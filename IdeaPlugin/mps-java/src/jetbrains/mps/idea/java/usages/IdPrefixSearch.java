@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 package jetbrains.mps.idea.java.usages;
 
 import com.intellij.openapi.application.QueryExecutorBase;
+import com.intellij.openapi.progress.ProcessCanceledException;
+import com.intellij.openapi.project.IndexNotReadyException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiClass;
@@ -37,12 +39,11 @@ import jetbrains.mps.idea.core.psi.impl.MPSPsiProvider;
 import jetbrains.mps.idea.core.refactoring.NodePtr;
 import jetbrains.mps.idea.core.usages.IdeaSearchScope;
 import jetbrains.mps.idea.java.index.ForeignIdReferenceIndex;
+import jetbrains.mps.idea.java.index.NodeAssociationsData;
 import jetbrains.mps.idea.java.psiStubs.JavaForeignIdBuilder;
 import jetbrains.mps.smodel.SNodeId.Foreign;
 import jetbrains.mps.smodel.SNodePointer;
 import jetbrains.mps.smodel.StaticReference;
-import jetbrains.mps.util.Pair;
-import jetbrains.mps.workbench.goTo.index.SNodeDescriptor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.EditableSModel;
 import org.jetbrains.mps.openapi.model.SModel;
@@ -59,7 +60,6 @@ import java.util.LinkedList;
 /**
  * danilla 3/24/13
  */
-
 public class IdPrefixSearch extends QueryExecutorBase<PsiReference, SearchParameters> {
 
   public IdPrefixSearch() {
@@ -68,7 +68,7 @@ public class IdPrefixSearch extends QueryExecutorBase<PsiReference, SearchParame
   }
 
   @Override
-  public void processQuery(@NotNull SearchParameters queryParameters, @NotNull final Processor<PsiReference> consumer) {
+  public void processQuery(@NotNull SearchParameters queryParameters, @NotNull Processor<? super PsiReference> consumer) {
 
     if (!(queryParameters.getEffectiveSearchScope() instanceof GlobalSearchScope)) {
       return;
@@ -94,75 +94,75 @@ public class IdPrefixSearch extends QueryExecutorBase<PsiReference, SearchParame
           return;
         }
 
-        final NodePtr nodePtr = JavaForeignIdBuilder.computeNodePtr(target);
-        if (nodePtr == null) return;
+        try {
+          final NodePtr nodePtr = JavaForeignIdBuilder.computeNodePtr(target);
+          if (nodePtr == null) {
+            return;
+          }
 
-        final SNodeReference mpsTarget = new SNodePointer(nodePtr.getSModelReference(), nodePtr.getNodeId());
-        // do we have this node?
-        if (mpsTarget.resolve(repository) == null) return;
+          final SNodeReference mpsTarget = new SNodePointer(nodePtr.getSModelReference(), nodePtr.getNodeId());
+          // do we have this node?
+          if (mpsTarget.resolve(repository) == null) {
+            return;
+          }
 
-        String prefix = nodePtr.getNodeId().toString();
-        final String prefixToSearch = (prefix.startsWith(Foreign.ID_PREFIX) ? prefix.substring(1) : prefix);
-        final String prefixToSearchWithDot = prefixToSearch + ".";
-        final Project project = target.getProject();
+          String prefix = nodePtr.getNodeId().toString();
+          final String prefixToSearch = (prefix.startsWith(Foreign.ID_PREFIX) ? prefix.substring(1) : prefix);
+          final String prefixToSearchWithDot = prefixToSearch + ".";
+          final Project project = target.getProject();
 
-        // first look into changed models
-        SearchScope mpsSearchScope = new IdeaSearchScope(scope, true);
-        CollectConsumer<VirtualFile> processedFilesConsumer = new CollectConsumer<VirtualFile>();
+          // first look into changed models
+          SearchScope mpsSearchScope = new IdeaSearchScope(scope, true);
+          CollectConsumer<VirtualFile> processedFilesConsumer = new CollectConsumer<VirtualFile>();
 
-        for (SModel model : mpsSearchScope.getModels()) {
-          boolean changed = model instanceof EditableSModel && ((EditableSModel) model).isChanged();
-          if (!changed) continue;
+          for (SModel model : mpsSearchScope.getModels()) {
+            boolean changed = model instanceof EditableSModel && ((EditableSModel) model).isChanged();
+            if (!changed) continue;
 
-          findInModel(model, prefixToSearch, processedFilesConsumer, new Consumer<SReference>() {
-            @Override
-            public void consume(SReference ref) {
-
-              String role = ref.getRole();
+            findInModel(model, prefixToSearch, processedFilesConsumer, ref -> {
               SNode source = ref.getSourceNode();
 
               PsiElement psiNode = MPSPsiProvider.getInstance(project).getPsi(source.getReference());
               assert psiNode instanceof MPSPsiNode;
 
-              consumer.process(new IdPrefixReference(mpsTarget, role, psiNode));
-            }
-          });
-        }
-
-        // now index
-        final Collection<VirtualFile> filesOfChangedModels = processedFilesConsumer.getResult();
-
-        GlobalSearchScope truncatedScope = new DelegatingGlobalSearchScope(scope) {
-          @Override
-          public boolean contains(VirtualFile file) {
-            if (filesOfChangedModels.contains(file)) return false;
-            return super.contains(file);
+              consumer.process(new IdPrefixReference(mpsTarget, ref.getLink(), psiNode));
+            });
           }
-        };
 
-        ValueProcessor<Collection<Pair<SNodeDescriptor, String>>> sReferenceProcessor = new ValueProcessor<Collection<Pair<SNodeDescriptor, String>>>() {
-          @Override
-          public boolean process(VirtualFile file, Collection<Pair<SNodeDescriptor, String>> refs) {
-            for (Pair<SNodeDescriptor, String> ref : refs) {
-              SNodeReference nodeRef = ref.o1.getNodeReference();
-              String role = ref.o2;
+          // now index
+          final Collection<VirtualFile> filesOfChangedModels = processedFilesConsumer.getResult();
 
+          GlobalSearchScope truncatedScope = new DelegatingGlobalSearchScope(scope) {
+            @Override
+            public boolean contains(VirtualFile file) {
+              if (filesOfChangedModels.contains(file)) return false;
+              return super.contains(file);
+            }
+          };
+
+          ValueProcessor<NodeAssociationsData> sReferenceProcessor = (file, refs) -> {
+            refs.forEach((nodeRef, link) -> {
               // index got out-of-date on this
               // unfortunately our indices are not always up-to-date, as we don't index yet-unsaved changes
-              if (nodeRef.resolve(repository) == null) continue;
+              if (nodeRef.resolve(repository) == null) {
+                return;
+              }
 
               PsiElement psiNode = MPSPsiProvider.getInstance(project).getPsi(nodeRef);
 
               // original node came from MPS index, it must be converted to our PSI element
               assert psiNode instanceof MPSPsiNode;
 
-              consumer.process(new IdPrefixReference(mpsTarget, role, psiNode));
-            }
-            return true;
-          }
-        };
+              consumer.process(new IdPrefixReference(mpsTarget, link, psiNode));
 
-        FileBasedIndex.getInstance().processValues(ForeignIdReferenceIndex.ID, prefixToSearchWithDot, null, sReferenceProcessor, truncatedScope);
+            });
+            return true;
+          };
+
+          FileBasedIndex.getInstance().processValues(ForeignIdReferenceIndex.ID, prefixToSearchWithDot, null, sReferenceProcessor, truncatedScope);
+        } catch (ProcessCanceledException | IndexNotReadyException ex) {
+          // ignore exception, can not do anything but finish model read gracefully
+        }
       }
     });
   }

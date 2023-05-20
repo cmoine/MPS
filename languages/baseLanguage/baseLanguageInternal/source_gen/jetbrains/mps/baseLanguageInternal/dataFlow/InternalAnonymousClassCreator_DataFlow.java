@@ -7,7 +7,6 @@ import jetbrains.mps.lang.dataFlow.DataFlowBuilderContext;
 import java.util.List;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import java.util.Set;
 import jetbrains.mps.internal.collections.runtime.SetSequence;
@@ -15,22 +14,35 @@ import java.util.HashSet;
 import jetbrains.mps.baseLanguage.behavior.StatementList__BehaviorDescriptor;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.baseLanguage.behavior.ClassConcept__BehaviorDescriptor;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 
 public class InternalAnonymousClassCreator_DataFlow extends DataFlowBuilder {
   public void build(final DataFlowBuilderContext _context) {
-    List<SNode> methods = SNodeOperations.getNodeDescendants(_context.getNode(), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, "jetbrains.mps.baseLanguage.structure.BaseMethodDeclaration"), false, new SAbstractConcept[]{});
+    List<SNode> methods = SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.BaseMethodDeclaration$kD, false, new SAbstractConcept[]{});
     Set<SNode> vars = SetSequence.fromSet(new HashSet<SNode>());
     for (SNode method : methods) {
-      SetSequence.fromSet(vars).addSequence(SetSequence.fromSet(StatementList__BehaviorDescriptor.getExternalVariablesDeclarations_idhF5UhAC.invoke(SLinkOperations.getTarget(method, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, 0xf8cc56b1ffL, "body")))));
+      SetSequence.fromSet(vars).addSequence(SetSequence.fromSet(StatementList__BehaviorDescriptor.getExternalVariablesDeclarations_idhF5UhAC.invoke(SLinkOperations.getTarget(method, LINKS.body$5xQk))));
     }
     for (SNode var : vars) {
       _context.getBuilder().emitRead(var, "r:3e9b7681-85ee-48b2-91d2-9a45a96731b1(jetbrains.mps.baseLanguageInternal.dataFlow)/3421461530438560096");
     }
-    for (SNode expr : SLinkOperations.getChildren(SLinkOperations.getTarget(_context.getNode(), MetaAdapterFactory.getContainmentLink(0xdf345b11b8c74213L, 0xac6648d2a9b75d88L, 0x2f7b79225e746808L, 0x2f7b79225e74691fL, "cls")), MetaAdapterFactory.getContainmentLink(0xdf345b11b8c74213L, 0xac6648d2a9b75d88L, 0x2f7b79225e746809L, 0x2f7b79225e74680cL, "constructorArgument"))) {
+    for (SNode expr : SLinkOperations.getChildren(SLinkOperations.getTarget(_context.getNode(), LINKS.cls$4Rcl), LINKS.constructorArgument$V7mk)) {
       _context.getBuilder().build((SNode) expr);
     }
-    for (SNode fieldDeclaration : ClassConcept__BehaviorDescriptor.fields_id4_LVZ3pC27C.invoke(SLinkOperations.getTarget(_context.getNode(), MetaAdapterFactory.getContainmentLink(0xdf345b11b8c74213L, 0xac6648d2a9b75d88L, 0x2f7b79225e746808L, 0x2f7b79225e74691fL, "cls")))) {
+    for (SNode fieldDeclaration : ClassConcept__BehaviorDescriptor.fields_id4_LVZ3pC27C.invoke(SLinkOperations.getTarget(_context.getNode(), LINKS.cls$4Rcl))) {
       _context.getBuilder().build((SNode) fieldDeclaration);
     }
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept BaseMethodDeclaration$kD = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, "jetbrains.mps.baseLanguage.structure.BaseMethodDeclaration");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink body$5xQk = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, 0xf8cc56b1ffL, "body");
+    /*package*/ static final SContainmentLink cls$4Rcl = MetaAdapterFactory.getContainmentLink(0xdf345b11b8c74213L, 0xac6648d2a9b75d88L, 0x2f7b79225e746808L, 0x2f7b79225e74691fL, "cls");
+    /*package*/ static final SContainmentLink constructorArgument$V7mk = MetaAdapterFactory.getContainmentLink(0xdf345b11b8c74213L, 0xac6648d2a9b75d88L, 0x2f7b79225e746809L, 0x2f7b79225e74680cL, "constructorArgument");
   }
 }

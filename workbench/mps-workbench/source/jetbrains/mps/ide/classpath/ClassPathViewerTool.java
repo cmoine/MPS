@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionPlaces;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.application.ModalityState;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindowAnchor;
 import com.intellij.ui.ScrollPaneFactory;
@@ -29,27 +28,23 @@ import jetbrains.mps.ide.ui.tree.MPSTree;
 import jetbrains.mps.ide.ui.tree.MPSTreeNode;
 import jetbrains.mps.ide.ui.tree.TextTreeNode;
 import jetbrains.mps.project.facets.JavaModuleOperations;
-import jetbrains.mps.reloading.CompositeClassPathItem;
-import jetbrains.mps.reloading.IClassPathItem;
-import jetbrains.mps.util.ToStringComparator;
+import jetbrains.mps.smodel.ModelReadRunnable;
 import jetbrains.mps.workbench.action.ActionUtils;
 import org.jetbrains.mps.openapi.module.SModule;
+import org.jetbrains.mps.openapi.module.SRepository;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-import java.util.Set;
 
 public class ClassPathViewerTool extends BaseProjectTool {
   private MyClassPathTree myTree;
   private JPanel myComponent;
-  private SModule myInspectedModule;
 
   public ClassPathViewerTool(Project project) {
-    super(project, "Classpath Explorer", -1, IdeIcons.DEFAULT_ICON, ToolWindowAnchor.BOTTOM, true);
+    super(project, "Classpath Explorer", null, IdeIcons.DEFAULT_ICON, ToolWindowAnchor.BOTTOM, false, true);
   }
 
   @Override
@@ -60,7 +55,7 @@ public class ClassPathViewerTool extends BaseProjectTool {
 
     ApplicationManager.getApplication().invokeLater(() -> {
       DefaultActionGroup group = ActionUtils.groupFromActions(createCloseAction());
-      JComponent toolbar = ActionManager.getInstance().createActionToolbar(ActionPlaces.UNKNOWN, group, false).getComponent();
+      JComponent toolbar = ActionManager.getInstance().createActionToolbar(ActionPlaces.TOOLBAR, group, false).getComponent();
       myComponent.add(toolbar, BorderLayout.WEST);
     });
     myTree.rebuildLater();
@@ -72,26 +67,53 @@ public class ClassPathViewerTool extends BaseProjectTool {
   }
 
   public void analyzeModule(SModule m) {
-    myInspectedModule = m;
+    myTree.setModule(m);
     myTree.rebuildLater();
   }
 
-  private class MyClassPathTree extends MPSTree {
+  @Override
+  public void disposeComponent() {
+    super.disposeComponent();
+    if (!myTree.isDisposed()){
+      myTree.dispose();
+    }
+  }
+
+  private static class MyClassPathTree extends MPSTree {
+    private SModule myInspectedModule;
+
+    MyClassPathTree() {
+    }
+
+    void setModule(SModule m) {
+      myInspectedModule = m;
+    }
+
+    @Override
+    protected void runRebuildAction(Runnable rebuildAction, boolean saveExpansion) {
+      SRepository r = myInspectedModule == null ? null : myInspectedModule.getRepository();
+      if (r == null) {
+        super.runRebuildAction(rebuildAction, saveExpansion);
+      } else {
+        // JMO.collectCompileClasspath uses GMDM and walks modules, therefore needs model access.
+        super.runRebuildAction(new ModelReadRunnable(r, rebuildAction), saveExpansion);
+      }
+    }
+
     @Override
     protected MPSTreeNode rebuild() {
       if (myInspectedModule == null) {
         return new TextTreeNode("No Module");
       }
+      if (myInspectedModule.getRepository() == null) {
+        return new TextTreeNode("Can not calculate classpath for a detached module");
+      }
 
       TextTreeNode root = new TextTreeNode("ClassPath of module " + myInspectedModule.getModuleName());
-      final Set<String> classPath = JavaModuleOperations.collectCompileClasspath(Collections.singleton(myInspectedModule), true);
-      CompositeClassPathItem cpItem = JavaModuleOperations.createClassPathItem(classPath, ClassPathViewerTool.class.getName());
-
-      List<IClassPathItem> items = new ArrayList<>(cpItem.optimize().getChildren());
-      Collections.sort(items, new ToStringComparator());
-
-      for (IClassPathItem item : items) {
-        root.add(new TextTreeNode(item.toString()));
+      ArrayList<String> cp = new ArrayList<>(JavaModuleOperations.collectCompileClasspath(Collections.singleton(myInspectedModule), true));
+      cp.sort(null);
+      for (String item : cp) {
+        root.add(new TextTreeNode(item));
       }
       return root;
     }

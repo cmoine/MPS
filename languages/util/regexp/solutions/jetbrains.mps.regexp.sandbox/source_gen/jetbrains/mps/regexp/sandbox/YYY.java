@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
   public YYY() {
   }
   /*package*/ void m() {
-    RegexpOperations.replace("", REGEXP_y3g_b0a0b, new _Replacer_y3g_a0a0a1(YYY.this));
+    RegexpOperations.replace("", REGEXP, new _Replacer_y3g_a0a0a1(YYY.this));
   }
-  private static Pattern REGEXP_y3g_b0a0b = Pattern.compile("abc", 0);
+  private static final Pattern REGEXP = Pattern.compile("abc", 0);
 }

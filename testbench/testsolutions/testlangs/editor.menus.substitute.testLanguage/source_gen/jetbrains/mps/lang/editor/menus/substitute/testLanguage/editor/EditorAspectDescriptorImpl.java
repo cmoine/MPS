@@ -12,90 +12,74 @@ import jetbrains.mps.openapi.editor.descriptor.TransformationMenu;
 import jetbrains.mps.openapi.editor.descriptor.NamedMenuId;
 import java.util.Arrays;
 import jetbrains.mps.openapi.editor.descriptor.SubstituteMenu;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public class EditorAspectDescriptorImpl extends EditorAspectDescriptorBase {
   @NotNull
   public Collection<ConceptEditor> getDeclaredEditors(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = ((SAbstractConcept) concept);
-      Integer preIndex = indices_xbvbvu_a0a.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TestSubstituteChild_Editor());
-          }
-          break;
-        case 1:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TestSubstituteChildWithConstraints1_Editor());
-          }
-          break;
-        case 2:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TestSubstituteChildWithConstraints2_Editor());
-          }
-          break;
-        case 3:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TestSubstituteChildWithConstraints3_Editor());
-          }
-          break;
-        case 4:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TestSubstituteParent_Editor());
-          }
-          break;
-        case 5:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TestSubstituteParentToReference_Editor());
-          }
-          break;
-        case 6:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TestSubstituteParentWithConstraints_Editor());
-          }
-          break;
-        case 7:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TestSubstituteSpecialChild_Editor());
-          }
-          break;
-        case 8:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TestSubstituteSpecialChildAttribute_Editor());
-          }
-          break;
-        case 9:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TestSubstituteSpecialParent_Editor());
-          }
-          break;
-        case 10:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TestSubstituteSpecialSubChild_Editor());
-          }
-          break;
-        case 11:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TestSubstituteSubChild1_Editor());
-          }
-          break;
-        case 12:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TestSubstituteSubChild2_Editor());
-          }
-          break;
-        case 13:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TestSubstituteSubChildSmartReference_Editor());
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = ((SAbstractConcept) concept);
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteAttribute_RegularEditor_Editor());
+      case 1:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteAttribute_TransparentEditor_Editor());
+      case 2:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteAttribute_WithReference_Editor());
+      case 3:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteChild_Editor());
+      case 4:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteChildOfWrapper_Editor());
+      case 5:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteChildWithAttibute_Editor());
+      case 6:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteChildWithConstraints1_Editor());
+      case 7:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteChildWithConstraints2_Editor());
+      case 8:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteChildWithConstraints3_Editor());
+      case 9:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteExceptionParent_Editor());
+      case 10:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteParent_Editor());
+      case 11:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteParentForChildrenWithAttibute_Editor());
+      case 12:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteParentOfWrapper_Editor());
+      case 13:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteParentPropertyAndReference_Editor());
+      case 14:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteParentPropertyAndReference_Subconcept_Editor());
+      case 15:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteParentToReference_Editor());
+      case 16:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteParentWithConstraints_Editor());
+      case 17:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteSmartRef_Interface_Editor());
+      case 18:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteSmartRef_WithoutExplicitMenu_Editor());
+      case 19:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteSpecialChild_Editor());
+      case 20:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteSpecialChildAttribute_Editor());
+      case 21:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteSpecialParent_Editor());
+      case 22:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteSpecialSubChild_Editor());
+      case 23:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteSubChild1_Editor());
+      case 24:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteSubChild2_Editor());
+      case 25:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteSubChildSmartReference_WithMenu_Editor());
+      case 26:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteToWrapFromTransformMenu_Editor());
+      case 27:
+        return Collections.<ConceptEditor>singletonList(new TestSubstituteWrapper_Editor());
+      case 28:
+        return Collections.<ConceptEditor>singletonList(new TestSubstitute_Parent_Editor());
+      default:
     }
     return Collections.<ConceptEditor>emptyList();
   }
@@ -104,91 +88,106 @@ public class EditorAspectDescriptorImpl extends EditorAspectDescriptorBase {
   @NotNull
   @Override
   public Collection<TransformationMenu> getDeclaredDefaultTransformationMenus(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_xbvbvu_a0d.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new TestSubstituteChild_TransformationMenu());
-          }
-          break;
-        case 1:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new TestSubstituteChildWithConstraints1_TransformationMenu());
-          }
-          break;
-        case 2:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new TestSubstituteChildWithConstraints2_TransformationMenu());
-          }
-          break;
-        case 3:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new TestSubstituteGrandChildWithConstraints_TransformationMenu());
-          }
-          break;
-        case 4:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new TestSubstituteSpecialSubChild_TransformationMenu());
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex1.index(cncpt)) {
+      case 0:
+        return Collections.<TransformationMenu>singletonList(new TestSubstituteChild_TransformationMenu());
+      case 1:
+        return Collections.<TransformationMenu>singletonList(new TestSubstituteChildWithAttibute_TransformationMenu());
+      case 2:
+        return Collections.<TransformationMenu>singletonList(new TestSubstituteChildWithConstraints1_TransformationMenu());
+      case 3:
+        return Collections.<TransformationMenu>singletonList(new TestSubstituteChildWithConstraints2_TransformationMenu());
+      case 4:
+        return Collections.<TransformationMenu>singletonList(new TestSubstituteGrandChildWithConstraints_TransformationMenu());
+      case 5:
+        return Collections.<TransformationMenu>singletonList(new TestSubstituteSpecialSubChild_TransformationMenu());
+      case 6:
+        return Collections.<TransformationMenu>singletonList(new TestSubstituteWrapper_TransformationMenu());
+      case 7:
+        return Collections.<TransformationMenu>singletonList(new TestSubstitute_IncludeDefaultAndNullMenu_TransformationMenu());
+      default:
     }
     return Collections.<TransformationMenu>emptyList();
   }
   @NotNull
   @Override
   public Collection<TransformationMenu> getDeclaredNamedTransformationMenus(NamedMenuId menuId) {
-    {
-      SAbstractConcept cncpt = (SAbstractConcept) menuId.getConcept();
-      Integer preIndex = indices_xbvbvu_a0e.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            switch (Arrays.binarySearch(stringSwitchCases_xbvbvu_a0a0a0a3a0a4, menuId.getFqName())) {
-              case 0:
-                return Arrays.asList(new TransformationMenu[]{new NamedTransformationMenu()});
-              default:
-            }
+    SAbstractConcept cncpt = (SAbstractConcept) menuId.getConcept();
+    switch (conceptIndex2.index(cncpt)) {
+      case 0:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.NamedTransformationMenu":
+              return Arrays.asList(new TransformationMenu[]{new NamedTransformationMenu()});
+            default:
           }
-          break;
-        case 1:
-          if (true) {
-            switch (Arrays.binarySearch(stringSwitchCases_xbvbvu_a0a0a0b3a0a4, menuId.getFqName())) {
-              case 0:
-                return Arrays.asList(new TransformationMenu[]{new NamedTransformationMenu_EmptyCell()});
-              case 1:
-                return Arrays.asList(new TransformationMenu[]{new WrapSubstitute()});
-              default:
-            }
+        }
+        break;
+      case 1:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.NamedTransformationMenu_EmptyCell":
+              return Arrays.asList(new TransformationMenu[]{new NamedTransformationMenu_EmptyCell()});
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.TestSubstituteParent_WrapDefaultSubstituteMenu":
+              return Arrays.asList(new TransformationMenu[]{new TestSubstituteParent_WrapDefaultSubstituteMenu()});
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.TestSubstituteParent_WrapDefaultSubstituteMenuWithFunction":
+              return Arrays.asList(new TransformationMenu[]{new TestSubstituteParent_WrapDefaultSubstituteMenuWithFunction()});
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.TestSubstituteParent_WrapNamedSubstituteMenu":
+              return Arrays.asList(new TransformationMenu[]{new TestSubstituteParent_WrapNamedSubstituteMenu()});
+            default:
           }
-          break;
-        case 2:
-          if (true) {
-            switch (Arrays.binarySearch(stringSwitchCases_xbvbvu_a0a0a0c3a0a4, menuId.getFqName())) {
-              case 0:
-                return Arrays.asList(new TransformationMenu[]{new TestSubstituteSpecialChild_TransformationMenu()});
-              default:
-            }
+        }
+        break;
+      case 2:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.TestSubstituteParentPropertyAndReference_BooleanMenuPart":
+              return Arrays.asList(new TransformationMenu[]{new TestSubstituteParentPropertyAndReference_BooleanMenuPart()});
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.TestSubstituteParentPropertyAndReference_CustomPropertyMenu":
+              return Arrays.asList(new TransformationMenu[]{new TestSubstituteParentPropertyAndReference_CustomPropertyMenu()});
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.TestSubstituteParentPropertyAndReference_CustomReferenceMenu":
+              return Arrays.asList(new TransformationMenu[]{new TestSubstituteParentPropertyAndReference_CustomReferenceMenu()});
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.TestSubstituteParentPropertyAndReference_EnumMenuPart":
+              return Arrays.asList(new TransformationMenu[]{new TestSubstituteParentPropertyAndReference_EnumMenuPart()});
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.TestSubstituteParentPropertyAndReference_ReferenceMenuPart":
+              return Arrays.asList(new TransformationMenu[]{new TestSubstituteParentPropertyAndReference_ReferenceMenuPart()});
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.TestSubstituteParentPropertyAndReference_StringMenuPart":
+              return Arrays.asList(new TransformationMenu[]{new TestSubstituteParentPropertyAndReference_StringMenuPart()});
+            default:
           }
-          break;
-        case 3:
-          if (true) {
-            switch (Arrays.binarySearch(stringSwitchCases_xbvbvu_a0a0a0d3a0a4, menuId.getFqName())) {
-              case 0:
-                return Arrays.asList(new TransformationMenu[]{new TestSubstituteSpecialParent_Multiple_EmptyCell_TransformationMenu()});
-              case 1:
-                return Arrays.asList(new TransformationMenu[]{new TestSubstituteSpecialParent_Single_EmptyCell_TransformationMenu()});
-              default:
-            }
+        }
+        break;
+      case 3:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.TestSubstituteParentPropertyAndRef_Subconcept_RefMenuPart":
+              return Arrays.asList(new TransformationMenu[]{new TestSubstituteParentPropertyAndRef_Subconcept_RefMenuPart()});
+            default:
           }
-          break;
-        default:
-      }
+        }
+        break;
+      case 4:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.TestSubstituteSpecialChild_TransformationMenu":
+              return Arrays.asList(new TransformationMenu[]{new TestSubstituteSpecialChild_TransformationMenu()});
+            default:
+          }
+        }
+        break;
+      case 5:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.TestSubstituteSpecialParent_Multiple_EmptyCell_TransformationMenu":
+              return Arrays.asList(new TransformationMenu[]{new TestSubstituteSpecialParent_Multiple_EmptyCell_TransformationMenu()});
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.TestSubstituteSpecialParent_Single_EmptyCell_TransformationMenu":
+              return Arrays.asList(new TransformationMenu[]{new TestSubstituteSpecialParent_Single_EmptyCell_TransformationMenu()});
+            default:
+          }
+        }
+        break;
+      default:
     }
 
     return Collections.<TransformationMenu>emptyList();
@@ -196,95 +195,188 @@ public class EditorAspectDescriptorImpl extends EditorAspectDescriptorBase {
   @NotNull
   @Override
   public Collection<SubstituteMenu> getDeclaredDefaultSubstituteMenus(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_xbvbvu_a0f.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new TestSubstitituteAbstractChildAmbigousPosition_SubstituteMenu());
-          }
-          break;
-        case 1:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new TestSubstituteChild_SubstituteMenu());
-          }
-          break;
-        case 2:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new TestSubstituteChildWithConstraintsWrapper1_SubstituteMenu());
-          }
-          break;
-        case 3:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new TestSubstituteChildWithConstraintsWrapper2_SubstituteMenu());
-          }
-          break;
-        case 4:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new TestSubstituteChildWithConstraintsWrapper3_SubstituteMenu());
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex3.index(cncpt)) {
+      case 0:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteAbstractChildAmbigousPosition_SubstituteMenu());
+      case 1:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteChild_SubstituteMenu());
+      case 2:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteChildOfWrapper_SubstituteMenu());
+      case 3:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteChildWithAttibute_SubstituteMenu());
+      case 4:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteChildWithConstraintsWrapper1_SubstituteMenu());
+      case 5:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteChildWithConstraintsWrapper2_SubstituteMenu());
+      case 6:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteChildWithConstraintsWrapper3_SubstituteMenu());
+      case 7:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteExceptionActionCanSubstituteChild_SubstituteMenu());
+      case 8:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteExceptionActionDescriptionTextChild_SubstituteMenu());
+      case 9:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteExceptionActionIconChild_SubstituteMenu());
+      case 10:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteExceptionActionMatchingTextChild_SubstituteMenu());
+      case 11:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteExceptionActionTypeChild_SubstituteMenu());
+      case 12:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteExceptionConceptListChild_SubstituteMenu());
+      case 13:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteExceptionGroupChild_SubstituteMenu());
+      case 14:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteExceptionIncludeMenuChild_SubstituteMenu());
+      case 15:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteExceptionParameterizedChild_SubstituteMenu());
+      case 16:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteExceptionReferenceDescriptionTextChild_SubstituteMenu());
+      case 17:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteExceptionReferenceMatchingTextChild_SubstituteMenu());
+      case 18:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteExceptionReferenceVisibleMatchingTextChild_SubstituteMenu());
+      case 19:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteExceptionSubconceptsChild_SubstituteMenu());
+      case 20:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteExceptionWrapMenuChild_SubstituteMenu());
+      case 21:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteSmartRef_Interface_SubstituteMenu());
+      case 22:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteSmartRef_WithoutExplicitMenu_SubstituteMenu());
+      case 23:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteSmartRef_WithoutExplicitMenu_Subconcept_SubstituteMenu());
+      case 24:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteSubChildSmartReference_WithMenu_SubstituteMenu());
+      case 25:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteToWrapFromSubstituteMenu_SubstituteMenu());
+      case 26:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteToWrapFromTransformMenu_SubstituteMenu());
+      case 27:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstituteWrapper_SubstituteMenu());
+      case 28:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstitute_IncludeDifferentMenus_SubstituteMenu());
+      case 29:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstitute_IncludeSameMenuTwice_SubstituteMenu());
+      case 30:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstitute_WrapDifferentMenus_SubstituteMenu());
+      case 31:
+        return Collections.<SubstituteMenu>singletonList(new TestSubstitute_WrapSameMenuTwice_SubstituteMenu());
+      default:
     }
     return Collections.<SubstituteMenu>emptyList();
   }
   @NotNull
   @Override
   public Collection<SubstituteMenu> getDeclaredNamedSubstituteMenus(NamedMenuId menuId) {
-    {
-      SAbstractConcept cncpt = (SAbstractConcept) menuId.getConcept();
-      Integer preIndex = indices_xbvbvu_a0g.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            switch (Arrays.binarySearch(stringSwitchCases_xbvbvu_a0a0a0a3a0a6, menuId.getFqName())) {
-              case 0:
-                return Arrays.asList(new SubstituteMenu[]{new ParameterizedByPrimitiveType()});
-              default:
-            }
+    SAbstractConcept cncpt = (SAbstractConcept) menuId.getConcept();
+    switch (conceptIndex4.index(cncpt)) {
+      case 0:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.ParameterizedByPrimitiveType":
+              return Arrays.asList(new SubstituteMenu[]{new ParameterizedByPrimitiveType()});
+            default:
           }
-          break;
-        case 1:
-          if (true) {
-            switch (Arrays.binarySearch(stringSwitchCases_xbvbvu_a0a0a0b3a0a6, menuId.getFqName())) {
-              case 0:
-                return Arrays.asList(new SubstituteMenu[]{new NamedSubstituteMenu()});
-              case 1:
-                return Arrays.asList(new SubstituteMenu[]{new NamedSubstituteMenuForContribution()});
-              case 2:
-                return Arrays.asList(new SubstituteMenu[]{new NamedSubstituteMenu_EmptyCell()});
-              default:
-            }
+        }
+        break;
+      case 1:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.NamedSubstituteMenu":
+              return Arrays.asList(new SubstituteMenu[]{new NamedSubstituteMenu()});
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.NamedSubstituteMenuForContribution":
+              return Arrays.asList(new SubstituteMenu[]{new NamedSubstituteMenuForContribution()});
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.NamedSubstituteMenu_EmptyCell":
+              return Arrays.asList(new SubstituteMenu[]{new NamedSubstituteMenu_EmptyCell()});
+            default:
           }
-          break;
-        default:
-      }
+        }
+        break;
+      case 2:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.TestSubstituteSubChildSmartReference_SmartReference":
+              return Arrays.asList(new SubstituteMenu[]{new TestSubstituteSubChildSmartReference_SmartReference()});
+            default:
+          }
+        }
+        break;
+      case 3:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.NamedSubstituteMenuToWrapFromSubstituteMenu":
+              return Arrays.asList(new SubstituteMenu[]{new NamedSubstituteMenuToWrapFromSubstituteMenu()});
+            default:
+          }
+        }
+        break;
+      case 4:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.NamedSubstituteMenuToWrapFromTransformMenu":
+              return Arrays.asList(new SubstituteMenu[]{new NamedSubstituteMenuToWrapFromTransformMenu()});
+            default:
+          }
+        }
+        break;
+      case 5:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.IncludeDefaultAndNullMenu":
+              return Arrays.asList(new SubstituteMenu[]{new IncludeDefaultAndNullMenu()});
+            default:
+          }
+        }
+        break;
+      case 6:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.TestSubstitute_Menu_ToInclude1":
+              return Arrays.asList(new SubstituteMenu[]{new TestSubstitute_Menu_ToInclude1()});
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.TestSubstitute_Menu_ToInclude2":
+              return Arrays.asList(new SubstituteMenu[]{new TestSubstitute_Menu_ToInclude2()});
+            default:
+          }
+        }
+        break;
+      case 7:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.TestSubstitute_SameMenu_ToInclude":
+              return Arrays.asList(new SubstituteMenu[]{new TestSubstitute_SameMenu_ToInclude()});
+            default:
+          }
+        }
+        break;
+      case 8:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.TestSubstitute_Menu_ToWrap1":
+              return Arrays.asList(new SubstituteMenu[]{new TestSubstitute_Menu_ToWrap1()});
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.TestSubstitute_Menu_ToWrap2":
+              return Arrays.asList(new SubstituteMenu[]{new TestSubstitute_Menu_ToWrap2()});
+            default:
+          }
+        }
+        break;
+      case 9:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.TestSubstitute_SameMenu_ToWrap":
+              return Arrays.asList(new SubstituteMenu[]{new TestSubstitute_SameMenu_ToWrap()});
+            default:
+          }
+        }
+        break;
+      default:
     }
 
     return Collections.<SubstituteMenu>emptyList();
   }
 
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
-  }
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0a = buildConceptIndices(MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3a6fb0beL, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteChild"), MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x9c8de75f2ccf9b4L, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteChildWithConstraints1"), MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x9c8de75f2ccf9b3L, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteChildWithConstraints2"), MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x9c8de75f2ceddc8L, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteChildWithConstraints3"), MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3a6fb0bdL, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteParent"), MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3aa7c75fL, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteParentToReference"), MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x9c8de75f2cc6e9aL, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteParentWithConstraints"), MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x38b257ae54d85a98L, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteSpecialChild"), MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x51ed57d5dc9c3b8L, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteSpecialChildAttribute"), MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x38b257ae54d85a99L, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteSpecialParent"), MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x77c1a85c9f90b75bL, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteSpecialSubChild"), MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3a6ff2a8L, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteSubChild1"), MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3a6ff2a9L, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteSubChild2"), MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3a6ff2aeL, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteSubChildSmartReference"));
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0d = buildConceptIndices(MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3a6fb0beL, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteChild"), MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x9c8de75f2ccf9b4L, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteChildWithConstraints1"), MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x9c8de75f2ccf9b3L, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteChildWithConstraints2"), MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x2d4683aef72697c0L, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteGrandChildWithConstraints"), MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x77c1a85c9f90b75bL, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteSpecialSubChild"));
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0e = buildConceptIndices(MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3a6fb0beL, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteChild"), MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3a6fb0bdL, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteParent"), MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x38b257ae54d85a98L, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteSpecialChild"), MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x38b257ae54d85a99L, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteSpecialParent"));
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0f = buildConceptIndices(MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7f53d2199235476bL, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstitituteAbstractChildAmbigousPosition"), MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3a6fb0beL, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteChild"), MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x9c8de75f2d21687L, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteChildWithConstraintsWrapper1"), MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x9c8de75f2d36ae2L, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteChildWithConstraintsWrapper2"), MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x9c8de75f2d41c8eL, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteChildWithConstraintsWrapper3"));
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0g = buildConceptIndices(MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x75a761fb50351afbL, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestConceptForMenuParameterizedByPrimitiveType"), MetaAdapterFactory.getConcept(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3a6fb0beL, "jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure.TestSubstituteChild"));
-  private static String[] stringSwitchCases_xbvbvu_a0a0a0a3a0a4 = new String[]{"jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.NamedTransformationMenu"};
-  private static String[] stringSwitchCases_xbvbvu_a0a0a0b3a0a4 = new String[]{"jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.NamedTransformationMenu_EmptyCell", "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.WrapSubstitute"};
-  private static String[] stringSwitchCases_xbvbvu_a0a0a0c3a0a4 = new String[]{"jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.TestSubstituteSpecialChild_TransformationMenu"};
-  private static String[] stringSwitchCases_xbvbvu_a0a0a0d3a0a4 = new String[]{"jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.TestSubstituteSpecialParent_Multiple_EmptyCell_TransformationMenu", "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.TestSubstituteSpecialParent_Single_EmptyCell_TransformationMenu"};
-  private static String[] stringSwitchCases_xbvbvu_a0a0a0a3a0a6 = new String[]{"jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.ParameterizedByPrimitiveType"};
-  private static String[] stringSwitchCases_xbvbvu_a0a0a0b3a0a6 = new String[]{"jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.NamedSubstituteMenu", "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.NamedSubstituteMenuForContribution", "jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor.NamedSubstituteMenu_EmptyCell"};
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x446b8c93949517d6L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x446b8c93949517d5L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x446b8c93949517d7L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3a6fb0beL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x401156263ff3470cL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x446b8c93949517d4L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x9c8de75f2ccf9b4L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x9c8de75f2ccf9b3L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x9c8de75f2ceddc8L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x63457d5cb580f351L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3a6fb0bdL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x446b8c93949517d3L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x401156263ff2fe4cL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x69b757bd7bd1801L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x314f66c376dfa909L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3aa7c75fL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x9c8de75f2cc6e9aL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7dd7af941a6edd1bL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x6723ebbaa490bde6L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x38b257ae54d85a98L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x51ed57d5dc9c3b8L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x38b257ae54d85a99L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x77c1a85c9f90b75bL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3a6ff2a8L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3a6ff2a9L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3a6ff2aeL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7315fee8e56db2aeL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x401156263ff3470bL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x3f759544c6a0703eL)).seal();
+  private static final ConceptSwitchIndex conceptIndex1 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3a6fb0beL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x446b8c93949517d4L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x9c8de75f2ccf9b4L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x9c8de75f2ccf9b3L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x2d4683aef72697c0L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x77c1a85c9f90b75bL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x401156263ff3470bL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x41299cab94ed9982L)).seal();
+  private static final ConceptSwitchIndex conceptIndex2 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3a6fb0beL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3a6fb0bdL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x69b757bd7bd1801L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x314f66c376dfa909L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x38b257ae54d85a98L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x38b257ae54d85a99L)).seal();
+  private static final ConceptSwitchIndex conceptIndex3 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7f53d2199235476bL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3a6fb0beL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x401156263ff3470cL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x446b8c93949517d4L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x9c8de75f2d21687L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x9c8de75f2d36ae2L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x9c8de75f2d41c8eL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x63457d5cb580f352L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x63457d5cb581957aL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x63457d5cb581a862L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x63457d5cb5817a84L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x63457d5cb581c35cL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x63457d5cb5822235L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x63457d5cb581f203L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x63457d5cb58267deL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x63457d5cb58283b9L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x63457d5cb582c0d2L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x63457d5cb582978bL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x63457d5cb582b4edL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x4c7dc5cc7a893d21L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x28bb36fb7222267fL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7dd7af941a6edd1bL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x6723ebbaa490bde6L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x6723ebbaa49bf847L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3a6ff2aeL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3a6ff2aaL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7315fee8e56db2aeL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x401156263ff3470bL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x1a41c6fb28100fdcL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x3f759544c6a0709aL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x1a41c6fb2810192dL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x3f759544c6a0709dL)).seal();
+  private static final ConceptSwitchIndex conceptIndex4 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x75a761fb50351afbL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3a6fb0beL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3a6ff2aeL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7ce1116e3a6ff2aaL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x7315fee8e56db2aeL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x41299cab94ed9982L), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x1a41c6fb28100fdcL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x3f759544c6a0709aL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x1a41c6fb2810192dL), MetaIdFactory.conceptId(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x3f759544c6a0709dL)).seal();
 }

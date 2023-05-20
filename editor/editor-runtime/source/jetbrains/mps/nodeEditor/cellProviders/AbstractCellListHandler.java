@@ -15,93 +15,156 @@
  */
 package jetbrains.mps.nodeEditor.cellProviders;
 
+import jetbrains.mps.editor.runtime.descriptor.AbstractEditorBuilder;
+import jetbrains.mps.editor.runtime.descriptor.EditorBuilderEnvironment;
+import jetbrains.mps.editor.runtime.impl.cellActions.CommentUtil;
+import jetbrains.mps.editor.runtime.style.StyleAttributes;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.AttributeOperations;
 import jetbrains.mps.nodeEditor.cellActions.CellAction_InsertIntoCollection;
 import jetbrains.mps.nodeEditor.cellLayout.CellLayout;
 import jetbrains.mps.nodeEditor.cellLayout.CellLayout_Horizontal;
-import jetbrains.mps.nodeEditor.cellLayout.CellLayout_Vertical;
 import jetbrains.mps.nodeEditor.cells.EditorCell_Collection;
 import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.CellActionType;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
-import jetbrains.mps.util.annotation.ToRemove;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.language.SConceptFeature;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.model.SNode;
 
 import java.util.Iterator;
 import java.util.List;
 
-public abstract class AbstractCellListHandler {
+public abstract class AbstractCellListHandler extends AbstractEditorBuilder implements EditorBuilderEnvironment {
+  public static final String ELEMENT_CELL_COMPLETE_SET = "element-cell-complete-set";
+  public static final String ELEMENT_CELL_BACKSPACE_SET = "element-cell-backspace-set";
+  public static final String ELEMENT_CELL_DELETE_SET = "element-cell-delete-set";
+
+  // other actions
   public static final String ELEMENT_CELL_ACTIONS_SET = "element-cell-actions-set";
 
-  protected SNode myOwnerNode;
-  protected EditorContext myEditorContext;
   protected EditorCell_Collection myListEditorCell_Collection;
-  protected String myElementRole;
 
-  public AbstractCellListHandler(SNode ownerNode, String elementRole, EditorContext editorContext) {
-    myOwnerNode = ownerNode;
-    myElementRole = elementRole;
-    myEditorContext = editorContext;
+  public AbstractCellListHandler(EditorContext editorContext) {
+    super(editorContext);
   }
 
-  public EditorContext getEditorContext() {
-    return myEditorContext;
+@Deprecated(since = "2018.3", forRemoval = true)
+  //use getLink/getReference instead
+  public String getElementRole(){
+    return null;
   }
 
-  public SNode getOwner() {
-    return myOwnerNode;
+  public SConceptFeature getElementSRole(){
+    return null;
   }
 
-  public String getElementRole() {
-    return myElementRole;
+  public SContainmentLink getSLink() {
+    return null;
   }
 
   protected abstract SNode getAnchorNode(EditorCell anchorCell);
 
   protected abstract void doInsertNode(SNode nodeToInsert, SNode anchorNode, boolean insertBefore);
 
+  protected abstract List<? extends SNode> getNodesForList();
+
   public void insertNewChild(EditorContext editorContext, EditorCell anchorCell, boolean insertBefore) {
     SNode anchorNode = getAnchorNode(anchorCell);
-    SNode nodeToInsert = createNodeToInsert(editorContext);
+
+    List<? extends SNode> children = getNodesForList();
+    int anchorIndex;
+    if (anchorNode == null) {
+      anchorIndex = -1;
+    } else {
+      anchorIndex = children.indexOf(anchorNode);
+    }
+
+    SNode prevNode;
+    SNode nextNode;
+    int insertIndex;
+
+    int size = children.size();
+
+    if (size == 0) {
+      prevNode = nextNode = null;
+      insertIndex = 0;
+    } else if (anchorIndex == -1) {
+      if (insertBefore) {
+        prevNode = children.get(size - 1);
+        nextNode = null;
+        insertIndex = size;
+      } else {   // insertAfter
+        prevNode = null;
+        nextNode = children.get(0);
+        insertIndex = 0;
+      }
+    } else if (insertBefore) {
+      nextNode = anchorNode;
+      insertIndex = anchorIndex;
+      if (anchorIndex == 0) {
+        prevNode = null;
+      } else {
+        prevNode = children.get(anchorIndex - 1);
+      }
+    } else {  // insertAfter
+      prevNode = anchorNode;
+      insertIndex = anchorIndex + 1;
+      if (anchorIndex == size - 1) {
+        nextNode = null;
+      } else {
+        nextNode = children.get(anchorIndex + 1);
+      }
+    }
+
+    SNode nodeToInsert = createNodeToInsert(editorContext, prevNode, nextNode, insertIndex);
     doInsertNode(nodeToInsert, anchorNode, insertBefore);
   }
 
-  public abstract EditorCell createNodeCell(EditorContext editorContext, SNode node);
-
-  protected EditorCell createSeparatorCell(EditorContext editorContext, SNode prevNode, SNode nextNode) {
+  public EditorCell createNodeCell(SNode node){
     return null;
   }
 
-  protected abstract EditorCell createEmptyCell(EditorContext editorContext);
-
-  public abstract SNode createNodeToInsert(EditorContext editorContext);
-
-  public EditorCell_Collection createCells_Vertical(EditorContext editorContext) {
-    return createCells(editorContext, new CellLayout_Vertical());
+  protected EditorCell createSeparatorCell(SNode prevNode, SNode nextNode){
+    return null;
   }
 
-  public EditorCell_Collection createCells_Horizontal(EditorContext editorContext) {
-    return createCells(editorContext, new CellLayout_Horizontal());
+  abstract protected EditorCell createEmptyCell();
+
+  /**
+   * @param prevNode a node to become the previous sibling of the newly created node or null if the new node will be placed first
+   * @param nextNode a node to become the next sibling of the newly created node or null if the new node will be placed last
+   * @param index index of the newly created node. Index is 0 if the new node will be placed first.
+   */
+  public SNode createNodeToInsert(EditorContext editorContext, SNode prevNode, SNode nextNode, int index) {
+    return createNodeToInsert(editorContext);
   }
 
-  public EditorCell_Collection createCells(EditorContext editorContext, CellLayout cellLayout, boolean selectable) {
-    EditorCell_Collection cellsCollection = createCells(editorContext, cellLayout);
+  @Deprecated
+  public SNode createNodeToInsert(EditorContext ignored) {
+    throw new UnsupportedOperationException();
+  }
+
+  public EditorCell_Collection createCells(CellLayout cellLayout, boolean selectable) {
+    EditorCell_Collection cellsCollection = createCells(cellLayout);
     if (!selectable) {
       return cellsCollection;
     }
 
     // if the list compartment is selectable - create wrapping cell collection around it so
     // that actions intended to work for the list element do not work for the list owner.
-    EditorCell_Collection wrapperCell = EditorCell_Collection.create(editorContext, myOwnerNode, new CellLayout_Horizontal(), null);
+    EditorCell_Collection wrapperCell = EditorCell_Collection.create(getEditorContext(), getNode(), new CellLayout_Horizontal(), null);
     wrapperCell.setSelectable(true);
     wrapperCell.addEditorCell(cellsCollection);
     return wrapperCell;
   }
 
-  public EditorCell_Collection createCells(EditorContext editorContext, CellLayout cellLayout) {
-    myListEditorCell_Collection = EditorCell_Collection.create(editorContext, myOwnerNode, cellLayout, this);
+  public EditorCell_Collection createCells(CellLayout cellLayout) {
+    myListEditorCell_Collection = EditorCell_Collection.create(getEditorContext(), getNode(), cellLayout, this);
     myListEditorCell_Collection.setSelectable(false);
 
-    createInnerCells(myOwnerNode, editorContext);
+    createInnerCells();
 
     // add insert/insert-before actions
     myListEditorCell_Collection.setAction(CellActionType.INSERT, new CellAction_InsertIntoCollection(this, false));
@@ -110,63 +173,47 @@ public abstract class AbstractCellListHandler {
     return myListEditorCell_Collection;
   }
 
-  @ToRemove(version = 3.5)
-  protected boolean isCompatibilityMode() {
-    return true;
-  }
-
-
-  @ToRemove(version = 3.5)
-  protected void createInnerCellsWithEditorCellContext(SNode node, EditorContext editorContext) {
-    if (isCompatibilityMode()) {
-      getEditorContext().getCellFactory().pushCellContext();
-      getEditorContext().getCellFactory().setNodeLocation(null);
-      try {
-        createInnerCells(node, editorContext);
-      } finally {
-        getEditorContext().getCellFactory().popCellContext();
-      }
-    } else {
-      createInnerCells(node, editorContext);
-    }
-  }
-
-  protected void createInnerCells(SNode node, EditorContext editorContext) {
+  protected void createInnerCells() {
     Iterator<? extends SNode> listNodes = getNodesForList().iterator();
     if (!listNodes.hasNext()) {
-      if (isCompatibilityMode()) {
-        getEditorContext().getCellFactory().pushCellContext();
-        getEditorContext().getCellFactory().setNodeLocation(null);
-      }
-      try {
-        EditorCell emptyCell = createEmptyCell(editorContext);
-        emptyCell.setRole(getElementRole());
-        myListEditorCell_Collection.addEditorCell(emptyCell);
-      } finally {
-        if (isCompatibilityMode()) {
-          getEditorContext().getCellFactory().popCellContext();
-        }
-      }
+      EditorCell emptyCell = createEmptyCell();
+      emptyCell.setSRole(getElementSRole());
+      myListEditorCell_Collection.addEditorCell(emptyCell);
     } else {
-      SNode prevNode = null;
-      while (listNodes.hasNext()) {
-        SNode nextNode = listNodes.next();
-        addSeparatorCell(editorContext, prevNode, nextNode);
-        myListEditorCell_Collection.addEditorCell(createNodeCell(editorContext, nextNode));
-        prevNode = nextNode;
+      SNode currentNode = listNodes.next();
+      for (;;) {
+        EditorCell currentCell = createNodeCell(currentNode);
+        if (listNodes.hasNext()) {
+          SNode nextNode = listNodes.next();
+          EditorCell separatorCell = createSeparator(currentNode, nextNode);
+          if (separatorCell != null) {
+            EditorCell_Collection destinationCell;
+            if (separatorCell.getStyle().get(StyleAttributes.SEPARATOR_RIGHT)) {
+              destinationCell = EditorCell_Collection.create(getEditorContext(), currentNode, new CellLayout_Horizontal(), null);
+              destinationCell.setSelectable(false);
+              myListEditorCell_Collection.addEditorCell(destinationCell);
+            } else {
+              destinationCell = myListEditorCell_Collection;
+            }
+            destinationCell.addEditorCell(currentCell);
+            destinationCell.addEditorCell(separatorCell);
+          } else {
+            myListEditorCell_Collection.addEditorCell(currentCell);
+          }
+          currentNode = nextNode;
+        } else {
+          myListEditorCell_Collection.addEditorCell(currentCell);
+          break;
+        }
       }
     }
   }
 
-  protected abstract List<? extends SNode> getNodesForList();
-
-  private void addSeparatorCell(EditorContext editorContext, SNode prevNode, SNode nextNode) {
-    if (prevNode == null) {
-      return;
+  @Nullable
+  private EditorCell createSeparator(@NotNull SNode prevNode, @NotNull SNode nextNode) {
+    if (AttributeOperations.isChildAttribute(nextNode) && !CommentUtil.isComment(nextNode)) {
+      return null;
     }
-    EditorCell separatorCell = createSeparatorCell(editorContext, prevNode, nextNode);
-    if (separatorCell != null) {
-      myListEditorCell_Collection.addEditorCell(separatorCell);
-    }
+    return createSeparatorCell(prevNode, nextNode);
   }
 }

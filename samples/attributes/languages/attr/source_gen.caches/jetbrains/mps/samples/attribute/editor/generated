@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-338q4dozixukt2k77i8hy7u864irhr3" />
+<product version="3" modelHash="75no2w9qxb5xyvzef34m0rnvukk9vfh">
+  <files names="CommentAttribute2_Editor.java:CommentAttribute2_EditorBuilder_a.java:CommentAttribute_Editor.java:CommentAttribute_EditorBuilder_a.java:EditorAspectDescriptorImpl.java:HandlerAsChild_Editor.java:HandlerAsChild_EditorBuilder_a.java:HandlerAsRoot_Editor.java:HandlerAsRoot_EditorBuilder_a.java:SubConceptToTransformNested_Editor.java:SubConceptToTransformNested_EditorBuilder_a.java:SubConceptToTransform_Editor.java:SubConceptToTransform_EditorBuilder_a.java" />
+</product>
 

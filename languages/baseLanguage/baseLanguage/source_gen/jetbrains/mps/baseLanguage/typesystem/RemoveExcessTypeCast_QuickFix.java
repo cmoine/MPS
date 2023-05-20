@@ -7,6 +7,7 @@ import jetbrains.mps.smodel.SNodePointer;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class RemoveExcessTypeCast_QuickFix extends QuickFix_Runtime {
@@ -17,6 +18,10 @@ public class RemoveExcessTypeCast_QuickFix extends QuickFix_Runtime {
     return "Remove Excess Typecast";
   }
   public void execute(SNode node) {
-    SNodeOperations.replaceWithAnother(((SNode) RemoveExcessTypeCast_QuickFix.this.getField("castExpr")[0]), SLinkOperations.getTarget(((SNode) RemoveExcessTypeCast_QuickFix.this.getField("castExpr")[0]), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf940dabe4aL, 0xf940dabe4cL, "expression")));
+    SNodeOperations.replaceWithAnother(((SNode) RemoveExcessTypeCast_QuickFix.this.getField("castExpr")[0]), SLinkOperations.getTarget(((SNode) RemoveExcessTypeCast_QuickFix.this.getField("castExpr")[0]), LINKS.expression$XDmN));
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink expression$XDmN = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf940dabe4aL, 0xf940dabe4cL, "expression");
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,77 +15,141 @@
  */
 package jetbrains.mps.ide;
 
-import com.intellij.configurationStore.StoreAwareProjectManager;
+import com.intellij.configurationStore.StoreReloadManager;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ModalityState;
-import com.intellij.openapi.components.ServiceKt;
-import com.intellij.openapi.components.impl.stores.StoreUtil;
-import com.intellij.openapi.project.ProjectManager;
-import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.project.ProjectUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.PlatformTestUtil;
-import jetbrains.mps.PlatformMpsTest;
-import jetbrains.mps.ide.newSolutionDialog.NewModuleUtil;
-import jetbrains.mps.ide.vfs.IdeaFile;
-import jetbrains.mps.ide.vfs.IdeaFileSystem;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.project.MPSProject;
-import jetbrains.mps.project.Solution;
-import jetbrains.mps.smodel.Language;
+import jetbrains.mps.tool.environment.Environment;
+import jetbrains.mps.tool.environment.EnvironmentAware;
 import jetbrains.mps.util.Reference;
-import jetbrains.mps.vfs.DefaultCachingContext;
+import jetbrains.mps.vfs.IFile;
+import jetbrains.mps.vfs.refresh.DefaultCachingContext;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.module.ModelAccess;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
 
-public class ModuleInProjectTest extends PlatformMpsTest {
+public abstract class ModuleInProjectTest implements EnvironmentAware {
   private final static String MODULE_NAME_PREFIX = "TEST";
+  // By default, property is not set and tmp project will not be deleted after test. Use for debug proposes.
+  private static final boolean SAVE_PROJECT =
+      Boolean.parseBoolean(System.getProperty("mps.tests.module.in.project.save.test.project"));
   private static int ourModuleCounter = 0;
 
-  protected static MPSProject ourProject;
+  private Environment myEnv;
+  protected MPSProject myProject;
 
   protected static String getNewModuleName() {
     return MODULE_NAME_PREFIX + ++ourModuleCounter;
   }
 
+  /**
+   * @param env test needs IdeaEnvironment
+   */
+  @Override
+  public void setEnvironment(@NotNull Environment env) {
+    myEnv = env;
+  }
+
   @Before
   public void before() {
-    ModuleIDETests.ourProject = (MPSProject) getEnvironment().createEmptyProject();
+    myProject = (MPSProject) myEnv.createEmptyProject();
   }
 
   void saveProjectInTest() {
-    ourProject.save();
-    PlatformTestUtil.saveProject(ourProject.getProject());
+    myProject.save();
+    PlatformTestUtil.saveProject(myProject.getProject());
   }
 
   @After
   public void after() {
-    ModuleIDETests.ourProject.dispose();
+    final VirtualFile projectDir = ProjectUtil.guessProjectDir(myProject.getProject());
+    myEnv.closeProject(myProject);
+    if (!SAVE_PROJECT) {
+      ApplicationManager.getApplication().invokeLater(() -> ApplicationManager.getApplication().runWriteAction(() -> {
+        try {
+          projectDir.delete(this);
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }));
+    }
   }
 
   void refreshProjectRecursively() {
-    IdeaFile projectFile = new IdeaFileSystem().getFile(ModuleIDETests.ourProject.getProjectFile().toString());
+    IFile projectFile = myProject.getFileSystem().getFile(getProjectRoot());
     projectFile.refresh(new DefaultCachingContext(true, true));
+    // TODO: Needs kotlin support in TC runner
+    //StoreReloadManager.getInstance().reloadChangedStorageFiles();
     ApplicationManager.getApplication().invokeAndWait(() -> {
-      ((StoreAwareProjectManager) ProjectManager.getInstance()).flushChangedAlarm(); // needed to trigger refresh on the project folder components in test environment
+      // needed to trigger refresh on the project folder components in test environment
+      // TODO: 223FIX
+      //StoreReloadManager.getInstance().flushChangedProjectFileAlarm();
     }, ModalityState.NON_MODAL);
   }
 
   @NotNull
-  String createNewDirInProject() {
-    String projectRoot = ModuleIDETests.ourProject.getProjectFile().getAbsolutePath();
-    File file;
-    for (int i = 0; (file = new File(projectRoot, String.valueOf(i))).exists(); ++i);
-    return file.getAbsolutePath();
+  IFile createNewDirInProject() {
+    String baseName = "dir";
+    String curName = baseName;
+    IFile result = null;
+    for (int i = 0; i < 2000 && result == null; ++i) {
+      result = createNewDirInProject(curName);
+      curName = baseName + "_" + i;
+    }
+    if (result == null) {
+      String[] files = myProject.getProjectFile().list();
+      for (String file : files) {
+        Logger.getLogger(ModuleInProjectTest.class).error("list: " + file);
+      }
+      throw new IllegalStateException("Could not create an available directory '" + curName + "' in the project '" + myProject.getProjectFile().getAbsolutePath() + "'");
+    }
+    return result;
   }
+
+  @Nullable
+  IFile createNewDirInProject(@NotNull String projectDirName) {
+    File file = new File(getProjectRoot(), projectDirName);
+    if (file.exists()) {
+      return null;
+    }
+    if (file.mkdirs()) {
+      return myProject.getFileSystem().getFile(file);
+    }
+    return null;
+  }
+
+  @NotNull
+  IFile getOrCreateDirInProject(@NotNull String projectDirName) {
+    File file = new File(getProjectRoot(), projectDirName);
+    return myProject.getFileSystem().getFile(file);
+  }
+
+  // see ba276906
+  private File getProjectRoot() {
+    try {
+      // On Mac, "/var/xxx" is "/private/var/xxx" in canonical. Since we use 'startsWith' check,
+      // make sure we start module descriptor loading from canonical file location (module macro performs
+      // canonicalization of file, if we supply non-canonical, paths of model roots would differ)
+      return myProject.getProjectFile().getCanonicalFile();
+    } catch (IOException ex) {
+      throw new IllegalStateException(ex);
+    }
+  }
+
 
   void invokeInCommand(@NotNull Runnable runnable) {
     Reference<Throwable> throwableReference = new Reference<>();
-    ModelAccess modelAccess = ModuleIDETests.ourProject.getRepository().getModelAccess();
-    ApplicationManager.getApplication().invokeAndWait(() -> modelAccess.executeCommand(() -> modelAccess.runWriteAction(() -> {
+    final ModelAccess modelAccess = myProject.getRepository().getModelAccess();
+    ApplicationManager.getApplication().invokeAndWait(() -> modelAccess.executeCommand(() -> {
       try {
         runnable.run();
       } catch (VirtualMachineError e) {
@@ -93,8 +157,8 @@ public class ModuleInProjectTest extends PlatformMpsTest {
       } catch (Throwable e) {
         throwableReference.set(e);
       }
-    })), ModalityState.NON_MODAL);
-    ENV.flushAllEvents();
+    }), ModalityState.NON_MODAL);
+    myEnv.flushAllEvents();
     if (!throwableReference.isNull()) {
       Throwable cause = throwableReference.get();
       if (cause instanceof RuntimeException) {

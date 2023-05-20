@@ -15,6 +15,8 @@
  */
 package jetbrains.mps.nodeEditor;
 
+import jetbrains.mps.lang.editor.menus.transformation.IncludeTransformationMenuTransformationMenuPart;
+import jetbrains.mps.lang.editor.menus.transformation.IncludeTransformationMenuTransformationMenuPartTest;
 import jetbrains.mps.nodeEditor.assist.AncestorOrSmallCellContextAssistantFinderTest;
 import jetbrains.mps.nodeEditor.assist.CanExecuteFilterTest;
 import jetbrains.mps.nodeEditor.braces.BracesFinderTest;
@@ -39,6 +41,7 @@ import org.junit.runners.Suite;
     BracesFinderTest.class,
     ActionExecutionTest.class,
     MenuItemListStepTest.class,
+    IncludeTransformationMenuTransformationMenuPartTest.class,
     OverflowLayoutTest.class,
     ComponentCellTest.class,
     ContainerTests.class,

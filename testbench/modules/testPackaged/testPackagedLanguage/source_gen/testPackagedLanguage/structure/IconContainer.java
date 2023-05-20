@@ -5,5 +5,5 @@ package testPackagedLanguage.structure;
 import jetbrains.mps.smodel.runtime.IconResource;
 
 public class IconContainer {
-  protected static IconResource RESOURCE_a0a0a = new IconResource("icon.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a2a0a0b0c = new IconResource("icon.png", IconContainer.class);
 }

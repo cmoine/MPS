@@ -7,9 +7,9 @@ import jetbrains.mps.core.aspects.behaviour.api.BHDescriptor;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor {
   private final BHDescriptor myFindBlock__BehaviorDescriptor = new FindBlock__BehaviorDescriptor();
@@ -17,91 +17,51 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
   private final BHDescriptor myIsApplicableBlock__BehaviorDescriptor = new IsApplicableBlock__BehaviorDescriptor();
   private final BHDescriptor myResultStatement__BehaviorDescriptor = new ResultStatement__BehaviorDescriptor();
   private final BHDescriptor myNodeStatement__BehaviorDescriptor = new NodeStatement__BehaviorDescriptor();
-  private final BHDescriptor myExecuteFinderExpression__BehaviorDescriptor = new ExecuteFinderExpression__BehaviorDescriptor();
   private final BHDescriptor myCategorizeBlock__BehaviorDescriptor = new CategorizeBlock__BehaviorDescriptor();
   private final BHDescriptor mySearchedNodesBlock__BehaviorDescriptor = new SearchedNodesBlock__BehaviorDescriptor();
   private final BHDescriptor myCheckCancelledStatusStatement__BehaviorDescriptor = new CheckCancelledStatusStatement__BehaviorDescriptor();
   private final BHDescriptor myIsVisibleBlock__BehaviorDescriptor = new IsVisibleBlock__BehaviorDescriptor();
   private final BHDescriptor myIsUsedByDefault__BehaviorDescriptor = new IsUsedByDefault__BehaviorDescriptor();
+  private final BHDescriptor myOnEachFoundNodeCallback__BehaviorDescriptor = new OnEachFoundNodeCallback__BehaviorDescriptor();
+  private final BHDescriptor myForEachNodeFoundClosureParameterDeclaration__BehaviorDescriptor = new ForEachNodeFoundClosureParameterDeclaration__BehaviorDescriptor();
+  private final BHDescriptor myOnEachNodeFoundByExpression__BehaviorDescriptor = new OnEachNodeFoundByExpression__BehaviorDescriptor();
 
   public BehaviorAspectDescriptor() {
   }
 
   @Nullable
   public BHDescriptor getDescriptor(@NotNull SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_846f5o_a0o.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return myCategorizeBlock__BehaviorDescriptor;
-          }
-          break;
-        case 1:
-          if (true) {
-            return myCheckCancelledStatusStatement__BehaviorDescriptor;
-          }
-          break;
-        case 2:
-          if (true) {
-            return myExecuteFinderExpression__BehaviorDescriptor;
-          }
-          break;
-        case 3:
-          if (true) {
-            return myFindBlock__BehaviorDescriptor;
-          }
-          break;
-        case 4:
-          if (true) {
-            return myFinderDeclaration__BehaviorDescriptor;
-          }
-          break;
-        case 5:
-          if (true) {
-            return myIsApplicableBlock__BehaviorDescriptor;
-          }
-          break;
-        case 6:
-          if (true) {
-            return myIsUsedByDefault__BehaviorDescriptor;
-          }
-          break;
-        case 7:
-          if (true) {
-            return myIsVisibleBlock__BehaviorDescriptor;
-          }
-          break;
-        case 8:
-          if (true) {
-            return myNodeStatement__BehaviorDescriptor;
-          }
-          break;
-        case 9:
-          if (true) {
-            return myResultStatement__BehaviorDescriptor;
-          }
-          break;
-        case 10:
-          if (true) {
-            return mySearchedNodesBlock__BehaviorDescriptor;
-          }
-          break;
-        default:
-          // default 
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return myCategorizeBlock__BehaviorDescriptor;
+      case 1:
+        return myCheckCancelledStatusStatement__BehaviorDescriptor;
+      case 2:
+        return myFindBlock__BehaviorDescriptor;
+      case 3:
+        return myFinderDeclaration__BehaviorDescriptor;
+      case 4:
+        return myForEachNodeFoundClosureParameterDeclaration__BehaviorDescriptor;
+      case 5:
+        return myIsApplicableBlock__BehaviorDescriptor;
+      case 6:
+        return myIsUsedByDefault__BehaviorDescriptor;
+      case 7:
+        return myIsVisibleBlock__BehaviorDescriptor;
+      case 8:
+        return myNodeStatement__BehaviorDescriptor;
+      case 9:
+        return myOnEachFoundNodeCallback__BehaviorDescriptor;
+      case 10:
+        return myOnEachNodeFoundByExpression__BehaviorDescriptor;
+      case 11:
+        return myResultStatement__BehaviorDescriptor;
+      case 12:
+        return mySearchedNodesBlock__BehaviorDescriptor;
+      default:
     }
     return null;
   }
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
-  }
-  private static final Map<SAbstractConcept, Integer> indices_846f5o_a0o = buildConceptIndices(MetaAdapterFactory.getConcept(0x64d34fcdad024e73L, 0xaff8a581124c2e30L, 0x118e6b14c36L, "jetbrains.mps.lang.findUsages.structure.CategorizeBlock"), MetaAdapterFactory.getConcept(0x64d34fcdad024e73L, 0xaff8a581124c2e30L, 0x1190f427b83L, "jetbrains.mps.lang.findUsages.structure.CheckCancelledStatusStatement"), MetaAdapterFactory.getConcept(0x64d34fcdad024e73L, 0xaff8a581124c2e30L, 0x118d6fce801L, "jetbrains.mps.lang.findUsages.structure.ExecuteFinderExpression"), MetaAdapterFactory.getConcept(0x64d34fcdad024e73L, 0xaff8a581124c2e30L, 0x116b5695a88L, "jetbrains.mps.lang.findUsages.structure.FindBlock"), MetaAdapterFactory.getConcept(0x64d34fcdad024e73L, 0xaff8a581124c2e30L, 0x116b5695a8dL, "jetbrains.mps.lang.findUsages.structure.FinderDeclaration"), MetaAdapterFactory.getConcept(0x64d34fcdad024e73L, 0xaff8a581124c2e30L, 0x116b5695a94L, "jetbrains.mps.lang.findUsages.structure.IsApplicableBlock"), MetaAdapterFactory.getConcept(0x64d34fcdad024e73L, 0xaff8a581124c2e30L, 0x1660f4e85a04a8fL, "jetbrains.mps.lang.findUsages.structure.IsUsedByDefault"), MetaAdapterFactory.getConcept(0x64d34fcdad024e73L, 0xaff8a581124c2e30L, 0x11b36e60151L, "jetbrains.mps.lang.findUsages.structure.IsVisibleBlock"), MetaAdapterFactory.getConcept(0x64d34fcdad024e73L, 0xaff8a581124c2e30L, 0x1177408145aL, "jetbrains.mps.lang.findUsages.structure.NodeStatement"), MetaAdapterFactory.getConcept(0x64d34fcdad024e73L, 0xaff8a581124c2e30L, 0x1177404a3f4L, "jetbrains.mps.lang.findUsages.structure.ResultStatement"), MetaAdapterFactory.getConcept(0x64d34fcdad024e73L, 0xaff8a581124c2e30L, 0x118e6b5cc19L, "jetbrains.mps.lang.findUsages.structure.SearchedNodesBlock"));
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x64d34fcdad024e73L, 0xaff8a581124c2e30L, 0x118e6b14c36L), MetaIdFactory.conceptId(0x64d34fcdad024e73L, 0xaff8a581124c2e30L, 0x1190f427b83L), MetaIdFactory.conceptId(0x64d34fcdad024e73L, 0xaff8a581124c2e30L, 0x116b5695a88L), MetaIdFactory.conceptId(0x64d34fcdad024e73L, 0xaff8a581124c2e30L, 0x116b5695a8dL), MetaIdFactory.conceptId(0x64d34fcdad024e73L, 0xaff8a581124c2e30L, 0x112b337a16d39f72L), MetaIdFactory.conceptId(0x64d34fcdad024e73L, 0xaff8a581124c2e30L, 0x116b5695a94L), MetaIdFactory.conceptId(0x64d34fcdad024e73L, 0xaff8a581124c2e30L, 0x1660f4e85a04a8fL), MetaIdFactory.conceptId(0x64d34fcdad024e73L, 0xaff8a581124c2e30L, 0x11b36e60151L), MetaIdFactory.conceptId(0x64d34fcdad024e73L, 0xaff8a581124c2e30L, 0x1177408145aL), MetaIdFactory.conceptId(0x64d34fcdad024e73L, 0xaff8a581124c2e30L, 0x112b337a16caa96eL), MetaIdFactory.conceptId(0x64d34fcdad024e73L, 0xaff8a581124c2e30L, 0x5f5488291166ada7L), MetaIdFactory.conceptId(0x64d34fcdad024e73L, 0xaff8a581124c2e30L, 0x1177404a3f4L), MetaIdFactory.conceptId(0x64d34fcdad024e73L, 0xaff8a581124c2e30L, 0x118e6b5cc19L)).seal();
 }

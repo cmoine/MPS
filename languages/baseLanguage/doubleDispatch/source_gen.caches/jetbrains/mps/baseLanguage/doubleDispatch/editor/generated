@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="62f8mspkovfp5zxq6du74frm4jsdak" />
+<product version="3" modelHash="-ej6a7r0sh49xbd0nid1j57xljxpufo">
+  <files names="DispatchModifier_Editor.java:DispatchModifier_EditorBuilder_a.java:EditorAspectDescriptorImpl.java:addCtorIncompleteFromModifier.java" />
+</product>
 

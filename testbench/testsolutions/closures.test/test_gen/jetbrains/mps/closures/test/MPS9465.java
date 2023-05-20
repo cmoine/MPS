@@ -8,15 +8,13 @@ public class MPS9465 {
   public MPS9465() {
   }
   public void foo() {
-    exec(new _FunctionTypes._void_P0_E0() {
-      public void invoke() {
-        try {
-        } catch (Throwable ex) {
-          if (ex instanceof RuntimeException) {
-            throw ((RuntimeException) ex);
-          } else {
-            throw new RuntimeException();
-          }
+    exec(() -> {
+      try {
+      } catch (Throwable ex) {
+        if (ex instanceof RuntimeException) {
+          throw ((RuntimeException) ex);
+        } else {
+          throw new RuntimeException();
         }
       }
     });

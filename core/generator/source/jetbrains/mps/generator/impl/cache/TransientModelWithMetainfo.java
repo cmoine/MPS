@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,18 +15,17 @@
  */
 package jetbrains.mps.generator.impl.cache;
 
-import jetbrains.mps.generator.impl.GenerationFailureException;
-import jetbrains.mps.generator.impl.dependencies.DependenciesBuilder;
 import jetbrains.mps.util.io.ModelInputStream;
 import jetbrains.mps.util.io.ModelOutputStream;
-import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeId;
 import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 /**
@@ -45,8 +44,8 @@ public class TransientModelWithMetainfo {
   public TransientModelWithMetainfo(SModelReference reference, List<SNode> roots) {
     myReference = reference;
     myRoots = roots;
-    myRootToOriginal = new HashMap<SNodeId, SNodeId>();
-    myMappingsMemento = new HashMap<SNodeId, MappingsMemento>();
+    myRootToOriginal = new HashMap<>();
+    myMappingsMemento = new HashMap<>();
   }
 
   public List<SNode> getRoots() {
@@ -129,21 +128,5 @@ public class TransientModelWithMetainfo {
     TransientModelWithMetainfo result = new TransientModelWithMetainfo(modelReference, roots);
     result.loadMetainfo(is);
     return result;
-  }
-
-  public static TransientModelWithMetainfo create(SModel model, DependenciesBuilder builder) throws GenerationFailureException {
-    ArrayList<SNode> roots = new ArrayList<SNode>();
-    for (SNode root1 : model.getRootNodes()) {
-      roots.add(root1);
-    }
-    TransientModelWithMetainfo metainfo = new TransientModelWithMetainfo(model.getReference(), roots);
-    Iterator<SNode> it = model.getRootNodes().iterator();
-    while (it.hasNext()) {
-      SNode root = it.next();
-      SNode node = builder.getOriginalForOutput(root);
-      metainfo.myRootToOriginal.put(root.getNodeId(), node == null ? null: node.getNodeId());
-    }
-    builder.updateUnchanged(metainfo);
-    return metainfo;
   }
 }

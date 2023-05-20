@@ -15,16 +15,28 @@
  */
 package org.jetbrains.mps.openapi.language;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Collection;
+import java.util.List;
+
 /**
- * Represents an enumeration - a collections of related options (SEnumerationLiterals)
+ * Enumerations define collections of related {@link SEnumerationLiteral options}.
  */
-public interface SEnumeration extends SDataType {
+public interface SEnumeration extends SNamedElement, SDataType {
   /**
    * Resolves the enumeration literal with matching name
    */
-  SEnumerationLiteral getLiteral(String name);
+  @Nullable
+  SEnumerationLiteral getLiteral(@Nullable String name);
 
+  @Nullable
   SEnumerationLiteral getDefault();
 
-  Iterable<SEnumerationLiteral> getLiterals();
+  /**
+   * @return ordered set of enumeration literals
+   */
+  @NotNull
+  Collection<SEnumerationLiteral> getLiterals();
 }

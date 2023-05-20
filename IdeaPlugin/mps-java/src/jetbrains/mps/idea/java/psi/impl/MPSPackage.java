@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@ package jetbrains.mps.idea.java.psi.impl;
 
 import com.intellij.codeInsight.completion.scope.JavaCompletionHints;
 import com.intellij.openapi.util.Condition;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiClass;
@@ -38,6 +39,7 @@ import com.intellij.util.IncorrectOperationException;
 import jetbrains.mps.idea.core.icons.MPSIcons;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiModel;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiNodeBase;
+import jetbrains.mps.util.NameUtil;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -66,6 +68,11 @@ public class MPSPackage extends MPSPsiNodeBase implements PsiPackage {
   @Override
   public PsiManager getManager() {
     return myPsiModel.getManager();
+  }
+
+  @Override
+  public TextRange getTextRange() {
+    return null;
   }
 
   @Override
@@ -98,6 +105,20 @@ public class MPSPackage extends MPSPsiNodeBase implements PsiPackage {
     // Q: should I handle stereotype here?
     // MPSPackage is supposed to be used only for real mps models in user's project
     return myPsiModel.getQualifiedName();
+  }
+
+  @Override
+  public String getName() {
+    // IMO, it's a bit of a mess here with all getText(), getName() and
+    //   getPresentation().getPresentableText() coming from different interfaces (PsiNamedElement,
+    //   PsiQualifiedNamedElement, NavigatablePsiElement), check
+    //   com.intellij.codeInsight.navigation.UtilKt.targetPresentation(util.kt:93)
+    //   to see despair.
+    //   Perhaps, shall stick to getPresentation() (might want to reuse NodePointerNavigationItem)
+    //   and derive all other methods from it. Alternative, generic getPresentation() that delegates
+    //   to getText()/getIcon() is bit more tricky as it's uncertian whether to use getName() or getText()
+    //   let alone confusion why didn't IDEA team did that for me.
+    return NameUtil.shortNameFromLongName(getQualifiedName());
   }
 
   @Nullable

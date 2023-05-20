@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="70wmwopl2o7fiai2roqlalzjuymeowq" />
+<product version="3" modelHash="ar3nmywccb7nxfg28vq9fawwnazyw5h">
+  <files names="ExtensionDescriptor.java" />
+</product>
 

@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 public class Interval<T extends Comparable> implements Iterable<T> {
-  private static final Map<Class, Interval.IteratorFactory> ourIteratorFactories = new HashMap<Class, Interval.IteratorFactory>();
+  private static final Map<Class, IteratorFactory> ourIteratorFactories = new HashMap<Class, IteratorFactory>();
   private final T myStart;
   private final T myEnd;
   private final boolean myStartIncluded;
@@ -76,7 +76,7 @@ public class Interval<T extends Comparable> implements Iterable<T> {
     if (myStart == null || myEnd == null) {
       throw new UnsupportedOperationException();
     }
-    Interval.IteratorFactory<T> factory = ourIteratorFactories.get(myStart.getClass());
+    IteratorFactory<T> factory = ourIteratorFactories.get(myStart.getClass());
     if (factory == null) {
       throw new UnsupportedOperationException();
     }
@@ -86,7 +86,7 @@ public class Interval<T extends Comparable> implements Iterable<T> {
     Iterator<T> iterator(T start, boolean startIncluded, T end, boolean endIncluded);
   }
   static {
-    ourIteratorFactories.put(Character.class, new Interval.IteratorFactory<Character>() {
+    ourIteratorFactories.put(Character.class, new IteratorFactory<Character>() {
       @Override
       public Iterator<Character> iterator(final Character start, final boolean startIncluded, final Character end, final boolean endIncluded) {
         return new Iterator<Character>() {
@@ -117,7 +117,7 @@ public class Interval<T extends Comparable> implements Iterable<T> {
         };
       }
     });
-    ourIteratorFactories.put(Byte.class, new Interval.IteratorFactory<Byte>() {
+    ourIteratorFactories.put(Byte.class, new IteratorFactory<Byte>() {
       @Override
       public Iterator<Byte> iterator(final Byte start, final boolean startIncluded, final Byte end, final boolean endIncluded) {
         return new Iterator<Byte>() {
@@ -148,7 +148,7 @@ public class Interval<T extends Comparable> implements Iterable<T> {
         };
       }
     });
-    ourIteratorFactories.put(Short.class, new Interval.IteratorFactory<Short>() {
+    ourIteratorFactories.put(Short.class, new IteratorFactory<Short>() {
       @Override
       public Iterator<Short> iterator(final Short start, final boolean startIncluded, final Short end, final boolean endIncluded) {
         return new Iterator<Short>() {
@@ -179,7 +179,7 @@ public class Interval<T extends Comparable> implements Iterable<T> {
         };
       }
     });
-    ourIteratorFactories.put(Integer.class, new Interval.IteratorFactory<Integer>() {
+    ourIteratorFactories.put(Integer.class, new IteratorFactory<Integer>() {
       @Override
       public Iterator<Integer> iterator(final Integer start, final boolean startIncluded, final Integer end, final boolean endIncluded) {
         return new Iterator<Integer>() {
@@ -210,7 +210,7 @@ public class Interval<T extends Comparable> implements Iterable<T> {
         };
       }
     });
-    ourIteratorFactories.put(Long.class, new Interval.IteratorFactory<Long>() {
+    ourIteratorFactories.put(Long.class, new IteratorFactory<Long>() {
       @Override
       public Iterator<Long> iterator(final Long start, final boolean startIncluded, final Long end, final boolean endIncluded) {
         return new Iterator<Long>() {

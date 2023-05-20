@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <root>
+    <file name="IntentionsDescriptor.java">
+      <unit at="18,0,58,0" name="testOverridingType.intentions.IntentionsDescriptor" />
+    </file>
+  </root>
+  <root nodeRef="r:d884d12b-f79a-4b35-a8fe-63e10e0c9c8d(testOverridingType.intentions)/1870027727456307005">
+    <file name="AddRemoveUnconditionalPresenceAnnotation_Intention.java">
+      <node id="1870027727456307005" at="22,0,23,0" concept="3" trace="myCachedExecutable" />
+      <node id="1870027727456307005" at="24,63,25,144" concept="9" />
+      <node id="1870027727456307005" at="29,35,30,54" concept="6" />
+      <node id="1870027727456307005" at="34,35,35,17" concept="6" />
+      <node id="1870027727456307005" at="39,37,40,105" concept="2" />
+      <node id="1870027727456307005" at="41,5,42,30" concept="6" />
+      <node id="1870027727456307008" at="49,87,50,207" concept="6" />
+      <node id="1870027727456362061" at="55,116,56,105" concept="2" />
+      <node id="1870027727456362018" at="56,105,57,0" concept="7" />
+      <node id="1870027727456307039" at="58,14,59,130" concept="2" />
+      <node id="1870027727456307005" at="64,86,65,18" concept="6" />
+      <node id="1870027727456307005" at="71,48,72,69" concept="6" />
+      <node id="1870027727456307005" at="78,0,79,0" concept="8" trace="UnconditionalOverrideAnnotation$2L" />
+      <node id="1870027727456307005" at="45,0,47,0" concept="1" trace="IntentionImplementation#()V" />
+      <node id="1870027727456307037" at="58,12,60,7" concept="0" />
+      <node id="1870027727456307005" at="24,0,27,0" concept="1" trace="AddRemoveUnconditionalPresenceAnnotation_Intention#()V" />
+      <node id="1870027727456307005" at="38,99,41,5" concept="4" />
+      <node id="1870027727456307005" at="28,0,32,0" concept="5" trace="getPresentation#()Ljava/lang/String;" />
+      <node id="1870027727456307005" at="33,0,37,0" concept="5" trace="isSurroundWith#()Z" />
+      <node id="1870027727456307005" at="48,0,52,0" concept="5" trace="getDescription#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/openapi/editor/EditorContext;)Ljava/lang/String;" />
+      <node id="1870027727456307005" at="63,0,67,0" concept="5" trace="isApplicable#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/openapi/editor/EditorContext;)Z" />
+      <node id="1870027727456307005" at="70,0,74,0" concept="5" trace="getDescriptor#()Ljetbrains/mps/openapi/intentions/IntentionDescriptor;" />
+      <node id="1870027727456307005" at="38,0,44,0" concept="5" trace="instances#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/openapi/editor/EditorContext;)Ljava/util/Collection;" />
+      <node id="1870027727456307020" at="54,78,60,7" concept="4" />
+      <node id="1870027727456307005" at="53,0,62,0" concept="5" trace="execute#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/openapi/editor/EditorContext;)V" />
+      <scope id="1870027727456307005" at="45,38,45,38" />
+      <scope id="1870027727456307005" at="24,63,25,144" />
+      <scope id="1870027727456307005" at="29,35,30,54" />
+      <scope id="1870027727456307005" at="34,35,35,17" />
+      <scope id="1870027727456307005" at="39,37,40,105" />
+      <scope id="1870027727456307007" at="49,87,50,207" />
+      <scope id="1870027727456307038" at="58,14,59,130" />
+      <scope id="1870027727456307005" at="64,86,65,18" />
+      <scope id="1870027727456307005" at="71,48,72,69" />
+      <scope id="1870027727456307005" at="45,0,47,0" />
+      <scope id="1870027727456307021" at="55,116,57,0" />
+      <scope id="1870027727456307005" at="24,0,27,0" />
+      <scope id="1870027727456307005" at="28,0,32,0" />
+      <scope id="1870027727456307005" at="33,0,37,0" />
+      <scope id="1870027727456307005" at="38,99,42,30" />
+      <scope id="1870027727456307005" at="48,0,52,0">
+        <var name="editorContext" id="1870027727456307005" />
+        <var name="node" id="1870027727456307005" />
+      </scope>
+      <scope id="1870027727456307005" at="63,0,67,0">
+        <var name="editorContext" id="1870027727456307005" />
+        <var name="node" id="1870027727456307005" />
+      </scope>
+      <scope id="1870027727456307005" at="70,0,74,0" />
+      <scope id="1870027727456307005" at="38,0,44,0">
+        <var name="context" id="1870027727456307005" />
+        <var name="node" id="1870027727456307005" />
+      </scope>
+      <scope id="1870027727456307019" at="54,78,60,7" />
+      <scope id="1870027727456307005" at="53,0,62,0">
+        <var name="editorContext" id="1870027727456307005" />
+        <var name="node" id="1870027727456307005" />
+      </scope>
+      <unit id="1870027727456307005" at="77,0,80,0" name="testOverridingType.intentions.AddRemoveUnconditionalPresenceAnnotation_Intention$CONCEPTS" />
+      <unit id="1870027727456307005" at="44,0,76,0" name="testOverridingType.intentions.AddRemoveUnconditionalPresenceAnnotation_Intention$IntentionImplementation" />
+      <unit id="1870027727456307005" at="21,0,81,0" name="testOverridingType.intentions.AddRemoveUnconditionalPresenceAnnotation_Intention" />
+    </file>
+    <file name="IntentionsDescriptor.java">
+      <node id="1870027727456307005" at="38,70,39,83" concept="2" />
+      <node id="1870027727456307005" at="52,56,53,69" concept="2" />
+    </file>
+  </root>
+  <root nodeRef="r:d884d12b-f79a-4b35-a8fe-63e10e0c9c8d(testOverridingType.intentions)/4113274076525537945">
+    <file name="AddRemovePresenceAnnotation_Intention.java">
+      <node id="4113274076525537945" at="22,0,23,0" concept="3" trace="myCachedExecutable" />
+      <node id="4113274076525537945" at="24,50,25,144" concept="9" />
+      <node id="4113274076525537945" at="29,35,30,41" concept="6" />
+      <node id="4113274076525537945" at="34,35,35,17" concept="6" />
+      <node id="4113274076525537945" at="39,37,40,105" concept="2" />
+      <node id="4113274076525537945" at="41,5,42,30" concept="6" />
+      <node id="4113274076525539577" at="49,87,50,165" concept="6" />
+      <node id="1870027727456362436" at="55,103,56,92" concept="2" />
+      <node id="1870027727456362426" at="56,92,57,0" concept="7" />
+      <node id="4113274076525578978" at="58,14,59,117" concept="2" />
+      <node id="4113274076525537945" at="64,86,65,18" concept="6" />
+      <node id="4113274076525537945" at="71,48,72,56" concept="6" />
+      <node id="4113274076525537945" at="78,0,79,0" concept="8" trace="OverrideAnnotation$xy" />
+      <node id="4113274076525537945" at="45,0,47,0" concept="1" trace="IntentionImplementation#()V" />
+      <node id="4113274076525578866" at="58,12,60,7" concept="0" />
+      <node id="4113274076525537945" at="24,0,27,0" concept="1" trace="AddRemovePresenceAnnotation_Intention#()V" />
+      <node id="4113274076525537945" at="38,99,41,5" concept="4" />
+      <node id="4113274076525537945" at="28,0,32,0" concept="5" trace="getPresentation#()Ljava/lang/String;" />
+      <node id="4113274076525537945" at="33,0,37,0" concept="5" trace="isSurroundWith#()Z" />
+      <node id="4113274076525537945" at="48,0,52,0" concept="5" trace="getDescription#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/openapi/editor/EditorContext;)Ljava/lang/String;" />
+      <node id="4113274076525537945" at="63,0,67,0" concept="5" trace="isApplicable#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/openapi/editor/EditorContext;)Z" />
+      <node id="4113274076525537945" at="70,0,74,0" concept="5" trace="getDescriptor#()Ljetbrains/mps/openapi/intentions/IntentionDescriptor;" />
+      <node id="4113274076525537945" at="38,0,44,0" concept="5" trace="instances#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/openapi/editor/EditorContext;)Ljava/util/Collection;" />
+      <node id="4113274076525575064" at="54,78,60,7" concept="4" />
+      <node id="4113274076525537945" at="53,0,62,0" concept="5" trace="execute#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/openapi/editor/EditorContext;)V" />
+      <scope id="4113274076525537945" at="45,38,45,38" />
+      <scope id="4113274076525537945" at="24,50,25,144" />
+      <scope id="4113274076525537945" at="29,35,30,41" />
+      <scope id="4113274076525537945" at="34,35,35,17" />
+      <scope id="4113274076525537945" at="39,37,40,105" />
+      <scope id="4113274076525537947" at="49,87,50,165" />
+      <scope id="4113274076525578867" at="58,14,59,117" />
+      <scope id="4113274076525537945" at="64,86,65,18" />
+      <scope id="4113274076525537945" at="71,48,72,56" />
+      <scope id="4113274076525537945" at="45,0,47,0" />
+      <scope id="4113274076525575065" at="55,103,57,0" />
+      <scope id="4113274076525537945" at="24,0,27,0" />
+      <scope id="4113274076525537945" at="28,0,32,0" />
+      <scope id="4113274076525537945" at="33,0,37,0" />
+      <scope id="4113274076525537945" at="38,99,42,30" />
+      <scope id="4113274076525537945" at="48,0,52,0">
+        <var name="editorContext" id="4113274076525537945" />
+        <var name="node" id="4113274076525537945" />
+      </scope>
+      <scope id="4113274076525537945" at="63,0,67,0">
+        <var name="editorContext" id="4113274076525537945" />
+        <var name="node" id="4113274076525537945" />
+      </scope>
+      <scope id="4113274076525537945" at="70,0,74,0" />
+      <scope id="4113274076525537945" at="38,0,44,0">
+        <var name="context" id="4113274076525537945" />
+        <var name="node" id="4113274076525537945" />
+      </scope>
+      <scope id="4113274076525537949" at="54,78,60,7" />
+      <scope id="4113274076525537945" at="53,0,62,0">
+        <var name="editorContext" id="4113274076525537945" />
+        <var name="node" id="4113274076525537945" />
+      </scope>
+      <unit id="4113274076525537945" at="77,0,80,0" name="testOverridingType.intentions.AddRemovePresenceAnnotation_Intention$CONCEPTS" />
+      <unit id="4113274076525537945" at="44,0,76,0" name="testOverridingType.intentions.AddRemovePresenceAnnotation_Intention$IntentionImplementation" />
+      <unit id="4113274076525537945" at="21,0,81,0" name="testOverridingType.intentions.AddRemovePresenceAnnotation_Intention" />
+    </file>
+    <file name="IntentionsDescriptor.java">
+      <node id="4113274076525537945" at="37,47,38,70" concept="2" />
+      <node id="4113274076525537945" at="51,52,52,56" concept="2" />
+    </file>
+  </root>
+</debug-info>
+

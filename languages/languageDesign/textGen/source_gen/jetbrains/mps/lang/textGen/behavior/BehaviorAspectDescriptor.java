@@ -7,9 +7,9 @@ import jetbrains.mps.core.aspects.behaviour.api.BHDescriptor;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor {
   private final BHDescriptor myConceptTextGenDeclaration__BehaviorDescriptor = new ConceptTextGenDeclaration__BehaviorDescriptor();
@@ -17,9 +17,7 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
   private final BHDescriptor myGenerateTextDeclaration__BehaviorDescriptor = new GenerateTextDeclaration__BehaviorDescriptor();
   private final BHDescriptor myLanguageTextGenDeclaration__BehaviorDescriptor = new LanguageTextGenDeclaration__BehaviorDescriptor();
   private final BHDescriptor myOperationDeclaration__BehaviorDescriptor = new OperationDeclaration__BehaviorDescriptor();
-  private final BHDescriptor myContextParameter__BehaviorDescriptor = new ContextParameter__BehaviorDescriptor();
   private final BHDescriptor myAbstractTextGenDeclaration__BehaviorDescriptor = new AbstractTextGenDeclaration__BehaviorDescriptor();
-  private final BHDescriptor myBufferParameter__BehaviorDescriptor = new BufferParameter__BehaviorDescriptor();
   private final BHDescriptor myUtilityMethodCall__BehaviorDescriptor = new UtilityMethodCall__BehaviorDescriptor();
   private final BHDescriptor myAbstractTextGenParameter__BehaviorDescriptor = new AbstractTextGenParameter__BehaviorDescriptor();
   private final BHDescriptor myWithIndentOperation__BehaviorDescriptor = new WithIndentOperation__BehaviorDescriptor();
@@ -30,6 +28,7 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
   private final BHDescriptor myFilenameFunction__BehaviorDescriptor = new FilenameFunction__BehaviorDescriptor();
   private final BHDescriptor myEncodingDeclaration__BehaviorDescriptor = new EncodingDeclaration__BehaviorDescriptor();
   private final BHDescriptor myStubOperationDeclaration__BehaviorDescriptor = new StubOperationDeclaration__BehaviorDescriptor();
+  private final BHDescriptor myFilePathQuery__BehaviorDescriptor = new FilePathQuery__BehaviorDescriptor();
   private final BHDescriptor myExtensionDeclaration__BehaviorDescriptor = new ExtensionDeclaration__BehaviorDescriptor();
 
   public BehaviorAspectDescriptor() {
@@ -37,119 +36,47 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
 
   @Nullable
   public BHDescriptor getDescriptor(@NotNull SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_846f5o_a0w.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return myAbstractAppendPart__BehaviorDescriptor;
-          }
-          break;
-        case 1:
-          if (true) {
-            return myAbstractTextGenDeclaration__BehaviorDescriptor;
-          }
-          break;
-        case 2:
-          if (true) {
-            return myAbstractTextGenParameter__BehaviorDescriptor;
-          }
-          break;
-        case 3:
-          if (true) {
-            return myBufferParameter__BehaviorDescriptor;
-          }
-          break;
-        case 4:
-          if (true) {
-            return myCollectionAppendPart__BehaviorDescriptor;
-          }
-          break;
-        case 5:
-          if (true) {
-            return myConceptTextGenDeclaration__BehaviorDescriptor;
-          }
-          break;
-        case 6:
-          if (true) {
-            return myConstantStringAppendPart__BehaviorDescriptor;
-          }
-          break;
-        case 7:
-          if (true) {
-            return myContextParameter__BehaviorDescriptor;
-          }
-          break;
-        case 8:
-          if (true) {
-            return myEncodingDeclaration__BehaviorDescriptor;
-          }
-          break;
-        case 9:
-          if (true) {
-            return myExtensionDeclaration__BehaviorDescriptor;
-          }
-          break;
-        case 10:
-          if (true) {
-            return myFilenameFunction__BehaviorDescriptor;
-          }
-          break;
-        case 11:
-          if (true) {
-            return myGenerateTextDeclaration__BehaviorDescriptor;
-          }
-          break;
-        case 12:
-          if (true) {
-            return myLanguageTextGenDeclaration__BehaviorDescriptor;
-          }
-          break;
-        case 13:
-          if (true) {
-            return myNodeAppendPart__BehaviorDescriptor;
-          }
-          break;
-        case 14:
-          if (true) {
-            return myNodeParameter__BehaviorDescriptor;
-          }
-          break;
-        case 15:
-          if (true) {
-            return myOperationDeclaration__BehaviorDescriptor;
-          }
-          break;
-        case 16:
-          if (true) {
-            return myStubOperationDeclaration__BehaviorDescriptor;
-          }
-          break;
-        case 17:
-          if (true) {
-            return myUtilityMethodCall__BehaviorDescriptor;
-          }
-          break;
-        case 18:
-          if (true) {
-            return myWithIndentOperation__BehaviorDescriptor;
-          }
-          break;
-        default:
-          // default 
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return myAbstractAppendPart__BehaviorDescriptor;
+      case 1:
+        return myAbstractTextGenDeclaration__BehaviorDescriptor;
+      case 2:
+        return myAbstractTextGenParameter__BehaviorDescriptor;
+      case 3:
+        return myCollectionAppendPart__BehaviorDescriptor;
+      case 4:
+        return myConceptTextGenDeclaration__BehaviorDescriptor;
+      case 5:
+        return myConstantStringAppendPart__BehaviorDescriptor;
+      case 6:
+        return myEncodingDeclaration__BehaviorDescriptor;
+      case 7:
+        return myExtensionDeclaration__BehaviorDescriptor;
+      case 8:
+        return myFilePathQuery__BehaviorDescriptor;
+      case 9:
+        return myFilenameFunction__BehaviorDescriptor;
+      case 10:
+        return myGenerateTextDeclaration__BehaviorDescriptor;
+      case 11:
+        return myLanguageTextGenDeclaration__BehaviorDescriptor;
+      case 12:
+        return myNodeAppendPart__BehaviorDescriptor;
+      case 13:
+        return myNodeParameter__BehaviorDescriptor;
+      case 14:
+        return myOperationDeclaration__BehaviorDescriptor;
+      case 15:
+        return myStubOperationDeclaration__BehaviorDescriptor;
+      case 16:
+        return myUtilityMethodCall__BehaviorDescriptor;
+      case 17:
+        return myWithIndentOperation__BehaviorDescriptor;
+      default:
     }
     return null;
   }
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
-  }
-  private static final Map<SAbstractConcept, Integer> indices_846f5o_a0w = buildConceptIndices(MetaAdapterFactory.getConcept(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x1201521c456L, "jetbrains.mps.lang.textGen.structure.AbstractAppendPart"), MetaAdapterFactory.getConcept(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x11f60f06a49L, "jetbrains.mps.lang.textGen.structure.AbstractTextGenDeclaration"), MetaAdapterFactory.getConcept(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x11f84e1988dL, "jetbrains.mps.lang.textGen.structure.AbstractTextGenParameter"), MetaAdapterFactory.getConcept(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x11f65197df2L, "jetbrains.mps.lang.textGen.structure.BufferParameter"), MetaAdapterFactory.getConcept(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x1201527819cL, "jetbrains.mps.lang.textGen.structure.CollectionAppendPart"), MetaAdapterFactory.getConcept(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x11f3c776369L, "jetbrains.mps.lang.textGen.structure.ConceptTextGenDeclaration"), MetaAdapterFactory.getConcept(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x12015288286L, "jetbrains.mps.lang.textGen.structure.ConstantStringAppendPart"), MetaAdapterFactory.getConcept(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x11f60cd534bL, "jetbrains.mps.lang.textGen.structure.ContextParameter"), MetaAdapterFactory.getConcept(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x10fd02ec599e8f93L, "jetbrains.mps.lang.textGen.structure.EncodingDeclaration"), MetaAdapterFactory.getConcept(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x7bf48616723f681dL, "jetbrains.mps.lang.textGen.structure.ExtensionDeclaration"), MetaAdapterFactory.getConcept(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0xa0f73089d40b8eL, "jetbrains.mps.lang.textGen.structure.FilenameFunction"), MetaAdapterFactory.getConcept(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x11f412f8790L, "jetbrains.mps.lang.textGen.structure.GenerateTextDeclaration"), MetaAdapterFactory.getConcept(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x11f4b71f51fL, "jetbrains.mps.lang.textGen.structure.LanguageTextGenDeclaration"), MetaAdapterFactory.getConcept(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x12015251a28L, "jetbrains.mps.lang.textGen.structure.NodeAppendPart"), MetaAdapterFactory.getConcept(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x11f411d576bL, "jetbrains.mps.lang.textGen.structure.NodeParameter"), MetaAdapterFactory.getConcept(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x11f4b80e9d3L, "jetbrains.mps.lang.textGen.structure.OperationDeclaration"), MetaAdapterFactory.getConcept(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x2bacbf19e457bd3bL, "jetbrains.mps.lang.textGen.structure.StubOperationDeclaration"), MetaAdapterFactory.getConcept(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x11f6faa8c98L, "jetbrains.mps.lang.textGen.structure.UtilityMethodCall"), MetaAdapterFactory.getConcept(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x11fd28e1146L, "jetbrains.mps.lang.textGen.structure.WithIndentOperation"));
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x1201521c456L), MetaIdFactory.conceptId(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x11f60f06a49L), MetaIdFactory.conceptId(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x11f84e1988dL), MetaIdFactory.conceptId(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x1201527819cL), MetaIdFactory.conceptId(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x11f3c776369L), MetaIdFactory.conceptId(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x12015288286L), MetaIdFactory.conceptId(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x10fd02ec599e8f93L), MetaIdFactory.conceptId(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x7bf48616723f681dL), MetaIdFactory.conceptId(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x6cdeb9421c83c71fL), MetaIdFactory.conceptId(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0xa0f73089d40b8eL), MetaIdFactory.conceptId(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x11f412f8790L), MetaIdFactory.conceptId(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x11f4b71f51fL), MetaIdFactory.conceptId(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x12015251a28L), MetaIdFactory.conceptId(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x11f411d576bL), MetaIdFactory.conceptId(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x11f4b80e9d3L), MetaIdFactory.conceptId(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x2bacbf19e457bd3bL), MetaIdFactory.conceptId(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x11f6faa8c98L), MetaIdFactory.conceptId(0xb83431fe5c8f40bcL, 0x8a3665e25f4dd253L, 0x11fd28e1146L)).seal();
 }

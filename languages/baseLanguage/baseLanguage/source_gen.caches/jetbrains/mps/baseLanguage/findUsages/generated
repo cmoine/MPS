@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="dhtnhxcftqxgk9ip9emcw53ng5z8zoc" />
+<product version="3" modelHash="-5wiwqthlo45vjd8h6y0g5warjqtc186">
+  <files names="AllMethodUsages_Finder.java:BaseMethodUsages_Finder.java:BaseMethod_Finder.java:ClassAncestors_Finder.java:ClassUsages_Finder.java:ConstructorUsages_Finder.java:DerivedClasses_Finder.java:DerivedInterfaces_Finder.java:DerivedMethods_Finder.java:ExactMethodUsages_Finder.java:FieldUsages_Finder.java:FindUsagesDescriptor.java:ImplementedInterfaces_Finder.java:ImplementingClasses_Finder.java:InterfaceAncestors_Finder.java:InterfaceMethodImplementations_Finder.java:OverridingFields_Finder.java:OverridingMethods_Finder.java:ParameterUsages_Finder.java:StraightDerivedClasses_Finder.java" />
+</product>
 

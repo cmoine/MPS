@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +15,12 @@
  */
 package jetbrains.mps.generator.runtime;
 
-import jetbrains.mps.generator.impl.GenerationFailureException;
 import jetbrains.mps.generator.template.ITemplateGenerator;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SProperty;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 
 import java.util.Collection;
@@ -30,24 +33,32 @@ import java.util.Collections;
  * @since 3.3
  */
 public abstract class MapConfigBase implements TemplateMappingConfiguration {
-
   private final SNodeReference myMapConfigNode;
   private final String myName;
   private final TemplateModel myTemplateModel;
   private final boolean myTopPriority;
 
-  protected MapConfigBase(@NotNull SNodeReference mcNode, @NotNull String name, @NotNull TemplateModel templateModel, boolean topPri) {
+  protected final SConcept[] myConcepts;
+  protected final SProperty[] myProperties;
+  protected final SReferenceLink[] myAssociationLinks;
+  protected final SContainmentLink[] myAggregationLinks;
+
+  protected MapConfigBase(@NotNull SNodeReference mcNode, @NotNull String name, @NotNull TemplateModel templateModel, boolean topPri, MetaObjectContainer moc) {
     myMapConfigNode = mcNode;
     myName = name;
     myTemplateModel = templateModel;
     myTopPriority = topPri;
+    myConcepts = moc.concepts();
+    myProperties = moc.properties();
+    myAssociationLinks = moc.associations();
+    myAggregationLinks = moc.aggregations();
   }
 
   /**
    * Default implementation subclasses could rely on to return <code>true</code>
    */
   @Override
-  public boolean isApplicable(@NotNull ITemplateGenerator generator) throws GenerationFailureException {
+  public boolean isApplicable(@NotNull ITemplateGenerator generator) {
     return true;
   }
 
@@ -134,5 +145,52 @@ public abstract class MapConfigBase implements TemplateMappingConfiguration {
   @Override
   public Collection<TemplateDropAttributeRule> getDropAttributeRules() {
     return Collections.emptySet();
+  }
+
+  /**
+   * @return empty collection
+   */
+  @NotNull
+  @Override
+  public Collection<ReferenceReductionRule> getReferenceReductionRules() {
+    return Collections.emptySet();
+  }
+
+  /**
+   * @return empty collection
+   */
+  @NotNull
+  @Override
+  public Collection<LabelDeclaration> getLabels() {
+    return Collections.emptyList();
+  }
+
+  // factory method to produce instances for {@code getLabels()}
+  // intended for use from generated templates
+  protected LabelDeclaration label(String name, boolean isPrivate) {
+    return new LD(this, name, isPrivate);
+  }
+
+  private static class LD implements LabelDeclaration {
+    // I expect the need to tell labels not only by their names, which is not reliable, but by their TMC identity, too.
+    private final MapConfigBase myOwner;
+    private final String myName;
+    private final boolean myIsPrivate;
+
+    /*package*/ LD(MapConfigBase owner, String name, boolean isPrivate) {
+      myOwner = owner;
+      myName = name;
+      myIsPrivate = isPrivate;
+    }
+
+    @Override
+    public String getName() {
+      return myName;
+    }
+
+    @Override
+    public boolean isPrivate() {
+      return myIsPrivate;
+    };
   }
 }

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-b994i8iairwthi5dxfhqffor2iun6pm" />
+<product version="3" modelHash="7zz87gkxb9sxxedebnqxbeaf6waxm88">
+  <files names="CompositeResult.java:InvalidScript.java:MessageFeedbackStrategy.java:Script.java:TargetRange.java:TimeStatisticResource.java:ValidationError.java" />
+</product>
 

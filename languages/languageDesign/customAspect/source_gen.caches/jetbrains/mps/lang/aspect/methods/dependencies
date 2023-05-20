@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<dependenciesRoot>
-  <dependency className="jetbrains.mps.lang.aspect.methods.LanguageAspect_Queries" file="LanguageAspect_Queries.java" />
-</dependenciesRoot>
-

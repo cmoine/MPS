@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <root nodeRef="r:94b0657a-a0b5-4958-bad6-96a18d236e17(jetbrains.mps.ide.code)/1650638035896359074">
+    <file name="CodeStyleSettings.java">
+      <node id="1650638035896359074" at="11,0,12,0" concept="2" trace="myFieldPrefix" />
+      <node id="1650638035896359074" at="12,34,13,30" concept="4" />
+      <node id="1650638035896359074" at="15,46,16,31" concept="1" />
+      <node id="1650638035896359074" at="18,46,19,27" concept="1" />
+      <node id="1650638035896359074" at="19,27,20,17" concept="4" />
+      <node id="1650638035896359074" at="24,27,25,32" concept="4" />
+      <node id="1650638035896359074" at="27,37,28,31" concept="1" />
+      <node id="1650638035896359074" at="32,0,33,0" concept="2" trace="myFieldSuffix" />
+      <node id="1650638035896359074" at="33,34,34,30" concept="4" />
+      <node id="1650638035896359074" at="36,46,37,31" concept="1" />
+      <node id="1650638035896359074" at="39,46,40,27" concept="1" />
+      <node id="1650638035896359074" at="40,27,41,17" concept="4" />
+      <node id="1650638035896359074" at="45,27,46,32" concept="4" />
+      <node id="1650638035896359074" at="48,37,49,31" concept="1" />
+      <node id="1650638035896359074" at="53,0,54,0" concept="2" trace="myStaticFieldPrefix" />
+      <node id="1650638035896359074" at="54,40,55,36" concept="4" />
+      <node id="1650638035896359074" at="57,52,58,37" concept="1" />
+      <node id="1650638035896359074" at="60,52,61,33" concept="1" />
+      <node id="1650638035896359074" at="61,33,62,17" concept="4" />
+      <node id="1650638035896359074" at="66,27,67,38" concept="4" />
+      <node id="1650638035896359074" at="69,37,70,37" concept="1" />
+      <node id="1650638035896359074" at="74,0,75,0" concept="2" trace="myStaticFieldSuffix" />
+      <node id="1650638035896359074" at="75,40,76,36" concept="4" />
+      <node id="1650638035896359074" at="78,52,79,37" concept="1" />
+      <node id="1650638035896359074" at="81,52,82,33" concept="1" />
+      <node id="1650638035896359074" at="82,33,83,17" concept="4" />
+      <node id="1650638035896359074" at="87,27,88,38" concept="4" />
+      <node id="1650638035896359074" at="90,37,91,37" concept="1" />
+      <node id="1650638035896359074" at="95,0,96,0" concept="2" trace="myParameterPrefix" />
+      <node id="1650638035896359074" at="96,38,97,34" concept="4" />
+      <node id="1650638035896359074" at="99,50,100,35" concept="1" />
+      <node id="1650638035896359074" at="102,50,103,31" concept="1" />
+      <node id="1650638035896359074" at="103,31,104,17" concept="4" />
+      <node id="1650638035896359074" at="108,27,109,36" concept="4" />
+      <node id="1650638035896359074" at="111,37,112,35" concept="1" />
+      <node id="1650638035896359074" at="116,0,117,0" concept="2" trace="myParameterSuffix" />
+      <node id="1650638035896359074" at="117,38,118,34" concept="4" />
+      <node id="1650638035896359074" at="120,50,121,35" concept="1" />
+      <node id="1650638035896359074" at="123,50,124,31" concept="1" />
+      <node id="1650638035896359074" at="124,31,125,17" concept="4" />
+      <node id="1650638035896359074" at="129,27,130,36" concept="4" />
+      <node id="1650638035896359074" at="132,37,133,35" concept="1" />
+      <node id="1650638035896359074" at="137,0,138,0" concept="2" trace="myLocalVariablePrefix" />
+      <node id="1650638035896359074" at="138,42,139,38" concept="4" />
+      <node id="1650638035896359074" at="141,54,142,39" concept="1" />
+      <node id="1650638035896359074" at="144,54,145,35" concept="1" />
+      <node id="1650638035896359074" at="145,35,146,17" concept="4" />
+      <node id="1650638035896359074" at="150,27,151,40" concept="4" />
+      <node id="1650638035896359074" at="153,37,154,39" concept="1" />
+      <node id="1650638035896359074" at="158,0,159,0" concept="2" trace="myLocalVariableSuffix" />
+      <node id="1650638035896359074" at="159,42,160,38" concept="4" />
+      <node id="1650638035896359074" at="162,54,163,39" concept="1" />
+      <node id="1650638035896359074" at="165,54,166,35" concept="1" />
+      <node id="1650638035896359074" at="166,35,167,17" concept="4" />
+      <node id="1650638035896359074" at="171,27,172,40" concept="4" />
+      <node id="1650638035896359074" at="174,37,175,39" concept="1" />
+      <node id="1650638035896359074" at="179,0,180,0" concept="2" trace="myLineSeparator" />
+      <node id="1650638035896359074" at="180,36,181,32" concept="4" />
+      <node id="1650638035896359074" at="183,48,184,33" concept="1" />
+      <node id="1650638035896359074" at="186,48,187,29" concept="1" />
+      <node id="1650638035896359074" at="187,29,188,17" concept="4" />
+      <node id="1650638035896359074" at="192,27,193,34" concept="4" />
+      <node id="1650638035896359074" at="195,37,196,33" concept="1" />
+      <node id="5036277047286165620" at="203,41,204,110" concept="4" />
+      <node id="1650638035896359076" at="200,0,202,0" concept="0" trace="CodeStyleSettings#()V" />
+      <node id="1650638035896359074" at="12,0,15,0" concept="3" trace="getFieldPrefix#()Ljava/lang/String;" />
+      <node id="1650638035896359074" at="15,0,18,0" concept="3" trace="_setFieldPrefix#(Ljava/lang/String;)V" />
+      <node id="1650638035896359074" at="24,0,27,0" concept="3" trace="get#()Ljava/lang/String;" />
+      <node id="1650638035896359074" at="27,0,30,0" concept="3" trace="set#(Ljava/lang/String;)V" />
+      <node id="1650638035896359074" at="33,0,36,0" concept="3" trace="getFieldSuffix#()Ljava/lang/String;" />
+      <node id="1650638035896359074" at="36,0,39,0" concept="3" trace="_setFieldSuffix#(Ljava/lang/String;)V" />
+      <node id="1650638035896359074" at="45,0,48,0" concept="3" trace="get#()Ljava/lang/String;" />
+      <node id="1650638035896359074" at="48,0,51,0" concept="3" trace="set#(Ljava/lang/String;)V" />
+      <node id="1650638035896359074" at="54,0,57,0" concept="3" trace="getStaticFieldPrefix#()Ljava/lang/String;" />
+      <node id="1650638035896359074" at="57,0,60,0" concept="3" trace="_setStaticFieldPrefix#(Ljava/lang/String;)V" />
+      <node id="1650638035896359074" at="66,0,69,0" concept="3" trace="get#()Ljava/lang/String;" />
+      <node id="1650638035896359074" at="69,0,72,0" concept="3" trace="set#(Ljava/lang/String;)V" />
+      <node id="1650638035896359074" at="75,0,78,0" concept="3" trace="getStaticFieldSuffix#()Ljava/lang/String;" />
+      <node id="1650638035896359074" at="78,0,81,0" concept="3" trace="_setStaticFieldSuffix#(Ljava/lang/String;)V" />
+      <node id="1650638035896359074" at="87,0,90,0" concept="3" trace="get#()Ljava/lang/String;" />
+      <node id="1650638035896359074" at="90,0,93,0" concept="3" trace="set#(Ljava/lang/String;)V" />
+      <node id="1650638035896359074" at="96,0,99,0" concept="3" trace="getParameterPrefix#()Ljava/lang/String;" />
+      <node id="1650638035896359074" at="99,0,102,0" concept="3" trace="_setParameterPrefix#(Ljava/lang/String;)V" />
+      <node id="1650638035896359074" at="108,0,111,0" concept="3" trace="get#()Ljava/lang/String;" />
+      <node id="1650638035896359074" at="111,0,114,0" concept="3" trace="set#(Ljava/lang/String;)V" />
+      <node id="1650638035896359074" at="117,0,120,0" concept="3" trace="getParameterSuffix#()Ljava/lang/String;" />
+      <node id="1650638035896359074" at="120,0,123,0" concept="3" trace="_setParameterSuffix#(Ljava/lang/String;)V" />
+      <node id="1650638035896359074" at="129,0,132,0" concept="3" trace="get#()Ljava/lang/String;" />
+      <node id="1650638035896359074" at="132,0,135,0" concept="3" trace="set#(Ljava/lang/String;)V" />
+      <node id="1650638035896359074" at="138,0,141,0" concept="3" trace="getLocalVariablePrefix#()Ljava/lang/String;" />
+      <node id="1650638035896359074" at="141,0,144,0" concept="3" trace="_setLocalVariablePrefix#(Ljava/lang/String;)V" />
+      <node id="1650638035896359074" at="150,0,153,0" concept="3" trace="get#()Ljava/lang/String;" />
+      <node id="1650638035896359074" at="153,0,156,0" concept="3" trace="set#(Ljava/lang/String;)V" />
+      <node id="1650638035896359074" at="159,0,162,0" concept="3" trace="getLocalVariableSuffix#()Ljava/lang/String;" />
+      <node id="1650638035896359074" at="162,0,165,0" concept="3" trace="_setLocalVariableSuffix#(Ljava/lang/String;)V" />
+      <node id="1650638035896359074" at="171,0,174,0" concept="3" trace="get#()Ljava/lang/String;" />
+      <node id="1650638035896359074" at="174,0,177,0" concept="3" trace="set#(Ljava/lang/String;)V" />
+      <node id="1650638035896359074" at="180,0,183,0" concept="3" trace="getLineSeparator#()Ljava/lang/String;" />
+      <node id="1650638035896359074" at="183,0,186,0" concept="3" trace="_setLineSeparator#(Ljava/lang/String;)V" />
+      <node id="1650638035896359074" at="192,0,195,0" concept="3" trace="get#()Ljava/lang/String;" />
+      <node id="1650638035896359074" at="195,0,198,0" concept="3" trace="set#(Ljava/lang/String;)V" />
+      <node id="1650638035896359074" at="18,0,22,0" concept="3" trace="setFieldPrefix#(Ljava/lang/String;)Ljava/lang/String;" />
+      <node id="1650638035896359074" at="39,0,43,0" concept="3" trace="setFieldSuffix#(Ljava/lang/String;)Ljava/lang/String;" />
+      <node id="1650638035896359074" at="60,0,64,0" concept="3" trace="setStaticFieldPrefix#(Ljava/lang/String;)Ljava/lang/String;" />
+      <node id="1650638035896359074" at="81,0,85,0" concept="3" trace="setStaticFieldSuffix#(Ljava/lang/String;)Ljava/lang/String;" />
+      <node id="1650638035896359074" at="102,0,106,0" concept="3" trace="setParameterPrefix#(Ljava/lang/String;)Ljava/lang/String;" />
+      <node id="1650638035896359074" at="123,0,127,0" concept="3" trace="setParameterSuffix#(Ljava/lang/String;)Ljava/lang/String;" />
+      <node id="1650638035896359074" at="144,0,148,0" concept="3" trace="setLocalVariablePrefix#(Ljava/lang/String;)Ljava/lang/String;" />
+      <node id="1650638035896359074" at="165,0,169,0" concept="3" trace="setLocalVariableSuffix#(Ljava/lang/String;)Ljava/lang/String;" />
+      <node id="1650638035896359074" at="186,0,190,0" concept="3" trace="setLineSeparator#(Ljava/lang/String;)Ljava/lang/String;" />
+      <node id="5036277047286161914" at="202,0,206,0" concept="3" trace="getLineSeparatorValue#()Ljava/lang/String;" />
+      <node id="1650638035896359074" at="22,47,30,6" concept="4" />
+      <node id="1650638035896359074" at="43,47,51,6" concept="4" />
+      <node id="1650638035896359074" at="64,53,72,6" concept="4" />
+      <node id="1650638035896359074" at="85,53,93,6" concept="4" />
+      <node id="1650638035896359074" at="106,51,114,6" concept="4" />
+      <node id="1650638035896359074" at="127,51,135,6" concept="4" />
+      <node id="1650638035896359074" at="148,55,156,6" concept="4" />
+      <node id="1650638035896359074" at="169,55,177,6" concept="4" />
+      <node id="1650638035896359074" at="190,49,198,6" concept="4" />
+      <node id="1650638035896359074" at="22,0,32,0" concept="3" trace="refToFieldPrefix#()Ljetbrains/mps/references/Reference;" />
+      <node id="1650638035896359074" at="43,0,53,0" concept="3" trace="refToFieldSuffix#()Ljetbrains/mps/references/Reference;" />
+      <node id="1650638035896359074" at="64,0,74,0" concept="3" trace="refToStaticFieldPrefix#()Ljetbrains/mps/references/Reference;" />
+      <node id="1650638035896359074" at="85,0,95,0" concept="3" trace="refToStaticFieldSuffix#()Ljetbrains/mps/references/Reference;" />
+      <node id="1650638035896359074" at="106,0,116,0" concept="3" trace="refToParameterPrefix#()Ljetbrains/mps/references/Reference;" />
+      <node id="1650638035896359074" at="127,0,137,0" concept="3" trace="refToParameterSuffix#()Ljetbrains/mps/references/Reference;" />
+      <node id="1650638035896359074" at="148,0,158,0" concept="3" trace="refToLocalVariablePrefix#()Ljetbrains/mps/references/Reference;" />
+      <node id="1650638035896359074" at="169,0,179,0" concept="3" trace="refToLocalVariableSuffix#()Ljetbrains/mps/references/Reference;" />
+      <node id="1650638035896359074" at="190,0,200,0" concept="3" trace="refToLineSeparator#()Ljetbrains/mps/references/Reference;" />
+      <scope id="1650638035896359079" at="200,30,200,30" />
+      <scope id="1650638035896359074" at="12,34,13,30" />
+      <scope id="1650638035896359074" at="15,46,16,31" />
+      <scope id="1650638035896359074" at="24,27,25,32" />
+      <scope id="1650638035896359074" at="27,37,28,31" />
+      <scope id="1650638035896359074" at="33,34,34,30" />
+      <scope id="1650638035896359074" at="36,46,37,31" />
+      <scope id="1650638035896359074" at="45,27,46,32" />
+      <scope id="1650638035896359074" at="48,37,49,31" />
+      <scope id="1650638035896359074" at="54,40,55,36" />
+      <scope id="1650638035896359074" at="57,52,58,37" />
+      <scope id="1650638035896359074" at="66,27,67,38" />
+      <scope id="1650638035896359074" at="69,37,70,37" />
+      <scope id="1650638035896359074" at="75,40,76,36" />
+      <scope id="1650638035896359074" at="78,52,79,37" />
+      <scope id="1650638035896359074" at="87,27,88,38" />
+      <scope id="1650638035896359074" at="90,37,91,37" />
+      <scope id="1650638035896359074" at="96,38,97,34" />
+      <scope id="1650638035896359074" at="99,50,100,35" />
+      <scope id="1650638035896359074" at="108,27,109,36" />
+      <scope id="1650638035896359074" at="111,37,112,35" />
+      <scope id="1650638035896359074" at="117,38,118,34" />
+      <scope id="1650638035896359074" at="120,50,121,35" />
+      <scope id="1650638035896359074" at="129,27,130,36" />
+      <scope id="1650638035896359074" at="132,37,133,35" />
+      <scope id="1650638035896359074" at="138,42,139,38" />
+      <scope id="1650638035896359074" at="141,54,142,39" />
+      <scope id="1650638035896359074" at="150,27,151,40" />
+      <scope id="1650638035896359074" at="153,37,154,39" />
+      <scope id="1650638035896359074" at="159,42,160,38" />
+      <scope id="1650638035896359074" at="162,54,163,39" />
+      <scope id="1650638035896359074" at="171,27,172,40" />
+      <scope id="1650638035896359074" at="174,37,175,39" />
+      <scope id="1650638035896359074" at="180,36,181,32" />
+      <scope id="1650638035896359074" at="183,48,184,33" />
+      <scope id="1650638035896359074" at="192,27,193,34" />
+      <scope id="1650638035896359074" at="195,37,196,33" />
+      <scope id="5036277047286161917" at="203,41,204,110" />
+      <scope id="1650638035896359074" at="18,46,20,17" />
+      <scope id="1650638035896359074" at="39,46,41,17" />
+      <scope id="1650638035896359074" at="60,52,62,17" />
+      <scope id="1650638035896359074" at="81,52,83,17" />
+      <scope id="1650638035896359074" at="102,50,104,17" />
+      <scope id="1650638035896359074" at="123,50,125,17" />
+      <scope id="1650638035896359074" at="144,54,146,17" />
+      <scope id="1650638035896359074" at="165,54,167,17" />
+      <scope id="1650638035896359074" at="186,48,188,17" />
+      <scope id="1650638035896359076" at="200,0,202,0" />
+      <scope id="1650638035896359074" at="12,0,15,0" />
+      <scope id="1650638035896359074" at="15,0,18,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="24,0,27,0" />
+      <scope id="1650638035896359074" at="27,0,30,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="33,0,36,0" />
+      <scope id="1650638035896359074" at="36,0,39,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="45,0,48,0" />
+      <scope id="1650638035896359074" at="48,0,51,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="54,0,57,0" />
+      <scope id="1650638035896359074" at="57,0,60,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="66,0,69,0" />
+      <scope id="1650638035896359074" at="69,0,72,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="75,0,78,0" />
+      <scope id="1650638035896359074" at="78,0,81,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="87,0,90,0" />
+      <scope id="1650638035896359074" at="90,0,93,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="96,0,99,0" />
+      <scope id="1650638035896359074" at="99,0,102,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="108,0,111,0" />
+      <scope id="1650638035896359074" at="111,0,114,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="117,0,120,0" />
+      <scope id="1650638035896359074" at="120,0,123,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="129,0,132,0" />
+      <scope id="1650638035896359074" at="132,0,135,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="138,0,141,0" />
+      <scope id="1650638035896359074" at="141,0,144,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="150,0,153,0" />
+      <scope id="1650638035896359074" at="153,0,156,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="159,0,162,0" />
+      <scope id="1650638035896359074" at="162,0,165,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="171,0,174,0" />
+      <scope id="1650638035896359074" at="174,0,177,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="180,0,183,0" />
+      <scope id="1650638035896359074" at="183,0,186,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="192,0,195,0" />
+      <scope id="1650638035896359074" at="195,0,198,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="18,0,22,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="39,0,43,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="60,0,64,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="81,0,85,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="102,0,106,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="123,0,127,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="144,0,148,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="165,0,169,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="1650638035896359074" at="186,0,190,0">
+        <var name="value" id="1650638035896359074" />
+      </scope>
+      <scope id="5036277047286161914" at="202,0,206,0" />
+      <scope id="1650638035896359074" at="22,47,30,6" />
+      <scope id="1650638035896359074" at="43,47,51,6" />
+      <scope id="1650638035896359074" at="64,53,72,6" />
+      <scope id="1650638035896359074" at="85,53,93,6" />
+      <scope id="1650638035896359074" at="106,51,114,6" />
+      <scope id="1650638035896359074" at="127,51,135,6" />
+      <scope id="1650638035896359074" at="148,55,156,6" />
+      <scope id="1650638035896359074" at="169,55,177,6" />
+      <scope id="1650638035896359074" at="190,49,198,6" />
+      <scope id="1650638035896359074" at="22,0,32,0" />
+      <scope id="1650638035896359074" at="43,0,53,0" />
+      <scope id="1650638035896359074" at="64,0,74,0" />
+      <scope id="1650638035896359074" at="85,0,95,0" />
+      <scope id="1650638035896359074" at="106,0,116,0" />
+      <scope id="1650638035896359074" at="127,0,137,0" />
+      <scope id="1650638035896359074" at="148,0,158,0" />
+      <scope id="1650638035896359074" at="169,0,179,0" />
+      <scope id="1650638035896359074" at="190,0,200,0" />
+      <unit id="1650638035896359074" at="23,15,30,5" name="jetbrains.mps.ide.code.CodeStyleSettings$1" />
+      <unit id="1650638035896359074" at="44,15,51,5" name="jetbrains.mps.ide.code.CodeStyleSettings$2" />
+      <unit id="1650638035896359074" at="65,15,72,5" name="jetbrains.mps.ide.code.CodeStyleSettings$3" />
+      <unit id="1650638035896359074" at="86,15,93,5" name="jetbrains.mps.ide.code.CodeStyleSettings$4" />
+      <unit id="1650638035896359074" at="107,15,114,5" name="jetbrains.mps.ide.code.CodeStyleSettings$5" />
+      <unit id="1650638035896359074" at="128,15,135,5" name="jetbrains.mps.ide.code.CodeStyleSettings$6" />
+      <unit id="1650638035896359074" at="149,15,156,5" name="jetbrains.mps.ide.code.CodeStyleSettings$7" />
+      <unit id="1650638035896359074" at="170,15,177,5" name="jetbrains.mps.ide.code.CodeStyleSettings$8" />
+      <unit id="1650638035896359074" at="191,15,198,5" name="jetbrains.mps.ide.code.CodeStyleSettings$9" />
+      <unit id="1650638035896359074" at="9,0,207,0" name="jetbrains.mps.ide.code.CodeStyleSettings" />
+    </file>
+  </root>
+  <root nodeRef="r:94b0657a-a0b5-4958-bad6-96a18d236e17(jetbrains.mps.ide.code)/644116965567343729">
+    <file name="CodeStyleSettingsRegistry.java">
+      <node id="920705696368452801" at="13,0,14,0" concept="5" trace="myProjectToSettingsMap" />
+      <node id="1650638035896359059" at="16,64,17,68" concept="4" />
+      <node id="920705696368452814" at="19,84,20,71" concept="1" />
+      <node id="920705696368452828" at="22,58,23,67" concept="1" />
+      <node id="644116965567343731" at="14,0,16,0" concept="0" trace="CodeStyleSettingsRegistry#()V" />
+      <node id="1650638035896359052" at="16,0,19,0" concept="6" trace="getSettings#(Ljetbrains/mps/project/Project;)Ljetbrains/mps/ide/code/CodeStyleSettings;" />
+      <node id="920705696368429017" at="19,0,22,0" concept="6" trace="registerSettings#(Ljetbrains/mps/project/Project;Ljetbrains/mps/ide/code/CodeStyleSettings;)V" />
+      <node id="920705696368429026" at="22,0,25,0" concept="6" trace="unregisterSettings#(Ljetbrains/mps/project/Project;)V" />
+      <scope id="644116965567343734" at="14,39,14,39" />
+      <scope id="1650638035896359055" at="16,64,17,68" />
+      <scope id="920705696368429020" at="19,84,20,71" />
+      <scope id="920705696368429029" at="22,58,23,67" />
+      <scope id="644116965567343731" at="14,0,16,0" />
+      <scope id="1650638035896359052" at="16,0,19,0">
+        <var name="project" id="1650638035896359057" />
+      </scope>
+      <scope id="920705696368429017" at="19,0,22,0">
+        <var name="project" id="920705696368429021" />
+        <var name="settings" id="920705696368429023" />
+      </scope>
+      <scope id="920705696368429026" at="22,0,25,0">
+        <var name="project" id="920705696368429030" />
+      </scope>
+      <unit id="644116965567343729" at="11,0,26,0" name="jetbrains.mps.ide.code.CodeStyleSettingsRegistry" />
+    </file>
+  </root>
+</debug-info>
+

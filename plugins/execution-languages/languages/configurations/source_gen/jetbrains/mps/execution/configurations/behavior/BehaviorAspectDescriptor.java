@@ -7,9 +7,9 @@ import jetbrains.mps.core.aspects.behaviour.api.BHDescriptor;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor {
   private final BHDescriptor myStartProcessHandlerStatement__BehaviorDescriptor = new StartProcessHandlerStatement__BehaviorDescriptor();
@@ -34,104 +34,43 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
 
   @Nullable
   public BHDescriptor getDescriptor(@NotNull SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_846f5o_a0t.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return myAbstractRunConfigurationExecutor__BehaviorDescriptor;
-          }
-          break;
-        case 1:
-          if (true) {
-            return myBeforeTask__BehaviorDescriptor;
-          }
-          break;
-        case 2:
-          if (true) {
-            return myBeforeTaskParameter__BehaviorDescriptor;
-          }
-          break;
-        case 3:
-          if (true) {
-            return myBeforeTaskParameterReference__BehaviorDescriptor;
-          }
-          break;
-        case 4:
-          if (true) {
-            return myConfigurationFromExecutorReference__BehaviorDescriptor;
-          }
-          break;
-        case 5:
-          if (true) {
-            return myConsoleType__BehaviorDescriptor;
-          }
-          break;
-        case 6:
-          if (true) {
-            return myCreate_ConceptFunction__BehaviorDescriptor;
-          }
-          break;
-        case 7:
-          if (true) {
-            return myExecuteBeforeTask_ConceptFunction__BehaviorDescriptor;
-          }
-          break;
-        case 8:
-          if (true) {
-            return myExecuteConfiguration_Function__BehaviorDescriptor;
-          }
-          break;
-        case 9:
-          if (true) {
-            return myIsConfigurationFromContext_ConceptFunction__BehaviorDescriptor;
-          }
-          break;
-        case 10:
-          if (true) {
-            return myRunConfiguration__BehaviorDescriptor;
-          }
-          break;
-        case 11:
-          if (true) {
-            return myRunConfigurationExecutor__BehaviorDescriptor;
-          }
-          break;
-        case 12:
-          if (true) {
-            return myRunConfigurationKind__BehaviorDescriptor;
-          }
-          break;
-        case 13:
-          if (true) {
-            return myRunConfigurationProducer__BehaviorDescriptor;
-          }
-          break;
-        case 14:
-          if (true) {
-            return myRunConfigurationProducerPart__BehaviorDescriptor;
-          }
-          break;
-        case 15:
-          if (true) {
-            return myStartProcessHandlerStatement__BehaviorDescriptor;
-          }
-          break;
-        default:
-          // default 
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return myAbstractRunConfigurationExecutor__BehaviorDescriptor;
+      case 1:
+        return myBeforeTask__BehaviorDescriptor;
+      case 2:
+        return myBeforeTaskParameter__BehaviorDescriptor;
+      case 3:
+        return myBeforeTaskParameterReference__BehaviorDescriptor;
+      case 4:
+        return myConfigurationFromExecutorReference__BehaviorDescriptor;
+      case 5:
+        return myConsoleType__BehaviorDescriptor;
+      case 6:
+        return myCreate_ConceptFunction__BehaviorDescriptor;
+      case 7:
+        return myExecuteBeforeTask_ConceptFunction__BehaviorDescriptor;
+      case 8:
+        return myExecuteConfiguration_Function__BehaviorDescriptor;
+      case 9:
+        return myIsConfigurationFromContext_ConceptFunction__BehaviorDescriptor;
+      case 10:
+        return myRunConfiguration__BehaviorDescriptor;
+      case 11:
+        return myRunConfigurationExecutor__BehaviorDescriptor;
+      case 12:
+        return myRunConfigurationKind__BehaviorDescriptor;
+      case 13:
+        return myRunConfigurationProducer__BehaviorDescriptor;
+      case 14:
+        return myRunConfigurationProducerPart__BehaviorDescriptor;
+      case 15:
+        return myStartProcessHandlerStatement__BehaviorDescriptor;
+      default:
     }
     return null;
   }
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
-  }
-  private static final Map<SAbstractConcept, Integer> indices_846f5o_a0t = buildConceptIndices(MetaAdapterFactory.getConcept(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x2153d8f1c1f52479L, "jetbrains.mps.execution.configurations.structure.AbstractRunConfigurationExecutor"), MetaAdapterFactory.getConcept(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x61a8be33d403b7bfL, "jetbrains.mps.execution.configurations.structure.BeforeTask"), MetaAdapterFactory.getConcept(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x5ae6ebde781f8014L, "jetbrains.mps.execution.configurations.structure.BeforeTaskParameter"), MetaAdapterFactory.getConcept(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x5ae6ebde781fd3c0L, "jetbrains.mps.execution.configurations.structure.BeforeTaskParameterReference"), MetaAdapterFactory.getConcept(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x6c55c13f5bcac62fL, "jetbrains.mps.execution.configurations.structure.ConfigurationFromExecutorReference"), MetaAdapterFactory.getConcept(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x161fc6929dd1ac93L, "jetbrains.mps.execution.configurations.structure.ConsoleType"), MetaAdapterFactory.getConcept(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x3c97fcb79c84cdc3L, "jetbrains.mps.execution.configurations.structure.Create_ConceptFunction"), MetaAdapterFactory.getConcept(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x220f4a2c4aff4248L, "jetbrains.mps.execution.configurations.structure.ExecuteBeforeTask_ConceptFunction"), MetaAdapterFactory.getConcept(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x5532ce3cbd91002cL, "jetbrains.mps.execution.configurations.structure.ExecuteConfiguration_Function"), MetaAdapterFactory.getConcept(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x490c79b029c39076L, "jetbrains.mps.execution.configurations.structure.IsConfigurationFromContext_ConceptFunction"), MetaAdapterFactory.getConcept(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x2153d8f1c1f46e49L, "jetbrains.mps.execution.configurations.structure.RunConfiguration"), MetaAdapterFactory.getConcept(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x6c55c13f5bc8e1ecL, "jetbrains.mps.execution.configurations.structure.RunConfigurationExecutor"), MetaAdapterFactory.getConcept(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x2153d8f1c1f46e4aL, "jetbrains.mps.execution.configurations.structure.RunConfigurationKind"), MetaAdapterFactory.getConcept(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x3c97fcb79c842305L, "jetbrains.mps.execution.configurations.structure.RunConfigurationProducer"), MetaAdapterFactory.getConcept(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x3c97fcb79c84cda6L, "jetbrains.mps.execution.configurations.structure.RunConfigurationProducerPart"), MetaAdapterFactory.getConcept(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0xd244b712f9d44d1L, "jetbrains.mps.execution.configurations.structure.StartProcessHandlerStatement"));
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x2153d8f1c1f52479L), MetaIdFactory.conceptId(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x61a8be33d403b7bfL), MetaIdFactory.conceptId(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x5ae6ebde781f8014L), MetaIdFactory.conceptId(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x5ae6ebde781fd3c0L), MetaIdFactory.conceptId(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x6c55c13f5bcac62fL), MetaIdFactory.conceptId(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x161fc6929dd1ac93L), MetaIdFactory.conceptId(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x3c97fcb79c84cdc3L), MetaIdFactory.conceptId(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x220f4a2c4aff4248L), MetaIdFactory.conceptId(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x5532ce3cbd91002cL), MetaIdFactory.conceptId(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x490c79b029c39076L), MetaIdFactory.conceptId(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x2153d8f1c1f46e49L), MetaIdFactory.conceptId(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x6c55c13f5bc8e1ecL), MetaIdFactory.conceptId(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x2153d8f1c1f46e4aL), MetaIdFactory.conceptId(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x3c97fcb79c842305L), MetaIdFactory.conceptId(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x3c97fcb79c84cda6L), MetaIdFactory.conceptId(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0xd244b712f9d44d1L)).seal();
 }

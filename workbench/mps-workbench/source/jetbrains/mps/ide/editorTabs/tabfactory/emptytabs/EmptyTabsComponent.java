@@ -82,6 +82,10 @@ public class EmptyTabsComponent implements TabsComponent {
   }
 
   @Override
+  public void updateTabs(Collection<SNodeReference> changedRoots) {
+  }
+
+  @Override
   public void updateTabColors() {
   }
 

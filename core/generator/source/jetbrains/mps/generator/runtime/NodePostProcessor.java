@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,15 +46,18 @@ public interface NodePostProcessor {
   TemplateContext getTemplateContext();
 
   /**
+   * FIXME forcing NotNull seems not the best decision here, as it's generated code and may yield null return value, and it would be nice to handle it
+   *       gracefully in a single place, rather than failing with NPE
+   *
    * Counterpart for {@link NodeMapper#map(SNode, TemplateContext)}, to replace {@link #getOutputAnchor()} with a new node
-   * @return generally shall supply a new node to replace {@link #getOutputAnchor() output mode}. Shall return {@link #getOutputAnchor()} to skip the step.
+   * @return generally shall supply a new node to replace {@link #getOutputAnchor() output mode}. Shall return {@link #getOutputAnchor()} to skip the substitution step.
    */
   @NotNull
   SNode substitute() throws GenerationFailureException;
 
   /**
    * Counterpart for {@link PostProcessor#process(SNode, TemplateContext)}
-   * @param outputNode node in output model to process (outcome of {@link #substitute()} call).
+   * @param outputNode node in output model to process (outcome of {@link #substitute()} call, even if it gave {@link #getOutputAnchor()}).
    */
   void postProcess(@NotNull SNode outputNode) throws GenerationFailureException;
 }

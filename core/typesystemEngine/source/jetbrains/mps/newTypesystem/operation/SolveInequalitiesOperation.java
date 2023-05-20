@@ -16,11 +16,13 @@
 package jetbrains.mps.newTypesystem.operation;
 
 import jetbrains.mps.newTypesystem.state.State;
+import org.jetbrains.annotations.NotNull;
 
 public class SolveInequalitiesOperation extends AbstractOperation {
-  private Runnable myAction = null;
+  @NotNull
+  private Runnable myAction;
 
-  public SolveInequalitiesOperation(Runnable action) {
+  public SolveInequalitiesOperation(@NotNull Runnable action) {
     myAction = action;
   }
 
@@ -42,9 +44,7 @@ public class SolveInequalitiesOperation extends AbstractOperation {
   @Override
   public void execute(State state) {
     state.getInequalities().setSolvingInProcess(true);
-    if (myAction != null) {
-      myAction.run();
-      myAction = null;
-    }
+    myAction.run();
+    myAction = null;
   }
 }

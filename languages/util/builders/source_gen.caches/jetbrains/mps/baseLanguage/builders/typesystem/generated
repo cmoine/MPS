@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="ejlhudaqfx29la0zucvol2q5o7iec4n" />
+<product version="3" modelHash="-2n238baqrya30usn542iqjl0lqjj6wh">
+  <files names="TypesystemDescriptor.java:check_SimpleBuilderDeclaration_NonTypesystemRule.java:typeof_AsBuilderStatement_InferenceRule.java:typeof_BeanPropertyBuilder_InferenceRule.java:typeof_BuilderCreator_InferenceRule.java:typeof_ResultExpression_InferenceRule.java:typeof_SimpleBuilderChildExpression_InferenceRule.java:typeof_SimpleBuilderDeclaration_InferenceRule.java:typeof_SimpleBuilderParameterReference_InferenceRule.java:typeof_SimpleBuilderParameter_InferenceRule.java:typeof_SimpleBuilderParentExpression_InferenceRule.java:typeof_SimpleBuilderPropertyBuilder_InferenceRule.java:typeof_SimpleBuilderPropertyParent_InferenceRule.java:typeof_SimpleBuilderPropertyValue_InferenceRule.java:typeof_SimpleBuilder_InferenceRule.java" />
+</product>
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,11 +38,12 @@ public class MPSFileTypeFactory extends FileTypeFactory {
   public static final FileType LANGUAGE_FILE_TYPE = new XMLFileType("Language", "MPS Language File Type", MPSExtentions.LANGUAGE,
       FileIcons.PROJECT_LANGUAGE_ICON);
   public static final FileType DEVKIT_FILE_TYPE = new XMLFileType("Devkit", "MPS Devkit File Type", MPSExtentions.DEVKIT, FileIcons.DEVKIT_ICON);
+  public static final FileType GENERATOR_MODULE_FILE_TYPE = new XMLFileType("Generator", "MPS Generator Module File Type", MPSExtentions.GENERATOR, FileIcons.GENERATOR_ICON);
 
   public static final FileType MPS_NODE_FILE_TYPE = new MPSNodeFileType();
   public static final FileType MPS_MODEL_FILE_TYPE = new MPSModelFileType();
 
-  public static final FileType[] MPS_FILE_TYPES = {PROJECT_FILE_TYPE, MPS_FILE_TYPE, MPS_BINARY_FILE_TYPE, MPS_ROOT_FILE_TYPE, SOLUTION_FILE_TYPE, LANGUAGE_FILE_TYPE, DEVKIT_FILE_TYPE};
+  public static final FileType[] MPS_FILE_TYPES = {PROJECT_FILE_TYPE, MPS_FILE_TYPE, MPS_BINARY_FILE_TYPE, MPS_ROOT_FILE_TYPE, SOLUTION_FILE_TYPE, LANGUAGE_FILE_TYPE, DEVKIT_FILE_TYPE, GENERATOR_MODULE_FILE_TYPE};
 
   @Override
   public void createFileTypes(@NotNull FileTypeConsumer consumer) {

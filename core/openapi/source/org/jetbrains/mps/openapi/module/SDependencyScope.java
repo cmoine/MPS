@@ -70,7 +70,7 @@ public enum SDependencyScope {
 
   private final String myIdentity;
   private final String myPresentation;
-  private SDependencyScope(String identity, String presentation) {
+  SDependencyScope(String identity, String presentation) {
     myIdentity = identity;
     myPresentation = presentation;
   }

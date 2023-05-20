@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class GenerationTaskRecorder<T extends GeneratorTask> implements GeneratorTaskListener<T> {
   private final GeneratorTaskListener<? super T> myDelegate;
-  private final List<Pair<T, GenerationStatus>> myCompletedTasks = new ArrayList<Pair<T, GenerationStatus>>();
+  private final List<Pair<T, GenerationStatus>> myCompletedTasks = new ArrayList<>();
 
   public GenerationTaskRecorder(@Nullable GeneratorTaskListener<? super T> delegate) {
     myDelegate = delegate;
@@ -44,14 +44,14 @@ public class GenerationTaskRecorder<T extends GeneratorTask> implements Generato
 
   @Override
   public void done(@NotNull T task, @NotNull GenerationStatus status) {
-    myCompletedTasks.add(new Pair<T, GenerationStatus>(task, status));
+    myCompletedTasks.add(new Pair<>(task, status));
     if (myDelegate != null) {
       myDelegate.done(task, status);
     }
   }
 
   public List<GenerationStatus> getAllRecorded() {
-    ArrayList<GenerationStatus> rv = new ArrayList<GenerationStatus>(myCompletedTasks.size());
+    ArrayList<GenerationStatus> rv = new ArrayList<>(myCompletedTasks.size());
     for (Pair<T, GenerationStatus> p : myCompletedTasks) {
       rv.add(p.o2);
     }

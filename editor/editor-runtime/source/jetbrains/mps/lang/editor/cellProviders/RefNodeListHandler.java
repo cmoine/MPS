@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,18 @@
 package jetbrains.mps.lang.editor.cellProviders;
 
 import jetbrains.mps.editor.runtime.impl.cellActions.CommentUtil;
-import jetbrains.mps.kernel.model.SModelUtil;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.AttributeOperations;
-import jetbrains.mps.nodeEditor.cellMenu.DefaultChildSubstituteInfo;
 import jetbrains.mps.nodeEditor.cellProviders.AbstractCellListHandler;
 import jetbrains.mps.nodeEditor.cells.EditorCell_Constant;
 import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
-import jetbrains.mps.smodel.NodeReadAccessCasterInEditor;
-import jetbrains.mps.smodel.SNodeLegacy;
-import jetbrains.mps.smodel.SNodeUtil;
-import jetbrains.mps.smodel.legacy.ConceptMetaInfoConverter;
+import jetbrains.mps.smodel.action.NodeFactoryManager;
+import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.util.IterableUtil;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SConceptFeature;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.model.SNode;
 
@@ -38,86 +38,90 @@ import java.util.Iterator;
 import java.util.List;
 
 public abstract class RefNodeListHandler extends AbstractCellListHandler {
-
-  private SNode myChildConcept;
-  private SNode myLinkDeclaration;
   private boolean myIsReverseOrder = false;
 
-  public RefNodeListHandler(final SNode ownerNode, final String childRole, EditorContext editorContext) {
-    super(ownerNode, childRole, editorContext);
-    NodeReadAccessCasterInEditor.runReadTransparentAction(new Runnable() {
-      @Override
-      public void run() {
-        myLinkDeclaration = new SNodeLegacy(ownerNode).getLinkDeclaration(childRole);
-        assert
-            myLinkDeclaration != null :
-            "link declaration was not found for role: \"" + childRole + "\" in concept: " + ownerNode.getConcept().getQualifiedName();
-        SNode genuineLink = SModelUtil.getGenuineLinkDeclaration(myLinkDeclaration);
-        myChildConcept = SModelUtil.getLinkDeclarationTarget(myLinkDeclaration);
-        if (SNodeUtil.getLinkDeclaration_IsReference(genuineLink)) {
-          throw new RuntimeException("Only Aggregation links can be used in list");
-        }
-        myElementRole = SModelUtil.getLinkDeclarationRole(genuineLink);
-      }
-    });
+  public RefNodeListHandler(EditorContext editorContext) {
+    super(editorContext);
   }
 
-  public RefNodeListHandler(SNode ownerNode, String childRole, EditorContext editorContext, boolean isReverseOrder) {
-    this(ownerNode, childRole, editorContext);
+  public RefNodeListHandler(EditorContext editorContext, boolean isReverseOrder) {
+    super(editorContext);
     myIsReverseOrder = isReverseOrder;
   }
 
-  public SNode getLinkDeclaration() {
-    return myLinkDeclaration;
-  }
-
-  public SNode getChildConcept() {
-    return myChildConcept;
+@Deprecated(since = "2018.3", forRemoval = true)
+  @Override
+  public String getElementRole() {
+    return getSLink().getName();
   }
 
   @Override
-  public EditorCell createNodeCell(EditorContext editorContext, SNode node) {
-    return editorContext.getEditorComponent().getUpdater().getCurrentUpdateSession().updateChildNodeCell(node);
+  //todo [MM] merge with getLink()
+  public SConceptFeature getElementSRole() {
+    return getSLink();
+  }
+
+  /**
+   * @return original link (not specialized)
+   */
+  public abstract SContainmentLink getSLink();
+
+  public abstract SAbstractConcept getChildSConcept();
+
+  @Override
+  public SNode createNodeToInsert(EditorContext editorContext, @Nullable SNode prevNode, @Nullable SNode nextNode, int index) {
+    SAbstractConcept childConcept = getChildSConcept();
+    SConcept defaultConcreteConcept = ConceptRegistry.getInstance().getConstraintsDescriptor(childConcept).getDefaultConcreteConcept();
+    if (defaultConcreteConcept != null) {
+      childConcept = defaultConcreteConcept;
+    }
+    return NodeFactoryManager.createNode(childConcept, index, getNode(), getSLink(), getNode().getModel());
   }
 
   @Override
-  protected EditorCell createEmptyCell(EditorContext editorContext) {
-    EditorCell_Constant emptyCell = new EditorCell_Constant(editorContext, getOwner(), null);
+  protected EditorCell createEmptyCell() {
+    EditorCell_Constant emptyCell = new EditorCell_Constant(getEditorContext(), getNode(), null);
     emptyCell.setDefaultText("<< ... >>");
     emptyCell.setEditable(true);
-    emptyCell.setSubstituteInfo(new DefaultChildSubstituteInfo(getOwner(), null, getLinkDeclaration(), editorContext));
-    emptyCell.setRole(getElementRole());
-    emptyCell.setCellId("empty_" + getElementRole());
+    emptyCell.setSRole(getElementSRole());
+    emptyCell.setCellId("empty_" + getElementSRole().getName());
     return emptyCell;
   }
 
   @Override
   protected SNode getAnchorNode(EditorCell anchorCell) {
-    SNode anchorNode = (anchorCell != null ? anchorCell.getSNode() : null);
-    if (anchorNode != null) {
+    SNode anchorNodeTemp = (anchorCell != null ? anchorCell.getSNode() : null);
+    SNode anchorNodeResult = null;
+    if (anchorNodeTemp != null) {
       Collection<? extends SNode> listElements = IterableUtil.asCollection(
-          AttributeOperations.getChildNodesAndAttributes(myOwnerNode, ((ConceptMetaInfoConverter) myOwnerNode.getConcept()).convertAggregation(myElementRole)));
-      // anchor should be directly referenced from "list owner"
-      while (anchorNode != null && !listElements.contains(anchorNode)) {
-        anchorNode = anchorNode.getParent();
+          AttributeOperations.getChildNodesAndAttributes(getNode(), getSLink()));
+      if (!listElements.isEmpty()) {
+        // anchor should be directly referenced from "list owner"
+        while (anchorNodeTemp != null && anchorNodeTemp != getNode()) {
+          if (listElements.contains(anchorNodeTemp)) {
+            anchorNodeResult = anchorNodeTemp;
+            break;
+          } else {
+            anchorNodeTemp = anchorNodeTemp.getParent();
+          }
+        }
       }
     }
-    return anchorNode;
+    return anchorNodeResult;
   }
 
   @Override
   protected void doInsertNode(SNode nodeToInsert, SNode anchorNode, boolean insertBefore) {
     insertBefore = insertBefore != myIsReverseOrder;
-    getOwner().insertChildBefore(getElementRole(), nodeToInsert,
-        insertBefore ? anchorNode : anchorNode == null ? getOwner().getFirstChild() : anchorNode.getNextSibling());
+    SNode anchor = insertBefore ? anchorNode : anchorNode == null ? getNode().getFirstChild() : anchorNode.getNextSibling();
+    getNode().insertChildBefore(getSLink(), nodeToInsert, anchor);
   }
 
   @Override
   protected List<SNode> getNodesForList() {
-    List<SNode> resultList = new ArrayList<SNode>();
-    SContainmentLink containmentLink = ((ConceptMetaInfoConverter) myOwnerNode.getConcept()).convertAggregation(myElementRole);
+    List<SNode> resultList = new ArrayList<>();
     Iterable<SNode> nodesAndComments =
-        AttributeOperations.getChildNodesAndAttributes(myOwnerNode, containmentLink);
+        AttributeOperations.getChildNodesAndAttributes(getNode(), getSLink());
     if (!myIsReverseOrder) {
       resultList.addAll(IterableUtil.asCollection(nodesAndComments));
     } else {
@@ -132,6 +136,8 @@ public abstract class RefNodeListHandler extends AbstractCellListHandler {
       SNode nodeToFilter = next;
       if (CommentUtil.isComment(next)) {
         nodeToFilter = CommentUtil.getCommentedNode(next);
+      } else if (AttributeOperations.isChildAttribute(next)) {
+        continue;
       }
       if (!filter(nodeToFilter)) {
         it.remove();
@@ -142,5 +148,9 @@ public abstract class RefNodeListHandler extends AbstractCellListHandler {
 
   protected boolean filter(SNode childNode) {
     return true;
+  }
+
+  protected void setInnerCellsContext() {
+    setInnerCellsContext(myListEditorCell_Collection);
   }
 }

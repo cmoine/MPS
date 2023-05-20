@@ -21,7 +21,8 @@ import org.jetbrains.annotations.NotNull;
 import java.awt.Graphics2D;
 
 public abstract class AbstractSelection implements SelectionInternal {
-  private EditorComponent myEditorComponent;
+  private final EditorComponent myEditorComponent;
+  private SelectionDirection mySideSelectDirection = SelectionDirection.NONE;
 
   public AbstractSelection(@NotNull EditorComponent editorComponent) {
     myEditorComponent = editorComponent;
@@ -34,5 +35,15 @@ public abstract class AbstractSelection implements SelectionInternal {
   }
 
   public void paintSelection(Graphics2D g) {
+  }
+
+  @Override
+  public final void setDirection(SelectionDirection direction) {
+    mySideSelectDirection = direction;
+  }
+
+  @Override
+  public final SelectionDirection getDirection() {
+    return mySideSelectDirection;
   }
 }

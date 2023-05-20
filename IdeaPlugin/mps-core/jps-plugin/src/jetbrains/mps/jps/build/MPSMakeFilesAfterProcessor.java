@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import jetbrains.mps.project.MPSExtentions;
 import jetbrains.mps.tool.builder.make.ReducedMakeFacetConfiguration;
 import jetbrains.mps.vfs.IFile;
 import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.jps.builders.logging.ProjectBuilderLogger;
 import org.jetbrains.jps.incremental.CompileContext;
 import org.jetbrains.jps.incremental.FSOperations;
@@ -30,10 +31,6 @@ import org.jetbrains.jps.incremental.ModuleBuildTarget;
 import org.jetbrains.jps.incremental.ModuleLevelBuilder.OutputConsumer;
 import org.jetbrains.jps.incremental.fs.CompilationRound;
 import org.jetbrains.jps.incremental.java.JavaBuilder;
-import org.jetbrains.jps.incremental.messages.BuildMessage.Kind;
-import org.jetbrains.jps.incremental.messages.CompilerMessage;
-import org.jetbrains.jps.model.java.JpsJavaExtensionService;
-import org.jetbrains.jps.util.JpsPathUtil;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.persistence.DataSource;
 
@@ -112,10 +109,10 @@ public class MPSMakeFilesAfterProcessor {
       }
       if (!isJava(writtenFile)) {
         // all non-java files got to be copied (which are not in the caches folder, e.g. dependencies/generated)
-        if (!myPathsController.getRedirects().isInCacheOutput(writtenPath)) {
+        if (!myPathsController.getRedirects().isInCacheOutput(writtenFile)) {
           try {
             copyResource(target, writtenFile);
-          } catch (IOException e) {
+          } catch (Exception e) {
             reportError(BUNDLE.getString("io.problem.during.resources.copying"), e);
             success = false;
           }
@@ -166,19 +163,19 @@ public class MPSMakeFilesAfterProcessor {
     File root = myPathsController.getOutputRoot(target);
     String relativePath = FileUtil.getRelativePath(root, file);
     if (relativePath == null) {
-      throw new IllegalStateException("File resource at " + file.getAbsolutePath() + " is not located under the root path " + root.getAbsolutePath());
+      throw new IOException(String.format("File resource at %s is not located under the root path %s", file.getAbsolutePath(), root.getAbsolutePath()));
     }
-    relativePath = FileUtil.toSystemIndependentName(relativePath);
+    final File productionDir = target.getOutputDir();
+    if (productionDir == null) {
+      throw new IOException(String.format("No output directory for build target %s", target));
+    }
 
-    final String outputRootUrl = JpsJavaExtensionService.getInstance().getOutputUrl(target.getModule(), target.isTests());
-    final String targetPath = JpsPathUtil.urlToPath(outputRootUrl) + '/' + relativePath;
-
-    final File targetFile = new File(targetPath).getCanonicalFile();
+    final File targetFile = new File(productionDir, relativePath);
     FileUtil.copyContent(file, targetFile);
     myOutputConsumer.registerOutputFile(target, targetFile, Collections.singletonList(file.getPath()));
   }
 
-  private void reportError(String msg, Throwable e) {
-    myContext.processMessage(new CompilerMessage(msg, Kind.ERROR, e.getMessage()));
+  private void reportError(String msg, @Nullable Throwable e) {
+    MPSCompilerUtil.reportError(myContext, msg, e);
   }
 }

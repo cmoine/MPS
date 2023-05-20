@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-4he9250uzo402i71su4nhc4l2b13sjs" />
+<product version="3" modelHash="-i1s63vggpi77mxlhvpq2u8kv31sfkb">
+  <files names="BehaviorAspectDescriptor.java:DebuggedType__BehaviorDescriptor.java:DoNotTransformAnnotation__BehaviorDescriptor.java:EvaluatorConcept__BehaviorDescriptor.java:Evaluator__BehaviorDescriptor.java:EvaluatorsSuperMethodCall__BehaviorDescriptor.java:IEvaluatorConcept__BehaviorDescriptor.java:LowLevelVariable__BehaviorDescriptor.java:UnprocessedAnnotation__BehaviorDescriptor.java" />
+</product>
 

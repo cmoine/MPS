@@ -1,0 +1,6 @@
+// the aim of this file is to mark projects as one where unplayed migrations are allowed
+// this file is checked by NoPendingMigrationsTest
+
+//[MM] this is a temporary fix. There is no project in this directory, so why is it checked by the test? Seems that some test creates a project structure in it.
+//In this case, the same test should revert everything. In addition, this is a test material contained in /languages folder.
+//Test that tries to open this "project" is TraceInfoTest

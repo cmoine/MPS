@@ -16,5 +16,5 @@
 package jetbrains.mps.typesystem.newTypesystem.structure;
 
 public interface IReference<T> {
-  public T getTarget();
+  T getTarget();
 }

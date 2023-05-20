@@ -2,8 +2,7 @@
 <model ref="r:dcdc35e4-9e23-4315-b822-9c8981abf5fa(jetbrains.mps.lang.editor.forms.typesystem)">
   <persistence version="9" />
   <languages>
-    <use id="7a5dda62-9140-4668-ab76-d5ed1746f2b2" name="jetbrains.mps.lang.typesystem" version="0" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="00000000-0000-4000-0000-1de82b3a4936(jetbrains.mps.devkit.aspect.typesystem)" />
   </languages>
   <imports>
     <import index="f55a" ref="r:8598bcb3-b739-42c2-b1fc-32c367683d7c(jetbrains.mps.lang.editor.forms.structure)" implicit="true" />
@@ -44,14 +43,14 @@
       <concept id="1227096498176" name="jetbrains.mps.lang.typesystem.structure.PropertyMessageTarget" flags="ng" index="2ODE4t">
         <reference id="1227096521710" name="propertyDeclaration" index="2ODJFN" />
       </concept>
-      <concept id="1227096774658" name="jetbrains.mps.lang.typesystem.structure.MessageStatement" flags="ng" index="2OEH$v">
-        <child id="1227096802790" name="nodeToReport" index="2OEOjV" />
-        <child id="1227096836496" name="messageTarget" index="2OEWyd" />
-      </concept>
       <concept id="1195213580585" name="jetbrains.mps.lang.typesystem.structure.AbstractCheckingRule" flags="ig" index="18hYwZ">
         <child id="1195213635060" name="body" index="18ibNy" />
       </concept>
       <concept id="1195214364922" name="jetbrains.mps.lang.typesystem.structure.NonTypesystemRule" flags="ig" index="18kY7G" />
+      <concept id="3937244445246642777" name="jetbrains.mps.lang.typesystem.structure.AbstractReportStatement" flags="ng" index="1urrMJ">
+        <child id="3937244445246643443" name="messageTarget" index="1urrC5" />
+        <child id="3937244445246642781" name="nodeToReport" index="1urrMF" />
+      </concept>
       <concept id="1174642788531" name="jetbrains.mps.lang.typesystem.structure.ConceptReference" flags="ig" index="1YaCAy">
         <reference id="1174642800329" name="concept" index="1YaFvo" />
       </concept>
@@ -79,14 +78,14 @@
       <node concept="3clFbJ" id="4CPWB7pWuO6" role="3cqZAp">
         <node concept="3clFbS" id="4CPWB7pWuO7" role="3clFbx">
           <node concept="2MkqsV" id="4CPWB7pWvlZ" role="3cqZAp">
-            <node concept="1YBJjd" id="4CPWB7pWvmM" role="2OEOjV">
-              <ref role="1YBMHb" node="4CPWB7pWuLO" resolve="ui" />
-            </node>
             <node concept="Xl_RD" id="4CPWB7pWvmb" role="2MkJ7o">
               <property role="Xl_RC" value="falseText is not set" />
             </node>
-            <node concept="2ODE4t" id="4CPWB7pWvIh" role="2OEWyd">
+            <node concept="2ODE4t" id="4CPWB7pWvIh" role="1urrC5">
               <ref role="2ODJFN" to="f55a:1aoPJ1nwex0" resolve="falseText" />
+            </node>
+            <node concept="1YBJjd" id="4CPWB7pWvmM" role="1urrMF">
+              <ref role="1YBMHb" node="4CPWB7pWuLO" resolve="ui" />
             </node>
           </node>
         </node>
@@ -105,14 +104,14 @@
       <node concept="3clFbJ" id="4CPWB7pWvyH" role="3cqZAp">
         <node concept="3clFbS" id="4CPWB7pWvyJ" role="3clFbx">
           <node concept="2MkqsV" id="4CPWB7pWvI2" role="3cqZAp">
-            <node concept="1YBJjd" id="4CPWB7pWvKp" role="2OEOjV">
-              <ref role="1YBMHb" node="4CPWB7pWuLO" resolve="ui" />
-            </node>
             <node concept="Xl_RD" id="4CPWB7pWvJF" role="2MkJ7o">
               <property role="Xl_RC" value="trueText is not set" />
             </node>
-            <node concept="2ODE4t" id="4CPWB7pWvKL" role="2OEWyd">
+            <node concept="2ODE4t" id="4CPWB7pWvKL" role="1urrC5">
               <ref role="2ODJFN" to="f55a:1aoPJ1nwewY" resolve="trueText" />
+            </node>
+            <node concept="1YBJjd" id="4CPWB7pWvKp" role="1urrMF">
+              <ref role="1YBMHb" node="4CPWB7pWuLO" resolve="ui" />
             </node>
           </node>
         </node>
@@ -134,7 +133,7 @@
             <node concept="Xl_RD" id="4CPWB7pWwgN" role="a7wSD">
               <property role="Xl_RC" value="trueText and falseText are the same" />
             </node>
-            <node concept="1YBJjd" id="4CPWB7pWwib" role="2OEOjV">
+            <node concept="1YBJjd" id="4CPWB7pWwib" role="1urrMF">
               <ref role="1YBMHb" node="4CPWB7pWuLO" resolve="ui" />
             </node>
           </node>

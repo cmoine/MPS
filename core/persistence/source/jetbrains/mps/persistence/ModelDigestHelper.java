@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,61 +15,70 @@
  */
 package jetbrains.mps.persistence;
 
-import jetbrains.mps.extapi.model.GeneratableSModel;
+import jetbrains.mps.components.CoreComponent;
 import jetbrains.mps.extapi.persistence.FileDataSource;
 import jetbrains.mps.vfs.IFile;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.persistence.StreamDataSource;
 
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class ModelDigestHelper {
+// Left as an exercise: try to tell ModelDigestHelper from ModelDigestUtil
+public class ModelDigestHelper implements CoreComponent {
 
-  private static ModelDigestHelper ourInstance = new ModelDigestHelper();
-  private List<DigestProvider> myProviders = new CopyOnWriteArrayList<DigestProvider>();
+  private static ModelDigestHelper ourInstance;
+  private List<DigestProvider> myProviders = new CopyOnWriteArrayList<>();
 
   public static ModelDigestHelper getInstance() {
     return ourInstance;
   }
 
-  private ModelDigestHelper() {
+  /*package*/ ModelDigestHelper() {
 
+  }
+
+  @Override
+  public void init() {
+    ourInstance = this;
+  }
+
+  @Override
+  public void dispose() {
+    ourInstance = null;
   }
 
   public void addDigestProvider(DigestProvider provider) {
     myProviders.add(provider);
   }
 
-  public Map<String, String> getGenerationHashes(@NotNull StreamDataSource source) {
-    if (!(source instanceof FileDataSource)) return null;
-    return getGenerationHashes(((FileDataSource) source).getFile());
+  public void removeDigestProvider(DigestProvider provider) {
+    myProviders.remove(provider);
   }
 
-  public Map<String, String> getGenerationHashes(@NotNull IFile file) {
+  @Nullable
+  public String getGenerationHash(@NotNull IFile file) {
     for (DigestProvider p : myProviders) {
-      Map<String, String> result = p.getGenerationHashes(file);
-      if (result != null) return result;
+      String result = p.getGenerationHash(file);
+      if (result != null) {
+        return result;
+      }
     }
-
     return null;
   }
 
+  @Nullable
   public String getModelHash(@NotNull StreamDataSource source) {
     if (source instanceof FileDataSource) {
-      for (DigestProvider p : myProviders) {
-        Map<String, String> result = p.getGenerationHashes(((FileDataSource) source).getFile());
-        if (result != null) {
-          return result.get(GeneratableSModel.FILE);
-        }
-      }
+      final IFile file = ((FileDataSource) source).getFile();
+      return getGenerationHash(file);
     }
 
     return null;
   }
 
   public interface DigestProvider {
-    Map<String, String> getGenerationHashes(@NotNull IFile iFile);
+    String getGenerationHash(@NotNull IFile file);
   }
 }

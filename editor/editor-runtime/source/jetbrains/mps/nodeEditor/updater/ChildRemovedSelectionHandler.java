@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ import jetbrains.mps.nodeEditor.EditorComponent;
 import jetbrains.mps.nodeEditor.cells.CellFinderUtil;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.model.SNode;
 
 /**
@@ -27,10 +28,10 @@ import org.jetbrains.mps.openapi.model.SNode;
  */
 class ChildRemovedSelectionHandler extends ModelEventsSelectionHandler {
   private final SNode myParent;
-  private final String myChildRole;
-  private int myChildIndex;
+  private final SContainmentLink myChildRole;
+  private final int myChildIndex;
 
-  ChildRemovedSelectionHandler(@NotNull SNode parent, @NotNull String childRole, int childIndex) {
+  ChildRemovedSelectionHandler(@NotNull SNode parent, @NotNull SContainmentLink childRole, int childIndex) {
     myParent = parent;
     myChildRole = childRole;
     myChildIndex = childIndex;
@@ -38,11 +39,11 @@ class ChildRemovedSelectionHandler extends ModelEventsSelectionHandler {
 
   @Override
   void setEditorSelection(EditorComponent editorComponent, SNode lastSelectedNode) {
-    if (lastSelectedNode != null && lastSelectedNode.getModel() != null) {
+    if (lastSelectedNode != null && lastSelectedNode.getModel() != null && editorComponent.findNodeCell(lastSelectedNode) != null) {
       super.setEditorSelection(editorComponent, lastSelectedNode);
-      return;
+    } else {
+      doSetSelection(editorComponent);
     }
-    doSetSelection(editorComponent);
   }
 
   private void doSetSelection(EditorComponent editorComponent) {
@@ -50,7 +51,7 @@ class ChildRemovedSelectionHandler extends ModelEventsSelectionHandler {
     boolean isNextSibling = false;
     int index = 0;
     for (SNode nextChild : myParent.getChildren()) {
-      if (myChildRole.equals(nextChild.getRoleInParent())) {
+      if (myChildRole.equals(nextChild.getContainmentLink())) {
         siblingToSelect = nextChild;
         if (index >= myChildIndex) {
           isNextSibling = true;

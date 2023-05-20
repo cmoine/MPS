@@ -16,13 +16,14 @@
 package jetbrains.mps.util.containers;
 
 import gnu.trove.THashMap;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
 public class BidirectionalMap<K, V> implements Map<K, V> {
-  private final Map<K, V> myKeyToValueMap = new THashMap<K, V>();
-  private final Map<V, List<K>> myValueToKeysMap = new THashMap<V, List<K>>();
+  private final Map<K, V> myKeyToValueMap = new THashMap<>();
+  private final Map<V, List<K>> myValueToKeysMap = new THashMap<>();
 
   @Override
   public V put(K key, V value) {
@@ -35,7 +36,7 @@ public class BidirectionalMap<K, V> implements Map<K, V> {
 
     List<K> array = myValueToKeysMap.get(value);
     if (array == null) {
-      array = new ArrayList<K>();
+      array = new ArrayList<>();
       myValueToKeysMap.put(value, array);
     }
     array.add(key);
@@ -53,6 +54,7 @@ public class BidirectionalMap<K, V> implements Map<K, V> {
     return myValueToKeysMap.get(value);
   }
 
+  @NotNull
   @Override
   public Set<K> keySet() {
     return myKeyToValueMap.keySet();
@@ -106,17 +108,19 @@ public class BidirectionalMap<K, V> implements Map<K, V> {
   }
 
   @Override
-  public void putAll(Map<? extends K, ? extends V> t) {
+  public void putAll(@NotNull Map<? extends K, ? extends V> t) {
     for (final K k1 : t.keySet()) {
       put(k1, t.get(k1));
     }
   }
 
+  @NotNull
   @Override
   public Collection<V> values() {
     return myValueToKeysMap.keySet();
   }
 
+  @NotNull
   @Override
   public Set<Entry<K, V>> entrySet() {
     return myKeyToValueMap.entrySet();
@@ -124,6 +128,6 @@ public class BidirectionalMap<K, V> implements Map<K, V> {
 
   @Override
   public String toString() {
-    return new HashMap<K, V>(myKeyToValueMap).toString();
+    return new HashMap<>(myKeyToValueMap).toString();
   }
 }

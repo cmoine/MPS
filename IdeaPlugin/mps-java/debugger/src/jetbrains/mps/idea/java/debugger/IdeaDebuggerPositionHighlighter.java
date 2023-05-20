@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,12 +30,11 @@ import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.execution.ui.RunContentManager;
 import com.intellij.execution.ui.RunContentWithExecutorListener;
 import com.intellij.openapi.components.ProjectComponent;
-import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import jetbrains.mps.debugger.core.CurrentLinePositionComponentEx;
 import jetbrains.mps.idea.java.trace.MpsSourcePosition;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.mps.openapi.model.SNodeReference;
 
 import java.util.Collection;
 
@@ -46,26 +45,18 @@ public class IdeaDebuggerPositionHighlighter extends CurrentLinePositionComponen
   private final RunContentWithExecutorListener myRunContentListener = new MyRunContentListener();
   private final ExecutionManager myExecutionManager;
 
-  public IdeaDebuggerPositionHighlighter(Project project, FileEditorManager fileEditorManager) {
-    super(project, fileEditorManager);
+  public IdeaDebuggerPositionHighlighter(Project project) {
+    super(project);
     myExecutionManager = ExecutionManager.getInstance(myProject);
   }
 
   @Override
-  protected SNode getNode(DebuggerSession session) {
+  protected SNodeReference getNode(DebuggerSession session) {
     SourcePosition sourcePosition = session.getContextManager().getContext().getSourcePosition();
     if (sourcePosition instanceof MpsSourcePosition) {
       return ((MpsSourcePosition) sourcePosition).getNode();
     }
     return null;
-  }
-
-  @Override
-  public void initComponent() {
-  }
-
-  @Override
-  public void disposeComponent() {
   }
 
   @NotNull

@@ -1,8 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
   <root>
     <file name="DemoApp.java">
       <unit at="13,0,42,0" name="jetbrains.mps.samples.generator_demo.test_models.test3.DemoApp" />
+    </file>
+  </root>
+  <root nodeRef="r:1ebe3253-04ff-442c-a927-b07e3d7072ae(jetbrains.mps.samples.generator_demo.test_models.test3)/1228530125337">
+    <file name="DemoApp.java">
+      <node id="1228530125338" at="24,54,25,39" concept="0" />
+      <node id="1228530125338" at="28,47,29,38" concept="1" />
+      <node id="1228530125338" at="29,38,30,31" concept="0" />
+      <node id="1228530125338" at="30,31,31,32" concept="0" />
+      <node id="1228530125338" at="31,32,32,21" concept="2" />
+      <node id="1228530125338" at="28,0,34,0" concept="3" trace="createComponent_a#()Ljava/awt/Component;" />
+      <scope id="1228530125338" at="28,47,32,21">
+        <var name="component" id="1228530125338" />
+      </scope>
+      <scope id="1228530125338" at="28,0,34,0" />
+    </file>
+  </root>
+  <root nodeRef="r:1ebe3253-04ff-442c-a927-b07e3d7072ae(jetbrains.mps.samples.generator_demo.test_models.test3)/1228530125339">
+    <file name="DemoApp.java">
+      <node id="1228530125340" at="25,39,26,41" concept="0" />
+      <node id="1228530125340" at="34,49,35,36" concept="1" />
+      <node id="1228530125340" at="35,36,36,32" concept="0" />
+      <node id="1228530125340" at="36,32,37,30" concept="0" />
+      <node id="1228530125340" at="37,30,38,42" concept="0" />
+      <node id="1228530125340" at="38,42,39,21" concept="2" />
+      <node id="1228530125340" at="34,0,41,0" concept="3" trace="createComponent_a_0#()Ljava/awt/Component;" />
+      <scope id="1228530125340" at="34,49,39,21">
+        <var name="component" id="1228530125340" />
+      </scope>
+      <scope id="1228530125340" at="34,0,41,0" />
     </file>
   </root>
 </debug-info>

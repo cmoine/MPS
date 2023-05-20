@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,9 @@
  */
 package jetbrains.mps.lang.typesystem.runtime;
 
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactoryByName;
-import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.typesystem.inference.TypeCheckingContext;
+import org.jetbrains.mps.openapi.model.SNode;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -29,7 +26,7 @@ public abstract class AbstractSubtypingRule_Runtime implements ISubtypingRule_Ru
   public List<SNode> getSubOrSuperTypes(SNode type, TypeCheckingContext typeCheckingContext, IsApplicableStatus status) {
     SNode subOrSuperType = getSubOrSuperType(type, typeCheckingContext, status);
     if (subOrSuperType != null) {
-      return Arrays.asList(subOrSuperType);
+      return List.of(subOrSuperType);
     }
     return Collections.emptyList();
   }

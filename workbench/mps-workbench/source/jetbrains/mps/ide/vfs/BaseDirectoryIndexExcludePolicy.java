@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import com.intellij.openapi.roots.impl.DirectoryIndexExcludePolicy;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.pointers.VirtualFilePointer;
 import com.intellij.openapi.vfs.pointers.VirtualFilePointerManager;
+import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ import java.util.Collection;
 import java.util.Set;
 
 public abstract class BaseDirectoryIndexExcludePolicy implements DirectoryIndexExcludePolicy {
-  private Project myProject;
+  private final Project myProject;
 
   protected BaseDirectoryIndexExcludePolicy(@NotNull Project project) {
     myProject = project;
@@ -41,24 +42,23 @@ public abstract class BaseDirectoryIndexExcludePolicy implements DirectoryIndexE
   @NotNull
   protected abstract Set<VirtualFile> getAllExcludeRoots();
 
-  @NotNull
   @Override
-  public VirtualFile[] getExcludeRootsForProject() {
+  @NotNull
+  public String [] getExcludeUrlsForProject() {
     if (myProject.isDisposed()) {
-      return VirtualFile.EMPTY_ARRAY;
+      return new String[0];
     }
-    final Collection<VirtualFile> roots = getAllExcludeRoots();
-    return roots.toArray(new VirtualFile[roots.size()]);
+    return ContainerUtil.map2Array(getAllExcludeRoots(), String.class, VirtualFile::getUrl);
   }
 
   @NotNull
   @Override
   public VirtualFilePointer[] getExcludeRootsForModule(@NotNull ModuleRootModel rootModel) {
     Set<VirtualFile> roots = getAllExcludeRoots();
-    ArrayList<VirtualFilePointer> filePointers = new ArrayList<VirtualFilePointer>();
+    ArrayList<VirtualFilePointer> filePointers = new ArrayList<>();
     for (VirtualFile root : roots) {
       filePointers.add(VirtualFilePointerManager.getInstance().create(root, myProject, null));
     }
-    return filePointers.toArray(new VirtualFilePointer[filePointers.size()]);
+    return filePointers.toArray(new VirtualFilePointer[0]);
   }
 }

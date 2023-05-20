@@ -5,6 +5,15 @@ package jetbrains.mps.lang.editor.table.runtime;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.openapi.editor.EditorContext;
 
-public interface TableModelFactory {
-  TableModel createTableModel(SNode node, EditorContext editorContext);
+public abstract class TableModelFactory {
+  @Deprecated
+  public TableModel createTableModel(SNode node, EditorContext editorContext) {
+    // TODO: not used anymore, remove after MPS 3.5 release
+    return null;
+  }
+
+  public TableModel createTableModel() {
+    // TODO: make abstract after MPS 3.5 release
+    return null;
+  }
 }

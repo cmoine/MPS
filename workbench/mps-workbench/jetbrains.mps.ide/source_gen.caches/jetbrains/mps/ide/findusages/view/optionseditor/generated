@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="37bbx7w6civaqelctspkbj8jabqao2c" />
+<product version="3" modelHash="ay9iikmxc1lgtta9hj9d02xv6erhosq">
+  <files names="DefaultOptionsContainer.java:DefaultSearchOptionsComponent.java" />
+</product>
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +15,9 @@
  */
 package jetbrains.mps.nodeEditor.cells;
 
-import jetbrains.mps.openapi.editor.cells.EditorCellFactory;
-import jetbrains.mps.openapi.editor.descriptor.EditorHintsSpecific;
+import jetbrains.mps.openapi.editor.descriptor.BaseConceptEditor;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.openapi.module.SRepository;
 
 import java.util.Collection;
 
@@ -25,23 +25,23 @@ import java.util.Collection;
  * User: shatalin
  * Date: 5/14/13
  */
-abstract class AbstractEditorRegistry<T extends EditorHintsSpecific> extends AbstractEditorHintsSpecificRegistry<T> {
+abstract class AbstractEditorRegistry<T extends BaseConceptEditor> extends AbstractEditorHintsSpecificRegistry<T> {
+
   @NotNull
-  protected final EditorCellFactory myCellFactory;
+  private final Collection<String> myHints;
 
-  protected AbstractEditorRegistry(@NotNull EditorCellFactory cellFactory) {
-    myCellFactory = cellFactory;
-  }
-
-  @Override
-  protected Collection<String> getCurrentContextHints() {
-    return myCellFactory.getCellContext().getHints();
+  AbstractEditorRegistry(@NotNull Collection<String> hints, @NotNull SRepository repository) {
+    super(repository);
+    myHints = hints;
   }
 
   @Override
   protected String getErrorMessage(T additional, T chosen, String context) {
-    return String.format(
-        "Additional editor %s is applicable to the current context (%s). Skipping this editor, using %s.",
-        additional.getClass(), context, chosen.getClass());
+    return String.format("Additional editor %s is applicable to the current context (%s). Skipping this editor, using %s.", additional.getClass(), context,
+        chosen.getClass());
+  }
+
+  protected Collection<String> getCurrentContextHints() {
+    return myHints;
   }
 }

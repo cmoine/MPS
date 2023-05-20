@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="mps-logging">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/mps-core/lib/mps-logging.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../core/logging/source" />
+    </SOURCES>
+  </library>
+</component>

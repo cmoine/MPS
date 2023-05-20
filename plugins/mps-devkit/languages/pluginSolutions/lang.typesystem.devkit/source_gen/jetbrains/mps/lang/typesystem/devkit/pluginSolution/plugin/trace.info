@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1160998861373:jetbrains.mps.baseLanguage.structure.AssertStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144226303539:jetbrains.mps.baseLanguage.structure.ForeachStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/5351203823916750322:jetbrains.mps.baseLanguage.structure.TryUniversalStatement" />
+  <root nodeRef="r:bf6ff1bc-5ee9-482f-981b-49fe4400ac01(jetbrains.mps.lang.typesystem.devkit.pluginSolution.plugin)/3273650261466121722">
+    <file name="GoToTypeErrorHelper.java">
+      <node id="3273650261466284400" at="14,0,15,0" concept="4" trace="myEditorComponent" />
+      <node id="3273650261466285462" at="15,63,16,40" concept="3" />
+      <node id="3273650261466289818" at="18,71,19,130" concept="8" />
+      <node id="3273650261466289830" at="20,64,21,18" concept="9" />
+      <node id="3273650261466289845" at="24,53,25,100" concept="9" />
+      <node id="3273650261466289858" at="27,24,28,28" concept="9" />
+      <node id="3273650261466292197" at="30,49,31,82" concept="9" />
+      <node id="3273650261466285454" at="15,0,18,0" concept="2" trace="GoToTypeErrorHelper#(Ljetbrains/mps/nodeEditor/EditorComponent;)V" />
+      <node id="3273650261466289828" at="19,130,22,5" concept="6" />
+      <node id="3273650261466289843" at="24,0,27,0" concept="7" trace="accept#(Ljetbrains/mps/errors/item/IssueKindReportItem;)Z" />
+      <node id="3273650261466292192" at="30,0,33,0" concept="7" trace="getMostRelevantReportItem#()Ljetbrains/mps/errors/item/ReportItem;" />
+      <node id="3273650261466289835" at="22,5,27,24" concept="8" />
+      <node id="3273650261466289812" at="18,0,30,0" concept="7" trace="getMaxSeverityReportItems#()Ljava/util/Collection;" />
+      <scope id="3273650261466285458" at="15,63,16,40" />
+      <scope id="3273650261466289829" at="20,64,21,18" />
+      <scope id="3273650261466289844" at="24,53,25,100" />
+      <scope id="3273650261466292196" at="30,49,31,82" />
+      <scope id="3273650261466285454" at="15,0,18,0">
+        <var name="editorComponent" id="3273650261466285461" />
+      </scope>
+      <scope id="3273650261466289843" at="24,0,27,0">
+        <var name="it" id="3273650261466289843" />
+      </scope>
+      <scope id="3273650261466292192" at="30,0,33,0" />
+      <scope id="3273650261466289817" at="18,71,28,28">
+        <var name="allItems" id="3273650261466289819" />
+        <var name="maxSeverityItems" id="3273650261466289836" />
+      </scope>
+      <scope id="3273650261466289812" at="18,0,30,0" />
+      <unit id="3273650261466289843" at="23,104,27,5" name="jetbrains.mps.lang.typesystem.devkit.pluginSolution.plugin.GoToTypeErrorHelper$1" />
+      <unit id="3273650261466121722" at="13,0,34,0" name="jetbrains.mps.lang.typesystem.devkit.pluginSolution.plugin.GoToTypeErrorHelper" />
+    </file>
+  </root>
+  <root nodeRef="r:bf6ff1bc-5ee9-482f-981b-49fe4400ac01(jetbrains.mps.lang.typesystem.devkit.pluginSolution.plugin)/5181507218630412169">
+    <file name="PluginSolution_ApplicationPlugin.java">
+      <node id="5181507218630412169" at="30,45,31,57" concept="3" />
+    </file>
+    <file name="ShowRulesWhichAffectNodeType_Action.java">
+      <node id="5181507218630412169" at="27,0,28,0" concept="12" trace="ICON" />
+      <node id="5181507218630412169" at="29,48,30,59" concept="14" />
+      <node id="5181507218630412169" at="30,59,31,34" concept="3" />
+      <node id="5181507218630412169" at="31,34,32,52" concept="3" />
+      <node id="5181507218630412169" at="35,32,36,16" concept="9" />
+      <node id="5181507218630412169" at="40,53,41,19" concept="9" />
+      <node id="5181507218630412217" at="43,5,44,57" concept="8" />
+      <node id="5181507218630412217" at="44,57,45,53" concept="3" />
+      <node id="5181507218630412220" at="46,25,47,21" concept="9" />
+      <node id="5542552559869123755" at="50,5,51,56" concept="8" />
+      <node id="5542552559869123755" at="51,56,52,57" concept="3" />
+      <node id="5542552559869123756" at="53,22,54,21" concept="9" />
+      <node id="6100166834214530411" at="57,5,58,66" concept="8" />
+      <node id="6100166834214530411" at="58,66,59,56" concept="3" />
+      <node id="6100166834214530412" at="60,22,61,21" concept="9" />
+      <node id="5181507218630412169" at="63,5,64,16" concept="9" />
+      <node id="5181507218630412172" at="67,96,68,74" concept="8" />
+      <node id="150237051626650968" at="69,120,70,99" concept="8" />
+      <node id="2034046503361610512" at="70,99,71,95" concept="3" />
+      <node id="5542552559869130309" at="72,7,73,82" concept="8" />
+      <node id="5542552559868791017" at="73,82,74,148" concept="8" />
+      <node id="5542552559869128930" at="74,148,75,119" concept="3" />
+      <node id="5181507218630412169" at="39,95,42,5" concept="6" />
+      <node id="5181507218630412220" at="45,53,48,7" concept="6" />
+      <node id="5542552559869123756" at="52,57,55,7" concept="6" />
+      <node id="6100166834214530412" at="59,56,62,7" concept="6" />
+      <node id="5181507218630412169" at="34,0,38,0" concept="7" trace="isDumbAware#()Z" />
+      <node id="150237051626509646" at="68,74,72,7" concept="3" />
+      <node id="5181507218630412169" at="29,0,34,0" concept="2" trace="ShowRulesWhichAffectNodeType_Action#()V" />
+      <node id="5181507218630412217" at="42,5,49,5" concept="1" />
+      <node id="5542552559869123755" at="49,5,56,5" concept="1" />
+      <node id="6100166834214530411" at="56,5,63,5" concept="1" />
+      <node id="5181507218630412169" at="66,0,77,0" concept="7" trace="doExecute#(Lcom/intellij/openapi/actionSystem/AnActionEvent;Ljava/util/Map;)V" />
+      <node id="5181507218630412169" at="38,0,66,0" concept="7" trace="collectActionData#(Lcom/intellij/openapi/actionSystem/AnActionEvent;Ljava/util/Map;)Z" />
+      <scope id="5181507218630412169" at="35,32,36,16" />
+      <scope id="5181507218630412169" at="40,53,41,19" />
+      <scope id="5181507218630412220" at="46,25,47,21" />
+      <scope id="5542552559869123756" at="53,22,54,21" />
+      <scope id="6100166834214530412" at="60,22,61,21" />
+      <scope id="150237051626509650" at="69,120,71,95">
+        <var name="scope" id="150237051626650969" />
+      </scope>
+      <scope id="5181507218630412169" at="29,48,32,52" />
+      <scope id="5181507218630412169" at="34,0,38,0" />
+      <scope id="5181507218630412169" at="29,0,34,0" />
+      <scope id="5181507218630412217" at="43,5,48,7">
+        <var name="node" id="5181507218630412217" />
+      </scope>
+      <scope id="5542552559869123755" at="50,5,55,7">
+        <var name="p" id="5542552559869123755" />
+      </scope>
+      <scope id="6100166834214530411" at="57,5,62,7">
+        <var name="p" id="6100166834214530411" />
+      </scope>
+      <scope id="5181507218630412169" at="67,96,75,119">
+        <var name="opt" id="5542552559868791020" />
+        <var name="provider" id="5542552559869130310" />
+        <var name="query" id="5181507218630412173" />
+      </scope>
+      <scope id="5181507218630412169" at="66,0,77,0">
+        <var name="_params" id="5181507218630412169" />
+        <var name="event" id="5181507218630412169" />
+      </scope>
+      <scope id="5181507218630412169" at="39,95,64,16" />
+      <scope id="5181507218630412169" at="38,0,66,0">
+        <var name="_params" id="5181507218630412169" />
+        <var name="event" id="5181507218630412169" />
+      </scope>
+      <unit id="5181507218630412169" at="26,0,78,0" name="jetbrains.mps.lang.typesystem.devkit.pluginSolution.plugin.ShowRulesWhichAffectNodeType_Action" />
+    </file>
+  </root>
+  <root nodeRef="r:bf6ff1bc-5ee9-482f-981b-49fe4400ac01(jetbrains.mps.lang.typesystem.devkit.pluginSolution.plugin)/5181507218630412277">
+    <file name="PluginSolution_ApplicationPlugin.java">
+      <node id="5181507218630412277" at="29,48,30,45" concept="3" />
+    </file>
+    <file name="ShowExpectedType_Action.java">
+      <node id="5181507218630412277" at="27,0,28,0" concept="12" trace="ICON" />
+      <node id="5181507218630412277" at="29,36,30,76" concept="14" />
+      <node id="5181507218630412277" at="30,76,31,35" concept="3" />
+      <node id="5181507218630412277" at="31,35,32,40" concept="3" />
+      <node id="5181507218630412277" at="35,32,36,16" concept="9" />
+      <node id="5181507218630412277" at="40,53,41,19" concept="9" />
+      <node id="4504999384443384272" at="43,5,44,66" concept="8" />
+      <node id="4504999384443384272" at="44,66,45,56" concept="3" />
+      <node id="4504999384443384273" at="46,22,47,21" concept="9" />
+      <node id="5181507218630412280" at="50,5,51,55" concept="8" />
+      <node id="5181507218630412280" at="51,55,52,51" concept="3" />
+      <node id="5181507218630412281" at="53,22,54,21" concept="9" />
+      <node id="5181507218630412282" at="57,5,58,54" concept="8" />
+      <node id="5181507218630412282" at="58,54,59,50" concept="3" />
+      <node id="5181507218630412283" at="60,22,61,21" concept="9" />
+      <node id="5487985028841908727" at="64,5,65,90" concept="8" />
+      <node id="5487985028841908727" at="66,67,67,31" concept="3" />
+      <node id="5487985028841908727" at="68,7,69,75" concept="3" />
+      <node id="5487985028841908728" at="70,36,71,21" concept="9" />
+      <node id="5181507218630412277" at="73,5,74,16" concept="9" />
+      <node id="5181507218630412286" at="77,96,78,61" concept="8" />
+      <node id="4030359579151780688" at="78,61,79,70" concept="8" />
+      <node id="4030359579151807711" at="79,70,80,0" concept="11" />
+      <node id="4030359579151805340" at="81,120,82,123" concept="3" />
+      <node id="4030359579151847810" at="82,123,83,114" concept="3" />
+      <node id="4030359579151851811" at="84,7,85,0" concept="11" />
+      <node id="7667709432488506582" at="86,29,87,140" concept="8" />
+      <node id="7667709432488603867" at="87,140,88,89" concept="3" />
+      <node id="6277318027977508741" at="88,89,89,13" concept="9" />
+      <node id="6277318027977508323" at="90,5,91,0" concept="11" />
+      <node id="7423714904715859313" at="91,0,92,67" concept="8" />
+      <node id="8755844276335130757" at="92,67,93,0" concept="11" />
+      <node id="2034046503381295169" at="95,138,96,108" concept="3" />
+      <node id="2034046503381295177" at="96,108,97,47" concept="3" />
+      <node id="2034046503381295182" at="97,47,98,72" concept="3" />
+      <node id="723345233651878706" at="99,9,100,0" concept="11" />
+      <node id="4030359579151876918" at="100,0,101,134" concept="3" />
+      <node id="4030359579151886686" at="101,134,102,0" concept="11" />
+      <node id="8311156516541781935" at="104,138,105,84" concept="10" />
+      <node id="4091399266697163929" at="105,84,106,105" concept="10" />
+      <node id="4091399266697180477" at="106,105,107,95" concept="10" />
+      <node id="2034046503381295230" at="107,95,108,50" concept="3" />
+      <node id="2034046503381295235" at="108,50,109,62" concept="3" />
+      <node id="5181507218630412277" at="39,95,42,5" concept="6" />
+      <node id="4504999384443384273" at="45,56,48,7" concept="6" />
+      <node id="5181507218630412281" at="52,51,55,7" concept="6" />
+      <node id="5181507218630412283" at="59,50,62,7" concept="6" />
+      <node id="5487985028841908727" at="65,90,68,7" concept="6" />
+      <node id="5487985028841908728" at="69,75,72,7" concept="6" />
+      <node id="5181507218630412277" at="34,0,38,0" concept="7" trace="isDumbAware#()Z" />
+      <node id="4030359579151792332" at="80,0,84,7" concept="3" />
+      <node id="5181507218630412277" at="29,0,34,0" concept="2" trace="ShowExpectedType_Action#()V" />
+      <node id="6277318027977508733" at="85,0,90,5" concept="6" />
+      <node id="723345233651872747" at="94,9,99,9" concept="3" />
+      <node id="4504999384443384272" at="42,5,49,5" concept="1" />
+      <node id="5181507218630412280" at="49,5,56,5" concept="1" />
+      <node id="5181507218630412282" at="56,5,63,5" concept="1" />
+      <node id="723345233651880658" at="103,15,110,9" concept="3" />
+      <node id="5487985028841908727" at="63,5,73,5" concept="1" />
+      <node id="6277318027977458451" at="93,0,111,5" concept="15" />
+      <node id="5181507218630412277" at="76,0,113,0" concept="7" trace="doExecute#(Lcom/intellij/openapi/actionSystem/AnActionEvent;Ljava/util/Map;)V" />
+      <node id="5181507218630412277" at="38,0,76,0" concept="7" trace="collectActionData#(Lcom/intellij/openapi/actionSystem/AnActionEvent;Ljava/util/Map;)Z" />
+      <scope id="5181507218630412277" at="35,32,36,16" />
+      <scope id="5181507218630412277" at="40,53,41,19" />
+      <scope id="4504999384443384273" at="46,22,47,21" />
+      <scope id="5181507218630412281" at="53,22,54,21" />
+      <scope id="5181507218630412283" at="60,22,61,21" />
+      <scope id="5487985028841908727" at="66,67,67,31" />
+      <scope id="5487985028841908728" at="70,36,71,21" />
+      <scope id="4030359579151792336" at="81,120,83,114" />
+      <scope id="5181507218630412277" at="29,36,32,40" />
+      <scope id="6277318027977508734" at="86,29,89,13">
+        <var name="manager" id="7667709432488506581" />
+      </scope>
+      <scope id="723345233651872751" at="95,138,98,72" />
+      <scope id="5181507218630412277" at="34,0,38,0" />
+      <scope id="5181507218630412277" at="29,0,34,0" />
+      <scope id="4504999384443384272" at="43,5,48,7">
+        <var name="p" id="4504999384443384272" />
+      </scope>
+      <scope id="5181507218630412280" at="50,5,55,7">
+        <var name="p" id="5181507218630412280" />
+      </scope>
+      <scope id="5181507218630412282" at="57,5,62,7">
+        <var name="p" id="5181507218630412282" />
+      </scope>
+      <scope id="723345233651880662" at="104,138,109,62" />
+      <scope id="6277318027977458454" at="103,15,110,9" />
+      <scope id="5487985028841908727" at="64,5,72,7">
+        <var name="editorComponent" id="5487985028841908727" />
+      </scope>
+      <scope id="6277318027977458453" at="94,9,102,0" />
+      <scope id="5181507218630412277" at="77,96,111,5">
+        <var name="dialogTitle" id="4030359579151780689" />
+        <var name="tmpModel" id="7423714904715859314" />
+        <var name="type" id="5181507218630412287" />
+      </scope>
+      <scope id="5181507218630412277" at="39,95,74,16" />
+      <scope id="5181507218630412277" at="76,0,113,0">
+        <var name="_params" id="5181507218630412277" />
+        <var name="event" id="5181507218630412277" />
+      </scope>
+      <scope id="5181507218630412277" at="38,0,76,0">
+        <var name="_params" id="5181507218630412277" />
+        <var name="event" id="5181507218630412277" />
+      </scope>
+      <unit id="5181507218630412277" at="26,0,114,0" name="jetbrains.mps.lang.typesystem.devkit.pluginSolution.plugin.ShowExpectedType_Action" />
+    </file>
+  </root>
+  <root nodeRef="r:bf6ff1bc-5ee9-482f-981b-49fe4400ac01(jetbrains.mps.lang.typesystem.devkit.pluginSolution.plugin)/5181507218630412336">
+    <file name="InternalTypeSystemActions_ActionGroup.java">
+      <node id="5181507218630412336" at="10,0,11,0" concept="12" trace="ID" />
+      <node id="5181507218630412336" at="12,83,13,51" concept="14" />
+      <node id="5181507218630412336" at="13,51,14,25" concept="3" />
+      <node id="5181507218630412336" at="14,25,15,20" concept="3" />
+      <node id="5181507218630412338" at="15,20,16,143" concept="3" />
+      <node id="5181507218630412336" at="12,0,18,0" concept="2" trace="InternalTypeSystemActions_ActionGroup#(Ljetbrains/mps/workbench/action/ApplicationPlugin;)V" />
+      <scope id="5181507218630412336" at="12,83,16,143" />
+      <scope id="5181507218630412336" at="12,0,18,0">
+        <var name="plugin" id="5181507218630412336" />
+      </scope>
+      <unit id="5181507218630412336" at="9,0,19,0" name="jetbrains.mps.lang.typesystem.devkit.pluginSolution.plugin.InternalTypeSystemActions_ActionGroup" />
+    </file>
+    <file name="PluginSolution_ApplicationPlugin.java">
+      <node id="5181507218630412336" at="33,55,34,62" concept="3" />
+      <node id="5181507218630412339" at="38,109,39,106" concept="3" />
+    </file>
+  </root>
+  <root nodeRef="r:bf6ff1bc-5ee9-482f-981b-49fe4400ac01(jetbrains.mps.lang.typesystem.devkit.pluginSolution.plugin)/5181507218630412340">
+    <file name="GoToTypeErrorRule_InGroup_Action.java">
+      <node id="5181507218630412340" at="18,0,19,0" concept="12" trace="ICON" />
+      <node id="5181507218630412341" at="20,0,21,0" concept="4" trace="errorId" />
+      <node id="5181507218630412358" at="21,0,22,0" concept="4" trace="immediate" />
+      <node id="5181507218630412340" at="22,94,23,53" concept="14" />
+      <node id="5181507218630412340" at="23,53,24,31" concept="3" />
+      <node id="5181507218630412340" at="24,31,25,35" concept="3" />
+      <node id="5181507218630412340" at="25,35,26,34" concept="3" />
+      <node id="5181507218630412340" at="26,34,27,52" concept="3" />
+      <node id="5181507218630412340" at="30,32,31,16" concept="9" />
+      <node id="5181507218630412388" at="34,89,35,169" concept="8" />
+      <node id="5181507218630412403" at="35,169,36,42" concept="3" />
+      <node id="5181507218630412340" at="40,53,41,19" concept="9" />
+      <node id="1375078825678823735" at="43,5,44,66" concept="8" />
+      <node id="1375078825678823735" at="44,66,45,53" concept="3" />
+      <node id="1375078825678823736" at="46,22,47,21" concept="9" />
+      <node id="5181507218630412340" at="49,5,50,16" concept="9" />
+      <node id="9170035598775961058" at="53,96,54,154" concept="3" />
+      <node id="5181507218630412340" at="57,31,58,44" concept="8" />
+      <node id="5181507218630412340" at="58,44,59,36" concept="3" />
+      <node id="5181507218630412340" at="59,36,60,20" concept="3" />
+      <node id="5181507218630412340" at="60,20,61,61" concept="3" />
+      <node id="5181507218630412340" at="61,61,62,20" concept="3" />
+      <node id="5181507218630412340" at="62,20,63,53" concept="3" />
+      <node id="5181507218630412340" at="63,53,64,20" concept="3" />
+      <node id="5181507218630412340" at="64,20,65,26" concept="9" />
+      <node id="5181507218630412348" at="67,61,68,29" concept="9" />
+      <node id="5181507218630412340" at="39,95,42,5" concept="6" />
+      <node id="1375078825678823736" at="45,53,48,7" concept="6" />
+      <node id="5181507218630412340" at="67,0,70,0" concept="13" trace="errorId_State#(Lorg/jetbrains/mps/openapi/model/SNodeReference;)Ljava/lang/String;" />
+      <node id="5181507218630412340" at="29,0,33,0" concept="7" trace="isDumbAware#()Z" />
+      <node id="5181507218630412340" at="52,0,56,0" concept="7" trace="doExecute#(Lcom/intellij/openapi/actionSystem/AnActionEvent;Ljava/util/Map;)V" />
+      <node id="5181507218630412340" at="33,0,38,0" concept="7" trace="doUpdate#(Lcom/intellij/openapi/actionSystem/AnActionEvent;Ljava/util/Map;)V" />
+      <node id="5181507218630412340" at="22,0,29,0" concept="2" trace="GoToTypeErrorRule_InGroup_Action#(Lorg/jetbrains/mps/openapi/model/SNodeReference;Z)V" />
+      <node id="1375078825678823735" at="42,5,49,5" concept="1" />
+      <node id="5181507218630412340" at="56,0,67,0" concept="7" trace="getActionId#()Ljava/lang/String;" />
+      <node id="5181507218630412340" at="38,0,52,0" concept="7" trace="collectActionData#(Lcom/intellij/openapi/actionSystem/AnActionEvent;Ljava/util/Map;)Z" />
+      <scope id="5181507218630412340" at="30,32,31,16" />
+      <scope id="5181507218630412340" at="40,53,41,19" />
+      <scope id="1375078825678823736" at="46,22,47,21" />
+      <scope id="5181507218630412340" at="53,96,54,154" />
+      <scope id="5181507218630412347" at="67,61,68,29" />
+      <scope id="5181507218630412387" at="34,89,36,42">
+        <var name="text" id="5181507218630412389" />
+      </scope>
+      <scope id="5181507218630412340" at="67,0,70,0">
+        <var name="object" id="5181507218630412340" />
+      </scope>
+      <scope id="5181507218630412340" at="29,0,33,0" />
+      <scope id="5181507218630412340" at="52,0,56,0">
+        <var name="_params" id="5181507218630412340" />
+        <var name="event" id="5181507218630412340" />
+      </scope>
+      <scope id="5181507218630412340" at="22,94,27,52" />
+      <scope id="5181507218630412340" at="33,0,38,0">
+        <var name="_params" id="5181507218630412340" />
+        <var name="event" id="5181507218630412340" />
+      </scope>
+      <scope id="1375078825678823735" at="43,5,48,7">
+        <var name="p" id="1375078825678823735" />
+      </scope>
+      <scope id="5181507218630412340" at="22,0,29,0">
+        <var name="errorId_par" id="5181507218630412340" />
+        <var name="immediate_par" id="5181507218630412340" />
+      </scope>
+      <scope id="5181507218630412340" at="57,31,65,26">
+        <var name="res" id="5181507218630412340" />
+      </scope>
+      <scope id="5181507218630412340" at="39,95,50,16" />
+      <scope id="5181507218630412340" at="56,0,67,0" />
+      <scope id="5181507218630412340" at="38,0,52,0">
+        <var name="_params" id="5181507218630412340" />
+        <var name="event" id="5181507218630412340" />
+      </scope>
+      <unit id="5181507218630412340" at="17,0,71,0" name="jetbrains.mps.lang.typesystem.devkit.pluginSolution.plugin.GoToTypeErrorRule_InGroup_Action" />
+    </file>
+  </root>
+  <root nodeRef="r:bf6ff1bc-5ee9-482f-981b-49fe4400ac01(jetbrains.mps.lang.typesystem.devkit.pluginSolution.plugin)/5181507218630412410">
+    <file name="GoToTypeErrorRule_Action.java">
+      <node id="5181507218630412410" at="24,0,25,0" concept="12" trace="ICON" />
+      <node id="5181507218630412410" at="26,37,27,53" concept="14" />
+      <node id="5181507218630412410" at="27,53,28,35" concept="3" />
+      <node id="5181507218630412410" at="28,35,29,52" concept="3" />
+      <node id="5181507218630412410" at="32,32,33,16" concept="9" />
+      <node id="3273650261466346693" at="36,87,37,165" concept="8" />
+      <node id="3273650261466346710" at="38,41,39,19" concept="9" />
+      <node id="4866539458460394193" at="40,5,41,141" concept="8" />
+      <node id="3273650261466369235" at="41,141,42,92" concept="9" />
+      <node id="5181507218630412410" at="45,89,46,85" concept="3" />
+      <node id="5181507218630412410" at="50,53,51,19" concept="9" />
+      <node id="5181507218630412484" at="53,5,54,90" concept="8" />
+      <node id="5181507218630412484" at="55,67,56,31" concept="3" />
+      <node id="5181507218630412484" at="57,7,58,75" concept="3" />
+      <node id="5181507218630412485" at="59,36,60,21" concept="9" />
+      <node id="1375078825678810304" at="63,5,64,66" concept="8" />
+      <node id="1375078825678810304" at="64,66,65,53" concept="3" />
+      <node id="1375078825678810305" at="66,22,67,21" concept="9" />
+      <node id="5181507218630412410" at="69,5,70,16" concept="9" />
+      <node id="3273650261466438995" at="73,96,74,165" concept="8" />
+      <node id="4866539458460327350" at="74,165,75,148" concept="8" />
+      <node id="4866539458460452580" at="75,148,76,43" concept="0" />
+      <node id="4866539458460356981" at="76,43,77,90" concept="8" />
+      <node id="9170035598776204273" at="77,90,78,123" concept="3" />
+      <node id="3273650261466346701" at="37,165,40,5" concept="6" />
+      <node id="5181507218630412410" at="49,95,52,5" concept="6" />
+      <node id="5181507218630412484" at="54,90,57,7" concept="6" />
+      <node id="5181507218630412485" at="58,75,61,7" concept="6" />
+      <node id="1375078825678810305" at="65,53,68,7" concept="6" />
+      <node id="5181507218630412410" at="31,0,35,0" concept="7" trace="isDumbAware#()Z" />
+      <node id="5181507218630412410" at="44,0,48,0" concept="7" trace="doUpdate#(Lcom/intellij/openapi/actionSystem/AnActionEvent;Ljava/util/Map;)V" />
+      <node id="5181507218630412410" at="26,0,31,0" concept="2" trace="GoToTypeErrorRule_Action#()V" />
+      <node id="1375078825678810304" at="62,5,69,5" concept="1" />
+      <node id="5181507218630412410" at="72,0,80,0" concept="7" trace="doExecute#(Lcom/intellij/openapi/actionSystem/AnActionEvent;Ljava/util/Map;)V" />
+      <node id="5181507218630412410" at="35,0,44,0" concept="7" trace="isApplicable#(Lcom/intellij/openapi/actionSystem/AnActionEvent;Ljava/util/Map;)Z" />
+      <node id="5181507218630412484" at="52,5,62,5" concept="1" />
+      <node id="5181507218630412410" at="48,0,72,0" concept="7" trace="collectActionData#(Lcom/intellij/openapi/actionSystem/AnActionEvent;Ljava/util/Map;)Z" />
+      <scope id="5181507218630412410" at="32,32,33,16" />
+      <scope id="3273650261466346702" at="38,41,39,19" />
+      <scope id="5181507218630412410" at="45,89,46,85" />
+      <scope id="5181507218630412410" at="50,53,51,19" />
+      <scope id="5181507218630412484" at="55,67,56,31" />
+      <scope id="5181507218630412485" at="59,36,60,21" />
+      <scope id="1375078825678810305" at="66,22,67,21" />
+      <scope id="5181507218630412410" at="26,37,29,52" />
+      <scope id="5181507218630412410" at="31,0,35,0" />
+      <scope id="5181507218630412410" at="44,0,48,0">
+        <var name="_params" id="5181507218630412410" />
+        <var name="event" id="5181507218630412410" />
+      </scope>
+      <scope id="5181507218630412410" at="26,0,31,0" />
+      <scope id="1375078825678810304" at="63,5,68,7">
+        <var name="p" id="1375078825678810304" />
+      </scope>
+      <scope id="5181507218630412410" at="73,96,78,123">
+        <var name="collection" id="4866539458460327351" />
+        <var name="mostRelevantReportItem" id="3273650261466438996" />
+        <var name="ruleSourceNode" id="4866539458460356982" />
+      </scope>
+      <scope id="5181507218630412442" at="36,87,42,92">
+        <var name="brokenRules" id="4866539458460394194" />
+        <var name="mostRelevantReportItem" id="3273650261466346694" />
+      </scope>
+      <scope id="5181507218630412484" at="53,5,61,7">
+        <var name="editorComponent" id="5181507218630412484" />
+      </scope>
+      <scope id="5181507218630412410" at="72,0,80,0">
+        <var name="_params" id="5181507218630412410" />
+        <var name="event" id="5181507218630412410" />
+      </scope>
+      <scope id="5181507218630412410" at="35,0,44,0">
+        <var name="_params" id="5181507218630412410" />
+        <var name="event" id="5181507218630412410" />
+      </scope>
+      <scope id="5181507218630412410" at="49,95,70,16" />
+      <scope id="5181507218630412410" at="48,0,72,0">
+        <var name="_params" id="5181507218630412410" />
+        <var name="event" id="5181507218630412410" />
+      </scope>
+      <unit id="5181507218630412410" at="23,0,81,0" name="jetbrains.mps.lang.typesystem.devkit.pluginSolution.plugin.GoToTypeErrorRule_Action" />
+    </file>
+    <file name="PluginSolution_ApplicationPlugin.java">
+      <node id="5181507218630412410" at="27,29,28,46" concept="3" />
+    </file>
+  </root>
+  <root nodeRef="r:bf6ff1bc-5ee9-482f-981b-49fe4400ac01(jetbrains.mps.lang.typesystem.devkit.pluginSolution.plugin)/5181507218630412486">
+    <file name="GoToTypeErrorGroup_ActionGroup.java">
+      <node id="5181507218630412486" at="28,0,29,0" concept="12" trace="ID" />
+      <node id="5181507218630412486" at="29,0,30,0" concept="4" trace="myPlaces" />
+      <node id="5181507218630412486" at="31,76,32,55" concept="14" />
+      <node id="5181507218630412486" at="32,55,33,30" concept="3" />
+      <node id="5181507218630412486" at="33,30,34,25" concept="3" />
+      <node id="5181507218630412486" at="34,25,35,19" concept="3" />
+      <node id="5181507218630412486" at="37,45,38,16" concept="3" />
+      <node id="5181507218630412491" at="38,16,39,55" concept="8" />
+      <node id="5181507218630412500" at="40,23,41,75" concept="3" />
+      <node id="5181507218630412507" at="41,75,42,13" concept="9" />
+      <node id="5181507218630412511" at="43,5,44,88" concept="8" />
+      <node id="5181507218630412520" at="45,34,46,75" concept="3" />
+      <node id="5181507218630412527" at="46,75,47,13" concept="9" />
+      <node id="3273650261466314912" at="48,5,49,109" concept="8" />
+      <node id="3273650261465802763" at="50,41,51,75" concept="3" />
+      <node id="3273650261465801432" at="51,75,52,13" concept="9" />
+      <node id="3273650261465817386" at="53,5,54,226" concept="8" />
+      <node id="5181507218630412542" at="55,61,56,75" concept="3" />
+      <node id="5181507218630412549" at="56,75,57,13" concept="9" />
+      <node id="5181507218630412600" at="60,39,61,159" concept="3" />
+      <node id="5181507218630412611" at="64,79,65,239" concept="3" />
+      <node id="5181507218630412486" at="67,70,68,39" concept="3" />
+      <node id="5181507218630412486" at="71,81,72,109" concept="3" />
+      <node id="5181507218630412486" at="74,29,75,17" concept="9" />
+      <node id="5181507218630412486" at="78,44,79,16" concept="9" />
+      <node id="3273650261466594610" at="59,147,62,7" concept="6" />
+      <node id="3273650261466604542" at="63,5,66,5" concept="6" />
+      <node id="5181507218630412486" at="66,5,69,5" concept="5" />
+      <node id="5181507218630412486" at="71,0,74,0" concept="7" trace="addPlace#(Ljetbrains/mps/workbench/ActionPlace;Lorg/jetbrains/mps/util/Condition;)V" />
+      <node id="5181507218630412486" at="74,0,77,0" concept="7" trace="isStrict#()Z" />
+      <node id="5181507218630412498" at="39,55,43,5" concept="6" />
+      <node id="5181507218630412518" at="44,88,48,5" concept="6" />
+      <node id="3273650261465784684" at="49,109,53,5" concept="6" />
+      <node id="5181507218630412540" at="54,226,58,5" concept="6" />
+      <node id="5181507218630412486" at="77,0,81,0" concept="7" trace="hideIfNoVisibleChildren#()Z" />
+      <node id="5181507218630412597" at="58,5,63,5" concept="5" />
+      <node id="5181507218630412486" at="31,0,37,0" concept="2" trace="GoToTypeErrorGroup_ActionGroup#(Ljetbrains/mps/workbench/action/ApplicationPlugin;)V" />
+      <node id="5181507218630412486" at="37,0,71,0" concept="7" trace="doUpdate#(Lcom/intellij/openapi/actionSystem/AnActionEvent;)V" />
+      <scope id="3273650261466594612" at="60,39,61,159" />
+      <scope id="3273650261466604544" at="64,79,65,239" />
+      <scope id="5181507218630412486" at="67,70,68,39" />
+      <scope id="5181507218630412486" at="71,81,72,109" />
+      <scope id="5181507218630412486" at="74,29,75,17" />
+      <scope id="5181507218630412486" at="78,44,79,16" />
+      <scope id="5181507218630412499" at="40,23,42,13" />
+      <scope id="5181507218630412519" at="45,34,47,13" />
+      <scope id="3273650261465784686" at="50,41,52,13" />
+      <scope id="5181507218630412541" at="55,61,57,13" />
+      <scope id="5181507218630412598" at="59,147,62,7" />
+      <scope id="5181507218630412486" at="66,5,69,5">
+        <var name="p" id="5181507218630412486" />
+      </scope>
+      <scope id="5181507218630412486" at="71,0,74,0">
+        <var name="cond" id="5181507218630412486" />
+        <var name="place" id="5181507218630412486" />
+      </scope>
+      <scope id="5181507218630412486" at="74,0,77,0" />
+      <scope id="5181507218630412486" at="31,76,35,19" />
+      <scope id="5181507218630412486" at="77,0,81,0" />
+      <scope id="5181507218630412597" at="58,5,63,5">
+        <var name="id" id="5181507218630412606" />
+      </scope>
+      <scope id="5181507218630412486" at="31,0,37,0">
+        <var name="plugin" id="5181507218630412486" />
+      </scope>
+      <scope id="5181507218630412486" at="37,45,69,5">
+        <var name="editorComponent" id="5181507218630412512" />
+        <var name="mostRelevantReportItem" id="3273650261466314913" />
+        <var name="navigationData" id="3273650261465817387" />
+        <var name="node" id="5181507218630412492" />
+      </scope>
+      <scope id="5181507218630412486" at="37,0,71,0">
+        <var name="event" id="5181507218630412486" />
+      </scope>
+      <unit id="5181507218630412486" at="27,0,82,0" name="jetbrains.mps.lang.typesystem.devkit.pluginSolution.plugin.GoToTypeErrorGroup_ActionGroup" />
+    </file>
+    <file name="PluginSolution_ApplicationPlugin.java">
+      <node id="5181507218630412486" at="32,13,33,55" concept="3" />
+      <node id="5181507218630412487" at="37,37,38,109" concept="3" />
+    </file>
+  </root>
+  <root nodeRef="r:bf6ff1bc-5ee9-482f-981b-49fe4400ac01(jetbrains.mps.lang.typesystem.devkit.pluginSolution.plugin)/5487985028841908585">
+    <file name="PluginSolution_ApplicationPlugin.java">
+      <node id="5487985028841908585" at="34,62,35,61" concept="3" />
+      <node id="5487985028841908586" at="39,106,40,138" concept="3" />
+    </file>
+    <file name="TypesystemActions_Devkit_ActionGroup.java">
+      <node id="5487985028841908585" at="10,0,11,0" concept="12" trace="ID" />
+      <node id="5487985028841908585" at="12,82,13,50" concept="14" />
+      <node id="5487985028841908585" at="13,50,14,25" concept="3" />
+      <node id="5487985028841908585" at="14,25,15,20" concept="3" />
+      <node id="5487985028841908589" at="15,20,16,143" concept="3" />
+      <node id="6710380512701707001" at="16,143,17,145" concept="3" />
+      <node id="5487985028841908590" at="17,145,18,154" concept="3" />
+      <node id="5487985028841908585" at="12,0,20,0" concept="2" trace="TypesystemActions_Devkit_ActionGroup#(Ljetbrains/mps/workbench/action/ApplicationPlugin;)V" />
+      <scope id="5487985028841908585" at="12,82,18,154" />
+      <scope id="5487985028841908585" at="12,0,20,0">
+        <var name="plugin" id="5487985028841908585" />
+      </scope>
+      <unit id="5487985028841908585" at="9,0,21,0" name="jetbrains.mps.lang.typesystem.devkit.pluginSolution.plugin.TypesystemActions_Devkit_ActionGroup" />
+    </file>
+  </root>
+  <root nodeRef="r:bf6ff1bc-5ee9-482f-981b-49fe4400ac01(jetbrains.mps.lang.typesystem.devkit.pluginSolution.plugin)/5487985028841909059">
+    <file name="Default_KeymapChanges.java">
+      <node id="5487985028841909061" at="8,34,9,109" concept="3" />
+      <node id="5487985028841909067" at="9,109,10,126" concept="3" />
+      <node id="5487985028841909059" at="10,126,11,20" concept="10" />
+      <node id="5487985028841909063" at="11,20,12,125" concept="3" />
+      <node id="5487985028841909059" at="15,29,16,22" concept="9" />
+      <node id="5487985028841909059" at="14,0,18,0" concept="7" trace="getScheme#()Ljava/lang/String;" />
+      <node id="5487985028841909059" at="8,0,14,0" concept="2" trace="Default_KeymapChanges#()V" />
+      <scope id="5487985028841909059" at="15,29,16,22" />
+      <scope id="5487985028841909059" at="8,34,12,125" />
+      <scope id="5487985028841909059" at="14,0,18,0" />
+      <scope id="5487985028841909059" at="8,0,14,0" />
+      <unit id="5487985028841909059" at="7,0,20,0" name="jetbrains.mps.lang.typesystem.devkit.pluginSolution.plugin.Default_KeymapChanges" />
+    </file>
+    <file name="PluginSolution_ApplicationPlugin.java">
+      <node id="5487985028841909059" at="43,92,44,71" concept="3" />
+    </file>
+  </root>
+  <root nodeRef="r:bf6ff1bc-5ee9-482f-981b-49fe4400ac01(jetbrains.mps.lang.typesystem.devkit.pluginSolution.plugin)/6710380512701187015">
+    <file name="HighlightSuppressor_Action.java">
+      <node id="6710380512701187015" at="26,0,27,0" concept="12" trace="ICON" />
+      <node id="6710380512701187015" at="28,39,29,44" concept="14" />
+      <node id="6710380512701187015" at="29,44,30,35" concept="3" />
+      <node id="6710380512701187015" at="30,35,31,52" concept="3" />
+      <node id="6710380512701187015" at="34,32,35,16" concept="9" />
+      <node id="1989627224549719800" at="38,87,39,76" concept="8" />
+      <node id="6710380512701652955" at="40,120,41,19" concept="9" />
+      <node id="6710380512701661756" at="42,5,43,16" concept="9" />
+      <node id="6710380512701187015" at="46,89,47,85" concept="3" />
+      <node id="6710380512701187015" at="51,53,52,19" concept="9" />
+      <node id="6710380512701469328" at="54,5,55,90" concept="8" />
+      <node id="6710380512701469328" at="56,67,57,31" concept="3" />
+      <node id="6710380512701469329" at="59,36,60,21" concept="9" />
+      <node id="6710380512701469330" at="63,5,64,66" concept="8" />
+      <node id="6710380512701469331" at="65,22,66,21" concept="9" />
+      <node id="6710380512701187015" at="68,5,69,16" concept="9" />
+      <node id="227146524086812207" at="72,96,73,116" concept="8" />
+      <node id="227146524086812215" at="73,116,74,116" concept="8" />
+      <node id="299059313917246840" at="74,116,75,0" concept="11" />
+      <node id="6710380512701675308" at="75,0,76,76" concept="8" />
+      <node id="1989627224549729081" at="76,76,77,0" concept="11" />
+      <node id="227146524086812463" at="77,0,78,101" concept="3" />
+      <node id="1709218712959265252" at="78,101,79,55" concept="3" />
+      <node id="1989627224549707242" at="81,58,82,143" concept="8" />
+      <node id="1989627224549707254" at="83,41,84,18" concept="9" />
+      <node id="1989627224549744785" at="85,5,86,90" concept="8" />
+      <node id="1989627224549713078" at="86,90,87,122" concept="9" />
+      <node id="6710380512701629113" at="90,36,91,42" concept="9" />
+      <node id="6710380512701629113" at="92,5,93,16" concept="9" />
+      <node id="1989627224549707262" at="96,36,97,51" concept="9" />
+      <node id="1989627224549707262" at="98,5,99,16" concept="9" />
+      <node id="6710380512701503555" at="39,76,42,5" concept="6" />
+      <node id="6710380512701187015" at="50,95,53,5" concept="6" />
+      <node id="6710380512701469328" at="55,90,58,7" concept="6" />
+      <node id="6710380512701469329" at="58,7,61,7" concept="6" />
+      <node id="6710380512701469331" at="64,66,67,7" concept="6" />
+      <node id="1989627224549707252" at="82,143,85,5" concept="6" />
+      <node id="6710380512701629113" at="89,68,92,5" concept="6" />
+      <node id="1989627224549707262" at="95,99,98,5" concept="6" />
+      <node id="6710380512701187015" at="33,0,37,0" concept="7" trace="isDumbAware#()Z" />
+      <node id="6710380512701187015" at="45,0,49,0" concept="7" trace="doUpdate#(Lcom/intellij/openapi/actionSystem/AnActionEvent;Ljava/util/Map;)V" />
+      <node id="6710380512701187015" at="28,0,33,0" concept="2" trace="HighlightSuppressor_Action#()V" />
+      <node id="6710380512701469330" at="62,5,68,5" concept="1" />
+      <node id="6710380512701629113" at="89,0,95,0" concept="13" trace="check_56mpy_a0b0a#(Lorg/jetbrains/mps/openapi/model/SNode;)Lorg/jetbrains/mps/openapi/model/SModel;" />
+      <node id="1989627224549707262" at="95,0,101,0" concept="13" trace="check_56mpy_a3a0#(Lorg/jetbrains/mps/openapi/model/SNodeReference;Lorg/jetbrains/mps/openapi/module/SRepository;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="6710380512701187015" at="37,0,45,0" concept="7" trace="isApplicable#(Lcom/intellij/openapi/actionSystem/AnActionEvent;Ljava/util/Map;)Z" />
+      <node id="1989627224549705830" at="81,0,89,0" concept="7" trace="getSuppressor#(Lcom/intellij/openapi/actionSystem/AnActionEvent;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="6710380512701469328" at="53,5,62,5" concept="1" />
+      <node id="6710380512701187015" at="71,0,81,0" concept="7" trace="doExecute#(Lcom/intellij/openapi/actionSystem/AnActionEvent;Ljava/util/Map;)V" />
+      <node id="6710380512701187015" at="49,0,71,0" concept="7" trace="collectActionData#(Lcom/intellij/openapi/actionSystem/AnActionEvent;Ljava/util/Map;)Z" />
+      <scope id="6710380512701187015" at="34,32,35,16" />
+      <scope id="6710380512701503557" at="40,120,41,19" />
+      <scope id="6710380512701187015" at="46,89,47,85" />
+      <scope id="6710380512701187015" at="51,53,52,19" />
+      <scope id="6710380512701469328" at="56,67,57,31" />
+      <scope id="6710380512701469329" at="59,36,60,21" />
+      <scope id="6710380512701469331" at="65,22,66,21" />
+      <scope id="1989627224549707253" at="83,41,84,18" />
+      <scope id="6710380512701629113" at="90,36,91,42" />
+      <scope id="1989627224549707262" at="96,36,97,51" />
+      <scope id="6710380512701187015" at="28,39,31,52" />
+      <scope id="6710380512701187015" at="33,0,37,0" />
+      <scope id="6710380512701187015" at="45,0,49,0">
+        <var name="_params" id="6710380512701187015" />
+        <var name="event" id="6710380512701187015" />
+      </scope>
+      <scope id="6710380512701469330" at="63,5,67,7">
+        <var name="p" id="6710380512701469330" />
+      </scope>
+      <scope id="6710380512701629113" at="89,68,93,16" />
+      <scope id="1989627224549707262" at="95,99,99,16" />
+      <scope id="6710380512701187015" at="28,0,33,0" />
+      <scope id="6710380512701472205" at="38,87,43,16">
+        <var name="suppressor" id="1989627224549719801" />
+      </scope>
+      <scope id="1989627224549705832" at="81,58,87,122">
+        <var name="mostRelevantReportItem" id="1989627224549707243" />
+        <var name="repository" id="1989627224549744786" />
+      </scope>
+      <scope id="6710380512701629113" at="89,0,95,0">
+        <var name="checkedDotOperand" id="6710380512701629113" />
+      </scope>
+      <scope id="1989627224549707262" at="95,0,101,0">
+        <var name="checkedDotOperand" id="1989627224549707262" />
+        <var name="repository" id="1989627224549744792" />
+      </scope>
+      <scope id="6710380512701469328" at="54,5,61,7">
+        <var name="editorComponent" id="6710380512701469328" />
+      </scope>
+      <scope id="6710380512701187015" at="72,96,79,55">
+        <var name="highlightManager" id="227146524086812208" />
+        <var name="messageOwner" id="227146524086812216" />
+        <var name="suppressor" id="6710380512701675309" />
+      </scope>
+      <scope id="6710380512701187015" at="37,0,45,0">
+        <var name="_params" id="6710380512701187015" />
+        <var name="event" id="6710380512701187015" />
+      </scope>
+      <scope id="1989627224549705830" at="81,0,89,0">
+        <var name="event" id="1989627224549705830" />
+      </scope>
+      <scope id="6710380512701187015" at="71,0,81,0">
+        <var name="_params" id="6710380512701187015" />
+        <var name="event" id="6710380512701187015" />
+      </scope>
+      <scope id="6710380512701187015" at="50,95,69,16" />
+      <scope id="6710380512701187015" at="49,0,71,0">
+        <var name="_params" id="6710380512701187015" />
+        <var name="event" id="6710380512701187015" />
+      </scope>
+      <unit id="6710380512701187015" at="25,0,102,0" name="jetbrains.mps.lang.typesystem.devkit.pluginSolution.plugin.HighlightSuppressor_Action" />
+    </file>
+    <file name="PluginSolution_ApplicationPlugin.java">
+      <node id="6710380512701187015" at="28,46,29,48" concept="3" />
+    </file>
+  </root>
+  <root nodeRef="r:bf6ff1bc-5ee9-482f-981b-49fe4400ac01(jetbrains.mps.lang.typesystem.devkit.pluginSolution.plugin)/7162597690967702203">
+    <file name="PluginSolution_ApplicationPlugin.java">
+      <node id="7162597690967702203" at="16,0,17,0" concept="4" trace="myId" />
+      <node id="7162597690967702203" at="22,27,23,16" concept="9" />
+      <node id="7162597690967702203" at="26,30,27,29" concept="10" />
+      <node id="7162597690967702203" at="31,57,32,13" concept="10" />
+      <node id="7162597690967702203" at="42,48,43,92" concept="8" />
+      <node id="7162597690967702203" at="44,71,45,15" concept="9" />
+      <node id="7162597690967702203" at="18,0,20,0" concept="2" trace="PluginSolution_ApplicationPlugin#()V" />
+      <node id="7162597690967702203" at="21,0,25,0" concept="7" trace="getId#()Lcom/intellij/openapi/extensions/PluginId;" />
+      <node id="7162597690967702203" at="37,0,42,0" concept="7" trace="adjustRegularGroups#()V" />
+      <node id="7162597690967702203" at="42,0,47,0" concept="7" trace="initKeymaps#()Ljava/util/List;" />
+      <node id="7162597690967702203" at="26,0,37,0" concept="7" trace="createGroups#()V" />
+      <scope id="7162597690967702203" at="18,45,18,45" />
+      <scope id="7162597690967702203" at="22,27,23,16" />
+      <scope id="7162597690967702203" at="18,0,20,0" />
+      <scope id="7162597690967702203" at="37,37,40,138" />
+      <scope id="7162597690967702203" at="42,48,45,15">
+        <var name="res" id="7162597690967702203" />
+      </scope>
+      <scope id="7162597690967702203" at="21,0,25,0" />
+      <scope id="7162597690967702203" at="37,0,42,0" />
+      <scope id="7162597690967702203" at="42,0,47,0" />
+      <scope id="7162597690967702203" at="26,30,35,61" />
+      <scope id="7162597690967702203" at="26,0,37,0" />
+      <unit id="7162597690967702203" at="15,0,48,0" name="jetbrains.mps.lang.typesystem.devkit.pluginSolution.plugin.PluginSolution_ApplicationPlugin" />
+    </file>
+  </root>
+</debug-info>
+

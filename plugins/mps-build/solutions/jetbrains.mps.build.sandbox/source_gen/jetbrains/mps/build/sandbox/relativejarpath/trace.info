@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <root nodeRef="r:e5da3639-8955-4a71-a390-4e05ddeb2481(jetbrains.mps.build.sandbox.relativejarpath)/867429721720070735">
+    <file name="testjarpath.xml">
+      <unit id="867429721720070735" at="1,0,29,10" name="jetbrains.mps.build.sandbox.relativejarpath.testjarpath" />
+    </file>
+  </root>
+</debug-info>
+

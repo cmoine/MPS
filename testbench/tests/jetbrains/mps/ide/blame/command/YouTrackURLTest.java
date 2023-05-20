@@ -15,44 +15,21 @@
  */
 package jetbrains.mps.ide.blame.command;
 
-import jetbrains.mps.ide.blame.perform.Query;
-import jetbrains.mps.ide.blame.perform.Response;
+import jetbrains.mps.ide.blame.api.Reporter;
 import junit.framework.TestCase;
-import org.apache.commons.httpclient.HttpException;
 
 import java.io.IOException;
-import java.io.InterruptedIOException;
 
 public class YouTrackURLTest extends TestCase {
-  public void testLogin() throws IOException {
-    Command c = new Command();
-    c.setTimeouts(Poster.DEFAULT_TIMEOUT);
-    Response result = null;
-    IOException lastEx = null;
-    for (int i=1; i<=3; ++i) {
-      lastEx = null;
-      try {
-        result = c.login(Query.ANONYMOUS);
-        if (!result.isSuccess()) {
-          try {
-            Thread.sleep(3000*i);
-          }
-          catch (InterruptedException ignore) {}
-        }
-        else {
-          break;
-        }
-      }
-      catch (HttpException ex) {
-        lastEx = ex;
-      }
-      catch (InterruptedIOException ex) {
-        lastEx = ex;
-      }
+  public void testLogin()  {
+    // No login to youtrack anymore
+    // Just test that token for anonymous reports (mpsexception) still works
+    Reporter reporter = new Reporter(null);
+    // execute some action, it will throw exception if not success
+    try {
+      reporter.checkAffectedVersion("");
+    } catch (IOException e) {
+      assertTrue("Can't connect to YouTrack as anonymous\n" + e.getMessage(), false);
     }
-    if (lastEx != null) {
-      throw lastEx;
-    }
-    assertTrue("Can't login to YouTrack as anonymous", result.isSuccess());
   }
 }

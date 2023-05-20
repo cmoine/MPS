@@ -6,34 +6,12 @@ import jetbrains.mps.nodeEditor.DefaultNodeEditor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Constant;
-import jetbrains.mps.openapi.editor.style.Style;
-import jetbrains.mps.editor.runtime.style.StyleImpl;
-import jetbrains.mps.editor.runtime.cells.BigCellUtil;
 
 public class CellModel_ContextAssistant_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createConstant_9t7ajm_a(editorContext, node);
+    return new CellModel_ContextAssistant_EditorBuilder_a(editorContext, node).createCell();
   }
   public EditorCell createInspectedCell(EditorContext editorContext, SNode node) {
-    return this.createComponent_9t7ajm_a(editorContext, node);
-  }
-  private EditorCell createConstant_9t7ajm_a(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, "");
-    editorCell.setCellId("Constant_9t7ajm_a");
-    editorCell.setBig(true);
-    Style style = new StyleImpl();
-    Styles_StyleSheet.apply_rootCellModelStyle(style, editorCell);
-    editorCell.getStyle().putAll(style);
-    editorCell.setDefaultText("*context assistant menu placeholder*");
-    return editorCell;
-  }
-  private EditorCell createComponent_9t7ajm_a(EditorContext editorContext, SNode node) {
-    EditorCell editorCell = editorContext.getCellFactory().createEditorComponentCell(node, "jetbrains.mps.lang.editor.editor._CellModel_Common");
-    EditorCell bigCell = BigCellUtil.findBigCell(editorCell, node);
-    if (bigCell != null) {
-      bigCell.setBig(true);
-    }
-    return editorCell;
+    return new CellModel_ContextAssistant_InspectorBuilder_a(editorContext, node).createCell();
   }
 }

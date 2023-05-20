@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,28 +16,32 @@
 package jetbrains.mps.ide.ui.smodel;
 
 import jetbrains.mps.smodel.ModelsEventsCollector;
-import org.jetbrains.mps.openapi.model.SModel;
 import jetbrains.mps.smodel.event.SModelEvent;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.openapi.model.SModel;
+import org.jetbrains.mps.openapi.module.SRepository;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 /**
+ * @deprecated Dispatches events using legacy {@link SModelEvent} classes and there's only 1 use (TreeStructureUpdate) which doesn't justify its existence
  * User: Alexander Shatalin
  * Date: 16.04.2010
  */
+@Deprecated(since = "2018.3", forRemoval = true)
 public class SModelEventsDispatcher {
-  private static SModelEventsDispatcher myInstance;
-
+  private final SRepository myRepo;
   private ModelsEventsCollector myModelsEventsCollector;
-  private final Map<SModel, Set<SModelEventsListener>> myDescriptorsToListenersMap = new HashMap<SModel, Set<SModelEventsListener>>();
+  private final Map<SModel, Set<SModelEventsListener>> myDescriptorsToListenersMap = new HashMap<>();
 
-  public static SModelEventsDispatcher getInstance() {
-    if (myInstance == null) {
-      myInstance = new SModelEventsDispatcher();
-    }
-    return myInstance;
+  public SModelEventsDispatcher(SRepository repo) {
+    myRepo = repo;
   }
 
   public void registerListener(SModelEventsListener l) {
@@ -79,7 +83,7 @@ public class SModelEventsDispatcher {
 
   private ModelsEventsCollector getModelsEventsCollector() {
     if (myModelsEventsCollector == null) {
-      myModelsEventsCollector = new MyEventsCollector();
+      myModelsEventsCollector = new MyEventsCollector(myRepo);
     }
     return myModelsEventsCollector;
   }
@@ -95,9 +99,13 @@ public class SModelEventsDispatcher {
 
   private class MyEventsCollector extends ModelsEventsCollector {
 
+    /*package-local*/ MyEventsCollector(SRepository repo) {
+      super(repo.getModelAccess());
+    }
+
     @Override
     protected void eventsHappened(List<SModelEvent> events) {
-      Map<SModel, List<SModelEvent>> descriptorsToEventsMap = new HashMap<SModel, List<SModelEvent>>();
+      Map<SModel, List<SModelEvent>> descriptorsToEventsMap = new HashMap<>();
       for (SModelEvent event : events) {
         SModel descriptor = event.getModelDescriptor();
         List<SModelEvent> collectedEvents = descriptorsToEventsMap.get(descriptor);

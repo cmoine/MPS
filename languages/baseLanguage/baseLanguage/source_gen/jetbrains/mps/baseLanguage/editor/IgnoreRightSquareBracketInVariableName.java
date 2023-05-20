@@ -9,14 +9,15 @@ import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import java.util.List;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class IgnoreRightSquareBracketInVariableName extends KeyMapImpl {
   public IgnoreRightSquareBracketInVariableName() {
     this.setApplicableToEveryModel(false);
     KeyMapAction action;
-    action = new IgnoreRightSquareBracketInVariableName.IgnoreRightSquareBracketInVariableName_Action0();
+    action = new IgnoreRightSquareBracketInVariableName_Action0();
     this.putAction("none", "]", action);
   }
   public static class IgnoreRightSquareBracketInVariableName_Action0 extends KeyMapActionImpl {
@@ -35,7 +36,7 @@ public class IgnoreRightSquareBracketInVariableName extends KeyMapImpl {
       if (contextNode == null) {
         return false;
       }
-      if (!(SNodeOperations.isInstanceOf(contextNode, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c37a7f6eL, "jetbrains.mps.baseLanguage.structure.VariableDeclaration")))) {
+      if (!(SNodeOperations.isInstanceOf(contextNode, CONCEPTS.VariableDeclaration$Y0))) {
         return false;
       }
       return true;
@@ -49,5 +50,9 @@ public class IgnoreRightSquareBracketInVariableName extends KeyMapImpl {
     public String getKeyStroke() {
       return "none ]";
     }
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept VariableDeclaration$Y0 = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c37a7f6eL, "jetbrains.mps.baseLanguage.structure.VariableDeclaration");
   }
 }

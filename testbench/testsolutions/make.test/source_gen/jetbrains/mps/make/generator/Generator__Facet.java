@@ -21,7 +21,8 @@ import jetbrains.mps.make.script.IConfig;
 import jetbrains.mps.baseLanguage.tuples.runtime.Tuples;
 import jetbrains.mps.make.script.IPropertiesPool;
 import jetbrains.mps.baseLanguage.tuples.runtime.MultiTuple;
-import junit.framework.Assert;
+import java.util.stream.IntStream;
+import org.junit.Assert;
 import java.util.Map;
 import jetbrains.mps.internal.collections.runtime.MapSequence;
 
@@ -29,8 +30,8 @@ public class Generator__Facet extends IFacet.Stub {
   private List<ITarget> targets = ListSequence.fromList(new ArrayList<ITarget>());
   private IFacet.Name name = new IFacet.Name("jetbrains.mps.make.tests.Generator_");
   public Generator__Facet() {
-    ListSequence.fromList(targets).addElement(new Generator__Facet.Target_Configure());
-    ListSequence.fromList(targets).addElement(new Generator__Facet.Target_Generate());
+    ListSequence.fromList(targets).addElement(new Target_Configure());
+    ListSequence.fromList(targets).addElement(new Target_Generate());
   }
   public Iterable<ITarget> targets() {
     return targets;
@@ -48,7 +49,7 @@ public class Generator__Facet extends IFacet.Stub {
     return this.name;
   }
   public IPropertiesPersistence propertiesPersistence() {
-    return new Generator__Facet.TargetProperties();
+    return new TargetProperties();
   }
   public static class Target_Configure implements ITargetEx {
     private static final ITarget.Name name = new ITarget.Name("jetbrains.mps.make.tests.Generator_.Configure");
@@ -64,6 +65,7 @@ public class Generator__Facet extends IFacet.Stub {
             case 0:
               vars(pa.global()).value("uninitialized");
             default:
+              progressMonitor.done();
               return new IResult.SUCCESS(_output_j0fmyu_a0a);
           }
         }
@@ -113,8 +115,8 @@ public class Generator__Facet extends IFacet.Stub {
       }
       return t;
     }
-    public static Generator__Facet.Target_Configure.Variables vars(IPropertiesPool ppool) {
-      return ppool.properties(name, Generator__Facet.Target_Configure.Variables.class);
+    public static Variables vars(IPropertiesPool ppool) {
+      return ppool.properties(name, Variables.class);
     }
     public static class Variables extends MultiTuple._1<String> {
       public Variables() {
@@ -141,19 +143,22 @@ public class Generator__Facet extends IFacet.Stub {
         public IResult execute(final Iterable<IResource> rawInput, final IJobMonitor monitor, final IPropertiesAccessor pa, @NotNull final ProgressMonitor progressMonitor) {
           Iterable<IResource> _output_j0fmyu_a0b = null;
           final Iterable<IResource> input = (Iterable) (Iterable) rawInput;
+          progressMonitor.start("", IntStream.of(1000).sum());
           switch (0) {
             case 0:
-              Assert.assertEquals("uninitialized", Generator__Facet.Target_Configure.vars(pa.global()).value());
-              monitor.currentProgress().beginWork("GENERATE", 100, monitor.currentProgress().workLeft());
-              Generator__Facet.Target_Configure.vars(pa.global()).value("VALUE");
+              Assert.assertEquals("uninitialized", Target_Configure.vars(pa.global()).value());
+              final ProgressMonitor subProgress_b0a0b = progressMonitor.subTask(1000);
+              subProgress_b0a0b.start("GENERATE", 100);
+              Target_Configure.vars(pa.global()).value("VALUE");
               for (IResource resource : input) {
                 _output_j0fmyu_a0b = Sequence.fromIterable(_output_j0fmyu_a0b).concat(Sequence.fromIterable(Sequence.<IResource>singleton(resource)));
               }
-              monitor.currentProgress().advanceWork("GENERATE", 50);
-              monitor.currentProgress().finishWork("GENERATE");
+              subProgress_b0a0b.advance(50);
+              subProgress_b0a0b.done();
               _output_j0fmyu_a0b = Sequence.fromIterable(_output_j0fmyu_a0b).concat(Sequence.fromIterable(input));
               return new IResult.SUCCESS(_output_j0fmyu_a0b);
             default:
+              progressMonitor.done();
               return new IResult.SUCCESS(_output_j0fmyu_a0b);
           }
         }
@@ -208,7 +213,7 @@ public class Generator__Facet extends IFacet.Stub {
       {
         ITarget.Name name = new ITarget.Name("jetbrains.mps.make.tests.Generator_.Configure");
         if (properties.hasProperties(name)) {
-          Generator__Facet.Target_Configure.Variables props = properties.properties(name, Generator__Facet.Target_Configure.Variables.class);
+          Target_Configure.Variables props = properties.properties(name, Target_Configure.Variables.class);
           MapSequence.fromMap(store).put("jetbrains.mps.make.tests.Generator_.Configure.value", String.valueOf(props.value()));
         }
       }
@@ -217,7 +222,7 @@ public class Generator__Facet extends IFacet.Stub {
       try {
         {
           ITarget.Name name = new ITarget.Name("jetbrains.mps.make.tests.Generator_.Configure");
-          Generator__Facet.Target_Configure.Variables props = properties.properties(name, Generator__Facet.Target_Configure.Variables.class);
+          Target_Configure.Variables props = properties.properties(name, Target_Configure.Variables.class);
           if (MapSequence.fromMap(store).containsKey("jetbrains.mps.make.tests.Generator_.Configure.value")) {
             props.value(String.valueOf(MapSequence.fromMap(store).get("jetbrains.mps.make.tests.Generator_.Configure.value")));
           }

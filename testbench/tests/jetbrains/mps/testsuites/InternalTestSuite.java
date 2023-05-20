@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,19 +15,17 @@
  */
 package jetbrains.mps.testsuites;
 
-import jetbrains.mps.tool.environment.Environment;
+import jetbrains.mps.testbench.junit.runners.PushEnvironmentRunnerBuilder;
 import jetbrains.mps.tool.environment.EnvironmentConfig;
 import jetbrains.mps.tool.environment.IdeaEnvironment;
+import org.junit.AfterClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.RunnerBuilder;
 
 /**
- * These are the tests which DO require the idea platform
- *
- * NB: the test which prints errors to output (apache Logger#error) is considered failed.
- * Further the level will be lowered so that any warning will fail the test.
+ * These are the tests which DO require the idea platform AND WE DON'T WANT TO EXPOSE, SEE MPS-21871
  */
 @RunWith(InternalTestSuite.class)
 @Suite.SuiteClasses({
@@ -35,9 +33,20 @@ import org.junit.runners.model.RunnerBuilder;
 })
 public class InternalTestSuite extends OutputWatchingTestSuite {
   // creating the platform environment for the first time
-  public static final Environment ourEnvironment = IdeaEnvironment.getOrCreate(EnvironmentConfig.defaultConfig().withVcsPlugin().withBuildPlugin());
+  private static IdeaEnvironment ourEnvironment;
+
+  static {
+    ourEnvironment = new IdeaEnvironment(EnvironmentConfig.defaultConfig().withVcsPlugin().withBuildPlugin().withTestModeOn());
+    ourEnvironment.init();
+  }
 
   public InternalTestSuite(Class<?> aClass, RunnerBuilder builder) throws InitializationError {
-    super(aClass, builder);
+    super(aClass, new PushEnvironmentRunnerBuilder(ourEnvironment, builder));
+  }
+
+  @AfterClass
+  public static void tearDown() {
+    ourEnvironment.dispose();
+    ourEnvironment = null;
   }
 }

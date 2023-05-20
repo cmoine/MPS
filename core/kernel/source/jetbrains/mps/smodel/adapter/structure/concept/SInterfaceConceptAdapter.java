@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,14 +19,13 @@ import jetbrains.mps.smodel.adapter.ids.SConceptId;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.smodel.runtime.ConceptDescriptor;
-import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.language.SInterfaceConcept;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @see SAbstractConceptAdapter
@@ -36,12 +35,20 @@ public abstract class SInterfaceConceptAdapter extends SAbstractConceptAdapter i
     super(fqName);
   }
 
+  @Nullable
+  @Override
+  public SConcept getSuperConcept() {
+    return null;
+  }
+
   @Override
   public List<SInterfaceConcept> getSuperInterfaces() {
     ConceptDescriptor d = getConceptDescriptor();
-    if (d == null) return Collections.emptyList();
+    if (d == null) {
+      return Collections.emptyList();
+    }
 
-    List<SInterfaceConcept> res = new ArrayList<SInterfaceConcept>();
+    List<SInterfaceConcept> res = new ArrayList<>();
     for (SConceptId id : d.getParentsIds()) {
       res.add(MetaAdapterFactory.getInterfaceConcept(id, ConceptRegistry.getInstance().getConceptDescriptor(id).getConceptFqName()));
     }

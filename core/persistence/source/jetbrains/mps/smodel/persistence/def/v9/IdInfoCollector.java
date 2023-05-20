@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,12 @@
  */
 package jetbrains.mps.smodel.persistence.def.v9;
 
+import jetbrains.mps.RuntimeFlags;
 import jetbrains.mps.persistence.MetaModelInfoProvider;
 import jetbrains.mps.persistence.registry.ConceptInfo;
 import jetbrains.mps.persistence.registry.IdInfoRegistry;
 import jetbrains.mps.smodel.adapter.ids.MetaIdHelper;
+import jetbrains.mps.smodel.adapter.ids.SConceptFeatureId;
 import jetbrains.mps.smodel.adapter.ids.SConceptId;
 import jetbrains.mps.smodel.adapter.ids.SContainmentLinkId;
 import jetbrains.mps.smodel.adapter.ids.SPropertyId;
@@ -27,7 +29,8 @@ import jetbrains.mps.smodel.runtime.ConceptKind;
 import jetbrains.mps.smodel.runtime.StaticScope;
 import jetbrains.mps.util.NameUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import org.jetbrains.mps.openapi.language.SConceptFeature;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
@@ -78,22 +81,16 @@ public class IdInfoCollector {
 
 
   private void fillConcept(SNode n) {
-    final SConcept concept = n.getConcept();
-    SConceptId conceptId = MetaIdHelper.getConcept(concept);
-
-    assert conceptId != null : String.format("Can't get identity of concept %s of node %s", concept, n.getReference());
-
-    registerConcept(conceptId);
+    registerConcept(n.getConcept());
   }
 
   private void fillProperties(SNode n) {
     for (SProperty prop : n.getProperties()) {
       SPropertyId propId = MetaIdHelper.getProperty(prop);
-      assert propId != null : String.format("Can't get identity of property %s of node %s", prop, n.getReference());
-      SConceptId conceptId = propId.getConceptId();
-      final ConceptInfo conceptInfo = registerConcept(conceptId);
+      final ConceptInfo conceptInfo = registerConcept(prop, propId);
       if (!conceptInfo.knows(propId)) {
-        conceptInfo.addProperty(propId, myMetaInfoProvider.getPropertyName(propId));
+        final String propertyName = myMetaInfoProvider.getPropertyName(propId);
+        conceptInfo.addProperty(propId, propertyName == null || propertyName.isEmpty() ? prop.getName() : propertyName);
       }
     }
   }
@@ -101,11 +98,10 @@ public class IdInfoCollector {
     for (SReference ref : n.getReferences()) {
       final SReferenceLink l = ref.getLink();
       SReferenceLinkId linkId = MetaIdHelper.getAssociation(l);
-      assert linkId != null : String.format("Can't get identity of association %s of node %s", l, n.getReference());
-      SConceptId conceptId = linkId.getConceptId();
-      final ConceptInfo conceptInfo = registerConcept(conceptId);
+      final ConceptInfo conceptInfo = registerConcept(l, linkId);
       if (!conceptInfo.knows(linkId)) {
-        conceptInfo.addLink(linkId, myMetaInfoProvider.getAssociationName(linkId));
+        final String name = myMetaInfoProvider.getAssociationName(linkId);
+        conceptInfo.addLink(linkId, name == null || name.isEmpty() ? l.getName() : name);
       }
     }
   }
@@ -114,11 +110,10 @@ public class IdInfoCollector {
   private void fillAggregation(SNode n) {
     final SContainmentLink l = n.getContainmentLink();
     SContainmentLinkId linkId = MetaIdHelper.getAggregation(l);
-    assert linkId != null : String.format("Can't get identity of aggregation %s of node %s", l, n.getReference());
-    SConceptId conceptId = linkId.getConceptId();
-    final ConceptInfo conceptInfo = registerConcept(conceptId);
+    final ConceptInfo conceptInfo = registerConcept(l, linkId);
     if (!conceptInfo.knows(linkId)) {
-      conceptInfo.addLink(linkId, myMetaInfoProvider.getAggregationName(linkId), myMetaInfoProvider.isUnordered(linkId));
+      final String name = myMetaInfoProvider.getAggregationName(linkId);
+      conceptInfo.addLink(linkId, name == null || name.isEmpty() ? l.getName() : name, myMetaInfoProvider.isUnordered(linkId));
     }
   }
 
@@ -142,12 +137,56 @@ public class IdInfoCollector {
     }
     String conceptName = myMetaInfoProvider.getConceptName(concept);
     ConceptInfo ci = myRegistry.registerConcept(concept, conceptName);
+    fillFromMMMIP(ci, concept);
+    return ci;
+  }
+
+  private void fillFromMMMIP(ConceptInfo ci, SConceptId concept) {
     final StaticScope scope = myMetaInfoProvider.getScope(concept);
     final ConceptKind kind = myMetaInfoProvider.getKind(concept);
     ci.setImplementationKind(scope, kind);
     if (kind == ConceptKind.IMPLEMENTATION_WITH_STUB) {
       ci.setStubCounterpart(myMetaInfoProvider.getStubConcept(concept));
     }
+  }
+
+  private ConceptInfo registerConcept(SAbstractConcept c) {
+    final SConceptId conceptId = MetaIdHelper.getConcept(c);
+    if (!RuntimeFlags.isMergeDriverMode() && (c.isValid() || MetaIdHelper.unrecognized(c))) {
+      return registerConcept(conceptId);
+    }
+    if (!myRegistry.knows(conceptId.getLanguageId())) {
+      myRegistry.registerLanguage(conceptId.getLanguageId(), c.getLanguage().getQualifiedName());
+    }
+    String conceptName = myMetaInfoProvider.getConceptName(conceptId);
+    ConceptInfo ci = myRegistry.registerConcept(conceptId, conceptName == null || conceptName.isEmpty() ? c.getQualifiedName() : conceptName);
+    // XXX scope, kind, stub - we don't keep this in SAbstractConcept!!
+    //     however, it's all the same for a concept with isValid() == false, there's no place to extract this data from either
+    //     therefore, I resort here to the same code as in a general case
+    fillFromMMMIP(ci, conceptId);
     return ci;
+  }
+
+  // XXX would be great to have SConceptFeatureWithId interface
+  private ConceptInfo registerConcept(SConceptFeature cf, SConceptFeatureId cfId) {
+    if (myRegistry.knows(cfId.getConceptId())) {
+      // if we already know the concept, don't try to get into getOwner(). In a persistence-only scenario, w/o languages available,
+      // (e.g. copyModels task or cmd-line merge) we may face proper SReferenceAdapterById, e.g. the one hard-coded in
+      // SNodeUtil.ref_SNodeType_concept (or elsewhere in the Java code). Attempt to get its owner results in IllegalConceptDescriptor warning
+      // Here we cover scenarios when the concept of such reference is already known (which is the case with SNodeType), however, it's possible
+      // to face a SConceptFeature here with concept we didn't encounter yet, and then we'll face ICD warning again.
+      // FIXME I consider this fix sufficient for MPS-35421 in 2022.3 timeframe, but need to refactor this code in the future
+      return myRegistry.get(cfId.getConceptId());
+    }
+    final SAbstractConcept c = cf.getOwner();
+    if (MetaIdHelper.unrecognized(c)) {
+      // we can not get proper information about owner of the concept feature (irrespective whether there's ConceptDescriptor runtime counterpart or not),
+      // resort to using conceptId value recorded in the concept feature itself
+      return registerConcept(cfId.getConceptId());
+    }
+    // either there's ConceptDescriptor for the feature (isValid() == true) or there's a SAbstractConcept adapter instance that knows its pieces
+    // (e.g. SPropertyAdapter3 case). IOW unrecognized() == false, i.e. no runtime descriptor but it's a feature/concept
+    // we have constructed earlier from some persistence data (or by other means that preserves feature owner information)
+    return registerConcept(c);
   }
 }

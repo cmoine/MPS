@@ -4,397 +4,1053 @@ package jetbrains.mps.lang.plugin.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
+import jetbrains.mps.lang.plugin.plugin.URLFunction_HelpCenterDocUrl;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_AbstractToolKeystroke = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AbstractToolShortcut = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ActionAccessOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ActionConstructionParameterDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ActionConstructorParameterReferenceOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ActionDataParameterDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ActionDataParameterReferenceOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ActionDeclaration = new ConceptPresentationBuilder().helpUrl("http://confluence.jetbrains.com/display/MPSD34/Plugin#Plugin-actionsandactiongroups").icon(IconContainer.RESOURCE_a0a0h).create();
-  private final ConceptPresentation props_ActionGroupDeclaration = new ConceptPresentationBuilder().icon(IconContainer.RESOURCE_a0a0i).create();
-  private final ConceptPresentation props_ActionGroupMember = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ActionGroupRef = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ActionInstance = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ActionParameter = new ConceptPresentationBuilder().deprecated(MetaAdapterFactory.getProperty(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11b737a6b7cL, 0x11c71345faaL, "isOptional")).create();
-  private final ConceptPresentation props_ActionParameterCondition = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ActionParameterDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ActionParameterReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ActionParameterReferenceOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ActionPlaceSpecification = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ActionReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ActionType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AddElementStatement = new ConceptPresentationBuilder().deprecated().create();
-  private final ConceptPresentation props_AddKeystrokeStatement = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AddStatement = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AddTabOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BaseNodeBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BaseProjectOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BaseToolDeclaration = new ConceptPresentationBuilder().deprecated(MetaAdapterFactory.getProperty(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x5adc7622e710bddcL, 0x5adc7622e710cedcL, "caption"), MetaAdapterFactory.getProperty(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x5adc7622e710bddcL, 0x5adc7622e710cf2dL, "number"), MetaAdapterFactory.getProperty(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x5adc7622e710bddcL, 0x22ace24ea9f7487cL, "position"), MetaAdapterFactory.getProperty(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x5adc7622e710bddcL, 0x5adc7622e710cf6eL, "icon")).icon(IconContainer.RESOURCE_a0a0ab).create();
-  private final ConceptPresentation props_BuildGroupBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ButtonCreator = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CloseTabOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptCondition = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptFunctionParameter_AnActionEvent = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptFunctionParameter_Concept = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptFunctionParameter_CreatorType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptFunctionParameter_IModule = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptFunctionParameter_MPSProject = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptFunctionParameter_Model = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptFunctionParameter_OperationContext = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptFunctionParameter_PreferencePage_component = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptFunctionParameter_Project = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptFunctionParameter_SConceptClass = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptFunctionParameter_node = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptsBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CreateBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CreateNodeAspectBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CreateTabBlock = new ConceptPresentationBuilder().deprecated(MetaAdapterFactory.getProperty(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x16c373ab7fdbb667L, 0x16c373ab7fdbb66eL, "commandOnCreate")).create();
-  private final ConceptPresentation props_CustomCondition = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CustomToolShortcut = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DisposeBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DoUpdateBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_EditableModel = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_EditorTab = new ConceptPresentationBuilder().deprecated(MetaAdapterFactory.getProperty(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x33f4c34299ff0d2fL, 0x33f4c34299ff0d37L, "shortcutChar"), MetaAdapterFactory.getProperty(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x33f4c34299ff0d2fL, 0x71dc7d539b7857cfL, "commandOnCreate"), MetaAdapterFactory.getReferenceLink(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x33f4c34299ff0d2fL, 0x33f4c34299ff0d30L, "baseNodeConcept")).icon(IconContainer.RESOURCE_a0a0zb).create();
-  private final ConceptPresentation props_EditorTabReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ElementListContents = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_EnumerateChildrenFunction = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_EverywhereActionPlace = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ExecuteBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GetComponentBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GetGroupOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GetNodeBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GetNodesBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GetSelectedTabOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GroupAccessOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GroupAnchor = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GroupContents = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GroupType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IdeaActionsDescriptor = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IdeaConfigurationXml = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IdeaInitializerDescriptor = new ConceptPresentationBuilder().icon(IconContainer.RESOURCE_a0a0qc).create();
-  private final ConceptPresentation props_IdeaPluginDependency = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InitBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InterfaceExtentionPoint = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InterfaceGroup = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IsApplicableBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IsApplicableTabBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_KeyMapKeystroke = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_KeyStrokeType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_KeymapChangesDeclaration = new ConceptPresentationBuilder().icon(IconContainer.RESOURCE_a0a0zc).create();
-  private final ConceptPresentation props_KeymapRef = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ListenBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MPSPluginDependency = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ModificationStatement = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_NodesBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_NonDumbAwareActions = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_NumberToolShortcut = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_OldConceptsBlock = new ConceptPresentationBuilder().deprecated().create();
-  private final ConceptPresentation props_OldCreateBlock = new ConceptPresentationBuilder().deprecated().create();
-  private final ConceptPresentation props_OnAfterReadBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_OnBeforeWriteBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Order = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_OrderConstraints = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_OrderReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ParameterCondition_ConceptFunctionParameter = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ParameterizedShortcutChange = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PersistentPropertyDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PersistentPropertyReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PinTabOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PluginDependency = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PopupCreator = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PreferencePage = new ConceptPresentationBuilder().deprecated(MetaAdapterFactory.getProperty(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119e269a79fL, 0x119e28e412bL, "iconPath"), MetaAdapterFactory.getProperty(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119e269a79fL, 0x159c8001ffadea11L, "helpTopic")).create();
-  private final ConceptPresentation props_PreferencePageCommitBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PreferencePageIsModifiedBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PreferencePageResetBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PreferencesComponentDeclaration = new ConceptPresentationBuilder().icon(IconContainer.RESOURCE_a0a0zd).create();
-  private final ConceptPresentation props_PreferencesComponentType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RequiredCondition = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Separator = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ShortcutChange = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SimpleActionPlace = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SimpleShortcutChange = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SmartDisposeClosureParameterDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TabbedToolDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TabbedToolOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ToStringConceptFunction = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ToStringParameter = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ToolActionPlace = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ToolDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ToolInstanceExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ToolKeystroke = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ToolTab = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ToolType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ToolbarCreator = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_UnpinTabOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_UpdateBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_UpdateGroupBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_UpdateGroupFunction = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_AbstractToolKeystroke;
+  private ConceptPresentation props_AbstractToolShortcut;
+  private ConceptPresentation props_ActionAccessOperation;
+  private ConceptPresentation props_ActionConstructionParameterDeclaration;
+  private ConceptPresentation props_ActionConstructorParameterReferenceOperation;
+  private ConceptPresentation props_ActionDataParameterDeclaration;
+  private ConceptPresentation props_ActionDataParameterReferenceOperation;
+  private ConceptPresentation props_ActionDeclaration;
+  private ConceptPresentation props_ActionGroupDeclaration;
+  private ConceptPresentation props_ActionGroupMember;
+  private ConceptPresentation props_ActionGroupRef;
+  private ConceptPresentation props_ActionInstance;
+  private ConceptPresentation props_ActionParameter;
+  private ConceptPresentation props_ActionParameterCondition;
+  private ConceptPresentation props_ActionParameterDeclaration;
+  private ConceptPresentation props_ActionParameterReference;
+  private ConceptPresentation props_ActionParameterReferenceOperation;
+  private ConceptPresentation props_ActionPlaceSpecification;
+  private ConceptPresentation props_ActionReference;
+  private ConceptPresentation props_ActionType;
+  private ConceptPresentation props_AddElementStatement;
+  private ConceptPresentation props_AddKeystrokeStatement;
+  private ConceptPresentation props_AddStatement;
+  private ConceptPresentation props_AddTabOperation;
+  private ConceptPresentation props_BaseNodeBlock;
+  private ConceptPresentation props_BaseProjectOperation;
+  private ConceptPresentation props_BaseToolDeclaration;
+  private ConceptPresentation props_BuildGroupBlock;
+  private ConceptPresentation props_ButtonCreator;
+  private ConceptPresentation props_CloseTabOperation;
+  private ConceptPresentation props_ConceptCondition;
+  private ConceptPresentation props_ConceptFunctionParameter_AnActionEvent;
+  private ConceptPresentation props_ConceptFunctionParameter_CreatorType;
+  private ConceptPresentation props_ConceptFunctionParameter_IModule;
+  private ConceptPresentation props_ConceptFunctionParameter_MPSProject;
+  private ConceptPresentation props_ConceptFunctionParameter_Model;
+  private ConceptPresentation props_ConceptFunctionParameter_NodeReference;
+  private ConceptPresentation props_ConceptFunctionParameter_OperationContext;
+  private ConceptPresentation props_ConceptFunctionParameter_PreferencePage_component;
+  private ConceptPresentation props_ConceptFunctionParameter_Project;
+  private ConceptPresentation props_ConceptFunctionParameter_SConceptClass;
+  private ConceptPresentation props_ConceptFunctionParameter_node;
+  private ConceptPresentation props_ConceptsBlock;
+  private ConceptPresentation props_CreateBlock;
+  private ConceptPresentation props_CreateNodeAspectBlock;
+  private ConceptPresentation props_CreateTabBlock;
+  private ConceptPresentation props_CustomCondition;
+  private ConceptPresentation props_CustomToolShortcut;
+  private ConceptPresentation props_DisposeBlock;
+  private ConceptPresentation props_DoUpdateBlock;
+  private ConceptPresentation props_EditableModel;
+  private ConceptPresentation props_EditorTab;
+  private ConceptPresentation props_EditorTabReference;
+  private ConceptPresentation props_ElementListContents;
+  private ConceptPresentation props_EnumerateChildrenFunction;
+  private ConceptPresentation props_EverywhereActionPlace;
+  private ConceptPresentation props_ExecuteBlock;
+  private ConceptPresentation props_GetComponentBlock;
+  private ConceptPresentation props_GetGroupOperation;
+  private ConceptPresentation props_GetNodeBlock;
+  private ConceptPresentation props_GetNodesBlock;
+  private ConceptPresentation props_GetSelectedTabOperation;
+  private ConceptPresentation props_GroupAccessOperation;
+  private ConceptPresentation props_GroupAnchor;
+  private ConceptPresentation props_GroupContents;
+  private ConceptPresentation props_GroupType;
+  private ConceptPresentation props_IdeaActionsDescriptor;
+  private ConceptPresentation props_IdeaConfigurationXml;
+  private ConceptPresentation props_IdeaInitializerDescriptor;
+  private ConceptPresentation props_IdeaPluginDependency;
+  private ConceptPresentation props_InitBlock;
+  private ConceptPresentation props_InterfaceExtentionPoint;
+  private ConceptPresentation props_InterfaceGroup;
+  private ConceptPresentation props_IsApplicableBlock;
+  private ConceptPresentation props_IsApplicableTabBlock;
+  private ConceptPresentation props_IsInstanceCondition;
+  private ConceptPresentation props_KeyMapKeystroke;
+  private ConceptPresentation props_KeyStrokeType;
+  private ConceptPresentation props_KeymapChangesDeclaration;
+  private ConceptPresentation props_KeymapRef;
+  private ConceptPresentation props_ListenBlock;
+  private ConceptPresentation props_MPSPluginDependency;
+  private ConceptPresentation props_ModificationStatement;
+  private ConceptPresentation props_NodesBlock;
+  private ConceptPresentation props_NonDumbAwareActions;
+  private ConceptPresentation props_NumberToolShortcut;
+  private ConceptPresentation props_OnAfterReadBlock;
+  private ConceptPresentation props_OnBeforeWriteBlock;
+  private ConceptPresentation props_Order;
+  private ConceptPresentation props_OrderConstraints;
+  private ConceptPresentation props_OrderReference;
+  private ConceptPresentation props_ParameterCondition_ConceptFunctionParameter;
+  private ConceptPresentation props_ParameterizedShortcutChange;
+  private ConceptPresentation props_PersistentPropertyDeclaration;
+  private ConceptPresentation props_PersistentPropertyReference;
+  private ConceptPresentation props_PinTabOperation;
+  private ConceptPresentation props_PluginDependency;
+  private ConceptPresentation props_PopupCreator;
+  private ConceptPresentation props_PreferencePage;
+  private ConceptPresentation props_PreferencePageCommitBlock;
+  private ConceptPresentation props_PreferencePageIsModifiedBlock;
+  private ConceptPresentation props_PreferencePageResetBlock;
+  private ConceptPresentation props_PreferencesComponentDeclaration;
+  private ConceptPresentation props_PreferencesComponentType;
+  private ConceptPresentation props_RequiredCondition;
+  private ConceptPresentation props_Separator;
+  private ConceptPresentation props_ShortcutChange;
+  private ConceptPresentation props_SimpleActionPlace;
+  private ConceptPresentation props_SimpleShortcutChange;
+  private ConceptPresentation props_SmartDisposeClosureParameterDeclaration;
+  private ConceptPresentation props_TabbedToolDeclaration;
+  private ConceptPresentation props_TabbedToolOperation;
+  private ConceptPresentation props_ToStringConceptFunction;
+  private ConceptPresentation props_ToStringParameter;
+  private ConceptPresentation props_ToolActionPlace;
+  private ConceptPresentation props_ToolDeclaration;
+  private ConceptPresentation props_ToolInstanceExpression;
+  private ConceptPresentation props_ToolKeystroke;
+  private ConceptPresentation props_ToolTab;
+  private ConceptPresentation props_ToolType;
+  private ConceptPresentation props_ToolbarCreator;
+  private ConceptPresentation props_UnpinTabOperation;
+  private ConceptPresentation props_UpdateBlock;
+  private ConceptPresentation props_UpdateGroupBlock;
+  private ConceptPresentation props_UpdateGroupFunction;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.AbstractToolKeystroke:
+        if (props_AbstractToolKeystroke == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_AbstractToolKeystroke = cpb.create();
+        }
         return props_AbstractToolKeystroke;
-      case 1:
+      case LanguageConceptSwitch.AbstractToolShortcut:
+        if (props_AbstractToolShortcut == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_AbstractToolShortcut = cpb.create();
+        }
         return props_AbstractToolShortcut;
-      case 2:
+      case LanguageConceptSwitch.ActionAccessOperation:
+        if (props_ActionAccessOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x2c7cd89ac8d0060cL, 0x2c7cd89ac8d14570L, "action", "action<", ">");
+          props_ActionAccessOperation = cpb.create();
+        }
         return props_ActionAccessOperation;
-      case 3:
+      case LanguageConceptSwitch.ActionConstructionParameterDeclaration:
+        if (props_ActionConstructionParameterDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_ActionConstructionParameterDeclaration = cpb.create();
+        }
         return props_ActionConstructionParameterDeclaration;
-      case 4:
+      case LanguageConceptSwitch.ActionConstructorParameterReferenceOperation:
+        if (props_ActionConstructorParameterReferenceOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x443f4c36fcf54eb6L, 0x95008d06ed259e3eL, 0x118bca97396L, 0x118bcb657ecL, "member", "", "");
+          props_ActionConstructorParameterReferenceOperation = cpb.create();
+        }
         return props_ActionConstructorParameterReferenceOperation;
-      case 5:
+      case LanguageConceptSwitch.ActionDataParameterDeclaration:
+        if (props_ActionDataParameterDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_ActionDataParameterDeclaration = cpb.create();
+        }
         return props_ActionDataParameterDeclaration;
-      case 6:
+      case LanguageConceptSwitch.ActionDataParameterReferenceOperation:
+        if (props_ActionDataParameterReferenceOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x443f4c36fcf54eb6L, 0x95008d06ed259e3eL, 0x118bca97396L, 0x118bcb657ecL, "member", "", "");
+          props_ActionDataParameterReferenceOperation = cpb.create();
+        }
         return props_ActionDataParameterReferenceOperation;
-      case 7:
+      case LanguageConceptSwitch.ActionDeclaration:
+        if (props_ActionDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.helpUrl(HELP_URL);
+          cpb.icon(IconContainer.RESOURCE_a0a3a0a7b0we);
+          props_ActionDeclaration = cpb.create();
+        }
         return props_ActionDeclaration;
-      case 8:
+      case LanguageConceptSwitch.ActionGroupDeclaration:
+        if (props_ActionGroupDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.helpUrl(HELP_URL1);
+          cpb.icon(IconContainer.RESOURCE_a0a3a0a8b0we);
+          props_ActionGroupDeclaration = cpb.create();
+        }
         return props_ActionGroupDeclaration;
-      case 9:
+      case LanguageConceptSwitch.ActionGroupMember:
+        if (props_ActionGroupMember == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_ActionGroupMember = cpb.create();
+        }
         return props_ActionGroupMember;
-      case 10:
+      case LanguageConceptSwitch.ActionGroupRef:
+        if (props_ActionGroupRef == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x498be7ea73fa71fL, 0x498be7ea73fa720L, "group", "", "");
+          props_ActionGroupRef = cpb.create();
+        }
         return props_ActionGroupRef;
-      case 11:
+      case LanguageConceptSwitch.ActionInstance:
+        if (props_ActionInstance == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1181da2ba57L, 0x1181da2f27fL, "action", "", "");
+          props_ActionInstance = cpb.create();
+        }
         return props_ActionInstance;
-      case 12:
+      case LanguageConceptSwitch.ActionParameter:
+        if (props_ActionParameter == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11b737a6b7cL);
+          cpb.deprecateProperty(0x11c71345faaL, "isOptional");
+          props_ActionParameter = cpb.create();
+        }
         return props_ActionParameter;
-      case 13:
+      case LanguageConceptSwitch.ActionParameterCondition:
+        if (props_ActionParameterCondition == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_ActionParameterCondition = cpb.create();
+        }
         return props_ActionParameterCondition;
-      case 14:
+      case LanguageConceptSwitch.ActionParameterDeclaration:
+        if (props_ActionParameterDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_ActionParameterDeclaration = cpb.create();
+        }
         return props_ActionParameterDeclaration;
-      case 15:
+      case LanguageConceptSwitch.ActionParameterReference:
+        if (props_ActionParameterReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c77f1e98L, 0xf8cc6bf960L, "variableDeclaration", "", "");
+          props_ActionParameterReference = cpb.create();
+        }
         return props_ActionParameterReference;
-      case 16:
+      case LanguageConceptSwitch.ActionParameterReferenceOperation:
+        if (props_ActionParameterReferenceOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x443f4c36fcf54eb6L, 0x95008d06ed259e3eL, 0x118bca97396L, 0x118bcb657ecL, "member", "", "");
+          props_ActionParameterReferenceOperation = cpb.create();
+        }
         return props_ActionParameterReferenceOperation;
-      case 17:
+      case LanguageConceptSwitch.ActionPlaceSpecification:
+        if (props_ActionPlaceSpecification == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_ActionPlaceSpecification = cpb.create();
+        }
         return props_ActionPlaceSpecification;
-      case 18:
+      case LanguageConceptSwitch.ActionReference:
+        if (props_ActionReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x14fc9beabb2214dfL, 0x14fc9beabb2214e0L, "actionDeclaration", "", "");
+          props_ActionReference = cpb.create();
+        }
         return props_ActionReference;
-      case 19:
+      case LanguageConceptSwitch.ActionType:
+        if (props_ActionType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x118c26632a3L, 0x118c266a4d7L, "action", "action<", ">");
+          props_ActionType = cpb.create();
+        }
         return props_ActionType;
-      case 20:
+      case LanguageConceptSwitch.AddElementStatement:
+        if (props_AddElementStatement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.deprecated(true);
+          cpb.rawPresentation("addJavaAction");
+          props_AddElementStatement = cpb.create();
+        }
         return props_AddElementStatement;
-      case 21:
+      case LanguageConceptSwitch.AddKeystrokeStatement:
+        if (props_AddKeystrokeStatement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("addKeystroke");
+          props_AddKeystrokeStatement = cpb.create();
+        }
         return props_AddKeystrokeStatement;
-      case 22:
+      case LanguageConceptSwitch.AddStatement:
+        if (props_AddStatement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("add");
+          props_AddStatement = cpb.create();
+        }
         return props_AddStatement;
-      case 23:
+      case LanguageConceptSwitch.AddTabOperation:
+        if (props_AddTabOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("addTab");
+          props_AddTabOperation = cpb.create();
+        }
         return props_AddTabOperation;
-      case 24:
+      case LanguageConceptSwitch.BaseNodeBlock:
+        if (props_BaseNodeBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("base node");
+          props_BaseNodeBlock = cpb.create();
+        }
         return props_BaseNodeBlock;
-      case 25:
+      case LanguageConceptSwitch.BaseProjectOperation:
+        if (props_BaseProjectOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("BaseProjectOperation");
+          props_BaseProjectOperation = cpb.create();
+        }
         return props_BaseProjectOperation;
-      case 26:
+      case LanguageConceptSwitch.BaseToolDeclaration:
+        if (props_BaseToolDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x5adc7622e710bddcL);
+          cpb.deprecateProperty(0x5adc7622e710cf2dL, "number");
+          cpb.deprecateProperty(0x5adc7622e710cf6eL, "icon");
+          cpb.icon(IconContainer.RESOURCE_a0a3a0a62b0we);
+          props_BaseToolDeclaration = cpb.create();
+        }
         return props_BaseToolDeclaration;
-      case 27:
+      case LanguageConceptSwitch.BuildGroupBlock:
+        if (props_BuildGroupBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("build");
+          props_BuildGroupBlock = cpb.create();
+        }
         return props_BuildGroupBlock;
-      case 28:
+      case LanguageConceptSwitch.ButtonCreator:
+        if (props_ButtonCreator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("button");
+          props_ButtonCreator = cpb.create();
+        }
         return props_ButtonCreator;
-      case 29:
+      case LanguageConceptSwitch.CloseTabOperation:
+        if (props_CloseTabOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("closeTab");
+          props_CloseTabOperation = cpb.create();
+        }
         return props_CloseTabOperation;
-      case 30:
+      case LanguageConceptSwitch.ConceptCondition:
+        if (props_ConceptCondition == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("concept");
+          props_ConceptCondition = cpb.create();
+        }
         return props_ConceptCondition;
-      case 31:
+      case LanguageConceptSwitch.ConceptFunctionParameter_AnActionEvent:
+        if (props_ConceptFunctionParameter_AnActionEvent == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("function parameter");
+          cpb.rawPresentation("event");
+          props_ConceptFunctionParameter_AnActionEvent = cpb.create();
+        }
         return props_ConceptFunctionParameter_AnActionEvent;
-      case 32:
-        return props_ConceptFunctionParameter_Concept;
-      case 33:
+      case LanguageConceptSwitch.ConceptFunctionParameter_CreatorType:
+        if (props_ConceptFunctionParameter_CreatorType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_ConceptFunctionParameter_CreatorType = cpb.create();
+        }
         return props_ConceptFunctionParameter_CreatorType;
-      case 34:
+      case LanguageConceptSwitch.ConceptFunctionParameter_IModule:
+        if (props_ConceptFunctionParameter_IModule == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("module");
+          props_ConceptFunctionParameter_IModule = cpb.create();
+        }
         return props_ConceptFunctionParameter_IModule;
-      case 35:
+      case LanguageConceptSwitch.ConceptFunctionParameter_MPSProject:
+        if (props_ConceptFunctionParameter_MPSProject == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("MPS project");
+          cpb.rawPresentation("project");
+          props_ConceptFunctionParameter_MPSProject = cpb.create();
+        }
         return props_ConceptFunctionParameter_MPSProject;
-      case 36:
+      case LanguageConceptSwitch.ConceptFunctionParameter_Model:
+        if (props_ConceptFunctionParameter_Model == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("model");
+          props_ConceptFunctionParameter_Model = cpb.create();
+        }
         return props_ConceptFunctionParameter_Model;
-      case 37:
+      case LanguageConceptSwitch.ConceptFunctionParameter_NodeReference:
+        if (props_ConceptFunctionParameter_NodeReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("nodePointer");
+          props_ConceptFunctionParameter_NodeReference = cpb.create();
+        }
+        return props_ConceptFunctionParameter_NodeReference;
+      case LanguageConceptSwitch.ConceptFunctionParameter_OperationContext:
+        if (props_ConceptFunctionParameter_OperationContext == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.deprecated(true);
+          cpb.shortDesc("function parameter");
+          cpb.rawPresentation("context");
+          props_ConceptFunctionParameter_OperationContext = cpb.create();
+        }
         return props_ConceptFunctionParameter_OperationContext;
-      case 38:
+      case LanguageConceptSwitch.ConceptFunctionParameter_PreferencePage_component:
+        if (props_ConceptFunctionParameter_PreferencePage_component == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("UI component of the page");
+          cpb.rawPresentation("component");
+          props_ConceptFunctionParameter_PreferencePage_component = cpb.create();
+        }
         return props_ConceptFunctionParameter_PreferencePage_component;
-      case 39:
+      case LanguageConceptSwitch.ConceptFunctionParameter_Project:
+        if (props_ConceptFunctionParameter_Project == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("IDEA project");
+          cpb.rawPresentation("project");
+          props_ConceptFunctionParameter_Project = cpb.create();
+        }
         return props_ConceptFunctionParameter_Project;
-      case 40:
+      case LanguageConceptSwitch.ConceptFunctionParameter_SConceptClass:
+        if (props_ConceptFunctionParameter_SConceptClass == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("concept");
+          props_ConceptFunctionParameter_SConceptClass = cpb.create();
+        }
         return props_ConceptFunctionParameter_SConceptClass;
-      case 41:
+      case LanguageConceptSwitch.ConceptFunctionParameter_node:
+        if (props_ConceptFunctionParameter_node == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("node");
+          props_ConceptFunctionParameter_node = cpb.create();
+        }
         return props_ConceptFunctionParameter_node;
-      case 42:
+      case LanguageConceptSwitch.ConceptsBlock:
+        if (props_ConceptsBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("getConcepts");
+          props_ConceptsBlock = cpb.create();
+        }
         return props_ConceptsBlock;
-      case 43:
+      case LanguageConceptSwitch.CreateBlock:
+        if (props_CreateBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("create");
+          props_CreateBlock = cpb.create();
+        }
         return props_CreateBlock;
-      case 44:
+      case LanguageConceptSwitch.CreateNodeAspectBlock:
+        if (props_CreateNodeAspectBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("create");
+          props_CreateNodeAspectBlock = cpb.create();
+        }
         return props_CreateNodeAspectBlock;
-      case 45:
+      case LanguageConceptSwitch.CreateTabBlock:
+        if (props_CreateTabBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("CreateTabBlock");
+          props_CreateTabBlock = cpb.create();
+        }
         return props_CreateTabBlock;
-      case 46:
+      case LanguageConceptSwitch.CustomCondition:
+        if (props_CustomCondition == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("custom precondition");
+          props_CustomCondition = cpb.create();
+        }
         return props_CustomCondition;
-      case 47:
+      case LanguageConceptSwitch.CustomToolShortcut:
+        if (props_CustomToolShortcut == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("CustomToolShortcut");
+          props_CustomToolShortcut = cpb.create();
+        }
         return props_CustomToolShortcut;
-      case 48:
+      case LanguageConceptSwitch.DisposeBlock:
+        if (props_DisposeBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("dispose");
+          props_DisposeBlock = cpb.create();
+        }
         return props_DisposeBlock;
-      case 49:
+      case LanguageConceptSwitch.DoUpdateBlock:
+        if (props_DoUpdateBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("update");
+          props_DoUpdateBlock = cpb.create();
+        }
         return props_DoUpdateBlock;
-      case 50:
+      case LanguageConceptSwitch.EditableModel:
+        if (props_EditableModel == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("editable");
+          props_EditableModel = cpb.create();
+        }
         return props_EditableModel;
-      case 51:
+      case LanguageConceptSwitch.EditorTab:
+        if (props_EditorTab == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x33f4c34299ff0d2fL);
+          cpb.deprecateProperty(0x71dc7d539b7857cfL, "commandOnCreate");
+          cpb.presentationByName();
+          cpb.helpUrl(HELP_URL2);
+          cpb.icon(IconContainer.RESOURCE_a0a4a0a15b0we);
+          props_EditorTab = cpb.create();
+        }
         return props_EditorTab;
-      case 52:
+      case LanguageConceptSwitch.EditorTabReference:
+        if (props_EditorTabReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x22035699bdd7814bL, 0x22035699bdd7814cL, "editorTab", "", "");
+          props_EditorTabReference = cpb.create();
+        }
         return props_EditorTabReference;
-      case 53:
+      case LanguageConceptSwitch.ElementListContents:
+        if (props_ElementListContents == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("element list");
+          props_ElementListContents = cpb.create();
+        }
         return props_ElementListContents;
-      case 54:
+      case LanguageConceptSwitch.EnumerateChildrenFunction:
+        if (props_EnumerateChildrenFunction == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("enumerateChildren");
+          props_EnumerateChildrenFunction = cpb.create();
+        }
         return props_EnumerateChildrenFunction;
-      case 55:
+      case LanguageConceptSwitch.EverywhereActionPlace:
+        if (props_EverywhereActionPlace == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("everywhere");
+          props_EverywhereActionPlace = cpb.create();
+        }
         return props_EverywhereActionPlace;
-      case 56:
+      case LanguageConceptSwitch.ExecuteBlock:
+        if (props_ExecuteBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("execute");
+          props_ExecuteBlock = cpb.create();
+        }
         return props_ExecuteBlock;
-      case 57:
+      case LanguageConceptSwitch.GetComponentBlock:
+        if (props_GetComponentBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("getComponent");
+          props_GetComponentBlock = cpb.create();
+        }
         return props_GetComponentBlock;
-      case 58:
+      case LanguageConceptSwitch.GetGroupOperation:
+        if (props_GetGroupOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119b4514b56L, 0x119b4518939L, "group", "actionGroup<", ">");
+          props_GetGroupOperation = cpb.create();
+        }
         return props_GetGroupOperation;
-      case 59:
+      case LanguageConceptSwitch.GetNodeBlock:
+        if (props_GetNodeBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("getNode");
+          props_GetNodeBlock = cpb.create();
+        }
         return props_GetNodeBlock;
-      case 60:
+      case LanguageConceptSwitch.GetNodesBlock:
+        if (props_GetNodesBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("getNodes");
+          props_GetNodesBlock = cpb.create();
+        }
         return props_GetNodesBlock;
-      case 61:
+      case LanguageConceptSwitch.GetSelectedTabOperation:
+        if (props_GetSelectedTabOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("getSelectedTab");
+          props_GetSelectedTabOperation = cpb.create();
+        }
         return props_GetSelectedTabOperation;
-      case 62:
+      case LanguageConceptSwitch.GroupAccessOperation:
+        if (props_GroupAccessOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x2c7cd89ac8d17d74L, 0x2c7cd89ac8d17d76L, "group", "group<", ">");
+          props_GroupAccessOperation = cpb.create();
+        }
         return props_GroupAccessOperation;
-      case 63:
+      case LanguageConceptSwitch.GroupAnchor:
+        if (props_GroupAnchor == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("extension point");
+          cpb.presentationByName();
+          props_GroupAnchor = cpb.create();
+        }
         return props_GroupAnchor;
-      case 64:
+      case LanguageConceptSwitch.GroupContents:
+        if (props_GroupContents == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_GroupContents = cpb.create();
+        }
         return props_GroupContents;
-      case 65:
+      case LanguageConceptSwitch.GroupType:
+        if (props_GroupType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119240f9168L, 0x119240f916aL, "actionGroup", "actiongroup<", ">");
+          props_GroupType = cpb.create();
+        }
         return props_GroupType;
-      case 66:
+      case LanguageConceptSwitch.IdeaActionsDescriptor:
+        if (props_IdeaActionsDescriptor == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("actions");
+          props_IdeaActionsDescriptor = cpb.create();
+        }
         return props_IdeaActionsDescriptor;
-      case 67:
+      case LanguageConceptSwitch.IdeaConfigurationXml:
+        if (props_IdeaConfigurationXml == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.helpUrl(HELP_URL3);
+          props_IdeaConfigurationXml = cpb.create();
+        }
         return props_IdeaConfigurationXml;
-      case 68:
+      case LanguageConceptSwitch.IdeaInitializerDescriptor:
+        if (props_IdeaInitializerDescriptor == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x45b64b294c2b3514L);
+          cpb.deprecateProperty(0x39d4595a63622b5fL, "vendorLogo");
+          cpb.presentationByName();
+          cpb.helpUrl(HELP_URL4);
+          cpb.icon(IconContainer.RESOURCE_a0a4a0a86b0we);
+          props_IdeaInitializerDescriptor = cpb.create();
+        }
         return props_IdeaInitializerDescriptor;
-      case 69:
+      case LanguageConceptSwitch.IdeaPluginDependency:
+        if (props_IdeaPluginDependency == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("IdeaPluginDependency");
+          props_IdeaPluginDependency = cpb.create();
+        }
         return props_IdeaPluginDependency;
-      case 70:
+      case LanguageConceptSwitch.InitBlock:
+        if (props_InitBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("init");
+          props_InitBlock = cpb.create();
+        }
         return props_InitBlock;
-      case 71:
+      case LanguageConceptSwitch.InterfaceExtentionPoint:
+        if (props_InterfaceExtentionPoint == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_InterfaceExtentionPoint = cpb.create();
+        }
         return props_InterfaceExtentionPoint;
-      case 72:
+      case LanguageConceptSwitch.InterfaceGroup:
+        if (props_InterfaceGroup == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.helpUrl(HELP_URL5);
+          props_InterfaceGroup = cpb.create();
+        }
         return props_InterfaceGroup;
-      case 73:
+      case LanguageConceptSwitch.IsApplicableBlock:
+        if (props_IsApplicableBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("isApplicable");
+          props_IsApplicableBlock = cpb.create();
+        }
         return props_IsApplicableBlock;
-      case 74:
+      case LanguageConceptSwitch.IsApplicableTabBlock:
+        if (props_IsApplicableTabBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("isApplicable");
+          props_IsApplicableTabBlock = cpb.create();
+        }
         return props_IsApplicableTabBlock;
-      case 75:
+      case LanguageConceptSwitch.IsInstanceCondition:
+        if (props_IsInstanceCondition == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("instance of check");
+          cpb.rawPresentation("is");
+          props_IsInstanceCondition = cpb.create();
+        }
+        return props_IsInstanceCondition;
+      case LanguageConceptSwitch.KeyMapKeystroke:
+        if (props_KeyMapKeystroke == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("KeyMapKeystroke");
+          props_KeyMapKeystroke = cpb.create();
+        }
         return props_KeyMapKeystroke;
-      case 76:
+      case LanguageConceptSwitch.KeyStrokeType:
+        if (props_KeyStrokeType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("keystroke");
+          props_KeyStrokeType = cpb.create();
+        }
         return props_KeyStrokeType;
-      case 77:
+      case LanguageConceptSwitch.KeymapChangesDeclaration:
+        if (props_KeymapChangesDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.helpUrl(HELP_URL6);
+          cpb.icon(IconContainer.RESOURCE_a0a3a0a87b0we);
+          props_KeymapChangesDeclaration = cpb.create();
+        }
         return props_KeymapChangesDeclaration;
-      case 78:
+      case LanguageConceptSwitch.KeymapRef:
+        if (props_KeymapRef == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x498be7ea73fa87eL, 0x498be7ea73fa87fL, "keymap", "", "");
+          props_KeymapRef = cpb.create();
+        }
         return props_KeymapRef;
-      case 79:
+      case LanguageConceptSwitch.ListenBlock:
+        if (props_ListenBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("listen");
+          props_ListenBlock = cpb.create();
+        }
         return props_ListenBlock;
-      case 80:
+      case LanguageConceptSwitch.MPSPluginDependency:
+        if (props_MPSPluginDependency == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x2d2ad2584076330L, 0x2d2ad2584076331L, "plugin", "", "");
+          props_MPSPluginDependency = cpb.create();
+        }
         return props_MPSPluginDependency;
-      case 81:
+      case LanguageConceptSwitch.ModificationStatement:
+        if (props_ModificationStatement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("add");
+          props_ModificationStatement = cpb.create();
+        }
         return props_ModificationStatement;
-      case 82:
+      case LanguageConceptSwitch.NodesBlock:
+        if (props_NodesBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_NodesBlock = cpb.create();
+        }
         return props_NodesBlock;
-      case 83:
+      case LanguageConceptSwitch.NonDumbAwareActions:
+        if (props_NonDumbAwareActions == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.helpUrl(HELP_URL7);
+          props_NonDumbAwareActions = cpb.create();
+        }
         return props_NonDumbAwareActions;
-      case 84:
+      case LanguageConceptSwitch.NumberToolShortcut:
+        if (props_NumberToolShortcut == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("number");
+          props_NumberToolShortcut = cpb.create();
+        }
         return props_NumberToolShortcut;
-      case 85:
-        return props_OldConceptsBlock;
-      case 86:
-        return props_OldCreateBlock;
-      case 87:
+      case LanguageConceptSwitch.OnAfterReadBlock:
+        if (props_OnAfterReadBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("after read");
+          props_OnAfterReadBlock = cpb.create();
+        }
         return props_OnAfterReadBlock;
-      case 88:
+      case LanguageConceptSwitch.OnBeforeWriteBlock:
+        if (props_OnBeforeWriteBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("before write");
+          props_OnBeforeWriteBlock = cpb.create();
+        }
         return props_OnBeforeWriteBlock;
-      case 89:
+      case LanguageConceptSwitch.Order:
+        if (props_Order == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.helpUrl(HELP_URL8);
+          props_Order = cpb.create();
+        }
         return props_Order;
-      case 90:
+      case LanguageConceptSwitch.OrderConstraints:
+        if (props_OrderConstraints == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_OrderConstraints = cpb.create();
+        }
         return props_OrderConstraints;
-      case 91:
+      case LanguageConceptSwitch.OrderReference:
+        if (props_OrderReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x22035699bdd79211L, 0x22035699bdd79212L, "order", "", "");
+          props_OrderReference = cpb.create();
+        }
         return props_OrderReference;
-      case 92:
+      case LanguageConceptSwitch.ParameterCondition_ConceptFunctionParameter:
+        if (props_ParameterCondition_ConceptFunctionParameter == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("parameter");
+          props_ParameterCondition_ConceptFunctionParameter = cpb.create();
+        }
         return props_ParameterCondition_ConceptFunctionParameter;
-      case 93:
+      case LanguageConceptSwitch.ParameterizedShortcutChange:
+        if (props_ParameterizedShortcutChange == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("parameterized");
+          props_ParameterizedShortcutChange = cpb.create();
+        }
         return props_ParameterizedShortcutChange;
-      case 94:
+      case LanguageConceptSwitch.PersistentPropertyDeclaration:
+        if (props_PersistentPropertyDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_PersistentPropertyDeclaration = cpb.create();
+        }
         return props_PersistentPropertyDeclaration;
-      case 95:
+      case LanguageConceptSwitch.PersistentPropertyReference:
+        if (props_PersistentPropertyReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("reference to externalizable property");
+          cpb.presentationByReference(0x443f4c36fcf54eb6L, 0x95008d06ed259e3eL, 0x118bca97396L, 0x118bcb657ecL, "member", "", "");
+          props_PersistentPropertyReference = cpb.create();
+        }
         return props_PersistentPropertyReference;
-      case 96:
+      case LanguageConceptSwitch.PinTabOperation:
+        if (props_PinTabOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("pinTab");
+          props_PinTabOperation = cpb.create();
+        }
         return props_PinTabOperation;
-      case 97:
+      case LanguageConceptSwitch.PluginDependency:
+        if (props_PluginDependency == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_PluginDependency = cpb.create();
+        }
         return props_PluginDependency;
-      case 98:
+      case LanguageConceptSwitch.PopupCreator:
+        if (props_PopupCreator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("popup");
+          props_PopupCreator = cpb.create();
+        }
         return props_PopupCreator;
-      case 99:
+      case LanguageConceptSwitch.PreferencePage:
+        if (props_PreferencePage == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119e269a79fL);
+          cpb.deprecateProperty(0x119e28e412bL, "iconPath");
+          cpb.presentationByName();
+          props_PreferencePage = cpb.create();
+        }
         return props_PreferencePage;
-      case 100:
+      case LanguageConceptSwitch.PreferencePageCommitBlock:
+        if (props_PreferencePageCommitBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("commit");
+          props_PreferencePageCommitBlock = cpb.create();
+        }
         return props_PreferencePageCommitBlock;
-      case 101:
+      case LanguageConceptSwitch.PreferencePageIsModifiedBlock:
+        if (props_PreferencePageIsModifiedBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("isModified");
+          props_PreferencePageIsModifiedBlock = cpb.create();
+        }
         return props_PreferencePageIsModifiedBlock;
-      case 102:
+      case LanguageConceptSwitch.PreferencePageResetBlock:
+        if (props_PreferencePageResetBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("reset");
+          props_PreferencePageResetBlock = cpb.create();
+        }
         return props_PreferencePageResetBlock;
-      case 103:
+      case LanguageConceptSwitch.PreferencesComponentDeclaration:
+        if (props_PreferencesComponentDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.helpUrl(HELP_URL9);
+          cpb.icon(IconContainer.RESOURCE_a0a3a0a201b0we);
+          props_PreferencesComponentDeclaration = cpb.create();
+        }
         return props_PreferencesComponentDeclaration;
-      case 104:
+      case LanguageConceptSwitch.PreferencesComponentType:
+        if (props_PreferencesComponentType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119c497fc64L, 0x119c4987dc8L, "componentDeclaration", "preferenceComponent<", ">");
+          props_PreferencesComponentType = cpb.create();
+        }
         return props_PreferencesComponentType;
-      case 105:
+      case LanguageConceptSwitch.RequiredCondition:
+        if (props_RequiredCondition == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("required");
+          props_RequiredCondition = cpb.create();
+        }
         return props_RequiredCondition;
-      case 106:
+      case LanguageConceptSwitch.Separator:
+        if (props_Separator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("separator");
+          cpb.rawPresentation("<--->");
+          props_Separator = cpb.create();
+        }
         return props_Separator;
-      case 107:
+      case LanguageConceptSwitch.ShortcutChange:
+        if (props_ShortcutChange == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_ShortcutChange = cpb.create();
+        }
         return props_ShortcutChange;
-      case 108:
+      case LanguageConceptSwitch.SimpleActionPlace:
+        if (props_SimpleActionPlace == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("action place");
+          props_SimpleActionPlace = cpb.create();
+        }
         return props_SimpleActionPlace;
-      case 109:
+      case LanguageConceptSwitch.SimpleShortcutChange:
+        if (props_SimpleShortcutChange == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("simple");
+          props_SimpleShortcutChange = cpb.create();
+        }
         return props_SimpleShortcutChange;
-      case 110:
+      case LanguageConceptSwitch.SmartDisposeClosureParameterDeclaration:
+        if (props_SmartDisposeClosureParameterDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("smart closure parameter");
+          cpb.presentationByName();
+          props_SmartDisposeClosureParameterDeclaration = cpb.create();
+        }
         return props_SmartDisposeClosureParameterDeclaration;
-      case 111:
+      case LanguageConceptSwitch.TabbedToolDeclaration:
+        if (props_TabbedToolDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.helpUrl(HELP_URL10);
+          props_TabbedToolDeclaration = cpb.create();
+        }
         return props_TabbedToolDeclaration;
-      case 112:
+      case LanguageConceptSwitch.TabbedToolOperation:
+        if (props_TabbedToolOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_TabbedToolOperation = cpb.create();
+        }
         return props_TabbedToolOperation;
-      case 113:
+      case LanguageConceptSwitch.ToStringConceptFunction:
+        if (props_ToStringConceptFunction == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("toString");
+          props_ToStringConceptFunction = cpb.create();
+        }
         return props_ToStringConceptFunction;
-      case 114:
+      case LanguageConceptSwitch.ToStringParameter:
+        if (props_ToStringParameter == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("object");
+          props_ToStringParameter = cpb.create();
+        }
         return props_ToStringParameter;
-      case 115:
+      case LanguageConceptSwitch.ToolActionPlace:
+        if (props_ToolActionPlace == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("tool action place");
+          props_ToolActionPlace = cpb.create();
+        }
         return props_ToolActionPlace;
-      case 116:
+      case LanguageConceptSwitch.ToolDeclaration:
+        if (props_ToolDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.helpUrl(HELP_URL11);
+          props_ToolDeclaration = cpb.create();
+        }
         return props_ToolDeclaration;
-      case 117:
+      case LanguageConceptSwitch.ToolInstanceExpression:
+        if (props_ToolInstanceExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("instance");
+          props_ToolInstanceExpression = cpb.create();
+        }
         return props_ToolInstanceExpression;
-      case 118:
+      case LanguageConceptSwitch.ToolKeystroke:
+        if (props_ToolKeystroke == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ToolKeystroke");
+          props_ToolKeystroke = cpb.create();
+        }
         return props_ToolKeystroke;
-      case 119:
+      case LanguageConceptSwitch.ToolTab:
+        if (props_ToolTab == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("tab");
+          props_ToolTab = cpb.create();
+        }
         return props_ToolTab;
-      case 120:
+      case LanguageConceptSwitch.ToolType:
+        if (props_ToolType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11961ebbf24L, 0x11961f94babL, "tool", "tool<", ">");
+          props_ToolType = cpb.create();
+        }
         return props_ToolType;
-      case 121:
+      case LanguageConceptSwitch.ToolbarCreator:
+        if (props_ToolbarCreator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("toolbar");
+          props_ToolbarCreator = cpb.create();
+        }
         return props_ToolbarCreator;
-      case 122:
+      case LanguageConceptSwitch.UnpinTabOperation:
+        if (props_UnpinTabOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("unpinTab");
+          props_UnpinTabOperation = cpb.create();
+        }
         return props_UnpinTabOperation;
-      case 123:
+      case LanguageConceptSwitch.UpdateBlock:
+        if (props_UpdateBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_UpdateBlock = cpb.create();
+        }
         return props_UpdateBlock;
-      case 124:
+      case LanguageConceptSwitch.UpdateGroupBlock:
+        if (props_UpdateGroupBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("update");
+          props_UpdateGroupBlock = cpb.create();
+        }
         return props_UpdateGroupBlock;
-      case 125:
+      case LanguageConceptSwitch.UpdateGroupFunction:
+        if (props_UpdateGroupFunction == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("update");
+          props_UpdateGroupFunction = cpb.create();
+        }
         return props_UpdateGroupFunction;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
+  private static final String HELP_URL = URLFunction_HelpCenterDocUrl.getUrl() + "plugin.html#actionsandactiongroups";
+  private static final String HELP_URL1 = URLFunction_HelpCenterDocUrl.getUrl() + "plugin.html#actionsandactiongroups";
+  private static final String HELP_URL2 = URLFunction_HelpCenterDocUrl.getUrl() + "plugin.html#tabbedtools";
+  private static final String HELP_URL3 = URLFunction_HelpCenterDocUrl.getUrl() + "plugin.html";
+  private static final String HELP_URL4 = URLFunction_HelpCenterDocUrl.getUrl() + "plugin.html";
+  private static final String HELP_URL5 = URLFunction_HelpCenterDocUrl.getUrl() + "plugin.html#bootstrapgroups";
+  private static final String HELP_URL6 = URLFunction_HelpCenterDocUrl.getUrl() + "plugin.html#keymapchanges";
+  private static final String HELP_URL7 = URLFunction_HelpCenterDocUrl.getUrl() + "plugin.html#nondumbawareactions";
+  private static final String HELP_URL8 = URLFunction_HelpCenterDocUrl.getUrl() + "plugin.html#editortabs";
+  private static final String HELP_URL9 = URLFunction_HelpCenterDocUrl.getUrl() + "plugin.html#preferencescomponents";
+  private static final String HELP_URL10 = URLFunction_HelpCenterDocUrl.getUrl() + "plugin.html#preferencescomponents";
+  private static final String HELP_URL11 = URLFunction_HelpCenterDocUrl.getUrl() + "plugin.html#tools";
 }

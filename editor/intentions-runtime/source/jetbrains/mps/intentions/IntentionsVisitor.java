@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,54 +15,91 @@
  */
 package jetbrains.mps.intentions;
 
-import java.util.HashSet;
-import java.util.Set;
+import jetbrains.mps.logging.Logger;
+import jetbrains.mps.openapi.editor.EditorContext;
+import jetbrains.mps.openapi.intentions.IntentionExecutable;
+import jetbrains.mps.openapi.intentions.IntentionFactory;
+import jetbrains.mps.openapi.intentions.Kind;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.model.SNode;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * User: shatalin
  * Date: 11/1/12
  */
 interface IntentionsVisitor {
-  boolean visit(IntentionFactory intentionFactory);
+  boolean visit(@NotNull IntentionFactory intentionFactory, SNode node);
 
   class CollectAvailableIntentionsVisitor implements IntentionsVisitor {
-    private Set<IntentionFactory> myAvailableIntentionFactories = new HashSet<IntentionFactory>();
+
+    private final EditorContext myEditorContext;
+    private final Map<IntentionExecutable, Kind> result = new HashMap<>();
+
+    CollectAvailableIntentionsVisitor(EditorContext editorContext) {
+      myEditorContext = editorContext;
+    }
 
     @Override
-    public boolean visit(IntentionFactory intentionFactory) {
-      myAvailableIntentionFactories.add(intentionFactory);
+    public boolean visit(@NotNull IntentionFactory intentionFactory, SNode node) {
+      for (IntentionExecutable executable : intentionFactory.instances(node, myEditorContext)) {
+        try {
+          if (executable.isApplicable(node, myEditorContext)) {
+            result.put(executable, intentionFactory.getKind());
+          }
+        } catch (Throwable t) {
+          Logger.getLogger(IntentionsVisitor.class).error("Exception during parameterized intentions instantiation", t);
+        }
+      }
       return true;
     }
 
-    public Set<IntentionFactory> getAvailableIntentionFactories() {
-      return myAvailableIntentionFactories;
+    public Map<IntentionExecutable, Kind> getResult() {
+      return result;
     }
   }
 
   class GetHighestAvailableIntentionTypeVisitor implements IntentionsVisitor {
-    private IntentionType myIntentionType = null;
+
+    private final EditorContext myEditorContext;
+    private Kind myIntentionKind = null;
+
+    GetHighestAvailableIntentionTypeVisitor(@NotNull EditorContext editorContext) {
+      myEditorContext = editorContext;
+    }
 
     @Override
-    public boolean visit(IntentionFactory intentionFactory) {
-      return visit(intentionFactory.getType());
-    }
-
-    public IntentionType getIntentionType() {
-      return myIntentionType;
-    }
-
-    private boolean visit(IntentionType intentionType) {
-      if (hasHigherPriority(intentionType)) {
-        myIntentionType = intentionType;
+    public boolean visit(@NotNull IntentionFactory intentionFactory, SNode node) {
+      boolean isEmpty = true;
+      for (var executable : intentionFactory.instances(node, myEditorContext)) {
+        try {
+          if (executable.isApplicable(node, myEditorContext)) {
+            isEmpty = false;
+            break;
+          }
+        } catch (Throwable t) {
+          Logger.getLogger(IntentionsVisitor.class).error("Exception during parameterized intentions instantiation", t);
+        }
       }
-      return myIntentionType.getPriority() > 0;
+      if (!isEmpty) {
+        myIntentionKind = intentionFactory.getKind();
+      }
+      return myIntentionKind == null || !myIntentionKind.IsTheMostSevere();
+    }
+
+    @Nullable
+    Kind getIntentionKind() {
+      return myIntentionKind;
     }
 
     /**
      * return true if passed intentionType has higher priority then one currently stored by this visitor
      */
-    public boolean hasHigherPriority(IntentionType intentionType) {
-      return myIntentionType == null || myIntentionType.getPriority() < intentionType.getPriority();
+    public boolean hasHigherPriority(Kind intentionType) {
+      return myIntentionKind == null || myIntentionKind.ordinal() > intentionType.ordinal();
     }
   }
 }

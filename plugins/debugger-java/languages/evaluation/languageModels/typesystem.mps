@@ -2,10 +2,7 @@
 <model ref="r:1b2caefb-8c76-452e-a59a-bbd2c73d0b03(jetbrains.mps.debugger.java.evaluation.typesystem)">
   <persistence version="9" />
   <languages>
-    <use id="7a5dda62-9140-4668-ab76-d5ed1746f2b2" name="jetbrains.mps.lang.typesystem" version="0" />
-    <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="4" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="00000000-0000-4000-0000-1de82b3a4936(jetbrains.mps.devkit.aspect.typesystem)" />
   </languages>
   <imports>
     <import index="8sls" ref="r:3a27a6eb-dfce-419d-9e4c-ca44cc01a2e2(jetbrains.mps.debugger.java.evaluation.structure)" />
@@ -116,7 +113,7 @@
                 </node>
               </node>
               <node concept="3TrEf2" id="3WhGjgvCI0P" role="2OqNvi">
-                <ref role="3Tt5mk" to="8sls:3WhGjgvCzoj" />
+                <ref role="3Tt5mk" to="8sls:3WhGjgvCzoj" resolve="thisNode" />
               </node>
             </node>
           </node>
@@ -146,7 +143,7 @@
               <ref role="1YBMHb" node="3Ri4ifqHBs1" resolve="lowLevelVariable" />
             </node>
             <node concept="3TrEf2" id="3WhGjgvCBZ8" role="2OqNvi">
-              <ref role="3Tt5mk" to="8sls:3WhGjgvCBYJ" />
+              <ref role="3Tt5mk" to="8sls:3WhGjgvCBYJ" resolve="debuggedType" />
             </node>
           </node>
         </node>
@@ -176,7 +173,7 @@
                 <ref role="1YBMHb" node="6Z7xt3wI5zd" resolve="lowLevelVariableReference" />
               </node>
               <node concept="3TrEf2" id="6Z7xt3wI5H3" role="2OqNvi">
-                <ref role="3Tt5mk" to="8sls:7Qql7Y5uzGz" />
+                <ref role="3Tt5mk" to="8sls:7Qql7Y5uzGz" resolve="variableDeclaration" />
               </node>
             </node>
           </node>
@@ -205,7 +202,7 @@
             <ref role="1YBMHb" node="3WhGjgvCBYM" resolve="debuggedType" />
           </node>
           <node concept="3TrEf2" id="3WhGjgvCBYU" role="2OqNvi">
-            <ref role="3Tt5mk" to="8sls:3WhGjgvC_Vq" />
+            <ref role="3Tt5mk" to="8sls:3WhGjgvC_Vq" resolve="highType" />
           </node>
         </node>
       </node>
@@ -226,7 +223,7 @@
               <ref role="1YBMHb" node="3WhGjgvCGeP" resolve="unitNode" />
             </node>
             <node concept="3TrEf2" id="3WhGjgvCGf6" role="2OqNvi">
-              <ref role="3Tt5mk" to="8sls:3WhGjgvCGes" />
+              <ref role="3Tt5mk" to="8sls:3WhGjgvCGes" resolve="debuggedType" />
             </node>
           </node>
         </node>
@@ -263,7 +260,7 @@
                       <ref role="1YBMHb" node="6RpXVOy70jB" resolve="debuggedType" />
                     </node>
                     <node concept="3TrEf2" id="6RpXVOy70jQ" role="2OqNvi">
-                      <ref role="3Tt5mk" to="8sls:3WhGjgvC_Vp" />
+                      <ref role="3Tt5mk" to="8sls:3WhGjgvC_Vp" resolve="lowType" />
                     </node>
                   </node>
                 </node>
@@ -291,7 +288,7 @@
               <ref role="1YBMHb" node="6RpXVOy70jh" resolve="downCastToLowLevel" />
             </node>
             <node concept="3TrEf2" id="6RpXVOy70jA" role="2OqNvi">
-              <ref role="3Tt5mk" to="8sls:6RpXVOy6Veu" />
+              <ref role="3Tt5mk" to="8sls:6RpXVOy6Veu" resolve="expression" />
             </node>
           </node>
         </node>

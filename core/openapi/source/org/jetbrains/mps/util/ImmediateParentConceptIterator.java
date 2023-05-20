@@ -18,7 +18,6 @@ package org.jetbrains.mps.util;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SConcept;
-import org.jetbrains.mps.openapi.model.SNodeUtil;
 
 import java.util.Iterator;
 
@@ -46,6 +45,7 @@ public final class ImmediateParentConceptIterator implements Iterable<SConcept>,
     reset();
   }
 
+  @NotNull
   @Override
   public Iterator<SConcept> iterator() {
     reset();

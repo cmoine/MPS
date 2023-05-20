@@ -7,7 +7,6 @@ import jetbrains.mps.generator.template.PropertyMacroContext;
 import jetbrains.mps.generator.template.TemplateArgumentContext;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.lang.core.behavior.BaseConcept__BehaviorDescriptor;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.generator.template.SourceSubstituteMacroNodesContext;
@@ -16,43 +15,61 @@ import jetbrains.mps.generator.template.TemplateQueryContext;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SModelOperations;
 import jetbrains.mps.internal.collections.runtime.IWhereFilter;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SEnumOperations;
 import jetbrains.mps.generator.template.TemplateVarContext;
+import org.jetbrains.mps.openapi.language.SProperty;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SConcept;
 
 @Generated
 public class QueriesGenerated {
-  public static Object propertyMacro_GetPropertyValue_6736062018948578789(final PropertyMacroContext _context) {
-    // here we demonstrate use of TemplateArgumentParameterExpression instead of GenerationContextOp_ParameterRef 
+  public static Object propertyMacro_GetValue_4_0(final PropertyMacroContext _context) {
+    // here we demonstrate use of TemplateArgumentParameterExpression instead of GenerationContextOp_ParameterRef
     return ((String) _context.getVariable("text"));
   }
-  public static Object templateArgumentQuery_6736062018948465982(final TemplateArgumentContext _context) {
+  public static Object templateArgumentQuery_0_0(final TemplateArgumentContext _context) {
     return 1 + 3;
   }
-  public static Object templateArgumentQuery_6736062018948483009(final TemplateArgumentContext _context) {
+  public static Object templateArgumentQuery_0_1(final TemplateArgumentContext _context) {
     return SNodeOperations.getParent(_context.getNode());
   }
-  public static Object templateArgumentQuery_6736062018948608740(final TemplateArgumentContext _context) {
-    return String.valueOf(((Integer) _context.getVariable("value")) + SPropertyOperations.getInteger(_context.getNode(), MetaAdapterFactory.getProperty(0xab0ae915e3b54f35L, 0xb55ac655d649a03cL, 0x118e6cad46aL, 0x44696d5abe089ec8L, "key"))) + ((String) _context.getVariable("text"));
+  public static Object templateArgumentQuery_3_0(final TemplateArgumentContext _context) {
+    return String.valueOf(((Integer) _context.getVariable("value")) + SPropertyOperations.getInteger(_context.getNode(), PROPS.key$31TA)) + ((String) _context.getVariable("text"));
   }
-  public static Object templateArgumentQuery_207553032706677823(final TemplateArgumentContext _context) {
+  public static Object templateArgumentQuery_3_1(final TemplateArgumentContext _context) {
     return ((String) _context.getVariable("text")) + "__" + String.valueOf(((Integer) _context.getVariable("value")));
   }
-  public static Object templateArgumentQuery_6736062018948525024(final TemplateArgumentContext _context) {
+  public static Object templateArgumentQuery_2_0(final TemplateArgumentContext _context) {
     return ((String) _context.getVariable("text")) + BaseConcept__BehaviorDescriptor.getPresentation_idhEwIMiw.invoke(((SNode) _context.getVariable("element")));
   }
-  public static Object templateArgumentQuery_6736062018948578444(final TemplateArgumentContext _context) {
+  public static Object templateArgumentQuery_2_1(final TemplateArgumentContext _context) {
     return ((Integer) _context.getVariable("value")) * 2;
   }
-  public static Iterable<SNode> sourceNodesQuery_7496726876599914779(final SourceSubstituteMacroNodesContext _context) {
-    return SLinkOperations.getChildren(_context.getNode(), MetaAdapterFactory.getContainmentLink(0xab0ae915e3b54f35L, 0xb55ac655d649a03cL, 0x11645953ab3L, 0x11645abf534L, "inputChild"));
+  public static Iterable<SNode> sourceNodesQuery_1_0(final SourceSubstituteMacroNodesContext _context) {
+    return SLinkOperations.getChildren(_context.getNode(), LINKS.inputChild$4qxF);
   }
-  public static boolean mappingConfiguration_Condition_7496726876599722461(final TemplateQueryContext _context) {
-    return ListSequence.fromList(SModelOperations.roots(_context.getInputModel(), MetaAdapterFactory.getConcept(0xab0ae915e3b54f35L, 0xb55ac655d649a03cL, 0x11645953ab3L, "jetbrains.mps.transformation.test.inputLang.structure.InputRoot"))).where(new IWhereFilter<SNode>() {
+  public static boolean mc_Condition_0(final TemplateQueryContext _context) {
+    return ListSequence.fromList(SModelOperations.roots(_context.getInputModel(), CONCEPTS.InputRoot$nY)).where(new IWhereFilter<SNode>() {
       public boolean accept(SNode it) {
-        return SPropertyOperations.hasValue(it, MetaAdapterFactory.getProperty(0xab0ae915e3b54f35L, 0xb55ac655d649a03cL, 0x11645953ab3L, 0x117eb48fdf5L, "useInTest"), "argsInTemplateCall", "none");
+        return SEnumOperations.isMember(SPropertyOperations.getEnum(it, PROPS.useInTest$1LnL), 0x2e16062328916bbL);
       }
     }).isNotEmpty();
   }
-  public static Object insertMacro_varValue_6736062018948583815(final TemplateVarContext _context) {
+  public static Object varMacro_Value_3_0(final TemplateVarContext _context) {
     return BaseConcept__BehaviorDescriptor.getPresentation_idhEwIMiw.invoke(((SNode) _context.getVariable("element"))) + "- as VarMacro";
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty key$31TA = MetaAdapterFactory.getProperty(0xab0ae915e3b54f35L, 0xb55ac655d649a03cL, 0x118e6cad46aL, 0x44696d5abe089ec8L, "key");
+    /*package*/ static final SProperty useInTest$1LnL = MetaAdapterFactory.getProperty(0xab0ae915e3b54f35L, 0xb55ac655d649a03cL, 0x11645953ab3L, 0x117eb48fdf5L, "useInTest");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink inputChild$4qxF = MetaAdapterFactory.getContainmentLink(0xab0ae915e3b54f35L, 0xb55ac655d649a03cL, 0x11645953ab3L, 0x11645abf534L, "inputChild");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept InputRoot$nY = MetaAdapterFactory.getConcept(0xab0ae915e3b54f35L, 0xb55ac655d649a03cL, 0x11645953ab3L, "jetbrains.mps.transformation.test.inputLang.structure.InputRoot");
   }
 }

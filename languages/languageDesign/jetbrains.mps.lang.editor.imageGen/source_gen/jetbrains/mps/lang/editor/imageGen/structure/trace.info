@@ -1,14 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
   <root>
     <file name="ConceptPresentationAspectImpl.java">
-      <unit at="11,0,25,0" name="jetbrains.mps.lang.editor.imageGen.structure.ConceptPresentationAspectImpl" />
+      <unit at="11,0,31,0" name="jetbrains.mps.lang.editor.imageGen.structure.ConceptPresentationAspectImpl" />
     </file>
     <file name="IconContainer.java">
       <unit at="7,0,10,0" name="jetbrains.mps.lang.editor.imageGen.structure.IconContainer" />
     </file>
+    <file name="LanguageConceptSwitch.java">
+      <unit at="10,0,28,0" name="jetbrains.mps.lang.editor.imageGen.structure.LanguageConceptSwitch" />
+    </file>
     <file name="StructureAspectDescriptor.java">
-      <unit at="20,0,62,0" name="jetbrains.mps.lang.editor.imageGen.structure.StructureAspectDescriptor" />
+      <unit at="16,0,66,0" name="jetbrains.mps.lang.editor.imageGen.structure.StructureAspectDescriptor" />
+    </file>
+  </root>
+  <root nodeRef="r:a7cbf330-9260-4b6d-8d53-3b6cb70171c0(jetbrains.mps.lang.editor.imageGen.structure)/2359976223559993484">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="2359976223559993484" at="12,0,13,0" concept="1" trace="props_ImageGenerator" />
+      <node id="2359976223559993484" at="20,43,21,76" concept="3" />
+      <node id="2359976223559993484" at="21,76,22,35" concept="0" />
+      <node id="2359976223559993484" at="22,35,23,55" concept="0" />
+      <node id="2359976223559993484" at="23,55,24,46" concept="0" />
+      <node id="2359976223559993484" at="25,9,26,36" concept="4" />
+      <node id="2359976223559993484" at="19,48,25,9" concept="2" />
+      <scope id="2359976223559993484" at="20,43,24,46">
+        <var name="cpb" id="2359976223559993484" />
+      </scope>
+      <scope id="2359976223559993484" at="19,48,26,36" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="2359976223559993484" at="12,0,13,0" concept="5" trace="ImageGenerator" />
+      <node id="2359976223559993484" at="15,116,16,53" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="2359976223559993484" at="17,0,18,0" concept="1" trace="myConceptImageGenerator" />
+      <node id="2359976223559993484" at="39,48,40,39" concept="4" />
+      <node id="2359976223559993484" at="51,72,52,183" concept="3" />
+      <node id="2359976223559993484" at="52,183,53,33" concept="0" />
+      <node id="2359976223559993484" at="53,33,54,71" concept="0" />
+      <node id="2359976223559993484" at="54,71,55,121" concept="0" />
+      <node id="2359976223559993484" at="55,121,56,17" concept="0" />
+      <node id="2359976223560030855" at="56,17,57,114" concept="0" />
+      <node id="3245637733309852966" at="57,114,58,108" concept="0" />
+      <node id="1380214350862969083" at="58,108,59,117" concept="0" />
+      <node id="1380214350862971625" at="59,117,60,171" concept="0" />
+      <node id="3245637733310277398" at="60,171,61,162" concept="0" />
+      <node id="2359976223559993484" at="61,162,62,21" concept="0" />
+      <node id="2359976223559993484" at="62,21,63,22" concept="4" />
+      <node id="2359976223559993484" at="51,0,65,0" concept="6" trace="createDescriptorForImageGenerator#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="2359976223559993484" at="39,48,40,39" />
+      <scope id="2359976223559993484" at="51,72,63,22">
+        <var name="b" id="2359976223559993484" />
+      </scope>
+      <scope id="2359976223559993484" at="51,0,65,0" />
     </file>
   </root>
 </debug-info>

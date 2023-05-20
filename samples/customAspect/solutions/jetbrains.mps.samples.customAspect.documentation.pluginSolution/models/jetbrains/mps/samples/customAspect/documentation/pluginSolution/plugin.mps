@@ -2,11 +2,11 @@
 <model ref="r:81f2d26c-7afe-43c5-850e-0e2c49e4cf00(jetbrains.mps.samples.customAspect.documentation.pluginSolution.plugin)">
   <persistence version="9" />
   <languages>
-    <use id="28f9e497-3b42-4291-aeba-0a1039153ab1" name="jetbrains.mps.lang.plugin" version="2" />
+    <use id="28f9e497-3b42-4291-aeba-0a1039153ab1" name="jetbrains.mps.lang.plugin" version="5" />
     <use id="ef7bf5ac-d06c-4342-b11d-e42104eb9343" name="jetbrains.mps.lang.plugin.standalone" version="0" />
-    <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="4" />
+    <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="19" />
     <use id="63650c59-16c8-498a-99c8-005c7ee9515d" name="jetbrains.mps.lang.access" version="0" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports>
     <import index="9oh" ref="r:de82dfab-9448-49ba-813e-2b0579f7fb15(jetbrains.mps.ide.platform.actions)" />
@@ -27,6 +27,7 @@
         <child id="1207145201301" name="reference" index="ftvYc" />
       </concept>
       <concept id="1203071646776" name="jetbrains.mps.lang.plugin.structure.ActionDeclaration" flags="ng" index="sE7Ow">
+        <property id="1211298967294" name="outsideCommandExecution" index="72QZ$" />
         <property id="1205250923097" name="caption" index="2uzpH1" />
         <child id="1203083196627" name="updateBlock" index="tmbBb" />
         <child id="1203083461638" name="executeFunction" index="tncku" />
@@ -78,15 +79,23 @@
       <concept id="4972933694980447171" name="jetbrains.mps.baseLanguage.structure.BaseVariableDeclaration" flags="ng" index="19Szcq">
         <child id="5680397130376446158" name="type" index="1tU5fm" />
       </concept>
+      <concept id="1068580123152" name="jetbrains.mps.baseLanguage.structure.EqualsExpression" flags="nn" index="3clFbC" />
       <concept id="1068580123155" name="jetbrains.mps.baseLanguage.structure.ExpressionStatement" flags="nn" index="3clFbF">
         <child id="1068580123156" name="expression" index="3clFbG" />
       </concept>
+      <concept id="1068580123157" name="jetbrains.mps.baseLanguage.structure.Statement" flags="nn" index="3clFbH" />
       <concept id="1068580123159" name="jetbrains.mps.baseLanguage.structure.IfStatement" flags="nn" index="3clFbJ">
         <child id="1068580123160" name="condition" index="3clFbw" />
         <child id="1068580123161" name="ifTrue" index="3clFbx" />
       </concept>
       <concept id="1068580123136" name="jetbrains.mps.baseLanguage.structure.StatementList" flags="sn" stub="5293379017992965193" index="3clFbS">
         <child id="1068581517665" name="statement" index="3cqZAp" />
+      </concept>
+      <concept id="1068580123137" name="jetbrains.mps.baseLanguage.structure.BooleanConstant" flags="nn" index="3clFbT">
+        <property id="1068580123138" name="value" index="3clFbU" />
+      </concept>
+      <concept id="1068581242878" name="jetbrains.mps.baseLanguage.structure.ReturnStatement" flags="nn" index="3cpWs6">
+        <child id="1068581517676" name="expression" index="3cqZAk" />
       </concept>
       <concept id="1068581242864" name="jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" flags="nn" index="3cpWs8">
         <child id="1068581242865" name="localVariableDeclaration" index="3cpWs9" />
@@ -127,6 +136,7 @@
   <node concept="sE7Ow" id="_dFfuhhYCb">
     <property role="TrG5h" value="ShowDoc" />
     <property role="2uzpH1" value="Show Documentation" />
+    <property role="72QZ$" value="true" />
     <node concept="tnohg" id="_dFfuhhYCc" role="tncku">
       <node concept="3clFbS" id="_dFfuhhYCd" role="2VODD2">
         <node concept="3cpWs8" id="_dFfuhiv_K" role="3cqZAp">
@@ -141,7 +151,7 @@
                 </node>
               </node>
               <node concept="liA8E" id="_dFfuhiv_Q" role="2OqNvi">
-                <ref role="37wK5l" to="mhbf:~SNode.getConcept():org.jetbrains.mps.openapi.language.SConcept" resolve="getConcept" />
+                <ref role="37wK5l" to="mhbf:~SNode.getConcept()" resolve="getConcept" />
               </node>
             </node>
           </node>
@@ -155,7 +165,7 @@
             <node concept="2OqwBi" id="_dFfuhivPL" role="33vP2m">
               <node concept="2YIFZM" id="_dFfuhivPM" role="2Oq$k0">
                 <ref role="1Pybhc" to="vndm:~LanguageRegistry" resolve="LanguageRegistry" />
-                <ref role="37wK5l" to="vndm:~LanguageRegistry.getInstance(org.jetbrains.mps.openapi.module.SRepository):jetbrains.mps.smodel.language.LanguageRegistry" resolve="getInstance" />
+                <ref role="37wK5l" to="vndm:~LanguageRegistry.getInstance(org.jetbrains.mps.openapi.module.SRepository)" resolve="getInstance" />
                 <node concept="2OqwBi" id="7QakCu$r6_3" role="37wK5m">
                   <node concept="2OqwBi" id="_dFfuhivPN" role="2Oq$k0">
                     <node concept="2WthIp" id="_dFfuhivPO" role="2Oq$k0" />
@@ -164,21 +174,32 @@
                     </node>
                   </node>
                   <node concept="liA8E" id="7QakCu$r6SV" role="2OqNvi">
-                    <ref role="37wK5l" to="z1c3:~Project.getRepository():org.jetbrains.mps.openapi.module.SRepository" resolve="getRepository" />
+                    <ref role="37wK5l" to="z1c3:~Project.getRepository()" resolve="getRepository" />
                   </node>
                 </node>
               </node>
               <node concept="liA8E" id="_dFfuhivPQ" role="2OqNvi">
-                <ref role="37wK5l" to="vndm:~LanguageRegistry.getLanguage(org.jetbrains.mps.openapi.language.SLanguage):jetbrains.mps.smodel.language.LanguageRuntime" resolve="getLanguage" />
+                <ref role="37wK5l" to="vndm:~LanguageRegistry.getLanguage(org.jetbrains.mps.openapi.language.SLanguage)" resolve="getLanguage" />
                 <node concept="2OqwBi" id="_dFfuhivPR" role="37wK5m">
                   <node concept="37vLTw" id="_dFfuhivPS" role="2Oq$k0">
                     <ref role="3cqZAo" node="_dFfuhiv_L" resolve="concept" />
                   </node>
                   <node concept="liA8E" id="_dFfuhivPT" role="2OqNvi">
-                    <ref role="37wK5l" to="c17a:~SAbstractConcept.getLanguage():org.jetbrains.mps.openapi.language.SLanguage" resolve="getLanguage" />
+                    <ref role="37wK5l" to="c17a:~SAbstractConcept.getLanguage()" resolve="getLanguage" />
                   </node>
                 </node>
               </node>
+            </node>
+          </node>
+        </node>
+        <node concept="3clFbJ" id="7LGEsuh8AKU" role="3cqZAp">
+          <node concept="3clFbS" id="7LGEsuh8AKV" role="3clFbx">
+            <node concept="3cpWs6" id="7LGEsuh8AKW" role="3cqZAp" />
+          </node>
+          <node concept="3clFbC" id="7LGEsuh8AKY" role="3clFbw">
+            <node concept="10Nm6u" id="7LGEsuh8AKZ" role="3uHU7w" />
+            <node concept="37vLTw" id="7LGEsuh8AL0" role="3uHU7B">
+              <ref role="3cqZAo" node="_dFfuhivPK" resolve="languageRuntime" />
             </node>
           </node>
         </node>
@@ -193,7 +214,7 @@
                 <ref role="3cqZAo" node="_dFfuhivPK" resolve="languageRuntime" />
               </node>
               <node concept="liA8E" id="_dFfuhiwMo" role="2OqNvi">
-                <ref role="37wK5l" to="vndm:~LanguageRuntime.getAspect(java.lang.Class):jetbrains.mps.smodel.runtime.ILanguageAspect" resolve="getAspect" />
+                <ref role="37wK5l" to="vndm:~LanguageRuntime.getAspect(java.lang.Class)" resolve="getAspect" />
                 <node concept="3VsKOn" id="_dFfuhiwMp" role="37wK5m">
                   <ref role="3VsUkX" to="4stj:2wQ3F8GeTEG" resolve="DocumentationAspectDescriptor" />
                 </node>
@@ -201,6 +222,18 @@
             </node>
           </node>
         </node>
+        <node concept="3clFbJ" id="7LGEsuh8BUZ" role="3cqZAp">
+          <node concept="3clFbS" id="7LGEsuh8BV0" role="3clFbx">
+            <node concept="3cpWs6" id="7LGEsuh8BV1" role="3cqZAp" />
+          </node>
+          <node concept="3clFbC" id="7LGEsuh8BV2" role="3clFbw">
+            <node concept="10Nm6u" id="7LGEsuh8BV3" role="3uHU7w" />
+            <node concept="37vLTw" id="7LGEsuh8Ceo" role="3uHU7B">
+              <ref role="3cqZAo" node="_dFfuhiwMl" resolve="docDescriptor" />
+            </node>
+          </node>
+        </node>
+        <node concept="3clFbH" id="7LGEsuh8BCi" role="3cqZAp" />
         <node concept="3cpWs8" id="_dFfuhix7P" role="3cqZAp">
           <node concept="3cpWsn" id="_dFfuhix7Q" role="3cpWs9">
             <property role="TrG5h" value="docText" />
@@ -224,7 +257,7 @@
           <node concept="3clFbS" id="_dFfuhixnC" role="3clFbx">
             <node concept="3clFbF" id="_dFfuhixLv" role="3cqZAp">
               <node concept="2YIFZM" id="_dFfuhiB2F" role="3clFbG">
-                <ref role="37wK5l" to="dxuu:~JOptionPane.showMessageDialog(java.awt.Component,java.lang.Object):void" resolve="showMessageDialog" />
+                <ref role="37wK5l" to="dxuu:~JOptionPane.showMessageDialog(java.awt.Component,java.lang.Object)" resolve="showMessageDialog" />
                 <ref role="1Pybhc" to="dxuu:~JOptionPane" resolve="JOptionPane" />
                 <node concept="10Nm6u" id="_dFfuhiB37" role="37wK5m" />
                 <node concept="37vLTw" id="_dFfuhiB4i" role="37wK5m">
@@ -266,7 +299,7 @@
                 </node>
               </node>
               <node concept="liA8E" id="QCL$WxnuDX" role="2OqNvi">
-                <ref role="37wK5l" to="mhbf:~SNode.getConcept():org.jetbrains.mps.openapi.language.SConcept" resolve="getConcept" />
+                <ref role="37wK5l" to="mhbf:~SNode.getConcept()" resolve="getConcept" />
               </node>
             </node>
           </node>
@@ -280,7 +313,7 @@
             <node concept="2OqwBi" id="QCL$WxnuE1" role="33vP2m">
               <node concept="2YIFZM" id="QCL$WxnuE2" role="2Oq$k0">
                 <ref role="1Pybhc" to="vndm:~LanguageRegistry" resolve="LanguageRegistry" />
-                <ref role="37wK5l" to="vndm:~LanguageRegistry.getInstance(org.jetbrains.mps.openapi.module.SRepository):jetbrains.mps.smodel.language.LanguageRegistry" resolve="getInstance" />
+                <ref role="37wK5l" to="vndm:~LanguageRegistry.getInstance(org.jetbrains.mps.openapi.module.SRepository)" resolve="getInstance" />
                 <node concept="2OqwBi" id="7QakCu$r5If" role="37wK5m">
                   <node concept="2OqwBi" id="QCL$WxnuE3" role="2Oq$k0">
                     <node concept="2WthIp" id="QCL$WxnuE4" role="2Oq$k0" />
@@ -289,21 +322,36 @@
                     </node>
                   </node>
                   <node concept="liA8E" id="7QakCu$r621" role="2OqNvi">
-                    <ref role="37wK5l" to="z1c3:~Project.getRepository():org.jetbrains.mps.openapi.module.SRepository" resolve="getRepository" />
+                    <ref role="37wK5l" to="z1c3:~Project.getRepository()" resolve="getRepository" />
                   </node>
                 </node>
               </node>
               <node concept="liA8E" id="QCL$WxnuE6" role="2OqNvi">
-                <ref role="37wK5l" to="vndm:~LanguageRegistry.getLanguage(org.jetbrains.mps.openapi.language.SLanguage):jetbrains.mps.smodel.language.LanguageRuntime" resolve="getLanguage" />
+                <ref role="37wK5l" to="vndm:~LanguageRegistry.getLanguage(org.jetbrains.mps.openapi.language.SLanguage)" resolve="getLanguage" />
                 <node concept="2OqwBi" id="QCL$WxnuE7" role="37wK5m">
                   <node concept="37vLTw" id="QCL$WxnuE8" role="2Oq$k0">
                     <ref role="3cqZAo" node="QCL$WxnuDR" resolve="concept" />
                   </node>
                   <node concept="liA8E" id="QCL$WxnuE9" role="2OqNvi">
-                    <ref role="37wK5l" to="c17a:~SAbstractConcept.getLanguage():org.jetbrains.mps.openapi.language.SLanguage" resolve="getLanguage" />
+                    <ref role="37wK5l" to="c17a:~SAbstractConcept.getLanguage()" resolve="getLanguage" />
                   </node>
                 </node>
               </node>
+            </node>
+          </node>
+        </node>
+        <node concept="3clFbJ" id="7LGEsuh8$oD" role="3cqZAp">
+          <node concept="3clFbS" id="7LGEsuh8$oF" role="3clFbx">
+            <node concept="3cpWs6" id="7LGEsuh8_DF" role="3cqZAp">
+              <node concept="3clFbT" id="7LGEsuh8AcX" role="3cqZAk">
+                <property role="3clFbU" value="false" />
+              </node>
+            </node>
+          </node>
+          <node concept="3clFbC" id="7LGEsuh8_1Q" role="3clFbw">
+            <node concept="10Nm6u" id="7LGEsuh8_kW" role="3uHU7w" />
+            <node concept="37vLTw" id="7LGEsuh8$EW" role="3uHU7B">
+              <ref role="3cqZAo" node="QCL$WxnuDZ" resolve="languageRuntime" />
             </node>
           </node>
         </node>
@@ -318,7 +366,7 @@
                 <ref role="3cqZAo" node="QCL$WxnuDZ" resolve="languageRuntime" />
               </node>
               <node concept="liA8E" id="QCL$WxnuEf" role="2OqNvi">
-                <ref role="37wK5l" to="vndm:~LanguageRuntime.getAspect(java.lang.Class):jetbrains.mps.smodel.runtime.ILanguageAspect" resolve="getAspect" />
+                <ref role="37wK5l" to="vndm:~LanguageRuntime.getAspect(java.lang.Class)" resolve="getAspect" />
                 <node concept="3VsKOn" id="QCL$WxnuEg" role="37wK5m">
                   <ref role="3VsUkX" to="4stj:2wQ3F8GeTEG" resolve="DocumentationAspectDescriptor" />
                 </node>

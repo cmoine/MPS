@@ -42,11 +42,6 @@ public class CellAction_UnfoldCell extends AbstractCellAction {
   }
 
   private static EditorCell_Collection findCell(EditorCell editorCell) {
-    return CellFinderUtil.findParent(editorCell, new Condition<EditorCell_Collection>() {
-      @Override
-      public boolean met(EditorCell_Collection object) {
-        return object.isCollapsed();
-      }
-    });
+    return CellFinderUtil.findParent(editorCell, object -> object.isCollapsed());
   }
 }

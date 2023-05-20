@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-21wnvuy629k8hl42chrex88np7urhez" />
+<product version="3" modelHash="ax2lzo8m5jwv70kbrr3sxp5l4l1smfb">
+  <files names="ActionAspectDescriptorImpl.java:QueryExpression_NodeFactories.java:ScopeParameterLiteral_factories.java" />
+</product>
 

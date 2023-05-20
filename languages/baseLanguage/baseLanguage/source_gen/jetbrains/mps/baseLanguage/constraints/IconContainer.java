@@ -5,8 +5,8 @@ package jetbrains.mps.baseLanguage.constraints;
 import jetbrains.mps.smodel.runtime.IconResource;
 
 public class IconContainer {
-  protected static IconResource RESOURCE_a0a0a0a1 = new IconResource("abstractException.png", IconContainer.class);
-  protected static IconResource RESOURCE_a1a0a1 = new IconResource("exceptionClass.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a1a1 = new IconResource("abstractClass.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a0b = new IconResource("abstractMethod.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a0a0a0 = new IconResource("abstractException.png", IconContainer.class);
+  protected static IconResource RESOURCE_a1a0a0 = new IconResource("exceptionClass.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a1a0 = new IconResource("abstractClass.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a0a = new IconResource("abstractMethod.png", IconContainer.class);
 }

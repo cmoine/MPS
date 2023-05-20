@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,60 +15,76 @@
  */
 package jetbrains.mps.smodel;
 
-import jetbrains.mps.project.SModuleOperations;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.util.annotation.ToRemove;
+import jetbrains.mps.smodel.language.LanguageAspectDescriptor;
+import jetbrains.mps.smodel.language.LanguageAspectSupport;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.language.SLanguage;
 import org.jetbrains.mps.openapi.model.SModel;
+import org.jetbrains.mps.openapi.model.SModelName;
 import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SModuleReference;
 import org.jetbrains.mps.openapi.persistence.ModelRoot;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+// NOTE, although quite some of these enums are not in use in MPS, there are uses in mbeddr!
 public enum LanguageAspect {
   //mostly migrated
-  STRUCTURE("structure", BootstrapLanguages.structureLanguageRef(), LanguageAspect.CONFLUENCE_BASE + "Structure"),
+  STRUCTURE("structure", BootstrapLanguages.structureLanguageRef(), LanguageAspect.HELP_CENTER_BASE + "structure.html"),
 
   //mostly migrated
-  EDITOR("editor", BootstrapLanguages.editorLanguageRef(), LanguageAspect.CONFLUENCE_BASE + "Editor"),
+  EDITOR("editor", BootstrapLanguages.editorLanguageRef(), LanguageAspect.HELP_CENTER_BASE + "editor.html  "),
 
   //mostly migrated
-  ACTIONS("actions", BootstrapLanguages.actionsLanguageRef(), LanguageAspect.CONFLUENCE_BASE + "Editor+Actions"),
+  ACTIONS("actions", BootstrapLanguages.actionsLanguageRef(), LanguageAspect.HELP_CENTER_BASE + "editor-actions.html"),
 
   //mostly migrated
-  CONSTRAINTS("constraints", BootstrapLanguages.constraintsLanguageRef(), LanguageAspect.CONFLUENCE_BASE + "Constraints"),
-
-  //mostly migrated
-  BEHAVIOR("behavior", BootstrapLanguages.behaviorLanguageRef(), LanguageAspect.CONFLUENCE_BASE + "Behavior"),
-
-  //mostly migrated
-  TYPESYSTEM("typesystem", BootstrapLanguages.typesystemLanguageRef(), LanguageAspect.CONFLUENCE_BASE + "Typesystem"),
-
-  //mostly migrated
-  REFACTORINGS("refactorings", BootstrapLanguages.refactoringLanguageRef(), LanguageAspect.CONFLUENCE_BASE + "Refactoring"),
-
-  //mostly migrated
-  SCRIPTS("scripts", BootstrapLanguages.scriptLanguageRef(), null),
-
-  //mostly migrated
-  INTENTIONS("intentions", BootstrapLanguages.intentionsLanguageRef(), LanguageAspect.CONFLUENCE_BASE + "Intentions"),
-
-  //mostly migrated
-  FIND_USAGES("findUsages", BootstrapLanguages.findUsagesLanguageRef(), LanguageAspect.CONFLUENCE_BASE + "Find+usages"),
-
-  //migrated, uncomment when migration is finished [compatibility] and deprecate this class
-  PLUGIN("plugin", null, LanguageAspect.CONFLUENCE_BASE + "Plugin"){
+  CONSTRAINTS("constraints", BootstrapLanguages.constraintsLanguageRef(), LanguageAspect.HELP_CENTER_BASE + "constraints.html") {
     @Override
     public Collection<SLanguage> getMainLanguages() {
-      ArrayList<SLanguage> result = new ArrayList<SLanguage>();
+      Collection<SLanguage> mainLanguages = new ArrayList<>();
+      LanguageAspectDescriptor aspectDescriptor = LanguageAspectSupport.getAspectDescriptorById(getName());
+      if (aspectDescriptor != null) {
+        mainLanguages.addAll(aspectDescriptor.getMainLanguages());
+      }
+      SLanguage bootstrapLang = MetaAdapterFactory.getLanguage(getMainLanguage());
+      return Stream.concat(mainLanguages.stream(), Stream.of(bootstrapLang))
+                   .distinct()
+                   .collect(Collectors.toList());
+    }
+  },
+
+  //mostly migrated
+  BEHAVIOR("behavior", BootstrapLanguages.behaviorLanguageRef(), LanguageAspect.HELP_CENTER_BASE + "behavior.html"),
+
+  //mostly migrated
+  TYPESYSTEM("typesystem", BootstrapLanguages.typesystemLanguageRef(), LanguageAspect.HELP_CENTER_BASE + "typesystem.html"),
+
+  //mostly migrated
+  REFACTORINGS("refactorings", BootstrapLanguages.refactoringLanguageRef(), LanguageAspect.HELP_CENTER_BASE + "refactoring.html"),
+
+  //mostly migrated
+  SCRIPTS("scripts", BootstrapLanguages.scriptLanguageRef(), LanguageAspect.HELP_CENTER_BASE + "scripts.html"),
+
+  //mostly migrated
+  INTENTIONS("intentions", BootstrapLanguages.intentionsLanguageRef(), LanguageAspect.HELP_CENTER_BASE + "intentions.html"),
+
+  //mostly migrated
+  FIND_USAGES("findUsages", BootstrapLanguages.findUsagesLanguageRef(), LanguageAspect.HELP_CENTER_BASE + "find-usages.html"),
+
+  //migrated, uncomment when migration is finished [compatibility] and deprecate this class
+  PLUGIN("plugin", null, LanguageAspect.HELP_CENTER_BASE + "plugin.html") {
+    @Override
+    public Collection<SLanguage> getMainLanguages() {
+      ArrayList<SLanguage> result = new ArrayList<>();
       result.add(MetaAdapterFactory.getLanguage(BootstrapLanguages.pluginLanguageRef()));
       result.add(MetaAdapterFactory.getLanguage(BootstrapLanguages.aspectLanguageRef()));
       return result;
@@ -76,19 +92,19 @@ public enum LanguageAspect {
   },
 
   //mostly migrated
-  DATA_FLOW("dataFlow", BootstrapLanguages.dataFlowLanguageRef(), LanguageAspect.CONFLUENCE_BASE + "Data+flow#Dataflow-intermediatelanguage"),
+  DATA_FLOW("dataFlow", BootstrapLanguages.dataFlowLanguageRef(), LanguageAspect.HELP_CENTER_BASE + "data-flow.html"),
 
   //mostly migrated
-  TEST("test", BootstrapLanguages.testLanguageRef(), LanguageAspect.CONFLUENCE_BASE + "Language+tests+language#Languagetestslanguage-introduction"),
+  TEST("test", BootstrapLanguages.testLanguageRef(), LanguageAspect.HELP_CENTER_BASE + "testing-languages.html"),
 
   //mostly migrated
-  TEXT_GEN("textGen", BootstrapLanguages.textGenLanguageRef(), LanguageAspect.CONFLUENCE_BASE + "TextGen"),
+  TEXT_GEN("textGen", BootstrapLanguages.textGenLanguageRef(), LanguageAspect.HELP_CENTER_BASE + "textGen.html"),
 
   //mostly migrated
-  MIGRATION("migration", BootstrapLanguages.migrationLanguageRef(), LanguageAspect.CONFLUENCE_BASE + "Migrations");
+  MIGRATION("migration", BootstrapLanguages.migrationLanguageRef(), LanguageAspect.HELP_CENTER_BASE + "migrations.html");
 
-  //TODO must be changes for each major/minor version release
-  public static final String CONFLUENCE_BASE = "http://confluence.jetbrains.com/display/MPSD34/";
+  //TODO must be changed for each major/minor version release
+  public static final String HELP_CENTER_BASE = "https://www.jetbrains.com/help/mps/2022.3/";
 
   private String myName;
   private final SModuleReference myMainLang;
@@ -105,21 +121,16 @@ public enum LanguageAspect {
    * Builds a class name of an aspect class according to hardcoded MPS convention.
    */
   public String getAspectQualifiedClassName(@NotNull SAbstractConcept concept) {
-    StringBuilder builder = new StringBuilder();
-    builder.append(concept.getLanguage().getQualifiedName());
-    builder.append('.');
-    builder.append(getName());
-    builder.append('.');
-    builder.append(concept.getName());
-    return builder.toString();
+    return concept.getLanguage().getQualifiedName() + '.' + getName() + '.' + concept.getName();
   }
 
-  public boolean is(SModel sm) {
+  public boolean is(@NotNull SModel sm) {
     SModule module = sm.getModule();
     if (!(module instanceof Language)) return false;
     return get(((Language) module)) == sm;
   }
 
+  @Nullable
   public SModel get(Language l) {
     return get_internal(l, false);
   }
@@ -156,7 +167,8 @@ public enum LanguageAspect {
     } else {
       modelRoot = structureModel.getModelRoot();
     }
-    return SModuleOperations.createModelWithAdjustments(l.getModuleName() + '.' + getName(), modelRoot);
+    // I don't care there's no ModelsAutoImportManager, this is deprecated way to instantiate aspect models anyway
+    return modelRoot.createModel(new SModelName(l.getModuleName(), getName(), null));
   }
 
   @Nullable
@@ -172,17 +184,16 @@ public enum LanguageAspect {
   }
 
   public Collection<SLanguage> getMainLanguages() {
-    ArrayList<SLanguage> res = new ArrayList<SLanguage>();
+    ArrayList<SLanguage> res = new ArrayList<>();
     res.add(MetaAdapterFactory.getLanguage(getMainLanguage()));
     return res;
   }
 
-  @Deprecated
-  @ToRemove(version = 3.3)
+@Deprecated(since = "3.3", forRemoval = true)
   //not used in MPS
   //use jetbrains.mps.smodel.language.LanguageAspectSupport.getAspectModels()
   public static Collection<SModel> getAspectModels(Language l) {
-    Set<SModel> result = new HashSet<SModel>();
+    Set<SModel> result = new HashSet<>();
     for (LanguageAspect aspect : LanguageAspect.values()) {
       SModel asp = aspect.get(l);
       if (asp != null) {

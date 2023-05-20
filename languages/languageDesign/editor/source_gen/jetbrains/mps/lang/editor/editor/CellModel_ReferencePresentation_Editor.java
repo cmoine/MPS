@@ -6,61 +6,12 @@ import jetbrains.mps.nodeEditor.DefaultNodeEditor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Collection;
-import jetbrains.mps.lang.editor.behavior.EditorCellModel__BehaviorDescriptor;
-import jetbrains.mps.openapi.editor.style.Style;
-import jetbrains.mps.editor.runtime.style.StyleImpl;
-import jetbrains.mps.editor.runtime.style.StyleAttributes;
-import jetbrains.mps.nodeEditor.MPSFonts;
-import jetbrains.mps.editor.runtime.cells.BigCellUtil;
 
 public class CellModel_ReferencePresentation_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createCollection_jf7bj_a(editorContext, node);
+    return new CellModel_ReferencePresentation_EditorBuilder_a(editorContext, node).createCell();
   }
   public EditorCell createInspectedCell(EditorContext editorContext, SNode node) {
-    return this.createComponent_jf7bj_a(editorContext, node);
-  }
-  private EditorCell createCollection_jf7bj_a(EditorContext editorContext, SNode node) {
-    EditorCell_Collection editorCell = EditorCell_Collection.createHorizontal(editorContext, node);
-    editorCell.setCellId("Collection_jf7bj_a");
-    editorCell.setBig(true);
-    if (renderingCondition_jf7bj_a0a(node, editorContext)) {
-      editorCell.addEditorCell(this.createComponent_jf7bj_a0(editorContext, node));
-    }
-    editorCell.addEditorCell(this.createComponent_jf7bj_b0(editorContext, node));
-    if (renderingCondition_jf7bj_a2a(node, editorContext)) {
-      editorCell.addEditorCell(this.createComponent_jf7bj_c0(editorContext, node));
-    }
-    return editorCell;
-  }
-  private EditorCell createComponent_jf7bj_a0(EditorContext editorContext, SNode node) {
-    EditorCell editorCell = editorContext.getCellFactory().createEditorComponentCell(node, "jetbrains.mps.lang.editor.editor._OpenTag");
-    return editorCell;
-  }
-  private static boolean renderingCondition_jf7bj_a0a(SNode node, EditorContext editorContext) {
-    return EditorCellModel__BehaviorDescriptor.getOpeningTag_idhKxXtpm.invoke(node).length() > 0;
-  }
-  private EditorCell createComponent_jf7bj_b0(EditorContext editorContext, SNode node) {
-    EditorCell editorCell = editorContext.getCellFactory().createEditorComponentCell(node, "jetbrains.mps.lang.core.editor.alias");
-    Style style = new StyleImpl();
-    style.set(StyleAttributes.FONT_STYLE, 0, MPSFonts.PLAIN);
-    editorCell.getStyle().putAll(style);
-    return editorCell;
-  }
-  private EditorCell createComponent_jf7bj_c0(EditorContext editorContext, SNode node) {
-    EditorCell editorCell = editorContext.getCellFactory().createEditorComponentCell(node, "jetbrains.mps.lang.editor.editor._CloseTag");
-    return editorCell;
-  }
-  private static boolean renderingCondition_jf7bj_a2a(SNode node, EditorContext editorContext) {
-    return EditorCellModel__BehaviorDescriptor.getClosingTag_idhKxXx_K.invoke(node).length() > 0;
-  }
-  private EditorCell createComponent_jf7bj_a(EditorContext editorContext, SNode node) {
-    EditorCell editorCell = editorContext.getCellFactory().createEditorComponentCell(node, "jetbrains.mps.lang.editor.editor._CellModel_Common");
-    EditorCell bigCell = BigCellUtil.findBigCell(editorCell, node);
-    if (bigCell != null) {
-      bigCell.setBig(true);
-    }
-    return editorCell;
+    return new CellModel_ReferencePresentation_InspectorBuilder_a(editorContext, node).createCell();
   }
 }

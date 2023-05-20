@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,14 +25,17 @@ import jetbrains.mps.smodel.adapter.ids.SLanguageId;
 import jetbrains.mps.smodel.adapter.ids.SPropertyId;
 import jetbrains.mps.smodel.adapter.ids.SReferenceLinkId;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.smodel.persistence.def.v9.IdEncoder.EncodingException;
 import jetbrains.mps.smodel.runtime.ConceptKind;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.language.SLanguage;
 import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
+import org.jetbrains.mps.openapi.model.SNodeId;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,10 +55,14 @@ class IdInfoReadHelper {
   private final MetaModelInfoProvider myMetaInfoProvider;
   private LangInfo myActualLang;
   private ConceptInfo myActualConcept;
-  private final Map<String, SConcept> myConcepts = new HashMap<String, SConcept>();
-  private final Map<String, SProperty> myProperties = new HashMap<String, SProperty>();
-  private final Map<String, SReferenceLink> myAssociations = new HashMap<String, SReferenceLink>();
-  private final Map<String, SContainmentLink> myAggregations = new HashMap<String, SContainmentLink>();
+  private SAbstractConcept myConceptMO;
+  // FIXME how come I record SConcept here, when I can encounter references to InterfaceConcept in the registry
+  //       (e.g. INamedConcept/name) ?!
+  private final Map<String, SConcept> myConcepts = new HashMap<>();
+  private final Map<String, SProperty> myProperties = new HashMap<>();
+  private final Map<String, SReferenceLink> myAssociations = new HashMap<>();
+  private final Map<String, SContainmentLink> myAggregations = new HashMap<>();
+  private final Map<String, SNodeId> myModelNodes = new HashMap<>(200);
   private final boolean myInterfaceOnly;
   private final boolean myStripImplementation;
 
@@ -94,7 +101,9 @@ class IdInfoReadHelper {
     SConceptId conceptId = myIdEncoder.parseConceptId(myActualLang.getLanguageId(), id);
     myActualConcept = myMetaRegistry.registerConcept(conceptId, name);
     myActualConcept.parseImplementationKind(nodeInfo);
-    myConcepts.put(index, MetaAdapterFactory.getConcept(conceptId, name));
+    final SConcept ccc = MetaAdapterFactory.getConcept(conceptId, name);
+    myConceptMO = ccc;
+    myConcepts.put(index, ccc);
     myMetaInfoProvider.setConceptName(conceptId, name);
     myMetaInfoProvider.setKind(conceptId, myActualConcept.getKind());
     myMetaInfoProvider.setScope(conceptId, myActualConcept.getScope());
@@ -110,7 +119,7 @@ class IdInfoReadHelper {
     assert myActualConcept != null;
     SPropertyId propertyId = myIdEncoder.parsePropertyId(myActualConcept.getConceptId(), id);
     myActualConcept.addProperty(propertyId, name);
-    myProperties.put(index, MetaAdapterFactory.getProperty(propertyId, name));
+    myProperties.put(index, MetaAdapterFactory.getProperty(myConceptMO, propertyId.getIdValue(), name));
     myMetaInfoProvider.setPropertyName(propertyId, name);
   }
 
@@ -118,7 +127,7 @@ class IdInfoReadHelper {
     assert myActualConcept != null;
     SReferenceLinkId linkId = myIdEncoder.parseAssociation(myActualConcept.getConceptId(), id);
     myActualConcept.addLink(linkId, name);
-    myAssociations.put(index, MetaAdapterFactory.getReferenceLink(linkId, name));
+    myAssociations.put(index, MetaAdapterFactory.getReferenceLink(myConceptMO, linkId.getIdValue(), name));
     myMetaInfoProvider.setAssociationName(linkId, name);
   }
 
@@ -126,7 +135,7 @@ class IdInfoReadHelper {
     assert myActualConcept != null;
     SContainmentLinkId linkId = myIdEncoder.parseAggregation(myActualConcept.getConceptId(), id);
     myActualConcept.addLink(linkId, name, unordered);
-    myAggregations.put(index, MetaAdapterFactory.getContainmentLink(linkId, name));
+    myAggregations.put(index, MetaAdapterFactory.getContainmentLink(myConceptMO, linkId.getIdValue(), name));
     myMetaInfoProvider.setAggregationName(linkId, name);
     myMetaInfoProvider.setUnordered(linkId, unordered);
   }
@@ -134,17 +143,17 @@ class IdInfoReadHelper {
   // Query. De-serialize ids, resolve indexes and retrieve meta-objects according to myInfoCollector state
 
   public SConcept readConcept(@NotNull String index) {
-    assert myConcepts.containsKey(index);
+    assert myConcepts.containsKey(index) : String.format("Bad concept index key: %s", index);
     return myConcepts.get(index);
   }
 
   public SProperty readProperty(@NotNull String index) {
-    assert myProperties.containsKey(index);
+    assert myProperties.containsKey(index) : String.format("Bad property index key: %s", index);
     return myProperties.get(index);
   }
 
   public SReferenceLink readAssociation(@NotNull String index) {
-    assert myAssociations.containsKey(index);
+    assert myAssociations.containsKey(index) : String.format("Bad association index key: %s", index);
     return myAssociations.get(index);
   }
 
@@ -153,7 +162,7 @@ class IdInfoReadHelper {
     if (index == null) {
       return null;
     }
-    assert myAggregations.containsKey(index);
+    assert myAggregations.containsKey(index) : String.format("Bad aggregation index key: %s", index);
     return myAggregations.get(index);
   }
 
@@ -186,5 +195,30 @@ class IdInfoReadHelper {
     // proper read order (first registry, then used languages). It's even more complicated for per-root
     // persistence, where usedLanguages are kept in a header file only, while registry spans few.
     return MetaAdapterFactory.getLanguage(langId, langName);
+  }
+
+  public SNodeId readNodeId(String text) {
+    SNodeId rv = myModelNodes.get(text);
+    if (rv != null) {
+      return rv;
+    }
+    try {
+      myModelNodes.put(text, rv = myIdEncoder.parseNodeId(text));
+      return rv;
+    } catch (EncodingException ex) {
+      throw new IllegalArgumentException(text, ex.getCause());
+    }
+  }
+
+  public SNodeId readLocalRefTarget(String text) {
+    SNodeId rv = myModelNodes.get(text);
+    if (rv != null) {
+      return rv;
+    }
+    rv = myIdEncoder.parseLocalNodeReference(text);
+    if (rv != null) {
+      myModelNodes.put(text, rv);
+    }
+    return rv;
   }
 }

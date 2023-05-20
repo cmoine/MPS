@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,51 +17,22 @@ package jetbrains.mps.smodel.adapter.structure.property;
 
 import jetbrains.mps.RuntimeFlags;
 import jetbrains.mps.smodel.MPSModuleRepository;
-import jetbrains.mps.smodel.SNodeId;
-import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
-import jetbrains.mps.smodel.adapter.ids.SConceptId;
-import jetbrains.mps.smodel.adapter.ids.SContainmentLinkId;
 import jetbrains.mps.smodel.adapter.ids.SPropertyId;
 import jetbrains.mps.smodel.adapter.structure.ConceptFeatureHelper;
 import jetbrains.mps.smodel.adapter.structure.FormatException;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.smodel.adapter.structure.concept.SConceptAdapterById;
-import jetbrains.mps.smodel.adapter.structure.link.SContainmentLinkAdapterById;
-import jetbrains.mps.smodel.language.ConceptRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistryUtil;
-import jetbrains.mps.smodel.runtime.ConceptDescriptor;
-import jetbrains.mps.smodel.runtime.LinkDescriptor;
 import jetbrains.mps.smodel.runtime.PropertyDescriptor;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.language.SProperty;
-import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 
-public final class SPropertyAdapterById extends SPropertyAdapter {
+public class SPropertyAdapterById extends SPropertyAdapter {
   public static final java.lang.String PROP_PREFIX = "p";
-  private final SPropertyId myPropertyId;
-  private final boolean myIsBootstrap;
 
   public SPropertyAdapterById(@NotNull SPropertyId propertyId, @NotNull String propName) {
-    this(propertyId, propName, false);
-  }
-
-  /**
-   * @param bootstrap see BOOTSTRAP META OBJECTS javadoc for {@link jetbrains.mps.smodel.adapter.BootstrapAdapterFactory}
-   */
-  public SPropertyAdapterById(@NotNull SPropertyId propertyId, @NotNull String propName, boolean bootstrap) {
-    super(propName);
-    myPropertyId = propertyId;
-    myIsBootstrap = bootstrap;
-  }
-
-  @NotNull
-  public SPropertyId getId() {
-    return myPropertyId;
+    super(propertyId, propName);
   }
 
   @NotNull
@@ -72,6 +43,7 @@ public final class SPropertyAdapterById extends SPropertyAdapter {
 
   @Override
   public boolean equals(Object obj) {
+    // the same equal logic is for any of our subclasses (we don't care to tell 'bootstrap' or 'with owner' cases from those hardcoded in generated code.
     if (!(obj instanceof SPropertyAdapterById)) {
       return false;
     }
@@ -87,7 +59,7 @@ public final class SPropertyAdapterById extends SPropertyAdapter {
   @NotNull
   @Override
   public String getName() {
-    if (RuntimeFlags.isMergeDriverMode() || myIsBootstrap) {
+    if (RuntimeFlags.isMergeDriverMode()) {
       return myPropertyName;
     }
     PropertyDescriptor d = getPropertyDescriptor();
@@ -99,12 +71,8 @@ public final class SPropertyAdapterById extends SPropertyAdapter {
   }
 
   @Override
-  public PropertyDescriptor getPropertyDescriptor() {
-    ConceptDescriptor cd = ConceptFeatureHelper.getOwnerDescriptor(getId());
-    if (cd == null) {
-      return null;
-    }
-    return cd.getPropertyDescriptor(myPropertyId);
+  protected PropertyDescriptor getPropertyDescriptor() {
+    return ConceptFeatureHelper.getOwnerDescriptor(getId()).getPropertyDescriptor(myPropertyId);
   }
 
   @Override
@@ -112,20 +80,14 @@ public final class SPropertyAdapterById extends SPropertyAdapter {
     PropertyDescriptor d = getPropertyDescriptor();
     if (d != null) {
       SNodeReference sn = d.getSourceNode();
-      if(sn!=null) return sn.resolve(MPSModuleRepository.getInstance());
+      return sn == null ? null : sn.resolve(MPSModuleRepository.getInstance());
     }
-
-    SNode cnode = getOwner().getDeclarationNode();
-    if (cnode == null) {
-      return null;
-    }
-    SModel model = cnode.getModel();
-    return model.getNode(new SNodeId.Regular(myPropertyId.getIdValue()));
+    return null;
   }
 
   @Override
   public String serialize() {
-    return PROP_PREFIX + ID_DELIM + myPropertyId.serialize() + ID_DELIM + myPropertyName;
+    return PROP_PREFIX + ID_DELIM + myPropertyId.serialize() + ID_DELIM + getName();
   }
 
   public static SPropertyAdapterById deserialize(String s) {

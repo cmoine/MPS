@@ -15,7 +15,7 @@ public class Complex extends Number {
   }
   @Override
   public boolean equals(Object obj) {
-    if ((obj == null) || !((obj instanceof Complex))) {
+    if ((obj == null) || !(obj instanceof Complex)) {
       return false;
     }
     Complex Cobj = (Complex) obj;

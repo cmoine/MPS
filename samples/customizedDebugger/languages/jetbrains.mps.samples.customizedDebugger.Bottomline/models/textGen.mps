@@ -2,8 +2,7 @@
 <model ref="r:bc09622b-9ebb-4585-9e9c-b69fb2294562(jetbrains.mps.samples.customizedDebugger.Bottomline.textGen)">
   <persistence version="9" />
   <languages>
-    <use id="b83431fe-5c8f-40bc-8a36-65e25f4dd253" name="jetbrains.mps.lang.textGen" version="0" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="fa73d85a-ac7f-447b-846c-fcdc41caa600(jetbrains.mps.devkit.aspect.textgen)" />
   </languages>
   <imports>
     <import index="tpcu" ref="r:00000000-0000-4000-0000-011c89590282(jetbrains.mps.lang.core.behavior)" />
@@ -138,7 +137,7 @@
                 <ref role="3cqZAo" node="vvfLbL9eXO" resolve="fqName" />
               </node>
               <node concept="liA8E" id="vvfLbL9gsq" role="2OqNvi">
-                <ref role="37wK5l" to="wyt6:~String.lastIndexOf(java.lang.String):int" resolve="lastIndexOf" />
+                <ref role="37wK5l" to="wyt6:~String.lastIndexOf(java.lang.String)" resolve="lastIndexOf" />
                 <node concept="Xl_RD" id="vvfLbL9gsr" role="37wK5m">
                   <property role="Xl_RC" value="." />
                 </node>
@@ -153,7 +152,7 @@
                 <ref role="3cqZAo" node="vvfLbL9eXO" resolve="fqName" />
               </node>
               <node concept="liA8E" id="vvfLbL9inB" role="2OqNvi">
-                <ref role="37wK5l" to="wyt6:~String.substring(int,int):java.lang.String" resolve="substring" />
+                <ref role="37wK5l" to="wyt6:~String.substring(int,int)" resolve="substring" />
                 <node concept="3cmrfG" id="vvfLbL9kCs" role="37wK5m">
                   <property role="3cmrfH" value="0" />
                 </node>
@@ -216,7 +215,7 @@
                 <node concept="2OqwBi" id="vvfLbL9rLE" role="2Oq$k0">
                   <node concept="117lpO" id="vvfLbL9rFH" role="2Oq$k0" />
                   <node concept="3Tsc0h" id="vvfLbL9sbc" role="2OqNvi">
-                    <ref role="3TtcxE" to="mlwq:vvfLbL9anB" />
+                    <ref role="3TtcxE" to="mlwq:vvfLbL9anB" resolve="messages" />
                   </node>
                 </node>
                 <node concept="2es0OD" id="vvfLbL9$6Z" role="2OqNvi">

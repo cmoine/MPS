@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +15,9 @@
  */
 package jetbrains.mps.nodeEditor;
 
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.openapi.editor.descriptor.EditorAspectDescriptor;
 import jetbrains.mps.smodel.language.LanguageRuntime;
-import org.apache.log4j.LogManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -36,13 +36,13 @@ import java.util.stream.Collectors;
  * bundled with some extra data further identifying the contribution. Contributions are collected from the owning editor descriptor's language and languages
  * which extend this language (directly or indirectly).
  * <p>
- * The maintained cache is invalidated by {@link ValidEditorDescriptorsCache#cleanCaches(Iterable)}.
+ * The maintained cache is invalidated by {@code EditorAspectDescriptorBase#clearAllCaches()}.
  *
  * @param <KeyT> type of the identifier of a contribution
  * @param <ContributionT> contribution type
  */
 abstract class EditorAspectContributionsCache<KeyT, ContributionT> {
-  private static final jetbrains.mps.logging.Logger LOG = jetbrains.mps.logging.Logger.wrap(LogManager.getLogger(EditorAspectContributionsCache.class));
+  private static final Logger LOG = Logger.getLogger(EditorAspectContributionsCache.class);
 
   private final Map<KeyT, Map<String, Collection<ContributionT>>> myCache = new HashMap<>();
 
@@ -103,17 +103,14 @@ abstract class EditorAspectContributionsCache<KeyT, ContributionT> {
   }
 
   private Map<String, Collection<ContributionT>> computeValues(KeyT key) {
-    Map<String, Collection<ContributionT>> result = new HashMap<>();
+    final Map<String, Collection<ContributionT>> result = new HashMap<>();
 
     putIfNotEmpty(result, myLanguageRuntime.getNamespace(), getDeclaredContributions(myLanguageRuntime, key));
-    for (LanguageRuntime extendingLanguage : myLanguageRuntime.getExtendingLanguages()) {
-      putIfNotEmpty(result, extendingLanguage.getNamespace(), getDeclaredContributions(extendingLanguage, key));
-    }
-
+    myLanguageRuntime.forEachContributor(lr -> putIfNotEmpty(result, lr.getNamespace(), getDeclaredContributions(lr, key)), EditorAspectDescriptor.class);
     return result;
   }
 
-  private static <KeyT, ValueT> void putIfNotEmpty(Map<KeyT, Collection<ValueT>> map, KeyT key, Collection<ValueT> values) {
+  private static <MK, MV> void putIfNotEmpty(Map<MK, Collection<MV>> map, MK key, Collection<MV> values) {
     if (!values.isEmpty()) {
       map.put(key, values);
     }

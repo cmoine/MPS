@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="1hpusl9y22pik91iq7eofnablvt5zqv" />
+<product version="3" modelHash="-6rgmhmu9xkaaz9fqyk5gliwqez6ei6d">
+  <files names="FixDynamicReferences_MigrationScript.java:ScriptsDescriptor.java" />
+</product>
 

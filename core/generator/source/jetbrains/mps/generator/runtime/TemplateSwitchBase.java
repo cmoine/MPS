@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,26 @@
  */
 package jetbrains.mps.generator.runtime;
 
+import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SProperty;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
+
 /**
  * Base implementation of {@link jetbrains.mps.generator.runtime.TemplateSwitchMapping} to use as superclass in generated code
  * to facilitate future API changes
  * @author Artem Tikhomirov
  */
 public abstract class TemplateSwitchBase implements TemplateSwitchMapping {
+  protected final SConcept[] myConcepts;
+  protected final SProperty[] myProperties;
+  protected final SReferenceLink[] myAssociationLinks;
+  protected final SContainmentLink[] myAggregationLinks;
+
+  protected TemplateSwitchBase(MetaObjectContainer metaObjectContainer) {
+    myConcepts = metaObjectContainer.concepts();
+    myProperties = metaObjectContainer.properties();
+    myAssociationLinks = metaObjectContainer.associations();
+    myAggregationLinks = metaObjectContainer.aggregations();
+  }
 }

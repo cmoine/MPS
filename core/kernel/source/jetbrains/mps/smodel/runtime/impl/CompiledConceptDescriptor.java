@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,55 +21,54 @@ import jetbrains.mps.smodel.adapter.ids.SContainmentLinkId;
 import jetbrains.mps.smodel.adapter.ids.SPropertyId;
 import jetbrains.mps.smodel.adapter.ids.SReferenceLinkId;
 import jetbrains.mps.smodel.language.ConceptRegistry;
+import jetbrains.mps.smodel.language.StructureRegistry;
 import jetbrains.mps.smodel.runtime.ConceptDescriptor;
+import jetbrains.mps.smodel.runtime.ConceptKind;
 import jetbrains.mps.smodel.runtime.LinkDescriptor;
 import jetbrains.mps.smodel.runtime.PropertyDescriptor;
 import jetbrains.mps.smodel.runtime.ReferenceDescriptor;
 import jetbrains.mps.smodel.runtime.StaticScope;
-import jetbrains.mps.smodel.runtime.base.BaseConceptDescriptor;
+import jetbrains.mps.util.NameUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class CompiledConceptDescriptor extends BaseConceptDescriptor {
+public final class CompiledConceptDescriptor implements ConceptDescriptor {
   private final SConceptId myId;
   private final String myConceptFqName;
   @Nullable
   private final SConceptId mySuperConceptId;
-  private final String mySuperConcept;
   private final boolean myInterfaceConcept;
-  private final SConceptId[] myParents;
+  private final List<SConceptId> myParents;
   private final PropertyDescriptor[] myOwnProperties;
   private final ReferenceDescriptor[] myOwnReferences;
   private final LinkDescriptor[] myOwnLinks;
   private final boolean myAbstract;
   private final boolean myFinal;
-  private boolean myIsRootable;
+  private final boolean myIsRootable;
   private final String myConceptAlias;
-  private final String myConceptShortDescription;
-  private final String myHelpUrl;
+  private final ConceptKind myConceptKind;
   private final StaticScope myStaticScope;
-  private SNodeReference mySourceNodeRef;
+  @Nullable
+  private final SConceptId myStubConceptId;
+  private final SNodeReference mySourceNodeRef;
   private final Object myLock = "";
   // to be initialized
-  private List<SConceptId> parents;
   private Set<SConceptId> ancestorsIds;
   private Map<SPropertyId, PropertyDescriptor> properties;
   private Map<SReferenceLinkId, ReferenceDescriptor> references;
   private Map<SContainmentLinkId, LinkDescriptor> links;
-  private Map<String, PropertyDescriptor> propertiesByName;
-  private Map<String, ReferenceDescriptor> referencesByName;
-  private Map<String, LinkDescriptor> linksByName;
   private volatile boolean myInitialized = false;
   private int myVersion;
 
@@ -78,10 +77,8 @@ public class CompiledConceptDescriptor extends BaseConceptDescriptor {
       @NotNull SConceptId id,
       @NotNull String conceptFqName,
       @Nullable SConceptId superConceptId,
-      @Nullable String superConcept,
       boolean interfaceConcept,
       SConceptId[] parents,
-      String[] parentNames, // ignored
       PropertyDescriptor[] ownProperties,
       ReferenceDescriptor[] ownReferences,
       LinkDescriptor[] ownLinks,
@@ -89,17 +86,41 @@ public class CompiledConceptDescriptor extends BaseConceptDescriptor {
       boolean isFinal,
       boolean isRootable,
       String conceptAlias,
-      String shortDescription,
-      String helpUrl,
       StaticScope staticScope,
+      SConceptId stubConcept,
+      ConceptKind conceptKind,
       SNodeReference sourceNodeRef) {
     myVersion = version;
     myId = id;
     myConceptFqName = conceptFqName;
     mySuperConceptId = superConceptId;
-    mySuperConcept = superConcept;
     myInterfaceConcept = interfaceConcept;
-    myParents = parents;
+    if (!interfaceConcept && !SNodeUtil.conceptId_BaseConcept.equals(id)) {
+      // make sure parents include superconcept (e.g. ConceptDescendantsCache.loadConcept implicitly assumes BC in concept's hierarchy)
+      // we could have done this in ConceptDescriptorBuilder, but since we got two of them now, I decided to keep the code to enforce the invariant
+      // of #getParentIds() here.
+      if (superConceptId == null) {
+        // for a !interface concept, missing superconcept implies BaseConcept
+        superConceptId = SNodeUtil.conceptId_BaseConcept;
+      }
+      ArrayDeque<SConceptId> pp = new ArrayDeque<>(parents == null ? 2 : parents.length + 2);
+      boolean parentsContainSuper = false;
+      if (parents != null) {
+        for (SConceptId p : parents) {
+          pp.addLast(p);
+          if (!parentsContainSuper && superConceptId.equals(p)) {
+            parentsContainSuper = true;
+          }
+        }
+      }
+      if (!parentsContainSuper) {
+        pp.addFirst(superConceptId);
+      }
+      myParents = Arrays.asList(pp.toArray(new SConceptId[0]));
+    } else {
+      assert superConceptId == null;
+      myParents = parents == null || parents.length == 0 ? Collections.emptyList() : Arrays.asList(parents);
+    }
 
     myOwnProperties = ownProperties;
     myOwnReferences = ownReferences;
@@ -108,10 +129,12 @@ public class CompiledConceptDescriptor extends BaseConceptDescriptor {
     myAbstract = isAbstract;
     myFinal = isFinal;
     myIsRootable = isRootable;
-    myConceptAlias = conceptAlias;
-    myConceptShortDescription = shortDescription;
-    myHelpUrl = helpUrl;
+    myConceptAlias = conceptAlias == null ? "" : conceptAlias;
+    // generally, conceptKind != null, and defaults to NORMAL. In case there could be code that does CDB2.kind(null,...), can make sure it's not null here
+    myConceptKind = conceptKind;
     myStaticScope = staticScope;
+
+    myStubConceptId = stubConcept;
 
     // todo: common with StructureAspectInterpreted to new class!
     mySourceNodeRef = sourceNodeRef;
@@ -121,33 +144,39 @@ public class CompiledConceptDescriptor extends BaseConceptDescriptor {
     if (myInitialized) {
       return;
     }
+
+    List<ConceptDescriptor> parentDescriptors = new ArrayList<>(myParents.size());
+    for (SConceptId parent : myParents) {
+      //it's important to keep this code out of myLock since it may acquire a read lock (see MPS-26559)
+      ConceptDescriptor descriptor = ConceptRegistry.getInstance().getConceptDescriptor(parent);
+      parentDescriptors.add(descriptor);
+    }
+
     synchronized (myLock) {
       if (myInitialized) {
         return;
       }
-      List<ConceptDescriptor> parentDescriptors = new ArrayList<ConceptDescriptor>(myParents.length);
-      for (SConceptId parent : myParents) {
-        ConceptDescriptor descriptor = ConceptRegistry.getInstance().getConceptDescriptor(parent);
-        parentDescriptors.add(descriptor);
-      }
 
-      if (isInterfaceConcept()){
+      if (isInterfaceConcept()) {
+        // for regular ConceptDescriptor, BaseConcept would come through superConcept hierarchy, either directly from myParents or
+        // indirectly as (grand-)parent of a superconcept.
+        // for interface ConceptDescriptor, we need to respect BaseConcept's features but don't need to expose it in parents (why, btw?)
+        // At least SInterfaceConceptAdapter.getSuperInterfaces doesn't expect anything but interface CDs from getParents()
         parentDescriptors.add(ConceptRegistry.getInstance().getConceptDescriptor(SNodeUtil.conceptId_BaseConcept));
       }
 
       initAncestors(parentDescriptors);
       initPropertyNames(parentDescriptors);
-      initReferenceNames(parentDescriptors);
-      initChildNames(parentDescriptors);
+      initAssociations(parentDescriptors);
+      initAggregations(parentDescriptors);
       myInitialized = true;
     }
   }
 
   private void initAncestors(List<ConceptDescriptor> parentDescriptors) {
     assert !myInitialized;
-    parents = Arrays.asList(myParents);
-    ancestorsIds = new LinkedHashSet<SConceptId>();
-    Collections.addAll(ancestorsIds, myParents);
+    ancestorsIds = new LinkedHashSet<>();
+    ancestorsIds.addAll(myParents);
     ancestorsIds.add(myId);
     for (ConceptDescriptor parentDescriptor : parentDescriptors) {
       ancestorsIds.addAll(parentDescriptor.getAncestorsIds());
@@ -157,70 +186,58 @@ public class CompiledConceptDescriptor extends BaseConceptDescriptor {
   private void initPropertyNames(List<ConceptDescriptor> parentDescriptors) {
     assert !myInitialized;
 
-    Map<SPropertyId, PropertyDescriptor> propsMap = new LinkedHashMap<SPropertyId, PropertyDescriptor>();
-    Map<String, PropertyDescriptor> propByNameMap = new LinkedHashMap<String, PropertyDescriptor>();
+    Map<SPropertyId, PropertyDescriptor> propsMap = new LinkedHashMap<>();
     for (PropertyDescriptor p : myOwnProperties) {
       propsMap.put(p.getId(), p);
-      propByNameMap.put(p.getName(), p);
     }
     for (ConceptDescriptor parentDescriptor : parentDescriptors) {
-      for (SPropertyId p : parentDescriptor.getPropertyIds()) {
-        PropertyDescriptor pd = parentDescriptor.getPropertyDescriptor(p);
-        propsMap.put(p, pd);
-        propByNameMap.put(pd.getName(), pd);
+      for (PropertyDescriptor pd : parentDescriptor.getPropertyDescriptors()) {
+        propsMap.put(pd.getId(), pd);
       }
     }
-    properties = propsMap;
-    propertiesByName = propByNameMap;
+    properties = Collections.unmodifiableMap(propsMap);
   }
 
-  private void initReferenceNames(List<ConceptDescriptor> parentDescriptors) {
+  private void initAssociations(List<ConceptDescriptor> parentDescriptors) {
     assert !myInitialized;
 
-    Map<SReferenceLinkId, ReferenceDescriptor> refsMap = new LinkedHashMap<SReferenceLinkId, ReferenceDescriptor>();
-    HashMap<String, ReferenceDescriptor> refsByNameMap = new LinkedHashMap<String, ReferenceDescriptor>();
+    Map<SReferenceLinkId, ReferenceDescriptor> refsMap = new LinkedHashMap<>();
     for (ReferenceDescriptor r : myOwnReferences) {
+      if (r.getSpecializedLink() != null) {
+        // ignore specialized links for now
+        continue;
+      }
       refsMap.put(r.getId(), r);
-      refsByNameMap.put(r.getName(), r);
     }
     for (ConceptDescriptor parentDescriptor : parentDescriptors) {
-      for (SReferenceLinkId r : parentDescriptor.getReferenceIds()) {
-        ReferenceDescriptor rd = parentDescriptor.getRefDescriptor(r);
-        refsMap.put(r, rd);
-        refsByNameMap.put(rd.getName(), rd);
+      for (ReferenceDescriptor rd : parentDescriptor.getReferenceDescriptors()) {
+        refsMap.put(rd.getId(), rd);
       }
     }
-    references = refsMap;
-    referencesByName = refsByNameMap;
+    references = Collections.unmodifiableMap(refsMap);
   }
 
-  private void initChildNames(List<ConceptDescriptor> parentDescriptors) {
+  private void initAggregations(List<ConceptDescriptor> parentDescriptors) {
     assert !myInitialized;
 
     //ids
-    Map<SContainmentLinkId, LinkDescriptor> linksMap = new LinkedHashMap<SContainmentLinkId, LinkDescriptor>();
-    HashMap<String, LinkDescriptor> linksByNameMap = new LinkedHashMap<String, LinkDescriptor>();
+    Map<SContainmentLinkId, LinkDescriptor> linksMap = new LinkedHashMap<>();
     for (LinkDescriptor r : myOwnLinks) {
+      if (r.getSpecializedLink() != null) {
+        // ignore specialized links for now
+        continue;
+      }
       linksMap.put(r.getId(), r);
-      linksByNameMap.put(r.getName(), r);
     }
     for (ConceptDescriptor parentDescriptor : parentDescriptors) {
-      for (SContainmentLinkId r : parentDescriptor.getLinkIds()) {
-        LinkDescriptor ld = parentDescriptor.getLinkDescriptor(r);
-        linksMap.put(r, ld);
-        linksByNameMap.put(ld.getName(), ld);
+      for (LinkDescriptor ld : parentDescriptor.getLinkDescriptors()) {
+        linksMap.put(ld.getId(), ld);
       }
     }
-    links = linksMap;
-    linksByName = linksByNameMap;
+    links = Collections.unmodifiableMap(linksMap);
   }
 
-  /**
-   * This method is for internal use only.
-   * It allows to identify whether some properties, which were added in later versions of MPS, were specified
-   * on construction (by generated code) or they have default values.
-   * This is needed not to make wasSet/wasNotSet field for each method.
-   */
+  @Override
   public int getVersion() {
     return myVersion;
   }
@@ -230,14 +247,20 @@ public class CompiledConceptDescriptor extends BaseConceptDescriptor {
     return myConceptFqName;
   }
 
+  @NotNull
   @Override
-  public String getSuperConcept() {
-    return mySuperConcept;
+  public String getName() {
+    return NameUtil.shortNameFromLongName(myConceptFqName);
   }
 
   @Override
   public boolean isInterfaceConcept() {
     return myInterfaceConcept;
+  }
+
+  @Override
+  public ConceptKind getConceptKind() {
+    return myConceptKind;
   }
 
   @Override
@@ -266,16 +289,6 @@ public class CompiledConceptDescriptor extends BaseConceptDescriptor {
     return myConceptAlias;
   }
 
-  @Override
-  public String getConceptShortDescription() {
-    return myConceptShortDescription;
-  }
-
-  @Override
-  public String getHelpUrl() {
-    return myHelpUrl;
-  }
-
   @Nullable
   @Override
   public SNodeReference getSourceNode() {
@@ -294,10 +307,15 @@ public class CompiledConceptDescriptor extends BaseConceptDescriptor {
     return mySuperConceptId;
   }
 
+  @Nullable
+  @Override
+  public SConceptId getStubConceptId() {
+    return myStubConceptId;
+  }
+
   @Override
   public List<SConceptId> getParentsIds() {
-    init();
-    return parents;
+    return myParents;
   }
 
   @Override
@@ -307,9 +325,9 @@ public class CompiledConceptDescriptor extends BaseConceptDescriptor {
   }
 
   @Override
-  public Set<SPropertyId> getPropertyIds() {
+  public Collection<PropertyDescriptor> getPropertyDescriptors() {
     init();
-    return properties.keySet();
+    return properties.values();
   }
 
   @Override
@@ -319,15 +337,9 @@ public class CompiledConceptDescriptor extends BaseConceptDescriptor {
   }
 
   @Override
-  public PropertyDescriptor getPropertyDescriptor(String name) {
+  public Collection<ReferenceDescriptor> getReferenceDescriptors() {
     init();
-    return propertiesByName.get(name);
-  }
-
-  @Override
-  public Set<SReferenceLinkId> getReferenceIds() {
-    init();
-    return references.keySet();
+    return references.values();
   }
 
   @Override
@@ -337,15 +349,9 @@ public class CompiledConceptDescriptor extends BaseConceptDescriptor {
   }
 
   @Override
-  public ReferenceDescriptor getRefDescriptor(String name) {
+  public Collection<LinkDescriptor> getLinkDescriptors() {
     init();
-    return referencesByName.get(name);
-  }
-
-  @Override
-  public Set<SContainmentLinkId> getLinkIds() {
-    init();
-    return links.keySet();
+    return links.values();
   }
 
   @Override
@@ -355,8 +361,95 @@ public class CompiledConceptDescriptor extends BaseConceptDescriptor {
   }
 
   @Override
-  public LinkDescriptor getLinkDescriptor(String name) {
-    init();
-    return linksByName.get(name);
+  public boolean isAssignableTo(SConceptId conceptId) {
+    return getAncestorsIds().contains(conceptId);
+  }
+
+  /*
+   * Three concepts, each with a link declaration. C3 extends C2, C2 extends C1. (C1.ld1), (C2.ld2) and (C3.ld3)
+   * Case 1, transitive:
+   *   ld3 specializes ld2, ld2 specialize ld1.
+   * Case 2, two overrides for same base link:
+   *   ld3 specializes ld1, ld2 specializes ld1.
+   * Case 3, super-concept specialize, sub-concept shall respect the one of super-concept
+   *  ld2 specialize ld1, targetOf(C3.ld1) shall give targetOf(ld2)
+   */
+  @Override
+  public SConceptId getMostSpecificLinkTarget(StructureRegistry registry, @NotNull SReferenceLinkId genuine) {
+    assert getRefDescriptor(genuine) != null : "association link not from concept hierarchy";
+    for (ReferenceDescriptor rd : myOwnReferences) {
+      if (rd.getSpecializedLink() == null) {
+        continue;
+      }
+      if (genuine.equals(rd.getSpecializedLink())) {
+        return rd.getTargetConcept();
+      }
+      final SConceptId ancestor = rd.getSpecializedLink().getConceptId();
+      assert getAncestorsIds().contains(ancestor) : "specialized link belongs to a concept not from my hierarchy";
+      final ConceptDescriptor acd = registry.getConceptDescriptor(ancestor);
+      if (acd.getRefDescriptor(genuine) == null) {
+        // rd specifies some other link than submitted 'genuine'
+        continue;
+      }
+      final SConceptId transitive = acd.getMostSpecificLinkTarget(registry, genuine);
+      if (transitive != null) {
+        // Assumption is there could be no 2 specifications for the same link, if we find any link in hierarchy that specialize
+        // supplied 'genuine', use it right away
+        return transitive;
+      }
+      // try next link specification, if any.
+    }
+    for (SConceptId p : getParentsIds()) {
+      final ConceptDescriptor pcd = registry.getConceptDescriptor(p);
+      if (pcd.getRefDescriptor(genuine) == null) {
+        // this particular parent doesn't come with the link
+        continue;
+      }
+      final SConceptId cid = pcd.getMostSpecificLinkTarget(registry, genuine);
+      if (cid != null) {
+        return cid;
+      }
+    }
+    // well, neither we nor our parents know anything about specifications for the link
+    return null;
+  }
+
+  @Override
+  public SConceptId getMostSpecificLinkTarget(StructureRegistry registry, @NotNull SContainmentLinkId genuine) {
+    assert getLinkDescriptor(genuine) != null : "aggregation link not from concept hierarchy";
+    for (LinkDescriptor rd : myOwnLinks) {
+      if (rd.getSpecializedLink() == null) {
+        continue;
+      }
+      if (genuine.equals(rd.getSpecializedLink())) {
+        return rd.getTargetConcept();
+      }
+      final SConceptId ancestor = rd.getSpecializedLink().getConceptId();
+      assert getAncestorsIds().contains(ancestor) : "specialized link belongs to a concept not from my hierarchy";
+      final ConceptDescriptor acd = registry.getConceptDescriptor(ancestor);
+      if (acd.getLinkDescriptor(genuine) == null) {
+        // rd specifies some other link than submitted 'genuine'
+        continue;
+      }
+      final SConceptId transitive = acd.getMostSpecificLinkTarget(registry, genuine);
+      if (transitive != null) {
+        // Assumption is there could be no 2 specifications for the same link, if we find any link in hierarchy that specialize
+        // supplied 'genuine', use it right away
+        return transitive;
+      }
+      // try next link specification, if any.
+    }
+    for (SConceptId p : getParentsIds()) {
+      final ConceptDescriptor pcd = registry.getConceptDescriptor(p);
+      if (pcd.getLinkDescriptor(genuine) == null) {
+        // this particular parent doesn't come with the link
+        continue;
+      }
+      final SConceptId cid = registry.getConceptDescriptor(p).getMostSpecificLinkTarget(registry, genuine);
+      if (cid != null) {
+        return cid;
+      }
+    }
+    return null;
   }
 }

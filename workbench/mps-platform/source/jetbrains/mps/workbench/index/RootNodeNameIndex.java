@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,11 @@
  */
 package jetbrains.mps.workbench.index;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.openapi.progress.ProcessCanceledException;
+import com.intellij.openapi.project.IndexNotReadyException;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.indexing.FileBasedIndex;
@@ -25,110 +29,123 @@ import com.intellij.util.indexing.ID;
 import com.intellij.util.indexing.SingleEntryFileBasedIndexExtension;
 import com.intellij.util.indexing.SingleEntryIndexer;
 import com.intellij.util.io.DataExternalizer;
+import jetbrains.mps.components.ComponentHost;
+import jetbrains.mps.extapi.model.SModelData;
+import jetbrains.mps.extapi.persistence.ModelFactoryService;
+import jetbrains.mps.extapi.persistence.datasource.DataSourceFactoryFromPath;
+import jetbrains.mps.extapi.persistence.datasource.DataSourceFactoryRuleService;
 import jetbrains.mps.fileTypes.MPSFileTypeFactory;
-import jetbrains.mps.ide.vfs.VirtualFileUtils;
-import jetbrains.mps.persistence.FolderModelFactory;
-import jetbrains.mps.persistence.PersistenceUtil;
-import jetbrains.mps.project.MPSExtentions;
-import jetbrains.mps.smodel.SModelStereotype;
+import jetbrains.mps.ide.MPSCoreComponents;
+import jetbrains.mps.logging.Logger;
+import jetbrains.mps.persistence.IndexAwareModelFactory;
 import jetbrains.mps.smodel.SNodePointer;
-import jetbrains.mps.util.ConditionalIterable;
-import jetbrains.mps.util.FileUtil;
-import jetbrains.mps.workbench.findusages.ConcreteFilesGlobalSearchScope;
+import jetbrains.mps.smodel.persistence.def.ModelReadException;
+import jetbrains.mps.vfs.path.Path;
+import jetbrains.mps.vfs.path.PathFormats;
 import jetbrains.mps.workbench.goTo.index.SNodeDescriptor;
 import jetbrains.mps.workbench.index.ModelRootsData.Entry;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.mps.openapi.model.SModel;
-import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.persistence.DataSource;
 import org.jetbrains.mps.openapi.persistence.ModelFactory;
 import org.jetbrains.mps.openapi.persistence.NavigationParticipant.NavigationTarget;
-import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
-import org.jetbrains.mps.util.Condition;
+import org.jetbrains.mps.openapi.persistence.datasource.DataSourceType;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Indexes .mps files, producing an object that keeps all navigable model roots.
  * Note, it's not a true index, rather a caching mechanism that employs indexing infrastructure (as any
- * SingleEntryFileBasedIndexExtension does). There's only one key to access indexed values, and it's id of the virtual file itself,
- * see {@link #getFileKey(VirtualFile)}. It's not an index as one needs to know file to obtain the key (look at {@link #getValues(VirtualFile)}).
+ * SingleEntryFileBasedIndexExtension does). There's only one key to access indexed values, and it's id of the virtual file itself.
+ * It's not an index as one needs to know file to obtain the key (look at {@link #getValues(Project, VirtualFile)}).
  */
 public class RootNodeNameIndex extends SingleEntryFileBasedIndexExtension<ModelRootsData> {
   @NonNls
   private static final ID<Integer, ModelRootsData> NAME = ID.create("mps.RootNodeName");
-  private static final Logger LOG = LogManager.getLogger(RootNodeNameIndex.class);
-  private static final Key<SModel> PARSED_MODEL = new Key<SModel>("parsed-model");
+  private static final Logger LOG = Logger.getLogger(RootNodeNameIndex.class);
+  private static final Key<SModelData> PARSED_MODEL = new Key<>("parsed-model");
 
-  public static SModel doModelParsing(FileContent inputData) {
-    SModel model = inputData.getUserData(PARSED_MODEL);
+  public static SModelData doModelParsing(ComponentHost mpsPlatform, FileContent inputData) {
+    SModelData modelData = inputData.getUserData(PARSED_MODEL);
 
-    if (model == null) {
-      String ext = FileUtil.getExtension(inputData.getFileName());
-      if (MPSFileTypeFactory.MPS_ROOT_FILE_TYPE.equals(inputData.getFile().getFileType())) {
-        ext = MPSFileTypeFactory.MPS_HEADER_FILE_TYPE.getDefaultExtension();
-      }
-      ModelFactory factory = PersistenceFacade.getInstance().getModelFactory(ext);
-      if (factory == null) {
+    if (modelData == null) {
+      try {
+        Path path = constructPathFromData(inputData);
+        var dataSourceFactory = getDataSourceFactory(mpsPlatform, path);
+        if (dataSourceFactory == null) {
+          return null;
+        }
+        DataSource dataSource = dataSourceFactory.create(path);
+        DataSourceType type = dataSource.getType();
+        if (type == null) {
+          return null;
+        }
+        ModelFactory factory = mpsPlatform.findComponent(ModelFactoryService.class).getDefaultModelFactory(type);
+        if (factory == null) {
+          return null;
+        }
+        if (!(factory instanceof IndexAwareModelFactory)) {
+          return null;
+        }
+        modelData = ((IndexAwareModelFactory) factory).parseSingleStream(inputData.getFileName(), new ByteArrayInputStream(inputData.getContent()));
+        if (modelData == null) {
+          return null;
+        }
+        inputData.putUserData(PARSED_MODEL, modelData);
+      } catch (ModelReadException e) {
+        //do nothing. This may happen e.g. when the file is created and not yet filled with content
+      } catch (IOException e) {
+        LOG.error(String.format("Failed to index %s", inputData.getFileName()), e);
         return null;
       }
-      if (factory instanceof FolderModelFactory) {
-        model = PersistenceUtil.loadModel(VirtualFileUtils.toIFile(
-                MPSFileTypeFactory.MPS_ROOT_FILE_TYPE.equals(inputData.getFile().getFileType())
-                    ? inputData.getFile().getParent().findChild(MPSExtentions.DOT_MODEL_HEADER) : inputData.getFile())
-        );
-      } else {
-        model = factory.isBinary()
-            ? PersistenceUtil.loadModel(inputData.getContent(), ext)
-            : PersistenceUtil.loadModel(inputData.getContentAsText().toString(), ext);
-      }
-      if (model == null) {
-        return null;
-      }
-      inputData.putUserData(PARSED_MODEL, model);
     }
-    return model;
+    return modelData;
   }
 
-  // FIXME No idea what's this method for, why do we care about node id serialization format. Drop
-  public static Iterable<SNode> getRootsToIterate(SModel model) {
-    return new ConditionalIterable<SNode>(model.getRootNodes(), new MyCondition());
+  @Nullable
+  private static DataSourceFactoryFromPath getDataSourceFactory(ComponentHost mpsPlatform, Path path) {
+    var service = mpsPlatform.findComponent(DataSourceFactoryRuleService.class);
+    var dataSourceFactory = service.getFactory(path);
+    if (dataSourceFactory == null) {
+      LOG.error("Data Source Factory is not found for " + path);
+    }
+    return dataSourceFactory;
   }
 
-  /**
-   * @return key one needs to access indexed values
-   */
-  public static int getFileKey(@NotNull VirtualFile file) {
-    // this is what SingleEntryIndexer does to associate values with a file, and what
-    // SingleEntryFileBasedIndexExtension shall expose in its API but does not, and every client of it shall
-    // duplicate this implementation logic when trying to access index values (Math.abs() is often overlooked)
-    int fileId = FileBasedIndex.getFileId(file);
-    if (fileId != Math.abs(fileId)) {
-      System.out.printf("!!!" + file.getPath());
-    }
-    return fileId;
-//    return Math.abs(fileId);
+  @Nullable
+  private static Path constructPathFromData(FileContent inputData) {
+    String path = inputData.getFile().getPath();
+    return PathFormats.UNIX.fromString(path);
   }
 
   /**
    * @return cached, aka 'indexed' values associated with the model file, ready for navigation
    */
   @NotNull
-  public static Collection<NavigationTarget> getValues(@NotNull VirtualFile modelFile) {
-    int fileId = RootNodeNameIndex.getFileKey(modelFile);
-    ConcreteFilesGlobalSearchScope fileScope = new ConcreteFilesGlobalSearchScope(Collections.singleton(modelFile));
-    List<ModelRootsData> descriptors = FileBasedIndex.getInstance().getValues(RootNodeNameIndex.NAME, fileId, fileScope);
+  public static Collection<NavigationTarget> getValues(@NotNull Project project, @NotNull VirtualFile modelFile) {
+    Collection<ModelRootsData> descriptors = Collections.emptyList();
+    try {
+      descriptors = FileBasedIndex.getInstance().getFileData(RootNodeNameIndex.NAME, modelFile, project).values();
+    } catch (ProcessCanceledException | IndexNotReadyException ex) {
+      // ignore, fall-through
+    }
     if (descriptors.isEmpty()) {
       return Collections.emptyList();
     }
-    ModelRootsData modelEntry = descriptors.get(0); // key is unique for the model
+    if (descriptors.size() > 1) {
+      final String m = descriptors.stream().map(ModelRootsData::getModelReference).map(Objects::toString).collect(Collectors.joining(","));
+      LOG.warning(String.format("Unexpected %d sets of data inside a single model file: %s", descriptors.size(), m));
+    }
+    ModelRootsData modelEntry = descriptors.iterator().next(); // key is unique for the model
     Collection<Entry> entries = modelEntry.getEntries();
-    ArrayList<NavigationTarget> rv = new ArrayList<NavigationTarget>(entries.size());
+    ArrayList<NavigationTarget> rv = new ArrayList<>(entries.size());
     for (Entry e : entries) {
       rv.add(new SNodeDescriptor(e.myName, e.myConcept, new SNodePointer(modelEntry.getModelReference(), e.myNode)));
     }
@@ -150,7 +167,7 @@ public class RootNodeNameIndex extends SingleEntryFileBasedIndexExtension<ModelR
   @NotNull
   @Override
   public SingleEntryIndexer<ModelRootsData> getIndexer() {
-    return new MyIndexer();
+    return new MyIndexer(ApplicationManager.getApplication().getComponent(MPSCoreComponents.class).getPlatform());
   }
 
   @NotNull
@@ -164,14 +181,6 @@ public class RootNodeNameIndex extends SingleEntryFileBasedIndexExtension<ModelR
     return 1;
   }
 
-  private static class MyCondition implements Condition<SNode> {
-    @Override
-    public boolean met(SNode node) {
-      // FIXME I've got no idea why we discriminate nodes with such id
-      return !node.getNodeId().toString().contains("$");
-    }
-  }
-
   private static class MyInputFilter implements FileBasedIndex.InputFilter {
     @Override
     public boolean acceptInput(@NotNull VirtualFile file) {
@@ -181,22 +190,24 @@ public class RootNodeNameIndex extends SingleEntryFileBasedIndexExtension<ModelR
   }
 
   private static class MyIndexer extends SingleEntryIndexer<ModelRootsData> {
-    private MyIndexer() {
+    private final ComponentHost myPlatform;
+
+    private MyIndexer(ComponentHost platform) {
       super(false);
+      myPlatform = platform;
     }
 
     @Override
     protected ModelRootsData computeValue(@NotNull final FileContent inputData) {
       try {
         // XXX Perhaps, shall extend xml.persistence.Indexer with proper methods (name, concept) not to read as complete SModel?
-        SModel model = doModelParsing(inputData);
-        if (model == null || SModelStereotype.isStubModel(model)) {
+        SModelData modelData = doModelParsing(myPlatform, inputData);
+        if (modelData == null) {
           // e.g. model with merge conflict
-          // stub models are handled elsewhere
           return null;
         }
 
-        ModelRootsData data = new ModelRootsData(model);
+        ModelRootsData data = new ModelRootsData(modelData);
         // it looks there's no reason to serialize data for empty model
         return data.isEmpty() ? null : data;
       } catch (Exception e) {

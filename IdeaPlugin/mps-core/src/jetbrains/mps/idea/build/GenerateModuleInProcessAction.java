@@ -20,10 +20,18 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.project.Project;
 import jetbrains.mps.fileTypes.FileIcons;
+import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.idea.core.project.module.ModuleMPSSupport;
 import jetbrains.mps.project.Solution;
+import jetbrains.mps.smodel.ModelAccessHelper;
+import jetbrains.mps.util.Computable;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.model.SModel;
+import org.jetbrains.mps.openapi.module.SRepository;
+
+import java.util.List;
 
 /**
  * Created by danilla on 21/10/15.
@@ -42,16 +50,27 @@ public class GenerateModuleInProcessAction extends AnAction {
       return;
     } else {
       ModuleMPSSupport mpsSupport = ModuleMPSSupport.getInstance();
-      boolean thereAreModels = mpsSupport != null && mpsSupport.isMPSEnabled(module) && mpsSupport.getSolution(module).getModels().iterator().hasNext();
+      boolean thereAreModels = mpsSupport != null && mpsSupport.isMPSEnabled(module) && thereAreModels(mpsSupport, module);
       e.getPresentation().setEnabled(thereAreModels);
     }
+  }
+
+  private boolean thereAreModels(ModuleMPSSupport mpsSupport, Module module) {
+    Project project = module.getProject();
+    SRepository repository = ProjectHelper.getProjectRepository(project);
+    if (repository == null) {
+      return false;
+    }
+    return new ModelAccessHelper(repository).runReadAction(() -> mpsSupport.getSolution(module).getModels().iterator().hasNext());
   }
 
   @Override
   public void actionPerformed(AnActionEvent anActionEvent) {
     Module module = LangDataKeys.MODULE.getData(anActionEvent.getDataContext());
     Solution solution = ModuleMPSSupport.getInstance().getSolution(module);
-    new GenerateModelsInProcess(module.getProject(), solution.getModels()).generate(getMakeConfigurator());
+    ModelAccessHelper mah = new ModelAccessHelper(solution.getRepository());
+    List<SModel> models = mah.runReadAction((Computable<List<SModel>>) solution::getModels);
+    new GenerateModelsInProcess(module.getProject(), models).generate(getMakeConfigurator());
   }
 
   @Nullable

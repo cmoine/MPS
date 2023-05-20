@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<model ref="r:c3326453-994c-4682-b1cc-f65f3d656c0f(tests.testDepViewer.model1)" doNotGenerate="true">
+<model ref="r:c3326453-994c-4682-b1cc-f65f3d656c0f(tests.testDepViewer.model1)">
   <persistence version="9" />
+  <attribute name="doNotGenerate" value="true" />
   <languages>
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports>
     <import index="jht5" ref="r:008b12eb-ad41-4183-a334-adab93f41d2a(tests.testDepViewer.model2)" />

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-9htbena9quotkoehtgi64dz0gb2r5c8" />
+<product version="3" modelHash="7cqdcd2oyf4g3uufqbwc9pcx233jsgo">
+  <files names="AbstractMutableChildrenList.java:AttributeOperations.java:EmptyList.java:IAttributeDescriptor.java:MutableChildrenList.java:NodeCastException.java:SConceptOperations.java:SEnumOperations.java:SLinkOperations.java:SModelOperations.java:SModuleOperations.java:SNodeOperations.java:SPointerOperations.java:SPropertyOperations.java" />
+</product>
 

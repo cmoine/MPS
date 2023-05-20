@@ -6,11 +6,14 @@ import jetbrains.mps.errors.QuickFix_Runtime;
 import jetbrains.mps.smodel.SNodePointer;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.internal.collections.runtime.IWhereFilter;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SProperty;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 
 public class MoveItemToTheRightPositionWithinDailyPlan_QuickFix extends QuickFix_Runtime {
   public MoveItemToTheRightPositionWithinDailyPlan_QuickFix() {
@@ -20,18 +23,31 @@ public class MoveItemToTheRightPositionWithinDailyPlan_QuickFix extends QuickFix
     return "Move the item to the correct position within the daily plan";
   }
   public void execute(SNode node) {
-    final SNode item = SNodeOperations.cast(node, MetaAdapterFactory.getConcept(0xa7d67633e8d9473bL, 0x98ce995a7aa66941L, 0x4f786d85fe288176L, "jetbrains.mps.samples.heating.structure.Slot"));
-    if (SPropertyOperations.getInteger(item, MetaAdapterFactory.getProperty(0xa7d67633e8d9473bL, 0x98ce995a7aa66941L, 0x4f786d85fe288176L, 0x4f786d85fe28827cL, "start")) < 0) {
+    final SNode item = SNodeOperations.cast(node, CONCEPTS.Slot$rU);
+    if (SPropertyOperations.getInteger(item, PROPS.start$f2z3) < 0) {
       return;
     }
-    SNode dailyPlan = SNodeOperations.cast(SNodeOperations.getParent(item), MetaAdapterFactory.getConcept(0xa7d67633e8d9473bL, 0x98ce995a7aa66941L, 0x4644aa4ce08aec4fL, "jetbrains.mps.samples.heating.structure.DailyPlan"));
-    SNode nextSibling = ListSequence.fromList(SLinkOperations.getChildren(dailyPlan, MetaAdapterFactory.getContainmentLink(0xa7d67633e8d9473bL, 0x98ce995a7aa66941L, 0x4644aa4ce08aec4fL, 0x4644aa4ce08aec57L, "items"))).findFirst(new IWhereFilter<SNode>() {
+    SNode dailyPlan = SNodeOperations.cast(SNodeOperations.getParent(item), CONCEPTS.DailyPlan$zP);
+    SNode nextSibling = ListSequence.fromList(SLinkOperations.getChildren(dailyPlan, LINKS.items$4wAy)).findFirst(new IWhereFilter<SNode>() {
       public boolean accept(SNode it) {
-        return SPropertyOperations.getInteger(it, MetaAdapterFactory.getProperty(0xa7d67633e8d9473bL, 0x98ce995a7aa66941L, 0x4f786d85fe288176L, 0x4f786d85fe28827cL, "start")) > SPropertyOperations.getInteger(item, MetaAdapterFactory.getProperty(0xa7d67633e8d9473bL, 0x98ce995a7aa66941L, 0x4f786d85fe288176L, 0x4f786d85fe28827cL, "start"));
+        return SPropertyOperations.getInteger(it, PROPS.start$f2z3) > SPropertyOperations.getInteger(item, PROPS.start$f2z3);
       }
     });
     if ((nextSibling != null)) {
       SNodeOperations.insertPrevSiblingChild(nextSibling, item);
     }
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept Slot$rU = MetaAdapterFactory.getConcept(0xa7d67633e8d9473bL, 0x98ce995a7aa66941L, 0x4f786d85fe288176L, "jetbrains.mps.samples.heating.structure.Slot");
+    /*package*/ static final SConcept DailyPlan$zP = MetaAdapterFactory.getConcept(0xa7d67633e8d9473bL, 0x98ce995a7aa66941L, 0x4644aa4ce08aec4fL, "jetbrains.mps.samples.heating.structure.DailyPlan");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty start$f2z3 = MetaAdapterFactory.getProperty(0xa7d67633e8d9473bL, 0x98ce995a7aa66941L, 0x4f786d85fe288176L, 0x4f786d85fe28827cL, "start");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink items$4wAy = MetaAdapterFactory.getContainmentLink(0xa7d67633e8d9473bL, 0x98ce995a7aa66941L, 0x4644aa4ce08aec4fL, 0x4644aa4ce08aec57L, "items");
   }
 }

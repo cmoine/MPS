@@ -4,19 +4,16 @@ package jetbrains.mps.build.mps.pluginSolution.plugin;
 
 import org.jetbrains.mps.openapi.module.SModule;
 import jetbrains.mps.project.Project;
-import jetbrains.mps.ide.project.ProjectHelper;
-import jetbrains.mps.smodel.ModelAccess;
-import jetbrains.mps.util.Computable;
+import jetbrains.mps.project.MPSProject;
 import jetbrains.mps.project.Solution;
 import jetbrains.mps.internal.collections.runtime.Sequence;
 import jetbrains.mps.internal.collections.runtime.IWhereFilter;
 import jetbrains.mps.internal.collections.runtime.ISelector;
-import org.jetbrains.annotations.NotNull;
 
 public class SolutionStep extends TwoOptionsStep<SModule> {
   private final Project myMpsProject;
   public SolutionStep(Project project, AbstractBuildGenerator generator, IErrorHandler handler) {
-    super(ProjectHelper.toIdeaProject(project), generator, handler);
+    super(((MPSProject) project).getProject(), generator, handler);
     this.myMpsProject = project;
   }
   @Override
@@ -37,12 +34,7 @@ public class SolutionStep extends TwoOptionsStep<SModule> {
   }
   @Override
   protected String getVariantName(final SModule module) {
-    return ModelAccess.instance().runReadAction(new Computable<String>() {
-      @Override
-      public String compute() {
-        return module.toString();
-      }
-    });
+    return module.toString();
   }
   @Override
   protected String getTextFieldText() {
@@ -66,7 +58,7 @@ public class SolutionStep extends TwoOptionsStep<SModule> {
   }
   @Override
   protected SModule[] getVariants() {
-    return Sequence.fromIterable(((Iterable<SModule>) this.myMpsProject.getModules())).where(new IWhereFilter<SModule>() {
+    return Sequence.fromIterable(((Iterable<SModule>) this.myMpsProject.getProjectModules())).where(new IWhereFilter<SModule>() {
       public boolean accept(SModule it) {
         return it instanceof Solution;
       }
@@ -90,10 +82,5 @@ public class SolutionStep extends TwoOptionsStep<SModule> {
       return "Empty solution name not allowed.";
     }
     return "Module " + text + " already exists, choose another name.";
-  }
-  @NotNull
-  @Override
-  public String getImageText() {
-    return "Script Solution";
   }
 }

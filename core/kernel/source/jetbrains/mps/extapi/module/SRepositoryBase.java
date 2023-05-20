@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,19 +15,33 @@
  */
 package jetbrains.mps.extapi.module;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.model.SModel;
+import org.jetbrains.mps.openapi.model.SModelId;
+import org.jetbrains.mps.openapi.module.RepositoryAccess;
 import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SModuleReference;
 import org.jetbrains.mps.openapi.module.SRepository;
 import org.jetbrains.mps.openapi.module.SRepositoryListener;
+
+import java.util.Objects;
+import java.util.stream.StreamSupport;
 
 /**
  * A repository which registers in the SRepositoryRegistry and fires events about itself
  */
 public abstract class SRepositoryBase implements SRepository {
 
+  private final SRepositoryRegistry myRepositoryRegistry;
   private SRepositoryEventsDispatcher myEventsDispatcher;
 
   protected SRepositoryBase() {
+    myRepositoryRegistry = null;
+  }
+
+  protected SRepositoryBase(@Nullable SRepositoryRegistry repositoryRegistry) {
+    myRepositoryRegistry = repositoryRegistry;
   }
 
   @Override
@@ -35,22 +49,56 @@ public abstract class SRepositoryBase implements SRepository {
     return null;
   }
 
-  protected void init() {
+  public void init() {
+    // XXX why myEventsDispatcher is not mandatory? Do we like to get NPE in e.g. TestRepository?
     myEventsDispatcher = new SRepositoryEventsDispatcher(this);
-    SRepositoryRegistry.getInstance().addRepository(this);
+    if (myRepositoryRegistry != null) {
+      myRepositoryRegistry.addRepository(this);
+    }
   }
 
   public void dispose() {
-    SRepositoryRegistry.getInstance().removeRepository(this);
+    if (myRepositoryRegistry != null){
+      myRepositoryRegistry.removeRepository(this);
+    }
+  }
+
+  /**
+   * subclasses are encouraged to override to supply alternative effective implementation
+   */
+  @Nullable
+  @Override
+  public SModel getModel(@NotNull SModelId modelId) {
+    if (!modelId.isGloballyUnique()) {
+      assert false : "attempt to retrieve a model with non-unique identity";
+      return null;
+    }
+    return StreamSupport.stream(getModules().spliterator(), false).map(m -> m.getModel(modelId)).filter(Objects::nonNull).findFirst().orElse(null);
+  }
+
+
+  // XXX perhaps, has to be part of a separate interface (like SRepoExt), not in this base class
+  // this is a quick'n'dirty alternative to SRepositoryListener methods like modelSetIncomplete/modelSetComplete;
+  // once the approach proves itself, perhaps, I'll stick to MPSModuleRepository being completely responsible for markIncompleteModelSet()
+  public void markIncompleteModelSet(/*not null*/ SModule module) {
+    // base repo impl provides no support for incomplete modules.
+    // Perhaps, could force model loading, instead (i.e. with module.getModels() call)
+    // However, decided that getModel(ModelId) implementation, above, is aligned with 'incomplete' modules, as it walks all modules
+    // and asks them for a model, triggering model load, if necessary, hence no-op here.
   }
 
   @Override
-  public /*final*/ void addRepositoryListener(SRepositoryListener listener) {
+  public RepositoryAccess getRepositoryAccess() {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public /*final*/ void addRepositoryListener(@NotNull SRepositoryListener listener) {
     myEventsDispatcher.addRepositoryListener(listener);
   }
 
   @Override
-  public /*final*/ void removeRepositoryListener(SRepositoryListener listener) {
+  public /*final*/ void removeRepositoryListener(@NotNull SRepositoryListener listener) {
     myEventsDispatcher.removeRepositoryListener(listener);
   }
 

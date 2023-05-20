@@ -12,7 +12,7 @@ public final class ScriptsDescriptor extends ScriptAspectBase {
   private final RefactoringScript[] myRefactoringScripts;
 
   public ScriptsDescriptor() {
-    myRefactoringScripts = new RefactoringScript[9];
+    myRefactoringScripts = new RefactoringScript[10];
     myRefactoringScripts[0] = new ShowJavaUtilReferences_MigrationScript();
     myRefactoringScripts[1] = new BaseLanguageEnhancements_MigrationScript();
     myRefactoringScripts[2] = new RemoveThisWhereAppropriate_MigrationScript();
@@ -22,6 +22,7 @@ public final class ScriptsDescriptor extends ScriptAspectBase {
     myRefactoringScripts[6] = new AddNativeFlagToAllMethods_MigrationScript();
     myRefactoringScripts[7] = new WrapNotChildWithParens_MigrationScript();
     myRefactoringScripts[8] = new MigrateFloatConstants_MigrationScript();
+    myRefactoringScripts[9] = new MigrateTryCatch_MigrationScript();
   }
 
   @Override

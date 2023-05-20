@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,65 +15,52 @@
  */
 package jetbrains.mps.smodel.runtime;
 
-import jetbrains.mps.smodel.IOperationContext;
-import jetbrains.mps.smodel.adapter.ids.SConceptId;
-import jetbrains.mps.smodel.adapter.ids.SPropertyId;
-import jetbrains.mps.smodel.adapter.ids.SReferenceLinkId;
-import jetbrains.mps.util.annotation.ToRemove;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
-import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
 
+/**
+ * Contains the part for the constraints aspect (presumably contains basic checks for links (refs/children), properties + some others)
+ * Here one can find the constraints logic, specific to the given {@link SAbstractConcept}
+ *
+ * Generated constraints roots inherit from this interface
+ *
+ * @author unknown, sorokin
+ */
 public interface ConstraintsDescriptor {
-  @Deprecated
-  String getConceptFqName();
+  // legacy part
+  boolean canBeChild(@NotNull ConstraintContext_CanBeChild context, @Nullable CheckingNodeContext checkingNodeContext);
 
-  @Deprecated
-  @ToRemove(version = 3.4)
-  SConceptId getConceptId();
+  boolean canBeRoot(@NotNull ConstraintContext_CanBeRoot context, @Nullable CheckingNodeContext checkingNodeContext);
 
-  SAbstractConcept getConcept();
+  boolean canBeParent(@NotNull ConstraintContext_CanBeParent context, @Nullable CheckingNodeContext checkingNodeContext);
 
-  boolean canBeChild(@Nullable SNode node, SNode parentNode, SNode link, @Deprecated SNode childConcept, IOperationContext operationContext,
-      @Nullable CheckingNodeContext checkingNodeContext);
+  boolean canBeAncestor(@NotNull ConstraintContext_CanBeAncestor context, @Nullable CheckingNodeContext checkingNodeContext);
 
-  boolean canBeRoot(SModel model, IOperationContext operationContext, @Nullable CheckingNodeContext checkingNodeContext);
+  default boolean canBeChildIsDefined() {
+    return true;
+  }
 
-  boolean canBeParent(SNode node, @Nullable SNode childNode, SNode childConcept, SNode link, IOperationContext operationContext,
-      @Nullable CheckingNodeContext checkingNodeContext);
+  default boolean canBeParentIsDefined() {
+    return true;
+  }
 
-  boolean canBeAncestor(SNode node, @Nullable SNode childNode, SNode childConcept, SNode parentNode, SNode link, IOperationContext operationContext,
-      @Nullable CheckingNodeContext checkingNodeContext);
+  default boolean canBeRootIsDefined() {
+    return true;
+  }
 
-  /**
-   * @deprecated since MPS 3.4 use {@link #canBeAncestor(SNode, SNode, SNode, SNode, SNode, IOperationContext, CheckingNodeContext)}
-   */
-  @Deprecated
-  @ToRemove(version = 3.4)
-  boolean canBeAncestor(SNode node, @Nullable SNode childNode, SNode childConcept, IOperationContext operationContext,
-      @Nullable CheckingNodeContext checkingNodeContext);
+  default boolean canBeAncestorIsDefined() {
+    return true;
+  }
 
   PropertyConstraintsDescriptor getProperty(SProperty property);
 
-  @Deprecated
-  @ToRemove(version = 3.4)
-  PropertyConstraintsDescriptor getProperty(SPropertyId property);
-
-  @Deprecated
-  PropertyConstraintsDescriptor getProperty(String name);
-
-  ReferenceConstraintsDescriptor getReference(SReferenceLink referenceLink);
-
-  @Deprecated
-  @ToRemove(version = 3.4)
-  ReferenceConstraintsDescriptor getReference(SReferenceLinkId referenceLink);
-
-  @Deprecated
   @Nullable
-  ReferenceConstraintsDescriptor getReference(String refName);
+  ReferenceConstraintsDescriptor getReference(SReferenceLink referenceLink);
 
   @Nullable
   ReferenceScopeProvider getDefaultScopeProvider();
@@ -82,17 +69,11 @@ public interface ConstraintsDescriptor {
     // by convention inheritance for this methods not works
   IconResource getInstanceIcon(SNode node);
 
-  SAbstractConcept getDefaultConcreteConcept();
-
-  // todo: remove/move this methods
-  // by convention inheritance for this methods not works
-  // null if icon not alternative
-  @Deprecated
-  @ToRemove(version = 3.4)
   @Nullable
-  String getAlternativeIcon(SNode node);
+  SConcept getDefaultConcreteConcept();
 
-  @Deprecated
-  @ToRemove(version = 3.4)
-  SConceptId getDefaultConcreteConceptId();
+  /**
+   * @return the hosting concept for the descriptor
+   */
+  @NotNull SAbstractConcept getConcept();
 }

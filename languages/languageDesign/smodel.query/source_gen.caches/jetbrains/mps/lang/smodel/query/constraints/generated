@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-bo5s1fa3soegf6sgh758y8khx5kvsz3" />
+<product version="3" modelHash="3bxymohrp822c17ei07zhhdxda61amk">
+  <files names="ConstraintsAspectDescriptor.java:InstancesExpression_Constraints.java:QueryExpression_Constraints.java:QueryParameter_Constraints.java:UsagesExpression_Constraints.java:WithStatement_Constraints.java" />
+</product>
 

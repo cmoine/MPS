@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,77 +16,73 @@
 package jetbrains.mps.generator;
 
 import jetbrains.mps.extapi.model.EditableSModelBase;
+import jetbrains.mps.extapi.model.ModelWithAttributes;
 import jetbrains.mps.extapi.model.SModelBase;
 import jetbrains.mps.extapi.module.TransientSModule;
 import jetbrains.mps.generator.TransientModelsProvider.TransientSwapSpace;
 import jetbrains.mps.generator.impl.ModelVault;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.module.SDependencyImpl;
 import jetbrains.mps.project.AbstractModule;
-import jetbrains.mps.project.ModuleId;
-import jetbrains.mps.project.dependency.GlobalModuleDependenciesManager;
-import jetbrains.mps.project.dependency.GlobalModuleDependenciesManager.Deptype;
 import jetbrains.mps.smodel.FastNodeFinderManager;
-import jetbrains.mps.smodel.SModelOperations;
+import jetbrains.mps.smodel.ModelDependencyUpdate;
+import jetbrains.mps.smodel.ModelImports;
+import jetbrains.mps.smodel.SModelHeader;
+import jetbrains.mps.smodel.SModelId.IntegerSModelId;
+import jetbrains.mps.smodel.SNodeImplAccess;
 import jetbrains.mps.smodel.loading.ModelLoadingState;
-import jetbrains.mps.smodel.references.ImmatureReferencesTracker;
-import jetbrains.mps.util.annotation.ToRemove;
 import jetbrains.mps.util.containers.ConcurrentHashSet;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.mps.openapi.language.SLanguage;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SModelId;
 import org.jetbrains.mps.openapi.model.SModelReference;
+import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.module.SDependency;
 import org.jetbrains.mps.openapi.module.SDependencyScope;
 import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SModuleReference;
-import org.jetbrains.mps.openapi.persistence.ModelSaveException;
+import org.jetbrains.mps.openapi.module.SRepository;
 import org.jetbrains.mps.openapi.persistence.NullDataSource;
 
-import java.io.IOException;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BiConsumer;
 
 public class TransientModelsModule extends AbstractModule implements TransientSModule {
-  private static final Logger LOG = LogManager.getLogger(TransientModelsModule.class);
+  private static final Logger LOG = Logger.getLogger(TransientModelsModule.class);
 
-  private static final AtomicInteger ourModuleCounter = new AtomicInteger();
-
-  private final SModule myOriginalModule;
   private final TransientModelsProvider myComponent;
 
-  private Set<SModel> myPublished = new ConcurrentHashSet<SModel>();
-  private final ModelVault<TransientSModelDescriptor> myModelVault = new ModelVault<TransientSModelDescriptor>();
+  private final Set<SModel> myPublished = new ConcurrentHashSet<>();
+  private final ModelVault<TransientSModelDescriptor> myModelVault = new ModelVault<>();
 
-  private Set<SDependency> myCachedDependencies = null;
+  private final Map<String, GenerationTrace> myTraces = new HashMap<>();
 
-  private final Map<String, GenerationTrace> myTraces = new HashMap<String, GenerationTrace>();
+  // facility to generate IntegerSModelId, unique within a transient module
+  private final AtomicInteger myCounter = new AtomicInteger(0);
 
-  public TransientModelsModule(@NotNull SModule original, @NotNull TransientModelsProvider component) {
-    assert !(original instanceof TransientModelsModule) :
-        "create TransientModelsModule based on another TransientModelsModule with name " + original.getModuleName();
-    myComponent = component;
-    myOriginalModule = original;
-    String fqName = original.getModuleName() + "@transient" + ourModuleCounter.getAndIncrement();
-    SModuleReference reference = new jetbrains.mps.project.structure.modules.ModuleReference(fqName, ModuleId.regular());
-    setModuleReference(reference);
-  }
+  private TransientSwapSpace mySwapSpace;
 
   /*package*/ TransientModelsModule(@NotNull TransientModelsProvider tmProvider, @NotNull SModuleReference moduleReference) {
-    // I could have used custom subclass of AbstractModule and regular models (instanceof extapi.TransientSModel, not necessarily
-    // the same as generator.TransientSModel this class produces), there's no true need in TransientModelsModule, however,
-    // (a) don't want to refactor right now; (b) perhaps, could use swap mechanism of TransientModelsModule in future to keep checkpoint models
-    // (though later could be addressed with extra consumer for TransientSwapOwner, not to mix the two kinds of transient models into single module kind).
     myComponent = tmProvider;
-    myOriginalModule = null;
     setModuleReference(moduleReference);
+  }
+
+  @Override
+  public boolean isReadOnly() {
+    // I treat this as an end-user POV; it's generator that modifies this module internally, but users don't need to
+    // deal with the module. This doesn't mean any [openapi]TransientSModule has to be read-only; only the one of Generator scenario.
+    return true;
+  }
+
+  @Override
+  public boolean isPackaged() {
+    return false;
   }
 
   public boolean hasPublished() {
@@ -95,6 +91,10 @@ public class TransientModelsModule extends AbstractModule implements TransientSM
 
   @Override
   public void dispose() {
+    if (mySwapSpace != null) {
+      mySwapSpace.clear();
+      mySwapSpace = null;
+    }
     clearAll();
     super.dispose();
   }
@@ -146,14 +146,15 @@ public class TransientModelsModule extends AbstractModule implements TransientSM
 
   // to remove published model, one needs write access to a repository,
   // which is not always possible e.g. when a new checkpoint model replaces existing
-  public void forgetModel(SModelReference modelReference, boolean forgetDependants) {
+  public void forgetModel(SModel model, boolean forgetDependants) {
+    SModelReference modelReference = model.getReference();
     assert isMyTransientModel(modelReference);
-    myModelVault.forget(modelReference);
+    myModelVault.forget(model);
     if (forgetDependants) {
       for (TransientSModelDescriptor tm : myModelVault.allModels()) {
         for (SModelReference importElement : tm.getModelImports()) {
           if (modelReference.equals(importElement)) {
-            myModelVault.forget(tm.getReference());
+            myModelVault.forget(tm);
             break;
           }
         }
@@ -196,6 +197,7 @@ public class TransientModelsModule extends AbstractModule implements TransientSM
 
   public SModel createTransientModel(SModelReference modelReference) {
     TransientSModelDescriptor result = new TransientSModelDescriptor(modelReference);
+    // XXX why do we load new model?
     result.load();
 
     myModelVault.add(result);
@@ -203,24 +205,20 @@ public class TransientModelsModule extends AbstractModule implements TransientSM
     return result;
   }
 
-  public String toString() {
-    return getName() + " [transient models module]";
+  // TODO generify attributes so that we can pass whatever information we find handy along with a transient model
+  public SModel createTransientModel(SModelReference modelReference, int branchSerial) {
+    TransientSModelDescriptor result = (TransientSModelDescriptor) createTransientModel(modelReference);
+    result.setBranchSerial(branchSerial);
+    return result;
   }
 
-  /**
-   * @deprecated need for the method is dubious, though the method itself is ok (transient module could be associated with an origin module).
-   * This is a reminder to refactor StaticMethodCall.eval() not to use this method
-   */
-  @Deprecated
-  @ToRemove(version = 3.3)
-  @Nullable
-  public SModule getOriginalModule() {
-    return myOriginalModule;
+  public String toString() {
+    return getModuleName() + " [transient models module]";
   }
 
   // Purpose of this implementation is to resolve references to yet not public transient models
   private SModel findInVault(SModelId reference) {
-    for (SModel m : myModelVault.allModels()) {
+    for (SModel m : myModelVault.allModelsExceptScheduled2Drop()) {
       if (reference.equals(m.getModelId())) {
         return m;
       }
@@ -231,7 +229,8 @@ public class TransientModelsModule extends AbstractModule implements TransientSM
   @Override
   public SModel getModel(SModelId id) {
     SModel rv = super.getModel(id);
-    if (rv != null) {
+    // we may find CP model published during previous generator run but already re-generated (and scheduled to drop) during actual run.
+    if (rv != null && !myModelVault.isScheduled2Drop(rv)) {
       return rv;
     }
     return findInVault(id);
@@ -241,27 +240,43 @@ public class TransientModelsModule extends AbstractModule implements TransientSM
     return modelRef != null && myModelVault.known(modelRef);
   }
 
-  @Override
-  public Set<SLanguage> getUsedLanguages() {
-    return myOriginalModule == null ? Collections.<SLanguage>emptySet() : myOriginalModule.getUsedLanguages();
+
+  /**
+   * @param idHint 5 hex digits for your own use, not necessarily unique for models from this module
+   * @return simple integer id unique within this module, with value from MPS reserved range {@link IntegerSModelId}
+   */
+  public IntegerSModelId nextModelId(int idHint) {
+//    int prefix = 0x100 + myCounter.getAndIncrement();
+//    return new IntegerSModelId((prefix << 20) | (idHint & 0x000FFFFF));
+    // next alternative gives almost complete integer range (except some ~270M)
+    return new IntegerSModelId(0x10000000 + myCounter.incrementAndGet());
   }
 
+  /**
+   * Module of any referenced model we can access through our repository (one of TransientModelsProvider) is deemed declared dependency.
+   * There's little value to show 'out of scope' errors for transient nodes, that's why everything is here.
+   * It used to be GMDM(originalModule, Compile), but I don't see any reason for that.
+   */
   @Override
   public Iterable<SDependency> getDeclaredDependencies() {
-    if (myCachedDependencies == null) {
-      // could be invoked from multiple threads. Don't want synchronization, and hope extra iteration won't hurt that much
-      Set<SDependency> deps;
-      if (myOriginalModule == null) {
-        deps = Collections.emptySet();
-      } else {
-        deps = new HashSet<SDependency>();
-        for (SModule module : new GlobalModuleDependenciesManager(myOriginalModule).getModules(Deptype.COMPILE)) {
-          deps.add(new SDependencyImpl(module, SDependencyScope.DEFAULT, false));
-        }
-      }
-      myCachedDependencies = deps;
+    assertCanRead();
+    // SModelOperations.validateLanguagesAndImports could update this set for us (if I override addDependency() to record values),
+    // but I don't think the method deserves to survive, and its extra use doesn't help this.
+    HashSet<SModelReference> referencedModels = new HashSet<>();
+    for (SModel m : getModels()) {
+      // I'd love to collect importedModel.getModuleReference(), but GUID model references would leave out quite some module dependencies
+      referencedModels.addAll(new ModelImports(m).getImportedModels());
     }
-    return myCachedDependencies;
+    HashSet<SModule> deps = new HashSet<>();
+    for (SModelReference mr : referencedModels) {
+      SModel model = mr.resolve(myComponent.getRepository());
+      if (model != null && model.getModule() != null) {
+        deps.add(model.getModule());
+      }
+    }
+    ArrayList<SDependency> rv = new ArrayList<>(deps.size());
+    deps.forEach(m -> rv.add(new SDependencyImpl(m, SDependencyScope.DEFAULT, false)));
+    return rv;
   }
 
   public GenerationTrace getTrace(SModelReference model) {
@@ -277,14 +292,34 @@ public class TransientModelsModule extends AbstractModule implements TransientSM
     ((TransientSModelDescriptor) transientModel).changeModelReference(newRef);
   }
 
-  public final class TransientSModelDescriptor extends EditableSModelBase implements jetbrains.mps.extapi.model.TransientSModel {
-    protected volatile jetbrains.mps.smodel.SModel mySModel;
+  /*package*/ TransientSwapSpace getSwapSpace() {
+    if (mySwapSpace == null) {
+      // I don't care to guard thread access, as it's responsibility of TransientSwapOwner to make swap allocation atomic (so that check for existence and
+      // create/clear can not get into race condition), and here I don't care if I initialize the field twice with the same value.
+      mySwapSpace = myComponent.getTransientSwapSpace(this);
+    }
+    return mySwapSpace;
+  }
+
+  public final class TransientSModelDescriptor extends EditableSModelBase implements jetbrains.mps.extapi.model.TransientSModel, ModelWithAttributes {
+    protected volatile TransientSModel mySModel;
     private boolean wasUnloaded = false;
-    private ImmatureReferencesTracker myRefsTracker = new ImmatureReferencesTracker();
+    // XXX IRT relies on model changed events. TransientSModel.canFireEvents suggests our intention here was not
+    // to fire any events at all. It's not true now - we respect canFireEvents() for few SModelListener events only,
+    // perhaps, worth respecting the flag for all modification events, in which case IRT here would make no sense.
+
+    private int myBranchSerial = 0;
 
     private TransientSModelDescriptor(@NotNull SModelReference modelRef) {
       super(modelRef, new NullDataSource());
-      myRefsTracker.attach(this,false);
+    }
+
+    /*package*/ void setBranchSerial(int v) {
+      myBranchSerial = v;
+    }
+
+    public int getBranchSerial() {
+      return myBranchSerial;
     }
 
     @Override
@@ -293,7 +328,7 @@ public class TransientModelsModule extends AbstractModule implements TransientSM
     }
 
     @Override
-    public final jetbrains.mps.smodel.SModel getSModelInternal() {
+    public jetbrains.mps.smodel.SModel getSModel() {
       if (mySModel != null) {
         return mySModel;
       }
@@ -304,10 +339,14 @@ public class TransientModelsModule extends AbstractModule implements TransientSM
         oldState = getLoadingState();
         if (mySModel == null) {
           mySModel = createModel();
-          mySModel.setModelDescriptor(this);
+          mySModel.setModelDescriptor(this, getNodeEventDispatch());
           if (wasUnloaded) {
             // ensure imports are back
-            SModelOperations.validateLanguagesAndImports(this, false, false);
+            // XXX don't ask me why we don't swap out models with imports, but bare nodes only.
+            // TransientModelsModule is not necessarily inside a repository, need to take one
+            // where it would end up if published
+            SRepository repository = TransientModelsModule.this.myComponent.getRepository();
+            new ModelDependencyUpdate(this).updateUsedLanguages().updateImportedModels(repository);
             wasUnloaded = false;
           }
           setLoadingState(ModelLoadingState.FULLY_LOADED);
@@ -327,12 +366,15 @@ public class TransientModelsModule extends AbstractModule implements TransientSM
       }
     }
 
-    private jetbrains.mps.smodel.SModel createModel() {
+    private TransientSModel createModel() {
       if (wasUnloaded) {
         LOG.debug("Re-loading " + getReference());
 
-        TransientSwapSpace swap = myComponent.getTransientSwapSpace();
-        if (swap == null) throw new IllegalStateException("no swap space");
+        TransientSwapSpace swap = getSwapSpace();
+        if (swap == null) {
+          // if we got here, it means doUnload managed to access swap and wrote model down there.
+          throw new IllegalStateException("no swap space");
+        }
 
         TransientSModel m = swap.restoreFromSwap(getReference(), new TransientSModel(getReference()));
 
@@ -350,7 +392,7 @@ public class TransientModelsModule extends AbstractModule implements TransientSM
       if (!wasUnloaded) {
         LOG.debug("Un-loading " + getReference());
 
-        TransientSwapSpace swap = myComponent.getTransientSwapSpace();
+        TransientSwapSpace swap = getSwapSpace();
         if (swap == null || !swap.swapOut(mySModel)) {
           return;
         }
@@ -373,10 +415,8 @@ public class TransientModelsModule extends AbstractModule implements TransientSM
 
     // unlike unload, doesn't not swap out model data
     private void dropModel() {
-      myRefsTracker.detach();
       if (mySModel != null) {
         LOG.debug("Dropped " + getReference());
-        mySModel.setModelDescriptor(null);
         mySModel.dispose();
         mySModel = null;
         setLoadingState(ModelLoadingState.NOT_LOADED);
@@ -395,12 +435,12 @@ public class TransientModelsModule extends AbstractModule implements TransientSM
     }
 
     @Override
-    protected boolean saveModel() throws IOException, ModelSaveException {
+    protected boolean saveModel() {
       throw new UnsupportedOperationException();
     }
 
     @Override
-    public void rename(String newModelName, boolean changeFile) {
+    public void rename(@NotNull String newModelName, boolean changeFile) {
       throw new UnsupportedOperationException();
     }
 
@@ -410,7 +450,37 @@ public class TransientModelsModule extends AbstractModule implements TransientSM
     }
 
     public void makeRefsMature() {
-      myRefsTracker.makeMature();
+      for ( SNode n : getRootNodes()) {
+        new SNodeImplAccess(n).makeReferencesIndirect();
+        // XXX makeIndirect() doesn't force 'maturing' of references to hanging nodes (from models not in repository)
+        //     I wonder if transient model happen to have a reference to a checkpoint model, does it mean we fail to
+        //     serialize these? Is it an issue?
+      }
+    }
+
+    private SModelHeader getModelHeader() {
+      getModelData(); // init mySModel field, just in case it hasn't been initialized
+      return mySModel.getSModelHeader();
+    }
+
+    @Override
+    public void setAttribute(@NotNull String key, @Nullable String value) {
+      if (value == null) {
+        getModelHeader().removeOptionalProperty(key);
+      } else {
+        getModelHeader().setOptionalProperty(key, value);
+      }
+    }
+
+    @Nullable
+    @Override
+    public String getAttribute(@NotNull String key) {
+      return getModelHeader().getOptionalProperty(key);
+    }
+
+    @Override
+    public void forEachAttribute(@NotNull BiConsumer<String, String> action) {
+      getModelHeader().getOptionalProperties().forEach(action);
     }
   }
 }

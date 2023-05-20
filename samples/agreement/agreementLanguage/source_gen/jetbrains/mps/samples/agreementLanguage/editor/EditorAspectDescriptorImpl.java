@@ -9,100 +9,48 @@ import jetbrains.mps.openapi.editor.descriptor.ConceptEditor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import java.util.Collections;
 import jetbrains.mps.openapi.editor.descriptor.SubstituteMenu;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public class EditorAspectDescriptorImpl extends EditorAspectDescriptorBase {
   @NotNull
   public Collection<ConceptEditor> getDeclaredEditors(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = ((SAbstractConcept) concept);
-      Integer preIndex = indices_xbvbvu_a0a.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new AccountType_Editor());
-          }
-          break;
-        case 1:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new AgreementDeclarations_Editor());
-          }
-          break;
-        case 2:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new Date_Editor());
-          }
-          break;
-        case 3:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new Date_Future_Editor());
-          }
-          break;
-        case 4:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new Date_Past_Editor());
-          }
-          break;
-        case 5:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new Event_Editor());
-          }
-          break;
-        case 6:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new EventType_Editor());
-          }
-          break;
-        case 7:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new EventVariable_Editor());
-          }
-          break;
-        case 8:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new EventVariableReference_Editor());
-          }
-          break;
-        case 9:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new Plan_Editor());
-          }
-          break;
-        case 10:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new PostingRule_Editor());
-          }
-          break;
-        case 11:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new PostingRuleTemporalProperty_Editor());
-          }
-          break;
-        case 12:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new Quantity_Editor());
-          }
-          break;
-        case 13:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new QuantityTemporalProperty_Editor());
-          }
-          break;
-        case 14:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new Value_Editor());
-          }
-          break;
-        case 15:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ValueReference_Editor());
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = ((SAbstractConcept) concept);
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return Collections.<ConceptEditor>singletonList(new AccountType_Editor());
+      case 1:
+        return Collections.<ConceptEditor>singletonList(new AgreementDeclarations_Editor());
+      case 2:
+        return Collections.<ConceptEditor>singletonList(new Date_Editor());
+      case 3:
+        return Collections.<ConceptEditor>singletonList(new Date_Future_Editor());
+      case 4:
+        return Collections.<ConceptEditor>singletonList(new Date_Past_Editor());
+      case 5:
+        return Collections.<ConceptEditor>singletonList(new Event_Editor());
+      case 6:
+        return Collections.<ConceptEditor>singletonList(new EventType_Editor());
+      case 7:
+        return Collections.<ConceptEditor>singletonList(new EventVariable_Editor());
+      case 8:
+        return Collections.<ConceptEditor>singletonList(new EventVariableReference_Editor());
+      case 9:
+        return Collections.<ConceptEditor>singletonList(new Plan_Editor());
+      case 10:
+        return Collections.<ConceptEditor>singletonList(new PostingRule_Editor());
+      case 11:
+        return Collections.<ConceptEditor>singletonList(new PostingRuleTemporalProperty_Editor());
+      case 12:
+        return Collections.<ConceptEditor>singletonList(new Quantity_Editor());
+      case 13:
+        return Collections.<ConceptEditor>singletonList(new QuantityTemporalProperty_Editor());
+      case 14:
+        return Collections.<ConceptEditor>singletonList(new Value_Editor());
+      case 15:
+        return Collections.<ConceptEditor>singletonList(new ValueReference_Editor());
+      default:
     }
     return Collections.<ConceptEditor>emptyList();
   }
@@ -111,35 +59,25 @@ public class EditorAspectDescriptorImpl extends EditorAspectDescriptorBase {
   @NotNull
   @Override
   public Collection<SubstituteMenu> getDeclaredDefaultSubstituteMenus(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_xbvbvu_a0d.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new quantity_Contribution());
-          }
-          break;
-        case 1:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new Quantity_SubstituteMenu());
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex1.index(cncpt)) {
+      case 0:
+        return Collections.<SubstituteMenu>singletonList(new Event_SubstituteMenu());
+      case 1:
+        return Collections.<SubstituteMenu>singletonList(new EventVariableReference_SubstituteMenu());
+      case 2:
+        return Collections.<SubstituteMenu>singletonList(new quantity_Contribution());
+      case 3:
+        return Collections.<SubstituteMenu>singletonList(new PostingRule_SubstituteMenu());
+      case 4:
+        return Collections.<SubstituteMenu>singletonList(new Quantity_SubstituteMenu());
+      case 5:
+        return Collections.<SubstituteMenu>singletonList(new ValueReference_SubstituteMenu());
+      default:
     }
     return Collections.<SubstituteMenu>emptyList();
   }
 
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
-  }
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0a = buildConceptIndices(MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dc29baa2L, "jetbrains.mps.samples.agreementLanguage.structure.AccountType"), MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102fae6140bL, "jetbrains.mps.samples.agreementLanguage.structure.AgreementDeclarations"), MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dbfd8dcdL, "jetbrains.mps.samples.agreementLanguage.structure.Date"), MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x103f15b1a76L, "jetbrains.mps.samples.agreementLanguage.structure.Date_Future"), MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x103f1595f54L, "jetbrains.mps.samples.agreementLanguage.structure.Date_Past"), MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dbe8f094L, "jetbrains.mps.samples.agreementLanguage.structure.Event"), MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dc1185c3L, "jetbrains.mps.samples.agreementLanguage.structure.EventType"), MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dc12643eL, "jetbrains.mps.samples.agreementLanguage.structure.EventVariable"), MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102ea8a3c37L, "jetbrains.mps.samples.agreementLanguage.structure.EventVariableReference"), MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dbe79bfeL, "jetbrains.mps.samples.agreementLanguage.structure.Plan"), MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dc23b0daL, "jetbrains.mps.samples.agreementLanguage.structure.PostingRule"), MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dc2154d7L, "jetbrains.mps.samples.agreementLanguage.structure.PostingRuleTemporalProperty"), MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dbf92b68L, "jetbrains.mps.samples.agreementLanguage.structure.Quantity"), MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dbff8d6dL, "jetbrains.mps.samples.agreementLanguage.structure.QuantityTemporalProperty"), MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dbe8ab0eL, "jetbrains.mps.samples.agreementLanguage.structure.Value"), MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102eaa8102cL, "jetbrains.mps.samples.agreementLanguage.structure.ValueReference"));
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0d = buildConceptIndices(MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db824fa1L, "jetbrains.mps.samples.formulaLanguage.structure.Expression"), MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dbf92b68L, "jetbrains.mps.samples.agreementLanguage.structure.Quantity"));
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dc29baa2L), MetaIdFactory.conceptId(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102fae6140bL), MetaIdFactory.conceptId(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dbfd8dcdL), MetaIdFactory.conceptId(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x103f15b1a76L), MetaIdFactory.conceptId(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x103f1595f54L), MetaIdFactory.conceptId(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dbe8f094L), MetaIdFactory.conceptId(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dc1185c3L), MetaIdFactory.conceptId(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dc12643eL), MetaIdFactory.conceptId(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102ea8a3c37L), MetaIdFactory.conceptId(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dbe79bfeL), MetaIdFactory.conceptId(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dc23b0daL), MetaIdFactory.conceptId(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dc2154d7L), MetaIdFactory.conceptId(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dbf92b68L), MetaIdFactory.conceptId(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dbff8d6dL), MetaIdFactory.conceptId(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dbe8ab0eL), MetaIdFactory.conceptId(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102eaa8102cL)).seal();
+  private static final ConceptSwitchIndex conceptIndex1 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dbe8f094L), MetaIdFactory.conceptId(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102ea8a3c37L), MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db824fa1L), MetaIdFactory.conceptId(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dc23b0daL), MetaIdFactory.conceptId(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dbf92b68L), MetaIdFactory.conceptId(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102eaa8102cL)).seal();
 }

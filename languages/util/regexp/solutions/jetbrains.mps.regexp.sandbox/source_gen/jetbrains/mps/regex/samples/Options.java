@@ -10,11 +10,11 @@ import java.util.regex.Matcher;
   }
   /*package*/ void test() {
     {
-      Pattern _pattern_0 = REGEXP_3flcu7_a0a0a0b;
+      Pattern _pattern_0 = REGEXP;
       Matcher _matcher_0 = _pattern_0.matcher("abc");
       if (_matcher_0.matches()) {
       }
     }
   }
-  private static Pattern REGEXP_3flcu7_a0a0a0b = Pattern.compile("abcde", 32);
+  private static final Pattern REGEXP = Pattern.compile("abcde", 32);
 }

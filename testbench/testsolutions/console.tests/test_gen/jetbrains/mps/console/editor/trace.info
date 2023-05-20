@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <root nodeRef="r:917991a1-3dab-4b0d-a9f3-7ff4a725c921(jetbrains.mps.console.editor@tests)/1157549163016427193">
+    <file name="CommandSelectAllTest_Test.java">
+      <node id="1157549163016427193" at="19,38,20,60" concept="4" />
+      <node id="1157549163016427193" at="24,60,25,36" concept="1" />
+      <node id="1157549163016427193" at="30,52,31,19" concept="4" />
+      <node id="1157549163016427193" at="35,51,36,72" concept="1" />
+      <node id="1157549163016438937" at="36,72,37,72" concept="1" />
+      <node id="1157549163016427193" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="1157549163016427193" at="19,0,22,0" concept="0" trace="CommandSelectAllTest_Test#()V" />
+      <node id="1157549163016427193" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="1157549163016427193" at="23,0,27,0" concept="2" trace="test_CommandSelectAllTest#()V" />
+      <node id="1157549163016427193" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="1157549163016427193" at="19,38,20,60" />
+      <scope id="1157549163016427193" at="24,60,25,36" />
+      <scope id="1157549163016427193" at="30,52,31,19" />
+      <scope id="1157549163016427193" at="35,51,37,72" />
+      <scope id="1157549163016427193" at="19,0,22,0" />
+      <scope id="1157549163016427193" at="30,0,33,0">
+        <var name="owner" id="1157549163016427193" />
+      </scope>
+      <scope id="1157549163016427193" at="23,0,27,0" />
+      <scope id="1157549163016427193" at="34,0,39,0" />
+      <unit id="1157549163016427193" at="28,0,40,0" name="jetbrains.mps.console.editor.CommandSelectAllTest_Test$TestBody" />
+      <unit id="1157549163016427193" at="14,0,41,0" name="jetbrains.mps.console.editor.CommandSelectAllTest_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:917991a1-3dab-4b0d-a9f3-7ff4a725c921(jetbrains.mps.console.editor@tests)/1207671029799816308">
+    <file name="EmptyConsoleSelectAllTest_Test.java">
+      <node id="1207671029799816308" at="19,43,20,60" concept="4" />
+      <node id="1207671029799816308" at="24,65,25,36" concept="1" />
+      <node id="1207671029799816308" at="30,52,31,19" concept="4" />
+      <node id="1207671029799816308" at="35,51,36,72" concept="1" />
+      <node id="1207671029799816328" at="36,72,37,72" concept="1" />
+      <node id="1207671029799816308" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="1207671029799816308" at="19,0,22,0" concept="0" trace="EmptyConsoleSelectAllTest_Test#()V" />
+      <node id="1207671029799816308" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="1207671029799816308" at="23,0,27,0" concept="2" trace="test_EmptyConsoleSelectAllTest#()V" />
+      <node id="1207671029799816308" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="1207671029799816308" at="19,43,20,60" />
+      <scope id="1207671029799816308" at="24,65,25,36" />
+      <scope id="1207671029799816308" at="30,52,31,19" />
+      <scope id="1207671029799816308" at="35,51,37,72" />
+      <scope id="1207671029799816308" at="19,0,22,0" />
+      <scope id="1207671029799816308" at="30,0,33,0">
+        <var name="owner" id="1207671029799816308" />
+      </scope>
+      <scope id="1207671029799816308" at="23,0,27,0" />
+      <scope id="1207671029799816308" at="34,0,39,0" />
+      <unit id="1207671029799816308" at="28,0,40,0" name="jetbrains.mps.console.editor.EmptyConsoleSelectAllTest_Test$TestBody" />
+      <unit id="1207671029799816308" at="14,0,41,0" name="jetbrains.mps.console.editor.EmptyConsoleSelectAllTest_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:917991a1-3dab-4b0d-a9f3-7ff4a725c921(jetbrains.mps.console.editor@tests)/1207671029800077884">
+    <file name="EmptyConsoleCommentTest_Test.java">
+      <node id="1207671029800077884" at="19,41,20,60" concept="4" />
+      <node id="1207671029800077884" at="24,63,25,36" concept="1" />
+      <node id="1207671029800077884" at="30,52,31,19" concept="4" />
+      <node id="1207671029800077884" at="35,51,36,72" concept="1" />
+      <node id="1207671029800077896" at="36,72,37,70" concept="1" />
+      <node id="1207671029800077884" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="1207671029800077884" at="19,0,22,0" concept="0" trace="EmptyConsoleCommentTest_Test#()V" />
+      <node id="1207671029800077884" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="1207671029800077884" at="23,0,27,0" concept="2" trace="test_EmptyConsoleCommentTest#()V" />
+      <node id="1207671029800077884" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="1207671029800077884" at="19,41,20,60" />
+      <scope id="1207671029800077884" at="24,63,25,36" />
+      <scope id="1207671029800077884" at="30,52,31,19" />
+      <scope id="1207671029800077884" at="35,51,37,70" />
+      <scope id="1207671029800077884" at="19,0,22,0" />
+      <scope id="1207671029800077884" at="30,0,33,0">
+        <var name="owner" id="1207671029800077884" />
+      </scope>
+      <scope id="1207671029800077884" at="23,0,27,0" />
+      <scope id="1207671029800077884" at="34,0,39,0" />
+      <unit id="1207671029800077884" at="28,0,40,0" name="jetbrains.mps.console.editor.EmptyConsoleCommentTest_Test$TestBody" />
+      <unit id="1207671029800077884" at="14,0,41,0" name="jetbrains.mps.console.editor.EmptyConsoleCommentTest_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:917991a1-3dab-4b0d-a9f3-7ff4a725c921(jetbrains.mps.console.editor@tests)/2510515516718276432">
+    <file name="RemoveStringExpression_Test.java">
+      <node id="2510515516718276432" at="19,40,20,60" concept="4" />
+      <node id="2510515516718276432" at="24,62,25,36" concept="1" />
+      <node id="2510515516718276432" at="30,52,31,19" concept="4" />
+      <node id="2510515516718276432" at="35,51,36,72" concept="1" />
+      <node id="2510515516718276740" at="36,72,37,72" concept="1" />
+      <node id="2510515516718276432" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="2510515516718276432" at="19,0,22,0" concept="0" trace="RemoveStringExpression_Test#()V" />
+      <node id="2510515516718276432" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="2510515516718276432" at="23,0,27,0" concept="2" trace="test_RemoveStringExpression#()V" />
+      <node id="2510515516718276432" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="2510515516718276432" at="19,40,20,60" />
+      <scope id="2510515516718276432" at="24,62,25,36" />
+      <scope id="2510515516718276432" at="30,52,31,19" />
+      <scope id="2510515516718276432" at="35,51,37,72" />
+      <scope id="2510515516718276432" at="19,0,22,0" />
+      <scope id="2510515516718276432" at="30,0,33,0">
+        <var name="owner" id="2510515516718276432" />
+      </scope>
+      <scope id="2510515516718276432" at="23,0,27,0" />
+      <scope id="2510515516718276432" at="34,0,39,0" />
+      <unit id="2510515516718276432" at="28,0,40,0" name="jetbrains.mps.console.editor.RemoveStringExpression_Test$TestBody" />
+      <unit id="2510515516718276432" at="14,0,41,0" name="jetbrains.mps.console.editor.RemoveStringExpression_Test" />
+    </file>
+  </root>
+</debug-info>
+

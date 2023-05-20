@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="5eowmui6gbma3ra5kn4zec7kor7gnq7" />
+<product version="3" modelHash="9zpn2pgmg2c7lnkikyvm71ik7i3y3xa">
+  <files names="AddCustomLocationJavaJar_Intention.java:IntentionsDescriptor.java" />
+</product>
 

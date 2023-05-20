@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,9 @@
  */
 package jetbrains.mps.generator.impl.cache;
 
+import jetbrains.mps.generator.impl.InputKeyIdentity;
+import jetbrains.mps.generator.impl.LMLookup;
+import jetbrains.mps.generator.impl.LabelRecordBase;
 import jetbrains.mps.util.Pair;
 import jetbrains.mps.util.io.ModelInputStream;
 import jetbrains.mps.util.io.ModelOutputStream;
@@ -38,10 +41,10 @@ import java.util.stream.Collectors;
 public class MappingsMemento {
 
   /* mapping,input -> output */
-  private final Map<String, Map<SNodeId, Object>> myMappingNameAndInputNodeToOutputNodeMap = new HashMap<String, Map<SNodeId, Object>>();
+  private final Map<String, Map<SNodeId, Object>> myMappingNameAndInputNodeToOutputNodeMap = new HashMap<>();
 
   /* input -> output */
-  private final Map<SNodeId, Object> myCopiedOutputNodeForInputNode = new HashMap<SNodeId, Object>();
+  private final Map<SNodeId, Object> myCopiedOutputNodeForInputNode = new HashMap<>();
 
   private final List<Pair<String, SNodeId>> myConditionalRoots = new ArrayList<>();
 
@@ -52,7 +55,7 @@ public class MappingsMemento {
     if (mappingName == null) return;
     Map<SNodeId, Object> currentMapping = myMappingNameAndInputNodeToOutputNodeMap.get(mappingName);
     if (currentMapping == null) {
-      myMappingNameAndInputNodeToOutputNodeMap.put(mappingName, new HashMap<SNodeId, Object>());
+      myMappingNameAndInputNodeToOutputNodeMap.put(mappingName, new HashMap<>());
       currentMapping = myMappingNameAndInputNodeToOutputNodeMap.get(mappingName);
     }
     if (value instanceof SNodeId) {
@@ -62,7 +65,7 @@ public class MappingsMemento {
     } else if (value instanceof Collection) {
       @SuppressWarnings("unchecked")
       Collection<SNode> n0 = (Collection<SNode>) value;
-      List<SNodeId> v = new ArrayList<SNodeId>(n0.size());
+      List<SNodeId> v = new ArrayList<>(n0.size());
       for (SNode n : n0) {
         v.add(n.getNodeId());
       }
@@ -74,8 +77,16 @@ public class MappingsMemento {
     myCopiedOutputNodeForInputNode.put(inputNode, isUnique ? outputNode : Collections.singletonList(outputNode));
   }
 
+  // FIXME why do I stick to SNodeId here, not SNode? After all, I read CP model where output nodes
+  // are present - see CheckpointState, where MM is populated from checkpointModel, and the same model is
+  // employed to resolve() these nodeIds
   public void addNewOutputNode(String mappingLabel, SNodeId outputNode) {
     myConditionalRoots.add(new Pair<>(mappingLabel, outputNode));
+  }
+
+  private final ArrayList<LabelRecordBase<InputKeyIdentity, SNode>> myCompositeLabels = new ArrayList<>();
+  public void addRecord(String label, InputKeyIdentity k1, InputKeyIdentity k2, SNode output) {
+    myCompositeLabels.add(new LabelRecordBase<>(label, k1, k2, output));
   }
 
   // getters
@@ -90,6 +101,14 @@ public class MappingsMemento {
 
   public Collection<SNodeId> getNewOutputNodes(String mappingLabel) {
     return myConditionalRoots.stream().filter(p -> p.o1.equals(mappingLabel)).map(p -> p.o2).collect(Collectors.toList());
+  }
+
+  public LMLookup getCompositeLabelsLookup(String label) {
+    return LMLookup.forPersisted(label, myCompositeLabels);
+  }
+
+  public boolean hasCompositeLM(final String label) {
+    return LMLookup.hasCompositeLM(label, myCompositeLabels);
   }
 
   // serialization
@@ -142,14 +161,14 @@ public class MappingsMemento {
     for (int size = is.readInt(); size > 0; size--) {
       String label = is.readString();
       int mapSize = is.readInt();
-      Map<SNodeId, Object> innerMap = new HashMap<SNodeId, Object>(mapSize);
+      Map<SNodeId, Object> innerMap = new HashMap<>(mapSize);
       for (; mapSize > 0; mapSize--) {
         SNodeId key = is.readNodeId();
         int valSize = is.readInt();
         if (valSize == 1) {
           innerMap.put(key, is.readNodeId());
         } else {
-          List<SNodeId> list = new ArrayList<SNodeId>(valSize);
+          List<SNodeId> list = new ArrayList<>(valSize);
           for (; valSize > 0; valSize--) {
             list.add(is.readNodeId());
           }

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="4nmh5uh19e6iyaqg58na60tq6qiyk94" />
+<product version="3" modelHash="cr4hbqrybc6ol5j6hdzh7cgwd2se3lb">
+  <files names="Attributes.java:Child_Referent_Parent.java:Children.java:ConceptProperties.java:ConceptRef.java:Conditions.java:LinkRef.java:ListOfNodes.java:Model.java:NewNode.java:NodeRef.java:Properties.java:SemanticDowncast.java:Siblings.java:StructureLanguageEnums.java:TypeCast.java" />
+</product>
 

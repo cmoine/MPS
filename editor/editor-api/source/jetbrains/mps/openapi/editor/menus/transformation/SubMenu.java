@@ -15,7 +15,9 @@
  */
 package jetbrains.mps.openapi.editor.menus.transformation;
 
+import jetbrains.mps.openapi.editor.menus.EditorMenuTraceInfo;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -24,10 +26,15 @@ public class SubMenu implements TransformationMenuItem {
   private final String myText;
   @NotNull
   private final List<TransformationMenuItem> myItems;
+  private EditorMenuTraceInfo myTraceInfo;
 
   public SubMenu(@NotNull String text, @NotNull List<TransformationMenuItem> items) {
+    this(text, items, null);
+  }
+  public SubMenu(@NotNull String text, @NotNull List<TransformationMenuItem> items, @Nullable EditorMenuTraceInfo traceInfo) {
     myText = text;
     myItems = items;
+    myTraceInfo = traceInfo;
   }
 
   @NotNull
@@ -58,6 +65,11 @@ public class SubMenu implements TransformationMenuItem {
 
     return myText.equals(subMenu.myText) && myItems.equals(subMenu.myItems);
 
+  }
+
+  @Override
+  public EditorMenuTraceInfo getTraceInfo() {
+    return myTraceInfo;
   }
 
   @Override

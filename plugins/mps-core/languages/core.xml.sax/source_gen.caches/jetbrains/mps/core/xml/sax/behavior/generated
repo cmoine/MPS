@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="cl4ehubahhrepwn6pqxwjrl36syzz2p" />
+<product version="3" modelHash="-ayrgrdwxw50usvsl4vu59jt421nl8ke">
+  <files names="BehaviorAspectDescriptor.java:XMLSAXAttributeHandler__BehaviorDescriptor.java:XMLSAXAttributeHandler_value__BehaviorDescriptor.java:XMLSAXChildHandler__BehaviorDescriptor.java:XMLSAXChildRuleCondition__BehaviorDescriptor.java:XMLSAXChildRule__BehaviorDescriptor.java:XMLSAXDefaultChildHandler__BehaviorDescriptor.java:XMLSAXDefaultChildHandler_tagName__BehaviorDescriptor.java:XMLSAXFieldReference__BehaviorDescriptor.java:XMLSAXHandlerFunction__BehaviorDescriptor.java:XMLSAXNodeCreator__BehaviorDescriptor.java:XMLSAXNodeRule__BehaviorDescriptor.java:XMLSAXNodeValidator__BehaviorDescriptor.java:XMLSAXParser__BehaviorDescriptor.java:XMLSAXTextHandler__BehaviorDescriptor.java:XMLSAXTextHandler_value__BehaviorDescriptor.java" />
+</product>
 

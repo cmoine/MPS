@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-1vh242fjvrka3cj2x7jya4hz9rz3a89" />
+<product version="3" modelHash="esepx9iuoavtbi5quq7uvxavyixgj1">
+  <files names="BinaryRegexp_DataFlow.java:DataFlowAspectDescriptorImpl.java:FindMatchExpression_DataFlow.java:FindMatchStatement_DataFlow.java:ForEachMatchStatement_DataFlow.java:InlineRegexpExpression_DataFlow.java:LookRegexp_DataFlow.java:MatchParensRegexp_DataFlow.java:MatchRegexpExpression_DataFlow.java:MatchRegexpOperation_DataFlow.java:MatchRegexpStatement_DataFlow.java:MatchVariableReferenceRegexp_DataFlow.java:MatchVariableReferenceReplacement_DataFlow.java:MatchVariableReference_DataFlow.java:ParensRegexp_DataFlow.java:RegexpDeclarationReferenceRegexp_DataFlow.java:RegexpDeclaration_DataFlow.java:RegexpExpression_DataFlow.java:Regexp_DataFlow.java:Regexps_DataFlow.java:ReplaceRegexpOperation_DataFlow.java:ReplaceWithRegexpOperation_DataFlow.java:SplitOperation_DataFlow.java:SymbolClassRegexp_DataFlow.java:UnaryRegexp_DataFlow.java" />
+</product>
 

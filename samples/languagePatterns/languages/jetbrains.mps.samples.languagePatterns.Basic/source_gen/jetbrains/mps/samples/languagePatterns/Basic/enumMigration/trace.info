@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1163670490218:jetbrains.mps.baseLanguage.structure.SwitchStatement" />
+  <root nodeRef="r:274d8f60-ebc2-4221-9baf-0f254794da32(jetbrains.mps.samples.languagePatterns.Basic.enumMigration)/4241665505353448364">
+    <file name="OrangeTaste_MigrationUtils.java">
+      <node id="4241665505353448372" at="13,13,14,20" concept="1" />
+      <node id="4241665505353448375" at="15,13,16,20" concept="1" />
+      <node id="4241665505353448378" at="17,13,18,20" concept="1" />
+      <node id="4241665505353448385" at="19,14,20,20" concept="1" />
+      <node id="4241665505353448415" at="24,24,25,238" concept="1" />
+      <node id="4241665505353448426" at="28,14,29,20" concept="1" />
+      <node id="4241665505353448364" at="32,0,33,0" concept="2" trace="enumSwitchIndex" />
+      <node id="4241665505353448413" at="23,61,26,5" concept="0" />
+      <node id="4241665505353448423" at="26,5,30,5" concept="4" />
+      <node id="4241665505353448388" at="23,0,32,0" concept="3" trace="fromValue#(Ljava/lang/String;)Lorg/jetbrains/mps/openapi/language/SEnumerationLiteral;" />
+      <node id="4241665505353448385" at="11,62,21,5" concept="4" />
+      <node id="4241665505353448379" at="11,0,23,0" concept="3" trace="value#(Lorg/jetbrains/mps/openapi/language/SEnumerationLiteral;)Ljava/lang/String;" />
+      <scope id="4241665505353448372" at="13,13,14,20" />
+      <scope id="4241665505353448375" at="15,13,16,20" />
+      <scope id="4241665505353448378" at="17,13,18,20" />
+      <scope id="4241665505353448385" at="19,14,20,20" />
+      <scope id="4241665505353448414" at="24,24,25,238" />
+      <scope id="4241665505353448425" at="28,14,29,20" />
+      <scope id="4241665505353448422" at="23,61,30,5" />
+      <scope id="4241665505353448388" at="23,0,32,0">
+        <var name="value" id="4241665505353448389" />
+      </scope>
+      <scope id="4241665505353448383" at="11,62,21,5" />
+      <scope id="4241665505353448379" at="11,0,23,0">
+        <var name="enummember" id="4241665505353448380" />
+      </scope>
+      <unit id="4241665505353448364" at="10,0,34,0" name="jetbrains.mps.samples.languagePatterns.Basic.enumMigration.OrangeTaste_MigrationUtils" />
+    </file>
+  </root>
+</debug-info>
+

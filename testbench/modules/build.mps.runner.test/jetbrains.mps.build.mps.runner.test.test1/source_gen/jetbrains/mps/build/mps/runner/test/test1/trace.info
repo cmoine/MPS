@@ -4,7 +4,7 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1164879751025:jetbrains.mps.baseLanguage.structure.TryCatchStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/5351203823916750322:jetbrains.mps.baseLanguage.structure.TryUniversalStatement" />
   <root nodeRef="r:0874afb3-3c36-4193-9ba6-eed3bcd5ae08(jetbrains.mps.build.mps.runner.test.test1)/5712055271175121694">
     <file name="MainClass.java">
       <node id="5712055271175138910" at="9,32,10,41" concept="0" />
@@ -16,11 +16,11 @@
       <node id="5712055271175282202" at="11,41,19,5" concept="4" />
       <node id="5712055271175138812" at="9,0,21,0" concept="3" trace="mpsMain#()V" />
       <scope id="5712055271175287191" at="13,42,14,85" />
-      <scope id="5712055271175282198" at="16,0,18,26">
-        <var name="e" id="5712055271175282200" />
-      </scope>
       <scope id="5712055271175282199" at="16,29,18,26" />
       <scope id="5712055271175282203" at="12,9,15,7" />
+      <scope id="5712055271175282198" at="16,5,19,5">
+        <var name="e" id="5712055271175282200" />
+      </scope>
       <scope id="5712055271175138818" at="9,32,19,5">
         <var name="resultFile" id="5712055271175219221" />
       </scope>

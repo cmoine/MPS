@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="mps-java-platform">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/mps-java/lib/java-core.jar!/" />
+      <root url="jar://$PROJECT_DIR$/mps-java/lib/java-platform.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

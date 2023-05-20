@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-17hzwlqw1rwukj9rdp0402uz4dki29q" />
+<product version="3" modelHash="-dgq5lt3dclgp71v5g8p0159bs491mz9">
+  <files names="ConstantValue_Constraints.java:ConstraintsAspectDescriptor.java:ExtractStatementListInnerExpression_Constraints.java:ExtractStaticInnerClassConcept_Constraints.java:ExtractStaticInnerClassCreator_Constraints.java:ExtractStaticMethod_CallExpression_Constraints.java:ExtractToConstantRefExpression_Constraints.java:InternalAnonymousClass_Constraints.java:InternalPartialInstanceMethodCall_Constraints.java:InternalSuperMethodCallOperation_Constraints.java:WeakClassReference_Constraints.java" />
+</product>
 

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-6mq3jzej0847ee70yopg3qkt5k35sw1" />
+<product version="3" modelHash="-828b7z4agk7rsrfbgakfgtbelixt7el">
+  <files names="CreateCellInEmptyRow_Test.java:CreateRowInEmptyTable_Test.java:Create_Test.java:EditCell_Test.java:EndFromColumnSelection_Test.java:HomeFromColumnSelection_Test.java:InsertColumnAfter_Test.java:InsertColumnBefore_Test.java:InsertRowAfter_Test.java:InsertRowBefore_FromFirstCell_ByIns_Test.java:InsertRowBefore_FromLastCell_ByIns_Test.java:InsertRowBefore_Test.java:LocalEndFromColumnSelection_Test.java:LocalHomeFromColumnSelection_Test.java:MoveElementsDownFromColumnSelection_Test.java:MoveElementsUpFromColumnSelection_Test.java:RemoveColumn_Test.java:RemoveLastCell_Test.java:RemoveLastRow_Test.java:RemoveRow_FromFirstCell_Test.java:RemoveRow_FromLastCell_Test.java:RootEndFromColumnSelection_Test.java:RootHomeFromColumnSelection_Test.java:SelectDownFromColumnSelection_Test.java:SelectLeftInCell_Test.java:SelectRow_Test.java:SelectUpFromColumnSelection_Test.java:TabNavigationNextLine_Test.java:TabNavigation_Test.java" />
+</product>
 

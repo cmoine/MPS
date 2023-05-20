@@ -4,33 +4,57 @@ package jetbrains.mps.samples.KajaSceneConstruction.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_AbstractBuilderCommand = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BuildWall = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DestroyWall = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DropMark = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PickMark = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_AbstractBuilderCommand;
+  private ConceptPresentation props_BuildWall;
+  private ConceptPresentation props_DestroyWall;
+  private ConceptPresentation props_DropMark;
+  private ConceptPresentation props_PickMark;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.AbstractBuilderCommand:
+        if (props_AbstractBuilderCommand == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_AbstractBuilderCommand = cpb.create();
+        }
         return props_AbstractBuilderCommand;
-      case 1:
+      case LanguageConceptSwitch.BuildWall:
+        if (props_BuildWall == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("build wall");
+          props_BuildWall = cpb.create();
+        }
         return props_BuildWall;
-      case 2:
+      case LanguageConceptSwitch.DestroyWall:
+        if (props_DestroyWall == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("destroy wall");
+          props_DestroyWall = cpb.create();
+        }
         return props_DestroyWall;
-      case 3:
+      case LanguageConceptSwitch.DropMark:
+        if (props_DropMark == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("drop mark");
+          props_DropMark = cpb.create();
+        }
         return props_DropMark;
-      case 4:
+      case LanguageConceptSwitch.PickMark:
+        if (props_PickMark == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("pick mark");
+          props_PickMark = cpb.create();
+        }
         return props_PickMark;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

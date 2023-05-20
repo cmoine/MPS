@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,39 +15,31 @@
  */
 package jetbrains.mps.ide.generator.index;
 
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.indexing.FileBasedIndex;
+import com.intellij.util.indexing.FileContent;
 import com.intellij.util.indexing.ID;
 import jetbrains.mps.fileTypes.MPSFileTypeFactory;
-import jetbrains.mps.persistence.BinaryModelPersistence;
-import jetbrains.mps.persistence.ByteArrayInputSource;
+import jetbrains.mps.generator.ModelDigestUtil;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Map;
 
 /**
  * evgeny, 2/12/13
  */
 public class BinaryModelDigestIndex extends BaseModelDigestIndex {
-  public static final ID<Integer, Map<String, String>> NAME = ID.create("BinaryModelDigest");
+  public static final ID<Integer, String> NAME = ID.create("BinaryModelDigest2");
 
   public BinaryModelDigestIndex() {
-    super(NAME, 3);
+    super(NAME, 1);
   }
 
   @NotNull
   @Override
   public FileBasedIndex.InputFilter getInputFilter() {
-    return new FileBasedIndex.InputFilter() {
-      @Override
-      public boolean acceptInput(VirtualFile file) {
-        return file.getFileType().equals(MPSFileTypeFactory.MPS_BINARY_FILE_TYPE);
-      }
-    };
+    return file -> file.getFileType().equals(MPSFileTypeFactory.MPS_BINARY_FILE_TYPE);
   }
 
   @Override
-  protected Map<String, String> calculateDigest(final byte[] content) {
-    return BinaryModelPersistence.getDigestMap(new ByteArrayInputSource(content));
+  protected String calculateDigest(@NotNull FileContent content) {
+    return ModelDigestUtil.hashBytes(content.getContent());
   }
 }

@@ -8,58 +8,30 @@ import java.util.Collection;
 import jetbrains.mps.lang.dataFlow.framework.IDataFlowBuilder;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import java.util.Collections;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public class DataFlowAspectDescriptorImpl extends DataFlowAspectDescriptorBase {
 
   @NotNull
   @Override
   public Collection<IDataFlowBuilder> getDataFlowBuilders(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = ((SAbstractConcept) concept);
-      Integer preIndex = indices_vhxjlb_a0b.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new BaseEmitJumpStatement_DataFlow());
-          }
-          break;
-        case 1:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new BaseEmitVariableStatement_DataFlow());
-          }
-          break;
-        case 2:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new EmitCodeForStatement_DataFlow());
-          }
-          break;
-        case 3:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new EmitMayBeUnreachable_DataFlow());
-          }
-          break;
-        case 4:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new RelativePosition_DataFlow());
-          }
-          break;
-        default:
-          // default 
-      }
+    SAbstractConcept cncpt = ((SAbstractConcept) concept);
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return Collections.<IDataFlowBuilder>singletonList(new BaseEmitJumpStatement_DataFlow());
+      case 1:
+        return Collections.<IDataFlowBuilder>singletonList(new BaseEmitVariableStatement_DataFlow());
+      case 2:
+        return Collections.<IDataFlowBuilder>singletonList(new EmitCodeForStatement_DataFlow());
+      case 3:
+        return Collections.<IDataFlowBuilder>singletonList(new EmitMayBeUnreachable_DataFlow());
+      case 4:
+        return Collections.<IDataFlowBuilder>singletonList(new RelativePosition_DataFlow());
+      default:
     }
     return Collections.<IDataFlowBuilder>emptyList();
   }
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
-  }
-  private static final Map<SAbstractConcept, Integer> indices_vhxjlb_a0b = buildConceptIndices(MetaAdapterFactory.getConcept(0x7fa12e9cb9494976L, 0xb4fa19accbc320b4L, 0x118e5bc8a99L, "jetbrains.mps.lang.dataFlow.structure.BaseEmitJumpStatement"), MetaAdapterFactory.getConcept(0x7fa12e9cb9494976L, 0xb4fa19accbc320b4L, 0x118e5b40208L, "jetbrains.mps.lang.dataFlow.structure.BaseEmitVariableStatement"), MetaAdapterFactory.getConcept(0x7fa12e9cb9494976L, 0xb4fa19accbc320b4L, 0x118e643e7efL, "jetbrains.mps.lang.dataFlow.structure.EmitCodeForStatement"), MetaAdapterFactory.getConcept(0x7fa12e9cb9494976L, 0xb4fa19accbc320b4L, 0x118eb0b6674L, "jetbrains.mps.lang.dataFlow.structure.EmitMayBeUnreachable"), MetaAdapterFactory.getConcept(0x7fa12e9cb9494976L, 0xb4fa19accbc320b4L, 0x118e5b86667L, "jetbrains.mps.lang.dataFlow.structure.RelativePosition"));
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x7fa12e9cb9494976L, 0xb4fa19accbc320b4L, 0x118e5bc8a99L), MetaIdFactory.conceptId(0x7fa12e9cb9494976L, 0xb4fa19accbc320b4L, 0x118e5b40208L), MetaIdFactory.conceptId(0x7fa12e9cb9494976L, 0xb4fa19accbc320b4L, 0x118e643e7efL), MetaIdFactory.conceptId(0x7fa12e9cb9494976L, 0xb4fa19accbc320b4L, 0x118eb0b6674L), MetaIdFactory.conceptId(0x7fa12e9cb9494976L, 0xb4fa19accbc320b4L, 0x118e5b86667L)).seal();
 }

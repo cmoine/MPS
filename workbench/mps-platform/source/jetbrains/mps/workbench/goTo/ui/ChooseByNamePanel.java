@@ -20,6 +20,7 @@ import com.intellij.ide.util.gotoByName.ChooseByNameModel;
 import com.intellij.ide.util.gotoByName.ChooseByNamePopupComponent.Callback;
 import com.intellij.ide.util.gotoByName.ChooseByNamePopupComponent.MultiElementsCallback;
 import com.intellij.openapi.project.Project;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -45,6 +46,7 @@ public class ChooseByNamePanel extends com.intellij.ide.util.gotoByName.ChooseBy
     myProvider = provider;
   }
 
+  @NotNull
   @Override
   public List<Object> getChosenElements() {
     if (myChoosenElementsBackUp != null) {

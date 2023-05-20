@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-exppkisjo2wud9xiwdxelq86aqbeuce" />
+<product version="3" modelHash="-6ntcb3rbs7obb701m9lwaahgpx0mvll">
+  <files names="BehaviorAspectDescriptor.java:GenerationContextOp_ContextVarRef__BehaviorDescriptor.java:GenerationContextOp_LinkPatternRef__BehaviorDescriptor.java:GenerationContextOp_NodePatternRef__BehaviorDescriptor.java:GenerationContextOp_PatternRef__BehaviorDescriptor.java:GenerationContextOp_PropertyPatternRef__BehaviorDescriptor.java:GenerationContextOp_SessionObjectAccess__BehaviorDescriptor.java:GenerationContextOp_StepObjectAccess__BehaviorDescriptor.java:GenerationContextOp_TransientObjectAccess__BehaviorDescriptor.java:GenerationContextOp_UserObjectAccessBase__BehaviorDescriptor.java:TemplateFunctionParameter_generationContext__BehaviorDescriptor.java" />
+</product>
 

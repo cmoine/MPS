@@ -1,0 +1,19 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="bootstrap:mps-platform">
+    <output-path>$PROJECT_DIR$/lib/</output-path>
+    <root id="root">
+      <element id="archive" name="mps-icons.jar">
+        <element id="module-output" name="mps-icons" />
+      </element>
+      <element id="archive" name="mps-platform.jar">
+        <element id="module-output" name="mps-platform" />
+        <element id="module-output" name="baseLanguage-search" />
+        <element id="module-output" name="migrations-runtime" />
+        <element id="module-output" name="mps-debugger" />
+        <element id="module-output" name="mps-ui" />
+        <element id="module-output" name="vfs-tracking" />
+        <element id="module-output" name="psi" />
+      </element>
+    </root>
+  </artifact>
+</component>

@@ -18,22 +18,9 @@ package jetbrains.mps.editor.runtime.style;
 
 import jetbrains.mps.editor.runtime.style.StyleAttributeMap.DiscardValue;
 import jetbrains.mps.openapi.editor.style.StyleAttribute;
-import jetbrains.mps.tool.environment.EnvironmentConfig;
-import jetbrains.mps.tool.environment.MpsEnvironment;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class StyleTests {
-  @BeforeClass
-  public static void init() {
-    MpsEnvironment.getOrCreate(EnvironmentConfig.defaultConfig());
-  }
-
-  @AfterClass
-  public static void dispose() {
-  }
-
   @Test
   public void testStyleMaps() {
     TopLevelStyleMap topMap = new TopLevelStyleMap();

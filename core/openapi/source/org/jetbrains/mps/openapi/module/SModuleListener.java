@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,18 +15,19 @@
  */
 package org.jetbrains.mps.openapi.module;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SLanguage;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SModelReference;
 
 /**
- * To implement this interface, consider extending {@link SModuleListenerBase}.
+ * Notifications about {@link SModule} changes
  */
 public interface SModuleListener {
 
-  void modelAdded(SModule module, SModel model);
+  default void modelAdded(SModule module, SModel model) {}
 
-  void beforeModelRemoved(SModule module, SModel model);
+  default void beforeModelRemoved(SModule module, SModel model) {}
 
   /**
    * Model is removed from a repository. Note, it doesn't necessarily mean model was deleted.
@@ -34,25 +35,27 @@ public interface SModuleListener {
    * @param module
    * @param ref
    */
-  void modelRemoved(SModule module, SModelReference ref);
+  default void modelRemoved(SModule module, SModelReference ref) {}
 
   /**
    * Model renamed event may also indicate a change in its data source (e.g. file rename).
    */
-  void beforeModelRenamed(SModule module, SModel model, SModelReference newRef);
+  default void beforeModelRenamed(SModule module, SModel model, SModelReference newRef) {}
 
-  void modelRenamed(SModule module, SModel model, SModelReference oldRef);
+  default void modelRenamed(SModule module, SModel model, SModelReference oldRef) {}
 
-  void dependencyAdded(SModule module, SDependency dep);
+  default void moduleRenamed(@NotNull SModule module, @NotNull SModuleReference oldRef) {}
 
-  void dependencyRemoved(SModule module, SDependency dep);
+  default void dependencyAdded(SModule module, SDependency dep) {}
 
-  void languageAdded(SModule module, SLanguage lang);
+  default void dependencyRemoved(SModule module, SDependency dep) {}
 
-  void languageRemoved(SModule module, SLanguage lang);
+  default void languageAdded(SModule module, SLanguage lang) {}
+
+  default void languageRemoved(SModule module, SLanguage lang) {}
 
   /**
-   * Any change that doesn't affect the dependencies and used languages.
+   * Any change including module dependencies and descriptor reload from disk
    */
-  void moduleChanged(SModule module);
+  default void moduleChanged(SModule module) {}
 }

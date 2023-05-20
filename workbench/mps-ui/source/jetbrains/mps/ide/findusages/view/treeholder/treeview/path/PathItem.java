@@ -15,23 +15,68 @@
  */
 package jetbrains.mps.ide.findusages.view.treeholder.treeview.path;
 
+import jetbrains.mps.ide.findusages.view.treeholder.tree.nodedatatypes.BaseNodeData;
+import jetbrains.mps.util.Pair;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class PathItem {
-  private Object myIdObject;
-  private PathItemRole myRole;
+public final class PathItem<T> {
+  private final T myIdObject;
+  private final Object myPresentationObject;
+  private final boolean myTail;
+  private final Factory<T> myFactory;
+  private final PathItemRole myRole;
 
-  public PathItem(PathItemRole role, @NotNull Object idObject) {
+  /*package*/ PathItem(PathItemRole role, @NotNull T idObject, @Nullable Object presentationObject,  boolean tail, @NotNull Factory<T> factory) {
     myRole = role;
     myIdObject = idObject;
+    myPresentationObject = presentationObject;
+    myTail = tail;
+    myFactory = factory;
   }
 
+  /**
+   * @return identifies path/location of presentationObject (e.g. different messages on a same node)
+   */
   @NotNull
-  public Object getIdObject() {
+  public T getIdObject() {
     return myIdObject;
   }
 
-  public PathItemRole getRole() {
+  // not null
+  public Object getInternalIdentityForCachedTreeBuild() {
+    // FIXME this is to deal with the fact DataTree caches [parent, PathItem.id] values to avoid duplicates in the tree
+    //       If we use myIdObject, all search result with same id object and different presentation objects get collapsed into single element,
+    //       leading to https://youtrack.jetbrains.com/issue/MPS-30581. Now I try to overcome this with a complex identity (resembles what
+    //       AbstractResultNodeData.createIdObjects did in previous release, prior to elimination of UI element merge code)
+    if (myPresentationObject == null || myIdObject == myPresentationObject) {
+      return myIdObject;
+    }
+    return new Pair<>(myIdObject, myPresentationObject);
+  }
+
+  /*package*/ PathItemRole getRole() {
     return myRole;
+  }
+
+  /**
+   * the only reason to keep this is custom presentation for tail elements.
+   * Alternatively, may supply one into create() method, as DataTree.createPath have access to SearchResult.getObject()
+   */
+  /*package*/ Object getPresentationObject() {
+    return myPresentationObject;
+  }
+
+  /*package*/ boolean isTail() {
+    return myTail;
+  }
+
+  @NotNull
+  public BaseNodeData create() {
+    return myFactory.create(this);
+  }
+
+  interface Factory<T>  {
+    BaseNodeData create(PathItem<T> creator);
   }
 }

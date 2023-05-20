@@ -1,29 +1,18 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Copyright 2000-2021 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 package jetbrains.mps.plugins.applicationplugins;
 
+import com.intellij.openapi.actionSystem.ActionGroup;
+import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.actionSystem.IdeActions;
 import com.intellij.openapi.actionSystem.ex.ActionManagerEx;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.wm.ex.WindowManagerEx;
-import com.intellij.openapi.wm.impl.IdeFrameImpl;
+import com.intellij.openapi.wm.impl.ProjectFrameHelper;
 import jetbrains.mps.RuntimeFlags;
 import jetbrains.mps.ide.actions.MPSActions;
 import jetbrains.mps.ide.actions.ModuleActions_ActionGroup;
@@ -68,16 +57,20 @@ public class GroupAdjuster {
 
     addPlace(ModuleActions_ActionGroup.ID, ActionPlace.MODULE_DEPENDENCIES);
 
-    DefaultActionGroup editorPopupGroup = ActionUtils.getDefaultGroup(MPSActions.EDITOR_POPUP_GROUP);
-    List<AnAction> actionList = Arrays.asList(editorPopupGroup.getChildren(null));
-    BaseGroup.addPlaceToActionList(actionList, ActionPlace.EDITOR, null);
+    ActionGroup editorPopupGroup = (ActionGroup) ActionManager.getInstance().getAction(MPSActions.EDITOR_POPUP_GROUP);
+    if (editorPopupGroup != null) {
+      List<AnAction> actionList = Arrays.asList(editorPopupGroup.getChildren(null));
+      BaseGroup.addPlaceToActionList(actionList, ActionPlace.EDITOR, null);
+    }
 
-    DefaultActionGroup editorActionsGroup = ActionUtils.getDefaultGroup(MPSActions.EDITOR_ACTIONS_GROUP);
-    actionList = Arrays.asList(editorActionsGroup.getChildren(null));
-    BaseGroup.addPlaceToActionList(actionList, ActionPlace.EDITOR, null);
+    ActionGroup editorActionsGroup = (ActionGroup) ActionManager.getInstance().getAction(MPSActions.EDITOR_ACTIONS_GROUP);
+    if (editorActionsGroup != null) {
+      List<AnAction> actionList = Arrays.asList(editorActionsGroup.getChildren(null));
+      BaseGroup.addPlaceToActionList(actionList, ActionPlace.EDITOR, null);
+    }
 
     List<BaseGroup> mainMenuGroups = new ArrayList<>();
-    DefaultActionGroup mainMenuGroup = ActionUtils.getDefaultGroup(IdeActions.GROUP_MAIN_MENU);
+    ActionGroup mainMenuGroup = (ActionGroup) ActionManager.getInstance().getAction(IdeActions.GROUP_MAIN_MENU);
     ActionManagerEx manager = ActionManagerEx.getInstanceEx();
     for (String id : manager.getActionIds("")) {
       AnAction action = manager.getAction(id);
@@ -96,19 +89,19 @@ public class GroupAdjuster {
 
 
   public static void refreshCustomizations() {
-    if (!RuntimeFlags.isTestMode()) return;
+    if (RuntimeFlags.isTestMode()) return;
     ApplicationManager.getApplication().invokeLater(GroupAdjuster::setCustomizationSchemaForCurrentProjects);
   }
 
   private static void setCustomizationSchemaForCurrentProjects() {
     final Project[] openProjects = ProjectManager.getInstance().getOpenProjects();
     for (Project project : openProjects) {
-      final IdeFrameImpl frame = WindowManagerEx.getInstanceEx().getFrame(project);
-      if (frame != null) {
-        frame.updateView();
+      final ProjectFrameHelper frameHelper = WindowManagerEx.getInstanceEx().getFrameHelper(project);
+      if (frameHelper != null) {
+        frameHelper.updateView();
       }
     }
-    final IdeFrameImpl frame = WindowManagerEx.getInstanceEx().getFrame(null);
+    final ProjectFrameHelper frame = WindowManagerEx.getInstanceEx().getFrameHelper(null);
     if (frame != null) {
       frame.updateView();
     }

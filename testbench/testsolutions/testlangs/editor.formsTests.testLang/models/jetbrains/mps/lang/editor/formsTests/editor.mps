@@ -3,7 +3,7 @@
   <persistence version="9" />
   <languages>
     <use id="602c36ad-cc55-47ff-8c40-73d7f12f035c" name="jetbrains.mps.lang.editor.forms" version="0" />
-    <use id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor" version="4" />
+    <use id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor" version="14" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -73,10 +73,10 @@
           <property role="1563UK" value="false" />
           <ref role="1k5W1q" to="tpen:MpZliP$Hlb" resolve="Url" />
           <node concept="Vb9p2" id="783I1NXtTS1" role="3F10Kt">
-            <property role="Vbekb" value="BOLD" />
+            <property role="Vbekb" value="g1_k_vY/BOLD" />
           </node>
           <node concept="VechU" id="783I1NXtVza" role="3F10Kt">
-            <property role="Vb096" value="pink" />
+            <property role="Vb096" value="fLwANPo/pink" />
           </node>
         </node>
         <node concept="3F0ifn" id="783I1NXqS7f" role="2fqkNU">

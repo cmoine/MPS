@@ -2,8 +2,7 @@
 <model ref="r:00000000-0000-4000-0000-011c8959042e(jetbrains.mps.samples.secretCompartmentLanguage.structure)">
   <persistence version="9" />
   <languages>
-    <use id="c72da2b9-7cce-4447-8389-f407dc1158b7" name="jetbrains.mps.lang.structure" version="3" />
-    <use id="982eb8df-2c96-4bd7-9963-11712ea622e5" name="jetbrains.mps.lang.resources" version="2" />
+    <devkit ref="78434eb8-b0e5-444b-850d-e7c4ad2da9ab(jetbrains.mps.devkit.aspect.structure)" />
   </languages>
   <imports>
     <import index="tpck" ref="r:00000000-0000-4000-0000-011c89590288(jetbrains.mps.lang.core.structure)" />
@@ -48,21 +47,21 @@
     <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="hr11S1x" role="1TKVEi">
       <property role="20kJfa" value="startState" />
-      <property role="20lbJX" value="1" />
+      <property role="20lbJX" value="fLJekj4/1" />
       <property role="IQ2ns" value="1197239402593" />
       <ref role="20lvS9" node="hqWVo8n" resolve="State" />
     </node>
     <node concept="1TJgyj" id="hqWRrc6" role="1TKVEi">
-      <property role="20lmBu" value="aggregation" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="event" />
-      <property role="20lbJX" value="0..n" />
+      <property role="20lbJX" value="fLJekj5/0..n" />
       <property role="IQ2ns" value="1197169554182" />
       <ref role="20lvS9" node="hqWQG$u" resolve="Event" />
     </node>
     <node concept="1TJgyj" id="hr03EUJ" role="1TKVEi">
-      <property role="20lmBu" value="aggregation" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="state" />
-      <property role="20lbJX" value="1..n" />
+      <property role="20lbJX" value="fLJekj6/1..n" />
       <property role="IQ2ns" value="1197223095983" />
       <ref role="20lvS9" node="hqWVo8n" resolve="State" />
     </node>
@@ -98,8 +97,8 @@
     <property role="EcuMT" value="1197170590231" />
     <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="hr15Sar" role="1TKVEi">
-      <property role="20lmBu" value="aggregation" />
-      <property role="20lbJX" value="0..n" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20lbJX" value="fLJekj5/0..n" />
       <property role="20kJfa" value="transition" />
       <property role="IQ2ns" value="1197240451739" />
       <ref role="20lvS9" node="hr14JSE" resolve="Transition" />
@@ -119,13 +118,13 @@
     <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="hr14QoW" role="1TKVEi">
       <property role="20kJfa" value="trigger" />
-      <property role="20lbJX" value="1" />
+      <property role="20lbJX" value="fLJekj4/1" />
       <property role="IQ2ns" value="1197240182332" />
       <ref role="20lvS9" node="hqWQG$u" resolve="Event" />
     </node>
     <node concept="1TJgyj" id="hr14S0H" role="1TKVEi">
       <property role="20kJfa" value="target" />
-      <property role="20lbJX" value="1" />
+      <property role="20lbJX" value="fLJekj4/1" />
       <property role="IQ2ns" value="1197240188973" />
       <ref role="20lvS9" node="hqWVo8n" resolve="State" />
     </node>
@@ -136,14 +135,14 @@
     <property role="EcuMT" value="1197246912613" />
     <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="hr1P$7t" role="1TKVEi">
-      <property role="20lmBu" value="aggregation" />
-      <property role="20lbJX" value="0..n" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20lbJX" value="fLJekj5/0..n" />
       <property role="20kJfa" value="testMethod" />
       <property role="IQ2ns" value="1197252952541" />
       <ref role="20lvS9" node="hr1OEYa" resolve="StateMachineTestMethod" />
     </node>
     <node concept="1TJgyj" id="hr1xS$3" role="1TKVEi">
-      <property role="20lbJX" value="1" />
+      <property role="20lbJX" value="fLJekj4/1" />
       <property role="20kJfa" value="stateMachine" />
       <property role="IQ2ns" value="1197247793411" />
       <ref role="20lvS9" node="hqVFaSW" resolve="StateMachine" />
@@ -157,15 +156,15 @@
     <property role="EcuMT" value="1197252718474" />
     <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="hr20vOZ" role="1TKVEi">
-      <property role="20lmBu" value="aggregation" />
-      <property role="20lbJX" value="0..n" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20lbJX" value="fLJekj5/0..n" />
       <property role="20kJfa" value="handleEvent" />
       <property role="IQ2ns" value="1197255818559" />
       <ref role="20lvS9" node="hr20l$N" resolve="HandleEvent" />
     </node>
     <node concept="1TJgyj" id="hr1YeKF" role="1TKVEi">
       <property role="20kJfa" value="finalState" />
-      <property role="20lbJX" value="1" />
+      <property role="20lbJX" value="fLJekj4/1" />
       <property role="IQ2ns" value="1197255224363" />
       <ref role="20lvS9" node="hqWVo8n" resolve="State" />
     </node>
@@ -181,7 +180,7 @@
     <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="hr20na8" role="1TKVEi">
       <property role="20kJfa" value="event" />
-      <property role="20lbJX" value="1" />
+      <property role="20lbJX" value="fLJekj4/1" />
       <property role="IQ2ns" value="1197255783048" />
       <ref role="20lvS9" node="hqWQG$u" resolve="Event" />
     </node>

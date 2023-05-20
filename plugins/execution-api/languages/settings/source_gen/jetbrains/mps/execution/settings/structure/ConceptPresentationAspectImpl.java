@@ -4,108 +4,266 @@ package jetbrains.mps.execution.settings.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_ApplyTo_Function = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CheckProperitesOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CheckProperties_Function = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Configuration_Parameter = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CreateEditor_Function = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DeprecatedAnnotation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Dispose_Function = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_EditorExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_EditorOperationCall = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_EditorOperationDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_EditorPropertyDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_EditorPropertyReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GetEditorOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GridBagConstraints = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IPersistentPropertyHolder = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PersistentConfiguration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PersistentConfigurationAssistent = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PersistentConfigurationMethod = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PersistentConfigurationTemplate = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PersistentConfigurationTemplateInitializer = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PersistentConfigurationType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PersistentPropertyDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PersistentPropertyReferenceOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ReportConfigurationErrorStatement = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ResetFrom_Function = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SettingsEditor = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SettingsEditorType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TemplateParameter = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TemplateParameterReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TemplatePersistentConfigurationType = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_ApplyTo_Function;
+  private ConceptPresentation props_CheckProperitesOperation;
+  private ConceptPresentation props_CheckProperties_Function;
+  private ConceptPresentation props_Configuration_Parameter;
+  private ConceptPresentation props_CreateEditor_Function;
+  private ConceptPresentation props_DeprecatedAnnotation;
+  private ConceptPresentation props_Dispose_Function;
+  private ConceptPresentation props_EditorExpression;
+  private ConceptPresentation props_EditorOperationCall;
+  private ConceptPresentation props_EditorOperationDeclaration;
+  private ConceptPresentation props_EditorPropertyDeclaration;
+  private ConceptPresentation props_EditorPropertyReference;
+  private ConceptPresentation props_GetEditorOperation;
+  private ConceptPresentation props_GridBagConstraints;
+  private ConceptPresentation props_IPersistentPropertyHolder;
+  private ConceptPresentation props_PersistentConfiguration;
+  private ConceptPresentation props_PersistentConfigurationAssistent;
+  private ConceptPresentation props_PersistentConfigurationMethod;
+  private ConceptPresentation props_PersistentConfigurationTemplate;
+  private ConceptPresentation props_PersistentConfigurationTemplateInitializer;
+  private ConceptPresentation props_PersistentConfigurationType;
+  private ConceptPresentation props_PersistentPropertyDeclaration;
+  private ConceptPresentation props_PersistentPropertyReferenceOperation;
+  private ConceptPresentation props_ProjectAccessExpression;
+  private ConceptPresentation props_ReportConfigurationErrorStatement;
+  private ConceptPresentation props_ResetFrom_Function;
+  private ConceptPresentation props_SettingsEditor;
+  private ConceptPresentation props_SettingsEditorType;
+  private ConceptPresentation props_TemplateParameter;
+  private ConceptPresentation props_TemplateParameterReference;
+  private ConceptPresentation props_TemplatePersistentConfigurationType;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.ApplyTo_Function:
+        if (props_ApplyTo_Function == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("apply to");
+          props_ApplyTo_Function = cpb.create();
+        }
         return props_ApplyTo_Function;
-      case 1:
+      case LanguageConceptSwitch.CheckProperitesOperation:
+        if (props_CheckProperitesOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("check configuration");
+          props_CheckProperitesOperation = cpb.create();
+        }
         return props_CheckProperitesOperation;
-      case 2:
+      case LanguageConceptSwitch.CheckProperties_Function:
+        if (props_CheckProperties_Function == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_CheckProperties_Function = cpb.create();
+        }
         return props_CheckProperties_Function;
-      case 3:
+      case LanguageConceptSwitch.Configuration_Parameter:
+        if (props_Configuration_Parameter == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("configuration");
+          props_Configuration_Parameter = cpb.create();
+        }
         return props_Configuration_Parameter;
-      case 4:
+      case LanguageConceptSwitch.CreateEditor_Function:
+        if (props_CreateEditor_Function == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("create");
+          props_CreateEditor_Function = cpb.create();
+        }
         return props_CreateEditor_Function;
-      case 5:
+      case LanguageConceptSwitch.DeprecatedAnnotation:
+        if (props_DeprecatedAnnotation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("DeprecatedAnnotation");
+          props_DeprecatedAnnotation = cpb.create();
+        }
         return props_DeprecatedAnnotation;
-      case 6:
+      case LanguageConceptSwitch.Dispose_Function:
+        if (props_Dispose_Function == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("dispose");
+          props_Dispose_Function = cpb.create();
+        }
         return props_Dispose_Function;
-      case 7:
+      case LanguageConceptSwitch.EditorExpression:
+        if (props_EditorExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("editor");
+          props_EditorExpression = cpb.create();
+        }
         return props_EditorExpression;
-      case 8:
+      case LanguageConceptSwitch.EditorOperationCall:
+        if (props_EditorOperationCall == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x756e911c3f1f4a48L, 0xbdf5a2ceb91b723cL, 0xd244b712f91012eL, 0xd244b712f910131L, "editorOperationDeclaration", "", "");
+          props_EditorOperationCall = cpb.create();
+        }
         return props_EditorOperationCall;
-      case 9:
+      case LanguageConceptSwitch.EditorOperationDeclaration:
+        if (props_EditorOperationDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_EditorOperationDeclaration = cpb.create();
+        }
         return props_EditorOperationDeclaration;
-      case 10:
+      case LanguageConceptSwitch.EditorPropertyDeclaration:
+        if (props_EditorPropertyDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_EditorPropertyDeclaration = cpb.create();
+        }
         return props_EditorPropertyDeclaration;
-      case 11:
+      case LanguageConceptSwitch.EditorPropertyReference:
+        if (props_EditorPropertyReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c77f1e98L, 0xf8cc6bf960L, "variableDeclaration", "", "");
+          props_EditorPropertyReference = cpb.create();
+        }
         return props_EditorPropertyReference;
-      case 12:
+      case LanguageConceptSwitch.GetEditorOperation:
+        if (props_GetEditorOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("editor");
+          props_GetEditorOperation = cpb.create();
+        }
         return props_GetEditorOperation;
-      case 13:
+      case LanguageConceptSwitch.GridBagConstraints:
+        if (props_GridBagConstraints == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("grid bag constraints");
+          props_GridBagConstraints = cpb.create();
+        }
         return props_GridBagConstraints;
-      case 14:
+      case LanguageConceptSwitch.IPersistentPropertyHolder:
+        if (props_IPersistentPropertyHolder == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IPersistentPropertyHolder = cpb.create();
+        }
         return props_IPersistentPropertyHolder;
-      case 15:
+      case LanguageConceptSwitch.PersistentConfiguration:
+        if (props_PersistentConfiguration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_PersistentConfiguration = cpb.create();
+        }
         return props_PersistentConfiguration;
-      case 16:
+      case LanguageConceptSwitch.PersistentConfigurationAssistent:
+        if (props_PersistentConfigurationAssistent == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_PersistentConfigurationAssistent = cpb.create();
+        }
         return props_PersistentConfigurationAssistent;
-      case 17:
+      case LanguageConceptSwitch.PersistentConfigurationMethod:
+        if (props_PersistentConfigurationMethod == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_PersistentConfigurationMethod = cpb.create();
+        }
         return props_PersistentConfigurationMethod;
-      case 18:
+      case LanguageConceptSwitch.PersistentConfigurationTemplate:
+        if (props_PersistentConfigurationTemplate == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_PersistentConfigurationTemplate = cpb.create();
+        }
         return props_PersistentConfigurationTemplate;
-      case 19:
+      case LanguageConceptSwitch.PersistentConfigurationTemplateInitializer:
+        if (props_PersistentConfigurationTemplateInitializer == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x756e911c3f1f4a48L, 0xbdf5a2ceb91b723cL, 0xd244b712f910116L, 0xd244b712f910117L, "template", "", "");
+          props_PersistentConfigurationTemplateInitializer = cpb.create();
+        }
         return props_PersistentConfigurationTemplateInitializer;
-      case 20:
+      case LanguageConceptSwitch.PersistentConfigurationType:
+        if (props_PersistentConfigurationType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("persistent configuration type");
+          cpb.rawPresentation("configuration");
+          props_PersistentConfigurationType = cpb.create();
+        }
         return props_PersistentConfigurationType;
-      case 21:
+      case LanguageConceptSwitch.PersistentPropertyDeclaration:
+        if (props_PersistentPropertyDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_PersistentPropertyDeclaration = cpb.create();
+        }
         return props_PersistentPropertyDeclaration;
-      case 22:
+      case LanguageConceptSwitch.PersistentPropertyReferenceOperation:
+        if (props_PersistentPropertyReferenceOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("persistent property reference");
+          cpb.presentationByReference(0x756e911c3f1f4a48L, 0xbdf5a2ceb91b723cL, 0xd244b712f91010eL, 0xd244b712f91010fL, "variableDeclaration", "", "");
+          props_PersistentPropertyReferenceOperation = cpb.create();
+        }
         return props_PersistentPropertyReferenceOperation;
-      case 23:
+      case LanguageConceptSwitch.ProjectAccessExpression:
+        if (props_ProjectAccessExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("project");
+          props_ProjectAccessExpression = cpb.create();
+        }
+        return props_ProjectAccessExpression;
+      case LanguageConceptSwitch.ReportConfigurationErrorStatement:
+        if (props_ReportConfigurationErrorStatement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("report error");
+          props_ReportConfigurationErrorStatement = cpb.create();
+        }
         return props_ReportConfigurationErrorStatement;
-      case 24:
+      case LanguageConceptSwitch.ResetFrom_Function:
+        if (props_ResetFrom_Function == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("reset from");
+          props_ResetFrom_Function = cpb.create();
+        }
         return props_ResetFrom_Function;
-      case 25:
+      case LanguageConceptSwitch.SettingsEditor:
+        if (props_SettingsEditor == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("SettingsEditor");
+          props_SettingsEditor = cpb.create();
+        }
         return props_SettingsEditor;
-      case 26:
+      case LanguageConceptSwitch.SettingsEditorType:
+        if (props_SettingsEditorType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("editor");
+          props_SettingsEditorType = cpb.create();
+        }
         return props_SettingsEditorType;
-      case 27:
+      case LanguageConceptSwitch.TemplateParameter:
+        if (props_TemplateParameter == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_TemplateParameter = cpb.create();
+        }
         return props_TemplateParameter;
-      case 28:
+      case LanguageConceptSwitch.TemplateParameterReference:
+        if (props_TemplateParameterReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c77f1e98L, 0xf8cc6bf960L, "variableDeclaration", "", "");
+          props_TemplateParameterReference = cpb.create();
+        }
         return props_TemplateParameterReference;
-      case 29:
+      case LanguageConceptSwitch.TemplatePersistentConfigurationType:
+        if (props_TemplatePersistentConfigurationType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("template configuration reference");
+          cpb.rawPresentation("template configuration");
+          props_TemplatePersistentConfigurationType = cpb.create();
+        }
         return props_TemplatePersistentConfigurationType;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

@@ -12,6 +12,6 @@ public class NegateWhereFilter<T> extends IWhereFilter<T> {
   }
   @Override
   public boolean accept(T t) {
-    return !((filter.invoke(t)));
+    return !(filter.invoke(t));
   }
 }

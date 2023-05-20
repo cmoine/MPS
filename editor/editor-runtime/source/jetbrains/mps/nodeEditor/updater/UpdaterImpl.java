@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,10 +29,9 @@ import jetbrains.mps.openapi.editor.update.Updater;
 import jetbrains.mps.openapi.editor.update.UpdaterListener;
 import jetbrains.mps.project.Project;
 import jetbrains.mps.smodel.event.SModelEvent;
-import jetbrains.mps.typesystem.inference.TypeContextManager;
+import jetbrains.mps.typechecking.TypecheckingFacade;
 import jetbrains.mps.util.Pair;
 import jetbrains.mps.util.WeakSet;
-import org.apache.log4j.LogManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNode;
@@ -54,7 +53,7 @@ import java.util.WeakHashMap;
  * Date: 03/09/14
  */
 public class UpdaterImpl implements Updater {
-  private static final Logger LOG = Logger.wrap(LogManager.getLogger(UpdaterImpl.class));
+  private static final Logger LOG = Logger.getLogger(UpdaterImpl.class);
 
   @NotNull
   private final EditorComponent myEditorComponent;
@@ -85,8 +84,10 @@ public class UpdaterImpl implements Updater {
   public void update() {
     assert !myDisposed;
     boolean wasInProgress = fireEditorUpdateStarted();
-    doUpdate(null);
+    // first cleaning collected events because subsequent update process may call flushModelEvents()
+    // for now and it is expected that all events should be already processed
     myModelListenersController.clearCollectedEvents();
+    doUpdate(null);
     fireEditorUpdated(wasInProgress);
   }
 
@@ -109,9 +110,9 @@ public class UpdaterImpl implements Updater {
     if (editedNode == null || editedNode.getModel() == null) {
       myEditorComponent.setRootCell(myEditorComponent.createEmptyCell());
     } else {
-      EditorComponentState state = getEditorContext().getEditorComponentState();
+      EditorComponentState state = myEditorComponent.captureState();
       myEditorComponent.setRootCell(updateRootCell(editedNode, events));
-      getEditorContext().restoreEditorComponentState(state);
+      myEditorComponent.restoreState(state);
     }
   }
 
@@ -121,22 +122,23 @@ public class UpdaterImpl implements Updater {
     assert
         project == null || !project.isDisposed() :
         "Update was executed for the editor associated with disposed project: " + project + ", editor: " + getEditorComponent() + ", node: " +
-            getEditorComponent().getEditedNode();
+        getEditorComponent().getEditedNode();
 
     assert myUpdateSession == null;
     myUpdateSession = createUpdateSession(node, events);
-    EditorCell rootCell = null;
     try {
-
       Pair<EditorCell, UpdateInfoIndex> result =
-          TypeContextManager.getInstance().runTypecheckingAction(myEditorComponent, () -> myUpdateSession.performUpdate());
-      rootCell = result.o1;
+          TypecheckingFacade
+              .getFromContext()
+              .computeWithSession(myEditorComponent.getTypecheckingSession(), (session) -> myUpdateSession.performUpdate());
+
+      EditorCell rootCell = result.o1;
       myUpdateInfoIndex = result.o2;
+      myModelListenersController.attachListeners(node, getRelatedNodes(rootCell), getRelatedRefTargets(rootCell));
+      return rootCell;
     } finally {
       myUpdateSession = null;
     }
-    myModelListenersController.attachListeners(node, getRelatedNodes(rootCell), getRelatedRefTargets(rootCell));
-    return rootCell;
   }
 
   @Override
@@ -165,7 +167,7 @@ public class UpdaterImpl implements Updater {
 
   @Override
   public boolean setInitialEditorHints(@Nullable String[] hints) {
-    assert !myDisposed;
+    assert !myDisposed : "editor is already disposed";
     boolean changed = !Arrays.equals(myInitialHints, hints);
     myInitialHints = hints;
     return changed;
@@ -191,9 +193,12 @@ public class UpdaterImpl implements Updater {
       Collections.addAll(currentHints, hints);
       myEditorHintsForNodeMap.put(nodeReference, currentHints);
     } else {
-      Collections.addAll(currentHints, hints);
+      for (String hint : hints) {
+        if (!currentHints.contains(hint)) {
+          currentHints.add(hint);
+        }
+      }
     }
-
   }
 
   @Override
@@ -213,7 +218,7 @@ public class UpdaterImpl implements Updater {
   @Override
   public String[] getExplicitEditorHintsForNode(SNodeReference nodeReference) {
     Collection<String> hints = myEditorHintsForNodeMap.get(nodeReference);
-    return hints == null ? null : hints.toArray(new String[hints.size()]);
+    return hints == null ? null : hints.toArray(new String[0]);
   }
 
   @Override
@@ -251,7 +256,7 @@ public class UpdaterImpl implements Updater {
   protected UpdateSessionImpl createUpdateSession(SNode node, List<SModelEvent> events) {
     UpdateSessionImpl result =
         new UpdateSessionImpl(node, events, this, myBigCellsMap, myRelatedNodes, myRelatedRefTargets, myCleanDependentCells, myDirtyDependentCells,
-            myExistenceDependentCells, myUpdateInfoIndex);
+                              myExistenceDependentCells, myUpdateInfoIndex);
     result.setInitialEditorHints(myInitialHints);
     result.setEditorHintsForNodeMap(myEditorHintsForNodeMap);
 // TODO: clean local state completely & use only info from this UpdateSessionImpl to update the editor after it.

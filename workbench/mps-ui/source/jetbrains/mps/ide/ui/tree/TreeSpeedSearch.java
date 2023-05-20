@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,13 +42,15 @@ public class TreeSpeedSearch extends SpeedSearchBase {
   }
 
   @Override
-  protected Object[] getAllElements() {
+  protected int getElementCount() {
     JTree tree = (JTree) myComponent;
-    TreePath[] paths = new TreePath[tree.getRowCount()];
-    for (int i = 0; i < paths.length; i++) {
-      paths[i] = tree.getPathForRow(i);
-    }
-    return paths;
+    return tree.getRowCount();
+  }
+
+  @Override
+  protected Object getElementAt(int viewIndex) {
+    JTree tree = (JTree) myComponent;
+    return tree.getPathForRow(viewIndex);
   }
 
   @Override

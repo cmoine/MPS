@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MPSProject">
+    <projectModules>
+      <modulePath path="$PROJECT_DIR$/languages/jetbrains.mps.samples.CustomTestCases/jetbrains.mps.samples.CustomTestCases.mpl" folder="" />
+      <modulePath path="$PROJECT_DIR$/languages/jetbrains.mps.samples.CustomTestCases/sandbox/jetbrains.mps.samples.CustomTestCases.sandbox.msd" folder="" />
+    </projectModules>
+  </component>
+</project>

@@ -95,7 +95,7 @@
                     </node>
                   </node>
                   <node concept="liA8E" id="6K07tEmCGv" role="2OqNvi">
-                    <ref role="37wK5l" to="wyt6:~String.endsWith(java.lang.String):boolean" resolve="endsWith" />
+                    <ref role="37wK5l" to="wyt6:~String.endsWith(java.lang.String)" resolve="endsWith" />
                     <node concept="Xl_RD" id="6K07tEmCGw" role="37wK5m">
                       <property role="Xl_RC" value="1" />
                     </node>

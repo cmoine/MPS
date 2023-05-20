@@ -39,18 +39,15 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Artem Tikhomirov
  */
 public class FastNodeFinderManager {
-  private static final ConcurrentHashMap<SModelReference, FastNodeFinder> ourFinders = new ConcurrentHashMap<SModelReference, FastNodeFinder>();
-  private static final ConcurrentHashMap<SRepository, StructureAspectChangeTracker> ourStructureChangeTrackers = new ConcurrentHashMap<SRepository, StructureAspectChangeTracker>();
-  private static final ConcurrentHashMap<SRepository, ModelLifecycleTracker> ourLifecycleTrackers = new ConcurrentHashMap<SRepository, ModelLifecycleTracker>();
-  private static final ModuleListener ourStructureAspectListener = new ModuleListener() {
-    @Override
-    public void structureAspectChanged(Set<SModuleReference> changedModules) {
-      // forget all finders, as it seems cheaper to re-create than to figure out their inter-dependencies
-      ArrayList<FastNodeFinder> finders = new ArrayList<FastNodeFinder>(ourFinders.values());
-      ourFinders.clear();
-      for (FastNodeFinder finder : finders) {
-        finder.dispose();
-      }
+  private static final ConcurrentHashMap<SModelReference, FastNodeFinder> ourFinders = new ConcurrentHashMap<>();
+  private static final ConcurrentHashMap<SRepository, StructureAspectChangeTracker> ourStructureChangeTrackers = new ConcurrentHashMap<>();
+  private static final ConcurrentHashMap<SRepository, ModelLifecycleTracker> ourLifecycleTrackers = new ConcurrentHashMap<>();
+  private static final ModuleListener ourStructureAspectListener = changedModules -> {
+    // forget all finders, as it seems cheaper to re-create than to figure out their inter-dependencies
+    ArrayList<FastNodeFinder> finders = new ArrayList<>(ourFinders.values());
+    ourFinders.clear();
+    for (FastNodeFinder finder : finders) {
+      finder.dispose();
     }
   };
 

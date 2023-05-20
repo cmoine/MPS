@@ -7,9 +7,9 @@ import jetbrains.mps.core.aspects.behaviour.api.BHDescriptor;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor {
   private final BHDescriptor myXmlText__BehaviorDescriptor = new XmlText__BehaviorDescriptor();
@@ -17,6 +17,7 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
   private final BHDescriptor myXmlPart__BehaviorDescriptor = new XmlPart__BehaviorDescriptor();
   private final BHDescriptor myXmlBasePrologElement__BehaviorDescriptor = new XmlBasePrologElement__BehaviorDescriptor();
   private final BHDescriptor myXmlDoctypeDeclaration__BehaviorDescriptor = new XmlDoctypeDeclaration__BehaviorDescriptor();
+  private final BHDescriptor myXmlSingleLineText__BehaviorDescriptor = new XmlSingleLineText__BehaviorDescriptor();
   private final BHDescriptor myXmlCharRef__BehaviorDescriptor = new XmlCharRef__BehaviorDescriptor();
   private final BHDescriptor myXmlDeclaration__BehaviorDescriptor = new XmlDeclaration__BehaviorDescriptor();
   private final BHDescriptor myXmlContent__BehaviorDescriptor = new XmlContent__BehaviorDescriptor();
@@ -39,129 +40,55 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
 
   @Nullable
   public BHDescriptor getDescriptor(@NotNull SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_846f5o_a0y.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return myXmlAttribute__BehaviorDescriptor;
-          }
-          break;
-        case 1:
-          if (true) {
-            return myXmlBaseAttribute__BehaviorDescriptor;
-          }
-          break;
-        case 2:
-          if (true) {
-            return myXmlBaseElement__BehaviorDescriptor;
-          }
-          break;
-        case 3:
-          if (true) {
-            return myXmlBasePrologElement__BehaviorDescriptor;
-          }
-          break;
-        case 4:
-          if (true) {
-            return myXmlCDATA__BehaviorDescriptor;
-          }
-          break;
-        case 5:
-          if (true) {
-            return myXmlCharRef__BehaviorDescriptor;
-          }
-          break;
-        case 6:
-          if (true) {
-            return myXmlComment__BehaviorDescriptor;
-          }
-          break;
-        case 7:
-          if (true) {
-            return myXmlContent__BehaviorDescriptor;
-          }
-          break;
-        case 8:
-          if (true) {
-            return myXmlDeclaration__BehaviorDescriptor;
-          }
-          break;
-        case 9:
-          if (true) {
-            return myXmlDoctypeDeclaration__BehaviorDescriptor;
-          }
-          break;
-        case 10:
-          if (true) {
-            return myXmlElement__BehaviorDescriptor;
-          }
-          break;
-        case 11:
-          if (true) {
-            return myXmlEntityRef__BehaviorDescriptor;
-          }
-          break;
-        case 12:
-          if (true) {
-            return myXmlFile__BehaviorDescriptor;
-          }
-          break;
-        case 13:
-          if (true) {
-            return myXmlPart__BehaviorDescriptor;
-          }
-          break;
-        case 14:
-          if (true) {
-            return myXmlProcessingInstruction__BehaviorDescriptor;
-          }
-          break;
-        case 15:
-          if (true) {
-            return myXmlProlog__BehaviorDescriptor;
-          }
-          break;
-        case 16:
-          if (true) {
-            return myXmlPrologElement__BehaviorDescriptor;
-          }
-          break;
-        case 17:
-          if (true) {
-            return myXmlText__BehaviorDescriptor;
-          }
-          break;
-        case 18:
-          if (true) {
-            return myXmlTextValue__BehaviorDescriptor;
-          }
-          break;
-        case 19:
-          if (true) {
-            return myXmlValuePart__BehaviorDescriptor;
-          }
-          break;
-        case 20:
-          if (true) {
-            return myXmlWhitespace__BehaviorDescriptor;
-          }
-          break;
-        default:
-          // default 
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return myXmlAttribute__BehaviorDescriptor;
+      case 1:
+        return myXmlBaseAttribute__BehaviorDescriptor;
+      case 2:
+        return myXmlBaseElement__BehaviorDescriptor;
+      case 3:
+        return myXmlBasePrologElement__BehaviorDescriptor;
+      case 4:
+        return myXmlCDATA__BehaviorDescriptor;
+      case 5:
+        return myXmlCharRef__BehaviorDescriptor;
+      case 6:
+        return myXmlComment__BehaviorDescriptor;
+      case 7:
+        return myXmlContent__BehaviorDescriptor;
+      case 8:
+        return myXmlDeclaration__BehaviorDescriptor;
+      case 9:
+        return myXmlDoctypeDeclaration__BehaviorDescriptor;
+      case 10:
+        return myXmlElement__BehaviorDescriptor;
+      case 11:
+        return myXmlEntityRef__BehaviorDescriptor;
+      case 12:
+        return myXmlFile__BehaviorDescriptor;
+      case 13:
+        return myXmlPart__BehaviorDescriptor;
+      case 14:
+        return myXmlProcessingInstruction__BehaviorDescriptor;
+      case 15:
+        return myXmlProlog__BehaviorDescriptor;
+      case 16:
+        return myXmlPrologElement__BehaviorDescriptor;
+      case 17:
+        return myXmlSingleLineText__BehaviorDescriptor;
+      case 18:
+        return myXmlText__BehaviorDescriptor;
+      case 19:
+        return myXmlTextValue__BehaviorDescriptor;
+      case 20:
+        return myXmlValuePart__BehaviorDescriptor;
+      case 21:
+        return myXmlWhitespace__BehaviorDescriptor;
+      default:
     }
     return null;
   }
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
-  }
-  private static final Map<SAbstractConcept, Integer> indices_846f5o_a0y = buildConceptIndices(MetaAdapterFactory.getConcept(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c54b8df3L, "jetbrains.mps.core.xml.structure.XmlAttribute"), MetaAdapterFactory.getConcept(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c54b10b3L, "jetbrains.mps.core.xml.structure.XmlBaseAttribute"), MetaAdapterFactory.getConcept(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c549486dL, "jetbrains.mps.core.xml.structure.XmlBaseElement"), MetaAdapterFactory.getConcept(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x1d9c27c394f08788L, "jetbrains.mps.core.xml.structure.XmlBasePrologElement"), MetaAdapterFactory.getConcept(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c549487aL, "jetbrains.mps.core.xml.structure.XmlCDATA"), MetaAdapterFactory.getConcept(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x2abf08504ffe9886L, "jetbrains.mps.core.xml.structure.XmlCharRef"), MetaAdapterFactory.getConcept(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c5494878L, "jetbrains.mps.core.xml.structure.XmlComment"), MetaAdapterFactory.getConcept(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c549486bL, "jetbrains.mps.core.xml.structure.XmlContent"), MetaAdapterFactory.getConcept(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x4890619bb401ef6eL, "jetbrains.mps.core.xml.structure.XmlDeclaration"), MetaAdapterFactory.getConcept(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x1d9c27c394f4069bL, "jetbrains.mps.core.xml.structure.XmlDoctypeDeclaration"), MetaAdapterFactory.getConcept(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c54b10b2L, "jetbrains.mps.core.xml.structure.XmlElement"), MetaAdapterFactory.getConcept(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x16838b3fce9c6f4dL, "jetbrains.mps.core.xml.structure.XmlEntityRef"), MetaAdapterFactory.getConcept(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c54c94c0L, "jetbrains.mps.core.xml.structure.XmlFile"), MetaAdapterFactory.getInterfaceConcept(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x1d9c27c394eff13eL, "jetbrains.mps.core.xml.structure.XmlPart"), MetaAdapterFactory.getConcept(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c5494875L, "jetbrains.mps.core.xml.structure.XmlProcessingInstruction"), MetaAdapterFactory.getConcept(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c5494871L, "jetbrains.mps.core.xml.structure.XmlProlog"), MetaAdapterFactory.getInterfaceConcept(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x6988ccb84e3bd0e5L, "jetbrains.mps.core.xml.structure.XmlPrologElement"), MetaAdapterFactory.getConcept(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x16838b3fce9aa513L, "jetbrains.mps.core.xml.structure.XmlText"), MetaAdapterFactory.getConcept(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c54cfd1fL, "jetbrains.mps.core.xml.structure.XmlTextValue"), MetaAdapterFactory.getConcept(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c54cfd1cL, "jetbrains.mps.core.xml.structure.XmlValuePart"), MetaAdapterFactory.getConcept(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x6988ccb84e3cfaa8L, "jetbrains.mps.core.xml.structure.XmlWhitespace"));
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c54b8df3L), MetaIdFactory.conceptId(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c54b10b3L), MetaIdFactory.conceptId(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c549486dL), MetaIdFactory.conceptId(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x1d9c27c394f08788L), MetaIdFactory.conceptId(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c549487aL), MetaIdFactory.conceptId(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x2abf08504ffe9886L), MetaIdFactory.conceptId(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c5494878L), MetaIdFactory.conceptId(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c549486bL), MetaIdFactory.conceptId(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x4890619bb401ef6eL), MetaIdFactory.conceptId(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x1d9c27c394f4069bL), MetaIdFactory.conceptId(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c54b10b2L), MetaIdFactory.conceptId(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x16838b3fce9c6f4dL), MetaIdFactory.conceptId(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c54c94c0L), MetaIdFactory.conceptId(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x1d9c27c394eff13eL), MetaIdFactory.conceptId(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c5494875L), MetaIdFactory.conceptId(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c5494871L), MetaIdFactory.conceptId(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x6988ccb84e3bd0e5L), MetaIdFactory.conceptId(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x1ff12ac079bd229fL), MetaIdFactory.conceptId(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x16838b3fce9aa513L), MetaIdFactory.conceptId(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c54cfd1fL), MetaIdFactory.conceptId(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c54cfd1cL), MetaIdFactory.conceptId(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x6988ccb84e3cfaa8L)).seal();
 }

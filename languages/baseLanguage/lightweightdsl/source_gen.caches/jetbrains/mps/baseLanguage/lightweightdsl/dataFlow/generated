@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="iy22ax3qeaz12dgi9b103z5j1dk9ti" />
+<product version="3" modelHash="75dn8ga0c70gaarlr56pws17tn1kj2c">
+  <files names="DataFlowAspectDescriptorImpl.java:PropertyInstance_DataFlow.java" />
+</product>
 

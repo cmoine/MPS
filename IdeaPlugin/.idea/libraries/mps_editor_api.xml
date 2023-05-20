@@ -4,6 +4,8 @@
       <root url="jar://$PROJECT_DIR$/mps-core/lib/mps-editor-api.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../editor/editor-api/source" />
+    </SOURCES>
   </library>
 </component>

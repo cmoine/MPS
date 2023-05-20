@@ -4,90 +4,213 @@ package jetbrains.mps.baseLanguage.lightweightdsl.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_AutoInitDSLClass = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BooleanPropertyInstance = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CustomMemberDescriptor = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DSLAnnotation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DSLClassMember = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DSLDescriptor = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DependentTypeDescriptor = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DependentTypeInstance = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_EmptyMemberDescriptor = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GenerateModifier = new ConceptPresentationBuilder().deprecated().create();
-  private final ConceptPresentation props_IntegerPropertyInstance = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MemberInstance = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MemberModifier = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MemberPlaceholder = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MethodDescriptor = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MethodInstance = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MethodParameterInstance = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MultipleModifier = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ParameterDescriptor = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PlaceholderModifier = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PropertyDescriptor = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PropertyInstance = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RequiredModifier = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_StringPropertyInstance = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_AutoInitDSLClass;
+  private ConceptPresentation props_BooleanPropertyInstance;
+  private ConceptPresentation props_CustomMemberDescriptor;
+  private ConceptPresentation props_DSLAnnotation;
+  private ConceptPresentation props_DSLClassMember;
+  private ConceptPresentation props_DSLDescriptor;
+  private ConceptPresentation props_DefaultModifier;
+  private ConceptPresentation props_DependentTypeDescriptor;
+  private ConceptPresentation props_DependentTypeInstance;
+  private ConceptPresentation props_EmptyMemberDescriptor;
+  private ConceptPresentation props_ImplementationCode;
+  private ConceptPresentation props_IntegerPropertyInstance;
+  private ConceptPresentation props_MemberInstance;
+  private ConceptPresentation props_MemberModifier;
+  private ConceptPresentation props_MemberPlaceholder;
+  private ConceptPresentation props_MethodDescriptor;
+  private ConceptPresentation props_MethodInstance;
+  private ConceptPresentation props_MethodParameterInstance;
+  private ConceptPresentation props_MultipleModifier;
+  private ConceptPresentation props_ParameterDescriptor;
+  private ConceptPresentation props_PlaceholderModifier;
+  private ConceptPresentation props_PropertyDescriptor;
+  private ConceptPresentation props_PropertyInstance;
+  private ConceptPresentation props_RequiredModifier;
+  private ConceptPresentation props_StringPropertyInstance;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.AutoInitDSLClass:
+        if (props_AutoInitDSLClass == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_AutoInitDSLClass = cpb.create();
+        }
         return props_AutoInitDSLClass;
-      case 1:
+      case LanguageConceptSwitch.BooleanPropertyInstance:
+        if (props_BooleanPropertyInstance == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_BooleanPropertyInstance = cpb.create();
+        }
         return props_BooleanPropertyInstance;
-      case 2:
+      case LanguageConceptSwitch.CustomMemberDescriptor:
+        if (props_CustomMemberDescriptor == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_CustomMemberDescriptor = cpb.create();
+        }
         return props_CustomMemberDescriptor;
-      case 3:
+      case LanguageConceptSwitch.DSLAnnotation:
+        if (props_DSLAnnotation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xc7d5b9dda05f4be2L, 0xbc73f2e16994cc67L, 0x3190d3f9f1cab0caL, 0x3190d3f9f1cac277L, "descriptor", "", "");
+          props_DSLAnnotation = cpb.create();
+        }
         return props_DSLAnnotation;
-      case 4:
+      case LanguageConceptSwitch.DSLClassMember:
+        if (props_DSLClassMember == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_DSLClassMember = cpb.create();
+        }
         return props_DSLClassMember;
-      case 5:
+      case LanguageConceptSwitch.DSLDescriptor:
+        if (props_DSLDescriptor == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_DSLDescriptor = cpb.create();
+        }
         return props_DSLDescriptor;
-      case 6:
+      case LanguageConceptSwitch.DefaultModifier:
+        if (props_DefaultModifier == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("default");
+          props_DefaultModifier = cpb.create();
+        }
+        return props_DefaultModifier;
+      case LanguageConceptSwitch.DependentTypeDescriptor:
+        if (props_DependentTypeDescriptor == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("deptype");
+          props_DependentTypeDescriptor = cpb.create();
+        }
         return props_DependentTypeDescriptor;
-      case 7:
+      case LanguageConceptSwitch.DependentTypeInstance:
+        if (props_DependentTypeInstance == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("DependentTypeInstance");
+          props_DependentTypeInstance = cpb.create();
+        }
         return props_DependentTypeInstance;
-      case 8:
+      case LanguageConceptSwitch.EmptyMemberDescriptor:
+        if (props_EmptyMemberDescriptor == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("empty line");
+          props_EmptyMemberDescriptor = cpb.create();
+        }
         return props_EmptyMemberDescriptor;
-      case 9:
-        return props_GenerateModifier;
-      case 10:
+      case LanguageConceptSwitch.ImplementationCode:
+        if (props_ImplementationCode == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_ImplementationCode = cpb.create();
+        }
+        return props_ImplementationCode;
+      case LanguageConceptSwitch.IntegerPropertyInstance:
+        if (props_IntegerPropertyInstance == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_IntegerPropertyInstance = cpb.create();
+        }
         return props_IntegerPropertyInstance;
-      case 11:
+      case LanguageConceptSwitch.MemberInstance:
+        if (props_MemberInstance == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_MemberInstance = cpb.create();
+        }
         return props_MemberInstance;
-      case 12:
+      case LanguageConceptSwitch.MemberModifier:
+        if (props_MemberModifier == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_MemberModifier = cpb.create();
+        }
         return props_MemberModifier;
-      case 13:
+      case LanguageConceptSwitch.MemberPlaceholder:
+        if (props_MemberPlaceholder == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xc7d5b9dda05f4be2L, 0xbc73f2e16994cc67L, 0x59e9926e840d7db2L, 0x59e9926e840d7db5L, "decl", "", "");
+          props_MemberPlaceholder = cpb.create();
+        }
         return props_MemberPlaceholder;
-      case 14:
+      case LanguageConceptSwitch.MethodDescriptor:
+        if (props_MethodDescriptor == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_MethodDescriptor = cpb.create();
+        }
         return props_MethodDescriptor;
-      case 15:
+      case LanguageConceptSwitch.MethodInstance:
+        if (props_MethodInstance == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_MethodInstance = cpb.create();
+        }
         return props_MethodInstance;
-      case 16:
+      case LanguageConceptSwitch.MethodParameterInstance:
+        if (props_MethodParameterInstance == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_MethodParameterInstance = cpb.create();
+        }
         return props_MethodParameterInstance;
-      case 17:
+      case LanguageConceptSwitch.MultipleModifier:
+        if (props_MultipleModifier == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("multiple");
+          props_MultipleModifier = cpb.create();
+        }
         return props_MultipleModifier;
-      case 18:
+      case LanguageConceptSwitch.ParameterDescriptor:
+        if (props_ParameterDescriptor == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_ParameterDescriptor = cpb.create();
+        }
         return props_ParameterDescriptor;
-      case 19:
+      case LanguageConceptSwitch.PlaceholderModifier:
+        if (props_PlaceholderModifier == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("placeholder");
+          props_PlaceholderModifier = cpb.create();
+        }
         return props_PlaceholderModifier;
-      case 20:
+      case LanguageConceptSwitch.PropertyDescriptor:
+        if (props_PropertyDescriptor == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_PropertyDescriptor = cpb.create();
+        }
         return props_PropertyDescriptor;
-      case 21:
+      case LanguageConceptSwitch.PropertyInstance:
+        if (props_PropertyInstance == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_PropertyInstance = cpb.create();
+        }
         return props_PropertyInstance;
-      case 22:
+      case LanguageConceptSwitch.RequiredModifier:
+        if (props_RequiredModifier == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("required");
+          props_RequiredModifier = cpb.create();
+        }
         return props_RequiredModifier;
-      case 23:
+      case LanguageConceptSwitch.StringPropertyInstance:
+        if (props_StringPropertyInstance == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_StringPropertyInstance = cpb.create();
+        }
         return props_StringPropertyInstance;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

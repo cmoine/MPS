@@ -7,14 +7,15 @@ import jetbrains.mps.baseLanguage.closures.runtime._FunctionTypes;
 public class MPS14653_helper {
   public MPS14653_helper() {
   }
+  public static class SampleException extends Exception {
+  }
   public static class Context<T extends Exception> {
     public Context() {
     }
     public _FunctionTypes._void_P0_E1<? extends T> getFunction() {
-      return (_FunctionTypes._void_P0_E1<? extends T>) new _FunctionTypes._void_P0_E1<Exception>() {
-        public void invoke() throws Exception {
-          throw new Exception();
-        }
+      return () -> {
+        // Exception cannot be thrown as we cannot ensure T = Exception, in our case it is true so we cast
+        throw (T) new Exception();
       };
     }
     public void acceptFunction(_FunctionTypes._void_P0_E1<? extends T> fun) throws T {

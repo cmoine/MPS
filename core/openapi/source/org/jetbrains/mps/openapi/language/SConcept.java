@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,15 +22,11 @@ import org.jetbrains.annotations.Nullable;
  * Represents a concept
  */
 public interface SConcept extends SAbstractConcept {
-  /**
-   * Returns the superconcept of this concept
-   */
+  // override preserved to keep references from model code intact
   @Nullable
   SConcept getSuperConcept();
 
-  /**
-   * Returns immediately implemented interfaces
-   */
+  // override preserved to keep references from model code intact
   Iterable<SInterfaceConcept> getSuperInterfaces();
 
   boolean isRootable();

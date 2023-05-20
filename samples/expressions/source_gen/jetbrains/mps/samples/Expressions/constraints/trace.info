@@ -2,45 +2,65 @@
 <debug-info version="2">
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
   <root>
     <file name="ConstraintsAspectDescriptor.java">
-      <unit at="13,0,45,0" name="jetbrains.mps.samples.Expressions.constraints.ConstraintsAspectDescriptor" />
+      <unit at="13,0,29,0" name="jetbrains.mps.samples.Expressions.constraints.ConstraintsAspectDescriptor" />
     </file>
   </root>
   <root nodeRef="r:c8883f02-cad6-4252-a4e6-ca01d435b80e(jetbrains.mps.samples.Expressions.constraints)/2073504467208672573">
     <file name="ArithmeticSimpleMathExpression_Constraints.java">
-      <node id="2073504467208672573" at="19,55,20,182" concept="5" />
-      <node id="2073504467208672573" at="24,84,25,119" concept="3" />
-      <node id="2073504467208672573" at="28,40,29,20" concept="4" />
-      <node id="2073504467208672573" at="32,70,33,41" concept="3" />
-      <node id="2073504467208880117" at="33,41,34,234" concept="4" />
-      <node id="2073504467208672573" at="36,7,37,22" concept="4" />
-      <node id="2073504467208672573" at="19,0,22,0" concept="0" trace="ArithmeticSimpleMathExpression_Constraints#()V" />
-      <node id="2073504467208672573" at="27,0,31,0" concept="2" trace="hasOwnValidator#()Z" />
-      <node id="2073504467208672573" at="31,0,36,0" concept="2" trace="validateValue#(Lorg/jetbrains/mps/openapi/model/SNode;Ljava/lang/String;)Z" />
-      <node id="2073504467208672573" at="25,119,36,7" concept="1" />
-      <node id="2073504467208672573" at="23,0,39,0" concept="2" trace="getSpecifiedProperties#()Ljava/util/Map;" />
-      <scope id="2073504467208672573" at="19,55,20,182" />
-      <scope id="2073504467208672573" at="28,40,29,20" />
-      <scope id="2073504467208672573" at="32,70,34,234">
-        <var name="propertyName" id="2073504467208672573" />
+      <node id="2073504467208672573" at="22,55,23,54" concept="8" />
+      <node id="2073504467208672625" at="27,63,28,64" concept="8" />
+      <node id="2073504467208672625" at="31,109,32,99" concept="4" />
+      <node id="2073504467208672625" at="33,53,34,174" concept="1" />
+      <node id="2073504467208672625" at="35,7,36,20" concept="5" />
+      <node id="2073504467208880117" at="38,85,39,166" concept="5" />
+      <node id="2073504467208672573" at="43,84,44,119" concept="4" />
+      <node id="2073504467208672625" at="44,119,45,69" concept="1" />
+      <node id="2073504467208672573" at="45,69,46,22" concept="5" />
+      <node id="2073504467208672573" at="50,0,51,0" concept="6" trace="ArithmeticSimpleMathExpression$kg" />
+      <node id="2073504467208672573" at="54,0,55,0" concept="6" trace="operator$4Nfc" />
+      <node id="2073504467208672573" at="22,0,25,0" concept="0" trace="ArithmeticSimpleMathExpression_Constraints#()V" />
+      <node id="2073504467208672625" at="27,0,30,0" concept="0" trace="Operator_Property#(Ljetbrains/mps/smodel/runtime/ConstraintsDescriptor;)V" />
+      <node id="2073504467208672625" at="32,99,35,7" concept="2" />
+      <node id="2073504467208672625" at="38,0,41,0" concept="7" trace="staticValidateProperty#(Lorg/jetbrains/mps/openapi/model/SNode;Ljava/lang/String;)Z" />
+      <node id="2073504467208672573" at="42,0,48,0" concept="3" trace="getSpecifiedProperties#()Ljava/util/Map;" />
+      <node id="2073504467208672625" at="30,0,38,0" concept="3" trace="validateValue#(Lorg/jetbrains/mps/openapi/model/SNode;Ljava/lang/Object;Ljetbrains/mps/smodel/runtime/CheckingNodeContext;)Z" />
+      <scope id="2073504467208672573" at="22,55,23,54" />
+      <scope id="2073504467208672625" at="27,63,28,64" />
+      <scope id="2073504467208672625" at="33,53,34,174" />
+      <scope id="2073504467208672628" at="38,85,39,166" />
+      <scope id="2073504467208672573" at="22,0,25,0" />
+      <scope id="2073504467208672625" at="27,0,30,0">
+        <var name="container" id="2073504467208672625" />
       </scope>
-      <scope id="2073504467208672573" at="19,0,22,0" />
-      <scope id="2073504467208672573" at="27,0,31,0" />
-      <scope id="2073504467208672573" at="31,0,36,0">
-        <var name="node" id="2073504467208672573" />
-        <var name="propertyValue" id="2073504467208672573" />
+      <scope id="2073504467208672625" at="38,0,41,0">
+        <var name="node" id="2073504467208672625" />
+        <var name="propertyValue" id="2073504467208672625" />
       </scope>
-      <scope id="2073504467208672573" at="24,84,37,22">
+      <scope id="2073504467208672573" at="43,84,46,22">
         <var name="properties" id="2073504467208672573" />
       </scope>
-      <scope id="2073504467208672573" at="23,0,39,0" />
-      <unit id="2073504467208672573" at="26,151,36,5" name="jetbrains.mps.samples.Expressions.constraints.ArithmeticSimpleMathExpression_Constraints$1" />
-      <unit id="2073504467208672573" at="18,0,40,0" name="jetbrains.mps.samples.Expressions.constraints.ArithmeticSimpleMathExpression_Constraints" />
+      <scope id="2073504467208672625" at="31,109,36,20">
+        <var name="result" id="2073504467208672625" />
+      </scope>
+      <scope id="2073504467208672573" at="42,0,48,0" />
+      <scope id="2073504467208672625" at="30,0,38,0">
+        <var name="checkingNodeContext" id="2073504467208672625" />
+        <var name="node" id="2073504467208672625" />
+        <var name="propertyValue" id="2073504467208672625" />
+      </scope>
+      <unit id="2073504467208672573" at="49,0,52,0" name="jetbrains.mps.samples.Expressions.constraints.ArithmeticSimpleMathExpression_Constraints$CONCEPTS" />
+      <unit id="2073504467208672573" at="53,0,56,0" name="jetbrains.mps.samples.Expressions.constraints.ArithmeticSimpleMathExpression_Constraints$PROPS" />
+      <unit id="2073504467208672625" at="26,0,42,0" name="jetbrains.mps.samples.Expressions.constraints.ArithmeticSimpleMathExpression_Constraints$Operator_Property" />
+      <unit id="2073504467208672573" at="21,0,57,0" name="jetbrains.mps.samples.Expressions.constraints.ArithmeticSimpleMathExpression_Constraints" />
     </file>
   </root>
 </debug-info>

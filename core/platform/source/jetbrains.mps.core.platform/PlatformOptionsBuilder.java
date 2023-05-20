@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,29 +16,24 @@
 package jetbrains.mps.core.platform;
 
 public enum PlatformOptionsBuilder {
-  CORE(true, false, false),
-  PERSISTENCE(true, true, false),
-  ALL(true, true, true);
+  CORE(false, false),
+  PERSISTENCE(true, false),
+  ALL(true, true);
 
-  private final boolean myLoadCore;
   private final boolean myLoadPersistence;
   private final boolean myLoadOthers;
 
-  PlatformOptionsBuilder(boolean loadCore, boolean loadPersistence, boolean loadOthers) {
-    myLoadCore = loadCore;
+  PlatformOptionsBuilder(boolean loadPersistence, boolean loadOthers) {
     myLoadPersistence = loadPersistence;
     myLoadOthers = loadOthers;
   }
 
-  public boolean isLoadCore() {
-    return myLoadCore;
-  }
 
-  public boolean isLoadPersistence() {
+  public boolean loadsPersistence() {
     return myLoadPersistence;
   }
 
-  public boolean isLoadOthers() {
+  public boolean loadsOthers() {
     return myLoadOthers;
   }
 }

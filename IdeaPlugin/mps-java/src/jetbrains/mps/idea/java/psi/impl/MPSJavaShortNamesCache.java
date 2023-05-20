@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.java.psi.impl;
 
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiClass;
@@ -25,13 +25,11 @@ import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.PsiShortNamesCache;
-import com.intellij.util.CollectConsumer;
-import com.intellij.util.CommonProcessors;
-import com.intellij.util.Consumer;
+import com.intellij.util.CommonProcessors.CollectProcessor;
 import com.intellij.util.Processor;
-import com.intellij.util.containers.HashSet;
 import com.intellij.util.indexing.FileBasedIndex;
 import com.intellij.util.indexing.FileBasedIndex.ValueProcessor;
+import com.intellij.util.indexing.ID;
 import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiProvider;
 import jetbrains.mps.idea.java.index.MPSJavaFieldIndex;
@@ -43,6 +41,7 @@ import jetbrains.mps.workbench.goTo.index.SNodeDescriptor;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.mps.openapi.module.SRepository;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -53,21 +52,23 @@ import java.util.List;
  */
 public class MPSJavaShortNamesCache extends PsiShortNamesCache {
   private final Project myProject;
+  private final SRepository myProjectRepo;
 
   public MPSJavaShortNamesCache(Project project) {
     myProject = project;
+    myProjectRepo = ProjectHelper.getProjectRepository(project);
   }
 
   @NotNull
   @Override
   public PsiClass[] getClassesByName(@NotNull @NonNls final String name, final @NotNull GlobalSearchScope scope) {
     ApplicationManager.getApplication().assertReadAccessAllowed();
-    return new ModelAccessHelper(ProjectHelper.getModelAccess(myProject)).runReadAction(new Computable<PsiClass[]>() {
+    return new ModelAccessHelper(myProjectRepo).runReadAction(new Computable<PsiClass[]>() {
       @Override
       public PsiClass[] compute() {
-        CollectConsumer<SNode> consumer = new CollectConsumer<SNode>(new ArrayList<SNode>());
+        CollectProcessor<SNode> consumer = new CollectProcessor<>();
         findMPSClasses(name, consumer, scope);
-        return toPsiClasses(consumer.getResult());
+        return toPsiClasses(consumer.getResults());
       }
     });
   }
@@ -75,25 +76,24 @@ public class MPSJavaShortNamesCache extends PsiShortNamesCache {
   @NotNull
   @Override
   public String[] getAllClassNames() {
-    Collection<String> allNames = FileBasedIndex.getInstance().getAllKeys(MPSShortNameJavaClassIndex.ID, myProject);
-    return allNames.toArray(new String[allNames.size()]);
-  }
-
-  @Override
-  public void getAllClassNames(@NotNull HashSet<String> dest) {
-    FileBasedIndex.getInstance().processAllKeys(MPSShortNameJavaClassIndex.ID, new CommonProcessors.CollectProcessor<String>(dest), myProject);
+    try {
+      Collection<String> allNames = FileBasedIndex.getInstance().getAllKeys(MPSShortNameJavaClassIndex.ID, myProject);
+      return allNames.toArray(new String[allNames.size()]);
+    } catch (ProcessCanceledException ex) {
+      return new String[0];
+    }
   }
 
   @NotNull
   @Override
   public PsiMethod[] getMethodsByName(@NonNls @NotNull final String name, @NotNull final GlobalSearchScope scope) {
     ApplicationManager.getApplication().assertReadAccessAllowed();
-    return new ModelAccessHelper(ProjectHelper.getModelAccess(myProject)).runReadAction(new Computable<PsiMethod[]>() {
+    return new ModelAccessHelper(myProjectRepo).runReadAction(new Computable<PsiMethod[]>() {
       @Override
       public PsiMethod[] compute() {
-        CollectConsumer<SNode> consumer = new CollectConsumer<SNode>(new ArrayList<SNode>());
+        CollectProcessor<SNode> consumer = new CollectProcessor<>();
         findMPSMethods(name, consumer, scope);
-        return toPsiMethods(consumer.getResult());
+        return toPsiMethods(consumer.getResults());
       }
     });
   }
@@ -102,20 +102,22 @@ public class MPSJavaShortNamesCache extends PsiShortNamesCache {
   @Override
   public PsiMethod[] getMethodsByNameIfNotMoreThan(@NonNls @NotNull final String name, @NotNull final GlobalSearchScope scope, final int maxCount) {
     ApplicationManager.getApplication().assertReadAccessAllowed();
-    return new ModelAccessHelper(ProjectHelper.getModelAccess(myProject)).runReadAction(new Computable<PsiMethod[]>() {
+    return new ModelAccessHelper(myProjectRepo).runReadAction(new Computable<PsiMethod[]>() {
       @Override
       public PsiMethod[] compute() {
-        final CollectConsumer<SNode> consumer = new CollectConsumer<SNode>(new ArrayList<SNode>());
-        processMPSMethods(name, new Processor<SNode>() {
+        final CollectProcessor<SNode> consumer = new CollectProcessor<SNode>() {
           int count = 0;
           @Override
           public boolean process(SNode node) {
-            if (count++ >= maxCount) return false;
-            consumer.consume(node);
-            return true;
+            if (count++ >= maxCount) {
+              // accept() is not proper alternative, it's rather filter than break
+              return false;
+            }
+            return super.process(node);
           }
-        }, scope);
-        return toPsiMethods(consumer.getResult());
+        };
+        processMPSMethods(name, consumer, scope);
+        return toPsiMethods(consumer.getResults());
       }
     });
   }
@@ -124,30 +126,33 @@ public class MPSJavaShortNamesCache extends PsiShortNamesCache {
   @Override
   public PsiField[] getFieldsByNameIfNotMoreThan(@NonNls @NotNull final String name, @NotNull final GlobalSearchScope scope, final int maxCount) {
     ApplicationManager.getApplication().assertReadAccessAllowed();
-    return new ModelAccessHelper(ProjectHelper.getModelAccess(myProject)).runReadAction(new Computable<PsiField[]>() {
+    return new ModelAccessHelper(myProjectRepo).runReadAction(new Computable<PsiField[]>() {
       @Override
       public PsiField[] compute() {
-        final CollectConsumer<SNode> consumer = new CollectConsumer<SNode>(new ArrayList<SNode>());
-        processMPSFields(name, new Processor<SNode>() {
+        final CollectProcessor<SNode> consumer = new CollectProcessor<SNode>() {
           int count = 0;
 
           @Override
           public boolean process(SNode node) {
-            if (count++ >= maxCount) return false;
-            consumer.consume(node);
-            return true;
+            if (count++ >= maxCount) {
+              return false;
+            }
+            return super.process(node);
           }
-        }, scope);
-        return toPsiFields(consumer.getResult());
+        };
+        processMPSFields(name, consumer, scope);
+        return toPsiFields(consumer.getResults());
       }
     });
   }
 
   @Override
-  public boolean processMethodsWithName(@NonNls @NotNull final String name, @NotNull final GlobalSearchScope scope, @NotNull final Processor<PsiMethod> processor) {
+  public boolean processMethodsWithName(@NonNls @NotNull final String name,
+                                        @NotNull final GlobalSearchScope scope,
+                                        @NotNull final Processor<? super PsiMethod> processor) {
     ApplicationManager.getApplication().assertReadAccessAllowed();
     final MPSPsiProvider psiProvider = MPSPsiProvider.getInstance(myProject);
-    return new ModelAccessHelper(ProjectHelper.getModelAccess(myProject)).runReadAction(new Computable<Boolean>() {
+    return new ModelAccessHelper(myProjectRepo).runReadAction(new Computable<Boolean>() {
       @Override
       public Boolean compute() {
         return processMPSMethods(name, new Processor<SNode>() {
@@ -155,7 +160,9 @@ public class MPSJavaShortNamesCache extends PsiShortNamesCache {
           public boolean process(SNode node) {
             PsiElement psi = psiProvider.getPsi(node);
             if (psi instanceof PsiMethod) {
-              if (!processor.process((PsiMethod) psi)) return false;
+              if (!processor.process((PsiMethod) psi)) {
+                return false;
+              }
             }
             return true;
           }
@@ -167,25 +174,24 @@ public class MPSJavaShortNamesCache extends PsiShortNamesCache {
   @NotNull
   @Override
   public String[] getAllMethodNames() {
-    Collection<String> allNames = FileBasedIndex.getInstance().getAllKeys(MPSJavaMethodIndex.ID, myProject);
-    return allNames.toArray(new String[allNames.size()]);
-  }
-
-  @Override
-  public void getAllMethodNames(@NotNull HashSet<String> set) {
-    FileBasedIndex.getInstance().processAllKeys(MPSJavaMethodIndex.ID, new CommonProcessors.CollectProcessor<String>(set), myProject);
+    try {
+      Collection<String> allNames = FileBasedIndex.getInstance().getAllKeys(MPSJavaMethodIndex.ID, myProject);
+      return allNames.toArray(new String[allNames.size()]);
+    } catch (ProcessCanceledException ex) {
+      return new String[0];
+    }
   }
 
   @NotNull
   @Override
   public PsiField[] getFieldsByName(@NotNull @NonNls final String name, @NotNull final GlobalSearchScope scope) {
     ApplicationManager.getApplication().assertReadAccessAllowed();
-    return new ModelAccessHelper(ProjectHelper.getModelAccess(myProject)).runReadAction(new Computable<PsiField[]>() {
+    return new ModelAccessHelper(myProjectRepo).runReadAction(new Computable<PsiField[]>() {
       @Override
       public PsiField[] compute() {
-        CollectConsumer<SNode> consumer = new CollectConsumer<SNode>(new ArrayList<SNode>());
+        CollectProcessor<SNode> consumer = new CollectProcessor<>();
         findMPSFields(name, consumer, scope);
-        return toPsiFields(consumer.getResult());
+        return toPsiFields(consumer.getResults());
       }
     });
   }
@@ -193,95 +199,89 @@ public class MPSJavaShortNamesCache extends PsiShortNamesCache {
   @NotNull
   @Override
   public String[] getAllFieldNames() {
-    Collection<String> allNames = FileBasedIndex.getInstance().getAllKeys(MPSJavaFieldIndex.ID, myProject);
-    return allNames.toArray(new String[allNames.size()]);
-  }
-
-  @Override
-  public void getAllFieldNames(@NotNull HashSet<String> set) {
-    FileBasedIndex.getInstance().processAllKeys(MPSJavaFieldIndex.ID, new CommonProcessors.CollectProcessor<String>(set), myProject);
-  }
-
-  /** read access required */
-  private void findMPSClasses(String shortName, Consumer<SNode> consumer, GlobalSearchScope scope) {
-    final FileBasedIndex fileBasedIndex = FileBasedIndex.getInstance();
-    List<Collection<SNodeDescriptor>> values = fileBasedIndex.getValues(MPSShortNameJavaClassIndex.ID, shortName, scope);
-    collectNodes(consumer, values);
+    try {
+      Collection<String> allNames = FileBasedIndex.getInstance().getAllKeys(MPSJavaFieldIndex.ID, myProject);
+      return allNames.toArray(new String[allNames.size()]);
+    } catch (ProcessCanceledException ex) {
+      return new String[0];
+    }
   }
 
   /** read access required */
-  private void findMPSMethods(String shortName, Consumer<SNode> consumer, GlobalSearchScope scope) {
-    final FileBasedIndex fileBasedIndex = FileBasedIndex.getInstance();
-    List<Collection<SNodeDescriptor>> values = fileBasedIndex.getValues(MPSJavaMethodIndex.ID, shortName, scope);
-    collectNodes(consumer, values);
+  private void findMPSClasses(String shortName, Processor<SNode> consumer, GlobalSearchScope scope) {
+    processValues(MPSShortNameJavaClassIndex.ID, shortName, scope, new ResolvingValueProcessor(myProjectRepo, consumer));
+  }
+
+  /** read access required */
+  private void findMPSMethods(String shortName, Processor<SNode> consumer, GlobalSearchScope scope) {
+    processValues(MPSJavaMethodIndex.ID, shortName, scope, new ResolvingValueProcessor(myProjectRepo, consumer));
   }
 
   /** read access required */
   private boolean processMPSMethods(String shortName, final Processor<SNode> processor, GlobalSearchScope scope) {
-    final FileBasedIndex fileBasedIndex = FileBasedIndex.getInstance();
-    return fileBasedIndex.processValues(MPSJavaMethodIndex.ID, shortName, null, new ValueProcessor<Collection<SNodeDescriptor>>() {
-      @Override
-      public boolean process(VirtualFile file, Collection<SNodeDescriptor> value) {
-        for (SNodeDescriptor descriptor : value) {
-          SNode node = descriptor.getNodeReference().resolve(ProjectHelper.getProjectRepository(myProject));
-          if (node == null) continue;
-          if (!processor.process(node)) return false;
-        }
-        return true;
-      }
-    }, scope);
+    return processValues(MPSJavaMethodIndex.ID, shortName, scope, new ResolvingValueProcessor(myProjectRepo, processor));
   }
 
   /** read access required */
-  private void findMPSFields(String shortName, Consumer<SNode> consumer, GlobalSearchScope scope) {
-    final FileBasedIndex fileBasedIndex = FileBasedIndex.getInstance();
-    List<Collection<SNodeDescriptor>> values = fileBasedIndex.getValues(MPSJavaFieldIndex.ID, shortName, scope);
-    collectNodes(consumer, values);
+  private void findMPSFields(String shortName, Processor<SNode> consumer, GlobalSearchScope scope) {
+    processValues(MPSJavaFieldIndex.ID, shortName, scope, new ResolvingValueProcessor(myProjectRepo, consumer));
   }
 
   /** read access required */
   private boolean processMPSFields(String shortName, final Processor<SNode> processor, GlobalSearchScope scope) {
-    final FileBasedIndex fileBasedIndex = FileBasedIndex.getInstance();
-    return fileBasedIndex.processValues(MPSJavaFieldIndex.ID, shortName, null, new ValueProcessor<Collection<SNodeDescriptor>>() {
-      @Override
-      public boolean process(VirtualFile file, Collection<SNodeDescriptor> value) {
-        for (SNodeDescriptor descriptor : value) {
-          SNode node = descriptor.getNodeReference().resolve(ProjectHelper.getProjectRepository(myProject));
-          if (node == null) continue;
-          if (!processor.process(node)) return false;
-        }
-        return true;
-      }
-    }, scope);
+    return processValues(MPSJavaFieldIndex.ID, shortName, scope, new ResolvingValueProcessor(myProjectRepo, processor));
   }
 
-  private void collectNodes(Consumer<SNode> consumer, List<Collection<SNodeDescriptor>> values) {
-    for (Collection<SNodeDescriptor> value : values) {
-      for (SNodeDescriptor descriptor : value) {
-        SNode node = descriptor.getNodeReference().resolve(ProjectHelper.getProjectRepository(myProject));
-        if (node == null) continue;
-        consumer.consume(node);
-      }
+  private boolean processValues(ID<String, Collection<SNodeDescriptor>> id, String shortName, GlobalSearchScope scope, ValueProcessor<Collection<SNodeDescriptor>> vp) {
+    try {
+      final FileBasedIndex fileBasedIndex = FileBasedIndex.getInstance();
+      return fileBasedIndex.processValues(id, shortName, null, vp, scope);
+    } catch (ProcessCanceledException ex) {
+      return false;
     }
   }
 
-  @SuppressWarnings("SuspiciousToArrayCall")
+  private static class ResolvingValueProcessor implements ValueProcessor<Collection<SNodeDescriptor>> {
+    private final SRepository myRepository;
+    private final Processor<SNode> myNodeProcessor;
+
+    ResolvingValueProcessor(SRepository repository, Processor<SNode> nodeProcessor) {
+      myRepository = repository;
+      myNodeProcessor = nodeProcessor;
+    }
+
+    @Override
+    public boolean process(@NotNull VirtualFile virtualFile, Collection<SNodeDescriptor> value) {
+      for (SNodeDescriptor descriptor : value) {
+        SNode node = descriptor.getNodeReference().resolve(myRepository);
+        if (node == null) {
+          continue;
+        }
+        if (!myNodeProcessor.process(node)) {
+          return false;
+        }
+      }
+      return true;
+    }
+  }
+
+  @SuppressWarnings({"SuspiciousToArrayCall", "ToArrayCallWithZeroLengthArrayArgument"})
   private PsiClass[] toPsiClasses(Iterable<SNode> classes) {
-    List<PsiElement> result = new ArrayList<PsiElement>();
+    List<PsiElement> result = new ArrayList<>();
     collectPsiElements(classes, PsiClass.class, result);
     return result.isEmpty() ? PsiClass.EMPTY_ARRAY : result.toArray(new PsiClass[result.size()]);
   }
 
-  @SuppressWarnings("SuspiciousToArrayCall")
+  @SuppressWarnings({"SuspiciousToArrayCall", "ToArrayCallWithZeroLengthArrayArgument"})
   private PsiMethod[] toPsiMethods(Iterable<SNode> methods) {
-    List<PsiElement> result = new ArrayList<PsiElement>();
+    List<PsiElement> result = new ArrayList<>();
     collectPsiElements(methods, PsiMethod.class, result);
     return result.isEmpty() ? PsiMethod.EMPTY_ARRAY : result.toArray(new PsiMethod[result.size()]);
   }
 
-  @SuppressWarnings("SuspiciousToArrayCall")
+  @SuppressWarnings({"SuspiciousToArrayCall", "ToArrayCallWithZeroLengthArrayArgument"})
   private PsiField[] toPsiFields(Iterable<SNode> fields) {
-    List<PsiElement> result = new ArrayList<PsiElement>();
+    List<PsiElement> result = new ArrayList<>();
     collectPsiElements(fields, PsiField.class, result);
     return result.isEmpty() ? PsiField.EMPTY_ARRAY : result.toArray(new PsiField[result.size()]);
   }

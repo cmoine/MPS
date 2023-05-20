@@ -15,29 +15,24 @@
  */
 package jetbrains.mps.nodeEditor;
 
-import jetbrains.mps.nodeEditor.cellMenu.OldNewSubstituteUtil;
+import com.intellij.psi.codeStyle.MinusculeMatcher;
+import com.intellij.psi.codeStyle.NameUtil;
 import jetbrains.mps.openapi.editor.cells.SubstituteAction;
-import jetbrains.mps.smodel.presentation.NodePresentationUtil;
-import org.jetbrains.mps.openapi.model.SNode;
-import org.jetbrains.mps.openapi.module.SRepository;
 
 import java.util.Comparator;
 
 public class SubstituteActionComparator implements Comparator<SubstituteAction> {
   private String myPattern;
+  private MinusculeMatcher myMatcher;
 
   public SubstituteActionComparator(String pattern) {
     this.myPattern = pattern;
   }
 
 
+  @Deprecated
   protected int getLocalSortPriority(SubstituteAction action) {
-    final Object parameterObject = action.getParameterObject();
-    if (parameterObject instanceof SNode) {
-      return NodePresentationUtil.getSortPriority(action.getSourceNode(), (SNode) parameterObject);
-    } else {
-      return 0;
-    }
+    return 0;
   }
 
   protected String getVisibleMatchingText(SubstituteAction action) {
@@ -49,7 +44,11 @@ public class SubstituteActionComparator implements Comparator<SubstituteAction> 
   }
 
   protected int getRate(SubstituteAction action) {
-    return SubstituteActionUtil.getSubstituteRate(action, myPattern);
+    String matchingText = action.getMatchingText(myPattern);
+    if (matchingText == null) {
+      return Integer.MIN_VALUE;
+    }
+    return getMatcher().matchingDegree(matchingText);
   }
 
   protected boolean startsWith(SubstituteAction action) {
@@ -66,7 +65,13 @@ public class SubstituteActionComparator implements Comparator<SubstituteAction> 
     }
     int firstSubstituteRate = getRate(firstAction);
     int secondSubstituteRate = getRate(secondAction);
-    return secondSubstituteRate - firstSubstituteRate;
+    if (firstSubstituteRate > secondSubstituteRate) {
+      return -1;
+    } else if (firstSubstituteRate < secondSubstituteRate) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 
   private int compareByStrictly(SubstituteAction i1, SubstituteAction i2) {
@@ -76,12 +81,6 @@ public class SubstituteActionComparator implements Comparator<SubstituteAction> 
       return strictly1 ? -1 : 1;
     }
     return 0;
-  }
-
-  private int compareByLocalPriority(SubstituteAction i1, SubstituteAction i2) {
-    int p1 = getLocalSortPriority(i1);
-    int p2 = getLocalSortPriority(i2);
-    return p1 - p2;
   }
 
   private int compareByStartsWith(SubstituteAction i1, SubstituteAction i2) {
@@ -94,42 +93,43 @@ public class SubstituteActionComparator implements Comparator<SubstituteAction> 
   }
 
   private int compareByStartsWithLowerCase(SubstituteAction i1, SubstituteAction i2) {
-    boolean startsWithLowerCase1 = startsWithLowerCase(i1);
-    boolean startsWithLowerCase2 = startsWithLowerCase(i2);
-    if (startsWithLowerCase1 != startsWithLowerCase2) {
-      return startsWithLowerCase1 ? -1 : 1;
+    boolean startsWith1 = startsWithLowerCase(i1);
+    boolean startsWith2 = startsWithLowerCase(i2);
+    if (startsWith1 != startsWith2) {
+      return startsWith1 ? -1 : 1;
     }
     return 0;
   }
 
+
   @Override
   public int compare(SubstituteAction action1, SubstituteAction action2) {
     int result = compareByStrictly(action1, action2);
-    if (result != 0) return result;
-
-    String s1 = getVisibleMatchingText(action1);
-    String s2 = getVisibleMatchingText(action2);
-
-    boolean null_s1 = (s1 == null || s1.length() == 0);
-    boolean null_s2 = (s2 == null || s2.length() == 0);
-    if (null_s1 && null_s2) return compareByLocalPriority(action1, action2);
-    if (null_s1) return 1;
-    if (null_s2) return -1;
-
-    result = compareByStartsWith(action1, action2);
-    if (result != 0) return result;
-
-    result = compareByRate(action1, action2);
-    if (result != 0) return result;
-
-    result = compareByLocalPriority(action1, action2);
-    if (result != 0) return result;
-
-    if (getRate(action1) == SubstituteActionUtil.CAN_SUBSTITUTE_VIA_SEARCH && getRate(action2) == SubstituteActionUtil.CAN_SUBSTITUTE_VIA_SEARCH) {
-      result = compareByStartsWithLowerCase(action1, action2);
-      if (result != 0) return result;
+    if (result != 0) {
+      return result;
     }
 
-    return s1.compareTo(s2);
+    result = compareByStartsWith(action1, action2);
+    if (result != 0) {
+      return result;
+    }
+
+    result = compareByStartsWithLowerCase(action1, action2);
+    if (result != 0) {
+      return result;
+    }
+
+    result = compareByRate(action1, action2);
+    if (result != 0) {
+      return result;
+    }
+    return 0;
+  }
+
+  private MinusculeMatcher getMatcher() {
+    if (myMatcher == null) {
+      myMatcher = NameUtil.buildMatcher(myPattern).build();
+    }
+    return myMatcher;
   }
 }

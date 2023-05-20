@@ -43,6 +43,7 @@ public class CellTreeIterable implements Iterable<EditorCell> {
     return this;
   }
 
+  @NotNull
   @Override
   public TreeIterator<EditorCell> iterator() {
     TreeIterator<EditorCell> result;

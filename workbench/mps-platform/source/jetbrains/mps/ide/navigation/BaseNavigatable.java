@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,22 +26,9 @@ public abstract class BaseNavigatable implements Navigatable {
 
   protected final Project myProject;
 
-  BaseNavigatable(@NotNull Project project) {
+  public BaseNavigatable(@NotNull Project project) {
     myProject = project;
   }
-
-  @Override
-  public void navigate(final boolean requestFocus) {
-    final Runnable navigateRunnable = new Runnable() {
-      @Override
-      public void run() {
-        doNavigate(requestFocus);
-      }
-    };
-    myProject.getModelAccess().runWriteInEDT(navigateRunnable);
-  }
-
-  protected abstract void doNavigate(boolean focus);
 
   @Override
   public boolean canNavigate() {

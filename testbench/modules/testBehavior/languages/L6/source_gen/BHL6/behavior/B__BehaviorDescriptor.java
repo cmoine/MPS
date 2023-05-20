@@ -5,12 +5,9 @@ package BHL6.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.List;
 import java.util.Arrays;
@@ -23,19 +20,18 @@ import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
 
 public final class B__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x424c173aee734dc9L, 0xbc43d0051c9b1e8fL, 0x559729dec0460fdaL, "BHL6.structure.B");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<Integer> foo_id5mnatV0hwZQ = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("foo").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("5mnatV0hwZQ").registry(REGISTRY).build();
-  public static final SMethod<Integer> bar_id5mnatV0hx04 = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("bar").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("5mnatV0hx04").registry(REGISTRY).build();
-  public static final SMethod<Integer> bar1_id5jWiLvujSC6 = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("bar1").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("5jWiLvujSC6").registry(REGISTRY).build();
-  public static final SMethod<Integer> foo1_id5jWiLvujSmw = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("foo1").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("5jWiLvujSmw").registry(REGISTRY).build();
-  public static final SMethod<Integer> foo2_id5jWiLvujSzJ = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("foo2").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("5jWiLvujSzJ").registry(REGISTRY).build();
-  public static final SMethod<Integer> foo3_id4RMBeRWcio1 = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.class)).name("foo3").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("4RMBeRWcio1").registry(REGISTRY).build();
-  /*package*/ static final SMethod<Integer> privateMethod_id1olXtyGAKnt = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("privateMethod").modifiers(SModifiersImpl.create(0, AccessPrivileges.PRIVATE)).concept(CONCEPT).id("1olXtyGAKnt").registry(REGISTRY).build(SMethodBuilder.createJavaParameter(Object.class, ""));
-  public static final SMethod<Integer> foo4_id1olXtyGAKpB = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("foo4").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("1olXtyGAKpB").registry(REGISTRY).build();
-  public static final SMethod<Integer> foo5_id1olXtyGAKsY = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("foo5").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("1olXtyGAKsY").registry(REGISTRY).build();
-  public static final SMethod<Object> foo6_id186XXh$CxOf = new SMethodBuilder<Object>(new SJavaCompoundTypeImpl(Object.class)).name("foo6").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("186XXh$CxOf").registry(REGISTRY).build();
-  public static final SMethod<Object> foo7_id1eK5xBtRuXu = new SMethodBuilder<Object>(new SJavaCompoundTypeImpl(Object.class)).name("foo7").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("1eK5xBtRuXu").registry(REGISTRY).build();
+  public static final SMethod<Integer> foo_id5mnatV0hwZQ = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("foo").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(6167444251392479222L).languageId(0xbc43d0051c9b1e8fL, 0x424c173aee734dc9L).build2();
+  public static final SMethod<Integer> bar_id5mnatV0hx04 = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("bar").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(6167444251392479236L).languageId(0xbc43d0051c9b1e8fL, 0x424c173aee734dc9L).build2();
+  public static final SMethod<Integer> bar1_id5jWiLvujSC6 = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("bar1").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(6123852159203117574L).languageId(0xbc43d0051c9b1e8fL, 0x424c173aee734dc9L).build2();
+  public static final SMethod<Integer> foo1_id5jWiLvujSmw = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("foo1").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(6123852159203116448L).languageId(0xbc43d0051c9b1e8fL, 0x424c173aee734dc9L).build2();
+  public static final SMethod<Integer> foo2_id5jWiLvujSzJ = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("foo2").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(6123852159203117295L).languageId(0xbc43d0051c9b1e8fL, 0x424c173aee734dc9L).build2();
+  public static final SMethod<Integer> foo3_id4RMBeRWcio1 = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.class)).name("foo3").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(5616724231236691457L).languageId(0xbc43d0051c9b1e8fL, 0x424c173aee734dc9L).build2();
+  /*package*/ static final SMethod<Integer> privateMethod_id1olXtyGAKnt = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("privateMethod").modifiers(0, AccessPrivileges.PRIVATE).concept(CONCEPT).baseMethodId(1591448354302920157L).languageId(0xbc43d0051c9b1e8fL, 0x424c173aee734dc9L).build2(SMethodBuilder.createJavaParameter(Object.class, ""));
+  public static final SMethod<Integer> foo4_id1olXtyGAKpB = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("foo4").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1591448354302920295L).languageId(0xbc43d0051c9b1e8fL, 0x424c173aee734dc9L).build2();
+  public static final SMethod<Integer> foo5_id1olXtyGAKsY = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("foo5").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1591448354302920510L).languageId(0xbc43d0051c9b1e8fL, 0x424c173aee734dc9L).build2();
+  public static final SMethod<Object> foo6_id186XXh$CxOf = new SMethodBuilder<Object>(new SJavaCompoundTypeImpl(Object.class)).name("foo6").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1298998034136440079L).languageId(0xbc43d0051c9b1e8fL, 0x424c173aee734dc9L).build2();
+  public static final SMethod<Object> foo7_id1eK5xBtRuXu = new SMethodBuilder<Object>(new SJavaCompoundTypeImpl(Object.class)).name("foo7").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1418658182974009182L).languageId(0xbc43d0051c9b1e8fL, 0x424c173aee734dc9L).build2();
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(foo_id5mnatV0hwZQ, bar_id5mnatV0hx04, bar1_id5jWiLvujSC6, foo1_id5jWiLvujSmw, foo2_id5jWiLvujSzJ, foo3_id4RMBeRWcio1, privateMethod_id1olXtyGAKnt, foo4_id1olXtyGAKpB, foo5_id1olXtyGAKsY, foo6_id186XXh$CxOf, foo7_id1eK5xBtRuXu);
 
@@ -64,7 +60,7 @@ public final class B__BehaviorDescriptor extends BaseBHDescriptor {
     return TestResults.DEFAULT_RETURN_VALUE;
   }
   /*package*/ static int foo4_id1olXtyGAKpB(@NotNull SNode __thisNode__) {
-    return ((int) B__BehaviorDescriptor.privateMethod_id1olXtyGAKnt.invoke(__thisNode__, null));
+    return ((int) B__BehaviorDescriptor.privateMethod_id1olXtyGAKnt.invokeSpecial(__thisNode__, null));
   }
   /*package*/ static int foo5_id1olXtyGAKsY(@NotNull SNode __thisNode__) {
     return ((int) B__BehaviorDescriptor.privateMethod_id1olXtyGAKnt.invoke(__thisNode__, null));
@@ -77,7 +73,6 @@ public final class B__BehaviorDescriptor extends BaseBHDescriptor {
   }
 
   /*package*/ B__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override

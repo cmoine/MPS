@@ -6,9 +6,9 @@ import jetbrains.mps.smodel.runtime.BaseConstraintsAspectDescriptor;
 import jetbrains.mps.smodel.runtime.ConstraintsDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.runtime.base.BaseConstraintsDescriptor;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public class ConstraintsAspectDescriptor extends BaseConstraintsAspectDescriptor {
   public ConstraintsAspectDescriptor() {
@@ -16,184 +16,77 @@ public class ConstraintsAspectDescriptor extends BaseConstraintsAspectDescriptor
 
   @Override
   public ConstraintsDescriptor getConstraints(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_2qnle6_a0c.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return new BuildAspect_Constraints();
-          }
-          break;
-        case 1:
-          if (true) {
-            return new BuildExternalLayout_Constraints();
-          }
-          break;
-        case 2:
-          if (true) {
-            return new BuildExternalLayoutDependency_Constraints();
-          }
-          break;
-        case 3:
-          if (true) {
-            return new BuildLayout_Constraints();
-          }
-          break;
-        case 4:
-          if (true) {
-            return new BuildLayout_CompileOutputOf_Constraints();
-          }
-          break;
-        case 5:
-          if (true) {
-            return new BuildLayout_File_Constraints();
-          }
-          break;
-        case 6:
-          if (true) {
-            return new BuildLayout_FileStub_Constraints();
-          }
-          break;
-        case 7:
-          if (true) {
-            return new BuildLayout_Filemode_Constraints();
-          }
-          break;
-        case 8:
-          if (true) {
-            return new BuildLayout_FilesOf_Constraints();
-          }
-          break;
-        case 9:
-          if (true) {
-            return new BuildLayout_Import_Constraints();
-          }
-          break;
-        case 10:
-          if (true) {
-            return new BuildLayout_ImportContent_Constraints();
-          }
-          break;
-        case 11:
-          if (true) {
-            return new BuildLayout_JarManifest_Constraints();
-          }
-          break;
-        case 12:
-          if (true) {
-            return new BuildLayout_JarManifest_Section_Constraints();
-          }
-          break;
-        case 13:
-          if (true) {
-            return new BuildLayout_NamedContainer_Constraints();
-          }
-          break;
-        case 14:
-          if (true) {
-            return new BuildProjectDependency_Constraints();
-          }
-          break;
-        case 15:
-          if (true) {
-            return new BuildSourceMacroRelativePath_Constraints();
-          }
-          break;
-        case 16:
-          if (true) {
-            return new BuildSourcePath_Constraints();
-          }
-          break;
-        case 17:
-          if (true) {
-            return new BuildSource_JavaClassFolder_Constraints();
-          }
-          break;
-        case 18:
-          if (true) {
-            return new BuildSource_JavaDependencyLibrary_Constraints();
-          }
-          break;
-        case 19:
-          if (true) {
-            return new BuildSource_JavaExternalJarFolderRef_Constraints();
-          }
-          break;
-        case 20:
-          if (true) {
-            return new BuildSource_JavaExternalJarRef_Constraints();
-          }
-          break;
-        case 21:
-          if (true) {
-            return new BuildSource_JavaLibrary_Constraints();
-          }
-          break;
-        case 22:
-          if (true) {
-            return new BuildSource_JavaModule_Constraints();
-          }
-          break;
-        case 23:
-          if (true) {
-            return new BuildSource_JavaModuleOptions_Constraints();
-          }
-          break;
-        case 24:
-          if (true) {
-            return new BuildSource_JavaOptions_Constraints();
-          }
-          break;
-        case 25:
-          if (true) {
-            return new BuildSource_JavaSources_Constraints();
-          }
-          break;
-        case 26:
-          if (true) {
-            return new BuildStringPart_Constraints();
-          }
-          break;
-        case 27:
-          if (true) {
-            return new BuildTextStringPart_Constraints();
-          }
-          break;
-        case 28:
-          if (true) {
-            return new BuildVarRefStringPart_Constraints();
-          }
-          break;
-        case 29:
-          if (true) {
-            return new BuildVariableMacro_Constraints();
-          }
-          break;
-        case 30:
-          if (true) {
-            return new BuildVariableMacroInitValue_Constraints();
-          }
-          break;
-        case 31:
-          if (true) {
-            return new BuildVariableMacroInitWithDate_Constraints();
-          }
-          break;
-        default:
-          // default 
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return new BuildAspect_Constraints();
+      case 1:
+        return new BuildCompositePath_Constraints();
+      case 2:
+        return new BuildExternalLayout_Constraints();
+      case 3:
+        return new BuildExternalLayoutDependency_Constraints();
+      case 4:
+        return new BuildLayout_Constraints();
+      case 5:
+        return new BuildLayout_CompileOutputOf_Constraints();
+      case 6:
+        return new BuildLayout_File_Constraints();
+      case 7:
+        return new BuildLayout_FileStub_Constraints();
+      case 8:
+        return new BuildLayout_Filemode_Constraints();
+      case 9:
+        return new BuildLayout_FilesOf_Constraints();
+      case 10:
+        return new BuildLayout_Import_Constraints();
+      case 11:
+        return new BuildLayout_ImportContent_Constraints();
+      case 12:
+        return new BuildLayout_JarManifest_Constraints();
+      case 13:
+        return new BuildLayout_JarManifest_Section_Constraints();
+      case 14:
+        return new BuildLayout_NamedContainer_Constraints();
+      case 15:
+        return new BuildProjectDependency_Constraints();
+      case 16:
+        return new BuildSourceMacroRelativePath_Constraints();
+      case 17:
+        return new BuildSourcePath_Constraints();
+      case 18:
+        return new BuildSource_JavaClassFolder_Constraints();
+      case 19:
+        return new BuildSource_JavaDependencyLibrary_Constraints();
+      case 20:
+        return new BuildSource_JavaExternalJarFolderRef_Constraints();
+      case 21:
+        return new BuildSource_JavaExternalJarRef_Constraints();
+      case 22:
+        return new BuildSource_JavaLibrary_Constraints();
+      case 23:
+        return new BuildSource_JavaModule_Constraints();
+      case 24:
+        return new BuildSource_JavaModuleOptions_Constraints();
+      case 25:
+        return new BuildSource_JavaOptions_Constraints();
+      case 26:
+        return new BuildSource_JavaSources_Constraints();
+      case 27:
+        return new BuildStringPart_Constraints();
+      case 28:
+        return new BuildTextStringPart_Constraints();
+      case 29:
+        return new BuildVarRefStringPart_Constraints();
+      case 30:
+        return new BuildVariableMacro_Constraints();
+      case 31:
+        return new BuildVariableMacroInitValue_Constraints();
+      case 32:
+        return new BuildVariableMacroInitWithDate_Constraints();
+      default:
     }
     return new BaseConstraintsDescriptor(concept);
   }
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
-  }
-  private static final Map<SAbstractConcept, Integer> indices_2qnle6_a0c = buildConceptIndices(MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x31292e1a60dd541dL, "jetbrains.mps.build.structure.BuildAspect"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x63a87b9320d0bfc9L, "jetbrains.mps.build.structure.BuildExternalLayout"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x63a87b9320d3d0a4L, "jetbrains.mps.build.structure.BuildExternalLayoutDependency"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a14L, "jetbrains.mps.build.structure.BuildLayout"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x23f6fd361bdcfd24L, "jetbrains.mps.build.structure.BuildLayout_CompileOutputOf"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7ea63ceef6e8c0edL, "jetbrains.mps.build.structure.BuildLayout_File"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x63a87b9320d31b36L, "jetbrains.mps.build.structure.BuildLayout_FileStub"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x6c4335df4e838e40L, "jetbrains.mps.build.structure.BuildLayout_Filemode"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x6b9a2011083f9404L, "jetbrains.mps.build.structure.BuildLayout_FilesOf"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0xbabdfbeee1350f2L, "jetbrains.mps.build.structure.BuildLayout_Import"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86af9fdb53L, "jetbrains.mps.build.structure.BuildLayout_ImportContent"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x115d3b22faf20f2eL, "jetbrains.mps.build.structure.BuildLayout_JarManifest"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x115d3b22faf47d7bL, "jetbrains.mps.build.structure.BuildLayout_JarManifest_Section"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafac7f8cL, "jetbrains.mps.build.structure.BuildLayout_NamedContainer"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd908c220L, "jetbrains.mps.build.structure.BuildProjectDependency"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafae121dL, "jetbrains.mps.build.structure.BuildSourceMacroRelativePath"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafacdc3eL, "jetbrains.mps.build.structure.BuildSourcePath"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x11779a1dbd021959L, "jetbrains.mps.build.structure.BuildSource_JavaClassFolder"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd9079dceL, "jetbrains.mps.build.structure.BuildSource_JavaDependencyLibrary"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb65a3fL, "jetbrains.mps.build.structure.BuildSource_JavaExternalJarFolderRef"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb2f64cL, "jetbrains.mps.build.structure.BuildSource_JavaExternalJarRef"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x540febaa6144b873L, "jetbrains.mps.build.structure.BuildSource_JavaLibrary"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafacdc38L, "jetbrains.mps.build.structure.BuildSource_JavaModule"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x1708d207f2178b52L, "jetbrains.mps.build.structure.BuildSource_JavaModuleOptions"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0xcdff0e1a96739c2L, "jetbrains.mps.build.structure.BuildSource_JavaOptions"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db92974fcL, "jetbrains.mps.build.structure.BuildSource_JavaSources"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7cffL, "jetbrains.mps.build.structure.BuildStringPart"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d03L, "jetbrains.mps.build.structure.BuildTextStringPart"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d01L, "jetbrains.mps.build.structure.BuildVarRefStringPart"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3449288aa0d560e2L, "jetbrains.mps.build.structure.BuildVariableMacro"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263c91972cd1e1aaL, "jetbrains.mps.build.structure.BuildVariableMacroInitValue"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x365f30e12d2c3e4L, "jetbrains.mps.build.structure.BuildVariableMacroInitWithDate"));
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x31292e1a60dd541dL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x779c6e65c01467f1L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x63a87b9320d0bfc9L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x63a87b9320d3d0a4L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a14L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x23f6fd361bdcfd24L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7ea63ceef6e8c0edL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x63a87b9320d31b36L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x6c4335df4e838e40L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x6b9a2011083f9404L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0xbabdfbeee1350f2L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86af9fdb53L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x115d3b22faf20f2eL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x115d3b22faf47d7bL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafac7f8cL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd908c220L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafae121dL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafacdc3eL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x11779a1dbd021959L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd9079dceL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb65a3fL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb2f64cL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x540febaa6144b873L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafacdc38L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x1708d207f2178b52L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0xcdff0e1a96739c2L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db92974fcL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7cffL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d03L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d01L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3449288aa0d560e2L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263c91972cd1e1aaL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x365f30e12d2c3e4L)).seal();
 }

@@ -7,8 +7,9 @@ import jetbrains.mps.openapi.actions.descriptor.ActionAspectDescriptor;
 import java.util.Collection;
 import jetbrains.mps.openapi.actions.descriptor.NodeFactory;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.Arrays;
+import jetbrains.mps.openapi.actions.descriptor.PastePostProcessor;
 
 public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor implements ActionAspectDescriptor {
   private static final String LANGUAGE_FQ_NAME = "jetbrains.mps.lang.structure";
@@ -16,14 +17,18 @@ public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor imple
   @Override
   public Collection<NodeFactory> getFactories(SAbstractConcept concept) {
     if (LANGUAGE_FQ_NAME.equals(concept.getLanguage().getQualifiedName())) {
-      switch (Arrays.binarySearch(stringSwitchCases_tpto26_a0a0a0c, concept.getName())) {
-        case 0:
+      switch (concept.getName()) {
+        case "AbstractConceptDeclaration":
           return Collections.<NodeFactory>singletonList(new SetStructureIds.NodeFactory_5424895381998988571());
-        case 1:
+        case "ConceptDeclaration":
           return Collections.<NodeFactory>singletonList(new STRL_node_factories.NodeFactory_1163111194508());
-        case 2:
+        case "DataTypeDeclaration":
+          return Collections.<NodeFactory>singletonList(new SetStructureIds.NodeFactory_7791109065626944384());
+        case "EnumerationMemberDeclaration":
+          return Collections.<NodeFactory>singletonList(new SetStructureIds.NodeFactory_1421157252384198379());
+        case "LinkDeclaration":
           return Arrays.asList(new NodeFactory[]{new SetStructureIds.NodeFactory_5424895381999015757(), new DeclarationFactories.NodeFactory_850862791448416028()});
-        case 3:
+        case "PropertyDeclaration":
           return Arrays.asList(new NodeFactory[]{new SetStructureIds.NodeFactory_5424895381999015715(), new DeclarationFactories.NodeFactory_850862791450337452()});
         default:
       }
@@ -32,8 +37,7 @@ public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor imple
   }
 
   @Override
-  public boolean hasBuilders() {
-    return false;
+  public Collection<PastePostProcessor> getPastePostProcessors() {
+    return Arrays.asList(new PastePostProcessor[]{new StructureIds_PastePostProcessor_0(), new StructureIds_PastePostProcessor_1(), new StructureIds_PastePostProcessor_2(), new StructureIds_PastePostProcessor_3(), new StructureIds_PastePostProcessor_4(), new StructureIds_PastePostProcessor_5()});
   }
-  private static String[] stringSwitchCases_tpto26_a0a0a0c = new String[]{"AbstractConceptDeclaration", "ConceptDeclaration", "LinkDeclaration", "PropertyDeclaration"};
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.core.refactoring;
 
 import com.intellij.ide.projectView.ProjectView;
@@ -37,14 +36,17 @@ import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.idea.core.MPSBundle;
 import jetbrains.mps.idea.core.MPSDataKeys;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiProvider;
-import jetbrains.mps.project.SModuleOperations;
+import jetbrains.mps.model.ModelDeleteHelper;
 import jetbrains.mps.refactoring.Renamer;
+import jetbrains.mps.smodel.ModelAccessHelper;
 import jetbrains.mps.smodel.ModuleRepositoryFacade;
 import jetbrains.mps.smodel.SModelFileTracker;
 import jetbrains.mps.vfs.IFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.EditableSModel;
 import org.jetbrains.mps.openapi.model.SModel;
+import org.jetbrains.mps.openapi.model.SModelName;
+import org.jetbrains.mps.openapi.module.ModelAccess;
 import org.jetbrains.mps.openapi.module.SRepository;
 
 import javax.lang.model.SourceVersion;
@@ -53,7 +55,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class ModelRenameHandler implements RenameHandler {
   private static final Logger LOG = Logger.getInstance(ModelRenameHandler.class);
-  private static final String CACHES_SUFFIX = ".caches";
 
   @Override
   public boolean isAvailableOnDataContext(DataContext dataContext) {
@@ -90,7 +91,7 @@ public class ModelRenameHandler implements RenameHandler {
       MPSBundle.message("rename.model.to", editableSModel.getName().getLongName()),
       MPSBundle.message("rename.model"),
       MPSBundle.message("update.all.references"), true, true, null, editableSModel.getName().getLongName(),
-      new MyInputValidator() {
+      new MyInputValidator(ProjectHelper.getModelAccess(project)) {
         @Override
         protected void doRename(String fqName) {
           targetFqName.set(fqName);
@@ -146,15 +147,15 @@ public class ModelRenameHandler implements RenameHandler {
     }
 
     // TODO for 3.5: check rewritten code and remove if(true)
-    final IFile outputRoot = SModuleOperations.getOutputRoot(sModel);
-    if (outputRoot == null) {
-      return;
-    }
-    outputRoot.delete();
-    outputRoot.getFileSystem().getFile(outputRoot.toPath() + CACHES_SUFFIX).delete();
+    new ModelDeleteHelper(sModel).removeGeneratedArtifacts();
   }
 
   private static abstract class MyInputValidator implements InputValidatorEx {
+    private final ModelAccess myModelAccess;
+
+    private MyInputValidator(ModelAccess modelAccess) {
+      myModelAccess = modelAccess;
+    }
 
     @Override
     public boolean checkInput(String text) {
@@ -195,10 +196,6 @@ public class ModelRenameHandler implements RenameHandler {
         return false;
       }
 
-      if (new ModuleRepositoryFacade(getRepository()).getModelByName(modelName) != null) {
-        errorText[0] = MPSBundle.message("create.new.model.dialog.error.model.exists", modelName);
-        return false;
-      }
 
       if (modelName.lastIndexOf(".") == modelName.length()) {
         errorText[0] = MPSBundle.message("create.new.model.dialog.error.empty.short.name");
@@ -207,6 +204,16 @@ public class ModelRenameHandler implements RenameHandler {
 
       if (!(SourceVersion.isName(modelName))) {
         errorText[0] = MPSBundle.message("create.new.model.dialog.error.invalid.java", modelName);
+        return false;
+      }
+      try {
+        SModelName mn = new SModelName(modelName);
+        if (new ModelAccessHelper(myModelAccess).runReadAction(() -> !new ModuleRepositoryFacade(getRepository()).getModelsByName(mn).isEmpty())) {
+          errorText[0] = MPSBundle.message("create.new.model.dialog.error.model.exists", modelName);
+          return false;
+        }
+      } catch (IllegalArgumentException ex) {
+        errorText[0] = ex.getMessage();
         return false;
       }
       return true;

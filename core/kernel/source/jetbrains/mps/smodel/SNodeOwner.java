@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
+import org.jetbrains.mps.openapi.model.SModelReference;
 
 /**
  * <code>SNodeOwner</code> captures what node or a tree of nodes knows of / demands from its environment.
@@ -49,10 +50,19 @@ import org.jetbrains.mps.openapi.language.SReferenceLink;
 abstract class SNodeOwner {
   /**
    * Access model node attached to, or <code>null</code> if node doesn't belong to any model right now.
-   * Note, model this node used to be doesn't qualify as 'right now'.
+   * Note, model this node used to be part of doesn't qualify as 'right now'.
    */
   @Nullable
   abstract SModel getModel();
+
+  /**
+   * Unlike {@link #getModel()}, supplies information about node's model even if the node has been detached from model.
+   * Primary use is to provide reasonable {@link org.jetbrains.mps.openapi.model.SNode#getReference()} implementation.
+   * There's a lot of code in MPS that keeps {@code SNode} instances. These instances could become detached e.g. due to model unload (memory clean-up activity)
+   * and then there's no mechanism to find out identity of the node, which could have been used e.g. as a cache key.
+   */
+  @Nullable
+  abstract SModelReference lastKnownModel();
 
   /**
    * Fail with exception if there's no read access to the model, and the state requires access tracking.
@@ -69,7 +79,7 @@ abstract class SNodeOwner {
   void firePropertyRead(SNode node, SProperty p, String value, boolean hasProperty) {}
   void fireReferenceRead(SNode node, SReferenceLink link, SNode target) {}
   void firePropertyChange(SNode node, SProperty property, String oldValue, String newValue) {}
-  void fireReferenceChange(SNode node, SReferenceLink l, org.jetbrains.mps.openapi.model.SReference oldRef, org.jetbrains.mps.openapi.model.SReference newRef) {}
+  void fireReferenceChange(SNode node, SReferenceLink l, AssociationData oldRef, AssociationData newRef) {}
   void fireNodeAdd(SNode node, SContainmentLink role, SNode child, SNode anchor) {}
   void fireBeforeNodeRemove(SNode node, SContainmentLink role, SNode child, SNode anchor) {}
   void fireNodeRemove(SNode node, SContainmentLink role, SNode child, SNode anchor) {}
@@ -77,13 +87,14 @@ abstract class SNodeOwner {
   // establish SNode->SModel connection
 
   /**
-   * Nodes being attached (add/insert node to a model) to the owner announce themselves using this method.
+   * Introduce a node into the associated model
+   * Once a node is attached (add/insert) to a model, let the actual owner perform necessary activities (e.g. associate node hierarchy with the proper owner)
    * @param node non-null
    */
   void registerNode(SNode node) {
   }
   /**
-   * Nodes being detached from the owner announce themselves using this method.
+   * Tell the owner it no longer responsible for the node and its children.
    * @param node non-null
    */
   void unregisterNode(SNode node) {
@@ -92,20 +103,9 @@ abstract class SNodeOwner {
   //
 
   /**
-   * FIXME the method truly needs justification for existence. now it's merely a hack
-   * FIXME If it indeed required, perhaps symmetric call needed in removeChild? If not, explain.
-   * @param parent non-null, node being modified
-   * @param child non-null, node being added
-   */
-  void startUndoTracking(SNode parent, SNode child) {
-
-  }
-
-  /**
    * Notify environment there's a change in the model that could be undone. It's up to owner's discretion whether
    * the action shall end up in undo queue.
-   * @param node non-null
    * @param action non-null
    */
-  abstract void performUndoableAction(org.jetbrains.mps.openapi.model.SNode node, SNodeUndoableAction action);
+  abstract void performUndoableAction(SNodeUndoableAction action);
 }

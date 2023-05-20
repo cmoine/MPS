@@ -2,11 +2,10 @@
 <model ref="r:00000000-0000-4000-0000-011c8959034f(jetbrains.mps.lang.intentions.constraints)">
   <persistence version="9" />
   <languages>
-    <use id="3f4bc5f5-c6c1-4a28-8b10-c83066ffa4a1" name="jetbrains.mps.lang.constraints" version="-1" />
-    <use id="13744753-c81f-424a-9c1b-cf8943bf4e86" name="jetbrains.mps.lang.sharedConcepts" version="-1" />
-    <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="4" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="-1" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <use id="69b8a993-9b87-4d96-bf0c-3559f4bb0c63" name="jetbrains.mps.lang.slanguage" version="0" />
+    <use id="13744753-c81f-424a-9c1b-cf8943bf4e86" name="jetbrains.mps.lang.sharedConcepts" version="0" />
+    <use id="3f4bc5f5-c6c1-4a28-8b10-c83066ffa4a1" name="jetbrains.mps.lang.constraints" version="6" />
+    <devkit ref="00000000-0000-4000-0000-5604ebd4f22c(jetbrains.mps.devkit.aspect.constraints)" />
   </languages>
   <imports>
     <import index="tp3j" ref="r:00000000-0000-4000-0000-011c89590353(jetbrains.mps.lang.intentions.structure)" />
@@ -63,7 +62,7 @@
     </language>
   </registry>
   <node concept="1M2fIO" id="hQOgExi">
-    <property role="3GE5qa" value="old" />
+    <property role="3GE5qa" value="traditional" />
     <ref role="1M2myG" to="tp3j:hmS6QkF" resolve="IntentionDeclaration" />
     <node concept="2NXJUA" id="hQOgHAO" role="2NY200">
       <node concept="3clFbS" id="hQOgHAP" role="2VODD2">
@@ -77,7 +76,7 @@
             </node>
             <node concept="2YIFZM" id="2EFylI5n7IY" role="3uHU7w">
               <ref role="1Pybhc" to="w1kc:~SModelStereotype" resolve="SModelStereotype" />
-              <ref role="37wK5l" to="w1kc:~SModelStereotype.isGeneratorModel(org.jetbrains.mps.openapi.model.SModel):boolean" resolve="isGeneratorModel" />
+              <ref role="37wK5l" to="w1kc:~SModelStereotype.isGeneratorModel(org.jetbrains.mps.openapi.model.SModel)" resolve="isGeneratorModel" />
               <node concept="1Q6Npb" id="2EFylI5n7IZ" role="37wK5m" />
             </node>
           </node>
@@ -86,7 +85,7 @@
     </node>
   </node>
   <node concept="1M2fIO" id="5rGvd38DcHu">
-    <property role="3GE5qa" value="new" />
+    <property role="3GE5qa" value="classLike" />
     <ref role="1M2myG" to="tp3j:2c3oNEsfAwl" resolve="SurroundWithIntentionDeclaration" />
     <node concept="2NXJUA" id="5rGvd38DcHw" role="2NY200">
       <node concept="3clFbS" id="5rGvd38DcHx" role="2VODD2">
@@ -100,7 +99,7 @@
             </node>
             <node concept="2YIFZM" id="1KFbmnBQDYp" role="3uHU7w">
               <ref role="1Pybhc" to="w1kc:~SModelStereotype" resolve="SModelStereotype" />
-              <ref role="37wK5l" to="w1kc:~SModelStereotype.isGeneratorModel(org.jetbrains.mps.openapi.model.SModel):boolean" resolve="isGeneratorModel" />
+              <ref role="37wK5l" to="w1kc:~SModelStereotype.isGeneratorModel(org.jetbrains.mps.openapi.model.SModel)" resolve="isGeneratorModel" />
               <node concept="1Q6Npb" id="1KFbmnBQDYq" role="37wK5m" />
             </node>
           </node>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,13 @@
 package jetbrains.mps.generator.impl.query;
 
 import jetbrains.mps.generator.impl.GenerationFailureException;
-import jetbrains.mps.generator.impl.interpreted.ReflectiveQueryProvider;
 import jetbrains.mps.generator.template.CreateRootRuleContext;
 import jetbrains.mps.generator.template.DropAttributeRuleContext;
 import jetbrains.mps.generator.template.DropRootRuleContext;
 import jetbrains.mps.generator.template.IfMacroContext;
 import jetbrains.mps.generator.template.InlineSwitchCaseContext;
 import jetbrains.mps.generator.template.InsertMacroContext;
+import jetbrains.mps.generator.template.LabelKeyQueryContext;
 import jetbrains.mps.generator.template.MapRootRuleContext;
 import jetbrains.mps.generator.template.MapSrcMacroContext;
 import jetbrains.mps.generator.template.MapSrcMacroPostProcContext;
@@ -39,7 +39,6 @@ import jetbrains.mps.generator.template.TemplateVarContext;
 import jetbrains.mps.generator.template.WeavingAnchorContext;
 import jetbrains.mps.generator.template.WeavingMappingRuleContext;
 import jetbrains.mps.lang.pattern.GeneratedMatchingPattern;
-import jetbrains.mps.util.annotation.ToRemove;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SProperty;
@@ -56,144 +55,120 @@ import java.util.Collections;
  * @author Artem Tikhomirov
  */
 public abstract class QueryProviderBase implements GeneratorQueryProvider {
-  private final int myVersion;
-  private ReflectiveQueryProvider myReflectiveFallback;
 
   protected QueryProviderBase() {
     // this cons is invoked from previous version of QueriesGenerated that implements GeneratorQueryProvider
-    myVersion = 0;
   }
 
-  protected QueryProviderBase(int version) {
+  protected QueryProviderBase(int versionNowUnused) {
     // this one is invoked from newly generated implementations to indicate new methods were generated
-    myVersion = version;
-  }
-
-  // INTERNAL API for QueryProviderCache, to support non-reflective providers generated with MPS 3.3
-  @ToRemove(version = 3.4)
-  public boolean needsReflectiveFallback() {
-    return myVersion == 0;
-  }
-
-  // INTERNAL API for QueryProviderCache, to support non-reflective providers generated with MPS 3.3
-  @ToRemove(version = 3.4)
-  public void useReflectiveFallback(ReflectiveQueryProvider rqp) {
-    myReflectiveFallback = rqp;
   }
 
   @NotNull
   @Override
-  public CreateRootCondition getCreateRootRuleCondition(@NotNull SNode rule) {
+  public CreateRootCondition getCreateRootRuleCondition(@NotNull QueryKey identity) {
     return new Defaults();
   }
 
   @NotNull
   @Override
-  public MapRootRuleCondition getMapRootRuleCondition(@NotNull SNode rule) {
+  public MapRootRuleCondition getMapRootRuleCondition(@NotNull QueryKey identity) {
     return new Defaults();
   }
 
   @NotNull
   @Override
-  public ReductionRuleCondition getReductionRuleCondition(@NotNull SNode rule) {
+  public ReductionRuleCondition getReductionRuleCondition(@NotNull QueryKey identity) {
     return new Defaults();
   }
 
   @NotNull
   @Override
-  public PatternRuleQuery getPatternRuleCondition(@NotNull SNode rule) {
+  public PatternRuleQuery getPatternRuleCondition(@NotNull QueryKey identity) {
     return new Defaults();
   }
 
   @NotNull
   @Override
-  public DropRuleCondition getDropRuleCondition(@NotNull SNode rule) {
+  public DropRuleCondition getDropRuleCondition(@NotNull QueryKey identity) {
     return new Defaults();
   }
 
   @NotNull
   @Override
-  public DropAttributeRuleCondition getDropAttributeRuleCondition(@NotNull SNode rule) {
+  public DropAttributeRuleCondition getDropAttributeRuleCondition(@NotNull QueryKey identity) {
     return new Defaults();
   }
 
   @NotNull
   @Override
-  public WeaveRuleCondition getWeaveRuleCondition(@NotNull SNode rule) {
+  public WeaveRuleCondition getWeaveRuleCondition(@NotNull QueryKey identity) {
     return new Defaults();
   }
 
   @NotNull
   @Override
-  public WeaveRuleQuery getWeaveRuleQuery(@NotNull SNode rule) {
+  public WeaveRuleQuery getWeaveRuleQuery(@NotNull QueryKey identity) {
     return new Defaults();
   }
 
   @NotNull
   @Override
-  public WeaveAnchorQuery getWeaveAnchorQuery(@NotNull SNode rule) {
+  public WeaveAnchorQuery getWeaveAnchorQuery(@NotNull QueryKey identity) {
     return new Defaults();
   }
 
   @NotNull
   @Override
-  public ScriptCodeBlock getScriptCodeBlock(@NotNull SNode script) {
+  public ScriptCodeBlock getScriptCodeBlock(@NotNull QueryKey identity) {
     return new Defaults();
   }
 
   @NotNull
   @Override
-  public MapConfigurationCondition getMapConfigurationCondition(@NotNull SNode mapCfg) {
+  public MapConfigurationCondition getMapConfigurationCondition(@NotNull QueryKey identity) {
     return new Defaults();
   }
 
   @NotNull
   @Override
-  public SourceNodeQuery getSourceNodeQuery(@NotNull SNode query) {
+  public SourceNodeQuery getSourceNodeQuery(@NotNull QueryKey identity) {
     return new Defaults();
   }
 
   @NotNull
   @Override
-  public SourceNodesQuery getSourceNodesQuery(@NotNull SNode query) {
+  public SourceNodesQuery getSourceNodesQuery(@NotNull QueryKey identity) {
     return new Defaults();
   }
 
   @NotNull
   @Override
-  public PropertyValueQuery getPropertyValueQuery(@NotNull SNode propertyMacro) {
-    return new PropertyQuery(propertyMacro.getReference());
+  public PropertyValueQuery getPropertyValueQuery(@NotNull QueryKey identity) {
+    return new PropertyQuery(identity);
   }
 
   @NotNull
   @Override
-  public IfMacroCondition getIfMacroCondition(@NotNull SNode ifMacro) {
-    return new Missing(ifMacro);
+  public IfMacroCondition getIfMacroCondition(@NotNull QueryKey identity) {
+    return new Missing(identity);
   }
 
   @NotNull
   @Override
-  public InlineSwitchCaseCondition getInlineSwitchCaseCondition(@NotNull SNode caseNode) {
-    return new Missing(caseNode);
+  public InlineSwitchCaseCondition getInlineSwitchCaseCondition(@NotNull QueryKey identity) {
+    return new Missing(identity);
   }
 
   @NotNull
   @Override
   public ReferenceTargetQuery getReferenceTargetQuery(@NotNull QueryKey identity) {
-    if (myVersion == 0) {
-      // XXX provisional code to support generated providers prior to addition of the method
-      return myReflectiveFallback.getReferenceTargetQuery(identity);
-    }
     return new RefQuery(identity);
   }
 
   @NotNull
   @Override
   public CallArgumentQuery getTemplateCallArgumentQuery(@NotNull QueryKey identity) {
-    if (myVersion == 0) {
-      // XXX provisional code to support generated providers prior to addition of the method
-      return myReflectiveFallback.getTemplateCallArgumentQuery(identity);
-    }
     // DefaultQueryExecutionContext used to evaluate to null if no method was found.
     // It is reasonable for scenarios like bootstrap of the generator itself (e.g. to generate a new CALL inside QueriesGenerate)
     // but for any other generator there's no reason to continue generation if QG is broken that's why we fail here with Missing.
@@ -205,10 +180,6 @@ public abstract class QueryProviderBase implements GeneratorQueryProvider {
   @NotNull
   @Override
   public VariableValueQuery getVariableValueQuery(@NotNull QueryKey identity) {
-    if (myVersion == 0) {
-      // XXX provisional code to support generated providers prior to addition of the method
-      return myReflectiveFallback.getVariableValueQuery(identity);
-    }
     // Same as above, no reason to default to null.
     return new Missing(identity);
   }
@@ -216,10 +187,6 @@ public abstract class QueryProviderBase implements GeneratorQueryProvider {
   @NotNull
   @Override
   public InsertMacroQuery getInsertMacroQuery(@NotNull QueryKey identity) {
-    if (myVersion == 0) {
-      // XXX provisional code to support generated providers prior to addition of the method
-      return myReflectiveFallback.getInsertMacroQuery(identity);
-    }
     // used to evaluate to null if missing in DQEC. Why not do the same here?
     return new Missing(identity);
   }
@@ -227,29 +194,29 @@ public abstract class QueryProviderBase implements GeneratorQueryProvider {
   @NotNull
   @Override
   public MapNodeQuery getMapNodeQuery(@NotNull QueryKey identity) {
-    if (myVersion == 0) {
-      return myReflectiveFallback.getMapNodeQuery(identity);
-    }
     return new Missing(identity);
   }
 
   @NotNull
   @Override
   public MapPostProcessor getMapPostProcessor(@NotNull QueryKey identity) {
-    if (myVersion == 0) {
-      return myReflectiveFallback.getMapPostProcessor(identity);
-    }
     return new Missing(identity);
+  }
+
+  @NotNull
+  @Override
+  public LabelInputQuery getLabelInputQuery(@NotNull QueryKey identity) {
+    return new Defaults();
   }
 
   /**
    * Reasonable default values for all conditions and queries.
-   * Note, these default values represent the case when no condition/query was specified. There's
-   * another set of defaults for cases when condition failed to evaluate ({@link jetbrains.mps.generator.impl.interpreted.ReflectiveQueryProvider.Impl}.
+   * Note, these default values represent the case when no condition/query was specified.
+   * There might be another set of defaults for cases when condition failed to evaluate.
    */
-  public static class Defaults implements CreateRootCondition, MapRootRuleCondition, ReductionRuleCondition, PatternRuleQuery,
+  /*package*/ static class Defaults implements CreateRootCondition, MapRootRuleCondition, ReductionRuleCondition, PatternRuleQuery,
       DropRuleCondition, WeaveRuleCondition, WeaveRuleQuery, ScriptCodeBlock, MapConfigurationCondition, SourceNodeQuery, SourceNodesQuery,
-      WeaveAnchorQuery, DropAttributeRuleCondition {
+      WeaveAnchorQuery, DropAttributeRuleCondition, LabelInputQuery {
 
     @Override
     public boolean check(@NotNull CreateRootRuleContext ctx) {
@@ -314,17 +281,23 @@ public abstract class QueryProviderBase implements GeneratorQueryProvider {
 
     @Override
     @Nullable
-    public SNode anchorNode(WeavingAnchorContext ctx) throws GenerationFailureException {
+    public SNode anchorNode(WeavingAnchorContext ctx) {
       // null is legitimate value, indicates 'just append'
       return null;
+    }
+
+    @Nullable
+    @Override
+    public Object evaluate(@NotNull LabelKeyQueryContext context) throws GenerationFailureException {
+      return context.getInputNode();
     }
   }
 
   private static class PropertyQuery implements PropertyValueQuery {
-    private final SNodeReference myMacro;
+    private final QueryKey myQueryKey;
 
-    PropertyQuery(@NotNull SNodeReference macro) {
-      myMacro = macro;
+    PropertyQuery(QueryKey identity) {
+      myQueryKey = identity;
     }
 
     @NotNull
@@ -341,7 +314,9 @@ public abstract class QueryProviderBase implements GeneratorQueryProvider {
     @NotNull
     @Override
     public SNodeReference getMacro() {
-      return myMacro;
+      // FIXME getTemplateNode is not necessarily macro node, but we don't need this method anyway, and will remove it soon.
+      //       OTOH, may utilize myQueryKey.getTemplateNode() in evaluate() to log location
+      return myQueryKey.getTemplateNode();
     }
 
     @Nullable
@@ -370,14 +345,13 @@ public abstract class QueryProviderBase implements GeneratorQueryProvider {
   }
 
   // unlike Defaults, complains about missing query
-  private static class Missing implements IfMacroCondition, InlineSwitchCaseCondition, CallArgumentQuery, VariableValueQuery, InsertMacroQuery, MapNodeQuery, MapPostProcessor {
+  /*package*/ static class Missing implements IfMacroCondition, InlineSwitchCaseCondition, CallArgumentQuery, VariableValueQuery, InsertMacroQuery, MapNodeQuery, MapPostProcessor {
     private final SNodeReference myTemplate;
 
     public Missing(QueryKey identity) {
       myTemplate = identity.getTemplateNode();
     }
 
-    // FIXME switch to QueryKey
     public Missing(SNode identity) {
       myTemplate = identity.getReference();
     }
@@ -436,7 +410,7 @@ public abstract class QueryProviderBase implements GeneratorQueryProvider {
       throw new GenerationFailureException(msg);
     }
 
-    private void reportError(TemplateQueryContext context, String message) throws GenerationFailureException {
+    private void reportError(TemplateQueryContext context, String message) {
       context.getGenerator().getLogger().error(myTemplate, message);
     }
   }

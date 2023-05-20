@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +15,24 @@
  */
 package jetbrains.mps.ide.java.ui;
 
-import org.jetbrains.mps.openapi.persistence.ModelRoot;
+import com.intellij.openapi.project.Project;
+import jetbrains.mps.ide.project.ProjectHelper;
+import jetbrains.mps.persistence.java.library.JavaClassStubsModelRoot;
+import jetbrains.mps.project.MPSProject;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.ui.persistence.ModelRootEntry;
 import org.jetbrains.mps.openapi.ui.persistence.ModelRootEntryFactory;
 
-public class JavaClassStubsModelRootEntryFactory implements ModelRootEntryFactory {
+public final class JavaClassStubsModelRootEntryFactory implements ModelRootEntryFactory<JavaClassStubsModelRoot> {
+  private final MPSProject myProject;
+
+  public JavaClassStubsModelRootEntryFactory(Project ideaProject) {
+    myProject = ProjectHelper.fromIdeaProjectOrFail(ideaProject);
+  }
+
+  @NotNull
   @Override
-  public ModelRootEntry getModelRootEntry(ModelRoot modelRoot) {
-    return new JavaClassStubsModelRootEntry(modelRoot);
+  public ModelRootEntry<JavaClassStubsModelRoot> getModelRootEntry(@NotNull JavaClassStubsModelRoot modelRoot) {
+    return new JavaClassStubsModelRootEntry(myProject, modelRoot);
   }
 }

@@ -22,7 +22,6 @@ import jetbrains.mps.ide.IdeBundle;
 import jetbrains.mps.util.NameUtil;
 import jetbrains.mps.util.Reference;
 import jetbrains.mps.util.containers.MultiMap;
-import jetbrains.mps.workbench.choose.base.BaseMPSChooseModel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,7 +38,7 @@ import java.util.Set;
  * Replacement for {@link jetbrains.mps.workbench.choose.base.BaseMPSChooseModel}, with composition rather than
  * inheritance as usage pattern, and without need to know about peculiarities of {@link com.intellij.navigation.NavigationItem},
  * {@link com.intellij.navigation.ItemPresentation} and correspondence of their methods to
- * methods of {@link ChooseByNameModel}, like {@link NavigationItem#getName() vs {@link ChooseByNameModel#getElementName(Object)}
+ * methods of {@link ChooseByNameModel}, like {@link NavigationItem#getName()} vs {@link ChooseByNameModel#getElementName(Object)}
  * vs {@link ItemPresentation#getPresentableText()}. Besides, dumb mode control has nothing to do with choose model, and left to callers for management.
  * <p/>
  * Generally, there's no need to sub-class this class, composition should be enough, hence final. Nevertheless, the class is not inherently 'final', and
@@ -139,7 +138,7 @@ public final class ChooseByNameData<T> implements ChooseByNameModel {
     // XXX no idea whether getNames() is expected to return unique values only. Provided getElementByName() takes single name and expects multiple values,
     // likely, unique names are expected here. It's ok with MultiMap, however needs attention if we switch to another container.
     Set<String> keys = elementMap.keySet();
-    return keys.toArray(new String[keys.size()]);
+    return keys.toArray(new String[0]);
   }
 
   private MultiMap<String, T> buildMap(Iterable<T> elements) {
@@ -189,7 +188,7 @@ public final class ChooseByNameData<T> implements ChooseByNameModel {
   @NotNull
   @Override
   public String[] getSeparators() {
-    return new String[]{BaseMPSChooseModel.SEPARATOR};
+    return new String[]{"."};
   }
 
   @Nullable
@@ -268,7 +267,7 @@ public final class ChooseByNameData<T> implements ChooseByNameModel {
    * Configure chooser. Invoke this method prior to use of the model.
    * Perhaps, need an alternative constructor that would take scope as well.
    * <p/>
-   * The choice of {@code Iterable} for scope is not a sure thing. I don't see a poing for a custom interface here; {@code Supplier<Iterable<T>>}
+   * The choice of {@code Iterable} for scope is not a sure thing. I don't see a point for a custom interface here; {@code Supplier<Iterable<T>>}
    * looks bit too much, and {@code Iterable} seems quite handy with streams.
    * @param localScope default set of elements, available without extras/global staff made available with {@linkplain #getCheckBoxName() checkbox}
    * @param globalScope extended set of elements, available on explicit request from user. {@code null} indicates same scope as local shall be used.

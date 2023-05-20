@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-cr6ga9w333boj3jy7cbi8m55yrouv9q" />
+<product version="3" modelHash="7v3fwte2bmq03aaqbwcm2i03h0vgp17">
+  <files names="Applicability_Constraints.java:ChangeEvent_Constraints.java:ConstraintsAspectDescriptor.java:DailyPlanReference_Constraints.java:DailyPlan_Constraints.java:Slot_Constraints.java" />
+</product>
 

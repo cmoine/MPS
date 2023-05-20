@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,8 @@ import org.jetbrains.mps.openapi.module.SModuleReference;
 /**
  * Almost useless(?!) {@link jetbrains.mps.generator.IGeneratorLogger} implementation that counts errors and warnings
  * and aware of errors for modules (beside nodes).
+ * Note, error count is vital to recognize m2m failure (see GenerationSession), with errors not counted,
+ * any m2m without exception would be treated as successful.
  */
 public class GenerationSessionLogger extends GeneratorLoggerAdapter implements IGeneratorLogger {
 

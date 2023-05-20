@@ -15,20 +15,29 @@
  */
 package jetbrains.mps.logging;
 
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.annotations.Immutable;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 import org.jetbrains.mps.openapi.module.SModule;
+import org.jetbrains.mps.openapi.project.Project;
 
 @Immutable
 public final class MessageObject {
   private final String myMessage;
+  private final String mySender;
   private final Object myHintObject;
+  private final Project myProject;
 
-  public MessageObject(String message, Object hintObject) {
+  public MessageObject(/*@NotNull*/ String message,
+                       @Nullable Object hintObject,
+                       @Nullable String sender,
+                       @Nullable Project project) {
     myMessage = message;
     myHintObject = hintObject instanceof SNode ? ((SNode) hintObject).getReference() : hintObject;
+    mySender = sender;
+    myProject = project;
   }
 
   public String getMessage() {
@@ -39,11 +48,20 @@ public final class MessageObject {
     return myHintObject;
   }
 
+  public String getSender() {
+    return mySender;
+  }
+
+  public Project getProject() {
+    return myProject;
+  }
+
+  @Override
   public String toString() {
     if (myHintObject == null) {
       return myMessage;
     }
-    String hint = "";
+    String hint;
     if (myHintObject instanceof SNodeReference) {
       // XXX we might try to resolve node reference here to get more descriptive text for the node (e.g. with snode.getPresentation())
       // but is there any real need to do that?

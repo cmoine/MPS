@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,6 @@ package jetbrains.mps.ide.findusages.view.treeholder.tree.nodedatatypes;
 
 import jetbrains.mps.icons.MPSIcons.Nodes;
 import jetbrains.mps.ide.findusages.CantLoadSomethingException;
-import jetbrains.mps.ide.findusages.view.treeholder.tree.TextOptions;
-import jetbrains.mps.ide.findusages.view.treeholder.treeview.INodeRepresentator;
 import jetbrains.mps.ide.findusages.view.treeholder.treeview.path.PathItemRole;
 import jetbrains.mps.project.Project;
 import org.jdom.Element;
@@ -26,16 +24,8 @@ import org.jdom.Element;
 import javax.swing.Icon;
 
 public class ResultsNodeData extends BaseNodeData {
-  private static final String CATEGORY_NAME = "results";
-  private INodeRepresentator myNodeRepresentator;
-
-  public ResultsNodeData(PathItemRole role) {
-    super(role, CATEGORY_NAME, "", true, false, false);
-  }
-
-  public ResultsNodeData(PathItemRole role, INodeRepresentator nodeRepresentator) {
-    super(role, CATEGORY_NAME, "", true, false, false);
-    myNodeRepresentator = nodeRepresentator;
+  public ResultsNodeData() {
+    super(PathItemRole.ROLE_MAIN_RESULTS, "Usages", null, false, true);
   }
 
   public ResultsNodeData(Element element, Project project) throws CantLoadSomethingException {
@@ -44,28 +34,11 @@ public class ResultsNodeData extends BaseNodeData {
 
   @Override
   public Object getIdObject() {
-    return CATEGORY_NAME;
+    return getClass().getName();
   }
 
   @Override
-  public Icon getIcon() {
-    if (myNodeRepresentator == null) {
-      return Nodes.UsagesFinder;
-    } else {
-      return myNodeRepresentator.getResultsIcon();
-    }
-  }
-
-  @Override
-  public String getText(TextOptions options) {
-    if (myNodeRepresentator == null) {
-      return "<b>" + sizeRepresentation(options.mySubresultsCount) + " found" + "</b>";
-    } else {
-      return myNodeRepresentator.getResultsText(options);
-    }
-  }
-
-  private static String sizeRepresentation(int size) {
-    return "<b>" + Integer.toString(size) + " usage" + (size == 1 ? "" : "s") + "</b>";
+  public Icon getIcon(PresentationContext presentationContext) {
+    return Nodes.UsagesFinder;
   }
 }

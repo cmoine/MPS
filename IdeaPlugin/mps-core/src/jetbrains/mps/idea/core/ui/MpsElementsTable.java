@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,24 +16,16 @@
 
 package jetbrains.mps.idea.core.ui;
 
-import com.intellij.ide.util.ChooseElementsDialog;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.ui.AnActionButton;
-import com.intellij.ui.AnActionButtonRunnable;
 import com.intellij.ui.ColoredTableCellRenderer;
 import com.intellij.ui.JBColor;
 import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.ui.SpeedSearchBase;
 import com.intellij.ui.TableUtil;
-import com.intellij.ui.ToolbarDecorator;
 import com.intellij.ui.table.JBTable;
-import com.intellij.util.ui.UIUtil;
-import jetbrains.mps.smodel.ModelAccess;
 
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JComponent;
-import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
@@ -43,7 +35,6 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -52,6 +43,9 @@ public abstract class MpsElementsTable<T> {
 
   private MpsElementsTableModel<T> myElementsTableModel;
   private JBTable myElementsTable;
+
+  protected MpsElementsTable() {
+  }
 
   public JComponent createComponent() {
     myElementsTableModel = new MpsElementsTableModel<>(getComparator(), getRendererClass(), getColumnTitle());
@@ -102,45 +96,7 @@ public abstract class MpsElementsTable<T> {
         }
       }
     };
-
-    ToolbarDecorator decorator = ToolbarDecorator.createDecorator(myElementsTable);
-    decorator.setAddAction(new AnActionButtonRunnable() {
-      @Override
-      public void run(AnActionButton anActionButton) {
-        ModelAccess.instance().runReadInEDT(new Runnable() {
-          @Override
-          public void run() {
-            final java.util.List<T> allElements = getAllVisibleElements();
-            allElements.removeAll(getElements());
-            Collections.sort(allElements, getComparator());
-
-            ApplicationManager.getApplication().invokeLater(() -> {
-              ChooseElementsDialog<T> chooseElementsDialog = new ChooseElementsDialog<T>(myElementsTable, allElements, getChooserMessage()) {
-                @Override
-                protected String getItemText(T item) {
-                  return getText(item);
-                }
-
-                @Override
-                protected Icon getItemIcon(T item) {
-                  return getIcon(item);
-                }
-              };
-              chooseElementsDialog.show();
-              Set<T> elementsToAdd = new HashSet<>(chooseElementsDialog.getChosenElements());
-              doAddElements(elementsToAdd);
-            });
-          }
-        });
-      }
-    }).setRemoveAction(new AnActionButtonRunnable() {
-      @Override
-      public void run(AnActionButton anActionButton) {
-        TableUtil.removeSelectedItems(myElementsTable);
-        myElementsTableModel.fireTableDataChanged();
-      }
-    });
-    return postDecoratePanel(decorator.createPanel());
+    return myElementsTable;
   }
 
   protected TableCellRenderer createDefaultRenderer() {
@@ -164,14 +120,9 @@ public abstract class MpsElementsTable<T> {
 
   protected abstract Icon getIcon(T element);
 
-  // should be executed only inside MPS model read
-  protected abstract List<T> getAllVisibleElements();
-
   protected abstract Comparator<T> getComparator();
 
   protected abstract Class<T> getRendererClass();
-
-  protected abstract String getChooserMessage();
 
   protected void doAddElements(Set<T> elementsToAdd) {
     myElementsTableModel.addElements(elementsToAdd);
@@ -185,11 +136,6 @@ public abstract class MpsElementsTable<T> {
         }
       }
     }
-  }
-
-  protected JPanel postDecoratePanel(JPanel panel) {
-    panel.setBorder(null);
-    return panel;
   }
 
   protected String getColumnTitle() {

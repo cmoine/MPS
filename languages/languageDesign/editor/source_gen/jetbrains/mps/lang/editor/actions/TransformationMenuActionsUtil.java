@@ -12,6 +12,7 @@ import jetbrains.mps.internal.collections.runtime.IWhereFilter;
 import org.jetbrains.mps.openapi.language.SConcept;
 import jetbrains.mps.internal.collections.runtime.ISelector;
 import jetbrains.mps.internal.collections.runtime.Sequence;
+import java.util.Objects;
 
 public class TransformationMenuActionsUtil {
   public static Iterable<SAbstractConcept> getSubconceptsWithCurrentChildConceptsExcluded(SAbstractConcept concept, SNode parentNode, SContainmentLink link, final SNode currentTargetNode) {
@@ -28,13 +29,10 @@ public class TransformationMenuActionsUtil {
     if (currentTargetNode != null) {
       currentConcepts = Sequence.fromIterable(currentConcepts).where(new IWhereFilter<SConcept>() {
         public boolean accept(SConcept it) {
-          return neq_wnuenf_a0a0a0a0a0a0a2a0(it, SNodeOperations.getConcept(currentTargetNode));
+          return !(Objects.equals(it, SNodeOperations.getConcept(currentTargetNode)));
         }
       });
     }
     return Sequence.fromIterable(subConcepts).subtract(Sequence.fromIterable(currentConcepts));
-  }
-  private static boolean neq_wnuenf_a0a0a0a0a0a0a2a0(Object a, Object b) {
-    return !(((a != null ? a.equals(b) : a == b)));
   }
 }

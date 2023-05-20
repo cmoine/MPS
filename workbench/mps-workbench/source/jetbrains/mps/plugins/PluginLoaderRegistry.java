@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,48 +15,59 @@
  */
 package jetbrains.mps.plugins;
 
-import com.intellij.openapi.application.Application;
+import com.intellij.configurationStore.JdomSerializer;
+import com.intellij.ide.ApplicationInitializedListener;
+import com.intellij.openapi.Disposable;
+import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ModalityState;
-import com.intellij.openapi.components.ApplicationComponent;
+import com.intellij.openapi.fileEditor.ex.FileEditorManagerEx;
 import com.intellij.openapi.progress.EmptyProgressIndicator;
+import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
-import com.intellij.util.WaitForProgressToShow;
+import com.intellij.openapi.project.ProjectManager;
+import com.intellij.openapi.util.IconLoader;
+import com.intellij.openapi.wm.ex.WindowManagerEx;
+import com.intellij.openapi.wm.impl.ProjectFrameHelper;
 import jetbrains.mps.classloading.ClassLoaderManager;
-import jetbrains.mps.classloading.DeployListener;
+import jetbrains.mps.core.platform.Platform;
 import jetbrains.mps.ide.MPSCoreComponents;
 import jetbrains.mps.ide.ThreadUtils;
-import jetbrains.mps.ide.actions.Ide_PluginInitializer;
-import jetbrains.mps.make.IMakeService;
-import jetbrains.mps.module.ReloadableModule;
-import jetbrains.mps.progress.ProgressMonitorAdapter;
-import jetbrains.mps.project.Solution;
-import jetbrains.mps.project.structure.modules.SolutionKind;
-import jetbrains.mps.smodel.Language;
+import jetbrains.mps.logging.Logger;
+import jetbrains.mps.plugins.applicationplugins.BaseApplicationPlugin;
+import jetbrains.mps.plugins.projectplugins.BaseProjectPlugin;
+import jetbrains.mps.progress.EmptyProgressMonitor;
 import jetbrains.mps.smodel.MPSModuleRepository;
-import jetbrains.mps.smodel.ModelAccessHelper;
-import jetbrains.mps.util.annotation.ToRemove;
-import org.apache.log4j.Logger;
-import org.jetbrains.annotations.NonNls;
+import jetbrains.mps.smodel.language.LanguageRegistry;
+import jetbrains.mps.smodel.runtime.ModuleDeploymentChange;
+import jetbrains.mps.smodel.runtime.ModuleDeploymentListener;
+import jetbrains.mps.smodel.runtime.ModuleRuntime;
+import jetbrains.mps.util.JavaNameUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.module.ModelAccess;
-import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SRepository;
 import org.jetbrains.mps.openapi.util.ProgressMonitor;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Queue;
+import java.util.ServiceLoader;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
-
-import static java.util.stream.Collectors.toCollection;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Represents a single class loading listener to trigger the plugin reload in
@@ -65,48 +76,99 @@ import static java.util.stream.Collectors.toCollection;
  * <p>
  * It listens for class loading events, calculate the plugin contributors which need to be updated and notifies these managers.
  * <p>
- * TODO: currently it reloads only the ModulePluginContributors, need to work on AbstractPluginFactories also. Makes sense to remove these factories at all
  */
-public class PluginLoaderRegistry implements ApplicationComponent {
+public class PluginLoaderRegistry implements Disposable {
   private static final Logger LOG = Logger.getLogger(PluginLoaderRegistry.class);
 
   private final ClassLoaderManager myClassLoaderManager;
   private final ModelAccess myModelAccess;
 
-  private final DeployListener myClassesListener = new SchedulingUpdateListener();
+  private final SchedulingUpdateListener myClassesListener = new SchedulingUpdateListener();
   private final Set<PluginContributor> myCurrentContributors = new LinkedHashSet<>();
   private final Set<PluginLoader> myCurrentLoaders = new LinkedHashSet<>();
+  private final List<PluginReloadingListener> myReloadingListeners = new CopyOnWriteArrayList<>();
 
-  private final AtomicBoolean myDirtyFlag = new AtomicBoolean(false);
+  private final AtomicBoolean myUpdateIsScheduledInEDT = new AtomicBoolean(false);
+  private final AtomicBoolean myAppInitialized = new AtomicBoolean();
 
-  public PluginLoaderRegistry(MPSCoreComponents coreComponents, @SuppressWarnings(value="UnusedParameters") Ide_PluginInitializer idePlugin) {
-    myClassLoaderManager = coreComponents.getClassLoaderManager();
-    SRepository repo = coreComponents.getPlatform().findComponent(MPSModuleRepository.class);
-    assert repo != null;
-    myModelAccess = repo.getModelAccess();
+  public static PluginLoaderRegistry getInstance() {
+    return ApplicationManager.getApplication().getComponent(PluginLoaderRegistry.class);
   }
 
-  private static Set<PluginContributor> createPluginContributors(Collection<ReloadableModule> modules) {
-    List<ReloadableModule> sortedModules = new PluginSorter(modules).sortByDependencies();
+  public PluginLoaderRegistry() {
+    // FIXME Now, PluginLoaderRegistry is app component. Seems easy to convert to a
+    //       service, however, doesn't make too much sense unless we convert
+    //       ApplicationPluginManager and ProjectPluginManager as well.
+    //       Switching to extension points for these managers might be an option
+    //       although I don't clearly see how to approach per-project PPM and app-wide
+    //       APM in a single extpoint (two would be too much, imo).
+    // Note, registerAppInitListener fits service story quite well - it would be the
+    // listener to activate PLR service by issuing an update.
+    MPSCoreComponents coreComponents = MPSCoreComponents.getInstance();
+    Platform mpsPlatform = coreComponents.getPlatform();
+    myClassLoaderManager = mpsPlatform.findComponent(ClassLoaderManager.class);
+    SRepository repo = mpsPlatform.findComponent(MPSModuleRepository.class);
+    assert repo != null;
+    myModelAccess = repo.getModelAccess();
+
+    assert myCurrentContributors.isEmpty();
+    mpsPlatform.findComponent(LanguageRegistry.class).addRegistryListener(myClassesListener);
+  }
+
+  private void signalAppInitialized() {
+    myAppInitialized.set(true);
+    // XXX invoked from ApplicationInitializedListener which "doesn't guarantee EDT", but OTOH doesn't
+    //     guarantee NOT EDT, while run() here asserts !EDT
+    new UpdatingTask(null).run(new EmptyProgressIndicator());
+  }
+
+  private Set<PluginContributor> createPluginContributors(Collection<ModuleRuntime> modules) {
+    if (modules.isEmpty()) {
+      return Collections.emptySet();
+    }
+//  FIXME!!!  List<ReloadableModule> sortedModules = PluginSorter.sortByDependencies(modules);
+    Collection<ModuleRuntime> sortedModules = modules;
 
     List<PluginContributor> contributors = new ArrayList<>();
-    for (ReloadableModule module : sortedModules) {
-      PluginContributor contributor = createPluginContributor(module);
-      if (contributor != null) {
-        contributors.add(contributor);
-      }
+    for (ModuleRuntime module : sortedModules) {
+      contributors.add(new ModulePluginContributor2(module));
     }
 
     return new LinkedHashSet<>(contributors);
   }
 
-  @Nullable
-  private static PluginContributor createPluginContributor(@NotNull ReloadableModule module) {
-    if (module.willLoad()) {
-      LOG.trace("Creating plugin contributor from " + module);
-      return new ModulePluginContributor(module);
+  private void fireAfterPluginsLoaded(List<PluginContributor> contributorsToLoad) {
+    if (LOG.isDebugLevel()) {
+      final String m = "Dispatch %d contributors loaded to %d listeners";
+      LOG.debug(String.format(m, contributorsToLoad.size(), myReloadingListeners.size()));
     }
-    return null;
+    if (contributorsToLoad.isEmpty()) {
+      return;
+    }
+    for (PluginReloadingListener listener : myReloadingListeners) {
+      listener.afterPluginsLoaded(contributorsToLoad);
+    }
+  }
+
+  private void fireBeforePluginsUnloaded(List<PluginContributor> contributorsToUnload) {
+    if (LOG.isDebugLevel()) {
+      final String m = "Dispatch %d contributors unloaded to %d listeners";
+      LOG.debug(String.format(m, contributorsToUnload.size(), myReloadingListeners.size()));
+    }
+    if (contributorsToUnload.isEmpty()) {
+      return;
+    }
+    for (PluginReloadingListener listener : myReloadingListeners) {
+      listener.beforePluginsUnloaded(contributorsToUnload);
+    }
+  }
+
+  public void addReloadingListener(@NotNull PluginReloadingListener listener) {
+    myReloadingListeners.add(listener);
+  }
+
+  public void removeReloadingListener(PluginReloadingListener listener) {
+    myReloadingListeners.remove(listener);
   }
 
   /**
@@ -114,22 +176,19 @@ public class PluginLoaderRegistry implements ApplicationComponent {
    * Before the registration we load all contributors which have been loaded up to that moment
    */
   public void register(@NotNull final PluginLoader loader) {
-    synchronized (myLoadersDeltaLock) {
-      LOG.debug("Registering the " + loader);
-      myLoaderDelta.load(Collections.singleton(loader));
-    }
+    LOG.debug("Registering the " + loader);
+    myAccumulation.loaderChange(loader, null);
+    update();
   }
 
   /**
    * Unregisters the loader asynchronously in EDT.
-   * Before the unregistration we unload all contributors which have remained loaded at that moment
+   * Before the un-registration we unload all contributors which have remained loaded at that moment
    */
   public void unregister(@NotNull final PluginLoader loader) {
-    synchronized (myLoadersDeltaLock) {
-      LOG.debug("Unregistering the " + loader);
-      myLoaderDelta.unload(Collections.singleton(loader));
-      scheduleUpdate(); // fixme hack to schedule on project closing. appropriate classloading events will do in the next release
-    }
+    LOG.debug("Unregistering the " + loader);
+    myAccumulation.loaderChange(null, loader);
+    forceUpdate();
   }
 
   /**
@@ -143,7 +202,8 @@ public class PluginLoaderRegistry implements ApplicationComponent {
     try {
       monitor.start("Loading", pluginLoaders.size());
       for (final PluginLoader loader : pluginLoaders) {
-        loader.loadPlugins(new ArrayList<>(contributors));
+        List<PluginContributor> contribList = List.copyOf(contributors);
+        loader.loadPlugins(contribList);
         monitor.advance(1);
       }
     } finally {
@@ -163,7 +223,8 @@ public class PluginLoaderRegistry implements ApplicationComponent {
     long beginTime = System.nanoTime();
     try {
       for (final PluginLoader loader : pluginLoaders) {
-        loader.unloadPlugins(new ArrayList<>(contributors));
+        List<PluginContributor> contribList = List.copyOf(contributors);
+        loader.unloadPlugins(contribList);
         monitor.advance(1);
       }
     } finally {
@@ -172,20 +233,14 @@ public class PluginLoaderRegistry implements ApplicationComponent {
     }
   }
 
-  private void runTask(Task task) {
-    LOG.trace("running task with new indicator");
-    if (isMakeActive()) {
-      task.run(new EmptyProgressIndicator());
-    } else {
-      ProgressManager.getInstance().run(task);
+  private Set<PluginContributor> calcContributorsToUnload(Set<PluginContributor> currentContributors, Collection<ModuleRuntime> toUnload) {
+    if (toUnload.isEmpty()) {
+      return Collections.emptySet();
     }
-  }
-
-  private Set<PluginContributor> calcContributorsToUnload(Set<PluginContributor> currentContributors, Set<ReloadableModule> toUnload) {
     List<PluginContributor> toUnloadContributors = new ArrayList<>();
     for (PluginContributor contributor : currentContributors) {
-      if (contributor instanceof ModulePluginContributor) {
-        ReloadableModule module = ((ModulePluginContributor) contributor).getModule();
+      if (contributor instanceof ModulePluginContributor2) {
+        ModuleRuntime module = ((ModulePluginContributor2) contributor).getModule();
         if (toUnload.contains(module)) {
           toUnloadContributors.add(contributor);
         }
@@ -195,247 +250,542 @@ public class PluginLoaderRegistry implements ApplicationComponent {
     return new LinkedHashSet<>(toUnloadContributors);
   }
 
-  @Override
-  @NonNls
-  @NotNull
-  public String getComponentName() {
-    return PluginLoaderRegistry.class.getName();
-  }
+  private Set<PluginContributor> getContributorsFromExtPoint() {
+    class ExtPointContributor extends PluginContributor {
+      private final ComponentContributorExtension myExtension;
 
-  @Override
-  public void initComponent() {
-    myClassLoaderManager.addListener(myClassesListener);
-    assert myCurrentContributors.isEmpty();
+      private ExtPointContributor(ComponentContributorExtension extension) {
+        myExtension = extension;
+      }
+
+      @Override
+      public BaseProjectPlugin createProjectPlugin() {
+        if (myExtension.myProjectPartContributor != null) {
+          return instantiateSafe(myExtension.myProjectPartContributor);
+        }
+        return null;
+      }
+
+      @Override
+      public BaseApplicationPlugin createApplicationPlugin() {
+        if (myExtension.myApplicationPartContributor != null) {
+          return instantiateSafe(myExtension.myApplicationPartContributor);
+        }
+        return null;
+      }
+
+      private <T> T instantiateSafe(String contributorClassName) {
+        try {
+          Class<T> cls = myExtension.findClass(contributorClassName);
+          return cls.getDeclaredConstructor().newInstance();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException ex) {
+          String msg = String.format("Failed to load class %s from plugin %s", contributorClassName, getContributingPluginId());
+          PluginLoaderRegistry.LOG.error(msg, ex);
+          return null;
+        }
+      }
+
+      @Override
+      public int hashCode() {
+        String contributingPlugin = getContributingPluginId();
+        return Objects.hash(contributingPlugin, myExtension.myApplicationPartContributor, myExtension.myProjectPartContributor);
+      }
+
+      @Override
+      public boolean equals(Object obj) {
+        if (obj == this) {
+          return true;
+        }
+        if (false == obj instanceof ExtPointContributor) {
+          return false;
+        }
+        ExtPointContributor other = (ExtPointContributor) obj;
+        return other.getContributingPluginId().equals(getContributingPluginId())
+               && Objects.equals(myExtension.myApplicationPartContributor, other.myExtension.myApplicationPartContributor)
+               && Objects.equals(myExtension.myProjectPartContributor, other.myExtension.myProjectPartContributor);
+      }
+
+      @Override
+      public String toString() {
+        String app = JavaNameUtil.shortName(myExtension.myApplicationPartContributor);
+        String proj = JavaNameUtil.shortName(myExtension.myProjectPartContributor);
+        return String.format("ext-point contributor (%s, %s) from %s", app, proj, getContributingPluginId());
+      }
+
+      private String getContributingPluginId() {
+        return myExtension.getPluginDescriptor().getPluginId().getIdString();
+      }
+    }
+    HashSet<PluginContributor> rv = new HashSet<>();
+    for (ComponentContributorExtension ext : ComponentContributorExtension.POINT.getExtensions()) {
+      rv.add(new ExtPointContributor(ext));
+    }
+    return rv;
   }
 
   /**
-   * Factories are registered via IdeaInitializerDescriptor generated code.
-   * They are initialized during the application initialization.
-   * Note that these contributors are registered once and NEVER unregistered
-   * This is one reason we need to get rid of them
-   *
-   * @deprecated mechanism will be disabled
+   * here we come from the CLM notifications #onLoaded, #onUnloaded
    */
-  @ToRemove(version = 3.3)
-  @Deprecated
-  private Set<PluginContributor> getFactoryContributors(Set<PluginContributor> currentContributors) {
-    final List<PluginContributor> pluginFactoriesRegistryContributors = getPluginFactoriesRegistryContributors();
-    return pluginFactoriesRegistryContributors.stream().filter(contributor -> !currentContributors.contains(contributor)).collect(
-        toCollection(LinkedHashSet::new));
-  }
-
-  private static List<PluginContributor> getPluginFactoriesRegistryContributors() {
-    List<PluginContributor> pluginContributors;
-    pluginContributors = new ArrayList<>();
-
-    Collection<AbstractPluginFactory> pluginFactories = PluginFactoriesRegistry.flush();
-    for (AbstractPluginFactory factory : pluginFactories) {
-      pluginContributors.add(PluginContributor.adapt(factory));
-    }
-
-    return pluginContributors;
-  }
-
   private void update() {
-    ThreadUtils.assertEDT();
-    if (myTaskInProgress) { // this happens to be called inside the UpdatingTask#doUpdate
-      LOG.debug("Rescheduling update");
-      reschedule();
+    if (myUpdateIsScheduledInEDT.compareAndSet(false, true)) {
+      // doesn't make sense to ask PI from pooled thread, the only chance to get not null, imo, is here.
+      final ProgressIndicator globalProgressIndicator = ProgressManager.getGlobalProgressIndicator();
+      // no idea which executor/thread pool to use, e.g. seen uses of AppExecutorUtil.getAppExecutorService()
+      ApplicationManager.getApplication().executeOnPooledThread(() -> {
+        // we need to get out of application read since it is impossible to #invokeAndWait from read, lets postpone
+        LOG.debug("running the task later");
+        // trying to pass the current indicator, for example this helps us to reload plugins within the global project open indicator
+        runTask(globalProgressIndicator);
+      });
     }
-    LOG.debug("Updating");
-    Delta<PluginLoader> loadersDelta;
-    Delta<ReloadableModule> moduleDelta;
-    synchronized (myLoadersDeltaLock) {
-      loadersDelta = new Delta<>(myLoaderDelta);
-      myLoaderDelta.clear();
-    }
-    synchronized (myDeltaLock) {
-      moduleDelta = new Delta<>(myDelta);
-      myDelta.clear();
-    }
-    myDirtyFlag.set(false);
+  }
 
-    if (loadersDelta.isEmpty() && moduleDelta.isEmpty()) {
-      LOG.debug("Nothing to do in update");
+  /**
+   * here we come from loaders registering/unregistering
+   *
+   * we would like on app/project dispose to unload all extensions in time, so we ignore if another update is already scheduled
+   */
+  private void forceUpdate() {
+    LOG.debug("force update");
+    if (!ThreadUtils.isInEDT()) {
+      update();
+    } else {
+      ThreadUtils.assertEDT();
+      UpdatingTask task = new UpdatingTask(null);
+      if (isAppLoaded()) {
+        // here we are also when #disposeComponent is called in AppPlManager
+        // async will not do, the app will be disposed then, so sync update with a good old UI freeze
+        myUpdateIsScheduledInEDT.set(true);
+        task.update(new EmptyProgressMonitor());
+      } else {
+        // here we are on any not first project open
+        update();
+      }
+    }
+  }
+
+  // now we are not in read
+  private void runTask(@Nullable ProgressIndicator oldIndicator) {
+    if (ApplicationManager.getApplication() == null || ApplicationManager.getApplication().isDisposed()) {
       return;
     }
-    assert !myTaskInProgress;
+    assert (!ApplicationManager.getApplication().isReadAccessAllowed());
+    assert !ThreadUtils.isInEDT(); // we are in EDT iff we have 'write'
 
-    Set<PluginContributor> toUnloadContributors = calcContributorsToUnload(myCurrentContributors, getPluginModules(moduleDelta.toUnload));
-    Set<PluginContributor> toLoadContributors =
-        new ModelAccessHelper(myModelAccess).runReadAction(() -> createPluginContributors(getPluginModules(moduleDelta.toLoad)));
-    Delta<PluginContributor> contributorDelta = new Delta<>(toLoadContributors, toUnloadContributors);
-
-    assert !myTaskInProgress;
-    UpdatingTask task = new UpdatingTask(null, loadersDelta, contributorDelta);
-    runTask(task);
+    LOG.trace("running task with old/new indicator");
+    UpdatingTask task = new UpdatingTask(null);
+    if (!isAppLoaded()) {
+      LOG.trace("rescheduling task");
+      return;
+    }
+    assert isAppLoaded();
+    if (oldIndicator == null) {
+      // trying to find any indicator
+      oldIndicator = ProgressManager.getGlobalProgressIndicator();
+    }
+    if (oldIndicator != null && oldIndicator.isShowing()) {
+      // let's run under the old indicator
+      LOG.trace("running with the old PI");
+      task.run(oldIndicator);
+    } else {
+      // usually this section is called after rebuild/make
+      // we have no indicator -- lets create one
+      LOG.trace("queued with the new PI");
+      task.queue();
+    }
   }
 
-  private void reschedule() {
-    Application application = ApplicationManager.getApplication();
-    application.invokeLater(this::update, ModalityState.NON_MODAL, application.getDisposed());
-  }
-
-  private boolean isMakeActive() {
-    return IMakeService.INSTANCE.isSessionActive();
+  // we don't want to do anything until components are all #initialized
+  // this is just to guarantee that we will have only one plugin reload before we open a project
+  // consider the period when app is not loaded a dead zone for this class, the plugin update are disabled during that moment
+  private boolean isAppLoaded() {
+    return myAppInitialized.get();
   }
 
   /**
    * This task flushes all added/removed loaders and added/removed contributors
-   * update happens only inside this task
-   *
+   * It's executed from a pooled thread (regular Task behavior), with progress window (isModal() == true).
+   * For MPS needs, it fires update() in EDT thread and pooled thread waits for EDT activity to complete.
    * @see #update
    */
   private class UpdatingTask extends Task.Modal {
-    @NotNull
-    private final Delta<PluginLoader> loadersDelta;
-    @NotNull
-    private final Delta<PluginContributor> contributorsDelta;
-
-    UpdatingTask(Project project, @NotNull Delta<PluginLoader> loadersDelta, @NotNull Delta<PluginContributor> contributorsDelta) {
+    UpdatingTask(@Nullable Project project) {
       super(project, "Reloading MPS Plugins", false);
-      this.loadersDelta = loadersDelta;
-      this.contributorsDelta = contributorsDelta;
     }
 
     @Override
     public void run(@NotNull ProgressIndicator indicator) {
-      if (loadersDelta.isEmpty() && contributorsDelta.isEmpty()) {
-        LOG.debug("Nothing to do in update");
-        return;
-      }
-      ProgressMonitor monitor = new ProgressMonitorAdapter(indicator);
-      try {
-        LOG.info("Running Update Task : loaders " + loadersDelta + "; contributors : " + contributorsDelta + "; " + Thread.currentThread());
-        indicator.pushState();
-        indicator.setIndeterminate(true);
-        monitor.start("Reloading MPS Plugins", 5);
-        WaitForProgressToShow.runOrInvokeAndWaitAboveProgress(() -> doUpdate(monitor), indicator.getModalityState());
-      } finally {
-        monitor.done();
-        indicator.popState();
+      // here we just try to update the caption and freeze edt to do our reload of extensions there
+      assert !ThreadUtils.isInEDT();
+      // MPS-generated ApplicationPlugins register actions (createGroups->BAP.addAction), and it happens in EDT
+      // (invokeAndWait, below), but ActionManager service doesn't want to be initialized in EDT, therefore we make
+      // sure it's initialized while we're not in EDT. See MPS-33757
+      // FIXME this is a workaround, need a proper fix. I don't understand the limitation of ActionManager/EDT,
+      //       and what's the regular initialization sequence for the ActionManager class (i.e. how does the rest of
+      //       IDEA code make sure it doesn't invoke it accidentally)
+      //       Perhaps, the issue is due to improper timing caused by MyApplicationInitializedListener (need to figure
+      //       out alternative mechanism to trigger plugin reload). Another approach would be not to use EDT for update
+      //       although I expect assumptions about EDT in App/ProjectPlugin initialization code.
+      ActionManager.getInstance();
+      // explicit ANY modality state, despite the fact invokeAndWait documentation promises modality state of the current task:
+      // "When invoked in the thread of some modal progress, returns modality state corresponding to that progress' dialog".
+      // Indeed, occasionally I see modality tailored for this model task, however, I've also seen NON_MODAL value, which
+      // prevents/delays update. As long as we need EDT just to ensure MPS plugins can init/dispose their UI elements, and not for user
+      // interaction, I hope "ANY" modality is good (== we just need to run this code in EDT ASAP).
+      final ModalityState modalityState = ApplicationManager.getApplication().getAnyModalityState();
+      boolean showing = indicator.isShowing();
+      if (!showing) {
+        // we cannot do anything, lets just freeze without any progress
+        ApplicationManager.getApplication().invokeAndWait(() -> update(new EmptyProgressMonitor()), modalityState);
+        // I've never seen this part of code working, can't be certain defaultModalityState() won't work here, but
+        // with the argument, above, seems fair to run with ANY, and, second, helps code consistency.
+      } else {
+        try {
+          indicator.pushState();
+          indicator.setText("Reloading MPS Plugins"); // we hope that the user will see the text but that is unlikely
+//          this also does not work
+//          try {
+//            TimeUnit.MILLISECONDS.sleep(200);
+//          } catch (InterruptedException e) {
+//            e.printStackTrace();
+//          }
+          ApplicationManager.getApplication().invokeAndWait(() -> update(new EmptyProgressMonitor()), modalityState);
+        } finally {
+          indicator.popState();
+        }
       }
     }
 
-    private void doUpdate(ProgressMonitor monitor) {
+    public void update(@NotNull final ProgressMonitor monitor) {
       try {
         ThreadUtils.assertEDT();
-        assert !myTaskInProgress;
-        myTaskInProgress = true;
-        removeLoaders(monitor);
-        removeContributors(monitor);
-        addLoaders(monitor);
-        addFactories(monitor);
-        addContributors(monitor);
-      } finally{
-        myTaskInProgress = false;
+        if (ApplicationManager.getApplication().isDisposed()) return;
+        myUpdateIsScheduledInEDT.compareAndSet(true, false);
+        monitor.start("Reloading MPS Plugins", 6);
+        ProgressManager.checkCanceled();
+        // model access here is for MPSModuleRepository singleton. While it's ok now, when project repo
+        // shares MA with the global one, it's not quite good as generally we load plugins from project modules, too
+        // and MA of global repo is not the one to lock here. However, if we eventually move to MPSModuleRepository
+        // being the one responsible for modules with CL (aka 'deployed'), this approach might be still valid.
+//        myModelAccess.runReadAction(() -> {
+          // XXX readAction here is necessary for runTransaction not to get into deadlock (uses of runTransaction from CLM
+          //     usually got writeAction already, so if a read attempts to start inside runTransaction, we could face a deadlock
+          //     (first thread holds write and waits for transaction, another got transaction, and waiting for read).
+          //     However, once we move to ModuleRuntime, I expect this code not to require model access at all. Nevertheless, in case
+          //     there's some bad code (like SNodeOperations.getNode, accessing global repo), need to switch from lock() to tryLock()
+          //     for scenarios inside CLM to be ready for possible abuse and to prevent deadlock.
+          //     If necessary, can grab read lock inside CLM.runTransaction as it has knowledge of the repo it deals with.
+          // FWIW, ModuleCL.loadOwnClass->loadClass->loadFromDeps may end up in RootClassloaderLookup for an SModule, which
+          // requires MODEL READ. FIXME I don't think CL shall depend on model read, we have no means to guarantee loading of a
+          //                       class would happen in a thread that grabs any model access at all.
+          // Another curious point is that reload of a module happens in 2 CLM transaction but within single model write,
+          // see CLM.doReloadModules and transactions in #unloadModules() + #preLoadModules. I'm not quite sure there's
+          // a reason to be explicit about CLM transactions here (now that we listen to LanguageRegistry here), but given the fact
+          // class loading is picky about SModule state (see RootClassloaderLookup mention, above), I feel we shall keep it for now,
+          // until LanguageRegistry notification mechanism becomes mainstream and demand for CLs w/o model read would force us to
+          // make true CLs
+//          myClassLoaderManager.runTransaction(() -> {
+            // NOTE: when we call #reset we are bound to process those changes, otherwise we lose them
+            // for instance, that is the reason we cannot call #checkCancelled here
+            // FIXME although with our own code we can have sort of 'staged' reset here, and 'revert' reset() in case
+            //       operation was cancelled.
+            Snapshot snapshot = myAccumulation.reset();
+            try {
+              // this is in clm transaction, so we do not get any updates on the delta with modules
+              Delta<ModuleRuntime> moduleDelta = snapshot.getModuleDelta();
+              Delta<PluginLoader> loadersDelta = snapshot.getLoaderDelta();
+
+              if (loadersDelta.isEmpty() && moduleDelta.isEmpty()) {
+                LOG.debug("Nothing to do in update");
+                return;
+              }
+              monitor.advance(1);
+
+              Set<PluginContributor> toUnloadContributors = calcContributorsToUnload(myCurrentContributors, moduleDelta.toUnload);
+              Set<PluginContributor> toLoadContributors = createPluginContributors(moduleDelta.toLoad);
+              List<PluginContributor> notifyToUnload;
+              List<PluginContributor> notifyToLoad;
+              if (loadersDelta.isEmpty()) {
+                notifyToLoad = new ArrayList<>(toLoadContributors);
+                notifyToUnload = new ArrayList<>(toUnloadContributors);
+              } else {
+                // if there's new or gone loader (e.g. opened/closed project and ProjectPluginManager)
+                // we are going to consult all current contributors (see addLoaders()/removeLoaders()), hence
+                // need to include myCurrentContributors into notification set to avoid scenarios like MPSSPRT-413
+                // where a project open event comes after all contributors are there, toLoadContributors.isEmpty and
+                // fireAfterPluginsLoaded() sends notification which is ignored as the list of contributors is empty.
+                // Indeed, it's unlikely there ever would be a listener to process actual PluginContributor instances, but
+                // it doesn't hurt to be responsible here.
+                notifyToLoad = new ArrayList<>(myCurrentContributors);
+                notifyToLoad.addAll(toLoadContributors);
+                notifyToUnload = new ArrayList<>(myCurrentContributors);
+              }
+
+              if (LOG.isInfoLevel()) {
+                final String m = "Running Update Task : loaders %s; contributors : [+%d / -%d]; %s";
+                LOG.info(String.format(m, loadersDelta, toLoadContributors.size(), toUnloadContributors.size(), Thread.currentThread()));
+              }
+              fireBeforePluginsUnloaded(notifyToUnload);
+              monitor.step("Unloading...");
+              clearIDEMenusFromOurActionRefs();
+              clearIDEASerializationCaches();
+              clearIDEAIconsGlobalCache(snapshot.getCLsToBeDisposed());
+
+              // for ALL myCurrentContributors AND loadersDelta.toUnload do PC.unloadPlugins; myCurrentLoaders\= toUnload
+              removeLoaders(loadersDelta.toUnload, monitor);
+              // for contributorsDelta.toUnload AND myCurrentLoaders do PC.unloadPlugins; myCurrentContributors \= toUnload
+              // XXX if toUnload == myCurrentContributors, a pair of removeLoaders/removeContributors effectively unloads all plugins
+              removeContributors(toUnloadContributors, monitor);
+              monitor.step("Loading...");
+              addLoaders(loadersDelta.toLoad, monitor);
+              addIdeaExtPointPluginContributors(monitor);
+              addContributors(toLoadContributors, monitor);
+              fireAfterPluginsLoaded(notifyToLoad);
+            } catch (Throwable t) {
+              LOG.error("caught some error during #update", t);
+            } finally {
+              snapshot.invokePostRunnables();
+            }
+//          });
+//        });
+      } catch (VirtualMachineError e) {
+        throw e;
+      } catch (ProcessCanceledException ignored) {
+      } catch (Throwable t) {
+        LOG.error("Problem while reloading mps-plugins in EDT", t);
+      } finally {
+        monitor.done();
       }
     }
 
-    private void addContributors(ProgressMonitor monitor) {
-      Set<PluginContributor> contributorsToAdd = new LinkedHashSet<>(contributorsDelta.toLoad);
+    private void addContributors(Set<PluginContributor> contributorsToAdd, ProgressMonitor monitor) {
       contributorsToAdd.removeAll(myCurrentContributors);
       LOG.debug("Loading " + contributorsToAdd.size() + " new contributors to " + myCurrentLoaders.size() + " current loaders");
       loadContributors(contributorsToAdd, myCurrentLoaders, monitor.subTask(1));
       myCurrentContributors.addAll(contributorsToAdd);
     }
 
-    private void addFactories(ProgressMonitor monitor) {
-      Set<PluginContributor> factories = getFactoryContributors(myCurrentContributors);
+    private void addIdeaExtPointPluginContributors(@NotNull ProgressMonitor monitor) {
+      Set<PluginContributor> factories = new LinkedHashSet<>(getContributorsFromExtPoint());
       factories.removeAll(myCurrentContributors);
       LOG.debug("Loading " + factories.size() + " Factories");
       loadContributors(factories, myCurrentLoaders, monitor.subTask(1));
       myCurrentContributors.addAll(factories);
     }
 
-    private void addLoaders(ProgressMonitor monitor) {
-      Set<PluginLoader> loadersToAdd = loadersDelta.toLoad;
+    private void addLoaders(Set<PluginLoader> loadersToAdd, ProgressMonitor monitor) {
       loadersToAdd.removeAll(myCurrentLoaders);
       LOG.debug("Loading " + myCurrentContributors.size() + " current contributors to new " + loadersToAdd.size() + " loaders");
       loadContributors(myCurrentContributors, loadersToAdd, monitor.subTask(1));
       myCurrentLoaders.addAll(loadersToAdd);
     }
 
-    private void removeContributors(ProgressMonitor monitor) {
-      Set<PluginContributor> contributorsToRemove = contributorsDelta.toUnload;
+    private void removeContributors(Set<PluginContributor> contributorsToRemove, ProgressMonitor monitor) {
       contributorsToRemove.retainAll(myCurrentContributors); // just a precaution
       LOG.debug("Unloading " + contributorsToRemove.size() + " contributors from " + myCurrentLoaders.size() + " current loaders");
       unloadContributors(contributorsToRemove, myCurrentLoaders, monitor.subTask(1));
       myCurrentContributors.removeAll(contributorsToRemove);
     }
 
-    private void removeLoaders(ProgressMonitor monitor) {
-      Set<PluginLoader> loadersToRemove = loadersDelta.toUnload;
+    private void removeLoaders(Set<PluginLoader> loadersToRemove, ProgressMonitor monitor) {
       loadersToRemove.retainAll(myCurrentLoaders); // just a precaution
       LOG.debug("Unloading " + myCurrentContributors.size() + " current contributors from " + loadersToRemove.size() + " loaders");
       unloadContributors(myCurrentContributors, loadersToRemove, monitor.subTask(1));
       myCurrentLoaders.removeAll(loadersToRemove);
     }
-  }
 
-  /**
-   * NOTE:
-   * not unloading plugins on application dispose (since we are inside the dispose Application.isDisposed == true;
-   * it is not tolerated by ActionGroup#getChildren which is called in some of the plugins #dispose method.
-   */
-  private void scheduleUpdate() {
-    if (myDirtyFlag.compareAndSet(false, true)) {
-      Application application = ApplicationManager.getApplication();
-      if (ThreadUtils.isInEDT() && !application.isDisposed()) {
-        update();
-      } else {
-        reschedule();
+    private void clearIDEAIconsGlobalCache(@NotNull Collection<ClassLoader> classLoadersToBeDisposed) {
+      for (ClassLoader cl : classLoadersToBeDisposed) {
+        // TODO: find alternative
+        //IconLoader.detachClassLoader(cl);
+      }
+      final ProjectManager pm = ProjectManager.getInstanceIfCreated();
+      if (pm == null) {
+        return;
+      }
+      for (Project project : pm.getOpenProjects()) {
+        FileEditorManagerEx.getInstanceEx(project).refreshIcons();
       }
     }
-  }
 
-  private Set<ReloadableModule> getPluginModules(Collection<ReloadableModule> modules) {
-    return modules.stream().filter(this::isPluginModule).collect(toCollection(LinkedHashSet::new));
-  }
-
-  private boolean isPluginModule(SModule module) {
-    if (module instanceof ReloadableModule) {
-      if (module instanceof Language) {
-        return true;
+    @SuppressWarnings("UnstableApiUsage")
+    private void clearIDEASerializationCaches() {
+      try {
+        Optional<JdomSerializer> jdomSerializer = ServiceLoader.load(JdomSerializer.class, JdomSerializer.class.getClassLoader()).findFirst();
+        jdomSerializer.ifPresent(JdomSerializer::clearSerializationCaches);
+      } catch (Throwable t) {
+        LOG.error("Caught exception while clearing IDEA serialization caches", t);
       }
+  }
 
-      if (module instanceof Solution) {
-        SolutionKind kind = ((Solution) module).getKind();
-        return kind != SolutionKind.NONE;
+    @SuppressWarnings("UnstableApiUsage")
+    private void clearIDEMenusFromOurActionRefs() {
+      try {
+        WindowManagerEx windowManager = WindowManagerEx.getInstanceEx();
+        for (Project project : ProjectManager.getInstance().getOpenProjects()) {
+          ProjectFrameHelper frame = windowManager.getFrameHelper(project);
+          if (frame != null) {
+            frame.updateView();
+          }
+        }
+
+        ProjectFrameHelper frame = windowManager.getFrameHelper(null);
+        if (frame != null) {
+          frame.updateView();
+        }
+      } catch (Throwable t) {
+        LOG.error("Caught exception while clearing IDE menus", t);
       }
     }
-    return false;
   }
 
   @Override
-  public void disposeComponent() {
-    myClassLoaderManager.removeListener(myClassesListener);
+  public void dispose() {
+    MPSCoreComponents coreComponents = MPSCoreComponents.getInstance();
+    Platform mpsPlatform = coreComponents.getPlatform();
+    mpsPlatform.findComponent(LanguageRegistry.class).removeRegistryListener(myClassesListener);
   }
 
-  private class SchedulingUpdateListener implements DeployListener {
+  private class SchedulingUpdateListener implements ModuleDeploymentListener {
     @Override
-    public void onUnloaded(Set<ReloadableModule> unloadedModules, @NotNull ProgressMonitor monitor) {
-      synchronized (myDeltaLock) {
-        myDelta.unload(unloadedModules);
+    public void deploymentStateChanged(@NotNull ModuleDeploymentChange change) {
+      final Runnable releaseCLs = change.acquireRemovedTrackingLock();
+      AtomicInteger added = new AtomicInteger(0);
+      AtomicInteger addedWE = new AtomicInteger(0);
+      AtomicInteger removed = new AtomicInteger(0);
+      AtomicInteger removedWE = new AtomicInteger(0);
+      AtomicInteger reloaded = new AtomicInteger(0);
+      AtomicInteger reloadedWE = new AtomicInteger(0);
+      // XXX no real use for hash set here, for pc2load, as we just fill with new instances,
+      //     however, it's just too much pain now to change Delta api to accommodate Collection
+      final LinkedHashSet<ModuleRuntime> mr2load = new LinkedHashSet<>();
+      final LinkedHashSet<ModuleRuntime> mr2Unload = new LinkedHashSet<>();
+      // I don't filter classLoaders2Dispose to match plugin modules as there's no way to 'release' subset only.
+      // Besides, these CLs are likely dependant between each other anyway, why bother.
+      // Moreover, update() uses these to refresh various caches, so it's highly likely we need to clear all these.
+      Set<ClassLoader> classLoaders2Dispose = new HashSet<>();
+      change.forEachAdded(t -> {
+        added.incrementAndGet();
+        if (t.withExtensions()) {
+          addedWE.incrementAndGet();
+          mr2load.add(t);
+        }
+      });
+      change.forEachRemoved(t -> {
+        removed.incrementAndGet();
+        classLoaders2Dispose.add(t.getModuleClassLoader());
+        if (t.withExtensions()) {
+          removedWE.incrementAndGet();
+          mr2Unload.add(t);
+        }
+      });
+      change.forEachReloaded(t -> {
+        reloaded.incrementAndGet();
+        if (t.withExtensions()) {
+          reloadedWE.incrementAndGet();
+        }
+      });
+      String traceMsg = "deployment state change (total/with extensions): added: %d/%d; removed: %d/%d; reloaded: %d/%d. Thread: %s";
+      LOG.debug(String.format(traceMsg, added.get(), addedWE.get(), removed.get(), removedWE.get(), reloaded.get(), reloadedWE.get(), Thread.currentThread().getName()));
+      if (!mr2load.isEmpty()) {
+        myAccumulation.onLoad(mr2load);
+      }
+      if (!mr2Unload.isEmpty()) {
+        myAccumulation.onUnload(mr2Unload, classLoaders2Dispose, releaseCLs);
+      } else {
+        releaseCLs.run();
+      }
+      if (!mr2load.isEmpty() || !mr2Unload.isEmpty()) {
+        update();
+      }
+    }
+  }
+
+  private final EventAccumulation myAccumulation = new EventAccumulation();
+
+  // access to all data members is synchronized through access methods
+  static class EventAccumulation {
+    private final Delta<ModuleRuntime> myDelta = new Delta<>();
+    private final List<ClassLoader> myCLsToBeDisposed = new ArrayList<>(); // to be disposed in the next invocation of UpdatingTask#update
+    private final Queue<Runnable> myPostRunnableQueue = new LinkedList<>();
+
+    private final Delta<PluginLoader> myLoaderDelta = new Delta<>();
+
+    synchronized void onUnload(Set<ModuleRuntime> unloadedModules, @NotNull Set<ClassLoader> disposingCLs, @Nullable Runnable postRunnable) {
+      myDelta.unload(unloadedModules);
+      myCLsToBeDisposed.addAll(disposingCLs);
+      if (postRunnable != null) {
+        myPostRunnableQueue.add(postRunnable);
       }
     }
 
-    @Override
-    public void onLoaded(Set<ReloadableModule> loadedModules, @NotNull ProgressMonitor monitor) {
-      synchronized (myDeltaLock) {
-        myDelta.load(loadedModules);
-        scheduleUpdate();
+    synchronized void onLoad(Set<ModuleRuntime> loadedModules) {
+      myDelta.load(loadedModules);
+    }
+
+    synchronized void loaderChange(@Nullable PluginLoader added, @Nullable PluginLoader removed) {
+      if (added != null) {
+        myLoaderDelta.load(Collections.singleton(added));
       }
+      if (removed != null) {
+        myLoaderDelta.unload(Collections.singleton(removed));
+      }
+    }
+
+    @NotNull
+    public synchronized Snapshot reset() {
+      return new Snapshot(myDelta.reset(), myLoaderDelta.reset(), snapshotCLs(), snapshotPostRunnables());
+    }
+
+    @NotNull
+    private List<ClassLoader> snapshotCLs() {
+      List<ClassLoader> cls2dispose = new ArrayList<>(myCLsToBeDisposed);
+      myCLsToBeDisposed.clear();
+      return cls2dispose;
+    }
+
+    @NotNull
+    private List<Runnable> snapshotPostRunnables() {
+      List<Runnable> postRunnablesToRun = new ArrayList<>(myPostRunnableQueue);
+      myPostRunnableQueue.clear();
+      return postRunnablesToRun;
     }
   }
 
-  private volatile boolean myTaskInProgress = false;
-  private final Object myDeltaLock = new Object();
-  private final Object myLoadersDeltaLock = new Object();
-  private final Delta<ReloadableModule> myDelta = new Delta<>();
-  private final Delta<PluginLoader> myLoaderDelta = new Delta<>();
+  final static class Snapshot {
+    private final Delta<ModuleRuntime> myModuleDelta;
+    private final Delta<PluginLoader> myLoaderDelta;
+    private final List<ClassLoader> myClassLoaders;
+    private final List<Runnable> myPostRun;
 
-  private static class Delta<T> {
+    Snapshot(Delta<ModuleRuntime> md, Delta<PluginLoader> pld, List<ClassLoader> cbd, List<Runnable> postRun) {
+      myModuleDelta = md;
+      myLoaderDelta = pld;
+      myClassLoaders = cbd;
+      myPostRun = postRun;
+    }
+
+    @NotNull
+    Delta<ModuleRuntime> getModuleDelta() {
+      return myModuleDelta;
+    }
+
+    @NotNull
+    Delta<PluginLoader> getLoaderDelta() {
+      return myLoaderDelta;
+    }
+
+    @NotNull
+    List<ClassLoader> getCLsToBeDisposed() {
+      return myClassLoaders;
+    }
+
+    void invokePostRunnables() {
+      myPostRun.forEach(Runnable::run);
+    }
+  }
+
+  private static final class Delta<T> {
     private final Set<T> toUnload;
     private final Set<T> toLoad;
 
@@ -448,12 +798,12 @@ public class PluginLoaderRegistry implements ApplicationComponent {
       this(delta.toLoad, delta.toUnload);
     }
 
-    public Delta(@NotNull Set<T> loaded, @NotNull Set<T> unloaded) {
-      toLoad = new LinkedHashSet<>(loaded);
-      toUnload = new LinkedHashSet<>(unloaded);
+    public Delta(@NotNull Collection<T> load, @NotNull Collection<T> unload) {
+      this.toLoad = new LinkedHashSet<>(load);
+      this.toUnload = new LinkedHashSet<>(unload);
     }
 
-    public final void clear() {
+    public void clear() {
       toUnload.clear();
       toLoad.clear();
     }
@@ -467,18 +817,32 @@ public class PluginLoaderRegistry implements ApplicationComponent {
       toLoad.removeAll(ts);
     }
 
-    public void apply(Set<T> tsToChange) {
-      tsToChange.addAll(toLoad);
-      tsToChange.removeAll(toUnload);
-    }
-
     public boolean isEmpty() {
       return toLoad.isEmpty() && toUnload.isEmpty();
     }
 
     @Override
     public String toString() {
-      return "[toLoad: " + toLoad.size() + "; toUnload:" + toUnload.size() + "]";
+      return String.format("∆[load:%d; unload:%d]", toLoad.size(), toUnload.size());
+    }
+
+    @NotNull
+    public Delta<T> reset() {
+      Delta<T> tDelta = new Delta<>(this);
+      clear();
+      return tDelta;
+    }
+  }
+
+  @SuppressWarnings("UnstableApiUsage")
+  public static class MyApplicationInitializedListener implements ApplicationInitializedListener {
+    /**
+     * Somehow TaskModal#queue does not work properly during app initialization (see #runTask).
+     * So I call UpdatingTask#run explicitly
+     */
+    @Override
+    public void componentsInitialized() {
+      PluginLoaderRegistry.getInstance().signalAppInitialized();
     }
   }
 }

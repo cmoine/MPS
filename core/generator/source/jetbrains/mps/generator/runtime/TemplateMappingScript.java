@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,8 +25,8 @@ import org.jetbrains.mps.openapi.model.SNodeReference;
  */
 public interface TemplateMappingScript {
 
-  public static final int PREPROCESS = 1;
-  public static final int POSTPROCESS = 2;
+  int PREPROCESS = 1;
+  int POSTPROCESS = 2;
 
   SNodeReference getScriptNode();
 
@@ -34,7 +34,18 @@ public interface TemplateMappingScript {
 
   int getKind();
 
-  void apply(SModel model, ITemplateGenerator generator) throws GenerationFailureException;
+  /**
+   * @deprecated use {@link #apply(SModel, TemplateExecutionEnvironment)} instead
+   */
+@Deprecated(since = "2021.1", forRemoval = true)
+  default void apply(SModel model, ITemplateGenerator generator) throws GenerationFailureException {
+    // no-op to let subclasses not implement this one
+  }
+
+  default void apply(SModel model, TemplateExecutionEnvironment env) throws GenerationFailureException {
+    // remove the body once 2021.1 is out
+    apply(model, env.getGenerator());
+  }
 
   boolean modifiesModel();
 }

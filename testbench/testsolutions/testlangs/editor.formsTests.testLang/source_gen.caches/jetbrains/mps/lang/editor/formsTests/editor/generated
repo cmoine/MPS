@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-929hyr8jw72w3zzgd0ubqfz98cztyf2" />
+<product version="3" modelHash="-nbekyydyo9lyzzo2eu1bitxpai30o7">
+  <files names="Checkbox_ActionMap_3jyf1k_b0.java:Checkbox_ActionMap_3jyf1k_c0.java:Checkbox_ActionMap_3jyf1k_f0.java:Checkbox_ActionMap_3jyf1k_g0.java:Checkbox_ActionMap_7xa7wl_a.java:Checkbox_ActionMap_c4zoug_a.java:Checkbox_KeyMap_3jyf1k_b0.java:Checkbox_KeyMap_3jyf1k_c0.java:Checkbox_KeyMap_3jyf1k_f0.java:Checkbox_KeyMap_3jyf1k_g0.java:Checkbox_KeyMap_7xa7wl_a.java:Checkbox_KeyMap_c4zoug_a.java:EditorAspectDescriptorImpl.java:ToggleCheckboxAction_3jyf1k_b0.java:ToggleCheckboxAction_3jyf1k_c0.java:ToggleCheckboxAction_3jyf1k_f0.java:ToggleCheckboxAction_3jyf1k_g0.java:ToggleCheckboxAction_7xa7wl_a.java:ToggleCheckboxAction_c4zoug_a.java:UsesPlatformCheckbox_Editor.java:UsesPlatformCheckbox_EditorBuilder_a.java:UsesTextCheckbox_Editor.java:UsesTextCheckbox_EditorBuilder_a.java:VariousCheckboxes_Editor.java:VariousCheckboxes_EditorBuilder_a.java" />
+</product>
 

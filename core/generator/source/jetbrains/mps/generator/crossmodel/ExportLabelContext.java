@@ -21,8 +21,8 @@ import org.jetbrains.mps.openapi.model.SNode;
  * @author Artem Tikhomirov
  */
 public interface ExportLabelContext {
-  public SNode getInput();
-  public SNode getOutput();
+  SNode getInput();
+  SNode getOutput();
   // value holder / keeper - persisted aspect of the export
-  public SNode getKeeper();
+  SNode getKeeper();
 }

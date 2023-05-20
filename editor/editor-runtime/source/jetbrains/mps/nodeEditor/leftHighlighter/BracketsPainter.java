@@ -25,9 +25,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Stack;
 
 /**
@@ -36,8 +34,8 @@ import java.util.Stack;
  */
 public class BracketsPainter extends AbstractFoldingAreaPainter {
   private int myAreaWidth = -1;
-  private HashMap<CellInfo, HighlighterBracket> myBrackets = new HashMap<CellInfo, HighlighterBracket>();
-  private boolean myRightToLeft;
+  private final HashMap<CellInfo, HighlighterBracket> myBrackets = new HashMap<>();
+  private final boolean myRightToLeft;
 
   public BracketsPainter(LeftEditorHighlighter leftEditorHighlighter, boolean rightToLeft) {
     super(leftEditorHighlighter);
@@ -67,15 +65,10 @@ public class BracketsPainter extends AbstractFoldingAreaPainter {
   }
 
   private int relayoutBrackets() {
-    for (Iterator<Entry<CellInfo, HighlighterBracket>> it = myBrackets.entrySet().iterator(); it.hasNext(); ) {
-      Entry<CellInfo, HighlighterBracket> nextEntry = it.next();
-      if (!nextEntry.getValue().relayout()) {
-        // TODO: check if this code is useful 
-        it.remove();
-      }
-    }
+    // TODO: check if this code is useful
+    myBrackets.entrySet().removeIf(nextEntry -> !nextEntry.getValue().relayout());
 
-    List<BracketEdge> bracketEdges = new ArrayList<BracketEdge>();
+    List<BracketEdge> bracketEdges = new ArrayList<>();
     for (HighlighterBracket bracket : myBrackets.values()) {
       bracket.setLevel(1);
       bracketEdges.add(bracket.getBeginningEdge());
@@ -84,11 +77,11 @@ public class BracketsPainter extends AbstractFoldingAreaPainter {
     Collections.sort(bracketEdges);
 
     int maxLevel = 0;
-    Stack<HighlighterBracket> myBracketsLayoutStack = new Stack<HighlighterBracket>();
+    Stack<HighlighterBracket> myBracketsLayoutStack = new Stack<>();
     for (int i = 0; i < bracketEdges.size(); i++) {
       BracketEdge edge = bracketEdges.get(i);
       HighlighterBracket bracket = edge.getBracket();
-      if (edge.isBeggining()) {
+      if (edge.isBeginning()) {
         myBracketsLayoutStack.push(bracket);
       } else {
         HighlighterBracket bracketFromStack = null;

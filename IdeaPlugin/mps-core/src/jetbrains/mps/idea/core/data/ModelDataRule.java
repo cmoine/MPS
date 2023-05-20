@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,38 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.core.data;
 
 import com.intellij.ide.impl.dataRules.GetDataRule;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataProvider;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import jetbrains.mps.ide.project.ProjectHelper;
-import jetbrains.mps.smodel.SModelFileTracker;
-import jetbrains.mps.vfs.FileSystem;
+import jetbrains.mps.project.MPSProject;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * evgeny, 6/28/13
- */
 public class ModelDataRule implements GetDataRule {
+  private final ModelFromVirtualFileExtractor myExtractor;
+
+  public ModelDataRule() {
+    myExtractor = new ModelFromVirtualFileExtractor();
+  }
+
   @Nullable
   @Override
-  public Object getData(DataProvider dataProvider) {
+  public Object getData(@NotNull DataProvider dataProvider) {
     VirtualFile virtualFile = PlatformDataKeys.VIRTUAL_FILE.getData(dataProvider);
-    if (virtualFile == null) {
-      return null;
-
-    }
-    final Project project =  CommonDataKeys.PROJECT.getData(dataProvider);
-    if (project == null) {
-      return null;
-    }
-
-    return SModelFileTracker.getInstance(ProjectHelper.getProjectRepository(project)).findModel(FileSystem.getInstance().getFileByPath(virtualFile.getPath()));
+    MPSProject project = ProjectHelper.fromIdeaProject(CommonDataKeys.PROJECT.getData(dataProvider));
+    return myExtractor.extract(virtualFile, project);
   }
 }
 

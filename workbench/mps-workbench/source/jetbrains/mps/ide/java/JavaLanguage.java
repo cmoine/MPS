@@ -36,6 +36,7 @@ public class JavaLanguage extends Language {
       });
   }
 
+  @NotNull
   @Override
   public String getDisplayName() {
     return "Java";

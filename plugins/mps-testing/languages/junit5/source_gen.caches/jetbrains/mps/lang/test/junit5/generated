@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="ckxdbxxw7yjb4hybzxscmcxnefbf7pk">
+  <files names="AbstractJUnit5Launcher.java:FailureDetector.java:ModuleClassLoaderUtil.java:ModuleFilesListProjectStrategy.java:ScriptJUnit5Launcher.java:SimpleJUnit5Launcher.java:TestDiscovery.java:TestDiscoveryVisitor.java" />
+</product>
+

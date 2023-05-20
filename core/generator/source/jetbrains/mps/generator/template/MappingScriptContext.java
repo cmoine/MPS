@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,15 +15,22 @@
  */
 package jetbrains.mps.generator.template;
 
+import jetbrains.mps.generator.runtime.TemplateExecutionEnvironment;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 
 public class MappingScriptContext extends TemplateQueryContext {
-  private SModel myModel;
+  private final SModel myModel;
 
+@Deprecated(since = "2021.1", forRemoval = true)
   public MappingScriptContext(SModel model, @NotNull SNodeReference mappingScript, @NotNull ITemplateGenerator generator) {
     super(mappingScript, generator);
+    myModel = model;
+  }
+
+  public MappingScriptContext(@NotNull SModel model, @NotNull SNodeReference mappingScript, @NotNull TemplateExecutionEnvironment env) {
+    super(mappingScript, env);
     myModel = model;
   }
 

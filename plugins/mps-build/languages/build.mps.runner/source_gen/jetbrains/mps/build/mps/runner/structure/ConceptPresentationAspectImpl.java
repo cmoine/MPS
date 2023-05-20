@@ -4,24 +4,43 @@ package jetbrains.mps.build.mps.runner.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_BuildSolutionRunnerAspect = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BuildSolutionRunnerPlugin = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_BuildSolutionRunnerAspect;
+  private ConceptPresentation props_BuildSolutionRunnerPlugin;
+  private ConceptPresentation props_RequiredPlugin;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.BuildSolutionRunnerAspect:
+        if (props_BuildSolutionRunnerAspect == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("run code");
+          props_BuildSolutionRunnerAspect = cpb.create();
+        }
         return props_BuildSolutionRunnerAspect;
-      case 1:
+      case LanguageConceptSwitch.BuildSolutionRunnerPlugin:
+        if (props_BuildSolutionRunnerPlugin == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("adds ability to run MPS code after build");
+          cpb.rawPresentation("mps-runner");
+          props_BuildSolutionRunnerPlugin = cpb.create();
+        }
         return props_BuildSolutionRunnerPlugin;
+      case LanguageConceptSwitch.RequiredPlugin:
+        if (props_RequiredPlugin == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x427a473d5177432cL, 0x9905bcbceb71b996L, 0x5b81705cdf7bc318L, 0x5b81705cdf7bc319L, "plugin", "", "");
+          props_RequiredPlugin = cpb.create();
+        }
+        return props_RequiredPlugin;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

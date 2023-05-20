@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="3qp5exa258d5rsl7sohmkjxfssdm233" />
+<product version="3" modelHash="-9pobtc28h46efe14dq263lk5ixowbk8">
+  <files names="AsBuilderStatement__BehaviorDescriptor.java:AsTypeBuilder__BehaviorDescriptor.java:BaseSimpleBuilderDeclaration__BehaviorDescriptor.java:BeanBuilder__BehaviorDescriptor.java:BeanPropertyBuilder__BehaviorDescriptor.java:BehaviorAspectDescriptor.java:BuilderContainer__BehaviorDescriptor.java:BuilderCreator__BehaviorDescriptor.java:BuilderStatement__BehaviorDescriptor.java:Builder__BehaviorDescriptor.java:SimpleBuilderDeclaration__BehaviorDescriptor.java:SimpleBuilderExtensionDeclaration__BehaviorDescriptor.java:SimpleBuilderPropertyBuilder__BehaviorDescriptor.java:SimpleBuilder__BehaviorDescriptor.java:SimpleBuilders__BehaviorDescriptor.java" />
+</product>
 

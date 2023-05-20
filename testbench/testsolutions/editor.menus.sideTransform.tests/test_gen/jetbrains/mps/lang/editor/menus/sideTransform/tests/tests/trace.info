@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <root nodeRef="r:b4f50ed2-df75-4f06-8889-d503cb129f2d(jetbrains.mps.lang.editor.menus.sideTransform.tests.tests@tests)/278746753871085504">
+    <file name="TestSideTransform_SimpleNode_DefaultLeftAction_Test.java">
+      <node id="278746753871085504" at="19,64,20,60" concept="6" />
+      <node id="278746753871085504" at="24,86,25,36" concept="1" />
+      <node id="278746753871085504" at="30,52,31,19" concept="6" />
+      <node id="278746753871085504" at="35,51,36,70" concept="1" />
+      <node id="278746753871085512" at="36,70,37,33" concept="1" />
+      <node id="278746753871085513" at="37,33,38,71" concept="1" />
+      <node id="278746753871085504" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="278746753871085504" at="19,0,22,0" concept="0" trace="TestSideTransform_SimpleNode_DefaultLeftAction_Test#()V" />
+      <node id="278746753871085504" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="278746753871085504" at="23,0,27,0" concept="2" trace="test_TestSideTransform_SimpleNode_DefaultLeftAction#()V" />
+      <node id="278746753871085504" at="34,0,40,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="278746753871085504" at="19,64,20,60" />
+      <scope id="278746753871085504" at="24,86,25,36" />
+      <scope id="278746753871085504" at="30,52,31,19" />
+      <scope id="278746753871085504" at="19,0,22,0" />
+      <scope id="278746753871085504" at="30,0,33,0">
+        <var name="owner" id="278746753871085504" />
+      </scope>
+      <scope id="278746753871085504" at="35,51,38,71" />
+      <scope id="278746753871085504" at="23,0,27,0" />
+      <scope id="278746753871085504" at="34,0,40,0" />
+      <unit id="278746753871085504" at="28,0,41,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransform_SimpleNode_DefaultLeftAction_Test$TestBody" />
+      <unit id="278746753871085504" at="14,0,42,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransform_SimpleNode_DefaultLeftAction_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:b4f50ed2-df75-4f06-8889-d503cb129f2d(jetbrains.mps.lang.editor.menus.sideTransform.tests.tests@tests)/278746753871085523">
+    <file name="TestSideTransform_SimpleNode_CustomLeftAction_Test.java">
+      <node id="278746753871085523" at="19,63,20,60" concept="6" />
+      <node id="278746753871085523" at="24,85,25,36" concept="1" />
+      <node id="278746753871085523" at="30,52,31,19" concept="6" />
+      <node id="278746753871085523" at="35,51,36,70" concept="1" />
+      <node id="278746753871085531" at="36,70,37,32" concept="1" />
+      <node id="278746753871085532" at="37,32,38,71" concept="1" />
+      <node id="278746753871085523" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="278746753871085523" at="19,0,22,0" concept="0" trace="TestSideTransform_SimpleNode_CustomLeftAction_Test#()V" />
+      <node id="278746753871085523" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="278746753871085523" at="23,0,27,0" concept="2" trace="test_TestSideTransform_SimpleNode_CustomLeftAction#()V" />
+      <node id="278746753871085523" at="34,0,40,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="278746753871085523" at="19,63,20,60" />
+      <scope id="278746753871085523" at="24,85,25,36" />
+      <scope id="278746753871085523" at="30,52,31,19" />
+      <scope id="278746753871085523" at="19,0,22,0" />
+      <scope id="278746753871085523" at="30,0,33,0">
+        <var name="owner" id="278746753871085523" />
+      </scope>
+      <scope id="278746753871085523" at="35,51,38,71" />
+      <scope id="278746753871085523" at="23,0,27,0" />
+      <scope id="278746753871085523" at="34,0,40,0" />
+      <unit id="278746753871085523" at="28,0,41,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransform_SimpleNode_CustomLeftAction_Test$TestBody" />
+      <unit id="278746753871085523" at="14,0,42,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransform_SimpleNode_CustomLeftAction_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:b4f50ed2-df75-4f06-8889-d503cb129f2d(jetbrains.mps.lang.editor.menus.sideTransform.tests.tests@tests)/2935000035739921952">
+    <file name="TestSideTransformExceptionActionCanExecute_Test.java">
+      <node id="2935000035739921952" at="22,60,23,60" concept="6" />
+      <node id="2935000035739921952" at="27,82,28,36" concept="1" />
+      <node id="2935000035739921952" at="33,52,34,19" concept="6" />
+      <node id="2935000035739921952" at="38,51,39,53" concept="1" />
+      <node id="2935000035739921960" at="39,53,40,22" concept="1" />
+      <node id="2935000035739921961" at="40,22,41,71" concept="1" />
+      <node id="7153261420283915528" at="41,71,42,100" concept="3" />
+      <node id="7153261420283916151" at="42,100,43,110" concept="1" />
+      <node id="5651034758630072675" at="43,110,44,0" concept="4" />
+      <node id="3676420103152618379" at="48,69,49,62" concept="1" />
+      <node id="2935000035739921952" at="19,0,21,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="2935000035739921952" at="22,0,25,0" concept="0" trace="TestSideTransformExceptionActionCanExecute_Test#()V" />
+      <node id="2935000035739921952" at="33,0,36,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="2935000035739921952" at="26,0,30,0" concept="2" trace="test_TestSideTransformExceptionActionCanExecute#()V" />
+      <node id="2935000035739921952" at="47,0,51,0" concept="2" trace="populateExpectedEvents#(Ljetbrains/mps/testbench/util/CachingAppender;)V" />
+      <node id="2935000035739921952" at="37,0,46,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="2935000035739921952" at="22,60,23,60" />
+      <scope id="2935000035739921952" at="27,82,28,36" />
+      <scope id="2935000035739921952" at="33,52,34,19" />
+      <scope id="2935000035739921952" at="48,69,49,62" />
+      <scope id="2935000035739921952" at="22,0,25,0" />
+      <scope id="2935000035739921952" at="33,0,36,0">
+        <var name="owner" id="2935000035739921952" />
+      </scope>
+      <scope id="2935000035739921952" at="26,0,30,0" />
+      <scope id="2935000035739921952" at="47,0,51,0">
+        <var name="appender" id="2935000035739921952" />
+      </scope>
+      <scope id="2935000035739921952" at="38,51,44,0">
+        <var name="nodeSubstituteChooser" id="7153261420283915529" />
+      </scope>
+      <scope id="2935000035739921952" at="37,0,46,0" />
+      <unit id="2935000035739921952" at="31,0,52,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransformExceptionActionCanExecute_Test$TestBody" />
+      <unit id="2935000035739921952" at="17,0,53,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransformExceptionActionCanExecute_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:b4f50ed2-df75-4f06-8889-d503cb129f2d(jetbrains.mps.lang.editor.menus.sideTransform.tests.tests@tests)/4091667478583510639">
+    <file name="TestSideTransform_NodeWithSimpleReference_CustomLeftAction_Test.java">
+      <node id="4091667478583510639" at="19,76,20,60" concept="6" />
+      <node id="4091667478583510639" at="24,98,25,36" concept="1" />
+      <node id="4091667478583510639" at="30,52,31,19" concept="6" />
+      <node id="4091667478583510639" at="35,51,36,72" concept="1" />
+      <node id="4091667478583510647" at="36,72,37,32" concept="1" />
+      <node id="4091667478583510648" at="37,32,38,71" concept="1" />
+      <node id="4091667478583510639" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="4091667478583510639" at="19,0,22,0" concept="0" trace="TestSideTransform_NodeWithSimpleReference_CustomLeftAction_Test#()V" />
+      <node id="4091667478583510639" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="4091667478583510639" at="23,0,27,0" concept="2" trace="test_TestSideTransform_NodeWithSimpleReference_CustomLeftAction#()V" />
+      <node id="4091667478583510639" at="34,0,40,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="4091667478583510639" at="19,76,20,60" />
+      <scope id="4091667478583510639" at="24,98,25,36" />
+      <scope id="4091667478583510639" at="30,52,31,19" />
+      <scope id="4091667478583510639" at="19,0,22,0" />
+      <scope id="4091667478583510639" at="30,0,33,0">
+        <var name="owner" id="4091667478583510639" />
+      </scope>
+      <scope id="4091667478583510639" at="35,51,38,71" />
+      <scope id="4091667478583510639" at="23,0,27,0" />
+      <scope id="4091667478583510639" at="34,0,40,0" />
+      <unit id="4091667478583510639" at="28,0,41,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransform_NodeWithSimpleReference_CustomLeftAction_Test$TestBody" />
+      <unit id="4091667478583510639" at="14,0,42,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransform_NodeWithSimpleReference_CustomLeftAction_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:b4f50ed2-df75-4f06-8889-d503cb129f2d(jetbrains.mps.lang.editor.menus.sideTransform.tests.tests@tests)/4091667478583530282">
+    <file name="TestSideTransform_NodeWithSimpleReference_CustomRightAction_Test.java">
+      <node id="4091667478583530282" at="19,77,20,60" concept="6" />
+      <node id="4091667478583530282" at="24,99,25,36" concept="1" />
+      <node id="4091667478583530282" at="30,52,31,19" concept="6" />
+      <node id="4091667478583530282" at="35,51,36,72" concept="1" />
+      <node id="4091667478583530292" at="36,72,37,33" concept="1" />
+      <node id="4091667478583530293" at="37,33,38,71" concept="1" />
+      <node id="4091667478583530282" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="4091667478583530282" at="19,0,22,0" concept="0" trace="TestSideTransform_NodeWithSimpleReference_CustomRightAction_Test#()V" />
+      <node id="4091667478583530282" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="4091667478583530282" at="23,0,27,0" concept="2" trace="test_TestSideTransform_NodeWithSimpleReference_CustomRightAction#()V" />
+      <node id="4091667478583530282" at="34,0,40,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="4091667478583530282" at="19,77,20,60" />
+      <scope id="4091667478583530282" at="24,99,25,36" />
+      <scope id="4091667478583530282" at="30,52,31,19" />
+      <scope id="4091667478583530282" at="19,0,22,0" />
+      <scope id="4091667478583530282" at="30,0,33,0">
+        <var name="owner" id="4091667478583530282" />
+      </scope>
+      <scope id="4091667478583530282" at="35,51,38,71" />
+      <scope id="4091667478583530282" at="23,0,27,0" />
+      <scope id="4091667478583530282" at="34,0,40,0" />
+      <unit id="4091667478583530282" at="28,0,41,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransform_NodeWithSimpleReference_CustomRightAction_Test$TestBody" />
+      <unit id="4091667478583530282" at="14,0,42,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransform_NodeWithSimpleReference_CustomRightAction_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:b4f50ed2-df75-4f06-8889-d503cb129f2d(jetbrains.mps.lang.editor.menus.sideTransform.tests.tests@tests)/4091667478583530303">
+    <file name="TestSideTransform_NodeWithComplexReference_CustomLeftAction_Test.java">
+      <node id="4091667478583530303" at="19,77,20,60" concept="6" />
+      <node id="4091667478583530303" at="24,99,25,36" concept="1" />
+      <node id="4091667478583530303" at="30,52,31,19" concept="6" />
+      <node id="4091667478583530303" at="35,51,36,72" concept="1" />
+      <node id="4091667478583530313" at="36,72,37,32" concept="1" />
+      <node id="4091667478583530314" at="37,32,38,71" concept="1" />
+      <node id="4091667478583530303" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="4091667478583530303" at="19,0,22,0" concept="0" trace="TestSideTransform_NodeWithComplexReference_CustomLeftAction_Test#()V" />
+      <node id="4091667478583530303" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="4091667478583530303" at="23,0,27,0" concept="2" trace="test_TestSideTransform_NodeWithComplexReference_CustomLeftAction#()V" />
+      <node id="4091667478583530303" at="34,0,40,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="4091667478583530303" at="19,77,20,60" />
+      <scope id="4091667478583530303" at="24,99,25,36" />
+      <scope id="4091667478583530303" at="30,52,31,19" />
+      <scope id="4091667478583530303" at="19,0,22,0" />
+      <scope id="4091667478583530303" at="30,0,33,0">
+        <var name="owner" id="4091667478583530303" />
+      </scope>
+      <scope id="4091667478583530303" at="35,51,38,71" />
+      <scope id="4091667478583530303" at="23,0,27,0" />
+      <scope id="4091667478583530303" at="34,0,40,0" />
+      <unit id="4091667478583530303" at="28,0,41,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransform_NodeWithComplexReference_CustomLeftAction_Test$TestBody" />
+      <unit id="4091667478583530303" at="14,0,42,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransform_NodeWithComplexReference_CustomLeftAction_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:b4f50ed2-df75-4f06-8889-d503cb129f2d(jetbrains.mps.lang.editor.menus.sideTransform.tests.tests@tests)/4091667478583530316">
+    <file name="TestSideTransform_NodeWithComplexReference_CustomRightAction_Test.java">
+      <node id="4091667478583530316" at="19,78,20,60" concept="6" />
+      <node id="4091667478583530316" at="24,100,25,36" concept="1" />
+      <node id="4091667478583530316" at="30,52,31,19" concept="6" />
+      <node id="4091667478583530316" at="35,51,36,72" concept="1" />
+      <node id="4091667478583530326" at="36,72,37,33" concept="1" />
+      <node id="4091667478583530327" at="37,33,38,71" concept="1" />
+      <node id="4091667478583530316" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="4091667478583530316" at="19,0,22,0" concept="0" trace="TestSideTransform_NodeWithComplexReference_CustomRightAction_Test#()V" />
+      <node id="4091667478583530316" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="4091667478583530316" at="23,0,27,0" concept="2" trace="test_TestSideTransform_NodeWithComplexReference_CustomRightAction#()V" />
+      <node id="4091667478583530316" at="34,0,40,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="4091667478583530316" at="19,78,20,60" />
+      <scope id="4091667478583530316" at="24,100,25,36" />
+      <scope id="4091667478583530316" at="30,52,31,19" />
+      <scope id="4091667478583530316" at="19,0,22,0" />
+      <scope id="4091667478583530316" at="30,0,33,0">
+        <var name="owner" id="4091667478583530316" />
+      </scope>
+      <scope id="4091667478583530316" at="35,51,38,71" />
+      <scope id="4091667478583530316" at="23,0,27,0" />
+      <scope id="4091667478583530316" at="34,0,40,0" />
+      <unit id="4091667478583530316" at="28,0,41,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransform_NodeWithComplexReference_CustomRightAction_Test$TestBody" />
+      <unit id="4091667478583530316" at="14,0,42,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransform_NodeWithComplexReference_CustomRightAction_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:b4f50ed2-df75-4f06-8889-d503cb129f2d(jetbrains.mps.lang.editor.menus.sideTransform.tests.tests@tests)/5651034758630079706">
+    <file name="TestSideTransformExceptionActionDescriptionText_Test.java">
+      <node id="5651034758630079706" at="22,65,23,60" concept="6" />
+      <node id="5651034758630079706" at="27,87,28,36" concept="1" />
+      <node id="5651034758630079706" at="33,52,34,19" concept="6" />
+      <node id="5651034758630079706" at="38,51,39,53" concept="1" />
+      <node id="5651034758630079709" at="39,53,40,22" concept="1" />
+      <node id="5651034758630079710" at="40,22,41,71" concept="1" />
+      <node id="5651034758630079712" at="41,71,42,100" concept="3" />
+      <node id="5651034758630079718" at="42,100,43,110" concept="1" />
+      <node id="5651034758630079728" at="43,110,44,0" concept="4" />
+      <node id="3676420103152652834" at="48,69,49,62" concept="1" />
+      <node id="5651034758630079706" at="19,0,21,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="5651034758630079706" at="22,0,25,0" concept="0" trace="TestSideTransformExceptionActionDescriptionText_Test#()V" />
+      <node id="5651034758630079706" at="33,0,36,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5651034758630079706" at="26,0,30,0" concept="2" trace="test_TestSideTransformExceptionActionDescriptionText#()V" />
+      <node id="5651034758630079706" at="47,0,51,0" concept="2" trace="populateExpectedEvents#(Ljetbrains/mps/testbench/util/CachingAppender;)V" />
+      <node id="5651034758630079706" at="37,0,46,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="5651034758630079706" at="22,65,23,60" />
+      <scope id="5651034758630079706" at="27,87,28,36" />
+      <scope id="5651034758630079706" at="33,52,34,19" />
+      <scope id="5651034758630079706" at="48,69,49,62" />
+      <scope id="5651034758630079706" at="22,0,25,0" />
+      <scope id="5651034758630079706" at="33,0,36,0">
+        <var name="owner" id="5651034758630079706" />
+      </scope>
+      <scope id="5651034758630079706" at="26,0,30,0" />
+      <scope id="5651034758630079706" at="47,0,51,0">
+        <var name="appender" id="5651034758630079706" />
+      </scope>
+      <scope id="5651034758630079706" at="38,51,44,0">
+        <var name="nodeSubstituteChooser" id="5651034758630079713" />
+      </scope>
+      <scope id="5651034758630079706" at="37,0,46,0" />
+      <unit id="5651034758630079706" at="31,0,52,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransformExceptionActionDescriptionText_Test$TestBody" />
+      <unit id="5651034758630079706" at="17,0,53,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransformExceptionActionDescriptionText_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:b4f50ed2-df75-4f06-8889-d503cb129f2d(jetbrains.mps.lang.editor.menus.sideTransform.tests.tests@tests)/5651034758630093194">
+    <file name="TestSideTransformExceptionActionGroup_Test.java">
+      <node id="5651034758630093194" at="22,55,23,60" concept="6" />
+      <node id="5651034758630093194" at="27,77,28,36" concept="1" />
+      <node id="5651034758630093194" at="33,52,34,19" concept="6" />
+      <node id="5651034758630093194" at="38,51,39,53" concept="1" />
+      <node id="5651034758630093197" at="39,53,40,22" concept="1" />
+      <node id="5651034758630093198" at="40,22,41,71" concept="1" />
+      <node id="5651034758630093200" at="41,71,42,100" concept="3" />
+      <node id="5651034758630093206" at="42,100,43,110" concept="1" />
+      <node id="5651034758630093216" at="43,110,44,0" concept="4" />
+      <node id="5651034758630093195" at="48,69,49,62" concept="1" />
+      <node id="5651034758630093194" at="19,0,21,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="5651034758630093194" at="22,0,25,0" concept="0" trace="TestSideTransformExceptionActionGroup_Test#()V" />
+      <node id="5651034758630093194" at="33,0,36,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5651034758630093194" at="26,0,30,0" concept="2" trace="test_TestSideTransformExceptionActionGroup#()V" />
+      <node id="5651034758630093194" at="47,0,51,0" concept="2" trace="populateExpectedEvents#(Ljetbrains/mps/testbench/util/CachingAppender;)V" />
+      <node id="5651034758630093194" at="37,0,46,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="5651034758630093194" at="22,55,23,60" />
+      <scope id="5651034758630093194" at="27,77,28,36" />
+      <scope id="5651034758630093194" at="33,52,34,19" />
+      <scope id="5651034758630093194" at="48,69,49,62" />
+      <scope id="5651034758630093194" at="22,0,25,0" />
+      <scope id="5651034758630093194" at="33,0,36,0">
+        <var name="owner" id="5651034758630093194" />
+      </scope>
+      <scope id="5651034758630093194" at="26,0,30,0" />
+      <scope id="5651034758630093194" at="47,0,51,0">
+        <var name="appender" id="5651034758630093194" />
+      </scope>
+      <scope id="5651034758630093194" at="38,51,44,0">
+        <var name="nodeSubstituteChooser" id="5651034758630093201" />
+      </scope>
+      <scope id="5651034758630093194" at="37,0,46,0" />
+      <unit id="5651034758630093194" at="31,0,52,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransformExceptionActionGroup_Test$TestBody" />
+      <unit id="5651034758630093194" at="17,0,53,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransformExceptionActionGroup_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:b4f50ed2-df75-4f06-8889-d503cb129f2d(jetbrains.mps.lang.editor.menus.sideTransform.tests.tests@tests)/5651034758630104588">
+    <file name="TestSideTransformExceptionActionIcon_Test.java">
+      <node id="5651034758630104588" at="21,54,22,60" concept="6" />
+      <node id="5651034758630104588" at="26,76,27,36" concept="1" />
+      <node id="5651034758630104588" at="32,52,33,19" concept="6" />
+      <node id="5651034758630104588" at="37,51,38,53" concept="1" />
+      <node id="5651034758630104590" at="38,53,39,22" concept="1" />
+      <node id="5651034758630104591" at="39,22,40,71" concept="1" />
+      <node id="5651034758630104593" at="40,71,41,100" concept="3" />
+      <node id="5651034758630104599" at="41,100,42,110" concept="1" />
+      <node id="5651034758630104609" at="42,110,43,0" concept="4" />
+      <node id="5651034758630104588" at="18,0,20,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="5651034758630104588" at="21,0,24,0" concept="0" trace="TestSideTransformExceptionActionIcon_Test#()V" />
+      <node id="5651034758630104588" at="32,0,35,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5651034758630104588" at="25,0,29,0" concept="2" trace="test_TestSideTransformExceptionActionIcon#()V" />
+      <node id="5651034758630104588" at="36,0,45,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="5651034758630104588" at="21,54,22,60" />
+      <scope id="5651034758630104588" at="26,76,27,36" />
+      <scope id="5651034758630104588" at="32,52,33,19" />
+      <scope id="5651034758630104588" at="21,0,24,0" />
+      <scope id="5651034758630104588" at="32,0,35,0">
+        <var name="owner" id="5651034758630104588" />
+      </scope>
+      <scope id="5651034758630104588" at="25,0,29,0" />
+      <scope id="5651034758630104588" at="37,51,43,0">
+        <var name="nodeSubstituteChooser" id="5651034758630104594" />
+      </scope>
+      <scope id="5651034758630104588" at="36,0,45,0" />
+      <unit id="5651034758630104588" at="30,0,46,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransformExceptionActionIcon_Test$TestBody" />
+      <unit id="5651034758630104588" at="16,0,47,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransformExceptionActionIcon_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:b4f50ed2-df75-4f06-8889-d503cb129f2d(jetbrains.mps.lang.editor.menus.sideTransform.tests.tests@tests)/5651034758630110621">
+    <file name="TestSideTransformExceptionActionText_Test.java">
+      <node id="5651034758630110621" at="22,54,23,60" concept="6" />
+      <node id="5651034758630110621" at="27,76,28,36" concept="1" />
+      <node id="5651034758630110621" at="33,52,34,19" concept="6" />
+      <node id="5651034758630110621" at="38,51,39,53" concept="1" />
+      <node id="5651034758630110624" at="39,53,40,22" concept="1" />
+      <node id="5651034758630110625" at="40,22,41,71" concept="1" />
+      <node id="5651034758630110627" at="41,71,42,100" concept="3" />
+      <node id="5651034758630110633" at="42,100,43,110" concept="1" />
+      <node id="5651034758630110643" at="43,110,44,0" concept="4" />
+      <node id="5651034758630110622" at="48,69,49,62" concept="1" />
+      <node id="5651034758630110621" at="19,0,21,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="5651034758630110621" at="22,0,25,0" concept="0" trace="TestSideTransformExceptionActionText_Test#()V" />
+      <node id="5651034758630110621" at="33,0,36,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5651034758630110621" at="26,0,30,0" concept="2" trace="test_TestSideTransformExceptionActionText#()V" />
+      <node id="5651034758630110621" at="47,0,51,0" concept="2" trace="populateExpectedEvents#(Ljetbrains/mps/testbench/util/CachingAppender;)V" />
+      <node id="5651034758630110621" at="37,0,46,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="5651034758630110621" at="22,54,23,60" />
+      <scope id="5651034758630110621" at="27,76,28,36" />
+      <scope id="5651034758630110621" at="33,52,34,19" />
+      <scope id="5651034758630110621" at="48,69,49,62" />
+      <scope id="5651034758630110621" at="22,0,25,0" />
+      <scope id="5651034758630110621" at="33,0,36,0">
+        <var name="owner" id="5651034758630110621" />
+      </scope>
+      <scope id="5651034758630110621" at="26,0,30,0" />
+      <scope id="5651034758630110621" at="47,0,51,0">
+        <var name="appender" id="5651034758630110621" />
+      </scope>
+      <scope id="5651034758630110621" at="38,51,44,0">
+        <var name="nodeSubstituteChooser" id="5651034758630110628" />
+      </scope>
+      <scope id="5651034758630110621" at="37,0,46,0" />
+      <unit id="5651034758630110621" at="31,0,52,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransformExceptionActionText_Test$TestBody" />
+      <unit id="5651034758630110621" at="17,0,53,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransformExceptionActionText_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:b4f50ed2-df75-4f06-8889-d503cb129f2d(jetbrains.mps.lang.editor.menus.sideTransform.tests.tests@tests)/5651034758630125932">
+    <file name="TestSideTransformExceptionIncludeMenu_Test.java">
+      <node id="5651034758630125932" at="22,55,23,60" concept="6" />
+      <node id="5651034758630125932" at="27,77,28,36" concept="1" />
+      <node id="5651034758630125932" at="33,52,34,19" concept="6" />
+      <node id="5651034758630125932" at="38,51,39,53" concept="1" />
+      <node id="5651034758630125935" at="39,53,40,22" concept="1" />
+      <node id="5651034758630125936" at="40,22,41,71" concept="1" />
+      <node id="5651034758630125938" at="41,71,42,100" concept="3" />
+      <node id="5651034758630125944" at="42,100,43,110" concept="1" />
+      <node id="5651034758630125954" at="43,110,44,0" concept="4" />
+      <node id="5651034758630125933" at="48,69,49,62" concept="1" />
+      <node id="5651034758630125932" at="19,0,21,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="5651034758630125932" at="22,0,25,0" concept="0" trace="TestSideTransformExceptionIncludeMenu_Test#()V" />
+      <node id="5651034758630125932" at="33,0,36,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5651034758630125932" at="26,0,30,0" concept="2" trace="test_TestSideTransformExceptionIncludeMenu#()V" />
+      <node id="5651034758630125932" at="47,0,51,0" concept="2" trace="populateExpectedEvents#(Ljetbrains/mps/testbench/util/CachingAppender;)V" />
+      <node id="5651034758630125932" at="37,0,46,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="5651034758630125932" at="22,55,23,60" />
+      <scope id="5651034758630125932" at="27,77,28,36" />
+      <scope id="5651034758630125932" at="33,52,34,19" />
+      <scope id="5651034758630125932" at="48,69,49,62" />
+      <scope id="5651034758630125932" at="22,0,25,0" />
+      <scope id="5651034758630125932" at="33,0,36,0">
+        <var name="owner" id="5651034758630125932" />
+      </scope>
+      <scope id="5651034758630125932" at="26,0,30,0" />
+      <scope id="5651034758630125932" at="47,0,51,0">
+        <var name="appender" id="5651034758630125932" />
+      </scope>
+      <scope id="5651034758630125932" at="38,51,44,0">
+        <var name="nodeSubstituteChooser" id="5651034758630125939" />
+      </scope>
+      <scope id="5651034758630125932" at="37,0,46,0" />
+      <unit id="5651034758630125932" at="31,0,52,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransformExceptionIncludeMenu_Test$TestBody" />
+      <unit id="5651034758630125932" at="17,0,53,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransformExceptionIncludeMenu_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:b4f50ed2-df75-4f06-8889-d503cb129f2d(jetbrains.mps.lang.editor.menus.sideTransform.tests.tests@tests)/5651034758630134402">
+    <file name="TestSideTransformExceptionActionParameterized_Test.java">
+      <node id="5651034758630134402" at="22,63,23,60" concept="6" />
+      <node id="5651034758630134402" at="27,85,28,36" concept="1" />
+      <node id="5651034758630134402" at="33,52,34,19" concept="6" />
+      <node id="5651034758630134402" at="38,51,39,53" concept="1" />
+      <node id="5651034758630134405" at="39,53,40,22" concept="1" />
+      <node id="5651034758630134406" at="40,22,41,71" concept="1" />
+      <node id="5651034758630134408" at="41,71,42,100" concept="3" />
+      <node id="5651034758630134414" at="42,100,43,110" concept="1" />
+      <node id="5651034758630134424" at="43,110,44,0" concept="4" />
+      <node id="5651034758630134403" at="48,69,49,62" concept="1" />
+      <node id="5651034758630134402" at="19,0,21,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="5651034758630134402" at="22,0,25,0" concept="0" trace="TestSideTransformExceptionActionParameterized_Test#()V" />
+      <node id="5651034758630134402" at="33,0,36,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5651034758630134402" at="26,0,30,0" concept="2" trace="test_TestSideTransformExceptionActionParameterized#()V" />
+      <node id="5651034758630134402" at="47,0,51,0" concept="2" trace="populateExpectedEvents#(Ljetbrains/mps/testbench/util/CachingAppender;)V" />
+      <node id="5651034758630134402" at="37,0,46,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="5651034758630134402" at="22,63,23,60" />
+      <scope id="5651034758630134402" at="27,85,28,36" />
+      <scope id="5651034758630134402" at="33,52,34,19" />
+      <scope id="5651034758630134402" at="48,69,49,62" />
+      <scope id="5651034758630134402" at="22,0,25,0" />
+      <scope id="5651034758630134402" at="33,0,36,0">
+        <var name="owner" id="5651034758630134402" />
+      </scope>
+      <scope id="5651034758630134402" at="26,0,30,0" />
+      <scope id="5651034758630134402" at="47,0,51,0">
+        <var name="appender" id="5651034758630134402" />
+      </scope>
+      <scope id="5651034758630134402" at="38,51,44,0">
+        <var name="nodeSubstituteChooser" id="5651034758630134409" />
+      </scope>
+      <scope id="5651034758630134402" at="37,0,46,0" />
+      <unit id="5651034758630134402" at="31,0,52,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransformExceptionActionParameterized_Test$TestBody" />
+      <unit id="5651034758630134402" at="17,0,53,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransformExceptionActionParameterized_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:b4f50ed2-df75-4f06-8889-d503cb129f2d(jetbrains.mps.lang.editor.menus.sideTransform.tests.tests@tests)/5651034758630142872">
+    <file name="TestSideTransformExceptionSubmenu_Test.java">
+      <node id="5651034758630142872" at="22,51,23,60" concept="6" />
+      <node id="5651034758630142872" at="27,73,28,36" concept="1" />
+      <node id="5651034758630142872" at="33,52,34,19" concept="6" />
+      <node id="5651034758630142872" at="38,51,39,53" concept="1" />
+      <node id="5651034758630142875" at="39,53,40,22" concept="1" />
+      <node id="5651034758630142876" at="40,22,41,71" concept="1" />
+      <node id="5651034758630142878" at="41,71,42,100" concept="3" />
+      <node id="5651034758630142884" at="42,100,43,110" concept="1" />
+      <node id="5651034758630142894" at="43,110,44,0" concept="4" />
+      <node id="5651034758630142873" at="48,69,49,62" concept="1" />
+      <node id="5651034758630142872" at="19,0,21,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="5651034758630142872" at="22,0,25,0" concept="0" trace="TestSideTransformExceptionSubmenu_Test#()V" />
+      <node id="5651034758630142872" at="33,0,36,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5651034758630142872" at="26,0,30,0" concept="2" trace="test_TestSideTransformExceptionSubmenu#()V" />
+      <node id="5651034758630142872" at="47,0,51,0" concept="2" trace="populateExpectedEvents#(Ljetbrains/mps/testbench/util/CachingAppender;)V" />
+      <node id="5651034758630142872" at="37,0,46,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="5651034758630142872" at="22,51,23,60" />
+      <scope id="5651034758630142872" at="27,73,28,36" />
+      <scope id="5651034758630142872" at="33,52,34,19" />
+      <scope id="5651034758630142872" at="48,69,49,62" />
+      <scope id="5651034758630142872" at="22,0,25,0" />
+      <scope id="5651034758630142872" at="33,0,36,0">
+        <var name="owner" id="5651034758630142872" />
+      </scope>
+      <scope id="5651034758630142872" at="26,0,30,0" />
+      <scope id="5651034758630142872" at="47,0,51,0">
+        <var name="appender" id="5651034758630142872" />
+      </scope>
+      <scope id="5651034758630142872" at="38,51,44,0">
+        <var name="nodeSubstituteChooser" id="5651034758630142879" />
+      </scope>
+      <scope id="5651034758630142872" at="37,0,46,0" />
+      <unit id="5651034758630142872" at="31,0,52,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransformExceptionSubmenu_Test$TestBody" />
+      <unit id="5651034758630142872" at="17,0,53,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransformExceptionSubmenu_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:b4f50ed2-df75-4f06-8889-d503cb129f2d(jetbrains.mps.lang.editor.menus.sideTransform.tests.tests@tests)/5651034758630149670">
+    <file name="TestSideTransformExceptionWrapSubstituteMenu_Test.java">
+      <node id="5651034758630149670" at="22,62,23,60" concept="6" />
+      <node id="5651034758630149670" at="27,84,28,36" concept="1" />
+      <node id="5651034758630149670" at="33,52,34,19" concept="6" />
+      <node id="5651034758630149670" at="38,51,39,53" concept="1" />
+      <node id="5651034758630149673" at="39,53,40,22" concept="1" />
+      <node id="5651034758630149674" at="40,22,41,71" concept="1" />
+      <node id="5651034758630149676" at="41,71,42,100" concept="3" />
+      <node id="5651034758630149682" at="42,100,43,110" concept="1" />
+      <node id="5651034758630149692" at="43,110,44,0" concept="4" />
+      <node id="5651034758630149671" at="48,69,49,62" concept="1" />
+      <node id="5651034758630149670" at="19,0,21,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="5651034758630149670" at="22,0,25,0" concept="0" trace="TestSideTransformExceptionWrapSubstituteMenu_Test#()V" />
+      <node id="5651034758630149670" at="33,0,36,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5651034758630149670" at="26,0,30,0" concept="2" trace="test_TestSideTransformExceptionWrapSubstituteMenu#()V" />
+      <node id="5651034758630149670" at="47,0,51,0" concept="2" trace="populateExpectedEvents#(Ljetbrains/mps/testbench/util/CachingAppender;)V" />
+      <node id="5651034758630149670" at="37,0,46,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="5651034758630149670" at="22,62,23,60" />
+      <scope id="5651034758630149670" at="27,84,28,36" />
+      <scope id="5651034758630149670" at="33,52,34,19" />
+      <scope id="5651034758630149670" at="48,69,49,62" />
+      <scope id="5651034758630149670" at="22,0,25,0" />
+      <scope id="5651034758630149670" at="33,0,36,0">
+        <var name="owner" id="5651034758630149670" />
+      </scope>
+      <scope id="5651034758630149670" at="26,0,30,0" />
+      <scope id="5651034758630149670" at="47,0,51,0">
+        <var name="appender" id="5651034758630149670" />
+      </scope>
+      <scope id="5651034758630149670" at="38,51,44,0">
+        <var name="nodeSubstituteChooser" id="5651034758630149677" />
+      </scope>
+      <scope id="5651034758630149670" at="37,0,46,0" />
+      <unit id="5651034758630149670" at="31,0,52,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransformExceptionWrapSubstituteMenu_Test$TestBody" />
+      <unit id="5651034758630149670" at="17,0,53,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransformExceptionWrapSubstituteMenu_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:b4f50ed2-df75-4f06-8889-d503cb129f2d(jetbrains.mps.lang.editor.menus.sideTransform.tests.tests@tests)/6199005252790639536">
+    <file name="TestSideTransform_SimpleNode_DefaultRightAction_Test.java">
+      <node id="6199005252790639536" at="19,65,20,60" concept="6" />
+      <node id="6199005252790639536" at="24,87,25,36" concept="1" />
+      <node id="6199005252790639536" at="30,52,31,19" concept="6" />
+      <node id="6199005252790639536" at="35,51,36,72" concept="1" />
+      <node id="6199005252790662725" at="36,72,37,34" concept="1" />
+      <node id="6199005252790662730" at="37,34,38,71" concept="1" />
+      <node id="6199005252790639536" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="6199005252790639536" at="19,0,22,0" concept="0" trace="TestSideTransform_SimpleNode_DefaultRightAction_Test#()V" />
+      <node id="6199005252790639536" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="6199005252790639536" at="23,0,27,0" concept="2" trace="test_TestSideTransform_SimpleNode_DefaultRightAction#()V" />
+      <node id="6199005252790639536" at="34,0,40,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="6199005252790639536" at="19,65,20,60" />
+      <scope id="6199005252790639536" at="24,87,25,36" />
+      <scope id="6199005252790639536" at="30,52,31,19" />
+      <scope id="6199005252790639536" at="19,0,22,0" />
+      <scope id="6199005252790639536" at="30,0,33,0">
+        <var name="owner" id="6199005252790639536" />
+      </scope>
+      <scope id="6199005252790639536" at="35,51,38,71" />
+      <scope id="6199005252790639536" at="23,0,27,0" />
+      <scope id="6199005252790639536" at="34,0,40,0" />
+      <unit id="6199005252790639536" at="28,0,41,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransform_SimpleNode_DefaultRightAction_Test$TestBody" />
+      <unit id="6199005252790639536" at="14,0,42,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransform_SimpleNode_DefaultRightAction_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:b4f50ed2-df75-4f06-8889-d503cb129f2d(jetbrains.mps.lang.editor.menus.sideTransform.tests.tests@tests)/6199005252791087851">
+    <file name="TestSideTransform_SimpleNode_CustomRightAction_Test.java">
+      <node id="6199005252791087851" at="19,64,20,60" concept="6" />
+      <node id="6199005252791087851" at="24,86,25,36" concept="1" />
+      <node id="6199005252791087851" at="30,52,31,19" concept="6" />
+      <node id="6199005252791087851" at="35,51,36,72" concept="1" />
+      <node id="6199005252791087859" at="36,72,37,33" concept="1" />
+      <node id="6199005252791087860" at="37,33,38,71" concept="1" />
+      <node id="6199005252791087851" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="6199005252791087851" at="19,0,22,0" concept="0" trace="TestSideTransform_SimpleNode_CustomRightAction_Test#()V" />
+      <node id="6199005252791087851" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="6199005252791087851" at="23,0,27,0" concept="2" trace="test_TestSideTransform_SimpleNode_CustomRightAction#()V" />
+      <node id="6199005252791087851" at="34,0,40,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="6199005252791087851" at="19,64,20,60" />
+      <scope id="6199005252791087851" at="24,86,25,36" />
+      <scope id="6199005252791087851" at="30,52,31,19" />
+      <scope id="6199005252791087851" at="19,0,22,0" />
+      <scope id="6199005252791087851" at="30,0,33,0">
+        <var name="owner" id="6199005252791087851" />
+      </scope>
+      <scope id="6199005252791087851" at="35,51,38,71" />
+      <scope id="6199005252791087851" at="23,0,27,0" />
+      <scope id="6199005252791087851" at="34,0,40,0" />
+      <unit id="6199005252791087851" at="28,0,41,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransform_SimpleNode_CustomRightAction_Test$TestBody" />
+      <unit id="6199005252791087851" at="14,0,42,0" name="jetbrains.mps.lang.editor.menus.sideTransform.tests.tests.TestSideTransform_SimpleNode_CustomRightAction_Test" />
+    </file>
+  </root>
+</debug-info>
+

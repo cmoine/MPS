@@ -4,28 +4,39 @@ package jetbrains.mps.refactoringTest;
 
 import jetbrains.mps.MPSLaunch;
 import jetbrains.mps.lang.test.runtime.BaseTransformationTest;
-import org.junit.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCacheExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCache;
+import org.junit.jupiter.api.Test;
 import jetbrains.mps.lang.test.runtime.BaseTestBody;
-import junit.framework.Assert;
+import jetbrains.mps.lang.test.runtime.TransformationTest;
+import org.junit.Assert;
 import jetbrains.mps.baseLanguage.util.plugin.refactorings.InlineMethodModel;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 @MPSLaunch
 public class InlineWithNoSourcesAttached_Test extends BaseTransformationTest {
-  @Test
-  public void test_InlineWithNoSourcesAttached() throws Throwable {
-    initTest("${mps_home}", "r:4dc6ffb5-4bbb-4773-b0b7-e52989ceb56f(jetbrains.mps.refactoringTest@tests)", false);
-    runTest("jetbrains.mps.refactoringTest.InlineWithNoSourcesAttached_Test$TestBody", "test_InlineWithNoSourcesAttached", true);
+  @RegisterExtension
+  private static final TestParametersCacheExtension ourParametersCacheExtension = new TestParametersCacheExtension(new TestParametersCache(InlineWithNoSourcesAttached_Test.class, "${mps_home}", "r:4dc6ffb5-4bbb-4773-b0b7-e52989ceb56f(jetbrains.mps.refactoringTest@tests)", false));
+
+  public InlineWithNoSourcesAttached_Test() {
+    super(ourParametersCacheExtension.getParametersCache());
   }
 
-  @MPSLaunch
-  public static class TestBody extends BaseTestBody {
-    public void test_InlineWithNoSourcesAttached() throws Exception {
-      addNodeById("1230052989307");
-      Assert.assertTrue(new InlineMethodModel(SNodeOperations.cast(getNodeById("1230052989317"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x118154a6332L, "jetbrains.mps.baseLanguage.structure.InstanceMethodCallOperation"))).getErrors() != null);
+  @Test
+  public void test_InlineWithNoSourcesAttached() throws Throwable {
+    new TestBody(this).test_InlineWithNoSourcesAttached();
+  }
+
+  /*package*/ static class TestBody extends BaseTestBody {
+
+    /*package*/ TestBody(TransformationTest owner) {
+      super(owner);
     }
 
+    public void test_InlineWithNoSourcesAttached() throws Exception {
+      runWithinCommand(() -> addNodeById("1230052989307"));
+      runWithinCommand(() -> Assert.assertTrue(new InlineMethodModel(getNodeById("1230052989317")).getErrors() != null));
+    }
 
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import org.jetbrains.mps.openapi.model.SNode;
 
 /**
  * Factory to instantiate {@link jetbrains.mps.openapi.editor.Editor editor} for a node.
- * It's {@link EditorOpenHandler} done right - no IOperationContext, and it doesn't open editors,
+ * It's {@code EditorOpenHandler} done right - no IOperationContext, and it doesn't open editors,
  * it instantiates (hence factory) component, and actual code to open an editor is platform's responsibility.
  * <p/>
  * Instances of the factory are registered with {@link #EXT_POINT} extension point, within Project area (thus can

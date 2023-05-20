@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  */
 package jetbrains.mps.generator.runtime;
 
-import jetbrains.mps.generator.impl.interpreted.TemplateModuleInterpreted;
 import jetbrains.mps.project.structure.modules.mappingpriorities.MappingConfig_AbstractRef;
 import jetbrains.mps.project.structure.modules.mappingpriorities.MappingConfig_ExternalRef;
 import jetbrains.mps.project.structure.modules.mappingpriorities.MappingConfig_RefAllGlobal;
@@ -24,13 +23,7 @@ import jetbrains.mps.project.structure.modules.mappingpriorities.MappingConfig_R
 import jetbrains.mps.project.structure.modules.mappingpriorities.MappingConfig_SimpleRef;
 import jetbrains.mps.project.structure.modules.mappingpriorities.MappingPriorityRule;
 import jetbrains.mps.project.structure.modules.mappingpriorities.RuleType;
-import jetbrains.mps.smodel.Generator;
-import jetbrains.mps.smodel.ModuleRepositoryFacade;
-import jetbrains.mps.smodel.language.LanguageRuntime;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.jetbrains.mps.openapi.model.SNode;
-import org.jetbrains.mps.openapi.model.SNodeReference;
 import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
 
 import java.util.ArrayList;
@@ -44,10 +37,8 @@ import java.util.List;
  */
 public class TemplateUtil {
 
-  private static final Logger LOG = LogManager.getLogger(TemplateUtil.class);
-
   public static Collection<SNode> singletonList(SNode node) {
-    return node != null ? Collections.singletonList(node) : Collections.<SNode>emptyList();
+    return node != null ? Collections.singletonList(node) : Collections.emptyList();
   }
 
   public static Collection<SNode> asList(SNode... nodes) {
@@ -55,7 +46,7 @@ public class TemplateUtil {
       return Collections.emptyList();
     }
 
-    List<SNode> result = new ArrayList<SNode>(nodes.length);
+    List<SNode> result = new ArrayList<>(nodes.length);
     for (SNode node : nodes) {
       if (node != null) {
         result.add(node);
@@ -86,7 +77,7 @@ public class TemplateUtil {
       }
     }
 
-    List<SNode> result = new ArrayList<SNode>(size);
+    List<SNode> result = new ArrayList<>(size);
     for (Object o : nodesOrCollectionOfNodes) {
       if (o instanceof SNode) {
         result.add((SNode) o);
@@ -102,30 +93,11 @@ public class TemplateUtil {
   }
 
   public static <T> Iterable<T> asNotNull(final Iterable<T> objects) {
-    return objects == null ? Collections.<T>emptyList() : objects;
+    return objects == null ? Collections.emptyList() : objects;
   }
 
   public static <T> Collection<T> asCollection(final T... objects) {
     return Arrays.asList(objects);
-  }
-
-  /**
-   * @throws IllegalArgumentException if actual number of arguments doesn't match expected
-   */
-  public static void assertTemplateParametersCount(SNodeReference template, int expected, int actual) throws IllegalArgumentException {
-    if (expected != actual) {
-      final String msg = String.format("Wrong number of arguments for template %s. Expected %d, actual count is %d", template, 0, actual);
-      throw new IllegalArgumentException(msg);
-    }
-  }
-
-  public static TemplateModule createInterpretedGenerator(LanguageRuntime sourceLanguage, String moduleReference) {
-    Generator g = ModuleRepositoryFacade.getInstance().getModule(PersistenceFacade.getInstance().createModuleReference(moduleReference), Generator.class);
-    if (g == null) {
-      LOG.error("language " + sourceLanguage.getNamespace() + " doesn't contain generator `" + moduleReference + "': try to regenerate language");
-      return null;
-    }
-    return new TemplateModuleInterpreted(sourceLanguage, g);
   }
 
   public static TemplateMappingPriorityRule createStrictlyBeforeRule(TemplateMappingConfigRef left, TemplateMappingConfigRef right) {
@@ -184,10 +156,11 @@ public class TemplateUtil {
     return result;
   }
 
-  public static TemplateMappingConfigRef createRefNormal(String modelUID, String nodeUID) {
+  public static TemplateMappingConfigRef createRefNormal(String modelUID, String nodeUID, String mapConfigName) {
     MappingConfig_SimpleRef result = new MappingConfig_SimpleRef();
     result.setModelUID(modelUID);
     result.setNodeID(nodeUID);
+    result.setMapConfigName(mapConfigName);
     return result;
   }
 

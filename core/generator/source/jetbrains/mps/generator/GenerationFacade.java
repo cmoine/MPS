@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,102 +15,45 @@
  */
 package jetbrains.mps.generator;
 
-import jetbrains.mps.cleanup.CleanupManager;
-import jetbrains.mps.generator.GeneratorTask.Factory;
-import jetbrains.mps.generator.generationTypes.IGenerationHandler;
+import jetbrains.mps.extapi.model.GeneratableSModel;
 import jetbrains.mps.generator.impl.GenControllerContext;
 import jetbrains.mps.generator.impl.GenerationController;
 import jetbrains.mps.generator.impl.GeneratorLoggerAdapter;
 import jetbrains.mps.generator.impl.ModelStreamManager;
 import jetbrains.mps.generator.impl.ModelStreamProviderImpl;
-import jetbrains.mps.generator.impl.dependencies.GenerationDependencies;
-import jetbrains.mps.generator.impl.dependencies.GenerationDependenciesCache;
+import jetbrains.mps.generator.trace.TraceFacility;
 import jetbrains.mps.messages.IMessageHandler;
-import jetbrains.mps.progress.EmptyProgressMonitor;
-import jetbrains.mps.project.Project;
-import jetbrains.mps.smodel.IOperationContext;
-import jetbrains.mps.smodel.LanguageAspect;
-import jetbrains.mps.smodel.SModelStereotype;
-import jetbrains.mps.smodel.UndoHelper;
-import jetbrains.mps.util.Computable;
-import jetbrains.mps.util.SNodeOperations;
-import jetbrains.mps.util.annotation.ToRemove;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.mps.openapi.model.EditableSModel;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.module.SRepository;
-import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
 import org.jetbrains.mps.openapi.util.ProgressMonitor;
 
-import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 /**
- * Evgeny Gryaznov, 1/25/11
+ * Entry point to model transformation (aka generation) process. Populate with relevant context information:
+ * {@link #messages(IMessageHandler)}  to receive generator messages (optional);
+ * {@link #transients(TransientModelsProvider)} where to keep transient models (mandatory);
+ * {@link #taskHandler(GeneratorTaskListener)} get notified about progress (optional);
+ * {@link #trace(TraceFacility)} to get trace events (optional);
+ * then fire off with {@link #process(ProgressMonitor, List)}
+ *
+ * IMPLEMENTATION NOTE:
+ *  transformation requires model read lock for a repository of transformed model. At certain moments, it also requires write lock on a repository with
+ *  transient modules. Although I can (and would like to) hide appropriate locks inside TransientModelsProvider, now these are explicit and are outside
+ *  of the class to avoid accidental 'can't write from read'. Shall investigate if there's true need to expose transient modules in a repository right
+ *  from the very beginning. If yes, shall double efforts to get distinct repository for transient modules (so that only transient repo is write-locked,
+ *  while input model's repo is read-locked).
+ *
+ * @author Artem Tikhomirov
+ * @author Evgeny Gryaznov, 1/25/11
  */
 public final class GenerationFacade {
 
-  public static Collection<SModel> getModifiedModels(Collection<? extends SModel> models) {
-    Set<SModel> result = new LinkedHashSet<SModel>();
-    ModelGenerationStatusManager statusManager = ModelGenerationStatusManager.getInstance();
-    for (SModel sm : models) {
-      if (statusManager.generationRequired(sm)) {
-        result.add(sm);
-        continue;
-      }
-
-      // TODO regenerating all dependant models can be slow, option?
-      if (!(SModelStereotype.DESCRIPTOR.equals(SModelStereotype.getStereotype(sm)) || LanguageAspect.BEHAVIOR.is(sm) || LanguageAspect.CONSTRAINTS.is(sm))) {
-        // temporary solution: only descriptor/behavior/constraints models
-        continue;
-      }
-
-      final SRepository repository = sm.getRepository();
-      if (repository == null) {
-        // no idea how to treat a model which hands in the air; expect it to be editable and tell isChanged if desires re-generation
-        continue;
-      }
-      GenerationDependencies oldDependencies = GenerationDependenciesCache.getInstance().get(sm);
-      // FIXME use SRepository to pick proper GenerationDependenciesCache instance
-      if (oldDependencies == null) {
-        // TODO turn on when generated file will be mandatory
-        //result.add(sm);
-        continue;
-      }
-
-
-
-      Map<String, String> externalHashes = oldDependencies.getExternalHashes();
-      for (Entry<String, String> entry : externalHashes.entrySet()) {
-        String modelReference = entry.getKey();
-        SModel rmd = PersistenceFacade.getInstance().createModelReference(modelReference).resolve(repository);
-        if (rmd == null) {
-          result.add(sm);
-          break;
-        }
-        String oldHash = entry.getValue();
-        if (oldHash == null) {
-          continue;
-        }
-        String newHash = statusManager.currentHash(rmd);
-        if (newHash == null || !oldHash.equals(newHash)) {
-          result.add(sm);
-          break;
-        }
-      }
-    }
-
-    return result;
-  }
-
   public static boolean canGenerate(SModel sm) {
-    return SNodeOperations.isGeneratable(sm);
+    return sm instanceof GeneratableSModel && ((GeneratableSModel) sm).isGeneratable();
   }
 
 
@@ -120,6 +63,7 @@ public final class GenerationFacade {
   private TransientModelsProvider myTransientModelsProvider;
   private IMessageHandler myMessageHandler = IMessageHandler.NULL_HANDLER;
   private ModelStreamManager.Provider myStreamProvider;
+  private TraceFacility myTraceSession;
 
   public GenerationFacade(@NotNull SRepository repository, @NotNull GenerationOptions generationOptions) {
     myRepository = repository;
@@ -129,10 +73,10 @@ public final class GenerationFacade {
 
   /**
    * Optional handler to get notified about generation process
-   * @param taskHandler
+   * @param taskHandler receives notifications
    * @return <code>this</code> for convenience
    */
-  public GenerationFacade taskHandler(GeneratorTaskListener<GeneratorTask> taskHandler) {
+  public GenerationFacade taskHandler(@Nullable GeneratorTaskListener<GeneratorTask> taskHandler) {
     myTaskListener = taskHandler;
     return this;
   }
@@ -158,6 +102,19 @@ public final class GenerationFacade {
   }
 
   /**
+   * PROVISIONAL API, PLEASE DON'T USE OUTSIDE OF MPS
+   */
+  public GenerationFacade trace(@Nullable TraceFacility traceSession) {
+    // on one hand, I'd like to have control whether a transformation is traced (e.g. the one from Make should, some
+    // home-grown, e.g. evaluation, likely no). OTOH, would like to keep control over notification dispatch mechanism
+    // not to be abused. If I use ComponentHost to get TR in #process, it means every transformation get traced.
+    // Perhaps, could keep #trace(), but parameterize with ComponentHost, so that (a) it indicates intention to be traced
+    // and therefore, only transformations of interest would get traced, and (b) hides facility/session mediator
+    myTraceSession = traceSession;
+    return this;
+  }
+
+  /**
    * Configure access to auxiliary data associated with model
    * FIXME public
    * @param streamProvider facility to keep model-associated data
@@ -169,47 +126,24 @@ public final class GenerationFacade {
   }
 
   /**
-   * @deprecated use {@link #process(ProgressMonitor, List)} or {@link #process(ProgressMonitor, SModel)} instead
-   * @param invocationContext ignored, may be null
-   */
-  @Deprecated
-  @ToRemove(version = 3.4)
-  public static boolean generateModels(final Project p,
-      final List<? extends SModel> inputModels,
-      final IOperationContext invocationContext,
-      final IGenerationHandler generationHandler,
-      final ProgressMonitor monitor,
-      final IMessageHandler messages,
-      final GenerationOptions options,
-      @NotNull final TransientModelsProvider tmProvider) {
-
-    final GenerationFacade generationFacade = new GenerationFacade(p.getRepository(), options);
-    generationFacade.taskHandler(new LegacyTaskListener(generationHandler)).messages(messages).transients(tmProvider);
-    generationFacade.modelStreams(new ModelStreamProviderImpl());
-    final DefaultTaskBuilder<GeneratorTaskBase> tb = new DefaultTaskBuilder<GeneratorTaskBase>(new Factory<GeneratorTaskBase>() {
-      @Override
-      public GeneratorTaskBase create(SModel inputModel) {
-        return new GeneratorTaskBase(inputModel);
-      }
-    });
-    tb.addAll(inputModels);
-    return generationFacade.process0(monitor, tb.getResult());
-  }
-
-  /**
    * Generate single model. {@link GenerationFacade} instance can be reused then for other generation activities.
+   * IMPORTANT: unlike {@link #process(ProgressMonitor, List)}, requires model write lock (on a repository of TransientModelsProvider)
+   * as it needs to create and publish module with transient models.
    * @param monitor report progress/cancellation
    * @param model input
    * @return status object that describes generation outcome
    */
   public GenerationStatus process(@NotNull final ProgressMonitor monitor, @NotNull SModel model) {
     final GeneratorTaskListener<GeneratorTask> originalListener = myTaskListener;
-    final GenerationTaskRecorder<GeneratorTask> recorder = new GenerationTaskRecorder<GeneratorTask>(originalListener);
+    final GenerationTaskRecorder<GeneratorTask> recorder = new GenerationTaskRecorder<>(originalListener);
     myTaskListener = recorder;
     try {
       final GeneratorTaskBase task = new GeneratorTaskBase(model);
+      TransientModelsModule tm = myTransientModelsProvider.createModule(model.getModule().getModuleName());
+      myTransientModelsProvider.associate(task, tm);
       modelStreams(new ModelStreamProviderImpl());
       process0(monitor, Collections.singletonList(task));
+      myTransientModelsProvider.publishAll();
       return recorder.getRecorded(task);
     } finally {
       myTaskListener = originalListener;
@@ -217,7 +151,8 @@ public final class GenerationFacade {
   }
 
   /**
-   * Generate sequence of models
+   * Feed transformation process with sequence of task. Tasks are processed in the order given. If a task deals with a model
+   * from a repository, calling code shall ensure respective read lock.
    * @param monitor report progress/cancellation
    * @param tasks models to generate
    */
@@ -226,31 +161,12 @@ public final class GenerationFacade {
     process0(monitor, tasks);
   }
 
-  /**
-   * @return <code>true</code> to indicate generation success (what does constitute a success is, alas, undefined)
-   */
-  private boolean process0(@NotNull final ProgressMonitor monitor, @NotNull final List<? extends GeneratorTask> tasks) {
-    final boolean[] result = new boolean[1];
+  private void process0(@NotNull final ProgressMonitor monitor, @NotNull final List<? extends GeneratorTask> tasks) {
     myTransientModelsProvider.startGeneration(myGenerationOptions.getNumberOfModelsToKeep());
 
     final GeneratorLoggerAdapter logger = new GeneratorLoggerAdapter(myMessageHandler, myGenerationOptions.isShowInfo(), myGenerationOptions.isShowWarnings());
 
-    myRepository.getModelAccess().runWriteAction(new Runnable() {
-      @Override
-      public void run() {
-        for (GeneratorTask t : tasks) {
-          SModel d = t.getModel();
-          if (d instanceof EditableSModel && ((EditableSModel) d).needsReloading()) {
-            ((EditableSModel) d).reloadFromSource();
-            logger.info("Model " + d + " reloaded from disk.");
-          }
-          myTransientModelsProvider.createModule(d.getModule());
-        }
-      }
-    });
-    myTransientModelsProvider.initCheckpointModule(); // at the moment, starts write action, thus shall start outside of read
-
-    GenControllerContext ctx = new GenControllerContext(myRepository, myGenerationOptions, myTransientModelsProvider, myStreamProvider);
+    GenControllerContext ctx = new GenControllerContext(myRepository, myGenerationOptions, myTransientModelsProvider, myStreamProvider, myTraceSession);
     GeneratorTaskListener<GeneratorTask> taskListener;
     if (myTaskListener != null) {
       taskListener = myTaskListener;
@@ -259,22 +175,7 @@ public final class GenerationFacade {
     }
 
     final GenerationController gc = new GenerationController(tasks, ctx, taskListener, logger);
-    myRepository.getModelAccess().runReadAction(new Runnable() {
-      @Override
-      public void run() {
-        result[0] = UndoHelper.getInstance().runNonUndoableAction(new Computable<Boolean>() {
-          @Override
-          public Boolean compute() {
-            return gc.generate(monitor);
-          }
-        });
-      }
-    });
-
-    // XXX removeAllTransients done from make facet, perhaps publish shall be part of external code as well?
-    myTransientModelsProvider.publishAll();
-    CleanupManager.getInstance().cleanup();
-    return result[0];
+    gc.generate(monitor);
   }
 
   private static class EmptyTaskListener implements GeneratorTaskListener<GeneratorTask> {
@@ -286,29 +187,6 @@ public final class GenerationFacade {
     @Override
     public void done(@NotNull GeneratorTask task, @NotNull GenerationStatus status) {
       // no-op
-    }
-  }
-
-  // support only two methods of the handler that are mostly in use
-  // remove along with IGenerationHandler
-  @ToRemove(version = 3.4)
-  private static class LegacyTaskListener implements GeneratorTaskListener<GeneratorTask> {
-    private final IGenerationHandler myGenerationHandler;
-
-    public LegacyTaskListener(IGenerationHandler legacyHandler) {
-      myGenerationHandler = legacyHandler;
-    }
-
-    @Override
-    public void start(@NotNull GeneratorTask task) {
-      final SModel inputModel = task.getModel();
-      myGenerationHandler.startModule(inputModel.getModule(), Collections.singletonList(inputModel), null);
-    }
-
-    @Override
-    public void done(@NotNull GeneratorTask task, @NotNull GenerationStatus status) {
-      final SModel inputModel = task.getModel();
-      myGenerationHandler.handleOutput(inputModel.getModule(), inputModel, status, null, new EmptyProgressMonitor());
     }
   }
 }

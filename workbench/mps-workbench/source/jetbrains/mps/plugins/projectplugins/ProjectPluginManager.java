@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,34 +22,29 @@ import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.components.StoragePathMacros;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.util.containers.HashMap;
 import com.intellij.util.xmlb.annotations.MapAnnotation;
 import jetbrains.mps.ide.editor.MPSFileNodeEditor;
 import jetbrains.mps.ide.editor.NodeEditor;
 import jetbrains.mps.ide.editor.tabs.TabbedEditor;
-import jetbrains.mps.ide.make.StartupModuleMaker;
+import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.ide.tools.BaseTool;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.nodeEditor.highlighter.EditorsHelper;
 import jetbrains.mps.plugins.BasePluginManager;
 import jetbrains.mps.plugins.PluginContributor;
-import jetbrains.mps.plugins.PluginLoaderRegistry;
-import jetbrains.mps.plugins.PluginReloadingListener;
 import jetbrains.mps.plugins.prefs.BaseProjectPrefsComponent;
 import jetbrains.mps.plugins.projectplugins.BaseProjectPlugin.PluginState;
 import jetbrains.mps.plugins.projectplugins.ProjectPluginManager.PluginsState;
 import jetbrains.mps.plugins.relations.RelationDescriptor;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNode;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Is a {@link BasePluginManager} which is responsible for loading project plugins {@link BaseProjectPlugin};
@@ -61,20 +56,19 @@ import java.util.concurrent.CopyOnWriteArrayList;
     storages = @Storage(StoragePathMacros.WORKSPACE_FILE)
 )
 public class ProjectPluginManager extends BasePluginManager<BaseProjectPlugin> implements ProjectComponent, PersistentStateComponent<PluginsState> {
-  private static final Logger LOG = LogManager.getLogger(ProjectPluginManager.class);
+  private static final Logger LOG = Logger.getLogger(ProjectPluginManager.class);
 
   private PluginsState myState = new PluginsState();
   private final Project myProject;
   private final jetbrains.mps.project.Project myMpsProject;
-  private final FileEditorManager myManager;
-  private final List<PluginReloadingListener> myReloadingListeners = new CopyOnWriteArrayList<>();
 
-  public ProjectPluginManager(@NotNull Project project, jetbrains.mps.project.Project mpsProject, PluginLoaderRegistry pluginLoaderRegistry,
-      @SuppressWarnings("unused") StartupModuleMaker moduleMaker, FileEditorManager manager) {
-    super(mpsProject.getRepository(), pluginLoaderRegistry);
+  public static ProjectPluginManager getInstance(Project ideaProject) {
+    return ideaProject.getComponent(ProjectPluginManager.class);
+  }
+
+  public ProjectPluginManager(@NotNull Project project) {
     myProject = project;
-    myMpsProject = mpsProject;
-    myManager = manager;
+    myMpsProject = ProjectHelper.fromIdeaProject(project);
   }
 
   @Override
@@ -143,23 +137,18 @@ public class ProjectPluginManager extends BasePluginManager<BaseProjectPlugin> i
     final ProjectPluginManager ppm = p.getComponent(ProjectPluginManager.class);
     List<RelationDescriptor> tabs = ppm == null ? Collections.emptyList() : ppm.getTabDescriptors();
     for (RelationDescriptor tab : tabs) {
-      if (tab.isApplicable(node)) {
-        result.add(tab);
+      try {
+        if (tab.isApplicable(node)) {
+          result.add(tab);
+        }
+      } catch (Throwable t) {
+        LOG.error("Exception in extension code: ", t);
       }
     }
     return result;
   }
 
   //----------------RELOAD STUFF---------------------
-
-  public void addReloadingListener(@NotNull PluginReloadingListener listener) {
-    myReloadingListeners.add(listener);
-  }
-
-  public void removeReloadingListener(PluginReloadingListener listener) {
-    myReloadingListeners.remove(listener);
-  }
-
   @Override
   protected BaseProjectPlugin createPlugin(PluginContributor contributor) {
     BaseProjectPlugin plugin = contributor.createProjectPlugin();
@@ -170,30 +159,6 @@ public class ProjectPluginManager extends BasePluginManager<BaseProjectPlugin> i
     plugin.init(myProject);
 
     return plugin;
-  }
-
-  @Override
-  public final void loadPlugins(List<PluginContributor> contributors) {
-    super.loadPlugins(contributors);
-    fireAfterPluginsLoaded(contributors);
-  }
-
-  @Override
-  public final void unloadPlugins(List<PluginContributor> contributors) {
-    fireBeforePluginsUnloaded(contributors);
-    super.unloadPlugins(contributors);
-  }
-
-  private void fireAfterPluginsLoaded(List<PluginContributor> contributors) {
-    for (PluginReloadingListener listener : myReloadingListeners) {
-      listener.afterPluginsLoaded(contributors);
-    }
-  }
-
-  private void fireBeforePluginsUnloaded(List<PluginContributor> contributors) {
-    for (PluginReloadingListener listener : myReloadingListeners) {
-      listener.beforePluginsUnloaded(contributors);
-    }
   }
 
   @Override
@@ -221,21 +186,9 @@ public class ProjectPluginManager extends BasePluginManager<BaseProjectPlugin> i
     plugin.dispose();
   }
 
-  //----------------COMPONENT STUFF---------------------
-
   @Override
-  @NonNls
-  @NotNull
-  public String getComponentName() {
-    return ProjectPluginManager.class.getName();
-  }
-
-  @Override
-  public void initComponent() {
-  }
-
-  @Override
-  public void disposeComponent() {
+  public boolean isDisposed() {
+    return myMpsProject.isDisposed();
   }
 
   //----------------STATE STUFF------------------------
@@ -247,7 +200,7 @@ public class ProjectPluginManager extends BasePluginManager<BaseProjectPlugin> i
   }
 
   @Override
-  public void loadState(PluginsState state) {
+  public void loadState(@NotNull PluginsState state) {
     myState = state;
   }
 
@@ -255,7 +208,14 @@ public class ProjectPluginManager extends BasePluginManager<BaseProjectPlugin> i
 //    myState.pluginsState.clear();
     for (BaseProjectPlugin plugin : plugins) {
       PluginState state = plugin.getState();
-      if (state != null) {
+      // XXX can make BaseProjectPlugin.getState() return null if there's nothing to store,
+      //     however, null return value sort of PersistentStateComponent.getState() has special
+      //     meaning (use previous). Although it's just this PPM that asks getState() and
+      //     we could establish own contract, I decided not to - well, unless we replace
+      //     IDEA's API with own (identical), where we can have this contract explicit.
+      //     That's why here's a !myComponentsState.isEmpty check, not to write blank xml elements
+      //     into workspace.xml for each MPS Project Plugin.
+      if (state != null && !state.myComponentsState.isEmpty()) {
         myState.pluginsState.put(plugin.getClass().getName(), state);
       } else {
         myState.pluginsState.remove(plugin.getClass().getName());
@@ -281,7 +241,7 @@ public class ProjectPluginManager extends BasePluginManager<BaseProjectPlugin> i
 
   private void recreateTabbedEditors() {
     myMpsProject.getModelAccess().runReadInEDT(() -> {
-      for (MPSFileNodeEditor editor : EditorsHelper.getAllEditors(myManager)) {
+      for (MPSFileNodeEditor editor : EditorsHelper.getAllEditors(FileEditorManager.getInstance(myProject))) {
         if (!editor.isValid()) {
           continue;
         }
@@ -292,7 +252,7 @@ public class ProjectPluginManager extends BasePluginManager<BaseProjectPlugin> i
         } else if (editor.getNodeEditor() instanceof NodeEditor) {
           //and this is to make non-tabbed editors tabbed if they need to
           for (RelationDescriptor tab : getTabDescriptors()) {
-            SNode node = editor.getNodeEditor().getCurrentlyEditedNode().resolve(myRepository);
+            SNode node = editor.getNodeEditor().getCurrentlyEditedNode().resolve(myMpsProject.getRepository());
             if (tab.isApplicable(node)) {
               editor.recreateEditorOnTabChange();
               break;

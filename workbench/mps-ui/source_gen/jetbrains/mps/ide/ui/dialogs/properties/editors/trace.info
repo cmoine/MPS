@@ -8,40 +8,40 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
   <root nodeRef="r:e46d921f-36a3-4bc0-aa46-fc10c6f85948(jetbrains.mps.ide.ui.dialogs.properties.editors)/3995997045458443074">
     <file name="RuleTypeEditor.java">
-      <node id="6464687090063975627" at="13,0,14,0" concept="2" trace="myComboBox" />
-      <node id="3995997045458443080" at="14,27,15,27" concept="5" />
-      <node id="6464687090063975762" at="15,27,16,45" concept="1" />
-      <node id="3995997045458443089" at="16,45,17,49" concept="1" />
-      <node id="3995997045458443094" at="17,49,18,52" concept="1" />
-      <node id="3995997045458443099" at="18,52,19,48" concept="1" />
-      <node id="3995997045458443104" at="19,48,20,51" concept="1" />
-      <node id="3995997045458443109" at="20,51,21,51" concept="1" />
-      <node id="3995997045458443114" at="21,51,22,84" concept="1" />
-      <node id="8881345873770272859" at="27,71,28,41" concept="1" />
-      <node id="8881345873770236606" at="28,41,29,23" concept="1" />
-      <node id="8719553478678306782" at="24,0,26,0" concept="4" trace="keyTyped#(Ljava/awt/event/KeyEvent;)V" />
-      <node id="8719553478678306798" at="32,0,34,0" concept="4" trace="keyReleased#(Ljava/awt/event/KeyEvent;)V" />
-      <node id="8719553478678306850" at="26,43,30,9" concept="3" />
-      <node id="8719553478678306790" at="26,0,32,0" concept="4" trace="keyPressed#(Ljava/awt/event/KeyEvent;)V" />
-      <node id="8719553478678184317" at="22,84,34,7" concept="1" />
-      <node id="3995997045458443077" at="14,0,36,0" concept="0" trace="RuleTypeEditor#()V" />
-      <scope id="8719553478678306788" at="24,41,24,41" />
-      <scope id="8719553478678306804" at="32,44,32,44" />
-      <scope id="8719553478678306782" at="24,0,26,0">
+      <node id="6464687090063975627" at="15,0,16,0" concept="2" trace="myComboBox" />
+      <node id="3995997045458443080" at="16,27,17,27" concept="5" />
+      <node id="6464687090063975762" at="17,27,18,45" concept="1" />
+      <node id="3995997045458443089" at="18,45,19,49" concept="1" />
+      <node id="3995997045458443094" at="19,49,20,52" concept="1" />
+      <node id="3995997045458443099" at="20,52,21,48" concept="1" />
+      <node id="3995997045458443104" at="21,48,22,51" concept="1" />
+      <node id="3995997045458443109" at="22,51,23,51" concept="1" />
+      <node id="3995997045458443114" at="23,51,24,84" concept="1" />
+      <node id="8881345873770272859" at="29,71,30,41" concept="1" />
+      <node id="8881345873770236606" at="30,41,31,23" concept="1" />
+      <node id="8719553478678306782" at="26,0,28,0" concept="4" trace="keyTyped#(Ljava/awt/event/KeyEvent;)V" />
+      <node id="8719553478678306798" at="34,0,36,0" concept="4" trace="keyReleased#(Ljava/awt/event/KeyEvent;)V" />
+      <node id="8719553478678306850" at="28,43,32,9" concept="3" />
+      <node id="8719553478678306790" at="28,0,34,0" concept="4" trace="keyPressed#(Ljava/awt/event/KeyEvent;)V" />
+      <node id="8719553478678184317" at="24,84,36,7" concept="1" />
+      <node id="3995997045458443077" at="16,0,38,0" concept="0" trace="RuleTypeEditor#()V" />
+      <scope id="8719553478678306788" at="26,41,26,41" />
+      <scope id="8719553478678306804" at="34,44,34,44" />
+      <scope id="8719553478678306782" at="26,0,28,0">
         <var name="p0" id="8719553478678306786" />
       </scope>
-      <scope id="8719553478678306851" at="27,71,29,23" />
-      <scope id="8719553478678306798" at="32,0,34,0">
+      <scope id="8719553478678306851" at="29,71,31,23" />
+      <scope id="8719553478678306798" at="34,0,36,0">
         <var name="p0" id="8719553478678306802" />
       </scope>
-      <scope id="8719553478678306796" at="26,43,30,9" />
-      <scope id="8719553478678306790" at="26,0,32,0">
+      <scope id="8719553478678306796" at="28,43,32,9" />
+      <scope id="8719553478678306790" at="28,0,34,0">
         <var name="p0" id="8719553478678306794" />
       </scope>
-      <scope id="3995997045458443079" at="14,27,34,7" />
-      <scope id="3995997045458443077" at="14,0,36,0" />
-      <unit id="8719553478678306780" at="23,39,34,5" name="jetbrains.mps.ide.ui.dialogs.properties.editors.RuleTypeEditor$1" />
-      <unit id="3995997045458443074" at="12,0,37,0" name="jetbrains.mps.ide.ui.dialogs.properties.editors.RuleTypeEditor" />
+      <scope id="3995997045458443079" at="16,27,36,7" />
+      <scope id="3995997045458443077" at="16,0,38,0" />
+      <unit id="8719553478678306780" at="25,39,36,5" name="jetbrains.mps.ide.ui.dialogs.properties.editors.RuleTypeEditor$1" />
+      <unit id="3995997045458443074" at="13,0,39,0" name="jetbrains.mps.ide.ui.dialogs.properties.editors.RuleTypeEditor" />
     </file>
   </root>
 </debug-info>

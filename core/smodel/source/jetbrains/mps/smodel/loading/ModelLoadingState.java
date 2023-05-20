@@ -17,6 +17,7 @@ package jetbrains.mps.smodel.loading;
 
 public enum ModelLoadingState {
   NOT_LOADED("not loaded"),
+  // FIXME need another state here, aka HEADER, to tell 'tried to load but failed due to persistence issues' from 'didn't even tried to read a model'
   INTERFACE_LOADED("partially loaded"),
   NO_IMPLEMENTATION("without implementation"),
   FULLY_LOADED("fully loaded");

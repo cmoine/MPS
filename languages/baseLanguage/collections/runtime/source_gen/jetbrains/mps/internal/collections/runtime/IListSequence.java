@@ -5,6 +5,7 @@ package jetbrains.mps.internal.collections.runtime;
 import java.util.List;
 import jetbrains.mps.baseLanguage.closures.runtime.AdapterClass;
 import jetbrains.mps.baseLanguage.closures.runtime._FunctionTypes;
+import jetbrains.mps.references.Reference;
 
 public interface IListSequence<T> extends ICollectionSequence<T>, ISequence<T>, List<T> {
   T addElement(T t);
@@ -26,4 +27,16 @@ public interface IListSequence<T> extends ICollectionSequence<T>, ISequence<T>, 
   T[] toGenericArray(Class<T> runtimeClass);
   IListSequence<T> asUnmodifiable();
   IListSequence<T> asSynchronized();
+
+  default Reference<T> getElementRef(final int idx) {
+    return new Reference<T>() {
+      public T get() {
+        return getElement(idx);
+      }
+      public void set(T elem) {
+        setElement(idx, elem);
+      }
+    };
+  }
+
 }

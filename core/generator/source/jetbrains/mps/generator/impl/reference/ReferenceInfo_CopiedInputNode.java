@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import jetbrains.mps.smodel.SModelStereotype;
 import jetbrains.mps.util.SNodeOperations;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.model.ResolveInfo;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SReference;
@@ -49,7 +50,7 @@ public class ReferenceInfo_CopiedInputNode extends ReferenceInfo {
 
   @Nullable
   @Override
-  public SReference create(@NotNull PostponedReference ref) {
+  public ResolveInfo create(@NotNull PostponedReference ref) {
     if (myInputTargetNode != null) {
       // output target node might has been copied (reduced) from the input target node
       // here accept only one-to-one copying
@@ -59,9 +60,7 @@ public class ReferenceInfo_CopiedInputNode extends ReferenceInfo {
       }
       String resolveInfo = jetbrains.mps.util.SNodeOperations.getResolveInfo(myInputTargetNode);
       if (resolveInfo != null) {
-        final SReference dr = createDynamicReference(ref, resolveInfo, new DynamicReferenceOrigin(null, myInputNode.getReference()));
-        ref.getGenerator().registerDynamicReference(dr);
-        return dr;
+        return createDynamicReference(ref, resolveInfo, new DynamicReferenceOrigin(null, myInputNode.getReference()));
       }
       // if input was copied - return one of its copies
       // this can easy produce incorrect references
@@ -71,7 +70,7 @@ public class ReferenceInfo_CopiedInputNode extends ReferenceInfo {
         if (checkResolvedTarget(ref, ambiguousTarget)) {
           return createStaticReference(ref, ambiguousTarget);
         } else {
-          return jetbrains.mps.smodel.SReference.create(ref.getLink(), ref.getSourceNode(), ref.getGenerator().getOutputModel().getReference(), null);
+          return createInvalidReference(ref, null);
         }
       }
     }

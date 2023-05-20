@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-8mskv0mo90jm1qodsg352go9md1tt28" />
+<product version="3" modelHash="-6s8l7h5apikvapdb7thu8z0dvl1wqyr">
+  <files names="DebugInfoProvider_AppPluginPart.java:Debug_ApplicationPlugin.java" />
+</product>
 

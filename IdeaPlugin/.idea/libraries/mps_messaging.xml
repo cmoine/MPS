@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="mps-messaging">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/mps-core/lib/mps-messaging.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../core/mps-messaging/source" />
+    </SOURCES>
+  </library>
+</component>

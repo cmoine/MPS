@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2016 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,10 @@ package jetbrains.mps.ide.findusages.view.optionseditor;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
-import jetbrains.mps.ide.findusages.findalgorithm.finders.ReloadableFinder;
+import jetbrains.mps.ide.findusages.findalgorithm.finders.IInterfacedFinder;
 import jetbrains.mps.ide.findusages.view.optionseditor.components.FindersEditor;
 import jetbrains.mps.ide.findusages.view.optionseditor.components.ScopeEditor;
 import jetbrains.mps.ide.findusages.view.optionseditor.components.ViewOptionsEditor;
-import jetbrains.mps.ide.findusages.view.optionseditor.options.FindersOptions;
-import jetbrains.mps.ide.findusages.view.optionseditor.options.ScopeOptions;
-import jetbrains.mps.ide.findusages.view.optionseditor.options.ViewOptions;
 import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.openapi.navigation.EditorNavigator;
 import org.jetbrains.annotations.Nullable;
@@ -33,6 +30,7 @@ import org.jetbrains.mps.openapi.model.SNodeReference;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.util.function.Consumer;
 
 public class FindUsagesDialog extends DialogWrapper {
   private JPanel myPanel;
@@ -40,21 +38,18 @@ public class FindUsagesDialog extends DialogWrapper {
   private FindersEditor myFindersEditor;
   private ViewOptionsEditor myViewOptionsEditor;
   private boolean myIsCancelled = true;
-  private final boolean myWithDialog;
 
-  public FindUsagesDialog(final FindUsagesOptions defaultOptions, final SNode node, final Project project, final boolean withDialog) {
+  public FindUsagesDialog(final FindUsagesOptions defaultOptions, final SNode node, final Project project) {
     super(project);
-    myWithDialog = withDialog;
     setTitle("Find Usages");
-    setOKButtonText("&Find");
-    setCancelButtonText("Ca&ncel");
+    setOKButtonText("Find");
 
     final jetbrains.mps.project.Project mpsProject = ProjectHelper.toMPSProject(project);
     mpsProject.getModelAccess().runReadAction(new Runnable() {
       @Override
       public void run() {
         myScopeEditor = new ScopeEditor(defaultOptions.getScopeOptions(), mpsProject.getRepository());
-        myFindersEditor = new MyFindersEditor(defaultOptions, node, project) {
+        myFindersEditor = new FindersEditor(defaultOptions.getFindersOptions(), node, new FinderNavigation(mpsProject)) {
           @Override
           protected void findersListChangedByUser() {
             super.findersListChangedByUser();
@@ -108,26 +103,19 @@ public class FindUsagesDialog extends DialogWrapper {
     return myPanel;
   }
 
-  private class MyFindersEditor extends FindersEditor {
-    private Project myProject;
+  static final class FinderNavigation implements Consumer<IInterfacedFinder> {
+    private jetbrains.mps.project.Project myProject;
 
-    public MyFindersEditor(FindUsagesOptions defaultOptions, SNode node, Project project) {
-      super(defaultOptions.getFindersOptions(), node);
+    FinderNavigation(jetbrains.mps.project.Project project) {
       myProject = project;
     }
 
     @Override
-    public void goToFinder(final ReloadableFinder finder) {
-      final jetbrains.mps.project.Project mpsProject = ProjectHelper.toMPSProject(myProject);
+    public void accept(IInterfacedFinder finder) {
       SNodeReference finderDeclaration = finder.getDeclarationNode();
-      if (finderDeclaration != null && mpsProject != null) {
-        new EditorNavigator(mpsProject).shallFocus(true).selectIfChild().open(finderDeclaration);
+      if (finderDeclaration != null) {
+        new EditorNavigator(myProject).shallFocus(true).selectIfChild().open(finderDeclaration);
       }
-    }
-
-    @Override
-    protected boolean resetToDefaults() {
-      return !myWithDialog;
     }
   }
 }

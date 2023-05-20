@@ -1,7 +1,6 @@
 package jetbrains.mps.newTypesystem.context.component;
 
 import jetbrains.mps.errors.IErrorReporter;
-import org.jetbrains.mps.openapi.model.SNode;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,5 +10,5 @@ import org.jetbrains.mps.openapi.model.SNode;
  * To change this template use File | Settings | File Templates.
  */
 public interface ITypeErrorComponent {
-  void addError(SNode node, IErrorReporter reporter);
+  void addError(IErrorReporter reporter);
 }

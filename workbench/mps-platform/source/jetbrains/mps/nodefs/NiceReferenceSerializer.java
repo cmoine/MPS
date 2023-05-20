@@ -103,24 +103,9 @@ import org.jetbrains.mps.openapi.module.SRepository;
   }
 
   // serialization targets
-  private static final SerializerTarget<SNode> NODE_TARGET = new SerializerTarget<SNode>() {
-    @Override
-    public String getName(SNode e) {
-      return String.valueOf(e.getPresentation());
-    }
-  };
-  private static final SerializerTarget<SModel> MODEL_TARGET = new SerializerTarget<SModel>() {
-    @Override
-    public String getName(SModel e) {
-      return String.valueOf(e.getModelName());
-    }
-  };
-  private static final SerializerTarget<SModule> MODULE_TARGET = new SerializerTarget<SModule>() {
-    @Override
-    public String getName(SModule e) {
-      return String.valueOf(e.getModuleName());
-    }
-  };
+  private static final SerializerTarget<SNode> NODE_TARGET = e -> String.valueOf(e.getPresentation());
+  private static final SerializerTarget<SModel> MODEL_TARGET = e -> String.valueOf(e.getModelName());
+  private static final SerializerTarget<SModule> MODULE_TARGET = e -> String.valueOf(e.getModuleName());
 
   private interface SerializerTarget<T> {
     @NotNull

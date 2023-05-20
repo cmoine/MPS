@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="7gye5ehnu52z1jllol4oilavwpikzrw">
+  <files names="SimplifyNodeType_QuickFix.java:TypesystemDescriptor.java:check_NodeType_CanSimplify_NonTypesystemRule.java:check_invalid_ShortNodeType_as_argument_NonTypesystemRule.java:fix_shortNodeTypeAsProjection_QuickFix.java" />
+</product>
+

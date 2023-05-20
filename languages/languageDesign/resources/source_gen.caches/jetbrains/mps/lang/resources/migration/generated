@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="27o9ugfsjvyp2bmvm41msr3xzrhbdg4" />
+<product version="3" modelHash="-j9ez7xultlikvqc5ouz5dg3qdodcm4">
+  <files names="InlineIconExpressions.java:MigrationDescriptor.java:MoveResourcePathToIconFile.java" />
+</product>
 

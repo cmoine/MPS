@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,19 +16,17 @@
 package jetbrains.mps.nodeEditor;
 
 import jetbrains.mps.errors.MessageStatus;
-import jetbrains.mps.errors.QuickFixProvider;
 import jetbrains.mps.nodeEditor.inspector.InspectorEditorComponent;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.message.EditorMessageOwner;
 import jetbrains.mps.openapi.editor.message.SimpleEditorMessage;
 import jetbrains.mps.smodel.ModelAccessHelper;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SNode;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -37,31 +35,32 @@ import java.util.Map;
 public class DefaultEditorMessage implements EditorMessage {
   private static final int DEFAULT_MESSAGE_PRIORITY = 0;
 
-  private Color myColor;
-  private String myMessage;
-  private EditorMessageOwner myOwner;
-  private SNode myNode;
-  private List<QuickFixProvider> myIntentionProviders;
-  private MessageStatus myStatus = MessageStatus.OK;
+  private final Color myColor;
+  private final String myMessage;
+  private final EditorMessageOwner myOwner;
+  private final SNode myNode;
+  private final MessageStatus myStatus;
 
   private Map<Object, Object> myUserObjects;
 
   public DefaultEditorMessage(SNode node, Color color, String message, EditorMessageOwner owner) {
+    this(node, MessageStatus.OK, color, message, owner);
+  }
+
+  public DefaultEditorMessage(SNode node, MessageStatus status, Color color, String message, EditorMessageOwner owner) {
+    myStatus = status;
     myNode = node;
     myColor = color;
     myMessage = message;
     myOwner = owner;
   }
 
-  public DefaultEditorMessage(SNode node, MessageStatus status, Color color, String message, EditorMessageOwner owner) {
-    this(node, color, message, owner);
-    myStatus = status;
-  }
-
   @Override
   public boolean sameAs(SimpleEditorMessage message) {
-    return message.getNode() == getNode() && getOwner() == message.getOwner() &&
-        getStatus() == message.getStatus() && getMessage().equals(message.getMessage());
+    return message.getNode() == getNode() &&
+           getOwner() == message.getOwner() &&
+           getStatus() == message.getStatus() &&
+           getMessage().equals(message.getMessage());
   }
 
   @Override
@@ -102,7 +101,7 @@ public class DefaultEditorMessage implements EditorMessage {
 
   @Override
   public int getStart(jetbrains.mps.openapi.editor.EditorComponent editorComponent) {
-    EditorCell editorCell = getCellInBothWays((EditorComponent) editorComponent);
+    EditorCell editorCell = getCellInBothWays(editorComponent);
     if (editorCell == null) {
       return -1;
     }
@@ -111,7 +110,7 @@ public class DefaultEditorMessage implements EditorMessage {
 
   @Override
   public int getHeight(jetbrains.mps.openapi.editor.EditorComponent editorComponent) {
-    EditorCell editorCell = getCellInBothWays((EditorComponent) editorComponent);
+    EditorCell editorCell = getCellInBothWays(editorComponent);
     if (editorCell == null) {
       return -1;
     }
@@ -120,10 +119,17 @@ public class DefaultEditorMessage implements EditorMessage {
 
   @Override
   public void doNavigate(EditorComponent editorComponent) {
-    editorComponent.changeSelection(getCellInBothWays(editorComponent));
+    EditorCell editorCell = getCellInBothWays(editorComponent);
+    if (editorCell != null) {
+      editorComponent.changeSelection(editorCell);
+    }
   }
 
-  protected EditorCell getCellInBothWays(final EditorComponent editor) {
+  protected EditorCell getCellInBothWays(final jetbrains.mps.openapi.editor.EditorComponent editorComponent) {
+    if (false == editorComponent instanceof EditorComponent) {
+      return null;
+    }
+    EditorComponent editor = (EditorComponent) editorComponent;
     return new ModelAccessHelper(editor.getRepository()).runReadAction(() -> {
       EditorCell editorCell = getCell(editor);
       if (editorCell != null) {
@@ -146,25 +152,22 @@ public class DefaultEditorMessage implements EditorMessage {
     return editor.getBigValidCellForNode(getNode());
   }
 
-  @Override
-  public EditorCell getCellForParentNodeInMainEditor(final EditorComponent editor) {
-    return new ModelAccessHelper(editor.getRepository()).runReadAction(() -> {
-      if (getNode() == null) {
-        return null;
-      }
-      if (editor instanceof InspectorEditorComponent) {
-        return null;
-      }
-      SNode parent = getNode().getParent();
-      while (parent != null) {
-        EditorCell result = editor.getBigValidCellForNode(parent);
-        if (result != null) {
-          return result;
-        }
-        parent = parent.getParent();
-      }
+  protected EditorCell getCellForParentNodeInMainEditor(final EditorComponent editor) {
+    if (editor instanceof InspectorEditorComponent) {
       return null;
-    });
+    }
+    if (getNode() == null) {
+      return null;
+    }
+    SNode parent = getNode().getParent();
+    while (parent != null) {
+      EditorCell result = editor.getBigValidCellForNode(parent);
+      if (result != null) {
+        return result;
+      }
+      parent = parent.getParent();
+    }
+    return null;
   }
 
   @Override
@@ -205,37 +208,6 @@ public class DefaultEditorMessage implements EditorMessage {
   @Override
   public boolean isBackground() {
     return false;
-  }
-
-  public void setIntentionProvider(QuickFixProvider intentionProvider) {
-    addIntentionProvider(intentionProvider);
-  }
-
-  public void addIntentionProvider(QuickFixProvider intentionProvider) {
-    if (myIntentionProviders == null) {
-      myIntentionProviders = new ArrayList<>(1);
-    }
-    myIntentionProviders.add(intentionProvider);
-  }
-
-  @Override
-  public QuickFixProvider getIntentionProvider() {
-    if (myIntentionProviders == null) {
-      return null;
-    }
-    if (myIntentionProviders.isEmpty()) {
-      return null;
-    }
-    return myIntentionProviders.get(0);
-  }
-
-  @Override
-  public List<QuickFixProvider> getIntentionProviders() {
-    ArrayList<QuickFixProvider> result = new ArrayList<>(1);
-    if (myIntentionProviders != null) {
-      result.addAll(myIntentionProviders);
-    }
-    return result;
   }
 
   @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,11 +25,13 @@ import jetbrains.mps.nodeEditor.checking.UpdateResult.Completed;
 import jetbrains.mps.openapi.editor.ColorConstants;
 import jetbrains.mps.openapi.editor.style.StyleRegistry;
 import jetbrains.mps.smodel.RepoListenerRegistrar;
+import jetbrains.mps.typesystem.checking.HighlightUtil;
 import jetbrains.mps.util.Cancellable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SModel.Problem;
 import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.mps.openapi.model.SNodeReference;
 import org.jetbrains.mps.openapi.module.SRepository;
 import org.jetbrains.mps.openapi.module.SRepositoryContentAdapter;
 
@@ -100,14 +102,15 @@ public class ModelProblemsChecker extends BaseEditorChecker implements Disposabl
 
       Set<EditorMessage> result = new HashSet<>();
       for (Problem p : model.getProblems()) {
-        SNode node = p.getNode();
-        if (node == null) continue;
+        SNodeReference anchor = p.getAnchorNode();
+        SNode node = anchor == null ? null : model.getNode(anchor.getNodeId());
+        if (node == null) {
+          continue;
+        }
 
-        Color color =
-            p.isError() ? new Color(ColorConstants.ERROR) :
-                (StyleRegistry.getInstance().isDarkTheme() ? new Color(ColorConstants.WARNING_DARK) : new Color(ColorConstants.WARNING));
-        result.add(new ModelProblemMessage(node, p.isError() ? MessageStatus.ERROR : MessageStatus.WARNING,
-            color, p.getText(), this));
+        Color color = p.isError() ? HighlightUtil.getMessageColor(MessageStatus.ERROR)
+                                  : HighlightUtil.getMessageColor(MessageStatus.WARNING);
+        result.add(new ModelProblemMessage(node, p.isError() ? MessageStatus.ERROR : MessageStatus.WARNING, color, p.getText(), this));
       }
       return new Completed(true, result);
     } catch (RuntimeException e) {

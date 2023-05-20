@@ -6,41 +6,9 @@ import jetbrains.mps.nodeEditor.DefaultNodeEditor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Collection;
-import jetbrains.mps.openapi.editor.style.Style;
-import jetbrains.mps.editor.runtime.style.StyleImpl;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Constant;
-import jetbrains.mps.editor.runtime.style.StyleAttributes;
-import jetbrains.mps.editor.runtime.style.Padding;
-import jetbrains.mps.editor.runtime.style.Measure;
 
 public class SimpleTextGenOperation_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createCollection_yb6w4b_a(editorContext, node);
-  }
-  private EditorCell createCollection_yb6w4b_a(EditorContext editorContext, SNode node) {
-    EditorCell_Collection editorCell = EditorCell_Collection.createIndent2(editorContext, node);
-    editorCell.setCellId("Collection_yb6w4b_a");
-    editorCell.setBig(true);
-    editorCell.addEditorCell(this.createComponent_yb6w4b_a0(editorContext, node));
-    editorCell.addEditorCell(this.createConstant_yb6w4b_b0(editorContext, node));
-    return editorCell;
-  }
-  private EditorCell createComponent_yb6w4b_a0(EditorContext editorContext, SNode node) {
-    EditorCell editorCell = editorContext.getCellFactory().createEditorComponentCell(node, "jetbrains.mps.lang.core.editor.alias");
-    Style style = new StyleImpl();
-    TextGenStyles_StyleSheet.apply_TextGenOperation(style, editorCell);
-    editorCell.getStyle().putAll(style);
-    return editorCell;
-  }
-  private EditorCell createConstant_yb6w4b_b0(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, ";");
-    editorCell.setCellId("Constant_yb6w4b_b0");
-    Style style = new StyleImpl();
-    style.set(StyleAttributes.PADDING_LEFT, 0, new Padding(-1.0, Measure.SPACES));
-    style.set(StyleAttributes.FIRST_POSITION_ALLOWED, 0, false);
-    editorCell.getStyle().putAll(style);
-    editorCell.setDefaultText("");
-    return editorCell;
+    return new SimpleTextGenOperation_EditorBuilder_a(editorContext, node).createCell();
   }
 }

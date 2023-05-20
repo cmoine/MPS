@@ -7,14 +7,15 @@ import org.jetbrains.mps.openapi.model.SNode;
 
 public class nullInstruction extends GeneratedInstruction {
   private SNode myexpression;
-  private String myPresentation;
+  private final String myPresentation;
+
   public nullInstruction(SNode expression) {
     StringBuilder sb = new StringBuilder();
     sb.append("null");
     myexpression = expression;
     putUserObject("expression", expression);
     addParameter(expression);
-    sb.append(" " + expression);
+    sb.append(" ").append(presentationOf(expression));
     myPresentation = sb.toString();
   }
   @Override

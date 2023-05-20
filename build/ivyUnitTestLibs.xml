@@ -1,8 +1,18 @@
-<ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+<ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd"
+            xmlns:m="http://maven.apache.org/POM/4.0.0">
   <info organisation="languages.baseLanguage" module="unitTest"/>
   <dependencies>
-    <dependency org="org.jmock" name="jmock-junit4" rev="2.8.2"/>
-    <dependency org="org.jmock" name="jmock" rev="2.8.2"/>
-    <dependency org="org.hamcrest" name="hamcrest-library" rev="1.3"/>
+    <dependency org="org.jmock" name="jmock-junit4" rev="2.8.2">
+      <artifact name="jmock-junit4" ext="jar"/>
+      <artifact name="jmock-junit4" m:classifier="sources" ext="jar"/>
+    </dependency>
+    <dependency org="org.jmock" name="jmock" rev="2.8.2">
+      <artifact name="jmock" ext="jar"/>
+      <artifact name="jmock" m:classifier="sources" ext="jar"/>
+    </dependency>
+    <dependency org="org.hamcrest" name="hamcrest-library" rev="1.3">
+      <artifact name="hamcrest-library" ext="jar"/>
+      <artifact name="hamcrest-library" m:classifier="sources" ext="jar"/>
+    </dependency>
   </dependencies>
 </ivy-module>

@@ -10,12 +10,12 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1178893518978:jetbrains.mps.baseLanguage.structure.ThisConstructorInvocation" />
   <root>
     <file name="DataFlowAspectDescriptorImpl.java">
-      <unit at="17,0,81,0" name="testCustomAnalyzer.dataFlow.DataFlowAspectDescriptorImpl" />
+      <unit at="17,0,52,0" name="testCustomAnalyzer.dataFlow.DataFlowAspectDescriptorImpl" />
     </file>
   </root>
   <root nodeRef="r:11be8b48-b45e-48e5-98ad-b77dc1b202b1(testCustomAnalyzer.dataFlow)/2955426575105435842">
@@ -39,8 +39,8 @@
       <node id="2955426575105630521" at="22,59,23,80" concept="12" />
       <node id="2955426575105630521" at="25,100,26,22" concept="11" />
       <node id="2955426575105630521" at="26,22,27,18" concept="2" />
-      <node id="2955426575105630521" at="27,18,28,91" concept="2" />
-      <node id="2955426575105630521" at="28,91,29,46" concept="2" />
+      <node id="2955426575105630521" at="27,18,28,54" concept="2" />
+      <node id="2955426575105630521" at="28,54,29,46" concept="2" />
       <node id="2955426575105630521" at="29,46,30,121" concept="2" />
       <node id="2955426575105686927" at="36,45,37,15" concept="8" />
       <node id="2955426575105688562" at="39,64,40,25" concept="7" />
@@ -48,14 +48,12 @@
       <node id="2955426575105688580" at="45,7,46,24" concept="8" />
       <node id="2955426575105698112" at="48,109,49,23" concept="8" />
       <node id="2955426575105630521" at="51,45,52,39" concept="8" />
-      <node id="2955426575105630521" at="60,34,61,66" concept="8" />
       <node id="2955426575105630521" at="34,0,36,0" concept="1" trace="CustomAnalyzerWithModeAnalyzer#()V" />
       <node id="2955426575105630521" at="22,0,25,0" concept="1" trace="CustomAnalyzerWithModeAnalyzerRunner#(Lorg/jetbrains/mps/openapi/model/SNode;)V" />
       <node id="2955426575105630521" at="36,0,39,0" concept="6" trace="initial#(Ljetbrains/mps/lang/dataFlow/framework/Program;)Ljava/lang/Integer;" />
       <node id="2955426575105688570" at="41,37,44,9" concept="5" />
       <node id="2955426575105630521" at="48,0,51,0" concept="6" trace="fun#(Ljava/lang/Integer;Ljetbrains/mps/lang/dataFlow/framework/ProgramState;Ljava/util/Map;)Ljava/lang/Integer;" />
       <node id="2955426575105630521" at="51,0,54,0" concept="6" trace="getDirection#()Ljetbrains/mps/lang/dataFlow/framework/AnalysisDirection;" />
-      <node id="2955426575105630521" at="59,0,63,0" concept="10" trace="getId#()Ljava/lang/String;" />
       <node id="2955426575105688566" at="40,25,45,7" concept="4" />
       <node id="2955426575105630521" at="25,0,32,0" concept="1" trace="CustomAnalyzerWithModeAnalyzerRunner#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/lang/dataFlow/framework/ProgramFactory;)V" />
       <node id="2955426575105630521" at="39,0,48,0" concept="6" trace="merge#(Ljetbrains/mps/lang/dataFlow/framework/Program;Ljava/util/List;)Ljava/lang/Integer;" />
@@ -65,7 +63,6 @@
       <scope id="2955426575105688571" at="42,35,43,31" />
       <scope id="2955426575105630527" at="48,109,49,23" />
       <scope id="2955426575105630521" at="51,45,52,39" />
-      <scope id="2955426575105630521" at="60,34,61,66" />
       <scope id="2955426575105630521" at="34,0,36,0" />
       <scope id="2955426575105630521" at="22,0,25,0">
         <var name="node" id="2955426575105630521" />
@@ -80,7 +77,6 @@
         <var name="stateValues" id="2955426575105630521" />
       </scope>
       <scope id="2955426575105630521" at="51,0,54,0" />
-      <scope id="2955426575105630521" at="59,0,63,0" />
       <scope id="2955426575105630521" at="25,100,30,121" />
       <scope id="2955426575105688566" at="40,25,45,7">
         <var name="counter" id="2955426575105688567" />
@@ -96,55 +92,61 @@
         <var name="input" id="2955426575105630521" />
         <var name="program" id="2955426575105630521" />
       </scope>
-      <unit id="2955426575105630521" at="33,0,64,0" name="testCustomAnalyzer.dataFlow.CustomAnalyzerWithModeAnalyzerRunner$CustomAnalyzerWithModeAnalyzer" />
-      <unit id="2955426575105630521" at="20,0,65,0" name="testCustomAnalyzer.dataFlow.CustomAnalyzerWithModeAnalyzerRunner" />
+      <unit id="2955426575105630521" at="33,0,55,0" name="testCustomAnalyzer.dataFlow.CustomAnalyzerWithModeAnalyzerRunner$CustomAnalyzerWithModeAnalyzer" />
+      <unit id="2955426575105630521" at="20,0,56,0" name="testCustomAnalyzer.dataFlow.CustomAnalyzerWithModeAnalyzerRunner" />
     </file>
-    <file name="counterInstructionInstruction.java">
+    <file name="DataFlowAspectDescriptorImpl.java">
+      <node id="2955426575105630521" at="24,64,25,88" concept="8" />
+      <scope id="2955426575105630521" at="24,64,25,88" />
+    </file>
+    <file name="counterInstructionBInstruction.java">
       <node id="2955426575106079627" at="8,0,9,0" concept="3" trace="myPresentation" />
-      <node id="2955426575106079627" at="9,42,10,43" concept="7" />
-      <node id="2955426575106079627" at="10,43,11,36" concept="2" />
-      <node id="2955426575106079627" at="11,36,12,35" concept="2" />
-      <node id="2955426575106079627" at="15,39,16,26" concept="8" />
-      <node id="2955426575106079627" at="14,0,18,0" concept="6" trace="commandPresentation#()Ljava/lang/String;" />
-      <node id="2955426575106079627" at="9,0,14,0" concept="1" trace="counterInstructionInstruction#()V" />
-      <scope id="2955426575106079627" at="15,39,16,26" />
-      <scope id="2955426575106079627" at="9,42,12,35">
+      <node id="2955426575106079627" at="10,43,11,43" concept="7" />
+      <node id="2955426575106079627" at="11,43,12,37" concept="2" />
+      <node id="2955426575106079627" at="12,37,13,35" concept="2" />
+      <node id="2955426575106079627" at="16,39,17,26" concept="8" />
+      <node id="2955426575106079627" at="15,0,19,0" concept="6" trace="commandPresentation#()Ljava/lang/String;" />
+      <node id="2955426575106079627" at="10,0,15,0" concept="1" trace="counterInstructionBInstruction#()V" />
+      <scope id="2955426575106079627" at="16,39,17,26" />
+      <scope id="2955426575106079627" at="10,43,13,35">
         <var name="sb" id="2955426575106079627" />
       </scope>
-      <scope id="2955426575106079627" at="14,0,18,0" />
-      <scope id="2955426575106079627" at="9,0,14,0" />
-      <unit id="2955426575106079627" at="7,0,19,0" name="testCustomAnalyzer.dataFlow.counterInstructionInstruction" />
+      <scope id="2955426575106079627" at="15,0,19,0" />
+      <scope id="2955426575106079627" at="10,0,15,0" />
+      <unit id="2955426575106079627" at="7,0,20,0" name="testCustomAnalyzer.dataFlow.counterInstructionBInstruction" />
     </file>
   </root>
   <root nodeRef="r:11be8b48-b45e-48e5-98ad-b77dc1b202b1(testCustomAnalyzer.dataFlow)/2955426575106084979">
     <file name="ChildIntraModeRule.java">
-      <node id="2955426575106084979" at="17,43,18,64" concept="7" />
-      <node id="2955426575106084979" at="18,64,19,64" concept="7" />
-      <node id="2955426575106084979" at="19,64,20,90" concept="8" />
-      <node id="2955426575106084979" at="22,50,23,142" concept="8" />
-      <node id="2955426575106085008" at="25,53,26,0" concept="9" />
-      <node id="2955426575106084979" at="29,49,30,138" concept="8" />
-      <node id="2955426575106084979" at="22,0,25,0" concept="6" trace="getApplicableConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
-      <node id="2955426575106084979" at="25,0,28,0" concept="6" trace="performActions#(Ljetbrains/mps/lang/dataFlow/framework/Program;Lorg/jetbrains/mps/openapi/model/SNode;)V" />
-      <node id="2955426575106084979" at="28,0,32,0" concept="6" trace="getModes#()Ljava/util/Collection;" />
-      <node id="2955426575106084979" at="17,0,22,0" concept="6" trace="isApplicable#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
-      <scope id="2955426575106084979" at="22,50,23,142" />
-      <scope id="2955426575106085006" at="25,53,26,0" />
-      <scope id="2955426575106084979" at="29,49,30,138" />
-      <scope id="2955426575106084979" at="17,43,20,90">
+      <node id="2955426575106084979" at="18,43,19,64" concept="7" />
+      <node id="2955426575106084979" at="19,64,20,64" concept="7" />
+      <node id="2955426575106084979" at="20,64,21,90" concept="8" />
+      <node id="2955426575106084979" at="23,50,24,29" concept="8" />
+      <node id="2955426575106085008" at="26,53,27,0" concept="9" />
+      <node id="2955426575106084979" at="30,49,31,138" concept="8" />
+      <node id="2955426575106084979" at="35,0,36,0" concept="10" trace="Child$8m" />
+      <node id="2955426575106084979" at="23,0,26,0" concept="6" trace="getApplicableConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="2955426575106084979" at="26,0,29,0" concept="6" trace="performActions#(Ljetbrains/mps/lang/dataFlow/framework/Program;Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <node id="2955426575106084979" at="29,0,33,0" concept="6" trace="getModes#()Ljava/util/Collection;" />
+      <node id="2955426575106084979" at="18,0,23,0" concept="6" trace="isApplicable#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <scope id="2955426575106084979" at="23,50,24,29" />
+      <scope id="2955426575106085006" at="26,53,27,0" />
+      <scope id="2955426575106084979" at="30,49,31,138" />
+      <scope id="2955426575106084979" at="18,43,21,90">
         <var name="applicableConcept" id="2955426575106084979" />
         <var name="concept" id="2955426575106084979" />
       </scope>
-      <scope id="2955426575106084979" at="22,0,25,0" />
-      <scope id="2955426575106084979" at="25,0,28,0">
+      <scope id="2955426575106084979" at="23,0,26,0" />
+      <scope id="2955426575106084979" at="26,0,29,0">
         <var name="node" id="2955426575106084979" />
         <var name="o" id="2955426575106084979" />
       </scope>
-      <scope id="2955426575106084979" at="28,0,32,0" />
-      <scope id="2955426575106084979" at="17,0,22,0">
+      <scope id="2955426575106084979" at="29,0,33,0" />
+      <scope id="2955426575106084979" at="18,0,23,0">
         <var name="node" id="2955426575106084979" />
       </scope>
-      <unit id="2955426575106084979" at="16,0,33,0" name="testCustomAnalyzer.dataFlow.ChildIntraModeRule" />
+      <unit id="2955426575106084979" at="34,0,37,0" name="testCustomAnalyzer.dataFlow.ChildIntraModeRule$CONCEPTS" />
+      <unit id="2955426575106084979" at="17,0,38,0" name="testCustomAnalyzer.dataFlow.ChildIntraModeRule" />
     </file>
   </root>
   <root nodeRef="r:11be8b48-b45e-48e5-98ad-b77dc1b202b1(testCustomAnalyzer.dataFlow)/4383142553201250304">
@@ -169,25 +171,23 @@
       <node id="6628579460233828323" at="22,87,23,96" concept="12" />
       <node id="6628579460233828323" at="25,128,26,22" concept="11" />
       <node id="6628579460233828323" at="26,22,27,18" concept="2" />
-      <node id="6628579460233828323" at="27,18,28,121" concept="2" />
-      <node id="6628579460233828323" at="28,121,29,46" concept="2" />
+      <node id="6628579460233828323" at="27,18,28,76" concept="2" />
+      <node id="6628579460233828323" at="28,76,29,46" concept="2" />
       <node id="6628579460233828323" at="29,46,30,129" concept="2" />
-      <node id="6628579460233828323" at="34,0,35,0" concept="3" trace="initialCounter" />
-      <node id="6628579460233828323" at="35,71,36,43" concept="2" />
+      <node id="6628579460233828985" at="34,0,35,0" concept="3" trace="initialCounter" />
+      <node id="6628579460233828985" at="35,71,36,43" concept="2" />
       <node id="8332528989793377539" at="38,45,39,33" concept="8" />
       <node id="8332528989793402998" at="41,64,42,43" concept="7" />
       <node id="8332528989793410165" at="44,35,45,31" concept="2" />
       <node id="8332528989793413070" at="47,7,48,24" concept="8" />
       <node id="8332528989793395271" at="50,109,51,23" concept="8" />
       <node id="6628579460233828323" at="53,45,54,39" concept="8" />
-      <node id="6628579460233828323" at="62,34,63,74" concept="8" />
       <node id="6628579460233828323" at="22,0,25,0" concept="1" trace="CounterAnalyzerWithConstructorAnalyzerRunner#(Lorg/jetbrains/mps/openapi/model/SNode;I)V" />
       <node id="6628579460233828323" at="35,0,38,0" concept="1" trace="CounterAnalyzerWithConstructorAnalyzer#(I)V" />
       <node id="6628579460233828323" at="38,0,41,0" concept="6" trace="initial#(Ljetbrains/mps/lang/dataFlow/framework/Program;)Ljava/lang/Integer;" />
       <node id="8332528989793401397" at="43,37,46,9" concept="5" />
       <node id="6628579460233828323" at="50,0,53,0" concept="6" trace="fun#(Ljava/lang/Integer;Ljetbrains/mps/lang/dataFlow/framework/ProgramState;Ljava/util/Map;)Ljava/lang/Integer;" />
       <node id="6628579460233828323" at="53,0,56,0" concept="6" trace="getDirection#()Ljetbrains/mps/lang/dataFlow/framework/AnalysisDirection;" />
-      <node id="6628579460233828323" at="61,0,65,0" concept="10" trace="getId#()Ljava/lang/String;" />
       <node id="8332528989793418455" at="42,43,47,7" concept="4" />
       <node id="6628579460233828323" at="25,0,32,0" concept="1" trace="CounterAnalyzerWithConstructorAnalyzerRunner#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/lang/dataFlow/framework/ProgramFactory;I)V" />
       <node id="6628579460233828323" at="41,0,50,0" concept="6" trace="merge#(Ljetbrains/mps/lang/dataFlow/framework/Program;Ljava/util/List;)Ljava/lang/Integer;" />
@@ -197,13 +197,12 @@
       <scope id="8332528989793401398" at="44,35,45,31" />
       <scope id="6628579460233828327" at="50,109,51,23" />
       <scope id="6628579460233828323" at="53,45,54,39" />
-      <scope id="6628579460233828323" at="62,34,63,74" />
       <scope id="6628579460233828323" at="22,0,25,0">
-        <var name="initialCounter" id="6628579460233828323" />
+        <var name="initialCounter" id="6628579460233828985" />
         <var name="node" id="6628579460233828323" />
       </scope>
       <scope id="6628579460233828323" at="35,0,38,0">
-        <var name="initialCounter" id="6628579460233828323" />
+        <var name="initialCounter" id="6628579460233828985" />
       </scope>
       <scope id="6628579460233828323" at="38,0,41,0">
         <var name="program" id="6628579460233828323" />
@@ -215,14 +214,13 @@
         <var name="stateValues" id="6628579460233828323" />
       </scope>
       <scope id="6628579460233828323" at="53,0,56,0" />
-      <scope id="6628579460233828323" at="61,0,65,0" />
       <scope id="6628579460233828323" at="25,128,30,129" />
       <scope id="8332528989793418455" at="42,43,47,7">
         <var name="counter" id="8332528989793418456" />
       </scope>
       <scope id="6628579460233828323" at="25,0,32,0">
         <var name="factory" id="6628579460233828323" />
-        <var name="initialCounter" id="6628579460233828323" />
+        <var name="initialCounter" id="6628579460233828985" />
         <var name="node" id="6628579460233828323" />
       </scope>
       <scope id="6628579460233828331" at="41,64,48,24">
@@ -232,56 +230,64 @@
         <var name="input" id="6628579460233828323" />
         <var name="program" id="6628579460233828323" />
       </scope>
-      <unit id="6628579460233828323" at="33,0,66,0" name="testCustomAnalyzer.dataFlow.CounterAnalyzerWithConstructorAnalyzerRunner$CounterAnalyzerWithConstructorAnalyzer" />
-      <unit id="6628579460233828323" at="20,0,67,0" name="testCustomAnalyzer.dataFlow.CounterAnalyzerWithConstructorAnalyzerRunner" />
+      <unit id="6628579460233828323" at="33,0,57,0" name="testCustomAnalyzer.dataFlow.CounterAnalyzerWithConstructorAnalyzerRunner$CounterAnalyzerWithConstructorAnalyzer" />
+      <unit id="6628579460233828323" at="20,0,58,0" name="testCustomAnalyzer.dataFlow.CounterAnalyzerWithConstructorAnalyzerRunner" />
     </file>
-    <file name="counterInstructionInstruction.java">
+    <file name="DataFlowAspectDescriptorImpl.java">
+      <node id="6628579460233828323" at="22,72,23,79" concept="8" />
+      <scope id="6628579460233828323" at="22,72,23,79" />
+    </file>
+    <file name="counterInstructionAInstruction.java">
       <node id="6628579460233829743" at="8,0,9,0" concept="3" trace="myPresentation" />
-      <node id="6628579460233829743" at="9,42,10,43" concept="7" />
-      <node id="6628579460233829743" at="10,43,11,36" concept="2" />
-      <node id="6628579460233829743" at="11,36,12,35" concept="2" />
-      <node id="6628579460233829743" at="15,39,16,26" concept="8" />
-      <node id="6628579460233829743" at="14,0,18,0" concept="6" trace="commandPresentation#()Ljava/lang/String;" />
-      <node id="6628579460233829743" at="9,0,14,0" concept="1" trace="counterInstructionInstruction#()V" />
-      <scope id="6628579460233829743" at="15,39,16,26" />
-      <scope id="6628579460233829743" at="9,42,12,35">
+      <node id="6628579460233829743" at="10,43,11,43" concept="7" />
+      <node id="6628579460233829743" at="11,43,12,37" concept="2" />
+      <node id="6628579460233829743" at="12,37,13,35" concept="2" />
+      <node id="6628579460233829743" at="16,39,17,26" concept="8" />
+      <node id="6628579460233829743" at="15,0,19,0" concept="6" trace="commandPresentation#()Ljava/lang/String;" />
+      <node id="6628579460233829743" at="10,0,15,0" concept="1" trace="counterInstructionAInstruction#()V" />
+      <scope id="6628579460233829743" at="16,39,17,26" />
+      <scope id="6628579460233829743" at="10,43,13,35">
         <var name="sb" id="6628579460233829743" />
       </scope>
-      <scope id="6628579460233829743" at="14,0,18,0" />
-      <scope id="6628579460233829743" at="9,0,14,0" />
-      <unit id="6628579460233829743" at="7,0,19,0" name="testCustomAnalyzer.dataFlow.counterInstructionInstruction" />
+      <scope id="6628579460233829743" at="15,0,19,0" />
+      <scope id="6628579460233829743" at="10,0,15,0" />
+      <unit id="6628579460233829743" at="7,0,20,0" name="testCustomAnalyzer.dataFlow.counterInstructionAInstruction" />
     </file>
   </root>
   <root nodeRef="r:11be8b48-b45e-48e5-98ad-b77dc1b202b1(testCustomAnalyzer.dataFlow)/7078910619969191664">
     <file name="OtherRoot_DataFlow.java">
-      <node id="7078910619969193530" at="14,228,15,49" concept="2" />
-      <node id="7078910619969191685" at="13,60,16,5" concept="4" />
-      <node id="7078910619969191664" at="13,0,18,0" concept="6" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
-      <scope id="7078910619969191688" at="14,228,15,49" />
-      <scope id="7078910619969191666" at="13,60,16,5" />
-      <scope id="7078910619969191685" at="13,60,16,5">
+      <node id="7078910619969193530" at="15,114,16,49" concept="2" />
+      <node id="7078910619969191664" at="21,0,22,0" concept="10" trace="child$cKRN" />
+      <node id="7078910619969191685" at="14,60,17,5" concept="4" />
+      <node id="7078910619969191664" at="14,0,19,0" concept="6" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="7078910619969191688" at="15,114,16,49" />
+      <scope id="7078910619969191666" at="14,60,17,5" />
+      <scope id="7078910619969191685" at="14,60,17,5">
         <var name="child" id="7078910619969191686" />
       </scope>
-      <scope id="7078910619969191664" at="13,0,18,0">
+      <scope id="7078910619969191664" at="14,0,19,0">
         <var name="_context" id="7078910619969191664" />
       </scope>
-      <unit id="7078910619969191664" at="12,0,19,0" name="testCustomAnalyzer.dataFlow.OtherRoot_DataFlow" />
+      <unit id="7078910619969191664" at="20,0,23,0" name="testCustomAnalyzer.dataFlow.OtherRoot_DataFlow$LINKS" />
+      <unit id="7078910619969191664" at="13,0,24,0" name="testCustomAnalyzer.dataFlow.OtherRoot_DataFlow" />
     </file>
   </root>
   <root nodeRef="r:11be8b48-b45e-48e5-98ad-b77dc1b202b1(testCustomAnalyzer.dataFlow)/7078910619969193816">
     <file name="OtherChild_IntraProcedural_BuilderMode_DataFlow.java">
-      <node id="7078910619969193837" at="16,60,17,219" concept="2" />
-      <node id="7078910619969196244" at="17,219,18,125" concept="2" />
-      <node id="7078910619969193816" at="21,49,22,138" concept="8" />
-      <node id="7078910619969193816" at="16,0,20,0" concept="6" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
-      <node id="7078910619969193816" at="20,0,24,0" concept="6" trace="getModes#()Ljava/util/Collection;" />
-      <scope id="7078910619969193816" at="21,49,22,138" />
-      <scope id="7078910619969193818" at="16,60,18,125" />
-      <scope id="7078910619969193816" at="16,0,20,0">
+      <node id="7078910619969193837" at="17,60,18,105" concept="2" />
+      <node id="7078910619969196244" at="18,105,19,125" concept="2" />
+      <node id="7078910619969193816" at="22,49,23,138" concept="8" />
+      <node id="7078910619969193816" at="27,0,28,0" concept="10" trace="child$fPvo" />
+      <node id="7078910619969193816" at="17,0,21,0" concept="6" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <node id="7078910619969193816" at="21,0,25,0" concept="6" trace="getModes#()Ljava/util/Collection;" />
+      <scope id="7078910619969193816" at="22,49,23,138" />
+      <scope id="7078910619969193818" at="17,60,19,125" />
+      <scope id="7078910619969193816" at="17,0,21,0">
         <var name="_context" id="7078910619969193816" />
       </scope>
-      <scope id="7078910619969193816" at="20,0,24,0" />
-      <unit id="7078910619969193816" at="15,0,25,0" name="testCustomAnalyzer.dataFlow.OtherChild_IntraProcedural_BuilderMode_DataFlow" />
+      <scope id="7078910619969193816" at="21,0,25,0" />
+      <unit id="7078910619969193816" at="26,0,29,0" name="testCustomAnalyzer.dataFlow.OtherChild_IntraProcedural_BuilderMode_DataFlow$LINKS" />
+      <unit id="7078910619969193816" at="16,0,30,0" name="testCustomAnalyzer.dataFlow.OtherChild_IntraProcedural_BuilderMode_DataFlow" />
     </file>
   </root>
   <root nodeRef="r:11be8b48-b45e-48e5-98ad-b77dc1b202b1(testCustomAnalyzer.dataFlow)/7078910619969195895">
@@ -301,61 +307,65 @@
   </root>
   <root nodeRef="r:11be8b48-b45e-48e5-98ad-b77dc1b202b1(testCustomAnalyzer.dataFlow)/8332528989793335920">
     <file name="Root_DataFlow.java">
-      <node id="8332528989793339823" at="14,228,15,49" concept="2" />
-      <node id="8332528989793339327" at="13,60,16,5" concept="4" />
-      <node id="8332528989793335920" at="13,0,18,0" concept="6" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
-      <scope id="8332528989793339329" at="14,228,15,49" />
-      <scope id="8332528989793335922" at="13,60,16,5" />
-      <scope id="8332528989793339327" at="13,60,16,5">
+      <node id="8332528989793339823" at="15,114,16,49" concept="2" />
+      <node id="8332528989793335920" at="21,0,22,0" concept="10" trace="child$G3Ei" />
+      <node id="8332528989793339327" at="14,60,17,5" concept="4" />
+      <node id="8332528989793335920" at="14,0,19,0" concept="6" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="8332528989793339329" at="15,114,16,49" />
+      <scope id="8332528989793335922" at="14,60,17,5" />
+      <scope id="8332528989793339327" at="14,60,17,5">
         <var name="child" id="8332528989793339328" />
       </scope>
-      <scope id="8332528989793335920" at="13,0,18,0">
+      <scope id="8332528989793335920" at="14,0,19,0">
         <var name="_context" id="8332528989793335920" />
       </scope>
-      <unit id="8332528989793335920" at="12,0,19,0" name="testCustomAnalyzer.dataFlow.Root_DataFlow" />
+      <unit id="8332528989793335920" at="20,0,23,0" name="testCustomAnalyzer.dataFlow.Root_DataFlow$LINKS" />
+      <unit id="8332528989793335920" at="13,0,24,0" name="testCustomAnalyzer.dataFlow.Root_DataFlow" />
     </file>
   </root>
   <root nodeRef="r:11be8b48-b45e-48e5-98ad-b77dc1b202b1(testCustomAnalyzer.dataFlow)/8332528989793339868">
     <file name="ChildRule.java">
-      <node id="8332528989793339868" at="14,43,15,64" concept="7" />
-      <node id="8332528989793339868" at="15,64,16,64" concept="7" />
-      <node id="8332528989793339868" at="16,64,17,90" concept="8" />
-      <node id="8332528989793339868" at="19,50,20,142" concept="8" />
-      <node id="8332528989793339882" at="23,5,24,27" concept="7" />
-      <node id="8332528989793339882" at="25,43,26,30" concept="7" />
-      <node id="8332528989793339882" at="26,30,27,54" concept="7" />
-      <node id="8332528989793339882" at="27,54,28,70" concept="7" />
-      <node id="8332528989793339882" at="28,70,29,128" concept="2" />
-      <node id="8332528989793339882" at="29,128,30,36" concept="2" />
-      <node id="8332528989793339882" at="30,36,31,68" concept="2" />
-      <node id="8332528989793339868" at="19,0,22,0" concept="6" trace="getApplicableConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
-      <node id="8332528989793339868" at="14,0,19,0" concept="6" trace="isApplicable#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
-      <node id="8332528989793339882" at="24,27,32,7" concept="5" />
-      <node id="8332528989793339882" at="22,53,33,5" concept="0" />
-      <node id="8332528989793339868" at="22,0,35,0" concept="6" trace="performActions#(Ljetbrains/mps/lang/dataFlow/framework/Program;Lorg/jetbrains/mps/openapi/model/SNode;)V" />
-      <scope id="8332528989793339868" at="19,50,20,142" />
-      <scope id="8332528989793339868" at="14,43,17,90">
+      <node id="8332528989793339868" at="15,43,16,64" concept="7" />
+      <node id="8332528989793339868" at="16,64,17,64" concept="7" />
+      <node id="8332528989793339868" at="17,64,18,90" concept="8" />
+      <node id="8332528989793339868" at="20,50,21,29" concept="8" />
+      <node id="8332528989793339882" at="24,5,25,27" concept="7" />
+      <node id="8332528989793339882" at="26,43,27,30" concept="7" />
+      <node id="8332528989793339882" at="27,30,28,54" concept="7" />
+      <node id="8332528989793339882" at="28,54,29,71" concept="7" />
+      <node id="8332528989793339882" at="29,71,30,128" concept="2" />
+      <node id="8332528989793339882" at="30,128,31,36" concept="2" />
+      <node id="8332528989793339882" at="31,36,32,68" concept="2" />
+      <node id="8332528989793339868" at="38,0,39,0" concept="10" trace="Child$8m" />
+      <node id="8332528989793339868" at="20,0,23,0" concept="6" trace="getApplicableConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="8332528989793339868" at="15,0,20,0" concept="6" trace="isApplicable#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="8332528989793339882" at="25,27,33,7" concept="5" />
+      <node id="8332528989793339882" at="23,53,34,5" concept="0" />
+      <node id="8332528989793339868" at="23,0,36,0" concept="6" trace="performActions#(Ljetbrains/mps/lang/dataFlow/framework/Program;Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <scope id="8332528989793339868" at="20,50,21,29" />
+      <scope id="8332528989793339868" at="15,43,18,90">
         <var name="applicableConcept" id="8332528989793339868" />
         <var name="concept" id="8332528989793339868" />
       </scope>
-      <scope id="8332528989793339868" at="19,0,22,0" />
-      <scope id="8332528989793339868" at="14,0,19,0">
+      <scope id="8332528989793339868" at="20,0,23,0" />
+      <scope id="8332528989793339868" at="15,0,20,0">
         <var name="node" id="8332528989793339868" />
       </scope>
-      <scope id="8332528989793339882" at="25,43,31,68">
+      <scope id="8332528989793339882" at="26,43,32,68">
         <var name="before" id="8332528989793339882" />
         <var name="instruction" id="8332528989793339882" />
         <var name="position" id="8332528989793339882" />
       </scope>
-      <scope id="8332528989793339882" at="23,5,32,7">
+      <scope id="8332528989793339882" at="24,5,33,7">
         <var name="object" id="8332528989793339882" />
       </scope>
-      <scope id="8332528989793339885" at="22,53,33,5" />
-      <scope id="8332528989793339868" at="22,0,35,0">
+      <scope id="8332528989793339885" at="23,53,34,5" />
+      <scope id="8332528989793339868" at="23,0,36,0">
         <var name="node" id="8332528989793339868" />
         <var name="o" id="8332528989793339868" />
       </scope>
-      <unit id="8332528989793339868" at="13,0,36,0" name="testCustomAnalyzer.dataFlow.ChildRule" />
+      <unit id="8332528989793339868" at="37,0,40,0" name="testCustomAnalyzer.dataFlow.ChildRule$CONCEPTS" />
+      <unit id="8332528989793339868" at="14,0,41,0" name="testCustomAnalyzer.dataFlow.ChildRule" />
     </file>
   </root>
 </debug-info>

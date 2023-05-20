@@ -2,7 +2,7 @@
 <debug-info version="2">
   <root>
     <file name="ExtensionDescriptor.java">
-      <unit at="9,0,18,0" name="jetbrains.mps.refactoring.participant.plugin.ExtensionDescriptor" />
+      <unit at="9,0,14,0" name="jetbrains.mps.refactoring.participant.plugin.ExtensionDescriptor" />
     </file>
   </root>
 </debug-info>

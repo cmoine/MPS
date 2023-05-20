@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="1pz4dx3i99s9k84heuz0bml28rthq1s">
+  <files names="ConceptVCSDescriptor_Editor.java:ConceptVCSDescriptor_EditorBuilder_a.java:EditorAspectDescriptorImpl.java:LinkVCSDescriptor_Editor.java:LinkVCSDescriptor_EditorBuilder_a.java:LinkVCSDescriptor_SubstituteMenu.java:OursStrategy_Editor.java:OursStrategy_EditorBuilder_a.java:PropertyVCSDescriptor_Editor.java:PropertyVCSDescriptor_EditorBuilder_a.java:PropertyVCSDescriptor_SubstituteMenu.java:TheirsStrategy_Editor.java:TheirsStrategy_EditorBuilder_a.java:VCSHints_Editor.java:VCSHints_EditorBuilder_a.java" />
+</product>
+

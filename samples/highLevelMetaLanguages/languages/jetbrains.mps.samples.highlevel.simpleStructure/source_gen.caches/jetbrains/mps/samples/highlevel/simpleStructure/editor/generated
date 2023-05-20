@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="1wugz44yrmuh1920h3u94jys0o84zz8" />
+<product version="3" modelHash="2e7f2e3o0d6tvxgj1nk1khen2alupv">
+  <files names="EditorAspectDescriptorImpl.java:SimpleConceptDeclaration_Editor.java:SimpleConceptDeclaration_EditorBuilder_a.java:SimplePropertyDeclaration_Editor.java:SimplePropertyDeclaration_EditorBuilder_a.java:StructureAspectDeclaration_Editor.java:StructureAspectDeclaration_EditorBuilder_a.java" />
+</product>
 

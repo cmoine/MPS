@@ -2,9 +2,7 @@
 <model ref="r:2721a314-71a4-4f87-8d33-9d2d1cd9ce6c(BHL5.structure)">
   <persistence version="9" />
   <languages>
-    <use id="c72da2b9-7cce-4447-8389-f407dc1158b7" name="jetbrains.mps.lang.structure" version="3" />
-    <use id="982eb8df-2c96-4bd7-9963-11712ea622e5" name="jetbrains.mps.lang.resources" version="2" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="78434eb8-b0e5-444b-850d-e7c4ad2da9ab(jetbrains.mps.devkit.aspect.structure)" />
   </languages>
   <imports>
     <import index="tpck" ref="r:00000000-0000-4000-0000-011c89590288(jetbrains.mps.lang.core.structure)" implicit="true" />
@@ -114,6 +112,25 @@
     <property role="TrG5h" value="C7" />
     <property role="EcuMT" value="2569465595672244115" />
     <ref role="1TJDcQ" node="2eC$PxWCqFH" resolve="C6" />
+    <node concept="PrWs8" id="2k7p7sTv$N5" role="PzmwI">
+      <ref role="PrY4T" node="2k7p7sTv$LJ" resolve="I3" />
+    </node>
+    <node concept="PrWs8" id="2k7p7sTv$Na" role="PzmwI">
+      <ref role="PrY4T" node="2k7p7sTv$LO" resolve="I4" />
+    </node>
+  </node>
+  <node concept="PlHQZ" id="2k7p7sTv$LJ">
+    <property role="EcuMT" value="2668211767468772463" />
+    <property role="TrG5h" value="I3" />
+    <node concept="1TJgyi" id="6LeUth2_uCA" role="1TKVEl">
+      <property role="IQ2nx" value="7804432302139107878" />
+      <property role="TrG5h" value="c" />
+      <ref role="AX2Wp" to="tpck:fKAOsGN" resolve="string" />
+    </node>
+  </node>
+  <node concept="PlHQZ" id="2k7p7sTv$LO">
+    <property role="EcuMT" value="2668211767468772468" />
+    <property role="TrG5h" value="I4" />
   </node>
 </model>
 

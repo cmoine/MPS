@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,18 +19,36 @@ import jetbrains.mps.project.FilteredScope;
 import jetbrains.mps.project.GlobalScope;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.module.SModule;
+import org.jetbrains.mps.openapi.module.SRepository;
+import org.jetbrains.mps.openapi.module.SearchScope;
+import org.jetbrains.mps.util.Condition;
 
+/**
+ * A view of a repository modules, with some filtered out according to {@link VisibleModuleRegistry}
+ * (owner-manifested as hidden or matching a pattern from ext point)
+ *
+ * Use of this class is discouraged due to unfortunate naming and impl of negligible value.
+ * Indeed, it captures the knowledge about the way to find out what modules are 'hidden', but why for global repo only?
+ */
 public class FilteredGlobalScope extends FilteredScope {
-  public FilteredGlobalScope() {
-    super(GlobalScope.getInstance());
+  private final Condition<SModule> myCondition;
+
+  public FilteredGlobalScope(SRepository repository) {
+    // not that filtered *global* scope cares about a repo, but if you insist on using VR logic, and don't want to use deprecated cons,
+    // here's the one to use instead.
+    this(new GlobalScope(repository));
+  }
+
+  private FilteredGlobalScope(SearchScope delegate) {
+    super(delegate);
+    // To do: add headless VisibleModuleRegistry component
+    VisibleModuleRegistry registry = VisibleModuleRegistry.getInstance();
+    myCondition = registry == null ? Condition.always() : registry::isVisible;
   }
 
   @Override
   protected boolean acceptModule(SModule module) {
-    // To do: add headless VisibleModuleRegistry component
-    VisibleModuleRegistry registry = VisibleModuleRegistry.getInstance();
-    if (registry == null)  return true;
-    return registry.isVisible(module);
+    return myCondition.met(module);
   }
 
   @Override

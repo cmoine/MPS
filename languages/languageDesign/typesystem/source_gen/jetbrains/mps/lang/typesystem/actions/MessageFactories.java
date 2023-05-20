@@ -6,88 +6,107 @@ import jetbrains.mps.openapi.actions.descriptor.NodeFactory;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SModel;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 
 public class MessageFactories {
   public static class NodeFactory_1005490780641997347 implements NodeFactory {
-    public void setup(SNode newNode, SNode sampleNode, SNode enclosingNode, SModel model) {
+    public void setup(SNode newNode, SNode sampleNode, SNode enclosingNode, int index, SModel model) {
       {
         final SNode original = sampleNode;
-        if (SNodeOperations.isInstanceOf(original, MetaAdapterFactory.getInterfaceConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11db4aad802L, "jetbrains.mps.lang.typesystem.structure.MessageStatement"))) {
-          SLinkOperations.setTarget(newNode, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11db4aad802L, 0x11db4ab45e6L, "nodeToReport"), SLinkOperations.getTarget(original, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11db4aad802L, 0x11db4ab45e6L, "nodeToReport")));
-          ListSequence.fromList(SLinkOperations.getChildren(newNode, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11db4aad802L, 0x11db4ab45e7L, "helginsIntention"))).addSequence(ListSequence.fromList(SLinkOperations.getChildren(original, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11db4aad802L, 0x11db4ab45e7L, "helginsIntention"))));
-          SLinkOperations.setTarget(newNode, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11db4aad802L, 0x11db4abc990L, "messageTarget"), SLinkOperations.getTarget(original, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11db4aad802L, 0x11db4abc990L, "messageTarget")));
-          SLinkOperations.setTarget(newNode, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11db4aad802L, 0x37a16b7744c2e061L, "foreignMessageSource"), SLinkOperations.getTarget(original, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11db4aad802L, 0x37a16b7744c2e061L, "foreignMessageSource")));
+        if (SNodeOperations.isInstanceOf(original, CONCEPTS.AbstractReportStatement$8d)) {
+          SLinkOperations.setTarget(newNode, LINKS.nodeToReport$xn5I, SLinkOperations.getTarget(original, LINKS.nodeToReport$xn5I));
+          ListSequence.fromList(SLinkOperations.getChildren(newNode, LINKS.helginsIntention$WhDe)).addSequence(ListSequence.fromList(SLinkOperations.getChildren(original, LINKS.helginsIntention$WhDe)));
+          SLinkOperations.setTarget(newNode, LINKS.messageTarget$3zAg, SLinkOperations.getTarget(original, LINKS.messageTarget$3zAg));
+          SLinkOperations.setTarget(newNode, LINKS.foreignMessageSource$aPMj, SLinkOperations.getTarget(original, LINKS.foreignMessageSource$aPMj));
         }
       }
     }
   }
   public static class NodeFactory_1005490780642123875 implements NodeFactory {
-    public void setup(SNode newNode, SNode sampleNode, SNode enclosingNode, SModel model) {
+    public void setup(SNode newNode, SNode sampleNode, SNode enclosingNode, int index, SModel model) {
       {
         final SNode original = sampleNode;
-        if (SNodeOperations.isInstanceOf(original, MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111b251a62aL, "jetbrains.mps.lang.typesystem.structure.ReportErrorStatement"))) {
-          SLinkOperations.setTarget(newNode, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111b251a62aL, 0x111b252f0c9L, "errorString"), SLinkOperations.getTarget(original, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111b251a62aL, 0x111b252f0c9L, "errorString")));
+        if (SNodeOperations.isInstanceOf(original, CONCEPTS.ReportErrorStatement$v1)) {
+          SLinkOperations.setTarget(newNode, LINKS.errorString$2Vf_, SLinkOperations.getTarget(original, LINKS.errorString$2Vf_));
         }
       }
       {
         final SNode original = sampleNode;
-        if (SNodeOperations.isInstanceOf(original, MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1190a1db131L, "jetbrains.mps.lang.typesystem.structure.WarningStatement"))) {
-          SLinkOperations.setTarget(newNode, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111b251a62aL, 0x111b252f0c9L, "errorString"), SLinkOperations.getTarget(original, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1190a1db131L, 0x1190a1e0f30L, "warningText")));
+        if (SNodeOperations.isInstanceOf(original, CONCEPTS.WarningStatement$iV)) {
+          SLinkOperations.setTarget(newNode, LINKS.errorString$2Vf_, SLinkOperations.getTarget(original, LINKS.warningText$plyA));
         }
       }
       {
         final SNode original = sampleNode;
-        if (SNodeOperations.isInstanceOf(original, MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11d2965916bL, "jetbrains.mps.lang.typesystem.structure.InfoStatement"))) {
-          SLinkOperations.setTarget(newNode, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111b251a62aL, 0x111b252f0c9L, "errorString"), SLinkOperations.getTarget(original, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11d2965916bL, 0x11d2966036aL, "infoText")));
+        if (SNodeOperations.isInstanceOf(original, CONCEPTS.InfoStatement$Y5)) {
+          SLinkOperations.setTarget(newNode, LINKS.errorString$2Vf_, SLinkOperations.getTarget(original, LINKS.infoText$13Kl));
         }
       }
     }
   }
   public static class NodeFactory_1005490780642148227 implements NodeFactory {
-    public void setup(SNode newNode, SNode sampleNode, SNode enclosingNode, SModel model) {
+    public void setup(SNode newNode, SNode sampleNode, SNode enclosingNode, int index, SModel model) {
       {
         final SNode original = sampleNode;
-        if (SNodeOperations.isInstanceOf(original, MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111b251a62aL, "jetbrains.mps.lang.typesystem.structure.ReportErrorStatement"))) {
-          SLinkOperations.setTarget(newNode, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1190a1db131L, 0x1190a1e0f30L, "warningText"), SLinkOperations.getTarget(original, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111b251a62aL, 0x111b252f0c9L, "errorString")));
+        if (SNodeOperations.isInstanceOf(original, CONCEPTS.ReportErrorStatement$v1)) {
+          SLinkOperations.setTarget(newNode, LINKS.warningText$plyA, SLinkOperations.getTarget(original, LINKS.errorString$2Vf_));
         }
       }
       {
         final SNode original = sampleNode;
-        if (SNodeOperations.isInstanceOf(original, MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1190a1db131L, "jetbrains.mps.lang.typesystem.structure.WarningStatement"))) {
-          SLinkOperations.setTarget(newNode, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1190a1db131L, 0x1190a1e0f30L, "warningText"), SLinkOperations.getTarget(original, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1190a1db131L, 0x1190a1e0f30L, "warningText")));
+        if (SNodeOperations.isInstanceOf(original, CONCEPTS.WarningStatement$iV)) {
+          SLinkOperations.setTarget(newNode, LINKS.warningText$plyA, SLinkOperations.getTarget(original, LINKS.warningText$plyA));
         }
       }
       {
         final SNode original = sampleNode;
-        if (SNodeOperations.isInstanceOf(original, MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11d2965916bL, "jetbrains.mps.lang.typesystem.structure.InfoStatement"))) {
-          SLinkOperations.setTarget(newNode, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1190a1db131L, 0x1190a1e0f30L, "warningText"), SLinkOperations.getTarget(original, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11d2965916bL, 0x11d2966036aL, "infoText")));
+        if (SNodeOperations.isInstanceOf(original, CONCEPTS.InfoStatement$Y5)) {
+          SLinkOperations.setTarget(newNode, LINKS.warningText$plyA, SLinkOperations.getTarget(original, LINKS.infoText$13Kl));
         }
       }
     }
   }
   public static class NodeFactory_1005490780642154321 implements NodeFactory {
-    public void setup(SNode newNode, SNode sampleNode, SNode enclosingNode, SModel model) {
+    public void setup(SNode newNode, SNode sampleNode, SNode enclosingNode, int index, SModel model) {
       {
         final SNode original = sampleNode;
-        if (SNodeOperations.isInstanceOf(original, MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111b251a62aL, "jetbrains.mps.lang.typesystem.structure.ReportErrorStatement"))) {
-          SLinkOperations.setTarget(newNode, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11d2965916bL, 0x11d2966036aL, "infoText"), SLinkOperations.getTarget(original, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111b251a62aL, 0x111b252f0c9L, "errorString")));
+        if (SNodeOperations.isInstanceOf(original, CONCEPTS.ReportErrorStatement$v1)) {
+          SLinkOperations.setTarget(newNode, LINKS.infoText$13Kl, SLinkOperations.getTarget(original, LINKS.errorString$2Vf_));
         }
       }
       {
         final SNode original = sampleNode;
-        if (SNodeOperations.isInstanceOf(original, MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1190a1db131L, "jetbrains.mps.lang.typesystem.structure.WarningStatement"))) {
-          SLinkOperations.setTarget(newNode, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11d2965916bL, 0x11d2966036aL, "infoText"), SLinkOperations.getTarget(original, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1190a1db131L, 0x1190a1e0f30L, "warningText")));
+        if (SNodeOperations.isInstanceOf(original, CONCEPTS.WarningStatement$iV)) {
+          SLinkOperations.setTarget(newNode, LINKS.infoText$13Kl, SLinkOperations.getTarget(original, LINKS.warningText$plyA));
         }
       }
       {
         final SNode original = sampleNode;
-        if (SNodeOperations.isInstanceOf(original, MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11d2965916bL, "jetbrains.mps.lang.typesystem.structure.InfoStatement"))) {
-          SLinkOperations.setTarget(newNode, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11d2965916bL, 0x11d2966036aL, "infoText"), SLinkOperations.getTarget(original, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11d2965916bL, 0x11d2966036aL, "infoText")));
+        if (SNodeOperations.isInstanceOf(original, CONCEPTS.InfoStatement$Y5)) {
+          SLinkOperations.setTarget(newNode, LINKS.infoText$13Kl, SLinkOperations.getTarget(original, LINKS.infoText$13Kl));
         }
       }
     }
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept AbstractReportStatement$8d = MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x36a3e6f668ce5a59L, "jetbrains.mps.lang.typesystem.structure.AbstractReportStatement");
+    /*package*/ static final SConcept ReportErrorStatement$v1 = MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111b251a62aL, "jetbrains.mps.lang.typesystem.structure.ReportErrorStatement");
+    /*package*/ static final SConcept WarningStatement$iV = MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1190a1db131L, "jetbrains.mps.lang.typesystem.structure.WarningStatement");
+    /*package*/ static final SConcept InfoStatement$Y5 = MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11d2965916bL, "jetbrains.mps.lang.typesystem.structure.InfoStatement");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink nodeToReport$xn5I = MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x36a3e6f668ce5a59L, 0x36a3e6f668ce5a5dL, "nodeToReport");
+    /*package*/ static final SContainmentLink helginsIntention$WhDe = MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x36a3e6f668ce5a59L, 0x36a3e6f668ce5c15L, "helginsIntention");
+    /*package*/ static final SContainmentLink messageTarget$3zAg = MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x36a3e6f668ce5a59L, 0x36a3e6f668ce5cf3L, "messageTarget");
+    /*package*/ static final SContainmentLink foreignMessageSource$aPMj = MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x36a3e6f668ce5a59L, 0x36a3e6f668ce5dd2L, "foreignMessageSource");
+    /*package*/ static final SContainmentLink errorString$2Vf_ = MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111b251a62aL, 0x111b252f0c9L, "errorString");
+    /*package*/ static final SContainmentLink warningText$plyA = MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1190a1db131L, 0x1190a1e0f30L, "warningText");
+    /*package*/ static final SContainmentLink infoText$13Kl = MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11d2965916bL, 0x11d2966036aL, "infoText");
   }
 }

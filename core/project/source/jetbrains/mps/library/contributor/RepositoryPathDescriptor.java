@@ -18,6 +18,11 @@ package jetbrains.mps.library.contributor;
 import jetbrains.mps.vfs.IFile;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * something a little bigger than IFile (in project IFile + virtual path??)
+ * fixme
+ * @author apyshkin
+ */
 public interface RepositoryPathDescriptor {
   /**
    * @return a path to the repository modules or repository module configuration file (TODO)

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,7 @@
  */
 package jetbrains.mps.util;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.LogManager;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.vfs.IFile;
 import org.jdom.Document;
 import org.jdom.JDOMException;
@@ -27,17 +26,29 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.persistence.MultiStreamDataSource;
 import org.jetbrains.mps.openapi.persistence.StreamDataSource;
-import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import java.io.*;
+import java.io.BufferedOutputStream;
+import java.io.CharArrayReader;
+import java.io.CharArrayWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.io.Writer;
 
 public class JDOMUtil {
-  private static final Logger LOG = LogManager.getLogger(JDOMUtil.class);
+  private static final Logger LOG = Logger.getLogger(JDOMUtil.class);
 
   private static SAXParserFactory factory = null;
 
@@ -50,24 +61,11 @@ public class JDOMUtil {
 
   public static Document loadDocument(IFile file) throws JDOMException, IOException {
     SAXBuilder saxBuilder = createBuilder();
-    InputStream in = null;
-    try {
-      in = file.openInputStream();
+    try (InputStream in = file.openInputStream()) {
       return saxBuilder.build(new InputStreamReader(in, FileUtil.DEFAULT_CHARSET));
-    } catch (JDOMException e) {
+    } catch (JDOMException | IOException e) {
       LOG.error("FAILED TO LOAD FILE : " + file.getPath(), e);
       throw e;
-    } catch (IOException e) {
-      LOG.error("FAILED TO LOAD FILE : " + file.getPath(), e);
-      throw e;
-    } finally {
-      if (in != null) {
-        try {
-          in.close();
-        } catch (IOException e) {
-          LOG.error(null, e);
-        }
-      }
     }
   }
 
@@ -75,10 +73,7 @@ public class JDOMUtil {
     SAXBuilder saxBuilder = createBuilder();
     try {
       return saxBuilder.build(source);
-    } catch (JDOMException e) {
-      LOG.error("FAILED TO LOAD FILE : " + source.toString());
-      throw e;
-    } catch (IOException e) {
+    } catch (JDOMException | IOException e) {
       LOG.error("FAILED TO LOAD FILE : " + source.toString());
       throw e;
     }
@@ -86,17 +81,11 @@ public class JDOMUtil {
 
   public static Document loadDocument(File file) throws JDOMException, IOException {
     SAXBuilder saxBuilder = createBuilder();
-    FileInputStream in = new FileInputStream(file);
-    try {
+    try (FileInputStream in = new FileInputStream(file)) {
       return saxBuilder.build(new InputStreamReader(in, FileUtil.DEFAULT_CHARSET));
-    } catch (JDOMException e) {
+    } catch (JDOMException | IOException e) {
       LOG.error("FAILED TO LOAD FILE : " + file.getAbsolutePath());
       throw e;
-    } catch (IOException e) {
-      LOG.error("FAILED TO LOAD FILE : " + file.getAbsolutePath());
-      throw e;
-    } finally {
-      in.close();
     }
   }
 
@@ -116,57 +105,38 @@ public class JDOMUtil {
       writeDocument(doc, writer);
     } catch (IOException e) {
       // This is hardly possible
-      LOG.error(null, e);
+      LOG.error(String.valueOf(doc), e);
     }
     return writer.toString();
   }
 
   public static void writeDocument(Document document, String filePath) throws IOException {
-    OutputStream stream = new BufferedOutputStream(new FileOutputStream(filePath));
-    try {
+    try (OutputStream stream = new BufferedOutputStream(new FileOutputStream(filePath))) {
       writeDocument(document, stream);
-    } finally {
-      stream.close();
     }
   }
 
   public static SAXBuilder createBuilder() {
     final SAXBuilder saxBuilder = new SAXBuilder();
-    saxBuilder.setEntityResolver(new EntityResolver() {
-      @Override
-      public InputSource resolveEntity(String publicId,
-                       String systemId)
-        throws SAXException, IOException {
-        return new InputSource(new CharArrayReader(new char[0]));
-      }
-    });
+    saxBuilder.setEntityResolver((publicId, systemId) -> new InputSource(new CharArrayReader(new char[0])));
     return saxBuilder;
   }
 
   public static void writeDocument(Document document, IFile file) throws IOException {
-    OutputStream stream = new BufferedOutputStream(file.openOutputStream());
-    try {
+    try (OutputStream stream = new BufferedOutputStream(file.openOutputStream())) {
       writeDocument(document, stream);
-    } finally {
-      stream.close();
     }
   }
 
   public static void writeDocument(Document document, StreamDataSource source) throws IOException {
-    OutputStream stream = new BufferedOutputStream(source.openOutputStream());
-    try {
+    try (OutputStream stream = new BufferedOutputStream(source.openOutputStream())) {
       writeDocument(document, stream);
-    } finally {
-      stream.close();
     }
   }
 
   public static void writeDocument(Document document, MultiStreamDataSource source, String streamName) throws IOException {
-    OutputStream stream = new BufferedOutputStream(source.openOutputStream(streamName));
-    try {
+    try (OutputStream stream = new BufferedOutputStream(source.getStreamByNameOrCreate(streamName).openOutputStream())) {
       writeDocument(document, stream);
-    } finally {
-      stream.close();
     }
   }
 
@@ -179,11 +149,8 @@ public class JDOMUtil {
       file.createNewFile();
     }
 
-    OutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
-    try {
+    try (OutputStream stream = new BufferedOutputStream(new FileOutputStream(file))) {
       writeDocument(document, stream);
-    } finally {
-      stream.close();
     }
   }
 
@@ -251,7 +218,7 @@ public class JDOMUtil {
           buffer = new StringBuilder(text.length() + 20);
           // Copy previous skipped characters and fall through
           // to pickup current character
-          buffer.append(text.substring(0, i));
+          buffer.append(text, 0, i);
           buffer.append(quotation);
         }
       } else {
@@ -346,7 +313,7 @@ public class JDOMUtil {
           buffer = new StringBuilder(text.length());
           // Copy previous skipped characters and fall through
           // to pickup current character
-          buffer.append(text.substring(0, start));
+          buffer.append(text, 0, start);
           buffer.append(quotation);
         }
       } else {

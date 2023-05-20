@@ -5,56 +5,76 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
   <root nodeRef="r:2d25e22e-2ee8-4e84-89da-295e3fc8de94(jetbrains.mps.lang.plugin.standalone.generator.util)/681855071694482336">
     <file name="PluginUtils.java">
-      <node id="5023285075122028228" at="16,53,17,1595" concept="4" />
-      <node id="5023285075122038876" at="19,57,20,1380" concept="4" />
-      <node id="6362460243896632403" at="23,256,24,13" concept="4" />
-      <node id="5115557898426114451" at="26,265,27,13" concept="4" />
-      <node id="6362460243896632408" at="28,5,29,0" concept="5" />
-      <node id="812693349008551611" at="29,0,30,54" concept="3" />
-      <node id="812693349008551779" at="30,54,31,71" concept="3" />
-      <node id="6362460243896632414" at="32,73,33,13" concept="4" />
-      <node id="6362460243896632416" at="34,5,35,0" concept="5" />
-      <node id="812693349008597362" at="35,0,36,172" concept="1" />
-      <node id="6362460243896632409" at="38,62,39,46" concept="4" />
-      <node id="681855071694482338" at="14,0,16,0" concept="0" trace="PluginUtils#()V" />
-      <node id="681855071694482342" at="16,0,19,0" concept="6" trace="needAppPlugin#(Lorg/jetbrains/mps/openapi/model/SModel;)Z" />
-      <node id="681855071694482362" at="19,0,22,0" concept="6" trace="needProjectPlugin#(Lorg/jetbrains/mps/openapi/model/SModel;)Z" />
-      <node id="6362460243896632387" at="22,88,25,5" concept="2" />
-      <node id="5115557898426114449" at="25,5,28,5" concept="2" />
-      <node id="812693349008551481" at="31,71,34,5" concept="2" />
-      <node id="6362460243896632409" at="38,0,41,0" concept="6" trace="eq_l4wyvj_a0f0d#(Ljava/lang/Object;Ljava/lang/Object;)Z" />
-      <node id="6362460243896604674" at="22,0,38,0" concept="6" trace="checkPluginModelName#(Ljetbrains/mps/generator/template/TemplateQueryContext;Lorg/jetbrains/mps/openapi/model/SNode;)V" />
-      <scope id="681855071694482341" at="14,24,14,24" />
-      <scope id="681855071694482345" at="16,53,17,1595" />
-      <scope id="681855071694482365" at="19,57,20,1380" />
-      <scope id="6362460243896632388" at="23,256,24,13" />
-      <scope id="5115557898426114450" at="26,265,27,13" />
-      <scope id="812693349008551482" at="32,73,33,13" />
-      <scope id="6362460243896632409" at="38,62,39,46" />
-      <scope id="681855071694482338" at="14,0,16,0" />
-      <scope id="681855071694482342" at="16,0,19,0">
+      <node id="5023285075122028228" at="20,53,21,749" concept="4" />
+      <node id="5023285075122038876" at="23,57,24,644" concept="4" />
+      <node id="2220549924074045193" at="26,88,27,115" concept="5" />
+      <node id="2220549924074046224" at="27,115,28,124" concept="5" />
+      <node id="6362460243896632403" at="29,136,30,13" concept="4" />
+      <node id="5115557898426114451" at="32,134,33,13" concept="4" />
+      <node id="6362460243896632408" at="34,5,35,0" concept="6" />
+      <node id="812693349008551611" at="35,0,36,54" concept="3" />
+      <node id="2220549924074047168" at="36,54,37,0" concept="6" />
+      <node id="2220549924074061359" at="38,201,39,90" concept="5" />
+      <node id="2220549924074061375" at="39,90,40,125" concept="5" />
+      <node id="2220549924074816857" at="40,125,41,160" concept="5" />
+      <node id="2220549924074061302" at="41,160,42,13" concept="4" />
+      <node id="2220549924074047228" at="43,5,44,0" concept="6" />
+      <node id="812693349008551779" at="44,0,45,71" concept="3" />
+      <node id="6362460243896632414" at="46,72,47,13" concept="4" />
+      <node id="6362460243896632416" at="48,5,49,0" concept="6" />
+      <node id="812693349008597362" at="49,0,50,172" concept="1" />
+      <node id="681855071694482336" at="54,0,55,0" concept="7" trace="ApplicationPluginDeclaration$W1" />
+      <node id="681855071694482336" at="55,0,56,0" concept="7" trace="StandalonePluginDescriptor$4y" />
+      <node id="681855071694482336" at="56,0,57,0" concept="7" trace="IdeaInitializerDescriptor$UQ" />
+      <node id="681855071694482336" at="57,0,58,0" concept="7" trace="ActionGroupDeclaration$VO" />
+      <node id="681855071694482336" at="58,0,59,0" concept="7" trace="ActionDeclaration$T0" />
+      <node id="681855071694482336" at="59,0,60,0" concept="7" trace="InterfaceGroup$yq" />
+      <node id="681855071694482336" at="60,0,61,0" concept="7" trace="KeymapChangesDeclaration$QD" />
+      <node id="681855071694482336" at="61,0,62,0" concept="7" trace="EditorTab$zO" />
+      <node id="681855071694482336" at="62,0,63,0" concept="7" trace="BaseToolDeclaration$cK" />
+      <node id="681855071694482336" at="63,0,64,0" concept="7" trace="PreferencesComponentDeclaration$3m" />
+      <node id="681855071694482336" at="64,0,65,0" concept="7" trace="ProjectPluginDeclaration$IW" />
+      <node id="681855071694482336" at="68,0,69,0" concept="7" trace="needInitConfig$W9CN" />
+      <node id="681855071694482336" at="69,0,70,0" concept="7" trace="compileInMPS$2Q_X" />
+      <node id="681855071694482338" at="18,0,20,0" concept="0" trace="PluginUtils#()V" />
+      <node id="681855071694482342" at="20,0,23,0" concept="8" trace="needAppPlugin#(Lorg/jetbrains/mps/openapi/model/SModel;)Z" />
+      <node id="681855071694482362" at="23,0,26,0" concept="8" trace="needProjectPlugin#(Lorg/jetbrains/mps/openapi/model/SModel;)Z" />
+      <node id="6362460243896632387" at="28,124,31,5" concept="2" />
+      <node id="5115557898426114449" at="31,5,34,5" concept="2" />
+      <node id="812693349008551481" at="45,71,48,5" concept="2" />
+      <node id="2220549924074049150" at="37,0,43,5" concept="2" />
+      <node id="6362460243896604674" at="26,0,52,0" concept="8" trace="checkPluginModelName#(Ljetbrains/mps/generator/template/TemplateQueryContext;Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <scope id="681855071694482341" at="18,24,18,24" />
+      <scope id="681855071694482345" at="20,53,21,749" />
+      <scope id="681855071694482365" at="23,57,24,644" />
+      <scope id="6362460243896632388" at="29,136,30,13" />
+      <scope id="5115557898426114450" at="32,134,33,13" />
+      <scope id="812693349008551482" at="46,72,47,13" />
+      <scope id="681855071694482338" at="18,0,20,0" />
+      <scope id="681855071694482342" at="20,0,23,0">
         <var name="model" id="9016469588388108907" />
       </scope>
-      <scope id="681855071694482362" at="19,0,22,0">
+      <scope id="681855071694482362" at="23,0,26,0">
         <var name="model" id="9016469588388110151" />
       </scope>
-      <scope id="6362460243896632409" at="38,0,41,0">
-        <var name="a" id="6362460243896632409" />
-        <var name="b" id="6362460243896632409" />
-      </scope>
-      <scope id="6362460243896604677" at="22,88,36,172">
+      <scope id="2220549924074049152" at="38,201,42,13" />
+      <scope id="6362460243896604677" at="26,88,50,172">
         <var name="correctName" id="812693349008551780" />
         <var name="model" id="812693349008551612" />
       </scope>
-      <scope id="6362460243896604674" at="22,0,38,0">
+      <scope id="6362460243896604674" at="26,0,52,0">
         <var name="genContext" id="6362460243896632376" />
         <var name="node" id="6362460243896632374" />
       </scope>
-      <unit id="681855071694482336" at="13,0,42,0" name="jetbrains.mps.lang.plugin.standalone.generator.util.PluginUtils" />
+      <unit id="681855071694482336" at="67,0,71,0" name="jetbrains.mps.lang.plugin.standalone.generator.util.PluginUtils$PROPS" />
+      <unit id="681855071694482336" at="53,0,66,0" name="jetbrains.mps.lang.plugin.standalone.generator.util.PluginUtils$CONCEPTS" />
+      <unit id="681855071694482336" at="17,0,72,0" name="jetbrains.mps.lang.plugin.standalone.generator.util.PluginUtils" />
     </file>
   </root>
 </debug-info>

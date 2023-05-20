@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <root nodeRef="r:12f3b94f-2196-4e11-9045-044eed54cea7(jetbrains.mps.build.sandbox.testExternalJavaBuild)/8056730377013685541">
+    <file name="buildTest.xml">
+      <unit id="8056730377013685541" at="1,0,44,10" name="jetbrains.mps.build.sandbox.testExternalJavaBuild.buildTest" />
+    </file>
+  </root>
+  <root nodeRef="r:12f3b94f-2196-4e11-9045-044eed54cea7(jetbrains.mps.build.sandbox.testExternalJavaBuild)/8077978191914979020">
+    <file name="buildTest2.xml">
+      <unit id="8077978191914979020" at="1,0,41,10" name="jetbrains.mps.build.sandbox.testExternalJavaBuild.buildTest2" />
+    </file>
+  </root>
+</debug-info>
+

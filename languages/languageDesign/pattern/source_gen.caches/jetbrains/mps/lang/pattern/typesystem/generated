@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="7j83dc8poh3z0v46gu5vo1id5ygqq2t" />
+<product version="3" modelHash="-a8ebawdy352vde1desxued1mfttwdp2">
+  <files names="PatternMemberDuplication_NonTypesystemRule.java:PatternVariableDuplication_NonTypesystemRule.java:TypesystemDescriptor.java:check_ExpressionPatternProvider_NonTypesystemRule.java:check_NodeBuilderList_NonTypesystemRule.java:typeof_AsPattern_InferenceRule.java:typeof_LabeledNode_InferenceRule.java:typeof_LinkPatternVariableDeclaration_InferenceRule.java:typeof_ListPattern_InferenceRule.java:typeof_PatternBuilderVariableReference_InferenceRule.java:typeof_PatternExpression_InferenceRule.java:typeof_PatternSwitchStatement_InferenceRule.java:typeof_PatternVariableDeclaration_InferenceRule.java:typeof_PatternVariableNode_InferenceRule.java:typeof_PatternVariableProperty_InferenceRule.java:typeof_PropertyPatternVariableDeclaration_InferenceRule.java" />
+</product>
 

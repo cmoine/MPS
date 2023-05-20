@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <root nodeRef="r:ba36a6c7-bab0-4006-ad8b-187ac1fc8f66(jetbrains.mps.lang.typesystem.editorTest@tests)/4981802504972003464">
+    <file name="TestCreateComparableEquationStatement_Test.java">
+      <node id="4981802504972003464" at="19,55,20,60" concept="5" />
+      <node id="4981802504972003464" at="24,77,25,36" concept="1" />
+      <node id="4981802504972003464" at="30,52,31,19" concept="5" />
+      <node id="4981802504972003464" at="35,51,36,72" concept="1" />
+      <node id="4981802504972013253" at="36,72,37,25" concept="1" />
+      <node id="4981802504972003464" at="16,0,18,0" concept="4" trace="ourParametersCacheExtension" />
+      <node id="4981802504972003464" at="19,0,22,0" concept="0" trace="TestCreateComparableEquationStatement_Test#()V" />
+      <node id="4981802504972003464" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="4981802504972003464" at="23,0,27,0" concept="2" trace="test_TestCreateComparableEquationStatement#()V" />
+      <node id="4981802504972003464" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="4981802504972003464" at="19,55,20,60" />
+      <scope id="4981802504972003464" at="24,77,25,36" />
+      <scope id="4981802504972003464" at="30,52,31,19" />
+      <scope id="4981802504972003464" at="35,51,37,25" />
+      <scope id="4981802504972003464" at="19,0,22,0" />
+      <scope id="4981802504972003464" at="30,0,33,0">
+        <var name="owner" id="4981802504972003464" />
+      </scope>
+      <scope id="4981802504972003464" at="23,0,27,0" />
+      <scope id="4981802504972003464" at="34,0,39,0" />
+      <unit id="4981802504972003464" at="28,0,40,0" name="jetbrains.mps.lang.typesystem.editorTest.TestCreateComparableEquationStatement_Test$TestBody" />
+      <unit id="4981802504972003464" at="14,0,41,0" name="jetbrains.mps.lang.typesystem.editorTest.TestCreateComparableEquationStatement_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:ba36a6c7-bab0-4006-ad8b-187ac1fc8f66(jetbrains.mps.lang.typesystem.editorTest@tests)/4981802504972074172">
+    <file name="TestCreateEquationStatement_Test.java">
+      <node id="4981802504972074172" at="19,45,20,60" concept="5" />
+      <node id="4981802504972074172" at="24,67,25,36" concept="1" />
+      <node id="4981802504972074172" at="30,52,31,19" concept="5" />
+      <node id="4981802504972074172" at="35,51,36,72" concept="1" />
+      <node id="4981802504972074227" at="36,72,37,26" concept="1" />
+      <node id="4981802504972074268" at="37,26,38,0" concept="3" />
+      <node id="4981802504972074172" at="16,0,18,0" concept="4" trace="ourParametersCacheExtension" />
+      <node id="4981802504972074172" at="19,0,22,0" concept="0" trace="TestCreateEquationStatement_Test#()V" />
+      <node id="4981802504972074172" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="4981802504972074172" at="23,0,27,0" concept="2" trace="test_TestCreateEquationStatement#()V" />
+      <node id="4981802504972074172" at="34,0,40,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="4981802504972074172" at="19,45,20,60" />
+      <scope id="4981802504972074172" at="24,67,25,36" />
+      <scope id="4981802504972074172" at="30,52,31,19" />
+      <scope id="4981802504972074172" at="19,0,22,0" />
+      <scope id="4981802504972074172" at="30,0,33,0">
+        <var name="owner" id="4981802504972074172" />
+      </scope>
+      <scope id="4981802504972074172" at="35,51,38,0" />
+      <scope id="4981802504972074172" at="23,0,27,0" />
+      <scope id="4981802504972074172" at="34,0,40,0" />
+      <unit id="4981802504972074172" at="28,0,41,0" name="jetbrains.mps.lang.typesystem.editorTest.TestCreateEquationStatement_Test$TestBody" />
+      <unit id="4981802504972074172" at="14,0,42,0" name="jetbrains.mps.lang.typesystem.editorTest.TestCreateEquationStatement_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:ba36a6c7-bab0-4006-ad8b-187ac1fc8f66(jetbrains.mps.lang.typesystem.editorTest@tests)/4981802504972074646">
+    <file name="TestCreateGreaterThanInequationStatement_Test.java">
+      <node id="4981802504972074646" at="19,58,20,60" concept="5" />
+      <node id="4981802504972074646" at="24,80,25,36" concept="1" />
+      <node id="4981802504972074646" at="30,52,31,19" concept="5" />
+      <node id="4981802504972074646" at="35,51,36,72" concept="1" />
+      <node id="4981802504972074692" at="36,72,37,26" concept="1" />
+      <node id="4981802504972074697" at="37,26,38,0" concept="3" />
+      <node id="4981802504972074646" at="16,0,18,0" concept="4" trace="ourParametersCacheExtension" />
+      <node id="4981802504972074646" at="19,0,22,0" concept="0" trace="TestCreateGreaterThanInequationStatement_Test#()V" />
+      <node id="4981802504972074646" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="4981802504972074646" at="23,0,27,0" concept="2" trace="test_TestCreateGreaterThanInequationStatement#()V" />
+      <node id="4981802504972074646" at="34,0,40,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="4981802504972074646" at="19,58,20,60" />
+      <scope id="4981802504972074646" at="24,80,25,36" />
+      <scope id="4981802504972074646" at="30,52,31,19" />
+      <scope id="4981802504972074646" at="19,0,22,0" />
+      <scope id="4981802504972074646" at="30,0,33,0">
+        <var name="owner" id="4981802504972074646" />
+      </scope>
+      <scope id="4981802504972074646" at="35,51,38,0" />
+      <scope id="4981802504972074646" at="23,0,27,0" />
+      <scope id="4981802504972074646" at="34,0,40,0" />
+      <unit id="4981802504972074646" at="28,0,41,0" name="jetbrains.mps.lang.typesystem.editorTest.TestCreateGreaterThanInequationStatement_Test$TestBody" />
+      <unit id="4981802504972074646" at="14,0,42,0" name="jetbrains.mps.lang.typesystem.editorTest.TestCreateGreaterThanInequationStatement_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:ba36a6c7-bab0-4006-ad8b-187ac1fc8f66(jetbrains.mps.lang.typesystem.editorTest@tests)/4981802504972074751">
+    <file name="TestCreateLessThanInequationStatement_Test.java">
+      <node id="4981802504972074751" at="19,55,20,60" concept="5" />
+      <node id="4981802504972074751" at="24,77,25,36" concept="1" />
+      <node id="4981802504972074751" at="30,52,31,19" concept="5" />
+      <node id="4981802504972074751" at="35,51,36,72" concept="1" />
+      <node id="4981802504972074801" at="36,72,37,26" concept="1" />
+      <node id="4981802504972074802" at="37,26,38,0" concept="3" />
+      <node id="4981802504972074751" at="16,0,18,0" concept="4" trace="ourParametersCacheExtension" />
+      <node id="4981802504972074751" at="19,0,22,0" concept="0" trace="TestCreateLessThanInequationStatement_Test#()V" />
+      <node id="4981802504972074751" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="4981802504972074751" at="23,0,27,0" concept="2" trace="test_TestCreateLessThanInequationStatement#()V" />
+      <node id="4981802504972074751" at="34,0,40,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="4981802504972074751" at="19,55,20,60" />
+      <scope id="4981802504972074751" at="24,77,25,36" />
+      <scope id="4981802504972074751" at="30,52,31,19" />
+      <scope id="4981802504972074751" at="19,0,22,0" />
+      <scope id="4981802504972074751" at="30,0,33,0">
+        <var name="owner" id="4981802504972074751" />
+      </scope>
+      <scope id="4981802504972074751" at="35,51,38,0" />
+      <scope id="4981802504972074751" at="23,0,27,0" />
+      <scope id="4981802504972074751" at="34,0,40,0" />
+      <unit id="4981802504972074751" at="28,0,41,0" name="jetbrains.mps.lang.typesystem.editorTest.TestCreateLessThanInequationStatement_Test$TestBody" />
+      <unit id="4981802504972074751" at="14,0,42,0" name="jetbrains.mps.lang.typesystem.editorTest.TestCreateLessThanInequationStatement_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:ba36a6c7-bab0-4006-ad8b-187ac1fc8f66(jetbrains.mps.lang.typesystem.editorTest@tests)/4981802504972075013">
+    <file name="TestCreateStrongLessThanInequationStatement_Test.java">
+      <node id="4981802504972075013" at="19,61,20,60" concept="5" />
+      <node id="4981802504972075013" at="24,83,25,36" concept="1" />
+      <node id="4981802504972075013" at="30,52,31,19" concept="5" />
+      <node id="4981802504972075013" at="35,51,36,72" concept="1" />
+      <node id="4981802504972075062" at="36,72,37,27" concept="1" />
+      <node id="4981802504972075064" at="37,27,38,0" concept="3" />
+      <node id="4981802504972075013" at="16,0,18,0" concept="4" trace="ourParametersCacheExtension" />
+      <node id="4981802504972075013" at="19,0,22,0" concept="0" trace="TestCreateStrongLessThanInequationStatement_Test#()V" />
+      <node id="4981802504972075013" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="4981802504972075013" at="23,0,27,0" concept="2" trace="test_TestCreateStrongLessThanInequationStatement#()V" />
+      <node id="4981802504972075013" at="34,0,40,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="4981802504972075013" at="19,61,20,60" />
+      <scope id="4981802504972075013" at="24,83,25,36" />
+      <scope id="4981802504972075013" at="30,52,31,19" />
+      <scope id="4981802504972075013" at="19,0,22,0" />
+      <scope id="4981802504972075013" at="30,0,33,0">
+        <var name="owner" id="4981802504972075013" />
+      </scope>
+      <scope id="4981802504972075013" at="35,51,38,0" />
+      <scope id="4981802504972075013" at="23,0,27,0" />
+      <scope id="4981802504972075013" at="34,0,40,0" />
+      <unit id="4981802504972075013" at="28,0,41,0" name="jetbrains.mps.lang.typesystem.editorTest.TestCreateStrongLessThanInequationStatement_Test$TestBody" />
+      <unit id="4981802504972075013" at="14,0,42,0" name="jetbrains.mps.lang.typesystem.editorTest.TestCreateStrongLessThanInequationStatement_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:ba36a6c7-bab0-4006-ad8b-187ac1fc8f66(jetbrains.mps.lang.typesystem.editorTest@tests)/4981802504972075118">
+    <file name="TestCreateComparableEquationStatementStrong_Test.java">
+      <node id="4981802504972075118" at="19,61,20,60" concept="5" />
+      <node id="4981802504972075118" at="24,83,25,36" concept="1" />
+      <node id="4981802504972075118" at="30,52,31,19" concept="5" />
+      <node id="4981802504972075118" at="35,51,36,72" concept="1" />
+      <node id="4981802504972075163" at="36,72,37,26" concept="1" />
+      <node id="4981802504972075169" at="37,26,38,0" concept="3" />
+      <node id="4981802504972075118" at="16,0,18,0" concept="4" trace="ourParametersCacheExtension" />
+      <node id="4981802504972075118" at="19,0,22,0" concept="0" trace="TestCreateComparableEquationStatementStrong_Test#()V" />
+      <node id="4981802504972075118" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="4981802504972075118" at="23,0,27,0" concept="2" trace="test_TestCreateComparableEquationStatementStrong#()V" />
+      <node id="4981802504972075118" at="34,0,40,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="4981802504972075118" at="19,61,20,60" />
+      <scope id="4981802504972075118" at="24,83,25,36" />
+      <scope id="4981802504972075118" at="30,52,31,19" />
+      <scope id="4981802504972075118" at="19,0,22,0" />
+      <scope id="4981802504972075118" at="30,0,33,0">
+        <var name="owner" id="4981802504972075118" />
+      </scope>
+      <scope id="4981802504972075118" at="35,51,38,0" />
+      <scope id="4981802504972075118" at="23,0,27,0" />
+      <scope id="4981802504972075118" at="34,0,40,0" />
+      <unit id="4981802504972075118" at="28,0,41,0" name="jetbrains.mps.lang.typesystem.editorTest.TestCreateComparableEquationStatementStrong_Test$TestBody" />
+      <unit id="4981802504972075118" at="14,0,42,0" name="jetbrains.mps.lang.typesystem.editorTest.TestCreateComparableEquationStatementStrong_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:ba36a6c7-bab0-4006-ad8b-187ac1fc8f66(jetbrains.mps.lang.typesystem.editorTest@tests)/4981802504972075223">
+    <file name="TestCreateStrongGreaterThanInequationStatement_Test.java">
+      <node id="4981802504972075223" at="19,64,20,60" concept="5" />
+      <node id="4981802504972075223" at="24,86,25,36" concept="1" />
+      <node id="4981802504972075223" at="30,52,31,19" concept="5" />
+      <node id="4981802504972075223" at="35,51,36,72" concept="1" />
+      <node id="4981802504972075271" at="36,72,37,27" concept="1" />
+      <node id="4981802504972075274" at="37,27,38,0" concept="3" />
+      <node id="4981802504972075223" at="16,0,18,0" concept="4" trace="ourParametersCacheExtension" />
+      <node id="4981802504972075223" at="19,0,22,0" concept="0" trace="TestCreateStrongGreaterThanInequationStatement_Test#()V" />
+      <node id="4981802504972075223" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="4981802504972075223" at="23,0,27,0" concept="2" trace="test_TestCreateStrongGreaterThanInequationStatement#()V" />
+      <node id="4981802504972075223" at="34,0,40,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="4981802504972075223" at="19,64,20,60" />
+      <scope id="4981802504972075223" at="24,86,25,36" />
+      <scope id="4981802504972075223" at="30,52,31,19" />
+      <scope id="4981802504972075223" at="19,0,22,0" />
+      <scope id="4981802504972075223" at="30,0,33,0">
+        <var name="owner" id="4981802504972075223" />
+      </scope>
+      <scope id="4981802504972075223" at="35,51,38,0" />
+      <scope id="4981802504972075223" at="23,0,27,0" />
+      <scope id="4981802504972075223" at="34,0,40,0" />
+      <unit id="4981802504972075223" at="28,0,41,0" name="jetbrains.mps.lang.typesystem.editorTest.TestCreateStrongGreaterThanInequationStatement_Test$TestBody" />
+      <unit id="4981802504972075223" at="14,0,42,0" name="jetbrains.mps.lang.typesystem.editorTest.TestCreateStrongGreaterThanInequationStatement_Test" />
+    </file>
+  </root>
+</debug-info>
+

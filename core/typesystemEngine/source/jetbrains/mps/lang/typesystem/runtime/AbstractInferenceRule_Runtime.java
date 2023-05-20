@@ -15,10 +15,8 @@
  */
 package jetbrains.mps.lang.typesystem.runtime;
 
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactoryByName;
-import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.typesystem.inference.TypeCheckingContext;
+import org.jetbrains.mps.openapi.model.SNode;
 
 public abstract class AbstractInferenceRule_Runtime implements InferenceRule_Runtime {
   @Override
@@ -31,7 +29,7 @@ public abstract class AbstractInferenceRule_Runtime implements InferenceRule_Run
   }
 
   @Override
-  public boolean supercedesAttributed(SNode argument, IsApplicableStatus status) {
+  public boolean supersedesAttributed(SNode argument, IsApplicableStatus status) {
     return false;
   }
 

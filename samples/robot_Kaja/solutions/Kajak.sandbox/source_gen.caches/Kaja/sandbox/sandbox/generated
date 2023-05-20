@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="dbxkk6lh03s7cz0i3f3rdg0ab02fmca" />
+<product version="3" modelHash="4i1u2ftwpv25qkmmf8jonncnwa7degr">
+  <files names="Dog.java:Karel.java:MarkSniffer.java:Maze.java:Sample.java" />
+</product>
 

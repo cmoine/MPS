@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="bnqth2jnqhmaxs8g4z2so3bz1s816tn" />
+<product version="3" modelHash="-bs8dm6tw3roithylkkndz9dw8esuk3k">
+  <files names="AnyType_subtypeOf_AllTypes_InequationReplacementRule.java:TypesystemDescriptor.java:typeof_AbstractionVarRef_InferenceRule.java:typeof_BinaryNumericOperation_InferenceRule.java:typeof_BinaryOperation_InferenceRule.java:typeof_BinaryStringOperation_InferenceRule.java:typeof_LambdaAbstraction_InferenceRule.java:typeof_LambdaApplication_InferenceRule.java:typeof_LambdaExpression_InferenceRule.java:typeof_LetExpression_InferenceRule.java:typeof_LetRef_InferenceRule.java:typeof_MultipleExpression_InferenceRule.java:typeof_NumericConstant_InferenceRule.java:typeof_ParenthesisExpression_InferenceRule.java:typeof_StringConstant_InferenceRule.java:typeof_Variable_InferenceRule.java" />
+</product>
 

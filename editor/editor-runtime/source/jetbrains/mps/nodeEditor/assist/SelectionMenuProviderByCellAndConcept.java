@@ -73,8 +73,11 @@ public class SelectionMenuProviderByCellAndConcept implements SelectionMenuProvi
       if (cell.isBig()) {
         SConcept concept = cell.getSNode().getConcept();
         DefaultTransformationMenuLookup menuLookup = new DefaultTransformationMenuLookup(LanguageRegistry.getInstance(cell.getContext().getRepository()), concept);
-        assert MenuUtil.isMenuApplicableToLocation(menuLookup, myMenuLocation, cell.getSNode()) : "undefined default menu for " + menuLookup;
-        return new Pair<>(menuLookup, cell);
+        if (MenuUtil.isMenuApplicableToLocation(menuLookup, myMenuLocation, cell.getSNode())) {
+          return new Pair<>(menuLookup, cell);
+        } else {
+          return null;
+        }
       }
 
       cell = cell.getParent();

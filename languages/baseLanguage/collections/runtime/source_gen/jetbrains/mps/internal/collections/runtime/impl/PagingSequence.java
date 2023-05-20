@@ -11,9 +11,9 @@ import java.util.ArrayList;
 
 public class PagingSequence<U> extends Sequence<U> implements Iterable<U> {
   private final AbstractSequence<U> input;
-  private final PagingSequence.Page page;
+  private final Page page;
   private final int length;
-  public PagingSequence(AbstractSequence<U> input, PagingSequence.Page page, int length) {
+  public PagingSequence(AbstractSequence<U> input, Page page, int length) {
     if (input == null) {
       throw new NullPointerException();
     }
@@ -26,7 +26,7 @@ public class PagingSequence<U> extends Sequence<U> implements Iterable<U> {
   }
   @Override
   public Iterator<U> iterator() {
-    return new PagingSequence.PagingIterator();
+    return new PagingIterator();
   }
   public enum Page {
     TAKE(),
@@ -63,7 +63,7 @@ public class PagingSequence<U> extends Sequence<U> implements Iterable<U> {
       if (hasNext.unknown()) {
         moveToNext();
       }
-      if (!((hasNext.hasNext()))) {
+      if (!(hasNext.hasNext())) {
         throw new NoSuchElementException();
       }
       return clearNext();

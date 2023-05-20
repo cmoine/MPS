@@ -55,7 +55,7 @@ public abstract class MpsJpsBuildTestCaseWithEnvironment<B extends MpsBean, E ex
    */
   private E setUpEnvironment(@NotNull B emptyBean, @NotNull E emptyEnvironment, @NonNls @TestDataFile String inputTestFileName) {
     final File file = new File(getTestDataRootPath(), inputTestFileName);
-    Assert.assertTrue(file.exists());
+    Assert.assertTrue("File does not exist: " + file.getAbsolutePath(), file.exists());
     return adjustEnvironment(emptyBean, emptyEnvironment, file.getAbsolutePath());
   }
 

@@ -15,21 +15,20 @@
  */
 package jetbrains.mps.util;
 
-public class EqualUtil {
+import java.util.Objects;
 
+public final class EqualUtil {
+  @Deprecated
   public static boolean equals(Object o1, Object o2) {
-    if (o1 == o2) return true;
-    if (o1 == null || o2 == null) return false;
-    return o1.equals(o2);
+    return Objects.equals(o1, o2);
+  }
+
+  @Deprecated
+  public static int hashCode(Object o) {
+    return Objects.hashCode(o);
   }
 
   public static boolean equalsIgnoreCase(String s1, String s2) {
     return s1 == null ? s2 == null : s1.equalsIgnoreCase(s2);
   }
-
-  public static int hashCode(Object o) {
-    if (o == null) return 0;
-    return o.hashCode();
-  }
-
 }

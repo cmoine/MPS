@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dev-kit name="jetbrains.mps.devkit.language-descriptor" uuid="00000000-0000-4000-0000-3c66972ccb47">
+  <exported-language name="f4ad079d-bc71-4ffb-9600-9328705cf998(jetbrains.mps.lang.descriptor)" />
+  <exported-solutions>
+    <exported-solution>a9e4c532-c5f5-4bb7-99ef-42abb73bbb70(jetbrains.mps.lang.descriptor.aspects)</exported-solution>
+  </exported-solutions>
+  <generation-plan model="r:c8bc4c40-9faa-4266-9c2b-c216316574a4(jetbrains.mps.lang.descriptor.descriptor@genplan)" />
+</dev-kit>
+

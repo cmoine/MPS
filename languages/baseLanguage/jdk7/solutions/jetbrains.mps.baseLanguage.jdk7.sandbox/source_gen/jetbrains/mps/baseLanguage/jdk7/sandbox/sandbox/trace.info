@@ -3,29 +3,27 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1163670490218:jetbrains.mps.baseLanguage.structure.SwitchStatement" />
   <root nodeRef="r:4eb76af4-7b12-4aa7-95fd-a699167aadb7(jetbrains.mps.baseLanguage.jdk7.sandbox.sandbox)/616711547385063562">
     <file name="TestClass.java">
-      <node id="616711547385064606" at="10,29,11,19" concept="2" />
-      <node id="616711547385064614" at="13,13,14,42" concept="1" />
-      <node id="616711547385064622" at="15,13,16,34" concept="1" />
-      <node id="616711547385064629" at="17,14,18,40" concept="1" />
-      <node id="616711547385063562" at="21,0,22,0" concept="3" trace="stringSwitchCases_6lh81f_a0b0b" />
-      <node id="616711547385063564" at="8,0,10,0" concept="0" trace="TestClass#()V" />
-      <node id="616711547385064610" at="11,19,19,5" concept="5" />
-      <node id="616711547385064601" at="10,0,21,0" concept="4" trace="main#()V" />
-      <scope id="616711547385063567" at="8,22,8,22" />
-      <scope id="616711547385064613" at="13,13,14,42" />
-      <scope id="616711547385064621" at="15,13,16,34" />
-      <scope id="616711547385064628" at="17,14,18,40" />
-      <scope id="616711547385063564" at="8,0,10,0" />
-      <scope id="616711547385064604" at="10,29,19,5">
+      <node id="616711547385064606" at="9,29,10,19" concept="2" />
+      <node id="3845357643093406057" at="12,15,13,42" concept="1" />
+      <node id="3845357643093406065" at="14,15,15,34" concept="1" />
+      <node id="3845357643093406071" at="16,14,17,40" concept="1" />
+      <node id="616711547385063564" at="7,0,9,0" concept="0" trace="TestClass#()V" />
+      <node id="3845357643093406053" at="10,19,18,5" concept="4" />
+      <node id="616711547385064601" at="9,0,20,0" concept="3" trace="main#()V" />
+      <scope id="616711547385063567" at="7,22,7,22" />
+      <scope id="3845357643093406056" at="12,15,13,42" />
+      <scope id="3845357643093406064" at="14,15,15,34" />
+      <scope id="3845357643093406070" at="16,14,17,40" />
+      <scope id="616711547385063564" at="7,0,9,0" />
+      <scope id="616711547385064604" at="9,29,18,5">
         <var name="t" id="616711547385064607" />
       </scope>
-      <scope id="616711547385064601" at="10,0,21,0" />
-      <unit id="616711547385063562" at="7,0,23,0" name="jetbrains.mps.baseLanguage.jdk7.sandbox.sandbox.TestClass" />
+      <scope id="616711547385064601" at="9,0,20,0" />
+      <unit id="616711547385063562" at="6,0,21,0" name="jetbrains.mps.baseLanguage.jdk7.sandbox.sandbox.TestClass" />
     </file>
   </root>
 </debug-info>

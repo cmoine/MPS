@@ -15,7 +15,6 @@
  */
 package jetbrains.mps.smodel.legacy;
 
-import jetbrains.mps.util.annotation.ToRemove;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.language.SProperty;
@@ -33,8 +32,7 @@ import org.jetbrains.mps.openapi.language.SReferenceLink;
  * @deprecated this is transition code, don't use unless for intended purpose
  * @author Artem Tikhomirov
  */
-@ToRemove(version = 3.3)
-@Deprecated
+@Deprecated(since = "3.3", forRemoval = true)
 public interface ConceptMetaInfoConverter {
   @NotNull
   SContainmentLink convertAggregation(String role);

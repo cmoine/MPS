@@ -5,12 +5,9 @@ package jetbrains.mps.build.mps.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import jetbrains.mps.build.util.UnpackHelper;
 import jetbrains.mps.build.util.DependenciesHelper;
@@ -21,59 +18,112 @@ import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.build.behavior.BuildLayout_Node__BehaviorDescriptor;
+import jetbrains.mps.internal.collections.runtime.Sequence;
+import jetbrains.mps.build.behavior.BuildLayout_PathElement__BehaviorDescriptor;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SProperty;
+import org.jetbrains.mps.openapi.language.SConcept;
 
 public final class BuildMpsLayout_ModuleJars__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0xcf935df46994e9cL, 0xa132fa109541cba3L, 0x11918e0f209b83e7L, "jetbrains.mps.build.mps.structure.BuildMpsLayout_ModuleJars");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<Void> unpack_id6bGbH3Svq6g = new SMethodBuilder<Void>(new SJavaCompoundTypeImpl(Void.class)).name("unpack").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("6bGbH3Svq6g").registry(REGISTRY).build(SMethodBuilder.createJavaParameter(UnpackHelper.class, ""), SMethodBuilder.createJavaParameter(Iterable.class, ""));
-  public static final SMethod<String> location_id6b4RkXS8sT2 = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("location").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("6b4RkXS8sT2").registry(REGISTRY).build(SMethodBuilder.createJavaParameter(DependenciesHelper.class, ""), SMethodBuilder.createJavaParameter(Object.class, ""));
-  public static final SMethod<Boolean> exports_id5FtnUVJQES1 = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("exports").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("5FtnUVJQES1").registry(REGISTRY).build(SMethodBuilder.createJavaParameter(Object.class, ""));
+  public static final SMethod<Void> unpack_id6IqTD4bJTWZ = new SMethodBuilder<Void>(new SJavaCompoundTypeImpl(Void.class)).name("unpack").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(7753763219113484095L).languageId(0xb99171f8c50ce5d2L, 0x798100da4f0a421aL).build2(SMethodBuilder.createJavaParameter(UnpackHelper.class, ""));
+  public static final SMethod<String> location_id6b4RkXS8sT2 = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("location").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(7117056644539862594L).languageId(0xb99171f8c50ce5d2L, 0x798100da4f0a421aL).build2(SMethodBuilder.createJavaParameter(DependenciesHelper.class, ""), SMethodBuilder.createJavaParameter(Object.class, ""));
+  public static final SMethod<Boolean> exports_id5FtnUVJQES1 = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("exports").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(6547494638219603457L).languageId(0xb99171f8c50ce5d2L, 0x798100da4f0a421aL).build2(SMethodBuilder.createJavaParameter(Object.class, ""));
+  public static final SMethod<String> getSourceModuleJarName_id6v5CVv8csP9 = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getSourceModuleJarName").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(7477562766051626313L).languageId(0xa132fa109541cba3L, 0xcf935df46994e9cL).build2();
 
-  private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(unpack_id6bGbH3Svq6g, location_id6b4RkXS8sT2, exports_id5FtnUVJQES1);
+  private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(unpack_id6IqTD4bJTWZ, location_id6b4RkXS8sT2, exports_id5FtnUVJQES1, getSourceModuleJarName_id6v5CVv8csP9);
 
   private static void ___init___(@NotNull SNode __thisNode__) {
   }
 
-  /*package*/ static void unpack_id6bGbH3Svq6g(@NotNull SNode __thisNode__, UnpackHelper helper, Iterable<Object> artifacts) {
+  /*package*/ static void unpack_id6IqTD4bJTWZ(@NotNull SNode __thisNode__, UnpackHelper helper) {
     SNode parent = helper.parent(__thisNode__);
-    String parentLocation = helper.contentLocations().get(parent);
-    String languageLocation = parentLocation + "/" + SPropertyOperations.getString(SLinkOperations.getTarget(__thisNode__, MetaAdapterFactory.getReferenceLink(0xcf935df46994e9cL, 0xa132fa109541cba3L, 0x11918e0f209b83e7L, 0x11918e0f209b83e9L, "module")), MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name")) + ".jar";
-    helper.locations().put(__thisNode__, languageLocation);
+    String parentLocation = helper.getContentLocation(parent);
+    String moduleLocation = parentLocation + "/" + SPropertyOperations.getString(SLinkOperations.getTarget(__thisNode__, LINKS.module$iRYT), PROPS.name$MnvL) + ".jar";
+    helper.putLocation(__thisNode__, moduleLocation);
+    // XXX next is location() implementation moved to a proper moment of time, for the reason see BuildMpsLayout_Plugin_Behavior#unpack
+    if (SNodeOperations.isInstanceOf(SLinkOperations.getTarget(__thisNode__, LINKS.module$iRYT), CONCEPTS.BuildMps_Language$RA)) {
+      moduleLocation = moduleLocation.substring(0, moduleLocation.length() - ".jar".length());
+      int i = 0;
+      SNode asLang = SNodeOperations.as(SLinkOperations.getTarget(__thisNode__, LINKS.module$iRYT), CONCEPTS.BuildMps_Language$RA);
+      // BEWARE here comes some odd peculiarity of build language. We do unpack for dependencies both from the same model (@0 transient)
+      //   and external models that are not intended for modification (putLayoutRelativePath adds UO to the node), and what helps us here
+      //   is that managedGenerators are initialized for @0 model and are empty otherwise. This leads to troubles referencing not the 
+      //   first one (default) generator from an external (different model) project - we don't know its i value from outside.
+      // XXX perhaps, shall introduce an int property into Generator to keep its index? Or just force independent 'module' layout for managed 
+      // generators as well? Still, it's all just workarounds to get this bloody logic fixed, instead, shall use checkpoint models with 
+      // respective values obtained right from the intermediate model rather than introducing values into original model to support this sh!t
+      for (SNode gm : Sequence.fromIterable(SLinkOperations.collect(SLinkOperations.getChildren(asLang, LINKS.managedGenerators$Hbof), LINKS.generator$98gH))) {
+        // see property macro for module-generator.jar name in reduce_BuildMpsLayout_ModuleJars
+        helper.putLayoutRelativePath(__thisNode__, gm, moduleLocation + ((i > 0 ? String.format("-%d-generator.jar", i) : "-generator.jar")));
+        i++;
+      }
+      // I assume unpack() is invoked *after* loadMods MC (loadModules script) moves generator modules as language siblings
+      // load_deps MC with prepare_dependencies script/FetchProcessor goes after loadMods
+    }
   }
   /*package*/ static String location_id6b4RkXS8sT2(@NotNull SNode __thisNode__, DependenciesHelper helper, Object artifactId) {
     if (artifactId instanceof SNode) {
       SNode node = (SNode) artifactId;
-      String languageLocation = helper.locations().get(__thisNode__);
+      String moduleLocation = helper.getLocation(__thisNode__);
 
-      if (SNodeOperations.isInstanceOf(node, MetaAdapterFactory.getConcept(0xcf935df46994e9cL, 0xa132fa109541cba3L, 0x4c6db07d2e56a8b4L, "jetbrains.mps.build.mps.structure.BuildMps_Generator"))) {
-        return languageLocation.substring(0, languageLocation.length() - ".jar".length()) + "-generator.jar";
+      // could be generator that is part of a language (aka managed), then it would have layoutRelativePath set in unpack(), above
+      //   this further falls into 2 options, when language/generator are part of the same model (and get layoutRelativePath set),
+      //   or when they are part of external project and therefore we have only location for this layout node only.
+      // also it could be a standalone generator module, or a 'managed' generator which is not part of the Language module.
+      if (SNodeOperations.isInstanceOf(node, CONCEPTS.BuildMps_Generator$RQ)) {
+        // I'd like to check this.module.isInstanceOf(BM_Language) not to give 
+        // location for arbitrary standalone generator modules. However, location() may get invoked with 'this' from transient model 0,
+        // with artifactId from transient model 6+, and attempt to navigate 'this.module' may end up in disposed model, 
+        // rendering isInstanceOf check false.
+        // Moreover, model 0 may get disposed during TC/test execution, and not disposed in IDE, leading to hard-to-tackle inconsistency defects. 
+        // If generator comes from the same model, utilize values calculated above in unpack()
+        String layoutRelativePath = helper.getLayoutRelativePath(__thisNode__, node);
+        if ((layoutRelativePath != null && layoutRelativePath.length() > 0)) {
+          return layoutRelativePath;
+        }
+        // if there's no value, generator is either from external model (expect module from the same model to get UO with path) or is standalone
+        // for external model case, this.module would point to a non-transient module; if it's a language, we are in layout node to cover language and
+        // its managed generators. We don't have a mechanism to find out specific index of the managed generator, and default to the first one, which 
+        // is incorrect but tolerable as long as MPS itself doesn't expose managed generators for use in dependent projects.
+        if (SNodeOperations.isInstanceOf(SLinkOperations.getTarget(__thisNode__, LINKS.module$iRYT), CONCEPTS.BuildMps_Language$RA)) {
+          // fallback to default path calculation, which doesn't respect multiple generators per language, by the way.
+          return moduleLocation.substring(0, moduleLocation.length() - ".jar".length()) + "-generator.jar";
+        }
+        // fall-through, for standalone generators with their own 'module' layout, we don't have layoutRelativePath, the one to use is that of layoutNode.
       }
-      if (SNodeOperations.isInstanceOf(node, MetaAdapterFactory.getConcept(0xcf935df46994e9cL, 0xa132fa109541cba3L, 0x48e82d508331930cL, "jetbrains.mps.build.mps.structure.BuildMps_Module"))) {
-        return languageLocation;
+
+      if (SNodeOperations.isInstanceOf(node, CONCEPTS.BuildMps_AbstractModule$FZ)) {
+        return moduleLocation;
       }
     }
-    return ((String) BuildLayout_Node__BehaviorDescriptor.location_id6b4RkXS8sT2.invokeSpecial(__thisNode__, helper, artifactId));
+    return ((String) BuildLayout_PathElement__BehaviorDescriptor.location_id6b4RkXS8sT2.invokeSuper(__thisNode__, CONCEPTS.BuildMpsLayout_ModuleJars$MZ, helper, artifactId));
   }
   /*package*/ static boolean exports_id5FtnUVJQES1(@NotNull SNode __thisNode__, Object object) {
     if (object instanceof SNode) {
       SNode node = (SNode) object;
-      if (SNodeOperations.isInstanceOf(node, MetaAdapterFactory.getConcept(0xcf935df46994e9cL, 0xa132fa109541cba3L, 0x4c6db07d2e56a8b4L, "jetbrains.mps.build.mps.structure.BuildMps_Generator"))) {
-        return SLinkOperations.getTarget(__thisNode__, MetaAdapterFactory.getReferenceLink(0xcf935df46994e9cL, 0xa132fa109541cba3L, 0x11918e0f209b83e7L, 0x11918e0f209b83e9L, "module")) == BuildMps_Generator__BehaviorDescriptor.getSourceLanguage_id7YI57w6ZMdZ.invoke(SNodeOperations.cast(node, MetaAdapterFactory.getConcept(0xcf935df46994e9cL, 0xa132fa109541cba3L, 0x4c6db07d2e56a8b4L, "jetbrains.mps.build.mps.structure.BuildMps_Generator")));
+      if (SLinkOperations.getTarget(__thisNode__, LINKS.module$iRYT) == node) {
+        return true;
       }
-      if (SNodeOperations.isInstanceOf(node, MetaAdapterFactory.getConcept(0xcf935df46994e9cL, 0xa132fa109541cba3L, 0x48e82d508331930cL, "jetbrains.mps.build.mps.structure.BuildMps_Module"))) {
-        return SLinkOperations.getTarget(__thisNode__, MetaAdapterFactory.getReferenceLink(0xcf935df46994e9cL, 0xa132fa109541cba3L, 0x11918e0f209b83e7L, 0x11918e0f209b83e9L, "module")) == node;
+      if (SNodeOperations.isInstanceOf(node, CONCEPTS.BuildMps_Generator$RQ) && SNodeOperations.isInstanceOf(SLinkOperations.getTarget(__thisNode__, LINKS.module$iRYT), CONCEPTS.BuildMps_Language$RA)) {
+        // layout 'module' for a language exports managed generators for the language (those that share mpl).
+        SNode generator = SNodeOperations.cast(node, CONCEPTS.BuildMps_Generator$RQ);
+        SNode sourceLanguage = BuildMps_Generator__BehaviorDescriptor.getSourceLanguage_id7YI57w6ZMdZ.invoke(generator);
+        return SLinkOperations.getTarget(__thisNode__, LINKS.module$iRYT) == sourceLanguage && (boolean) BuildMps_Generator__BehaviorDescriptor.isManagedBy_idtxX2LHveIs.invoke(generator, sourceLanguage);
       }
     }
     return false;
   }
+  /*package*/ static String getSourceModuleJarName_id6v5CVv8csP9(@NotNull SNode __thisNode__) {
+    return SPropertyOperations.getString(SLinkOperations.getTarget(__thisNode__, LINKS.module$iRYT), PROPS.name$MnvL) + "-src.jar";
+  }
 
   /*package*/ BuildMpsLayout_ModuleJars__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -89,12 +139,14 @@ public final class BuildMpsLayout_ModuleJars__BehaviorDescriptor extends BaseBHD
     }
     switch (methodIndex) {
       case 0:
-        unpack_id6bGbH3Svq6g(node, (UnpackHelper) parameters[0], (Iterable<Object>) parameters[1]);
+        unpack_id6IqTD4bJTWZ(node, (UnpackHelper) parameters[0]);
         return null;
       case 1:
         return (T) ((String) location_id6b4RkXS8sT2(node, (DependenciesHelper) parameters[0], (Object) parameters[1]));
       case 2:
         return (T) ((Boolean) exports_id5FtnUVJQES1(node, (Object) parameters[0]));
+      case 3:
+        return (T) ((String) getSourceModuleJarName_id6v5CVv8csP9(node));
       default:
         throw new BHMethodNotFoundException(this, method);
     }
@@ -122,5 +174,22 @@ public final class BuildMpsLayout_ModuleJars__BehaviorDescriptor extends BaseBHD
   @Override
   public SAbstractConcept getConcept() {
     return CONCEPT;
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SReferenceLink module$iRYT = MetaAdapterFactory.getReferenceLink(0xcf935df46994e9cL, 0xa132fa109541cba3L, 0x11918e0f209b83e7L, 0x11918e0f209b83e9L, "module");
+    /*package*/ static final SContainmentLink managedGenerators$Hbof = MetaAdapterFactory.getContainmentLink(0xcf935df46994e9cL, 0xa132fa109541cba3L, 0x2c446791464290f8L, 0x6d1df6c2700aeb88L, "managedGenerators");
+    /*package*/ static final SReferenceLink generator$98gH = MetaAdapterFactory.getReferenceLink(0xcf935df46994e9cL, 0xa132fa109541cba3L, 0x6d1df6c2700aeb81L, 0x6d1df6c2700aeb82L, "generator");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept BuildMps_Language$RA = MetaAdapterFactory.getConcept(0xcf935df46994e9cL, 0xa132fa109541cba3L, 0x2c446791464290f8L, "jetbrains.mps.build.mps.structure.BuildMps_Language");
+    /*package*/ static final SConcept BuildMps_Generator$RQ = MetaAdapterFactory.getConcept(0xcf935df46994e9cL, 0xa132fa109541cba3L, 0x4c6db07d2e56a8b4L, "jetbrains.mps.build.mps.structure.BuildMps_Generator");
+    /*package*/ static final SConcept BuildMps_AbstractModule$FZ = MetaAdapterFactory.getConcept(0xcf935df46994e9cL, 0xa132fa109541cba3L, 0x4780308f5d333ebL, "jetbrains.mps.build.mps.structure.BuildMps_AbstractModule");
+    /*package*/ static final SConcept BuildMpsLayout_ModuleJars$MZ = MetaAdapterFactory.getConcept(0xcf935df46994e9cL, 0xa132fa109541cba3L, 0x11918e0f209b83e7L, "jetbrains.mps.build.mps.structure.BuildMpsLayout_ModuleJars");
   }
 }

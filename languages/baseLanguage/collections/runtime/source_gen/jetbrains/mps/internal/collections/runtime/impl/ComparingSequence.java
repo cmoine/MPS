@@ -13,8 +13,8 @@ public class ComparingSequence<U> extends Sequence<U> implements Iterable<U> {
   private final ISequence<? extends U> left;
   private final ISequence<? extends U> right;
   private final ISequence<?> rightGeneric;
-  private final ComparingSequence.Kind kind;
-  public ComparingSequence(ISequence<? extends U> left, ISequence<? extends U> right, ComparingSequence.Kind kind) {
+  private final Kind kind;
+  public ComparingSequence(ISequence<? extends U> left, ISequence<? extends U> right, Kind kind) {
     if (left == null || right == null) {
       throw new NullPointerException();
     }
@@ -24,11 +24,11 @@ public class ComparingSequence<U> extends Sequence<U> implements Iterable<U> {
     this.kind = kind;
   }
 
-  public ComparingSequence(ComparingSequence.Kind kind, ISequence<? extends U> left, ISequence<?> right) {
+  public ComparingSequence(Kind kind, ISequence<? extends U> left, ISequence<?> right) {
     if (left == null || right == null) {
       throw new NullPointerException();
     }
-    assert kind == ComparingSequence.Kind.SUBSTRACTION || kind == ComparingSequence.Kind.INTERSECTION;
+    assert kind == Kind.SUBSTRACTION || kind == Kind.INTERSECTION;
     this.left = left;
     this.right = null;
     this.rightGeneric = right;
@@ -37,7 +37,7 @@ public class ComparingSequence<U> extends Sequence<U> implements Iterable<U> {
 
   @Override
   public Iterator<U> iterator() {
-    return new ComparingSequence.ComparingIterator();
+    return new ComparingIterator();
   }
   public enum Kind {
     UNION(),
@@ -75,7 +75,7 @@ public class ComparingSequence<U> extends Sequence<U> implements Iterable<U> {
       if (hasNext.unknown()) {
         moveToNext();
       }
-      if (!((hasNext.hasNext()))) {
+      if (!(hasNext.hasNext())) {
         throw new NoSuchElementException();
       }
       return clearNext();
@@ -183,7 +183,7 @@ loop:
             break;
         }
       } while (true);
-      if (!((hasNext.hasNext()))) {
+      if (!(hasNext.hasNext())) {
         destroy();
       }
     }

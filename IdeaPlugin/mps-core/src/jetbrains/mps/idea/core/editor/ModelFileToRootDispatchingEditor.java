@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.core.editor;
 
 import com.intellij.openapi.fileEditor.FileEditor;
@@ -25,16 +24,14 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.pom.Navigatable;
 import jetbrains.mps.ide.editor.MPSFileNodeEditor;
 import jetbrains.mps.ide.project.ProjectHelper;
-import jetbrains.mps.ide.vfs.VirtualFileUtils;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiModel;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiNode;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiNodeBase;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiProvider;
-import jetbrains.mps.smodel.ModelAccessHelper;
-import jetbrains.mps.smodel.SModelFileTracker;
-import jetbrains.mps.util.Computable;
 import jetbrains.mps.nodefs.MPSNodeVirtualFile;
 import jetbrains.mps.nodefs.NodeVirtualFileSystem;
+import jetbrains.mps.smodel.ModelAccessHelper;
+import jetbrains.mps.smodel.SModelFileTracker;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
@@ -61,12 +58,10 @@ import org.jetbrains.mps.openapi.module.SRepository;
  * Created by danilla on 20/11/15.
  */
 public class ModelFileToRootDispatchingEditor extends MPSFileNodeEditor implements NavigatableFileEditor {
-  private Project myProject;
   private VirtualFile myModelFile;
 
   ModelFileToRootDispatchingEditor(Project project, VirtualFile virtualFile) {
     super(ProjectHelper.fromIdeaProject(project), null);
-    myProject = project;
     myModelFile = virtualFile;
   }
 
@@ -79,13 +74,7 @@ public class ModelFileToRootDispatchingEditor extends MPSFileNodeEditor implemen
     if (offset < 0) {
       return false;
     }
-    final SRepository repository = ProjectHelper.fromIdeaProject(myProject).getRepository();
-    return new ModelAccessHelper(repository.getModelAccess()).runReadAction(new Computable<Boolean>() {
-      @Override
-      public Boolean compute() {
-        return iKnowThisNode(offset, repository);
-      }
-    });
+    return new ModelAccessHelper(myProject.getModelAccess()).runReadAction(() -> iKnowThisNode(offset));
   }
 
   @Override
@@ -95,11 +84,11 @@ public class ModelFileToRootDispatchingEditor extends MPSFileNodeEditor implemen
     if (offset == -1) {
       return;
     }
-    final SRepository repository = ProjectHelper.fromIdeaProject(myProject).getRepository();
+    final SRepository repository = myProject.getRepository();
     repository.getModelAccess().runReadAction(new Runnable() {
       @Override
       public void run() {
-        SNodeReference nodeRef = getNode(offset, repository);
+        SNodeReference nodeRef = getNode(offset);
         SNode node = nodeRef.resolve(repository);
         if (node == null) {
           return;
@@ -112,7 +101,7 @@ public class ModelFileToRootDispatchingEditor extends MPSFileNodeEditor implemen
         editor.getNodeEditor().showNode(node, true);
 
         // now closing this artificial editor
-        FileEditorManager.getInstance(myProject).closeFile(myModelFile);
+        FileEditorManager.getInstance(myProject.getProject()).closeFile(myModelFile);
       }
     });
   }
@@ -127,23 +116,24 @@ public class ModelFileToRootDispatchingEditor extends MPSFileNodeEditor implemen
     // guard from NPE in super.deselectNotify()
   }
 
-  private boolean iKnowThisNode(int offset, SRepository repository) {
-    return getNode(offset, repository) != null;
+  private boolean iKnowThisNode(int offset) {
+    return getNode(offset) != null;
   }
 
-  private SNodeReference getNode(int offset, SRepository repository) {
-    SModel model = SModelFileTracker.getInstance(repository).findModel(VirtualFileUtils.toIFile(myModelFile));
+  private SNodeReference getNode(int offset) {
+    // XXX would be great to stick to SModelReference here, but getPsi() down here needs SModel, AFAIK.
+    SModel model = SModelFileTracker.getInstance(myProject.getRepository()).findModel(myProject.getFileSystem().fromVirtualFile(myModelFile));
     if (model == null) {
       return null;
     }
-    MPSPsiModel psiModel = MPSPsiProvider.getInstance(myProject).getPsi(model);
+    MPSPsiModel psiModel = MPSPsiProvider.getInstance(myProject.getProject()).getPsi(model);
     if (psiModel == null) {
       return null;
     }
     MPSPsiNodeBase node = psiModel.findNodeByPosition(offset);
     if (!(node instanceof MPSPsiNode)) {
       // we've been asked to navigate by an offset that corresponds not to a real node in the model
-      // but some auxilary psi node (like MPSPsiParameterList) that has no counterpart in the model
+      // but some auxiliary psi node (like MPSPsiParameterList) that has no counterpart in the model
       return null;
     }
     return ((MPSPsiNode) node).getSNodeReference();
@@ -163,7 +153,7 @@ public class ModelFileToRootDispatchingEditor extends MPSFileNodeEditor implemen
 //      return result;
 //    }
     // creating a new editor
-    FileEditor[] editors = FileEditorManager.getInstance(myProject).openFile(nodeFile, true);
+    FileEditor[] editors = FileEditorManager.getInstance(myProject.getProject()).openFile(nodeFile, true);
     MPSFileNodeEditor result = null;
     for (FileEditor editor: editors) {
       if (editor instanceof MPSFileNodeEditor) {

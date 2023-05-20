@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,11 @@
  */
 package jetbrains.mps.workbench.index;
 
+import jetbrains.mps.extapi.model.SModelData;
 import jetbrains.mps.smodel.SNodeUtil;
-import jetbrains.mps.util.EqualUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.annotations.Immutable;
 import org.jetbrains.mps.openapi.language.SConcept;
-import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeId;
@@ -29,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Holds index-related information about roots in a model.
@@ -44,9 +44,9 @@ import java.util.List;
   private final SModelReference myModelReference;
   private final List<Entry> myEntries;
 
-  /*package*/ ModelRootsData(@NotNull SModel model) {
+  /*package*/ ModelRootsData(@NotNull SModelData model) {
     myModelReference = model.getReference();
-    myEntries = new ArrayList<Entry>();
+    myEntries = new ArrayList<>();
     for (SNode root : model.getRootNodes()) {
       myEntries.add(new Entry(root));
     }
@@ -54,7 +54,7 @@ import java.util.List;
 
   /*package*/ ModelRootsData(@NotNull SModelReference modelRef, Collection<Entry> entries) {
     myModelReference = modelRef;
-    myEntries = new ArrayList<Entry>(entries);
+    myEntries = new ArrayList<>(entries);
   }
 
   public boolean isEmpty() {
@@ -111,7 +111,7 @@ import java.util.List;
     public boolean equals(Object obj) {
       if (obj instanceof Entry) {
         Entry o = (Entry) obj;
-        return myNode.equals(o.myNode) && myConcept.equals(o.myConcept) && EqualUtil.equals(myName, o.myName);
+        return myNode.equals(o.myNode) && myConcept.equals(o.myConcept) && Objects.equals(myName, o.myName);
       }
       return false;
     }

@@ -4,22 +4,14 @@ package jetbrains.mps.lang.editor.menus.tests;
 
 import jetbrains.mps.openapi.editor.EditorComponent;
 import org.jetbrains.mps.openapi.language.SLanguage;
-import junit.framework.Assert;
+import org.junit.Assert;
 
 public class UsedLanguagesUtils {
   public static void assertLanguageUsed(final EditorComponent editorComponent, final SLanguage language) {
-    editorComponent.getEditorContext().getRepository().getModelAccess().runReadAction(new Runnable() {
-      public void run() {
-        Assert.assertTrue("model should use language " + language, UsedLanguagesUtils.isLanguageUsed(editorComponent, language));
-      }
-    });
+    editorComponent.getEditorContext().getRepository().getModelAccess().runReadAction(() -> Assert.assertTrue("model should use language " + language, UsedLanguagesUtils.isLanguageUsed(editorComponent, language)));
   }
   public static void assertLanguageNotUsed(final EditorComponent editorComponent, final SLanguage language) {
-    editorComponent.getEditorContext().getRepository().getModelAccess().runReadAction(new Runnable() {
-      public void run() {
-        Assert.assertFalse("model should not use language " + language, UsedLanguagesUtils.isLanguageUsed(editorComponent, language));
-      }
-    });
+    editorComponent.getEditorContext().getRepository().getModelAccess().runReadAction(() -> Assert.assertFalse("model should not use language " + language, UsedLanguagesUtils.isLanguageUsed(editorComponent, language)));
   }
   private static boolean isLanguageUsed(EditorComponent editorComponent, SLanguage language) {
     return editorComponent.getEditedNode().getModel().getModule().getUsedLanguages().contains(language);

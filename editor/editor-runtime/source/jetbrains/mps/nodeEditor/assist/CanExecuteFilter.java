@@ -62,7 +62,7 @@ class CanExecuteFilter implements Function<List<TransformationMenuItem>, List<Tr
           return null;
         }
 
-        return new SubMenu(subMenu.getText(), executableItems);
+        return new SubMenu(subMenu.getText(), executableItems, subMenu.getTraceInfo());
       }
     };
   }

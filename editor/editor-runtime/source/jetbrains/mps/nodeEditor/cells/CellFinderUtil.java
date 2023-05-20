@@ -104,7 +104,7 @@ public class CellFinderUtil {
 
   public static <C extends EditorCell> C findChildByConditionAndClass(@NotNull EditorCell cell, @NotNull final Condition<EditorCell> condition,
       final Class<C> clazz, boolean forward, boolean includeThis) {
-    return ((C) findChildByCondition(cell, new AndCondition<EditorCell>(new ByClassCondition(clazz), condition), forward, includeThis));
+    return ((C) findChildByCondition(cell, new AndCondition<>(new ByClassCondition(clazz), condition), forward, includeThis));
   }
 
   public static <C extends EditorCell> C findChildByConditionAndClass(@NotNull EditorCell cell, @NotNull final Condition<EditorCell> condition,

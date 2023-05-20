@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import jetbrains.mps.idea.core.facet.MPSFacet;
 import jetbrains.mps.idea.core.facet.MPSFacetType;
 import jetbrains.mps.idea.core.project.ModuleRuntimeLibrariesImporter;
 import jetbrains.mps.project.Solution;
-import org.jetbrains.mps.openapi.module.SModuleReference;
+import org.jetbrains.mps.openapi.language.SLanguage;
 
 import java.util.Collection;
 
@@ -44,9 +44,13 @@ public class IdeaModuleMPSSupport extends ModuleMPSSupport {
   }
 
   @Override
-  public void fixImports(Module module, Collection<SModuleReference> addedLanguages) {
+  public void fixImports(Module module, Collection<SLanguage> addedLanguages) {
     ModifiableRootModel modModel = ModuleRootManager.getInstance(module).getModifiableModel();
     ModuleRuntimeLibrariesImporter.importForUsedLanguages(module, addedLanguages, modModel);
-    modModel.commit();
+    if (modModel.isChanged()) {
+      modModel.commit();
+    } else {
+      modModel.dispose();
+    }
   }
 }

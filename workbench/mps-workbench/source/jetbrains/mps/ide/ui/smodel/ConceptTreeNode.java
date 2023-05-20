@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 package jetbrains.mps.ide.ui.smodel;
 
+import com.intellij.util.IconUtil;
 import jetbrains.mps.icons.MPSIcons.Nodes;
 import jetbrains.mps.ide.ui.tree.MPSTreeNodeEx;
 import jetbrains.mps.ide.ui.tree.smodel.NodeTargetProvider;
@@ -25,16 +26,18 @@ import org.jetbrains.mps.openapi.model.SNodeReference;
 
 public class ConceptTreeNode extends MPSTreeNodeEx implements NodeTargetProvider {
   private final SNode myNode;
+  private final SNodeReference myNodePointer;
   private final SNodeReference myConceptDeclaration;
 
   public ConceptTreeNode(SNode node) {
     myNode = node;
-
+    myNodePointer = node.getReference();
     SConcept concept = myNode.getConcept();
-    setIcon(Nodes.Structure);
-    setNodeIdentifier(concept.getName());
-    final SNode conceptDecl = concept.getDeclarationNode();
-    myConceptDeclaration = conceptDecl == null ? null : conceptDecl.getReference();
+    setNodeIdentifier("Concept: " + concept.getName());
+    myConceptDeclaration = concept.getSourceNode();
+    // Use grayed out icon because it is less distracting for user [then original green one],
+    // but in the same time looks different in comparison to default node icon.
+    setIcon(IconUtil.desaturate(Nodes.Structure));
   }
 
   @Override
@@ -42,10 +45,20 @@ public class ConceptTreeNode extends MPSTreeNodeEx implements NodeTargetProvider
     return myNode;
   }
 
+  @Override
+  public SNodeReference getNodePointer() {
+    return myNodePointer;
+  }
+
   @Nullable
   @Override
   public SNodeReference getNavigationTarget() {
     // navigate to concept declaration, if any
     return myConceptDeclaration;
+  }
+
+  @Override
+  public boolean isLeaf() {
+    return true;
   }
 }

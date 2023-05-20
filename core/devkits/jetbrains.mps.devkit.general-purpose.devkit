@@ -8,5 +8,6 @@
   <exported-language name="f2801650-65d5-424e-bb1b-463a8781b786(jetbrains.mps.baseLanguage.javadoc)" />
   <exported-language name="a247e09e-2435-45ba-b8d2-07e93feba96a(jetbrains.mps.baseLanguage.tuples)" />
   <exported-language name="83888646-71ce-4f1c-9c53-c54016f6ad4f(jetbrains.mps.baseLanguage.collections)" />
+  <exported-language name="c7fb639f-be78-4307-89b0-b5959c3fa8c8(jetbrains.mps.lang.text)" />
 </dev-kit>
 

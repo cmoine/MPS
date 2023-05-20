@@ -5,13 +5,10 @@ package jetbrains.mps.lang.migration.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import org.jetbrains.mps.openapi.module.SRepository;
 import java.util.List;
@@ -22,16 +19,17 @@ import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SConcept;
 
 public final class MoveNodeSpecialization__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x9074634404fd4286L, 0x97d5b46ae6a81709L, 0x2b3f57492c165c5dL, "jetbrains.mps.lang.migration.structure.MoveNodeSpecialization");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<SNode> getFrom_id1NHZk5hj1Zl = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getFrom").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("1NHZk5hj1Zl").registry(REGISTRY).build(SMethodBuilder.createJavaParameter(SRepository.class, ""));
-  public static final SMethod<SNode> getTo_id1NHZk5hj1ls = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getTo").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("1NHZk5hj1ls").registry(REGISTRY).build(SMethodBuilder.createJavaParameter(SRepository.class, ""));
-  public static final SMethod<SNode> getMyMoveNodeItem_id4yRsQKnq58F = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getMyMoveNodeItem").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("4yRsQKnq58F").registry(REGISTRY).build();
-  public static final SMethod<Boolean> shouldKeepOldNode_id1NHZk5hi$oq = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("shouldKeepOldNode").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("1NHZk5hi$oq").registry(REGISTRY).build();
-  public static final SMethod<Void> doDeprecateOldNode_id1NHZk5hiKRu = new SMethodBuilder<Void>(new SJavaCompoundTypeImpl(Void.class)).name("doDeprecateOldNode").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("1NHZk5hiKRu").registry(REGISTRY).build(SMethodBuilder.createJavaParameter(SRepository.class, ""));
+  public static final SMethod<SNode> getFrom_id1NHZk5hj1Zl = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getFrom").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(2084600659521052629L).languageId(0x97d5b46ae6a81709L, 0x9074634404fd4286L).build2(SMethodBuilder.createJavaParameter(SRepository.class, ""));
+  public static final SMethod<SNode> getTo_id1NHZk5hj1ls = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getTo").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(2084600659521049948L).languageId(0x97d5b46ae6a81709L, 0x9074634404fd4286L).build2(SMethodBuilder.createJavaParameter(SRepository.class, ""));
+  public static final SMethod<SNode> getMyMoveNodeItem_id4yRsQKnq58F = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getMyMoveNodeItem").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(5239783599555236395L).languageId(0x97d5b46ae6a81709L, 0x9074634404fd4286L).build2();
+  public static final SMethod<Boolean> shouldKeepOldNode_id1NHZk5hi$oq = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("shouldKeepOldNode").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(2084600659520931354L).languageId(0x97d5b46ae6a81709L, 0x9074634404fd4286L).build2();
+  public static final SMethod<Void> doDeprecateOldNode_id1NHZk5hiKRu = new SMethodBuilder<Void>(new SJavaCompoundTypeImpl(Void.class)).name("doDeprecateOldNode").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(2084600659520982494L).languageId(0x97d5b46ae6a81709L, 0x9074634404fd4286L).build2(SMethodBuilder.createJavaParameter(SRepository.class, ""));
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getFrom_id1NHZk5hj1Zl, getTo_id1NHZk5hj1ls, getMyMoveNodeItem_id4yRsQKnq58F, shouldKeepOldNode_id1NHZk5hi$oq, doDeprecateOldNode_id1NHZk5hiKRu);
 
@@ -39,13 +37,13 @@ public final class MoveNodeSpecialization__BehaviorDescriptor extends BaseBHDesc
   }
 
   /*package*/ static SNode getFrom_id1NHZk5hj1Zl(@NotNull SNode __thisNode__, SRepository repository) {
-    return check_cflqrt_a0a0(SLinkOperations.getTarget(MoveNodeSpecialization__BehaviorDescriptor.getMyMoveNodeItem_id4yRsQKnq58F.invoke(__thisNode__), MetaAdapterFactory.getContainmentLink(0x9074634404fd4286L, 0x97d5b46ae6a81709L, 0x67236d4a5830221eL, 0x67236d4a58343d15L, "fromNode")), repository);
+    return check_cflqrt_a0a0(SLinkOperations.getTarget(MoveNodeSpecialization__BehaviorDescriptor.getMyMoveNodeItem_id4yRsQKnq58F.invoke(__thisNode__), LINKS.fromNode$UG1d), repository);
   }
   /*package*/ static SNode getTo_id1NHZk5hj1ls(@NotNull SNode __thisNode__, SRepository repository) {
-    return check_cflqrt_a0a1(SLinkOperations.getTarget(MoveNodeSpecialization__BehaviorDescriptor.getMyMoveNodeItem_id4yRsQKnq58F.invoke(__thisNode__), MetaAdapterFactory.getContainmentLink(0x9074634404fd4286L, 0x97d5b46ae6a81709L, 0x67236d4a5830221eL, 0x67236d4a58343d17L, "toNode")), repository);
+    return check_cflqrt_a0a1(SLinkOperations.getTarget(MoveNodeSpecialization__BehaviorDescriptor.getMyMoveNodeItem_id4yRsQKnq58F.invoke(__thisNode__), LINKS.toNode$UGvf), repository);
   }
   /*package*/ static SNode getMyMoveNodeItem_id4yRsQKnq58F(@NotNull SNode __thisNode__) {
-    return SNodeOperations.as(SNodeOperations.getParent(__thisNode__), MetaAdapterFactory.getConcept(0x9074634404fd4286L, 0x97d5b46ae6a81709L, 0x67236d4a5830221eL, "jetbrains.mps.lang.migration.structure.MoveNodeMigrationPart"));
+    return SNodeOperations.as(SNodeOperations.getParent(__thisNode__), CONCEPTS.MoveNodeMigrationPart$zn);
   }
   /*package*/ static boolean shouldKeepOldNode_id1NHZk5hi$oq(@NotNull SNode __thisNode__) {
     return false;
@@ -54,7 +52,6 @@ public final class MoveNodeSpecialization__BehaviorDescriptor extends BaseBHDesc
   }
 
   /*package*/ MoveNodeSpecialization__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -119,5 +116,14 @@ public final class MoveNodeSpecialization__BehaviorDescriptor extends BaseBHDesc
       return AbstractNodeReference__BehaviorDescriptor.tryToFindNode_id6szrkDoc2K7.invoke(checkedDotOperand, repository);
     }
     return null;
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink fromNode$UG1d = MetaAdapterFactory.getContainmentLink(0x9074634404fd4286L, 0x97d5b46ae6a81709L, 0x67236d4a5830221eL, 0x67236d4a58343d15L, "fromNode");
+    /*package*/ static final SContainmentLink toNode$UGvf = MetaAdapterFactory.getContainmentLink(0x9074634404fd4286L, 0x97d5b46ae6a81709L, 0x67236d4a5830221eL, 0x67236d4a58343d17L, "toNode");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept MoveNodeMigrationPart$zn = MetaAdapterFactory.getConcept(0x9074634404fd4286L, 0x97d5b46ae6a81709L, 0x67236d4a5830221eL, "jetbrains.mps.lang.migration.structure.MoveNodeMigrationPart");
   }
 }

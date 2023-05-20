@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,11 +22,23 @@ import java.io.File;
 @Immutable
 public final class FileWithPosition {
   private final File myFile;
-  private final int myOffset;
+  private final long myLine;
+  private final long myColumn;
+  private final long myOffset;
 
-  public FileWithPosition(File file, int offset) {
+  public FileWithPosition(File file, long offset) {
     myFile = file;
     myOffset = offset;
+    myLine = myColumn = -1;
+  }
+
+  // use {@code -1} for any unknown value
+  // offset, line and column are 0-based
+  public FileWithPosition(File file, long offset, long line, long column) {
+    myFile = file;
+    myOffset = offset;
+    myLine = line;
+    myColumn = column;
   }
 
   public File getFile() {
@@ -34,6 +46,27 @@ public final class FileWithPosition {
   }
 
   public int getOffset() {
+    return (int) myOffset;
+  }
+
+  public long getOffsetLong() {
     return myOffset;
+  }
+
+  public int getLine() {
+    return (int) myLine;
+  }
+
+  public int getColumn() {
+    return (int) myColumn;
+  }
+
+  @Override
+  public String toString() {
+    if (myLine != -1) {
+      return String.format("%s[%d:%d]", myFile, myLine, myColumn);
+    } else {
+      return String.format("%s@%d", myFile, myOffset);
+    }
   }
 }

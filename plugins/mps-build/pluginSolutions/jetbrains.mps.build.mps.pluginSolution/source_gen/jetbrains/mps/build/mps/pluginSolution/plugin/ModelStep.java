@@ -4,105 +4,97 @@ package jetbrains.mps.build.mps.pluginSolution.plugin;
 
 import org.jetbrains.mps.openapi.model.SModel;
 import jetbrains.mps.project.Project;
-import jetbrains.mps.ide.project.ProjectHelper;
-import jetbrains.mps.util.NameUtil;
+import jetbrains.mps.project.MPSProject;
 import jetbrains.mps.project.Solution;
-import java.util.List;
-import jetbrains.mps.smodel.ModelAccess;
-import jetbrains.mps.util.Computable;
-import jetbrains.mps.internal.collections.runtime.Sequence;
-import java.util.Collections;
-import org.jetbrains.mps.openapi.persistence.ModelRoot;
-import jetbrains.mps.internal.collections.runtime.IWhereFilter;
+import jetbrains.mps.smodel.ModelAccessHelper;
 import org.jetbrains.mps.openapi.model.EditableSModel;
-import jetbrains.mps.internal.collections.runtime.ListSequence;
-import org.jetbrains.annotations.NotNull;
 
 public class ModelStep extends TwoOptionsStep<SModel> {
+  private Project myMPSProject;
+
   public ModelStep(Project project, AbstractBuildGenerator buildGenerator, IErrorHandler handler) {
-    super(ProjectHelper.toIdeaProject(project), buildGenerator, handler);
+    super(((MPSProject) project).getProject(), buildGenerator, handler);
+    myMPSProject = project;
   }
+
   @Override
   protected void setChecked(boolean checked) {
     this.myGenerator.setCreateModel(checked);
   }
+
   @Override
   protected boolean getChecked() {
     return this.myGenerator.getCreateModel();
   }
+
   @Override
   protected String getComboBoxName() {
     return "Use existing model:";
   }
+
   @Override
   protected String getVariantName(final SModel model) {
-    return NameUtil.shortNameFromLongName(model.getModelName());
+    return model.getName().getSimpleName();
   }
+
   @Override
   protected String getTextFieldText() {
     return this.myGenerator.getNewModelName();
   }
+
   @Override
   protected void setTextFieldText(String text) {
     this.myGenerator.setNewModelName(text);
   }
+
   @Override
   protected String getCheckBoxName() {
     return "Create new model";
   }
+
   @Override
   protected void setVariant(SModel m) {
     this.myGenerator.setModel(m);
   }
+
   @Override
   protected String getTextFieldName() {
     return "New model name:";
   }
+
   @Override
   protected SModel[] getVariants() {
     final Solution solution = this.myGenerator.getSolution();
     if (solution == null) {
       return new SModel[0];
     } else {
-      List<SModel> models = ModelAccess.instance().runReadAction(new Computable<List<SModel>>() {
-        @Override
-        public List<SModel> compute() {
-          Iterable<SModel> models = Sequence.fromIterable(Collections.<SModel>emptyList());
-          for (ModelRoot mr : solution.getModelRoots()) {
-            models = Sequence.fromIterable(models).concat(Sequence.fromIterable(mr.getModels()));
-          }
-          return Sequence.fromIterable(models).where(new IWhereFilter<SModel>() {
-            public boolean accept(SModel it) {
-              return it instanceof EditableSModel && !(it.isReadOnly());
-            }
-          }).toListSequence();
-        }
+      return new ModelAccessHelper(myMPSProject.getModelAccess()).runReadAction(() -> {
+        // MR condition is likely to filter out artificial/manually registered models
+        return solution.getModels((SModel m) -> m.getModelRoot() != null && m instanceof EditableSModel && !(m.isReadOnly())).toArray(new SModel[0]);
       });
-      return ListSequence.fromList(models).toGenericArray(SModel.class);
     }
   }
+
   @Override
   public String getDescription() {
     return "Select a model to create a new build script.";
   }
+
   @Override
   protected boolean isCheckBoxEnabled() {
     return !(this.myGenerator.getCreateSolution());
   }
+
   @Override
   protected boolean isValid(String text) {
     return this.myGenerator.isValidModelName(text);
   }
+
   @Override
   protected String getWarningText(String text) {
     if (text.equals("")) {
       return "Empty model name is not allowed.";
     }
     return "Model " + text + " already exists, choose another name.";
-  }
-  @NotNull
-  @Override
-  public String getImageText() {
-    return "Script Model";
   }
 }

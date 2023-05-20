@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-dx4f5d3elpzezhj0op21dirxn1282yn" />
+<product version="3" modelHash="-j0lfi9gkqguob37uwc7xo27f6j7d5p">
+  <files names="EditorAspectDescriptorImpl.java:MoneyCreator_Editor.java:MoneyCreator_EditorBuilder_a.java:MoneyLiteral_Editor.java:MoneyLiteral_EditorBuilder_a.java:MoneyMethodCall_Editor.java:MoneyMethodCall_EditorBuilder_a.java:MoneyMethods_Contribution.java" />
+</product>
 

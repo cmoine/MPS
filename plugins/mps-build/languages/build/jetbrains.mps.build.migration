@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model ref="r:ba09f4a9-79c5-4227-a22c-3db8d1f5ce9e(migrationData)">
+  <persistence version="9" />
+  <languages />
+  <imports>
+    <import index="3ior" ref="r:e9081cad-d8c3-45f2-b4ad-1dabd5ff82af(jetbrains.mps.build.structure)" implicit="true" />
+    <import index="o2va" ref="r:00f69407-23a8-49a2-a236-9e89a32679aa(jetbrains.mps.build.editor)" implicit="true" />
+  </imports>
+  <registry>
+    <language id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor">
+      <concept id="3017733173184487099" name="jetbrains.mps.lang.editor.structure.SmartRefMigrationDataEntity" flags="ng" index="ZsZFI">
+        <reference id="3017733173184487105" name="generatedMenu" index="ZsZEk" />
+        <reference id="3017733173184487102" name="conceptNode" index="ZsZFF" />
+      </concept>
+      <concept id="3017733173184487098" name="jetbrains.mps.lang.editor.structure.SmartRefMigrationData" flags="ng" index="ZsZFJ">
+        <child id="3017733173184487121" name="entities" index="ZsZE4" />
+      </concept>
+    </language>
+    <language id="9882f4ad-1955-46fe-8269-94189e5dbbf2" name="jetbrains.mps.lang.migration.util">
+      <concept id="7417095922908669705" name="jetbrains.mps.lang.migration.util.structure.StepData" flags="ng" index="2z5JpS">
+        <property id="1973338949477451252" name="script" index="3qqn2_" />
+        <child id="7417095922908725798" name="data" index="2z5Xdn" />
+      </concept>
+    </language>
+  </registry>
+  <node concept="2z5JpS" id="47y0FrqhJAg">
+    <property role="3qqn2_" value="18bc6592-03a6-4e29-a83a-7ff23bde13ba(jetbrains.mps.lang.editor)/8" />
+    <node concept="ZsZFJ" id="47y0FrqhJzi" role="2z5Xdn">
+      <node concept="ZsZFI" id="47y0FrqhJ$$" role="ZsZE4">
+        <ref role="ZsZFF" to="3ior:4RsV8qJGJpc" resolve="BuildSource_JavaExternalJarRef" />
+        <ref role="ZsZEk" to="o2va:47y0FrqhJ$u" resolve="BuildSource_JavaExternalJarRef_SmartReference" />
+      </node>
+      <node concept="ZsZFI" id="47y0FrqhJ$X" role="ZsZE4">
+        <ref role="ZsZFF" to="3ior:6qcrfIJFx8t" resolve="BuildSourceMacroRelativePath" />
+        <ref role="ZsZEk" to="o2va:47y0FrqhJ$R" resolve="BuildSourceMacroRelativePath_SmartReference" />
+      </node>
+      <node concept="ZsZFI" id="47y0FrqhJAf" role="ZsZE4">
+        <ref role="ZsZFF" to="3ior:4RsV8qJH_CZ" resolve="BuildSource_JavaExternalJarFolderRef" />
+        <ref role="ZsZEk" to="o2va:47y0FrqhJA9" resolve="BuildSource_JavaExternalJarFolderRef_SmartReference" />
+      </node>
+    </node>
+  </node>
+</model>
+

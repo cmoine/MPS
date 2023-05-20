@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -107,5 +107,37 @@ public final class SModifiersImpl implements SModifiers {
         (isStatic() ? "S" : "") +
         (isFinal() ? "F" : "") +
         "[" + myAccessPrivileges + "]";
+  }
+
+  // further unspecified set of bit flags that capture SModifiers state, suitable for #fromBitFlags(int)
+  /*package*/ static int asBitFlags(SModifiers m) {
+    assert m instanceof SModifiersImpl : "need to re-construct bits one by one";
+    final SModifiersImpl mi = (SModifiersImpl) m;
+    return (mi.myAccessPrivileges.ordinal() << 16) | mi.myMask;
+  }
+
+  /*package*/ static SModifiers fromBitFlags(int bitFlags) {
+    int mask = bitFlags & 0x00ffff;
+    return SModifiersImpl.create(mask, ap(bitFlags));
+  }
+
+  private static AccessPrivileges ap(int bitFlags) {
+    return AccessPrivileges.values()[bitFlags >>> 16];
+  }
+
+  /*package*/ static boolean isPublic(int bitFlags) {
+    return ap(bitFlags) == AccessPrivileges.PUBLIC;
+  }
+  /*package*/ static boolean isPrivate(int bitFlags) {
+    return ap(bitFlags) == AccessPrivileges.PRIVATE;
+  }
+  /*package*/ static boolean isAbstract(int bitFlags) {
+    return (bitFlags & ABSTRACT) != 0;
+  }
+  /*package*/ static boolean isStatic(int bitFlags) {
+    return (bitFlags & STATIC) != 0;
+  }
+  /*package*/ static boolean isVirtual(int bitFlags) {
+    return (bitFlags & VIRTUAL) != 0;
   }
 }

@@ -41,10 +41,10 @@ public class TraceInfoCollector {
   // FIXME for the time being, mimic structure of TraceInfoGenerationUtil. There seems to be no reason to assume
   // single position info kind per node, OTOH it doesn't hurt? Anyway, the problem is Map in the API, which needs to be
   // replaced with smth reasonable
-  private final Map<SNode, TraceablePositionInfo> myTracePositions = new HashMap<SNode, TraceablePositionInfo>();
-  private final Map<SNode, ScopePositionInfo> myScopePositions = new HashMap<SNode, ScopePositionInfo>();
-  private final Map<SNode, UnitPositionInfo> myUnitPositions = new HashMap<SNode, UnitPositionInfo>();
-  private final List<Pair<TextMark,PositionInfo>> myPositions = new ArrayList<Pair<TextMark, PositionInfo>>();
+  private final Map<SNode, TraceablePositionInfo> myTracePositions = new HashMap<>();
+  private final Map<SNode, ScopePositionInfo> myScopePositions = new HashMap<>();
+  private final Map<SNode, UnitPositionInfo> myUnitPositions = new HashMap<>();
+  private final List<Pair<TextMark,PositionInfo>> myPositions = new ArrayList<>();
 
   public final void populatePositions(BufferSnapshot bufferText) {
     for (Pair<TextMark, PositionInfo> p : myPositions) {
@@ -74,21 +74,21 @@ public class TraceInfoCollector {
     TraceablePositionInfo pi = new TraceablePositionInfo();
     pi.setConcept(node.getConcept());
     myTracePositions.put(node, pi);
-    myPositions.add(new Pair<TextMark, PositionInfo>(positionMarker, pi));
+    myPositions.add(new Pair<>(positionMarker, pi));
     return pi;
   }
 
   public ScopePositionInfo createScopePosition(@NotNull TextMark positionMarker, @NotNull SNode node) {
     ScopePositionInfo pi = new ScopePositionInfo();
     myScopePositions.put(node, pi);
-    myPositions.add(new Pair<TextMark, PositionInfo>(positionMarker, pi));
+    myPositions.add(new Pair<>(positionMarker, pi));
     return pi;
   }
 
   public UnitPositionInfo createUnitPosition(@NotNull TextMark positionMarker, @NotNull SNode node) {
     UnitPositionInfo pi = new UnitPositionInfo();
     myUnitPositions.put(node, pi);
-    myPositions.add(new Pair<TextMark, PositionInfo>(positionMarker, pi));
+    myPositions.add(new Pair<>(positionMarker, pi));
     return pi;
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,17 +58,19 @@ class UpdaterRepositoryContentAdapter extends SRepositoryContentAdapter {
   @Override
   public void modelReplaced(SModel model) {
     if (myUsedModels.contains(model)) {
-      myEditorComponent.getEditorContext().getRepository().getModelAccess().runReadInEDT(new Runnable() {
-        @Override
-        public void run() {
-          if (myEditorComponent.isDisposed()) {
-            return;
-          }
-          myEditorComponent.rebuildAfterReloadModel();
-          myEditorComponent.rebuildEditorContent();
+      myEditorComponent.getEditorContext().getRepository().getModelAccess().runReadInEDT(() -> {
+        if (myEditorComponent.isDisposed()) {
+          return;
         }
+        myEditorComponent.rebuildAfterReloadModel();
+        myEditorComponent.rebuildEditorContent();
       });
     }
+  }
+
+  @Override
+  public void modelUnloaded(SModel model) {
+    modelReplaced(model);
   }
 
   @Override
@@ -91,7 +93,7 @@ class UpdaterRepositoryContentAdapter extends SRepositoryContentAdapter {
     for (SModel old : myUsedModels) {
       old.removeModelListener(this);
     }
-    myUsedModels = new ArrayList<SModel>(models);
+    myUsedModels = new ArrayList<>(models);
     for (SModel m : models) {
       m.addModelListener(this);
     }

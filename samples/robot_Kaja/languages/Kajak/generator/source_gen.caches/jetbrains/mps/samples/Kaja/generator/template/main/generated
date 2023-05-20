@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-eayzceg2lgb8ch503phbd7hv3beh6oq" />
+<product version="3" modelHash="-7nboc34uvri16fj7hspwriiv0v1j62a">
+  <files names="Mapping_main.java:QueriesGenerated.java:Script_MoveLibraryRoutineDefinitions.java:Script_MoveRoutineDefinitions.java:Script_RemoveEmptyLines.java:Switch_ReduceDirectionEnum.java:TemplateModelImpl.java:Template_map_Script.java:Template_reduce_CommandList.java:Template_reduce_CommentLine.java:Template_reduce_Drop.java:Template_reduce_East.java:Template_reduce_Heading.java:Template_reduce_IfStatement.java:Template_reduce_IsFull.java:Template_reduce_IsMark.java:Template_reduce_IsWall.java:Template_reduce_LeftTurn.java:Template_reduce_Looking.java:Template_reduce_North.java:Template_reduce_Not.java:Template_reduce_Pick.java:Template_reduce_Repeat.java:Template_reduce_RoutineCall.java:Template_reduce_RoutineDefinition.java:Template_reduce_South.java:Template_reduce_Step.java:Template_reduce_TraceMessage.java:Template_reduce_West.java:Template_reduce_While.java" />
+</product>
 

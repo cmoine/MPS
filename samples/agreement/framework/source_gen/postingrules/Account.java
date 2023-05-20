@@ -13,6 +13,7 @@ public class Account {
   private List<Entry> myEntries = new ArrayList<Entry>();
   private Currency myCurrency;
   private AccountType myType;
+
   public Account(Currency currency) {
     this(currency, null);
   }

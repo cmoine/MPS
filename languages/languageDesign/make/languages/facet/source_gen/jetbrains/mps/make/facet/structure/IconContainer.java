@@ -5,5 +5,5 @@ package jetbrains.mps.make.facet.structure;
 import jetbrains.mps.smodel.runtime.IconResource;
 
 public class IconContainer {
-  protected static IconResource RESOURCE_a0a0b = new IconResource("facetDeclaration.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a2a0a1b0v = new IconResource("facetDeclaration.png", IconContainer.class);
 }

@@ -37,7 +37,7 @@ public class DateRange implements Comparable {
   }
   @Override
   public boolean equals(Object arg) {
-    if (!((arg instanceof DateRange))) {
+    if (!(arg instanceof DateRange)) {
       return false;
     }
     DateRange other = (DateRange) arg;

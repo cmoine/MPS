@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +15,21 @@
  */
 package jetbrains.mps.errors;
 
+import jetbrains.mps.smodel.language.LanguageRegistry;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+// XXX it's a bit odd to have isExecutedImmediately here, but to instantiate QuickFix_Runtime to get declaration node, could we do anything about that?
 public interface QuickFixProvider {
 
-  public QuickFix_Runtime getQuickFix();
+  /**
+   * FIXME inconsistent contract. Implementation used to return null, while client didn't account for null value
+   *       Now, implementation returns fake instance and ensures != null, although it's not necessarily a bright idea.
+   */
+  QuickFix_Runtime getQuickFix(@NotNull LanguageRegistry languageRegistry);
 
-  public boolean isExecutedImmediately();
+  boolean isExecutedImmediately();
 
-  void setIsError(boolean isError);
-
-  boolean isError();
+  @Nullable
+  String getIntentionId();
 }

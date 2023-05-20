@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,14 +20,12 @@ import jetbrains.mps.nodeEditor.AbstractCellProvider;
 import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.SubstituteInfo;
 import jetbrains.mps.openapi.editor.update.AttributeKind;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SNode;
 
 public abstract class CellProviderWithRole extends AbstractCellProvider {
   protected String myNoTargetText;
   protected EditorContext myEditorContext;
-
-  // auxiliary cell provider, which may help to create some parts of resulting cell (used in inheritors)
-  protected AbstractCellProvider myAuxiliaryCellProvider;
 
   // if the cell to provide "allows" "empty" target of its relation.
   // The exact meaning of what is "empty" and what is "to allow"
@@ -42,7 +40,7 @@ public abstract class CellProviderWithRole extends AbstractCellProvider {
 
 
   //it is important for descendants to have a unique constructor and with the same parameters as this one 
-  public CellProviderWithRole(SNode node, EditorContext context) {
+  public CellProviderWithRole(@NotNull SNode node, EditorContext context) {
     super(node);
     myEditorContext = context;
   }
@@ -50,9 +48,6 @@ public abstract class CellProviderWithRole extends AbstractCellProvider {
   public EditorContext getEditorContext() {
     return myEditorContext;
   }
-
-  //sets a role object for this provider
-  public abstract void setRole(Object role);
 
   //gets an attribute for this provider's node hanging on this provider's role
   public SNode getRoleAttribute() {
@@ -64,14 +59,6 @@ public abstract class CellProviderWithRole extends AbstractCellProvider {
   public abstract Iterable<SNode> getRoleAttributes();
 
   // gets a kind of attributes possibly hanging on this provider's role.
-  //todo replace with AttributeKind
-
-  /**
-   * @deprecated since MPS 3.4 use {@link #getRoleAttributeKind()}
-   */
-  @Deprecated
-  public abstract Class getRoleAttributeClass();
-
   public abstract AttributeKind getRoleAttributeKind();
 
   public abstract SubstituteInfo createDefaultSubstituteInfo();
@@ -95,13 +82,5 @@ public abstract class CellProviderWithRole extends AbstractCellProvider {
 
   public void setAllowsEmptyTarget(boolean allowsEmptyTarget) {
     myAllowsEmptyTarget = allowsEmptyTarget;
-  }
-
-  public void setAuxiliaryCellProvider(AbstractCellProvider provider) {
-    myAuxiliaryCellProvider = provider;
-  }
-
-  public AbstractCellProvider getAuxiliaryCellProvider() {
-    return myAuxiliaryCellProvider;
   }
 }

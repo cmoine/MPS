@@ -15,12 +15,14 @@
  */
 package org.jetbrains.mps.openapi.persistence;
 
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SReference;
 import org.jetbrains.mps.openapi.util.Consumer;
+import org.jetbrains.mps.openapi.util.ProgressMonitor;
 
 import java.util.Collection;
 import java.util.Set;
@@ -36,15 +38,45 @@ public interface FindUsagesParticipant {
   /**
    * Finds references to the provided nodes in the scope.
    */
-  void findUsages(Collection<SModel> scope, Set<SNode> nodes, Consumer<SReference> consumer, Consumer<SModel> processedConsumer);
+  default void findUsages(Collection<SModel> scope, Set<SNode> nodes, Consumer<SReference> consumer, Consumer<SModel> processedConsumer) {
+    findUsages(scope, nodes, consumer, processedConsumer, null);
+  }
 
   /**
    * Finds instances of the provided concepts in the scope.
    */
-  void findInstances(Collection<SModel> scope, Set<SAbstractConcept> concepts, Consumer<SNode> consumer, Consumer<SModel> processedConsumer);
+  default void findInstances(Collection<SModel> scope, Set<SAbstractConcept> concepts, Consumer<SNode> consumer, Consumer<SModel> processedConsumer) {
+    findInstances(scope, concepts, consumer, processedConsumer, null);
+  }
 
   /**
    * Finds models referencing the provided set of models in the scope.
    */
-  void findModelUsages(Collection<SModel> scope, Set<SModelReference> modelReferences, Consumer<SModel> consumer, Consumer<SModel> processedConsumer);
+  default void findModelUsages(Collection<SModel> scope, Set<SModelReference> modelReferences, Consumer<SModel> consumer, Consumer<SModel> processedConsumer) {
+    findModelUsages(scope, modelReferences, consumer, processedConsumer, null);
+  }
+
+  /**
+   * Finds references to the provided nodes in the scope.
+   */
+  default void findUsages(Collection<SModel> scope, Set<SNode> nodes, Consumer<SReference> consumer, Consumer<SModel> processedConsumer,
+                          @Nullable ProgressMonitor monitor) {
+    findUsages(scope, nodes, consumer, processedConsumer);
+  }
+
+  /**
+   * Finds instances of the provided concepts in the scope.
+   */
+  default void findInstances(Collection<SModel> scope, Set<SAbstractConcept> concepts, Consumer<SNode> consumer, Consumer<SModel> processedConsumer,
+                             @Nullable ProgressMonitor monitor) {
+    findInstances(scope, concepts, consumer, processedConsumer);
+  }
+
+  /**
+   * Finds models referencing the provided set of models in the scope.
+   */
+  default void findModelUsages(Collection<SModel> scope, Set<SModelReference> modelReferences, Consumer<SModel> consumer, Consumer<SModel> processedConsumer,
+                               @Nullable ProgressMonitor monitor) {
+    findModelUsages(scope, modelReferences, consumer, processedConsumer);
+  }
 }

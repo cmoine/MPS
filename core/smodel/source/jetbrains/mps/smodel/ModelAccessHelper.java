@@ -40,15 +40,23 @@ public final class ModelAccessHelper {
   }
 
   public <T> T runReadAction(final Computable<T> c) {
-    final ComputeRunnable<T> r = new ComputeRunnable<T>(c);
+    final ComputeRunnable<T> r = new ComputeRunnable<>(c);
     myModelAccess.runReadAction(r);
     return r.getResult();
   }
 
+  public void runReadAction(Runnable r) {
+    myModelAccess.runReadAction(r);
+  }
+
   public <T> T runWriteAction(final Computable<T> c) {
-    final ComputeRunnable<T> r = new ComputeRunnable<T>(c);
+    final ComputeRunnable<T> r = new ComputeRunnable<>(c);
     myModelAccess.runWriteAction(r);
     return r.getResult();
+  }
+
+  public void runWriteAction(Runnable r) {
+    myModelAccess.runWriteAction(r);
   }
 
     /**
@@ -56,7 +64,7 @@ public final class ModelAccessHelper {
      * Shall be invoked from EDT thread.
      */
   public <T> T executeCommand(final Computable<T> c) {
-    final ComputeRunnable<T> r = new ComputeRunnable<T>(c);
+    final ComputeRunnable<T> r = new ComputeRunnable<>(c);
     myModelAccess.executeCommand(r);
     return r.getResult();
   }

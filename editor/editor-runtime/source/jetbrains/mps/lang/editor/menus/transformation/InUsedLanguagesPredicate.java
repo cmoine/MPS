@@ -16,7 +16,6 @@
 package jetbrains.mps.lang.editor.menus.transformation;
 
 import jetbrains.mps.nodeEditor.menus.MenuUtil;
-import jetbrains.mps.openapi.editor.menus.substitute.SubstituteMenuItem;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.language.SLanguage;

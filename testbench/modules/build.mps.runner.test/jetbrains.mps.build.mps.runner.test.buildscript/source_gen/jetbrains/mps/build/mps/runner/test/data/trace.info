@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <root nodeRef="r:3ec186f8-da5f-44b7-b163-d357d2b481c0(jetbrains.mps.build.mps.runner.test.data)/2264311582633519580">
+    <file name="plugin.xml">
+      <unit id="2264311582633519580" at="1,0,11,14" name="jetbrains.mps.build.mps.runner.test.data.plugin" />
+    </file>
+  </root>
+</debug-info>
+

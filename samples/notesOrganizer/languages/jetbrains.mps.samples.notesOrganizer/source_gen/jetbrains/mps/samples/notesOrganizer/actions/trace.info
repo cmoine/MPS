@@ -2,27 +2,30 @@
 <debug-info version="2">
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <root>
     <file name="ActionAspectDescriptorImpl.java">
-      <unit at="13,0,34,0" name="jetbrains.mps.samples.notesOrganizer.actions.ActionAspectDescriptorImpl" />
-    </file>
-    <file name="QueriesGenerated.java">
-      <unit at="6,0,8,0" name="jetbrains.mps.samples.notesOrganizer.actions.QueriesGenerated" />
+      <unit at="12,0,28,0" name="jetbrains.mps.samples.notesOrganizer.actions.ActionAspectDescriptorImpl" />
     </file>
   </root>
   <root nodeRef="r:3fe3892d-7b9f-411e-8209-952fc977b7ad(jetbrains.mps.samples.notesOrganizer.actions)/8908453262579903200">
     <file name="Notes.java">
-      <node id="8908453262579903208" at="13,91,14,381" concept="0" />
-      <node id="8908453262579903201" at="13,0,16,0" concept="1" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SModel;)V" />
-      <scope id="8908453262579903201" at="13,91,14,381" />
-      <scope id="8908453262579903201" at="13,0,16,0">
+      <node id="8908453262579903208" at="15,102,16,94" concept="0" />
+      <node id="8908453262579903200" at="21,0,22,0" concept="2" trace="parts$Wb1E" />
+      <node id="8908453262579903200" at="25,0,26,0" concept="2" trace="TextNotePart$bv" />
+      <node id="8908453262579903201" at="15,0,18,0" concept="1" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <scope id="8908453262579903201" at="15,102,16,94" />
+      <scope id="8908453262579903201" at="15,0,18,0">
         <var name="enclosingNode" id="8908453262579903201" />
+        <var name="index" id="8908453262579903201" />
         <var name="model" id="8908453262579903201" />
         <var name="newNode" id="8908453262579903201" />
         <var name="sampleNode" id="8908453262579903201" />
       </scope>
-      <unit id="8908453262579903201" at="12,0,17,0" name="jetbrains.mps.samples.notesOrganizer.actions.Notes$NodeFactory_8908453262579903201" />
-      <unit id="8908453262579903200" at="11,0,18,0" name="jetbrains.mps.samples.notesOrganizer.actions.Notes" />
+      <unit id="8908453262579903200" at="20,0,23,0" name="jetbrains.mps.samples.notesOrganizer.actions.Notes$LINKS" />
+      <unit id="8908453262579903200" at="24,0,27,0" name="jetbrains.mps.samples.notesOrganizer.actions.Notes$CONCEPTS" />
+      <unit id="8908453262579903201" at="14,0,19,0" name="jetbrains.mps.samples.notesOrganizer.actions.Notes$NodeFactory_8908453262579903201" />
+      <unit id="8908453262579903200" at="13,0,28,0" name="jetbrains.mps.samples.notesOrganizer.actions.Notes" />
     </file>
   </root>
 </debug-info>

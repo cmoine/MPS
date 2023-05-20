@@ -38,7 +38,7 @@ import java.util.List;
  * @param <T> WTF?
  */
 public abstract class DependTableModel<T> extends AbstractTableModel implements ItemRemovable, Modifiable {
-  protected List<DependenciesTableItem> myTableItems = new ArrayList<DependenciesTableItem>();
+  protected List<DependenciesTableItem> myTableItems = new ArrayList<>();
   protected T myItem;
 
   private final String myExportColumnName = PropertiesBundle.message("mps.properties.configurable.tablemodel.dependency.column.export");

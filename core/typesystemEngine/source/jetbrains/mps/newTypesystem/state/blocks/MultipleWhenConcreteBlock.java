@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class MultipleWhenConcreteBlock extends WhenConcreteBlock {
   private List<SNode> myArguments;
@@ -39,23 +40,23 @@ public class MultipleWhenConcreteBlock extends WhenConcreteBlock {
 
   @Override
   public Set<Pair<SNode, ConditionKind>> getInitialInputs() {
-    Set<Pair<SNode, ConditionKind>> result = new HashSet<Pair<SNode, ConditionKind>>();
+    Set<Pair<SNode, ConditionKind>> result = new HashSet<>();
     for (SNode arg : myArguments) {
-      result.add(new Pair<SNode, ConditionKind>(arg, myConditionKind));
+      result.add(new Pair<>(arg, myConditionKind));
     }
     return result;
   }
 
   @Override
   public Set<SNode> getInputs() {
-    HashSet<SNode> result = new HashSet<SNode>();
+    HashSet<SNode> result = new HashSet<>();
     result.addAll(myArguments);
     return result;
   }
 
   @Override
   public List<SNode> getVariables(State state) {
-    List<SNode> result = new ArrayList<SNode>();
+    List<SNode> result = new ArrayList<>();
     for (SNode arg : myArguments) {
       result.addAll(TypesUtil.getVariables(arg, state));
     }
@@ -65,11 +66,15 @@ public class MultipleWhenConcreteBlock extends WhenConcreteBlock {
 
   @Override
   public String getPresentation() {
-    return "when concrete (" + myArguments + ") " + myConditionKind.getPresentation();
+    return String.format("when concrete (%s) %s", arguments2string(), myConditionKind.getPresentation());
   }
 
   @Override
   public String getShortPresentation() {
-    return myConditionKind.getPresentation() + myArguments;
+    return myConditionKind.getPresentation() + arguments2string();
+  }
+
+  private String arguments2string() {
+    return myArguments.stream().map(SNode::getPresentation).collect(Collectors.toList()).toString();
   }
 }

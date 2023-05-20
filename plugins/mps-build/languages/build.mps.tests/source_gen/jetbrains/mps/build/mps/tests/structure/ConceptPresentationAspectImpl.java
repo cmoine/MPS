@@ -4,33 +4,74 @@ package jetbrains.mps.build.mps.tests.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_BuildModuleTestsPlugin = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BuildMpsLayout_TestModule = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BuildMpsLayout_TestModuleGroup = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BuildMpsLayout_TestModules = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BuildMpsLayout_TestModules_Content = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_BuildAspect_MpsTestModules;
+  private ConceptPresentation props_BuildModuleTestsPlugin;
+  private ConceptPresentation props_BuildMps_TestModule;
+  private ConceptPresentation props_BuildMps_TestModuleGroup;
+  private ConceptPresentation props_BuildMps_TestModules_Content;
+  private ConceptPresentation props_BuildMps_TestModules_Options;
+  private ConceptPresentation props_RequiredPlugin;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.BuildAspect_MpsTestModules:
+        if (props_BuildAspect_MpsTestModules == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_BuildAspect_MpsTestModules = cpb.create();
+        }
+        return props_BuildAspect_MpsTestModules;
+      case LanguageConceptSwitch.BuildModuleTestsPlugin:
+        if (props_BuildModuleTestsPlugin == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("adds ability to execute module tests to the project");
+          cpb.rawPresentation("module-tests");
+          props_BuildModuleTestsPlugin = cpb.create();
+        }
         return props_BuildModuleTestsPlugin;
-      case 1:
-        return props_BuildMpsLayout_TestModule;
-      case 2:
-        return props_BuildMpsLayout_TestModuleGroup;
-      case 3:
-        return props_BuildMpsLayout_TestModules;
-      case 4:
-        return props_BuildMpsLayout_TestModules_Content;
+      case LanguageConceptSwitch.BuildMps_TestModule:
+        if (props_BuildMps_TestModule == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x3600cb0a44dd4a5bL, 0x996822924406419eL, 0x3f496e80bd8ef372L, 0x3f496e80bd8ef373L, "module", "", "");
+          props_BuildMps_TestModule = cpb.create();
+        }
+        return props_BuildMps_TestModule;
+      case LanguageConceptSwitch.BuildMps_TestModuleGroup:
+        if (props_BuildMps_TestModuleGroup == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x3600cb0a44dd4a5bL, 0x996822924406419eL, 0x3f496e80bd8ef36bL, 0x3f496e80bd8ef36cL, "group", "", "");
+          props_BuildMps_TestModuleGroup = cpb.create();
+        }
+        return props_BuildMps_TestModuleGroup;
+      case LanguageConceptSwitch.BuildMps_TestModules_Content:
+        if (props_BuildMps_TestModules_Content == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_BuildMps_TestModules_Content = cpb.create();
+        }
+        return props_BuildMps_TestModules_Content;
+      case LanguageConceptSwitch.BuildMps_TestModules_Options:
+        if (props_BuildMps_TestModules_Options == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("BuildMps_TestModules_Options");
+          props_BuildMps_TestModules_Options = cpb.create();
+        }
+        return props_BuildMps_TestModules_Options;
+      case LanguageConceptSwitch.RequiredPlugin:
+        if (props_RequiredPlugin == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x3600cb0a44dd4a5bL, 0x996822924406419eL, 0x5b81705cdf7bc318L, 0x5b81705cdf7bc319L, "plugin", "", "");
+          props_RequiredPlugin = cpb.create();
+        }
+        return props_RequiredPlugin;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

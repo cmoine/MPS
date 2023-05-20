@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<model ref="r:b44bed60-e0f0-4d48-bb29-e0fdb2041a66(tests.testPersistence.testModel)" doNotGenerate="true">
+<model ref="r:b44bed60-e0f0-4d48-bb29-e0fdb2041a66(tests.testPersistence.testModel)">
   <persistence version="9" />
+  <attribute name="doNotGenerate" value="true" />
   <languages>
     <use id="f2801650-65d5-424e-bb1b-463a8781b786" name="jetbrains.mps.baseLanguage.javadoc" version="2" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports>
     <import index="wyt6" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)" implicit="true" />
@@ -12,9 +13,6 @@
   <registry>
     <language id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage">
       <concept id="1202948039474" name="jetbrains.mps.baseLanguage.structure.InstanceMethodCallOperation" flags="nn" index="liA8E" />
-      <concept id="1224848483129" name="jetbrains.mps.baseLanguage.structure.IBLDeprecatable" flags="ng" index="IEa8$">
-        <property id="1224848525476" name="isDeprecated" index="IEkAT" />
-      </concept>
       <concept id="1197027756228" name="jetbrains.mps.baseLanguage.structure.DotExpression" flags="nn" index="2OqwBi">
         <child id="1197027771414" name="operand" index="2Oq$k0" />
         <child id="1197027833540" name="operation" index="2OqNvi" />
@@ -53,11 +51,8 @@
       <concept id="1178549954367" name="jetbrains.mps.baseLanguage.structure.IVisible" flags="ng" index="1B3ioH">
         <child id="1178549979242" name="visibility" index="1B3o_S" />
       </concept>
-      <concept id="6329021646629104957" name="jetbrains.mps.baseLanguage.structure.TextCommentPart" flags="nn" index="3SKdUq">
-        <property id="6329021646629104958" name="text" index="3SKdUp" />
-      </concept>
       <concept id="6329021646629104954" name="jetbrains.mps.baseLanguage.structure.SingleLineComment" flags="nn" index="3SKdUt">
-        <child id="6329021646629175155" name="commentPart" index="3SKWNk" />
+        <child id="8356039341262087992" name="line" index="1aUNEU" />
       </concept>
       <concept id="1146644602865" name="jetbrains.mps.baseLanguage.structure.PublicVisibility" flags="nn" index="3Tm1VV" />
     </language>
@@ -81,23 +76,46 @@
         <property id="1169194664001" name="name" index="TrG5h" />
       </concept>
     </language>
+    <language id="c7fb639f-be78-4307-89b0-b5959c3fa8c8" name="jetbrains.mps.lang.text">
+      <concept id="155656958578482948" name="jetbrains.mps.lang.text.structure.Word" flags="nn" index="3oM_SD">
+        <property id="155656958578482949" name="value" index="3oM_SC" />
+      </concept>
+      <concept id="2535923850359271782" name="jetbrains.mps.lang.text.structure.Line" flags="nn" index="1PaTwC">
+        <child id="2535923850359271783" name="elements" index="1PaTwD" />
+      </concept>
+    </language>
   </registry>
   <node concept="312cEu" id="3ofMfJ4WzhN">
     <property role="TrG5h" value="TestClass" />
     <node concept="2YIFZL" id="3ofMfJ50Oe4" role="jymVt">
       <property role="TrG5h" value="testMethod" />
-      <property role="IEkAT" value="false" />
       <property role="DiZV1" value="false" />
       <property role="od$2w" value="false" />
       <node concept="3clFbS" id="3ofMfJ4W$cu" role="3clF47">
         <node concept="3SKdUt" id="3ofMfJ50O2w" role="3cqZAp">
-          <node concept="3SKdUq" id="3ofMfJ50O2T" role="3SKWNk">
-            <property role="3SKdUp" value="ref to System" />
+          <node concept="1PaTwC" id="ATZLwXops7" role="1aUNEU">
+            <node concept="3oM_SD" id="ATZLwXops8" role="1PaTwD">
+              <property role="3oM_SC" value="ref" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXops9" role="1PaTwD">
+              <property role="3oM_SC" value="to" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXopsa" role="1PaTwD">
+              <property role="3oM_SC" value="System" />
+            </node>
           </node>
         </node>
         <node concept="3SKdUt" id="3ofMfJ50O5E" role="3cqZAp">
-          <node concept="3SKdUq" id="3ofMfJ50O67" role="3SKWNk">
-            <property role="3SKdUp" value="model dep java.io" />
+          <node concept="1PaTwC" id="ATZLwXopsb" role="1aUNEU">
+            <node concept="3oM_SD" id="ATZLwXopsc" role="1PaTwD">
+              <property role="3oM_SC" value="model" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXopsd" role="1PaTwD">
+              <property role="3oM_SC" value="dep" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXopse" role="1PaTwD">
+              <property role="3oM_SC" value="java.io" />
+            </node>
           </node>
         </node>
         <node concept="3clFbF" id="3ofMfJ50D6M" role="3cqZAp">
@@ -107,14 +125,22 @@
               <ref role="3cqZAo" to="wyt6:~System.out" resolve="out" />
             </node>
             <node concept="liA8E" id="3ofMfJ50D6L" role="2OqNvi">
-              <ref role="37wK5l" to="guwi:~PrintStream.println():void" resolve="println" />
+              <ref role="37wK5l" to="guwi:~PrintStream.println()" resolve="println" />
             </node>
           </node>
         </node>
         <node concept="3clFbH" id="3ofMfJ50O1h" role="3cqZAp" />
         <node concept="3SKdUt" id="3ofMfJ50O3l" role="3cqZAp">
-          <node concept="3SKdUq" id="3ofMfJ50O3J" role="3SKWNk">
-            <property role="3SKdUp" value="ref to self" />
+          <node concept="1PaTwC" id="ATZLwXopsf" role="1aUNEU">
+            <node concept="3oM_SD" id="ATZLwXopsg" role="1PaTwD">
+              <property role="3oM_SC" value="ref" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXopsh" role="1PaTwD">
+              <property role="3oM_SC" value="to" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXopsi" role="1PaTwD">
+              <property role="3oM_SC" value="self" />
+            </node>
           </node>
         </node>
         <node concept="3clFbF" id="3ofMfJ50O6J" role="3cqZAp">

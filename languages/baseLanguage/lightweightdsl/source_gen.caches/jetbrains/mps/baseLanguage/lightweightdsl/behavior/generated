@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-9xtq4g37tajx5ievyy7a0lir659uym5" />
+<product version="3" modelHash="-7168w4lisyyev9trzxnl14kehmz246q">
+  <files names="AutoInitDSLClass__BehaviorDescriptor.java:BehaviorAspectDescriptor.java:BooleanPropertyInstance__BehaviorDescriptor.java:CustomMemberDescriptor__BehaviorDescriptor.java:DSLClassMember__BehaviorDescriptor.java:DSLDescriptor__BehaviorDescriptor.java:DependentTypeDescriptor__BehaviorDescriptor.java:DependentTypeInstance__BehaviorDescriptor.java:EmptyMemberDescriptor__BehaviorDescriptor.java:IntegerPropertyInstance__BehaviorDescriptor.java:MemberInstance__BehaviorDescriptor.java:MemberPlaceholder__BehaviorDescriptor.java:MethodDescriptor__BehaviorDescriptor.java:MethodInstance__BehaviorDescriptor.java:ParameterDescriptor__BehaviorDescriptor.java:PlaceholderModifier__BehaviorDescriptor.java:PropertyDescriptor__BehaviorDescriptor.java:PropertyInstance__BehaviorDescriptor.java:StringPropertyInstance__BehaviorDescriptor.java" />
+</product>
 

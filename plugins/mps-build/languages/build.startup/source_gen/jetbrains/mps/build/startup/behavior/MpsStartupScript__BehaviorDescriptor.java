@@ -5,12 +5,9 @@ package jetbrains.mps.build.startup.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import org.jetbrains.mps.openapi.model.SNode;
 import java.util.List;
@@ -19,78 +16,276 @@ import org.jetbrains.annotations.NotNull;
 import jetbrains.mps.internal.collections.runtime.Sequence;
 import jetbrains.mps.internal.collections.runtime.IWhereFilter;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.internal.collections.runtime.IRightCombinator;
+import jetbrains.mps.internal.collections.runtime.ILeftCombinator;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.internal.collections.runtime.ISelector;
+import jetbrains.mps.internal.collections.runtime.ITranslator2;
+import java.util.Collections;
+import jetbrains.mps.internal.collections.runtime.ISequenceClosure;
+import java.util.Iterator;
+import jetbrains.mps.baseLanguage.closures.runtime.YieldingIterator;
+import jetbrains.mps.build.behavior.BuildString__BehaviorDescriptor;
+import jetbrains.mps.build.mps.behavior.BuildMps_Branding__BehaviorDescriptor;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
-import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
-import jetbrains.mps.smodel.SModelUtil_new;
-import org.jetbrains.mps.openapi.model.SNodeAccessUtil;
+import jetbrains.mps.smodel.builder.SNodeBuilder;
+import org.jetbrains.mps.openapi.language.SProperty;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
+import org.jetbrains.mps.openapi.language.SConcept;
 
 public final class MpsStartupScript__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0xd5033ceef63244b6L, 0xb30889d4fbde34ffL, 0x35ebd6e5b3437508L, "jetbrains.mps.build.startup.structure.MpsStartupScript");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<String> getDefaultVmoptions_id54lRqzvuHDj = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getDefaultVmoptions").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("54lRqzvuHDj").registry(REGISTRY).build(SMethodBuilder.createJavaParameter(Boolean.TYPE, ""));
-  public static final SMethod<Iterable<SNode>> getCommentedOptions_id54lRqzvvwVL = new SMethodBuilder<Iterable<SNode>>(new SJavaCompoundTypeImpl((Class<Iterable<SNode>>) ((Class) Object.class))).name("getCommentedOptions").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("54lRqzvvwVL").registry(REGISTRY).build(SMethodBuilder.createJavaParameter(Boolean.TYPE, ""));
-  public static final SMethod<Iterable<SNode>> getVmOptions_id2lwFGYOX$qJ = new SMethodBuilder<Iterable<SNode>>(new SJavaCompoundTypeImpl((Class<Iterable<SNode>>) ((Class) Object.class))).name("getVmOptions").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("2lwFGYOX$qJ").registry(REGISTRY).build(SMethodBuilder.createJavaParameter(Boolean.TYPE, ""));
-  public static final SMethod<Iterable<SNode>> getDefaultVmOptionsLines_id2lwFGYOXBOk = new SMethodBuilder<Iterable<SNode>>(new SJavaCompoundTypeImpl((Class<Iterable<SNode>>) ((Class) Object.class))).name("getDefaultVmOptionsLines").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("2lwFGYOXBOk").registry(REGISTRY).build(SMethodBuilder.createJavaParameter(Boolean.TYPE, ""));
-  public static final SMethod<String> getPathToVmOptionsFile_id54lRqzvvwXi = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getPathToVmOptionsFile").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("54lRqzvvwXi").registry(REGISTRY).build(SMethodBuilder.createJavaParameter(Boolean.TYPE, ""));
-  public static final SMethod<String> getVmOptionsFileName_id2lwFGYOYlNP = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getVmOptionsFileName").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("2lwFGYOYlNP").registry(REGISTRY).build(SMethodBuilder.createJavaParameter(Boolean.TYPE, ""));
-  public static final SMethod<String> getVmOptionsExtension_id54lRqzvvwXR = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getVmOptionsExtension").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("54lRqzvvwXR").registry(REGISTRY).build();
+  /*package*/ static final SMethod<String> getDefaultVmoptions_id54lRqzvuHDj = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getDefaultVmoptions").modifiers(0, AccessPrivileges.PRIVATE).concept(CONCEPT).baseMethodId(5842819808956701267L).languageId(0xb30889d4fbde34ffL, 0xd5033ceef63244b6L).build2(SMethodBuilder.createJavaParameter(Boolean.TYPE, ""));
+  /*package*/ static final SMethod<String> getCommentedVmoptions_id31jVCtHh$86 = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getCommentedVmoptions").modifiers(0, AccessPrivileges.PRIVATE).concept(CONCEPT).baseMethodId(3482389202308841990L).languageId(0xb30889d4fbde34ffL, 0xd5033ceef63244b6L).build2(SMethodBuilder.createJavaParameter(Boolean.TYPE, ""));
+  /*package*/ static final SMethod<Iterable<SNode>> getCommentedOptions_id54lRqzvvwVL = new SMethodBuilder<Iterable<SNode>>(new SJavaCompoundTypeImpl((Class<Iterable<SNode>>) ((Class) Object.class))).name("getCommentedOptions").modifiers(0, AccessPrivileges.PRIVATE).concept(CONCEPT).baseMethodId(5842819808956911345L).languageId(0xb30889d4fbde34ffL, 0xd5033ceef63244b6L).build2(SMethodBuilder.createJavaParameter(Boolean.TYPE, ""));
+  /*package*/ static final SMethod<Iterable<SNode>> getVmOptions_id2lwFGYOX$qJ = new SMethodBuilder<Iterable<SNode>>(new SJavaCompoundTypeImpl((Class<Iterable<SNode>>) ((Class) Object.class))).name("getVmOptions").modifiers(0, AccessPrivileges.PRIVATE).concept(CONCEPT).baseMethodId(2693344784285058735L).languageId(0xb30889d4fbde34ffL, 0xd5033ceef63244b6L).build2(SMethodBuilder.createJavaParameter(Boolean.TYPE, ""));
+  public static final SMethod<Iterable<SNode>> getDefaultVmOptionsLines_id2lwFGYOXBOk = new SMethodBuilder<Iterable<SNode>>(new SJavaCompoundTypeImpl((Class<Iterable<SNode>>) ((Class) Object.class))).name("getDefaultVmOptionsLines").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(2693344784285072660L).languageId(0xb30889d4fbde34ffL, 0xd5033ceef63244b6L).build2(SMethodBuilder.createJavaParameter(Boolean.TYPE, ""));
+  public static final SMethod<Iterable<SNode>> getCommentedVmOptionsLines_id31jVCtHhzv9 = new SMethodBuilder<Iterable<SNode>>(new SJavaCompoundTypeImpl((Class<Iterable<SNode>>) ((Class) Object.class))).name("getCommentedVmOptionsLines").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(3482389202308839369L).languageId(0xb30889d4fbde34ffL, 0xd5033ceef63244b6L).build2(SMethodBuilder.createJavaParameter(Boolean.TYPE, ""));
+  public static final SMethod<Iterable<SNode>> getVmOptionsTextLines_id2M0p1n5GA6s = new SMethodBuilder<Iterable<SNode>>(new SJavaCompoundTypeImpl((Class<Iterable<SNode>>) ((Class) Object.class))).name("getVmOptionsTextLines").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(3206672979361685916L).languageId(0xb30889d4fbde34ffL, 0xd5033ceef63244b6L).build2(SMethodBuilder.createJavaParameter(Boolean.TYPE, ""));
+  public static final SMethod<String> getVmOptionsFileName_id2lwFGYOYlNP = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getVmOptionsFileName").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(2693344784285261045L).languageId(0xb30889d4fbde34ffL, 0xd5033ceef63244b6L).build2(SMethodBuilder.createJavaParameter(Boolean.TYPE, ""));
+  public static final SMethod<String> getVmOptionsExtension_id54lRqzvvwXR = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getVmOptionsExtension").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(5842819808956911479L).languageId(0xb30889d4fbde34ffL, 0xd5033ceef63244b6L).build2();
+  public static final SMethod<String> getIdeaPathSelector_idBsOHnja5fe = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getIdeaPathSelector").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(710674657030198222L).languageId(0xb30889d4fbde34ffL, 0xd5033ceef63244b6L).build2();
 
-  private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getDefaultVmoptions_id54lRqzvuHDj, getCommentedOptions_id54lRqzvvwVL, getVmOptions_id2lwFGYOX$qJ, getDefaultVmOptionsLines_id2lwFGYOXBOk, getPathToVmOptionsFile_id54lRqzvvwXi, getVmOptionsFileName_id2lwFGYOYlNP, getVmOptionsExtension_id54lRqzvvwXR);
+  private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getDefaultVmoptions_id54lRqzvuHDj, getCommentedVmoptions_id31jVCtHh$86, getCommentedOptions_id54lRqzvvwVL, getVmOptions_id2lwFGYOX$qJ, getDefaultVmOptionsLines_id2lwFGYOXBOk, getCommentedVmOptionsLines_id31jVCtHhzv9, getVmOptionsTextLines_id2M0p1n5GA6s, getVmOptionsFileName_id2lwFGYOYlNP, getVmOptionsExtension_id54lRqzvvwXR, getIdeaPathSelector_idBsOHnja5fe);
 
   private static void ___init___(@NotNull SNode __thisNode__) {
   }
 
+  @Deprecated(since = "2021.2.1")
   /*package*/ static String getDefaultVmoptions_id54lRqzvuHDj(@NotNull SNode __thisNode__, boolean is64bit) {
-    return trim_9sggks_a0a0p(Sequence.fromIterable(MpsStartupScript__BehaviorDescriptor.getVmOptions_id2lwFGYOX$qJ.invoke(__thisNode__, ((boolean) is64bit))).where(new IWhereFilter<SNode>() {
+    return trim_9sggks_a0a0r(Sequence.fromIterable(MpsStartupScript__BehaviorDescriptor.getVmOptions_id2lwFGYOX$qJ.invokeSpecial(__thisNode__, ((boolean) is64bit))).where(new IWhereFilter<SNode>() {
       public boolean accept(SNode it) {
-        return !(SPropertyOperations.getBoolean(it, MetaAdapterFactory.getProperty(0xd5033ceef63244b6L, 0xb30889d4fbde34ffL, 0x35ebd6e5b343774cL, 0x5115dda8df7dfca2L, "commented")));
+        return !(SPropertyOperations.getBoolean(it, PROPS.commented$92Mp));
       }
-    }).foldRight("", new IRightCombinator<SNode, String>() {
-      public String combine(SNode it, String s) {
-        return s + " " + SPropertyOperations.getString(it, MetaAdapterFactory.getProperty(0xd5033ceef63244b6L, 0xb30889d4fbde34ffL, 0x35ebd6e5b343774cL, 0x35ebd6e5b343774dL, "options"));
+    }).foldLeft("", new ILeftCombinator<SNode, String>() {
+      public String combine(String s, SNode it) {
+        return s + " " + SPropertyOperations.getString(it, PROPS.options$D2Jv);
       }
     }));
   }
-  /*package*/ static Iterable<SNode> getCommentedOptions_id54lRqzvvwVL(@NotNull SNode __thisNode__, boolean is64bit) {
-    return Sequence.fromIterable(MpsStartupScript__BehaviorDescriptor.getVmOptions_id2lwFGYOX$qJ.invoke(__thisNode__, ((boolean) is64bit))).where(new IWhereFilter<SNode>() {
+  @Deprecated(since = "2021.2.1")
+  /*package*/ static String getCommentedVmoptions_id31jVCtHh$86(@NotNull SNode __thisNode__, boolean is64bit) {
+    return trim_9sggks_a0a0s(Sequence.fromIterable(MpsStartupScript__BehaviorDescriptor.getCommentedOptions_id54lRqzvvwVL.invokeSpecial(__thisNode__, ((boolean) is64bit))).where(new IWhereFilter<SNode>() {
       public boolean accept(SNode it) {
-        return SPropertyOperations.getBoolean(it, MetaAdapterFactory.getProperty(0xd5033ceef63244b6L, 0xb30889d4fbde34ffL, 0x35ebd6e5b343774cL, 0x5115dda8df7dfca2L, "commented"));
+        return SPropertyOperations.getBoolean(it, PROPS.commented$92Mp);
+      }
+    }).foldLeft("", new ILeftCombinator<SNode, String>() {
+      public String combine(String s, SNode it) {
+        return s + " #" + SPropertyOperations.getString(it, PROPS.options$D2Jv);
+      }
+    }));
+  }
+  @Deprecated(since = "2021.2.1")
+  /*package*/ static Iterable<SNode> getCommentedOptions_id54lRqzvvwVL(@NotNull SNode __thisNode__, boolean is64bit) {
+    return Sequence.fromIterable(MpsStartupScript__BehaviorDescriptor.getVmOptions_id2lwFGYOX$qJ.invokeSpecial(__thisNode__, ((boolean) is64bit))).where(new IWhereFilter<SNode>() {
+      public boolean accept(SNode it) {
+        return SPropertyOperations.getBoolean(it, PROPS.commented$92Mp);
       }
     });
   }
   /*package*/ static Iterable<SNode> getVmOptions_id2lwFGYOX$qJ(@NotNull SNode __thisNode__, boolean is64bit) {
-    return SNodeOperations.ofConcept(((is64bit ? SLinkOperations.getChildren(__thisNode__, MetaAdapterFactory.getContainmentLink(0xd5033ceef63244b6L, 0xb30889d4fbde34ffL, 0x35ebd6e5b3437508L, 0x2560aecfb4da3f5bL, "vmOptions64")) : SLinkOperations.getChildren(__thisNode__, MetaAdapterFactory.getContainmentLink(0xd5033ceef63244b6L, 0xb30889d4fbde34ffL, 0x35ebd6e5b3437508L, 0x35ebd6e5b3442664L, "vmOptions")))), MetaAdapterFactory.getConcept(0xd5033ceef63244b6L, 0xb30889d4fbde34ffL, 0x35ebd6e5b343774cL, "jetbrains.mps.build.startup.structure.SimpleVmOptions"));
+    return SNodeOperations.ofConcept(((is64bit ? SLinkOperations.getChildren(__thisNode__, LINKS.vmOptions64$zvnw) : SLinkOperations.getChildren(__thisNode__, LINKS.vmOptions$y$aq))), CONCEPTS.SimpleVmOptions$48);
   }
+  @Deprecated(since = "2021.2.1")
   /*package*/ static Iterable<SNode> getDefaultVmOptionsLines_id2lwFGYOXBOk(@NotNull SNode __thisNode__, boolean is64bit) {
-    return Sequence.fromIterable(Sequence.fromArray(MpsStartupScript__BehaviorDescriptor.getDefaultVmoptions_id54lRqzvuHDj.invoke(__thisNode__, ((boolean) is64bit)).split("\\s"))).where(new IWhereFilter<String>() {
+    return Sequence.fromIterable(Sequence.fromArray(MpsStartupScript__BehaviorDescriptor.getDefaultVmoptions_id54lRqzvuHDj.invokeSpecial(__thisNode__, ((boolean) is64bit)).split("\\s"))).where(new IWhereFilter<String>() {
       public boolean accept(String it) {
         return (it != null && it.length() > 0);
       }
     }).select(new ISelector<String, SNode>() {
       public SNode select(String it) {
-        return _quotation_createNode_p7akvg_a0a0a0a0d(it);
+        return createTextLine_p7akvg_a0a0a0a0e(it);
       }
     });
   }
-  /*package*/ static String getPathToVmOptionsFile_id54lRqzvvwXi(@NotNull SNode __thisNode__, boolean is64bit) {
-    return SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0xd5033ceef63244b6L, 0xb30889d4fbde34ffL, 0x35ebd6e5b3437508L, 0x35ebd6e5b343750bL, "startupFolder")) + "/" + MpsStartupScript__BehaviorDescriptor.getVmOptionsFileName_id2lwFGYOYlNP.invoke(__thisNode__, ((boolean) is64bit));
+  @Deprecated(since = "2021.2.1")
+  /*package*/ static Iterable<SNode> getCommentedVmOptionsLines_id31jVCtHhzv9(@NotNull SNode __thisNode__, boolean is64bit) {
+    return Sequence.fromIterable(MpsStartupScript__BehaviorDescriptor.getCommentedOptions_id54lRqzvvwVL.invokeSpecial(__thisNode__, ((boolean) is64bit))).where(new IWhereFilter<SNode>() {
+      public boolean accept(SNode it) {
+        return isNotEmptyString(SPropertyOperations.getString(it, PROPS.options$D2Jv));
+      }
+    }).select(new ISelector<SNode, SNode>() {
+      public SNode select(SNode it) {
+        return createTextLine_p7akvg_a0a0a0a0f("#" + SPropertyOperations.getString(it, PROPS.options$D2Jv));
+      }
+    });
+  }
+  /*package*/ static Iterable<SNode> getVmOptionsTextLines_id2M0p1n5GA6s(@NotNull SNode __thisNode__, boolean is64bit) {
+    return Sequence.fromIterable(MpsStartupScript__BehaviorDescriptor.getVmOptions_id2lwFGYOX$qJ.invokeSpecial(__thisNode__, ((boolean) is64bit))).translate(new ITranslator2<SNode, SNode>() {
+      public Iterable<SNode> translate(final SNode it) {
+        if (isEmptyString(SPropertyOperations.getString(it, PROPS.options$D2Jv)) || SPropertyOperations.getString(it, PROPS.options$D2Jv).isBlank()) {
+          // Ignore empty lines
+          return Sequence.fromIterable(Collections.<SNode>emptyList());
+        } else if (SPropertyOperations.getBoolean(it, PROPS.commented$92Mp)) {
+          // Pass through commented lines without changes
+          return Sequence.fromClosure(new ISequenceClosure<SNode>() {
+            public Iterable<SNode> iterable() {
+              return new Iterable<SNode>() {
+                public Iterator<SNode> iterator() {
+                  return new YieldingIterator<SNode>() {
+                    private int __CP__ = 0;
+                    protected boolean moveToNext() {
+__loop__:
+                      do {
+__switch__:
+                        switch (this.__CP__) {
+                          case -1:
+                            assert false : "Internal error";
+                            return false;
+                          case 2:
+                            this.__CP__ = 1;
+                            this.yield(it);
+                            return true;
+                          case 0:
+                            this.__CP__ = 2;
+                            break;
+                          default:
+                            break __loop__;
+                        }
+                      } while (true);
+                      return false;
+                    }
+                  };
+                }
+              };
+            }
+          });
+        } else {
+          // Detect legacy options
+          final String[] options = SPropertyOperations.getString(it, PROPS.options$D2Jv).split("\\s");
+          if (options.length > 1) {
+            // If space characters were found - convert meaningful entries to a list of options
+            return Sequence.fromClosure(new ISequenceClosure<SNode>() {
+              public Iterable<SNode> iterable() {
+                return new Iterable<SNode>() {
+                  public Iterator<SNode> iterator() {
+                    return new YieldingIterator<SNode>() {
+                      private int __CP__ = 0;
+                      protected boolean moveToNext() {
+__loop__:
+                        do {
+__switch__:
+                          switch (this.__CP__) {
+                            case -1:
+                              assert false : "Internal error";
+                              return false;
+                            case 2:
+                              this._2_option_idx = 0;
+                            case 3:
+                              if (this._2_option_idx >= options.length) {
+                                this.__CP__ = 1;
+                                break;
+                              }
+                              this._2_option = options[this._2_option_idx++];
+                              this.__CP__ = 4;
+                              break;
+                            case 5:
+                              if (!(_2_option.isBlank())) {
+                                this.__CP__ = 6;
+                                break;
+                              }
+                              this.__CP__ = 3;
+                              break;
+                            case 7:
+                              this.__CP__ = 3;
+                              this.yield(createSimpleVmOptions_p7akvg_a0a0a0a0a0b0c0a0a0a0a0a0a6(_2_option));
+                              return true;
+                            case 0:
+                              this.__CP__ = 2;
+                              break;
+                            case 4:
+                              this.__CP__ = 5;
+                              break;
+                            case 6:
+                              this.__CP__ = 7;
+                              break;
+                            default:
+                              break __loop__;
+                          }
+                        } while (true);
+                        return false;
+                      }
+                      private String _2_option;
+                      private int _2_option_idx;
+                    };
+                  }
+                };
+              }
+            });
+          } else {
+            return Sequence.fromClosure(new ISequenceClosure<SNode>() {
+              public Iterable<SNode> iterable() {
+                return new Iterable<SNode>() {
+                  public Iterator<SNode> iterator() {
+                    return new YieldingIterator<SNode>() {
+                      private int __CP__ = 0;
+                      protected boolean moveToNext() {
+__loop__:
+                        do {
+__switch__:
+                          switch (this.__CP__) {
+                            case -1:
+                              assert false : "Internal error";
+                              return false;
+                            case 2:
+                              this.__CP__ = 1;
+                              this.yield(it);
+                              return true;
+                            case 0:
+                              this.__CP__ = 2;
+                              break;
+                            default:
+                              break __loop__;
+                          }
+                        } while (true);
+                        return false;
+                      }
+                    };
+                  }
+                };
+              }
+            });
+          }
+        }
+      }
+    }).select(new ISelector<SNode, SNode>() {
+      public SNode select(SNode it) {
+        return createTextLine_p7akvg_a0a0a0a0g(((SPropertyOperations.getBoolean(it, PROPS.commented$92Mp) ? "#" : "")) + SPropertyOperations.getString(it, PROPS.options$D2Jv));
+      }
+    });
   }
   /*package*/ static String getVmOptionsFileName_id2lwFGYOYlNP(@NotNull SNode __thisNode__, boolean is64bit) {
-    return SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name")) + ((is64bit ? "64" : "")) + "." + MpsStartupScript__BehaviorDescriptor.getVmOptionsExtension_id54lRqzvvwXR.invoke(__thisNode__);
+    return BuildString__BehaviorDescriptor.getText_id3NagsOfTioI.invoke(SLinkOperations.getTarget(SLinkOperations.getTarget(__thisNode__, LINKS.branding$Eg1g), LINKS.script$MlVT), null) + ((is64bit ? "64" : "")) + "." + MpsStartupScript__BehaviorDescriptor.getVmOptionsExtension_id54lRqzvvwXR.invoke(__thisNode__);
   }
   /*package*/ static String getVmOptionsExtension_id54lRqzvvwXR(@NotNull SNode __thisNode__) {
     return "vmoptions";
   }
+  /*package*/ static String getIdeaPathSelector_idBsOHnja5fe(@NotNull SNode __thisNode__) {
+    SNode branding = SLinkOperations.getTarget(__thisNode__, LINKS.branding$Eg1g);
+
+    if ((branding == null)) {
+      return "MPS";
+    }
+
+    if ((boolean) BuildMps_Branding__BehaviorDescriptor.isNewVersionFormat_id3AMbuf0qvWw.invoke(branding)) {
+      // assume there is either plain text or version.major + version.minor "macros" will be used
+      String result = BuildString__BehaviorDescriptor.getText_id3NagsOfTioI.invoke(SLinkOperations.getTarget(branding, LINKS.product$RfQu), null) + BuildMps_Branding__BehaviorDescriptor.getVersionMajor_id3AMbuf0qvyc.invoke(branding, null) + "." + BuildMps_Branding__BehaviorDescriptor.getVersionMinor_id3AMbuf0qHKA.invoke(branding, null);
+      if (result.contains("$")) {
+        // substitute with the "macros"
+        result = BuildString__BehaviorDescriptor.getText_id3NagsOfTioI.invoke(SLinkOperations.getTarget(branding, LINKS.product$RfQu), null) + "$version.major$.$version.minor$";
+      }
+      return result;
+    }
+
+    // Assume that brandig.codename always consists from instances of BuildTextStringPart so we don't need MacroHelper
+    return BuildString__BehaviorDescriptor.getText_id3NagsOfTioI.invoke(SLinkOperations.getTarget(branding, LINKS.product$RfQu), null) + SPropertyOperations.getInteger(branding, PROPS.major$o5cB) + "." + SPropertyOperations.getInteger(branding, PROPS.minor$o5rC);
+  }
 
   /*package*/ MpsStartupScript__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -108,17 +303,23 @@ public final class MpsStartupScript__BehaviorDescriptor extends BaseBHDescriptor
       case 0:
         return (T) ((String) getDefaultVmoptions_id54lRqzvuHDj(node, ((boolean) (Boolean) parameters[0])));
       case 1:
-        return (T) ((Iterable<SNode>) getCommentedOptions_id54lRqzvvwVL(node, ((boolean) (Boolean) parameters[0])));
+        return (T) ((String) getCommentedVmoptions_id31jVCtHh$86(node, ((boolean) (Boolean) parameters[0])));
       case 2:
-        return (T) ((Iterable<SNode>) getVmOptions_id2lwFGYOX$qJ(node, ((boolean) (Boolean) parameters[0])));
+        return (T) ((Iterable<SNode>) getCommentedOptions_id54lRqzvvwVL(node, ((boolean) (Boolean) parameters[0])));
       case 3:
-        return (T) ((Iterable<SNode>) getDefaultVmOptionsLines_id2lwFGYOXBOk(node, ((boolean) (Boolean) parameters[0])));
+        return (T) ((Iterable<SNode>) getVmOptions_id2lwFGYOX$qJ(node, ((boolean) (Boolean) parameters[0])));
       case 4:
-        return (T) ((String) getPathToVmOptionsFile_id54lRqzvvwXi(node, ((boolean) (Boolean) parameters[0])));
+        return (T) ((Iterable<SNode>) getDefaultVmOptionsLines_id2lwFGYOXBOk(node, ((boolean) (Boolean) parameters[0])));
       case 5:
-        return (T) ((String) getVmOptionsFileName_id2lwFGYOYlNP(node, ((boolean) (Boolean) parameters[0])));
+        return (T) ((Iterable<SNode>) getCommentedVmOptionsLines_id31jVCtHhzv9(node, ((boolean) (Boolean) parameters[0])));
       case 6:
+        return (T) ((Iterable<SNode>) getVmOptionsTextLines_id2M0p1n5GA6s(node, ((boolean) (Boolean) parameters[0])));
+      case 7:
+        return (T) ((String) getVmOptionsFileName_id2lwFGYOYlNP(node, ((boolean) (Boolean) parameters[0])));
+      case 8:
         return (T) ((String) getVmOptionsExtension_id54lRqzvvwXR(node));
+      case 9:
+        return (T) ((String) getIdeaPathSelector_idBsOHnja5fe(node));
       default:
         throw new BHMethodNotFoundException(this, method);
     }
@@ -147,14 +348,58 @@ public final class MpsStartupScript__BehaviorDescriptor extends BaseBHDescriptor
   public SAbstractConcept getConcept() {
     return CONCEPT;
   }
-  public static String trim_9sggks_a0a0p(String str) {
+  private static SNode createTextLine_p7akvg_a0a0a0a0e(String p0) {
+    SNodeBuilder n0 = new SNodeBuilder().init(CONCEPTS.TextLine$zd);
+    n0.setProperty(PROPS.text$DMB3, p0);
+    return n0.getResult();
+  }
+  private static SNode createTextLine_p7akvg_a0a0a0a0f(String p0) {
+    SNodeBuilder n0 = new SNodeBuilder().init(CONCEPTS.TextLine$zd);
+    n0.setProperty(PROPS.text$DMB3, p0);
+    return n0.getResult();
+  }
+  private static SNode createSimpleVmOptions_p7akvg_a0a0a0a0a0b0c0a0a0a0a0a0a6(String p0) {
+    SNodeBuilder n0 = new SNodeBuilder().init(CONCEPTS.SimpleVmOptions$48);
+    n0.setProperty(PROPS.commented$92Mp, "" + (false));
+    n0.setProperty(PROPS.options$D2Jv, p0);
+    return n0.getResult();
+  }
+  private static SNode createTextLine_p7akvg_a0a0a0a0g(String p0) {
+    SNodeBuilder n0 = new SNodeBuilder().init(CONCEPTS.TextLine$zd);
+    n0.setProperty(PROPS.text$DMB3, p0);
+    return n0.getResult();
+  }
+  public static String trim_9sggks_a0a0r(String str) {
     return (str == null ? null : str.trim());
   }
-  private static SNode _quotation_createNode_p7akvg_a0a0a0a0d(Object parameter_1) {
-    PersistenceFacade facade = PersistenceFacade.getInstance();
-    SNode quotedNode_2 = null;
-    quotedNode_2 = SModelUtil_new.instantiateConceptDeclaration(MetaAdapterFactory.getConcept(0xd5033ceef63244b6L, 0xb30889d4fbde34ffL, 0x180805c7b1d668a2L, "jetbrains.mps.build.startup.structure.TextLine"), null, null, false);
-    SNodeAccessUtil.setProperty(quotedNode_2, MetaAdapterFactory.getProperty(0xd5033ceef63244b6L, 0xb30889d4fbde34ffL, 0x180805c7b1d668a2L, 0x180805c7b1df77d9L, "text"), (String) parameter_1);
-    return quotedNode_2;
+  public static String trim_9sggks_a0a0s(String str) {
+    return (str == null ? null : str.trim());
+  }
+  private static boolean isNotEmptyString(String str) {
+    return str != null && str.length() > 0;
+  }
+  private static boolean isEmptyString(String str) {
+    return str == null || str.isEmpty();
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty commented$92Mp = MetaAdapterFactory.getProperty(0xd5033ceef63244b6L, 0xb30889d4fbde34ffL, 0x35ebd6e5b343774cL, 0x5115dda8df7dfca2L, "commented");
+    /*package*/ static final SProperty options$D2Jv = MetaAdapterFactory.getProperty(0xd5033ceef63244b6L, 0xb30889d4fbde34ffL, 0x35ebd6e5b343774cL, 0x35ebd6e5b343774dL, "options");
+    /*package*/ static final SProperty minor$o5rC = MetaAdapterFactory.getProperty(0xcf935df46994e9cL, 0xa132fa109541cba3L, 0x6b9a2011083b778dL, 0x308857b584c74e45L, "minor");
+    /*package*/ static final SProperty major$o5cB = MetaAdapterFactory.getProperty(0xcf935df46994e9cL, 0xa132fa109541cba3L, 0x6b9a2011083b778dL, 0x308857b584c74e44L, "major");
+    /*package*/ static final SProperty text$DMB3 = MetaAdapterFactory.getProperty(0xd5033ceef63244b6L, 0xb30889d4fbde34ffL, 0x180805c7b1d668a2L, 0x180805c7b1df77d9L, "text");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink vmOptions64$zvnw = MetaAdapterFactory.getContainmentLink(0xd5033ceef63244b6L, 0xb30889d4fbde34ffL, 0x35ebd6e5b3437508L, 0x2560aecfb4da3f5bL, "vmOptions64");
+    /*package*/ static final SContainmentLink vmOptions$y$aq = MetaAdapterFactory.getContainmentLink(0xd5033ceef63244b6L, 0xb30889d4fbde34ffL, 0x35ebd6e5b3437508L, 0x35ebd6e5b3442664L, "vmOptions");
+    /*package*/ static final SReferenceLink branding$Eg1g = MetaAdapterFactory.getReferenceLink(0xd5033ceef63244b6L, 0xb30889d4fbde34ffL, 0x35ebd6e5b3437508L, 0x30a61e6d55f6abc9L, "branding");
+    /*package*/ static final SContainmentLink script$MlVT = MetaAdapterFactory.getContainmentLink(0xcf935df46994e9cL, 0xa132fa109541cba3L, 0x6b9a2011083b778dL, 0xccf01929cb3b53bL, "script");
+    /*package*/ static final SContainmentLink product$RfQu = MetaAdapterFactory.getContainmentLink(0xcf935df46994e9cL, 0xa132fa109541cba3L, 0x6b9a2011083b778dL, 0x54c4eb89feb230afL, "product");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept SimpleVmOptions$48 = MetaAdapterFactory.getConcept(0xd5033ceef63244b6L, 0xb30889d4fbde34ffL, 0x35ebd6e5b343774cL, "jetbrains.mps.build.startup.structure.SimpleVmOptions");
+    /*package*/ static final SConcept TextLine$zd = MetaAdapterFactory.getConcept(0xd5033ceef63244b6L, 0xb30889d4fbde34ffL, 0x180805c7b1d668a2L, "jetbrains.mps.build.startup.structure.TextLine");
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2016 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,17 +15,80 @@
  */
 package jetbrains.mps.project.facets;
 
+import jetbrains.mps.generator.fileGenerator.FileGenerationUtil;
+import jetbrains.mps.smodel.SModelStereotype;
 import jetbrains.mps.vfs.IFile;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.module.SModuleFacet;
 
-public interface TestsFacet extends SModuleFacet {
+/**
+ * This facet implies tests are generally written in Java (MPS compiles files from {@link #getTestsOutputPath()})
+ */
+public interface TestsFacet extends SModuleFacet, GenerationTargetFacet {
 
-  public static final String FACET_TYPE = "tests";
+  String FACET_TYPE = "tests";
 
   /**
    * @return test output folder, if there is one. Otherwise returns null.
    */
   @Nullable
   IFile getTestsOutputPath();
+
+  /**
+   * @see JavaModuleFacet#getOutputCacheRoot()
+   */
+  @Nullable
+  default IFile getOutputCacheRoot() {
+    IFile outputRoot = getTestsOutputPath();
+    return outputRoot == null ? null : FileGenerationUtil.getCachesDir(outputRoot);
+  }
+
+  @Nullable
+  @Override
+  default IFile getOutputRoot(@NotNull SModel model) {
+    if (!SModelStereotype.isTestModel(model)) {
+      return null;
+    }
+    final IFile overriddenOutputDir = JavaModuleOperations.getOverriddenOutputDir(model);
+    if (overriddenOutputDir != null) {
+      return overriddenOutputDir;
+    }
+    return getTestsOutputPath();
+  }
+
+  @Nullable
+  @Override
+  default IFile getOutputCacheRoot(@NotNull SModel model) {
+    if (SModelStereotype.isTestModel(model)) {
+      return getOutputCacheRoot();
+    }
+    return null;
+  }
+
+  @Nullable
+  @Override
+  default IFile getOutputLocation(@NotNull SModel model) {
+    if (!SModelStereotype.isTestModel(model)) {
+      return null;
+    }
+    final IFile overriddenOutputDir = JavaModuleOperations.getOverriddenOutputDir(model);
+    if (overriddenOutputDir != null) {
+      return overriddenOutputDir;
+    }
+    IFile root = getTestsOutputPath();
+    return root == null ? null : FileGenerationUtil.getDefaultOutputDir(model, root);
+
+  }
+
+  @Nullable
+  @Override
+  default IFile getOutputCacheLocation(@NotNull SModel model) {
+    if (!SModelStereotype.isTestModel(model)) {
+      return null;
+    }
+    IFile root = getOutputCacheRoot();
+    return root == null ? null : FileGenerationUtil.getDefaultOutputDir(model, root);
+  }
 }

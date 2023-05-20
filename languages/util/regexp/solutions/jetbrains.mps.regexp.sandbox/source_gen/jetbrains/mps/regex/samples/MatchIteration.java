@@ -11,12 +11,12 @@ import java.util.regex.Matcher;
   /*package*/ void forEachMatch() {
     String test = "239 239 239";
     {
-      Pattern _pattern_0 = REGEXP_m02t0c_a0a0b0b;
+      Pattern _pattern_0 = REGEXP;
       Matcher _matcher_0 = _pattern_0.matcher(test);
       while (_matcher_0.find()) {
         System.out.println("number = " + _matcher_0.group(1));
       }
     }
   }
-  private static Pattern REGEXP_m02t0c_a0a0b0b = Pattern.compile("(\\d+)", 0);
+  private static final Pattern REGEXP = Pattern.compile("(\\d+)", 0);
 }

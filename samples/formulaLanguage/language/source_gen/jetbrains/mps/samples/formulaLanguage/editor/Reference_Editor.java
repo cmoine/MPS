@@ -6,16 +6,9 @@ import jetbrains.mps.nodeEditor.DefaultNodeEditor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Error;
 
 public class Reference_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createError_d3lpcg_a(editorContext, node);
-  }
-  private EditorCell createError_d3lpcg_a(EditorContext editorContext, SNode node) {
-    EditorCell_Error editorCell = new EditorCell_Error(editorContext, node, "?reference?");
-    editorCell.setCellId("Error_d3lpcg_a");
-    editorCell.setBig(true);
-    return editorCell;
+    return new Reference_EditorBuilder_a(editorContext, node).createCell();
   }
 }

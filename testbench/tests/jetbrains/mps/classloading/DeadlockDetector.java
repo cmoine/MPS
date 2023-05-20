@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,7 @@
  */
 package jetbrains.mps.classloading;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import jetbrains.mps.logging.Logger;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadInfo;
@@ -29,7 +28,7 @@ import java.util.concurrent.TimeUnit;
  * @since 31/12/16
  */
 final class DeadlockDetector {
-  private static final Logger LOG = LogManager.getLogger(DeadlockDetector.class);
+  private static final Logger LOG = Logger.getLogger(DeadlockDetector.class);
 
   private final ScheduledExecutorService myDeadlockDetector;
   private volatile boolean myDeadlockDetected;

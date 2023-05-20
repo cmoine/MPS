@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<dependenciesRoot>
-  <dependency className="jetbrains.mps.samples.Expressions.sandbox.Main" file="Main.java" />
-  <dependency className="jetbrains.mps.samples.Expressions.sandbox.Simple" file="Simple.java" />
-  <dependency className="jetbrains.mps.samples.Expressions.sandbox.TypeError" file="TypeError.java" />
-</dependenciesRoot>
-

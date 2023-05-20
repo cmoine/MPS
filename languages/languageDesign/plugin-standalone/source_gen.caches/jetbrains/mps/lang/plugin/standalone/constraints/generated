@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-65jr74ae4w8va2ahsv89ja2clxh6qzn" />
+<product version="3" modelHash="-egzkhfozcqtgt1a6ebp1vxtjc0b7ola">
+  <files names="ConstraintsAspectDescriptor.java:PlatformAccessExpression_Constraints.java" />
+</product>
 

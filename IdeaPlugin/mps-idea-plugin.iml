@@ -20,17 +20,17 @@
       <sourceFolder url="file://$MODULE_DIR$/mps-core/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/mps-java/jps-plugin/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/mps-java/source_gen" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mps-migration/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mps-testing/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="IDEA IC" jdkType="IDEA JDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="generator-engine" />
     <orderEntry type="module" module-name="java-stub" />
     <orderEntry type="module" module-name="kernel" />
     <orderEntry type="module" module-name="kernel-resources" />
-    <orderEntry type="module" module-name="make-facets" />
     <orderEntry type="module" module-name="make-runtime" />
-    <orderEntry type="module" module-name="mps-core" />
     <orderEntry type="module" module-name="mps-platform" />
     <orderEntry type="module" module-name="openapi" />
     <orderEntry type="module" module-name="persistence" />
@@ -39,5 +39,71 @@
     <orderEntry type="library" name="Idea-platform" level="project" />
     <orderEntry type="module" module-name="vfs" />
     <orderEntry type="module" module-name="baseLanguage-search" />
+    <orderEntry type="module" module-name="mps-ui" />
+    <orderEntry type="module" module-name="debuginfo-api" />
+    <orderEntry type="module" module-name="debuginfo-impl" />
+    <orderEntry type="module" module-name="refactoring-runtime" />
+    <orderEntry type="module" module-name="actions-runtime" />
+    <orderEntry type="module" module-name="ant-mps" />
+    <orderEntry type="module" module-name="ant-mps-common" />
+    <orderEntry type="module" module-name="behavior-api" />
+    <orderEntry type="module" module-name="behavior-runtime" />
+    <orderEntry type="module" module-name="closures-runtime" />
+    <orderEntry type="module" module-name="collections-runtime" />
+    <orderEntry type="module" module-name="components" />
+    <orderEntry type="module" module-name="debugger-api-api" />
+    <orderEntry type="module" module-name="debugger-api-runtime" />
+    <orderEntry type="module" module-name="debugger-java-api" />
+    <orderEntry type="module" module-name="debugger-java-customViewers" />
+    <orderEntry type="module" module-name="debugger-java-runtime" />
+    <orderEntry type="module" module-name="editing-runtime" />
+    <orderEntry type="module" module-name="editor-api" />
+    <orderEntry type="module" module-name="editor-runtime" />
+    <orderEntry type="module" module-name="editorlang-runtime" />
+    <orderEntry type="module" module-name="environment" />
+    <orderEntry type="module" module-name="execution-api" />
+    <orderEntry type="module" module-name="execution-impl" />
+    <orderEntry type="module" module-name="findUsages-runtime" />
+    <orderEntry type="module" module-name="gensources" />
+    <orderEntry type="module" module-name="mps-httpsupport" />
+    <orderEntry type="module" module-name="mps-idea-integration" />
+    <orderEntry type="module" module-name="ideaIntegrationCommon" />
+    <orderEntry type="module" module-name="IDEAPlugin" />
+    <orderEntry type="module" module-name="instrumentation" />
+    <orderEntry type="module" module-name="intentions-runtime" />
+    <orderEntry type="module" module-name="logging" />
+    <orderEntry type="module" module-name="migration-platform" />
+    <orderEntry type="module" module-name="misc-tests" />
+    <orderEntry type="module" module-name="model" />
+    <orderEntry type="module" module-name="mps-modelchecker" />
+    <orderEntry type="module" module-name="module" />
+    <orderEntry type="module" module-name="mps" />
+    <orderEntry type="module" module-name="mps-annotations" />
+    <orderEntry type="module" module-name="mps-ant" />
+    <orderEntry type="module" module-name="mps-debugger" />
+    <orderEntry type="module" module-name="mps-devkit" />
+    <orderEntry type="module" module-name="mps-editor" />
+    <orderEntry type="module" module-name="mps-icons" />
+    <orderEntry type="module" module-name="mps-messaging" />
+    <orderEntry type="module" module-name="mps-project-excludes" />
+    <orderEntry type="module" module-name="mps-workbench" />
+    <orderEntry type="module" module-name="refactoring" />
+    <orderEntry type="module" module-name="resources" />
+    <orderEntry type="module" module-name="resources_en" />
+    <orderEntry type="module" module-name="mps-samples" />
+    <orderEntry type="module" module-name="smodel" />
+    <orderEntry type="module" module-name="startup" />
+    <orderEntry type="module" module-name="testbench" />
+    <orderEntry type="module" module-name="textgen" />
+    <orderEntry type="module" module-name="tools" />
+    <orderEntry type="module" module-name="tuples-runtime" />
+    <orderEntry type="module" module-name="typesystemEngine" />
+    <orderEntry type="module" module-name="typesystemIntegration" />
+    <orderEntry type="module" module-name="typesystemUi" />
+    <orderEntry type="module" module-name="util-core" />
+    <orderEntry type="module" module-name="mps-vcs" />
+    <orderEntry type="module" module-name="vcs-core" />
+    <orderEntry type="module" module-name="vcs-platform" />
+    <orderEntry type="library" name="jps-build-test" level="project" />
   </component>
 </module>

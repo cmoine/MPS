@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,26 +15,21 @@
  */
 package jetbrains.mps.util;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import jetbrains.mps.logging.Logger;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.util.Consumer;
-import org.jetbrains.mps.openapi.util.Processor;
 
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageOutputStream;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 
 public class IconCreationUtil {
-  protected static Logger LOG = LogManager.getLogger(IconCreationUtil.class);
+  protected static Logger LOG = Logger.getLogger(IconCreationUtil.class);
 
   private static final int DEFAULT_ICON_SIZE = 16;
 

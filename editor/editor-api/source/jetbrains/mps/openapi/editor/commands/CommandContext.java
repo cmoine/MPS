@@ -15,7 +15,9 @@
  */
 package jetbrains.mps.openapi.editor.commands;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.mps.openapi.module.SRepository;
 
 /**
  * User: shatalin
@@ -33,4 +35,7 @@ public interface CommandContext {
    * @return contextual node or null if current editor has no node inside
    */
   SNode getContextNode();
+
+  @NotNull
+  SRepository getRepository();
 }

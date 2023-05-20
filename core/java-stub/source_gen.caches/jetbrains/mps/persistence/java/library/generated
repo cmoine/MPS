@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-a1daj15cqbjpbbyq9naexyaw9cwe56w" />
+<product version="3" modelHash="-cyldjjepp65p174ykn6601nb6mg3syb">
+  <files names="JDKClassStubModelRootFactory.java:JDKStubsModelRoot.java:JavaClassStubConstants.java:JavaClassStubModelDescriptor.java:JavaClassStubModelRootFactory.java:JavaClassStubsModelRoot.java" />
+</product>
 

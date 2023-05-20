@@ -14,6 +14,7 @@ import java.awt.Dimension;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
 import java.awt.Color;
+import jetbrains.mps.nodeEditor.MPSColors;
 import javax.swing.SwingUtilities;
 import java.awt.Font;
 
@@ -248,7 +249,7 @@ public abstract class KajaFrame {
           }
         }
         if (worldCell.isWall()) {
-          cell = Color.RED;
+          cell = MPSColors.RED;
         }
         final VisualCell currentVisual = visuals[i][j];
         final Color cellValue = cell;

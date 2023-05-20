@@ -44,11 +44,7 @@ public class CopyPasteFilesData {
 
   public CopyPasteFilesData(String[] presentation) {
     myFiles = new VirtualFile[presentation.length - 1];
-    if (presentation[0].equals(CUT)) {
-      myIsCut = true;
-    } else {
-      myIsCut = false;
-    }
+    myIsCut = presentation[0].equals(CUT);
     for (int i = 0; i < myFiles.length; i++) {
       myFiles[i] = VirtualFileManager.getInstance().findFileByUrl(presentation[i + 1]);
     }

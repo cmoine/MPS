@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="6b9477d6buean3ss5v0a51obzjbonwf" />
+<product version="3" modelHash="89eth9dcj2eqnoz6t1yyal1qdeehz05">
+  <files names="Mapping_main.java:QueriesGenerated.java:TemplateModelImpl.java:Template_map_outputNode.java:Template_weave_InputNode_A.java" />
+</product>
 

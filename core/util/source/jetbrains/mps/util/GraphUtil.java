@@ -32,8 +32,8 @@ public class GraphUtil {
    */
   public static int[] setToList(int[] set) {
     int size = 0;
-    for (int i = 0; i < set.length; i++) {
-      if (set[i] == 1) {
+    for (int aSet : set) {
+      if (aSet == 1) {
         size++;
       }
     }
@@ -66,8 +66,8 @@ public class GraphUtil {
   public static int[][] transpose(int[][] graph) {
     int vertexCount = graph.length;
     int[] size = new int[vertexCount];
-    for (int v = 0; v < vertexCount; v++) {
-      for (int target : graph[v]) {
+    for (int[] aGraph : graph) {
+      for (int target : aGraph) {
         size[target]++;
       }
     }
@@ -129,7 +129,7 @@ public class GraphUtil {
 
   public static int[][] components(int[][] graph) {
     int count = graph.length;
-    List<int[]> result = new ArrayList<int[]>();
+    List<int[]> result = new ArrayList<>();
 
     if (count < 2) {
       if (count == 1) {
@@ -141,7 +141,7 @@ public class GraphUtil {
     int[] component = new int[count];
 
     int[] state = new int[count];
-    Stack<Integer> stack = new Stack<Integer>();
+    Stack<Integer> stack = new Stack<>();
     int nextVertex = 0;
 
     while (nextVertex < count) {
@@ -171,7 +171,7 @@ public class GraphUtil {
   }
 
   private static class Tarjan {
-    List<int[]> result = new ArrayList<int[]>();
+    List<int[]> result = new ArrayList<>();
     int[] stack;
     int[] index;
     int[] lowlink;

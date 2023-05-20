@@ -4,24 +4,34 @@ package jetbrains.mps.samples.highlevel.sampleLanguage.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_Car = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Person = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_Car;
+  private ConceptPresentation props_Person;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.Car:
+        if (props_Car == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("Car");
+          props_Car = cpb.create();
+        }
         return props_Car;
-      case 1:
+      case LanguageConceptSwitch.Person:
+        if (props_Person == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("Person");
+          props_Person = cpb.create();
+        }
         return props_Person;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

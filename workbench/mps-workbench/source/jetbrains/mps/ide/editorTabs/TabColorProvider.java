@@ -24,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 import java.awt.Color;
 
 public interface TabColorProvider {
-  ExtensionPointName<TabColorProvider> EP_NAME = new ExtensionPointName<TabColorProvider>("com.intellij.mps.TabColorProvider");
+  ExtensionPointName<TabColorProvider> EP_NAME = new ExtensionPointName<>("com.intellij.mps.TabColorProvider");
 
   @Nullable
   Color getNodeColor(@NotNull SNode node);

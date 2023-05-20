@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,78 +15,89 @@
  */
 package jetbrains.mps.compile;
 
-import jetbrains.mps.CoreMpsTest;
 import jetbrains.mps.compiler.JavaCompilerOptions;
 import jetbrains.mps.compiler.JavaCompilerOptionsComponent.JavaVersion;
 import jetbrains.mps.make.MPSCompilationResult;
 import jetbrains.mps.make.ModuleMaker;
-import jetbrains.mps.messages.IMessageHandler;
-import jetbrains.mps.messages.MessageKind;
 import jetbrains.mps.progress.EmptyProgressMonitor;
 import jetbrains.mps.project.Project;
 import jetbrains.mps.project.Solution;
+import jetbrains.mps.tool.environment.Environment;
+import jetbrains.mps.tool.environment.EnvironmentAware;
 import jetbrains.mps.util.Reference;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.module.SModule;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class EclipseJavaCompilerTest extends CoreMpsTest {
-  private static final File PROJECT_PATH = new File("testbench/modules/testCompilation");
-  @NotNull private static Project ourProject;
-  @NotNull private static Solution ourSolution;
+public class EclipseJavaCompilerTest implements EnvironmentAware {
+  @NotNull private Project myProject;
+  @NotNull private Solution mySolution;
+  private Environment myEnvironment;
 
-  @BeforeClass
-  public static void setUp() {
-    ourProject = openProject(PROJECT_PATH);
-    ourSolution = getSolution("TestCompileSolution");
+
+  /**
+   * @param env bare MPS environment suffice
+   */
+  @Override
+  public void setEnvironment(@NotNull Environment env) {
+    myEnvironment = env;
   }
 
-  @AfterClass
-  public static void tearDown() {
-    if (ourProject != null) {
-      ourProject.dispose();
-    }
+  @Before
+  public void setUp() {
+    myProject = myEnvironment.openProject(new File("testbench/modules/testCompilation"));
+    mySolution = myProject.getProjectModules(Solution.class).stream().filter(s -> "TestCompileSolution".equals(s.getModuleName())).findFirst().get();
+  }
+
+  @After
+  public void tearDown() {
+    myEnvironment.closeProject(myProject);
   }
 
   @Test
   public void testOldVersion() throws Exception {
-    Assert.assertFalse(testRecompileClasses(JavaVersion.VERSION_1_6, IMessageHandler.NULL_HANDLER));
+    Logger mmLogger = Logger.getLogger(ModuleMaker.class.getName());
+    Level oldLevel = mmLogger.getLevel();
+    try {
+      // ModuleMaker uses both IMessageHandler and JUL logger to report its messages.
+      // Those reported through IMessageHandler go to end-user, low-level log4 messages are subject to external configuration (used to be bin/log.xml for log4j).
+      // In this test we expect to get some compilation errors (hence assertFalse), but don't want the test to fail due to compilation errors
+      // reported through log ('unclean test execution failure' due to console output). Therefore, we temporarily disable log of all error messages.
+      mmLogger.setLevel(Level.OFF);
+      Assert.assertFalse(testRecompileClasses(JavaVersion.VERSION_1_6));
+    } finally {
+      mmLogger.setLevel(oldLevel);
+    }
   }
 
   @Test
   public void testNewVersion() throws Exception {
-    Assert.assertTrue(testRecompileClasses(JavaVersion.VERSION_1_8, null));
+    Assert.assertTrue(testRecompileClasses(JavaVersion.VERSION_1_8));
   }
 
   /**
    * @return true iff there were no errors during compilation
    */
-  private boolean testRecompileClasses(final JavaVersion version, @Nullable final IMessageHandler msgHandler) {
-    final Set<SModule> toCompile = new LinkedHashSet<SModule>();
-    toCompile.add(ourSolution);
-
-    final Reference<Boolean> resultRef = new Reference<Boolean>();
+  private boolean testRecompileClasses(final JavaVersion version) {
     final Reference<Throwable> throwableRef = new Reference<Throwable>();
-    ourProject.getModelAccess().runReadAction(new Runnable() {
+    ModuleMaker moduleMaker = new ModuleMaker();
+    moduleMaker.requestECJ().options(new JavaCompilerOptions(version));
+    myProject.getModelAccess().runReadAction(new Runnable() {
       public void run() {
         try {
-          ModuleMaker moduleMaker;
-          if (msgHandler == null) {
-            moduleMaker = new ModuleMaker();
-          } else {
-            moduleMaker = new ModuleMaker(msgHandler, MessageKind.INFORMATION);
-          }
+          final Set<SModule> toCompile = new LinkedHashSet<SModule>();
+          toCompile.add(mySolution);
           moduleMaker.clean(toCompile, new EmptyProgressMonitor());
-          MPSCompilationResult result = moduleMaker.make(toCompile, new EmptyProgressMonitor(), new JavaCompilerOptions(version));
-          resultRef.set(result.isOk());
+          moduleMaker.prepare(toCompile, true, new EmptyProgressMonitor());
         } catch (Throwable t) {
           throwableRef.set(t);
         }
@@ -95,6 +106,7 @@ public class EclipseJavaCompilerTest extends CoreMpsTest {
     if (!throwableRef.isNull()) {
       throw new RuntimeException(throwableRef.get());
     }
-    return resultRef.get();
+    MPSCompilationResult result = moduleMaker.make(new EmptyProgressMonitor());
+    return result.isOk();
   }
 }

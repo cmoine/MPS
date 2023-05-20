@@ -19,7 +19,7 @@ public class ConcatingSequence<U> extends Sequence<U> {
   }
   @Override
   public Iterator<U> iterator() {
-    return new ConcatingSequence.ConcatingIterator();
+    return new ConcatingIterator();
   }
   private class ConcatingIterator implements Iterator<U> {
     private U next;
@@ -46,7 +46,7 @@ public class ConcatingSequence<U> extends Sequence<U> {
       if (hasNext.unknown()) {
         moveToNext();
       }
-      if (!((hasNext.hasNext()))) {
+      if (!(hasNext.hasNext())) {
         throw new NoSuchElementException();
       }
       return clearNext();

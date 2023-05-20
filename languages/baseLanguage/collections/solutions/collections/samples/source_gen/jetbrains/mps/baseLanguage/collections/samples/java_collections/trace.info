@@ -144,8 +144,8 @@
       <scope id="1153939332251" at="12,0,69,0">
         <var name="args" id="1153939342427" />
       </scope>
-      <unit id="1224754223401" at="17,23,57,13" name="jetbrains.mps.baseLanguage.collections.samples.java_collections.Main_sequence_as_javaList$3" />
-      <unit id="1224754223401" at="15,19,59,9" name="jetbrains.mps.baseLanguage.collections.samples.java_collections.Main_sequence_as_javaList$2" />
+      <unit id="1224754223401" at="17,23,57,13" name="jetbrains.mps.baseLanguage.collections.samples.java_collections.Main_sequence_as_javaList$1$1$1" />
+      <unit id="1224754223401" at="15,19,59,9" name="jetbrains.mps.baseLanguage.collections.samples.java_collections.Main_sequence_as_javaList$1$1" />
       <unit id="1224754223401" at="13,58,61,5" name="jetbrains.mps.baseLanguage.collections.samples.java_collections.Main_sequence_as_javaList$1" />
       <unit id="1153939305375" at="11,0,70,0" name="jetbrains.mps.baseLanguage.collections.samples.java_collections.Main_sequence_as_javaList" />
     </file>

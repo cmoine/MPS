@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,10 +30,10 @@ import jetbrains.mps.smodel.ModelAccessHelper;
 import jetbrains.mps.smodel.ModelImports;
 import jetbrains.mps.smodel.SNodeId.Foreign;
 import jetbrains.mps.smodel.SNodePointer;
-import jetbrains.mps.smodel.StaticReference;
 import jetbrains.mps.util.Computable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.model.SNode;
@@ -47,12 +47,12 @@ import org.jetbrains.mps.openapi.model.SNodeReference;
 
 public class IdPrefixReference implements PsiReference {
   private SNodeReference myTarget;
-  private String myRole;
+  private SReferenceLink myAssociationLink;
   private PsiElement myParent;
 
-  public IdPrefixReference(SNodeReference target, String role, PsiElement fosterFather) {
+  public IdPrefixReference(SNodeReference target, SReferenceLink association, PsiElement fosterFather) {
     myTarget = target;
-    myRole = role;
+    myAssociationLink = association;
     myParent = fosterFather;
   }
 
@@ -87,7 +87,7 @@ public class IdPrefixReference implements PsiReference {
 
   @Override
   public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
-    SNodeId targetNodeId = ((SNodePointer) myTarget).getNodeId();
+    SNodeId targetNodeId = myTarget.getNodeId();
     String str = targetNodeId.toString();
     String newStr;
     int lastDot = str.lastIndexOf(".");
@@ -96,16 +96,12 @@ public class IdPrefixReference implements PsiReference {
     } else {
       newStr = str.substring(0, lastDot + 1) + newElementName;
     }
-    final NodePtr newTarget = new NodePtr(((SNodePointer) myTarget).getModelReference(), new Foreign(newStr));
+    final NodePtr newTarget = new NodePtr(myTarget.getModelReference(), new Foreign(newStr));
 
     SNodeReference source = ((MPSPsiNode) myParent).getSNodeReference();
 
-    myParent.getProject().getComponent(MoveRenameBatch.class).scheduleIdPrefixRefUpdate(source, myRole, new Runnable() {
-      @Override
-      public void run() {
-        handleRename(newTarget);
-      }
-    });
+    final MoveRenameBatch mrb = myParent.getProject().getComponent(MoveRenameBatch.class);
+    mrb.scheduleIdPrefixRefUpdate(source, myAssociationLink, () -> handleRename(newTarget));
     return myParent;
   }
 
@@ -113,29 +109,25 @@ public class IdPrefixReference implements PsiReference {
   public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
     SNodeReference source = ((MPSPsiNode) myParent).getSNodeReference();
     final NodePtr newTargetPtr = JavaForeignIdBuilder.computeNodePtr(element);
-    myParent.getProject().getComponent(MoveRenameBatch.class).scheduleIdPrefixRefUpdate(source, myRole, new Runnable() {
-      @Override
-      public void run() {
-        handleRename(newTargetPtr);
-      }
-    });
+    final MoveRenameBatch mrb = myParent.getProject().getComponent(MoveRenameBatch.class);
+    mrb.scheduleIdPrefixRefUpdate(source, myAssociationLink, () -> handleRename(newTargetPtr));
     return myParent;
   }
 
   private void handleRename(NodePtr newNode) {
     SNodePointer oldNode = (SNodePointer) myTarget;
     SNode source = ((MPSPsiNode) myParent).getSNodeReference().resolve(ProjectHelper.getProjectRepository(myParent.getProject()));
-    String oldId = source.getReference(myRole).getTargetNodeId().toString();
+    String oldId = source.getReference(myAssociationLink).getTargetNodeId().toString();
 
-    // replacing all proper occurences
+    // replacing all proper occurrences
     String what = oldNode.getNodeId().toString();
-    what = what.startsWith("~") ? what.substring(1) : what;
+    what = what.startsWith(Foreign.ID_PREFIX) ? what.substring(1) : what;
     String replacement = newNode.getNodeId().toString();
-    replacement = replacement.startsWith("~") ? replacement.substring(1) : replacement;
+    replacement = replacement.startsWith(Foreign.ID_PREFIX) ? replacement.substring(1) : replacement;
 
     String newId = carefullyReplace(oldId, what, replacement);
 
-    source.setReference(myRole, StaticReference.create(myRole, source, newNode.getSModelReference(), new Foreign(newId)));
+    source.setReference(myAssociationLink, new SNodePointer(newNode.getSModelReference(), new Foreign(newId)));
 
     // add model import if needed
     if (!oldNode.getModelReference().equals(newNode.getSModelReference())) {

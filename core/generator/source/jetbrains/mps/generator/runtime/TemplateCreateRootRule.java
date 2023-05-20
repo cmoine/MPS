@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,8 @@
  */
 package jetbrains.mps.generator.runtime;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNode;
 
 import java.util.Collection;
@@ -24,5 +26,6 @@ import java.util.Collection;
  */
 public interface TemplateCreateRootRule extends TemplateRuleWithCondition {
 
-  Collection<SNode> apply(TemplateExecutionEnvironment environment) throws GenerationException;
+  @Nullable
+  Collection<SNode> apply(@NotNull TemplateContext context) throws GenerationException;
 }

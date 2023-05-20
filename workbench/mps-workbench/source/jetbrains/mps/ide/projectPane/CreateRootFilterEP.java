@@ -37,8 +37,8 @@ public class CreateRootFilterEP {
   private CreateRootFilterEP() {
   }
 
-  private final Set<Condition<SAbstractConcept>> myFilters = new HashSet<Condition<SAbstractConcept>>();
-  private final Set<CreateNodeExtension> myCreateExtensions = new HashSet<CreateNodeExtension>();
+  private final Set<Condition<SAbstractConcept>> myFilters = new HashSet<>();
+  private final Set<CreateNodeExtension> myCreateExtensions = new HashSet<>();
 
   public void addFilter(Condition<SAbstractConcept> filter) {
     myFilters.add(filter);
@@ -78,7 +78,7 @@ public class CreateRootFilterEP {
    */
   @NotNull
   public Collection<CreateNodeExtension> getCreateNodeExtensions() {
-    return new ArrayList<CreateNodeExtension>(myCreateExtensions);
+    return new ArrayList<>(myCreateExtensions);
   }
 
   public boolean shouldBeRemoved(SAbstractConcept c) {

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
@@ -8,60 +7,57 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
   <root nodeRef="r:a1e6d46a-5cab-40b1-8baa-74b09e2c51bc(jetbrains.mps.asTest@tests)/2492830749282026718">
     <file name="AsTest_Test.java">
-      <node id="2492830749282026729" at="9,42,10,28" concept="3" />
-      <node id="2492830749282026735" at="10,28,11,15" concept="3" />
-      <node id="2492830749282026744" at="11,15,12,28" concept="3" />
-      <node id="2492830749282026752" at="12,28,13,60" concept="1" />
-      <node id="2492830749282026789" at="13,60,14,61" concept="1" />
-      <node id="2492830749282026760" at="14,61,15,57" concept="1" />
-      <node id="2492830749282026768" at="15,57,16,64" concept="1" />
-      <node id="2492830749282026778" at="16,64,17,64" concept="1" />
-      <node id="2492830749282026755" at="21,66,22,47" concept="4" />
-      <node id="2492830749282026792" at="24,66,25,47" concept="4" />
-      <node id="2492830749282026763" at="27,66,28,47" concept="4" />
-      <node id="2492830749282026773" at="30,66,31,47" concept="4" />
-      <node id="2492830749282026783" at="33,66,34,47" concept="4" />
-      <node id="2492830749282026720" at="19,0,21,0" concept="0" trace="AsTest_Test#()V" />
-      <node id="2492830749282026755" at="21,0,24,0" concept="5" trace="as_q3h6h2_a0a3a0#(Ljava/lang/Object;Ljava/lang/Class;)null" />
-      <node id="2492830749282026792" at="24,0,27,0" concept="5" trace="as_q3h6h2_a0a4a0#(Ljava/lang/Object;Ljava/lang/Class;)null" />
-      <node id="2492830749282026763" at="27,0,30,0" concept="5" trace="as_q3h6h2_a0a5a0#(Ljava/lang/Object;Ljava/lang/Class;)null" />
-      <node id="2492830749282026773" at="30,0,33,0" concept="5" trace="as_q3h6h2_a1a6a0#(Ljava/lang/Object;Ljava/lang/Class;)null" />
-      <node id="2492830749282026783" at="33,0,36,0" concept="5" trace="as_q3h6h2_a1a7a0#(Ljava/lang/Object;Ljava/lang/Class;)null" />
-      <node id="2492830749282026725" at="9,0,19,0" concept="2" trace="test_as#()V" />
-      <scope id="2492830749282026723" at="19,24,19,24" />
-      <scope id="2492830749282026755" at="21,66,22,47" />
-      <scope id="2492830749282026792" at="24,66,25,47" />
-      <scope id="2492830749282026763" at="27,66,28,47" />
-      <scope id="2492830749282026773" at="30,66,31,47" />
-      <scope id="2492830749282026783" at="33,66,34,47" />
-      <scope id="2492830749282026720" at="19,0,21,0" />
-      <scope id="2492830749282026755" at="21,0,24,0">
+      <node id="2492830749282026729" at="10,42,11,28" concept="2" />
+      <node id="2492830749282026735" at="11,28,12,15" concept="2" />
+      <node id="2492830749282026744" at="12,15,13,28" concept="2" />
+      <node id="2492830749282026752" at="13,28,14,60" concept="0" />
+      <node id="2492830749282026789" at="14,60,15,61" concept="0" />
+      <node id="2492830749282026760" at="15,61,16,57" concept="0" />
+      <node id="2492830749282026768" at="16,57,17,64" concept="0" />
+      <node id="2492830749282026778" at="17,64,18,64" concept="0" />
+      <node id="2492830749282026755" at="20,66,21,47" concept="3" />
+      <node id="2492830749282026792" at="23,66,24,47" concept="3" />
+      <node id="2492830749282026763" at="26,66,27,47" concept="3" />
+      <node id="2492830749282026773" at="29,66,30,47" concept="3" />
+      <node id="2492830749282026783" at="32,66,33,47" concept="3" />
+      <node id="2492830749282026755" at="20,0,23,0" concept="4" trace="as_q3h6h2_a0a3a0#(Ljava/lang/Object;Ljava/lang/Class;)null" />
+      <node id="2492830749282026792" at="23,0,26,0" concept="4" trace="as_q3h6h2_a0a4a0#(Ljava/lang/Object;Ljava/lang/Class;)null" />
+      <node id="2492830749282026763" at="26,0,29,0" concept="4" trace="as_q3h6h2_a0a5a0#(Ljava/lang/Object;Ljava/lang/Class;)null" />
+      <node id="2492830749282026773" at="29,0,32,0" concept="4" trace="as_q3h6h2_a1a6a0#(Ljava/lang/Object;Ljava/lang/Class;)null" />
+      <node id="2492830749282026783" at="32,0,35,0" concept="4" trace="as_q3h6h2_a1a7a0#(Ljava/lang/Object;Ljava/lang/Class;)null" />
+      <node id="2492830749282026725" at="9,0,20,0" concept="1" trace="test_as#()V" />
+      <scope id="2492830749282026755" at="20,66,21,47" />
+      <scope id="2492830749282026792" at="23,66,24,47" />
+      <scope id="2492830749282026763" at="26,66,27,47" />
+      <scope id="2492830749282026773" at="29,66,30,47" />
+      <scope id="2492830749282026783" at="32,66,33,47" />
+      <scope id="2492830749282026755" at="20,0,23,0">
         <var name="o" id="2492830749282026755" />
         <var name="type" id="2492830749282026755" />
       </scope>
-      <scope id="2492830749282026792" at="24,0,27,0">
+      <scope id="2492830749282026792" at="23,0,26,0">
         <var name="o" id="2492830749282026792" />
         <var name="type" id="2492830749282026792" />
       </scope>
-      <scope id="2492830749282026763" at="27,0,30,0">
+      <scope id="2492830749282026763" at="26,0,29,0">
         <var name="o" id="2492830749282026763" />
         <var name="type" id="2492830749282026763" />
       </scope>
-      <scope id="2492830749282026773" at="30,0,33,0">
+      <scope id="2492830749282026773" at="29,0,32,0">
         <var name="o" id="2492830749282026773" />
         <var name="type" id="2492830749282026773" />
       </scope>
-      <scope id="2492830749282026783" at="33,0,36,0">
+      <scope id="2492830749282026783" at="32,0,35,0">
         <var name="o" id="2492830749282026783" />
         <var name="type" id="2492830749282026783" />
       </scope>
-      <scope id="2492830749282026728" at="9,42,17,64">
+      <scope id="2492830749282026728" at="10,42,18,64">
         <var name="i" id="2492830749282026736" />
         <var name="o" id="2492830749282026745" />
         <var name="str" id="2492830749282026730" />
       </scope>
-      <scope id="2492830749282026725" at="9,0,19,0" />
-      <unit id="2492830749282026718" at="8,0,37,0" name="jetbrains.mps.asTest.AsTest_Test" />
+      <scope id="2492830749282026725" at="9,0,20,0" />
+      <unit id="2492830749282026718" at="8,0,36,0" name="jetbrains.mps.asTest.AsTest_Test" />
     </file>
   </root>
 </debug-info>

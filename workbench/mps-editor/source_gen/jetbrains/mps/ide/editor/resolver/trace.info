@@ -7,58 +7,52 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1153952380246:jetbrains.mps.baseLanguage.structure.TryStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1164991038168:jetbrains.mps.baseLanguage.structure.ThrowStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/5351203823916750322:jetbrains.mps.baseLanguage.structure.TryUniversalStatement" />
   <root nodeRef="r:e83eb82a-b3b8-4003-84af-b40cb742ea94(jetbrains.mps.ide.editor.resolver)/1802459475176570754">
     <file name="EditorResolverComponent.java">
-      <node id="1802459475176571506" at="12,0,13,0" concept="2" trace="myResolver" />
-      <node id="1802459475176571511" at="16,31,17,38" concept="1" />
-      <node id="1802459475176570783" at="17,38,18,60" concept="1" />
-      <node id="1802459475176570801" at="21,34,22,63" concept="1" />
-      <node id="1802459475176571528" at="22,63,23,22" concept="1" />
-      <node id="1802459475176570779" at="28,36,29,49" concept="6" />
-      <node id="1802459475176570756" at="13,0,15,0" concept="0" trace="EditorResolverComponent#(Ljetbrains/mps/ide/MPSCoreComponents;)V" />
-      <node id="1802459475176570765" at="15,0,20,0" concept="4" trace="initComponent#()V" />
-      <node id="1802459475176570769" at="20,0,25,0" concept="4" trace="disposeComponent#()V" />
-      <node id="1802459475176570773" at="25,0,31,0" concept="4" trace="getComponentName#()Ljava/lang/String;" />
-      <scope id="1802459475176570759" at="13,68,13,68" />
-      <scope id="1802459475176570778" at="28,36,29,49" />
-      <scope id="1802459475176570756" at="13,0,15,0">
-        <var name="coreComponents" id="4365681323802964092" />
-      </scope>
-      <scope id="1802459475176570768" at="16,31,18,60" />
-      <scope id="1802459475176570772" at="21,34,23,22" />
-      <scope id="1802459475176570765" at="15,0,20,0" />
-      <scope id="1802459475176570769" at="20,0,25,0" />
-      <scope id="1802459475176570773" at="25,0,31,0" />
-      <unit id="1802459475176570754" at="11,0,32,0" name="jetbrains.mps.ide.editor.resolver.EditorResolverComponent" />
+      <node id="1802459475176571506" at="13,0,14,0" concept="2" trace="myResolver" />
+      <node id="6320962430902800720" at="16,50,17,73" concept="7" />
+      <node id="6320962430902865644" at="17,73,18,48" concept="7" />
+      <node id="6320962430902801436" at="18,48,19,40" concept="8" />
+      <node id="1802459475176571511" at="20,5,21,38" concept="1" />
+      <node id="1802459475176570783" at="21,38,22,60" concept="1" />
+      <node id="1802459475176570801" at="26,25,27,63" concept="1" />
+      <node id="1802459475176571528" at="27,63,28,22" concept="1" />
+      <node id="6320962430902793079" at="15,36,20,5" concept="3" />
+      <node id="1802459475176570769" at="25,0,30,0" concept="4" trace="dispose#()V" />
+      <node id="1802459475176570756" at="15,0,24,0" concept="0" trace="EditorResolverComponent#()V" />
+      <scope id="1802459475176570772" at="26,25,28,22" />
+      <scope id="6320962430902793081" at="16,50,19,40" />
+      <scope id="1802459475176570769" at="25,0,30,0" />
+      <scope id="1802459475176570759" at="15,36,22,60" />
+      <scope id="1802459475176570756" at="15,0,24,0" />
+      <unit id="1802459475176570754" at="10,0,31,0" name="jetbrains.mps.ide.editor.resolver.EditorResolverComponent" />
     </file>
   </root>
   <root nodeRef="r:e83eb82a-b3b8-4003-84af-b40cb742ea94(jetbrains.mps.ide.editor.resolver)/1802459475176571473">
     <file name="EditorResolver.java">
-      <node id="1802459475176585196" at="21,117,22,92" concept="5" />
-      <node id="4953860923773790232" at="23,30,24,19" concept="6" />
-      <node id="1802459475176582994" at="25,5,26,138" concept="5" />
-      <node id="5447047924422203920" at="27,9,28,125" concept="6" />
-      <node id="216787248379473153" at="29,15,30,31" concept="1" />
-      <node id="1802459475176571475" at="17,0,19,0" concept="0" trace="EditorResolver#()V" />
-      <node id="4953860923773790207" at="22,92,25,5" concept="3" />
-      <node id="3391050862413798839" at="26,138,31,5" concept="7" />
-      <node id="1802459475176571480" at="19,0,33,0" concept="4" trace="resolve#(Lorg/jetbrains/mps/openapi/model/SReference;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/module/SRepository;)Z" />
-      <scope id="1802459475176571478" at="17,27,17,27" />
-      <scope id="4953860923773790208" at="23,30,24,19" />
-      <scope id="3391050862413798840" at="27,9,28,125" />
-      <scope id="3391050862413798842" at="29,15,30,31" />
-      <scope id="1802459475176571475" at="17,0,19,0" />
-      <scope id="1802459475176571503" at="21,117,31,5">
+      <node id="1802459475176582994" at="22,117,23,91" concept="5" />
+      <node id="2644667000416898445" at="24,9,25,77" concept="1" />
+      <node id="5447047924422203920" at="25,77,26,102" concept="6" />
+      <node id="216787248379473153" at="27,15,28,31" concept="1" />
+      <node id="1802459475176571475" at="18,0,20,0" concept="0" trace="EditorResolver#()V" />
+      <node id="3391050862413798839" at="23,91,29,5" concept="9" />
+      <node id="1802459475176571480" at="20,0,31,0" concept="4" trace="resolve#(Lorg/jetbrains/mps/openapi/model/SReference;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/module/SRepository;)Z" />
+      <scope id="1802459475176571478" at="18,27,18,27" />
+      <scope id="3391050862413798842" at="27,15,28,31" />
+      <scope id="1802459475176571475" at="18,0,20,0" />
+      <scope id="3391050862413798840" at="24,9,26,102" />
+      <scope id="1802459475176571503" at="22,117,29,5">
         <var name="headlessEditor" id="1802459475176582995" />
-        <var name="resolveInfo" id="1802459475176585197" />
       </scope>
-      <scope id="1802459475176571480" at="19,0,33,0">
+      <scope id="1802459475176571480" at="20,0,31,0">
         <var name="reference" id="1802459475176571481" />
         <var name="repository" id="1802459475176571487" />
         <var name="sourceNode" id="1802459475176571484" />
       </scope>
-      <unit id="1802459475176571473" at="16,0,34,0" name="jetbrains.mps.ide.editor.resolver.EditorResolver" />
+      <unit id="1802459475176571473" at="16,0,32,0" name="jetbrains.mps.ide.editor.resolver.EditorResolver" />
     </file>
   </root>
 </debug-info>

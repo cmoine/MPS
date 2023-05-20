@@ -28,7 +28,7 @@ public class PostponedReferenceUpdate {
   private final List<PostponedReference> myRefs;
 
   public PostponedReferenceUpdate() {
-    myRefs = new ArrayList<PostponedReference>(100);
+    myRefs = new ArrayList<>(100);
   }
 
   public synchronized void add(@NotNull PostponedReference pr) {

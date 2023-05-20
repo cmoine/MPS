@@ -4,7 +4,7 @@
   <languages>
     <use id="a7d67633-e8d9-473b-98ce-995a7aa66941" name="jetbrains.mps.samples.heating" version="0" />
     <use id="000a73b2-ac88-49d9-bfcf-a3fa90cdb367" name="jetbrains.mps.samples.heating.tabular" version="0" />
-    <use id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core" version="1" />
+    <use id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core" version="2" />
   </languages>
   <imports />
   <registry>
@@ -136,7 +136,7 @@
         </node>
       </node>
       <node concept="1ePQG7" id="NU25MqW$dS" role="1ePc6i">
-        <property role="1ePQJd" value="sunday" />
+        <property role="1ePQJd" value="4p4E$Nw_8pZ/sunday" />
       </node>
     </node>
     <node concept="2AN$o3" id="1RZY6YZStRp" role="2AN$o1">
@@ -201,7 +201,7 @@
         </node>
       </node>
       <node concept="1ePY3a" id="1RZY6YZStS7" role="1ePc6i">
-        <property role="1ePY3b" value="saturday" />
+        <property role="1ePY3b" value="4p4E$Nw_8pS/saturday" />
       </node>
       <node concept="2m3Y1G" id="1RZY6YZStSk" role="2m0CA$">
         <ref role="2m3Y1H" node="NU25MqZUj$" />

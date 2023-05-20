@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,10 +18,9 @@ package jetbrains.mps.smodel;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.model.SNode;
 
-class RemoveChildUndoableAction extends SNodeUndoableAction {
+final class RemoveChildUndoableAction extends ChildUndoableAction {
   private final SNode myAnchor;
   private final SContainmentLink myRole;
-  private final SNode myChild;
 
   /**
    *
@@ -31,19 +30,18 @@ class RemoveChildUndoableAction extends SNodeUndoableAction {
    * @param child removed child
    */
   RemoveChildUndoableAction(SNode node, SNode anchor, SContainmentLink role, SNode child) {
-    super(node);
+    super(node, child);
     myAnchor = anchor;
     myRole = role;
-    myChild = child;
   }
 
   @Override
-  protected void doUndo() {
+  public void undo() {
     getAffectedNode().insertChildBefore(myRole, myChild, myAnchor);
   }
 
   @Override
-  protected void doRedo() {
+  public void redo() {
     getAffectedNode().removeChild(myChild);
   }
 }

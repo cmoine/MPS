@@ -5,7 +5,6 @@ package jetbrains.mps.lang.editor.table.runtime;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.smodel.adapter.MetaAdapterByDeclaration;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
@@ -14,9 +13,9 @@ import java.util.List;
 
 public class HierarchycalTableModelWithHeader extends HierarchycalTableModel {
   private SContainmentLink myHeaderColumnsLinkDeclaration;
-  public HierarchycalTableModelWithHeader(@NotNull SNode tableNode, @NotNull SNode rowsLinkDeclaration, @NotNull SNode cellsLinkDeclaration, @NotNull SNode headerCellsLinkDeclaration) {
+  public HierarchycalTableModelWithHeader(@NotNull SNode tableNode, @NotNull SContainmentLink rowsLinkDeclaration, @NotNull SContainmentLink cellsLinkDeclaration, @NotNull SContainmentLink headerCellsLinkDeclaration) {
     super(tableNode, rowsLinkDeclaration, cellsLinkDeclaration);
-    myHeaderColumnsLinkDeclaration = MetaAdapterByDeclaration.getContainmentLink(headerCellsLinkDeclaration);
+    myHeaderColumnsLinkDeclaration = headerCellsLinkDeclaration;
     assert SNodeOperations.getConcept(getTableNode()).getContainmentLinks().contains(myHeaderColumnsLinkDeclaration);
     assert ListSequence.fromList(getHeaderColumns()).count() == getColumnCount();
   }
@@ -36,7 +35,7 @@ public class HierarchycalTableModelWithHeader extends HierarchycalTableModel {
   @Override
   public void deleteRow(int rowNumber) {
     if (rowNumber == 0) {
-      // it's not possible to delete header row 
+      // it's not possible to delete header row
       return;
     }
     super.deleteRow(rowNumber - 1);
@@ -44,7 +43,7 @@ public class HierarchycalTableModelWithHeader extends HierarchycalTableModel {
   @Override
   public void insertRow(int rowNumber) {
     if (rowNumber == 0) {
-      // it's not possible to insert row before header 
+      // it's not possible to insert row before header
       rowNumber = 1;
     }
     super.insertRow(rowNumber - 1);
@@ -57,7 +56,7 @@ public class HierarchycalTableModelWithHeader extends HierarchycalTableModel {
   @Override
   public void insertColumn(int columnNumber) {
     SAbstractConcept concept = myHeaderColumnsLinkDeclaration.getTargetConcept();
-    Utils.insertElementAt(getHeaderColumns(), SNodeFactoryOperations.createNewNode(SNodeFactoryOperations.asInstanceConcept(concept), null), columnNumber);
+    Utils.insertElementAt(getHeaderColumns(), SNodeFactoryOperations.createNewNode(concept, null), columnNumber);
     super.insertColumn(columnNumber);
   }
   private List<SNode> getHeaderColumns() {

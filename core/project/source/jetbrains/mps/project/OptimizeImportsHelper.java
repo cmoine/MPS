@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,21 +16,15 @@
 package jetbrains.mps.project;
 
 import jetbrains.mps.progress.EmptyProgressMonitor;
+import jetbrains.mps.project.dependency.GeneratorModuleScanner;
 import jetbrains.mps.project.structure.modules.Dependency;
-import jetbrains.mps.project.structure.modules.mappingpriorities.MappingConfig_AbstractRef;
-import jetbrains.mps.project.structure.modules.mappingpriorities.MappingConfig_ExternalRef;
-import jetbrains.mps.project.structure.modules.mappingpriorities.MappingConfig_RefSet;
-import jetbrains.mps.project.structure.modules.mappingpriorities.MappingPriorityRule;
 import jetbrains.mps.smodel.Generator;
 import jetbrains.mps.smodel.Language;
-import jetbrains.mps.smodel.MPSModuleRepository;
 import jetbrains.mps.smodel.ModelDependencyScanner;
 import jetbrains.mps.smodel.SModelOperations;
 import jetbrains.mps.smodel.SModelStereotype;
-import jetbrains.mps.util.annotation.ToRemove;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SLanguage;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SModelReference;
@@ -43,7 +37,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -52,24 +45,26 @@ import java.util.Set;
 // FIXME (3) sort dependencies by name, group by kind(SDependencyScope) to make dependencies look uniform and easy to grasp.
 // FIXME (4) Refactor the class, reporting and breathe some OOP in here
 public class OptimizeImportsHelper {
-  private static final Logger LOG = LogManager.getLogger(OptimizeImportsHelper.class);
-
   private final SRepository myRepository;
+  private final ModelsAutoImportsManager myAutoImports;
 
   /**
-   * @deprecated please pass the repository to the constructor
+   * @param repository -- is a context repository which contains the modules/models the client want to resolve
+   * @deprecated
    */
-  @Deprecated
-  @ToRemove(version = 3.3)
-  public OptimizeImportsHelper() {
-    this(MPSModuleRepository.getInstance());
+@Deprecated(since = "2020.1", forRemoval = true)
+  public OptimizeImportsHelper(@NotNull SRepository repository) {
+    myRepository = repository;
+    myAutoImports = null;
   }
 
   /**
    * @param repository -- is a context repository which contains the modules/models the client want to resolve
+   * @param autoImports -- optional provider for imports that are treated as omni-present/required for a model
    */
-  public OptimizeImportsHelper(@NotNull SRepository repository) {
+  public OptimizeImportsHelper(@NotNull SRepository repository, @Nullable ModelsAutoImportsManager autoImports) {
     myRepository = repository;
+    myAutoImports = autoImports;
   }
 
   //----public optimizeX methods--------
@@ -83,8 +78,7 @@ public class OptimizeImportsHelper {
    * Optimizes project imports. Might take some time.
    * @deprecated use {@link #optimizeProjectImports(Project, ProgressMonitor)} instead
    */
-  @Deprecated
-  @ToRemove(version = 3.3)
+@Deprecated(since = "3.3", forRemoval = true)
   public String optimizeProjectImports(Project p) {
     return optimizeProjectImports(p, new EmptyProgressMonitor());
   }
@@ -108,8 +102,7 @@ public class OptimizeImportsHelper {
    * Optimizes imports for a list of models. Might take some time, so please pass the monitor parameter
    * @deprecated use {@link #optimizeModelsImports(List, ProgressMonitor)}
    */
-  @Deprecated
-  @ToRemove(version = 3.3)
+@Deprecated(since = "3.3", forRemoval = true)
   @NotNull
   public String optimizeModelsImports(List<SModel> modelsToOptimize) {
     return optimizeModelsImports(modelsToOptimize, new EmptyProgressMonitor());
@@ -154,14 +147,14 @@ public class OptimizeImportsHelper {
   }
 
   private Result optimizeSolutionImports_internal(Solution solution) {
-    List<SModel> modelsToOptimize = solution.getModels();
+    Collection<SModel> modelsToOptimize = solution.getModels();
     Result result = optimizeModelsImports_internal(modelsToOptimize, new EmptyProgressMonitor());
-    result.myReport = optimizeModuleImports(solution, result, Collections.<SModuleReference>emptySet()) + "\n\n" + result.myReport;
+    result.myReport = optimizeModuleImports(solution, result, Collections.emptySet()) + "\n\n" + result.myReport;
     return result;
   }
 
   private Result optimizeLanguageImports_internal(Language language) {
-    List<SModel> modelsToOptimize = new ArrayList<SModel>();
+    List<SModel> modelsToOptimize = new ArrayList<>();
     for (SModel model : language.getModels()) {
       if (SModelStereotype.isDescriptorModelStereotype(SModelStereotype.getStereotype(model)) || SModelStereotype.isStubModel(model)) {
         // with @desciptor model hosting imports to activate generation of custom aspects, it's not wise to remove these.
@@ -170,37 +163,22 @@ public class OptimizeImportsHelper {
       }
       modelsToOptimize.add(model);
     }
-    for (Generator g : language.getGenerators()) {
+    for (Generator g : language.getOwnedGenerators()) {
       modelsToOptimize.addAll(g.getModels());
     }
     Result result = optimizeModelsImports_internal(modelsToOptimize, new EmptyProgressMonitor());
     myRepository.saveAll();
-    for (Generator g : language.getGenerators()) {
-      HashSet<SModuleReference> referencedGenerators = new HashSet<SModuleReference>();
-      // ArrayDeque doesn't tolerate null, unfortunately
-      LinkedList<MappingConfig_AbstractRef> mcRefs = new LinkedList<MappingConfig_AbstractRef>();
-      for (MappingPriorityRule rule : g.getModuleDescriptor().getPriorityRules()) {
-        mcRefs.add(rule.getLeft());
-        mcRefs.add(rule.getRight());
-      }
-      while (!mcRefs.isEmpty()) {
-        MappingConfig_AbstractRef ref = mcRefs.removeFirst();
-        if (ref instanceof MappingConfig_RefSet) {
-          mcRefs.addAll(((MappingConfig_RefSet) ref).getMappingConfigs());
-          continue;
-        }
-        if (ref instanceof MappingConfig_ExternalRef) {
-          referencedGenerators.add(((MappingConfig_ExternalRef) ref).getGenerator());
-        }
-      }
-      result.myReport = optimizeModuleImports(g, result, referencedGenerators) + "\n\n" + result.myReport;
+    for (Generator g : language.getOwnedGenerators()) {
+      GeneratorModuleScanner gms = new GeneratorModuleScanner();
+      gms.walkPriorityRules(g);
+      result.myReport = optimizeModuleImports(g, result, gms.getReferencedGenerators()) + "\n\n" + result.myReport;
     }
-    result.myReport = optimizeModuleImports(language, result, Collections.<SModuleReference>emptySet()) + "\n\n" + result.myReport;
+    result.myReport = optimizeModuleImports(language, result, Collections.emptySet()) + "\n\n" + result.myReport;
 
     return result;
   }
 
-  private Result optimizeModelsImports_internal(List<SModel> modelsToOptimize, ProgressMonitor monitor) {
+  private Result optimizeModelsImports_internal(Collection<SModel> modelsToOptimize, ProgressMonitor monitor) {
     Result result = new Result();
     monitor.start("working", modelsToOptimize.size());
     try {
@@ -226,7 +204,7 @@ public class OptimizeImportsHelper {
   private Result optimizeModelImports_internal(SModel modelDescriptor) {
     Result result = collectModelDependencies(modelDescriptor);
 
-    Set<SModelReference> unusedModels = new HashSet<SModelReference>();
+    Set<SModelReference> unusedModels = new HashSet<>();
     for (SModelReference model : SModelOperations.getImportedModelUIDs(modelDescriptor)) {
       if (result.myUsedModels.contains(model)) continue;
 
@@ -243,16 +221,16 @@ public class OptimizeImportsHelper {
       unusedModels.add(model);
     }
 
-    Set<SLanguage> unusedLanguages = new HashSet<SLanguage>();
+    Set<SLanguage> unusedLanguages = new HashSet<>();
     for (SLanguage languageRef : ((jetbrains.mps.smodel.SModelInternal) modelDescriptor).importedLanguageIds()) {
       if (isUnusedLanguageRef(result, languageRef)) {
         unusedLanguages.add(languageRef);
       }
     }
 
-    Set<SModuleReference> unusedDevkits = new HashSet<SModuleReference>();
+    Set<SModuleReference> unusedDevkits = new HashSet<>();
     for (SModuleReference devkitRef : ((jetbrains.mps.smodel.SModelInternal) modelDescriptor).importedDevkits()) {
-      if (ModelsAutoImportsManager.getDevKits(modelDescriptor.getModule(), modelDescriptor).contains(devkitRef)) {
+      if (myAutoImports != null && myAutoImports.getDevkitsToImport(modelDescriptor.getModule(), modelDescriptor).contains(devkitRef)) {
         continue;
       }
       if (isUnusedDevkitRef(result, devkitRef)) {
@@ -277,11 +255,11 @@ public class OptimizeImportsHelper {
     result.myUsedModels.addAll(modelScanner.getCrossModelReferences());
 
     // add auto imports as dependencies
-    for (SLanguage l : ModelsAutoImportsManager.getLanguages(model.getModule(), model)) {
-      result.myUsedLanguages.add(l);
-    }
-    for (SModel m : ModelsAutoImportsManager.getAutoImportedModels(model.getModule(), model)) {
-      result.addUsedModel(m.getReference());
+    if (myAutoImports != null) {
+      result.myUsedLanguages.addAll(myAutoImports.getLanguagesToImport(model.getModule(), model));
+      for (SModel m : myAutoImports.getModelsToImport(model.getModule(), model)) {
+        result.addUsedModel(m.getReference());
+      }
     }
 
     return result;
@@ -290,9 +268,9 @@ public class OptimizeImportsHelper {
   //----additional methods--------
 
   private String optimizeModuleImports(AbstractModule module, Result result, Collection<SModuleReference> toKeep) {
-    List<Dependency> unusedDeps = new ArrayList<Dependency>();
+    List<Dependency> unusedDeps = new ArrayList<>();
     final SModuleReference optimizedModuleReference = module.getModuleReference();
-    HashSet<SModuleReference> inUse = new HashSet<SModuleReference>(toKeep);
+    HashSet<SModuleReference> inUse = new HashSet<>(toKeep);
     SRepository repository = module.getRepository();
     // from used models, find out modules we need
     for (SModelReference mr : result.myUsedModels) {
@@ -395,8 +373,8 @@ public class OptimizeImportsHelper {
 
   private static class Result {
     public String myReport = "";
-    public final Set<SLanguage> myUsedLanguages = new HashSet<SLanguage>();
-    public final Set<SModelReference> myUsedModels = new HashSet<SModelReference>();
+    public final Set<SLanguage> myUsedLanguages = new HashSet<>();
+    public final Set<SModelReference> myUsedModels = new HashSet<>();
 
     public void add(Result addition) {
       myReport = myReport + addition.myReport + "\n";

@@ -19,56 +19,46 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.annotations.Immutable;
 
 @Immutable
-public final class SConceptId {
-  private final SLanguageId myLanguageId;
-  private final long myConceptId;
+public final class SConceptId extends SElementId {
 
   public SConceptId(@NotNull SLanguageId languageId, long conceptId) {
-    myConceptId = conceptId;
-    myLanguageId = languageId;
+    super(languageId, conceptId);
   }
 
   public static SConceptId deserialize(String s) {
-    int split = s.lastIndexOf("/");
-    SLanguageId lang = SLanguageId.deserialize(s.substring(0, split));
-    long concept = Long.parseLong(s.substring(split + 1));
-    return new SConceptId(lang, concept);
+    return deserializeDefault(s, SConceptId::new);
   }
 
+  // FIXME all these method overrides needed for compatibility with MPS baseLanguage code that is referencing these methods.
+  // If we remove these overrides, we got broken references in MPS
+  // Generally speaking, moving method up in hierarchy is compatible in pure java, but it is not compatible in MPS
+  // We should figure out how to handle this scenario with migrations, unless leave these overrides here. See MPS-28629
+
+  @NotNull
   public SLanguageId getLanguageId() {
-    return myLanguageId;
+    return super.getLanguageId();
   }
 
   public long getIdValue() {
-    return myConceptId;
+    return super.getIdValue();
   }
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-
-    SConceptId that = (SConceptId) o;
-
-    if (myConceptId != that.myConceptId) return false;
-    if (!myLanguageId.equals(that.myLanguageId)) return false;
-
-    return true;
+    return super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    long result = myLanguageId.hashCode();
-    result = 31 * result + myConceptId;
-    return (int) result;
+    return super.hashCode();
   }
 
   public String serialize() {
-    return myLanguageId.serialize() + "/" + myConceptId;
+    return super.serialize();
   }
 
   @Override
   public String toString() {
-    return serialize();
+    return super.toString();
   }
 }

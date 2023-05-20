@@ -15,12 +15,12 @@
       <node id="8215612579905005536" at="20,0,21,0" concept="9" trace="EXPECTED_CHILD_INDEX" />
       <node id="1322445664742917526" at="21,0,22,0" concept="2" trace="mySelectedCell" />
       <node id="1322445664742918154" at="24,60,25,34" concept="1" />
-      <node id="1322445664742809646" at="29,84,30,72" concept="7" />
-      <node id="1322445664742809648" at="30,72,31,18" concept="6" />
+      <node id="1322445664742809646" at="29,84,30,71" concept="7" />
+      <node id="1322445664742809648" at="30,71,31,18" concept="6" />
       <node id="1322445664742809657" at="32,5,33,0" concept="8" />
       <node id="1322445664742809658" at="33,0,34,62" concept="5" />
-      <node id="8215612579905011352" at="35,128,36,72" concept="7" />
-      <node id="8215612579905010261" at="36,72,37,18" concept="6" />
+      <node id="8215612579905011352" at="35,128,36,71" concept="7" />
+      <node id="8215612579905010261" at="36,71,37,18" concept="6" />
       <node id="1322445664742809681" at="38,5,39,0" concept="8" />
       <node id="1322445664742809717" at="39,0,40,165" concept="6" />
       <node id="1322445664742913685" at="43,0,44,0" concept="4" trace="createCellSelector#()Ljetbrains/mps/nodeEditor/selectionRestoring/CellSelector;" />
@@ -51,12 +51,12 @@
       <node id="1801654740563425060" at="22,34,23,39" concept="1" />
       <node id="1322445664742945924" at="27,74,28,62" concept="5" />
       <node id="4682006100572687844" at="28,62,29,0" concept="8" />
-      <node id="4682006100572688386" at="30,80,31,72" concept="7" />
-      <node id="4682006100572688388" at="31,72,32,18" concept="6" />
+      <node id="4682006100572688386" at="30,80,31,71" concept="7" />
+      <node id="4682006100572688388" at="31,71,32,18" concept="6" />
       <node id="4682006100572677527" at="33,5,34,0" concept="8" />
       <node id="4682006100572678384" at="34,0,35,60" concept="5" />
-      <node id="4682006100572678392" at="36,126,37,72" concept="7" />
-      <node id="4682006100572678394" at="37,72,38,18" concept="6" />
+      <node id="4682006100572678392" at="36,126,37,71" concept="7" />
+      <node id="4682006100572678394" at="37,71,38,18" concept="6" />
       <node id="4682006100572678412" at="39,5,40,0" concept="8" />
       <node id="4682006100572678413" at="40,0,41,177" concept="6" />
       <node id="4682006100572692072" at="44,0,45,0" concept="4" trace="createCellSelector#(Ljetbrains/mps/openapi/editor/cells/EditorCell;)Ljetbrains/mps/nodeEditor/selectionRestoring/CellSelector;" />

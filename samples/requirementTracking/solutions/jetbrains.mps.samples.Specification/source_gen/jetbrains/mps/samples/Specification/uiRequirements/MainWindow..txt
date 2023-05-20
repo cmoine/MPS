@@ -1,0 +1,11 @@
+Requirements MainWindow
+
+1. 00063: The window must start full screen
+This is mandated by the deployment platform. 
+
+2. 00091: The graphics must work on retina displays in high-res
+Non-retina displays may revert to low-res. 
+
+3. When started, the windoiw should be placed on top of all open windows
+Users get puzzled if the application starts in the background. 
+

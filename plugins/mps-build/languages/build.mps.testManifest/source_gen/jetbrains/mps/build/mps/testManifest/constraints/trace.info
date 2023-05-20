@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
   <root>
     <file name="ConstraintsAspectDescriptor.java">
-      <unit at="13,0,45,0" name="jetbrains.mps.build.mps.testManifest.constraints.ConstraintsAspectDescriptor" />
+      <unit at="13,0,29,0" name="jetbrains.mps.build.mps.testManifest.constraints.ConstraintsAspectDescriptor" />
     </file>
   </root>
   <root nodeRef="r:31b9ca31-eb5d-471f-91ea-30fbf9c39fae(jetbrains.mps.build.mps.testManifest.constraints)/3298469228705255568">
     <file name="TestModuleManifest_Constraints.java">
-      <node id="3298469228705255568" at="9,43,10,173" concept="1" />
-      <node id="3298469228705255568" at="9,0,12,0" concept="0" trace="TestModuleManifest_Constraints#()V" />
-      <scope id="3298469228705255568" at="9,43,10,173" />
-      <scope id="3298469228705255568" at="9,0,12,0" />
-      <unit id="3298469228705255568" at="8,0,14,0" name="jetbrains.mps.build.mps.testManifest.constraints.TestModuleManifest_Constraints" />
+      <node id="3298469228705255568" at="10,43,11,42" concept="2" />
+      <node id="3298469228705255568" at="15,0,16,0" concept="1" trace="TestModuleManifest$1I" />
+      <node id="3298469228705255568" at="10,0,13,0" concept="0" trace="TestModuleManifest_Constraints#()V" />
+      <scope id="3298469228705255568" at="10,43,11,42" />
+      <scope id="3298469228705255568" at="10,0,13,0" />
+      <unit id="3298469228705255568" at="14,0,17,0" name="jetbrains.mps.build.mps.testManifest.constraints.TestModuleManifest_Constraints$CONCEPTS" />
+      <unit id="3298469228705255568" at="9,0,18,0" name="jetbrains.mps.build.mps.testManifest.constraints.TestModuleManifest_Constraints" />
     </file>
   </root>
 </debug-info>

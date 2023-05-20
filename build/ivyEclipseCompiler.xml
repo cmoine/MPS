@@ -1,0 +1,9 @@
+<ivy-module version="2.0" xmlns:m="http://www.inversoft.com/schemas/savant-2.0/base">
+  <info organisation="org.jetbrains.mps" module="idea-platform"/>
+  <dependencies>
+    <dependency org="org.eclipse.jdt.core.compiler" name="ecj" rev="4.6.2RC3">
+      <artifact name="ecj" ext="jar"/>
+      <artifact name="ecj" m:classifier="src" ext="jar"/>
+    </dependency>
+  </dependencies>
+</ivy-module>

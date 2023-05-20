@@ -41,28 +41,28 @@ public final class PathItemRole {
   public static final PathItemRole ROLE_MAIN_RESULTS = new PathItemRole("results");
   public static final PathItemRole ROLE_MAIN_ROOT = new PathItemRole("main root");
 
-  public static final Set<PathItemRole> VALUES = new HashSet<PathItemRole>(Arrays.asList(
-    ROLE_TARGET_NODE,
-    ROLE_ROOT_TO_TARGET_NODE,
-    ROLE_ROOT,
-    ROLE_MODEL,
-    ROLE_MODULE,
-    ROLE_LANGUAGE,
-    ROLE_CATEGORY,
-    ROLE_MAIN_SEARCHED_NODES,
-    ROLE_MAIN_RESULTS,
-    ROLE_MAIN_ROOT
+  public static final Set<PathItemRole> VALUES = new HashSet<>(Arrays.asList(
+      ROLE_TARGET_NODE,
+      ROLE_ROOT_TO_TARGET_NODE,
+      ROLE_ROOT,
+      ROLE_MODEL,
+      ROLE_MODULE,
+      ROLE_LANGUAGE,
+      ROLE_CATEGORY,
+      ROLE_MAIN_SEARCHED_NODES,
+      ROLE_MAIN_RESULTS,
+      ROLE_MAIN_ROOT
   ));
 
   //------------------READ/WRITE stuff-------------------
 
   private static final String NAME = "name";
 
-  public static void write(PathItemRole instance, Element element) throws CantSaveSomethingException {
+  public static void write(PathItemRole instance, Element element) {
     element.setAttribute(NAME, instance.getName());
   }
 
-  public static PathItemRole read(Element element) throws CantLoadSomethingException {
+  public static PathItemRole read(Element element) {
     String name = element.getAttributeValue(NAME);
     for (PathItemRole instance : VALUES) {
       if (instance.getName().equals(name)) {
@@ -78,7 +78,7 @@ public final class PathItemRole {
   //------------------INSTANCE STUFF-------------------
 
   @NotNull
-  private String myName = "";
+  private String myName;
 
   @NotNull
   public String getName() {
@@ -100,9 +100,7 @@ public final class PathItemRole {
 
     PathItemRole that = (PathItemRole) o;
 
-    if (!myName.equals(that.myName)) return false;
-
-    return true;
+    return myName.equals(that.myName);
   }
 
   @Override

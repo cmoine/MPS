@@ -7,31 +7,26 @@ import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.baseLanguage.closures.runtime._FunctionTypes;
 import org.jetbrains.mps.openapi.model.SNode;
-import org.jetbrains.mps.openapi.module.SearchScope;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.project.GlobalScope;
 import java.util.List;
 import org.jetbrains.mps.openapi.module.FindUsagesFacade;
+import org.jetbrains.mps.openapi.module.SearchScope;
 import org.jetbrains.mps.openapi.util.ProgressMonitor;
 import java.util.Set;
 import java.util.Collections;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import java.util.ArrayList;
 import jetbrains.mps.internal.collections.runtime.IWhereFilter;
-import org.jetbrains.mps.openapi.model.SModel;
-import jetbrains.mps.smodel.ScopeOperations;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SModelOperations;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class NodeByConceptChooser extends NodeChooser {
   @NotNull
   private SAbstractConcept myTargetConcept;
   @Nullable
   private _FunctionTypes._return_P1_E0<? extends Boolean, ? super SNode> myAcceptor;
-  private final SearchScope myScope;
 
   public NodeByConceptChooser() {
-    this(MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x10802efe25aL, "jetbrains.mps.lang.core.structure.BaseConcept"), null);
+    this(CONCEPTS.BaseConcept$gP, null);
   }
 
   public NodeByConceptChooser(SAbstractConcept conceptFqName, @Nullable _FunctionTypes._return_P1_E0<? extends Boolean, ? super SNode> acceptor) {
@@ -39,7 +34,6 @@ public class NodeByConceptChooser extends NodeChooser {
 
     myTargetConcept = conceptFqName;
     myAcceptor = acceptor;
-    myScope = GlobalScope.getInstance();
   }
 
   public SAbstractConcept getTargetConcept() {
@@ -59,8 +53,8 @@ public class NodeByConceptChooser extends NodeChooser {
   }
 
   @Override
-  protected List<SNode> findToChooseFromOnInit(FindUsagesFacade manager, ProgressMonitor monitor) {
-    Set<SNode> instances = manager.findInstances(myScope, Collections.singleton(myTargetConcept), false, monitor);
+  protected List<SNode> findToChooseFromOnInit(FindUsagesFacade manager, SearchScope scope, ProgressMonitor monitor) {
+    Set<SNode> instances = manager.findInstances(scope, Collections.singleton(myTargetConcept), false, monitor);
     if (this.myAcceptor == null) {
       return ListSequence.fromListWithValues(new ArrayList<SNode>(), instances);
     } else {
@@ -72,24 +66,7 @@ public class NodeByConceptChooser extends NodeChooser {
     }
   }
 
-  @Override
-  protected Iterable<SModel> getModels(String model) {
-    return ScopeOperations.getModelsByName(myScope, model);
-  }
-
-  @Override
-  protected Iterable<SNode> findNodes(SModel model, final String fqName) {
-    return ListSequence.fromList(SModelOperations.nodes(((SModel) model), null)).where(new IWhereFilter<SNode>() {
-      public boolean accept(SNode it) {
-        if (!(SNodeOperations.isInstanceOf(it, SNodeOperations.asSConcept(myTargetConcept)))) {
-          return false;
-        }
-        if (myAcceptor == null) {
-          return getFqName(it).equals(fqName);
-        } else {
-          return myAcceptor.invoke(it) && getFqName(it).equals(fqName);
-        }
-      }
-    });
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept BaseConcept$gP = MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x10802efe25aL, "jetbrains.mps.lang.core.structure.BaseConcept");
   }
 }

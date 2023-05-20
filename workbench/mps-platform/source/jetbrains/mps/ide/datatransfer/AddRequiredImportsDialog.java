@@ -22,7 +22,7 @@ import com.intellij.ui.ScrollPaneFactory;
 import com.intellij.ui.SimpleColoredComponent;
 import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.ui.components.JBList;
-import jetbrains.mps.ide.icons.IconManager;
+import jetbrains.mps.ide.icons.GlobalIconManager;
 import jetbrains.mps.ide.icons.IdeIcons;
 import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.project.Project;
@@ -183,12 +183,9 @@ public class AddRequiredImportsDialog extends DialogWrapper {
         final SModelReference ref = (SModelReference) value;
 
         // FIXME likely, IconManager shall take project argument
-        myProject.getModelAccess().runReadAction(new Runnable() {
-          @Override
-          public void run() {
-            SModel model = ref.resolve(myProject.getRepository());
-            setIcon(IconManager.getIconFor(model));
-          }
+        myProject.getModelAccess().runReadAction(() -> {
+          SModel model = ref.resolve(myProject.getRepository());
+          setIcon(GlobalIconManager.getInstance().getIconFor(model));
         });
         append(ref.getModelName(), SimpleTextAttributes.REGULAR_ATTRIBUTES);
         SModuleReference module = ref.getModuleReference();

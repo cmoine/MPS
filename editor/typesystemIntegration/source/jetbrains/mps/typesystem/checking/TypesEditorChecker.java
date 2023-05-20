@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,23 +15,37 @@
  */
 package jetbrains.mps.typesystem.checking;
 
-import jetbrains.mps.newTypesystem.context.IncrementalTypecheckingContext;
-import jetbrains.mps.newTypesystem.context.typechecking.IncrementalTypechecking;
+import jetbrains.mps.checkers.ICheckingPostprocessor;
+import jetbrains.mps.errors.item.NodeReportItem;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.nodeEditor.EditorMessage;
 import jetbrains.mps.nodeEditor.checking.UpdateResult;
 import jetbrains.mps.nodeEditor.checking.UpdateResult.Completed;
 import jetbrains.mps.openapi.editor.EditorContext;
-import jetbrains.mps.typesystem.inference.TypeCheckingContext;
+import jetbrains.mps.typechecking.CacheState;
+import jetbrains.mps.typechecking.TypecheckingFacade;
+import jetbrains.mps.typechecking.TypecheckingSession;
 import jetbrains.mps.util.Cancellable;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import jetbrains.mps.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.mps.openapi.model.SNodeReference;
+import org.jetbrains.mps.openapi.module.SRepository;
 
+import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
 
 public class TypesEditorChecker extends AbstractTypesystemEditorChecker {
-  private static final Logger LOG = LogManager.getLogger(TypesEditorChecker.class);
+
+  public TypesEditorChecker(SRepository repository, Collection<ICheckingPostprocessor<NodeReportItem>> postprocessors) {
+    super(repository, postprocessors);
+  }
 
   @Override
   public boolean isEssential() {
@@ -40,30 +54,60 @@ public class TypesEditorChecker extends AbstractTypesystemEditorChecker {
 
   @NotNull
   @Override
-  protected UpdateResult doCreateMessages(final TypeCheckingContext context, final boolean wasCheckedOnce,
-      final EditorContext editorContext, final SNode rootNode, Cancellable cancellable, final boolean applyQuickFixes) {
-    if (context == null || !(context instanceof IncrementalTypecheckingContext)) {
+  protected UpdateResult doCreateMessages(final TypecheckingSession typecheckingSession,
+                                          final boolean incremental,
+                                          Instant wasLastChecked,
+                                          final EditorContext editorContext,
+                                          final SNode rootNode,
+                                          Cancellable cancellable,
+                                          final boolean applyQuickFixes)
+  {
+    if (!typecheckingSession.flags().isIncremental()) {
       return UpdateResult.CANCELLED;
     }
 
-    return ((IncrementalTypecheckingContext) context).runTypeCheckingAction(() -> {
+    return TypecheckingFacade.getFromContext().computeWithSession(typecheckingSession, (session) -> {
       boolean messagesChanged = false;
 
-      if (!wasCheckedOnce || !context.isCheckedRoot(true) || context.messagesChanged(editorContext.getEditorComponent().getClass())) {
-        IncrementalTypechecking typesComponent = context.getBaseNodeTypesComponent();
+      Collection<Pair<SNodeReference, List<NodeReportItem>>> collected = Collections.emptyList();
+      CacheState cacheState = TypecheckingFacade.getFromContext().getCacheState(rootNode);
+      if (!incremental || cacheState.hasChangedSince(wasLastChecked)) {
         try {
           messagesChanged = true;
-          context.checkIfNotChecked(rootNode, false);
+          ErrorsCollector errorsCollector = new ErrorsCollector();
+          TypecheckingFacade.getFromContext().checkRecursively(rootNode, errorsCollector);
+          collected = errorsCollector.getCollected();
+
+
         } catch (Throwable t) {
-          LOG.error(null, t);
-          typesComponent.setCheckedTypesystem();
+          Logger.getLogger(TypesEditorChecker.class).error(t);
           return UpdateResult.CANCELLED;
         }
       }
 
       // highlight nodes with errors
-      Collection<EditorMessage> messages = collectMessagesForNodesWithErrors(context, editorContext, true, applyQuickFixes);
+      Collection<EditorMessage> messages = collectMessagesForNodesWithErrors(collected, editorContext, applyQuickFixes);
       return new Completed(messagesChanged, messages);
     });
+  }
+
+  private static class ErrorsCollector implements Consumer<NodeReportItem> {
+
+    private Map<SNodeReference, List<NodeReportItem>> myCollectedItems = new HashMap<>();
+
+    @Override
+    public void accept(NodeReportItem nodeReportItem) {
+      List<NodeReportItem> items = myCollectedItems.computeIfAbsent(nodeReportItem.getNode(), (key) -> new ArrayList<>());
+      items.add(nodeReportItem);
+    }
+
+    Collection<Pair<SNodeReference, List<NodeReportItem>>> getCollected() {
+      List<Pair<SNodeReference, List<NodeReportItem>>> res = new ArrayList<>();
+      for (Map.Entry<SNodeReference, List<NodeReportItem>> e : myCollectedItems.entrySet()) {
+        res.add(new Pair<>(e.getKey(), e.getValue()));
+      }
+      return res;
+    }
+
   }
 }

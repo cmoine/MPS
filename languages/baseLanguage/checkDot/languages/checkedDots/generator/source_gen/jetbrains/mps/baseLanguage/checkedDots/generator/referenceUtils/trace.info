@@ -1,53 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1164991038168:jetbrains.mps.baseLanguage.structure.ThrowStatement" />
   <root nodeRef="r:9fe3b5b8-3b82-4c46-a9a9-5eb7cd2665a4(jetbrains.mps.baseLanguage.checkedDots.generator.referenceUtils)/297042804014309596">
     <file name="ReferenceConversionHelper.java">
-      <node id="297042804013972658" at="15,68,16,98" concept="1" />
-      <node id="297042804013957197" at="16,98,17,0" concept="3" />
-      <node id="297042804014182687" at="19,40,20,651" concept="2" />
-      <node id="297042804014928966" at="25,75,26,98" concept="1" />
-      <node id="297042804014923230" at="26,98,27,0" concept="3" />
-      <node id="297042804014930843" at="29,41,30,652" concept="2" />
-      <node id="297042804014907510" at="35,67,36,616" concept="2" />
-      <node id="297042804014182685" at="19,0,22,0" concept="0" trace="accept#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
-      <node id="297042804014930841" at="29,0,32,0" concept="0" trace="accept#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
-      <node id="297042804014908608" at="35,0,38,0" concept="4" trace="retrieveFlowInterruptors#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/util/List;" />
-      <node id="297042804014125840" at="17,0,22,7" concept="2" />
-      <node id="297042804014930832" at="27,0,32,7" concept="2" />
-      <node id="297042804014310654" at="15,0,24,0" concept="4" trace="retrieveDescendentRefs#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/Iterable;" />
-      <node id="297042804014860528" at="25,0,34,0" concept="4" trace="retrieveDescendentMethodCalls#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/Iterable;" />
-      <scope id="297042804014182686" at="19,40,20,651" />
-      <scope id="297042804014930842" at="29,41,30,652" />
-      <scope id="297042804014906423" at="35,67,36,616" />
-      <scope id="297042804014182685" at="19,0,22,0">
+      <node id="6480817028665677269" at="22,76,23,191" concept="4" />
+      <node id="6480817028665677283" at="24,90,25,144" concept="4" />
+      <node id="6480817028667102124" at="26,12,27,109" concept="8" />
+      <node id="6480817028663451237" at="30,92,31,98" concept="3" />
+      <node id="6480817028663451242" at="31,98,32,0" concept="5" />
+      <node id="6480817028663451253" at="34,40,35,271" concept="4" />
+      <node id="297042804013972658" at="40,68,41,98" concept="3" />
+      <node id="297042804013957197" at="41,98,42,0" concept="5" />
+      <node id="297042804014182687" at="44,40,45,271" concept="4" />
+      <node id="297042804014928966" at="50,75,51,98" concept="3" />
+      <node id="297042804014923230" at="51,98,52,0" concept="5" />
+      <node id="297042804014930843" at="54,41,55,272" concept="4" />
+      <node id="297042804014907510" at="60,67,61,236" concept="4" />
+      <node id="297042804014309596" at="65,0,66,0" concept="6" trace="IVariableReference$C" />
+      <node id="297042804014309596" at="66,0,67,0" concept="6" trace="ConceptFunctionParameter$Tk" />
+      <node id="297042804014309596" at="67,0,68,0" concept="6" trace="IControlFlowInterrupter$Ra" />
+      <node id="297042804014309596" at="68,0,69,0" concept="6" trace="IStatementListContainer$xz" />
+      <node id="297042804014309596" at="69,0,70,0" concept="6" trace="IContainsStatementList$v9" />
+      <node id="297042804014309596" at="70,0,71,0" concept="6" trace="IMethodCall$M9" />
+      <node id="297042804014309596" at="74,0,75,0" concept="6" trace="name$MnvL" />
+      <node id="6480817028665677289" at="26,10,28,5" concept="0" />
+      <node id="6480817028663451251" at="34,0,37,0" concept="2" trace="accept#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="297042804014182685" at="44,0,47,0" concept="2" trace="accept#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="297042804014930841" at="54,0,57,0" concept="2" trace="accept#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="297042804014908608" at="60,0,63,0" concept="7" trace="retrieveFlowInterruptors#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/util/List;" />
+      <node id="6480817028663451243" at="32,0,37,7" concept="4" />
+      <node id="297042804014125840" at="42,0,47,7" concept="4" />
+      <node id="297042804014930832" at="52,0,57,7" concept="4" />
+      <node id="6480817028665677263" at="21,69,28,5" concept="1" />
+      <node id="6480817028667168996" at="21,0,30,0" concept="7" trace="getRefOrConceptFunctionParamName#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
+      <node id="6480817028663451235" at="30,0,39,0" concept="7" trace="retrieveDescendentRefsAndConceptFunctionParams#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/Iterable;" />
+      <node id="297042804014310654" at="40,0,49,0" concept="7" trace="retrieveDescendentRefs#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/Iterable;" />
+      <node id="297042804014860528" at="50,0,59,0" concept="7" trace="retrieveDescendentMethodCalls#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/Iterable;" />
+      <scope id="6480817028665677268" at="22,76,23,191" />
+      <scope id="6480817028665677282" at="24,90,25,144" />
+      <scope id="6480817028665677290" at="26,12,27,109" />
+      <scope id="6480817028663451252" at="34,40,35,271" />
+      <scope id="297042804014182686" at="44,40,45,271" />
+      <scope id="297042804014930842" at="54,41,55,272" />
+      <scope id="297042804014906423" at="60,67,61,236" />
+      <scope id="6480817028663451251" at="34,0,37,0">
+        <var name="ref" id="6480817028663451251" />
+      </scope>
+      <scope id="297042804014182685" at="44,0,47,0">
         <var name="ref" id="297042804014182685" />
       </scope>
-      <scope id="297042804014930841" at="29,0,32,0">
+      <scope id="297042804014930841" at="54,0,57,0">
         <var name="call" id="297042804014930841" />
       </scope>
-      <scope id="297042804014908608" at="35,0,38,0">
+      <scope id="297042804014908608" at="60,0,63,0">
         <var name="node" id="297042804014907518" />
       </scope>
-      <scope id="297042804014310657" at="15,68,22,7">
+      <scope id="6480817028667087232" at="21,69,28,5" />
+      <scope id="6480817028663451236" at="30,92,37,7">
+        <var name="flowInterruptors" id="6480817028663451238" />
+      </scope>
+      <scope id="297042804014310657" at="40,68,47,7">
         <var name="flowInterruptors" id="297042804013972659" />
       </scope>
-      <scope id="297042804014860529" at="25,75,32,7">
+      <scope id="297042804014860529" at="50,75,57,7">
         <var name="flowInterruptors" id="297042804014928967" />
       </scope>
-      <scope id="297042804014310654" at="15,0,24,0">
+      <scope id="6480817028667168996" at="21,0,30,0">
+        <var name="node" id="6480817028667087445" />
+      </scope>
+      <scope id="6480817028663451235" at="30,0,39,0">
+        <var name="node" id="6480817028663451268" />
+      </scope>
+      <scope id="297042804014310654" at="40,0,49,0">
         <var name="node" id="297042804014313503" />
       </scope>
-      <scope id="297042804014860528" at="25,0,34,0">
+      <scope id="297042804014860528" at="50,0,59,0">
         <var name="node" id="297042804014860566" />
       </scope>
-      <unit id="297042804014182685" at="18,279,22,5" name="jetbrains.mps.baseLanguage.checkedDots.generator.referenceUtils.ReferenceConversionHelper$1" />
-      <unit id="297042804014930841" at="28,267,32,5" name="jetbrains.mps.baseLanguage.checkedDots.generator.referenceUtils.ReferenceConversionHelper$2" />
-      <unit id="297042804014309596" at="13,0,39,0" name="jetbrains.mps.baseLanguage.checkedDots.generator.referenceUtils.ReferenceConversionHelper" />
+      <unit id="297042804014309596" at="73,0,76,0" name="jetbrains.mps.baseLanguage.checkedDots.generator.referenceUtils.ReferenceConversionHelper$PROPS" />
+      <unit id="6480817028663451251" at="33,291,37,5" name="jetbrains.mps.baseLanguage.checkedDots.generator.referenceUtils.ReferenceConversionHelper$1" />
+      <unit id="297042804014182685" at="43,149,47,5" name="jetbrains.mps.baseLanguage.checkedDots.generator.referenceUtils.ReferenceConversionHelper$2" />
+      <unit id="297042804014930841" at="53,142,57,5" name="jetbrains.mps.baseLanguage.checkedDots.generator.referenceUtils.ReferenceConversionHelper$3" />
+      <unit id="297042804014309596" at="64,0,72,0" name="jetbrains.mps.baseLanguage.checkedDots.generator.referenceUtils.ReferenceConversionHelper$CONCEPTS" />
+      <unit id="297042804014309596" at="19,0,77,0" name="jetbrains.mps.baseLanguage.checkedDots.generator.referenceUtils.ReferenceConversionHelper" />
     </file>
   </root>
 </debug-info>

@@ -9,8 +9,9 @@ import jetbrains.mps.lang.migration.runtime.base.MigrationScriptReference;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class SetOldConceptIds_Empty extends MigrationScriptBase {
+  private final String description = "Set Old Concept Ids (empty)";
   public String getCaption() {
-    return "Set Old Concept Ids (empty)";
+    return description;
   }
   @Override
   public boolean isRerunnable() {
@@ -21,9 +22,9 @@ public class SetOldConceptIds_Empty extends MigrationScriptBase {
     return null;
   }
   public void doExecute(final SModule m) {
-    // body was removed as it's not needed. We use another ids already and never used those set by this migration 
+    // body was removed as it's not needed. We use another ids already and never used those set by this migration
   }
-  public MigrationScriptReference getDescriptor() {
+  public MigrationScriptReference getReference() {
     return new MigrationScriptReference(MetaAdapterFactory.getLanguage(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, "jetbrains.mps.lang.structure"), 0);
   }
 

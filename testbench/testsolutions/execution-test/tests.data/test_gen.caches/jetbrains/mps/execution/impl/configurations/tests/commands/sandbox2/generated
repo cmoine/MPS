@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-esfswskriwxt514h216ac8bif3v6obw" />
+<product version="3" modelHash="4w0nkrlz5dte48uw9gl4149xxallunc">
+  <files names="FailedTestCase_Test_Test.java:PropertyIsAvailaibleInMPSTestCase_Test.java:ReadingPropertyTestCase_Test_Test.java:SimpleTestCase_Test_Test.java:UsingLangTestCase_Test.java:WaitingTestCase_Test_Test.java" />
+</product>
 

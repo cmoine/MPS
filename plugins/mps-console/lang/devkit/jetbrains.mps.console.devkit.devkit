@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dev-kit name="jetbrains.mps.console.devkit" uuid="70d3d6da-af63-483d-a75f-9c8acf8de332">
+  <exported-language name="de1ad86d-6e50-4a02-b306-d4d17f64c375(jetbrains.mps.console.base)" />
+  <exported-language name="a5e4de53-46a3-44da-aab3-68fdf1c34ed0(jetbrains.mps.console.ideCommands)" />
+  <exported-language name="995a7394-7f76-4b8b-a929-c53448708106(jetbrains.mps.console.internalCommands)" />
+  <exported-language name="f26691d2-0def-4c06-aec6-2cb90c4af0a4(jetbrains.mps.console.scripts)" />
+  <exported-language name="69b8a993-9b87-4d96-bf0c-3559f4bb0c63(jetbrains.mps.lang.slanguage)" />
+  <extendedDevKits>
+    <extendedDevKit>fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)</extendedDevKit>
+  </extendedDevKits>
+</dev-kit>
+

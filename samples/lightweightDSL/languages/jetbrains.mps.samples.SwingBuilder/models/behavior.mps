@@ -2,7 +2,7 @@
 <model ref="r:7b3e122e-7e64-4c05-a2c6-a91fde0cc734(jetbrains.mps.samples.SwingBuilder.behavior)">
   <persistence version="9" />
   <languages>
-    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="0" />
+    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="2" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -55,10 +55,13 @@
       <concept id="1146644602865" name="jetbrains.mps.baseLanguage.structure.PublicVisibility" flags="nn" index="3Tm1VV" />
     </language>
     <language id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel">
+      <concept id="1177026924588" name="jetbrains.mps.lang.smodel.structure.RefConcept_Reference" flags="nn" index="chp4Y">
+        <reference id="1177026940964" name="conceptDeclaration" index="cht4Q" />
+      </concept>
       <concept id="1179409122411" name="jetbrains.mps.lang.smodel.structure.Node_ConceptMethodCall" flags="nn" index="2qgKlT" />
       <concept id="2396822768958367367" name="jetbrains.mps.lang.smodel.structure.AbstractTypeCastExpression" flags="nn" index="$5XWr">
-        <reference id="6733348108486823428" name="concept" index="1m5ApE" />
         <child id="6733348108486823193" name="leftExpression" index="1m5AlR" />
+        <child id="3906496115198199033" name="conceptArgument" index="3oSUPX" />
       </concept>
       <concept id="597763930871270009" name="jetbrains.mps.lang.smodel.structure.ChildNodeRefExpression" flags="nn" index="3fl2lp">
         <reference id="597763930871272016" name="targetNode" index="3fl3PK" />
@@ -305,7 +308,6 @@
             <node concept="2OqwBi" id="4PvwzwV9UTq" role="2Oq$k0">
               <node concept="1PxgMI" id="4PvwzwV9UI_" role="2Oq$k0">
                 <property role="1BlNFB" value="true" />
-                <ref role="1m5ApE" to="yo60:4PvwzwV9QLq" resolve="SourceDataType" />
                 <node concept="2OqwBi" id="4PvwzwV9U0r" role="1m5AlR">
                   <node concept="2OqwBi" id="4PvwzwV9SOa" role="2Oq$k0">
                     <node concept="3fl2lp" id="4PvwzwVa6jE" role="2Oq$k0">
@@ -321,9 +323,12 @@
                   </node>
                   <node concept="1uHKPH" id="4PvwzwV9Ud6" role="2OqNvi" />
                 </node>
+                <node concept="chp4Y" id="714IaVdH032" role="3oSUPX">
+                  <ref role="cht4Q" to="yo60:4PvwzwV9QLq" resolve="SourceDataType" />
+                </node>
               </node>
               <node concept="3TrEf2" id="4PvwzwV9VkG" role="2OqNvi">
-                <ref role="3Tt5mk" to="yo60:4PvwzwV9QLr" />
+                <ref role="3Tt5mk" to="yo60:4PvwzwV9QLr" resolve="type" />
               </node>
             </node>
             <node concept="1$rogu" id="4PvwzwV9VLx" role="2OqNvi" />
@@ -343,7 +348,6 @@
             <node concept="2OqwBi" id="4PvwzwVa6sO" role="2Oq$k0">
               <node concept="1PxgMI" id="4PvwzwVa6sP" role="2Oq$k0">
                 <property role="1BlNFB" value="true" />
-                <ref role="1m5ApE" to="yo60:4PvwzwV9Rg5" resolve="TargetDataType" />
                 <node concept="2OqwBi" id="4PvwzwVa6sQ" role="1m5AlR">
                   <node concept="2OqwBi" id="4PvwzwVa6sR" role="2Oq$k0">
                     <node concept="3fl2lp" id="4PvwzwVa6sS" role="2Oq$k0">
@@ -359,9 +363,12 @@
                   </node>
                   <node concept="1uHKPH" id="4PvwzwVa6sW" role="2OqNvi" />
                 </node>
+                <node concept="chp4Y" id="714IaVdH033" role="3oSUPX">
+                  <ref role="cht4Q" to="yo60:4PvwzwV9Rg5" resolve="TargetDataType" />
+                </node>
               </node>
               <node concept="3TrEf2" id="4PvwzwVakBe" role="2OqNvi">
-                <ref role="3Tt5mk" to="yo60:4PvwzwV9Rg6" />
+                <ref role="3Tt5mk" to="yo60:4PvwzwV9Rg6" resolve="type" />
               </node>
             </node>
             <node concept="1$rogu" id="4PvwzwVa6sY" role="2OqNvi" />

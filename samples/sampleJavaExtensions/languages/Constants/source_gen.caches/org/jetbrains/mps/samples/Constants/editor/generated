@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-26m2qtx5vw1rwlhss4w5wy4289qi40n" />
+<product version="3" modelHash="4qxkyeq5cxyqnwmzyhw66kxes1e6m9f">
+  <files names="ConstantReference_Editor.java:ConstantReference_EditorBuilder_a.java:ConstantReference_SubstituteMenu.java:Constant_Editor.java:Constant_EditorBuilder_a.java:Constants_Editor.java:Constants_EditorBuilder_a.java:EditorAspectDescriptorImpl.java" />
+</product>
 

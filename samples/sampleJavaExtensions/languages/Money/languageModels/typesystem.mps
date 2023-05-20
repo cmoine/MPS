@@ -2,9 +2,7 @@
 <model ref="r:0c486cb8-8265-4e9d-90e8-118f83fd1147(org.jetbrains.mps.samples.Money.typesystem)">
   <persistence version="9" />
   <languages>
-    <use id="7a5dda62-9140-4668-ab76-d5ed1746f2b2" name="jetbrains.mps.lang.typesystem" version="0" />
-    <use id="662a9f2b-5802-4d16-9558-72c65c7a681e" name="org.jetbrains.mps.samples.Money" version="0" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="00000000-0000-4000-0000-1de82b3a4936(jetbrains.mps.devkit.aspect.typesystem)" />
   </languages>
   <imports>
     <import index="v0h4" ref="r:cd29712f-cf1b-4f19-90a2-4ce86af0d5f6(org.jetbrains.mps.samples.Money.structure)" />
@@ -36,6 +34,12 @@
     <language id="3a13115c-633c-4c5c-bbcc-75c4219e9555" name="jetbrains.mps.lang.quotation">
       <concept id="1196350785113" name="jetbrains.mps.lang.quotation.structure.Quotation" flags="nn" index="2c44tf">
         <child id="1196350785114" name="quotedNode" index="2c44tc" />
+      </concept>
+      <concept id="5455284157993863837" name="jetbrains.mps.lang.quotation.structure.NodeBuilder" flags="nn" index="2pJPEk">
+        <child id="5455284157993863838" name="quotedNode" index="2pJPEn" />
+      </concept>
+      <concept id="5455284157993863840" name="jetbrains.mps.lang.quotation.structure.NodeBuilderNode" flags="nn" index="2pJPED">
+        <reference id="5455284157993910961" name="concept" index="2pJxaS" />
       </concept>
     </language>
     <language id="7a5dda62-9140-4668-ab76-d5ed1746f2b2" name="jetbrains.mps.lang.typesystem">
@@ -94,9 +98,6 @@
         <property id="1169194664001" name="name" index="TrG5h" />
       </concept>
     </language>
-    <language id="662a9f2b-5802-4d16-9558-72c65c7a681e" name="org.jetbrains.mps.samples.Money">
-      <concept id="5447719361346490730" name="org.jetbrains.mps.samples.Money.structure.MoneyType" flags="in" index="iynUf" />
-    </language>
     <language id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections">
       <concept id="1151689724996" name="jetbrains.mps.baseLanguage.collections.structure.SequenceType" flags="in" index="A3Dl8">
         <child id="1151689745422" name="elementType" index="A3Ik2" />
@@ -115,8 +116,10 @@
           </node>
         </node>
         <node concept="mw_s8" id="4IqbYlp4Quw" role="1ZfhKB">
-          <node concept="2c44tf" id="4IqbYlp4Qux" role="mwGJk">
-            <node concept="iynUf" id="4IqbYlp4Quz" role="2c44tc" />
+          <node concept="2pJPEk" id="41QnNuDA3xi" role="mwGJk">
+            <node concept="2pJPED" id="41QnNuDA3xh" role="2pJPEn">
+              <ref role="2pJxaS" to="v0h4:4IqbYlp4P5E" resolve="MoneyType" />
+            </node>
           </node>
         </node>
       </node>
@@ -129,8 +132,10 @@
   <node concept="3hdX5o" id="4IqbYlp547P">
     <property role="TrG5h" value="MoneyOperations" />
     <node concept="3ciAk0" id="4IqbYlp547U" role="3he0YX">
-      <node concept="2c44tf" id="4IqbYlp5486" role="3ciSnv">
-        <node concept="iynUf" id="4IqbYlp5488" role="2c44tc" />
+      <node concept="2pJPEk" id="41QnNuDA3p$" role="3ciSnv">
+        <node concept="2pJPED" id="41QnNuDA3pz" role="2pJPEn">
+          <ref role="2pJxaS" to="v0h4:4IqbYlp4P5E" resolve="MoneyType" />
+        </node>
       </node>
       <node concept="3gn64h" id="4IqbYlp5480" role="32tDTA">
         <ref role="3gnhBz" to="tpee:fzcpWvV" resolve="PlusExpression" />
@@ -141,19 +146,25 @@
       <node concept="3ciZUL" id="4IqbYlp547Y" role="32tDT$">
         <node concept="3clFbS" id="4IqbYlp547Z" role="2VODD2">
           <node concept="3clFbF" id="4IqbYlp548a" role="3cqZAp">
-            <node concept="2c44tf" id="4IqbYlp548b" role="3clFbG">
-              <node concept="iynUf" id="4IqbYlp548d" role="2c44tc" />
+            <node concept="2pJPEk" id="41QnNuDA3rV" role="3clFbG">
+              <node concept="2pJPED" id="41QnNuDA3rU" role="2pJPEn">
+                <ref role="2pJxaS" to="v0h4:4IqbYlp4P5E" resolve="MoneyType" />
+              </node>
             </node>
           </node>
         </node>
       </node>
-      <node concept="2c44tf" id="4IqbYlp5483" role="3ciSkW">
-        <node concept="iynUf" id="4IqbYlp5485" role="2c44tc" />
+      <node concept="2pJPEk" id="41QnNuDA3pg" role="3ciSkW">
+        <node concept="2pJPED" id="41QnNuDA3pf" role="2pJPEn">
+          <ref role="2pJxaS" to="v0h4:4IqbYlp4P5E" resolve="MoneyType" />
+        </node>
       </node>
     </node>
     <node concept="3ciAk0" id="2uZW74tB9Xj" role="3he0YX">
-      <node concept="2c44tf" id="2uZW74tBaxZ" role="3ciSkW">
-        <node concept="iynUf" id="2uZW74tBayq" role="2c44tc" />
+      <node concept="2pJPEk" id="41QnNuDA3sB" role="3ciSkW">
+        <node concept="2pJPED" id="41QnNuDA3sA" role="2pJPEn">
+          <ref role="2pJxaS" to="v0h4:4IqbYlp4P5E" resolve="MoneyType" />
+        </node>
       </node>
       <node concept="3gn64h" id="2uZW74tBawh" role="32tDTA">
         <ref role="3gnhBz" to="tpee:fJeOSZf" resolve="GreaterThanExpression" />
@@ -176,8 +187,10 @@
           </node>
         </node>
       </node>
-      <node concept="2c44tf" id="2uZW74tBaA8" role="3ciSnv">
-        <node concept="iynUf" id="2uZW74tBaA9" role="2c44tc" />
+      <node concept="2pJPEk" id="41QnNuDA3sV" role="3ciSnv">
+        <node concept="2pJPED" id="41QnNuDA3sU" role="2pJPEn">
+          <ref role="2pJxaS" to="v0h4:4IqbYlp4P5E" resolve="MoneyType" />
+        </node>
       </node>
     </node>
   </node>
@@ -254,8 +267,10 @@
     <node concept="3clFbS" id="1Bl50iLW0nG" role="18ibNy">
       <node concept="1Z5TYs" id="$lsh0EhvjK" role="3cqZAp">
         <node concept="mw_s8" id="$lsh0Ehvk_" role="1ZfhKB">
-          <node concept="2c44tf" id="$lsh0Ehvkx" role="mwGJk">
-            <node concept="iynUf" id="$lsh0Ehwph" role="2c44tc" />
+          <node concept="2pJPEk" id="41QnNuDA3k8" role="mwGJk">
+            <node concept="2pJPED" id="41QnNuDA3k7" role="2pJPEn">
+              <ref role="2pJxaS" to="v0h4:4IqbYlp4P5E" resolve="MoneyType" />
+            </node>
           </node>
         </node>
         <node concept="mw_s8" id="$lsh0EhvjN" role="1ZfhK$">
@@ -274,8 +289,10 @@
     <node concept="3clFbS" id="3u6SZi0ypNP" role="18ibNy">
       <node concept="1Z5TYs" id="3u6SZi0ypSE" role="3cqZAp">
         <node concept="mw_s8" id="3u6SZi0ypT1" role="1ZfhKB">
-          <node concept="2c44tf" id="3u6SZi0ypSX" role="mwGJk">
-            <node concept="iynUf" id="3u6SZi0ypTy" role="2c44tc" />
+          <node concept="2pJPEk" id="41QnNuD_Y6W" role="mwGJk">
+            <node concept="2pJPED" id="41QnNuD_Y6V" role="2pJPEn">
+              <ref role="2pJxaS" to="v0h4:4IqbYlp4P5E" resolve="MoneyType" />
+            </node>
           </node>
         </node>
         <node concept="mw_s8" id="3u6SZi0ypSH" role="1ZfhK$">

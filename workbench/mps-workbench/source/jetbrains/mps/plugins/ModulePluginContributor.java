@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,33 +15,39 @@
  */
 package jetbrains.mps.plugins;
 
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.module.ReloadableModule;
 import jetbrains.mps.plugins.applicationplugins.BaseApplicationPlugin;
 import jetbrains.mps.plugins.projectplugins.BaseProjectPlugin;
 import jetbrains.mps.project.AbstractModule;
+import jetbrains.mps.util.MacroHelper;
+import jetbrains.mps.util.MacrosFactory;
 import jetbrains.mps.util.ModuleNameUtil;
 import jetbrains.mps.vfs.IFile;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import jetbrains.mps.vfs.openapi.FileSystem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.mps.openapi.module.SModule;
+import org.jetbrains.mps.openapi.module.SModuleReference;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * @deprecated Likely, shall remove this one and rename ModulePluginContributor2
+ */
+@Deprecated(since = "2022.3", forRemoval = true)
 public class ModulePluginContributor extends PluginContributor {
-  private static final Logger LOG = LogManager.getLogger(ModulePluginContributor.class);
+  private static final Logger LOG = Logger.getLogger(ModulePluginContributor.class);
   private static final String PLUGIN_STRING = ".plugin.";
   private static final String PROJECT_PLUGIN_SUFFIX = "_ProjectPlugin";
   private static final String APP_PLUGIN_SUFFIX = "_ApplicationPlugin";
 
-  private static String getProjectPluginClassName(SModule module) {
+  /*package*/ static String getProjectPluginClassName(SModuleReference module) {
     return String.format("%s%s%s%s", module.getModuleName(), PLUGIN_STRING, ModuleNameUtil.getModuleShortName(module), PROJECT_PLUGIN_SUFFIX);
   }
 
-  private static String getApplicationPluginClassName(SModule module) {
+  /*package*/ static String getApplicationPluginClassName(SModuleReference module) {
     return String.format("%s%s%s%s", module.getModuleName(), PLUGIN_STRING, ModuleNameUtil.getModuleShortName(module), APP_PLUGIN_SUFFIX);
   }
 
@@ -60,31 +66,41 @@ public class ModulePluginContributor extends PluginContributor {
   @Override
   public BaseApplicationPlugin createApplicationPlugin() {
     String pluginClassName;
+    boolean nameByConvention = false;
     Properties cfg = getComponentStartupConfiguration();
     if (cfg == null || (pluginClassName = cfg.getProperty("init.application")) == null) {
       // fallback to legacy, name convention approach
-      pluginClassName = getApplicationPluginClassName(myModule);
+      pluginClassName = getApplicationPluginClassName(myModule.getModuleReference());
+      nameByConvention = true;
     }
-    return pluginClassName == null ? null : createPlugin(BaseApplicationPlugin.class, pluginClassName);
+    return pluginClassName == null ? null : createPlugin(BaseApplicationPlugin.class, pluginClassName, nameByConvention);
   }
 
   @Override
   public BaseProjectPlugin createProjectPlugin() {
     String pluginClassName;
+    boolean nameByConvention = false;
     Properties cfg = getComponentStartupConfiguration();
     if (cfg == null || (pluginClassName = cfg.getProperty("init.project")) == null) {
       // fallback to legacy, name convention approach
-      pluginClassName = getProjectPluginClassName(myModule);
+      pluginClassName = getProjectPluginClassName(myModule.getModuleReference());
+      nameByConvention = true;
     }
-    return pluginClassName == null ? null : createPlugin(BaseProjectPlugin.class, pluginClassName);
+    return pluginClassName == null ? null : createPlugin(BaseProjectPlugin.class, pluginClassName, nameByConvention);
   }
 
   @Nullable
-  private <T> T createPlugin(Class<T> expectedClass, String className) {
+  private <T> T createPlugin(Class<T> expectedClass, String className, boolean justGuess) {
     try {
       Class<?> pluginClass = myModule.getOwnClass(className);
       return  pluginClass.asSubclass(expectedClass).newInstance();
     } catch (ClassNotFoundException e) {
+      if (!justGuess) {
+        // we try almost any Solution, and all Language modules (see PluginLoaderRegistry.isPluginModule),
+        // and we might end up with a lot of CNFE for modules that don't even consider being pluginSolution.
+        // However, when class name is explicitly specified, someone may be wondering why nothing is loaded, report.
+        LOG.warning(String.format("Missing %s contributed by %s: %s", className, myModule.getModuleName(), e.getMessage()));
+      }
       return null;
     } catch (Throwable t) {
       LOG.error("Failed to instantiate plugin component activator", t);
@@ -94,17 +110,22 @@ public class ModulePluginContributor extends PluginContributor {
 
   @Nullable
   private Properties getComponentStartupConfiguration() {
-    // although getResource does look into dependencies and chances are we read configuration
-    // of another module, the fact we use loadOwnClass later prevents loading it second time.
-    // However, shall update fallback solution (try to load from config name, then try to load from fallback name)
-    // unless switch to files here
-    IFile dir = ((AbstractModule) myModule).getModuleSourceDir();
-    if (dir == null) {
+    MacroHelper macroHelper = MacrosFactory.forModule(myModule);
+    // Note, META-INF nor ${module} location would work for groups of modules distributed as a single plugin, shall come up with better approach
+    final String relPath = "${module}/startup.properties";
+    String cfgFullPath = macroHelper.expandPath(relPath);
+    if (relPath.equals(cfgFullPath)) {
+      // not expanded, nothing to try
       return null;
     }
-    IFile cfg = dir.getDescendant("startup.properties");
-    // Note, META-INF location won't work for groups of modules distributed as a single plugin, shall come up with better approach
-    if (!cfg.exists()) {
+    // note, for deployed modules, with META-INF/module.xml as anchor/descriptor file, there's a hack in ModuleMacros that uses META-INF/.. as ${module} value
+    //
+    // AP, I beg your pardon, no idea where to take FS from if a module is not an instance of AbstractModule.
+    FileSystem fs = myModule instanceof AbstractModule ? ((AbstractModule) myModule).getFileSystem() : jetbrains.mps.vfs.FileSystem.getInstance();
+    // I'd be pretty much satisfied with new java.io.File(cfgFullPath), but it is not capable of paths inside a jar.
+    IFile cfg = fs.getFile(cfgFullPath);
+    // I'd love to use IFile here, but MacroHelper gives me a string, not IFile, and, alas, there's no access to proper filesystem here
+    if (!cfg.exists() || cfg.isDirectory()) {
       return null;
     }
     InputStream is = null;
@@ -114,7 +135,8 @@ public class ModulePluginContributor extends PluginContributor {
       rv.load(is);
       return rv;
     } catch (IOException ex) {
-      LOG.warn("Failed to read startup.properties for module " + myModule.getModuleName(), ex);
+      String m = "Failed to read startup.properties for module %s from location %s";
+      LOG.warning(String.format(m, myModule.getModuleName(), cfgFullPath), ex);
     } finally {
       if (is != null) {
         try {

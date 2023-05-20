@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,16 +15,21 @@
  */
 package jetbrains.mps.nodeEditor.cells;
 
-
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.editor.colors.EditorColorsManager;
+import com.intellij.ui.ColorUtil;
+import com.intellij.ui.DarculaColors;
+import com.intellij.ui.JBColor;
 import jetbrains.mps.editor.runtime.style.Measure;
 import jetbrains.mps.editor.runtime.style.Padding;
 import jetbrains.mps.editor.runtime.style.StyleAttributes;
 import jetbrains.mps.editor.runtime.style.StyleImpl;
+import jetbrains.mps.nodeEditor.EditorComponentSettingsImpl;
 import jetbrains.mps.nodeEditor.EditorSettings;
+import jetbrains.mps.openapi.editor.EditorComponentSettings;
+import jetbrains.mps.openapi.editor.cells.EditorFontMetrics;
 import jetbrains.mps.openapi.editor.style.Style;
 import jetbrains.mps.openapi.editor.style.StyleAttribute;
-import jetbrains.mps.openapi.editor.style.StyleChangeEvent;
-import jetbrains.mps.openapi.editor.style.StyleListener;
 import jetbrains.mps.openapi.editor.style.StyleRegistry;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,19 +38,24 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.font.TextAttribute;
+import java.text.AttributedCharacterIterator.Attribute;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 public class TextLine {
   // COLORS: Remove hardcoded color
-  private static final Color ERROR_COLOR =
-      StyleRegistry.getInstance() != null && StyleRegistry.getInstance().isDarkTheme() ? StyleRegistry.getInstance().getEditorBackground() :
-          new Color(255, 220, 220);
+  private static final Color SELECTED_OR_BACKGROUND_ERROR_COLOR =
+      new JBColor(new Color(255, 220, 220, 128), ColorUtil.mix(StyleRegistry.getInstance().getEditorBackground(), DarculaColors.RED, 0.1));
+  private static final Color ERROR_FOREGROUND_COLOR = new JBColor(new Color(168, 30, 30, 255), DarculaColors.RED);
 
   private String myText;
   private int myDescent = 0;
 
   private Font myFont = EditorSettings.getInstance().getDefaultEditorFont();
-  private FontMetrics myFontMetrics;
+  private final EditorComponentSettings myEditorComponentSettings;
+  private EditorFontMetrics myFontMetrics;
 
   private int myCaretPosition = 0;
   private int myCaretX = -1;
@@ -62,12 +72,11 @@ public class TextLine {
   private boolean myCaretEnabled = true;
   private int myMinimalLength = 0;
 
-  private double myLineSpacing = EditorSettings.getInstance().getLineSpacing();
+  private final double myLineSpacing = EditorSettings.getInstance().getLineSpacing();
   private Color mySelectedTextColor = EditorSettings.getInstance().getSelectionForegroundColor();
-  private Color myTextSelectedTextColor = EditorSettings.getInstance().getSelectionForegroundColor();
-  private Color myTextSelectedBackgroundColor = EditorSettings.getInstance().getSelectionBackgroundColor();
+  private final Color myTextSelectedTextColor = EditorSettings.getInstance().getSelectionForegroundColor();
+  private final Color myTextSelectedBackgroundColor = EditorSettings.getInstance().getSelectionBackgroundColor();
 
-  private Color myErrorColor = Color.red;
 
   private boolean myShowsErrorColor = false;
 
@@ -96,15 +105,25 @@ public class TextLine {
   private int myFontCorrectionRightGap;
   private int myFontCorrectionTextShift;
 
-  public TextLine(String text) {
-    this(text, new StyleImpl(), false);
+  public TextLine(String text, EditorComponentSettings editorComponentSettings) {
+    this(text, new StyleImpl(), false, editorComponentSettings);
   }
 
+  /**
+   * Used by mps extensions.
+   * @deprecated use {@link #TextLine(String, Style, boolean, EditorComponentSettings)} instead
+   */
+  @Deprecated
   public TextLine(String text, @NotNull Style style, boolean isNull) {
+    this(text, style, isNull, EditorComponentSettingsImpl.DEFAULT_SETTINGS);
+  }
+
+  public TextLine(String text, @NotNull Style style, boolean isNull, EditorComponentSettings editorComponentSettings) {
     setText(text);
     myNull = isNull;
     myStyle = style;
     showTextColor();
+    myEditorComponentSettings = editorComponentSettings;
   }
 
   public String getText() {
@@ -167,15 +186,38 @@ public class TextLine {
   }
 
   private void updateStyle(Set<StyleAttribute> attributes) {
-    if (attributes == null || attributes.contains(StyleAttributes.FONT_SIZE) || attributes.contains(StyleAttributes.FONT_STYLE)) {
+    myStrikeOut = myStyle.get(StyleAttributes.STRIKE_OUT);
+    myUnderlined = myStyle.get(StyleAttributes.UNDERLINED);
+
+    if (attributes == null
+        || attributes.contains(StyleAttributes.FONT_SIZE)
+        || attributes.contains(StyleAttributes.FONT_STYLE)
+        || attributes.contains(StyleAttributes.FONT_FAMILY)) {
       //this is the most expensive calculation
       EditorSettings settings = EditorSettings.getInstance();
       Integer styleFontSize = myStyle.get(StyleAttributes.FONT_SIZE);
-      String family = settings.getFontFamily();
+      String styleFontFamily = myStyle.get(StyleAttributes.FONT_FAMILY);
+      if (styleFontFamily != null && !FontRegistry.getInstance().getAvailableFontFamilyNames().contains(styleFontFamily)) {
+        FontRegistry.getInstance().reportUnknownFontFamily(styleFontFamily);
+        styleFontFamily = null;
+      }
+
       Integer style = myStyle.get(StyleAttributes.FONT_STYLE);
+      String family = styleFontFamily != null ? styleFontFamily : settings.getFontFamily();
       int fontSize = styleFontSize != null ? styleFontSize : settings.getFontSize();
-      myFont = FontRegistry.getInstance().getFont(family, style, fontSize);
-      myFontMetrics = null;
+      fontSize = myEditorComponentSettings.getFontSizeScaled(fontSize);
+
+      final Font font = FontRegistry.getInstance().getFont(family, style, fontSize);
+
+      Map<Attribute, Object> fontAttributes = new HashMap<>();
+      if (ApplicationManager.getApplication() != null && EditorColorsManager.getInstance().getGlobalScheme().getFontPreferences().useLigatures()) {
+        fontAttributes.put(TextAttribute.LIGATURES, TextAttribute.LIGATURES_ON);
+      }
+      if (myStrikeOut) {
+        fontAttributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON);
+      }
+      myFont = fontAttributes.isEmpty() ? font : font.deriveFont(fontAttributes);
+      myFontMetrics = myEditorComponentSettings.getFontMetrics(family, style, fontSize);
       myFontCorrectionRightGap = FontRegistry.getInstance().isFakeItalic(family, style) ? 1 : 0;
       myFontCorrectionTextShift = (style & Font.ITALIC) > 0 ? -1 : 0;
     }
@@ -186,8 +228,6 @@ public class TextLine {
     myPaddingBottom = getVerticalInternalInset(myStyle.get(StyleAttributes.PADDING_BOTTOM));
 
     myControlOvered = myStyle.get(StyleAttributes.CONTROL_OVERED_REFERENCE);
-    myStrikeOut = myStyle.get(StyleAttributes.STRIKE_OUT);
-    myUnderlined = myStyle.get(StyleAttributes.UNDERLINED);
 
     myTextColor = myStyle.get(StyleAttributes.TEXT_COLOR);
     myNullTextColor = myStyle.get(StyleAttributes.NULL_TEXT_COLOR);
@@ -211,12 +251,11 @@ public class TextLine {
   }
 
   public void relayout() {
-    FontMetrics metrics = getFontMetrics();
+    EditorFontMetrics metrics = getEditorFontMetrics();
     myHeight = (int) (metrics.getHeight() * myLineSpacing + getPaddingTop() + getPaddingBottom());
     myTextHeight = (int) (metrics.getHeight() * myLineSpacing);
     int minWidth = calculateMinWidth();
-    int width =
-        metrics.charsWidth(myText.toCharArray(), 0, myText.length()) + myFontCorrectionRightGap + getPaddingLeft() + getPaddingRight();
+    int width = metrics.getWidth(myText) + myFontCorrectionRightGap + getPaddingLeft() + getPaddingRight();
     myWidth = Math.max(minWidth, width);
     myDescent = metrics.getDescent();
   }
@@ -229,7 +268,7 @@ public class TextLine {
 
   private int calculateMinWidth() {
     if (myMinWidth == -1) {
-      myMinWidth = Math.max(myMinimalLength * getFontMetrics().charWidth('w'), 2);
+      myMinWidth = Math.max(myMinimalLength * charWidth(), myStyle.get(StyleAttributes.SELECTABLE) ? 2 : 0);
     }
     return myMinWidth;
   }
@@ -242,10 +281,10 @@ public class TextLine {
       type = Measure.SPACES;
     }
 
-    if (type.equals(Measure.SPACES)) {
+    if (type == Measure.SPACES) {
       return (int) (charWidth() * value);
     }
-    if (type.equals(Measure.PIXELS)) {
+    if (type == Measure.PIXELS) {
       return (int) value;
     }
     return 0;
@@ -259,10 +298,10 @@ public class TextLine {
       type = Measure.SPACES;
     }
 
-    if (type.equals(Measure.SPACES)) {
+    if (type == Measure.SPACES) {
       return (int) (charHeight() * value);
     }
-    if (type.equals(Measure.PIXELS)) {
+    if (type == Measure.PIXELS) {
       return (int) value;
     }
     return 0;
@@ -289,12 +328,11 @@ public class TextLine {
   }
 
   public int charWidth() {
-    FontMetrics metrics = getFontMetrics();
-    return metrics.charWidth('w');
+    return getEditorFontMetrics().getWidth("w");
   }
 
   public int charHeight() {
-    return getFontMetrics().getHeight();
+    return getEditorFontMetrics().getHeight();
   }
 
   public boolean isCaretEnabled() {
@@ -323,7 +361,7 @@ public class TextLine {
 
   public Color getBackgroundColor() {
     if (myShowsErrorColor) {
-      return ERROR_COLOR;
+      return SELECTED_OR_BACKGROUND_ERROR_COLOR;
     }
     return null;
   }
@@ -343,7 +381,7 @@ public class TextLine {
 
   public Color getEffectiveTextColor() {
     if (myShowsErrorColor) {
-      return myErrorColor;
+      return ERROR_FOREGROUND_COLOR;
     } else {
       return getTextColor();
     }
@@ -351,7 +389,7 @@ public class TextLine {
 
   public Color getEffectiveSelectedTextColor() {
     if (myShowsErrorColor) {
-      return ERROR_COLOR;
+      return SELECTED_OR_BACKGROUND_ERROR_COLOR;
     } else {
       return mySelectedTextColor != null ? mySelectedTextColor : getTextColor();
     }
@@ -360,7 +398,7 @@ public class TextLine {
   public Color getTextBackgroundColor() {
     init();
     if (myShowsErrorColor) {
-      return ERROR_COLOR;
+      return SELECTED_OR_BACKGROUND_ERROR_COLOR;
     } else {
       if (!myNull) {
         return myTextBackground;
@@ -431,17 +469,17 @@ public class TextLine {
     if (backgroundColor != null && !g.getColor().equals(backgroundColor) && !mySelected) {
       g.setColor(backgroundColor);
       g.fillRect(shiftX + getPaddingLeft(),
-          shiftY + getPaddingTop(),
-          myWidth,
-          myTextHeight);
+                 shiftY + getPaddingTop(),
+                 getEffectiveWidth(),
+                 myTextHeight);
     }
 
     if (textBackgroundColor != null) {
       g.setColor(textBackgroundColor);
       g.fillRect(shiftX + getPaddingLeft(),
-          shiftY + getPaddingTop(),
-          myWidth,
-          myTextHeight);
+                 shiftY + getPaddingTop(),
+                 getEffectiveWidth(),
+                 myTextHeight);
     }
 
     g.setFont(getFont());
@@ -452,7 +490,7 @@ public class TextLine {
     int selectionStartX = shiftX + getPaddingLeft() + getSelectionStartX();
     int selectionEndX = shiftX + getPaddingLeft() + getSelectionEndX();
     int endLineX = shiftX + getPaddingLeft() + getTextEndX();
-    int baselineY = shiftY + myHeight - myDescent - getPaddingBottom() - getPaddingTop();
+    int baselineY = shiftY + myHeight - myDescent - getPaddingBottom();
     int centerLineY = shiftY + (myHeight - getPaddingBottom() + getPaddingTop()) / 2;
 
     if (getStartTextSelectionPosition() > 0) {
@@ -460,18 +498,12 @@ public class TextLine {
       if (isUnderlined()) {
         g.drawLine(shiftX + getPaddingLeft(), baselineY + 1, selectionStartX, baselineY + 1);
       }
-      if (isStrikeOut()) {
-        drawStrikeOutLine(g, shiftX + getPaddingLeft(), selectionStartX, centerLineY);
-      }
     }
 
     if (getEndTextSelectionPosition() <= myText.length()) {
       g.drawString(myText.substring(getEndTextSelectionPosition()), selectionEndX + myFontCorrectionTextShift, baselineY);
       if (isUnderlined()) {
         g.drawLine(selectionEndX, baselineY + 1, endLineX, baselineY + 1);
-      }
-      if (isStrikeOut()) {
-        drawStrikeOutLine(g, selectionEndX, endLineX, centerLineY);
       }
     }
 
@@ -482,16 +514,13 @@ public class TextLine {
       // Filling smaller rectangle to not cover frames created by other messages
       if (selectionEndX - selectionStartX - 2 + myFontCorrectionRightGap > 0) {
         g.fillRect(selectionStartX + 1, shiftY + getPaddingTop() + 1,
-            selectionEndX - selectionStartX - 2 + myFontCorrectionRightGap, myTextHeight - 2);
+                   selectionEndX - selectionStartX - 2 + myFontCorrectionRightGap, myTextHeight - 2);
       }
 
       g.setColor(myTextSelectedTextColor != null ? myTextSelectedTextColor : getTextColor());
       g.drawString(selectedText, selectionStartX + myFontCorrectionTextShift, baselineY);
       if (isUnderlined()) {
         g.drawLine(selectionStartX, baselineY + 1, selectionEndX, baselineY + 1);
-      }
-      if (isStrikeOut()) {
-        drawStrikeOutLine(g, selectionStartX, selectionEndX, centerLineY);
       }
 
       g.setColor(textColor);
@@ -500,10 +529,6 @@ public class TextLine {
     if (myShowCaret) {
       drawCaret(g, shiftX, shiftY);
     }
-  }
-
-  private void drawStrikeOutLine(Graphics g, int beginX, int endX, int constY) {
-    g.drawLine(beginX, constY + 1, endX, constY + 1);
   }
 
   private void drawCaret(Graphics g, int shiftX, int shiftY) {
@@ -515,12 +540,12 @@ public class TextLine {
       x--;
     }
     g.setColor(EditorSettings.getInstance().getCaretColor());
-    g.fillRect(x, shiftY, 2, myTextHeight);
+    g.fillRect(x, shiftY + getPaddingTop(), 2, myTextHeight);
   }
 
   public void repaintCaret(Component component, int shiftX, int shiftY) {
     int x = getCaretX(shiftX);
-    component.repaint(x - 1, shiftY - 1, x + 2, myTextHeight + 2);
+    component.repaint(x - 1, shiftY + getPaddingTop() - 1, x + 2, myTextHeight + 2);
   }
 
   public int getCaretX(int shiftX) {
@@ -552,15 +577,20 @@ public class TextLine {
   }
 
   private int getTextWidth(int caretPosition) {
-    FontMetrics metrics = getFontMetrics();
-    return metrics.charsWidth(myText.toCharArray(), 0, caretPosition);
+    return getEditorFontMetrics().getWidth(myText, 0, caretPosition);
   }
 
-  public FontMetrics getFontMetrics() {
-    if (myFontMetrics == null) {
-      myFontMetrics = FontRegistry.getInstance().getFontMetrics(getFont());
-    }
+  public EditorFontMetrics getEditorFontMetrics() {
+    init();
     return myFontMetrics;
+  }
+
+  /**
+   * @deprecated use {@link #getEditorFontMetrics()} instead
+   */
+  @Deprecated
+  public FontMetrics getFontMetrics() {
+    return ((EditorFontMetricsImpl) getEditorFontMetrics()).getFontMetrics();
   }
 
   public String getTextuallySelectedText() {
@@ -612,12 +642,11 @@ public class TextLine {
 
   public int getCaretPositionByXCoord(int _x) {
     int x = _x - getPaddingLeft();
-    FontMetrics metrics = getFontMetrics();
-    char[] chars = getText().toCharArray();
+    EditorFontMetrics metrics = getEditorFontMetrics();
     int caretPosition = myText.length();
     int len = 0;
     for (int i = 0; i < myText.length(); i++) {
-      int newLen = metrics.charsWidth(chars, 0, i + 1);
+      int newLen = metrics.getWidth(myText, 0, i + 1);
       if (x <= (len + newLen + 1) / 2) {
         caretPosition = i;
         break;

@@ -4,36 +4,42 @@ package org.jetbrains.mps.samples.Constants.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_Constant = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConstantReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConstantReferenceKeeper = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Constants = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DistantConstantReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GeneratedClassKeeper = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_Constant;
+  private ConceptPresentation props_ConstantReference;
+  private ConceptPresentation props_Constants;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.Constant:
+        if (props_Constant == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Constant = cpb.create();
+        }
         return props_Constant;
-      case 1:
+      case LanguageConceptSwitch.ConstantReference:
+        if (props_ConstantReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xd40d465dded40d0L, 0x8d4c2c6d177f60d7L, 0x37600150f5294665L, 0x37600150f5294666L, "original", "", "");
+          props_ConstantReference = cpb.create();
+        }
         return props_ConstantReference;
-      case 2:
-        return props_ConstantReferenceKeeper;
-      case 3:
+      case LanguageConceptSwitch.Constants:
+        if (props_Constants == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Constants = cpb.create();
+        }
         return props_Constants;
-      case 4:
-        return props_DistantConstantReference;
-      case 5:
-        return props_GeneratedClassKeeper;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

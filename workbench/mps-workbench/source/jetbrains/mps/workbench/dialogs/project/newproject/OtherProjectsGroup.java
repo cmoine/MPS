@@ -17,7 +17,7 @@ public class OtherProjectsGroup implements ProjectTemplatesGroup {
   @NotNull
   @Override
   public Collection<MPSProjectTemplate> getTemplates() {
-    List<MPSProjectTemplate> mpsProjectTemplates = new LinkedList<MPSProjectTemplate>();
+    List<MPSProjectTemplate> mpsProjectTemplates = new LinkedList<>();
     Collections.addAll(mpsProjectTemplates, OtherProjectTemplate.EP_NAME.getExtensions());
     return mpsProjectTemplates;
   }

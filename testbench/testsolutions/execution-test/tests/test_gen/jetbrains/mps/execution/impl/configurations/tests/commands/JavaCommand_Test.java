@@ -4,93 +4,79 @@ package jetbrains.mps.execution.impl.configurations.tests.commands;
 
 import jetbrains.mps.MPSLaunch;
 import jetbrains.mps.lang.test.runtime.BaseTransformationTest;
-import org.junit.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCacheExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCache;
+import org.junit.jupiter.api.Test;
 import jetbrains.mps.lang.test.runtime.BaseTestBody;
+import jetbrains.mps.lang.test.runtime.TransformationTest;
 import jetbrains.mps.baseLanguage.closures.runtime.Wrappers;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 import org.jetbrains.mps.openapi.model.SModel;
-import jetbrains.mps.smodel.ModuleRepositoryFacade;
+import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SModelOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.internal.collections.runtime.IWhereFilter;
+import java.util.Objects;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.execution.impl.configurations.tests.commands.sandbox.Main;
 import jetbrains.mps.smodel.SNodePointer;
-import jetbrains.mps.baseLanguage.execution.api.Java_Command;
 import com.intellij.execution.process.ProcessHandler;
-import com.intellij.execution.process.ProcessEvent;
-import jetbrains.mps.execution.api.commands.OutputRedirector;
-import com.intellij.execution.process.ProcessAdapter;
-import com.intellij.openapi.util.Key;
-import com.intellij.execution.process.ProcessOutputTypes;
-import jetbrains.mps.execution.api.commands.ProcessHandlerBuilder;
-import junit.framework.Assert;
+import jetbrains.mps.baseLanguage.execution.api.Java_Command;
+import jetbrains.mps.execution.impl.configurations.util.ProcessRunnerForConfigurationTests;
+import java.util.Collections;
+import java.util.regex.Pattern;
+import org.jetbrains.mps.openapi.language.SInterfaceConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 @MPSLaunch
 public class JavaCommand_Test extends BaseTransformationTest {
-  @Test
-  public void test_startJavaByNode() throws Throwable {
-    initTest("${mps_home}", "r:e2bad6d6-3029-4bc3-b44d-49863f32d863(jetbrains.mps.execution.impl.configurations.tests.commands@tests)", false);
-    runTest("jetbrains.mps.execution.impl.configurations.tests.commands.JavaCommand_Test$TestBody", "test_startJavaByNode", true);
+  @RegisterExtension
+  private static final TestParametersCacheExtension ourParametersCacheExtension = new TestParametersCacheExtension(new TestParametersCache(JavaCommand_Test.class, "${mps_home}", "r:e2bad6d6-3029-4bc3-b44d-49863f32d863(jetbrains.mps.execution.impl.configurations.tests.commands@tests)", false));
+
+  public JavaCommand_Test() {
+    super(ourParametersCacheExtension.getParametersCache());
   }
 
-  @MPSLaunch
-  public static class TestBody extends BaseTestBody {
+  @Test
+  public void test_startJavaByNode() throws Throwable {
+    new TestBody(this).test_startJavaByNode();
+  }
+
+  /*package*/ static class TestBody extends BaseTestBody {
+
+    /*package*/ TestBody(TransformationTest owner) {
+      super(owner);
+    }
+
     public void test_startJavaByNode() throws Exception {
-      final Wrappers._T<SNodeReference> pointer = new Wrappers._T<SNodeReference>();
-      myProject.getModelAccess().runReadAction(new Runnable() {
-        public void run() {
-          SModel model = new ModuleRepositoryFacade(myProject.getRepository()).getModelByName("jetbrains.mps.execution.impl.configurations.tests.commands.sandbox@tests");
-          SNode mainNode = ListSequence.fromList(SModelOperations.roots(model, MetaAdapterFactory.getInterfaceConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, "jetbrains.mps.lang.core.structure.INamedConcept"))).findFirst(new IWhereFilter<SNode>() {
+      runWithinCommand(() -> {
+        final Wrappers._T<SNodeReference> pointer = new Wrappers._T<SNodeReference>();
+        myProject.getModelAccess().runReadAction(() -> {
+          SModel model = PersistenceFacade.getInstance().createModelReference("r:c2c670fc-188b-4168-9559-68c718816e1a(jetbrains.mps.execution.impl.configurations.tests.commands.sandbox@tests)").resolve(myProject.getRepository());
+          SNode mainNode = ListSequence.fromList(SModelOperations.roots(model, CONCEPTS.INamedConcept$Kd)).findFirst(new IWhereFilter<SNode>() {
             public boolean accept(SNode it) {
-              return eq_849b2c_a0a0a0a0a0a1a0a0a0a1a0c(SPropertyOperations.getString(it, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name")), Main.class.getSimpleName());
+              return Objects.equals(SPropertyOperations.getString(it, PROPS.name$MnvL), Main.class.getSimpleName());
             }
           });
           pointer.value = new SNodePointer(mainNode);
-        }
+        });
+
+        ProcessHandler process = new Java_Command().createProcess(pointer.value, myProject.getRepository());
+        ProcessRunnerForConfigurationTests processRunner = new ProcessRunnerForConfigurationTests.Builder(process).addExpectedPaterns(Collections.singletonList(Pattern.compile(Main.MESSAGE + "\n*"))).addAllowedErrorPaterns(Collections.singletonList(Pattern.compile("Picked up JAVA_TOOL_OPTIONS.*\n*"))).build();
+        processRunner.startAndCheckProcess();
       });
-      this.checkProcess(new Java_Command().createProcess(pointer.value), Main.MESSAGE + "\n");
     }
 
+  }
 
-    public void checkProcess(ProcessHandler process, final String expectedSysErr) {
-      final ProcessEvent[] failed = new ProcessEvent[1];
-      final boolean[] printed = new boolean[1];
-      // todo show progress window 
-      OutputRedirector.redirect(process, new ProcessAdapter() {
-        @Override
-        public void onTextAvailable(ProcessEvent event, Key key) {
-          if (ProcessOutputTypes.STDERR.equals(key)) {
-            if (neq_849b2c_a0a0a0a0a1a3a3c(event.getText(), expectedSysErr)) {
-              failed[0] = event;
-              System.err.print(event.getText());
-            } else {
-              printed[0] = true;
-            }
-          } else if (!(ProcessOutputTypes.SYSTEM.equals(key))) {
-            failed[0] = event;
-            System.err.println("Unknown event " + event.getText());
-          }
-        }
-      });
-      int exitCode = ProcessHandlerBuilder.startAndWait(process);
-      if (failed[0] != null) {
-        Assert.fail(failed[0].getText());
-      }
-      if (!(printed[0])) {
-        Assert.fail("Did not print required message!");
-      }
-      if (exitCode != 0) {
-        Assert.fail("Exit with code " + exitCode);
-      }
-    }
-    private static boolean eq_849b2c_a0a0a0a0a0a1a0a0a0a1a0c(Object a, Object b) {
-      return (a != null ? a.equals(b) : a == b);
-    }
-    private static boolean neq_849b2c_a0a0a0a0a1a3a3c(Object a, Object b) {
-      return !(((a != null ? a.equals(b) : a == b)));
-    }
+  private static final class CONCEPTS {
+    /*package*/ static final SInterfaceConcept INamedConcept$Kd = MetaAdapterFactory.getInterfaceConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, "jetbrains.mps.lang.core.structure.INamedConcept");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }

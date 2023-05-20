@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,25 +18,24 @@ package jetbrains.mps.nodeEditor;
 import com.intellij.openapi.wm.IdeFocusManager;
 import jetbrains.mps.ide.ThreadUtils;
 import jetbrains.mps.ide.project.ProjectHelper;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.nodeEditor.assist.DisabledContextAssistantManager;
-import jetbrains.mps.nodeEditor.cells.EditorCellFactoryImpl;
 import jetbrains.mps.nodeEditor.cells.EditorCell_Label;
 import jetbrains.mps.nodeEditor.configuration.EditorConfiguration;
 import jetbrains.mps.nodeEditor.configuration.EditorConfigurationBuilder;
+import jetbrains.mps.nodeEditor.deletionApprover.DeletionApproverImpl;
 import jetbrains.mps.nodeEditor.inspector.InspectorEditorComponent;
+import jetbrains.mps.openapi.editor.DeletionApprover;
 import jetbrains.mps.openapi.editor.EditorComponentState;
 import jetbrains.mps.openapi.editor.EditorInspector;
 import jetbrains.mps.openapi.editor.EditorPanelManager;
 import jetbrains.mps.openapi.editor.assist.ContextAssistantManager;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
-import jetbrains.mps.openapi.editor.cells.EditorCellFactory;
 import jetbrains.mps.openapi.editor.selection.SelectionManager;
 import jetbrains.mps.project.GlobalOperationContext;
-import jetbrains.mps.project.ModuleContext;
 import jetbrains.mps.project.Project;
 import jetbrains.mps.project.ProjectOperationContext;
 import jetbrains.mps.smodel.IOperationContext;
-import jetbrains.mps.smodel.ModelAccess;
 import jetbrains.mps.util.Computable;
 import jetbrains.mps.util.performance.IPerformanceTracer;
 import jetbrains.mps.util.performance.PerformanceTracer;
@@ -45,10 +44,12 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.EditableSModel;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
-import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SRepository;
 
+import javax.swing.Icon;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Author: Sergey Dmitriev
@@ -64,17 +65,19 @@ public class EditorContext implements jetbrains.mps.openapi.editor.EditorContext
   private EditorCell myContextCell;
   private IPerformanceTracer myPerformanceTracer = null;
 
-  private EditorCellFactory myCellFactory;
+  private Map<String, Icon> myIconCache = new HashMap<>();
 
   @NotNull
   private final ContextAssistantManager myContextAssistantManager;
+
+  private DeletionApproverImpl myDeletionApprover;
 
   public EditorContext(@NotNull EditorComponent editorComponent, @Nullable SModel model, @NotNull SRepository repository) {
     this(editorComponent, model, repository, EditorConfigurationBuilder.buildDefault(), new DisabledContextAssistantManager());
   }
 
   public EditorContext(@NotNull EditorComponent editorComponent, @Nullable SModel model, @NotNull SRepository repository, EditorConfiguration configuration,
-      @NotNull ContextAssistantManager contextAssistantManager) {
+                       @NotNull ContextAssistantManager contextAssistantManager) {
     myNodeEditorComponent = editorComponent;
     myModel = model;
     myRepository = repository;
@@ -152,20 +155,8 @@ public class EditorContext implements jetbrains.mps.openapi.editor.EditorContext
       };
     }
 
-    SModule module = myModel == null ? null : myModel.getModule();
-    if (module == null) {
-      return new ProjectOperationContext(project) {
-        @Override
-        public <T> T getComponent(@NotNull Class<T> clazz) {
-          if (EditorManager.class == clazz) {
-            return (T) getEditorManager();
-          }
-          return super.getComponent(clazz);
-        }
-      };
-    }
-
-    return new ModuleContext(module, project) {
+    // still a lot of uses of editorContext.getOperationContext().getProject(), 10 in MPS code at the moment!!!
+    return new ProjectOperationContext(project) {
       @Override
       public <T> T getComponent(@NotNull Class<T> clazz) {
         if (EditorManager.class == clazz) {
@@ -182,43 +173,17 @@ public class EditorContext implements jetbrains.mps.openapi.editor.EditorContext
     myNodeEditorComponent.getUpdater().flushModelEvents();
   }
 
-  /**
-   * @deprecated Since MPS 3.4 use getState()
-   */
-  @Deprecated
-  @Override
-  public Object createMemento() {
-    return getEditorComponentState();
-  }
-
   @Override
   public EditorComponentState getEditorComponentState() {
-    return new Memento(this, false);
-  }
-
-  /**
-   * @deprecated Since MPS 3.4 use getState()
-   */
-  @Deprecated
-  @Override
-  public boolean setMemento(Object o) {
-    if (o instanceof EditorComponentState) {
-      restoreEditorComponentState((EditorComponentState) o);
-      return true;
-    }
-    return false;
+    Logger.getLogger(getClass()).warnDeprecatedUse("This functionality has been replaced with respective methods in EditorComponent");
+    return myNodeEditorComponent.captureState();
   }
 
   @Override
   public void restoreEditorComponentState(EditorComponentState state) {
-    if (state instanceof Memento) {
-      Memento memento = (Memento) state;
-      ModelAccess.instance().runReadAction(() -> {
-        myNodeEditorComponent.relayout();
-        memento.restore(myNodeEditorComponent);
-      });
-
-      myNodeEditorComponent.getUpdater().flushModelEvents();
+    Logger.getLogger(getClass()).warnDeprecatedUse("This functionality has been replaced with respective methods in EditorComponent");
+    if (state != null) {
+      myNodeEditorComponent.restoreState(state);
     }
   }
 
@@ -324,11 +289,11 @@ public class EditorContext implements jetbrains.mps.openapi.editor.EditorContext
     return myPerformanceTracer != null;
   }
 
-  public void pushTracerTask(String message, boolean isMajor) {
+  void pushTracerTask(String message) {
     if (myPerformanceTracer == null) {
       return;
     }
-    myPerformanceTracer.push(message, isMajor);
+    myPerformanceTracer.push(message);
   }
 
   public void popTracerTask() {
@@ -336,14 +301,6 @@ public class EditorContext implements jetbrains.mps.openapi.editor.EditorContext
       return;
     }
     myPerformanceTracer.pop();
-  }
-
-  @Override
-  public EditorCellFactory getCellFactory() {
-    if (myCellFactory == null) {
-      myCellFactory = new EditorCellFactoryImpl(this);
-    }
-    return myCellFactory;
   }
 
   @Override
@@ -364,13 +321,37 @@ public class EditorContext implements jetbrains.mps.openapi.editor.EditorContext
     return myEditorManager;
   }
 
+  public Map<String, Icon> getIconCache() {
+    return myIconCache;
+  }
+
   void reset() {
     myEditorManager = null;
+    if (myDeletionApprover != null) {
+      myDeletionApprover.dispose();
+      myDeletionApprover = null;
+    }
+    myIconCache.clear();
   }
 
   @Nullable
   @Override
   public EditorPanelManager getEditorPanelManager() {
     return myConfiguration.editorPanelManager;
+  }
+
+  @Override
+  public DeletionApprover getDeletionApprover() {
+    // impl in EditorComponent was synchronized over EC instance. I don't see a point.
+    // We access editor code mainly in EDT, especially user-interaction code like deletion.
+    if (EditorSettings.getInstance().isUseTwoStepDeletion()) {
+      if (myDeletionApprover == null) {
+        myDeletionApprover = new DeletionApproverImpl(this, myNodeEditorComponent.getHighlightManager());
+        myDeletionApprover.initialize();
+      }
+      return myDeletionApprover;
+    } else {
+      return jetbrains.mps.openapi.editor.EditorContext.super.getDeletionApprover();
+    }
   }
 }

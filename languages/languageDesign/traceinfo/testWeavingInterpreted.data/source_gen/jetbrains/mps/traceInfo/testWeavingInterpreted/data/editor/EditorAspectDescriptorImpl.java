@@ -8,58 +8,31 @@ import java.util.Collection;
 import jetbrains.mps.openapi.editor.descriptor.ConceptEditor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import java.util.Collections;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public class EditorAspectDescriptorImpl extends EditorAspectDescriptorBase {
   @NotNull
   public Collection<ConceptEditor> getDeclaredEditors(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = ((SAbstractConcept) concept);
-      Integer preIndex = indices_xbvbvu_a0a.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ChildConceptWeave_Editor());
-          }
-          break;
-        case 1:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ChildConceptWeaveEach_Editor());
-          }
-          break;
-        case 2:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ChildConceptWeaveEachMany_Editor());
-          }
-          break;
-        case 3:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ChildConceptWeaveMany_Editor());
-          }
-          break;
-        case 4:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new RootConcept_Editor());
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = ((SAbstractConcept) concept);
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return Collections.<ConceptEditor>singletonList(new ChildConceptWeave_Editor());
+      case 1:
+        return Collections.<ConceptEditor>singletonList(new ChildConceptWeaveEach_Editor());
+      case 2:
+        return Collections.<ConceptEditor>singletonList(new ChildConceptWeaveEachMany_Editor());
+      case 3:
+        return Collections.<ConceptEditor>singletonList(new ChildConceptWeaveMany_Editor());
+      case 4:
+        return Collections.<ConceptEditor>singletonList(new RootConcept_Editor());
+      default:
     }
     return Collections.<ConceptEditor>emptyList();
   }
 
 
 
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
-  }
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0a = buildConceptIndices(MetaAdapterFactory.getConcept(0xffafcf63cbe64e5cL, 0x9717541f01743ac7L, 0x55da9f701c64f39cL, "jetbrains.mps.traceInfo.testWeavingInterpreted.data.structure.ChildConceptWeave"), MetaAdapterFactory.getConcept(0xffafcf63cbe64e5cL, 0x9717541f01743ac7L, 0x55da9f701c64f39aL, "jetbrains.mps.traceInfo.testWeavingInterpreted.data.structure.ChildConceptWeaveEach"), MetaAdapterFactory.getConcept(0xffafcf63cbe64e5cL, 0x9717541f01743ac7L, 0x55da9f701c681163L, "jetbrains.mps.traceInfo.testWeavingInterpreted.data.structure.ChildConceptWeaveEachMany"), MetaAdapterFactory.getConcept(0xffafcf63cbe64e5cL, 0x9717541f01743ac7L, 0x55da9f701c681159L, "jetbrains.mps.traceInfo.testWeavingInterpreted.data.structure.ChildConceptWeaveMany"), MetaAdapterFactory.getConcept(0xffafcf63cbe64e5cL, 0x9717541f01743ac7L, 0x55da9f701c64caccL, "jetbrains.mps.traceInfo.testWeavingInterpreted.data.structure.RootConcept"));
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0xffafcf63cbe64e5cL, 0x9717541f01743ac7L, 0x55da9f701c64f39cL), MetaIdFactory.conceptId(0xffafcf63cbe64e5cL, 0x9717541f01743ac7L, 0x55da9f701c64f39aL), MetaIdFactory.conceptId(0xffafcf63cbe64e5cL, 0x9717541f01743ac7L, 0x55da9f701c681163L), MetaIdFactory.conceptId(0xffafcf63cbe64e5cL, 0x9717541f01743ac7L, 0x55da9f701c681159L), MetaIdFactory.conceptId(0xffafcf63cbe64e5cL, 0x9717541f01743ac7L, 0x55da9f701c64caccL)).seal();
 }

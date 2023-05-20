@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,14 +20,17 @@ import com.intellij.openapi.actionSystem.DataProvider;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import jetbrains.mps.ide.actions.MPSCommonDataKeys;
 import jetbrains.mps.project.MPSProject;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ProjectFileRule implements GetDataRule {
   @Override
   @Nullable
-  public Object getData(DataProvider dataProvider) {
-    MPSProject project = (MPSProject) dataProvider.getData(MPSCommonDataKeys.MPS_PROJECT.getName());
-    if (project == null) return null;
+  public Object getData(@NotNull DataProvider dataProvider) {
+    MPSProject project = MPSCommonDataKeys.MPS_PROJECT.getData(dataProvider);
+    if (project == null) {
+      return null;
+    }
     return LocalFileSystem.getInstance().findFileByIoFile(project.getProjectFile().getParentFile());
   }
 }

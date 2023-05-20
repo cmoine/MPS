@@ -6,6 +6,7 @@
       <modulePath path="$PROJECT_DIR$/languages/declarations/declarations.mpl" folder="example2" />
       <modulePath path="$PROJECT_DIR$/languages/ref/ref.mpl" folder="example1" />
       <modulePath path="$PROJECT_DIR$/languages/references/references.mpl" folder="example2" />
+      <modulePath path="$PROJECT_DIR$/solutions/migartions.test/migrations.test.msd" folder="example2" />
     </projectModules>
   </component>
 </project>

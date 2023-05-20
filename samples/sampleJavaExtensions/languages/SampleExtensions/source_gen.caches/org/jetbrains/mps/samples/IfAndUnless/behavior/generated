@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="5v2d5ndzx2yd4hs5l67p8llczkeh51y" />
+<product version="3" modelHash="6w0ptxhypht3ur9obrqj3kzduezbe75">
+  <files names="BehaviorAspectDescriptor.java:FalseFlow__BehaviorDescriptor.java:Flow__BehaviorDescriptor.java:TrueFlow__BehaviorDescriptor.java" />
+</product>
 

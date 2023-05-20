@@ -5,39 +5,62 @@ package jetbrains.mps.baseLanguage.unitTest.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import java.util.List;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.Arrays;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.mps.openapi.model.SModel;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
+import jetbrains.mps.internal.collections.runtime.ListSequence;
+import jetbrains.mps.internal.collections.runtime.IWhereFilter;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import java.util.ArrayList;
+import org.jetbrains.mps.openapi.model.SModel;
+import jetbrains.mps.util.NameUtil;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public final class ITestCase__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getInterfaceConcept(0xf61473f9130f42f6L, 0xb98d6c438812c2f6L, 0x11b2709bd56L, "jetbrains.mps.baseLanguage.unitTest.structure.ITestCase");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<List<SNode>> getTestSet_idhGB2z8L = new SMethodBuilder<List<SNode>>(new SJavaCompoundTypeImpl((Class<List<SNode>>) ((Class) Object.class))).name("getTestSet").modifiers(SModifiersImpl.create(12, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("hGB2z8L").registry(REGISTRY).build();
-  public static final SMethod<String> getClassName_idhGBnqtL = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getClassName").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("hGBnqtL").registry(REGISTRY).build();
-  public static final SMethod<String> getSimpleClassName_idhSQIE8p = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getSimpleClassName").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("hSQIE8p").registry(REGISTRY).build();
-  public static final SMethod<List<SNode>> getTestMethods_id1RfJDyhAUar = new SMethodBuilder<List<SNode>>(new SJavaCompoundTypeImpl((Class<List<SNode>>) ((Class) Object.class))).name("getTestMethods").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("1RfJDyhAUar").registry(REGISTRY).build();
-  public static final SMethod<Boolean> canRunInProcess_id5_jSk8paieB = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("canRunInProcess").modifiers(SModifiersImpl.create(10, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("5_jSk8paieB").registry(REGISTRY).build();
+  public static final SMethod<List<SNode>> getTestSet_idhGB2z8L = new SMethodBuilder<List<SNode>>(new SJavaCompoundTypeImpl((Class<List<SNode>>) ((Class) Object.class))).name("getTestSet").modifiers(12, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1216130724401L).languageId(0xb98d6c438812c2f6L, 0xf61473f9130f42f6L).build2();
+  public static final SMethod<List<SNode>> getUncommentedTestSet_id6I8tQNTsM_Z = new SMethodBuilder<List<SNode>>(new SJavaCompoundTypeImpl((Class<List<SNode>>) ((Class) Object.class))).name("getUncommentedTestSet").modifiers(0, AccessPrivileges.PROTECTED).concept(CONCEPT).baseMethodId(7748574468816185727L).languageId(0xb98d6c438812c2f6L, 0xf61473f9130f42f6L).build2();
+  public static final SMethod<List<SNode>> getTestMethods_id1RfJDyhAUar = new SMethodBuilder<List<SNode>>(new SJavaCompoundTypeImpl((Class<List<SNode>>) ((Class) Object.class))).name("getTestMethods").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(2148145109766218395L).languageId(0xb98d6c438812c2f6L, 0xf61473f9130f42f6L).build2();
+  public static final SMethod<List<SNode>> getUncommentedTestMethods_id6I8tQNTvi0f = new SMethodBuilder<List<SNode>>(new SJavaCompoundTypeImpl((Class<List<SNode>>) ((Class) Object.class))).name("getUncommentedTestMethods").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(7748574468816838671L).languageId(0xb98d6c438812c2f6L, 0xf61473f9130f42f6L).build2();
+  public static final SMethod<String> getClassName_idhGBnqtL = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getClassName").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1216136193905L).languageId(0xb98d6c438812c2f6L, 0xf61473f9130f42f6L).build2();
+  public static final SMethod<String> getSimpleClassName_idhSQIE8p = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getSimpleClassName").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1229278847513L).languageId(0xb98d6c438812c2f6L, 0xf61473f9130f42f6L).build2();
+  public static final SMethod<Boolean> canRunInProcess_id5_jSk8paieB = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("canRunInProcess").modifiers(10, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(6436735966448788391L).languageId(0xb98d6c438812c2f6L, 0xf61473f9130f42f6L).build2();
 
-  private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getTestSet_idhGB2z8L, getClassName_idhGBnqtL, getSimpleClassName_idhSQIE8p, getTestMethods_id1RfJDyhAUar, canRunInProcess_id5_jSk8paieB);
+  private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getTestSet_idhGB2z8L, getUncommentedTestSet_id6I8tQNTsM_Z, getTestMethods_id1RfJDyhAUar, getUncommentedTestMethods_id6I8tQNTvi0f, getClassName_idhGBnqtL, getSimpleClassName_idhSQIE8p, canRunInProcess_id5_jSk8paieB);
 
   private static void ___init___(@NotNull SNode __thisNode__) {
   }
 
+  /*package*/ static List<SNode> getUncommentedTestSet_id6I8tQNTsM_Z(@NotNull SNode __thisNode__) {
+    List<SNode> method = ITestCase__BehaviorDescriptor.getTestSet_idhGB2z8L.invoke(__thisNode__);
+    return ListSequence.fromList(method).where(new IWhereFilter<SNode>() {
+      public boolean accept(SNode it) {
+        return (SNodeOperations.getNodeAncestor(it, CONCEPTS.BaseCommentAttribute$nv, false, false) == null);
+      }
+    }).toListSequence();
+  }
+  /*package*/ static List<SNode> getTestMethods_id1RfJDyhAUar(@NotNull SNode __thisNode__) {
+    return new ArrayList<SNode>();
+  }
+  /*package*/ static List<SNode> getUncommentedTestMethods_id6I8tQNTvi0f(@NotNull SNode __thisNode__) {
+    List<SNode> method = ITestCase__BehaviorDescriptor.getTestSet_idhGB2z8L.invoke(__thisNode__);
+    return ListSequence.fromList(method).where(new IWhereFilter<SNode>() {
+      public boolean accept(SNode it) {
+        return (SNodeOperations.getNodeAncestor(it, CONCEPTS.BaseCommentAttribute$nv, false, false) == null);
+      }
+    }).toListSequence();
+  }
   /*package*/ static String getClassName_idhGBnqtL(@NotNull SNode __thisNode__) {
     SModel model = __thisNode__.getModel();
     if (model == null) {
@@ -46,18 +69,14 @@ public final class ITestCase__BehaviorDescriptor extends BaseBHDescriptor {
     return model.getName().getLongName() + "." + ITestCase__BehaviorDescriptor.getSimpleClassName_idhSQIE8p.invoke(__thisNode__);
   }
   /*package*/ static String getSimpleClassName_idhSQIE8p(@NotNull SNode __thisNode__) {
-    return SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name")) + "_Test";
-  }
-  /*package*/ static List<SNode> getTestMethods_id1RfJDyhAUar(@NotNull SNode __thisNode__) {
-    return new ArrayList<SNode>();
+    return NameUtil.toValidCamelIdentifier(SPropertyOperations.getString(__thisNode__, PROPS.name$MnvL) + "_Test");
   }
   /*package*/ static boolean canRunInProcess_id5_jSk8paieB(@NotNull SNode __thisNode__) {
-    // method is a property 
-    return !(SPropertyOperations.getBoolean(__thisNode__, MetaAdapterFactory.getProperty(0xf61473f9130f42f6L, 0xb98d6c438812c2f6L, 0x11b2709bd56L, 0x59337dc8dffe0d9dL, "canNotRunInProcess")));
+    // method is a property
+    return !(SPropertyOperations.getBoolean(__thisNode__, PROPS.canNotRunInProcess$hiag));
   }
 
   /*package*/ ITestCase__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -73,12 +92,16 @@ public final class ITestCase__BehaviorDescriptor extends BaseBHDescriptor {
     }
     switch (methodIndex) {
       case 1:
-        return (T) ((String) getClassName_idhGBnqtL(node));
+        return (T) ((List<SNode>) getUncommentedTestSet_id6I8tQNTsM_Z(node));
       case 2:
-        return (T) ((String) getSimpleClassName_idhSQIE8p(node));
-      case 3:
         return (T) ((List<SNode>) getTestMethods_id1RfJDyhAUar(node));
+      case 3:
+        return (T) ((List<SNode>) getUncommentedTestMethods_id6I8tQNTvi0f(node));
       case 4:
+        return (T) ((String) getClassName_idhGBnqtL(node));
+      case 5:
+        return (T) ((String) getSimpleClassName_idhSQIE8p(node));
+      case 6:
         return (T) ((Boolean) canRunInProcess_id5_jSk8paieB(node));
       default:
         throw new BHMethodNotFoundException(this, method);
@@ -107,5 +130,14 @@ public final class ITestCase__BehaviorDescriptor extends BaseBHDescriptor {
   @Override
   public SAbstractConcept getConcept() {
     return CONCEPT;
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept BaseCommentAttribute$nv = MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x3dcc194340c24debL, "jetbrains.mps.lang.core.structure.BaseCommentAttribute");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+    /*package*/ static final SProperty canNotRunInProcess$hiag = MetaAdapterFactory.getProperty(0xf61473f9130f42f6L, 0xb98d6c438812c2f6L, 0x11b2709bd56L, 0x59337dc8dffe0d9dL, "canNotRunInProcess");
   }
 }

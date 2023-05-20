@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,12 @@
  */
 package jetbrains.mps.newTypesystem.operation;
 
+import jetbrains.mps.smodel.SNodeUtil;
 import org.jetbrains.mps.openapi.model.SNode;
 
 public class ProcessReplacementRuleOperation extends AddRemarkOperation {
-  private SNode mySubType;
-  private SNode mySuperType;
+  private final SNode mySubType;
+  private final SNode mySuperType;
 
   public ProcessReplacementRuleOperation(SNode subType, SNode superType, Runnable runnable) {
     super(runnable);
@@ -29,7 +30,7 @@ public class ProcessReplacementRuleOperation extends AddRemarkOperation {
 
   @Override
   public String getPresentation() {
-    return mySubType + " is subtype of " + mySuperType + " by replacement rule";
+    return String.format("%s is subtype of %s by replacement rule", SNodeUtil.getPresentation(mySubType), SNodeUtil.getPresentation(mySuperType));
   }
 }
 

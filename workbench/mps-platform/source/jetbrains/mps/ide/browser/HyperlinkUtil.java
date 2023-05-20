@@ -32,12 +32,9 @@ public final class HyperlinkUtil {
     editorPane.setContentType("text/html");
     editorPane.setText("<a href=\"" + url + "\">" + url + "</a>");
     editorPane.setEditable(false);
-    editorPane.addHyperlinkListener(new HyperlinkListener() {
-      @Override
-      public void hyperlinkUpdate(HyperlinkEvent e) {
-        if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-          BrowserUtil.launchBrowser(url);
-        }
+    editorPane.addHyperlinkListener(e -> {
+      if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+        BrowserUtil.launchBrowser(url);
       }
     });
     editorPane.setFocusable(false);

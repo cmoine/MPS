@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,9 @@
 package jetbrains.mps.newTypesystem.operation;
 
 import jetbrains.mps.newTypesystem.state.State;
-import org.jetbrains.mps.openapi.model.SNode;
+import jetbrains.mps.smodel.SNodeUtil;
 import jetbrains.mps.typesystem.inference.EquationInfo;
+import org.jetbrains.mps.openapi.model.SNode;
 
 public class ExpandTypeOperation extends AssignTypeOperation {
   private final SNode myOldType;
@@ -34,7 +35,7 @@ public class ExpandTypeOperation extends AssignTypeOperation {
 
   @Override
   public String getPresentation() {
-    return "Type expanded: " + myNode + " ------> " + myType;
+    return String.format("Type expanded: %s ------> %s", SNodeUtil.getPresentation(myNode), SNodeUtil.getPresentation(myType));
   }
 
   @Override

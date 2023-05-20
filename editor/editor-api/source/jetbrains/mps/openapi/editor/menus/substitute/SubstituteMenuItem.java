@@ -15,6 +15,8 @@
  */
 package jetbrains.mps.openapi.editor.menus.substitute;
 
+import jetbrains.mps.openapi.editor.menus.style.EditorMenuItemStyle;
+import jetbrains.mps.openapi.editor.menus.EditorMenuTraceInfo;
 import jetbrains.mps.smodel.runtime.IconResource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -32,6 +34,10 @@ public interface SubstituteMenuItem {
    */
   @Nullable
   SAbstractConcept getOutputConcept();
+
+  default boolean isAcceptable(String pattern, SubstitutionAcceptable acceptable) {
+    return false;
+  }
 
   /**
    * Returns the type of the node which will be created by {@link #createNode(String)}, if known and applicable. Used to filter actions for smart completion.
@@ -97,7 +103,16 @@ public interface SubstituteMenuItem {
    * Performs the selection.
    *
    * @param createdNode the node which was created by the actions
-   * @param pattern the text that the user has typed so far
+   * @param pattern     the text that the user has typed so far
    */
   void select(@NotNull SNode createdNode, @NotNull String pattern);
+
+  @Nullable
+  default EditorMenuTraceInfo getTraceInfo() {
+    return null;
+  }
+
+  default void customize(String pattern, EditorMenuItemStyle style) {
+
+  }
 }

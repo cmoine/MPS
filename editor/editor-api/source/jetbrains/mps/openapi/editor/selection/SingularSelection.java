@@ -26,11 +26,50 @@ public interface SingularSelection extends Selection {
   @NotNull
   EditorCell getEditorCell();
 
+  /**
+   * Use {@link Selection#setDirection(jetbrains.mps.openapi.editor.selection.Selection.SelectionDirection)}
+   */
+  @Deprecated
   void setSideSelectDirection(SideSelectDirection direction);
 
+  /**
+   * Use {@link Selection#getDirection()}
+   */
+  @Deprecated
   SideSelectDirection getSideSelectDirection();
 
+  /**
+   * Use {@link Selection.SelectionDirection}
+   */
+  @Deprecated
   enum SideSelectDirection {
-    LEFT, RIGHT, NONE;
+
+    /**
+     * Use {@link Selection.SelectionDirection#LEFT}
+     */
+    @Deprecated
+    LEFT(SelectionDirection.LEFT),
+    /**
+     * Use {@link Selection.SelectionDirection#RIGHT}
+     */
+    @Deprecated
+    RIGHT(SelectionDirection.RIGHT),
+    /**
+     * Use {@link Selection.SelectionDirection#NONE}
+     */
+    @Deprecated
+    NONE(SelectionDirection.NONE);
+
+    private final SelectionDirection direction;
+
+    SideSelectDirection(SelectionDirection direction) {
+      this.direction = direction;
+    }
+
+    @Deprecated
+    @NotNull
+    public SelectionDirection getDirection() {
+      return direction;
+    }
   }
 }

@@ -6,9 +6,9 @@ import jetbrains.mps.smodel.runtime.BaseConstraintsAspectDescriptor;
 import jetbrains.mps.smodel.runtime.ConstraintsDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.runtime.base.BaseConstraintsDescriptor;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public class ConstraintsAspectDescriptor extends BaseConstraintsAspectDescriptor {
   public ConstraintsAspectDescriptor() {
@@ -16,134 +16,57 @@ public class ConstraintsAspectDescriptor extends BaseConstraintsAspectDescriptor
 
   @Override
   public ConstraintsDescriptor getConstraints(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_2qnle6_a0c.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return new ActionConstructionParameterDeclaration_Constraints();
-          }
-          break;
-        case 1:
-          if (true) {
-            return new ActionDataParameterDeclaration_Constraints();
-          }
-          break;
-        case 2:
-          if (true) {
-            return new ActionDeclaration_Constraints();
-          }
-          break;
-        case 3:
-          if (true) {
-            return new ActionGroupDeclaration_Constraints();
-          }
-          break;
-        case 4:
-          if (true) {
-            return new ActionInstance_Constraints();
-          }
-          break;
-        case 5:
-          if (true) {
-            return new ActionParameterDeclaration_Constraints();
-          }
-          break;
-        case 6:
-          if (true) {
-            return new ActionParameterReference_Constraints();
-          }
-          break;
-        case 7:
-          if (true) {
-            return new AddElementStatement_Constraints();
-          }
-          break;
-        case 8:
-          if (true) {
-            return new AddStatement_Constraints();
-          }
-          break;
-        case 9:
-          if (true) {
-            return new BaseProjectOperation_Constraints();
-          }
-          break;
-        case 10:
-          if (true) {
-            return new ConceptCondition_Constraints();
-          }
-          break;
-        case 11:
-          if (true) {
-            return new EditableModel_Constraints();
-          }
-          break;
-        case 12:
-          if (true) {
-            return new GroupAnchor_Constraints();
-          }
-          break;
-        case 13:
-          if (true) {
-            return new IdeaInitializerDescriptor_Constraints();
-          }
-          break;
-        case 14:
-          if (true) {
-            return new InterfaceExtentionPoint_Constraints();
-          }
-          break;
-        case 15:
-          if (true) {
-            return new ModificationStatement_Constraints();
-          }
-          break;
-        case 16:
-          if (true) {
-            return new Separator_Constraints();
-          }
-          break;
-        case 17:
-          if (true) {
-            return new ShortcutChange_Constraints();
-          }
-          break;
-        case 18:
-          if (true) {
-            return new SmartDisposeClosureParameterDeclaration_Constraints();
-          }
-          break;
-        case 19:
-          if (true) {
-            return new TabbedToolOperation_Constraints();
-          }
-          break;
-        case 20:
-          if (true) {
-            return new ToolInstanceExpression_Constraints();
-          }
-          break;
-        case 21:
-          if (true) {
-            return new UpdateBlock_Constraints();
-          }
-          break;
-        default:
-          // default 
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return new ActionConstructionParameterDeclaration_Constraints();
+      case 1:
+        return new ActionDataParameterDeclaration_Constraints();
+      case 2:
+        return new ActionDeclaration_Constraints();
+      case 3:
+        return new ActionGroupDeclaration_Constraints();
+      case 4:
+        return new ActionInstance_Constraints();
+      case 5:
+        return new ActionParameterDeclaration_Constraints();
+      case 6:
+        return new ActionParameterReference_Constraints();
+      case 7:
+        return new AddElementStatement_Constraints();
+      case 8:
+        return new AddStatement_Constraints();
+      case 9:
+        return new BaseProjectOperation_Constraints();
+      case 10:
+        return new ConceptCondition_Constraints();
+      case 11:
+        return new EditableModel_Constraints();
+      case 12:
+        return new GroupAnchor_Constraints();
+      case 13:
+        return new IdeaInitializerDescriptor_Constraints();
+      case 14:
+        return new InterfaceExtentionPoint_Constraints();
+      case 15:
+        return new ModificationStatement_Constraints();
+      case 16:
+        return new Order_Constraints();
+      case 17:
+        return new Separator_Constraints();
+      case 18:
+        return new ShortcutChange_Constraints();
+      case 19:
+        return new SmartDisposeClosureParameterDeclaration_Constraints();
+      case 20:
+        return new TabbedToolOperation_Constraints();
+      case 21:
+        return new ToolInstanceExpression_Constraints();
+      case 22:
+        return new UpdateBlock_Constraints();
+      default:
     }
     return new BaseConstraintsDescriptor(concept);
   }
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
-  }
-  private static final Map<SAbstractConcept, Integer> indices_2qnle6_a0c = buildConceptIndices(MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11daf6d2bdcL, "jetbrains.mps.lang.plugin.structure.ActionConstructionParameterDeclaration"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11b69e025e0L, "jetbrains.mps.lang.plugin.structure.ActionDataParameterDeclaration"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1181ca87c38L, "jetbrains.mps.lang.plugin.structure.ActionDeclaration"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1181da058d2L, "jetbrains.mps.lang.plugin.structure.ActionGroupDeclaration"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1181da2ba57L, "jetbrains.mps.lang.plugin.structure.ActionInstance"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x118b812427fL, "jetbrains.mps.lang.plugin.structure.ActionParameterDeclaration"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1947b3e0f0959deeL, "jetbrains.mps.lang.plugin.structure.ActionParameterReference"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1190f7a2d1aL, "jetbrains.mps.lang.plugin.structure.AddElementStatement"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11dafad4b27L, "jetbrains.mps.lang.plugin.structure.AddStatement"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x2e56fadb4d375f27L, "jetbrains.mps.lang.plugin.structure.BaseProjectOperation"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0xe9375051ff52781L, "jetbrains.mps.lang.plugin.structure.ConceptCondition"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x4ecd9810833251a2L, "jetbrains.mps.lang.plugin.structure.EditableModel"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11840f36089L, "jetbrains.mps.lang.plugin.structure.GroupAnchor"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x45b64b294c2b3514L, "jetbrains.mps.lang.plugin.structure.IdeaInitializerDescriptor"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1186bb08443L, "jetbrains.mps.lang.plugin.structure.InterfaceExtentionPoint"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1181de4920dL, "jetbrains.mps.lang.plugin.structure.ModificationStatement"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1188a1ecd8aL, "jetbrains.mps.lang.plugin.structure.Separator"), MetaAdapterFactory.getInterfaceConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x55f30a5d1e092278L, "jetbrains.mps.lang.plugin.structure.ShortcutChange"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x6bd88e2e00aae68L, "jetbrains.mps.lang.plugin.structure.SmartDisposeClosureParameterDeclaration"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x705d0a376e80e04cL, "jetbrains.mps.lang.plugin.structure.TabbedToolOperation"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11870178843L, "jetbrains.mps.lang.plugin.structure.ToolInstanceExpression"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x118b8325461L, "jetbrains.mps.lang.plugin.structure.UpdateBlock"));
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11daf6d2bdcL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11b69e025e0L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1181ca87c38L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1181da058d2L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1181da2ba57L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x118b812427fL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1947b3e0f0959deeL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1190f7a2d1aL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11dafad4b27L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x2e56fadb4d375f27L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0xe9375051ff52781L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x4ecd9810833251a2L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11840f36089L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x45b64b294c2b3514L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1186bb08443L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1181de4920dL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x22035699bdd78147L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1188a1ecd8aL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x55f30a5d1e092278L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x6bd88e2e00aae68L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x705d0a376e80e04cL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11870178843L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x118b8325461L)).seal();
 }

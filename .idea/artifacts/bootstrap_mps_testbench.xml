@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="bootstrap:mps-testbench">
+    <output-path>$PROJECT_DIR$/lib/</output-path>
+    <root id="root">
+      <element id="archive" name="mps-test.jar">
+        <element id="module-output" name="testbench" />
+      </element>
+      <element id="archive" name="mps-environment.jar">
+        <element id="module-output" name="ant-mps-common" />
+        <element id="module-output" name="environment" />
+      </element>
+    </root>
+  </artifact>
+</component>

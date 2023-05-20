@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="1oeqsxfrmugvd3t4zh7futr46uau9pm" />
+<product version="3" modelHash="ca0h9pbt65x246b7kn01grv8jo2jsuq">
+  <files names="TypesystemDescriptor.java:typeof_XMLSAXAttributeReference_InferenceRule.java:typeof_XMLSAXBreakStatement_InferenceRule.java:typeof_XMLSAXChildHandler_childObject_InferenceRule.java:typeof_XMLSAXChildRule_InferenceRule.java:typeof_XMLSAXFieldReference_InferenceRule.java:typeof_XMLSAXHandler_resultObject_InferenceRule.java:typeof_XMLSAXLocatorExpression_InferenceRule.java:typeof_XMLSAXNodeRuleParamRef_InferenceRule.java" />
+</product>
 

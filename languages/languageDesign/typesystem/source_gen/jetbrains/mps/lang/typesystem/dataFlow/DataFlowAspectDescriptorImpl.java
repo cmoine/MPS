@@ -8,183 +8,92 @@ import java.util.Collection;
 import jetbrains.mps.lang.dataFlow.framework.IDataFlowBuilder;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import java.util.Collections;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public class DataFlowAspectDescriptorImpl extends DataFlowAspectDescriptorBase {
 
   @NotNull
   @Override
   public Collection<IDataFlowBuilder> getDataFlowBuilders(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = ((SAbstractConcept) concept);
-      Integer preIndex = indices_vhxjlb_a0b.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new AbstractCheckingRule_DataFlow());
-          }
-          break;
-        case 1:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new AbstractEquationStatement_DataFlow());
-          }
-          break;
-        case 2:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new AbstractSubtypingRule_DataFlow());
-          }
-          break;
-        case 3:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new AddDependencyStatement_DataFlow());
-          }
-          break;
-        case 4:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new ApplicableNodeCondition_DataFlow());
-          }
-          break;
-        case 5:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new ApplicableNodeReference_DataFlow());
-          }
-          break;
-        case 6:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new AssertStatement_DataFlow());
-          }
-          break;
-        case 7:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new CoerceExpression_DataFlow());
-          }
-          break;
-        case 8:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new CoerceStatement_DataFlow());
-          }
-          break;
-        case 9:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new ComparisonRule_DataFlow());
-          }
-          break;
-        case 10:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new ImmediateSupertypesExpression_DataFlow());
-          }
-          break;
-        case 11:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new InequationReplacementRule_DataFlow());
-          }
-          break;
-        case 12:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new InfoStatement_DataFlow());
-          }
-          break;
-        case 13:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new IsSubtypeExpression_DataFlow());
-          }
-          break;
-        case 14:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new MatchStatement_DataFlow());
-          }
-          break;
-        case 15:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new MatchStatementItem_DataFlow());
-          }
-          break;
-        case 16:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new MultipleForeachLoop_DataFlow());
-          }
-          break;
-        case 17:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new NormalTypeClause_DataFlow());
-          }
-          break;
-        case 18:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new PatternCondition_DataFlow());
-          }
-          break;
-        case 19:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new PropertyNameTarget_DataFlow());
-          }
-          break;
-        case 20:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new ReferenceRoleTarget_DataFlow());
-          }
-          break;
-        case 21:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new ReportErrorStatement_DataFlow());
-          }
-          break;
-        case 22:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new SubstituteTypeRule_DataFlow());
-          }
-          break;
-        case 23:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new TypeOfExpression_DataFlow());
-          }
-          break;
-        case 24:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new TypeVarDeclaration_DataFlow());
-          }
-          break;
-        case 25:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new TypeVarReference_DataFlow());
-          }
-          break;
-        case 26:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new TypesystemIntention_DataFlow());
-          }
-          break;
-        case 27:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new TypesystemIntentionArgument_DataFlow());
-          }
-          break;
-        case 28:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new WarningStatement_DataFlow());
-          }
-          break;
-        case 29:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new WhenConcreteStatement_DataFlow());
-          }
-          break;
-        default:
-          // default 
-      }
+    SAbstractConcept cncpt = ((SAbstractConcept) concept);
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return Collections.<IDataFlowBuilder>singletonList(new AbstractCheckingRule_DataFlow());
+      case 1:
+        return Collections.<IDataFlowBuilder>singletonList(new AbstractEquationStatement_DataFlow());
+      case 2:
+        return Collections.<IDataFlowBuilder>singletonList(new AbstractSubtypingRule_DataFlow());
+      case 3:
+        return Collections.<IDataFlowBuilder>singletonList(new AddDependencyStatement_DataFlow());
+      case 4:
+        return Collections.<IDataFlowBuilder>singletonList(new ApplicableNodeCondition_DataFlow());
+      case 5:
+        return Collections.<IDataFlowBuilder>singletonList(new ApplicableNodeReference_DataFlow());
+      case 6:
+        return Collections.<IDataFlowBuilder>singletonList(new AssertStatement_DataFlow());
+      case 7:
+        return Collections.<IDataFlowBuilder>singletonList(new CoerceExpression_DataFlow());
+      case 8:
+        return Collections.<IDataFlowBuilder>singletonList(new CoerceStatement_DataFlow());
+      case 9:
+        return Collections.<IDataFlowBuilder>singletonList(new ComparisonRule_DataFlow());
+      case 10:
+        return Collections.<IDataFlowBuilder>singletonList(new GetOperationType_DataFlow());
+      case 11:
+        return Collections.<IDataFlowBuilder>singletonList(new ImmediateSupertypesExpression_DataFlow());
+      case 12:
+        return Collections.<IDataFlowBuilder>singletonList(new InequationReplacementRule_DataFlow());
+      case 13:
+        return Collections.<IDataFlowBuilder>singletonList(new InfoStatement_DataFlow());
+      case 14:
+        return Collections.<IDataFlowBuilder>singletonList(new IsSubtypeExpression_DataFlow());
+      case 15:
+        return Collections.<IDataFlowBuilder>singletonList(new LinkPatternVariableReference_DataFlow());
+      case 16:
+        return Collections.<IDataFlowBuilder>singletonList(new MatchStatement_DataFlow());
+      case 17:
+        return Collections.<IDataFlowBuilder>singletonList(new MatchStatementItem_DataFlow());
+      case 18:
+        return Collections.<IDataFlowBuilder>singletonList(new NormalTypeClause_DataFlow());
+      case 19:
+        return Collections.<IDataFlowBuilder>singletonList(new PatternCondition_DataFlow());
+      case 20:
+        return Collections.<IDataFlowBuilder>singletonList(new PatternVariableReference_DataFlow());
+      case 21:
+        return Collections.<IDataFlowBuilder>singletonList(new PropertyNameTarget_DataFlow());
+      case 22:
+        return Collections.<IDataFlowBuilder>singletonList(new PropertyPatternVariableReference_DataFlow());
+      case 23:
+        return Collections.<IDataFlowBuilder>singletonList(new QuickFixArgumentReference_DataFlow());
+      case 24:
+        return Collections.<IDataFlowBuilder>singletonList(new QuickFixFieldReference_DataFlow());
+      case 25:
+        return Collections.<IDataFlowBuilder>singletonList(new ReferenceRoleTarget_DataFlow());
+      case 26:
+        return Collections.<IDataFlowBuilder>singletonList(new ReportErrorStatement_DataFlow());
+      case 27:
+        return Collections.<IDataFlowBuilder>singletonList(new SubstituteTypeRule_DataFlow());
+      case 28:
+        return Collections.<IDataFlowBuilder>singletonList(new TypeOfExpression_DataFlow());
+      case 29:
+        return Collections.<IDataFlowBuilder>singletonList(new TypeVarDeclaration_DataFlow());
+      case 30:
+        return Collections.<IDataFlowBuilder>singletonList(new TypeVarReference_DataFlow());
+      case 31:
+        return Collections.<IDataFlowBuilder>singletonList(new TypesystemIntention_DataFlow());
+      case 32:
+        return Collections.<IDataFlowBuilder>singletonList(new TypesystemIntentionArgument_DataFlow());
+      case 33:
+        return Collections.<IDataFlowBuilder>singletonList(new WarningStatement_DataFlow());
+      case 34:
+        return Collections.<IDataFlowBuilder>singletonList(new WhenConcreteStatement_DataFlow());
+      case 35:
+        return Collections.<IDataFlowBuilder>singletonList(new WhenConcreteVariableReference_DataFlow());
+      default:
     }
     return Collections.<IDataFlowBuilder>emptyList();
   }
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
-  }
-  private static final Map<SAbstractConcept, Integer> indices_vhxjlb_a0b = buildConceptIndices(MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1164847e929L, "jetbrains.mps.lang.typesystem.structure.AbstractCheckingRule"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f3c1ffaL, "jetbrains.mps.lang.typesystem.structure.AbstractEquationStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1119c40dfb0L, "jetbrains.mps.lang.typesystem.structure.AbstractSubtypingRule"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11c22f6c964L, "jetbrains.mps.lang.typesystem.structure.AddDependencyStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e29d976L, "jetbrains.mps.lang.typesystem.structure.ApplicableNodeCondition"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e9ef5dcL, "jetbrains.mps.lang.typesystem.structure.ApplicableNodeReference"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111b24c0cd8L, "jetbrains.mps.lang.typesystem.structure.AssertStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1127a2a14aeL, "jetbrains.mps.lang.typesystem.structure.CoerceExpression"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111f05e2451L, "jetbrains.mps.lang.typesystem.structure.CoerceStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x114caade477L, "jetbrains.mps.lang.typesystem.structure.ComparisonRule"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1120ebd8531L, "jetbrains.mps.lang.typesystem.structure.ImmediateSupertypesExpression"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x117c5668bf2L, "jetbrains.mps.lang.typesystem.structure.InequationReplacementRule"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11d2965916bL, "jetbrains.mps.lang.typesystem.structure.InfoStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111ef7b9fb7L, "jetbrains.mps.lang.typesystem.structure.IsSubtypeExpression"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1122952fb1dL, "jetbrains.mps.lang.typesystem.structure.MatchStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x112295a8fecL, "jetbrains.mps.lang.typesystem.structure.MatchStatementItem"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111efb6d46fL, "jetbrains.mps.lang.typesystem.structure.MultipleForeachLoop"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1141682561cL, "jetbrains.mps.lang.typesystem.structure.NormalTypeClause"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e2c3e68L, "jetbrains.mps.lang.typesystem.structure.PatternCondition"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11db54b106bL, "jetbrains.mps.lang.typesystem.structure.PropertyNameTarget"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11db54de8fdL, "jetbrains.mps.lang.typesystem.structure.ReferenceRoleTarget"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111b251a62aL, "jetbrains.mps.lang.typesystem.structure.ReportErrorStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x58e32a0782bca52aL, "jetbrains.mps.lang.typesystem.structure.SubstituteTypeRule"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f0ad10aL, "jetbrains.mps.lang.typesystem.structure.TypeOfExpression"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f85df7bL, "jetbrains.mps.lang.typesystem.structure.TypeVarDeclaration"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f90b04cL, "jetbrains.mps.lang.typesystem.structure.TypeVarReference"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x119e85e030eL, "jetbrains.mps.lang.typesystem.structure.TypesystemIntention"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x119e85f8628L, "jetbrains.mps.lang.typesystem.structure.TypesystemIntentionArgument"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1190a1db131L, "jetbrains.mps.lang.typesystem.structure.WarningStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x114177ce6cdL, "jetbrains.mps.lang.typesystem.structure.WhenConcreteStatement"));
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1164847e929L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f3c1ffaL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1119c40dfb0L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11c22f6c964L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e29d976L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e9ef5dcL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111b24c0cd8L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1127a2a14aeL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111f05e2451L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x114caade477L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11fd11186b7L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1120ebd8531L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x117c5668bf2L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11d2965916bL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111ef7b9fb7L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11192d92ad3L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1122952fb1dL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x112295a8fecL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1141682561cL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e2c3e68L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11192d10036L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11db54b106bL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11192d97ff9L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11b3683c009L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x70489eee8479b55dL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11db54de8fdL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111b251a62aL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x58e32a0782bca52aL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f0ad10aL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f85df7bL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f90b04cL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x119e85e030eL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x119e85f8628L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1190a1db131L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x114177ce6cdL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x118bd0e07f1L)).seal();
 }

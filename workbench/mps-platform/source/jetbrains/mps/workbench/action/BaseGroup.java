@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,22 +21,23 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.project.DumbAware;
-import com.intellij.openapi.project.Project;
-import jetbrains.mps.InternalFlag;
-import jetbrains.mps.ide.project.ProjectHelper;
-import jetbrains.mps.smodel.MPSModuleRepository;
+import com.intellij.openapi.util.NlsActions.ActionText;
+import jetbrains.mps.RuntimeFlags;
 import jetbrains.mps.workbench.ActionPlace;
-import org.apache.log4j.Logger;
+import jetbrains.mps.logging.Logger;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.module.ModelAccess;
+import org.jetbrains.mps.openapi.module.SRepository;
 import org.jetbrains.mps.util.Condition;
 
 import javax.swing.Icon;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class BaseGroup extends DefaultActionGroup implements DumbAware {
-  private String myId = "";
+  private final String myId;
   private boolean myIsInternal = false;
   private boolean myIsAlwaysVisible = true;
 
@@ -54,15 +55,25 @@ public class BaseGroup extends DefaultActionGroup implements DumbAware {
     getTemplatePresentation().setIcon(icon);
   }
 
-  public void setIsAlwaysVisible(boolean isAlwaysVisible) {
+  public BaseGroup(@NotNull Supplier<@ActionText String> text, String id, boolean popup){
+    this(text, id, null, popup);
+  }
+
+  public BaseGroup(@NotNull Supplier<@ActionText String> text, String id, Icon icon, boolean popup){
+    super(text, popup);
+    myId = id;
+    getTemplatePresentation().setIcon(icon);
+  }
+
+  public final void setIsAlwaysVisible(boolean isAlwaysVisible) {
     myIsAlwaysVisible = isAlwaysVisible;
   }
 
-  public void setIsInternal(boolean isInternal) {
+  public final void setIsInternal(boolean isInternal) {
     myIsInternal = isInternal;
   }
 
-  public void setMnemonic(char mnemonic) {
+  public final void setMnemonic(char mnemonic) {
     String text = getTemplatePresentation().getText();
     int pos = text.indexOf(Character.toUpperCase(mnemonic));
     if (pos == -1) pos = text.indexOf(Character.toLowerCase(mnemonic));
@@ -71,21 +82,21 @@ public class BaseGroup extends DefaultActionGroup implements DumbAware {
     getTemplatePresentation().setText(newText.toString());
   }
 
-  public String getId() {
+  public final String getId() {
     return myId;
   }
 
-  public void disable(Presentation p) {
+  public final void disable(Presentation p) {
     p.setEnabled(false);
     p.setVisible(myIsAlwaysVisible);
   }
 
-  public void enable(Presentation p) {
+  public final void enable(Presentation p) {
     p.setEnabled(true);
     p.setVisible(true);
   }
 
-  protected void setEnabledState(Presentation p, boolean state) {
+  protected final void setEnabledState(Presentation p, boolean state) {
     if (state) enable(p);
     else disable(p);
   }
@@ -93,20 +104,18 @@ public class BaseGroup extends DefaultActionGroup implements DumbAware {
   @Override
   public void update(final AnActionEvent e) {
     super.update(e);
-    if (myIsInternal && !InternalFlag.isInternalMode()) {
+    if (myIsInternal && !RuntimeFlags.isInternalMode()) {
       e.getPresentation().setEnabled(false);
       e.getPresentation().setVisible(false);
     } else {
-      getModelAccess(e).runReadAction(new Runnable() {
-        @Override
-        public void run() {
-          try {
-            e.getPresentation().setEnabled(true);
-            e.getPresentation().setVisible(true);
-            doUpdate(e);
-          } catch (Throwable ex) {
-            Logger.getLogger(BaseGroup.this.getClass()).error("Action group update failed", ex);
-          }
+      final SRepository repo = BaseAction.getRepository(e);
+      repo.getModelAccess().runReadAction(() -> {
+        try {
+          e.getPresentation().setEnabled(true);
+          e.getPresentation().setVisible(true);
+          doUpdate(e.withDataContext(BaseAction.legacyWrap(repo, e.getDataContext())));
+        } catch (Throwable ex) {
+          Logger.getLogger(BaseGroup.this.getClass()).error("Action group update failed", ex);
         }
       });
     }
@@ -136,12 +145,8 @@ public class BaseGroup extends DefaultActionGroup implements DumbAware {
   }
 
   // copied from BaseAction.getModelAccess()
+  @Deprecated(forRemoval = true, since = "2021.3")
   protected final ModelAccess getModelAccess(AnActionEvent event) {
-    Project project = getEventProject(event);
-    if (project != null) {
-      return ProjectHelper.getModelAccess(project);
-    } else {
-      return MPSModuleRepository.getInstance().getModelAccess();
-    }
+    return BaseAction.getRepository(event).getModelAccess();
   }
 }

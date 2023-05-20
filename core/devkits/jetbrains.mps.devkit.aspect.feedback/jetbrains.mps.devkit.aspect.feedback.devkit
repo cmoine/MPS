@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dev-kit name="jetbrains.mps.devkit.aspect.feedback" uuid="0845ddb4-34c2-4a32-b2ae-270bffc5b430">
+  <exported-language name="7127d409-29f0-43e8-917f-f016ea288944(jetbrains.mps.lang.feedback.problem.structural)" />
+  <exported-language name="ad93155d-79b2-4759-b10c-55123e763903(jetbrains.mps.lang.messages)" />
+  <exported-language name="16e76fe3-9534-4def-afb7-925a169a7c0b(jetbrains.mps.lang.feedback.messages)" />
+  <exported-language name="cddf55b3-117e-46ec-837c-ff50eb7b89b0(jetbrains.mps.lang.feedback.problem.childAndProp)" />
+  <exported-language name="feec32f9-bc8f-4da8-8efd-7f3f9dd4101b(jetbrains.mps.lang.feedback.problem.scopes)" />
+  <extendedDevKits>
+    <extendedDevKit>602e7698-0d4d-45a0-8df4-365c7e7e87e8(main-feedback)</extendedDevKit>
+  </extendedDevKits>
+  <exported-solutions>
+    <exported-solution>a9e4c532-c5f5-4bb7-99ef-42abb73bbb70(jetbrains.mps.lang.descriptor.aspects)</exported-solution>
+  </exported-solutions>
+  <generation-plan model="r:b2450103-82ba-4770-b915-a940947c0fb1(jetbrains.mps.lang.descriptor.feedback@genplan)" />
+</dev-kit>
+

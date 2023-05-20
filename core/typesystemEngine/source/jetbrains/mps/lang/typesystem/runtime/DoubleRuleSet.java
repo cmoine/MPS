@@ -34,7 +34,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class DoubleRuleSet<T extends IApplicableTo2Concepts> {
   private static final String TYPESYSTEM_SUFFIX = ".typesystem";
-  ConcurrentMap<Pair<SAbstractConcept, SAbstractConcept>, Set<T>> myRules = new ConcurrentHashMap<Pair<SAbstractConcept, SAbstractConcept>, /* synchronized */ Set<T>>();
+  ConcurrentMap<Pair<SAbstractConcept, SAbstractConcept>, Set<T>> myRules = new ConcurrentHashMap<>();
 
   private DoubleTermRules<T> myDoubleTermRules = new DoubleTermRules<T>() {
 
@@ -48,10 +48,10 @@ public class DoubleRuleSet<T extends IApplicableTo2Concepts> {
     for (T rule : rules) {
       SAbstractConcept concept1 = rule.getApplicableConcept1();
       SAbstractConcept concept2 = rule.getApplicableConcept2();
-      Pair<SAbstractConcept, SAbstractConcept> pair = new Pair<SAbstractConcept, SAbstractConcept>(concept1, concept2);
+      Pair<SAbstractConcept, SAbstractConcept> pair = new Pair<>(concept1, concept2);
       Set<T> existingRules = myRules.get(pair);
       while (existingRules == null) {
-        myRules.putIfAbsent(pair, Collections.synchronizedSet(new HashSet<T>(1)));
+        myRules.putIfAbsent(pair, Collections.synchronizedSet(new HashSet<>(1)));
         existingRules = myRules.get(pair);
       }
       existingRules.add(rule);
@@ -64,10 +64,10 @@ public class DoubleRuleSet<T extends IApplicableTo2Concepts> {
   }
 
   private Iterable<T> getAllApplicableTo(SAbstractConcept leftConcept, SAbstractConcept rightConcept, LanguageScope scope) {
-    Pair<SAbstractConcept, SAbstractConcept> conceptPair = new Pair<SAbstractConcept, SAbstractConcept>(leftConcept, rightConcept);
+    Pair<SAbstractConcept, SAbstractConcept> conceptPair = new Pair<>(leftConcept, rightConcept);
     if (!myRules.containsKey(conceptPair)) return Collections.emptyList();
 
-    List<T> result = new ArrayList<T>(4);
+    List<T> result = new ArrayList<>(4);
     Set<T> rules = myRules.get(conceptPair);
     synchronized (rules) {
       for (T rule : rules) {

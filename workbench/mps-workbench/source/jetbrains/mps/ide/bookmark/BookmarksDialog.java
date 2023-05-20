@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,12 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.ui.ScrollPaneFactory;
 import jetbrains.mps.ide.project.ProjectHelper;
-import jetbrains.mps.smodel.ModelAccess;
+import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
+import javax.swing.Action;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 
@@ -45,6 +48,7 @@ public class BookmarksDialog extends DialogWrapper {
     init();
   }
 
+  @NotNull
   @Override
   protected Action[] createActions() {
     return new Action[]{
@@ -69,24 +73,14 @@ public class BookmarksDialog extends DialogWrapper {
         @Override
         protected void doAction(ActionEvent e) {
           if(!isSelectionEmpty()) {
-            ModelAccess.instance().runReadInEDT(new Runnable() {
-              @Override
-              public void run() {
-                myTree.removeSelectedBookmark();
-              }
-            });
+            myTree.removeSelectedBookmark();
           }
         }
       },
       new DialogWrapperAction("Remove All") {
         @Override
         protected void doAction(ActionEvent e) {
-          ModelAccess.instance().runReadInEDT(new Runnable() {
-            @Override
-            public void run() {
-              myBookmarkManager.clearBookmarks();
-            }
-          });
+          myBookmarkManager.clearBookmarks();
         }
       },
       new DialogWrapperAction("Close") {

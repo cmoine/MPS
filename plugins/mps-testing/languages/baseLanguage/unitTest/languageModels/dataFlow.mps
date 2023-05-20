@@ -2,10 +2,7 @@
 <model ref="r:00000000-0000-4000-0000-011c895902d3(jetbrains.mps.baseLanguage.unitTest.dataFlow)">
   <persistence version="9" />
   <languages>
-    <use id="7fa12e9c-b949-4976-b4fa-19accbc320b4" name="jetbrains.mps.lang.dataFlow" version="0" />
-    <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="4" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="00000000-0000-4000-0000-443879f56b80(jetbrains.mps.devkit.aspect.dataflow)" />
   </languages>
   <imports>
     <import index="tpe3" ref="r:00000000-0000-4000-0000-011c895902d7(jetbrains.mps.baseLanguage.unitTest.structure)" />
@@ -65,7 +62,7 @@
           <node concept="2OqwBi" id="h$beddf" role="3Ah4Yx">
             <node concept="3__QtB" id="h$bed3G" role="2Oq$k0" />
             <node concept="3TrEf2" id="h$beid8" role="2OqNvi">
-              <ref role="3Tt5mk" to="tpe3:h3vwVM7" />
+              <ref role="3Tt5mk" to="tpe3:h3vwVM7" resolve="condition" />
             </node>
           </node>
         </node>
@@ -73,7 +70,7 @@
           <node concept="2OqwBi" id="1KPHzfPK5K_" role="3Ah4Yx">
             <node concept="3__QtB" id="1KPHzfPK5Ky" role="2Oq$k0" />
             <node concept="3TrEf2" id="1KPHzfPK5KE" role="2OqNvi">
-              <ref role="3Tt5mk" to="tpe3:h3_9lvq" />
+              <ref role="3Tt5mk" to="tpe3:h3_9lvq" resolve="message" />
             </node>
           </node>
         </node>
@@ -89,7 +86,7 @@
           <node concept="2OqwBi" id="h$beNph" role="3Ah4Yx">
             <node concept="3__QtB" id="h$beNkB" role="2Oq$k0" />
             <node concept="3TrEf2" id="7jPoEeD_jQ3" role="2OqNvi">
-              <ref role="3Tt5mk" to="tpe3:7jPoEeD$ZP4" />
+              <ref role="3Tt5mk" to="tpe3:7jPoEeD$ZP4" resolve="expected" />
             </node>
           </node>
         </node>
@@ -97,7 +94,7 @@
           <node concept="2OqwBi" id="h$beQ0w" role="3Ah4Yx">
             <node concept="3__QtB" id="h$bePX4" role="2Oq$k0" />
             <node concept="3TrEf2" id="7jPoEeD_jQ4" role="2OqNvi">
-              <ref role="3Tt5mk" to="tpe3:7jPoEeD$ZP5" />
+              <ref role="3Tt5mk" to="tpe3:7jPoEeD$ZP5" resolve="actual" />
             </node>
           </node>
         </node>
@@ -113,7 +110,7 @@
           <node concept="2OqwBi" id="h$bfAn8" role="3Ah4Yx">
             <node concept="3__QtB" id="h$bfAiu" role="2Oq$k0" />
             <node concept="3TrEf2" id="h$bfAX0" role="2OqNvi">
-              <ref role="3Tt5mk" to="tpe3:h3vFAPs" />
+              <ref role="3Tt5mk" to="tpe3:h3vFAPs" resolve="condition" />
             </node>
           </node>
         </node>
@@ -129,7 +126,7 @@
           <node concept="2OqwBi" id="h$bfVQ3" role="3Ah4Yx">
             <node concept="3__QtB" id="h$bfVN7" role="2Oq$k0" />
             <node concept="3TrEf2" id="h$bfXHe" role="2OqNvi">
-              <ref role="3Tt5mk" to="tpe3:h3ykUcf" />
+              <ref role="3Tt5mk" to="tpe3:h3ykUcf" resolve="expression" />
             </node>
           </node>
         </node>
@@ -145,7 +142,7 @@
           <node concept="2OqwBi" id="hSd7_xh" role="3Ah4Yx">
             <node concept="3__QtB" id="hSd7_mx" role="2Oq$k0" />
             <node concept="3TrEf2" id="7jPoEeD_jQ5" role="2OqNvi">
-              <ref role="3Tt5mk" to="tpe3:7jPoEeD$ZP4" />
+              <ref role="3Tt5mk" to="tpe3:7jPoEeD$ZP4" resolve="expected" />
             </node>
           </node>
         </node>
@@ -153,7 +150,7 @@
           <node concept="2OqwBi" id="hSd7B0R" role="3Ah4Yx">
             <node concept="3__QtB" id="hSd7AIy" role="2Oq$k0" />
             <node concept="3TrEf2" id="7jPoEeD_jQ6" role="2OqNvi">
-              <ref role="3Tt5mk" to="tpe3:7jPoEeD$ZP5" />
+              <ref role="3Tt5mk" to="tpe3:7jPoEeD$ZP5" resolve="actual" />
             </node>
           </node>
         </node>
@@ -163,14 +160,14 @@
   </node>
   <node concept="3_zdsH" id="692cUnf6I45">
     <property role="3GE5qa" value="assert" />
-    <ref role="3_znuS" to="tpe3:692cUnf6I3R" resolve="AssertInNotNull" />
+    <ref role="3_znuS" to="tpe3:692cUnf6I3R" resolve="AssertIsNotNull" />
     <node concept="3__wT9" id="692cUnf6I46" role="3_A6iZ">
       <node concept="3clFbS" id="692cUnf6I47" role="2VODD2">
         <node concept="3AgYrR" id="692cUnf6I48" role="3cqZAp">
           <node concept="2OqwBi" id="692cUnf6I4b" role="3Ah4Yx">
             <node concept="3__QtB" id="692cUnf6I4a" role="2Oq$k0" />
             <node concept="3TrEf2" id="692cUnf6I4f" role="2OqNvi">
-              <ref role="3Tt5mk" to="tpe3:692cUnf6I3T" />
+              <ref role="3Tt5mk" to="tpe3:692cUnf6I3T" resolve="expression" />
             </node>
           </node>
         </node>
@@ -185,7 +182,7 @@
           <node concept="2OqwBi" id="1G6jxL1pnB$" role="3Ah4Yx">
             <node concept="3__QtB" id="1G6jxL1pnBz" role="2Oq$k0" />
             <node concept="3TrEf2" id="1G6jxL1pvtT" role="2OqNvi">
-              <ref role="3Tt5mk" to="tpe3:h3$Olsu" />
+              <ref role="3Tt5mk" to="tpe3:h3$Olsu" resolve="statement" />
             </node>
           </node>
         </node>
@@ -203,7 +200,7 @@
               <node concept="2OqwBi" id="1KPHzfPK4z4" role="3Ah4Yx">
                 <node concept="3__QtB" id="1KPHzfPK4z1" role="2Oq$k0" />
                 <node concept="3TrEf2" id="1KPHzfPK4RU" role="2OqNvi">
-                  <ref role="3Tt5mk" to="tpe3:h3_1ByX" />
+                  <ref role="3Tt5mk" to="tpe3:h3_1ByX" resolve="message" />
                 </node>
               </node>
             </node>
@@ -213,7 +210,7 @@
             <node concept="2OqwBi" id="1KPHzfPK4yM" role="3uHU7B">
               <node concept="3__QtB" id="1KPHzfPK4yJ" role="2Oq$k0" />
               <node concept="3TrEf2" id="1KPHzfPK4yR" role="2OqNvi">
-                <ref role="3Tt5mk" to="tpe3:h3_1ByX" />
+                <ref role="3Tt5mk" to="tpe3:h3_1ByX" resolve="message" />
               </node>
             </node>
           </node>

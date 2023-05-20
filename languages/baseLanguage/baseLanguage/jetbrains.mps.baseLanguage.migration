@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model ref="r:014fd3cf-b801-4a0b-98b7-249c4c1353ec(migrationData)">
+  <persistence version="9" />
+  <languages />
+  <imports>
+    <import index="tpee" ref="r:00000000-0000-4000-0000-011c895902ca(jetbrains.mps.baseLanguage.structure)" implicit="true" />
+    <import index="tpen" ref="r:00000000-0000-4000-0000-011c895902c3(jetbrains.mps.baseLanguage.editor)" implicit="true" />
+  </imports>
+  <registry>
+    <language id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor">
+      <concept id="3017733173184487099" name="jetbrains.mps.lang.editor.structure.SmartRefMigrationDataEntity" flags="ng" index="ZsZFI">
+        <reference id="3017733173184487105" name="generatedMenu" index="ZsZEk" />
+        <reference id="3017733173184487102" name="conceptNode" index="ZsZFF" />
+      </concept>
+      <concept id="3017733173184487098" name="jetbrains.mps.lang.editor.structure.SmartRefMigrationData" flags="ng" index="ZsZFJ">
+        <child id="3017733173184487121" name="entities" index="ZsZE4" />
+      </concept>
+    </language>
+    <language id="9882f4ad-1955-46fe-8269-94189e5dbbf2" name="jetbrains.mps.lang.migration.util">
+      <concept id="7417095922908669705" name="jetbrains.mps.lang.migration.util.structure.StepData" flags="ng" index="2z5JpS">
+        <property id="1973338949477451252" name="script" index="3qqn2_" />
+        <child id="7417095922908725798" name="data" index="2z5Xdn" />
+      </concept>
+    </language>
+  </registry>
+  <node concept="2z5JpS" id="47y0FrqhJgk">
+    <property role="3qqn2_" value="18bc6592-03a6-4e29-a83a-7ff23bde13ba(jetbrains.mps.lang.editor)/8" />
+    <node concept="ZsZFJ" id="47y0FrqaMai" role="2z5Xdn">
+      <node concept="ZsZFI" id="47y0FrqhJer" role="ZsZE4">
+        <ref role="ZsZFF" to="tpee:2s$p4KaM3e_" resolve="DefaultClassCreator" />
+        <ref role="ZsZEk" to="tpen:47y0FrqhJel" resolve="DefaultClassCreator_SmartReference" />
+      </node>
+      <node concept="ZsZFI" id="47y0FrqhJfD" role="ZsZE4">
+        <ref role="ZsZFF" to="tpee:hDpGfJe" resolve="ClassCreator" />
+        <ref role="ZsZEk" to="tpen:47y0FrqhJfz" resolve="ClassCreator_SmartReference" />
+      </node>
+      <node concept="ZsZFI" id="47y0FrqhJfQ" role="ZsZE4">
+        <ref role="ZsZFF" to="tpee:g7uibYu" resolve="ClassifierType" />
+        <ref role="ZsZEk" to="tpen:47y0FrqhJfO" resolve="ClassifierType_SmartReference" />
+      </node>
+      <node concept="ZsZFI" id="47y0FrqhJgf" role="ZsZE4">
+        <ref role="ZsZFF" to="tpee:gfVsKKk" resolve="ClassifierClassExpression" />
+        <ref role="ZsZEk" to="tpen:47y0FrqhJgd" resolve="ClassifierClassExpression_SmartReference" />
+      </node>
+      <node concept="ZsZFI" id="47y0FrqhJgj" role="ZsZE4">
+        <ref role="ZsZFF" to="tpee:hiB6LFO" resolve="AnnotationInstanceValue" />
+        <ref role="ZsZEk" to="tpen:47y0FrqhJgh" resolve="AnnotationInstanceValue_SmartReference" />
+      </node>
+    </node>
+  </node>
+</model>
+

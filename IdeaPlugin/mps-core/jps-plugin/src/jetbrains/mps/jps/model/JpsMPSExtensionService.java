@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,14 +24,13 @@ import org.jetbrains.jps.service.JpsServiceManager;
 /**
  * evgeny, 11/28/12
  */
-public abstract class JpsMPSExtensionService {
-  public static JpsMPSExtensionService getInstance() {
+public interface JpsMPSExtensionService {
+  static JpsMPSExtensionService getInstance() {
     return JpsServiceManager.getInstance().getService(JpsMPSExtensionService.class);
   }
 
   @Nullable
-  public abstract JpsMPSModuleExtension getExtension(@Nullable JpsModule module);
+  JpsMPSModuleExtension getExtension(@Nullable JpsModule module);
 
-  public abstract void setExtension(@NotNull JpsModule module, @NotNull JpsMPSModuleExtension extension);
-
+  void setExtension(@NotNull JpsModule module, @NotNull JpsMPSModuleExtension extension);
 }

@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2003-2016 JetBrains s.r.o.
+  ~ Copyright 2003-2021 JetBrains s.r.o.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,39 +14,22 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin version="2" xmlns:xi="http://www.w3.org/2001/XInclude">
+<idea-plugin xmlns:xi="http://www.w3.org/2001/XInclude">
   <id>jetbrains.mps.core</id>
   <name>MPS Core</name>
   <category>Custom Languages</category>
   <description>MPS Core</description>
-  <version>3.4.5</version>
-  <vendor url="http://www.jetbrains.com/mps/">JetBrains MPS</vendor>
-  <idea-version since-build="145.1" until-build="164.1"/>
+  <version>2023.1</version>
+  <vendor url="http://www.jetbrains.com/mps/">JetBrains</vendor>
+  <idea-version since-build="231.1" until-build="232.1"/>
 
   <depends optional="true" config-file="idea-support.xml">com.intellij.modules.java</depends>
-  <depends optional="true" config-file="intellij-ides-support.xml">com.intellij.modules.ultimate</depends>
+  <depends optional="true" config-file="intellij-ides-support.xml">com.intellij.modules.platform</depends>
 
   <application-components>
     <component>
-      <interface-class>jetbrains.mps.ide.vfs.IdeaFSComponent</interface-class>
-      <implementation-class>jetbrains.mps.ide.vfs.IdeaFileSystem</implementation-class>
-    </component>
-    <component>
-      <interface-class>jetbrains.mps.smodel.ModelAccess</interface-class>
-      <implementation-class>jetbrains.mps.smodel.WorkbenchModelAccess</implementation-class>
-    </component>
-    <component>
-      <interface-class>jetbrains.mps.smodel.UndoHandler</interface-class>
-      <implementation-class>jetbrains.mps.ide.undo.WorkbenchUndoHandler</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.ide.MPSCoreComponents</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.ide.persistence.PersistenceComponent</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.idea.core.make.NoMakeService</implementation-class>
+      <interface-class>jetbrains.mps.make.IMakeService</interface-class>
+      <implementation-class>jetbrains.mps.ide.make.WorkbenchMakeService</implementation-class>
     </component>
     <component>
       <implementation-class>jetbrains.mps.idea.core.navigation.NavigationSupportImpl</implementation-class>
@@ -55,14 +38,7 @@
       <implementation-class>jetbrains.mps.idea.core.refactoring.RefactoringAccessImpl</implementation-class>
     </component>
     <component>
-      <implementation-class>jetbrains.mps.ide.projectView.ProjectViewSelectInProvider</implementation-class>
-    </component>
-    <component>
       <implementation-class>jetbrains.mps.idea.core.project.stubs.MPSGlobalLibImporter</implementation-class>
-    </component>
-    <component>
-      <interface-class>jetbrains.mps.ide.platform.watching.ReloadManager</interface-class>
-      <implementation-class>jetbrains.mps.ide.platform.watching.ReloadManagerComponent</implementation-class>
     </component>
     <!--
 
@@ -75,39 +51,25 @@
     </component>
 
     <component>
-      <implementation-class>jetbrains.mps.idea.core.library.MpsModuleLibraryKindContainer</implementation-class>
-    </component>
-    <component>
-      <interface-class>jetbrains.mps.workbench.action.IRegistryManager</interface-class>
-      <implementation-class>jetbrains.mps.workbench.action.DummyRegistryManager</implementation-class>
-    </component>
-    <component>
-      <interface-class>jetbrains.mps.repository.IdeaPluginFacetComponent</interface-class>
-      <implementation-class>jetbrains.mps.repository.DummyIdeaPluginFacetComponent</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.repository.RepositoryInitializingComponent</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.ide.platform.watching.WatchedRoots</implementation-class>
+      <implementation-class>jetbrains.mps.repository.RepositoryInPluginInitializer</implementation-class>
     </component>
     <component>
       <implementation-class>jetbrains.mps.idea.core.project.PluginsPathMacroCrutch</implementation-class>
     </component>
-    <component>
-      <implementation-class>jetbrains.mps.ide.icons.GlobalIconManager</implementation-class>
-    </component>
   </application-components>
 
-  <xi:include href="../../../workbench/mps-platform/source/META-INF/MPSCore.xml" xpointer="xpointer(/components/*)"/>
-  <xi:include href="../../../workbench/mps-editor/source/META-INF/MPSEditor.xml" xpointer="xpointer(/components/*)"/>
+  <xi:include href="../../../workbench/mps-platform/source/META-INF/MPSCore.xml"/>
+  <xi:include href="../../../workbench/mps-editor/source/META-INF/MPSEditor.xml"/>
   <xi:include href="../../../workbench/mps-ui/source_gen/jetbrains/mps/ide/platform/actions/PlatformActions.xml"
-              xpointer="xpointer(/components/*)"/>
+             />
   <xi:include href="../../../workbench/mps-editor/source_gen/jetbrains/mps/ide/editor/actions/MPSEditorActions.xml"
-              xpointer="xpointer(/components/*)"/>
+             />
+  <xi:include href="../../../workbench/mps-ui/source/META-INF/MPSUI.xml"/>
 
   <project-components>
-    <xi:include href="../../../workbench/mps-ui/source/META-INF/MPSUI.xml" xpointer="xpointer(/components/project-components/*)"/>
+    <component>
+      <implementation-class>jetbrains.mps.idea.core.config.ConfigurationChecker</implementation-class>
+    </component>
     <component>
       <implementation-class>jetbrains.mps.idea.core.project.stubs.MPSProjectLibImporter</implementation-class>
     </component>
@@ -115,13 +77,7 @@
       <implementation-class>jetbrains.mps.project.MPSProject</implementation-class>
     </component>
     <component>
-      <implementation-class>jetbrains.mps.ide.vfs.ProjectRootListenerComponent</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.idea.core.psi.impl.MPSPsiProvider</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.idea.core.psi.impl.PsiModelReloadListener</implementation-class>
+      <implementation-class>jetbrains.mps.ide.vfs.ProjectStoreDirAddToVFSSnapshot</implementation-class>
     </component>
     <component>
       <implementation-class>jetbrains.mps.idea.core.project.UpgradeModelsPersistence</implementation-class>
@@ -138,7 +94,6 @@
   </project-components>
 
   <extensionPoints>
-    <xi:include href="../../../workbench/mps-ui/source/META-INF/MPSUI.xml" xpointer="xpointer(/components/extensionPoints/*)"/>
     <extensionPoint qualifiedName="com.intellij.mps.modelRootContributor"
                     beanClass="jetbrains.mps.idea.core.project.ModelRootContributorEP"/>
     <extensionPoint qualifiedName="com.intellij.mps.modelTemplateProvider"
@@ -155,12 +110,9 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <mps.modelRootContributor className="jetbrains.mps.idea.core.project.stubs.ModuleLibStubProvider"/>
-    <editorOptionsProvider
-            instance="jetbrains.mps.nodeEditor.EditorSettingsConfigurable$EditorSettingsConfigurableOptionsProvider"/>
     <facetType implementation="jetbrains.mps.idea.core.facet.MPSFacetType"/>
     <frameworkSupport implementation="jetbrains.mps.idea.core.facet.MPSFrameworkSupportProvider"/>
     <mps.LanguageLibrary dir="/languages"/>
-    <mps.LanguageLibrary dir="/lib"/>
     <mps.renameRefactoringContributor className="jetbrains.mps.idea.core.refactoring.DefaultRenameContributor"
                                       id="mps-core-rename" order="last"/>
 
@@ -172,7 +124,6 @@
     <vetoRenameCondition implementation="jetbrains.mps.idea.core.refactoring.MPSVetoRenameCondition"/>
     <refactoring.moveHandler implementation="jetbrains.mps.idea.core.refactoring.MPSMoveHandlerDelegate"
                              order="first"/> <!-- isn't first a bit too much -->
-    <moduleRendererFactory implementation="jetbrains.mps.idea.core.navigation.MpsRendererFactory" order="first"/>
     <!-- FIXME: mps-editor-api.jar doesn't look good in jps classpath -->
     <!-- FIXME: added mps-platform.jar to avoid NoClassDefFound for VisibilityUtil from baseLanguage.search
     2 things should happen
@@ -181,31 +132,34 @@
          It doesn't work currently (NoClassDef still occurs) most likely due to the fact that baseLanguage is part
          of mps-core not mps-java, so its generator works in the core jps plugin's classloader.
          Ideally baseLanguage must be part of mps-java
-
-      mps-editor.jar added :( due to NoClassDef for IntentionAspectDescriptor
     -->
-    <!-- IMORTANT keep it in sync with build.xml runTests target, otherwise jps tests fill fail -->
+    <!-- IMPORTANT keep it in sync with build.xml runTests target, otherwise jps tests fill fail -->
     <compileServer.plugin
-            classpath="jps/mps-jps-plugin.jar;mps-common.jar;mps-tool.jar;mps-core.jar;mps-openapi.jar;mps-logging.jar;mps-messaging.jar;mps-collections.jar;mps-closures.jar;mps-tuples.jar;mps-editor.jar;mps-editor-api.jar;mps-platform.jar;mps-behavior-api.jar;mps-behavior-runtime.jar;mps-boot-util.jar"/>
+            classpath="jps/mps-core-jps-plugin.jar;jps/mps-core-jps-plugin-j8.jar;mps-common.jar;mpsant/mps-tool.jar;mps-core.jar;mps-references.jar;mps-openapi.jar;mps-logging.jar;mps-messaging.jar;mps-collections.jar;mps-closures.jar;mps-tuples.jar;mps-editor-api.jar;mps-platform.jar;mps-behavior-api.jar;mps-behavior-runtime.jar;mps-boot-util.jar;mps-annotations.jar;mps-project-check.jar;mps-generator.jar;mps-textgen.jar;mps-persistence.jar;mps-constraints-runtime.jar;mps-context.jar;mps-feedback-api.jar;mps-messages-api.jar;mps-problem.jar;mps-messages-for-rules.jar;mps-messages-for-structure.jar;mps-messages-for-legacy-constraints.jar"/>
     <buildProcess.parametersProvider implementation="jetbrains.mps.idea.build.MPSBuildProcessParametersProvider"/>
     <library.type implementation="jetbrains.mps.idea.core.library.ModuleLibraryType"/>
-    <projectConfigurable instance="jetbrains.mps.idea.core.codeStyle.MpsCodeStyleSettingsConfigurable"
-                         order="after colors"/>
-    <projectConfigurable instance="jetbrains.mps.idea.core.compiler.MpsCompilerSettingsConfigurable"
-                         order="after colors"/>
+    <projectConfigurable parentId="preferences.sourceCode" displayName="MPS" instance="jetbrains.mps.ide.codeStyle.CodeStyleSettingsConfigurable" order="first"/>
+    <projectConfigurable parentId="project.propCompiler" displayName="MPS Java Compiler" instance="jetbrains.mps.ide.compiler.CompilerSettingsConfigurable" nonDefaultProject="true"/>
     <lang.fileViewProviderFactory language="MPS"
                                   implementationClass="jetbrains.mps.idea.core.psi.impl.file.MPSFileViewProviderFactory"/>
     <analyzeStacktraceFilter implementation="jetbrains.mps.ide.platform.actions.MPSStackTraceFilter" order="first"/>
     <navbar implementation="jetbrains.mps.idea.core.navbar.MPSNavBarExtension" id="MPSNavbar"/>
     <lang.parserDefinition language="MPS" implementationClass="jetbrains.mps.idea.core.fileType.MPSParserDefinition"/>
-    <iconLayerProvider implementation="jetbrains.mps.idea.core.psi.impl.ModelFileIconLayerProvider"/>
     <getDataRule key="MPS_SModel" implementationClass="jetbrains.mps.idea.core.data.ModelDataRule"/>
     <getDataRule key="MPS_SModel_List" implementationClass="jetbrains.mps.idea.core.data.ModelsDataRule"/>
     <projectService serviceInterface="com.intellij.psi.search.ProjectScopeBuilder"
                     serviceImplementation="jetbrains.mps.idea.core.project.MPSProjectScopeBuilder"
                     overrides="true"/>
-    <fileEditorProvider implementation="jetbrains.mps.idea.core.editor.ModelFileToRootDispatchingEditorProvider"></fileEditorProvider>
+    <fileEditorProvider implementation="jetbrains.mps.idea.core.editor.ModelFileToRootDispatchingEditorProvider"/>
     <gotoClassContributor implementation="jetbrains.mps.idea.core.navigation.MPSIdeaGotoClassContributor"/>
+    <projectService serviceImplementation="jetbrains.mps.ide.make.MakeServiceConfiguration"/>
+    <applicationService serviceImplementation="jetbrains.mps.ide.projectView.ProjectViewSelectInProvider"/>
+    <applicationService serviceImplementation="jetbrains.mps.ide.platform.watching.FileSystemListenersContainer"/>
+    <projectService serviceImplementation="jetbrains.mps.idea.core.project.stubs.MultipleSdkProblemNotifier" />
+    <notificationGroup id="MPS facet" displayType="BALLOON" isLogByDefault="false"/>
+    <projectService serviceImplementation="jetbrains.mps.idea.core.psi.impl.PsiModelReloadListener" />
+    <getDataRule key="psi.Element" implementationClass="jetbrains.mps.idea.core.psi.impl.MPSPsiElementDataRule" type="context"/>
+    <projectService serviceImplementation="jetbrains.mps.idea.core.psi.impl.MPSPsiProvider" />
   </extensions>
 
   <extensions defaultExtensionNs="jetbrains.mps">
@@ -240,6 +194,13 @@
                     anchor="first"/>
       <keyboard-shortcut first-keystroke="ctrl alt shift M" keymap="$default"/>
     </action>
+    <action id="jetbrains.mps.idea.core.actions.GoToMpsStubs"
+            class="jetbrains.mps.idea.core.actions.GoToMpsStubs"
+            text="MPS Stub">
+      <add-to-group group-id="jetbrains.mps.ide.editor.actions.GoToEditorPopupAddition_ActionGroup"
+                    anchor="first"/>
+      <keyboard-shortcut first-keystroke="ctrl shift B" keymap="$default" />
+    </action>
 
 
 
@@ -255,5 +216,14 @@
               class="jetbrains.mps.idea.core.actions.AddFirstLanguageImport">
       </action>
     </group>
+    <unregister id="jetbrains.mps.ide.editor.actions.AddLanguageImport_Action"/>
+    <action id="jetbrains.mps.idea.core.actions.UseLanguageAction"
+            class="jetbrains.mps.idea.core.actions.UseLanguageAction">
+      <!-- Copied from AddLanguageImport_Action declaration at MPSEditorActions.xml-->
+      <keyboard-shortcut first-keystroke="ctrl L" keymap="$default" />
+      <keyboard-shortcut first-keystroke="ctrl L" keymap="Mac OS X" />
+      <keyboard-shortcut first-keystroke="ctrl L" keymap="Mac OS X 10.5+" />
+      <add-to-group group-id="jetbrains.mps.ide.editor.actions.IDE_Edit_ActionGroup" anchor="after" relative-to-action="jetbrains.mps.ide.editor.actions.AddModelImportByRoot_Action"/>
+    </action>
   </actions>
 </idea-plugin>

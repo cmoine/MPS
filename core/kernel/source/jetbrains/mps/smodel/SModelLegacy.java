@@ -57,6 +57,8 @@ public final class SModelLegacy {
     myModel.addLanguage(MetaAdapterFactory.getLanguage(ref));
   }
 
+@Deprecated(since = "2019.2", forRemoval = true)
+  //use SModelInternal.addLanguage(SLanguage)
   public void addLanguage(Language language) {
     myModel.addLanguage(MetaAdapterByDeclaration.getLanguage(language));
   }
@@ -74,7 +76,7 @@ public final class SModelLegacy {
 
   public List<SModuleReference> importedLanguages() {
     final Collection<SLanguage> usedLanguages = myModel.usedLanguages();
-    ArrayList<SModuleReference> rv = new ArrayList<SModuleReference>(usedLanguages.size());
+    ArrayList<SModuleReference> rv = new ArrayList<>(usedLanguages.size());
     for (SLanguage l : usedLanguages) {
       final SModule sourceModule = l.getSourceModule();
       if (sourceModule != null) {

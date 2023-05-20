@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  */
 package jetbrains.mps.generator;
 
-import jetbrains.mps.generator.impl.DefaultNonIncrementalStrategy;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SModel;
@@ -36,13 +35,10 @@ public class GenerationOptions {
   private final boolean mySaveTransientModels;
   private final boolean myActiveInplaceTransform;
   private final boolean myStrictMode;
-  private final boolean myRebuildAll;
   private final boolean myUseDynamicRefs;
 
-  private final IncrementalGenerationStrategy myIncrementalStrategy;
   private final GenerationParametersProvider myParametersProvider;
   private final Map<SModel, ModelGenerationPlan> myCustomPlans;
-  private boolean myKeepOutputModel;
 
   private final boolean myGenerateInParallel;
   private final int myNumberOfThreads;
@@ -52,34 +48,29 @@ public class GenerationOptions {
   private final boolean myShowWarnings;
   private final boolean myKeepModelsWithWarnings;
   private final boolean myShowBadChildWarning;
+  private final boolean myWarnDynamicToStatic;
   private final int myNumberOfModelsToKeep;
 
-  private final boolean myDebugIncrementalDependencies;
-
-  private GenerationOptions(boolean strictMode, boolean saveTransientModels, boolean rebuildAll, boolean useInplaceTransformations,
+  private GenerationOptions(boolean strictMode, boolean saveTransientModels, boolean useInplaceTransformations,
                             boolean generateInParallel, int numberOfThreads, int tracingMode, boolean showInfo,
                             boolean showWarnings, boolean keepModelsWithWarnings, int numberOfModelsToKeep,
-                            boolean useDynamicRefs, IncrementalGenerationStrategy incrementalStrategy,
-                            GenerationParametersProvider parametersProvider, boolean keepOutputModel, boolean showBadChildWarning,
-                            Map<SModel, ModelGenerationPlan> customPlans,
-                            boolean debugIncrementalDependencies) {
+                            boolean useDynamicRefs,
+                            GenerationParametersProvider parametersProvider, boolean showBadChildWarning, boolean warnDynamicToStatic,
+                            Map<SModel, ModelGenerationPlan> customPlans) {
     mySaveTransientModels = saveTransientModels;
     myActiveInplaceTransform = useInplaceTransformations;
     myGenerateInParallel = generateInParallel;
     myStrictMode = strictMode;
-    myRebuildAll = rebuildAll;
     myNumberOfThreads = numberOfThreads;
     myTracingMode = tracingMode;
     myNumberOfModelsToKeep = numberOfModelsToKeep;
     myShowInfo = showInfo;
     myShowWarnings = showWarnings;
     myKeepModelsWithWarnings = keepModelsWithWarnings;
-    myIncrementalStrategy = incrementalStrategy;
     myParametersProvider = parametersProvider;
-    myKeepOutputModel = keepOutputModel;
     myShowBadChildWarning = showBadChildWarning;
+    myWarnDynamicToStatic = warnDynamicToStatic;
     myCustomPlans = customPlans;
-    myDebugIncrementalDependencies = debugIncrementalDependencies;
     myUseDynamicRefs = useDynamicRefs;
   }
 
@@ -95,15 +86,6 @@ public class GenerationOptions {
     return myStrictMode;
   }
 
-  public boolean isRebuildAll() {
-    return myRebuildAll;
-  }
-
-  @NotNull
-  public IncrementalGenerationStrategy getIncrementalStrategy() {
-    return myIncrementalStrategy;
-  }
-
   public int getNumberOfThreads() {
     return myNumberOfThreads;
   }
@@ -113,9 +95,6 @@ public class GenerationOptions {
   }
 
   public int getTracingMode() {
-    if (isGenerateInParallel() && myTracingMode > TRACE_STEPS) {
-      return TRACE_STEPS;
-    }
     return myTracingMode;
   }
 
@@ -133,6 +112,10 @@ public class GenerationOptions {
 
   public boolean isShowBadChildWarning() {
     return myShowBadChildWarning;
+  }
+
+  public boolean warnDynamicToStaticFailed() {
+    return myWarnDynamicToStatic;
   }
 
   public int getNumberOfModelsToKeep() {
@@ -158,18 +141,11 @@ public class GenerationOptions {
       useInplaceTransformations(settings.useInplaceTransformations()).
       generateInParallel(settings.isParallelGenerator(), settings.getNumberOfParallelThreads()).
       reporting(settings.isShowInfo(), settings.isShowWarnings(), settings.isKeepModelsWithWarnings(), settings.getNumberOfModelsToKeep()).
-      showBadChildWarning(settings.isShowBadChildWarning()).debugIncrementalDependencies(settings.isDebugIncrementalDependencies()).
+      showBadChildWarning(settings.isShowWarnings() && settings.isShowBadChildWarning()).
+      warnDynamicToStatic(settings.isShowWarnings() && settings.warnDynamicToStaticReference()).
       useDynamicReferences(!settings.createStaticReferences());
   }
 
-
-  public boolean isKeepOutputModel() {
-    return myKeepOutputModel;
-  }
-
-  public boolean isDebugIncrementalDependencies() {
-    return myDebugIncrementalDependencies;
-  }
 
   /**
    * @see jetbrains.mps.generator.IGenerationSettings#createStaticReferences()
@@ -186,10 +162,8 @@ public class GenerationOptions {
 
     private boolean mySaveTransientModels = false;
     private boolean myStrictMode = false;
-    private boolean myRebuildAll = true;
-    private IncrementalGenerationStrategy myIncrementalStrategy = new DefaultNonIncrementalStrategy();
 
-    private Map<SModel, ModelGenerationPlan> myCustomPlans = new HashMap<SModel, ModelGenerationPlan>();
+    private Map<SModel, ModelGenerationPlan> myCustomPlans = new HashMap<>();
     private boolean myGenerateInParallel = false;
     private int myNumberOfThreads = 4;
     private int myTracingMode = TRACE_OFF;
@@ -198,12 +172,11 @@ public class GenerationOptions {
     private boolean myShowWarnings = true;
     private boolean myKeepModelsWithWarnings = true;
     private boolean myShowBadChildWarning = true;
+    private boolean myWarnDynamicToStatic = false;
     private int myNumberOfModelsToKeep = 16;
 
     private GenerationParametersProvider myParametersProvider = null;
 
-    private boolean myKeepOutputModel;
-    private boolean myDebugIncrementalDependencies = false;
     private boolean myUseInplace;
     private boolean myUseDynamicRefs = false;
 
@@ -211,15 +184,11 @@ public class GenerationOptions {
     }
 
     public GenerationOptions create() {
-      if(myIncrementalStrategy == null) {
-        throw new IllegalArgumentException("incremental strategy is not set");
-      }
-
-      return new GenerationOptions(myStrictMode, mySaveTransientModels, myRebuildAll, myUseInplace,
+      return new GenerationOptions(myStrictMode, mySaveTransientModels, myUseInplace,
         myGenerateInParallel, myNumberOfThreads, myTracingMode, myShowInfo, myShowWarnings,
         myKeepModelsWithWarnings, myNumberOfModelsToKeep, myUseDynamicRefs,
-        myIncrementalStrategy, myParametersProvider, myKeepOutputModel, myShowBadChildWarning,
-        myCustomPlans, myDebugIncrementalDependencies);
+        myParametersProvider, myShowBadChildWarning, myWarnDynamicToStatic,
+        myCustomPlans);
     }
 
     public OptionsBuilder saveTransientModels(boolean saveTransientModels) {
@@ -242,23 +211,13 @@ public class GenerationOptions {
       return this;
     }
 
-    public OptionsBuilder debugIncrementalDependencies(boolean value) {
-      myDebugIncrementalDependencies = value;
+    public OptionsBuilder warnDynamicToStatic(boolean enabled) {
+      myWarnDynamicToStatic = enabled;
       return this;
     }
 
     public OptionsBuilder useInplaceTransformations(boolean use) {
       myUseInplace = use;
-      return this;
-    }
-
-    public OptionsBuilder rebuildAll(boolean rebuildAll) {
-      myRebuildAll = rebuildAll;
-      return this;
-    }
-
-    public OptionsBuilder incremental(@NotNull IncrementalGenerationStrategy incrementalStrategy) {
-      myIncrementalStrategy = incrementalStrategy;
       return this;
     }
 
@@ -278,11 +237,6 @@ public class GenerationOptions {
 
     public OptionsBuilder tracing(int tracingMode) {
       myTracingMode = tracingMode;
-      return this;
-    }
-
-    public OptionsBuilder keepOutputModel(boolean keepOutputModel) {
-      myKeepOutputModel = keepOutputModel;
       return this;
     }
 

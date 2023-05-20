@@ -26,7 +26,7 @@ public class TextGen__Facet extends IFacet.Stub {
   private List<ITarget> targets = ListSequence.fromList(new ArrayList<ITarget>());
   private IFacet.Name name = new IFacet.Name("jetbrains.mps.make.tests.TextGen_");
   public TextGen__Facet() {
-    ListSequence.fromList(targets).addElement(new TextGen__Facet.Target_ConditionallyGenerate());
+    ListSequence.fromList(targets).addElement(new Target_ConditionallyGenerate());
   }
   public Iterable<ITarget> targets() {
     return targets;
@@ -44,7 +44,7 @@ public class TextGen__Facet extends IFacet.Stub {
     return this.name;
   }
   public IPropertiesPersistence propertiesPersistence() {
-    return new TextGen__Facet.TargetProperties();
+    return new TargetProperties();
   }
   public static class Target_ConditionallyGenerate implements ITargetEx {
     private static final ITarget.Name name = new ITarget.Name("jetbrains.mps.make.tests.TextGen_.ConditionallyGenerate");
@@ -59,6 +59,7 @@ public class TextGen__Facet extends IFacet.Stub {
           switch (0) {
             case 0:
             default:
+              progressMonitor.done();
               return new IResult.SUCCESS(_output_rqwvem_a0a);
           }
         }

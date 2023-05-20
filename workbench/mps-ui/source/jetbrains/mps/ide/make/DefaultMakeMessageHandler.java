@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +15,15 @@
  */
 package jetbrains.mps.ide.make;
 
+import jetbrains.mps.ide.messages.MessageListOptions;
 import jetbrains.mps.ide.messages.MessagesViewTool;
 import jetbrains.mps.make.IMakeService;
 import jetbrains.mps.messages.IMessage;
 import jetbrains.mps.messages.IMessageHandler;
+import jetbrains.mps.messages.IMessageList;
 import jetbrains.mps.messages.LogHandler;
 import jetbrains.mps.project.Project;
-import org.apache.log4j.Logger;
+import jetbrains.mps.logging.Logger;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -32,13 +34,15 @@ public class DefaultMakeMessageHandler implements IMessageHandler {
   private final IMessageHandler myDelegate;
 
   public DefaultMakeMessageHandler(Project mpsProject) {
-      MessagesViewTool tool = mpsProject.getComponent(MessagesViewTool.class);
-      if (tool != null) {
-        myDelegate = tool.newHandler("Make", true);
-      } else {
-        //it might happen if we haven't opened IDE yet
-        myDelegate = new LogHandler(Logger.getLogger(IMakeService.class));
-      }
+    MessagesViewTool tool = MessagesViewTool.getInstance(mpsProject);
+    if (tool != null) {
+      IMessageList list = tool.getMessageList("Make", MessageListOptions.ActivateOnMessage, MessageListOptions.ReuseExisting);
+      list.clear();
+      myDelegate = list;
+    } else {
+      //it might happen if we haven't opened IDE yet
+      myDelegate = new LogHandler(Logger.getLogger(IMakeService.class));
+    }
   }
 
   @Override

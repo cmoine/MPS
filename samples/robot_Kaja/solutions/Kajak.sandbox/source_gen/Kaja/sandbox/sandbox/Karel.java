@@ -12,7 +12,7 @@ public class Karel extends KajaFrame {
     while (!(isMark())) {
       traceStep_routine();
     }
-    // Routine definitions 
+    // Routine definitions
   }
   public void traceStep_routine() {
     if (!(isFull())) {
@@ -25,8 +25,11 @@ public class Karel extends KajaFrame {
   }
   public void safeStep_routine() {
     while (isWall()) {
-      turnLeft();
-      pause();
+      try {
+        turnLeft();
+        pause();
+      } finally {
+      }
     }
     if (canMove()) {
       moveKaja();
@@ -37,15 +40,24 @@ public class Karel extends KajaFrame {
   }
   public void turnRight_routine() {
     for (int indexVariable_ligmp_a0c = 0; indexVariable_ligmp_a0c < 3; indexVariable_ligmp_a0c++) {
-      turnLeft();
-      pause();
+      try {
+        turnLeft();
+        pause();
+      } finally {
+      }
     }
   }
   public void turnAround_routine() {
-    turnLeft();
-    pause();
-    turnLeft();
-    pause();
+    try {
+      turnLeft();
+      pause();
+    } finally {
+    }
+    try {
+      turnLeft();
+      pause();
+    } finally {
+    }
   }
   public static void main(String[] args) {
     Karel script = new Karel();

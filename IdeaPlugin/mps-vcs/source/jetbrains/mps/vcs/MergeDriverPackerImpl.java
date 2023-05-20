@@ -1,5 +1,5 @@
-package jetbrains.mps.vcs;/*
- * Copyright 2003-2012 JetBrains s.r.o.
+/*
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,27 +13,23 @@ package jetbrains.mps.vcs;/*
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+package jetbrains.mps.vcs;
 
 import com.intellij.ide.plugins.IdeaPluginDescriptor;
 import com.intellij.ide.plugins.PluginManager;
-import com.intellij.openapi.components.ApplicationComponent;
+import com.intellij.ide.plugins.PluginManagerCore;
 import com.intellij.openapi.extensions.PluginId;
 import jetbrains.mps.vcs.platform.mergedriver.MergeDriverPacker;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
-public class MergeDriverPackerImpl extends MergeDriverPacker implements ApplicationComponent {
+public class MergeDriverPackerImpl extends MergeDriverPacker {
 
   private String getMPSCorePluginPath() {
-    IdeaPluginDescriptor mpsCorePlugin = PluginManager.getPlugin(PluginId.getId("jetbrains.mps.core"));
+    IdeaPluginDescriptor mpsCorePlugin = PluginManagerCore.getPlugin(PluginId.getId("jetbrains.mps.core"));
     assert mpsCorePlugin != null;
-    return mpsCorePlugin.getPath().getPath();
+    return mpsCorePlugin.getPluginPath().toString();
   }
-
 
   @Override
   public String getMPSCorePath() {
@@ -41,35 +37,14 @@ public class MergeDriverPackerImpl extends MergeDriverPacker implements Applicat
   }
 
   @Override
-  protected Set<String> getClasspathInternal() {
-    Set<String> classpathItems = new LinkedHashSet<String>();
-    String mpsCorePluginPath = getMPSCorePluginPath();
-    for (String jar : mpsAddJars) {
-      classpathItems.add(mpsCorePluginPath + File.separator + "lib" + File.separator + jar);
-    }
-    classpathItems.add(mpsCorePluginPath + File.separator + "classes");
-    classpathItems.add(getVCSCorePluginPath() + File.separator + "classes");
-    return classpathItems;
+  protected String getVCSCorePluginPath() {
+    IdeaPluginDescriptor vcsCorePlugin = PluginManagerCore.getPlugin(PluginId.getId("jetbrains.mps.idea.vcs"));
+    assert vcsCorePlugin != null;
+    return vcsCorePlugin.getPluginPath().toString();
   }
 
   @Override
   protected String getVCSCoreFileName() {
-    return "mps-vcs-core.jar";
-  }
-
-  @Override
-  public void initComponent() {
-    MergeDriverPacker.setInstance(this);
-  }
-
-  @Override
-  public void disposeComponent() {
-    MergeDriverPacker.setInstance(null);
-  }
-
-  @NotNull
-  @Override
-  public String getComponentName() {
-    return "IDEA Plugin-specific Merge Driver Packer implementation";
+    return "vcs-core.jar";
   }
 }

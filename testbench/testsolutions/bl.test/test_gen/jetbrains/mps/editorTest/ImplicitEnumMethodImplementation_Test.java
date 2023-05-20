@@ -4,90 +4,132 @@ package jetbrains.mps.editorTest;
 
 import jetbrains.mps.MPSLaunch;
 import jetbrains.mps.lang.test.runtime.BaseTransformationTest;
-import org.junit.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCacheExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCache;
+import org.junit.jupiter.api.Test;
 import jetbrains.mps.lang.test.runtime.BaseTestBody;
+import jetbrains.mps.lang.test.runtime.TransformationTest;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.lang.test.behavior.INodesTestMethod__BehaviorDescriptor;
+import jetbrains.mps.lang.test.runtime.CheckErrorMessagesRunnable;
+import jetbrains.mps.project.ProjectBase;
+import jetbrains.mps.internal.collections.runtime.ListSequence;
+import java.util.ArrayList;
+import jetbrains.mps.lang.test.runtime.CheckExpectedMessageRunnable;
+import jetbrains.mps.errors.MessageStatus;
+import jetbrains.mps.smodel.SNodePointer;
 
 @MPSLaunch
 public class ImplicitEnumMethodImplementation_Test extends BaseTransformationTest {
+  @RegisterExtension
+  private static final TestParametersCacheExtension ourParametersCacheExtension = new TestParametersCacheExtension(new TestParametersCache(ImplicitEnumMethodImplementation_Test.class, "${mps_home}", "r:914ee49a-537d-44b2-a5fb-bac87a54743d(jetbrains.mps.editorTest@tests)", false));
+
+  public ImplicitEnumMethodImplementation_Test() {
+    super(ourParametersCacheExtension.getParametersCache());
+  }
+
   @Test
   public void test_ErrorMessagesCheck8841676161362742012() throws Throwable {
-    initTest("${mps_home}", "r:914ee49a-537d-44b2-a5fb-bac87a54743d(jetbrains.mps.editorTest@tests)", false);
-    runTest("jetbrains.mps.editorTest.ImplicitEnumMethodImplementation_Test$TestBody", "test_ErrorMessagesCheck8841676161362742012", true);
+    new TestBody(this).test_ErrorMessagesCheck8841676161362742012();
   }
   @Test
   public void test_ErrorMessagesCheck8841676161362742874() throws Throwable {
-    initTest("${mps_home}", "r:914ee49a-537d-44b2-a5fb-bac87a54743d(jetbrains.mps.editorTest@tests)", false);
-    runTest("jetbrains.mps.editorTest.ImplicitEnumMethodImplementation_Test$TestBody", "test_ErrorMessagesCheck8841676161362742874", true);
-  }
-  @Test
-  public void test_NodeEnumHasUnimplementedMethodsCheck8841676161362904735() throws Throwable {
-    initTest("${mps_home}", "r:914ee49a-537d-44b2-a5fb-bac87a54743d(jetbrains.mps.editorTest@tests)", false);
-    runTest("jetbrains.mps.editorTest.ImplicitEnumMethodImplementation_Test$TestBody", "test_NodeEnumHasUnimplementedMethodsCheck8841676161362904735", true);
+    new TestBody(this).test_ErrorMessagesCheck8841676161362742874();
   }
   @Test
   public void test_ErrorMessagesCheck8841676161362737481() throws Throwable {
-    initTest("${mps_home}", "r:914ee49a-537d-44b2-a5fb-bac87a54743d(jetbrains.mps.editorTest@tests)", false);
-    runTest("jetbrains.mps.editorTest.ImplicitEnumMethodImplementation_Test$TestBody", "test_ErrorMessagesCheck8841676161362737481", true);
+    new TestBody(this).test_ErrorMessagesCheck8841676161362737481();
   }
   @Test
-  public void test_NodeEnumConstantHasUnimplementedCheck8841676161362737703() throws Throwable {
-    initTest("${mps_home}", "r:914ee49a-537d-44b2-a5fb-bac87a54743d(jetbrains.mps.editorTest@tests)", false);
-    runTest("jetbrains.mps.editorTest.ImplicitEnumMethodImplementation_Test$TestBody", "test_NodeEnumConstantHasUnimplementedCheck8841676161362737703", true);
+  public void test_NodeUnnamedErrorCheck6091751241367772282() throws Throwable {
+    new TestBody(this).test_NodeUnnamedErrorCheck6091751241367772282();
   }
   @Test
-  public void test_NodeEnumConstantHasUnimplementedCheck8841676161362737723() throws Throwable {
-    initTest("${mps_home}", "r:914ee49a-537d-44b2-a5fb-bac87a54743d(jetbrains.mps.editorTest@tests)", false);
-    runTest("jetbrains.mps.editorTest.ImplicitEnumMethodImplementation_Test$TestBody", "test_NodeEnumConstantHasUnimplementedCheck8841676161362737723", true);
+  public void test_NodeUnnamedErrorCheck824450455580355889() throws Throwable {
+    new TestBody(this).test_NodeUnnamedErrorCheck824450455580355889();
+  }
+  @Test
+  public void test_NodeUnnamedErrorCheck824450455580357478() throws Throwable {
+    new TestBody(this).test_NodeUnnamedErrorCheck824450455580357478();
   }
   @Test
   public void test_ErrorMessagesCheck8841676161362737639() throws Throwable {
-    initTest("${mps_home}", "r:914ee49a-537d-44b2-a5fb-bac87a54743d(jetbrains.mps.editorTest@tests)", false);
-    runTest("jetbrains.mps.editorTest.ImplicitEnumMethodImplementation_Test$TestBody", "test_ErrorMessagesCheck8841676161362737639", true);
+    new TestBody(this).test_ErrorMessagesCheck8841676161362737639();
   }
   @Test
   public void test_ErrorMessagesCheck8841676161362738093() throws Throwable {
-    initTest("${mps_home}", "r:914ee49a-537d-44b2-a5fb-bac87a54743d(jetbrains.mps.editorTest@tests)", false);
-    runTest("jetbrains.mps.editorTest.ImplicitEnumMethodImplementation_Test$TestBody", "test_ErrorMessagesCheck8841676161362738093", true);
+    new TestBody(this).test_ErrorMessagesCheck8841676161362738093();
   }
 
-  @MPSLaunch
-  public static class TestBody extends BaseTestBody {
+  /*package*/ static class TestBody extends BaseTestBody {
+
+    /*package*/ TestBody(TransformationTest owner) {
+      super(owner);
+    }
 
     public void test_ErrorMessagesCheck8841676161362742012() throws Exception {
-      SNode operation = SNodeOperations.cast(getRealNodeById("8841676161362742012"), MetaAdapterFactory.getInterfaceConcept(0x8585453e6bfb4d80L, 0x98deb16074f1d86cL, 0x1510445f8a2c272dL, "jetbrains.mps.lang.test.structure.INodesTestMethod"));
-      INodesTestMethod__BehaviorDescriptor.perform_id1kgh5YabdhC.invoke(operation, getRealNodeById("8841676161362741755"));
+
+      runWithinCommand(() -> {
+        SNode nodeToCheck = getRealNodeById("8841676161362741848");
+        SNode operation = getRealNodeById("8841676161362742012");
+        new CheckErrorMessagesRunnable(nodeToCheck, false, false, ((ProjectBase) myProject).getPlatform()).includeSelf(true).exclude(ListSequence.fromList(new ArrayList<CheckExpectedMessageRunnable>())).run();
+      });
     }
     public void test_ErrorMessagesCheck8841676161362742874() throws Exception {
-      SNode operation = SNodeOperations.cast(getRealNodeById("8841676161362742874"), MetaAdapterFactory.getInterfaceConcept(0x8585453e6bfb4d80L, 0x98deb16074f1d86cL, 0x1510445f8a2c272dL, "jetbrains.mps.lang.test.structure.INodesTestMethod"));
-      INodesTestMethod__BehaviorDescriptor.perform_id1kgh5YabdhC.invoke(operation, getRealNodeById("8841676161362742601"));
-    }
-    public void test_NodeEnumHasUnimplementedMethodsCheck8841676161362904735() throws Exception {
-      SNode operation = SNodeOperations.cast(getRealNodeById("8841676161362904735"), MetaAdapterFactory.getInterfaceConcept(0x8585453e6bfb4d80L, 0x98deb16074f1d86cL, 0x1510445f8a2c272dL, "jetbrains.mps.lang.test.structure.INodesTestMethod"));
-      INodesTestMethod__BehaviorDescriptor.perform_id1kgh5YabdhC.invoke(operation, getRealNodeById("8841676161362736760"));
+
+      runWithinCommand(() -> {
+        SNode nodeToCheck = getRealNodeById("8841676161362742700");
+        SNode operation = getRealNodeById("8841676161362742874");
+        new CheckErrorMessagesRunnable(nodeToCheck, false, false, ((ProjectBase) myProject).getPlatform()).includeSelf(true).exclude(ListSequence.fromList(new ArrayList<CheckExpectedMessageRunnable>())).run();
+      });
     }
     public void test_ErrorMessagesCheck8841676161362737481() throws Exception {
-      SNode operation = SNodeOperations.cast(getRealNodeById("8841676161362737481"), MetaAdapterFactory.getInterfaceConcept(0x8585453e6bfb4d80L, 0x98deb16074f1d86cL, 0x1510445f8a2c272dL, "jetbrains.mps.lang.test.structure.INodesTestMethod"));
-      INodesTestMethod__BehaviorDescriptor.perform_id1kgh5YabdhC.invoke(operation, getRealNodeById("8841676161362736758"));
+
+      runWithinCommand(() -> {
+        SNode nodeToCheck = getRealNodeById("8841676161362736760");
+        SNode operation = getRealNodeById("8841676161362737481");
+        new CheckErrorMessagesRunnable(nodeToCheck, false, false, ((ProjectBase) myProject).getPlatform()).includeSelf(true).exclude(ListSequence.fromListAndArray(new ArrayList<CheckExpectedMessageRunnable>(), new CheckExpectedMessageRunnable.CheckExpectedRuleMessageRunnable(getRealNodeById("8841676161362736760"), MessageStatus.ERROR, new SNodePointer("r:00000000-0000-4000-0000-011c895902c5(jetbrains.mps.baseLanguage.typesystem)", "7861981782410371482"), "", myProject.getRepository(), ((ProjectBase) myProject).getPlatform()))).run();
+      });
     }
-    public void test_NodeEnumConstantHasUnimplementedCheck8841676161362737703() throws Exception {
-      SNode operation = SNodeOperations.cast(getRealNodeById("8841676161362737703"), MetaAdapterFactory.getInterfaceConcept(0x8585453e6bfb4d80L, 0x98deb16074f1d86cL, 0x1510445f8a2c272dL, "jetbrains.mps.lang.test.structure.INodesTestMethod"));
-      INodesTestMethod__BehaviorDescriptor.perform_id1kgh5YabdhC.invoke(operation, getRealNodeById("8841676161362737582"));
+    public void test_NodeUnnamedErrorCheck6091751241367772282() throws Exception {
+
+      runWithinCommand(() -> {
+        SNode nodeToCheck = getRealNodeById("8841676161362736760");
+        SNode operation = getRealNodeById("6091751241367772282");
+        new CheckExpectedMessageRunnable.CheckExpectedRuleMessageRunnable(nodeToCheck, MessageStatus.ERROR, new SNodePointer("r:00000000-0000-4000-0000-011c895902c5(jetbrains.mps.baseLanguage.typesystem)", "7861981782410371482"), "", myProject.getRepository(), ((ProjectBase) myProject).getPlatform()).run();
+      });
     }
-    public void test_NodeEnumConstantHasUnimplementedCheck8841676161362737723() throws Exception {
-      SNode operation = SNodeOperations.cast(getRealNodeById("8841676161362737723"), MetaAdapterFactory.getInterfaceConcept(0x8585453e6bfb4d80L, 0x98deb16074f1d86cL, 0x1510445f8a2c272dL, "jetbrains.mps.lang.test.structure.INodesTestMethod"));
-      INodesTestMethod__BehaviorDescriptor.perform_id1kgh5YabdhC.invoke(operation, getRealNodeById("8841676161362737645"));
+    public void test_NodeUnnamedErrorCheck824450455580355889() throws Exception {
+
+      runWithinCommand(() -> {
+        SNode nodeToCheck = getRealNodeById("8841676161362737582");
+        SNode operation = getRealNodeById("824450455580355889");
+        new CheckExpectedMessageRunnable.CheckExpectedRuleMessageRunnable(nodeToCheck, MessageStatus.ERROR, new SNodePointer("r:00000000-0000-4000-0000-011c895902c5(jetbrains.mps.baseLanguage.typesystem)", "824450455578865184"), "", myProject.getRepository(), ((ProjectBase) myProject).getPlatform()).run();
+      });
+    }
+    public void test_NodeUnnamedErrorCheck824450455580357478() throws Exception {
+
+      runWithinCommand(() -> {
+        SNode nodeToCheck = getRealNodeById("8841676161362737645");
+        SNode operation = getRealNodeById("824450455580357478");
+        new CheckExpectedMessageRunnable.CheckExpectedRuleMessageRunnable(nodeToCheck, MessageStatus.ERROR, new SNodePointer("r:00000000-0000-4000-0000-011c895902c5(jetbrains.mps.baseLanguage.typesystem)", "824450455578865184"), "", myProject.getRepository(), ((ProjectBase) myProject).getPlatform()).run();
+      });
     }
     public void test_ErrorMessagesCheck8841676161362737639() throws Exception {
-      SNode operation = SNodeOperations.cast(getRealNodeById("8841676161362737639"), MetaAdapterFactory.getInterfaceConcept(0x8585453e6bfb4d80L, 0x98deb16074f1d86cL, 0x1510445f8a2c272dL, "jetbrains.mps.lang.test.structure.INodesTestMethod"));
-      INodesTestMethod__BehaviorDescriptor.perform_id1kgh5YabdhC.invoke(operation, getRealNodeById("8841676161362737487"));
+
+      runWithinCommand(() -> {
+        SNode nodeToCheck = getRealNodeById("8841676161362737510");
+        SNode operation = getRealNodeById("8841676161362737639");
+        new CheckErrorMessagesRunnable(nodeToCheck, false, false, ((ProjectBase) myProject).getPlatform()).includeSelf(true).exclude(ListSequence.fromListAndArray(new ArrayList<CheckExpectedMessageRunnable>(), new CheckExpectedMessageRunnable.CheckExpectedRuleMessageRunnable(getRealNodeById("8841676161362737582"), MessageStatus.ERROR, new SNodePointer("r:00000000-0000-4000-0000-011c895902c5(jetbrains.mps.baseLanguage.typesystem)", "824450455578865184"), "", myProject.getRepository(), ((ProjectBase) myProject).getPlatform()), new CheckExpectedMessageRunnable.CheckExpectedRuleMessageRunnable(getRealNodeById("8841676161362737645"), MessageStatus.ERROR, new SNodePointer("r:00000000-0000-4000-0000-011c895902c5(jetbrains.mps.baseLanguage.typesystem)", "824450455578865184"), "", myProject.getRepository(), ((ProjectBase) myProject).getPlatform()))).run();
+      });
     }
     public void test_ErrorMessagesCheck8841676161362738093() throws Exception {
-      SNode operation = SNodeOperations.cast(getRealNodeById("8841676161362738093"), MetaAdapterFactory.getInterfaceConcept(0x8585453e6bfb4d80L, 0x98deb16074f1d86cL, 0x1510445f8a2c272dL, "jetbrains.mps.lang.test.structure.INodesTestMethod"));
-      INodesTestMethod__BehaviorDescriptor.perform_id1kgh5YabdhC.invoke(operation, getRealNodeById("8841676161362738021"));
+
+      runWithinCommand(() -> {
+        SNode nodeToCheck = getRealNodeById("8841676161362738066");
+        SNode operation = getRealNodeById("8841676161362738093");
+        new CheckErrorMessagesRunnable(nodeToCheck, false, false, ((ProjectBase) myProject).getPlatform()).includeSelf(true).exclude(ListSequence.fromList(new ArrayList<CheckExpectedMessageRunnable>())).run();
+      });
     }
 
   }

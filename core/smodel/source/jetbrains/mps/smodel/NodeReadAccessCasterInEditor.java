@@ -23,7 +23,7 @@ import org.jetbrains.mps.openapi.model.SNodeId;
 import java.util.Stack;
 
 public class NodeReadAccessCasterInEditor {
-  private static ThreadLocal<ListenersContainer> ourListenersContainer = new ThreadLocal<ListenersContainer>();
+  private static ThreadLocal<ListenersContainer> ourListenersContainer = new ThreadLocal<>();
 
   public static void setCellBuildNodeReadAccessListener(NodeReadAccessInEditorListener listener) {
     getListenersContainer().addListener(listener);
@@ -130,7 +130,7 @@ public class NodeReadAccessCasterInEditor {
   }
 
   static class ListenersContainer {
-    private Stack<NodeReadAccessInEditorListener> myListenersStack = new Stack<NodeReadAccessInEditorListener>();
+    private Stack<NodeReadAccessInEditorListener> myListenersStack = new Stack<>();
     private boolean myEventsBlocked;
     private boolean myCleanPropertyAccessMode;
     private boolean myPropertyReadEventsSuppressed;

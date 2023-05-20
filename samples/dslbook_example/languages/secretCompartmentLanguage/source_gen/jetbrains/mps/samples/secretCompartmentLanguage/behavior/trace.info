@@ -8,107 +8,87 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1163670490218:jetbrains.mps.baseLanguage.structure.SwitchStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1164991038168:jetbrains.mps.baseLanguage.structure.ThrowStatement" />
   <root>
     <file name="BehaviorAspectDescriptor.java">
-      <unit at="14,0,48,0" name="jetbrains.mps.samples.secretCompartmentLanguage.behavior.BehaviorAspectDescriptor" />
-    </file>
-    <file name="Event_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.secretCompartmentLanguage.behavior.Event_BehaviorDescriptor" />
-    </file>
-    <file name="HandleEvent_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.secretCompartmentLanguage.behavior.HandleEvent_BehaviorDescriptor" />
-    </file>
-    <file name="StateMachineTestMethod_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.secretCompartmentLanguage.behavior.StateMachineTestMethod_BehaviorDescriptor" />
-    </file>
-    <file name="StateMachineTest_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.secretCompartmentLanguage.behavior.StateMachineTest_BehaviorDescriptor" />
-    </file>
-    <file name="StateMachine_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.secretCompartmentLanguage.behavior.StateMachine_BehaviorDescriptor" />
-    </file>
-    <file name="State_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.secretCompartmentLanguage.behavior.State_BehaviorDescriptor" />
-    </file>
-    <file name="Transition_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.secretCompartmentLanguage.behavior.Transition_BehaviorDescriptor" />
+      <unit at="14,0,32,0" name="jetbrains.mps.samples.secretCompartmentLanguage.behavior.BehaviorAspectDescriptor" />
     </file>
   </root>
   <root nodeRef="r:bf569071-47c0-4c8e-8820-c63d5ff55ed1(jetbrains.mps.samples.secretCompartmentLanguage.behavior)/3191472212106638383">
     <file name="StateMachineTest__BehaviorDescriptor.java">
-      <node id="3191472212106638383" at="26,0,27,0" concept="6" trace="CONCEPT" />
-      <node id="3191472212106638383" at="27,0,28,0" concept="6" trace="REGISTRY" />
-      <node id="3191472212106638383" at="29,0,30,0" concept="6" trace="getStateMachineName_idhr1J3q0" />
-      <node id="3191472212106638383" at="31,0,32,0" concept="6" trace="BH_METHODS" />
-      <node id="1197251292013" at="36,88,37,335" concept="5" />
-      <node id="3191472212106638383" at="40,54,41,20" concept="8" />
-      <node id="3191472212106638383" at="45,114,46,21" concept="1" />
-      <node id="3191472212106638383" at="50,114,51,49" concept="4" />
-      <node id="3191472212106638383" at="52,26,53,56" concept="10" />
-      <node id="3191472212106638383" at="56,13,57,66" concept="5" />
-      <node id="3191472212106638383" at="58,14,59,58" concept="10" />
-      <node id="3191472212106638383" at="64,128,65,49" concept="4" />
-      <node id="3191472212106638383" at="66,26,67,56" concept="10" />
-      <node id="3191472212106638383" at="70,14,71,58" concept="10" />
-      <node id="3191472212106638383" at="77,48,78,22" concept="5" />
-      <node id="3191472212106638383" at="83,40,84,19" concept="5" />
-      <node id="3191472212106638383" at="33,0,35,0" concept="7" trace="___init___#(Lorg/jetbrains/mps/openapi/model/SNode;)V" />
-      <node id="3191472212106638383" at="36,0,39,0" concept="7" trace="getStateMachineName_idhr1J3q0#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
-      <node id="3191472212106638383" at="40,0,43,0" concept="0" trace="StateMachineTest__BehaviorDescriptor#()V" />
-      <node id="3191472212106638383" at="51,49,54,5" concept="2" />
-      <node id="3191472212106638383" at="65,49,68,5" concept="2" />
-      <node id="3191472212106638383" at="44,0,48,0" concept="3" trace="initNode#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/core/aspects/behaviour/api/SConstructor;[Ljava/lang/Object;)V" />
-      <node id="3191472212106638383" at="68,5,72,5" concept="9" />
-      <node id="3191472212106638383" at="75,0,80,0" concept="3" trace="getDeclaredMethods#()Ljava/util/List;" />
-      <node id="3191472212106638383" at="81,0,86,0" concept="3" trace="getConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
-      <node id="3191472212106638383" at="54,5,60,5" concept="9" />
-      <node id="3191472212106638383" at="63,0,74,0" concept="3" trace="invokeSpecial0#(Lorg/jetbrains/mps/openapi/language/SAbstractConcept;Ljetbrains/mps/core/aspects/behaviour/api/SMethod;[Ljava/lang/Object;)null" />
-      <node id="3191472212106638383" at="49,0,62,0" concept="3" trace="invokeSpecial0#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/core/aspects/behaviour/api/SMethod;[Ljava/lang/Object;)null" />
-      <scope id="3191472212106638383" at="33,63,33,63" />
-      <scope id="1197251245698" at="36,88,37,335" />
-      <scope id="3191472212106638383" at="40,54,41,20" />
-      <scope id="3191472212106638383" at="45,114,46,21" />
-      <scope id="3191472212106638383" at="52,26,53,56" />
-      <scope id="3191472212106638383" at="56,13,57,66" />
-      <scope id="3191472212106638383" at="58,14,59,58" />
-      <scope id="3191472212106638383" at="66,26,67,56" />
-      <scope id="3191472212106638383" at="70,14,71,58" />
-      <scope id="3191472212106638383" at="77,48,78,22" />
-      <scope id="3191472212106638383" at="83,40,84,19" />
-      <scope id="3191472212106638383" at="33,0,35,0">
+      <node id="3191472212106638383" at="25,0,26,0" concept="6" trace="CONCEPT" />
+      <node id="3191472212106638383" at="27,0,28,0" concept="6" trace="getStateMachineName_idhr1J3q0" />
+      <node id="3191472212106638383" at="29,0,30,0" concept="6" trace="BH_METHODS" />
+      <node id="1197251292013" at="34,88,35,136" concept="5" />
+      <node id="3191472212106638383" at="42,114,43,21" concept="1" />
+      <node id="3191472212106638383" at="47,114,48,49" concept="4" />
+      <node id="3191472212106638383" at="49,26,50,56" concept="9" />
+      <node id="3191472212106638383" at="53,13,54,66" concept="5" />
+      <node id="3191472212106638383" at="55,14,56,58" concept="9" />
+      <node id="3191472212106638383" at="61,128,62,49" concept="4" />
+      <node id="3191472212106638383" at="63,26,64,56" concept="9" />
+      <node id="3191472212106638383" at="67,14,68,58" concept="9" />
+      <node id="3191472212106638383" at="74,48,75,22" concept="5" />
+      <node id="3191472212106638383" at="80,40,81,19" concept="5" />
+      <node id="3191472212106638383" at="85,0,86,0" concept="6" trace="stateMachine$rUP6" />
+      <node id="3191472212106638383" at="89,0,90,0" concept="6" trace="stateMachineName$ztzM" />
+      <node id="3191472212106638383" at="31,0,33,0" concept="7" trace="___init___#(Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <node id="3191472212106638383" at="38,0,40,0" concept="0" trace="StateMachineTest__BehaviorDescriptor#()V" />
+      <node id="3191472212106638383" at="34,0,37,0" concept="7" trace="getStateMachineName_idhr1J3q0#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
+      <node id="3191472212106638383" at="48,49,51,5" concept="2" />
+      <node id="3191472212106638383" at="62,49,65,5" concept="2" />
+      <node id="3191472212106638383" at="41,0,45,0" concept="3" trace="initNode#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/core/aspects/behaviour/api/SConstructor;[Ljava/lang/Object;)V" />
+      <node id="3191472212106638383" at="65,5,69,5" concept="8" />
+      <node id="3191472212106638383" at="72,0,77,0" concept="3" trace="getDeclaredMethods#()Ljava/util/List;" />
+      <node id="3191472212106638383" at="78,0,83,0" concept="3" trace="getConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="3191472212106638383" at="51,5,57,5" concept="8" />
+      <node id="3191472212106638383" at="60,0,71,0" concept="3" trace="invokeSpecial0#(Lorg/jetbrains/mps/openapi/language/SAbstractConcept;Ljetbrains/mps/core/aspects/behaviour/api/SMethod;[Ljava/lang/Object;)null" />
+      <node id="3191472212106638383" at="46,0,59,0" concept="3" trace="invokeSpecial0#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/core/aspects/behaviour/api/SMethod;[Ljava/lang/Object;)null" />
+      <scope id="3191472212106638383" at="31,63,31,63" />
+      <scope id="3191472212106638383" at="38,54,38,54" />
+      <scope id="1197251245698" at="34,88,35,136" />
+      <scope id="3191472212106638383" at="42,114,43,21" />
+      <scope id="3191472212106638383" at="49,26,50,56" />
+      <scope id="3191472212106638383" at="53,13,54,66" />
+      <scope id="3191472212106638383" at="55,14,56,58" />
+      <scope id="3191472212106638383" at="63,26,64,56" />
+      <scope id="3191472212106638383" at="67,14,68,58" />
+      <scope id="3191472212106638383" at="74,48,75,22" />
+      <scope id="3191472212106638383" at="80,40,81,19" />
+      <scope id="3191472212106638383" at="31,0,33,0">
         <var name="__thisNode__" id="3191472212106638383" />
       </scope>
-      <scope id="3191472212106638383" at="36,0,39,0">
+      <scope id="3191472212106638383" at="38,0,40,0" />
+      <scope id="3191472212106638383" at="34,0,37,0">
         <var name="__thisNode__" id="3191472212106638383" />
       </scope>
-      <scope id="3191472212106638383" at="40,0,43,0" />
-      <scope id="3191472212106638383" at="44,0,48,0">
+      <scope id="3191472212106638383" at="41,0,45,0">
         <var name="constructor" id="3191472212106638383" />
         <var name="node" id="3191472212106638383" />
         <var name="parameters" id="3191472212106638383" />
       </scope>
-      <scope id="3191472212106638383" at="75,0,80,0" />
-      <scope id="3191472212106638383" at="81,0,86,0" />
-      <scope id="3191472212106638383" at="64,128,72,5">
+      <scope id="3191472212106638383" at="72,0,77,0" />
+      <scope id="3191472212106638383" at="78,0,83,0" />
+      <scope id="3191472212106638383" at="61,128,69,5">
         <var name="methodIndex" id="3191472212106638383" />
       </scope>
-      <scope id="3191472212106638383" at="50,114,60,5">
+      <scope id="3191472212106638383" at="47,114,57,5">
         <var name="methodIndex" id="3191472212106638383" />
       </scope>
-      <scope id="3191472212106638383" at="63,0,74,0">
+      <scope id="3191472212106638383" at="60,0,71,0">
         <var name="concept" id="3191472212106638383" />
         <var name="method" id="3191472212106638383" />
         <var name="parameters" id="3191472212106638383" />
       </scope>
-      <scope id="3191472212106638383" at="49,0,62,0">
+      <scope id="3191472212106638383" at="46,0,59,0">
         <var name="method" id="3191472212106638383" />
         <var name="node" id="3191472212106638383" />
         <var name="parameters" id="3191472212106638383" />
       </scope>
-      <unit id="3191472212106638383" at="25,0,87,0" name="jetbrains.mps.samples.secretCompartmentLanguage.behavior.StateMachineTest__BehaviorDescriptor" />
+      <unit id="3191472212106638383" at="84,0,87,0" name="jetbrains.mps.samples.secretCompartmentLanguage.behavior.StateMachineTest__BehaviorDescriptor$LINKS" />
+      <unit id="3191472212106638383" at="88,0,91,0" name="jetbrains.mps.samples.secretCompartmentLanguage.behavior.StateMachineTest__BehaviorDescriptor$PROPS" />
+      <unit id="3191472212106638383" at="24,0,92,0" name="jetbrains.mps.samples.secretCompartmentLanguage.behavior.StateMachineTest__BehaviorDescriptor" />
     </file>
   </root>
 </debug-info>

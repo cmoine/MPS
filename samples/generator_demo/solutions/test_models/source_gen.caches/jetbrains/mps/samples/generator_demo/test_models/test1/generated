@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="88ccghblz3n9esdbl3j8t47ggtf8fl1" />
+<product version="3" modelHash="88ccghblz3n9esdbl3j8t47ggtf8fl1">
+  <files names="Button.java:Label.java" />
+</product>
 

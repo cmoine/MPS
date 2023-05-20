@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,13 @@
 package jetbrains.mps.errors.messageTargets;
 
 
+import org.jetbrains.mps.annotations.Immutable;
+
 /**
  * Cyril.Konopko, 18.02.2010
  */
-public class NodeMessageTarget implements MessageTarget {
+@Immutable
+public final class NodeMessageTarget implements MessageTarget {
   @Override
   public MessageTargetEnum getTarget() {
     return MessageTargetEnum.NODE;

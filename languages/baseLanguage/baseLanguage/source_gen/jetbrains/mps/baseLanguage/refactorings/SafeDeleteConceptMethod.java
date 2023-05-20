@@ -6,13 +6,12 @@ import jetbrains.mps.refactoring.framework.BaseRefactoring;
 import jetbrains.mps.refactoring.framework.IRefactoringTarget;
 import jetbrains.mps.refactoring.framework.RefactoringContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import java.util.List;
-import org.jetbrains.mps.openapi.model.SModel;
 import jetbrains.mps.ide.findusages.model.SearchResults;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.ide.findusages.view.FindUtils;
 import jetbrains.mps.progress.EmptyProgressMonitor;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class SafeDeleteConceptMethod extends BaseRefactoring {
   public SafeDeleteConceptMethod() {
@@ -27,11 +26,12 @@ public class SafeDeleteConceptMethod extends BaseRefactoring {
     SNode method = refactoringContext.getSelectedNode();
     new SafeDeleteMethod(refactoringContext.getCurrentScope(), method).doRefactor();
   }
-  public List<SModel> getModelsToGenerate(final RefactoringContext refactoringContext) {
-    return (List<SModel>) refactoringContext.getModelsFromUsages(refactoringContext.getSelectedModel());
-  }
   public SearchResults getAffectedNodes(final RefactoringContext refactoringContext) {
-    SNode method = SNodeOperations.cast(refactoringContext.getSelectedNode(), MetaAdapterFactory.getConcept(0xaf65afd8f0dd4942L, 0x87d963a55f2a9db1L, 0x11d4348057eL, "jetbrains.mps.lang.behavior.structure.ConceptMethodDeclaration"));
+    SNode method = SNodeOperations.cast(refactoringContext.getSelectedNode(), CONCEPTS.ConceptMethodDeclaration$N0);
     return FindUtils.getSearchResults(new EmptyProgressMonitor(), method, refactoringContext.getCurrentScope(), "jetbrains.mps.baseLanguage.findUsages.ExactMethodUsages_Finder", "jetbrains.mps.lang.behavior.findUsages.OverridingMethods_Finder");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept ConceptMethodDeclaration$N0 = MetaAdapterFactory.getConcept(0xaf65afd8f0dd4942L, 0x87d963a55f2a9db1L, 0x11d4348057eL, "jetbrains.mps.lang.behavior.structure.ConceptMethodDeclaration");
   }
 }

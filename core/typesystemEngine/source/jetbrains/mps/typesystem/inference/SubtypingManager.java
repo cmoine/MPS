@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,21 +16,21 @@
 package jetbrains.mps.typesystem.inference;
 
 
-import jetbrains.mps.util.Pair;
-import org.apache.log4j.Logger;
-import org.apache.log4j.LogManager;
-import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.typesystem.inference.util.StructuralNodeSet;
+import jetbrains.mps.util.Pair;
+import org.jetbrains.mps.openapi.model.SNode;
 
 import java.util.Set;
 
 public abstract class SubtypingManager {
-  private static final Logger LOG = LogManager.getLogger(SubtypingManager.class);
+  private final TypeCheckerHelper myTypeCheckerHelper;
 
-  protected final TypeChecker myTypeChecker;
+  public SubtypingManager(TypeCheckerHelper typeCheckerHelper) {
+    myTypeCheckerHelper = typeCheckerHelper;
+  }
 
-  public SubtypingManager(TypeChecker typeChecker) {
-    myTypeChecker = typeChecker;
+  protected TypeCheckerHelper getTypeCheckerHelper() {
+    return myTypeCheckerHelper;
   }
 
   public abstract boolean isSubtype(SNode subType, SNode superType);

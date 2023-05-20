@@ -41,10 +41,9 @@ class ReferenceRemovedSelectionHandler extends ModelEventsSelectionHandler {
     }
   }
 
-  private EditorCell getCellToSelect(EditorComponent editorComponent) {
+  private EditorCell getCellToSelect(jetbrains.mps.openapi.editor.EditorComponent editorComponent) {
     SNode sourceNode = myReference.getSourceNode();
-    String role = myReference.getRole();
-    EditorCell nullCell = editorComponent.findNodeCellWithRole(sourceNode, role);
+    EditorCell nullCell = editorComponent.findNodeCellWithRole(sourceNode, myReference.getLink());
     return nullCell != null ? nullCell : editorComponent.findNodeCell(sourceNode);
   }
 }

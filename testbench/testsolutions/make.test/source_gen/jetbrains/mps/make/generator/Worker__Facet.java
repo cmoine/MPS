@@ -17,6 +17,7 @@ import jetbrains.mps.make.script.IJobMonitor;
 import jetbrains.mps.make.resources.IPropertiesAccessor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.util.ProgressMonitor;
+import java.util.stream.IntStream;
 import jetbrains.mps.make.script.IConfig;
 import java.util.Map;
 import jetbrains.mps.make.script.IPropertiesPool;
@@ -25,7 +26,7 @@ public class Worker__Facet extends IFacet.Stub {
   private List<ITarget> targets = ListSequence.fromList(new ArrayList<ITarget>());
   private IFacet.Name name = new IFacet.Name("jetbrains.mps.make.tests.Worker_");
   public Worker__Facet() {
-    ListSequence.fromList(targets).addElement(new Worker__Facet.Target_work());
+    ListSequence.fromList(targets).addElement(new Target_work());
   }
   public Iterable<ITarget> targets() {
     return targets;
@@ -43,7 +44,7 @@ public class Worker__Facet extends IFacet.Stub {
     return this.name;
   }
   public IPropertiesPersistence propertiesPersistence() {
-    return new Worker__Facet.TargetProperties();
+    return new TargetProperties();
   }
   public static class Target_work implements ITargetEx {
     private static final ITarget.Name name = new ITarget.Name("jetbrains.mps.make.tests.Worker_.work");
@@ -55,16 +56,20 @@ public class Worker__Facet extends IFacet.Stub {
         public IResult execute(final Iterable<IResource> rawInput, final IJobMonitor monitor, final IPropertiesAccessor pa, @NotNull final ProgressMonitor progressMonitor) {
           Iterable<IResource> _output_qdke9s_a0a = null;
           final Iterable<IResource> input = (Iterable) (Iterable) rawInput;
+          progressMonitor.start("", IntStream.of(1000, 1000 / 2).sum());
           switch (0) {
             case 0:
-              monitor.currentProgress().beginWork("WORK", 100, monitor.currentProgress().workLeft());
-              monitor.currentProgress().advanceWork("WORK", 50);
-              monitor.currentProgress().beginWork("WORKWORK", 10, monitor.currentProgress().workLeft() / 2);
-              monitor.currentProgress().advanceWork("WORKWORK", 5);
-              monitor.currentProgress().advanceWork("WORKWORK", 5);
-              monitor.currentProgress().finishWork("WORKWORK");
-              monitor.currentProgress().finishWork("WORK");
+              final ProgressMonitor subProgress_a0a0a = progressMonitor.subTask(1000);
+              subProgress_a0a0a.start("WORK", 100);
+              subProgress_a0a0a.advance(50);
+              final ProgressMonitor subProgress_c0a0a = progressMonitor.subTask(1000 / 2);
+              subProgress_c0a0a.start("WORKWORK", 10);
+              subProgress_c0a0a.advance(5);
+              subProgress_c0a0a.advance(5);
+              subProgress_c0a0a.done();
+              subProgress_a0a0a.done();
             default:
+              progressMonitor.done();
               return new IResult.SUCCESS(_output_qdke9s_a0a);
           }
         }

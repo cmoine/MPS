@@ -6,9 +6,10 @@ import jetbrains.mps.lang.dataFlow.framework.DataFlowConstructor;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.lang.dataFlow.framework.Program;
 import jetbrains.mps.lang.dataFlow.framework.instructions.Instruction;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class ChildRule implements DataFlowConstructor {
   public boolean isApplicable(SNode node) {
@@ -17,7 +18,7 @@ public class ChildRule implements DataFlowConstructor {
     return concept.equals(applicableConcept) || concept.isSubConceptOf(applicableConcept);
   }
   public SAbstractConcept getApplicableConcept() {
-    return MetaAdapterFactory.getConcept(0xb124c25e1e164432L, 0xad5e0ac0ecae98f5L, 0x73a316f7f5468ed5L, "testCustomAnalyzer.structure.Child");
+    return CONCEPTS.Child$8m;
   }
   public void performActions(Program o, SNode node) {
     {
@@ -25,11 +26,15 @@ public class ChildRule implements DataFlowConstructor {
       if (((Program) o).contains(object)) {
         boolean before = true;
         int position = ((Program) (o)).getStart(node);
-        Instruction instruction = new counterInstructionInstruction();
+        Instruction instruction = new counterInstructionAInstruction();
         instruction.setRuleReference("r:11be8b48-b45e-48e5-98ad-b77dc1b202b1(testCustomAnalyzer.dataFlow)/8332528989793339882");
         instruction.setSource(node);
         ((Program) (o)).insert(instruction, position, true, before);
       }
     }
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept Child$8m = MetaAdapterFactory.getConcept(0xb124c25e1e164432L, 0xad5e0ac0ecae98f5L, 0x73a316f7f5468ed5L, "testCustomAnalyzer.structure.Child");
   }
 }

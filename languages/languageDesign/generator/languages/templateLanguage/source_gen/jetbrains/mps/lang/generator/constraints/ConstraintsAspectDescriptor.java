@@ -6,9 +6,9 @@ import jetbrains.mps.smodel.runtime.BaseConstraintsAspectDescriptor;
 import jetbrains.mps.smodel.runtime.ConstraintsDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.runtime.base.BaseConstraintsDescriptor;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public class ConstraintsAspectDescriptor extends BaseConstraintsAspectDescriptor {
   public ConstraintsAspectDescriptor() {
@@ -16,89 +16,41 @@ public class ConstraintsAspectDescriptor extends BaseConstraintsAspectDescriptor
 
   @Override
   public ConstraintsDescriptor getConstraints(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_2qnle6_a0c.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return new CreateRootRule_Constraints();
-          }
-          break;
-        case 1:
-          if (true) {
-            return new GeneratorParameterReference_Constraints();
-          }
-          break;
-        case 2:
-          if (true) {
-            return new Root_MappingRule_Constraints();
-          }
-          break;
-        case 3:
-          if (true) {
-            return new TemplateArgumentLinkPatternRefExpression_Constraints();
-          }
-          break;
-        case 4:
-          if (true) {
-            return new TemplateArgumentParameterExpression_Constraints();
-          }
-          break;
-        case 5:
-          if (true) {
-            return new TemplateArgumentPatternVarRefExpression_Constraints();
-          }
-          break;
-        case 6:
-          if (true) {
-            return new TemplateArgumentPropertyPatternRefExpression_Constraints();
-          }
-          break;
-        case 7:
-          if (true) {
-            return new TemplateArgumentQueryExpression_Constraints();
-          }
-          break;
-        case 8:
-          if (true) {
-            return new TemplateArgumentVariableRefExpression_Constraints();
-          }
-          break;
-        case 9:
-          if (true) {
-            return new TemplateCallMacro_Constraints();
-          }
-          break;
-        case 10:
-          if (true) {
-            return new TemplateDeclarationReference_Constraints();
-          }
-          break;
-        case 11:
-          if (true) {
-            return new TemplateSwitch_Constraints();
-          }
-          break;
-        case 12:
-          if (true) {
-            return new TemplateSwitchMacro_Constraints();
-          }
-          break;
-        default:
-          // default 
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return new AbstractNodeMacroNamespace_Constraints();
+      case 1:
+        return new CreateRootRule_Constraints();
+      case 2:
+        return new GeneratorParameterReference_Constraints();
+      case 3:
+        return new ReferenceReductionRule_Constraints();
+      case 4:
+        return new Root_MappingRule_Constraints();
+      case 5:
+        return new TemplateArgumentLinkPatternRefExpression_Constraints();
+      case 6:
+        return new TemplateArgumentParameterExpression_Constraints();
+      case 7:
+        return new TemplateArgumentPatternVarRefExpression_Constraints();
+      case 8:
+        return new TemplateArgumentPropertyPatternRefExpression_Constraints();
+      case 9:
+        return new TemplateArgumentQueryExpression_Constraints();
+      case 10:
+        return new TemplateArgumentVarRefExpression2_Constraints();
+      case 11:
+        return new TemplateCallMacro_Constraints();
+      case 12:
+        return new TemplateDeclarationReference_Constraints();
+      case 13:
+        return new TemplateSwitch_Constraints();
+      case 14:
+        return new TemplateSwitchMacro_Constraints();
+      default:
     }
     return new BaseConstraintsDescriptor(concept);
   }
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
-  }
-  private static final Map<SAbstractConcept, Integer> indices_2qnle6_a0c = buildConceptIndices(MetaAdapterFactory.getConcept(0xb401a68083254110L, 0x8fd384331ff25befL, 0x10fbbd5854aL, "jetbrains.mps.lang.generator.structure.CreateRootRule"), MetaAdapterFactory.getConcept(0xb401a68083254110L, 0x8fd384331ff25befL, 0x90726ff283cbf8aL, "jetbrains.mps.lang.generator.structure.GeneratorParameterReference"), MetaAdapterFactory.getConcept(0xb401a68083254110L, 0x8fd384331ff25befL, 0x10fd54746dbL, "jetbrains.mps.lang.generator.structure.Root_MappingRule"), MetaAdapterFactory.getConcept(0xb401a68083254110L, 0x8fd384331ff25befL, 0x42d71bfbeb1a5de8L, "jetbrains.mps.lang.generator.structure.TemplateArgumentLinkPatternRefExpression"), MetaAdapterFactory.getConcept(0xb401a68083254110L, 0x8fd384331ff25befL, 0x457655815a794e79L, "jetbrains.mps.lang.generator.structure.TemplateArgumentParameterExpression"), MetaAdapterFactory.getConcept(0xb401a68083254110L, 0x8fd384331ff25befL, 0x40be82ad503b3c88L, "jetbrains.mps.lang.generator.structure.TemplateArgumentPatternVarRefExpression"), MetaAdapterFactory.getConcept(0xb401a68083254110L, 0x8fd384331ff25befL, 0x42d71bfbeb1a5de7L, "jetbrains.mps.lang.generator.structure.TemplateArgumentPropertyPatternRefExpression"), MetaAdapterFactory.getConcept(0xb401a68083254110L, 0x8fd384331ff25befL, 0x380132d742e8ccb0L, "jetbrains.mps.lang.generator.structure.TemplateArgumentQueryExpression"), MetaAdapterFactory.getConcept(0xb401a68083254110L, 0x8fd384331ff25befL, 0x3d6f2506d88aa028L, "jetbrains.mps.lang.generator.structure.TemplateArgumentVariableRefExpression"), MetaAdapterFactory.getConcept(0xb401a68083254110L, 0x8fd384331ff25befL, 0x14f7f8a311b8f14fL, "jetbrains.mps.lang.generator.structure.TemplateCallMacro"), MetaAdapterFactory.getConcept(0xb401a68083254110L, 0x8fd384331ff25befL, 0x11013906056L, "jetbrains.mps.lang.generator.structure.TemplateDeclarationReference"), MetaAdapterFactory.getConcept(0xb401a68083254110L, 0x8fd384331ff25befL, 0x10313ed7688L, "jetbrains.mps.lang.generator.structure.TemplateSwitch"), MetaAdapterFactory.getConcept(0xb401a68083254110L, 0x8fd384331ff25befL, 0xda3dc6e51747593L, "jetbrains.mps.lang.generator.structure.TemplateSwitchMacro"));
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0xb401a68083254110L, 0x8fd384331ff25befL, 0x27fb58cc0349297eL), MetaIdFactory.conceptId(0xb401a68083254110L, 0x8fd384331ff25befL, 0x10fbbd5854aL), MetaIdFactory.conceptId(0xb401a68083254110L, 0x8fd384331ff25befL, 0x90726ff283cbf8aL), MetaIdFactory.conceptId(0xb401a68083254110L, 0x8fd384331ff25befL, 0x7786936d61b8dafaL), MetaIdFactory.conceptId(0xb401a68083254110L, 0x8fd384331ff25befL, 0x10fd54746dbL), MetaIdFactory.conceptId(0xb401a68083254110L, 0x8fd384331ff25befL, 0x42d71bfbeb1a5de8L), MetaIdFactory.conceptId(0xb401a68083254110L, 0x8fd384331ff25befL, 0x457655815a794e79L), MetaIdFactory.conceptId(0xb401a68083254110L, 0x8fd384331ff25befL, 0x40be82ad503b3c88L), MetaIdFactory.conceptId(0xb401a68083254110L, 0x8fd384331ff25befL, 0x42d71bfbeb1a5de7L), MetaIdFactory.conceptId(0xb401a68083254110L, 0x8fd384331ff25befL, 0x380132d742e8ccb0L), MetaIdFactory.conceptId(0xb401a68083254110L, 0x8fd384331ff25befL, 0xe8e73f9584aee0fL), MetaIdFactory.conceptId(0xb401a68083254110L, 0x8fd384331ff25befL, 0x14f7f8a311b8f14fL), MetaIdFactory.conceptId(0xb401a68083254110L, 0x8fd384331ff25befL, 0x11013906056L), MetaIdFactory.conceptId(0xb401a68083254110L, 0x8fd384331ff25befL, 0x10313ed7688L), MetaIdFactory.conceptId(0xb401a68083254110L, 0x8fd384331ff25befL, 0xda3dc6e51747593L)).seal();
 }

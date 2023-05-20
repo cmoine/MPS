@@ -6,48 +6,9 @@ import jetbrains.mps.nodeEditor.DefaultNodeEditor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Collection;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Constant;
 
 public class UsesTextCheckbox_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createCollection_c4zoug_a(editorContext, node);
-  }
-  private EditorCell createCollection_c4zoug_a(EditorContext editorContext, SNode node) {
-    EditorCell_Collection editorCell = EditorCell_Collection.createHorizontal(editorContext, node);
-    editorCell.setCellId("Collection_c4zoug_a");
-    editorCell.setBig(true);
-    Checkbox_ActionMap_4.setCellActions(editorCell, node, editorContext);
-    editorCell.addKeyMap(new Checkbox_KeyMap_4());
-    editorCell.addEditorCell(this.createAlternation_c4zoug_a0(editorContext, node));
-    return editorCell;
-  }
-  private EditorCell createAlternation_c4zoug_a0(EditorContext editorContext, SNode node) {
-    boolean alternationCondition = true;
-    alternationCondition = UsesTextCheckbox_Editor.renderingCondition_c4zoug_a0a(node, editorContext);
-    EditorCell editorCell = null;
-    if (alternationCondition) {
-      editorCell = this.createConstant_c4zoug_a0a(editorContext, node);
-    } else {
-      editorCell = this.createConstant_c4zoug_a0a_0(editorContext, node);
-    }
-    return editorCell;
-  }
-  private static boolean renderingCondition_c4zoug_a0a(SNode node, EditorContext editorContext) {
-    return SPropertyOperations.getBoolean(node, MetaAdapterFactory.getProperty(0xafb9a5fdbc5d4169L, 0xa22542d8823d623aL, 0x4a35f271d9f26e94L, 0x4a35f271d9f26e95L, "property"));
-  }
-  private EditorCell createConstant_c4zoug_a0a(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, "x");
-    editorCell.setCellId("Constant_c4zoug_a0a");
-    editorCell.setDefaultText("");
-    return editorCell;
-  }
-  private EditorCell createConstant_c4zoug_a0a_0(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, " ");
-    editorCell.setCellId("Constant_c4zoug_a0a_0");
-    editorCell.setDefaultText("");
-    return editorCell;
+    return new UsesTextCheckbox_EditorBuilder_a(editorContext, node).createCell();
   }
 }

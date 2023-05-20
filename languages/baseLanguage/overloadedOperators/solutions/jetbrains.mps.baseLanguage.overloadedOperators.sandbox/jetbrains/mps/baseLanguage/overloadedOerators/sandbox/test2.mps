@@ -4,7 +4,7 @@
   <languages>
     <use id="774bf8a0-62e5-41e1-af63-f4812e60e48b" name="jetbrains.mps.baseLanguage.checkedDots" version="0" />
     <use id="fc8d557e-5de6-4dd8-b749-aab2fb23aefc" name="jetbrains.mps.baseLanguage.overloadedOperators" version="0" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports>
     <import index="3rf1" ref="r:3ad93d2f-47fe-4070-8a77-383dab3a6def(jetbrains.mps.baseLanguage.overloadedOerators.sandbox.test)" />
@@ -124,7 +124,7 @@
               <ref role="3cqZAo" node="4fnbQpI7aia" resolve="str" />
             </node>
             <node concept="liA8E" id="4fnbQpI7air" role="2OqNvi">
-              <ref role="37wK5l" to="wyt6:~String.concat(java.lang.String):java.lang.String" resolve="concat" />
+              <ref role="37wK5l" to="wyt6:~String.concat(java.lang.String)" resolve="concat" />
               <node concept="Xl_RD" id="4fnbQpI7ais" role="37wK5m">
                 <property role="Xl_RC" value="a" />
               </node>
@@ -137,7 +137,7 @@
               <ref role="3cqZAo" node="4fnbQpI7aia" resolve="str" />
             </node>
             <node concept="liA8E" id="4fnbQpI7ai$" role="2OqNvi">
-              <ref role="37wK5l" to="wyt6:~String.concat(java.lang.String):java.lang.String" resolve="concat" />
+              <ref role="37wK5l" to="wyt6:~String.concat(java.lang.String)" resolve="concat" />
               <node concept="Xl_RD" id="4fnbQpI7ai_" role="37wK5m">
                 <property role="Xl_RC" value="b" />
               </node>

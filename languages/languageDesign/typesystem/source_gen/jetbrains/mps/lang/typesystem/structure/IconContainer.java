@@ -5,13 +5,13 @@ package jetbrains.mps.lang.typesystem.structure;
 import jetbrains.mps.smodel.runtime.IconResource;
 
 public class IconContainer {
-  protected static IconResource RESOURCE_a0a0q = new IconResource("comparison.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a0ob = new IconResource("replacement.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a0pb = new IconResource("rule.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a0mc = new IconResource("nontypesystem.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a0sc = new IconResource("overloadedRules.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a0wd = new IconResource("substitute.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a0xd = new IconResource("subtyping.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a0ge = new IconResource("quickFix.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a0ke = new IconResource("variableReplacement.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a3a0a71b0oe = new IconResource("comparison.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a3a0a04b0oe = new IconResource("replacement.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a3a0a14b0oe = new IconResource("rule.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a3a0a16b0oe = new IconResource("nontypesystem.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a3a0a76b0oe = new IconResource("overloadedRules.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a3a0a69b0oe = new IconResource("substitute.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a3a0a79b0oe = new IconResource("subtyping.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a3a0a701b0oe = new IconResource("quickFix.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a2a0a111b0oe = new IconResource("variableReplacement.png", IconContainer.class);
 }

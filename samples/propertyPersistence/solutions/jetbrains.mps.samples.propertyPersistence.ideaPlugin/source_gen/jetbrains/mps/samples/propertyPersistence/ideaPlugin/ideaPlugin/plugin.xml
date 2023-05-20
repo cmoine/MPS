@@ -1,0 +1,20 @@
+<!DOCTYPE idea-plugin PUBLIC 'Plugin/DTD' 'http://plugins.intellij.net/plugin.dtd'>
+<idea-plugin xmlns:xi="http://www.w3.org/2001/XInclude">
+  <id>jetbrains.mps.samples.propertyPersistence</id>
+  <name>Sample Property Persistence</name>
+  <description>    
+    Sample persistence of MPS models into property files
+  </description>
+  <version>1.0</version>
+  <vendor url="http://www.jetbrains.com/mps/">JetBrains</vendor>
+  <idea-version since-build="193.1" />
+  
+  <depends>jetbrains.mps.core</depends>
+  
+  <extensions defaultExtensionNs="com.intellij">
+    <mps.modelRootFactory rootType="property_files_stubs" className="jetbrains.mps.samples.propertyPersistenceDef.persistence.PropertyFilesStubModelRootFactory" />
+    <mps.modelRootEntry rootType="property_files_stubs" title="Property files" className="jetbrains.mps.samples.propertyPersistenceDef.persistence.PropertyFilesStubModelRootEntryFactory" />
+    
+    <mps.LanguageLibrary dir="/languages" />
+  </extensions>
+</idea-plugin>

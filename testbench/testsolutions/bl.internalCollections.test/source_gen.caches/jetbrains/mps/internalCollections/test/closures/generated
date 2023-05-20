@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="cgylum1ovzwbkb4wr4vkd10h8z98png" />
+<product version="3" modelHash="-eqww74kflclxp67wwefmokkldqmbiov">
+  <files names="A.java:Advanced_Test.java:B.java:ChainedOperations_Test.java:Find_Test.java:ForEach_Test.java:IBar.java:IFoo.java:IInterface.java:IntHolder.java:MPS10313.java:Mapper_Test.java:ReduceFold_Test.java:RemoveWhereTest_Test.java:Runtime_Test.java:SelectTest_Test.java:Sort_Test.java:Util_Test.java:VisitAll_Test.java:Where_Test.java" />
+</product>
 

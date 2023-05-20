@@ -16,9 +16,6 @@
 package jetbrains.mps.ide.ui.tree.module;
 
 import jetbrains.mps.ide.ui.tree.smodel.SModelTreeNode;
-import jetbrains.mps.smodel.SModelStereotype;
-import jetbrains.mps.util.NameUtil;
-import org.jetbrains.mps.openapi.model.SModel;
 
 public class SModelNamespaceTreeBuilder extends DefaultNamespaceTreeBuilder<SModelTreeNode> {
   @Override

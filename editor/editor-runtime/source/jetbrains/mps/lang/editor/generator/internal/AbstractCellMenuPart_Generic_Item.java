@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,10 +37,9 @@ public abstract class AbstractCellMenuPart_Generic_Item implements SubstituteInf
 
   @Override
   public List<SubstituteAction> createActions(CellContext cellContext, final EditorContext editorContext) {
-    final SNode node = (SNode) cellContext.get(BasicCellContext.EDITED_NODE);
-    final IOperationContext context = editorContext.getOperationContext();
+    final SNode node = cellContext.get(BasicCellContext.EDITED_NODE);
 
-    return Collections.<SubstituteAction>singletonList(new AbstractNodeSubstituteAction(null, null, node) {
+    return Collections.singletonList(new AbstractNodeSubstituteAction(null, null, node) {
 
       @Override
       public String getMatchingText(String pattern, boolean referent_presentation, boolean visible) {
@@ -59,13 +58,24 @@ public abstract class AbstractCellMenuPart_Generic_Item implements SubstituteInf
 
       @Override
       public SNode doSubstitute(@Nullable final EditorContext editorContext, String pattern) {
-        handleAction(node, node.getModel(), context, editorContext);
+        handleAction(node, node.getModel(), editorContext);
         return null;
       }
     });
   }
 
-  protected abstract void handleAction(SNode node, SModel model, IOperationContext operationContext, EditorContext editorContext);
+  protected void handleAction(SNode node, SModel model, EditorContext editorContext) {
+    // FIXME make abstract once 2020.3 is out
+    handleAction(node, model, editorContext.getOperationContext(), editorContext);
+  }
+
+  /**
+   * @deprecated override {@link #handleAction(SNode, SModel, EditorContext)} instead
+   */
+  @Deprecated(since = "2020.2", forRemoval = true)
+  protected void handleAction(SNode node, SModel model, IOperationContext operationContext, EditorContext editorContext) {
+    // no-op, just can't be abstract to facilitate generation of new method override
+  }
 
   protected abstract String getMatchingText();
 }

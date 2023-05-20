@@ -15,6 +15,8 @@
  */
 package jetbrains.mps.util;
 
+@Deprecated
+//use standard Consumer<T> instead
 public interface Callback<T> {
   void call(T param);
 }

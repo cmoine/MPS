@@ -5,12 +5,9 @@ package jetbrains.mps.lang.behavior.test.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.List;
 import java.util.Arrays;
@@ -22,11 +19,10 @@ import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
 
 public final class I__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getInterfaceConcept(0xa18fb831fb54541L, 0x97c9a13312451954L, 0x41ab5625f92e6814L, "jetbrains.mps.lang.behavior.test.structure.I");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<String> virtualAbstractFromInterfaceConcept_id46FlynTbALM = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("virtualAbstractFromInterfaceConcept").modifiers(SModifiersImpl.create(12, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("46FlynTbALM").registry(REGISTRY).build(SMethodBuilder.createJavaParameter(Integer.TYPE, ""));
-  public static final SMethod<String> nonVirtualFromInterfaceConcept_id46FlynTbB0A = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("nonVirtualFromInterfaceConcept").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("46FlynTbB0A").registry(REGISTRY).build(SMethodBuilder.createJavaParameter(String.class, ""), SMethodBuilder.createJavaParameter(Integer.TYPE, ""));
-  public static final SMethod<String> virtualFromInterfaceConcept_id46FlynTbB2v = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("virtualFromInterfaceConcept").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("46FlynTbB2v").registry(REGISTRY).build(SMethodBuilder.createJavaParameter(String.class, ""));
+  public static final SMethod<String> virtualAbstractFromInterfaceConcept_id46FlynTbALM = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("virtualAbstractFromInterfaceConcept").modifiers(12, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(4731970554577185906L).languageId(0x97c9a13312451954L, 0xa18fb831fb54541L).build2(SMethodBuilder.createJavaParameter(Integer.TYPE, ""));
+  public static final SMethod<String> nonVirtualFromInterfaceConcept_id46FlynTbB0A = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("nonVirtualFromInterfaceConcept").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(4731970554577186854L).languageId(0x97c9a13312451954L, 0xa18fb831fb54541L).build2(SMethodBuilder.createJavaParameter(String.class, ""), SMethodBuilder.createJavaParameter(Integer.TYPE, ""));
+  public static final SMethod<String> virtualFromInterfaceConcept_id46FlynTbB2v = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("virtualFromInterfaceConcept").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(4731970554577186975L).languageId(0x97c9a13312451954L, 0xa18fb831fb54541L).build2(SMethodBuilder.createJavaParameter(String.class, ""));
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(virtualAbstractFromInterfaceConcept_id46FlynTbALM, nonVirtualFromInterfaceConcept_id46FlynTbB0A, virtualFromInterfaceConcept_id46FlynTbB2v);
 
@@ -41,7 +37,6 @@ public final class I__BehaviorDescriptor extends BaseBHDescriptor {
   }
 
   /*package*/ I__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override

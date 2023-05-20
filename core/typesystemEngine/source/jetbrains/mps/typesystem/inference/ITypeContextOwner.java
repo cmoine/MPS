@@ -18,6 +18,10 @@ package jetbrains.mps.typesystem.inference;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.typesystem.inference.util.SubtypingCache;
 
+/**
+ * @deprecated use {@link jetbrains.mps.typechecking.TypecheckingFacade} for launching typechecking actions.
+ */
+@Deprecated(forRemoval = true)
 public interface ITypeContextOwner {
   TypeCheckingContext createTypecheckingContext (SNode sNode, TypeContextManager typeContextManager);
 

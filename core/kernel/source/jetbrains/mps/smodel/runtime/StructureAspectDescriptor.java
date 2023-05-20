@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,7 @@
 package jetbrains.mps.smodel.runtime;
 
 import jetbrains.mps.smodel.adapter.ids.SConceptId;
-import jetbrains.mps.util.annotation.ToRemove;
-import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.adapter.ids.SDataTypeId;
 
 import java.util.Collection;
 
@@ -29,11 +28,43 @@ import java.util.Collection;
  * IMPORTANT: generated code shall not implement this interface directly, rather extend
  * {@link jetbrains.mps.smodel.runtime.BaseStructureAspectDescriptor}.
  *
- * FIXME BaseStructureAspectDescriptor#getDescriptors() shall move here once 3.2 (which uses BSAD in generated descriptors) is out.
  * @see jetbrains.mps.smodel.runtime.BaseStructureAspectDescriptor
  */
-public interface StructureAspectDescriptor extends LanguageAspectDescriptor {
+public interface StructureAspectDescriptor extends ILanguageAspect {
   ConceptDescriptor getDescriptor(SConceptId id);
 
   Collection<ConceptDescriptor> getDescriptors();
+
+  DataTypeDescriptor getDataTypeDescriptor(SDataTypeId id);
+
+  Collection<DataTypeDescriptor> getDataTypeDescriptors();
+
+  /**
+   * Let structure aspect expose its dependencies from other languages.
+   * The moment this method is consulted is unspecified.
+   * @since 2019.1
+   */
+  void reportDependencies(Dependencies deps);
+
+  /**
+   * DESIGN NOTE: technically, SAD shall express its language dependencies with SLanguageId, which is aligned with ConceptDescriptor from
+   * {@link #getDescriptors()}. However, I don't want to expose neither SLanguageId (though ready to discuss that), nor SLanguage
+   * (which it quite messed up interface with RT stuff access), but still would like to keep sort of 'debug info' (i.e. language name) along
+   * with the identity of dependency language which we might find handy for issue reporting. Indeed, it's easy to generate collection of
+   * SLanguage, but every time I see MetaAdapterFactory in the generated code, I frown. With inversion this class provides, we have some
+   * flexibility in a way we report dependencies.
+   */
+  interface Dependencies {
+    /**
+     * Report languages of foreign concepts extended by concepts of this language. Here, 'concepts' means both SConcept and SInterfaceConcept.
+     * 'lang.core' is not necessarily included unless {@code BaseConcept} or any other lang.core concept is mentioned explicitly.
+     */
+    void extendedLanguage(long hiBits, long lowBits, String name);
+
+    /**
+     * Report languages of foreign concepts aggregated by concepts of this language.
+     * IOW, a child role with a concept from another language get the language into this set.
+     */
+    void aggregatedLanguage(long hiBits, long lowBits, String name);
+  }
 }

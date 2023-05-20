@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +15,17 @@
  */
 package jetbrains.mps;
 
-import com.intellij.openapi.extensions.AbstractExtensionPointBean;
 import com.intellij.openapi.extensions.ExtensionPointName;
 import com.intellij.util.xmlb.annotations.Attribute;
 
-public class VisibleModuleMask extends AbstractExtensionPointBean {
+public class VisibleModuleMask {
   public static final ExtensionPointName<VisibleModuleMask> EP_VISIBLE_MODULES = ExtensionPointName.create("com.intellij.mps.VisibleModuleMask");
 
+  /**
+   * It is used as parameter for java.util.regex.Pattern#compile(java.lang.String) to check module name for visibility
+   *
+   * Must not be empty or null
+   */
   @Attribute("mask")
   public String mask;
 }

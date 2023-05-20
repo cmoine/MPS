@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +28,7 @@ import org.jetbrains.mps.openapi.model.SModel.Problem.Kind;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.persistence.DataSource;
+import org.jetbrains.mps.openapi.persistence.ModelLoadException;
 import org.jetbrains.mps.openapi.persistence.ModelSaveException;
 import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
 import org.jetbrains.mps.openapi.persistence.StreamDataSource;
@@ -37,8 +38,13 @@ import java.util.Collections;
 import java.util.Iterator;
 
 /**
+ * A basic implementation of the EditableSmodelBase suitable for most of the custom persistence scenarios
+ * Supposed to be constructed in the implementing class of ModelFactory (corr. to the new persistence)
  *
+ * @deprecated better use {@link CustomPersistenceModelWithHeader}
+ * @see XmlPersistence for example
  */
+@Deprecated(since = "191", forRemoval = true)
 public final class CustomPersistenceSModel extends EditableSModelBase implements SingleRootSModel {
   @NotNull
   private final SModelPersistence myPersistence;
@@ -46,7 +52,11 @@ public final class CustomPersistenceSModel extends EditableSModelBase implements
   private Iterable<Problem> myProblems = Collections.emptySet();
 
   public CustomPersistenceSModel(@NotNull SModelReference modelReference, @NotNull StreamDataSource source, @NotNull SModelPersistence persistence) {
-    super(modelReference, source instanceof FileDataSource ? FileWithBackupDataSource.create((FileDataSource) source) : source);
+    super(modelReference, source instanceof FileDataSource
+                          ? FileWithBackupDataSource.create((FileDataSource) source)
+                          : source);
+    // FIXME It's not a model to be responsible to construct FileWithBackupDataSource! It's DataSourceFactory for specific DataSourceType that knows
+    //       its limitations and therefore constructs FilwWithBackupDataSource, not model implementation. Otherwise, it's too coupled
     myPersistence = persistence;
   }
 
@@ -62,14 +72,14 @@ public final class CustomPersistenceSModel extends EditableSModelBase implements
   }
 
   @Override
-  public SModel getSModelInternal() {
+  public SModel getSModel() {
     if (myModel == null) {
       final ModelLoadingState oldState;
       synchronized (this) {
         oldState = getLoadingState();
         if (myModel == null) {
           myModel = loadSModel();
-          myModel.setModelDescriptor(this);
+          myModel.setModelDescriptor(this, getNodeEventDispatch());
           setLoadingState(ModelLoadingState.FULLY_LOADED);
         }
       }
@@ -101,8 +111,7 @@ public final class CustomPersistenceSModel extends EditableSModelBase implements
       if (brokenFile != null) {
         long l = ((FileDataSource) getSource()).getFile().lastModified();
         if (l > 0 && brokenFile.lastModified() > l) {
-          SModelBase brokenModel = (SModelBase) PersistenceFacade.getInstance().getDefaultModelFactory().load(
-              new FileDataSource(brokenFile, null), Collections.<String, String>emptyMap());
+          SModelBase brokenModel = (SModelBase) PersistenceFacade.getInstance().getDefaultModelFactory().load(new FileDataSource(brokenFile));
           brokenModel.load();
           // force save
           setChanged(true);
@@ -110,7 +119,7 @@ public final class CustomPersistenceSModel extends EditableSModelBase implements
         }
       }
       return (SModel) myPersistence.readModel(getReference(), getSource());
-    } catch (IOException e) {
+    } catch (IOException | ModelLoadException e) {
       return new StubModel(getReference(), e);
     }
   }
@@ -131,25 +140,22 @@ public final class CustomPersistenceSModel extends EditableSModelBase implements
 
     final SModel oldModel = myModel;
     myModel = loadSModel();
-    oldModel.setModelDescriptor(null);
-    myModel.setModelDescriptor(this);
     oldModel.dispose();
+    myModel.setModelDescriptor(this, getNodeEventDispatch());
     setChanged(false);
 
-    // XXX loadSModel() doesn't change loading state (though it's wrong, as reload might load empty model)
-    //     hence no fireModelStateChanged() call here
     fireModelReplaced();
   }
 
   @Override
   protected boolean saveModel() throws ModelSaveException, IOException {
-    SModel smodel = getSModel();
-    if (smodel instanceof InvalidSModel) {
+    SModelData modelData = getModelData();
+    if (modelData instanceof InvalidSModel) {
       // we do not save stub model to not overwrite the real model
       return false;
     }
     try {
-      myPersistence.writeModel(smodel, getSource());
+      myPersistence.writeModel(modelData, getSource());
       IFile brokenFile = getBackupFile(true);
       if (brokenFile != null) {
         brokenFile.delete();
@@ -158,9 +164,8 @@ public final class CustomPersistenceSModel extends EditableSModelBase implements
     } catch (ModelSaveException e) {
       IFile brokenFile = getBackupFile(false);
       try {
-        PersistenceFacade.getInstance().getDefaultModelFactory().save(this, new FileDataSource(brokenFile, null));
-      } catch (ModelSaveException ignore) {
-      } catch (IOException ignore) {
+        PersistenceFacade.getInstance().getDefaultModelFactory().save(this, new FileDataSource(brokenFile));
+      } catch (ModelSaveException | IOException ignore) {
       }
       myProblems = e.getProblems();
       throw e;
@@ -181,9 +186,9 @@ public final class CustomPersistenceSModel extends EditableSModelBase implements
   }
 
   public static class StubModel extends jetbrains.mps.smodel.SModel implements InvalidSModel {
-    private IOException myCause;
+    private Exception myCause;
 
-    public StubModel(@NotNull SModelReference modelReference, @Nullable IOException cause) {
+    public StubModel(@NotNull SModelReference modelReference, @Nullable Exception cause) {
       super(modelReference);
       myCause = cause;
     }
@@ -191,7 +196,7 @@ public final class CustomPersistenceSModel extends EditableSModelBase implements
     @NotNull
     @Override
     public Iterable<Problem> getProblems() {
-      return Collections.<Problem>singleton(
+      return Collections.singleton(
           new PersistenceProblem(Kind.Load, myCause == null ? "Couldn't read model." : "Cannot load. I/O problem: " + myCause.getMessage(), null,
               true));
     }

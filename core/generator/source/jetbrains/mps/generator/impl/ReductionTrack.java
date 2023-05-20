@@ -37,7 +37,7 @@ final class ReductionTrack {
 
   public ReductionTrack(@NotNull BlockedReductionsData reductionsData) {
     myReductionsData = reductionsData;
-    myReductionStack = new ArrayDeque<ReductionContext>(20);
+    myReductionStack = new ArrayDeque<>(20);
     myReductionStack.push(new ReductionContext());
   }
 

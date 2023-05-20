@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="562se61blhkqwslwhd4jxgfd90xlkuj">
+  <files names="mpsEditorTestsPlugin.xml:mpsIdeaMigration.xml:mpsIdeaVcs.xml:mpsJavaIdeaPlugin.xml:mpsJpsIdea.xml:mpsJpsIdeaJ8Compatibility.xml:mpsPlugin.xml:mpsPluginCommon.xml:mpsPluginCore.xml:mpsPluginDist.xml:mpsPluginTesting.xml:mpsPluginTests.xml" />
+</product>
+

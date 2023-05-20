@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="4q8hj4s3j17y5ldmckearbn5f5ruqvh" />
+<product version="3" modelHash="eo85kzyul2skczbl0npusppunzf3mw0">
+  <files names="AddAllSetElementsOperation_replace_Intention.java:AddSetElementOperation_replace_Intention.java:Add_Comparator_Intention.java:ConvertForEachStatementToForeachStatement_Intention.java:ConvertForeachStatementToForEach_Intention.java:ConvertToMultiForeach_Intention.java:CreateInitializer_Intention.java:IntentionsDescriptor.java:IterateOverSequence_Intention.java:RemoveAllSetElementsOperation_replace_Intention.java:RemoveSetElementOperation_replace_Intention.java:add_copy_from_Intention.java:add_init_values_Intention.java:add_sequence_initializer_Intention.java" />
+</product>
 

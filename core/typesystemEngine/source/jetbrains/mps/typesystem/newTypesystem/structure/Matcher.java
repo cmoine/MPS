@@ -21,7 +21,7 @@ import java.util.Set;
 
 public class Matcher {
   public static <Meta, Target> MatchResult<Meta, Target> match(Type<Meta, Target> type1, Type<Meta, Target> type2) {
-    MatchResult<Meta, Target> result = new MatchResult<Meta, Target>();
+    MatchResult<Meta, Target> result = new MatchResult<>();
     if (type1 == type2) return result;
     if (type1 == null || type2 == null) return MatchResult.FALSE;
 

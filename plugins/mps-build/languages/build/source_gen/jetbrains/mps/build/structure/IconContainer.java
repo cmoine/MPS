@@ -5,21 +5,21 @@ package jetbrains.mps.build.structure;
 import jetbrains.mps.smodel.runtime.IconResource;
 
 public class IconContainer {
-  protected static IconResource RESOURCE_a0a0f = new IconResource("externalLayout.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a0g = new IconResource("dependency.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a0m = new IconResource("macro.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a0v = new IconResource("layout.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a0zb = new IconResource("layout.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a0dc = new IconResource("archive.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a0mc = new IconResource("archive.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a0pc = new IconResource("archive.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a0tc = new IconResource("buildProject.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a0uc = new IconResource("dependency.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a0yc = new IconResource("path.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a0ad = new IconResource("path.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a0ud = new IconResource("library.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a0zd = new IconResource("javaModule.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a0be = new IconResource("javaOptions.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a0ge = new IconResource("string.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a0me = new IconResource("macro.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a2a0a5b0gf = new IconResource("externalLayout.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a2a0a6b0gf = new IconResource("dependency.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a3a0a21b0gf = new IconResource("macro.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a2a0a22b0gf = new IconResource("layout.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a3a0a25b0gf = new IconResource("layout.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a2a0a65b0gf = new IconResource("archive.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a2a0a56b0gf = new IconResource("archive.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a2a0a86b0gf = new IconResource("archive.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a2a0a27b0gf = new IconResource("build.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a2a0a37b0gf = new IconResource("dependency.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a2a0a77b0gf = new IconResource("path.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a2a0a97b0gf = new IconResource("path.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a2a0a99b0gf = new IconResource("library.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a2a0a401b0gf = new IconResource("javaModule.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a2a0a601b0gf = new IconResource("javaOptions.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a2a0a111b0gf = new IconResource("string.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a3a0a711b0gf = new IconResource("macro.png", IconContainer.class);
 }

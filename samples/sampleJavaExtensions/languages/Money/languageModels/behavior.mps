@@ -2,7 +2,7 @@
 <model ref="r:66ae1c00-8213-4a4f-b278-da47b00dec95(org.jetbrains.mps.samples.Money.behavior)">
   <persistence version="9" />
   <languages>
-    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="0" />
+    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="2" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -28,7 +28,6 @@
       </concept>
       <concept id="1225194413805" name="jetbrains.mps.lang.behavior.structure.ConceptConstructorDeclaration" flags="in" index="13hLZK" />
       <concept id="1225194472830" name="jetbrains.mps.lang.behavior.structure.ConceptMethodDeclaration" flags="ng" index="13i0hz">
-        <property id="1225194472833" name="isPrivate" index="13i0is" />
         <property id="1225194472832" name="isVirtual" index="13i0it" />
         <property id="1225194472834" name="isAbstract" index="13i0iv" />
         <reference id="1225194472831" name="overriddenMethod" index="13i0hy" />
@@ -190,7 +189,6 @@
     <node concept="13i0hz" id="5A8yV0Pe14_" role="13h7CS">
       <property role="13i0it" value="false" />
       <property role="TrG5h" value="getVariableSuffixes" />
-      <property role="13i0is" value="false" />
       <property role="13i0iv" value="false" />
       <ref role="13i0hy" to="tpek:hEwIzNo" resolve="getVariableSuffixes" />
       <node concept="3Tm1VV" id="5A8yV0Pe14A" role="1B3o_S" />
@@ -228,7 +226,6 @@
     <node concept="13i0hz" id="5A8yV0Pe4j4" role="13h7CS">
       <property role="TrG5h" value="getVariableExpectedName" />
       <property role="13i0it" value="false" />
-      <property role="13i0is" value="false" />
       <property role="13i0iv" value="false" />
       <ref role="13i0hy" to="tpek:hEwJgm_" resolve="getVariableExpectedName" />
       <node concept="3Tm1VV" id="5A8yV0Pe4j5" role="1B3o_S" />
@@ -255,18 +252,18 @@
             </node>
             <node concept="2YIFZM" id="x3u75dlyLX" role="37vLTx">
               <ref role="1Pybhc" to="18ew:~NameUtil" resolve="NameUtil" />
-              <ref role="37wK5l" to="18ew:~NameUtil.pluralize(java.lang.String):java.lang.String" resolve="pluralize" />
+              <ref role="37wK5l" to="18ew:~NameUtil.pluralize(java.lang.String)" resolve="pluralize" />
               <node concept="2YIFZM" id="x3u75dlzDZ" role="37wK5m">
                 <ref role="1Pybhc" to="18ew:~NameUtil" resolve="NameUtil" />
-                <ref role="37wK5l" to="18ew:~NameUtil.capitalize(java.lang.String):java.lang.String" resolve="capitalize" />
+                <ref role="37wK5l" to="18ew:~NameUtil.capitalize(java.lang.String)" resolve="capitalize" />
                 <node concept="2YIFZM" id="x3u75dlzyC" role="37wK5m">
                   <ref role="1Pybhc" to="18ew:~NameUtil" resolve="NameUtil" />
-                  <ref role="37wK5l" to="18ew:~NameUtil.decapitalize(java.lang.String):java.lang.String" resolve="decapitalize" />
+                  <ref role="37wK5l" to="18ew:~NameUtil.decapitalize(java.lang.String)" resolve="decapitalize" />
                   <node concept="2OqwBi" id="x3u75dlyLY" role="37wK5m">
                     <node concept="2OqwBi" id="x3u75dlyLZ" role="2Oq$k0">
                       <node concept="13iPFW" id="x3u75dlyM0" role="2Oq$k0" />
                       <node concept="3TrEf2" id="x3u75dlyM1" role="2OqNvi">
-                        <ref role="3Tt5mk" to="v0h4:38gGBrhh3mC" />
+                        <ref role="3Tt5mk" to="v0h4:38gGBrhh3mC" resolve="unit" />
                       </node>
                     </node>
                     <node concept="3TrcHB" id="x3u75dlyM2" role="2OqNvi">
@@ -681,7 +678,7 @@
                     </node>
                     <node concept="2YIFZM" id="x3u75dl_Av" role="37vLTx">
                       <ref role="1Pybhc" to="18ew:~NameUtil" resolve="NameUtil" />
-                      <ref role="37wK5l" to="18ew:~NameUtil.capitalize(java.lang.String):java.lang.String" resolve="capitalize" />
+                      <ref role="37wK5l" to="18ew:~NameUtil.capitalize(java.lang.String)" resolve="capitalize" />
                       <node concept="3EllGN" id="x3u75dl$Nc" role="37wK5m">
                         <node concept="37vLTw" id="3GM_nagT$8w" role="3ElVtu">
                           <ref role="3cqZAo" node="x3u75dl$MT" resolve="mod" />
@@ -769,7 +766,7 @@
             <node concept="2OqwBi" id="3u6SZi0EJ1E" role="2Oq$k0">
               <node concept="13iPFW" id="3u6SZi0EIYy" role="2Oq$k0" />
               <node concept="3TrEf2" id="3u6SZi0GarW" role="2OqNvi">
-                <ref role="3Tt5mk" to="v0h4:3u6SZi0G99E" />
+                <ref role="3Tt5mk" to="v0h4:3u6SZi0G99E" resolve="symbol" />
               </node>
             </node>
             <node concept="3w_OXm" id="3u6SZi0Gbzf" role="2OqNvi" />
@@ -792,7 +789,7 @@
                   <node concept="2OqwBi" id="3u6SZi0EGAr" role="2Oq$k0">
                     <node concept="13iPFW" id="3u6SZi0EGAs" role="2Oq$k0" />
                     <node concept="3TrEf2" id="3u6SZi0Gc01" role="2OqNvi">
-                      <ref role="3Tt5mk" to="v0h4:3u6SZi0G99E" />
+                      <ref role="3Tt5mk" to="v0h4:3u6SZi0G99E" resolve="symbol" />
                     </node>
                   </node>
                   <node concept="3TrcHB" id="3u6SZi0Gcxy" role="2OqNvi">

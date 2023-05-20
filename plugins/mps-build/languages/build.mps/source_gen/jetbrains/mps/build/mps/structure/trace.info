@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
@@ -8,151 +7,2750 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1076505808687:jetbrains.mps.baseLanguage.structure.WhileStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1163670490218:jetbrains.mps.baseLanguage.structure.SwitchStatement" />
   <root>
     <file name="ConceptPresentationAspectImpl.java">
-      <unit at="12,0,182,0" name="jetbrains.mps.build.mps.structure.ConceptPresentationAspectImpl" />
+      <unit at="11,0,595,0" name="jetbrains.mps.build.mps.structure.ConceptPresentationAspectImpl" />
     </file>
     <file name="IconContainer.java">
       <unit at="7,0,10,0" name="jetbrains.mps.build.mps.structure.IconContainer" />
     </file>
+    <file name="LanguageConceptSwitch.java">
+      <unit at="10,0,164,0" name="jetbrains.mps.build.mps.structure.LanguageConceptSwitch" />
+    </file>
     <file name="StructureAspectDescriptor.java">
-      <unit at="21,0,427,0" name="jetbrains.mps.build.mps.structure.StructureAspectDescriptor" />
+      <unit at="22,0,1073,0" name="jetbrains.mps.build.mps.structure.StructureAspectDescriptor" />
     </file>
   </root>
-  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/269707337715631379">
-    <file name="BuildMps_ModuleSourcesKind.java">
-      <node id="269707337715631379" at="14,0,15,0" concept="3" trace="myName" />
-      <node id="269707337715631379" at="15,27,16,18" concept="7" />
-      <node id="269707337715631379" at="18,0,19,0" concept="3" trace="myValue" />
-      <node id="269707337715631379" at="19,65,20,18" concept="2" />
-      <node id="269707337715631379" at="20,18,21,20" concept="2" />
-      <node id="269707337715631379" at="23,28,24,19" concept="7" />
-      <node id="269707337715631379" at="26,36,27,19" concept="7" />
-      <node id="269707337715631379" at="29,65,30,112" concept="6" />
-      <node id="269707337715631379" at="30,112,31,79" concept="2" />
-      <node id="269707337715631379" at="31,79,32,89" concept="2" />
-      <node id="269707337715631379" at="32,89,33,77" concept="2" />
-      <node id="269707337715631379" at="33,77,34,16" concept="7" />
-      <node id="269707337715631379" at="36,57,37,16" concept="7" />
-      <node id="269707337715631379" at="40,24,41,53" concept="7" />
-      <node id="269707337715631379" at="43,78,44,48" concept="7" />
-      <node id="269707337715631379" at="46,88,47,58" concept="7" />
-      <node id="269707337715631379" at="49,76,50,46" concept="7" />
-      <node id="269707337715631379" at="51,5,52,51" concept="7" />
-      <node id="269707337715631379" at="15,0,18,0" concept="5" trace="getName#()Ljava/lang/String;" />
-      <node id="269707337715631379" at="23,0,26,0" concept="5" trace="getValue#()Ljava/lang/String;" />
-      <node id="269707337715631379" at="26,0,29,0" concept="5" trace="getValueAsString#()Ljava/lang/String;" />
-      <node id="269707337715631379" at="36,0,39,0" concept="8" trace="getDefault#()Ljetbrains/mps/build/mps/structure/BuildMps_ModuleSourcesKind;" />
-      <node id="269707337715631379" at="39,69,42,5" concept="4" />
-      <node id="269707337715631379" at="42,5,45,5" concept="4" />
-      <node id="269707337715631379" at="45,5,48,5" concept="4" />
-      <node id="269707337715631379" at="48,5,51,5" concept="4" />
-      <node id="269707337715631379" at="19,0,23,0" concept="1" trace="BuildMps_ModuleSourcesKind#(Ljava/lang/String;Ljava/lang/String;)V" />
-      <node id="269707337715631379" at="29,0,36,0" concept="8" trace="getConstants#()Ljava/util/List;" />
-      <node id="269707337715631379" at="39,0,54,0" concept="8" trace="parseValue#(Ljava/lang/String;)Ljetbrains/mps/build/mps/structure/BuildMps_ModuleSourcesKind;" />
-      <scope id="269707337715631379" at="15,27,16,18" />
-      <scope id="269707337715631379" at="23,28,24,19" />
-      <scope id="269707337715631379" at="26,36,27,19" />
-      <scope id="269707337715631379" at="36,57,37,16" />
-      <scope id="269707337715631379" at="40,24,41,53" />
-      <scope id="269707337715631379" at="43,78,44,48" />
-      <scope id="269707337715631379" at="46,88,47,58" />
-      <scope id="269707337715631379" at="49,76,50,46" />
-      <scope id="269707337715631379" at="19,65,21,20" />
-      <scope id="269707337715631379" at="15,0,18,0" />
-      <scope id="269707337715631379" at="23,0,26,0" />
-      <scope id="269707337715631379" at="26,0,29,0" />
-      <scope id="269707337715631379" at="36,0,39,0" />
-      <scope id="269707337715631379" at="19,0,23,0">
-        <var name="name" id="269707337715631379" />
-        <var name="value" id="269707337715631379" />
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/1265949165890536423">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="1265949165890536423" at="20,0,21,0" concept="2" trace="props_BuildMpsLayout_ModuleJars" />
+      <node id="1265949165890536423" at="151,54,152,76" concept="5" />
+      <node id="1265949165890536423" at="152,76,153,40" concept="1" />
+      <node id="1265949165890536423" at="153,40,154,57" concept="1" />
+      <node id="1265949165890536423" at="155,9,156,47" concept="6" />
+      <node id="1265949165890536423" at="150,59,155,9" concept="3" />
+      <scope id="1265949165890536423" at="151,54,154,57">
+        <var name="cpb" id="1265949165890536423" />
       </scope>
-      <scope id="269707337715631379" at="29,65,34,16">
-        <var name="list" id="269707337715631379" />
-      </scope>
-      <scope id="269707337715631379" at="29,0,36,0" />
-      <scope id="269707337715631379" at="39,69,52,51" />
-      <scope id="269707337715631379" at="39,0,54,0">
-        <var name="value" id="269707337715631379" />
-      </scope>
-      <unit id="269707337715631379" at="9,0,55,0" name="jetbrains.mps.build.mps.structure.BuildMps_ModuleSourcesKind" />
+      <scope id="1265949165890536423" at="150,59,156,47" />
     </file>
-    <file name="BuildMps_ModuleSourcesKind_PropertySupport.java">
-      <node id="269707337715631379" at="11,24,12,18" concept="7" />
-      <node id="269707337715631379" at="13,5,14,129" concept="6" />
-      <node id="269707337715631379" at="15,33,16,61" concept="6" />
-      <node id="269707337715631379" at="17,45,18,20" concept="7" />
-      <node id="269707337715631379" at="20,5,21,17" concept="7" />
-      <node id="269707337715631379" at="24,24,25,18" concept="7" />
-      <node id="269707337715631379" at="26,5,27,129" concept="6" />
-      <node id="269707337715631379" at="28,33,29,61" concept="6" />
-      <node id="269707337715631379" at="30,45,31,43" concept="7" />
-      <node id="269707337715631379" at="33,5,34,16" concept="7" />
-      <node id="269707337715631379" at="36,49,37,87" concept="6" />
-      <node id="269707337715631379" at="38,27,39,32" concept="7" />
-      <node id="269707337715631379" at="40,5,41,14" concept="7" />
-      <node id="269707337715631379" at="10,44,13,5" concept="4" />
-      <node id="269707337715631379" at="16,61,19,7" concept="4" />
-      <node id="269707337715631379" at="23,47,26,5" concept="4" />
-      <node id="269707337715631379" at="29,61,32,7" concept="4" />
-      <node id="269707337715631379" at="37,87,40,5" concept="4" />
-      <node id="269707337715631379" at="14,129,20,5" concept="9" />
-      <node id="269707337715631379" at="27,129,33,5" concept="9" />
-      <node id="269707337715631379" at="36,0,43,0" concept="5" trace="fromInternalValue#(Ljava/lang/String;)Ljava/lang/String;" />
-      <node id="269707337715631379" at="10,0,23,0" concept="5" trace="canSetValue#(Ljava/lang/String;)Z" />
-      <node id="269707337715631379" at="23,0,36,0" concept="5" trace="toInternalValue#(Ljava/lang/String;)Ljava/lang/String;" />
-      <scope id="269707337715631379" at="11,24,12,18" />
-      <scope id="269707337715631379" at="17,45,18,20" />
-      <scope id="269707337715631379" at="24,24,25,18" />
-      <scope id="269707337715631379" at="30,45,31,43" />
-      <scope id="269707337715631379" at="38,27,39,32" />
-      <scope id="269707337715631379" at="15,33,19,7">
-        <var name="constant" id="269707337715631379" />
+    <file name="LanguageConceptSwitch.java">
+      <node id="1265949165890536423" at="20,0,21,0" concept="8" trace="BuildMpsLayout_ModuleJars" />
+      <node id="1265949165890536423" at="91,70,92,64" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="1265949165890536423" at="31,0,32,0" concept="2" trace="myConceptBuildMpsLayout_ModuleJars" />
+      <node id="1265949165890536423" at="135,59,136,50" concept="6" />
+      <node id="1265949165890536423" at="360,83,361,182" concept="5" />
+      <node id="1265949165890536423" at="361,182,362,34" concept="1" />
+      <node id="1265949165890536423" at="362,34,363,62" concept="7" />
+      <node id="1265949165890536423" at="363,62,364,76" concept="1" />
+      <node id="1265949165890536423" at="364,76,365,110" concept="1" />
+      <node id="1265949165890536423" at="365,110,366,17" concept="1" />
+      <node id="7918752904810477378" at="366,17,367,126" concept="1" />
+      <node id="3335207478148060173" at="367,126,368,120" concept="1" />
+      <node id="1265949165890536425" at="368,120,369,168" concept="1" />
+      <node id="4356762679305730677" at="369,168,370,203" concept="1" />
+      <node id="3335207478148056905" at="370,203,371,203" concept="1" />
+      <node id="3335207478148060176" at="371,203,372,201" concept="1" />
+      <node id="1265949165890536423" at="372,201,373,22" concept="1" />
+      <node id="1265949165890536423" at="373,22,374,22" concept="6" />
+      <node id="1265949165890536423" at="360,0,376,0" concept="9" trace="createDescriptorForBuildMpsLayout_ModuleJars#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="1265949165890536423" at="135,59,136,50" />
+      <scope id="1265949165890536423" at="360,83,374,22">
+        <var name="b" id="1265949165890536423" />
       </scope>
-      <scope id="269707337715631379" at="28,33,32,7">
-        <var name="constant" id="269707337715631379" />
+      <scope id="1265949165890536423" at="360,0,376,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/1330375798066754656">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="1330375798066754656" at="12,0,13,0" concept="2" trace="props_BuildLayout_ToBinaryCopyProcessor" />
+      <node id="1330375798066754656" at="88,62,89,76" concept="5" />
+      <node id="1330375798066754656" at="89,76,90,74" concept="1" />
+      <node id="1330375798066754656" at="90,74,91,65" concept="1" />
+      <node id="1330375798066754656" at="92,9,93,55" concept="6" />
+      <node id="1330375798066754656" at="87,67,92,9" concept="3" />
+      <scope id="1330375798066754656" at="88,62,91,65">
+        <var name="cpb" id="1330375798066754656" />
       </scope>
-      <scope id="269707337715631379" at="36,49,41,14">
-        <var name="constant" id="269707337715631379" />
+      <scope id="1330375798066754656" at="87,67,93,55" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="1330375798066754656" at="12,0,13,0" concept="8" trace="BuildLayout_ToBinaryCopyProcessor" />
+      <node id="1330375798066754656" at="83,115,84,72" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="1330375798066754656" at="23,0,24,0" concept="2" trace="myConceptBuildLayout_ToBinaryCopyProcessor" />
+      <node id="1330375798066754656" at="119,67,120,58" concept="6" />
+      <node id="1330375798066754656" at="271,91,272,190" concept="5" />
+      <node id="1330375798066754656" at="272,190,273,34" concept="1" />
+      <node id="1330375798066754656" at="273,34,274,71" concept="7" />
+      <node id="1330375798066754656" at="274,71,275,76" concept="1" />
+      <node id="1330375798066754656" at="275,76,276,110" concept="1" />
+      <node id="1330375798066754656" at="276,110,277,17" concept="1" />
+      <node id="7918752904805006474" at="277,17,278,126" concept="1" />
+      <node id="1330375798066754656" at="278,126,279,56" concept="1" />
+      <node id="1330375798066754656" at="279,56,280,22" concept="6" />
+      <node id="1330375798066754656" at="271,0,282,0" concept="9" trace="createDescriptorForBuildLayout_ToBinaryCopyProcessor#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="1330375798066754656" at="119,67,120,58" />
+      <scope id="1330375798066754656" at="271,91,280,22">
+        <var name="b" id="1330375798066754656" />
       </scope>
-      <scope id="269707337715631379" at="36,0,43,0">
-        <var name="value" id="269707337715631379" />
+      <scope id="1330375798066754656" at="271,0,282,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/1500819558095907805">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="1500819558095907805" at="44,0,45,0" concept="2" trace="props_BuildMps_Group" />
+      <node id="1500819558095907805" at="329,43,330,76" concept="5" />
+      <node id="1500819558095907805" at="330,76,331,35" concept="1" />
+      <node id="1500819558095907805" at="331,35,332,46" concept="1" />
+      <node id="1500819558095907805" at="333,9,334,36" concept="6" />
+      <node id="1500819558095907805" at="328,48,333,9" concept="3" />
+      <scope id="1500819558095907805" at="329,43,332,46">
+        <var name="cpb" id="1500819558095907805" />
       </scope>
-      <scope id="269707337715631379" at="10,44,21,17">
-        <var name="constants" id="269707337715631379" />
+      <scope id="1500819558095907805" at="328,48,334,36" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="1500819558095907805" at="44,0,45,0" concept="8" trace="BuildMps_Group" />
+      <node id="1500819558095907805" at="115,60,116,53" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="1500819558095907805" at="55,0,56,0" concept="2" trace="myConceptBuildMps_Group" />
+      <node id="1500819558095907805" at="183,48,184,39" concept="6" />
+      <node id="1500819558095907805" at="683,72,684,171" concept="5" />
+      <node id="1500819558095907805" at="684,171,685,34" concept="1" />
+      <node id="1500819558095907805" at="685,34,686,62" concept="7" />
+      <node id="1500819558095907805" at="686,62,687,76" concept="1" />
+      <node id="1500819558095907805" at="687,76,688,71" concept="1" />
+      <node id="1500819558095907805" at="688,71,689,110" concept="1" />
+      <node id="1500819558095907805" at="689,110,690,17" concept="1" />
+      <node id="1500819558095907806" at="690,17,691,197" concept="1" />
+      <node id="1500819558095907805" at="691,197,692,25" concept="1" />
+      <node id="1500819558095907805" at="692,25,693,22" concept="6" />
+      <node id="1500819558095907805" at="683,0,695,0" concept="9" trace="createDescriptorForBuildMps_Group#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="1500819558095907805" at="183,48,184,39" />
+      <scope id="1500819558095907805" at="683,72,693,22">
+        <var name="b" id="1500819558095907805" />
       </scope>
-      <scope id="269707337715631379" at="23,47,34,16">
-        <var name="constants" id="269707337715631379" />
+      <scope id="1500819558095907805" at="683,0,695,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/1692280246134781712">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="1692280246134781712" at="21,0,22,0" concept="2" trace="props_BuildMpsLayout_ModuleSources" />
+      <node id="1692280246134781712" at="158,57,159,76" concept="5" />
+      <node id="1692280246134781712" at="159,76,160,44" concept="1" />
+      <node id="1692280246134781712" at="160,44,161,60" concept="1" />
+      <node id="1692280246134781712" at="162,9,163,50" concept="6" />
+      <node id="1692280246134781712" at="157,62,162,9" concept="3" />
+      <scope id="1692280246134781712" at="158,57,161,60">
+        <var name="cpb" id="1692280246134781712" />
       </scope>
-      <scope id="269707337715631379" at="10,0,23,0">
-        <var name="value" id="269707337715631379" />
+      <scope id="1692280246134781712" at="157,62,163,50" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="1692280246134781712" at="21,0,22,0" concept="8" trace="BuildMpsLayout_ModuleSources" />
+      <node id="1692280246134781712" at="92,64,93,67" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="1692280246134781712" at="32,0,33,0" concept="2" trace="myConceptBuildMpsLayout_ModuleSources" />
+      <node id="1692280246134781712" at="137,62,138,53" concept="6" />
+      <node id="1692280246134781712" at="376,86,377,185" concept="5" />
+      <node id="1692280246134781712" at="377,185,378,34" concept="1" />
+      <node id="1692280246134781712" at="378,34,379,62" concept="7" />
+      <node id="1692280246134781712" at="379,62,380,76" concept="1" />
+      <node id="1692280246134781712" at="380,76,381,76" concept="1" />
+      <node id="1692280246134781712" at="381,76,382,110" concept="1" />
+      <node id="1692280246134781712" at="382,110,383,17" concept="1" />
+      <node id="4643216374596270214" at="383,17,384,117" concept="1" />
+      <node id="7918752904808503599" at="384,117,385,126" concept="1" />
+      <node id="1692280246134781713" at="385,126,386,168" concept="1" />
+      <node id="1692280246134781712" at="386,168,387,26" concept="1" />
+      <node id="1692280246134781712" at="387,26,388,22" concept="6" />
+      <node id="1692280246134781712" at="376,0,390,0" concept="9" trace="createDescriptorForBuildMpsLayout_ModuleSources#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="1692280246134781712" at="137,62,138,53" />
+      <scope id="1692280246134781712" at="376,86,388,22">
+        <var name="b" id="1692280246134781712" />
       </scope>
-      <scope id="269707337715631379" at="23,0,36,0">
-        <var name="value" id="269707337715631379" />
+      <scope id="1692280246134781712" at="376,0,390,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/2105528055260548241">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="2105528055260548241" at="16,0,17,0" concept="2" trace="props_BuildMpsLayout_FolderWithSources" />
+      <node id="2105528055260548241" at="119,61,120,76" concept="5" />
+      <node id="2105528055260548241" at="120,76,121,38" concept="1" />
+      <node id="2105528055260548241" at="121,38,122,56" concept="1" />
+      <node id="2105528055260548241" at="122,56,123,64" concept="1" />
+      <node id="2105528055260548241" at="124,9,125,54" concept="6" />
+      <node id="2105528055260548241" at="118,66,124,9" concept="3" />
+      <scope id="2105528055260548241" at="119,61,123,64">
+        <var name="cpb" id="2105528055260548241" />
       </scope>
-      <unit id="269707337715631379" at="9,0,44,0" name="jetbrains.mps.build.mps.structure.BuildMps_ModuleSourcesKind_PropertySupport" />
+      <scope id="2105528055260548241" at="118,66,125,54" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="2105528055260548241" at="16,0,17,0" concept="8" trace="BuildMpsLayout_FolderWithSources" />
+      <node id="2105528055260548241" at="87,74,88,71" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="2105528055260548241" at="27,0,28,0" concept="2" trace="myConceptBuildMpsLayout_FolderWithSources" />
+      <node id="2105528055260548241" at="127,66,128,57" concept="6" />
+      <node id="2105528055260548241" at="319,90,320,189" concept="5" />
+      <node id="2105528055260548241" at="320,189,321,34" concept="1" />
+      <node id="2105528055260548241" at="321,34,322,78" concept="7" />
+      <node id="2105528055260548241" at="322,78,323,75" concept="1" />
+      <node id="2105528055260548241" at="323,75,324,76" concept="1" />
+      <node id="2105528055260548241" at="324,76,325,76" concept="1" />
+      <node id="2105528055260548241" at="325,76,326,110" concept="1" />
+      <node id="2105528055260548241" at="326,110,327,17" concept="1" />
+      <node id="2105528055260548241" at="327,17,328,38" concept="1" />
+      <node id="2105528055260548241" at="328,38,329,22" concept="6" />
+      <node id="2105528055260548241" at="319,0,331,0" concept="9" trace="createDescriptorForBuildMpsLayout_FolderWithSources#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="2105528055260548241" at="127,66,128,57" />
+      <scope id="2105528055260548241" at="319,90,329,22">
+        <var name="b" id="2105528055260548241" />
+      </scope>
+      <scope id="2105528055260548241" at="319,0,331,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/2389279258782627672">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="2389279258782627672" at="69,0,70,0" concept="2" trace="props_BuildMps_ModuleTestSource" />
+      <node id="2389279258782627672" at="505,54,506,76" concept="5" />
+      <node id="2389279258782627672" at="506,76,507,45" concept="1" />
+      <node id="2389279258782627672" at="507,45,508,57" concept="1" />
+      <node id="2389279258782627672" at="509,9,510,47" concept="6" />
+      <node id="2389279258782627672" at="504,59,509,9" concept="3" />
+      <scope id="2389279258782627672" at="505,54,508,57">
+        <var name="cpb" id="2389279258782627672" />
+      </scope>
+      <scope id="2389279258782627672" at="504,59,510,47" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="2389279258782627672" at="69,0,70,0" concept="8" trace="BuildMps_ModuleTestSource" />
+      <node id="2389279258782627672" at="140,60,141,64" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="2389279258782627672" at="80,0,81,0" concept="2" trace="myConceptBuildMps_ModuleTestSource" />
+      <node id="2389279258782627672" at="233,59,234,50" concept="6" />
+      <node id="2389279258782627672" at="951,83,952,182" concept="5" />
+      <node id="2389279258782627672" at="952,182,953,34" concept="1" />
+      <node id="2389279258782627672" at="953,34,954,71" concept="7" />
+      <node id="2389279258782627672" at="954,71,955,75" concept="1" />
+      <node id="2389279258782627672" at="955,75,956,110" concept="1" />
+      <node id="2389279258782627672" at="956,110,957,17" concept="1" />
+      <node id="7354447573577513025" at="957,17,958,118" concept="1" />
+      <node id="2389279258782632528" at="958,118,959,200" concept="1" />
+      <node id="2389279258782627672" at="959,200,960,27" concept="1" />
+      <node id="2389279258782627672" at="960,27,961,22" concept="6" />
+      <node id="2389279258782627672" at="951,0,963,0" concept="9" trace="createDescriptorForBuildMps_ModuleTestSource#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="2389279258782627672" at="233,59,234,50" />
+      <scope id="2389279258782627672" at="951,83,961,22">
+        <var name="b" id="2389279258782627672" />
+      </scope>
+      <scope id="2389279258782627672" at="951,0,963,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/3189788309731840247">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3189788309731840247" at="70,0,71,0" concept="2" trace="props_BuildMps_Solution" />
+      <node id="3189788309731840247" at="512,46,513,76" concept="5" />
+      <node id="3189788309731840247" at="513,76,514,35" concept="1" />
+      <node id="3189788309731840247" at="514,35,515,49" concept="1" />
+      <node id="3189788309731840247" at="516,9,517,39" concept="6" />
+      <node id="3189788309731840247" at="511,51,516,9" concept="3" />
+      <scope id="3189788309731840247" at="512,46,515,49">
+        <var name="cpb" id="3189788309731840247" />
+      </scope>
+      <scope id="3189788309731840247" at="511,51,517,39" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3189788309731840247" at="70,0,71,0" concept="8" trace="BuildMps_Solution" />
+      <node id="3189788309731840247" at="141,64,142,56" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3189788309731840247" at="81,0,82,0" concept="2" trace="myConceptBuildMps_Solution" />
+      <node id="3189788309731840247" at="235,51,236,42" concept="6" />
+      <node id="3189788309731840247" at="963,75,964,174" concept="5" />
+      <node id="3189788309731840247" at="964,174,965,34" concept="1" />
+      <node id="3189788309731840247" at="965,34,966,65" concept="7" />
+      <node id="3189788309731840247" at="966,65,967,75" concept="1" />
+      <node id="3189788309731840247" at="967,75,968,110" concept="1" />
+      <node id="3189788309731840247" at="968,110,969,17" concept="1" />
+      <node id="4241665505353454199" at="969,17,970,179" concept="1" />
+      <node id="3189788309731840247" at="970,179,971,24" concept="1" />
+      <node id="3189788309731840247" at="971,24,972,22" concept="6" />
+      <node id="3189788309731840247" at="963,0,974,0" concept="9" trace="createDescriptorForBuildMps_Solution#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3189788309731840247" at="235,51,236,42" />
+      <scope id="3189788309731840247" at="963,75,972,22">
+        <var name="b" id="3189788309731840247" />
+      </scope>
+      <scope id="3189788309731840247" at="963,0,974,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/3189788309731840248">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3189788309731840248" at="52,0,53,0" concept="2" trace="props_BuildMps_Language" />
+      <node id="3189788309731840248" at="388,46,389,76" concept="5" />
+      <node id="3189788309731840248" at="389,76,390,35" concept="1" />
+      <node id="3189788309731840248" at="390,35,391,49" concept="1" />
+      <node id="3189788309731840248" at="392,9,393,39" concept="6" />
+      <node id="3189788309731840248" at="387,51,392,9" concept="3" />
+      <scope id="3189788309731840248" at="388,46,391,49">
+        <var name="cpb" id="3189788309731840248" />
+      </scope>
+      <scope id="3189788309731840248" at="387,51,393,39" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3189788309731840248" at="52,0,53,0" concept="8" trace="BuildMps_Language" />
+      <node id="3189788309731840248" at="123,64,124,56" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3189788309731840248" at="63,0,64,0" concept="2" trace="myConceptBuildMps_Language" />
+      <node id="3189788309731840248" at="199,51,200,42" concept="6" />
+      <node id="3189788309731840248" at="772,75,773,174" concept="5" />
+      <node id="3189788309731840248" at="773,174,774,34" concept="1" />
+      <node id="3189788309731840248" at="774,34,775,65" concept="7" />
+      <node id="3189788309731840248" at="775,65,776,75" concept="1" />
+      <node id="3189788309731840248" at="776,75,777,110" concept="1" />
+      <node id="3189788309731840248" at="777,110,778,17" concept="1" />
+      <node id="3189788309731917348" at="778,17,779,198" concept="1" />
+      <node id="7939233666839079197" at="779,198,780,200" concept="1" />
+      <node id="9200313594498201639" at="780,200,781,201" concept="1" />
+      <node id="7862711839422606216" at="781,201,782,208" concept="1" />
+      <node id="3189788309731840248" at="782,208,783,24" concept="1" />
+      <node id="3189788309731840248" at="783,24,784,22" concept="6" />
+      <node id="3189788309731840248" at="772,0,786,0" concept="9" trace="createDescriptorForBuildMps_Language#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3189788309731840248" at="199,51,200,42" />
+      <scope id="3189788309731840248" at="772,75,784,22">
+        <var name="b" id="3189788309731840248" />
+      </scope>
+      <scope id="3189788309731840248" at="772,0,786,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/3189788309731903991">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3189788309731903991" at="66,0,67,0" concept="2" trace="props_BuildMps_ModuleRuntime" />
+      <node id="3189788309731903991" at="486,51,487,76" concept="5" />
+      <node id="3189788309731903991" at="487,76,488,54" concept="1" />
+      <node id="3189788309731903991" at="489,9,490,44" concept="6" />
+      <node id="3189788309731903991" at="485,56,489,9" concept="3" />
+      <scope id="3189788309731903991" at="486,51,488,54">
+        <var name="cpb" id="3189788309731903991" />
+      </scope>
+      <scope id="3189788309731903991" at="485,56,490,44" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3189788309731903991" at="66,0,67,0" concept="8" trace="BuildMps_ModuleRuntime" />
+      <node id="3189788309731903991" at="137,62,138,61" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3189788309731903991" at="77,0,78,0" concept="2" trace="myConceptBuildMps_ModuleRuntime" />
+      <node id="3189788309731903991" at="227,56,228,47" concept="6" />
+      <node id="3189788309731903991" at="927,80,928,179" concept="5" />
+      <node id="3189788309731903991" at="928,179,929,33" concept="1" />
+      <node id="3189788309731903991" at="929,33,930,110" concept="1" />
+      <node id="3189788309731903991" at="930,110,931,17" concept="1" />
+      <node id="3189788309731903991" at="931,17,932,22" concept="6" />
+      <node id="3189788309731903991" at="927,0,934,0" concept="9" trace="createDescriptorForBuildMps_ModuleRuntime#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3189788309731903991" at="227,56,228,47" />
+      <scope id="3189788309731903991" at="927,80,932,22">
+        <var name="b" id="3189788309731903991" />
+      </scope>
+      <scope id="3189788309731903991" at="927,0,934,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/3189788309731922642">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3189788309731922642" at="61,0,62,0" concept="2" trace="props_BuildMps_ModuleDependencyUseLanguage" />
+      <node id="3189788309731922642" at="449,65,450,76" concept="5" />
+      <node id="3189788309731922642" at="450,76,451,145" concept="1" />
+      <node id="3189788309731922642" at="451,145,452,68" concept="1" />
+      <node id="3189788309731922642" at="453,9,454,58" concept="6" />
+      <node id="3189788309731922642" at="448,70,453,9" concept="3" />
+      <scope id="3189788309731922642" at="449,65,452,68">
+        <var name="cpb" id="3189788309731922642" />
+      </scope>
+      <scope id="3189788309731922642" at="448,70,454,58" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3189788309731922642" at="61,0,62,0" concept="8" trace="BuildMps_ModuleDependencyUseLanguage" />
+      <node id="3189788309731922642" at="132,78,133,75" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3189788309731922642" at="72,0,73,0" concept="2" trace="myConceptBuildMps_ModuleDependencyUseLanguage" />
+      <node id="3189788309731922642" at="217,70,218,61" concept="6" />
+      <node id="3189788309731922642" at="874,94,875,193" concept="5" />
+      <node id="3189788309731922642" at="875,193,876,34" concept="1" />
+      <node id="3189788309731922642" at="876,34,877,75" concept="7" />
+      <node id="3189788309731922642" at="877,75,878,75" concept="1" />
+      <node id="3189788309731922642" at="878,75,879,110" concept="1" />
+      <node id="3189788309731922642" at="879,110,880,17" concept="1" />
+      <node id="3189788309731922643" at="880,17,881,171" concept="1" />
+      <node id="3189788309731922642" at="881,171,882,22" concept="6" />
+      <node id="3189788309731922642" at="874,0,884,0" concept="9" trace="createDescriptorForBuildMps_ModuleDependencyUseLanguage#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3189788309731922642" at="217,70,218,61" />
+      <scope id="3189788309731922642" at="874,94,882,22">
+        <var name="b" id="3189788309731922642" />
+      </scope>
+      <scope id="3189788309731922642" at="874,0,884,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/3189788309731928315">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3189788309731928315" at="58,0,59,0" concept="2" trace="props_BuildMps_ModuleDependencyOnJavaModule" />
+      <node id="3189788309731928315" at="428,66,429,76" concept="5" />
+      <node id="3189788309731928315" at="429,76,430,139" concept="1" />
+      <node id="3189788309731928315" at="430,139,431,69" concept="1" />
+      <node id="3189788309731928315" at="432,9,433,59" concept="6" />
+      <node id="3189788309731928315" at="427,71,432,9" concept="3" />
+      <scope id="3189788309731928315" at="428,66,431,69">
+        <var name="cpb" id="3189788309731928315" />
+      </scope>
+      <scope id="3189788309731928315" at="427,71,433,59" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3189788309731928315" at="58,0,59,0" concept="8" trace="BuildMps_ModuleDependencyOnJavaModule" />
+      <node id="3189788309731928315" at="129,71,130,76" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3189788309731928315" at="69,0,70,0" concept="2" trace="myConceptBuildMps_ModuleDependencyOnJavaModule" />
+      <node id="3189788309731928315" at="211,71,212,62" concept="6" />
+      <node id="3189788309731928315" at="841,95,842,194" concept="5" />
+      <node id="3189788309731928315" at="842,194,843,34" concept="1" />
+      <node id="3189788309731928315" at="843,34,844,75" concept="7" />
+      <node id="3189788309731928315" at="844,75,845,75" concept="1" />
+      <node id="3189788309731928315" at="845,75,846,110" concept="1" />
+      <node id="3189788309731928315" at="846,110,847,17" concept="1" />
+      <node id="3189788309731928316" at="847,17,848,115" concept="1" />
+      <node id="3189788309731928317" at="848,115,849,170" concept="1" />
+      <node id="7330083795456493634" at="849,170,850,208" concept="1" />
+      <node id="3189788309731928315" at="850,208,851,22" concept="6" />
+      <node id="3189788309731928315" at="841,0,853,0" concept="9" trace="createDescriptorForBuildMps_ModuleDependencyOnJavaModule#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3189788309731928315" at="211,71,212,62" />
+      <scope id="3189788309731928315" at="841,95,851,22">
+        <var name="b" id="3189788309731928315" />
+      </scope>
+      <scope id="3189788309731928315" at="841,0,853,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/3189788309731981027">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3189788309731981027" at="67,0,68,0" concept="2" trace="props_BuildMps_ModuleSolutionRuntime" />
+      <node id="3189788309731981027" at="492,59,493,76" concept="5" />
+      <node id="3189788309731981027" at="493,76,494,150" concept="1" />
+      <node id="3189788309731981027" at="494,150,495,62" concept="1" />
+      <node id="3189788309731981027" at="496,9,497,52" concept="6" />
+      <node id="3189788309731981027" at="491,64,496,9" concept="3" />
+      <scope id="3189788309731981027" at="492,59,495,62">
+        <var name="cpb" id="3189788309731981027" />
+      </scope>
+      <scope id="3189788309731981027" at="491,64,497,52" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3189788309731981027" at="67,0,68,0" concept="8" trace="BuildMps_ModuleSolutionRuntime" />
+      <node id="3189788309731981027" at="138,61,139,69" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3189788309731981027" at="78,0,79,0" concept="2" trace="myConceptBuildMps_ModuleSolutionRuntime" />
+      <node id="3189788309731981027" at="229,64,230,55" concept="6" />
+      <node id="3189788309731981027" at="934,88,935,187" concept="5" />
+      <node id="3189788309731981027" at="935,187,936,34" concept="1" />
+      <node id="3189788309731981027" at="936,34,937,72" concept="7" />
+      <node id="3189788309731981027" at="937,72,938,75" concept="1" />
+      <node id="3189788309731981027" at="938,75,939,110" concept="1" />
+      <node id="3189788309731981027" at="939,110,940,17" concept="1" />
+      <node id="3189788309731981028" at="940,17,941,171" concept="1" />
+      <node id="3189788309731981027" at="941,171,942,22" concept="6" />
+      <node id="3189788309731981027" at="934,0,944,0" concept="9" trace="createDescriptorForBuildMps_ModuleSolutionRuntime#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3189788309731981027" at="229,64,230,55" />
+      <scope id="3189788309731981027" at="934,88,942,22">
+        <var name="b" id="3189788309731981027" />
+      </scope>
+      <scope id="3189788309731981027" at="934,0,944,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/322010710375794190">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="322010710375794190" at="35,0,36,0" concept="2" trace="props_BuildMps_DevKit" />
+      <node id="322010710375794190" at="266,44,267,76" concept="5" />
+      <node id="322010710375794190" at="267,76,268,35" concept="1" />
+      <node id="322010710375794190" at="268,35,269,47" concept="1" />
+      <node id="322010710375794190" at="270,9,271,37" concept="6" />
+      <node id="322010710375794190" at="265,49,270,9" concept="3" />
+      <scope id="322010710375794190" at="266,44,269,47">
+        <var name="cpb" id="322010710375794190" />
+      </scope>
+      <scope id="322010710375794190" at="265,49,271,37" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="322010710375794190" at="35,0,36,0" concept="8" trace="BuildMps_DevKit" />
+      <node id="322010710375794190" at="106,63,107,53" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="322010710375794190" at="46,0,47,0" concept="2" trace="myConceptBuildMps_DevKit" />
+      <node id="322010710375794190" at="165,49,166,40" concept="6" />
+      <node id="322010710375794190" at="587,73,588,171" concept="5" />
+      <node id="322010710375794190" at="588,171,589,34" concept="1" />
+      <node id="322010710375794190" at="589,34,590,73" concept="7" />
+      <node id="322010710375794190" at="590,73,591,74" concept="1" />
+      <node id="322010710375794190" at="591,74,592,109" concept="1" />
+      <node id="322010710375794190" at="592,109,593,17" concept="1" />
+      <node id="322010710375805250" at="593,17,594,195" concept="1" />
+      <node id="322010710375832962" at="594,195,595,195" concept="1" />
+      <node id="322010710375794190" at="595,195,596,22" concept="1" />
+      <node id="322010710375794190" at="596,22,597,22" concept="6" />
+      <node id="322010710375794190" at="587,0,599,0" concept="9" trace="createDescriptorForBuildMps_DevKit#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="322010710375794190" at="165,49,166,40" />
+      <scope id="322010710375794190" at="587,73,597,22">
+        <var name="b" id="322010710375794190" />
+      </scope>
+      <scope id="322010710375794190" at="587,0,599,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/322010710375805242">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="322010710375805242" at="39,0,40,0" concept="2" trace="props_BuildMps_DevKitRef" />
+      <node id="322010710375805242" at="293,47,294,76" concept="5" />
+      <node id="322010710375805242" at="294,76,295,137" concept="1" />
+      <node id="322010710375805242" at="295,137,296,50" concept="1" />
+      <node id="322010710375805242" at="297,9,298,40" concept="6" />
+      <node id="322010710375805242" at="292,52,297,9" concept="3" />
+      <scope id="322010710375805242" at="293,47,296,50">
+        <var name="cpb" id="322010710375805242" />
+      </scope>
+      <scope id="322010710375805242" at="292,52,298,40" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="322010710375805242" at="39,0,40,0" concept="8" trace="BuildMps_DevKitRef" />
+      <node id="322010710375805242" at="110,67,111,56" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="322010710375805242" at="50,0,51,0" concept="2" trace="myConceptBuildMps_DevKitRef" />
+      <node id="322010710375805242" at="173,52,174,43" concept="6" />
+      <node id="322010710375805242" at="626,76,627,174" concept="5" />
+      <node id="322010710375805242" at="627,174,628,34" concept="1" />
+      <node id="322010710375805242" at="628,34,629,109" concept="1" />
+      <node id="322010710375805242" at="629,109,630,17" concept="1" />
+      <node id="322010710375805243" at="630,17,631,166" concept="1" />
+      <node id="322010710375805242" at="631,166,632,22" concept="6" />
+      <node id="322010710375805242" at="626,0,634,0" concept="9" trace="createDescriptorForBuildMps_DevKitRef#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="322010710375805242" at="173,52,174,43" />
+      <scope id="322010710375805242" at="626,76,632,22">
+        <var name="b" id="322010710375805242" />
+      </scope>
+      <scope id="322010710375805242" at="626,0,634,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/322010710375805251">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="322010710375805251" at="36,0,37,0" concept="2" trace="props_BuildMps_DevKitExport" />
+      <node id="322010710375805251" at="273,50,274,76" concept="5" />
+      <node id="322010710375805251" at="274,76,275,53" concept="1" />
+      <node id="322010710375805251" at="276,9,277,43" concept="6" />
+      <node id="322010710375805251" at="272,55,276,9" concept="3" />
+      <scope id="322010710375805251" at="273,50,275,53">
+        <var name="cpb" id="322010710375805251" />
+      </scope>
+      <scope id="322010710375805251" at="272,55,277,43" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="322010710375805251" at="36,0,37,0" concept="8" trace="BuildMps_DevKitExport" />
+      <node id="322010710375805251" at="107,53,108,59" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="322010710375805251" at="47,0,48,0" concept="2" trace="myConceptBuildMps_DevKitExport" />
+      <node id="322010710375805251" at="167,55,168,46" concept="6" />
+      <node id="322010710375805251" at="599,79,600,177" concept="5" />
+      <node id="322010710375805251" at="600,177,601,33" concept="1" />
+      <node id="322010710375805251" at="601,33,602,109" concept="1" />
+      <node id="322010710375805251" at="602,109,603,17" concept="1" />
+      <node id="322010710375805251" at="603,17,604,22" concept="6" />
+      <node id="322010710375805251" at="599,0,606,0" concept="9" trace="createDescriptorForBuildMps_DevKitExport#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="322010710375805251" at="167,55,168,46" />
+      <scope id="322010710375805251" at="599,79,604,22">
+        <var name="b" id="322010710375805251" />
+      </scope>
+      <scope id="322010710375805251" at="599,0,606,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/322010710375832938">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="322010710375832938" at="37,0,38,0" concept="2" trace="props_BuildMps_DevKitExportLanguage" />
+      <node id="322010710375832938" at="279,58,280,76" concept="5" />
+      <node id="322010710375832938" at="280,76,281,148" concept="1" />
+      <node id="322010710375832938" at="281,148,282,61" concept="1" />
+      <node id="322010710375832938" at="283,9,284,51" concept="6" />
+      <node id="322010710375832938" at="278,63,283,9" concept="3" />
+      <scope id="322010710375832938" at="279,58,282,61">
+        <var name="cpb" id="322010710375832938" />
+      </scope>
+      <scope id="322010710375832938" at="278,63,284,51" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="322010710375832938" at="37,0,38,0" concept="8" trace="BuildMps_DevKitExportLanguage" />
+      <node id="322010710375832938" at="108,59,109,67" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="322010710375832938" at="48,0,49,0" concept="2" trace="myConceptBuildMps_DevKitExportLanguage" />
+      <node id="322010710375832938" at="169,63,170,54" concept="6" />
+      <node id="322010710375832938" at="606,87,607,185" concept="5" />
+      <node id="322010710375832938" at="607,185,608,34" concept="1" />
+      <node id="322010710375832938" at="608,34,609,71" concept="7" />
+      <node id="322010710375832938" at="609,71,610,74" concept="1" />
+      <node id="322010710375832938" at="610,74,611,109" concept="1" />
+      <node id="322010710375832938" at="611,109,612,17" concept="1" />
+      <node id="322010710375832947" at="612,17,613,169" concept="1" />
+      <node id="322010710375832938" at="613,169,614,22" concept="6" />
+      <node id="322010710375832938" at="606,0,616,0" concept="9" trace="createDescriptorForBuildMps_DevKitExportLanguage#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="322010710375832938" at="169,63,170,54" />
+      <scope id="322010710375832938" at="606,87,614,22">
+        <var name="b" id="322010710375832938" />
+      </scope>
+      <scope id="322010710375832938" at="606,0,616,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/322010710375832954">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="322010710375832954" at="38,0,39,0" concept="2" trace="props_BuildMps_DevKitExportSolution" />
+      <node id="322010710375832954" at="286,58,287,76" concept="5" />
+      <node id="322010710375832954" at="287,76,288,139" concept="1" />
+      <node id="322010710375832954" at="288,139,289,61" concept="1" />
+      <node id="322010710375832954" at="290,9,291,51" concept="6" />
+      <node id="322010710375832954" at="285,63,290,9" concept="3" />
+      <scope id="322010710375832954" at="286,58,289,61">
+        <var name="cpb" id="322010710375832954" />
+      </scope>
+      <scope id="322010710375832954" at="285,63,291,51" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="322010710375832954" at="38,0,39,0" concept="8" trace="BuildMps_DevKitExportSolution" />
+      <node id="322010710375832954" at="109,67,110,67" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="322010710375832954" at="49,0,50,0" concept="2" trace="myConceptBuildMps_DevKitExportSolution" />
+      <node id="322010710375832954" at="171,63,172,54" concept="6" />
+      <node id="322010710375832954" at="616,87,617,185" concept="5" />
+      <node id="322010710375832954" at="617,185,618,34" concept="1" />
+      <node id="322010710375832954" at="618,34,619,71" concept="7" />
+      <node id="322010710375832954" at="619,71,620,74" concept="1" />
+      <node id="322010710375832954" at="620,74,621,109" concept="1" />
+      <node id="322010710375832954" at="621,109,622,17" concept="1" />
+      <node id="322010710375832955" at="622,17,623,169" concept="1" />
+      <node id="322010710375832954" at="623,169,624,22" concept="6" />
+      <node id="322010710375832954" at="616,0,626,0" concept="9" trace="createDescriptorForBuildMps_DevKitExportSolution#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="322010710375832954" at="171,63,172,54" />
+      <scope id="322010710375832954" at="616,87,624,22">
+        <var name="b" id="322010710375832954" />
+      </scope>
+      <scope id="322010710375832954" at="616,0,626,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/322010710375871467">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="322010710375871467" at="27,0,28,0" concept="2" trace="props_BuildMps_AbstractModule" />
+      <node id="322010710375871467" at="199,52,200,76" concept="5" />
+      <node id="322010710375871467" at="200,76,201,55" concept="1" />
+      <node id="322010710375871467" at="202,9,203,45" concept="6" />
+      <node id="322010710375871467" at="198,57,202,9" concept="3" />
+      <scope id="322010710375871467" at="199,52,201,55">
+        <var name="cpb" id="322010710375871467" />
+      </scope>
+      <scope id="322010710375871467" at="198,57,203,45" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="322010710375871467" at="27,0,28,0" concept="8" trace="BuildMps_AbstractModule" />
+      <node id="322010710375871467" at="98,74,99,61" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="322010710375871467" at="38,0,39,0" concept="2" trace="myConceptBuildMps_AbstractModule" />
+      <node id="322010710375871467" at="149,57,150,48" concept="6" />
+      <node id="322010710375871467" at="450,81,451,179" concept="5" />
+      <node id="322010710375871467" at="451,179,452,33" concept="1" />
+      <node id="322010710375871467" at="452,33,453,62" concept="7" />
+      <node id="322010710375871467" at="453,62,454,76" concept="1" />
+      <node id="322010710375871467" at="454,76,455,71" concept="1" />
+      <node id="322010710375871467" at="455,71,456,109" concept="1" />
+      <node id="322010710375871467" at="456,109,457,17" concept="1" />
+      <node id="322010710375892619" at="457,17,458,108" concept="1" />
+      <node id="8369506495128725901" at="458,108,459,114" concept="1" />
+      <node id="322010710375956261" at="459,114,460,195" concept="1" />
+      <node id="322010710375871467" at="460,195,461,22" concept="6" />
+      <node id="322010710375871467" at="450,0,463,0" concept="9" trace="createDescriptorForBuildMps_AbstractModule#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="322010710375871467" at="149,57,150,48" />
+      <scope id="322010710375871467" at="450,81,461,22">
+        <var name="b" id="322010710375871467" />
+      </scope>
+      <scope id="322010710375871467" at="450,0,463,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/322010710376037449">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="322010710376037449" at="57,0,58,0" concept="2" trace="props_BuildMps_ModuleDependencyOnDevKit" />
+      <node id="322010710376037449" at="421,62,422,76" concept="5" />
+      <node id="322010710376037449" at="422,76,423,137" concept="1" />
+      <node id="322010710376037449" at="423,137,424,65" concept="1" />
+      <node id="322010710376037449" at="425,9,426,55" concept="6" />
+      <node id="322010710376037449" at="420,67,425,9" concept="3" />
+      <scope id="322010710376037449" at="421,62,424,65">
+        <var name="cpb" id="322010710376037449" />
+      </scope>
+      <scope id="322010710376037449" at="420,67,426,55" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="322010710376037449" at="57,0,58,0" concept="8" trace="BuildMps_ModuleDependencyOnDevKit" />
+      <node id="322010710376037449" at="128,67,129,71" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="322010710376037449" at="68,0,69,0" concept="2" trace="myConceptBuildMps_ModuleDependencyOnDevKit" />
+      <node id="322010710376037449" at="209,67,210,58" concept="6" />
+      <node id="322010710376037449" at="831,91,832,189" concept="5" />
+      <node id="322010710376037449" at="832,189,833,34" concept="1" />
+      <node id="322010710376037449" at="833,34,834,75" concept="7" />
+      <node id="322010710376037449" at="834,75,835,75" concept="1" />
+      <node id="322010710376037449" at="835,75,836,109" concept="1" />
+      <node id="322010710376037449" at="836,109,837,17" concept="1" />
+      <node id="322010710376037450" at="837,17,838,166" concept="1" />
+      <node id="322010710376037449" at="838,166,839,22" concept="6" />
+      <node id="322010710376037449" at="831,0,841,0" concept="9" trace="createDescriptorForBuildMps_ModuleDependencyOnDevKit#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="322010710376037449" at="209,67,210,58" />
+      <scope id="322010710376037449" at="831,91,839,22">
+        <var name="b" id="322010710376037449" />
+      </scope>
+      <scope id="322010710376037449" at="831,0,841,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/3335207478148059730">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3335207478148059730" at="19,0,20,0" concept="2" trace="props_BuildMpsLayout_ModuleJarContent" />
+      <node id="3335207478148059730" at="143,60,144,76" concept="5" />
+      <node id="3335207478148059730" at="144,76,145,99" concept="1" />
+      <node id="3335207478148059730" at="145,99,146,65" concept="1" />
+      <node id="3335207478148059730" at="146,65,147,63" concept="1" />
+      <node id="3335207478148059730" at="148,9,149,53" concept="6" />
+      <node id="3335207478148059730" at="142,65,148,9" concept="3" />
+      <scope id="3335207478148059730" at="143,60,147,63">
+        <var name="cpb" id="3335207478148059730" />
+      </scope>
+      <scope id="3335207478148059730" at="142,65,149,53" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3335207478148059730" at="19,0,20,0" concept="8" trace="BuildMpsLayout_ModuleJarContent" />
+      <node id="3335207478148059730" at="90,76,91,70" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3335207478148059730" at="30,0,31,0" concept="2" trace="myConceptBuildMpsLayout_ModuleJarContent" />
+      <node id="3335207478148059730" at="133,65,134,56" concept="6" />
+      <node id="3335207478148059730" at="351,89,352,188" concept="5" />
+      <node id="3335207478148059730" at="352,188,353,34" concept="1" />
+      <node id="3335207478148059730" at="353,34,354,78" concept="7" />
+      <node id="3335207478148059730" at="354,78,355,76" concept="1" />
+      <node id="3335207478148059730" at="355,76,356,110" concept="1" />
+      <node id="3335207478148059730" at="356,110,357,17" concept="1" />
+      <node id="3335207478148059730" at="357,17,358,22" concept="6" />
+      <node id="3335207478148059730" at="351,0,360,0" concept="9" trace="createDescriptorForBuildMpsLayout_ModuleJarContent#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3335207478148059730" at="133,65,134,56" />
+      <scope id="3335207478148059730" at="351,89,358,22">
+        <var name="b" id="3335207478148059730" />
+      </scope>
+      <scope id="3335207478148059730" at="351,0,360,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/3535927011722257946">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3535927011722257946" at="17,0,18,0" concept="2" trace="props_BuildMpsLayout_Manifest" />
+      <node id="3535927011722257946" at="127,52,128,76" concept="5" />
+      <node id="3535927011722257946" at="128,76,129,64" concept="1" />
+      <node id="3535927011722257946" at="129,64,130,49" concept="1" />
+      <node id="3535927011722257946" at="130,49,131,55" concept="1" />
+      <node id="3535927011722257946" at="132,9,133,45" concept="6" />
+      <node id="3535927011722257946" at="126,57,132,9" concept="3" />
+      <scope id="3535927011722257946" at="127,52,131,55">
+        <var name="cpb" id="3535927011722257946" />
+      </scope>
+      <scope id="3535927011722257946" at="126,57,133,45" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3535927011722257946" at="17,0,18,0" concept="8" trace="BuildMpsLayout_Manifest" />
+      <node id="3535927011722257946" at="88,71,89,62" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3535927011722257946" at="28,0,29,0" concept="2" trace="myConceptBuildMpsLayout_Manifest" />
+      <node id="3535927011722257946" at="129,57,130,48" concept="6" />
+      <node id="3535927011722257946" at="331,81,332,180" concept="5" />
+      <node id="3535927011722257946" at="332,180,333,34" concept="1" />
+      <node id="3535927011722257946" at="333,34,334,62" concept="7" />
+      <node id="3535927011722257946" at="334,62,335,76" concept="1" />
+      <node id="3535927011722257946" at="335,76,336,110" concept="1" />
+      <node id="3535927011722257946" at="336,110,337,17" concept="1" />
+      <node id="3535927011722257946" at="337,17,338,31" concept="1" />
+      <node id="3535927011722257946" at="338,31,339,22" concept="6" />
+      <node id="3535927011722257946" at="331,0,341,0" concept="9" trace="createDescriptorForBuildMpsLayout_Manifest#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3535927011722257946" at="129,57,130,48" />
+      <scope id="3535927011722257946" at="331,81,339,22">
+        <var name="b" id="3535927011722257946" />
+      </scope>
+      <scope id="3535927011722257946" at="331,0,341,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/3570488090019868063">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3570488090019868063" at="26,0,27,0" concept="2" trace="props_BuildMpsLayout_PluginLayoutTypeBase" />
+      <node id="3570488090019868063" at="193,64,194,76" concept="5" />
+      <node id="3570488090019868063" at="194,76,195,67" concept="1" />
+      <node id="3570488090019868063" at="196,9,197,57" concept="6" />
+      <node id="3570488090019868063" at="192,69,196,9" concept="3" />
+      <scope id="3570488090019868063" at="193,64,195,67">
+        <var name="cpb" id="3570488090019868063" />
+      </scope>
+      <scope id="3570488090019868063" at="192,69,197,57" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3570488090019868063" at="26,0,27,0" concept="8" trace="BuildMpsLayout_PluginLayoutTypeBase" />
+      <node id="3570488090019868063" at="97,70,98,74" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3570488090019868063" at="37,0,38,0" concept="2" trace="myConceptBuildMpsLayout_PluginLayoutTypeBase" />
+      <node id="3570488090019868063" at="147,69,148,60" concept="6" />
+      <node id="3570488090019868063" at="443,93,444,192" concept="5" />
+      <node id="3570488090019868063" at="444,192,445,33" concept="1" />
+      <node id="3570488090019868063" at="445,33,446,110" concept="1" />
+      <node id="3570488090019868063" at="446,110,447,17" concept="1" />
+      <node id="3570488090019868063" at="447,17,448,22" concept="6" />
+      <node id="3570488090019868063" at="443,0,450,0" concept="9" trace="createDescriptorForBuildMpsLayout_PluginLayoutTypeBase#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3570488090019868063" at="147,69,148,60" />
+      <scope id="3570488090019868063" at="443,93,448,22">
+        <var name="b" id="3570488090019868063" />
+      </scope>
+      <scope id="3570488090019868063" at="443,0,450,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/3570488090019868064">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3570488090019868064" at="18,0,19,0" concept="2" trace="props_BuildMpsLayout_ManualPluginLayoutType" />
+      <node id="3570488090019868064" at="135,66,136,76" concept="5" />
+      <node id="3570488090019868064" at="136,76,137,81" concept="1" />
+      <node id="3570488090019868064" at="137,81,138,50" concept="1" />
+      <node id="3570488090019868064" at="138,50,139,69" concept="1" />
+      <node id="3570488090019868064" at="140,9,141,59" concept="6" />
+      <node id="3570488090019868064" at="134,71,140,9" concept="3" />
+      <scope id="3570488090019868064" at="135,66,139,69">
+        <var name="cpb" id="3570488090019868064" />
+      </scope>
+      <scope id="3570488090019868064" at="134,71,141,59" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3570488090019868064" at="18,0,19,0" concept="8" trace="BuildMpsLayout_ManualPluginLayoutType" />
+      <node id="3570488090019868064" at="89,62,90,76" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3570488090019868064" at="29,0,30,0" concept="2" trace="myConceptBuildMpsLayout_ManualPluginLayoutType" />
+      <node id="3570488090019868064" at="131,71,132,62" concept="6" />
+      <node id="3570488090019868064" at="341,95,342,194" concept="5" />
+      <node id="3570488090019868064" at="342,194,343,34" concept="1" />
+      <node id="3570488090019868064" at="343,34,344,85" concept="7" />
+      <node id="3570488090019868064" at="344,85,345,75" concept="1" />
+      <node id="3570488090019868064" at="345,75,346,110" concept="1" />
+      <node id="3570488090019868064" at="346,110,347,17" concept="1" />
+      <node id="3570488090019868064" at="347,17,348,32" concept="1" />
+      <node id="3570488090019868064" at="348,32,349,22" concept="6" />
+      <node id="3570488090019868064" at="341,0,351,0" concept="9" trace="createDescriptorForBuildMpsLayout_ManualPluginLayoutType#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3570488090019868064" at="131,71,132,62" />
+      <scope id="3570488090019868064" at="341,95,349,22">
+        <var name="b" id="3570488090019868064" />
+      </scope>
+      <scope id="3570488090019868064" at="341,0,351,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/3570488090019868065">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3570488090019868065" at="15,0,16,0" concept="2" trace="props_BuildMpsLayout_AutoPluginLayoutType" />
+      <node id="3570488090019868065" at="111,64,112,76" concept="5" />
+      <node id="3570488090019868065" at="112,76,113,122" concept="1" />
+      <node id="3570488090019868065" at="113,122,114,48" concept="1" />
+      <node id="3570488090019868065" at="114,48,115,67" concept="1" />
+      <node id="3570488090019868065" at="116,9,117,57" concept="6" />
+      <node id="3570488090019868065" at="110,69,116,9" concept="3" />
+      <scope id="3570488090019868065" at="111,64,115,67">
+        <var name="cpb" id="3570488090019868065" />
+      </scope>
+      <scope id="3570488090019868065" at="110,69,117,57" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3570488090019868065" at="15,0,16,0" concept="8" trace="BuildMpsLayout_AutoPluginLayoutType" />
+      <node id="3570488090019868065" at="86,53,87,74" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3570488090019868065" at="26,0,27,0" concept="2" trace="myConceptBuildMpsLayout_AutoPluginLayoutType" />
+      <node id="3570488090019868065" at="125,69,126,60" concept="6" />
+      <node id="3570488090019868065" at="309,93,310,192" concept="5" />
+      <node id="3570488090019868065" at="310,192,311,34" concept="1" />
+      <node id="3570488090019868065" at="311,34,312,85" concept="7" />
+      <node id="3570488090019868065" at="312,85,313,75" concept="1" />
+      <node id="3570488090019868065" at="313,75,314,110" concept="1" />
+      <node id="3570488090019868065" at="314,110,315,17" concept="1" />
+      <node id="3570488090019868065" at="315,17,316,30" concept="1" />
+      <node id="3570488090019868065" at="316,30,317,22" concept="6" />
+      <node id="3570488090019868065" at="309,0,319,0" concept="9" trace="createDescriptorForBuildMpsLayout_AutoPluginLayoutType#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3570488090019868065" at="125,69,126,60" />
+      <scope id="3570488090019868065" at="309,93,317,22">
+        <var name="b" id="3570488090019868065" />
+      </scope>
+      <scope id="3570488090019868065" at="309,0,319,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/3639941018582260809">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3639941018582260809" at="79,0,80,0" concept="2" trace="props_GeneratorInternal_PluginExpanded" />
+      <node id="3639941018582260809" at="578,61,579,76" concept="5" />
+      <node id="3639941018582260809" at="579,76,580,66" concept="1" />
+      <node id="3639941018582260809" at="580,66,581,64" concept="1" />
+      <node id="3639941018582260809" at="582,9,583,54" concept="6" />
+      <node id="3639941018582260809" at="577,66,582,9" concept="3" />
+      <scope id="3639941018582260809" at="578,61,581,64">
+        <var name="cpb" id="3639941018582260809" />
+      </scope>
+      <scope id="3639941018582260809" at="577,66,583,54" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3639941018582260809" at="79,0,80,0" concept="8" trace="GeneratorInternal_PluginExpanded" />
+      <node id="3639941018582260809" at="150,72,151,71" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3639941018582260809" at="90,0,91,0" concept="2" trace="myConceptGeneratorInternal_PluginExpanded" />
+      <node id="3639941018582260809" at="253,66,254,57" concept="6" />
+      <node id="3639941018582260809" at="1055,90,1056,189" concept="5" />
+      <node id="3639941018582260809" at="1056,189,1057,34" concept="1" />
+      <node id="3639941018582260809" at="1057,34,1058,110" concept="1" />
+      <node id="3639941018582260809" at="1058,110,1059,17" concept="1" />
+      <node id="3639941018582260810" at="1059,17,1060,110" concept="1" />
+      <node id="3639941018582260811" at="1060,110,1061,108" concept="1" />
+      <node id="3639941018582260809" at="1061,108,1062,22" concept="6" />
+      <node id="3639941018582260809" at="1055,0,1064,0" concept="9" trace="createDescriptorForGeneratorInternal_PluginExpanded#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3639941018582260809" at="253,66,254,57" />
+      <scope id="3639941018582260809" at="1055,90,1062,22">
+        <var name="b" id="3639941018582260809" />
+      </scope>
+      <scope id="3639941018582260809" at="1055,0,1064,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/4034578608468929319">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="4034578608468929319" at="49,0,50,0" concept="2" trace="props_BuildMps_IdeaPluginGroupCustomModule" />
+      <node id="4034578608468929319" at="365,65,366,76" concept="5" />
+      <node id="4034578608468929319" at="366,76,367,31" concept="1" />
+      <node id="4034578608468929319" at="367,31,368,139" concept="1" />
+      <node id="4034578608468929319" at="368,139,369,68" concept="1" />
+      <node id="4034578608468929319" at="370,9,371,58" concept="6" />
+      <node id="4034578608468929319" at="364,70,370,9" concept="3" />
+      <scope id="4034578608468929319" at="365,65,369,68">
+        <var name="cpb" id="4034578608468929319" />
+      </scope>
+      <scope id="4034578608468929319" at="364,70,371,58" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="4034578608468929319" at="49,0,50,0" concept="8" trace="BuildMps_IdeaPluginGroupCustomModule" />
+      <node id="4034578608468929319" at="120,63,121,75" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="4034578608468929319" at="60,0,61,0" concept="2" trace="myConceptBuildMps_IdeaPluginGroupCustomModule" />
+      <node id="4034578608468929319" at="193,70,194,61" concept="6" />
+      <node id="4034578608468929319" at="744,94,745,193" concept="5" />
+      <node id="4034578608468929319" at="745,193,746,34" concept="1" />
+      <node id="4034578608468929319" at="746,34,747,110" concept="1" />
+      <node id="4034578608468929319" at="747,110,748,17" concept="1" />
+      <node id="4034578608468929320" at="748,17,749,168" concept="1" />
+      <node id="4034578608468929319" at="749,168,750,22" concept="6" />
+      <node id="4034578608468929319" at="744,0,752,0" concept="9" trace="createDescriptorForBuildMps_IdeaPluginGroupCustomModule#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="4034578608468929319" at="193,70,194,61" />
+      <scope id="4034578608468929319" at="744,94,750,22">
+        <var name="b" id="4034578608468929319" />
+      </scope>
+      <scope id="4034578608468929319" at="744,0,752,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/4157435862321765764">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="4157435862321765764" at="34,0,35,0" concept="2" trace="props_BuildMps_BrandingVersion" />
+      <node id="4157435862321765764" at="259,53,260,76" concept="5" />
+      <node id="4157435862321765764" at="260,76,261,41" concept="1" />
+      <node id="4157435862321765764" at="261,41,262,56" concept="1" />
+      <node id="4157435862321765764" at="263,9,264,46" concept="6" />
+      <node id="4157435862321765764" at="258,58,263,9" concept="3" />
+      <scope id="4157435862321765764" at="259,53,262,56">
+        <var name="cpb" id="4157435862321765764" />
+      </scope>
+      <scope id="4157435862321765764" at="258,58,264,46" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="4157435862321765764" at="34,0,35,0" concept="8" trace="BuildMps_BrandingVersion" />
+      <node id="4157435862321765764" at="105,66,106,63" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="4157435862321765764" at="45,0,46,0" concept="2" trace="myConceptBuildMps_BrandingVersion" />
+      <node id="4157435862321765764" at="163,58,164,49" concept="6" />
+      <node id="4157435862321765764" at="575,82,576,181" concept="5" />
+      <node id="4157435862321765764" at="576,181,577,34" concept="1" />
+      <node id="4157435862321765764" at="577,34,578,110" concept="1" />
+      <node id="4157435862321765764" at="578,110,579,17" concept="1" />
+      <node id="4157435862321765791" at="579,17,580,205" concept="1" />
+      <node id="4157435862321765792" at="580,205,581,205" concept="1" />
+      <node id="4157435862321765793" at="581,205,582,209" concept="1" />
+      <node id="4157435862321765794" at="582,209,583,204" concept="1" />
+      <node id="4157435862321765764" at="583,204,584,23" concept="1" />
+      <node id="4157435862321765764" at="584,23,585,22" concept="6" />
+      <node id="4157435862321765764" at="575,0,587,0" concept="9" trace="createDescriptorForBuildMps_BrandingVersion#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="4157435862321765764" at="163,58,164,49" />
+      <scope id="4157435862321765764" at="575,82,585,22">
+        <var name="b" id="4157435862321765764" />
+      </scope>
+      <scope id="4157435862321765764" at="575,0,587,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/4241665505353447971">
+    <file name="EnumerationDescriptor_BuildMps_ModuleSourcesKind.java">
+      <node id="4241665505353447971" at="14,61,15,198" concept="10" />
+      <node id="4241665505353447973" at="18,0,19,0" concept="2" trace="myMember_sources_0" />
+      <node id="4241665505353447974" at="19,0,20,0" concept="2" trace="myMember_sources_and_tests_0" />
+      <node id="4241665505353447975" at="20,0,21,0" concept="2" trace="myMember_tests_0" />
+      <node id="8213682475664316843" at="21,0,22,0" concept="2" trace="myMember_none_0" />
+      <node id="4241665505353447971" at="23,0,24,0" concept="2" trace="myIndex" />
+      <node id="4241665505353447971" at="24,0,25,0" concept="2" trace="myMembers" />
+      <node id="4241665505353447971" at="28,62,29,16" concept="6" />
+      <node id="4241665505353447971" at="34,68,35,21" concept="6" />
+      <node id="4241665505353447971" at="41,29,42,18" concept="6" />
+      <node id="4241665505353447973" at="45,21,46,34" concept="6" />
+      <node id="4241665505353447974" at="47,31,48,44" concept="6" />
+      <node id="4241665505353447975" at="49,19,50,32" concept="6" />
+      <node id="8213682475664316843" at="51,18,52,31" concept="6" />
+      <node id="4241665505353447971" at="53,5,54,16" concept="6" />
+      <node id="4241665505353447971" at="59,73,60,39" concept="5" />
+      <node id="4241665505353447971" at="61,22,62,18" concept="6" />
+      <node id="4241665505353447971" at="63,5,64,32" concept="6" />
+      <node id="4241665505353447971" at="14,0,17,0" concept="0" trace="EnumerationDescriptor_BuildMps_ModuleSourcesKind#()V" />
+      <node id="4241665505353447971" at="40,88,43,5" concept="3" />
+      <node id="4241665505353447971" at="60,39,63,5" concept="3" />
+      <node id="4241665505353447971" at="26,0,31,0" concept="4" trace="getDefault#()Ljetbrains/mps/smodel/runtime/EnumerationDescriptor/MemberDescriptor;" />
+      <node id="4241665505353447971" at="32,0,37,0" concept="4" trace="getMembers#()Ljava/util/List;" />
+      <node id="4241665505353447971" at="57,0,66,0" concept="4" trace="getMember#(J)Ljetbrains/mps/smodel/runtime/EnumerationDescriptor/MemberDescriptor;" />
+      <node id="4241665505353447971" at="43,5,53,5" concept="11" />
+      <node id="4241665505353447971" at="38,0,56,0" concept="4" trace="getMember#(Ljava/lang/String;)Ljetbrains/mps/smodel/runtime/EnumerationDescriptor/MemberDescriptor;" />
+      <scope id="4241665505353447971" at="14,61,15,198" />
+      <scope id="4241665505353447971" at="28,62,29,16" />
+      <scope id="4241665505353447971" at="34,68,35,21" />
+      <scope id="4241665505353447971" at="41,29,42,18" />
+      <scope id="4241665505353447973" at="45,21,46,34" />
+      <scope id="4241665505353447974" at="47,31,48,44" />
+      <scope id="4241665505353447975" at="49,19,50,32" />
+      <scope id="8213682475664316843" at="51,18,52,31" />
+      <scope id="4241665505353447971" at="61,22,62,18" />
+      <scope id="4241665505353447971" at="14,0,17,0" />
+      <scope id="4241665505353447971" at="26,0,31,0" />
+      <scope id="4241665505353447971" at="32,0,37,0" />
+      <scope id="4241665505353447971" at="59,73,64,32">
+        <var name="index" id="4241665505353447971" />
+      </scope>
+      <scope id="4241665505353447971" at="57,0,66,0">
+        <var name="idValue" id="4241665505353447971" />
+      </scope>
+      <scope id="4241665505353447971" at="40,88,54,16" />
+      <scope id="4241665505353447971" at="38,0,56,0">
+        <var name="memberName" id="4241665505353447971" />
+      </scope>
+      <unit id="4241665505353447971" at="12,0,67,0" name="jetbrains.mps.build.mps.structure.EnumerationDescriptor_BuildMps_ModuleSourcesKind" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="4241665505353447971" at="93,0,94,0" concept="2" trace="myEnumerationBuildMps_ModuleSourcesKind" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/4241665505353447976">
+    <file name="EnumerationDescriptor_BuildMps_GeneratorOptions_SkipUnmodifiedModels.java">
+      <node id="4241665505353447976" at="14,81,15,218" concept="10" />
+      <node id="4241665505353447978" at="18,0,19,0" concept="2" trace="myMember_use_mps_generator_skipUnmodifiedModels_macro_0" />
+      <node id="4241665505353447979" at="19,0,20,0" concept="2" trace="myMember_never_0" />
+      <node id="4241665505353447976" at="21,0,22,0" concept="2" trace="myIndex" />
+      <node id="4241665505353447976" at="22,0,23,0" concept="2" trace="myMembers" />
+      <node id="4241665505353447976" at="26,62,27,67" concept="6" />
+      <node id="4241665505353447976" at="32,68,33,21" concept="6" />
+      <node id="4241665505353447976" at="39,29,40,18" concept="6" />
+      <node id="4241665505353447978" at="43,58,44,71" concept="6" />
+      <node id="4241665505353447979" at="45,19,46,32" concept="6" />
+      <node id="4241665505353447976" at="47,5,48,16" concept="6" />
+      <node id="4241665505353447976" at="53,73,54,39" concept="5" />
+      <node id="4241665505353447976" at="55,22,56,18" concept="6" />
+      <node id="4241665505353447976" at="57,5,58,32" concept="6" />
+      <node id="4241665505353447976" at="14,0,17,0" concept="0" trace="EnumerationDescriptor_BuildMps_GeneratorOptions_SkipUnmodifiedModels#()V" />
+      <node id="4241665505353447976" at="38,88,41,5" concept="3" />
+      <node id="4241665505353447976" at="54,39,57,5" concept="3" />
+      <node id="4241665505353447976" at="24,0,29,0" concept="4" trace="getDefault#()Ljetbrains/mps/smodel/runtime/EnumerationDescriptor/MemberDescriptor;" />
+      <node id="4241665505353447976" at="30,0,35,0" concept="4" trace="getMembers#()Ljava/util/List;" />
+      <node id="4241665505353447976" at="41,5,47,5" concept="11" />
+      <node id="4241665505353447976" at="51,0,60,0" concept="4" trace="getMember#(J)Ljetbrains/mps/smodel/runtime/EnumerationDescriptor/MemberDescriptor;" />
+      <node id="4241665505353447976" at="36,0,50,0" concept="4" trace="getMember#(Ljava/lang/String;)Ljetbrains/mps/smodel/runtime/EnumerationDescriptor/MemberDescriptor;" />
+      <scope id="4241665505353447976" at="14,81,15,218" />
+      <scope id="4241665505353447976" at="26,62,27,67" />
+      <scope id="4241665505353447976" at="32,68,33,21" />
+      <scope id="4241665505353447976" at="39,29,40,18" />
+      <scope id="4241665505353447978" at="43,58,44,71" />
+      <scope id="4241665505353447979" at="45,19,46,32" />
+      <scope id="4241665505353447976" at="55,22,56,18" />
+      <scope id="4241665505353447976" at="14,0,17,0" />
+      <scope id="4241665505353447976" at="24,0,29,0" />
+      <scope id="4241665505353447976" at="30,0,35,0" />
+      <scope id="4241665505353447976" at="53,73,58,32">
+        <var name="index" id="4241665505353447976" />
+      </scope>
+      <scope id="4241665505353447976" at="51,0,60,0">
+        <var name="idValue" id="4241665505353447976" />
+      </scope>
+      <scope id="4241665505353447976" at="38,88,48,16" />
+      <scope id="4241665505353447976" at="36,0,50,0">
+        <var name="memberName" id="4241665505353447976" />
+      </scope>
+      <unit id="4241665505353447976" at="12,0,61,0" name="jetbrains.mps.build.mps.structure.EnumerationDescriptor_BuildMps_GeneratorOptions_SkipUnmodifiedModels" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="4241665505353447976" at="92,0,93,0" concept="2" trace="myEnumerationBuildMps_GeneratorOptions_SkipUnmodifiedModels" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/4278635856200794926">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="4278635856200794926" at="55,0,56,0" concept="2" trace="props_BuildMps_ModuleDependencyExtendLanguage" />
+      <node id="4278635856200794926" at="407,68,408,76" concept="5" />
+      <node id="4278635856200794926" at="408,76,409,149" concept="1" />
+      <node id="4278635856200794926" at="409,149,410,71" concept="1" />
+      <node id="4278635856200794926" at="411,9,412,61" concept="6" />
+      <node id="4278635856200794926" at="406,73,411,9" concept="3" />
+      <scope id="4278635856200794926" at="407,68,410,71">
+        <var name="cpb" id="4278635856200794926" />
+      </scope>
+      <scope id="4278635856200794926" at="406,73,412,61" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="4278635856200794926" at="55,0,56,0" concept="8" trace="BuildMps_ModuleDependencyExtendLanguage" />
+      <node id="4278635856200794926" at="126,64,127,78" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="4278635856200794926" at="66,0,67,0" concept="2" trace="myConceptBuildMps_ModuleDependencyExtendLanguage" />
+      <node id="4278635856200794926" at="205,73,206,64" concept="6" />
+      <node id="4278635856200794926" at="809,97,810,196" concept="5" />
+      <node id="4278635856200794926" at="810,196,811,34" concept="1" />
+      <node id="4278635856200794926" at="811,34,812,75" concept="7" />
+      <node id="4278635856200794926" at="812,75,813,75" concept="1" />
+      <node id="4278635856200794926" at="813,75,814,110" concept="1" />
+      <node id="4278635856200794926" at="814,110,815,17" concept="1" />
+      <node id="4278635856200794928" at="815,17,816,171" concept="1" />
+      <node id="4278635856200794926" at="816,171,817,22" concept="6" />
+      <node id="4278635856200794926" at="809,0,819,0" concept="9" trace="createDescriptorForBuildMps_ModuleDependencyExtendLanguage#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="4278635856200794926" at="205,73,206,64" />
+      <scope id="4278635856200794926" at="809,97,817,22">
+        <var name="b" id="4278635856200794926" />
+      </scope>
+      <scope id="4278635856200794926" at="809,0,819,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/4278635856200817744">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="4278635856200817744" at="63,0,64,0" concept="2" trace="props_BuildMps_ModuleModelRoot" />
+      <node id="4278635856200817744" at="463,53,464,76" concept="5" />
+      <node id="4278635856200817744" at="464,76,465,44" concept="1" />
+      <node id="4278635856200817744" at="465,44,466,56" concept="1" />
+      <node id="4278635856200817744" at="467,9,468,46" concept="6" />
+      <node id="4278635856200817744" at="462,58,467,9" concept="3" />
+      <scope id="4278635856200817744" at="463,53,466,56">
+        <var name="cpb" id="4278635856200817744" />
+      </scope>
+      <scope id="4278635856200817744" at="462,58,468,46" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="4278635856200817744" at="63,0,64,0" concept="8" trace="BuildMps_ModuleModelRoot" />
+      <node id="4278635856200817744" at="134,64,135,63" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="4278635856200817744" at="74,0,75,0" concept="2" trace="myConceptBuildMps_ModuleModelRoot" />
+      <node id="4278635856200817744" at="221,58,222,49" concept="6" />
+      <node id="4278635856200817744" at="895,82,896,181" concept="5" />
+      <node id="4278635856200817744" at="896,181,897,34" concept="1" />
+      <node id="4278635856200817744" at="897,34,898,71" concept="7" />
+      <node id="4278635856200817744" at="898,71,899,75" concept="1" />
+      <node id="4278635856200817744" at="899,75,900,110" concept="1" />
+      <node id="4278635856200817744" at="900,110,901,17" concept="1" />
+      <node id="2889113830911481881" at="901,17,902,122" concept="1" />
+      <node id="8137134783396676838" at="902,122,903,116" concept="1" />
+      <node id="8137134783396907368" at="903,116,904,121" concept="1" />
+      <node id="8137134783396676835" at="904,121,905,201" concept="1" />
+      <node id="4278635856200817744" at="905,201,906,26" concept="1" />
+      <node id="4278635856200817744" at="906,26,907,22" concept="6" />
+      <node id="4278635856200817744" at="895,0,909,0" concept="9" trace="createDescriptorForBuildMps_ModuleModelRoot#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="4278635856200817744" at="221,58,222,49" />
+      <scope id="4278635856200817744" at="895,82,907,22">
+        <var name="b" id="4278635856200817744" />
+      </scope>
+      <scope id="4278635856200817744" at="895,0,909,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/4278635856200826393">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="4278635856200826393" at="56,0,57,0" concept="2" trace="props_BuildMps_ModuleDependencyJar" />
+      <node id="4278635856200826393" at="414,57,415,76" concept="5" />
+      <node id="4278635856200826393" at="415,76,416,37" concept="1" />
+      <node id="4278635856200826393" at="416,37,417,60" concept="1" />
+      <node id="4278635856200826393" at="418,9,419,50" concept="6" />
+      <node id="4278635856200826393" at="413,62,418,9" concept="3" />
+      <scope id="4278635856200826393" at="414,57,417,60">
+        <var name="cpb" id="4278635856200826393" />
+      </scope>
+      <scope id="4278635856200826393" at="413,62,419,50" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="4278635856200826393" at="56,0,57,0" concept="8" trace="BuildMps_ModuleDependencyJar" />
+      <node id="4278635856200826393" at="127,78,128,67" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="4278635856200826393" at="67,0,68,0" concept="2" trace="myConceptBuildMps_ModuleDependencyJar" />
+      <node id="4278635856200826393" at="207,62,208,53" concept="6" />
+      <node id="4278635856200826393" at="819,86,820,185" concept="5" />
+      <node id="4278635856200826393" at="820,185,821,34" concept="1" />
+      <node id="4278635856200826393" at="821,34,822,75" concept="7" />
+      <node id="4278635856200826393" at="822,75,823,75" concept="1" />
+      <node id="4278635856200826393" at="823,75,824,110" concept="1" />
+      <node id="4278635856200826393" at="824,110,825,17" concept="1" />
+      <node id="4278635856200826394" at="825,17,826,198" concept="1" />
+      <node id="2798275735916344703" at="826,198,827,207" concept="1" />
+      <node id="4278635856200826393" at="827,207,828,19" concept="1" />
+      <node id="4278635856200826393" at="828,19,829,22" concept="6" />
+      <node id="4278635856200826393" at="819,0,831,0" concept="9" trace="createDescriptorForBuildMps_ModuleDependencyJar#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="4278635856200826393" at="207,62,208,53" />
+      <scope id="4278635856200826393" at="819,86,829,22">
+        <var name="b" id="4278635856200826393" />
+      </scope>
+      <scope id="4278635856200826393" at="819,0,831,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/4297162197620964123">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="4297162197620964123" at="42,0,43,0" concept="2" trace="props_BuildMps_GeneratorOptions" />
+      <node id="4297162197620964123" at="314,54,315,76" concept="5" />
+      <node id="4297162197620964123" at="315,76,316,35" concept="1" />
+      <node id="4297162197620964123" at="316,35,317,57" concept="1" />
+      <node id="4297162197620964123" at="318,9,319,47" concept="6" />
+      <node id="4297162197620964123" at="313,59,318,9" concept="3" />
+      <scope id="4297162197620964123" at="314,54,317,57">
+        <var name="cpb" id="4297162197620964123" />
+      </scope>
+      <scope id="4297162197620964123" at="313,59,319,47" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="4297162197620964123" at="42,0,43,0" concept="8" trace="BuildMps_GeneratorOptions" />
+      <node id="4297162197620964123" at="113,57,114,64" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="4297162197620964123" at="53,0,54,0" concept="2" trace="myConceptBuildMps_GeneratorOptions" />
+      <node id="4297162197620964123" at="179,59,180,50" concept="6" />
+      <node id="4297162197620964123" at="657,83,658,182" concept="5" />
+      <node id="4297162197620964123" at="658,182,659,34" concept="1" />
+      <node id="4297162197620964123" at="659,34,660,62" concept="7" />
+      <node id="4297162197620964123" at="660,62,661,76" concept="1" />
+      <node id="4297162197620964123" at="661,76,662,71" concept="1" />
+      <node id="4297162197620964123" at="662,71,663,110" concept="1" />
+      <node id="4297162197620964123" at="663,110,664,17" concept="1" />
+      <node id="4297162197620978188" at="664,17,665,113" concept="1" />
+      <node id="4297162197620978190" at="665,113,666,115" concept="1" />
+      <node id="4297162197620978193" at="666,115,667,122" concept="1" />
+      <node id="4297162197621031140" at="667,122,668,114" concept="1" />
+      <node id="3938719774425307123" at="668,114,669,119" concept="1" />
+      <node id="6535001758416941941" at="669,119,670,123" concept="1" />
+      <node id="4241665505353454201" at="670,123,671,188" concept="1" />
+      <node id="4297162197620964123" at="671,188,672,33" concept="1" />
+      <node id="4297162197620964123" at="672,33,673,22" concept="6" />
+      <node id="4297162197620964123" at="657,0,675,0" concept="9" trace="createDescriptorForBuildMps_GeneratorOptions#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="4297162197620964123" at="179,59,180,50" />
+      <scope id="4297162197620964123" at="657,83,673,22">
+        <var name="b" id="4297162197620964123" />
+      </scope>
+      <scope id="4297162197620964123" at="657,0,675,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/4356762679305675652">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="4356762679305675652" at="23,0,24,0" concept="2" trace="props_BuildMpsLayout_ModuleXml_CustomJarLocation" />
+      <node id="4356762679305675652" at="172,71,173,76" concept="5" />
+      <node id="4356762679305675652" at="173,76,174,76" concept="1" />
+      <node id="4356762679305675652" at="174,76,175,74" concept="1" />
+      <node id="4356762679305675652" at="176,9,177,64" concept="6" />
+      <node id="4356762679305675652" at="171,76,176,9" concept="3" />
+      <scope id="4356762679305675652" at="172,71,175,74">
+        <var name="cpb" id="4356762679305675652" />
+      </scope>
+      <scope id="4356762679305675652" at="171,76,177,64" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="4356762679305675652" at="23,0,24,0" concept="8" trace="BuildMpsLayout_ModuleXml_CustomJarLocation" />
+      <node id="4356762679305675652" at="94,63,95,81" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="4356762679305675652" at="34,0,35,0" concept="2" trace="myConceptBuildMpsLayout_ModuleXml_CustomJarLocation" />
+      <node id="4356762679305675652" at="141,76,142,67" concept="6" />
+      <node id="4356762679305675652" at="407,100,408,199" concept="5" />
+      <node id="4356762679305675652" at="408,199,409,34" concept="1" />
+      <node id="4356762679305675652" at="409,34,410,110" concept="1" />
+      <node id="4356762679305675652" at="410,110,411,17" concept="1" />
+      <node id="4356762679305675654" at="411,17,412,122" concept="1" />
+      <node id="4356762679305675653" at="412,122,413,198" concept="1" />
+      <node id="4356762679305675652" at="413,198,414,22" concept="6" />
+      <node id="4356762679305675652" at="407,0,416,0" concept="9" trace="createDescriptorForBuildMpsLayout_ModuleXml_CustomJarLocation#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="4356762679305675652" at="141,76,142,67" />
+      <scope id="4356762679305675652" at="407,100,414,22">
+        <var name="b" id="4356762679305675652" />
+      </scope>
+      <scope id="4356762679305675652" at="407,0,416,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/4964617264469340623">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="4964617264469340623" at="77,0,78,0" concept="2" trace="props_GeneratorInternal_BuildMps_Module" />
+      <node id="4964617264469340623" at="564,62,565,76" concept="5" />
+      <node id="4964617264469340623" at="565,76,566,145" concept="1" />
+      <node id="4964617264469340623" at="566,145,567,65" concept="1" />
+      <node id="4964617264469340623" at="568,9,569,55" concept="6" />
+      <node id="4964617264469340623" at="563,67,568,9" concept="3" />
+      <scope id="4964617264469340623" at="564,62,567,65">
+        <var name="cpb" id="4964617264469340623" />
+      </scope>
+      <scope id="4964617264469340623" at="563,67,569,55" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="4964617264469340623" at="77,0,78,0" concept="8" trace="GeneratorInternal_BuildMps_Module" />
+      <node id="4964617264469340623" at="148,60,149,72" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="4964617264469340623" at="88,0,89,0" concept="2" trace="myConceptGeneratorInternal_BuildMps_Module" />
+      <node id="4964617264469340623" at="249,67,250,58" concept="6" />
+      <node id="4964617264469340623" at="1039,91,1040,190" concept="5" />
+      <node id="4964617264469340623" at="1040,190,1041,34" concept="1" />
+      <node id="4964617264469340623" at="1041,34,1042,110" concept="1" />
+      <node id="4964617264469340623" at="1042,110,1043,17" concept="1" />
+      <node id="4964617264469340624" at="1043,17,1044,175" concept="1" />
+      <node id="4964617264469340623" at="1044,175,1045,22" concept="6" />
+      <node id="4964617264469340623" at="1039,0,1047,0" concept="9" trace="createDescriptorForGeneratorInternal_BuildMps_Module#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="4964617264469340623" at="249,67,250,58" />
+      <scope id="4964617264469340623" at="1039,91,1045,22">
+        <var name="b" id="4964617264469340623" />
+      </scope>
+      <scope id="4964617264469340623" at="1039,0,1047,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/4964617264469340766">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="4964617264469340766" at="78,0,79,0" concept="2" trace="props_GeneratorInternal_BuildSourcePath" />
+      <node id="4964617264469340766" at="571,62,572,76" concept="5" />
+      <node id="4964617264469340766" at="572,76,573,143" concept="1" />
+      <node id="4964617264469340766" at="573,143,574,65" concept="1" />
+      <node id="4964617264469340766" at="575,9,576,55" concept="6" />
+      <node id="4964617264469340766" at="570,67,575,9" concept="3" />
+      <scope id="4964617264469340766" at="571,62,574,65">
+        <var name="cpb" id="4964617264469340766" />
+      </scope>
+      <scope id="4964617264469340766" at="570,67,576,55" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="4964617264469340766" at="78,0,79,0" concept="8" trace="GeneratorInternal_BuildSourcePath" />
+      <node id="4964617264469340766" at="149,72,150,72" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="4964617264469340766" at="89,0,90,0" concept="2" trace="myConceptGeneratorInternal_BuildSourcePath" />
+      <node id="4964617264469340766" at="251,67,252,58" concept="6" />
+      <node id="4964617264469340766" at="1047,91,1048,190" concept="5" />
+      <node id="4964617264469340766" at="1048,190,1049,34" concept="1" />
+      <node id="4964617264469340766" at="1049,34,1050,110" concept="1" />
+      <node id="4964617264469340766" at="1050,110,1051,17" concept="1" />
+      <node id="4964617264469340767" at="1051,17,1052,174" concept="1" />
+      <node id="4964617264469340766" at="1052,174,1053,22" concept="6" />
+      <node id="4964617264469340766" at="1047,0,1055,0" concept="9" trace="createDescriptorForGeneratorInternal_BuildSourcePath#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="4964617264469340766" at="251,67,252,58" />
+      <scope id="4964617264469340766" at="1047,91,1053,22">
+        <var name="b" id="4964617264469340766" />
+      </scope>
+      <scope id="4964617264469340766" at="1047,0,1055,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/5253498789149381388">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="5253498789149381388" at="53,0,54,0" concept="2" trace="props_BuildMps_Module" />
+      <node id="5253498789149381388" at="395,44,396,76" concept="5" />
+      <node id="5253498789149381388" at="396,76,397,47" concept="1" />
+      <node id="5253498789149381388" at="398,9,399,37" concept="6" />
+      <node id="5253498789149381388" at="394,49,398,9" concept="3" />
+      <scope id="5253498789149381388" at="395,44,397,47">
+        <var name="cpb" id="5253498789149381388" />
+      </scope>
+      <scope id="5253498789149381388" at="394,49,399,37" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="5253498789149381388" at="53,0,54,0" concept="8" trace="BuildMps_Module" />
+      <node id="5253498789149381388" at="124,56,125,54" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="5253498789149381388" at="64,0,65,0" concept="2" trace="myConceptBuildMps_Module" />
+      <node id="5253498789149381388" at="201,49,202,40" concept="6" />
+      <node id="5253498789149381388" at="786,73,787,172" concept="5" />
+      <node id="5253498789149381388" at="787,172,788,33" concept="1" />
+      <node id="5253498789149381388" at="788,33,789,73" concept="7" />
+      <node id="5253498789149381388" at="789,73,790,74" concept="1" />
+      <node id="5253498789149381388" at="790,74,791,76" concept="1" />
+      <node id="5253498789149381388" at="791,76,792,75" concept="1" />
+      <node id="5253498789149381388" at="792,75,793,110" concept="1" />
+      <node id="5253498789149381388" at="793,110,794,17" concept="1" />
+      <node id="1500819558096356884" at="794,17,795,119" concept="1" />
+      <node id="5253498789149547825" at="795,119,796,198" concept="1" />
+      <node id="5253498789149547704" at="796,198,797,203" concept="1" />
+      <node id="4571516170014976861" at="797,203,798,199" concept="1" />
+      <node id="5253498789149381388" at="798,199,799,22" concept="1" />
+      <node id="5253498789149381388" at="799,22,800,22" concept="6" />
+      <node id="5253498789149381388" at="786,0,802,0" concept="9" trace="createDescriptorForBuildMps_Module#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="5253498789149381388" at="201,49,202,40" />
+      <scope id="5253498789149381388" at="786,73,800,22">
+        <var name="b" id="5253498789149381388" />
+      </scope>
+      <scope id="5253498789149381388" at="786,0,802,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/5253498789149547703">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="5253498789149547703" at="54,0,55,0" concept="2" trace="props_BuildMps_ModuleDependency" />
+      <node id="5253498789149547703" at="401,54,402,76" concept="5" />
+      <node id="5253498789149547703" at="402,76,403,57" concept="1" />
+      <node id="5253498789149547703" at="404,9,405,47" concept="6" />
+      <node id="5253498789149547703" at="400,59,404,9" concept="3" />
+      <scope id="5253498789149547703" at="401,54,403,57">
+        <var name="cpb" id="5253498789149547703" />
+      </scope>
+      <scope id="5253498789149547703" at="400,59,405,47" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="5253498789149547703" at="54,0,55,0" concept="8" trace="BuildMps_ModuleDependency" />
+      <node id="5253498789149547703" at="125,54,126,64" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="5253498789149547703" at="65,0,66,0" concept="2" trace="myConceptBuildMps_ModuleDependency" />
+      <node id="5253498789149547703" at="203,59,204,50" concept="6" />
+      <node id="5253498789149547703" at="802,83,803,182" concept="5" />
+      <node id="5253498789149547703" at="803,182,804,33" concept="1" />
+      <node id="5253498789149547703" at="804,33,805,110" concept="1" />
+      <node id="5253498789149547703" at="805,110,806,17" concept="1" />
+      <node id="5253498789149547703" at="806,17,807,22" concept="6" />
+      <node id="5253498789149547703" at="802,0,809,0" concept="9" trace="createDescriptorForBuildMps_ModuleDependency#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="5253498789149547703" at="203,59,204,50" />
+      <scope id="5253498789149547703" at="802,83,807,22">
+        <var name="b" id="5253498789149547703" />
+      </scope>
+      <scope id="5253498789149547703" at="802,0,809,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/5253498789149547823">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="5253498789149547823" at="68,0,69,0" concept="2" trace="props_BuildMps_ModuleSource" />
+      <node id="5253498789149547823" at="499,50,500,76" concept="5" />
+      <node id="5253498789149547823" at="500,76,501,53" concept="1" />
+      <node id="5253498789149547823" at="502,9,503,43" concept="6" />
+      <node id="5253498789149547823" at="498,55,502,9" concept="3" />
+      <scope id="5253498789149547823" at="499,50,501,53">
+        <var name="cpb" id="5253498789149547823" />
+      </scope>
+      <scope id="5253498789149547823" at="498,55,503,43" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="5253498789149547823" at="68,0,69,0" concept="8" trace="BuildMps_ModuleSource" />
+      <node id="5253498789149547823" at="139,69,140,60" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="5253498789149547823" at="79,0,80,0" concept="2" trace="myConceptBuildMps_ModuleSource" />
+      <node id="5253498789149547823" at="231,55,232,46" concept="6" />
+      <node id="5253498789149547823" at="944,79,945,178" concept="5" />
+      <node id="5253498789149547823" at="945,178,946,33" concept="1" />
+      <node id="5253498789149547823" at="946,33,947,110" concept="1" />
+      <node id="5253498789149547823" at="947,110,948,17" concept="1" />
+      <node id="5253498789149547823" at="948,17,949,22" concept="6" />
+      <node id="5253498789149547823" at="944,0,951,0" concept="9" trace="createDescriptorForBuildMps_ModuleSource#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="5253498789149547823" at="231,55,232,46" />
+      <scope id="5253498789149547823" at="944,79,949,22">
+        <var name="b" id="5253498789149547823" />
+      </scope>
+      <scope id="5253498789149547823" at="944,0,951,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/5253498789149585690">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="5253498789149585690" at="59,0,60,0" concept="2" trace="props_BuildMps_ModuleDependencyOnModule" />
+      <node id="5253498789149585690" at="435,62,436,76" concept="5" />
+      <node id="5253498789149585690" at="436,76,437,139" concept="1" />
+      <node id="5253498789149585690" at="437,139,438,65" concept="1" />
+      <node id="5253498789149585690" at="439,9,440,55" concept="6" />
+      <node id="5253498789149585690" at="434,67,439,9" concept="3" />
+      <scope id="5253498789149585690" at="435,62,438,65">
+        <var name="cpb" id="5253498789149585690" />
+      </scope>
+      <scope id="5253498789149585690" at="434,67,440,55" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="5253498789149585690" at="59,0,60,0" concept="8" trace="BuildMps_ModuleDependencyOnModule" />
+      <node id="5253498789149585690" at="130,76,131,72" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="5253498789149585690" at="70,0,71,0" concept="2" trace="myConceptBuildMps_ModuleDependencyOnModule" />
+      <node id="5253498789149585690" at="213,67,214,58" concept="6" />
+      <node id="5253498789149585690" at="853,91,854,190" concept="5" />
+      <node id="5253498789149585690" at="854,190,855,34" concept="1" />
+      <node id="5253498789149585690" at="855,34,856,75" concept="7" />
+      <node id="5253498789149585690" at="856,75,857,75" concept="1" />
+      <node id="5253498789149585690" at="857,75,858,110" concept="1" />
+      <node id="5253498789149585690" at="858,110,859,17" concept="1" />
+      <node id="5253498789149547713" at="859,17,860,115" concept="1" />
+      <node id="5253498789149547705" at="860,115,861,169" concept="1" />
+      <node id="5253498789149585690" at="861,169,862,22" concept="6" />
+      <node id="5253498789149585690" at="853,0,864,0" concept="9" trace="createDescriptorForBuildMps_ModuleDependencyOnModule#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="5253498789149585690" at="213,67,214,58" />
+      <scope id="5253498789149585690" at="853,91,862,22">
+        <var name="b" id="5253498789149585690" />
+      </scope>
+      <scope id="5253498789149585690" at="853,0,864,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/5253498789149588970">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="5253498789149588970" at="62,0,63,0" concept="2" trace="props_BuildMps_ModuleJavaSource" />
+      <node id="5253498789149588970" at="456,54,457,76" concept="5" />
+      <node id="5253498789149588970" at="457,76,458,59" concept="1" />
+      <node id="5253498789149588970" at="458,59,459,57" concept="1" />
+      <node id="5253498789149588970" at="460,9,461,47" concept="6" />
+      <node id="5253498789149588970" at="455,59,460,9" concept="3" />
+      <scope id="5253498789149588970" at="456,54,459,57">
+        <var name="cpb" id="5253498789149588970" />
+      </scope>
+      <scope id="5253498789149588970" at="455,59,461,47" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="5253498789149588970" at="62,0,63,0" concept="8" trace="BuildMps_ModuleJavaSource" />
+      <node id="5253498789149588970" at="133,75,134,64" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="5253498789149588970" at="73,0,74,0" concept="2" trace="myConceptBuildMps_ModuleJavaSource" />
+      <node id="5253498789149588970" at="219,59,220,50" concept="6" />
+      <node id="5253498789149588970" at="884,83,885,182" concept="5" />
+      <node id="5253498789149588970" at="885,182,886,34" concept="1" />
+      <node id="5253498789149588970" at="886,34,887,71" concept="7" />
+      <node id="5253498789149588970" at="887,71,888,75" concept="1" />
+      <node id="5253498789149588970" at="888,75,889,110" concept="1" />
+      <node id="5253498789149588970" at="889,110,890,17" concept="1" />
+      <node id="5970181360963003994" at="890,17,891,118" concept="1" />
+      <node id="5253498789149588972" at="891,118,892,200" concept="1" />
+      <node id="5253498789149588970" at="892,200,893,22" concept="6" />
+      <node id="5253498789149588970" at="884,0,895,0" concept="9" trace="createDescriptorForBuildMps_ModuleJavaSource#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="5253498789149588970" at="219,59,220,50" />
+      <scope id="5253498789149588970" at="884,83,893,22">
+        <var name="b" id="5253498789149588970" />
+      </scope>
+      <scope id="5253498789149588970" at="884,0,895,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/5507251971038816436">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="5507251971038816436" at="41,0,42,0" concept="2" trace="props_BuildMps_Generator" />
+      <node id="5507251971038816436" at="307,47,308,76" concept="5" />
+      <node id="5507251971038816436" at="308,76,309,35" concept="1" />
+      <node id="5507251971038816436" at="309,35,310,50" concept="1" />
+      <node id="5507251971038816436" at="311,9,312,40" concept="6" />
+      <node id="5507251971038816436" at="306,52,311,9" concept="3" />
+      <scope id="5507251971038816436" at="307,47,310,50">
+        <var name="cpb" id="5507251971038816436" />
+      </scope>
+      <scope id="5507251971038816436" at="306,52,312,40" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="5507251971038816436" at="41,0,42,0" concept="8" trace="BuildMps_Generator" />
+      <node id="5507251971038816436" at="112,73,113,57" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="5507251971038816436" at="52,0,53,0" concept="2" trace="myConceptBuildMps_Generator" />
+      <node id="5507251971038816436" at="177,52,178,43" concept="6" />
+      <node id="5507251971038816436" at="646,76,647,175" concept="5" />
+      <node id="5507251971038816436" at="647,175,648,34" concept="1" />
+      <node id="5507251971038816436" at="648,34,649,65" concept="7" />
+      <node id="5507251971038816436" at="649,65,650,75" concept="1" />
+      <node id="5507251971038816436" at="650,75,651,110" concept="1" />
+      <node id="5507251971038816436" at="651,110,652,17" concept="1" />
+      <node id="868963075225252684" at="652,17,653,174" concept="1" />
+      <node id="5507251971038816436" at="653,174,654,25" concept="1" />
+      <node id="5507251971038816436" at="654,25,655,22" concept="6" />
+      <node id="5507251971038816436" at="646,0,657,0" concept="9" trace="createDescriptorForBuildMps_Generator#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="5507251971038816436" at="177,52,178,43" />
+      <scope id="5507251971038816436" at="646,76,655,22">
+        <var name="b" id="5507251971038816436" />
+      </scope>
+      <scope id="5507251971038816436" at="646,0,657,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/5894421362117677519">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="5894421362117677519" at="31,0,32,0" concept="2" trace="props_BuildMps_BrandingKeymap" />
+      <node id="5894421362117677519" at="238,52,239,76" concept="5" />
+      <node id="5894421362117677519" at="239,76,240,40" concept="1" />
+      <node id="5894421362117677519" at="240,40,241,55" concept="1" />
+      <node id="5894421362117677519" at="242,9,243,45" concept="6" />
+      <node id="5894421362117677519" at="237,57,242,9" concept="3" />
+      <scope id="5894421362117677519" at="238,52,241,55">
+        <var name="cpb" id="5894421362117677519" />
+      </scope>
+      <scope id="5894421362117677519" at="237,57,243,45" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="5894421362117677519" at="31,0,32,0" concept="8" trace="BuildMps_BrandingKeymap" />
+      <node id="5894421362117677519" at="102,60,103,62" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="5894421362117677519" at="42,0,43,0" concept="2" trace="myConceptBuildMps_BrandingKeymap" />
+      <node id="5894421362117677519" at="157,57,158,48" concept="6" />
+      <node id="5894421362117677519" at="544,81,545,180" concept="5" />
+      <node id="5894421362117677519" at="545,180,546,34" concept="1" />
+      <node id="5894421362117677519" at="546,34,547,110" concept="1" />
+      <node id="5894421362117677519" at="547,110,548,17" concept="1" />
+      <node id="5894421362117677523" at="548,17,549,196" concept="1" />
+      <node id="5894421362117677528" at="549,196,550,196" concept="1" />
+      <node id="5894421362117677519" at="550,196,551,22" concept="1" />
+      <node id="5894421362117677519" at="551,22,552,22" concept="6" />
+      <node id="5894421362117677519" at="544,0,554,0" concept="9" trace="createDescriptorForBuildMps_BrandingKeymap#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="5894421362117677519" at="157,57,158,48" />
+      <scope id="5894421362117677519" at="544,81,552,22">
+        <var name="b" id="5894421362117677519" />
+      </scope>
+      <scope id="5894421362117677519" at="544,0,554,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/6503355885715333289">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="6503355885715333289" at="14,0,15,0" concept="2" trace="props_BuildMpsAspect" />
+      <node id="6503355885715333289" at="103,43,104,136" concept="5" />
+      <node id="353547257300482730" at="104,136,105,81" concept="1" />
+      <node id="6503355885715333289" at="105,81,106,46" concept="1" />
+      <node id="6503355885715333289" at="106,46,107,46" concept="1" />
+      <node id="6503355885715333289" at="108,9,109,36" concept="6" />
+      <node id="6503355885715333289" at="102,48,108,9" concept="3" />
+      <scope id="6503355885715333289" at="103,43,107,46">
+        <var name="cpb" id="6503355885715333289" />
+      </scope>
+      <scope id="6503355885715333289" at="102,48,109,36" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="6503355885715333289" at="14,0,15,0" concept="8" trace="BuildMpsAspect" />
+      <node id="6503355885715333289" at="85,52,86,53" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="6503355885715333289" at="25,0,26,0" concept="2" trace="myConceptBuildMpsAspect" />
+      <node id="6503355885715333289" at="123,48,124,39" concept="6" />
+      <node id="6503355885715333289" at="294,72,295,171" concept="5" />
+      <node id="6503355885715333289" at="295,171,296,34" concept="1" />
+      <node id="6503355885715333289" at="296,34,297,57" concept="7" />
+      <node id="6503355885715333289" at="297,57,298,76" concept="1" />
+      <node id="6503355885715333289" at="298,76,299,110" concept="1" />
+      <node id="6503355885715333289" at="299,110,300,17" concept="1" />
+      <node id="6503355885715353788" at="300,17,301,116" concept="1" />
+      <node id="1787667533297081791" at="301,116,302,121" concept="1" />
+      <node id="5002485985633856504" at="302,121,303,114" concept="1" />
+      <node id="7981469545489178349" at="303,114,304,132" concept="1" />
+      <node id="353547257300482730" at="304,132,305,130" concept="1" />
+      <node id="6503355885715333289" at="305,130,306,28" concept="1" />
+      <node id="6503355885715333289" at="306,28,307,22" concept="6" />
+      <node id="6503355885715333289" at="294,0,309,0" concept="9" trace="createDescriptorForBuildMpsAspect#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="6503355885715333289" at="123,48,124,39" />
+      <scope id="6503355885715333289" at="294,72,307,22">
+        <var name="b" id="6503355885715333289" />
+      </scope>
+      <scope id="6503355885715333289" at="294,0,309,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/6592112598314498926">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="6592112598314498926" at="24,0,25,0" concept="2" trace="props_BuildMpsLayout_Plugin" />
+      <node id="6592112598314498926" at="179,50,180,76" concept="5" />
+      <node id="6592112598314498926" at="180,76,181,35" concept="1" />
+      <node id="6592112598314498926" at="181,35,182,53" concept="1" />
+      <node id="6592112598314498926" at="183,9,184,43" concept="6" />
+      <node id="6592112598314498926" at="178,55,183,9" concept="3" />
+      <scope id="6592112598314498926" at="179,50,182,53">
+        <var name="cpb" id="6592112598314498926" />
+      </scope>
+      <scope id="6592112598314498926" at="178,55,184,43" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="6592112598314498926" at="24,0,25,0" concept="8" trace="BuildMpsLayout_Plugin" />
+      <node id="6592112598314498926" at="95,81,96,60" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="6592112598314498926" at="35,0,36,0" concept="2" trace="myConceptBuildMpsLayout_Plugin" />
+      <node id="6592112598314498926" at="143,55,144,46" concept="6" />
+      <node id="6592112598314498926" at="416,79,417,178" concept="5" />
+      <node id="6592112598314498926" at="417,178,418,34" concept="1" />
+      <node id="6592112598314498926" at="418,34,419,75" concept="7" />
+      <node id="6592112598314498926" at="419,75,420,76" concept="1" />
+      <node id="6592112598314498926" at="420,76,421,71" concept="1" />
+      <node id="6592112598314498926" at="421,71,422,76" concept="1" />
+      <node id="6592112598314498926" at="422,76,423,110" concept="1" />
+      <node id="6592112598314498926" at="423,110,424,17" concept="1" />
+      <node id="3389822811991596365" at="424,17,425,126" concept="1" />
+      <node id="6592112598314801433" at="425,126,426,169" concept="1" />
+      <node id="3570488090019868128" at="426,169,427,206" concept="1" />
+      <node id="6592112598314498926" at="427,206,428,22" concept="1" />
+      <node id="6592112598314498926" at="428,22,429,22" concept="6" />
+      <node id="6592112598314498926" at="416,0,431,0" concept="9" trace="createDescriptorForBuildMpsLayout_Plugin#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="6592112598314498926" at="143,55,144,46" />
+      <scope id="6592112598314498926" at="416,79,429,22">
+        <var name="b" id="6592112598314498926" />
+      </scope>
+      <scope id="6592112598314498926" at="416,0,431,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/6592112598314498932">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="6592112598314498932" at="45,0,46,0" concept="2" trace="props_BuildMps_IdeaPlugin" />
+      <node id="6592112598314498932" at="336,48,337,76" concept="5" />
+      <node id="6592112598314498932" at="337,76,338,35" concept="1" />
+      <node id="6592112598314498932" at="338,35,339,57" concept="1" />
+      <node id="6592112598314498932" at="339,57,340,51" concept="1" />
+      <node id="6592112598314498932" at="341,9,342,41" concept="6" />
+      <node id="6592112598314498932" at="335,53,341,9" concept="3" />
+      <scope id="6592112598314498932" at="336,48,340,51">
+        <var name="cpb" id="6592112598314498932" />
+      </scope>
+      <scope id="6592112598314498932" at="335,53,342,41" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="6592112598314498932" at="45,0,46,0" concept="8" trace="BuildMps_IdeaPlugin" />
+      <node id="6592112598314498932" at="116,53,117,58" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="6592112598314498932" at="56,0,57,0" concept="2" trace="myConceptBuildMps_IdeaPlugin" />
+      <node id="6592112598314498932" at="185,53,186,44" concept="6" />
+      <node id="6592112598314498932" at="695,77,696,176" concept="5" />
+      <node id="6592112598314498932" at="696,176,697,34" concept="1" />
+      <node id="6592112598314498932" at="697,34,698,62" concept="7" />
+      <node id="6592112598314498932" at="698,62,699,76" concept="1" />
+      <node id="6592112598314498932" at="699,76,700,71" concept="1" />
+      <node id="6592112598314498932" at="700,71,701,76" concept="1" />
+      <node id="6592112598314498932" at="701,76,702,110" concept="1" />
+      <node id="6592112598314498932" at="702,110,703,17" concept="1" />
+      <node id="4972001163784560067" at="703,17,704,124" concept="1" />
+      <node id="6592112598314498927" at="704,124,705,172" concept="1" />
+      <node id="6592112598314499021" at="705,172,706,197" concept="1" />
+      <node id="2172791612906637490" at="706,197,707,203" concept="1" />
+      <node id="6592112598314855574" at="707,203,708,206" concept="1" />
+      <node id="6592112598314498931" at="708,206,709,200" concept="1" />
+      <node id="6592112598314499050" at="709,200,710,198" concept="1" />
+      <node id="6592112598314499028" at="710,198,711,203" concept="1" />
+      <node id="1238980147629899306" at="711,203,712,202" concept="1" />
+      <node id="7832771629084912518" at="712,202,713,198" concept="1" />
+      <node id="1359186315025500371" at="713,198,714,195" concept="1" />
+      <node id="6592112598314498932" at="714,195,715,27" concept="1" />
+      <node id="6592112598314498932" at="715,27,716,22" concept="6" />
+      <node id="6592112598314498932" at="695,0,718,0" concept="9" trace="createDescriptorForBuildMps_IdeaPlugin#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="6592112598314498932" at="185,53,186,44" />
+      <scope id="6592112598314498932" at="695,77,716,22">
+        <var name="b" id="6592112598314498932" />
+      </scope>
+      <scope id="6592112598314498932" at="695,0,718,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/6592112598314499027">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="6592112598314499027" at="47,0,48,0" concept="2" trace="props_BuildMps_IdeaPluginDependency" />
+      <node id="6592112598314499027" at="350,58,351,76" concept="5" />
+      <node id="6592112598314499027" at="351,76,352,139" concept="1" />
+      <node id="6592112598314499027" at="352,139,353,61" concept="1" />
+      <node id="6592112598314499027" at="354,9,355,51" concept="6" />
+      <node id="6592112598314499027" at="349,63,354,9" concept="3" />
+      <scope id="6592112598314499027" at="350,58,353,61">
+        <var name="cpb" id="6592112598314499027" />
+      </scope>
+      <scope id="6592112598314499027" at="349,63,355,51" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="6592112598314499027" at="47,0,48,0" concept="8" trace="BuildMps_IdeaPluginDependency" />
+      <node id="6592112598314499027" at="118,65,119,68" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="6592112598314499027" at="58,0,59,0" concept="2" trace="myConceptBuildMps_IdeaPluginDependency" />
+      <node id="6592112598314499027" at="189,63,190,54" concept="6" />
+      <node id="6592112598314499027" at="725,87,726,186" concept="5" />
+      <node id="6592112598314499027" at="726,186,727,34" concept="1" />
+      <node id="6592112598314499027" at="727,34,728,110" concept="1" />
+      <node id="6592112598314499027" at="728,110,729,17" concept="1" />
+      <node id="6592112598314499066" at="729,17,730,169" concept="1" />
+      <node id="6592112598314499027" at="730,169,731,22" concept="6" />
+      <node id="6592112598314499027" at="725,0,733,0" concept="9" trace="createDescriptorForBuildMps_IdeaPluginDependency#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="6592112598314499027" at="189,63,190,54" />
+      <scope id="6592112598314499027" at="725,87,731,22">
+        <var name="b" id="6592112598314499027" />
+      </scope>
+      <scope id="6592112598314499027" at="725,0,733,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/6592112598314499036">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="6592112598314499036" at="50,0,51,0" concept="2" trace="props_BuildMps_IdeaPluginModule" />
+      <node id="6592112598314499036" at="373,54,374,136" concept="5" />
+      <node id="4034578608468849375" at="374,136,375,72" concept="1" />
+      <node id="6592112598314499036" at="375,72,376,139" concept="1" />
+      <node id="6592112598314499036" at="376,139,377,57" concept="1" />
+      <node id="6592112598314499036" at="378,9,379,47" concept="6" />
+      <node id="6592112598314499036" at="372,59,378,9" concept="3" />
+      <scope id="6592112598314499036" at="373,54,377,57">
+        <var name="cpb" id="6592112598314499036" />
+      </scope>
+      <scope id="6592112598314499036" at="372,59,379,47" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="6592112598314499036" at="50,0,51,0" concept="8" trace="BuildMps_IdeaPluginModule" />
+      <node id="6592112598314499036" at="121,75,122,64" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="6592112598314499036" at="61,0,62,0" concept="2" trace="myConceptBuildMps_IdeaPluginModule" />
+      <node id="6592112598314499036" at="195,59,196,50" concept="6" />
+      <node id="6592112598314499036" at="752,83,753,182" concept="5" />
+      <node id="6592112598314499036" at="753,182,754,34" concept="1" />
+      <node id="6592112598314499036" at="754,34,755,76" concept="7" />
+      <node id="6592112598314499036" at="755,76,756,75" concept="1" />
+      <node id="6592112598314499036" at="756,75,757,110" concept="1" />
+      <node id="6592112598314499036" at="757,110,758,17" concept="1" />
+      <node id="4034578608468849375" at="758,17,759,122" concept="1" />
+      <node id="6592112598314499037" at="759,122,760,168" concept="1" />
+      <node id="6592112598314499036" at="760,168,761,22" concept="6" />
+      <node id="6592112598314499036" at="752,0,763,0" concept="9" trace="createDescriptorForBuildMps_IdeaPluginModule#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="6592112598314499036" at="195,59,196,50" />
+      <scope id="6592112598314499036" at="752,83,761,22">
+        <var name="b" id="6592112598314499036" />
+      </scope>
+      <scope id="6592112598314499036" at="752,0,763,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/6592112598314499051">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="6592112598314499051" at="46,0,47,0" concept="2" trace="props_BuildMps_IdeaPluginContent" />
+      <node id="6592112598314499051" at="344,55,345,76" concept="5" />
+      <node id="6592112598314499051" at="345,76,346,58" concept="1" />
+      <node id="6592112598314499051" at="347,9,348,48" concept="6" />
+      <node id="6592112598314499051" at="343,60,347,9" concept="3" />
+      <scope id="6592112598314499051" at="344,55,346,58">
+        <var name="cpb" id="6592112598314499051" />
+      </scope>
+      <scope id="6592112598314499051" at="343,60,348,48" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="6592112598314499051" at="46,0,47,0" concept="8" trace="BuildMps_IdeaPluginContent" />
+      <node id="6592112598314499051" at="117,58,118,65" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="6592112598314499051" at="57,0,58,0" concept="2" trace="myConceptBuildMps_IdeaPluginContent" />
+      <node id="6592112598314499051" at="187,60,188,51" concept="6" />
+      <node id="6592112598314499051" at="718,84,719,183" concept="5" />
+      <node id="6592112598314499051" at="719,183,720,33" concept="1" />
+      <node id="6592112598314499051" at="720,33,721,110" concept="1" />
+      <node id="6592112598314499051" at="721,110,722,17" concept="1" />
+      <node id="6592112598314499051" at="722,17,723,22" concept="6" />
+      <node id="6592112598314499051" at="718,0,725,0" concept="9" trace="createDescriptorForBuildMps_IdeaPluginContent#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="6592112598314499051" at="187,60,188,51" />
+      <scope id="6592112598314499051" at="718,84,723,22">
+        <var name="b" id="6592112598314499051" />
+      </scope>
+      <scope id="6592112598314499051" at="718,0,725,0" />
     </file>
   </root>
   <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/6592112598314529916">
-    <file name="qualifiedName_PropertySupport.java">
-      <node id="6592112598314529916" at="8,44,9,28" concept="6" />
-      <node id="6592112598314529916" at="10,24,11,21" concept="2" />
-      <node id="6592112598314529916" at="12,12,13,24" concept="2" />
-      <node id="6592112598314529916" at="14,5,15,83" concept="7" />
-      <node id="6592112598314529916" at="12,10,14,5" concept="0" />
-      <node id="6592112598314529916" at="9,28,14,5" concept="4" />
-      <node id="6592112598314529916" at="8,0,17,0" concept="5" trace="canSetValue#(Ljava/lang/String;)Z" />
-      <scope id="6592112598314529916" at="10,24,11,21" />
-      <scope id="6592112598314529916" at="12,12,13,24" />
-      <scope id="6592112598314529916" at="8,44,15,83">
-        <var name="testValue" id="6592112598314529916" />
+    <file name="StructureAspectDescriptor.java">
+      <node id="6592112598314529916" at="94,0,95,0" concept="2" trace="myCSDatatypequalifiedName" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/6592112598314586625">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="6592112598314586625" at="48,0,49,0" concept="2" trace="props_BuildMps_IdeaPluginGroup" />
+      <node id="6592112598314586625" at="357,53,358,136" concept="5" />
+      <node id="4034578608468929327" at="358,136,359,75" concept="1" />
+      <node id="6592112598314586625" at="359,75,360,138" concept="1" />
+      <node id="6592112598314586625" at="360,138,361,56" concept="1" />
+      <node id="6592112598314586625" at="362,9,363,46" concept="6" />
+      <node id="6592112598314586625" at="356,58,362,9" concept="3" />
+      <scope id="6592112598314586625" at="357,53,361,56">
+        <var name="cpb" id="6592112598314586625" />
       </scope>
-      <scope id="6592112598314529916" at="8,0,17,0">
-        <var name="value" id="6592112598314529916" />
+      <scope id="6592112598314586625" at="356,58,363,46" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="6592112598314586625" at="48,0,49,0" concept="8" trace="BuildMps_IdeaPluginGroup" />
+      <node id="6592112598314586625" at="119,68,120,63" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="6592112598314586625" at="59,0,60,0" concept="2" trace="myConceptBuildMps_IdeaPluginGroup" />
+      <node id="6592112598314586625" at="191,58,192,49" concept="6" />
+      <node id="6592112598314586625" at="733,82,734,181" concept="5" />
+      <node id="6592112598314586625" at="734,181,735,34" concept="1" />
+      <node id="6592112598314586625" at="735,34,736,76" concept="7" />
+      <node id="6592112598314586625" at="736,76,737,75" concept="1" />
+      <node id="6592112598314586625" at="737,75,738,110" concept="1" />
+      <node id="6592112598314586625" at="738,110,739,17" concept="1" />
+      <node id="6592112598314586626" at="739,17,740,168" concept="1" />
+      <node id="4034578608468929327" at="740,168,741,206" concept="1" />
+      <node id="6592112598314586625" at="741,206,742,22" concept="6" />
+      <node id="6592112598314586625" at="733,0,744,0" concept="9" trace="createDescriptorForBuildMps_IdeaPluginGroup#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="6592112598314586625" at="191,58,192,49" />
+      <scope id="6592112598314586625" at="733,82,742,22">
+        <var name="b" id="6592112598314586625" />
       </scope>
-      <unit id="6592112598314529916" at="7,0,18,0" name="jetbrains.mps.build.mps.structure.qualifiedName_PropertySupport" />
+      <scope id="6592112598314586625" at="733,0,744,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/6592112598314795900">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="6592112598314795900" at="25,0,26,0" concept="2" trace="props_BuildMpsLayout_PluginDescriptor" />
+      <node id="6592112598314795900" at="186,60,187,76" concept="5" />
+      <node id="6592112598314795900" at="187,76,188,54" concept="1" />
+      <node id="6592112598314795900" at="188,54,189,63" concept="1" />
+      <node id="6592112598314795900" at="190,9,191,53" concept="6" />
+      <node id="6592112598314795900" at="185,65,190,9" concept="3" />
+      <scope id="6592112598314795900" at="186,60,189,63">
+        <var name="cpb" id="6592112598314795900" />
+      </scope>
+      <scope id="6592112598314795900" at="185,65,191,53" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="6592112598314795900" at="25,0,26,0" concept="8" trace="BuildMpsLayout_PluginDescriptor" />
+      <node id="6592112598314795900" at="96,60,97,70" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="6592112598314795900" at="36,0,37,0" concept="2" trace="myConceptBuildMpsLayout_PluginDescriptor" />
+      <node id="6592112598314795900" at="145,65,146,56" concept="6" />
+      <node id="6592112598314795900" at="431,89,432,188" concept="5" />
+      <node id="6592112598314795900" at="432,188,433,34" concept="1" />
+      <node id="6592112598314795900" at="433,34,434,62" concept="7" />
+      <node id="6592112598314795900" at="434,62,435,76" concept="1" />
+      <node id="6592112598314795900" at="435,76,436,76" concept="1" />
+      <node id="6592112598314795900" at="436,76,437,110" concept="1" />
+      <node id="6592112598314795900" at="437,110,438,17" concept="1" />
+      <node id="6592112598314795901" at="438,17,439,169" concept="1" />
+      <node id="6592112598314795900" at="439,169,440,36" concept="1" />
+      <node id="6592112598314795900" at="440,36,441,22" concept="6" />
+      <node id="6592112598314795900" at="431,0,443,0" concept="9" trace="createDescriptorForBuildMpsLayout_PluginDescriptor#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="6592112598314795900" at="145,65,146,56" />
+      <scope id="6592112598314795900" at="431,89,441,22">
+        <var name="b" id="6592112598314795900" />
+      </scope>
+      <scope id="6592112598314795900" at="431,0,443,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/6818892319992984815">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="6818892319992984815" at="75,0,76,0" concept="2" trace="props_BuildMps_TipsPackage" />
+      <node id="6818892319992984815" at="548,49,549,76" concept="5" />
+      <node id="6818892319992984815" at="549,76,550,57" concept="1" />
+      <node id="6818892319992984815" at="550,57,551,35" concept="1" />
+      <node id="6818892319992984815" at="551,35,552,52" concept="1" />
+      <node id="6818892319992984815" at="553,9,554,42" concept="6" />
+      <node id="6818892319992984815" at="547,54,553,9" concept="3" />
+      <scope id="6818892319992984815" at="548,49,552,52">
+        <var name="cpb" id="6818892319992984815" />
+      </scope>
+      <scope id="6818892319992984815" at="547,54,554,42" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="6818892319992984815" at="75,0,76,0" concept="8" trace="BuildMps_TipsPackage" />
+      <node id="6818892319992984815" at="146,55,147,59" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="6818892319992984815" at="86,0,87,0" concept="2" trace="myConceptBuildMps_TipsPackage" />
+      <node id="6818892319992984815" at="245,54,246,45" concept="6" />
+      <node id="6818892319992984815" at="1015,78,1016,177" concept="5" />
+      <node id="6818892319992984815" at="1016,177,1017,34" concept="1" />
+      <node id="6818892319992984815" at="1017,34,1018,62" concept="7" />
+      <node id="6818892319992984815" at="1018,62,1019,76" concept="1" />
+      <node id="6818892319992984815" at="1019,76,1020,71" concept="1" />
+      <node id="6818892319992984815" at="1020,71,1021,110" concept="1" />
+      <node id="6818892319992984815" at="1021,110,1022,17" concept="1" />
+      <node id="7323166234190549907" at="1022,17,1023,166" concept="1" />
+      <node id="6818892319992984815" at="1023,166,1024,37" concept="1" />
+      <node id="6818892319992984815" at="1024,37,1025,22" concept="6" />
+      <node id="6818892319992984815" at="1015,0,1027,0" concept="9" trace="createDescriptorForBuildMps_TipsPackage#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="6818892319992984815" at="245,54,246,45" />
+      <scope id="6818892319992984815" at="1015,78,1025,22">
+        <var name="b" id="6818892319992984815" />
+      </scope>
+      <scope id="6818892319992984815" at="1015,0,1027,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/7259033139236285166">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="7259033139236285166" at="40,0,41,0" concept="2" trace="props_BuildMps_ExtractedModuleDependency" />
+      <node id="7259033139236285166" at="300,63,301,76" concept="5" />
+      <node id="7259033139236285166" at="301,76,302,45" concept="1" />
+      <node id="7259033139236285166" at="302,45,303,66" concept="1" />
+      <node id="7259033139236285166" at="304,9,305,56" concept="6" />
+      <node id="7259033139236285166" at="299,68,304,9" concept="3" />
+      <scope id="7259033139236285166" at="300,63,303,66">
+        <var name="cpb" id="7259033139236285166" />
+      </scope>
+      <scope id="7259033139236285166" at="299,68,305,56" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="7259033139236285166" at="40,0,41,0" concept="8" trace="BuildMps_ExtractedModuleDependency" />
+      <node id="7259033139236285166" at="111,56,112,73" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="7259033139236285166" at="51,0,52,0" concept="2" trace="myConceptBuildMps_ExtractedModuleDependency" />
+      <node id="7259033139236285166" at="175,68,176,59" concept="6" />
+      <node id="7259033139236285166" at="634,92,635,191" concept="5" />
+      <node id="7259033139236285166" at="635,191,636,34" concept="1" />
+      <node id="7259033139236285166" at="636,34,637,75" concept="7" />
+      <node id="7259033139236285166" at="637,75,638,75" concept="1" />
+      <node id="7259033139236285166" at="638,75,639,110" concept="1" />
+      <node id="7259033139236285166" at="639,110,640,17" concept="1" />
+      <node id="7259033139236285167" at="640,17,641,203" concept="1" />
+      <node id="7259033139236285166" at="641,203,642,49" concept="1" />
+      <node id="7259033139236285166" at="642,49,643,27" concept="1" />
+      <node id="7259033139236285166" at="643,27,644,22" concept="6" />
+      <node id="7259033139236285166" at="634,0,646,0" concept="9" trace="createDescriptorForBuildMps_ExtractedModuleDependency#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="7259033139236285166" at="175,68,176,59" />
+      <scope id="7259033139236285166" at="634,92,644,22">
+        <var name="b" id="7259033139236285166" />
+      </scope>
+      <scope id="7259033139236285166" at="634,0,646,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/763829979718664966">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="763829979718664966" at="65,0,66,0" concept="2" trace="props_BuildMps_ModuleResources" />
+      <node id="763829979718664966" at="478,53,479,76" concept="5" />
+      <node id="763829979718664966" at="479,76,480,76" concept="1" />
+      <node id="763829979718664966" at="480,76,481,58" concept="1" />
+      <node id="763829979718664966" at="481,58,482,56" concept="1" />
+      <node id="763829979718664966" at="483,9,484,46" concept="6" />
+      <node id="763829979718664966" at="477,58,483,9" concept="3" />
+      <scope id="763829979718664966" at="478,53,482,56">
+        <var name="cpb" id="763829979718664966" />
+      </scope>
+      <scope id="763829979718664966" at="477,58,484,46" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="763829979718664966" at="65,0,66,0" concept="8" trace="BuildMps_ModuleResources" />
+      <node id="763829979718664966" at="136,57,137,62" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="763829979718664966" at="76,0,77,0" concept="2" trace="myConceptBuildMps_ModuleResources" />
+      <node id="763829979718664966" at="225,58,226,49" concept="6" />
+      <node id="763829979718664966" at="917,82,918,180" concept="5" />
+      <node id="763829979718664966" at="918,180,919,34" concept="1" />
+      <node id="763829979718664966" at="919,34,920,71" concept="7" />
+      <node id="763829979718664966" at="920,71,921,75" concept="1" />
+      <node id="763829979718664966" at="921,75,922,109" concept="1" />
+      <node id="763829979718664966" at="922,109,923,17" concept="1" />
+      <node id="763829979718664967" at="923,17,924,197" concept="1" />
+      <node id="763829979718664966" at="924,197,925,22" concept="6" />
+      <node id="763829979718664966" at="917,0,927,0" concept="9" trace="createDescriptorForBuildMps_ModuleResources#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="763829979718664966" at="225,58,226,49" />
+      <scope id="763829979718664966" at="917,82,925,22">
+        <var name="b" id="763829979718664966" />
+      </scope>
+      <scope id="763829979718664966" at="917,0,927,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/7655580649838764660">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="7655580649838764660" at="22,0,23,0" concept="2" trace="props_BuildMpsLayout_ModuleXml" />
+      <node id="7655580649838764660" at="165,53,166,76" concept="5" />
+      <node id="7655580649838764660" at="166,76,167,54" concept="1" />
+      <node id="7655580649838764660" at="167,54,168,56" concept="1" />
+      <node id="7655580649838764660" at="169,9,170,46" concept="6" />
+      <node id="7655580649838764660" at="164,58,169,9" concept="3" />
+      <scope id="7655580649838764660" at="165,53,168,56">
+        <var name="cpb" id="7655580649838764660" />
+      </scope>
+      <scope id="7655580649838764660" at="164,58,170,46" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="7655580649838764660" at="22,0,23,0" concept="8" trace="BuildMpsLayout_ModuleXml" />
+      <node id="7655580649838764660" at="93,67,94,63" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="7655580649838764660" at="33,0,34,0" concept="2" trace="myConceptBuildMpsLayout_ModuleXml" />
+      <node id="7655580649838764660" at="139,58,140,49" concept="6" />
+      <node id="7655580649838764660" at="390,82,391,181" concept="5" />
+      <node id="7655580649838764660" at="391,181,392,34" concept="1" />
+      <node id="7655580649838764660" at="392,34,393,62" concept="7" />
+      <node id="7655580649838764660" at="393,62,394,76" concept="1" />
+      <node id="7655580649838764660" at="394,76,395,76" concept="1" />
+      <node id="7655580649838764660" at="395,76,396,110" concept="1" />
+      <node id="7655580649838764660" at="396,110,397,17" concept="1" />
+      <node id="7655580649838764661" at="397,17,398,168" concept="1" />
+      <node id="4356762679305686649" at="398,168,399,203" concept="1" />
+      <node id="506537499308757750" at="399,203,400,207" concept="1" />
+      <node id="7477562766051177430" at="400,207,401,211" concept="1" />
+      <node id="8488591998064324395" at="401,211,402,206" concept="1" />
+      <node id="6654070855063054711" at="402,206,403,204" concept="1" />
+      <node id="7655580649838764660" at="403,204,404,36" concept="1" />
+      <node id="7655580649838764660" at="404,36,405,22" concept="6" />
+      <node id="7655580649838764660" at="390,0,407,0" concept="9" trace="createDescriptorForBuildMpsLayout_ModuleXml#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="7655580649838764660" at="139,58,140,49" />
+      <scope id="7655580649838764660" at="390,82,405,22">
+        <var name="b" id="7655580649838764660" />
+      </scope>
+      <scope id="7655580649838764660" at="390,0,407,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/7753544965996377997">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="7753544965996377997" at="28,0,29,0" concept="2" trace="props_BuildMps_Branding" />
+      <node id="7753544965996377997" at="205,46,206,136" concept="5" />
+      <node id="3497141547781541444" at="206,136,207,62" concept="1" />
+      <node id="3497141547781541445" at="207,62,208,62" concept="1" />
+      <node id="4237758264760168561" at="208,62,209,65" concept="1" />
+      <node id="3497141547781541446" at="209,65,210,60" concept="1" />
+      <node id="6108265972537229339" at="210,60,211,66" concept="1" />
+      <node id="6108265972537229338" at="211,66,212,66" concept="1" />
+      <node id="6108265972537229340" at="212,66,213,72" concept="1" />
+      <node id="781140262677761022" at="213,72,214,66" concept="1" />
+      <node id="6845119683729874664" at="214,66,215,74" concept="1" />
+      <node id="6099622527104884073" at="215,74,216,71" concept="1" />
+      <node id="5894421362118014164" at="216,71,217,70" concept="1" />
+      <node id="7753544965996377997" at="217,70,218,71" concept="1" />
+      <node id="7753544965996377997" at="218,71,219,35" concept="1" />
+      <node id="7753544965996377997" at="219,35,220,49" concept="1" />
+      <node id="7753544965996377997" at="221,9,222,39" concept="6" />
+      <node id="7753544965996377997" at="204,51,221,9" concept="3" />
+      <scope id="7753544965996377997" at="205,46,220,49">
+        <var name="cpb" id="7753544965996377997" />
+      </scope>
+      <scope id="7753544965996377997" at="204,51,222,39" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="7753544965996377997" at="28,0,29,0" concept="8" trace="BuildMps_Branding" />
+      <node id="7753544965996377997" at="99,61,100,56" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="7753544965996377997" at="39,0,40,0" concept="2" trace="myConceptBuildMps_Branding" />
+      <node id="7753544965996377997" at="151,51,152,42" concept="6" />
+      <node id="7753544965996377997" at="463,75,464,174" concept="5" />
+      <node id="7753544965996377997" at="464,174,465,34" concept="1" />
+      <node id="7753544965996377997" at="465,34,466,62" concept="7" />
+      <node id="7753544965996377997" at="466,62,467,76" concept="1" />
+      <node id="7753544965996377997" at="467,76,468,76" concept="1" />
+      <node id="7753544965996377997" at="468,76,469,110" concept="1" />
+      <node id="7753544965996377997" at="469,110,470,17" concept="1" />
+      <node id="3497141547781541444" at="470,17,471,112" concept="1" />
+      <node id="3497141547781541445" at="471,112,472,112" concept="1" />
+      <node id="4237758264760168561" at="472,112,473,114" concept="1" />
+      <node id="3497141547781541446" at="473,114,474,110" concept="1" />
+      <node id="3497141547781549827" at="474,110,475,201" concept="1" />
+      <node id="781140262677914381" at="475,201,476,196" concept="1" />
+      <node id="4157435862321767641" at="476,196,477,199" concept="1" />
+      <node id="6108265972537229337" at="477,199,478,204" concept="1" />
+      <node id="1462305029084462472" at="478,204,479,202" concept="1" />
+      <node id="6108265972537182996" at="479,202,480,206" concept="1" />
+      <node id="8795525031433238889" at="480,206,481,201" concept="1" />
+      <node id="6845119683729294884" at="481,201,482,206" concept="1" />
+      <node id="6845119683729337285" at="482,206,483,202" concept="1" />
+      <node id="7962467864633062782" at="483,202,484,207" concept="1" />
+      <node id="6108265972537182997" at="484,207,485,204" concept="1" />
+      <node id="1084163669516639223" at="485,204,486,201" concept="1" />
+      <node id="1084163669516664629" at="486,201,487,210" concept="1" />
+      <node id="1084163669516664664" at="487,210,488,200" concept="1" />
+      <node id="1084163669516694195" at="488,200,489,197" concept="1" />
+      <node id="1084163669516694232" at="489,197,490,197" concept="1" />
+      <node id="1084163669516694346" at="490,197,491,197" concept="1" />
+      <node id="1084163669516694385" at="491,197,492,197" concept="1" />
+      <node id="6108265972537229339" at="492,197,493,199" concept="1" />
+      <node id="6108265972537229338" at="493,199,494,199" concept="1" />
+      <node id="6108265972537229340" at="494,199,495,205" concept="1" />
+      <node id="781140262677761022" at="495,205,496,198" concept="1" />
+      <node id="62678610895108142" at="496,198,497,192" concept="1" />
+      <node id="62678610895108195" at="497,192,498,198" concept="1" />
+      <node id="6845119683729280452" at="498,198,499,197" concept="1" />
+      <node id="6845119683729874664" at="499,197,500,207" concept="1" />
+      <node id="6108265972537372847" at="500,207,501,200" concept="1" />
+      <node id="6108265972537372848" at="501,200,502,201" concept="1" />
+      <node id="922958177840117010" at="502,201,503,198" concept="1" />
+      <node id="922958177840117051" at="503,198,504,197" concept="1" />
+      <node id="6222348044815161049" at="504,197,505,198" concept="1" />
+      <node id="772379520210716142" at="505,198,506,203" concept="1" />
+      <node id="6099622527104884073" at="506,203,507,204" concept="1" />
+      <node id="781140262677761833" at="507,204,508,198" concept="1" />
+      <node id="6108265972537335245" at="508,198,509,205" concept="1" />
+      <node id="437343344536486297" at="509,205,510,194" concept="1" />
+      <node id="5894421362116952242" at="510,194,511,206" concept="1" />
+      <node id="5894421362117323157" at="511,206,512,200" concept="1" />
+      <node id="8877724874822185910" at="512,200,513,204" concept="1" />
+      <node id="781140262677906594" at="513,204,514,199" concept="1" />
+      <node id="5894421362117677753" at="514,199,515,198" concept="1" />
+      <node id="5894421362118014164" at="515,198,516,203" concept="1" />
+      <node id="6845119683729424406" at="516,203,517,208" concept="1" />
+      <node id="781140262677951053" at="517,208,518,194" concept="1" />
+      <node id="7753544965996377997" at="518,194,519,29" concept="1" />
+      <node id="7753544965996377997" at="519,29,520,22" concept="6" />
+      <node id="7753544965996377997" at="463,0,522,0" concept="9" trace="createDescriptorForBuildMps_Branding#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="7753544965996377997" at="151,51,152,42" />
+      <scope id="7753544965996377997" at="463,75,520,22">
+        <var name="b" id="7753544965996377997" />
+      </scope>
+      <scope id="7753544965996377997" at="463,0,522,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/7753544965996489991">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="7753544965996489991" at="33,0,34,0" concept="2" trace="props_BuildMps_BrandingUpdateSite" />
+      <node id="7753544965996489991" at="252,56,253,76" concept="5" />
+      <node id="7753544965996489991" at="253,76,254,48" concept="1" />
+      <node id="7753544965996489991" at="254,48,255,59" concept="1" />
+      <node id="7753544965996489991" at="256,9,257,49" concept="6" />
+      <node id="7753544965996489991" at="251,61,256,9" concept="3" />
+      <scope id="7753544965996489991" at="252,56,255,59">
+        <var name="cpb" id="7753544965996489991" />
+      </scope>
+      <scope id="7753544965996489991" at="251,61,257,49" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="7753544965996489991" at="33,0,34,0" concept="8" trace="BuildMps_BrandingUpdateSite" />
+      <node id="7753544965996489991" at="104,60,105,66" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="7753544965996489991" at="44,0,45,0" concept="2" trace="myConceptBuildMps_BrandingUpdateSite" />
+      <node id="7753544965996489991" at="161,61,162,52" concept="6" />
+      <node id="7753544965996489991" at="564,85,565,184" concept="5" />
+      <node id="7753544965996489991" at="565,184,566,34" concept="1" />
+      <node id="7753544965996489991" at="566,34,567,110" concept="1" />
+      <node id="7753544965996489991" at="567,110,568,17" concept="1" />
+      <node id="6108265972537335224" at="568,17,569,201" concept="1" />
+      <node id="6108265972537335225" at="569,201,570,202" concept="1" />
+      <node id="8795525031433091059" at="570,202,571,206" concept="1" />
+      <node id="7753544965996489991" at="571,206,572,30" concept="1" />
+      <node id="7753544965996489991" at="572,30,573,22" concept="6" />
+      <node id="7753544965996489991" at="564,0,575,0" concept="9" trace="createDescriptorForBuildMps_BrandingUpdateSite#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="7753544965996489991" at="161,61,162,52" />
+      <scope id="7753544965996489991" at="564,85,573,22">
+        <var name="b" id="7753544965996489991" />
+      </scope>
+      <scope id="7753544965996489991" at="564,0,575,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/7753544965996489992">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="7753544965996489992" at="30,0,31,0" concept="2" trace="props_BuildMps_BrandingHelp" />
+      <node id="7753544965996489992" at="231,50,232,76" concept="5" />
+      <node id="7753544965996489992" at="232,76,233,38" concept="1" />
+      <node id="7753544965996489992" at="233,38,234,53" concept="1" />
+      <node id="7753544965996489992" at="235,9,236,43" concept="6" />
+      <node id="7753544965996489992" at="230,55,235,9" concept="3" />
+      <scope id="7753544965996489992" at="231,50,234,53">
+        <var name="cpb" id="7753544965996489992" />
+      </scope>
+      <scope id="7753544965996489992" at="230,55,236,43" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="7753544965996489992" at="30,0,31,0" concept="8" trace="BuildMps_BrandingHelp" />
+      <node id="7753544965996489992" at="101,62,102,60" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="7753544965996489992" at="41,0,42,0" concept="2" trace="myConceptBuildMps_BrandingHelp" />
+      <node id="7753544965996489992" at="155,55,156,46" concept="6" />
+      <node id="7753544965996489992" at="533,79,534,178" concept="5" />
+      <node id="7753544965996489992" at="534,178,535,34" concept="1" />
+      <node id="7753544965996489992" at="535,34,536,110" concept="1" />
+      <node id="7753544965996489992" at="536,110,537,17" concept="1" />
+      <node id="437343344536486294" at="537,17,538,194" concept="1" />
+      <node id="437343344536486295" at="538,194,539,195" concept="1" />
+      <node id="437343344536486296" at="539,195,540,196" concept="1" />
+      <node id="7753544965996489992" at="540,196,541,20" concept="1" />
+      <node id="7753544965996489992" at="541,20,542,22" concept="6" />
+      <node id="7753544965996489992" at="533,0,544,0" concept="9" trace="createDescriptorForBuildMps_BrandingHelp#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="7753544965996489992" at="155,55,156,46" />
+      <scope id="7753544965996489992" at="533,79,542,22">
+        <var name="b" id="7753544965996489992" />
+      </scope>
+      <scope id="7753544965996489992" at="533,0,544,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/781140262677762159">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="781140262677762159" at="32,0,33,0" concept="2" trace="props_BuildMps_BrandingStats" />
+      <node id="781140262677762159" at="245,51,246,76" concept="5" />
+      <node id="781140262677762159" at="246,76,247,52" concept="1" />
+      <node id="781140262677762159" at="247,52,248,54" concept="1" />
+      <node id="781140262677762159" at="249,9,250,44" concept="6" />
+      <node id="781140262677762159" at="244,56,249,9" concept="3" />
+      <scope id="781140262677762159" at="245,51,248,54">
+        <var name="cpb" id="781140262677762159" />
+      </scope>
+      <scope id="781140262677762159" at="244,56,250,44" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="781140262677762159" at="32,0,33,0" concept="8" trace="BuildMps_BrandingStats" />
+      <node id="781140262677762159" at="103,62,104,60" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="781140262677762159" at="43,0,44,0" concept="2" trace="myConceptBuildMps_BrandingStats" />
+      <node id="781140262677762159" at="159,56,160,47" concept="6" />
+      <node id="781140262677762159" at="554,80,555,178" concept="5" />
+      <node id="781140262677762159" at="555,178,556,34" concept="1" />
+      <node id="781140262677762159" at="556,34,557,109" concept="1" />
+      <node id="781140262677762159" at="557,109,558,17" concept="1" />
+      <node id="781140262677779095" at="558,17,559,199" concept="1" />
+      <node id="781140262677779096" at="559,199,560,198" concept="1" />
+      <node id="781140262677762159" at="560,198,561,34" concept="1" />
+      <node id="781140262677762159" at="561,34,562,22" concept="6" />
+      <node id="781140262677762159" at="554,0,564,0" concept="9" trace="createDescriptorForBuildMps_BrandingStats#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="781140262677762159" at="159,56,160,47" />
+      <scope id="781140262677762159" at="554,80,562,22">
+        <var name="b" id="781140262677762159" />
+      </scope>
+      <scope id="781140262677762159" at="554,0,564,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/781140262677906392">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="781140262677906392" at="29,0,30,0" concept="2" trace="props_BuildMps_BrandingCompany" />
+      <node id="781140262677906392" at="224,53,225,76" concept="5" />
+      <node id="781140262677906392" at="225,76,226,53" concept="1" />
+      <node id="781140262677906392" at="226,53,227,56" concept="1" />
+      <node id="781140262677906392" at="228,9,229,46" concept="6" />
+      <node id="781140262677906392" at="223,58,228,9" concept="3" />
+      <scope id="781140262677906392" at="224,53,227,56">
+        <var name="cpb" id="781140262677906392" />
+      </scope>
+      <scope id="781140262677906392" at="223,58,229,46" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="781140262677906392" at="29,0,30,0" concept="8" trace="BuildMps_BrandingCompany" />
+      <node id="781140262677906392" at="100,56,101,62" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="781140262677906392" at="40,0,41,0" concept="2" trace="myConceptBuildMps_BrandingCompany" />
+      <node id="781140262677906392" at="153,58,154,49" concept="6" />
+      <node id="781140262677906392" at="522,82,523,180" concept="5" />
+      <node id="781140262677906392" at="523,180,524,34" concept="1" />
+      <node id="781140262677906392" at="524,34,525,109" concept="1" />
+      <node id="781140262677906392" at="525,109,526,17" concept="1" />
+      <node id="781140262677906401" at="526,17,527,195" concept="1" />
+      <node id="781140262677906402" at="527,195,528,194" concept="1" />
+      <node id="2355727383336213970" at="528,194,529,207" concept="1" />
+      <node id="781140262677906392" at="529,207,530,35" concept="1" />
+      <node id="781140262677906392" at="530,35,531,22" concept="6" />
+      <node id="781140262677906392" at="522,0,533,0" concept="9" trace="createDescriptorForBuildMps_BrandingCompany#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="781140262677906392" at="153,58,154,49" />
+      <scope id="781140262677906392" at="522,82,531,22">
+        <var name="b" id="781140262677906392" />
+      </scope>
+      <scope id="781140262677906392" at="522,0,533,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/7832771629084799699">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="7832771629084799699" at="51,0,52,0" concept="2" trace="props_BuildMps_IdeaPluginVendor" />
+      <node id="7832771629084799699" at="381,54,382,76" concept="5" />
+      <node id="7832771629084799699" at="382,76,383,59" concept="1" />
+      <node id="7832771629084799699" at="383,59,384,57" concept="1" />
+      <node id="7832771629084799699" at="385,9,386,47" concept="6" />
+      <node id="7832771629084799699" at="380,59,385,9" concept="3" />
+      <scope id="7832771629084799699" at="381,54,384,57">
+        <var name="cpb" id="7832771629084799699" />
+      </scope>
+      <scope id="7832771629084799699" at="380,59,386,47" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="7832771629084799699" at="51,0,52,0" concept="8" trace="BuildMps_IdeaPluginVendor" />
+      <node id="7832771629084799699" at="122,64,123,64" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="7832771629084799699" at="62,0,63,0" concept="2" trace="myConceptBuildMps_IdeaPluginVendor" />
+      <node id="7832771629084799699" at="197,59,198,50" concept="6" />
+      <node id="7832771629084799699" at="763,83,764,182" concept="5" />
+      <node id="7832771629084799699" at="764,182,765,34" concept="1" />
+      <node id="7832771629084799699" at="765,34,766,110" concept="1" />
+      <node id="7832771629084799699" at="766,110,767,17" concept="1" />
+      <node id="7832771629084799701" at="767,17,768,109" concept="1" />
+      <node id="7832771629084799702" at="768,109,769,110" concept="1" />
+      <node id="7832771629084799699" at="769,110,770,22" concept="6" />
+      <node id="7832771629084799699" at="763,0,772,0" concept="9" trace="createDescriptorForBuildMps_IdeaPluginVendor#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="7832771629084799699" at="197,59,198,50" />
+      <scope id="7832771629084799699" at="763,83,770,22">
+        <var name="b" id="7832771629084799699" />
+      </scope>
+      <scope id="7832771629084799699" at="763,0,772,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/7862711839422606209">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="7862711839422606209" at="43,0,44,0" concept="2" trace="props_BuildMps_GeneratorRef" />
+      <node id="7862711839422606209" at="321,50,322,76" concept="5" />
+      <node id="7862711839422606209" at="322,76,323,67" concept="1" />
+      <node id="7862711839422606209" at="323,67,324,142" concept="1" />
+      <node id="7862711839422606209" at="324,142,325,53" concept="1" />
+      <node id="7862711839422606209" at="326,9,327,43" concept="6" />
+      <node id="7862711839422606209" at="320,55,326,9" concept="3" />
+      <scope id="7862711839422606209" at="321,50,325,53">
+        <var name="cpb" id="7862711839422606209" />
+      </scope>
+      <scope id="7862711839422606209" at="320,55,327,43" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="7862711839422606209" at="43,0,44,0" concept="8" trace="BuildMps_GeneratorRef" />
+      <node id="7862711839422606209" at="114,64,115,60" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="7862711839422606209" at="54,0,55,0" concept="2" trace="myConceptBuildMps_GeneratorRef" />
+      <node id="7862711839422606209" at="181,55,182,46" concept="6" />
+      <node id="7862711839422606209" at="675,79,676,178" concept="5" />
+      <node id="7862711839422606209" at="676,178,677,34" concept="1" />
+      <node id="7862711839422606209" at="677,34,678,110" concept="1" />
+      <node id="7862711839422606209" at="678,110,679,17" concept="1" />
+      <node id="7862711839422606210" at="679,17,680,172" concept="1" />
+      <node id="7862711839422606209" at="680,172,681,22" concept="6" />
+      <node id="7862711839422606209" at="675,0,683,0" concept="9" trace="createDescriptorForBuildMps_GeneratorRef#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="7862711839422606209" at="181,55,182,46" />
+      <scope id="7862711839422606209" at="675,79,681,22">
+        <var name="b" id="7862711839422606209" />
+      </scope>
+      <scope id="7862711839422606209" at="675,0,683,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/7939233666839079194">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="7939233666839079194" at="64,0,65,0" concept="2" trace="props_BuildMps_ModuleRef" />
+      <node id="7939233666839079194" at="470,47,471,76" concept="5" />
+      <node id="7939233666839079194" at="471,76,472,57" concept="1" />
+      <node id="7939233666839079194" at="472,57,473,139" concept="1" />
+      <node id="7939233666839079194" at="473,139,474,50" concept="1" />
+      <node id="7939233666839079194" at="475,9,476,40" concept="6" />
+      <node id="7939233666839079194" at="469,52,475,9" concept="3" />
+      <scope id="7939233666839079194" at="470,47,474,50">
+        <var name="cpb" id="7939233666839079194" />
+      </scope>
+      <scope id="7939233666839079194" at="469,52,476,40" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="7939233666839079194" at="64,0,65,0" concept="8" trace="BuildMps_ModuleRef" />
+      <node id="7939233666839079194" at="135,63,136,57" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="7939233666839079194" at="75,0,76,0" concept="2" trace="myConceptBuildMps_ModuleRef" />
+      <node id="7939233666839079194" at="223,52,224,43" concept="6" />
+      <node id="7939233666839079194" at="909,76,910,175" concept="5" />
+      <node id="7939233666839079194" at="910,175,911,34" concept="1" />
+      <node id="7939233666839079194" at="911,34,912,110" concept="1" />
+      <node id="7939233666839079194" at="912,110,913,17" concept="1" />
+      <node id="7939233666839079195" at="913,17,914,169" concept="1" />
+      <node id="7939233666839079194" at="914,169,915,22" concept="6" />
+      <node id="7939233666839079194" at="909,0,917,0" concept="9" trace="createDescriptorForBuildMps_ModuleRef#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="7939233666839079194" at="223,52,224,43" />
+      <scope id="7939233666839079194" at="909,76,915,22">
+        <var name="b" id="7939233666839079194" />
+      </scope>
+      <scope id="7939233666839079194" at="909,0,917,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/8174907532628842428">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="8174907532628842428" at="71,0,72,0" concept="2" trace="props_BuildMps_Tips" />
+      <node id="8174907532628842428" at="519,42,520,76" concept="5" />
+      <node id="8174907532628842428" at="520,76,521,35" concept="1" />
+      <node id="8174907532628842428" at="521,35,522,45" concept="1" />
+      <node id="8174907532628842428" at="523,9,524,35" concept="6" />
+      <node id="8174907532628842428" at="518,47,523,9" concept="3" />
+      <scope id="8174907532628842428" at="519,42,522,45">
+        <var name="cpb" id="8174907532628842428" />
+      </scope>
+      <scope id="8174907532628842428" at="518,47,524,35" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="8174907532628842428" at="71,0,72,0" concept="8" trace="BuildMps_Tips" />
+      <node id="8174907532628842428" at="142,56,143,52" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="8174907532628842428" at="82,0,83,0" concept="2" trace="myConceptBuildMps_Tips" />
+      <node id="8174907532628842428" at="237,47,238,38" concept="6" />
+      <node id="8174907532628842428" at="974,71,975,170" concept="5" />
+      <node id="8174907532628842428" at="975,170,976,34" concept="1" />
+      <node id="8174907532628842428" at="976,34,977,62" concept="7" />
+      <node id="8174907532628842428" at="977,62,978,76" concept="1" />
+      <node id="8174907532628842428" at="978,76,979,71" concept="1" />
+      <node id="8174907532628842428" at="979,71,980,110" concept="1" />
+      <node id="8174907532628842428" at="980,110,981,17" concept="1" />
+      <node id="8174907532631382423" at="981,17,982,198" concept="1" />
+      <node id="8174907532628842428" at="982,198,983,29" concept="1" />
+      <node id="8174907532628842428" at="983,29,984,22" concept="6" />
+      <node id="8174907532628842428" at="974,0,986,0" concept="9" trace="createDescriptorForBuildMps_Tips#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="8174907532628842428" at="237,47,238,38" />
+      <scope id="8174907532628842428" at="974,71,984,22">
+        <var name="b" id="8174907532628842428" />
+      </scope>
+      <scope id="8174907532628842428" at="974,0,986,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/8174907532631382422">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="8174907532631382422" at="73,0,74,0" concept="2" trace="props_BuildMps_TipsImport" />
+      <node id="8174907532631382422" at="534,48,535,76" concept="5" />
+      <node id="8174907532631382422" at="535,76,536,51" concept="1" />
+      <node id="8174907532631382422" at="537,9,538,41" concept="6" />
+      <node id="8174907532631382422" at="533,53,537,9" concept="3" />
+      <scope id="8174907532631382422" at="534,48,536,51">
+        <var name="cpb" id="8174907532631382422" />
+      </scope>
+      <scope id="8174907532631382422" at="533,53,538,41" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="8174907532631382422" at="73,0,74,0" concept="8" trace="BuildMps_TipsImport" />
+      <node id="8174907532631382422" at="144,55,145,58" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="8174907532631382422" at="84,0,85,0" concept="2" trace="myConceptBuildMps_TipsImport" />
+      <node id="8174907532631382422" at="241,53,242,44" concept="6" />
+      <node id="8174907532631382422" at="998,77,999,176" concept="5" />
+      <node id="8174907532631382422" at="999,176,1000,33" concept="1" />
+      <node id="8174907532631382422" at="1000,33,1001,110" concept="1" />
+      <node id="8174907532631382422" at="1001,110,1002,17" concept="1" />
+      <node id="8174907532631382422" at="1002,17,1003,22" concept="6" />
+      <node id="8174907532631382422" at="998,0,1005,0" concept="9" trace="createDescriptorForBuildMps_TipsImport#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="8174907532631382422" at="241,53,242,44" />
+      <scope id="8174907532631382422" at="998,77,1003,22">
+        <var name="b" id="8174907532631382422" />
+      </scope>
+      <scope id="8174907532631382422" at="998,0,1005,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/8174907532631382425">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="8174907532631382425" at="74,0,75,0" concept="2" trace="props_BuildMps_TipsMps" />
+      <node id="8174907532631382425" at="540,45,541,76" concept="5" />
+      <node id="8174907532631382425" at="541,76,542,48" concept="1" />
+      <node id="8174907532631382425" at="542,48,543,42" concept="1" />
+      <node id="8174907532631382425" at="543,42,544,48" concept="1" />
+      <node id="8174907532631382425" at="545,9,546,38" concept="6" />
+      <node id="8174907532631382425" at="539,50,545,9" concept="3" />
+      <scope id="8174907532631382425" at="540,45,544,48">
+        <var name="cpb" id="8174907532631382425" />
+      </scope>
+      <scope id="8174907532631382425" at="539,50,546,38" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="8174907532631382425" at="74,0,75,0" concept="8" trace="BuildMps_TipsMps" />
+      <node id="8174907532631382425" at="145,58,146,55" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="8174907532631382425" at="85,0,86,0" concept="2" trace="myConceptBuildMps_TipsMps" />
+      <node id="8174907532631382425" at="243,50,244,41" concept="6" />
+      <node id="8174907532631382425" at="1005,74,1006,173" concept="5" />
+      <node id="8174907532631382425" at="1006,173,1007,34" concept="1" />
+      <node id="8174907532631382425" at="1007,34,1008,69" concept="7" />
+      <node id="8174907532631382425" at="1008,69,1009,75" concept="1" />
+      <node id="8174907532631382425" at="1009,75,1010,110" concept="1" />
+      <node id="8174907532631382425" at="1010,110,1011,17" concept="1" />
+      <node id="8174907532631382425" at="1011,17,1012,24" concept="1" />
+      <node id="8174907532631382425" at="1012,24,1013,22" concept="6" />
+      <node id="8174907532631382425" at="1005,0,1015,0" concept="9" trace="createDescriptorForBuildMps_TipsMps#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="8174907532631382425" at="243,50,244,41" />
+      <scope id="8174907532631382425" at="1005,74,1013,22">
+        <var name="b" id="8174907532631382425" />
+      </scope>
+      <scope id="8174907532631382425" at="1005,0,1015,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/8174907532631605600">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="8174907532631605600" at="72,0,73,0" concept="2" trace="props_BuildMps_TipsDir" />
+      <node id="8174907532631605600" at="526,45,527,76" concept="5" />
+      <node id="8174907532631605600" at="527,76,528,53" concept="1" />
+      <node id="8174907532631605600" at="528,53,529,48" concept="1" />
+      <node id="8174907532631605600" at="529,48,530,48" concept="1" />
+      <node id="8174907532631605600" at="531,9,532,38" concept="6" />
+      <node id="8174907532631605600" at="525,50,531,9" concept="3" />
+      <scope id="8174907532631605600" at="526,45,530,48">
+        <var name="cpb" id="8174907532631605600" />
+      </scope>
+      <scope id="8174907532631605600" at="525,50,532,38" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="8174907532631605600" at="72,0,73,0" concept="8" trace="BuildMps_TipsDir" />
+      <node id="8174907532631605600" at="143,52,144,55" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="8174907532631605600" at="83,0,84,0" concept="2" trace="myConceptBuildMps_TipsDir" />
+      <node id="8174907532631605600" at="239,50,240,41" concept="6" />
+      <node id="8174907532631605600" at="986,74,987,173" concept="5" />
+      <node id="8174907532631605600" at="987,173,988,34" concept="1" />
+      <node id="8174907532631605600" at="988,34,989,69" concept="7" />
+      <node id="8174907532631605600" at="989,69,990,75" concept="1" />
+      <node id="8174907532631605600" at="990,75,991,110" concept="1" />
+      <node id="8174907532631605600" at="991,110,992,17" concept="1" />
+      <node id="5102190059026414894" at="992,17,993,114" concept="1" />
+      <node id="5102190059026414892" at="993,114,994,198" concept="1" />
+      <node id="8174907532631605600" at="994,198,995,30" concept="1" />
+      <node id="8174907532631605600" at="995,30,996,22" concept="6" />
+      <node id="8174907532631605600" at="986,0,998,0" concept="9" trace="createDescriptorForBuildMps_TipsDir#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="8174907532631605600" at="239,50,240,41" />
+      <scope id="8174907532631605600" at="986,74,996,22">
+        <var name="b" id="8174907532631605600" />
+      </scope>
+      <scope id="8174907532631605600" at="986,0,998,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/8174907532632110020">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="8174907532632110020" at="76,0,77,0" concept="2" trace="props_BuildMps_TipsSolution" />
+      <node id="8174907532632110020" at="556,50,557,76" concept="5" />
+      <node id="8174907532632110020" at="557,76,558,65" concept="1" />
+      <node id="8174907532632110020" at="558,65,559,47" concept="1" />
+      <node id="8174907532632110020" at="559,47,560,53" concept="1" />
+      <node id="8174907532632110020" at="561,9,562,43" concept="6" />
+      <node id="8174907532632110020" at="555,55,561,9" concept="3" />
+      <scope id="8174907532632110020" at="556,50,560,53">
+        <var name="cpb" id="8174907532632110020" />
+      </scope>
+      <scope id="8174907532632110020" at="555,55,562,43" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="8174907532632110020" at="76,0,77,0" concept="8" trace="BuildMps_TipsSolution" />
+      <node id="8174907532632110020" at="147,59,148,60" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="8174907532632110020" at="87,0,88,0" concept="2" trace="myConceptBuildMps_TipsSolution" />
+      <node id="8174907532632110020" at="247,55,248,46" concept="6" />
+      <node id="8174907532632110020" at="1027,79,1028,178" concept="5" />
+      <node id="8174907532632110020" at="1028,178,1029,34" concept="1" />
+      <node id="8174907532632110020" at="1029,34,1030,69" concept="7" />
+      <node id="8174907532632110020" at="1030,69,1031,75" concept="1" />
+      <node id="8174907532632110020" at="1031,75,1032,110" concept="1" />
+      <node id="8174907532632110020" at="1032,110,1033,17" concept="1" />
+      <node id="6613562591795606304" at="1033,17,1034,170" concept="1" />
+      <node id="8624281949500666058" at="1034,170,1035,197" concept="1" />
+      <node id="8174907532632110020" at="1035,197,1036,29" concept="1" />
+      <node id="8174907532632110020" at="1036,29,1037,22" concept="6" />
+      <node id="8174907532632110020" at="1027,0,1039,0" concept="9" trace="createDescriptorForBuildMps_TipsSolution#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="8174907532632110020" at="247,55,248,46" />
+      <scope id="8174907532632110020" at="1027,79,1037,22">
+        <var name="b" id="8174907532632110020" />
+      </scope>
+      <scope id="8174907532632110020" at="1027,0,1039,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/868032131020265945">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="868032131020265945" at="13,0,14,0" concept="2" trace="props_BuildMPSPlugin" />
+      <node id="868032131020265945" at="95,43,96,76" concept="5" />
+      <node id="868032131020265945" at="96,76,97,88" concept="1" />
+      <node id="868032131020265945" at="97,88,98,37" concept="1" />
+      <node id="868032131020265945" at="98,37,99,46" concept="1" />
+      <node id="868032131020265945" at="100,9,101,36" concept="6" />
+      <node id="868032131020265945" at="94,48,100,9" concept="3" />
+      <scope id="868032131020265945" at="95,43,99,46">
+        <var name="cpb" id="868032131020265945" />
+      </scope>
+      <scope id="868032131020265945" at="94,48,101,36" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="868032131020265945" at="13,0,14,0" concept="8" trace="BuildMPSPlugin" />
+      <node id="868032131020265945" at="84,72,85,52" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="868032131020265945" at="24,0,25,0" concept="2" trace="myConceptBuildMPSPlugin" />
+      <node id="868032131020265945" at="121,48,122,39" concept="6" />
+      <node id="868032131020265945" at="282,72,283,170" concept="5" />
+      <node id="868032131020265945" at="283,170,284,34" concept="1" />
+      <node id="868032131020265945" at="284,34,285,57" concept="7" />
+      <node id="868032131020265945" at="285,57,286,76" concept="1" />
+      <node id="868032131020265945" at="286,76,287,75" concept="1" />
+      <node id="868032131020265945" at="287,75,288,109" concept="1" />
+      <node id="868032131020265945" at="288,109,289,17" concept="1" />
+      <node id="4571516170012626612" at="289,17,290,118" concept="1" />
+      <node id="868032131020265945" at="290,118,291,19" concept="1" />
+      <node id="868032131020265945" at="291,19,292,22" concept="6" />
+      <node id="868032131020265945" at="282,0,294,0" concept="9" trace="createDescriptorForBuildMPSPlugin#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="868032131020265945" at="121,48,122,39" />
+      <scope id="868032131020265945" at="282,72,292,22">
+        <var name="b" id="868032131020265945" />
+      </scope>
+      <scope id="868032131020265945" at="282,0,294,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/8971171305100238972">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="8971171305100238972" at="60,0,61,0" concept="2" trace="props_BuildMps_ModuleDependencyTargetLanguage" />
+      <node id="8971171305100238972" at="442,68,443,76" concept="5" />
+      <node id="8971171305100238972" at="443,76,444,148" concept="1" />
+      <node id="8971171305100238972" at="444,148,445,71" concept="1" />
+      <node id="8971171305100238972" at="446,9,447,61" concept="6" />
+      <node id="8971171305100238972" at="441,73,446,9" concept="3" />
+      <scope id="8971171305100238972" at="442,68,445,71">
+        <var name="cpb" id="8971171305100238972" />
+      </scope>
+      <scope id="8971171305100238972" at="441,73,447,61" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="8971171305100238972" at="60,0,61,0" concept="8" trace="BuildMps_ModuleDependencyTargetLanguage" />
+      <node id="8971171305100238972" at="131,72,132,78" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="8971171305100238972" at="71,0,72,0" concept="2" trace="myConceptBuildMps_ModuleDependencyTargetLanguage" />
+      <node id="8971171305100238972" at="215,73,216,64" concept="6" />
+      <node id="8971171305100238972" at="864,97,865,196" concept="5" />
+      <node id="8971171305100238972" at="865,196,866,34" concept="1" />
+      <node id="8971171305100238972" at="866,34,867,75" concept="7" />
+      <node id="8971171305100238972" at="867,75,868,75" concept="1" />
+      <node id="8971171305100238972" at="868,75,869,110" concept="1" />
+      <node id="8971171305100238972" at="869,110,870,17" concept="1" />
+      <node id="8971171305100238973" at="870,17,871,171" concept="1" />
+      <node id="8971171305100238972" at="871,171,872,22" concept="6" />
+      <node id="8971171305100238972" at="864,0,874,0" concept="9" trace="createDescriptorForBuildMps_ModuleDependencyTargetLanguage#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="8971171305100238972" at="215,73,216,64" />
+      <scope id="8971171305100238972" at="864,97,872,22">
+        <var name="b" id="8971171305100238972" />
+      </scope>
+      <scope id="8971171305100238972" at="864,0,874,0" />
+    </file>
+  </root>
+  <root nodeRef="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)/978600701690054692">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="978600701690054692" at="80,0,81,0" concept="2" trace="props_GeneratorInternal_String" />
+      <node id="978600701690054692" at="585,53,586,76" concept="5" />
+      <node id="978600701690054692" at="586,76,587,58" concept="1" />
+      <node id="978600701690054692" at="587,58,588,56" concept="1" />
+      <node id="978600701690054692" at="589,9,590,46" concept="6" />
+      <node id="978600701690054692" at="584,58,589,9" concept="3" />
+      <scope id="978600701690054692" at="585,53,588,56">
+        <var name="cpb" id="978600701690054692" />
+      </scope>
+      <scope id="978600701690054692" at="584,58,590,46" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="978600701690054692" at="80,0,81,0" concept="8" trace="GeneratorInternal_String" />
+      <node id="978600701690054692" at="151,71,152,62" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="978600701690054692" at="91,0,92,0" concept="2" trace="myConceptGeneratorInternal_String" />
+      <node id="978600701690054692" at="255,58,256,49" concept="6" />
+      <node id="978600701690054692" at="1064,82,1065,180" concept="5" />
+      <node id="978600701690054692" at="1065,180,1066,34" concept="1" />
+      <node id="978600701690054692" at="1066,34,1067,109" concept="1" />
+      <node id="978600701690054692" at="1067,109,1068,17" concept="1" />
+      <node id="978600701690054695" at="1068,17,1069,108" concept="1" />
+      <node id="978600701690054692" at="1069,108,1070,22" concept="6" />
+      <node id="978600701690054692" at="1064,0,1072,0" concept="9" trace="createDescriptorForGeneratorInternal_String#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="978600701690054692" at="255,58,256,49" />
+      <scope id="978600701690054692" at="1064,82,1070,22">
+        <var name="b" id="978600701690054692" />
+      </scope>
+      <scope id="978600701690054692" at="1064,0,1072,0" />
     </file>
   </root>
 </debug-info>

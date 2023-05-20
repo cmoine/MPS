@@ -7,7 +7,6 @@ import jetbrains.mps.openapi.actions.descriptor.ActionAspectDescriptor;
 import java.util.Collection;
 import jetbrains.mps.openapi.actions.descriptor.NodeFactory;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor implements ActionAspectDescriptor {
@@ -16,12 +15,12 @@ public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor imple
   @Override
   public Collection<NodeFactory> getFactories(SAbstractConcept concept) {
     if (LANGUAGE_FQ_NAME.equals(concept.getLanguage().getQualifiedName())) {
-      switch (Arrays.binarySearch(stringSwitchCases_tpto26_a0a0a0c, concept.getName())) {
-        case 0:
+      switch (concept.getName()) {
+        case "CopySrcListMacro":
           return Collections.<NodeFactory>singletonList(new NodeFactories.NodeFactory_7834938100936651350());
-        case 1:
+        case "NodeMacro":
           return Collections.<NodeFactory>singletonList(new NodeFactories.NodeFactory_1207674454116());
-        case 2:
+        case "Reduction_MappingRule":
           return Collections.<NodeFactory>singletonList(new NodeFactories.NodeFactory_224926278906344315());
         default:
       }
@@ -29,9 +28,4 @@ public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor imple
     return Collections.<NodeFactory>emptyList();
   }
 
-  @Override
-  public boolean hasBuilders() {
-    return false;
-  }
-  private static String[] stringSwitchCases_tpto26_a0a0a0c = new String[]{"CopySrcListMacro", "NodeMacro", "Reduction_MappingRule"};
 }

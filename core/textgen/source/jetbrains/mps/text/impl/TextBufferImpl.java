@@ -45,16 +45,16 @@ import java.util.Set;
  * @author Artem Tikhomirov
  */
 public class TextBufferImpl implements TextBuffer {
-  private final Deque<TextArea> myChunkStack = new ArrayDeque<TextArea>();
+  private final Deque<TextArea> myChunkStack = new ArrayDeque<>();
   // preserve order in which chunks were created
-  private final Map<TextAreaToken, TextArea> myChunks = new LinkedHashMap<TextAreaToken, TextArea>();
-  private final Deque<Marker> myMarkerStack = new ArrayDeque<Marker>();
+  private final Map<TextAreaToken, TextArea> myChunks = new LinkedHashMap<>();
+  private final Deque<Marker> myMarkerStack = new ArrayDeque<>();
   /*
    * Markers are partially ordered as it's impossible to add a marker in front of another one.
    * However, with re-ordering of text areas, markers added later may get positioned in front of their predecessors.
    * Within single text area, though, ordering is kept.
    */
-  private final List<Marker> myMarkers = new ArrayList<Marker>();
+  private final List<Marker> myMarkers = new ArrayList<>();
   private final TextAreaFactory myChunkFactory;
 
   public TextBufferImpl() {
@@ -118,19 +118,19 @@ public class TextBufferImpl implements TextBuffer {
   public BufferSnapshot snapshot(@NotNull BufferLayout layout) {
     Layout realLayout = (Layout) layout;
     // build actual text of all chunks
-    LinkedHashMap<TextAreaToken, StringBuilder> textMap = new LinkedHashMap<TextAreaToken, StringBuilder>();
+    LinkedHashMap<TextAreaToken, StringBuilder> textMap = new LinkedHashMap<>();
     // we could have kept token as attribute of TextArea, but would like to keep TextAre as simple as possible
-    Map<TextArea, TextAreaToken> chunk2token = new HashMap<TextArea, TextAreaToken>();
+    Map<TextArea, TextAreaToken> chunk2token = new HashMap<>();
     // Marker is immutable location in text area, while we need a location we could shift as needed for actual snapshot
-    LinkedHashMap<TextArea, Deque<LiveLocation>> actualMarkers = new LinkedHashMap<TextArea, Deque<LiveLocation>>();
+    LinkedHashMap<TextArea, Deque<LiveLocation>> actualMarkers = new LinkedHashMap<>();
     // to find actual position from marker kept by client fast (could walk LiveLocation chain, but why not map?)
-    LinkedHashMap<TextMark, LiveLocation> marker2liveLocation = new LinkedHashMap<TextMark, LiveLocation>();
+    LinkedHashMap<TextMark, LiveLocation> marker2liveLocation = new LinkedHashMap<>();
     // myChunks is in the order chunks were created, keep the order in case not all chunks are explicitly placed.
     for (Entry<TextAreaToken, TextArea> e : myChunks.entrySet()) {
       final StringBuilder sb = new StringBuilder(myChunkFactory.value(e.getValue()));
       textMap.put(e.getKey(), sb);
       chunk2token.put(e.getValue(), e.getKey());
-      actualMarkers.put(e.getValue(), new ArrayDeque<LiveLocation>());
+      actualMarkers.put(e.getValue(), new ArrayDeque<>());
     }
     for (Marker m : myMarkers) {
       final Deque<LiveLocation> ll = actualMarkers.get(m.myTextArea);
@@ -138,7 +138,7 @@ public class TextBufferImpl implements TextBuffer {
       ll.addLast(liveLoc);
       marker2liveLocation.put(m, liveLoc);
     }
-    Set<TextAreaToken> consumedChunks = new HashSet<TextAreaToken>();
+    Set<TextAreaToken> consumedChunks = new HashSet<>();
     for (Entry<TextMark, TextAreaToken> e : realLayout.mySubstitutions.entrySet()) {
       LiveLocation loc = marker2liveLocation.get(e.getKey());
       StringBuilder target = textMap.get(chunk2token.get(loc.getTextArea()));
@@ -241,14 +241,14 @@ public class TextBufferImpl implements TextBuffer {
   private static class TextSnapshot implements BufferSnapshot {
     private final CharSequence myText;
     private final int[] myLineBreaks; // index where a line starts, sorted due to initialization algorithm
-    private Map<TextArea, Integer> myOffsets = new HashMap<TextArea, Integer>(8);
+    private Map<TextArea, Integer> myOffsets = new HashMap<>(8);
     private Map<TextMark,LiveLocation> myMarks;
 
 
     public TextSnapshot(CharSequence seq, Map<TextMark,LiveLocation> marks, String lineSep) {
       myText = seq;
       myMarks = marks;
-      ArrayList<Integer> lineBreaks = new ArrayList<Integer>();
+      ArrayList<Integer> lineBreaks = new ArrayList<>();
       int i = 0;
       final String s = seq.toString();
       do {
@@ -319,7 +319,7 @@ public class TextBufferImpl implements TextBuffer {
   }
 
   private static class Layout implements BufferLayout {
-    public final Map<TextMark, TextAreaToken> mySubstitutions = new LinkedHashMap<TextMark, TextAreaToken>();
+    public final Map<TextMark, TextAreaToken> mySubstitutions = new LinkedHashMap<>();
 
     @Override
     public void replace(@NotNull TextMark mark, @NotNull TextAreaToken withChunk) {

@@ -22,8 +22,13 @@ import org.jetbrains.mps.openapi.persistence.StreamDataSource;
 import java.io.IOException;
 
 /**
+ * A callback for {@link CustomPersistenceSModel}.
+ *
+ * @deprecated Consider using {@link CustomPersistenceLoadFacility} instead
+ *
  * evgeny, 3/22/13
  */
+@Deprecated
 public interface SModelPersistence {
 
   SModelData createEmpty(SModelReference reference, StreamDataSource source);

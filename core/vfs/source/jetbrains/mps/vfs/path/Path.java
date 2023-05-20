@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,40 +15,39 @@
  */
 package jetbrains.mps.vfs.path;
 
-import jetbrains.mps.vfs.Watchable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 /**
- * Alike to the {@link java.nio.file.Path}.
- * Might be absolute or relative. The path is split up into so-called name components. Let us call
- * the first name component the <em>root</em> component.
+ * This is a file system path abstraction.
+ * Never supposed to address the physical file system.
+ * Can be absolute or relative.
+ * The path scheme is a <root name><root sep><name1><sep><name2><sep>...
+ * The keeper of the scheme is PathFormat, given by {@link #getFormat()}.
  *
- * The aim of this class is to get rid of working with the file paths (simply Strings) in the client code.
- * This comprises working with separators as well as working with archives.
+ * The aim of this class is to stop working with paths as Strings.
+ * This comprises working with separators as well as working with archive paths.
  *
- * Created by apyshkin on 6/17/16.
+ * TODO: our current plan is first to use Path as a mediator between IFile and plain strings;
+ *       then we are going to replace all the strings in jetbrains.mps.vfs package;
+ *       then we go out of the vfs package exposing Path to all the clients of IFile so that they never work with strings
+ *       and never write another slash in their code.
+ *
+ * @author apyshkin
  */
-public interface Path extends Comparable<Path>, /*AP: do I want this?*/ Watchable, PathUtil {
-  /**
-   * current system defaults
-   */
+public interface Path extends /*Comparable<Path>,*/ /*AP: do I want this?*/ PathUtil {
   char SYSTEM_SEPARATOR_CHAR = File.separatorChar;
   String SYSTEM_SEPARATOR = File.separator;
 
-  /**
-   * any path one can get from this API must use this separator
-   * default separator is UNIX-style
-   */
-  char UNIX_SEPARATOR_CHAR = '/'; // this is used for so-called independent paths
+  char UNIX_SEPARATOR_CHAR = '/';
   String UNIX_SEPARATOR = String.valueOf(UNIX_SEPARATOR_CHAR);
 
-  char WIN_SEPARATOR_CHAR = '\\'; // this is used for so-called dependent paths
+  char WIN_SEPARATOR_CHAR = '\\';
   String WIN_SEPARATOR = String.valueOf(WIN_SEPARATOR_CHAR);
+  String WIN_DRIVE_LETTER_SEPARATOR = ":" + WIN_SEPARATOR;
 
   String ZIP = "zip";
   String DOT_ZIP = "." + ZIP;
@@ -57,7 +56,7 @@ public interface Path extends Comparable<Path>, /*AP: do I want this?*/ Watchabl
   String DOT_JAR = "." + JAR;
 
   /**
-   * e.g /Users/ap/foo/bar/abc/my-archive.jar!/my/path/within/jar/module.xml
+   * e.g. /Users/ap/foo/bar/abc/my-archive.jar!/my/path/within/jar/module.xml
    *
    * NB: might be any ZIP as well
    */
@@ -68,22 +67,17 @@ public interface Path extends Comparable<Path>, /*AP: do I want this?*/ Watchabl
    */
   boolean isRelative();
 
-  /**
-   * @return the separator of this path
-   */
-  char getSeparator();
 
   /**
    * @return null iff it is a root folder, the parent Path instance otherwise
    * note that this method will not eliminate special path parts like '..' and '.'
    * please
-   * @see #toNormal()
-   * @see #toCanonical()
+   * @see #normalize()
    */
   @Nullable Path getParent();
 
   /**
-   * simply a shortcut to the last element of the {@link #getNames()}
+   * simply a shortcut to the last element of the {@link #getAllParts()}
    * if the list is empty then this method returns null
    *
    * @return the actual file name (the last in the whole path)
@@ -91,28 +85,49 @@ public interface Path extends Comparable<Path>, /*AP: do I want this?*/ Watchabl
   @Nullable String getFileName();
 
   /**
-   * @return an immutable list of names of folder/file(s)
+   * path is a [<root name><root sep>]<name1><sep><name2><sep>...
+   * @return a list with the root name, name1, name2, etc.
+   * the root part (the first element in the resulting list) must be equal to null if #isRelative is true
    */
-  @NotNull List<String> getNames();
+  @NotNull List<String> getAllParts();
+
+  @NotNull default List<String> getNonRootParts() {
+    List<String> allParts = getAllParts();
+    if (getAllParts().isEmpty()) {
+      throw new IllegalStateException("The contract of #getAllParts is broken");
+    }
+    return allParts.subList(1, getAllParts().size());
+  }
 
   /**
-   * Returns the root component of this path as a {@code Path} object,
-   * or {@code null} if this path does not have a root component.
+   * Returns the root component of this path as a {@code Path} object
+   *
+   * @return  a path representing the root component of this path
+   */
+  @NotNull Path getRoot();
+
+  /**
+   * Returns the root component of this path as a {@code String} object,
+   * or {@code null} if this path does not have a root component (meaning it is a relative path)
    *
    * @return  a path representing the root component of this path,
    *          or {@code null}
    */
-  @Nullable Path getRoot();
+  @Nullable String getRootPart();
 
   /**
-   * Separator becomes {@link #UNIX_SEPARATOR_CHAR}, replacing drive letter is up to implementation
+   * Separator becomes {@link #UNIX_SEPARATOR_CHAR}
+   * contract: #toSystemPathFormat(#toUnixPathFormat(#toSystemPathFormat()) == #toSystemPathFormat
+   * contract: #toUnixPathFormat(#toSystemPathFormat(#toUnixPathFormat()) == #toUnixPathFormat
    */
-  @NotNull Path toIndependentPath();
+  @NotNull Path toUnixPathFormat();
 
   /**
-   * Separator becomes {@link #SYSTEM_SEPARATOR_CHAR}, replacing drive letter is up to implementation
+   * Separator becomes {@link #SYSTEM_SEPARATOR_CHAR}
+   * contract: #toUnixPathFormat(#toSystemPathFormat(#toUnixPathFormat()) == #toUnixPathFormat
+   * contract: #toSystemPathFormat(#toUnixPathFormat(#toSystemPathFormat()) == #toSystemPathFormat
    */
-  @NotNull Path toSystemPath();
+  @NotNull Path toSystemPathFormat();
 
   /**
    * Tests if this path ends with the given path.
@@ -181,70 +196,45 @@ public interface Path extends Comparable<Path>, /*AP: do I want this?*/ Watchabl
   @NotNull Path copy();
 
   /**
-   * Returns a {@code Path} object representing the absolute path of this
-   * path.
-   *
-   * <p> If this path is not {@link Path#isRelative()} relative} then it is absolute and this
-   * method simply returns this path. Otherwise, this method resolves the path
-   * in an implementation dependent manner, typically by resolving the path
-   * against a file system default directory. Depending on the implementation,
-   * this method may throw an I/O error if the file system is not accessible.
-   *
-   * @return  a {@code Path} object representing the absolute path
-   *
-   * @throws  java.io.IOError
-   *          if an I/O error occurs
-   */
-  @NotNull Path toAbsolute();
-
-  /**
    * it tries to do the same that the <code>#toCanonical</code>
    * without actual access to the file system.
    * That means resolving all "." and ".." symbols.
    * Note that in the case there are symlinks in the path string we might end
-   * with the quite different path.
-   *
-   * @see #toCanonical()
+   * with quite a different path.
    */
-  @NotNull Path toNormal();
+  @NotNull Path normalize();
+
+  @NotNull
+  default Path subpath(int beginIndex, int endIndex) {
+    throw new UnsupportedOperationException();
+  }
+
+  default Path resolveSibling(Path other) {
+    throw new UnsupportedOperationException();
+  }
+
+  default Path resolveSibling(String other) {
+    throw new UnsupportedOperationException();
+  }
 
   /**
-   * Returns the canonical pathname string of this abstract pathname.
+   * @return sensible path (like the one we can navigate to in FS)
    *
-   * A canonical pathname is both absolute and unique.  The precise
-   * definition of canonical form is system-dependent.  This method first
-   * converts this pathname to absolute form if necessary, as if by invoking the
-   * {@link #toAbsolute()} method, and then maps it to its unique form in a
-   * system-dependent way.  This typically involves removing redundant names
-   * such as "." and ".." from the pathname, resolving
-   * symbolic links (on UNIX platforms), and converting drive letters to a
-   * standard case (on Microsoft Windows platforms).
-   *
-   * Every pathname that denotes an existing file or directory has a
-   * unique canonical form.  Every pathname that denotes a nonexistent file
-   * or directory also has a unique canonical form.  The canonical form of
-   * the pathname of a nonexistent file or directory may be different from
-   * the canonical form of the same pathname after the file or directory is
-   * created.  Similarly, the canonical form of the pathname of an existing
-   * file or directory may be different from the canonical form of the same
-   * pathname after the file or directory is deleted.
-   *
-   * @return  The canonical pathname string denoting the same file or
-   *          directory as this abstract pathname
-   *
-   * @throws  IOException
-   *          If an I/O error occurs, which is possible because the
-   *          construction of the canonical pathname may require
-   *          filesystem queries
-   *
-   * @see File#getCanonicalFile()
+   * as opposed to the method #toString which offers more debug-like information
    */
-  @NotNull Path toCanonical() throws IOException;
+  @NotNull String toText();
 
-//  @NotNull Path subpath(int beginIndex, int endIndex);
-//
-//
-//  Path resolveSibling(Path other);
-//
-//  Path resolveSibling(String other);
+  /**
+   * this defines the format of the path
+   */
+  @NotNull PathFormat getFormat();
+
+  default char getSeparatorChar() {
+    return getFormat().getSeparatorChar();
+  }
+
+  @NotNull
+  default String getSeparator() {
+    return getFormat().getSeparator();
+  }
 }

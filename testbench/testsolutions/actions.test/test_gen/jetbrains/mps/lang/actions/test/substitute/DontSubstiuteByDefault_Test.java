@@ -4,20 +4,34 @@ package jetbrains.mps.lang.actions.test.substitute;
 
 import jetbrains.mps.MPSLaunch;
 import jetbrains.mps.lang.test.runtime.BaseTransformationTest;
-import org.junit.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCacheExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCache;
+import org.junit.jupiter.api.Test;
 import jetbrains.mps.lang.test.runtime.BaseEditorTestBody;
-import junit.framework.Assert;
+import jetbrains.mps.lang.test.runtime.TransformationTest;
+import org.junit.Assert;
 
 @MPSLaunch
 public class DontSubstiuteByDefault_Test extends BaseTransformationTest {
-  @Test
-  public void test_DontSubstiuteByDefault() throws Throwable {
-    initTest("${mps_home}", "r:0d47ccef-2a97-4a7c-8ede-5adeaac0a5a7(jetbrains.mps.lang.actions.test.substitute@tests)");
-    runTest("jetbrains.mps.lang.actions.test.substitute.DontSubstiuteByDefault_Test$TestBody", "testMethod", false);
+  @RegisterExtension
+  private static final TestParametersCacheExtension ourParametersCacheExtension = new TestParametersCacheExtension(new TestParametersCache(DontSubstiuteByDefault_Test.class, "${mps_home}", "r:0d47ccef-2a97-4a7c-8ede-5adeaac0a5a7(jetbrains.mps.lang.actions.test.substitute@tests)", false));
+
+  public DontSubstiuteByDefault_Test() {
+    super(ourParametersCacheExtension.getParametersCache());
   }
 
-  @MPSLaunch
-  public static class TestBody extends BaseEditorTestBody {
+  @Test
+  public void test_DontSubstiuteByDefault() throws Throwable {
+    new TestBody(this).testMethod();
+  }
+
+  /*package*/ static class TestBody extends BaseEditorTestBody {
+
+    /*package*/ TestBody(TransformationTest owner) {
+      super(owner);
+    }
+
     @Override
     public void testMethodImpl() throws Exception {
       initEditorComponent("2550657305103547991", "2550657305103548219");

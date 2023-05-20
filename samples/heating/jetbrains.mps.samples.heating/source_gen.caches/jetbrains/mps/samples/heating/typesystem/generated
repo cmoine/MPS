@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="8q3ogyp88a3q85plmapugromtsphvt6" />
+<product version="3" modelHash="-404tgp938hevj1t5alz2h9yllei0f4q">
+  <files names="AssignCorrectValue_QuickFix.java:MoveItemToTheRightPositionWithinDailyPlan_QuickFix.java:RemoveSlot_QuickFix.java:TypesystemDescriptor.java:checkCircularCustomization_NonTypesystemRule.java:check_Slot_NonTypesystemRule.java" />
+</product>
 

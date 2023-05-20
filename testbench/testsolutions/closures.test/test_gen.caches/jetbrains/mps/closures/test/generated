@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-8gdi3n8vr0wum7odcntcq2gzplhbrin" />
+<product version="3" modelHash="-b9xvgb5r9ekzwq4yk4srrnjdkyvz298">
+  <files names="AdvancedFunctionTypes_Test.java:Child_Test.java:ClassifierAdapters_Test.java:ClosuresBase_Test.java:ExternalReferences_Test.java:FinalClosureParameter_Test.java:Fruits.java:FunctionTypes_Test.java:Functions.java:Generator.java:GenericFTAcceptor.java:IFilter.java:InferredParameter_Test.java:JavaLambdaGeneration_Test.java:MPS14653_Test.java:MPS14653_helper.java:MPS14656_Test.java:MPS14656_helper.java:MPS7432.java:MPS7440.java:MPS7448.java:MPS9119.java:MPS9324.java:MPS9465.java:MPS9760.java:MPS9808.java:MPS_18030.java:MPS_18030_Test.java:NumberGenerator.java:ParameterAnnotation_Test.java:Parent_Test.java:ProcessingException.java:Processor.java:SequenceFunctionTypes_Test.java:ThisExpression_Test.java:ThisProvider.java:VariableArity_Test.java:WhileBreak_Test.java:Worker.java:YieldClosures_Test.java:_Adapters.java:mps8150.java" />
+</product>
 

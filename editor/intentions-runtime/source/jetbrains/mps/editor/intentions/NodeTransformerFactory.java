@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +15,9 @@
  */
 package jetbrains.mps.editor.intentions;
 
-import jetbrains.mps.editor.intentions.NodeTransformer.Kind;
 import jetbrains.mps.openapi.editor.EditorContext;
-import jetbrains.mps.util.annotation.ToRemove;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.model.SNode;
-import org.jetbrains.mps.openapi.model.SNodeReference;
 
 import java.util.Collection;
 
@@ -75,23 +70,4 @@ public interface NodeTransformerFactory {
    * This id is used for disabling transformers from UI.
    */
   String getId();
-
-  //---------deprecated, needed for compatibility. remove after 3.3----------
-
-  @Deprecated
-  @ToRemove(version = 3.3)
-  /**
-   * required for compatibility purposes
-   * use NodeTransformer.getKind()
-   */
-  Kind getKind();
-
-  @Deprecated
-  @ToRemove(version = 3.3)
-  /**
-   * required for compatibility purposes
-   * use NodeTransformer.getDeclarationNode()
-   */
-  @Nullable
-  SNodeReference getDeclarationNode();
 }

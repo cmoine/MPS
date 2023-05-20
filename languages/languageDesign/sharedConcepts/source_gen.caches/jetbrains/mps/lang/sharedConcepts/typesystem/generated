@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-10onqlcno7r554g9s7s6ljoupxsi2fl" />
+<product version="3" modelHash="-at5ori3tcojrvo9tyvehrwc0g7az9g6">
+  <files names="TypesystemDescriptor.java:typeof_ConceptFunctionParameter_progressMonitor_InferenceRule.java:typeof_ConceptFunctionParameter_scope_InferenceRule.java" />
+</product>
 

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="elrnx6lg08gobor10ljiju54qmu33ma" />
+<product version="3" modelHash="ctl0rhzkeymxdi2aejms8pka4jr7jhd">
+  <files names="BehaviorAspectDescriptor.java:QueryFunctionParameter_IntentionExecutable__BehaviorDescriptor.java:TransformationMenuPart_Intention__BehaviorDescriptor.java" />
+</product>
 

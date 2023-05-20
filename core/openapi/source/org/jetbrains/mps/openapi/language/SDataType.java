@@ -15,13 +15,25 @@
  */
 package org.jetbrains.mps.openapi.language;
 
-/**
- * Represents a simple data type: can be either a {@link org.jetbrains.mps.openapi.language.SPrimitiveDataType}
- * or a {@link org.jetbrains.mps.openapi.language.SEnumeration}
- * Data types need to be able to save to and load from strings.
- */
-public interface SDataType {
-  Object fromString(String value);
+import org.jetbrains.annotations.Nullable;
 
-  String toString(Object value);
+/**
+ * Data types define categories of persistable values
+ */
+public interface SDataType extends SType {
+
+  /**
+   * Returns a value of this type that is represented with given string,
+   * or {@link SType#NOT_A_VALUE} if there is no value that is represented
+   * with given string.
+   */
+  @Nullable
+  Object fromString(@Nullable String string);
+
+  /**
+   * Returns textual representation of given value.
+   * Given value has to be an instance of this type.
+   */
+  @Nullable
+  String toString(@Nullable Object value);
 }

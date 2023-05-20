@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="51i2c9imp2jq3uuit7n8nj0pqs92rb4" />
+<product version="3" modelHash="axvcwtq6ue2f0cajkhl51uhq39dkkrn">
+  <files names="FacetRegistry.java:IFacet.java:IFacetManifest.java:ITarget.java:ITargetEx.java:ITargetEx2.java" />
+</product>
 

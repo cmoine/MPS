@@ -4,18 +4,16 @@
   <id>jetbrains.mps.debugger.java.customViewers</id>
   <name>BaseLanguage Debugger Support</name>
   <description>Debugger support for baseLanguage extensions</description>
-  <version>3.4.5</version>
-  <vendor url="http://www.jetbrains.com/mps/" logo="/MPS_16.png">JetBrains</vendor>
-  <idea-version since-build="143.1" />
+  <version>2023.1</version>
+  <vendor url="http://www.jetbrains.com/mps/">JetBrains</vendor>
+  <idea-version since-build="222.1" />
   
   <depends>jetbrains.mps.debugger.java</depends>
-  <application-components>
-    <component>
-      <implementation-class>jetbrains.mps.debugger.java.customViewers.plugin.plugin.Plugin_PluginInitializer</implementation-class>
-    </component>
-  </application-components>
   
   <extensions defaultExtensionNs="com.intellij">
     <errorHandler implementation="jetbrains.mps.ide.blame.CharismaReporter" />
+  </extensions>
+  <extensions defaultExtensionNs="com.intellij">
+    <mps.PluginComponentContributor application="jetbrains.mps.debugger.java.customViewers.plugin.plugin.Plugin_ApplicationPlugin" />
   </extensions>
 </idea-plugin>

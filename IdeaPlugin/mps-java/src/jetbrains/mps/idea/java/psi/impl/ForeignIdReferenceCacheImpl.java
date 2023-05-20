@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,59 +13,63 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.java.psi.impl;
 
+import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.CollectConsumer;
 import com.intellij.util.Consumer;
 import com.intellij.util.indexing.FileBasedIndex;
 import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.idea.java.index.ForeignIdReferenceIndex;
+import jetbrains.mps.idea.java.index.NodeAssociationsData;
 import jetbrains.mps.idea.java.psi.ForeignIdReferenceCache;
 import jetbrains.mps.util.Pair;
 import jetbrains.mps.workbench.goTo.index.SNodeDescriptor;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.mps.openapi.model.SNodeReference;
 import org.jetbrains.mps.openapi.model.SReference;
 import org.jetbrains.mps.openapi.module.SRepository;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.BiConsumer;
 
 /**
- * User: fyodor
- * Date: 4/8/13
+ * Reference cache implementation that uses IDEA's indexing mechanism
  */
 public class ForeignIdReferenceCacheImpl extends ForeignIdReferenceCache {
 
   @Override
   public Iterable<SReference> getReferencesMatchingPrefix(final String prefix, final GlobalSearchScope scope) {
-    CollectConsumer<SReference> consumer = new CollectConsumer<SReference>(new ArrayList<SReference>());
+    CollectConsumer<SReference> consumer = new CollectConsumer<>(new ArrayList<>());
     findReferencesMatching(prefix, consumer, scope);
     return consumer.getResult();
   }
 
   private void findReferencesMatching(String prefix, Consumer<SReference> consumer, GlobalSearchScope scope) {
-    final FileBasedIndex fileBasedIndex = FileBasedIndex.getInstance();
-    List<Collection<Pair<SNodeDescriptor, String>>> values = fileBasedIndex.getValues(ForeignIdReferenceIndex.ID, prefix, scope);
-    collectReferences(consumer, values, ProjectHelper.getProjectRepository(scope.getProject()));
-  }
-
-  private void collectReferences(final Consumer<SReference> consumer, final List<Collection<Pair<SNodeDescriptor, String>>> values, final SRepository repository) {
-    repository.getModelAccess().runReadAction(new Runnable() {
-      @Override
-      public void run() {
-        for (Collection<Pair<SNodeDescriptor, String>> value : values) {
-          for (Pair<SNodeDescriptor, String> pair : value) {
-            SNode node = pair.o1.getNodeReference().resolve(repository);
-            if (node == null) continue;
-            SReference sref = node.getReference(pair.o2);
-            if (sref == null) continue;
-            consumer.consume(sref);
-          }
+    try {
+      final FileBasedIndex fileBasedIndex = FileBasedIndex.getInstance();
+      final List<NodeAssociationsData> values = fileBasedIndex.getValues(ForeignIdReferenceIndex.ID, prefix, scope);
+      final SRepository repo = ProjectHelper.getProjectRepository(scope.getProject());
+      repo.getModelAccess().runReadAction(() -> {
+        for (NodeAssociationsData value : values) {
+          value.forEach((ref, link) -> {
+            SNode node = ref.resolve(repo);
+            if (node == null) {
+              return;
+            }
+            SReference x = node.getReference(link);
+            if (x != null) {
+              consumer.consume(x);
+            }
+          });
         }
-      }
-    });
+      });
+    } catch (ProcessCanceledException ex) {
+      // ignore the exception
+    }
   }
 }

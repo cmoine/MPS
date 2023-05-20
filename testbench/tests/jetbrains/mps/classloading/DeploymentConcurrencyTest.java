@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,18 +15,15 @@
  */
 package jetbrains.mps.classloading;
 
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.progress.EmptyProgressMonitor;
+import jetbrains.mps.smodel.ExecutorServiceShutdownHelper;
 import jetbrains.mps.smodel.MPSModuleRepository;
-import jetbrains.mps.testbench.BaseMpsTest;
 import jetbrains.mps.tool.environment.Environment;
-import jetbrains.mps.tool.environment.EnvironmentConfig;
-import jetbrains.mps.tool.environment.IdeaEnvironment;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import jetbrains.mps.tool.environment.EnvironmentAware;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.module.SModule;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -36,47 +33,44 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class DeploymentConcurrencyTest extends BaseMpsTest {
-  private final static Logger LOG = LogManager.getLogger(DeploymentConcurrencyTest.class);
+public class DeploymentConcurrencyTest implements EnvironmentAware {
+  private final static Logger LOG = Logger.getLogger(DeploymentConcurrencyTest.class);
 
   private final static int nThreads = 10;
-  private final static long TIME_OUT_MS = 10000;
+  private final static long TIME_OUT_MS = 20000;
   private Environment myEnvironment;
 
-  private Environment createEnvironment() {
-    return IdeaEnvironment.getOrCreate(EnvironmentConfig.defaultConfig());
+  @Override
+  public void setEnvironment(@NotNull Environment env) {
+    myEnvironment = env;
   }
-  @Before
-  public void beforeTest() {
-    if (myEnvironment == null) {
-      myEnvironment = createEnvironment();
-    }
-  }
-
-  @After
-  public void afterTest() {
-//    myEnvironment.dispose(); cannot restart idea environment for now
-  }
-
 
   @Test
   public void naiveConcurrencyTest() {
     ExecutorService pool = Executors.newFixedThreadPool(nThreads);
     Collection<Callable<Object>> taskList = new ArrayList<>(nThreads);
     MPSModuleRepository repo = myEnvironment.getPlatform().findComponent(MPSModuleRepository.class);
-    pool.execute(() -> {
-      for (int i = 0; i < nThreads; ++i) {
-        repo.getModelAccess().runWriteAction(() ->
-            ClassLoaderManager.getInstance().reloadAll(new EmptyProgressMonitor()));
+    // With DeploymentNotificationImpl and its semaphores, we started to face InterruptedException from semaphore during this test.
+    // To me, it looks like 20 sec limit for the executor service is not enough. First thread grabs write for almost whole duration:
+    //   Write Action duration (us): 908, 1309, 1055, 1679, 1075, 1006, 1122, 1010, 1044, 986, 1029, 1040, 996, 1037, 988, 1033, 979, 1041, 1049, 867
+    // therefore, I decided to make less reloads (used to be 20). I feel 10 is enough to make a point.
+    final int TOTAL_RELOADS = 10;
+//    final ArrayList<Long> waDur = new ArrayList<>();
+    taskList.add(() -> {
+      for (int i = 0; i < TOTAL_RELOADS; i++) {
+        final long s = System.nanoTime();
+        repo.getModelAccess().runWriteAction(() -> getCLM().reloadAll(new EmptyProgressMonitor()));
+//        waDur.add(System.nanoTime() - s);
       }
+      return null;
     });
-    for (int i = 0; i < nThreads; ++i) {
+    for (int i = 1; i < nThreads; ++i) {
       taskList.add(() -> {
-        for (int j = 0; j < nThreads; ++j) {
+        for (int j = 0; j < 20; ++j) {
           LOG.info("Requesting classloader for modules");
           repo.getModelAccess().runReadAction(() -> {
             for (SModule module : repo.getModules()) {
-              ClassLoaderManager.getInstance().getClassLoader(module);
+              getCLM().getClassLoader(module);
             }
           });
         }
@@ -85,10 +79,23 @@ public class DeploymentConcurrencyTest extends BaseMpsTest {
     }
     try {
       pool.invokeAll(taskList, TIME_OUT_MS, TimeUnit.MILLISECONDS);
-      pool.shutdownNow();
+      new ExecutorServiceShutdownHelper(pool).shutdownAndAwaitTermination(TIME_OUT_MS);
+      /*
+      System.out.print("Write Action duration (us): ");
+      for (Long l : waDur) {
+        System.out.print(l / 1000000);
+        System.out.print(", ");
+      }
+      System.out.println();
+      */
     } catch (InterruptedException e) {
       e.printStackTrace();
       Assert.fail();
     }
+  }
+
+  @NotNull
+  private ClassLoaderManager getCLM() {
+    return myEnvironment.getPlatform().findComponent(ClassLoaderManager.class);
   }
 }

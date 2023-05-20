@@ -3,7 +3,7 @@
   <persistence version="9" />
   <languages>
     <use id="a247e09e-2435-45ba-b8d2-07e93feba96a" name="jetbrains.mps.baseLanguage.tuples" version="0" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports>
     <import index="wyt6" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)" />
@@ -139,7 +139,7 @@
               <node concept="Xjq3P" id="3I9XST$B6UJ" role="2Oq$k0" />
             </node>
             <node concept="liA8E" id="3I9XST$B6UQ" role="2OqNvi">
-              <ref role="37wK5l" to="33ny:~HashMap.put(java.lang.Object,java.lang.Object):java.lang.Object" resolve="put" />
+              <ref role="37wK5l" to="33ny:~HashMap.put(java.lang.Object,java.lang.Object)" resolve="put" />
               <node concept="3cmrfG" id="3I9XST$B6UV" role="37wK5m">
                 <property role="3cmrfH" value="1" />
               </node>
@@ -168,7 +168,7 @@
               <ref role="3cqZAo" to="wyt6:~System.out" resolve="out" />
             </node>
             <node concept="liA8E" id="3I9XST$B6Qm" role="2OqNvi">
-              <ref role="37wK5l" to="guwi:~PrintStream.println(int):void" resolve="println" />
+              <ref role="37wK5l" to="guwi:~PrintStream.println(int)" resolve="println" />
               <node concept="1LFfDK" id="3I9XST$B6Qn" role="37wK5m">
                 <node concept="3cmrfG" id="3I9XST$B6Qo" role="1LF_Uc">
                   <property role="3cmrfH" value="0" />
@@ -185,7 +185,7 @@
                     </node>
                   </node>
                   <node concept="liA8E" id="3I9XST$B6Qu" role="2OqNvi">
-                    <ref role="37wK5l" to="33ny:~HashMap.get(java.lang.Object):java.lang.Object" resolve="get" />
+                    <ref role="37wK5l" to="33ny:~HashMap.get(java.lang.Object)" resolve="get" />
                     <node concept="3cmrfG" id="3I9XST$B6Qv" role="37wK5m">
                       <property role="3cmrfH" value="1" />
                     </node>

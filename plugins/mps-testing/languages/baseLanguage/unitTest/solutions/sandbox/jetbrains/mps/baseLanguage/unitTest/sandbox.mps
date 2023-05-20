@@ -3,19 +3,19 @@
   <persistence version="9" />
   <languages>
     <use id="760a0a8c-eabb-4521-8bfd-65db761a9ba3" name="jetbrains.mps.baseLanguage.logging" version="0" />
-    <use id="f61473f9-130f-42f6-b98d-6c438812c2f6" name="jetbrains.mps.baseLanguage.unitTest" version="0" />
+    <use id="f61473f9-130f-42f6-b98d-6c438812c2f6" name="jetbrains.mps.baseLanguage.unitTest" version="1" />
     <use id="df345b11-b8c7-4213-ac66-48d2a9b75d88" name="jetbrains.mps.baseLanguageInternal" version="0" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports>
     <import index="wyt6" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)" />
     <import index="guwi" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.io(JDK/)" />
-    <import index="rjhg" ref="83f155ff-422c-4b5a-a2f2-b459302dd215/java:org.junit(jetbrains.mps.baseLanguage.unitTest.libs/)" />
-    <import index="u132" ref="83f155ff-422c-4b5a-a2f2-b459302dd215/java:junit.framework(jetbrains.mps.baseLanguage.unitTest.libs/)" />
-    <import index="bbnd" ref="83f155ff-422c-4b5a-a2f2-b459302dd215/java:org.junit.runners(jetbrains.mps.baseLanguage.unitTest.libs/)" />
-    <import index="7cms" ref="83f155ff-422c-4b5a-a2f2-b459302dd215/java:org.junit.runners.model(jetbrains.mps.baseLanguage.unitTest.libs/)" />
-    <import index="k76n" ref="83f155ff-422c-4b5a-a2f2-b459302dd215/java:org.junit.runner.notification(jetbrains.mps.baseLanguage.unitTest.libs/)" />
-    <import index="cvlm" ref="83f155ff-422c-4b5a-a2f2-b459302dd215/java:org.junit.runner(jetbrains.mps.baseLanguage.unitTest.libs/)" />
+    <import index="u132" ref="49808fad-9d41-4b96-83fa-9231640f6b2b/java:junit.framework(JUnit/)" />
+    <import index="cvlm" ref="49808fad-9d41-4b96-83fa-9231640f6b2b/java:org.junit.runner(JUnit/)" />
+    <import index="rjhg" ref="49808fad-9d41-4b96-83fa-9231640f6b2b/java:org.junit(JUnit/)" />
+    <import index="bbnd" ref="49808fad-9d41-4b96-83fa-9231640f6b2b/java:org.junit.runners(JUnit/)" />
+    <import index="7cms" ref="49808fad-9d41-4b96-83fa-9231640f6b2b/java:org.junit.runners.model(JUnit/)" />
+    <import index="k76n" ref="49808fad-9d41-4b96-83fa-9231640f6b2b/java:org.junit.runner.notification(JUnit/)" />
   </imports>
   <registry>
     <language id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage">
@@ -60,7 +60,6 @@
       </concept>
       <concept id="1068390468198" name="jetbrains.mps.baseLanguage.structure.ClassConcept" flags="ig" index="312cEu">
         <property id="1075300953594" name="abstractClass" index="1sVAO0" />
-        <child id="1068390468201" name="constructor" index="312cEh" />
         <child id="1165602531693" name="superclass" index="1zkMxy" />
       </concept>
       <concept id="1068498886296" name="jetbrains.mps.baseLanguage.structure.VariableReference" flags="nn" index="37vLTw">
@@ -144,9 +143,9 @@
       <concept id="8243879142738613213" name="jetbrains.mps.baseLanguage.unitTest.structure.AfterTest" flags="in" index="1KhZuU" />
     </language>
     <language id="760a0a8c-eabb-4521-8bfd-65db761a9ba3" name="jetbrains.mps.baseLanguage.logging">
-      <concept id="1167227138527" name="jetbrains.mps.baseLanguage.logging.structure.LogStatement" flags="nn" index="34ab3g">
-        <property id="1167245565795" name="severity" index="35gtTG" />
-        <child id="1167227463056" name="logExpression" index="34bqiv" />
+      <concept id="2034914114981261497" name="jetbrains.mps.baseLanguage.logging.structure.LogLowLevelStatement" flags="ng" index="RRSsy">
+        <property id="2034914114981261751" name="severity" index="RRSoG" />
+        <child id="2034914114981261753" name="message" index="RRSoy" />
       </concept>
     </language>
     <language id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core">
@@ -166,7 +165,7 @@
               <ref role="1PxDUh" to="wyt6:~System" resolve="System" />
             </node>
             <node concept="liA8E" id="79C96s2bVZ8" role="2OqNvi">
-              <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String):void" resolve="println" />
+              <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String)" resolve="println" />
               <node concept="Xl_RD" id="79C96s2bVZ9" role="37wK5m">
                 <property role="Xl_RC" value="setup test!!" />
               </node>
@@ -184,7 +183,7 @@
               <ref role="3cqZAo" to="wyt6:~System.err" resolve="err" />
             </node>
             <node concept="liA8E" id="79C96s2bVZr" role="2OqNvi">
-              <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String):void" resolve="println" />
+              <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String)" resolve="println" />
               <node concept="Xl_RD" id="79C96s2bVZs" role="37wK5m">
                 <property role="Xl_RC" value="teardown test!!" />
               </node>
@@ -194,20 +193,15 @@
       </node>
     </node>
     <node concept="3Tm1VV" id="3bGuHn8PMbC" role="1B3o_S" />
-    <node concept="3clFbW" id="3bGuHn8PMbD" role="312cEh">
-      <node concept="3cqZAl" id="3bGuHn8PMbE" role="3clF45" />
-      <node concept="3Tm1VV" id="3bGuHn8PMbF" role="1B3o_S" />
-      <node concept="3clFbS" id="3bGuHn8PMbG" role="3clF47" />
-    </node>
     <node concept="3s_gsd" id="3bGuHn8PMbH" role="3s_ewO">
       <node concept="3s$Bmu" id="3bGuHn8PMbI" role="3s_gse">
         <property role="3s$Bm0" value="test1" />
         <node concept="3Tm1VV" id="3bGuHn8PMbJ" role="1B3o_S" />
         <node concept="3cqZAl" id="3bGuHn8PMbK" role="3clF45" />
         <node concept="3clFbS" id="3bGuHn8PMbL" role="3clF47">
-          <node concept="34ab3g" id="35GdNdw5Ct9" role="3cqZAp">
-            <property role="35gtTG" value="info" />
-            <node concept="Xl_RD" id="35GdNdw5Cta" role="34bqiv">
+          <node concept="RRSsy" id="3jYQuSB39KU" role="3cqZAp">
+            <property role="RRSoG" value="h1akgim/info" />
+            <node concept="Xl_RD" id="35GdNdw5Cta" role="RRSoy">
               <property role="Xl_RC" value="info!" />
             </node>
           </node>
@@ -253,7 +247,7 @@
               <ref role="3cqZAo" to="wyt6:~System.out" resolve="out" />
             </node>
             <node concept="liA8E" id="2kGTfCQPUx6" role="2OqNvi">
-              <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String):void" resolve="println" />
+              <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String)" resolve="println" />
               <node concept="Xl_RD" id="2kGTfCQPUx7" role="37wK5m">
                 <property role="Xl_RC" value="Hi!" />
               </node>
@@ -263,7 +257,7 @@
         <node concept="3clFbF" id="3GY2l4dhyjX" role="3cqZAp">
           <node concept="2YIFZM" id="5uy3kSHexcI" role="3clFbG">
             <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="u132:~Assert.assertFalse(boolean):void" resolve="assertFalse" />
+            <ref role="37wK5l" to="u132:~Assert.assertFalse(boolean)" resolve="assertFalse" />
             <node concept="3clFbT" id="5uy3kSHexcJ" role="37wK5m" />
           </node>
         </node>
@@ -400,7 +394,7 @@
               <ref role="3cqZAo" to="wyt6:~System.out" resolve="out" />
             </node>
             <node concept="liA8E" id="7JmqdyD79sE" role="2OqNvi">
-              <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String):void" resolve="println" />
+              <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String)" resolve="println" />
               <node concept="3cpWs3" id="7JmqdyD79sG" role="37wK5m">
                 <node concept="37vLTw" id="2BHiRxgm8u9" role="3uHU7w">
                   <ref role="3cqZAo" node="7JmqdyD79ss" resolve="method" />
@@ -414,7 +408,7 @@
         </node>
         <node concept="3clFbF" id="7JmqdyD79sy" role="3cqZAp">
           <node concept="3nyPlj" id="7JmqdyD79sz" role="3clFbG">
-            <ref role="37wK5l" to="bbnd:~BlockJUnit4ClassRunner.runChild(org.junit.runners.model.FrameworkMethod,org.junit.runner.notification.RunNotifier):void" resolve="runChild" />
+            <ref role="37wK5l" to="bbnd:~BlockJUnit4ClassRunner.runChild(org.junit.runners.model.FrameworkMethod,org.junit.runner.notification.RunNotifier)" resolve="runChild" />
             <node concept="37vLTw" id="2BHiRxgmyVh" role="37wK5m">
               <ref role="3cqZAo" node="7JmqdyD79ss" resolve="method" />
             </node>
@@ -455,7 +449,7 @@
               <ref role="3cqZAo" to="wyt6:~System.err" resolve="err" />
             </node>
             <node concept="liA8E" id="5V6TCVQm_nl" role="2OqNvi">
-              <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String):void" resolve="println" />
+              <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String)" resolve="println" />
               <node concept="Xl_RD" id="5V6TCVQm_nm" role="37wK5m">
                 <property role="Xl_RC" value="Hello, Universe!" />
               </node>
@@ -485,7 +479,7 @@
         <node concept="3clFbF" id="1URdE03IsJy" role="3cqZAp">
           <node concept="2YIFZM" id="5uy3kSHe$rG" role="3clFbG">
             <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="u132:~Assert.assertEquals(java.lang.String,java.lang.String):void" resolve="assertEquals" />
+            <ref role="37wK5l" to="u132:~Assert.assertEquals(java.lang.String,java.lang.String)" resolve="assertEquals" />
             <node concept="Xl_RD" id="5uy3kSHe$rH" role="37wK5m">
               <property role="Xl_RC" value="" />
             </node>

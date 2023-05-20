@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,15 +15,18 @@
  */
 package jetbrains.mps.smodel.action;
 
-import jetbrains.mps.kernel.model.SModelUtil;
+import jetbrains.mps.lang.editor.menus.EditorMenuDescriptorBase;
+import jetbrains.mps.lang.editor.menus.transformation.ReferenceTransformationMenuItem;
+import jetbrains.mps.logging.Logger;
+import jetbrains.mps.nodeEditor.cellMenu.CompletionActionItemAsSubstituteAction;
+import jetbrains.mps.nodeEditor.menus.EditorMenuTraceInfoImpl;
+import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.SubstituteAction;
 import jetbrains.mps.scope.ErrorScope;
 import jetbrains.mps.scope.Scope;
-import jetbrains.mps.smodel.adapter.MetaAdapterByDeclaration;
 import jetbrains.mps.smodel.constraints.ModelConstraints;
 import jetbrains.mps.smodel.constraints.ReferenceDescriptor;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
 import org.jetbrains.mps.openapi.model.SNode;
@@ -32,40 +35,48 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/*package*/ class ReferentSubstituteActionsHelper {
-  private static final Logger LOG = LogManager.getLogger(ReferentSubstituteActionsHelper.class);
+class ReferentSubstituteActionsHelper {
+  private static final Logger LOG = Logger.getLogger(ReferentSubstituteActionsHelper.class);
 
-  public static List<SubstituteAction> createActions(SNode referenceNode, SNode currentReferent, SNode linkDeclaration) {
+  public static List<SubstituteAction> createActions(SNode referenceNode, SReferenceLink link,
+                                                     IReferentPresentationProvider matchingTextProvider,
+                                                     IReferentPresentationProvider visibleMatchingTextProvider, EditorContext editorContext) {
     // search scope
-    SReferenceLink association = MetaAdapterByDeclaration.getReferenceLink(linkDeclaration);
-    ReferenceDescriptor refDescriptor = ModelConstraints.getReferenceDescriptor(referenceNode, association);
+    ReferenceDescriptor refDescriptor = ModelConstraints.getReferenceDescriptor(referenceNode, link);
     Scope searchScope = refDescriptor.getScope();
     if (searchScope instanceof ErrorScope) {
       LOG.error("Couldn't create referent search scope : " + ((ErrorScope) searchScope).getMessage());
       return Collections.emptyList();
     }
-    // XXX not quite sure this is the right approach, to take specialized link, if any, use its scope, and then find genuine link
-    // but this is most close to the original code.
-    final SNode genuineLinkDeclaration = SModelUtil.getGenuineLinkDeclaration(linkDeclaration);
-    if (linkDeclaration != genuineLinkDeclaration) {
-      association = MetaAdapterByDeclaration.getReferenceLink(genuineLinkDeclaration);
-    }
-    return createActions(referenceNode, currentReferent, association, refDescriptor);
+    return createActions(referenceNode, link, refDescriptor, matchingTextProvider, visibleMatchingTextProvider, editorContext);
   }
 
-  private static List<SubstituteAction> createActions(
-      SNode referenceNode, SNode currentReferent, SReferenceLink association, ReferenceDescriptor descriptor) {
+  private static List<SubstituteAction> createActions(SNode referenceNode, SReferenceLink association,
+                                                      ReferenceDescriptor descriptor, IReferentPresentationProvider matchingTextProvider,
+                                                      IReferentPresentationProvider visibleMatchingTextProvider, EditorContext editorContext) {
 
     final SAbstractConcept targetConcept = association.getTargetConcept();
-    if (targetConcept == null) {
-      return Collections.emptyList();
-    }
     Iterable<SNode> nodes = descriptor.getScope().getAvailableElements(null);
-    List<SubstituteAction> actions = new ArrayList<SubstituteAction>();
-    for (SNode node : nodes) {
-      if (node == null || !node.getConcept().isSubConceptOf(targetConcept))
+    List<SubstituteAction> actions = new ArrayList<>();
+    for (SNode targetNode : nodes) {
+      if (targetNode == null || !targetNode.getConcept().isSubConceptOf(targetConcept)) {
         continue;
-      actions.add(new DefaultSReferenceSubstituteAction(node, referenceNode, currentReferent, association));
+      }
+      final String matchingText = matchingTextProvider.getPresentation(referenceNode, targetNode);
+      final String visibleMatchingText = visibleMatchingTextProvider.getPresentation(referenceNode, targetNode);
+      EditorMenuTraceInfoImpl traceInfo = new EditorMenuTraceInfoImpl();
+      traceInfo.setDescriptor(new EditorMenuDescriptorBase("default reference action with target node: " + targetNode.getPresentation(), null));
+      actions.add(new CompletionActionItemAsSubstituteAction(new ReferenceTransformationMenuItem(referenceNode, editorContext, association, targetNode, traceInfo){
+        @Override
+        public String getLabelText(String pattern) {
+          return matchingText;
+        }
+
+        @Override
+        public String getVisibleText(@NotNull String pattern) {
+          return visibleMatchingText;
+        }
+      }, referenceNode, editorContext.getRepository()));
     }
     return actions;
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +18,11 @@ package jetbrains.mps.newTypesystem.state;
 import jetbrains.mps.lang.typesystem.runtime.HUtil;
 import jetbrains.mps.lang.typesystem.runtime.ICheckingRule_Runtime;
 import jetbrains.mps.lang.typesystem.runtime.IsApplicableStatus;
-import jetbrains.mps.smodel.SModelUtil_new;
 import jetbrains.mps.smodel.SNodeUtil;
-import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.typesystem.inference.EquationInfo;
 import jetbrains.mps.typesystem.inference.InequalitySystem;
 import jetbrains.mps.typesystem.inference.TypeCheckingContext;
+import org.jetbrains.mps.openapi.model.SNode;
 
 /**
  * User: fyodor
@@ -40,7 +39,7 @@ public class HoleState extends State {
 
   public void initHole(SNode hole) {
     SNode holeVar = typeOf(hole, null);
-    SNode holeType = SModelUtil_new.instantiateConceptDeclaration(SNodeUtil.concept_RuntimeHoleType, null, null, false);
+    SNode holeType = new jetbrains.mps.smodel.SNode(SNodeUtil.concept_RuntimeHoleType);
     getNodeMaps().addNodeToType(hole, holeVar, null);
     getEquations().addEquation(holeVar, holeType, null);
     myHole = hole;

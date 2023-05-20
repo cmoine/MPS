@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="1fodek3yme7nb5k8uq7ejtoovpogf0d" />
+<product version="3" modelHash="3k73k1zj8aj6kq5brmzx0go6webk5gh">
+  <files names="ConstraintsAspectDescriptor.java:IntentionDeclaration_Constraints.java:SurroundWithIntentionDeclaration_Constraints.java" />
+</product>
 

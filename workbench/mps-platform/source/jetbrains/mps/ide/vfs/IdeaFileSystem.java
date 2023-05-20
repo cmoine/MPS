@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,149 +15,124 @@
  */
 package jetbrains.mps.ide.vfs;
 
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.application.ModalityState;
-import com.intellij.openapi.fileTypes.FileTypeManager;
-import com.intellij.openapi.util.io.StreamUtil;
+import com.intellij.openapi.components.BaseComponent;
+import com.intellij.openapi.vfs.JarFileSystem;
+import com.intellij.openapi.vfs.LargeFileWriteRequestor;
+import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.SafeWriteRequestor;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.newvfs.RefreshQueue;
-import jetbrains.mps.ide.platform.watching.FileSystemListenersContainer;
+import com.intellij.openapi.vfs.VirtualFileSystem;
+import jetbrains.mps.ide.MPSCoreComponents;
 import jetbrains.mps.util.FileUtil;
-import jetbrains.mps.vfs.CachingContext;
-import jetbrains.mps.vfs.CachingFile;
-import jetbrains.mps.vfs.CachingFileSystem;
 import jetbrains.mps.vfs.FileSystem;
-import jetbrains.mps.vfs.FileSystemListener;
+import jetbrains.mps.vfs.FileSystemExtPoint;
 import jetbrains.mps.vfs.IFile;
-import jetbrains.mps.vfs.DefaultCachingContext;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import jetbrains.mps.vfs.IFileSystem;
+import jetbrains.mps.vfs.VFSManager;
+import jetbrains.mps.vfs.refresh.CachingFileSystem;
 import org.jetbrains.annotations.NotNull;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * @author Evgeny Gerashchenko
+ * To my best knowledge, it's a bridge between legacy FileSystem singleton and "new" per-protocol IFileSystem.
+ * Not sure if it has to be IFileSystem then, as it delegates to IFileSystem through FileSystem facade.
  */
-public class IdeaFileSystem extends IdeaFSComponent implements SafeWriteRequestor {
-  private static final Logger LOG = LogManager.getLogger(IdeaFileSystem.class);
+@Deprecated(since = "2019.1", forRemoval = true)
+public final class IdeaFileSystem extends BaseIdeaFileSystem implements FileSystem, IFileSystem, CachingFileSystem, FileSystemBridge,
+                                                                        SafeWriteRequestor,
+                                                                        LargeFileWriteRequestor,
+                                                                        BaseComponent {
+  private FileSystem myOldFileSystem;
 
-  private FileSystemListenersContainer myListeners = new FileSystemListenersContainer();
+  //all FSes should be registered before this one starts working
+  private JarIdeaFileSystem fs1;
+  private LocalIdeaFileSystem fs2;
+  private JrtIdeaFileSystem fs3;
 
   public IdeaFileSystem() {
-  }
-
-  @Override
-  public void refresh(@NotNull CachingContext context, Collection<CachingFile> files) {
-    Set<VirtualFile> virtualFiles = files.stream().map(file -> ((IdeaFile) file).getVirtualFile()).filter(Objects::nonNull).collect(Collectors.toSet());
-    virtualFiles.forEach(VirtualFile::getChildren); // to enforce refresh for this file
-    RefreshQueue.getInstance().refresh(!context.isSynchronous(), context.isRecursive(), null, virtualFiles);
+    super();
   }
 
   @NotNull
   @Override
   public IdeaFile getFile(@NotNull String path) {
-    return new IdeaFile(this, path);
-  }
-
-  @Override
-  public void addListener(@NotNull FileSystemListener listener) {
-    myListeners.addListener(listener);
-  }
-
-  @Override
-  public void removeListener(@NotNull FileSystemListener listener) {
-    myListeners.removeListener(listener);
-  }
-
-  public FileSystemListenersContainer getListenersContainer() {
-    return myListeners;
-  }
-
-  @Override
-  public boolean isFileIgnored(@NotNull String name) {
-    return FileTypeManager.getInstance().isFileIgnored(name);
-  }
-
-  @Override
-  public void scheduleUpdateForWrittenFiles(Iterable<IFile> writtenFiles) {
-    final List<IFile> newFiles = new ArrayList<>();
-    final List<IFile> updatedFiles = new ArrayList<>();
-    for (IFile file : writtenFiles) {
-      if (file.exists()) {
-        updatedFiles.add(file);
-      } else {
-        newFiles.add(file);
-      }
+    path = FileUtil.normalizeAndResolveParentDirs(path);
+    if (path.endsWith("!")) {
+      path += "/";
     }
-    ApplicationManager.getApplication().invokeLater(new IdeaWriteAction(() -> {
-      // Recreate files using VFS
-      for (IFile file : newFiles) {
-        OutputStream out = null;
-        try {
-          // No need to close InputStream: it will be closed by loadFromStream()
-          byte[] content = StreamUtil.loadFromStream(new FileInputStream(file.getPath()));
-
-          out = file.openOutputStream();
-          out.write(content);
-        } catch (IOException e) {
-          LOG.error(null, e);
-        } finally {
-          FileUtil.closeFileSafe(out);
-        }
-      }
-
-      // Refresh added files
-      Set<CachingFile> ideaFiles = updatedFiles.stream()
-          .filter(file -> file instanceof IdeaFile)
-          .map(file -> ((IdeaFile) file)).collect(Collectors.toSet());
-      refresh(new DefaultCachingContext(true, false), ideaFiles);
-    })
-    );
+    String fsId = path.contains("!") ? VFSManager.JAR_FS : VFSManager.FILE_FS;
+    IFileSystem fileSystem = vfsManager().getFileSystem(fsId);
+    assert fileSystem instanceof BaseIdeaFileSystem;
+    return ((BaseIdeaFileSystem) fileSystem).getFile(path);
   }
 
+  /**
+   * Proper alternative to {@code VirtualFileUtils#toIFile(VirtualFile)}, gives MPS file abstraction for an IDEA's one.
+   *
+   * @param virtualFile IDEA's file abstraction
+   * @return MPS file abstraction
+   */
   @Override
-  public boolean runWriteTransaction(@NotNull Runnable r) {
-    final IdeaWriteAction action = new IdeaWriteAction(r);
-    ApplicationManager.getApplication().invokeAndWait(action, ModalityState.any());
-    return action.getFailure() == null;
-  }
-
-  private static class IdeaWriteAction implements Runnable {
-    private final Runnable myDelegate;
-    private Exception myException;
-
-    public IdeaWriteAction(@NotNull Runnable delegate) {
-      myDelegate = delegate;
-    }
-
-    @Override
-    public void run() {
-      try {
-        ApplicationManager.getApplication().runWriteAction(myDelegate);
-      } catch (Exception ex) {
-        LOG.error(ex.getMessage(), ex);
-        myException = ex;
-      }
-    }
-
-    public Exception getFailure() {
-      return myException;
-    }
-  }
-
   @NotNull
+  public IFile fromVirtualFile(@NotNull VirtualFile virtualFile) {
+    assert canConvert(virtualFile) : "Only local/jar platform file systems are supported by IdeaFileSystem: " + virtualFile.getPath();
+    return getFile(FileUtil.normalize(virtualFile.getPath()));
+  }
+
   @Override
-  public String getComponentName() {
-    return "IdeaFileSystemProvider";
+  public boolean canConvert(@NotNull VirtualFile virtualFile) {
+    return virtualFile.getFileSystem() instanceof LocalFileSystem || virtualFile.getFileSystem() instanceof JarFileSystem;
+  }
+
+  /**
+   * Proper alternative to {@code VirtualFileUtils#getProjectVirtualFile(IFile)}, get back from MPS's {@code IFile} to IDEA's {@code VirtualFile}
+   *
+   * @param file MPS file abstraction
+   * @return IDEA's VirtualFile, if supplied IFile is tracked under project's file system.
+   * @since 2021.1
+   */
+  @Override
+  @Nullable
+  public VirtualFile asVirtualFile(@NotNull IFile file) {
+    if (file instanceof IdeaFile) {
+      return ((IdeaFile) file).getVirtualFile();
+    } else {
+      return null;
+    }
+  }
+
+  @Override
+  public void initComponent() {
+    fs1 = new JarIdeaFileSystem();
+    fs2 = new LocalIdeaFileSystem();
+    fs3 = new JrtIdeaFileSystem();
+    final VFSManager vfsManager = vfsManager();
+    vfsManager.registerFS(fs1.getProtocol(), fs1);
+    vfsManager.registerFS(fs2.getProtocol(), fs2);
+    vfsManager.registerFS(fs3.getProtocol(), fs3);
+    myOldFileSystem = FileSystemExtPoint.getFS();
+    FileSystemExtPoint.setFS(this);
+  }
+
+  private static VFSManager vfsManager() {
+    return MPSCoreComponents.getInstance().getPlatform().findComponent(VFSManager.class);
+  }
+
+  @Override
+  public void disposeComponent() {
+    final VFSManager vfsManager = vfsManager();
+    vfsManager.unregisterFS(fs3.getProtocol(), fs3);
+    vfsManager.unregisterFS(fs2.getProtocol(), fs2);
+    vfsManager.unregisterFS(fs1.getProtocol(), fs1);
+    if (myOldFileSystem != null) {
+      FileSystemExtPoint.setFS(myOldFileSystem);
+      myOldFileSystem = null;
+    }
+  }
+
+  @Nullable
+  @Override
+  VirtualFileSystem getUnderlyingFS() {
+    throw new UnsupportedOperationException("Should not be invoked on IdeaFileSystem");
   }
 }

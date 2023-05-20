@@ -1,0 +1,76 @@
+<project name="mpsSmartRefAttrMigration" default="check" basedir="../../">
+  <property name="env.JAVA_HOME" value="${java.home}/.."/>
+  <property name="jdk.home" value="${env.JAVA_HOME}"/>
+
+  <property name="test.project" location="${basedir}/testbench/modules/testSmartRefAttrMigration"/>
+
+  <!--this will be specified by test.xml-->
+  <property name="mps_home" location="build/artifacts/mps"/>
+
+  <!--
+     Unless mpsHome attribute is specified for <migrate>, task might need artifacts.mps value
+     see MPS-23341 and MPSClasspathUtil.calculateClassPath.
+     FIXME Note, <migrate> needs both mps.home/mps_home properties and mpsHome attribute (or artifacts.mps)
+        properties are in use to calculate classpath for MigrationWorker location,
+        while attribute is to get classpath of MPS itself.
+        This is stupid, indeed, have to use same mechanism.
+  <property name="artifacts.mps" location="${mps_home}"/>
+  -->
+
+  <path id="path.mps.ant.path">
+    <pathelement location="${mps_home}/lib/ant/lib/ant-mps.jar" />
+    <fileset dir="${mps_home}/lib">
+      <include name="util-8.jar" />
+      <include name="3rd-party-rt.jar" />
+    </fileset>
+  </path>
+
+  <taskdef resource="jetbrains/mps/build/ant/antlib.xml" classpathref="path.mps.ant.path"/>
+
+  <target name="check">
+    <migrate project="${test.project}" mpsHome="${mps_home}" makeDistribModules="false" force="true">
+      <jvmargs>
+        <arg value="-Xmx1200m" />
+        <arg value="-ea" />
+        <arg value="--add-opens=java.base/java.io=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.lang=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.lang.reflect=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.net=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.nio=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.nio.charset=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.text=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.time=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.util=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.util.concurrent=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/jdk.internal.vm=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/sun.nio.ch=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/sun.security.ssl=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/sun.security.util=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/java.awt=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/java.awt.dnd.peer=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/java.awt.event=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/java.awt.image=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/java.awt.peer=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/javax.swing=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/javax.swing.plaf.basic=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/javax.swing.text.html=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/sun.awt.datatransfer=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/sun.awt.image=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/sun.awt=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/sun.font=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/sun.java2d=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/sun.swing=ALL-UNNAMED" />
+        <arg value="--add-opens=jdk.attach/sun.tools.attach=ALL-UNNAMED" />
+        <arg value="--add-opens=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED" />
+        <arg value="--add-opens=jdk.internal.jvmstat/sun.jvmstat.monitor=ALL-UNNAMED" />
+        <arg value="--add-opens=jdk.jdi/com.sun.tools.jdi=ALL-UNNAMED" />
+      </jvmargs>
+    </migrate>
+
+    <ant antfile="build/tests/mpsSmartRefAttrMigration_gen.xml" inheritAll="true" useNativeBasedir="true">
+      <target name="build"/>
+      <target name="check"/>
+    </ant>
+  </target>
+</project>

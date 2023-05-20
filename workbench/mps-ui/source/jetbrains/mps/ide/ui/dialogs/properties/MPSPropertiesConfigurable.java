@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,19 +21,22 @@ import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.CommonShortcuts;
 import com.intellij.openapi.actionSystem.ShortcutSet;
 import com.intellij.openapi.options.Configurable;
-import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.ui.ComboBoxTableRenderer;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.ui.AnActionButton;
 import com.intellij.ui.AnActionButtonRunnable;
+import com.intellij.ui.AnActionButtonUpdater;
 import com.intellij.ui.BooleanTableCellRenderer;
+import com.intellij.ui.ErrorLabel;
 import com.intellij.ui.IdeBorderFactory;
+import com.intellij.ui.JBColor;
 import com.intellij.ui.SpeedSearchBase;
 import com.intellij.ui.SpeedSearchComparator;
 import com.intellij.ui.TabbedPaneWrapper;
 import com.intellij.ui.TableUtil;
 import com.intellij.ui.ToolbarDecorator;
+import com.intellij.ui.ToolbarDecorator.ElementActionButton;
 import com.intellij.ui.components.JBLabel;
 import com.intellij.ui.table.JBTable;
 import com.intellij.uiDesigner.core.GridConstraints;
@@ -45,7 +48,6 @@ import jetbrains.mps.ide.findusages.model.IResultProvider;
 import jetbrains.mps.ide.findusages.model.SearchQuery;
 import jetbrains.mps.ide.findusages.view.UsageToolOptions;
 import jetbrains.mps.ide.findusages.view.UsagesViewTool;
-import jetbrains.mps.ide.icons.IdeIcons;
 import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.ide.save.SaveRepositoryCommand;
 import jetbrains.mps.ide.ui.dialogs.properties.renders.DependencyCellState;
@@ -54,10 +56,11 @@ import jetbrains.mps.ide.ui.dialogs.properties.tables.items.DependenciesTableIte
 import jetbrains.mps.ide.ui.dialogs.properties.tables.models.DependTableModel;
 import jetbrains.mps.ide.ui.dialogs.properties.tables.models.UsedLangsTableModel;
 import jetbrains.mps.ide.ui.dialogs.properties.tables.models.UsedLangsTableModel.Import;
+import jetbrains.mps.ide.ui.dialogs.properties.tables.models.UsedLangsTableModel.ValidImportCondition;
 import jetbrains.mps.ide.ui.dialogs.properties.tabs.BaseTab;
 import jetbrains.mps.project.DevKit;
 import jetbrains.mps.project.Project;
-import jetbrains.mps.util.IterableUtil;
+import jetbrains.mps.util.NotCondition;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SLanguage;
@@ -65,6 +68,7 @@ import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.module.SDependencyScope;
 import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SModuleReference;
+import org.jetbrains.mps.openapi.module.SRepository;
 import org.jetbrains.mps.openapi.ui.Modifiable;
 import org.jetbrains.mps.openapi.ui.persistence.Tab;
 
@@ -83,21 +87,24 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Configuration page consisting of {@link Tab tabs}.
  */
-public abstract class MPSPropertiesConfigurable implements Configurable, Disposable {
-  private TabbedPaneWrapper myTabbedPaneWrapper = new TabbedPaneWrapper(this);
-  private List<Tab> myTabs = new ArrayList<>();
-  protected final Project myProject;
+public abstract class MPSPropertiesConfigurable implements Configurable {
+  private final Disposable myDisposable = Disposer.newDisposable(MPSPropertiesConfigurable.class.getName());
+  private final TabbedPaneWrapper myTabbedPaneWrapper = new TabbedPaneWrapper(myDisposable);
+  private final List<Tab> myTabs = new ArrayList<>();
+  protected final Project myMPSProject;
   private DialogWrapper myParentForCallBack = null;
 
+  protected boolean myIsReadOnly;
+
   public MPSPropertiesConfigurable(Project project) {
-    myProject = project;
+    myMPSProject = project;
   }
 
   public final void setParentForCallBack(DialogWrapper parentForCallBack) {
@@ -108,12 +115,11 @@ public abstract class MPSPropertiesConfigurable implements Configurable, Disposa
     if (myParentForCallBack == null) {
       return;
     }
-    ThreadUtils.runInUIThreadNoWait(new Runnable() {
-      @Override
-      public void run() {
-        myParentForCallBack.doCancelAction();
-      }
-    });
+    ThreadUtils.runInUIThreadNoWait(() -> myParentForCallBack.doCancelAction());
+  }
+
+  protected final void setReadOnly(boolean isReadOnly) {
+    myIsReadOnly = isReadOnly;
   }
 
   @Override
@@ -121,20 +127,17 @@ public abstract class MPSPropertiesConfigurable implements Configurable, Disposa
     return null;
   }
 
-  @Override
-  public void dispose() {
-  }
-
   /**
    * Subclasses may choose whether to instantiate initial tabs on demand with {@link #createInitialTabs()}
    * or register them at once with this method. Supplied tabs would get a chance to build UI
    * at a proper moment some time later (with {@link Modifiable#init()} call.
+   * <p>FWIW, tab initialization happens inside EDT and with model read.
    * <p>
    * The method may be invoked few times before the UI is created, registered tabs sum up.
    *
    * @param tabs initial set of tabs
    */
-  protected void registerTabs(Tab... tabs) {
+  protected final void registerTabs(Tab... tabs) {
     myTabs.addAll(Arrays.asList(tabs));
   }
 
@@ -149,10 +152,12 @@ public abstract class MPSPropertiesConfigurable implements Configurable, Disposa
 
   @Override
   public final JComponent createComponent() {
-    for (Tab tab : createInitialTabs()) {
-      tab.init();
-      addTab(tab);
-    }
+    myMPSProject.getModelAccess().runReadAction(() -> {
+      for (Tab tab : createInitialTabs()) {
+        tab.init();
+        addTab(tab);
+      }
+    });
     return myTabbedPaneWrapper.getComponent();
   }
 
@@ -228,45 +233,45 @@ public abstract class MPSPropertiesConfigurable implements Configurable, Disposa
   }
 
   public final void addChangeListener(final ChangeListener listener) {
-    if (myTabbedPaneWrapper != null) {
-      myTabbedPaneWrapper.addChangeListener(listener);
-    }
+    myTabbedPaneWrapper.addChangeListener(listener);
   }
 
   @Override
-  public void apply() throws ConfigurationException {
+  public void apply() {
     ThreadUtils.assertEDT();
     //see MPS-18743
-    new SaveRepositoryCommand(myProject.getRepository()).execute();
-    myProject.getModelAccess().executeCommand(new Runnable() {
-      @Override
-      public void run() {
-        for (Tab tab : myTabs) {
-          tab.apply();
-        }
-        save();
+    new SaveRepositoryCommand(myMPSProject.getRepository()).execute();
+    myMPSProject.getModelAccess().executeCommand(() -> {
+      for (Tab tab : myTabs) {
+        tab.apply();
       }
+      save();
     });
   }
 
   @Override
   public boolean isModified() {
-    for (Tab tab : myTabs) {
-      if (tab.isModified()) {
-        return true;
+    return myMPSProject.getModelAccess().computeReadAction(() -> {
+      for (Tab tab : myTabs) {
+        if (tab.isModified()) {
+          return true;
+        }
       }
-    }
-
-    return false;
+      return false;
+    });
   }
 
   @Override
   public void reset() {
   }
 
+  public final Disposable getDisposable() {
+    return myDisposable;
+  }
+
   @Override
   public void disposeUIResources() {
-    Disposer.dispose(this);
+    Disposer.dispose(myDisposable);
   }
 
   /**
@@ -283,18 +288,13 @@ public abstract class MPSPropertiesConfigurable implements Configurable, Disposa
     // wrap into Iterable to ensure lazy construction of module sequence.
     // getModules operation requires read access, but I don't see a reason to
     // move creation of conditional sequence into a read runnable.
-    return new Iterable<SModule>() {
-      @Override
-      public Iterator<SModule> iterator() {
-        return myProject.getRepository().getModules().iterator();
-      }
-    };
+    return () -> myMPSProject.getRepository().getModules().iterator();
   }
 
   // keep usage view options common to properties page in a single place
   /*package*/ void showUsageImpl(SearchQuery query, IResultProvider provider) {
     final UsageToolOptions uvOpt = new UsageToolOptions().allowRunAgain(true).forceNewTab(true).navigateIfSingle(false).transientView(true);
-    UsagesViewTool.showUsages(ProjectHelper.toIdeaProject(myProject), provider, query, uvOpt);
+    UsagesViewTool.showUsages(ProjectHelper.toIdeaProject(myMPSProject), provider, query, uvOpt);
   }
 
 
@@ -303,7 +303,7 @@ public abstract class MPSPropertiesConfigurable implements Configurable, Disposa
     protected JTextField myTextFieldName;
 
     public CommonTab() {
-      super(PropertiesBundle.message("mps.properties.common.title"), AllIcons.General.ProjectSettings, PropertiesBundle.message("mps.properties.common.tip"));
+      super(PropertiesBundle.message("mps.properties.common.title"), AllIcons.General.Settings, PropertiesBundle.message("mps.properties.common.tip"));
     }
 
     protected abstract String getConfigItemName();
@@ -324,32 +324,39 @@ public abstract class MPSPropertiesConfigurable implements Configurable, Disposa
       JPanel sourcesTab = new JPanel();
       sourcesTab.setLayout(new GridLayoutManager(topComponent != null ? 4 : 3, 2, INSETS, -1, -1));
 
-      JBLabel label = new JBLabel(PropertiesBundle.message("mps.properties.common.namelabel"));
-      sourcesTab.add(label,
-          new GridConstraints(rowCount++, 0, 1, 1, GridConstraints.ANCHOR_NORTHWEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED,
+      final ErrorLabel errorLabel = new ErrorLabel(PropertiesBundle.message("mps.properties.common.namelabel"));
+      sourcesTab.add(errorLabel,
+          new GridConstraints(rowCount++, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED,
               GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 
       myTextFieldName = new JTextField();
       myTextFieldName.setText(getConfigItemName());
       sourcesTab.add(myTextFieldName,
-          new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_NORTHWEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW,
+          new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW,
               GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+      myTextFieldName.addCaretListener(e -> {
+        if(myTextFieldName.getText().isEmpty()) {
+          errorLabel.setErrorText(PropertiesBundle.message("mps.properties.common.namenotempty"), JBColor.RED);
+        } else {
+          errorLabel.setErrorText(null, null);
+        }
+      });
 
-      label = new JBLabel(PropertiesBundle.message("mps.properties.common.filepathlabel"));
+      JBLabel label = new JBLabel(PropertiesBundle.message("mps.properties.common.filepathlabel"));
       sourcesTab.add(label,
-          new GridConstraints(rowCount, 0, 1, 1, GridConstraints.ANCHOR_NORTHWEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED,
+          new GridConstraints(rowCount, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED,
               GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 
       JTextField textField = new JTextField();
       textField.setEditable(false);
       textField.setText(getConfigItemPath());
       sourcesTab.add(textField,
-          new GridConstraints(rowCount++, 1, 1, 1, GridConstraints.ANCHOR_NORTHWEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW,
+          new GridConstraints(rowCount++, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW,
               GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
 
       if (topComponent != null) {
         sourcesTab.add(topComponent,
-            new GridConstraints(rowCount++, 0, 1, 2, GridConstraints.ANCHOR_NORTHWEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW,
+            new GridConstraints(rowCount++, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW,
                 GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
       }
 
@@ -361,13 +368,14 @@ public abstract class MPSPropertiesConfigurable implements Configurable, Disposa
 
     @Override
     public boolean isModified() {
-      return !myTextFieldName.getText().equals(getConfigItemName());
+      return !myTextFieldName.getText().isEmpty() && !myTextFieldName.getText().equals(getConfigItemName());
     }
   }
 
   public abstract class DependenciesTab extends BaseTab {
 
     protected DependTableModel myDependTableModel;
+    private JBTable myDependenciesTable;
 
     public DependenciesTab() {
       super(PropertiesBundle.message("mps.properties.dependencies.title"), General.Dependencies, PropertiesBundle.message("mps.properties.dependencies.tip"));
@@ -383,52 +391,57 @@ public abstract class MPSPropertiesConfigurable implements Configurable, Disposa
       JPanel dependenciesTab = new JPanel();
       dependenciesTab.setLayout(new GridLayoutManager(1, 1, INSETS, -1, -1));
 
-      final JBTable tableDepend = new JBTable();
-      tableDepend.setShowHorizontalLines(false);
-      tableDepend.setShowVerticalLines(false);
-      tableDepend.setAutoCreateRowSorter(false);
-      tableDepend.setAutoscrolls(true);
-      tableDepend.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+      myDependenciesTable = new JBTable();
+      myDependenciesTable.setShowHorizontalLines(false);
+      myDependenciesTable.setShowVerticalLines(false);
+      myDependenciesTable.setAutoCreateRowSorter(false);
+      myDependenciesTable.setAutoscrolls(true);
+      myDependenciesTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
       myDependTableModel = getDependTableModel();
-      tableDepend.setModel(myDependTableModel);
+      myDependenciesTable.setModel(myDependTableModel);
 
-      tableDepend.setDefaultRenderer(DependenciesTableItem.class, getTableCellRender());
-      tableDepend.setDefaultRenderer(Boolean.class, new BooleanTableCellRenderer());
+      myDependenciesTable.setDefaultRenderer(DependenciesTableItem.class, getTableCellRender());
+      myDependenciesTable.setDefaultRenderer(Boolean.class, new BooleanTableCellRenderer());
 
-      tableDepend.setDefaultRenderer(SDependencyScope.class, new ComboBoxTableRenderer<>(SDependencyScope.values()));
-      tableDepend.setDefaultEditor(SDependencyScope.class, getTableCellEditor());
+      myDependenciesTable.setDefaultRenderer(SDependencyScope.class, new ComboBoxTableRenderer<>(SDependencyScope.values()));
+      myDependenciesTable.setDefaultEditor(SDependencyScope.class, getTableCellEditor());
 
 
       TableColumn column;
       if (myDependTableModel.getExportColumnIndex() >= 0) {
-        column = tableDepend.getTableHeader().getColumnModel().getColumn(myDependTableModel.getExportColumnIndex());
+        column = myDependenciesTable.getTableHeader().getColumnModel().getColumn(myDependTableModel.getExportColumnIndex());
         column.setMinWidth(20);
-        column.setPreferredWidth(50);
-        column.setMaxWidth(50);
+        column.setPreferredWidth(70);
+        column.setMaxWidth(70);
       }
       if (myDependTableModel.getRoleColumnIndex() >= 0) {
-        column = tableDepend.getTableHeader().getColumnModel().getColumn(myDependTableModel.getRoleColumnIndex());
+        column = myDependenciesTable.getTableHeader().getColumnModel().getColumn(myDependTableModel.getRoleColumnIndex());
         column.setMinWidth(80);
         column.setPreferredWidth(130);
         column.setMaxWidth(200);
       }
       if (myDependTableModel.getItemColumnIndex() >= 0) {
-        column = tableDepend.getTableHeader().getColumnModel().getColumn(myDependTableModel.getItemColumnIndex());
+        column = myDependenciesTable.getTableHeader().getColumnModel().getColumn(myDependTableModel.getItemColumnIndex());
         column.setPreferredWidth(250);
       }
 
 
-      ToolbarDecorator decorator = ToolbarDecorator.createDecorator(tableDepend);
-      decorator.setAddAction(getAnActionButtonRunnable()).setRemoveAction(new RemoveEntryAction(tableDepend) {
+      ToolbarDecorator decorator = ToolbarDecorator.createDecorator(myDependenciesTable);
+      decorator.setAddAction(getAnActionButtonRunnable()).setRemoveAction(new RemoveEntryAction(myDependenciesTable) {
         @Override
         protected boolean confirmRemove(int row) {
           return DependenciesTab.this.confirmRemove(myDependTableModel.getValueAt(row, myDependTableModel.getItemColumnIndex()));
         }
       });
-      FindActionButton findActionButton = getFindAnAction(tableDepend);
+      FindActionButton findActionButton = getFindAnAction(myDependenciesTable);
       if (findActionButton != null) {
         decorator.addExtraAction(findActionButton);
+      }
+      if (myIsReadOnly) {
+        final AnActionButtonUpdater disableEdit = (u) -> false;
+        decorator.setAddActionUpdater(disableEdit);
+        decorator.setRemoveActionUpdater(disableEdit);
       }
 
       decorator.setPreferredSize(new Dimension(500, 300));
@@ -441,7 +454,13 @@ public abstract class MPSPropertiesConfigurable implements Configurable, Disposa
 
       setTabComponent(dependenciesTab);
 
-      new TableColumnSearch(tableDepend, myDependTableModel.getItemColumnIndex()).setComparator(new SpeedSearchComparator(false, true));
+      new TableColumnSearch(myDependenciesTable, myDependTableModel.getItemColumnIndex()).setComparator(new SpeedSearchComparator(false, true));
+    }
+
+    /*package*/ void setTableContentIsLoading(boolean isLoading) {
+      if (myDependenciesTable != null) {
+        myDependenciesTable.setPaintBusy(isLoading);
+      }
     }
 
     /*CellRenderer for module column, actual value supplied to renderer is DependenciesTableItem instance */
@@ -475,11 +494,18 @@ public abstract class MPSPropertiesConfigurable implements Configurable, Disposa
     protected JBTable myUsedLangsTable;
 
     public UsedLanguagesTab() {
-      super(PropertiesBundle.message("mps.properties.usedlanguages.title"), IdeIcons.LANGUAGE_ICON,
+      super(PropertiesBundle.message("mps.properties.usedlanguages.title"), General.UsedLanguages,
           PropertiesBundle.message("mps.properties.usedlanguages.tip"));
     }
 
     protected abstract UsedLangsTableModel getUsedLangsTableModel();
+
+    protected TableCellRenderer getTableCellRender() {
+      SRepository contextRepo = myMPSProject.getRepository();
+      LanguageTableCellRenderer tcr = new LanguageTableCellRenderer(contextRepo);
+      tcr.addCellState(NotCondition.negate(new ValidImportCondition(myMPSProject)), DependencyCellState.NOT_AVAILABLE);
+      return tcr;
+    }
 
     @Override
     public void init() {
@@ -498,10 +524,6 @@ public abstract class MPSPropertiesConfigurable implements Configurable, Disposa
       myUsedLangsTable = usedLangsTable;
 
       final TableCellRenderer tableCellRender = getTableCellRender();
-      if (tableCellRender instanceof LanguageTableCellRenderer) {
-        ((LanguageTableCellRenderer) tableCellRender).addCellState(anImport -> (anImport.myLanguage == null && anImport.myDevKit == null)
-            || (anImport.myLanguage != null && !anImport.myLanguage.isValid()), DependencyCellState.NOT_AVAILABLE);
-      }
       usedLangsTable.setDefaultRenderer(UsedLangsTableModel.Import.class, tableCellRender);
 
       ToolbarDecorator decorator = createToolbar(usedLangsTable);
@@ -523,54 +545,50 @@ public abstract class MPSPropertiesConfigurable implements Configurable, Disposa
       return ToolbarDecorator.createDecorator(usedLangsTable);
     }
 
-
-    protected TableCellRenderer getTableCellRender() {
-      return new LanguageTableCellRenderer(myProject.getRepository());
-    }
-
     @Override
     public boolean isModified() {
       return myUsedLangsTableModel.isModified();
     }
 
-    protected final List<SLanguage> getSelectedLanguages() {
-      final List<SLanguage> languages = new LinkedList<>();
-      myProject.getModelAccess().runReadAction(new Runnable() {
-        @Override
-        public void run() {
-          for (int i : myUsedLangsTable.getSelectedRows()) {
-            Object value = myUsedLangsTableModel.getValueAt(i, UsedLangsTableModel.ITEM_COLUMN);
-            if (value instanceof UsedLangsTableModel.Import) {
-              final Import entry = (Import) value;
-              if (entry.myLanguage != null) {
-                languages.add(entry.myLanguage);
-              } else {
-                final SModule devkit = entry.myDevKit.resolve(myProject.getRepository());
-                if (devkit instanceof DevKit) {
-                  languages.addAll(IterableUtil.asCollection(((DevKit) devkit).getAllExportedLanguageIds()));
-                }
-              }
+    protected final List<SLanguage> toLanguages(Collection<Import> entries) {
+      ArrayList<SLanguage> rv = new ArrayList<>();
+      ArrayList<SModuleReference> devkits = new ArrayList<>();
+      for (Import entry : entries) {
+        if (entry.myLanguage != null) {
+          rv.add(entry.myLanguage);
+        } else {
+          devkits.add(entry.myDevKit);
+        }
+      }
+      if (!devkits.isEmpty()) {
+        final SRepository repo = myMPSProject.getRepository();
+        repo.getModelAccess().runReadAction(() -> {
+          for (SModuleReference mr : devkits) {
+            final SModule devkit = mr.resolve(repo);
+            if (devkit instanceof DevKit) {
+              ((DevKit) devkit).getAllExportedLanguageIds().forEach(rv::add);
             }
           }
-        }
-      });
-      return languages;
+        });
+      }
+      return rv;
+    }
+
+    protected final List<SLanguage> getSelectedLanguages() {
+      final IntStream selectedRows = IntStream.of(myUsedLangsTable.getSelectedRows());
+      return toLanguages(selectedRows.mapToObj(myUsedLangsTableModel::getValueAt).collect(Collectors.toList()));
     }
   }
 
-  public abstract static class FindActionButton extends AnActionButton {
+  public abstract static class FindActionButton extends ElementActionButton {
     protected final JBTable myTable;
 
     public FindActionButton(JBTable table) {
       myTable = table;
-      this.getTemplatePresentation().setEnabledAndVisible(true);
       this.getTemplatePresentation().setIcon(Actions.Find);
-      this.getTemplatePresentation().setText("Find usages");
-    }
-
-    @Override
-    public boolean isEnabled() {
-      return !(myTable.getSelectionModel().isSelectionEmpty());
+      this.getTemplatePresentation().setText(PropertiesBundle.message("model.dependencies.find.text"));
+      setEnabled(true);
+      setVisible(true);
     }
 
     @Override
@@ -601,19 +619,16 @@ public abstract class MPSPropertiesConfigurable implements Configurable, Disposa
     }
 
     @Override
-    protected int convertIndexToModel(int viewIndex) {
-      return myComponent.convertRowIndexToModel(viewIndex);
+    protected int getElementCount() {
+      final TableModel tableModel = myComponent.getModel();
+      return tableModel.getRowCount();
     }
 
     @Override
-    public Object[] getAllElements() {
+    protected Object getElementAt(int viewIndex) {
       final TableModel tableModel = myComponent.getModel();
-      final int count = tableModel.getRowCount();
-      Object[] elements = new Object[count];
-      for (int idx = 0; idx < count; idx++) {
-        elements[idx] = tableModel.getValueAt(idx, myColumnIndex);
-      }
-      return elements;
+      // XXX not sure if need convertRowIndexToModel? I assume as long as I query tableModel than it's not viewIndex.
+      return tableModel.getValueAt(myComponent.convertRowIndexToModel(viewIndex), myColumnIndex);
     }
 
     @Override
@@ -628,7 +643,11 @@ public abstract class MPSPropertiesConfigurable implements Configurable, Disposa
     }
 
     @Override
-    public void selectElement(Object element, String selectedText) {
+    public void selectElement(@Nullable Object element, String selectedText) {
+      if (element == null) {
+        // @see SpeedSearchBase.findAndSelectElement, which passes findElement(searchQuery) result w/o checking for null
+        return;
+      }
       final TableModel tableModel = myComponent.getModel();
       final int count = tableModel.getRowCount();
       for (int row = 0; row < count; row++) {

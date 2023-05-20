@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="33j2qqjxr36vf62v4f1qzjiqkc9qn08" />
+<product version="3" modelHash="cu85jzjte4flp5xsxnbhdrs010zw8l1">
+  <files names="CachingAppender.java:CachingPrintStream.java:Output.java:ThreadWatcher.java" />
+</product>
 

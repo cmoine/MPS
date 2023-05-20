@@ -1,35 +1,20 @@
-<component xmlns:xi="http://www.w3.org/2001/XInclude">
+<idea-plugin xmlns:xi="http://www.w3.org/2001/XInclude">
   <actions>
     <group id="MPSToolbarRunGroup">
       <!--for integration purposes-->
       <add-to-group group-id="ToolbarRunGroup" relative-to-action="RunConfiguration" anchor="before"/>
     </group>
 
-    <group id="MPSWelcomeGettingStartedMenu">
-      <action id="CreateNewProjectAction"
+    <group id="WelcomeScreen.QuickStart.MPS">
+      <action id="WelcomeScreen.CreateNewProject"
               class="jetbrains.mps.workbench.actions.NewMPSProjectAction"
-              text="Create New Project"
+              text="New Project"
               description="You can create a new project with this action"/>
-
-      <action id="OpenExistingProjectAction"
-              class="jetbrains.mps.workbench.actions.OpenMPSProjectAction"
-              text="Open Project"
+      <action id="WelcomeScreen.OpenProject"
+              class="jetbrains.mps.workbench.actions.OpenMPSProjectAction$OnMPSWelcomeScreen"
+              text="Open"
               description="You can open existing project with this action"/>
       <add-to-group group-id="WelcomeScreen.QuickStart" anchor="first"/>
     </group>
-
-    <group id="FindMenuGroup" popup="true">
-      <add-to-group group-id="EditCreateDeleteGroup" anchor="before" relative-to-action="EditSelectGroup"/>
-      <action id="SelectNextOccurrence" class="com.intellij.openapi.editor.actions.SelectNextOccurrenceAction"/>
-      <action id="UnselectPreviousOccurrence" class="com.intellij.openapi.editor.actions.UnselectPreviousOccurrenceAction"/>
-      <action id="SelectAllOccurrences" class="com.intellij.openapi.editor.actions.SelectAllOccurrencesAction"/>
-    </group>
-
-    <action id="Find" class="com.intellij.openapi.editor.actions.IncrementalFindAction" icon="/actions/menu-find.png"/>
-    <action id="Replace" class="com.intellij.openapi.editor.actions.ReplaceAction" icon="/actions/menu-replace.png"/>
-    <action id="FindNext" class="com.intellij.ide.actions.SearchAgainAction"/>
-    <action id="FindPrevious" class="com.intellij.ide.actions.SearchBackAction"/>
-    <action id="FindWordAtCaret" class="com.intellij.openapi.editor.actions.FindWordAtCaretAction"/>
-    <action id="FindUsages" class="com.intellij.find.actions.FindUsagesAction"/>
   </actions>
-</component>
+</idea-plugin>

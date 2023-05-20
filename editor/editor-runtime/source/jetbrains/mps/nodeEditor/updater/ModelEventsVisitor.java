@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ import jetbrains.mps.smodel.event.SModelChildEvent;
 import jetbrains.mps.smodel.event.SModelDevKitEvent;
 import jetbrains.mps.smodel.event.SModelEvent;
 import jetbrains.mps.smodel.event.SModelEventVisitor;
-import jetbrains.mps.smodel.event.SModelFileChangedEvent;
 import jetbrains.mps.smodel.event.SModelImportEvent;
 import jetbrains.mps.smodel.event.SModelLanguageEvent;
 import jetbrains.mps.smodel.event.SModelPropertyEvent;
@@ -84,7 +83,7 @@ class ModelEventsVisitor implements SModelEventVisitor {
     if (event.isAdded()) {
       mySelectionHandler = new ChildAddedSelectionHandler(event.getChild());
     } else {
-      mySelectionHandler = new ChildRemovedSelectionHandler(event.getParent(), event.getChildRole(), event.getChildIndex());
+      mySelectionHandler = new ChildRemovedSelectionHandler(event.getParent(), event.getAggregationLink(), event.getChildIndex());
     }
   }
 
@@ -118,7 +117,7 @@ class ModelEventsVisitor implements SModelEventVisitor {
       return;
     }
     myIsPropertyModification = Boolean.TRUE;
-    myModifiedProperty = new Pair<SNodeReference, String>(new SNodePointer(event.getNode()), event.getPropertyName());
+    myModifiedProperty = new Pair<>(new SNodePointer(event.getNode()), event.getPropertyName());
     myIsPropertyAddedRemoved =
         SModelUtil_new.isEmptyPropertyValue(event.getOldPropertyValue()) != SModelUtil_new.isEmptyPropertyValue(event.getNewPropertyValue());
   }
@@ -135,11 +134,6 @@ class ModelEventsVisitor implements SModelEventVisitor {
 
   @Override
   public void visitImportEvent(SModelImportEvent event) {
-    visitNonPropertyEvent();
-  }
-
-  @Override
-  public void visitModelFileEvent(SModelFileChangedEvent event) {
     visitNonPropertyEvent();
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,19 +16,15 @@
 package jetbrains.mps.util;
 
 import jetbrains.mps.vfs.IFile;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import jetbrains.mps.vfs.util.PathFormatChecker;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
+import java.util.ArrayList;
+import java.util.function.Predicate;
 
-/**
- * rewrite using {@link jetbrains.mps.vfs.path.Path}
- */
 class MacroHelperImpl implements MacroHelper {
-  private static final Logger LOG = LogManager.getLogger(MacroHelperImpl.class);
-
-  @Nullable private final IFile anchorFile; // what is null anchorFile??
+  @Nullable
+  private final IFile anchorFile; // null anchorFile is generally a 'global' helper, but could also happen for modules w/o descriptor in a file
   private final Macros macros;
 
   MacroHelperImpl(@Nullable IFile anchorFile, Macros macros) {
@@ -41,32 +37,43 @@ class MacroHelperImpl implements MacroHelper {
     if (path == null) {
       return null;
     }
-
-    // This is a support for paths with macros which were saved in Windows before MPS beta.
-    // Path with macros should always be stored with slashes.
-    if (path.indexOf('\\') != -1) {
-      LOG.warn("Using backslashes in macros: " + path);
-      path = path.replace('\\', MacrosFactory.SEPARATOR_CHAR);
-    }
-
-    if (anchorFile == null || !anchorFile.isInArchive()) {
-      path = path.replace(MacrosFactory.SEPARATOR_CHAR, File.separatorChar);
-    }
+    new PathFormatChecker(path).osIndependentPath();
 
     return macros.expand(path, anchorFile);
   }
 
   @Override
-  public String shrinkPath(@Nullable String absolutePath) {
+  public String shrinkPath(@Nullable String absolutePath, @Nullable String hintOriginalPath) {
     if (absolutePath == null) {
       return null;
     }
 
     //this is to support undefined path vars
-    if (!absolutePath.startsWith("${")) {
-      absolutePath = macros.shrink(absolutePath, anchorFile);
+    if (absolutePath.startsWith("${")) {
+      return absolutePath;
     }
 
-    return absolutePath.replace(File.separatorChar, MacrosFactory.SEPARATOR_CHAR);
+    new PathFormatChecker(absolutePath).osIndependentPath().noDots().absolute();
+
+    ArrayList<String> alternatives = new ArrayList<>();
+    macros.shrink(absolutePath, anchorFile, alternatives);
+    if (alternatives.isEmpty()) {
+      return absolutePath;
+    }
+    if (hintOriginalPath == null || alternatives.size() == 1) {
+      return alternatives.get(0);
+    }
+    // size > 1 && got a hint
+    if (MacrosFactory.containsMacro(hintOriginalPath)) {
+      final String hintMacro = hintOriginalPath.substring(2, hintOriginalPath.indexOf('}'));
+      Predicate<String> isSameMacro = (s -> s.regionMatches(2, hintMacro, 0, hintMacro.length()));
+      final String sameMacro = alternatives.stream().filter(MacrosFactory::containsMacro).filter(isSameMacro).findFirst().orElse(null);
+      if (sameMacro != null) {
+        return sameMacro;
+      }
+      // no matching macro while there's one in the original value, can't get close to the hint, just fall through to get the top alternative
+    }
+    // XXX perhaps, shall find alternative with the longest common prefix with the hint value?
+    return alternatives.get(0);
   }
 }

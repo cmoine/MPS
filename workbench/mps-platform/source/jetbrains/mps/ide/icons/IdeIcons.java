@@ -24,7 +24,6 @@ import jetbrains.mps.fileTypes.FileIcons;
 import jetbrains.mps.icons.MPSIcons;
 import jetbrains.mps.icons.MPSIcons.Nodes;
 import jetbrains.mps.icons.MPSIcons.ToolWindows;
-import jetbrains.mps.util.annotation.ToRemove;
 
 import javax.swing.Icon;
 
@@ -36,7 +35,7 @@ public class IdeIcons {
   public static final Icon UNKNOWN_ICON = Nodes.Unknown;
 
   public static final Icon DEFAULT_ICON = ToolWindows.Default;
-  public static final Icon DEFAULT_CONCEPT_ICON = Nodes.RootNode;
+  public static final Icon DEFAULT_CONCEPT_ICON = Nodes.Node;
   public static final Icon DEFAULT_ROOT_ICON = Nodes.RootNode;
   public static final Icon DEFAULT_NODE_ICON = Nodes.Node;
 
@@ -51,27 +50,16 @@ public class IdeIcons {
   public static final Icon DEVKIT_ICON = FileIcons.DEVKIT_ICON;
   public static final Icon GENERATOR_ICON = Nodes.Generator;
 
-  /**
-   * @deprecated duplicates {@link #LANGUAGE_ICON}
-   */
-  @Deprecated
-  @ToRemove(version = 3.3)
-  public static final Icon PROJECT_LANGUAGE_ICON = FileIcons.PROJECT_LANGUAGE_ICON;
-
-  public static final Icon PROJECT_MODELS_ICON = MPSIcons.Nodes.ProjectModels;
-  public static final Icon PROJECT_MODELS_EXPANDED_ICON = MPSIcons.Nodes.ProjectModels;
-  public static final Icon TRANSIENT_MODELS_ICON = MPSIcons.Nodes.TransientModels;
-
   public static final Icon PROPERTIES_ICON = General.Settings;
   public static final Icon INSPECTOR_ICON = Toolwindows.ToolWindowInspection;
+  public static final Icon GEAR_PLAIN_ICON=General.GearPlain;
+  public static final Icon SYNC_SCROLLING=AllIcons.Actions.SynchronizeScrolling;
 
   public static final Icon APPLY = Diff.Arrow;
+  public static final Icon APPLY_RIGHT= Diff.ArrowRight;
   public static final Icon EXCLUDE = Diff.Remove;
-  public static final Icon OPENED_FOLDER = AllIcons.Nodes.TreeOpen;
-  public static final Icon CLOSED_FOLDER = AllIcons.Nodes.TreeClosed;
+  public static final Icon OPENED_FOLDER = AllIcons.Nodes.Folder;
+  public static final Icon CLOSED_FOLDER = AllIcons.Nodes.Folder;
 
   public static final Icon REFERENCE_ICON = Actions.Forward;
-
-  public static final Icon MODULE_GROUP_CLOSED = AllIcons.Nodes.ModuleGroup;
-  public static final Icon MODULE_GROUP_OPENED = AllIcons.Nodes.ModuleGroup;
 }

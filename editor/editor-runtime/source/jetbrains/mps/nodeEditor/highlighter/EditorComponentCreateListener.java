@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,13 +19,24 @@ import com.intellij.util.messages.Topic;
 import jetbrains.mps.nodeEditor.EditorComponent;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * This is unfortunately named {@code EditorComponentRootCellChangeListener}.
+ * Dispatches events when primary node of an {@link EditorComponent} changes so that clients
+ * can react and update related messages/UI elements.
+ * For a proper, platform-independent lifecycle listener, check {@link jetbrains.mps.editor.EditorComponentLifecycleListener}.
+ */
 public interface EditorComponentCreateListener {
   Topic<EditorComponentCreateListener> EDITOR_COMPONENT_CREATION =
-    new Topic<EditorComponentCreateListener>("editor component creation and disposal", EditorComponentCreateListener.class);
+      new Topic<>("editor component creation and disposal", EditorComponentCreateListener.class);
 
-  // This is invoked in the end of EditorComponent constructor
+  /**
+   * Invoked when there's a node selected for editing for the given editor component, *after* the change.
+   */
   void editorComponentCreated(@NotNull EditorComponent editorComponent);
 
-  // This is invoked before EditorComponent is disposed
+  /**
+   * Invoked when there is a node selected for editing and there was one edited already (i.e. not invoked on first editNode()).
+   * Also invoked when {@link EditorComponent}, as UI component, is about to cease to exist (i.e. without need for a node change).
+   */
   void editorComponentDisposed(@NotNull EditorComponent editorComponent);
 }

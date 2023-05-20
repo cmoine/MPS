@@ -15,7 +15,7 @@
  */
 package jetbrains.mps.openapi.actions.descriptor;
 
-import jetbrains.mps.smodel.runtime.LanguageAspectDescriptor;
+import jetbrains.mps.smodel.runtime.ILanguageAspect;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 
 import java.util.Collection;
@@ -24,9 +24,20 @@ import java.util.Collection;
  * User: shatalin
  * Date: 29/01/15
  */
-public interface ActionAspectDescriptor extends LanguageAspectDescriptor {
+public interface ActionAspectDescriptor extends ILanguageAspect {
 
   Collection<NodeFactory> getFactories(SAbstractConcept concept);
 
+
+  /**
+   * @deprecated actions language does not support transformation and substitute builders, they were moved to the {@link jetbrains.mps.openapi.editor.descriptor.EditorAspectDescriptor}
+   */
+  @Deprecated
   boolean hasBuilders();
+
+  Collection<CopyPreProcessor> getCopyPreProcessors();
+
+  Collection<PastePostProcessor> getPastePostProcessors();
+
+  Collection<PasteWrapper> getPasteWrappers();
 }

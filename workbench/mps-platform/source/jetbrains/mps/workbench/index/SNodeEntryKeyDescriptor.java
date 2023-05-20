@@ -16,6 +16,7 @@
 package jetbrains.mps.workbench.index;
 
 import com.intellij.util.io.KeyDescriptor;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.DataInput;
 import java.io.DataOutput;
@@ -29,12 +30,12 @@ public class SNodeEntryKeyDescriptor implements KeyDescriptor<SNodeEntry> {
   private final SNodeEntryExternalizer myEntryExternalizer = new SNodeEntryExternalizer(false);
 
   @Override
-  public void save(DataOutput out, SNodeEntry value) throws IOException {
+  public void save(@NotNull DataOutput out, SNodeEntry value) throws IOException {
     myEntryExternalizer.save(out, value);
   }
 
   @Override
-  public SNodeEntry read(DataInput in) throws IOException {
+  public SNodeEntry read(@NotNull DataInput in) throws IOException {
     return myEntryExternalizer.read(in);
   }
 

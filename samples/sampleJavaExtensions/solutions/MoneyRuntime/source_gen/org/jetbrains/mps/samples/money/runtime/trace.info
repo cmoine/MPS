@@ -14,7 +14,7 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1164991038168:jetbrains.mps.baseLanguage.structure.ThrowStatement" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1164879751025:jetbrains.mps.baseLanguage.structure.TryCatchStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/5351203823916750322:jetbrains.mps.baseLanguage.structure.TryUniversalStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1076505808687:jetbrains.mps.baseLanguage.structure.WhileStatement" />
   <root nodeRef="r:540d5e3a-9424-4c25-a6ed-9d51ec46dfad(org.jetbrains.mps.samples.money.runtime)/4001135958234331732">
     <file name="DailyStockPrice.java">
@@ -76,96 +76,96 @@
   </root>
   <root nodeRef="r:540d5e3a-9424-4c25-a6ed-9d51ec46dfad(org.jetbrains.mps.samples.money.runtime)/4001135958234855014">
     <file name="StockPriceDownloader.java">
-      <node id="4001135958234855082" at="23,0,24,0" concept="11" trace="instance" />
-      <node id="4001135958234855778" at="25,52,26,20" concept="8" />
-      <node id="4001135958234970127" at="32,0,33,0" concept="3" trace="priceCache" />
-      <node id="4001135958234994538" at="34,28,35,44" concept="2" />
-      <node id="4001135958235448370" at="38,52,39,43" concept="8" />
-      <node id="4001135958235026353" at="44,11,45,83" concept="7" />
-      <node id="4001135958235312362" at="46,29,47,75" concept="2" />
-      <node id="4001135958233347544" at="47,75,48,85" concept="7" />
-      <node id="4001135958233349324" at="48,85,49,55" concept="7" />
-      <node id="4001135958233419547" at="49,55,50,84" concept="7" />
-      <node id="4001135958233424530" at="50,84,51,22" concept="7" />
-      <node id="4001135958233523151" at="51,22,52,32" concept="7" />
-      <node id="4001135958234461229" at="52,32,53,75" concept="7" />
-      <node id="4001135958233557228" at="55,28,56,44" concept="7" />
-      <node id="4001135958233577786" at="56,44,57,73" concept="7" />
-      <node id="4001135958233603691" at="59,45,60,85" concept="2" />
-      <node id="4001135958234413420" at="61,17,62,141" concept="7" />
-      <node id="4001135958233562533" at="62,141,63,64" concept="2" />
-      <node id="4001135958234410687" at="63,64,64,0" concept="10" />
-      <node id="4001135958234652131" at="65,42,66,38" concept="9" />
-      <node id="4001135958234666987" at="66,38,67,28" concept="8" />
-      <node id="4001135958233635293" at="68,53,69,38" concept="9" />
-      <node id="4001135958233621269" at="69,38,70,28" concept="8" />
-      <node id="4001135958233546085" at="72,20,73,29" concept="2" />
-      <node id="4001135958235113327" at="75,11,76,62" concept="2" />
-      <node id="4001135958233645900" at="77,9,78,96" concept="8" />
-      <node id="4001135958233352220" at="79,41,80,20" concept="8" />
-      <node id="4001135958233362569" at="81,31,82,20" concept="8" />
-      <node id="4001135958233830184" at="84,12,85,18" concept="8" />
-      <node id="4001135958234114568" at="89,70,90,45" concept="8" />
-      <node id="4001135958234855897" at="29,0,31,0" concept="1" trace="StockPriceDownloader#()V" />
-      <node id="4001135958233544918" at="72,18,74,13" concept="0" />
-      <node id="4001135958233824459" at="84,10,86,5" concept="0" />
-      <node id="4001135958234855043" at="25,0,28,0" concept="12" trace="getInstance#()Lorg/jetbrains/mps/samples/money/runtime/StockPriceDownloader;" />
-      <node id="4001135958234990791" at="34,0,37,0" concept="6" trace="clearCache#()V" />
-      <node id="4001135958235427774" at="38,0,41,0" concept="6" trace="isValidStockSymbol#(Ljava/lang/String;)Z" />
-      <node id="4001135958233588641" at="58,19,61,17" concept="4" />
-      <node id="4001135958234114568" at="89,0,92,0" concept="12" trace="trim_54jj5w_a0a0a0a2a0a7a1a0a0a21#(Ljava/lang/String;)Ljava/lang/String;" />
-      <node id="4001135958233615363" at="57,73,71,15" concept="14" />
-      <node id="4001135958233535996" at="54,54,74,13" concept="5" />
-      <node id="4001135958233422324" at="53,75,75,11" concept="15" />
-      <node id="4001135958235056085" at="45,83,77,9" concept="5" />
-      <node id="4001135958233350117" at="43,50,83,7" concept="14" />
-      <node id="4001135958233295814" at="42,47,86,5" concept="5" />
-      <node id="4001135958234862735" at="42,0,88,0" concept="6" trace="getCurrentPrice#(Ljava/lang/String;)Lorg/jetbrains/mps/samples/money/runtime/Money;" />
-      <scope id="4001135958234855901" at="29,34,29,34" />
-      <scope id="4001135958234855046" at="25,52,26,20" />
-      <scope id="4001135958234990794" at="34,28,35,44" />
-      <scope id="4001135958235427777" at="38,52,39,43" />
-      <scope id="4001135958233588644" at="59,45,60,85" />
-      <scope id="4001135958233544919" at="72,20,73,29" />
-      <scope id="4001135958233350131" at="79,0,80,20">
+      <node id="4001135958234855082" at="22,0,23,0" concept="11" trace="instance" />
+      <node id="4001135958234855778" at="24,52,25,20" concept="8" />
+      <node id="4001135958234970127" at="31,0,32,0" concept="3" trace="priceCache" />
+      <node id="4001135958234994538" at="33,28,34,44" concept="2" />
+      <node id="4001135958235448370" at="37,52,38,43" concept="8" />
+      <node id="4001135958235026353" at="43,11,44,83" concept="7" />
+      <node id="4001135958235312362" at="45,29,46,75" concept="2" />
+      <node id="4001135958233347544" at="46,75,47,85" concept="7" />
+      <node id="4001135958233349324" at="47,85,48,48" concept="7" />
+      <node id="4001135958233419547" at="48,48,49,84" concept="7" />
+      <node id="4001135958233424530" at="49,84,50,22" concept="7" />
+      <node id="4001135958233523151" at="50,22,51,32" concept="7" />
+      <node id="4001135958234461229" at="51,32,52,75" concept="7" />
+      <node id="4001135958233557228" at="54,28,55,44" concept="7" />
+      <node id="4001135958233577786" at="55,44,56,73" concept="7" />
+      <node id="4001135958233603691" at="58,45,59,85" concept="2" />
+      <node id="4001135958234413420" at="60,17,61,141" concept="7" />
+      <node id="4001135958233562533" at="61,141,62,64" concept="2" />
+      <node id="4001135958234410687" at="62,64,63,0" concept="10" />
+      <node id="4001135958234652131" at="64,42,65,37" concept="9" />
+      <node id="4001135958234666987" at="65,37,66,28" concept="8" />
+      <node id="4001135958233635293" at="67,53,68,37" concept="9" />
+      <node id="4001135958233621269" at="68,37,69,28" concept="8" />
+      <node id="4001135958233546085" at="71,20,72,29" concept="2" />
+      <node id="4001135958235113327" at="74,11,75,62" concept="2" />
+      <node id="4001135958233645900" at="76,9,77,96" concept="8" />
+      <node id="4001135958233352220" at="78,41,79,20" concept="8" />
+      <node id="4001135958233362569" at="80,31,81,20" concept="8" />
+      <node id="4001135958233830184" at="83,12,84,18" concept="8" />
+      <node id="4001135958234114568" at="88,70,89,45" concept="8" />
+      <node id="4001135958234855897" at="28,0,30,0" concept="1" trace="StockPriceDownloader#()V" />
+      <node id="4001135958233544918" at="71,18,73,13" concept="0" />
+      <node id="4001135958233824459" at="83,10,85,5" concept="0" />
+      <node id="4001135958234855043" at="24,0,27,0" concept="12" trace="getInstance#()Lorg/jetbrains/mps/samples/money/runtime/StockPriceDownloader;" />
+      <node id="4001135958234990791" at="33,0,36,0" concept="6" trace="clearCache#()V" />
+      <node id="4001135958235427774" at="37,0,40,0" concept="6" trace="isValidStockSymbol#(Ljava/lang/String;)Z" />
+      <node id="4001135958233588641" at="57,19,60,17" concept="4" />
+      <node id="4001135958234114568" at="88,0,91,0" concept="12" trace="trim_54jj5w_a0a0a0a2a0a7a1a0a0a21#(Ljava/lang/String;)Ljava/lang/String;" />
+      <node id="4001135958233615363" at="56,73,70,15" concept="14" />
+      <node id="4001135958233535996" at="53,54,73,13" concept="5" />
+      <node id="4001135958233422324" at="52,75,74,11" concept="15" />
+      <node id="4001135958235056085" at="44,83,76,9" concept="5" />
+      <node id="4001135958233350117" at="42,50,82,7" concept="14" />
+      <node id="4001135958233295814" at="41,47,85,5" concept="5" />
+      <node id="4001135958234862735" at="41,0,87,0" concept="6" trace="getCurrentPrice#(Ljava/lang/String;)Lorg/jetbrains/mps/samples/money/runtime/Money;" />
+      <scope id="4001135958234855901" at="28,34,28,34" />
+      <scope id="4001135958234855046" at="24,52,25,20" />
+      <scope id="4001135958234990794" at="33,28,34,44" />
+      <scope id="4001135958235427777" at="37,52,38,43" />
+      <scope id="4001135958233588644" at="58,45,59,85" />
+      <scope id="4001135958233544919" at="71,20,72,29" />
+      <scope id="4001135958233350134" at="78,41,79,20" />
+      <scope id="4001135958233350127" at="80,31,81,20" />
+      <scope id="4001135958233824460" at="83,12,84,18" />
+      <scope id="4001135958234114568" at="88,70,89,45" />
+      <scope id="4001135958234855897" at="28,0,30,0" />
+      <scope id="4001135958234638630" at="64,42,66,28" />
+      <scope id="4001135958233615368" at="67,53,69,28" />
+      <scope id="4001135958233350131" at="78,7,80,7">
         <var name="e" id="4001135958233350135" />
       </scope>
-      <scope id="4001135958233350134" at="79,41,80,20" />
-      <scope id="4001135958233350124" at="81,0,82,20">
+      <scope id="4001135958233350124" at="80,7,82,7">
         <var name="e" id="4001135958233350128" />
       </scope>
-      <scope id="4001135958233350127" at="81,31,82,20" />
-      <scope id="4001135958233824460" at="84,12,85,18" />
-      <scope id="4001135958234114568" at="89,70,90,45" />
-      <scope id="4001135958234855897" at="29,0,31,0" />
-      <scope id="4001135958234638627" at="65,0,67,28">
-        <var name="e" id="4001135958234638628" />
-      </scope>
-      <scope id="4001135958234638630" at="65,42,67,28" />
-      <scope id="4001135958233615365" at="68,0,70,28">
-        <var name="e" id="4001135958233615366" />
-      </scope>
-      <scope id="4001135958233615368" at="68,53,70,28" />
-      <scope id="4001135958234855043" at="25,0,28,0" />
-      <scope id="4001135958234990791" at="34,0,37,0" />
-      <scope id="4001135958235427774" at="38,0,41,0">
+      <scope id="4001135958234855043" at="24,0,27,0" />
+      <scope id="4001135958234990791" at="33,0,36,0" />
+      <scope id="4001135958235427774" at="37,0,40,0">
         <var name="symbol" id="4001135958235434514" />
       </scope>
-      <scope id="4001135958233588641" at="58,19,61,17">
+      <scope id="4001135958233588641" at="57,19,60,17">
         <var name="i" id="4001135958233588647" />
       </scope>
-      <scope id="4001135958234114568" at="89,0,92,0">
+      <scope id="4001135958234638627" at="64,15,67,15">
+        <var name="e" id="4001135958234638628" />
+      </scope>
+      <scope id="4001135958233615365" at="67,15,70,15">
+        <var name="e" id="4001135958233615366" />
+      </scope>
+      <scope id="4001135958234114568" at="88,0,91,0">
         <var name="str" id="4001135958234114568" />
       </scope>
-      <scope id="4001135958233615364" at="58,19,64,0">
+      <scope id="4001135958233615364" at="57,19,63,0">
         <var name="price" id="4001135958234413421" />
       </scope>
-      <scope id="4001135958233535999" at="55,28,71,15">
+      <scope id="4001135958233535999" at="54,28,70,15">
         <var name="item" id="4001135958233557229" />
         <var name="tokenizer" id="4001135958233577787" />
       </scope>
-      <scope id="4001135958233422326" at="54,54,74,13" />
-      <scope id="4001135958235056088" at="46,29,76,62">
+      <scope id="4001135958233422326" at="53,54,73,13" />
+      <scope id="4001135958235056088" at="45,29,75,62">
         <var name="dateFormat" id="4001135958234461230" />
         <var name="header" id="4001135958233523154" />
         <var name="line" id="4001135958233424533" />
@@ -173,15 +173,15 @@
         <var name="stream" id="4001135958233349325" />
         <var name="url" id="4001135958233347545" />
       </scope>
-      <scope id="4001135958233350118" at="44,11,78,96">
+      <scope id="4001135958233350118" at="43,11,77,96">
         <var name="prices" id="4001135958235026354" />
       </scope>
-      <scope id="4001135958233295815" at="43,50,83,7" />
-      <scope id="4001135958233293108" at="42,47,86,5" />
-      <scope id="4001135958234862735" at="42,0,88,0">
+      <scope id="4001135958233295815" at="42,50,82,7" />
+      <scope id="4001135958233293108" at="41,47,85,5" />
+      <scope id="4001135958234862735" at="41,0,87,0">
         <var name="symbol" id="4001135958234868875" />
       </scope>
-      <unit id="4001135958234855014" at="22,0,93,0" name="org.jetbrains.mps.samples.money.runtime.StockPriceDownloader" />
+      <unit id="4001135958234855014" at="21,0,92,0" name="org.jetbrains.mps.samples.money.runtime.StockPriceDownloader" />
     </file>
   </root>
   <root nodeRef="r:540d5e3a-9424-4c25-a6ed-9d51ec46dfad(org.jetbrains.mps.samples.money.runtime)/4001135958235925037">
@@ -226,77 +226,121 @@
   </root>
   <root nodeRef="r:540d5e3a-9424-4c25-a6ed-9d51ec46dfad(org.jetbrains.mps.samples.money.runtime)/5447719361346501252">
     <file name="Money.java">
-      <node id="5447719361346501289" at="8,52,9,27" concept="2" />
-      <node id="5447719361346501295" at="9,27,10,31" concept="2" />
-      <node id="5447719361346519358" at="12,45,13,43" concept="2" />
-      <node id="5447719361346519372" at="13,43,14,31" concept="2" />
-      <node id="5447719361346501259" at="16,42,17,55" concept="8" />
-      <node id="5447719361346519508" at="20,28,21,55" concept="8" />
-      <node id="5447719361346555903" at="24,60,25,123" concept="13" />
-      <node id="5447719361346555931" at="26,12,27,84" concept="8" />
-      <node id="5447719361346555948" at="31,60,32,123" concept="13" />
-      <node id="5447719361346555964" at="33,12,34,89" concept="8" />
-      <node id="5447719361346501266" at="37,0,38,0" concept="3" trace="myAmount" />
-      <node id="5447719361346501266" at="38,33,39,25" concept="8" />
-      <node id="5447719361346501266" at="41,44,42,26" concept="2" />
-      <node id="5447719361346501273" at="44,0,45,0" concept="3" trace="myCurrency" />
-      <node id="5447719361346501273" at="45,31,46,27" concept="8" />
-      <node id="5447719361346501273" at="48,42,49,28" concept="2" />
-      <node id="5447719361346555902" at="26,10,28,5" concept="0" />
-      <node id="5447719361346555962" at="33,10,35,5" concept="0" />
-      <node id="5447719361346501253" at="16,0,19,0" concept="6" trace="to#(Ljava/lang/String;)Lorg/jetbrains/mps/samples/money/runtime/Money;" />
-      <node id="5447719361346501266" at="38,0,41,0" concept="6" trace="getAmount#()Ljava/math/BigDecimal;" />
-      <node id="5447719361346501266" at="41,0,44,0" concept="6" trace="setAmount#(Ljava/math/BigDecimal;)V" />
-      <node id="5447719361346501273" at="45,0,48,0" concept="6" trace="getCurrency#()Ljava/lang/String;" />
-      <node id="5447719361346501273" at="48,0,51,0" concept="6" trace="setCurrency#(Ljava/lang/String;)V" />
-      <node id="5447719361346501281" at="8,0,12,0" concept="1" trace="Money#(Ljava/math/BigDecimal;Ljava/lang/String;)V" />
-      <node id="5447719361346519348" at="12,0,16,0" concept="1" trace="Money#(ILjava/lang/String;)V" />
-      <node id="5447719361346519498" at="19,0,23,0" concept="6" trace="toString#()Ljava/lang/String;" />
-      <node id="5447719361346555870" at="23,40,28,5" concept="5" />
-      <node id="5447719361346555937" at="30,41,35,5" concept="5" />
-      <node id="5447719361346555824" at="23,0,30,0" concept="6" trace="plus#(Lorg/jetbrains/mps/samples/money/runtime/Money;)Lorg/jetbrains/mps/samples/money/runtime/Money;" />
-      <node id="5447719361346555932" at="30,0,37,0" concept="6" trace="minus#(Lorg/jetbrains/mps/samples/money/runtime/Money;)Lorg/jetbrains/mps/samples/money/runtime/Money;" />
-      <scope id="5447719361346501258" at="16,42,17,55" />
-      <scope id="5447719361346519501" at="20,28,21,55" />
-      <scope id="5447719361346555901" at="24,60,25,123" />
-      <scope id="5447719361346555871" at="26,12,27,84" />
-      <scope id="5447719361346555947" at="31,60,32,123" />
-      <scope id="5447719361346555963" at="33,12,34,89" />
-      <scope id="5447719361346501266" at="38,33,39,25" />
-      <scope id="5447719361346501266" at="41,44,42,26" />
-      <scope id="5447719361346501273" at="45,31,46,27" />
-      <scope id="5447719361346501273" at="48,42,49,28" />
-      <scope id="5447719361346501288" at="8,52,10,31" />
-      <scope id="5447719361346519351" at="12,45,14,31" />
-      <scope id="5447719361346501253" at="16,0,19,0">
+      <node id="5447719361346501252" at="9,0,10,0" concept="3" trace="myAmount" />
+      <node id="5447719361346501252" at="10,33,11,25" concept="8" />
+      <node id="5447719361346501252" at="13,45,14,26" concept="2" />
+      <node id="5447719361346501252" at="16,50,17,22" concept="2" />
+      <node id="5447719361346501252" at="17,22,18,17" concept="8" />
+      <node id="5447719361346501252" at="22,31,23,27" concept="8" />
+      <node id="5447719361346501252" at="25,41,26,26" concept="2" />
+      <node id="5447719361346501252" at="30,0,31,0" concept="3" trace="myCurrency" />
+      <node id="5447719361346501252" at="31,31,32,27" concept="8" />
+      <node id="5447719361346501252" at="34,43,35,28" concept="2" />
+      <node id="5447719361346501252" at="37,44,38,24" concept="2" />
+      <node id="5447719361346501252" at="38,24,39,17" concept="8" />
+      <node id="5447719361346501252" at="43,27,44,29" concept="8" />
+      <node id="5447719361346501252" at="46,37,47,28" concept="2" />
+      <node id="5447719361346501289" at="51,52,52,27" concept="2" />
+      <node id="5447719361346501295" at="52,27,53,31" concept="2" />
+      <node id="5447719361346519358" at="55,45,56,43" concept="2" />
+      <node id="5447719361346519372" at="56,43,57,31" concept="2" />
+      <node id="5447719361346501259" at="59,42,60,55" concept="8" />
+      <node id="5447719361346519508" at="63,28,64,55" concept="8" />
+      <node id="5447719361346555903" at="67,60,68,123" concept="13" />
+      <node id="5447719361346555931" at="69,12,70,84" concept="8" />
+      <node id="5447719361346555948" at="74,60,75,123" concept="13" />
+      <node id="5447719361346555964" at="76,12,77,89" concept="8" />
+      <node id="5447719361346555902" at="69,10,71,5" concept="0" />
+      <node id="5447719361346555962" at="76,10,78,5" concept="0" />
+      <node id="5447719361346501252" at="10,0,13,0" concept="6" trace="getAmount#()Ljava/math/BigDecimal;" />
+      <node id="5447719361346501252" at="13,0,16,0" concept="6" trace="_setAmount#(Ljava/math/BigDecimal;)V" />
+      <node id="5447719361346501252" at="22,0,25,0" concept="6" trace="get#()Ljava/math/BigDecimal;" />
+      <node id="5447719361346501252" at="25,0,28,0" concept="6" trace="set#(Ljava/math/BigDecimal;)V" />
+      <node id="5447719361346501252" at="31,0,34,0" concept="6" trace="getCurrency#()Ljava/lang/String;" />
+      <node id="5447719361346501252" at="34,0,37,0" concept="6" trace="_setCurrency#(Ljava/lang/String;)V" />
+      <node id="5447719361346501252" at="43,0,46,0" concept="6" trace="get#()Ljava/lang/String;" />
+      <node id="5447719361346501252" at="46,0,49,0" concept="6" trace="set#(Ljava/lang/String;)V" />
+      <node id="5447719361346501253" at="59,0,62,0" concept="6" trace="to#(Ljava/lang/String;)Lorg/jetbrains/mps/samples/money/runtime/Money;" />
+      <node id="5447719361346501252" at="16,0,20,0" concept="6" trace="setAmount#(Ljava/math/BigDecimal;)Ljava/math/BigDecimal;" />
+      <node id="5447719361346501252" at="37,0,41,0" concept="6" trace="setCurrency#(Ljava/lang/String;)Ljava/lang/String;" />
+      <node id="5447719361346501281" at="51,0,55,0" concept="1" trace="Money#(Ljava/math/BigDecimal;Ljava/lang/String;)V" />
+      <node id="5447719361346519348" at="55,0,59,0" concept="1" trace="Money#(ILjava/lang/String;)V" />
+      <node id="5447719361346519498" at="62,0,66,0" concept="6" trace="toString#()Ljava/lang/String;" />
+      <node id="5447719361346555870" at="66,40,71,5" concept="5" />
+      <node id="5447719361346555937" at="73,41,78,5" concept="5" />
+      <node id="5447719361346555824" at="66,0,73,0" concept="6" trace="plus#(Lorg/jetbrains/mps/samples/money/runtime/Money;)Lorg/jetbrains/mps/samples/money/runtime/Money;" />
+      <node id="5447719361346555932" at="73,0,80,0" concept="6" trace="minus#(Lorg/jetbrains/mps/samples/money/runtime/Money;)Lorg/jetbrains/mps/samples/money/runtime/Money;" />
+      <node id="5447719361346501252" at="20,47,28,6" concept="8" />
+      <node id="5447719361346501252" at="41,45,49,6" concept="8" />
+      <node id="5447719361346501252" at="20,0,30,0" concept="6" trace="refToAmount#()Ljetbrains/mps/references/Reference;" />
+      <node id="5447719361346501252" at="41,0,51,0" concept="6" trace="refToCurrency#()Ljetbrains/mps/references/Reference;" />
+      <scope id="5447719361346501252" at="10,33,11,25" />
+      <scope id="5447719361346501252" at="13,45,14,26" />
+      <scope id="5447719361346501252" at="22,31,23,27" />
+      <scope id="5447719361346501252" at="25,41,26,26" />
+      <scope id="5447719361346501252" at="31,31,32,27" />
+      <scope id="5447719361346501252" at="34,43,35,28" />
+      <scope id="5447719361346501252" at="43,27,44,29" />
+      <scope id="5447719361346501252" at="46,37,47,28" />
+      <scope id="5447719361346501258" at="59,42,60,55" />
+      <scope id="5447719361346519501" at="63,28,64,55" />
+      <scope id="5447719361346555901" at="67,60,68,123" />
+      <scope id="5447719361346555871" at="69,12,70,84" />
+      <scope id="5447719361346555947" at="74,60,75,123" />
+      <scope id="5447719361346555963" at="76,12,77,89" />
+      <scope id="5447719361346501252" at="16,50,18,17" />
+      <scope id="5447719361346501252" at="37,44,39,17" />
+      <scope id="5447719361346501288" at="51,52,53,31" />
+      <scope id="5447719361346519351" at="55,45,57,31" />
+      <scope id="5447719361346501252" at="10,0,13,0" />
+      <scope id="5447719361346501252" at="13,0,16,0">
+        <var name="value" id="5447719361346501252" />
+      </scope>
+      <scope id="5447719361346501252" at="22,0,25,0" />
+      <scope id="5447719361346501252" at="25,0,28,0">
+        <var name="value" id="5447719361346501252" />
+      </scope>
+      <scope id="5447719361346501252" at="31,0,34,0" />
+      <scope id="5447719361346501252" at="34,0,37,0">
+        <var name="value" id="5447719361346501252" />
+      </scope>
+      <scope id="5447719361346501252" at="43,0,46,0" />
+      <scope id="5447719361346501252" at="46,0,49,0">
+        <var name="value" id="5447719361346501252" />
+      </scope>
+      <scope id="5447719361346501253" at="59,0,62,0">
         <var name="targetCurrency" id="5447719361346501254" />
       </scope>
-      <scope id="5447719361346501266" at="38,0,41,0" />
-      <scope id="5447719361346501266" at="41,0,44,0">
-        <var name="value" id="5447719361346501266" />
+      <scope id="5447719361346501252" at="16,0,20,0">
+        <var name="value" id="5447719361346501252" />
       </scope>
-      <scope id="5447719361346501273" at="45,0,48,0" />
-      <scope id="5447719361346501273" at="48,0,51,0">
-        <var name="value" id="5447719361346501273" />
+      <scope id="5447719361346501252" at="37,0,41,0">
+        <var name="value" id="5447719361346501252" />
       </scope>
-      <scope id="5447719361346501281" at="8,0,12,0">
+      <scope id="5447719361346501281" at="51,0,55,0">
         <var name="amount" id="5447719361346501282" />
         <var name="currency" id="5447719361346501284" />
       </scope>
-      <scope id="5447719361346519348" at="12,0,16,0">
+      <scope id="5447719361346519348" at="55,0,59,0">
         <var name="amount" id="5447719361346519352" />
         <var name="currency" id="5447719361346519354" />
       </scope>
-      <scope id="5447719361346519498" at="19,0,23,0" />
-      <scope id="5447719361346555827" at="23,40,28,5" />
-      <scope id="5447719361346555935" at="30,41,35,5" />
-      <scope id="5447719361346555824" at="23,0,30,0">
+      <scope id="5447719361346519498" at="62,0,66,0" />
+      <scope id="5447719361346555827" at="66,40,71,5" />
+      <scope id="5447719361346555935" at="73,41,78,5" />
+      <scope id="5447719361346555824" at="66,0,73,0">
         <var name="other" id="5447719361346555842" />
       </scope>
-      <scope id="5447719361346555932" at="30,0,37,0">
+      <scope id="5447719361346555932" at="73,0,80,0">
         <var name="other" id="5447719361346555978" />
       </scope>
-      <unit id="5447719361346501252" at="7,0,52,0" name="org.jetbrains.mps.samples.money.runtime.Money" />
+      <scope id="5447719361346501252" at="20,47,28,6" />
+      <scope id="5447719361346501252" at="41,45,49,6" />
+      <scope id="5447719361346501252" at="20,0,30,0" />
+      <scope id="5447719361346501252" at="41,0,51,0" />
+      <unit id="5447719361346501252" at="21,15,28,5" name="org.jetbrains.mps.samples.money.runtime.Money$1" />
+      <unit id="5447719361346501252" at="42,15,49,5" name="org.jetbrains.mps.samples.money.runtime.Money$2" />
+      <unit id="5447719361346501252" at="8,0,81,0" name="org.jetbrains.mps.samples.money.runtime.Money" />
     </file>
   </root>
   <root nodeRef="r:540d5e3a-9424-4c25-a6ed-9d51ec46dfad(org.jetbrains.mps.samples.money.runtime)/5447719361346501301">

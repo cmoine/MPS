@@ -2,8 +2,7 @@
 <model ref="r:64c71df5-2adc-4e3d-8424-aa08c0bc782f(jetbrains.mps.samples.highlevel.simpleEditor.structure)">
   <persistence version="9" />
   <languages>
-    <use id="c72da2b9-7cce-4447-8389-f407dc1158b7" name="jetbrains.mps.lang.structure" version="3" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="78434eb8-b0e5-444b-850d-e7c4ad2da9ab(jetbrains.mps.devkit.aspect.structure)" />
   </languages>
   <imports>
     <import index="q7pe" ref="r:e5107c9a-a05a-456e-bf48-05faadc7a98c(jetbrains.mps.samples.highlevel.simpleStructure.structure)" />
@@ -45,9 +44,9 @@
     <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="3hIFiK8Nfsc" role="1TKVEi">
       <property role="IQ2ns" value="3778147542048241420" />
-      <property role="20lmBu" value="aggregation" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="editors" />
-      <property role="20lbJX" value="0..n" />
+      <property role="20lbJX" value="fLJekj5/0..n" />
       <ref role="20lvS9" node="3hIFiK8NfrZ" resolve="SimpleEditorDeclaration" />
     </node>
   </node>
@@ -62,16 +61,15 @@
     </node>
     <node concept="1TJgyj" id="3hIFiK8NfCd" role="1TKVEi">
       <property role="IQ2ns" value="3778147542048242189" />
-      <property role="20lmBu" value="aggregation" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="visibleProperties" />
-      <property role="20lbJX" value="0..n" />
+      <property role="20lbJX" value="fLJekj5/0..n" />
       <ref role="20lvS9" node="3hIFiK8NfCg" resolve="SimplePropertyReference" />
     </node>
     <node concept="1TJgyj" id="3hIFiK8NfBN" role="1TKVEi">
       <property role="IQ2ns" value="3778147542048242163" />
-      <property role="20lmBu" value="reference" />
       <property role="20kJfa" value="cncpt" />
-      <property role="20lbJX" value="1" />
+      <property role="20lbJX" value="fLJekj4/1" />
       <ref role="20lvS9" to="q7pe:4offtGnqKCW" resolve="SimpleConceptDeclaration" />
     </node>
   </node>
@@ -81,9 +79,8 @@
     <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="3hIFiK8NfCv" role="1TKVEi">
       <property role="IQ2ns" value="3778147542048242207" />
-      <property role="20lmBu" value="reference" />
       <property role="20kJfa" value="prop" />
-      <property role="20lbJX" value="1" />
+      <property role="20lbJX" value="fLJekj4/1" />
       <ref role="20lvS9" to="q7pe:3hIFiK8N7YI" resolve="SimplePropertyDeclaration" />
     </node>
   </node>

@@ -68,6 +68,7 @@ public class Sample {
     }.invoke()));
 
     System.out.println(s);
+    System.out.println(r);
     try {
       int i = 1;
       while (i != 0) {

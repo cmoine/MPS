@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <root nodeRef="r:567e1961-8569-4966-8d8a-ba7c02fdcb28(jetbrains.mps.lang.editor.diagram.generator.template.util)/8082246476500401936">
+    <file name="FigureUtils.java">
+      <node id="8082246476500752005" at="16,58,17,560" concept="0" />
+      <node id="8082246476500660468" at="20,60,21,560" concept="0" />
+      <node id="8082246476500401936" at="25,0,26,0" concept="1" trace="AttributedFigureReference$Zo" />
+      <node id="8082246476500401936" at="29,0,30,0" concept="1" trace="figureAttribute$EOJr" />
+      <node id="8082246476500752003" at="16,0,19,0" concept="2" trace="isMovable#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="8082246476500575376" at="20,0,23,0" concept="2" trace="isResizable#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <scope id="8082246476500752004" at="16,58,17,560" />
+      <scope id="8082246476500575365" at="20,60,21,560" />
+      <scope id="8082246476500752003" at="16,0,19,0">
+        <var name="figureReference" id="8082246476500752024" />
+      </scope>
+      <scope id="8082246476500575376" at="20,0,23,0">
+        <var name="figureReference" id="8082246476500575391" />
+      </scope>
+      <unit id="8082246476500401936" at="24,0,27,0" name="jetbrains.mps.lang.editor.diagram.generator.template.util.FigureUtils$CONCEPTS" />
+      <unit id="8082246476500401936" at="28,0,31,0" name="jetbrains.mps.lang.editor.diagram.generator.template.util.FigureUtils$LINKS" />
+      <unit id="8082246476500401936" at="15,0,32,0" name="jetbrains.mps.lang.editor.diagram.generator.template.util.FigureUtils" />
+    </file>
+  </root>
+</debug-info>
+

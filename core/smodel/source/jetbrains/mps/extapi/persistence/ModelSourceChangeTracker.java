@@ -23,11 +23,12 @@ import org.jetbrains.mps.openapi.persistence.DataSourceListener;
 /**
  * Trivial {@link org.jetbrains.mps.openapi.persistence.DataSourceListener} implementation that tracks
  * source's timestamp and triggers model reload
+ *
  * @author Artem Tikhomirov
  */
 public class ModelSourceChangeTracker implements DataSourceListener {
-  protected final ReloadCallback myCallback;
-  private long mySourceTimestamp = -1;
+  private final ReloadCallback myCallback;
+  private long mySourceTimestamp = -1L;
 
   public ModelSourceChangeTracker(@NotNull ReloadCallback callback) {
     myCallback = callback;
@@ -59,7 +60,7 @@ public class ModelSourceChangeTracker implements DataSourceListener {
   }
 
   @Override
-  public void changed(DataSource source) {
+  public void changed(@NotNull DataSource source) {
     if (needsReloading(source)) {
       myCallback.reloadFromDiskSafe();
     }

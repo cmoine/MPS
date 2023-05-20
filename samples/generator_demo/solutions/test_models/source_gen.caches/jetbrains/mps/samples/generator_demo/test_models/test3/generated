@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-erhk80h8afdz2ab70dfot4bjnl45dfe" />
+<product version="3" modelHash="-erhk80h8afdz2ab70dfot4bjnl45dfe">
+  <files names="DemoApp.java" />
+</product>
 

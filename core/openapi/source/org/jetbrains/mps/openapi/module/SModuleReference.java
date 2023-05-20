@@ -16,15 +16,23 @@
 package org.jetbrains.mps.openapi.module;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * A globally unique reference to a module
  */
 public interface SModuleReference {
+  @NotNull SModuleId getModuleId();
 
-  SModuleId getModuleId();
+  /**
+   * @return null if the name is not provided
+   * the name serves as extra information here
+   */
+  @Nullable String getModuleName();
 
-  String getModuleName();
-
-  SModule resolve(@NotNull SRepository repo);
+  /**
+   * @return the SModule such that {@link SModule#getModuleReference()} equals to this one.
+   * SRepository is supposed to store only one module with the given module reference
+   */
+  @Nullable SModule resolve(@NotNull SRepository repo);
 }

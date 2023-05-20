@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@ package jetbrains.mps.newTypesystem.operation.equation;
 
 import jetbrains.mps.newTypesystem.TypesUtil;
 import jetbrains.mps.newTypesystem.operation.AbstractOperation;
+import jetbrains.mps.smodel.SNodeUtil;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.typesystem.inference.EquationInfo;
 
@@ -36,12 +37,12 @@ public abstract class AbstractEquationOperation extends AbstractOperation {
 
   @Override
   public String getShortPresentation() {
-    return myChild + " = " + myParent;
+    return String.format("%s = %s", SNodeUtil.getPresentation(myChild), SNodeUtil.getPresentation(myParent));
   }
 
   @Override
   public List<SNode> getVariables() {
-    LinkedList<SNode> nodes = new LinkedList<SNode>();
+    LinkedList<SNode> nodes = new LinkedList<>();
     if (TypesUtil.isVariable(myChild)) {
       nodes.add(myChild);
     }

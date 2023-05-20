@@ -49,7 +49,7 @@ public class ConnectedComponentPartitioner {
     int[] dependsOn = new int[myCount];
     int[][] result = new int[myCount][];
 
-    Map<SNode, Integer> rootIndex = new HashMap<SNode, Integer>();
+    Map<SNode, Integer> rootIndex = new HashMap<>();
     for (int i = 0; i < myRoots.length; i++) {
       rootIndex.put(myRoots[i], i);
     }
@@ -83,11 +83,11 @@ public class ConnectedComponentPartitioner {
   public List<SNode[]> partition() {
     int[][] partitions = GraphUtil.components(GraphUtil.removeOrientation(myDependencies));
 
-    List<SNode[]> result = new ArrayList<SNode[]>(partitions.length + 1);
-    for (int i = 0; i < partitions.length; i++) {
-      SNode[] proots = new SNode[partitions[i].length];
+    List<SNode[]> result = new ArrayList<>(partitions.length + 1);
+    for (int[] partition : partitions) {
+      SNode[] proots = new SNode[partition.length];
       for (int e = 0; e < proots.length; e++) {
-        proots[e] = myRoots[partitions[i][e]];
+        proots[e] = myRoots[partition[e]];
       }
       result.add(proots);
     }
@@ -154,9 +154,9 @@ public class ConnectedComponentPartitioner {
     StringBuffer sb = new StringBuffer();
     sb.append(myRoots.length).append(" roots, ").append(partitions.length).append(" components\n");
     for (int i = 0; i < partitions.length; i++) {
-      sb.append("#").append(i).append("(").append(partitions[i].length).append("): ");
+      sb.append('#').append(i).append('(').append(partitions[i].length).append("): ");
       for (int e = 0; e < partitions[i].length; e++) {
-        sb.append(" ").append(myRoots[partitions[i][e]]);
+        sb.append(' ').append(myRoots[partitions[i][e]]);
       }
       sb.append('\n');
     }

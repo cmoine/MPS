@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="sources (generated)" pattern="file:*source_gen//*&amp;&amp;!file[mps-idea-plugin]:*/||file:*test_gen//*" />
+</component>

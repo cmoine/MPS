@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="yj4yz9teopo2afpjkq85hpuwbu48zv" />
+<product version="3" modelHash="-de215vanjhtuqfb2tisvxysrs9fb57l">
+  <files names="CollectCallback.java:TestPersistenceHelper.java:TestPersistence_Test.java" />
+</product>
 

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <root>
+    <file name="ActionAspectDescriptorImpl.java">
+      <unit at="12,0,30,0" name="jetbrains.mps.lang.quotation.actions.ActionAspectDescriptorImpl" />
+    </file>
+  </root>
+  <root nodeRef="r:229089c1-3978-41b2-af28-24e969f0e0b9(jetbrains.mps.lang.quotation.actions)/9079830899493053021">
+    <file name="NodeBuilder_Replace.java">
+      <node id="9079830899493053588" at="19,7,20,51" concept="4" />
+      <node id="9079830899493053715" at="21,91,22,131" concept="1" />
+      <node id="9079830899493056669" at="22,131,23,191" concept="1" />
+      <node id="410791833645398113" at="30,7,31,51" concept="4" />
+      <node id="410791833645398125" at="32,91,33,118" concept="1" />
+      <node id="9079830899493053021" at="40,0,41,0" concept="5" trace="NodeBuilderNode$Sn" />
+      <node id="9079830899493053021" at="44,0,45,0" concept="5" trace="concept$xoA0" />
+      <node id="9079830899493053021" at="45,0,46,0" concept="5" trace="values$JgAV" />
+      <node id="9079830899493053021" at="46,0,47,0" concept="5" trace="nodes$MvP4" />
+      <node id="410791833645398113" at="31,51,34,9" concept="2" />
+      <node id="9079830899493053588" at="20,51,24,9" concept="2" />
+      <node id="410791833645398113" at="29,102,35,7" concept="0" />
+      <node id="9079830899493053588" at="18,102,25,7" concept="0" />
+      <node id="410791833645398110" at="29,0,37,0" concept="3" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <node id="9079830899493053022" at="18,0,27,0" concept="3" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <scope id="410791833645398115" at="32,91,33,118" />
+      <scope id="9079830899493053590" at="21,91,23,191" />
+      <scope id="410791833645398113" at="30,7,34,9">
+        <var name="sampleBuilderNode" id="410791833645398113" />
+      </scope>
+      <scope id="9079830899493053588" at="19,7,24,9">
+        <var name="sampleBuilderNode" id="9079830899493053588" />
+      </scope>
+      <scope id="410791833645398110" at="29,102,35,7" />
+      <scope id="9079830899493053022" at="18,102,25,7" />
+      <scope id="410791833645398110" at="29,0,37,0">
+        <var name="enclosingNode" id="410791833645398110" />
+        <var name="index" id="410791833645398110" />
+        <var name="model" id="410791833645398110" />
+        <var name="newNode" id="410791833645398110" />
+        <var name="sampleNode" id="410791833645398110" />
+      </scope>
+      <scope id="9079830899493053022" at="18,0,27,0">
+        <var name="enclosingNode" id="9079830899493053022" />
+        <var name="index" id="9079830899493053022" />
+        <var name="model" id="9079830899493053022" />
+        <var name="newNode" id="9079830899493053022" />
+        <var name="sampleNode" id="9079830899493053022" />
+      </scope>
+      <unit id="9079830899493053021" at="39,0,42,0" name="jetbrains.mps.lang.quotation.actions.NodeBuilder_Replace$CONCEPTS" />
+      <unit id="9079830899493053021" at="43,0,48,0" name="jetbrains.mps.lang.quotation.actions.NodeBuilder_Replace$LINKS" />
+      <unit id="410791833645398110" at="28,0,38,0" name="jetbrains.mps.lang.quotation.actions.NodeBuilder_Replace$NodeFactory_410791833645398110" />
+      <unit id="9079830899493053022" at="17,0,28,0" name="jetbrains.mps.lang.quotation.actions.NodeBuilder_Replace$NodeFactory_9079830899493053022" />
+      <unit id="9079830899493053021" at="16,0,49,0" name="jetbrains.mps.lang.quotation.actions.NodeBuilder_Replace" />
+    </file>
+  </root>
+</debug-info>
+

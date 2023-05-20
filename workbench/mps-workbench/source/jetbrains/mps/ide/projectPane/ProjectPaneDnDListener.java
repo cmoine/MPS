@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,15 +22,14 @@ import jetbrains.mps.ide.ui.tree.smodel.PackageNode;
 import jetbrains.mps.ide.ui.tree.smodel.SModelTreeNode;
 import jetbrains.mps.ide.ui.tree.smodel.SNodeGroupTreeNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.plugins.projectplugins.ProjectPluginManager;
 import jetbrains.mps.plugins.relations.RelationDescriptor;
 import jetbrains.mps.project.MPSProject;
 import jetbrains.mps.smodel.SNodeUtil;
-import jetbrains.mps.util.EqualUtil;
 import jetbrains.mps.util.NameUtil;
 import jetbrains.mps.util.Pair;
 import jetbrains.mps.workbench.MPSDataKeys;
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SModelReference;
@@ -55,8 +54,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class ProjectPaneDnDListener implements DropTargetListener {
+  private static final Logger LOG = Logger.getLogger(ProjectPaneDnDListener.class);
+
   private final JTree myTree;
   private final DataFlavor myDataFlavor;
 
@@ -115,25 +117,26 @@ public class ProjectPaneDnDListener implements DropTargetListener {
     int result = JOptionPane.showConfirmDialog(frame, text, "Move Nodes", JOptionPane.YES_NO_OPTION);
     if (result != JOptionPane.YES_OPTION) return;
 
-    project.getModelAccess().executeCommand(new Runnable() {
-      @Override
-      public void run() {
-        SModel targetModel = getTargetModel(target);
-        if (targetModel == null) return;
+    project.getModelAccess().executeCommand(() -> {
+      SModel targetModel = getTargetModel(target);
+      if (targetModel == null) return;
 
-        for (Pair<SNode, String> sourceNode : getNodesToMove(targetModel, targetPackage, sourceNodes)) {
-          String fullTargetPack = getFullTargetPack(targetPackage, sourceNode.o2);
-          SNodeAccessUtil.setProperty(sourceNode.o1, SNodeUtil.property_BaseConcept_virtualPackage, fullTargetPack);
-          if (SNodeOperations.isInstanceOf(sourceNode.o1, SNodeUtil.concept_AbstractConceptDeclaration)) {
-            SNode baseNode = sourceNode.o1;
-            List<RelationDescriptor> tabs = ProjectPluginManager.getApplicableTabs(project.getProject(), baseNode);
-            for (RelationDescriptor tab : tabs) {
+      for (Pair<SNode, String> sourceNode : getNodesToMove(targetModel, targetPackage, sourceNodes)) {
+        String fullTargetPack = getFullTargetPack(targetPackage, sourceNode.o2);
+        SNodeAccessUtil.setProperty(sourceNode.o1, SNodeUtil.property_BaseConcept_virtualPackage, fullTargetPack);
+        if (SNodeOperations.isInstanceOf(sourceNode.o1, SNodeUtil.concept_AbstractConceptDeclaration)) {
+          SNode baseNode = sourceNode.o1;
+          List<RelationDescriptor> tabs = ProjectPluginManager.getApplicableTabs(project.getProject(), baseNode);
+          for (RelationDescriptor tab : tabs) {
+            try {
               if (!tab.isApplicable(baseNode)) continue;
 
               for (SNode aspect : tab.getNodes(baseNode)) {
                 if (tab.getBaseNode(aspect) != baseNode) continue;
                 SNodeAccessUtil.setProperty(aspect, SNodeUtil.property_BaseConcept_virtualPackage, fullTargetPack);
               }
+            } catch (Throwable t) {
+              LOG.error("Exception in extension code: ", t);
             }
           }
         }
@@ -202,15 +205,15 @@ public class ProjectPaneDnDListener implements DropTargetListener {
 
   private List<Pair<SNode, String>> getNodesToMove(@NotNull SModel targetModel, String virtualPackage, List<Pair<SNodeReference, String>> sourceNodes) {
     final SRepository repo = targetModel.getRepository();
-    List<Pair<SNode, String>> result = new ArrayList<Pair<SNode, String>>();
+    List<Pair<SNode, String>> result = new ArrayList<>();
     for (final Pair<SNodeReference, String> node : sourceNodes) {
       SNode snode = node.o1.resolve(repo);
 
       if (snode == null) continue;
-      if (EqualUtil.equals(virtualPackage + node.o2, getVirtualPackage(snode))) continue;
+      if (Objects.equals(virtualPackage + node.o2, getVirtualPackage(snode))) continue;
       SModel sourceModel = snode.getModel();
-      if (EqualUtil.equals(sourceModel, targetModel)) {
-        result.add(new Pair<SNode, String>(snode, node.o2));
+      if (Objects.equals(sourceModel, targetModel)) {
+        result.add(new Pair<>(snode, node.o2));
       }
     }
     return result;

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="awpelng7r6jprdcnwzhwi12gsbwvdw4" />
+<product version="3" modelHash="ffdgyj5x9t0wbg27bz7vqfk3ia3h68">
+  <files names="ActionWrapper.java:IPersistentConfiguration.java:PersistentConfigurationContext.java:SettingsEditorEx.java" />
+</product>
 

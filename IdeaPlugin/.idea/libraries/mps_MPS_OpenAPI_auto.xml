@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="mps.MPS.OpenAPI_auto" type="mps.solution.library">
+    <CLASSES>
+      <root url="jar://$APPLICATION_PLUGINS_DIR$/mps-core/languages/mps-stubs.jar!/" />
+      <root url="jar://$APPLICATION_PLUGINS_DIR$/mps-core/lib/mps-openapi.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <MPS_MODULE_XML>
+      <root url="jar://$APPLICATION_PLUGINS_DIR$/mps-core/languages/mps-stubs.jar!/modules/MPS.OpenAPI/MPS.OpenAPI.msd" />
+    </MPS_MODULE_XML>
+    <SOURCES />
+  </library>
+</component>

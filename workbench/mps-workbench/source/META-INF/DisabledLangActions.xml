@@ -1,0 +1,547 @@
+<!--
+  ~ Copyright 2000-2020 JetBrains s.r.o.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<idea-plugin>
+  <actions>
+    <action id="ClassNameCompletion" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="SurroundWithLiveTemplate" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <group id="GenerateGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    <group id="GenerateGroup">-->
+    <action id="OverrideMethods" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ImplementMethods" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="DelegateMethods" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <group id="GenerateFromTestCreatorsGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    </group>-->
+
+    <action id="ShowIntentionActions" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <group id="ShowIntentionsGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <action id="TogglePopupHints" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+
+    <action id="CodeInspection.OnEditor" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <action id="ActivateNavBar" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <action id="EditorIndentLineOrSelection" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <action id="BraceOrQuoteOut" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <action id="ToggleRenderedDocPresentation" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <group id="DocCommentGutterIconContextMenu" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    <group id="DocCommentGutterIconContextMenu">-->
+    <action id="ToggleRenderedDocPresentationForAll" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--    </group>-->
+
+    <group id="CodeInsightEditorActions" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    <group id="CodeInsightEditorActions">-->
+    <action id="EmacsStyleIndent" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="EditorCodeBlockStart" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="EditorCodeBlockEnd" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="EditorMatchBrace" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="EditorCodeBlockStartWithSelection" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="EditorCodeBlockEndWithSelection" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="EditorCompleteStatement" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--    </group>-->
+
+
+    <!-- File -->
+    <action id="ChangeTemplateDataLanguage" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <!-- Edit -->
+    <action id="CopyAsPlainText" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <!--    <group id="FindUsagesMenuGroup" popup="true">-->
+    <action id="FindUsages" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ShowSettingsAndFindUsages" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ShowUsages" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="FindUsagesInFile" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="HighlightUsagesInFile" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="GotoNextElementUnderCaretUsage" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="GotoPrevElementUnderCaretUsage" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <group id="ShowRecentFindUsagesGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    </group>-->
+
+    <group id="EditBookmarksGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    <group id="EditBookmarksGroup" popup="true">-->
+    <action id="ToggleBookmark" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ToggleBookmarkWithMnemonic" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ShowBookmarks" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="GotoNextBookmark" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="GotoPreviousBookmark" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--    </group>-->
+
+    <group id="popup@BookmarkContextMenu" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+<!--    <group id="popup@BookmarkContextMenu">-->
+      <action id="EditBookmark" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+<!--    </group>-->
+
+    <action id="GotoDeclarationOnly" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+
+    <!-- View -->
+    <!--    <group id="QuickActions">-->
+    <!-- MPS patch: see MPS-24488  TODO: investigate-->
+    <action id="QuickImplementations" class="jetbrains.mps.codeInsight.hint.actions.MockShowImplementationsAction" overrides="true"/>
+    <action id="QuickJavaDoc" class="jetbrains.mps.codeInsight.documentation.actions.MockShowQuickDocInfoAction" overrides="true"/>
+    <!--    </group>-->
+
+    <group id="CodeEditorBaseGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    <group id="CodeEditorBaseGroup">-->
+    <group id="CodeEditorViewGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--      <group id="CodeEditorViewGroup">-->
+    <action id="ExternalJavaDoc" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ParameterInfo" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ExpressionTypeInfo" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="EditorContextInfo" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ShowErrorDescription" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--      </group>-->
+    <!--    </group>-->
+
+    <action id="ShowGutterIconsSettings" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <action id="FixDocComment" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="QuickPreview" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <action id="ViewImportPopups" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <!-- Go To -->
+    <group id="GoToTargetEx" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!-- keystroke values taken from platform-impl.jar!/keymaps/Mac OS X 10.5+.xml -->
+    <!-- I didn't find a better way to unregister these shortcuts to avoid conflicts with GoToModule/GoToModel actions-->
+    <action id="GotoSymbol" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true">
+      <keyboard-shortcut keymap="Mac OS X 10.5+" remove="true" first-keystroke="meta alt O"/>
+    </action>
+    <action id="GotoFile" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true">
+      <keyboard-shortcut keymap="Mac OS X 10.5+" remove="true" first-keystroke="meta shift O"/>
+    </action>
+
+    <group id="GoToCodeGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <action id="TypeHierarchy" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <!-- Code -->
+    <!--    <group id="CodeMenu" popup="true">-->
+    <action id="Generate" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <group id="CodeCompletionGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <action id="InsertLiveTemplate" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="SurroundWith" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="Unwrap" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <group id="FoldingGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--      <group id="FoldingGroup" popup="true">-->
+    <action id="ExpandRegion" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ExpandRegionRecursively" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ExpandAllRegions" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="CollapseRegion" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="CollapseRegionRecursively" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="CollapseAllRegions" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <group id="ExpandToLevel" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--        <group id="ExpandToLevel" popup="true">-->
+    <action id="ExpandToLevel1" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ExpandToLevel2" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ExpandToLevel3" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ExpandToLevel4" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ExpandToLevel5" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--        </group>-->
+    <group id="ExpandAllToLevel" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--        <group id="ExpandAllToLevel" popup="true">-->
+    <action id="ExpandAllToLevel1" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ExpandAllToLevel2" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ExpandAllToLevel3" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ExpandAllToLevel4" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ExpandAllToLevel5" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--        </group>-->
+
+    <group id="LanguageSpecificFoldingGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--        <group id="LanguageSpecificFoldingGroup">-->
+    <action id="ExpandDocComments" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="CollapseDocComments" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--        </group>-->
+
+    <action id="CollapseSelection" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="CollapseBlock" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--      </group>-->
+
+    <group id="CommentGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--      <group id="CommentGroup">-->
+    <action id="CommentByLineComment" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="CommentByBlockComment" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--      </group>-->
+
+    <group id="CodeFormatGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--      <group id="CodeFormatGroup">-->
+    <action id="ReformatCode" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ShowReformatFileDialog" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="AutoIndentLines" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="OptimizeImports" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="RearrangeCode" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--      </group>-->
+
+    <action id="MoveStatementDown" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="MoveStatementUp" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="MoveElementLeft" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="MoveElementRight" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="MoveLineDown" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="MoveLineUp" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--    </group>-->
+
+    <group id="ParameterNameHints" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    <group id="ParameterNameHints" popup="true">-->
+    <action id="ShowSettingsWithAddedPattern" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ToggleInlineHintsAction" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ShowParameterHintsSettings" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <action id="ToggleCompletionHintsAction" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--    </group>-->
+
+    <action id="ToggleInlayHintsGloballyAction" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <!-- Analyze -->
+    <action id="SliceBackward" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="SliceForward" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <!-- Refactor -->
+    <group id="RefactoringMenu" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    <group id="RefactoringMenu" popup="true">-->
+    <action id="Refactorings.QuickListPopupAction" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="RenameElement" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ChangeSignature" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <action id="CopyElement" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="SafeDelete" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <!--      <group id="IntroduceActionsGroup" popup="true" class="com.intellij.ide.actions.PopupInMainMenuActionGroup">-->
+    <action id="IntroduceVariable" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="IntroduceConstant" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="IntroduceField" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="IntroduceParameter" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <action id="IntroduceParameterObject" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <action id="ExtractMethod" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <action id="ExtractClass" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ExtractInclude" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ExtractInterface" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ExtractSuperclass" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ExtractModule" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--      </group>-->
+
+    <action id="Inline" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="InvertBoolean" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <action id="MembersPullUp" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="MemberPushDown" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--    </group>-->
+
+    <!-- Tools -->
+    <group id="ToolsBasicGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    <group id="ToolsBasicGroup">-->
+    <action id="SaveAsTemplate" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="SaveFileAsTemplate" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <action id="IdeScriptingConsole" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--    </group>-->
+    <action id="NewScratchBuffer" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="Scratch.ChangeLanguage" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <group id="ExternalToolsGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+
+    <!--    <group id="NewGroup" popup="true" searchable="false">-->
+    <action id="NewFile" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="NewScratchFile" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="NewDir" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <group id="FileTemplateSeparatorGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <group id="NewFromTemplate" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    </group>-->
+
+    <!-- PROVISIONAL HACK TO ADDRESS MPS-34610; the override was commented out, no idea why did we need it in the first place -->
+    <!-- group id="WeighingNewGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/ -->
+
+
+    <!-- Toolbar -->
+    <group id="ToolbarFindGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+
+    <group id="Bookmarks" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    <group id="Bookmarks">-->
+    <action id="GotoBookmark0" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="GotoBookmark1" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="GotoBookmark2" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="GotoBookmark3" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="GotoBookmark4" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="GotoBookmark5" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="GotoBookmark6" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="GotoBookmark7" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="GotoBookmark8" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="GotoBookmark9" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <action id="ToggleBookmark0" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ToggleBookmark1" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ToggleBookmark2" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ToggleBookmark3" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ToggleBookmark4" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ToggleBookmark5" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ToggleBookmark6" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ToggleBookmark7" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ToggleBookmark8" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ToggleBookmark9" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--    </group>-->
+
+    <group id="ProjectViewPopupMenuRefactoringGroup"  class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <group id="ProjectViewPopupMenuModifyGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    <group id="ProjectViewPopupMenuModifyGroup">-->
+    <group id="MarkFileAs" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    </group>-->
+
+    <group id="ProjectViewPopupMenuRunGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <group id="ProjectViewPopupMenuSettingsGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    <group id="ProjectViewPopupMenuSettingsGroup">-->
+    <group id="MarkRootGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    </group>-->
+
+
+    <!--    <group id="ProjectViewPopupMenu">-->
+    <action id="RestoreDefaultExtensionScripts" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="SynchronizeCurrentFile" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="GoToLinkTarget" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <group id="RemoveBom.Group" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--      <group id="RemoveBom.Group">-->
+    <action id="RemoveBom" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--      </group>-->
+    <!--    </group>-->
+
+
+    <group id="ScopeViewPopupMenu" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <group id="EditorPopupMenu1.FindRefactor" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <group id="EditorLangPopupMenu" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    <group id="EditorLangPopupMenu">-->
+    <group id="EditorPopupMenu.GoTo" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <group id="EditorPopupMenu.Run" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    </group>-->
+
+    <group id="TreeNodeExclusion" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    <group id="TreeNodeExclusion">-->
+    <action id="UsageView.Include" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="UsageView.Exclude" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--    </group>-->
+
+    <group id="UsageView.Popup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    <group id="UsageView.Popup">-->
+    <action id="UsageView.Rerun" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="UsageView.Remove" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="UsageView.ShowRecentFindUsages" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--    </group>-->
+
+    <action id="NewElementSamePlace" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <action id="ChangeCodeStyleScheme" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <action id="ChangeInspectionProfile"  class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="TypeHierarchyBase.BaseOnThisType" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="MethodHierarchy.BaseOnThisMethod" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="CallHierarchy.BaseOnThisMethod" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="TypeHierarchy.Class" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="TypeHierarchy.Subtypes" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="TypeHierarchy.Supertypes" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <group id="TypeHierarchyPopupMenu" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <group id="MethodHierarchyPopupMenu" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <group id="CallHierarchyPopupMenu" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <action id="EditBreakpoint" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <group id="DebugMainMenu" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    <group id="DebugMainMenu">-->
+    <group id="DebuggingActionsGroup" popup="true" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--      <group id="DebuggingActionsGroup" popup="true">-->
+    <group id="DebugReloadGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <action id="StepOver" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ForceStepOver" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="StepInto" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ForceStepInto" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="SmartStepInto" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="StepOut" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="RunToCursor" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ForceRunToCursor" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="Pause" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="Resume" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <action id="EvaluateExpression" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="QuickEvaluateExpression" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ShowExecutionPoint" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--      </group>-->
+    <group id="BreakpointActionsGroup" popup="true" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--      <group id="BreakpointActionsGroup" popup="true">-->
+    <action id="Debugger.RestoreBreakpoint" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ToggleLineBreakpoint" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ToggleTemporaryLineBreakpoint" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ToggleBreakpointEnabled" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--      </group>-->
+    <action id="ViewBreakpoints" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--    </group>-->
+
+    <group id="XDebugger.Actions" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    <group id="XDebugger.Actions">-->
+    <action id="Debugger.AddToWatch" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="Debugger.AddInlineWatch" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="Debugger.EvaluateInConsole" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <action id="XDebugger.SetValue" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="XDebugger.CopyValue" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="XDebugger.CompareValueWithClipboard" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="XDebugger.CopyName" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="XDebugger.Inspect" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="XDebugger.JumpToSource" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="XDebugger.JumpToTypeSource" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <action id="Debugger.Tree.EvaluateInConsole" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <action id="XDebugger.NewWatch" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="XDebugger.EditWatch" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="XDebugger.CopyWatch" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="XDebugger.RemoveWatch" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="XDebugger.MoveWatchUp" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="XDebugger.MoveWatchDown" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="XDebugger.SwitchWatchesInVariables" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="XDebugger.RemoveAllWatches" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="XDebugger.MuteBreakpoints" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="XDebugger.ToggleSortValues" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="Debugger.MarkObject" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="Debugger.FocusOnBreakpoint" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="Debugger.ShowReferring" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="Debugger.RemoveAllBreakpoints" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="Debugger.RemoveAllBreakpointsInFile" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--    </group>-->
+
+    <group id="EditorPopupMenuDebug" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <group id="XDebugger.ToolWindow.TopToolbar" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <group id="XDebugger.ToolWindow.LeftToolbar" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <group id="XDebugger.Evaluation.Dialog.Tree.Popup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <group id="XDebugger.Frames.Tree.Popup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    <group id="XDebugger.Frames.Tree.Popup">-->
+    <action id="Debugger.CopyStack" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--    </group>-->
+
+    <group id="XDebugger.Frames.TopToolbar" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    <group id="XDebugger.Frames.TopToolbar">-->
+    <action id="Debugger.ShowLibraryFrames" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--    </group>-->
+
+    <group id="XDebugger.Variables.Tree.Popup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <group id="XDebugger.Variables.Tree.Toolbar" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <group id="XDebugger.Watches.Tree.Popup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <group id="XDebugger.Watches.Tree.Toolbar" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <group id="XDebugger.Watches.Inline.Popup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+
+    <group id="XDebugger.Inspect.Tree.Popup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <group id="XDebugger.Evaluate.Code.Fragment.Editor.Popup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <group id="XDebugger.Settings" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    <group id="XDebugger.Settings" icon="AllIcons.General.GearPlain" popup="true">-->
+    <action id="XDebugger.Inline" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="XDebugger.UnmuteOnStop" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--    </group>-->
+
+    <group id="TestTreePopupMenu" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <action id="openAssertEqualsDiff" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <group id="RunTestGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <action id="DumpLookupElementWeights" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <action id="JumpToColorsAndFonts" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    
+
+    <!-- Arrangement rules -->
+    <group id="ArrangementRulesGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    <group id="ArrangementRulesGroup">-->
+    <action id="Arrangement.Rule.Add" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="Arrangement.Rule.Section.Add" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="Arrangement.Rule.Remove" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--  Set same as icon as in original action to avoid NPE in HTML/XML settings  -->
+    <action id="Arrangement.Rule.Edit" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true" icon="AllIcons.Actions.Edit"/>
+    <action id="Arrangement.Rule.Match.Condition.Move.Up" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="Arrangement.Rule.Match.Condition.Move.Down" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="Arrangement.Custom.Token.Rule.Edit" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="Arrangement.Rule.Group.Condition.Move.Up" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="Arrangement.Rule.Group.Condition.Move.Down" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <action id="Arrangement.Alias.Rule.Add" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="Arrangement.Alias.Rule.Remove" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="Arrangement.Alias.Rule.Edit" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="Arrangement.Alias.Rule.Match.Condition.Move.Up" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="Arrangement.Alias.Rule.Match.Condition.Move.Down" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--    </group>-->
+
+
+    <group id="Arrangement.Alias.Rule.ToolBar" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <group id="Arrangement.Alias.Rule.Context.Menu" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <group id="Arrangement.Rule.Match.Control.Context.Menu" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <group id="Arrangement.Rule.Match.Control.ToolBar" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <group id="Arrangement.Rule.Group.Control.ToolBar" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <action id="SeverityEditorDialog" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <group id="InspectionToolWindow.TreePopup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    <group id="InspectionToolWindow.TreePopup" compact="true">-->
+    <group id="QuickFixes" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <group id="SuppressFixes" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <action id="EditInspectionSettings" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="DisableInspection" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="RunInspectionOn" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--    </group>-->
+
+    <group id="ExtractMethodToolWindow.TreePopup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <action id="UpdateRunningApplication" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <group id="TodoMainGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--    <group id="TodoMainGroup">-->
+    <group id="TodoViewGroupByGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--      <group id="TodoViewGroupByGroup" class="com.intellij.ide.todo.TodoPanel$GroupByActionGroup" icon="AllIcons.Actions.GroupBy" popup="true">-->
+    <action id="TodoViewGroupByShowModules" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="TodoViewGroupByShowPackages" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="TodoViewGroupByFlattenPackage" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--      </group>-->
+    <!--    </group>-->
+  </actions>
+</idea-plugin>

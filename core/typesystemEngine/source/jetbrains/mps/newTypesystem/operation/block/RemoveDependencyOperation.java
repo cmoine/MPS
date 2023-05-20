@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package jetbrains.mps.newTypesystem.operation.block;
 import jetbrains.mps.newTypesystem.state.State;
 import jetbrains.mps.newTypesystem.state.blocks.Block;
 import jetbrains.mps.newTypesystem.state.blocks.ConditionKind;
+import jetbrains.mps.smodel.SNodeUtil;
 import org.jetbrains.mps.openapi.model.SNode;
 
 public class RemoveDependencyOperation extends AbstractBlockOperation {
@@ -32,7 +33,7 @@ public class RemoveDependencyOperation extends AbstractBlockOperation {
 
   @Override
   public String getPresentation() {
-    return "Block dependency removed: " + myVar + " -> [" + myBlock.getPresentation() + "]";
+    return String.format("Block dependency removed: %s -> [%s]", SNodeUtil.getPresentation(myVar), myBlock.getPresentation());
   }
 
   @Override

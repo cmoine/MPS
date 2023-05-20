@@ -54,7 +54,7 @@ public class ReductionContext {
   }
 
   Object getBlockedRules(SNode inputNode) {
-    ArrayList<TemplateReductionRule> matchingRules = new ArrayList<TemplateReductionRule>();
+    ArrayList<TemplateReductionRule> matchingRules = new ArrayList<>();
     for (ReductionContext current = this; current != null; current = current.myParent) {
       if (current.myInputNode == inputNode && current.myReductionRule != null) {
         matchingRules.add(current.myReductionRule);
@@ -63,7 +63,7 @@ public class ReductionContext {
     if (matchingRules.isEmpty()) {
       return null;
     } else {
-      return new HashSet<TemplateReductionRule>(matchingRules);
+      return new HashSet<>(matchingRules);
     }
   }
 
@@ -74,24 +74,24 @@ public class ReductionContext {
       return set1;
     if (set1 instanceof TemplateReductionRule) {
       if (set2 instanceof TemplateReductionRule) {
-        Set<Object> set = new HashSet<Object>(2);
+        Set<Object> set = new HashSet<>(2);
         set.add(set1);
         set.add(set2);
         return set;
       } else {
-        Set<Object> set = new HashSet<Object>(((Set) set2).size() + 1);
+        Set<Object> set = new HashSet<>(((Set) set2).size() + 1);
         set.addAll((Set) set2);
         set.add(set1);
         return set;
       }
     } else {
       if (set2 instanceof TemplateReductionRule) {
-        Set<Object> set = new HashSet<Object>(((Set) set1).size() + 1);
+        Set<Object> set = new HashSet<>(((Set) set1).size() + 1);
         set.addAll((Set) set1);
         set.add(set2);
         return set;
       } else {
-        Set<Object> set = new HashSet<Object>(((Set) set2).size() + ((Set) set1).size());
+        Set<Object> set = new HashSet<>(((Set) set2).size() + ((Set) set1).size());
         set.addAll((Set) set1);
         set.addAll((Set) set2);
         return set;

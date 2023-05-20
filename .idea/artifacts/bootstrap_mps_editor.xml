@@ -1,0 +1,21 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="bootstrap:mps-editor">
+    <output-path>$PROJECT_DIR$/lib/</output-path>
+    <root id="root">
+      <element id="archive" name="mps-editor.jar">
+        <element id="module-output" name="editing-runtime" />
+        <element id="module-output" name="editor-runtime" />
+        <element id="module-output" name="actions-runtime" />
+        <element id="module-output" name="intentions-runtime" />
+        <element id="module-output" name="typesystemIntegration" />
+        <element id="module-output" name="mps-editor" />
+      </element>
+      <element id="archive" name="mps-editor-api.jar">
+        <element id="module-output" name="editor-api" />
+      </element>
+      <element id="archive" name="mps-editor-runtime.jar">
+        <element id="module-output" name="editorlang-runtime" />
+      </element>
+    </root>
+  </artifact>
+</component>

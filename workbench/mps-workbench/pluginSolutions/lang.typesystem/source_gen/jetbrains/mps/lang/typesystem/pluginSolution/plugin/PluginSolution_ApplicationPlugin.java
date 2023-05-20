@@ -4,6 +4,7 @@ package jetbrains.mps.lang.typesystem.pluginSolution.plugin;
 
 import jetbrains.mps.plugins.applicationplugins.BaseApplicationPlugin;
 import com.intellij.openapi.extensions.PluginId;
+import org.jetbrains.annotations.NotNull;
 import jetbrains.mps.ide.actions.DebugActions_ActionGroup;
 import java.util.List;
 import jetbrains.mps.plugins.actions.BaseKeymapChanges;
@@ -11,27 +12,33 @@ import jetbrains.mps.internal.collections.runtime.ListSequence;
 import java.util.ArrayList;
 
 public class PluginSolution_ApplicationPlugin extends BaseApplicationPlugin {
-  private PluginId myId = PluginId.getId("jetbrains.mps.lang.typesystem.pluginSolution");
+  private final PluginId myId = PluginId.getId("jetbrains.mps.lang.typesystem.pluginSolution");
+
   public PluginSolution_ApplicationPlugin() {
   }
+
+  @NotNull
   public PluginId getId() {
     return myId;
   }
+
   public void createGroups() {
-    // actions w/o parameters 
+    // actions w/o parameters
     addAction(new ConvertInferenceRuleToCheckingRule_Action());
     addAction(new ShowNodeType_Action());
-    // groups 
-    addGroup(new ShowAsIntentions_ActionGroup());
-    addGroup(new TypesystemActions_ActionGroup());
+    // groups
+    addGroup(new ShowAsIntentions_TypeSystem_ActionGroup(this));
+    addGroup(new TypesystemActions_Plugin_ActionGroup(this));
   }
   public void adjustRegularGroups() {
-    insertGroupIntoAnother(TypesystemActions_ActionGroup.ID, DebugActions_ActionGroup.ID, DebugActions_ActionGroup.LABEL_ID_types);
-    insertGroupIntoAnother(ShowAsIntentions_ActionGroup.ID, "jetbrains.mps.ide.editor.actions.ActionsAsIntentions_ActionGroup", null);
+    insertGroupIntoAnother(ShowAsIntentions_TypeSystem_ActionGroup.ID, "jetbrains.mps.ide.editor.actions.ActionsAsIntentions_ActionGroup", null);
+    insertGroupIntoAnother(TypesystemActions_Plugin_ActionGroup.ID, DebugActions_ActionGroup.ID, DebugActions_ActionGroup.LABEL_ID_types);
   }
   public List<BaseKeymapChanges> initKeymaps() {
     List<BaseKeymapChanges> res = ListSequence.fromList(new ArrayList<BaseKeymapChanges>());
     ListSequence.fromList(res).addElement(new Default_KeymapChanges());
+    ListSequence.fromList(res).addElement(new MacOSX105_KeymapChanges());
+    ListSequence.fromList(res).addElement(new MacOSX_KeymapChanges());
     return res;
   }
 }

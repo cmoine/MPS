@@ -1,9 +1,22 @@
+/*
+ * Copyright 2003-2022 JetBrains s.r.o.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package jetbrains.mps.jps.project;
 
 import com.intellij.openapi.util.io.FileUtil;
-import jetbrains.mps.extapi.module.ModuleFacetBase;
 import jetbrains.mps.extapi.persistence.FileDataSource;
-import jetbrains.mps.idea.core.make.MPSMakeConstants;
 import jetbrains.mps.idea.core.project.JpsModelRootContributor;
 import jetbrains.mps.jps.build.MPSCompilerUtil;
 import jetbrains.mps.jps.model.JpsMPSRepositoryFacade;
@@ -12,15 +25,10 @@ import jetbrains.mps.persistence.FilePerRootDataSource;
 import jetbrains.mps.project.ModuleId;
 import jetbrains.mps.project.Solution;
 import jetbrains.mps.project.facets.JavaModuleFacet;
-import jetbrains.mps.project.facets.JavaModuleFacetImpl;
 import jetbrains.mps.project.structure.modules.SolutionDescriptor;
-import jetbrains.mps.vfs.FileSystem;
-import jetbrains.mps.vfs.IFile;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.jps.ProjectPaths;
 import org.jetbrains.jps.incremental.CompileContext;
-import org.jetbrains.jps.incremental.messages.BuildMessage.Kind;
-import org.jetbrains.jps.incremental.messages.CompilerMessage;
-import org.jetbrains.jps.model.java.JpsJavaExtensionService;
 import org.jetbrains.jps.model.java.JpsJavaSdkType;
 import org.jetbrains.jps.model.library.JpsLibrary;
 import org.jetbrains.jps.model.module.JpsDependencyElement;
@@ -32,6 +40,7 @@ import org.jetbrains.jps.service.JpsServiceManager;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.module.SDependency;
 import org.jetbrains.mps.openapi.module.SDependencyScope;
+import org.jetbrains.mps.openapi.module.SModuleFacet;
 import org.jetbrains.mps.openapi.persistence.DataSource;
 import org.jetbrains.mps.openapi.persistence.Memento;
 import org.jetbrains.mps.openapi.persistence.ModelRoot;
@@ -48,7 +57,6 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * danilla 12/10/12
  */
-
 public class JpsSolutionIdea extends Solution {
 
   private JpsModule myModule;
@@ -58,7 +66,6 @@ public class JpsSolutionIdea extends Solution {
 
   public JpsSolutionIdea(@NotNull JpsModule module, SolutionDescriptor descriptor, CompileContext compileCtx) {
     super(descriptor, null);
-    myModule = module;
     myModule = module;
     myCompileContext = compileCtx;
   }
@@ -81,7 +88,7 @@ public class JpsSolutionIdea extends Solution {
         p = FileUtil.toCanonicalPath(p);
         map.put(p, m);
       } else if(source instanceof FilePerRootDataSource) {
-        String p = ((FilePerRootDataSource) source).getFolder().getDescendant(".model").getPath();
+        String p = ((FilePerRootDataSource) source).getFolder().findChild(".model").getPath();
         p = FileUtil.toCanonicalPath(p);
         map.put(p, m);
       }
@@ -89,6 +96,11 @@ public class JpsSolutionIdea extends Solution {
 
     myPathToModel.compareAndSet(null, map);
     return map.get(path);
+  }
+
+  @Override
+  public boolean isPackaged() {
+    return false;
   }
 
   @Override
@@ -139,34 +151,31 @@ public class JpsSolutionIdea extends Solution {
     return dependencies;
   }
 
+  @NotNull
   @Override
-  protected ModuleFacetBase setupFacet(ModuleFacetBase facet, Memento memento) {
+  protected SModuleFacet loadAndAttachIfNeeded(@NotNull SModuleFacet facet, Memento memento) {
     if (facet instanceof JavaModuleFacet) {
-      facet = new JavaModuleFacetImpl() {
-        @Override
-        public IFile getClassesGen() {
-          IFile descriptorFile = getDescriptorFile();
-          if (descriptorFile != null && descriptorFile.isReadOnly()) {
-            myCompileContext.processMessage(new CompilerMessage(MPSMakeConstants.BUILDER_ID, Kind.INFO, " super.ClassesGen " + super.getClassesGen()));
-            return super.getClassesGen();
-          }
-
-          // FIX hard-coded forTests=false
-          // TODO use ProjectPaths.getModuleOutputDir(myModule, false); (using JpsJavaExtensionService directly to be compatible with IDEA 12.0.0 release)
-          File outputDir = JpsJavaExtensionService.getInstance().getOutputDirectory(myModule, false);
-          if (outputDir == null) return null;
-          MPSCompilerUtil.debug(myCompileContext, " ClassesGen from module " + outputDir.getPath());
-          return FileSystem.getInstance().getFileByPath(outputDir.getPath());
-        }
-      };
+      // see SolutionIdea for reasons why memento replaced subclass.
+      // I don't feel there's use for JMF.getClassesGen() as MPS Make in JPS excludes JavaCompile facet (see ReducedMakeFacetConfiguration)
+      // which is the primary client for the method. However, decided to keep this piece of knowledge just in case.
+      File outputDir = ProjectPaths.getModuleOutputDir(myModule, false); // FIX hard-coded forTests=false
+      if (outputDir != null) {
+        MPSCompilerUtil.debug(myCompileContext, " ClassesGen from module " + outputDir.getPath());
+        // In-line values of JavaModuleFacetImpl.CLASSES_KEY and other keys
+        final Memento c = memento.createChild("classes");
+        c.put("generated", "true");
+        c.put("path", outputDir.getPath());
+        return super.loadAndAttachIfNeeded(facet, c);
+      }
+      // fall-through
     }
-    return super.setupFacet(facet, memento);
+    return super.loadAndAttachIfNeeded(facet, memento);
   }
 
   @Override
   protected Iterable<ModelRoot> loadRoots() {
     if (myContributedModelRoots == null) {
-      myContributedModelRoots = new HashSet<ModelRoot>();
+      myContributedModelRoots = new HashSet<>();
       for (JpsModelRootContributor c : JpsServiceManager.getInstance().getExtensions(JpsModelRootContributor.class)) {
         for (ModelRoot root : c.getModelRoots(myModule)) {
           myContributedModelRoots.add(root);

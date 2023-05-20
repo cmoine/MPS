@@ -2,8 +2,8 @@
 <model ref="r:7bf33aca-3b5f-450a-baea-d52813bdb88b(jetbrains.mps.lang.editor.imageGen.generator.template.main@generator)">
   <persistence version="9" />
   <languages>
-    <use id="b401a680-8325-4110-8fd3-84331ff25bef" name="jetbrains.mps.lang.generator" version="0" />
-    <use id="d7706f63-9be2-479c-a3da-ae92af1e64d5" name="jetbrains.mps.lang.generator.generationContext" version="0" />
+    <use id="b401a680-8325-4110-8fd3-84331ff25bef" name="jetbrains.mps.lang.generator" version="4" />
+    <use id="d7706f63-9be2-479c-a3da-ae92af1e64d5" name="jetbrains.mps.lang.generator.generationContext" version="2" />
     <use id="1839bec5-cea6-41df-b9e0-c405ff35c41e" name="jetbrains.mps.lang.editor.imageGen" version="0" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
@@ -87,7 +87,7 @@
         <child id="5169995583184591170" name="smodelAttribute" index="lGtFl" />
       </concept>
       <concept id="3364660638048049750" name="jetbrains.mps.lang.core.structure.PropertyAttribute" flags="ng" index="A9Btg">
-        <property id="1757699476691236117" name="propertyName" index="2qtEX9" />
+        <property id="1757699476691236117" name="name_DebugInfo" index="2qtEX9" />
         <property id="1341860900487648621" name="propertyId" index="P4ACc" />
       </concept>
       <concept id="1169194658468" name="jetbrains.mps.lang.core.structure.INamedConcept" flags="ng" index="TrEIO">
@@ -108,7 +108,7 @@
               <node concept="2OqwBi" id="2OaO_a3$bTN" role="3uHU7B">
                 <node concept="30H73N" id="2OaO_a3$bRb" role="2Oq$k0" />
                 <node concept="3TrEf2" id="2OaO_a3$c24" role="2OqNvi">
-                  <ref role="3Tt5mk" to="l04x:2OaO_a3$2sm" />
+                  <ref role="3Tt5mk" to="l04x:2OaO_a3$2sm" resolve="node" />
                 </node>
               </node>
             </node>
@@ -155,18 +155,18 @@
                       <node concept="2OqwBi" id="2OaO_a3$duv" role="12$y8L">
                         <node concept="30H73N" id="2OaO_a3$cBp" role="2Oq$k0" />
                         <node concept="3TrEf2" id="2OaO_a3$d$8" role="2OqNvi">
-                          <ref role="3Tt5mk" to="l04x:2OaO_a3$2sm" />
+                          <ref role="3Tt5mk" to="l04x:2OaO_a3$2sm" resolve="node" />
                         </node>
                       </node>
                     </node>
                   </node>
                 </node>
                 <node concept="liA8E" id="2OaO_a3$cBq" role="2OqNvi">
-                  <ref role="37wK5l" to="mhbf:~SNode.getNodeId():org.jetbrains.mps.openapi.model.SNodeId" resolve="getNodeId" />
+                  <ref role="37wK5l" to="mhbf:~SNode.getNodeId()" resolve="getNodeId" />
                 </node>
               </node>
               <node concept="liA8E" id="2OaO_a3$cBr" role="2OqNvi">
-                <ref role="37wK5l" to="wyt6:~Object.toString():java.lang.String" resolve="toString" />
+                <ref role="37wK5l" to="wyt6:~Object.toString()" resolve="toString" />
               </node>
             </node>
           </node>

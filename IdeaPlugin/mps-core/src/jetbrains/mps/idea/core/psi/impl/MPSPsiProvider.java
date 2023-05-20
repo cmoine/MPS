@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,100 +15,145 @@
  */
 package jetbrains.mps.idea.core.psi.impl;
 
-import com.intellij.openapi.actionSystem.LangDataKeys;
-import com.intellij.openapi.components.AbstractProjectComponent;
-import com.intellij.openapi.fileEditor.FileEditor;
-import com.intellij.openapi.fileEditor.FileEditorDataProvider;
-import com.intellij.openapi.fileEditor.FileEditorDataProviderManager;
-import com.intellij.openapi.project.DumbService;
+import com.intellij.openapi.Disposable;
+import com.intellij.openapi.application.TransactionGuard;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.PsiTreeChangeEvent;
 import com.intellij.psi.impl.PsiManagerEx;
 import com.intellij.psi.impl.PsiManagerImpl;
 import com.intellij.psi.impl.PsiModificationTrackerImpl;
 import com.intellij.psi.impl.PsiTreeChangeEventImpl;
-import com.intellij.psi.impl.file.impl.FileManager;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.util.Processor;
-import com.intellij.util.indexing.FileBasedIndex;
-import com.intellij.util.indexing.FileBasedIndexExtension;
-import com.intellij.util.indexing.ID;
-import jetbrains.mps.extapi.persistence.FileSystemBasedDataSource;
 import jetbrains.mps.ide.project.ProjectHelper;
-import jetbrains.mps.ide.vfs.VirtualFileUtils;
 import jetbrains.mps.idea.core.psi.MPS2PsiMapperUtil;
 import jetbrains.mps.idea.core.psi.MPSPsiNodeFactory;
 import jetbrains.mps.idea.core.psi.impl.events.SModelEventProcessor;
 import jetbrains.mps.idea.core.psi.impl.events.SModelEventProcessor.ModelProvider;
 import jetbrains.mps.idea.core.psi.impl.events.SModelEventProcessor.ReloadableModel;
-import jetbrains.mps.nodefs.MPSNodeVirtualFile;
-import jetbrains.mps.smodel.GlobalSModelEventsManager;
 import jetbrains.mps.smodel.ModelAccessHelper;
-import jetbrains.mps.smodel.event.SModelCommandListener;
+import jetbrains.mps.smodel.ModelsEventsCollector;
+import jetbrains.mps.smodel.RepoListenerRegistrar;
 import jetbrains.mps.smodel.event.SModelEvent;
-import jetbrains.mps.util.Computable;
-import jetbrains.mps.vfs.IFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 import org.jetbrains.mps.openapi.model.EditableSModel;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeId;
 import org.jetbrains.mps.openapi.model.SNodeReference;
+import org.jetbrains.mps.openapi.module.ModelAccess;
 import org.jetbrains.mps.openapi.module.SModule;
-import org.jetbrains.mps.openapi.module.SModuleListenerBase;
+import org.jetbrains.mps.openapi.module.SRepository;
+import org.jetbrains.mps.openapi.module.SRepositoryContentAdapter;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.Consumer;
 
 /**
  * evgeny, 1/25/13
  */
-public class MPSPsiProvider extends AbstractProjectComponent {
+public class MPSPsiProvider implements Disposable {
 
+  private final Project myProject;
   // TODO softReference..
   private final ConcurrentMap<SModelReference, MPSPsiModel> models = new ConcurrentHashMap<SModelReference, MPSPsiModel>();
   private final PsiModificationTrackerImpl myModificationTracker;
 
   public static MPSPsiProvider getInstance(@NotNull Project project) {
-    return project.getComponent(MPSPsiProvider.class);
+    return project.getService(MPSPsiProvider.class);
   }
 
   private SModelEventProcessor myEventProcessor;
 
-  private SModelCommandListener myListener = new SModelCommandListener() {
-    public void eventsHappenedInCommand(List<SModelEvent> events) {
-      myEventProcessor.process(events);
+  /**
+   * We're notifying about changes in PSI via
+   * {@link com.intellij.psi.impl.PsiModificationTrackerImpl#incCounter()}).
+   * It asserts {@link com.intellij.openapi.application.TransactionGuardImpl#assertWriteActionAllowed()
+   * The problem is the command which created the events we're reacting to might have been either
+   * inside a transaction or not. Currently, most MPS actions don't invoke a transaction. Moreover,
+   * calls to runWriteInEDT() and the like, which happen to exist in MPS actions, run the given code
+   * via LaterInvocator and the code is executed not in a transaction.
+   * <p>
+   * Thus, we should expect both scenarios.
+   * <p>
+   * In the future, maybe we should drop the case when we're creating our own fake transaction here.
+   * It can be done either by removing runWriteInEDT in actions (because every action is wrapped
+   * in {@link com.intellij.openapi.application.TransactionGuardImpl#performUserActivity(Runnable)})
+   * or by invoking a transaction explicitly in the action.
+   */
+  class MyModeEventsCollector extends ModelsEventsCollector {
+    MyModeEventsCollector(ModelAccess modelAccess) {
+      super(modelAccess);
+    }
 
+    @Override
+    protected void eventsHappened(List<SModelEvent> events) {
+      Runnable processEvents = () -> myEventProcessor.process(events);
+      if (TransactionGuard.getInstance().getContextTransaction() != null) {
+        // the command that caused the events was in a transaction
+        processEvents.run();
+      } else {
+        // hackish, might be dropped in the future
+        TransactionGuard.submitTransaction(myProject, () -> {
+          SRepository repository = ProjectHelper.getProjectRepository(myProject);
+          if (repository != null) {
+            repository.getModelAccess().runWriteAction(processEvents);
+          }
+        });
+      }
 
       // TODO PsiModificationTrackerImpl.incCounter/incOutOfCodeBlockModificationCounter (see JavaCodeBlockModificationListener)
       // TODO notify ANY_PSI_CHANGE_TOPIC
     }
   };
+  private ModelsEventsCollector myEventsCollector;
 
-  protected MPSPsiProvider(Project project) {
-    super(project);
+  private final SRepositoryContentAdapter myRepoListener = new SRepositoryContentAdapter() {
+    @Override
+    protected boolean isIncluded(SModule module) {
+      return !module.isReadOnly();
+    }
+
+    @Override
+    protected void startListening(SModel model) {
+      myEventsCollector.startListeningToModel(model);
+    }
+
+    @Override
+    protected void stopListening(SModel model) {
+      myEventsCollector.stopListeningToModel(model);
+    }
+  };
+
+  public MPSPsiProvider(Project project) {
+    myProject = project;
     myEventProcessor = createEventProcessor();
     PsiManager psiManager = PsiManagerEx.getInstance(project);
     this.myModificationTracker = (PsiModificationTrackerImpl) psiManager.getModificationTracker();
+    initComponent();
   }
 
-  public void initComponent() {
-    GlobalSModelEventsManager.getInstance().addGlobalCommandListener(myListener);
-    FileEditorDataProviderManager.getInstance(myProject).registerDataProvider(new PsiFileEditorDataProvider(), null);
+  @Override
+  public void dispose() {
+    disposeComponent();
   }
 
-  public void disposeComponent() {
-    GlobalSModelEventsManager.getInstance().removeGlobalCommandListener(myListener);
+  private void initComponent() {
+    myEventsCollector = new MyModeEventsCollector(ProjectHelper.getModelAccess(myProject));
+    new RepoListenerRegistrar(ProjectHelper.getProjectRepository(myProject), myRepoListener).attach();
+  }
+
+  private void disposeComponent() {
+    new RepoListenerRegistrar(ProjectHelper.getProjectRepository(myProject), myRepoListener).detach();
+    myEventsCollector.dispose();
+    myEventsCollector = null;
   }
 
   public PsiElement getPsi(SNodeReference nodeRef) {
@@ -127,6 +172,12 @@ public class MPSPsiProvider extends AbstractProjectComponent {
     if (source != null) {
       return source;
     }
+
+    return getMPSPsi(node);
+  }
+
+  public MPSPsiNode getMPSPsi(SNode node) {
+    if (node == null) return null;
 
     final SModel containingModel = node.getModel();
     if (containingModel == null) return null;
@@ -168,7 +219,7 @@ public class MPSPsiProvider extends AbstractProjectComponent {
     return new MPSPsiNode(id, concept.getQualifiedName(), containingRole, PsiManager.getInstance(myProject));
   }
 
-  public MPSPsiRef createReferenceNode(String role, SAbstractConcept linkTargetConcept, SModelReference targetModel, SNodeId targetId) {
+  public MPSPsiRef createReferenceNode(SReferenceLink role, SAbstractConcept linkTargetConcept, SModelReference targetModel, SNodeId targetId) {
     if (linkTargetConcept != null) {
       for (MPSPsiNodeFactory factory : MPSPsiNodeFactory.EP_NAME.getExtensions()) {
         final MPSPsiRef psiRefNode = factory.createReferenceNode(role, linkTargetConcept, targetModel, targetId, PsiManager.getInstance(myProject));
@@ -180,7 +231,7 @@ public class MPSPsiProvider extends AbstractProjectComponent {
     return new MPSPsiRef(role, targetModel, targetId, PsiManager.getInstance(myProject));
   }
 
-  public MPSPsiRef createReferenceNode(String role, SAbstractConcept linkTargetConcept, String referenceText) {
+  public MPSPsiRef createReferenceNode(SReferenceLink role, SAbstractConcept linkTargetConcept, String referenceText) {
     if (linkTargetConcept != null) {
       for (MPSPsiNodeFactory factory : MPSPsiNodeFactory.EP_NAME.getExtensions()) {
         final MPSPsiRef psiRefNode = factory.createReferenceNode(role, linkTargetConcept, referenceText, PsiManager.getInstance(myProject));
@@ -209,19 +260,8 @@ public class MPSPsiProvider extends AbstractProjectComponent {
         // I.e. those root nodes cannot be added as children to a model when they are already children of another
         result.reload(model);
         models.put(modelRef, result);
-        model.getModule().addModuleListener(new SModuleListenerBase() {
-          @Override
-          public void beforeModelRenamed(SModule module, SModel model, SModelReference newRef) {
-            models.remove(model.getReference());
-          }
-
-          @Override
-          public void beforeModelRemoved(SModule module, SModel removedModel) {
-            if (removedModel != model) return;
-            models.remove(modelRef);
-          }
-        });
-        model.addModelListener(myProject.getComponent(PsiModelReloadListener.class));
+        // bad smell: odd cycle, where PsiModelReloadListener access MPSPsiProvider, and MPSPsiProvider needs PsiModelReloadListener
+        model.addModelListener(PsiModelReloadListener.getInstance(myProject).getModelListener());
       }
       return result;
     }
@@ -268,102 +308,72 @@ public class MPSPsiProvider extends AbstractProjectComponent {
   }
 
   void notifyPsiChanged(MPSPsiModel model, MPSPsiNodeBase node) {
-
     if (!model.isValid()) return;
 
+    notify(model, manager -> {
+      PsiTreeChangeEventImpl event = new PsiTreeChangeEventImpl(manager);
+      event.setParent(node != null ? node : model);
+      event.setGenericChange(false);
+
+      manager.childrenChanged(event);
+    });
+  }
+
+  void notifyModelRenamed(SModelReference modelRef, SModel model) {
+    if (models.remove(modelRef) == null) {
+      // we didn't handle this model
+      return;
+    }
+    String oldName = modelRef.getModelName();
+    String newName = model.getName().getValue();
+    MPSPsiModel psiModel = getPsi(model);
+
+    notify(psiModel, manager -> {
+      PsiTreeChangeEventImpl event = new PsiTreeChangeEventImpl(manager);
+      event.setElement(psiModel);
+      event.setPropertyName(PsiTreeChangeEvent.PROP_FILE_NAME);
+      event.setOldValue(oldName);
+      event.setNewValue(newName);
+      manager.propertyChanged(event);
+    });
+  }
+
+  void notifyModelRemoved(SModelReference modelRef) {
+    MPSPsiModel psiModel = models.remove(modelRef);
+    if (psiModel != null) {
+      notify(psiModel, manager -> {
+        PsiTreeChangeEventImpl event = new PsiTreeChangeEventImpl(manager);
+        event.setParent(psiModel);
+        event.setChild(psiModel);
+        manager.childRemoved(event);
+      });
+    }
+  }
+
+  private void notify(MPSPsiModel model, Consumer<PsiManagerImpl> func) {
     PsiManager manager = model.getManager();
-    if (manager == null || !(manager instanceof PsiManagerImpl)) return;
+    if (!(manager instanceof PsiManagerImpl)) return;
 
     myModificationTracker.incCounter();
 
     // TODO: this is a dumb straightforward solution, better use beforeChage*. Or not?
     manager.dropResolveCaches();
-
-    PsiTreeChangeEventImpl event = new PsiTreeChangeEventImpl(manager);
-    event.setParent(node != null ? node : model);
-    event.setGenericChange(false);
-
-    ((PsiManagerImpl) manager).childrenChanged(event);
+    func.accept((PsiManagerImpl) manager);
   }
 
-  void notifyModelRenamed(MPSPsiModel model, String oldName, String newName) {
-    PsiManager manager = model.getManager();
-    if (manager == null || !(manager instanceof PsiManagerImpl)) return;
+  @Nullable
+  public PsiElement getPsiElement(@NotNull SNodeReference sNodePointer) {
+    MPSPsiModel psiModel = models.get(sNodePointer.getModelReference());
+    if (psiModel == null) return null;
 
-    myModificationTracker.incCounter();
+    PsiElement psiElement = new ModelAccessHelper(ProjectHelper.getModelAccess(myProject)).runReadAction(() -> getPsi(sNodePointer));
+    if (psiElement != null) return psiElement;
 
-    // TODO: this is a dumb straightforward solution, better use beforeChage*. Or not?
-    manager.dropResolveCaches();
-
-    PsiTreeChangeEventImpl event = new PsiTreeChangeEventImpl(manager);
-    event.setElement(model);
-    event.setPropertyName(PsiTreeChangeEvent.PROP_FILE_NAME);
-    event.setOldValue(oldName);
-    event.setNewValue(newName);
-    ((PsiManagerImpl) manager).propertyChanged(event);
-  }
-
-  private class PsiFileEditorDataProvider implements FileEditorDataProvider {
-
-    @Nullable
-    @Override
-    public Object getData(String dataId, FileEditor e, VirtualFile file) {
-      if (!file.isValid()) return null;
-
-//      if (LangDataKeys.PSI_FILE.is(dataId)) {
-//        return getPsiFile(file);
-//      }
-
-      if (LangDataKeys.PSI_ELEMENT.is(dataId)) {
-        return getPsiPsiElement(file);
+    for (MPSPsiRootNode rootNode : psiModel.getChildren(MPSPsiRootNode.class)) {
+      if (rootNode.getSNodeReference().equals(sNodePointer)) {
+        return rootNode;
       }
-
-      return null;
     }
-
-    private PsiElement getPsiPsiElement(VirtualFile snodeVFile) {
-      if (snodeVFile instanceof MPSNodeVirtualFile) {
-        final MPSNodeVirtualFile mpsFile = (MPSNodeVirtualFile) snodeVFile;
-
-        final SNodeReference sNodePointer = mpsFile.getSNodePointer();
-
-        MPSPsiModel psiModel = models.get(sNodePointer.getModelReference());
-        if (psiModel == null) return null;
-
-        PsiElement psiElement = new ModelAccessHelper(ProjectHelper.getModelAccess(myProject)).runReadAction(new Computable<PsiElement>() {
-          @Override
-          public PsiElement compute() {
-            return getPsi(sNodePointer);
-          }
-        });
-        if (psiElement != null) return psiElement;
-
-        for (MPSPsiRootNode rootNode : psiModel.getChildren(MPSPsiRootNode.class)) {
-          if (rootNode.getSNodeReference().equals(mpsFile.getSNodePointer())) {
-            return rootNode;
-          }
-        }
-
-        // TODO not cached node
-      }
-      return null;
-    }
-
-    private PsiFile getPsiFile(VirtualFile snodeVFile) {
-      if (snodeVFile instanceof MPSNodeVirtualFile) {
-        final MPSNodeVirtualFile mpsFile = (MPSNodeVirtualFile) snodeVFile;
-        SNodeReference sNodePointer = mpsFile.getSNodePointer();
-        MPSPsiModel mpsPsiModel = models.get(sNodePointer.getModelReference());
-        if (mpsPsiModel == null) return null;
-        VirtualFile sourceVFile = mpsPsiModel.getSourceVirtualFile();
-
-        FileManager fileManager = ((PsiManagerEx) PsiManagerEx.getInstance(myProject)).getFileManager();
-        return fileManager.findFile(sourceVFile);
-
-
-        // TODO not cached node
-      }
-      return null;
-    }
+    return null;
   }
 }

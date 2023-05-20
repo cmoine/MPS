@@ -5,5 +5,5 @@ package jetbrains.mps.lang.aspect.structure;
 import jetbrains.mps.smodel.runtime.IconResource;
 
 public class IconContainer {
-  protected static IconResource RESOURCE_a0a0i = new IconResource("aspect.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a3a0a5b0i = new IconResource("aspect.png", IconContainer.class);
 }

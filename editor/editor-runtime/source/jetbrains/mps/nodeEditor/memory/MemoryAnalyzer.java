@@ -43,9 +43,7 @@ public class MemoryAnalyzer {
       }
       Method getter = getInstrumentationGetter(agentClass);
       return (Instrumentation) getter.invoke(null);
-    } catch (ClassNotFoundException e) {
-    } catch (InvocationTargetException e) {
-    } catch (IllegalAccessException e) {
+    } catch (ClassNotFoundException | IllegalAccessException | InvocationTargetException e) {
     }
     return null;
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +15,15 @@
  */
 package jetbrains.mps.checkedName;
 
+import jetbrains.mps.smodel.legacy.ConceptMetaInfoConverter;
+import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.model.SNode;
-import org.jetbrains.mps.openapi.model.SNodeAccessUtil;
 
 public class PropertyReference {
-  private SNode myNode;
-  private String myProperty;
+  private final SNode myNode;
+  private final SProperty myProperty;
 
-  public PropertyReference(SNode node, String property) {
+  public PropertyReference(SNode node, SProperty property) {
     myNode = node;
     myProperty = property;
   }
@@ -31,15 +32,7 @@ public class PropertyReference {
     return myNode;
   }
 
-  public String getProperty() {
+  public SProperty getProperty() {
     return myProperty;
-  }
-
-  public String getValue(){
-    return SNodeAccessUtil.getProperty(myNode, myProperty);
-  }
-
-  public void setValue(String value){
-    SNodeAccessUtil.setProperty(myNode, myProperty, value);
   }
 }

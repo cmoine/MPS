@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-2yri8iljpe5jvxc3kn8fpjds74ywrgi" />
+<product version="3" modelHash="-cjkfykl39bppteic70wt1efxk75ghrn">
+  <files names="TypesystemDescriptor.java:check_DataFlowBuilderDeclaration_modeUniqueness_NonTypesystemRule.java:typeof_BooleanInstructionOperation_InferenceRule.java:typeof_EmitCodeForStatement_InferenceRule.java:typeof_EmitVariableStatement_InferenceRule.java:typeof_GetCodeForExpression_InferenceRule.java:typeof_InsertPosition_InferenceRule.java:typeof_InstructionGetSourceOperation_InferenceRule.java:typeof_NodeParameter_InferenceRule.java:typeof_RelativePosition_InferenceRule.java" />
+</product>
 

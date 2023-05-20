@@ -6,24 +6,9 @@ import jetbrains.mps.nodeEditor.DefaultNodeEditor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Constant;
-import jetbrains.mps.openapi.editor.style.Style;
-import jetbrains.mps.editor.runtime.style.StyleImpl;
-import jetbrains.mps.editor.runtime.style.StyleAttributes;
 
 public class ToListOperation_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createConstant_fiobsf_a(editorContext, node);
-  }
-  private EditorCell createConstant_fiobsf_a(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, "toList");
-    editorCell.setCellId("Constant_fiobsf_a");
-    editorCell.setBig(true);
-    Style style = new StyleImpl();
-    Collections_Style_StyleSheet.apply_Operation(style, editorCell);
-    style.set(StyleAttributes.EDITABLE, 0, true);
-    editorCell.getStyle().putAll(style);
-    editorCell.setDefaultText("");
-    return editorCell;
+    return new ToListOperation_EditorBuilder_a(editorContext, node).createCell();
   }
 }

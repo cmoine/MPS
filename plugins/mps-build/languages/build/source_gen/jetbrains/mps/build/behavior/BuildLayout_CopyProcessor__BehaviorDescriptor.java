@@ -5,12 +5,9 @@ package jetbrains.mps.build.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.Map;
 import jetbrains.mps.generator.template.TemplateQueryContext;
@@ -27,16 +24,18 @@ import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public final class BuildLayout_CopyProcessor__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x127671bd5d12a2c2L, "jetbrains.mps.build.structure.BuildLayout_CopyProcessor");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<String> getTaskName_id19QsrPtc4wK = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getTaskName").modifiers(SModifiersImpl.create(12, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("19QsrPtc4wK").registry(REGISTRY).build();
-  public static final SMethod<Map<String, String>> getTaskArguments_id6R_3WZ31H2E = new SMethodBuilder<Map<String, String>>(new SJavaCompoundTypeImpl(Map.class)).name("getTaskArguments").modifiers(SModifiersImpl.create(12, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("6R_3WZ31H2E").registry(REGISTRY).build();
-  public static final SMethod<String> getTempFolder_id19QsrPvjYS$ = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getTempFolder").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("19QsrPvjYS$").registry(REGISTRY).build(SMethodBuilder.createJavaParameter(TemplateQueryContext.class, ""));
-  /*package*/ static final SMethod<String> representativeName_id19QsrPvAva7 = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("representativeName").modifiers(SModifiersImpl.create(1, AccessPrivileges.PRIVATE)).concept(CONCEPT).id("19QsrPvAva7").registry(REGISTRY).build(SMethodBuilder.createJavaParameter((Class<SNode>) ((Class) Object.class), ""));
-  /*package*/ static final SMethod<String> filesetName_id19QsrPvClqt = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("filesetName").modifiers(SModifiersImpl.create(1, AccessPrivileges.PRIVATE)).concept(CONCEPT).id("19QsrPvClqt").registry(REGISTRY).build(SMethodBuilder.createJavaParameter((Class<SNode>) ((Class) Object.class), ""));
+  public static final SMethod<String> getTaskName_id19QsrPtc4wK = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getTaskName").modifiers(12, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1330375798060763184L).languageId(0xb99171f8c50ce5d2L, 0x798100da4f0a421aL).build2();
+  public static final SMethod<Map<String, String>> getTaskArguments_id6R_3WZ31H2E = new SMethodBuilder<Map<String, String>>(new SJavaCompoundTypeImpl(Map.class)).name("getTaskArguments").modifiers(12, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(7918752904805535914L).languageId(0xb99171f8c50ce5d2L, 0x798100da4f0a421aL).build2();
+  public static final SMethod<String> getTempFolder_id19QsrPvjYS$ = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getTempFolder").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1330375798096391716L).languageId(0xb99171f8c50ce5d2L, 0x798100da4f0a421aL).build2(SMethodBuilder.createJavaParameter(TemplateQueryContext.class, ""));
+  /*package*/ static final SMethod<String> representativeName_id19QsrPvAva7 = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("representativeName").modifiers(1, AccessPrivileges.PRIVATE).concept(CONCEPT).baseMethodId(1330375798101242503L).languageId(0xb99171f8c50ce5d2L, 0x798100da4f0a421aL).build2(SMethodBuilder.createJavaParameter((Class<SNode>) ((Class) Object.class), ""));
+  /*package*/ static final SMethod<String> filesetName_id19QsrPvClqt = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("filesetName").modifiers(1, AccessPrivileges.PRIVATE).concept(CONCEPT).baseMethodId(1330375798101726877L).languageId(0xb99171f8c50ce5d2L, 0x798100da4f0a421aL).build2(SMethodBuilder.createJavaParameter((Class<SNode>) ((Class) Object.class), ""));
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getTaskName_id19QsrPtc4wK, getTaskArguments_id6R_3WZ31H2E, getTempFolder_id19QsrPvjYS$, representativeName_id19QsrPvAva7, filesetName_id19QsrPvClqt);
 
@@ -44,7 +43,7 @@ public final class BuildLayout_CopyProcessor__BehaviorDescriptor extends BaseBHD
   }
 
   /*package*/ static String getTempFolder_id19QsrPvjYS$(@NotNull SNode __thisNode__, TemplateQueryContext genContext) {
-    SNode project = SNodeOperations.getNodeAncestor(__thisNode__, MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a13L, "jetbrains.mps.build.structure.BuildProject"), false, false);
+    SNode project = SNodeOperations.getNodeAncestor(__thisNode__, CONCEPTS.BuildProject$ae, false, false);
     ConcurrentMap<SNode, String> map = GenerationUtil.<SNode,String>getTransientMap(project, genContext, "handlerOutputPath");
     String outpath = map.get(__thisNode__);
     if (outpath != null) {
@@ -52,9 +51,9 @@ public final class BuildLayout_CopyProcessor__BehaviorDescriptor extends BaseBHD
     }
 
     String name = "default";
-    SNode copyNode = SNodeOperations.as(SNodeOperations.getParent(__thisNode__), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7f76698a394d9ab2L, "jetbrains.mps.build.structure.BuildLayout_CustomCopy"));
+    SNode copyNode = SNodeOperations.as(SNodeOperations.getParent(__thisNode__), CONCEPTS.BuildLayout_CustomCopy$bv);
     if ((copyNode != null)) {
-      name = BuildLayout_CopyProcessor__BehaviorDescriptor.filesetName_id19QsrPvClqt.invoke(SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x127671bd5d12a2c2L, "jetbrains.mps.build.structure.BuildLayout_CopyProcessor")), SLinkOperations.getTarget(copyNode, MetaAdapterFactory.getContainmentLink(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7f76698a394d9b91L, 0x48d5d03db92339baL, "fileset")));
+      name = BuildLayout_CopyProcessor__BehaviorDescriptor.filesetName_id19QsrPvClqt.invoke(SNodeOperations.asSConcept(CONCEPTS.BuildLayout_CopyProcessor$ty), SLinkOperations.getTarget(copyNode, LINKS.fileset$tUzn));
     }
     outpath = Context.defaultContext(genContext).getTempPath(__thisNode__, name, "customProcessors", BuildLayout_CopyProcessor__BehaviorDescriptor.getTaskName_id19QsrPtc4wK.invoke(__thisNode__));
     map.put(__thisNode__, outpath);
@@ -62,20 +61,20 @@ public final class BuildLayout_CopyProcessor__BehaviorDescriptor extends BaseBHD
   }
   /*package*/ static String representativeName_id19QsrPvAva7(@NotNull SAbstractConcept __thisConcept__, SNode path) {
     StringBuilder res = new StringBuilder();
-    if (SNodeOperations.isInstanceOf(path, MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x65997a657729f6fbL, "jetbrains.mps.build.structure.BuildRelativePath"))) {
-      SNode compositePart = SLinkOperations.getTarget(SNodeOperations.cast(path, MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x65997a657729f6fbL, "jetbrains.mps.build.structure.BuildRelativePath")), MetaAdapterFactory.getContainmentLink(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x65997a657729f6fbL, 0x65997a65772aebcbL, "compositePart"));
+    if (SNodeOperations.isInstanceOf(path, CONCEPTS.BuildRelativePath$Kc)) {
+      SNode compositePart = SLinkOperations.getTarget(SNodeOperations.cast(path, CONCEPTS.BuildRelativePath$Kc), LINKS.compositePart$blMW);
       while (compositePart != null) {
-        String name = SPropertyOperations.getString(compositePart, MetaAdapterFactory.getProperty(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x779c6e65c01467f1L, 0x779c6e65c01467f3L, "head"));
+        String name = SPropertyOperations.getString(compositePart, PROPS.head$$gC$);
         if (name.indexOf("{") == -1 && name.indexOf("}") == -1 && name.indexOf("$") == -1) {
           if (res.length() > 0) {
             res.append("-");
           }
           res.append(name);
         }
-        compositePart = BuildRelativePath__BehaviorDescriptor.next_id7wpYgMyU0gZ.invoke(SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x65997a657729f6fbL, "jetbrains.mps.build.structure.BuildRelativePath")), compositePart);
+        compositePart = BuildRelativePath__BehaviorDescriptor.next_id7wpYgMyU0gZ.invoke(SNodeOperations.asSConcept(CONCEPTS.BuildRelativePath$Kc), compositePart);
       }
     } else {
-      res.append(BuildSourcePath__BehaviorDescriptor.getLastSegment_id1bWeed$oUb5.invoke(path, null));
+      res.append(BuildSourcePath__BehaviorDescriptor.getLastSegment_id5dwDdJ8yckN.invoke(path));
     }
     if (res.length() == 0) {
       res.append("container");
@@ -83,16 +82,15 @@ public final class BuildLayout_CopyProcessor__BehaviorDescriptor extends BaseBHD
     return res.toString();
   }
   /*package*/ static String filesetName_id19QsrPvClqt(@NotNull SAbstractConcept __thisConcept__, SNode fileset) {
-    if (SNodeOperations.isInstanceOf(fileset, MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db9224596L, "jetbrains.mps.build.structure.BuildInputSingleFile"))) {
-      return BuildLayout_CopyProcessor__BehaviorDescriptor.representativeName_id19QsrPvAva7.invoke(SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x127671bd5d12a2c2L, "jetbrains.mps.build.structure.BuildLayout_CopyProcessor")), SLinkOperations.getTarget(SNodeOperations.cast(fileset, MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db9224596L, "jetbrains.mps.build.structure.BuildInputSingleFile")), MetaAdapterFactory.getContainmentLink(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db9224596L, 0x48d5d03db922459aL, "path")));
-    } else if (SNodeOperations.isInstanceOf(fileset, MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db92245a4L, "jetbrains.mps.build.structure.BuildInputFiles"))) {
-      return BuildLayout_CopyProcessor__BehaviorDescriptor.representativeName_id19QsrPvAva7.invoke(SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x127671bd5d12a2c2L, "jetbrains.mps.build.structure.BuildLayout_CopyProcessor")), SLinkOperations.getTarget(SNodeOperations.cast(fileset, MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db92245a4L, "jetbrains.mps.build.structure.BuildInputFiles")), MetaAdapterFactory.getContainmentLink(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db92245a4L, 0x48d5d03db92245a6L, "dir")));
+    if (SNodeOperations.isInstanceOf(fileset, CONCEPTS.BuildInputSingleFile$4U)) {
+      return BuildLayout_CopyProcessor__BehaviorDescriptor.representativeName_id19QsrPvAva7.invoke(SNodeOperations.asSConcept(CONCEPTS.BuildLayout_CopyProcessor$ty), SLinkOperations.getTarget(SNodeOperations.cast(fileset, CONCEPTS.BuildInputSingleFile$4U), LINKS.path$dYr6));
+    } else if (SNodeOperations.isInstanceOf(fileset, CONCEPTS.BuildInputFiles$lR)) {
+      return BuildLayout_CopyProcessor__BehaviorDescriptor.representativeName_id19QsrPvAva7.invoke(SNodeOperations.asSConcept(CONCEPTS.BuildLayout_CopyProcessor$ty), SLinkOperations.getTarget(SNodeOperations.cast(fileset, CONCEPTS.BuildInputFiles$lR), LINKS.dir$e6r$));
     }
     return "copy";
   }
 
   /*package*/ BuildLayout_CopyProcessor__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -140,5 +138,25 @@ public final class BuildLayout_CopyProcessor__BehaviorDescriptor extends BaseBHD
   @Override
   public SAbstractConcept getConcept() {
     return CONCEPT;
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept BuildProject$ae = MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a13L, "jetbrains.mps.build.structure.BuildProject");
+    /*package*/ static final SConcept BuildLayout_CustomCopy$bv = MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7f76698a394d9ab2L, "jetbrains.mps.build.structure.BuildLayout_CustomCopy");
+    /*package*/ static final SConcept BuildLayout_CopyProcessor$ty = MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x127671bd5d12a2c2L, "jetbrains.mps.build.structure.BuildLayout_CopyProcessor");
+    /*package*/ static final SConcept BuildRelativePath$Kc = MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x65997a657729f6fbL, "jetbrains.mps.build.structure.BuildRelativePath");
+    /*package*/ static final SConcept BuildInputSingleFile$4U = MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db9224596L, "jetbrains.mps.build.structure.BuildInputSingleFile");
+    /*package*/ static final SConcept BuildInputFiles$lR = MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db92245a4L, "jetbrains.mps.build.structure.BuildInputFiles");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink fileset$tUzn = MetaAdapterFactory.getContainmentLink(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7f76698a394d9b91L, 0x48d5d03db92339baL, "fileset");
+    /*package*/ static final SContainmentLink compositePart$blMW = MetaAdapterFactory.getContainmentLink(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x65997a657729f6fbL, 0x65997a65772aebcbL, "compositePart");
+    /*package*/ static final SContainmentLink path$dYr6 = MetaAdapterFactory.getContainmentLink(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db9224596L, 0x48d5d03db922459aL, "path");
+    /*package*/ static final SContainmentLink dir$e6r$ = MetaAdapterFactory.getContainmentLink(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db92245a4L, 0x48d5d03db92245a6L, "dir");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty head$$gC$ = MetaAdapterFactory.getProperty(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x779c6e65c01467f1L, 0x779c6e65c01467f3L, "head");
   }
 }

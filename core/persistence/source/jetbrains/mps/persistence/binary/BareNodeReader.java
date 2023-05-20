@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,11 @@
  */
 package jetbrains.mps.persistence.binary;
 
+import jetbrains.mps.extapi.model.ResolveInfoExt;
 import jetbrains.mps.extapi.model.SModelData;
 import jetbrains.mps.smodel.DynamicReference;
 import jetbrains.mps.smodel.DynamicReference.DynamicReferenceOrigin;
-import jetbrains.mps.smodel.StaticReference;
+import jetbrains.mps.smodel.SNodePointer;
 import jetbrains.mps.util.io.ModelInputStream;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -26,6 +27,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
+import org.jetbrains.mps.openapi.model.ResolveInfo;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeId;
@@ -35,6 +37,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * Lightweight, straightforward binary serialization of individual {@link org.jetbrains.mps.openapi.model.SNode}s.
@@ -42,12 +45,26 @@ import java.util.List;
  * @author Artem Tikhomirov
  */
 public class BareNodeReader {
-  protected final SModelReference myModelReference;
+  protected final Supplier<SModelReference> myModelReference;
   protected final ModelInputStream myIn;
 
+  /**
+   * @deprecated use {@link #BareNodeReader(Supplier, ModelInputStream)} instead
+   */
+@Deprecated(since = "2020.2", forRemoval = true)
   public BareNodeReader(@NotNull SModelReference modelReference, @NotNull ModelInputStream is) {
-    myModelReference = modelReference;
+    this (() -> modelReference, is);
+  }
+
+  public BareNodeReader(@NotNull Supplier<SModelReference> localModelRef, @NotNull ModelInputStream is) {
+    myModelReference = localModelRef;
     myIn = is;
+  }
+
+  public BareNodeReader(@NotNull ModelInputStream is) {
+    this(() -> {
+      throw new UnsupportedOperationException();
+    }, is);
   }
 
   /**
@@ -65,7 +82,7 @@ public class BareNodeReader {
    */
   public List<SNode> readChildren(@Nullable SNode parent) throws IOException {
     int size = myIn.readInt();
-    ArrayList<SNode> rv = new ArrayList<SNode>(size);
+    ArrayList<SNode> rv = new ArrayList<>(size);
     while (size-- > 0) {
       rv.add(readNode(parent));
     }
@@ -123,7 +140,7 @@ public class BareNodeReader {
     }
   }
 
-  protected SReference readReference(SReferenceLink sref, SNode node) throws IOException {
+  protected void readReference(SReferenceLink sref, SNode node) throws IOException {
     int kind = myIn.readByte();
     assert kind >= 1 && kind <= 3;
     SNodeId targetNodeId = kind == 1 ? myIn.readNodeId() : null;
@@ -135,30 +152,18 @@ public class BareNodeReader {
       modelRef = myIn.readModelReference();
       externalNodeReferenceRead(modelRef, targetNodeId);
     } else {
-      modelRef = myModelReference;
+      modelRef = myModelReference.get();
       localNodeReferenceRead(targetNodeId);
     }
     String resolveInfo = myIn.readString();
     if (kind == 1) {
-      SReference reference = new StaticReference(
-          sref,
-          node,
-          modelRef,
-          targetNodeId,
-          resolveInfo);
-      node.setReference(reference.getLink(), reference);
-      return reference;
-    } else if (kind == 2 || kind == 3) {
-      DynamicReference reference = new DynamicReference(
-          sref,
-          node,
-          modelRef,
-          resolveInfo);
-      if (origin != null) {
-        reference.setOrigin(origin);
-      }
-      node.setReference(sref, reference);
-      return reference;
+      node.setReference(sref, ResolveInfo.of(new SNodePointer(modelRef, targetNodeId), resolveInfo));
+    } else //noinspection ConstantConditions
+      if (kind == 2) {
+        node.setReference(sref, ResolveInfo.of(resolveInfo));
+      } else if (kind == 3) {
+        assert origin != null;
+        node.setReference(sref, (ResolveInfoExt) (source, link) -> DynamicReference.create(sref, node, resolveInfo, origin));
     } else {
       throw new IOException("unknown reference type");
     }

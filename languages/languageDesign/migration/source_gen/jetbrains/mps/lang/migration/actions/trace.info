@@ -5,66 +5,82 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
   <root>
     <file name="ActionAspectDescriptorImpl.java">
-      <unit at="13,0,36,0" name="jetbrains.mps.lang.migration.actions.ActionAspectDescriptorImpl" />
-    </file>
-    <file name="QueriesGenerated.java">
-      <unit at="6,0,8,0" name="jetbrains.mps.lang.migration.actions.QueriesGenerated" />
+      <unit at="12,0,30,0" name="jetbrains.mps.lang.migration.actions.ActionAspectDescriptorImpl" />
     </file>
   </root>
   <root nodeRef="90746344-04fd-4286-97d5-b46ae6a81709/r:f22d27ec-c702-420c-bd15-8c30195d31df(jetbrains.mps.lang.migration/jetbrains.mps.lang.migration.actions)/1901572971594205598">
     <file name="TransformStatement.java">
-      <node id="1901572971594233973" at="20,91,21,510" concept="0" />
-      <node id="7527743013694960557" at="21,510,22,180" concept="0" />
-      <node id="1901572971594270494" at="24,83,25,65" concept="3" />
-      <node id="1901572971594270494" at="25,65,26,32" concept="3" />
-      <node id="1901572971594270494" at="26,32,27,32" concept="3" />
-      <node id="1901572971594270494" at="27,32,28,234" concept="0" />
-      <node id="1901572971594270494" at="28,234,29,170" concept="0" />
-      <node id="1901572971594270494" at="29,170,30,223" concept="0" />
-      <node id="1901572971594270494" at="30,223,31,198" concept="0" />
-      <node id="1901572971594270494" at="31,198,32,173" concept="0" />
-      <node id="1901572971594270494" at="32,173,33,26" concept="4" />
-      <node id="1901572971594206036" at="20,0,24,0" concept="2" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SModel;)V" />
-      <node id="1901572971594270494" at="24,0,35,0" concept="5" trace="_quotation_createNode_md2x8h_a0a0a0a#(Ljava/lang/Object;)Lorg/jetbrains/mps/openapi/model/SNode;" />
-      <scope id="1901572971594206036" at="20,91,22,180" />
-      <scope id="1901572971594206036" at="20,0,24,0">
+      <node id="1901572971594233973" at="22,102,23,283" concept="0" />
+      <node id="7527743013694960557" at="23,283,24,75" concept="0" />
+      <node id="1901572971594270494" at="26,83,27,32" concept="3" />
+      <node id="1901572971594270494" at="27,32,28,32" concept="3" />
+      <node id="1901572971594270494" at="28,32,29,232" concept="3" />
+      <node id="1901572971594270494" at="29,232,30,36" concept="0" />
+      <node id="1901572971594270494" at="30,36,31,143" concept="0" />
+      <node id="1901572971594270494" at="31,143,32,222" concept="3" />
+      <node id="1901572971594270494" at="32,222,33,37" concept="0" />
+      <node id="1901572971594270494" at="33,37,34,198" concept="0" />
+      <node id="1901572971594270494" at="34,198,35,173" concept="0" />
+      <node id="1901572971594270494" at="35,173,36,26" concept="4" />
+      <node id="1901572971594205598" at="41,0,42,0" concept="5" trace="parameter$b4Y3" />
+      <node id="1901572971594205598" at="45,0,46,0" concept="5" trace="TransformStatement$iG" />
+      <node id="1901572971594205598" at="49,0,50,0" concept="5" trace="forceMultiLine$AhIn" />
+      <node id="1901572971594206036" at="22,0,26,0" concept="2" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <node id="1901572971594270494" at="26,0,38,0" concept="6" trace="_quotation_createNode_md2x8h_a0a0a0a#(Ljava/lang/Object;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <scope id="1901572971594206036" at="22,102,24,75" />
+      <scope id="1901572971594206036" at="22,0,26,0">
         <var name="enclosingNode" id="1901572971594206036" />
+        <var name="index" id="1901572971594206036" />
         <var name="model" id="1901572971594206036" />
         <var name="newNode" id="1901572971594206036" />
         <var name="sampleNode" id="1901572971594206036" />
       </scope>
-      <scope id="1901572971594270494" at="24,83,33,26">
-        <var name="facade" id="1901572971594270494" />
+      <scope id="1901572971594270494" at="26,83,36,26">
+        <var name="nb" id="1901572971594270494" />
+        <var name="nb1" id="1901572971594270494" />
         <var name="quotedNode_2" id="1901572971594270494" />
         <var name="quotedNode_3" id="1901572971594270494" />
       </scope>
-      <scope id="1901572971594270494" at="24,0,35,0">
+      <scope id="1901572971594270494" at="26,0,38,0">
         <var name="parameter_1" id="1901572971594270494" />
       </scope>
-      <unit id="1901572971594206036" at="19,0,36,0" name="jetbrains.mps.lang.migration.actions.TransformStatement$NodeFactory_1901572971594206036" />
-      <unit id="1901572971594205598" at="18,0,37,0" name="jetbrains.mps.lang.migration.actions.TransformStatement" />
+      <unit id="1901572971594205598" at="40,0,43,0" name="jetbrains.mps.lang.migration.actions.TransformStatement$LINKS" />
+      <unit id="1901572971594205598" at="44,0,47,0" name="jetbrains.mps.lang.migration.actions.TransformStatement$CONCEPTS" />
+      <unit id="1901572971594205598" at="48,0,51,0" name="jetbrains.mps.lang.migration.actions.TransformStatement$PROPS" />
+      <unit id="1901572971594206036" at="21,0,39,0" name="jetbrains.mps.lang.migration.actions.TransformStatement$NodeFactory_1901572971594206036" />
+      <unit id="1901572971594205598" at="20,0,52,0" name="jetbrains.mps.lang.migration.actions.TransformStatement" />
     </file>
   </root>
   <root nodeRef="90746344-04fd-4286-97d5-b46ae6a81709/r:f22d27ec-c702-420c-bd15-8c30195d31df(jetbrains.mps.lang.migration/jetbrains.mps.lang.migration.actions)/2864063292004380726">
     <file name="NodeReference_factories.java">
-      <node id="2864063292004391952" at="18,209,19,538" concept="0" />
-      <node id="2864063292004398534" at="19,538,20,600" concept="0" />
-      <node id="2864063292004382263" at="20,600,21,583" concept="0" />
-      <node id="2864063292004381173" at="17,91,22,7" concept="1" />
-      <node id="2864063292004380727" at="17,0,24,0" concept="2" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SModel;)V" />
-      <scope id="2864063292004381174" at="18,209,21,583" />
-      <scope id="2864063292004380727" at="17,91,22,7" />
-      <scope id="2864063292004380727" at="17,0,24,0">
+      <node id="2864063292004391952" at="22,86,23,199" concept="0" />
+      <node id="2864063292004398534" at="23,199,24,275" concept="0" />
+      <node id="2864063292004382263" at="24,275,25,244" concept="0" />
+      <node id="2864063292004380726" at="31,0,32,0" concept="5" trace="nodeId$HCGf" />
+      <node id="2864063292004380726" at="32,0,33,0" concept="5" trace="modelRef$HwWI" />
+      <node id="2864063292004380726" at="33,0,34,0" concept="5" trace="nodeName$l7lW" />
+      <node id="2864063292004380726" at="37,0,38,0" concept="5" trace="DirectNodeReference$fk" />
+      <node id="2864063292004380726" at="41,0,42,0" concept="5" trace="target$8vSJ" />
+      <node id="2864063292004381173" at="21,102,26,7" concept="1" />
+      <node id="2864063292004380727" at="21,0,28,0" concept="2" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <scope id="2864063292004381174" at="22,86,25,244" />
+      <scope id="2864063292004380727" at="21,102,26,7" />
+      <scope id="2864063292004380727" at="21,0,28,0">
         <var name="enclosingNode" id="2864063292004380727" />
+        <var name="index" id="2864063292004380727" />
         <var name="model" id="2864063292004380727" />
         <var name="newNode" id="2864063292004380727" />
         <var name="sampleNode" id="2864063292004380727" />
       </scope>
-      <unit id="2864063292004380727" at="16,0,25,0" name="jetbrains.mps.lang.migration.actions.NodeReference_factories$NodeFactory_2864063292004380727" />
-      <unit id="2864063292004380726" at="15,0,26,0" name="jetbrains.mps.lang.migration.actions.NodeReference_factories" />
+      <unit id="2864063292004380726" at="36,0,39,0" name="jetbrains.mps.lang.migration.actions.NodeReference_factories$CONCEPTS" />
+      <unit id="2864063292004380726" at="40,0,43,0" name="jetbrains.mps.lang.migration.actions.NodeReference_factories$LINKS" />
+      <unit id="2864063292004380726" at="30,0,35,0" name="jetbrains.mps.lang.migration.actions.NodeReference_factories$PROPS" />
+      <unit id="2864063292004380727" at="20,0,29,0" name="jetbrains.mps.lang.migration.actions.NodeReference_factories$NodeFactory_2864063292004380727" />
+      <unit id="2864063292004380726" at="19,0,44,0" name="jetbrains.mps.lang.migration.actions.NodeReference_factories" />
     </file>
   </root>
 </debug-info>

@@ -2,7 +2,7 @@
 <model ref="r:8d9d5d2a-4503-4714-9fa6-17c2b8928601(BHL6.behavior)">
   <persistence version="9" />
   <languages>
-    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="0" />
+    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="2" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -29,6 +29,8 @@
         <reference id="5299096511375896640" name="superConcept" index="3eA5LN" />
       </concept>
       <concept id="1225194691553" name="jetbrains.mps.lang.behavior.structure.ThisNodeExpression" flags="nn" index="13iPFW" />
+      <concept id="1703835097132541506" name="jetbrains.mps.lang.behavior.structure.ThisConceptExpression" flags="ng" index="1fM9EW" />
+      <concept id="7613853987897845671" name="jetbrains.mps.lang.behavior.structure.SuperConceptExpression" flags="ng" index="3pZB1V" />
     </language>
     <language id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage">
       <concept id="1202948039474" name="jetbrains.mps.baseLanguage.structure.InstanceMethodCallOperation" flags="nn" index="liA8E" />
@@ -224,7 +226,7 @@
         <node concept="3cpWs6" id="4RMBeRWcipX" role="3cqZAp">
           <node concept="2YIFZM" id="4RMBeRWcBt$" role="3cqZAk">
             <ref role="1Pybhc" to="wyt6:~Integer" resolve="Integer" />
-            <ref role="37wK5l" to="wyt6:~Integer.valueOf(int):java.lang.Integer" resolve="valueOf" />
+            <ref role="37wK5l" to="wyt6:~Integer.valueOf(int)" resolve="valueOf" />
             <node concept="3cmrfG" id="4RMBeRWcBtT" role="37wK5m">
               <property role="3cmrfH" value="1" />
             </node>
@@ -330,7 +332,7 @@
       <node concept="3clFbS" id="5mnatV0hxLi" role="3clF47">
         <node concept="3cpWs6" id="5mnatV0hxMB" role="3cqZAp">
           <node concept="2OqwBi" id="5mnatV0hxPD" role="3cqZAk">
-            <node concept="13iPFW" id="5mnatV0hxMO" role="2Oq$k0" />
+            <node concept="1fM9EW" id="1u_ffTozL0b" role="2Oq$k0" />
             <node concept="2qgKlT" id="5mnatV0hy1g" role="2OqNvi">
               <ref role="37wK5l" node="5mnatV0hxLE" resolve="bar" />
             </node>
@@ -376,7 +378,7 @@
       <node concept="3clFbS" id="7zO8mNAVkj3" role="3clF47">
         <node concept="3cpWs6" id="7zO8mNAVkpL" role="3cqZAp">
           <node concept="2OqwBi" id="7zO8mNAVktn" role="3cqZAk">
-            <node concept="13iPFW" id="7zO8mNAVkpZ" role="2Oq$k0" />
+            <node concept="1fM9EW" id="1u_ffTozL0c" role="2Oq$k0" />
             <node concept="2qgKlT" id="7zO8mNAVk$4" role="2OqNvi">
               <ref role="37wK5l" node="47lrFSh1$Ca" resolve="virtual" />
             </node>
@@ -475,7 +477,7 @@
               </node>
             </node>
             <node concept="liA8E" id="4RMBeRWciRz" role="2OqNvi">
-              <ref role="37wK5l" to="wyt6:~Integer.byteValue():byte" resolve="byteValue" />
+              <ref role="37wK5l" to="wyt6:~Integer.byteValue()" resolve="byteValue" />
             </node>
           </node>
         </node>
@@ -550,7 +552,7 @@
       <node concept="3clFbS" id="5mnatV0hyuQ" role="3clF47">
         <node concept="3clFbF" id="5mnatV0hyuZ" role="3cqZAp">
           <node concept="2OqwBi" id="5mnatV0hyxK" role="3clFbG">
-            <node concept="13iAh5" id="5mnatV0hyuY" role="2Oq$k0" />
+            <node concept="3pZB1V" id="7tU$0ZcyCcW" role="2Oq$k0" />
             <node concept="2qgKlT" id="5mnatV0hyBF" role="2OqNvi">
               <ref role="37wK5l" node="5mnatV0hxLf" resolve="foo" />
             </node>

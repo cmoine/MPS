@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="3pedqp2684mvu9nmfpcpax1ji8pfueb" />
+<product version="3" modelHash="5xzylqvb351gku8ji7vnjy9efai2gbx">
+  <files names="EscapeSpecialCharactersInProperties_MigrationScript.java:NodePointerMigrations.java:SModelLanguageEnhancements_MigrationScript.java:SModelLanguageEnhancements_Pointers_MigrationScript.java:ScriptsDescriptor.java:ShowAdapterUsages_MigrationScript.java" />
+</product>
 

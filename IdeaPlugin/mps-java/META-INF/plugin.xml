@@ -14,22 +14,19 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin version="2" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <id>jetbrains.mps.java</id>
-  <name>MPS BaseLanguage support</name>
-  <description>Support of MPS baseLanguage</description>
+<idea-plugin xmlns:xi="http://www.w3.org/2001/XInclude">
+  <id>jetbrains.mps.idea.java</id>
+  <name>MPS BaseLanguage Support</name>
+  <description>Integrate MPS BaseLanguage (Java) into IDEA PSI Model</description>
   <category>Custom Languages</category>
-  <version>3.4.5</version>
-  <vendor url="http://www.jetbrains.com/mps/">JetBrains MPS</vendor>
-  <idea-version since-build="145.1" until-build="164.1"/>
+  <version>2023.1</version>
+  <vendor url="http://www.jetbrains.com/mps/">JetBrains</vendor>
+  <idea-version since-build="231.1" until-build="232.1"/>
   <depends>jetbrains.mps.core</depends>
 
-  <xi:include href="../../../plugins/mpsjava/platform/source_gen/jetbrains/mps/ide/java/actions/JavaActions.xml" xpointer="xpointer(/components/*)"/>
+  <xi:include href="JavaPlatform.xml"/>
 
   <application-components>
-    <component>
-      <implementation-class>jetbrains.mps.ide.java.platform.index.ClassifierSuccessorsFinder</implementation-class>
-    </component>
     <component>
       <implementation-class>jetbrains.mps.idea.java.fastFind.JavaPsiStubsNavigationContributor</implementation-class>
     </component>
@@ -46,23 +43,13 @@
       <implementation-class>jetbrains.mps.idea.java.debugger.breakpoints.IdeaBreakpointsUiComponent</implementation-class>
     </component>
     <component>
-      <implementation-class>jetbrains.mps.idea.java.trace.TraceFilesManager</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.ide.java.actions.OverrideImplementMethodComponent</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.ide.java.platform.highlighters.JavaHighlighters</implementation-class>
-    </component>
-    <component>
       <implementation-class>jetbrains.mps.idea.java.refactoring.MoveRenameBatch</implementation-class>
     </component>
     <component>
       <implementation-class>jetbrains.mps.idea.java.psi.PsiChangesWatcher</implementation-class>
     </component>
     <component>
-      <implementation-class>jetbrains.mps.idea.java.refactoring.RegisterMoveStaticMemberPsiParticipant
-      </implementation-class>
+      <implementation-class>jetbrains.mps.idea.java.refactoring.RegisterMoveStaticMemberPsiParticipant</implementation-class>
     </component>
   </project-components>
 
@@ -85,9 +72,7 @@
     <mps.psiSourceFinder implementation="jetbrains.mps.idea.java.psiStubs.Mapper"/>
     <mps.renameRefactoringContributor className="jetbrains.mps.idea.java.refactoring.MethodRenameContributor" order="before mps-core-rename"/>
     <debugger.positionManagerFactory implementation="jetbrains.mps.idea.java.debugger.MpsPositionManagerFactory"/>
-    <fileBasedIndex implementation="jetbrains.mps.ide.java.platform.index.ClassifierSuccessorsIndexer"/>
-    <errorHandler implementation="jetbrains.mps.ide.blame.CharismaReporter"/>
-    <compileServer.plugin classpath="jps/mps-java-jps-plugin.jar;mps-java-common.jar"/>
+    <compileServer.plugin classpath="jps/mps-java-jps-plugin.jar;jps/mps-java-jps-plugin-j8.jar;java-platform.jar;java-core.jar"/>
     <referencesSearch implementation="jetbrains.mps.idea.java.usages.MPSReferenceSearch"/>
     <referencesSearch implementation="jetbrains.mps.idea.java.usages.IdPrefixSearch"/>
     <java.elementFinder implementation="jetbrains.mps.idea.java.psi.impl.MPSJavaClassFinder"/>

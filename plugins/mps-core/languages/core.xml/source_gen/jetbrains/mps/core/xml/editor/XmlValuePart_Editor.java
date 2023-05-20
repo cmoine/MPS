@@ -6,16 +6,9 @@ import jetbrains.mps.nodeEditor.DefaultNodeEditor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Error;
 
 public class XmlValuePart_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createError_v691gf_a(editorContext, node);
-  }
-  private EditorCell createError_v691gf_a(EditorContext editorContext, SNode node) {
-    EditorCell_Error editorCell = new EditorCell_Error(editorContext, node, "<no value>");
-    editorCell.setCellId("Error_v691gf_a");
-    editorCell.setBig(true);
-    return editorCell;
+    return new XmlValuePart_EditorBuilder_a(editorContext, node).createCell();
   }
 }

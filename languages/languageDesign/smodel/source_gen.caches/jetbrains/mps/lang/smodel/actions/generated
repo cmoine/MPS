@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-7thq0o3lx9ommhh1048tjqknqdcbg9b" />
+<product version="3" modelHash="-bsi0bw8i6udtbaor7ew054jdf2nh5k1">
+  <files names="ActionAspectDescriptorImpl.java:ApplicableTypesInfo.java:ConceptRefFactories.java:Node_GetChildrenAndChildAttributesOperation_Factory.java:SModelLang_factories.java:SNodeTypeFactories.java:SwitchExpressionPW_PasteWrapper_0.java:SwitchExpressionPW_PasteWrapper_1.java:SwitchExpressionPW_PasteWrapper_2.java:SwitchExpressionPW_PasteWrapper_3.java:SwitchExpressionPW_PasteWrapper_4.java:SwitchExpressionPW_PasteWrapper_5.java:SwitchExpressionPW_PasteWrapper_6.java" />
+</product>
 

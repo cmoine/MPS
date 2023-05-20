@@ -5,21 +5,22 @@ package jetbrains.mps.baseLanguage.lightweightdsl.actions;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import java.util.Collections;
 import jetbrains.mps.baseLanguage.lightweightdsl.util.DSLDescriptorUtil;
 import jetbrains.mps.internal.collections.runtime.Sequence;
 import jetbrains.mps.baseLanguage.lightweightdsl.behavior.DSLDescriptor__BehaviorDescriptor;
 import jetbrains.mps.internal.collections.runtime.IWhereFilter;
 import jetbrains.mps.baseLanguage.lightweightdsl.behavior.DSLClassMember__BehaviorDescriptor;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class SubstituteUtil {
   public static Iterable<SNode> getMembers2Substitute(SAbstractConcept memberConcept, SNode node) {
-    if (!(SNodeOperations.isInstanceOf(node, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c108ca66L, "jetbrains.mps.baseLanguage.structure.ClassConcept")))) {
+    if (!(SNodeOperations.isInstanceOf(node, CONCEPTS.ClassConcept$bK))) {
       return Collections.emptyList();
     }
 
-    final SNode classNode = SNodeOperations.cast(node, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c108ca66L, "jetbrains.mps.baseLanguage.structure.ClassConcept"));
+    final SNode classNode = SNodeOperations.cast(node, CONCEPTS.ClassConcept$bK);
     SNode descr = DSLDescriptorUtil.getDescriptor(classNode);
     if (descr == null) {
       return Collections.emptyList();
@@ -36,16 +37,20 @@ public class SubstituteUtil {
   }
 
   public static Iterable<SNode> getAllMembers(SAbstractConcept memberConcept, SNode node) {
-    if (!(SNodeOperations.isInstanceOf(node, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c108ca66L, "jetbrains.mps.baseLanguage.structure.ClassConcept")))) {
+    if (!(SNodeOperations.isInstanceOf(node, CONCEPTS.ClassConcept$bK))) {
       return Collections.emptyList();
     }
 
-    SNode classNode = SNodeOperations.cast(node, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c108ca66L, "jetbrains.mps.baseLanguage.structure.ClassConcept"));
+    SNode classNode = SNodeOperations.cast(node, CONCEPTS.ClassConcept$bK);
     SNode descr = DSLDescriptorUtil.getDescriptor(classNode);
     if (descr == null) {
       return Collections.emptyList();
     }
 
     return SNodeOperations.ofConcept(DSLDescriptor__BehaviorDescriptor.getClassLikeMembers_id2iCqkkxuhoj.invoke(descr), SNodeOperations.asSConcept(memberConcept));
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept ClassConcept$bK = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c108ca66L, "jetbrains.mps.baseLanguage.structure.ClassConcept");
   }
 }

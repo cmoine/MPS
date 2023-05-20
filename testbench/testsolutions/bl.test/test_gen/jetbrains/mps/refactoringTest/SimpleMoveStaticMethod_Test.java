@@ -4,37 +4,52 @@ package jetbrains.mps.refactoringTest;
 
 import jetbrains.mps.MPSLaunch;
 import jetbrains.mps.lang.test.runtime.BaseTransformationTest;
-import org.junit.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCacheExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCache;
+import org.junit.jupiter.api.Test;
 import jetbrains.mps.lang.test.runtime.BaseTestBody;
+import jetbrains.mps.lang.test.runtime.TransformationTest;
 import jetbrains.mps.baseLanguage.util.plugin.refactorings.MoveStaticMethodRefactoring;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.ide.findusages.model.SearchResults;
 import org.jetbrains.mps.openapi.model.SNode;
+import java.util.Collections;
 import jetbrains.mps.ide.findusages.model.SearchResult;
 
 @MPSLaunch
 public class SimpleMoveStaticMethod_Test extends BaseTransformationTest {
-  @Test
-  public void test_SimpleMoveStaticMethod() throws Throwable {
-    initTest("${mps_home}", "r:4dc6ffb5-4bbb-4773-b0b7-e52989ceb56f(jetbrains.mps.refactoringTest@tests)", false);
-    runTest("jetbrains.mps.refactoringTest.SimpleMoveStaticMethod_Test$TestBody", "test_SimpleMoveStaticMethod", true);
+  @RegisterExtension
+  private static final TestParametersCacheExtension ourParametersCacheExtension = new TestParametersCacheExtension(new TestParametersCache(SimpleMoveStaticMethod_Test.class, "${mps_home}", "r:4dc6ffb5-4bbb-4773-b0b7-e52989ceb56f(jetbrains.mps.refactoringTest@tests)", false));
+
+  public SimpleMoveStaticMethod_Test() {
+    super(ourParametersCacheExtension.getParametersCache());
   }
 
-  @MPSLaunch
-  public static class TestBody extends BaseTestBody {
-    public void test_SimpleMoveStaticMethod() throws Exception {
-      addNodeById("3014415391767789120");
-      addNodeById("3014415391767789149");
-      addNodeById("3014415391767789154");
-      addNodeById("3014415391767789181");
-      MoveStaticMethodRefactoring refactoring = new MoveStaticMethodRefactoring(SNodeOperations.cast(getNodeById("3014415391767789137"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfbbebabf0aL, "jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration")), SNodeOperations.cast(getNodeById("3014415391767789150"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c108ca66L, "jetbrains.mps.baseLanguage.structure.ClassConcept")));
-      SearchResults<SNode> results = new SearchResults();
-      results.getSearchResults().add(new SearchResult(SNodeOperations.cast(getNodeById("3014415391767789131"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x6c6b6a1e379f9404L, "jetbrains.mps.baseLanguage.structure.LocalMethodCall")), "usage"));
-      refactoring.setUsages(results);
-      refactoring.doRefactoring();
+  @Test
+  public void test_SimpleMoveStaticMethod() throws Throwable {
+    new TestBody(this).test_SimpleMoveStaticMethod();
+  }
+
+  /*package*/ static class TestBody extends BaseTestBody {
+
+    /*package*/ TestBody(TransformationTest owner) {
+      super(owner);
     }
 
+    public void test_SimpleMoveStaticMethod() throws Exception {
+      runWithinCommand(() -> {
+        addNodeById("3014415391767789120");
+        addNodeById("3014415391767789149");
+        addNodeById("3014415391767789154");
+        addNodeById("3014415391767789181");
+      });
+      runWithinCommand(() -> {
+        MoveStaticMethodRefactoring refactoring = new MoveStaticMethodRefactoring(getNodeById("3014415391767789137"), getNodeById("3014415391767789150"));
+        SearchResults<SNode> results = new SearchResults(Collections.emptyList(), Collections.singletonList(new SearchResult(getNodeById("3014415391767789131"), "usage")));
+        refactoring.setUsages(results);
+        refactoring.doRefactoring();
+      });
+    }
 
   }
 }

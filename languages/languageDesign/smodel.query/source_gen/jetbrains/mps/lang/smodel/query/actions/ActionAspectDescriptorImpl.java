@@ -7,7 +7,6 @@ import jetbrains.mps.openapi.actions.descriptor.ActionAspectDescriptor;
 import java.util.Collection;
 import jetbrains.mps.openapi.actions.descriptor.NodeFactory;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor implements ActionAspectDescriptor {
@@ -16,10 +15,10 @@ public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor imple
   @Override
   public Collection<NodeFactory> getFactories(SAbstractConcept concept) {
     if (LANGUAGE_FQ_NAME.equals(concept.getLanguage().getQualifiedName())) {
-      switch (Arrays.binarySearch(stringSwitchCases_tpto26_a0a0a0c, concept.getName())) {
-        case 0:
-          return Collections.<NodeFactory>singletonList(new ScopeParameterLiteral_factories.NodeFactory_3492877759609298945());
-        case 1:
+      switch (concept.getName()) {
+        case "CustomScope":
+          return Collections.<NodeFactory>singletonList(new ScopeParameterLiteral_factories.NodeFactory_2362304834939062502());
+        case "QueryExpression":
           return Collections.<NodeFactory>singletonList(new QueryExpression_NodeFactories.NodeFactory_4307205004138627840());
         default:
       }
@@ -27,9 +26,4 @@ public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor imple
     return Collections.<NodeFactory>emptyList();
   }
 
-  @Override
-  public boolean hasBuilders() {
-    return false;
-  }
-  private static String[] stringSwitchCases_tpto26_a0a0a0c = new String[]{"CustomScope", "QueryExpression"};
 }

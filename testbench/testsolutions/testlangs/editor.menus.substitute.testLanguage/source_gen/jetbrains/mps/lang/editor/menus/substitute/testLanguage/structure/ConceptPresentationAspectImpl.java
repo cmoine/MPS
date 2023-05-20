@@ -4,126 +4,618 @@ package jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_TestConceptForMenuParameterizedByPrimitiveType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstitituteAbstractChildAmbigousPosition = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstitituteAbstractSubChildAmbigousPosition = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstitituteChildAmbigousPosition1 = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstitituteChildAmbigousPosition2 = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstitituteSubChildAmbigousPosition1 = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstitituteSubChildAmbigousPosition2 = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteAbstractChildWithConstraints = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteChild = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteChildBrother = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteChildSuper = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteChildToSpecialize = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteChildWithConstraints1 = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteChildWithConstraints2 = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteChildWithConstraints3 = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteChildWithConstraintsAbstractWrapper = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteChildWithConstraintsToWrap = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteChildWithConstraintsWrapper1 = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteChildWithConstraintsWrapper2 = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteChildWithConstraintsWrapper3 = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteConceptChildToReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteConceptToWrap = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteGrandChildWithConstraints = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteGrandChildWithConstraintsProhibited = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteNotSubconceptOfChild = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteParent = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteParentToReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteParentWithConstraints = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteSpecialChild = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteSpecialChildAttribute = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteSpecialParent = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteSpecialSubChild = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteSubChild1 = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteSubChild2 = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteSubChildSmartReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSubstituteSubConceptToWrap = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_TestConceptForMenuParameterizedByPrimitiveType;
+  private ConceptPresentation props_TestSubstituteAbstractChildAmbigousPosition;
+  private ConceptPresentation props_TestSubstituteAbstractChildWithConstraints;
+  private ConceptPresentation props_TestSubstituteAbstractSubChildAmbigousPosition;
+  private ConceptPresentation props_TestSubstituteAttribute_RegularEditor;
+  private ConceptPresentation props_TestSubstituteAttribute_TransparentEditor;
+  private ConceptPresentation props_TestSubstituteAttribute_WithReference;
+  private ConceptPresentation props_TestSubstituteChild;
+  private ConceptPresentation props_TestSubstituteChildAmbigousPosition1;
+  private ConceptPresentation props_TestSubstituteChildAmbigousPosition2;
+  private ConceptPresentation props_TestSubstituteChildBrother;
+  private ConceptPresentation props_TestSubstituteChildOfWrapper;
+  private ConceptPresentation props_TestSubstituteChildSuper;
+  private ConceptPresentation props_TestSubstituteChildToReferenceSubconcept;
+  private ConceptPresentation props_TestSubstituteChildToSpecialize;
+  private ConceptPresentation props_TestSubstituteChildWithAttibute;
+  private ConceptPresentation props_TestSubstituteChildWithConstraints1;
+  private ConceptPresentation props_TestSubstituteChildWithConstraints2;
+  private ConceptPresentation props_TestSubstituteChildWithConstraints3;
+  private ConceptPresentation props_TestSubstituteChildWithConstraintsAbstractWrapper;
+  private ConceptPresentation props_TestSubstituteChildWithConstraintsToWrap;
+  private ConceptPresentation props_TestSubstituteChildWithConstraintsWrapper1;
+  private ConceptPresentation props_TestSubstituteChildWithConstraintsWrapper2;
+  private ConceptPresentation props_TestSubstituteChildWithConstraintsWrapper3;
+  private ConceptPresentation props_TestSubstituteConceptChildToReference;
+  private ConceptPresentation props_TestSubstituteExceptionActionCanSubstituteChild;
+  private ConceptPresentation props_TestSubstituteExceptionActionDescriptionTextChild;
+  private ConceptPresentation props_TestSubstituteExceptionActionIconChild;
+  private ConceptPresentation props_TestSubstituteExceptionActionMatchingTextChild;
+  private ConceptPresentation props_TestSubstituteExceptionActionTypeChild;
+  private ConceptPresentation props_TestSubstituteExceptionConceptListChild;
+  private ConceptPresentation props_TestSubstituteExceptionGroupChild;
+  private ConceptPresentation props_TestSubstituteExceptionIncludeMenuChild;
+  private ConceptPresentation props_TestSubstituteExceptionParameterizedChild;
+  private ConceptPresentation props_TestSubstituteExceptionParent;
+  private ConceptPresentation props_TestSubstituteExceptionReferenceDescriptionTextChild;
+  private ConceptPresentation props_TestSubstituteExceptionReferenceMatchingTextChild;
+  private ConceptPresentation props_TestSubstituteExceptionReferenceVisibleMatchingTextChild;
+  private ConceptPresentation props_TestSubstituteExceptionSubconceptsChild;
+  private ConceptPresentation props_TestSubstituteExceptionSubconceptsSubChild;
+  private ConceptPresentation props_TestSubstituteExceptionWrapMenuChild;
+  private ConceptPresentation props_TestSubstituteGrandChildWithConstraints;
+  private ConceptPresentation props_TestSubstituteGrandChildWithConstraintsProhibited;
+  private ConceptPresentation props_TestSubstituteNotSubconceptOfChild;
+  private ConceptPresentation props_TestSubstituteParent;
+  private ConceptPresentation props_TestSubstituteParentForChildrenWithAttibute;
+  private ConceptPresentation props_TestSubstituteParentOfWrapper;
+  private ConceptPresentation props_TestSubstituteParentPropertyAndReference;
+  private ConceptPresentation props_TestSubstituteParentPropertyAndReference_Subconcept;
+  private ConceptPresentation props_TestSubstituteParentToReference;
+  private ConceptPresentation props_TestSubstituteParentWithConstraints;
+  private ConceptPresentation props_TestSubstituteSmartRef_Interface;
+  private ConceptPresentation props_TestSubstituteSmartRef_WithoutExplicitMenu;
+  private ConceptPresentation props_TestSubstituteSmartRef_WithoutExplicitMenu_Subconcept;
+  private ConceptPresentation props_TestSubstituteSpecialChild;
+  private ConceptPresentation props_TestSubstituteSpecialChildAttribute;
+  private ConceptPresentation props_TestSubstituteSpecialParent;
+  private ConceptPresentation props_TestSubstituteSpecialSubChild;
+  private ConceptPresentation props_TestSubstituteSubChild1;
+  private ConceptPresentation props_TestSubstituteSubChild2;
+  private ConceptPresentation props_TestSubstituteSubChildAmbigousPosition1;
+  private ConceptPresentation props_TestSubstituteSubChildAmbigousPosition2;
+  private ConceptPresentation props_TestSubstituteSubChildSmartReference_WithMenu;
+  private ConceptPresentation props_TestSubstituteToWrapFromSubstituteMenu;
+  private ConceptPresentation props_TestSubstituteToWrapFromTransformMenu;
+  private ConceptPresentation props_TestSubstituteWrapper;
+  private ConceptPresentation props_TestSubstitute_IncludeDefaultAndNullMenu;
+  private ConceptPresentation props_TestSubstitute_IncludeDifferentMenus;
+  private ConceptPresentation props_TestSubstitute_IncludeSameMenuTwice;
+  private ConceptPresentation props_TestSubstitute_Interface;
+  private ConceptPresentation props_TestSubstitute_Parent;
+  private ConceptPresentation props_TestSubstitute_SubInterface1;
+  private ConceptPresentation props_TestSubstitute_SubInterface2;
+  private ConceptPresentation props_TestSubstitute_Subconcept;
+  private ConceptPresentation props_TestSubstitute_WrapDifferentMenus;
+  private ConceptPresentation props_TestSubstitute_WrapSameMenuTwice;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.TestConceptForMenuParameterizedByPrimitiveType:
+        if (props_TestConceptForMenuParameterizedByPrimitiveType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestConceptForMenuParameterizedByPrimitiveType");
+          props_TestConceptForMenuParameterizedByPrimitiveType = cpb.create();
+        }
         return props_TestConceptForMenuParameterizedByPrimitiveType;
-      case 1:
-        return props_TestSubstitituteAbstractChildAmbigousPosition;
-      case 2:
-        return props_TestSubstitituteAbstractSubChildAmbigousPosition;
-      case 3:
-        return props_TestSubstitituteChildAmbigousPosition1;
-      case 4:
-        return props_TestSubstitituteChildAmbigousPosition2;
-      case 5:
-        return props_TestSubstitituteSubChildAmbigousPosition1;
-      case 6:
-        return props_TestSubstitituteSubChildAmbigousPosition2;
-      case 7:
+      case LanguageConceptSwitch.TestSubstituteAbstractChildAmbigousPosition:
+        if (props_TestSubstituteAbstractChildAmbigousPosition == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_TestSubstituteAbstractChildAmbigousPosition = cpb.create();
+        }
+        return props_TestSubstituteAbstractChildAmbigousPosition;
+      case LanguageConceptSwitch.TestSubstituteAbstractChildWithConstraints:
+        if (props_TestSubstituteAbstractChildWithConstraints == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_TestSubstituteAbstractChildWithConstraints = cpb.create();
+        }
         return props_TestSubstituteAbstractChildWithConstraints;
-      case 8:
+      case LanguageConceptSwitch.TestSubstituteAbstractSubChildAmbigousPosition:
+        if (props_TestSubstituteAbstractSubChildAmbigousPosition == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_TestSubstituteAbstractSubChildAmbigousPosition = cpb.create();
+        }
+        return props_TestSubstituteAbstractSubChildAmbigousPosition;
+      case LanguageConceptSwitch.TestSubstituteAttribute_RegularEditor:
+        if (props_TestSubstituteAttribute_RegularEditor == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteAttribute_RegularEditor");
+          props_TestSubstituteAttribute_RegularEditor = cpb.create();
+        }
+        return props_TestSubstituteAttribute_RegularEditor;
+      case LanguageConceptSwitch.TestSubstituteAttribute_TransparentEditor:
+        if (props_TestSubstituteAttribute_TransparentEditor == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteAttribute_TransparentEditor");
+          props_TestSubstituteAttribute_TransparentEditor = cpb.create();
+        }
+        return props_TestSubstituteAttribute_TransparentEditor;
+      case LanguageConceptSwitch.TestSubstituteAttribute_WithReference:
+        if (props_TestSubstituteAttribute_WithReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteAttribute_WithReference");
+          props_TestSubstituteAttribute_WithReference = cpb.create();
+        }
+        return props_TestSubstituteAttribute_WithReference;
+      case LanguageConceptSwitch.TestSubstituteChild:
+        if (props_TestSubstituteChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_TestSubstituteChild = cpb.create();
+        }
         return props_TestSubstituteChild;
-      case 9:
+      case LanguageConceptSwitch.TestSubstituteChildAmbigousPosition1:
+        if (props_TestSubstituteChildAmbigousPosition1 == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ambigous");
+          props_TestSubstituteChildAmbigousPosition1 = cpb.create();
+        }
+        return props_TestSubstituteChildAmbigousPosition1;
+      case LanguageConceptSwitch.TestSubstituteChildAmbigousPosition2:
+        if (props_TestSubstituteChildAmbigousPosition2 == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ambigous");
+          props_TestSubstituteChildAmbigousPosition2 = cpb.create();
+        }
+        return props_TestSubstituteChildAmbigousPosition2;
+      case LanguageConceptSwitch.TestSubstituteChildBrother:
+        if (props_TestSubstituteChildBrother == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("brother child");
+          props_TestSubstituteChildBrother = cpb.create();
+        }
         return props_TestSubstituteChildBrother;
-      case 10:
+      case LanguageConceptSwitch.TestSubstituteChildOfWrapper:
+        if (props_TestSubstituteChildOfWrapper == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("test substitute child of wrapper");
+          props_TestSubstituteChildOfWrapper = cpb.create();
+        }
+        return props_TestSubstituteChildOfWrapper;
+      case LanguageConceptSwitch.TestSubstituteChildSuper:
+        if (props_TestSubstituteChildSuper == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_TestSubstituteChildSuper = cpb.create();
+        }
         return props_TestSubstituteChildSuper;
-      case 11:
+      case LanguageConceptSwitch.TestSubstituteChildToReferenceSubconcept:
+        if (props_TestSubstituteChildToReferenceSubconcept == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_TestSubstituteChildToReferenceSubconcept = cpb.create();
+        }
+        return props_TestSubstituteChildToReferenceSubconcept;
+      case LanguageConceptSwitch.TestSubstituteChildToSpecialize:
+        if (props_TestSubstituteChildToSpecialize == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteChildToSpecialize");
+          props_TestSubstituteChildToSpecialize = cpb.create();
+        }
         return props_TestSubstituteChildToSpecialize;
-      case 12:
+      case LanguageConceptSwitch.TestSubstituteChildWithAttibute:
+        if (props_TestSubstituteChildWithAttibute == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_TestSubstituteChildWithAttibute = cpb.create();
+        }
+        return props_TestSubstituteChildWithAttibute;
+      case LanguageConceptSwitch.TestSubstituteChildWithConstraints1:
+        if (props_TestSubstituteChildWithConstraints1 == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_TestSubstituteChildWithConstraints1 = cpb.create();
+        }
         return props_TestSubstituteChildWithConstraints1;
-      case 13:
+      case LanguageConceptSwitch.TestSubstituteChildWithConstraints2:
+        if (props_TestSubstituteChildWithConstraints2 == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_TestSubstituteChildWithConstraints2 = cpb.create();
+        }
         return props_TestSubstituteChildWithConstraints2;
-      case 14:
+      case LanguageConceptSwitch.TestSubstituteChildWithConstraints3:
+        if (props_TestSubstituteChildWithConstraints3 == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteChildWithConstraints3");
+          props_TestSubstituteChildWithConstraints3 = cpb.create();
+        }
         return props_TestSubstituteChildWithConstraints3;
-      case 15:
+      case LanguageConceptSwitch.TestSubstituteChildWithConstraintsAbstractWrapper:
+        if (props_TestSubstituteChildWithConstraintsAbstractWrapper == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_TestSubstituteChildWithConstraintsAbstractWrapper = cpb.create();
+        }
         return props_TestSubstituteChildWithConstraintsAbstractWrapper;
-      case 16:
+      case LanguageConceptSwitch.TestSubstituteChildWithConstraintsToWrap:
+        if (props_TestSubstituteChildWithConstraintsToWrap == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteChildWithConstraintsToWrap");
+          props_TestSubstituteChildWithConstraintsToWrap = cpb.create();
+        }
         return props_TestSubstituteChildWithConstraintsToWrap;
-      case 17:
+      case LanguageConceptSwitch.TestSubstituteChildWithConstraintsWrapper1:
+        if (props_TestSubstituteChildWithConstraintsWrapper1 == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteChildWithConstraintsWrapper1");
+          props_TestSubstituteChildWithConstraintsWrapper1 = cpb.create();
+        }
         return props_TestSubstituteChildWithConstraintsWrapper1;
-      case 18:
+      case LanguageConceptSwitch.TestSubstituteChildWithConstraintsWrapper2:
+        if (props_TestSubstituteChildWithConstraintsWrapper2 == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteChildWithConstraintsWrapper2");
+          props_TestSubstituteChildWithConstraintsWrapper2 = cpb.create();
+        }
         return props_TestSubstituteChildWithConstraintsWrapper2;
-      case 19:
+      case LanguageConceptSwitch.TestSubstituteChildWithConstraintsWrapper3:
+        if (props_TestSubstituteChildWithConstraintsWrapper3 == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteChildWithConstraintsWrapper3");
+          props_TestSubstituteChildWithConstraintsWrapper3 = cpb.create();
+        }
         return props_TestSubstituteChildWithConstraintsWrapper3;
-      case 20:
+      case LanguageConceptSwitch.TestSubstituteConceptChildToReference:
+        if (props_TestSubstituteConceptChildToReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_TestSubstituteConceptChildToReference = cpb.create();
+        }
         return props_TestSubstituteConceptChildToReference;
-      case 21:
-        return props_TestSubstituteConceptToWrap;
-      case 22:
+      case LanguageConceptSwitch.TestSubstituteExceptionActionCanSubstituteChild:
+        if (props_TestSubstituteExceptionActionCanSubstituteChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteExceptionActionCanSubstituteChild");
+          props_TestSubstituteExceptionActionCanSubstituteChild = cpb.create();
+        }
+        return props_TestSubstituteExceptionActionCanSubstituteChild;
+      case LanguageConceptSwitch.TestSubstituteExceptionActionDescriptionTextChild:
+        if (props_TestSubstituteExceptionActionDescriptionTextChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteExceptionActionDescriptionTextChild");
+          props_TestSubstituteExceptionActionDescriptionTextChild = cpb.create();
+        }
+        return props_TestSubstituteExceptionActionDescriptionTextChild;
+      case LanguageConceptSwitch.TestSubstituteExceptionActionIconChild:
+        if (props_TestSubstituteExceptionActionIconChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteExceptionActionIconChild");
+          props_TestSubstituteExceptionActionIconChild = cpb.create();
+        }
+        return props_TestSubstituteExceptionActionIconChild;
+      case LanguageConceptSwitch.TestSubstituteExceptionActionMatchingTextChild:
+        if (props_TestSubstituteExceptionActionMatchingTextChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteExceptionActionMatchingTextChild");
+          props_TestSubstituteExceptionActionMatchingTextChild = cpb.create();
+        }
+        return props_TestSubstituteExceptionActionMatchingTextChild;
+      case LanguageConceptSwitch.TestSubstituteExceptionActionTypeChild:
+        if (props_TestSubstituteExceptionActionTypeChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteExceptionActionTypeChild");
+          props_TestSubstituteExceptionActionTypeChild = cpb.create();
+        }
+        return props_TestSubstituteExceptionActionTypeChild;
+      case LanguageConceptSwitch.TestSubstituteExceptionConceptListChild:
+        if (props_TestSubstituteExceptionConceptListChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteExceptionConceptListChild");
+          props_TestSubstituteExceptionConceptListChild = cpb.create();
+        }
+        return props_TestSubstituteExceptionConceptListChild;
+      case LanguageConceptSwitch.TestSubstituteExceptionGroupChild:
+        if (props_TestSubstituteExceptionGroupChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteExceptionGroupChild");
+          props_TestSubstituteExceptionGroupChild = cpb.create();
+        }
+        return props_TestSubstituteExceptionGroupChild;
+      case LanguageConceptSwitch.TestSubstituteExceptionIncludeMenuChild:
+        if (props_TestSubstituteExceptionIncludeMenuChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteExceptionIncludeMenuChild");
+          props_TestSubstituteExceptionIncludeMenuChild = cpb.create();
+        }
+        return props_TestSubstituteExceptionIncludeMenuChild;
+      case LanguageConceptSwitch.TestSubstituteExceptionParameterizedChild:
+        if (props_TestSubstituteExceptionParameterizedChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteExceptionParameterizedChild");
+          props_TestSubstituteExceptionParameterizedChild = cpb.create();
+        }
+        return props_TestSubstituteExceptionParameterizedChild;
+      case LanguageConceptSwitch.TestSubstituteExceptionParent:
+        if (props_TestSubstituteExceptionParent == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteExceptionParent");
+          props_TestSubstituteExceptionParent = cpb.create();
+        }
+        return props_TestSubstituteExceptionParent;
+      case LanguageConceptSwitch.TestSubstituteExceptionReferenceDescriptionTextChild:
+        if (props_TestSubstituteExceptionReferenceDescriptionTextChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteExceptionReferenceDescriptionTextChild");
+          props_TestSubstituteExceptionReferenceDescriptionTextChild = cpb.create();
+        }
+        return props_TestSubstituteExceptionReferenceDescriptionTextChild;
+      case LanguageConceptSwitch.TestSubstituteExceptionReferenceMatchingTextChild:
+        if (props_TestSubstituteExceptionReferenceMatchingTextChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteExceptionReferenceMatchingTextChild");
+          props_TestSubstituteExceptionReferenceMatchingTextChild = cpb.create();
+        }
+        return props_TestSubstituteExceptionReferenceMatchingTextChild;
+      case LanguageConceptSwitch.TestSubstituteExceptionReferenceVisibleMatchingTextChild:
+        if (props_TestSubstituteExceptionReferenceVisibleMatchingTextChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteExceptionReferenceVisibleMatchingTextChild");
+          props_TestSubstituteExceptionReferenceVisibleMatchingTextChild = cpb.create();
+        }
+        return props_TestSubstituteExceptionReferenceVisibleMatchingTextChild;
+      case LanguageConceptSwitch.TestSubstituteExceptionSubconceptsChild:
+        if (props_TestSubstituteExceptionSubconceptsChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteExceptionSubconceptsChild");
+          props_TestSubstituteExceptionSubconceptsChild = cpb.create();
+        }
+        return props_TestSubstituteExceptionSubconceptsChild;
+      case LanguageConceptSwitch.TestSubstituteExceptionSubconceptsSubChild:
+        if (props_TestSubstituteExceptionSubconceptsSubChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteExceptionSubconceptsSubChild");
+          props_TestSubstituteExceptionSubconceptsSubChild = cpb.create();
+        }
+        return props_TestSubstituteExceptionSubconceptsSubChild;
+      case LanguageConceptSwitch.TestSubstituteExceptionWrapMenuChild:
+        if (props_TestSubstituteExceptionWrapMenuChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteExceptionWrapMenuChild");
+          props_TestSubstituteExceptionWrapMenuChild = cpb.create();
+        }
+        return props_TestSubstituteExceptionWrapMenuChild;
+      case LanguageConceptSwitch.TestSubstituteGrandChildWithConstraints:
+        if (props_TestSubstituteGrandChildWithConstraints == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteGrandChildWithConstraints");
+          props_TestSubstituteGrandChildWithConstraints = cpb.create();
+        }
         return props_TestSubstituteGrandChildWithConstraints;
-      case 23:
+      case LanguageConceptSwitch.TestSubstituteGrandChildWithConstraintsProhibited:
+        if (props_TestSubstituteGrandChildWithConstraintsProhibited == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("see TestTransform_ChildWithConstraints_CanBeAncestor_GrandChild ");
+          cpb.rawPresentation("TestSubstituteGrandChildWithConstraintsProhibited");
+          props_TestSubstituteGrandChildWithConstraintsProhibited = cpb.create();
+        }
         return props_TestSubstituteGrandChildWithConstraintsProhibited;
-      case 24:
+      case LanguageConceptSwitch.TestSubstituteNotSubconceptOfChild:
+        if (props_TestSubstituteNotSubconceptOfChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteNotSubconceptOfChild");
+          props_TestSubstituteNotSubconceptOfChild = cpb.create();
+        }
         return props_TestSubstituteNotSubconceptOfChild;
-      case 25:
+      case LanguageConceptSwitch.TestSubstituteParent:
+        if (props_TestSubstituteParent == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteParent");
+          props_TestSubstituteParent = cpb.create();
+        }
         return props_TestSubstituteParent;
-      case 26:
+      case LanguageConceptSwitch.TestSubstituteParentForChildrenWithAttibute:
+        if (props_TestSubstituteParentForChildrenWithAttibute == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteParentForChildrenWithAttibute");
+          props_TestSubstituteParentForChildrenWithAttibute = cpb.create();
+        }
+        return props_TestSubstituteParentForChildrenWithAttibute;
+      case LanguageConceptSwitch.TestSubstituteParentOfWrapper:
+        if (props_TestSubstituteParentOfWrapper == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteParentOfWrapper");
+          props_TestSubstituteParentOfWrapper = cpb.create();
+        }
+        return props_TestSubstituteParentOfWrapper;
+      case LanguageConceptSwitch.TestSubstituteParentPropertyAndReference:
+        if (props_TestSubstituteParentPropertyAndReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_TestSubstituteParentPropertyAndReference = cpb.create();
+        }
+        return props_TestSubstituteParentPropertyAndReference;
+      case LanguageConceptSwitch.TestSubstituteParentPropertyAndReference_Subconcept:
+        if (props_TestSubstituteParentPropertyAndReference_Subconcept == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_TestSubstituteParentPropertyAndReference_Subconcept = cpb.create();
+        }
+        return props_TestSubstituteParentPropertyAndReference_Subconcept;
+      case LanguageConceptSwitch.TestSubstituteParentToReference:
+        if (props_TestSubstituteParentToReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_TestSubstituteParentToReference = cpb.create();
+        }
         return props_TestSubstituteParentToReference;
-      case 27:
+      case LanguageConceptSwitch.TestSubstituteParentWithConstraints:
+        if (props_TestSubstituteParentWithConstraints == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteParentWithConstraints");
+          props_TestSubstituteParentWithConstraints = cpb.create();
+        }
         return props_TestSubstituteParentWithConstraints;
-      case 28:
+      case LanguageConceptSwitch.TestSubstituteSmartRef_Interface:
+        if (props_TestSubstituteSmartRef_Interface == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_TestSubstituteSmartRef_Interface = cpb.create();
+        }
+        return props_TestSubstituteSmartRef_Interface;
+      case LanguageConceptSwitch.TestSubstituteSmartRef_WithoutExplicitMenu:
+        if (props_TestSubstituteSmartRef_WithoutExplicitMenu == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x6723ebbaa490bde6L, 0x6723ebbaa490bde7L, "childToReference", "", "");
+          props_TestSubstituteSmartRef_WithoutExplicitMenu = cpb.create();
+        }
+        return props_TestSubstituteSmartRef_WithoutExplicitMenu;
+      case LanguageConceptSwitch.TestSubstituteSmartRef_WithoutExplicitMenu_Subconcept:
+        if (props_TestSubstituteSmartRef_WithoutExplicitMenu_Subconcept == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xcb6d57037c8e46a9L, 0xb993c1373dc0942fL, 0x6723ebbaa490bde6L, 0x6723ebbaa490bde7L, "childToReference", "", "");
+          props_TestSubstituteSmartRef_WithoutExplicitMenu_Subconcept = cpb.create();
+        }
+        return props_TestSubstituteSmartRef_WithoutExplicitMenu_Subconcept;
+      case LanguageConceptSwitch.TestSubstituteSpecialChild:
+        if (props_TestSubstituteSpecialChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("special");
+          props_TestSubstituteSpecialChild = cpb.create();
+        }
         return props_TestSubstituteSpecialChild;
-      case 29:
+      case LanguageConceptSwitch.TestSubstituteSpecialChildAttribute:
+        if (props_TestSubstituteSpecialChildAttribute == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteSpecialChildAttribute");
+          props_TestSubstituteSpecialChildAttribute = cpb.create();
+        }
         return props_TestSubstituteSpecialChildAttribute;
-      case 30:
+      case LanguageConceptSwitch.TestSubstituteSpecialParent:
+        if (props_TestSubstituteSpecialParent == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteSpecialParent");
+          props_TestSubstituteSpecialParent = cpb.create();
+        }
         return props_TestSubstituteSpecialParent;
-      case 31:
+      case LanguageConceptSwitch.TestSubstituteSpecialSubChild:
+        if (props_TestSubstituteSpecialSubChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("sub-child");
+          props_TestSubstituteSpecialSubChild = cpb.create();
+        }
         return props_TestSubstituteSpecialSubChild;
-      case 32:
+      case LanguageConceptSwitch.TestSubstituteSubChild1:
+        if (props_TestSubstituteSubChild1 == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_TestSubstituteSubChild1 = cpb.create();
+        }
         return props_TestSubstituteSubChild1;
-      case 33:
+      case LanguageConceptSwitch.TestSubstituteSubChild2:
+        if (props_TestSubstituteSubChild2 == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_TestSubstituteSubChild2 = cpb.create();
+        }
         return props_TestSubstituteSubChild2;
-      case 34:
-        return props_TestSubstituteSubChildSmartReference;
-      case 35:
-        return props_TestSubstituteSubConceptToWrap;
+      case LanguageConceptSwitch.TestSubstituteSubChildAmbigousPosition1:
+        if (props_TestSubstituteSubChildAmbigousPosition1 == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("subambigous");
+          props_TestSubstituteSubChildAmbigousPosition1 = cpb.create();
+        }
+        return props_TestSubstituteSubChildAmbigousPosition1;
+      case LanguageConceptSwitch.TestSubstituteSubChildAmbigousPosition2:
+        if (props_TestSubstituteSubChildAmbigousPosition2 == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("subambigous");
+          props_TestSubstituteSubChildAmbigousPosition2 = cpb.create();
+        }
+        return props_TestSubstituteSubChildAmbigousPosition2;
+      case LanguageConceptSwitch.TestSubstituteSubChildSmartReference_WithMenu:
+        if (props_TestSubstituteSubChildSmartReference_WithMenu == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_TestSubstituteSubChildSmartReference_WithMenu = cpb.create();
+        }
+        return props_TestSubstituteSubChildSmartReference_WithMenu;
+      case LanguageConceptSwitch.TestSubstituteToWrapFromSubstituteMenu:
+        if (props_TestSubstituteToWrapFromSubstituteMenu == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("default");
+          props_TestSubstituteToWrapFromSubstituteMenu = cpb.create();
+        }
+        return props_TestSubstituteToWrapFromSubstituteMenu;
+      case LanguageConceptSwitch.TestSubstituteToWrapFromTransformMenu:
+        if (props_TestSubstituteToWrapFromTransformMenu == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_TestSubstituteToWrapFromTransformMenu = cpb.create();
+        }
+        return props_TestSubstituteToWrapFromTransformMenu;
+      case LanguageConceptSwitch.TestSubstituteWrapper:
+        if (props_TestSubstituteWrapper == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstituteWrapper");
+          props_TestSubstituteWrapper = cpb.create();
+        }
+        return props_TestSubstituteWrapper;
+      case LanguageConceptSwitch.TestSubstitute_IncludeDefaultAndNullMenu:
+        if (props_TestSubstitute_IncludeDefaultAndNullMenu == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstitute_IncludeDefaultAndNullMenu");
+          props_TestSubstitute_IncludeDefaultAndNullMenu = cpb.create();
+        }
+        return props_TestSubstitute_IncludeDefaultAndNullMenu;
+      case LanguageConceptSwitch.TestSubstitute_IncludeDifferentMenus:
+        if (props_TestSubstitute_IncludeDifferentMenus == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstitute_IncludeDifferentMenus");
+          props_TestSubstitute_IncludeDifferentMenus = cpb.create();
+        }
+        return props_TestSubstitute_IncludeDifferentMenus;
+      case LanguageConceptSwitch.TestSubstitute_IncludeSameMenuTwice:
+        if (props_TestSubstitute_IncludeSameMenuTwice == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstitute_IncludeSameMenuTwice");
+          props_TestSubstitute_IncludeSameMenuTwice = cpb.create();
+        }
+        return props_TestSubstitute_IncludeSameMenuTwice;
+      case LanguageConceptSwitch.TestSubstitute_Interface:
+        if (props_TestSubstitute_Interface == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_TestSubstitute_Interface = cpb.create();
+        }
+        return props_TestSubstitute_Interface;
+      case LanguageConceptSwitch.TestSubstitute_Parent:
+        if (props_TestSubstitute_Parent == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstitute_Parent");
+          props_TestSubstitute_Parent = cpb.create();
+        }
+        return props_TestSubstitute_Parent;
+      case LanguageConceptSwitch.TestSubstitute_SubInterface1:
+        if (props_TestSubstitute_SubInterface1 == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_TestSubstitute_SubInterface1 = cpb.create();
+        }
+        return props_TestSubstitute_SubInterface1;
+      case LanguageConceptSwitch.TestSubstitute_SubInterface2:
+        if (props_TestSubstitute_SubInterface2 == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_TestSubstitute_SubInterface2 = cpb.create();
+        }
+        return props_TestSubstitute_SubInterface2;
+      case LanguageConceptSwitch.TestSubstitute_Subconcept:
+        if (props_TestSubstitute_Subconcept == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstitute_Subconcept");
+          props_TestSubstitute_Subconcept = cpb.create();
+        }
+        return props_TestSubstitute_Subconcept;
+      case LanguageConceptSwitch.TestSubstitute_WrapDifferentMenus:
+        if (props_TestSubstitute_WrapDifferentMenus == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstitute_WrapDifferentMenus");
+          props_TestSubstitute_WrapDifferentMenus = cpb.create();
+        }
+        return props_TestSubstitute_WrapDifferentMenus;
+      case LanguageConceptSwitch.TestSubstitute_WrapSameMenuTwice:
+        if (props_TestSubstitute_WrapSameMenuTwice == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestSubstitute_WrapSameMenuTwice");
+          props_TestSubstitute_WrapSameMenuTwice = cpb.create();
+        }
+        return props_TestSubstitute_WrapSameMenuTwice;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

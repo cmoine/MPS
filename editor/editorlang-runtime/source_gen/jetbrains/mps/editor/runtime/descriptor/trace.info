@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144226303539:jetbrains.mps.baseLanguage.structure.ForeachStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <root nodeRef="r:8ff33705-85bf-4855-805c-06d68fbe233c(jetbrains.mps.editor.runtime.descriptor)/4302900529822367990">
+    <file name="AbstractEditorBuilder.java">
+      <node id="5090800358950996323" at="20,70,21,36" concept="1" />
+      <node id="5090800358950997949" at="25,43,26,27" concept="6" />
+      <node id="3543928247798061302" at="29,45,30,47" concept="6" />
+      <node id="8344200696735192055" at="34,43,35,87" concept="6" />
+      <node id="188887267969509572" at="39,43,40,39" concept="6" />
+      <node id="7241968728243327740" at="44,58,45,27" concept="1" />
+      <node id="4914536826837389510" at="50,40,51,61" concept="1" />
+      <node id="7241968728243330107" at="52,5,53,16" concept="6" />
+      <node id="5090800358950984588" at="17,0,19,0" concept="2" trace="myEditorContext" />
+      <node id="4302900529822368020" at="20,0,23,0" concept="0" trace="AbstractEditorBuilder#(Ljetbrains/mps/openapi/editor/EditorContext;)V" />
+      <node id="3543928247798060552" at="29,0,32,0" concept="5" trace="getCellFactory#()Ljetbrains/mps/openapi/editor/cells/EditorCellFactory;" />
+      <node id="6238306046628636169" at="43,68,46,5" concept="3" />
+      <node id="4914536826837389508" at="49,56,52,5" concept="4" />
+      <node id="5090800358950997623" at="24,0,28,0" concept="5" trace="getEditorContext#()Ljetbrains/mps/openapi/editor/EditorContext;" />
+      <node id="8344200696735191128" at="33,0,37,0" concept="5" trace="getUpdateSession#()Ljetbrains/mps/openapi/editor/update/UpdateSession;" />
+      <node id="188887267969508351" at="38,0,42,0" concept="5" trace="getStyleRegistry#()Ljetbrains/mps/openapi/editor/style/StyleRegistry;" />
+      <node id="6238306046628635015" at="43,0,48,0" concept="5" trace="setInnerCellsContext#(Ljetbrains/mps/openapi/editor/cells/EditorCell_Collection;)V" />
+      <node id="4914536826837386468" at="49,0,55,0" concept="5" trace="setCellContext#(Ljetbrains/mps/openapi/editor/cells/EditorCell;)Ljetbrains/mps/openapi/editor/cells/EditorCell;" />
+      <scope id="4302900529822368024" at="20,70,21,36" />
+      <scope id="5090800358950997627" at="25,43,26,27" />
+      <scope id="3543928247798060556" at="29,45,30,47" />
+      <scope id="8344200696735191132" at="34,43,35,87" />
+      <scope id="188887267969508355" at="39,43,40,39" />
+      <scope id="6238306046628636172" at="44,58,45,27" />
+      <scope id="4914536826837389509" at="50,40,51,61" />
+      <scope id="4302900529822368020" at="20,0,23,0">
+        <var name="editorContext" id="825332792092992853" />
+      </scope>
+      <scope id="3543928247798060552" at="29,0,32,0" />
+      <scope id="6238306046628635018" at="43,68,46,5" />
+      <scope id="6238306046628636169" at="43,68,46,5">
+        <var name="cell" id="6238306046628636170" />
+      </scope>
+      <scope id="5090800358950997623" at="24,0,28,0" />
+      <scope id="8344200696735191128" at="33,0,37,0" />
+      <scope id="188887267969508351" at="38,0,42,0" />
+      <scope id="4914536826837386471" at="49,56,53,16" />
+      <scope id="6238306046628635015" at="43,0,48,0">
+        <var name="cells" id="6238306046628635527" />
+      </scope>
+      <scope id="4914536826837386468" at="49,0,55,0">
+        <var name="cell" id="4914536826837387135" />
+      </scope>
+      <unit id="4302900529822367990" at="15,0,56,0" name="jetbrains.mps.editor.runtime.descriptor.AbstractEditorBuilder" />
+    </file>
+  </root>
+  <root nodeRef="r:8ff33705-85bf-4855-805c-06d68fbe233c(jetbrains.mps.editor.runtime.descriptor)/7869544664116130538">
+    <file name="EditorBuilderEnvironment.java">
+      <node id="7869544664116130639" at="14,0,15,0" concept="5" trace="getEditorContext#()Ljetbrains/mps/openapi/editor/EditorContext;" />
+      <node id="7869544664116130850" at="15,0,16,0" concept="5" trace="getNode#()Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="7869544664116131041" at="16,0,17,0" concept="5" trace="getCellFactory#()Ljetbrains/mps/openapi/editor/cells/EditorCellFactory;" />
+      <node id="8344200696735190308" at="17,0,18,0" concept="5" trace="getUpdateSession#()Ljetbrains/mps/openapi/editor/update/UpdateSession;" />
+      <node id="188887267969505015" at="18,0,19,0" concept="5" trace="getStyleRegistry#()Ljetbrains/mps/openapi/editor/style/StyleRegistry;" />
+      <scope id="7869544664116130639" at="14,0,15,0" />
+      <scope id="7869544664116130850" at="15,0,16,0" />
+      <scope id="7869544664116131041" at="16,0,17,0" />
+      <scope id="8344200696735190308" at="17,0,18,0" />
+      <scope id="188887267969505015" at="18,0,19,0" />
+      <unit id="7869544664116130538" at="12,0,20,0" name="jetbrains.mps.editor.runtime.descriptor.EditorBuilderEnvironment" />
+    </file>
+  </root>
+</debug-info>
+

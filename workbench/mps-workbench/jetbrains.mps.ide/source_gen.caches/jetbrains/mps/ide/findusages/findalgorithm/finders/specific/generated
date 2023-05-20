@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="5kofggfz2ouaio49n3fpm8gqf56zb75" />
+<product version="3" modelHash="-a86emkdpcuj3ijv52p3ohgoykg19q90">
+  <files names="AspectMethodsFinder.java:ConstantFinder.java:LanguageConceptsUsagesFinder.java:MappingConfigFinder.java" />
+</product>
 

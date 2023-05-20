@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-bb9lfdxjq4txh8ivxxhpof346e28r4c" />
+<product version="3" modelHash="-711gory4vchik9yx1hwa181fmvfsifl">
+  <files names="BinaryOperationUtil.java" />
+</product>
 

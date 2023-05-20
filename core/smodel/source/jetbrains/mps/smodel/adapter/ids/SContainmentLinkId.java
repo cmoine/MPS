@@ -43,9 +43,7 @@ public final class SContainmentLinkId extends SConceptFeatureId {
     SContainmentLinkId that = (SContainmentLinkId) o;
 
     if (myLinkId != that.myLinkId) return false;
-    if (!getConceptId().equals(that.getConceptId())) return false;
-
-    return true;
+    return getConceptId().equals(that.getConceptId());
   }
 
   @Override
@@ -60,7 +58,7 @@ public final class SContainmentLinkId extends SConceptFeatureId {
   }
 
   public static SContainmentLinkId deserialize(String s) {
-    int split = s.lastIndexOf("/");
+    int split = s.lastIndexOf('/');
     SConceptId concept = SConceptId.deserialize(s.substring(0, split));
     long ref = Long.parseLong(s.substring(split + 1));
     return new SContainmentLinkId(concept, ref);

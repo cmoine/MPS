@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,8 @@
 package jetbrains.mps.smodel;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.model.SModelReference;
 
 /**
  * This is a state nodes being removed from a model get.
@@ -44,8 +45,14 @@ final class DetachedNodeOwner extends SNodeOwner {
     return null;
   }
 
+  @Nullable
   @Override
-  void performUndoableAction(SNode node, SNodeUndoableAction action) {
+  SModelReference lastKnownModel() {
+    return myModelForUndo.getReference();
+  }
+
+  @Override
+  void performUndoableAction(SNodeUndoableAction action) {
     myModelForUndo.performUndoableAction(action);
   }
 }

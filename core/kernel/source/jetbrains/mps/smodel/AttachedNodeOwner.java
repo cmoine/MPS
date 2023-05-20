@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,15 @@
  */
 package jetbrains.mps.smodel;
 
+import jetbrains.mps.smodel.AssociationData.Transition;
+import jetbrains.mps.smodel.ModelCommandContext.Provider;
 import jetbrains.mps.smodel.event.ModelEventDispatch;
-import jetbrains.mps.smodel.references.UnregisteredNodes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
+import org.jetbrains.mps.openapi.model.SModelReference;
+import org.jetbrains.mps.openapi.module.ModelAccess;
 import org.jetbrains.mps.openapi.module.SRepository;
 
 /**
@@ -28,8 +31,8 @@ import org.jetbrains.mps.openapi.module.SRepository;
  *
  * Events are dispatched, model access ensured.
  * <p>
- * OpenAPI listeners ({@link org.jetbrains.mps.openapi.model.SNodeAccessListener}, {@link org.jetbrains.mps.openapi.model.SModelChangeListener},
- * {@link org.jetbrains.mps.openapi.model.SModelAccessListener}) are notified through {@link jetbrains.mps.smodel.event.ModelEventDispatch},
+ * OpenAPI listeners ({@link org.jetbrains.mps.openapi.model.SNodeAccessListener}, {@link org.jetbrains.mps.openapi.model.SNodeChangeListener})
+ * are notified through {@link jetbrains.mps.smodel.event.ModelEventDispatch},
  * this class shall not depend on particular openapi.SModel implementation (e.g. SModelBase or EditableSModelBase).
  * <p>
  * Legacy listeners ({@link jetbrains.mps.smodel.event.SModelListener}, {@link jetbrains.mps.smodel.NodeReadEventsCaster} and
@@ -70,8 +73,7 @@ final class AttachedNodeOwner extends SNodeOwner {
 
   @Override
   public void assertLegalChange() {
-    final SModel model = myModel;
-    if (model.isUpdateMode()) {
+    if (myModel.isUpdateMode()) {
       return;
     }
     final SRepository repo = myModel.getRepository();
@@ -79,9 +81,17 @@ final class AttachedNodeOwner extends SNodeOwner {
       return;
     }
     repo.getModelAccess().checkWriteAccess();
-    if (!UndoHelper.getInstance().isInsideUndoableCommand()) {
-      throw new IllegalModelChangeError("registered node can only be modified inside undoable command or in 'loading' model " + myModel);
-    }
+    // here used to be one of most perplexing pieces of MPS core functionality, check for MA.isCommandAction with IMCE in case not.
+    // Speculations are the check ensured all model changes for a model inside repository got Undo recorded (MM, slack, 13.02.2017)
+    // however, I don't think it's proper in variant, as there are different models inside a repo (e.g. temp, transient,
+    // internal Console state, etc), and we don't need to record Undo for these.
+    // In case we need per-model variations in behavior, may invoke some internal API method on [smodel].SModel here, so that
+    // various SModel implementation may provide their own logic (e.g. check MA.isCommandAction() if they truly need to)
+    // Even better, the method might be part of SRepository or MA API. One could argue why not MA.isCommandAction() then, but
+    //   this method is way too overloaded, and keeping both 'inside command' and 'can modify node now' knowledge under single
+    //   method is worse than introducing a distinct API. For the same reason I believe having this check
+    //   inside MA.checkWriteAccess() might not be perfect idea (although don't have that strong objections as for the
+    //   single isCommandAction() check)
   }
 
   @Override
@@ -90,22 +100,77 @@ final class AttachedNodeOwner extends SNodeOwner {
   }
 
   @Override
-  public void registerNode(SNode node) {
-    myModel.registerNode(node);
-    // FIXME why UnregisteredNodes.put in SNode#unRegisterFromModel (#detach(SNodeOwner)) us conditioned with !isUpdateMode(), and this one is not?
-    UnregisteredNodes.instance().remove(node);
+  SModelReference lastKnownModel() {
+    return myModel.getReference();
   }
 
   @Override
-  public void unregisterNode(SNode node) {
-    myModel.unregisterNode(node);
-    if (!myModel.isUpdateMode()) {
-      UnregisteredNodes.instance().put(node);
+  public void registerNode(SNode node) {
+    myModel.enforceFullLoad(); // FIXME dubious need to perform full load if all we do is populating id map
+    doRegister(node, commandContext());
+    if (myModel.getRepository() != null) {
+      // one can hardly expect to navigate/resolve indirect (aka 'mature') reference from a node that belongs to a model
+      // not inside a repository, that's why I don't make them indirect just the moment node get attached to a model.
+      // There's ImmatureReferences that would force indirect references the moment command completes, regardless of
+      // repository presence.
+      final Transition transition = new Transition(false);
+      node.forEachAssociationDeep(data -> transition.makeIndirect(data, StaticReference::getResolveInfo));
+    }
+  }
+
+  // pre: myCommandContext != null
+  private void doRegister(SNode node, ModelCommandContext commandContext) {
+    // XXX model.registerNode shall go *BEFORE* setNodeOwner, otherwise SNode.setId fails - attached owner provides model.
+    //     At the moment, there's copy-paste editor functionality that depends on ability to change nodeId
+    //     (copied node preserves id of the original node, and if pasted into same model, there's id conflict which is resolved in SModel.assignNewId())
+    myModel.registerNode(node);
+    node.setNodeOwner(this);
+    // for an attached node, its complete subtree has to share same SNodeOwner, assign it unconditionally
+    // FIXME why UnregisteredNodes.put in SNode#unRegisterFromModel (#detach(SNodeOwner)) us conditioned with !isUpdateMode(), and this one is not?
+    //       I suppose the reason was remove() doesn't hurt in case there's no such node, though not 100% sure
+    commandContext.nodeAttached(node);
+
+    for (SNode child = node.firstChild(); child != null; child = child.treeNext()) {
+      doRegister(child, commandContext);
     }
   }
 
   @Override
-  void performUndoableAction(org.jetbrains.mps.openapi.model.SNode node, SNodeUndoableAction action) {
+  public void unregisterNode(SNode node) {
+    if (!myModel.isUpdateMode()) {
+      // XXX no idea what this isUpdateMode() check is about, used to be in SNode.detach()
+      //     it dates back to e64402e1, I suspect it might be a performance optimization
+      //     (nobody gonna access references of a node that has been removed during internal update process)
+      //
+      // makeDirect has been separated from detach() code to give better control over reference resolution time.
+      // indeed, in a perfect world we would know all nodes to be deleted during a command beforehand, and could process their references at once.
+      // as it's not possible (node.sibling.detach could come right after node.detach) we at least go easy path for references within a detached subtree
+      final Transition transition = new Transition();
+      final org.jetbrains.mps.openapi.model.SModel current = myModel.getModelDescriptor();
+      node.forEachAssociationDeep(data -> transition.makeDirect(data, () -> StaticReference.getTargetModel_Fair_ProvisionalStatic(data.getTargetModel(), current)));
+      // Direct object pointers facilitate reference access operations from the detached nodes just in case there's need.
+    }
+
+    doUnregister(new DetachedNodeOwner(myModel), node, commandContext());
+  }
+
+  // pre: myCommandContext != null
+  private void doUnregister(DetachedNodeOwner detachedOwner, SNode node, ModelCommandContext commandContext) {
+    myModel.unregisterNode(node);
+    if (!myModel.isUpdateMode()) {
+      // XXX perhaps, SModel shall tell myOwner.enterUpdate()/myOwner.leaveUpdate() instead of isUpdateMode checks?
+      commandContext.nodeDetached(node);
+    }
+    // XXX when we put a node in UnregisteredNodes, it better keep original SModel so that any reference pointing to the node could still get resolved.
+    //     Tests like MakeFieldNonStaticAndHaveReferencesUpdated fail if UN receives a node with detached model owner (model unset)
+    node.setNodeOwner(detachedOwner);
+    for (SNode child = node.firstChild(); child != null; child = child.treeNext()) {
+      doUnregister(detachedOwner, child, commandContext);
+    }
+  }
+
+  @Override
+  void performUndoableAction(SNodeUndoableAction action) {
     myModel.performUndoableAction(action);
   }
 
@@ -184,20 +249,22 @@ final class AttachedNodeOwner extends SNodeOwner {
   }
 
   @Override
-  /*package*/ void fireReferenceChange(SNode node, SReferenceLink l, org.jetbrains.mps.openapi.model.SReference oldRef, org.jetbrains.mps.openapi.model.SReference newRef) {
+  /*package*/ void fireReferenceChange(SNode node, SReferenceLink l, AssociationData oldRef, AssociationData newRef) {
+    // FIXME is it true we need to register immature even in update mode?
+    commandContext().associationSet(node, l, newRef);
     if (myModel.isUpdateMode()) {
       return;
     }
     if (oldRef != null) {
-      myModel.fireReferenceRemovedEvent(oldRef);
+      myModel.fireReferenceRemovedEvent(node.toAPI(l, oldRef));
     }
     if (newRef != null) {
-      myModel.fireReferenceAddedEvent(newRef);
+      myModel.fireReferenceAddedEvent(node.toAPI(l, newRef));
     }
     // referenceChanged(l, oldRef, newRef);
     final ModelEventDispatch md = myEventDispatch;
     if (md != null) {
-      md.fireReferenceChange(node, l, oldRef, newRef);
+      md.fireReferenceChange(node, l, oldRef == null ? null : node.toAPI(l, oldRef), newRef == null ? null : node.toAPI(l, newRef));
     }
   }
 
@@ -251,5 +318,19 @@ final class AttachedNodeOwner extends SNodeOwner {
     if (md != null) {
       md.fireNodeRemove(node, role, child);
     }
+  }
+
+  /*package*/ ModelCommandContext commandContext() {
+    final SRepository repo = myModel.getRepository();
+    final org.jetbrains.mps.openapi.model.SModel md = myModel.getModelDescriptor();
+    if (repo == null || md == null) {
+      return ModelCommandContext.EMPTY;
+    }
+    final ModelAccess ma = repo.getModelAccess();
+    if (ma instanceof ModelCommandContext.Provider) {
+      final ModelCommandContext cc = ((Provider) ma).getCommandContext(md);
+      return cc == null ? ModelCommandContext.EMPTY : cc;
+    }
+    return ModelCommandContext.EMPTY;
   }
 }

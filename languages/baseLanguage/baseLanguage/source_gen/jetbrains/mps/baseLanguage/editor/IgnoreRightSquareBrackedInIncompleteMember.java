@@ -9,14 +9,15 @@ import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import java.util.List;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class IgnoreRightSquareBrackedInIncompleteMember extends KeyMapImpl {
   public IgnoreRightSquareBrackedInIncompleteMember() {
     this.setApplicableToEveryModel(false);
     KeyMapAction action;
-    action = new IgnoreRightSquareBrackedInIncompleteMember.IgnoreRightSquareBrackedInIncompleteMember_Action0();
+    action = new IgnoreRightSquareBrackedInIncompleteMember_Action0();
     this.putAction("none", "]", action);
   }
   public static class IgnoreRightSquareBrackedInIncompleteMember_Action0 extends KeyMapActionImpl {
@@ -35,7 +36,7 @@ public class IgnoreRightSquareBrackedInIncompleteMember extends KeyMapImpl {
       if (contextNode == null) {
         return false;
       }
-      if (!(SNodeOperations.isInstanceOf(contextNode, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x32175ac2e6fcc181L, "jetbrains.mps.baseLanguage.structure.IncompleteMemberDeclaration")))) {
+      if (!(SNodeOperations.isInstanceOf(contextNode, CONCEPTS.IncompleteMemberDeclaration$jI))) {
         return false;
       }
       return true;
@@ -49,5 +50,9 @@ public class IgnoreRightSquareBrackedInIncompleteMember extends KeyMapImpl {
     public String getKeyStroke() {
       return "none ]";
     }
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept IncompleteMemberDeclaration$jI = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x32175ac2e6fcc181L, "jetbrains.mps.baseLanguage.structure.IncompleteMemberDeclaration");
   }
 }

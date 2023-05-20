@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,33 +15,50 @@
  */
 package jetbrains.mps.smodel.runtime;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.annotations.Immutable;
 import org.jetbrains.mps.openapi.language.SConceptFeature;
+import org.jetbrains.mps.openapi.model.SNode;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collection;
 
-public class ConceptPresentation {
-  private String myHelpUrl;
-  private String myShortDescription;
-  private IconResource myIcon;
-  private boolean myIsDeprecated;
-  private Set<SConceptFeature> myDeprecatedFeatures = new HashSet<>(2);
+@Immutable
+public final class ConceptPresentation {
+  private final String myHelpUrl;
+  private final String myShortDescription;
+  private final IconResource myIcon;
+  private final boolean myDeprecated;
+  private final boolean myExperimental;
+  private final Collection<SConceptFeature> myDeprecatedFeatures; // could be null
+  private final NodePresentationProvider myNodePresentationProvider;
 
-  public ConceptPresentation(String helpUrl, String shortDescription, IconResource icon, boolean isDeprecated,
-      Set<SConceptFeature> deprecatedFeatures) {
+  ConceptPresentation(String helpUrl,
+                                  String shortDescription,
+                                  IconResource icon,
+                                  boolean deprecated,
+                                  boolean experimental,
+                                  Collection<SConceptFeature> deprecatedFeatures,
+                                  NodePresentationProvider presentationProvider) {
     myHelpUrl = helpUrl;
     myShortDescription = shortDescription;
     myIcon = icon;
-    myIsDeprecated = isDeprecated;
+    myDeprecated = deprecated;
+    myExperimental = experimental;
     myDeprecatedFeatures = deprecatedFeatures;
+    myNodePresentationProvider = presentationProvider;
   }
 
   public String getHelpUrl() {
-    return myHelpUrl;
+    return myHelpUrl == null ? "" : myHelpUrl;
   }
 
   public String getShortDescription() {
-    return myShortDescription;
+    // clients (SConceptAdapter) expect !null values. Not sure what's the right place to ensure this
+    return myShortDescription == null ? "" : myShortDescription;
+  }
+
+  public String getPresentationFor(@NotNull SNode node) {
+    return myNodePresentationProvider.getPresentation(node);
   }
 
   public IconResource getIcon() {
@@ -49,10 +66,14 @@ public class ConceptPresentation {
   }
 
   public boolean isDeprecated() {
-    return myIsDeprecated;
+    return myDeprecated;
+  }
+
+  public boolean isExperimental() {
+    return myExperimental;
   }
 
   public boolean isDeprecated(SConceptFeature f) {
-    return myDeprecatedFeatures.contains(f);
+    return myDeprecatedFeatures != null && myDeprecatedFeatures.contains(f);
   }
 }

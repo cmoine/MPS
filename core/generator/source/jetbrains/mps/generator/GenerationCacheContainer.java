@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,22 +15,31 @@
  */
 package jetbrains.mps.generator;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.LogManager;
-import org.jetbrains.mps.openapi.model.SModel;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.util.FileUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.openapi.model.SModel;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
+ * FIXME revisit, perhaps can make use of to keep checkpoint models outside of a workspace (not to bother with identical files)
+ *
+ * FIXME There is extension point, what do I do with it?
+ *       new ExtensionPoint<GenerationCacheContainer>("jetbrains.mps.lang.core.GeneratorCache").getObjects();
+ *       GeneratorCache_extension, GeneratorCacheComponent
  * Evgeny Gryaznov, Sep 21, 2010
  */
 public interface GenerationCacheContainer {
 
   ModelCacheContainer getCache(@NotNull SModel descriptor, String hash, boolean create);
 
-  public interface ModelCacheContainer {
+  interface ModelCacheContainer {
 
     @NotNull
     InputStream openStream(String name) throws IOException;
@@ -43,9 +52,9 @@ public interface GenerationCacheContainer {
     void revert();
   }
 
-  public static class FileBasedGenerationCacheContainer implements GenerationCacheContainer {
+  class FileBasedGenerationCacheContainer implements GenerationCacheContainer {
 
-    private static final Logger LOG = LogManager.getLogger(FileBasedGenerationCacheContainer.class);
+    private static final Logger LOG = Logger.getLogger(FileBasedGenerationCacheContainer.class);
 
     @NotNull
     private File myGeneratorCaches;
@@ -93,9 +102,9 @@ public interface GenerationCacheContainer {
     }
   }
 
-  public static class FileBasedModelCacheContainer implements ModelCacheContainer {
+  class FileBasedModelCacheContainer implements ModelCacheContainer {
 
-    private static final Logger LOG = LogManager.getLogger(FileBasedModelCacheContainer.class);
+    private static final Logger LOG = Logger.getLogger(FileBasedModelCacheContainer.class);
 
     private final File myFolder;
     private final File myHashDir;

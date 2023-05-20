@@ -5,12 +5,9 @@ package jetbrains.mps.samples.Shapes.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.List;
 import java.util.Arrays;
@@ -22,12 +19,12 @@ import javax.swing.JPanel;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public final class Canvas__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x16bafbb4c6cd4cc5L, 0x83327c6de8729b3fL, 0x51dcaa29974fa71dL, "jetbrains.mps.samples.Shapes.structure.Canvas");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<Void> interpret_idW6XMzE_6ci = new SMethodBuilder<Void>(new SJavaCompoundTypeImpl(Void.class)).name("interpret").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("W6XMzE_6ci").registry(REGISTRY).build();
+  public static final SMethod<Void> interpret_idW6XMzE_6ci = new SMethodBuilder<Void>(new SJavaCompoundTypeImpl(Void.class)).name("interpret").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1082824515535528722L).languageId(0x83327c6de8729b3fL, 0x16bafbb4c6cd4cc5L).build2();
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(interpret_idW6XMzE_6ci);
 
@@ -35,7 +32,7 @@ public final class Canvas__BehaviorDescriptor extends BaseBHDescriptor {
   }
 
   /*package*/ static void interpret_idW6XMzE_6ci(@NotNull SNode __thisNode__) {
-    JFrame frame = new JFrame("Preview: " + SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name")));
+    JFrame frame = new JFrame("Preview: " + SPropertyOperations.getString(__thisNode__, PROPS.name$MnvL));
     final JPanel panel = PreviewFactory.createPanel(__thisNode__);
     frame.add(panel);
     frame.setVisible(true);
@@ -43,7 +40,6 @@ public final class Canvas__BehaviorDescriptor extends BaseBHDescriptor {
   }
 
   /*package*/ Canvas__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -88,5 +84,9 @@ public final class Canvas__BehaviorDescriptor extends BaseBHDescriptor {
   @Override
   public SAbstractConcept getConcept() {
     return CONCEPT;
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }

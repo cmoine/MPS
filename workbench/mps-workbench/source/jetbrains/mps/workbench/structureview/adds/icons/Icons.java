@@ -15,13 +15,29 @@
  */
 package jetbrains.mps.workbench.structureview.adds.icons;
 
+import com.intellij.icons.AllIcons.ObjectBrowser;
 import jetbrains.mps.icons.MPSIcons.Generator;
+import jetbrains.mps.icons.MPSIcons.Nodes.Models;
+import jetbrains.mps.ide.icons.IdeIcons;
 
 import javax.swing.Icon;
 
+@Deprecated(since = "2017.1", forRemoval = true)
 public class Icons {
+  /**
+   * @deprecated use {@link Generator#Output} instead
+   */
+@Deprecated(since = "2017.1", forRemoval = true)
   public static final Icon OUTPUT = Generator.Output;
 
-  public static final Icon SORT_NODES_BY_ASPECT_ICON = jetbrains.mps.ide.projectPane.Icons.PROJECT_ICON;
-  public static final Icon GROUP_ASPECTS_ICON = jetbrains.mps.ide.projectPane.Icons.PROJECT_MODELS_ICON;
+  /**
+   * @deprecated use {@link ObjectBrowser#SortByType} instead
+   */
+@Deprecated(since = "2017.1", forRemoval = true)
+  public static final Icon SORT_NODES_BY_ASPECT_ICON = IdeIcons.PROJECT_ICON;
+  /**
+   * @deprecated use {@link Models#AspectModel} instead
+   * */
+@Deprecated(since = "2017.1", forRemoval = true)
+  public static final Icon GROUP_ASPECTS_ICON = Models.AspectModel;
 }

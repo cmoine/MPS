@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-22cak16rs89hr1rivaf3itatcztxxwp" />
+<product version="3" modelHash="-9mmrt13f6ncb536du6siok1t7zahgzg">
+  <files names="Applicability_Editor.java:Applicability_EditorBuilder_a.java:ChangeEvent_Editor.java:ChangeEvent_EditorBuilder_a.java:Customizes.java:DailyPlanReference_Editor.java:DailyPlanReference_EditorBuilder_a.java:DailyPlanReference_SmartReference.java:DailyPlanReference_SubstituteMenu.java:DailyPlan_ApplySideTransforms.java:DailyPlan_Editor.java:DailyPlan_EditorBuilder_a.java:DayRange_Editor.java:DayRange_EditorBuilder_a.java:DeleteCustomizes.java:EditorAspectDescriptorImpl.java:HeatingPlan_Editor.java:HeatingPlan_EditorBuilder_a.java:NotSpecified_Editor.java:NotSpecified_EditorBuilder_a.java:PresentationProviders.java:Slot_Editor.java:Slot_EditorBuilder_a.java:SpecificDay_Editor.java:SpecificDay_EditorBuilder_a.java" />
+</product>
 

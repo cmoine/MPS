@@ -7,20 +7,268 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <root nodeRef="r:19bf018c-b5e7-418d-8415-b23921421325(sandboxModel)/1751004816843423273">
+    <file name="fixpoint.java">
+      <node id="1751004816843423273" at="12,42,13,33" concept="1" />
+      <node id="1751004816843423273" at="15,31,16,46" concept="5" />
+      <node id="1751004816843424603" at="19,0,20,0" concept="2" trace="myOuterVars" />
+      <node id="1751004816843424603" at="20,43,21,47" concept="1" />
+      <node id="1751004816843424603" at="23,57,24,47" concept="1" />
+      <node id="1751004816843424603" at="24,47,25,36" concept="1" />
+      <node id="1751004816843424603" at="27,26,28,16" concept="4" />
+      <node id="1751004816843424603" at="28,16,29,16" concept="4" />
+      <node id="1751004816843424605" at="29,16,30,46" concept="4" />
+      <node id="1751004816843424603" at="30,46,31,85" concept="5" />
+      <node id="1751004816843424603" at="33,33,34,15" concept="5" />
+      <node id="1751004816843424603" at="36,28,37,59" concept="5" />
+      <node id="1751004816843561803" at="40,0,41,0" concept="2" trace="myOuterVars" />
+      <node id="1751004816843561803" at="41,55,42,49" concept="1" />
+      <node id="1751004816843424605" at="42,49,43,27" concept="1" />
+      <node id="1751004816843561803" at="45,59,46,49" concept="1" />
+      <node id="1751004816843561803" at="46,49,47,38" concept="1" />
+      <node id="1751004816843561803" at="49,28,50,18" concept="4" />
+      <node id="1751004816843561803" at="50,18,51,18" concept="4" />
+      <node id="1751004816843424605" at="51,18,52,53" concept="4" />
+      <node id="1751004816843561804" at="52,53,53,48" concept="4" />
+      <node id="1751004816843561803" at="53,48,54,79" concept="5" />
+      <node id="1751004816843561803" at="56,35,57,17" concept="5" />
+      <node id="1751004816843561803" at="59,30,60,61" concept="5" />
+      <node id="1751004816843561372" at="63,82,64,77" concept="5" />
+      <node id="1751004816843423273" at="10,0,12,0" concept="0" trace="fixpoint#()V" />
+      <node id="1751004816843423273" at="12,0,15,0" concept="6" trace="main#([Ljava/lang/String;)V" />
+      <node id="1751004816843423273" at="15,0,18,0" concept="6" trace="eval#()Ljava/lang/Object;" />
+      <node id="1751004816843424603" at="20,0,23,0" concept="0" trace="Function_1751004816843424603#()V" />
+      <node id="1751004816843424603" at="33,0,36,0" concept="3" trace="getParamsCount#()I" />
+      <node id="1751004816843424603" at="36,0,39,0" concept="3" trace="copy#()Ljetbrains/mps/samples/lambdaCalculus/runtime/Function;" />
+      <node id="1751004816843561803" at="56,0,59,0" concept="3" trace="getParamsCount#()I" />
+      <node id="1751004816843561803" at="59,0,62,0" concept="3" trace="copy#()Ljetbrains/mps/samples/lambdaCalculus/runtime/Function;" />
+      <node id="1751004816843561372" at="63,0,66,0" concept="6" trace="lambdaAbstr_1751004816843424696#(Ljetbrains/mps/samples/lambdaCalculus/runtime/Function;Ljetbrains/mps/samples/lambdaCalculus/runtime/Function;)Ljava/lang/Object;" />
+      <node id="1751004816843424603" at="23,0,27,0" concept="0" trace="Function_1751004816843424603#(Ljava/util/List;)V" />
+      <node id="1751004816843561803" at="41,0,45,0" concept="0" trace="Function_1751004816843561803#(Ljetbrains/mps/samples/lambdaCalculus/runtime/Function;)V" />
+      <node id="1751004816843561803" at="45,0,49,0" concept="0" trace="Function_1751004816843561803#(Ljava/util/List;)V" />
+      <node id="1751004816843424603" at="27,0,33,0" concept="3" trace="eval#()Ljava/lang/Object;" />
+      <node id="1751004816843561803" at="49,0,56,0" concept="3" trace="eval#()Ljava/lang/Object;" />
+      <scope id="1751004816843423273" at="10,21,10,21" />
+      <scope id="1751004816843423273" at="12,42,13,33" />
+      <scope id="1751004816843423273" at="15,31,16,46" />
+      <scope id="1751004816843424603" at="20,43,21,47" />
+      <scope id="1751004816843424603" at="33,33,34,15" />
+      <scope id="1751004816843424603" at="36,28,37,59" />
+      <scope id="1751004816843561803" at="56,35,57,17" />
+      <scope id="1751004816843561803" at="59,30,60,61" />
+      <scope id="1751004816843561372" at="63,82,64,77" />
+      <scope id="1751004816843423273" at="10,0,12,0" />
+      <scope id="1751004816843424603" at="23,57,25,36" />
+      <scope id="1751004816843561803" at="41,55,43,27" />
+      <scope id="1751004816843561803" at="45,59,47,38" />
+      <scope id="1751004816843423273" at="12,0,15,0">
+        <var name="args" id="1751004816843423273" />
+      </scope>
+      <scope id="1751004816843423273" at="15,0,18,0" />
+      <scope id="1751004816843424603" at="20,0,23,0" />
+      <scope id="1751004816843424603" at="33,0,36,0" />
+      <scope id="1751004816843424603" at="36,0,39,0" />
+      <scope id="1751004816843561803" at="56,0,59,0" />
+      <scope id="1751004816843561803" at="59,0,62,0" />
+      <scope id="1751004816843561372" at="63,0,66,0">
+        <var name="f" id="1751004816843424605" />
+        <var name="x" id="1751004816843424698" />
+      </scope>
+      <scope id="1751004816843424603" at="23,0,27,0">
+        <var name="outerVars" id="1751004816843424603" />
+      </scope>
+      <scope id="1751004816843424603" at="27,26,31,85">
+        <var name="f" id="1751004816843424605" />
+        <var name="i" id="1751004816843424603" />
+        <var name="j" id="1751004816843424603" />
+      </scope>
+      <scope id="1751004816843561803" at="41,0,45,0">
+        <var name="f" id="1751004816843424605" />
+      </scope>
+      <scope id="1751004816843561803" at="45,0,49,0">
+        <var name="outerVars" id="1751004816843561803" />
+      </scope>
+      <scope id="1751004816843561803" at="49,28,54,79">
+        <var name="f" id="1751004816843424605" />
+        <var name="i" id="1751004816843561803" />
+        <var name="j" id="1751004816843561803" />
+        <var name="x" id="1751004816843561804" />
+      </scope>
+      <scope id="1751004816843424603" at="27,0,33,0" />
+      <scope id="1751004816843561803" at="49,0,56,0" />
+      <unit id="1751004816843561803" at="39,0,63,0" name="sandboxModel.fixpoint$Function_1751004816843424603$Function_1751004816843561803" />
+      <unit id="1751004816843424603" at="18,0,67,0" name="sandboxModel.fixpoint$Function_1751004816843424603" />
+      <unit id="1751004816843423273" at="9,0,68,0" name="sandboxModel.fixpoint" />
+    </file>
+  </root>
+  <root nodeRef="r:19bf018c-b5e7-418d-8415-b23921421325(sandboxModel)/1751004816843565387">
+    <file name="minimalTypeTest.java">
+      <node id="1751004816843565387" at="12,42,13,33" concept="1" />
+      <node id="1751004816843565387" at="15,31,16,46" concept="5" />
+      <node id="1751004816843568058" at="19,0,20,0" concept="2" trace="myOuterVars" />
+      <node id="1751004816843568058" at="20,43,21,47" concept="1" />
+      <node id="1751004816843568058" at="23,57,24,47" concept="1" />
+      <node id="1751004816843568058" at="24,47,25,36" concept="1" />
+      <node id="1751004816843568058" at="27,26,28,16" concept="4" />
+      <node id="1751004816843568058" at="28,16,29,16" concept="4" />
+      <node id="1751004816843568060" at="29,16,30,46" concept="4" />
+      <node id="1751004816843568058" at="30,46,31,46" concept="5" />
+      <node id="1751004816843568058" at="33,33,34,15" concept="5" />
+      <node id="1751004816843568058" at="36,28,37,59" concept="5" />
+      <node id="1751004816843565387" at="10,0,12,0" concept="0" trace="minimalTypeTest#()V" />
+      <node id="1751004816843565387" at="12,0,15,0" concept="6" trace="main#([Ljava/lang/String;)V" />
+      <node id="1751004816843565387" at="15,0,18,0" concept="6" trace="eval#()Ljava/lang/Object;" />
+      <node id="1751004816843568058" at="20,0,23,0" concept="0" trace="Function_1751004816843568058#()V" />
+      <node id="1751004816843568058" at="33,0,36,0" concept="3" trace="getParamsCount#()I" />
+      <node id="1751004816843568058" at="36,0,39,0" concept="3" trace="copy#()Ljetbrains/mps/samples/lambdaCalculus/runtime/Function;" />
+      <node id="1751004816843568058" at="23,0,27,0" concept="0" trace="Function_1751004816843568058#(Ljava/util/List;)V" />
+      <node id="1751004816843568058" at="27,0,33,0" concept="3" trace="eval#()Ljava/lang/Object;" />
+      <scope id="1751004816843565387" at="10,28,10,28" />
+      <scope id="1751004816843565387" at="12,42,13,33" />
+      <scope id="1751004816843565387" at="15,31,16,46" />
+      <scope id="1751004816843568058" at="20,43,21,47" />
+      <scope id="1751004816843568058" at="33,33,34,15" />
+      <scope id="1751004816843568058" at="36,28,37,59" />
+      <scope id="1751004816843565387" at="10,0,12,0" />
+      <scope id="1751004816843568058" at="23,57,25,36" />
+      <scope id="1751004816843565387" at="12,0,15,0">
+        <var name="args" id="1751004816843565387" />
+      </scope>
+      <scope id="1751004816843565387" at="15,0,18,0" />
+      <scope id="1751004816843568058" at="20,0,23,0" />
+      <scope id="1751004816843568058" at="33,0,36,0" />
+      <scope id="1751004816843568058" at="36,0,39,0" />
+      <scope id="1751004816843568058" at="23,0,27,0">
+        <var name="outerVars" id="1751004816843568058" />
+      </scope>
+      <scope id="1751004816843568058" at="27,26,31,46">
+        <var name="i" id="1751004816843568058" />
+        <var name="j" id="1751004816843568058" />
+        <var name="x" id="1751004816843568060" />
+      </scope>
+      <scope id="1751004816843568058" at="27,0,33,0" />
+      <unit id="1751004816843568058" at="18,0,40,0" name="sandboxModel.minimalTypeTest$Function_1751004816843568058" />
+      <unit id="1751004816843565387" at="9,0,41,0" name="sandboxModel.minimalTypeTest" />
+    </file>
+  </root>
+  <root nodeRef="r:19bf018c-b5e7-418d-8415-b23921421325(sandboxModel)/1751004816843669401">
+    <file name="biggerTypeTest1.java">
+      <node id="1751004816843669401" at="12,42,13,33" concept="1" />
+      <node id="1751004816843669401" at="15,31,16,46" concept="5" />
+      <node id="1751004816843669402" at="19,0,20,0" concept="2" trace="myOuterVars" />
+      <node id="1751004816843669402" at="20,43,21,80" concept="1" />
+      <node id="1751004816843669402" at="23,57,24,80" concept="1" />
+      <node id="1751004816843669402" at="24,80,25,36" concept="1" />
+      <node id="1751004816843669402" at="27,26,28,16" concept="4" />
+      <node id="1751004816843669402" at="28,16,29,16" concept="4" />
+      <node id="1751004816843669403" at="29,16,30,46" concept="4" />
+      <node id="1751004816843897735" at="30,46,31,46" concept="4" />
+      <node id="1751004816843669402" at="31,46,32,77" concept="5" />
+      <node id="1751004816843669402" at="34,33,35,15" concept="5" />
+      <node id="1751004816843669402" at="37,28,38,59" concept="5" />
+      <node id="1751004816843669401" at="10,0,12,0" concept="0" trace="biggerTypeTest1#()V" />
+      <node id="1751004816843669401" at="12,0,15,0" concept="6" trace="main#([Ljava/lang/String;)V" />
+      <node id="1751004816843669401" at="15,0,18,0" concept="6" trace="eval#()Ljava/lang/Object;" />
+      <node id="1751004816843669402" at="20,0,23,0" concept="0" trace="Function_1751004816843669402#()V" />
+      <node id="1751004816843669402" at="34,0,37,0" concept="3" trace="getParamsCount#()I" />
+      <node id="1751004816843669402" at="37,0,40,0" concept="3" trace="copy#()Ljetbrains/mps/samples/lambdaCalculus/runtime/Function;" />
+      <node id="1751004816843669402" at="23,0,27,0" concept="0" trace="Function_1751004816843669402#(Ljava/util/List;)V" />
+      <node id="1751004816843669402" at="27,0,34,0" concept="3" trace="eval#()Ljava/lang/Object;" />
+      <scope id="1751004816843669401" at="10,28,10,28" />
+      <scope id="1751004816843669401" at="12,42,13,33" />
+      <scope id="1751004816843669401" at="15,31,16,46" />
+      <scope id="1751004816843669402" at="20,43,21,80" />
+      <scope id="1751004816843669402" at="34,33,35,15" />
+      <scope id="1751004816843669402" at="37,28,38,59" />
+      <scope id="1751004816843669401" at="10,0,12,0" />
+      <scope id="1751004816843669402" at="23,57,25,36" />
+      <scope id="1751004816843669401" at="12,0,15,0">
+        <var name="args" id="1751004816843669401" />
+      </scope>
+      <scope id="1751004816843669401" at="15,0,18,0" />
+      <scope id="1751004816843669402" at="20,0,23,0" />
+      <scope id="1751004816843669402" at="34,0,37,0" />
+      <scope id="1751004816843669402" at="37,0,40,0" />
+      <scope id="1751004816843669402" at="23,0,27,0">
+        <var name="outerVars" id="1751004816843669402" />
+      </scope>
+      <scope id="1751004816843669402" at="27,26,32,77">
+        <var name="i" id="1751004816843669402" />
+        <var name="j" id="1751004816843669402" />
+        <var name="x" id="1751004816843669403" />
+        <var name="y" id="1751004816843897735" />
+      </scope>
+      <scope id="1751004816843669402" at="27,0,34,0" />
+      <unit id="1751004816843669402" at="18,0,41,0" name="sandboxModel.biggerTypeTest1$Function_1751004816843669402" />
+      <unit id="1751004816843669401" at="9,0,42,0" name="sandboxModel.biggerTypeTest1" />
+    </file>
+  </root>
+  <root nodeRef="r:19bf018c-b5e7-418d-8415-b23921421325(sandboxModel)/1751004816844298779">
+    <file name="biggerTypeTest2.java">
+      <node id="1751004816844298779" at="12,42,13,33" concept="1" />
+      <node id="1751004816844298779" at="15,31,16,46" concept="5" />
+      <node id="1751004816844298780" at="19,0,20,0" concept="2" trace="myOuterVars" />
+      <node id="1751004816844298780" at="20,43,21,80" concept="1" />
+      <node id="1751004816844298780" at="23,57,24,80" concept="1" />
+      <node id="1751004816844298780" at="24,80,25,36" concept="1" />
+      <node id="1751004816844298780" at="27,26,28,16" concept="4" />
+      <node id="1751004816844298780" at="28,16,29,16" concept="4" />
+      <node id="1751004816844298781" at="29,16,30,46" concept="4" />
+      <node id="1751004816844299683" at="30,46,31,46" concept="4" />
+      <node id="1751004816844298780" at="31,46,32,77" concept="5" />
+      <node id="1751004816844298780" at="34,33,35,15" concept="5" />
+      <node id="1751004816844298780" at="37,28,38,59" concept="5" />
+      <node id="1751004816844298779" at="10,0,12,0" concept="0" trace="biggerTypeTest2#()V" />
+      <node id="1751004816844298779" at="12,0,15,0" concept="6" trace="main#([Ljava/lang/String;)V" />
+      <node id="1751004816844298779" at="15,0,18,0" concept="6" trace="eval#()Ljava/lang/Object;" />
+      <node id="1751004816844298780" at="20,0,23,0" concept="0" trace="Function_1751004816844298780#()V" />
+      <node id="1751004816844298780" at="34,0,37,0" concept="3" trace="getParamsCount#()I" />
+      <node id="1751004816844298780" at="37,0,40,0" concept="3" trace="copy#()Ljetbrains/mps/samples/lambdaCalculus/runtime/Function;" />
+      <node id="1751004816844298780" at="23,0,27,0" concept="0" trace="Function_1751004816844298780#(Ljava/util/List;)V" />
+      <node id="1751004816844298780" at="27,0,34,0" concept="3" trace="eval#()Ljava/lang/Object;" />
+      <scope id="1751004816844298779" at="10,28,10,28" />
+      <scope id="1751004816844298779" at="12,42,13,33" />
+      <scope id="1751004816844298779" at="15,31,16,46" />
+      <scope id="1751004816844298780" at="20,43,21,80" />
+      <scope id="1751004816844298780" at="34,33,35,15" />
+      <scope id="1751004816844298780" at="37,28,38,59" />
+      <scope id="1751004816844298779" at="10,0,12,0" />
+      <scope id="1751004816844298780" at="23,57,25,36" />
+      <scope id="1751004816844298779" at="12,0,15,0">
+        <var name="args" id="1751004816844298779" />
+      </scope>
+      <scope id="1751004816844298779" at="15,0,18,0" />
+      <scope id="1751004816844298780" at="20,0,23,0" />
+      <scope id="1751004816844298780" at="34,0,37,0" />
+      <scope id="1751004816844298780" at="37,0,40,0" />
+      <scope id="1751004816844298780" at="23,0,27,0">
+        <var name="outerVars" id="1751004816844298780" />
+      </scope>
+      <scope id="1751004816844298780" at="27,26,32,77">
+        <var name="i" id="1751004816844298780" />
+        <var name="j" id="1751004816844298780" />
+        <var name="x" id="1751004816844298781" />
+        <var name="y" id="1751004816844299683" />
+      </scope>
+      <scope id="1751004816844298780" at="27,0,34,0" />
+      <unit id="1751004816844298780" at="18,0,41,0" name="sandboxModel.biggerTypeTest2$Function_1751004816844298780" />
+      <unit id="1751004816844298779" at="9,0,42,0" name="sandboxModel.biggerTypeTest2" />
+    </file>
+  </root>
   <root nodeRef="r:19bf018c-b5e7-418d-8415-b23921421325(sandboxModel)/2167053794906818090">
     <file name="sim.java">
       <node id="2167053794906818090" at="12,42,13,33" concept="1" />
-      <node id="2167053794906818090" at="15,31,16,85" concept="5" />
+      <node id="2167053794906818090" at="15,31,16,81" concept="5" />
       <node id="2167053794906818092" at="19,0,20,0" concept="2" trace="myOuterVars" />
       <node id="2167053794906818092" at="20,43,21,34" concept="1" />
       <node id="2167053794906818092" at="23,57,24,34" concept="1" />
       <node id="2167053794906818092" at="24,34,25,36" concept="1" />
       <node id="2167053794906818092" at="27,26,28,16" concept="4" />
       <node id="2167053794906818092" at="28,16,29,16" concept="4" />
-      <node id="2167053794906818092" at="29,16,30,44" concept="4" />
+      <node id="2167053794906818093" at="29,16,30,44" concept="4" />
       <node id="2167053794906818092" at="30,44,31,19" concept="5" />
       <node id="2167053794906818092" at="33,33,34,15" concept="5" />
-      <node id="2167053794906818092" at="36,28,37,63" concept="5" />
+      <node id="2167053794906818092" at="36,28,37,59" concept="5" />
       <node id="2167053794906818091" at="40,61,41,95" concept="5" />
       <node id="2167053794906818090" at="10,0,12,0" concept="0" trace="sim#()V" />
       <node id="2167053794906818090" at="12,0,15,0" concept="6" trace="main#([Ljava/lang/String;)V" />
@@ -33,10 +281,10 @@
       <node id="2167053794906818092" at="27,0,33,0" concept="3" trace="eval#()Ljava/lang/Object;" />
       <scope id="2167053794906818090" at="10,16,10,16" />
       <scope id="2167053794906818090" at="12,42,13,33" />
-      <scope id="2167053794906818090" at="15,31,16,85" />
+      <scope id="2167053794906818090" at="15,31,16,81" />
       <scope id="2167053794906818092" at="20,43,21,34" />
       <scope id="2167053794906818092" at="33,33,34,15" />
-      <scope id="2167053794906818092" at="36,28,37,63" />
+      <scope id="2167053794906818092" at="36,28,37,59" />
       <scope id="2167053794906818091" at="40,61,41,95" />
       <scope id="2167053794906818090" at="10,0,12,0" />
       <scope id="2167053794906818092" at="23,57,25,36" />
@@ -56,7 +304,7 @@
       <scope id="2167053794906818092" at="27,26,31,19">
         <var name="i" id="2167053794906818092" />
         <var name="j" id="2167053794906818092" />
-        <var name="x" id="2167053794906818092" />
+        <var name="x" id="2167053794906818093" />
       </scope>
       <scope id="2167053794906818092" at="27,0,33,0" />
       <unit id="2167053794906818092" at="18,0,40,0" name="sandboxModel.sim$Function_2167053794906818092" />
@@ -82,7 +330,7 @@
       </scope>
       <scope id="5277476162361142416" at="12,0,15,0" />
       <scope id="5277476162361142445" at="15,0,18,0">
-        <var name="x" id="5277476162361142445" />
+        <var name="x" id="5277476162361142419" />
       </scope>
       <unit id="5277476162361142416" at="6,0,19,0" name="sandboxModel.test2" />
     </file>
@@ -115,24 +363,24 @@
       </scope>
       <scope id="816130369292750457" at="12,0,15,0" />
       <scope id="816130369292750664" at="15,0,18,0">
-        <var name="x" id="816130369292750664" />
-        <var name="y" id="816130369292750664" />
+        <var name="x" id="816130369292750460" />
+        <var name="y" id="816130369292750464" />
       </scope>
       <scope id="816130369292750468" at="18,0,21,0">
         <var name="sum" id="816130369292750468" />
-        <var name="x" id="816130369292750468" />
-        <var name="y" id="816130369292750468" />
+        <var name="x" id="816130369292750460" />
+        <var name="y" id="816130369292750464" />
       </scope>
       <scope id="816130369292750496" at="21,0,24,0">
         <var name="mult" id="816130369292750496" />
-        <var name="sum" id="816130369292750496" />
-        <var name="x" id="816130369292750496" />
-        <var name="y" id="816130369292750496" />
+        <var name="sum" id="816130369292750478" />
+        <var name="x" id="816130369292750460" />
+        <var name="y" id="816130369292750464" />
       </scope>
       <scope id="816130369292750539" at="24,0,27,0">
-        <var name="mult" id="816130369292750539" />
-        <var name="sum" id="816130369292750539" />
-        <var name="z" id="816130369292750539" />
+        <var name="mult" id="816130369292750499" />
+        <var name="sum" id="816130369292750478" />
+        <var name="z" id="816130369292750516" />
       </scope>
       <unit id="816130369292750457" at="6,0,28,0" name="sandboxModel.sumsq" />
     </file>
@@ -162,7 +410,7 @@
         <var name="q1" id="816130369292806253" />
       </scope>
       <scope id="816130369292806255" at="18,0,21,0">
-        <var name="q1" id="816130369292806255" />
+        <var name="q1" id="816130369292806261" />
         <var name="q2" id="816130369292806255" />
       </scope>
       <unit id="816130369292806252" at="6,0,22,0" name="sandboxModel.letlet" />

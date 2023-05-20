@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,9 @@
 package jetbrains.mps.lang.editor.cellProviders;
 
 import jetbrains.mps.editor.runtime.cells.AbstractCellAction;
+import jetbrains.mps.editor.runtime.descriptor.AbstractEditorBuilder;
+import jetbrains.mps.editor.runtime.descriptor.EditorBuilderEnvironment;
 import jetbrains.mps.editor.runtime.impl.cellActions.CellAction_DeleteSimple;
-import jetbrains.mps.editor.runtime.impl.cellActions.CellAction_DeleteSmart;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.AttributeOperations;
 import jetbrains.mps.nodeEditor.SNodeEditorUtil;
 import jetbrains.mps.nodeEditor.cellActions.CellAction_DeleteNode.DeleteDirection;
@@ -29,9 +30,11 @@ import jetbrains.mps.openapi.editor.cells.CellActionType;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.cells.EditorCell_Collection;
 import jetbrains.mps.smodel.action.NodeFactoryManager;
-import jetbrains.mps.util.annotation.ToRemove;
+import jetbrains.mps.smodel.language.ConceptRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.model.SNode;
 
@@ -41,51 +44,36 @@ import java.util.Iterator;
 /**
  * @author simon
  */
-public abstract class SingleRoleCellProvider {
+public abstract class SingleRoleCellProvider extends AbstractEditorBuilder implements EditorBuilderEnvironment {
 
   protected final SContainmentLink myContainmentLink;
-  protected final SNode myOwnerNode;
+
+  /**
+   * @deprecated since MPS 3.5 use {@link #getEditorContext()} method, this field will be removed in the next release
+   */
+  @Deprecated
   protected final EditorContext myEditorContext;
 
-  public SingleRoleCellProvider(final SNode ownerNode, final SContainmentLink containmentLink, EditorContext editorContext) {
-    myOwnerNode = ownerNode;
+  public SingleRoleCellProvider(final SContainmentLink containmentLink, EditorContext editorContext) {
+    super(editorContext);
     myContainmentLink = containmentLink;
     myEditorContext = editorContext;
   }
 
-  /**
-   * @deprecated use createChildCell(SNode)
-   */
-  @Deprecated
-  @ToRemove(version = 3.5)
-  protected EditorCell createChildCell(EditorContext editorContext, SNode child) {
-    final EditorCell editorCell = createChildCell_internal(editorContext, child);
-    if (isCompatibilityMode()) {
-      editorCell.setAction(CellActionType.DELETE, new CellAction_DeleteSmart(myOwnerNode, myContainmentLink, child));
-      editorCell.setAction(CellActionType.BACKSPACE, new CellAction_DeleteSmart(myOwnerNode, myContainmentLink, child));
-    }
-    return editorCell;
-  }
-
   protected EditorCell createChildCell(SNode child) {
-    return createChildCell(myEditorContext, child);
-  }
-
-  @ToRemove(version = 3.5)
-  protected boolean isCompatibilityMode() {
-    return true;
+    return createChildCell_internal(child);
   }
 
   @NotNull
-  private EditorCell createChildCell_internal(EditorContext editorContext, SNode child) {
-    return editorContext.getEditorComponent().getUpdater().getCurrentUpdateSession().updateChildNodeCell(child);
+  private EditorCell createChildCell_internal(SNode child) {
+    return getEditorContext().getEditorComponent().getUpdater().getCurrentUpdateSession().updateChildNodeCell(child);
   }
 
   public EditorCell createCell() {
     if (areAttributesEmpty()) {
       return createSingleCell();
     } else {
-      EditorCell_Collection resultCell = jetbrains.mps.nodeEditor.cells.EditorCell_Collection.createIndent2(myEditorContext, myOwnerNode);
+      EditorCell_Collection resultCell = jetbrains.mps.nodeEditor.cells.EditorCell_Collection.createIndent2(getEditorContext(), getNode());
       addInnerCells(resultCell);
       return resultCell;
     }
@@ -98,7 +86,7 @@ public abstract class SingleRoleCellProvider {
       if (node == realChild) {
         cell = createChildCell(node);
       } else {
-        cell = createChildCell_internal(myEditorContext, node);
+        cell = createChildCell_internal(node);
         cell.setAction(CellActionType.BACKSPACE, new CellAction_DeleteSimple(node, DeleteDirection.BACKWARD));
         cell.setAction(CellActionType.DELETE, new CellAction_DeleteSimple(node, DeleteDirection.FORWARD));
       }
@@ -111,7 +99,7 @@ public abstract class SingleRoleCellProvider {
 
   @Nullable
   private SNode getRealChild() {
-    Iterator<? extends SNode> childIterator = myOwnerNode.getChildren(myContainmentLink).iterator();
+    Iterator<? extends SNode> childIterator = getNode().getChildren(myContainmentLink).iterator();
     return childIterator.hasNext() ? childIterator.next() : null;
   }
 
@@ -125,36 +113,36 @@ public abstract class SingleRoleCellProvider {
   }
 
   private boolean areAttributesEmpty() {
-    return !AttributeOperations.getChildAttributes(myOwnerNode, myContainmentLink).iterator().hasNext();
+    return !AttributeOperations.getChildAttributes(getNode(), myContainmentLink).iterator().hasNext();
   }
 
   private EditorCell createEmptyCellCollection() {
-    if (isCompatibilityMode()) {
-      myEditorContext.getCellFactory().pushCellContext();
-      myEditorContext.getCellFactory().setNodeLocation(null);
-    }
-    try {
-      EditorCell_Collection collection = jetbrains.mps.nodeEditor.cells.EditorCell_Collection.createIndent2(myEditorContext, myOwnerNode);
-      collection.setSelectable(false);
-      collection.addEditorCell(createEmptyCell());
-      collection.setAction(CellActionType.INSERT, new CellAction_InsertInSingleRole());
-      collection.setAction(CellActionType.INSERT_BEFORE, new CellAction_InsertInSingleRole());
-      return collection;
-    } finally {
-      if (isCompatibilityMode()) {
-        myEditorContext.getCellFactory().popCellContext();
-      }
-    }
+    EditorCell_Collection collection = jetbrains.mps.nodeEditor.cells.EditorCell_Collection.createIndent2(getEditorContext(), getNode());
+    collection.setSelectable(false);
+    collection.addEditorCell(createEmptyCell());
+
+    collection.setAction(CellActionType.INSERT, new CellAction_InsertInSingleRole());
+    collection.setAction(CellActionType.INSERT_BEFORE, new CellAction_InsertInSingleRole());
+    return collection;
   }
 
   protected SNode createNodeToInsert() {
-    return NodeFactoryManager.createNode(myContainmentLink.getTargetConcept(), null, myOwnerNode, myOwnerNode.getModel());
+    SAbstractConcept targetConcept = getTargetConcept();
+    // FWIW, there's ModelConstraints.getDefaultConcreteConcept(), not null
+    SConcept defaultConcreteConcept = ConceptRegistry.getInstance().getConstraintsDescriptor(targetConcept).getDefaultConcreteConcept();
+    if (defaultConcreteConcept != null) {
+      targetConcept = defaultConcreteConcept;
+    }
+    return NodeFactoryManager.createNode(targetConcept, null, getNode(), getNode().getModel());
+  }
+
+  protected SAbstractConcept getTargetConcept(){
+    return myContainmentLink.getTargetConcept();
   }
 
   protected EditorCell createEmptyCell() {
-    EditorCell_Label result = myContainmentLink.isOptional() ?
-        new EditorCell_Constant(myEditorContext, myOwnerNode, "") :
-        new EditorCell_Error(myEditorContext, myOwnerNode, getNoTargetText());
+    EditorCell_Label result = myContainmentLink.isOptional() ? new EditorCell_Constant(getEditorContext(), getNode(), "") :
+                              new EditorCell_Error(getEditorContext(), getNode(), getNoTargetText());
     result.setDefaultText(getNoTargetText());
     result.setEditable(true);
     return result;
@@ -165,14 +153,14 @@ public abstract class SingleRoleCellProvider {
   }
 
   protected Iterable<SNode> getNodesToPresent() {
-    return AttributeOperations.getChildNodesAndAttributes(myOwnerNode, myContainmentLink);
+    return AttributeOperations.getChildNodesAndAttributes(getNode(), myContainmentLink);
   }
 
   private class CellAction_InsertInSingleRole extends AbstractCellAction {
     @Override
     public void execute(EditorContext context) {
       final SNode nodeToInsert = createNode();
-      SNodeEditorUtil.setSingleChild(myOwnerNode, myContainmentLink, nodeToInsert);
+      SNodeEditorUtil.setSingleChild(getNode(), myContainmentLink, nodeToInsert);
     }
 
     private SNode createNode() {

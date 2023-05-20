@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="1o94dr6yhqsa3rnj022hlck987s2ath" />
+<product version="3" modelHash="-9nl9vcmaqb0pogtfrmmkj051nrqfkp">
+  <files names="DummyRunConfigurationsStateManager.java:RunConfigurationsStateManager.java" />
+</product>
 

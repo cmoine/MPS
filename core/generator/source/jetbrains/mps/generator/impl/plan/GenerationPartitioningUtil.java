@@ -15,16 +15,15 @@
  */
 package jetbrains.mps.generator.impl.plan;
 
+import jetbrains.mps.generator.impl.MapCfgGroups;
+import jetbrains.mps.generator.impl.MapCfgGroups.ByModel;
 import jetbrains.mps.generator.runtime.TemplateMappingConfiguration;
-import jetbrains.mps.generator.runtime.TemplateModel;
 import jetbrains.mps.util.Pair;
-import jetbrains.mps.util.containers.MultiMap;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -33,32 +32,19 @@ import java.util.List;
  */
 public class GenerationPartitioningUtil {
   public static List<Pair<String, TemplateMappingConfiguration>> toStrings(Collection<TemplateMappingConfiguration> mappings) {
-    List<Pair<String, TemplateMappingConfiguration>> strings = new ArrayList<Pair<String, TemplateMappingConfiguration>>();
+    List<Pair<String, TemplateMappingConfiguration>> strings = new ArrayList<>();
 
-    // consolidate mappings
-    MultiMap<TemplateModel, TemplateMappingConfiguration> mcByModel = new MultiMap<TemplateModel, TemplateMappingConfiguration>();
-    for (TemplateMappingConfiguration mappingConfig : mappings) {
-      mcByModel.putValue(mappingConfig.getModel(), mappingConfig);
-    }
-    // output
-    for (TemplateModel model : mcByModel.keySet()) {
-      HashSet<TemplateMappingConfiguration> all = new HashSet<TemplateMappingConfiguration>(model.getConfigurations());
-      HashSet<TemplateMappingConfiguration> seen = new HashSet<TemplateMappingConfiguration>(mcByModel.get(model));
-      if (all.equals(seen)) {
-        strings.add(new Pair<String, TemplateMappingConfiguration>(model.getLongName() + ".*", seen.iterator().next()));
+    for (ByModel g : new MapCfgGroups(mappings).groupByModel()) {
+      if (g.includesAll()) {
+        // as long as we start with set of MCs, it's impossible to get group with no MCs in it, findAny() is fine.
+        strings.add(new Pair<>(g.getKey().getLongName() + ".*", g.getElements().findAny().get()));
       } else {
-        for (TemplateMappingConfiguration mappingConfig : seen) {
-          strings.add(new Pair<String, TemplateMappingConfiguration>(model.getLongName() + "." + mappingConfig.getName(), mappingConfig));
-        }
+        String tmName = g.getKey().getLongName() + ".";
+        g.getElements().map(mc -> new Pair<>(tmName + mc.getName(), mc)).forEach(strings::add);
       }
     }
 
-    Collections.sort(strings, new Comparator<Pair<String, TemplateMappingConfiguration>>() {
-      @Override
-      public int compare(Pair<String, TemplateMappingConfiguration> o1, Pair<String, TemplateMappingConfiguration> o2) {
-        return o1.o1.compareTo(o2.o1);
-      }
-    });
+    Collections.sort(strings, Comparator.comparing(Pair.first()));
     return strings;
   }
 }

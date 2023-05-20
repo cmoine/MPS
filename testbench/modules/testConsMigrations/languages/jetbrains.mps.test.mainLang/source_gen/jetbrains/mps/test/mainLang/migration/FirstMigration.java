@@ -10,8 +10,6 @@ import jetbrains.mps.lang.migration.runtime.base.MigrationScriptReference;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import java.io.File;
 import jetbrains.mps.project.AbstractModule;
-import jetbrains.mps.smodel.ModuleRepositoryFacade;
-import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
 
 public class FirstMigration extends MigrationScriptBase {
   public String getCaption() {
@@ -22,21 +20,24 @@ public class FirstMigration extends MigrationScriptBase {
     return false;
   }
   public SNode execute(final SModule m) {
+    doExecute(m);
+    return null;
+  }
+  public void doExecute(final SModule m) {
     try {
-      firstFile().createNewFile();
+      firstFile(m).createNewFile();
     } catch (IOException e) {
     }
-    return null;
   }
   public MigrationScriptReference getDescriptor() {
     return new MigrationScriptReference(MetaAdapterFactory.getLanguage(0xca03d2f0cb014ae7L, 0xb688d32e45bbfcc1L, "jetbrains.mps.test.mainLang"), 0);
   }
 
 
-  public static File firstFile() {
-    return new File(FirstMigration.projectHomePath(), "first-migration.txt");
+  public static File firstFile(SModule m) {
+    return new File(projectHomePath(m), "first-migration.txt");
   }
-  public static String projectHomePath() {
-    return ((AbstractModule) ModuleRepositoryFacade.getInstance().getModule(PersistenceFacade.getInstance().createModuleReference("ca03d2f0-cb01-4ae7-b688-d32e45bbfcc1(jetbrains.mps.test.mainLang)"))).getModuleSourceDir().getParent().getParent().getPath();
+  public static String projectHomePath(SModule m) {
+    return ((AbstractModule) m).getModuleSourceDir().getParent().getParent().getParent().getPath();
   }
 }

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="5vyrg7ei6nclj5u4w01s2l6o3zl3sls" />
+<product version="3" modelHash="69a5toi7i2p43qki32o7bn02u14vui9">
+  <files names="MPSDebugRunner.java" />
+</product>
 

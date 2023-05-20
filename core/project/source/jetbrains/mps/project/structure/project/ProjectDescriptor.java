@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,24 +15,21 @@
  */
 package jetbrains.mps.project.structure.project;
 
-import org.apache.log4j.LogManager;
+import jetbrains.mps.logging.Logger;
+import jetbrains.mps.vfs.IFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
- * Represents a persisted project state
- * TODO make immutable
+ * Represents set of project modules to address project state persistence
  */
 public final class ProjectDescriptor {
   private final String myName;
-  private final Map<String, String> myPath2VFolderMap = new HashMap<>();
+  private final List<ModulePath> myPaths = new ArrayList<>();
 
   public ProjectDescriptor(@Nullable String name) {
     myName = name;
@@ -44,35 +41,41 @@ public final class ProjectDescriptor {
   }
 
   public List<ModulePath> getModulePaths() {
-    List<ModulePath> result = new ArrayList<>();
-    myPath2VFolderMap.entrySet().forEach((entry) -> result.add(new ModulePath(entry.getKey(), entry.getValue())));
-    return Collections.unmodifiableList(result);
-  }
-
-  public boolean contains(@NotNull ModulePath path) {
-    return myPath2VFolderMap.containsKey(path.getPath());
+    return Collections.unmodifiableList(myPaths);
   }
 
   private static boolean isEmpty(String s) {
-    return s == null || s.equals("");
+    return s == null || s.isEmpty();
   }
 
-  @Nullable
-  public String addModulePath(@NotNull ModulePath path) {
-    if (myPath2VFolderMap.containsKey(path.getPath()) && isEmpty(path.getVirtualFolder())) {
-      LogManager.getLogger(ProjectDescriptor.class).warn("Not adding module path with an empty virtual folder; already have one");
-      return null;
-    } else {
-      return myPath2VFolderMap.put(path.getPath(), path.getVirtualFolder());
+  public void addModulePath(@NotNull ModulePath path) {
+    final IFile candidate = path.getFile();
+    if (myPaths.stream().map(ModulePath::getFile).anyMatch(candidate::equals)) {
+      if (isEmpty(path.getVirtualFolder())) {
+        // I don't completely understand the reason for this warning, and what scenario may cause it.
+        Logger.getLogger(ProjectDescriptor.class).warning("Not adding module path with an empty virtual folder; already have one: " + candidate);
+      }
+      // FIXME Bad smell. We used to get here when project started, and existing ProjectDescriptor serves as an input to populate Project (through ModuleLoader),
+      //    which, in turn, in addModule() adds the path to the descriptor again. Shall rather tell 'load' from 'augment' scenario.
+      //    However, with updated PD scenario, might not be true any more.
+      return;
     }
+    myPaths.add(path);
   }
 
-  @Nullable
-  public String removeModulePath(@NotNull ModulePath path) {
-    return myPath2VFolderMap.remove(path.getPath());
+  public void removeModulePath(@NotNull ModulePath path) {
+    myPaths.remove(path);
+  }
+
+  // unlikely any possible use, PD is 'transient' now and there's no need to maintain its
+  // state/module ordering
+  public void replacePath(@NotNull ModulePath modulePath, @NotNull ModulePath newPath) {
+    int i = myPaths.indexOf(modulePath);
+    assert i != -1;
+    myPaths.set(i, newPath);
   }
 
   public String toString() {
-    return String.format("%s:%d modules", myName, myPath2VFolderMap.size());
+    return String.format("%s:%d modules", myName, myPaths.size());
   }
 }

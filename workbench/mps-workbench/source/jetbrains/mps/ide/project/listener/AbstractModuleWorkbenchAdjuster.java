@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,27 +15,33 @@
  */
 package jetbrains.mps.ide.project.listener;
 
-import com.intellij.openapi.components.ApplicationComponent;
+import com.intellij.openapi.Disposable;
+import jetbrains.mps.ide.MPSCoreComponents;
 import jetbrains.mps.project.ModelsAutoImportsManager;
-import org.jetbrains.annotations.NotNull;
 
 /**
- * Evgeny Gryaznov, Aug 26, 2010
+ * App component to contribute to one of MPS CoreComponents.
+ * Initially this class was responsible for workbench-related (hierarchy view) adjustments, over the time
+ * got new responsibilities, unrelated to UI or even IDEA. Although I see no reason why TestsModelAutoImports
+ * would be different from other AutoImportsContributor registered right in MPSCore,
+ * keep this class as an example of CC configuration from within IDEA code.
+ *
+ * AppComponent seems too much, but I don't know any better-suited mechanism. If you do, please step out
+ * and tell me.
  */
-public class AbstractModuleWorkbenchAdjuster implements ApplicationComponent {
-  @Override
-  @NotNull
-  public String getComponentName() {
-    // todo: why workbench adjuster?
-    return "Abstract Module Workbench Adjuster";
+public class AbstractModuleWorkbenchAdjuster implements Disposable {
+  private final MPSCoreComponents myCoreComponents;
+  private TestsModelAutoImports myContributor;
+
+  public AbstractModuleWorkbenchAdjuster() {
+    myCoreComponents = MPSCoreComponents.getInstance();
+    myContributor = new TestsModelAutoImports();
+    myCoreComponents.getPlatform().findComponent(ModelsAutoImportsManager.class).register(myContributor);
   }
 
   @Override
-  public void initComponent() {
-    ModelsAutoImportsManager.registerContributor(new TestsModelAutoImports());
-  }
-
-  @Override
-  public void disposeComponent() {
+  public void dispose() {
+    myCoreComponents.getPlatform().findComponent(ModelsAutoImportsManager.class).unregister(myContributor);
+    myContributor = null;
   }
 }

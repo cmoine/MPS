@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="9ddof39r7m92nltg0yuznx68fkn2lz6">
+  <files names="FeedbackChildIsNotDefined_Test.java:FeedbackIncorrectConceptInRole_Test.java:FeedbackMultipleChildrenInSingleRole_Test.java:FeedbackNoChildInObligatoryRole_Test.java:FeedbackNoRefInObligatoryRole_Test.java:FeedbackPropConstraintsAreBroken_Test.java:FeedbackPropIsNotDefined_Test.java:FeedbackRefIsNotDefined_Test.java:FeedbackRefOutOfScope_Test.java" />
+</product>
+

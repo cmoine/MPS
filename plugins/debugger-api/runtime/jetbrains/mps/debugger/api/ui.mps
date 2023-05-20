@@ -2,7 +2,7 @@
 <model ref="r:16e1d5b7-80ca-4570-9d1a-1cf2ce305e08(jetbrains.mps.debugger.api.ui)">
   <persistence version="9" />
   <languages>
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports>
     <import index="lt1n" ref="r:4a0301da-c964-420c-8e35-486843de9df5(jetbrains.mps.debug.api.evaluation)" />
@@ -96,17 +96,22 @@
       <concept id="1178549954367" name="jetbrains.mps.baseLanguage.structure.IVisible" flags="ng" index="1B3ioH">
         <child id="1178549979242" name="visibility" index="1B3o_S" />
       </concept>
-      <concept id="6329021646629104957" name="jetbrains.mps.baseLanguage.structure.TextCommentPart" flags="nn" index="3SKdUq">
-        <property id="6329021646629104958" name="text" index="3SKdUp" />
-      </concept>
       <concept id="6329021646629104954" name="jetbrains.mps.baseLanguage.structure.SingleLineComment" flags="nn" index="3SKdUt">
-        <child id="6329021646629175155" name="commentPart" index="3SKWNk" />
+        <child id="8356039341262087992" name="line" index="1aUNEU" />
       </concept>
       <concept id="1146644602865" name="jetbrains.mps.baseLanguage.structure.PublicVisibility" flags="nn" index="3Tm1VV" />
     </language>
     <language id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core">
       <concept id="1169194658468" name="jetbrains.mps.lang.core.structure.INamedConcept" flags="ng" index="TrEIO">
         <property id="1169194664001" name="name" index="TrG5h" />
+      </concept>
+    </language>
+    <language id="c7fb639f-be78-4307-89b0-b5959c3fa8c8" name="jetbrains.mps.lang.text">
+      <concept id="155656958578482948" name="jetbrains.mps.lang.text.structure.Word" flags="nn" index="3oM_SD">
+        <property id="155656958578482949" name="value" index="3oM_SC" />
+      </concept>
+      <concept id="2535923850359271782" name="jetbrains.mps.lang.text.structure.Line" flags="nn" index="1PaTwC">
+        <child id="2535923850359271783" name="elements" index="1PaTwD" />
       </concept>
     </language>
   </registry>
@@ -142,7 +147,7 @@
                 <ref role="3cqZAo" node="24OxoGwU3J4" resolve="event" />
               </node>
               <node concept="liA8E" id="24OxoGwU3Jc" role="2OqNvi">
-                <ref role="37wK5l" to="qkt:~AnActionEvent.getDataContext():com.intellij.openapi.actionSystem.DataContext" resolve="getDataContext" />
+                <ref role="37wK5l" to="qkt:~AnActionEvent.getDataContext()" resolve="getDataContext" />
               </node>
             </node>
           </node>
@@ -242,7 +247,7 @@
                 <ref role="3cqZAo" to="qkt:~CommonDataKeys.PROJECT" resolve="PROJECT" />
               </node>
               <node concept="liA8E" id="24OxoGwU3JU" role="2OqNvi">
-                <ref role="37wK5l" to="qkt:~DataKey.getData(com.intellij.openapi.actionSystem.DataContext):java.lang.Object" resolve="getData" />
+                <ref role="37wK5l" to="qkt:~DataKey.getData(com.intellij.openapi.actionSystem.DataContext)" resolve="getData" />
                 <node concept="37vLTw" id="2BHiRxgh9Xj" role="37wK5m">
                   <ref role="3cqZAo" node="24OxoGwU3JF" resolve="dataContext" />
                 </node>
@@ -270,15 +275,15 @@
             <node concept="3uibUv" id="24OxoGwU3JK" role="1tU5fm">
               <ref role="3uigEE" to="cjdg:~RunContentDescriptor" resolve="RunContentDescriptor" />
             </node>
-            <node concept="2OqwBi" id="24OxoGwU3JL" role="33vP2m">
-              <node concept="10M0yZ" id="24OxoGwU3JM" role="2Oq$k0">
-                <ref role="1PxDUh" to="cjdg:~RunContentManager" resolve="RunContentManager" />
-                <ref role="3cqZAo" to="cjdg:~RunContentManager.RUN_CONTENT_DESCRIPTOR" resolve="RUN_CONTENT_DESCRIPTOR" />
+            <node concept="2OqwBi" id="43U_o2NISyG" role="33vP2m">
+              <node concept="37vLTw" id="43U_o2NISpl" role="2Oq$k0">
+                <ref role="3cqZAo" node="24OxoGwU3JF" resolve="dataContext" />
               </node>
-              <node concept="liA8E" id="24OxoGwU3JN" role="2OqNvi">
-                <ref role="37wK5l" to="qkt:~DataKey.getData(com.intellij.openapi.actionSystem.DataContext):java.lang.Object" resolve="getData" />
-                <node concept="37vLTw" id="2BHiRxgmP7g" role="37wK5m">
-                  <ref role="3cqZAo" node="24OxoGwU3JF" resolve="dataContext" />
+              <node concept="liA8E" id="43U_o2NISHp" role="2OqNvi">
+                <ref role="37wK5l" to="qkt:~DataContext.getData(com.intellij.openapi.actionSystem.DataKey)" resolve="getData" />
+                <node concept="10M0yZ" id="43U_o2NISZI" role="37wK5m">
+                  <ref role="3cqZAo" to="qkt:~LangDataKeys.RUN_CONTENT_DESCRIPTOR" resolve="RUN_CONTENT_DESCRIPTOR" />
+                  <ref role="1PxDUh" to="qkt:~LangDataKeys" resolve="LangDataKeys" />
                 </node>
               </node>
             </node>
@@ -287,8 +292,13 @@
         <node concept="3clFbJ" id="5N5J$YBiK5X" role="3cqZAp">
           <node concept="3clFbS" id="5N5J$YBiK60" role="3clFbx">
             <node concept="3SKdUt" id="5N5J$YBiKru" role="3cqZAp">
-              <node concept="3SKdUq" id="5N5J$YBiKrD" role="3SKWNk">
-                <property role="3SKdUp" value="tool window" />
+              <node concept="1PaTwC" id="ATZLwXobBl" role="1aUNEU">
+                <node concept="3oM_SD" id="ATZLwXobBm" role="1PaTwD">
+                  <property role="3oM_SC" value="tool" />
+                </node>
+                <node concept="3oM_SD" id="ATZLwXobBn" role="1PaTwD">
+                  <property role="3oM_SC" value="window" />
+                </node>
               </node>
             </node>
             <node concept="3cpWs6" id="5N5J$YBiKaR" role="3cqZAp">
@@ -307,7 +317,7 @@
                       <ref role="3cqZAo" node="24OxoGwU3JJ" resolve="runContentDescriptor" />
                     </node>
                     <node concept="liA8E" id="5N5J$YBiDZ5" role="2OqNvi">
-                      <ref role="37wK5l" to="cjdg:~RunContentDescriptor.getProcessHandler():com.intellij.execution.process.ProcessHandler" resolve="getProcessHandler" />
+                      <ref role="37wK5l" to="cjdg:~RunContentDescriptor.getProcessHandler()" resolve="getProcessHandler" />
                     </node>
                   </node>
                 </node>
@@ -323,8 +333,13 @@
         </node>
         <node concept="3clFbH" id="5N5J$YBiKde" role="3cqZAp" />
         <node concept="3SKdUt" id="5N5J$YBiDYc" role="3cqZAp">
-          <node concept="3SKdUq" id="5N5J$YBiDYd" role="3SKWNk">
-            <property role="3SKdUp" value="main menu" />
+          <node concept="1PaTwC" id="ATZLwXobBo" role="1aUNEU">
+            <node concept="3oM_SD" id="ATZLwXobBp" role="1PaTwD">
+              <property role="3oM_SC" value="main" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXobBq" role="1PaTwD">
+              <property role="3oM_SC" value="menu" />
+            </node>
           </node>
         </node>
         <node concept="3cpWs8" id="5N5J$YBiDYl" role="3cqZAp">
@@ -337,17 +352,17 @@
               <node concept="2OqwBi" id="5N5J$YBiDYp" role="2Oq$k0">
                 <node concept="2YIFZM" id="5N5J$YBiDYq" role="2Oq$k0">
                   <ref role="1Pybhc" to="3v5a:~ExecutionManager" resolve="ExecutionManager" />
-                  <ref role="37wK5l" to="3v5a:~ExecutionManager.getInstance(com.intellij.openapi.project.Project):com.intellij.execution.ExecutionManager" resolve="getInstance" />
+                  <ref role="37wK5l" to="3v5a:~ExecutionManager.getInstance(com.intellij.openapi.project.Project)" resolve="getInstance" />
                   <node concept="37vLTw" id="5N5J$YBiDYr" role="37wK5m">
                     <ref role="3cqZAo" node="24OxoGwU3JQ" resolve="project" />
                   </node>
                 </node>
                 <node concept="liA8E" id="5N5J$YBiDYs" role="2OqNvi">
-                  <ref role="37wK5l" to="3v5a:~ExecutionManager.getContentManager():com.intellij.execution.ui.RunContentManager" resolve="getContentManager" />
+                  <ref role="37wK5l" to="3v5a:~ExecutionManager.getContentManager()" resolve="getContentManager" />
                 </node>
               </node>
               <node concept="liA8E" id="5N5J$YBiDYt" role="2OqNvi">
-                <ref role="37wK5l" to="cjdg:~RunContentManager.getSelectedContent():com.intellij.execution.ui.RunContentDescriptor" resolve="getSelectedContent" />
+                <ref role="37wK5l" to="cjdg:~RunContentManager.getSelectedContent()" resolve="getSelectedContent" />
               </node>
             </node>
           </node>
@@ -361,13 +376,83 @@
           </node>
           <node concept="3clFbS" id="5N5J$YBiDYy" role="3clFbx">
             <node concept="3SKdUt" id="5N5J$YBiDYz" role="3cqZAp">
-              <node concept="3SKdUq" id="5N5J$YBiDY$" role="3SKWNk">
-                <property role="3SKdUp" value="when Debug is first started for the first time, the debug tool window is shown but not activated" />
+              <node concept="1PaTwC" id="ATZLwXobBr" role="1aUNEU">
+                <node concept="3oM_SD" id="ATZLwXobBs" role="1PaTwD">
+                  <property role="3oM_SC" value="when" />
+                </node>
+                <node concept="3oM_SD" id="ATZLwXobBt" role="1PaTwD">
+                  <property role="3oM_SC" value="Debug" />
+                </node>
+                <node concept="3oM_SD" id="ATZLwXobBu" role="1PaTwD">
+                  <property role="3oM_SC" value="is" />
+                </node>
+                <node concept="3oM_SD" id="ATZLwXobBv" role="1PaTwD">
+                  <property role="3oM_SC" value="first" />
+                </node>
+                <node concept="3oM_SD" id="ATZLwXobBw" role="1PaTwD">
+                  <property role="3oM_SC" value="started" />
+                </node>
+                <node concept="3oM_SD" id="ATZLwXobBx" role="1PaTwD">
+                  <property role="3oM_SC" value="for" />
+                </node>
+                <node concept="3oM_SD" id="ATZLwXobBy" role="1PaTwD">
+                  <property role="3oM_SC" value="the" />
+                </node>
+                <node concept="3oM_SD" id="ATZLwXobBz" role="1PaTwD">
+                  <property role="3oM_SC" value="first" />
+                </node>
+                <node concept="3oM_SD" id="ATZLwXobB$" role="1PaTwD">
+                  <property role="3oM_SC" value="time," />
+                </node>
+                <node concept="3oM_SD" id="ATZLwXobB_" role="1PaTwD">
+                  <property role="3oM_SC" value="the" />
+                </node>
+                <node concept="3oM_SD" id="ATZLwXobBA" role="1PaTwD">
+                  <property role="3oM_SC" value="debug" />
+                </node>
+                <node concept="3oM_SD" id="ATZLwXobBB" role="1PaTwD">
+                  <property role="3oM_SC" value="tool" />
+                </node>
+                <node concept="3oM_SD" id="ATZLwXobBC" role="1PaTwD">
+                  <property role="3oM_SC" value="window" />
+                </node>
+                <node concept="3oM_SD" id="ATZLwXobBD" role="1PaTwD">
+                  <property role="3oM_SC" value="is" />
+                </node>
+                <node concept="3oM_SD" id="ATZLwXobBE" role="1PaTwD">
+                  <property role="3oM_SC" value="shown" />
+                </node>
+                <node concept="3oM_SD" id="ATZLwXobBF" role="1PaTwD">
+                  <property role="3oM_SC" value="but" />
+                </node>
+                <node concept="3oM_SD" id="ATZLwXobBG" role="1PaTwD">
+                  <property role="3oM_SC" value="not" />
+                </node>
+                <node concept="3oM_SD" id="ATZLwXobBH" role="1PaTwD">
+                  <property role="3oM_SC" value="activated" />
+                </node>
               </node>
             </node>
             <node concept="3SKdUt" id="5N5J$YBiDY_" role="3cqZAp">
-              <node concept="3SKdUq" id="5N5J$YBiDYA" role="3SKWNk">
-                <property role="3SKdUp" value="here we deal with this situation" />
+              <node concept="1PaTwC" id="ATZLwXobBI" role="1aUNEU">
+                <node concept="3oM_SD" id="ATZLwXobBJ" role="1PaTwD">
+                  <property role="3oM_SC" value="here" />
+                </node>
+                <node concept="3oM_SD" id="ATZLwXobBK" role="1PaTwD">
+                  <property role="3oM_SC" value="we" />
+                </node>
+                <node concept="3oM_SD" id="ATZLwXobBL" role="1PaTwD">
+                  <property role="3oM_SC" value="deal" />
+                </node>
+                <node concept="3oM_SD" id="ATZLwXobBM" role="1PaTwD">
+                  <property role="3oM_SC" value="with" />
+                </node>
+                <node concept="3oM_SD" id="ATZLwXobBN" role="1PaTwD">
+                  <property role="3oM_SC" value="this" />
+                </node>
+                <node concept="3oM_SD" id="ATZLwXobBO" role="1PaTwD">
+                  <property role="3oM_SC" value="situation" />
+                </node>
               </node>
             </node>
             <node concept="3clFbF" id="5N5J$YBiDYB" role="3cqZAp">
@@ -378,22 +463,18 @@
                 <node concept="2OqwBi" id="5N5J$YBiDYE" role="37vLTx">
                   <node concept="2OqwBi" id="5N5J$YBiDYF" role="2Oq$k0">
                     <node concept="2YIFZM" id="5N5J$YBiDYG" role="2Oq$k0">
-                      <ref role="37wK5l" to="3v5a:~ExecutionManager.getInstance(com.intellij.openapi.project.Project):com.intellij.execution.ExecutionManager" resolve="getInstance" />
+                      <ref role="37wK5l" to="3v5a:~ExecutionManager.getInstance(com.intellij.openapi.project.Project)" resolve="getInstance" />
                       <ref role="1Pybhc" to="3v5a:~ExecutionManager" resolve="ExecutionManager" />
                       <node concept="37vLTw" id="5N5J$YBiDYH" role="37wK5m">
                         <ref role="3cqZAo" node="24OxoGwU3JQ" resolve="project" />
                       </node>
                     </node>
                     <node concept="liA8E" id="5N5J$YBiDYI" role="2OqNvi">
-                      <ref role="37wK5l" to="3v5a:~ExecutionManager.getContentManager():com.intellij.execution.ui.RunContentManager" resolve="getContentManager" />
+                      <ref role="37wK5l" to="3v5a:~ExecutionManager.getContentManager()" resolve="getContentManager" />
                     </node>
                   </node>
                   <node concept="liA8E" id="5N5J$YBiDYJ" role="2OqNvi">
-                    <ref role="37wK5l" to="cjdg:~RunContentManager.getSelectedContent(com.intellij.execution.Executor):com.intellij.execution.ui.RunContentDescriptor" resolve="getSelectedContent" />
-                    <node concept="2YIFZM" id="5N5J$YBiDYK" role="37wK5m">
-                      <ref role="1Pybhc" to="9mrk:~DefaultDebugExecutor" resolve="DefaultDebugExecutor" />
-                      <ref role="37wK5l" to="9mrk:~DefaultDebugExecutor.getDebugExecutorInstance():com.intellij.execution.Executor" resolve="getDebugExecutorInstance" />
-                    </node>
+                    <ref role="37wK5l" to="cjdg:~RunContentManager.getSelectedContent()" resolve="getSelectedContent" />
                   </node>
                 </node>
               </node>
@@ -429,7 +510,7 @@
                   <ref role="3cqZAo" node="5N5J$YBiDYm" resolve="selectedContent" />
                 </node>
                 <node concept="liA8E" id="5N5J$YBiDYW" role="2OqNvi">
-                  <ref role="37wK5l" to="cjdg:~RunContentDescriptor.getProcessHandler():com.intellij.execution.process.ProcessHandler" resolve="getProcessHandler" />
+                  <ref role="37wK5l" to="cjdg:~RunContentDescriptor.getProcessHandler()" resolve="getProcessHandler" />
                 </node>
               </node>
             </node>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,12 @@
  */
 package jetbrains.mps.generator.template;
 
-import jetbrains.mps.generator.impl.ExportsSessionContext;
 import jetbrains.mps.generator.impl.GeneratorUtil;
+import jetbrains.mps.generator.impl.TemplateExecutionEnvironmentImpl;
 import jetbrains.mps.generator.runtime.TemplateContext;
-import jetbrains.mps.smodel.IOperationContext;
+import jetbrains.mps.generator.runtime.TemplateExecutionEnvironment;
 import jetbrains.mps.textgen.trace.TracingUtil;
-import jetbrains.mps.util.annotation.ToRemove;
+import jetbrains.mps.util.NameUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SModel;
@@ -28,7 +28,7 @@ import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 import org.jetbrains.mps.openapi.module.SRepository;
 
-import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -38,9 +38,15 @@ import java.util.List;
  * Jul 21, 2008
  */
 public class TemplateQueryContext {
-
+  // not null
   private final SNodeReference myTemplateNode;
+  // not null if myContext != null, may be null otherwise in case of test/legacy cons (legacy use gonna cease with 2021.1)
+  @Nullable
+  private final TemplateExecutionEnvironment myEnv;
+  @Nullable
   protected TemplateContext myContext;
+  // the only field != null when myContext && myEnv == null, for use by MC condition and MappingScript (latter in compiled templates prior to 2021.1 only)
+  @Nullable
   private final ITemplateGenerator myGenerator;
 
   /**
@@ -51,21 +57,31 @@ public class TemplateQueryContext {
     myTemplateNode = templateNode;
     myContext = null;
     myGenerator = generator;
+    myEnv = null;
   }
 
   protected TemplateQueryContext(@NotNull SNodeReference templateNode, @NotNull TemplateContext context) {
     myContext = context;
     myTemplateNode = templateNode;
+    myEnv = context.getEnvironment();
     myGenerator = context.getEnvironment().getGenerator();
   }
 
-  /**
-   * Cons for internal/tests use, generally subclasses shall not call it.
-   */
+  protected TemplateQueryContext(@NotNull SNodeReference templateNode, @NotNull TemplateExecutionEnvironment env) {
+    myContext = null;
+    myTemplateNode = templateNode;
+    myEnv = env;
+    myGenerator = myEnv.getGenerator();
+  }
+
+    /**
+     * Cons for internal/tests use, generally subclasses shall not call it.
+     */
   protected TemplateQueryContext() {
     myContext = null;
     myTemplateNode = null;
     myGenerator = null;
+    myEnv = null;
   }
 
   /**
@@ -88,10 +104,6 @@ public class TemplateQueryContext {
     return myGenerator.getInputModel();
   }
 
-  public boolean isDirty(SNode node) {
-    return myGenerator.isDirty(node);
-  }
-
   public SModel getOutputModel() {
     return myGenerator.getOutputModel();
   }
@@ -105,15 +117,6 @@ public class TemplateQueryContext {
    */
   public ITemplateGenerator getGenerator() {
     return myGenerator;
-  }
-
-  /**
-   * @deprecated replaced with more generic alternative, {@link #getOutputNodeByMappingLabel(String, SModel)}
-   */
-  @Deprecated
-  @ToRemove(version = 3.4)
-  public SNode getOutputNodeByMappingLabel(String label) {
-    return getOutputNodeByMappingLabel(label, null);
   }
 
   /**
@@ -131,14 +134,50 @@ public class TemplateQueryContext {
     return myGenerator.findOutputNode(inputModel, label);
   }
 
+  /*
+   * entry point for {@code genContext.get output by input and label}, single input node, single output
+   */
   public SNode getOutputNodeByInputNodeAndMappingLabel(SNode inputNode, String label) {
-    if (inputNode == null) return null;
+    if (inputNode == null || label == null) {
+      // FIXME if we enforce inputNode != null here, why does findOutputNodeByInputNodeAndMappingName() tolerates null inputNode then?
+      // XXX shall I warn about null label? It's an error, likely.
+      return null;
+    }
     if (!myGenerator.areMappingsAvailable()) {
       myGenerator.getLogger().error(getTemplateNodeRef(), "'get output by input and label' cannot be used here");
+    }
+    if (myContext != null) {
+      final SNode localRecord = ((TemplateExecutionEnvironmentImpl) myContext.getEnvironment()).findLocalOutputRecordSingle(inputNode, label);
+      if (localRecord != null) {
+        return localRecord;
+      }
+      // fall-through, try shared container
     }
     return myGenerator.findOutputNodeByInputNodeAndMappingName(inputNode, label);
   }
 
+  /*
+   * entry point for {@code genContext.get output by input and label}, two input nodes, single output
+   * @since 2020.3
+   */
+  public SNode getOutputForInputAndLabel(String label, Object key1, Object key2) {
+    if (!myGenerator.areMappingsAvailable()) {
+      myGenerator.getLogger().error(getTemplateNodeRef(), "'get output by input and label' cannot be used here");
+    }
+    if (myEnv != null) {
+      // FIXME it's not 'local' as long as we perform delegation to shared labels through generator instance there
+      final SNode localRecord = ((TemplateExecutionEnvironmentImpl) myEnv).findOutputRecordSingle(label, key1, key2);
+      if (localRecord != null) {
+        return localRecord;
+      }
+      // fall-through, try shared container
+    }
+    return null; // XXX shared composite labels are accessed through TEEI now (unlike getOutputNodeByInputNodeAndMappingLabel)
+  }
+
+  /*
+   * entry point for {@code genContext.get all output by input and label}, single input, all known output nodes
+   */
   public List<SNode> getAllOutputNodesByInputNodeAndMappingLabel(SNode inputNode, String label) {
     if (inputNode == null) return null;
     if (!myGenerator.areMappingsAvailable()) {
@@ -147,11 +186,32 @@ public class TemplateQueryContext {
     return myGenerator.findAllOutputNodesByInputNodeAndMappingName(inputNode, label);
   }
 
+  /*
+   * entry point for {@code genContext.get all output by input and label}, two input nodes, all known output nodes
+   */
+  public List<SNode> getOutputListForInputAndLabel(String label, Object key1, Object key2) {
+    if (!myGenerator.areMappingsAvailable()) {
+      myGenerator.getLogger().error(getTemplateNodeRef(), "'get output by input and label' cannot be used here");
+    }
+    if (myContext != null) {
+      return ((TemplateExecutionEnvironmentImpl) myContext.getEnvironment()).findOutputRecordList(label, key1, key2);
+    }
+    // multi-keyed LMs are part of regular transformation sequence, do not account for their use in MC condition or a script
+    // Once I make TQC to use TEE, this won't make any difference
+    return Collections.emptyList();
+  }
+
   public void registerMappingLabel(SNode inputNode, String mappingName, SNode outputNode) {
     // technically, we could do myGenerator.isStrict() && myGenerator.areMappingsAvailable() -> fail "no more labels once transformation is over"
     // but this would expose knowledge that areMappingsAvailable is meaningful only in strict mode.
     // Since we do not restrict registration of mapping labels e.g. in TEEImpl, I decided not to keep a check here
-    myGenerator.registerMappingLabel(inputNode, mappingName, outputNode);
+    if (myEnv != null) {
+      myEnv.registerLabel(inputNode, outputNode, mappingName);
+    } else {
+      // with Scripts using TQC initialized with TEE (since 21.1) and they are primary clients of this operation,
+      // the only scenario we get here is compiled templates from 20.3 or earlier.
+      throw new IllegalStateException("ML registration is not possible here");
+    }
   }
 
   public SNode getCopiedOutputNodeForInputNode(SNode inputNode) {
@@ -173,15 +233,32 @@ public class TemplateQueryContext {
     return result != null ? result : node;
   }
 
+  /**
+   *
+   * @param baseName prefix
+   * @param contextNode optional extra context node. Contributes (if a named node) a name fragment to further distinguish names, holds used names
+   *                    (IOW, defines name visibility context). If no {@code contextNode} is specified, scope is global.
+   * @return value {@code baseName}[_{@code hash(contextNode)}][_{@code hash(getInputNode())}][_{@code counter}]
+   */
   public String createUniqueName(String baseName, SNode contextNode) {
     return myGenerator.getGeneratorSessionContext().createUniqueName(baseName, contextNode, getInputNode());
   }
 
-  @Deprecated
-  @ToRemove(version = 3.4)
-  public IOperationContext getInvocationContext() {
-    // according to doc: Operation context associated with module - owner of the original input model
-    throw new UnsupportedOperationException("IOperationContext has been deprecated for years and scheduled for removal. Do not use 'genContext.invocation context' aka TemplateQueryContext.getInvocationContext()");
+  /**
+   *
+   * @param baseName prefix the name sequence would share
+   * @param contextNode optional context node to keep last used index for {@code baseName}.{@code null} means global (i.e. session) context.
+   * @param noIndexForFirst if {@code true}, the first value returned would be "baseName", second "baseName1", etc.
+   *                        When {@code false}, all names would get index, starting from 0.
+   * @return {@code baseName}[{@code counter}]
+   */
+  public String createIndexedName(String baseName, SNode contextNode, boolean noIndexForFirst) {
+    return myGenerator.getGeneratorSessionContext().createIndexedName(baseName, contextNode, noIndexForFirst);
+  }
+
+  public String createUniqueValidId(SNode node) {
+    String name = node.getName();
+    return myGenerator.getGeneratorSessionContext().createIndexedName(NameUtil.toValidCamelIdentifier(name == null ? "_" : name), null, true);
   }
 
   // user objects
@@ -225,23 +302,6 @@ public class TemplateQueryContext {
     return myGenerator.getGeneratorSessionContext().getSessionObject(key);
   }
 
-
-  public SNode getOutputNodeProxy(SNode inputNode, String exportLabelName) {
-    if (inputNode == null) {
-      showErrorMessage(null, String.format("Attempt to find proxy for non-existent node. Label %s, model %s", exportLabelName, myGenerator.getInputModel().toString()));
-      return null;
-    }
-    final ExportsSessionContext exports = myGenerator.getGeneratorSessionContext().getExports();
-    final Collection<SNode> exportProxies = exports.find(exportLabelName, getInputModel(), inputNode);
-    if (exportProxies.isEmpty()) {
-      return null;
-    }
-    if (exportProxies.size() > 1) {
-      showErrorMessage(inputNode, String.format("There are %d known exports with label %s for input node %s", exportProxies.size(), exportLabelName, inputNode));
-    }
-    return exportProxies.iterator().next();
-  }
-
   public void showInformationMessage(SNode node, String message) {
     myGenerator.getLogger().info(node == null ? getTemplateNodeRef() : node.getReference(), message);
   }
@@ -256,20 +316,6 @@ public class TemplateQueryContext {
     SNodeReference rnr = getRuleNode();
     myGenerator.getLogger().error(rnr == null ? tn : rnr, message,
         GeneratorUtil.describeIfExists(inputNode, "input node"), GeneratorUtil.describeIfExists(tn, "template node"));
-  }
-
-  /**
-   * Node in template model most close to the query being evaluated. For macro nodes, however
-   * shall point to macro's parent node (genContext.templateNode op contract)
-   * @deprecated  doesn't make sense for generated templates. Switch to {@link #getTemplateReference()}
-   *
-   */
-  @Deprecated
-  @ToRemove(version = 3.4)
-  public SNode getTemplateNode() {
-    SNodeReference tnr = getTemplateNodeRef();
-    SRepository repo = myGenerator.getGeneratorSessionContext().getRepository();
-    return tnr == null ? null : tnr.resolve(repo);
   }
 
   /**

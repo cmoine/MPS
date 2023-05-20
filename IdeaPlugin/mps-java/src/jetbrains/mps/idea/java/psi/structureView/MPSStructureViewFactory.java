@@ -18,18 +18,14 @@ package jetbrains.mps.idea.java.psi.structureView;
 
 import com.intellij.ide.structureView.StructureView;
 import com.intellij.ide.structureView.StructureViewBuilder;
-import com.intellij.ide.structureView.StructureViewModel;
 import com.intellij.ide.structureView.newStructureView.StructureViewComponent;
 import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiFile;
 import jetbrains.mps.ide.editor.NodeStructureViewProvider;
-import jetbrains.mps.ide.java.actions.MemberContainerStructureModel;
+import jetbrains.mps.java.platform.actions.MemberContainerStructureModel;
 import jetbrains.mps.ide.project.ProjectHelper;
-import jetbrains.mps.internal.collections.runtime.MapSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.project.MPSProject;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactoryByName;
+import jetbrains.mps.smodel.SNodeUtil;
 import jetbrains.mps.nodefs.MPSNodeVirtualFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -46,8 +42,12 @@ public class MPSStructureViewFactory implements NodeStructureViewProvider {
   @Override
   public StructureViewBuilder getStructureViewBuilder(@NotNull MPSNodeVirtualFile file, @NotNull Project project) {
     SNode node = file.getNode();
-    SNode container = SNodeOperations.getNodeAncestor(node, MetaAdapterFactoryByName.getInterfaceConcept("jetbrains.mps.baseLanguage.structure.IMemberContainer"), true, false);
-    final MemberContainerStructureModel model = new MemberContainerStructureModel(container);
+    SNode container = SNodeOperations.getNodeAncestor(node, SNodeUtil.concept_IMemberContainer, true, false);
+    if (container == null) {
+      // not java-like, another language. not our business
+      return null;
+    }
+    final MemberContainerStructureModel model = new MemberContainerStructureModel(ProjectHelper.fromIdeaProject(project), container);
     return new StructureViewBuilder() {
       @NotNull
       @Override

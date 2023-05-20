@@ -15,7 +15,6 @@
  */
 package jetbrains.mps.openapi.editor.style;
 
-import jetbrains.mps.openapi.editor.cells.EditorCell;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
@@ -35,7 +34,7 @@ public interface Style {
   <T> void set(StyleAttribute<T> attribute, T value);
   <T> void set(StyleAttribute<T> attribute, int priority, T value);
 
-  public static class IntPair<T> {
+  class IntPair<T> {
     public int index;
     public T value;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 package jetbrains.mps.smodel;
 
 import jetbrains.mps.extapi.model.EditableSModelBase;
-import jetbrains.mps.smodel.loading.ModelLoadResult;
 import jetbrains.mps.smodel.loading.ModelLoadingState;
 import jetbrains.mps.smodel.loading.PartialModelDataSupport;
 import org.jetbrains.annotations.NotNull;
@@ -28,24 +27,23 @@ import org.jetbrains.mps.openapi.persistence.DataSource;
  * evgeny, 6/6/13
  */
 public abstract class LazyEditableSModelBase extends EditableSModelBase {
-  private final PartialModelDataSupport<SModel> myModel;
+  private final PartialModelDataSupport<SModel> myLoadSupport;
 
   public LazyEditableSModelBase(@NotNull SModelReference modelReference, @NotNull DataSource source) {
     super(modelReference, source);
-    myModel = new PartialModelDataSupport<>(this, state -> {
-      // FIXME need a new loadSModel(state) that return proper ModelLoadResult, and deprecate the old one.
-      ModelLoadResult result = loadSModel(state);
-      if (result.getModel() != null) {
-        result.getModel().setModelDescriptor(LazyEditableSModelBase.this);
+    myLoadSupport = new PartialModelDataSupport<>(this, state -> {
+      ModelLoadResult<SModel> result = loadSModel(state);
+      if (result.getModelData() != null) {
+        result.getModelData().setModelDescriptor(LazyEditableSModelBase.this, getNodeEventDispatch());
       }
-      return new jetbrains.mps.smodel.ModelLoadResult<>(result.getModel(), result.getState());
+      return result;
     });
   }
 
   @Override
-  public final SModel getSModelInternal() {
+  public final SModel getSModel() {
     ModelLoadingState oldState = getLoadingState();
-    SModel res = myModel.getModel(ModelLoadingState.INTERFACE_LOADED);
+    SModel res = myLoadSupport.getModel(ModelLoadingState.INTERFACE_LOADED);
     if (res == null) {
       return null; // this is when we are in recursion
     }
@@ -55,44 +53,66 @@ public abstract class LazyEditableSModelBase extends EditableSModelBase {
 
   @Override
   public final void load() {
-    myModel.getModel(ModelLoadingState.FULLY_LOADED);
+    ModelLoadingState oldState = getLoadingState();
+    myLoadSupport.getModel(ModelLoadingState.FULLY_LOADED);
+    // e.g. could transition from INTERFACE_LOADED to FULLY_LOADED
+    fireModelStateChanged(oldState, getLoadingState());
   }
 
   @Override
   protected final SModel getCurrentModelInternal() {
-    return myModel.getModel(null);
+    // getModel(null) is not expected to change loading state, hence no fireModeStateChanged here
+    return myLoadSupport.getModel(null);
   }
 
 
   @Override
   protected void doUnload() {
     super.doUnload();
-    myModel.replaceWith(null, ModelLoadingState.NOT_LOADED);
+    myLoadSupport.replaceWith(null, ModelLoadingState.NOT_LOADED);
   }
 
   /**
    * loads model from the source, w/o changing state of SModelDescriptor
    */
-  protected abstract ModelLoadResult loadSModel(ModelLoadingState state);
+  protected abstract ModelLoadResult<SModel> loadSModel(ModelLoadingState state);
 
-  protected void replaceModel(final SModel newModel, final ModelLoadingState state) {
-    if (newModel == getCurrentModelInternal()) {
+  void replaceModel(final SModel newModel, final ModelLoadingState state) {
+    final boolean needToChangeReference = needToChangeReference(getReference(), newModel.getReference());
+    if (newModel == getCurrentModelInternal() && !needToChangeReference) {
       return;
     }
     setChanged(false);
     final SModel oldModel = getCurrentModelInternal();
-    myModel.replaceWith(newModel, state);
+    myLoadSupport.replaceWith(newModel, state);
     // newModel to get modelDescriptor along with event firing
     replaceModelAndFireEvent(oldModel, newModel);
+
+    // fixme AP since we have reference separately from the model data; will go away once the name as well as id is stored inside model data
+    if (needToChangeReference) {
+      changeModelReference(newModel.getReference());
+    }
+  }
+
+  @Deprecated(since = "0", forRemoval = true)
+  private static boolean needToChangeReference(SModelReference oldRef, SModelReference newRef) {
+    return !(oldRef.getModelId().equals(newRef.getModelId()) && oldRef.getName().equals(newRef.getName()));
   }
 
   @Override
   protected void reloadContents() {
     if (getLoadingState() == ModelLoadingState.NOT_LOADED) {
+      // even though model is not loaded, it might be an invalid model that failed to load due to some error inside a file.
+      // once file is changed, we get reloadContents() through file listener, and need to clear old InvalidSModel instance of model data.
+      final SModel modelData = myLoadSupport.getModel(null);
+      if (modelData != null) {
+        myLoadSupport.replaceWith(null, ModelLoadingState.NOT_LOADED);
+        modelData.dispose();
+      }
       return;
     }
 
-    ModelLoadResult result = loadSModel(getLoadingState());
-    replaceModel(result.getModel(), result.getState());
+    ModelLoadResult<SModel> result = loadSModel(getLoadingState());
+    replaceModel(result.getModelData(), result.getState());
   }
 }

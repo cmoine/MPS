@@ -25,12 +25,7 @@ import com.intellij.util.AlarmFactory;
  * and the period starts again.
  */
 public abstract class DelayedRunnable {
-  private final Runnable myRunnable = new Runnable() {
-    @Override
-    public void run() {
-      runEventually();
-    }
-  };
+  private final Runnable myRunnable = () -> runEventually();
   private final Alarm myAlarm;
 
   public DelayedRunnable() {

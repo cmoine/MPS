@@ -2,10 +2,10 @@
 <model ref="r:0569381c-9c19-431d-a804-4df8bcdb4152(jetbrains.mps.debugger.api.lang.migration)">
   <persistence version="9" />
   <languages>
-    <use id="90746344-04fd-4286-97d5-b46ae6a81709" name="jetbrains.mps.lang.migration" version="0" />
-    <use id="28f9e497-3b42-4291-aeba-0a1039153ab1" name="jetbrains.mps.lang.plugin" version="2" />
-    <use id="d4615e3b-d671-4ba9-af01-2b78369b0ba7" name="jetbrains.mps.lang.pattern" version="1" />
-    <use id="1a8554c4-eb84-43ba-8c34-6f0d90c6e75a" name="jetbrains.mps.lang.smodel.query" version="2" />
+    <use id="90746344-04fd-4286-97d5-b46ae6a81709" name="jetbrains.mps.lang.migration" version="2" />
+    <use id="28f9e497-3b42-4291-aeba-0a1039153ab1" name="jetbrains.mps.lang.plugin" version="5" />
+    <use id="d4615e3b-d671-4ba9-af01-2b78369b0ba7" name="jetbrains.mps.lang.pattern" version="2" />
+    <use id="1a8554c4-eb84-43ba-8c34-6f0d90c6e75a" name="jetbrains.mps.lang.smodel.query" version="3" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -24,7 +24,7 @@
         <child id="1068498886295" name="lValue" index="37vLTJ" />
       </concept>
       <concept id="4836112446988635817" name="jetbrains.mps.baseLanguage.structure.UndefinedType" flags="in" index="2jxLKc" />
-      <concept id="1465982738277781862" name="jetbrains.mps.baseLanguage.structure.PlaceholderMember" flags="ng" index="2tJIrI" />
+      <concept id="1465982738277781862" name="jetbrains.mps.baseLanguage.structure.PlaceholderMember" flags="nn" index="2tJIrI" />
       <concept id="1197027756228" name="jetbrains.mps.baseLanguage.structure.DotExpression" flags="nn" index="2OqwBi">
         <child id="1197027771414" name="operand" index="2Oq$k0" />
         <child id="1197027833540" name="operation" index="2OqNvi" />
@@ -135,8 +135,8 @@
         <reference id="1177026940964" name="conceptDeclaration" index="cht4Q" />
       </concept>
       <concept id="2396822768958367367" name="jetbrains.mps.lang.smodel.structure.AbstractTypeCastExpression" flags="nn" index="$5XWr">
-        <reference id="6733348108486823428" name="concept" index="1m5ApE" />
         <child id="6733348108486823193" name="leftExpression" index="1m5AlR" />
+        <child id="3906496115198199033" name="conceptArgument" index="3oSUPX" />
       </concept>
       <concept id="8866923313515890008" name="jetbrains.mps.lang.smodel.structure.AsNodeOperation" flags="nn" index="FGMqu" />
       <concept id="2644386474302386080" name="jetbrains.mps.lang.smodel.structure.PropertyIdRefExpression" flags="nn" index="355D3s">
@@ -388,12 +388,14 @@
                                 <node concept="2OqwBi" id="5zFeAub7jEj" role="3uHU7w">
                                   <node concept="2OqwBi" id="5zFeAub7jEk" role="2Oq$k0">
                                     <node concept="1PxgMI" id="5zFeAub7jEl" role="2Oq$k0">
-                                      <ref role="1m5ApE" to="tpee:hqOqwz4" resolve="DotExpression" />
                                       <node concept="2OqwBi" id="5zFeAub7jEm" role="1m5AlR">
                                         <node concept="37vLTw" id="5zFeAub7jEn" role="2Oq$k0">
                                           <ref role="3cqZAo" node="5zFeAub7jEy" resolve="it" />
                                         </node>
                                         <node concept="1mfA1w" id="5zFeAub7jEo" role="2OqNvi" />
+                                      </node>
+                                      <node concept="chp4Y" id="714IaVdGY$x" role="3oSUPX">
+                                        <ref role="cht4Q" to="tpee:hqOqwz4" resolve="DotExpression" />
                                       </node>
                                     </node>
                                     <node concept="3TrEf2" id="5zFeAub7jEp" role="2OqNvi">

@@ -21,9 +21,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * A type backed by java class.
@@ -86,7 +84,7 @@ public class SJavaCompoundTypeImpl implements SJavaCompoundType {
   }
 
   public static List<SJavaCompoundType> fromClasses(Class<?>... types) {
-    List<SJavaCompoundType> result = new ArrayList<SJavaCompoundType>();
+    List<SJavaCompoundType> result = new ArrayList<>();
     for (Class<?> type : types) {
       result.add(new SJavaCompoundTypeImpl(type));
     }

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-btafoz01rahjxx1iarhfniyq6oank2v" />
+<product version="3" modelHash="-av3ueijstdpsd0rypiwv5fy5tp4andd">
+  <files names="JavaDebugger.java:JavaNodePositionProvider.java" />
+</product>
 

@@ -1,83 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<components xmlns:xi="http://www.w3.org/2001/XInclude"
+<idea-plugin xmlns:xi="http://www.w3.org/2001/XInclude"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://www.w3.org/2001/XInclude
    http://www.w3.org/2001/XInclude.xsd">
 
-  <xi:include href="/META-INF/MPSCore.xml" xpointer="xpointer(/components/*)"/>
-  <xi:include href="/META-INF/MPSEditor.xml" xpointer="xpointer(/components/*)"/>
-  <xi:include href="/META-INF/MPSUI.xml" xpointer="xpointer(/components/*)"/>
-  <xi:include href="/META-INF/MPSWorkbench.xml" xpointer="xpointer(/components/*)"/>
+  <xi:include href="/META-INF/MPSCore.xml"/>
+  <xi:include href="/META-INF/MPSEditor.xml"/>
+  <xi:include href="/META-INF/MPSUI.xml"/>
+  <xi:include href="/META-INF/MPSWorkbench.xml"/>
 
   <application-components>
-    <component>
-      <interface-class>jetbrains.mps.ide.vfs.IdeaFSComponent</interface-class>
-      <implementation-class>jetbrains.mps.ide.vfs.WatchingIdeaFileSystem</implementation-class>
-    </component>
-    <component>
-      <interface-class>jetbrains.mps.smodel.ModelAccess</interface-class>
-      <implementation-class>jetbrains.mps.smodel.WorkbenchModelAccess</implementation-class>
-    </component>
-    <component>
-      <interface-class>jetbrains.mps.smodel.UndoHandler</interface-class>
-      <implementation-class>jetbrains.mps.ide.undo.WorkbenchUndoHandler</implementation-class>
-    </component>
-    <component>
-      <interface-class>jetbrains.mps.repository.IdeaPluginFacetComponent</interface-class>
-      <implementation-class>jetbrains.mps.ide.project.facets.IdeaPluginModuleFacetImplComponent</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.ide.MPSCoreComponents</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.ide.icons.GlobalIconManager</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.ide.persistence.PersistenceComponent</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.ide.generator.TransientSwapOwnerComponent</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.ide.platform.watching.FSChangesWatcher</implementation-class>
-    </component>
-    <component>
-      <interface-class>jetbrains.mps.ide.platform.watching.ReloadManager</interface-class>
-      <implementation-class>jetbrains.mps.ide.platform.watching.ReloadManagerComponent</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.ide.platform.watching.WatchedRoots</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.watching.WatchedRootsUpdater</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.watching.ModelFocusSynchronizer</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.ide.platform.watching.ModelCacheReloader</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.ide.refactoring.RefactoringAccessImpl</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.workbench.findusages.StubModelsIndexer</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.workbench.findusages.StubModelsFastFindSupport</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.workbench.MPSApplicationInfo</implementation-class>
-    </component>
-    <component>
-      <implementation-class>com.intellij.platform.PlatformProjectStarter</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.MessagesPoolClearer</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.library.AdditionalLibrariesManager</implementation-class>
-    </component>
     <component>
       <implementation-class>jetbrains.mps.smodel.ModelValidationSettings</implementation-class>
     </component>
@@ -85,21 +17,10 @@
       <implementation-class>jetbrains.mps.ide.navigation.NavigationSupportImpl</implementation-class>
     </component>
     <component>
-      <implementation-class>jetbrains.mps.workbench.languagesFs.MPSLanguagesVirtualFileSystem
-      </implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.workbench.editors.MPSLanguageEditorProvider</implementation-class>
-    </component>
-    <component>
-      <interface-class>jetbrains.mps.workbench.action.IRegistryManager</interface-class>
       <implementation-class>jetbrains.mps.plugins.applicationplugins.ApplicationPluginManager</implementation-class>
     </component>
     <component>
       <implementation-class>jetbrains.mps.plugins.PluginLoaderRegistry</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.classloading.WorkbenchClassloadingEDTDispatcher</implementation-class>
     </component>
     <component>
       <implementation-class>jetbrains.mps.ide.generator.GenerationSettings</implementation-class>
@@ -108,46 +29,24 @@
       <implementation-class>jetbrains.mps.ide.refactoring.RefactoringSettings</implementation-class>
     </component>
     <component>
-      <implementation-class>jetbrains.mps.ide.generator.index.IndexBasedModelDigest</implementation-class>
-    </component>
-    <component>
       <implementation-class>jetbrains.mps.ide.project.listener.AbstractModuleWorkbenchAdjuster</implementation-class>
     </component>
     <component>
-      <implementation-class>jetbrains.mps.ide.generator.GeneratorCacheComponent</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.ide.generator.PluginsTraceInfoResourceProvider</implementation-class>
-    </component>
-    <component>
       <implementation-class>jetbrains.mps.workbench.structureview.NodeStructureViewProviderImpl</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.diagnostic.MPSDialogAppender</implementation-class>
     </component>
   </application-components>
 
   <project-components>
     <component>
-      <implementation-class>jetbrains.mps.project.MPSProjectVersion</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.migration.global.ProjectMigrationProperties</implementation-class>
-    </component>
-    <component>
       <interface-class>jetbrains.mps.project.MPSProject</interface-class>
       <implementation-class>jetbrains.mps.project.StandaloneMPSProject</implementation-class>
     </component>
     <component>
-      <implementation-class>jetbrains.mps.ide.vfs.ProjectRootListenerComponent</implementation-class>
+      <implementation-class>jetbrains.mps.ide.vfs.ProjectStoreDirAddToVFSSnapshot</implementation-class>
     </component>
     <component>
       <interface-class>jetbrains.mps.generator.TransientModelsProvider</interface-class>
       <implementation-class>jetbrains.mps.ide.generator.TransientModelsComponent</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.ide.findusages.view.optionseditor.DefaultSearchOptionsComponent
-      </implementation-class>
     </component>
     <component>
       <implementation-class>jetbrains.mps.ide.classpath.ClassPathViewerTool</implementation-class>
@@ -159,57 +58,76 @@
       <implementation-class>jetbrains.mps.ide.bookmark.BookmarksTool</implementation-class>
     </component>
     <component>
-      <implementation-class>jetbrains.mps.ide.refactoring.RefactoringView</implementation-class>
-    </component>
-    <component>
       <implementation-class>jetbrains.mps.ide.hierarchy.BaseLanguageHierarchyViewTool</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.project.ProjectLibraryManager</implementation-class>
     </component>
     <component>
       <implementation-class>jetbrains.mps.ide.bookmark.BookmarkManager</implementation-class>
     </component>
     <component>
-      <implementation-class>jetbrains.mps.ide.bookmark.BookmarksUIComponent</implementation-class>
-    </component>
-    <component>
       <implementation-class>jetbrains.mps.ide.vfs.DirectoryIndexExcludeUpdater</implementation-class>
     </component>
 
-    <!-- typesystem -->
-    <component>
-      <implementation-class>jetbrains.mps.typesystem.uiActions.SupertypesViewTool</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.typesystem.uiActions.TypecheckerStateView</implementation-class>
-    </component>
     <component>
       <implementation-class>jetbrains.mps.plugins.projectplugins.ProjectPluginManager</implementation-class>
     </component>
+
     <component>
-      <implementation-class>jetbrains.mps.ide.script.plugin.migrationtool.MigrationScriptsTool
-      </implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.ide.findusages.caches.MPSIndexableFileSet</implementation-class>
-    </component>
-    <!-- language development workbench -->
-    <component>
-      <interface-class>jetbrains.mps.ide.make.StartupModuleMaker</interface-class>
-      <headless-implementation-class>jetbrains.mps.ide.make.DummyStartupModuleMaker</headless-implementation-class>
-      <implementation-class>jetbrains.mps.ide.make.StartupModuleMakerImpl</implementation-class>
+      <implementation-class>jetbrains.mps.vfs.tracking.ModelTracking</implementation-class>
     </component>
   </project-components>
 
   <extensions defaultExtensionNs="com.intellij">
+    <appStarter implementation="jetbrains.mps.tool.environment.MPSHeadlessPlatformStarter"/>
+
+    <!-- This is needed for JDK solution loading. Is better to be replaced by lazy loading. Also a possible solution is to load JDK solution with IO FS -->
+    <virtualFileSystem implementationClass="com.intellij.openapi.vfs.impl.jrt.JrtFileSystemImpl" key="jrt" physical="true"/>
+
     <projectConfigurable displayName="Project Settings" instance="jetbrains.mps.workbench.dialogs.project.properties.project.ProjectPropertiesPrefsPage" id="project.options.prefs.page" nonDefaultProject="true"/>
     <applicationConfigurable groupId="build" groupWeight="150" instance="jetbrains.mps.smodel.ModelValidationConfigurable" id="preferences.modelValidationSettings"/>
     <applicationConfigurable groupId="build" groupWeight="140" instance="jetbrains.mps.ide.generator.GenerationSettingsPreferencesPage" id="preferences.generationSettings"/>
+
+    <fileEditorProvider implementation="jetbrains.mps.workbench.editors.MPSLanguageEditorProvider"/>
+
+    <virtualFileSystem implementationClass="jetbrains.mps.workbench.languagesFs.MPSLanguagesVirtualFileSystem" key="mpslang" physical="true"/>
+
+    <fileType extensions="java" hashBangs="java" name="JAVA" language="JAVA" fieldName="INSTANCE" implementationClass="com.intellij.ide.highlighter.JavaFileType"/>
+    <fileType extensions="class" name="CLASS" fieldName="INSTANCE" implementationClass="com.intellij.ide.highlighter.JavaClassFileType"/>
+    <idIndexer filetype="CLASS" implementationClass="jetbrains.mps.workbench.findusages.JavaStubIdIndexer"/>
+    <postStartupActivity implementation="jetbrains.mps.ide.generator.index.IndexBasedModelDigest" />
+    <postStartupActivity implementation="jetbrains.mps.workbench.findusages.StubModelsFastFindSupport$Plug" />
+    <postStartupActivity implementation="jetbrains.mps.ide.make.StartupModuleMakerImpl" />
+    <projectService serviceImplementation="jetbrains.mps.ide.findusages.view.optionseditor.DefaultSearchOptionsComponent"/>
+    <projectService serviceImplementation="jetbrains.mps.ide.editor.tabs.TabRootNodesTracker"/>
+    <projectService serviceImplementation="jetbrains.mps.ide.editor.tabs.FileStatusChangeListener"/>
+    <projectService serviceImplementation="jetbrains.mps.ide.bookmark.BookmarksUIComponent"/>
+    <projectService serviceImplementation="jetbrains.mps.project.ProjectLibraryManager" />
+    <applicationService serviceInterface="jetbrains.mps.ide.platform.watching.FileSystemListenersContainer"
+                        serviceImplementation="jetbrains.mps.ide.vfs.WatchingFileSystemListenersContainer" />
+    <applicationService serviceImplementation="jetbrains.mps.ide.generator.TransientSwapOwnerComponent" />
+    <applicationService serviceImplementation="jetbrains.mps.watching.WatchedRootsUpdater" />
+    <applicationService serviceImplementation="jetbrains.mps.library.AdditionalLibrariesManager"/>
+
+    <notificationGroup id="jetbrains.mps.ide.make.StartupModuleMaker" displayType="STICKY_BALLOON" key="smm.group.name" bundle="jetbrains.mps.ide.make.Messages"/>
+    <applicationService serviceImplementation="jetbrains.mps.ide.generator.GeneratorCacheComponent"/>
+    <applicationInitializedListener implementation="jetbrains.mps.plugins.PluginLoaderRegistry$MyApplicationInitializedListener"/>
   </extensions>
 
   <extensions defaultExtensionNs="jetbrains.mps">
     <NodeEditorFactory implementation="jetbrains.mps.workbench.editors.TabsMPSEditorFactory"/>
   </extensions>
 
-</components>
+  <applicationListeners>
+    <listener class="jetbrains.mps.watching.ModelFocusSynchronizer" topic="com.intellij.ide.FrameStateListener"/>
+    <listener class="jetbrains.mps.watching.WatchedRootsUpdater$ProjectListener" topic="com.intellij.openapi.project.ProjectManagerListener"
+              activeInHeadlessMode="false" activeInTestMode="false"/>
+    <listener class="jetbrains.mps.project.ProjectLibraryManager$ProjectListener" topic="com.intellij.openapi.project.ProjectManagerListener"
+              activeInHeadlessMode="false" activeInTestMode="false"/>
+  </applicationListeners>
+  <projectListeners>
+    <listener class="jetbrains.mps.ide.bookmark.BookmarksUIComponent$EditorComponentListener"
+              topic="jetbrains.mps.nodeEditor.highlighter.EditorComponentCreateListener"
+              activeInHeadlessMode="false"
+              activeInTestMode="false"/>
+  </projectListeners>
+
+</idea-plugin>

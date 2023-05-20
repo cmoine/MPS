@@ -4,18 +4,24 @@ package jetbrains.mps.baseLanguage.tuples.test;
 
 import jetbrains.mps.baseLanguage.tuples.runtime.MultiTuple;
 
-public class Sample extends MultiTuple._1<Integer> implements ISample {
+public class Sample extends MultiTuple._2<Integer, Float> implements ISample {
   public Sample() {
     super();
   }
-  public Sample(Integer i) {
-    super(i);
+  public Sample(Integer i, Float f) {
+    super(i, f);
   }
   public Integer i(Integer value) {
     return super._0(value);
   }
+  public Float f(Float value) {
+    return super._1(value);
+  }
   public Integer i() {
     return super._0();
+  }
+  public Float f() {
+    return super._1();
   }
   public String getSample() {
     return "<" + (int) this.i() + ">";

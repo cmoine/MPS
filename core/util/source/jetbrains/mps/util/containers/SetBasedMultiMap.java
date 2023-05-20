@@ -22,7 +22,7 @@ import java.util.HashSet;
 public class SetBasedMultiMap<K, V> extends MultiMap<K, V> {
   @Override
   protected Collection<V> createCollection() {
-    return new HashSet<V>();
+    return new HashSet<>();
   }
 
   @Override

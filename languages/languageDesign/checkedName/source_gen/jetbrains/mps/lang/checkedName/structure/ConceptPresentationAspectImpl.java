@@ -4,27 +4,59 @@ package jetbrains.mps.lang.checkedName.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_ICheckedNamePolicy = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PropertyRefExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PropertyRefType = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_ICheckedNamePolicy;
+  private ConceptPresentation props_PropertyPointerType;
+  private ConceptPresentation props_PropertyPointerValueOperation;
+  private ConceptPresentation props_PropertyRefExpression;
+  private ConceptPresentation props_PropertyRefType;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.ICheckedNamePolicy:
+        if (props_ICheckedNamePolicy == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_ICheckedNamePolicy = cpb.create();
+        }
         return props_ICheckedNamePolicy;
-      case 1:
+      case LanguageConceptSwitch.PropertyPointerType:
+        if (props_PropertyPointerType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("propRef<>");
+          props_PropertyPointerType = cpb.create();
+        }
+        return props_PropertyPointerType;
+      case LanguageConceptSwitch.PropertyPointerValueOperation:
+        if (props_PropertyPointerValueOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("value");
+          props_PropertyPointerValueOperation = cpb.create();
+        }
+        return props_PropertyPointerValueOperation;
+      case LanguageConceptSwitch.PropertyRefExpression:
+        if (props_PropertyRefExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("property reference");
+          cpb.rawPresentation("property/<node>,<role>/");
+          props_PropertyRefExpression = cpb.create();
+        }
         return props_PropertyRefExpression;
-      case 2:
+      case LanguageConceptSwitch.PropertyRefType:
+        if (props_PropertyRefType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.deprecated(true);
+          cpb.rawPresentation("propRef");
+          props_PropertyRefType = cpb.create();
+        }
         return props_PropertyRefType;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

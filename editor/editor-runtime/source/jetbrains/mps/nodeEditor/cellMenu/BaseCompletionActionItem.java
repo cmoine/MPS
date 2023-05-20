@@ -16,7 +16,6 @@
 package jetbrains.mps.nodeEditor.cellMenu;
 
 import jetbrains.mps.openapi.editor.menus.transformation.CompletionActionItem;
-import jetbrains.mps.util.PatternUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -31,6 +30,6 @@ public interface BaseCompletionActionItem extends CompletionActionItem {
 
   @Override
   default boolean canExecute(@NotNull String pattern) {
-    return PatternUtil.matchesPattern(pattern, getMatchingText(pattern));
+    return true;
   }
 }

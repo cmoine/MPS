@@ -15,12 +15,19 @@
  */
 package jetbrains.mps.ide.ui.smodel;
 
-import jetbrains.mps.ide.projectPane.Icons;
+import com.intellij.icons.AllIcons.Nodes;
+import com.intellij.ide.PowerSaveMode;
+import com.intellij.ui.LayeredIcon;
+import jetbrains.mps.icons.MPSIcons;
+import jetbrains.mps.ide.icons.GlobalIconManager;
 import jetbrains.mps.ide.ui.tree.TextTreeNode;
 import jetbrains.mps.ide.ui.tree.smodel.NodeTargetProvider;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 import org.jetbrains.mps.openapi.model.SReference;
+
+import javax.swing.Icon;
 
 public class ReferenceTreeNode extends TextTreeNode implements NodeTargetProvider {
   private final SReference myRef;
@@ -28,7 +35,21 @@ public class ReferenceTreeNode extends TextTreeNode implements NodeTargetProvide
   public ReferenceTreeNode(SReference ref) {
     super(ref.getLink().getName() + ": " + ref.getTargetNode());
     myRef = ref;
-    setIcon(Icons.DEFAULT_ICON);
+    // In power save mode just use default node icon, otherwise try to get exact icon for target.
+    Icon iconForRef ;
+    if (PowerSaveMode.isEnabled()){
+      iconForRef = MPSIcons.Nodes.Node;
+    } else {
+      // TODO: reference to generated code. Extract some interface for icons to source code.
+      SNode node = ref.getTargetNode();
+      if (node == null){
+        iconForRef = MPSIcons.Nodes.Node;
+      } else{
+        iconForRef = GlobalIconManager.getInstance().getIconFor(node);
+      }
+    }
+    // Decorate icon with symlink pictogram
+    setIcon(LayeredIcon.create(iconForRef, Nodes.Symlink));
   }
 
   @Nullable

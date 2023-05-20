@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 package jetbrains.mps.ide.editorTabs.tabfactory;
 
-import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import jetbrains.mps.ide.editorTabs.tabfactory.emptytabs.EmptyTabsComponent;
 import jetbrains.mps.ide.editorTabs.tabfactory.tabs.CreateModeCallback;
@@ -31,8 +31,8 @@ import java.util.Set;
 
 public abstract class TabComponentFactory {
   public static TabsComponent createTabsComponent(final SNodeReference baseNode, final Set<RelationDescriptor> possibleTabs, JComponent component,
-      NodeChangeCallback callback, CreateModeCallback createModeCallback, Project project) {
-    EditorSettings editorSettings = ApplicationManager.getApplication().getComponent(EditorSettings.class);
+                                                  NodeChangeCallback callback, CreateModeCallback createModeCallback, Project project) {
+    EditorSettings editorSettings = ServiceManager.getService(EditorSettings.class);
     if (!editorSettings.isShow()) {
       return new EmptyTabsComponent(baseNode, callback, ProjectHelper.fromIdeaProject(project));
     }

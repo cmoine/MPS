@@ -17,6 +17,7 @@
 package jetbrains.mps.idea.core.facet;
 
 import com.intellij.facet.FacetManager;
+import com.intellij.facet.FacetType;
 import com.intellij.facet.ModifiableFacetModel;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.ModuleAdapter;
@@ -52,7 +53,7 @@ import java.util.Set;
  */
 public class ModuleRenameHandler extends ModuleAdapter {
   @Override
-  public void modulesRenamed(@NotNull final Project project, @NotNull List<Module> modules, @NotNull Function<Module, String> oldNameProvider) {
+  public void modulesRenamed(@NotNull final Project project, @NotNull List<? extends Module> modules, @NotNull Function<? super Module, String> oldNameProvider) {
     for (final Module module : modules) {
       final FacetManager facetManager = FacetManager.getInstance(module);
       final MPSFacet facet = facetManager.getFacetByType(MPSFacetType.ID);
@@ -121,14 +122,19 @@ public class ModuleRenameHandler extends ModuleAdapter {
     Module module = facet.getModule();
     FacetManager facetManager = FacetManager.getInstance(module);
 
+    final MPSConfigurationBean cfgBean = facet.getConfiguration().getBean();
     ModifiableFacetModel mm = facetManager.createModifiableModel();
     mm.removeFacet(facet);
     mm.commit();
 
     mm = facetManager.createModifiableModel();
-    facet.getConfiguration().getBean().setIdByModuleName(module.getName());
-    facet.getConfiguration().getBean().getSolutionDescriptor().setNamespace(module.getName());
-    final MPSFacet newFacet = new MPSFacet(new MPSFacetType(), module, MPSFacetConstants.MPS_FACET_NAME, facet.getConfiguration(), null);
+    cfgBean.setIdByModuleName(module.getName());
+    // XXX here use to be in cfgBean.getSolutionDescriptor().setNamespace(), which is part of SolutionIdea.doSetModuleDescriptor anyway
+    //     and I wonder why we don't do the same for module id?
+    final MPSFacetType facetType = FacetType.findInstance(MPSFacetType.class);
+    final MPSFacetConfiguration cfg = facetType.createDefaultConfiguration();
+    cfg.loadState(cfgBean);
+    final MPSFacet newFacet = facetManager.createFacet(facetType, facetType.getDefaultFacetName(), cfg, null) ;
     mm.addFacet(newFacet);
     mm.commit();
 

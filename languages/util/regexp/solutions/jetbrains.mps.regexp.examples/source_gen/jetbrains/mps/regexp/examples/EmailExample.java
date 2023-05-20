@@ -10,17 +10,17 @@ import java.util.regex.Matcher;
   }
   public static void msain(String emailToAnalyse) {
     {
-      Pattern _pattern_0 = REGEXP_qkhp2f_a0a0a0b;
+      Pattern _pattern_0 = REGEXP;
       Matcher _matcher_0 = _pattern_0.matcher(emailToAnalyse);
       if (_matcher_0.matches()) {
         System.out.println("User name = " + _matcher_0.group(1));
         System.out.println("Domain = " + _matcher_0.group(2));
       }
     }
-    if (REGEXP_qkhp2f_a0a1a1.matcher(emailToAnalyse).matches()) {
+    if (REGEXP1.matcher(emailToAnalyse).matches()) {
       System.out.println("");
     }
   }
-  private static Pattern REGEXP_qkhp2f_a0a0a0b = Pattern.compile("(\\w+)@(\\w+(?:\\.\\w+))", 0);
-  private static Pattern REGEXP_qkhp2f_a0a1a1 = Pattern.compile("(\\A+)", 0);
+  private static final Pattern REGEXP = Pattern.compile("(\\w+)@(\\w+(?:\\.\\w+))", 0);
+  private static final Pattern REGEXP1 = Pattern.compile("(\\A+)", 0);
 }

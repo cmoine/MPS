@@ -16,8 +16,11 @@
 package jetbrains.mps.persistence.java.library;
 
 import jetbrains.mps.components.CoreComponent;
+import jetbrains.mps.java.stub.ClassStubRootProvider;
 import jetbrains.mps.java.stub.JavaPackageModelId;
+import jetbrains.mps.persistence.PersistenceRegistry;
 import jetbrains.mps.smodel.LanguageID;
+import jetbrains.mps.vfs.VFSManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
 
@@ -26,20 +29,30 @@ import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
  */
 public class JavaClassesPersistence implements CoreComponent {
   private final PersistenceFacade myFacade;
+  private final VFSManager myVfsManager;
+  private final ClassStubRootProvider myStubRootProvider;
+  private final PredefinedRootClassTypeConfig myPredefinedRootConfig;
 
-  public JavaClassesPersistence(@NotNull PersistenceFacade persistenceFacade) {
+  public JavaClassesPersistence(@NotNull PersistenceFacade persistenceFacade, VFSManager vfsManager, ClassStubRootProvider srp) {
     myFacade = persistenceFacade;
+    myVfsManager = vfsManager;
+    myStubRootProvider = srp;
+    myPredefinedRootConfig = new PredefinedRootClassTypeConfig();
   }
+
   @Override
   public void init() {
-    myFacade.setModelRootFactory(JavaClassStubConstants.STUB_TYPE, new JavaClassStubModelRootFactory());
+    myStubRootProvider.register(myPredefinedRootConfig);
+    myFacade.setModelRootFactory(JavaClassStubConstants.STUB_TYPE, new JavaClassStubModelRootFactory(myStubRootProvider));
+    myFacade.setModelRootFactory(PersistenceRegistry.JDK_CLASSES_ROOT, new JDKClassStubModelRootFactory(myVfsManager, myStubRootProvider));
     myFacade.setModelIdFactory(LanguageID.JAVA, new JavaPackageModelId.Factory());
   }
 
   @Override
   public void dispose() {
     myFacade.setModelIdFactory(LanguageID.JAVA, null);
+    myFacade.setModelRootFactory(PersistenceRegistry.JDK_CLASSES_ROOT, null);
     myFacade.setModelRootFactory(JavaClassStubConstants.STUB_TYPE, null);
+    myStubRootProvider.unregister(myPredefinedRootConfig);
   }
-
 }

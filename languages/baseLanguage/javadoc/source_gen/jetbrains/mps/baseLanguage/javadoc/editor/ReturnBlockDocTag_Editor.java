@@ -6,54 +6,9 @@ import jetbrains.mps.nodeEditor.DefaultNodeEditor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Collection;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Constant;
-import jetbrains.mps.openapi.editor.style.Style;
-import jetbrains.mps.editor.runtime.style.StyleImpl;
-import jetbrains.mps.nodeEditor.cellProviders.CellProviderWithRole;
-import jetbrains.mps.lang.editor.cellProviders.PropertyCellProvider;
-import jetbrains.mps.baseLanguage.editor.BaseLanguageStyle_StyleSheet;
-import jetbrains.mps.nodeEditor.EditorManager;
 
 public class ReturnBlockDocTag_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createCollection_eiwgw6_a(editorContext, node);
-  }
-  private EditorCell createCollection_eiwgw6_a(EditorContext editorContext, SNode node) {
-    EditorCell_Collection editorCell = EditorCell_Collection.createIndent2(editorContext, node);
-    editorCell.setCellId("Collection_eiwgw6_a");
-    editorCell.setBig(true);
-    editorCell.addEditorCell(this.createConstant_eiwgw6_a0(editorContext, node));
-    editorCell.addEditorCell(this.createProperty_eiwgw6_b0(editorContext, node));
-    return editorCell;
-  }
-  private EditorCell createConstant_eiwgw6_a0(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, "@return");
-    editorCell.setCellId("Constant_eiwgw6_a0");
-    Style style = new StyleImpl();
-    DocumentationCommentStyleSheet_StyleSheet.apply_CommentTag(style, editorCell);
-    editorCell.getStyle().putAll(style);
-    DeleteDocTag.setCellActions(editorCell, node, editorContext);
-    editorCell.setDefaultText("");
-    return editorCell;
-  }
-  private EditorCell createProperty_eiwgw6_b0(EditorContext editorContext, SNode node) {
-    CellProviderWithRole provider = new PropertyCellProvider(node, editorContext);
-    provider.setRole("text");
-    provider.setNoTargetText("<no text>");
-    EditorCell editorCell;
-    editorCell = provider.createEditorCell(editorContext);
-    editorCell.setCellId("property_text");
-    Style style = new StyleImpl();
-    BaseLanguageStyle_StyleSheet.apply_JavaDoc(style, editorCell);
-    editorCell.getStyle().putAll(style);
-    DeleteDocTag.setCellActions(editorCell, node, editorContext);
-    editorCell.setSubstituteInfo(provider.createDefaultSubstituteInfo());
-    SNode attributeConcept = provider.getRoleAttribute();
-    if (attributeConcept != null) {
-      EditorManager manager = EditorManager.getInstanceFromContext(editorContext);
-      return manager.createNodeRoleAttributeCell(attributeConcept, provider.getRoleAttributeKind(), editorCell);
-    } else
-    return editorCell;
+    return new ReturnBlockDocTag_EditorBuilder_a(editorContext, node).createCell();
   }
 }

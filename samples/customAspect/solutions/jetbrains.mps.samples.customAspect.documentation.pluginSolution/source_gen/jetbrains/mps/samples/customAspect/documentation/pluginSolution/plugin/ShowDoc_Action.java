@@ -22,7 +22,7 @@ public class ShowDoc_Action extends BaseAction {
   public ShowDoc_Action() {
     super("Show Documentation", "", ICON);
     this.setIsAlwaysVisible(false);
-    this.setExecuteOutsideCommand(false);
+    this.setExecuteOutsideCommand(true);
   }
   @Override
   public boolean isDumbAware() {
@@ -32,6 +32,9 @@ public class ShowDoc_Action extends BaseAction {
   public boolean isApplicable(AnActionEvent event, final Map<String, Object> _params) {
     SAbstractConcept concept = event.getData(MPSCommonDataKeys.NODE).getConcept();
     LanguageRuntime languageRuntime = LanguageRegistry.getInstance(event.getData(MPSCommonDataKeys.MPS_PROJECT).getRepository()).getLanguage(concept.getLanguage());
+    if (languageRuntime == null) {
+      return false;
+    }
     DocumentationAspectDescriptor docDescriptor = languageRuntime.getAspect(DocumentationAspectDescriptor.class);
     return docDescriptor != null;
   }
@@ -62,7 +65,14 @@ public class ShowDoc_Action extends BaseAction {
   public void doExecute(@NotNull final AnActionEvent event, final Map<String, Object> _params) {
     SAbstractConcept concept = event.getData(MPSCommonDataKeys.NODE).getConcept();
     LanguageRuntime languageRuntime = LanguageRegistry.getInstance(event.getData(MPSCommonDataKeys.MPS_PROJECT).getRepository()).getLanguage(concept.getLanguage());
+    if (languageRuntime == null) {
+      return;
+    }
     DocumentationAspectDescriptor docDescriptor = languageRuntime.getAspect(DocumentationAspectDescriptor.class);
+    if (docDescriptor == null) {
+      return;
+    }
+
     String docText = docDescriptor.getConceptDocumentation(concept);
     if (docText != null) {
       JOptionPane.showMessageDialog(null, docText);

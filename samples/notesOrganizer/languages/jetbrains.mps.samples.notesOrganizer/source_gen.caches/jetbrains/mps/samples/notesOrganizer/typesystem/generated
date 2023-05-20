@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="3juzmw5tr55plo2pa3helhmeqe4enr7" />
+<product version="3" modelHash="9jz3bkvr7kq5r5989mb10rubhie2ksy">
+  <files names="TypesystemDescriptor.java:check_NotesConfiguration_NonTypesystemRule.java" />
+</product>
 

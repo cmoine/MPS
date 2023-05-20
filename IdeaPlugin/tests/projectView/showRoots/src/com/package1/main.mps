@@ -2,7 +2,7 @@
 <model ref="r:cdf0e280-e3c2-44a8-9746-0304f21e463c(main)">
   <persistence version="9" />
   <languages>
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="1" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports />
   <registry>
@@ -55,17 +55,22 @@
         <child id="1178549979242" name="visibility" index="1B3o_S" />
       </concept>
       <concept id="1107796713796" name="jetbrains.mps.baseLanguage.structure.Interface" flags="ig" index="3HP615" />
-      <concept id="6329021646629104957" name="jetbrains.mps.baseLanguage.structure.TextCommentPart" flags="nn" index="3SKdUq">
-        <property id="6329021646629104958" name="text" index="3SKdUp" />
-      </concept>
       <concept id="6329021646629104954" name="jetbrains.mps.baseLanguage.structure.SingleLineComment" flags="nn" index="3SKdUt">
-        <child id="6329021646629175155" name="commentPart" index="3SKWNk" />
+        <child id="8356039341262087992" name="line" index="1aUNEU" />
       </concept>
       <concept id="1146644602865" name="jetbrains.mps.baseLanguage.structure.PublicVisibility" flags="nn" index="3Tm1VV" />
     </language>
     <language id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core">
       <concept id="1169194658468" name="jetbrains.mps.lang.core.structure.INamedConcept" flags="ng" index="TrEIO">
         <property id="1169194664001" name="name" index="TrG5h" />
+      </concept>
+    </language>
+    <language id="c7fb639f-be78-4307-89b0-b5959c3fa8c8" name="jetbrains.mps.lang.text">
+      <concept id="155656958578482948" name="jetbrains.mps.lang.text.structure.Word" flags="nn" index="3oM_SD">
+        <property id="155656958578482949" name="value" index="3oM_SC" />
+      </concept>
+      <concept id="2535923850359271782" name="jetbrains.mps.lang.text.structure.Line" flags="nn" index="1PaTwC">
+        <child id="2535923850359271783" name="elements" index="1PaTwD" />
       </concept>
     </language>
   </registry>
@@ -111,8 +116,40 @@
       <node concept="3Tm1VV" id="65tcnZJq04m" role="1B3o_S" />
       <node concept="3clFbS" id="65tcnZJq04n" role="3clF47">
         <node concept="3SKdUt" id="65tcnZJq04q" role="3cqZAp">
-          <node concept="3SKdUq" id="65tcnZJq04r" role="3SKWNk">
-            <property role="3SKdUp" value="TODO System.out.println(), as soon as we support JDK dependency in MPS-plugin" />
+          <node concept="1PaTwC" id="7SLi_qlKNXH" role="1aUNEU">
+            <node concept="3oM_SD" id="7SLi_qlKNXI" role="1PaTwD">
+              <property role="3oM_SC" value="TODO" />
+            </node>
+            <node concept="3oM_SD" id="7SLi_qlKNXJ" role="1PaTwD">
+              <property role="3oM_SC" value="System.out.println()," />
+            </node>
+            <node concept="3oM_SD" id="7SLi_qlKNXK" role="1PaTwD">
+              <property role="3oM_SC" value="as" />
+            </node>
+            <node concept="3oM_SD" id="7SLi_qlKNXL" role="1PaTwD">
+              <property role="3oM_SC" value="soon" />
+            </node>
+            <node concept="3oM_SD" id="7SLi_qlKNXM" role="1PaTwD">
+              <property role="3oM_SC" value="as" />
+            </node>
+            <node concept="3oM_SD" id="7SLi_qlKNXN" role="1PaTwD">
+              <property role="3oM_SC" value="we" />
+            </node>
+            <node concept="3oM_SD" id="7SLi_qlKNXO" role="1PaTwD">
+              <property role="3oM_SC" value="support" />
+            </node>
+            <node concept="3oM_SD" id="7SLi_qlKNXP" role="1PaTwD">
+              <property role="3oM_SC" value="JDK" />
+            </node>
+            <node concept="3oM_SD" id="7SLi_qlKNXQ" role="1PaTwD">
+              <property role="3oM_SC" value="dependency" />
+            </node>
+            <node concept="3oM_SD" id="7SLi_qlKNXR" role="1PaTwD">
+              <property role="3oM_SC" value="in" />
+            </node>
+            <node concept="3oM_SD" id="7SLi_qlKNXS" role="1PaTwD">
+              <property role="3oM_SC" value="MPS-plugin" />
+            </node>
           </node>
         </node>
       </node>

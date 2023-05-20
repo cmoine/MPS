@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,15 +15,15 @@
  */
 package jetbrains.mps.nodeEditor.cells;
 
-import jetbrains.mps.nodeEditor.LanguageRegistryHelper;
 import jetbrains.mps.logging.Logger;
+import jetbrains.mps.nodeEditor.LanguageRegistryHelper;
 import jetbrains.mps.openapi.editor.descriptor.EditorAspectDescriptor;
 import jetbrains.mps.openapi.editor.descriptor.EditorHintsSpecific;
 import jetbrains.mps.smodel.language.LanguageRegistry;
-import org.apache.log4j.LogManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import org.jetbrains.mps.openapi.module.SRepository;
 import org.jetbrains.mps.util.BreadthConceptHierarchyIterator;
 
 import java.util.ArrayList;
@@ -33,28 +33,27 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
 /**
  * Selects the best matching instance of {@code T} given a concept and a set of editor hints. Traverses superconcept and superinterface hierarchy
  * in breadth-first order.
+ *
  * @param <T> a class implementing {@link EditorHintsSpecific}
  */
 public abstract class AbstractEditorHintsSpecificRegistry<T extends EditorHintsSpecific> {
-  private static final Logger LOG = Logger.wrap(LogManager.getLogger(AbstractEditorHintsSpecificRegistry.class));
+  private static final Logger LOG = Logger.getLogger(AbstractEditorHintsSpecificRegistry.class);
 
   private static Comparator<EditorHintsSpecific> ourCompareByHintsSizeDescAndClassName;
   private static Comparator<EditorHintsSpecific> ourCompareByHintsSizeDesc;
 
   private static Comparator<EditorHintsSpecific> compareByHintsSizeDescAndClassName() {
     if (ourCompareByHintsSizeDescAndClassName == null) {
-      ourCompareByHintsSizeDescAndClassName = new Comparator<EditorHintsSpecific>() {
-        @Override
-        public int compare(EditorHintsSpecific a, EditorHintsSpecific b) {
-          if (a.getContextHints().size() == b.getContextHints().size()) {
-            return a.getClass().getName().compareTo(b.getClass().getName());
-          }
-          return b.getContextHints().size() - a.getContextHints().size();
+      ourCompareByHintsSizeDescAndClassName = (a, b) -> {
+        if (a.getContextHints().size() == b.getContextHints().size()) {
+          return a.getClass().getName().compareTo(b.getClass().getName());
         }
+        return b.getContextHints().size() - a.getContextHints().size();
       };
     }
     return ourCompareByHintsSizeDescAndClassName;
@@ -62,34 +61,30 @@ public abstract class AbstractEditorHintsSpecificRegistry<T extends EditorHintsS
 
   private static Comparator<EditorHintsSpecific> compareByHintsSizeDesc() {
     if (ourCompareByHintsSizeDesc == null) {
-      ourCompareByHintsSizeDesc = new Comparator<EditorHintsSpecific>() {
-        @Override
-        public int compare(EditorHintsSpecific a, EditorHintsSpecific b) {
-          return b.getContextHints().size() - a.getContextHints().size();
-        }
-      };
+      ourCompareByHintsSizeDesc = (a, b) -> b.getContextHints().size() - a.getContextHints().size();
     }
     return ourCompareByHintsSizeDesc;
   }
 
-  @Nullable
-  public T get(SAbstractConcept concept) {
-    return get(concept, new HashSet<Class<? extends T>>());
+  @NotNull
+  private final SRepository myRepository;
+
+  public AbstractEditorHintsSpecificRegistry(@NotNull SRepository repository) {
+    myRepository = repository;
   }
 
   @Nullable
-  public T get(SAbstractConcept concept, @NotNull Collection<Class<? extends T>> excludedClasses) {
-    Set<SAbstractConcept> processedConcepts = new HashSet<SAbstractConcept>();
-    BreadthConceptHierarchyIterator ancestorsIterable = new BreadthConceptHierarchyIterator(concept);
-    List<T> resultList = new ArrayList<T>();
-    for (SAbstractConcept next : ancestorsIterable) {
+  public T get(@NotNull SAbstractConcept concept) {
+    Set<SAbstractConcept> processedConcepts = new HashSet<>();
+    List<T> resultList = new ArrayList<>();
+    for (SAbstractConcept next : new BreadthConceptHierarchyIterator(concept)) {
       if (!processedConcepts.add(next)) {
         continue;
       }
 
-      T instanceForConcept = getForConcept(next, excludedClasses);
+      T instanceForConcept = getForConcept(next);
       if (instanceForConcept != null) {
-        if (isEnoughForCurrentContext(instanceForConcept)) {
+        if (isExactContextMatch(instanceForConcept)) {
           return instanceForConcept;
         } else {
           resultList.add(instanceForConcept);
@@ -103,29 +98,16 @@ public abstract class AbstractEditorHintsSpecificRegistry<T extends EditorHintsS
     return resultList.get(0);
   }
 
-  private T getForConcept(SAbstractConcept concept, @NotNull Collection<Class<? extends T>> excludedClasses) {
-    List<T> applicableInstances = collectApplicableInstances(concept);
-    if (applicableInstances.isEmpty()) {
-      return null;
-    }
-    Collections.sort(applicableInstances, compareByHintsSizeDescAndClassName());
-    T result = null;
-    for (T instance : applicableInstances) {
-      if (result == null) {
-        //noinspection SuspiciousMethodCalls
-        if (!excludedClasses.contains(instance.getClass())) {
-          result = instance;
-        }
-      } else if (instance.getContextHints().size() == result.getContextHints().size()) {
-        LOG.error(getErrorMessage(instance, result));
-      } else {
-        break;
+  private T getForConcept(@NotNull SAbstractConcept concept) {
+    return collectApplicableInstances(concept).sorted(compareByHintsSizeDescAndClassName()).reduce((result, nextElement) -> {
+      if (nextElement.getContextHints().size() == result.getContextHints().size()) {
+        LOG.error(getErrorMessage(nextElement, result));
       }
-    }
-    return result;
+      return result;
+    }).orElse(null);
   }
 
-  private boolean isEnoughForCurrentContext(EditorHintsSpecific instance) {
+  private boolean isExactContextMatch(EditorHintsSpecific instance) {
     return instance.getContextHints().containsAll(getCurrentContextHints());
   }
 
@@ -133,32 +115,25 @@ public abstract class AbstractEditorHintsSpecificRegistry<T extends EditorHintsS
     return getCurrentContextHints().containsAll(instance.getContextHints());
   }
 
-  private List<T> collectApplicableInstances(SAbstractConcept concept) {
-    List<T> result = new ArrayList<T>();
-    EditorAspectDescriptor aspectDescriptor = LanguageRegistryHelper.getEditorAspectDescriptor(LanguageRegistry.getInstance(), concept.getLanguage());
-    if (aspectDescriptor != null) {
-      for (T instance : get(aspectDescriptor, concept)) {
-        if (isApplicableInCurrentContext(instance)) {
-          result.add(instance);
-        }
-      }
-    }
-    return result;
+  private Stream<T> collectApplicableInstances(@NotNull SAbstractConcept concept) {
+    EditorAspectDescriptor aspectDescriptor =
+        LanguageRegistryHelper.getEditorAspectDescriptor(LanguageRegistry.getInstance(myRepository), concept.getLanguage());
+    return aspectDescriptor == null ? Stream.empty() : get(aspectDescriptor, concept).filter(this::isApplicableInCurrentContext);
   }
 
   private String getErrorMessage(T additional, T chosen) {
-    String context = "";
+    StringBuilder context = new StringBuilder();
     for (String contextHint : getCurrentContextHints()) {
-      if (!context.isEmpty()) {
-        context += ", ";
+      if (context.length() > 0) {
+        context.append(", ");
       }
-      context += contextHint;
+      context.append(contextHint);
     }
-    return getErrorMessage(additional, chosen, context);
+    return getErrorMessage(additional, chosen, context.toString());
   }
 
   @NotNull
-  protected abstract Collection<T> get(EditorAspectDescriptor aspectDescriptor, SAbstractConcept concept);
+  protected abstract Stream<T> get(@NotNull EditorAspectDescriptor aspectDescriptor, @NotNull SAbstractConcept concept);
 
   protected abstract Collection<String> getCurrentContextHints();
 

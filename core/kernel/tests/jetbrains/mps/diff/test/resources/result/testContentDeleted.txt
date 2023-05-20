@@ -1,7 +1,0 @@
---- old text
-+++ generated text
-@@ -1,4 +1,0 @@
--diff
--test
--case
--content

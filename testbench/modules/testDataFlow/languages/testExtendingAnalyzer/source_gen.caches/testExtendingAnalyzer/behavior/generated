@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-346z9j7csj2w6jdg3iepb3960j2abm0" />
+<product version="3" modelHash="4ppsbwmpv43u3jnluourqwo3c7e31u5">
+  <files names="BehaviorAspectDescriptor.java:NullSafeDotExpression__BehaviorDescriptor.java:NullUnsafeDotExpression__BehaviorDescriptor.java" />
+</product>
 

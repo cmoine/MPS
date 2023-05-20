@@ -57,7 +57,7 @@ public class MfDate implements Comparable {
   }
   @Override
   public boolean equals(Object arg) {
-    if (!((arg instanceof MfDate))) {
+    if (!(arg instanceof MfDate)) {
       return false;
     }
     MfDate other = (MfDate) arg;

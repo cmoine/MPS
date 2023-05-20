@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="curn3nvahdif4sigx82fd5eccs9hn2a" />
+<product version="3" modelHash="3i6ykqfok90zs4dvo1k3fetzd3d7anz">
+  <files names="DefaultEditorComponent_Test.java:EditorComponentSpecifiedBy_context_hint_Test.java:MostSpecificEditorComponent_Test.java:OverridenEditorComponent_Test.java" />
+</product>
 

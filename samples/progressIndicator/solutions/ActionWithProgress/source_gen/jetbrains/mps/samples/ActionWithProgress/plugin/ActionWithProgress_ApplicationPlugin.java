@@ -4,20 +4,25 @@ package jetbrains.mps.samples.ActionWithProgress.plugin;
 
 import jetbrains.mps.plugins.applicationplugins.BaseApplicationPlugin;
 import com.intellij.openapi.extensions.PluginId;
+import org.jetbrains.annotations.NotNull;
 
 public class ActionWithProgress_ApplicationPlugin extends BaseApplicationPlugin {
-  private PluginId myId = PluginId.getId("jetbrains.mps.samples.ActionWithProgress");
+  private final PluginId myId = PluginId.getId("jetbrains.mps.samples.ActionWithProgress");
+
   public ActionWithProgress_ApplicationPlugin() {
   }
+
+  @NotNull
   public PluginId getId() {
     return myId;
   }
+
   public void createGroups() {
-    // actions w/o parameters 
+    // actions w/o parameters
     addAction(new BackgroundableProgressAction_Action());
     addAction(new ModalProgressAction_Action());
-    // groups 
-    addGroup(new ProgressActionsGroup_ActionGroup());
+    // groups
+    addGroup(new ProgressActionsGroup_ActionGroup(this));
   }
   public void adjustRegularGroups() {
   }

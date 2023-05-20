@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,6 +64,11 @@ public class BookmarksTree extends MPSTree {
   @Override
   protected void doInit(MPSTreeNode node, Runnable nodeInitRunnable) {
     super.doInit(node, new ModelReadRunnable(myProject.getModelAccess(), nodeInitRunnable));
+  }
+
+  @Override
+  protected void runRebuildAction(Runnable rebuildAction, boolean saveExpansion) {
+    super.runRebuildAction(new ModelReadRunnable(myProject.getModelAccess(), rebuildAction), saveExpansion);
   }
 
   @Override
@@ -159,9 +164,9 @@ public class BookmarksTree extends MPSTree {
   }
 
   private interface BookmarkNode {
-    public void navigateToBookmark();
+    void navigateToBookmark();
 
-    public void removeBookmark();
+    void removeBookmark();
   }
 
   private class MyTextTreeNodeNumbered extends TextTreeNode implements BookmarkNode {

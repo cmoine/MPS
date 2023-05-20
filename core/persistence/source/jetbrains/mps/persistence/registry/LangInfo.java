@@ -28,7 +28,7 @@ import java.util.List;
 public final class LangInfo extends BaseInfo implements Comparable<LangInfo> {
   private final SLanguageId myLanguageId;
   private final String myName;
-  private final List<ConceptInfo> myConcepts = new ArrayList<ConceptInfo>();
+  private final List<ConceptInfo> myConcepts = new ArrayList<>();
 
   /*package*/LangInfo(@NotNull SLanguageId languageId, @NotNull String langaugeName) {
     myLanguageId = languageId;
@@ -48,7 +48,7 @@ public final class LangInfo extends BaseInfo implements Comparable<LangInfo> {
   }
 
   public List<ConceptInfo> getConceptsInUse() {
-    ArrayList<ConceptInfo> rv = new ArrayList<ConceptInfo>(myConcepts);
+    ArrayList<ConceptInfo> rv = new ArrayList<>(myConcepts);
     Collections.sort(rv);
     return rv;
   }

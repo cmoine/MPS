@@ -17,11 +17,7 @@ public class SeveralThreads {
         int j;
         int k;
 
-        _FunctionTypes._void_P0_E0 cl = new _FunctionTypes._void_P0_E0() {
-          public void invoke() {
-            System.err.println("Other thread running");
-          }
-        };
+        _FunctionTypes._void_P0_E0 cl = () -> System.err.println("Other thread running");
         while (true) {
           try {
             Data tuple = new Data("42", "239");

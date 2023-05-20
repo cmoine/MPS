@@ -15,6 +15,6 @@ public class RemoveUnusedField_QuickFix extends QuickFix_Runtime {
     return "Remove unused field";
   }
   public void execute(SNode node) {
-    SNodeOperations.detachNode(node);
+    SNodeOperations.deleteNode(node);
   }
 }

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <root nodeRef="r:cc7bd7ff-ad7f-43d6-97d1-d660e55b3d10(jetbrains.mps.baseLanguage.logging.rt)/3679134236455929071">
+    <file name="Log.java">
+      <node id="3679134236455932153" at="10,0,11,0" concept="5" trace="fatal#(Ljava/lang/Object;)V" />
+      <node id="3679134236455932668" at="11,0,12,0" concept="5" trace="error#(Ljava/lang/Object;)V" />
+      <node id="3679134236455933114" at="12,0,13,0" concept="5" trace="warning#(Ljava/lang/Object;)V" />
+      <node id="3679134236455933420" at="13,0,14,0" concept="5" trace="info#(Ljava/lang/Object;)V" />
+      <node id="3679134236455933812" at="14,0,15,0" concept="5" trace="debug#(Ljava/lang/Object;)V" />
+      <node id="3679134236455934290" at="15,0,16,0" concept="5" trace="trace#(Ljava/lang/Object;)V" />
+      <scope id="3679134236455932153" at="10,0,11,0">
+        <var name="msg" id="3679134236455932214" />
+      </scope>
+      <scope id="3679134236455932668" at="11,0,12,0">
+        <var name="msg" id="3679134236455932951" />
+      </scope>
+      <scope id="3679134236455933114" at="12,0,13,0">
+        <var name="msg" id="3679134236455933194" />
+      </scope>
+      <scope id="3679134236455933420" at="13,0,14,0">
+        <var name="msg" id="3679134236455933523" />
+      </scope>
+      <scope id="3679134236455933812" at="14,0,15,0">
+        <var name="msg" id="3679134236455933938" />
+      </scope>
+      <scope id="3679134236455934290" at="15,0,16,0">
+        <var name="msg" id="3679134236455934439" />
+      </scope>
+      <unit id="3679134236455929071" at="9,0,17,0" name="jetbrains.mps.baseLanguage.logging.rt.Log" />
+    </file>
+  </root>
+  <root nodeRef="r:cc7bd7ff-ad7f-43d6-97d1-d660e55b3d10(jetbrains.mps.baseLanguage.logging.rt)/3679134236455946004">
+    <file name="LogCtx.java">
+      <node id="5721587534047579222" at="16,0,17,0" concept="9" trace="MSG_VIEW_TOKEN" />
+      <node id="3679134236455948671" at="18,0,19,0" concept="3" trace="mySender" />
+      <node id="3679134236455949116" at="19,0,20,0" concept="3" trace="myException" />
+      <node id="3679134236455949364" at="20,0,21,0" concept="3" trace="myProject" />
+      <node id="2096919206294022870" at="21,0,22,0" concept="3" trace="myHint" />
+      <node id="3679134236455948675" at="23,127,24,22" concept="2" />
+      <node id="3679134236455949120" at="24,22,25,28" concept="2" />
+      <node id="3679134236455949368" at="25,28,26,24" concept="2" />
+      <node id="2096919206294478519" at="27,32,28,45" concept="2" />
+      <node id="2096919206294478533" at="30,33,31,46" concept="2" />
+      <node id="2096919206294478547" at="33,34,34,53" concept="2" />
+      <node id="2096919206294478557" at="35,12,36,20" concept="2" />
+      <node id="6583289326083632563" at="40,46,41,101" concept="8" />
+      <node id="6583289326083635098" at="41,101,42,30" concept="8" />
+      <node id="6583289326083565396" at="42,30,43,61" concept="6" />
+      <node id="6583289326083582190" at="43,61,44,30" concept="2" />
+      <node id="2096919206294032572" at="44,30,45,64" concept="2" />
+      <node id="3679134236456145564" at="45,64,46,45" concept="2" />
+      <node id="3679134236456170790" at="50,33,51,28" concept="2" />
+      <node id="3679134236456176023" at="54,33,55,28" concept="2" />
+      <node id="3679134236456178250" at="58,35,59,29" concept="2" />
+      <node id="3679134236456178994" at="62,32,63,26" concept="2" />
+      <node id="3679134236456180264" at="66,33,67,26" concept="2" />
+      <node id="3679134236456181090" at="70,33,71,28" concept="2" />
+      <node id="2096919206294478555" at="35,10,37,5" concept="0" />
+      <node id="3679134236455950050" at="49,0,53,0" concept="5" trace="fatal#(Ljava/lang/Object;)V" />
+      <node id="3679134236455950058" at="53,0,57,0" concept="5" trace="error#(Ljava/lang/Object;)V" />
+      <node id="3679134236455950066" at="57,0,61,0" concept="5" trace="warning#(Ljava/lang/Object;)V" />
+      <node id="3679134236455950074" at="61,0,65,0" concept="5" trace="info#(Ljava/lang/Object;)V" />
+      <node id="3679134236455950082" at="65,0,69,0" concept="5" trace="debug#(Ljava/lang/Object;)V" />
+      <node id="3679134236455950090" at="69,0,73,0" concept="5" trace="trace#(Ljava/lang/Object;)V" />
+      <node id="2096919206294478541" at="32,10,37,5" concept="4" />
+      <node id="2096919206294478527" at="29,10,37,5" concept="4" />
+      <node id="3679134236456133570" at="40,0,48,0" concept="5" trace="_log#(Ljava/util/logging/Level;Ljava/lang/Object;)V" />
+      <node id="2096919206294478513" at="26,24,37,5" concept="4" />
+      <node id="3679134236455947780" at="23,0,39,0" concept="1" trace="LogCtx#(Ljava/lang/String;Ljava/lang/Throwable;Lorg/jetbrains/mps/openapi/project/Project;Ljava/lang/Object;)V" />
+      <scope id="2096919206294478518" at="27,32,28,45" />
+      <scope id="2096919206294478532" at="30,33,31,46" />
+      <scope id="2096919206294478546" at="33,34,34,53" />
+      <scope id="2096919206294478556" at="35,12,36,20" />
+      <scope id="3679134236455950056" at="50,33,51,28" />
+      <scope id="3679134236455950064" at="54,33,55,28" />
+      <scope id="3679134236455950072" at="58,35,59,29" />
+      <scope id="3679134236455950080" at="62,32,63,26" />
+      <scope id="3679134236455950088" at="66,33,67,26" />
+      <scope id="3679134236455950096" at="70,33,71,28" />
+      <scope id="3679134236455950050" at="49,0,53,0">
+        <var name="msg" id="3679134236455950054" />
+      </scope>
+      <scope id="3679134236455950058" at="53,0,57,0">
+        <var name="msg" id="3679134236455950059" />
+      </scope>
+      <scope id="3679134236455950066" at="57,0,61,0">
+        <var name="msg" id="3679134236455950067" />
+      </scope>
+      <scope id="3679134236455950074" at="61,0,65,0">
+        <var name="msg" id="3679134236455950075" />
+      </scope>
+      <scope id="3679134236455950082" at="65,0,69,0">
+        <var name="msg" id="3679134236455950083" />
+      </scope>
+      <scope id="3679134236455950090" at="69,0,73,0">
+        <var name="msg" id="3679134236455950091" />
+      </scope>
+      <scope id="3679134236456133573" at="40,46,46,45">
+        <var name="lr" id="6583289326083565397" />
+      </scope>
+      <scope id="3679134236456133570" at="40,0,48,0">
+        <var name="level" id="2082074084068639040" />
+        <var name="msg" id="3679134236456135421" />
+      </scope>
+      <scope id="3679134236455947784" at="23,127,37,5" />
+      <scope id="3679134236455947780" at="23,0,39,0">
+        <var name="exception" id="3679134236455947869" />
+        <var name="hint" id="2096919206294020429" />
+        <var name="project" id="3679134236455947872" />
+        <var name="sender" id="3679134236455947865" />
+      </scope>
+      <unit id="3679134236455946004" at="15,0,74,0" name="jetbrains.mps.baseLanguage.logging.rt.LogCtx" />
+    </file>
+  </root>
+  <root nodeRef="r:cc7bd7ff-ad7f-43d6-97d1-d660e55b3d10(jetbrains.mps.baseLanguage.logging.rt)/3679134236456112307">
+    <file name="LogContext.java">
+      <node id="3679134236455937705" at="13,110,14,67" concept="7" />
+      <node id="2096919206294057357" at="16,133,17,67" concept="7" />
+      <node id="3679134236455936295" at="13,0,16,0" concept="10" trace="with#(Ljava/lang/Class;Ljava/lang/Throwable;Lorg/jetbrains/mps/openapi/project/Project;)Ljetbrains/mps/baseLanguage/logging/rt/Log;" />
+      <node id="2096919206294057342" at="16,0,19,0" concept="10" trace="with#(Ljava/lang/Class;Ljava/lang/Throwable;Lorg/jetbrains/mps/openapi/project/Project;Ljava/lang/Object;)Ljetbrains/mps/baseLanguage/logging/rt/Log;" />
+      <scope id="3679134236455936298" at="13,110,14,67" />
+      <scope id="2096919206294057356" at="16,133,17,67" />
+      <scope id="3679134236455936295" at="13,0,16,0">
+        <var name="project" id="3679134236455937177" />
+        <var name="sender" id="3679134236455937170" />
+        <var name="throwable" id="3679134236455937174" />
+      </scope>
+      <scope id="2096919206294057342" at="16,0,19,0">
+        <var name="hint" id="2096919206294057353" />
+        <var name="project" id="2096919206294057350" />
+        <var name="sender" id="2096919206294057343" />
+        <var name="throwable" id="2096919206294057347" />
+      </scope>
+      <unit id="3679134236456112307" at="12,0,20,0" name="jetbrains.mps.baseLanguage.logging.rt.LogContext" />
+    </file>
+  </root>
+</debug-info>
+

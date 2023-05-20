@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 package jetbrains.mps.nodeEditor;
 
 import jetbrains.mps.nodeEditor.configuration.EditorConfiguration;
-import jetbrains.mps.openapi.editor.EditorComponentState;
 import jetbrains.mps.openapi.editor.assist.ContextAssistantManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -24,17 +23,14 @@ import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.module.SRepository;
 
 /**
+ * @deprecated Not in use, no additional value compared to {@link EditorContext}, remove once 2022.3 is out
  * User: shatalin
  * Date: 20/07/14
  */
+@Deprecated(since = "2022.3", forRemoval = true)
 public class InspectorEditorContext extends EditorContext {
   public InspectorEditorContext(EditorComponent editorComponent, @Nullable SModel model, @NotNull SRepository repository, EditorConfiguration configuration,
       ContextAssistantManager contextAssistantManager) {
     super(editorComponent, model, repository, configuration, contextAssistantManager);
-  }
-
-  @Override
-  public EditorComponentState getEditorComponentState() {
-    return new Memento(this, true);
   }
 }

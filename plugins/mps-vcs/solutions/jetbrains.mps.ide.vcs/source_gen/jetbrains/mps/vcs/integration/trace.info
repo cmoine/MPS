@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144226303539:jetbrains.mps.baseLanguage.structure.ForeachStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <root nodeRef="r:eec25685-8f1e-47c9-a9de-4a7ef6b504ec(jetbrains.mps.vcs.integration)/3521790172251160903">
+    <file name="ProjectCheckoutListener.java">
+      <node id="3521790172251160936" at="23,52,24,76" concept="8" />
+      <node id="5748651123749996507" at="27,44,28,49" concept="7" />
+      <node id="5748651123750017021" at="29,69,30,98" concept="2" />
+      <node id="5748651123750007027" at="30,98,31,0" concept="10" />
+      <node id="3521790172251160982" at="32,7,33,18" concept="8" />
+      <node id="3521790172251160984" at="34,5,35,17" concept="8" />
+      <node id="3521790172251160928" at="22,0,26,0" concept="6" trace="accept#(Ljava/io/File;Ljava/lang/String;)Z" />
+      <node id="5748651123750007026" at="28,49,32,7" concept="5" />
+      <node id="3521790172251160918" at="20,96,26,7" concept="7" />
+      <node id="3521790172251160941" at="26,7,34,5" concept="5" />
+      <node id="3521790172251160910" at="19,0,37,0" concept="6" trace="processCheckedOutDirectory#(Lcom/intellij/openapi/project/Project;Ljava/nio/file/Path;)Z" />
+      <scope id="3521790172251160935" at="23,52,24,76" />
+      <scope id="5748651123750007028" at="29,69,31,0" />
+      <scope id="3521790172251160928" at="22,0,26,0">
+        <var name="dir" id="3521790172251160931" />
+        <var name="name" id="3521790172251160933" />
+      </scope>
+      <scope id="3521790172251160951" at="27,44,33,18">
+        <var name="virtualFile" id="5748651123749996506" />
+      </scope>
+      <scope id="3521790172251160917" at="20,96,35,17">
+        <var name="files" id="3521790172251160919" />
+      </scope>
+      <scope id="3521790172251160910" at="19,0,37,0">
+        <var name="directory" id="3521790172251160915" />
+        <var name="project" id="3521790172251160913" />
+      </scope>
+      <unit id="3521790172251160927" at="21,52,26,5" name="jetbrains.mps.vcs.integration.ProjectCheckoutListener$1" />
+      <unit id="3521790172251160903" at="17,0,38,0" name="jetbrains.mps.vcs.integration.ProjectCheckoutListener" />
+    </file>
+  </root>
+  <root nodeRef="r:eec25685-8f1e-47c9-a9de-4a7ef6b504ec(jetbrains.mps.vcs.integration)/3521790172251226878">
+    <file name="ModuleVcsPathPresenter.java">
+      <node id="3521790172251226881" at="22,0,23,0" concept="3" trace="myProject" />
+      <node id="3521790172251226884" at="23,0,24,0" concept="3" trace="myManager" />
+      <node id="3521790172251226895" at="24,94,25,24" concept="2" />
+      <node id="3521790172251226899" at="25,24,26,24" concept="2" />
+      <node id="3521790172251226914" at="31,23,32,16" concept="8" />
+      <node id="3521790172251226928" at="36,31,37,69" concept="7" />
+      <node id="3521790172251226945" at="39,56,40,85" concept="8" />
+      <node id="3521790172251226974" at="44,63,45,90" concept="8" />
+      <node id="3521790172251226990" at="47,9,48,54" concept="8" />
+      <node id="9161154527962517792" at="54,114,55,121" concept="7" />
+      <node id="3521790172251227006" at="55,121,56,86" concept="8" />
+      <node id="3521790172251226909" at="30,71,33,5" concept="5" />
+      <node id="3521790172251226939" at="38,30,41,11" concept="5" />
+      <node id="3521790172251226966" at="43,57,46,11" concept="5" />
+      <node id="3521790172251226887" at="24,0,28,0" concept="1" trace="ModuleVcsPathPresenter#(Lcom/intellij/openapi/project/Project;Lcom/intellij/openapi/vcs/ProjectLevelVcsManager;)V" />
+      <node id="3521790172251226934" at="37,69,42,9" concept="5" />
+      <node id="3521790172251226959" at="42,9,47,9" concept="4" />
+      <node id="3521790172251226998" at="52,0,58,0" concept="6" trace="getPresentableRelativePath#(Lcom/intellij/openapi/vcs/changes/ContentRevision;Lcom/intellij/openapi/vcs/changes/ContentRevision;)Ljava/lang/String;" />
+      <node id="3521790172251226924" at="35,0,50,0" concept="6" trace="compute#()Ljava/lang/String;" />
+      <node id="3521790172251226916" at="33,5,50,7" concept="8" />
+      <node id="3521790172251226903" at="28,0,52,0" concept="6" trace="getPresentableRelativePathFor#(Lcom/intellij/openapi/vfs/VirtualFile;)Ljava/lang/String;" />
+      <scope id="3521790172251226913" at="31,23,32,16" />
+      <scope id="3521790172251226944" at="39,56,40,85" />
+      <scope id="3521790172251226973" at="44,63,45,90" />
+      <scope id="3521790172251226894" at="24,94,26,24" />
+      <scope id="3521790172251227005" at="54,114,56,86">
+        <var name="relativePath" id="9161154527962517793" />
+      </scope>
+      <scope id="3521790172251226938" at="38,30,41,11" />
+      <scope id="3521790172251226965" at="43,57,46,11" />
+      <scope id="3521790172251226887" at="24,0,28,0">
+        <var name="manager" id="3521790172251226892" />
+        <var name="project" id="3521790172251226890" />
+      </scope>
+      <scope id="3521790172251226959" at="42,9,47,9">
+        <var name="root" id="3521790172251226963" />
+      </scope>
+      <scope id="3521790172251226998" at="52,0,58,0">
+        <var name="fromRevision" id="3521790172251227001" />
+        <var name="toRevision" id="3521790172251227003" />
+      </scope>
+      <scope id="3521790172251226927" at="36,31,48,54">
+        <var name="baseDir" id="3521790172251226929" />
+      </scope>
+      <scope id="3521790172251226924" at="35,0,50,0" />
+      <scope id="3521790172251226908" at="30,71,50,7" />
+      <scope id="3521790172251226903" at="28,0,52,0">
+        <var name="file" id="3521790172251226906" />
+      </scope>
+      <unit id="3521790172251226922" at="34,65,50,5" name="jetbrains.mps.vcs.integration.ModuleVcsPathPresenter$1" />
+      <unit id="3521790172251226878" at="20,0,59,0" name="jetbrains.mps.vcs.integration.ModuleVcsPathPresenter" />
+    </file>
+  </root>
+  <root nodeRef="r:eec25685-8f1e-47c9-a9de-4a7ef6b504ec(jetbrains.mps.vcs.integration)/5748651123750026353">
+    <file name="ProjectDirMPSCheckoutListener.java">
+      <node id="5748651123750029452" at="20,108,21,69" concept="7" />
+      <node id="5748651123750029462" at="22,35,23,19" concept="8" />
+      <node id="5748651123750029479" at="28,69,29,119" concept="2" />
+      <node id="5748651123750029489" at="32,6,33,72" concept="7" />
+      <node id="5748651123750029496" at="34,41,35,21" concept="2" />
+      <node id="5748651123750029500" at="36,12,37,42" concept="2" />
+      <node id="5748651123750029503" at="38,5,39,16" concept="8" />
+      <node id="5748651123750028828" at="39,16,40,0" concept="10" />
+      <node id="5748651123750029498" at="36,10,38,5" concept="0" />
+      <node id="5748651123750029456" at="21,69,24,5" concept="5" />
+      <node id="5748651123750029473" at="27,25,30,9" concept="5" />
+      <node id="5748651123750029492" at="33,72,38,5" concept="5" />
+      <node id="5748651123750029470" at="26,0,32,0" concept="6" trace="run#()V" />
+      <node id="5748651123750029465" at="24,5,32,6" concept="7" />
+      <node id="5748651123750026673" at="19,0,42,0" concept="6" trace="processCheckedOutDirectory#(Lcom/intellij/openapi/project/Project;Ljava/nio/file/Path;)Z" />
+      <scope id="5748651123750029461" at="22,35,23,19" />
+      <scope id="5748651123750029478" at="28,69,29,119" />
+      <scope id="5748651123750029495" at="34,41,35,21" />
+      <scope id="5748651123750029499" at="36,12,37,42" />
+      <scope id="5748651123750029472" at="27,25,30,9" />
+      <scope id="5748651123750029470" at="26,0,32,0" />
+      <scope id="5748651123750026683" at="20,108,40,0">
+        <var name="application" id="5748651123750029488" />
+        <var name="dotIdea" id="5748651123750029451" />
+        <var name="runnable" id="5748651123750029464" />
+      </scope>
+      <scope id="5748651123750026673" at="19,0,42,0">
+        <var name="directory" id="5748651123750026680" />
+        <var name="project" id="5748651123750026677" />
+      </scope>
+      <unit id="5748651123750029469" at="25,34,32,5" name="jetbrains.mps.vcs.integration.ProjectDirMPSCheckoutListener$1" />
+      <unit id="5748651123750026353" at="17,0,43,0" name="jetbrains.mps.vcs.integration.ProjectDirMPSCheckoutListener" />
+    </file>
+  </root>
+  <root nodeRef="r:eec25685-8f1e-47c9-a9de-4a7ef6b504ec(jetbrains.mps.vcs.integration)/6203974263416579308">
+    <file name="GeneratedFileConflictResolving.java">
+      <node id="7540523421682873779" at="29,0,30,0" concept="3" trace="myMpsProject" />
+      <node id="5895927245363690426" at="31,69,32,62" concept="9" />
+      <node id="7540523421682874523" at="32,62,33,30" concept="2" />
+      <node id="4959319918758774843" at="36,50,37,35" concept="7" />
+      <node id="5895927245360409540" at="38,23,39,13" concept="8" />
+      <node id="7888896292848771668" at="40,5,41,53" concept="7" />
+      <node id="7888896292848543754" at="42,33,43,13" concept="8" />
+      <node id="7888896292848773017" at="44,5,45,0" concept="10" />
+      <node id="4959319918758774858" at="46,113,47,13" concept="8" />
+      <node id="2834132315319621348" at="48,5,49,0" concept="10" />
+      <node id="6203974263416606149" at="49,0,50,132" concept="7" />
+      <node id="6203974263416605723" at="51,32,52,99" concept="7" />
+      <node id="6203974263416606177" at="53,161,54,52" concept="2" />
+      <node id="6203974263416606245" at="54,52,55,84" concept="2" />
+      <node id="1773567318381334588" at="61,0,62,0" concept="3" trace="myResolve" />
+      <node id="7812420883498499109" at="62,0,63,0" concept="3" trace="myProject" />
+      <node id="5895927245363721619" at="64,46,65,91" concept="9" />
+      <node id="5895927245363722454" at="65,91,66,89" concept="9" />
+      <node id="7812420883498506464" at="66,89,67,30" concept="2" />
+      <node id="5895927245360443909" at="73,44,74,43" concept="2" />
+      <node id="1773567318381499973" at="81,51,82,43" concept="2" />
+      <node id="7812420883498604356" at="87,58,88,91" concept="9" />
+      <node id="7812420883498631911" at="88,91,89,99" concept="9" />
+      <node id="7812420883498643197" at="89,99,90,42" concept="9" />
+      <node id="1773567318381335876" at="91,30,92,103" concept="2" />
+      <node id="7812420883498542768" at="93,7,94,23" concept="8" />
+      <node id="5895927245363729573" at="97,90,98,105" concept="9" />
+      <node id="5895927245363741586" at="98,105,99,33" concept="9" />
+      <node id="5895927245360330933" at="102,43,103,60" concept="8" />
+      <node id="5895927245360134911" at="105,8,106,80" concept="8" />
+      <node id="6203974263416606152" at="110,36,111,50" concept="8" />
+      <node id="6203974263416606152" at="112,5,113,16" concept="8" />
+      <node id="5895927245360397618" at="37,35,40,5" concept="5" />
+      <node id="7888896292848543747" at="41,53,44,5" concept="5" />
+      <node id="4959319918758774435" at="45,0,48,5" concept="5" />
+      <node id="5895927245360443904" at="72,54,75,9" concept="5" />
+      <node id="5895927245360123690" at="80,54,83,9" concept="5" />
+      <node id="7812420883498509596" at="90,42,93,7" concept="5" />
+      <node id="6203974263416606152" at="109,82,112,5" concept="5" />
+      <node id="6203974263416606264" at="31,0,35,0" concept="1" trace="GeneratedFileConflictResolving#(Ljetbrains/mps/project/MPSProject;)V" />
+      <node id="6203974263416605686" at="52,99,56,7" concept="5" />
+      <node id="5895927245360329182" at="101,0,105,0" concept="6" trace="test#(Lcom/intellij/openapi/vfs/newvfs/events/VFileEvent;)Z" />
+      <node id="6203974263416588881" at="64,0,69,0" concept="1" trace="FileListener#(Lcom/intellij/openapi/project/Project;)V" />
+      <node id="5895927245360443902" at="71,68,76,7" concept="4" />
+      <node id="5895927245360114413" at="79,67,84,7" concept="4" />
+      <node id="5895927245360214640" at="99,33,105,8" concept="7" />
+      <node id="6203974263416606152" at="109,0,115,0" concept="11" trace="check_tqtyvq_a0h0e#(Lcom/intellij/openapi/vcs/AbstractVcs;)Lcom/intellij/openapi/vcs/merge/MergeProvider;" />
+      <node id="6203974263416593522" at="50,132,57,5" concept="5" />
+      <node id="5895927245360064783" at="70,0,78,0" concept="6" trace="before#(Ljava/util/List;)V" />
+      <node id="5895927245360064801" at="78,0,86,0" concept="6" trace="after#(Ljava/util/List;)V" />
+      <node id="7812420883498470464" at="87,0,96,0" concept="6" trace="getResolver#()Ljetbrains/mps/vcs/integration/GeneratedFileConflictResolving;" />
+      <node id="5895927245360130416" at="97,0,108,0" concept="11" trace="fromOurFileSystem#(Ljava/util/List;)Ljava/util/List;" />
+      <node id="6203974263416588917" at="36,0,59,0" concept="6" trace="resolveIfNeeded#(Lcom/intellij/openapi/vfs/newvfs/events/VFileEvent;)V" />
+      <scope id="5895927245360397620" at="38,23,39,13" />
+      <scope id="7888896292848543753" at="42,33,43,13" />
+      <scope id="4959319918758774436" at="46,113,47,13" />
+      <scope id="5895927245360443908" at="73,44,74,43" />
+      <scope id="5895927245360123692" at="81,51,82,43" />
+      <scope id="7812420883498509598" at="91,30,92,103" />
+      <scope id="5895927245360329188" at="102,43,103,60" />
+      <scope id="6203974263416606152" at="110,36,111,50" />
+      <scope id="6203974263416606268" at="31,69,33,30" />
+      <scope id="6203974263416605688" at="53,161,55,84" />
+      <scope id="6203974263416588884" at="64,46,67,30" />
+      <scope id="5895927245360443903" at="72,54,75,9" />
+      <scope id="5895927245360114416" at="80,54,83,9" />
+      <scope id="6203974263416606264" at="31,0,35,0">
+        <var name="mpsProject" id="7540523421682865058" />
+      </scope>
+      <scope id="5895927245360329182" at="101,0,105,0">
+        <var name="e" id="5895927245360329186" />
+      </scope>
+      <scope id="6203974263416606152" at="109,82,113,16" />
+      <scope id="6203974263416593523" at="51,32,56,7">
+        <var name="status" id="6203974263416605724" />
+      </scope>
+      <scope id="6203974263416588881" at="64,0,69,0">
+        <var name="ideaProject" id="1773567318381243731" />
+      </scope>
+      <scope id="5895927245360064793" at="71,68,76,7" />
+      <scope id="5895927245360443902" at="71,68,76,7">
+        <var name="e" id="5895927245360443914" />
+      </scope>
+      <scope id="5895927245360064811" at="79,67,84,7" />
+      <scope id="5895927245360114413" at="79,67,84,7">
+        <var name="e" id="5895927245360114417" />
+      </scope>
+      <scope id="6203974263416606152" at="109,0,115,0">
+        <var name="checkedDotOperand" id="6203974263416606152" />
+      </scope>
+      <scope id="7812420883498470467" at="87,58,94,23" />
+      <scope id="5895927245360064783" at="70,0,78,0">
+        <var name="events" id="5895927245360064788" />
+      </scope>
+      <scope id="5895927245360064801" at="78,0,86,0">
+        <var name="events" id="5895927245360064806" />
+      </scope>
+      <scope id="7812420883498470464" at="87,0,96,0" />
+      <scope id="5895927245360130419" at="97,90,106,80">
+        <var name="p" id="5895927245360214641" />
+      </scope>
+      <scope id="5895927245360130416" at="97,0,108,0">
+        <var name="events" id="5895927245360134036" />
+      </scope>
+      <scope id="6203974263416588920" at="36,50,57,5">
+        <var name="file" id="4959319918758774844" />
+        <var name="fs" id="7888896292848771669" />
+        <var name="mergeProvider" id="6203974263416606150" />
+      </scope>
+      <scope id="6203974263416588917" at="36,0,59,0">
+        <var name="e" id="6203974263416588922" />
+      </scope>
+      <unit id="5895927245360329167" at="100,36,105,7" name="jetbrains.mps.vcs.integration.GeneratedFileConflictResolving$FileListener$1" />
+      <unit id="6203974263416588879" at="60,0,109,0" name="jetbrains.mps.vcs.integration.GeneratedFileConflictResolving$FileListener" />
+      <unit id="6203974263416579308" at="27,0,116,0" name="jetbrains.mps.vcs.integration.GeneratedFileConflictResolving" />
+    </file>
+  </root>
+</debug-info>
+

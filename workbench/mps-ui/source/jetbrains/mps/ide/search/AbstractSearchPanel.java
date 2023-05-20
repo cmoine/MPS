@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,16 @@
 package jetbrains.mps.ide.search;
 
 import com.intellij.icons.AllIcons.Actions;
-import com.intellij.openapi.actionSystem.*;
+import com.intellij.icons.AllIcons.ToolbarDecorator;
+import com.intellij.openapi.actionSystem.ActionManager;
+import com.intellij.openapi.actionSystem.ActionToolbar;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.CustomShortcutSet;
+import com.intellij.openapi.actionSystem.DefaultActionGroup;
+import com.intellij.openapi.actionSystem.IdeActions;
+import com.intellij.openapi.actionSystem.KeyboardShortcut;
+import com.intellij.openapi.actionSystem.Shortcut;
 import com.intellij.openapi.editor.impl.EditorHeaderComponent;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
@@ -25,11 +34,23 @@ import com.intellij.ui.components.panels.NonOpaquePanel;
 import jetbrains.mps.ide.actions.MPSActions;
 import jetbrains.mps.ide.ui.CompletionTextField;
 
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -79,6 +100,7 @@ public abstract class AbstractSearchPanel extends EditorHeaderComponent {
     }
 
     final ActionToolbar tb = ActionManager.getInstance().createActionToolbar("SearchBar", group, true);
+    tb.setTargetComponent(this);
     tb.setLayoutPolicy(ActionToolbar.NOWRAP_LAYOUT_POLICY);
     myToolbarComponent = tb.getComponent();
     myToolbarComponent.setBorder(null);
@@ -89,38 +111,23 @@ public abstract class AbstractSearchPanel extends EditorHeaderComponent {
     mainPanel.add(myIsCaseSensitive);
     myIsCaseSensitive.setMnemonic(KeyEvent.VK_M);
     myIsCaseSensitive.setFocusable(false);
-    myIsCaseSensitive.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent event) {
-        search();
-      }
-    });
+    myIsCaseSensitive.addActionListener(event -> search());
 
     mainPanel.add(myIsRegex);
     myIsRegex.setMnemonic(KeyEvent.VK_R);
     myIsRegex.setFocusable(false);
-    myIsRegex.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent event) {
-        myIsWordsOnly.setEnabled(!myIsWordsOnly.isEnabled());
-      }
-    });
+    myIsRegex.addActionListener(event -> myIsWordsOnly.setEnabled(!myIsWordsOnly.isEnabled()));
 
     mainPanel.add(myIsWordsOnly);
     myIsWordsOnly.setMnemonic(KeyEvent.VK_O);
     myIsWordsOnly.setFocusable(false);
-    myIsWordsOnly.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent event) {
-        search();
-      }
-    });
+    myIsWordsOnly.addActionListener(event -> search());
 
     this.add(mainPanel, BorderLayout.WEST);
 
     JPanel tailPanel = new NonOpaquePanel(new BorderLayout(5, 0));
     JPanel tailContainer = new NonOpaquePanel(new BorderLayout(5, 0));
-    JLabel escapeLabel = new JLabel(Actions.Cross);
+    JLabel escapeLabel = new JLabel(Actions.Close);
 
     tailPanel.add(myFindResult, BorderLayout.CENTER);
     tailPanel.add(escapeLabel, BorderLayout.EAST);
@@ -285,7 +292,7 @@ public abstract class AbstractSearchPanel extends EditorHeaderComponent {
 
   protected class HistoryCompletionTextField extends CompletionTextField {
     private final int myPossibleValuesLimit = 30;
-    private List<String> myPossibleValues = new ArrayList<String>();
+    private List<String> myPossibleValues = new ArrayList<>();
 
     public HistoryCompletionTextField() {
       super();
@@ -332,12 +339,12 @@ public abstract class AbstractSearchPanel extends EditorHeaderComponent {
       getTemplatePresentation().setDescription("Search history");
       getTemplatePresentation().setText("Search History");
 
-      ArrayList<Shortcut> shortcuts = new ArrayList<Shortcut>();
+      ArrayList<Shortcut> shortcuts = new ArrayList<>();
       shortcuts.addAll(getActionShortcuts(MPSActions.EDITOR_FIND));
       shortcuts.add(new KeyboardShortcut(KeyStroke.getKeyStroke(KeyEvent.VK_H, KeyEvent.CTRL_DOWN_MASK), null));
 
       registerCustomShortcutSet(
-        new CustomShortcutSet(shortcuts.toArray(new Shortcut[shortcuts.size()])),
+        new CustomShortcutSet(shortcuts.toArray(new Shortcut[0])),
         myText);
     }
 
@@ -358,13 +365,13 @@ public abstract class AbstractSearchPanel extends EditorHeaderComponent {
       getTemplatePresentation().setDescription("Previous Occurrence");
       getTemplatePresentation().setText("Previous Occurrence");
 
-      ArrayList<Shortcut> shortcuts = new ArrayList<Shortcut>();
+      ArrayList<Shortcut> shortcuts = new ArrayList<>();
       shortcuts.addAll(getActionShortcuts(MPSActions.EDITOR_FIND_PREVIOUS));
       shortcuts.addAll(getActionShortcuts(IdeActions.ACTION_EDITOR_MOVE_CARET_UP));
       shortcuts.add(new KeyboardShortcut(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, KeyEvent.SHIFT_DOWN_MASK), null));
 
       registerCustomShortcutSet(
-        new CustomShortcutSet(shortcuts.toArray(new Shortcut[shortcuts.size()])),
+        new CustomShortcutSet(shortcuts.toArray(new Shortcut[0])),
         myText);
     }
 
@@ -385,13 +392,13 @@ public abstract class AbstractSearchPanel extends EditorHeaderComponent {
       getTemplatePresentation().setDescription("Next Occurrence");
       getTemplatePresentation().setText("Next Occurrence");
 
-      ArrayList<Shortcut> shortcuts = new ArrayList<Shortcut>();
+      ArrayList<Shortcut> shortcuts = new ArrayList<>();
       shortcuts.addAll(getActionShortcuts(MPSActions.EDITOR_FIND_NEXT));
       shortcuts.addAll(getActionShortcuts(IdeActions.ACTION_EDITOR_MOVE_CARET_DOWN));
       shortcuts.add(new KeyboardShortcut(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), null));
 
       registerCustomShortcutSet(
-        new CustomShortcutSet(shortcuts.toArray(new Shortcut[shortcuts.size()])),
+        new CustomShortcutSet(shortcuts.toArray(new Shortcut[0])),
         myText);
     }
 
@@ -408,7 +415,7 @@ public abstract class AbstractSearchPanel extends EditorHeaderComponent {
 
   private class FindAllAction extends AnAction {
     private FindAllAction() {
-      getTemplatePresentation().setIcon(Actions.Export);
+      getTemplatePresentation().setIcon(ToolbarDecorator.Export);
       getTemplatePresentation().setDescription("Export matches to Find tool window");
       getTemplatePresentation().setText("Find All");
       AnAction findNext = ActionManager.getInstance().getAction(MPSActions.EDITOR_FIND_NEXT);

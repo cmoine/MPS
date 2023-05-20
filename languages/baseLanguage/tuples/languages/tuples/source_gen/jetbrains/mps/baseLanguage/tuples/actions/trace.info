@@ -4,39 +4,45 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144226303539:jetbrains.mps.baseLanguage.structure.ForeachStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <root>
     <file name="ActionAspectDescriptorImpl.java">
-      <unit at="13,0,34,0" name="jetbrains.mps.baseLanguage.tuples.actions.ActionAspectDescriptorImpl" />
-    </file>
-    <file name="QueriesGenerated.java">
-      <unit at="6,0,8,0" name="jetbrains.mps.baseLanguage.tuples.actions.QueriesGenerated" />
+      <unit at="12,0,28,0" name="jetbrains.mps.baseLanguage.tuples.actions.ActionAspectDescriptorImpl" />
     </file>
   </root>
   <root nodeRef="r:838e2cf6-ab53-4d74-b51a-1c68353cb80b(jetbrains.mps.baseLanguage.tuples.actions)/1239567468054">
     <file name="tupleLiteral_init.java">
-      <node id="2912004279740771390" at="19,53,20,176" concept="3" />
-      <node id="1239567537226" at="22,11,23,625" concept="0" />
-      <node id="2912004279740771246" at="19,0,22,0" concept="2" trace="translate#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/Iterable;" />
-      <node id="1239567501524" at="17,91,24,7" concept="1" />
-      <node id="1239567483800" at="17,0,26,0" concept="2" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SModel;)V" />
-      <scope id="2912004279740771247" at="19,53,20,176" />
-      <scope id="1239567501528" at="22,11,23,625" />
-      <scope id="2912004279740771246" at="19,0,22,0">
+      <node id="2912004279740771390" at="22,53,23,72" concept="3" />
+      <node id="1239567537226" at="25,11,26,254" concept="0" />
+      <node id="1239567468054" at="32,0,33,0" concept="4" trace="tupleDeclaration$Pcb7" />
+      <node id="1239567468054" at="33,0,34,0" concept="4" trace="component$wCHx" />
+      <node id="1239567468054" at="34,0,35,0" concept="4" trace="componentRef$hTGc" />
+      <node id="1239567468054" at="35,0,36,0" concept="4" trace="componentDeclaration$nkzL" />
+      <node id="1239567468054" at="39,0,40,0" concept="4" trace="NamedTupleComponentReference$e7" />
+      <node id="2912004279740771246" at="22,0,25,0" concept="2" trace="translate#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/Iterable;" />
+      <node id="1239567501524" at="20,102,27,7" concept="1" />
+      <node id="1239567483800" at="20,0,29,0" concept="2" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <scope id="2912004279740771247" at="22,53,23,72" />
+      <scope id="1239567501528" at="25,11,26,254" />
+      <scope id="2912004279740771246" at="22,0,25,0">
         <var name="ntd" id="2912004279740771246" />
       </scope>
-      <scope id="1239567483800" at="17,91,24,7" />
-      <scope id="1239567501524" at="17,91,24,7">
+      <scope id="1239567483800" at="20,102,27,7" />
+      <scope id="1239567501524" at="20,102,27,7">
         <var name="cd" id="1239567501526" />
       </scope>
-      <scope id="1239567483800" at="17,0,26,0">
+      <scope id="1239567483800" at="20,0,29,0">
         <var name="enclosingNode" id="1239567483800" />
+        <var name="index" id="1239567483800" />
         <var name="model" id="1239567483800" />
         <var name="newNode" id="1239567483800" />
         <var name="sampleNode" id="1239567483800" />
       </scope>
-      <unit id="2912004279740771246" at="18,315,22,7" name="jetbrains.mps.baseLanguage.tuples.actions.tupleLiteral_init$1" />
-      <unit id="1239567483800" at="16,0,27,0" name="jetbrains.mps.baseLanguage.tuples.actions.tupleLiteral_init$NodeFactory_1239567483800" />
-      <unit id="1239567468054" at="15,0,28,0" name="jetbrains.mps.baseLanguage.tuples.actions.tupleLiteral_init" />
+      <unit id="1239567468054" at="38,0,41,0" name="jetbrains.mps.baseLanguage.tuples.actions.tupleLiteral_init$CONCEPTS" />
+      <unit id="2912004279740771246" at="21,213,25,7" name="jetbrains.mps.baseLanguage.tuples.actions.tupleLiteral_init$NodeFactory_1239567483800$1" />
+      <unit id="1239567468054" at="31,0,37,0" name="jetbrains.mps.baseLanguage.tuples.actions.tupleLiteral_init$LINKS" />
+      <unit id="1239567483800" at="19,0,30,0" name="jetbrains.mps.baseLanguage.tuples.actions.tupleLiteral_init$NodeFactory_1239567483800" />
+      <unit id="1239567468054" at="18,0,42,0" name="jetbrains.mps.baseLanguage.tuples.actions.tupleLiteral_init" />
     </file>
   </root>
 </debug-info>

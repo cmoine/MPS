@@ -27,7 +27,7 @@ public class FooCheckedDots<T extends Enum> {
     check_7013wl_a1a6(s, this);
     check_7013wl_a2a6(s, myString);
     check_7013wl_a3a6(s, this);
-    // http://youtrack.jetbrains.com/issue/MPS-14355 
+    // http://youtrack.jetbrains.com/issue/MPS-14355
     check_7013wl_a5a6(s, this);
   }
   public int intFunc() {
@@ -41,7 +41,7 @@ public class FooCheckedDots<T extends Enum> {
     }
   }
   public void checkThisBeforCheckedDot() {
-    // http://youtrack.jetbrains.net/issue/MPS-13818 
+    // http://youtrack.jetbrains.net/issue/MPS-13818
     check_7013wl_a1a9(getInstance(this.myInt, this.myBoolean), this);
   }
   private String getString(int i, boolean b) {

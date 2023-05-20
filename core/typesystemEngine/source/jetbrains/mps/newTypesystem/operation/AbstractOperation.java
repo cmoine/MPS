@@ -16,9 +16,11 @@
 package jetbrains.mps.newTypesystem.operation;
 
 import jetbrains.mps.newTypesystem.state.State;
-import org.jetbrains.mps.openapi.model.SNode;
+import jetbrains.mps.smodel.SNodePointer;
 import jetbrains.mps.typesystem.inference.EquationInfo;
-import jetbrains.mps.util.Pair;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.mps.openapi.model.SNodeReference;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -27,27 +29,31 @@ import java.util.List;
 public abstract class AbstractOperation {
   private List<AbstractOperation> myConsequences;
   protected SNode mySource = null;
-  protected Pair<String, String> myRule = null;
+  protected SNodeReference myRule = null;
 
   public void addConsequence(AbstractOperation op) {
     if (myConsequences == null) {
-      myConsequences = new LinkedList<AbstractOperation>();
+      myConsequences = new LinkedList<>();
     }
     myConsequences.add(op);
   }
 
-  protected void setRule(EquationInfo info) {
+  protected final void setRule(EquationInfo info) {
     if (info != null) {
-      myRule = new Pair<String, String>(info.getRuleModel(), info.getRuleId());
+      myRule = info.getRuleNode();
     }
   }
 
-  protected void setRule(String model, String id) {
-    myRule = new Pair<String, String>(model, id);
+  protected final void setRule(String model, String id) {
+    myRule = model == null || id == null ? null : new SNodePointer(model, id);
+  }
+
+  protected final void setRule(SNodeReference ruleNode) {
+    myRule = ruleNode;
   }
 
   public List<AbstractOperation> getConsequences() {
-    return myConsequences == null ? Collections.<AbstractOperation>emptyList() : Collections.unmodifiableList(myConsequences);
+    return myConsequences == null ? Collections.emptyList() : Collections.unmodifiableList(myConsequences);
   }
 
   protected abstract void doUndo(State state);
@@ -55,21 +61,11 @@ public abstract class AbstractOperation {
   protected abstract void doRedo(State state);
 
   public void undo(final State state) {
-    state.executeStateChangeAction(new Runnable() {
-      @Override
-      public void run() {
-        doUndo(state);
-      }
-    });
+    state.executeStateChangeAction(() -> doUndo(state));
   }
 
   public void redo(final State state) {
-    state.executeStateChangeAction(new Runnable() {
-      @Override
-      public void run() {
-        doRedo(state);
-      }
-    });
+    state.executeStateChangeAction(() -> doRedo(state));
   }
 
   // default implementation
@@ -91,7 +87,8 @@ public abstract class AbstractOperation {
     return mySource;
   }
 
-  public Pair<String, String> getRule() {
+  @Nullable
+  public SNodeReference getRule() {
     return myRule;
   }
 

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144226303539:jetbrains.mps.baseLanguage.structure.ForeachStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1076505808687:jetbrains.mps.baseLanguage.structure.WhileStatement" />
+  <root nodeRef="r:4a618277-2606-4667-90e0-556bb06e001b(jetbrains.mps.ide.mpsmigration)/3472837269634483379">
+    <file name="Mpsmigration_ApplicationPlugin.java">
+      <node id="3472837269634483379" at="23,66,24,53" concept="1" />
+    </file>
+    <file name="ProjectMigrations_AppPluginPart.java">
+      <node id="3472837269634483405" at="20,0,21,0" concept="2" trace="myMigrations" />
+      <node id="3472837269634538932" at="21,0,22,0" concept="2" trace="myRegistry" />
+      <node id="3472837269634526196" at="25,22,26,94" concept="1" />
+      <node id="3472837269634688790" at="26,94,27,91" concept="6" />
+      <node id="3472837269634716835" at="27,91,28,104" concept="6" />
+      <node id="3472837269634505603" at="28,104,29,89" concept="1" />
+      <node id="3472837269634672921" at="29,89,30,89" concept="1" />
+      <node id="3472837269634661808" at="30,89,31,89" concept="1" />
+      <node id="3472837269634666665" at="31,89,32,89" concept="1" />
+      <node id="3472837269634619116" at="32,89,33,89" concept="1" />
+      <node id="7780660499362662" at="33,89,34,89" concept="1" />
+      <node id="1291799896033384798" at="34,89,35,89" concept="1" />
+      <node id="1100146153821859972" at="35,89,36,89" concept="1" />
+      <node id="419238803118915307" at="36,89,37,89" concept="1" />
+      <node id="3472837269634704025" at="37,89,38,56" concept="6" />
+      <node id="2400678414103294623" at="39,83,40,78" concept="1" />
+      <node id="7084733703794808505" at="44,25,45,48" concept="6" />
+      <node id="3472837269634562771" at="46,76,47,141" concept="1" />
+      <node id="3472837269634552925" at="48,5,49,59" concept="1" />
+      <node id="3472837269634483379" at="22,0,24,0" concept="0" trace="ProjectMigrations_AppPluginPart#()V" />
+      <node id="2400678414103294620" at="38,56,41,5" concept="3" />
+      <node id="3472837269634553856" at="45,48,48,5" concept="7" />
+      <node id="3472837269634483379" at="43,0,51,0" concept="4" trace="dispose#()V" />
+      <node id="3472837269634483379" at="24,0,43,0" concept="4" trace="init#()V" />
+      <scope id="3472837269634483379" at="22,44,22,44" />
+      <scope id="2400678414103294622" at="39,83,40,78" />
+      <scope id="3472837269634553858" at="46,76,47,141" />
+      <scope id="3472837269634483379" at="22,0,24,0" />
+      <scope id="2400678414103294620" at="38,56,41,5">
+        <var name="pm" id="2400678414103294628" />
+      </scope>
+      <scope id="3472837269634483394" at="44,25,49,59" />
+      <scope id="3472837269634483379" at="43,0,51,0" />
+      <scope id="3472837269634483382" at="25,22,41,5" />
+      <scope id="3472837269634483379" at="24,0,43,0" />
+      <unit id="3472837269634483379" at="19,0,52,0" name="jetbrains.mps.ide.mpsmigration.ProjectMigrations_AppPluginPart" />
+    </file>
+  </root>
+  <root nodeRef="r:4a618277-2606-4667-90e0-556bb06e001b(jetbrains.mps.ide.mpsmigration)/3472837269634483380">
+    <file name="Mpsmigration_ApplicationPlugin.java">
+      <node id="3472837269634483380" at="12,0,13,0" concept="2" trace="myId" />
+      <node id="3472837269634483380" at="18,27,19,16" concept="5" />
+      <node id="3472837269634483380" at="14,0,16,0" concept="0" trace="Mpsmigration_ApplicationPlugin#()V" />
+      <node id="3472837269634483380" at="17,0,21,0" concept="4" trace="getId#()Lcom/intellij/openapi/extensions/PluginId;" />
+      <node id="3472837269634483380" at="22,0,26,0" concept="4" trace="fillCustomParts#(Ljava/util/List;)V" />
+      <scope id="3472837269634483380" at="14,43,14,43" />
+      <scope id="3472837269634483380" at="18,27,19,16" />
+      <scope id="3472837269634483380" at="23,66,24,53" />
+      <scope id="3472837269634483380" at="14,0,16,0" />
+      <scope id="3472837269634483380" at="17,0,21,0" />
+      <scope id="3472837269634483380" at="22,0,26,0">
+        <var name="parts" id="3472837269634483380" />
+      </scope>
+      <unit id="3472837269634483380" at="11,0,27,0" name="jetbrains.mps.ide.mpsmigration.Mpsmigration_ApplicationPlugin" />
+    </file>
+    <file name="startup.properties">
+      <unit id="3472837269634483380" at="1,0,5,0" name="jetbrains.mps.ide.mpsmigration.startup" />
+    </file>
+  </root>
+</debug-info>
+

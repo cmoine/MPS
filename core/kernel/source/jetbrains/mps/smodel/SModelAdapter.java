@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package jetbrains.mps.smodel;
 import jetbrains.mps.smodel.event.SModelChildEvent;
 import jetbrains.mps.smodel.event.SModelDevKitEvent;
 import jetbrains.mps.smodel.event.SModelEvent;
-import jetbrains.mps.smodel.event.SModelFileChangedEvent;
 import jetbrains.mps.smodel.event.SModelImportEvent;
 import jetbrains.mps.smodel.event.SModelLanguageEvent;
 import jetbrains.mps.smodel.event.SModelListener;
@@ -34,7 +33,7 @@ import org.jetbrains.mps.openapi.model.SModel;
  * @author Kostik
  */
 public class SModelAdapter implements SModelListener {
-  private SModelListenerPriority myPriority;
+  private final SModelListenerPriority myPriority;
 
   public SModelAdapter() {
     this(SModelListenerPriority.CLIENT);
@@ -137,15 +136,6 @@ public class SModelAdapter implements SModelListener {
 
   @Override
   public void modelRenamed(SModelRenamedEvent event) {
-    eventFired(event);
-  }
-
-  @Override
-  public void beforeModelFileChanged(SModelFileChangedEvent event) {
-  }
-
-  @Override
-  public void modelFileChanged(SModelFileChangedEvent event) {
     eventFired(event);
   }
 

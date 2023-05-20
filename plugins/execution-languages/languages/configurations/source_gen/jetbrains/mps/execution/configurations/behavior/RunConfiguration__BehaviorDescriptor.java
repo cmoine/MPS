@@ -5,13 +5,10 @@ package jetbrains.mps.execution.configurations.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.List;
 import java.util.Arrays;
@@ -22,17 +19,19 @@ import jetbrains.mps.lang.smodel.generator.smodelAdapter.SModelOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.internal.collections.runtime.IWhereFilter;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
+import java.util.Objects;
 import jetbrains.mps.execution.common.behavior.IGeneratedToClass__BehaviorDescriptor;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 
 public final class RunConfiguration__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x2153d8f1c1f46e49L, "jetbrains.mps.execution.configurations.structure.RunConfiguration");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<SNode> getExecutor_id3gs394eDyIj = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getExecutor").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("3gs394eDyIj").registry(REGISTRY).build();
-  public static final SMethod<Boolean> isForeign_id3wpI_WC06mf = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isForeign").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("3wpI_WC06mf").registry(REGISTRY).build();
-  public static final SMethod<String> getGeneratedFactoryName_id1XgDflG1h5w = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getGeneratedFactoryName").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("1XgDflG1h5w").registry(REGISTRY).build();
+  public static final SMethod<SNode> getExecutor_id3gs394eDyIj = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getExecutor").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(3754890006475713427L).languageId(0x84036750153aa615L, 0x22e72e4c0f6946ceL).build2();
+  public static final SMethod<Boolean> isForeign_id3wpI_WC06mf = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isForeign").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(4042467058397504911L).languageId(0x84036750153aa615L, 0x22e72e4c0f6946ceL).build2();
+  public static final SMethod<String> getGeneratedFactoryName_id1XgDflG1h5w = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getGeneratedFactoryName").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(2256484787298832736L).languageId(0x84036750153aa615L, 0x22e72e4c0f6946ceL).build2();
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getExecutor_id3gs394eDyIj, isForeign_id3wpI_WC06mf, getGeneratedFactoryName_id1XgDflG1h5w);
 
@@ -41,24 +40,23 @@ public final class RunConfiguration__BehaviorDescriptor extends BaseBHDescriptor
 
   @Nullable
   /*package*/ static SNode getExecutor_id3gs394eDyIj(@NotNull final SNode __thisNode__) {
-    return ListSequence.fromList(SModelOperations.roots(SNodeOperations.getModel(__thisNode__), MetaAdapterFactory.getConcept(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x2153d8f1c1f52479L, "jetbrains.mps.execution.configurations.structure.AbstractRunConfigurationExecutor"))).findFirst(new IWhereFilter<SNode>() {
+    return ListSequence.fromList(SModelOperations.roots(SNodeOperations.getModel(__thisNode__), CONCEPTS.AbstractRunConfigurationExecutor$Fp)).findFirst(new IWhereFilter<SNode>() {
       public boolean accept(SNode it) {
-        return SLinkOperations.getTarget(it, MetaAdapterFactory.getReferenceLink(0x756e911c3f1f4a48L, 0xbdf5a2ceb91b723cL, 0xd244b712f9dce91L, 0xd244b712f9dce92L, "configuration")) == __thisNode__;
+        return SLinkOperations.getTarget(it, LINKS.configuration$CM7P) == __thisNode__;
       }
     });
   }
   /*package*/ static boolean isForeign_id3wpI_WC06mf(@NotNull SNode __thisNode__) {
-    if ((SLinkOperations.getTarget(__thisNode__, MetaAdapterFactory.getReferenceLink(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x2153d8f1c1f46e49L, 0x2153d8f1c1f48ae2L, "configurationKind")) == null)) {
+    if ((SLinkOperations.getTarget(__thisNode__, LINKS.configurationKind$$GNc) == null)) {
       return false;
     }
-    return neq_dhv8ye_a0b0m(SNodeOperations.getModel(SLinkOperations.getTarget(__thisNode__, MetaAdapterFactory.getReferenceLink(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x2153d8f1c1f46e49L, 0x2153d8f1c1f48ae2L, "configurationKind"))), SNodeOperations.getModel(__thisNode__));
+    return !(Objects.equals(SNodeOperations.getModel(SLinkOperations.getTarget(__thisNode__, LINKS.configurationKind$$GNc)), SNodeOperations.getModel(__thisNode__)));
   }
   /*package*/ static String getGeneratedFactoryName_id1XgDflG1h5w(@NotNull SNode __thisNode__) {
     return IGeneratedToClass__BehaviorDescriptor.getGeneratedClassName_idO$iR4JBsSg.invoke(__thisNode__) + "_Factory";
   }
 
   /*package*/ RunConfiguration__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -107,7 +105,13 @@ public final class RunConfiguration__BehaviorDescriptor extends BaseBHDescriptor
   public SAbstractConcept getConcept() {
     return CONCEPT;
   }
-  private static boolean neq_dhv8ye_a0b0m(Object a, Object b) {
-    return !(((a != null ? a.equals(b) : a == b)));
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept AbstractRunConfigurationExecutor$Fp = MetaAdapterFactory.getConcept(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x2153d8f1c1f52479L, "jetbrains.mps.execution.configurations.structure.AbstractRunConfigurationExecutor");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SReferenceLink configuration$CM7P = MetaAdapterFactory.getReferenceLink(0x756e911c3f1f4a48L, 0xbdf5a2ceb91b723cL, 0xd244b712f9dce91L, 0xd244b712f9dce92L, "configuration");
+    /*package*/ static final SReferenceLink configurationKind$$GNc = MetaAdapterFactory.getReferenceLink(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0x2153d8f1c1f46e49L, 0x2153d8f1c1f48ae2L, "configurationKind");
   }
 }

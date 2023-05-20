@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-61mu7ck988ekjk472v04drwrpkjc0ox" />
+<product version="3" modelHash="e1r8kxxcusfwrvpgaojzmmqx176ieqx">
+  <files names="ConvertToClassifierFQNameSpecification_Intention.java:ConvertToMethodFQNameSpecification_Intention.java:IntentionsDescriptor.java" />
+</product>
 

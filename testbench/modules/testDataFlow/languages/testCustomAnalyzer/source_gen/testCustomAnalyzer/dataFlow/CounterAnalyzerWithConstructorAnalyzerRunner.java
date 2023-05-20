@@ -25,7 +25,7 @@ public class CounterAnalyzerWithConstructorAnalyzerRunner extends CustomAnalyzer
   public CounterAnalyzerWithConstructorAnalyzerRunner(SNode node, ProgramFactory<NamedAnalyzerId> factory, int initialCounter) {
     super(null, null);
     myNode = node;
-    myAnalyzer = new CounterAnalyzerWithConstructorAnalyzerRunner.CounterAnalyzerWithConstructorAnalyzer(initialCounter);
+    myAnalyzer = new CounterAnalyzerWithConstructorAnalyzer(initialCounter);
     myProgram = factory.createProgram(myNode);
     factory.prepareProgram(myProgram, myNode, new NamedAnalyzerId("testCustomAnalyzer.dataFlow.CounterAnalyzerWithConstructor"));
   }
@@ -52,15 +52,6 @@ public class CounterAnalyzerWithConstructorAnalyzerRunner extends CustomAnalyzer
     }
     public AnalysisDirection getDirection() {
       return AnalysisDirection.FORWARD;
-    }
-
-    /**
-     * 
-     * @deprecated 
-     */
-    @Deprecated
-    public static String getId() {
-      return "testCustomAnalyzer.dataFlow.CounterAnalyzerWithConstructor";
     }
   }
 }

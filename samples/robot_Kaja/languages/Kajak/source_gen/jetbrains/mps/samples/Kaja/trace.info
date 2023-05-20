@@ -2,7 +2,7 @@
 <debug-info version="2">
   <root>
     <file name="Language.java">
-      <unit at="27,0,104,0" name="jetbrains.mps.samples.Kaja.Language" />
+      <unit at="29,0,91,0" name="jetbrains.mps.samples.Kaja.Language" />
     </file>
   </root>
 </debug-info>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,6 @@ package org.jetbrains.mps.openapi.language;
  * Represents an interface concept
  */
 public interface SInterfaceConcept extends SAbstractConcept {
-  /**
-   * Returns interfaces this one inherits immediately
-   */
+  // override preserved to keep references from model code intact
   Iterable<SInterfaceConcept> getSuperInterfaces();
 }

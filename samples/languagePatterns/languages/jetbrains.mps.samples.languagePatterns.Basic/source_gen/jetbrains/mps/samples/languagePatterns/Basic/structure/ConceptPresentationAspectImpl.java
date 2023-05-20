@@ -4,135 +4,332 @@ package jetbrains.mps.samples.languagePatterns.Basic.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_AbstractRequestDescription = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Address = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AddressReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AgendaItem = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Apple = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Car = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CombinedPerformance = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Component = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ComponentUsage = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Concert = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Container = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DottedLine = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DrawCommand = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DrawLine = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DrawRect = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_EmptyLine = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_FormDescription = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Fruit = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_FruitPlate = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IncompleteCommand = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Item = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ItemReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_LineStyle = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ListOfDrawCommands = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_OperationOnAddress = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Orange = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Participant = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Performance = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PerformanceWithTitle = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RaceParticipant = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Request = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SimplifiedFormDescription = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Singer = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SolidLine = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SomeForm = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_StreetOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_StringDescription = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Truck = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ZipOperation = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_AbstractRequestDescription;
+  private ConceptPresentation props_Address;
+  private ConceptPresentation props_AddressReference;
+  private ConceptPresentation props_AddressType;
+  private ConceptPresentation props_AgendaItem;
+  private ConceptPresentation props_Apple;
+  private ConceptPresentation props_Car;
+  private ConceptPresentation props_CombinedPerformance;
+  private ConceptPresentation props_Component;
+  private ConceptPresentation props_ComponentUsage;
+  private ConceptPresentation props_Concert;
+  private ConceptPresentation props_Container;
+  private ConceptPresentation props_DottedLine;
+  private ConceptPresentation props_DrawCommand;
+  private ConceptPresentation props_DrawLine;
+  private ConceptPresentation props_DrawRect;
+  private ConceptPresentation props_EmptyLine;
+  private ConceptPresentation props_FormDescription;
+  private ConceptPresentation props_Fruit;
+  private ConceptPresentation props_FruitPlate;
+  private ConceptPresentation props_IncompleteCommand;
+  private ConceptPresentation props_Item;
+  private ConceptPresentation props_ItemReference;
+  private ConceptPresentation props_LineStyle;
+  private ConceptPresentation props_ListOfDrawCommands;
+  private ConceptPresentation props_OperationOnAddress;
+  private ConceptPresentation props_Orange;
+  private ConceptPresentation props_Participant;
+  private ConceptPresentation props_Performance;
+  private ConceptPresentation props_PerformanceWithTitle;
+  private ConceptPresentation props_RaceParticipant;
+  private ConceptPresentation props_Request;
+  private ConceptPresentation props_SimplifiedFormDescription;
+  private ConceptPresentation props_Singer;
+  private ConceptPresentation props_SolidLine;
+  private ConceptPresentation props_SomeForm;
+  private ConceptPresentation props_StreetOperation;
+  private ConceptPresentation props_StringDescription;
+  private ConceptPresentation props_Truck;
+  private ConceptPresentation props_ZipOperation;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.AbstractRequestDescription:
+        if (props_AbstractRequestDescription == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_AbstractRequestDescription = cpb.create();
+        }
         return props_AbstractRequestDescription;
-      case 1:
+      case LanguageConceptSwitch.Address:
+        if (props_Address == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("Address");
+          props_Address = cpb.create();
+        }
         return props_Address;
-      case 2:
+      case LanguageConceptSwitch.AddressReference:
+        if (props_AddressReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x48a6ab8c26b53535L, 0x48a6ab8c26b53536L, "target", "", "");
+          props_AddressReference = cpb.create();
+        }
         return props_AddressReference;
-      case 3:
+      case LanguageConceptSwitch.AddressType:
+        if (props_AddressType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("address");
+          props_AddressType = cpb.create();
+        }
+        return props_AddressType;
+      case LanguageConceptSwitch.AgendaItem:
+        if (props_AgendaItem == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_AgendaItem = cpb.create();
+        }
         return props_AgendaItem;
-      case 4:
+      case LanguageConceptSwitch.Apple:
+        if (props_Apple == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("apple");
+          props_Apple = cpb.create();
+        }
         return props_Apple;
-      case 5:
+      case LanguageConceptSwitch.Car:
+        if (props_Car == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("car");
+          props_Car = cpb.create();
+        }
         return props_Car;
-      case 6:
+      case LanguageConceptSwitch.CombinedPerformance:
+        if (props_CombinedPerformance == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("combined performance");
+          props_CombinedPerformance = cpb.create();
+        }
         return props_CombinedPerformance;
-      case 7:
+      case LanguageConceptSwitch.Component:
+        if (props_Component == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Component = cpb.create();
+        }
         return props_Component;
-      case 8:
+      case LanguageConceptSwitch.ComponentUsage:
+        if (props_ComponentUsage == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_ComponentUsage = cpb.create();
+        }
         return props_ComponentUsage;
-      case 9:
+      case LanguageConceptSwitch.Concert:
+        if (props_Concert == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Concert = cpb.create();
+        }
         return props_Concert;
-      case 10:
+      case LanguageConceptSwitch.Container:
+        if (props_Container == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Container = cpb.create();
+        }
         return props_Container;
-      case 11:
+      case LanguageConceptSwitch.DottedLine:
+        if (props_DottedLine == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("dotted");
+          props_DottedLine = cpb.create();
+        }
         return props_DottedLine;
-      case 12:
+      case LanguageConceptSwitch.DrawCommand:
+        if (props_DrawCommand == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_DrawCommand = cpb.create();
+        }
         return props_DrawCommand;
-      case 13:
+      case LanguageConceptSwitch.DrawLine:
+        if (props_DrawLine == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("line");
+          props_DrawLine = cpb.create();
+        }
         return props_DrawLine;
-      case 14:
+      case LanguageConceptSwitch.DrawRect:
+        if (props_DrawRect == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("rectangle");
+          props_DrawRect = cpb.create();
+        }
         return props_DrawRect;
-      case 15:
+      case LanguageConceptSwitch.EmptyLine:
+        if (props_EmptyLine == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("<empty line>");
+          props_EmptyLine = cpb.create();
+        }
         return props_EmptyLine;
-      case 16:
+      case LanguageConceptSwitch.FormDescription:
+        if (props_FormDescription == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("form description");
+          props_FormDescription = cpb.create();
+        }
         return props_FormDescription;
-      case 17:
+      case LanguageConceptSwitch.Fruit:
+        if (props_Fruit == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_Fruit = cpb.create();
+        }
         return props_Fruit;
-      case 18:
+      case LanguageConceptSwitch.FruitPlate:
+        if (props_FruitPlate == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_FruitPlate = cpb.create();
+        }
         return props_FruitPlate;
-      case 19:
+      case LanguageConceptSwitch.IncompleteCommand:
+        if (props_IncompleteCommand == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("IncompleteCommand");
+          props_IncompleteCommand = cpb.create();
+        }
         return props_IncompleteCommand;
-      case 20:
+      case LanguageConceptSwitch.Item:
+        if (props_Item == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Item = cpb.create();
+        }
         return props_Item;
-      case 21:
+      case LanguageConceptSwitch.ItemReference:
+        if (props_ItemReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x7e8fc6224ac7e053L, 0x7e8fc6224ac7e054L, "item", "", "");
+          props_ItemReference = cpb.create();
+        }
         return props_ItemReference;
-      case 22:
+      case LanguageConceptSwitch.LineStyle:
+        if (props_LineStyle == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_LineStyle = cpb.create();
+        }
         return props_LineStyle;
-      case 23:
+      case LanguageConceptSwitch.ListOfDrawCommands:
+        if (props_ListOfDrawCommands == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_ListOfDrawCommands = cpb.create();
+        }
         return props_ListOfDrawCommands;
-      case 24:
+      case LanguageConceptSwitch.OperationOnAddress:
+        if (props_OperationOnAddress == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_OperationOnAddress = cpb.create();
+        }
         return props_OperationOnAddress;
-      case 25:
+      case LanguageConceptSwitch.Orange:
+        if (props_Orange == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("orange");
+          props_Orange = cpb.create();
+        }
         return props_Orange;
-      case 26:
+      case LanguageConceptSwitch.Participant:
+        if (props_Participant == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x34c8853ae78e59fbL, 0x34c8853ae78e59fcL, "singer", "", "");
+          props_Participant = cpb.create();
+        }
         return props_Participant;
-      case 27:
+      case LanguageConceptSwitch.Performance:
+        if (props_Performance == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x34c8853ae7895ce1L, 0x34c8853ae7895ce2L, "singer", "", "");
+          props_Performance = cpb.create();
+        }
         return props_Performance;
-      case 28:
+      case LanguageConceptSwitch.PerformanceWithTitle:
+        if (props_PerformanceWithTitle == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("titled performance");
+          props_PerformanceWithTitle = cpb.create();
+        }
         return props_PerformanceWithTitle;
-      case 29:
+      case LanguageConceptSwitch.RaceParticipant:
+        if (props_RaceParticipant == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_RaceParticipant = cpb.create();
+        }
         return props_RaceParticipant;
-      case 30:
+      case LanguageConceptSwitch.Request:
+        if (props_Request == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Request = cpb.create();
+        }
         return props_Request;
-      case 31:
+      case LanguageConceptSwitch.SimplifiedFormDescription:
+        if (props_SimplifiedFormDescription == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("simplified form description");
+          props_SimplifiedFormDescription = cpb.create();
+        }
         return props_SimplifiedFormDescription;
-      case 32:
+      case LanguageConceptSwitch.Singer:
+        if (props_Singer == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Singer = cpb.create();
+        }
         return props_Singer;
-      case 33:
+      case LanguageConceptSwitch.SolidLine:
+        if (props_SolidLine == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("solid");
+          props_SolidLine = cpb.create();
+        }
         return props_SolidLine;
-      case 34:
+      case LanguageConceptSwitch.SomeForm:
+        if (props_SomeForm == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_SomeForm = cpb.create();
+        }
         return props_SomeForm;
-      case 35:
+      case LanguageConceptSwitch.StreetOperation:
+        if (props_StreetOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("street");
+          props_StreetOperation = cpb.create();
+        }
         return props_StreetOperation;
-      case 36:
+      case LanguageConceptSwitch.StringDescription:
+        if (props_StringDescription == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("string description");
+          props_StringDescription = cpb.create();
+        }
         return props_StringDescription;
-      case 37:
+      case LanguageConceptSwitch.Truck:
+        if (props_Truck == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("truck");
+          props_Truck = cpb.create();
+        }
         return props_Truck;
-      case 38:
+      case LanguageConceptSwitch.ZipOperation:
+        if (props_ZipOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("zip");
+          props_ZipOperation = cpb.create();
+        }
         return props_ZipOperation;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

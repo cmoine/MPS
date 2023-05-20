@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2003-2010 JetBrains s.r.o.
+  ~ Copyright 2003-2021 JetBrains s.r.o.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -28,26 +28,11 @@
   </target>
 
   <target name="check-project-structure" depends="unpack">
-    <echo message="JDK HOME: ${jdk.home}"/>
-    <mkdir dir="${build.tmp}/buildtests.tmp"/>
-    <path id="tests.classpath">
-      <fileset dir="${mps_build_home}/lib">
-        <include name="**/*.jar"/>
-      </fileset>
-      <path path="${mps_build_home}/lib/mps-backend.jar"/>
-      <path path="${mps_build_home}/lib/jdom.jar"/>
-    </path>
-    <jar destfile="${mps_build_home}/lib/mpstests.jar" duplicate="preserve" filesonly="true">
-      <fileset dir="${build.tmp}/buildtests.tmp"/>
-    </jar>
-    <delete dir="${build.tmp}/buildtests.tmp"/>
-
     <junit fork="true" dir="${mps_build_home}" showoutput="true">
       <jvmarg value="-ea"/>
       <jvmarg value="-Dmps.junit.modules.root=."/>
       <jvmarg value="-Xss1024k"/>
       <jvmarg value="-Xmx1200m"/>
-      <jvmarg value="-XX:MaxPermSize=128m"/>
       <jvmarg value="-XX:+HeapDumpOnOutOfMemoryError"/>
       <test name="jetbrains.mps.testbench.junit.suites.CheckProjectStructure"/>
       <formatter type="xml"/>
@@ -55,12 +40,21 @@
         <fileset dir="${mps_build_home}/lib">
           <include name="*.jar"/>
         </fileset>
-        <pathelement path="${jdk.home}/lib/tools.jar" />
       </classpath>
     </junit>
   </target>
 
   <target name="module-tests" depends="unpack">
+    <ant antfile="build/tests/mpsBehavior.xml" inheritAll="true" useNativeBasedir="true">
+      <target name="build"/>
+      <target name="check"/>
+      <property name="mps_home" value="${mps_build_home}"/>
+    </ant>
+    <ant antfile="build/tests/mpsHttpSupport.xml" inheritAll="true" useNativeBasedir="true">
+      <target name="build"/>
+      <target name="check"/>
+      <property name="mps_home" value="${mps_build_home}"/>
+    </ant>
     <ant antfile="build/tests/mpsTestModules.xml" inheritAll="true" useNativeBasedir="true">
       <target name="build"/>
       <target name="check"/>
@@ -101,6 +95,11 @@
       <target name="check"/>
       <property name="mps_home" value="${mps_build_home}"/>
     </ant>
+    <ant antfile="build/tests/mpsKotlin.xml" inheritAll="true" useNativeBasedir="true">
+      <target name="build"/>
+      <target name="check"/>
+      <property name="mps_home" value="${mps_build_home}"/>
+    </ant>
     <ant antfile="build/tests/mpsBuild.xml" inheritAll="true" useNativeBasedir="true">
       <target name="build"/>
       <target name="check"/>
@@ -127,7 +126,11 @@
       <target name="check"/>
       <property name="mps_home" value="${mps_build_home}"/>
     </ant>
-    <ant antfile="build/mpsMigration.xml" inheritAll="true" useNativeBasedir="true">
+    <ant antfile="build/tests/mpsMigrationTest.xml" inheritAll="true" useNativeBasedir="true">
+      <target name="checkAll"/>
+      <property name="mps_home" value="${mps_build_home}"/>
+    </ant>
+    <ant antfile="build/tests/mpsAntTaskTest.xml" inheritAll="true" useNativeBasedir="true">
       <target name="checkAll"/>
       <property name="mps_home" value="${mps_build_home}"/>
     </ant>
@@ -136,7 +139,57 @@
       <target name="check"/>
       <property name="mps_home" value="${mps_build_home}"/>
     </ant>
+    <ant antfile="build/tests/mpsSmartRefAttrMigration.xml" inheritAll="true" useNativeBasedir="true">
+      <target name="check"/>
+      <property name="mps_home" value="${mps_build_home}"/>
+    </ant>
+    <ant antfile="build/tests/mpsConstraints.xml" inheritAll="true" useNativeBasedir="true">
+      <target name="build"/>
+      <target name="check"/>
+      <property name="mps_home" value="${mps_build_home}"/>
+    </ant>
+    <ant antfile="build/tests/mpsText.xml" inheritAll="true" useNativeBasedir="true">
+      <target name="check"/>
+      <property name="mps_home" value="${mps_build_home}"/>
+    </ant>
+    <ant antfile="build/tests/mpsDataFlow.xml" inheritAll="true" useNativeBasedir="true">
+      <target name="check"/>
+      <property name="mps_home" value="${mps_build_home}"/>
+    </ant>
+    <ant antfile="build/tests/mpsTypesystem.xml" inheritAll="true" useNativeBasedir="true">
+      <target name="check"/>
+      <property name="mps_home" value="${mps_build_home}"/>
+    </ant>
+    <ant antfile="build/tests/mpsConsole.xml" inheritAll="true" useNativeBasedir="true">
+      <target name="build"/>
+      <target name="check"/>
+      <property name="mps_home" value="${mps_build_home}"/>
+    </ant>
+    <ant antfile="build/tests/mpsFeedback.xml" inheritAll="true" useNativeBasedir="true">
+      <target name="build"/>
+      <target name="check"/>
+      <property name="mps_home" value="${mps_build_home}"/>
+    </ant>
+    <ant antfile="build/tests/mpsTest.xml" inheritAll="true" useNativeBasedir="true">
+      <target name="build"/>
+      <target name="check"/>
+      <property name="mps_home" value="${mps_build_home}"/>
+    </ant>
+    <ant antfile="build/tests/mpsToolTests.xml" inheritAll="true" useNativeBasedir="true">
+      <target name="build"/>
+      <target name="check"/>
+      <property name="mps_home" value="${mps_build_home}"/>
+    </ant>
   </target>
 
   <target name="default" depends="check-project-structure, module-tests"/>
+
+  <target name="migrateSamplesAndTests" depends="unpack" description="PROVISIONAL, fix noPendingMigrationTest when there's a new migration">
+    <!-- FIXME not related to test.xml, placed here as I need unpack functionality to use MPS.zip; shall refactor -->
+    <ant antfile="build/migrateSampleAndTestProjects.xml" inheritAll="true" useNativeBasedir="true">
+      <target name="migrateAll"/>
+      <property name="mps_home" value="${mps_build_home}"/>
+    </ant>
+  </target>
+
 </project>

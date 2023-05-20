@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="e4s49z98zgi76qc05032avaftgyeaot" />
+<product version="3" modelHash="-9klxj2jp5pdc5bjm4kqpu0s0t30vpip">
+  <files names="FindMatchStatement_InferenceRule.java:ForEachMatchStatement_InferenceRule.java:MatchRegexpExpression_InferenceRule.java:MatchRegexpStatement_InferenceRule.java:MatchVariableReference_InferenceRule.java:ReplaceWithRegexpExpression_InferenceRule.java:SplitExpression_InferenceRule.java:TypesystemDescriptor.java:check_LiteralReplacement_NonTypesystemRule.java:check_StringLiteralRegexp_NonTypesystemRule.java:typeof_FindMatchExpression_InferenceRule.java:typeof_InlineRegexpExpression_InferenceRule.java:typeof_MatchRegexpOperation_InferenceRule.java:typeof_ReplaceRegexpOperation_InferenceRule.java:typeof_SplitOperation_InferenceRule.java" />
+</product>
 

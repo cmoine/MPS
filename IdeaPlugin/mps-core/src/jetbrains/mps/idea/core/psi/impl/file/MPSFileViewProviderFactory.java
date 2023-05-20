@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.core.psi.impl.file;
 
 import com.intellij.lang.Language;
@@ -34,14 +33,13 @@ import jetbrains.mps.idea.core.psi.impl.MPSPsiModel;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiProvider;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiRootNode;
 import jetbrains.mps.nodefs.MPSNodeVirtualFile;
+import jetbrains.mps.project.MPSProject;
 import jetbrains.mps.smodel.ModelAccessHelper;
 import jetbrains.mps.smodel.SModelFileTracker;
 import jetbrains.mps.util.Computable;
-import jetbrains.mps.vfs.FileSystem;
 import jetbrains.mps.vfs.IFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SModel;
-import org.jetbrains.mps.openapi.module.SRepository;
 
 /**
  * User: fyodor
@@ -89,15 +87,18 @@ public class MPSFileViewProviderFactory implements FileViewProviderFactory {
           && virtualFile.getFileType() != MPSFileTypeFactory.MPS_ROOT_FILE_TYPE)) {
         return null;
       }
-      final IFile modelFile = virtualFile.getFileType() == MPSFileTypeFactory.MPS_ROOT_FILE_TYPE
-        ? FileSystem.getInstance().getFileByPath(virtualFile.getParent().getPath())
-        : FileSystem.getInstance().getFileByPath(virtualFile.getPath());
+      final MPSProject mpsProject = ProjectHelper.fromIdeaProject(getManager().getProject());
+      if (mpsProject == null) {
+        return null;
+      }
+      final IFile modelFile = mpsProject.getFileSystem().fromVirtualFile(virtualFile.getFileType() == MPSFileTypeFactory.MPS_ROOT_FILE_TYPE
+        ? virtualFile.getParent()
+        : virtualFile);
 
-      SRepository repository = ProjectHelper.getProjectRepository(getManager().getProject());
-      PsiFile psiFile = new ModelAccessHelper(repository.getModelAccess()).runReadAction(new Computable<PsiFile>() {
+      PsiFile psiFile = new ModelAccessHelper(mpsProject.getModelAccess()).runReadAction(new Computable<PsiFile>() {
         @Override
         public PsiFile compute() {
-          SModel descr = SModelFileTracker.getInstance(repository).findModel(modelFile);
+          SModel descr = SModelFileTracker.getInstance(mpsProject.getRepository()).findModel(modelFile);
           if (descr != null) {
             // force loading the model and updating the PSI tree at this time
             MPSPsiProvider mpsPsiProvider = MPSPsiProvider.getInstance(getManager().getProject());
@@ -112,7 +113,7 @@ public class MPSFileViewProviderFactory implements FileViewProviderFactory {
               return null;
             }
 
-            return new FileSourcePsiFile(MyFileViewProvider.this, descr.getReference(), descr.getModelName());
+            return new FileSourcePsiFile(MyFileViewProvider.this, descr.getReference(), descr.getName().getValue());
           }
           return null;
         }

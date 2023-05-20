@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-79qmidiynd5lpuimdl5wsjn1bsqr23u" />
+<product version="3" modelHash="ejbmu96w81svr3qos7fl77rd6wzsjmf">
+  <files names="AbstractWatchableNode.java:NodeTreeNode.java:PlaceholderTreeNode.java:VariablesTree.java:WatchableNode.java" />
+</product>
 

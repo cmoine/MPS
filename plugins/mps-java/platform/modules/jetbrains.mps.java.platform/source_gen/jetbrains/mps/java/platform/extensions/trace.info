@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <root nodeRef="r:c0d12a77-d1ce-4458-b94f-4eb6f4df358a(jetbrains.mps.java.platform.extensions)/2773971779182568051">
+    <file name="JavaSourceStubsModelRootEntry.java">
+      <node id="2773971779182568105" at="26,102,27,68" concept="1" />
+      <node id="2773971779182568110" at="27,68,28,18" concept="1" />
+      <node id="2773971779182568119" at="33,43,34,39" concept="4" />
+      <node id="2773971779182568127" at="39,49,40,18" concept="4" />
+      <node id="2773971779182568135" at="45,34,46,44" concept="4" />
+      <node id="2773971779182568142" at="50,28,51,37" concept="4" />
+      <node id="2773971779182568152" at="55,98,56,56" concept="1" />
+      <node id="2773971779182568163" at="60,101,61,59" concept="1" />
+      <node id="3296175966478770845" at="65,25,66,38" concept="1" />
+      <node id="2773971779182568179" at="71,43,72,49" concept="4" />
+      <node id="2773971779182568188" at="76,57,77,56" concept="1" />
+      <node id="2773971779182568196" at="81,38,82,43" concept="1" />
+      <node id="8663334038572359187" at="87,88,88,98" concept="4" />
+      <node id="2773971779182568089" at="21,0,23,0" concept="2" trace="myModelRootData" />
+      <node id="2773971779182568094" at="23,0,25,0" concept="2" trace="myRoot" />
+      <node id="2773971779182568099" at="26,0,30,0" concept="0" trace="JavaSourceStubsModelRootEntry#(Ljetbrains/mps/project/MPSProject;Ljetbrains/mps/java/core/sourceStubs/JavaSourceStubModelRoot;)V" />
+      <node id="2773971779182568139" at="49,0,53,0" concept="3" trace="isValid#()Z" />
+      <node id="2773971779182568146" at="54,0,58,0" concept="3" trace="addModelRootEntryListener#(Lorg/jetbrains/mps/openapi/ui/persistence/ModelRootEntry/ModelRootEntryListener;)V" />
+      <node id="2773971779182568157" at="59,0,63,0" concept="3" trace="removeModelRootEntryListener#(Lorg/jetbrains/mps/openapi/ui/persistence/ModelRootEntry/ModelRootEntryListener;)V" />
+      <node id="2773971779182568168" at="64,0,68,0" concept="3" trace="dispose#()V" />
+      <node id="2773971779182568183" at="75,0,79,0" concept="3" trace="setForegroundColor#(Ljava/awt/Color;)V" />
+      <node id="2773971779182568193" at="80,0,84,0" concept="3" trace="resetForegroundColor#()V" />
+      <node id="2773971779182568115" at="31,0,36,0" concept="3" trace="getEditor#()Lorg/jetbrains/mps/openapi/ui/persistence/ModelRootEntryEditor;" />
+      <node id="2773971779182568123" at="37,0,42,0" concept="3" trace="getModelRoot#()Ljetbrains/mps/java/core/sourceStubs/JavaSourceStubModelRoot;" />
+      <node id="2773971779182568131" at="43,0,48,0" concept="3" trace="getDetailsText#()Ljava/lang/String;" />
+      <node id="2773971779182568175" at="69,0,74,0" concept="3" trace="getDetailsComponent#()Ljavax/swing/JComponent;" />
+      <node id="8663334038572359169" at="85,0,90,0" concept="3" trace="conflictsWith#(Lorg/jetbrains/mps/openapi/ui/persistence/ModelRootEntry;)Ljetbrains/mps/util/IStatus;" />
+      <scope id="2773971779182568118" at="33,43,34,39" />
+      <scope id="2773971779182568126" at="39,49,40,18" />
+      <scope id="2773971779182568134" at="45,34,46,44" />
+      <scope id="2773971779182568141" at="50,28,51,37" />
+      <scope id="2773971779182568151" at="55,98,56,56" />
+      <scope id="2773971779182568162" at="60,101,61,59" />
+      <scope id="2773971779182568170" at="65,25,66,38" />
+      <scope id="2773971779182568178" at="71,43,72,49" />
+      <scope id="2773971779182568187" at="76,57,77,56" />
+      <scope id="2773971779182568195" at="81,38,82,43" />
+      <scope id="8663334038572359180" at="87,88,88,98" />
+      <scope id="2773971779182568104" at="26,102,28,18" />
+      <scope id="2773971779182568099" at="26,0,30,0">
+        <var name="mpsProject" id="4657891101580016120" />
+        <var name="root" id="2773971779182568101" />
+      </scope>
+      <scope id="2773971779182568139" at="49,0,53,0" />
+      <scope id="2773971779182568146" at="54,0,58,0">
+        <var name="listener" id="2773971779182568148" />
+      </scope>
+      <scope id="2773971779182568157" at="59,0,63,0">
+        <var name="listener" id="2773971779182568159" />
+      </scope>
+      <scope id="2773971779182568168" at="64,0,68,0" />
+      <scope id="2773971779182568183" at="75,0,79,0">
+        <var name="foregroundColor" id="2773971779182568185" />
+      </scope>
+      <scope id="2773971779182568193" at="80,0,84,0" />
+      <scope id="2773971779182568115" at="31,0,36,0" />
+      <scope id="2773971779182568123" at="37,0,42,0" />
+      <scope id="2773971779182568131" at="43,0,48,0" />
+      <scope id="2773971779182568175" at="69,0,74,0" />
+      <scope id="8663334038572359169" at="85,0,90,0">
+        <var name="other" id="8663334038572359175" />
+      </scope>
+      <unit id="2773971779182568051" at="19,0,91,0" name="jetbrains.mps.java.platform.extensions.JavaSourceStubsModelRootEntry" />
+    </file>
+  </root>
+  <root nodeRef="r:c0d12a77-d1ce-4458-b94f-4eb6f4df358a(jetbrains.mps.java.platform.extensions)/2773971779182586893">
+    <file name="JavaSourceStubsModelRootEntryFactory.java">
+      <node id="4657891101579999627" at="16,0,17,0" concept="2" trace="myProject" />
+      <node id="4657891101579998401" at="18,68,19,65" concept="1" />
+      <node id="2773971779182586906" at="24,112,25,67" concept="4" />
+      <node id="4657891101579980963" at="18,0,21,0" concept="0" trace="JavaSourceStubsModelRootEntryFactory#(Lcom/intellij/openapi/project/Project;)V" />
+      <node id="2773971779182586899" at="22,0,27,0" concept="3" trace="getModelRootEntry#(Ljetbrains/mps/java/core/sourceStubs/JavaSourceStubModelRoot;)Lorg/jetbrains/mps/openapi/ui/persistence/ModelRootEntry;" />
+      <scope id="4657891101579980967" at="18,68,19,65" />
+      <scope id="2773971779182586905" at="24,112,25,67" />
+      <scope id="4657891101579980963" at="18,0,21,0">
+        <var name="ideaProject" id="4657891101579983732" />
+      </scope>
+      <scope id="2773971779182586899" at="22,0,27,0">
+        <var name="modelRoot" id="2773971779182586902" />
+      </scope>
+      <unit id="2773971779182586893" at="14,0,28,0" name="jetbrains.mps.java.platform.extensions.JavaSourceStubsModelRootEntryFactory" />
+    </file>
+  </root>
+</debug-info>
+

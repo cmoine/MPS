@@ -4,24 +4,34 @@ package jetbrains.mps.samples.generator_demo.demoLang6.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_Button = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Label = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_Button;
+  private ConceptPresentation props_Label;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.Button:
+        if (props_Button == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Button = cpb.create();
+        }
         return props_Button;
-      case 1:
+      case LanguageConceptSwitch.Label:
+        if (props_Label == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Label = cpb.create();
+        }
         return props_Label;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

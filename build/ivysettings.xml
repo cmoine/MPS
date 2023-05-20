@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivy-settings>
-  <settings defaultResolver="main" />
+  <property name="teamcity.url" value="https://teamcity.jetbrains.com/guestAuth/repository/download"/>
+  <property name="ivy.checksums" value=""/>
+  <caches defaultCacheDir="${user.home}/.ivy2/cache"/>
+
+  <settings defaultResolver="mps-chain"/>
+  <!-- Local path will be equal default value, but custom on TeamCity -->
   <caches defaultCacheDir="${mps.ivy.home}/.ivy2/cache" />
-  <!--Authentication required for publishing (deployment). 'Artifactory Realm' is the realm used by Artifactory so don't change it.-->
-  <credentials host="repository.jetbrains.com" realm="Artifactory Realm" username="mps" passwd="" />
+  <statuses>
+    <status name="integration" integration="true"/>
+  </statuses>
   <resolvers>
-    <chain name="main">
-      <ibiblio name="public" m2compatible="true" root="https://repository.jetbrains.com/all" />
+    <chain name="mps-chain">
+      <url name="teamcity-rep" alwaysCheckExactRevision="yes" checkmodified="true">
+        <ivy pattern="https://teamcity.jetbrains.com/guestAuth/repository/download/[module]/[revision]/teamcity-ivy.xml"/>
+        <artifact pattern="https://teamcity.jetbrains.com/guestAuth/repository/download/[module]/[revision]/[artifact](.[ext])"/>
+      </url>
       <url name="maven" m2compatible="true">
-        <artifact pattern="http://repo1.maven.org/maven2/[organization]/[module]/[revision]/[module]-[revision](-[classifier]).[ext]" />
+        <artifact pattern="https://repo1.maven.org/maven2/[organization]/[module]/[revision]/[module]-[revision](-[classifier]).[ext]" />
+      </url>
+      <url name="artifactory" m2compatible="true">
+        <artifact pattern="https://repository.jetbrains.com/all/[organization]/[module]/[revision]/[module]-[revision](-[classifier]).[ext]" />
       </url>
     </chain>
+    <url name="kotlin-compiler-releases">
+      <artifact pattern="https://github.com/JetBrains/kotlin/releases/download/v[revision]/[artifact]-[revision].[ext]" />
+    </url>
   </resolvers>
+  <modules>
+    <!-- Kotlin compiler is the only artifact from github, it has its own url resolver (not in main chain) -->
+    <module organisation="org.jetbrains.kotlin" name="kotlin-compiler-standalone-zip" resolver="kotlin-compiler-releases" />
+  </modules>
 </ivy-settings>

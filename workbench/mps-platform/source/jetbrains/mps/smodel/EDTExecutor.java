@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,227 +15,81 @@
  */
 package jetbrains.mps.smodel;
 
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.application.ModalityState;
-import jetbrains.mps.ide.ThreadUtils;
+import com.intellij.openapi.Disposable;
+import com.intellij.openapi.util.Disposer;
 import jetbrains.mps.project.Project;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import jetbrains.mps.util.Computable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.annotations.Immutable;
+import org.jetbrains.mps.annotations.Internal;
 
-import java.util.concurrent.ConcurrentLinkedQueue;
+/**
+ * Thread-safe
+ *
+ * Invokes read/write/command task asynchronously on the EDT thread. Literally the essence is in the {@code myTaskQueue}
+ * field which contains all the tasks in the order of invocation #scheduleXXX methods
+ *
+ */
+@Immutable
+final class EDTExecutor implements Disposable {
+  static final int TERMINATION_TIMEOUT_MS = 2000;
 
-class EDTExecutor {
+  static final long MAX_SINGLE_EXECUTION_TIME_MS = 100;
+  static final int QUEUE_MAX_EXPECTED_VALUE = 1000;
 
-  private static final int MAX_EXECUTION_TIME = 100;
+  private final EDTExecutorInternal myExecutor = new EDTExecutorInternal();
 
-  private static final Logger LOG = LogManager.getLogger(EDTExecutor.class);
-
-  /* Notified when:
-   *    myTasks queue becomes non-empty
-   *    workerStarted becomes false
-   */
-  private final Object myLock = new Object();
-
-  private final Thread myExecutor;
-  private final WorkbenchModelAccess myModelAccess;
-
-  /* remove elements in EDT only */
-  private ConcurrentLinkedQueue<Task> myTasks = new ConcurrentLinkedQueue<Task>();
-
-  public EDTExecutor(WorkbenchModelAccess modelAccess) {
-    myModelAccess = modelAccess;
-    myExecutor = new Executor();
-    myExecutor.setDaemon(true);
-    myExecutor.start();
+  EDTExecutor() {
+    Disposer.register(this, myExecutor);
   }
 
-  public void scheduleRead(final Runnable r) {
-    synchronized (myLock) {
-      if (myTasks.isEmpty()) {
-        myLock.notifyAll();
-      }
-      myTasks.offer(new Task() {
-        @Override
-        public boolean tryRun() throws TaskIsOutdated {
-          return myModelAccess.tryRead(r);
-        }
-
-        @Override
-        public boolean needsWrite() {
-          return false;
-        }
-      });
-    }
+  void scheduleRead(@NotNull Computable<Boolean> tryRead) {
+    scheduleTask(tryRead::compute);
   }
 
-  public void scheduleWrite(final Runnable r) {
-    synchronized (myLock) {
-      if (myTasks.isEmpty()) {
-        myLock.notifyAll();
-      }
-      myTasks.offer(new Task() {
-        @Override
-        public boolean tryRun() throws TaskIsOutdated {
-          return myModelAccess.tryWrite(r);
-        }
-
-        @Override
-        public boolean needsWrite() {
-          return true;
-        }
-      });
-    }
+  void scheduleWrite(@NotNull Computable<Boolean> tryWrite) {
+    scheduleTask(tryWrite::compute);
   }
 
-  public void scheduleCommand(final Runnable r, final Project p) {
-    if (p == null || r == null) {
-      throw new IllegalArgumentException();
-    }
-    synchronized (myLock) {
-      if (myTasks.isEmpty()) {
-        myLock.notifyAll();
-      }
-      myTasks.offer(new Task() {
-        @Override
-        public boolean tryRun() throws TaskIsOutdated {
-          boolean ok = myModelAccess.tryWriteInCommand(r, p);
-          if (p.isDisposed()) {
-            throw new TaskIsOutdated();
-          }
-          return ok;
-        }
-
-        @Override
-        public boolean needsWrite() {
-          return true;
-        }
-      });
-    }
-  }
-
-  public void flushEventQueue() {
-    if (ThreadUtils.isInEDT()) {
-      throw new IllegalStateException("We are in EDT : possible deadlock");
-    }
-    synchronized (myLock) {
-      while (!myTasks.isEmpty()) {
-        try {
-          myLock.wait();
-        } catch (InterruptedException ignored) {
-        }
-      }
-    }
-  }
-
-  private class Executor extends Thread {
-
-    private volatile boolean workerStarted = false;
-    private Runnable myWorker = new Runnable() {
+  void scheduleCommand(@NotNull Computable<Boolean> tryCommand, @NotNull Project project) {
+    scheduleTask(new Task() {
       @Override
-      public void run() {
-        worker();
-      }
-    };
-
-    private Executor() {
-      super("Executor");
-    }
-
-    @Override
-    public void run() {
-      try {
-        while (true) {
-          boolean schedule, needsWrite;
-          synchronized (myLock) {
-            if (workerStarted || myTasks.isEmpty()) {
-              try {
-                myLock.wait();
-              } catch (InterruptedException e) {
-                /* ignore */
-              }
-            }
-            if (workerStarted) {
-              continue;
-            }
-            Task first = myTasks.peek();
-            schedule = first != null;
-            needsWrite = schedule && first.needsWrite();
-          }
-
-          if (schedule) {
-            /* wait until required lock is available */
-            myModelAccess.waitLock(needsWrite);
-
-            /* start worker */
-            workerStarted = true;
-            /*
-             * Using ModalityState.any() here because there is one queue of model read/write tasks in MPS now (myTasks).
-             * myWorker runnable used to flush (a part of) this queue in AWT thread and, by design, we expect scheduled
-             * myWorker to be executed before we schedule next one.
-             *
-             * If current modality state was changed to more specific one (another modal dialog become visible) then scheduled
-             * myWorker will not be executed unless the state changed back, so task processing will be effectively frozen till
-             * the moment of modality state change.
-             *
-             * To avoid this situation, ModalityState.any() used here.
-             */
-            ApplicationManager.getApplication().invokeLater(myWorker, ModalityState.any());
-          }
+      public boolean tryRun() throws TaskIsOutdated {
+        if (project.isDisposed()) {
+          throw new TaskIsOutdated(this, "The project " + project + " is disposed");
         }
-      } catch (Exception e) {
-        LOG.error(null, e);
+        return tryCommand.compute();
       }
-    }
-
-    // invoked in EDT
-    private void worker() {
-      if (!workerStarted) {
-        return;
-      }
-      try {
-        long deadline = System.currentTimeMillis() + MAX_EXECUTION_TIME;
-
-        do {
-          Task t = myTasks.peek();
-          if (t == null) {
-            return;
-          }
-          boolean remove = true;
-          try {
-            if (!t.tryRun()) {
-              // stop processing, reschedule
-              remove = false;
-              return;
-            }
-          } catch (TaskIsOutdated e) {
-            /* ignore, remove task */
-          } catch (Exception e) {
-            /* report */
-            LOG.error("run in EDT failure", e);
-          } finally {
-            if (remove) {
-              synchronized (myLock) {
-                myTasks.remove();
-              }
-            }
-          }
-        } while (deadline > System.currentTimeMillis());
-
-      } finally {
-        synchronized (myLock) {
-          workerStarted = false;
-          myLock.notifyAll();
-        }
-      }
-    }
+    });
   }
 
-  private static interface Task {
+  /**
+   * flushes the queue until at some moment it appears to be empty
+   */
+  void flushEventsQueue() {
+    myExecutor.flushTasks();
+  }
+
+  @Internal
+  void forceFlush() {
+    myExecutor.forceScheduleFlushEDT();
+  }
+
+  private void scheduleTask(@NotNull Task task) {
+    myExecutor.scheduleTask(task);
+  }
+
+  @Override
+  public void dispose() {
+  }
+
+  interface Task {
     boolean tryRun() throws TaskIsOutdated;
-
-    boolean needsWrite();
   }
 
-  private static class TaskIsOutdated extends Exception {
+  static final class TaskIsOutdated extends Exception {
+    TaskIsOutdated(@NotNull Task task, @NotNull String reason) {
+      super("Task " + task + " is outdated; the reason is " + reason);
+    }
   }
 }

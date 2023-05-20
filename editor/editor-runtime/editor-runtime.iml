@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+  <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/classes" />
     <output-test url="file://$MODULE_DIR$/testclasses" />
     <exclude-output />
@@ -23,18 +23,17 @@
     <orderEntry type="module" module-name="make-runtime" />
     <orderEntry type="module" module-name="mps-platform" />
     <orderEntry type="module" module-name="mps-ui" />
-    <orderEntry type="library" name="JDOM" level="project" />
-    <orderEntry type="library" name="Trove" level="project" />
     <orderEntry type="library" name="Annotations" level="project" />
     <orderEntry type="library" name="Idea-platform" level="project" />
     <orderEntry type="module" module-name="mps-icons" />
-    <orderEntry type="library" name="Log4j" level="project" />
     <orderEntry type="module" module-name="closures-runtime" />
     <orderEntry type="module" module-name="behavior-api" />
     <orderEntry type="module" module-name="behavior-runtime" />
-    <orderEntry type="module" module-name="mps-editor" />
     <orderEntry type="module" module-name="testbench" scope="TEST" />
     <orderEntry type="library" scope="TEST" name="JUnit4" level="project" />
     <orderEntry type="library" scope="TEST" name="JMock" level="project" />
+    <orderEntry type="module" module-name="editing-runtime" exported="" />
+    <orderEntry type="module" module-name="typechecking" />
+    <orderEntry type="module" module-name="constraints-runtime" />
   </component>
 </module>

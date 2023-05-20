@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 package jetbrains.mps.nodeEditor.selection;
 
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.module.ReloadableModule;
 import jetbrains.mps.nodeEditor.cells.DefaultCellInfo;
 import jetbrains.mps.openapi.editor.EditorComponent;
@@ -22,12 +23,14 @@ import jetbrains.mps.openapi.editor.cells.CellInfo;
 import jetbrains.mps.openapi.editor.selection.Selection;
 import jetbrains.mps.openapi.editor.selection.SelectionInfo;
 import jetbrains.mps.openapi.editor.selection.SelectionStoreException;
-import jetbrains.mps.smodel.MPSModuleRepository;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import jetbrains.mps.smodel.ModelAccessHelper;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.module.SModule;
+import org.jetbrains.mps.openapi.module.SModuleReference;
+import org.jetbrains.mps.openapi.module.SRepository;
+import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -36,7 +39,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class SelectionInfoImpl implements SelectionInfo {
-  private static final Logger LOG = LogManager.getLogger(SelectionInfoImpl.class);
+  private static final Logger LOG = Logger.getLogger(SelectionInfoImpl.class);
 
   private static final String CLASS_NAME_ATTRIBUTE = "className";
   private static final String MODULE_ID_ATTRIBUTE = "moduleID";
@@ -48,7 +51,7 @@ public class SelectionInfoImpl implements SelectionInfo {
 
   private String mySelectionClassName;
   private String myModuleID;
-  private Map<String, String> myProperties = new HashMap<String, String>();
+  private Map<String, String> myProperties = new HashMap<>();
   private DefaultCellInfo myCellInfo = null;
 
   public SelectionInfoImpl(Element element) {
@@ -68,9 +71,9 @@ public class SelectionInfoImpl implements SelectionInfo {
     }
   }
 
-  public SelectionInfoImpl(@NotNull String selectionClassName, String moduleID) {
+  public SelectionInfoImpl(@NotNull String selectionClassName, @Nullable SModuleReference moduleID) {
     this(selectionClassName);
-    myModuleID = moduleID;
+    myModuleID = moduleID == null ? null : PersistenceFacade.getInstance().asString(moduleID);
   }
 
   public SelectionInfoImpl(@NotNull String selectionClassName) {
@@ -91,32 +94,46 @@ public class SelectionInfoImpl implements SelectionInfo {
   @Override
   public Selection createSelection(EditorComponent editorComponent) {
     try {
-      Class<Selection> selectionClass;
+      Class<?> selectionClass;
       if (myModuleID != null) {
-        SModule module = MPSModuleRepository.getInstance().getModuleByFqName(myModuleID);
-        if (module == null) {
-          LOG.error("Specified selection class module was not found by ID: " + myModuleID);
+        SRepository repo = editorComponent.getEditorContext().getRepository();
+        // XXX I have no idea whether there's model read access when #createSelection is invoked, rather take one.
+        ReloadableModule reloadableModule = new ModelAccessHelper(repo).runReadAction(() -> {
+          SModule module;
+          try {
+            SModuleReference mr = PersistenceFacade.getInstance().createModuleReference(myModuleID);
+            module = mr.resolve(repo);
+          } catch (IllegalArgumentException ex) {
+            // fallback, perhaps, it's an old selection, where just module name has been stored
+            module = null;
+          }
+          if (module == null) {
+            LOG.error("Specified selection class module was not found by ID: " + myModuleID);
+            return null;
+          }
+          if (!(module instanceof ReloadableModule)) {
+            LOG.error(String.format("Module %s of specified selection class (%s) can not load classes", myModuleID, mySelectionClassName));
+            return null;
+          }
+          return (ReloadableModule) module;
+        });
+        if (reloadableModule == null) {
           return null;
         }
-        if (!(module instanceof ReloadableModule)) {
-          LOG.error("Specified selection class module was not Language: " + myModuleID);
-          return null;
-        }
-        selectionClass = (Class<Selection>) ((ReloadableModule) module).getClass(mySelectionClassName);
+        // I know it's odd to access module outside ot model read (although the module is likely deployed and shall not
+        // get disposed unexpectedly). Just don't want to refactor the a lot (exception handling for both if/else cases).
+        selectionClass = reloadableModule.getClass(mySelectionClassName);
       } else {
-        selectionClass = (Class<Selection>) getClass().getClassLoader().loadClass(mySelectionClassName);
+        selectionClass = getClass().getClassLoader().loadClass(mySelectionClassName);
       }
       if (!Selection.class.isAssignableFrom(selectionClass)) {
         LOG.error("Serialized selection class: " + mySelectionClassName + " is not a subclass of " + Selection.class.getName());
         return null;
       }
-      Constructor<Selection> constructor = selectionClass.getConstructor(EditorComponent.class, Map.class, CellInfo.class);
+      Constructor<Selection> constructor = ((Class<Selection>) selectionClass).getConstructor(EditorComponent.class, Map.class, CellInfo.class);
       return constructor.newInstance(editorComponent, myProperties, myCellInfo);
-    } catch (ClassNotFoundException e) {
-      LOG.error(null, e);
-      return null;
-    } catch (NoSuchMethodException e) {
-      LOG.error(null, e);
+    } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InstantiationException e) {
+      LOG.error(e);
       return null;
     } catch (InvocationTargetException e) {
       if (e.getTargetException() instanceof SelectionRestoreException) {
@@ -128,13 +145,7 @@ public class SelectionInfoImpl implements SelectionInfo {
          */
         return null;
       }
-      LOG.error(null, e);
-      return null;
-    } catch (InstantiationException e) {
-      LOG.error(null, e);
-      return null;
-    } catch (IllegalAccessException e) {
-      LOG.error(null, e);
+      LOG.error(e);
       return null;
     }
   }
@@ -174,11 +185,7 @@ public class SelectionInfoImpl implements SelectionInfo {
     if (myCellInfo != null ? !myCellInfo.equals(that.myCellInfo) : that.myCellInfo != null) {
       return false;
     }
-    if (!myProperties.equals(that.myProperties)) {
-      return false;
-    }
-
-    return true;
+    return myProperties.equals(that.myProperties);
   }
 
   @Override

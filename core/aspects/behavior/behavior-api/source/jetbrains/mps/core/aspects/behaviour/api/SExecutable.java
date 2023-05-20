@@ -31,10 +31,11 @@ import java.util.List;
 public interface SExecutable extends SNamedElement {
     /**
      * SExecutable must belong to some concept
+     * For example in the case of SMethod the concept is the concept where the method is declared
+     *
      * @return the concept which this executable belongs to
      */
-    @NotNull
-    SAbstractConcept getConcept();
+    @NotNull SAbstractConcept getConcept();
 
     /**
      * @return modifiers of the method (public/private, virtual, etc.)

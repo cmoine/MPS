@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-codxo8zpb9cq7l9aefsdl5ssyf7cwsr" />
+<product version="3" modelHash="2mfpaoo00u9blueut2jc1k3z8mzdjf0">
+  <files names="AddRemoveSeparator_Intention.java:IntentionsDescriptor.java:SetWithIndent_Intention.java" />
+</product>
 

@@ -8,108 +8,66 @@ import java.util.Collection;
 import jetbrains.mps.openapi.editor.descriptor.ConceptEditor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import java.util.Collections;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.openapi.editor.descriptor.SubstituteMenu;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public class EditorAspectDescriptorImpl extends EditorAspectDescriptorBase {
   @NotNull
   public Collection<ConceptEditor> getDeclaredEditors(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = ((SAbstractConcept) concept);
-      Integer preIndex = indices_xbvbvu_a0a.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ContentElement_Editor());
-          }
-          break;
-        case 1:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new DataCell_Editor());
-          }
-          break;
-        case 2:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new Event_Editor());
-          }
-          break;
-        case 3:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new EventReference_Editor());
-          }
-          break;
-        case 4:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new HierarchycalTable_Editor());
-          }
-          break;
-        case 5:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new LightWeightDecisionTable_Editor());
-          }
-          break;
-        case 6:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new Matrix_Editor());
-          }
-          break;
-        case 7:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new State_Editor());
-          }
-          break;
-        case 8:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new StateMachine_Editor());
-          }
-          break;
-        case 9:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new StateReference_Editor());
-          }
-          break;
-        case 10:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new Table_Editor());
-          }
-          break;
-        case 11:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new Transition_Editor());
-          }
-          break;
-        case 12:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new UltimateContainer_Editor());
-          }
-          break;
-        case 13:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new XElement_Editor());
-          }
-          break;
-        case 14:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new YElement_Editor());
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = ((SAbstractConcept) concept);
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return Collections.<ConceptEditor>singletonList(new ContentElement_Editor());
+      case 1:
+        return Collections.<ConceptEditor>singletonList(new DataCell_Editor());
+      case 2:
+        return Collections.<ConceptEditor>singletonList(new Event_Editor());
+      case 3:
+        return Collections.<ConceptEditor>singletonList(new EventReference_Editor());
+      case 4:
+        return Collections.<ConceptEditor>singletonList(new HierarchycalTable_Editor());
+      case 5:
+        return Collections.<ConceptEditor>singletonList(new LightWeightDecisionTable_Editor());
+      case 6:
+        return Collections.<ConceptEditor>singletonList(new Matrix_Editor());
+      case 7:
+        return Collections.<ConceptEditor>singletonList(new State_Editor());
+      case 8:
+        return Collections.<ConceptEditor>singletonList(new StateMachine_Editor());
+      case 9:
+        return Collections.<ConceptEditor>singletonList(new StateReference_Editor());
+      case 10:
+        return Collections.<ConceptEditor>singletonList(new Table_Editor());
+      case 11:
+        return Collections.<ConceptEditor>singletonList(new Transition_Editor());
+      case 12:
+        return Collections.<ConceptEditor>singletonList(new UltimateContainer_Editor());
+      case 13:
+        return Collections.<ConceptEditor>singletonList(new XElement_Editor());
+      case 14:
+        return Collections.<ConceptEditor>singletonList(new YElement_Editor());
+      default:
     }
     return Collections.<ConceptEditor>emptyList();
   }
 
 
-
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
+  @NotNull
+  @Override
+  public Collection<SubstituteMenu> getDeclaredDefaultSubstituteMenus(SAbstractConcept concept) {
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex1.index(cncpt)) {
+      case 0:
+        return Collections.<SubstituteMenu>singletonList(new EventReference_SubstituteMenu());
+      case 1:
+        return Collections.<SubstituteMenu>singletonList(new StateReference_SubstituteMenu());
+      default:
     }
-    return res;
+    return Collections.<SubstituteMenu>emptyList();
   }
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0a = buildConceptIndices(MetaAdapterFactory.getConcept(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0x3cc6bd99e23ef6a8L, "jetbrains.mps.lang.editor.tableTests.structure.ContentElement"), MetaAdapterFactory.getConcept(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0x28004d411fa3bea4L, "jetbrains.mps.lang.editor.tableTests.structure.DataCell"), MetaAdapterFactory.getConcept(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0xa99ffe1c845743bL, "jetbrains.mps.lang.editor.tableTests.structure.Event"), MetaAdapterFactory.getConcept(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0xa99ffe1c8457446L, "jetbrains.mps.lang.editor.tableTests.structure.EventReference"), MetaAdapterFactory.getConcept(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0x760c9302beb3e1d1L, "jetbrains.mps.lang.editor.tableTests.structure.HierarchycalTable"), MetaAdapterFactory.getConcept(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0x6a2febf37d11d3dfL, "jetbrains.mps.lang.editor.tableTests.structure.LightWeightDecisionTable"), MetaAdapterFactory.getConcept(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0x3cc6bd99e23e4590L, "jetbrains.mps.lang.editor.tableTests.structure.Matrix"), MetaAdapterFactory.getConcept(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0xa99ffe1c8457442L, "jetbrains.mps.lang.editor.tableTests.structure.State"), MetaAdapterFactory.getConcept(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0xa99ffe1c8456ba1L, "jetbrains.mps.lang.editor.tableTests.structure.StateMachine"), MetaAdapterFactory.getConcept(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0xa99ffe1c8457444L, "jetbrains.mps.lang.editor.tableTests.structure.StateReference"), MetaAdapterFactory.getConcept(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0x28004d411fa3bea0L, "jetbrains.mps.lang.editor.tableTests.structure.Table"), MetaAdapterFactory.getConcept(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0xa99ffe1c845743dL, "jetbrains.mps.lang.editor.tableTests.structure.Transition"), MetaAdapterFactory.getConcept(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0x4c733427bdedcbd0L, "jetbrains.mps.lang.editor.tableTests.structure.UltimateContainer"), MetaAdapterFactory.getConcept(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0x3cc6bd99e23ef6a6L, "jetbrains.mps.lang.editor.tableTests.structure.XElement"), MetaAdapterFactory.getConcept(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0x3cc6bd99e23ef6a7L, "jetbrains.mps.lang.editor.tableTests.structure.YElement"));
+
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0x3cc6bd99e23ef6a8L), MetaIdFactory.conceptId(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0x28004d411fa3bea4L), MetaIdFactory.conceptId(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0xa99ffe1c845743bL), MetaIdFactory.conceptId(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0xa99ffe1c8457446L), MetaIdFactory.conceptId(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0x760c9302beb3e1d1L), MetaIdFactory.conceptId(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0x6a2febf37d11d3dfL), MetaIdFactory.conceptId(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0x3cc6bd99e23e4590L), MetaIdFactory.conceptId(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0xa99ffe1c8457442L), MetaIdFactory.conceptId(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0xa99ffe1c8456ba1L), MetaIdFactory.conceptId(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0xa99ffe1c8457444L), MetaIdFactory.conceptId(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0x28004d411fa3bea0L), MetaIdFactory.conceptId(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0xa99ffe1c845743dL), MetaIdFactory.conceptId(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0x4c733427bdedcbd0L), MetaIdFactory.conceptId(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0x3cc6bd99e23ef6a6L), MetaIdFactory.conceptId(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0x3cc6bd99e23ef6a7L)).seal();
+  private static final ConceptSwitchIndex conceptIndex1 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0xa99ffe1c8457446L), MetaIdFactory.conceptId(0xdf8799e7254a406fL, 0xbd67f4cc27337152L, 0xa99ffe1c8457444L)).seal();
 }

@@ -16,35 +16,24 @@
 
 package jetbrains.mps.idea.java.debugger.breakpoints;
 
-import com.intellij.debugger.DebuggerManagerEx;
 import com.intellij.debugger.ui.breakpoints.BreakpointWithHighlighter;
+import com.intellij.icons.AllIcons.Debugger;
+import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionPlaces;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.Constraints;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.ui.popup.Balloon;
-import com.intellij.openapi.ui.popup.JBPopupAdapter;
-import com.intellij.openapi.ui.popup.LightweightWindowEvent;
-import com.intellij.openapi.wm.IdeFocusManager;
-import com.intellij.util.ui.UIUtil;
-import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import com.intellij.xdebugger.impl.actions.EditBreakpointAction.ContextAction;
 import com.intellij.xdebugger.impl.breakpoints.XLineBreakpointImpl;
-import com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory;
 import com.intellij.xdebugger.impl.ui.DebuggerUIUtil;
 import jetbrains.mps.debugger.core.breakpoints.BreakpointIconRenderrerEx;
 import jetbrains.mps.idea.java.MpsJavaBundle;
 import jetbrains.mps.nodeEditor.EditorComponent;
-import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.mps.openapi.model.SNodeReference;
 
 import javax.swing.Icon;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JPopupMenu;
 import java.awt.Point;
 
@@ -60,28 +49,31 @@ import java.awt.Point;
 
   @Override
   public Icon getIcon() {
-    return myBreakpoint.getIcon();
+    Icon icon = myBreakpoint.getIcon();
+    // fixme idea seems to update the icon (which is initialy null) under a series of Swing.invokeLaters
+    // our control flow is such that even if schedule breakpoint.updateUI() it will happen later
+    // Let's be simplistic for now and just return the default icon.
+    return icon != null ? icon : Debugger.Db_set_breakpoint;
   }
 
   @Override
-  public SNode getNode() {
-    return BreakpointPainter.getNodeForBreakpoint(myBreakpoint);
+  public SNodeReference getNodeReference() {
+    return BreakpointPainter.getNodeReferenceForBreakpoint(myBreakpoint);
   }
 
   @Override
   public JPopupMenu getPopupMenu() {
-    final Editor editor = CommonDataKeys.EDITOR_EVEN_IF_INACTIVE.getData(((EditorComponent)myComponent));
-    ((DebuggerManagerEx)DebuggerManagerEx.getInstance(myBreakpoint.getProject())).getBreakpointManager().editBreakpoint(myBreakpoint, editor);
-    if (true) {
-      return null;
-    }
     DefaultActionGroup actions = new DefaultActionGroup();
-    if(myBreakpoint.getXBreakpoint() instanceof XLineBreakpointImpl)
-      actions.addAll(((XLineBreakpointImpl) myBreakpoint.getXBreakpoint()).getHighlighter().getGutterIconRenderer().getPopupMenuActions());
-    for (AnAction action : actions.getChildActionsOrStubs()) {
-      if (action instanceof ContextAction) {
-        actions.remove(action);
-        break;
+    ActionGroup actionGroup = ((XLineBreakpointImpl) myBreakpoint.getXBreakpoint()).getHighlighter().getGutterIconRenderer().getPopupMenuActions();
+    if (actionGroup != null) {
+      if (myBreakpoint.getXBreakpoint() instanceof XLineBreakpointImpl) {
+        actions.addAll(actionGroup);
+      }
+      for (AnAction action : actions.getChildActionsOrStubs()) {
+        if (action instanceof ContextAction) {
+          actions.remove(action);
+          break;
+        }
       }
     }
     actions.add(new EditBreakpointAction(), Constraints.FIRST);
@@ -109,61 +101,12 @@ import java.awt.Point;
     }
 
     @Override
-    public void update(AnActionEvent e) {
-      /*BreakpointFactory breakpointFactory = findFactory(myBreakpoint);
-      if (breakpointFactory == null) {
-        e.getPresentation().setEnabled(false);
-      } else {
-        e.getPresentation().setEnabled(true);
-      }*/
-      super.update(e);
-    }
-
-    @Override
     public void actionPerformed(AnActionEvent e) {
-      /*BreakpointFactory breakpointFactory = findFactory(myBreakpoint);
-      if (breakpointFactory == null) {
-        return;
-      }
-
-      final BreakpointPropertiesPanel propertiesPanel = breakpointFactory.createBreakpointPropertiesPanel(myBreakpoint.getProject(), true);
-      propertiesPanel.initFrom(myBreakpoint, false);*/
-      final JComponent mainPanel = new JLabel("In progress");//propertiesPanel.getPanel();
-
       int y = getComponent().getLeftEditorHighlighter().getIconCoordinate(BreakpointIconRenderrer.this);
       int x = getComponent().getLeftEditorHighlighter().getIconRenderersOffset();
       Point whereToShow = new Point(x + getIcon().getIconWidth() / 2, y + getIcon().getIconHeight() / 2);
 
-      Balloon balloon = DebuggerUIUtil.showBreakpointEditor(myBreakpoint.getProject(), mainPanel,
-        whereToShow, getComponent().getLeftEditorHighlighter(), new Runnable() {
-        @Override
-        public void run() {
-          UIUtil.invokeLaterIfNeeded(new Runnable() {
-            @Override
-            public void run() {
-              BreakpointsDialogFactory.getInstance(myBreakpoint.getProject()).showDialog(myBreakpoint);
-            }
-          });
-        }
-      }, myBreakpoint);
-
-      balloon.addListener(new JBPopupAdapter() {
-        @Override
-        public void onClosed(LightweightWindowEvent event) {
-          /*propertiesPanel.saveTo(myBreakpoint, new Runnable() {
-            @Override
-            public void run() {
-            }
-          });*/
-        }
-      });
-
-      ApplicationManager.getApplication().invokeLater(new Runnable() {
-        @Override
-        public void run() {
-          IdeFocusManager.findInstance().requestFocus(mainPanel, true);
-        }
-      });
+      DebuggerUIUtil.showXBreakpointEditorBalloon(myBreakpoint.getProject(), whereToShow, getComponent().getLeftEditorHighlighter(), false, myBreakpoint.getXBreakpoint());
     }
   }
 }

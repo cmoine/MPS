@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="cau8ku92hgvlo55ejzaggmwq8gbxuux" />
+<product version="3" modelHash="7z37porkkbkumqsgbk53vt058bqsol2">
+  <files names="CanWrapHighLevelValue_ConceptFunction_Constraints.java:ConstraintsAspectDescriptor.java:GetHighLevelValuePresentation_ConceptFunction_Constraints.java:GetHighLevelWatchablesBlock_ConceptFunction_Constraints.java:HighLevelWatchableCreator_Constraints.java" />
+</product>
 

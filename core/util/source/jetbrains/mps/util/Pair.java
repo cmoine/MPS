@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2016 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,14 @@
  */
 package jetbrains.mps.util;
 
-import org.jetbrains.mps.annotations.Immutable;
+import java.util.function.Function;
 
+/**
+ * Mutable pair of values
+ * @param <T1> type of first value
+ * @param <T2> type of second value
+ */
 @SuppressWarnings({"InstanceVariableNamingConvention"})
-@Immutable
 public final class Pair<T1, T2> {
   public T1 o1;
   public T2 o2;
@@ -50,5 +54,19 @@ public final class Pair<T1, T2> {
 
   public String toString() {
     return "(" + o1 + ", " + o2 + ")";
+  }
+
+  /**
+   * @return Function that extracts {@linkplain #o1 first value} from a pair
+   */
+  public static <P1,P2> Function<Pair<P1, P2>, P1> first() {
+    return p -> p.o1;
+  }
+
+  /**
+   * @return Function that extracts {@linkplain #o2 second value} from a pair
+   */
+  public static <P1,P2> Function<Pair<P1, P2>, P2> second() {
+    return p -> p.o2;
   }
 }

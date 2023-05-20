@@ -63,11 +63,7 @@ public class BarCheckedDots {
   }
   private static void check_pdjdqn_a0a2a11(BarCheckedDots checkedDotOperand) throws Exception, RuntimeException {
     if (null != checkedDotOperand) {
-      checkedDotOperand.method1(method2(method3(new _FunctionTypes._return_P1_E0<Integer, Integer>() {
-        public Integer invoke(Integer a) {
-          return 2 * a;
-        }
-      })));
+      checkedDotOperand.method1(method2(method3((Integer a) -> 2 * a)));
     }
 
   }

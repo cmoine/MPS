@@ -2,19 +2,12 @@
 <model ref="r:00000000-0000-4000-0000-011c89590351(jetbrains.mps.lang.intentions.typesystem)">
   <persistence version="9" />
   <languages>
-    <use id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections" version="0" />
-    <use id="3a13115c-633c-4c5c-bbcc-75c4219e9555" name="jetbrains.mps.lang.quotation" version="0" />
-    <use id="7a5dda62-9140-4668-ab76-d5ed1746f2b2" name="jetbrains.mps.lang.typesystem" version="0" />
-    <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="4" />
-    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="0" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="00000000-0000-4000-0000-1de82b3a4936(jetbrains.mps.devkit.aspect.typesystem)" />
   </languages>
   <imports>
     <import index="tp3j" ref="r:00000000-0000-4000-0000-011c89590353(jetbrains.mps.lang.intentions.structure)" />
     <import index="tpce" ref="r:00000000-0000-4000-0000-011c89590292(jetbrains.mps.lang.structure.structure)" />
     <import index="6003" ref="r:cd31458a-5129-42ac-be1d-44effd111f4a(jetbrains.mps.lang.intentions.util)" />
-    <import index="cj4x" ref="1ed103c3-3aa6-49b7-9c21-6765ee11f224/java:jetbrains.mps.openapi.editor(MPS.Editor/)" />
   </imports>
   <registry>
     <language id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage">
@@ -106,7 +99,7 @@
         <child id="5169995583184591170" name="smodelAttribute" index="lGtFl" />
       </concept>
       <concept id="3364660638048049745" name="jetbrains.mps.lang.core.structure.LinkAttribute" flags="ng" index="A9Btn">
-        <property id="1757699476691236116" name="linkRole" index="2qtEX8" />
+        <property id="1757699476691236116" name="role_DebugInfo" index="2qtEX8" />
         <property id="1341860900488019036" name="linkId" index="P3scX" />
       </concept>
       <concept id="1169194658468" name="jetbrains.mps.lang.core.structure.INamedConcept" flags="ng" index="TrEIO">
@@ -117,7 +110,7 @@
   <node concept="1YbPZF" id="hmSkZ6f">
     <property role="18ip37" value="true" />
     <property role="TrG5h" value="typeof_ConceptFunctionParameter_node" />
-    <property role="3GE5qa" value="old" />
+    <property role="3GE5qa" value="traditional" />
     <node concept="3clFbS" id="hmSkZ6g" role="18ibNy">
       <node concept="3cpWs8" id="hmSkZ6h" role="3cqZAp">
         <node concept="3cpWsn" id="hmSkZ6i" role="3cpWs9">
@@ -139,7 +132,7 @@
               </node>
             </node>
             <node concept="3TrEf2" id="hmStUaa" role="2OqNvi">
-              <ref role="3Tt5mk" to="tp3j:2c3oNEsfAwi" />
+              <ref role="3Tt5mk" to="tp3j:2c3oNEsfAwi" resolve="forConcept" />
             </node>
           </node>
         </node>
@@ -210,11 +203,11 @@
                 <ref role="3cqZAo" node="i38ZRQa" resolve="intention" />
               </node>
               <node concept="3TrEf2" id="i3et8uo" role="2OqNvi">
-                <ref role="3Tt5mk" to="tp3j:i3dlsyr" />
+                <ref role="3Tt5mk" to="tp3j:i3dlsyr" resolve="queryFunction" />
               </node>
             </node>
             <node concept="3TrEf2" id="i3et8Vx" role="2OqNvi">
-              <ref role="3Tt5mk" to="tp3j:i3ddBrI" />
+              <ref role="3Tt5mk" to="tp3j:i3ddBrI" resolve="paramType" />
             </node>
           </node>
         </node>
@@ -227,7 +220,7 @@
   </node>
   <node concept="1YbPZF" id="38RcvkhOstk">
     <property role="TrG5h" value="typeof_ConceptFunctionParameter_childNode" />
-    <property role="3GE5qa" value="old" />
+    <property role="3GE5qa" value="traditional" />
     <node concept="3clFbS" id="38RcvkhOstl" role="18ibNy">
       <node concept="1Z5TYs" id="38RcvkhOsvm" role="3cqZAp">
         <node concept="mw_s8" id="38RcvkhOsvq" role="1ZfhKB">
@@ -252,7 +245,7 @@
   <node concept="1YbPZF" id="5ChbRjKJ1AY">
     <property role="TrG5h" value="typeof_ForConceptParameterDeclaration" />
     <property role="18ip37" value="true" />
-    <property role="3GE5qa" value="new.parameter" />
+    <property role="3GE5qa" value="classLike.parameter" />
     <node concept="3clFbS" id="5ChbRjKJ1AZ" role="18ibNy">
       <node concept="1Z5TYs" id="5ChbRjKJ1Ga" role="3cqZAp">
         <node concept="mw_s8" id="4y11RyiW0mW" role="1ZfhKB">

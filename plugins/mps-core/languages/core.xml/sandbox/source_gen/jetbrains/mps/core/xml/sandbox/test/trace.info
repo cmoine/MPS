@@ -2,12 +2,12 @@
 <debug-info version="2">
   <root nodeRef="r:d31f9592-7619-4098-b4aa-53d9b210c472(jetbrains.mps.core.xml.sandbox.test)/175285232894469943">
     <file name="test2.xml">
-      <unit id="175285232894469943" at="1,0,39,7" name="jetbrains.mps.core.xml.sandbox.test.test2" />
+      <unit id="175285232894469943" at="1,0,45,7" name="jetbrains.mps.core.xml.sandbox.test.test2" />
     </file>
   </root>
   <root nodeRef="r:d31f9592-7619-4098-b4aa-53d9b210c472(jetbrains.mps.core.xml.sandbox.test)/6666499814681526040">
     <file name="test1.xml">
-      <unit id="6666499814681526040" at="1,0,53,6" name="jetbrains.mps.core.xml.sandbox.test.test1" />
+      <unit id="6666499814681526040" at="1,0,58,6" name="jetbrains.mps.core.xml.sandbox.test.test1" />
     </file>
   </root>
   <root nodeRef="r:d31f9592-7619-4098-b4aa-53d9b210c472(jetbrains.mps.core.xml.sandbox.test)/7385586609667787292">

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-dhgtjmmykwf7itsr99vbpxiemubc5t9" />
+<product version="3" modelHash="dozry7zmgqqbjffsxfzd0klg1ybwsaz">
+  <files names="TypesystemDescriptor.java:typeof_ElementMacro_InferenceRule.java:typeof_TextMacro_InferenceRule.java:typeof_XmlLiteral_InferenceRule.java" />
+</product>
 

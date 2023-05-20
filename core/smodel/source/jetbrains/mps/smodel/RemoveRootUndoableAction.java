@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package jetbrains.mps.smodel;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
 
-class RemoveRootUndoableAction extends SNodeUndoableAction {
+final class RemoveRootUndoableAction extends SNodeUndoableAction {
   private final SModel myModel;
 
   RemoveRootUndoableAction(SNode root, SModel model) {
@@ -27,22 +27,17 @@ class RemoveRootUndoableAction extends SNodeUndoableAction {
   }
 
   @Override
-  protected void doUndo() {
+  public void undo() {
     myModel.addRootNode(getAffectedNode());
   }
 
   @Override
-  protected void doRedo() {
+  public void redo() {
     myModel.removeRootNode(getAffectedNode());
   }
 
   @Override
-  public boolean isGlobal() {
-    return true;
-  }
-
-  @Override
-  public SNode getRoot() {
-    return null;
+  public VFSChange getAssociatedVfsChange() {
+    return VFSChange.FILE_DELETED;
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,52 +16,50 @@
 package jetbrains.mps.classloading;
 
 import jetbrains.mps.module.ReloadableModule;
-import jetbrains.mps.module.ReloadableModuleBase;
-import jetbrains.mps.smodel.MPSModuleRepository;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SRepositoryListener;
-import org.jetbrains.mps.openapi.module.SRepositoryListenerBase;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.After;
+import org.junit.Before;
 
 import static org.junit.Assert.assertTrue;
 
 public class ModulesReloadTestStress extends ModulesReloadTest {
-  final static SRepositoryListener CRAZY_LISTENER = new SRepositoryListenerBase() {
-    private final ClassLoaderManager myManager = ClassLoaderManager.getInstance();
-    private final ModulesWatcher myModulesWatcher = myManager.getModulesWatcher();
+  private SRepositoryListener myCrazyListener;
 
-    @Override
-    public void moduleAdded(@NotNull SModule module) {
-      checkModuleWatched(module);
-      myManager.reloadModule(module);
-    }
-
-    @Override
-    public void beforeModuleRemoved(@NotNull SModule module) {
-      checkModuleWatched(module);
-      myManager.reloadModule(module);
-    }
-
-    private void checkModuleWatched(SModule module) {
-      if (module instanceof ReloadableModule) {
-        ReloadableModuleBase reloadableModuleBase = (ReloadableModuleBase) module;
-        reloadableModuleBase.getClassLoader(); // to initiate a refresh session in CLManager
-        assertTrue("The module " + module + " is not watched by class loading", myModulesWatcher.isModuleWatched(reloadableModuleBase));
+  @NotNull
+  static SRepositoryListener createCrazyListener(@NotNull ClassLoaderManager clm) {
+    return new SRepositoryListener() {
+      @Override
+      public void moduleAdded(@NotNull SModule module) {
+        checkModuleWatched(module);
+        clm.reloadModule(module);
       }
-    }
-  };
 
-  @BeforeClass
-  public static void setUp() {
-    ModulesReloadTest.setUp();
-    MPSModuleRepository.getInstance().addRepositoryListener(CRAZY_LISTENER);
+      @Override
+      public void beforeModuleRemoved(@NotNull SModule module) {
+        checkModuleWatched(module);
+        clm.reloadModule(module);
+      }
+
+      private void checkModuleWatched(SModule module) {
+        if (module instanceof ReloadableModule) {
+          ReloadableModule reloadableModule = (ReloadableModule) module;
+          reloadableModule.getClassLoader(); // to initiate a refresh session in CLManager
+          assertTrue("The module " + module + " is not watched by class loading", clm.getModulesWatcher().isModuleWatched(reloadableModule));
+        }
+      }
+    };
   }
 
-  @AfterClass
-  public static void tearDown() {
-    MPSModuleRepository.getInstance().removeRepositoryListener(CRAZY_LISTENER);
-    ModulesReloadTest.tearDown();
+  @Before
+  public void attachCrazyListener() {
+    myCrazyListener = createCrazyListener(getCLM());
+    getTestRepository().addRepositoryListener(myCrazyListener);
+  }
+
+  @After
+  public void detachCrazyListener() {
+    getTestRepository().removeRepositoryListener(myCrazyListener);
   }
 }

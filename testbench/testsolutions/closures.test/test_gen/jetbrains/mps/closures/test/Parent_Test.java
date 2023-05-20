@@ -9,6 +9,6 @@ public class Parent_Test extends TestCase {
   public Parent_Test() {
   }
   public void testStub() {
-    // do nothing 
+    // do nothing
   }
 }

@@ -29,5 +29,5 @@ public interface DisposableDataSource extends DataSource {
    * Invoked with intention never come across this data source again.
    * For a file/folder/DB entry, this would mean 'wipe out'.
    */
-  void delete();
+  boolean delete();
 }

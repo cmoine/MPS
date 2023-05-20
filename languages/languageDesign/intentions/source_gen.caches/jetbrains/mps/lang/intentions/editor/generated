@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-eemqgzit2r4ty8jgs6jzi5469er5l3o" />
+<product version="3" modelHash="euk58p2khb8qtten8130vcxzzjoo2uz">
+  <files names="BaseIntentionDeclaration_Editor.java:BaseIntentionDeclaration_EditorBuilder_a.java:BaseIntentionDeclaration_SubstituteMenu.java:ConceptFunctionParameter_childNode_SubstituteMenu.java:ConceptFunctionParameter_node_SubstituteMenu.java:EditorAspectDescriptorImpl.java:ErrorIntentionPriority_Editor.java:ErrorIntentionPriority_EditorBuilder_a.java:ForConceptMethodParameter_Editor.java:ForConceptMethodParameter_EditorBuilder_a.java:IntentionParameter_Editor.java:IntentionParameter_EditorBuilder_a.java:IntentionParameter_SubstituteMenu.java:Intention_Editor.java:Intention_EditorBuilder_a.java:Parameter_Editor.java:Parameter_EditorBuilder_a.java:ParameterizedDescriptionBlock_SubstituteMenu.java:ParameterizedIntentionDeclaration_Editor.java:ParameterizedIntentionDeclaration_EditorBuilder_a.java:QueryBlock_Editor.java:QueryBlock_EditorBuilder_a.java:QueryBlock_InspectorBuilder_a.java:parameter_Contribution.java" />
+</product>
 

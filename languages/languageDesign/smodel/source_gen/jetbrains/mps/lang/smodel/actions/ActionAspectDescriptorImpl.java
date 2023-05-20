@@ -7,8 +7,9 @@ import jetbrains.mps.openapi.actions.descriptor.ActionAspectDescriptor;
 import java.util.Collection;
 import jetbrains.mps.openapi.actions.descriptor.NodeFactory;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import java.util.Arrays;
 import java.util.Collections;
+import jetbrains.mps.openapi.actions.descriptor.PasteWrapper;
+import java.util.Arrays;
 
 public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor implements ActionAspectDescriptor {
   private static final String LANGUAGE_FQ_NAME = "jetbrains.mps.lang.smodel";
@@ -16,43 +17,45 @@ public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor imple
   @Override
   public Collection<NodeFactory> getFactories(SAbstractConcept concept) {
     if (LANGUAGE_FQ_NAME.equals(concept.getLanguage().getQualifiedName())) {
-      switch (Arrays.binarySearch(stringSwitchCases_tpto26_a0a0a0c, concept.getName())) {
-        case 0:
-          return Collections.<NodeFactory>singletonList(new SModelLang_factories.NodeFactory_6955116391923836025());
-        case 1:
-          return Collections.<NodeFactory>singletonList(new SModelLang_factories.NodeFactory_6955116391923862678());
-        case 2:
+      switch (concept.getName()) {
+        case "ConceptIdRefExpression":
           return Collections.<NodeFactory>singletonList(new ConceptRefFactories.NodeFactory_3634671212091137140());
-        case 3:
+        case "ConceptRefExpression":
           return Collections.<NodeFactory>singletonList(new ConceptRefFactories.NodeFactory_2356801005208152816());
-        case 4:
+        case "Concept_IsSubConceptOfOperation":
           return Collections.<NodeFactory>singletonList(new SModelLang_factories.NodeFactory_1203553739270());
-        case 5:
+        case "Concept_IsSuperConceptOfOperation":
           return Collections.<NodeFactory>singletonList(new SModelLang_factories.NodeFactory_1203553726914());
-        case 6:
+        case "Concept_NewInstance":
           return Collections.<NodeFactory>singletonList(new SModelLang_factories.NodeFactory_3341893916018829253());
-        case 7:
+        case "LinkList_AddNewChildOperation":
           return Collections.<NodeFactory>singletonList(new SModelLang_factories.NodeFactory_3341893916018829632());
-        case 8:
+        case "Link_SetNewChildOperation":
           return Collections.<NodeFactory>singletonList(new SModelLang_factories.NodeFactory_3341893916018829589());
-        case 9:
+        case "Model_CreateNewNodeOperation":
           return Collections.<NodeFactory>singletonList(new SModelLang_factories.NodeFactory_3341893916018829316());
-        case 10:
+        case "Node_GetAncestorOperation":
           return Collections.<NodeFactory>singletonList(new SModelLang_factories.NodeFactory_1171415364777());
-        case 11:
+        case "Node_GetChildrenAndChildAttributesOperation":
           return Collections.<NodeFactory>singletonList(new Node_GetChildrenAndChildAttributesOperation_Factory.NodeFactory_7457491784609238794());
-        case 12:
+        case "Node_GetDescendantsOperation":
           return Collections.<NodeFactory>singletonList(new SModelLang_factories.NodeFactory_1207248813874());
-        case 13:
+        case "Node_InsertNewNextSiblingOperation":
           return Collections.<NodeFactory>singletonList(new SModelLang_factories.NodeFactory_3341893916018829413());
-        case 14:
+        case "Node_InsertNewPrevSiblingOperation":
           return Collections.<NodeFactory>singletonList(new SModelLang_factories.NodeFactory_3341893916018829507());
-        case 15:
+        case "Node_ReplaceWithNewOperation":
           return Collections.<NodeFactory>singletonList(new SModelLang_factories.NodeFactory_3341893916018829548());
-        case 16:
+        case "SConceptType":
+          return Collections.<NodeFactory>singletonList(new SNodeTypeFactories.NodeFactory_3320646261220827861());
+        case "SNodeCreator":
           return Collections.<NodeFactory>singletonList(new SModelLang_factories.NodeFactory_3602058458308809797());
-        case 17:
+        case "SNodeListType":
           return Collections.<NodeFactory>singletonList(new SModelLang_factories.NodeFactory_1205353787833());
+        case "SNodePointerType":
+          return Collections.<NodeFactory>singletonList(new SNodeTypeFactories.NodeFactory_8153066124498048370());
+        case "SNodeType":
+          return Collections.<NodeFactory>singletonList(new SNodeTypeFactories.NodeFactory_3320646261220621242());
         default:
       }
     }
@@ -60,8 +63,7 @@ public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor imple
   }
 
   @Override
-  public boolean hasBuilders() {
-    return false;
+  public Collection<PasteWrapper> getPasteWrappers() {
+    return Arrays.asList(new PasteWrapper[]{new SwitchExpressionPW_PasteWrapper_0(), new SwitchExpressionPW_PasteWrapper_1(), new SwitchExpressionPW_PasteWrapper_2(), new SwitchExpressionPW_PasteWrapper_3(), new SwitchExpressionPW_PasteWrapper_4(), new SwitchExpressionPW_PasteWrapper_5(), new SwitchExpressionPW_PasteWrapper_6()});
   }
-  private static String[] stringSwitchCases_tpto26_a0a0a0c = new String[]{"CheckedModuleQualifiedName", "CheckedModuleReference", "ConceptIdRefExpression", "ConceptRefExpression", "Concept_IsSubConceptOfOperation", "Concept_IsSuperConceptOfOperation", "Concept_NewInstance", "LinkList_AddNewChildOperation", "Link_SetNewChildOperation", "Model_CreateNewNodeOperation", "Node_GetAncestorOperation", "Node_GetChildrenAndChildAttributesOperation", "Node_GetDescendantsOperation", "Node_InsertNewNextSiblingOperation", "Node_InsertNewPrevSiblingOperation", "Node_ReplaceWithNewOperation", "SNodeCreator", "SNodeListType"};
 }

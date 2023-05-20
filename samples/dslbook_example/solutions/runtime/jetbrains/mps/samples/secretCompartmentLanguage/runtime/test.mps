@@ -2,11 +2,11 @@
 <model ref="r:43e3e907-f65e-4358-a377-baa3670feacf(jetbrains.mps.samples.secretCompartmentLanguage.runtime.test)">
   <persistence version="9" />
   <languages>
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports>
     <import index="gf2w" ref="r:84968794-d306-4a7a-9857-08605b2b07d6(jetbrains.mps.samples.secretCompartmentLanguage.runtime)" />
-    <import index="u132" ref="83f155ff-422c-4b5a-a2f2-b459302dd215/java:junit.framework(jetbrains.mps.baseLanguage.unitTest.libs/)" />
+    <import index="rjhg" ref="49808fad-9d41-4b96-83fa-9231640f6b2b/java:org.junit(JUnit/)" />
     <import index="wyt6" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)" implicit="true" />
   </imports>
   <registry>
@@ -164,23 +164,23 @@
             </node>
           </node>
         </node>
-        <node concept="3clFbF" id="5XNkAKP6$DI" role="3cqZAp">
-          <node concept="2YIFZM" id="5XNkAKP6$DJ" role="3clFbG">
-            <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="u132:~Assert.assertEquals(java.lang.String,java.lang.String):void" resolve="assertEquals" />
-            <node concept="Xl_RD" id="5XNkAKP6$DK" role="37wK5m">
+        <node concept="3clFbF" id="7LGEsuh7UJd" role="3cqZAp">
+          <node concept="2YIFZM" id="7LGEsuh7UMy" role="3clFbG">
+            <ref role="37wK5l" to="rjhg:~Assert.assertEquals(java.lang.Object,java.lang.Object)" resolve="assertEquals" />
+            <ref role="1Pybhc" to="rjhg:~Assert" resolve="Assert" />
+            <node concept="Xl_RD" id="7LGEsuh7UQ6" role="37wK5m">
               <property role="Xl_RC" value="unlockedPanel" />
             </node>
-            <node concept="2OqwBi" id="5XNkAKP6$DL" role="37wK5m">
-              <node concept="2OqwBi" id="5XNkAKP6$DM" role="2Oq$k0">
-                <node concept="1rXfSq" id="4hiugqyyVy7" role="2Oq$k0">
+            <node concept="2OqwBi" id="7LGEsuh7UWD" role="37wK5m">
+              <node concept="2OqwBi" id="7LGEsuh7UWE" role="2Oq$k0">
+                <node concept="1rXfSq" id="7LGEsuh7UWF" role="2Oq$k0">
                   <ref role="37wK5l" to="gf2w:5XNkAKP6$PW" resolve="getController" />
                 </node>
-                <node concept="liA8E" id="5XNkAKP6$DO" role="2OqNvi">
+                <node concept="liA8E" id="7LGEsuh7UWG" role="2OqNvi">
                   <ref role="37wK5l" to="gf2w:5XNkAKP6$_Z" resolve="getCurrentState" />
                 </node>
               </node>
-              <node concept="liA8E" id="5XNkAKP6$DP" role="2OqNvi">
+              <node concept="liA8E" id="7LGEsuh7UWH" role="2OqNvi">
                 <ref role="37wK5l" to="gf2w:5XNkAKP6$GP" resolve="getName" />
               </node>
             </node>

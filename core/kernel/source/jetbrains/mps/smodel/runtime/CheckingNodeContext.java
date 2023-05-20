@@ -15,12 +15,15 @@
  */
 package jetbrains.mps.smodel.runtime;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SNodeReference;
-import org.jetbrains.annotations.Nullable;
 
+/**
+ * debug context for the navigation to the source node
+ * [AP] to be incorporated into context of constraints rules
+ *
+ * @author abishev
+ */
 public interface CheckingNodeContext {
-  void setBreakingNode(@Nullable SNodeReference node);
-
-  @Nullable
-  SNodeReference getBreakingNode();
+  void setBreakingNode(@NotNull SNodeReference ruleSourceNode);
 }

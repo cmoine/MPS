@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,38 +17,24 @@ package jetbrains.mps.smodel.adapter.structure.link;
 
 import jetbrains.mps.RuntimeFlags;
 import jetbrains.mps.smodel.MPSModuleRepository;
-import jetbrains.mps.smodel.SNodeId;
 import jetbrains.mps.smodel.adapter.ids.SContainmentLinkId;
 import jetbrains.mps.smodel.adapter.structure.ConceptFeatureHelper;
 import jetbrains.mps.smodel.adapter.structure.FormatException;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.smodel.language.ConceptRegistryUtil;
 import jetbrains.mps.smodel.runtime.ConceptDescriptor;
 import jetbrains.mps.smodel.runtime.LinkDescriptor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
-import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 
-public final class SContainmentLinkAdapterById extends SContainmentLinkAdapter {
+public class SContainmentLinkAdapterById extends SContainmentLinkAdapter {
   public static final java.lang.String LINK_PREFIX = "l";
-  private final SContainmentLinkId myRoleId;
-  private final boolean myIsBootstrap;
 
   public SContainmentLinkAdapterById(@NotNull SContainmentLinkId roleId, @NotNull String name) {
-    this(roleId, name, false);
-  }
-
-  /**
-   * @param bootstrap see BOOTSTRAP META OBJECTS javadoc for {@link jetbrains.mps.smodel.adapter.BootstrapAdapterFactory}
-   */
-  public SContainmentLinkAdapterById(@NotNull SContainmentLinkId roleId, @NotNull String name, boolean bootstrap) {
-    super(name);
-    myRoleId = roleId;
-    myIsBootstrap = bootstrap;
+    super(roleId, name);
   }
 
   @Override
@@ -64,11 +50,6 @@ public final class SContainmentLinkAdapterById extends SContainmentLinkAdapter {
   }
 
   @NotNull
-  public SContainmentLinkId getId() {
-    return myRoleId;
-  }
-
-  @NotNull
   @Override
   public SAbstractConcept getOwner() {
     return ConceptFeatureHelper.getOwner(getId());
@@ -76,7 +57,9 @@ public final class SContainmentLinkAdapterById extends SContainmentLinkAdapter {
 
   @Override
   public String getRoleName() {
-    if (RuntimeFlags.isMergeDriverMode() || myIsBootstrap) {
+    if (RuntimeFlags.isMergeDriverMode()) {
+      // XXX can I get rid of isMergeDriverMode() using the fact there's xAdapter3 thing? Or, at least, I can keep
+      // the check outside of this class at MetaAdapterFactory to create xAdapter2 while in merge
       return myName;
     }
     LinkDescriptor d = getLinkDescriptor();
@@ -89,31 +72,25 @@ public final class SContainmentLinkAdapterById extends SContainmentLinkAdapter {
 
   @Override
   @Nullable
-  public LinkDescriptor getLinkDescriptor() {
-    ConceptDescriptor cd = ConceptFeatureHelper.getOwnerDescriptor(getId());
-    if (cd == null) return null;
+  protected LinkDescriptor getLinkDescriptor() {
+    ConceptDescriptor cd = ConceptFeatureHelper.getOwnerDescriptor(myRoleId);
     return cd.getLinkDescriptor(myRoleId);
   }
 
+  @Nullable
   @Override
   public SNode getDeclarationNode() {
     LinkDescriptor d = getLinkDescriptor();
     if (d != null) {
       SNodeReference sn = d.getSourceNode();
-      if(sn!=null) return sn.resolve(MPSModuleRepository.getInstance());
+      return sn == null ? null : sn.resolve(MPSModuleRepository.getInstance());
     }
-
-    SNode cnode = getOwner().getDeclarationNode();
-    if (cnode == null) {
-      return null;
-    }
-    SModel model = cnode.getModel();
-    return model.getNode(new SNodeId.Regular(myRoleId.getIdValue()));
+    return null;
   }
 
   @Override
   public String serialize() {
-    return LINK_PREFIX + ID_DELIM + myRoleId.serialize() + ID_DELIM + myName;
+    return LINK_PREFIX + ID_DELIM + myRoleId.serialize() + ID_DELIM + getRoleName();
   }
 
   public static SContainmentLinkAdapterById deserialize(String s) {

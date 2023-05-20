@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,100 +15,74 @@
  */
 package jetbrains.mps.classloading;
 
-import jetbrains.mps.compiler.CompilationResultAdapter;
-import jetbrains.mps.compiler.EclipseJavaCompiler;
-import jetbrains.mps.make.ClassFileWriter;
-import jetbrains.mps.project.facets.JavaModuleOperations;
-import jetbrains.mps.reloading.CommonPaths;
-import jetbrains.mps.util.NameUtil;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-import org.eclipse.jdt.core.compiler.CategorizedProblem;
-import org.eclipse.jdt.internal.compiler.ClassFile;
-import org.eclipse.jdt.internal.compiler.CompilationResult;
+import jetbrains.mps.logging.Logger;
 
+import javax.tools.Diagnostic;
+import javax.tools.Diagnostic.Kind;
+import javax.tools.DiagnosticCollector;
+import javax.tools.JavaCompiler;
+import javax.tools.JavaFileObject;
+import javax.tools.SimpleJavaFileObject;
+import javax.tools.StandardJavaFileManager;
+import javax.tools.StandardLocation;
+import javax.tools.ToolProvider;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOError;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.net.URI;
+import java.util.Arrays;
+import java.util.Collections;
 
 // FIXME Reuse make package, remove duplication
 public class TestClassFileCreator {
-  private static final Logger LOG = LogManager.getLogger(TestClassFileCreator.class);
-  private final String myClassDir;
+  private static final Logger LOG = Logger.getLogger(TestClassFileCreator.class);
+  private final File myClassDir;
   private final String myTestClassName;
   private final String myTestSourceCode;
 
-  public TestClassFileCreator(String testClassFqName, String classDir) {
+  public TestClassFileCreator(String testClassFqName, File classDir) {
     this(testClassFqName, classDir, "public class " + testClassFqName + "{}");
   }
 
-  public TestClassFileCreator(String testClassFqName, String classDir, String sourceCode) {
+  public TestClassFileCreator(String testClassFqName, File classDir, String sourceCode) {
     myClassDir = classDir;
     myTestClassName = testClassFqName;
     myTestSourceCode = sourceCode;
   }
 
-  public void create() {
-    EclipseJavaCompiler compiler = new EclipseJavaCompiler();
-    compiler.addSource(myTestClassName, myTestSourceCode);
-    MyCompilationResultListener listener = new MyCompilationResultListener();
-    compiler.addCompilationResultListener(listener);
-    compiler.compile(JavaModuleOperations.createClassPathItem(CommonPaths.getJDKPath(), Object.class.getName()));
-    compiler.removeCompilationResultListener(listener);
-    Collection<? extends String> classPaths = listener.getClassPaths();
-    assert classPaths.size() == 1;
+  public void create() throws IOException {
+    final JavaCompiler jc = ToolProvider.getSystemJavaCompiler();
+    DiagnosticCollector<JavaFileObject> listener = new DiagnosticCollector<>();
+    myClassDir.mkdirs();
+    final StandardJavaFileManager fileManager = jc.getStandardFileManager(listener, null, null);
+    fileManager.setLocation(StandardLocation.CLASS_OUTPUT, Collections.singleton(myClassDir));
+    final JavaSourceFromString cu = new JavaSourceFromString(myTestClassName, myTestSourceCode);
+    final boolean call = jc.getTask(null, fileManager, listener, null, null, Arrays.asList(cu)).call();
+    assert call;
+
+    for (Diagnostic<? extends JavaFileObject> d : listener.getDiagnostics()) {
+      if (d.getKind() == Kind.ERROR) {
+        LOG.error(String.format("Compilation problems : %s : %s (line:%d)", d.getSource(), d.getMessage(null), d.getLineNumber()));
+      }
+    }
+    final String classFileName = myTestClassName.replace('.', '/').concat(JavaFileObject.Kind.CLASS.extension);
+    final File classFile = new File(myClassDir, classFileName);
+    if (!classFile.exists()) {
+      throw new IllegalStateException(classFile.getAbsolutePath());
+    }
   }
 
-  private class MyCompilationResultListener extends CompilationResultAdapter {
-    private Collection<String> myClassPaths = new ArrayList<String>();
+  // https://stackoverflow.com/questions/12173294/compile-code-fully-in-memory-with-javax-tools-javacompiler
+  private static class JavaSourceFromString extends SimpleJavaFileObject {
+    private final String code;
 
-    public Collection<? extends String> getClassPaths() {
-      return myClassPaths;
+    JavaSourceFromString(String name, String code) {
+      super(URI.create("string:///" + name.replace('.', '/') + Kind.SOURCE.extension), Kind.SOURCE);
+      this.code = code;
     }
 
     @Override
-    public void onCompilationResult(CompilationResult result) {
-      if (result.hasErrors()) {
-        for (final CategorizedProblem cp : result.getErrors()) {
-          String messageString = new String(cp.getOriginatingFileName()) + " : " + cp.getMessage();
-          String errMsg = messageString + " (line: " + cp.getSourceLineNumber() + ")";
-          LOG.error("Compilation problems : " + errMsg);
-        }
-      }
-    }
-
-    @Override
-    public void onClass(ClassFile cf) {
-      String fqName = ClassFileWriter.convertCompoundToFqName(cf.getCompoundName());
-      String packageName = NameUtil.namespaceFromLongName(fqName);
-      File outputDir = new File(myClassDir + File.separator + NameUtil.pathFromNamespace(packageName));
-      if (!outputDir.exists() && !outputDir.mkdirs()) {
-        throw new RuntimeException("Can't create " + outputDir.getPath() + " directory");
-      }
-      String className = NameUtil.shortNameFromLongName(fqName);
-      File output = new File(outputDir, className + ".class");
-      FileOutputStream os = null;
-      try {
-        os = new FileOutputStream(output);
-        os.write(cf.getBytes());
-      } catch (IOException e) {
-        throw new IOError(e);
-      } finally {
-        if (os != null) {
-          try {
-            os.close();
-          } catch (IOException ignored) {
-          }
-        }
-      }
-      try {
-        myClassPaths.add(outputDir.getCanonicalPath());
-      } catch (IOException e) {
-        throw new IOError(e);
-      }
+    public CharSequence getCharContent(boolean ignoreEncodingErrors) {
+      return code;
     }
   }
 }

@@ -9,39 +9,39 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
   <root nodeRef="r:ebb14179-d192-43be-86ee-73001bbf35b0(jetbrains.mps.ide.ui.dialogs.properties.renderers)/3995997045458515690">
     <file name="RuleTypeRenderer.java">
-      <node id="3995997045458515712" at="21,155,22,97" concept="4" />
-      <node id="3995997045458515726" at="22,97,23,122" concept="4" />
-      <node id="6464687090063707171" at="27,27,28,40" concept="1" />
-      <node id="3995997045458515738" at="31,5,32,62" concept="5" />
-      <node id="3995997045458515748" at="34,73,35,55" concept="4" />
-      <node id="3995997045458515755" at="35,55,36,160" concept="4" />
-      <node id="3995997045458515776" at="36,160,37,37" concept="1" />
-      <node id="3995997045458515782" at="37,37,38,50" concept="1" />
-      <node id="3995997045458515789" at="38,50,39,53" concept="1" />
-      <node id="3995997045458515799" at="39,53,40,21" concept="5" />
-      <node id="3995997045458515693" at="18,0,20,0" concept="0" trace="RuleTypeRenderer#()V" />
-      <node id="6464687090063239371" at="26,0,30,0" concept="3" trace="run#()V" />
-      <node id="1092784201483719405" at="24,47,30,9" concept="1" />
-      <node id="6464687090063239734" at="23,122,31,5" concept="2" />
-      <node id="3995997045458515742" at="34,0,42,0" concept="6" trace="createCenterAlignmentInCell#(Ljavax/swing/JComponent;)Ljavax/swing/JComponent;" />
-      <node id="3995997045458515696" at="20,0,34,0" concept="3" trace="getTableCellRendererComponent#(Ljavax/swing/JTable;Ljava/lang/Object;ZZII)Ljava/awt/Component;" />
-      <scope id="3995997045458515695" at="18,29,18,29" />
-      <scope id="6464687090063239375" at="27,27,28,40" />
-      <scope id="3995997045458515693" at="18,0,20,0" />
-      <scope id="6464687090063239371" at="26,0,30,0" />
-      <scope id="6464687090063239737" at="24,47,30,9" />
-      <scope id="3995997045458515747" at="34,73,40,21">
+      <node id="3995997045458515712" at="23,155,24,97" concept="4" />
+      <node id="3995997045458515726" at="24,97,25,122" concept="4" />
+      <node id="6464687090063707171" at="29,27,30,40" concept="1" />
+      <node id="3995997045458515738" at="33,5,34,62" concept="5" />
+      <node id="3995997045458515748" at="36,73,37,55" concept="4" />
+      <node id="3995997045458515755" at="37,55,38,160" concept="4" />
+      <node id="3995997045458515776" at="38,160,39,37" concept="1" />
+      <node id="3995997045458515782" at="39,37,40,50" concept="1" />
+      <node id="3995997045458515789" at="40,50,41,53" concept="1" />
+      <node id="3995997045458515799" at="41,53,42,21" concept="5" />
+      <node id="3995997045458515693" at="20,0,22,0" concept="0" trace="RuleTypeRenderer#()V" />
+      <node id="6464687090063239371" at="28,0,32,0" concept="3" trace="run#()V" />
+      <node id="1092784201483719405" at="26,47,32,9" concept="1" />
+      <node id="6464687090063239734" at="25,122,33,5" concept="2" />
+      <node id="3995997045458515742" at="36,0,44,0" concept="6" trace="createCenterAlignmentInCell#(Ljavax/swing/JComponent;)Ljavax/swing/JComponent;" />
+      <node id="3995997045458515696" at="22,0,36,0" concept="3" trace="getTableCellRendererComponent#(Ljavax/swing/JTable;Ljava/lang/Object;ZZII)Ljava/awt/Component;" />
+      <scope id="3995997045458515695" at="20,29,20,29" />
+      <scope id="6464687090063239375" at="29,27,30,40" />
+      <scope id="3995997045458515693" at="20,0,22,0" />
+      <scope id="6464687090063239371" at="28,0,32,0" />
+      <scope id="6464687090063239737" at="26,47,32,9" />
+      <scope id="3995997045458515747" at="36,73,42,21">
         <var name="compPanel" id="3995997045458515749" />
         <var name="constraints" id="3995997045458515756" />
       </scope>
-      <scope id="3995997045458515742" at="34,0,42,0">
+      <scope id="3995997045458515742" at="36,0,44,0">
         <var name="comp" id="3995997045458515745" />
       </scope>
-      <scope id="3995997045458515711" at="21,155,32,62">
+      <scope id="3995997045458515711" at="23,155,34,62">
         <var name="caption" id="3995997045458515713" />
         <var name="comp" id="3995997045458515727" />
       </scope>
-      <scope id="3995997045458515696" at="20,0,34,0">
+      <scope id="3995997045458515696" at="22,0,36,0">
         <var name="column" id="3995997045458515709" />
         <var name="hasFocus" id="3995997045458515705" />
         <var name="isSelected" id="3995997045458515703" />
@@ -49,8 +49,8 @@
         <var name="table" id="3995997045458515699" />
         <var name="value" id="3995997045458515701" />
       </scope>
-      <unit id="6464687090063239369" at="25,58,30,7" name="jetbrains.mps.ide.ui.dialogs.properties.renderers.RuleTypeRenderer$1" />
-      <unit id="3995997045458515690" at="17,0,43,0" name="jetbrains.mps.ide.ui.dialogs.properties.renderers.RuleTypeRenderer" />
+      <unit id="6464687090063239369" at="27,58,32,7" name="jetbrains.mps.ide.ui.dialogs.properties.renderers.RuleTypeRenderer$1" />
+      <unit id="3995997045458515690" at="18,0,45,0" name="jetbrains.mps.ide.ui.dialogs.properties.renderers.RuleTypeRenderer" />
     </file>
   </root>
 </debug-info>

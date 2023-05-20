@@ -5,54 +5,54 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1164879751025:jetbrains.mps.baseLanguage.structure.TryCatchStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/5351203823916750322:jetbrains.mps.baseLanguage.structure.TryUniversalStatement" />
   <root nodeRef="r:00000000-0000-4000-0000-011c895903ef(jetbrains.mps.internalCollections.test.compareOperations)/1205497877107">
     <file name="Union_Test.java">
-      <node id="1205511148280" at="16,51,17,62" concept="3" />
-      <node id="1205511178142" at="17,62,18,74" concept="3" />
-      <node id="1205511228648" at="18,74,19,80" concept="1" />
-      <node id="1205512669744" at="21,54,22,56" concept="3" />
-      <node id="1205512738194" at="22,56,23,114" concept="3" />
-      <node id="1205512764395" at="23,114,24,80" concept="1" />
-      <node id="2796241438627701570" at="26,56,27,25" concept="3" />
-      <node id="2796241438627701575" at="27,25,28,25" concept="3" />
-      <node id="2796241438627701580" at="28,25,29,25" concept="3" />
-      <node id="2796241438627701585" at="29,25,30,25" concept="3" />
-      <node id="2796241438627701590" at="30,25,31,20" concept="3" />
-      <node id="2796241438627701594" at="31,20,32,96" concept="3" />
-      <node id="2796241438627701604" at="32,96,33,69" concept="3" />
-      <node id="2796241438627701615" at="33,69,34,90" concept="3" />
-      <node id="2796241438627701623" at="34,90,35,85" concept="1" />
-      <node id="1241359235505" at="37,58,38,218" concept="3" />
-      <node id="1241359235524" at="38,218,39,36" concept="1" />
-      <node id="1241359235529" at="39,36,40,36" concept="1" />
-      <node id="1241359235534" at="40,36,41,36" concept="1" />
-      <node id="1241359235539" at="41,36,42,36" concept="1" />
-      <node id="1241359235549" at="42,36,43,37" concept="1" />
-      <node id="1241359235555" at="44,9,45,16" concept="1" />
-      <node id="1241359235553" at="45,16,46,20" concept="1" />
-      <node id="1241359235553" at="47,40,48,28" concept="4" />
-      <node id="1205497886685" at="16,0,21,0" concept="2" trace="test_unionMethod#()V" />
-      <node id="1205512662549" at="21,0,26,0" concept="2" trace="test_unionOperation#()V" />
-      <node id="1241359235553" at="43,37,49,5" concept="5" />
-      <node id="2796241438627701536" at="26,0,37,0" concept="2" trace="test_unionOpCovariant#()V" />
-      <node id="1241359235502" at="37,0,51,0" concept="2" trace="test_nextWithoutHasNext#()V" />
-      <scope id="1241359235553" at="47,0,48,28">
+      <node id="1205511148280" at="18,51,19,62" concept="3" />
+      <node id="1205511178142" at="19,62,20,74" concept="3" />
+      <node id="1205511228648" at="20,74,21,80" concept="1" />
+      <node id="1205512669744" at="24,54,25,56" concept="3" />
+      <node id="1205512738194" at="25,56,26,114" concept="3" />
+      <node id="1205512764395" at="26,114,27,80" concept="1" />
+      <node id="2796241438627701570" at="30,56,31,25" concept="3" />
+      <node id="2796241438627701575" at="31,25,32,25" concept="3" />
+      <node id="2796241438627701580" at="32,25,33,25" concept="3" />
+      <node id="2796241438627701585" at="33,25,34,25" concept="3" />
+      <node id="2796241438627701590" at="34,25,35,20" concept="3" />
+      <node id="2796241438627701594" at="35,20,36,96" concept="3" />
+      <node id="2796241438627701604" at="36,96,37,69" concept="3" />
+      <node id="2796241438627701615" at="37,69,38,90" concept="3" />
+      <node id="2796241438627701623" at="38,90,39,85" concept="1" />
+      <node id="1241359235505" at="42,58,43,218" concept="3" />
+      <node id="1241359235524" at="43,218,44,36" concept="1" />
+      <node id="1241359235529" at="44,36,45,36" concept="1" />
+      <node id="1241359235534" at="45,36,46,36" concept="1" />
+      <node id="1241359235539" at="46,36,47,36" concept="1" />
+      <node id="1241359235549" at="47,36,48,37" concept="1" />
+      <node id="1241359235555" at="49,9,50,16" concept="1" />
+      <node id="1241359235553" at="50,16,51,20" concept="1" />
+      <node id="1241359235553" at="52,40,53,27" concept="4" />
+      <node id="1205497886685" at="17,0,23,0" concept="2" trace="test_unionMethod#()V" />
+      <node id="1205512662549" at="23,0,29,0" concept="2" trace="test_unionOperation#()V" />
+      <node id="1241359235553" at="48,37,54,5" concept="5" />
+      <node id="2796241438627701536" at="29,0,41,0" concept="2" trace="test_unionOpCovariant#()V" />
+      <node id="1241359235502" at="41,0,56,0" concept="2" trace="test_nextWithoutHasNext#()V" />
+      <scope id="1241359235553" at="52,40,53,27" />
+      <scope id="1241359235553" at="49,9,51,20" />
+      <scope id="1241359235553" at="52,5,54,5">
         <var name="e" id="1241359235553" />
       </scope>
-      <scope id="1241359235553" at="47,40,48,28" />
-      <scope id="1241359235553" at="44,9,46,20" />
-      <scope id="1205497886687" at="16,51,19,80">
+      <scope id="1205497886687" at="18,51,21,80">
         <var name="input" id="1205511148281" />
         <var name="test" id="1205511178143" />
       </scope>
-      <scope id="1205512662551" at="21,54,24,80">
+      <scope id="1205512662551" at="24,54,27,80">
         <var name="input" id="1205512669745" />
         <var name="test" id="1205512738195" />
       </scope>
-      <scope id="1205497886685" at="16,0,21,0" />
-      <scope id="1205512662549" at="21,0,26,0" />
-      <scope id="2796241438627701539" at="26,56,35,85">
+      <scope id="1205497886685" at="17,0,23,0" />
+      <scope id="1205512662549" at="23,0,29,0" />
+      <scope id="2796241438627701539" at="30,56,39,85">
         <var name="bar1" id="2796241438627701581" />
         <var name="bar2" id="2796241438627701586" />
         <var name="first" id="2796241438627701595" />
@@ -62,61 +62,61 @@
         <var name="res" id="2796241438627701616" />
         <var name="second" id="2796241438627701605" />
       </scope>
-      <scope id="2796241438627701536" at="26,0,37,0" />
-      <scope id="1241359235504" at="37,58,49,5">
+      <scope id="2796241438627701536" at="29,0,41,0" />
+      <scope id="1241359235504" at="42,58,54,5">
         <var name="it" id="1241359235506" />
       </scope>
-      <scope id="1241359235502" at="37,0,51,0" />
-      <unit id="1205497877107" at="15,0,52,0" name="jetbrains.mps.internalCollections.test.compareOperations.Union_Test" />
+      <scope id="1241359235502" at="41,0,56,0" />
+      <unit id="1205497877107" at="16,0,57,0" name="jetbrains.mps.internalCollections.test.compareOperations.Union_Test" />
     </file>
   </root>
   <root nodeRef="r:00000000-0000-4000-0000-011c895903ef(jetbrains.mps.internalCollections.test.compareOperations)/1205514854257">
     <file name="SubtractTest_Test.java">
-      <node id="1205514874053" at="16,54,17,71" concept="3" />
-      <node id="1205514898886" at="17,71,18,80" concept="3" />
-      <node id="1205515400905" at="18,80,19,71" concept="1" />
-      <node id="1205515314846" at="21,57,22,68" concept="3" />
-      <node id="1205515334646" at="22,68,23,120" concept="3" />
-      <node id="1205515413330" at="23,120,24,74" concept="1" />
-      <node id="2796241438627700404" at="26,59,27,25" concept="3" />
-      <node id="2796241438627700414" at="27,25,28,25" concept="3" />
-      <node id="2796241438627700419" at="28,25,29,25" concept="3" />
-      <node id="2796241438627700476" at="29,25,30,25" concept="3" />
-      <node id="2796241438627700409" at="30,25,31,20" concept="3" />
-      <node id="2796241438627700424" at="31,20,32,20" concept="3" />
-      <node id="2796241438627700428" at="32,20,33,96" concept="3" />
-      <node id="2796241438627700438" at="33,96,34,75" concept="3" />
-      <node id="2796241438627700449" at="34,75,35,93" concept="3" />
-      <node id="2796241438627700457" at="35,93,36,67" concept="1" />
-      <node id="1241359271612" at="38,58,39,227" concept="3" />
-      <node id="1241359271631" at="39,227,40,36" concept="1" />
-      <node id="1241359271646" at="40,36,41,36" concept="1" />
-      <node id="1241359271651" at="41,36,42,36" concept="1" />
-      <node id="1241359271656" at="42,36,43,37" concept="1" />
-      <node id="1241359271662" at="44,9,45,16" concept="1" />
-      <node id="1241359271660" at="45,16,46,20" concept="1" />
-      <node id="1241359271660" at="47,40,48,28" concept="4" />
-      <node id="1205514867105" at="16,0,21,0" concept="2" trace="test_subtractMethod#()V" />
-      <node id="1205515308375" at="21,0,26,0" concept="2" trace="test_subtractOperation#()V" />
-      <node id="1241359271660" at="43,37,49,5" concept="5" />
-      <node id="2796241438627700375" at="26,0,38,0" concept="2" trace="test_subtractOpCovariant#()V" />
-      <node id="1241359271609" at="38,0,51,0" concept="2" trace="test_nextWithoutHasNext#()V" />
-      <scope id="1241359271660" at="47,0,48,28">
+      <node id="1205514874053" at="18,54,19,71" concept="3" />
+      <node id="1205514898886" at="19,71,20,80" concept="3" />
+      <node id="1205515400905" at="20,80,21,71" concept="1" />
+      <node id="1205515314846" at="24,57,25,68" concept="3" />
+      <node id="1205515334646" at="25,68,26,120" concept="3" />
+      <node id="1205515413330" at="26,120,27,74" concept="1" />
+      <node id="2796241438627700404" at="30,59,31,25" concept="3" />
+      <node id="2796241438627700414" at="31,25,32,25" concept="3" />
+      <node id="2796241438627700419" at="32,25,33,25" concept="3" />
+      <node id="2796241438627700476" at="33,25,34,25" concept="3" />
+      <node id="2796241438627700409" at="34,25,35,20" concept="3" />
+      <node id="2796241438627700424" at="35,20,36,20" concept="3" />
+      <node id="2796241438627700428" at="36,20,37,96" concept="3" />
+      <node id="2796241438627700438" at="37,96,38,75" concept="3" />
+      <node id="2796241438627700449" at="38,75,39,93" concept="3" />
+      <node id="2796241438627700457" at="39,93,40,67" concept="1" />
+      <node id="1241359271612" at="43,58,44,227" concept="3" />
+      <node id="1241359271631" at="44,227,45,36" concept="1" />
+      <node id="1241359271646" at="45,36,46,36" concept="1" />
+      <node id="1241359271651" at="46,36,47,36" concept="1" />
+      <node id="1241359271656" at="47,36,48,37" concept="1" />
+      <node id="1241359271662" at="49,9,50,16" concept="1" />
+      <node id="1241359271660" at="50,16,51,20" concept="1" />
+      <node id="1241359271660" at="52,40,53,27" concept="4" />
+      <node id="1205514867105" at="17,0,23,0" concept="2" trace="test_subtractMethod#()V" />
+      <node id="1205515308375" at="23,0,29,0" concept="2" trace="test_subtractOperation#()V" />
+      <node id="1241359271660" at="48,37,54,5" concept="5" />
+      <node id="2796241438627700375" at="29,0,42,0" concept="2" trace="test_subtractOpCovariant#()V" />
+      <node id="1241359271609" at="42,0,56,0" concept="2" trace="test_nextWithoutHasNext#()V" />
+      <scope id="1241359271660" at="52,40,53,27" />
+      <scope id="1241359271660" at="49,9,51,20" />
+      <scope id="1241359271660" at="52,5,54,5">
         <var name="e" id="1241359271660" />
       </scope>
-      <scope id="1241359271660" at="47,40,48,28" />
-      <scope id="1241359271660" at="44,9,46,20" />
-      <scope id="1205514867107" at="16,54,19,71">
+      <scope id="1205514867107" at="18,54,21,71">
         <var name="input" id="1205514874054" />
         <var name="test" id="1205514898887" />
       </scope>
-      <scope id="1205515308377" at="21,57,24,74">
+      <scope id="1205515308377" at="24,57,27,74">
         <var name="input" id="1205515314847" />
         <var name="test" id="1205515334647" />
       </scope>
-      <scope id="1205514867105" at="16,0,21,0" />
-      <scope id="1205515308375" at="21,0,26,0" />
-      <scope id="2796241438627700378" at="26,59,36,67">
+      <scope id="1205514867105" at="17,0,23,0" />
+      <scope id="1205515308375" at="23,0,29,0" />
+      <scope id="2796241438627700378" at="30,59,40,67">
         <var name="bar1" id="2796241438627700415" />
         <var name="bar2" id="2796241438627700420" />
         <var name="bar3" id="2796241438627700477" />
@@ -127,59 +127,59 @@
         <var name="res" id="2796241438627700450" />
         <var name="second" id="2796241438627700439" />
       </scope>
-      <scope id="1241359271611" at="38,58,49,5">
+      <scope id="1241359271611" at="43,58,54,5">
         <var name="it" id="1241359271613" />
       </scope>
-      <scope id="2796241438627700375" at="26,0,38,0" />
-      <scope id="1241359271609" at="38,0,51,0" />
-      <unit id="1205514854257" at="15,0,52,0" name="jetbrains.mps.internalCollections.test.compareOperations.SubtractTest_Test" />
+      <scope id="2796241438627700375" at="29,0,42,0" />
+      <scope id="1241359271609" at="42,0,56,0" />
+      <unit id="1205514854257" at="16,0,57,0" name="jetbrains.mps.internalCollections.test.compareOperations.SubtractTest_Test" />
     </file>
   </root>
   <root nodeRef="r:00000000-0000-4000-0000-011c895903ef(jetbrains.mps.internalCollections.test.compareOperations)/1205515610187">
     <file name="Intersect_Test.java">
-      <node id="1205515636456" at="16,55,17,62" concept="3" />
-      <node id="1205515636468" at="17,62,18,78" concept="3" />
-      <node id="1205515636481" at="18,78,19,68" concept="1" />
-      <node id="1205515757404" at="21,58,22,62" concept="3" />
-      <node id="1205515757415" at="22,62,23,124" concept="3" />
-      <node id="1205515757428" at="23,124,24,74" concept="1" />
-      <node id="2796241438627699862" at="26,60,27,25" concept="3" />
-      <node id="2796241438627699867" at="27,25,28,25" concept="3" />
-      <node id="2796241438627699872" at="28,25,29,25" concept="3" />
-      <node id="2796241438627699923" at="29,25,30,25" concept="3" />
-      <node id="2796241438627699918" at="30,25,31,20" concept="3" />
-      <node id="2796241438627699877" at="31,20,32,96" concept="3" />
-      <node id="2796241438627699886" at="32,96,33,69" concept="3" />
-      <node id="2796241438627699894" at="33,69,34,94" concept="3" />
-      <node id="2796241438627699902" at="34,94,35,67" concept="1" />
-      <node id="1241359315969" at="37,58,38,225" concept="3" />
-      <node id="1241359315993" at="38,225,39,36" concept="1" />
-      <node id="1241359315998" at="39,36,40,36" concept="1" />
-      <node id="1241359316013" at="40,36,41,37" concept="1" />
-      <node id="1241359316019" at="42,9,43,16" concept="1" />
-      <node id="1241359316017" at="43,16,44,20" concept="1" />
-      <node id="1241359316017" at="45,40,46,28" concept="4" />
-      <node id="1205515625184" at="16,0,21,0" concept="2" trace="test_intersectMethod#()V" />
-      <node id="1205515751004" at="21,0,26,0" concept="2" trace="test_intersectOperation#()V" />
-      <node id="1241359316017" at="41,37,47,5" concept="5" />
-      <node id="2796241438627699823" at="26,0,37,0" concept="2" trace="test_intersectOpCovariant#()V" />
-      <node id="1241359315966" at="37,0,49,0" concept="2" trace="test_nextWithoutHasNext#()V" />
-      <scope id="1241359316017" at="45,0,46,28">
+      <node id="1205515636456" at="18,55,19,62" concept="3" />
+      <node id="1205515636468" at="19,62,20,78" concept="3" />
+      <node id="1205515636481" at="20,78,21,68" concept="1" />
+      <node id="1205515757404" at="24,58,25,62" concept="3" />
+      <node id="1205515757415" at="25,62,26,124" concept="3" />
+      <node id="1205515757428" at="26,124,27,74" concept="1" />
+      <node id="2796241438627699862" at="30,60,31,25" concept="3" />
+      <node id="2796241438627699867" at="31,25,32,25" concept="3" />
+      <node id="2796241438627699872" at="32,25,33,25" concept="3" />
+      <node id="2796241438627699923" at="33,25,34,25" concept="3" />
+      <node id="2796241438627699918" at="34,25,35,20" concept="3" />
+      <node id="2796241438627699877" at="35,20,36,96" concept="3" />
+      <node id="2796241438627699886" at="36,96,37,69" concept="3" />
+      <node id="2796241438627699894" at="37,69,38,94" concept="3" />
+      <node id="2796241438627699902" at="38,94,39,67" concept="1" />
+      <node id="1241359315969" at="42,58,43,225" concept="3" />
+      <node id="1241359315993" at="43,225,44,36" concept="1" />
+      <node id="1241359315998" at="44,36,45,36" concept="1" />
+      <node id="1241359316013" at="45,36,46,37" concept="1" />
+      <node id="1241359316019" at="47,9,48,16" concept="1" />
+      <node id="1241359316017" at="48,16,49,20" concept="1" />
+      <node id="1241359316017" at="50,40,51,27" concept="4" />
+      <node id="1205515625184" at="17,0,23,0" concept="2" trace="test_intersectMethod#()V" />
+      <node id="1205515751004" at="23,0,29,0" concept="2" trace="test_intersectOperation#()V" />
+      <node id="1241359316017" at="46,37,52,5" concept="5" />
+      <node id="2796241438627699823" at="29,0,41,0" concept="2" trace="test_intersectOpCovariant#()V" />
+      <node id="1241359315966" at="41,0,54,0" concept="2" trace="test_nextWithoutHasNext#()V" />
+      <scope id="1241359316017" at="50,40,51,27" />
+      <scope id="1241359316017" at="47,9,49,20" />
+      <scope id="1241359316017" at="50,5,52,5">
         <var name="e" id="1241359316017" />
       </scope>
-      <scope id="1241359316017" at="45,40,46,28" />
-      <scope id="1241359316017" at="42,9,44,20" />
-      <scope id="1205515625186" at="16,55,19,68">
+      <scope id="1205515625186" at="18,55,21,68">
         <var name="input" id="1205515636457" />
         <var name="test" id="1205515636469" />
       </scope>
-      <scope id="1205515751006" at="21,58,24,74">
+      <scope id="1205515751006" at="24,58,27,74">
         <var name="input" id="1205515757405" />
         <var name="test" id="1205515757416" />
       </scope>
-      <scope id="1205515625184" at="16,0,21,0" />
-      <scope id="1205515751004" at="21,0,26,0" />
-      <scope id="2796241438627699826" at="26,60,35,67">
+      <scope id="1205515625184" at="17,0,23,0" />
+      <scope id="1205515751004" at="23,0,29,0" />
+      <scope id="2796241438627699826" at="30,60,39,67">
         <var name="bar1" id="2796241438627699873" />
         <var name="bar2" id="2796241438627699924" />
         <var name="first" id="2796241438627699878" />
@@ -189,71 +189,71 @@
         <var name="res" id="2796241438627699895" />
         <var name="second" id="2796241438627699887" />
       </scope>
-      <scope id="1241359315968" at="37,58,47,5">
+      <scope id="1241359315968" at="42,58,52,5">
         <var name="it" id="1241359315970" />
       </scope>
-      <scope id="2796241438627699823" at="26,0,37,0" />
-      <scope id="1241359315966" at="37,0,49,0" />
-      <unit id="1205515610187" at="15,0,50,0" name="jetbrains.mps.internalCollections.test.compareOperations.Intersect_Test" />
+      <scope id="2796241438627699823" at="29,0,41,0" />
+      <scope id="1241359315966" at="41,0,54,0" />
+      <unit id="1205515610187" at="16,0,55,0" name="jetbrains.mps.internalCollections.test.compareOperations.Intersect_Test" />
     </file>
   </root>
   <root nodeRef="r:00000000-0000-4000-0000-011c895903ef(jetbrains.mps.internalCollections.test.compareOperations)/1205528089811">
     <file name="Disjunct_Test.java">
-      <node id="1205528129142" at="16,57,17,65" concept="3" />
-      <node id="1205528129151" at="17,65,18,86" concept="3" />
-      <node id="1205528129163" at="18,86,19,71" concept="1" />
-      <node id="1205598522795" at="21,58,22,62" concept="3" />
-      <node id="1205598522806" at="22,62,23,123" concept="3" />
-      <node id="1205598522820" at="23,123,24,71" concept="1" />
-      <node id="2796241438627702040" at="26,59,27,25" concept="3" />
-      <node id="2796241438627702045" at="27,25,28,25" concept="3" />
-      <node id="2796241438627702050" at="28,25,29,25" concept="3" />
-      <node id="2796241438627702055" at="29,25,30,25" concept="3" />
-      <node id="2796241438627702060" at="30,25,31,20" concept="3" />
-      <node id="2796241438627702064" at="31,20,32,96" concept="3" />
-      <node id="2796241438627702074" at="32,96,33,69" concept="3" />
-      <node id="2796241438627702085" at="33,69,34,96" concept="3" />
-      <node id="2796241438627702093" at="34,96,35,79" concept="1" />
-      <node id="1205756990207" at="37,62,38,84" concept="3" />
-      <node id="1205757045800" at="38,84,39,74" concept="3" />
-      <node id="1205757101413" at="39,74,40,234" concept="1" />
-      <node id="1205757152997" at="40,234,41,233" concept="1" />
-      <node id="1241359347135" at="43,58,44,233" concept="3" />
-      <node id="1241359347154" at="44,233,45,36" concept="1" />
-      <node id="1241359347159" at="45,36,46,36" concept="1" />
-      <node id="1241359347164" at="46,36,47,36" concept="1" />
-      <node id="1241359347169" at="47,36,48,36" concept="1" />
-      <node id="1241359347179" at="48,36,49,37" concept="1" />
-      <node id="1241359347185" at="50,9,51,16" concept="1" />
-      <node id="1241359347183" at="51,16,52,20" concept="1" />
-      <node id="1241359347183" at="53,40,54,28" concept="4" />
-      <node id="1205528105673" at="16,0,21,0" concept="2" trace="test_disjunctionMethod#()V" />
-      <node id="1205598508954" at="21,0,26,0" concept="2" trace="test_discjunctOperation#()V" />
-      <node id="1205756979836" at="37,0,43,0" concept="2" trace="test_disjunctionEquivalence#()V" />
-      <node id="1241359347183" at="49,37,55,5" concept="5" />
-      <node id="2796241438627701980" at="26,0,37,0" concept="2" trace="test_disjunctOpCovariant#()V" />
-      <node id="1241359347132" at="43,0,57,0" concept="2" trace="test_nextWithoutHasNext#()V" />
-      <scope id="1241359347183" at="53,0,54,28">
+      <node id="1205528129142" at="18,57,19,65" concept="3" />
+      <node id="1205528129151" at="19,65,20,86" concept="3" />
+      <node id="1205528129163" at="20,86,21,71" concept="1" />
+      <node id="1205598522795" at="24,58,25,62" concept="3" />
+      <node id="1205598522806" at="25,62,26,123" concept="3" />
+      <node id="1205598522820" at="26,123,27,71" concept="1" />
+      <node id="2796241438627702040" at="30,59,31,25" concept="3" />
+      <node id="2796241438627702045" at="31,25,32,25" concept="3" />
+      <node id="2796241438627702050" at="32,25,33,25" concept="3" />
+      <node id="2796241438627702055" at="33,25,34,25" concept="3" />
+      <node id="2796241438627702060" at="34,25,35,20" concept="3" />
+      <node id="2796241438627702064" at="35,20,36,96" concept="3" />
+      <node id="2796241438627702074" at="36,96,37,69" concept="3" />
+      <node id="2796241438627702085" at="37,69,38,96" concept="3" />
+      <node id="2796241438627702093" at="38,96,39,79" concept="1" />
+      <node id="1205756990207" at="42,62,43,84" concept="3" />
+      <node id="1205757045800" at="43,84,44,74" concept="3" />
+      <node id="1205757101413" at="44,74,45,234" concept="1" />
+      <node id="1205757152997" at="45,234,46,233" concept="1" />
+      <node id="1241359347135" at="49,58,50,233" concept="3" />
+      <node id="1241359347154" at="50,233,51,36" concept="1" />
+      <node id="1241359347159" at="51,36,52,36" concept="1" />
+      <node id="1241359347164" at="52,36,53,36" concept="1" />
+      <node id="1241359347169" at="53,36,54,36" concept="1" />
+      <node id="1241359347179" at="54,36,55,37" concept="1" />
+      <node id="1241359347185" at="56,9,57,16" concept="1" />
+      <node id="1241359347183" at="57,16,58,20" concept="1" />
+      <node id="1241359347183" at="59,40,60,27" concept="4" />
+      <node id="1205528105673" at="17,0,23,0" concept="2" trace="test_disjunctionMethod#()V" />
+      <node id="1205598508954" at="23,0,29,0" concept="2" trace="test_discjunctOperation#()V" />
+      <node id="1241359347183" at="55,37,61,5" concept="5" />
+      <node id="1205756979836" at="41,0,48,0" concept="2" trace="test_disjunctionEquivalence#()V" />
+      <node id="2796241438627701980" at="29,0,41,0" concept="2" trace="test_disjunctOpCovariant#()V" />
+      <node id="1241359347132" at="48,0,63,0" concept="2" trace="test_nextWithoutHasNext#()V" />
+      <scope id="1241359347183" at="59,40,60,27" />
+      <scope id="1241359347183" at="56,9,58,20" />
+      <scope id="1241359347183" at="59,5,61,5">
         <var name="e" id="1241359347183" />
       </scope>
-      <scope id="1241359347183" at="53,40,54,28" />
-      <scope id="1241359347183" at="50,9,52,20" />
-      <scope id="1205528105675" at="16,57,19,71">
+      <scope id="1205528105675" at="18,57,21,71">
         <var name="input" id="1205528129143" />
         <var name="test" id="1205528129152" />
       </scope>
-      <scope id="1205598508956" at="21,58,24,71">
+      <scope id="1205598508956" at="24,58,27,71">
         <var name="input" id="1205598522796" />
         <var name="test" id="1205598522807" />
       </scope>
-      <scope id="1205756979838" at="37,62,41,233">
+      <scope id="1205756979838" at="42,62,46,233">
         <var name="a" id="1205756990208" />
         <var name="b" id="1205757045801" />
       </scope>
-      <scope id="1205528105673" at="16,0,21,0" />
-      <scope id="1205598508954" at="21,0,26,0" />
-      <scope id="1205756979836" at="37,0,43,0" />
-      <scope id="2796241438627701983" at="26,59,35,79">
+      <scope id="1205528105673" at="17,0,23,0" />
+      <scope id="1205598508954" at="23,0,29,0" />
+      <scope id="1205756979836" at="41,0,48,0" />
+      <scope id="2796241438627701983" at="30,59,39,79">
         <var name="bar1" id="2796241438627702051" />
         <var name="bar2" id="2796241438627702056" />
         <var name="first" id="2796241438627702065" />
@@ -263,60 +263,60 @@
         <var name="res" id="2796241438627702086" />
         <var name="second" id="2796241438627702075" />
       </scope>
-      <scope id="2796241438627701980" at="26,0,37,0" />
-      <scope id="1241359347134" at="43,58,55,5">
+      <scope id="2796241438627701980" at="29,0,41,0" />
+      <scope id="1241359347134" at="49,58,61,5">
         <var name="it" id="1241359347136" />
       </scope>
-      <scope id="1241359347132" at="43,0,57,0" />
-      <unit id="1205528089811" at="15,0,58,0" name="jetbrains.mps.internalCollections.test.compareOperations.Disjunct_Test" />
+      <scope id="1241359347132" at="48,0,63,0" />
+      <unit id="1205528089811" at="16,0,64,0" name="jetbrains.mps.internalCollections.test.compareOperations.Disjunct_Test" />
     </file>
   </root>
   <root nodeRef="r:00000000-0000-4000-0000-011c895903ef(jetbrains.mps.internalCollections.test.compareOperations)/1205574331460">
     <file name="Concat_Test.java">
-      <node id="1205574351719" at="16,52,17,59" concept="3" />
-      <node id="1205574560755" at="17,59,18,72" concept="3" />
-      <node id="1205574593026" at="18,72,19,69" concept="1" />
-      <node id="1206730396345" at="21,55,22,44" concept="3" />
-      <node id="1206730428795" at="22,44,23,119" concept="3" />
-      <node id="1206730455918" at="23,119,24,53" concept="1" />
-      <node id="2796241438627699259" at="26,57,27,25" concept="3" />
-      <node id="2796241438627699270" at="27,25,28,25" concept="3" />
-      <node id="2796241438627699279" at="28,25,29,25" concept="3" />
-      <node id="2796241438627699249" at="29,25,30,89" concept="3" />
-      <node id="2796241438627699332" at="30,89,31,55" concept="3" />
-      <node id="2796241438627699377" at="31,55,32,88" concept="3" />
-      <node id="2796241438627699342" at="32,88,33,79" concept="1" />
-      <node id="1241359038129" at="35,58,36,219" concept="3" />
-      <node id="1241359050395" at="36,219,37,36" concept="1" />
-      <node id="1241359059520" at="37,36,38,36" concept="1" />
-      <node id="1241359061883" at="38,36,39,36" concept="1" />
-      <node id="1241359062926" at="39,36,40,36" concept="1" />
-      <node id="1241359063765" at="40,36,41,36" concept="1" />
-      <node id="1241359075606" at="41,36,42,37" concept="1" />
-      <node id="1241359092606" at="43,9,44,16" concept="1" />
-      <node id="1241359081160" at="44,16,45,20" concept="1" />
-      <node id="1241359081160" at="46,40,47,28" concept="4" />
-      <node id="1205574337823" at="16,0,21,0" concept="2" trace="test_concatMethod#()V" />
-      <node id="1206730385103" at="21,0,26,0" concept="2" trace="test_concatOperation#()V" />
-      <node id="1241359081160" at="42,37,48,5" concept="5" />
-      <node id="2796241438627699170" at="26,0,35,0" concept="2" trace="test_concatOpCovariant#()V" />
-      <node id="1241358954601" at="35,0,50,0" concept="2" trace="test_nextWithoutHasNext#()V" />
-      <scope id="1241359081160" at="46,0,47,28">
+      <node id="1205574351719" at="18,52,19,59" concept="3" />
+      <node id="1205574560755" at="19,59,20,72" concept="3" />
+      <node id="1205574593026" at="20,72,21,69" concept="1" />
+      <node id="1206730396345" at="24,55,25,44" concept="3" />
+      <node id="1206730428795" at="25,44,26,119" concept="3" />
+      <node id="1206730455918" at="26,119,27,53" concept="1" />
+      <node id="2796241438627699259" at="30,57,31,25" concept="3" />
+      <node id="2796241438627699270" at="31,25,32,25" concept="3" />
+      <node id="2796241438627699279" at="32,25,33,25" concept="3" />
+      <node id="2796241438627699249" at="33,25,34,89" concept="3" />
+      <node id="2796241438627699332" at="34,89,35,55" concept="3" />
+      <node id="2796241438627699377" at="35,55,36,88" concept="3" />
+      <node id="2796241438627699342" at="36,88,37,79" concept="1" />
+      <node id="1241359038129" at="40,58,41,219" concept="3" />
+      <node id="1241359050395" at="41,219,42,36" concept="1" />
+      <node id="1241359059520" at="42,36,43,36" concept="1" />
+      <node id="1241359061883" at="43,36,44,36" concept="1" />
+      <node id="1241359062926" at="44,36,45,36" concept="1" />
+      <node id="1241359063765" at="45,36,46,36" concept="1" />
+      <node id="1241359075606" at="46,36,47,37" concept="1" />
+      <node id="1241359092606" at="48,9,49,16" concept="1" />
+      <node id="1241359081160" at="49,16,50,20" concept="1" />
+      <node id="1241359081160" at="51,40,52,27" concept="4" />
+      <node id="1205574337823" at="17,0,23,0" concept="2" trace="test_concatMethod#()V" />
+      <node id="1206730385103" at="23,0,29,0" concept="2" trace="test_concatOperation#()V" />
+      <node id="1241359081160" at="47,37,53,5" concept="5" />
+      <node id="2796241438627699170" at="29,0,39,0" concept="2" trace="test_concatOpCovariant#()V" />
+      <node id="1241358954601" at="39,0,55,0" concept="2" trace="test_nextWithoutHasNext#()V" />
+      <scope id="1241359081160" at="51,40,52,27" />
+      <scope id="1241359081160" at="48,9,50,20" />
+      <scope id="1241359081160" at="51,5,53,5">
         <var name="e" id="1241359081160" />
       </scope>
-      <scope id="1241359081160" at="46,40,47,28" />
-      <scope id="1241359081160" at="43,9,45,20" />
-      <scope id="1205574337825" at="16,52,19,69">
+      <scope id="1205574337825" at="18,52,21,69">
         <var name="input" id="1205574351720" />
         <var name="test" id="1205574560756" />
       </scope>
-      <scope id="1206730385105" at="21,55,24,53">
+      <scope id="1206730385105" at="24,55,27,53">
         <var name="input" id="1206730396346" />
         <var name="test" id="1206730428796" />
       </scope>
-      <scope id="1205574337823" at="16,0,21,0" />
-      <scope id="1206730385103" at="21,0,26,0" />
-      <scope id="2796241438627699173" at="26,57,33,79">
+      <scope id="1205574337823" at="17,0,23,0" />
+      <scope id="1206730385103" at="23,0,29,0" />
+      <scope id="2796241438627699173" at="30,57,37,79">
         <var name="bar1" id="2796241438627699280" />
         <var name="foo1" id="2796241438627699260" />
         <var name="foo2" id="2796241438627699271" />
@@ -324,12 +324,12 @@
         <var name="res" id="2796241438627699378" />
         <var name="tail" id="2796241438627699333" />
       </scope>
-      <scope id="2796241438627699170" at="26,0,35,0" />
-      <scope id="1241358954603" at="35,58,48,5">
+      <scope id="2796241438627699170" at="29,0,39,0" />
+      <scope id="1241358954603" at="40,58,53,5">
         <var name="it" id="1241359038130" />
       </scope>
-      <scope id="1241358954601" at="35,0,50,0" />
-      <unit id="1205574331460" at="15,0,51,0" name="jetbrains.mps.internalCollections.test.compareOperations.Concat_Test" />
+      <scope id="1241358954601" at="39,0,55,0" />
+      <unit id="1205574331460" at="16,0,56,0" name="jetbrains.mps.internalCollections.test.compareOperations.Concat_Test" />
     </file>
   </root>
   <root nodeRef="r:00000000-0000-4000-0000-011c895903ef(jetbrains.mps.internalCollections.test.compareOperations)/2796241438627699186">

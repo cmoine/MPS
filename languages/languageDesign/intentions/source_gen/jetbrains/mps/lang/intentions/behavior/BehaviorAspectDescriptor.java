@@ -7,9 +7,9 @@ import jetbrains.mps.core.aspects.behaviour.api.BHDescriptor;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor {
   private final BHDescriptor myIntentionDeclaration__BehaviorDescriptor = new IntentionDeclaration__BehaviorDescriptor();
@@ -18,8 +18,6 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
   private final BHDescriptor myExecuteBlock__BehaviorDescriptor = new ExecuteBlock__BehaviorDescriptor();
   private final BHDescriptor myQueryBlock__BehaviorDescriptor = new QueryBlock__BehaviorDescriptor();
   private final BHDescriptor myParameterizedIntentionDeclaration__BehaviorDescriptor = new ParameterizedIntentionDeclaration__BehaviorDescriptor();
-  private final BHDescriptor myParameterizedDescriptionBlock__BehaviorDescriptor = new ParameterizedDescriptionBlock__BehaviorDescriptor();
-  private final BHDescriptor myParameterizedExecuteBlock__BehaviorDescriptor = new ParameterizedExecuteBlock__BehaviorDescriptor();
   private final BHDescriptor myBaseIntentionDeclaration__BehaviorDescriptor = new BaseIntentionDeclaration__BehaviorDescriptor();
   private final BHDescriptor myChildFilterFunction__BehaviorDescriptor = new ChildFilterFunction__BehaviorDescriptor();
   private final BHDescriptor myParameter__BehaviorDescriptor = new Parameter__BehaviorDescriptor();
@@ -30,84 +28,31 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
 
   @Nullable
   public BHDescriptor getDescriptor(@NotNull SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_846f5o_a0p.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return myBaseIntentionDeclaration__BehaviorDescriptor;
-          }
-          break;
-        case 1:
-          if (true) {
-            return myChildFilterFunction__BehaviorDescriptor;
-          }
-          break;
-        case 2:
-          if (true) {
-            return myDescriptionBlock__BehaviorDescriptor;
-          }
-          break;
-        case 3:
-          if (true) {
-            return myExecuteBlock__BehaviorDescriptor;
-          }
-          break;
-        case 4:
-          if (true) {
-            return myIntention__BehaviorDescriptor;
-          }
-          break;
-        case 5:
-          if (true) {
-            return myIntentionDeclaration__BehaviorDescriptor;
-          }
-          break;
-        case 6:
-          if (true) {
-            return myIsApplicableBlock__BehaviorDescriptor;
-          }
-          break;
-        case 7:
-          if (true) {
-            return myParameter__BehaviorDescriptor;
-          }
-          break;
-        case 8:
-          if (true) {
-            return myParameterizedDescriptionBlock__BehaviorDescriptor;
-          }
-          break;
-        case 9:
-          if (true) {
-            return myParameterizedExecuteBlock__BehaviorDescriptor;
-          }
-          break;
-        case 10:
-          if (true) {
-            return myParameterizedIntentionDeclaration__BehaviorDescriptor;
-          }
-          break;
-        case 11:
-          if (true) {
-            return myQueryBlock__BehaviorDescriptor;
-          }
-          break;
-        default:
-          // default 
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return myBaseIntentionDeclaration__BehaviorDescriptor;
+      case 1:
+        return myChildFilterFunction__BehaviorDescriptor;
+      case 2:
+        return myDescriptionBlock__BehaviorDescriptor;
+      case 3:
+        return myExecuteBlock__BehaviorDescriptor;
+      case 4:
+        return myIntention__BehaviorDescriptor;
+      case 5:
+        return myIntentionDeclaration__BehaviorDescriptor;
+      case 6:
+        return myIsApplicableBlock__BehaviorDescriptor;
+      case 7:
+        return myParameter__BehaviorDescriptor;
+      case 8:
+        return myParameterizedIntentionDeclaration__BehaviorDescriptor;
+      case 9:
+        return myQueryBlock__BehaviorDescriptor;
+      default:
     }
     return null;
   }
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
-  }
-  private static final Map<SAbstractConcept, Integer> indices_846f5o_a0p = buildConceptIndices(MetaAdapterFactory.getConcept(0xd7a92d38f7db40d0L, 0x8431763b0c3c9f20L, 0x2303633a9c3cc675L, "jetbrains.mps.lang.intentions.structure.BaseIntentionDeclaration"), MetaAdapterFactory.getConcept(0xd7a92d38f7db40d0L, 0x8431763b0c3c9f20L, 0x323731f511d1c1bbL, "jetbrains.mps.lang.intentions.structure.ChildFilterFunction"), MetaAdapterFactory.getConcept(0xd7a92d38f7db40d0L, 0x8431763b0c3c9f20L, 0x115b81bfaa7L, "jetbrains.mps.lang.intentions.structure.DescriptionBlock"), MetaAdapterFactory.getConcept(0xd7a92d38f7db40d0L, 0x8431763b0c3c9f20L, 0x115b82d36d9L, "jetbrains.mps.lang.intentions.structure.ExecuteBlock"), MetaAdapterFactory.getConcept(0xd7a92d38f7db40d0L, 0x8431763b0c3c9f20L, 0x71ffad1474b12a0bL, "jetbrains.mps.lang.intentions.structure.Intention"), MetaAdapterFactory.getConcept(0xd7a92d38f7db40d0L, 0x8431763b0c3c9f20L, 0x115b81b652bL, "jetbrains.mps.lang.intentions.structure.IntentionDeclaration"), MetaAdapterFactory.getConcept(0xd7a92d38f7db40d0L, 0x8431763b0c3c9f20L, 0x115b82b10f5L, "jetbrains.mps.lang.intentions.structure.IsApplicableBlock"), MetaAdapterFactory.getConcept(0xd7a92d38f7db40d0L, 0x8431763b0c3c9f20L, 0x6688b42d39674b7aL, "jetbrains.mps.lang.intentions.structure.Parameter"), MetaAdapterFactory.getConcept(0xd7a92d38f7db40d0L, 0x8431763b0c3c9f20L, 0x1925e8184af03861L, "jetbrains.mps.lang.intentions.structure.ParameterizedDescriptionBlock"), MetaAdapterFactory.getConcept(0xd7a92d38f7db40d0L, 0x8431763b0c3c9f20L, 0x1925e8184af310edL, "jetbrains.mps.lang.intentions.structure.ParameterizedExecuteBlock"), MetaAdapterFactory.getConcept(0xd7a92d38f7db40d0L, 0x8431763b0c3c9f20L, 0x120cd519c2dL, "jetbrains.mps.lang.intentions.structure.ParameterizedIntentionDeclaration"), MetaAdapterFactory.getConcept(0xd7a92d38f7db40d0L, 0x8431763b0c3c9f20L, 0x120c89cc719L, "jetbrains.mps.lang.intentions.structure.QueryBlock"));
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0xd7a92d38f7db40d0L, 0x8431763b0c3c9f20L, 0x2303633a9c3cc675L), MetaIdFactory.conceptId(0xd7a92d38f7db40d0L, 0x8431763b0c3c9f20L, 0x323731f511d1c1bbL), MetaIdFactory.conceptId(0xd7a92d38f7db40d0L, 0x8431763b0c3c9f20L, 0x115b81bfaa7L), MetaIdFactory.conceptId(0xd7a92d38f7db40d0L, 0x8431763b0c3c9f20L, 0x115b82d36d9L), MetaIdFactory.conceptId(0xd7a92d38f7db40d0L, 0x8431763b0c3c9f20L, 0x71ffad1474b12a0bL), MetaIdFactory.conceptId(0xd7a92d38f7db40d0L, 0x8431763b0c3c9f20L, 0x115b81b652bL), MetaIdFactory.conceptId(0xd7a92d38f7db40d0L, 0x8431763b0c3c9f20L, 0x115b82b10f5L), MetaIdFactory.conceptId(0xd7a92d38f7db40d0L, 0x8431763b0c3c9f20L, 0x6688b42d39674b7aL), MetaIdFactory.conceptId(0xd7a92d38f7db40d0L, 0x8431763b0c3c9f20L, 0x120cd519c2dL), MetaIdFactory.conceptId(0xd7a92d38f7db40d0L, 0x8431763b0c3c9f20L, 0x120c89cc719L)).seal();
 }

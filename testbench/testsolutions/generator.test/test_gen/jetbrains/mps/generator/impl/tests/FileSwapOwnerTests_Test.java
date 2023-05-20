@@ -4,19 +4,18 @@ package jetbrains.mps.generator.impl.tests;
 
 import jetbrains.mps.MPSLaunch;
 import jetbrains.mps.lang.test.runtime.BaseTransformationTest;
-import org.junit.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCacheExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCache;
+import org.junit.jupiter.api.Test;
 import jetbrains.mps.lang.test.runtime.BaseTestBody;
-import org.jetbrains.mps.openapi.model.SModel;
-import jetbrains.mps.smodel.tempmodel.TemporaryModels;
-import jetbrains.mps.smodel.tempmodel.TempModuleOptions;
+import jetbrains.mps.lang.test.runtime.TransformationTest;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.generator.impl.cache.FileSwapOwner;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import java.util.List;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import java.util.ArrayList;
-import junit.framework.Assert;
+import org.junit.Assert;
 import jetbrains.mps.lang.test.matcher.NodesMatcher;
 import java.io.IOException;
 import java.util.Map;
@@ -24,199 +23,207 @@ import jetbrains.mps.internal.collections.runtime.MapSequence;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import jetbrains.mps.smodel.SNodePointer;
-import jetbrains.mps.smodel.ModuleRepositoryFacade;
-import jetbrains.mps.extapi.model.SModelBase;
-import jetbrains.mps.lang.test.matcher.NodeDifference;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SModelOperations;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
+import org.jetbrains.mps.openapi.model.SModel;
+import jetbrains.mps.lang.test.matcher.NodeDifference;
 import jetbrains.mps.internal.collections.runtime.IMapping;
 
 @MPSLaunch
 public class FileSwapOwnerTests_Test extends BaseTransformationTest {
+  @RegisterExtension
+  private static final TestParametersCacheExtension ourParametersCacheExtension = new TestParametersCacheExtension(new TestParametersCache(FileSwapOwnerTests_Test.class, "${mps_home}", "r:a8dd08c8-d222-4842-87dd-546039cb1959(jetbrains.mps.generator.impl.tests@tests)", false));
+
+  public FileSwapOwnerTests_Test() {
+    super(ourParametersCacheExtension.getParametersCache());
+  }
+
   @Test
   public void test_justWrite() throws Throwable {
-    initTest("${mps_home}", "r:a8dd08c8-d222-4842-87dd-546039cb1959(jetbrains.mps.generator.impl.tests@tests)", false);
-    runTest("jetbrains.mps.generator.impl.tests.FileSwapOwnerTests_Test$TestBody", "test_justWrite", true);
+    new TestBody(this).test_justWrite();
   }
   @Test
   public void test_stringUserObjects() throws Throwable {
-    initTest("${mps_home}", "r:a8dd08c8-d222-4842-87dd-546039cb1959(jetbrains.mps.generator.impl.tests@tests)", false);
-    runTest("jetbrains.mps.generator.impl.tests.FileSwapOwnerTests_Test$TestBody", "test_stringUserObjects", true);
+    new TestBody(this).test_stringUserObjects();
   }
   @Test
   public void test_intUserObjects() throws Throwable {
-    initTest("${mps_home}", "r:a8dd08c8-d222-4842-87dd-546039cb1959(jetbrains.mps.generator.impl.tests@tests)", false);
-    runTest("jetbrains.mps.generator.impl.tests.FileSwapOwnerTests_Test$TestBody", "test_intUserObjects", true);
+    new TestBody(this).test_intUserObjects();
   }
   @Test
   public void test_charUserObjects() throws Throwable {
-    initTest("${mps_home}", "r:a8dd08c8-d222-4842-87dd-546039cb1959(jetbrains.mps.generator.impl.tests@tests)", false);
-    runTest("jetbrains.mps.generator.impl.tests.FileSwapOwnerTests_Test$TestBody", "test_charUserObjects", true);
+    new TestBody(this).test_charUserObjects();
   }
   @Test
   public void test_numberUserObjects() throws Throwable {
-    initTest("${mps_home}", "r:a8dd08c8-d222-4842-87dd-546039cb1959(jetbrains.mps.generator.impl.tests@tests)", false);
-    runTest("jetbrains.mps.generator.impl.tests.FileSwapOwnerTests_Test$TestBody", "test_numberUserObjects", true);
+    new TestBody(this).test_numberUserObjects();
   }
   @Test
   public void test_booleanUserObjects() throws Throwable {
-    initTest("${mps_home}", "r:a8dd08c8-d222-4842-87dd-546039cb1959(jetbrains.mps.generator.impl.tests@tests)", false);
-    runTest("jetbrains.mps.generator.impl.tests.FileSwapOwnerTests_Test$TestBody", "test_booleanUserObjects", true);
+    new TestBody(this).test_booleanUserObjects();
   }
   @Test
   public void test_mpsUserObjects() throws Throwable {
-    initTest("${mps_home}", "r:a8dd08c8-d222-4842-87dd-546039cb1959(jetbrains.mps.generator.impl.tests@tests)", false);
-    runTest("jetbrains.mps.generator.impl.tests.FileSwapOwnerTests_Test$TestBody", "test_mpsUserObjects", true);
+    new TestBody(this).test_mpsUserObjects();
   }
   @Test
   public void test_baseLanguageStructure() throws Throwable {
-    initTest("${mps_home}", "r:a8dd08c8-d222-4842-87dd-546039cb1959(jetbrains.mps.generator.impl.tests@tests)", false);
-    runTest("jetbrains.mps.generator.impl.tests.FileSwapOwnerTests_Test$TestBody", "test_baseLanguageStructure", true);
+    new TestBody(this).test_baseLanguageStructure();
   }
   @Test
   public void test_testOverloadedOperatorsSandbox() throws Throwable {
-    initTest("${mps_home}", "r:a8dd08c8-d222-4842-87dd-546039cb1959(jetbrains.mps.generator.impl.tests@tests)", false);
-    runTest("jetbrains.mps.generator.impl.tests.FileSwapOwnerTests_Test$TestBody", "test_testOverloadedOperatorsSandbox", true);
+    new TestBody(this).test_testOverloadedOperatorsSandbox();
   }
   @Test
   public void test_testSkipNodesWhileSaving() throws Throwable {
-    initTest("${mps_home}", "r:a8dd08c8-d222-4842-87dd-546039cb1959(jetbrains.mps.generator.impl.tests@tests)", false);
-    runTest("jetbrains.mps.generator.impl.tests.FileSwapOwnerTests_Test$TestBody", "test_testSkipNodesWhileSaving", true);
+    new TestBody(this).test_testSkipNodesWhileSaving();
   }
 
-  @MPSLaunch
-  public static class TestBody extends BaseTestBody {
-    public void test_justWrite() throws Exception {
-      addNodeById("1732396662099564446");
-      try {
-        SModel model = TemporaryModels.getInstance().create(false, false, TempModuleOptions.forDefaultModule());
+  /*package*/ static class TestBody extends BaseTestBody {
 
+    /*package*/ TestBody(TransformationTest owner) {
+      super(owner);
+    }
+
+    public void test_justWrite() throws Exception {
+      runWithinCommand(() -> addNodeById("1732396662099564446"));
+      runWithinCommand(() -> {
         try {
-          SNode node = FileSwapOwner.writeAndReadNode(SNodeOperations.cast(getNodeById("1732396662099564449"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc67c7f0L, "jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement")));
-          model.addRootNode(node);
+          SNode node = FileSwapOwner.writeAndReadNode(getNodeById("1732396662099564449"));
           {
-            List<SNode> nodesBefore = ListSequence.fromListAndArray(new ArrayList<SNode>(), SNodeOperations.cast(getNodeById("1732396662099564449"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc67c7f0L, "jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement")));
+            List<SNode> nodesBefore = ListSequence.fromListAndArray(new ArrayList<SNode>(), getNodeById("1732396662099564449"));
             List<SNode> nodesAfter = ListSequence.fromListAndArray(new ArrayList<SNode>(), node);
-            Assert.assertNull("The nodes '" + nodesBefore + "' and '" + nodesAfter + "' do not match!", new NodesMatcher().match(nodesBefore, nodesAfter));
+            Assert.assertTrue("The nodes '" + nodesBefore + "' and '" + nodesAfter + "' do not match!", new NodesMatcher(nodesBefore, nodesAfter).diff().isEmpty());
           }
-        } finally {
-          TemporaryModels.getInstance().dispose(model);
+        } catch (IOException e) {
+          e.printStackTrace();
+          Assert.fail(e.getMessage());
         }
-      } catch (IOException e) {
-        e.printStackTrace();
-        org.junit.Assert.fail(e.getMessage());
-      }
+      });
     }
     public void test_stringUserObjects() throws Exception {
-      addNodeById("1732396662099564446");
-      Map<Object, Object> userObjects = MapSequence.fromMap(new HashMap<Object, Object>());
-      MapSequence.fromMap(userObjects).put("1", "1");
-      MapSequence.fromMap(userObjects).put("2", "2");
-      this.testUserObjectsSaving(userObjects);
+      runWithinCommand(() -> addNodeById("1732396662099564446"));
+      runWithinCommand(() -> {
+        Map<Object, Object> userObjects = MapSequence.fromMap(new HashMap<Object, Object>());
+        MapSequence.fromMap(userObjects).put("1", "1");
+        MapSequence.fromMap(userObjects).put("2", "2");
+        TestBody.this.testUserObjectsSaving(userObjects);
+      });
     }
     public void test_intUserObjects() throws Exception {
-      addNodeById("1732396662099564446");
-      Map<Object, Object> userObjects = MapSequence.fromMap(new LinkedHashMap<Object, Object>(16, (float) 0.75, false));
-      MapSequence.fromMap(userObjects).put(2, "2");
-      MapSequence.fromMap(userObjects).put("3", 3);
-      MapSequence.fromMap(userObjects).put(4, 4);
-      this.testUserObjectsSaving(userObjects);
+      runWithinCommand(() -> addNodeById("1732396662099564446"));
+      runWithinCommand(() -> {
+        Map<Object, Object> userObjects = MapSequence.fromMap(new LinkedHashMap<Object, Object>(16, (float) 0.75, false));
+        MapSequence.fromMap(userObjects).put(2, "2");
+        MapSequence.fromMap(userObjects).put("3", 3);
+        MapSequence.fromMap(userObjects).put(4, 4);
+        TestBody.this.testUserObjectsSaving(userObjects);
+      });
     }
     public void test_charUserObjects() throws Exception {
-      addNodeById("1732396662099564446");
-      Map<Object, Object> userObjects = MapSequence.fromMap(new LinkedHashMap<Object, Object>(16, (float) 0.75, false));
-      MapSequence.fromMap(userObjects).put('1', '1');
-      MapSequence.fromMap(userObjects).put('2', '2');
-      MapSequence.fromMap(userObjects).put('3', '3');
-      this.testUserObjectsSaving(userObjects);
+      runWithinCommand(() -> addNodeById("1732396662099564446"));
+      runWithinCommand(() -> {
+        Map<Object, Object> userObjects = MapSequence.fromMap(new LinkedHashMap<Object, Object>(16, (float) 0.75, false));
+        MapSequence.fromMap(userObjects).put('1', '1');
+        MapSequence.fromMap(userObjects).put('2', '2');
+        MapSequence.fromMap(userObjects).put('3', '3');
+        TestBody.this.testUserObjectsSaving(userObjects);
+      });
     }
     public void test_numberUserObjects() throws Exception {
-      addNodeById("1732396662099564446");
-      Map<Object, Object> userObjects = MapSequence.fromMap(new LinkedHashMap<Object, Object>(16, (float) 0.75, false));
-      MapSequence.fromMap(userObjects).put(0.5, 0.5);
-      MapSequence.fromMap(userObjects).put(((float) 1.5), ((float) 1.5));
-      MapSequence.fromMap(userObjects).put(((byte) 2), ((byte) 2));
-      MapSequence.fromMap(userObjects).put(((short) 3), ((short) 3));
-      MapSequence.fromMap(userObjects).put(Long.MAX_VALUE, Long.MAX_VALUE);
-      this.testUserObjectsSaving(userObjects);
+      runWithinCommand(() -> addNodeById("1732396662099564446"));
+      runWithinCommand(() -> {
+        Map<Object, Object> userObjects = MapSequence.fromMap(new LinkedHashMap<Object, Object>(16, (float) 0.75, false));
+        MapSequence.fromMap(userObjects).put(0.5, 0.5);
+        MapSequence.fromMap(userObjects).put(((float) 1.5), ((float) 1.5));
+        MapSequence.fromMap(userObjects).put(((byte) 2), ((byte) 2));
+        MapSequence.fromMap(userObjects).put(((short) 3), ((short) 3));
+        MapSequence.fromMap(userObjects).put(Long.MAX_VALUE, Long.MAX_VALUE);
+        TestBody.this.testUserObjectsSaving(userObjects);
+      });
     }
     public void test_booleanUserObjects() throws Exception {
-      addNodeById("1732396662099564446");
-      Map<Object, Object> userObjects = MapSequence.fromMap(new LinkedHashMap<Object, Object>(16, (float) 0.75, false));
-      MapSequence.fromMap(userObjects).put(false, false);
-      MapSequence.fromMap(userObjects).put(false, true);
-      MapSequence.fromMap(userObjects).put(true, false);
-      MapSequence.fromMap(userObjects).put(true, true);
-      this.testUserObjectsSaving(userObjects);
+      runWithinCommand(() -> addNodeById("1732396662099564446"));
+      runWithinCommand(() -> {
+        Map<Object, Object> userObjects = MapSequence.fromMap(new LinkedHashMap<Object, Object>(16, (float) 0.75, false));
+        MapSequence.fromMap(userObjects).put(false, false);
+        MapSequence.fromMap(userObjects).put(false, true);
+        MapSequence.fromMap(userObjects).put(true, false);
+        MapSequence.fromMap(userObjects).put(true, true);
+        TestBody.this.testUserObjectsSaving(userObjects);
+      });
     }
     public void test_mpsUserObjects() throws Exception {
-      addNodeById("1732396662099564446");
-      Map<Object, Object> userObjects = MapSequence.fromMap(new LinkedHashMap<Object, Object>(16, (float) 0.75, false));
-      MapSequence.fromMap(userObjects).put(new SNodePointer(SNodeOperations.cast(getNodeById("1732396662099564449"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc67c7f0L, "jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement"))), new SNodePointer(SNodeOperations.cast(getNodeById("1732396662099564449"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc67c7f0L, "jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement"))));
-      MapSequence.fromMap(userObjects).put(SNodeOperations.getModel(SNodeOperations.cast(getNodeById("1732396662099564449"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc67c7f0L, "jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement"))).getReference(), new ModuleRepositoryFacade(myProject.getRepository()).getModelByName("java.lang@java_stub").getReference());
-      MapSequence.fromMap(userObjects).put(SNodeOperations.cast(getNodeById("1732396662099564449"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc67c7f0L, "jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement")).getNodeId(), new SNodePointer(SNodeOperations.cast(getNodeById("1732396662099564449"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc67c7f0L, "jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement"))));
-      MapSequence.fromMap(userObjects).put(SNodeOperations.getModel(SNodeOperations.cast(getNodeById("1732396662099564449"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc67c7f0L, "jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement"))).getModelId(), SNodeOperations.getModel(SNodeOperations.cast(getNodeById("1732396662099564449"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc67c7f0L, "jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement"))).getReference());
-      this.testUserObjectsSaving(userObjects);
+      runWithinCommand(() -> addNodeById("1732396662099564446"));
+      runWithinCommand(() -> {
+        Map<Object, Object> userObjects = MapSequence.fromMap(new LinkedHashMap<Object, Object>(16, (float) 0.75, false));
+        MapSequence.fromMap(userObjects).put(new SNodePointer(getNodeById("1732396662099564449")), new SNodePointer(getNodeById("1732396662099564449")));
+        MapSequence.fromMap(userObjects).put(SModelOperations.getPointer(SNodeOperations.getModel(getNodeById("1732396662099564449"))), PersistenceFacade.getInstance().createModelReference("6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)"));
+        MapSequence.fromMap(userObjects).put(getNodeById("1732396662099564449").getNodeId(), new SNodePointer(getNodeById("1732396662099564449")));
+        MapSequence.fromMap(userObjects).put(SNodeOperations.getModel(getNodeById("1732396662099564449")).getModelId(), SModelOperations.getPointer(SNodeOperations.getModel(getNodeById("1732396662099564449"))));
+        TestBody.this.testUserObjectsSaving(userObjects);
+      });
     }
     public void test_baseLanguageStructure() throws Exception {
-      addNodeById("1732396662099564446");
-      SModel sampleModel = new ModuleRepositoryFacade(myProject.getRepository()).getModelByName("jetbrains.mps.baseLanguage.structure");
-      SModel resultModel = FileSwapOwner.writeAndReadModel(((SModelBase) sampleModel).getSModel());
-      List<NodeDifference> matchNodes = new NodesMatcher().match(SModelOperations.roots(sampleModel, null), SModelOperations.roots(resultModel, null));
-      Assert.assertNull(matchNodes);
+      runWithinCommand(() -> addNodeById("1732396662099564446"));
+      runWithinCommand(() -> {
+        SModel sampleModel = PersistenceFacade.getInstance().createModelReference("r:00000000-0000-4000-0000-011c895902ca(jetbrains.mps.baseLanguage.structure)").resolve(myProject.getRepository());
+        SModel resultModel = FileSwapOwner.writeAndReadModel(sampleModel);
+        List<NodeDifference> diff = new NodesMatcher(SModelOperations.roots(sampleModel, null), SModelOperations.roots(resultModel, null)).diff();
+        Assert.assertTrue(diff.isEmpty());
+      });
     }
     public void test_testOverloadedOperatorsSandbox() throws Exception {
-      addNodeById("1732396662099564446");
-      SModel sampleModel = new ModuleRepositoryFacade(myProject.getRepository()).getModelByName("jetbrains.mps.baseLanguage.overloadedOerators.sandbox.test");
-      SModel resultModel = FileSwapOwner.writeAndReadModel(((SModelBase) sampleModel).getSModel());
-      List<NodeDifference> matchNodes = new NodesMatcher().match(SModelOperations.roots(sampleModel, null), SModelOperations.roots(resultModel, null));
-      Assert.assertNull(matchNodes);
+      runWithinCommand(() -> addNodeById("1732396662099564446"));
+      runWithinCommand(() -> {
+        SModel sampleModel = PersistenceFacade.getInstance().createModelReference("r:3ad93d2f-47fe-4070-8a77-383dab3a6def(jetbrains.mps.baseLanguage.overloadedOerators.sandbox.test)").resolve(myProject.getRepository());
+        SModel resultModel = FileSwapOwner.writeAndReadModel(sampleModel);
+        List<NodeDifference> diff = new NodesMatcher(SModelOperations.roots(sampleModel, null), SModelOperations.roots(resultModel, null)).diff();
+        Assert.assertTrue(diff.isEmpty());
+      });
     }
     public void test_testSkipNodesWhileSaving() throws Exception {
-      addNodeById("1732396662099564446");
-      Map<Object, Object> userObjects = MapSequence.fromMap(new LinkedHashMap<Object, Object>(16, (float) 0.75, false));
-      MapSequence.fromMap(userObjects).put("1", "1");
-      MapSequence.fromMap(userObjects).put(SNodeOperations.cast(getNodeById("1732396662099564449"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc67c7f0L, "jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement")), SNodeOperations.cast(getNodeById("1732396662099564449"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc67c7f0L, "jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement")));
-      MapSequence.fromMap(userObjects).put("2", "2");
+      runWithinCommand(() -> addNodeById("1732396662099564446"));
+      runWithinCommand(() -> {
+        Map<Object, Object> userObjects = MapSequence.fromMap(new LinkedHashMap<Object, Object>(16, (float) 0.75, false));
+        MapSequence.fromMap(userObjects).put("1", "1");
+        MapSequence.fromMap(userObjects).put(getNodeById("1732396662099564449"), getNodeById("1732396662099564449"));
+        MapSequence.fromMap(userObjects).put("2", "2");
 
-      Map<Object, Object> userObjectsToSkip = MapSequence.fromMap(new LinkedHashMap<Object, Object>(16, (float) 0.75, false));
-      MapSequence.fromMap(userObjectsToSkip).put(SNodeOperations.cast(getNodeById("1732396662099564449"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc67c7f0L, "jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement")), SNodeOperations.cast(getNodeById("1732396662099564449"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc67c7f0L, "jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement")));
+        Map<Object, Object> userObjectsToSkip = MapSequence.fromMap(new LinkedHashMap<Object, Object>(16, (float) 0.75, false));
+        MapSequence.fromMap(userObjectsToSkip).put(getNodeById("1732396662099564449"), getNodeById("1732396662099564449"));
 
-      this.testUserObjectsSaving(userObjects, userObjectsToSkip);
+        TestBody.this.testUserObjectsSaving(userObjects, userObjectsToSkip);
+      });
     }
-
 
     public void testUserObjectsSaving(Map<Object, Object> userObjects, Map<Object, Object> userObjectsToLoose) {
       SNode var1732396662099564454 = getNodeById("1732396662099564449");
       try {
 
         for (IMapping<Object, Object> object : MapSequence.fromMap(userObjects)) {
-          SNodeOperations.cast(getNodeById("1732396662099564449"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc67c7f0L, "jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement")).putUserObject(object.key(), object.value());
+          getNodeById("1732396662099564449").putUserObject(object.key(), object.value());
         }
 
-        SNode readNode = FileSwapOwner.writeAndReadNode(SNodeOperations.cast(getNodeById("1732396662099564449"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc67c7f0L, "jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement")));
-        SModel model = TemporaryModels.getInstance().create(false, false, TempModuleOptions.forDefaultModule());
+        SNode readNode = FileSwapOwner.writeAndReadNode(getNodeById("1732396662099564449"));
 
-        try {
-          model.addRootNode(readNode);
-          {
-            List<SNode> nodesBefore = ListSequence.fromListAndArray(new ArrayList<SNode>(), SNodeOperations.cast(getNodeById("1732396662099564449"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc67c7f0L, "jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement")));
-            List<SNode> nodesAfter = ListSequence.fromListAndArray(new ArrayList<SNode>(), readNode);
-            Assert.assertNull("The nodes '" + nodesBefore + "' and '" + nodesAfter + "' do not match!", new NodesMatcher().match(nodesBefore, nodesAfter));
-          }
+        {
+          List<SNode> nodesBefore = ListSequence.fromListAndArray(new ArrayList<SNode>(), getNodeById("1732396662099564449"));
+          List<SNode> nodesAfter = ListSequence.fromListAndArray(new ArrayList<SNode>(), readNode);
+          Assert.assertTrue("The nodes '" + nodesBefore + "' and '" + nodesAfter + "' do not match!", new NodesMatcher(nodesBefore, nodesAfter).diff().isEmpty());
+        }
 
-          for (IMapping<Object, Object> object : MapSequence.fromMap(userObjects)) {
-            if (MapSequence.fromMap(userObjectsToLoose).contains(object)) {
-              Assert.assertNull("User object " + object + " should have been lost.", readNode.getUserObject(object.key()));
-            } else {
-              Assert.assertEquals("User object " + object + " was lost.", object.value(), readNode.getUserObject(object.key()));
-            }
+        for (IMapping<Object, Object> object : MapSequence.fromMap(userObjects)) {
+          if (MapSequence.fromMap(userObjectsToLoose).contains(object)) {
+            Assert.assertNull("User object " + object + " should have been lost.", readNode.getUserObject(object.key()));
+          } else {
+            Assert.assertEquals("User object " + object + " was lost.", object.value(), readNode.getUserObject(object.key()));
           }
-        } finally {
-          TemporaryModels.getInstance().dispose(model);
         }
       } catch (IOException e) {
         e.printStackTrace();
-        org.junit.Assert.fail(e.getMessage());
+        Assert.fail(e.getMessage());
       }
     }
     public void testUserObjectsSaving(Map<Object, Object> userObjects) {

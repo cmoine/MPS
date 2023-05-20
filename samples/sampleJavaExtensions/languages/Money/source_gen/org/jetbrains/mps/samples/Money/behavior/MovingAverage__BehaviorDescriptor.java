@@ -5,13 +5,10 @@ package org.jetbrains.mps.samples.Money.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import java.math.BigDecimal;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.List;
 import java.util.Arrays;
@@ -23,9 +20,8 @@ import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
 
 public final class MovingAverage__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x662a9f2b58024d16L, 0x955872c65c7a681eL, 0x3786e3f480b1c19aL, "org.jetbrains.mps.samples.Money.structure.MovingAverage");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<Iterable<BigDecimal>> calculate_id3u6SZi0GsCg = new SMethodBuilder<Iterable<BigDecimal>>(new SJavaCompoundTypeImpl((Class<Iterable<BigDecimal>>) ((Class) Object.class))).name("calculate").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("3u6SZi0GsCg").registry(REGISTRY).build();
+  public static final SMethod<Iterable<BigDecimal>> calculate_id3u6SZi0GsCg = new SMethodBuilder<Iterable<BigDecimal>>(new SJavaCompoundTypeImpl((Class<Iterable<BigDecimal>>) ((Class) Object.class))).name("calculate").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(4001135958235925008L).languageId(0x955872c65c7a681eL, 0x662a9f2b58024d16L).build2();
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(calculate_id3u6SZi0GsCg);
 
@@ -37,7 +33,6 @@ public final class MovingAverage__BehaviorDescriptor extends BaseBHDescriptor {
   }
 
   /*package*/ MovingAverage__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override

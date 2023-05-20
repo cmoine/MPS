@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,10 +23,10 @@ public interface LanguageRegistryListener {
   /*
    *  invoked in [write action].
    */
-  void afterLanguagesLoaded(Iterable<LanguageRuntime> languages);
+  default void afterLanguagesLoaded(Iterable<LanguageRuntime> languages) {}
 
   /*
    *  invoked in [write action].
    */
-  void beforeLanguagesUnloaded(Iterable<LanguageRuntime> languages);
+  default void beforeLanguagesUnloaded(Iterable<LanguageRuntime> languages) {}
 }

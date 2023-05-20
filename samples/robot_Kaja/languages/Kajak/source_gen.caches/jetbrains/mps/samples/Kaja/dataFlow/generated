@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-4hdl384nbj44k19t4mssatjjmarigde" />
+<product version="3" modelHash="bbpqulcqs5t17sqg8woqgb6yfhbquye">
+  <files names="AbstractCommand_DataFlow.java:CommandList_DataFlow.java:DataFlowAspectDescriptorImpl.java:IfStatement_DataFlow.java:LogicalExpression_DataFlow.java:Not_DataFlow.java:Repeat_DataFlow.java:RoutineCall_DataFlow.java:RoutineDefinition_DataFlow.java:Script_DataFlow.java:Step_DataFlow.java:While_DataFlow.java" />
+</product>
 

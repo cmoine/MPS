@@ -2,13 +2,13 @@
 <model ref="r:e318478c-edb7-4caf-bafe-2e5906944dde(jetbrains.mps.baseLanguage.math.tests)">
   <persistence version="9" />
   <languages>
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports>
     <import index="k2b1" ref="r:b79696e4-f917-4b28-af17-40e382bc7b82(jetbrains.mps.baseLanguage.math.runtime)" />
     <import index="wyt6" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)" />
     <import index="33ny" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.util(JDK/)" />
-    <import index="rjhg" ref="83f155ff-422c-4b5a-a2f2-b459302dd215/java:org.junit(jetbrains.mps.baseLanguage.unitTest.libs/)" />
+    <import index="rjhg" ref="49808fad-9d41-4b96-83fa-9231640f6b2b/java:org.junit(JUnit/)" />
   </imports>
   <registry>
     <language id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage">
@@ -167,7 +167,7 @@
         <node concept="3clFbF" id="1rCh22xi5tX" role="3cqZAp">
           <node concept="2YIFZM" id="1rCh22xi5tY" role="3clFbG">
             <ref role="1Pybhc" to="rjhg:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="rjhg:~Assert.assertTrue(boolean):void" resolve="assertTrue" />
+            <ref role="37wK5l" to="rjhg:~Assert.assertTrue(boolean)" resolve="assertTrue" />
             <node concept="2OqwBi" id="1rCh22xi5tZ" role="37wK5m">
               <node concept="37vLTw" id="3GM_nagTx4A" role="2Oq$k0">
                 <ref role="3cqZAo" node="1rCh22xi5tP" resolve="interval" />
@@ -184,7 +184,7 @@
         <node concept="3clFbF" id="1rCh22xi5u3" role="3cqZAp">
           <node concept="2YIFZM" id="1rCh22xi5u4" role="3clFbG">
             <ref role="1Pybhc" to="rjhg:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="rjhg:~Assert.assertTrue(boolean):void" resolve="assertTrue" />
+            <ref role="37wK5l" to="rjhg:~Assert.assertTrue(boolean)" resolve="assertTrue" />
             <node concept="2OqwBi" id="1rCh22xi5u5" role="37wK5m">
               <node concept="37vLTw" id="3GM_nagTuMN" role="2Oq$k0">
                 <ref role="3cqZAo" node="1rCh22xi5tP" resolve="interval" />
@@ -201,7 +201,7 @@
         <node concept="3clFbF" id="1rCh22xi5u9" role="3cqZAp">
           <node concept="2YIFZM" id="1rCh22xi5ua" role="3clFbG">
             <ref role="1Pybhc" to="rjhg:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="rjhg:~Assert.assertTrue(boolean):void" resolve="assertTrue" />
+            <ref role="37wK5l" to="rjhg:~Assert.assertTrue(boolean)" resolve="assertTrue" />
             <node concept="2OqwBi" id="1rCh22xi5ub" role="37wK5m">
               <node concept="37vLTw" id="3GM_nagTs_i" role="2Oq$k0">
                 <ref role="3cqZAo" node="1rCh22xi5tP" resolve="interval" />
@@ -218,7 +218,7 @@
         <node concept="3clFbF" id="1rCh22xi5uf" role="3cqZAp">
           <node concept="2YIFZM" id="1rCh22xi5ug" role="3clFbG">
             <ref role="1Pybhc" to="rjhg:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="rjhg:~Assert.assertFalse(boolean):void" resolve="assertFalse" />
+            <ref role="37wK5l" to="rjhg:~Assert.assertFalse(boolean)" resolve="assertFalse" />
             <node concept="2OqwBi" id="1rCh22xi5uh" role="37wK5m">
               <node concept="37vLTw" id="3GM_nagTsVp" role="2Oq$k0">
                 <ref role="3cqZAo" node="1rCh22xi5tP" resolve="interval" />
@@ -237,7 +237,7 @@
         <node concept="3clFbF" id="1rCh22xi5um" role="3cqZAp">
           <node concept="2YIFZM" id="1rCh22xi5un" role="3clFbG">
             <ref role="1Pybhc" to="rjhg:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="rjhg:~Assert.assertFalse(boolean):void" resolve="assertFalse" />
+            <ref role="37wK5l" to="rjhg:~Assert.assertFalse(boolean)" resolve="assertFalse" />
             <node concept="2OqwBi" id="1rCh22xi5uo" role="37wK5m">
               <node concept="37vLTw" id="3GM_nagTyXQ" role="2Oq$k0">
                 <ref role="3cqZAo" node="1rCh22xi5tP" resolve="interval" />
@@ -293,7 +293,7 @@
         <node concept="3clFbF" id="1rCh22xi5uG" role="3cqZAp">
           <node concept="2YIFZM" id="1rCh22xi5uH" role="3clFbG">
             <ref role="1Pybhc" to="rjhg:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="rjhg:~Assert.assertTrue(boolean):void" resolve="assertTrue" />
+            <ref role="37wK5l" to="rjhg:~Assert.assertTrue(boolean)" resolve="assertTrue" />
             <node concept="2OqwBi" id="1rCh22xi5uI" role="37wK5m">
               <node concept="37vLTw" id="3GM_nagTukZ" role="2Oq$k0">
                 <ref role="3cqZAo" node="1rCh22xi5uy" resolve="interval" />
@@ -310,7 +310,7 @@
         <node concept="3clFbF" id="1rCh22xi5uM" role="3cqZAp">
           <node concept="2YIFZM" id="1rCh22xi5uN" role="3clFbG">
             <ref role="1Pybhc" to="rjhg:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="rjhg:~Assert.assertFalse(boolean):void" resolve="assertFalse" />
+            <ref role="37wK5l" to="rjhg:~Assert.assertFalse(boolean)" resolve="assertFalse" />
             <node concept="2OqwBi" id="1rCh22xi5uO" role="37wK5m">
               <node concept="37vLTw" id="3GM_nagTtza" role="2Oq$k0">
                 <ref role="3cqZAo" node="1rCh22xi5uy" resolve="interval" />
@@ -327,7 +327,7 @@
         <node concept="3clFbF" id="1rCh22xi5uS" role="3cqZAp">
           <node concept="2YIFZM" id="1rCh22xi5uT" role="3clFbG">
             <ref role="1Pybhc" to="rjhg:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="rjhg:~Assert.assertTrue(boolean):void" resolve="assertTrue" />
+            <ref role="37wK5l" to="rjhg:~Assert.assertTrue(boolean)" resolve="assertTrue" />
             <node concept="2OqwBi" id="1rCh22xi5uU" role="37wK5m">
               <node concept="37vLTw" id="3GM_nagTBYp" role="2Oq$k0">
                 <ref role="3cqZAo" node="1rCh22xi5uy" resolve="interval" />
@@ -383,7 +383,7 @@
         <node concept="3clFbF" id="1rCh22xi5ve" role="3cqZAp">
           <node concept="2YIFZM" id="1rCh22xi5vf" role="3clFbG">
             <ref role="1Pybhc" to="rjhg:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="rjhg:~Assert.assertTrue(boolean):void" resolve="assertTrue" />
+            <ref role="37wK5l" to="rjhg:~Assert.assertTrue(boolean)" resolve="assertTrue" />
             <node concept="2OqwBi" id="1rCh22xi5vg" role="37wK5m">
               <node concept="37vLTw" id="3GM_nagTtDA" role="2Oq$k0">
                 <ref role="3cqZAo" node="1rCh22xi5v4" resolve="interval" />
@@ -400,7 +400,7 @@
         <node concept="3clFbF" id="1rCh22xi5vk" role="3cqZAp">
           <node concept="2YIFZM" id="1rCh22xi5vl" role="3clFbG">
             <ref role="1Pybhc" to="rjhg:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="rjhg:~Assert.assertTrue(boolean):void" resolve="assertTrue" />
+            <ref role="37wK5l" to="rjhg:~Assert.assertTrue(boolean)" resolve="assertTrue" />
             <node concept="2OqwBi" id="1rCh22xi5vm" role="37wK5m">
               <node concept="37vLTw" id="3GM_nagT_wX" role="2Oq$k0">
                 <ref role="3cqZAo" node="1rCh22xi5v4" resolve="interval" />
@@ -417,7 +417,7 @@
         <node concept="3clFbF" id="1rCh22xi5vq" role="3cqZAp">
           <node concept="2YIFZM" id="1rCh22xi5vr" role="3clFbG">
             <ref role="1Pybhc" to="rjhg:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="rjhg:~Assert.assertFalse(boolean):void" resolve="assertFalse" />
+            <ref role="37wK5l" to="rjhg:~Assert.assertFalse(boolean)" resolve="assertFalse" />
             <node concept="2OqwBi" id="1rCh22xi5vs" role="37wK5m">
               <node concept="37vLTw" id="3GM_nagT_sM" role="2Oq$k0">
                 <ref role="3cqZAo" node="1rCh22xi5v4" resolve="interval" />
@@ -471,7 +471,7 @@
         <node concept="3clFbF" id="1rCh22xi5vK" role="3cqZAp">
           <node concept="2YIFZM" id="1rCh22xi5vL" role="3clFbG">
             <ref role="1Pybhc" to="rjhg:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="rjhg:~Assert.assertTrue(boolean):void" resolve="assertTrue" />
+            <ref role="37wK5l" to="rjhg:~Assert.assertTrue(boolean)" resolve="assertTrue" />
             <node concept="2OqwBi" id="1rCh22xi5vM" role="37wK5m">
               <node concept="37vLTw" id="3GM_nagT$mD" role="2Oq$k0">
                 <ref role="3cqZAo" node="1rCh22xi5vA" resolve="interval" />
@@ -490,7 +490,7 @@
         <node concept="3clFbF" id="1rCh22xi5vR" role="3cqZAp">
           <node concept="2YIFZM" id="1rCh22xi5vS" role="3clFbG">
             <ref role="1Pybhc" to="rjhg:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="rjhg:~Assert.assertTrue(boolean):void" resolve="assertTrue" />
+            <ref role="37wK5l" to="rjhg:~Assert.assertTrue(boolean)" resolve="assertTrue" />
             <node concept="2OqwBi" id="1rCh22xi5vT" role="37wK5m">
               <node concept="37vLTw" id="3GM_nagTsaD" role="2Oq$k0">
                 <ref role="3cqZAo" node="1rCh22xi5vA" resolve="interval" />
@@ -507,7 +507,7 @@
         <node concept="3clFbF" id="1rCh22xi5vX" role="3cqZAp">
           <node concept="2YIFZM" id="1rCh22xi5vY" role="3clFbG">
             <ref role="1Pybhc" to="rjhg:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="rjhg:~Assert.assertFalse(boolean):void" resolve="assertFalse" />
+            <ref role="37wK5l" to="rjhg:~Assert.assertFalse(boolean)" resolve="assertFalse" />
             <node concept="2OqwBi" id="1rCh22xi5vZ" role="37wK5m">
               <node concept="37vLTw" id="3GM_nagTAoQ" role="2Oq$k0">
                 <ref role="3cqZAo" node="1rCh22xi5vA" resolve="interval" />
@@ -561,7 +561,7 @@
         <node concept="3clFbF" id="1rCh22xi5wj" role="3cqZAp">
           <node concept="2YIFZM" id="1rCh22xi5wk" role="3clFbG">
             <ref role="1Pybhc" to="rjhg:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="rjhg:~Assert.assertTrue(boolean):void" resolve="assertTrue" />
+            <ref role="37wK5l" to="rjhg:~Assert.assertTrue(boolean)" resolve="assertTrue" />
             <node concept="2OqwBi" id="1rCh22xi5wl" role="37wK5m">
               <node concept="37vLTw" id="3GM_nagTrt8" role="2Oq$k0">
                 <ref role="3cqZAo" node="1rCh22xi5w9" resolve="interval" />
@@ -578,7 +578,7 @@
         <node concept="3clFbF" id="1rCh22xi5wp" role="3cqZAp">
           <node concept="2YIFZM" id="1rCh22xi5wq" role="3clFbG">
             <ref role="1Pybhc" to="rjhg:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="rjhg:~Assert.assertTrue(boolean):void" resolve="assertTrue" />
+            <ref role="37wK5l" to="rjhg:~Assert.assertTrue(boolean)" resolve="assertTrue" />
             <node concept="2OqwBi" id="1rCh22xi5wr" role="37wK5m">
               <node concept="37vLTw" id="3GM_nagTwyQ" role="2Oq$k0">
                 <ref role="3cqZAo" node="1rCh22xi5w9" resolve="interval" />
@@ -595,7 +595,7 @@
         <node concept="3clFbF" id="1rCh22xi5wv" role="3cqZAp">
           <node concept="2YIFZM" id="1rCh22xi5ww" role="3clFbG">
             <ref role="1Pybhc" to="rjhg:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="rjhg:~Assert.assertFalse(boolean):void" resolve="assertFalse" />
+            <ref role="37wK5l" to="rjhg:~Assert.assertFalse(boolean)" resolve="assertFalse" />
             <node concept="2OqwBi" id="1rCh22xi5wx" role="37wK5m">
               <node concept="37vLTw" id="3GM_nagTthg" role="2Oq$k0">
                 <ref role="3cqZAo" node="1rCh22xi5w9" resolve="interval" />
@@ -649,10 +649,10 @@
         <node concept="3clFbF" id="1rCh22xi5wO" role="3cqZAp">
           <node concept="2YIFZM" id="1rCh22xi5wP" role="3clFbG">
             <ref role="1Pybhc" to="rjhg:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="rjhg:~Assert.assertEquals(java.lang.Object,java.lang.Object):void" resolve="assertEquals" />
+            <ref role="37wK5l" to="rjhg:~Assert.assertEquals(java.lang.Object,java.lang.Object)" resolve="assertEquals" />
             <node concept="2YIFZM" id="1rCh22xi5wQ" role="37wK5m">
               <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-              <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+              <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
               <node concept="3cmrfG" id="1rCh22xi5wR" role="37wK5m">
                 <property role="3cmrfH" value="0" />
               </node>
@@ -713,10 +713,10 @@
         <node concept="3clFbF" id="1rCh22xi5xc" role="3cqZAp">
           <node concept="2YIFZM" id="1rCh22xi5xd" role="3clFbG">
             <ref role="1Pybhc" to="rjhg:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="rjhg:~Assert.assertEquals(java.lang.Object,java.lang.Object):void" resolve="assertEquals" />
+            <ref role="37wK5l" to="rjhg:~Assert.assertEquals(java.lang.Object,java.lang.Object)" resolve="assertEquals" />
             <node concept="2YIFZM" id="1rCh22xi5xe" role="37wK5m">
               <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-              <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+              <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
               <node concept="3cmrfG" id="1rCh22xi5xf" role="37wK5m">
                 <property role="3cmrfH" value="1" />
               </node>
@@ -774,10 +774,10 @@
         <node concept="3clFbF" id="1rCh22xi5xz" role="3cqZAp">
           <node concept="2YIFZM" id="1rCh22xi5x$" role="3clFbG">
             <ref role="1Pybhc" to="rjhg:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="rjhg:~Assert.assertEquals(java.lang.Object,java.lang.Object):void" resolve="assertEquals" />
+            <ref role="37wK5l" to="rjhg:~Assert.assertEquals(java.lang.Object,java.lang.Object)" resolve="assertEquals" />
             <node concept="2YIFZM" id="1rCh22xi5x_" role="37wK5m">
               <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-              <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+              <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
               <node concept="3cmrfG" id="1rCh22xi5xA" role="37wK5m">
                 <property role="3cmrfH" value="0" />
               </node>
@@ -831,10 +831,10 @@
         <node concept="3clFbF" id="1rCh22xi5xS" role="3cqZAp">
           <node concept="2YIFZM" id="1rCh22xi5xT" role="3clFbG">
             <ref role="1Pybhc" to="rjhg:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="rjhg:~Assert.assertEquals(java.lang.Object,java.lang.Object):void" resolve="assertEquals" />
+            <ref role="37wK5l" to="rjhg:~Assert.assertEquals(java.lang.Object,java.lang.Object)" resolve="assertEquals" />
             <node concept="2YIFZM" id="1rCh22xi5xU" role="37wK5m">
               <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-              <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+              <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
               <node concept="3cmrfG" id="1rCh22xi5xV" role="37wK5m">
                 <property role="3cmrfH" value="0" />
               </node>
@@ -1091,7 +1091,7 @@
                   <ref role="3cqZAo" node="1rCh22xi5zm" resolve="result" />
                 </node>
                 <node concept="liA8E" id="1rCh22xi5z$" role="2OqNvi">
-                  <ref role="37wK5l" to="33ny:~List.add(java.lang.Object):boolean" resolve="add" />
+                  <ref role="37wK5l" to="33ny:~List.add(java.lang.Object)" resolve="add" />
                   <node concept="37vLTw" id="3GM_nagTtfV" role="37wK5m">
                     <ref role="3cqZAo" node="1rCh22xi5zu" resolve="t" />
                   </node>

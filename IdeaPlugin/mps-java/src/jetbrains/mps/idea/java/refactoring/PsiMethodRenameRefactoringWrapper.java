@@ -6,23 +6,18 @@ import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.searches.MethodReferencesSearch;
 import com.intellij.psi.search.searches.OverridingMethodsSearch;
-import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.util.MergeQuery;
 import com.intellij.util.Processor;
 import com.intellij.util.Query;
-import jetbrains.mps.findUsages.UsagesList;
 import jetbrains.mps.ide.findusages.model.SearchResult;
 import jetbrains.mps.ide.findusages.model.SearchResults;
 import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiNode;
-import jetbrains.mps.idea.core.psi.impl.MPSPsiNodeBase;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiProvider;
 import jetbrains.mps.idea.core.refactoring.PsiRenameRefactoringWrapper;
 import jetbrains.mps.idea.core.refactoring.PsiSearchResult;
-import jetbrains.mps.idea.core.refactoring.RefactoringWrapper;
-import jetbrains.mps.refactoring.framework.IRefactoring;
 import jetbrains.mps.refactoring.framework.RefactoringContext;
-import jetbrains.mps.refactoring.framework.RefactoringUtil;
+import jetbrains.mps.refactoring.runtime.access.RefactoringAccess;
 import org.jetbrains.mps.openapi.model.SNode;
 
 import java.util.ArrayList;
@@ -33,11 +28,10 @@ import java.util.List;
 /**
  * danilla 6/4/13
  */
-
 public class PsiMethodRenameRefactoringWrapper extends PsiRenameRefactoringWrapper {
 
-  public PsiMethodRenameRefactoringWrapper() {
-    super(RefactoringUtil.getRefactoringByClassName("jetbrains.mps.baseLanguage.refactorings.RenameMethod"));
+  /*package*/ PsiMethodRenameRefactoringWrapper(RefactoringAccess refactoringAccess) {
+    super(refactoringAccess.getRefactoringByClassName("jetbrains.mps.baseLanguage.refactorings.RenameMethod"));
   }
 
   @Override
@@ -54,11 +48,14 @@ public class PsiMethodRenameRefactoringWrapper extends PsiRenameRefactoringWrapp
 
     SearchResults<SNode> usages = (SearchResults<SNode>) refactoringContext.getUsages();
 
-    for (SearchResult<SNode> result : usages.getSearchResults()) {
-      if (!(result instanceof PsiSearchResult)) continue;
-      PsiReference psiRef = ((PsiSearchResult) result).getReference();
-      if (psiRef.getElement() instanceof MPSPsiNode) continue;
-      psiRef.handleElementRename(newName);
+    for (SearchResult<SNode> result : usages.getSearchResults2()) {
+      if (result instanceof PsiSearchResult) {
+        PsiReference psiRef = ((PsiSearchResult) result).getReference();
+        if (psiRef.getElement() instanceof MPSPsiNode) {
+          continue;
+        }
+        psiRef.handleElementRename(newName);
+      }
     }
 
     // rename overriding methods

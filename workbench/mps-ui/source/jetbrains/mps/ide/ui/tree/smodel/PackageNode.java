@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,57 +15,53 @@
  */
 package jetbrains.mps.ide.ui.tree.smodel;
 
-import jetbrains.mps.smodel.Language;
 import jetbrains.mps.smodel.SNodeUtil;
-import jetbrains.mps.smodel.language.LanguageAspectSupport;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeAccessUtil;
-import org.jetbrains.mps.openapi.module.SModule;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 public class PackageNode extends SNodeGroupTreeNode {
   private String myName;
   private SModelTreeNode myModelNode;
 
   public PackageNode(SModelTreeNode model, String name, @Nullable PackageNode parent) {
-    super(model, name, true);
+    super(model.getModel().getReference(), name, true);
     myModelNode = model;
     if (parent != null) {
-      myName = parent.getPackage() + "." + name;
+      myName = parent.getPackage() + '.' + name;
     } else {
       myName = name;
     }
   }
 
-  public Set<SNode> getNodesUnderPackage() {
+  public PackageNode(SModelTreeNode model, String uiText, String fullName) {
+    super(model.getModel().getReference(), uiText, true);
+    myModelNode = model;
+    myName = fullName;
+  }
+
+
+  /**
+   * Nodes from ancestor {@link SModelTreeNode}'s node with package name starting with the one of this node
+   * @return
+   */
+  public Collection<SNode> getNodesUnderPackage() {
     if (myModelNode.getModel() == null) {
       return Collections.emptySet();
     }
-    Set<SNode> result = new LinkedHashSet<SNode>();
-
-    final SModule module = myModelNode.getModel().getModule();
-    if (module instanceof Language) {
-      for (SModel sm : LanguageAspectSupport.getAspectModels(module)) {
-        result.addAll(getNodesUnderPackage(sm));
-      }
-    }
-
-    result.addAll(getNodesUnderPackage(myModelNode.getModel()));
-
-    return result;
-  }
-
-  public Set<SNode> getNodesUnderPackage(SModel sm) {
-    Set<SNode> nodes = new LinkedHashSet<SNode>();
-    for (SNode root : sm.getRootNodes()) {
-      String rootPack = SNodeAccessUtil.getProperty(root, SNodeUtil.propertyName_BaseConcept_virtualPackage);
-      if (rootPack != null && (rootPack.startsWith(getFullPackage() + ".") || rootPack.equals(getFullPackage()))) {
-        nodes.add(root);
+    ArrayList<SNode> nodes = new ArrayList<>();
+    final String fullPackageName = getFullPackage();
+    for (SNode root : myModelNode.getModel().getRootNodes()) {
+      String rootPack = SNodeAccessUtil.getProperty(root, SNodeUtil.property_BaseConcept_virtualPackage);
+      if (rootPack != null && rootPack.startsWith(fullPackageName)) {
+        assert rootPack.length() >= fullPackageName.length();
+        if (rootPack.length() == fullPackageName.length() || rootPack.charAt(fullPackageName.length()) == '.') {
+          nodes.add(root);
+        }
       }
     }
     return nodes;

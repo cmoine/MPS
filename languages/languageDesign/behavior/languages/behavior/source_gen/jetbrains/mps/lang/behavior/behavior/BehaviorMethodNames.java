@@ -4,11 +4,18 @@ package jetbrains.mps.lang.behavior.behavior;
 
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
+import org.jetbrains.mps.openapi.language.SProperty;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
+/**
+ * 
+ * @deprecated 
+ */
+@Deprecated
 public class BehaviorMethodNames {
   public static String BEHAVIOR_DESCRIPTOR_SUFFIX = "__BehaviorDescriptor";
 
+  @Deprecated
   private BehaviorMethodNames() {
   }
 
@@ -29,6 +36,10 @@ public class BehaviorMethodNames {
   }
 
   private static String getMethodName(SNode method) {
-    return SPropertyOperations.getString(method, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name")) + "_" + method.getNodeId().toString();
+    return SPropertyOperations.getString(method, PROPS.name$MnvL) + "_" + method.getNodeId().toString();
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }

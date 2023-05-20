@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,12 +22,15 @@ import org.jetbrains.mps.openapi.module.SModule;
 /**
  * Callback for the events of module loading into the project
  *
+ * FIXME need to document whether the module is attached/detached the moment event is dispatched
+ *       decide whether I care to get SModule instance here
+ *
  * Created by apyshkin on 11/5/15.
  */
 interface ProjectModuleLoadingListener {
-  void moduleLoaded(@NotNull SModule module);
+  void moduleLoaded(ModulePath modulePath, @NotNull SModule module);
 
-  void moduleRemoved(@NotNull SModule module);
+  void moduleRemoved(ModulePath modulePath, @NotNull SModule module);
 
   void moduleNotFound(@NotNull ModulePath modulePath);
 

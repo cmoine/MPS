@@ -6,7 +6,7 @@ import jetbrains.mps.generator.runtime.Generated;
 import jetbrains.mps.generator.runtime.TemplateMappingScript;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 import org.jetbrains.mps.openapi.model.SModel;
-import jetbrains.mps.generator.template.ITemplateGenerator;
+import jetbrains.mps.generator.runtime.TemplateExecutionEnvironment;
 import jetbrains.mps.generator.template.MappingScriptContext;
 import jetbrains.mps.smodel.SNodePointer;
 
@@ -26,8 +26,8 @@ public class Script_MoveLibraryRoutineDefinitions implements TemplateMappingScri
   public int getKind() {
     return PREPROCESS;
   }
-  public void apply(SModel model, ITemplateGenerator generator) {
-    QueriesGenerated.mappingScript_CodeBlock_4394627182935101791(new MappingScriptContext(model, getScriptNode(), generator));
+  public void apply(SModel model, TemplateExecutionEnvironment env) {
+    QueriesGenerated.mappingScript_CodeBlock_24(new MappingScriptContext(model, getScriptNode(), env));
   }
-  private static SNodePointer mappingScriptNode = new SNodePointer("r:3ab3501c-2f4b-48e6-9b6c-e31ff8ef3185(jetbrains.mps.samples.Kaja.generator.template.main@generator)", "4394627182935101790");
+  private static final SNodePointer mappingScriptNode = new SNodePointer("r:3ab3501c-2f4b-48e6-9b6c-e31ff8ef3185(jetbrains.mps.samples.Kaja.generator.template.main@generator)", "4394627182935101790");
 }

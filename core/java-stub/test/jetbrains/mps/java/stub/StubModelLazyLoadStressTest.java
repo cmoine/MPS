@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,28 +15,28 @@
  */
 package jetbrains.mps.java.stub;
 
+import jetbrains.mps.components.ComponentHost;
 import jetbrains.mps.extapi.persistence.FolderSetDataSource;
 import jetbrains.mps.persistence.java.library.JavaClassStubModelDescriptor;
 import jetbrains.mps.project.AbstractModule;
 import jetbrains.mps.project.ModuleId;
 import jetbrains.mps.project.structure.modules.ModuleReference;
-import jetbrains.mps.reloading.CommonPaths;
 import jetbrains.mps.smodel.SNodeId.Foreign;
 import jetbrains.mps.smodel.loading.ModelLoadingState;
 import jetbrains.mps.tool.environment.Environment;
-import jetbrains.mps.tool.environment.EnvironmentConfig;
-import jetbrains.mps.tool.environment.MpsEnvironment;
-import jetbrains.mps.vfs.impl.IoFileSystem;
+import jetbrains.mps.tool.environment.EnvironmentAware;
+import jetbrains.mps.util.PathManager;
+import jetbrains.mps.vfs.IFileSystem;
+import jetbrains.mps.vfs.VFSManager;
+import jetbrains.mps.vfs.util.PathUtil;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeId;
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.io.File;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.TimeUnit;
@@ -53,19 +53,17 @@ import java.util.concurrent.TimeUnit;
  * Since model under test is not attached to a repository, no model access control is in place.
  * @author Artem Tikhomirov
  */
-public class StubModelLazyLoadStressTest {
-  private static Environment ourPlatform;
+public class StubModelLazyLoadStressTest implements EnvironmentAware {
   private static final boolean DEBUG = Boolean.FALSE.booleanValue();
 
-  @BeforeClass
-  public static void setUp() {
-    ourPlatform = MpsEnvironment.getOrCreate(EnvironmentConfig.defaultConfig());
-  }
+  private ComponentHost myPlatform;
 
-  @AfterClass
-  public static void tearDown() {
-    ourPlatform.release();
-    ourPlatform = null;
+  /**
+   * @param env bare MPS environment suffice
+   */
+  @Override
+  public void setEnvironment(@NotNull Environment env) {
+    myPlatform = env.getPlatform();
   }
 
   private static void trace(String message) {
@@ -77,14 +75,12 @@ public class StubModelLazyLoadStressTest {
   @Test
   public void testParallelLoad() throws InterruptedException {
     final ModuleReference moduleRef = new ModuleReference("fake", ModuleId.regular());
-    SModelReference modelRef = new JavaPackageNameStub("java.util.regex").asModelReference(moduleRef);
+    SModelReference modelRef = new JavaPackageNameStub("gnu.trove").asModelReference(moduleRef);
     FolderSetDataSource dataSource = new FolderSetDataSource();
-    for (String path : CommonPaths.getJDKPath()) {
-      if (new File(path).isFile() && path.endsWith(".jar")) {
-        path += "!/java/util/regex/";
-      }
-      dataSource.addPath(new IoFileSystem().getFile(path), null);
-    }
+    // any har with JavaClassStubModelDescriptor would do. Used to be java.util, which uses dedicated model root (JDKStubsModelRoot) since Java 11
+    String path = PathUtil.toSystemIndependent(PathManager.getLibPath()) + "/util_rt.jar!/gnu/trove";
+    final IFileSystem jarFS = myPlatform.findComponent(VFSManager.class).getFileSystem(VFSManager.JAR_FS);
+    dataSource.addPath(jarFS.getFile(path));
     JavaClassStubModelDescriptor model = new JavaClassStubModelDescriptor(modelRef, dataSource) {
       @Override
       protected void fireModelStateChanged(ModelLoadingState oldState, ModelLoadingState newState) {
@@ -103,7 +99,7 @@ public class StubModelLazyLoadStressTest {
         setModuleReference(moduleRef);
       }
     });
-    SNodeId nodeId = new Foreign("~Pattern.compile(java.lang.String):java.util.regex.Pattern");
+    SNodeId nodeId = new Foreign("~THashMap.<init>()");
     FindNodeRunnable[] runners = new FindNodeRunnable[10];
     LatchCountAction latch = new LatchCountAction(new CountDownLatch(2));
     CyclicBarrier barrier = new CyclicBarrier(runners.length, latch);

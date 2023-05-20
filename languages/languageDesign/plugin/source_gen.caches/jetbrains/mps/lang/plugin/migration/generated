@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="a3dsgofqjv8y14v8egp15g7mten5zv2" />
+<product version="3" modelHash="-8epe7t8u7u1q7fnxk4fjt7z44boiqb1">
+  <files names="BaseToolDeclaration_number.java:CleanEditorTabCommandOnCreateProperty.java:CleanIdeaInitializerDescriptorVendorLogoProperty.java:ClearActionParameterIsOptional.java:CopyPrefPageIconsToResources.java:MigrationDescriptor.java" />
+</product>
 

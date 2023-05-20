@@ -6,24 +6,9 @@ import jetbrains.mps.nodeEditor.DefaultNodeEditor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Collection;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Constant;
 
 public class GeneratorInternal_BuildSource_SingleFile_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createCollection_1p6igx_a(editorContext, node);
-  }
-  private EditorCell createCollection_1p6igx_a(EditorContext editorContext, SNode node) {
-    EditorCell_Collection editorCell = EditorCell_Collection.createHorizontal(editorContext, node);
-    editorCell.setCellId("Collection_1p6igx_a");
-    editorCell.setBig(true);
-    editorCell.addEditorCell(this.createConstant_1p6igx_a0(editorContext, node));
-    return editorCell;
-  }
-  private EditorCell createConstant_1p6igx_a0(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, "file");
-    editorCell.setCellId("Constant_1p6igx_a0");
-    editorCell.setDefaultText("");
-    return editorCell;
+    return new GeneratorInternal_BuildSource_SingleFile_EditorBuilder_a(editorContext, node).createCell();
   }
 }

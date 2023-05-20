@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-6x5a2k1ch6yymbs5ujy24u4eu3rzl3b" />
+<product version="3" modelHash="9hedueyl3fawnlob99obfn0kc5rs4in">
+  <files names="ConstraintsAspectDescriptor.java:DefaultClassifierFieldDeclaration_Constraints.java:DefaultClassifierType_Constraints.java:IMemberOperation_Constraints.java:SuperClassifierExpresson_Constraints.java:ThisClassifierExpression_Constraints.java" />
+</product>
 

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-dvhddanvyxdz8wokopwicb297xxov30" />
+<product version="3" modelHash="-493mo22cp86sjahjg1zar0zmv824yzr">
+  <files names="BehaviorAspectDescriptor.java:CellModel_Checkbox__BehaviorDescriptor.java" />
+</product>
 

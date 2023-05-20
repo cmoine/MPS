@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ import com.intellij.openapi.project.Project;
 import jetbrains.mps.messages.IMessage;
 import jetbrains.mps.messages.IMessageHandler;
 import jetbrains.mps.messages.LogHandler;
-import org.apache.log4j.Logger;
+import jetbrains.mps.logging.Logger;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -32,7 +32,7 @@ public class DefaultMessageHandler implements IMessageHandler {
   private final IMessageHandler myDelegate;
 
   public DefaultMessageHandler(Project project) {
-    MessagesViewTool tool = project.getComponent(MessagesViewTool.class);
+    MessagesViewTool tool = project.getService(MessagesViewTool.class);
     if (tool != null) {
       myDelegate = tool.newHandler();
     } else {

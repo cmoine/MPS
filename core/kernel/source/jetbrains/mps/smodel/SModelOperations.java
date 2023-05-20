@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +15,12 @@
  */
 package jetbrains.mps.smodel;
 
-import jetbrains.mps.extapi.model.SModelDescriptorStub;
-import jetbrains.mps.project.AbstractModule;
-import jetbrains.mps.project.dependency.GlobalModuleDependenciesManager;
-import jetbrains.mps.project.dependency.GlobalModuleDependenciesManager.Deptype;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.project.dependency.ModelDependenciesManager;
+import jetbrains.mps.project.facets.JavaModuleFacet;
+import jetbrains.mps.project.facets.TestsFacet;
 import jetbrains.mps.smodel.language.LanguageRegistry;
-import jetbrains.mps.util.annotation.ToRemove;
+import jetbrains.mps.vfs.IFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
@@ -30,20 +29,82 @@ import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.module.SModule;
-import org.jetbrains.mps.openapi.module.SModuleReference;
 import org.jetbrains.mps.openapi.module.SRepository;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
 public class SModelOperations {
+
+  /**
+   * Tell output folder of a model based on its kind and {@linkplain jetbrains.mps.project.facets.GenerationTargetFacet code generation facets}
+   * active for model's module.
+   *
+   * PROVISIONAL CODE. Needed for transition from cumbersome {@link jetbrains.mps.generator.fileGenerator.FileGenerationUtil} to facet-backed output
+   * locations. Doesn't support facets other than {@link JavaModuleFacet} and {@link TestsFacet}
+   *
+   * @deprecated This method knows about 2 module facets only. Consider using
+   *             {@link jetbrains.mps.project.facets.GenerationTargetFacet#find(SModel)}  or
+   *             {@link jetbrains.mps.project.facets.GenerationTargetFacet#stream(SModel)} for general scenario or
+   *             iterate {@link SModule#getFacets() module facets} directly in case you need more sophisticated logic
+   *
+   * @return {@code null} if model is not capable to produce output for a model (e.g. deployed/packaged module)
+   * @see jetbrains.mps.project.facets.JavaModuleFacet
+   * @see jetbrains.mps.project.facets.TestsFacet
+   */
   @Nullable
-  public static SNode getRootByName(SModel model, @NotNull String name) {
+  @Deprecated(since = "2023.1", forRemoval = true)
+  public static IFile getOutputLocation(@NotNull SModel model) {
+    // there are 15 uses in mbeddr
+    assert model.getModule() != null;
+    if (SModelStereotype.isTestModel(model)) {
+      TestsFacet facet = model.getModule().getFacet(TestsFacet.class);
+      if (facet != null) {
+        return facet.getOutputLocation(model);
+      }
+      // fall-through
+    }
+    JavaModuleFacet jmf = model.getModule().getFacet(JavaModuleFacet.class);
+    return jmf == null ? null : jmf.getOutputLocation(model);
+  }
+
+  /**
+   * Pair method to {@link #getOutputLocation(SModel)}, responsible for
+   * {@linkplain jetbrains.mps.project.facets.GenerationTargetFacet#getOutputCacheLocation(SModel) model cache file location}.
+   *
+   * @deprecated This method knows about 2 module facets only. Consider using
+   *             {@link jetbrains.mps.project.facets.GenerationTargetFacet#find(SModel)}  or
+   *             {@link jetbrains.mps.project.facets.GenerationTargetFacet#stream(SModel)} for general scenario or
+   *             iterate {@link SModule#getFacets() module facets} ddirectly in case you need more sophisticated logic
+   *
+   * PROVISIONAL CODE. Same considerations as for {@link #getOutputLocation(SModel)} apply.
+   */
+  @Nullable
+  @Deprecated(since = "2023.1", forRemoval = true)
+  public static IFile getOutputCacheLocation(@NotNull SModel model) {
+    // there are no uses in MPS, nor in mps-extensions/mbeddr
+    assert model.getModule() != null;
+    Logger.getLogger(SModelOperations.class).warnDeprecatedUse("Stop using SModelOperations.getOutputCacheLocation() as it doesn't look into generic GenerationTargetFacet");
+    if (SModelStereotype.isTestModel(model)) {
+      // XXX TestsFacet is GTF, but due to legacy, have to give it priority.
+      TestsFacet facet = model.getModule().getFacet(TestsFacet.class);
+      if (facet != null) {
+        return facet.getOutputCacheLocation(model);
+      }
+      // fall-through
+    }
+    // FIXME decided to keep this method with JMF and gradually deprecate/remove its usages,
+    //       instead of switching to GenerationTargetFacet.find(), which is more suited for scenarios where few facets are available.
+    //       (e.g. tests + java or tests + plaintext)
+    JavaModuleFacet jmf = model.getModule().getFacet(JavaModuleFacet.class);
+    return jmf == null ? null : jmf.getOutputCacheLocation(model);
+  }
+
+  @Nullable
+  public static SNode getRootByName(@NotNull SModel model, @NotNull String name) {
     for (SNode root : model.getRootNodes()) {
       if (name.equals(root.getName())) return root;
     }
@@ -59,87 +120,12 @@ public class SModelOperations {
    * @param concept concept (with sub-concepts) to look up
    * @return empty collection if model is <code>null</code> or no concept instances found.
    */
-  public static List<SNode> getNodes(SModel model, @NotNull SAbstractConcept concept) {
-    if (model == null) {
-      return Collections.emptyList();
-    }
+  public static List<SNode> getNodes(@NotNull SModel model, @NotNull SAbstractConcept concept) {
     return FastNodeFinderManager.get(model).getNodes(concept, true);
   }
 
-  public static boolean isReadOnly(SModel model) {
+  public static boolean isReadOnly(@NotNull SModel model) {
     return model.isReadOnly();
-  }
-
-  /**
-   * Populate given model with proper imports/languages according to actual model content (i.e. nodes)
-   * @param model model to populate with language/import dependencies
-   * @param updateModuleImports <code>true</code> to update imports of model's module (if any)
-   * @param firstVersion whether to use unspecified or actual model version, doesn't make sense for present MPS state (we don't keep these versions in v9), value is ignored
-   */
-  public static void validateLanguagesAndImports(@NotNull SModel model, boolean updateModuleImports, boolean firstVersion) {
-    final SModule module = model.getModule();
-    final Collection<SModule> moduleDeclaredDependencies = module != null ? new GlobalModuleDependenciesManager(module).getModules(Deptype.VISIBLE) : null;
-    Set<SLanguage> modelDeclaredUsedLanguages = getAllLanguageImports(model);
-
-    Set<SModelReference> importedModels = new HashSet<SModelReference>();
-    // XXX why allImportedModels? it gives models from used language accessories, is it what we really need here?
-    for (SModel sm : allImportedModels(model)) {
-      importedModels.add(sm.getReference());
-    }
-
-    final ModelDependencyScanner modelScanner = new ModelDependencyScanner();
-    modelScanner.crossModelReferences(true).usedLanguages(true).walk(model);
-    for (SLanguage language : modelScanner.getUsedLanguages()) {
-      if (!modelDeclaredUsedLanguages.contains(language)) {
-        modelDeclaredUsedLanguages.add(language);
-        ((jetbrains.mps.smodel.SModelInternal) model).addLanguage(language);
-      }
-    }
-    for (SModelReference targetModelReference : modelScanner.getCrossModelReferences()) {
-      if (importedModels.add(targetModelReference)) {
-        if (updateModuleImports && module != null) {
-          SModel targetModelDescriptor = SModelRepository.getInstance().getModelDescriptor(targetModelReference);
-          SModule targetModule = targetModelDescriptor == null ? null : targetModelDescriptor.getModule();
-          if (targetModule != null && !moduleDeclaredDependencies.contains(targetModule)) {
-            ((AbstractModule) module).addDependency(targetModule.getModuleReference(), false); // cannot decide re-export or not here!
-          }
-        }
-        ((jetbrains.mps.smodel.SModelInternal) model).addModelImport(targetModelReference);
-      }
-    }
-    importedModels.clear();
-  }
-
-  /**
-   * All languages visible for the model, including imported and languages they extend
-   * @deprecated 'visible' is vague, whether it's module dependencies or used languages; use SLanguage instead of Language; replace with <code>new SLanguageHierarchy(SModelOperations.getAllLanguageImports()).getExtended()</code>
-   * MPS 3.4 note: despite being deprecated for 1.5 years to date, there are uses of the method. Those in actions are likely to fade away with
-   * new generated code (RT aspects), others deserve attention of the change architect (i.e. accessory models vs language runtime).
-   */
-  @NotNull
-  @Deprecated
-  @ToRemove(version = 3.2)
-  public static List<Language> getLanguages(SModel model) {
-    ArrayList<Language> languages = new ArrayList<>();
-    SRepository repository = model.getRepository();
-    if (repository == null) {
-      // FIXME generator does #validateLanguagesAndImports for detached models, that's why I have to resort to global instance for now.
-      repository = MPSModuleRepository.getInstance();
-//      throw new IllegalArgumentException("Can't figure out modules for languages of a detached model. Context repository missing");
-    }
-    LanguageRegistry languageRegistry = LanguageRegistry.getInstance(repository);
-
-    for (SLanguage lang : new SLanguageHierarchy(languageRegistry, SModelOperations.getAllLanguageImports(model)).getExtended()) {
-      final SModuleReference sourceModuleRef = lang.getSourceModuleReference();
-      if (sourceModuleRef == null) {
-        continue;
-      }
-      final SModule sourceModule = sourceModuleRef.resolve(repository);
-      if (sourceModule instanceof Language) {
-        languages.add((Language) sourceModule);
-      }
-    }
-    return languages;
   }
 
   /**
@@ -147,52 +133,49 @@ public class SModelOperations {
    * Doesn't look at actual model content (i.e. what concept instances are there).
    * <p>
    * To obtain closure including extended/extending languages, use {@link jetbrains.mps.smodel.SLanguageHierarchy}
+   * </p>
+   * <p>
+   * IMPORTANT: For a {@code model} that is not attached to a repository, set of used languages may be incomplete (MPS needs to resolve
+   * used DevKit modules to tell languages they expose).
+   * </p>
+   * @deprecated use {@link ModelDependencyResolver} instead
    * @return set of languages imported by the model, either directly or through devkit
    * @since 3.3
    */
+@Deprecated(since = "2018.3", forRemoval = true)
   @NotNull
   public static Set<SLanguage> getAllLanguageImports(@NotNull SModel model) {
-    if (model instanceof SModelDescriptorStub) {
-      // if it's our implementation, use cached value
-      return new HashSet<>(((SModelDescriptorStub) model).getModelDepsManager().getAllImportedLanguagesIds());
-    }
-    // otherwise, just calculate it
+    // there are ~10 uses in mbeddr
     return new HashSet<>(new ModelDependenciesManager(model).getAllImportedLanguagesIds());
   }
 
   //todo rewrite using iterators
-  public static List<SModel> allImportedModels(SModel model) {
-    Set<SModel> result = new LinkedHashSet<SModel>();
-    result.addAll(importedModels(model));
-
-    for (Language language : getLanguages(model)) {
-      List<SModel> accessoryModels = language.getAccessoryModels();
-      result.addAll(accessoryModels);
+  // FIXME needs LanguageRegistry or ComponentHost
+  // TODO document contract what constitutes imported models (i.e. accessory models of extended languages)
+  /**
+   * @deprecated use {@link ModelDependencyResolver} instead
+   */
+@Deprecated(since = "2018.3", forRemoval = true)
+  public static List<SModel> allImportedModels(@NotNull SModel model) {
+    // no uses in mbeddr
+    SRepository repo = model.getRepository();
+    if (repo == null) {
+      // Compatibility mechanism as long as there's code that uses allImportedModels() for detached models
+      // like transients during M2M. Once Generator gets its own repository for transients, we don't need to care
+      // about detached models any longer
+      repo = MPSModuleRepository.getInstance();
     }
-
-    result.remove(model);
-
-    return new ArrayList<SModel>(result);
+    LanguageRegistry languageRegistry = LanguageRegistry.getInstance(repo);
+    ModelDependencyResolver mdr = new ModelDependencyResolver(languageRegistry, repo);
+    Set<SModel> result = new LinkedHashSet<>();
+    result.addAll(mdr.directImports(model));
+    result.addAll(mdr.implicitImports(model));
+    return new ArrayList<>(result);
   }
 
   //todo rewrite using iterators
   @NotNull
-  public static List<SModelReference> getImportedModelUIDs(SModel sModel) {
+  public static List<SModelReference> getImportedModelUIDs(@NotNull SModel sModel) {
     return new ArrayList<>(new ModelImports(sModel).getImportedModels());
   }
-
-  @NotNull
-  private static List<SModel> importedModels(final SModel model) {
-    List<SModel> modelsList = new ArrayList<SModel>();
-    for (SModelReference modelReference : new ModelImports(model).getImportedModels()) {
-      SModel modelDescriptor = modelReference.resolve(MPSModuleRepository.getInstance());
-
-      if (modelDescriptor != null) {
-        modelsList.add(modelDescriptor);
-      }
-    }
-    return modelsList;
-  }
-
-  //-----------------------------------------------------
 }

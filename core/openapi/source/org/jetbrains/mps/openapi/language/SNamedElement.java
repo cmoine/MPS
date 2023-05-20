@@ -18,9 +18,9 @@ package org.jetbrains.mps.openapi.language;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * A named meta-object
+ * A named meta-entity.
  */
-public interface SNamedElement {
+public interface SNamedElement extends SElement {
   /**
    * Presentation of the element for an end-user.
    * Unlike identity, the name is deemed user-friendly and shall not be used for persistence.

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,38 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.core.library;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.LibraryOrderEntry;
 import com.intellij.openapi.roots.OrderEntry;
-import com.intellij.openapi.roots.OrderRootType;
-import com.intellij.openapi.roots.impl.libraries.ProjectLibraryTable;
 import com.intellij.openapi.roots.libraries.DummyLibraryProperties;
 import com.intellij.openapi.roots.libraries.Library;
+import com.intellij.openapi.roots.libraries.LibraryTablesRegistrar;
 import com.intellij.openapi.roots.ui.configuration.libraryEditor.NewLibraryEditor;
 import com.intellij.openapi.roots.ui.configuration.projectRoot.LibrariesContainer;
 import com.intellij.openapi.roots.ui.configuration.projectRoot.LibrariesContainer.LibraryLevel;
 import com.intellij.openapi.vfs.VirtualFile;
-import jetbrains.mps.ide.vfs.VirtualFileUtils;
+import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.idea.core.project.SolutionIdea;
+import jetbrains.mps.idea.core.project.StubSolutionIdea;
 import jetbrains.mps.project.AbstractModule;
 import jetbrains.mps.project.Solution;
-import jetbrains.mps.project.StubSolution;
-import jetbrains.mps.smodel.ModuleFileTracker;
 import jetbrains.mps.smodel.ModuleRepositoryFacade;
-import jetbrains.mps.vfs.IFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SModuleReference;
 import org.jetbrains.mps.openapi.module.SRepository;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class ModuleLibrariesUtil {
@@ -52,51 +50,70 @@ public class ModuleLibrariesUtil {
   public static final String LIBRARY_PREFIX = "mps.";
 
   @NotNull
-  public static Collection<Library> getLibraries(SModuleReference reference, Project project) {
+  private static Collection<Library> getLibraries(SModuleReference reference, Project project) {
+    SRepository repo = ProjectHelper.getProjectRepository(project);
     Set<Library> libraries = new HashSet<Library>();
-    for (Library library : ProjectLibraryTable.getInstance(project).getLibraries()) {
-      if (hasModule(library, reference)) {
+    // use MRF intentionally, I don't know if we are in model read here or not, and the code below doesn't need one.
+    // FIXME shall refactor this code so that I don't need to grab model read. The only thing we use module for is its descriptor file.
+    //       Could we solve this task in another way?
+    SModule module = new ModuleRepositoryFacade(repo).getModule(reference);
+    for (Library library : LibraryTablesRegistrar.getInstance().getLibraryTable(project).getLibraries()) {
+      // FIXME hasModule first checks if module is proper solution - no reason to perform the check for each library
+      //       besides, there's only 1 use, and it limits library by name anyway, why complicate matters here?
+      if (hasModule(library, module)) {
         libraries.add(library);
       }
     }
     return libraries;
   }
 
-  private static boolean hasModule(Library library, SModuleReference reference) {
-    SModule module = ModuleRepositoryFacade.getInstance().getModule(reference);
-    return hasModule(library, module);
-  }
-
   private static boolean hasModule(Library library, SModule module) {
-    if (!isSuitableModule(module) || !ModuleLibraryType.isModuleLibrary(library)) {
+    if (!isSuitableModule(module) || !ModuleLibraryType.isMPSModuleLibrary(library)) {
       return false;
     }
     Solution solution = (Solution) module;
-    return Arrays.asList(library.getFiles(ModuleXmlRootDetector.MPS_MODULE_XML)).contains(VirtualFileUtils.getOrCreateVirtualFile(solution.getDescriptorFile()));
+    return Arrays.asList(library.getFiles(ModuleXmlRootDetector.MPS_MODULE_XML)).contains(ModuleXmlRootDetector.asOrderRoot(solution).getFile());
   }
 
   private static boolean isSuitableModule(SModule module) {
-    return (module instanceof Solution) && !(module instanceof SolutionIdea) && !(module instanceof StubSolution);
+    // XXX I wonder if I have to check JavaModuleFacet presence, as MLT.getModuleJarsAsRoots assumes there's one always.
+    //     However, with JMF not mandatory for quite some time already, we may eventually face modules without one.
+    return (module instanceof Solution) && !(module instanceof SolutionIdea) && !(module instanceof StubSolutionIdea);
   }
 
+  // grabs read access
   @NotNull
   public static Set<SModuleReference> getModules(SRepository repository, final Library library) {
-    if (!ModuleLibraryType.isModuleLibrary(library)) {
+    if (!ModuleLibraryType.isMPSModuleLibrary(library)) {
       return Collections.emptySet();
     }
-    final Set<SModuleReference> modules = new HashSet<SModuleReference>();
-    final Set<IFile> moduleXmls = new HashSet<IFile>();
-    for (VirtualFile file : library.getFiles(ModuleXmlRootDetector.MPS_MODULE_XML)) {
-      moduleXmls.add(VirtualFileUtils.toIFile(file));
+    return extractMPSModulesFromTheirIDEALibraryCounterpart(repository, Collections.singleton(library));
+  }
+
+  // assumes ModuleLibraryType.isMPSModuleLibrary() == true for every library
+  private static Set<SModuleReference> extractMPSModulesFromTheirIDEALibraryCounterpart(SRepository repository, Collection<Library> libraries) {
+    final Set<VirtualFile> moduleXmlPaths = new HashSet<>();
+    for (Library library : libraries) {
+      assert ModuleLibraryType.isMPSModuleLibrary(library);
+      for (VirtualFile file : library.getFiles(ModuleXmlRootDetector.MPS_MODULE_XML)) {
+        moduleXmlPaths.add(file.getCanonicalFile());
+      }
     }
 
+    final Set<SModuleReference> modules = new HashSet<>();
     repository.getModelAccess().runReadAction(new Runnable() {
       @Override
       public void run() {
-        for (IFile moduleDescriptor : moduleXmls) {
-          SModule moduleByFile = ModuleFileTracker.getInstance().getModuleByFile(moduleDescriptor);
-          if (moduleByFile != null) {
-            modules.add(moduleByFile.getModuleReference());
+        for (SModule m : repository.getModules()) {
+          if (false == m instanceof AbstractModule) {
+            continue;
+          }
+          // Indeed, we don't check for xml file of a source module descriptor (available through DeploymentDescriptor). The reason is
+          // we care about deployed modules only, therefore expect moduleXmlPaths to be filled only with 'module.xml' files of deployed modules and
+          // straightforward IFile match against repository module's files shall suffice.
+          final VirtualFile f = ((AbstractModule) m).getDescriptorFile() == null ? null : ModuleXmlRootDetector.asOrderRoot((AbstractModule) m).getFile();
+          if (f != null && moduleXmlPaths.contains(f.getCanonicalFile())) {
+            modules.add(m.getModuleReference());
           }
         }
       }
@@ -104,14 +121,19 @@ public class ModuleLibrariesUtil {
     return modules;
   }
 
+  // doesn't need model read itself but grabs one down the road
+  // XXX check SolutionIdea.calculateLibraryDependencies, that uses slightly different way to iterate roots of ModuleRootModel, can't I merge the two?
   public static Set<SModuleReference> getModules(SRepository repository, OrderEntry... roots) {
-    Set<SModuleReference> modules = new HashSet<SModuleReference>();
+    List<Library> libs = new ArrayList<>();
     for (OrderEntry entry : roots) {
       if (entry instanceof LibraryOrderEntry) {
-        modules.addAll(ModuleLibrariesUtil.getModules(repository, ((LibraryOrderEntry) entry).getLibrary()));
+        final Library library = ((LibraryOrderEntry) entry).getLibrary();
+        if (ModuleLibraryType.isMPSModuleLibrary(library)) {
+          libs.add(library);
+        }
       }
     }
-    return modules;
+    return ModuleLibrariesUtil.extractMPSModulesFromTheirIDEALibraryCounterpart(repository, libs);
   }
 
   public static Library getOrCreateAutoLibrary(AbstractModule usedModule, Project project, LibrariesContainer container) {
@@ -119,13 +141,7 @@ public class ModuleLibrariesUtil {
     if (library != null) {
       return library;
     }
-    Set<VirtualFile> stubFiles = ModuleLibraryType.getModuleJars(usedModule);
-    IFile descriptorFile = usedModule.getDescriptorFile();
-    VirtualFile descriptorVirtualFile = null;
-    if (descriptorFile != null) {
-      descriptorVirtualFile = VirtualFileUtils.getOrCreateVirtualFile(descriptorFile);
-    }
-    return createAutoLibrary(usedModule.getModuleName(), stubFiles, descriptorVirtualFile, container);
+    return createAutoLibrary(usedModule, container);
   }
 
   @Nullable
@@ -139,18 +155,13 @@ public class ModuleLibrariesUtil {
     return null;
   }
 
-  private static Library createAutoLibrary(String moduleName, Collection<VirtualFile> libraryFiles, @Nullable VirtualFile moduleXml, LibrariesContainer container) {
-    String libName = LIBRARY_PREFIX + moduleName + AUTO_SUFFIX;
+  private static Library createAutoLibrary(AbstractModule module, LibrariesContainer container) {
+    String libName = LIBRARY_PREFIX + module.getModuleName() + AUTO_SUFFIX;
 
     NewLibraryEditor editor = new NewLibraryEditor();
     editor.setName(libName);
-    for (VirtualFile classRoot : libraryFiles) {
-      editor.addRoot(classRoot, OrderRootType.CLASSES);
-    }
-
-    if (moduleXml != null) {
-      editor.addRoot(moduleXml, ModuleXmlRootDetector.MPS_MODULE_XML);
-    }
+    editor.addRoots(ModuleLibraryType.getModuleJarsAsRoots(module));
+    editor.addRoots(Collections.singleton(ModuleXmlRootDetector.asOrderRoot(module)));
     editor.setType(ModuleLibraryType.getInstance());
     editor.setProperties(new DummyLibraryProperties());
     return container.createLibrary(editor, LibraryLevel.PROJECT);

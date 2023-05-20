@@ -3,8 +3,7 @@
   <persistence version="9" />
   <languages>
     <use id="774bf8a0-62e5-41e1-af63-f4812e60e48b" name="jetbrains.mps.baseLanguage.checkedDots" version="0" />
-    <use id="7a5dda62-9140-4668-ab76-d5ed1746f2b2" name="jetbrains.mps.lang.typesystem" version="0" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="00000000-0000-4000-0000-1de82b3a4936(jetbrains.mps.devkit.aspect.typesystem)" />
   </languages>
   <imports>
     <import index="cgfx" ref="r:10e9da27-7113-45e6-9477-92c95760f135(org.jetbrains.mps.samples.ParallelFor.structure)" />
@@ -55,7 +54,6 @@
         <reference id="1068581517664" name="variableDeclaration" index="3cqZAo" />
       </concept>
       <concept id="1068498886294" name="jetbrains.mps.baseLanguage.structure.AssignmentExpression" flags="nn" index="37vLTI" />
-      <concept id="1225271177708" name="jetbrains.mps.baseLanguage.structure.StringType" flags="in" index="17QB3L" />
       <concept id="4972933694980447171" name="jetbrains.mps.baseLanguage.structure.BaseVariableDeclaration" flags="ng" index="19Szcq">
         <child id="5680397130376446158" name="type" index="1tU5fm" />
       </concept>
@@ -151,13 +149,6 @@
         <child id="1175517851849" name="errorString" index="2MkJ7o" />
       </concept>
       <concept id="1179832490862" name="jetbrains.mps.lang.typesystem.structure.CreateStrongLessThanInequationStatement" flags="nn" index="2NvLDW" />
-      <concept id="1212056081426" name="jetbrains.mps.lang.typesystem.structure.AbstractInequationStatement" flags="ng" index="Ob1k8">
-        <property id="1212056105818" name="inequationPriority" index="Ob790" />
-      </concept>
-      <concept id="1227096774658" name="jetbrains.mps.lang.typesystem.structure.MessageStatement" flags="ng" index="2OEH$v">
-        <child id="1227096802791" name="helginsIntention" index="2OEOjU" />
-        <child id="1227096802790" name="nodeToReport" index="2OEOjV" />
-      </concept>
       <concept id="1216383170661" name="jetbrains.mps.lang.typesystem.structure.TypesystemQuickFix" flags="ng" index="Q5z_Y">
         <child id="1216383424566" name="executeBlock" index="Q6x$H" />
         <child id="1216391046856" name="descriptionBlock" index="QzAvj" />
@@ -169,6 +160,10 @@
         <child id="1195213635060" name="body" index="18ibNy" />
       </concept>
       <concept id="1195214364922" name="jetbrains.mps.lang.typesystem.structure.NonTypesystemRule" flags="ig" index="18kY7G" />
+      <concept id="3937244445246642777" name="jetbrains.mps.lang.typesystem.structure.AbstractReportStatement" flags="ng" index="1urrMJ">
+        <child id="3937244445246643221" name="helginsIntention" index="1urrFz" />
+        <child id="3937244445246642781" name="nodeToReport" index="1urrMF" />
+      </concept>
       <concept id="1210784285454" name="jetbrains.mps.lang.typesystem.structure.TypesystemIntention" flags="ng" index="3Cnw8n">
         <reference id="1216388525179" name="quickFix" index="QpYPw" />
       </concept>
@@ -207,8 +202,8 @@
       </concept>
       <concept id="1179409122411" name="jetbrains.mps.lang.smodel.structure.Node_ConceptMethodCall" flags="nn" index="2qgKlT" />
       <concept id="2396822768958367367" name="jetbrains.mps.lang.smodel.structure.AbstractTypeCastExpression" flags="nn" index="$5XWr">
-        <reference id="6733348108486823428" name="concept" index="1m5ApE" />
         <child id="6733348108486823193" name="leftExpression" index="1m5AlR" />
+        <child id="3906496115198199033" name="conceptArgument" index="3oSUPX" />
       </concept>
       <concept id="1171305280644" name="jetbrains.mps.lang.smodel.structure.Node_GetDescendantsOperation" flags="nn" index="2Rf3mk" />
       <concept id="1171407110247" name="jetbrains.mps.lang.smodel.structure.Node_GetAncestorOperation" flags="nn" index="2Xjw5R" />
@@ -292,7 +287,7 @@
                 <ref role="1YBMHb" node="7Joh5Ouy9F7" resolve="parallelFor" />
               </node>
               <node concept="3TrEf2" id="42COxuQQfQP" role="2OqNvi">
-                <ref role="3Tt5mk" to="cgfx:42COxuQQ87Y" />
+                <ref role="3Tt5mk" to="cgfx:42COxuQQ87Y" resolve="threadPool" />
               </node>
             </node>
           </node>
@@ -309,7 +304,7 @@
               <ref role="1YBMHb" node="7Joh5Ouy9F7" resolve="parallelFor" />
             </node>
             <node concept="3TrEf2" id="7Joh5Ouy9F9" role="2OqNvi">
-              <ref role="3Tt5mk" to="cgfx:7Joh5Ouy132" />
+              <ref role="3Tt5mk" to="cgfx:7Joh5Ouy132" resolve="loopVariable" />
             </node>
           </node>
         </node>
@@ -325,7 +320,7 @@
               <ref role="1YBMHb" node="7Joh5Ouy9F7" resolve="parallelFor" />
             </node>
             <node concept="3TrEf2" id="7Joh5Ouy9Fb" role="2OqNvi">
-              <ref role="3Tt5mk" to="cgfx:7Joh5Ouy8LY" />
+              <ref role="3Tt5mk" to="cgfx:7Joh5Ouy8LY" resolve="inputSequence" />
             </node>
           </node>
         </node>
@@ -336,7 +331,6 @@
             <property role="TrG5h" value="elementType" />
           </node>
           <node concept="1ZoDhX" id="2P1z38GOyKi" role="3cqZAp">
-            <property role="Ob790" value="0" />
             <property role="3wDh2S" value="false" />
             <node concept="mw_s8" id="2P1z38GOyKo" role="1ZfhK$">
               <node concept="2c44tf" id="2P1z38GOyKp" role="mwGJk">
@@ -435,7 +429,7 @@
             <node concept="2OqwBi" id="6FH9fp$hqac" role="3fr31v">
               <node concept="1BlSNk" id="6FH9fp$hrzj" role="2OqNvi">
                 <ref role="1BmUXE" to="cgfx:7Joh5OuxR2E" resolve="ParallelFor" />
-                <ref role="1Bn3mz" to="cgfx:42COxuQQ87Y" />
+                <ref role="1Bn3mz" to="cgfx:42COxuQQ87Y" resolve="threadPool" />
               </node>
               <node concept="1YBJjd" id="6FH9fp$hpZk" role="2Oq$k0">
                 <ref role="1YBMHb" node="6KBb0wH6DQs" resolve="variableReference" />
@@ -461,7 +455,7 @@
                   <ref role="1YBMHb" node="6KBb0wH6DQs" resolve="variableReference" />
                 </node>
                 <node concept="3TrEf2" id="2_c7diShvaA" role="2OqNvi">
-                  <ref role="3Tt5mk" to="tpee:fzcqZ_w" />
+                  <ref role="3Tt5mk" to="tpee:fzcqZ_w" resolve="variableDeclaration" />
                 </node>
               </node>
             </node>
@@ -502,14 +496,14 @@
                 </node>
                 <node concept="3clFbS" id="6KBb0wH6DQK" role="3clFbx">
                   <node concept="2MkqsV" id="6KBb0wH6HFf" role="3cqZAp">
-                    <node concept="3Cnw8n" id="6KBb0wH6KQl" role="2OEOjU">
-                      <ref role="QpYPw" node="6KBb0wH6KPO" resolve="MakeDeclarationFinal" />
-                    </node>
-                    <node concept="1YBJjd" id="6KBb0wH6HFj" role="2OEOjV">
-                      <ref role="1YBMHb" node="6KBb0wH6DQs" resolve="variableReference" />
-                    </node>
                     <node concept="Xl_RD" id="6KBb0wH6HFi" role="2MkJ7o">
                       <property role="Xl_RC" value="Cannot refer non-final variables and parameters from within concurrent code" />
+                    </node>
+                    <node concept="1YBJjd" id="6KBb0wH6HFj" role="1urrMF">
+                      <ref role="1YBMHb" node="6KBb0wH6DQs" resolve="variableReference" />
+                    </node>
+                    <node concept="3Cnw8n" id="6KBb0wH6KQl" role="1urrFz">
+                      <ref role="QpYPw" node="6KBb0wH6KPO" resolve="MakeDeclarationFinal" />
                     </node>
                   </node>
                 </node>
@@ -544,11 +538,13 @@
             <node concept="2OqwBi" id="6KBb0wH6KQb" role="37vLTJ">
               <node concept="2OqwBi" id="6KBb0wH6KQ6" role="2Oq$k0">
                 <node concept="1PxgMI" id="6KBb0wH6KQ4" role="2Oq$k0">
-                  <ref role="1m5ApE" to="tpee:fz7vLUo" resolve="VariableReference" />
                   <node concept="Q6c8r" id="6KBb0wH6KPX" role="1m5AlR" />
+                  <node concept="chp4Y" id="714IaVdGZ6X" role="3oSUPX">
+                    <ref role="cht4Q" to="tpee:fz7vLUo" resolve="VariableReference" />
+                  </node>
                 </node>
                 <node concept="3TrEf2" id="6KBb0wH6KQa" role="2OqNvi">
-                  <ref role="3Tt5mk" to="tpee:fzcqZ_w" />
+                  <ref role="3Tt5mk" to="tpee:fzcqZ_w" resolve="variableDeclaration" />
                 </node>
               </node>
               <node concept="3TrcHB" id="6KBb0wH6LZg" role="2OqNvi">
@@ -629,9 +625,11 @@
                   <node concept="10Nm6u" id="4ERQEDB1E0t" role="3uHU7w" />
                   <node concept="2OqwBi" id="4ERQEDB1DZZ" role="3uHU7B">
                     <node concept="1PxgMI" id="4ERQEDB1DZH" role="2Oq$k0">
-                      <ref role="1m5ApE" to="tpee:fIYIFW9" resolve="StaticMethodCall" />
                       <node concept="1YBJjd" id="4ERQEDB1DZs" role="1m5AlR">
                         <ref role="1YBMHb" node="4ERQEDB1fUZ" resolve="baseMethodCall" />
+                      </node>
+                      <node concept="chp4Y" id="714IaVdGZ72" role="3oSUPX">
+                        <ref role="cht4Q" to="tpee:fIYIFW9" resolve="StaticMethodCall" />
                       </node>
                     </node>
                     <node concept="3CFZ6_" id="4ERQEDB1E04" role="2OqNvi">
@@ -650,13 +648,15 @@
                   </node>
                   <node concept="2OqwBi" id="4ERQEDB1o3r" role="33vP2m">
                     <node concept="1PxgMI" id="4ERQEDB1o3s" role="2Oq$k0">
-                      <ref role="1m5ApE" to="tpee:fIYIFW9" resolve="StaticMethodCall" />
                       <node concept="1YBJjd" id="4ERQEDB1o3t" role="1m5AlR">
                         <ref role="1YBMHb" node="4ERQEDB1fUZ" resolve="baseMethodCall" />
                       </node>
+                      <node concept="chp4Y" id="714IaVdGZ78" role="3oSUPX">
+                        <ref role="cht4Q" to="tpee:fIYIFW9" resolve="StaticMethodCall" />
+                      </node>
                     </node>
                     <node concept="3TrEf2" id="4ERQEDB1o3u" role="2OqNvi">
-                      <ref role="3Tt5mk" to="tpee:gDPybl6" />
+                      <ref role="3Tt5mk" to="tpee:gDPybl6" resolve="classConcept" />
                     </node>
                   </node>
                 </node>
@@ -685,9 +685,11 @@
                     <ref role="ehGHo" to="tpee:fz12cDA" resolve="ClassConcept" />
                   </node>
                   <node concept="1PxgMI" id="6SUBcAg91NL" role="33vP2m">
-                    <ref role="1m5ApE" to="tpee:fz12cDA" resolve="ClassConcept" />
                     <node concept="37vLTw" id="6SUBcAg91NM" role="1m5AlR">
                       <ref role="3cqZAo" node="4ERQEDB1o3p" resolve="classifier" />
+                    </node>
+                    <node concept="chp4Y" id="714IaVdGZ6Z" role="3oSUPX">
+                      <ref role="cht4Q" to="tpee:fz12cDA" resolve="ClassConcept" />
                     </node>
                   </node>
                 </node>
@@ -713,11 +715,11 @@
               <node concept="3clFbJ" id="4ERQEDB1o4O" role="3cqZAp">
                 <node concept="3clFbS" id="4ERQEDB1o4P" role="3clFbx">
                   <node concept="2MkqsV" id="4ERQEDB1o5B" role="3cqZAp">
-                    <node concept="1YBJjd" id="4ERQEDB1o5F" role="2OEOjV">
-                      <ref role="1YBMHb" node="4ERQEDB1fUZ" resolve="baseMethodCall" />
-                    </node>
                     <node concept="Xl_RD" id="4ERQEDB1o5E" role="2MkJ7o">
                       <property role="Xl_RC" value="Calling a method on a non-thread-safe class" />
+                    </node>
+                    <node concept="1YBJjd" id="4ERQEDB1o5F" role="1urrMF">
+                      <ref role="1YBMHb" node="4ERQEDB1fUZ" resolve="baseMethodCall" />
                     </node>
                   </node>
                 </node>
@@ -739,11 +741,11 @@
                     <node concept="3clFbJ" id="34zgNsMI$gE" role="3cqZAp">
                       <node concept="3clFbS" id="34zgNsMI$gF" role="3clFbx">
                         <node concept="a7r0C" id="4ERQEDB1o5I" role="3cqZAp">
-                          <node concept="1YBJjd" id="4ERQEDB1o5M" role="2OEOjV">
-                            <ref role="1YBMHb" node="4ERQEDB1fUZ" resolve="baseMethodCall" />
-                          </node>
                           <node concept="Xl_RD" id="4ERQEDB1o5L" role="a7wSD">
                             <property role="Xl_RC" value="Calling a method on a potentially non-thread-safe class" />
+                          </node>
+                          <node concept="1YBJjd" id="4ERQEDB1o5M" role="1urrMF">
+                            <ref role="1YBMHb" node="4ERQEDB1fUZ" resolve="baseMethodCall" />
                           </node>
                         </node>
                       </node>
@@ -766,7 +768,7 @@
                                         <ref role="3cqZAo" node="34zgNsMI$gX" resolve="it" />
                                       </node>
                                       <node concept="3TrEf2" id="34zgNsMI$gW" role="2OqNvi">
-                                        <ref role="3Tt5mk" to="tpee:g7uigIF" />
+                                        <ref role="3Tt5mk" to="tpee:g7uigIF" resolve="classifier" />
                                       </node>
                                     </node>
                                   </node>
@@ -817,12 +819,14 @@
                       </node>
                       <node concept="2OqwBi" id="M1_F_ceZY0" role="2Oq$k0">
                         <node concept="3TrEf2" id="M1_F_ceZY1" role="2OqNvi">
-                          <ref role="3Tt5mk" to="tpee:6LFqxSRBTg7" />
+                          <ref role="3Tt5mk" to="tpee:6LFqxSRBTg7" resolve="method" />
                         </node>
                         <node concept="1PxgMI" id="M1_F_ceZY3" role="2Oq$k0">
-                          <ref role="1m5ApE" to="tpee:6LFqxSRBTg4" resolve="LocalMethodCall" />
                           <node concept="1YBJjd" id="M1_F_ceZY4" role="1m5AlR">
                             <ref role="1YBMHb" node="4ERQEDB1fUZ" resolve="baseMethodCall" />
+                          </node>
+                          <node concept="chp4Y" id="714IaVdGZ7m" role="3oSUPX">
+                            <ref role="cht4Q" to="tpee:6LFqxSRBTg4" resolve="LocalMethodCall" />
                           </node>
                         </node>
                       </node>
@@ -839,9 +843,11 @@
                     <node concept="10Nm6u" id="34zgNsMHGGY" role="3uHU7w" />
                     <node concept="2OqwBi" id="34zgNsMHGGZ" role="3uHU7B">
                       <node concept="1PxgMI" id="34zgNsMHGH0" role="2Oq$k0">
-                        <ref role="1m5ApE" to="tpee:6LFqxSRBTg4" resolve="LocalMethodCall" />
                         <node concept="1YBJjd" id="34zgNsMHGH1" role="1m5AlR">
                           <ref role="1YBMHb" node="4ERQEDB1fUZ" resolve="baseMethodCall" />
+                        </node>
+                        <node concept="chp4Y" id="714IaVdGZ7k" role="3oSUPX">
+                          <ref role="cht4Q" to="tpee:6LFqxSRBTg4" resolve="LocalMethodCall" />
                         </node>
                       </node>
                       <node concept="3CFZ6_" id="34zgNsMHGH2" role="2OqNvi">
@@ -859,17 +865,21 @@
                       <ref role="ehGHo" to="tpee:fzclF8t" resolve="InstanceMethodDeclaration" />
                     </node>
                     <node concept="1PxgMI" id="M1_F_ceZYL" role="33vP2m">
-                      <ref role="1m5ApE" to="tpee:fzclF8t" resolve="InstanceMethodDeclaration" />
                       <node concept="2OqwBi" id="4ERQEDB1o9o" role="1m5AlR">
                         <node concept="1PxgMI" id="4ERQEDB1o9p" role="2Oq$k0">
-                          <ref role="1m5ApE" to="tpee:6LFqxSRBTg4" resolve="LocalMethodCall" />
                           <node concept="1YBJjd" id="4ERQEDB1o9q" role="1m5AlR">
                             <ref role="1YBMHb" node="4ERQEDB1fUZ" resolve="baseMethodCall" />
                           </node>
+                          <node concept="chp4Y" id="714IaVdGZ7c" role="3oSUPX">
+                            <ref role="cht4Q" to="tpee:6LFqxSRBTg4" resolve="LocalMethodCall" />
+                          </node>
                         </node>
                         <node concept="3TrEf2" id="4ERQEDB1o9r" role="2OqNvi">
-                          <ref role="3Tt5mk" to="tpee:6LFqxSRBTg7" />
+                          <ref role="3Tt5mk" to="tpee:6LFqxSRBTg7" resolve="method" />
                         </node>
+                      </node>
+                      <node concept="chp4Y" id="714IaVdGZ7g" role="3oSUPX">
+                        <ref role="cht4Q" to="tpee:fzclF8t" resolve="InstanceMethodDeclaration" />
                       </node>
                     </node>
                   </node>
@@ -933,11 +943,11 @@
                 <node concept="3clFbJ" id="4ERQEDB1AMY" role="3cqZAp">
                   <node concept="3clFbS" id="4ERQEDB1AMZ" role="3clFbx">
                     <node concept="2MkqsV" id="4ERQEDB1ANj" role="3cqZAp">
-                      <node concept="1YBJjd" id="4ERQEDB1ANk" role="2OEOjV">
-                        <ref role="1YBMHb" node="4ERQEDB1fUZ" resolve="baseMethodCall" />
-                      </node>
                       <node concept="Xl_RD" id="4ERQEDB1ANl" role="2MkJ7o">
                         <property role="Xl_RC" value="Calling a method on a non-thread-safe shared object" />
+                      </node>
+                      <node concept="1YBJjd" id="4ERQEDB1ANk" role="1urrMF">
+                        <ref role="1YBMHb" node="4ERQEDB1fUZ" resolve="baseMethodCall" />
                       </node>
                     </node>
                   </node>
@@ -964,11 +974,11 @@
                   </node>
                 </node>
                 <node concept="a7r0C" id="4ERQEDB1o9R" role="3cqZAp">
-                  <node concept="1YBJjd" id="4ERQEDB1o9S" role="2OEOjV">
-                    <ref role="1YBMHb" node="4ERQEDB1fUZ" resolve="baseMethodCall" />
-                  </node>
                   <node concept="Xl_RD" id="4ERQEDB1o9T" role="a7wSD">
                     <property role="Xl_RC" value="Calling a method on a potentially non-thread-safe shared object" />
+                  </node>
+                  <node concept="1YBJjd" id="4ERQEDB1o9S" role="1urrMF">
+                    <ref role="1YBMHb" node="4ERQEDB1fUZ" resolve="baseMethodCall" />
                   </node>
                 </node>
                 <node concept="3cpWs6" id="4ERQEDB1o9V" role="3cqZAp" />
@@ -996,12 +1006,14 @@
                       </node>
                       <node concept="2OqwBi" id="M1_F_ceva2" role="2Oq$k0">
                         <node concept="3TrEf2" id="M1_F_ceva3" role="2OqNvi">
-                          <ref role="3Tt5mk" to="tpee:6LFqxSRBTg7" />
+                          <ref role="3Tt5mk" to="tpee:6LFqxSRBTg7" resolve="method" />
                         </node>
                         <node concept="1PxgMI" id="M1_F_ceva5" role="2Oq$k0">
-                          <ref role="1m5ApE" to="tpee:6LFqxSRBTg4" resolve="LocalMethodCall" />
                           <node concept="1YBJjd" id="M1_F_ceva6" role="1m5AlR">
                             <ref role="1YBMHb" node="4ERQEDB1fUZ" resolve="baseMethodCall" />
+                          </node>
+                          <node concept="chp4Y" id="714IaVdGZ7i" role="3oSUPX">
+                            <ref role="cht4Q" to="tpee:6LFqxSRBTg4" resolve="LocalMethodCall" />
                           </node>
                         </node>
                       </node>
@@ -1018,9 +1030,11 @@
                     <node concept="10Nm6u" id="34zgNsMHGHa" role="3uHU7w" />
                     <node concept="2OqwBi" id="34zgNsMHGHb" role="3uHU7B">
                       <node concept="1PxgMI" id="34zgNsMHGHc" role="2Oq$k0">
-                        <ref role="1m5ApE" to="tpee:6LFqxSRBTg4" resolve="LocalMethodCall" />
                         <node concept="1YBJjd" id="34zgNsMHGHd" role="1m5AlR">
                           <ref role="1YBMHb" node="4ERQEDB1fUZ" resolve="baseMethodCall" />
+                        </node>
+                        <node concept="chp4Y" id="714IaVdGZ74" role="3oSUPX">
+                          <ref role="cht4Q" to="tpee:6LFqxSRBTg4" resolve="LocalMethodCall" />
                         </node>
                       </node>
                       <node concept="3CFZ6_" id="34zgNsMHGHe" role="2OqNvi">
@@ -1038,24 +1052,28 @@
                       <ref role="ehGHo" to="tpee:fIYIFWa" resolve="StaticMethodDeclaration" />
                     </node>
                     <node concept="1PxgMI" id="M1_F_cevau" role="33vP2m">
-                      <ref role="1m5ApE" to="tpee:fIYIFWa" resolve="StaticMethodDeclaration" />
                       <node concept="2OqwBi" id="4ERQEDB1ob6" role="1m5AlR">
                         <node concept="1PxgMI" id="4ERQEDB1ob7" role="2Oq$k0">
-                          <ref role="1m5ApE" to="tpee:6LFqxSRBTg4" resolve="LocalMethodCall" />
                           <node concept="1YBJjd" id="4ERQEDB1ob8" role="1m5AlR">
                             <ref role="1YBMHb" node="4ERQEDB1fUZ" resolve="baseMethodCall" />
                           </node>
+                          <node concept="chp4Y" id="714IaVdGZ6Y" role="3oSUPX">
+                            <ref role="cht4Q" to="tpee:6LFqxSRBTg4" resolve="LocalMethodCall" />
+                          </node>
                         </node>
                         <node concept="3TrEf2" id="4ERQEDB1ob9" role="2OqNvi">
-                          <ref role="3Tt5mk" to="tpee:6LFqxSRBTg7" />
+                          <ref role="3Tt5mk" to="tpee:6LFqxSRBTg7" resolve="method" />
                         </node>
+                      </node>
+                      <node concept="chp4Y" id="714IaVdGZ77" role="3oSUPX">
+                        <ref role="cht4Q" to="tpee:fIYIFWa" resolve="StaticMethodDeclaration" />
                       </node>
                     </node>
                   </node>
                 </node>
                 <node concept="3cpWs8" id="4ERQEDB1obA" role="3cqZAp">
                   <node concept="3cpWsn" id="4ERQEDB1obB" role="3cpWs9">
-                    <property role="TrG5h" value="declaringClass" />
+                    <property role="TrG5h" value="declaringClassifier" />
                     <node concept="3Tqbb2" id="4ERQEDB1obC" role="1tU5fm">
                       <ref role="ehGHo" to="tpee:fz12cDA" resolve="ClassConcept" />
                     </node>
@@ -1065,7 +1083,7 @@
                       </node>
                       <node concept="2Xjw5R" id="4ERQEDB1obF" role="2OqNvi">
                         <node concept="1xMEDy" id="4ERQEDB1obG" role="1xVPHs">
-                          <node concept="chp4Y" id="4ERQEDB1obH" role="ri$Ld">
+                          <node concept="chp4Y" id="3KhtvfN$fnE" role="ri$Ld">
                             <ref role="cht4Q" to="tpee:fz12cDA" resolve="ClassConcept" />
                           </node>
                         </node>
@@ -1080,14 +1098,14 @@
                   <node concept="1Wc70l" id="4ERQEDB1obQ" role="3clFbw">
                     <node concept="3y3z36" id="4ERQEDB1obR" role="3uHU7B">
                       <node concept="37vLTw" id="3GM_nagT$AA" role="3uHU7B">
-                        <ref role="3cqZAo" node="4ERQEDB1obB" resolve="declaringClass" />
+                        <ref role="3cqZAo" node="4ERQEDB1obB" resolve="declaringClassifier" />
                       </node>
                       <node concept="10Nm6u" id="4ERQEDB1obT" role="3uHU7w" />
                     </node>
                     <node concept="3y3z36" id="4ERQEDB1obU" role="3uHU7w">
                       <node concept="2OqwBi" id="4ERQEDB1obV" role="3uHU7B">
                         <node concept="37vLTw" id="3GM_nagTta6" role="2Oq$k0">
-                          <ref role="3cqZAo" node="4ERQEDB1obB" resolve="declaringClass" />
+                          <ref role="3cqZAo" node="4ERQEDB1obB" resolve="declaringClassifier" />
                         </node>
                         <node concept="3CFZ6_" id="4ERQEDB1obX" role="2OqNvi">
                           <node concept="3CFYIy" id="4ERQEDB1obY" role="3CFYIz">
@@ -1102,25 +1120,25 @@
                 <node concept="3clFbJ" id="4ERQEDB1AMG" role="3cqZAp">
                   <node concept="3clFbS" id="4ERQEDB1AMH" role="3clFbx">
                     <node concept="2MkqsV" id="4ERQEDB1AMV" role="3cqZAp">
-                      <node concept="1YBJjd" id="4ERQEDB1AMW" role="2OEOjV">
-                        <ref role="1YBMHb" node="4ERQEDB1fUZ" resolve="baseMethodCall" />
-                      </node>
                       <node concept="Xl_RD" id="4ERQEDB1AMX" role="2MkJ7o">
-                        <property role="Xl_RC" value="Calling a method on a non-thread-safe class" />
+                        <property role="Xl_RC" value="Calling a method on a non-thread-safe classifier" />
+                      </node>
+                      <node concept="1YBJjd" id="4ERQEDB1AMW" role="1urrMF">
+                        <ref role="1YBMHb" node="4ERQEDB1fUZ" resolve="baseMethodCall" />
                       </node>
                     </node>
                   </node>
                   <node concept="1Wc70l" id="4ERQEDB1AMJ" role="3clFbw">
                     <node concept="3y3z36" id="4ERQEDB1AMK" role="3uHU7B">
                       <node concept="37vLTw" id="3GM_nagTtt7" role="3uHU7B">
-                        <ref role="3cqZAo" node="4ERQEDB1obB" resolve="declaringClass" />
+                        <ref role="3cqZAo" node="4ERQEDB1obB" resolve="declaringClassifier" />
                       </node>
                       <node concept="10Nm6u" id="4ERQEDB1AMM" role="3uHU7w" />
                     </node>
                     <node concept="3y3z36" id="4ERQEDB1AMN" role="3uHU7w">
                       <node concept="2OqwBi" id="4ERQEDB1AMO" role="3uHU7B">
                         <node concept="37vLTw" id="3GM_nagTA0W" role="2Oq$k0">
-                          <ref role="3cqZAo" node="4ERQEDB1obB" resolve="declaringClass" />
+                          <ref role="3cqZAo" node="4ERQEDB1obB" resolve="declaringClassifier" />
                         </node>
                         <node concept="3CFZ6_" id="4ERQEDB1AMQ" role="2OqNvi">
                           <node concept="3CFYIy" id="4ERQEDB1AMU" role="3CFYIz">
@@ -1133,11 +1151,11 @@
                   </node>
                 </node>
                 <node concept="a7r0C" id="4ERQEDB1oc0" role="3cqZAp">
-                  <node concept="1YBJjd" id="4ERQEDB1oc1" role="2OEOjV">
-                    <ref role="1YBMHb" node="4ERQEDB1fUZ" resolve="baseMethodCall" />
-                  </node>
                   <node concept="Xl_RD" id="4ERQEDB1oc2" role="a7wSD">
-                    <property role="Xl_RC" value="Calling a method on a potentially non-thread-safe class" />
+                    <property role="Xl_RC" value="Calling a method on a potentially non-thread-safe classifier" />
+                  </node>
+                  <node concept="1YBJjd" id="4ERQEDB1oc1" role="1urrMF">
+                    <ref role="1YBMHb" node="4ERQEDB1fUZ" resolve="baseMethodCall" />
                   </node>
                 </node>
               </node>
@@ -1213,10 +1231,10 @@
                   <node concept="Xl_RD" id="44JMKrMiuYZ" role="2MkJ7o">
                     <property role="Xl_RC" value="Cannot return from within a parallel for loop using a return statement. Use continue instead" />
                   </node>
-                  <node concept="37vLTw" id="2BHiRxgha6c" role="2OEOjV">
+                  <node concept="37vLTw" id="2BHiRxgha6c" role="1urrMF">
                     <ref role="3cqZAo" node="44JMKrMiuYU" resolve="it" />
                   </node>
-                  <node concept="3Cnw8n" id="44JMKrMiUby" role="2OEOjU">
+                  <node concept="3Cnw8n" id="44JMKrMiUby" role="1urrFz">
                     <ref role="QpYPw" node="44JMKrMiUaW" resolve="TurnReturnToContinue" />
                   </node>
                 </node>
@@ -1286,7 +1304,7 @@
                   <node concept="Xl_RD" id="44JMKrMiFui" role="2MkJ7o">
                     <property role="Xl_RC" value="Hush! Can't break from within a concurrently run branch of the computation." />
                   </node>
-                  <node concept="37vLTw" id="2BHiRxglnVj" role="2OEOjV">
+                  <node concept="37vLTw" id="2BHiRxglnVj" role="1urrMF">
                     <ref role="3cqZAo" node="44JMKrMiFud" resolve="it" />
                   </node>
                 </node>
@@ -1387,14 +1405,16 @@
                   <node concept="3Tqbb2" id="34zgNsMIyDP" role="1tU5fm" />
                   <node concept="2OqwBi" id="34zgNsMIyDQ" role="33vP2m">
                     <node concept="1PxgMI" id="34zgNsMIyDR" role="2Oq$k0">
-                      <ref role="1m5ApE" to="tpee:f$Xjq0c" resolve="ThisExpression" />
                       <node concept="2OqwBi" id="34zgNsMIyDS" role="1m5AlR">
                         <node concept="1YBJjd" id="34zgNsMIyDT" role="2Oq$k0">
                           <ref role="1YBMHb" node="34zgNsMI5Vs" resolve="dotExpression" />
                         </node>
                         <node concept="3TrEf2" id="34zgNsMIyDU" role="2OqNvi">
-                          <ref role="3Tt5mk" to="tpee:hqOq$gm" />
+                          <ref role="3Tt5mk" to="tpee:hqOq$gm" resolve="operand" />
                         </node>
+                      </node>
+                      <node concept="chp4Y" id="714IaVdGZ76" role="3oSUPX">
+                        <ref role="cht4Q" to="tpee:f$Xjq0c" resolve="ThisExpression" />
                       </node>
                     </node>
                     <node concept="3JvlWi" id="34zgNsMIyDV" role="2OqNvi" />
@@ -1410,17 +1430,21 @@
                         <ref role="ehGHo" to="tpee:fz12cDA" resolve="ClassConcept" />
                       </node>
                       <node concept="1PxgMI" id="34zgNsMIzvB" role="33vP2m">
-                        <ref role="1m5ApE" to="tpee:fz12cDA" resolve="ClassConcept" />
                         <node concept="2OqwBi" id="34zgNsMIzuH" role="1m5AlR">
                           <node concept="1PxgMI" id="34zgNsMIzul" role="2Oq$k0">
-                            <ref role="1m5ApE" to="tpee:g7uibYu" resolve="ClassifierType" />
                             <node concept="37vLTw" id="3GM_nagTzn$" role="1m5AlR">
                               <ref role="3cqZAo" node="34zgNsMIyDO" resolve="type" />
                             </node>
+                            <node concept="chp4Y" id="714IaVdGZ7h" role="3oSUPX">
+                              <ref role="cht4Q" to="tpee:g7uibYu" resolve="ClassifierType" />
+                            </node>
                           </node>
                           <node concept="3TrEf2" id="34zgNsMIzuM" role="2OqNvi">
-                            <ref role="3Tt5mk" to="tpee:g7uigIF" />
+                            <ref role="3Tt5mk" to="tpee:g7uigIF" resolve="classifier" />
                           </node>
+                        </node>
+                        <node concept="chp4Y" id="714IaVdGZ7a" role="3oSUPX">
+                          <ref role="cht4Q" to="tpee:fz12cDA" resolve="ClassConcept" />
                         </node>
                       </node>
                     </node>
@@ -1459,12 +1483,12 @@
                         <node concept="Xl_RD" id="34zgNsMItMy" role="2MkJ7o">
                           <property role="Xl_RC" value="Calling a method on a non-thread-safe shared object" />
                         </node>
-                        <node concept="2OqwBi" id="34zgNsMItMz" role="2OEOjV">
+                        <node concept="2OqwBi" id="34zgNsMItMz" role="1urrMF">
                           <node concept="1YBJjd" id="34zgNsMItM$" role="2Oq$k0">
                             <ref role="1YBMHb" node="34zgNsMI5Vs" resolve="dotExpression" />
                           </node>
                           <node concept="3TrEf2" id="34zgNsMItM_" role="2OqNvi">
-                            <ref role="3Tt5mk" to="tpee:hqOqNr4" />
+                            <ref role="3Tt5mk" to="tpee:hqOqNr4" resolve="operation" />
                           </node>
                         </node>
                       </node>
@@ -1491,12 +1515,12 @@
                         <node concept="Xl_RD" id="34zgNsMIuIs" role="a7wSD">
                           <property role="Xl_RC" value="Calling a method on a potentially non-thread-safe shared object" />
                         </node>
-                        <node concept="2OqwBi" id="34zgNsMIuIt" role="2OEOjV">
+                        <node concept="2OqwBi" id="34zgNsMIuIt" role="1urrMF">
                           <node concept="1YBJjd" id="34zgNsMIuIu" role="2Oq$k0">
                             <ref role="1YBMHb" node="34zgNsMI5Vs" resolve="dotExpression" />
                           </node>
                           <node concept="3TrEf2" id="34zgNsMIuIv" role="2OqNvi">
-                            <ref role="3Tt5mk" to="tpee:hqOqNr4" />
+                            <ref role="3Tt5mk" to="tpee:hqOqNr4" resolve="operation" />
                           </node>
                         </node>
                       </node>
@@ -1520,7 +1544,7 @@
                                       <ref role="3cqZAo" node="34zgNsMIuIG" resolve="it" />
                                     </node>
                                     <node concept="3TrEf2" id="34zgNsMIuIF" role="2OqNvi">
-                                      <ref role="3Tt5mk" to="tpee:g7uigIF" />
+                                      <ref role="3Tt5mk" to="tpee:g7uigIF" resolve="classifier" />
                                     </node>
                                   </node>
                                 </node>
@@ -1554,7 +1578,7 @@
                   <ref role="1YBMHb" node="34zgNsMI5Vs" resolve="dotExpression" />
                 </node>
                 <node concept="3TrEf2" id="34zgNsMItKd" role="2OqNvi">
-                  <ref role="3Tt5mk" to="tpee:hqOq$gm" />
+                  <ref role="3Tt5mk" to="tpee:hqOq$gm" resolve="operand" />
                 </node>
               </node>
               <node concept="1mIQ4w" id="34zgNsMItKF" role="2OqNvi">
@@ -1574,18 +1598,20 @@
                   </node>
                   <node concept="2OqwBi" id="34zgNsMIrUy" role="33vP2m">
                     <node concept="1PxgMI" id="34zgNsMIrVM" role="2Oq$k0">
-                      <ref role="1m5ApE" to="tpee:fz7vLUo" resolve="VariableReference" />
                       <node concept="2OqwBi" id="34zgNsMIrVk" role="1m5AlR">
                         <node concept="1YBJjd" id="34zgNsMIrUX" role="2Oq$k0">
                           <ref role="1YBMHb" node="34zgNsMI5Vs" resolve="dotExpression" />
                         </node>
                         <node concept="3TrEf2" id="34zgNsMIrVq" role="2OqNvi">
-                          <ref role="3Tt5mk" to="tpee:hqOq$gm" />
+                          <ref role="3Tt5mk" to="tpee:hqOq$gm" resolve="operand" />
                         </node>
+                      </node>
+                      <node concept="chp4Y" id="714IaVdGZ7b" role="3oSUPX">
+                        <ref role="cht4Q" to="tpee:fz7vLUo" resolve="VariableReference" />
                       </node>
                     </node>
                     <node concept="3TrEf2" id="34zgNsMIrVQ" role="2OqNvi">
-                      <ref role="3Tt5mk" to="tpee:fzcqZ_w" />
+                      <ref role="3Tt5mk" to="tpee:fzcqZ_w" resolve="variableDeclaration" />
                     </node>
                   </node>
                 </node>
@@ -1640,21 +1666,23 @@
                       <node concept="2EnYce" id="34zgNsMI5VZ" role="33vP2m">
                         <node concept="1PxgMI" id="34zgNsMI5W0" role="2Oq$k0">
                           <property role="1BlNFB" value="true" />
-                          <ref role="1m5ApE" to="tpee:g7uibYu" resolve="ClassifierType" />
                           <node concept="2OqwBi" id="34zgNsMI5W1" role="1m5AlR">
                             <node concept="2OqwBi" id="34zgNsMI5XX" role="2Oq$k0">
                               <node concept="1YBJjd" id="34zgNsMI5XA" role="2Oq$k0">
                                 <ref role="1YBMHb" node="34zgNsMI5Vs" resolve="dotExpression" />
                               </node>
                               <node concept="3TrEf2" id="34zgNsMI5Y3" role="2OqNvi">
-                                <ref role="3Tt5mk" to="tpee:hqOq$gm" />
+                                <ref role="3Tt5mk" to="tpee:hqOq$gm" resolve="operand" />
                               </node>
                             </node>
                             <node concept="3JvlWi" id="34zgNsMI5Y5" role="2OqNvi" />
                           </node>
+                          <node concept="chp4Y" id="714IaVdGZ73" role="3oSUPX">
+                            <ref role="cht4Q" to="tpee:g7uibYu" resolve="ClassifierType" />
+                          </node>
                         </node>
                         <node concept="3TrEf2" id="34zgNsMI5W4" role="2OqNvi">
-                          <ref role="3Tt5mk" to="tpee:g7uigIF" />
+                          <ref role="3Tt5mk" to="tpee:g7uigIF" resolve="classifier" />
                         </node>
                       </node>
                     </node>
@@ -1668,9 +1696,11 @@
                             <ref role="ehGHo" to="tpee:fz12cDA" resolve="ClassConcept" />
                           </node>
                           <node concept="1PxgMI" id="34zgNsMIsPI" role="33vP2m">
-                            <ref role="1m5ApE" to="tpee:fz12cDA" resolve="ClassConcept" />
                             <node concept="37vLTw" id="3GM_nagTzaP" role="1m5AlR">
                               <ref role="3cqZAo" node="34zgNsMI5VX" resolve="targetClassifier" />
+                            </node>
+                            <node concept="chp4Y" id="714IaVdGZ70" role="3oSUPX">
+                              <ref role="cht4Q" to="tpee:fz12cDA" resolve="ClassConcept" />
                             </node>
                           </node>
                         </node>
@@ -1709,12 +1739,12 @@
                             <node concept="Xl_RD" id="34zgNsMI5Wk" role="2MkJ7o">
                               <property role="Xl_RC" value="Calling a method on a non-thread-safe shared object" />
                             </node>
-                            <node concept="2OqwBi" id="34zgNsMI5Wl" role="2OEOjV">
+                            <node concept="2OqwBi" id="34zgNsMI5Wl" role="1urrMF">
                               <node concept="1YBJjd" id="34zgNsMI5Y6" role="2Oq$k0">
                                 <ref role="1YBMHb" node="34zgNsMI5Vs" resolve="dotExpression" />
                               </node>
                               <node concept="3TrEf2" id="34zgNsMI5Wn" role="2OqNvi">
-                                <ref role="3Tt5mk" to="tpee:hqOqNr4" />
+                                <ref role="3Tt5mk" to="tpee:hqOqNr4" resolve="operation" />
                               </node>
                             </node>
                           </node>
@@ -1753,12 +1783,12 @@
                         <node concept="Xl_RD" id="34zgNsMI5X4" role="a7wSD">
                           <property role="Xl_RC" value="Calling a method on a potentially non-thread-safe shared object" />
                         </node>
-                        <node concept="2OqwBi" id="34zgNsMI5X5" role="2OEOjV">
+                        <node concept="2OqwBi" id="34zgNsMI5X5" role="1urrMF">
                           <node concept="1YBJjd" id="34zgNsMI5Y7" role="2Oq$k0">
                             <ref role="1YBMHb" node="34zgNsMI5Vs" resolve="dotExpression" />
                           </node>
                           <node concept="3TrEf2" id="34zgNsMI5X7" role="2OqNvi">
-                            <ref role="3Tt5mk" to="tpee:hqOqNr4" />
+                            <ref role="3Tt5mk" to="tpee:hqOqNr4" resolve="operation" />
                           </node>
                         </node>
                       </node>
@@ -1789,7 +1819,7 @@
                                         <ref role="3cqZAo" node="34zgNsMI5Xk" resolve="it" />
                                       </node>
                                       <node concept="3TrEf2" id="34zgNsMI5Xj" role="2OqNvi">
-                                        <ref role="3Tt5mk" to="tpee:g7uigIF" />
+                                        <ref role="3Tt5mk" to="tpee:g7uigIF" resolve="classifier" />
                                       </node>
                                     </node>
                                   </node>
@@ -1821,18 +1851,20 @@
                 <node concept="2OqwBi" id="AVI$K8_YXw" role="3uHU7w">
                   <node concept="2OqwBi" id="AVI$K8_YXx" role="2Oq$k0">
                     <node concept="1PxgMI" id="AVI$K8_YXy" role="2Oq$k0">
-                      <ref role="1m5ApE" to="tpee:fz7vLUo" resolve="VariableReference" />
                       <node concept="2OqwBi" id="AVI$K8_YXz" role="1m5AlR">
                         <node concept="1YBJjd" id="AVI$K8_YX$" role="2Oq$k0">
                           <ref role="1YBMHb" node="34zgNsMI5Vs" resolve="dotExpression" />
                         </node>
                         <node concept="3TrEf2" id="AVI$K8_YX_" role="2OqNvi">
-                          <ref role="3Tt5mk" to="tpee:hqOq$gm" />
+                          <ref role="3Tt5mk" to="tpee:hqOq$gm" resolve="operand" />
                         </node>
+                      </node>
+                      <node concept="chp4Y" id="714IaVdGZ7f" role="3oSUPX">
+                        <ref role="cht4Q" to="tpee:fz7vLUo" resolve="VariableReference" />
                       </node>
                     </node>
                     <node concept="3TrEf2" id="AVI$K8_YXA" role="2OqNvi">
-                      <ref role="3Tt5mk" to="tpee:fzcqZ_w" />
+                      <ref role="3Tt5mk" to="tpee:fzcqZ_w" resolve="variableDeclaration" />
                     </node>
                   </node>
                   <node concept="1mIQ4w" id="AVI$K8_YXB" role="2OqNvi">
@@ -1847,7 +1879,7 @@
                       <ref role="1YBMHb" node="34zgNsMI5Vs" resolve="dotExpression" />
                     </node>
                     <node concept="3TrEf2" id="AVI$K8_YXG" role="2OqNvi">
-                      <ref role="3Tt5mk" to="tpee:hqOq$gm" />
+                      <ref role="3Tt5mk" to="tpee:hqOq$gm" resolve="operand" />
                     </node>
                   </node>
                   <node concept="1mIQ4w" id="AVI$K8_YXH" role="2OqNvi">
@@ -1944,9 +1976,6 @@
                   <node concept="3uibUv" id="34zgNsMIJyp" role="2c44tc">
                     <ref role="3uigEE" to="wyt6:~String" resolve="String" />
                   </node>
-                </node>
-                <node concept="2c44tf" id="34zgNsMIJyr" role="HW$Y0">
-                  <node concept="17QB3L" id="34zgNsMIJyt" role="2c44tc" />
                 </node>
                 <node concept="3Tqbb2" id="34zgNsMIuHK" role="HW$YZ">
                   <ref role="ehGHo" to="tpee:g7uibYu" resolve="ClassifierType" />

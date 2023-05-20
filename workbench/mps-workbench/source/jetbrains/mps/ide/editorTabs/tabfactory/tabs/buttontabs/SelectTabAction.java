@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,15 +18,15 @@ package jetbrains.mps.ide.editorTabs.tabfactory.tabs.buttontabs;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionPlaces;
 import com.intellij.openapi.actionSystem.ActionPopupMenu;
+import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CustomShortcutSet;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.actionSystem.KeyboardShortcut;
 import com.intellij.openapi.actionSystem.ToggleAction;
-import jetbrains.mps.ide.ModelReadAction;
 import jetbrains.mps.ide.editorTabs.TabColorProvider;
 import jetbrains.mps.ide.editorTabs.tabfactory.NodeChangeCallback;
-import jetbrains.mps.ide.icons.IconManager;
+import jetbrains.mps.ide.icons.GlobalIconManager;
 import jetbrains.mps.project.Project;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SNode;
@@ -74,38 +74,35 @@ class SelectTabAction extends ToggleAction {
 
   @Override
   public void setSelected(AnActionEvent e, boolean state) {
-    myProject.getModelAccess().runReadAction(new Runnable() {
-      @Override
-      public void run() {
-        List<SNodeReference> nodeRefs = myTab.getEditorNodes();
-        ArrayList<SNode> nodes = new ArrayList<>();
-        for (SNodeReference r : nodeRefs) {
-          SNode n = r.resolve(myProject.getRepository());
-          if (n != null) {
-            nodes.add(n);
-          }
+    myProject.getModelAccess().runReadAction(() -> {
+      List<SNodeReference> nodeRefs = myTab.getEditorNodes();
+      ArrayList<SNode> nodes = new ArrayList<>();
+      for (SNodeReference r : nodeRefs) {
+        SNode n = r.resolve(myProject.getRepository());
+        if (n != null) {
+          nodes.add(n);
         }
-        if (nodes.size() == 1) {
-          myCallback.changeNode(nodes.get(0).getReference());
-          return;
-        }
+      }
+      if (nodes.size() == 1) {
+        myCallback.changeNode(nodes.get(0).getReference());
+        return;
+      }
 
-        Component component = myTab.getComponentForPopup();
+      Component component = myTab.getComponentForPopup();
 
-        DefaultActionGroup group = getGotoGroup(nodes);
-        ActionPopupMenu popup = ActionManager.getInstance().createActionPopupMenu(ActionPlaces.UNKNOWN, group);
-        JPopupMenu popupMenu = popup.getComponent();
-        popupMenu.show(component, 0, 0);
+      DefaultActionGroup group = getGotoGroup(nodes);
+      ActionPopupMenu popup = ActionManager.getInstance().createActionPopupMenu(ActionPlaces.UNKNOWN, group);
+      JPopupMenu popupMenu = popup.getComponent();
+      popupMenu.show(component, 0, 0);
 
-        TabColorProvider tabColorProvider = myTab.getColorProvider();
-        if (tabColorProvider != null && popupMenu.getComponents().length == nodes.size()) {
-          for (int i = 0; i < nodes.size(); i++) {
-            SNode node = nodes.get(i);
-            Component menuItem = popupMenu.getComponents()[i];
-            Color color = tabColorProvider.getNodeColor(node);// WTF - TCP.getAspectColor takes SNodeReference, while TCP.getNodeColor - SNode
-            if (color != null) {
-              menuItem.setForeground(color);
-            }
+      TabColorProvider tabColorProvider = myTab.getColorProvider();
+      if (tabColorProvider != null && popupMenu.getComponents().length == nodes.size()) {
+        for (int i = 0; i < nodes.size(); i++) {
+          SNode node = nodes.get(i);
+          Component menuItem = popupMenu.getComponents()[i];
+          Color color = tabColorProvider.getNodeColor(node);// WTF - TCP.getAspectColor takes SNodeReference, while TCP.getNodeColor - SNode
+          if (color != null) {
+            menuItem.setForeground(color);
           }
         }
       }
@@ -127,8 +124,13 @@ class SelectTabAction extends ToggleAction {
         continue;
       }
       added.add(root);
-      final NodeChangeRunnable delegate = new NodeChangeRunnable(node.getReference(), myCallback);
-      result.add(new ModelReadAction(getActionName(node), "", IconManager.getIconFor(root), delegate));
+      final SNodeReference nodePtr = node.getReference();
+      result.add(new AnAction(getActionName(node), "", GlobalIconManager.getInstance().getIconFor(root)) {
+        @Override
+        public void actionPerformed(AnActionEvent anActionEvent) {
+          myCallback.changeNode(nodePtr);
+        }
+      });
     }
     return result;
   }

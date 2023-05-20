@@ -4,6 +4,7 @@ package jetbrains.mps.samples.ActionWithProgress.plugin;
 
 import jetbrains.mps.workbench.action.BaseAction;
 import javax.swing.Icon;
+import jetbrains.mps.workbench.action.ActionAccess;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import java.util.Map;
 import com.intellij.openapi.project.Project;
@@ -28,7 +29,7 @@ public class ModalProgressAction_Action extends BaseAction {
   public ModalProgressAction_Action() {
     super("ModalProgressAction", "", ICON);
     this.setIsAlwaysVisible(false);
-    this.setExecuteOutsideCommand(false);
+    this.setActionAccess(ActionAccess.UNDO_PROJECT);
   }
   @Override
   public boolean isDumbAware() {
@@ -55,12 +56,12 @@ public class ModalProgressAction_Action extends BaseAction {
   }
   @Override
   public void doExecute(@NotNull final AnActionEvent event, final Map<String, Object> _params) {
-    // Indicates whether the progress dialog has the'Cancel' option 
+    // Indicates whether the progress dialog has the'Cancel' option
     boolean canBeCanceled = true;
 
-    // This is a common modal task. It can't be sent to the background, but can be canceled  
-    // Your code needs to frequently check if the process has been canceled (between every calculation steps)  
-    // and handle yourself all steps to revert the action 
+    // This is a common modal task. It can't be sent to the background, but can be canceled
+    // Your code needs to frequently check if the process has been canceled (between every calculation steps)
+    // and handle yourself all steps to revert the action
     final Task.Modal modalTask = new Task.Modal(event.getData(CommonDataKeys.PROJECT), "Modal cancelable task", canBeCanceled) {
       @Override
       public void run(@NotNull final ProgressIndicator indicator) {
@@ -70,16 +71,16 @@ public class ModalProgressAction_Action extends BaseAction {
         adapter.start("Progress in progress...", 9);
         int stepValue = 1;
 
-        // a normal step 
+        // a normal step
         adapter.step("Do simple work...");
         ModalProgressAction_Action.this.doWork(event);
         adapter.advance(stepValue);
-        // Check if progress is canceled 
+        // Check if progress is canceled
         if (adapter.isCanceled()) {
           return;
         }
 
-        // ReadAction in step is ok 
+        // ReadAction in step is ok
         repository.getModelAccess().runReadAction(new Runnable() {
           public void run() {
             adapter.step("Do some work with Read Lock...");
@@ -91,7 +92,7 @@ public class ModalProgressAction_Action extends BaseAction {
           return;
         }
 
-        // WriteAction in step is ok 
+        // WriteAction in step is ok
         repository.getModelAccess().runWriteAction(new Runnable() {
           public void run() {
             adapter.step("Do some work with Write Lock...");
@@ -111,18 +112,10 @@ public class ModalProgressAction_Action extends BaseAction {
           return;
         }
 
-        // The correct way to call command with progress is as follows 
-        // The dialog might not show up if the method for the usual read & write locks are used 
+        // The correct way to call command with progress is as follows
+        // The dialog might not show up if the method for the usual read & write locks are used
         adapter.step("Do some work in command in EDT...");
-        WaitForProgressToShow.runOrInvokeAndWaitAboveProgress(new Runnable() {
-          public void run() {
-            repository.getModelAccess().executeCommand(new Runnable() {
-              public void run() {
-                ModalProgressAction_Action.this.doWork(event);
-              }
-            });
-          }
-        }, ModalityState.defaultModalityState());
+        WaitForProgressToShow.runOrInvokeAndWaitAboveProgress(() -> repository.getModelAccess().executeCommand(() -> ModalProgressAction_Action.this.doWork(event)), ModalityState.defaultModalityState());
 
         adapter.advance(stepValue);
         if (adapter.isCanceled()) {
@@ -130,14 +123,12 @@ public class ModalProgressAction_Action extends BaseAction {
         }
 
         adapter.step("Do some work with Read Lock in EDT using IDEA API...");
-        WaitForProgressToShow.runOrInvokeAndWaitAboveProgress(new Runnable() {
-          public void run() {
-            repository.getModelAccess().runReadAction(new Runnable() {
-              public void run() {
-                ModalProgressAction_Action.this.doWork(event);
-              }
-            });
-          }
+        WaitForProgressToShow.runOrInvokeAndWaitAboveProgress(() -> {
+          repository.getModelAccess().runReadAction(new Runnable() {
+            public void run() {
+              ModalProgressAction_Action.this.doWork(event);
+            }
+          });
         });
 
         adapter.advance(stepValue);
@@ -160,7 +151,7 @@ public class ModalProgressAction_Action extends BaseAction {
           return;
         }
 
-        // Any EDT access lock brokes normal progress behaviour 
+        // Any EDT access lock brokes normal progress behaviour
         adapter.step("Do some work with Write Lock in EDT using jdk...");
         repository.getModelAccess().runWriteInEDT(new Runnable() {
           public void run() {
@@ -175,7 +166,7 @@ public class ModalProgressAction_Action extends BaseAction {
           return;
         }
 
-        // Any EDT access lock brokes normal progress behaviour 
+        // Any EDT access lock brokes normal progress behaviour
 
         ModalProgressAction_Action.this.doWork(event);
 
@@ -192,18 +183,14 @@ public class ModalProgressAction_Action extends BaseAction {
       @Override
       public void onCancel() {
         super.onCancel();
-        // Needs to handle reverting changes for all the finished steps 
-        // This method does not interrupt the steps - steps must be either short or have such interruption capability 
+        // Needs to handle reverting changes for all the finished steps
+        // This method does not interrupt the steps - steps must be either short or have such interruption capability
       }
     };
 
-    // The execute() method of actions must be very quick 
-    // so every long calculation must be invoked outside of this method like this: 
-    ApplicationManager.getApplication().invokeLater(new Runnable() {
-      public void run() {
-        ProgressManager.getInstance().run(modalTask);
-      }
-    });
+    // The execute() method of actions must be very quick
+    // so every long calculation must be invoked outside of this method like this:
+    ApplicationManager.getApplication().invokeLater(() -> ProgressManager.getInstance().run(modalTask));
   }
   private void block(CyclicBarrier barrier, final AnActionEvent event) {
     try {
@@ -213,11 +200,11 @@ public class ModalProgressAction_Action extends BaseAction {
     }
   }
   private void doWork(final AnActionEvent event) {
-    // 42 because it is ultimate answer to everything =) 
+    // 42 because it is ultimate answer to everything =)
     ModalProgressAction_Action.this.fib(44, event);
   }
   private int fib(int n, final AnActionEvent event) {
-    // Very ineffective implementation with exponential time complexity 
+    // Very ineffective implementation with exponential time complexity
     if (n < 1) {
       throw new IllegalArgumentException();
     }

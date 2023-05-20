@@ -1,67 +1,168 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1164879751025:jetbrains.mps.baseLanguage.structure.TryCatchStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/5351203823916750322:jetbrains.mps.baseLanguage.structure.TryUniversalStatement" />
+  <root nodeRef="r:bbc844ac-dcda-4460-9717-8eb5d64b4778(jetbrains.mps.execution.impl.configurations.tests.commands.sandbox2@tests)/3879137142820985113">
+    <file name="UsingLangTestCase_Test.java">
+      <node id="3879137142820985113" at="21,35,22,60" concept="4" />
+      <node id="3879137142820985162" at="26,44,27,35" concept="1" />
+      <node id="3879137142820985113" at="32,52,33,19" concept="4" />
+      <node id="3879137142820985751" at="36,46,37,40" concept="1" />
+      <node id="3879137142820985208" at="37,40,38,32" concept="1" />
+      <node id="3879137142820985113" at="18,0,20,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="3879137142820985113" at="21,0,24,0" concept="0" trace="UsingLangTestCase_Test#()V" />
+      <node id="3879137142820985113" at="32,0,35,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="3879137142820985162" at="25,0,29,0" concept="2" trace="test_asdf#()V" />
+      <node id="3879137142820985162" at="36,0,40,0" concept="2" trace="test_asdf#()V" />
+      <scope id="3879137142820985113" at="21,35,22,60" />
+      <scope id="3879137142820985162" at="26,44,27,35" />
+      <scope id="3879137142820985113" at="32,52,33,19" />
+      <scope id="3879137142820985162" at="36,46,38,32" />
+      <scope id="3879137142820985113" at="21,0,24,0" />
+      <scope id="3879137142820985113" at="32,0,35,0">
+        <var name="owner" id="3879137142820985113" />
+      </scope>
+      <scope id="3879137142820985162" at="25,0,29,0" />
+      <scope id="3879137142820985162" at="36,0,40,0" />
+      <unit id="3879137142820985113" at="30,0,42,0" name="jetbrains.mps.execution.impl.configurations.tests.commands.sandbox2.UsingLangTestCase_Test$TestBody" />
+      <unit id="3879137142820985113" at="16,0,43,0" name="jetbrains.mps.execution.impl.configurations.tests.commands.sandbox2.UsingLangTestCase_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:bbc844ac-dcda-4460-9717-8eb5d64b4778(jetbrains.mps.execution.impl.configurations.tests.commands.sandbox2@tests)/4414733712821357918">
+    <file name="ReadingPropertyTestCase_Test_Test.java">
+      <node id="4414733712821357918" at="22,46,23,60" concept="4" />
+      <node id="4414733712821357919" at="27,45,28,36" concept="1" />
+      <node id="4414733712821357918" at="33,52,34,19" concept="4" />
+      <node id="5101378672992592588" at="37,47,38,163" concept="1" />
+      <node id="4414733712821357922" at="38,163,39,32" concept="1" />
+      <node id="4414733712821357918" at="19,0,21,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="4414733712821357918" at="22,0,25,0" concept="0" trace="ReadingPropertyTestCase_Test_Test#()V" />
+      <node id="4414733712821357918" at="33,0,36,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="4414733712821357919" at="26,0,30,0" concept="2" trace="test_test1#()V" />
+      <node id="4414733712821357919" at="37,0,41,0" concept="2" trace="test_test1#()V" />
+      <scope id="4414733712821357918" at="22,46,23,60" />
+      <scope id="4414733712821357919" at="27,45,28,36" />
+      <scope id="4414733712821357918" at="33,52,34,19" />
+      <scope id="4414733712821357919" at="37,47,39,32" />
+      <scope id="4414733712821357918" at="22,0,25,0" />
+      <scope id="4414733712821357918" at="33,0,36,0">
+        <var name="owner" id="4414733712821357918" />
+      </scope>
+      <scope id="4414733712821357919" at="26,0,30,0" />
+      <scope id="4414733712821357919" at="37,0,41,0" />
+      <unit id="4414733712821357918" at="31,0,43,0" name="jetbrains.mps.execution.impl.configurations.tests.commands.sandbox2.ReadingPropertyTestCase_Test_Test$TestBody" />
+      <unit id="4414733712821357918" at="17,0,44,0" name="jetbrains.mps.execution.impl.configurations.tests.commands.sandbox2.ReadingPropertyTestCase_Test_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:bbc844ac-dcda-4460-9717-8eb5d64b4778(jetbrains.mps.execution.impl.configurations.tests.commands.sandbox2@tests)/5101378672993280081">
+    <file name="PropertyIsAvailaibleInMPSTestCase_Test.java">
+      <node id="5101378672993280081" at="20,51,21,60" concept="4" />
+      <node id="5101378672993280082" at="25,45,26,36" concept="1" />
+      <node id="5101378672993280081" at="31,52,32,19" concept="4" />
+      <node id="5101378672993280256" at="35,47,36,64" concept="1" />
+      <node id="5101378672993280081" at="17,0,19,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="5101378672993280081" at="20,0,23,0" concept="0" trace="PropertyIsAvailaibleInMPSTestCase_Test#()V" />
+      <node id="5101378672993280081" at="31,0,34,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5101378672993280082" at="35,0,38,0" concept="2" trace="test_test1#()V" />
+      <node id="5101378672993280082" at="24,0,28,0" concept="2" trace="test_test1#()V" />
+      <scope id="5101378672993280081" at="20,51,21,60" />
+      <scope id="5101378672993280082" at="25,45,26,36" />
+      <scope id="5101378672993280081" at="31,52,32,19" />
+      <scope id="5101378672993280082" at="35,47,36,64" />
+      <scope id="5101378672993280081" at="20,0,23,0" />
+      <scope id="5101378672993280081" at="31,0,34,0">
+        <var name="owner" id="5101378672993280081" />
+      </scope>
+      <scope id="5101378672993280082" at="35,0,38,0" />
+      <scope id="5101378672993280082" at="24,0,28,0" />
+      <unit id="5101378672993280081" at="29,0,40,0" name="jetbrains.mps.execution.impl.configurations.tests.commands.sandbox2.PropertyIsAvailaibleInMPSTestCase_Test$TestBody" />
+      <unit id="5101378672993280081" at="15,0,41,0" name="jetbrains.mps.execution.impl.configurations.tests.commands.sandbox2.PropertyIsAvailaibleInMPSTestCase_Test" />
+    </file>
+  </root>
   <root nodeRef="r:bbc844ac-dcda-4460-9717-8eb5d64b4778(jetbrains.mps.execution.impl.configurations.tests.commands.sandbox2@tests)/6339244025082034140">
     <file name="FailedTestCase_Test_Test.java">
-      <node id="6339244025082034140" at="14,45,15,152" concept="0" />
-      <node id="6339244025082034140" at="15,152,16,137" concept="0" />
-      <node id="6339244025082055707" at="21,47,22,31" concept="0" />
-      <node id="6339244025082055679" at="21,0,24,0" concept="1" trace="test_test1#()V" />
-      <node id="6339244025082034140" at="13,0,18,0" concept="1" trace="test_test1#()V" />
-      <scope id="6339244025082055679" at="21,47,22,31" />
-      <scope id="6339244025082034140" at="14,45,16,137" />
-      <scope id="6339244025082055679" at="21,0,24,0" />
-      <scope id="6339244025082034140" at="13,0,18,0" />
-      <unit id="6339244025082034140" at="19,0,27,0" name="jetbrains.mps.execution.impl.configurations.tests.commands.sandbox2.FailedTestCase_Test_Test$TestBody" />
-      <unit id="6339244025082034140" at="11,0,28,0" name="jetbrains.mps.execution.impl.configurations.tests.commands.sandbox2.FailedTestCase_Test_Test" />
+      <node id="6339244025082034140" at="20,37,21,60" concept="4" />
+      <node id="6339244025082055679" at="25,45,26,36" concept="1" />
+      <node id="6339244025082034140" at="31,52,32,19" concept="4" />
+      <node id="6339244025082055707" at="35,47,36,31" concept="1" />
+      <node id="6339244025082034140" at="17,0,19,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="6339244025082034140" at="20,0,23,0" concept="0" trace="FailedTestCase_Test_Test#()V" />
+      <node id="6339244025082034140" at="31,0,34,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="6339244025082055679" at="35,0,38,0" concept="2" trace="test_test1#()V" />
+      <node id="6339244025082055679" at="24,0,28,0" concept="2" trace="test_test1#()V" />
+      <scope id="6339244025082034140" at="20,37,21,60" />
+      <scope id="6339244025082055679" at="25,45,26,36" />
+      <scope id="6339244025082034140" at="31,52,32,19" />
+      <scope id="6339244025082055679" at="35,47,36,31" />
+      <scope id="6339244025082034140" at="20,0,23,0" />
+      <scope id="6339244025082034140" at="31,0,34,0">
+        <var name="owner" id="6339244025082034140" />
+      </scope>
+      <scope id="6339244025082055679" at="35,0,38,0" />
+      <scope id="6339244025082055679" at="24,0,28,0" />
+      <unit id="6339244025082034140" at="29,0,40,0" name="jetbrains.mps.execution.impl.configurations.tests.commands.sandbox2.FailedTestCase_Test_Test$TestBody" />
+      <unit id="6339244025082034140" at="15,0,41,0" name="jetbrains.mps.execution.impl.configurations.tests.commands.sandbox2.FailedTestCase_Test_Test" />
     </file>
   </root>
   <root nodeRef="r:bbc844ac-dcda-4460-9717-8eb5d64b4778(jetbrains.mps.execution.impl.configurations.tests.commands.sandbox2@tests)/6339244025082972090">
     <file name="WaitingTestCase_Test_Test.java">
-      <node id="6339244025082972090" at="14,45,15,152" concept="0" />
-      <node id="6339244025082972090" at="15,152,16,138" concept="0" />
-      <node id="6339244025082972090" at="19,45,20,152" concept="0" />
-      <node id="6339244025082972090" at="20,152,21,138" concept="0" />
-      <node id="6339244025083038086" at="27,11,28,27" concept="0" />
-      <node id="6339244025082972148" at="30,7,31,32" concept="0" />
-      <node id="6339244025083026122" at="33,47,34,32" concept="0" />
-      <node id="6339244025083026119" at="33,0,36,0" concept="1" trace="test_test2#()V" />
-      <node id="6339244025083038561" at="26,47,30,7" concept="2" />
-      <node id="6339244025082972090" at="13,0,18,0" concept="1" trace="test_test1#()V" />
-      <node id="6339244025082972090" at="18,0,23,0" concept="1" trace="test_test2#()V" />
-      <node id="6339244025082972091" at="26,0,33,0" concept="1" trace="test_test1#()V" />
-      <scope id="6339244025083038557" at="29,0,29,40">
+      <node id="6339244025082972090" at="20,38,21,60" concept="4" />
+      <node id="6339244025082972091" at="25,45,26,36" concept="1" />
+      <node id="6339244025082972090" at="31,52,32,19" concept="4" />
+      <node id="6339244025083038086" at="36,11,37,27" concept="1" />
+      <node id="6339244025082972148" at="39,7,40,32" concept="1" />
+      <node id="6339244025082972090" at="17,0,19,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="6339244025082972090" at="20,0,23,0" concept="0" trace="WaitingTestCase_Test_Test#()V" />
+      <node id="6339244025082972090" at="31,0,34,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="6339244025082972091" at="24,0,28,0" concept="2" trace="test_test1#()V" />
+      <node id="6339244025083038561" at="35,47,39,7" concept="5" />
+      <node id="6339244025082972091" at="35,0,42,0" concept="2" trace="test_test1#()V" />
+      <scope id="6339244025083038558" at="38,40,38,40" />
+      <scope id="6339244025082972090" at="20,38,21,60" />
+      <scope id="6339244025082972091" at="25,45,26,36" />
+      <scope id="6339244025082972090" at="31,52,32,19" />
+      <scope id="6339244025083038562" at="36,11,37,27" />
+      <scope id="6339244025083038557" at="38,7,39,7">
         <var name="e" id="6339244025083038559" />
       </scope>
-      <scope id="6339244025083038558" at="29,40,29,40" />
-      <scope id="6339244025083038562" at="27,11,28,27" />
-      <scope id="6339244025083026119" at="33,47,34,32" />
-      <scope id="6339244025082972090" at="14,45,16,138" />
-      <scope id="6339244025082972090" at="19,45,21,138" />
-      <scope id="6339244025083026119" at="33,0,36,0" />
-      <scope id="6339244025082972090" at="13,0,18,0" />
-      <scope id="6339244025082972090" at="18,0,23,0" />
-      <scope id="6339244025082972091" at="26,47,31,32" />
-      <scope id="6339244025082972091" at="26,0,33,0" />
-      <unit id="6339244025082972090" at="24,0,39,0" name="jetbrains.mps.execution.impl.configurations.tests.commands.sandbox2.WaitingTestCase_Test_Test$TestBody" />
-      <unit id="6339244025082972090" at="11,0,40,0" name="jetbrains.mps.execution.impl.configurations.tests.commands.sandbox2.WaitingTestCase_Test_Test" />
+      <scope id="6339244025082972090" at="20,0,23,0" />
+      <scope id="6339244025082972090" at="31,0,34,0">
+        <var name="owner" id="6339244025082972090" />
+      </scope>
+      <scope id="6339244025082972091" at="24,0,28,0" />
+      <scope id="6339244025082972091" at="35,47,40,32" />
+      <scope id="6339244025082972091" at="35,0,42,0" />
+      <unit id="6339244025082972090" at="29,0,44,0" name="jetbrains.mps.execution.impl.configurations.tests.commands.sandbox2.WaitingTestCase_Test_Test$TestBody" />
+      <unit id="6339244025082972090" at="15,0,45,0" name="jetbrains.mps.execution.impl.configurations.tests.commands.sandbox2.WaitingTestCase_Test_Test" />
     </file>
   </root>
   <root nodeRef="r:bbc844ac-dcda-4460-9717-8eb5d64b4778(jetbrains.mps.execution.impl.configurations.tests.commands.sandbox2@tests)/6937584626643047380">
     <file name="SimpleTestCase_Test_Test.java">
-      <node id="6937584626643047380" at="14,45,15,152" concept="0" />
-      <node id="6937584626643047380" at="15,152,16,137" concept="0" />
-      <node id="6937584626643053816" at="21,47,22,32" concept="0" />
-      <node id="6937584626643053783" at="21,0,24,0" concept="1" trace="test_test1#()V" />
-      <node id="6937584626643047380" at="13,0,18,0" concept="1" trace="test_test1#()V" />
-      <scope id="6937584626643053783" at="21,47,22,32" />
-      <scope id="6937584626643047380" at="14,45,16,137" />
-      <scope id="6937584626643053783" at="21,0,24,0" />
-      <scope id="6937584626643047380" at="13,0,18,0" />
-      <unit id="6937584626643047380" at="19,0,27,0" name="jetbrains.mps.execution.impl.configurations.tests.commands.sandbox2.SimpleTestCase_Test_Test$TestBody" />
-      <unit id="6937584626643047380" at="11,0,28,0" name="jetbrains.mps.execution.impl.configurations.tests.commands.sandbox2.SimpleTestCase_Test_Test" />
+      <node id="6937584626643047380" at="20,37,21,60" concept="4" />
+      <node id="6937584626643053783" at="25,45,26,36" concept="1" />
+      <node id="6937584626643047380" at="31,52,32,19" concept="4" />
+      <node id="6937584626643053816" at="35,47,36,32" concept="1" />
+      <node id="6937584626643047380" at="17,0,19,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="6937584626643047380" at="20,0,23,0" concept="0" trace="SimpleTestCase_Test_Test#()V" />
+      <node id="6937584626643047380" at="31,0,34,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="6937584626643053783" at="35,0,38,0" concept="2" trace="test_test1#()V" />
+      <node id="6937584626643053783" at="24,0,28,0" concept="2" trace="test_test1#()V" />
+      <scope id="6937584626643047380" at="20,37,21,60" />
+      <scope id="6937584626643053783" at="25,45,26,36" />
+      <scope id="6937584626643047380" at="31,52,32,19" />
+      <scope id="6937584626643053783" at="35,47,36,32" />
+      <scope id="6937584626643047380" at="20,0,23,0" />
+      <scope id="6937584626643047380" at="31,0,34,0">
+        <var name="owner" id="6937584626643047380" />
+      </scope>
+      <scope id="6937584626643053783" at="35,0,38,0" />
+      <scope id="6937584626643053783" at="24,0,28,0" />
+      <unit id="6937584626643047380" at="29,0,40,0" name="jetbrains.mps.execution.impl.configurations.tests.commands.sandbox2.SimpleTestCase_Test_Test$TestBody" />
+      <unit id="6937584626643047380" at="15,0,41,0" name="jetbrains.mps.execution.impl.configurations.tests.commands.sandbox2.SimpleTestCase_Test_Test" />
     </file>
   </root>
 </debug-info>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <root>
+    <file name="ActionAspectDescriptorImpl.java">
+      <unit at="14,0,40,0" name="jetbrains.mps.lang.text.actions.ActionAspectDescriptorImpl" />
+    </file>
+  </root>
+  <root nodeRef="r:cbc33f39-aa37-40a5-b44c-ec98a558ab36(jetbrains.mps.lang.text.actions)/7005103847466616952">
+    <file name="WordHandlers_PastePostProcessor_0.java">
+      <node id="7005103847466617115" at="14,50,15,28" concept="5" />
+      <node id="7005103847466617184" at="18,49,19,72" concept="1" />
+      <node id="7005103847466617115" at="23,0,24,0" concept="6" trace="Word$Dn" />
+      <node id="7005103847466617115" at="13,0,17,0" concept="3" trace="getApplicableConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="7005103847466617115" at="17,0,21,0" concept="3" trace="postProcessNode#(Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <scope id="7005103847466617115" at="14,50,15,28" />
+      <scope id="7005103847466617117" at="18,49,19,72" />
+      <scope id="7005103847466617115" at="13,0,17,0" />
+      <scope id="7005103847466617115" at="17,0,21,0">
+        <var name="pastedNode" id="7005103847466617115" />
+      </scope>
+      <unit id="7005103847466617115" at="22,0,25,0" name="jetbrains.mps.lang.text.actions.WordHandlers_PastePostProcessor_0$CONCEPTS" />
+      <unit id="7005103847466617115" at="12,0,26,0" name="jetbrains.mps.lang.text.actions.WordHandlers_PastePostProcessor_0" />
+    </file>
+  </root>
+  <root nodeRef="r:cbc33f39-aa37-40a5-b44c-ec98a558ab36(jetbrains.mps.lang.text.actions)/9189109070801858719">
+    <file name="TextualFactories.java">
+      <node id="9189109070801859182" at="20,7,21,35" concept="4" />
+      <node id="9189109070801859591" at="22,66,23,127" concept="1" />
+      <node id="9189109070801862550" at="23,127,24,115" concept="1" />
+      <node id="9189109070801862640" at="24,115,25,119" concept="1" />
+      <node id="3129707072769713332" at="32,7,33,35" concept="4" />
+      <node id="2396155348568127208" at="34,69,35,75" concept="1" />
+      <node id="3129707072769713421" at="35,75,36,166" concept="1" />
+      <node id="1094247804558658411" at="43,7,44,35" concept="4" />
+      <node id="1094247804558658418" at="45,64,46,148" concept="1" />
+      <node id="6746006958027564869" at="53,7,54,35" concept="4" />
+      <node id="6746006958027564872" at="55,73,56,129" concept="1" />
+      <node id="9189109070801858719" at="63,0,64,0" concept="6" trace="Letter$kd" />
+      <node id="9189109070801858719" at="64,0,65,0" concept="6" trace="Paragraph$XF" />
+      <node id="9189109070801858719" at="65,0,66,0" concept="6" trace="Line$yC" />
+      <node id="9189109070801858719" at="66,0,67,0" concept="6" trace="IndentedPoint$BF" />
+      <node id="9189109070801858719" at="70,0,71,0" concept="6" trace="underlined$XqDm" />
+      <node id="9189109070801858719" at="71,0,72,0" concept="6" trace="bold$Xqbk" />
+      <node id="9189109070801858719" at="72,0,73,0" concept="6" trace="italic$Xqql" />
+      <node id="9189109070801858719" at="73,0,74,0" concept="6" trace="indentation$8ZOp" />
+      <node id="1094247804558658411" at="44,35,47,9" concept="2" />
+      <node id="6746006958027564869" at="54,35,57,9" concept="2" />
+      <node id="3129707072769713332" at="33,35,37,9" concept="2" />
+      <node id="9189109070801859182" at="21,35,26,9" concept="2" />
+      <node id="1094247804558658411" at="42,102,48,7" concept="0" />
+      <node id="6746006958027564869" at="52,102,58,7" concept="0" />
+      <node id="3129707072769713332" at="31,102,38,7" concept="0" />
+      <node id="9189109070801859182" at="19,102,27,7" concept="0" />
+      <node id="1094247804558658408" at="42,0,50,0" concept="3" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <node id="6746006958027564752" at="52,0,60,0" concept="3" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <node id="3129707072769713286" at="31,0,40,0" concept="3" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <node id="9189109070801858976" at="19,0,29,0" concept="3" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <scope id="1094247804558658413" at="45,64,46,148" />
+      <scope id="6746006958027564871" at="55,73,56,129" />
+      <scope id="3129707072769713334" at="34,69,36,166" />
+      <scope id="9189109070801859184" at="22,66,25,119" />
+      <scope id="1094247804558658411" at="43,7,47,9">
+        <var name="l" id="1094247804558658411" />
+      </scope>
+      <scope id="6746006958027564869" at="53,7,57,9">
+        <var name="p" id="6746006958027564869" />
+      </scope>
+      <scope id="3129707072769713332" at="32,7,37,9">
+        <var name="p" id="3129707072769713332" />
+      </scope>
+      <scope id="9189109070801859182" at="20,7,26,9">
+        <var name="l" id="9189109070801859182" />
+      </scope>
+      <scope id="1094247804558658408" at="42,102,48,7" />
+      <scope id="6746006958027564752" at="52,102,58,7" />
+      <scope id="3129707072769713286" at="31,102,38,7" />
+      <scope id="9189109070801858976" at="19,102,27,7" />
+      <scope id="1094247804558658408" at="42,0,50,0">
+        <var name="enclosingNode" id="1094247804558658408" />
+        <var name="index" id="1094247804558658408" />
+        <var name="model" id="1094247804558658408" />
+        <var name="newNode" id="1094247804558658408" />
+        <var name="sampleNode" id="1094247804558658408" />
+      </scope>
+      <scope id="6746006958027564752" at="52,0,60,0">
+        <var name="enclosingNode" id="6746006958027564752" />
+        <var name="index" id="6746006958027564752" />
+        <var name="model" id="6746006958027564752" />
+        <var name="newNode" id="6746006958027564752" />
+        <var name="sampleNode" id="6746006958027564752" />
+      </scope>
+      <scope id="3129707072769713286" at="31,0,40,0">
+        <var name="enclosingNode" id="3129707072769713286" />
+        <var name="index" id="3129707072769713286" />
+        <var name="model" id="3129707072769713286" />
+        <var name="newNode" id="3129707072769713286" />
+        <var name="sampleNode" id="3129707072769713286" />
+      </scope>
+      <scope id="9189109070801858976" at="19,0,29,0">
+        <var name="enclosingNode" id="9189109070801858976" />
+        <var name="index" id="9189109070801858976" />
+        <var name="model" id="9189109070801858976" />
+        <var name="newNode" id="9189109070801858976" />
+        <var name="sampleNode" id="9189109070801858976" />
+      </scope>
+      <unit id="9189109070801858719" at="62,0,68,0" name="jetbrains.mps.lang.text.actions.TextualFactories$CONCEPTS" />
+      <unit id="9189109070801858719" at="69,0,75,0" name="jetbrains.mps.lang.text.actions.TextualFactories$PROPS" />
+      <unit id="1094247804558658408" at="41,0,51,0" name="jetbrains.mps.lang.text.actions.TextualFactories$NodeFactory_1094247804558658408" />
+      <unit id="6746006958027564752" at="51,0,61,0" name="jetbrains.mps.lang.text.actions.TextualFactories$NodeFactory_6746006958027564752" />
+      <unit id="3129707072769713286" at="30,0,41,0" name="jetbrains.mps.lang.text.actions.TextualFactories$NodeFactory_3129707072769713286" />
+      <unit id="9189109070801858976" at="18,0,30,0" name="jetbrains.mps.lang.text.actions.TextualFactories$NodeFactory_9189109070801858976" />
+      <unit id="9189109070801858719" at="17,0,76,0" name="jetbrains.mps.lang.text.actions.TextualFactories" />
+    </file>
+  </root>
+</debug-info>
+

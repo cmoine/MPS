@@ -4,18 +4,18 @@ package jetbrains.mps.make.unittest;
 
 import java.util.Iterator;
 import jetbrains.mps.internal.collections.runtime.Sequence;
-import junit.framework.Assert;
+import org.junit.Assert;
 
 public class Utils {
   public Utils() {
   }
-  public static <T> void assertSameSequence(Iterable<T> expexted, Iterable<T> actual) {
-    Iterator<T> expIt = Sequence.fromIterable(expexted).iterator();
+  public static <T> void assertSameSequence(Iterable<T> expected, Iterable<T> actual) {
+    Iterator<T> expIt = Sequence.fromIterable(expected).iterator();
     Iterator<T> testIt = Sequence.fromIterable(actual).iterator();
     while (expIt.hasNext() && testIt.hasNext()) {
       Assert.assertEquals(expIt.next(), testIt.next());
     }
-    Assert.assertFalse(expIt.hasNext());
-    Assert.assertFalse(testIt.hasNext());
+    Assert.assertFalse("expected more items", expIt.hasNext());
+    Assert.assertFalse("more items than expected", testIt.hasNext());
   }
 }

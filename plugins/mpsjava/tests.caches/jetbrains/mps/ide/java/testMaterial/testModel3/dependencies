@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<dependenciesRoot>
-  <dependency className="jetbrains.mps.ide.java.testMaterial.testModel3.Cl" file="Cl.java">
-    <classNode dependClassName="jetbrains.mps.ide.java.testMaterial.testModel3.sub.MyClass" />
-  </dependency>
-</dependenciesRoot>
-

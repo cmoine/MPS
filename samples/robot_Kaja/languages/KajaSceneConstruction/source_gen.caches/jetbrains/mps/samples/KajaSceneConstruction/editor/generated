@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="7cure2obqh9wuwqpmhn3xhov0f9ztxy" />
+<product version="3" modelHash="630ya9bw521wvwuy5pfa3ebq1to6xcn">
+  <files names="BuildWall_Editor.java:BuildWall_EditorBuilder_a.java:DestroyWall_Editor.java:DestroyWall_EditorBuilder_a.java:DropMark_Editor.java:DropMark_EditorBuilder_a.java:EditorAspectDescriptorImpl.java:PickMark_Editor.java:PickMark_EditorBuilder_a.java:Position.java:Position_ComponentBuilder_a.java:SceneBuildingCommands.java" />
+</product>
 

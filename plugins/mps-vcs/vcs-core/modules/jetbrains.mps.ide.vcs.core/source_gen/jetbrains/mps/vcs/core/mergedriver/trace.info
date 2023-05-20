@@ -1,0 +1,953 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144231330558:jetbrains.mps.baseLanguage.structure.ForStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144226303539:jetbrains.mps.baseLanguage.structure.ForeachStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1163670490218:jetbrains.mps.baseLanguage.structure.SwitchStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1164991038168:jetbrains.mps.baseLanguage.structure.ThrowStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/5351203823916750322:jetbrains.mps.baseLanguage.structure.TryUniversalStatement" />
+  <root nodeRef="r:a178d3c3-970e-4352-b61c-4e55abc3bc24(jetbrains.mps.vcs.core.mergedriver)/1578360511938004001">
+    <file name="FileContent.java">
+      <node id="1578360511938160823" at="21,0,22,0" concept="3" trace="myFile" />
+      <node id="1578360511938380203" at="22,0,23,0" concept="3" trace="myData" />
+      <node id="1578360511938161321" at="24,52,25,18" concept="2" />
+      <node id="1578360511941890180" at="25,18,26,51" concept="8" />
+      <node id="1578360511941930241" at="27,9,28,37" concept="2" />
+      <node id="1578360511941899509" at="29,15,30,37" concept="2" />
+      <node id="7995818696743898288" at="36,33,37,46" concept="9" />
+      <node id="1578360511938206046" at="40,25,41,18" concept="9" />
+      <node id="1578360511938383795" at="44,27,45,18" concept="9" />
+      <node id="8635503400119467193" at="50,40,51,44" concept="9" />
+      <node id="8635503400119460437" at="56,61,57,40" concept="9" />
+      <node id="8635503400119720044" at="61,31,62,17" concept="9" />
+      <node id="7995818696743902210" at="66,27,67,27" concept="9" />
+      <node id="7995818696743902331" at="71,27,72,27" concept="9" />
+      <node id="8635503400119724945" at="77,31,78,28" concept="9" />
+      <node id="1578360511938206042" at="40,0,43,0" concept="7" trace="getFile#()Ljava/io/File;" />
+      <node id="1578360511938383790" at="44,0,47,0" concept="7" trace="getData#()[B" />
+      <node id="8635503400119718379" at="60,0,64,0" concept="7" trace="isReadOnly#()Z" />
+      <node id="7995818696743902206" at="65,0,69,0" concept="7" trace="delete#()Z" />
+      <node id="7995818696743902327" at="70,0,74,0" concept="7" trace="exists#()Z" />
+      <node id="1578360511941889359" at="26,51,31,5" concept="16" />
+      <node id="7995818696743898167" at="34,0,39,0" concept="7" trace="getStreamName#()Ljava/lang/String;" />
+      <node id="1578360511938823416" at="48,0,53,0" concept="7" trace="openInputStream#()Ljava/io/InputStream;" />
+      <node id="8635503400119458904" at="54,0,59,0" concept="7" trace="openOutputStream#()Ljava/io/OutputStream;" />
+      <node id="8635503400119723314" at="75,0,80,0" concept="7" trace="getLocation#()Ljava/lang/String;" />
+      <node id="1578360511938161313" at="24,0,33,0" concept="1" trace="FileContent#(Ljava/io/File;)V" />
+      <scope id="1578360511941889361" at="27,9,28,37" />
+      <scope id="1578360511941889362" at="29,15,30,37" />
+      <scope id="7995818696743898170" at="36,33,37,46" />
+      <scope id="1578360511938206045" at="40,25,41,18" />
+      <scope id="1578360511938383794" at="44,27,45,18" />
+      <scope id="1578360511938823419" at="50,40,51,44" />
+      <scope id="8635503400119458911" at="56,61,57,40" />
+      <scope id="8635503400119718383" at="61,31,62,17" />
+      <scope id="7995818696743902209" at="66,27,67,27" />
+      <scope id="7995818696743902330" at="71,27,72,27" />
+      <scope id="8635503400119723319" at="77,31,78,28" />
+      <scope id="1578360511938206042" at="40,0,43,0" />
+      <scope id="1578360511938383790" at="44,0,47,0" />
+      <scope id="8635503400119718379" at="60,0,64,0" />
+      <scope id="7995818696743902206" at="65,0,69,0" />
+      <scope id="7995818696743902327" at="70,0,74,0" />
+      <scope id="7995818696743898167" at="34,0,39,0" />
+      <scope id="1578360511938823416" at="48,0,53,0" />
+      <scope id="8635503400119458904" at="54,0,59,0" />
+      <scope id="8635503400119723314" at="75,0,80,0" />
+      <scope id="1578360511938161317" at="24,52,31,5">
+        <var name="stream" id="1578360511941890181" />
+      </scope>
+      <scope id="1578360511938161313" at="24,0,33,0">
+        <var name="file" id="1578360511938161320" />
+      </scope>
+      <unit id="1578360511938004001" at="19,0,81,0" name="jetbrains.mps.vcs.core.mergedriver.FileContent" />
+    </file>
+  </root>
+  <root nodeRef="r:a178d3c3-970e-4352-b61c-4e55abc3bc24(jetbrains.mps.vcs.core.mergedriver)/3342666646761693517">
+    <file name="MergeDriverMain.java">
+      <node id="3342666646761693518" at="29,0,30,0" concept="12" trace="CONFLICT_START" />
+      <node id="3342666646761693522" at="30,0,31,0" concept="12" trace="CONFLICT_END" />
+      <node id="3342666646761693526" at="31,0,32,0" concept="12" trace="CONFLICT_SEPARATOR" />
+      <node id="3342666646761693530" at="32,0,33,0" concept="12" trace="LOG_PROPERTY" />
+      <node id="3342666646761693888" at="33,0,34,0" concept="12" trace="SVN_OPTION" />
+      <node id="3342666646761693892" at="34,0,35,0" concept="12" trace="GIT_OPTION" />
+      <node id="8704175735081753807" at="35,0,36,0" concept="12" trace="NO_FILETYPE" />
+      <node id="3342666646761693545" at="38,59,39,53" concept="8" />
+      <node id="3342666646761693552" at="39,53,40,49" concept="8" />
+      <node id="3342666646761693559" at="40,49,41,61" concept="8" />
+      <node id="3342666646761693568" at="42,26,43,88" concept="2" />
+      <node id="3342666646761693575" at="43,88,44,21" concept="2" />
+      <node id="8704175735081290696" at="45,5,46,30" concept="8" />
+      <node id="8704175735081876393" at="47,39,48,22" concept="2" />
+      <node id="3342666646761693584" at="49,5,50,38" concept="8" />
+      <node id="3342666646761693592" at="50,38,51,41" concept="8" />
+      <node id="3342666646761693600" at="51,41,52,39" concept="8" />
+      <node id="3342666646761693608" at="52,39,53,30" concept="8" />
+      <node id="3342666646761693616" at="55,29,56,68" concept="2" />
+      <node id="3342666646761693629" at="56,68,57,64" concept="2" />
+      <node id="3342666646761693661" at="59,44,60,23" concept="2" />
+      <node id="3342666646761693667" at="61,12,62,21" concept="2" />
+      <node id="3342666646761693670" at="62,21,63,13" concept="9" />
+      <node id="3342666646761693671" at="64,5,65,19" concept="2" />
+      <node id="1117348409516357327" at="65,19,66,89" concept="8" />
+      <node id="2550617152346052654" at="66,89,67,0" concept="11" />
+      <node id="3342666646761693673" at="67,0,68,117" concept="8" />
+      <node id="429607733396471927" at="68,117,69,94" concept="2" />
+      <node id="7008686950533341264" at="69,94,70,54" concept="8" />
+      <node id="3342666646761693690" at="70,54,71,75" concept="8" />
+      <node id="3342666646761693699" at="72,25,73,84" concept="2" />
+      <node id="3643952839784884520" at="74,5,75,0" concept="11" />
+      <node id="7008686950533347126" at="77,37,78,25" concept="9" />
+      <node id="3643952839784774972" at="80,9,81,152" concept="8" />
+      <node id="1117348409516363766" at="81,152,82,23" concept="2" />
+      <node id="3342666646761693716" at="82,23,83,24" concept="2" />
+      <node id="3643952839784926695" at="85,41,86,83" concept="10" />
+      <node id="3643952839784924723" at="86,83,87,20" concept="8" />
+      <node id="3643952839784924862" at="88,9,89,48" concept="2" />
+      <node id="3643952839784925092" at="91,44,92,22" concept="9" />
+      <node id="3643952839784924784" at="95,39,96,26" concept="2" />
+      <node id="3643952839784924977" at="97,29,98,26" concept="2" />
+      <node id="3643952839784918789" at="99,15,100,32" concept="2" />
+      <node id="3643952839784925099" at="101,5,102,17" concept="9" />
+      <node id="3342666646761693742" at="107,38,108,95" concept="9" />
+      <node id="3342666646761693750" at="111,41,112,25" concept="9" />
+      <node id="3342666646761693758" at="115,27,116,18" concept="9" />
+      <node id="8704175735085294492" at="121,17,122,139" concept="9" />
+      <node id="3342666646761693786" at="126,19,127,73" concept="9" />
+      <node id="3342666646761693799" at="130,34,131,33" concept="9" />
+      <node id="3342666646761693805" at="132,29,133,44" concept="9" />
+      <node id="3342666646761693810" at="134,14,135,32" concept="9" />
+      <node id="3342666646761693821" at="138,57,139,54" concept="8" />
+      <node id="3342666646761693828" at="140,53,141,13" concept="9" />
+      <node id="4576581317021438992" at="142,5,143,45" concept="8" />
+      <node id="4576581317021473966" at="143,45,144,36" concept="2" />
+      <node id="4576581317021705325" at="144,36,145,73" concept="8" />
+      <node id="4576581317021726090" at="145,73,146,43" concept="2" />
+      <node id="4576581317021764981" at="146,43,147,73" concept="10" />
+      <node id="4576581317021785078" at="147,73,148,98" concept="10" />
+      <node id="4576581317021795902" at="148,98,149,99" concept="10" />
+      <node id="4576581317021820430" at="149,99,150,112" concept="10" />
+      <node id="4576581317021511604" at="150,112,151,30" concept="2" />
+      <node id="3342666646761693534" at="36,0,38,0" concept="1" trace="MergeDriverMain#()V" />
+      <node id="8704175735081610030" at="46,30,49,5" concept="6" />
+      <node id="3342666646761693665" at="61,10,64,5" concept="0" />
+      <node id="3342666646761693697" at="71,75,74,5" concept="6" />
+      <node id="7008686950533347124" at="77,0,80,0" concept="7" trace="accept#(Ljava/io/File;)Z" />
+      <node id="3643952839784924981" at="90,46,93,9" concept="6" />
+      <node id="3342666646761693740" at="107,0,110,0" concept="7" trace="select#(Ljava/io/File;)Ljetbrains/mps/vcs/core/mergedriver/FileType;" />
+      <node id="3342666646761693748" at="111,0,114,0" concept="7" trace="accept#(Ljetbrains/mps/vcs/core/mergedriver/FileType;)Z" />
+      <node id="3342666646761693756" at="114,7,117,5" concept="6" />
+      <node id="3342666646761693826" at="139,54,142,5" concept="6" />
+      <node id="3342666646761693566" at="41,61,45,5" concept="6" />
+      <node id="3342666646761693614" at="54,37,58,7" concept="6" />
+      <node id="3643952839784883819" at="75,0,80,9" concept="8" />
+      <node id="3643952839784924901" at="89,48,94,7" concept="4" />
+      <node id="3342666646761693731" at="105,119,114,7" concept="8" />
+      <node id="3342666646761693612" at="53,30,64,5" concept="6" />
+      <node id="3643952839784924677" at="87,20,101,5" concept="16" />
+      <node id="3342666646761693817" at="138,0,153,0" concept="13" trace="configureLog#()V" />
+      <node id="3643952839784918782" at="85,0,104,0" concept="13" trace="hasCRLF#(Ljava/io/File;)Z" />
+      <node id="3342666646761693763" at="117,5,136,5" concept="14" />
+      <node id="3342666646761693727" at="104,0,138,0" concept="13" trace="selectMerger#(Ljetbrains/mps/core/platform/Platform;Ljava/lang/String;null)Ljetbrains/mps/vcs/core/mergedriver/AbstractContentMerger;" />
+      <node id="3342666646761693538" at="38,0,85,0" concept="13" trace="main#([Ljava/lang/String;)V" />
+      <scope id="3342666646761693537" at="36,29,36,29" />
+      <scope id="8704175735085311590" at="119,24,119,24" />
+      <scope id="8704175735085439150" at="120,22,120,22" />
+      <scope id="3342666646761693776" at="123,20,123,20" />
+      <scope id="3342666646761693779" at="124,20,124,20" />
+      <scope id="3342666646761693782" at="125,18,125,18" />
+      <scope id="3342666646761693795" at="128,23,128,23" />
+      <scope id="7965376474570837488" at="129,37,129,37" />
+      <scope id="8704175735081610033" at="47,39,48,22" />
+      <scope id="3342666646761693660" at="59,44,60,23" />
+      <scope id="3342666646761693698" at="72,25,73,84" />
+      <scope id="7008686950533347125" at="77,37,78,25" />
+      <scope id="3643952839784924982" at="91,44,92,22" />
+      <scope id="3643952839784924765" at="95,39,96,26" />
+      <scope id="3643952839784924975" at="97,29,98,26" />
+      <scope id="3643952839784924680" at="99,15,100,32" />
+      <scope id="3342666646761693741" at="107,38,108,95" />
+      <scope id="3342666646761693749" at="111,41,112,25" />
+      <scope id="3342666646761693757" at="115,27,116,18" />
+      <scope id="3342666646761693766" at="121,17,122,139" />
+      <scope id="3342666646761693785" at="126,19,127,73" />
+      <scope id="3342666646761693798" at="130,34,131,33" />
+      <scope id="3342666646761693804" at="132,29,133,44" />
+      <scope id="3342666646761693809" at="134,14,135,32" />
+      <scope id="3342666646761693827" at="140,53,141,13" />
+      <scope id="3342666646761693534" at="36,0,38,0" />
+      <scope id="3342666646761693567" at="42,26,44,21" />
+      <scope id="3342666646761693615" at="55,29,57,64" />
+      <scope id="3342666646761693666" at="61,12,63,13" />
+      <scope id="3643952839784924762" at="95,5,97,5">
+        <var name="e" id="3643952839784924763" />
+      </scope>
+      <scope id="3643952839784924972" at="97,5,99,5">
+        <var name="e" id="3643952839784924973" />
+      </scope>
+      <scope id="7008686950533347124" at="77,0,80,0">
+        <var name="f" id="7008686950533347124" />
+      </scope>
+      <scope id="3643952839784924902" at="90,46,93,9" />
+      <scope id="3342666646761693740" at="107,0,110,0">
+        <var name="f" id="3342666646761693740" />
+      </scope>
+      <scope id="3342666646761693748" at="111,0,114,0">
+        <var name="f" id="3342666646761693748" />
+      </scope>
+      <scope id="3342666646761693613" at="54,37,58,7" />
+      <scope id="3643952839784924901" at="89,48,94,7">
+        <var name="c" id="3643952839784924904" />
+      </scope>
+      <scope id="3643952839784924678" at="88,9,94,7" />
+      <scope id="3342666646761693820" at="138,57,151,30">
+        <var name="fh" id="4576581317021705326" />
+        <var name="logPath" id="3342666646761693822" />
+        <var name="rootLogger" id="4576581317021438993" />
+      </scope>
+      <scope id="3342666646761693817" at="138,0,153,0" />
+      <scope id="3643952839784918785" at="85,41,102,17">
+        <var name="r" id="3643952839784924724" />
+      </scope>
+      <scope id="3643952839784918782" at="85,0,104,0">
+        <var name="f" id="3643952839784918787" />
+      </scope>
+      <scope id="3342666646761693730" at="105,119,136,5">
+        <var name="fileType" id="3342666646761693732" />
+      </scope>
+      <scope id="3342666646761693727" at="104,0,138,0">
+        <var name="files" id="3342666646761693813" />
+        <var name="filetype" id="8704175735081394865" />
+        <var name="mpsPlatform" id="8065933228299585274" />
+      </scope>
+      <scope id="3342666646761693544" at="38,59,83,24">
+        <var name="baseFile" id="3342666646761693585" />
+        <var name="conflictEnd" id="3342666646761693553" />
+        <var name="conflictSeparator" id="3342666646761693560" />
+        <var name="conflictStart" id="3342666646761693546" />
+        <var name="convertCRLF" id="3643952839784883820" />
+        <var name="currentFile" id="3342666646761693593" />
+        <var name="files" id="7008686950533341265" />
+        <var name="filetype" id="8704175735081290699" />
+        <var name="merger" id="3342666646761693691" />
+        <var name="otherFile" id="3342666646761693601" />
+        <var name="overwrite" id="3342666646761693609" />
+        <var name="platform" id="1117348409516357328" />
+        <var name="status" id="3643952839784774973" />
+        <var name="systemPath" id="3342666646761693674" />
+      </scope>
+      <scope id="3342666646761693538" at="38,0,85,0">
+        <var name="args" id="3342666646761693539" />
+      </scope>
+      <unit id="7008686950533347124" at="76,129,80,5" name="jetbrains.mps.vcs.core.mergedriver.MergeDriverMain$1" />
+      <unit id="3342666646761693740" at="106,84,110,5" name="jetbrains.mps.vcs.core.mergedriver.MergeDriverMain$2" />
+      <unit id="3342666646761693748" at="110,21,114,5" name="jetbrains.mps.vcs.core.mergedriver.MergeDriverMain$3" />
+      <unit id="3342666646761693517" at="27,0,154,0" name="jetbrains.mps.vcs.core.mergedriver.MergeDriverMain" />
+    </file>
+  </root>
+  <root nodeRef="r:a178d3c3-970e-4352-b61c-4e55abc3bc24(jetbrains.mps.vcs.core.mergedriver)/3342666646761697466">
+    <file name="AbstractContentMerger.java">
+      <node id="3342666646761697521" at="11,0,12,0" concept="12" trace="MERGED" />
+      <node id="3342666646761697525" at="12,0,13,0" concept="12" trace="CONFLICTS" />
+      <node id="3342666646761697529" at="13,0,14,0" concept="12" trace="FATAL_ERROR" />
+      <node id="3342666646761697492" at="14,0,15,0" concept="3" trace="myConflictStart" />
+      <node id="3342666646761697496" at="15,0,16,0" concept="3" trace="myConflictEnd" />
+      <node id="3342666646761697500" at="16,0,17,0" concept="3" trace="mySeparator" />
+      <node id="3342666646761697479" at="19,92,20,36" concept="2" />
+      <node id="3342666646761697483" at="20,36,21,32" concept="2" />
+      <node id="3342666646761697487" at="21,32,22,28" concept="2" />
+      <node id="3342666646761697533" at="17,0,19,0" concept="1" trace="AbstractContentMerger#()V" />
+      <node id="3342666646761697504" at="24,0,26,0" concept="7" trace="mergeContents#(Ljetbrains/mps/vcs/core/mergedriver/FileContent;Ljetbrains/mps/vcs/core/mergedriver/FileContent;Ljetbrains/mps/vcs/core/mergedriver/FileContent;)Ljetbrains/mps/baseLanguage/tuples/runtime/Tuples/_2;" />
+      <node id="3342666646761697467" at="19,0,24,0" concept="7" trace="setConflictMarks#([B[B[B)V" />
+      <scope id="3342666646761697535" at="17,39,17,39" />
+      <scope id="3342666646761697533" at="17,0,19,0" />
+      <scope id="3342666646761697504" at="24,0,26,0">
+        <var name="baseContent" id="3342666646761697509" />
+        <var name="latestContent" id="3342666646761697515" />
+        <var name="localContent" id="3342666646761697512" />
+      </scope>
+      <scope id="3342666646761697478" at="19,92,22,28" />
+      <scope id="3342666646761697467" at="19,0,24,0">
+        <var name="conflictEnd" id="3342666646761697471" />
+        <var name="conflictStart" id="3342666646761697468" />
+        <var name="separator" id="3342666646761697474" />
+      </scope>
+      <unit id="3342666646761697466" at="9,0,27,0" name="jetbrains.mps.vcs.core.mergedriver.AbstractContentMerger" />
+    </file>
+  </root>
+  <root nodeRef="r:a178d3c3-970e-4352-b61c-4e55abc3bc24(jetbrains.mps.vcs.core.mergedriver)/3342666646761697536">
+    <file name="CompositeMerger.java">
+      <node id="3342666646761697537" at="11,0,12,0" concept="3" trace="myPrimaryMerger" />
+      <node id="3342666646761697540" at="12,0,13,0" concept="3" trace="mySecondaryMerger" />
+      <node id="3342666646761697626" at="13,107,14,36" concept="2" />
+      <node id="3342666646761697630" at="14,36,15,40" concept="2" />
+      <node id="3342666646761697557" at="18,92,19,76" concept="2" />
+      <node id="3342666646761697564" at="19,76,20,78" concept="2" />
+      <node id="3342666646761697589" at="24,129,25,119" concept="8" />
+      <node id="3342666646761697603" at="26,70,27,87" concept="9" />
+      <node id="3342666646761697621" at="28,12,29,27" concept="9" />
+      <node id="3342666646761697619" at="28,10,30,5" concept="0" />
+      <node id="3342666646761697623" at="13,0,17,0" concept="1" trace="CompositeMerger#(Ljetbrains/mps/vcs/core/mergedriver/AbstractContentMerger;Ljetbrains/mps/vcs/core/mergedriver/AbstractContentMerger;)V" />
+      <node id="3342666646761697544" at="17,0,22,0" concept="7" trace="setConflictMarks#([B[B[B)V" />
+      <node id="3342666646761697601" at="25,119,30,5" concept="6" />
+      <node id="3342666646761697572" at="22,0,32,0" concept="7" trace="mergeContents#(Ljetbrains/mps/vcs/core/mergedriver/FileContent;Ljetbrains/mps/vcs/core/mergedriver/FileContent;Ljetbrains/mps/vcs/core/mergedriver/FileContent;)Ljetbrains/mps/baseLanguage/tuples/runtime/Tuples/_2;" />
+      <scope id="3342666646761697602" at="26,70,27,87" />
+      <scope id="3342666646761697620" at="28,12,29,27" />
+      <scope id="3342666646761697625" at="13,107,15,40" />
+      <scope id="3342666646761697556" at="18,92,20,78" />
+      <scope id="3342666646761697623" at="13,0,17,0">
+        <var name="primaryMerger" id="3342666646761697634" />
+        <var name="secondaryMerger" id="3342666646761697636" />
+      </scope>
+      <scope id="3342666646761697544" at="17,0,22,0">
+        <var name="conflictEnd" id="3342666646761697548" />
+        <var name="conflictStart" id="3342666646761697545" />
+        <var name="separator" id="3342666646761697551" />
+      </scope>
+      <scope id="3342666646761697588" at="24,129,30,5">
+        <var name="primaryResult" id="3342666646761697590" />
+      </scope>
+      <scope id="3342666646761697572" at="22,0,32,0">
+        <var name="baseContent" id="3342666646761697573" />
+        <var name="latestContent" id="3342666646761697579" />
+        <var name="localContent" id="3342666646761697576" />
+      </scope>
+      <unit id="3342666646761697536" at="9,0,33,0" name="jetbrains.mps.vcs.core.mergedriver.CompositeMerger" />
+    </file>
+  </root>
+  <root nodeRef="r:a178d3c3-970e-4352-b61c-4e55abc3bc24(jetbrains.mps.vcs.core.mergedriver)/3342666646761697638">
+    <file name="EmptyMerger.java">
+      <node id="3342666646761697660" at="16,129,17,64" concept="9" />
+      <node id="3342666646761697639" at="12,0,14,0" concept="1" trace="EmptyMerger#()V" />
+      <node id="3342666646761697643" at="14,0,19,0" concept="7" trace="mergeContents#(Ljetbrains/mps/vcs/core/mergedriver/FileContent;Ljetbrains/mps/vcs/core/mergedriver/FileContent;Ljetbrains/mps/vcs/core/mergedriver/FileContent;)Ljetbrains/mps/baseLanguage/tuples/runtime/Tuples/_2;" />
+      <scope id="3342666646761697642" at="12,24,12,24" />
+      <scope id="3342666646761697659" at="16,129,17,64" />
+      <scope id="3342666646761697639" at="12,0,14,0" />
+      <scope id="3342666646761697643" at="14,0,19,0">
+        <var name="baseContent" id="3342666646761697649" />
+        <var name="latestContent" id="3342666646761697655" />
+        <var name="localContent" id="3342666646761697652" />
+      </scope>
+      <unit id="3342666646761697638" at="10,0,20,0" name="jetbrains.mps.vcs.core.mergedriver.EmptyMerger" />
+    </file>
+  </root>
+  <root nodeRef="r:a178d3c3-970e-4352-b61c-4e55abc3bc24(jetbrains.mps.vcs.core.mergedriver)/3342666646761697669">
+    <file name="JavaDependenciesMerger.java">
+      <node id="9210249131357204722" at="23,40,24,111" concept="10" />
+      <node id="3342666646761697845" at="29,9,30,61" concept="8" />
+      <node id="1189742592211972237" at="30,61,31,63" concept="8" />
+      <node id="1189742592212008399" at="31,63,32,65" concept="8" />
+      <node id="1189742592212090783" at="32,65,33,0" concept="11" />
+      <node id="1189742592210721327" at="34,62,35,158" concept="2" />
+      <node id="1189742592210752295" at="35,158,36,106" concept="2" />
+      <node id="1189742592210771196" at="36,106,37,142" concept="2" />
+      <node id="3342666646761697860" at="38,7,39,0" concept="11" />
+      <node id="3342666646761697861" at="39,0,40,62" concept="8" />
+      <node id="3342666646761697866" at="40,62,41,34" concept="2" />
+      <node id="3342666646761697870" at="41,34,42,72" concept="9" />
+      <node id="3342666646761697880" at="43,45,44,26" concept="2" />
+      <node id="3342666646761697884" at="44,26,45,18" concept="9" />
+      <node id="9210249131356770766" at="48,108,49,66" concept="8" />
+      <node id="3342666646761697673" at="49,66,50,57" concept="9" />
+      <node id="3342666646761697694" at="52,101,53,60" concept="2" />
+      <node id="1189742592212835666" at="56,99,57,50" concept="8" />
+      <node id="1189742592212847382" at="57,50,58,18" concept="2" />
+      <node id="1189742592212884946" at="58,18,59,14" concept="9" />
+      <node id="1189742592213464803" at="62,101,63,83" concept="10" />
+      <node id="1189742592211103676" at="63,83,64,50" concept="8" />
+      <node id="1189742592211890087" at="64,50,65,45" concept="10" />
+      <node id="1189742592211185467" at="65,45,66,23" concept="2" />
+      <node id="1189742592211919243" at="66,23,67,47" concept="10" />
+      <node id="1189742592211476653" at="67,47,68,23" concept="2" />
+      <node id="1189742592211951940" at="68,23,69,25" concept="10" />
+      <node id="1189742592211556971" at="69,25,70,20" concept="2" />
+      <node id="1189742592211261886" at="70,20,71,32" concept="9" />
+      <node id="3342666646761697822" at="23,0,26,0" concept="1" trace="JavaDependenciesMerger#()V" />
+      <node id="3342666646761697687" at="52,0,55,0" concept="13" trace="saveDependencies#(Ljetbrains/mps/make/java/ModelDependencies;Ljava/io/OutputStream;)V" />
+      <node id="3342666646761697670" at="48,0,52,0" concept="13" trace="loadDependencies#(Ljetbrains/mps/vcs/core/mergedriver/FileContent;)Ljetbrains/mps/make/java/ModelDependencies;" />
+      <node id="1189742592212121072" at="33,0,38,7" concept="6" />
+      <node id="1189742592212735987" at="56,0,61,0" concept="13" trace="union#(Ljava/util/Collection;Ljava/util/Collection;)Ljava/util/LinkedHashSet;" />
+      <node id="1189742592210847460" at="62,0,73,0" concept="13" trace="merge#(Ljava/util/LinkedHashSet;Ljava/util/Collection;)Ljava/util/Collection;" />
+      <node id="3342666646761697843" at="28,129,46,5" concept="16" />
+      <node id="3342666646761697826" at="26,0,48,0" concept="7" trace="mergeContents#(Ljetbrains/mps/vcs/core/mergedriver/FileContent;Ljetbrains/mps/vcs/core/mergedriver/FileContent;Ljetbrains/mps/vcs/core/mergedriver/FileContent;)Ljetbrains/mps/baseLanguage/tuples/runtime/Tuples/_2;" />
+      <scope id="3342666646761697824" at="23,40,24,111" />
+      <scope id="3342666646761697693" at="52,101,53,60" />
+      <scope id="3342666646761697879" at="43,45,45,18" />
+      <scope id="3342666646761697672" at="48,108,50,57">
+        <var name="d" id="9210249131356770767" />
+      </scope>
+      <scope id="3342666646761697822" at="23,0,26,0" />
+      <scope id="1189742592212121074" at="34,62,37,142" />
+      <scope id="3342666646761697876" at="43,5,46,5">
+        <var name="e" id="3342666646761697877" />
+      </scope>
+      <scope id="3342666646761697687" at="52,0,55,0">
+        <var name="deps" id="3342666646761697688" />
+        <var name="out" id="3342666646761697690" />
+      </scope>
+      <scope id="1189742592212735990" at="56,99,59,14">
+        <var name="rv" id="1189742592212835669" />
+      </scope>
+      <scope id="3342666646761697670" at="48,0,52,0">
+        <var name="content" id="3342666646761697682" />
+      </scope>
+      <scope id="1189742592212735987" at="56,0,61,0">
+        <var name="c1" id="1189742592212750674" />
+        <var name="c2" id="1189742592212753945" />
+      </scope>
+      <scope id="1189742592210847463" at="62,101,71,32">
+        <var name="rv" id="1189742592211103677" />
+      </scope>
+      <scope id="1189742592210847460" at="62,0,73,0">
+        <var name="from" id="1189742592210858931" />
+        <var name="to" id="1189742592210859202" />
+      </scope>
+      <scope id="3342666646761697844" at="29,9,42,72">
+        <var name="base" id="3342666646761697846" />
+        <var name="local" id="1189742592211972238" />
+        <var name="out" id="3342666646761697862" />
+        <var name="remote" id="1189742592212008400" />
+      </scope>
+      <scope id="3342666646761697842" at="28,129,46,5" />
+      <scope id="3342666646761697826" at="26,0,48,0">
+        <var name="baseContent" id="3342666646761697832" />
+        <var name="latestContent" id="3342666646761697838" />
+        <var name="localContent" id="3342666646761697835" />
+      </scope>
+      <unit id="3342666646761697669" at="21,0,74,0" name="jetbrains.mps.vcs.core.mergedriver.JavaDependenciesMerger" />
+    </file>
+  </root>
+  <root nodeRef="r:a178d3c3-970e-4352-b61c-4e55abc3bc24(jetbrains.mps.vcs.core.mergedriver)/3342666646761698167">
+    <file name="ModelMerger.java">
+      <node id="3342666646761698167" at="38,0,39,0" concept="12" trace="LOG" />
+      <node id="3342666646761698168" at="39,0,40,0" concept="3" trace="myModelName" />
+      <node id="8704175735083455777" at="40,0,41,0" concept="3" trace="myExtension" />
+      <node id="8065933228299567379" at="41,0,42,0" concept="3" trace="myPlatform" />
+      <node id="8704175735083508921" at="43,62,44,28" concept="2" />
+      <node id="8065933228299567383" at="44,28,45,29" concept="2" />
+      <node id="727509771111617414" at="50,59,51,52" concept="10" />
+      <node id="727509771111547589" at="51,52,52,18" concept="9" />
+      <node id="727509771111567520" at="53,5,54,0" concept="11" />
+      <node id="3342666646761698195" at="54,0,55,42" concept="2" />
+      <node id="3342666646761698208" at="55,42,56,0" concept="11" />
+      <node id="1210573262413328976" at="56,0,57,75" concept="8" />
+      <node id="8704175735084867715" at="58,105,59,49" concept="10" />
+      <node id="8704175735084629057" at="59,49,60,32" concept="2" />
+      <node id="1210573262406678456" at="61,5,62,0" concept="11" />
+      <node id="3818729150937330733" at="63,28,64,36" concept="2" />
+      <node id="3342666646761698209" at="65,5,66,51" concept="8" />
+      <node id="3342666646761698212" at="66,51,67,53" concept="8" />
+      <node id="3342666646761698215" at="67,53,68,55" concept="8" />
+      <node id="3342666646761698262" at="69,73,70,62" concept="9" />
+      <node id="3342666646761698231" at="71,5,72,38" concept="2" />
+      <node id="3342666646761698267" at="72,38,73,0" concept="11" />
+      <node id="3342666646761698268" at="73,0,74,49" concept="8" />
+      <node id="3342666646761698274" at="74,49,75,51" concept="8" />
+      <node id="3342666646761698280" at="75,51,76,53" concept="8" />
+      <node id="3342666646761698288" at="77,94,78,22" concept="10" />
+      <node id="3818729150937330739" at="80,31,81,92" concept="2" />
+      <node id="3342666646761698319" at="82,7,83,62" concept="9" />
+      <node id="3342666646761698339" at="84,5,85,0" concept="11" />
+      <node id="3818729150937330749" at="87,30,88,64" concept="2" />
+      <node id="3342666646761698350" at="89,7,90,108" concept="8" />
+      <node id="3342666646761698369" at="92,46,93,87" concept="9" />
+      <node id="3818729150937330767" at="97,32,98,328" concept="2" />
+      <node id="5893107558717646042" at="99,9,100,64" concept="2" />
+      <node id="3818729150937330815" at="102,32,103,188" concept="2" />
+      <node id="3342666646761698477" at="104,9,105,64" concept="9" />
+      <node id="3818729150937330837" at="108,32,109,104" concept="2" />
+      <node id="3342666646761698432" at="111,14,112,27" concept="8" />
+      <node id="8635503400119823409" at="112,27,113,59" concept="8" />
+      <node id="3818729150937330847" at="114,32,115,77" concept="2" />
+      <node id="8635503400120603855" at="116,9,117,77" concept="2" />
+      <node id="1210573262413844662" at="117,77,118,135" concept="2" />
+      <node id="3818729150937330857" at="120,35,121,57" concept="2" />
+      <node id="1210573262414375608" at="122,11,123,66" concept="9" />
+      <node id="3818729150937330863" at="125,32,126,75" concept="2" />
+      <node id="3342666646761698443" at="127,9,128,57" concept="2" />
+      <node id="3342666646761698448" at="128,57,129,68" concept="9" />
+      <node id="3818729150937330873" at="132,31,133,48" concept="2" />
+      <node id="3342666646761698482" at="135,5,136,0" concept="11" />
+      <node id="3342666646761698483" at="136,0,137,60" concept="9" />
+      <node id="3342666646761698507" at="140,9,141,152" concept="8" />
+      <node id="3818729150937330881" at="143,32,144,56" concept="2" />
+      <node id="3818729150937330891" at="148,31,149,82" concept="2" />
+      <node id="3342666646761698545" at="151,5,152,16" concept="9" />
+      <node id="8788437410273804047" at="155,51,156,71" concept="9" />
+      <node id="8788437410273805102" at="157,5,158,14" concept="9" />
+      <node id="8635503400119074517" at="161,83,162,96" concept="8" />
+      <node id="8635503400119075007" at="163,31,164,18" concept="9" />
+      <node id="1719620988322979799" at="166,9,167,131" concept="8" />
+      <node id="8635503400119187496" at="167,131,168,75" concept="9" />
+      <node id="3818729150937330903" at="170,33,171,48" concept="2" />
+      <node id="4946444090186738023" at="174,33,175,48" concept="2" />
+      <node id="8635503400119190649" at="177,5,178,16" concept="9" />
+      <node id="8635503400120383260" at="181,120,182,86" concept="10" />
+      <node id="8635503400120365770" at="183,49,184,13" concept="9" />
+      <node id="8635503400120215263" at="185,5,186,74" concept="8" />
+      <node id="8635503400120283321" at="187,38,188,13" concept="9" />
+      <node id="8635503400120287148" at="189,5,190,70" concept="8" />
+      <node id="8635503400120288376" at="190,70,191,72" concept="8" />
+      <node id="8635503400120288528" at="191,72,192,74" concept="8" />
+      <node id="8635503400120627967" at="192,74,193,79" concept="10" />
+      <node id="8635503400120392926" at="194,97,195,13" concept="9" />
+      <node id="8635503400120458673" at="196,5,197,152" concept="10" />
+      <node id="8635503400120473058" at="197,152,198,120" concept="10" />
+      <node id="8635503400120411883" at="198,120,199,97" concept="8" />
+      <node id="8635503400120421013" at="200,27,201,63" concept="2" />
+      <node id="8635503400120548586" at="203,109,204,58" concept="8" />
+      <node id="8635503400120451770" at="205,55,206,122" concept="8" />
+      <node id="8635503400120454925" at="206,122,207,39" concept="2" />
+      <node id="8635503400120456373" at="207,39,208,31" concept="2" />
+      <node id="8635503400120585040" at="210,5,211,72" concept="2" />
+      <node id="8635503400120057571" at="211,72,212,11" concept="9" />
+      <node id="8635503400120273423" at="215,38,216,65" concept="8" />
+      <node id="8635503400120273725" at="216,65,217,87" concept="9" />
+      <node id="8635503400120269746" at="218,5,219,16" concept="9" />
+      <node id="8635503400120529081" at="222,24,223,18" concept="9" />
+      <node id="8635503400120533501" at="224,5,225,76" concept="8" />
+      <node id="8635503400120536170" at="226,66,227,62" concept="9" />
+      <node id="8635503400120537543" at="228,5,229,16" concept="9" />
+      <node id="3818729150937330733" at="62,0,65,5" concept="6" />
+      <node id="1210573262409716017" at="68,55,71,5" concept="6" />
+      <node id="3818729150937330739" at="79,12,82,7" concept="6" />
+      <node id="3818729150937330749" at="86,9,89,7" concept="6" />
+      <node id="3342666646761698367" at="92,0,95,0" concept="7" trace="accept#(Ljetbrains/mps/vcs/diff/changes/ModelChange;)Z" />
+      <node id="3818729150937330767" at="96,41,99,9" concept="6" />
+      <node id="3818729150937330815" at="101,14,104,9" concept="6" />
+      <node id="3818729150937330837" at="107,43,110,9" concept="6" />
+      <node id="3818729150937330847" at="113,59,116,9" concept="6" />
+      <node id="3818729150937330857" at="119,34,122,11" concept="6" />
+      <node id="3818729150937330863" at="124,9,127,9" concept="6" />
+      <node id="3818729150937330873" at="131,27,134,7" concept="6" />
+      <node id="3818729150937330881" at="142,29,145,9" concept="6" />
+      <node id="3818729150937330891" at="147,29,150,7" concept="6" />
+      <node id="8788437410273803559" at="154,58,157,5" concept="6" />
+      <node id="8635503400119074676" at="162,96,165,5" concept="6" />
+      <node id="3818729150937330903" at="169,37,172,7" concept="6" />
+      <node id="4946444090186738023" at="173,49,176,7" concept="6" />
+      <node id="8635503400120354881" at="182,86,185,5" concept="6" />
+      <node id="8635503400120058070" at="186,74,189,5" concept="6" />
+      <node id="8635503400120386949" at="193,79,196,5" concept="6" />
+      <node id="8635503400120417457" at="199,97,202,5" concept="6" />
+      <node id="8635503400120528833" at="221,101,224,5" concept="6" />
+      <node id="8635503400120535053" at="225,76,228,5" concept="6" />
+      <node id="8704175735083144930" at="43,0,47,0" concept="1" trace="ModelMerger#(Ljetbrains/mps/core/platform/Platform;Ljava/lang/String;)V" />
+      <node id="727509771111536980" at="49,129,53,5" concept="6" />
+      <node id="8704175735084290965" at="57,75,61,5" concept="6" />
+      <node id="8635503400120269462" at="214,67,218,5" concept="6" />
+      <node id="3342666646761698313" at="79,10,84,5" concept="0" />
+      <node id="3342666646761698358" at="90,108,95,17" concept="8" />
+      <node id="7625602360763903785" at="101,12,106,7" concept="0" />
+      <node id="3342666646761698527" at="141,152,146,7" concept="6" />
+      <node id="8635503400120441457" at="204,58,209,7" concept="6" />
+      <node id="1210573262414249522" at="118,135,124,9" concept="6" />
+      <node id="1210573262411626673" at="154,0,160,0" concept="13" trace="getPersistenceVersion#(Lorg/jetbrains/mps/openapi/model/SModel;)I" />
+      <node id="8635503400120257979" at="214,0,221,0" concept="13" trace="tryInternalModelData#(Lorg/jetbrains/mps/openapi/model/SModel;)Ljetbrains/mps/smodel/DefaultSModel;" />
+      <node id="3342666646761698286" at="76,53,84,5" concept="6" />
+      <node id="8635503400120563423" at="202,5,210,5" concept="5" />
+      <node id="8635503400120491096" at="221,0,231,0" concept="13" trace="tryStuffedProvider#(Ljetbrains/mps/smodel/DefaultSModel;)Ljetbrains/mps/persistence/MetaModelInfoProvider/StuffedMetaModelInfo;" />
+      <node id="7625602360763881831" at="95,17,106,7" concept="6" />
+      <node id="3342666646761698505" at="139,123,151,5" concept="16" />
+      <node id="8635503400119179179" at="165,5,177,5" concept="16" />
+      <node id="3342666646761698490" at="139,0,154,0" concept="7" trace="backup#(Ljetbrains/mps/vcs/core/mergedriver/FileContent;Ljetbrains/mps/vcs/core/mergedriver/FileContent;Ljetbrains/mps/vcs/core/mergedriver/FileContent;)Ljetbrains/mps/baseLanguage/tuples/runtime/Tuples/_2;" />
+      <node id="3342666646761698430" at="111,12,130,7" concept="0" />
+      <node id="8635503400119052002" at="161,0,180,0" concept="13" trace="loadModel#(Ljetbrains/mps/vcs/core/mergedriver/FileContent;Ljava/lang/String;)Lorg/jetbrains/mps/openapi/model/SModel;" />
+      <node id="3342666646761698421" at="106,7,130,7" concept="6" />
+      <node id="8635503400119883002" at="181,0,214,0" concept="13" trace="updateMetaModelInfo#(Lorg/jetbrains/mps/openapi/model/SModel;Lorg/jetbrains/mps/openapi/model/SModel;Lorg/jetbrains/mps/openapi/model/SModel;Lorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <node id="3342666646761698340" at="85,0,135,5" concept="16" />
+      <node id="3342666646761698175" at="47,0,139,0" concept="7" trace="mergeContents#(Ljetbrains/mps/vcs/core/mergedriver/FileContent;Ljetbrains/mps/vcs/core/mergedriver/FileContent;Ljetbrains/mps/vcs/core/mergedriver/FileContent;)Ljetbrains/mps/baseLanguage/tuples/runtime/Tuples/_2;" />
+      <scope id="3818729150937330733" at="63,28,64,36" />
+      <scope id="1210573262409716020" at="69,73,70,62" />
+      <scope id="3342666646761698287" at="77,94,78,22" />
+      <scope id="3818729150937330739" at="80,31,81,92" />
+      <scope id="3818729150937330749" at="87,30,88,64" />
+      <scope id="3342666646761698368" at="92,46,93,87" />
+      <scope id="3818729150937330767" at="97,32,98,328" />
+      <scope id="3818729150937330815" at="102,32,103,188" />
+      <scope id="3818729150937330837" at="108,32,109,104" />
+      <scope id="3818729150937330847" at="114,32,115,77" />
+      <scope id="3818729150937330857" at="120,35,121,57" />
+      <scope id="3818729150937330863" at="125,32,126,75" />
+      <scope id="3818729150937330873" at="132,31,133,48" />
+      <scope id="3818729150937330881" at="143,32,144,56" />
+      <scope id="3818729150937330891" at="148,31,149,82" />
+      <scope id="8788437410273803561" at="155,51,156,71" />
+      <scope id="8635503400119074679" at="163,31,164,18" />
+      <scope id="3818729150937330903" at="170,33,171,48" />
+      <scope id="4946444090186738023" at="174,33,175,48" />
+      <scope id="8635503400120354884" at="183,49,184,13" />
+      <scope id="8635503400120058073" at="187,38,188,13" />
+      <scope id="8635503400120386952" at="194,97,195,13" />
+      <scope id="8635503400120417460" at="200,27,201,63" />
+      <scope id="8635503400120528834" at="222,24,223,18" />
+      <scope id="8635503400120535056" at="226,66,227,62" />
+      <scope id="8704175735083144933" at="43,62,45,29" />
+      <scope id="727509771111536983" at="50,59,52,18" />
+      <scope id="8704175735084290968" at="58,105,60,32" />
+      <scope id="8635503400119179181" at="166,9,168,75">
+        <var name="model" id="1719620988322979800" />
+      </scope>
+      <scope id="8635503400120269463" at="215,38,217,87">
+        <var name="modelData" id="8635503400120273424" />
+      </scope>
+      <scope id="3342666646761698367" at="92,0,95,0">
+        <var name="c" id="3342666646761698367" />
+      </scope>
+      <scope id="3342666646761698425" at="107,43,110,9" />
+      <scope id="3342666646761698473" at="131,27,134,7" />
+      <scope id="3342666646761698528" at="142,29,145,9" />
+      <scope id="3342666646761698539" at="147,29,150,7" />
+      <scope id="8635503400119179184" at="169,37,172,7" />
+      <scope id="4946444090186738022" at="173,49,176,7" />
+      <scope id="8635503400120441460" at="205,55,208,31">
+        <var name="nextInChain" id="8635503400120451771" />
+      </scope>
+      <scope id="8704175735083144930" at="43,0,47,0">
+        <var name="extension" id="8704175735083198129" />
+        <var name="mpsPlatform" id="8065933228299566888" />
+      </scope>
+      <scope id="3342666646761698314" at="79,12,83,62" />
+      <scope id="7625602360763881834" at="96,41,100,64" />
+      <scope id="7625602360763903786" at="101,14,105,64" />
+      <scope id="1210573262414249525" at="119,34,123,66" />
+      <scope id="3342666646761698470" at="131,5,135,5">
+        <var name="e" id="3342666646761698471" />
+      </scope>
+      <scope id="3342666646761698536" at="147,5,151,5">
+        <var name="e" id="3342666646761698537" />
+      </scope>
+      <scope id="1210573262410927419" at="154,58,158,14" />
+      <scope id="8635503400119179182" at="169,5,173,5">
+        <var name="ex" id="8635503400119179186" />
+      </scope>
+      <scope id="4946444090186738021" at="173,5,177,5">
+        <var name="ex" id="4946444090186738026" />
+      </scope>
+      <scope id="8635503400120257982" at="214,67,219,16" />
+      <scope id="3342666646761698506" at="140,9,146,7">
+        <var name="zipModel" id="3342666646761698508" />
+      </scope>
+      <scope id="1210573262411626673" at="154,0,160,0">
+        <var name="model" id="1210573262411047047" />
+      </scope>
+      <scope id="8635503400120563426" at="203,109,209,7">
+        <var name="provider" id="8635503400120548587" />
+      </scope>
+      <scope id="8635503400120257979" at="214,0,221,0">
+        <var name="model" id="8635503400120268836" />
+      </scope>
+      <scope id="8635503400120563423" at="202,5,210,5">
+        <var name="m" id="8635503400120563429" />
+      </scope>
+      <scope id="8635503400120491099" at="221,101,229,16">
+        <var name="p" id="8635503400120533502" />
+      </scope>
+      <scope id="8635503400120491096" at="221,0,231,0">
+        <var name="model" id="8635503400120528284" />
+      </scope>
+      <scope id="3342666646761698504" at="139,123,152,16" />
+      <scope id="3342666646761698490" at="139,0,154,0">
+        <var name="baseContent" id="3342666646761698495" />
+        <var name="latestContent" id="3342666646761698501" />
+        <var name="localContent" id="3342666646761698498" />
+      </scope>
+      <scope id="8635503400119052005" at="161,83,178,16">
+        <var name="modelFactory" id="8635503400119074518" />
+      </scope>
+      <scope id="3342666646761698431" at="111,14,129,68">
+        <var name="resultBytes" id="3342666646761698433" />
+        <var name="resultModel" id="8635503400119823410" />
+      </scope>
+      <scope id="8635503400119052002" at="161,0,180,0">
+        <var name="content" id="8635503400119066033" />
+        <var name="fnameExtension" id="8635503400119068421" />
+      </scope>
+      <scope id="8635503400119883005" at="181,120,212,11">
+        <var name="baseModelInternal" id="8635503400120287149" />
+        <var name="delegate" id="8635503400120411884" />
+        <var name="localModelInternal" id="8635503400120288377" />
+        <var name="remoteModelInternal" id="8635503400120288529" />
+        <var name="resultModelInternal" id="8635503400120215264" />
+      </scope>
+      <scope id="8635503400119883002" at="181,0,214,0">
+        <var name="baseModel" id="8635503400120055691" />
+        <var name="localModel" id="8635503400120056314" />
+        <var name="remoteModel" id="8635503400120056931" />
+        <var name="resultModel" id="8635503400120055141" />
+      </scope>
+      <scope id="3342666646761698341" at="86,9,130,7">
+        <var name="conflictingChangesCount" id="3342666646761698359" />
+        <var name="mergeSession" id="3342666646761698351" />
+      </scope>
+      <scope id="3342666646761698190" at="49,129,137,60">
+        <var name="baseModel" id="3342666646761698210" />
+        <var name="baseP" id="3342666646761698269" />
+        <var name="ext" id="1210573262413328979" />
+        <var name="latestModel" id="3342666646761698216" />
+        <var name="latestP" id="3342666646761698281" />
+        <var name="localModel" id="3342666646761698213" />
+        <var name="localP" id="3342666646761698275" />
+      </scope>
+      <scope id="3342666646761698175" at="47,0,139,0">
+        <var name="baseContent" id="3342666646761698181" />
+        <var name="latestContent" id="3342666646761698187" />
+        <var name="localContent" id="3342666646761698184" />
+      </scope>
+      <unit id="3342666646761698367" at="91,98,95,7" name="jetbrains.mps.vcs.core.mergedriver.ModelMerger$1" />
+      <unit id="3342666646761698167" at="36,0,232,0" name="jetbrains.mps.vcs.core.mergedriver.ModelMerger" />
+    </file>
+  </root>
+  <root nodeRef="r:a178d3c3-970e-4352-b61c-4e55abc3bc24(jetbrains.mps.vcs.core.mergedriver)/3342666646761698548">
+    <file name="SimpleMerger.java">
+      <node id="3342666646761698585" at="17,129,18,55" concept="8" />
+      <node id="3342666646761698590" at="18,55,19,57" concept="8" />
+      <node id="3342666646761698595" at="19,57,20,59" concept="8" />
+      <node id="3342666646761698600" at="20,59,21,0" concept="11" />
+      <node id="3342666646761698603" at="22,45,23,78" concept="9" />
+      <node id="3342666646761698613" at="25,86,26,77" concept="9" />
+      <node id="3342666646761698626" at="27,5,28,78" concept="9" />
+      <node id="3342666646761698555" at="30,62,31,89" concept="9" />
+      <node id="3342666646761698565" at="13,0,15,0" concept="1" trace="SimpleMerger#()V" />
+      <node id="3342666646761698601" at="21,0,24,5" concept="6" />
+      <node id="3342666646761698611" at="24,5,27,5" concept="6" />
+      <node id="3342666646761698549" at="30,0,33,0" concept="13" trace="contentAsString#(Ljetbrains/mps/vcs/core/mergedriver/FileContent;)Ljava/lang/String;" />
+      <node id="3342666646761698568" at="15,0,30,0" concept="7" trace="mergeContents#(Ljetbrains/mps/vcs/core/mergedriver/FileContent;Ljetbrains/mps/vcs/core/mergedriver/FileContent;Ljetbrains/mps/vcs/core/mergedriver/FileContent;)Ljetbrains/mps/baseLanguage/tuples/runtime/Tuples/_2;" />
+      <scope id="3342666646761698567" at="13,30,13,30" />
+      <scope id="3342666646761698602" at="22,45,23,78" />
+      <scope id="3342666646761698612" at="25,86,26,77" />
+      <scope id="3342666646761698554" at="30,62,31,89" />
+      <scope id="3342666646761698565" at="13,0,15,0" />
+      <scope id="3342666646761698549" at="30,0,33,0">
+        <var name="content" id="3342666646761698550" />
+      </scope>
+      <scope id="3342666646761698584" at="17,129,28,78">
+        <var name="baseAsString" id="3342666646761698586" />
+        <var name="latestAsString" id="3342666646761698596" />
+        <var name="localAsString" id="3342666646761698591" />
+      </scope>
+      <scope id="3342666646761698568" at="15,0,30,0">
+        <var name="baseContent" id="3342666646761698574" />
+        <var name="latestContent" id="3342666646761698580" />
+        <var name="localContent" id="3342666646761698577" />
+      </scope>
+      <unit id="3342666646761698548" at="11,0,34,0" name="jetbrains.mps.vcs.core.mergedriver.SimpleMerger" />
+    </file>
+  </root>
+  <root nodeRef="r:a178d3c3-970e-4352-b61c-4e55abc3bc24(jetbrains.mps.vcs.core.mergedriver)/3342666646761698631">
+    <file name="TextMerger.java">
+      <node id="1976943775162628880" at="15,129,16,59" concept="10" />
+      <node id="5885452527076925586" at="16,59,17,16" concept="9" />
+      <node id="3342666646761698715" at="11,0,13,0" concept="1" trace="TextMerger#()V" />
+      <node id="3342666646761698632" at="13,0,19,0" concept="7" trace="mergeContents#(Ljetbrains/mps/vcs/core/mergedriver/FileContent;Ljetbrains/mps/vcs/core/mergedriver/FileContent;Ljetbrains/mps/vcs/core/mergedriver/FileContent;)Ljetbrains/mps/baseLanguage/tuples/runtime/Tuples/_2;" />
+      <scope id="3342666646761698718" at="11,23,11,23" />
+      <scope id="3342666646761698715" at="11,0,13,0" />
+      <scope id="3342666646761698648" at="15,129,17,16" />
+      <scope id="3342666646761698632" at="13,0,19,0">
+        <var name="baseContent" id="3342666646761698638" />
+        <var name="latestContent" id="3342666646761698644" />
+        <var name="localContent" id="3342666646761698641" />
+      </scope>
+      <unit id="3342666646761698631" at="9,0,20,0" name="jetbrains.mps.vcs.core.mergedriver.TextMerger" />
+    </file>
+  </root>
+  <root nodeRef="r:a178d3c3-970e-4352-b61c-4e55abc3bc24(jetbrains.mps.vcs.core.mergedriver)/3342666646761725292">
+    <file name="FileMerger.java">
+      <node id="3342666646761725316" at="18,217,19,74" concept="2" />
+      <node id="3342666646761725335" at="19,74,20,28" concept="8" />
+      <node id="3342666646761725360" at="21,9,22,58" concept="8" />
+      <node id="3342666646761725366" at="22,58,23,60" concept="8" />
+      <node id="3342666646761725372" at="23,60,24,62" concept="8" />
+      <node id="3342666646761725392" at="24,62,25,117" concept="8" />
+      <node id="3342666646761725406" at="26,32,27,113" concept="2" />
+      <node id="3342666646761725382" at="28,7,29,71" concept="2" />
+      <node id="3342666646761725415" at="29,71,30,78" concept="2" />
+      <node id="3342666646761725422" at="30,78,31,36" concept="9" />
+      <node id="3342666646761725430" at="32,29,33,26" concept="2" />
+      <node id="3342666646761725434" at="33,26,34,47" concept="9" />
+      <node id="3342666646761725446" at="35,15,36,34" concept="2" />
+      <node id="3643952839784883735" at="39,46,40,112" concept="9" />
+      <node id="3342666646761725450" at="16,0,18,0" concept="1" trace="FileMerger#()V" />
+      <node id="3342666646761725404" at="25,117,28,7" concept="6" />
+      <node id="3643952839784883722" at="39,0,42,0" concept="13" trace="convert#([B)[B" />
+      <node id="3342666646761725339" at="20,28,37,5" concept="16" />
+      <node id="3342666646761725293" at="18,0,39,0" concept="13" trace="mergeFiles#(Ljetbrains/mps/vcs/core/mergedriver/AbstractContentMerger;Ljava/io/File;Ljava/io/File;Ljava/io/File;[B[B[BZZ)I" />
+      <scope id="3342666646761725453" at="16,24,16,24" />
+      <scope id="3342666646761725405" at="26,32,27,113" />
+      <scope id="3342666646761725436" at="35,15,36,34" />
+      <scope id="3643952839784883725" at="39,46,40,112" />
+      <scope id="3342666646761725450" at="16,0,18,0" />
+      <scope id="3342666646761725429" at="32,29,34,47" />
+      <scope id="3342666646761725426" at="32,5,35,5">
+        <var name="e" id="3342666646761725427" />
+      </scope>
+      <scope id="3643952839784883722" at="39,0,42,0">
+        <var name="array" id="3643952839784883731" />
+      </scope>
+      <scope id="3342666646761725340" at="21,9,31,36">
+        <var name="baseContent" id="3342666646761725361" />
+        <var name="latestContent" id="3342666646761725373" />
+        <var name="localContent" id="3342666646761725367" />
+        <var name="mergeResult" id="3342666646761725393" />
+      </scope>
+      <scope id="3342666646761725315" at="18,217,37,5">
+        <var name="out" id="3342666646761725336" />
+      </scope>
+      <scope id="3342666646761725293" at="18,0,39,0">
+        <var name="baseFile" id="3342666646761725296" />
+        <var name="conflictEnd" id="3342666646761725305" />
+        <var name="conflictStart" id="3342666646761725302" />
+        <var name="contentMerger" id="3342666646761725294" />
+        <var name="convertCRLF" id="3643952839784883713" />
+        <var name="latestFile" id="3342666646761725300" />
+        <var name="localFile" id="3342666646761725298" />
+        <var name="overwrite" id="3342666646761725311" />
+        <var name="separator" id="3342666646761725308" />
+      </scope>
+      <unit id="3342666646761725292" at="14,0,43,0" name="jetbrains.mps.vcs.core.mergedriver.FileMerger" />
+    </file>
+  </root>
+  <root nodeRef="r:a178d3c3-970e-4352-b61c-4e55abc3bc24(jetbrains.mps.vcs.core.mergedriver)/3342666646761725454">
+    <file name="FileType.java">
+      <node id="8704175735085589775" at="39,0,40,0" concept="12" trace="BY_NAME" />
+      <node id="8704175735085988298" at="40,0,41,0" concept="12" trace="BY_EXT" />
+      <node id="3342666646761725649" at="41,0,42,0" concept="12" trace="SVN_BASE" />
+      <node id="3342666646761725455" at="43,0,44,0" concept="3" trace="mySuffix" />
+      <node id="6895208463127335366" at="44,0,45,0" concept="3" trace="myXmlRoot" />
+      <node id="3342666646761725637" at="45,51,46,22" concept="2" />
+      <node id="6895208463127373713" at="46,22,47,24" concept="2" />
+      <node id="3342666646761725657" at="50,29,51,20" concept="9" />
+      <node id="8605706393260619620" at="55,112,56,35" concept="10" />
+      <node id="8704175735089568012" at="59,43,60,45" concept="9" />
+      <node id="8704175735089568023" at="63,25,64,20" concept="9" />
+      <node id="8704175735082833309" at="66,93,67,30" concept="9" />
+      <node id="8704175735087462668" at="69,5,70,45" concept="10" />
+      <node id="3342666646761725465" at="70,45,71,81" concept="8" />
+      <node id="3342666646761725477" at="72,44,73,105" concept="2" />
+      <node id="3342666646761725501" at="75,43,76,53" concept="9" />
+      <node id="3342666646761725512" at="79,25,80,20" concept="9" />
+      <node id="8704175735089517359" at="82,122,83,30" concept="9" />
+      <node id="1022507842243885984" at="85,5,86,43" concept="10" />
+      <node id="6895208463129016859" at="86,43,87,34" concept="9" />
+      <node id="6895208463127001872" at="91,55,92,56" concept="8" />
+      <node id="6895208463129132706" at="92,56,93,26" concept="8" />
+      <node id="6895208463129171731" at="94,9,95,37" concept="2" />
+      <node id="6895208463126739442" at="95,37,96,52" concept="2" />
+      <node id="6895208463129096563" at="98,15,99,33" concept="2" />
+      <node id="8605706393260768108" at="100,5,101,53" concept="10" />
+      <node id="8605706393260751539" at="102,35,103,18" concept="9" />
+      <node id="8605706393260798073" at="104,5,105,0" concept="11" />
+      <node id="6895208463127269540" at="107,41,108,52" concept="9" />
+      <node id="6895208463128547923" at="110,7,111,42" concept="10" />
+      <node id="1022507842243540957" at="113,47,114,34" concept="2" />
+      <node id="1022507842243620367" at="116,49,117,36" concept="2" />
+      <node id="6895208463127209007" at="119,5,120,15" concept="9" />
+      <node id="6895208463126500678" at="123,0,124,0" concept="3" trace="rootName" />
+      <node id="6895208463126525324" at="124,0,125,0" concept="3" trace="contentAttr" />
+      <node id="6895208463126599038" at="126,117,127,23" concept="2" />
+      <node id="6895208463126625415" at="127,23,128,51" concept="2" />
+      <node id="6895208463126562585" at="128,51,129,41" concept="15" />
+      <node id="3342666646761725653" at="50,0,53,0" concept="7" trace="getSuffix#()Ljava/lang/String;" />
+      <node id="8704175735089568010" at="59,0,62,0" concept="7" trace="accept#(Ljetbrains/mps/vcs/core/mergedriver/FileType;)Z" />
+      <node id="8704175735089568021" at="62,9,65,7" concept="6" />
+      <node id="8704175735082939906" at="65,7,68,7" concept="6" />
+      <node id="3342666646761725499" at="75,0,78,0" concept="7" trace="accept#(Ljetbrains/mps/vcs/core/mergedriver/FileType;)Z" />
+      <node id="3342666646761725510" at="78,9,81,7" concept="6" />
+      <node id="8704175735080894261" at="81,7,84,7" concept="6" />
+      <node id="8605706393260698427" at="101,53,104,5" concept="6" />
+      <node id="6895208463127269538" at="107,0,110,0" concept="7" trace="accept#(Ljetbrains/mps/vcs/core/mergedriver/FileType;)Z" />
+      <node id="1022507842243504853" at="112,32,115,7" concept="6" />
+      <node id="1022507842243563715" at="115,7,118,7" concept="6" />
+      <node id="3342666646761725633" at="45,0,49,0" concept="1" trace="FileType#(Ljava/lang/String;Ljava/lang/String;)V" />
+      <node id="8704175735089568002" at="57,27,62,9" concept="8" />
+      <node id="3342666646761725491" at="73,105,78,9" concept="8" />
+      <node id="6895208463127254747" at="105,0,110,7" concept="8" />
+      <node id="6895208463126531496" at="125,0,131,0" concept="7" trace="startElement#(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V" />
+      <node id="6895208463129079442" at="93,26,100,5" concept="16" />
+      <node id="1022507842243460371" at="111,42,119,5" concept="6" />
+      <node id="8704175735081934778" at="56,35,69,5" concept="6" />
+      <node id="3342666646761725471" at="71,81,85,5" concept="6" />
+      <node id="6895208463126268605" at="90,0,122,0" concept="13" trace="getTypeByXmlRoot#(Ljava/io/File;)Ljetbrains/mps/vcs/core/mergedriver/FileType;" />
+      <node id="3342666646761725461" at="54,0,89,0" concept="13" trace="get#(Ljetbrains/mps/extapi/persistence/ModelFactoryService;Ljava/lang/String;Ljava/io/File;)Ljetbrains/mps/vcs/core/mergedriver/FileType;" />
+      <scope id="6895208463127100967" at="97,27,97,27" />
+      <scope id="3342666646761725656" at="50,29,51,20" />
+      <scope id="8704175735089568011" at="59,43,60,45" />
+      <scope id="8704175735089568022" at="63,25,64,20" />
+      <scope id="8704175735082939909" at="66,93,67,30" />
+      <scope id="3342666646761725500" at="75,43,76,53" />
+      <scope id="3342666646761725511" at="79,25,80,20" />
+      <scope id="8704175735080894264" at="82,122,83,30" />
+      <scope id="6895208463127100961" at="97,5,98,5">
+        <var name="e" id="6895208463127100963" />
+      </scope>
+      <scope id="6895208463129079445" at="98,15,99,33" />
+      <scope id="8605706393260698430" at="102,35,103,18" />
+      <scope id="6895208463127269539" at="107,41,108,52" />
+      <scope id="1022507842243504854" at="113,47,114,34" />
+      <scope id="1022507842243563718" at="116,49,117,36" />
+      <scope id="3342666646761725636" at="45,51,47,24" />
+      <scope id="6895208463127100960" at="94,9,96,52" />
+      <scope id="3342666646761725653" at="50,0,53,0" />
+      <scope id="8704175735089568010" at="59,0,62,0">
+        <var name="t" id="8704175735089568010" />
+      </scope>
+      <scope id="3342666646761725499" at="75,0,78,0">
+        <var name="t" id="3342666646761725499" />
+      </scope>
+      <scope id="6895208463127269538" at="107,0,110,0">
+        <var name="t" id="6895208463127269538" />
+      </scope>
+      <scope id="6895208463126531507" at="126,117,129,41" />
+      <scope id="3342666646761725633" at="45,0,49,0">
+        <var name="suffix" id="3342666646761725645" />
+        <var name="xmlRoot" id="6895208463127385982" />
+      </scope>
+      <scope id="1022507842243460374" at="112,32,118,7" />
+      <scope id="6895208463126531496" at="125,0,131,0">
+        <var name="attributes" id="6895208463126531504" />
+        <var name="localName" id="6895208463126531500" />
+        <var name="qName" id="6895208463126531502" />
+        <var name="uri" id="6895208463126531498" />
+      </scope>
+      <scope id="8704175735081934781" at="57,27,68,7">
+        <var name="type" id="8704175735089568003" />
+      </scope>
+      <scope id="3342666646761725476" at="72,44,84,7">
+        <var name="type" id="3342666646761725492" />
+      </scope>
+      <scope id="6895208463126256318" at="91,55,120,15">
+        <var name="handler" id="6895208463127001873" />
+        <var name="is" id="6895208463129132707" />
+        <var name="res" id="6895208463127254748" />
+      </scope>
+      <scope id="3342666646761725464" at="55,112,87,34">
+        <var name="fileName" id="3342666646761725466" />
+      </scope>
+      <scope id="6895208463126268605" at="90,0,122,0">
+        <var name="file" id="6895208463127149185" />
+      </scope>
+      <scope id="3342666646761725461" at="54,0,89,0">
+        <var name="file" id="3342666646761725606" />
+        <var name="filetype" id="8704175735081543667" />
+        <var name="service" id="9079244422969920517" />
+      </scope>
+      <unit id="8704175735089568010" at="58,97,62,7" name="jetbrains.mps.vcs.core.mergedriver.FileType$1" />
+      <unit id="3342666646761725499" at="74,97,78,7" name="jetbrains.mps.vcs.core.mergedriver.FileType$2" />
+      <unit id="6895208463127269538" at="106,94,110,5" name="jetbrains.mps.vcs.core.mergedriver.FileType$3" />
+      <unit id="6895208463126482230" at="122,0,132,0" name="jetbrains.mps.vcs.core.mergedriver.FileType$XMLRootHandler" />
+      <unit id="3342666646761725454" at="24,0,133,0" name="jetbrains.mps.vcs.core.mergedriver.FileType" />
+    </file>
+  </root>
+</debug-info>
+

@@ -76,7 +76,6 @@ public interface SModelListener {
 
   /**
    * This event is fired when the storage-memory conflict is detected (== isChanged() && needsReloading()).
-   * An IDE can listen to it and give user a way to resolve the conflict by invoking either updateTimestamp(), or reloadFromSource().
    */
   void conflictDetected(SModel model);
 

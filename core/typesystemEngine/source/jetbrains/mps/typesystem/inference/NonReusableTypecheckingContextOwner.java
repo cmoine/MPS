@@ -20,12 +20,9 @@ import jetbrains.mps.typesystem.inference.util.ConcurrentSubtypingCache;
 import jetbrains.mps.typesystem.inference.util.SubtypingCache;
 
 /**
-* Created with IntelliJ IDEA.
-* User: fyodor
-* Date: 12/7/12
-* Time: 4:13 PM
-* To change this template use File | Settings | File Templates.
+ * @deprecated use {@link jetbrains.mps.typechecking.TypecheckingFacade} for launching typechecking actions.
 */
+@Deprecated(forRemoval = true)
 public class NonReusableTypecheckingContextOwner implements ITypeContextOwner {
   @Override
   public TypeCheckingContext createTypecheckingContext(SNode sNode, TypeContextManager typeContextManager) {

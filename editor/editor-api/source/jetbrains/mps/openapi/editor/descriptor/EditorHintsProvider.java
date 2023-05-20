@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,26 @@
  */
 package jetbrains.mps.openapi.editor.descriptor;
 
+import org.jetbrains.mps.openapi.language.SLanguage;
+
 import java.util.Collection;
+import java.util.Collections;
+import java.util.function.Consumer;
 
 /**
- * Created by Mihail.Buryakov on 5/10/14.
+ * @author Mihail.Buryakov
+ * @since MPS 3.1
  */
 public interface EditorHintsProvider extends EditorAspectDescriptor {
-  Collection<ConceptEditorHint> getHints();
+  default Collection<ConceptEditorHint> getHints() {
+    return Collections.emptyList();
+  }
+
+  /**
+   * Let editor report its uses of hints from other languages. By 'uses' here we mean hints from extended (or otherwise denoted)
+   * languages that editors of this language respect and allow respective hints to be pushed onto them.
+   */
+  default void employsHintsFrom(Consumer<SLanguage> consumer) {
+    // no-op, no additional hints from other languages
+  }
 }

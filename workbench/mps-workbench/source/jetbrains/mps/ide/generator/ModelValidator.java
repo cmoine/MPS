@@ -17,7 +17,6 @@ package jetbrains.mps.ide.generator;
 
 import com.intellij.openapi.extensions.ExtensionPointName;
 import jetbrains.mps.project.Project;
-import jetbrains.mps.smodel.IOperationContext;
 import org.jetbrains.mps.openapi.model.SModel;
 
 import java.util.List;

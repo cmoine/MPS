@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,18 +20,11 @@ import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.descriptor.TransformationMenu;
 import jetbrains.mps.openapi.editor.menus.transformation.TransformationMenuItem;
 import jetbrains.mps.openapi.editor.menus.transformation.TransformationMenuLookup;
+import jetbrains.mps.smodel.ModelDependencyResolver;
 import jetbrains.mps.smodel.SLanguageHierarchy;
-import jetbrains.mps.smodel.SModelOperations;
-import jetbrains.mps.smodel.adapter.structure.concept.SAbstractConceptAdapter;
-import jetbrains.mps.smodel.adapter.structure.concept.SConceptAdapter;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.smodel.language.LanguageRegistry;
-import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.IconResource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.language.SLanguage;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
@@ -39,6 +32,7 @@ import org.jetbrains.mps.openapi.model.SNode;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author simon
@@ -56,7 +50,13 @@ public class MenuUtil {
 
   public static Collection<SLanguage> getUsedLanguages(SModel model) {
     LanguageRegistry lr = LanguageRegistry.getInstance(model.getRepository());
-    return new SLanguageHierarchy(lr, SModelOperations.getAllLanguageImports(model)).getExtended();
+    final Collection<SLanguage> languageImports = new ModelDependencyResolver(lr, model.getRepository()).usedLanguages(model);
+    final SLanguageHierarchy languageHierarchy = new SLanguageHierarchy(lr, languageImports);
+    final Set<SLanguage> rv = languageHierarchy.getExtended();
+    // for most menu purposes (except create root), we have to take into account languages referenced by aggregation so that
+    // children concepts could get created without the need to import their languages explicitly.
+    rv.addAll(languageHierarchy.getAggregated());
+    return rv;
   }
 
   public static boolean isMenuApplicableToLocation(@NotNull TransformationMenuLookup menuLookup, @NotNull String menuLocation, @NotNull SNode node) {

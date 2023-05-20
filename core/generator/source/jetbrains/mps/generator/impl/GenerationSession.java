@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,17 +15,17 @@
  */
 package jetbrains.mps.generator.impl;
 
-import jetbrains.mps.InternalFlag;
 import jetbrains.mps.RuntimeFlags;
 import jetbrains.mps.generator.GenerationCanceledException;
-import jetbrains.mps.generator.GenerationOptions;
 import jetbrains.mps.generator.GenerationParametersProvider;
 import jetbrains.mps.generator.GenerationParametersProviderEx;
 import jetbrains.mps.generator.GenerationSessionContext;
 import jetbrains.mps.generator.GenerationStatus;
 import jetbrains.mps.generator.GenerationTrace;
+import jetbrains.mps.generator.IGeneratorLogger.ProblemDescription;
 import jetbrains.mps.generator.ModelGenerationPlan;
 import jetbrains.mps.generator.ModelGenerationPlan.Checkpoint;
+import jetbrains.mps.generator.ModelGenerationPlan.Fork;
 import jetbrains.mps.generator.ModelGenerationPlan.Step;
 import jetbrains.mps.generator.ModelGenerationPlan.Transform;
 import jetbrains.mps.generator.TransientModelsModule;
@@ -33,10 +33,8 @@ import jetbrains.mps.generator.impl.GeneratorLoggerAdapter.BasicFactory;
 import jetbrains.mps.generator.impl.GeneratorLoggerAdapter.RecordingFactory;
 import jetbrains.mps.generator.impl.IGenerationTaskPool.ITaskPoolProvider;
 import jetbrains.mps.generator.impl.TemplateGenerator.StepArguments;
-import jetbrains.mps.generator.impl.cache.IntermediateCacheHelper;
-import jetbrains.mps.generator.impl.dependencies.DependenciesBuilder;
-import jetbrains.mps.generator.impl.dependencies.IncrementalDependenciesBuilder;
-import jetbrains.mps.generator.impl.plan.CheckpointIdentity;
+import jetbrains.mps.generator.impl.cache.QueryProviderCache;
+import jetbrains.mps.generator.impl.dependencies.GenerationDependencies;
 import jetbrains.mps.generator.impl.plan.CheckpointState;
 import jetbrains.mps.generator.impl.plan.Conflict;
 import jetbrains.mps.generator.impl.plan.CrossModelEnvironment;
@@ -44,39 +42,47 @@ import jetbrains.mps.generator.impl.plan.GenerationPartitioningUtil;
 import jetbrains.mps.generator.impl.plan.GenerationPlan;
 import jetbrains.mps.generator.impl.plan.MapCfgComparator;
 import jetbrains.mps.generator.impl.plan.ModelContentUtil;
-import jetbrains.mps.generator.impl.plan.PlanSignature;
+import jetbrains.mps.generator.plan.CheckpointIdentity;
 import jetbrains.mps.generator.runtime.TemplateMappingConfiguration;
 import jetbrains.mps.generator.runtime.TemplateMappingScript;
 import jetbrains.mps.generator.runtime.TemplateModule;
-import jetbrains.mps.logging.MPSAppenderBase;
+import jetbrains.mps.generator.template.ITemplateGenerator;
 import jetbrains.mps.messages.MessageKind;
 import jetbrains.mps.smodel.FastNodeFinderManager;
 import jetbrains.mps.smodel.Generator;
+import jetbrains.mps.smodel.SModelId.IntegerSModelId;
 import jetbrains.mps.smodel.SModelStereotype;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactoryByName;
-import jetbrains.mps.util.NameUtil;
+import jetbrains.mps.smodel.language.LanguageRuntime;
 import jetbrains.mps.util.Pair;
 import jetbrains.mps.util.performance.IPerformanceTracer;
-import org.apache.log4j.Priority;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SLanguage;
 import org.jetbrains.mps.openapi.model.SModel;
+import org.jetbrains.mps.openapi.model.SModelName;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.mps.openapi.model.SNodeId;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 import org.jetbrains.mps.openapi.module.SModuleReference;
-import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
 import org.jetbrains.mps.openapi.util.ProgressMonitor;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
+import java.util.Queue;
+import java.util.function.Function;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 /**
  * Igor Alshannikov
@@ -85,26 +91,30 @@ import java.util.List;
  * Created once per model generation.
  */
 class GenerationSession {
+  private final GenControllerContext myControlEnv;
   private final ITaskPoolProvider myTaskPoolProvider;
   private final SModel myOriginalInputModel;
+  private final RoleValidation myRoleValidation;
   private ModelGenerationPlan myGenerationPlan;
 
   private final GenerationTrace myNewTrace;
-  private MPSAppenderBase myLoggingHandler;
+  private TrackHintObjectsInLog myLoggingHandler;
   private final RecordingFactory myLogRecorder;
   private final GenerationSessionLogger myLogger;
-  private DependenciesBuilder myDependenciesBuilder;
 
-  private IntermediateCacheHelper myIntermediateCache;
   // != null unless session is abandoned/disposed
   private GenerationSessionContext mySessionContext;
   private final IPerformanceTracer ttrace;
   private StepArguments myStepArguments;
+  private QueryProviderCache myQuerySource;
+  private int myBranchCounter = 0;
 
+  // next are class-wide state of an active transformation branch. FIXME move into PlanBranchInfo
   private int myMajorStep = 0;
   private int myMinorStep = -1;
-  private final GenerationOptions myGenerationOptions;
-  private final List<SModel> myTransientModelsToRecycle = new ArrayList<SModel>();
+  private int myActiveBranchSerial = 0;
+  private final List<SModel> myTransientModelsToRecycle = new ArrayList<>();
+  private final HashSet<SLanguage> myEmployedLanguages = new HashSet<>(50);
 
   GenerationSession(@NotNull SModel inputModel, @NotNull GenControllerContext environment, ITaskPoolProvider taskPoolProvider,
       GeneratorLoggerAdapter logger, TransientModelsModule transientModule, IPerformanceTracer performanceTracer, GenerationTrace genTrace) {
@@ -114,8 +124,9 @@ class GenerationSession {
     myLogRecorder = new RecordingFactory(new BasicFactory());
     myLogger = new GenerationSessionLogger(logger, myLogRecorder);
     ttrace = performanceTracer;
-    myGenerationOptions = environment.getOptions();
-    mySessionContext = new GenerationSessionContext(environment, transientModule, myLogger, myOriginalInputModel, performanceTracer);
+    myControlEnv = environment;
+    mySessionContext = new GenerationSessionContext(environment, transientModule, myLogger, myOriginalInputModel);
+    myRoleValidation = new RoleValidation(environment.getOptions().isShowBadChildWarning());
   }
 
   GenerationStatus generateModel(ProgressMonitor monitor) throws GenerationCanceledException {
@@ -124,9 +135,9 @@ class GenerationSession {
     }
 
     // create a plan
-    GenerationParametersProvider parametersProvider = myGenerationOptions.getParametersProvider();
-    ttrace.push("analyzing dependencies", false);
-    myGenerationPlan = myGenerationOptions.getCustomPlan(myOriginalInputModel);
+    GenerationParametersProvider parametersProvider = myControlEnv.getOptions().getParametersProvider();
+    ttrace.push("analyzing dependencies");
+    myGenerationPlan = myControlEnv.getOptions().getCustomPlan(myOriginalInputModel);
     if (myGenerationPlan == null) {
       Collection<String> additionalLanguages =
           parametersProvider instanceof GenerationParametersProviderEx
@@ -135,189 +146,253 @@ class GenerationSession {
 
       List<SLanguage> extraLanguages = null;
       if (additionalLanguages != null && !additionalLanguages.isEmpty()) {
-        extraLanguages = new ArrayList<SLanguage>(additionalLanguages.size());
+        extraLanguages = new ArrayList<>(additionalLanguages.size());
         for (String l : additionalLanguages) {
-          //this usage of by-name is reviewed
-          extraLanguages.add(MetaAdapterFactoryByName.getLanguage(l));
+          LanguageRuntime lr = myControlEnv.getLanguageRegistry().getLanguage(l);
+          if (lr != null) {
+            extraLanguages.add(lr.getIdentity());
+          }
         }
       }
       GenerationPlan gp;
       myGenerationPlan = gp = new GenerationPlan(myOriginalInputModel, extraLanguages);
-      if (!checkGenerationPlan(gp) && myGenerationOptions.isStrictMode()) {
+      if (!checkGenerationPlan(gp) && myControlEnv.getOptions().isStrictMode()) {
         throw new GenerationCanceledException();
       }
     }
     warnIfGenerateSelf(myGenerationPlan);
+    myQuerySource = new QueryProviderCache(myGenerationPlan, myLogger);
+    ttrace.pop();
 
-    monitor.start("", 1 + myGenerationPlan.getSteps().size());
+    monitor.start("", myGenerationPlan.getSteps().size());
     try {
-      // distinct helper instance to hold data from existing cache (myIntermediateCache keeps data of actual generation)
-      IntermediateCacheHelper cacheHelper = new IntermediateCacheHelper(myGenerationOptions.getIncrementalStrategy(), new PlanSignature(myOriginalInputModel, myGenerationPlan), ttrace);
-      IncrementalGenerationHandler incrementalHandler = new IncrementalGenerationHandler(myOriginalInputModel, mySessionContext.getRepository(),
-          myGenerationOptions, cacheHelper, null);
-      myDependenciesBuilder = incrementalHandler.createDependenciesBuilder();
+      // prepare input model: make a clone so that rest of generator always works with transient model.
+      // This ensures each node got correct TracingUtil.ORIGINAL_INPUT_NODE (for traceInfo) in SNode.userObjects - there
+      // are templates out there that perform .copy on input nodes, and we have no chances to trace such nodes back. This used to work
+      // (with fallback to parent nodes) until in-place transformations brought cases when either regular model or a transient one
+      // serve as an input, which lead to different traceInfo (being more specific with transient model as input, as each node in transient does keep
+      // reference to origin)
+      // Another benefit is that FastNodeFinder (used throughout generator e.g. with model.nodes(Concept)) gives nodes in different order for
+      // regular and transient SModel (sorted by nodeid from DefaultFastNodeFinder, natural iteration order for TransientModelNodeFinder).
+      // Although this can be fixed in DFNF (not to sort, share impl for both FNF), it's still better to avoid possible differences.
+      // Last, but not least, there's planned switch to GeneratorSNode/GeneratorSModel to facilitate model reconstruction from delta
+      // and we'll need to switch to 'transient' (generator) model here anyway
+      SModel currInputModel = createTransientModel(0, 0, "0");
+      new CloneUtil(myOriginalInputModel, currInputModel).traceOriginalInput().cloneModelWithImports();
+      // FIXME 1. regular GP (not custom) collects all languages + handles 'additional' languages, have to re-use
+      //       2. custom GP doesn't necessarily cover all the model languages, do I care to limit to actually employed?
+      //       3. Forks may induce different set of employed languages, have to keep per output model, and, likely
+      //          collect input model languages per fork branch
+      // For now, I just need to get over the obstacle of failing tests (ModuleMaker doesn't get full CP e.g. if initial
+      //   model uses closures and they get reduced by external behavior method to a ClassifierType).
+      //   Logic similar to the one of GMDM (takes used languages of a model) is ok for the first round.
+      myEmployedLanguages.addAll(ModelContentUtil.getUsedLanguages(myOriginalInputModel));
+      ArrayList<SModel> allOutputModels = new ArrayList<>(4);
+      ttrace.push("steps");
 
-      if (incrementalHandler.canOptimize()) {
-        int ignored = incrementalHandler.getIgnoredRoots().size();
-        int total = incrementalHandler.getRootsCount();
-        myLogger.info((!incrementalHandler.canIgnoreConditionals() ? "" : "descriptors and ") + ignored + " of " + total + " roots are unchanged");
+      ModelTransitions transitionTrace = new ModelTransitions(); // FIXME make it optional, if there are no Checkpoint steps, do not record transitions
+      transitionTrace.newTransition(null, currInputModel, null);
 
-        if (total > 0 && ignored == total && incrementalHandler.canIgnoreConditionals()) {
-          myLogger.info("generated files are up-to-date");
-          ttrace.pop();
-          return new GenerationStatus(myOriginalInputModel, null,
-              myDependenciesBuilder.getResult(myGenerationOptions.getIncrementalStrategy()), false, false, false);
-        }
 
-        if (!incrementalHandler.getRequiredRoots().isEmpty() || incrementalHandler.requireConditionals()) {
-          myLogger.info((!incrementalHandler.requireConditionals() ? "" :
-              "descriptors and ") + incrementalHandler.getRequiredRoots().size() + " roots can be used from cache");
-        }
+      ArrayDeque<PlanBranchInfo> forkQueue = new ArrayDeque<>();
 
-        if (myGenerationOptions.getTracingMode() != GenerationOptions.TRACE_OFF) {
-          myLogger.info("Processing:");
-          for (SNode node : myOriginalInputModel.getRootNodes()) {
-            if (incrementalHandler.getRequiredRoots().contains(node)) {
-              myLogger.info(String.format("%s (%s) (cache)", node.getName(), node.getConcept().getQualifiedName()));
-            } else if (!incrementalHandler.getIgnoredRoots().contains(node)) {
-              myLogger.info(String.format("%s (%s)", node.getName(), node.getConcept().getQualifiedName()));
-            }
-          }
+      PlanBranchInfo majorBranch = new PlanBranchInfo();
+      majorBranch.inputModel = currInputModel;
+      majorBranch.actualStateCopyOfLastBitTransformStepMappings = Collections.emptyList();
+      majorBranch.majorStepAtFork = myMajorStep = 0;
+      majorBranch.minorStepAtFork = myMinorStep = 0;
+      majorBranch.branch = myGenerationPlan.getSteps();
+      majorBranch.transitionTrace = transitionTrace;
+      forkQueue.add(majorBranch);
+      while (!forkQueue.isEmpty()) {
+        SModel output = processGenPlanBranch(forkQueue.removeFirst(), forkQueue, monitor);
+        // for *each* completed GP branch, keep model as it's the outcome we are going to process further
+        if (output != null) {
+          allOutputModels.add(output);
+          mySessionContext.getModule().addModelToKeep(output.getReference(), true);
         }
       }
-      monitor.advance(1);
 
-      if (InternalFlag.isInternalMode() && myGenerationOptions.isRebuildAll() && myGenerationOptions.isDebugIncrementalDependencies() && myDependenciesBuilder instanceof IncrementalDependenciesBuilder) {
-        myLogger.info("creating generated.trace");
-        ((IncrementalDependenciesBuilder) myDependenciesBuilder).traceDependencyOrigins();
-      }
-
-      boolean success = false;
-
-      myIntermediateCache = new IntermediateCacheHelper(myGenerationOptions.getIncrementalStrategy(), new PlanSignature(myOriginalInputModel, myGenerationPlan), ttrace);
-      myIntermediateCache.createNew(myOriginalInputModel);
       ttrace.pop();
-      try {
-        // prepare input model: make a clone so that rest of generator always works with transient model.
-        // This ensures each node got correct TracingUtil.ORIGINAL_INPUT_NODE (for traceInfo) in SNode.userObjects - there
-        // are templates out there that perform .copy on input nodes, and we have no chances to trace such nodes back. This used to work
-        // (with fallback to parent nodes) until in-place transformations brought cases when either regular model or a transient one
-        // serve as an input, which lead to different traceInfo (being more specific with transient model as input, as each node in transient does keep
-        // reference to origin)
-        // Another benefit is that FastNodeFinder (used throughout generator e.g. with model.nodes(Concept)) gives nodes in different order for
-        // regular and transient SModel (sorted by nodeid from DefaultFastNodeFinder, natural iteration order for TransientModelNodeFinder).
-        // Although this can be fixed in DFNF (not to sort, share impl for both FNF), it's still better to avoid possible differences.
-        // Last, but not least, there's planned switch to GeneratorSNode/GeneratorSModel to facilitate model reconstruction from delta
-        // and we'll need to switch to 'transient' (generator) model here anyway
-        SModel currInputModel = createTransientModel("0");
-        new CloneUtil(myOriginalInputModel, currInputModel).traceOriginalInput().cloneModelWithImports();
-        // inform DependencyBuilder about new input model (now it keeps map based on instances, once it's nodeid (or it's gone), there'd be no need for):
-        for (Iterator<SNode> it1 = myOriginalInputModel.getRootNodes().iterator(), it2 = currInputModel.getRootNodes().iterator(); it1.hasNext() && it2.hasNext();) {
-          myDependenciesBuilder.registerRoot(it2.next(), it1.next());
-        }
-        myDependenciesBuilder.updateModel(currInputModel);
-        SModel currOutput = null;
 
-        ttrace.push("steps", false);
+      // we need this in order to prevent memory leaks from nodes which are reported to message view
+      // since session objects might include objects with disposed class loaders
+      mySessionContext.clearTransientObjects();
 
-
-        ModelTransitions transitionTrace = new ModelTransitions(); // FIXME make it optional, if there are no Checkpoint steps, do not record transitions
-        transitionTrace.newTransition(null, myOriginalInputModel.getReference(), currInputModel);
-
-        for (myMajorStep = 0; myMajorStep < myGenerationPlan.getSteps().size(); myMajorStep++) {
-          Step planStep = myGenerationPlan.getSteps().get(myMajorStep);
-          if (planStep instanceof Transform) {
-            Transform transformStep = (Transform) planStep;
-            final List<TemplateMappingConfiguration> mappingConfigurations = transformStep.getTransformations();
-            if (mappingConfigurations.size() >= 1) {
-              final TemplateMappingConfiguration first = mappingConfigurations.get(0);
-              String n = GeneratorUtil.compactNamespace(first.getModel().getLongName());
-              monitor.step(String.format("step %d (%s#%s%s)", myMajorStep+1, n, first.getName(), mappingConfigurations.size() == 1 ? "" : "..."));
-            }
-
-            if (myLogger.needsInfo()) {
-              myLogger.info("executing step " + (myMajorStep + 1));
-            }
-            currOutput = executeMajorStep(monitor.subTask(1), currInputModel, transformStep, transitionTrace.getActiveTransition());
-            monitor.advance(0);
-            if (currOutput == null || myLogger.getErrorCount() > 0) {
-              break;
-            }
-            if (mappingConfigurations.isEmpty()) {
-              break;
-            }
-            currInputModel = currOutput;
-          } else if (planStep instanceof Checkpoint) {
-            Checkpoint checkpointStep = (Checkpoint) planStep;
-            CheckpointIdentity checkpointIdentity = new CheckpointIdentity(myGenerationPlan, checkpointStep);
-            final CrossModelEnvironment xmodelEnv = mySessionContext.getCrossModelEnvironment();
-            SModel checkpointModel = xmodelEnv.createBlankCheckpointModel(myOriginalInputModel.getReference(), checkpointIdentity);
-            CheckpointStateBuilder cpBuilder = new CheckpointStateBuilder(currInputModel, checkpointModel, transitionTrace.getActiveTransition());
-            // myStepArguments may be null if Checkpoint is the very first step. Not quite sure it's legitimate scenario, though, need to think it over.
-            if (myStepArguments != null) {
-              // Shall populate state with last generator's MappingLabels. Note, ML could have been added from post-processing scripts. Generator
-              // instance could be different, we keep GeneratorMappings with step arguments, that span all pre/post scripts along with transformations.
-              GeneratorMappings stepLabels = myStepArguments.mappingLabels;
-              cpBuilder.addMappings(myOriginalInputModel, stepLabels);
-            }
-            CheckpointState cpState = cpBuilder.create(checkpointIdentity);
-            xmodelEnv.publishCheckpoint(myOriginalInputModel.getReference(), cpState);
-            transitionTrace.newTransition(checkpointStep, checkpointModel.getReference(), currInputModel);
-            myStepArguments = null;
-          }
-        }
-        ttrace.pop();
-
-        // we need this in order to prevent memory leaks from nodes which are reported to message view
-        // since session objects might include objects with disposed class loaders
-        mySessionContext.clearTransientObjects();
-
-        if (myGenerationOptions.isKeepOutputModel() && currOutput != null) {
-          mySessionContext.getModule().addModelToKeep(currOutput.getReference(), true);
-        }
-
-        GenerationStatus generationStatus = new GenerationStatus(myOriginalInputModel, currOutput,
-            myDependenciesBuilder.getResult(myGenerationOptions.getIncrementalStrategy()), myLogger.getErrorCount() > 0,
-            myLogger.getWarningCount() > 0, false);
-        generationStatus.setModelExports(mySessionContext.getExports().getExports());
-        // FIXME uncomment once CME persistence is full-fledged
-        // generationStatus.setCrossModelEnvironment(mySessionContext.getCrossModelEnvironment());
-        success = generationStatus.isOk();
-        return generationStatus;
-      } catch (GenerationCanceledException gce) {
-        throw gce;
-      } catch (GenerationFailureException gfe) {
-        final String nestedException;
-        if (gfe.getCause() != null) {
-          nestedException = gfe.getCause().toString();
-        } else {
-          nestedException = "";
-        }
-        String error = gfe.getMessage() == null ? gfe.toString() : gfe.getMessage();
-        String msg = String.format("Generation failed for model '%s': %s. %s", myOriginalInputModel.getName(), error, nestedException);
-        myLogger.handleException(gfe);
-        myLogger.error(gfe.getTemplateModelLocation(), msg, GeneratorUtil.describeInput(gfe.getTemplateContext()));
-        return new GenerationStatus.ERROR(myOriginalInputModel);
-      } catch (Exception e) {
-        myLogger.handleException(e);
-        myLogger.error(String.format("Generation failed for model '%s': %s", myOriginalInputModel.getName(), e.toString()));
-        return new GenerationStatus.ERROR(myOriginalInputModel);
-      } finally {
-        if (success) {
-          myIntermediateCache.commit();
-        } else {
-          myIntermediateCache.discard();
-        }
+      // identifies the model and specific "configuration" it has been generated with.
+      // XXX we could use GenerationDependencies to pass more information about actual generators/languages involved (including their runtimes
+      //     to facilitate proper classpath calculation
+      final GenerationDependencies genDeps = new GenerationDependencies(myOriginalInputModel, myControlEnv.getOptions().getParametersProvider());
+      GenerationStatus generationStatus = new GenerationStatus(myOriginalInputModel, allOutputModels, genDeps, myLogger.getErrorCount() > 0);
+      generationStatus.setCrossModelEnvironment(myControlEnv.getCrossModelEnvironment());
+      generationStatus.setEmployedLanguages(myEmployedLanguages);
+      return generationStatus;
+    } catch (GenerationCanceledException gce) {
+      throw gce;
+    } catch (TemplateQueryException tqe) {
+      // XXX although it's tqe.getCause which is of interest, it might be reasonable to report
+      // tqe to the logger, as it might get configured outside and decide whether to report a TQE to end user or not
+      myLogger.handleException(tqe.getCause());
+      String msg = String.format("Generation failed for model '%s', unexpected error in generator query: %s", myOriginalInputModel.getName(), tqe.getMessage());
+      ProblemDescription pd;
+      if (tqe.getQueryContext() != null) {
+        pd = GeneratorUtil.describeIfExists(tqe.getQueryContext().getInputNode(), "input node");
+      } else {
+        pd = GeneratorUtil.describeInput(tqe.getTemplateContext());
       }
+      myLogger.error(tqe.getTemplateModelLocation(), msg, pd);
+      return GenerationStatus.failure(myOriginalInputModel);
+    } catch (GenerationFailureException gfe) {
+      final String nestedException;
+      if (gfe.getCause() != null) {
+        nestedException = gfe.getCause().toString();
+      } else {
+        nestedException = "";
+      }
+      String error = gfe.getMessage() == null ? gfe.toString() : gfe.getMessage();
+      String msg = String.format("Generation failed for model '%s': %s. %s", myOriginalInputModel.getName(), error, nestedException);
+      myLogger.handleException(gfe);
+      myLogger.error(gfe.getTemplateModelLocation(), msg, GeneratorUtil.describeInput(gfe.getTemplateContext()));
+      return GenerationStatus.failure(myOriginalInputModel);
+    } catch (Exception e) {
+      myLogger.handleException(e);
+      myLogger.error(String.format("Generation failed for model '%s': %s", myOriginalInputModel.getName(), e));
+      return GenerationStatus.failure(myOriginalInputModel);
     } finally {
       monitor.done();
     }
   }
 
-  private SModel executeMajorStep(ProgressMonitor progress, SModel inputModel, Transform planStep, TransitionTrace transitionTrace) throws GenerationCanceledException, GenerationFailureException {
-    myMinorStep = -1;
+  private SModel processGenPlanBranch(PlanBranchInfo branchInfo, Queue<PlanBranchInfo> forkQueue, ProgressMonitor monitor) throws GenerationCanceledException, GenerationFailureException {
+    SModel currInputModel = branchInfo.inputModel;
+    List<Step> branchSteps = branchInfo.branch;
+    final ModelTransitions transitionTrace = branchInfo.transitionTrace;
+    final ArrayDeque<LMCollector> lastBigTransformStepMappings = new ArrayDeque<>(branchInfo.actualStateCopyOfLastBitTransformStepMappings);
 
-    List<TemplateMappingConfiguration> mappingConfigurations = new ArrayList<TemplateMappingConfiguration>(planStep.getTransformations());
+    // FIXME refactor, next shall be part of PBI only, not fields of GS class
+    myMajorStep = branchInfo.majorStepAtFork;
+    myMinorStep = branchInfo.minorStepAtFork;
+    myActiveBranchSerial = branchInfo.serial;
+
+    SModel currOutput = null;
+    for (int stepIndex = 0; stepIndex < branchSteps.size(); stepIndex++, myMajorStep++) {
+      Step planStep = branchSteps.get(stepIndex);
+      if (planStep instanceof Transform) {
+        Transform transformStep = (Transform) planStep;
+        final List<TemplateMappingConfiguration> mappingConfigurations = transformStep.getTransformations();
+        if (mappingConfigurations.size() >= 1) {
+          final TemplateMappingConfiguration first = mappingConfigurations.get(0);
+          String n = GeneratorUtil.compactNamespace(first.getModel().getLongName());
+          monitor.step(String.format("step %d (%s#%s%s)", myMajorStep+1, n, first.getName(), mappingConfigurations.size() == 1 ? "" : "..."));
+        }
+
+        if (myLogger.needsInfo()) {
+          myLogger.info("executing step " + (myMajorStep + 1));
+        }
+
+        currOutput = executeMajorStep(monitor.subTask(1), currInputModel, transformStep, transitionTrace.getActiveTransition());
+        monitor.advance(0);
+        if (currOutput == null || myLogger.getErrorCount() > 0) {
+          break;
+        }
+        if (mappingConfigurations.isEmpty()) {
+          // XXX revisit. De we need to break if there were no transformations at a step?
+          break;
+        }
+        if (transformStep.isLabeledTransformationsKept()) {
+          // FIXME both transform and checkpoint steps need myStepArgument; need better sharing than just access to the field
+          //       another method initialized and generously didn't clean.
+          lastBigTransformStepMappings.push(myStepArguments.mappingLabels.exposed());
+        }
+        currInputModel = currOutput;
+      } else if (planStep instanceof Checkpoint) {
+        Checkpoint checkpointStep = (Checkpoint) planStep;
+        if (!checkpointStep.isPersisted()) {
+          // not sure there's a reason to clear lastBigTransformStepMappings (although should not happen
+          // provided GenerationPlanBuilder marks Transform steps as 'keep' right in front of Checkpoint only)
+          continue;
+        }
+        CheckpointIdentity checkpointIdentity = checkpointStep.getIdentity();
+        final CrossModelEnvironment xmodelEnv = myControlEnv.getCrossModelEnvironment();
+        CheckpointIdentity lastPersistedCheckpoint = transitionTrace.getMostRecentCheckpoint();
+        SModel checkpointModel = xmodelEnv.createBlankCheckpointModel(myOriginalInputModel.getReference(), lastPersistedCheckpoint, checkpointIdentity);
+        CheckpointStateBuilder cpBuilder = new CheckpointStateBuilder(currInputModel, checkpointModel, transitionTrace, myLogger);
+        // myStepArguments may be null if Checkpoint is the very first step. Not quite sure it's legitimate scenario, though, need to think it over.
+        if (myStepArguments != null) {
+          // Shall populate state with last generator's MappingLabels. Note, ML could have been added from post-processing scripts. Generator
+          // instance could be different, we keep GeneratorMappings with step arguments, that span all pre/post scripts along with transformations.
+          final LMCollector stepLabels = myStepArguments.mappingLabels.exposed();
+          // stepLabels is likely the last one pushed into lastBigTransformStepMappings when previous Transform step had happened.
+          // FIXME however, this remove is no-op as GM#exposed() gives new instance each time, deal with that.
+          //       Likely, shall have transformStep#isLabeledTransformationsKept() == true for any Transform step that preceeds CP step,
+          //       not only the one with few MC sets
+          lastBigTransformStepMappings.remove(stepLabels);
+          final Function<SNodeId, SNode> getCurrentInputNode = currInputModel::getNode;
+          for (LMCollector prev : lastBigTransformStepMappings) {
+            prev.forEachNoInput((l, conditionalRoot) -> {
+              SNode copiedRoot = getCurrentInputNode.apply(conditionalRoot.getNodeId());
+              if (copiedRoot != null) {
+                // if root is in the last model, add record unless there's already record for the label.
+                // seems that we can keep multiple (label, conditionalRoot) pairs, and findAny().isEmpty() here
+                // is just a dumb way not to deal with possible duplicates now. I.e. imagine 2 conditional roots under same ML,
+                // one added at transformStep1, another at transformStep2. Now I don't copy the one from
+                // transformStep1 (findAny.isEmpty == false), although used to do that with GM. Is that right?
+                if (stepLabels.streamNoInput(l).findAny().isEmpty()) {
+                  stepLabels.add(l, copiedRoot);
+                }
+              }
+            });
+            prev.forEachWithInput((l, prevStepMappings) -> {
+              final NodeMap lastStepMappings = stepLabels.streamWithInput(l).findAny().orElse(null);
+              prevStepMappings.forEachRecord(r -> {
+                if (lastStepMappings != null && lastStepMappings.containsKey(r.key())) {
+                  // there's already labeled transformation for the same input node, no reason to override with value from previous steps
+                  return;
+                }
+                if (r.count() == 1) {
+                  // intentionally do not care about multiple outputs, just don't want to project multiple outputs into actual transient model
+                  // and it's of no real use anyway as we don't restore x-model references in case there are multiple outputs.
+                  SNode copiedOutput = getCurrentInputNode.apply(r.soleValue().getNodeId());
+                  if (copiedOutput != null) {
+                    stepLabels.add(l, r.key(), copiedOutput);
+                  }
+                }
+              });
+            });
+            // FIXME what about composite labels here? Why don't we copy them?
+          }
+          GeneratorMappings fakeInstance = new GeneratorMappings(Collections.emptyList(), myLogger);
+          fakeInstance.fillFrom(Collections.singletonList(stepLabels));
+          cpBuilder.addMappings(myOriginalInputModel, fakeInstance);
+        }
+        CheckpointState cpState = cpBuilder.create(checkpointIdentity);
+        xmodelEnv.publishCheckpoint(myOriginalInputModel.getReference(), cpState);
+        myStepArguments = null; // XXX what if there are few subsequent CPs (e.g. from different plans), why do we clear step arguments and
+        // prevent other CPs from saving MLs?
+        lastBigTransformStepMappings.clear();
+      } else if (planStep instanceof Fork) {
+        Fork forkStep = (Fork) planStep;
+        PlanBranchInfo bi = new PlanBranchInfo(++myBranchCounter);
+        // Pair cloneTransient/changeModelReference deserves a dedicated utility.
+        // Use of bi.serial is to ensure input model shows up under a proper group of models. It might be modified in-place, therefore it has to be part
+        // of the fork branch despite the fact it's just a clone of a model from parent/main branch and thus could have been kept there.
+        bi.inputModel = cloneTransientModel(currInputModel, bi.serial);
+        changeModelReference(bi.inputModel, createTransientModelReference(myMajorStep, myMinorStep + 100));
+        bi.branch = forkStep.getBranch();
+        bi.majorStepAtFork = myMajorStep;
+        bi.minorStepAtFork = myMinorStep + 100 + 1; // XXX +1 is sort of/mild hack, we'd like to see branch input model first, with its output next. With
+        // just +100, both input model and first output get the identical minorStep stereotype
+        bi.actualStateCopyOfLastBitTransformStepMappings = new ArrayList<>(lastBigTransformStepMappings);
+        // bi.inputModel, clone of currInputModel, already has ORIGIN_TRACE values properly set, no need to do anything in fork().
+        bi.transitionTrace = transitionTrace.fork();
+        forkQueue.add(bi);
+      }
+    }
+    return currOutput;
+  }
+
+  private SModel executeMajorStep(ProgressMonitor progress, SModel inputModel, Transform planStep, TransitionTrace transitionTrace) throws GenerationCanceledException, GenerationFailureException {
+    List<TemplateMappingConfiguration> mappingConfigurations = new ArrayList<>(planStep.getTransformations());
 
     if (myLogger.needsInfo()) {
       printUsedLanguages(inputModel);
@@ -333,8 +408,8 @@ class GenerationSession {
     mySessionContext = new GenerationSessionContext(mySessionContext);
 
     // -- filter mapping configurations
-    TemplateGenerator templateGenerator = new TemplateGenerator(mySessionContext, inputModel, null, new StepArguments(myDependenciesBuilder));
-    LinkedList<TemplateMappingConfiguration> drop = new LinkedList<TemplateMappingConfiguration>();
+    ITemplateGenerator templateGenerator = new BogusTemplateGenerator(mySessionContext, inputModel, myQuerySource);
+    LinkedList<TemplateMappingConfiguration> drop = new LinkedList<>();
     for (TemplateMappingConfiguration c : mappingConfigurations) {
       if (!c.isApplicable(templateGenerator)) {
         drop.add(c);
@@ -353,11 +428,12 @@ class GenerationSession {
     }
 
     // -- prepare generator
-    Collections.sort(mappingConfigurations, new MapCfgComparator());
-    GenPlanActiveStep activeStep = new GenPlanActiveStep(myGenerationPlan, planStep, mappingConfigurations);
+    mappingConfigurations.sort(new MapCfgComparator());
+    GenPlanActiveStep activeStep = new GenPlanActiveStep(myGenerationPlan, planStep, mappingConfigurations, myControlEnv.getLanguageRegistry());
 
     try {
-      myStepArguments = new StepArguments(activeStep, myDependenciesBuilder, myNewTrace, new GeneratorMappings(myLogger), transitionTrace);
+      final GeneratorMappings gml = new GeneratorMappings(activeStep.getPrivateLabels(), myLogger);
+      myStepArguments = new StepArguments(activeStep, myNewTrace, gml, transitionTrace, myQuerySource, myRoleValidation, ttrace);
       SModel outputModel = executeMajorStepInternal(inputModel, progress);
       if (myLogger.getErrorCount() > 0) {
         myLogger.warning(String.format("model '%s' has been generated with errors", inputModel.getName()));
@@ -372,20 +448,20 @@ class GenerationSession {
   // precondition: myStepArguments initialized (!= null);
   private SModel executeMajorStepInternal(SModel inputModel, ProgressMonitor progress) throws GenerationFailureException, GenerationCanceledException {
     SModel currentInputModel = inputModel;
-    final boolean cloneInputModel = myGenerationOptions.isSaveTransientModels() && myGenerationOptions.applyTransformationsInplace();
+    // XXX Does cloneInputModel == true make any sense for for a first model in a branch (which is itself a copy at the fork point?)
+    final boolean cloneInputModel = myControlEnv.getOptions().isSaveTransientModels() && myControlEnv.getOptions().applyTransformationsInplace();
 
     // -----------------------
     // run pre-processing scripts
     // -----------------------
-    ttrace.push("pre-processing", false);
+    ttrace.push("pre-processing");
     currentInputModel = preProcessModel(currentInputModel);
     ttrace.pop();
 
     SModel currentOutputModel = createTransientModel();
 
     if (myLogger.needsInfo()) {
-      myLogger.info(
-          "generating model '" + currentInputModel.getModelName() + "' --> '" + currentOutputModel.getModelName() + "'");
+      myLogger.info(String.format("generating model '%s' --> '%s'", currentInputModel.getName(), currentOutputModel.getName()));
     }
     boolean isPrimary = true;
     // exit condition for secondary mapping
@@ -397,18 +473,25 @@ class GenerationSession {
       }
       myNewTrace.nextStep(currentInputModel.getReference(), currentOutputModel.getReference());
 
-      final SModel intactInputModelClone = cloneInputModel ? cloneTransientModel(currentInputModel) : null;
+      final SModel intactInputModelClone = cloneInputModel ? cloneTransientModel(currentInputModel, myActiveBranchSerial) : null;
       final TemplateGenerator tg = prepareToApplyRules(currentInputModel, currentOutputModel);
       boolean somethingHasBeenGenerated = false, applySucceed = false;
       try {
-        somethingHasBeenGenerated = applyRules(tg, progress, isPrimary);
+        ttrace.push(String.format("Step %d.%d", myMajorStep+1, myMinorStep));
+        somethingHasBeenGenerated = tg.apply(progress, isPrimary);
+        ttrace.pop();
         applySucceed = true;
         if (!somethingHasBeenGenerated) {
+          // nothing has been generated
+          if (myLogger.needsInfo()) {
+            myLogger.info(String.format("unchanged, empty model '%s' removed", SModelStereotype.getStereotype(currentOutputModel)));
+          }
           myNewTrace.dropStep(currentInputModel.getReference(), currentOutputModel.getReference());
         } else {
           // next iteration ...
           mySessionContext.clearTransientObjects();
           isPrimary = false;
+          myEmployedLanguages.addAll(tg.getEmployedLanguages());
         }
       } finally {
         // if apply fails with exception, I'd like to keep both current input and output.
@@ -457,7 +540,6 @@ class GenerationSession {
           FastNodeFinderManager.dispose(currentInputModel); // why?!
         } else {
           assert currentInputModel == realOutputModel;
-          myDependenciesBuilder.dropModel();
           // currentInputModel stays as input.
           // in fact, can reuse output model here, but it's task to solve together with tracer (and how it would live with startTracing(same models)
           dropTransientModel(currentOutputModel);
@@ -476,7 +558,7 @@ class GenerationSession {
     // -----------------------
     // run post-processing scripts
     // -----------------------
-    ttrace.push("post-processing", false);
+    ttrace.push("post-processing");
     currentOutputModel = postProcessModel(currentOutputModel);
     ttrace.pop();
 
@@ -490,42 +572,9 @@ class GenerationSession {
 
   @NotNull
   private TemplateGenerator prepareToApplyRules(SModel currentInputModel, SModel currentOutputModel) {
-    myDependenciesBuilder.setOutputModel(currentOutputModel, myMajorStep, myMinorStep);
-    return myGenerationOptions.isGenerateInParallel()
+    return myControlEnv.getOptions().isGenerateInParallel()
             ? new ParallelTemplateGenerator(myTaskPoolProvider, mySessionContext, currentInputModel, currentOutputModel, myStepArguments)
             : new TemplateGenerator(mySessionContext, currentInputModel, currentOutputModel, myStepArguments);
-  }
-
-  private boolean applyRules(TemplateGenerator tg, ProgressMonitor progress, final boolean isPrimary)
-      throws GenerationFailureException, GenerationCanceledException {
-
-    final SModel originalOutputModel = tg.getOutputModel();
-    ttrace.push(String.format("Step %d.%d", myMajorStep+1, myMinorStep), true);
-    final boolean hasChanges = tg.apply(progress, isPrimary);
-    ttrace.pop();
-
-    if (isPrimary || hasChanges) {
-      myIntermediateCache.store(myMajorStep, myMinorStep, tg, myDependenciesBuilder);
-    }
-    if (hasChanges) {
-      SModel realOutputModel = tg.getOutputModel();
-      myDependenciesBuilder.updateModel(realOutputModel);
-    } else {
-      // nothing has been generated
-      myDependenciesBuilder.dropModel();
-      if (!isPrimary) {
-        // we may need myMinorStep in postProcess, when we store TransientModelWithMetainfo
-        // applyRules did that for primary step regardless of hasChanges state, hence we decrement minorStep
-        // only on secondary no-change runs to forget about no-op applyRules.
-        // I consider this changes safer than to remove isPrimary check in applyRules (it's appealing
-        // to save TMWM only when there are changes) as it seems there's assumption about TMWM presence (if used) for each step.
-        myMinorStep--;
-      }
-      if (myLogger.needsInfo()) {
-        myLogger.info(String.format("unchanged, empty model '%s' removed", SModelStereotype.getStereotype(originalOutputModel)));
-      }
-    }
-    return hasChanges;
   }
 
   private SModel preProcessModel(SModel currentInputModel) throws GenerationFailureException {
@@ -538,10 +587,10 @@ class GenerationSession {
     // need to clone input model?
     // generally, there's no need to have a copy to run a script, even if it modifies the model
     // however, if we keep transients AND model is modified, it's handy to get a copy of the model to see the difference
-    final boolean needToCloneInputModel = modifiesModel && myGenerationOptions.isSaveTransientModels();
+    final boolean needToCloneInputModel = modifiesModel && myControlEnv.getOptions().isSaveTransientModels();
     SModel toRecycle = null;
     if (needToCloneInputModel) {
-      ttrace.push("model clone", false);
+      ttrace.push("model clone");
       SModel currentInputModel_clone = createTransientModel();
       if (myLogger.needsInfo()) {
         myLogger.info(String.format("clone model '%s' --> '%s'", currentInputModel.getName(), currentInputModel_clone.getName()));
@@ -554,7 +603,6 @@ class GenerationSession {
       // probably we can forget about former input model here
       toRecycle = currentInputModel;
       currentInputModel = currentInputModel_clone;
-      myDependenciesBuilder.scriptApplied(currentInputModel); // scriptApplied for a blank copy to record old root to new root mapping
     } else {
       myNewTrace.nextStep(currentInputModel.getReference(), currentInputModel.getReference());
     }
@@ -564,13 +612,17 @@ class GenerationSession {
       if (myLogger.needsInfo()) {
         myLogger.info(preMappingScript.getScriptNode(), "pre-process " + preMappingScript.getLongName());
       }
+      if (modifiesModel && !needToCloneInputModel) {
+        // HACK:
+        // script gonna change a model and it's not a fresh new one, chances are there's FNF instance that may slow down removal of nodes significantly
+        // we can't help if script does model.nodes() and instantiates another FNF instance. Instead, shall make FNF use explicit or optimize
+        // its code that removes nodes to be effective with transient models (i.e. there's no batch notifications, nodes being removed one by one
+        // greatly slow down the process as FNF assumes multi-thread access to its cache).
+        FastNodeFinderManager.dispose(currentInputModel);
+      }
       templateGenerator.executeScript(preMappingScript);
     }
-    if (modifiesModel) {
-      myDependenciesBuilder.scriptApplied(currentInputModel);
-    }
     if (needToCloneInputModel) {
-      myIntermediateCache.store(myMajorStep, myMinorStep, templateGenerator, myDependenciesBuilder);
       recycleWasteModel(toRecycle);
     }
     myLogger.info("pre-processing finished");
@@ -583,10 +635,10 @@ class GenerationSession {
       return currentModel;
     }
     // post-processing script is deemed to modify model always
-    final boolean needToCloneModel = myGenerationOptions.isSaveTransientModels();
+    final boolean needToCloneModel = myControlEnv.getOptions().isSaveTransientModels();
     SModel toRecycle = null;
     if (needToCloneModel) {
-      ttrace.push("model clone", false);
+      ttrace.push("model clone");
       SModel currentOutputModel_clone = createTransientModel();
       if (myLogger.needsInfo()) {
         myLogger.info(String.format("clone model '%s' --> '%s'", currentModel.getName(), currentOutputModel_clone.getName()));
@@ -597,7 +649,6 @@ class GenerationSession {
       myNewTrace.nextStep(currentModel.getReference(), currentOutputModel_clone.getReference());
       toRecycle = currentModel;
       currentModel = currentOutputModel_clone;
-      myDependenciesBuilder.scriptApplied(currentModel);
     } else {
       myNewTrace.nextStep(currentModel.getReference(), currentModel.getReference());
       // just in case post-script modifies model a lot, and we've got FNF there, prevent it being updated - it's cheaper to create new one at the next step
@@ -613,9 +664,7 @@ class GenerationSession {
       }
       templateGenerator.executeScript(postMappingScript);
     }
-    myDependenciesBuilder.scriptApplied(currentModel);
     if (needToCloneModel) {
-      myIntermediateCache.store(myMajorStep, myMinorStep, templateGenerator, myDependenciesBuilder);
       recycleWasteModel(toRecycle);
     }
     myLogger.info("post-processing finished");
@@ -624,25 +673,43 @@ class GenerationSession {
 
   // XXX createOutputModel? - since the method has a side effect, increments myMinorStep count
   private SModel createTransientModel() {
-    return createTransientModel(Integer.toString(myMajorStep + 1) + "_" + ++myMinorStep);
+    SModelReference mr = createTransientModelReference(myMajorStep, myMinorStep++);
+    return mySessionContext.getModule().createTransientModel(mr, myActiveBranchSerial);
   }
 
-  private SModel createTransientModel(String stereotype) {
+  private SModel createTransientModel(int majorStep, int minorStep, String stereotype) {
+    final SModelReference mr = createTransientModelReference(majorStep, minorStep, stereotype);
+    // XXX technically, it seems feasible to keep simple values like branch serial number as a part of model reference,
+    //     which would help to deal with persistence issue (now we rely TransientSModelDescriptor instance stays the same)
+    //     but perhaps we would like to pass more attributes eventually.
+    // FIXME Might be reasonable to utilizeModelWithAttributes interface instead of dedicated and explicit int value,
+    //       just need to figure out if it affects checkpoint models (don't want them all get regenerated)
+    return mySessionContext.getModule().createTransientModel(mr, myActiveBranchSerial);
+  }
+
+  private SModelReference createTransientModelReference(int majorStep, int minorStep) {
+    String stereotype = Integer.toString(majorStep + 1) + '_' + Integer.toString(minorStep);
+    return createTransientModelReference(majorStep, minorStep, stereotype);
+  }
+
+  private SModelReference createTransientModelReference(int majorStep, int minorStep, String stereotype) {
+    // 3 least-significant hex digits for minor, then 2 for major, total 5 (expect myMajorStep to be less than 256)
+//    int idHint = ((majorStep+1) << 12) | minorStep;
+//    assert idHint < 1<<20 : "got only 5 hex digits reserved for the model identity";
     TransientModelsModule module = mySessionContext.getModule();
-    String longName = NameUtil.getModelLongName(myOriginalInputModel);
-    final String transientModelName = longName + '@' + stereotype;
-    final SModelReference mr = PersistenceFacade.getInstance().createModelReference(module.getModuleReference(), jetbrains.mps.smodel.SModelId.generate(), transientModelName);
-    return module.createTransientModel(mr);
+    final SModelName transientModelName = myOriginalInputModel.getName().withStereotype(stereotype);
+    IntegerSModelId id = module.nextModelId(0/*idHint*/);
+    return myControlEnv.getPersistenceFacade().createModelReference(module.getModuleReference(), id, transientModelName);
   }
 
   /**
    * makes an identical copy of transient model, preserving model reference
    */
-  private SModel cloneTransientModel(SModel transientModel) {
+  private SModel cloneTransientModel(SModel transientModel, int branchSerial) {
     TransientModelsModule module = mySessionContext.getModule();
     final SModelReference mr = transientModel.getReference();
     assert module.isMyTransientModel(mr);
-    SModel newModel = module.createTransientModel(mr);
+    SModel newModel = module.createTransientModel(mr, branchSerial);
     new CloneUtil(transientModel, newModel).cloneModelWithImports();
     return newModel;
   }
@@ -706,13 +773,8 @@ class GenerationSession {
   }
 
   private void printUsedLanguages(SModel inputModel) {
-    List<SLanguage> references = new ArrayList<SLanguage>(ModelContentUtil.getUsedLanguages(inputModel));
-    Collections.sort(references, new Comparator<SLanguage>() {
-      @Override
-      public int compare(SLanguage l1, SLanguage l2) {
-        return l1.getQualifiedName().compareTo(l2.getQualifiedName());
-      }
-    });
+    List<SLanguage> references = new ArrayList<>(ModelContentUtil.getUsedLanguages(inputModel));
+    references.sort(Comparator.comparing(SLanguage::getQualifiedName));
     myLogger.info("languages used:");
     for (SLanguage lang : references) {
       myLogger.info("    " + lang);
@@ -728,11 +790,11 @@ class GenerationSession {
   }
 
   private void recordAccessedTransientModels() {
-    Collection<SModelReference> modelToKeepCandidates = new LinkedHashSet<SModelReference>();
+    Collection<SModelReference> modelToKeepCandidates = new LinkedHashSet<>();
     final TransientModelsModule transientsModule = mySessionContext.getModule();
     if (keepTransientForMessageNavigation()) {
       modelToKeepCandidates.addAll(myLogRecorder.ofKind(MessageKind.ERROR));
-      if (myGenerationOptions.isShowWarnings() && myGenerationOptions.isKeepModelsWithWarnings()) {
+      if (myControlEnv.getOptions().isShowWarnings() && myControlEnv.getOptions().isKeepModelsWithWarnings()) {
         modelToKeepCandidates.addAll(myLogRecorder.ofKind(MessageKind.WARNING));
       }
       for (SModelReference mr : modelToKeepCandidates) {
@@ -742,7 +804,7 @@ class GenerationSession {
       }
     }
     myLogRecorder.reset();
-    final boolean discardTransients = !myGenerationOptions.isSaveTransientModels();
+    final boolean discardTransients = !myControlEnv.getOptions().isSaveTransientModels();
     for (SModel m : myTransientModelsToRecycle) {
       if (discardTransients && !modelToKeepCandidates.contains(m.getReference())) {
         // drop a model only if we don't save transients and don't keep this model due to errors/warnings
@@ -758,33 +820,76 @@ class GenerationSession {
     return !RuntimeFlags.isTestMode();
   }
 
-  public MPSAppenderBase getLoggingHandler() {
+  /*package*/ void activateLogTracking() {
     if (myLoggingHandler == null) {
-      myLoggingHandler = new MPSAppenderBase() {
-        @Override
-        protected void append(@NotNull Priority level, @NotNull String categoryName, @NotNull String message, @Nullable Throwable t,
-            @Nullable Object hintObject) {
-          if (hintObject instanceof SNode) {
-            final SModel m = ((SNode) hintObject).getModel();
-            myLogRecorder.record(MessageKind.fromPriority(level), m.getReference());
-          } else if (hintObject instanceof SModelReference) {
-            SModelReference mr = (SModelReference) hintObject;
-            myLogRecorder.record(MessageKind.fromPriority(level), mr);
-          } else if (hintObject instanceof SNodeReference) {
-            myLogRecorder.record(MessageKind.fromPriority(level), ((SNodeReference) hintObject).getModelReference());
-          }
-        }
-      };
+      myLoggingHandler = new TrackHintObjectsInLog(myLogRecorder);
+      Logger.getLogger("").addHandler(myLoggingHandler);
     }
-    return myLoggingHandler;
   }
 
+  /*package*/ void deactivateLogTracking() {
+    if (myLoggingHandler != null) {
+      Logger.getLogger("").removeHandler(myLoggingHandler);
+      myLoggingHandler = null;
+    }
+  }
+
+  private static final class TrackHintObjectsInLog extends Handler {
+    private final RecordingFactory myLogRecorder;
+
+    /*package*/ TrackHintObjectsInLog(RecordingFactory logRecorder) {
+      // no filter nor formatter
+      myLogRecorder = logRecorder;
+    }
+
+    @Override
+    public void publish(LogRecord record) {
+      final Object[] hintObjects = record.getParameters();
+      if (hintObjects == null) {
+        return;
+      }
+      final Level level = record.getLevel();
+      // Do I care to track anything finer than INFO? What if user debugs his code and would enjoy respective
+      // transient models being kept even for debug messages?
+      //   if (level.intValue() < Level.INFO.intValue())
+
+      Optional<SNode> node = Arrays.stream(hintObjects).filter(SNode.class::isInstance).map(SNode.class::cast).findAny();
+      Optional<SNodeReference> nref = Arrays.stream(hintObjects).filter(SNodeReference.class::isInstance).map(SNodeReference.class::cast).findAny();
+      Optional<SModelReference> mref = Arrays.stream(hintObjects).filter(SModelReference.class::isInstance).map(SModelReference.class::cast).findAny();
+      if (node.isPresent()) {
+        final SModel m = node.get().getModel();
+        myLogRecorder.record(MessageKind.fromPriority(level), m.getReference());
+      } else if (mref.isPresent()) {
+        myLogRecorder.record(MessageKind.fromPriority(level), mref.get());
+      } else if (nref.isPresent()) {
+        myLogRecorder.record(MessageKind.fromPriority(level), nref.get().getModelReference());
+      }
+    }
+
+    @Override
+    public void flush() {
+      // no-op
+    }
+
+    @Override
+    public void close() throws SecurityException {
+      // no-op
+    }
+  }
+
+  @SuppressWarnings("WeakerAccess")
   public void discardTransients() {
-    if (mySessionContext == null) return;
-    if (!myGenerationOptions.isSaveTransientModels()) {
+    if (mySessionContext == null) {
+      return;
+    }
+    if (!myControlEnv.getOptions().isSaveTransientModels()) {
       mySessionContext.getModule().clearUnused();
     }
-    mySessionContext.disposeQueryProvider();
+    if (myQuerySource != null) {
+      // exception may happen prior to initialization of myQuerySource field
+      myQuerySource.dispose();
+      myQuerySource = null;
+    }
     mySessionContext = null;
   }
 }

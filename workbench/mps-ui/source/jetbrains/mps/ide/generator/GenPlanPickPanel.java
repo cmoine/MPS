@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,26 +15,38 @@
  */
 package jetbrains.mps.ide.generator;
 
+import com.intellij.ide.util.gotoByName.ChooseByNamePopupComponent.Callback;
+import com.intellij.openapi.application.ModalityState;
+import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.openapi.util.Disposer;
 import com.intellij.ui.IdeBorderFactory;
-import jetbrains.mps.ide.ui.dialogs.properties.choosers.CommonChoosers;
-import jetbrains.mps.project.Project;
-import jetbrains.mps.smodel.ModelAccessHelper;
-import jetbrains.mps.util.Computable;
+import jetbrains.mps.project.MPSProject;
+import jetbrains.mps.scope.ConditionalScope;
+import jetbrains.mps.smodel.SModelStereotype;
+import jetbrains.mps.util.AndCondition;
+import jetbrains.mps.util.NotCondition;
+import jetbrains.mps.workbench.choose.ChooseByNameData;
+import jetbrains.mps.workbench.choose.ModelScopeIterable;
+import jetbrains.mps.workbench.choose.ModelsPresentation;
+import jetbrains.mps.workbench.goTo.ui.ChooseByNamePanel;
+import jetbrains.mps.workbench.goTo.ui.MpsPopupFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.module.SearchScope;
+import org.jetbrains.mps.util.Condition;
 
+import javax.swing.Action;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.function.Supplier;
 
 /**
  * UI component to select a model with custom generation plan.
@@ -43,14 +55,18 @@ import java.util.ArrayList;
  * @since 3.4
  */
 public class GenPlanPickPanel extends JPanel {
-  private final Project myProject;
-  private final SearchScope myScope;
+  private final MPSProject myProject;
+  private final Supplier<SearchScope> myScope;
   private final JTextField myModelName;
   private SModelReference myActualReference;
 
-  public GenPlanPickPanel(@NotNull Project mpsProject, @NotNull SearchScope scope, @NotNull String title) {
+  public GenPlanPickPanel(@NotNull MPSProject mpsProject, @NotNull SearchScope scope, @NotNull String title) {
+    this(mpsProject, () -> scope, title);
+  }
+
+  public GenPlanPickPanel(@NotNull MPSProject mpsProject, @NotNull Supplier<SearchScope> scopeProvider, @NotNull String title) {
     myProject = mpsProject;
-    myScope = scope;
+    myScope = scopeProvider;
     setBorder(IdeBorderFactory.createTitledBorder(title));
     setLayout(new GridBagLayout());
     JLabel l = new JLabel("Model:");
@@ -70,20 +86,11 @@ public class GenPlanPickPanel extends JPanel {
     c.fill = GridBagConstraints.NONE;
     c.weightx = 0;
     add(b, c);
-    b.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        ArrayList<SModelReference> models = new ModelAccessHelper(myProject.getModelAccess()).runReadAction(new Computable<ArrayList<SModelReference>>() {
-          @Override
-          public ArrayList<SModelReference> compute() {
-            ArrayList<SModelReference> rv = new ArrayList<SModelReference>();
-            for (SModel m : myScope.getModels()) {
-              rv.add(m.getReference());
-            }
-            return rv;
-          }
-        });
-        setPlanModel(CommonChoosers.showModelChooser(myProject, "Pick model with a generation plan", models));
+    b.addActionListener(e -> {
+      PickGenPlanModelDialog dialog = new PickGenPlanModelDialog(myProject, myScope.get());
+      dialog.show();
+      if (dialog.isOK()) {
+        setPlanModel(dialog.getResult());
       }
     });
   }
@@ -96,5 +103,90 @@ public class GenPlanPickPanel extends JPanel {
   public void setPlanModel(@Nullable SModelReference planModel) {
     myActualReference = planModel;
     myModelName.setText(myActualReference == null ? "<none>" : myActualReference.getModelName());
+  }
+
+
+  private static class PickGenPlanModelDialog extends DialogWrapper {
+    private static final int UNSET_EXIT_CODE = NEXT_USER_EXIT_CODE;
+    private final Action myResetAction;
+    private final ChooseByNamePanel myChooser;
+    private SModelReference mySelection;
+
+    public PickGenPlanModelDialog(MPSProject mpsProject, SearchScope scope) {
+      super(mpsProject.getProject());
+      setTitle("Pick model with a generation plan");
+      setModal(true);
+      ChooseByNameData<SModelReference> data = new ChooseByNameData<>(new ModelsPresentation(mpsProject.getRepository()));
+      // there's DeriveGenPlanDialog with the same filter
+      Condition<SModel> isStub = SModelStereotype::isStubModel;
+      Condition<SModel> isDescriptor = SModelStereotype::isDescriptorModel;
+      ConditionalScope s = new ConditionalScope(scope, null, new AndCondition<>(NotCondition.negate(isStub), NotCondition.negate(isDescriptor)));
+      data.derivePrompts("model").setCheckBoxName(null).setScope(new ModelScopeIterable(s, mpsProject.getRepository()), null);
+      myChooser = MpsPopupFactory.createPanelForPackage(mpsProject.getProject(), data, false);
+      myResetAction = new DialogWrapperExitAction("Unset plan", UNSET_EXIT_CODE);
+    }
+
+    @Override
+    protected void init() {
+      // shall invoke it prior to super.init() otherwise there's no panel in the dialog
+      myChooser.invoke(new Callback() {
+        @Override
+        public void elementChosen(Object element) {
+          mySelection = (SModelReference) element;
+          // according to ChooseByNamePopup, elementsChosen are invoked when selection has to be processed, not when actual selection changes
+          getOKAction().actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
+        }
+      }, ModalityState.any(), false);
+      Disposer.register(getDisposable(), myChooser);
+      super.init();
+    }
+
+    @Override
+    public void show() {
+      init();
+      super.show();
+    }
+
+    @NotNull
+    @Override
+    protected Action[] createActions() {
+      return new Action[] {getOKAction(), getCancelAction(), myResetAction};
+    }
+
+    @Nullable
+    @Override
+    protected JComponent createCenterPanel() {
+      return myChooser.getPanel();
+    }
+
+    @Override
+    protected void doOKAction() {
+      // see ChooserDialog.doOkAction
+      if (mySelection == null) {
+        // I assume mySelection != null when it's double-click in selection and our handling in elementChosen(), above, got us here
+        mySelection = (SModelReference) myChooser.getChosenElement();
+      }
+      super.doOKAction();
+    }
+
+    @Override
+    public boolean isOK() {
+      // unset means null outcome to clear selected model
+      return getExitCode() == OK_EXIT_CODE || getExitCode() == UNSET_EXIT_CODE;
+    }
+
+    @Nullable
+    /*package*/ SModelReference getResult() {
+      if (getExitCode() == OK_EXIT_CODE) {
+        return mySelection;
+      }
+      // for unset/cancel it's null
+      return null;
+    }
+
+    @Override
+    protected String getDimensionServiceKey() {
+      return getClass().getCanonicalName();
+    }
   }
 }

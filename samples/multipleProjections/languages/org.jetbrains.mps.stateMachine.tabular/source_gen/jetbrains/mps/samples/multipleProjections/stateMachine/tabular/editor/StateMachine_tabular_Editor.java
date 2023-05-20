@@ -9,10 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.lang.editor.table.runtime.TableModelFactory;
-import jetbrains.mps.lang.editor.table.runtime.TableModel;
-import jetbrains.mps.openapi.editor.cells.EditorCell_Collection;
-import jetbrains.mps.lang.editor.table.runtime.EditorCell_Table;
 
 public class StateMachine_tabular_Editor extends DefaultNodeEditor {
   private Collection<String> myContextHints = Arrays.asList(new String[]{"jetbrains.mps.samples.multipleProjections.requestTracking.editor.WorkflowPresentations.tabular"});
@@ -22,17 +18,6 @@ public class StateMachine_tabular_Editor extends DefaultNodeEditor {
     return myContextHints;
   }
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createTable_9yuogs_a(editorContext, node);
-  }
-  private EditorCell createTable_9yuogs_a(EditorContext editorContext, SNode node) {
-    TableModelFactory creator = new TableModelFactory() {
-      public TableModel createTableModel(final SNode node, final EditorContext editorContext) {
-        return new StateMachineTableModel(node, editorContext);
-      }
-    };
-    EditorCell_Collection editorCell = EditorCell_Table.createTable(editorContext, node, creator.createTableModel(node, editorContext), "Table_9yuogs_a");
-    editorCell.setCellId("Table_9yuogs_a_0");
-    editorCell.setBig(true);
-    return editorCell;
+    return new StateMachine_tabular_EditorBuilder_a(editorContext, node).createCell();
   }
 }

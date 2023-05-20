@@ -16,7 +16,6 @@
 package jetbrains.mps.editor.runtime.selection;
 
 import jetbrains.mps.openapi.editor.EditorContext;
-import jetbrains.mps.util.test.Checker.Result;
 import org.jetbrains.mps.openapi.model.SNode;
 
 import java.util.ArrayList;

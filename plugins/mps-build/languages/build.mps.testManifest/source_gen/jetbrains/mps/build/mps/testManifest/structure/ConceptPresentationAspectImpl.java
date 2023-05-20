@@ -4,27 +4,42 @@ package jetbrains.mps.build.mps.testManifest.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_TestModuleManifest = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestModuleManifestRef = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestProjectConfiguration = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_TestModuleManifest;
+  private ConceptPresentation props_TestModuleManifestRef;
+  private ConceptPresentation props_TestProjectConfiguration;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.TestModuleManifest:
+        if (props_TestModuleManifest == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_TestModuleManifest = cpb.create();
+        }
         return props_TestModuleManifest;
-      case 1:
+      case LanguageConceptSwitch.TestModuleManifestRef:
+        if (props_TestModuleManifestRef == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x9f846aef4e4a4a84L, 0x828e7e83fe2697f2L, 0x2dc684499788c1c4L, 0x2dc684499788c1c5L, "manifest", "", "");
+          props_TestModuleManifestRef = cpb.create();
+        }
         return props_TestModuleManifestRef;
-      case 2:
+      case LanguageConceptSwitch.TestProjectConfiguration:
+        if (props_TestProjectConfiguration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_TestProjectConfiguration = cpb.create();
+        }
         return props_TestProjectConfiguration;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

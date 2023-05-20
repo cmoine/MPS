@@ -1,0 +1,15 @@
+<ivy-module version="2.0" xmlns:m="http://ant.apache.org/ivy/maven">
+  <info organisation="org.jetbrains.mps" module="idea-platform"/>
+  <dependencies>
+    <dependency org="org.jetbrains.kotlinx" name="kotlinx-metadata-jvm" rev="0.4.2">
+      <artifact name="kotlinx-metadata-jvm" ext="jar"/>
+      <artifact name="kotlinx-metadata-jvm" m:classifier="sources" ext="jar"/>
+      <artifact name="kotlinx-metadata-jvm" m:classifier="javadoc" ext="jar"/>
+    </dependency>
+    <dependency org="org.jetbrains.kotlin" name="kotlin-compiler-client-embeddable" rev="${kotlin.version}">
+      <artifact name="kotlin-compiler-client-embeddable" ext="jar"/>
+      <artifact name="kotlin-compiler-client-embeddable" m:classifier="sources" ext="jar"/>
+      <artifact name="kotlin-compiler-client-embeddable" m:classifier="javadoc" ext="jar"/>
+    </dependency>
+  </dependencies>
+</ivy-module>

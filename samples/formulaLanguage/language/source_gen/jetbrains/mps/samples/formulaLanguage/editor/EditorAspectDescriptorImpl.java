@@ -10,130 +10,60 @@ import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import java.util.Collections;
 import jetbrains.mps.openapi.editor.descriptor.TransformationMenu;
 import jetbrains.mps.openapi.editor.descriptor.SubstituteMenu;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public class EditorAspectDescriptorImpl extends EditorAspectDescriptorBase {
   @NotNull
   public Collection<ConceptEditor> getDeclaredEditors(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = ((SAbstractConcept) concept);
-      Integer preIndex = indices_xbvbvu_a0a.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new AndOperation_Editor());
-          }
-          break;
-        case 1:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new Constant_Editor());
-          }
-          break;
-        case 2:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new EqualsOperation_Editor());
-          }
-          break;
-        case 3:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new Expression_Editor());
-          }
-          break;
-        case 4:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new FloatingPointConstant_Editor());
-          }
-          break;
-        case 5:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new Formula_Editor());
-          }
-          break;
-        case 6:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new Function_Editor());
-          }
-          break;
-        case 7:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new GreaterThanOperation_Editor());
-          }
-          break;
-        case 8:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new IfFunction_Editor());
-          }
-          break;
-        case 9:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new IntegerConstant_Editor());
-          }
-          break;
-        case 10:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new IsNullOperation_Editor());
-          }
-          break;
-        case 11:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new LessThanOperation_Editor());
-          }
-          break;
-        case 12:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MinusOperation_Editor());
-          }
-          break;
-        case 13:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MultOperation_Editor());
-          }
-          break;
-        case 14:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new NotOperation_Editor());
-          }
-          break;
-        case 15:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new NullConstant_Editor());
-          }
-          break;
-        case 16:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new Operation_Editor());
-          }
-          break;
-        case 17:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new OrOperation_Editor());
-          }
-          break;
-        case 18:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ParenthisizedExpression_Editor());
-          }
-          break;
-        case 19:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new PlusOperation_Editor());
-          }
-          break;
-        case 20:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new Reference_Editor());
-          }
-          break;
-        case 21:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new StringConstant_Editor());
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = ((SAbstractConcept) concept);
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return Collections.<ConceptEditor>singletonList(new AndOperation_Editor());
+      case 1:
+        return Collections.<ConceptEditor>singletonList(new Constant_Editor());
+      case 2:
+        return Collections.<ConceptEditor>singletonList(new EqualsOperation_Editor());
+      case 3:
+        return Collections.<ConceptEditor>singletonList(new Expression_Editor());
+      case 4:
+        return Collections.<ConceptEditor>singletonList(new FloatingPointConstant_Editor());
+      case 5:
+        return Collections.<ConceptEditor>singletonList(new Formula_Editor());
+      case 6:
+        return Collections.<ConceptEditor>singletonList(new Function_Editor());
+      case 7:
+        return Collections.<ConceptEditor>singletonList(new GreaterThanOperation_Editor());
+      case 8:
+        return Collections.<ConceptEditor>singletonList(new IfFunction_Editor());
+      case 9:
+        return Collections.<ConceptEditor>singletonList(new IntegerConstant_Editor());
+      case 10:
+        return Collections.<ConceptEditor>singletonList(new IsNullOperation_Editor());
+      case 11:
+        return Collections.<ConceptEditor>singletonList(new LessThanOperation_Editor());
+      case 12:
+        return Collections.<ConceptEditor>singletonList(new MinusOperation_Editor());
+      case 13:
+        return Collections.<ConceptEditor>singletonList(new MultOperation_Editor());
+      case 14:
+        return Collections.<ConceptEditor>singletonList(new NotOperation_Editor());
+      case 15:
+        return Collections.<ConceptEditor>singletonList(new NullConstant_Editor());
+      case 16:
+        return Collections.<ConceptEditor>singletonList(new Operation_Editor());
+      case 17:
+        return Collections.<ConceptEditor>singletonList(new OrOperation_Editor());
+      case 18:
+        return Collections.<ConceptEditor>singletonList(new ParenthisizedExpression_Editor());
+      case 19:
+        return Collections.<ConceptEditor>singletonList(new PlusOperation_Editor());
+      case 20:
+        return Collections.<ConceptEditor>singletonList(new Reference_Editor());
+      case 21:
+        return Collections.<ConceptEditor>singletonList(new StringConstant_Editor());
+      default:
     }
     return Collections.<ConceptEditor>emptyList();
   }
@@ -142,59 +72,31 @@ public class EditorAspectDescriptorImpl extends EditorAspectDescriptorBase {
   @NotNull
   @Override
   public Collection<TransformationMenu> getDeclaredDefaultTransformationMenus(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_xbvbvu_a0d.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new Expression_TransformationMenu());
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex1.index(cncpt)) {
+      case 0:
+        return Collections.<TransformationMenu>singletonList(new Expression_TransformationMenu());
+      default:
     }
     return Collections.<TransformationMenu>emptyList();
   }
   @NotNull
   @Override
   public Collection<SubstituteMenu> getDeclaredDefaultSubstituteMenus(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_xbvbvu_a0e.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new Expression_SubstituteMenu());
-          }
-          break;
-        case 1:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new FloatingPointConstant_SubstituteMenu());
-          }
-          break;
-        case 2:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new IntegerConstant_SubstituteMenu());
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex2.index(cncpt)) {
+      case 0:
+        return Collections.<SubstituteMenu>singletonList(new Expression_SubstituteMenu());
+      case 1:
+        return Collections.<SubstituteMenu>singletonList(new FloatingPointConstant_SubstituteMenu());
+      case 2:
+        return Collections.<SubstituteMenu>singletonList(new IntegerConstant_SubstituteMenu());
+      default:
     }
     return Collections.<SubstituteMenu>emptyList();
   }
 
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
-  }
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0a = buildConceptIndices(MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x108050a5816L, "jetbrains.mps.samples.formulaLanguage.structure.AndOperation"), MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db857767L, "jetbrains.mps.samples.formulaLanguage.structure.Constant"), MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x10809c54870L, "jetbrains.mps.samples.formulaLanguage.structure.EqualsOperation"), MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db824fa1L, "jetbrains.mps.samples.formulaLanguage.structure.Expression"), MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db8bab3cL, "jetbrains.mps.samples.formulaLanguage.structure.FloatingPointConstant"), MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db80c054L, "jetbrains.mps.samples.formulaLanguage.structure.Formula"), MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db8296fcL, "jetbrains.mps.samples.formulaLanguage.structure.Function"), MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x103009e5ee0L, "jetbrains.mps.samples.formulaLanguage.structure.GreaterThanOperation"), MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db8d4298L, "jetbrains.mps.samples.formulaLanguage.structure.IfFunction"), MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db8aa3f9L, "jetbrains.mps.samples.formulaLanguage.structure.IntegerConstant"), MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x10a037c6c0bL, "jetbrains.mps.samples.formulaLanguage.structure.IsNullOperation"), MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102ea976b99L, "jetbrains.mps.samples.formulaLanguage.structure.LessThanOperation"), MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102dba2244aL, "jetbrains.mps.samples.formulaLanguage.structure.MinusOperation"), MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102ff4441ddL, "jetbrains.mps.samples.formulaLanguage.structure.MultOperation"), MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x10a04135987L, "jetbrains.mps.samples.formulaLanguage.structure.NotOperation"), MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x10a036c79c0L, "jetbrains.mps.samples.formulaLanguage.structure.NullConstant"), MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db8620dbL, "jetbrains.mps.samples.formulaLanguage.structure.Operation"), MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x108050ab746L, "jetbrains.mps.samples.formulaLanguage.structure.OrOperation"), MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x10809d032baL, "jetbrains.mps.samples.formulaLanguage.structure.ParenthisizedExpression"), MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102dba0a69dL, "jetbrains.mps.samples.formulaLanguage.structure.PlusOperation"), MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db83846eL, "jetbrains.mps.samples.formulaLanguage.structure.Reference"), MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x10804f6f702L, "jetbrains.mps.samples.formulaLanguage.structure.StringConstant"));
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0d = buildConceptIndices(MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db824fa1L, "jetbrains.mps.samples.formulaLanguage.structure.Expression"));
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0e = buildConceptIndices(MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db824fa1L, "jetbrains.mps.samples.formulaLanguage.structure.Expression"), MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db8bab3cL, "jetbrains.mps.samples.formulaLanguage.structure.FloatingPointConstant"), MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db8aa3f9L, "jetbrains.mps.samples.formulaLanguage.structure.IntegerConstant"));
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x108050a5816L), MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db857767L), MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x10809c54870L), MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db824fa1L), MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db8bab3cL), MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db80c054L), MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db8296fcL), MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x103009e5ee0L), MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db8d4298L), MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db8aa3f9L), MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x10a037c6c0bL), MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102ea976b99L), MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102dba2244aL), MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102ff4441ddL), MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x10a04135987L), MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x10a036c79c0L), MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db8620dbL), MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x108050ab746L), MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x10809d032baL), MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102dba0a69dL), MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db83846eL), MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x10804f6f702L)).seal();
+  private static final ConceptSwitchIndex conceptIndex1 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db824fa1L)).seal();
+  private static final ConceptSwitchIndex conceptIndex2 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db824fa1L), MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db8bab3cL), MetaIdFactory.conceptId(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db8aa3f9L)).seal();
 }

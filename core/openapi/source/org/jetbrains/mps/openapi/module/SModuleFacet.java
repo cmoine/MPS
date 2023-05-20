@@ -16,6 +16,7 @@
 package org.jetbrains.mps.openapi.module;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.persistence.Memento;
 
 /**
@@ -28,30 +29,38 @@ import org.jetbrains.mps.openapi.persistence.Memento;
  *  For read-only modules, facets are not expected to change/persist settings.
  *  @see FacetsFacade
  */
-public interface SModuleFacet {
+public interface SModuleFacet extends DetachableFacet {
 
   /**
    * Identity of the facet, see {@link FacetsFacade#getFacetFactory(String)}
    * @return kind of the facet
    */
-  @NotNull
-  String getFacetType();
+  @NotNull String getFacetType();
 
   /**
-   * The owning module
+   * @return the module which is hosting this facet.
+   *         it is allowed to be detached from the module, so null can be seen here.
    */
-  @NotNull
-  SModule getModule();
+  @Nullable SModule getModule();
 
   /**
    * Gives the module facet the opportunity to persist into the supplied memento whatever configuration information
    * may be needed to restore the models in the future.
    */
-  void save(Memento memento);
+  void save(@NotNull Memento memento);
 
   /**
    * Allows the model root to read its previously saved configuration information
    */
-  void load(Memento memento);
+  void load(@NotNull Memento memento);
 
+  @Override
+  default void attach(@NotNull SModule module) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  default void detach() {
+    throw new UnsupportedOperationException();
+  }
 }

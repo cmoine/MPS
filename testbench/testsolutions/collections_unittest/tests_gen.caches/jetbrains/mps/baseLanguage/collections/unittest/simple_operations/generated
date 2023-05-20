@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="dhd0ub8xzs2433in9wlunp1wyz4eg42" />
+<product version="3" modelHash="-5hqfa417f2algdmt8ggkl7ut951r3q8">
+  <files names="Concat_Test_Test.java:Contains_Test.java:Distinct_Test.java:ListOperations_Test.java:Map_Test.java:NaiveSetOperations_Test.java:Null_Test.java:SelectNotNullOperation_Test.java:SimpleOperations1.java:Sort_Test1.java:Union_Test.java" />
+</product>
 

@@ -16,4 +16,15 @@
 package jetbrains.mps.lang.typesystem.runtime;
 
 public interface NonTypesystemRule_Runtime extends ICheckingRule_Runtime {
+
+  /**
+   * @return whether the rule overrides the specific rule
+   *
+   * This method is called for secondary filtration after rules with {@link ICheckingRule_Runtime#overrides()} returning true are already thrown away
+   */
+  boolean overrides(NonTypesystemRule_Runtime rule);
+
+  default boolean applyOnTheFly() {
+    return true;
+  }
 }

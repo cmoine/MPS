@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,16 @@
 package jetbrains.mps.project.structure.modules;
 
 import jetbrains.mps.project.ModuleId;
-import jetbrains.mps.util.EqualUtil;
 import jetbrains.mps.util.InternUtil;
-import jetbrains.mps.util.annotation.ToRemove;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.annotations.Immutable;
 import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SModuleId;
 import org.jetbrains.mps.openapi.module.SModuleReference;
 import org.jetbrains.mps.openapi.module.SRepository;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,25 +36,22 @@ public final class ModuleReference implements SModuleReference {
   private final String myModuleName;
   private final SModuleId myModuleId;
 
-  public ModuleReference(String moduleName, SModuleId moduleId) {
+  /**
+   * @param moduleName optional name for the module, serves solely for user needs, not part of equality/identity.
+   * @param moduleId generally, shall not be {@code null}; {@code null} indicates invalid reference
+   */
+  public ModuleReference(@Nullable String moduleName, @Nullable SModuleId moduleId) {
     myModuleName = InternUtil.intern(moduleName);
     myModuleId = moduleId;
   }
 
-  /**
-   * @deprecated use {@link #ModuleReference(String, SModuleId)} instead
-   */
-  @Deprecated
-  @ToRemove(version = 3.2)
-  public ModuleReference(String moduleName, String moduleId) {
-    this(moduleName, ModuleId.fromString(moduleId));
-  }
-
+  @NotNull
   @Override
   public SModuleId getModuleId() {
-    return myModuleId;
+    return myModuleId == null ? ModuleId.invalid() : myModuleId;
   }
 
+  @Nullable
   @Override
   public String getModuleName() {
     return myModuleName;
@@ -62,12 +59,14 @@ public final class ModuleReference implements SModuleReference {
 
   @Override
   public SModule resolve(@NotNull SRepository repo) {
-    return repo.getModule(getModuleId());
+    return myModuleId == null ? null : repo.getModule(getModuleId());
   }
 
   public int hashCode() {
-    if (myModuleId != null) return myModuleId.hashCode();
-    return myModuleName.hashCode();
+    if (myModuleId != null) {
+      return myModuleId.hashCode();
+    }
+    return Objects.hashCode(myModuleName);
   }
 
   public boolean equals(Object obj) {
@@ -76,20 +75,17 @@ public final class ModuleReference implements SModuleReference {
     }
     SModuleReference p = (SModuleReference) obj;
 
-    if (myModuleId == null && p.getModuleId() == null) {
-      return myModuleName.equals(p.getModuleName());
-    }
-    return EqualUtil.equals(myModuleId, p.getModuleId());
+    return Objects.equals(getModuleId(), p.getModuleId());
   }
 
   public String toString() {
     if (myModuleId == null) {
       return myModuleName;
     }
-    return myModuleId.toString() + "(" + myModuleName + ")";
+    return String.format("%s(%s)", myModuleId.toString(), myModuleName == null ? "" : myModuleName);
   }
 
-  public static SModuleReference parseReference(String text) {
+  public static SModuleReference parseReference(@NotNull String text) {
     text = text.trim();
     Matcher m = MODULE_REFERENCE.matcher(text);
     if (m.matches()) {
@@ -100,7 +96,7 @@ public final class ModuleReference implements SModuleReference {
 
   /**
    * Common functionality to tell if two references are identical, identical here being both id and name.
-   * Unlike #equals(), where id takes precedence.
+   * Unlike #equals(), where only ids are tested for equality.
    * Not specific to ModuleReference implementation, lives here as there's no better/discoverable place yet.
    * Originates from RefUpdateUtil.
    * @return <code>true</code> if either reference is null, or either references' name or id does not match
@@ -110,7 +106,10 @@ public final class ModuleReference implements SModuleReference {
       return ref1 != ref2;
     }
     // both not null
-    return !(EqualUtil.equals(ref1.getModuleId(), ref2.getModuleId()) && EqualUtil.equals(ref1.getModuleName(), ref2.getModuleName()));
+    if (ref1 == ref2) {
+      return false; // they are immutable
+    }
+    return !(Objects.equals(ref1.getModuleId(), ref2.getModuleId()) && Objects.equals(ref1.getModuleName(), ref2.getModuleName()));
   }
 }
 

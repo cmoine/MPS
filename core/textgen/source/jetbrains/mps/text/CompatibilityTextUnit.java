@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2016 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +18,9 @@ package jetbrains.mps.text;
 import jetbrains.mps.textgen.trace.ScopePositionInfo;
 import jetbrains.mps.textgen.trace.TraceablePositionInfo;
 import jetbrains.mps.textgen.trace.UnitPositionInfo;
-import jetbrains.mps.util.Pair;
-import jetbrains.mps.util.annotation.ToRemove;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNode;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -37,9 +34,10 @@ import java.util.Map;
  * AND generate new textgen that fill this associated data instead of TextGenBuffer (or better yet, update TextGenBuffer to put the data into TextUnit)
  * we shall refactor TextFacility to use the new mechanism. Perhaps, this class shall survive up to 3.3 release to deal with TextGen classes generated in 3.2
  * (unless I manage to refactor TextGenBuffer to use TextUnit!)
+ * FIXME Consider {@link jetbrains.mps.text.impl.RegularTextUnit#addContextObject(String, Object)} - could we use same mechanism?
  * @author Artem Tikhomirov
  */
-@ToRemove(version = 3.3)
+@Deprecated(since = "3.3", forRemoval = true)
 public interface CompatibilityTextUnit extends TextUnit {
   @Nullable
   Map<SNode, TraceablePositionInfo> getPositions();

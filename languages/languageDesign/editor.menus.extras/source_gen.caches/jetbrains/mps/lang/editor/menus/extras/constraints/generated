@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-as39jr3vxtqkqifd17fz64pq6e0i9sw" />
+<product version="3" modelHash="-7wdme0gabkvru9oapgea031efkm7se6">
+  <files names="ConstraintsAspectDescriptor.java:TransformationMenuPart_Intention_Constraints.java:TransformationMenuPart_Refactoring_Constraints.java" />
+</product>
 

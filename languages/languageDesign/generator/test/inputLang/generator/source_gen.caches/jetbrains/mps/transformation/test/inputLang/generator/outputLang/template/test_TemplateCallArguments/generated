@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-3buge81pobiunv9g2eosdpsd8aceiaw" />
+<product version="3" modelHash="n0r6s4c0icvok8hkxn42rmnx2as8zj">
+  <files names="Mapping_main.java:QueriesGenerated.java:Switch_switch_InputNode.java:TemplateModelImpl.java:Template_MyOutputRoot2.java:Template_produce_OutputNode.java:Template_reduce_InputNode.java" />
+</product>
 

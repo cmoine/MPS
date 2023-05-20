@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1160998861373:jetbrains.mps.baseLanguage.structure.AssertStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/5351203823916750322:jetbrains.mps.baseLanguage.structure.TryUniversalStatement" />
+  <root nodeRef="r:6c555ca8-5702-4a87-9946-5ca027bf0bb2(jetbrains.mps.build.mps.runner.test.test5)/5712055271175356642">
+    <file name="MainClass.java">
+      <node id="7314351270975463258" at="14,0,15,0" concept="6" trace="PROJECT_LOCATION" />
+      <node id="8449002106978639917" at="15,0,16,0" concept="6" trace="PROJECT_PATH" />
+      <node id="3307120220351995621" at="16,47,17,99" concept="4" />
+      <node id="3307120220351948861" at="18,50,19,57" concept="2" />
+      <node id="9111433334927058453" at="20,12,21,47" concept="2" />
+      <node id="9111433334927124442" at="22,11,23,85" concept="4" />
+      <node id="421608094131197646" at="23,85,24,34" concept="0" />
+      <node id="9111433334927193757" at="24,34,25,67" concept="2" />
+      <node id="421608094131495107" at="26,31,27,56" concept="2" />
+      <node id="421608094131492941" at="27,56,28,21" concept="0" />
+      <node id="5063604414306040447" at="30,5,31,0" concept="5" />
+      <node id="5712055271175219220" at="31,0,32,41" concept="4" />
+      <node id="5712055271175289197" at="34,42,35,85" concept="2" />
+      <node id="5712055271175282339" at="37,29,38,94" concept="2" />
+      <node id="5712055271175289756" at="38,94,39,26" concept="2" />
+      <node id="5712055271175287189" at="33,9,36,7" concept="3" />
+      <node id="421608094131491231" at="21,47,29,7" concept="8" />
+      <node id="5712055271175282202" at="32,41,40,5" concept="8" />
+      <node id="3307120220351953730" at="20,10,30,5" concept="1" />
+      <node id="3307120220351944736" at="17,99,30,5" concept="3" />
+      <node id="5712055271175356658" at="16,0,42,0" concept="7" trace="mpsMain#(Ljetbrains/mps/tool/environment/Environment;)V" />
+      <scope id="3307120220351944738" at="18,50,19,57" />
+      <scope id="5712055271175287191" at="34,42,35,85" />
+      <scope id="421608094131491228" at="26,31,28,21" />
+      <scope id="5712055271175282199" at="37,29,39,26" />
+      <scope id="421608094131491232" at="22,11,25,67">
+        <var name="project" id="9111433334927124443" />
+      </scope>
+      <scope id="421608094131491227" at="26,7,29,7">
+        <var name="e" id="421608094131491229" />
+      </scope>
+      <scope id="5712055271175282203" at="33,9,36,7" />
+      <scope id="5712055271175282198" at="37,5,40,5">
+        <var name="e" id="5712055271175282200" />
+      </scope>
+      <scope id="3307120220351953731" at="20,12,29,7" />
+      <scope id="5712055271175356664" at="16,47,40,5">
+        <var name="plugin" id="3307120220351995622" />
+        <var name="resultFile" id="5712055271175219221" />
+      </scope>
+      <scope id="5712055271175356658" at="16,0,42,0">
+        <var name="env" id="9111433334927120288" />
+      </scope>
+      <unit id="5712055271175356642" at="13,0,43,0" name="jetbrains.mps.build.mps.runner.test.test5.MainClass" />
+    </file>
+  </root>
+</debug-info>
+

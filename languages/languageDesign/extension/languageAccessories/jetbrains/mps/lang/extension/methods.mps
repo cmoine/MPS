@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model ref="r:421d64ed-8024-497f-aeab-8bddeb389dd2(jetbrains.mps.lang.extension.methods)">
   <persistence version="9" />
+  <attribute name="doNotGenerate" value="true" />
   <languages>
     <use id="c7d5b9dd-a05f-4be2-bc73-f2e16994cc67" name="jetbrains.mps.baseLanguage.lightweightdsl" version="1" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
-    <import index="oubp" ref="c7d5b9dd-a05f-4be2-bc73-f2e16994cc67/r:7cc2086d-c7d0-49c7-811c-ebbaf40d9195(jetbrains.mps.lang.classLike/jetbrains.mps.baseLanguage.lightweightdsl.structure)" />
     <import index="v54s" ref="r:2a0fe383-d602-4f5b-813c-e41afdbbb97e(jetbrains.mps.lang.extension.structure)" implicit="true" />
   </imports>
   <registry>
@@ -36,13 +36,13 @@
       </concept>
     </language>
     <language id="c7d5b9dd-a05f-4be2-bc73-f2e16994cc67" name="jetbrains.mps.baseLanguage.lightweightdsl">
-      <concept id="3682791316837141912" name="jetbrains.mps.baseLanguage.lightweightdsl.structure.GenerateModifier" flags="ng" index="2eSQEC" />
       <concept id="3751132065236767079" name="jetbrains.mps.baseLanguage.lightweightdsl.structure.MethodDescriptor" flags="ng" index="q3mfq">
         <child id="3751132065236767081" name="retType" index="q3mfk" />
       </concept>
       <concept id="3751132065236767072" name="jetbrains.mps.baseLanguage.lightweightdsl.structure.DSLDescriptor" flags="ng" index="q3mft">
         <reference id="1825613483881131410" name="preferredConcept" index="2qG0Lo" />
         <child id="8264762413010642120" name="classLikeMember" index="QNr5C" />
+        <child id="4507527286374037522" name="implModel" index="1xeoKX" />
       </concept>
       <concept id="3751132065236767068" name="jetbrains.mps.baseLanguage.lightweightdsl.structure.DependentTypeDescriptor" flags="ig" index="q3mfx">
         <child id="3751132065236767069" name="getter" index="q3mfw" />
@@ -54,6 +54,15 @@
       </concept>
       <concept id="8264762413010642119" name="jetbrains.mps.baseLanguage.lightweightdsl.structure.DSLClassMember" flags="ng" index="QNr5B">
         <child id="3402736933911577960" name="modifier" index="2IRzpu" />
+      </concept>
+    </language>
+    <language id="446c26eb-2b7b-4bf0-9b35-f83fa582753e" name="jetbrains.mps.lang.modelapi">
+      <concept id="361130699826193248" name="jetbrains.mps.lang.modelapi.structure.ModelPointer" flags="ng" index="1dCxOl">
+        <property id="1863527487546097494" name="modelId" index="1XweGQ" />
+        <child id="679099339649067980" name="name" index="1j$8Uc" />
+      </concept>
+      <concept id="679099339649053840" name="jetbrains.mps.lang.modelapi.structure.ModelName" flags="ng" index="1j_P7g">
+        <property id="679099339649053841" name="value" index="1j_P7h" />
       </concept>
     </language>
     <language id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel">
@@ -87,20 +96,17 @@
       <node concept="QcxE9" id="3zLwYDe0CPz" role="2IRzpu">
         <property role="QcwnP" value="activate" />
       </node>
-      <node concept="2eSQEC" id="3zLwYDe1iRn" role="2IRzpu" />
     </node>
     <node concept="q3mfq" id="3zLwYDe0BDO" role="QNr5C">
       <property role="TrG5h" value="deactivate" />
       <node concept="QcxE9" id="3zLwYDe0CPw" role="2IRzpu">
         <property role="QcwnP" value="deactivate" />
       </node>
-      <node concept="2eSQEC" id="3zLwYDe1iRu" role="2IRzpu" />
     </node>
     <node concept="qMXn0" id="3zLwYDe0Dgv" role="QNr5C" />
     <node concept="q3mfq" id="3zLwYDe0svr" role="QNr5C">
       <property role="TrG5h" value="get" />
       <node concept="2IRzkw" id="3zLwYDe0svu" role="2IRzpu" />
-      <node concept="2eSQEC" id="3zLwYDe1j0b" role="2IRzpu" />
       <node concept="q3mfx" id="3zLwYDe0sv$" role="q3mfk">
         <node concept="1bVj0M" id="3zLwYDe0sv_" role="q3mfw">
           <node concept="37vLTG" id="3zLwYDe0svA" role="1bW2Oz">
@@ -124,16 +130,22 @@
                     </node>
                   </node>
                   <node concept="3TrEf2" id="3zLwYDe0zs$" role="2OqNvi">
-                    <ref role="3Tt5mk" to="v54s:7335HkeYl_" />
+                    <ref role="3Tt5mk" to="v54s:7335HkeYl_" resolve="extensionPoint" />
                   </node>
                 </node>
                 <node concept="3TrEf2" id="3zLwYDe0_S$" role="2OqNvi">
-                  <ref role="3Tt5mk" to="v54s:6XJvNHU5VOb" />
+                  <ref role="3Tt5mk" to="v54s:6XJvNHU5VOb" resolve="objectType" />
                 </node>
               </node>
             </node>
           </node>
         </node>
+      </node>
+    </node>
+    <node concept="1dCxOl" id="2CO_L5IgpRj" role="1xeoKX">
+      <property role="1XweGQ" value="r:e79e8e68-ae7e-4662-ac9f-fd969fd55a7f" />
+      <node concept="1j_P7g" id="2CO_L5IgpRk" role="1j$8Uc">
+        <property role="1j_P7h" value="jetbrains.mps.lang.extension.util" />
       </node>
     </node>
   </node>

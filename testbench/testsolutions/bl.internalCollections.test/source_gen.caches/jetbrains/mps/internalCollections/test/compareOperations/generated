@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-9zyt9ps4r80lifvxgnl30t89ydl9a3h" />
+<product version="3" modelHash="8lp42x7xmdnul6xivbip63diitsnn6q">
+  <files names="Bar.java:Concat_Test.java:Disjunct_Test.java:Foo.java:Intersect_Test.java:SubtractTest_Test.java:Union_Test.java" />
+</product>
 

@@ -6,21 +6,9 @@ import jetbrains.mps.nodeEditor.DefaultNodeEditor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Collection;
 
 public class Concept_GetDirectSuperConcepts_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createCollection_k3ew3b_a(editorContext, node);
-  }
-  private EditorCell createCollection_k3ew3b_a(EditorContext editorContext, SNode node) {
-    EditorCell_Collection editorCell = EditorCell_Collection.createIndent2(editorContext, node);
-    editorCell.setCellId("Collection_k3ew3b_a");
-    editorCell.setBig(true);
-    editorCell.addEditorCell(this.createComponent_k3ew3b_a0(editorContext, node));
-    return editorCell;
-  }
-  private EditorCell createComponent_k3ew3b_a0(EditorContext editorContext, SNode node) {
-    EditorCell editorCell = editorContext.getCellFactory().createEditorComponentCell(node, "jetbrains.mps.lang.smodel.editor.ReplaceableAliasAndParms_Comp");
-    return editorCell;
+    return new Concept_GetDirectSuperConcepts_EditorBuilder_a(editorContext, node).createCell();
   }
 }

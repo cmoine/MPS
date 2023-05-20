@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="b9clewwwvrnvsfwj5x3e2r7cknvmzqt" />
+<product version="3" modelHash="dq14cnqueh42hqtpmuc1rgxlzcefxxz">
+  <files names="ActionAspectDescriptorImpl.java:buildScript_nodeFactories.java:wrappers_PasteWrapper_0.java:wrappers_PasteWrapper_1.java:wrappers_PasteWrapper_2.java:wrappers_PasteWrapper_3.java" />
+</product>
 

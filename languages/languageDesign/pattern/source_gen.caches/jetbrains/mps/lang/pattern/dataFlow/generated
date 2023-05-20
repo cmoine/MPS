@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="63aii99ckswqc5552pgwifzj8gkx6c1" />
+<product version="3" modelHash="-4f89uy96t4kp8pe81zyj2yi953ypuet">
+  <files names="DataFlowAspectDescriptorImpl.java:PatternExpression_DataFlow.java:PatternSwitchCase_DataFlow.java:PatternSwitchStatement_DataFlow.java:PatternVariableDeclaration_DataFlow.java:PropertyPatternVariableDeclaration_DataFlow.java" />
+</product>
 

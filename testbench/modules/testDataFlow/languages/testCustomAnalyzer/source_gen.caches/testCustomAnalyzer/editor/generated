@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-7crcysxrt8rwlpeaxb8tag7gu6y1vo4" />
+<product version="3" modelHash="2xswsdp0bo9kezvs1wzpy0jx8mrvo">
+  <files names="Child_Editor.java:Child_EditorBuilder_a.java:EditorAspectDescriptorImpl.java:OtherChild_Editor.java:OtherChild_EditorBuilder_a.java:OtherRoot_Editor.java:OtherRoot_EditorBuilder_a.java:OtherSubChild_Editor.java:OtherSubChild_EditorBuilder_a.java:Root_Editor.java:Root_EditorBuilder_a.java" />
+</product>
 

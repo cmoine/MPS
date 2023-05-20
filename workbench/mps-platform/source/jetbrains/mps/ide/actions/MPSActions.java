@@ -32,7 +32,10 @@ public class MPSActions {
 
   public static final String ACTIONS_AS_INTENTIONS_GROUP = "jetbrains.mps.ide.editor.actions.ActionsAsIntentions_ActionGroup";
 
-  public static final String EDITOR_GOTO_DECLARATION = "jetbrains.mps.ide.editor.actions.GoByCurrentReference_Action";
+  public static final String EDITOR_GOTO_DECLARATION = "jetbrains.mps.ide.editor.actions.GoToDeclaration_Action";
 
   public static final String FIND_USAGES_WITH_DIALOG_ACTION = "jetbrains.mps.ide.actions.FindSpecificNodeUsages_Action";
+
+  // this one is hand-coded in MPSEditor, unlikely subject to being generated?
+  public static final String EDITOR_SHOW_INTENTIONS_POPUP_ACTION = "MPS.Editor.ShowIntentionMenu";
 }

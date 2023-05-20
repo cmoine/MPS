@@ -27,7 +27,7 @@ import java.util.List;
  * Date: 03/03/16
  */
 public class TextBuilderImpl implements TextBuilder {
-  private List<StringBuilder> myLines = new ArrayList<StringBuilder>();
+  private List<StringBuilder> myLines = new ArrayList<>();
   private int myWidth;
 
   public TextBuilderImpl() {
@@ -53,7 +53,7 @@ public class TextBuilderImpl implements TextBuilder {
 
   @Override
   public Iterable<CharSequence> getLines() {
-    return Collections.<CharSequence>unmodifiableCollection(myLines);
+    return Collections.unmodifiableCollection(myLines);
   }
 
   @Override
@@ -83,7 +83,7 @@ public class TextBuilderImpl implements TextBuilder {
 
   @Override
   public TextBuilder appendToTheRight(TextBuilder builder, boolean insertSpace) {
-    if (builder.getSize() == 0 || builder.getWidth() == 0) {
+    if (!insertSpace && (builder.getSize() == 0 || builder.getWidth() == 0)) {
       return this;
     }
 
@@ -102,7 +102,7 @@ public class TextBuilderImpl implements TextBuilder {
     while (builderIterator.hasNext()) {
       StringBuilder nextLine = new StringBuilder(newWidth);
       for (int i = 0; i < myWidth + delimWidth; i++) {
-        nextLine.append(" ");
+        nextLine.append(' ');
       }
       nextLine.append(builderIterator.next());
       myLines.add(nextLine);

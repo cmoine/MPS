@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="b4ydr7vvhedq32385n67gm771rbsmm" />
+<product version="3" modelHash="2ir92h0gnsxrpkbbervn8lxu4mwzqa6">
+  <files names="AbstractCollectionSequence.java:AbstractListSequence.java:AbstractMapSequence.java:AbstractQueueSequence.java:AbstractSequence.java:AbstractSetSequence.java:ArrayUtils.java:CaseInsensitiveStringComparison.java:ClassUtils.java:CollectionSequence.java:CollectionUtils.java:CompoundComparator.java:DequeSequence.java:ICollectionSequence.java:IDequeSequence.java:IEnumerable.java:IEnumerator.java:ILeftCombinator.java:ILinkedList.java:ILinkedListSequence.java:IListSequence.java:IMapSequence.java:IMapping.java:IQueueSequence.java:IRightCombinator.java:ISelector.java:ISequence.java:ISequenceClosure.java:ISequenceIterableAdapter.java:ISetSequence.java:ISortedMapSequence.java:ISortedSetSequence.java:ITranslator.java:ITranslator2.java:IVisitor.java:IWhereFilter.java:IterableUtils.java:LinkedListSequence.java:ListSequence.java:MapSequence.java:NotNullWhereFilter.java:QueueSequence.java:SelectComparator.java:Sequence.java:SetSequence.java:SortedMapSequence.java:SortedSetSequence.java:StopIteratingException.java" />
+</product>
 

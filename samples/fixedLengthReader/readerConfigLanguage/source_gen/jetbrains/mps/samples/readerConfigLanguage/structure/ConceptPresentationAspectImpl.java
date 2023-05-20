@@ -4,27 +4,42 @@ package jetbrains.mps.samples.readerConfigLanguage.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_Field = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Mapping = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ReaderConfiguration = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_Field;
+  private ConceptPresentation props_Mapping;
+  private ConceptPresentation props_ReaderConfiguration;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.Field:
+        if (props_Field == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Field = cpb.create();
+        }
         return props_Field;
-      case 1:
+      case LanguageConceptSwitch.Mapping:
+        if (props_Mapping == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Mapping = cpb.create();
+        }
         return props_Mapping;
-      case 2:
+      case LanguageConceptSwitch.ReaderConfiguration:
+        if (props_ReaderConfiguration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_ReaderConfiguration = cpb.create();
+        }
         return props_ReaderConfiguration;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

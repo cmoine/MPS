@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-ectm9z2skmn9uskf293gm8uuengsfuw" />
+<product version="3" modelHash="-3fodzwqfac8o0spfzvh7l1z9izr6i6x">
+  <files names="ExtensionDescriptor.java:GeneratorCache_extension.java:RenameReferencesParticipant.java:UpdateModelImports.java:UpdateReferencesParticipantBase.java" />
+</product>
 

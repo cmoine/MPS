@@ -30,7 +30,7 @@ import java.util.List;
  * With v9, we don't keep implicit imports and re-construct them before save as needed.
  */
 public final class ImplicitImportsLegacyHolder {
-  private List<ImportElement> myImplicitImports = new ArrayList<ImportElement>();
+  private List<ImportElement> myImplicitImports = new ArrayList<>();
   @NotNull
   private final SModel myModel;
 

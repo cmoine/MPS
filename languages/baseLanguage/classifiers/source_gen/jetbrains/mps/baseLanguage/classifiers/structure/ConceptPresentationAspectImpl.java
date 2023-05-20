@@ -4,57 +4,119 @@ package jetbrains.mps.baseLanguage.classifiers.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_BaseClassifierType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DefaultClassifier = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DefaultClassifierFieldAccessOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DefaultClassifierFieldDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DefaultClassifierMethodCallOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DefaultClassifierMethodDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DefaultClassifierType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IClassifier = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IClassifierPart = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IMember = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IMemberOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SuperClassifierExpresson = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ThisClassifierExpression = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_BaseClassifierType;
+  private ConceptPresentation props_DefaultClassifier;
+  private ConceptPresentation props_DefaultClassifierFieldAccessOperation;
+  private ConceptPresentation props_DefaultClassifierFieldDeclaration;
+  private ConceptPresentation props_DefaultClassifierMethodCallOperation;
+  private ConceptPresentation props_DefaultClassifierMethodDeclaration;
+  private ConceptPresentation props_DefaultClassifierType;
+  private ConceptPresentation props_IClassifier;
+  private ConceptPresentation props_IClassifierPart;
+  private ConceptPresentation props_IMember;
+  private ConceptPresentation props_IMemberOperation;
+  private ConceptPresentation props_SuperClassifierExpresson;
+  private ConceptPresentation props_ThisClassifierExpression;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.BaseClassifierType:
+        if (props_BaseClassifierType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_BaseClassifierType = cpb.create();
+        }
         return props_BaseClassifierType;
-      case 1:
+      case LanguageConceptSwitch.DefaultClassifier:
+        if (props_DefaultClassifier == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_DefaultClassifier = cpb.create();
+        }
         return props_DefaultClassifier;
-      case 2:
+      case LanguageConceptSwitch.DefaultClassifierFieldAccessOperation:
+        if (props_DefaultClassifierFieldAccessOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x443f4c36fcf54eb6L, 0x95008d06ed259e3eL, 0x118bca97396L, 0x118bcb657ecL, "member", "", "");
+          props_DefaultClassifierFieldAccessOperation = cpb.create();
+        }
         return props_DefaultClassifierFieldAccessOperation;
-      case 3:
+      case LanguageConceptSwitch.DefaultClassifierFieldDeclaration:
+        if (props_DefaultClassifierFieldDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_DefaultClassifierFieldDeclaration = cpb.create();
+        }
         return props_DefaultClassifierFieldDeclaration;
-      case 4:
+      case LanguageConceptSwitch.DefaultClassifierMethodCallOperation:
+        if (props_DefaultClassifierMethodCallOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x443f4c36fcf54eb6L, 0x95008d06ed259e3eL, 0x118bca97396L, 0x118bcb657ecL, "member", "", "");
+          props_DefaultClassifierMethodCallOperation = cpb.create();
+        }
         return props_DefaultClassifierMethodCallOperation;
-      case 5:
+      case LanguageConceptSwitch.DefaultClassifierMethodDeclaration:
+        if (props_DefaultClassifierMethodDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_DefaultClassifierMethodDeclaration = cpb.create();
+        }
         return props_DefaultClassifierMethodDeclaration;
-      case 6:
+      case LanguageConceptSwitch.DefaultClassifierType:
+        if (props_DefaultClassifierType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x443f4c36fcf54eb6L, 0x95008d06ed259e3eL, 0x118bc7942feL, 0x118bc796c90L, "classifier", "", "");
+          props_DefaultClassifierType = cpb.create();
+        }
         return props_DefaultClassifierType;
-      case 7:
+      case LanguageConceptSwitch.IClassifier:
+        if (props_IClassifier == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IClassifier = cpb.create();
+        }
         return props_IClassifier;
-      case 8:
+      case LanguageConceptSwitch.IClassifierPart:
+        if (props_IClassifierPart == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IClassifierPart = cpb.create();
+        }
         return props_IClassifierPart;
-      case 9:
+      case LanguageConceptSwitch.IMember:
+        if (props_IMember == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IMember = cpb.create();
+        }
         return props_IMember;
-      case 10:
+      case LanguageConceptSwitch.IMemberOperation:
+        if (props_IMemberOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IMemberOperation = cpb.create();
+        }
         return props_IMemberOperation;
-      case 11:
+      case LanguageConceptSwitch.SuperClassifierExpresson:
+        if (props_SuperClassifierExpresson == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("super classifier");
+          cpb.rawPresentation("super");
+          props_SuperClassifierExpresson = cpb.create();
+        }
         return props_SuperClassifierExpresson;
-      case 12:
+      case LanguageConceptSwitch.ThisClassifierExpression:
+        if (props_ThisClassifierExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("this classifier");
+          cpb.rawPresentation("this");
+          props_ThisClassifierExpression = cpb.create();
+        }
         return props_ThisClassifierExpression;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

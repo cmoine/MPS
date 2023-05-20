@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,27 +16,24 @@
 package jetbrains.mps.ide.projectPane.fileSystem.nodes;
 
 import com.intellij.openapi.fileTypes.FileTypeManager;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import jetbrains.mps.ide.ui.tree.MPSTreeNode;
+import jetbrains.mps.project.MPSProject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
+import java.util.function.Predicate;
 
 public class FolderTreeNode extends AbstractFileTreeNode {
   private boolean myInitialized;
-  private Project myProject;
 
-  public FolderTreeNode(Project project, @NotNull VirtualFile folder) {
+  public FolderTreeNode(MPSProject project, @NotNull VirtualFile folder) {
     this(project, folder, false);
   }
 
-  public FolderTreeNode(Project project, @NotNull VirtualFile folder, boolean showFullPath) {
+  public FolderTreeNode(MPSProject project, @NotNull VirtualFile folder, boolean showFullPath) {
     super(project, folder, showFullPath);
-    myProject = project;
   }
 
   @Override
@@ -60,41 +57,17 @@ public class FolderTreeNode extends AbstractFileTreeNode {
     removeAllChildren();
 
     VirtualFile[] files = myFile.getChildren();
-    ArrayList<VirtualFile> sortedFiles = new ArrayList<VirtualFile>();
-    sortedFiles.addAll(Arrays.asList(files));
-    Collections.sort(sortedFiles, new Comparator<VirtualFile>() {
-      @Override
-      public int compare(VirtualFile o1, VirtualFile o2) {
-        return o1.getPath().compareTo(o2.getPath());
-      }
-    });
-    for (VirtualFile f : sortedFiles) {
-      if (f.exists()) {
-        if (!FileTypeManager.getInstance().isFileIgnored(f.getName()) &&
-            f.isDirectory()) {
-          this.add(createNode(myProject, f));
-        }
-      }
-    }
-    for (VirtualFile f : sortedFiles) {
-      if (f.exists()) {
-        if (!FileTypeManager.getInstance().isFileIgnored(f.getName()) &&
-            !f.isDirectory()) {
-
-          this.add(createNode(myProject, f));
-        }
-      }
-    }
+    ArrayList<VirtualFile> sortedFiles = new ArrayList<>(Arrays.asList(files));
+    FileTypeManager fileTypeManager = FileTypeManager.getInstance();
+    Predicate<VirtualFile> exists = VirtualFile::exists;
+    sortedFiles.removeIf(exists.negate().or(fileTypeManager::isFileIgnored));
+    sortedFiles.sort(Comparator.comparing(VirtualFile::getPath));
+    // files and folders that exist and are not ignored left in the list
+    Predicate<VirtualFile> isDirectory = VirtualFile::isDirectory;
+    sortedFiles.stream().filter(isDirectory).map(f -> new FolderTreeNode(myProject, f)).forEach(this::add);
+    sortedFiles.stream().filter(isDirectory.negate()).map(f -> new FileTreeNode(myProject, f)).forEach(this::add);
 
     updatePresentation();
     myInitialized = true;
-  }
-
-  private static MPSTreeNode createNode(Project project, VirtualFile file) {
-    if (file.isDirectory()) {
-      return new FolderTreeNode(project, file);
-    } else {
-      return new FileTreeNode(project, file);
-    }
   }
 }

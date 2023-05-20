@@ -16,17 +16,10 @@
 package jetbrains.mps.workbench.codeInsight;
 
 import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
-import com.intellij.codeInsight.daemon.DaemonCodeAnalyzerSettings;
-import com.intellij.codeInsight.daemon.impl.DaemonCodeAnalyzerImpl;
-import com.intellij.codeInsight.daemon.impl.EditorTracker;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
-import com.intellij.packageDependencies.DependencyValidationManager;
-import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.search.scope.packageSet.NamedScopeManager;
-import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,22 +27,13 @@ import org.jetbrains.annotations.Nullable;
  * User: shatalin
  * Date: 11/19/12
  */
-public class NullDaemonCodeAnalyzer extends DaemonCodeAnalyzerImpl {
+public class NullDaemonCodeAnalyzer extends DaemonCodeAnalyzer {
 
-  public NullDaemonCodeAnalyzer(@NotNull Project project,
-      @NotNull DaemonCodeAnalyzerSettings daemonCodeAnalyzerSettings,
-      @NotNull EditorTracker editorTracker, @NotNull PsiDocumentManager psiDocumentManager,
-      @NotNull NamedScopeManager namedScopeManager,
-      @NotNull DependencyValidationManager dependencyValidationManager) {
-    super(project, daemonCodeAnalyzerSettings, editorTracker, psiDocumentManager, namedScopeManager, dependencyValidationManager);
+  public NullDaemonCodeAnalyzer(@NotNull Project project) {
   }
 
   @Override
   public void settingsChanged() {
-  }
-
-  @Override
-  public void updateVisibleHighlighters(@NotNull Editor editor) {
   }
 
   @Override
@@ -97,16 +81,5 @@ public class NullDaemonCodeAnalyzer extends DaemonCodeAnalyzerImpl {
 
   @Override
   public void autoImportReferenceAtCursor(@NotNull Editor editor, @NotNull PsiFile file) {
-  }
-
-
-  @Nullable
-  @Override
-  public Element getState() {
-    return null;
-  }
-
-  @Override
-  public void loadState(Element state) {
   }
 }

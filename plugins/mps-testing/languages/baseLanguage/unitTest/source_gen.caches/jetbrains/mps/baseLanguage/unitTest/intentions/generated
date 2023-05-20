@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-5hviwrg6jlufur5jt1yxhjfxpz6e481" />
+<product version="3" modelHash="-2923b1vk2qnmu7l9imkha8ppq1x2qgh">
+  <files names="AddRemoveMessage_Intention.java:ConvertJUnit4_To_JUnit5_Intention.java:FlipAssertEquals_Intention.java:IntentionsDescriptor.java:convert_test_case_to_unittest_case_Intention.java" />
+</product>
 

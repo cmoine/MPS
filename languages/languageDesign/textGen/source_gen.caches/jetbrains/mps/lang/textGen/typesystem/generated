@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="4qqr3vkd0vd17sp4j119394spv4rkx3" />
+<product version="3" modelHash="-8xu5yv9pwcl3er70ljgk5x5lavcyt89">
+  <files names="TypesystemDescriptor.java:check_CallInnerFunctionOperation_NonTypesystemRule.java:check_CallPrivateFunction_NonTypesystemRule.java:check_MissingTextGenBlock_NonTypesystemRule.java:typeof_AbstractAppendPart_InferenceRule.java:typeof_AbstractTextGenParameter_InferenceRule.java:typeof_CallInnerFunctionOperation_InferenceRule.java:typeof_ConceptTextGenDeclaration_InferenceRule.java:typeof_FoundErrorOperation_InferenceRule.java:typeof_NodeParameter_InferenceRule.java:typeof_NodePart_InferenceRule.java:typeof_PrivateMethodCall_InferenceRule.java:typeof_SimplestTextGenOperation_InferenceRule.java:typeof_UnitContextReference_InferenceRule.java" />
+</product>
 

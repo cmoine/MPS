@@ -18,8 +18,8 @@ package jetbrains.mps.ide.editorTabs.tabfactory;
 import com.intellij.openapi.editor.Document;
 import jetbrains.mps.plugins.relations.RelationDescriptor;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.mps.openapi.model.SNodeReference;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.model.SNodeReference;
 
 import javax.swing.JComponent;
 import java.util.Collection;
@@ -47,8 +47,18 @@ public interface TabsComponent {
   /**
    * Refresh visible tabs, bring them into up-to-date state (add/remove missing/new).
    * Expects EDT and model read.
+   *
+   * Use TabsComponent#updateTabs(java.util.Collection), if incremental update required
    */
   void updateTabs();
+
+  /**
+   * Refresh visible tabs, bring them into up-to-date state (add/remove missing/new).
+   * Expects EDT and model read.
+   *
+   * @param changedRoots collection of roots, that was changed during command and need to be updated
+   */
+  void updateTabs(Collection<SNodeReference> changedRoots);
 
   /**
    * Update visual presentation of present tabs, do not add/remove tabs.
@@ -57,7 +67,7 @@ public interface TabsComponent {
   void updateTabColors();
 
   ///-------------tab navigation----------------
-  abstract void nextTab();
+  void nextTab();
 
-  abstract void prevTab();
+  void prevTab();
 }

@@ -4,7 +4,7 @@ package jetbrains.mps.build.mps.pluginSolution.plugin;
 
 import com.intellij.ide.wizard.AbstractWizard;
 import jetbrains.mps.project.Project;
-import jetbrains.mps.ide.project.ProjectHelper;
+import jetbrains.mps.project.MPSProject;
 import javax.swing.JComponent;
 import com.intellij.ide.wizard.Step;
 
@@ -17,17 +17,21 @@ public class GenerateBuildWizard extends AbstractWizard {
       GenerateBuildWizard.this.setErrorText(text);
     }
   };
+
   public GenerateBuildWizard(String title, Project project, AbstractBuildGenerator generator) {
-    super(title, ProjectHelper.toIdeaProject(project));
+    super(title, ((MPSProject) project).getProject());
     myProject = project;
     myGenerator = generator;
 
     initWizard();
   }
+
   @Override
   public String getHelpID() {
-    return null;
+
+    return "BuildScriptWizard";
   }
+
   @Override
   protected JComponent createCenterPanel() {
     JComponent panel = super.createCenterPanel();
@@ -35,16 +39,18 @@ public class GenerateBuildWizard extends AbstractWizard {
     panel.doLayout();
     return panel;
   }
+
   @Override
-  protected void updateStep() {
-    getFinishButton().setEnabled((getCurrentStep() == mySteps.size() - 1) && myGenerator.isValid());
-    super.updateStep();
+  protected boolean canFinish() {
+    return super.canFinish() && myGenerator.isValid();
   }
+
   @Override
   protected void doOKAction() {
     super.doOKAction();
     myGenerator.generate();
   }
+
   public void initWizard() {
     Step moduleStep = new SolutionStep(myProject, myGenerator, myErrorHandler);
     Step modelStep = new ModelStep(myProject, myGenerator, myErrorHandler);

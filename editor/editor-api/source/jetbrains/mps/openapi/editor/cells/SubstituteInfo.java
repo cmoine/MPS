@@ -26,6 +26,16 @@ public interface SubstituteInfo {
 
   List<SubstituteAction> getSmartMatchingActions(String pattern, boolean strictMatching, EditorCell contextCell);
 
+
+  //TODO: commonly the process of building the menu consists of: building the list of actions, caching it and filtering it by pattern.
+  //   * Current base implementation of SubstituteInfo does everything in getMatchingActions method.
+  //   * But actually we need to first build the actions and cache them in the read action and later filter them in command
+  //   * This method's purpose is to let the client build actions and cache them
+  //   * In future we need to separate interfaces of building the actions and filtering them (also because we need the different filters, which is currently
+  //   * done by NodeSubstituteInfoFilterDecorator)
+  default void buildActions() {
+  }
+
   // TODO: check if this method should be in API
   void invalidateActions();
 

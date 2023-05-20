@@ -2,14 +2,12 @@
 <model ref="r:2a0fe383-d602-4f5b-813c-e41afdbbb97e(jetbrains.mps.lang.extension.structure)">
   <persistence version="9" />
   <languages>
-    <use id="c72da2b9-7cce-4447-8389-f407dc1158b7" name="jetbrains.mps.lang.structure" version="3" />
-    <use id="982eb8df-2c96-4bd7-9963-11712ea622e5" name="jetbrains.mps.lang.resources" version="2" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="78434eb8-b0e5-444b-850d-e7c4ad2da9ab(jetbrains.mps.devkit.aspect.structure)" />
   </languages>
   <imports>
     <import index="tpee" ref="r:00000000-0000-4000-0000-011c895902ca(jetbrains.mps.baseLanguage.structure)" />
+    <import index="oubp" ref="c7d5b9dd-a05f-4be2-bc73-f2e16994cc67/r:7cc2086d-c7d0-49c7-811c-ebbaf40d9195(jetbrains.mps.lang.classLike/jetbrains.mps.baseLanguage.lightweightdsl.structure)" />
     <import index="tpck" ref="r:00000000-0000-4000-0000-011c89590288(jetbrains.mps.lang.core.structure)" implicit="true" />
-    <import index="oubp" ref="c7d5b9dd-a05f-4be2-bc73-f2e16994cc67/r:7cc2086d-c7d0-49c7-811c-ebbaf40d9195(jetbrains.mps.lang.classLike/jetbrains.mps.baseLanguage.lightweightdsl.structure)" implicit="true" />
   </imports>
   <registry>
     <language id="c72da2b9-7cce-4447-8389-f407dc1158b7" name="jetbrains.mps.lang.structure">
@@ -64,35 +62,34 @@
     <property role="EcuMT" value="3729007189729192404" />
     <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="6XJvNHU5VOj" role="1TKVEi">
-      <property role="20lmBu" value="aggregation" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="objectGetter" />
-      <property role="20lbJX" value="1" />
+      <property role="20lbJX" value="fLJekj4/1" />
       <property role="IQ2ns" value="8029776554053057811" />
       <ref role="20lvS9" node="6XJvNHU5Sl_" resolve="ExtensionObjectGetter" />
     </node>
     <node concept="1TJgyj" id="66AaOfxk_fI" role="1TKVEi">
-      <property role="20lmBu" value="aggregation" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="activator" />
       <property role="IQ2ns" value="7036359038356050926" />
       <ref role="20lvS9" node="66AaOfxk_fJ" resolve="ExtensionFunction" />
     </node>
     <node concept="1TJgyj" id="66AaOfxk_fQ" role="1TKVEi">
-      <property role="20lmBu" value="aggregation" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="deactivator" />
       <property role="IQ2ns" value="7036359038356050934" />
       <ref role="20lvS9" node="66AaOfxk_fJ" resolve="ExtensionFunction" />
     </node>
     <node concept="1TJgyj" id="66AaOfxkOVs" role="1TKVEi">
-      <property role="20lmBu" value="aggregation" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="fieldDeclaration" />
-      <property role="20lbJX" value="0..n" />
+      <property role="20lbJX" value="fLJekj5/0..n" />
       <property role="IQ2ns" value="7036359038356115164" />
       <ref role="20lvS9" node="66AaOfxkOUp" resolve="ExtensionFieldDeclaration" />
     </node>
     <node concept="1TJgyj" id="3f064wGFUBl" role="1TKVEi">
-      <property role="20lmBu" value="reference" />
       <property role="20kJfa" value="extensionPoint" />
-      <property role="20lbJX" value="1" />
+      <property role="20lbJX" value="fLJekj4/1" />
       <property role="IQ2ns" value="3729007189729192405" />
       <ref role="20lvS9" node="3f064wGFUBm" resolve="ExtensionPointDeclaration" />
     </node>
@@ -100,7 +97,7 @@
       <ref role="PrY4T" to="tpck:h0TrEE$" resolve="INamedConcept" />
     </node>
     <node concept="asaX9" id="70AZf4CVrP_" role="lGtFl">
-      <property role="YLPcu" value="MPS 3.3" />
+      <property role="YLPcu" value="3.3" />
       <property role="YLQ7P" value="use Extension instead" />
     </node>
   </node>
@@ -118,9 +115,9 @@
       </node>
     </node>
     <node concept="1TJgyj" id="6XJvNHU5VOb" role="1TKVEi">
-      <property role="20lmBu" value="aggregation" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="objectType" />
-      <property role="20lbJX" value="1" />
+      <property role="20lbJX" value="fLJekj4/1" />
       <property role="IQ2ns" value="8029776554053057803" />
       <ref role="20lvS9" to="tpee:fz3vP1H" resolve="Type" />
     </node>
@@ -130,39 +127,41 @@
     <node concept="PrWs8" id="aRphP9VZsR" role="PzmwI">
       <ref role="PrY4T" node="aRphP9VDPM" resolve="IRootWithUniqueName" />
     </node>
+    <node concept="PrWs8" id="15xzdwHynjp" role="PzmwI">
+      <ref role="PrY4T" node="15xzdwHynj5" resolve="IRegisterable" />
+    </node>
   </node>
   <node concept="1TIwiD" id="6XJvNHU5Sl_">
     <property role="TrG5h" value="ExtensionObjectGetter" />
-    <property role="2_RsDV" value="none" />
+    <property role="2_RsDV" value="4G1g3fIR8JG/none" />
     <property role="EcuMT" value="8029776554053043557" />
     <ref role="1TJDcQ" to="tpee:gyVMwX8" resolve="ConceptFunction" />
     <node concept="asaX9" id="70AZf4CVrPF" role="lGtFl">
-      <property role="YLPcu" value="MPS 3.3" />
+      <property role="YLPcu" value="3.3" />
     </node>
   </node>
   <node concept="1TIwiD" id="5JRjEZJSe_0">
     <property role="R5$K7" value="false" />
     <property role="R5$K2" value="false" />
     <property role="TrG5h" value="ExtensionPointExpression" />
-    <property role="2_RsDV" value="none" />
+    <property role="2_RsDV" value="4G1g3fIR8JG/none" />
     <property role="34LRSv" value="extensionPoint" />
     <property role="EcuMT" value="6626851894249711936" />
     <ref role="1TJDcQ" to="tpee:fz3vP1J" resolve="Expression" />
     <node concept="1TJgyj" id="5JRjEZJSeHl" role="1TKVEi">
-      <property role="20lmBu" value="reference" />
       <property role="20kJfa" value="extensionPoint" />
-      <property role="20lbJX" value="1" />
+      <property role="20lbJX" value="fLJekj4/1" />
       <property role="IQ2ns" value="6626851894249712469" />
       <ref role="20lvS9" node="3f064wGFUBm" resolve="ExtensionPointDeclaration" />
     </node>
   </node>
   <node concept="1TIwiD" id="66AaOfxk_fJ">
     <property role="TrG5h" value="ExtensionFunction" />
-    <property role="2_RsDV" value="none" />
+    <property role="2_RsDV" value="4G1g3fIR8JG/none" />
     <property role="EcuMT" value="7036359038356050927" />
     <ref role="1TJDcQ" to="tpee:gyVMwX8" resolve="ConceptFunction" />
     <node concept="asaX9" id="2UKVRofbKnr" role="lGtFl">
-      <property role="YLPcu" value="MPS 3.3" />
+      <property role="YLPcu" value="3.3" />
     </node>
   </node>
   <node concept="1TIwiD" id="66AaOfxkOUp">
@@ -170,9 +169,9 @@
     <property role="EcuMT" value="7036359038356115097" />
     <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="66AaOfxkOUt" role="1TKVEi">
-      <property role="20lmBu" value="aggregation" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="fieldType" />
-      <property role="20lbJX" value="1" />
+      <property role="20lbJX" value="fLJekj4/1" />
       <property role="IQ2ns" value="7036359038356115101" />
       <ref role="20lvS9" to="tpee:fz3vP1H" resolve="Type" />
     </node>
@@ -180,37 +179,35 @@
       <ref role="PrY4T" to="tpck:h0TrEE$" resolve="INamedConcept" />
     </node>
     <node concept="asaX9" id="70AZf4CVrPB" role="lGtFl">
-      <property role="YLPcu" value="MPS 3.3" />
+      <property role="YLPcu" value="3.3" />
     </node>
   </node>
   <node concept="1TIwiD" id="66AaOfxkOUu">
     <property role="TrG5h" value="ExtensionFieldReference" />
-    <property role="2_RsDV" value="none" />
+    <property role="2_RsDV" value="4G1g3fIR8JG/none" />
     <property role="EcuMT" value="7036359038356115102" />
     <ref role="1TJDcQ" to="tpee:fz3vP1J" resolve="Expression" />
     <node concept="1TJgyj" id="66AaOfxkOUv" role="1TKVEi">
-      <property role="20lmBu" value="reference" />
       <property role="20kJfa" value="declaration" />
-      <property role="20lbJX" value="1" />
+      <property role="20lbJX" value="fLJekj4/1" />
       <property role="IQ2ns" value="7036359038356115103" />
       <ref role="20lvS9" node="66AaOfxkOUp" resolve="ExtensionFieldDeclaration" />
     </node>
     <node concept="asaX9" id="70AZf4CVrPD" role="lGtFl">
-      <property role="YLPcu" value="MPS 3.3" />
+      <property role="YLPcu" value="3.3" />
     </node>
   </node>
   <node concept="1TIwiD" id="2KgYA8kbFkS">
     <property role="R5$K7" value="false" />
     <property role="R5$K2" value="false" />
     <property role="TrG5h" value="ExtensionPointType" />
-    <property role="2_RsDV" value="none" />
+    <property role="2_RsDV" value="4G1g3fIR8JG/none" />
     <property role="34LRSv" value="extensionPoint" />
     <property role="EcuMT" value="3175313036448544056" />
     <ref role="1TJDcQ" to="tpee:fz3vP1H" resolve="Type" />
     <node concept="1TJgyj" id="2KgYA8kbFkT" role="1TKVEi">
-      <property role="20lmBu" value="reference" />
       <property role="20kJfa" value="extensionPoint" />
-      <property role="20lbJX" value="1" />
+      <property role="20lbJX" value="fLJekj4/1" />
       <property role="IQ2ns" value="3175313036448544057" />
       <ref role="20lvS9" node="3f064wGFUBm" resolve="ExtensionPointDeclaration" />
     </node>
@@ -219,7 +216,7 @@
     <property role="R5$K7" value="false" />
     <property role="R5$K2" value="false" />
     <property role="TrG5h" value="GetExtensionObjectsOperation" />
-    <property role="2_RsDV" value="none" />
+    <property role="2_RsDV" value="4G1g3fIR8JG/none" />
     <property role="34LRSv" value="objects" />
     <property role="EcuMT" value="3175313036448560967" />
     <ref role="1TJDcQ" to="tpee:h_B$H5g" resolve="AbstractOperation" />
@@ -231,14 +228,16 @@
     <property role="EcuMT" value="126958800891274162" />
     <ref role="1TJDcQ" to="tpee:fz12cDA" resolve="ClassConcept" />
     <node concept="1TJgyj" id="7335HkeYl_" role="1TKVEi">
-      <property role="20lmBu" value="reference" />
       <property role="20kJfa" value="extensionPoint" />
-      <property role="20lbJX" value="1" />
+      <property role="20lbJX" value="fLJekj4/1" />
       <property role="IQ2ns" value="126958800891274597" />
       <ref role="20lvS9" node="3f064wGFUBm" resolve="ExtensionPointDeclaration" />
     </node>
     <node concept="PrWs8" id="UBgfI9ge5M" role="PzmwI">
       <ref role="PrY4T" to="oubp:UBgfI9exfH" resolve="AutoInitDSLClass" />
+    </node>
+    <node concept="PrWs8" id="15xzdwHynjh" role="PzmwI">
+      <ref role="PrY4T" node="15xzdwHynj5" resolve="IRegisterable" />
     </node>
   </node>
   <node concept="PlHQZ" id="aRphP9VDPM">
@@ -247,6 +246,13 @@
     <node concept="PrWs8" id="aRphP9VE3T" role="PrDN$">
       <ref role="PrY4T" to="tpck:h0TrEE$" resolve="INamedConcept" />
     </node>
+    <node concept="PrWs8" id="5ErAoTCrw5t" role="PrDN$">
+      <ref role="PrY4T" node="15xzdwHynj5" resolve="IRegisterable" />
+    </node>
+  </node>
+  <node concept="PlHQZ" id="15xzdwHynj5">
+    <property role="EcuMT" value="1252437031490516165" />
+    <property role="TrG5h" value="IRegisterable" />
   </node>
 </model>
 

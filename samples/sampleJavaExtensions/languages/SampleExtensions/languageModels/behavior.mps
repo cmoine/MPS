@@ -2,7 +2,7 @@
 <model ref="r:59d505ea-267a-4174-bf02-615e0817b24f(org.jetbrains.mps.samples.IfAndUnless.behavior)">
   <persistence version="9" />
   <languages>
-    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="0" />
+    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="2" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -18,7 +18,6 @@
       <concept id="1225194413805" name="jetbrains.mps.lang.behavior.structure.ConceptConstructorDeclaration" flags="in" index="13hLZK" />
       <concept id="1225194472830" name="jetbrains.mps.lang.behavior.structure.ConceptMethodDeclaration" flags="ng" index="13i0hz">
         <property id="5864038008284099149" name="isStatic" index="2Ki8OM" />
-        <property id="1225194472833" name="isPrivate" index="13i0is" />
         <property id="1225194472832" name="isVirtual" index="13i0it" />
         <reference id="1225194472831" name="overriddenMethod" index="13i0hy" />
       </concept>
@@ -59,7 +58,6 @@
     </node>
     <node concept="13i0hz" id="1653mnvAgr8" role="13h7CS">
       <property role="2Ki8OM" value="true" />
-      <property role="13i0is" value="false" />
       <property role="TrG5h" value="getTitle" />
       <property role="13i0it" value="true" />
       <node concept="3Tm1VV" id="1653mnvAgr9" role="1B3o_S" />
@@ -80,7 +78,6 @@
     </node>
     <node concept="13i0hz" id="1653mnvB2sG" role="13h7CS">
       <property role="2Ki8OM" value="true" />
-      <property role="13i0is" value="false" />
       <property role="TrG5h" value="getTitle" />
       <property role="13i0it" value="false" />
       <ref role="13i0hy" node="1653mnvAgr8" resolve="getTitle" />
@@ -102,7 +99,6 @@
     </node>
     <node concept="13i0hz" id="1653mnvB2u7" role="13h7CS">
       <property role="2Ki8OM" value="true" />
-      <property role="13i0is" value="false" />
       <property role="TrG5h" value="getTitle" />
       <property role="13i0it" value="false" />
       <ref role="13i0hy" node="1653mnvAgr8" resolve="getTitle" />

@@ -121,7 +121,7 @@ public class BaseFastNodeFinder implements FastNodeFinder {
   private List<SNode> getNodesImpl(SAbstractConcept concept, boolean includeInherited) {
     if (includeInherited) {
       Set<SAbstractConcept> allDescendantsOfConcept = ConceptDescendantsCache.getInstance().getDescendants(concept);
-      final ArrayList<List<SNode>> nodesOfConcept = new ArrayList<List<SNode>>(allDescendantsOfConcept.size());
+      final ArrayList<List<SNode>> nodesOfConcept = new ArrayList<>(allDescendantsOfConcept.size());
       int cnt = 0;
       synchronized (myNodeMap) { // utilize the fact values in map are immutable
         for (SAbstractConcept d : allDescendantsOfConcept) {
@@ -130,7 +130,7 @@ public class BaseFastNodeFinder implements FastNodeFinder {
           cnt += n.size();
         }
       }
-      final ArrayList<SNode> result = new ArrayList<SNode>(cnt);
+      final ArrayList<SNode> result = new ArrayList<>(cnt);
       for (List<SNode> l : nodesOfConcept) {
         result.addAll(l);
       }
@@ -181,7 +181,7 @@ public class BaseFastNodeFinder implements FastNodeFinder {
    * Simple wrap of Map('concept name' to concept instances).
    */
   protected static final class ConceptInstanceMap {
-    private final Map<SAbstractConcept, ArrayList<SNode>> myNodes = new HashMap<SAbstractConcept, ArrayList<SNode>>();
+    private final Map<SAbstractConcept, ArrayList<SNode>> myNodes = new HashMap<>();
 
     /**
      * this method doesn't expect root to be added twice to the same map (to keep impl simple)
@@ -190,7 +190,7 @@ public class BaseFastNodeFinder implements FastNodeFinder {
       SConcept concept = root.getConcept();
       ArrayList<SNode> set = myNodes.get(concept);
       if (set == null) {
-        myNodes.put(concept, set = new ArrayList<SNode>());
+        myNodes.put(concept, set = new ArrayList<>());
       }
       set.add(root);
     }
@@ -205,20 +205,55 @@ public class BaseFastNodeFinder implements FastNodeFinder {
   /**
    * Concurrency-aware, updatable storage of concept to instance map.
    * Collections of instances are immutable
+   * TODO!!! Possible bug: adding n1, then n2 (having same concept) places n2 after n1.
+   * TODO!!! For two nodes from different roots returned n2, then n1, we can delete them and in order mentioned above
+   * TODO!!! This will result in broken order
    */
   private static final class ConceptNodeMap {
-    private final Map<SAbstractConcept, List<SNode>> myNodes = new THashMap<SAbstractConcept, List<SNode>>();
+    /**
+     * A simple way to optimise child addition/removal for registered nodes.
+     * <p>
+     * A good way to optimize is to store node sequences in form of TLinkedHashSet
+     * instead of ArrayList. This will make forget consume O(removed) time, which
+     * is good. However, this will affect immutability utilized for better multithreaded
+     * performance (which actually may be not needed). If we forget about immutability,
+     * merge() can be just rewritten as myNodes(cn).addAll(newNodes), which finishes in
+     * O(added) time.
+     * <p>
+     * This fix allows to stop watching after a specific amount of odd work done.
+     * However, this algorithm will still work very slow under some [very specific]
+     * conditions. So, for the moment we consider it as working
+     * <p>
+     * E.g. model contains a single root with N children in the same role. If we
+     * continuously add/remove children from this role, it might still, as before, take
+     * O(N^2) time if we call model.nodes<> after each invalidation. Note that since the
+     * amount of work required for invalidation is similar to model size, adding "other"
+     * nodes to this model will not make the asymptotic time worse (caches rebuild for
+     * the whole model takes similar time to odd work time)
+     * <p>
+     * [MM] if you'd like to change the algorithm, you may contact me for investigation
+     * results / ideas
+     */
+    private int myOddWork = 0; //the amount of "odd" work spent on copying
+    private int mySize = 0; //number of all nodes in this map
+
+    private final Map<SAbstractConcept, List<SNode>> myNodes = new THashMap<>();
 
     public void forget(ConceptInstanceMap other) {
       for (SAbstractConcept cn : other.myNodes.keySet()) {
         assert myNodes.containsKey(cn); // other shall be subset of this map
         List<SNode> nodes = myNodes.get(cn);
-        LinkedHashSet<SNode> newNodes = new LinkedHashSet<SNode>(nodes);
-        newNodes.removeAll(other.myNodes.get(cn));
+        if (!performWork(nodes.size())) {
+          return;
+        }
+        LinkedHashSet<SNode> newNodes = new LinkedHashSet<>(nodes);
+        ArrayList<SNode> toRemove = other.myNodes.get(cn);
+        mySize -= toRemove.size();
+        newNodes.removeAll(toRemove);
         if (newNodes.isEmpty()) {
           myNodes.remove(cn);
         } else {
-          myNodes.put(cn, new ArrayList<SNode>(newNodes));
+          myNodes.put(cn, new ArrayList<>(newNodes));
         }
       }
     }
@@ -226,19 +261,37 @@ public class BaseFastNodeFinder implements FastNodeFinder {
     public void merge(ConceptInstanceMap other) {
       for (SAbstractConcept cn : other.myNodes.keySet()) {
         List<SNode> nodes = myNodes.get(cn);
+        ArrayList<SNode> toAdd = other.myNodes.get(cn);
+        mySize += toAdd.size();
         if (nodes == null) {
-          myNodes.put(cn, other.myNodes.get(cn));
+          myNodes.put(cn, toAdd);
         } else {
-          LinkedHashSet<SNode> newNodes = new LinkedHashSet<SNode>(nodes);
-          newNodes.addAll(other.myNodes.get(cn));
-          myNodes.put(cn, new ArrayList<SNode>(newNodes));
+          if (!performWork(nodes.size())) {
+            return;
+          }
+          LinkedHashSet<SNode> newNodes = new LinkedHashSet<>(nodes);
+          newNodes.addAll(toAdd);
+          myNodes.put(cn, new ArrayList<>(newNodes));
         }
       }
     }
 
+    /**
+     * @return true means we can continue working, false means caches were dropped (clear()), no point in finishing updating
+     */
+    private boolean performWork(int size) {
+      myOddWork += size;
+      if (mySize / myOddWork > 2) {
+        return true;
+      }
+
+      clear();
+      return false;
+    }
+
     public List<SNode> get(SAbstractConcept conceptFQName) {
       List<SNode> n = myNodes.get(conceptFQName);
-      return n == null ? Collections.<SNode>emptyList() : n;
+      return n == null ? Collections.emptyList() : n;
     }
 
     public boolean isEmpty() {
@@ -247,6 +300,7 @@ public class BaseFastNodeFinder implements FastNodeFinder {
 
     public void clear() {
       myNodes.clear();
+      mySize = myOddWork = 0;
     }
   }
 

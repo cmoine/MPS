@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,111 +19,100 @@ import com.intellij.ide.DataManager;
 import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.actionSystem.DefaultActionGroup;
-import com.intellij.openapi.actionSystem.Presentation;
-import com.intellij.openapi.application.RuntimeInterruptedException;
-import com.intellij.openapi.extensions.Extensions;
+import com.intellij.openapi.actionSystem.KeyboardShortcut;
+import com.intellij.openapi.actionSystem.Shortcut;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.ListPopup;
 import com.intellij.ui.awt.RelativePoint;
+import jetbrains.mps.editor.intentions.IntentionMenuProducer;
 import jetbrains.mps.editor.runtime.cells.ReadOnlyUtil;
-import jetbrains.mps.editor.runtime.commands.EditorCommand;
+import jetbrains.mps.ide.actions.MPSActionPlaces;
 import jetbrains.mps.ide.actions.MPSActions;
-import jetbrains.mps.intentions.IntentionExecutable;
-import jetbrains.mps.intentions.IntentionType;
 import jetbrains.mps.intentions.IntentionsManager;
-import jetbrains.mps.intentions.IntentionsManager.QueryDescriptor;
 import jetbrains.mps.intentions.LightBulbMenu;
 import jetbrains.mps.intentions.icons.Icons;
+import jetbrains.mps.intentions.icons.IntentionIconProvider;
+import jetbrains.mps.nodeEditor.EditorComponent.EditorDisposeListener;
 import jetbrains.mps.nodeEditor.cells.EditorCell_Label;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
-import jetbrains.mps.openapi.editor.selection.Selection;
 import jetbrains.mps.openapi.editor.selection.SelectionListener;
-import jetbrains.mps.smodel.ModelAccessHelper;
+import jetbrains.mps.openapi.intentions.Kind;
 import jetbrains.mps.smodel.SModelOperations;
-import jetbrains.mps.typesystem.inference.ITypechecking.Computation;
-import jetbrains.mps.typesystem.inference.TypeCheckingContext;
-import jetbrains.mps.typesystem.inference.TypeContextManager;
-import jetbrains.mps.util.Computable;
-import jetbrains.mps.util.Pair;
-import jetbrains.mps.workbench.action.BaseAction;
-import jetbrains.mps.workbench.action.BaseGroup;
+import jetbrains.mps.typechecking.TypecheckingFacade;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.module.ModelAccess;
 
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * Responsible for UI elements of Intentions popup menu and integration with EditorComponent.
+ * To build actual ActionGroup delegates to {@link jetbrains.mps.editor.intentions.IntentionMenuProducer}
+ */
 public class IntentionsSupport {
-  static final long INTENTION_SHOW_DELAY = 1000;
+  private static final long INTENTION_SHOW_DELAY = 1000;
 
-  private AbstractAction myShowIntentionsAction;
-  private Point myLightBulbLocation = new Point();
-  private LightBulbMenu myLightBulb;
+  // MPS-extensions tries to modify this field (and myLightBulb) through reflection
+  private final AbstractAction myShowIntentionsAction;
+  private final Point myLightBulbLocation = new Point();
+  private final LightBulbMenu myLightBulb;
 
-  private AtomicReference<Thread> myShowIntentionsThread = new AtomicReference<Thread>();
+  private final AtomicReference<IntentionsThread> myShowIntentionsThread = new AtomicReference<>();
 
   @NotNull
-  private EditorComponent myEditor;
+  private final EditorComponent myEditor;
+
+  private IntentionMenuProducer myMenuProducer;
 
   public IntentionsSupport(@NotNull EditorComponent editor) {
     myEditor = editor;
 
-    myLightBulb = new LightBulbMenu() {
-      @Override
-      public void activate() {
-        getModelAccess().runReadAction(new Runnable() {
-          @Override
-          public void run() {
-            checkAndShowMenu();
-          }
-        });
-      }
-    };
+    myMenuProducer = new IntentionMenuProducer(editor);
 
-    myEditor.getViewport().addChangeListener(new ChangeListener() {
-      @Override
-      public void stateChanged(ChangeEvent e) {
-        adjustLightBulbLocation();
+    final AnAction ideaActionRegistration = ActionManager.getInstance().getActionOrStub(MPSActions.EDITOR_SHOW_INTENTIONS_POPUP_ACTION);
+    KeyStroke firstKeyStroke = null;
+    for (Shortcut shortcut : ideaActionRegistration.getShortcutSet().getShortcuts()) {
+      if (!shortcut.isKeyboard()) {
+        continue;
       }
-    });
+      if (shortcut instanceof KeyboardShortcut) {
+        firstKeyStroke = ((KeyboardShortcut) shortcut).getFirstKeyStroke();
+        break;
+      }
+    }
+    if (firstKeyStroke == null) {
+      // fallback
+      firstKeyStroke = KeyStroke.getKeyStroke("alt ENTER");
+    }
+
+    myLightBulb = new LightBulbMenu(firstKeyStroke, this::checkAndShowMenu);
+
+    myEditor.getViewport().addChangeListener(e -> adjustLightBulbLocation());
 
     myShowIntentionsAction = new AbstractAction() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        getModelAccess().runReadAction(new Runnable() {
-          @Override
-          public void run() {
-            checkAndShowMenu();
-          }
-        });
+        checkAndShowMenu();
       }
     };
-    myEditor.registerKeyboardAction(myShowIntentionsAction, KeyStroke.getKeyStroke("alt ENTER"), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
-    myEditor.addFocusListener(new FocusAdapter() {
+    // FIXME check 47d64cfa and MPS-31891. Likely we need to switch to use idea's actions not only to keep shortcut,
+    //       just requires some deep understanding of DataContext to integrate it with our thread to update intentions menu
+    myEditor.registerKeyboardAction(myShowIntentionsAction, firstKeyStroke, JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
+    final FocusAdapter focusListener = new FocusAdapter() {
       @Override
       public void focusGained(FocusEvent e) {
         updateIntentionsStatus();
@@ -132,88 +121,84 @@ public class IntentionsSupport {
       @Override
       public void focusLost(FocusEvent e) {
         hideLightBulb();
+        // If editor lost focus, thread can be stopped - it will be any way restarted on focus gain
+        stopIntentionThread();
       }
-    });
+    };
+    myEditor.addFocusListener(focusListener);
 
 
-    myEditor.getSelectionManager().addSelectionListener(new SelectionListener() {
+    final SelectionListener selectionListener = (editorComponent, oldSelection, newSelection) -> {
+      if (oldSelection == newSelection) {
+        return;
+      }
+      if (!((EditorComponent) editorComponent).isFocusOwner()) {
+        return;
+      }
+      updateIntentionsStatus();
+    };
+    myEditor.getSelectionManager().addSelectionListener(selectionListener);
+
+    final EditorDisposeListener disposeListener = new EditorDisposeListener() {
       @Override
-      public void selectionChanged(jetbrains.mps.openapi.editor.EditorComponent editorComponent, Selection oldSelection, Selection newSelection) {
-        if (oldSelection == newSelection) {
-          return;
-        }
-        if (!((EditorComponent) editorComponent).isFocusOwner()) return;
-        updateIntentionsStatus();
+      public void editorWillBeDisposed(@NotNull EditorComponent component) {
+        stopIntentionThread();
+        myEditor.removeFocusListener(focusListener);
+        myEditor.getSelectionManager().removeSelectionListener(selectionListener);
+        myEditor.removeDisposeListener(this);
       }
-    });
+    };
+    myEditor.addDisposeListener(disposeListener);
+  }
+
+  /**
+   * Use default implementation to build actions of intentions menu popup.
+   */
+  /*package*/ void resetMenuProducer() {
+    myMenuProducer = new IntentionMenuProducer(myEditor);
+  }
+
+  /**
+   * Override default logic to build actions of intentions menu popup.
+   */
+  /*package*/ void setMenuProducer(@NotNull IntentionMenuProducer menuProducer) {
+    myMenuProducer = menuProducer;
   }
 
   private void checkAndShowMenu() {
-    if (isInconsistentEditor()) return;
-    if (ReadOnlyUtil.isSelectionReadOnlyInEditor(myEditor) || SModelOperations.isReadOnly(myEditor.getSelectedNode().getModel())) return;
+    getModelAccess().runReadAction(() -> {
+      if (isInconsistentEditor()) {
+        return;
+      }
+      final SModel model = myEditor.getSelectedNode() == null ? null : myEditor.getSelectedNode().getModel();
+      if (ReadOnlyUtil.isSelectionReadOnlyInEditor(myEditor) || model == null || SModelOperations.isReadOnly(model)) {
+        return;
+      }
 
-    showIntentionsMenu();
+      showIntentionsMenu();
+    });
+  }
+
+  private void stopIntentionThread() {
+    IntentionsThread thread = myShowIntentionsThread.getAndSet(null);
+    if (thread != null) {
+      thread.requestStop();
+    }
+  }
+
+  private void intentionThreadCompleted(IntentionsThread thread) {
+    myShowIntentionsThread.compareAndSet(thread, null);
   }
 
   private void updateIntentionsStatus() {
-    Thread thread = myShowIntentionsThread.get();
-    if (thread != null) {
-      thread.interrupt();
+    if (!myEditor.getEditorConfiguration().showLightBulb) {
+      return;
     }
+    stopIntentionThread();
 
     hideLightBulb();
 
-    myShowIntentionsThread.set(new Thread("Intentions") {
-      @Override
-      public void run() {
-        try {
-          Thread.sleep(IntentionsSupport.INTENTION_SHOW_DELAY);
-          if (interrupted()) {
-            return;
-          }
-
-          final IntentionType intentionType = new ModelAccessHelper(getModelAccess()).runReadAction(new Computable<IntentionType>() {
-            @Override
-            public IntentionType compute() {
-              if (isInconsistentEditor() || ReadOnlyUtil.isSelectionReadOnlyInEditor(myEditor)) return null;
-              // TODO check for ActionsAsIntentions
-              return TypeContextManager.getInstance().runTypeCheckingComputation(myEditor.getTypecheckingContextOwner(), myEditor.getEditedNode(),
-                  new Computation<IntentionType>() {
-                    @Override
-                    public IntentionType compute(TypeCheckingContext context) {
-                      return IntentionsManager.getInstance().getHighestAvailableBaseIntentionType(myEditor.getSelectedNode(), myEditor.getEditorContext());
-                    }
-                  });
-            }
-          });
-
-          if (intentionType == null || interrupted()) {
-            return;
-          }
-
-          getModelAccess().runReadInEDT(new Runnable() {
-            @Override
-            public void run() {
-              if (isInconsistentEditor() || ReadOnlyUtil.isSelectionReadOnlyInEditor(myEditor) || interrupted()) return;
-
-              if (myEditor.getSelectedCell() == null) {
-                hideLightBulb();
-              } else {
-                adjustLightBulbLocation();
-                showLightBulbComponent(intentionType == IntentionType.NORMAL ? Icons.INTENTION : intentionType.getIcon());
-              }
-            }
-          });
-
-        } catch (InterruptedException e) {
-
-        } catch (RuntimeInterruptedException e) {
-
-        } finally {
-          myShowIntentionsThread.compareAndSet(this, null);
-        }
-      }
-    });
+    myShowIntentionsThread.set(new IntentionsThread());
 
     myShowIntentionsThread.get().start();
   }
@@ -224,7 +209,9 @@ public class IntentionsSupport {
 
   private void adjustLightBulbLocation() {
     EditorCell selectedCell = myEditor.getSelectedCell();
-    if (selectedCell == null) return;
+    if (selectedCell == null) {
+      return;
+    }
 
     Point p = getLightBulbLocation(selectedCell);
 
@@ -266,121 +253,21 @@ public class IntentionsSupport {
     return getInsertedPosition(viewRect, myLightBulb.getPreferredSize(), new Point(x, y));
   }
 
-  private void executeIntention(final IntentionExecutable intention, final SNode node) {
-    getModelAccess().executeCommandInEDT(new EditorCommand(myEditor) {
-      @Override
-      public void doExecute() {
-        intention.execute(node, myEditor.getEditorContext());
-      }
-    });
-  }
-
-  private AnAction getIntentionGroup(final IntentionExecutable intention, final SNode node) {
-    Icon icon = intention.getDescriptor().getType().getIcon();
-    String text = intention.getDescription(node, myEditor.getEditorContext());
-
-    List<AnAction> intentionActions = new ArrayList<AnAction>();
-    for (IntentionActionsProvider provider : Extensions.getExtensions(IntentionActionsProvider.EP_NAME)) {
-      for (AnAction action : provider.getIntentionActions(intention))
-        intentionActions.add(action);
-    }
-
-    if (intentionActions.isEmpty()) {
-      return new BaseAction(text, null, icon) {
-        @Override
-        protected void doExecute(AnActionEvent e, Map<String, Object> params) {
-          executeIntention(intention, node);
-        }
-      };
-    } else {
-      DefaultActionGroup intentionActionGroup = new DefaultActionGroup(text, true) {
-        @Override
-        public boolean canBePerformed(DataContext c) {
-          return true;
-        }
-
-        @Override
-        public void actionPerformed(AnActionEvent e) {
-          executeIntention(intention, node);
-        }
-      };
-      intentionActionGroup.addAll(intentionActions);
-      intentionActionGroup.getTemplatePresentation().setIcon(icon);
-      return intentionActionGroup;
-    }
-
-  }
-
-  private BaseGroup getIntentionsGroup(final DataContext dataContext) {
-    // intentions
-    List<Pair<IntentionExecutable, SNode>> groupItems = new ArrayList<Pair<IntentionExecutable, SNode>>();
-    groupItems.addAll(getEnabledIntentions());
-
-    // actions as intentions
-    List<AnAction> actions = new ArrayList<AnAction>();
-    collectActionsAsIntentions(ActionManager.getInstance().getAction(MPSActions.ACTIONS_AS_INTENTIONS_GROUP), actions, dataContext);
-
-    if (groupItems.isEmpty() && actions.isEmpty()) {
-      return null;
-    }
-    // TODO sort actions & intentions together
-    Collections.sort(groupItems, new Comparator<Pair<IntentionExecutable, SNode>>() {
-      @Override
-      public int compare(Pair<IntentionExecutable, SNode> o1, Pair<IntentionExecutable, SNode> o2) {
-        IntentionExecutable intention1 = o1.o1;
-        IntentionExecutable intention2 = o2.o1;
-        SNode node1 = o1.o2;
-        SNode node2 = o2.o2;
-        EditorContext context = myEditor.getEditorContext();
-        return intention1.getDescription(node1, context).compareTo(intention2.getDescription(node2, context));
-      }
-    });
-    BaseGroup group = new BaseGroup("");
-    for (final Pair<IntentionExecutable, SNode> pair : groupItems) {
-      group.add(getIntentionGroup(pair.o1, pair.o2));
-    }
-    group.addAll(actions);
-    return group;
-  }
-
-  private void collectActionsAsIntentions(AnAction action, List<AnAction> actions, DataContext dataContext) {
-    if (action instanceof ActionGroup) {
-      for (AnAction child : ((ActionGroup) action).getChildren(null)) {
-        collectActionsAsIntentions(child, actions, dataContext);
-      }
-    } else if (action instanceof BaseAction) {
-      Presentation presentation = action.getTemplatePresentation();
-      if (presentation.getIcon() == null)
-        presentation.setIcon(Icons.REAL_INTENTION);
-      action.update(new AnActionEvent(null, dataContext, "", presentation, ActionManager.getInstance(), 0));
-      if (presentation.isVisible()) {
-        actions.add(action);
-      }
-    }
-  }
-
+  // invoked with model read
   private void showIntentionsMenu() {
     final EditorContext editorContext = myEditor.getEditorContext();
-    ListPopup popup = new ModelAccessHelper(getModelAccess()).runReadAction(new Computable<ListPopup>() {
-      @Override
-      public ListPopup compute() {
-        DataContext dataContext = DataManager.getInstance().getDataContext(editorContext.getNodeEditorComponent());
-        BaseGroup group = getIntentionsGroup(dataContext);
-        if (group == null) {
-          return null;
-        }
-        return JBPopupFactory.getInstance().createActionGroupPopup(
-            "Intentions",
-            group,
-            dataContext,
-            JBPopupFactory.ActionSelectionAid.SPEEDSEARCH,
-            false);
-      }
-    });
-
-    if (popup == null) {
+    DataContext dataContext = DataManager.getInstance().getDataContext(editorContext.getNodeEditorComponent());
+    ActionGroup group = myMenuProducer.getIntentionsGroup(dataContext);
+    if (group == null) {
       return;
     }
+    ListPopup popup = JBPopupFactory.getInstance().createActionGroupPopup(
+          "Intentions",
+          group,
+          dataContext,
+          JBPopupFactory.ActionSelectionAid.SPEEDSEARCH,
+          false,
+          MPSActionPlaces.MPS_EDITOR_INTENTIONS_POPUP);
 
     final EditorCell selectedCell = editorContext.getSelectedCell();
     int x = selectedCell.getX();
@@ -392,31 +279,76 @@ public class IntentionsSupport {
     popup.show(relativePoint);
   }
 
-  private Set<Pair<IntentionExecutable, SNode>> getEnabledIntentions() {
-    final Set<Pair<IntentionExecutable, SNode>> result = new LinkedHashSet<Pair<IntentionExecutable, SNode>>();
-    final SNode node = myEditor.getSelectedNode();
-    final EditorContext editorContext = myEditor.getEditorContext();
-    if (node != null) {
-      final QueryDescriptor query = new QueryDescriptor();
-      query.setEnabledOnly(true);
-      final Collection<Pair<IntentionExecutable, SNode>> availableIntentions =
-          TypeContextManager.getInstance().runTypeCheckingComputation(myEditor.getTypecheckingContextOwner(), myEditor.getEditedNode(),
-              new Computation<Collection<Pair<IntentionExecutable, SNode>>>() {
-                @Override
-                public Collection<Pair<IntentionExecutable, SNode>> compute(TypeCheckingContext context) {
-                  return IntentionsManager.getInstance().getAvailableIntentions(query, node, editorContext);
-                }
-              });
-      result.addAll(availableIntentions);
-    }
-    return result;
-  }
-
-  public boolean isLightBulbVisible() {
-    return myLightBulb.isVisible();
-  }
-
   private ModelAccess getModelAccess() {
     return myEditor.getRepository().getModelAccess();
+  }
+
+  private class IntentionsThread extends Thread {
+    private volatile boolean myStopRequested;
+
+    public IntentionsThread() {
+      super("Intentions");
+    }
+
+    /*package*/ void requestStop() {
+      myStopRequested = true;
+    }
+
+    @Override
+    public void run() {
+      try {
+        Thread.sleep(IntentionsSupport.INTENTION_SHOW_DELAY);
+        if (myStopRequested) {
+          return;
+        }
+
+        final boolean[] forceReturn = {false};
+        ApplicationManager.getApplication().invokeAndWait(
+            () -> myEditor.getRepository().getModelAccess().runReadAction(
+                () -> forceReturn[0] = isInconsistentEditor() || ReadOnlyUtil.isSelectionReadOnlyInEditor(myEditor)));
+
+        if (forceReturn[0]) {
+          return;
+        }
+
+        final Kind intentionKind = getModelAccess().computeReadAction(() -> {
+          // TODO check for ActionsAsIntentions
+          if (myEditor.getTypecheckingSession() == null) {
+            return null;
+          }
+
+          return TypecheckingFacade
+                     .getFromContext()
+                     .computeWithSession(myEditor.getTypecheckingSession(),
+                                        (session) ->
+                                           IntentionsManager
+                                                .getInstance()
+                                                .getHighestAvailableBaseIntentionType(myEditor.getSelectedNode(), myEditor.getEditorContext())
+          );
+        });
+
+        if (intentionKind == null || myStopRequested) {
+          return;
+        }
+
+        getModelAccess().runReadInEDT(() -> {
+          if (isInconsistentEditor() || ReadOnlyUtil.isSelectionReadOnlyInEditor(myEditor) || myStopRequested) {
+            return;
+          }
+
+          if (myEditor.getSelectedCell() == null) {
+            hideLightBulb();
+          } else {
+            adjustLightBulbLocation();
+            showLightBulbComponent(intentionKind == Kind.NORMAL ? Icons.INTENTION : new IntentionIconProvider(intentionKind).getIcon());
+          }
+        });
+
+      } catch (InterruptedException e) {
+        // It's ok, we don't care if the thread got interrupted
+      } finally {
+        intentionThreadCompleted(this);
+      }
+    }
   }
 }

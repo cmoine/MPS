@@ -25,7 +25,7 @@ import java.util.List;
 
 public class ScopeOperations {
   public static <T extends SModule> Iterable<T> getModules(SearchScope scope, Class<T> cls) {
-    List<T> result = new ArrayList<T>();
+    List<T> result = new ArrayList<>();
     for (SModule module : scope.getModules()) {
       if (cls.isInstance(module)) result.add((T) module);
     }

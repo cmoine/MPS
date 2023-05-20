@@ -14,20 +14,20 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1076505808687:jetbrains.mps.baseLanguage.structure.WhileStatement" />
   <root nodeRef="r:00000000-0000-4000-0000-011c8959051d(jetbrains.mps.regexp.examples)/1178529045424">
     <file name="EmailExample.java">
-      <node id="1178529080149" at="12,5,13,49" concept="7" />
-      <node id="1178529080149" at="13,49,14,62" concept="7" />
+      <node id="1178529080149" at="12,5,13,34" concept="7" />
+      <node id="1178529080149" at="13,34,14,62" concept="7" />
       <node id="1178529104619" at="15,33,16,65" concept="2" />
       <node id="1178529195950" at="16,65,17,62" concept="2" />
-      <node id="1223028394775" at="20,65,21,29" concept="2" />
-      <node id="1178529133696" at="24,0,25,0" concept="9" trace="REGEXP_qkhp2f_a0a0a0b" />
-      <node id="1222878828916" at="25,0,26,0" concept="9" trace="REGEXP_qkhp2f_a0a1a1" />
+      <node id="1223028394775" at="20,52,21,29" concept="2" />
+      <node id="1178529133696" at="24,0,25,0" concept="9" trace="REGEXP" />
+      <node id="1222878828916" at="25,0,26,0" concept="9" trace="REGEXP1" />
       <node id="1848533035883009391" at="9,0,11,0" concept="1" trace="EmailExample#()V" />
       <node id="1222878814653" at="19,5,22,5" concept="5" />
       <node id="1178529080149" at="14,62,18,7" concept="5" />
       <node id="1178529080149" at="11,51,19,5" concept="0" />
       <node id="1178529072362" at="11,0,24,0" concept="10" trace="msain#(Ljava/lang/String;)V" />
       <scope id="1848533035883009393" at="9,25,9,25" />
-      <scope id="1222878814654" at="20,65,21,29" />
+      <scope id="1222878814654" at="20,52,21,29" />
       <scope id="1848533035883009391" at="9,0,11,0" />
       <scope id="1178529088012" at="15,33,17,62" />
       <scope id="1178529080149" at="12,5,18,7">
@@ -43,24 +43,24 @@
   </root>
   <root nodeRef="r:00000000-0000-4000-0000-011c8959051d(jetbrains.mps.regexp.examples)/1178535069057">
     <file name="BaseLanguageIntegration.java">
-      <node id="1178535102780" at="13,5,14,49" concept="7" />
-      <node id="1178535102780" at="14,49,15,62" concept="7" />
+      <node id="1178535102780" at="13,5,14,34" concept="7" />
+      <node id="1178535102780" at="14,34,15,62" concept="7" />
       <node id="1178535102799" at="16,33,17,65" concept="2" />
       <node id="1178535102805" at="17,65,18,62" concept="2" />
-      <node id="1178535140358" at="23,5,24,49" concept="7" />
-      <node id="1178535140358" at="24,49,25,49" concept="7" />
+      <node id="1178535140358" at="23,5,24,35" concept="7" />
+      <node id="1178535140358" at="24,35,25,49" concept="7" />
       <node id="1178535159369" at="26,30,27,48" concept="2" />
-      <node id="1178535184339" at="32,5,33,49" concept="7" />
-      <node id="1178535184339" at="33,49,34,52" concept="7" />
+      <node id="1178535184339" at="32,5,33,35" concept="7" />
+      <node id="1178535184339" at="33,35,34,52" concept="7" />
       <node id="1178535206675" at="35,33,36,62" concept="2" />
-      <node id="1178535227739" at="40,45,41,94" concept="2" />
-      <node id="1222616772849" at="41,94,42,13" concept="8" />
-      <node id="1178535319557" at="45,70,46,38" concept="2" />
-      <node id="1178535102782" at="49,0,50,0" concept="9" trace="REGEXP_efh9at_a0a0a0b" />
-      <node id="1178535147654" at="50,0,51,0" concept="9" trace="REGEXP_efh9at_a0a0a0c" />
-      <node id="1178535193340" at="51,0,52,0" concept="9" trace="REGEXP_efh9at_a0a0a0d" />
-      <node id="1178535238356" at="52,0,53,0" concept="9" trace="REGEXP_efh9at_b0a0a4" />
-      <node id="1178535309012" at="53,0,54,0" concept="9" trace="REGEXP_efh9at_b0a0f" />
+      <node id="1178535227739" at="40,45,41,81" concept="2" />
+      <node id="1222616772849" at="41,81,42,13" concept="8" />
+      <node id="1178535319557" at="45,58,46,38" concept="2" />
+      <node id="1178535102782" at="49,0,50,0" concept="9" trace="REGEXP" />
+      <node id="1178535147654" at="50,0,51,0" concept="9" trace="REGEXP1" />
+      <node id="1178535193340" at="51,0,52,0" concept="9" trace="REGEXP2" />
+      <node id="1178535238356" at="52,0,53,0" concept="9" trace="REGEXP3" />
+      <node id="1178535309012" at="53,0,54,0" concept="9" trace="REGEXP4" />
       <node id="1848533035883009395" at="10,0,12,0" concept="1" trace="BaseLanguageIntegration#()V" />
       <node id="1178535140358" at="25,49,28,7" concept="5" />
       <node id="1178535184339" at="34,52,37,7" concept="11" />
@@ -77,7 +77,7 @@
       <scope id="1848533035883009397" at="10,36,10,36" />
       <scope id="1178535140360" at="26,30,27,48" />
       <scope id="1178535184341" at="35,33,36,62" />
-      <scope id="1178535286959" at="45,70,46,38" />
+      <scope id="1178535286959" at="45,58,46,38" />
       <scope id="1848533035883009395" at="10,0,12,0" />
       <scope id="1178535102798" at="16,33,18,62" />
       <scope id="1178535219994" at="40,45,42,13" />

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="mps-annotations">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/mps-core/lib/mps-annotations.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../core/mps-annotations/source" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,28 +17,38 @@ package jetbrains.mps.workbench.action;
 
 import com.intellij.ide.DataManager;
 import com.intellij.ide.actions.RecentProjectsGroup;
-import com.intellij.openapi.actionSystem.*;
-import org.apache.log4j.Logger;
-import org.apache.log4j.LogManager;
+import com.intellij.ide.ui.customization.CustomActionsSchema;
+import com.intellij.openapi.actionSystem.ActionGroup;
+import com.intellij.openapi.actionSystem.ActionManager;
+import com.intellij.openapi.actionSystem.ActionPlaces;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.actionSystem.DefaultActionGroup;
+import com.intellij.openapi.actionSystem.Presentation;
+import jetbrains.mps.logging.Logger;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.event.InputEvent;
 
 public class ActionUtils {
-  private static final Logger LOG = LogManager.getLogger(ActionUtils.class);
+  private static final Logger LOG = Logger.getLogger(ActionUtils.class);
 
   public static void updateGroup(ActionGroup group, AnActionEvent e) {
     try {
       group.update(e);
     } catch (Throwable t) {
-      LOG.error(null, t);
+      LOG.error(t);
     }
     for (AnAction child : group.getChildren(null)) {
       try {
         child.update(e);
       } catch (Throwable t) {
-        LOG.error(null, t);
+        LOG.error(t);
       }
-      if (child instanceof ActionGroup) updateGroup((ActionGroup) child, e);
+      if (child instanceof ActionGroup) {
+        updateGroup((ActionGroup) child, e);
+      }
     }
   }
 
@@ -46,8 +56,9 @@ public class ActionUtils {
     return ((BaseGroup) ActionManager.getInstance().getAction(id));
   }
 
-  public static DefaultActionGroup getDefaultGroup(String id) {
-    return ((DefaultActionGroup) ActionManager.getInstance().getAction(id));
+  @Nullable
+  public static ActionGroup getDefaultGroup(String id) {
+    return (ActionGroup) CustomActionsSchema.getInstance().getCorrectedAction(id);
   }
 
   public static DefaultActionGroup groupFromActions(AnAction... actions) {

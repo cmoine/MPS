@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2016 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,29 +18,30 @@ package jetbrains.mps.smodel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.module.ModelAccess;
 import org.jetbrains.mps.openapi.module.SRepository;
-import org.jetbrains.mps.openapi.module.SRepositoryContentAdapter;
+import org.jetbrains.mps.openapi.module.SRepositoryListener;
 
 /**
- * Handy facility to (un)register content adapter to a repository, with respect to model read access constraint.
+ * Handy facility to (un)register a listener to a repository, with respect to model read access constraint.
  * Not exposed in openapi as I'm not sure why we don't allow to attach listeners from anywhere (we need RA to walk modules, however SRepository
  * could grab read access as needed)
  */
 public class RepoListenerRegistrar implements Runnable {
+  // XXX could use name Plug instead of Registrar.
   private final SRepository myRepo;
-  private final SRepositoryContentAdapter myContentAdapter;
+  private final SRepositoryListener myListener;
   private boolean myIsAttach = false;
 
-  public RepoListenerRegistrar(@NotNull SRepository repo, @NotNull SRepositoryContentAdapter ca) {
+  public RepoListenerRegistrar(@NotNull SRepository repo, @NotNull SRepositoryListener ca) {
     myRepo = repo;
-    myContentAdapter = ca;
+    myListener = ca;
   }
 
   @Override
   public void run() {
     if (myIsAttach) {
-      myContentAdapter.subscribeTo(myRepo);
+      myRepo.addRepositoryListener(myListener);
     } else {
-      myContentAdapter.unsubscribeFrom(myRepo);
+      myRepo.removeRepositoryListener(myListener);
     }
   }
 

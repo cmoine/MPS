@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <root>
+    <file name="ActionAspectDescriptorImpl.java">
+      <unit at="12,0,28,0" name="jetbrains.mps.lang.context.defs.actions.ActionAspectDescriptorImpl" />
+    </file>
+  </root>
+  <root nodeRef="r:68da2764-5498-4fd3-bf55-72fdc8fd0453(jetbrains.mps.lang.context.defs.actions)/315923949159711975">
+    <file name="TypedIdentifier_preserveName.java">
+      <node id="315923949159713056" at="17,75,18,165" concept="0" />
+      <node id="315923949159711975" at="24,0,25,0" concept="3" trace="TypedDef$H3" />
+      <node id="315923949159711975" at="28,0,29,0" concept="3" trace="name$MnvL" />
+      <node id="315923949159711989" at="16,102,19,7" concept="1" />
+      <node id="315923949159711976" at="16,0,21,0" concept="2" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <scope id="315923949159711991" at="17,75,18,165" />
+      <scope id="315923949159711976" at="16,102,19,7" />
+      <scope id="315923949159711976" at="16,0,21,0">
+        <var name="enclosingNode" id="315923949159711976" />
+        <var name="index" id="315923949159711976" />
+        <var name="model" id="315923949159711976" />
+        <var name="newNode" id="315923949159711976" />
+        <var name="sampleNode" id="315923949159711976" />
+      </scope>
+      <unit id="315923949159711975" at="23,0,26,0" name="jetbrains.mps.lang.context.defs.actions.TypedIdentifier_preserveName$CONCEPTS" />
+      <unit id="315923949159711975" at="27,0,30,0" name="jetbrains.mps.lang.context.defs.actions.TypedIdentifier_preserveName$PROPS" />
+      <unit id="315923949159711976" at="15,0,22,0" name="jetbrains.mps.lang.context.defs.actions.TypedIdentifier_preserveName$NodeFactory_315923949159711976" />
+      <unit id="315923949159711975" at="14,0,31,0" name="jetbrains.mps.lang.context.defs.actions.TypedIdentifier_preserveName" />
+    </file>
+  </root>
+</debug-info>
+

@@ -7,17 +7,17 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
   <root nodeRef="r:00000000-0000-4000-0000-011c89590431(jetbrains.mps.samples.secretCompartmentLanguage.sandbox)/1197150020790">
     <file name="MrsH_StateMachineFactory.java">
-      <node id="1197150020790" at="13,41,14,65" concept="1" />
-      <node id="1197150020790" at="14,65,15,65" concept="1" />
-      <node id="1197150020790" at="15,65,16,59" concept="1" />
-      <node id="1197150020790" at="16,59,17,65" concept="1" />
-      <node id="1197150020790" at="17,65,18,45" concept="1" />
-      <node id="1197150020790" at="18,45,19,57" concept="1" />
-      <node id="1197150020790" at="19,57,20,57" concept="1" />
-      <node id="1197150020790" at="20,57,21,63" concept="1" />
-      <node id="1197150020790" at="21,63,22,88" concept="1" />
-      <node id="1197150020790" at="22,88,23,94" concept="1" />
-      <node id="1197150020790" at="23,94,24,94" concept="1" />
+      <node id="1197169658976" at="13,41,14,65" concept="1" />
+      <node id="1197169676040" at="14,65,15,65" concept="1" />
+      <node id="1197169688807" at="15,65,16,59" concept="1" />
+      <node id="1197169702886" at="16,59,17,65" concept="1" />
+      <node id="1197223600313" at="17,65,18,45" concept="1" />
+      <node id="1197240913970" at="18,45,19,57" concept="1" />
+      <node id="1197242143240" at="19,57,20,57" concept="1" />
+      <node id="1197242160585" at="20,57,21,63" concept="1" />
+      <node id="1197240843830" at="21,63,22,88" concept="1" />
+      <node id="1197242140286" at="22,88,23,94" concept="1" />
+      <node id="1197242172476" at="23,94,24,94" concept="1" />
       <node id="1197150020790" at="24,94,25,40" concept="3" />
       <node id="1197150020790" at="25,40,26,61" concept="3" />
       <node id="1197150020790" at="26,61,27,24" concept="4" />
@@ -35,21 +35,18 @@
   </root>
   <root nodeRef="r:00000000-0000-4000-0000-011c89590431(jetbrains.mps.samples.secretCompartmentLanguage.sandbox)/1197247437082">
     <file name="MrsH_StateMachine_Test.java">
-      <node id="1197253131013" at="10,41,11,77" concept="3" />
-      <node id="1197253131013" at="11,77,12,30" concept="1" />
-      <node id="1197255880355" at="12,30,13,35" concept="1" />
-      <node id="1197255894825" at="13,35,14,35" concept="1" />
-      <node id="1197255910138" at="14,35,15,35" concept="1" />
-      <node id="1197253131013" at="15,35,16,86" concept="1" />
-      <node id="1197247437082" at="18,0,20,0" concept="0" trace="MrsH_StateMachine_Test#()V" />
-      <node id="1197253131013" at="10,0,18,0" concept="2" trace="test_A#()V" />
-      <scope id="1197247437082" at="18,35,18,35" />
-      <scope id="1197247437082" at="18,0,20,0" />
-      <scope id="1197253131013" at="10,41,16,86">
+      <node id="1197253131013" at="12,41,13,77" concept="3" />
+      <node id="1197253131013" at="13,77,14,30" concept="1" />
+      <node id="1197255880355" at="14,30,15,35" concept="1" />
+      <node id="1197255894825" at="15,35,16,35" concept="1" />
+      <node id="1197255910138" at="16,35,17,35" concept="1" />
+      <node id="1197253131013" at="17,35,18,86" concept="1" />
+      <node id="1197253131013" at="11,0,20,0" concept="2" trace="test_A#()V" />
+      <scope id="1197253131013" at="12,41,18,86">
         <var name="stateMachineFactory" id="1197253131013" />
       </scope>
-      <scope id="1197253131013" at="10,0,18,0" />
-      <unit id="1197247437082" at="9,0,21,0" name="jetbrains.mps.samples.secretCompartmentLanguage.sandbox.MrsH_StateMachine_Test" />
+      <scope id="1197253131013" at="11,0,20,0" />
+      <unit id="1197247437082" at="10,0,21,0" name="jetbrains.mps.samples.secretCompartmentLanguage.sandbox.MrsH_StateMachine_Test" />
     </file>
   </root>
 </debug-info>

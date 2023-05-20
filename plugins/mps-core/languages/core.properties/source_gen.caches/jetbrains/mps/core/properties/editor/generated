@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-2gnco3j20oyzz15kujyjf2fp49slqub" />
+<product version="3" modelHash="-6wgugrisdca4228o8ed8zhcz1lqjn3r">
+  <files names="EditorAspectDescriptorImpl.java:PropertiesComment_Editor.java:PropertiesComment_EditorBuilder_a.java:PropertiesDeclaration_Editor.java:PropertiesDeclaration_EditorBuilder_a.java:PropertiesDeclaration_InspectorBuilder_a.java:PropertiesFile_Editor.java:PropertiesFile_EditorBuilder_a.java:PropertiesLine_Editor.java:PropertiesLine_EditorBuilder_a.java:PropertiesLine_SubstituteMenu.java:properiesSS_StyleSheet.java" />
+</product>
 

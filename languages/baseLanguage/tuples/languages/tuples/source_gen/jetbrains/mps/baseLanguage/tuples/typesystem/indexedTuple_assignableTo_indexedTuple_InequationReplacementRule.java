@@ -9,68 +9,58 @@ import jetbrains.mps.typesystem.inference.TypeCheckingContext;
 import jetbrains.mps.lang.typesystem.runtime.IsApplicable2Status;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.errors.messageTargets.MessageTarget;
 import jetbrains.mps.errors.messageTargets.NodeMessageTarget;
 import jetbrains.mps.errors.IErrorReporter;
 import jetbrains.mps.lang.typesystem.runtime.HUtil;
 import java.util.Iterator;
-import jetbrains.mps.typesystem.inference.TypeChecker;
+import jetbrains.mps.typechecking.TypecheckingFacade;
 import jetbrains.mps.lang.typesystem.runtime.IsApplicableStatus;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SConcept;
 
 public class indexedTuple_assignableTo_indexedTuple_InequationReplacementRule extends AbstractInequationReplacementRule_Runtime {
   public indexedTuple_assignableTo_indexedTuple_InequationReplacementRule() {
   }
   public void processInequation(final SNode subtype, final SNode supertype, final EquationInfo equationInfo, final TypeCheckingContext typeCheckingContext, IsApplicable2Status status, final boolean inequalityIsWeak, final boolean inequalityIsLessThan) {
-    if (!(ListSequence.fromList(SLinkOperations.getChildren(subtype, MetaAdapterFactory.getContainmentLink(0xa247e09e243545baL, 0xb8d207e93feba96aL, 0x1207157a8dcL, 0x1207158795cL, "componentType"))).count() == ListSequence.fromList(SLinkOperations.getChildren(supertype, MetaAdapterFactory.getContainmentLink(0xa247e09e243545baL, 0xb8d207e93feba96aL, 0x1207157a8dcL, 0x1207158795cL, "componentType"))).count())) {
-      MessageTarget errorTarget = new NodeMessageTarget();
+    if (!(ListSequence.fromList(SLinkOperations.getChildren(subtype, LINKS.componentType$crWY)).count() == ListSequence.fromList(SLinkOperations.getChildren(supertype, LINKS.componentType$crWY)).count())) {
+      final MessageTarget errorTarget = new NodeMessageTarget();
       IErrorReporter _reporter_2309309498 = typeCheckingContext.reportTypeError(equationInfo.getNodeWithError(), "Member types count don't match", "r:e119dbbd-3529-4067-8bad-6b9edd79d0b6(jetbrains.mps.baseLanguage.tuples.typesystem)", "1238854492399", null, errorTarget);
       HUtil.addAdditionalRuleIdsFromInfo(_reporter_2309309498, equationInfo);
     }
     {
-      SNode lmt;
-      SNode rmt;
-      Iterator<SNode> lmt_iterator = ListSequence.fromList(SLinkOperations.getChildren(subtype, MetaAdapterFactory.getContainmentLink(0xa247e09e243545baL, 0xb8d207e93feba96aL, 0x1207157a8dcL, 0x1207158795cL, "componentType"))).iterator();
-      Iterator<SNode> rmt_iterator = ListSequence.fromList(SLinkOperations.getChildren(supertype, MetaAdapterFactory.getContainmentLink(0xa247e09e243545baL, 0xb8d207e93feba96aL, 0x1207157a8dcL, 0x1207158795cL, "componentType"))).iterator();
-      while (true) {
-        if (!(lmt_iterator.hasNext())) {
-          break;
-        }
-        if (!(rmt_iterator.hasNext())) {
-          break;
-        }
-        lmt = lmt_iterator.next();
-        rmt = rmt_iterator.next();
+      Iterator<SNode> lmt_it = ListSequence.fromList(SLinkOperations.getChildren(subtype, LINKS.componentType$crWY)).iterator();
+      Iterator<SNode> rmt_it = ListSequence.fromList(SLinkOperations.getChildren(supertype, LINKS.componentType$crWY)).iterator();
+      SNode lmt_var;
+      SNode rmt_var;
+      while (lmt_it.hasNext() && rmt_it.hasNext()) {
+        lmt_var = lmt_it.next();
+        rmt_var = rmt_it.next();
         {
           SNode _nodeToCheck_1029348928467 = equationInfo.getNodeWithError();
-          EquationInfo _info_12389875345 = new EquationInfo(_nodeToCheck_1029348928467, null, "r:e119dbbd-3529-4067-8bad-6b9edd79d0b6(jetbrains.mps.baseLanguage.tuples.typesystem)", "1238854598691", 0, null);
+          EquationInfo _info_12389875345 = new EquationInfo(_nodeToCheck_1029348928467, null, "r:e119dbbd-3529-4067-8bad-6b9edd79d0b6(jetbrains.mps.baseLanguage.tuples.typesystem)", "816097550963326364", 0, null);
           _info_12389875345.getOuterRulesIdFromInfo(equationInfo);
-          typeCheckingContext.createLessThanInequality((SNode) lmt, (SNode) rmt, false, true, _info_12389875345);
+          typeCheckingContext.createLessThanInequality((SNode) lmt_var, (SNode) rmt_var, false, true, _info_12389875345);
         }
       }
     }
   }
   public boolean checkInequation(final SNode subtype, final SNode supertype, final EquationInfo equationInfo, IsApplicable2Status status, final boolean inequalityIsWeak, final boolean inequalityIsLessThan) {
     boolean result_14532009 = true;
-    if (!(ListSequence.fromList(SLinkOperations.getChildren(subtype, MetaAdapterFactory.getContainmentLink(0xa247e09e243545baL, 0xb8d207e93feba96aL, 0x1207157a8dcL, 0x1207158795cL, "componentType"))).count() == ListSequence.fromList(SLinkOperations.getChildren(supertype, MetaAdapterFactory.getContainmentLink(0xa247e09e243545baL, 0xb8d207e93feba96aL, 0x1207157a8dcL, 0x1207158795cL, "componentType"))).count())) {
+    if (!(ListSequence.fromList(SLinkOperations.getChildren(subtype, LINKS.componentType$crWY)).count() == ListSequence.fromList(SLinkOperations.getChildren(supertype, LINKS.componentType$crWY)).count())) {
       result_14532009 = false;
     }
     {
-      SNode lmt;
-      SNode rmt;
-      Iterator<SNode> lmt_iterator = ListSequence.fromList(SLinkOperations.getChildren(subtype, MetaAdapterFactory.getContainmentLink(0xa247e09e243545baL, 0xb8d207e93feba96aL, 0x1207157a8dcL, 0x1207158795cL, "componentType"))).iterator();
-      Iterator<SNode> rmt_iterator = ListSequence.fromList(SLinkOperations.getChildren(supertype, MetaAdapterFactory.getContainmentLink(0xa247e09e243545baL, 0xb8d207e93feba96aL, 0x1207157a8dcL, 0x1207158795cL, "componentType"))).iterator();
-      while (true) {
-        if (!(lmt_iterator.hasNext())) {
-          break;
-        }
-        if (!(rmt_iterator.hasNext())) {
-          break;
-        }
-        lmt = lmt_iterator.next();
-        rmt = rmt_iterator.next();
-        result_14532009 = result_14532009 && TypeChecker.getInstance().getSubtypingManager().isSubtype((SNode) lmt, (SNode) rmt, true);
+      Iterator<SNode> lmt_it = ListSequence.fromList(SLinkOperations.getChildren(subtype, LINKS.componentType$crWY)).iterator();
+      Iterator<SNode> rmt_it = ListSequence.fromList(SLinkOperations.getChildren(supertype, LINKS.componentType$crWY)).iterator();
+      SNode lmt_var;
+      SNode rmt_var;
+      while (lmt_it.hasNext() && rmt_it.hasNext()) {
+        lmt_var = lmt_it.next();
+        rmt_var = rmt_it.next();
+        result_14532009 = result_14532009 && TypecheckingFacade.getFromContext().isSubtype((SNode) lmt_var, (SNode) rmt_var);
       }
     }
     return result_14532009;
@@ -86,9 +76,17 @@ public class indexedTuple_assignableTo_indexedTuple_InequationReplacementRule ex
   }
 
   public SAbstractConcept getApplicableSubtypeConcept() {
-    return MetaAdapterFactory.getConcept(0xa247e09e243545baL, 0xb8d207e93feba96aL, 0x1207157a8dcL, "jetbrains.mps.baseLanguage.tuples.structure.IndexedTupleType");
+    return CONCEPTS.IndexedTupleType$6Q;
   }
   public SAbstractConcept getApplicableSupertypeConcept() {
-    return MetaAdapterFactory.getConcept(0xa247e09e243545baL, 0xb8d207e93feba96aL, 0x1207157a8dcL, "jetbrains.mps.baseLanguage.tuples.structure.IndexedTupleType");
+    return CONCEPTS.IndexedTupleType$6Q;
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink componentType$crWY = MetaAdapterFactory.getContainmentLink(0xa247e09e243545baL, 0xb8d207e93feba96aL, 0x1207157a8dcL, 0x1207158795cL, "componentType");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept IndexedTupleType$6Q = MetaAdapterFactory.getConcept(0xa247e09e243545baL, 0xb8d207e93feba96aL, 0x1207157a8dcL, "jetbrains.mps.baseLanguage.tuples.structure.IndexedTupleType");
   }
 }

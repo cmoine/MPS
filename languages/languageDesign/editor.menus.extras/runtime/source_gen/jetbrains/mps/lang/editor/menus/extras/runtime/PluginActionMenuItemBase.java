@@ -31,8 +31,9 @@ public class PluginActionMenuItemBase extends ActionItemBase {
 
   @Override
   public boolean canExecute(@NotNull String pattern) {
-    myAction.update(createAnActionEventWithTemplatePresentation());
-    return myAction.getTemplatePresentation().isEnabled();
+    AnActionEvent event = createAnActionEventWithTemplatePresentation();
+    myAction.update(event);
+    return event.getPresentation().isEnabled();
   }
 
   @Override
@@ -42,6 +43,6 @@ public class PluginActionMenuItemBase extends ActionItemBase {
 
   private AnActionEvent createAnActionEventWithTemplatePresentation() {
     DataContext dataContext = DataManager.getInstance().getDataContext((Component) _context.getEditorContext().getEditorComponent());
-    return new AnActionEvent(null, dataContext, ActionPlaces.UNKNOWN, myAction.getTemplatePresentation(), ActionManager.getInstance(), 0);
+    return new AnActionEvent(null, dataContext, ActionPlaces.UNKNOWN, myAction.getTemplatePresentation().clone(), ActionManager.getInstance(), 0);
   }
 }

@@ -7,9 +7,9 @@ import jetbrains.mps.core.aspects.behaviour.api.BHDescriptor;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor {
   private final BHDescriptor myMoneyLiteral__BehaviorDescriptor = new MoneyLiteral__BehaviorDescriptor();
@@ -22,44 +22,19 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
 
   @Nullable
   public BHDescriptor getDescriptor(@NotNull SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_846f5o_a0h.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return myMoneyCreator__BehaviorDescriptor;
-          }
-          break;
-        case 1:
-          if (true) {
-            return myMoneyGetCurrencyMethodCall__BehaviorDescriptor;
-          }
-          break;
-        case 2:
-          if (true) {
-            return myMoneyLiteral__BehaviorDescriptor;
-          }
-          break;
-        case 3:
-          if (true) {
-            return myMoneyType__BehaviorDescriptor;
-          }
-          break;
-        default:
-          // default 
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return myMoneyCreator__BehaviorDescriptor;
+      case 1:
+        return myMoneyGetCurrencyMethodCall__BehaviorDescriptor;
+      case 2:
+        return myMoneyLiteral__BehaviorDescriptor;
+      case 3:
+        return myMoneyType__BehaviorDescriptor;
+      default:
     }
     return null;
   }
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
-  }
-  private static final Map<SAbstractConcept, Integer> indices_846f5o_a0h = buildConceptIndices(MetaAdapterFactory.getConcept(0xf43135f9b8334685L, 0x8d26ffb6c8215f72L, 0x11472ff5968L, "jetbrains.mps.baseLanguage.money.structure.MoneyCreator"), MetaAdapterFactory.getConcept(0xf43135f9b8334685L, 0x8d26ffb6c8215f72L, 0x114740c6f9bL, "jetbrains.mps.baseLanguage.money.structure.MoneyGetCurrencyMethodCall"), MetaAdapterFactory.getConcept(0xf43135f9b8334685L, 0x8d26ffb6c8215f72L, 0x1144ae7606aL, "jetbrains.mps.baseLanguage.money.structure.MoneyLiteral"), MetaAdapterFactory.getConcept(0xf43135f9b8334685L, 0x8d26ffb6c8215f72L, 0x1144b05194dL, "jetbrains.mps.baseLanguage.money.structure.MoneyType"));
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0xf43135f9b8334685L, 0x8d26ffb6c8215f72L, 0x11472ff5968L), MetaIdFactory.conceptId(0xf43135f9b8334685L, 0x8d26ffb6c8215f72L, 0x114740c6f9bL), MetaIdFactory.conceptId(0xf43135f9b8334685L, 0x8d26ffb6c8215f72L, 0x1144ae7606aL), MetaIdFactory.conceptId(0xf43135f9b8334685L, 0x8d26ffb6c8215f72L, 0x1144b05194dL)).seal();
 }

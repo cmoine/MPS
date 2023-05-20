@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<idea-plugin xmlns:xi="http://www.w3.org/2001/XInclude"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.w3.org/2001/XInclude
+                                http://www.w3.org/2001/XInclude.xsd">
+  <xi:include href="JavaPlatformActions.xml"/>
+
+  <application-components>
+    <component>
+      <implementation-class>jetbrains.mps.java.core.sourceStubs.EmptyJavaSourceStubsFindUsages</implementation-class>
+    </component>
+  </application-components>
+
+  <project-components>
+    <component>
+      <implementation-class>jetbrains.mps.java.platform.highlighters.JavaHighlighters</implementation-class>
+    </component>
+  </project-components>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <fileBasedIndex implementation="jetbrains.mps.java.platform.index.ClassifierSuccessorsIndexer"/>
+    <errorHandler implementation="jetbrains.mps.ide.blame.CharismaReporter"/>
+    <projectService serviceImplementation="jetbrains.mps.java.platform.actions.OverrideImplementMethodComponent" />
+    <postStartupActivity implementation="jetbrains.mps.java.platform.index.ClassifierSuccessorsFinder$Plug" />
+
+    <mps.modelRootFactory rootType="java_source_stubs" className="jetbrains.mps.java.core.sourceStubs.JavaSourceStubModelRootFactory"/>
+    <mps.modelRootEntry rootType="java_source_stubs" title="Java &amp;Sources" className="jetbrains.mps.java.platform.extensions.JavaSourceStubsModelRootEntryFactory"/>
+  </extensions>
+</idea-plugin>

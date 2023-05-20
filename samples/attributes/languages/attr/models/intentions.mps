@@ -2,7 +2,7 @@
 <model ref="r:72e47166-8f77-453a-8c51-48d556a5cc3b(jetbrains.mps.samples.attribute.intentions)">
   <persistence version="9" />
   <languages>
-    <use id="d7a92d38-f7db-40d0-8431-763b0c3c9f20" name="jetbrains.mps.lang.intentions" version="0" />
+    <use id="d7a92d38-f7db-40d0-8431-763b0c3c9f20" name="jetbrains.mps.lang.intentions" version="1" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -78,7 +78,7 @@
       <node concept="3clFbS" id="6fYGsMY8g2$" role="2VODD2">
         <node concept="3clFbF" id="6fYGsMY8g7Y" role="3cqZAp">
           <node concept="Xl_RD" id="6fYGsMY8g7X" role="3clFbG">
-            <property role="Xl_RC" value="Attach comment attribute 1" />
+            <property role="Xl_RC" value="Attach Comment Attribute 1" />
           </node>
         </node>
       </node>
@@ -108,7 +108,7 @@
       <node concept="3clFbS" id="70B0YGk0hXT" role="2VODD2">
         <node concept="3clFbF" id="70B0YGk0hXU" role="3cqZAp">
           <node concept="Xl_RD" id="70B0YGk0hXV" role="3clFbG">
-            <property role="Xl_RC" value="Attach comment attribute 2" />
+            <property role="Xl_RC" value="Attach Comment Attribute 2" />
           </node>
         </node>
       </node>

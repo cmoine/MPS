@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="aymky0xdki97aba1a0df8qlrqyppn9z" />
+<product version="3" modelHash="-ei6opjjm0zmpo5v0p20c4wauphl4uht">
+  <files names="DeleteMathContext_Intention.java:DivExpressionDivToFraction_Intention.java:DivExpressionFractionToDiv_Intention.java:IntentionsDescriptor.java:SpecifyMathContext_Intention.java" />
+</product>
 

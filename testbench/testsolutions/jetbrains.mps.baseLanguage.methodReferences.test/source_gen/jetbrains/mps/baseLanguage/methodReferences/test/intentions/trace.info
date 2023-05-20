@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <root nodeRef="r:f59730a6-c5b9-44a6-9d8b-4644752d6525(jetbrains.mps.baseLanguage.methodReferences.test.intentions@tests)/2055055257257802048">
+    <file name="FromClosure_Constructor_Test.java">
+      <node id="2055055257257802048" at="19,41,20,60" concept="4" />
+      <node id="2055055257257802048" at="24,63,25,36" concept="1" />
+      <node id="2055055257257802048" at="30,52,31,19" concept="4" />
+      <node id="2055055257257802048" at="35,51,36,72" concept="1" />
+      <node id="2055055257257820745" at="36,72,37,134" concept="1" />
+      <node id="2055055257257802048" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="2055055257257802048" at="19,0,22,0" concept="0" trace="FromClosure_Constructor_Test#()V" />
+      <node id="2055055257257802048" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="2055055257257802048" at="23,0,27,0" concept="2" trace="test_FromClosure_Constructor#()V" />
+      <node id="2055055257257802048" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="2055055257257802048" at="19,41,20,60" />
+      <scope id="2055055257257802048" at="24,63,25,36" />
+      <scope id="2055055257257802048" at="30,52,31,19" />
+      <scope id="2055055257257802048" at="35,51,37,134" />
+      <scope id="2055055257257802048" at="19,0,22,0" />
+      <scope id="2055055257257802048" at="30,0,33,0">
+        <var name="owner" id="2055055257257802048" />
+      </scope>
+      <scope id="2055055257257802048" at="23,0,27,0" />
+      <scope id="2055055257257802048" at="34,0,39,0" />
+      <unit id="2055055257257802048" at="28,0,40,0" name="jetbrains.mps.baseLanguage.methodReferences.test.intentions.FromClosure_Constructor_Test$TestBody" />
+      <unit id="2055055257257802048" at="14,0,41,0" name="jetbrains.mps.baseLanguage.methodReferences.test.intentions.FromClosure_Constructor_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:f59730a6-c5b9-44a6-9d8b-4644752d6525(jetbrains.mps.baseLanguage.methodReferences.test.intentions@tests)/2055055257257840726">
+    <file name="FromClosure_StaticInstanceMethod_Test.java">
+      <node id="2055055257257840726" at="19,50,20,60" concept="4" />
+      <node id="2055055257257840726" at="24,72,25,36" concept="1" />
+      <node id="2055055257257840726" at="30,52,31,19" concept="4" />
+      <node id="2055055257257840726" at="35,51,36,72" concept="1" />
+      <node id="2055055257257840777" at="36,72,37,134" concept="1" />
+      <node id="2055055257257840726" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="2055055257257840726" at="19,0,22,0" concept="0" trace="FromClosure_StaticInstanceMethod_Test#()V" />
+      <node id="2055055257257840726" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="2055055257257840726" at="23,0,27,0" concept="2" trace="test_FromClosure_StaticInstanceMethod#()V" />
+      <node id="2055055257257840726" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="2055055257257840726" at="19,50,20,60" />
+      <scope id="2055055257257840726" at="24,72,25,36" />
+      <scope id="2055055257257840726" at="30,52,31,19" />
+      <scope id="2055055257257840726" at="35,51,37,134" />
+      <scope id="2055055257257840726" at="19,0,22,0" />
+      <scope id="2055055257257840726" at="30,0,33,0">
+        <var name="owner" id="2055055257257840726" />
+      </scope>
+      <scope id="2055055257257840726" at="23,0,27,0" />
+      <scope id="2055055257257840726" at="34,0,39,0" />
+      <unit id="2055055257257840726" at="28,0,40,0" name="jetbrains.mps.baseLanguage.methodReferences.test.intentions.FromClosure_StaticInstanceMethod_Test$TestBody" />
+      <unit id="2055055257257840726" at="14,0,41,0" name="jetbrains.mps.baseLanguage.methodReferences.test.intentions.FromClosure_StaticInstanceMethod_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:f59730a6-c5b9-44a6-9d8b-4644752d6525(jetbrains.mps.baseLanguage.methodReferences.test.intentions@tests)/2055055257258976035">
+    <file name="FromClosure_InstanceMethod_Test.java">
+      <node id="2055055257258976035" at="19,44,20,60" concept="4" />
+      <node id="2055055257258976035" at="24,66,25,36" concept="1" />
+      <node id="2055055257258976035" at="30,52,31,19" concept="4" />
+      <node id="2055055257258976035" at="35,51,36,72" concept="1" />
+      <node id="2055055257258976085" at="36,72,37,134" concept="1" />
+      <node id="2055055257258976035" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="2055055257258976035" at="19,0,22,0" concept="0" trace="FromClosure_InstanceMethod_Test#()V" />
+      <node id="2055055257258976035" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="2055055257258976035" at="23,0,27,0" concept="2" trace="test_FromClosure_InstanceMethod#()V" />
+      <node id="2055055257258976035" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="2055055257258976035" at="19,44,20,60" />
+      <scope id="2055055257258976035" at="24,66,25,36" />
+      <scope id="2055055257258976035" at="30,52,31,19" />
+      <scope id="2055055257258976035" at="35,51,37,134" />
+      <scope id="2055055257258976035" at="19,0,22,0" />
+      <scope id="2055055257258976035" at="30,0,33,0">
+        <var name="owner" id="2055055257258976035" />
+      </scope>
+      <scope id="2055055257258976035" at="23,0,27,0" />
+      <scope id="2055055257258976035" at="34,0,39,0" />
+      <unit id="2055055257258976035" at="28,0,40,0" name="jetbrains.mps.baseLanguage.methodReferences.test.intentions.FromClosure_InstanceMethod_Test$TestBody" />
+      <unit id="2055055257258976035" at="14,0,41,0" name="jetbrains.mps.baseLanguage.methodReferences.test.intentions.FromClosure_InstanceMethod_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:f59730a6-c5b9-44a6-9d8b-4644752d6525(jetbrains.mps.baseLanguage.methodReferences.test.intentions@tests)/2055055257264911692">
+    <file name="FromClosure_StaticMethod_Test.java">
+      <node id="2055055257264911692" at="19,42,20,60" concept="4" />
+      <node id="2055055257264911692" at="24,64,25,36" concept="1" />
+      <node id="2055055257264911692" at="30,52,31,19" concept="4" />
+      <node id="2055055257264911692" at="35,51,36,72" concept="1" />
+      <node id="2055055257264911741" at="36,72,37,134" concept="1" />
+      <node id="2055055257264911692" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="2055055257264911692" at="19,0,22,0" concept="0" trace="FromClosure_StaticMethod_Test#()V" />
+      <node id="2055055257264911692" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="2055055257264911692" at="23,0,27,0" concept="2" trace="test_FromClosure_StaticMethod#()V" />
+      <node id="2055055257264911692" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="2055055257264911692" at="19,42,20,60" />
+      <scope id="2055055257264911692" at="24,64,25,36" />
+      <scope id="2055055257264911692" at="30,52,31,19" />
+      <scope id="2055055257264911692" at="35,51,37,134" />
+      <scope id="2055055257264911692" at="19,0,22,0" />
+      <scope id="2055055257264911692" at="30,0,33,0">
+        <var name="owner" id="2055055257264911692" />
+      </scope>
+      <scope id="2055055257264911692" at="23,0,27,0" />
+      <scope id="2055055257264911692" at="34,0,39,0" />
+      <unit id="2055055257264911692" at="28,0,40,0" name="jetbrains.mps.baseLanguage.methodReferences.test.intentions.FromClosure_StaticMethod_Test$TestBody" />
+      <unit id="2055055257264911692" at="14,0,41,0" name="jetbrains.mps.baseLanguage.methodReferences.test.intentions.FromClosure_StaticMethod_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:f59730a6-c5b9-44a6-9d8b-4644752d6525(jetbrains.mps.baseLanguage.methodReferences.test.intentions@tests)/2448987392437855217">
+    <file name="FromClosure_Generics_Test.java">
+      <node id="2448987392437855217" at="19,38,20,60" concept="4" />
+      <node id="2448987392437855217" at="24,60,25,36" concept="1" />
+      <node id="2448987392437855217" at="30,52,31,19" concept="4" />
+      <node id="2448987392437855217" at="35,51,36,72" concept="1" />
+      <node id="2448987392437855257" at="36,72,37,134" concept="1" />
+      <node id="2448987392437855217" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="2448987392437855217" at="19,0,22,0" concept="0" trace="FromClosure_Generics_Test#()V" />
+      <node id="2448987392437855217" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="2448987392437855217" at="23,0,27,0" concept="2" trace="test_FromClosure_Generics#()V" />
+      <node id="2448987392437855217" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="2448987392437855217" at="19,38,20,60" />
+      <scope id="2448987392437855217" at="24,60,25,36" />
+      <scope id="2448987392437855217" at="30,52,31,19" />
+      <scope id="2448987392437855217" at="35,51,37,134" />
+      <scope id="2448987392437855217" at="19,0,22,0" />
+      <scope id="2448987392437855217" at="30,0,33,0">
+        <var name="owner" id="2448987392437855217" />
+      </scope>
+      <scope id="2448987392437855217" at="23,0,27,0" />
+      <scope id="2448987392437855217" at="34,0,39,0" />
+      <unit id="2448987392437855217" at="28,0,40,0" name="jetbrains.mps.baseLanguage.methodReferences.test.intentions.FromClosure_Generics_Test$TestBody" />
+      <unit id="2448987392437855217" at="14,0,41,0" name="jetbrains.mps.baseLanguage.methodReferences.test.intentions.FromClosure_Generics_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:f59730a6-c5b9-44a6-9d8b-4644752d6525(jetbrains.mps.baseLanguage.methodReferences.test.intentions@tests)/5046242729652910166">
+    <file name="ToClosure_Constructor_Test.java">
+      <node id="5046242729652910166" at="19,39,20,60" concept="4" />
+      <node id="5046242729652910166" at="24,61,25,36" concept="1" />
+      <node id="5046242729652910166" at="30,52,31,19" concept="4" />
+      <node id="5046242729652910166" at="35,51,36,72" concept="1" />
+      <node id="5046242729652910206" at="36,72,37,126" concept="1" />
+      <node id="5046242729652910166" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="5046242729652910166" at="19,0,22,0" concept="0" trace="ToClosure_Constructor_Test#()V" />
+      <node id="5046242729652910166" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5046242729652910166" at="23,0,27,0" concept="2" trace="test_ToClosure_Constructor#()V" />
+      <node id="5046242729652910166" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="5046242729652910166" at="19,39,20,60" />
+      <scope id="5046242729652910166" at="24,61,25,36" />
+      <scope id="5046242729652910166" at="30,52,31,19" />
+      <scope id="5046242729652910166" at="35,51,37,126" />
+      <scope id="5046242729652910166" at="19,0,22,0" />
+      <scope id="5046242729652910166" at="30,0,33,0">
+        <var name="owner" id="5046242729652910166" />
+      </scope>
+      <scope id="5046242729652910166" at="23,0,27,0" />
+      <scope id="5046242729652910166" at="34,0,39,0" />
+      <unit id="5046242729652910166" at="28,0,40,0" name="jetbrains.mps.baseLanguage.methodReferences.test.intentions.ToClosure_Constructor_Test$TestBody" />
+      <unit id="5046242729652910166" at="14,0,41,0" name="jetbrains.mps.baseLanguage.methodReferences.test.intentions.ToClosure_Constructor_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:f59730a6-c5b9-44a6-9d8b-4644752d6525(jetbrains.mps.baseLanguage.methodReferences.test.intentions@tests)/5046242729652910207">
+    <file name="ToClosure_Generics_Test.java">
+      <node id="5046242729652910207" at="19,36,20,60" concept="4" />
+      <node id="5046242729652910207" at="24,58,25,36" concept="1" />
+      <node id="5046242729652910207" at="30,52,31,19" concept="4" />
+      <node id="5046242729652910207" at="35,51,36,72" concept="1" />
+      <node id="5046242729652910291" at="36,72,37,126" concept="1" />
+      <node id="5046242729652910207" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="5046242729652910207" at="19,0,22,0" concept="0" trace="ToClosure_Generics_Test#()V" />
+      <node id="5046242729652910207" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5046242729652910207" at="23,0,27,0" concept="2" trace="test_ToClosure_Generics#()V" />
+      <node id="5046242729652910207" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="5046242729652910207" at="19,36,20,60" />
+      <scope id="5046242729652910207" at="24,58,25,36" />
+      <scope id="5046242729652910207" at="30,52,31,19" />
+      <scope id="5046242729652910207" at="35,51,37,126" />
+      <scope id="5046242729652910207" at="19,0,22,0" />
+      <scope id="5046242729652910207" at="30,0,33,0">
+        <var name="owner" id="5046242729652910207" />
+      </scope>
+      <scope id="5046242729652910207" at="23,0,27,0" />
+      <scope id="5046242729652910207" at="34,0,39,0" />
+      <unit id="5046242729652910207" at="28,0,40,0" name="jetbrains.mps.baseLanguage.methodReferences.test.intentions.ToClosure_Generics_Test$TestBody" />
+      <unit id="5046242729652910207" at="14,0,41,0" name="jetbrains.mps.baseLanguage.methodReferences.test.intentions.ToClosure_Generics_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:f59730a6-c5b9-44a6-9d8b-4644752d6525(jetbrains.mps.baseLanguage.methodReferences.test.intentions@tests)/5046242729652910292">
+    <file name="ToClosure_InstanceMethod_Test.java">
+      <node id="5046242729652910292" at="19,42,20,60" concept="4" />
+      <node id="5046242729652910292" at="24,64,25,36" concept="1" />
+      <node id="5046242729652910292" at="30,52,31,19" concept="4" />
+      <node id="5046242729652910292" at="35,51,36,72" concept="1" />
+      <node id="5046242729652910342" at="36,72,37,126" concept="1" />
+      <node id="5046242729652910292" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="5046242729652910292" at="19,0,22,0" concept="0" trace="ToClosure_InstanceMethod_Test#()V" />
+      <node id="5046242729652910292" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5046242729652910292" at="23,0,27,0" concept="2" trace="test_ToClosure_InstanceMethod#()V" />
+      <node id="5046242729652910292" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="5046242729652910292" at="19,42,20,60" />
+      <scope id="5046242729652910292" at="24,64,25,36" />
+      <scope id="5046242729652910292" at="30,52,31,19" />
+      <scope id="5046242729652910292" at="35,51,37,126" />
+      <scope id="5046242729652910292" at="19,0,22,0" />
+      <scope id="5046242729652910292" at="30,0,33,0">
+        <var name="owner" id="5046242729652910292" />
+      </scope>
+      <scope id="5046242729652910292" at="23,0,27,0" />
+      <scope id="5046242729652910292" at="34,0,39,0" />
+      <unit id="5046242729652910292" at="28,0,40,0" name="jetbrains.mps.baseLanguage.methodReferences.test.intentions.ToClosure_InstanceMethod_Test$TestBody" />
+      <unit id="5046242729652910292" at="14,0,41,0" name="jetbrains.mps.baseLanguage.methodReferences.test.intentions.ToClosure_InstanceMethod_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:f59730a6-c5b9-44a6-9d8b-4644752d6525(jetbrains.mps.baseLanguage.methodReferences.test.intentions@tests)/5046242729652910343">
+    <file name="ToClosure_StaticInstanceMethod_Test.java">
+      <node id="5046242729652910343" at="19,48,20,60" concept="4" />
+      <node id="5046242729652910343" at="24,70,25,36" concept="1" />
+      <node id="5046242729652910343" at="30,52,31,19" concept="4" />
+      <node id="5046242729652910343" at="35,51,36,72" concept="1" />
+      <node id="5046242729652910392" at="36,72,37,126" concept="1" />
+      <node id="5046242729652910343" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="5046242729652910343" at="19,0,22,0" concept="0" trace="ToClosure_StaticInstanceMethod_Test#()V" />
+      <node id="5046242729652910343" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5046242729652910343" at="23,0,27,0" concept="2" trace="test_ToClosure_StaticInstanceMethod#()V" />
+      <node id="5046242729652910343" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="5046242729652910343" at="19,48,20,60" />
+      <scope id="5046242729652910343" at="24,70,25,36" />
+      <scope id="5046242729652910343" at="30,52,31,19" />
+      <scope id="5046242729652910343" at="35,51,37,126" />
+      <scope id="5046242729652910343" at="19,0,22,0" />
+      <scope id="5046242729652910343" at="30,0,33,0">
+        <var name="owner" id="5046242729652910343" />
+      </scope>
+      <scope id="5046242729652910343" at="23,0,27,0" />
+      <scope id="5046242729652910343" at="34,0,39,0" />
+      <unit id="5046242729652910343" at="28,0,40,0" name="jetbrains.mps.baseLanguage.methodReferences.test.intentions.ToClosure_StaticInstanceMethod_Test$TestBody" />
+      <unit id="5046242729652910343" at="14,0,41,0" name="jetbrains.mps.baseLanguage.methodReferences.test.intentions.ToClosure_StaticInstanceMethod_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:f59730a6-c5b9-44a6-9d8b-4644752d6525(jetbrains.mps.baseLanguage.methodReferences.test.intentions@tests)/5046242729652910431">
+    <file name="ToClosure_StaticMethod_Test.java">
+      <node id="5046242729652910431" at="19,40,20,60" concept="4" />
+      <node id="5046242729652910431" at="24,62,25,36" concept="1" />
+      <node id="5046242729652910431" at="30,52,31,19" concept="4" />
+      <node id="5046242729652910431" at="35,51,36,72" concept="1" />
+      <node id="5046242729652910454" at="36,72,37,126" concept="1" />
+      <node id="5046242729652910431" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="5046242729652910431" at="19,0,22,0" concept="0" trace="ToClosure_StaticMethod_Test#()V" />
+      <node id="5046242729652910431" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5046242729652910431" at="23,0,27,0" concept="2" trace="test_ToClosure_StaticMethod#()V" />
+      <node id="5046242729652910431" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="5046242729652910431" at="19,40,20,60" />
+      <scope id="5046242729652910431" at="24,62,25,36" />
+      <scope id="5046242729652910431" at="30,52,31,19" />
+      <scope id="5046242729652910431" at="35,51,37,126" />
+      <scope id="5046242729652910431" at="19,0,22,0" />
+      <scope id="5046242729652910431" at="30,0,33,0">
+        <var name="owner" id="5046242729652910431" />
+      </scope>
+      <scope id="5046242729652910431" at="23,0,27,0" />
+      <scope id="5046242729652910431" at="34,0,39,0" />
+      <unit id="5046242729652910431" at="28,0,40,0" name="jetbrains.mps.baseLanguage.methodReferences.test.intentions.ToClosure_StaticMethod_Test$TestBody" />
+      <unit id="5046242729652910431" at="14,0,41,0" name="jetbrains.mps.baseLanguage.methodReferences.test.intentions.ToClosure_StaticMethod_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:f59730a6-c5b9-44a6-9d8b-4644752d6525(jetbrains.mps.baseLanguage.methodReferences.test.intentions@tests)/5046242729652932872">
+    <file name="WrapIntoCompatibleClosure_Test.java">
+      <node id="5046242729652932872" at="19,43,20,60" concept="4" />
+      <node id="5046242729652932872" at="24,65,25,36" concept="1" />
+      <node id="5046242729652932872" at="30,52,31,19" concept="4" />
+      <node id="5046242729652932872" at="35,51,36,72" concept="1" />
+      <node id="5046242729652936967" at="36,72,37,43" concept="1" />
+      <node id="5046242729652932872" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="5046242729652932872" at="19,0,22,0" concept="0" trace="WrapIntoCompatibleClosure_Test#()V" />
+      <node id="5046242729652932872" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5046242729652932872" at="23,0,27,0" concept="2" trace="test_WrapIntoCompatibleClosure#()V" />
+      <node id="5046242729652932872" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="5046242729652932872" at="19,43,20,60" />
+      <scope id="5046242729652932872" at="24,65,25,36" />
+      <scope id="5046242729652932872" at="30,52,31,19" />
+      <scope id="5046242729652932872" at="35,51,37,43" />
+      <scope id="5046242729652932872" at="19,0,22,0" />
+      <scope id="5046242729652932872" at="30,0,33,0">
+        <var name="owner" id="5046242729652932872" />
+      </scope>
+      <scope id="5046242729652932872" at="23,0,27,0" />
+      <scope id="5046242729652932872" at="34,0,39,0" />
+      <unit id="5046242729652932872" at="28,0,40,0" name="jetbrains.mps.baseLanguage.methodReferences.test.intentions.WrapIntoCompatibleClosure_Test$TestBody" />
+      <unit id="5046242729652932872" at="14,0,41,0" name="jetbrains.mps.baseLanguage.methodReferences.test.intentions.WrapIntoCompatibleClosure_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:f59730a6-c5b9-44a6-9d8b-4644752d6525(jetbrains.mps.baseLanguage.methodReferences.test.intentions@tests)/5046242729670000062">
+    <file name="WrapIntoCompatibleClosureMappingArgument_Test.java">
+      <node id="5046242729670000062" at="19,58,20,60" concept="4" />
+      <node id="5046242729670000062" at="24,80,25,36" concept="1" />
+      <node id="5046242729670000062" at="30,52,31,19" concept="4" />
+      <node id="5046242729670000062" at="35,51,36,72" concept="1" />
+      <node id="5046242729670000127" at="36,72,37,43" concept="1" />
+      <node id="5046242729670000062" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="5046242729670000062" at="19,0,22,0" concept="0" trace="WrapIntoCompatibleClosureMappingArgument_Test#()V" />
+      <node id="5046242729670000062" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5046242729670000062" at="23,0,27,0" concept="2" trace="test_WrapIntoCompatibleClosureMappingArgument#()V" />
+      <node id="5046242729670000062" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="5046242729670000062" at="19,58,20,60" />
+      <scope id="5046242729670000062" at="24,80,25,36" />
+      <scope id="5046242729670000062" at="30,52,31,19" />
+      <scope id="5046242729670000062" at="35,51,37,43" />
+      <scope id="5046242729670000062" at="19,0,22,0" />
+      <scope id="5046242729670000062" at="30,0,33,0">
+        <var name="owner" id="5046242729670000062" />
+      </scope>
+      <scope id="5046242729670000062" at="23,0,27,0" />
+      <scope id="5046242729670000062" at="34,0,39,0" />
+      <unit id="5046242729670000062" at="28,0,40,0" name="jetbrains.mps.baseLanguage.methodReferences.test.intentions.WrapIntoCompatibleClosureMappingArgument_Test$TestBody" />
+      <unit id="5046242729670000062" at="14,0,41,0" name="jetbrains.mps.baseLanguage.methodReferences.test.intentions.WrapIntoCompatibleClosureMappingArgument_Test" />
+    </file>
+  </root>
+</debug-info>
+

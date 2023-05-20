@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2016 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,36 +17,68 @@ package jetbrains.mps.generator.impl.template;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * Tracks visibility context of a variable name, produce name unique in the context.
- * IMPLEMENTATION NOTE: stateful. Perhaps, could do it stateless, with push() operation producing next, immutable VariableNameSource instance.
- *                      Might be handy in case of multi-threaded use.
+ * Not thread-safe, deemed for use from single thread. The only non-safe operation is assign/access new name, could be guarded, if necessary.
+ *
  * @author Artem Tikhomirov
  */
 public final class VariableNameSource {
   private final String myBaseName;
-  private int myCount;
-  private String myName;
+  private final String myName;
+  private String myNewName;
+  private final AtomicInteger myCounter;
 
   public VariableNameSource(@NotNull String baseName) {
-    myBaseName = baseName;
-    myName = baseName;
+    this(baseName, new AtomicInteger(0), baseName);
   }
 
-  public String getName() {
+  public VariableNameSource(@NotNull String baseName, @NotNull AtomicInteger counter) {
+    this(baseName, counter, baseName);
+  }
+
+  public VariableNameSource(@NotNull String baseName, @NotNull AtomicInteger counter, @NotNull String actualName) {
+    myBaseName = baseName;
+    myName = actualName;
+    myCounter = counter;
+  }
+
+  /**
+   * @return name this source got at construction time, never {@code null}
+   */
+  public String getActualName() {
     return myName;
   }
 
-  public VariableNameSource push() {
-    myName = myBaseName + myCount;
-    myCount++;
-    return this;
+  /**
+   * @return name latest created with a {@link #newName()} operation, or {@link #getActualName() actual name} if no new name was assigned, never {@code null}
+   */
+  public String getNewName() {
+    if (myNewName != null) {
+      return myNewName;
+    }
+    return myName;
   }
 
-  public VariableNameSource pop() {
-    assert myCount > 0;
-    myCount--;
-    myName = myBaseName + myCount;
-    return this;
+  public boolean hasNewName() {
+    return myNewName != null;
+  }
+
+  /**
+   * Construct and record new variable name, overriding previous one (i.e. result of preceding {@link #newName()} call).
+   * @return newly constructed name, never {@code null}
+   */
+  public String newName() {
+    myNewName = myBaseName + myCounter.incrementAndGet();
+    return myNewName;
+  }
+
+  /**
+   * @return name source with {@link #getNewName()} value of the current source as its {@link #getActualName()}.
+   */
+  public VariableNameSource next() {
+    return new VariableNameSource(myBaseName, myCounter, getNewName());
   }
 }

@@ -5,39 +5,50 @@ package jetbrains.mps.lang.editor.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
+import org.jetbrains.mps.openapi.model.SNode;
 import java.util.List;
 import java.util.Arrays;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
+import jetbrains.mps.util.NameUtil;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SProperty;
+import org.jetbrains.mps.openapi.language.SConcept;
 
 public final class StyleKey__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x399cb6c68aa9aeaaL, "jetbrains.mps.lang.editor.structure.StyleKey");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<String> getPresentation_idhEwIMiw = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getPresentation").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("hEwIMiw").registry(REGISTRY).build();
+  public static final SMethod<String> getPresentation_idhEwIMiw = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getPresentation").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1213877396640L).languageId(0x9b92103b95ca8c0cL, 0xceab519525ea4f22L).build2();
+  public static final SMethod<String> getClassName_id3w77Jl_kKl7 = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getClassName").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(4037229630276699463L).languageId(0xa83a7ff23bde13baL, 0x18bc659203a64e29L).build2();
+  public static final SMethod<String> getClassFQName_id3w77Jl_kKlh = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getClassFQName").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(4037229630276699473L).languageId(0xa83a7ff23bde13baL, 0x18bc659203a64e29L).build2();
+  public static final SMethod<SNode> getStyleKeyPack_id3w77Jl_kPZ_ = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getStyleKeyPack").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(4037229630276722661L).languageId(0xa83a7ff23bde13baL, 0x18bc659203a64e29L).build2();
 
-  private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getPresentation_idhEwIMiw);
+  private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getPresentation_idhEwIMiw, getClassName_id3w77Jl_kKl7, getClassFQName_id3w77Jl_kKlh, getStyleKeyPack_id3w77Jl_kPZ_);
 
   private static void ___init___(@NotNull SNode __thisNode__) {
   }
 
   /*package*/ static String getPresentation_idhEwIMiw(@NotNull SNode __thisNode__) {
-    return SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf93d565d10L, 0xf93d565d11L, "value"));
+    return SPropertyOperations.getString(__thisNode__, PROPS.value$w7MM);
+  }
+  /*package*/ static String getClassName_id3w77Jl_kKl7(@NotNull SNode __thisNode__) {
+    return NameUtil.toValidIdentifier(SPropertyOperations.getString(__thisNode__, PROPS.value$w7MM)) + "_StyleKey";
+  }
+  /*package*/ static String getClassFQName_id3w77Jl_kKlh(@NotNull SNode __thisNode__) {
+    return StyleKeyPack__BehaviorDescriptor.getClassFqName_id3w77Jl_kWGD.invoke(StyleKey__BehaviorDescriptor.getStyleKeyPack_id3w77Jl_kPZ_.invoke(__thisNode__)) + "." + StyleKey__BehaviorDescriptor.getClassName_id3w77Jl_kKl7.invoke(__thisNode__);
+  }
+  /*package*/ static SNode getStyleKeyPack_id3w77Jl_kPZ_(@NotNull SNode __thisNode__) {
+    return SNodeOperations.cast(SNodeOperations.getParent(__thisNode__), CONCEPTS.StyleKeyPack$9W);
   }
 
   /*package*/ StyleKey__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -54,6 +65,12 @@ public final class StyleKey__BehaviorDescriptor extends BaseBHDescriptor {
     switch (methodIndex) {
       case 0:
         return (T) ((String) getPresentation_idhEwIMiw(node));
+      case 1:
+        return (T) ((String) getClassName_id3w77Jl_kKl7(node));
+      case 2:
+        return (T) ((String) getClassFQName_id3w77Jl_kKlh(node));
+      case 3:
+        return (T) ((SNode) getStyleKeyPack_id3w77Jl_kPZ_(node));
       default:
         throw new BHMethodNotFoundException(this, method);
     }
@@ -81,5 +98,13 @@ public final class StyleKey__BehaviorDescriptor extends BaseBHDescriptor {
   @Override
   public SAbstractConcept getConcept() {
     return CONCEPT;
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty value$w7MM = MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf93d565d10L, 0xf93d565d11L, "value");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept StyleKeyPack$9W = MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x399cb6c68aa9af02L, "jetbrains.mps.lang.editor.structure.StyleKeyPack");
   }
 }

@@ -18,8 +18,7 @@ package jetbrains.mps.ide.ui.dialogs.properties.tables.models;
 import jetbrains.mps.ide.ui.dialogs.properties.ModelProperties;
 import org.jetbrains.mps.openapi.model.SModelReference;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.stream.Stream;
 
 public class ModelImportedModelsTableModel extends SimpleTableModel<SModelReference> {
 
@@ -57,5 +56,10 @@ public class ModelImportedModelsTableModel extends SimpleTableModel<SModelRefere
   @Override
   public String getColumnName(int column) {
     return "Imported models";
+  }
+
+  public Stream<SModelReference> getItemsStream() {
+    // just an attempt to find better API than 'for (rowCount) getValue(row)', expose if proved useful
+    return myTableItems.stream();
   }
 }

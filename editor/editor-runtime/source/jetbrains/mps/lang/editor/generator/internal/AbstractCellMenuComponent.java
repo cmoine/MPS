@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,11 @@
  */
 package jetbrains.mps.lang.editor.generator.internal;
 
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.nodeEditor.cellMenu.CellContext;
 import jetbrains.mps.nodeEditor.cellMenu.SubstituteInfoPartExt;
 import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.SubstituteAction;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
@@ -31,7 +30,7 @@ import java.util.List;
  * Date: Nov 29, 2006
  */
 public abstract class AbstractCellMenuComponent {
-  private static final Logger LOG = LogManager.getLogger(AbstractCellMenuComponent.class);
+  private static final Logger LOG = Logger.getLogger(AbstractCellMenuComponent.class);
 
   private SubstituteInfoPartExt[] myExtParts;
 
@@ -40,12 +39,12 @@ public abstract class AbstractCellMenuComponent {
   }
 
   public List<SubstituteAction> createSubstituteActions(CellContext cellContext, EditorContext editorContext) {
-    List<SubstituteAction> actions = new LinkedList<SubstituteAction>();
+    List<SubstituteAction> actions = new LinkedList<>();
     for (SubstituteInfoPartExt menuPart : myExtParts) {
       try {
         actions.addAll(menuPart.createActions(cellContext, editorContext));
       } catch (Exception e) {
-        LOG.error(null, e);
+        LOG.error(e);
       }
     }
     return actions;

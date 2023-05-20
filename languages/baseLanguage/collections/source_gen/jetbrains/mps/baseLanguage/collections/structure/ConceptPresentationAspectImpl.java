@@ -4,528 +4,1449 @@ package jetbrains.mps.baseLanguage.collections.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_AbstractContainerCreator = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AbstractContainerType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AbstractEnumeratorOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AbstractIteratorOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AbstractMappingOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AbstractSetOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AddAllElementsOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AddAllSetElementsOperation = new ConceptPresentationBuilder().deprecated().create();
-  private final ConceptPresentation props_AddElementOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AddFirstElementOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AddLastElementOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AddSetElementOperation = new ConceptPresentationBuilder().deprecated().create();
-  private final ConceptPresentation props_AllConstant = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AllOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AlsoSortOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AnyOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AsSequenceOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AsSynchronizedOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AsUnmodifiableOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BinaryOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ChunkOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ClearAllElementsOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ClearSetOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CollectionType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ComparatorSortOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConcatOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ContainerIteratorType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ContainsAllOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ContainsKeyOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ContainsOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ContainsValueOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CustomContainerCreator = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CustomContainerDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CustomContainers = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CustomMapCreator = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CutOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DequeType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DisjunctOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DistinctOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DowncastExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_EnumeratorType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ExcludeOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_FindFirstOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_FindLastOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_FoldLeftOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_FoldRightOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ForEachStatement = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ForEachVariable = new ConceptPresentationBuilder().icon(IconContainer.RESOURCE_a0a0vb).create();
-  private final ConceptPresentation props_ForEachVariableReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GetCurrentOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GetElementOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GetEnumeratorOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GetFirstOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GetIndexOfOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GetIteratorOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GetKeysOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GetLastIndexOfOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GetLastOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GetNextOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GetSizeOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GetValuesOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_HasNextOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_HashMapCreator = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_HashSetCreator = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_HeadListOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_HeadMapOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_HeadSetOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IApplicableToCollection = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IApplicableToDeque = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IApplicableToList = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IApplicableToNothing = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IApplicableToQueue = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IApplicableToStack = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ICollectionOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IContainerOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IDequeOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IListOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IQueueOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IStackOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InsertElementOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InternalSequenceOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IntersectOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IsEmptyOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IsNotEmptyOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IteratorType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_JoinOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_KeyAccessOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_LinkedHashMapCreator = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_LinkedHashSetCreator = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_LinkedListCreator = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_LinkedListType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ListCreatorWithInit = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ListElementAccessExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ListType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MapAsSequenceVarRef = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MapClearOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MapElement = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MapEntry = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MapInitializer = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MapOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MapOperationExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MapRemoveOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MapType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MappingType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MappingsSetOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MoveNextOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MultiForEachPair = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MultiForEachStatement = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MultiForEachVariable = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MultiForEachVariableReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_NoArgumentsSequenceOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_OfTypeOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PageOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PeekOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PopOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PriorityQueueCreator = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PushOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PutAllOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_QueueType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ReduceLeftOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ReduceRightOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RemoveAllElementsOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RemoveAllSetElementsOperation = new ConceptPresentationBuilder().deprecated().create();
-  private final ConceptPresentation props_RemoveAtElementOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RemoveElementOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RemoveFirstElementOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RemoveLastElementOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RemoveOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RemoveSetElementOperation = new ConceptPresentationBuilder().deprecated().create();
-  private final ConceptPresentation props_RemoveWhereOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ReverseOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SelectOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SequenceCreator = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SequenceOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SequenceType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SetElementOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SetType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SingleArgumentSequenceOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SingletonSequenceCreator = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SkipOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SkipStatement = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SmartClosureParameterDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SortDirection = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SortOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SortedMapOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SortedMapType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SortedSetOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SortedSetType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_StackType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_StopStatement = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SubListOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SubMapOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SubSetOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TailListOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TailMapOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TailOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TailSetOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TakeOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestAddElementOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestRemoveElementOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ToArrayOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ToIteratorOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ToListOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TranslateOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TreeMapCreator = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TreeSetCreator = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_UnionOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ValueAccessOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_VisitAllOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_WhereOperation = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_AbstractContainerCreator;
+  private ConceptPresentation props_AbstractContainerType;
+  private ConceptPresentation props_AbstractEnumeratorOperation;
+  private ConceptPresentation props_AbstractIteratorOperation;
+  private ConceptPresentation props_AbstractMappingOperation;
+  private ConceptPresentation props_AbstractSetOperation;
+  private ConceptPresentation props_AddAllElementsOperation;
+  private ConceptPresentation props_AddAllSetElementsOperation;
+  private ConceptPresentation props_AddElementOperation;
+  private ConceptPresentation props_AddFirstElementOperation;
+  private ConceptPresentation props_AddLastElementOperation;
+  private ConceptPresentation props_AddSetElementOperation;
+  private ConceptPresentation props_AllConstant;
+  private ConceptPresentation props_AllOperation;
+  private ConceptPresentation props_AlsoSortOperation;
+  private ConceptPresentation props_AnyOperation;
+  private ConceptPresentation props_AsSequenceOperation;
+  private ConceptPresentation props_AsSynchronizedOperation;
+  private ConceptPresentation props_AsUnmodifiableOperation;
+  private ConceptPresentation props_BinaryOperation;
+  private ConceptPresentation props_ChunkOperation;
+  private ConceptPresentation props_ClearAllElementsOperation;
+  private ConceptPresentation props_ClearSetOperation;
+  private ConceptPresentation props_CollectionType;
+  private ConceptPresentation props_ComparatorSortOperation;
+  private ConceptPresentation props_ConcatOperation;
+  private ConceptPresentation props_ContainerIteratorType;
+  private ConceptPresentation props_ContainsAllOperation;
+  private ConceptPresentation props_ContainsKeyOperation;
+  private ConceptPresentation props_ContainsOperation;
+  private ConceptPresentation props_ContainsValueOperation;
+  private ConceptPresentation props_CustomContainerCreator;
+  private ConceptPresentation props_CustomContainerDeclaration;
+  private ConceptPresentation props_CustomContainers;
+  private ConceptPresentation props_CustomMapCreator;
+  private ConceptPresentation props_CutOperation;
+  private ConceptPresentation props_DequeType;
+  private ConceptPresentation props_DisjunctOperation;
+  private ConceptPresentation props_DistinctOperation;
+  private ConceptPresentation props_DowncastExpression;
+  private ConceptPresentation props_EnumeratorType;
+  private ConceptPresentation props_ExcludeOperation;
+  private ConceptPresentation props_FindFirstOperation;
+  private ConceptPresentation props_FindLastOperation;
+  private ConceptPresentation props_FoldLeftOperation;
+  private ConceptPresentation props_FoldRightOperation;
+  private ConceptPresentation props_ForEachStatement;
+  private ConceptPresentation props_ForEachVariable;
+  private ConceptPresentation props_ForEachVariableReference;
+  private ConceptPresentation props_GetCurrentOperation;
+  private ConceptPresentation props_GetElementOperation;
+  private ConceptPresentation props_GetEnumeratorOperation;
+  private ConceptPresentation props_GetFirstOperation;
+  private ConceptPresentation props_GetIndexOfOperation;
+  private ConceptPresentation props_GetIteratorOperation;
+  private ConceptPresentation props_GetKeysOperation;
+  private ConceptPresentation props_GetLastIndexOfOperation;
+  private ConceptPresentation props_GetLastOperation;
+  private ConceptPresentation props_GetNextOperation;
+  private ConceptPresentation props_GetSizeOperation;
+  private ConceptPresentation props_GetValuesOperation;
+  private ConceptPresentation props_HasNextOperation;
+  private ConceptPresentation props_HashMapCreator;
+  private ConceptPresentation props_HashSetCreator;
+  private ConceptPresentation props_HeadListOperation;
+  private ConceptPresentation props_HeadMapOperation;
+  private ConceptPresentation props_HeadSetOperation;
+  private ConceptPresentation props_IApplicableToCollection;
+  private ConceptPresentation props_IApplicableToDeque;
+  private ConceptPresentation props_IApplicableToList;
+  private ConceptPresentation props_IApplicableToNothing;
+  private ConceptPresentation props_IApplicableToQueue;
+  private ConceptPresentation props_IApplicableToStack;
+  private ConceptPresentation props_ICollectionOperation;
+  private ConceptPresentation props_IContainerOperation;
+  private ConceptPresentation props_IDequeOperation;
+  private ConceptPresentation props_IListOperation;
+  private ConceptPresentation props_IQueueOperation;
+  private ConceptPresentation props_IStackOperation;
+  private ConceptPresentation props_InsertElementOperation;
+  private ConceptPresentation props_InternalSequenceOperation;
+  private ConceptPresentation props_IntersectOperation;
+  private ConceptPresentation props_IsEmptyOperation;
+  private ConceptPresentation props_IsNotEmptyOperation;
+  private ConceptPresentation props_IteratorType;
+  private ConceptPresentation props_JoinOperation;
+  private ConceptPresentation props_KeyAccessOperation;
+  private ConceptPresentation props_LinkedHashMapCreator;
+  private ConceptPresentation props_LinkedHashSetCreator;
+  private ConceptPresentation props_LinkedListCreator;
+  private ConceptPresentation props_LinkedListType;
+  private ConceptPresentation props_ListCreatorWithInit;
+  private ConceptPresentation props_ListElementAccessExpression;
+  private ConceptPresentation props_ListType;
+  private ConceptPresentation props_MapAsSequenceVarRef;
+  private ConceptPresentation props_MapClearOperation;
+  private ConceptPresentation props_MapElement;
+  private ConceptPresentation props_MapEntry;
+  private ConceptPresentation props_MapInitializer;
+  private ConceptPresentation props_MapOperation;
+  private ConceptPresentation props_MapOperationExpression;
+  private ConceptPresentation props_MapRemoveOperation;
+  private ConceptPresentation props_MapType;
+  private ConceptPresentation props_MappingType;
+  private ConceptPresentation props_MappingsSetOperation;
+  private ConceptPresentation props_MoveNextOperation;
+  private ConceptPresentation props_MultiForEachPair;
+  private ConceptPresentation props_MultiForEachStatement;
+  private ConceptPresentation props_MultiForEachVariable;
+  private ConceptPresentation props_MultiForEachVariableReference;
+  private ConceptPresentation props_NoArgumentsSequenceOperation;
+  private ConceptPresentation props_OfTypeOperation;
+  private ConceptPresentation props_PageOperation;
+  private ConceptPresentation props_PeekOperation;
+  private ConceptPresentation props_PopOperation;
+  private ConceptPresentation props_PriorityQueueCreator;
+  private ConceptPresentation props_PushOperation;
+  private ConceptPresentation props_PutAllOperation;
+  private ConceptPresentation props_QueueType;
+  private ConceptPresentation props_ReduceLeftOperation;
+  private ConceptPresentation props_ReduceRightOperation;
+  private ConceptPresentation props_RemoveAllElementsOperation;
+  private ConceptPresentation props_RemoveAllSetElementsOperation;
+  private ConceptPresentation props_RemoveAtElementOperation;
+  private ConceptPresentation props_RemoveElementOperation;
+  private ConceptPresentation props_RemoveFirstElementOperation;
+  private ConceptPresentation props_RemoveLastElementOperation;
+  private ConceptPresentation props_RemoveOperation;
+  private ConceptPresentation props_RemoveSetElementOperation;
+  private ConceptPresentation props_RemoveWhereOperation;
+  private ConceptPresentation props_ReverseOperation;
+  private ConceptPresentation props_SelectNotNullOperation;
+  private ConceptPresentation props_SelectOperation;
+  private ConceptPresentation props_SequenceCreator;
+  private ConceptPresentation props_SequenceOperation;
+  private ConceptPresentation props_SequenceType;
+  private ConceptPresentation props_SetElementOperation;
+  private ConceptPresentation props_SetType;
+  private ConceptPresentation props_SingleArgumentSequenceOperation;
+  private ConceptPresentation props_SingletonSequenceCreator;
+  private ConceptPresentation props_SkipOperation;
+  private ConceptPresentation props_SkipStatement;
+  private ConceptPresentation props_SmartClosureParameterDeclaration;
+  private ConceptPresentation props_SortDirection;
+  private ConceptPresentation props_SortOperation;
+  private ConceptPresentation props_SortedMapOperation;
+  private ConceptPresentation props_SortedMapType;
+  private ConceptPresentation props_SortedSetOperation;
+  private ConceptPresentation props_SortedSetType;
+  private ConceptPresentation props_StackType;
+  private ConceptPresentation props_StopStatement;
+  private ConceptPresentation props_SubListOperation;
+  private ConceptPresentation props_SubMapOperation;
+  private ConceptPresentation props_SubSetOperation;
+  private ConceptPresentation props_TailListOperation;
+  private ConceptPresentation props_TailMapOperation;
+  private ConceptPresentation props_TailOperation;
+  private ConceptPresentation props_TailSetOperation;
+  private ConceptPresentation props_TakeOperation;
+  private ConceptPresentation props_TestAddElementOperation;
+  private ConceptPresentation props_TestRemoveElementOperation;
+  private ConceptPresentation props_ToArrayOperation;
+  private ConceptPresentation props_ToIteratorOperation;
+  private ConceptPresentation props_ToListOperation;
+  private ConceptPresentation props_TranslateOperation;
+  private ConceptPresentation props_TreeMapCreator;
+  private ConceptPresentation props_TreeSetCreator;
+  private ConceptPresentation props_UnionOperation;
+  private ConceptPresentation props_ValueAccessOperation;
+  private ConceptPresentation props_VisitAllOperation;
+  private ConceptPresentation props_WhereOperation;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.AbstractContainerCreator:
+        if (props_AbstractContainerCreator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_AbstractContainerCreator = cpb.create();
+        }
         return props_AbstractContainerCreator;
-      case 1:
+      case LanguageConceptSwitch.AbstractContainerType:
+        if (props_AbstractContainerType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("container type");
+          props_AbstractContainerType = cpb.create();
+        }
         return props_AbstractContainerType;
-      case 2:
+      case LanguageConceptSwitch.AbstractEnumeratorOperation:
+        if (props_AbstractEnumeratorOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_AbstractEnumeratorOperation = cpb.create();
+        }
         return props_AbstractEnumeratorOperation;
-      case 3:
+      case LanguageConceptSwitch.AbstractIteratorOperation:
+        if (props_AbstractIteratorOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_AbstractIteratorOperation = cpb.create();
+        }
         return props_AbstractIteratorOperation;
-      case 4:
+      case LanguageConceptSwitch.AbstractMappingOperation:
+        if (props_AbstractMappingOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_AbstractMappingOperation = cpb.create();
+        }
         return props_AbstractMappingOperation;
-      case 5:
+      case LanguageConceptSwitch.AbstractSetOperation:
+        if (props_AbstractSetOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_AbstractSetOperation = cpb.create();
+        }
         return props_AbstractSetOperation;
-      case 6:
+      case LanguageConceptSwitch.AddAllElementsOperation:
+        if (props_AddAllElementsOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("add all elements");
+          cpb.rawPresentation("addAll");
+          props_AddAllElementsOperation = cpb.create();
+        }
         return props_AddAllElementsOperation;
-      case 7:
+      case LanguageConceptSwitch.AddAllSetElementsOperation:
+        if (props_AddAllSetElementsOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.deprecated(true);
+          cpb.shortDesc("add all elements");
+          cpb.rawPresentation("addAll");
+          props_AddAllSetElementsOperation = cpb.create();
+        }
         return props_AddAllSetElementsOperation;
-      case 8:
+      case LanguageConceptSwitch.AddElementOperation:
+        if (props_AddElementOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("add an element");
+          cpb.rawPresentation("add");
+          props_AddElementOperation = cpb.create();
+        }
         return props_AddElementOperation;
-      case 9:
+      case LanguageConceptSwitch.AddFirstElementOperation:
+        if (props_AddFirstElementOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("add element as first");
+          cpb.rawPresentation("addFirst");
+          props_AddFirstElementOperation = cpb.create();
+        }
         return props_AddFirstElementOperation;
-      case 10:
+      case LanguageConceptSwitch.AddLastElementOperation:
+        if (props_AddLastElementOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("add element as last");
+          cpb.rawPresentation("addLast");
+          props_AddLastElementOperation = cpb.create();
+        }
         return props_AddLastElementOperation;
-      case 11:
+      case LanguageConceptSwitch.AddSetElementOperation:
+        if (props_AddSetElementOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.deprecated(true);
+          cpb.shortDesc("add an element");
+          cpb.rawPresentation("add");
+          props_AddSetElementOperation = cpb.create();
+        }
         return props_AddSetElementOperation;
-      case 12:
+      case LanguageConceptSwitch.AllConstant:
+        if (props_AllConstant == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("all elements");
+          cpb.rawPresentation("ALL");
+          props_AllConstant = cpb.create();
+        }
         return props_AllConstant;
-      case 13:
+      case LanguageConceptSwitch.AllOperation:
+        if (props_AllOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("check if all elements match the condition");
+          cpb.rawPresentation("all");
+          props_AllOperation = cpb.create();
+        }
         return props_AllOperation;
-      case 14:
+      case LanguageConceptSwitch.AlsoSortOperation:
+        if (props_AlsoSortOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("sort by secondary key");
+          cpb.rawPresentation("alsoSortBy");
+          props_AlsoSortOperation = cpb.create();
+        }
         return props_AlsoSortOperation;
-      case 15:
+      case LanguageConceptSwitch.AnyOperation:
+        if (props_AnyOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("check if there are any elements matching the condition");
+          cpb.rawPresentation("any");
+          props_AnyOperation = cpb.create();
+        }
         return props_AnyOperation;
-      case 16:
+      case LanguageConceptSwitch.AsSequenceOperation:
+        if (props_AsSequenceOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("asSequence");
+          props_AsSequenceOperation = cpb.create();
+        }
         return props_AsSequenceOperation;
-      case 17:
+      case LanguageConceptSwitch.AsSynchronizedOperation:
+        if (props_AsSynchronizedOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("synchronized collection");
+          cpb.rawPresentation("asSynchronized");
+          props_AsSynchronizedOperation = cpb.create();
+        }
         return props_AsSynchronizedOperation;
-      case 18:
+      case LanguageConceptSwitch.AsUnmodifiableOperation:
+        if (props_AsUnmodifiableOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("unmodifiable collection");
+          cpb.rawPresentation("asUnmodifiable");
+          props_AsUnmodifiableOperation = cpb.create();
+        }
         return props_AsUnmodifiableOperation;
-      case 19:
+      case LanguageConceptSwitch.BinaryOperation:
+        if (props_BinaryOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_BinaryOperation = cpb.create();
+        }
         return props_BinaryOperation;
-      case 20:
+      case LanguageConceptSwitch.ChunkOperation:
+        if (props_ChunkOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_ChunkOperation = cpb.create();
+        }
         return props_ChunkOperation;
-      case 21:
+      case LanguageConceptSwitch.ClearAllElementsOperation:
+        if (props_ClearAllElementsOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("clear all elements");
+          cpb.rawPresentation("clear");
+          props_ClearAllElementsOperation = cpb.create();
+        }
         return props_ClearAllElementsOperation;
-      case 22:
+      case LanguageConceptSwitch.ClearSetOperation:
+        if (props_ClearSetOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("clear all elements");
+          cpb.rawPresentation("clear");
+          props_ClearSetOperation = cpb.create();
+        }
         return props_ClearSetOperation;
-      case 23:
+      case LanguageConceptSwitch.CollectionType:
+        if (props_CollectionType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("abstract collection type");
+          cpb.rawPresentation("collection");
+          props_CollectionType = cpb.create();
+        }
         return props_CollectionType;
-      case 24:
+      case LanguageConceptSwitch.ComparatorSortOperation:
+        if (props_ComparatorSortOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("sort using comparator");
+          cpb.rawPresentation("sort");
+          props_ComparatorSortOperation = cpb.create();
+        }
         return props_ComparatorSortOperation;
-      case 25:
+      case LanguageConceptSwitch.ConcatOperation:
+        if (props_ConcatOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("produce a sequence concatenation");
+          cpb.rawPresentation("concat");
+          props_ConcatOperation = cpb.create();
+        }
         return props_ConcatOperation;
-      case 26:
+      case LanguageConceptSwitch.ContainerIteratorType:
+        if (props_ContainerIteratorType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("modifying_iterator");
+          props_ContainerIteratorType = cpb.create();
+        }
         return props_ContainerIteratorType;
-      case 27:
+      case LanguageConceptSwitch.ContainsAllOperation:
+        if (props_ContainsAllOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("test if sequence contains all element");
+          cpb.rawPresentation("containsAll");
+          props_ContainsAllOperation = cpb.create();
+        }
         return props_ContainsAllOperation;
-      case 28:
+      case LanguageConceptSwitch.ContainsKeyOperation:
+        if (props_ContainsKeyOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("containsKey");
+          props_ContainsKeyOperation = cpb.create();
+        }
         return props_ContainsKeyOperation;
-      case 29:
+      case LanguageConceptSwitch.ContainsOperation:
+        if (props_ContainsOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("test if sequence contains an element");
+          cpb.rawPresentation("contains");
+          props_ContainsOperation = cpb.create();
+        }
         return props_ContainsOperation;
-      case 30:
+      case LanguageConceptSwitch.ContainsValueOperation:
+        if (props_ContainsValueOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("containsValue");
+          props_ContainsValueOperation = cpb.create();
+        }
         return props_ContainsValueOperation;
-      case 31:
+      case LanguageConceptSwitch.CustomContainerCreator:
+        if (props_CustomContainerCreator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x127be81db92655b3L, 0x127be81db92655b4L, "containerDeclaration", "", "");
+          props_CustomContainerCreator = cpb.create();
+        }
         return props_CustomContainerCreator;
-      case 32:
+      case LanguageConceptSwitch.CustomContainerDeclaration:
+        if (props_CustomContainerDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_CustomContainerDeclaration = cpb.create();
+        }
         return props_CustomContainerDeclaration;
-      case 33:
+      case LanguageConceptSwitch.CustomContainers:
+        if (props_CustomContainers == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_CustomContainers = cpb.create();
+        }
         return props_CustomContainers;
-      case 34:
+      case LanguageConceptSwitch.CustomMapCreator:
+        if (props_CustomMapCreator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x15e2150d4bff8a67L, 0x15e2150d4bff8a6aL, "containerDeclaration", "", "");
+          props_CustomMapCreator = cpb.create();
+        }
         return props_CustomMapCreator;
-      case 35:
+      case LanguageConceptSwitch.CutOperation:
+        if (props_CutOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("exclude elements from the end");
+          cpb.rawPresentation("cut");
+          props_CutOperation = cpb.create();
+        }
         return props_CutOperation;
-      case 36:
+      case LanguageConceptSwitch.DequeType:
+        if (props_DequeType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("deque");
+          props_DequeType = cpb.create();
+        }
         return props_DequeType;
-      case 37:
+      case LanguageConceptSwitch.DisjunctOperation:
+        if (props_DisjunctOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("produce an exclusive disjunction");
+          cpb.rawPresentation("disjunction");
+          props_DisjunctOperation = cpb.create();
+        }
         return props_DisjunctOperation;
-      case 38:
+      case LanguageConceptSwitch.DistinctOperation:
+        if (props_DistinctOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("produce sequence with unique elements");
+          cpb.rawPresentation("distinct");
+          props_DistinctOperation = cpb.create();
+        }
         return props_DistinctOperation;
-      case 39:
+      case LanguageConceptSwitch.DowncastExpression:
+        if (props_DowncastExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("downcast");
+          props_DowncastExpression = cpb.create();
+        }
         return props_DowncastExpression;
-      case 40:
+      case LanguageConceptSwitch.EnumeratorType:
+        if (props_EnumeratorType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("enumerator");
+          props_EnumeratorType = cpb.create();
+        }
         return props_EnumeratorType;
-      case 41:
+      case LanguageConceptSwitch.ExcludeOperation:
+        if (props_ExcludeOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("subtract a sequence");
+          cpb.rawPresentation("except");
+          props_ExcludeOperation = cpb.create();
+        }
         return props_ExcludeOperation;
-      case 42:
+      case LanguageConceptSwitch.FindFirstOperation:
+        if (props_FindFirstOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("find first element that matches");
+          cpb.rawPresentation("findFirst");
+          props_FindFirstOperation = cpb.create();
+        }
         return props_FindFirstOperation;
-      case 43:
+      case LanguageConceptSwitch.FindLastOperation:
+        if (props_FindLastOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("find last element that matches");
+          cpb.rawPresentation("findLast");
+          props_FindLastOperation = cpb.create();
+        }
         return props_FindLastOperation;
-      case 44:
+      case LanguageConceptSwitch.FoldLeftOperation:
+        if (props_FoldLeftOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("perform left folding");
+          cpb.rawPresentation("foldLeft");
+          props_FoldLeftOperation = cpb.create();
+        }
         return props_FoldLeftOperation;
-      case 45:
+      case LanguageConceptSwitch.FoldRightOperation:
+        if (props_FoldRightOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("perform right folding");
+          cpb.rawPresentation("foldRight");
+          props_FoldRightOperation = cpb.create();
+        }
         return props_FoldRightOperation;
-      case 46:
+      case LanguageConceptSwitch.ForEachStatement:
+        if (props_ForEachStatement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("foreach <e> in <sequence>");
+          cpb.rawPresentation("foreach");
+          props_ForEachStatement = cpb.create();
+        }
         return props_ForEachStatement;
-      case 47:
+      case LanguageConceptSwitch.ForEachVariable:
+        if (props_ForEachVariable == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.icon(IconContainer.RESOURCE_a0a2a0a74b0qg);
+          props_ForEachVariable = cpb.create();
+        }
         return props_ForEachVariable;
-      case 48:
+      case LanguageConceptSwitch.ForEachVariableReference:
+        if (props_ForEachVariableReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10cac6fa5c3L, 0x10cac7007baL, "variable", "", "");
+          props_ForEachVariableReference = cpb.create();
+        }
         return props_ForEachVariableReference;
-      case 49:
+      case LanguageConceptSwitch.GetCurrentOperation:
+        if (props_GetCurrentOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("current");
+          props_GetCurrentOperation = cpb.create();
+        }
         return props_GetCurrentOperation;
-      case 50:
+      case LanguageConceptSwitch.GetElementOperation:
+        if (props_GetElementOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("get element by index");
+          cpb.rawPresentation("get");
+          props_GetElementOperation = cpb.create();
+        }
         return props_GetElementOperation;
-      case 51:
+      case LanguageConceptSwitch.GetEnumeratorOperation:
+        if (props_GetEnumeratorOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("get the enumerator");
+          cpb.rawPresentation("enumerator");
+          props_GetEnumeratorOperation = cpb.create();
+        }
         return props_GetEnumeratorOperation;
-      case 52:
+      case LanguageConceptSwitch.GetFirstOperation:
+        if (props_GetFirstOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("get the first element");
+          cpb.rawPresentation("first");
+          props_GetFirstOperation = cpb.create();
+        }
         return props_GetFirstOperation;
-      case 53:
+      case LanguageConceptSwitch.GetIndexOfOperation:
+        if (props_GetIndexOfOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("get the index of an element");
+          cpb.rawPresentation("indexOf");
+          props_GetIndexOfOperation = cpb.create();
+        }
         return props_GetIndexOfOperation;
-      case 54:
+      case LanguageConceptSwitch.GetIteratorOperation:
+        if (props_GetIteratorOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("get the iterator");
+          cpb.rawPresentation("iterator");
+          props_GetIteratorOperation = cpb.create();
+        }
         return props_GetIteratorOperation;
-      case 55:
+      case LanguageConceptSwitch.GetKeysOperation:
+        if (props_GetKeysOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("keys");
+          props_GetKeysOperation = cpb.create();
+        }
         return props_GetKeysOperation;
-      case 56:
+      case LanguageConceptSwitch.GetLastIndexOfOperation:
+        if (props_GetLastIndexOfOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("get the index of an element");
+          cpb.rawPresentation("lastIndexOf");
+          props_GetLastIndexOfOperation = cpb.create();
+        }
         return props_GetLastIndexOfOperation;
-      case 57:
+      case LanguageConceptSwitch.GetLastOperation:
+        if (props_GetLastOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("get the last element");
+          cpb.rawPresentation("last");
+          props_GetLastOperation = cpb.create();
+        }
         return props_GetLastOperation;
-      case 58:
+      case LanguageConceptSwitch.GetNextOperation:
+        if (props_GetNextOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("next");
+          props_GetNextOperation = cpb.create();
+        }
         return props_GetNextOperation;
-      case 59:
+      case LanguageConceptSwitch.GetSizeOperation:
+        if (props_GetSizeOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("get the sequence size");
+          cpb.rawPresentation("size");
+          props_GetSizeOperation = cpb.create();
+        }
         return props_GetSizeOperation;
-      case 60:
+      case LanguageConceptSwitch.GetValuesOperation:
+        if (props_GetValuesOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("values");
+          props_GetValuesOperation = cpb.create();
+        }
         return props_GetValuesOperation;
-      case 61:
+      case LanguageConceptSwitch.HasNextOperation:
+        if (props_HasNextOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("hasNext");
+          props_HasNextOperation = cpb.create();
+        }
         return props_HasNextOperation;
-      case 62:
+      case LanguageConceptSwitch.HashMapCreator:
+        if (props_HashMapCreator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("hashmap");
+          props_HashMapCreator = cpb.create();
+        }
         return props_HashMapCreator;
-      case 63:
+      case LanguageConceptSwitch.HashSetCreator:
+        if (props_HashSetCreator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("create new hashset");
+          cpb.rawPresentation("hashset");
+          props_HashSetCreator = cpb.create();
+        }
         return props_HashSetCreator;
-      case 64:
+      case LanguageConceptSwitch.HeadListOperation:
+        if (props_HeadListOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("head list");
+          cpb.rawPresentation("headList");
+          props_HeadListOperation = cpb.create();
+        }
         return props_HeadListOperation;
-      case 65:
+      case LanguageConceptSwitch.HeadMapOperation:
+        if (props_HeadMapOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("headMap");
+          props_HeadMapOperation = cpb.create();
+        }
         return props_HeadMapOperation;
-      case 66:
+      case LanguageConceptSwitch.HeadSetOperation:
+        if (props_HeadSetOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("headSet");
+          props_HeadSetOperation = cpb.create();
+        }
         return props_HeadSetOperation;
-      case 67:
+      case LanguageConceptSwitch.IApplicableToCollection:
+        if (props_IApplicableToCollection == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IApplicableToCollection = cpb.create();
+        }
         return props_IApplicableToCollection;
-      case 68:
+      case LanguageConceptSwitch.IApplicableToDeque:
+        if (props_IApplicableToDeque == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IApplicableToDeque = cpb.create();
+        }
         return props_IApplicableToDeque;
-      case 69:
+      case LanguageConceptSwitch.IApplicableToList:
+        if (props_IApplicableToList == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IApplicableToList = cpb.create();
+        }
         return props_IApplicableToList;
-      case 70:
+      case LanguageConceptSwitch.IApplicableToNothing:
+        if (props_IApplicableToNothing == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IApplicableToNothing = cpb.create();
+        }
         return props_IApplicableToNothing;
-      case 71:
+      case LanguageConceptSwitch.IApplicableToQueue:
+        if (props_IApplicableToQueue == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IApplicableToQueue = cpb.create();
+        }
         return props_IApplicableToQueue;
-      case 72:
+      case LanguageConceptSwitch.IApplicableToStack:
+        if (props_IApplicableToStack == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IApplicableToStack = cpb.create();
+        }
         return props_IApplicableToStack;
-      case 73:
+      case LanguageConceptSwitch.ICollectionOperation:
+        if (props_ICollectionOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_ICollectionOperation = cpb.create();
+        }
         return props_ICollectionOperation;
-      case 74:
+      case LanguageConceptSwitch.IContainerOperation:
+        if (props_IContainerOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IContainerOperation = cpb.create();
+        }
         return props_IContainerOperation;
-      case 75:
+      case LanguageConceptSwitch.IDequeOperation:
+        if (props_IDequeOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IDequeOperation = cpb.create();
+        }
         return props_IDequeOperation;
-      case 76:
+      case LanguageConceptSwitch.IListOperation:
+        if (props_IListOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IListOperation = cpb.create();
+        }
         return props_IListOperation;
-      case 77:
+      case LanguageConceptSwitch.IQueueOperation:
+        if (props_IQueueOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IQueueOperation = cpb.create();
+        }
         return props_IQueueOperation;
-      case 78:
+      case LanguageConceptSwitch.IStackOperation:
+        if (props_IStackOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IStackOperation = cpb.create();
+        }
         return props_IStackOperation;
-      case 79:
+      case LanguageConceptSwitch.InsertElementOperation:
+        if (props_InsertElementOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("insert element at an index");
+          cpb.rawPresentation("insert");
+          props_InsertElementOperation = cpb.create();
+        }
         return props_InsertElementOperation;
-      case 80:
+      case LanguageConceptSwitch.InternalSequenceOperation:
+        if (props_InternalSequenceOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_InternalSequenceOperation = cpb.create();
+        }
         return props_InternalSequenceOperation;
-      case 81:
+      case LanguageConceptSwitch.IntersectOperation:
+        if (props_IntersectOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("produce an intersection");
+          cpb.rawPresentation("intersect");
+          props_IntersectOperation = cpb.create();
+        }
         return props_IntersectOperation;
-      case 82:
+      case LanguageConceptSwitch.IsEmptyOperation:
+        if (props_IsEmptyOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("test if sequence is empty");
+          cpb.rawPresentation("isEmpty");
+          props_IsEmptyOperation = cpb.create();
+        }
         return props_IsEmptyOperation;
-      case 83:
+      case LanguageConceptSwitch.IsNotEmptyOperation:
+        if (props_IsNotEmptyOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("test if sequence is not empty");
+          cpb.rawPresentation("isNotEmpty");
+          props_IsNotEmptyOperation = cpb.create();
+        }
         return props_IsNotEmptyOperation;
-      case 84:
+      case LanguageConceptSwitch.IteratorType:
+        if (props_IteratorType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("iterator");
+          props_IteratorType = cpb.create();
+        }
         return props_IteratorType;
-      case 85:
+      case LanguageConceptSwitch.JoinOperation:
+        if (props_JoinOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("join");
+          props_JoinOperation = cpb.create();
+        }
         return props_JoinOperation;
-      case 86:
+      case LanguageConceptSwitch.KeyAccessOperation:
+        if (props_KeyAccessOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("key");
+          props_KeyAccessOperation = cpb.create();
+        }
         return props_KeyAccessOperation;
-      case 87:
+      case LanguageConceptSwitch.LinkedHashMapCreator:
+        if (props_LinkedHashMapCreator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("linked_hashmap");
+          props_LinkedHashMapCreator = cpb.create();
+        }
         return props_LinkedHashMapCreator;
-      case 88:
+      case LanguageConceptSwitch.LinkedHashSetCreator:
+        if (props_LinkedHashSetCreator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("create new linked hashset");
+          cpb.rawPresentation("linked_hashset");
+          props_LinkedHashSetCreator = cpb.create();
+        }
         return props_LinkedHashSetCreator;
-      case 89:
+      case LanguageConceptSwitch.LinkedListCreator:
+        if (props_LinkedListCreator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("create new linked list");
+          cpb.rawPresentation("linkedlist");
+          props_LinkedListCreator = cpb.create();
+        }
         return props_LinkedListCreator;
-      case 90:
+      case LanguageConceptSwitch.LinkedListType:
+        if (props_LinkedListType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("linkedlist");
+          props_LinkedListType = cpb.create();
+        }
         return props_LinkedListType;
-      case 91:
+      case LanguageConceptSwitch.ListCreatorWithInit:
+        if (props_ListCreatorWithInit == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("create new array list");
+          cpb.rawPresentation("arraylist");
+          props_ListCreatorWithInit = cpb.create();
+        }
         return props_ListCreatorWithInit;
-      case 92:
+      case LanguageConceptSwitch.ListElementAccessExpression:
+        if (props_ListElementAccessExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ListElementAccessExpression");
+          props_ListElementAccessExpression = cpb.create();
+        }
         return props_ListElementAccessExpression;
-      case 93:
+      case LanguageConceptSwitch.ListType:
+        if (props_ListType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("list");
+          props_ListType = cpb.create();
+        }
         return props_ListType;
-      case 94:
+      case LanguageConceptSwitch.MapAsSequenceVarRef:
+        if (props_MapAsSequenceVarRef == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("MapAsSequenceVarRef");
+          props_MapAsSequenceVarRef = cpb.create();
+        }
         return props_MapAsSequenceVarRef;
-      case 95:
+      case LanguageConceptSwitch.MapClearOperation:
+        if (props_MapClearOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("clear");
+          props_MapClearOperation = cpb.create();
+        }
         return props_MapClearOperation;
-      case 96:
+      case LanguageConceptSwitch.MapElement:
+        if (props_MapElement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("MapElement");
+          props_MapElement = cpb.create();
+        }
         return props_MapElement;
-      case 97:
+      case LanguageConceptSwitch.MapEntry:
+        if (props_MapEntry == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("MapEntry");
+          props_MapEntry = cpb.create();
+        }
         return props_MapEntry;
-      case 98:
+      case LanguageConceptSwitch.MapInitializer:
+        if (props_MapInitializer == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("MapInitializer");
+          props_MapInitializer = cpb.create();
+        }
         return props_MapInitializer;
-      case 99:
+      case LanguageConceptSwitch.MapOperation:
+        if (props_MapOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_MapOperation = cpb.create();
+        }
         return props_MapOperation;
-      case 100:
+      case LanguageConceptSwitch.MapOperationExpression:
+        if (props_MapOperationExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("MapOperationExpression");
+          props_MapOperationExpression = cpb.create();
+        }
         return props_MapOperationExpression;
-      case 101:
+      case LanguageConceptSwitch.MapRemoveOperation:
+        if (props_MapRemoveOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("removeKey");
+          props_MapRemoveOperation = cpb.create();
+        }
         return props_MapRemoveOperation;
-      case 102:
+      case LanguageConceptSwitch.MapType:
+        if (props_MapType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("map");
+          props_MapType = cpb.create();
+        }
         return props_MapType;
-      case 103:
+      case LanguageConceptSwitch.MappingType:
+        if (props_MappingType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("mapping");
+          props_MappingType = cpb.create();
+        }
         return props_MappingType;
-      case 104:
+      case LanguageConceptSwitch.MappingsSetOperation:
+        if (props_MappingsSetOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("mappings");
+          props_MappingsSetOperation = cpb.create();
+        }
         return props_MappingsSetOperation;
-      case 105:
+      case LanguageConceptSwitch.MoveNextOperation:
+        if (props_MoveNextOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("moveNext");
+          props_MoveNextOperation = cpb.create();
+        }
         return props_MoveNextOperation;
-      case 106:
+      case LanguageConceptSwitch.MultiForEachPair:
+        if (props_MultiForEachPair == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("MultiForEachPair");
+          props_MultiForEachPair = cpb.create();
+        }
         return props_MultiForEachPair;
-      case 107:
+      case LanguageConceptSwitch.MultiForEachStatement:
+        if (props_MultiForEachStatement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("foreach loop over multiple variables");
+          cpb.rawPresentation("foreach");
+          props_MultiForEachStatement = cpb.create();
+        }
         return props_MultiForEachStatement;
-      case 108:
+      case LanguageConceptSwitch.MultiForEachVariable:
+        if (props_MultiForEachVariable == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_MultiForEachVariable = cpb.create();
+        }
         return props_MultiForEachVariable;
-      case 109:
+      case LanguageConceptSwitch.MultiForEachVariableReference:
+        if (props_MultiForEachVariableReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x731a0dad81895f16L, 0x731a0dad818984f5L, "variable", "", "");
+          props_MultiForEachVariableReference = cpb.create();
+        }
         return props_MultiForEachVariableReference;
-      case 110:
+      case LanguageConceptSwitch.NoArgumentsSequenceOperation:
+        if (props_NoArgumentsSequenceOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_NoArgumentsSequenceOperation = cpb.create();
+        }
         return props_NoArgumentsSequenceOperation;
-      case 111:
+      case LanguageConceptSwitch.OfTypeOperation:
+        if (props_OfTypeOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("select elements of the specified type");
+          cpb.rawPresentation("ofType");
+          props_OfTypeOperation = cpb.create();
+        }
         return props_OfTypeOperation;
-      case 112:
+      case LanguageConceptSwitch.PageOperation:
+        if (props_PageOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("select a subsequence");
+          cpb.rawPresentation("page");
+          props_PageOperation = cpb.create();
+        }
         return props_PageOperation;
-      case 113:
+      case LanguageConceptSwitch.PeekOperation:
+        if (props_PeekOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("peek");
+          props_PeekOperation = cpb.create();
+        }
         return props_PeekOperation;
-      case 114:
+      case LanguageConceptSwitch.PopOperation:
+        if (props_PopOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("pop");
+          props_PopOperation = cpb.create();
+        }
         return props_PopOperation;
-      case 115:
+      case LanguageConceptSwitch.PriorityQueueCreator:
+        if (props_PriorityQueueCreator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("create new priority queue");
+          cpb.rawPresentation("priority_queue");
+          props_PriorityQueueCreator = cpb.create();
+        }
         return props_PriorityQueueCreator;
-      case 116:
+      case LanguageConceptSwitch.PushOperation:
+        if (props_PushOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("push");
+          props_PushOperation = cpb.create();
+        }
         return props_PushOperation;
-      case 117:
+      case LanguageConceptSwitch.PutAllOperation:
+        if (props_PutAllOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("putAll");
+          props_PutAllOperation = cpb.create();
+        }
         return props_PutAllOperation;
-      case 118:
+      case LanguageConceptSwitch.QueueType:
+        if (props_QueueType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("queue");
+          props_QueueType = cpb.create();
+        }
         return props_QueueType;
-      case 119:
+      case LanguageConceptSwitch.ReduceLeftOperation:
+        if (props_ReduceLeftOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("perform left reduction");
+          cpb.rawPresentation("reduceLeft");
+          props_ReduceLeftOperation = cpb.create();
+        }
         return props_ReduceLeftOperation;
-      case 120:
+      case LanguageConceptSwitch.ReduceRightOperation:
+        if (props_ReduceRightOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("perform right reduction");
+          cpb.rawPresentation("reduceRight");
+          props_ReduceRightOperation = cpb.create();
+        }
         return props_ReduceRightOperation;
-      case 121:
+      case LanguageConceptSwitch.RemoveAllElementsOperation:
+        if (props_RemoveAllElementsOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("remove all elements");
+          cpb.rawPresentation("removeAll");
+          props_RemoveAllElementsOperation = cpb.create();
+        }
         return props_RemoveAllElementsOperation;
-      case 122:
+      case LanguageConceptSwitch.RemoveAllSetElementsOperation:
+        if (props_RemoveAllSetElementsOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.deprecated(true);
+          cpb.shortDesc("remove all elements");
+          cpb.rawPresentation("removeAll");
+          props_RemoveAllSetElementsOperation = cpb.create();
+        }
         return props_RemoveAllSetElementsOperation;
-      case 123:
+      case LanguageConceptSwitch.RemoveAtElementOperation:
+        if (props_RemoveAtElementOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("remove element at an index");
+          cpb.rawPresentation("removeAt");
+          props_RemoveAtElementOperation = cpb.create();
+        }
         return props_RemoveAtElementOperation;
-      case 124:
+      case LanguageConceptSwitch.RemoveElementOperation:
+        if (props_RemoveElementOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("remove an element");
+          cpb.rawPresentation("remove");
+          props_RemoveElementOperation = cpb.create();
+        }
         return props_RemoveElementOperation;
-      case 125:
+      case LanguageConceptSwitch.RemoveFirstElementOperation:
+        if (props_RemoveFirstElementOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("remove first element");
+          cpb.rawPresentation("removeFirst");
+          props_RemoveFirstElementOperation = cpb.create();
+        }
         return props_RemoveFirstElementOperation;
-      case 126:
+      case LanguageConceptSwitch.RemoveLastElementOperation:
+        if (props_RemoveLastElementOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("remove last element");
+          cpb.rawPresentation("removeLast");
+          props_RemoveLastElementOperation = cpb.create();
+        }
         return props_RemoveLastElementOperation;
-      case 127:
+      case LanguageConceptSwitch.RemoveOperation:
+        if (props_RemoveOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("remove");
+          props_RemoveOperation = cpb.create();
+        }
         return props_RemoveOperation;
-      case 128:
+      case LanguageConceptSwitch.RemoveSetElementOperation:
+        if (props_RemoveSetElementOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.deprecated(true);
+          cpb.shortDesc("remove an element");
+          cpb.rawPresentation("remove");
+          props_RemoveSetElementOperation = cpb.create();
+        }
         return props_RemoveSetElementOperation;
-      case 129:
+      case LanguageConceptSwitch.RemoveWhereOperation:
+        if (props_RemoveWhereOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("filter out the matched elements");
+          cpb.rawPresentation("removeWhere");
+          props_RemoveWhereOperation = cpb.create();
+        }
         return props_RemoveWhereOperation;
-      case 130:
+      case LanguageConceptSwitch.ReverseOperation:
+        if (props_ReverseOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("create a list with elements in reverse order");
+          cpb.rawPresentation("reverse");
+          props_ReverseOperation = cpb.create();
+        }
         return props_ReverseOperation;
-      case 131:
+      case LanguageConceptSwitch.SelectNotNullOperation:
+        if (props_SelectNotNullOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("exclude null elements");
+          cpb.rawPresentation("withoutNull");
+          props_SelectNotNullOperation = cpb.create();
+        }
+        return props_SelectNotNullOperation;
+      case LanguageConceptSwitch.SelectOperation:
+        if (props_SelectOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("transform each element to another type");
+          cpb.rawPresentation("select");
+          props_SelectOperation = cpb.create();
+        }
         return props_SelectOperation;
-      case 132:
+      case LanguageConceptSwitch.SequenceCreator:
+        if (props_SequenceCreator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("create new sequence");
+          cpb.rawPresentation("sequence");
+          props_SequenceCreator = cpb.create();
+        }
         return props_SequenceCreator;
-      case 133:
+      case LanguageConceptSwitch.SequenceOperation:
+        if (props_SequenceOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_SequenceOperation = cpb.create();
+        }
         return props_SequenceOperation;
-      case 134:
+      case LanguageConceptSwitch.SequenceType:
+        if (props_SequenceType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("sequence");
+          props_SequenceType = cpb.create();
+        }
         return props_SequenceType;
-      case 135:
+      case LanguageConceptSwitch.SetElementOperation:
+        if (props_SetElementOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("set an element at an index");
+          cpb.rawPresentation("set");
+          props_SetElementOperation = cpb.create();
+        }
         return props_SetElementOperation;
-      case 136:
+      case LanguageConceptSwitch.SetType:
+        if (props_SetType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("set");
+          props_SetType = cpb.create();
+        }
         return props_SetType;
-      case 137:
+      case LanguageConceptSwitch.SingleArgumentSequenceOperation:
+        if (props_SingleArgumentSequenceOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_SingleArgumentSequenceOperation = cpb.create();
+        }
         return props_SingleArgumentSequenceOperation;
-      case 138:
+      case LanguageConceptSwitch.SingletonSequenceCreator:
+        if (props_SingletonSequenceCreator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("create singleton sequence");
+          cpb.rawPresentation("singleton");
+          props_SingletonSequenceCreator = cpb.create();
+        }
         return props_SingletonSequenceCreator;
-      case 139:
+      case LanguageConceptSwitch.SkipOperation:
+        if (props_SkipOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("exclude elements from the beginning");
+          cpb.rawPresentation("skip");
+          props_SkipOperation = cpb.create();
+        }
         return props_SkipOperation;
-      case 140:
+      case LanguageConceptSwitch.SkipStatement:
+        if (props_SkipStatement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("skip to next element in input sequence");
+          cpb.rawPresentation("skip");
+          props_SkipStatement = cpb.create();
+        }
         return props_SkipStatement;
-      case 141:
+      case LanguageConceptSwitch.SmartClosureParameterDeclaration:
+        if (props_SmartClosureParameterDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("smart closure parameter");
+          cpb.presentationByName();
+          props_SmartClosureParameterDeclaration = cpb.create();
+        }
         return props_SmartClosureParameterDeclaration;
-      case 142:
+      case LanguageConceptSwitch.SortDirection:
+        if (props_SortDirection == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("SortDirection");
+          props_SortDirection = cpb.create();
+        }
         return props_SortDirection;
-      case 143:
+      case LanguageConceptSwitch.SortOperation:
+        if (props_SortOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("sort by key");
+          cpb.rawPresentation("sortBy");
+          props_SortOperation = cpb.create();
+        }
         return props_SortOperation;
-      case 144:
+      case LanguageConceptSwitch.SortedMapOperation:
+        if (props_SortedMapOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_SortedMapOperation = cpb.create();
+        }
         return props_SortedMapOperation;
-      case 145:
+      case LanguageConceptSwitch.SortedMapType:
+        if (props_SortedMapType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("sorted_map");
+          props_SortedMapType = cpb.create();
+        }
         return props_SortedMapType;
-      case 146:
+      case LanguageConceptSwitch.SortedSetOperation:
+        if (props_SortedSetOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_SortedSetOperation = cpb.create();
+        }
         return props_SortedSetOperation;
-      case 147:
+      case LanguageConceptSwitch.SortedSetType:
+        if (props_SortedSetType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("sorted_set");
+          props_SortedSetType = cpb.create();
+        }
         return props_SortedSetType;
-      case 148:
+      case LanguageConceptSwitch.StackType:
+        if (props_StackType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("stack");
+          props_StackType = cpb.create();
+        }
         return props_StackType;
-      case 149:
+      case LanguageConceptSwitch.StopStatement:
+        if (props_StopStatement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("stop iterating input sequence");
+          cpb.rawPresentation("stop");
+          props_StopStatement = cpb.create();
+        }
         return props_StopStatement;
-      case 150:
+      case LanguageConceptSwitch.SubListOperation:
+        if (props_SubListOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("sub list");
+          cpb.rawPresentation("subList");
+          props_SubListOperation = cpb.create();
+        }
         return props_SubListOperation;
-      case 151:
+      case LanguageConceptSwitch.SubMapOperation:
+        if (props_SubMapOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("subMap");
+          props_SubMapOperation = cpb.create();
+        }
         return props_SubMapOperation;
-      case 152:
+      case LanguageConceptSwitch.SubSetOperation:
+        if (props_SubSetOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("subSet");
+          props_SubSetOperation = cpb.create();
+        }
         return props_SubSetOperation;
-      case 153:
+      case LanguageConceptSwitch.TailListOperation:
+        if (props_TailListOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("tail list");
+          cpb.rawPresentation("tailList");
+          props_TailListOperation = cpb.create();
+        }
         return props_TailListOperation;
-      case 154:
+      case LanguageConceptSwitch.TailMapOperation:
+        if (props_TailMapOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("tailMap");
+          props_TailMapOperation = cpb.create();
+        }
         return props_TailMapOperation;
-      case 155:
+      case LanguageConceptSwitch.TailOperation:
+        if (props_TailOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("include elements at the end");
+          cpb.rawPresentation("tail");
+          props_TailOperation = cpb.create();
+        }
         return props_TailOperation;
-      case 156:
+      case LanguageConceptSwitch.TailSetOperation:
+        if (props_TailSetOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("tailSet");
+          props_TailSetOperation = cpb.create();
+        }
         return props_TailSetOperation;
-      case 157:
+      case LanguageConceptSwitch.TakeOperation:
+        if (props_TakeOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("include elements at the beginning");
+          cpb.rawPresentation("take");
+          props_TakeOperation = cpb.create();
+        }
         return props_TakeOperation;
-      case 158:
+      case LanguageConceptSwitch.TestAddElementOperation:
+        if (props_TestAddElementOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("add an element and test the outcome");
+          cpb.rawPresentation("testAdd");
+          props_TestAddElementOperation = cpb.create();
+        }
         return props_TestAddElementOperation;
-      case 159:
+      case LanguageConceptSwitch.TestRemoveElementOperation:
+        if (props_TestRemoveElementOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("remove an element and test the outcome");
+          cpb.rawPresentation("testRemove");
+          props_TestRemoveElementOperation = cpb.create();
+        }
         return props_TestRemoveElementOperation;
-      case 160:
+      case LanguageConceptSwitch.ToArrayOperation:
+        if (props_ToArrayOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("convert to an array");
+          cpb.rawPresentation("toArray");
+          props_ToArrayOperation = cpb.create();
+        }
         return props_ToArrayOperation;
-      case 161:
+      case LanguageConceptSwitch.ToIteratorOperation:
+        if (props_ToIteratorOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("convert to an iterator");
+          cpb.rawPresentation("iterator");
+          props_ToIteratorOperation = cpb.create();
+        }
         return props_ToIteratorOperation;
-      case 162:
+      case LanguageConceptSwitch.ToListOperation:
+        if (props_ToListOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("convert to a list");
+          cpb.rawPresentation("toList");
+          props_ToListOperation = cpb.create();
+        }
         return props_ToListOperation;
-      case 163:
+      case LanguageConceptSwitch.TranslateOperation:
+        if (props_TranslateOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("transform each element to a sequence");
+          cpb.rawPresentation("selectMany");
+          props_TranslateOperation = cpb.create();
+        }
         return props_TranslateOperation;
-      case 164:
+      case LanguageConceptSwitch.TreeMapCreator:
+        if (props_TreeMapCreator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("treemap");
+          props_TreeMapCreator = cpb.create();
+        }
         return props_TreeMapCreator;
-      case 165:
+      case LanguageConceptSwitch.TreeSetCreator:
+        if (props_TreeSetCreator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("create new treeset");
+          cpb.rawPresentation("treeset");
+          props_TreeSetCreator = cpb.create();
+        }
         return props_TreeSetCreator;
-      case 166:
+      case LanguageConceptSwitch.UnionOperation:
+        if (props_UnionOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("produce an union");
+          cpb.rawPresentation("union");
+          props_UnionOperation = cpb.create();
+        }
         return props_UnionOperation;
-      case 167:
+      case LanguageConceptSwitch.ValueAccessOperation:
+        if (props_ValueAccessOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("value");
+          props_ValueAccessOperation = cpb.create();
+        }
         return props_ValueAccessOperation;
-      case 168:
+      case LanguageConceptSwitch.VisitAllOperation:
+        if (props_VisitAllOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("execute for each element");
+          cpb.rawPresentation("forEach");
+          props_VisitAllOperation = cpb.create();
+        }
         return props_VisitAllOperation;
-      case 169:
+      case LanguageConceptSwitch.WhereOperation:
+        if (props_WhereOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("include only matched element");
+          cpb.rawPresentation("where");
+          props_WhereOperation = cpb.create();
+        }
         return props_WhereOperation;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

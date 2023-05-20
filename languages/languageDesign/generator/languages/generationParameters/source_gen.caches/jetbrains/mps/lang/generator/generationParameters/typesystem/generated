@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-egx3fkj9zam8t2td6xy6h81j311ozme" />
+<product version="3" modelHash="-a4616h9lio85by52c7w1ak9gg3znpxy">
+  <files names="TypesystemDescriptor.java:typeof_DefaultGeneratorParameter_InferenceRule.java" />
+</product>
 

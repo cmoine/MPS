@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,14 @@
 package jetbrains.mps.generator.impl;
 
 import jetbrains.mps.generator.GenerationCanceledException;
-import jetbrains.mps.smodel.ModelReadRunnable;
-import jetbrains.mps.util.Callback;
+import jetbrains.mps.smodel.SharedReadModelAccess;
 import jetbrains.mps.util.NamedThreadFactory;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.mps.openapi.module.ModelAccess;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Executor;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -34,8 +33,26 @@ import java.util.concurrent.atomic.AtomicLong;
  * Evgeny Gryaznov, Feb 23, 2010
  */
 public class GenerationTaskPool implements IGenerationTaskPool {
-
   public GenerationTaskPool(int numberOfThreads) {
+    this(numberOfThreads, new SharedReadModelAccess() {
+      @Override
+      public boolean canRead() {
+        return true;
+      }
+
+      @Override
+      public void release() {
+
+      }
+
+      @Override
+      public void execute(@NotNull Runnable command) {
+        command.run();
+      }
+    });
+  }
+
+  public GenerationTaskPool(int numberOfThreads, @NotNull SharedReadModelAccess modelAccess) {
     myExecutor = new ThreadPoolExecutor(numberOfThreads, numberOfThreads, 10, TimeUnit.SECONDS, queue, new NamedThreadFactory("generation-thread-")) {
       @Override
       protected void afterExecute(Runnable r, Throwable t) {
@@ -47,16 +64,18 @@ public class GenerationTaskPool implements IGenerationTaskPool {
         }
       }
     };
+    mySharedModelReadAccess = modelAccess;
   }
 
   private volatile boolean isCancelled = false;
 
-  final BlockingQueue<Runnable> queue = new LinkedBlockingQueue<Runnable>();
+  final BlockingQueue<Runnable> queue = new LinkedBlockingQueue<>();
   final ThreadPoolExecutor myExecutor;
+  private final SharedReadModelAccess mySharedModelReadAccess;
 
   final AtomicLong tasksInQueue = new AtomicLong();
   final Object objectLock = new Object();
-  final List<Throwable> exceptions = new LinkedList<Throwable>();
+  final List<Throwable> exceptions = new LinkedList<>();
 
   @Override
   public void addTask(GenerationTask r) {
@@ -64,16 +83,15 @@ public class GenerationTaskPool implements IGenerationTaskPool {
       return;
     }
     tasksInQueue.incrementAndGet();
-    // see GenerationTaskAdapter#run for explanation why we don't use model read action here yet
-    myExecutor.execute(/*new ModelReadRunnable(myModelAccess,...)*/new GenerationTaskAdapter(r, new Callback<Throwable>() {
-      @Override
-      public void call(Throwable param) {
-        synchronized (objectLock) {
-          exceptions.add(param);
-          objectLock.notifyAll();
-        }
-      }
-    }));
+    GenerationTaskAdapter gta = new GenerationTaskAdapter(r, this::handleException);
+    myExecutor.execute(new ModelReadAdapter(mySharedModelReadAccess, gta));
+  }
+
+  /*package*/ void handleException(Throwable param) {
+    synchronized (objectLock) {
+      exceptions.add(param);
+      objectLock.notifyAll();
+    }
   }
 
   @Override
@@ -113,5 +131,23 @@ public class GenerationTaskPool implements IGenerationTaskPool {
   @Override
   public void dispose() {
     myExecutor.shutdownNow();
+  }
+
+  // XXX could be generic WithExecutorRunnable, as it needs only Executor service.
+  //     OTOH, if we add MAT#execute(Runnable, Callback<> onInterrupt), we'd better use MAT here
+  // much like ModelReadRunnable, but we can't use regular MA.runReadAction directly (see ModelReadFlagLegacyAccess above)
+  private static class ModelReadAdapter implements Runnable {
+    private final Executor myAccessExecutor;
+    private final Runnable myDelegate;
+
+    ModelReadAdapter(Executor accessExecutor, Runnable delegate) {
+      myAccessExecutor = accessExecutor;
+      myDelegate = delegate;
+    }
+
+    @Override
+    public void run() {
+      myAccessExecutor.execute(myDelegate);
+    }
   }
 }

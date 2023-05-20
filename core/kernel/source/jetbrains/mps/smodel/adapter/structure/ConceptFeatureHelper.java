@@ -15,26 +15,21 @@
  */
 package jetbrains.mps.smodel.adapter.structure;
 
-import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 import jetbrains.mps.smodel.adapter.ids.SConceptFeatureId;
-import jetbrains.mps.smodel.adapter.ids.SConceptId;
 import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.smodel.runtime.ConceptDescriptor;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 
 public class ConceptFeatureHelper {
-  public static SAbstractConcept getOwner(SConceptFeatureId featureId) {
+  @NotNull
+  public static SAbstractConcept getOwner(@NotNull SConceptFeatureId featureId) {
     ConceptDescriptor conceptDescriptor = getOwnerDescriptor(featureId);
-    SConceptId resultId = conceptDescriptor.getId();
-    if (resultId.equals(MetaIdFactory.INVALID_CONCEPT_ID)) {
-      resultId = featureId.getConceptId();
-    }
-    return conceptDescriptor.isInterfaceConcept() ?
-        MetaAdapterFactory.getInterfaceConcept(resultId, conceptDescriptor.getConceptFqName()) :
-        MetaAdapterFactory.getConcept(resultId, conceptDescriptor.getConceptFqName());
+    return MetaAdapterFactory.getAbstractConcept(conceptDescriptor);
   }
 
-  public static ConceptDescriptor getOwnerDescriptor(SConceptFeatureId featureId) {
+  @NotNull
+  public static ConceptDescriptor getOwnerDescriptor(@NotNull SConceptFeatureId featureId) {
     return ConceptRegistry.getInstance().getConceptDescriptor(featureId.getConceptId());
   }
 }

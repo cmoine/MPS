@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,52 +15,36 @@
  */
 package jetbrains.mps.project;
 
-import jetbrains.mps.project.Project.ProjectScope;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.mps.openapi.module.ModelAccess;
 import org.jetbrains.mps.openapi.module.SModule;
-import org.jetbrains.mps.openapi.module.SModuleReference;
-import org.jetbrains.mps.openapi.module.SRepository;
 
 import java.util.List;
 
 /**
  * MPS project interface
  *
+ * fixme remove
+ * @deprecated use {@link org.jetbrains.mps.openapi.project.Project} or {@link jetbrains.mps.project.Project}
+ *
  * Created by apyshkin on 11/3/15.
  */
-public interface IProject {
-  /**
-   * @return scope with all the modules from the project, including generators.
-   */
-  @NotNull ProjectScope getScope();
-
-  /**
-   * @return the project repository which contains all the project modules
-   */
-  @NotNull SRepository getRepository();
-
-  /**
-   * @return a shorthand for #getRepository().getModelAccess()
-   */
-  @NotNull ModelAccess getModelAccess();
+@Deprecated(forRemoval = true, since = "2022.3")
+public interface IProject extends org.jetbrains.mps.openapi.project.Project {
 
   /**
    * Generic extension mechanism
+   * XXX likely, shall be part of openapi.project.Project interface
    *
    * @return component instance or <code>null</code> if no extension of specified kind found.
    */
   <T> T getComponent(Class<T> t);
 
   /**
-   * @return the name of the project
-   */
-  @NotNull String getName();
-
-  /**
    * api for the external project change : adding the module to the project
+   * FIXME explain what does 'add' and 'remove' mean. Is it about permanent, serialized change or just an association
+   *       with project repo. If permanent, why Project.dispose() uses it to unregister project modules?
    */
-  void addModule(@NotNull SModule module);
+  void addModule(@NotNull SModule module); // in use from mbeddr
 
   /**
    * api for the external project change : removing the module from the project
@@ -68,8 +52,9 @@ public interface IProject {
   void removeModule(@NotNull SModule module);
 
   /**
-   * @return all the modules this project owns (todo: contract to be: the same modules are in the #getRepository() repository)
-   * currently getRepository is the global repository (singleton) which hosts all the modules in the environment
+   * @see org.jetbrains.mps.openapi.project.Project#getProjectModules()
    */
-  @NotNull List<SModule> getProjectModules();
+  @NotNull
+  @Override
+  List<SModule> getProjectModules(); // in use from mbeddr
 }

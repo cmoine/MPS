@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="cdeww0vppw263ok82c4nd2acpw9evdh">
+  <files names="TypesystemDescriptor.java:check_CallActionDuplicatedParameters_NonTypesystemRule.java:check_RequiredParametersArePassed_NonTypesystemRule.java:check_ShowGenPlan_NonTypesystemRule.java:typeof_AbsractMake_InferenceRule.java:typeof_ActionCallParameter_InferenceRule.java:typeof_CallAction_InferenceRule.java:typeof_ModelProperties_InferenceRule.java:typeof_ModuleProperties_InferenceRule.java:typeof_ShowExpression_InferenceRule.java" />
+</product>
+

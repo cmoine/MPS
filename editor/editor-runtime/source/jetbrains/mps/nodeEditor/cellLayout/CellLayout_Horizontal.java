@@ -16,9 +16,16 @@
 package jetbrains.mps.nodeEditor.cellLayout;
 
 import jetbrains.mps.editor.runtime.TextBuilderImpl;
+import jetbrains.mps.editor.runtime.style.CellAlign;
+import jetbrains.mps.editor.runtime.style.StyleAttributes;
+import jetbrains.mps.nodeEditor.EditorSettings;
 import jetbrains.mps.openapi.editor.TextBuilder;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.cells.EditorCell_Collection;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * User: Sergey Dmitriev
@@ -33,8 +40,6 @@ public class CellLayout_Horizontal extends AbstractCellLayout {
     final int y = editorCells.getY();
     int ascent = 0;
     int descent = 0;
-    int topInset = 0;
-    int bottomInset = 0;
 
     boolean isInsideGird = editorCells.getParent() != null && editorCells.getParent().getCellLayout() instanceof CellLayout_Vertical &&
         ((CellLayout_Vertical) editorCells.getParent().getCellLayout()).isGridLayout();
@@ -48,26 +53,84 @@ public class CellLayout_Horizontal extends AbstractCellLayout {
          */
         editorCell.moveTo(x, editorCell.getY());
       } else {
-        editorCell.moveTo(x + width, editorCell.getY());
+        editorCell.moveTo(x + width, Math.max(editorCell.getY(), y));
       }
       editorCell.relayout();
       width += editorCell.getWidth();
 
-      ascent = Math.max(ascent, editorCell.getAscent());
-      descent = Math.max(descent, editorCell.getDescent());
-      topInset = Math.max(topInset, editorCell.getTopInset());
-      bottomInset = Math.max(bottomInset, editorCell.getBottomInset());
+      ascent = Math.max(ascent, editorCell.getAscent() + editorCell.getTopInset());
+      descent = Math.max(descent, editorCell.getDescent() + editorCell.getBottomInset());
     }
 
-    int baseline = y + ascent + topInset;
-
-    editorCells.setWidth(width);
-    editorCells.setHeight(ascent + descent + topInset + bottomInset);
+    int baseline = y + ascent;
 
     for (EditorCell editorCell : editorCells) {
       editorCell.setBaseline(baseline);
       editorCell.relayout();
     }
+
+    editorCells.setWidth(width);
+    editorCells.setHeight(ascent + descent);
+
+    if (!isInsideGird) {
+      alignCellsToRightGreedily(editorCells);
+    }
+  }
+
+  private void alignCellsToRightGreedily(EditorCell_Collection editorCells) {
+    List<EditorCell> cellsToMove = new ArrayList<>();
+    boolean smbWantsToRight = false;
+    for (Iterator<EditorCell> rev = editorCells.reverseIterator(); rev.hasNext();) {
+      EditorCell cell = rev.next();
+      CellAlign cellAlign = cell.getStyle().get(StyleAttributes.HORIZONTAL_ALIGN);
+      if (smbWantsToRight && cellAlign != CellAlign.RIGHT) {
+        break;
+      }
+      if (cellAlign != null && cellAlign != CellAlign.RIGHT) {
+        break;
+      }
+      if (cellAlign == CellAlign.RIGHT) {
+        smbWantsToRight = true;
+      }
+      cellsToMove.add(cell);
+    }
+    if (smbWantsToRight) {
+      moveToRight(editorCells, cellsToMove);
+    }
+  }
+
+  private void moveToRight(EditorCell_Collection editorCells, List<EditorCell> cellsToMove) {
+    List<EditorCell> movedCells = new ArrayList<>();
+    boolean anyoneAligned = false;
+    int maxWidth = getMaxWidth(editorCells);
+    int width = 0;
+    for (EditorCell cell : cellsToMove) {
+      CellAlign cellAlign = cell.getStyle().get(StyleAttributes.HORIZONTAL_ALIGN);
+      if (cellAlign != CellAlign.RIGHT) {
+        break;
+      }
+      width += cell.getWidth();
+      if (maxWidth - width > cell.getX()) {
+        anyoneAligned = true;
+        cell.moveTo(maxWidth - width, cell.getY());
+        movedCells.add(cell);
+      } else {
+        break;
+      }
+    }
+    if (anyoneAligned) {
+      for (EditorCell cell : movedCells) {
+        cell.relayout();
+      }
+      editorCells.setWidth(maxWidth - editorCells.getRootParent().getX());
+    }
+  }
+
+  private int getMaxWidth(EditorCell_Collection editorCells) {
+    if (editorCells.getStyle().isSpecified(StyleAttributes.MAX_WIDTH)) {
+      return editorCells.getX() + editorCells.getStyle().get(StyleAttributes.MAX_WIDTH);
+    }
+    return editorCells.getRootParent().getX() + editorCells.getEditorComponent().getEditorComponentSettings().getRightMargin();
   }
 
   @Override

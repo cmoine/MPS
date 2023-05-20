@@ -10,7 +10,6 @@ import jetbrains.mps.internal.collections.runtime.ListSequence;
 import java.util.ArrayList;
 import java.net.URL;
 import java.io.InputStream;
-import jetbrains.mps.util.URLUtil;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
@@ -46,7 +45,7 @@ public final class StockPriceDownloader {
         if (prices == null) {
           prices = ListSequence.fromList(new ArrayList<DailyStockPrice>());
           URL url = new URL("http://ichart.finance.yahoo.com/table.csv?s=" + symbol);
-          InputStream stream = URLUtil.openStream(url);
+          InputStream stream = url.openStream();
           BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
           String line;
           boolean header = true;
@@ -63,10 +62,10 @@ public final class StockPriceDownloader {
                 ListSequence.fromList(prices).addElement(price);
 
               } catch (ParseException e) {
-                // date parsing error 
+                // date parsing error
                 return null;
               } catch (IndexOutOfBoundsException e) {
-                // line parsing error 
+                // line parsing error
                 return null;
               }
             } else {

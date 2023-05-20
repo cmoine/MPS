@@ -59,7 +59,7 @@ public class XmlFastScanner {
     assert Character.isJavaIdentifierStart(chr);
     int start = currOffset;
     shift();
-    while (Character.isJavaIdentifierPart(chr)) {
+    while (chr != 0 && Character.isJavaIdentifierPart(chr)) {
       shift();
     }
     name = new String(data, start, currOffset - start);

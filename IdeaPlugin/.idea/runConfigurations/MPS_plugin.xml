@@ -1,17 +1,8 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="MPS-plugin" type="Application" factoryName="Application">
-    <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
     <option name="MAIN_CLASS_NAME" value="com.intellij.idea.Main" />
-    <option name="VM_PARAMETERS" value="-client -ea -Xmx768m -Xss4024k -XX:PermSize=290m -Dmps.internal=true -Dmps.make.debug=false -Didea.smooth.progress=false -Dapple.laf.useScreenMenuBar=true -Dcom.apple.mrj.application.apple.menu.about.name=&quot;IDEA+MPS&quot; -XX:+HeapDumpOnOutOfMemoryError -Didea.platform.prefix=Idea -Didea.config.path=$IDEA_PLUGINS_SANDBOX_FOLDER$/config -Didea.system.path=$IDEA_PLUGINS_SANDBOX_FOLDER$/system -Didea.plugins.path=$PROJECT_DIR$" />
-    <option name="PROGRAM_PARAMETERS" value="" />
-    <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-    <option name="ALTERNATIVE_JRE_PATH" value="" />
-    <option name="ENABLE_SWING_INSPECTOR" value="false" />
-    <option name="ENV_VARIABLES" />
-    <option name="PASS_PARENT_ENVS" value="true" />
     <module name="mps-startup" />
-    <envs />
+    <option name="VM_PARAMETERS" value="-client -ea -Xmx768m -Xss4024k -Djava.system.class.loader=com.intellij.util.lang.PathClassLoader -Dmps.internal=true -Dmps.make.debug=false -Didea.smooth.progress=false -Dapple.laf.useScreenMenuBar=true -Dcom.apple.mrj.application.apple.menu.about.name=&quot;IDEA+MPS&quot; -XX:+HeapDumpOnOutOfMemoryError -Didea.config.path=$PROJECT_DIR$/sandbox/plugin/config -Didea.system.path=$PROJECT_DIR$/sandbox/plugin/system -Didea.log.path=$PROJECT_DIR$/sandbox/plugin/log -Didea.plugins.path=$PROJECT_DIR$ -Didea.invalidate.caches.invalidates.vfs=true --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.nio=ALL-UNNAMED --add-opens=java.base/java.nio.charset=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED --add-opens=java.base/java.time=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens=java.base/jdk.internal.vm=ALL-UNNAMED --add-opens=java.base/sun.nio.ch=ALL-UNNAMED --add-opens=java.base/sun.nio.fs=ALL-UNNAMED --add-opens=java.base/sun.security.ssl=ALL-UNNAMED --add-opens=java.base/sun.security.util=ALL-UNNAMED --add-opens=java.desktop/com.apple.eawt=ALL-UNNAMED --add-opens=java.desktop/com.apple.eawt.event=ALL-UNNAMED --add-opens=java.desktop/com.apple.laf=ALL-UNNAMED --add-opens=java.desktop/java.awt=ALL-UNNAMED --add-opens=java.desktop/java.awt.dnd.peer=ALL-UNNAMED --add-opens=java.desktop/java.awt.event=ALL-UNNAMED --add-opens=java.desktop/java.awt.image=ALL-UNNAMED --add-opens=java.desktop/java.awt.peer=ALL-UNNAMED --add-opens=java.desktop/javax.swing=ALL-UNNAMED --add-opens=java.desktop/javax.swing.plaf.basic=ALL-UNNAMED --add-opens=java.desktop/javax.swing.text.html=ALL-UNNAMED --add-opens=java.desktop/sun.awt.datatransfer=ALL-UNNAMED --add-opens=java.desktop/sun.awt.image=ALL-UNNAMED --add-opens=java.desktop/sun.awt.windows=ALL-UNNAMED --add-opens=java.desktop/sun.awt=ALL-UNNAMED --add-opens=java.desktop/sun.font=ALL-UNNAMED --add-opens=java.desktop/sun.java2d=ALL-UNNAMED --add-opens=java.desktop/sun.swing=ALL-UNNAMED --add-opens=jdk.attach/sun.tools.attach=ALL-UNNAMED --add-opens=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-opens=jdk.internal.jvmstat/sun.jvmstat.monitor=ALL-UNNAMED --add-opens=jdk.jdi/com.sun.tools.jdi=ALL-UNNAMED --add-opens=java.desktop/sun.awt.X11=ALL-UNNAMED" />
     <RunnerSettings RunnerId="Debug">
       <option name="DEBUG_PORT" value="49879" />
       <option name="TRANSPORT" value="0" />
@@ -23,10 +14,12 @@
     <RunnerSettings RunnerId="Run" />
     <ConfigurationWrapper RunnerId="Debug" />
     <ConfigurationWrapper RunnerId="Run" />
-    <method>
+    <method v="2">
+      <option name="Make" enabled="true" />
       <option name="BuildArtifacts" enabled="true">
         <artifact name="mps-common:jar" />
-        <artifact name="mps-jps-plugin:jar" />
+        <artifact name="mps-core-jps-plugin:jar" />
+        <artifact name="mps-java-jps-plugin:jar" />
       </option>
     </method>
   </configuration>

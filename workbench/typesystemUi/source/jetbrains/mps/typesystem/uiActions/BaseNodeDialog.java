@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package jetbrains.mps.typesystem.uiActions;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.LabeledComponent;
 import com.intellij.openapi.ui.Splitter;
-import jetbrains.mps.nodeEditor.UIEditorComponent;
+import jetbrains.mps.nodeEditor.EditorComponent;
 import jetbrains.mps.nodeEditor.inspector.InspectorEditorComponent;
 import jetbrains.mps.openapi.editor.extensions.EditorExtensionUtil;
 import jetbrains.mps.project.Project;
@@ -26,28 +26,35 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNode;
 
 import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 
 public abstract class BaseNodeDialog extends DialogWrapper {
 
   private final Project myProject;
-  private UIEditorComponent myEditorComponent;
-  private Splitter mySplitter;
+  private final EditorComponent myEditorComponent;
+  private final Splitter mySplitter;
   private boolean myDisposed = false;
+  private final InspectorEditorComponent myInspector;
 
   protected BaseNodeDialog(Project mpsProject, String text) {
     super(true);
     myProject = mpsProject;
     setTitle(text);
 
-    InspectorEditorComponent inspector = new InspectorEditorComponent(myProject.getRepository());
-    EditorExtensionUtil.extendUsingProject(inspector, myProject);
-    myEditorComponent = new UIEditorComponent(myProject.getRepository(), inspector);
+    myInspector = new InspectorEditorComponent(myProject.getRepository());
+    myEditorComponent = new EditorComponent(myProject.getRepository()) {};
+    final KeyStroke escape = KeyStroke.getKeyStroke("ESCAPE");
+    // proudly stolen from UIEditorComponent
+    myInspector.unregisterKeyboardAction(escape);
+    myEditorComponent.unregisterKeyboardAction(escape);
+    myInspector.installRevealNodeListener(myEditorComponent);
+    EditorExtensionUtil.extendUsingProject(myInspector, myProject);
     EditorExtensionUtil.extendUsingProject(myEditorComponent, myProject);
 
     mySplitter = new Splitter(true, 0.6f);
 
     mySplitter.setFirstComponent(LabeledComponent.create(myEditorComponent.getExternalComponent(), "Editor"));
-    mySplitter.setSecondComponent(LabeledComponent.create(inspector.getExternalComponent(), "Inspector"));
+    mySplitter.setSecondComponent(LabeledComponent.create(myInspector.getExternalComponent(), "Inspector"));
   }
 
   protected abstract SNode getNode();
@@ -68,13 +75,10 @@ public abstract class BaseNodeDialog extends DialogWrapper {
 
   @Override
   public void show() {
-    myProject.getModelAccess().runReadAction(new Runnable() {
-      @Override
-      public void run() {
-        myEditorComponent.editNode(getNode());
-        myEditorComponent.selectNode(getNode());
-        myEditorComponent.changeSelectionWRTFocusPolicy(myEditorComponent.getSelectedCell());
-      }
+    myProject.getModelAccess().runReadAction(() -> {
+      myEditorComponent.editNode(getNode());
+      myEditorComponent.selectNode(getNode());
+      myEditorComponent.changeSelectionWRTFocusPolicy(myEditorComponent.getSelectedCell());
     });
     super.show();
   }
@@ -86,6 +90,10 @@ public abstract class BaseNodeDialog extends DialogWrapper {
     }
     myDisposed = true;
     myEditorComponent.dispose();
+    // I considered using Disposable to dispose editor components, but that would change dispose ordering,
+    // this method is invoked at the end of Disposable sequence. If we add Disposable for EC, it would get
+    // disposed *before* call to this method.
+    myInspector.dispose();
     super.dispose();
   }
 

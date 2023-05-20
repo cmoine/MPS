@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="dts588lc950yw9he2fxa65dyzxnkygd" />
+<product version="3" modelHash="-qcilccb9nopou6c5372syb64hbsxgn">
+  <files names="PluginSolution_ApplicationPlugin.java:RefreshTestProject_Action.java:TestBuildProject_ActionGroup.java:TestModuleBuildProjectTemplate.java" />
+</product>
 

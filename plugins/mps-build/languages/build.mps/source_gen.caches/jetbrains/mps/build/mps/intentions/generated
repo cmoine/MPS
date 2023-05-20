@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="bjtb1u0rbqzewyyoiegk1s0eic4y2qx" />
+<product version="3" modelHash="cdzs9tfyx0ef66ivucgp1guc5f7a2xs">
+  <files names="AddCustomLocationDependency_Intention.java:AddDefaultResources_Intention.java:AddPluginDescriptorToLayout_Intention.java:ConvertBrandingVersion_Intention.java:CoverJavaLibLocation_Intention.java:IntentionsDescriptor.java:PickOneOfManyGenerators_Intention.java:ReloadModulesFromDisk_Intention.java:ToggleCompactMpsModule_Intention.java" />
+</product>
 

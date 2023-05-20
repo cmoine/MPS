@@ -11,7 +11,7 @@ import jetbrains.mps.baseLanguage.regexp.runtime.RegexpOperations;
   }
   public static void email(String emailToAnalyse) {
     {
-      Pattern _pattern_0 = REGEXP_efh9at_a0a0a0b;
+      Pattern _pattern_0 = REGEXP;
       Matcher _matcher_0 = _pattern_0.matcher(emailToAnalyse);
       if (_matcher_0.matches()) {
         System.out.println("User name = " + _matcher_0.group(1));
@@ -21,7 +21,7 @@ import jetbrains.mps.baseLanguage.regexp.runtime.RegexpOperations;
   }
   public static void contains(String s) {
     {
-      Pattern _pattern_0 = REGEXP_efh9at_a0a0a0c;
+      Pattern _pattern_0 = REGEXP1;
       Matcher _matcher_0 = _pattern_0.matcher(s);
       if (_matcher_0.find()) {
         System.out.println(_matcher_0.group(1));
@@ -30,7 +30,7 @@ import jetbrains.mps.baseLanguage.regexp.runtime.RegexpOperations;
   }
   public static void forEach(String test) {
     {
-      Pattern _pattern_0 = REGEXP_efh9at_a0a0a0d;
+      Pattern _pattern_0 = REGEXP2;
       Matcher _matcher_0 = _pattern_0.matcher(test);
       while (_matcher_0.find()) {
         System.out.println("number = " + _matcher_0.group(1));
@@ -38,17 +38,17 @@ import jetbrains.mps.baseLanguage.regexp.runtime.RegexpOperations;
     }
   }
   public static String replaceAll(String s) {
-    s = RegexpOperations.replace(s, REGEXP_efh9at_b0a0a4, new _Replacer_efh9at_a0a0a0e(null));
+    s = RegexpOperations.replace(s, REGEXP3, new _Replacer_efh9at_a0a0a0e(null));
     return s;
   }
   public static void split(String s) {
-    for (String st : RegexpOperations.split(s, REGEXP_efh9at_b0a0f)) {
+    for (String st : RegexpOperations.split(s, REGEXP4)) {
       System.out.println("s = " + st);
     }
   }
-  private static Pattern REGEXP_efh9at_a0a0a0b = Pattern.compile("(\\w+)@(\\w+(?:\\.\\w+))", 0);
-  private static Pattern REGEXP_efh9at_a0a0a0c = Pattern.compile("(\\d+)", 0);
-  private static Pattern REGEXP_efh9at_a0a0a0d = Pattern.compile("(\\d+)", 0);
-  private static Pattern REGEXP_efh9at_b0a0a4 = Pattern.compile("\\((.*?)\\)", 0);
-  private static Pattern REGEXP_efh9at_b0a0f = Pattern.compile("\\s+", 0);
+  private static final Pattern REGEXP = Pattern.compile("(\\w+)@(\\w+(?:\\.\\w+))", 0);
+  private static final Pattern REGEXP1 = Pattern.compile("(\\d+)", 0);
+  private static final Pattern REGEXP2 = Pattern.compile("(\\d+)", 0);
+  private static final Pattern REGEXP3 = Pattern.compile("\\((.*?)\\)", 0);
+  private static final Pattern REGEXP4 = Pattern.compile("\\s+", 0);
 }

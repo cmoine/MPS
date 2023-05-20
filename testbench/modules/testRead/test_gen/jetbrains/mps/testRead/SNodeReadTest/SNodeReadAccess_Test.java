@@ -4,16 +4,20 @@ package jetbrains.mps.testRead.SNodeReadTest;
 
 import jetbrains.mps.MPSLaunch;
 import jetbrains.mps.lang.test.runtime.BaseTransformationTest;
-import org.junit.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCacheExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCache;
+import org.junit.jupiter.api.Test;
 import jetbrains.mps.lang.test.runtime.BaseTestBody;
+import jetbrains.mps.lang.test.runtime.TransformationTest;
 import java.util.Set;
 import java.util.List;
 import jetbrains.mps.util.CollectionUtil;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 import jetbrains.mps.smodel.NodeReadAccessCasterInEditor;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import java.util.Map;
 import java.util.HashMap;
 import java.lang.reflect.Method;
@@ -27,369 +31,428 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.beans.XMLDecoder;
 import java.util.HashSet;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 @MPSLaunch
 public class SNodeReadAccess_Test extends BaseTransformationTest {
+  @RegisterExtension
+  private static final TestParametersCacheExtension ourParametersCacheExtension = new TestParametersCacheExtension(new TestParametersCache(SNodeReadAccess_Test.class, "${mps_home}", "r:ee85802d-3f17-4cb5-b08b-75e01c861019(jetbrains.mps.testRead.SNodeReadTest@tests)", false));
+
+  public SNodeReadAccess_Test() {
+    super(ourParametersCacheExtension.getParametersCache());
+  }
+
   @Test
   public void test_checkContract() throws Throwable {
-    initTest("${mps_home}", "r:ee85802d-3f17-4cb5-b08b-75e01c861019(jetbrains.mps.testRead.SNodeReadTest@tests)", false);
-    runTest("jetbrains.mps.testRead.SNodeReadTest.SNodeReadAccess_Test$TestBody", "test_checkContract", true);
+    new TestBody(this).test_checkContract();
   }
   @Test
   public void test_addChild() throws Throwable {
-    initTest("${mps_home}", "r:ee85802d-3f17-4cb5-b08b-75e01c861019(jetbrains.mps.testRead.SNodeReadTest@tests)", false);
-    runTest("jetbrains.mps.testRead.SNodeReadTest.SNodeReadAccess_Test$TestBody", "test_addChild", true);
+    new TestBody(this).test_addChild();
   }
   @Test
   public void test_getChildren() throws Throwable {
-    initTest("${mps_home}", "r:ee85802d-3f17-4cb5-b08b-75e01c861019(jetbrains.mps.testRead.SNodeReadTest@tests)", false);
-    runTest("jetbrains.mps.testRead.SNodeReadTest.SNodeReadAccess_Test$TestBody", "test_getChildren", true);
+    new TestBody(this).test_getChildren();
   }
   @Test
   public void test_getProperty() throws Throwable {
-    initTest("${mps_home}", "r:ee85802d-3f17-4cb5-b08b-75e01c861019(jetbrains.mps.testRead.SNodeReadTest@tests)", false);
-    runTest("jetbrains.mps.testRead.SNodeReadTest.SNodeReadAccess_Test$TestBody", "test_getProperty", true);
+    new TestBody(this).test_getProperty();
   }
   @Test
   public void test_getReference() throws Throwable {
-    initTest("${mps_home}", "r:ee85802d-3f17-4cb5-b08b-75e01c861019(jetbrains.mps.testRead.SNodeReadTest@tests)", false);
-    runTest("jetbrains.mps.testRead.SNodeReadTest.SNodeReadAccess_Test$TestBody", "test_getReference", true);
+    new TestBody(this).test_getReference();
   }
   @Test
   public void test_getReferenceTarget() throws Throwable {
-    initTest("${mps_home}", "r:ee85802d-3f17-4cb5-b08b-75e01c861019(jetbrains.mps.testRead.SNodeReadTest@tests)", false);
-    runTest("jetbrains.mps.testRead.SNodeReadTest.SNodeReadAccess_Test$TestBody", "test_getReferenceTarget", true);
+    new TestBody(this).test_getReferenceTarget();
   }
   @Test
   public void test_getUserObject() throws Throwable {
-    initTest("${mps_home}", "r:ee85802d-3f17-4cb5-b08b-75e01c861019(jetbrains.mps.testRead.SNodeReadTest@tests)", false);
-    runTest("jetbrains.mps.testRead.SNodeReadTest.SNodeReadAccess_Test$TestBody", "test_getUserObject", true);
+    new TestBody(this).test_getUserObject();
   }
   @Test
   public void test_hasProperty() throws Throwable {
-    initTest("${mps_home}", "r:ee85802d-3f17-4cb5-b08b-75e01c861019(jetbrains.mps.testRead.SNodeReadTest@tests)", false);
-    runTest("jetbrains.mps.testRead.SNodeReadTest.SNodeReadAccess_Test$TestBody", "test_hasProperty", true);
+    new TestBody(this).test_hasProperty();
   }
   @Test
   public void test_insertChildBefore() throws Throwable {
-    initTest("${mps_home}", "r:ee85802d-3f17-4cb5-b08b-75e01c861019(jetbrains.mps.testRead.SNodeReadTest@tests)", false);
-    runTest("jetbrains.mps.testRead.SNodeReadTest.SNodeReadAccess_Test$TestBody", "test_insertChildBefore", true);
+    new TestBody(this).test_insertChildBefore();
   }
   @Test
   public void test_putUserObject() throws Throwable {
-    initTest("${mps_home}", "r:ee85802d-3f17-4cb5-b08b-75e01c861019(jetbrains.mps.testRead.SNodeReadTest@tests)", false);
-    runTest("jetbrains.mps.testRead.SNodeReadTest.SNodeReadAccess_Test$TestBody", "test_putUserObject", true);
+    new TestBody(this).test_putUserObject();
   }
   @Test
   public void test_removeChild() throws Throwable {
-    initTest("${mps_home}", "r:ee85802d-3f17-4cb5-b08b-75e01c861019(jetbrains.mps.testRead.SNodeReadTest@tests)", false);
-    runTest("jetbrains.mps.testRead.SNodeReadTest.SNodeReadAccess_Test$TestBody", "test_removeChild", true);
+    new TestBody(this).test_removeChild();
   }
   @Test
   public void test_setProperty() throws Throwable {
-    initTest("${mps_home}", "r:ee85802d-3f17-4cb5-b08b-75e01c861019(jetbrains.mps.testRead.SNodeReadTest@tests)", false);
-    runTest("jetbrains.mps.testRead.SNodeReadTest.SNodeReadAccess_Test$TestBody", "test_setProperty", true);
+    new TestBody(this).test_setProperty();
   }
   @Test
   public void test_setReference() throws Throwable {
-    initTest("${mps_home}", "r:ee85802d-3f17-4cb5-b08b-75e01c861019(jetbrains.mps.testRead.SNodeReadTest@tests)", false);
-    runTest("jetbrains.mps.testRead.SNodeReadTest.SNodeReadAccess_Test$TestBody", "test_setReference", true);
+    new TestBody(this).test_setReference();
   }
   @Test
   public void test_setReferenceTarget() throws Throwable {
-    initTest("${mps_home}", "r:ee85802d-3f17-4cb5-b08b-75e01c861019(jetbrains.mps.testRead.SNodeReadTest@tests)", false);
-    runTest("jetbrains.mps.testRead.SNodeReadTest.SNodeReadAccess_Test$TestBody", "test_setReferenceTarget", true);
+    new TestBody(this).test_setReferenceTarget();
   }
   @Test
   public void test_parameterLessMethods() throws Throwable {
-    initTest("${mps_home}", "r:ee85802d-3f17-4cb5-b08b-75e01c861019(jetbrains.mps.testRead.SNodeReadTest@tests)", false);
-    runTest("jetbrains.mps.testRead.SNodeReadTest.SNodeReadAccess_Test$TestBody", "test_parameterLessMethods", true);
+    new TestBody(this).test_parameterLessMethods();
   }
 
-  @MPSLaunch
-  public static class TestBody extends BaseTestBody {
+  /*package*/ static class TestBody extends BaseTestBody {
+
+    /*package*/ TestBody(TransformationTest owner) {
+      super(owner);
+    }
+
     public void test_checkContract() throws Exception {
-      addNodeById("8150353254540236423");
-      addNodeById("8150353254540236549");
-      addNodeById("4195712261513743410");
-      Set<String> savedMethods = this.getPreviousISNodeMethodsNames();
-      Set<String> currentMethods = this.getISNodeMethodsNames(true);
-      List<String> newContract = CollectionUtil.subtract(currentMethods, savedMethods);
-      List<String> deletedContract = CollectionUtil.subtract(savedMethods, currentMethods);
+      runWithinCommand(() -> {
+        addNodeById("8150353254540236423");
+        addNodeById("8150353254540236549");
+        addNodeById("4195712261513743410");
+      });
+      runWithinCommand(() -> {
+        Set<String> savedMethods = TestBody.this.getPreviousISNodeMethodsNames();
+        Set<String> currentMethods = TestBody.this.getISNodeMethodsNames(true);
+        List<String> newContract = CollectionUtil.subtract(currentMethods, savedMethods);
+        List<String> deletedContract = CollectionUtil.subtract(savedMethods, currentMethods);
 
-      StringBuilder error;
-      error = new StringBuilder("Contract for SNode changed!");
-      error.append(System.getProperty("line.separator"));
-      error.append("New methods in SNode:");
-      error.append(System.getProperty("line.separator"));
-      for (String s : newContract) {
-        error.append(s);
+        StringBuilder error;
+        error = new StringBuilder("Contract for SNode changed!");
         error.append(System.getProperty("line.separator"));
-      }
-      error.append(System.getProperty("line.separator"));
-      error.append("Deleted methods in SNode:");
-      error.append(System.getProperty("line.separator"));
-      for (String s : deletedContract) {
-        error.append(s);
+        error.append("New methods in SNode:");
         error.append(System.getProperty("line.separator"));
-      }
+        for (String s : newContract) {
+          error.append(s);
+          error.append(System.getProperty("line.separator"));
+        }
+        error.append(System.getProperty("line.separator"));
+        error.append("Deleted methods in SNode:");
+        error.append(System.getProperty("line.separator"));
+        for (String s : deletedContract) {
+          error.append(s);
+          error.append(System.getProperty("line.separator"));
+        }
 
-      Assert.assertTrue(error.toString(), newContract.isEmpty() && deletedContract.isEmpty());
+        Assert.assertTrue(error.toString(), newContract.isEmpty() && deletedContract.isEmpty());
+      });
     }
     public void test_addChild() throws Exception {
-      addNodeById("8150353254540236423");
-      addNodeById("8150353254540236549");
-      addNodeById("4195712261513743410");
-      SNode sNode = SNodeOperations.cast(getNodeById("8150353254540236424"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfc092b6b77L, "jetbrains.mps.baseLanguage.structure.BlockStatement"));
-      SNode child = SNodeOperations.cast(getNodeById("8150353254540236551"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc67c7f0L, "jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement"));
-      child.getParent().removeChild(child);
+      runWithinCommand(() -> {
+        addNodeById("8150353254540236423");
+        addNodeById("8150353254540236549");
+        addNodeById("4195712261513743410");
+      });
+      runWithinCommand(() -> {
+        SNode sNode = getNodeById("8150353254540236424");
+        SNode child = getNodeById("8150353254540236551");
+        final SContainmentLink containmentLink = child.getContainmentLink();
+        child.getParent().removeChild(child);
 
-      StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
-      NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
+        StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
+        NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
 
-      sNode.addChild("", child);
+        sNode.addChild(containmentLink, child);
 
-      this.assertMethod("public void jetbrains.mps.smodel.SNode.addChild(java.lang.String,org.jetbrains.mps.openapi.model.SNode)", listener.getResults().o1);
+        TestBody.this.assertMethod("public void jetbrains.mps.smodel.SNode.addChild(org.jetbrains.mps.openapi.language.SContainmentLink,org.jetbrains.mps.openapi.model.SNode)", listener.getResults().o1);
+      });
     }
     public void test_getChildren() throws Exception {
-      addNodeById("8150353254540236423");
-      addNodeById("8150353254540236549");
-      addNodeById("4195712261513743410");
-      SNode sNode = SNodeOperations.cast(getNodeById("8150353254540236424"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfc092b6b77L, "jetbrains.mps.baseLanguage.structure.BlockStatement"));
+      runWithinCommand(() -> {
+        addNodeById("8150353254540236423");
+        addNodeById("8150353254540236549");
+        addNodeById("4195712261513743410");
+      });
+      runWithinCommand(() -> {
+        SNode sNode = getNodeById("8150353254540236424");
 
-      StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
-      NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
+        StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
+        NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
 
 
-      sNode.getChildren(MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfc092b6b77L, 0xfc092b6b78L, "statements"));
+        sNode.getChildren(LINKS.statements$q65M);
 
-      this.assertMethod("public java.util.List<jetbrains.mps.smodel.SNode> jetbrains.mps.smodel.SNode.getChildren(java.lang.String)", listener.getResults().o1);
+        TestBody.this.assertMethod("public java.util.List<jetbrains.mps.smodel.SNode> jetbrains.mps.smodel.SNode.getChildren(java.lang.String)", listener.getResults().o1);
+      });
     }
     public void test_getProperty() throws Exception {
-      addNodeById("8150353254540236423");
-      addNodeById("8150353254540236549");
-      addNodeById("4195712261513743410");
-      SNode sNode = SNodeOperations.cast(getNodeById("4195712261513743413"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b217L, "jetbrains.mps.baseLanguage.structure.IfStatement"));
-      sNode.setProperty(MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b217L, 0x3dffcc410476e370L, "forceOneLine"), "true");
+      runWithinCommand(() -> {
+        addNodeById("8150353254540236423");
+        addNodeById("8150353254540236549");
+        addNodeById("4195712261513743410");
+      });
+      runWithinCommand(() -> {
+        SNode sNode = getNodeById("4195712261513743413");
+        sNode.setProperty(PROPS.forceOneLine$S6eN, "true");
 
-      StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
-      NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
+        StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
+        NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
 
-      sNode.getProperty(MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b217L, 0x3dffcc410476e370L, "forceOneLine"));
+        sNode.getProperty(PROPS.forceOneLine$S6eN);
 
-      this.assertMethod("public final java.lang.String jetbrains.mps.smodel.SNode.getProperty(java.lang.String)", listener.getResults().o1);
+        TestBody.this.assertMethod("public final java.lang.String jetbrains.mps.smodel.SNode.getProperty(java.lang.String)", listener.getResults().o1);
+      });
     }
     public void test_getReference() throws Exception {
-      addNodeById("8150353254540236423");
-      addNodeById("8150353254540236549");
-      addNodeById("4195712261513743410");
-      SNode sNode = SNodeOperations.cast(getNodeById("4265636116363098320"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c77f1e98L, "jetbrains.mps.baseLanguage.structure.VariableReference"));
+      runWithinCommand(() -> {
+        addNodeById("8150353254540236423");
+        addNodeById("8150353254540236549");
+        addNodeById("4195712261513743410");
+      });
+      runWithinCommand(() -> {
+        SNode sNode = getNodeById("4265636116363098320");
 
-      StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
-      NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
+        StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
+        NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
 
-      sNode.getReference(MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c77f1e98L, 0xf8cc6bf960L, "variableDeclaration"));
+        sNode.getReference(LINKS.variableDeclaration$N1XG);
 
-      this.assertMethod("public jetbrains.mps.smodel.SReference jetbrains.mps.smodel.SNode.getReference(java.lang.String)", listener.getResults().o1);
+        TestBody.this.assertMethod("public jetbrains.mps.smodel.SReference jetbrains.mps.smodel.SNode.getReference(java.lang.String)", listener.getResults().o1);
+      });
     }
     public void test_getReferenceTarget() throws Exception {
-      addNodeById("8150353254540236423");
-      addNodeById("8150353254540236549");
-      addNodeById("4195712261513743410");
-      SNode sNode = SNodeOperations.cast(getNodeById("4265636116363098320"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c77f1e98L, "jetbrains.mps.baseLanguage.structure.VariableReference"));
+      runWithinCommand(() -> {
+        addNodeById("8150353254540236423");
+        addNodeById("8150353254540236549");
+        addNodeById("4195712261513743410");
+      });
+      runWithinCommand(() -> {
+        SNode sNode = getNodeById("4265636116363098320");
 
-      StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
-      NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
+        StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
+        NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
 
-      sNode.getReferenceTarget(MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c77f1e98L, 0xf8cc6bf960L, "variableDeclaration"));
+        sNode.getReferenceTarget(LINKS.variableDeclaration$N1XG);
 
-      this.assertMethod("public org.jetbrains.mps.openapi.model.SNode jetbrains.mps.smodel.SNode.getReferenceTarget(java.lang.String)", listener.getResults().o1);
+        TestBody.this.assertMethod("public org.jetbrains.mps.openapi.model.SNode jetbrains.mps.smodel.SNode.getReferenceTarget(java.lang.String)", listener.getResults().o1);
+      });
     }
     public void test_getUserObject() throws Exception {
-      addNodeById("8150353254540236423");
-      addNodeById("8150353254540236549");
-      addNodeById("4195712261513743410");
-      SNode sNode = SNodeOperations.cast(getNodeById("8150353254540236424"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfc092b6b77L, "jetbrains.mps.baseLanguage.structure.BlockStatement"));
+      runWithinCommand(() -> {
+        addNodeById("8150353254540236423");
+        addNodeById("8150353254540236549");
+        addNodeById("4195712261513743410");
+      });
+      runWithinCommand(() -> {
+        SNode sNode = getNodeById("8150353254540236424");
 
-      StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
-      NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
+        StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
+        NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
 
-      sNode.getUserObject(null);
+        sNode.getUserObject(null);
 
-      this.assertMethod("public java.lang.Object jetbrains.mps.smodel.SNode.getUserObject(java.lang.Object)", listener.getResults().o1);
+        TestBody.this.assertMethod("public java.lang.Object jetbrains.mps.smodel.SNode.getUserObject(java.lang.Object)", listener.getResults().o1);
+      });
     }
     public void test_hasProperty() throws Exception {
-      addNodeById("8150353254540236423");
-      addNodeById("8150353254540236549");
-      addNodeById("4195712261513743410");
-      SNode sNode = SNodeOperations.cast(getNodeById("4195712261513743413"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b217L, "jetbrains.mps.baseLanguage.structure.IfStatement"));
+      runWithinCommand(() -> {
+        addNodeById("8150353254540236423");
+        addNodeById("8150353254540236549");
+        addNodeById("4195712261513743410");
+      });
+      runWithinCommand(() -> {
+        SNode sNode = getNodeById("4195712261513743413");
 
-      StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
-      NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
+        StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
+        NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
 
-      sNode.hasProperty(MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b217L, 0x3dffcc410476e370L, "forceOneLine"));
+        sNode.hasProperty(PROPS.forceOneLine$S6eN);
 
-      this.assertMethod("public final boolean jetbrains.mps.smodel.SNode.hasProperty(java.lang.String)", listener.getResults().o1);
+        TestBody.this.assertMethod("public final boolean jetbrains.mps.smodel.SNode.hasProperty(java.lang.String)", listener.getResults().o1);
+      });
     }
     public void test_insertChildBefore() throws Exception {
-      addNodeById("8150353254540236423");
-      addNodeById("8150353254540236549");
-      addNodeById("4195712261513743410");
-      SNode sNode = SNodeOperations.cast(getNodeById("8150353254540236424"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfc092b6b77L, "jetbrains.mps.baseLanguage.structure.BlockStatement"));
-      SNode child = SNodeOperations.cast(getNodeById("8150353254540236551"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc67c7f0L, "jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement"));
-      child.getParent().removeChild(child);
+      runWithinCommand(() -> {
+        addNodeById("8150353254540236423");
+        addNodeById("8150353254540236549");
+        addNodeById("4195712261513743410");
+      });
+      runWithinCommand(() -> {
+        SNode sNode = getNodeById("8150353254540236424");
+        SNode child = getNodeById("8150353254540236551");
+        child.getParent().removeChild(child);
 
-      StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
-      NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
+        StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
+        NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
 
-      sNode.insertChildBefore(MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfc092b6b77L, 0xfc092b6b78L, "statements"), child, null);
+        sNode.insertChildBefore(LINKS.statements$q65M, child, null);
 
-      this.assertMethod("public void jetbrains.mps.smodel.SNode.insertChildBefore(java.lang.String,org.jetbrains.mps.openapi.model.SNode,org.jetbrains.mps.openapi.model.SNode)", listener.getResults().o1);
+        TestBody.this.assertMethod("public void jetbrains.mps.smodel.SNode.insertChildBefore(java.lang.String,org.jetbrains.mps.openapi.model.SNode,org.jetbrains.mps.openapi.model.SNode)", listener.getResults().o1);
+      });
     }
     public void test_putUserObject() throws Exception {
-      addNodeById("8150353254540236423");
-      addNodeById("8150353254540236549");
-      addNodeById("4195712261513743410");
-      SNode sNode = SNodeOperations.cast(getNodeById("8150353254540236424"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfc092b6b77L, "jetbrains.mps.baseLanguage.structure.BlockStatement"));
+      runWithinCommand(() -> {
+        addNodeById("8150353254540236423");
+        addNodeById("8150353254540236549");
+        addNodeById("4195712261513743410");
+      });
+      runWithinCommand(() -> {
+        SNode sNode = getNodeById("8150353254540236424");
 
-      StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
-      NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
+        StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
+        NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
 
-      sNode.putUserObject("test", "test");
+        sNode.putUserObject("test", "test");
 
-      this.assertMethod("public void jetbrains.mps.smodel.SNode.putUserObject(java.lang.Object,java.lang.Object)", listener.getResults().o1);
+        TestBody.this.assertMethod("public void jetbrains.mps.smodel.SNode.putUserObject(java.lang.Object,java.lang.Object)", listener.getResults().o1);
+      });
     }
     public void test_removeChild() throws Exception {
-      addNodeById("8150353254540236423");
-      addNodeById("8150353254540236549");
-      addNodeById("4195712261513743410");
-      SNode sNode = SNodeOperations.cast(getNodeById("8150353254540236424"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfc092b6b77L, "jetbrains.mps.baseLanguage.structure.BlockStatement"));
-      SNode child = SNodeOperations.cast(getNodeById("8150353254540236551"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc67c7f0L, "jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement"));
-      child.getParent().removeChild(child);
-      sNode.addChild(MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfc092b6b77L, 0xfc092b6b78L, "statements"), child);
+      runWithinCommand(() -> {
+        addNodeById("8150353254540236423");
+        addNodeById("8150353254540236549");
+        addNodeById("4195712261513743410");
+      });
+      runWithinCommand(() -> {
+        SNode sNode = getNodeById("8150353254540236424");
+        SNode child = getNodeById("8150353254540236551");
+        child.getParent().removeChild(child);
+        sNode.addChild(LINKS.statements$q65M, child);
 
-      StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
-      NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
+        StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
+        NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
 
-      sNode.removeChild(child);
+        sNode.removeChild(child);
 
-      this.assertMethod("public void jetbrains.mps.smodel.SNode.removeChild(org.jetbrains.mps.openapi.model.SNode)", listener.getResults().o1);
+        TestBody.this.assertMethod("public void jetbrains.mps.smodel.SNode.removeChild(org.jetbrains.mps.openapi.model.SNode)", listener.getResults().o1);
+      });
     }
     public void test_setProperty() throws Exception {
-      addNodeById("8150353254540236423");
-      addNodeById("8150353254540236549");
-      addNodeById("4195712261513743410");
-      SNode sNode = SNodeOperations.cast(getNodeById("4195712261513743413"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b217L, "jetbrains.mps.baseLanguage.structure.IfStatement"));
+      runWithinCommand(() -> {
+        addNodeById("8150353254540236423");
+        addNodeById("8150353254540236549");
+        addNodeById("4195712261513743410");
+      });
+      runWithinCommand(() -> {
+        SNode sNode = getNodeById("4195712261513743413");
 
-      StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
-      NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
+        StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
+        NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
 
-      sNode.setProperty(MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b217L, 0x3dffcc410476e370L, "forceOneLine"), "true");
+        sNode.setProperty(PROPS.forceOneLine$S6eN, "true");
 
-      this.assertMethod("public void jetbrains.mps.smodel.SNode.setProperty(java.lang.String,java.lang.String)", listener.getResults().o1);
+        TestBody.this.assertMethod("public void jetbrains.mps.smodel.SNode.setProperty(java.lang.String,java.lang.String)", listener.getResults().o1);
+      });
     }
     public void test_setReference() throws Exception {
-      addNodeById("8150353254540236423");
-      addNodeById("8150353254540236549");
-      addNodeById("4195712261513743410");
-      SNode sNode = SNodeOperations.cast(getNodeById("4265636116363098320"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c77f1e98L, "jetbrains.mps.baseLanguage.structure.VariableReference"));
+      runWithinCommand(() -> {
+        addNodeById("8150353254540236423");
+        addNodeById("8150353254540236549");
+        addNodeById("4195712261513743410");
+      });
+      runWithinCommand(() -> {
+        SNode sNode = getNodeById("4265636116363098320");
 
-      StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
-      NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
+        StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
+        NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
 
-      sNode.setReference(MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c77f1e98L, 0xf8cc6bf960L, "variableDeclaration"), SNodeOperations.getReference(SNodeOperations.cast(getNodeById("4265636116363098320"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c77f1e98L, "jetbrains.mps.baseLanguage.structure.VariableReference")), MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c77f1e98L, 0xf8cc6bf960L, "variableDeclaration")));
+        sNode.setReference(LINKS.variableDeclaration$N1XG, SNodeOperations.getReference(getNodeById("4265636116363098320"), LINKS.variableDeclaration$N1XG));
 
-      this.assertMethod("public void jetbrains.mps.smodel.SNode.setReference(java.lang.String,org.jetbrains.mps.openapi.model.SReference)", listener.getResults().o1);
+        TestBody.this.assertMethod("public void jetbrains.mps.smodel.SNode.setReference(java.lang.String,org.jetbrains.mps.openapi.model.SReference)", listener.getResults().o1);
+      });
     }
     public void test_setReferenceTarget() throws Exception {
-      addNodeById("8150353254540236423");
-      addNodeById("8150353254540236549");
-      addNodeById("4195712261513743410");
-      SNode sNode = SNodeOperations.cast(getNodeById("4265636116363098320"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c77f1e98L, "jetbrains.mps.baseLanguage.structure.VariableReference"));
+      runWithinCommand(() -> {
+        addNodeById("8150353254540236423");
+        addNodeById("8150353254540236549");
+        addNodeById("4195712261513743410");
+      });
+      runWithinCommand(() -> {
+        SNode sNode = getNodeById("4265636116363098320");
 
-      StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
-      NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
+        StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
+        NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
 
-      sNode.setReferenceTarget(MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c77f1e98L, 0xf8cc6bf960L, "variableDeclaration"), SNodeOperations.cast(getNodeById("4195712261513781527"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc67c7efL, "jetbrains.mps.baseLanguage.structure.LocalVariableDeclaration")));
+        sNode.setReferenceTarget(LINKS.variableDeclaration$N1XG, getNodeById("4195712261513781527"));
 
-      this.assertMethod("public void jetbrains.mps.smodel.SNode.setReferenceTarget(java.lang.String,org.jetbrains.mps.openapi.model.SNode)", listener.getResults().o1);
+        TestBody.this.assertMethod("public void jetbrains.mps.smodel.SNode.setReferenceTarget(java.lang.String,org.jetbrains.mps.openapi.model.SNode)", listener.getResults().o1);
+      });
     }
     public void test_parameterLessMethods() throws Exception {
-      addNodeById("8150353254540236423");
-      addNodeById("8150353254540236549");
-      addNodeById("4195712261513743410");
-      SNode sNode = SNodeOperations.cast(getNodeById("8150353254540236424"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfc092b6b77L, "jetbrains.mps.baseLanguage.structure.BlockStatement"));
+      runWithinCommand(() -> {
+        addNodeById("8150353254540236423");
+        addNodeById("8150353254540236549");
+        addNodeById("4195712261513743410");
+      });
+      runWithinCommand(() -> {
+        SNode sNode = getNodeById("8150353254540236424");
 
-      StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
-      NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
+        StatCountNodeReadAccessInEditorListener listener = new StatCountNodeReadAccessInEditorListener(sNode);
+        NodeReadAccessCasterInEditor.setCellBuildNodeReadAccessListener(listener);
 
-      Map<String, Integer> prevCheck = this.getReadAccessMap();
-      Map<String, Integer> currentCheckChanged = new HashMap<String, Integer>();
-      Map<String, Integer> currentCheckNew = new HashMap<String, Integer>();
-      Map<String, Exception> currentException = new HashMap<String, Exception>();
-      Set<String> contractMethods = this.getISNodeMethodsNames(false);
+        Map<String, Integer> prevCheck = TestBody.this.getReadAccessMap();
+        Map<String, Integer> currentCheckChanged = new HashMap<String, Integer>();
+        Map<String, Integer> currentCheckNew = new HashMap<String, Integer>();
+        Map<String, Exception> currentException = new HashMap<String, Exception>();
+        Set<String> contractMethods = TestBody.this.getISNodeMethodsNames(false);
 
-      List<Method> methods = new ArrayList<Method>();
-      methods.addAll(Arrays.asList(jetbrains.mps.smodel.SNode.class.getDeclaredMethods()));
-      // 'delete' must be last checked method 
-      for (int i = 0; i < methods.size(); i++) {
-        if (methods.get(i).getName().equals("delete") && i != (methods.size() - 1)) {
-          Collections.swap(methods, i, (methods.size() - 1));
-          break;
+        List<Method> methods = new ArrayList<Method>();
+        methods.addAll(Arrays.asList(jetbrains.mps.smodel.SNode.class.getDeclaredMethods()));
+        // 'delete' must be last checked method
+        for (int i = 0; i < methods.size(); i++) {
+          if (methods.get(i).getName().equals("delete") && i != (methods.size() - 1)) {
+            Collections.swap(methods, i, (methods.size() - 1));
+            break;
+          }
         }
-      }
 
-      for (Method method : methods) {
-        if ((method.getModifiers() & (Modifier.PUBLIC | Modifier.PROTECTED)) > 0 && method.getParameterAnnotations().length == 0 && contractMethods.contains(method.getName())) {
-          try {
-            method.invoke(sNode);
-          } catch (Exception e) {
-            currentException.put(method.getName(), e);
-          } finally {
-            Pair<Integer, List<String>> pair = listener.getResults();
-            listener.resetResults();
+        for (Method method : methods) {
+          if ((method.getModifiers() & (Modifier.PUBLIC | Modifier.PROTECTED)) > 0 && method.getParameterAnnotations().length == 0 && contractMethods.contains(method.getName())) {
+            try {
+              method.invoke(sNode);
+            } catch (Exception e) {
+              currentException.put(method.getName(), e);
+            } finally {
+              Pair<Integer, List<String>> pair = listener.getResults();
+              listener.resetResults();
 
-            if (prevCheck.containsKey(method.toGenericString())) {
-              if (!(this.isReadsCountUnChanged(prevCheck.get(method.toGenericString()).intValue(), pair.o1.intValue()))) {
-                currentCheckChanged.put(method.toGenericString(), pair.o1);
+              if (prevCheck.containsKey(method.toGenericString())) {
+                if (!(TestBody.this.isReadsCountUnChanged(prevCheck.get(method.toGenericString()).intValue(), pair.o1.intValue()))) {
+                  currentCheckChanged.put(method.toGenericString(), pair.o1);
+                }
+              } else {
+                currentCheckNew.put(method.toGenericString(), pair.o1);
               }
-            } else {
-              currentCheckNew.put(method.toGenericString(), pair.o1);
             }
           }
         }
-      }
 
-      StringBuilder error = new StringBuilder("Some changes occured in read access in SNode after last check:");
-      error.append(System.getProperty("line.separator"));
-      error.append("Methods with changed number of read access:");
-      error.append(System.getProperty("line.separator"));
-      for (String s : currentCheckChanged.keySet()) {
-        error.append("In method " + s + " current count " + currentCheckChanged.get(s) + ", prev count " + prevCheck.get(s));
+        StringBuilder error = new StringBuilder("Some changes occured in read access in SNode after last check:");
         error.append(System.getProperty("line.separator"));
-      }
-      error.append(System.getProperty("line.separator"));
-      error.append("New methods with read access:");
-      error.append(System.getProperty("line.separator"));
-      for (String s : currentCheckNew.keySet()) {
-        error.append("In method " + s + " read count " + currentCheckNew.get(s));
+        error.append("Methods with changed number of read access:");
         error.append(System.getProperty("line.separator"));
-      }
-      error.append(System.getProperty("line.separator"));
-      error.append("Methods ended with exception:");
-      error.append(System.getProperty("line.separator"));
-      for (String s : currentException.keySet()) {
-        Exception ce = currentException.get(s);
-        error.append("There was an exception in method " + s + "\n");
-        for (StackTraceElement elem : ce.getStackTrace()) {
-          error.append(elem + "\n");
+        for (String s : currentCheckChanged.keySet()) {
+          error.append("In method " + s + " current count " + currentCheckChanged.get(s) + ", prev count " + prevCheck.get(s));
+          error.append(System.getProperty("line.separator"));
         }
         error.append(System.getProperty("line.separator"));
-      }
+        error.append("New methods with read access:");
+        error.append(System.getProperty("line.separator"));
+        for (String s : currentCheckNew.keySet()) {
+          error.append("In method " + s + " read count " + currentCheckNew.get(s));
+          error.append(System.getProperty("line.separator"));
+        }
+        error.append(System.getProperty("line.separator"));
+        error.append("Methods ended with exception:");
+        error.append(System.getProperty("line.separator"));
+        for (String s : currentException.keySet()) {
+          Exception ce = currentException.get(s);
+          error.append("There was an exception in method " + s + "\n");
+          for (StackTraceElement elem : ce.getStackTrace()) {
+            error.append(elem + "\n");
+          }
+          error.append(System.getProperty("line.separator"));
+        }
 
-      Assert.assertTrue(error.toString(), currentCheckChanged.isEmpty() && currentCheckNew.isEmpty() && currentException.isEmpty());
+        Assert.assertTrue(error.toString(), currentCheckChanged.isEmpty() && currentCheckNew.isEmpty() && currentException.isEmpty());
+      });
     }
-
 
     public Map<String, Integer> getReadAccessMap() throws FileNotFoundException, IOException {
       InputStream stream = ((Object) this).getClass().getResourceAsStream("/SNodeMethodReads.xml");
@@ -420,8 +483,17 @@ public class SNodeReadAccess_Test extends BaseTransformationTest {
       Assert.assertTrue("In method " + fullyQualifiedMethodName + " current count " + reads + ", prev count " + map.get(fullyQualifiedMethodName).intValue(), this.isReadsCountUnChanged(map.get(fullyQualifiedMethodName).intValue(), reads));
     }
     public boolean isReadsCountUnChanged(int previous, int current) {
-      // just check that reads doesn't appear or disappear quietly 
+      // just check that reads doesn't appear or disappear quietly
       return (previous == 0 ? current == 0 : current > 0);
     }
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink statements$q65M = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfc092b6b77L, 0xfc092b6b78L, "statements");
+    /*package*/ static final SReferenceLink variableDeclaration$N1XG = MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c77f1e98L, 0xf8cc6bf960L, "variableDeclaration");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty forceOneLine$S6eN = MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b217L, 0x3dffcc410476e370L, "forceOneLine");
   }
 }

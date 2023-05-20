@@ -31,7 +31,7 @@ public class StyleRegistry {
     return ourInstance;
   }
 
-  private final Map<String, Style> myStyleMap = new HashMap<String, Style>();
+  private final Map<String, Style> myStyleMap = new HashMap<>();
 
   public Color getEditorBackground() {
     return Color.white;

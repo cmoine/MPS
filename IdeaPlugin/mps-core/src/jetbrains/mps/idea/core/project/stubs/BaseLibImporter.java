@@ -20,18 +20,18 @@ import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.roots.libraries.LibraryTable;
 import com.intellij.openapi.roots.libraries.LibraryTable.Listener;
 import jetbrains.mps.extapi.module.SRepositoryExt;
+import jetbrains.mps.ide.MPSCoreComponents;
+import jetbrains.mps.vfs.VFSManager;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class BaseLibImporter extends AbstractJavaStubSolutionManager {
   private final Listener myListener = new MyListener();
 
   @Override
   protected void init() {
-    getRepository().getModelAccess().runWriteAction(new Runnable() {
-      @Override
-      public void run() {
-        for (Library l : getLibTable().getLibraries()) {
-          addModuleForLibrary(l);
-        }
+    getRepository().getModelAccess().runWriteAction(() -> {
+      for (Library l : getLibTable().getLibraries()) {
+        addModuleForLibrary(l);
       }
     });
     getLibTable().addListener(myListener);
@@ -48,7 +48,7 @@ public abstract class BaseLibImporter extends AbstractJavaStubSolutionManager {
   protected abstract LibraryTable getLibTable();
 
   protected void addModuleForLibrary(Library l) {
-    addSolution(l, getRepository());
+    addSolution(l, getRepository(), MPSCoreComponents.getInstance().getPlatform().findComponent(VFSManager.class));
   }
 
   protected void removeModuleForLibrary(Library l) {
@@ -56,27 +56,15 @@ public abstract class BaseLibImporter extends AbstractJavaStubSolutionManager {
   }
 
   private class MyListener implements Listener {
-    public void afterLibraryAdded(final Library newLibrary) {
-      getRepository().getModelAccess().runWriteAction(new Runnable() {
-        public void run() {
-          addModuleForLibrary(newLibrary);
-        }
-      });
+    public void afterLibraryAdded(@NotNull final Library newLibrary) {
+      getRepository().getModelAccess().runWriteAction(() -> addModuleForLibrary(newLibrary));
     }
 
-    public void afterLibraryRenamed(Library library) {
-      //todo update models
+    public void beforeLibraryRemoved(@NotNull final Library library) {
+      getRepository().getModelAccess().runWriteAction(() -> removeModuleForLibrary(library));
     }
 
-    public void beforeLibraryRemoved(final Library library) {
-      getRepository().getModelAccess().runWriteAction(new Runnable() {
-        public void run() {
-          removeModuleForLibrary(library);
-        }
-      });
-    }
-
-    public void afterLibraryRemoved(Library library) {
+    public void afterLibraryRemoved(@NotNull Library library) {
 
     }
   }

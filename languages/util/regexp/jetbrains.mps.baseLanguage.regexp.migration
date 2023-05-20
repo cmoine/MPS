@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model ref="r:84f199cf-cf8f-4c2a-8fc2-b9f5b1b52128(migrationData)">
+  <persistence version="9" />
+  <languages />
+  <imports>
+    <import index="tpfo" ref="r:00000000-0000-4000-0000-011c89590518(jetbrains.mps.baseLanguage.regexp.structure)" implicit="true" />
+    <import index="tpfu" ref="r:00000000-0000-4000-0000-011c89590516(jetbrains.mps.baseLanguage.regexp.editor)" implicit="true" />
+  </imports>
+  <registry>
+    <language id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor">
+      <concept id="3017733173184487099" name="jetbrains.mps.lang.editor.structure.SmartRefMigrationDataEntity" flags="ng" index="ZsZFI">
+        <reference id="3017733173184487105" name="generatedMenu" index="ZsZEk" />
+        <reference id="3017733173184487102" name="conceptNode" index="ZsZFF" />
+      </concept>
+      <concept id="3017733173184487098" name="jetbrains.mps.lang.editor.structure.SmartRefMigrationData" flags="ng" index="ZsZFJ">
+        <child id="3017733173184487121" name="entities" index="ZsZE4" />
+      </concept>
+    </language>
+    <language id="9882f4ad-1955-46fe-8269-94189e5dbbf2" name="jetbrains.mps.lang.migration.util">
+      <concept id="7417095922908669705" name="jetbrains.mps.lang.migration.util.structure.StepData" flags="ng" index="2z5JpS">
+        <property id="1973338949477451252" name="script" index="3qqn2_" />
+        <child id="7417095922908725798" name="data" index="2z5Xdn" />
+      </concept>
+    </language>
+  </registry>
+  <node concept="2z5JpS" id="47y0FrqhJwy">
+    <property role="3qqn2_" value="18bc6592-03a6-4e29-a83a-7ff23bde13ba(jetbrains.mps.lang.editor)/8" />
+    <node concept="ZsZFJ" id="47y0FrqhJvL" role="2z5Xdn">
+      <node concept="ZsZFI" id="47y0FrqhJw9" role="ZsZE4">
+        <ref role="ZsZFF" to="tpfo:3iI_KKpaF_e" resolve="MatchVariableReferenceReplacement" />
+        <ref role="ZsZEk" to="tpfu:47y0FrqhJw3" resolve="MatchVariableReferenceReplacement_SmartReference" />
+      </node>
+      <node concept="ZsZFI" id="47y0FrqhJwx" role="ZsZE4">
+        <ref role="ZsZFF" to="tpfo:h6e2xLl" resolve="MatchVariableReferenceRegexp" />
+        <ref role="ZsZEk" to="tpfu:47y0FrqhJwr" resolve="MatchVariableReferenceRegexp_SmartReference" />
+      </node>
+    </node>
+  </node>
+</model>
+

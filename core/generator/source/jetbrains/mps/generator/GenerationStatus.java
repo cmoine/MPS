@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,54 +16,59 @@
 package jetbrains.mps.generator;
 
 import jetbrains.mps.generator.impl.dependencies.GenerationDependencies;
-import jetbrains.mps.generator.impl.dependencies.GenerationRootDependencies;
 import jetbrains.mps.generator.impl.plan.CrossModelEnvironment;
-import jetbrains.mps.make.java.ModelDependencies;
-import jetbrains.mps.textgen.trace.DebugInfo;
-import jetbrains.mps.util.Status;
-import jetbrains.mps.util.annotation.ToRemove;
+import jetbrains.mps.util.IStatus;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.language.SLanguage;
 import org.jetbrains.mps.openapi.model.SModel;
+import org.jetbrains.mps.openapi.module.SRepository;
 
+import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 /**
- * Igor Alshannikov
+ * @author Artem Tikhomirov
+ * @author Igor Alshannikov
  * Oct 24, 2005
  */
-public class GenerationStatus extends Status {
+public final class GenerationStatus implements IStatus {
+  private final Code myStatusCode;
   private final SModel myOutputModel;
+  private final Collection<SModel> myOutputModels;
   private final SModel myInputModel;
-  private final boolean myCanceled;
-  private final boolean myWarnings;
+  // we initialize it the moment GS is created assuming we can read the input model at this time, so I don't bother with model RA.
+  private final SRepository myInputModelRepo;
   private GenerationDependencies myDependencies;
-  private ModelExports myExports;
 
-  private SModel myOriginalInputModel;
-
-  public GenerationStatus(SModel inputModel, SModel outputModel, GenerationDependencies dependencies, boolean errors, boolean warnings, boolean canceled) {
-    super(errors ? Code.ERROR : Code.OK, null);
-    myCanceled = canceled;
+  // XXX would be great to hide this one behind a factory method, boolean errors is gross.
+  public GenerationStatus(@NotNull SModel inputModel, SModel outputModel, GenerationDependencies dependencies, boolean errors) {
+    myStatusCode = errors ? Code.ERROR : Code.OK;
     myOutputModel = outputModel;
+    myOutputModels = outputModel == null ? Collections.emptyList() : Collections.singleton(outputModel);
     myInputModel = inputModel;
-    myWarnings = warnings;
     myDependencies = dependencies;
+    myInputModelRepo = inputModel.getRepository();
   }
 
-  @Override
-  public boolean isOk() {
-    return !myCanceled && super.isOk();
+  public GenerationStatus(@NotNull SModel inputModel, @NotNull Collection<SModel> outputModels, GenerationDependencies dependencies, boolean errors) {
+    myStatusCode = errors ? Code.ERROR : Code.OK;
+    myOutputModel = outputModels.isEmpty() ? null : outputModels.iterator().next();
+    myOutputModels = outputModels;
+    myInputModel = inputModel;
+    myDependencies = dependencies;
+    myInputModelRepo = inputModel.getRepository();
   }
 
-  public boolean isCanceled() {
-    return myCanceled;
+
+    @Override
+  public Code getCode() {
+    return myStatusCode;
   }
 
-  public boolean hasWarnings() {
-    return myWarnings;
-  }
-
+  /**
+   * @return primary output model, or {@code null} in case of transformation failure; to get all forked output models, use {@link #getOutputModels()} instead
+   */
   @Nullable
   public SModel getOutputModel() {
     return myOutputModel;
@@ -73,45 +78,38 @@ public class GenerationStatus extends Status {
     return myInputModel;
   }
 
-  /**
-   * debug info is not part of generation/transformation process, rather that of textgen, thus has nothing to do with GenerationStatus
-   * @return always <code>null</code>
-   */
-  @Deprecated
-  @ToRemove(version = 3.4)
-  public DebugInfo getDebugInfo() {
-    return null;
-  }
-
-  /**
-   * BL dependencies are not part of generation/transformation process, rather that of textgen, thus has nothing to do with GenerationStatus
-   * @return always <code>null</code>
-   */
-  @Deprecated
-  @ToRemove(version = 3.4)
-  public ModelDependencies getBLDependencies() {
-    return null;
-  }
-
   public GenerationDependencies getDependencies() {
     return myDependencies;
   }
 
   /**
-   * @deprecated use {@link GenerationDependencies#getUnchangedDependencies() getDependencies().getUnchangedDependencies()} instead
+   * Repository one need to guard access to when working with {@linkplain #getOutputModel() output model}.
+   *
+   * FIXME Perhaps, repository should be part of GResource, instead. Design of the whole thing is not clear to me yet.
+   *       With transient models/modules living in a distinct repository, we need to lock proper one when accessing transient models,
+   *       and this method is to give access to the one.
+   *
+   * @return generally, shall not return {@code null}, uses input model's repository as fallback. However, if both input
+   * and output model are not from a repository, you can face null.
    */
-  @Deprecated
-  @ToRemove(version = 3.4)
-  public List<GenerationRootDependencies> getUnchangedDependencies() {
-    return myDependencies != null ? myDependencies.getUnchangedDependencies() : Collections.<GenerationRootDependencies>emptyList();
+  public SRepository getOutputRepository() {
+    SRepository rv = null;
+    if (myOutputModel != null) {
+      // XXX here, I rely on the questionable assumption one can get repository of a model without proper read access
+      //     Note, as the same is not true for SModule#getRepository, I expect this assumption to break any time soon.
+      //     Need to settle the contract down, whether #getRepository is allowed w/o proper RA or not.
+      rv = myOutputModel.getRepository();
+    }
+    return rv == null ? myInputModelRepo : rv;
   }
 
-  public SModel getOriginalInputModel() {
-    return myOriginalInputModel;
-  }
-
-  public void setOriginalInputModel(org.jetbrains.mps.openapi.model.SModel originalInputModel) {
-    myOriginalInputModel = originalInputModel;
+  /**
+   * @return empty collection for failed transformation; singleton collection unless there were forks in generation plan.
+   *         Output model of a primary 'trunk' always comes first.
+   */
+  @NotNull
+  public Collection<SModel> getOutputModels() {
+    return myOutputModels;
   }
 
   /**
@@ -119,26 +117,9 @@ public class GenerationStatus extends Status {
    * GenerationStatus serves as a container for data associated with model generation step.
    * However, some of these associates has nothing to do with generation (e.g. ModelDependencies are purely textgen aspect),
    * and some are just exposed here to be accessed, and has nothing to do with generation status.
-   * ModelExports object keeps cross-model generation aspect and as such qualifies to be exposed from GS, however, with
+   * CrossModelEnvironment object keeps cross-model generation aspect and as such qualifies to be exposed from GS, however, with
    * better structure of CacheGenerators we unlikely to need it here (this might be generic 'AuxGeneratedDataSupplier' which would
    * tell desired location (sourcegen or caches) and accept StreamHandler to save whatever it needs to save (either exports model or 'trace.info' xml)
-   */
-  @Nullable
-  public ModelExports getModelExports() {
-    return myExports;
-  }
-
-  /**
-   * PROVISIONAL CODE. DO NOT USE!
-   */
-  public void setModelExports(ModelExports exports) {
-    myExports = exports;
-  }
-
-
-  /**
-   * PROVISIONAL CODE. DO NOT USE!
-   * See {@link #getModelExports()} for replacement ideas.
    */
   public void setCrossModelEnvironment(CrossModelEnvironment cme) {
     myCrossModelEnvironment = cme;
@@ -149,12 +130,18 @@ public class GenerationStatus extends Status {
   }
   private CrossModelEnvironment myCrossModelEnvironment;
 
+  // same considerations as for #setCrossModelEnvironment() apply, just an experimental mechanism
+  // to pass information collected during m2m outside
+  public void setEmployedLanguages(Collection<SLanguage> languages) {
+    myEmployedLanguages = languages;
+  }
+  public Collection<SLanguage> getEmployedLanguages() {
+    return myEmployedLanguages;
+  }
+  private Collection<SLanguage> myEmployedLanguages;
 
 
-
-  public static class ERROR extends GenerationStatus {
-    public ERROR(SModel inputModel) {
-      super(inputModel, null, null, true, false, false);
-    }
+  public static GenerationStatus failure(@NotNull SModel inputModel) {
+    return new GenerationStatus(inputModel, (SModel) null, null, true);
   }
 }

@@ -7,28 +7,65 @@ import jetbrains.mps.lang.typesystem.runtime.NonTypesystemRule_Runtime;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.typesystem.inference.TypeCheckingContext;
 import jetbrains.mps.lang.typesystem.runtime.IsApplicableStatus;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.errors.messageTargets.MessageTarget;
 import jetbrains.mps.errors.messageTargets.NodeMessageTarget;
 import jetbrains.mps.errors.IErrorReporter;
+import jetbrains.mps.errors.BaseQuickFixProvider;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import org.jetbrains.mps.openapi.language.SConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 
 public class check_AbstractClassifierReference_NonTypesystemRule extends AbstractNonTypesystemRule_Runtime implements NonTypesystemRule_Runtime {
   public check_AbstractClassifierReference_NonTypesystemRule() {
   }
   public void applyRule(final SNode abstractClassifierReference, final TypeCheckingContext typeCheckingContext, IsApplicableStatus status) {
-    {
-      MessageTarget errorTarget = new NodeMessageTarget();
-      IErrorReporter _reporter_2309309498 = typeCheckingContext.reportTypeError(abstractClassifierReference, "Expression expected", "r:00000000-0000-4000-0000-011c895902c5(jetbrains.mps.baseLanguage.typesystem)", "3256208460069612180", null, errorTarget);
+    SNode p = SNodeOperations.getParent(abstractClassifierReference);
+    if (SNodeOperations.isInstanceOf(p, CONCEPTS.DotExpression$yW) && SNodeOperations.isInstanceOf(SLinkOperations.getTarget(SNodeOperations.as(p, CONCEPTS.DotExpression$yW), LINKS.operation$gs9E), CONCEPTS.StaticMethodCallOperation$Uo) && (SNodeOperations.as(SLinkOperations.getTarget(SNodeOperations.as(p, CONCEPTS.DotExpression$yW), LINKS.operation$gs9E), CONCEPTS.StaticMethodCallOperation$Uo) != null)) {
+      {
+        final MessageTarget errorTarget = new NodeMessageTarget();
+        IErrorReporter _reporter_2309309498 = typeCheckingContext.reportTypeError(abstractClassifierReference, "Expression expected", "r:00000000-0000-4000-0000-011c895902c5(jetbrains.mps.baseLanguage.typesystem)", "5763944538904758216", null, errorTarget);
+        {
+          BaseQuickFixProvider intentionProvider = new BaseQuickFixProvider("jetbrains.mps.baseLanguage.typesystem.TurnAbstractClassifierOperandOfDotExprToStaticMethodCall_QuickFix", "5763944538904758880", true);
+          _reporter_2309309498.addIntentionProvider(intentionProvider);
+        }
+      }
+    } else if (SNodeOperations.isInstanceOf(p, CONCEPTS.DotExpression$yW) && SNodeOperations.isInstanceOf(SLinkOperations.getTarget(SNodeOperations.as(p, CONCEPTS.DotExpression$yW), LINKS.operation$gs9E), CONCEPTS.StaticFieldReferenceOperation$nE) && (SNodeOperations.as(SLinkOperations.getTarget(SNodeOperations.as(p, CONCEPTS.DotExpression$yW), LINKS.operation$gs9E), CONCEPTS.StaticFieldReferenceOperation$nE) != null)) {
+      {
+        final MessageTarget errorTarget = new NodeMessageTarget();
+        IErrorReporter _reporter_2309309498 = typeCheckingContext.reportTypeError(abstractClassifierReference, "Expression expected", "r:00000000-0000-4000-0000-011c895902c5(jetbrains.mps.baseLanguage.typesystem)", "8984386669011525988", null, errorTarget);
+        {
+          BaseQuickFixProvider intentionProvider = new BaseQuickFixProvider("jetbrains.mps.baseLanguage.typesystem.TurnAbstractClassifierOperandOfDotExprToStaticFieldReference_QuickFix", "8984386669011636252", true);
+          _reporter_2309309498.addIntentionProvider(intentionProvider);
+        }
+      }
+    } else {
+      {
+        final MessageTarget errorTarget = new NodeMessageTarget();
+        IErrorReporter _reporter_2309309498 = typeCheckingContext.reportTypeError(abstractClassifierReference, "Expression expected", "r:00000000-0000-4000-0000-011c895902c5(jetbrains.mps.baseLanguage.typesystem)", "3256208460069612180", null, errorTarget);
+      }
     }
   }
   public SAbstractConcept getApplicableConcept() {
-    return MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x6c6c91efa5ec8cd7L, "jetbrains.mps.baseLanguage.structure.AbstractClassifierReference");
+    return CONCEPTS.AbstractClassifierReference$Wh;
   }
   public IsApplicableStatus isApplicableAndPattern(SNode argument) {
     return new IsApplicableStatus(argument.getConcept().isSubConceptOf(getApplicableConcept()), null);
   }
   public boolean overrides() {
     return false;
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept DotExpression$yW = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x116b46a08c4L, "jetbrains.mps.baseLanguage.structure.DotExpression");
+    /*package*/ static final SConcept StaticMethodCallOperation$Uo = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x4ffda504fa5847fcL, "jetbrains.mps.baseLanguage.structure.StaticMethodCallOperation");
+    /*package*/ static final SConcept StaticFieldReferenceOperation$nE = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x35b563950dfe3377L, "jetbrains.mps.baseLanguage.structure.StaticFieldReferenceOperation");
+    /*package*/ static final SConcept AbstractClassifierReference$Wh = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x6c6c91efa5ec8cd7L, "jetbrains.mps.baseLanguage.structure.AbstractClassifierReference");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink operation$gs9E = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x116b46a08c4L, 0x116b46b36c4L, "operation");
   }
 }

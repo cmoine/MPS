@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-9aw1f1mn27cjktyhgimypdkm3vwo2i9" />
+<product version="3" modelHash="-c5ffu1c3131n1l87y9ciozphz5h6bvp">
+  <files names="Rectangle.java:test.java" />
+</product>
 

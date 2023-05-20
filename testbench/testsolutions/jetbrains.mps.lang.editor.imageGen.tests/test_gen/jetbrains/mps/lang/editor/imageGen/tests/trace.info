@@ -6,7 +6,9 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1164879751025:jetbrains.mps.baseLanguage.structure.TryCatchStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/5351203823916750322:jetbrains.mps.baseLanguage.structure.TryUniversalStatement" />
   <root nodeRef="r:57812925-2ef0-43c6-8314-0222b2c13acf(jetbrains.mps.lang.editor.imageGen.tests@tests)/2442780630506708579">
     <file name="Cls.java">
       <unit id="2442780630506708579" at="6,0,8,0" name="jetbrains.mps.lang.editor.imageGen.tests.Cls" />
@@ -14,52 +16,65 @@
   </root>
   <root nodeRef="r:57812925-2ef0-43c6-8314-0222b2c13acf(jetbrains.mps.lang.editor.imageGen.tests@tests)/5244026788026549053">
     <file name="ImageExport_Test.java">
-      <node id="5244026788026549053" at="16,61,17,125" concept="1" />
-      <node id="5244026788026549053" at="17,125,18,118" concept="1" />
-      <node id="5244026788026549053" at="21,64,22,125" concept="1" />
-      <node id="5244026788026549053" at="22,125,23,121" concept="1" />
-      <node id="5244026788026559032" at="28,63,29,77" concept="4" />
-      <node id="5244026788026564435" at="30,11,31,53" concept="4" />
-      <node id="5244026788026564797" at="31,53,32,36" concept="1" />
-      <node id="5244026788026565379" at="33,31,34,56" concept="1" />
-      <node id="3856853424911892008" at="37,66,38,84" concept="4" />
-      <node id="3856853424911892016" at="39,11,40,53" concept="4" />
-      <node id="3856853424911892022" at="40,53,41,36" concept="1" />
-      <node id="3856853424911892026" at="42,31,43,56" concept="1" />
-      <node id="5244026788026549053" at="15,0,20,0" concept="3" trace="test_manuallyExportedImage#()V" />
-      <node id="5244026788026549053" at="20,0,25,0" concept="3" trace="test_imageExportedByGenerator#()V" />
-      <node id="5244026788026564922" at="29,77,35,7" concept="6" />
-      <node id="3856853424911892014" at="38,84,44,7" concept="6" />
-      <node id="5244026788026549149" at="28,0,37,0" concept="3" trace="test_manuallyExportedImage#()V" />
-      <node id="3856853424911892005" at="37,0,46,0" concept="3" trace="test_imageExportedByGenerator#()V" />
-      <scope id="5244026788026564918" at="33,0,34,56">
-        <var name="e" id="5244026788026564920" />
-      </scope>
-      <scope id="5244026788026564919" at="33,31,34,56" />
-      <scope id="3856853424911892024" at="42,0,43,56">
-        <var name="e" id="3856853424911892031" />
-      </scope>
-      <scope id="3856853424911892025" at="42,31,43,56" />
-      <scope id="5244026788026549053" at="16,61,18,118" />
-      <scope id="5244026788026549053" at="21,64,23,121" />
-      <scope id="5244026788026564923" at="30,11,32,36">
+      <node id="5244026788026549053" at="22,29,23,60" concept="7" />
+      <node id="5244026788026549149" at="27,61,28,52" concept="1" />
+      <node id="3856853424911892005" at="31,64,32,55" concept="1" />
+      <node id="5244026788026549053" at="37,52,38,19" concept="7" />
+      <node id="5244026788026559032" at="42,30,43,79" concept="4" />
+      <node id="5244026788026564435" at="44,13,45,55" concept="4" />
+      <node id="5244026788026564797" at="45,55,46,38" concept="1" />
+      <node id="5244026788026565379" at="47,33,48,58" concept="1" />
+      <node id="3856853424911892008" at="53,30,54,86" concept="4" />
+      <node id="3856853424911892016" at="55,13,56,55" concept="4" />
+      <node id="3856853424911892022" at="56,55,57,38" concept="1" />
+      <node id="3856853424911892026" at="58,33,59,58" concept="1" />
+      <node id="5244026788026549053" at="19,0,21,0" concept="6" trace="ourParametersCacheExtension" />
+      <node id="5244026788026549053" at="22,0,25,0" concept="0" trace="ImageExport_Test#()V" />
+      <node id="5244026788026549053" at="37,0,40,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5244026788026549149" at="26,0,30,0" concept="3" trace="test_manuallyExportedImage#()V" />
+      <node id="3856853424911892005" at="30,0,34,0" concept="3" trace="test_imageExportedByGenerator#()V" />
+      <node id="5244026788026564922" at="43,79,49,9" concept="8" />
+      <node id="3856853424911892014" at="54,86,60,9" concept="8" />
+      <node id="5244026788026549149" at="41,63,50,9" concept="1" />
+      <node id="3856853424911892005" at="52,66,61,9" concept="1" />
+      <node id="5244026788026549149" at="41,0,52,0" concept="3" trace="test_manuallyExportedImage#()V" />
+      <node id="3856853424911892005" at="52,0,63,0" concept="3" trace="test_imageExportedByGenerator#()V" />
+      <scope id="5244026788026549053" at="22,29,23,60" />
+      <scope id="5244026788026549149" at="27,61,28,52" />
+      <scope id="3856853424911892005" at="31,64,32,55" />
+      <scope id="5244026788026549053" at="37,52,38,19" />
+      <scope id="5244026788026564919" at="47,33,48,58" />
+      <scope id="3856853424911892025" at="58,33,59,58" />
+      <scope id="5244026788026564923" at="44,13,46,38">
         <var name="image" id="5244026788026564436" />
       </scope>
-      <scope id="3856853424911892015" at="39,11,41,36">
+      <scope id="5244026788026564918" at="47,9,49,9">
+        <var name="e" id="5244026788026564920" />
+      </scope>
+      <scope id="3856853424911892015" at="55,13,57,38">
         <var name="image" id="3856853424911892017" />
       </scope>
-      <scope id="5244026788026549053" at="15,0,20,0" />
-      <scope id="5244026788026549053" at="20,0,25,0" />
-      <scope id="5244026788026549149" at="28,63,35,7">
+      <scope id="3856853424911892024" at="58,9,60,9">
+        <var name="e" id="3856853424911892031" />
+      </scope>
+      <scope id="5244026788026549053" at="22,0,25,0" />
+      <scope id="5244026788026549053" at="37,0,40,0">
+        <var name="owner" id="5244026788026549053" />
+      </scope>
+      <scope id="5244026788026549149" at="26,0,30,0" />
+      <scope id="3856853424911892005" at="30,0,34,0" />
+      <scope id="5244026788026549149" at="42,30,49,9">
         <var name="imageloader" id="5244026788026559033" />
       </scope>
-      <scope id="3856853424911892005" at="37,66,44,7">
+      <scope id="3856853424911892005" at="53,30,60,9">
         <var name="imageloader" id="3856853424911892009" />
       </scope>
-      <scope id="5244026788026549149" at="28,0,37,0" />
-      <scope id="3856853424911892005" at="37,0,46,0" />
-      <unit id="5244026788026549053" at="26,0,49,0" name="jetbrains.mps.lang.editor.imageGen.tests.ImageExport_Test$TestBody" />
-      <unit id="5244026788026549053" at="13,0,50,0" name="jetbrains.mps.lang.editor.imageGen.tests.ImageExport_Test" />
+      <scope id="5244026788026549149" at="41,63,50,9" />
+      <scope id="3856853424911892005" at="52,66,61,9" />
+      <scope id="5244026788026549149" at="41,0,52,0" />
+      <scope id="3856853424911892005" at="52,0,63,0" />
+      <unit id="5244026788026549053" at="35,0,65,0" name="jetbrains.mps.lang.editor.imageGen.tests.ImageExport_Test$TestBody" />
+      <unit id="5244026788026549053" at="17,0,66,0" name="jetbrains.mps.lang.editor.imageGen.tests.ImageExport_Test" />
     </file>
   </root>
   <root nodeRef="r:57812925-2ef0-43c6-8314-0222b2c13acf(jetbrains.mps.lang.editor.imageGen.tests@tests)/5244026788026555459">

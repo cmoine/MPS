@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,14 +18,18 @@ package jetbrains.mps.ide.ui.dialogs.properties.tables.models;
 import com.intellij.util.ui.ItemRemovable;
 import jetbrains.mps.ide.ui.dialogs.properties.PropertiesBundle;
 import jetbrains.mps.project.DevKit;
+import jetbrains.mps.project.Project;
 import jetbrains.mps.smodel.Language;
 import jetbrains.mps.smodel.ModelAccessHelper;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.smodel.language.LanguageRegistry;
 import jetbrains.mps.util.Computable;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SLanguage;
 import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SModuleReference;
 import org.jetbrains.mps.openapi.module.SRepository;
+import org.jetbrains.mps.util.Condition;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
@@ -35,8 +39,8 @@ import java.util.List;
 public class UsedLangsTableModel extends AbstractTableModel implements ItemRemovable {
   private final SRepository myRepository;
   private final String myColumnName;
-  private List<SLanguage> myLanguageItems = new ArrayList<SLanguage>();
-  private List<SModuleReference> myDevKitItems = new ArrayList<SModuleReference>();
+  private List<SLanguage> myLanguageItems = new ArrayList<>();
+  private List<SModuleReference> myDevKitItems = new ArrayList<>();
 
   public static final int ITEM_COLUMN = 0;
   private Collection<SLanguage> myInitialLanguages;
@@ -60,12 +64,7 @@ public class UsedLangsTableModel extends AbstractTableModel implements ItemRemov
   }
 
   public void addItem(final SModuleReference item) {
-    SModule m = new ModelAccessHelper(myRepository).runReadAction(new Computable<SModule>() {
-      @Override
-      public SModule compute() {
-        return item.resolve(myRepository);
-      }
-    });
+    SModule m = new ModelAccessHelper(myRepository).runReadAction(() -> item.resolve(myRepository));
     if (m instanceof Language) {
       final SLanguage lang = MetaAdapterFactory.getLanguage(item);
       addItem(lang);
@@ -174,6 +173,24 @@ public class UsedLangsTableModel extends AbstractTableModel implements ItemRemov
     @Override
     public String toString() {
       return myLanguage != null ? myLanguage.getQualifiedName() : myDevKit.getModuleName();
+    }
+  }
+
+  public static final class ValidImportCondition implements Condition<Import> {
+    private final SRepository myContextRepo;
+    private final LanguageRegistry myLanguageRegistry;
+
+    public ValidImportCondition(@NotNull Project project) {
+      myContextRepo = project.getRepository();
+      myLanguageRegistry = project.getComponent(LanguageRegistry.class);
+    }
+
+    @Override
+    public boolean met(Import anImport) {
+      if (anImport.myLanguage != null) {
+        return myLanguageRegistry.getLanguage(anImport.myLanguage) != null;
+      }
+      return anImport.myDevKit.resolve(myContextRepo) != null;
     }
   }
 }

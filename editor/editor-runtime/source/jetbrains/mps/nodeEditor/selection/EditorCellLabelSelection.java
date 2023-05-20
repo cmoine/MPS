@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,8 +28,9 @@ import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.cells.EditorCell_Label;
 import jetbrains.mps.openapi.editor.selection.Selection;
 import jetbrains.mps.openapi.editor.selection.SelectionStoreException;
-import jetbrains.mps.smodel.ModelAccess;
+import jetbrains.mps.smodel.ModelAccessHelper;
 import jetbrains.mps.util.Computable;
+import jetbrains.mps.util.SNodeOperations;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -44,7 +45,7 @@ public class EditorCellLabelSelection extends EditorCellSelection {
   private boolean myNonTrivialSelection = false;
 
   public EditorCellLabelSelection(EditorComponent editorComponent, Map<String, String> properties, CellInfo cellInfo) throws SelectionStoreException,
-      SelectionRestoreException {
+                                                                                                                             SelectionRestoreException {
     super(editorComponent, properties, cellInfo);
     if (!(getEditorCell() instanceof EditorCell_Label)) {
       throw new SelectionRestoreException();
@@ -140,9 +141,7 @@ public class EditorCellLabelSelection extends EditorCellSelection {
       if (getSelectionEnd() != that.getSelectionEnd()) {
         return false;
       }
-      if (getSelectionStart() != that.getSelectionStart()) {
-        return false;
-      }
+      return getSelectionStart() == that.getSelectionStart();
     }
     return true;
   }
@@ -218,12 +217,8 @@ public class EditorCellLabelSelection extends EditorCellSelection {
         }
       }
 
-      if (target == null || ModelAccess.instance().runReadAction(new Computable<Boolean>() {
-        @Override
-        public Boolean compute() {
-          return jetbrains.mps.util.SNodeOperations.isAncestor(target.getSNode(), selectedCell.getSNode());
-        }
-      })) {
+      Computable<Boolean> isAncestor = () -> SNodeOperations.isAncestor(target.getSNode(), selectedCell.getSNode());
+      if (target == null || new ModelAccessHelper(selectedCell.getContext().getRepository()).runReadAction(isAncestor)) {
         return false;
       }
 
@@ -266,6 +261,14 @@ public class EditorCellLabelSelection extends EditorCellSelection {
     }
     return false;
   }
+
+  public boolean isExactlyCoveringCell(EditorCell cell) {
+    if (getSelectionStart() != 0 || getSelectionEnd() != getEditorCellLabel().getText().length()) {
+      return false;
+    }
+    return super.isExactlyCoveringCell(cell);
+  }
+
 
   @Override
   public String toString() {

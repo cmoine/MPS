@@ -4,48 +4,98 @@ package org.jetbrains.mps.samples.Money.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_ConvertTo = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CurrencyDefTable = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CurrencyUnit = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CurrentStockPrice = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GetAmount = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GetCurrency = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MoneyLiteral = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MoneyType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MovingAverage = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_StockSymbol = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_ConvertTo;
+  private ConceptPresentation props_CurrencyDefTable;
+  private ConceptPresentation props_CurrencyUnit;
+  private ConceptPresentation props_CurrentStockPrice;
+  private ConceptPresentation props_GetAmount;
+  private ConceptPresentation props_GetCurrency;
+  private ConceptPresentation props_MoneyLiteral;
+  private ConceptPresentation props_MoneyType;
+  private ConceptPresentation props_MovingAverage;
+  private ConceptPresentation props_StockSymbol;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.ConvertTo:
+        if (props_ConvertTo == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("convert to");
+          props_ConvertTo = cpb.create();
+        }
         return props_ConvertTo;
-      case 1:
+      case LanguageConceptSwitch.CurrencyDefTable:
+        if (props_CurrencyDefTable == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("CurrencyDefTable");
+          props_CurrencyDefTable = cpb.create();
+        }
         return props_CurrencyDefTable;
-      case 2:
+      case LanguageConceptSwitch.CurrencyUnit:
+        if (props_CurrencyUnit == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_CurrencyUnit = cpb.create();
+        }
         return props_CurrencyUnit;
-      case 3:
+      case LanguageConceptSwitch.CurrentStockPrice:
+        if (props_CurrentStockPrice == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("current stock price");
+          props_CurrentStockPrice = cpb.create();
+        }
         return props_CurrentStockPrice;
-      case 4:
+      case LanguageConceptSwitch.GetAmount:
+        if (props_GetAmount == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("amount");
+          props_GetAmount = cpb.create();
+        }
         return props_GetAmount;
-      case 5:
+      case LanguageConceptSwitch.GetCurrency:
+        if (props_GetCurrency == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("currency");
+          props_GetCurrency = cpb.create();
+        }
         return props_GetCurrency;
-      case 6:
+      case LanguageConceptSwitch.MoneyLiteral:
+        if (props_MoneyLiteral == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("money");
+          props_MoneyLiteral = cpb.create();
+        }
         return props_MoneyLiteral;
-      case 7:
+      case LanguageConceptSwitch.MoneyType:
+        if (props_MoneyType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("Money");
+          props_MoneyType = cpb.create();
+        }
         return props_MoneyType;
-      case 8:
+      case LanguageConceptSwitch.MovingAverage:
+        if (props_MovingAverage == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("moving average");
+          props_MovingAverage = cpb.create();
+        }
         return props_MovingAverage;
-      case 9:
+      case LanguageConceptSwitch.StockSymbol:
+        if (props_StockSymbol == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("symbol");
+          props_StockSymbol = cpb.create();
+        }
         return props_StockSymbol;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

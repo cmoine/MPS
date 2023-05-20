@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144226303539:jetbrains.mps.baseLanguage.structure.ForeachStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <root nodeRef="r:6e4b2d34-6979-4587-970a-72cdf9e24f7c(migr.test.tests@tests)/8977123699282978604">
+    <file name="SampleDeclMigration_Test.java">
+      <node id="8977123699282978604" at="41,37,42,60" concept="9" />
+      <node id="8977123699282978604" at="46,64,47,36" concept="1" />
+      <node id="8977123699282978604" at="52,52,53,19" concept="9" />
+      <node id="8977123699282978604" at="57,46,58,337" concept="7" />
+      <node id="8977123699282978604" at="61,47,62,337" concept="7" />
+      <node id="8977123699282978604" at="65,51,66,88" concept="7" />
+      <node id="6109541130565562583" at="69,55,70,238" concept="6" />
+      <node id="6109541130565562583" at="73,162,74,45" concept="1" />
+      <node id="8977123699282978604" at="82,0,83,0" concept="8" trace="TestNode$zF" />
+      <node id="8977123699282978604" at="83,0,84,0" concept="8" trace="MigrationDataAnnotation$Ct" />
+      <node id="8977123699282978604" at="87,0,88,0" concept="8" trace="nodeToCheck$OBcW" />
+      <node id="8977123699282978604" at="91,0,92,0" concept="8" trace="createdByScript$dQMM" />
+      <node id="8977123699282978604" at="35,0,37,0" concept="8" trace="ourParametersCacheExtension" />
+      <node id="8977123699282978604" at="38,0,40,0" concept="2" trace="myCommandExtension" />
+      <node id="8977123699282978604" at="41,0,44,0" concept="0" trace="SampleDeclMigration_Test#()V" />
+      <node id="8977123699282978604" at="52,0,55,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="6109541130565562583" at="72,162,75,11" concept="4" />
+      <node id="8977123699282978604" at="45,0,49,0" concept="5" trace="test_SampleDeclMigration_Test#()V" />
+      <node id="8977123699282978604" at="56,0,60,0" concept="5" trace="getInputNodes#()Ljava/util/Collection;" />
+      <node id="8977123699282978604" at="60,0,64,0" concept="5" trace="getOutputNodes#()Ljava/util/Collection;" />
+      <node id="8977123699282978604" at="64,0,68,0" concept="5" trace="getMigrationScript#()[Ljetbrains/mps/lang/migration/runtime/base/MigrationScript;" />
+      <node id="6109541130565562583" at="71,68,76,9" concept="3" />
+      <node id="6109541130565562583" at="70,238,77,7" concept="3" />
+      <node id="6109541130565562583" at="68,0,79,0" concept="5" trace="postProcess#(Ljava/util/Collection;)V" />
+      <scope id="8977123699282978604" at="41,37,42,60" />
+      <scope id="8977123699282978604" at="46,64,47,36" />
+      <scope id="8977123699282978604" at="52,52,53,19" />
+      <scope id="8977123699282978604" at="57,46,58,337" />
+      <scope id="8977123699282978604" at="61,47,62,337" />
+      <scope id="8977123699282978604" at="65,51,66,88" />
+      <scope id="6109541130565562583" at="73,162,74,45" />
+      <scope id="8977123699282978604" at="41,0,44,0" />
+      <scope id="8977123699282978604" at="52,0,55,0">
+        <var name="owner" id="8977123699282978604" />
+      </scope>
+      <scope id="6109541130565562583" at="72,162,75,11" />
+      <scope id="8977123699282978604" at="45,0,49,0" />
+      <scope id="8977123699282978604" at="56,0,60,0" />
+      <scope id="8977123699282978604" at="60,0,64,0" />
+      <scope id="8977123699282978604" at="64,0,68,0" />
+      <scope id="6109541130565562583" at="71,68,76,9" />
+      <scope id="6109541130565562583" at="71,68,76,9">
+        <var name="data" id="6109541130565562583" />
+      </scope>
+      <scope id="6109541130565562583" at="70,238,77,7">
+        <var name="root" id="6109541130565562583" />
+      </scope>
+      <scope id="6109541130565562583" at="69,55,77,7">
+        <var name="allScripts" id="6109541130565562583" />
+      </scope>
+      <scope id="6109541130565562583" at="68,0,79,0">
+        <var name="output" id="6109541130565562583" />
+      </scope>
+      <unit id="8977123699282978604" at="86,0,89,0" name="migr.test.tests.SampleDeclMigration_Test$LINKS" />
+      <unit id="8977123699282978604" at="90,0,93,0" name="migr.test.tests.SampleDeclMigration_Test$PROPS" />
+      <unit id="8977123699282978604" at="81,0,85,0" name="migr.test.tests.SampleDeclMigration_Test$CONCEPTS" />
+      <unit id="8977123699282978604" at="50,0,80,0" name="migr.test.tests.SampleDeclMigration_Test$TestBody" />
+      <unit id="8977123699282978604" at="33,0,94,0" name="migr.test.tests.SampleDeclMigration_Test" />
+    </file>
+  </root>
+</debug-info>
+

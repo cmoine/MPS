@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="58sk1ygw92lul0649xjy10s4lam8r5a" />
+<product version="3" modelHash="1ltii6t3kdqlykilo6vh2ps8ipasrjz">
+  <files names="AnalyzerConstructorParameterReference_Constraints.java:AnalyzerRunnerAnalyzeOperation_Constraints.java:AnalyzerRunnerCreator_Constraints.java:Analyzer_Constraints.java:ApplicableNodeReference_Constraints.java:ConceptCondition_Constraints.java:ConstraintsAspectDescriptor.java:CustomInstructionsContainerReference_Constraints.java:InstructionReference_Constraints.java:IsOperation_Constraints.java:ProgramParameter_Constraints.java:Rule_Constraints.java" />
+</product>
 

@@ -1,5 +1,5 @@
 /*
-* Copyright 2003-2014 JetBrains s.r.o.
+* Copyright 2003-2019 JetBrains s.r.o.
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-
 package jetbrains.mps.excluded;
 
 import jetbrains.mps.core.platform.Platform;
@@ -24,7 +23,6 @@ import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
 
 import static org.junit.Assert.assertNull;
 
@@ -32,12 +30,12 @@ public class GeneratorsRunner {
   public static final File GEN_SOURCES_IML = new File("tools" + File.separatorChar + "gensources" + File.separatorChar + "gensources.iml");
   public static final File COMPILER_XML_FILE = new File(".idea" + File.separatorChar + "compiler.xml");
 
-  public static void generateGenSourcesIml() throws JDOMException, IOException {
-    final GensourcesModuleFile f = new GensourcesModuleFile(GEN_SOURCES_IML);
+  public static void generateGenSourcesIml(Platform mpsPlatform) throws Exception {
+    final GensourcesModuleFile f = new GensourcesModuleFile(mpsPlatform, GEN_SOURCES_IML);
     System.out.println("Analyzing MPS modules...");
     f.prepare();
     System.out.println("Building gensources module 1/2...");
-    f.updateGenSourcesIml(Utils.files("core", "languages", "samples", "workbench"));
+    f.updateGenSourcesIml(Utils.files("core", "languages", "languages.test", "samples", "workbench"));
     System.out.println("Building gensources module 2/2...");
     f.updateGenSourcesImlNoIntersections(Utils.files("workbench", "plugins", "testbench"));
     System.out.println("Saving...");
@@ -45,18 +43,20 @@ public class GeneratorsRunner {
     System.out.println("Done.");
   }
 
-  public static void generateCompilerXmlFile() throws JDOMException, IOException {
-    CompilerXml.updateCompilerExcludes(COMPILER_XML_FILE,
-        Utils.files("languages", "samples", "core", "plugins", "workbench", "testbench"),
+  public static void generateCompilerXmlFile(Platform mpsPlatform) throws JDOMException, IOException {
+    System.out.println("Add compiler excludes...");
+    new CompilerXml(mpsPlatform).updateCompilerExcludes(COMPILER_XML_FILE,
+        Utils.files("languages", "languages.test", "samples", "core", "plugins", "workbench", "testbench"),
         new File[]{new File("IdeaPlugin")});
+    System.out.println("Done.");
   }
 
-  public static void main(String[] args) throws JDOMException, IOException {
+  public static void main(String[] args) throws Exception {
     assertNull(PersistenceFacade.getInstance());
     Platform platform = PlatformFactory.initPlatform(PlatformOptionsBuilder.PERSISTENCE);
 
-    generateGenSourcesIml();
-    generateCompilerXmlFile();
+    generateGenSourcesIml(platform);
+    generateCompilerXmlFile(platform);
 
     platform.dispose();
   }

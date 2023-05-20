@@ -15,7 +15,7 @@
  */
 package jetbrains.mps.lang.script.runtime;
 
-import jetbrains.mps.smodel.runtime.LanguageAspectDescriptor;
+import jetbrains.mps.smodel.runtime.ILanguageAspect;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -24,7 +24,7 @@ import java.util.Collection;
  * @author Artem Tikhomirov
  * @since 3.3
  */
-public interface ScriptAspectDescriptor extends LanguageAspectDescriptor {
+public interface ScriptAspectDescriptor extends ILanguageAspect {
   @NotNull
   Collection<RefactoringScript> getRefactoringScripts();
 }

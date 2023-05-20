@@ -13,505 +13,236 @@ import jetbrains.mps.openapi.editor.descriptor.TransformationMenu;
 import jetbrains.mps.openapi.editor.descriptor.NamedMenuId;
 import java.util.Arrays;
 import jetbrains.mps.openapi.editor.descriptor.SubstituteMenu;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public class EditorAspectDescriptorImpl extends EditorAspectDescriptorBase {
   @NotNull
   public Collection<ConceptEditor> getDeclaredEditors(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = ((SAbstractConcept) concept);
-      Integer preIndex = indices_xbvbvu_a0a.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new AbstractComparableStatement_Editor());
-          }
-          break;
-        case 1:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new AbstractEquationStatement_Editor());
-          }
-          break;
-        case 2:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new AbstractInequationStatement_Editor());
-          }
-          break;
-        case 3:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new AddDependencyStatement_Editor());
-          }
-          break;
-        case 4:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ApplicableNodeCondition_Editor());
-          }
-          break;
-        case 5:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ApplicableNodeReference_Editor());
-          }
-          break;
-        case 6:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new AssertStatement_Editor());
-          }
-          break;
-        case 7:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new AttributedNodeExpression_Editor());
-          }
-          break;
-        case 8:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CaretPositionOperation_Editor());
-          }
-          break;
-        case 9:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CoerceExpression_Editor());
-          }
-          break;
-        case 10:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CoerceStatement_Editor());
-          }
-          break;
-        case 11:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CoerceStrongExpression_Editor());
-          }
-          break;
-        case 12:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ComparisonRule_Editor());
-          }
-          break;
-        case 13:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ConceptClauseLinkInfo_Editor());
-          }
-          break;
-        case 14:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ConceptReference_Editor());
-          }
-          break;
-        case 15:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CreateEquationStatement_Editor());
-          }
-          break;
-        case 16:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new DefaultGroupReference_Editor());
-          }
-          break;
-        case 17:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ErrorInfoExpression_Editor());
-          }
-          break;
-        case 18:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new GetOperationType_Editor());
-          }
-          break;
-        case 19:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ImmediateSupertypesExpression_Editor());
-          }
-          break;
-        case 20:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new InequationReference_Editor());
-          }
-          break;
-        case 21:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new InequationReplacementRule_Editor());
-          }
-          break;
-        case 22:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new InferenceRule_Editor());
-          }
-          break;
-        case 23:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new InfoStatement_Editor());
-          }
-          break;
-        case 24:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new IsApplicableConceptFunction_Editor());
-          }
-          break;
-        case 25:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new IsStrongSubtypeExpression_Editor());
-          }
-          break;
-        case 26:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new IsSubtypeExpression_Editor());
-          }
-          break;
-        case 27:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new JoinContainer_Editor());
-          }
-          break;
-        case 28:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new JoinType_Editor());
-          }
-          break;
-        case 29:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new LinkPatternVariableReference_Editor());
-          }
-          break;
-        case 30:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MatchStatement_Editor());
-          }
-          break;
-        case 31:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MatchStatementItem_Editor());
-          }
-          break;
-        case 32:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MeetContainer_Editor());
-          }
-          break;
-        case 33:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MeetType_Editor());
-          }
-          break;
-        case 34:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MessageStatementAnnotation_Editor());
-          }
-          break;
-        case 35:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MultipleForeachLoop_Editor());
-          }
-          break;
-        case 36:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MultipleForeachLoopVariable_Editor());
-          }
-          break;
-        case 37:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new NodeInfo_Editor());
-          }
-          break;
-        case 38:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new Node_InferTypeOperation_Editor());
-          }
-          break;
-        case 39:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new Node_TypeOperation_Editor());
-          }
-          break;
-        case 40:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new NonTypesystemRule_Editor());
-          }
-          break;
-        case 41:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new NormalTypeClause_Editor());
-          }
-          break;
-        case 42:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new OrStatement_Editor());
-          }
-          break;
-        case 43:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new OriginalNodeId_Editor());
-          }
-          break;
-        case 44:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new OverloadedOpRulesContainer_Editor());
-          }
-          break;
-        case 45:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new OverloadedOpTypeRule_OneTypeSpecified_Editor());
-          }
-          break;
-        case 46:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new OverloadedOperatorTypeRule_Editor());
-          }
-          break;
-        case 47:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new OverridesConceptFunction_Editor());
-          }
-          break;
-        case 48:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new PatternCondition_Editor());
-          }
-          break;
-        case 49:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new PatternVariableReference_Editor());
-          }
-          break;
-        case 50:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new PrintToTrace_Editor());
-          }
-          break;
-        case 51:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new PropertyMessageTarget_Editor());
-          }
-          break;
-        case 52:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new PropertyNameTarget_Editor());
-          }
-          break;
-        case 53:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new PropertyPatternVariableReference_Editor());
-          }
-          break;
-        case 54:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new QuickFixArgument_Editor());
-          }
-          break;
-        case 55:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new QuickFixArgumentReference_Editor());
-          }
-          break;
-        case 56:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new QuickFixField_Editor());
-          }
-          break;
-        case 57:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new QuickFixFieldReference_Editor());
-          }
-          break;
-        case 58:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ReferenceMessageTarget_Editor());
-          }
-          break;
-        case 59:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ReferenceRoleTarget_Editor());
-          }
-          break;
-        case 60:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ReplacementRuleReference_Editor());
-          }
-          break;
-        case 61:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ReportErrorStatement_Editor());
-          }
-          break;
-        case 62:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new RuntimeErrorType_Editor());
-          }
-          break;
-        case 63:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new RuntimeTypeVariable_Editor());
-          }
-          break;
-        case 64:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SelectionType_Editor());
-          }
-          break;
-        case 65:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubstituteTypeRule_Editor());
-          }
-          break;
-        case 66:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubtypingRule_Editor());
-          }
-          break;
-        case 67:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SupersedeConceptFunction_Editor());
-          }
-          break;
-        case 68:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TypeCheckerAccessExpression_Editor());
-          }
-          break;
-        case 69:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TypeClause_Editor());
-          }
-          break;
-        case 70:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TypeOfExpression_Editor());
-          }
-          break;
-        case 71:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TypeVarDeclaration_Editor());
-          }
-          break;
-        case 72:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TypeVarReference_Editor());
-          }
-          break;
-        case 73:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TypesystemIntention_Editor());
-          }
-          break;
-        case 74:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TypesystemIntentionArgument_Editor());
-          }
-          break;
-        case 75:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TypesystemQuickFix_Editor());
-          }
-          break;
-        case 76:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new VariableConverterItem_Editor());
-          }
-          break;
-        case 77:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new VariableConvertersContainer_Editor());
-          }
-          break;
-        case 78:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new WarningStatement_Editor());
-          }
-          break;
-        case 79:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new WasSelectedNodeOperation_Editor());
-          }
-          break;
-        case 80:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new WhenConcreteStatement_Editor());
-          }
-          break;
-        case 81:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new WhenConcreteVariableDeclaration_Editor());
-          }
-          break;
-        case 82:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new WhenConcreteVariableReference_Editor());
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = ((SAbstractConcept) concept);
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return Collections.<ConceptEditor>singletonList(new AbstractComparableStatement_Editor());
+      case 1:
+        return Collections.<ConceptEditor>singletonList(new AbstractEquationStatement_Editor());
+      case 2:
+        return Collections.<ConceptEditor>singletonList(new AbstractInequationStatement_Editor());
+      case 3:
+        return Collections.<ConceptEditor>singletonList(new AddDependencyStatement_Editor());
+      case 4:
+        return Collections.<ConceptEditor>singletonList(new ApplicableNodeCondition_Editor());
+      case 5:
+        return Collections.<ConceptEditor>singletonList(new ApplicableNodeReference_Editor());
+      case 6:
+        return Collections.<ConceptEditor>singletonList(new AssertStatement_Editor());
+      case 7:
+        return Collections.<ConceptEditor>singletonList(new AttributedNodeExpression_Editor());
+      case 8:
+        return Collections.<ConceptEditor>singletonList(new CheckingRuleReference_Editor());
+      case 9:
+        return Collections.<ConceptEditor>singletonList(new CoerceExpression_Editor());
+      case 10:
+        return Collections.<ConceptEditor>singletonList(new CoerceStatement_Editor());
+      case 11:
+        return Collections.<ConceptEditor>singletonList(new CoerceStrongExpression_Editor());
+      case 12:
+        return Collections.<ConceptEditor>singletonList(new ComparisonRule_Editor());
+      case 13:
+        return Collections.<ConceptEditor>singletonList(new ConceptReference_Editor());
+      case 14:
+        return Collections.<ConceptEditor>singletonList(new CreateEquationStatement_Editor());
+      case 15:
+        return Collections.<ConceptEditor>singletonList(new DefaultGroupReference_Editor());
+      case 16:
+        return Collections.<ConceptEditor>singletonList(new ErrorInfoExpression_Editor());
+      case 17:
+        return Collections.<ConceptEditor>singletonList(new GetOperationType_Editor());
+      case 18:
+        return Collections.<ConceptEditor>singletonList(new ImmediateSupertypesExpression_Editor());
+      case 19:
+        return Collections.<ConceptEditor>singletonList(new InequationReference_Editor());
+      case 20:
+        return Collections.<ConceptEditor>singletonList(new InequationReplacementRule_Editor());
+      case 21:
+        return Collections.<ConceptEditor>singletonList(new InferenceRule_Editor());
+      case 22:
+        return Collections.<ConceptEditor>singletonList(new InfoStatement_Editor());
+      case 23:
+        return Collections.<ConceptEditor>singletonList(new IsApplicableConceptFunction_Editor());
+      case 24:
+        return Collections.<ConceptEditor>singletonList(new IsStrongSubtypeExpression_Editor());
+      case 25:
+        return Collections.<ConceptEditor>singletonList(new IsSubtypeExpression_Editor());
+      case 26:
+        return Collections.<ConceptEditor>singletonList(new JoinContainer_Editor());
+      case 27:
+        return Collections.<ConceptEditor>singletonList(new JoinType_Editor());
+      case 28:
+        return Collections.<ConceptEditor>singletonList(new LinkPatternVariableReference_Editor());
+      case 29:
+        return Collections.<ConceptEditor>singletonList(new MatchStatement_Editor());
+      case 30:
+        return Collections.<ConceptEditor>singletonList(new MatchStatementItem_Editor());
+      case 31:
+        return Collections.<ConceptEditor>singletonList(new MeetContainer_Editor());
+      case 32:
+        return Collections.<ConceptEditor>singletonList(new MeetType_Editor());
+      case 33:
+        return Collections.<ConceptEditor>singletonList(new MessageStatementAnnotation_Editor());
+      case 34:
+        return Collections.<ConceptEditor>singletonList(new Node_InferTypeOperation_Editor());
+      case 35:
+        return Collections.<ConceptEditor>singletonList(new Node_TypeOperation_Editor());
+      case 36:
+        return Collections.<ConceptEditor>singletonList(new NonTypesystemRule_Editor());
+      case 37:
+        return Collections.<ConceptEditor>singletonList(new NormalTypeClause_Editor());
+      case 38:
+        return Collections.<ConceptEditor>singletonList(new OrStatement_Editor());
+      case 39:
+        return Collections.<ConceptEditor>singletonList(new OriginalNodeId_Editor());
+      case 40:
+        return Collections.<ConceptEditor>singletonList(new OverloadedOpRulesContainer_Editor());
+      case 41:
+        return Collections.<ConceptEditor>singletonList(new OverloadedOpTypeRule_OneTypeSpecified_Editor());
+      case 42:
+        return Collections.<ConceptEditor>singletonList(new OverloadedOperatorTypeRule_Editor());
+      case 43:
+        return Collections.<ConceptEditor>singletonList(new OverridesConceptFunction_Editor());
+      case 44:
+        return Collections.<ConceptEditor>singletonList(new PatternCondition_Editor());
+      case 45:
+        return Collections.<ConceptEditor>singletonList(new PatternVariableReference_Editor());
+      case 46:
+        return Collections.<ConceptEditor>singletonList(new PrintToTrace_Editor());
+      case 47:
+        return Collections.<ConceptEditor>singletonList(new PropertyMessageTarget_Editor());
+      case 48:
+        return Collections.<ConceptEditor>singletonList(new PropertyNameTarget_Editor());
+      case 49:
+        return Collections.<ConceptEditor>singletonList(new PropertyPatternVariableReference_Editor());
+      case 50:
+        return Collections.<ConceptEditor>singletonList(new QuickFixArgument_Editor());
+      case 51:
+        return Collections.<ConceptEditor>singletonList(new QuickFixArgumentReference_Editor());
+      case 52:
+        return Collections.<ConceptEditor>singletonList(new QuickFixField_Editor());
+      case 53:
+        return Collections.<ConceptEditor>singletonList(new QuickFixFieldReference_Editor());
+      case 54:
+        return Collections.<ConceptEditor>singletonList(new ReferenceMessageTarget_Editor());
+      case 55:
+        return Collections.<ConceptEditor>singletonList(new ReferenceRoleTarget_Editor());
+      case 56:
+        return Collections.<ConceptEditor>singletonList(new ReportErrorStatement_Editor());
+      case 57:
+        return Collections.<ConceptEditor>singletonList(new RuntimeErrorType_Editor());
+      case 58:
+        return Collections.<ConceptEditor>singletonList(new RuntimeTypeVariable_Editor());
+      case 59:
+        return Collections.<ConceptEditor>singletonList(new SelectionType_Editor());
+      case 60:
+        return Collections.<ConceptEditor>singletonList(new SubstituteTypeRule_Editor());
+      case 61:
+        return Collections.<ConceptEditor>singletonList(new SubtypingRule_Editor());
+      case 62:
+        return Collections.<ConceptEditor>singletonList(new SupersedeConceptFunction_Editor());
+      case 63:
+        return Collections.<ConceptEditor>singletonList(new TypeCheckerAccessExpression_Editor());
+      case 64:
+        return Collections.<ConceptEditor>singletonList(new TypeClause_Editor());
+      case 65:
+        return Collections.<ConceptEditor>singletonList(new TypeOfExpression_Editor());
+      case 66:
+        return Collections.<ConceptEditor>singletonList(new TypeVarDeclaration_Editor());
+      case 67:
+        return Collections.<ConceptEditor>singletonList(new TypeVarReference_Editor());
+      case 68:
+        return Collections.<ConceptEditor>singletonList(new TypesystemIntention_Editor());
+      case 69:
+        return Collections.<ConceptEditor>singletonList(new TypesystemIntentionArgument_Editor());
+      case 70:
+        return Collections.<ConceptEditor>singletonList(new TypesystemQuickFix_Editor());
+      case 71:
+        return Collections.<ConceptEditor>singletonList(new VariableConverterItem_Editor());
+      case 72:
+        return Collections.<ConceptEditor>singletonList(new VariableConvertersContainer_Editor());
+      case 73:
+        return Collections.<ConceptEditor>singletonList(new WarningStatement_Editor());
+      case 74:
+        return Collections.<ConceptEditor>singletonList(new WhenConcreteStatement_Editor());
+      case 75:
+        return Collections.<ConceptEditor>singletonList(new WhenConcreteVariableDeclaration_Editor());
+      case 76:
+        return Collections.<ConceptEditor>singletonList(new WhenConcreteVariableReference_Editor());
+      default:
     }
     return Collections.<ConceptEditor>emptyList();
   }
-
+  private Collection<ConceptEditorComponent> getDeclaredEC_0(String editorComponentId) {
+    if ("jetbrains.mps.lang.typesystem.editor.AbstractEquationInspector".equals(editorComponentId)) {
+      return Collections.singletonList(new AbstractEquationInspector());
+    }
+    return Collections.emptyList();
+  }
+  private Collection<ConceptEditorComponent> getDeclaredEC_1(String editorComponentId) {
+    if ("jetbrains.mps.lang.typesystem.editor._NotInRules_Component".equals(editorComponentId)) {
+      return Collections.singletonList(new _NotInRules_Component());
+    }
+    return Collections.emptyList();
+  }
   @NotNull
   public Collection<ConceptEditorComponent> getDeclaredEditorComponents(SAbstractConcept concept, String editorComponentId) {
-    {
-      SAbstractConcept cncpt = ((SAbstractConcept) concept);
-      Integer preIndex = indices_xbvbvu_a0c.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            if ("jetbrains.mps.lang.typesystem.editor.AbstractEquationInspector".equals(editorComponentId)) {
-              return Collections.<ConceptEditorComponent>singletonList(new AbstractEquationInspector());
-            }
-          }
-          break;
-        case 1:
-          if (true) {
-            if ("jetbrains.mps.lang.typesystem.editor._NotInRules_Component".equals(editorComponentId)) {
-              return Collections.<ConceptEditorComponent>singletonList(new _NotInRules_Component());
-            }
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = ((SAbstractConcept) concept);
+    switch (conceptIndex1.index(cncpt)) {
+      case 0:
+        return getDeclaredEC_0(editorComponentId);
+      case 1:
+        return getDeclaredEC_1(editorComponentId);
+      default:
     }
-    return Collections.<ConceptEditorComponent>emptyList();
+    return Collections.emptyList();
   }
+
 
   @NotNull
   @Override
   public Collection<TransformationMenu> getDeclaredDefaultTransformationMenus(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_xbvbvu_a0e.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new _Helgins_RT_Contribution());
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex2.index(cncpt)) {
+      case 0:
+        return Collections.<TransformationMenu>singletonList(new _Helgins_RT_Contribution());
+      default:
     }
     return Collections.<TransformationMenu>emptyList();
   }
   @NotNull
   @Override
   public Collection<TransformationMenu> getDeclaredNamedTransformationMenus(NamedMenuId menuId) {
-    {
-      SAbstractConcept cncpt = (SAbstractConcept) menuId.getConcept();
-      Integer preIndex = indices_xbvbvu_a0f.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            switch (Arrays.binarySearch(stringSwitchCases_xbvbvu_a0a0a0a3a0a5, menuId.getFqName())) {
-              case 0:
-                return Arrays.asList(new TransformationMenu[]{new InferenceRule_ApplySideTransforms()});
-              case 1:
-                return Arrays.asList(new TransformationMenu[]{new InferenceRule_add_OverridesConceptFunction()});
-              default:
-            }
+    SAbstractConcept cncpt = (SAbstractConcept) menuId.getConcept();
+    switch (conceptIndex3.index(cncpt)) {
+      case 0:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.typesystem.editor.InferenceRule_ApplySideTransforms":
+              return Arrays.asList(new TransformationMenu[]{new InferenceRule_ApplySideTransforms()});
+            case "jetbrains.mps.lang.typesystem.editor.InferenceRule_add_OverridesConceptFunction":
+              return Arrays.asList(new TransformationMenu[]{new InferenceRule_add_OverridesConceptFunction()});
+            default:
           }
-          break;
-        default:
-      }
+        }
+        break;
+      case 1:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.typesystem.editor.NonTypesystemRule_backToAll":
+              return Arrays.asList(new TransformationMenu[]{new NonTypesystemRule_backToAll()});
+            default:
+          }
+        }
+        break;
+      default:
     }
 
     return Collections.<TransformationMenu>emptyList();
@@ -519,114 +250,96 @@ public class EditorAspectDescriptorImpl extends EditorAspectDescriptorBase {
   @NotNull
   @Override
   public Collection<SubstituteMenu> getDeclaredDefaultSubstituteMenus(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_xbvbvu_a0g.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new AttributedNodeExpression_SubstituteMenu());
-          }
-          break;
-        case 1:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_ContextNode_SubstituteMenu());
-          }
-          break;
-        case 2:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_Role_SubstituteMenu());
-          }
-          break;
-        case 3:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_isAggregation_SubstituteMenu());
-          }
-          break;
-        case 4:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_node_SubstituteMenu());
-          }
-          break;
-        case 5:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_var_SubstituteMenu());
-          }
-          break;
-        case 6:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new subs_AttributedNodeExpression_Contribution());
-          }
-          break;
-        case 7:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new JoinContainer_SubstituteMenu());
-          }
-          break;
-        case 8:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new LeftOperandType_parameter_SubstituteMenu());
-          }
-          break;
-        case 9:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new MeetContainer_SubstituteMenu());
-          }
-          break;
-        case 10:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new Node_InferTypeOperation_SubstituteMenu());
-          }
-          break;
-        case 11:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new Node_TypeOperation_SubstituteMenu());
-          }
-          break;
-        case 12:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new Operation_parameter_SubstituteMenu());
-          }
-          break;
-        case 13:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new RightOperandType_parameter_SubstituteMenu());
-          }
-          break;
-        case 14:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new _Helgins_Substitute_Contribution());
-          }
-          break;
-        case 15:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new EasyInferAndCheckingEntry_Contribution());
-          }
-          break;
-        case 16:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new TypeClause_SubstituteMenu());
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex4.index(cncpt)) {
+      case 0:
+        return Collections.<SubstituteMenu>singletonList(new ApplicableNodeReference_SubstituteMenu());
+      case 1:
+        return Collections.<SubstituteMenu>singletonList(new AttributedNodeExpression_SubstituteMenu());
+      case 2:
+        return Collections.<SubstituteMenu>singletonList(new CheckingRuleReference_SubstituteMenu());
+      case 3:
+        return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_ContextNode_SubstituteMenu());
+      case 4:
+        return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_Role_SubstituteMenu());
+      case 5:
+        return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_isAggregation_SubstituteMenu());
+      case 6:
+        return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_node_SubstituteMenu());
+      case 7:
+        return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_var_SubstituteMenu());
+      case 8:
+        return Collections.<SubstituteMenu>singletonList(new subs_AttributedNodeExpression_Contribution());
+      case 9:
+        return Collections.<SubstituteMenu>singletonList(new InequationReference_SubstituteMenu());
+      case 10:
+        return Collections.<SubstituteMenu>singletonList(new JoinContainer_SubstituteMenu());
+      case 11:
+        return Collections.<SubstituteMenu>singletonList(new LeftOperandType_parameter_SubstituteMenu());
+      case 12:
+        return Collections.<SubstituteMenu>singletonList(new LinkPatternVariableReference_SubstituteMenu());
+      case 13:
+        return Collections.<SubstituteMenu>singletonList(new MeetContainer_SubstituteMenu());
+      case 14:
+        return Collections.<SubstituteMenu>singletonList(new Node_InferTypeOperation_SubstituteMenu());
+      case 15:
+        return Collections.<SubstituteMenu>singletonList(new Node_TypeOperation_SubstituteMenu());
+      case 16:
+        return Collections.<SubstituteMenu>singletonList(new Operation_parameter_SubstituteMenu());
+      case 17:
+        return Collections.<SubstituteMenu>singletonList(new PatternVariableReference_SubstituteMenu());
+      case 18:
+        return Collections.<SubstituteMenu>singletonList(new PropertyMessageTarget_SubstituteMenu());
+      case 19:
+        return Collections.<SubstituteMenu>singletonList(new PropertyPatternVariableReference_SubstituteMenu());
+      case 20:
+        return Collections.<SubstituteMenu>singletonList(new QuickFixArgumentReference_SubstituteMenu());
+      case 21:
+        return Collections.<SubstituteMenu>singletonList(new QuickFixFieldReference_SubstituteMenu());
+      case 22:
+        return Collections.<SubstituteMenu>singletonList(new ReferenceMessageTarget_SubstituteMenu());
+      case 23:
+        return Collections.<SubstituteMenu>singletonList(new RightOperandType_parameter_SubstituteMenu());
+      case 24:
+        return Collections.<SubstituteMenu>singletonList(new EasyInferAndCheckingEntry_Contribution());
+      case 25:
+        return Collections.<SubstituteMenu>singletonList(new TypeClause_SubstituteMenu());
+      case 26:
+        return Collections.<SubstituteMenu>singletonList(new TypeVarReference_SubstituteMenu());
+      case 27:
+        return Collections.<SubstituteMenu>singletonList(new TypesystemIntention_SubstituteMenu());
+      case 28:
+        return Collections.<SubstituteMenu>singletonList(new TypesystemIntentionArgument_SubstituteMenu());
+      case 29:
+        return Collections.<SubstituteMenu>singletonList(new WhenConcreteVariableReference_SubstituteMenu());
+      default:
     }
     return Collections.<SubstituteMenu>emptyList();
   }
-
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
+  @NotNull
+  @Override
+  public Collection<SubstituteMenu> getDeclaredNamedSubstituteMenus(NamedMenuId menuId) {
+    SAbstractConcept cncpt = (SAbstractConcept) menuId.getConcept();
+    switch (conceptIndex5.index(cncpt)) {
+      case 0:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.typesystem.editor.InequationReference_SmartReference":
+              return Arrays.asList(new SubstituteMenu[]{new InequationReference_SmartReference()});
+            default:
+          }
+        }
+        break;
+      default:
     }
-    return res;
+
+    return Collections.<SubstituteMenu>emptyList();
   }
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0a = buildConceptIndices(MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x3be2294807013eb7L, "jetbrains.mps.lang.typesystem.structure.AbstractComparableStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f3c1ffaL, "jetbrains.mps.lang.typesystem.structure.AbstractEquationStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11a342c1412L, "jetbrains.mps.lang.typesystem.structure.AbstractInequationStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11c22f6c964L, "jetbrains.mps.lang.typesystem.structure.AddDependencyStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e29d976L, "jetbrains.mps.lang.typesystem.structure.ApplicableNodeCondition"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e9ef5dcL, "jetbrains.mps.lang.typesystem.structure.ApplicableNodeReference"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111b24c0cd8L, "jetbrains.mps.lang.typesystem.structure.AssertStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x2152354b0d500086L, "jetbrains.mps.lang.typesystem.structure.AttributedNodeExpression"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0xef0542bbc395068L, "jetbrains.mps.lang.typesystem.structure.CaretPositionOperation"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1127a2a14aeL, "jetbrains.mps.lang.typesystem.structure.CoerceExpression"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111f05e2451L, "jetbrains.mps.lang.typesystem.structure.CoerceStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1127a376a3dL, "jetbrains.mps.lang.typesystem.structure.CoerceStrongExpression"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x114caade477L, "jetbrains.mps.lang.typesystem.structure.ComparisonRule"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x120c8f8641eL, "jetbrains.mps.lang.typesystem.structure.ConceptClauseLinkInfo"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e2a88b3L, "jetbrains.mps.lang.typesystem.structure.ConceptReference"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f179e8dL, "jetbrains.mps.lang.typesystem.structure.CreateEquationStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x12541e5f229acee2L, "jetbrains.mps.lang.typesystem.structure.DefaultGroupReference"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x117c6082b85L, "jetbrains.mps.lang.typesystem.structure.ErrorInfoExpression"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11fd11186b7L, "jetbrains.mps.lang.typesystem.structure.GetOperationType"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1120ebd8531L, "jetbrains.mps.lang.typesystem.structure.ImmediateSupertypesExpression"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x42501924d0bd1913L, "jetbrains.mps.lang.typesystem.structure.InequationReference"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x117c5668bf2L, "jetbrains.mps.lang.typesystem.structure.InequationReplacementRule"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e2f5efaL, "jetbrains.mps.lang.typesystem.structure.InferenceRule"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11d2965916bL, "jetbrains.mps.lang.typesystem.structure.InfoStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x669222c8f1941d7fL, "jetbrains.mps.lang.typesystem.structure.IsApplicableConceptFunction"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11222e251f1L, "jetbrains.mps.lang.typesystem.structure.IsStrongSubtypeExpression"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111ef7b9fb7L, "jetbrains.mps.lang.typesystem.structure.IsSubtypeExpression"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1206cda22fcL, "jetbrains.mps.lang.typesystem.structure.JoinContainer"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1129e737f02L, "jetbrains.mps.lang.typesystem.structure.JoinType"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11192d92ad3L, "jetbrains.mps.lang.typesystem.structure.LinkPatternVariableReference"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1122952fb1dL, "jetbrains.mps.lang.typesystem.structure.MatchStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x112295a8fecL, "jetbrains.mps.lang.typesystem.structure.MatchStatementItem"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1206cd802f8L, "jetbrains.mps.lang.typesystem.structure.MeetContainer"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x114b68ad132L, "jetbrains.mps.lang.typesystem.structure.MeetType"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x2bb0fe622a9eb078L, "jetbrains.mps.lang.typesystem.structure.MessageStatementAnnotation"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111efb6d46fL, "jetbrains.mps.lang.typesystem.structure.MultipleForeachLoop"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111efb75e90L, "jetbrains.mps.lang.typesystem.structure.MultipleForeachLoopVariable"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x5dffc3ada5b76687L, "jetbrains.mps.lang.typesystem.structure.NodeInfo"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x584039bf75272c67L, "jetbrains.mps.lang.typesystem.structure.Node_InferTypeOperation"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111ef7d5e03L, "jetbrains.mps.lang.typesystem.structure.Node_TypeOperation"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1164853e0faL, "jetbrains.mps.lang.typesystem.structure.NonTypesystemRule"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1141682561cL, "jetbrains.mps.lang.typesystem.structure.NormalTypeClause"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0xba3b706cf9561ecL, "jetbrains.mps.lang.typesystem.structure.OrStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x2980b78b2f03a40bL, "jetbrains.mps.lang.typesystem.structure.OriginalNodeId"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11fd137d047L, "jetbrains.mps.lang.typesystem.structure.OverloadedOpRulesContainer"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x70bfdafbb2c80edcL, "jetbrains.mps.lang.typesystem.structure.OverloadedOpTypeRule_OneTypeSpecified"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11fcc4a641fL, "jetbrains.mps.lang.typesystem.structure.OverloadedOperatorTypeRule"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1885777d1370d97bL, "jetbrains.mps.lang.typesystem.structure.OverridesConceptFunction"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e2c3e68L, "jetbrains.mps.lang.typesystem.structure.PatternCondition"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11192d10036L, "jetbrains.mps.lang.typesystem.structure.PatternVariableReference"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x76b48f1c91e9de8L, "jetbrains.mps.lang.typesystem.structure.PrintToTrace"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11db4a6a000L, "jetbrains.mps.lang.typesystem.structure.PropertyMessageTarget"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11db54b106bL, "jetbrains.mps.lang.typesystem.structure.PropertyNameTarget"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11192d97ff9L, "jetbrains.mps.lang.typesystem.structure.PropertyPatternVariableReference"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11b361afb76L, "jetbrains.mps.lang.typesystem.structure.QuickFixArgument"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11b3683c009L, "jetbrains.mps.lang.typesystem.structure.QuickFixArgumentReference"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x70489eee8478e93eL, "jetbrains.mps.lang.typesystem.structure.QuickFixField"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x70489eee8479b55dL, "jetbrains.mps.lang.typesystem.structure.QuickFixFieldReference"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11db4a87c94L, "jetbrains.mps.lang.typesystem.structure.ReferenceMessageTarget"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11db54de8fdL, "jetbrains.mps.lang.typesystem.structure.ReferenceRoleTarget"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x4cffb708491a734cL, "jetbrains.mps.lang.typesystem.structure.ReplacementRuleReference"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111b251a62aL, "jetbrains.mps.lang.typesystem.structure.ReportErrorStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x113f84956f9L, "jetbrains.mps.lang.typesystem.structure.RuntimeErrorType"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x113f84956fbL, "jetbrains.mps.lang.typesystem.structure.RuntimeTypeVariable"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x611e7dc14a6926c8L, "jetbrains.mps.lang.typesystem.structure.SelectionType"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x58e32a0782bca52aL, "jetbrains.mps.lang.typesystem.structure.SubstituteTypeRule"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1119c426ccaL, "jetbrains.mps.lang.typesystem.structure.SubtypingRule"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x65684a1aee252403L, "jetbrains.mps.lang.typesystem.structure.SupersedeConceptFunction"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111b6ea6b9bL, "jetbrains.mps.lang.typesystem.structure.TypeCheckerAccessExpression"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x114168188c7L, "jetbrains.mps.lang.typesystem.structure.TypeClause"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f0ad10aL, "jetbrains.mps.lang.typesystem.structure.TypeOfExpression"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f85df7bL, "jetbrains.mps.lang.typesystem.structure.TypeVarDeclaration"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f90b04cL, "jetbrains.mps.lang.typesystem.structure.TypeVarReference"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x119e85e030eL, "jetbrains.mps.lang.typesystem.structure.TypesystemIntention"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x119e85f8628L, "jetbrains.mps.lang.typesystem.structure.TypesystemIntentionArgument"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11b36163865L, "jetbrains.mps.lang.typesystem.structure.TypesystemQuickFix"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11e073a595aL, "jetbrains.mps.lang.typesystem.structure.VariableConverterItem"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11e07487edcL, "jetbrains.mps.lang.typesystem.structure.VariableConvertersContainer"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1190a1db131L, "jetbrains.mps.lang.typesystem.structure.WarningStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0xef0542bbc39506eL, "jetbrains.mps.lang.typesystem.structure.WasSelectedNodeOperation"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x114177ce6cdL, "jetbrains.mps.lang.typesystem.structure.WhenConcreteStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x118bd05a27aL, "jetbrains.mps.lang.typesystem.structure.WhenConcreteVariableDeclaration"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x118bd0e07f1L, "jetbrains.mps.lang.typesystem.structure.WhenConcreteVariableReference"));
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0c = buildConceptIndices(MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f3c1ffaL, "jetbrains.mps.lang.typesystem.structure.AbstractEquationStatement"), MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x10802efe25aL, "jetbrains.mps.lang.core.structure.BaseConcept"));
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0e = buildConceptIndices(MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c37f506fL, "jetbrains.mps.baseLanguage.structure.Expression"));
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0f = buildConceptIndices(MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e2f5efaL, "jetbrains.mps.lang.typesystem.structure.InferenceRule"));
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0g = buildConceptIndices(MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x2152354b0d500086L, "jetbrains.mps.lang.typesystem.structure.AttributedNodeExpression"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11e078ffb82L, "jetbrains.mps.lang.typesystem.structure.ConceptFunctionParameter_ContextNode"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11e078e410eL, "jetbrains.mps.lang.typesystem.structure.ConceptFunctionParameter_Role"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11e078ecdbdL, "jetbrains.mps.lang.typesystem.structure.ConceptFunctionParameter_isAggregation"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11b3618c300L, "jetbrains.mps.lang.typesystem.structure.ConceptFunctionParameter_node"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11e07431ba7L, "jetbrains.mps.lang.typesystem.structure.ConceptFunctionParameter_var"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c37f506fL, "jetbrains.mps.baseLanguage.structure.Expression"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1206cda22fcL, "jetbrains.mps.lang.typesystem.structure.JoinContainer"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11fcc4cf5b0L, "jetbrains.mps.lang.typesystem.structure.LeftOperandType_parameter"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1206cd802f8L, "jetbrains.mps.lang.typesystem.structure.MeetContainer"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x584039bf75272c67L, "jetbrains.mps.lang.typesystem.structure.Node_InferTypeOperation"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111ef7d5e03L, "jetbrains.mps.lang.typesystem.structure.Node_TypeOperation"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11fcc4d8298L, "jetbrains.mps.lang.typesystem.structure.Operation_parameter"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11fcc4d8edaL, "jetbrains.mps.lang.typesystem.structure.RightOperandType_parameter"), MetaAdapterFactory.getConcept(0x7866978ea0f04cc7L, 0x81bc4d213d9375e1L, 0x1090ea2ebacL, "jetbrains.mps.lang.smodel.structure.SNodeOperation"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b215L, "jetbrains.mps.baseLanguage.structure.Statement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x114168188c7L, "jetbrains.mps.lang.typesystem.structure.TypeClause"));
-  private static String[] stringSwitchCases_xbvbvu_a0a0a0a3a0a5 = new String[]{"jetbrains.mps.lang.typesystem.editor.InferenceRule_ApplySideTransforms", "jetbrains.mps.lang.typesystem.editor.InferenceRule_add_OverridesConceptFunction"};
+
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x3be2294807013eb7L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f3c1ffaL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11a342c1412L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11c22f6c964L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e29d976L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e9ef5dcL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111b24c0cd8L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x2152354b0d500086L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x2054bec22d01782eL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1127a2a14aeL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111f05e2451L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1127a376a3dL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x114caade477L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e2a88b3L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f179e8dL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x12541e5f229acee2L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x117c6082b85L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11fd11186b7L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1120ebd8531L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x42501924d0bd1913L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x117c5668bf2L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e2f5efaL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11d2965916bL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x669222c8f1941d7fL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11222e251f1L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111ef7b9fb7L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1206cda22fcL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1129e737f02L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11192d92ad3L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1122952fb1dL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x112295a8fecL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1206cd802f8L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x114b68ad132L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x2bb0fe622a9eb078L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x584039bf75272c67L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111ef7d5e03L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1164853e0faL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1141682561cL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0xba3b706cf9561ecL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x2980b78b2f03a40bL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11fd137d047L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x70bfdafbb2c80edcL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11fcc4a641fL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1885777d1370d97bL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e2c3e68L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11192d10036L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x76b48f1c91e9de8L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11db4a6a000L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11db54b106bL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11192d97ff9L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11b361afb76L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11b3683c009L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x70489eee8478e93eL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x70489eee8479b55dL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11db4a87c94L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11db54de8fdL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111b251a62aL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x113f84956f9L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x113f84956fbL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x611e7dc14a6926c8L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x58e32a0782bca52aL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1119c426ccaL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x65684a1aee252403L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111b6ea6b9bL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x114168188c7L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f0ad10aL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f85df7bL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f90b04cL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x119e85e030eL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x119e85f8628L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11b36163865L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11e073a595aL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11e07487edcL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1190a1db131L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x114177ce6cdL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x118bd05a27aL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x118bd0e07f1L)).seal();
+  private static final ConceptSwitchIndex conceptIndex1 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f3c1ffaL), MetaIdFactory.conceptId(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x10802efe25aL)).seal();
+  private static final ConceptSwitchIndex conceptIndex2 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c37f506fL)).seal();
+  private static final ConceptSwitchIndex conceptIndex3 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e2f5efaL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1164853e0faL)).seal();
+  private static final ConceptSwitchIndex conceptIndex4 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e9ef5dcL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x2152354b0d500086L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x2054bec22d01782eL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11e078ffb82L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11e078e410eL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11e078ecdbdL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11b3618c300L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11e07431ba7L), MetaIdFactory.conceptId(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c37f506fL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x42501924d0bd1913L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1206cda22fcL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11fcc4cf5b0L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11192d92ad3L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1206cd802f8L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x584039bf75272c67L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111ef7d5e03L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11fcc4d8298L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11192d10036L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11db4a6a000L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11192d97ff9L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11b3683c009L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x70489eee8479b55dL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11db4a87c94L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11fcc4d8edaL), MetaIdFactory.conceptId(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b215L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x114168188c7L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f90b04cL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x119e85e030eL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x119e85f8628L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x118bd0e07f1L)).seal();
+  private static final ConceptSwitchIndex conceptIndex5 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x42501924d0bd1913L)).seal();
 }

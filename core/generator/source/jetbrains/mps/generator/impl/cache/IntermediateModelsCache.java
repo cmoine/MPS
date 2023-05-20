@@ -29,8 +29,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * FIXME revisit, check if we can use it for checkpoint models
  * Evgeny Gryaznov, Sep 21, 2010
  */
+@Deprecated(since = "0", forRemoval = true)
 public class IntermediateModelsCache {
 
   private static final String SIGNATURE = "signature";
@@ -45,7 +47,7 @@ public class IntermediateModelsCache {
   public IntermediateModelsCache(ModelCacheContainer cacheContainer, String signature) {
     myCacheContainer = cacheContainer;
     mySignature = signature;
-    mySteps = new ArrayList<Integer>();
+    mySteps = new ArrayList<>();
   }
 
   public String getSignature() {
@@ -65,7 +67,7 @@ public class IntermediateModelsCache {
         if (count > 10000) {
           throw new IOException("illegal data");
         }
-        steps = new ArrayList<Integer>(count);
+        steps = new ArrayList<>(count);
         for (int i = 0; i < count; i++) {
           steps.add(is.readInt());
         }

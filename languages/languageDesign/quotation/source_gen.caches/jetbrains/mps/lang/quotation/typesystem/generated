@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-c2ohvqr5ur8uqsszjb1ti93a18egldt" />
+<product version="3" modelHash="ap5e3nnucbinokpzsitsmhkthrcox19">
+  <files names="TypesystemDescriptor.java:addLinkValue_QuickFix.java:addPropertyValue_QuickFix.java:check_Antiquotation_NonTypesystemRule.java:check_LightQuotationNode_multipleInitializers_NonTypesystemRule.java:check_LightQuotationNode_requiredInitializer_NonTypesystemRule.java:check_ListAntiquotation_NonTypesystemRule.java:typeof_Antiquotation_InferenceRule.java:typeof_LightAntiquotation_InferenceRule.java:typeof_LightQuotationLinkList_InferenceRule.java:typeof_LightQuotationLinkValue_InferenceRule.java:typeof_LightQuotationPropertyValue_InferenceRule.java:typeof_LightQuotation_InferenceRule.java:typeof_ListAntiquotation_InferenceRule.java:typeof_ModelNodeInitializer_InferenceRule.java:typeof_NodeBuilderPropertyExpression_InferenceRule.java:typeof_PropertyAntiquotation_InferenceRule.java:typeof_Quotation_InferenceRule.java:typeof_ReferenceAntiquotation_InferenceRule.java" />
+</product>
 

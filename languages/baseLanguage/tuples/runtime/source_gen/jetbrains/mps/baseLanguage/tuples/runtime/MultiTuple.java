@@ -6,8 +6,8 @@ import java.util.Arrays;
 
 public class MultiTuple {
   private static final Object[] EMPTY = new Object[0];
-  private Object[] values;
-  private MultiTuple(Object... objs) {
+  private final Object[] values;
+  protected MultiTuple(Object... objs) {
     if (objs == null || objs.length == 0) {
       this.values = EMPTY;
     } else {
@@ -15,11 +15,11 @@ public class MultiTuple {
       System.arraycopy(objs, 0, this.values, 0, objs.length);
     }
   }
-  private MultiTuple() {
-    this.values = EMPTY;
-  }
-  private MultiTuple(int size) {
+  protected MultiTuple(int size) {
     this.values = new Object[size];
+  }
+  protected MultiTuple() {
+    this.values = EMPTY;
   }
   @Override
   public boolean equals(Object that) {
@@ -45,855 +45,346 @@ public class MultiTuple {
     }
     return sb.append("]").toString();
   }
-  public Object set(int idx, Object value) {
-    return this.values[idx] = value;
+  public <X> X set(int idx, X value) {
+    this.values[idx] = value;
+    return value;
   }
   public Object get(int idx) {
     return this.values[idx];
   }
   @Deprecated
   public void assign(Object... values) {
+    // still uses in templates (?), e.g. see TResource code
     assignValues(values);
   }
   public MultiTuple assignValues(Object... values) {
     if (values == null) {
-      Arrays.fill(this.values, null);
+      reset();
     } else {
       System.arraycopy(values, 0, this.values, 0, values.length);
     }
     return this;
   }
+  protected void reset() {
+    Arrays.fill(this.values, null);
+  }
+  @Deprecated
   public static boolean eq(Object a, Object b) {
+    // uses were replaced with regular Objects.equals(); keep for one release and drop then
     return (a == b) || ((a != null ? a.equals(b) : false));
   }
+
   public static class _0 extends MultiTuple implements Tuples._0 {
     public _0(Object... objs) {
       super(objs);
     }
-    public _0() {
-      super(0);
+    protected _0(int c) {
+      super(c);
+    }
+    protected _0() {
+      this(0);
     }
     public Tuples._0 assign(Tuples._0 from) {
       if (from == null) {
-        return (Tuples._0) this.assignValues(null);
+        reset();
+      } else {
+        assignValues();
       }
-      return (Tuples._0) this.assignValues();
+      return this;
     }
   }
-  public static class _1<T0> extends MultiTuple implements Tuples._1<T0> {
+
+  public static class _1<T0> extends _0 implements Tuples._1<T0> {
     public _1(Object... objs) {
       super(objs);
     }
-    public _1() {
-      super(1);
+    protected _1(int c) {
+      super(c);
     }
-    @SuppressWarnings(value = "unchecked")
+    protected _1() {
+      this(1);
+    }
     public T0 _0(T0 value) {
-      return (T0) this.set(0, value);
+      return set(0, value);
     }
-    @SuppressWarnings(value = "unchecked")
     public T0 _0() {
-      return (T0) this.get(0);
-    }
-    public Tuples._0 assign(Tuples._0 from) {
-      if (from == null) {
-        return (Tuples._0) this.assignValues(null);
-      }
-      return (Tuples._0) this.assignValues();
+      return (T0) get(0);
     }
     public Tuples._1<T0> assign(Tuples._1<? extends T0> from) {
       if (from == null) {
-        return (Tuples._1<T0>) this.assignValues(null);
+        reset();
+      } else {
+        assignValues(from._0());
       }
-      return (Tuples._1<T0>) this.assignValues(from._0());
+      return this;
     }
   }
-  public static class _2<T0, T1> extends MultiTuple implements Tuples._2<T0, T1> {
+
+  public static class _2<T0, T1> extends _1<T0> implements Tuples._2<T0, T1> {
     public _2(Object... objs) {
       super(objs);
     }
-    public _2() {
-      super(2);
+    protected _2(int c) {
+      super(c);
     }
-    @SuppressWarnings(value = "unchecked")
-    public T0 _0(T0 value) {
-      return (T0) this.set(0, value);
+    protected _2() {
+      this(2);
     }
-    @SuppressWarnings(value = "unchecked")
     public T1 _1(T1 value) {
-      return (T1) this.set(1, value);
+      return set(1, value);
     }
-    @SuppressWarnings(value = "unchecked")
-    public T0 _0() {
-      return (T0) this.get(0);
-    }
-    @SuppressWarnings(value = "unchecked")
     public T1 _1() {
-      return (T1) this.get(1);
-    }
-    public Tuples._0 assign(Tuples._0 from) {
-      if (from == null) {
-        return (Tuples._0) this.assignValues(null);
-      }
-      return (Tuples._0) this.assignValues();
-    }
-    public Tuples._1<T0> assign(Tuples._1<? extends T0> from) {
-      if (from == null) {
-        return (Tuples._1<T0>) this.assignValues(null);
-      }
-      return (Tuples._1<T0>) this.assignValues(from._0());
+      return (T1) get(1);
     }
     public Tuples._2<T0, T1> assign(Tuples._2<? extends T0, ? extends T1> from) {
       if (from == null) {
-        return (Tuples._2<T0, T1>) this.assignValues(null);
+        reset();
+      } else {
+        assignValues(from._0(), from._1());
       }
-      return (Tuples._2<T0, T1>) this.assignValues(from._0(), from._1());
+      return this;
     }
   }
-  public static class _3<T0, T1, T2> extends MultiTuple implements Tuples._3<T0, T1, T2> {
+
+  public static class _3<T0, T1, T2> extends _2<T0, T1> implements Tuples._3<T0, T1, T2> {
     public _3(Object... objs) {
       super(objs);
     }
-    public _3() {
-      super(3);
+    protected _3(int c) {
+      super(c);
     }
-    @SuppressWarnings(value = "unchecked")
-    public T0 _0(T0 value) {
-      return (T0) this.set(0, value);
+    protected _3() {
+      this(3);
     }
-    @SuppressWarnings(value = "unchecked")
-    public T1 _1(T1 value) {
-      return (T1) this.set(1, value);
-    }
-    @SuppressWarnings(value = "unchecked")
     public T2 _2(T2 value) {
-      return (T2) this.set(2, value);
+      return set(2, value);
     }
-    @SuppressWarnings(value = "unchecked")
-    public T0 _0() {
-      return (T0) this.get(0);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T1 _1() {
-      return (T1) this.get(1);
-    }
-    @SuppressWarnings(value = "unchecked")
     public T2 _2() {
-      return (T2) this.get(2);
-    }
-    public Tuples._0 assign(Tuples._0 from) {
-      if (from == null) {
-        return (Tuples._0) this.assignValues(null);
-      }
-      return (Tuples._0) this.assignValues();
-    }
-    public Tuples._1<T0> assign(Tuples._1<? extends T0> from) {
-      if (from == null) {
-        return (Tuples._1<T0>) this.assignValues(null);
-      }
-      return (Tuples._1<T0>) this.assignValues(from._0());
-    }
-    public Tuples._2<T0, T1> assign(Tuples._2<? extends T0, ? extends T1> from) {
-      if (from == null) {
-        return (Tuples._2<T0, T1>) this.assignValues(null);
-      }
-      return (Tuples._2<T0, T1>) this.assignValues(from._0(), from._1());
+      return (T2) get(2);
     }
     public Tuples._3<T0, T1, T2> assign(Tuples._3<? extends T0, ? extends T1, ? extends T2> from) {
       if (from == null) {
-        return (Tuples._3<T0, T1, T2>) this.assignValues(null);
+        reset();
+      } else {
+        assignValues(from._0(), from._1(), from._2());
       }
-      return (Tuples._3<T0, T1, T2>) this.assignValues(from._0(), from._1(), from._2());
+      return this;
     }
   }
-  public static class _4<T0, T1, T2, T3> extends MultiTuple implements Tuples._4<T0, T1, T2, T3> {
+
+  public static class _4<T0, T1, T2, T3> extends _3<T0, T1, T2> implements Tuples._4<T0, T1, T2, T3> {
     public _4(Object... objs) {
       super(objs);
     }
-    public _4() {
-      super(4);
+    protected _4(int c) {
+      super(c);
     }
-    @SuppressWarnings(value = "unchecked")
-    public T0 _0(T0 value) {
-      return (T0) this.set(0, value);
+    protected _4() {
+      this(4);
     }
-    @SuppressWarnings(value = "unchecked")
-    public T1 _1(T1 value) {
-      return (T1) this.set(1, value);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T2 _2(T2 value) {
-      return (T2) this.set(2, value);
-    }
-    @SuppressWarnings(value = "unchecked")
     public T3 _3(T3 value) {
-      return (T3) this.set(3, value);
+      return set(3, value);
     }
-    @SuppressWarnings(value = "unchecked")
-    public T0 _0() {
-      return (T0) this.get(0);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T1 _1() {
-      return (T1) this.get(1);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T2 _2() {
-      return (T2) this.get(2);
-    }
-    @SuppressWarnings(value = "unchecked")
     public T3 _3() {
-      return (T3) this.get(3);
-    }
-    public Tuples._0 assign(Tuples._0 from) {
-      if (from == null) {
-        return (Tuples._0) this.assignValues(null);
-      }
-      return (Tuples._0) this.assignValues();
-    }
-    public Tuples._1<T0> assign(Tuples._1<? extends T0> from) {
-      if (from == null) {
-        return (Tuples._1<T0>) this.assignValues(null);
-      }
-      return (Tuples._1<T0>) this.assignValues(from._0());
-    }
-    public Tuples._2<T0, T1> assign(Tuples._2<? extends T0, ? extends T1> from) {
-      if (from == null) {
-        return (Tuples._2<T0, T1>) this.assignValues(null);
-      }
-      return (Tuples._2<T0, T1>) this.assignValues(from._0(), from._1());
-    }
-    public Tuples._3<T0, T1, T2> assign(Tuples._3<? extends T0, ? extends T1, ? extends T2> from) {
-      if (from == null) {
-        return (Tuples._3<T0, T1, T2>) this.assignValues(null);
-      }
-      return (Tuples._3<T0, T1, T2>) this.assignValues(from._0(), from._1(), from._2());
+      return (T3) get(3);
     }
     public Tuples._4<T0, T1, T2, T3> assign(Tuples._4<? extends T0, ? extends T1, ? extends T2, ? extends T3> from) {
       if (from == null) {
-        return (Tuples._4<T0, T1, T2, T3>) this.assignValues(null);
+        reset();
+      } else {
+        assignValues(from._0(), from._1(), from._2(), from._3());
       }
-      return (Tuples._4<T0, T1, T2, T3>) this.assignValues(from._0(), from._1(), from._2(), from._3());
+      return this;
     }
   }
-  public static class _5<T0, T1, T2, T3, T4> extends MultiTuple implements Tuples._5<T0, T1, T2, T3, T4> {
+
+  public static class _5<T0, T1, T2, T3, T4> extends _4<T0, T1, T2, T3> implements Tuples._5<T0, T1, T2, T3, T4> {
     public _5(Object... objs) {
       super(objs);
     }
-    public _5() {
-      super(5);
+    protected _5(int c) {
+      super(c);
     }
-    @SuppressWarnings(value = "unchecked")
-    public T0 _0(T0 value) {
-      return (T0) this.set(0, value);
+    protected _5() {
+      this(5);
     }
-    @SuppressWarnings(value = "unchecked")
-    public T1 _1(T1 value) {
-      return (T1) this.set(1, value);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T2 _2(T2 value) {
-      return (T2) this.set(2, value);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T3 _3(T3 value) {
-      return (T3) this.set(3, value);
-    }
-    @SuppressWarnings(value = "unchecked")
     public T4 _4(T4 value) {
-      return (T4) this.set(4, value);
+      return set(4, value);
     }
-    @SuppressWarnings(value = "unchecked")
-    public T0 _0() {
-      return (T0) this.get(0);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T1 _1() {
-      return (T1) this.get(1);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T2 _2() {
-      return (T2) this.get(2);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T3 _3() {
-      return (T3) this.get(3);
-    }
-    @SuppressWarnings(value = "unchecked")
     public T4 _4() {
-      return (T4) this.get(4);
-    }
-    public Tuples._0 assign(Tuples._0 from) {
-      if (from == null) {
-        return (Tuples._0) this.assignValues(null);
-      }
-      return (Tuples._0) this.assignValues();
-    }
-    public Tuples._1<T0> assign(Tuples._1<? extends T0> from) {
-      if (from == null) {
-        return (Tuples._1<T0>) this.assignValues(null);
-      }
-      return (Tuples._1<T0>) this.assignValues(from._0());
-    }
-    public Tuples._2<T0, T1> assign(Tuples._2<? extends T0, ? extends T1> from) {
-      if (from == null) {
-        return (Tuples._2<T0, T1>) this.assignValues(null);
-      }
-      return (Tuples._2<T0, T1>) this.assignValues(from._0(), from._1());
-    }
-    public Tuples._3<T0, T1, T2> assign(Tuples._3<? extends T0, ? extends T1, ? extends T2> from) {
-      if (from == null) {
-        return (Tuples._3<T0, T1, T2>) this.assignValues(null);
-      }
-      return (Tuples._3<T0, T1, T2>) this.assignValues(from._0(), from._1(), from._2());
-    }
-    public Tuples._4<T0, T1, T2, T3> assign(Tuples._4<? extends T0, ? extends T1, ? extends T2, ? extends T3> from) {
-      if (from == null) {
-        return (Tuples._4<T0, T1, T2, T3>) this.assignValues(null);
-      }
-      return (Tuples._4<T0, T1, T2, T3>) this.assignValues(from._0(), from._1(), from._2(), from._3());
+      return (T4) get(4);
     }
     public Tuples._5<T0, T1, T2, T3, T4> assign(Tuples._5<? extends T0, ? extends T1, ? extends T2, ? extends T3, ? extends T4> from) {
       if (from == null) {
-        return (Tuples._5<T0, T1, T2, T3, T4>) this.assignValues(null);
+        reset();
+      } else {
+        assignValues(from._0(), from._1(), from._2(), from._3(), from._4());
       }
-      return (Tuples._5<T0, T1, T2, T3, T4>) this.assignValues(from._0(), from._1(), from._2(), from._3(), from._4());
+      return this;
     }
   }
-  public static class _6<T0, T1, T2, T3, T4, T5> extends MultiTuple implements Tuples._6<T0, T1, T2, T3, T4, T5> {
+
+  public static class _6<T0, T1, T2, T3, T4, T5> extends _5<T0, T1, T2, T3, T4> implements Tuples._6<T0, T1, T2, T3, T4, T5> {
     public _6(Object... objs) {
       super(objs);
     }
-    public _6() {
-      super(6);
+    protected _6(int c) {
+      super(c);
     }
-    @SuppressWarnings(value = "unchecked")
-    public T0 _0(T0 value) {
-      return (T0) this.set(0, value);
+    protected _6() {
+      this(6);
     }
-    @SuppressWarnings(value = "unchecked")
-    public T1 _1(T1 value) {
-      return (T1) this.set(1, value);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T2 _2(T2 value) {
-      return (T2) this.set(2, value);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T3 _3(T3 value) {
-      return (T3) this.set(3, value);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T4 _4(T4 value) {
-      return (T4) this.set(4, value);
-    }
-    @SuppressWarnings(value = "unchecked")
     public T5 _5(T5 value) {
-      return (T5) this.set(5, value);
+      return set(5, value);
     }
-    @SuppressWarnings(value = "unchecked")
-    public T0 _0() {
-      return (T0) this.get(0);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T1 _1() {
-      return (T1) this.get(1);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T2 _2() {
-      return (T2) this.get(2);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T3 _3() {
-      return (T3) this.get(3);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T4 _4() {
-      return (T4) this.get(4);
-    }
-    @SuppressWarnings(value = "unchecked")
     public T5 _5() {
-      return (T5) this.get(5);
-    }
-    public Tuples._0 assign(Tuples._0 from) {
-      if (from == null) {
-        return (Tuples._0) this.assignValues(null);
-      }
-      return (Tuples._0) this.assignValues();
-    }
-    public Tuples._1<T0> assign(Tuples._1<? extends T0> from) {
-      if (from == null) {
-        return (Tuples._1<T0>) this.assignValues(null);
-      }
-      return (Tuples._1<T0>) this.assignValues(from._0());
-    }
-    public Tuples._2<T0, T1> assign(Tuples._2<? extends T0, ? extends T1> from) {
-      if (from == null) {
-        return (Tuples._2<T0, T1>) this.assignValues(null);
-      }
-      return (Tuples._2<T0, T1>) this.assignValues(from._0(), from._1());
-    }
-    public Tuples._3<T0, T1, T2> assign(Tuples._3<? extends T0, ? extends T1, ? extends T2> from) {
-      if (from == null) {
-        return (Tuples._3<T0, T1, T2>) this.assignValues(null);
-      }
-      return (Tuples._3<T0, T1, T2>) this.assignValues(from._0(), from._1(), from._2());
-    }
-    public Tuples._4<T0, T1, T2, T3> assign(Tuples._4<? extends T0, ? extends T1, ? extends T2, ? extends T3> from) {
-      if (from == null) {
-        return (Tuples._4<T0, T1, T2, T3>) this.assignValues(null);
-      }
-      return (Tuples._4<T0, T1, T2, T3>) this.assignValues(from._0(), from._1(), from._2(), from._3());
-    }
-    public Tuples._5<T0, T1, T2, T3, T4> assign(Tuples._5<? extends T0, ? extends T1, ? extends T2, ? extends T3, ? extends T4> from) {
-      if (from == null) {
-        return (Tuples._5<T0, T1, T2, T3, T4>) this.assignValues(null);
-      }
-      return (Tuples._5<T0, T1, T2, T3, T4>) this.assignValues(from._0(), from._1(), from._2(), from._3(), from._4());
+      return (T5) get(5);
     }
     public Tuples._6<T0, T1, T2, T3, T4, T5> assign(Tuples._6<? extends T0, ? extends T1, ? extends T2, ? extends T3, ? extends T4, ? extends T5> from) {
       if (from == null) {
-        return (Tuples._6<T0, T1, T2, T3, T4, T5>) this.assignValues(null);
+        reset();
+      } else {
+        assignValues(from._0(), from._1(), from._2(), from._3(), from._4(), from._5());
       }
-      return (Tuples._6<T0, T1, T2, T3, T4, T5>) this.assignValues(from._0(), from._1(), from._2(), from._3(), from._4(), from._5());
+      return this;
     }
   }
-  public static class _7<T0, T1, T2, T3, T4, T5, T6> extends MultiTuple implements Tuples._7<T0, T1, T2, T3, T4, T5, T6> {
+
+  public static class _7<T0, T1, T2, T3, T4, T5, T6> extends _6<T0, T1, T2, T3, T4, T5> implements Tuples._7<T0, T1, T2, T3, T4, T5, T6> {
     public _7(Object... objs) {
       super(objs);
     }
-    public _7() {
-      super(7);
+    protected _7(int c) {
+      super(c);
     }
-    @SuppressWarnings(value = "unchecked")
-    public T0 _0(T0 value) {
-      return (T0) this.set(0, value);
+    protected _7() {
+      this(7);
     }
-    @SuppressWarnings(value = "unchecked")
-    public T1 _1(T1 value) {
-      return (T1) this.set(1, value);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T2 _2(T2 value) {
-      return (T2) this.set(2, value);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T3 _3(T3 value) {
-      return (T3) this.set(3, value);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T4 _4(T4 value) {
-      return (T4) this.set(4, value);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T5 _5(T5 value) {
-      return (T5) this.set(5, value);
-    }
-    @SuppressWarnings(value = "unchecked")
     public T6 _6(T6 value) {
-      return (T6) this.set(6, value);
+      return set(6, value);
     }
-    @SuppressWarnings(value = "unchecked")
-    public T0 _0() {
-      return (T0) this.get(0);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T1 _1() {
-      return (T1) this.get(1);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T2 _2() {
-      return (T2) this.get(2);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T3 _3() {
-      return (T3) this.get(3);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T4 _4() {
-      return (T4) this.get(4);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T5 _5() {
-      return (T5) this.get(5);
-    }
-    @SuppressWarnings(value = "unchecked")
     public T6 _6() {
-      return (T6) this.get(6);
-    }
-    public Tuples._0 assign(Tuples._0 from) {
-      if (from == null) {
-        return (Tuples._0) this.assignValues(null);
-      }
-      return (Tuples._0) this.assignValues();
-    }
-    public Tuples._1<T0> assign(Tuples._1<? extends T0> from) {
-      if (from == null) {
-        return (Tuples._1<T0>) this.assignValues(null);
-      }
-      return (Tuples._1<T0>) this.assignValues(from._0());
-    }
-    public Tuples._2<T0, T1> assign(Tuples._2<? extends T0, ? extends T1> from) {
-      if (from == null) {
-        return (Tuples._2<T0, T1>) this.assignValues(null);
-      }
-      return (Tuples._2<T0, T1>) this.assignValues(from._0(), from._1());
-    }
-    public Tuples._3<T0, T1, T2> assign(Tuples._3<? extends T0, ? extends T1, ? extends T2> from) {
-      if (from == null) {
-        return (Tuples._3<T0, T1, T2>) this.assignValues(null);
-      }
-      return (Tuples._3<T0, T1, T2>) this.assignValues(from._0(), from._1(), from._2());
-    }
-    public Tuples._4<T0, T1, T2, T3> assign(Tuples._4<? extends T0, ? extends T1, ? extends T2, ? extends T3> from) {
-      if (from == null) {
-        return (Tuples._4<T0, T1, T2, T3>) this.assignValues(null);
-      }
-      return (Tuples._4<T0, T1, T2, T3>) this.assignValues(from._0(), from._1(), from._2(), from._3());
-    }
-    public Tuples._5<T0, T1, T2, T3, T4> assign(Tuples._5<? extends T0, ? extends T1, ? extends T2, ? extends T3, ? extends T4> from) {
-      if (from == null) {
-        return (Tuples._5<T0, T1, T2, T3, T4>) this.assignValues(null);
-      }
-      return (Tuples._5<T0, T1, T2, T3, T4>) this.assignValues(from._0(), from._1(), from._2(), from._3(), from._4());
-    }
-    public Tuples._6<T0, T1, T2, T3, T4, T5> assign(Tuples._6<? extends T0, ? extends T1, ? extends T2, ? extends T3, ? extends T4, ? extends T5> from) {
-      if (from == null) {
-        return (Tuples._6<T0, T1, T2, T3, T4, T5>) this.assignValues(null);
-      }
-      return (Tuples._6<T0, T1, T2, T3, T4, T5>) this.assignValues(from._0(), from._1(), from._2(), from._3(), from._4(), from._5());
+      return (T6) get(6);
     }
     public Tuples._7<T0, T1, T2, T3, T4, T5, T6> assign(Tuples._7<? extends T0, ? extends T1, ? extends T2, ? extends T3, ? extends T4, ? extends T5, ? extends T6> from) {
       if (from == null) {
-        return (Tuples._7<T0, T1, T2, T3, T4, T5, T6>) this.assignValues(null);
+        reset();
+      } else {
+        assignValues(from._0(), from._1(), from._2(), from._3(), from._4(), from._5(), from._6());
       }
-      return (Tuples._7<T0, T1, T2, T3, T4, T5, T6>) this.assignValues(from._0(), from._1(), from._2(), from._3(), from._4(), from._5(), from._6());
+      return this;
     }
   }
-  public static class _8<T0, T1, T2, T3, T4, T5, T6, T7> extends MultiTuple implements Tuples._8<T0, T1, T2, T3, T4, T5, T6, T7> {
+
+  public static class _8<T0, T1, T2, T3, T4, T5, T6, T7> extends _7<T0, T1, T2, T3, T4, T5, T6> implements Tuples._8<T0, T1, T2, T3, T4, T5, T6, T7> {
     public _8(Object... objs) {
       super(objs);
     }
-    public _8() {
-      super(8);
+    protected _8(int c) {
+      super(c);
     }
-    @SuppressWarnings(value = "unchecked")
-    public T0 _0(T0 value) {
-      return (T0) this.set(0, value);
+    protected _8() {
+      this(8);
     }
-    @SuppressWarnings(value = "unchecked")
-    public T1 _1(T1 value) {
-      return (T1) this.set(1, value);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T2 _2(T2 value) {
-      return (T2) this.set(2, value);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T3 _3(T3 value) {
-      return (T3) this.set(3, value);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T4 _4(T4 value) {
-      return (T4) this.set(4, value);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T5 _5(T5 value) {
-      return (T5) this.set(5, value);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T6 _6(T6 value) {
-      return (T6) this.set(6, value);
-    }
-    @SuppressWarnings(value = "unchecked")
     public T7 _7(T7 value) {
-      return (T7) this.set(7, value);
+      return set(7, value);
     }
-    @SuppressWarnings(value = "unchecked")
-    public T0 _0() {
-      return (T0) this.get(0);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T1 _1() {
-      return (T1) this.get(1);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T2 _2() {
-      return (T2) this.get(2);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T3 _3() {
-      return (T3) this.get(3);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T4 _4() {
-      return (T4) this.get(4);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T5 _5() {
-      return (T5) this.get(5);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T6 _6() {
-      return (T6) this.get(6);
-    }
-    @SuppressWarnings(value = "unchecked")
     public T7 _7() {
-      return (T7) this.get(7);
-    }
-    public Tuples._0 assign(Tuples._0 from) {
-      if (from == null) {
-        return (Tuples._0) this.assignValues(null);
-      }
-      return (Tuples._0) this.assignValues();
-    }
-    public Tuples._1<T0> assign(Tuples._1<? extends T0> from) {
-      if (from == null) {
-        return (Tuples._1<T0>) this.assignValues(null);
-      }
-      return (Tuples._1<T0>) this.assignValues(from._0());
-    }
-    public Tuples._2<T0, T1> assign(Tuples._2<? extends T0, ? extends T1> from) {
-      if (from == null) {
-        return (Tuples._2<T0, T1>) this.assignValues(null);
-      }
-      return (Tuples._2<T0, T1>) this.assignValues(from._0(), from._1());
-    }
-    public Tuples._3<T0, T1, T2> assign(Tuples._3<? extends T0, ? extends T1, ? extends T2> from) {
-      if (from == null) {
-        return (Tuples._3<T0, T1, T2>) this.assignValues(null);
-      }
-      return (Tuples._3<T0, T1, T2>) this.assignValues(from._0(), from._1(), from._2());
-    }
-    public Tuples._4<T0, T1, T2, T3> assign(Tuples._4<? extends T0, ? extends T1, ? extends T2, ? extends T3> from) {
-      if (from == null) {
-        return (Tuples._4<T0, T1, T2, T3>) this.assignValues(null);
-      }
-      return (Tuples._4<T0, T1, T2, T3>) this.assignValues(from._0(), from._1(), from._2(), from._3());
-    }
-    public Tuples._5<T0, T1, T2, T3, T4> assign(Tuples._5<? extends T0, ? extends T1, ? extends T2, ? extends T3, ? extends T4> from) {
-      if (from == null) {
-        return (Tuples._5<T0, T1, T2, T3, T4>) this.assignValues(null);
-      }
-      return (Tuples._5<T0, T1, T2, T3, T4>) this.assignValues(from._0(), from._1(), from._2(), from._3(), from._4());
-    }
-    public Tuples._6<T0, T1, T2, T3, T4, T5> assign(Tuples._6<? extends T0, ? extends T1, ? extends T2, ? extends T3, ? extends T4, ? extends T5> from) {
-      if (from == null) {
-        return (Tuples._6<T0, T1, T2, T3, T4, T5>) this.assignValues(null);
-      }
-      return (Tuples._6<T0, T1, T2, T3, T4, T5>) this.assignValues(from._0(), from._1(), from._2(), from._3(), from._4(), from._5());
-    }
-    public Tuples._7<T0, T1, T2, T3, T4, T5, T6> assign(Tuples._7<? extends T0, ? extends T1, ? extends T2, ? extends T3, ? extends T4, ? extends T5, ? extends T6> from) {
-      if (from == null) {
-        return (Tuples._7<T0, T1, T2, T3, T4, T5, T6>) this.assignValues(null);
-      }
-      return (Tuples._7<T0, T1, T2, T3, T4, T5, T6>) this.assignValues(from._0(), from._1(), from._2(), from._3(), from._4(), from._5(), from._6());
+      return (T7) get(7);
     }
     public Tuples._8<T0, T1, T2, T3, T4, T5, T6, T7> assign(Tuples._8<? extends T0, ? extends T1, ? extends T2, ? extends T3, ? extends T4, ? extends T5, ? extends T6, ? extends T7> from) {
       if (from == null) {
-        return (Tuples._8<T0, T1, T2, T3, T4, T5, T6, T7>) this.assignValues(null);
+        reset();
+      } else {
+        assignValues(from._0(), from._1(), from._2(), from._3(), from._4(), from._5(), from._6(), from._7());
       }
-      return (Tuples._8<T0, T1, T2, T3, T4, T5, T6, T7>) this.assignValues(from._0(), from._1(), from._2(), from._3(), from._4(), from._5(), from._6(), from._7());
+      return this;
     }
   }
-  public static class _9<T0, T1, T2, T3, T4, T5, T6, T7, T8> extends MultiTuple implements Tuples._9<T0, T1, T2, T3, T4, T5, T6, T7, T8> {
+
+  public static class _9<T0, T1, T2, T3, T4, T5, T6, T7, T8> extends _8<T0, T1, T2, T3, T4, T5, T6, T7> implements Tuples._9<T0, T1, T2, T3, T4, T5, T6, T7, T8> {
     public _9(Object... objs) {
       super(objs);
     }
-    public _9() {
-      super(9);
+    protected _9(int c) {
+      super(c);
     }
-    @SuppressWarnings(value = "unchecked")
-    public T0 _0(T0 value) {
-      return (T0) this.set(0, value);
+    protected _9() {
+      this(9);
     }
-    @SuppressWarnings(value = "unchecked")
-    public T1 _1(T1 value) {
-      return (T1) this.set(1, value);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T2 _2(T2 value) {
-      return (T2) this.set(2, value);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T3 _3(T3 value) {
-      return (T3) this.set(3, value);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T4 _4(T4 value) {
-      return (T4) this.set(4, value);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T5 _5(T5 value) {
-      return (T5) this.set(5, value);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T6 _6(T6 value) {
-      return (T6) this.set(6, value);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T7 _7(T7 value) {
-      return (T7) this.set(7, value);
-    }
-    @SuppressWarnings(value = "unchecked")
     public T8 _8(T8 value) {
-      return (T8) this.set(8, value);
+      return set(8, value);
     }
-    @SuppressWarnings(value = "unchecked")
-    public T0 _0() {
-      return (T0) this.get(0);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T1 _1() {
-      return (T1) this.get(1);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T2 _2() {
-      return (T2) this.get(2);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T3 _3() {
-      return (T3) this.get(3);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T4 _4() {
-      return (T4) this.get(4);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T5 _5() {
-      return (T5) this.get(5);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T6 _6() {
-      return (T6) this.get(6);
-    }
-    @SuppressWarnings(value = "unchecked")
-    public T7 _7() {
-      return (T7) this.get(7);
-    }
-    @SuppressWarnings(value = "unchecked")
     public T8 _8() {
-      return (T8) this.get(8);
-    }
-    public Tuples._0 assign(Tuples._0 from) {
-      if (from == null) {
-        return (Tuples._0) this.assignValues(null);
-      }
-      return (Tuples._0) this.assignValues();
-    }
-    public Tuples._1<T0> assign(Tuples._1<? extends T0> from) {
-      if (from == null) {
-        return (Tuples._1<T0>) this.assignValues(null);
-      }
-      return (Tuples._1<T0>) this.assignValues(from._0());
-    }
-    public Tuples._2<T0, T1> assign(Tuples._2<? extends T0, ? extends T1> from) {
-      if (from == null) {
-        return (Tuples._2<T0, T1>) this.assignValues(null);
-      }
-      return (Tuples._2<T0, T1>) this.assignValues(from._0(), from._1());
-    }
-    public Tuples._3<T0, T1, T2> assign(Tuples._3<? extends T0, ? extends T1, ? extends T2> from) {
-      if (from == null) {
-        return (Tuples._3<T0, T1, T2>) this.assignValues(null);
-      }
-      return (Tuples._3<T0, T1, T2>) this.assignValues(from._0(), from._1(), from._2());
-    }
-    public Tuples._4<T0, T1, T2, T3> assign(Tuples._4<? extends T0, ? extends T1, ? extends T2, ? extends T3> from) {
-      if (from == null) {
-        return (Tuples._4<T0, T1, T2, T3>) this.assignValues(null);
-      }
-      return (Tuples._4<T0, T1, T2, T3>) this.assignValues(from._0(), from._1(), from._2(), from._3());
-    }
-    public Tuples._5<T0, T1, T2, T3, T4> assign(Tuples._5<? extends T0, ? extends T1, ? extends T2, ? extends T3, ? extends T4> from) {
-      if (from == null) {
-        return (Tuples._5<T0, T1, T2, T3, T4>) this.assignValues(null);
-      }
-      return (Tuples._5<T0, T1, T2, T3, T4>) this.assignValues(from._0(), from._1(), from._2(), from._3(), from._4());
-    }
-    public Tuples._6<T0, T1, T2, T3, T4, T5> assign(Tuples._6<? extends T0, ? extends T1, ? extends T2, ? extends T3, ? extends T4, ? extends T5> from) {
-      if (from == null) {
-        return (Tuples._6<T0, T1, T2, T3, T4, T5>) this.assignValues(null);
-      }
-      return (Tuples._6<T0, T1, T2, T3, T4, T5>) this.assignValues(from._0(), from._1(), from._2(), from._3(), from._4(), from._5());
-    }
-    public Tuples._7<T0, T1, T2, T3, T4, T5, T6> assign(Tuples._7<? extends T0, ? extends T1, ? extends T2, ? extends T3, ? extends T4, ? extends T5, ? extends T6> from) {
-      if (from == null) {
-        return (Tuples._7<T0, T1, T2, T3, T4, T5, T6>) this.assignValues(null);
-      }
-      return (Tuples._7<T0, T1, T2, T3, T4, T5, T6>) this.assignValues(from._0(), from._1(), from._2(), from._3(), from._4(), from._5(), from._6());
-    }
-    public Tuples._8<T0, T1, T2, T3, T4, T5, T6, T7> assign(Tuples._8<? extends T0, ? extends T1, ? extends T2, ? extends T3, ? extends T4, ? extends T5, ? extends T6, ? extends T7> from) {
-      if (from == null) {
-        return (Tuples._8<T0, T1, T2, T3, T4, T5, T6, T7>) this.assignValues(null);
-      }
-      return (Tuples._8<T0, T1, T2, T3, T4, T5, T6, T7>) this.assignValues(from._0(), from._1(), from._2(), from._3(), from._4(), from._5(), from._6(), from._7());
+      return (T8) get(8);
     }
     public Tuples._9<T0, T1, T2, T3, T4, T5, T6, T7, T8> assign(Tuples._9<? extends T0, ? extends T1, ? extends T2, ? extends T3, ? extends T4, ? extends T5, ? extends T6, ? extends T7, ? extends T8> from) {
       if (from == null) {
-        return (Tuples._9<T0, T1, T2, T3, T4, T5, T6, T7, T8>) this.assignValues(null);
+        reset();
+      } else {
+        assignValues(from._0(), from._1(), from._2(), from._3(), from._4(), from._5(), from._6(), from._7(), from._8());
       }
-      return (Tuples._9<T0, T1, T2, T3, T4, T5, T6, T7, T8>) this.assignValues(from._0(), from._1(), from._2(), from._3(), from._4(), from._5(), from._6(), from._7(), from._8());
+      return this;
     }
   }
   public static Tuples._0 from() {
-    return new MultiTuple._0();
+    return new _0();
   }
   public static <T0> Tuples._1<T0> from(T0 o0) {
-    return new MultiTuple._1<T0>(o0);
+    return new _1<T0>(o0);
   }
   public static <T0, T1> Tuples._2<T0, T1> from(T0 o0, T1 o1) {
-    return new MultiTuple._2<T0, T1>(o0, o1);
+    return new _2<T0, T1>(o0, o1);
   }
   public static <T0, T1, T2> Tuples._3<T0, T1, T2> from(T0 o0, T1 o1, T2 o2) {
-    return new MultiTuple._3<T0, T1, T2>(o0, o1, o2);
+    return new _3<T0, T1, T2>(o0, o1, o2);
   }
   public static <T0, T1, T2, T3> Tuples._4<T0, T1, T2, T3> from(T0 o0, T1 o1, T2 o2, T3 o3) {
-    return new MultiTuple._4<T0, T1, T2, T3>(o0, o1, o2, o3);
+    return new _4<T0, T1, T2, T3>(o0, o1, o2, o3);
   }
   public static <T0, T1, T2, T3, T4> Tuples._5<T0, T1, T2, T3, T4> from(T0 o0, T1 o1, T2 o2, T3 o3, T4 o4) {
-    return new MultiTuple._5<T0, T1, T2, T3, T4>(o0, o1, o2, o3, o4);
+    return new _5<T0, T1, T2, T3, T4>(o0, o1, o2, o3, o4);
   }
   public static <T0, T1, T2, T3, T4, T5> Tuples._6<T0, T1, T2, T3, T4, T5> from(T0 o0, T1 o1, T2 o2, T3 o3, T4 o4, T5 o5) {
-    return new MultiTuple._6<T0, T1, T2, T3, T4, T5>(o0, o1, o2, o3, o4, o5);
+    return new _6<T0, T1, T2, T3, T4, T5>(o0, o1, o2, o3, o4, o5);
   }
   public static <T0, T1, T2, T3, T4, T5, T6> Tuples._7<T0, T1, T2, T3, T4, T5, T6> from(T0 o0, T1 o1, T2 o2, T3 o3, T4 o4, T5 o5, T6 o6) {
-    return new MultiTuple._7<T0, T1, T2, T3, T4, T5, T6>(o0, o1, o2, o3, o4, o5, o6);
+    return new _7<T0, T1, T2, T3, T4, T5, T6>(o0, o1, o2, o3, o4, o5, o6);
   }
   public static <T0, T1, T2, T3, T4, T5, T6, T7> Tuples._8<T0, T1, T2, T3, T4, T5, T6, T7> from(T0 o0, T1 o1, T2 o2, T3 o3, T4 o4, T5 o5, T6 o6, T7 o7) {
-    return new MultiTuple._8<T0, T1, T2, T3, T4, T5, T6, T7>(o0, o1, o2, o3, o4, o5, o6, o7);
+    return new _8<T0, T1, T2, T3, T4, T5, T6, T7>(o0, o1, o2, o3, o4, o5, o6, o7);
   }
   public static <T0, T1, T2, T3, T4, T5, T6, T7, T8> Tuples._9<T0, T1, T2, T3, T4, T5, T6, T7, T8> from(T0 o0, T1 o1, T2 o2, T3 o3, T4 o4, T5 o5, T6 o6, T7 o7, T8 o8) {
-    return new MultiTuple._9<T0, T1, T2, T3, T4, T5, T6, T7, T8>(o0, o1, o2, o3, o4, o5, o6, o7, o8);
+    return new _9<T0, T1, T2, T3, T4, T5, T6, T7, T8>(o0, o1, o2, o3, o4, o5, o6, o7, o8);
   }
   public static Tuples._0 empty0() {
-    return new MultiTuple._0();
+    return new _0();
   }
   public static <T0> Tuples._1<T0> empty1() {
-    return new MultiTuple._1<T0>();
+    return new _1<T0>();
   }
   public static <T0, T1> Tuples._2<T0, T1> empty2() {
-    return new MultiTuple._2<T0, T1>();
+    return new _2<T0, T1>();
   }
   public static <T0, T1, T2> Tuples._3<T0, T1, T2> empty3() {
-    return new MultiTuple._3<T0, T1, T2>();
+    return new _3<T0, T1, T2>();
   }
   public static <T0, T1, T2, T3> Tuples._4<T0, T1, T2, T3> empty4() {
-    return new MultiTuple._4<T0, T1, T2, T3>();
+    return new _4<T0, T1, T2, T3>();
   }
   public static <T0, T1, T2, T3, T4> Tuples._5<T0, T1, T2, T3, T4> empty5() {
-    return new MultiTuple._5<T0, T1, T2, T3, T4>();
+    return new _5<T0, T1, T2, T3, T4>();
   }
   public static <T0, T1, T2, T3, T4, T5> Tuples._6<T0, T1, T2, T3, T4, T5> empty6() {
-    return new MultiTuple._6<T0, T1, T2, T3, T4, T5>();
+    return new _6<T0, T1, T2, T3, T4, T5>();
   }
   public static <T0, T1, T2, T3, T4, T5, T6> Tuples._7<T0, T1, T2, T3, T4, T5, T6> empty7() {
-    return new MultiTuple._7<T0, T1, T2, T3, T4, T5, T6>();
+    return new _7<T0, T1, T2, T3, T4, T5, T6>();
   }
   public static <T0, T1, T2, T3, T4, T5, T6, T7> Tuples._8<T0, T1, T2, T3, T4, T5, T6, T7> empty8() {
-    return new MultiTuple._8<T0, T1, T2, T3, T4, T5, T6, T7>();
+    return new _8<T0, T1, T2, T3, T4, T5, T6, T7>();
   }
   public static <T0, T1, T2, T3, T4, T5, T6, T7, T8> Tuples._9<T0, T1, T2, T3, T4, T5, T6, T7, T8> empty9() {
-    return new MultiTuple._9<T0, T1, T2, T3, T4, T5, T6, T7, T8>();
+    return new _9<T0, T1, T2, T3, T4, T5, T6, T7, T8>();
   }
 }

@@ -5,56 +5,58 @@ package jetbrains.mps.lang.editor.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.List;
 import java.util.Arrays;
 import org.jetbrains.annotations.NotNull;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SEnumOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public final class CellMenuPart_Abstract__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f34f8c0deL, "jetbrains.mps.lang.editor.structure.CellMenuPart_Abstract");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<SNode> getEditedFeature_idhJEvH7P = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getEditedFeature").modifiers(SModifiersImpl.create(0, AccessPrivileges.PACKAGE)).concept(CONCEPT).id("hJEvH7P").registry(REGISTRY).build();
-  public static final SMethod<SNode> getEditedLink_idhJEvotS = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getEditedLink").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("hJEvotS").registry(REGISTRY).build();
-  public static final SMethod<SNode> getEditedAggregationLink_idhJEvgUM = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getEditedAggregationLink").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("hJEvgUM").registry(REGISTRY).build();
+  public static final SMethod<SNode> getEditedFeature_idhJEvH7P = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getEditedFeature").modifiers(0, AccessPrivileges.PACKAGE).concept(CONCEPT).baseMethodId(1219409924597L).languageId(0xa83a7ff23bde13baL, 0x18bc659203a64e29L).build2();
+  public static final SMethod<SNode> getEditedLink_idhJEvotS = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getEditedLink").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1219409839992L).languageId(0xa83a7ff23bde13baL, 0x18bc659203a64e29L).build2();
+  public static final SMethod<SNode> getEditedAggregationLink_idhJEvgUM = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getEditedAggregationLink").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1219409809074L).languageId(0xa83a7ff23bde13baL, 0x18bc659203a64e29L).build2();
+  public static final SMethod<SNode> getReferenceDeclaration_id1o9RazL_axx = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getReferenceDeclaration").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1588042961790478433L).languageId(0xa83a7ff23bde13baL, 0x18bc659203a64e29L).build2();
 
-  private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getEditedFeature_idhJEvH7P, getEditedLink_idhJEvotS, getEditedAggregationLink_idhJEvgUM);
+  private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getEditedFeature_idhJEvH7P, getEditedLink_idhJEvotS, getEditedAggregationLink_idhJEvgUM, getReferenceDeclaration_id1o9RazL_axx);
 
   private static void ___init___(@NotNull SNode __thisNode__) {
   }
 
   /*package*/ static SNode getEditedFeature_idhJEvH7P(@NotNull SNode __thisNode__) {
-    return CellMenuUtil.getEditedFeature(SNodeOperations.cast(SNodeOperations.getParent(__thisNode__), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f34f6aaacL, "jetbrains.mps.lang.editor.structure.CellMenuDescriptor")));
+    return CellMenuUtil.getEditedFeature(SNodeOperations.cast(SNodeOperations.getParent(__thisNode__), CONCEPTS.CellMenuDescriptor$Kj));
   }
   /*package*/ static SNode getEditedLink_idhJEvotS(@NotNull SNode __thisNode__) {
     SNode editedFeature = CellMenuPart_Abstract__BehaviorDescriptor.getEditedFeature_idhJEvH7P.invoke(__thisNode__);
-    if (SNodeOperations.isInstanceOf(editedFeature, MetaAdapterFactory.getConcept(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979bd086aL, "jetbrains.mps.lang.structure.structure.LinkDeclaration"))) {
-      return SNodeOperations.cast(editedFeature, MetaAdapterFactory.getConcept(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979bd086aL, "jetbrains.mps.lang.structure.structure.LinkDeclaration"));
+    if (SNodeOperations.isInstanceOf(editedFeature, CONCEPTS.LinkDeclaration$1p)) {
+      return SNodeOperations.cast(editedFeature, CONCEPTS.LinkDeclaration$1p);
     }
     return null;
   }
   /*package*/ static SNode getEditedAggregationLink_idhJEvgUM(@NotNull SNode __thisNode__) {
     SNode editedLink = CellMenuPart_Abstract__BehaviorDescriptor.getEditedLink_idhJEvotS.invoke(__thisNode__);
-    if (SPropertyOperations.hasValue(editedLink, MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979bd086aL, 0xf980556927L, "metaClass"), "aggregation", "reference")) {
+    if (SEnumOperations.isMember(SPropertyOperations.getEnum(editedLink, PROPS.metaClass$PeKc), 0xfc6f4e95b9L)) {
       return editedLink;
     }
     return null;
   }
+  /*package*/ static SNode getReferenceDeclaration_id1o9RazL_axx(@NotNull SNode __thisNode__) {
+    return CellMenuPart_Abstract__BehaviorDescriptor.getEditedLink_idhJEvotS.invoke(__thisNode__);
+  }
 
   /*package*/ CellMenuPart_Abstract__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -75,6 +77,8 @@ public final class CellMenuPart_Abstract__BehaviorDescriptor extends BaseBHDescr
         return (T) ((SNode) getEditedLink_idhJEvotS(node));
       case 2:
         return (T) ((SNode) getEditedAggregationLink_idhJEvgUM(node));
+      case 3:
+        return (T) ((SNode) getReferenceDeclaration_id1o9RazL_axx(node));
       default:
         throw new BHMethodNotFoundException(this, method);
     }
@@ -102,5 +106,14 @@ public final class CellMenuPart_Abstract__BehaviorDescriptor extends BaseBHDescr
   @Override
   public SAbstractConcept getConcept() {
     return CONCEPT;
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept CellMenuDescriptor$Kj = MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f34f6aaacL, "jetbrains.mps.lang.editor.structure.CellMenuDescriptor");
+    /*package*/ static final SConcept LinkDeclaration$1p = MetaAdapterFactory.getConcept(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979bd086aL, "jetbrains.mps.lang.structure.structure.LinkDeclaration");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty metaClass$PeKc = MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979bd086aL, 0xf980556927L, "metaClass");
   }
 }

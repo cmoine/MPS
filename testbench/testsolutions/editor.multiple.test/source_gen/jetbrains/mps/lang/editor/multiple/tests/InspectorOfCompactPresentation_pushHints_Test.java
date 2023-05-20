@@ -4,43 +4,52 @@ package jetbrains.mps.lang.editor.multiple.tests;
 
 import jetbrains.mps.MPSLaunch;
 import jetbrains.mps.lang.test.runtime.BaseTransformationTest;
-import org.junit.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCacheExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCache;
+import org.junit.jupiter.api.Test;
 import jetbrains.mps.lang.test.runtime.BaseEditorTestBody;
+import jetbrains.mps.lang.test.runtime.TransformationTest;
 import jetbrains.mps.nodeEditor.NodeEditorComponent;
 import jetbrains.mps.nodeEditor.cells.EditorCell;
+import org.junit.Assert;
 import jetbrains.mps.nodeEditor.cells.EditorCell_Label;
 import javax.swing.SwingUtilities;
 
 @MPSLaunch
 public class InspectorOfCompactPresentation_pushHints_Test extends BaseTransformationTest {
-  @Test
-  public void test_InspectorOfCompactPresentation_pushHints() throws Throwable {
-    initTest("${mps_home}", "r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)");
-    runTest("jetbrains.mps.lang.editor.multiple.tests.InspectorOfCompactPresentation_pushHints_Test$TestBody", "testMethod", false);
+  @RegisterExtension
+  private static final TestParametersCacheExtension ourParametersCacheExtension = new TestParametersCacheExtension(new TestParametersCache(InspectorOfCompactPresentation_pushHints_Test.class, "${mps_home}", "r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)", false));
+
+  public InspectorOfCompactPresentation_pushHints_Test() {
+    super(ourParametersCacheExtension.getParametersCache());
   }
 
-  @MPSLaunch
-  public static class TestBody extends BaseEditorTestBody {
+  @Test
+  public void test_InspectorOfCompactPresentation_pushHints() throws Throwable {
+    new TestBody(this).testMethod();
+  }
+
+  /*package*/ static class TestBody extends BaseEditorTestBody {
+
+    /*package*/ TestBody(TransformationTest owner) {
+      super(owner);
+    }
+
     @Override
     public void testMethodImpl() throws Exception {
       initEditorComponent("2112659629360604460", "");
 
       final NodeEditorComponent component = ((NodeEditorComponent) getEditorComponent());
       EditorCell rootCell = component.getInspector().getRootCell();
-      assert rootCell instanceof EditorCell_Label && ((EditorCell_Label) rootCell).getText().equals("default");
+      Assert.assertTrue(rootCell instanceof EditorCell_Label && ((EditorCell_Label) rootCell).getText().equals("default"));
       component.getUpdater().setInitialEditorHints(new String[]{"jetbrains.mps.lang.editor.multiple.testLanguage.editor.MultipleEditorTestHints.compact"});
-      SwingUtilities.invokeAndWait(new Runnable() {
-        public void run() {
-          component.getEditorContext().getRepository().getModelAccess().runReadAction(new Runnable() {
-            public void run() {
-              component.rebuildEditorContent();
-            }
-          });
-          component.getEditorContext().flushEvents();
-        }
+      SwingUtilities.invokeAndWait(() -> {
+        component.getEditorContext().getRepository().getModelAccess().runReadAction(() -> component.rebuildEditorContent());
+        component.getEditorContext().flushEvents();
       });
       rootCell = component.getInspector().getRootCell();
-      assert rootCell instanceof EditorCell_Label && ((EditorCell_Label) rootCell).getText().equals("compact");
+      Assert.assertTrue(rootCell instanceof EditorCell_Label && ((EditorCell_Label) rootCell).getText().equals("compact"));
     }
   }
 }

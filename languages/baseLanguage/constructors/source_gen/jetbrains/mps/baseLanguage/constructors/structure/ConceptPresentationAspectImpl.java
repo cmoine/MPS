@@ -4,48 +4,97 @@ package jetbrains.mps.baseLanguage.constructors.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_ArgumentClause = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CustomArgumentClause = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CustomConstructor = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CustomConstructorContainer = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CustomConstructorParameter = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CustomConstructorParameterReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CustomConstructorUsage = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ListArgumentsClause = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ListCustomParameter = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ListParameterReference = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_ArgumentClause;
+  private ConceptPresentation props_CustomArgumentClause;
+  private ConceptPresentation props_CustomConstructor;
+  private ConceptPresentation props_CustomConstructorContainer;
+  private ConceptPresentation props_CustomConstructorParameter;
+  private ConceptPresentation props_CustomConstructorParameterReference;
+  private ConceptPresentation props_CustomConstructorUsage;
+  private ConceptPresentation props_ListArgumentsClause;
+  private ConceptPresentation props_ListCustomParameter;
+  private ConceptPresentation props_ListParameterReference;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.ArgumentClause:
+        if (props_ArgumentClause == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_ArgumentClause = cpb.create();
+        }
         return props_ArgumentClause;
-      case 1:
+      case LanguageConceptSwitch.CustomArgumentClause:
+        if (props_CustomArgumentClause == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("CustomArgumentClause");
+          props_CustomArgumentClause = cpb.create();
+        }
         return props_CustomArgumentClause;
-      case 2:
+      case LanguageConceptSwitch.CustomConstructor:
+        if (props_CustomConstructor == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_CustomConstructor = cpb.create();
+        }
         return props_CustomConstructor;
-      case 3:
+      case LanguageConceptSwitch.CustomConstructorContainer:
+        if (props_CustomConstructorContainer == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_CustomConstructorContainer = cpb.create();
+        }
         return props_CustomConstructorContainer;
-      case 4:
+      case LanguageConceptSwitch.CustomConstructorParameter:
+        if (props_CustomConstructorParameter == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_CustomConstructorParameter = cpb.create();
+        }
         return props_CustomConstructorParameter;
-      case 5:
+      case LanguageConceptSwitch.CustomConstructorParameterReference:
+        if (props_CustomConstructorParameterReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xae47ad35abd486cL, 0xac0f298884f39393L, 0x4aa85872b745ce64L, 0x4aa85872b745ce65L, "parameter", "", "");
+          props_CustomConstructorParameterReference = cpb.create();
+        }
         return props_CustomConstructorParameterReference;
-      case 6:
+      case LanguageConceptSwitch.CustomConstructorUsage:
+        if (props_CustomConstructorUsage == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xae47ad35abd486cL, 0xac0f298884f39393L, 0x5ea800dcf8ca1ca6L, 0x5ea800dcf8cc71b3L, "customConstructor", "", "");
+          props_CustomConstructorUsage = cpb.create();
+        }
         return props_CustomConstructorUsage;
-      case 7:
+      case LanguageConceptSwitch.ListArgumentsClause:
+        if (props_ListArgumentsClause == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ListArgumentsClause");
+          props_ListArgumentsClause = cpb.create();
+        }
         return props_ListArgumentsClause;
-      case 8:
+      case LanguageConceptSwitch.ListCustomParameter:
+        if (props_ListCustomParameter == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_ListCustomParameter = cpb.create();
+        }
         return props_ListCustomParameter;
-      case 9:
+      case LanguageConceptSwitch.ListParameterReference:
+        if (props_ListParameterReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xae47ad35abd486cL, 0xac0f298884f39393L, 0x4aa85872b745ce64L, 0x4aa85872b745ce65L, "parameter", "", "");
+          props_ListParameterReference = cpb.create();
+        }
         return props_ListParameterReference;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

@@ -21,7 +21,8 @@ import jetbrains.mps.typesystem.inference.TypeCheckingContext;
 public interface ICheckingRule_Runtime extends Rule_Runtime {
   void applyRule(SNode argument, TypeCheckingContext typeCheckingContext, IsApplicableStatus status);
 
-  boolean overrides(SNode argument, IsApplicableStatus status);
-
+  /**
+   * @return whether the rule overrides every other rule defined in superconcepts
+   */
   boolean overrides();
 }

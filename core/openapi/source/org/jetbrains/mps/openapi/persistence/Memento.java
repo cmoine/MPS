@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,6 +35,33 @@ public interface Memento {
    * @param value <code>null</code> value effectively removes the key
    */
   void put(String key, String value);
+
+  String PATH_SPEC_PREFIX = "~path-spec:";
+  /**
+   * TRANSITION CODE TO ADDRESS MACRO RESOLUTION ISSUES IN PATHS
+   * I can't replace all uses of path-like values at once, need to keep {@code put("pathKey")/get("pathKey")} to work as it used to be.
+   * Code that is capable of macro processing shall use {@code putPathSpec("pathKey")/getPathSpec("pathKey")} instead.
+   * For now, I decided to stick to String value, perhaps, adding PathSpec would complicate Memento interface too much (likely, need ~PathSpec
+   * in ModuleDescriptor client).
+   * Ultimate goal is to:
+   * (a) allow configuring ModuleDescriptor with values like "${module}/classes_gen", not actual module dir path
+   * (b) get rid of MementoWithFS and streamline IFile/FS handling
+   * (c) make sure we record proper macro in case few of them resolve to the same location, when
+   *    {@code shrink("$mps_home/lib") == shrink("$platform_lib"} while these macros not necessarily always point to the same
+   *    location (Big MPS vs MPS-as-IDEA-plugin)
+   * @since 2022.3
+   */
+  default void putPathSpec(String key, String value) {
+    // we use prefix and suffix to avoid accidental match in ModuleDescriptorPersistence.isPathAttribute()
+    put(PATH_SPEC_PREFIX + key + '~', value);
+  }
+
+  /**
+   * @see #putPathSpec(String, String)
+   */
+  default String getPathSpec(String key) {
+    return get(PATH_SPEC_PREFIX + key + '~');
+  }
 
   /**
    * Retrieves a read-only collection of registered property keys.

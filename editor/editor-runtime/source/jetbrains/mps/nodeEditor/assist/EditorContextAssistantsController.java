@@ -53,7 +53,6 @@ class EditorContextAssistantsController {
     myScheduleUpdateDelayedRunnable = new ScheduleUpdateDelayedRunnable(myEditorContextAssistants);
     mySelectionManager.addSelectionListener(myScheduleUpdateListener);
     myUpdater.addListener(myScheduleUpdateListener);
-    scheduleUpdate();
   }
 
   void stopUpdating() {

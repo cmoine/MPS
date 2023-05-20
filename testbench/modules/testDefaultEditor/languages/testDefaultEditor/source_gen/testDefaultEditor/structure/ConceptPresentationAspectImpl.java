@@ -4,72 +4,167 @@ package testDefaultEditor.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_AbstractChild = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AbstractDeveloper = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Canvas = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Company = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConcreteChild = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Container = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DefaultNodeAttribute = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DefaultPropertyAttribute = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DefaultReferenceAttribute = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Developer = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DummyMethod = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Friend = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IConcreteChild = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IParent = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_NotSubstitutableDeveloper = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Parent = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Shape = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Team = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_AbstractChild;
+  private ConceptPresentation props_AbstractDeveloper;
+  private ConceptPresentation props_BaseChild;
+  private ConceptPresentation props_Canvas;
+  private ConceptPresentation props_Company;
+  private ConceptPresentation props_ConcreteChild;
+  private ConceptPresentation props_Container;
+  private ConceptPresentation props_DefaultNodeAttribute;
+  private ConceptPresentation props_DefaultPropertyAttribute;
+  private ConceptPresentation props_DefaultReferenceAttribute;
+  private ConceptPresentation props_Developer;
+  private ConceptPresentation props_DummyMethod;
+  private ConceptPresentation props_Friend;
+  private ConceptPresentation props_IConcreteChild;
+  private ConceptPresentation props_InterfaceChild;
+  private ConceptPresentation props_NotSubstitutableDeveloper;
+  private ConceptPresentation props_Parent;
+  private ConceptPresentation props_Shape;
+  private ConceptPresentation props_Team;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.AbstractChild:
+        if (props_AbstractChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_AbstractChild = cpb.create();
+        }
         return props_AbstractChild;
-      case 1:
+      case LanguageConceptSwitch.AbstractDeveloper:
+        if (props_AbstractDeveloper == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_AbstractDeveloper = cpb.create();
+        }
         return props_AbstractDeveloper;
-      case 2:
+      case LanguageConceptSwitch.BaseChild:
+        if (props_BaseChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("BaseChild");
+          props_BaseChild = cpb.create();
+        }
+        return props_BaseChild;
+      case LanguageConceptSwitch.Canvas:
+        if (props_Canvas == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("Canvas");
+          props_Canvas = cpb.create();
+        }
         return props_Canvas;
-      case 3:
+      case LanguageConceptSwitch.Company:
+        if (props_Company == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Company = cpb.create();
+        }
         return props_Company;
-      case 4:
+      case LanguageConceptSwitch.ConcreteChild:
+        if (props_ConcreteChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ConcreteChild");
+          props_ConcreteChild = cpb.create();
+        }
         return props_ConcreteChild;
-      case 5:
+      case LanguageConceptSwitch.Container:
+        if (props_Container == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("Container");
+          props_Container = cpb.create();
+        }
         return props_Container;
-      case 6:
+      case LanguageConceptSwitch.DefaultNodeAttribute:
+        if (props_DefaultNodeAttribute == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("DefaultNodeAttribute");
+          props_DefaultNodeAttribute = cpb.create();
+        }
         return props_DefaultNodeAttribute;
-      case 7:
+      case LanguageConceptSwitch.DefaultPropertyAttribute:
+        if (props_DefaultPropertyAttribute == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("DefaultPropertyAttribute");
+          props_DefaultPropertyAttribute = cpb.create();
+        }
         return props_DefaultPropertyAttribute;
-      case 8:
+      case LanguageConceptSwitch.DefaultReferenceAttribute:
+        if (props_DefaultReferenceAttribute == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("DefaultReferenceAttribute");
+          props_DefaultReferenceAttribute = cpb.create();
+        }
         return props_DefaultReferenceAttribute;
-      case 9:
+      case LanguageConceptSwitch.Developer:
+        if (props_Developer == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Developer = cpb.create();
+        }
         return props_Developer;
-      case 10:
+      case LanguageConceptSwitch.DummyMethod:
+        if (props_DummyMethod == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("DummyMethod");
+          props_DummyMethod = cpb.create();
+        }
         return props_DummyMethod;
-      case 11:
+      case LanguageConceptSwitch.Friend:
+        if (props_Friend == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xb5734616c4b04639L, 0x9c6af3a1cf5dc4dbL, 0xd0768d7cf13be7aL, 0xd0768d7cf13be7bL, "friend", "", "");
+          props_Friend = cpb.create();
+        }
         return props_Friend;
-      case 12:
+      case LanguageConceptSwitch.IConcreteChild:
+        if (props_IConcreteChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("IConcreteChild");
+          props_IConcreteChild = cpb.create();
+        }
         return props_IConcreteChild;
-      case 13:
-        return props_IParent;
-      case 14:
+      case LanguageConceptSwitch.InterfaceChild:
+        if (props_InterfaceChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_InterfaceChild = cpb.create();
+        }
+        return props_InterfaceChild;
+      case LanguageConceptSwitch.NotSubstitutableDeveloper:
+        if (props_NotSubstitutableDeveloper == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_NotSubstitutableDeveloper = cpb.create();
+        }
         return props_NotSubstitutableDeveloper;
-      case 15:
+      case LanguageConceptSwitch.Parent:
+        if (props_Parent == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("Parent");
+          props_Parent = cpb.create();
+        }
         return props_Parent;
-      case 16:
+      case LanguageConceptSwitch.Shape:
+        if (props_Shape == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("Shape");
+          props_Shape = cpb.create();
+        }
         return props_Shape;
-      case 17:
+      case LanguageConceptSwitch.Team:
+        if (props_Team == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Team = cpb.create();
+        }
         return props_Team;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

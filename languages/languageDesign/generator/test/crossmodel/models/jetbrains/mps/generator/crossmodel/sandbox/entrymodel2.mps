@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model ref="r:33dab35c-9da1-4f75-8cf9-47e2c5f4039d(jetbrains.mps.generator.crossmodel.sandbox.entrymodel2)">
   <persistence version="9" />
+  <attribute name="doNotGenerate" value="true" />
   <languages>
     <use id="4d14758c-3ecb-486d-b8c8-ea5beb8ae408" name="jetbrains.mps.generator.test.crossmodel.entity" version="0" />
   </languages>
@@ -30,7 +31,7 @@
     <property role="TrG5h" value="Second" />
     <node concept="21QsKl" id="3LKEueXERj5" role="21Qgav">
       <property role="TrG5h" value="EntryThree" />
-      <property role="21Qgat" value="2" />
+      <property role="21Qgat" value="3LKEueXEqI8/2" />
       <ref role="21Qg7I" node="3LKEueXERj5" resolve="EntryThree" />
       <ref role="3U$e42" node="3LKEueXERj4" resolve="Second" />
       <ref role="21Qg7F" to="hcj1:3LKEueXERiT" resolve="EntryOne" />

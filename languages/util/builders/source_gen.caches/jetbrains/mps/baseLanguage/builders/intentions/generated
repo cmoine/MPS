@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-3t2r074oo8dmsabw7aecb7t6a4b19b7" />
+<product version="3" modelHash="1ad3mimv91g288lzg0msnw37fhc5uc3">
+  <files names="ChangeAbstract_Intention.java:ChangeLeaf_Intention.java:ChangeRoot_Intention.java:ConvertToBeanBuilder_Intention.java:IntentionsDescriptor.java" />
+</product>
 

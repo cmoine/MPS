@@ -10,6 +10,8 @@ import org.jetbrains.mps.util.Condition;
 import jetbrains.mps.workbench.action.BaseAction;
 import jetbrains.mps.internal.collections.runtime.SetSequence;
 import java.util.HashSet;
+import org.jetbrains.annotations.NotNull;
+import jetbrains.mps.workbench.action.ApplicationPlugin;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import java.util.List;
 import org.jetbrains.mps.openapi.model.SModel;
@@ -20,21 +22,21 @@ import jetbrains.mps.project.MPSProject;
 import jetbrains.mps.workbench.MPSDataKeys;
 import jetbrains.mps.workbench.action.BaseGroup;
 import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.extensions.PluginId;
 import org.jetbrains.annotations.Nullable;
 
 public class ScriptsForSelection_ActionGroup extends GeneratedActionGroup {
   public static final String ID = "jetbrains.mps.lang.script.pluginSolution.plugin.ScriptsForSelection_ActionGroup";
-  private Set<Pair<ActionPlace, Condition<BaseAction>>> myPlaces = SetSequence.fromSet(new HashSet<Pair<ActionPlace, Condition<BaseAction>>>());
-  public ScriptsForSelection_ActionGroup() {
-    super("Scripts", ID);
-    this.setIsInternal(false);
-    this.setPopup(true);
+  private final Set<Pair<ActionPlace, Condition<BaseAction>>> myPlaces = SetSequence.fromSet(new HashSet<Pair<ActionPlace, Condition<BaseAction>>>());
+
+  public ScriptsForSelection_ActionGroup(@NotNull ApplicationPlugin plugin) {
+    super("Scripts", ID, plugin);
+    setIsInternal(false);
+    setPopup(true);
   }
   public void doUpdate(AnActionEvent event) {
     removeAll();
     List<SModel> models = MPSCommonDataKeys.MODELS.getData(event.getDataContext());
-    if (ListSequence.fromList(models).count() == 1 && !((ListSequence.fromList(models).first() instanceof EditableSModel && !(ListSequence.fromList(models).first().isReadOnly())))) {
+    if (ListSequence.fromList(models).count() == 1 && !(ListSequence.fromList(models).first() instanceof EditableSModel && !(ListSequence.fromList(models).first().isReadOnly()))) {
       event.getPresentation().setVisible(false);
       return;
     }
@@ -51,7 +53,7 @@ public class ScriptsForSelection_ActionGroup extends GeneratedActionGroup {
     for (AnAction a : catGroup.getChildren(null)) {
       ScriptsForSelection_ActionGroup.this.add(a);
     }
-    ScriptsForSelection_ActionGroup.this.addParameterizedAction(new RunMigrationScripts_Action(menuBuilder), PluginId.getId("jetbrains.mps.lang.script.pluginSolution"), menuBuilder);
+    ScriptsForSelection_ActionGroup.this.addParameterizedAction(new RunMigrationScripts_Action(true), true);
     for (Pair<ActionPlace, Condition<BaseAction>> p : this.myPlaces) {
       this.addPlace(p.first, p.second);
     }

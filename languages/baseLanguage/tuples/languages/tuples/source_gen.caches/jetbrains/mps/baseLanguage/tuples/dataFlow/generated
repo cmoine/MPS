@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="c1ehbubpff4husng3jzybk5a6hmmr72" />
+<product version="3" modelHash="-6daas31oe12vfyujdj56ehiyc2gbumh">
+  <files names="DataFlowAspectDescriptorImpl.java:IndexedTupleLiteral_DataFlow.java:IndexedTupleMemberAccessExpression_DataFlow.java:NamedTupleLiteral_DataFlow.java" />
+</product>
 

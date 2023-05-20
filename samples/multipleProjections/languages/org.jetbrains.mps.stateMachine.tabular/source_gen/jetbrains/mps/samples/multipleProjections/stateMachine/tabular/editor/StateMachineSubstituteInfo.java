@@ -14,8 +14,10 @@ import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.smodel.action.SNodeFactoryOperations;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
+import org.jetbrains.mps.openapi.language.SConcept;
 
 /*package*/ class StateMachineSubstituteInfo extends AbstractNodeSubstituteInfo {
   private final int myRow;
@@ -42,26 +44,41 @@ import jetbrains.mps.smodel.action.SNodeFactoryOperations;
           SNodeOperations.replaceWithAnother(myCurrentChild, newChild);
         } else {
           if (myRow == 0) {
-            SNodeOperations.insertPrevSiblingChild(ListSequence.fromList(SLinkOperations.getChildren(myParent, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba3L, "events"))).getElement(myColumn - 1), newChild);
+            SNodeOperations.insertPrevSiblingChild(ListSequence.fromList(SLinkOperations.getChildren(myParent, LINKS.events$_8qd)).getElement(myColumn - 1), newChild);
           }
           if (myColumn == 0) {
-            SNodeOperations.insertPrevSiblingChild(ListSequence.fromList(SLinkOperations.getChildren(myParent, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba5L, "states"))).getElement(myRow - 1), newChild);
+            SNodeOperations.insertPrevSiblingChild(ListSequence.fromList(SLinkOperations.getChildren(myParent, LINKS.states$_8Sf)).getElement(myRow - 1), newChild);
           }
           if (myColumn > 0 && myRow > 0) {
-            ListSequence.fromList(SLinkOperations.getChildren(myParent, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba4L, "transitions"))).addElement((SNode) newChild);
+            ListSequence.fromList(SLinkOperations.getChildren(myParent, LINKS.transitions$_8De)).addElement((SNode) newChild);
           }
         }
         if (myRow > 0 && myColumn > 0) {
-          SNode event = ListSequence.fromList(SLinkOperations.getChildren(myParent, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba3L, "events"))).getElement(myColumn - 1);
-          SNode state = ListSequence.fromList(SLinkOperations.getChildren(myParent, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba5L, "states"))).getElement(myRow - 1);
+          SNode event = ListSequence.fromList(SLinkOperations.getChildren(myParent, LINKS.events$_8qd)).getElement(myColumn - 1);
+          SNode state = ListSequence.fromList(SLinkOperations.getChildren(myParent, LINKS.states$_8Sf)).getElement(myRow - 1);
           SNode transition = (SNode) newChild;
-          SLinkOperations.setTarget(transition, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c845743dL, 0xa99ffe1c845743fL, "trigger"), SNodeFactoryOperations.createNewNode(SNodeFactoryOperations.asInstanceConcept(MetaAdapterFactory.getConcept(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8457446L, "jetbrains.mps.samples.multipleProjections.stateMachine.structure.EventReference")), null));
-          SLinkOperations.setTarget(SLinkOperations.getTarget(transition, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c845743dL, 0xa99ffe1c845743fL, "trigger")), MetaAdapterFactory.getReferenceLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8457446L, 0xa99ffe1c8457447L, "event"), event);
-          SLinkOperations.setTarget(transition, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c845743dL, 0xa99ffe1c845743eL, "fromState"), SNodeFactoryOperations.createNewNode(SNodeFactoryOperations.asInstanceConcept(MetaAdapterFactory.getConcept(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8457444L, "jetbrains.mps.samples.multipleProjections.stateMachine.structure.StateReference")), null));
-          SLinkOperations.setTarget(SLinkOperations.getTarget(transition, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c845743dL, 0xa99ffe1c845743eL, "fromState")), MetaAdapterFactory.getReferenceLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8457444L, 0xa99ffe1c8457445L, "state"), state);
+          SLinkOperations.setTarget(transition, LINKS.trigger$qlp2, SNodeFactoryOperations.createNewNode(CONCEPTS.EventReference$dP, null));
+          SLinkOperations.setTarget(SLinkOperations.getTarget(transition, LINKS.trigger$qlp2), LINKS.event$qnvG, event);
+          SLinkOperations.setTarget(transition, LINKS.fromState$qla1, SNodeFactoryOperations.createNewNode(CONCEPTS.StateReference$cR, null));
+          SLinkOperations.setTarget(SLinkOperations.getTarget(transition, LINKS.fromState$qla1), LINKS.state$qn0G, state);
         }
         return newChild;
       }
     }, getEditorContext());
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink events$_8qd = MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba3L, "events");
+    /*package*/ static final SContainmentLink states$_8Sf = MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba5L, "states");
+    /*package*/ static final SContainmentLink transitions$_8De = MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba4L, "transitions");
+    /*package*/ static final SContainmentLink trigger$qlp2 = MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c845743dL, 0xa99ffe1c845743fL, "trigger");
+    /*package*/ static final SReferenceLink event$qnvG = MetaAdapterFactory.getReferenceLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8457446L, 0xa99ffe1c8457447L, "event");
+    /*package*/ static final SContainmentLink fromState$qla1 = MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c845743dL, 0xa99ffe1c845743eL, "fromState");
+    /*package*/ static final SReferenceLink state$qn0G = MetaAdapterFactory.getReferenceLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8457444L, 0xa99ffe1c8457445L, "state");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept EventReference$dP = MetaAdapterFactory.getConcept(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8457446L, "jetbrains.mps.samples.multipleProjections.stateMachine.structure.EventReference");
+    /*package*/ static final SConcept StateReference$cR = MetaAdapterFactory.getConcept(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8457444L, "jetbrains.mps.samples.multipleProjections.stateMachine.structure.StateReference");
   }
 }

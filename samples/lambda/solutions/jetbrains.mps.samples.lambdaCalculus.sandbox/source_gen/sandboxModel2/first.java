@@ -35,11 +35,11 @@ public class first {
       return 2;
     }
     public Function copy() {
-      return new first.Function_816130369292799568(myOuterVars);
+      return new Function_816130369292799568(myOuterVars);
     }
   }
   public static Integer lambdaAbstr_816130369292799546(Integer x) {
-    return (Integer) let_816130369292799560(new first.Function_816130369292799568(), x);
+    return (Integer) let_816130369292799560(new Function_816130369292799568(), x);
   }
   public static Object let_816130369292799560(Function sum_sq, Integer x) {
     return lambdaAbstr_816130369292799665(x, x, sum_sq);

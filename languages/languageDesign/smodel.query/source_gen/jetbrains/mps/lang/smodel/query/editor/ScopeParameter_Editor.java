@@ -6,47 +6,9 @@ import jetbrains.mps.nodeEditor.DefaultNodeEditor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.editor.runtime.cells.BigCellUtil;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SConceptOperations;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Error;
-import jetbrains.mps.openapi.editor.style.Style;
-import jetbrains.mps.editor.runtime.style.StyleImpl;
-import jetbrains.mps.editor.runtime.style.StyleAttributes;
 
 public class ScopeParameter_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createAlternation_pzkiaj_a(editorContext, node);
-  }
-  private EditorCell createAlternation_pzkiaj_a(EditorContext editorContext, SNode node) {
-    boolean alternationCondition = true;
-    alternationCondition = ScopeParameter_Editor.renderingCondition_pzkiaj_a0(node, editorContext);
-    EditorCell editorCell = null;
-    if (alternationCondition) {
-      editorCell = this.createError_pzkiaj_a0(editorContext, node);
-    } else {
-      editorCell = this.createComponent_pzkiaj_a0(editorContext, node);
-    }
-    EditorCell bigCell = BigCellUtil.findBigCell(editorCell, node);
-    if (bigCell != null) {
-      bigCell.setBig(true);
-    }
-    return editorCell;
-  }
-  private static boolean renderingCondition_pzkiaj_a0(SNode node, EditorContext editorContext) {
-    return SConceptOperations.isExactly(SNodeOperations.asSConcept(SNodeOperations.getConcept(node)), MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x3bc64421763add4bL, "jetbrains.mps.lang.smodel.query.structure.ScopeParameter"));
-  }
-  private EditorCell createError_pzkiaj_a0(EditorContext editorContext, SNode node) {
-    EditorCell_Error editorCell = new EditorCell_Error(editorContext, node, "<no scope>");
-    editorCell.setCellId("Error_pzkiaj_a0");
-    return editorCell;
-  }
-  private EditorCell createComponent_pzkiaj_a0(EditorContext editorContext, SNode node) {
-    EditorCell editorCell = editorContext.getCellFactory().createEditorComponentCell(node, "jetbrains.mps.lang.core.editor.alias");
-    Style style = new StyleImpl();
-    style.set(StyleAttributes.AUTO_DELETABLE, 0, true);
-    editorCell.getStyle().putAll(style);
-    return editorCell;
+    return new ScopeParameter_EditorBuilder_a(editorContext, node).createCell();
   }
 }

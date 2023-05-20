@@ -17,7 +17,7 @@ public class ReversingSequence<T> extends AbstractChainedSequence<T, T> {
     for (T u : getInput()) {
       cache.add(u);
     }
-    return new ReversingSequence.ReversingIterator<T>(cache.listIterator(cache.size()));
+    return new ReversingIterator<T>(cache.listIterator(cache.size()));
   }
   private static class ReversingIterator<U> implements Iterator<U> {
     private ListIterator<U> listIterator;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,60 +16,84 @@
 package jetbrains.mps.smodel.language;
 
 import jetbrains.mps.classloading.ClassLoaderManager;
-import jetbrains.mps.classloading.MPSClassesListener;
-import jetbrains.mps.classloading.ModuleClassNotFoundException;
+import jetbrains.mps.classloading.DeployListener;
+import jetbrains.mps.components.ComponentHost;
 import jetbrains.mps.components.CoreComponent;
-import jetbrains.mps.module.ReloadableModuleBase;
+import jetbrains.mps.logging.Logger;
+import jetbrains.mps.module.ReloadableModule;
+import jetbrains.mps.project.AbstractModule;
+import jetbrains.mps.project.SModuleOperations;
+import jetbrains.mps.project.Solution;
+import jetbrains.mps.project.structure.modules.Dependency;
+import jetbrains.mps.project.structure.modules.LanguageDescriptor;
 import jetbrains.mps.smodel.Generator;
 import jetbrains.mps.smodel.Language;
-import jetbrains.mps.smodel.adapter.MetaAdapterByDeclaration;
 import jetbrains.mps.smodel.adapter.ids.MetaIdByDeclaration;
+import jetbrains.mps.smodel.adapter.ids.MetaIdHelper;
 import jetbrains.mps.smodel.adapter.ids.SLanguageId;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.smodel.adapter.structure.language.SLanguageAdapter;
+import jetbrains.mps.smodel.runtime.ModuleDeploymentListener;
+import jetbrains.mps.smodel.runtime.ModuleRuntime;
+import jetbrains.mps.smodel.runtime.ModuleRuntime.Flags;
+import jetbrains.mps.smodel.runtime.ModuleRuntime.ModuleRuntimeContext;
+import jetbrains.mps.smodel.runtime.impl.GeneratorRuntimeActivator;
+import jetbrains.mps.smodel.runtime.impl.LanguageRuntimeActivator;
 import jetbrains.mps.util.CollectionUtil;
-import jetbrains.mps.util.annotation.ToRemove;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import jetbrains.mps.util.NameUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SLanguage;
+import org.jetbrains.mps.openapi.module.SDependency;
+import org.jetbrains.mps.openapi.module.SDependencyScope;
 import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SModuleReference;
 import org.jetbrains.mps.openapi.module.SRepository;
+import org.jetbrains.mps.openapi.util.ProgressMonitor;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 import static java.lang.String.format;
 
 /**
+ * Preferred way to obtain instance of {@code LanguageRegistry} is to query {@link jetbrains.mps.components.ComponentHost}, e.g.
+ * through {@code jetbrains.mps.core.platform.Platform} or {@link jetbrains.mps.project.Project#getComponent(Class)} which is aware of the MPS platform.
+ *
  * evgeny, 3/11/11
  */
-public class LanguageRegistry implements CoreComponent, MPSClassesListener {
-  private static final Logger LOG = LogManager.getLogger(LanguageRegistry.class);
+public final class LanguageRegistry implements CoreComponent, DeployListener {
+  private static final Logger LOG = Logger.getLogger(LanguageRegistry.class);
 
   private static LanguageRegistry INSTANCE;
 
   /**
-   * @deprecated use context-specific alternative {@link #getInstance(SRepository)}
+   * @deprecated obtain instance through {@link jetbrains.mps.components.ComponentHost#findComponent(Class) componentHost#findComponent(LanguageRegistry.class)}
+   *             or use context-specific alternative {@link #getInstance(SRepository)}.
    */
-  @Deprecated
-  @ToRemove(version = 3.3)
+@Deprecated(since = "3.3", forRemoval = true)
   public static LanguageRegistry getInstance() {
     return INSTANCE;
   }
 
   /**
+   * IMPORTANT: use {@link jetbrains.mps.components.ComponentHost#findComponent(Class) componentHost#findComponent(LanguageRegistry.class)} whenever \
+   * possible instead of this method. USE OF THIS METHOD IS DISCOURAGED.
+   * <p/>
    * At the moment, there's only 1 global LanguageRegistry. However, we move slowly towards independent
    * projects/non-global module repositories and thus would need repository-specific registries,
    * and use of the method is the proper way to  obtain registry and to think about proper
@@ -77,23 +101,39 @@ public class LanguageRegistry implements CoreComponent, MPSClassesListener {
    *
    * @return collection of languages available in the given context
    */
-  @NotNull
-  public static LanguageRegistry getInstance(@NotNull SRepository repository) {
+  public static LanguageRegistry getInstance(@SuppressWarnings("unused") @NotNull SRepository repository) {
     return INSTANCE;
   }
 
-  private final Map<SLanguage, LanguageRuntime> myLanguagesById = new HashMap<SLanguage, LanguageRuntime>();
+  private final Map<SLanguageId, LanguageRuntime> myLanguagesById = new HashMap<>();
 
-  private final Map<SModuleReference, GeneratorRuntime> myGeneratorsWithCompiledRuntime = new HashMap<SModuleReference, GeneratorRuntime>();
+  private final Map<SModuleReference, ModuleRuntime> myModuleRuntime = new HashMap<>();
 
-  private final List<LanguageRegistryListener> myLanguageListeners = new CopyOnWriteArrayList<LanguageRegistryListener>();
+  /*
+   * Don't want to expose this lock right now, although perhaps would need to do it later, to facilitate scenarios with
+   * LanguageRegistry that are not satisfied with withAvailableLanguages (e.g. span longer lifecycle).
+   * At the moment, LR is updated inside repository's write action, and grabs myRuntimeInstanceAccess's write lock
+   * as well, which may lead to deadlock  (myRuntimeInstanceAccess.read + MA.read vs MA.write+myRuntimeInstanceAccess.write from another thread)
+   * and eventually we may split registry update out from model write, to run later, after write. Just need to sort out {@link LanguageRegistryListener}
+   * contract that tells events are dispatched in [write] (didn't find anyone to rely on this, though). With a split, we can mitigate deadlock risk.
+   */
+  private final ReadWriteLock myRuntimeInstanceAccess = new ReentrantReadWriteLock();
 
-  private final SRepository myRepository;
+  private final List<LanguageRegistryListener> myLanguageListeners = new CopyOnWriteArrayList<>();
+
   private final ClassLoaderManager myClassLoaderManager;
 
-  public LanguageRegistry(SRepository repository, ClassLoaderManager loaderManager) {
-    myRepository = repository;
+  private final LanguageExtensionRegistry myExtensionRegistry;
+
+  private final Supplier<ComponentHost> myPlatformAccess;
+
+  private final DeploymentNotificationImpl myDeploymentNotification;
+
+  public LanguageRegistry(ClassLoaderManager loaderManager, Supplier<ComponentHost> platformAccess) {
     myClassLoaderManager = loaderManager;
+    myExtensionRegistry = new LanguageExtensionRegistry();
+    myPlatformAccess = platformAccess;
+    myDeploymentNotification = new DeploymentNotificationImpl(this);
   }
 
   @Override
@@ -102,19 +142,12 @@ public class LanguageRegistry implements CoreComponent, MPSClassesListener {
       throw new IllegalStateException("double initialization");
     }
     INSTANCE = this;
-    myClassLoaderManager.addClassesHandler(this);
+    myClassLoaderManager.addListener(this);
   }
 
   @Override
   public void dispose() {
-    myRepository.getModelAccess().runWriteAction(new Runnable() {
-      @Override
-      public void run() {
-        notifyUnload(myLanguagesById.values());
-        myLanguagesById.clear();
-      }
-    });
-    myClassLoaderManager.removeClassesHandler(this);
+    myClassLoaderManager.removeListener(this);
     INSTANCE = null;
   }
 
@@ -161,96 +194,141 @@ public class LanguageRegistry implements CoreComponent, MPSClassesListener {
     try {
       final Class<?> rtClass = l.getOwnClass(rtClassName);
       if (LanguageRuntime.class.isAssignableFrom(rtClass)) {
-        return rtClass.asSubclass(LanguageRuntime.class).newInstance();
+        return rtClass.asSubclass(LanguageRuntime.class).getDeclaredConstructor().newInstance();
       }
-      LOG.error(String.format("Incompatible language runtime class for module %s; resort to interpreted runtime", l.getModuleName()));
-      return new InterpretedLanguageRuntime(l);
-    } catch (ClassNotFoundException ex) {
-      // would like to have error + exception here, but there are tests (e.g. ModulesReloadTest) that legitimately expect non-compiled modules
-      LOG.warn(String.format("Missing language runtime class for module %s (make failed?); resort to interpreted runtime", l.getModuleName()));
-      return new InterpretedLanguageRuntime(l);
-    } catch (InstantiationException e) {
-      LOG.error(String.format("Failed to load language %s", l.getModuleName()), e);
+      LOG.error(String.format("Incompatible language runtime class for module %s; returning null", l.getModuleName()));
       return null;
-    } catch (IllegalAccessException e) {
+    } catch (NoSuchMethodException | ClassNotFoundException ex) {
+      // would like to have error + exception here, but there are tests (e.g. ModulesReloadTest) that legitimately expect non-compiled modules
+      // and no distinction between source and deployed modules. Now, we try to load any module added to the global repository, even if it's
+      // a source module just added to a project. Once we tell deployed modules from sources (two distinct repositories would likely suffice),
+      LOG.warning(String.format("Missing language runtime class for module %s (make failed?); returning null", l.getModuleName()));
+      return null;
+    } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
       LOG.error(String.format("Failed to load language %s", l.getModuleName()), e);
       return null;
     }
   }
 
   /**
-   * For the time being, we instantiate runtime of generated generators only.
-   * We could have had TemplateModuleInterpreted instantiated here, but don't do that for few reasons
-   * (1) We are in [kernel] now, can't access code in [generator-engine] module. Would need to move the registry
-   * to [project], perhaps, to satisfy the dependency
-   * (2) TemplateModuleInterpreted doesn't work well when it lasts. It doesn't track model/module changes and may answer with stale info if
-   * the instance stays for a long time. Present approach is to ask language for generators (LR.getGenerators(), where new instance is created),
+   * We expect Generator RT class for any generator module, both interpreted and generated.
+   * However, in 2018.1 we tolerate no activator class case for compatibility with code generated with previous MPS releases.
+   * In this case, we resort to TemplateModuleInterpreted supplied from LanguageRuntime#getGenerators().
+   * <p/>
+   * Note, there's an entanglement with TemplateModuleInterpreted/TemplateModuleInterpreted2, they don't work well when last.
+   * Either doesn't track model/module changes and may answer with stale info if the instance stays for a long time.
+   * Prior to 2018.1, approach was to ask language for generators (LR.getGenerators(), where new instance is created),
    * and LR+TMI assume no changes in generator module while these generators are consumed.
+   * However, with activator class of generator module being there unless regenerated/reloaded, we may face issues, when template model is not in sync with
+   * generated code.
    */
   private GeneratorRuntime createRuntime(Generator g) {
-    if (g.generateTemplates()) {
-      Language sourceLanguage = g.getSourceLanguage();
-      final String rtClassName = sourceLanguage.getModuleName() + ".Generator";
-      try {
-        Class<?> rtClass;
-        try {
-          rtClass = g.getOwnClass(rtClassName);
-        } catch (ClassNotFoundException ex) {
-          // FIXME compatibility with legacy generators that has been generated with Generator class along with Language RT class
-          // under language module. XXX need this unless provide module activator class name in module.xml/module descriptor so that
-          // can tell legacy module from a newer one (newer would have activator for Generator module, while legacy had none)
-          try {
-            rtClass = sourceLanguage.getOwnClass(rtClassName);
-          } catch (ModuleClassNotFoundException e) {
-            // no error here: Generator might be not compiled yet
-            return null;
+    SLanguage sourceLanguage = g.sourceLanguage();
+    // A bit of history. The need for activator class name arise when we generate a code from a Generator module and load it at runtime.
+    // First, there were no activators at all. Then, activators for generator modules with 'generated' templates were introduced.
+    // They resorted to g.getSourceLanguage().getModuleName() + ".Generator", likely, not to deal with '#' in generator module name, and the fact
+    // that generator module name left to '#' is identical to source language anyway. E.g. GeneratorDescriptorModelProvider assumed that
+    // hash-less namespace of generator module was the same as source language. This was wrong, however, as there are generators that don't follow this
+    // pattern, and attempt to load activator class like getSourceLanguage().getModuleName() + ".Generator" would fail for them. It's time to get this fixed.
+    // Now, with activators generated for any Generator module,
+    // we have to deal with a case when there are multiple generators in a language (well, we had to deal with it anyway, just didn't encounter it for
+    // 'generated' templates). The idea is to use true name of generator module for activator class (except for '#...' suffix) as there seems to be no
+    // solid ground to keep left-hand side of generator module name equal to that of its source language. Provided it was derived from the language,
+    // existing compiled code (i.e. 'generated' generators) won't get broken as the value would be the same. There were no activators for generator modules
+    // with interpreted templates, therefore it's the right time to introduce the change.
+    // This code mimics GeneratorDescriptorModelProvider#getModelReference(), which controls name of a descriptor model (and, therefore, output location of
+    // the activator class which is generated from the model).
+    String mn = g.getModuleName();
+    int hashSign = mn.indexOf('#');
+    if (hashSign > 0) {
+      mn = mn.substring(0, hashSign);
+    }
+    // we used to mangle name with ordinal index of generator in its language (getSourceLanguage().getOwnedGenerators().indexOf(this))
+    // when there are few generators, but I don't think it's reasonable any more - it's easier to keep distinct generator modules in separate
+    // namespaces rather than to guess activator name based on index in uncontrolled collection. Besides, generating two+ modules into same location
+    // of their source language fools Make and leads to removal of activator of one of generated modules (same dir but file is not touched).
+//    ArrayList<Generator> ownedGenerators = new ArrayList<>();
+//    if (ownedGenerators.size() > 0 && ownedGenerators.indexOf(this) >= 0) {
+//      className += ownedGenerators.indexOf(this);
+//    }
+    final String rtClassName = NameUtil.longNameFromNamespaceAndShortName(mn, "Generator");
+
+    try {
+      Class<?> rtClass = g.getOwnClass(rtClassName);
+      if (GeneratorRuntime.class.isAssignableFrom(rtClass)) {
+        final Class<? extends GeneratorRuntime> aClass = rtClass.asSubclass(GeneratorRuntime.class);
+        final LanguageRuntime sourceLanguageRuntime = getLanguage(sourceLanguage);
+        if (sourceLanguageRuntime == null) {
+          String m = format("Could not find language runtime for %s to attach generator %s to", sourceLanguage.getQualifiedName(), g.getModuleName());
+          // we used to throw exception, yet same considerations as createRuntime(Language), above, shall apply. If Language module misses classes,
+          // createRuntime() for it would warn about 'make failed?' and go on gracefully, but its dependent generator fails with exception, which is inapropriate
+//          throw new InstantiationException(m);
+          LOG.warning(m);
+          return null;
+        }
+        Constructor<?>[] allConstructors = aClass.getConstructors();
+        // Provisional constructor for TemplateModule, that takes LanguageRegistry, LanguageRuntime and Generator module. @since 2018.1
+        // It's to substitute new TemplateModuleInterpreted from the LanguageRuntime subclass. We need it until all the generators are completely
+        // generated. Meanwhile we have a 'partially' interpreted generators, with TemplateModule/GeneratorRuntime being generated always.
+        for (Constructor<?> cons : allConstructors) {
+          if (cons.getParameterCount() != 3) {
+            continue;
+          }
+          Class<?>[] parameterTypes = cons.getParameterTypes();
+          if (parameterTypes[0] == LanguageRegistry.class && parameterTypes[1] == LanguageRuntime.class && parameterTypes[2] == Generator.class) {
+            Constructor<? extends GeneratorRuntime> c = aClass.getConstructor(LanguageRegistry.class, LanguageRuntime.class, Generator.class);
+            return c.newInstance(this, sourceLanguageRuntime, g);
           }
         }
-        if (GeneratorRuntime.class.isAssignableFrom(rtClass)) {
-          final Class<? extends GeneratorRuntime> aClass = rtClass.asSubclass(GeneratorRuntime.class);
-          final LanguageRuntime sourceLanguageRuntime = getLanguage(sourceLanguage);
-          if (sourceLanguageRuntime == null) {
-            throw new InstantiationException(String.format("Could not find language runtime for %s to attach generator %s to", sourceLanguage.getModuleName(),
-                g.getModuleName()));
+        // Constructor for TemplateModule, the one that takes LanguageRegistry and LanguageRuntime. @since 2017.1
+        for (Constructor<?> cons : allConstructors) {
+          if (cons.getParameterCount() != 2) {
+            continue;
           }
-          Constructor<? extends GeneratorRuntime> constructor = null;
-          for (Constructor<?> cons : aClass.getConstructors()) {
-            if (cons.getParameterTypes().length != 1) {
-              continue;
-            }
-            final Class<?> paramType = cons.getParameterTypes()[0];
-            if (paramType == sourceLanguageRuntime.getClass()) {
-              // Generator classes used to accept instance of Language runtime class as their cons argument.
-              // However, once moved to own module and being generated from distinct descriptor model, the reference become cross-model one,
-              // and given the choice between export labels and base RT class as cons argument, the pick is no-brainer.
-              constructor = aClass.getConstructor(sourceLanguageRuntime.getClass());
-              break;
-            }
-            if (paramType == LanguageRuntime.class) {
-              constructor = aClass.getConstructor(LanguageRuntime.class);
-              break;
-            }
-          }
-          if (constructor == null) {
-            LOG.error(String.format("No constructor to accept language runtime found in class %s of generator %s", rtClassName, g.getModuleName()));
-            return null;
-          } else {
-            return constructor.newInstance(sourceLanguageRuntime);
+          Class<?>[] parameterTypes = cons.getParameterTypes();
+          if (parameterTypes[0] == LanguageRegistry.class && parameterTypes[1] == LanguageRuntime.class) {
+            Constructor<? extends GeneratorRuntime> c = aClass.getConstructor(LanguageRegistry.class, LanguageRuntime.class);
+            return c.newInstance(this, sourceLanguageRuntime);
           }
         }
-      } catch (ClassNotFoundException e) {
-        LOG.error(String.format("Failed to load runtime %s of generator %s", rtClassName, g.getModuleName()), e);
-      } catch (InstantiationException e) {
-        LOG.error(String.format("Failed to instantiate runtime %s of generator %s", rtClassName, g.getModuleName()), e);
-      } catch (IllegalAccessException e) {
-        LOG.error(String.format("Failed to instantiate runtime %s of generator %s", rtClassName, g.getModuleName()), e);
-      } catch (NoSuchMethodException e) {
-        LOG.error(String.format("Failed to instantiate runtime %s of generator %s. Bad constructor?", rtClassName, g.getModuleName()), e);
-      } catch (InvocationTargetException e) {
-        LOG.error(String.format("Failed to instantiate runtime %s of generator %s. Bad constructor?", rtClassName, g.getModuleName()), e);
+        LOG.error(String.format("No proper constructor found in the class %s of generator %s", rtClassName, g.getModuleName()));
+        return null;
+      } else {
+        LOG.error(String.format("Generator runtime class %s from module %s is not an instance of GeneratorRuntime", rtClass.getName(), g.getModuleName()));
+        return null;
       }
+    } catch (ClassNotFoundException e) {
+      String msg = format("Failed to load runtime %s of generator %s", rtClassName, g.getModuleName());
+      if (g.generateTemplates()) {
+        if (LOG.isDebugLevel()) {
+          LOG.warning(msg, e);
+        } else {
+          LOG.warning(msg);
+        }
+      } else {
+        // FIXME this is compatibility code. Language RT generated prior to 2018.1 included #getGenerators() implementation for interpreted templates,
+        //       and generator module lacked any activator class. With 2018.1, we generate Generator RT class for every generator module (including interpreted)
+        //       Remove this code once 2018.1 is out.
+        LOG.debug(msg, e);
+      }
+    } catch (InstantiationException | IllegalAccessException e) {
+      LOG.error(String.format("Failed to instantiate runtime %s of generator %s", rtClassName, g.getModuleName()), e);
+    } catch (NoSuchMethodException | InvocationTargetException e) {
+      LOG.error(String.format("Failed to instantiate runtime %s of generator %s. Bad constructor?", rtClassName, g.getModuleName()), e);
     }
     return null;
+  }
+
+  @Nullable
+  private ModuleRuntime createRuntime(Solution solution) {
+    return new ModuleRuntime(solution.getModuleReference(), solution.getClassLoader(), deduceRuntimeFlags(solution));
+  }
+
+  private static Flags[] deduceRuntimeFlags(AbstractModule am) {
+    if (SModuleOperations.canSupplyExtensionsForMPS(am)) {
+      return new Flags[] {Flags.WithExtensions};
+    }
+    return new Flags[] {Flags.NoExtensions};
   }
 
   public String toString() {
@@ -265,136 +343,316 @@ public class LanguageRegistry implements CoreComponent, MPSClassesListener {
     myLanguageListeners.remove(listener);
   }
 
-  /*
-   *   Collection is valid until the end of the current read action.
-   */
-  public Collection<LanguageRuntime> getAvailableLanguages() {
-    myRepository.getModelAccess().checkReadAccess();
-    return myLanguagesById.values();
+  public void addRegistryListener(@NotNull ModuleDeploymentListener listener) {
+    myDeploymentNotification.addListener(listener);
   }
 
-  public Collection<SLanguage> getAllLanguages() {
-    final Collection<LanguageRuntime> languages = getAvailableLanguages();
-    ArrayList<SLanguage> rv = new ArrayList<SLanguage>(languages.size());
-    for (LanguageRuntime lr : languages) {
-      rv.add(MetaAdapterFactory.getLanguage(lr.getId(), lr.getNamespace()));
+  public void removeRegistryListener(@NotNull ModuleDeploymentListener listener) {
+    myDeploymentNotification.removeListener(listener);
+  }
+
+  /**
+   * Synchronous access to actual languages in the registry.
+   * It's guaranteed no change to the set of languages happen while this method is working.
+   * BEWARE, {@code operation} shall not perform model read/write as it might lead to dead-lock
+   * (a thread starts model write and waits for write on myRuntimeInstanceAccess, while another thread had grabbed
+   * myRuntimeInstanceAccess read lock and consumer operation trues to grab model lock).
+   * @param operation invoked for each actual {@link LanguageRuntime}, minimalistic and simple.
+   */
+  public void withAvailableLanguages(@NotNull Consumer<LanguageRuntime> operation) {
+    try {
+      myRuntimeInstanceAccess.readLock().lock();
+      myLanguagesById.values().forEach(operation);
+    } finally {
+      myRuntimeInstanceAccess.readLock().unlock();
     }
+  }
+
+  /**
+   * Pretty much what {@link #withAvailableLanguages(Consumer)} does, except for a designated subset.
+   * @since 2021.2
+   */
+  public void withAvailableLanguages(@NotNull Stream<SLanguage> languages, @NotNull Consumer<LanguageRuntime> operation) {
+    withAvailableLanguages(operation, languages.map(MetaIdHelper::getLanguage));
+  }
+
+  //
+  // could be public, if necessary
+  /*package*/ void withAvailableLanguages(@NotNull Consumer<LanguageRuntime> operation, @NotNull Stream<SLanguageId> languages) {
+    try {
+      myRuntimeInstanceAccess.readLock().lock();
+      languages.map(myLanguagesById::get).filter(Objects::nonNull).forEach(operation);
+    } finally {
+      myRuntimeInstanceAccess.readLock().unlock();
+    }
+  }
+
+  /**
+   * @return snapshot of languages known to the registry at the given moment.
+   *         May not reflect actual state (a language might get unloaded), but as long as it's about identity objects, it's not that important to
+   *         keep the collection exact.
+   */
+  public Collection<SLanguage> getAllLanguages() {
+    ArrayList<SLanguage> rv = new ArrayList<>(100);
+    withAvailableLanguages(lr -> rv.add(lr.getIdentity()));
     return rv;
   }
 
   @Nullable
   public LanguageRuntime getLanguage(SLanguage language) {
-    return myLanguagesById.get(language);
+    return getLanguage(MetaIdHelper.getLanguage(language));
   }
 
   @Nullable
   public LanguageRuntime getLanguage(SLanguageId id) {
-    return getLanguage(MetaAdapterFactory.getLanguage(id, "<LanguageRegistry: this name must not be used>"));
+    try {
+      myRuntimeInstanceAccess.readLock().lock();
+      return myLanguagesById.get(id);
+    } finally {
+      myRuntimeInstanceAccess.readLock().unlock();
+    }
   }
 
   @Nullable
   public LanguageRuntime getLanguage(String namespace) {
-    for (SLanguage l : myLanguagesById.keySet()) {
-      if (l.getQualifiedName().equals(namespace)) {
-        return myLanguagesById.get(l);
+    try {
+      myRuntimeInstanceAccess.readLock().lock();
+      for (LanguageRuntime l : myLanguagesById.values()) {
+        if (Objects.equals(l.getNamespace(), namespace)) {
+          return l;
+        }
       }
+    } finally {
+      myRuntimeInstanceAccess.readLock().unlock();
     }
     return null;
   }
 
   @Nullable
   public LanguageRuntime getLanguage(Language language) {
-    return getLanguage(MetaAdapterByDeclaration.getLanguage(language));
+    return getLanguage(MetaIdByDeclaration.getLanguageId(language));
   }
 
   /**
-   * PROVISIONAL API, DO NOT USE
-   * Find respective runtime presentation of generator module
-   * FIXME shall decide whether need standalone GeneratorRegistry to supply GeneratorRuntimes
-   * FIXME or access to GeneratorRuntime through LanguageRegistry is enough.
+   *
+   * @param generatorIdentity we use {@link SModuleReference} to identify generator, not to introduce a dedicated {@code SGenerator} similar to {@link SLanguage}
    */
-  public GeneratorRuntime getGenerator(Generator generator) {
-    LanguageRuntime lr = getLanguage(generator.getSourceLanguage());
-    if (lr == null) {
-      return null;
-    }
-    for (GeneratorRuntime grt : lr.getGenerators()) {
-      if (grt.getModuleReference().equals(generator.getModuleReference())) {
-        return grt;
+  @Nullable
+  public GeneratorRuntime getGenerator(@NotNull SModuleReference generatorIdentity) {
+    try {
+      myRuntimeInstanceAccess.readLock().lock();
+      final ModuleRuntime mr = myModuleRuntime.get(generatorIdentity);
+      GeneratorRuntime[] rv = new GeneratorRuntime[] {null};
+      if (mr != null) {
+        mr.forActivatorIfInstance(GeneratorRuntimeActivator.class, a -> rv[0] = a.getGeneratorRuntime());
       }
+      return rv[0];
+    } finally {
+      myRuntimeInstanceAccess.readLock().unlock();
     }
-    return null;
   }
 
-  // MPSClassesListener part
-  @Override
-  public void beforeClassesUnloaded(Set<? extends ReloadableModuleBase> unloadedModules) {
-    for (Generator generator : collectGeneratorModules(unloadedModules)) {
-      GeneratorRuntime generatorRuntime = myGeneratorsWithCompiledRuntime.remove(generator.getModuleReference());
-      if (generatorRuntime == null) {
-        // fine, we do not track GR other than generated
-        continue;
-      }
-      LanguageRuntime srcLangRuntime = generatorRuntime.getSourceLanguage();
-      srcLangRuntime.unregister(generatorRuntime);
-    }
+  // ClassLoaderManager/DeployListener part
 
-    Set<LanguageRuntime> languagesToUnload = new HashSet<LanguageRuntime>();
-    for (Language language : collectLanguageModules(unloadedModules)) {
-      SLanguage sl = MetaAdapterByDeclaration.getLanguage(language);
-      if (!myLanguagesById.containsKey(sl)) {
-        LOG.warn("No language with id " + sl + " to unload");
-      } else {
-        languagesToUnload.add(myLanguagesById.get(sl));
-      }
-    }
-
-    notifyUnload(languagesToUnload);
-
-    for (LanguageRuntime languageRuntime : languagesToUnload) {
-      myLanguagesById.remove(MetaAdapterFactory.getLanguage(languageRuntime.getId(), languageRuntime.getNamespace()));
-    }
-    reinitialize();
-  }
 
   @Override
-  public void afterClassesLoaded(Set<? extends ReloadableModuleBase> loadedModules) {
-    Set<LanguageRuntime> loadedRuntimes = new LinkedHashSet<LanguageRuntime>();
-    for (Language language : collectLanguageModules(loadedModules)) {
-      SLanguage sl = MetaAdapterByDeclaration.getLanguage(language);
-      if (myLanguagesById.containsKey(sl)) {
-        LOG.error("", new IllegalArgumentException(String.format("There is already a language '%s'", myLanguagesById.get(sl))));
-        continue;
-      }
-      try {
-        LanguageRuntime langRuntime = createRuntime(language);
-        if (langRuntime == null) {
+  public void onUnloaded(@NotNull final ResourceTrackerCallback callback, @NotNull ProgressMonitor monitor) {
+    // we need to identify each request individually
+    final Object unloadToken = Long.toString(System.currentTimeMillis(), 16);
+    final Set<ReloadableModule> unloadedModules = callback.acquire(unloadToken);
+    if (LOG.isTraceLevel()) {
+      LOG.trace("CLM unload token acquired: " + unloadToken);
+    }
+    try {
+      myRuntimeInstanceAccess.writeLock().lock();
+      monitor.start("Solution Runtime", 5);
+      final UnloadRecord modulesToUnload = new UnloadRecord();
+      for (Solution s : CollectionUtil.filter(Solution.class, unloadedModules)) {
+        // get, not remove as we notify all first, and only then remove them.
+        final ModuleRuntime moduleRuntime = myModuleRuntime.get(s.getModuleReference());
+        if (moduleRuntime == null) {
           continue;
         }
-
-        myLanguagesById.put(sl, langRuntime);
-        loadedRuntimes.add(langRuntime);
-      } catch (LinkageError le) {
-        processLinkageErrorForLanguage(language, le);
+        modulesToUnload.add(moduleRuntime, true);
       }
+      monitor.advance(1);
+
+      monitor.step("Generator Runtime");
+      for (Generator generator : collectGeneratorModules(unloadedModules)) {
+        final ModuleRuntime moduleRuntime = myModuleRuntime.get(generator.getModuleReference());
+        if (moduleRuntime == null) {
+          continue;
+        }
+        modulesToUnload.add(moduleRuntime, false);
+        GeneratorRuntime[] generatorRuntime = new GeneratorRuntime[] {null};
+        moduleRuntime.forActivatorIfInstance(GeneratorRuntimeActivator.class, a -> generatorRuntime[0] = a.getGeneratorRuntime());
+        if (generatorRuntime[0] == null) {
+          LOG.error(String.format("ModuleRuntime for %s present but doesn't hold activator instance", generator.getModuleReference()));
+          continue;
+        }
+        // let runtime know we don't need its services anymore, but do it the moment it's still in complete state.
+        generatorRuntime[0].deactivate(); // TODO unite with MR.Activator interface
+        LanguageRuntime srcLangRuntime = generatorRuntime[0].getSourceLanguage();
+        srcLangRuntime.unregister(generatorRuntime[0]);
+      }
+      monitor.advance(1);
+
+      monitor.step("Language Runtime");
+      Set<LanguageRuntime> languagesToUnload = new HashSet<>();
+      for (Language language : collectLanguageModules(unloadedModules)) {
+        SLanguageId sl = MetaIdByDeclaration.getLanguageId(language);
+        if (!myLanguagesById.containsKey(sl)) {
+          LOG.warning("No language with id " + sl + " to unload");
+        } else {
+          languagesToUnload.add(myLanguagesById.get(sl));
+        }
+        final ModuleRuntime moduleRuntime = myModuleRuntime.get(language.getModuleReference());
+        if (moduleRuntime != null) {
+          modulesToUnload.add(moduleRuntime, true);
+        }
+      }
+      monitor.advance(1);
+
+      final ModuleRuntimeContext rtc = myPlatformAccess::get;
+      myDeploymentNotification.update(Collections.emptyList(), modulesToUnload.notifyDeployment());
+      myDeploymentNotification.dispatch(true, () -> {
+        if (LOG.isTraceLevel()) {
+          LOG.trace("Deployment notification is over, actual runtime deactivation to start. Token: " + unloadToken);
+        }
+
+        // let CLs go
+        callback.release(unloadToken);
+        if (LOG.isTraceLevel()) {
+          LOG.trace("CLM unload  token released: " + unloadToken);
+        }
+      });
+
+      // forget about runtimes right away, but dispose them only once all processing in listeners don
+      myModuleRuntime.values().removeAll(modulesToUnload.myModules);
+
+      monitor.step("Language Registry Listeners");
+      notifyUnload(languagesToUnload);
+      monitor.advance(1);
+
+      Set<SLanguageId> extensionTargets = new HashSet<>();
+      for (LanguageRuntime languageRuntime : languagesToUnload) {
+        // XXX why do I use map at LER and don't store data right inside LR instance?
+        myExtensionRegistry.clearContributionsOf(languageRuntime, extensionTargets);
+        languageRuntime.dispose();
+        myLanguagesById.remove(languageRuntime.getId());
+      }
+      notifyExtensionsChanged(extensionTargets);
+      reinitialize();
+
+      // I'd love to deactivate MR only when all listeners of myDeploymentNotification done processing,
+      // but delaying deactivation without delaying activation of a reloaded module leaves MPS in inconsistent state
+      // (namely j.m.make.facets.ModuleActivator and FacetRegistry, which keeps single facet instance per IName)
+      // hence as a quick'n'dirty workaround, I deactivate a module right away, even though its runtime is expected to be
+      // "functional" until ModuleDeploymentListener(s) notify they are done processing notifications.
+      for (ModuleRuntime rt : modulesToUnload.myModules) {
+        rt.deactivate(rtc);
+      }
+    } finally {
+      myRuntimeInstanceAccess.writeLock().unlock();
     }
-    reinitialize();
+    monitor.done();
+  }
 
-    for (Generator generator : collectGeneratorModules(loadedModules)) {
-      GeneratorRuntime generatorRuntime = createRuntime(generator);
-      if (generatorRuntime == null) {
-        // either interpreted or no generator at all, let generated LanguageRuntime#getGenerators() decide
-        continue;
+  @Override
+  public void onLoaded(@NotNull Set<ReloadableModule> loadedModules, @NotNull ProgressMonitor monitor) {
+    monitor.start("Language Runtime", 5);
+    // XXX likely, would need to use PluginSorter here to sort loaded modules to get their activators running in proper order
+    // (i.e. to respect dependencies)
+    LoadRecord loadedRuntimes = new LoadRecord();
+    ArrayList<LanguageRuntime> transitional = new ArrayList<>();
+    try {
+      myRuntimeInstanceAccess.writeLock().lock();
+      for (Language language : collectLanguageModules(loadedModules)) {
+        try {
+          LanguageRuntime langRuntime = createRuntime(language);
+          if (langRuntime == null) {
+            continue;
+          }
+          SLanguageId sl = langRuntime.getId();
+          if (myLanguagesById.containsKey(sl)) {
+            String msg = String.format("There is already a language '%s'", myLanguagesById.get(sl));
+            LOG.error(msg, new IllegalArgumentException(msg));
+            continue;
+          }
+          myLanguagesById.put(sl, langRuntime);
+          final LanguageRuntimeActivator activator = new LanguageRuntimeActivator(langRuntime);
+          ModuleRuntime.ActivatorFactory af = (mr,ctx) -> activator;
+          loadedRuntimes.add(new ModuleRuntime(language.getModuleReference(),language.getClassLoader(), af, Flags.WithExtensions), true);
+          // perhaps, has to be part of loadedRuntimes cycle, below, but this is the place I've got Language instance,
+          // don't want to bother recording Pairs
+          fixupLanguageRuntime(language, langRuntime);
+          transitional.add(langRuntime);
+        } catch (LinkageError le) {
+          processLinkageErrorForLanguage(language, le);
+        }
       }
-      GeneratorRuntime old = myGeneratorsWithCompiledRuntime.put(generatorRuntime.getModuleReference(), generatorRuntime);
-      if (old != null) {
-        LOG.warn(String.format("There is already generator runtime for module '%s'", old.getModuleReference()));
+      reinitialize();
+      Set<SLanguageId> extensionTargets = new HashSet<>();
+      // perhaps, could be part of LangRuntime.initialize(LangReg), if I expose (package-local) LangExtReg from here
+      for (LanguageRuntime lr : transitional) {
+        final LanguageExtensions languageExtensions = myExtensionRegistry.forContributor(this, lr, extensionTargets);
+        lr.contributeExtensions(languageExtensions);
       }
-      LanguageRuntime srcLangRuntime = generatorRuntime.getSourceLanguage();
-      srcLangRuntime.register(generatorRuntime);
+      // note, extensionTargets is filled the moment LR.contributeExtensions() works, not inside LER.forContributor().
+      //
+      // if I improve aspects/extensions for any module, would need to move this down, when all the modules get the chance to initialise
+      // at the moment, it's only languages, that's why I do it right after I handled all the languages
+      notifyExtensionsChanged(extensionTargets);
+      monitor.advance(1);
+
+      monitor.step("Generator Runtime");
+      for (Generator generator : collectGeneratorModules(loadedModules)) {
+        GeneratorRuntime generatorRuntime = createRuntime(generator);
+        if (generatorRuntime == null) {
+          // either interpreted or no generator at all, let generated LanguageRuntime#getGenerators() decide
+          continue;
+        }
+        LanguageRuntime srcLangRuntime = generatorRuntime.getSourceLanguage();
+        srcLangRuntime.register(generatorRuntime);
+        GeneratorRuntimeActivator activator = new GeneratorRuntimeActivator(generatorRuntime);
+        loadedRuntimes.add(new ModuleRuntime(generator.getModuleReference(), generator.getClassLoader(), (mr, ctx)->activator, Flags.NoExtensions), false);
+      }
+      monitor.advance(1);
+
+      monitor.step("Solution Runtime");
+      for (Solution s : CollectionUtil.filter(Solution.class, loadedModules)) {
+        ModuleRuntime moduleRuntime = createRuntime(s);
+        if (moduleRuntime == null) {
+          continue;
+        }
+        loadedRuntimes.add(moduleRuntime, true);
+      }
+      monitor.advance(1);
+
+      monitor.step("Activators...");
+      ModuleRuntimeContext rtc = myPlatformAccess::get;
+      for (ModuleRuntime rt : loadedRuntimes.myModules) {
+        // XXX perhaps, 2 separate loops, one to register in the map, another to activate()? Just in case
+        // activate code looks up MR of another module (although generally shall not).
+        ModuleRuntime old = myModuleRuntime.put(rt.getSourceModule(), rt);
+        if (old != null) {
+          LOG.warning(String.format("There's already runtime instance for module '%s'", old.getSourceModule()));
+        }
+        rt.activate(rtc);
+      }
+      monitor.advance(1);
+    } finally {
+      myRuntimeInstanceAccess.writeLock().unlock();
     }
 
-    notifyLoad(loadedRuntimes);
+    monitor.step("Language Registry Listeners");
+    // XXX perhaps, shall grab read lock of myRuntimeInstanceAccess? Or it's enough to assume we would never get into onLoaded again while we are not
+    //     over with the previous one?
+    notifyLoad(transitional);
+    monitor.advance(1);
+    monitor.done();
+    myDeploymentNotification.update(loadedRuntimes.notifyDeployment(), Collections.emptyList());
+    myDeploymentNotification.dispatch(false, () -> {});
   }
 
   private Collection<Language> collectLanguageModules(Set<? extends SModule> modules) {
@@ -406,17 +664,94 @@ public class LanguageRegistry implements CoreComponent, MPSClassesListener {
   }
 
   private void reinitialize() {
-    for (LanguageRuntime languageRuntime : myLanguagesById.values()) {
-      languageRuntime.deinitialize();
+    myLanguagesById.values().forEach(LanguageRuntime::deinitialize);
+    myLanguagesById.values().forEach(languageRuntime -> languageRuntime.initialize(this));
+  }
+
+  private void notifyExtensionsChanged(Set<SLanguageId> extensionTargets) {
+    // in case any existing/new language has cached extensions for its aspects, let them know there might be new one
+    for (SLanguageId lid : extensionTargets) {
+      final LanguageRuntime extTargetRT = myLanguagesById.get(lid);
+      if (extTargetRT != null) {
+        // assume target language module could be present for CL but LR failed to instantiate, see
+        // comments inside LER.forContributor.
+        // Another case is when target language has been disposed along with the contributor, we don't care to notify
+        // disposed RT about the change, it is going to be disposed anyway
+        extTargetRT.languageExtensionsChanged();
+      }
     }
-    for (LanguageRuntime languageRuntime : myLanguagesById.values()) {
-      languageRuntime.initialize(this);
+  }
+
+  private void fixupLanguageRuntime(Language sourceModule, LanguageRuntime langRuntime) {
+    final Collection<SModuleReference> runtimeModulesReferences;
+    ArrayList<SModuleReference> generatesInto = new ArrayList<>(4);
+    final LanguageDescriptor md = sourceModule.getModuleDescriptor();
+    if (md != null) {
+      // AM.getDeclaredDependencies() doesn't really stick to 'declared' only, it also
+      // goes an extra mile to collect dependencies I don't care about (at least here)
+      runtimeModulesReferences = md.getRuntimeModules();
+      for (Dependency dependency : md.getDependencies()) {
+        if (dependency.getScope() == SDependencyScope.GENERATES_INTO) {
+          generatesInto.add(dependency.getModuleRef());
+        }
+      }
+    } else {
+      // not that I think it's essential to keep this 'else', there are hardly Language modules
+      // w/o MD, but this code shows we can handle this scenario as well.
+      runtimeModulesReferences = sourceModule.getRuntimeModulesReferences();
+      for (SDependency dd : sourceModule.getDeclaredDependencies()) {
+        if (dd.getScope() == SDependencyScope.GENERATES_INTO) {
+          generatesInto.add(dd.getTargetModule());
+        }
+      }
     }
+    langRuntime.setLanguageRuntimeModules(runtimeModulesReferences);
+    langRuntime.setGeneratesIntoTargets(generatesInto);
+  }
+
+  /*package*/ LanguageExtensionRegistry getExtensionRegistry() {
+    // provisionally expose the registry. shall keep all the operations over the registry local to this class and guard them with myRuntimeInstanceAccess lock
+    return myExtensionRegistry;
+  }
+
+  /*package*/ void withAvailableModuleRuntime(Consumer<Function<SModuleReference, ModuleRuntime>> callback) {
+    try {
+      myRuntimeInstanceAccess.readLock().lock();
+      callback.accept(myModuleRuntime::get);
+    } finally {
+      myRuntimeInstanceAccess.readLock().unlock();
+    }
+
   }
 
   private static void processLinkageErrorForLanguage(Language language, LinkageError linkageError) {
     LOG.error("Caught a linkage error while creating LanguageRuntime for the `" + language + "` language." +
         "Probably the language sources/classes are outdated, try rebuilding the project.", linkageError);
-    LOG.warn("MPS will attempt running in a inconsistent state.");
+    LOG.warning("MPS will attempt running in a inconsistent state.");
+  }
+
+  private static class Record {
+    protected final List<ModuleRuntime> myModules = new ArrayList<>();
+    private final Set<SModuleReference> myNotifications = new HashSet<>();
+
+    /*package*/ void add(ModuleRuntime mr, boolean needsNotify) {
+      // XXX needsNotify: for the time being, we don't include generators, although eventually shall include these, too
+      myModules.add(mr);
+      if (needsNotify) {
+        myNotifications.add(mr.getSourceModule());
+      }
+    }
+
+    /*package*/ Collection<SModuleReference> notifyDeployment() {
+      return Collections.unmodifiableSet(myNotifications);
+    }
+  }
+
+  private static class LoadRecord extends Record {
+
+  }
+
+  private static class UnloadRecord extends Record {
+
   }
 }

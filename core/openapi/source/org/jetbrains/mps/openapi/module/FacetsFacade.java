@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,12 @@ package org.jetbrains.mps.openapi.module;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.annotations.Internal;
 import org.jetbrains.mps.openapi.language.SLanguage;
 
 import java.util.Collection;
 import java.util.Set;
+import java.util.function.Consumer;
 
 public abstract class FacetsFacade {
 
@@ -29,6 +31,10 @@ public abstract class FacetsFacade {
 
   protected static FacetsFacade INSTANCE;
 
+  /**
+   * @deprecated Use respective {@code ComponentPlugin} (i.e. {@code MPSCore}) to obtain instance of the registry.
+   */
+  @Deprecated
   public static FacetsFacade getInstance() {
     return INSTANCE;
   }
@@ -39,36 +45,15 @@ public abstract class FacetsFacade {
   public abstract Set<String> getFacetTypes();
 
   /**
-   * @deprecated use {@link #getApplicableFacetTypes(Collection)} instead
-   */
-  @Deprecated
-  // ToRemove(version = 3.4)
-  public abstract Set<String> getApplicableFacetTypes(Iterable<String> usedLanguages);
-
-  /**
    * For the given set of languages, returns a set of recommended (see {@link #registerLanguageFacet(SLanguage, String)}) facet types.
    */
   public abstract Set<String> getApplicableFacetTypes(Collection<SLanguage> usedLanguages);
-
-  /**
-   * @deprecated use {@link #registerLanguageFacet(SLanguage, String)} instead
-   */
-  @Deprecated
-  // ToRemove(version = 3.4)
-  public abstract void registerLanguageFacet(String language, String facetType);
 
   /**
    *  Associates a facet with a language. Allows MPS to advise a user to turn on the facet for
    *  modules using this language.
    */
   public abstract void registerLanguageFacet(@NotNull SLanguage language, String facetType);
-
-  /**
-   * @deprecated use {@link #unregisterLanguageFacet(SLanguage, String)} instead
-   */
-  @Deprecated
-  // ToRemove(version = 3.4)
-  public abstract void unregisterLanguageFacet(String language, String facetType);
 
   public abstract void unregisterLanguageFacet(@NotNull SLanguage language, String facetType);
 
@@ -79,12 +64,35 @@ public abstract class FacetsFacade {
   @Nullable
   public abstract FacetFactory getFacetFactory(String facetType);
 
+  /**
+   * for now it is only for internal use
+   */
+  @Internal
+  public abstract void callWhenFacetFactoryAppears(@NotNull String facetFactoryType, @NotNull Consumer<FacetFactory> callback);
+
   public abstract void addFactory(@NotNull String facetType, FacetFactory factory);
 
   public abstract void removeFactory(FacetFactory factory);
 
   public interface FacetFactory {
-    // FIXME why cast to ModuleFacetBase.setModule when we can pass SModule right into #create() here?
-    SModuleFacet create();
+    /**
+     * @since 2018.3
+     */
+    default boolean isApplicable(@NotNull SModule module) {
+      return true;
+    }
+
+    /**
+     * @since 2018.3
+     */
+    SModuleFacet create(@NotNull SModule module);
+
+    /**
+     * @return user readable name for UI
+     */
+    @NotNull
+    default String getPresentation() {
+      return "";
+    }
   }
 }

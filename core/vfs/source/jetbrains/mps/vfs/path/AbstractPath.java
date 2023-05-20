@@ -17,37 +17,17 @@ package jetbrains.mps.vfs.path;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.annotations.Immutable;
 
 /**
- * Common base class
+ * Common base class, not sure whether it stays or gets dropped
  *
- * Created by apyshkin on 6/19/16.
+ * @author apyshkin
  */
-abstract class AbstractPath implements Path {
-  @Override
-  public int compareTo(@NotNull Path path) {
-    return toString().compareTo(path.toString()); //FIXME
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (!(obj instanceof Path)) {
-      return false;
-    }
-    return compareTo((Path) obj) == 0;
-  }
-
-  @Override
-  public int hashCode() {
-    int result = 0;
-    for (String name : getNames()) {
-      result = 31 * result + name.hashCode();
-    }
-    return result;
-  }
-
+@Immutable
+/*package*/ abstract class AbstractPath implements Path {
   private static int getNameCount(Path path) {
-    return path.getNames().size();
+    return path.getAllParts().size();
   }
 
   @Override
@@ -55,7 +35,7 @@ abstract class AbstractPath implements Path {
     if (isRelative() && !other.isRelative()) {
       return false;
     }
-    if (getSeparator() != other.getSeparator()) {
+    if (getSeparatorChar() != other.getSeparatorChar()) {
       return false;
     }
 
@@ -63,8 +43,12 @@ abstract class AbstractPath implements Path {
       return false;
     }
     for (int i = 0; i < getNameCount(other); ++i) {
-      if (!getNames().get(getNameCount(this) - 1 - i).equals(other.getNames().get(getNameCount(other) - 1 - i))) {
+      String myPart = getAllParts().get(getNameCount(this) - 1 - i);
+      String otherPart = other.getAllParts().get(getNameCount(other) - 1 - i);
+      if (otherPart != null && !myPart.equals(otherPart)) {
         return false;
+      } else if (otherPart == null) {
+        assert i == getNameCount(other) - 1;
       }
     }
 
@@ -76,7 +60,7 @@ abstract class AbstractPath implements Path {
     if (!isRelative() && other.isRelative()) {
       return false;
     }
-    if (getSeparator() != other.getSeparator()) {
+    if (getSeparatorChar() != other.getSeparatorChar()) {
       return false;
     }
 
@@ -84,7 +68,7 @@ abstract class AbstractPath implements Path {
       return false;
     }
     for (int i = 0; i < getNameCount(other); ++i) {
-      if (!getNames().get(i).equals(other.getNames().get(i))) {
+      if (!getAllParts().get(i).equals(other.getAllParts().get(i))) {
         return false;
       }
     }
@@ -95,9 +79,9 @@ abstract class AbstractPath implements Path {
   @Override
   @Nullable
   public final String getFileName() {
-    if (getNames().isEmpty()) {
+    if (getAllParts().isEmpty()) {
       return null;
     }
-    return getNames().get(getNameCount(this) - 1);
+    return getAllParts().get(getNameCount(this) - 1);
   }
 }

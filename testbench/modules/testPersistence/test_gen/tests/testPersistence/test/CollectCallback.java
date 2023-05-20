@@ -9,12 +9,14 @@ import java.util.HashSet;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import jetbrains.mps.smodel.adapter.ids.SConceptId;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /*package*/ class CollectCallback implements IndexAwareModelFactory.Callback {
   public final Set<SNodeId> myLocalRefs = new HashSet<SNodeId>();
   public final Set<SNodeId> myExtRefs = new HashSet<SNodeId>();
   public final Set<SModelReference> myImports = new HashSet<SModelReference>();
   public final Set<SConceptId> myConcepts = new HashSet<SConceptId>();
+  public final Set<String> myPropertyValues = new HashSet<String>();
   @Override
   public void instances(@NotNull SConceptId concept) {
     myConcepts.add(concept);
@@ -30,5 +32,10 @@ import org.jetbrains.annotations.NotNull;
   @Override
   public void localNodeRef(@NotNull SNodeId node) {
     myLocalRefs.add(node);
+  }
+
+  @Override
+  public void propertyValue(@Nullable SNodeId node, String value) {
+    myPropertyValues.add(value);
   }
 }

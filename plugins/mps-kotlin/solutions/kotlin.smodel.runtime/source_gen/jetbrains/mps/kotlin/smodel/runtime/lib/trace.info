@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <root nodeRef="r:4cc53280-f3bd-4909-ac6e-932df5f37f0f(jetbrains.mps.kotlin.smodel.runtime.lib)/4636219349448146549">
+    <file name="SNodeKotlinOperations.kt">
+      <unit id="8773483383502708139" at="10,0,10,65" />
+      <unit id="8773483383502763533" at="12,0,12,227" />
+      <unit id="8773483383504570084" at="14,0,14,82" />
+      <unit id="7647285342500705382" at="16,0,16,277" />
+      <unit id="7647285342497165784" at="18,0,18,253" />
+      <unit id="4636219349448146549" at="9,0,25,0" name="jetbrains.mps.kotlin.smodel.runtime.lib.SNodeKotlinOperationsKt" />
+    </file>
+  </root>
+  <root nodeRef="r:4cc53280-f3bd-4909-ac6e-932df5f37f0f(jetbrains.mps.kotlin.smodel.runtime.lib)/687366223600039236">
+    <file name="SConceptKotlinOperations.kt">
+      <unit id="7030867043399584208" at="9,0,9,102" />
+      <unit id="4636219349448146803" at="12,0,20,1" />
+      <unit id="687366223600039236" at="9,0,25,0" name="jetbrains.mps.kotlin.smodel.runtime.lib.SConceptKotlinOperationsKt" />
+    </file>
+  </root>
+  <root nodeRef="r:4cc53280-f3bd-4909-ac6e-932df5f37f0f(jetbrains.mps.kotlin.smodel.runtime.lib)/687366223600067542">
+    <file name="SLinkKotlinOperations.kt">
+      <unit id="687366223601003085" at="6,0,6,84" />
+      <unit id="687366223600067882" at="7,0,7,94" />
+      <unit id="687366223600067542" at="5,0,8,0" name="jetbrains.mps.kotlin.smodel.runtime.lib.SLinkKotlinOperationsKt" />
+    </file>
+  </root>
+</debug-info>
+

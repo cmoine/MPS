@@ -15,10 +15,8 @@
  */
 package jetbrains.mps.lang.typesystem.runtime;
 
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactoryByName;
-import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.typesystem.inference.TypeCheckingContext;
+import org.jetbrains.mps.openapi.model.SNode;
 
 public abstract class AbstractNonTypesystemRule_Runtime implements NonTypesystemRule_Runtime {
   @Override
@@ -31,7 +29,7 @@ public abstract class AbstractNonTypesystemRule_Runtime implements NonTypesystem
   }
 
   @Override
-  public boolean overrides(SNode argument, IsApplicableStatus status) {
+  public boolean overrides(NonTypesystemRule_Runtime rule) {
     return overrides();
   }
 

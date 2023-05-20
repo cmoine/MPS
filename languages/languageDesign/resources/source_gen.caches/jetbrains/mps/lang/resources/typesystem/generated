@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-504b7wyd2uboho1lvk2weok6itkr59r" />
+<product version="3" modelHash="-40yy800c1gv8g6guktcm9xvth3dotd7">
+  <files names="TypesystemDescriptor.java:URLCheckUtil.java:check_HelpURL_NonTypesystemRule.java:check_TextIcon_NonTypesystemRule.java:check_URLLiteral_NonTypesystemRule.java:typeof_BaseURLFunction_InferenceRule.java:typeof_ConceptIconResourceExpression_InferenceRule.java:typeof_IconExpression_InferenceRule.java:typeof_IconResourceExpression_InferenceRule.java:typeof_NodeIconResourceExpression_InferenceRule.java" />
+</product>
 

@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1178893518978:jetbrains.mps.baseLanguage.structure.ThisConstructorInvocation" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1164991038168:jetbrains.mps.baseLanguage.structure.ThrowStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/5351203823916750322:jetbrains.mps.baseLanguage.structure.TryUniversalStatement" />
+  <root nodeRef="r:6d26b589-14c5-496e-9d2b-5c71b3a15e5d(jetbrains.mps.ide.findusages.model.holders)/8568892084424435375">
+    <file name="StringHolder.java">
+      <node id="8568892084424435379" at="14,0,15,0" concept="7" trace="VALUE" />
+      <node id="8568892084424435383" at="15,0,16,0" concept="2" trace="myString" />
+      <node id="8568892084424435396" at="16,91,17,27" concept="1" />
+      <node id="8568892084424435406" at="19,38,20,22" concept="1" />
+      <node id="8568892084424435414" at="23,29,24,20" concept="6" />
+      <node id="8568892084424435422" at="28,30,29,20" concept="6" />
+      <node id="8568892084424435434" at="32,88,33,48" concept="1" />
+      <node id="8568892084424435445" at="34,27,35,74" concept="9" />
+      <node id="8568892084424435457" at="39,89,40,42" concept="1" />
+      <node id="8568892084424435388" at="16,0,19,0" concept="0" trace="StringHolder#(Lorg/jdom/Element;Ljetbrains/mps/project/Project;)V" />
+      <node id="8568892084424435401" at="19,0,22,0" concept="0" trace="StringHolder#(Ljava/lang/String;)V" />
+      <node id="8568892084424435439" at="33,48,36,5" concept="3" />
+      <node id="8568892084424435411" at="22,0,26,0" concept="4" trace="getObject#()Ljava/lang/String;" />
+      <node id="8568892084424435449" at="38,0,42,0" concept="4" trace="write#(Lorg/jdom/Element;Ljetbrains/mps/project/Project;)V" />
+      <node id="8568892084424435418" at="26,0,31,0" concept="4" trace="getCaption#()Ljava/lang/String;" />
+      <node id="8568892084424435426" at="31,0,38,0" concept="4" trace="read#(Lorg/jdom/Element;Ljetbrains/mps/project/Project;)V" />
+      <scope id="8568892084424435395" at="16,91,17,27" />
+      <scope id="8568892084424435405" at="19,38,20,22" />
+      <scope id="8568892084424435413" at="23,29,24,20" />
+      <scope id="8568892084424435421" at="28,30,29,20" />
+      <scope id="8568892084424435446" at="34,27,35,74" />
+      <scope id="8568892084424435456" at="39,89,40,42" />
+      <scope id="8568892084424435388" at="16,0,19,0">
+        <var name="element" id="8568892084424435390" />
+        <var name="project" id="8568892084424435392" />
+      </scope>
+      <scope id="8568892084424435401" at="19,0,22,0">
+        <var name="string" id="8568892084424435403" />
+      </scope>
+      <scope id="8568892084424435411" at="22,0,26,0" />
+      <scope id="8568892084424435433" at="32,88,36,5" />
+      <scope id="8568892084424435449" at="38,0,42,0">
+        <var name="element" id="8568892084424435451" />
+        <var name="project" id="8568892084424435453" />
+      </scope>
+      <scope id="8568892084424435418" at="26,0,31,0" />
+      <scope id="8568892084424435426" at="31,0,38,0">
+        <var name="element" id="8568892084424435428" />
+        <var name="project" id="8568892084424435430" />
+      </scope>
+      <unit id="8568892084424435375" at="12,0,43,0" name="jetbrains.mps.ide.findusages.model.holders.StringHolder" />
+    </file>
+  </root>
+  <root nodeRef="r:6d26b589-14c5-496e-9d2b-5c71b3a15e5d(jetbrains.mps.ide.findusages.model.holders)/8568892084424436806">
+    <file name="IHolder.java">
+      <node id="8568892084424436810" at="11,0,12,0" concept="4" trace="getObject#()null" />
+      <node id="8568892084424436814" at="12,0,14,0" concept="4" trace="getCaption#()Ljava/lang/String;" />
+      <scope id="8568892084424436810" at="11,0,12,0" />
+      <scope id="8568892084424436814" at="12,0,14,0" />
+      <unit id="8568892084424436806" at="9,0,15,0" name="jetbrains.mps.ide.findusages.model.holders.IHolder" />
+    </file>
+  </root>
+  <root nodeRef="r:6d26b589-14c5-496e-9d2b-5c71b3a15e5d(jetbrains.mps.ide.findusages.model.holders)/8568892084424437602">
+    <file name="ModelsHolder.java">
+      <node id="8568892084424437607" at="19,0,20,0" concept="2" trace="myModelReferences" />
+      <node id="8568892084424437619" at="20,71,21,72" concept="1" />
+      <node id="8568892084424437628" at="24,44,25,59" concept="6" />
+      <node id="8568892084424437638" at="29,30,30,77" concept="6" />
+      <node id="8568892084424437653" at="33,88,34,46" concept="9" />
+      <node id="8568892084424437665" at="37,89,38,46" concept="9" />
+      <node id="8568892084424437612" at="20,0,23,0" concept="0" trace="ModelsHolder#(Ljava/util/List;)V" />
+      <node id="8568892084424437625" at="23,0,27,0" concept="4" trace="getObject#()Ljava/util/List;" />
+      <node id="8568892084424437644" at="32,0,36,0" concept="4" trace="read#(Lorg/jdom/Element;Ljetbrains/mps/project/Project;)V" />
+      <node id="8568892084424437656" at="36,0,40,0" concept="4" trace="write#(Lorg/jdom/Element;Ljetbrains/mps/project/Project;)V" />
+      <node id="8568892084424437634" at="27,0,32,0" concept="4" trace="getCaption#()Ljava/lang/String;" />
+      <scope id="8568892084424437618" at="20,71,21,72" />
+      <scope id="8568892084424437627" at="24,44,25,59" />
+      <scope id="8568892084424437637" at="29,30,30,77" />
+      <scope id="8568892084424437651" at="33,88,34,46" />
+      <scope id="8568892084424437663" at="37,89,38,46" />
+      <scope id="8568892084424437612" at="20,0,23,0">
+        <var name="modelReferences" id="8568892084424437614" />
+      </scope>
+      <scope id="8568892084424437625" at="23,0,27,0" />
+      <scope id="8568892084424437644" at="32,0,36,0">
+        <var name="element" id="8568892084424437646" />
+        <var name="project" id="8568892084424437648" />
+      </scope>
+      <scope id="8568892084424437656" at="36,0,40,0">
+        <var name="element" id="8568892084424437658" />
+        <var name="project" id="8568892084424437660" />
+      </scope>
+      <scope id="8568892084424437634" at="27,0,32,0" />
+      <unit id="8568892084424437602" at="17,0,41,0" name="jetbrains.mps.ide.findusages.model.holders.ModelsHolder" />
+    </file>
+  </root>
+  <root nodeRef="r:6d26b589-14c5-496e-9d2b-5c71b3a15e5d(jetbrains.mps.ide.findusages.model.holders)/8568892084424437680">
+    <file name="VoidHolder.java">
+      <node id="8568892084424437683" at="15,0,16,0" concept="2" trace="myCaption" />
+      <node id="8568892084424437688" at="16,0,17,0" concept="2" trace="myIcon" />
+      <node id="8568892084424437701" at="17,55,18,46" concept="9" />
+      <node id="8568892084424437710" at="20,48,21,24" concept="1" />
+      <node id="8568892084424437714" at="21,24,22,18" concept="1" />
+      <node id="8568892084424437727" at="27,29,28,46" concept="9" />
+      <node id="8568892084424437734" at="32,30,33,21" concept="6" />
+      <node id="8568892084424437740" at="35,25,36,18" concept="6" />
+      <node id="8568892084424437754" at="39,88,40,71" concept="9" />
+      <node id="8568892084424437767" at="43,89,44,71" concept="9" />
+      <node id="8568892084424437719" at="24,0,26,0" concept="0" trace="VoidHolder#()V" />
+      <node id="8568892084424437693" at="17,0,20,0" concept="0" trace="VoidHolder#(Lorg/jdom/Element;Ljetbrains/mps/project/Project;)V" />
+      <node id="8568892084424437738" at="35,0,38,0" concept="4" trace="getIcon#()Ljavax/swing/Icon;" />
+      <node id="8568892084424437703" at="20,0,24,0" concept="0" trace="VoidHolder#(Ljava/lang/String;Ljavax/swing/Icon;)V" />
+      <node id="8568892084424437723" at="26,0,30,0" concept="4" trace="getObject#()Ljava/lang/Object;" />
+      <node id="8568892084424437744" at="38,0,42,0" concept="4" trace="read#(Lorg/jdom/Element;Ljetbrains/mps/project/Project;)V" />
+      <node id="8568892084424437757" at="42,0,46,0" concept="4" trace="write#(Lorg/jdom/Element;Ljetbrains/mps/project/Project;)V" />
+      <node id="8568892084424437730" at="30,0,35,0" concept="4" trace="getCaption#()Ljava/lang/String;" />
+      <scope id="8568892084424437721" at="24,23,24,23" />
+      <scope id="8568892084424437699" at="17,55,18,46" />
+      <scope id="8568892084424437725" at="27,29,28,46" />
+      <scope id="8568892084424437733" at="32,30,33,21" />
+      <scope id="8568892084424437739" at="35,25,36,18" />
+      <scope id="8568892084424437751" at="39,88,40,71" />
+      <scope id="8568892084424437764" at="43,89,44,71" />
+      <scope id="8568892084424437709" at="20,48,22,18" />
+      <scope id="8568892084424437719" at="24,0,26,0" />
+      <scope id="8568892084424437693" at="17,0,20,0">
+        <var name="element" id="8568892084424437695" />
+        <var name="project" id="8568892084424437697" />
+      </scope>
+      <scope id="8568892084424437738" at="35,0,38,0" />
+      <scope id="8568892084424437703" at="20,0,24,0">
+        <var name="caption" id="8568892084424437705" />
+        <var name="icon" id="8568892084424437707" />
+      </scope>
+      <scope id="8568892084424437723" at="26,0,30,0" />
+      <scope id="8568892084424437744" at="38,0,42,0">
+        <var name="element" id="8568892084424437746" />
+        <var name="project" id="8568892084424437748" />
+      </scope>
+      <scope id="8568892084424437757" at="42,0,46,0">
+        <var name="element" id="8568892084424437759" />
+        <var name="project" id="8568892084424437761" />
+      </scope>
+      <scope id="8568892084424437730" at="30,0,35,0" />
+      <unit id="8568892084424437680" at="13,0,47,0" name="jetbrains.mps.ide.findusages.model.holders.VoidHolder" />
+    </file>
+  </root>
+  <root nodeRef="r:6d26b589-14c5-496e-9d2b-5c71b3a15e5d(jetbrains.mps.ide.findusages.model.holders)/8568892084424438952">
+    <file name="ModuleRefHolder.java">
+      <node id="8568892084424438956" at="20,0,21,0" concept="7" trace="UID" />
+      <node id="8568892084424438960" at="21,0,22,0" concept="2" trace="myReference" />
+      <node id="8568892084424438972" at="22,94,23,27" concept="1" />
+      <node id="8568892084424438983" at="25,69,26,34" concept="1" />
+      <node id="8568892084424438991" at="29,39,30,23" concept="6" />
+      <node id="8568892084424438999" at="34,30,35,39" concept="6" />
+      <node id="8568892084424439013" at="39,9,40,106" concept="1" />
+      <node id="8568892084424439028" at="41,28,42,47" concept="9" />
+      <node id="8568892084424439041" at="46,89,47,85" concept="1" />
+      <node id="8568892084424438964" at="22,0,25,0" concept="0" trace="ModuleRefHolder#(Lorg/jdom/Element;Ljetbrains/mps/project/Project;)V" />
+      <node id="8568892084424438977" at="25,0,28,0" concept="0" trace="ModuleRefHolder#(Lorg/jetbrains/mps/openapi/module/SModuleReference;)V" />
+      <node id="8568892084424438988" at="28,0,32,0" concept="4" trace="getObject#()Lorg/jetbrains/mps/openapi/module/SModuleReference;" />
+      <node id="8568892084424439033" at="45,0,49,0" concept="4" trace="write#(Lorg/jdom/Element;Ljetbrains/mps/project/Project;)V" />
+      <node id="8568892084424438995" at="32,0,37,0" concept="4" trace="getCaption#()Ljava/lang/String;" />
+      <node id="8568892084424439029" at="38,88,43,5" concept="10" />
+      <node id="8568892084424439003" at="37,0,45,0" concept="4" trace="read#(Lorg/jdom/Element;Ljetbrains/mps/project/Project;)V" />
+      <scope id="8568892084424438971" at="22,94,23,27" />
+      <scope id="8568892084424438982" at="25,69,26,34" />
+      <scope id="8568892084424438990" at="29,39,30,23" />
+      <scope id="8568892084424438998" at="34,30,35,39" />
+      <scope id="8568892084424439012" at="39,9,40,106" />
+      <scope id="8568892084424439025" at="41,28,42,47" />
+      <scope id="8568892084424439040" at="46,89,47,85" />
+      <scope id="8568892084424439030" at="41,5,43,5">
+        <var name="ex" id="8568892084424439021" />
+      </scope>
+      <scope id="8568892084424438964" at="22,0,25,0">
+        <var name="element" id="8568892084424438966" />
+        <var name="project" id="8568892084424438968" />
+      </scope>
+      <scope id="8568892084424438977" at="25,0,28,0">
+        <var name="moduleReference" id="8568892084424438979" />
+      </scope>
+      <scope id="8568892084424438988" at="28,0,32,0" />
+      <scope id="8568892084424439033" at="45,0,49,0">
+        <var name="element" id="8568892084424439035" />
+        <var name="project" id="8568892084424439037" />
+      </scope>
+      <scope id="8568892084424438995" at="32,0,37,0" />
+      <scope id="8568892084424439010" at="38,88,43,5" />
+      <scope id="8568892084424439003" at="37,0,45,0">
+        <var name="element" id="8568892084424439005" />
+        <var name="project" id="8568892084424439007" />
+      </scope>
+      <unit id="8568892084424438952" at="18,0,50,0" name="jetbrains.mps.ide.findusages.model.holders.ModuleRefHolder" />
+    </file>
+  </root>
+  <root nodeRef="r:6d26b589-14c5-496e-9d2b-5c71b3a15e5d(jetbrains.mps.ide.findusages.model.holders)/8568892084424439100">
+    <file name="LanguageHolder.java">
+      <node id="8568892084424439104" at="20,0,21,0" concept="7" trace="ATTR1" />
+      <node id="8568892084424439108" at="21,0,22,0" concept="2" trace="myLanguage" />
+      <node id="8568892084424439118" at="22,54,23,26" concept="1" />
+      <node id="8568892084424439126" at="26,32,27,22" concept="6" />
+      <node id="8568892084424439134" at="31,30,32,41" concept="6" />
+      <node id="8568892084424439147" at="35,88,36,57" concept="5" />
+      <node id="8568892084424439158" at="37,23,38,45" concept="9" />
+      <node id="8568892084424439161" at="40,9,41,72" concept="1" />
+      <node id="8568892084424439175" at="42,34,43,47" concept="9" />
+      <node id="8568892084424439188" at="47,89,48,86" concept="1" />
+      <node id="8568892084424439112" at="22,0,25,0" concept="0" trace="LanguageHolder#(Lorg/jetbrains/mps/openapi/language/SLanguage;)V" />
+      <node id="8568892084424439151" at="36,57,39,5" concept="3" />
+      <node id="8568892084424439123" at="25,0,29,0" concept="4" trace="getObject#()Lorg/jetbrains/mps/openapi/language/SLanguage;" />
+      <node id="8568892084424439180" at="46,0,50,0" concept="4" trace="write#(Lorg/jdom/Element;Ljetbrains/mps/project/Project;)V" />
+      <node id="8568892084424439130" at="29,0,34,0" concept="4" trace="getCaption#()Ljava/lang/String;" />
+      <node id="8568892084424439176" at="39,5,44,5" concept="10" />
+      <node id="8568892084424439138" at="34,0,46,0" concept="4" trace="read#(Lorg/jdom/Element;Ljetbrains/mps/project/Project;)V" />
+      <scope id="8568892084424439117" at="22,54,23,26" />
+      <scope id="8568892084424439125" at="26,32,27,22" />
+      <scope id="8568892084424439133" at="31,30,32,41" />
+      <scope id="8568892084424439156" at="37,23,38,45" />
+      <scope id="8568892084424439160" at="40,9,41,72" />
+      <scope id="8568892084424439172" at="42,34,43,47" />
+      <scope id="8568892084424439187" at="47,89,48,86" />
+      <scope id="8568892084424439177" at="42,5,44,5">
+        <var name="ex" id="8568892084424439168" />
+      </scope>
+      <scope id="8568892084424439112" at="22,0,25,0">
+        <var name="language" id="8568892084424439114" />
+      </scope>
+      <scope id="8568892084424439123" at="25,0,29,0" />
+      <scope id="8568892084424439180" at="46,0,50,0">
+        <var name="element" id="8568892084424439182" />
+        <var name="project" id="8568892084424439184" />
+      </scope>
+      <scope id="8568892084424439130" at="29,0,34,0" />
+      <scope id="8568892084424439145" at="35,88,44,5">
+        <var name="lang" id="8568892084424439146" />
+      </scope>
+      <scope id="8568892084424439138" at="34,0,46,0">
+        <var name="element" id="8568892084424439140" />
+        <var name="project" id="8568892084424439142" />
+      </scope>
+      <unit id="8568892084424439100" at="18,0,51,0" name="jetbrains.mps.ide.findusages.model.holders.LanguageHolder" />
+    </file>
+  </root>
+  <root nodeRef="r:6d26b589-14c5-496e-9d2b-5c71b3a15e5d(jetbrains.mps.ide.findusages.model.holders)/8568892084424439210">
+    <file name="ModelHolder.java">
+      <node id="8568892084424439214" at="16,0,17,0" concept="7" trace="MODEL" />
+      <node id="8568892084424439218" at="17,0,18,0" concept="7" trace="UID" />
+      <node id="8568892084424439222" at="18,0,19,0" concept="2" trace="myModelReference" />
+      <node id="8568892084424439234" at="19,90,20,27" concept="1" />
+      <node id="8568892084424439244" at="22,54,23,38" concept="1" />
+      <node id="8568892084424439252" at="26,38,27,28" concept="6" />
+      <node id="8568892084424439260" at="31,30,32,54" concept="6" />
+      <node id="8568892084424439275" at="35,89,36,42" concept="5" />
+      <node id="8568892084424439279" at="36,42,37,60" concept="1" />
+      <node id="8568892084424439283" at="37,60,38,33" concept="1" />
+      <node id="8568892084424439297" at="41,88,42,47" concept="5" />
+      <node id="8568892084424439303" at="43,9,44,111" concept="1" />
+      <node id="8568892084424439319" at="45,43,46,79" concept="9" />
+      <node id="8568892084424439226" at="19,0,22,0" concept="0" trace="ModelHolder#(Lorg/jdom/Element;Ljetbrains/mps/project/Project;)V" />
+      <node id="8568892084424439239" at="22,0,25,0" concept="0" trace="ModelHolder#(Lorg/jetbrains/mps/openapi/model/SModelReference;)V" />
+      <node id="8568892084424439249" at="25,0,29,0" concept="4" trace="getObject#()Lorg/jetbrains/mps/openapi/model/SModelReference;" />
+      <node id="8568892084424439256" at="29,0,34,0" concept="4" trace="getCaption#()Ljava/lang/String;" />
+      <node id="8568892084424439320" at="42,47,47,5" concept="10" />
+      <node id="8568892084424439266" at="34,0,40,0" concept="4" trace="write#(Lorg/jdom/Element;Ljetbrains/mps/project/Project;)V" />
+      <node id="8568892084424439288" at="40,0,49,0" concept="4" trace="read#(Lorg/jdom/Element;Ljetbrains/mps/project/Project;)V" />
+      <scope id="8568892084424439233" at="19,90,20,27" />
+      <scope id="8568892084424439243" at="22,54,23,38" />
+      <scope id="8568892084424439251" at="26,38,27,28" />
+      <scope id="8568892084424439259" at="31,30,32,54" />
+      <scope id="8568892084424439302" at="43,9,44,111" />
+      <scope id="8568892084424439315" at="45,43,46,79" />
+      <scope id="8568892084424439321" at="45,5,47,5">
+        <var name="ex" id="8568892084424439311" />
+      </scope>
+      <scope id="8568892084424439226" at="19,0,22,0">
+        <var name="element" id="8568892084424439228" />
+        <var name="project" id="8568892084424439230" />
+      </scope>
+      <scope id="8568892084424439239" at="22,0,25,0">
+        <var name="modelReference" id="8568892084424439241" />
+      </scope>
+      <scope id="8568892084424439273" at="35,89,38,33">
+        <var name="modelXML" id="8568892084424439274" />
+      </scope>
+      <scope id="8568892084424439249" at="25,0,29,0" />
+      <scope id="8568892084424439256" at="29,0,34,0" />
+      <scope id="8568892084424439266" at="34,0,40,0">
+        <var name="element" id="8568892084424439268" />
+        <var name="project" id="8568892084424439270" />
+      </scope>
+      <scope id="8568892084424439295" at="41,88,47,5">
+        <var name="modelXML" id="8568892084424439296" />
+      </scope>
+      <scope id="8568892084424439288" at="40,0,49,0">
+        <var name="element" id="8568892084424439290" />
+        <var name="project" id="8568892084424439292" />
+      </scope>
+      <unit id="8568892084424439210" at="14,0,50,0" name="jetbrains.mps.ide.findusages.model.holders.ModelHolder" />
+    </file>
+  </root>
+  <root nodeRef="r:6d26b589-14c5-496e-9d2b-5c71b3a15e5d(jetbrains.mps.ide.findusages.model.holders)/8568892084424439455">
+    <file name="NodeHolder.java">
+      <node id="8568892084424439459" at="17,0,18,0" concept="7" trace="NODE" />
+      <node id="8568892084424439463" at="18,0,19,0" concept="7" trace="REF" />
+      <node id="8568892084424439467" at="19,0,20,0" concept="7" trace="CAPTION" />
+      <node id="8568892084424439471" at="20,0,21,0" concept="2" trace="myNodePointer" />
+      <node id="8568892084424439475" at="21,0,22,0" concept="2" trace="myTitle" />
+      <node id="8568892084424439487" at="22,89,23,27" concept="1" />
+      <node id="8568892084424439498" at="25,42,26,40" concept="1" />
+      <node id="8568892084424439502" at="26,40,27,37" concept="1" />
+      <node id="8568892084424439510" at="30,37,31,25" concept="6" />
+      <node id="8568892084424439518" at="35,30,36,66" concept="6" />
+      <node id="8568892084424439536" at="39,88,40,45" concept="5" />
+      <node id="8568892084424439553" at="41,63,42,59" concept="9" />
+      <node id="8568892084424439554" at="43,5,44,104" concept="1" />
+      <node id="8568892084424439562" at="44,104,45,49" concept="1" />
+      <node id="8568892084424439578" at="48,89,49,40" concept="5" />
+      <node id="8568892084424439582" at="49,40,50,87" concept="1" />
+      <node id="8568892084424439595" at="51,26,52,45" concept="1" />
+      <node id="8568892084424439599" at="53,5,54,32" concept="1" />
+      <node id="8568892084424439479" at="22,0,25,0" concept="0" trace="NodeHolder#(Lorg/jdom/Element;Ljetbrains/mps/project/Project;)V" />
+      <node id="8568892084424439540" at="40,45,43,5" concept="3" />
+      <node id="8568892084424439589" at="50,87,53,5" concept="3" />
+      <node id="8568892084424439492" at="25,0,29,0" concept="0" trace="NodeHolder#(Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <node id="8568892084424439507" at="29,0,33,0" concept="4" trace="getObject#()Lorg/jetbrains/mps/openapi/model/SNodeReference;" />
+      <node id="8568892084424439514" at="33,0,38,0" concept="4" trace="getCaption#()Ljava/lang/String;" />
+      <node id="8568892084424439527" at="38,0,47,0" concept="4" trace="read#(Lorg/jdom/Element;Ljetbrains/mps/project/Project;)V" />
+      <node id="8568892084424439569" at="47,0,56,0" concept="4" trace="write#(Lorg/jdom/Element;Ljetbrains/mps/project/Project;)V" />
+      <scope id="8568892084424439486" at="22,89,23,27" />
+      <scope id="8568892084424439509" at="30,37,31,25" />
+      <scope id="8568892084424439517" at="35,30,36,66" />
+      <scope id="8568892084424439550" at="41,63,42,59" />
+      <scope id="8568892084424439594" at="51,26,52,45" />
+      <scope id="8568892084424439497" at="25,42,27,37" />
+      <scope id="8568892084424439479" at="22,0,25,0">
+        <var name="element" id="8568892084424439481" />
+        <var name="project" id="8568892084424439483" />
+      </scope>
+      <scope id="8568892084424439492" at="25,0,29,0">
+        <var name="node" id="8568892084424439494" />
+      </scope>
+      <scope id="8568892084424439507" at="29,0,33,0" />
+      <scope id="8568892084424439514" at="33,0,38,0" />
+      <scope id="8568892084424439534" at="39,88,45,49">
+        <var name="nodeXML" id="8568892084424439535" />
+      </scope>
+      <scope id="8568892084424439576" at="48,89,54,32">
+        <var name="nodeXML" id="8568892084424439577" />
+      </scope>
+      <scope id="8568892084424439527" at="38,0,47,0">
+        <var name="element" id="8568892084424439529" />
+        <var name="project" id="8568892084424439531" />
+      </scope>
+      <scope id="8568892084424439569" at="47,0,56,0">
+        <var name="element" id="8568892084424439571" />
+        <var name="project" id="8568892084424439573" />
+      </scope>
+      <unit id="8568892084424439455" at="15,0,57,0" name="jetbrains.mps.ide.findusages.model.holders.NodeHolder" />
+    </file>
+  </root>
+  <root nodeRef="r:6d26b589-14c5-496e-9d2b-5c71b3a15e5d(jetbrains.mps.ide.findusages.model.holders)/8568892084424440209">
+    <file name="GenericHolder.java">
+      <node id="8568892084424440214" at="18,0,19,0" concept="2" trace="myValue" />
+      <node id="8568892084424440218" at="19,0,20,0" concept="2" trace="myCaption" />
+      <node id="8568892084424471522" at="20,42,21,34" concept="8" />
+      <node id="8568892084424440241" at="23,67,24,20" concept="1" />
+      <node id="8568892084424440245" at="24,20,25,24" concept="1" />
+      <node id="8568892084424440253" at="28,24,29,19" concept="6" />
+      <node id="8568892084424440261" at="33,30,34,21" concept="6" />
+      <node id="8568892084424440275" at="37,88,38,86" concept="9" />
+      <node id="8568892084424440288" at="41,89,42,86" concept="9" />
+      <node id="8568892084424440222" at="20,0,23,0" concept="0" trace="GenericHolder#(null)V" />
+      <node id="8568892084424440232" at="23,0,27,0" concept="0" trace="GenericHolder#(nullLjava/lang/String;)V" />
+      <node id="8568892084424440250" at="27,0,31,0" concept="4" trace="getObject#()null" />
+      <node id="8568892084424440265" at="36,0,40,0" concept="4" trace="read#(Lorg/jdom/Element;Ljetbrains/mps/project/Project;)V" />
+      <node id="8568892084424440278" at="40,0,44,0" concept="4" trace="write#(Lorg/jdom/Element;Ljetbrains/mps/project/Project;)V" />
+      <node id="8568892084424440257" at="31,0,36,0" concept="4" trace="getCaption#()Ljava/lang/String;" />
+      <scope id="8568892084424440227" at="20,42,21,34" />
+      <scope id="8568892084424440252" at="28,24,29,19" />
+      <scope id="8568892084424440260" at="33,30,34,21" />
+      <scope id="8568892084424440272" at="37,88,38,86" />
+      <scope id="8568892084424440285" at="41,89,42,86" />
+      <scope id="8568892084424440240" at="23,67,25,24" />
+      <scope id="8568892084424440222" at="20,0,23,0">
+        <var name="value" id="8568892084424440224" />
+      </scope>
+      <scope id="8568892084424440232" at="23,0,27,0">
+        <var name="caption" id="8568892084424440237" />
+        <var name="value" id="8568892084424440234" />
+      </scope>
+      <scope id="8568892084424440250" at="27,0,31,0" />
+      <scope id="8568892084424440265" at="36,0,40,0">
+        <var name="element" id="8568892084424440267" />
+        <var name="project" id="8568892084424440269" />
+      </scope>
+      <scope id="8568892084424440278" at="40,0,44,0">
+        <var name="element" id="8568892084424440280" />
+        <var name="project" id="8568892084424440282" />
+      </scope>
+      <scope id="8568892084424440257" at="31,0,36,0" />
+      <unit id="8568892084424440209" at="16,0,45,0" name="jetbrains.mps.ide.findusages.model.holders.GenericHolder" />
+    </file>
+  </root>
+</debug-info>
+

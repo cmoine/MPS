@@ -16,27 +16,27 @@
 package jetbrains.mps.nodeEditor.leftHighlighter;
 
 import jetbrains.mps.nodeEditor.EditorComponent;
-import jetbrains.mps.openapi.editor.cells.CellInfo;
 import jetbrains.mps.openapi.editor.cells.EditorCell_Collection;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 /**
  * User: Alexander Shatalin
  * Date: 02.03.2010
  */
 public class FoldingButtonsPainter extends AbstractFoldingAreaPainter {
-  private Map<CellInfo, FoldingButton> myFoldingButtons = new HashMap<CellInfo, FoldingButton>();
+  private final List<FoldingButton> myFoldingButtons = new ArrayList<>();
   private FoldingButton myButtonUnderMouse;
   private boolean myNeedsRelayout = false;
 
-  public FoldingButtonsPainter(LeftEditorHighlighter leftHighlighter) {
+  FoldingButtonsPainter(LeftEditorHighlighter leftHighlighter) {
     super(leftHighlighter);
   }
 
@@ -46,7 +46,7 @@ public class FoldingButtonsPainter extends AbstractFoldingAreaPainter {
     EditorComponent editorComponent = getEditorComponent();
     for (EditorCell_Collection foldable : editorComponent.getCellTracker().getFoldableCells()) {
       assert foldable.getEditorComponent() == editorComponent : "cell must be from my editor";
-      myFoldingButtons.put(foldable.getCellInfo(), new FoldingButton(foldable, getLeftHighlighter().getBackground()));
+      myFoldingButtons.add(new FoldingButton(foldable));
     }
     myNeedsRelayout = true;
   }
@@ -57,11 +57,38 @@ public class FoldingButtonsPainter extends AbstractFoldingAreaPainter {
   }
 
   private void doRelayout() {
-    for (Iterator<Entry<CellInfo, FoldingButton>> it = myFoldingButtons.entrySet().iterator(); it.hasNext(); ) {
-      Entry<CellInfo, FoldingButton> nextEntry = it.next();
-      if (!nextEntry.getValue().relayout()) {
-        it.remove();
+    Map<Integer, FoldingButton> occupiedSlot = new HashMap<>();
+    for (Iterator<FoldingButton> i = myFoldingButtons.iterator(); i.hasNext(); ) {
+      FoldingButton button = i.next();
+      if (button.relayout()) {
+        i.remove();
+      } else if (!button.isHidden()) {
+        int y1 = button.getY() + FoldingButton.HEIGHT;
+        int y2 = button.getY() + button.getHeight();
+        occupiedSlot.compute(y1, (k, existing) -> resolveConflict(y1, button, existing));
+        occupiedSlot.compute(y2, (k, existing) -> resolveConflict(y2, button, existing));
       }
+    }
+  }
+
+  private FoldingButton resolveConflict(int y, FoldingButton button, FoldingButton existing) {
+    if (existing == null || existing == button) {
+      return button;
+    }
+    if (existing.getHeight() <= button.getHeight()) {
+      hideMarker(y, button);
+      return existing;
+    } else {
+      hideMarker(y, existing);
+      return button;
+    }
+  }
+
+  private void hideMarker(int y, FoldingButton button) {
+    if (y == button.getY() + FoldingButton.HEIGHT) {
+      button.setTopCovered();
+    } else {
+      button.setBottomCovered();
     }
   }
 
@@ -83,15 +110,22 @@ public class FoldingButtonsPainter extends AbstractFoldingAreaPainter {
       doRelayout();
     }
     Rectangle clipBounds = g.getClipBounds();
-    // Painting mouse over feedback "below" all other folding buttons
-    for (FoldingButton button : myFoldingButtons.values()) {
-      if (isVisible(button, clipBounds)) {
-        button.paintFeedback(g);
+
+    if (myButtonUnderMouse != null) {
+      if (isVisible(myButtonUnderMouse, clipBounds)) {
+        myButtonUnderMouse.paintFeedback(g);
       }
-    }
-    for (FoldingButton button : myFoldingButtons.values()) {
-      if (isVisible(button, clipBounds)) {
-        button.paint(g);
+      for (FoldingButton button : myFoldingButtons) {
+        if (isVisible(button, clipBounds)) {
+          button.paint(g, myButtonUnderMouse.getY() + FoldingButton.HEIGHT, myButtonUnderMouse.getY() + myButtonUnderMouse.getHeight());
+        }
+      }
+      myButtonUnderMouse.paint(g);
+    } else {
+      for (FoldingButton button : myFoldingButtons) {
+        if (isVisible(button, clipBounds)) {
+          button.paint(g);
+        }
       }
     }
   }
@@ -140,7 +174,7 @@ public class FoldingButtonsPainter extends AbstractFoldingAreaPainter {
     FoldingButton buttonUnderMouse = getFoldingButtonUnderMouse(e);
     if (buttonUnderMouse != null) {
       if (e.getID() == MouseEvent.MOUSE_CLICKED) {
-        buttonUnderMouse.activate(getLocalXCoordinate(e), e.getY());
+        buttonUnderMouse.activate(e.getY());
       }
       e.consume();
     }
@@ -154,7 +188,7 @@ public class FoldingButtonsPainter extends AbstractFoldingAreaPainter {
   private FoldingButton getFoldingButtonUnderMouse(MouseEvent e) {
     int x = getLocalXCoordinate(e);
     int y = e.getY();
-    for (FoldingButton button : myFoldingButtons.values()) {
+    for (FoldingButton button : myFoldingButtons) {
       if (button.isInside(x, y)) {
         return button;
       }

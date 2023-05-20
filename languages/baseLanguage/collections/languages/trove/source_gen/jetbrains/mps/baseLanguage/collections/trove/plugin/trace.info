@@ -2,38 +2,35 @@
 <debug-info version="2">
   <concept fqn="c:c7d5b9dd-a05f-4be2-bc73-f2e16994cc67/3751132065236767060:jetbrains.mps.baseLanguage.lightweightdsl.structure.MethodInstance" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
   <root>
     <file name="ExtensionDescriptor.java">
-      <unit at="9,0,18,0" name="jetbrains.mps.baseLanguage.collections.trove.plugin.ExtensionDescriptor" />
+      <unit at="8,0,13,0" name="jetbrains.mps.baseLanguage.collections.trove.plugin.ExtensionDescriptor" />
     </file>
   </root>
   <root nodeRef="r:a6657f88-2637-4f34-9cd2-e8804cb17987(jetbrains.mps.baseLanguage.collections.trove.plugin)/5633688998557455347">
     <file name="customContainers_extension.java">
-      <node id="5633688998557455347" at="16,39,17,69" concept="6" />
-      <node id="5487985028841887670" at="24,51,25,64" concept="5" />
-      <node id="5487985028841887680" at="25,64,26,128" concept="3" />
-      <node id="7260676928374780787" at="26,128,27,206" concept="4" />
-      <node id="5633688998557455347" at="16,0,19,0" concept="1" trace="customContainers_extension#()V" />
-      <node id="5487985028841887662" at="24,0,29,0" concept="2" trace="invoke#(Lorg/jetbrains/mps/openapi/module/SRepository;)Ljava/util/List;" />
-      <node id="5633688998557455351" at="22,89,29,6" concept="4" />
-      <node id="4296411869844546454" at="22,0,31,0" concept="0" trace="get#()Ljetbrains/mps/baseLanguage/closures/runtime/_FunctionTypes/_return_P1_E0;" />
-      <scope id="5633688998557455347" at="16,39,17,69" />
-      <scope id="5633688998557455347" at="16,0,19,0" />
-      <scope id="5487985028841887663" at="24,51,27,206">
+      <node id="5633688998557455347" at="17,39,18,69" concept="6" />
+      <node id="5487985028841887670" at="24,34,25,61" concept="4" />
+      <node id="5487985028841887680" at="25,61,26,185" concept="2" />
+      <node id="7260676928374780787" at="26,185,27,71" concept="3" />
+      <node id="5633688998557455347" at="32,0,33,0" concept="5" trace="CustomContainers$Mn" />
+      <node id="5633688998557455347" at="17,0,20,0" concept="1" trace="customContainers_extension#()V" />
+      <node id="5633688998557455351" at="23,89,28,6" concept="3" />
+      <node id="4296411869844546454" at="23,0,30,0" concept="0" trace="get#()Ljetbrains/mps/baseLanguage/closures/runtime/_FunctionTypes/_return_P1_E0;" />
+      <scope id="5633688998557455347" at="17,39,18,69" />
+      <scope id="5633688998557455347" at="17,0,20,0" />
+      <scope id="5487985028841887663" at="24,34,27,71">
         <var name="mdl" id="5487985028841887681" />
       </scope>
-      <scope id="5487985028841887662" at="24,0,29,0">
-        <var name="repo" id="5487985028841887662" />
-      </scope>
-      <scope id="4296411869844546456" at="22,89,29,6" />
-      <scope id="4296411869844546454" at="22,0,31,0" />
-      <unit id="5487985028841887662" at="23,15,29,5" name="jetbrains.mps.baseLanguage.collections.trove.plugin.customContainers_extension$1" />
-      <unit id="5633688998557455347" at="15,0,32,0" name="jetbrains.mps.baseLanguage.collections.trove.plugin.customContainers_extension" />
+      <scope id="4296411869844546456" at="23,89,28,6" />
+      <scope id="4296411869844546454" at="23,0,30,0" />
+      <unit id="5633688998557455347" at="31,0,34,0" name="jetbrains.mps.baseLanguage.collections.trove.plugin.customContainers_extension$CONCEPTS" />
+      <unit id="5633688998557455347" at="16,0,35,0" name="jetbrains.mps.baseLanguage.collections.trove.plugin.customContainers_extension" />
     </file>
   </root>
 </debug-info>

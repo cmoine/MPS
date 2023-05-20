@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-11ju3568u738a4vvw04kaumr9f8lj1d" />
+<product version="3" modelHash="46zvlvvfzvyei0tjbzugr47rp2y44st">
+  <files names="EditorCell_VerticalLine.java:HLineCellProvider.java:VLineCellProvider.java" />
+</product>
 

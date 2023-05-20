@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +15,11 @@
  */
 package jetbrains.mps.jps.project;
 
-import jetbrains.mps.extapi.persistence.FileBasedModelRoot;
+import jetbrains.mps.extapi.persistence.DefaultSourceRoot;
+import jetbrains.mps.extapi.persistence.SourceRootKinds;
 import jetbrains.mps.idea.core.project.JpsModelRootContributor;
 import jetbrains.mps.persistence.java.library.JavaClassStubsModelRoot;
+import jetbrains.mps.vfs.FileSystem;
 import org.jetbrains.jps.model.JpsProject;
 import org.jetbrains.jps.model.library.JpsLibrary;
 import org.jetbrains.jps.model.library.JpsOrderRootType;
@@ -63,12 +65,11 @@ public class ClassStubsJpsModelRootContributor implements JpsModelRootContributo
       for (File root : roots) {
         String path = root.getPath();
         JavaClassStubsModelRoot modelRoot = new JavaClassStubsModelRoot();
-        modelRoot.setContentRoot(path);
-        modelRoot.addFile(FileBasedModelRoot.SOURCE_ROOTS, path);
+        // no idea where to take FS from, likely need to fix JpsSolutionIdea to pass FS/ComponentHost in here
+        modelRoot.addSourceRoot(SourceRootKinds.SOURCES, new DefaultSourceRoot(path, FileSystem.getInstance().getFile(path)));
         modelRoots.add(modelRoot);
       }
     }
-
 
     return modelRoots;
   }

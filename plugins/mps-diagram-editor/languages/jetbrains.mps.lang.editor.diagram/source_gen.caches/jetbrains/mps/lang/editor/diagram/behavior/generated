@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="bw7gbzpadm80plsj6i0wvrk3nwuhzpe">
+  <files names="AbstractDiagramCreation__BehaviorDescriptor.java:AbstractFigureReference__BehaviorDescriptor.java:AttributedFigureReference__BehaviorDescriptor.java:BehaviorAspectDescriptor.java:CellModel_DiagramConnector__BehaviorDescriptor.java:CellModel_DiagramNode__BehaviorDescriptor.java:CellModel_DiagramPort__BehaviorDescriptor.java:CellModel_Diagram__BehaviorDescriptor.java:DiagramConnectorCanCreateHandler__BehaviorDescriptor.java:DiagramConnectorCreationHandler__BehaviorDescriptor.java:DiagramElementCreationHandler__BehaviorDescriptor.java:ExternalFigureReference__BehaviorDescriptor.java:FigureParameterMapping__BehaviorDescriptor.java" />
+</product>
+

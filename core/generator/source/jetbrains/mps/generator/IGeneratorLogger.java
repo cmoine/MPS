@@ -47,7 +47,7 @@ public interface IGeneratorLogger {
    * Contains description of the problem.
    */
   @Immutable
-  public final class ProblemDescription {
+  final class ProblemDescription {
 
     private final SNodeReference myNode;
     private final String myMessage;

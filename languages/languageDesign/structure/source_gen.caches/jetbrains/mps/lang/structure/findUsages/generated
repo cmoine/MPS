@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-4nqzk9qttsvguqa1nbj4kzaz3b61xvc" />
+<product version="3" modelHash="-b8jncgaqg0lpo6xzxqjo074qgjja1g8">
+  <files names="AbstractConceptWrap.java:ConceptAncestors_Finder.java:ConceptDescendants_Finder.java:ConceptInstances_Finder.java:ConceptMRO.java:DerivedConcepts_Finder.java:DerivedInterfaceConcepts_Finder.java:ExactConceptInstances_Finder.java:FindUsagesDescriptor.java:ImplementingConcepts_Finder.java:LinkInstances_Finder.java:NodeUsages_Finder.java:PropertyInstances_Finder.java:StraightDescendants_Finder.java" />
+</product>
 

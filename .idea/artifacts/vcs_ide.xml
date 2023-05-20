@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="vcs-ide">
+    <output-path>$PROJECT_DIR$/plugins/mps-vcs/lib</output-path>
+    <root id="archive" name="vcs-ide.jar">
+      <element id="module-output" name="mps-vcs" />
+    </root>
+  </artifact>
+</component>

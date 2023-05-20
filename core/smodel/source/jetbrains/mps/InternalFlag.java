@@ -15,46 +15,27 @@
  */
 package jetbrains.mps;
 
+
+/**
+ * @deprecated use {@link RuntimeFlags}
+  */
+@Deprecated(since = "2018.2", forRemoval = true)
 public class InternalFlag {
 
-  private static InternalFlag ourInstance;
-
-  private boolean myInternalFlag;
-
-  private InternalFlag() {
-    myInternalFlag = isSystemInternal();
-  }
-
   public static InternalFlag getInstance() {
-    if (ourInstance == null) {
-      ourInstance = new InternalFlag();
-    }
-    return ourInstance;
-  }
-
-  @Deprecated
-  /**
-   * Use method isInternalMode
-   * @Deprecated in 3.4
-   */
-  public static boolean isSystemInternal() {
-    return "true".equals(System.getProperty("mps.internal"));
+    return new InternalFlag();
   }
 
   public static boolean isInternalMode() {
-    if (ourInstance == null) {
-      return isSystemInternal();
-    } else {
-      return ourInstance.getInternalFlag();
-    }
+    return RuntimeFlags.isInternalMode();
   }
 
   public boolean getInternalFlag() {
-    return myInternalFlag;
+    return RuntimeFlags.isInternalMode();
   }
 
   public void setInternalFlag(boolean flag) {
-    myInternalFlag = flag;
+    RuntimeFlags.setInternalMode(flag);
   }
 
 }

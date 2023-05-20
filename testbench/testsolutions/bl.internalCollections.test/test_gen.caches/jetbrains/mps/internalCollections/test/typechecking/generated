@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-6r96cvnhn0hlwbmat5900lo8wl7iudj" />
+<product version="3" modelHash="3lj5xhq5d5ic90u1w8gplqrnr39zf2f">
+  <files names="TypeCheckingErrors_Test.java" />
+</product>
 

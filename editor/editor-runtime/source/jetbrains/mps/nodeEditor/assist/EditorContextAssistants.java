@@ -20,9 +20,9 @@ import jetbrains.mps.openapi.editor.menus.transformation.TransformationMenuItem;
 import jetbrains.mps.openapi.editor.selection.Selection;
 import jetbrains.mps.openapi.editor.selection.SelectionManager;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.module.ModelAccess;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,19 +31,15 @@ import java.util.List;
  */
 class EditorContextAssistants {
   private final ModelAccess myModelAccess;
-  private final ContextAssistantFinder myAssistantFinder;
   private final SelectionMenuProvider myMenuProvider;
   private final SelectionManager mySelectionManager;
+  private final List<ContextAssistant> myContextAssistants = new ArrayList<>();
 
   private ContextAssistant myActiveAssistant;
   private List<TransformationMenuItem> myActiveMenuItems;
 
-  private int myAssistantCount;
-
-  EditorContextAssistants(ContextAssistantFinder assistantFinder, SelectionMenuProvider menuProvider, SelectionManager selectionManager,
-      ModelAccess modelAccess) {
+  EditorContextAssistants(SelectionMenuProvider menuProvider, SelectionManager selectionManager, ModelAccess modelAccess) {
     myModelAccess = modelAccess;
-    myAssistantFinder = assistantFinder;
     myMenuProvider = menuProvider;
     mySelectionManager = selectionManager;
   }
@@ -68,7 +64,7 @@ class EditorContextAssistants {
   void update() {
     myModelAccess.runReadAction(() -> {
       Selection selection = mySelectionManager.getSelection();
-      ContextAssistant newAssistant = selection == null ? null : myAssistantFinder.findAssistant(selection);
+      ContextAssistant newAssistant = selection == null ? null : new AncestorOrSmallCellContextAssistantFinder(myContextAssistants).findAssistant(selection);
 
       List<TransformationMenuItem> newItems = newAssistant == null ? Collections.emptyList() : myMenuProvider.getMenuItems(selection);
       hideMenu();
@@ -89,17 +85,16 @@ class EditorContextAssistants {
   }
 
   boolean hasRegisteredAssistants() {
-    return myAssistantCount > 0;
+    return myContextAssistants.size() > 0;
   }
 
   void register(ContextAssistant assistant) {
-    myAssistantCount++;
+    myContextAssistants.add(assistant);
   }
 
   void unregister(ContextAssistant assistant) {
-    assert myAssistantCount >= 1 : "too many assistants being unregistered";
-
-    myAssistantCount--;
+    boolean wasRemoved = myContextAssistants.remove(assistant);
+    assert wasRemoved : "trying to unregister not registered context assistant";
     if (assistant == myActiveAssistant) {
       hideMenu();
     }

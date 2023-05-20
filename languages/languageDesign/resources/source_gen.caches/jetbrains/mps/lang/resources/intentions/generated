@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-c8okhpjn49jgxj27bgr67net1gjoqee" />
+<product version="3" modelHash="-3dmlh4o37vs06dzihowgz91revlqkv0">
+  <files names="Icon2Resource_Intention.java:IntentionsDescriptor.java" />
+</product>
 

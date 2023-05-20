@@ -31,7 +31,7 @@ class CellSubtreeIterator implements TreeIterator<EditorCell> {
   /**
    * All iterators in the stack have {@code hasNext() == true}
    */
-  private final ArrayDeque<Iterator<EditorCell>> myIteratorStack = new ArrayDeque<Iterator<EditorCell>>();
+  private final ArrayDeque<Iterator<EditorCell>> myIteratorStack = new ArrayDeque<>();
   private final Direction myDirection;
 
   private EditorCell myCurrent;

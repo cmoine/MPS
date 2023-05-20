@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="6vjmn27u5zgq3fapxrlj72ysbl6y14q" />
+<product version="3" modelHash="5pntcaqm2z4q3u3rddvk42y32b7t0uj">
+  <files names="Actions_ApplicationPlugin.java:CorrectLanguageVersion_Action.java:MigrationGroup_ActionGroup.java" />
+</product>
 

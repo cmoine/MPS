@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="47gstc61unv8lghlizrm0s8kkes6e2u" />
+<product version="3" modelHash="-at6orrejbuga10lao7e4w2hh0cekmuq">
+  <files names="AddDefaultNodeAttribute_Intention.java:AddDefaultPropertyAttribute_Intention.java:AddDefaultReferenceAttribute_Intention.java:IntentionsDescriptor.java" />
+</product>
 

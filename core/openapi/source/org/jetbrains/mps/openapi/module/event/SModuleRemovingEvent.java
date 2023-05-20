@@ -17,7 +17,6 @@ package org.jetbrains.mps.openapi.module.event;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.module.SModule;
-import org.jetbrains.mps.openapi.module.SRepository;
 
 public class SModuleRemovingEvent extends SRepositoryModuleEvent {
 

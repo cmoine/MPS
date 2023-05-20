@@ -7,11 +7,13 @@ import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.smodel.action.SNodeFactoryOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.openapi.editor.cells.SubstituteInfo;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
+import org.jetbrains.mps.openapi.language.SConcept;
 
 public class StateMachineTableModel extends AbstractTableModel {
   private final SNode myNode;
@@ -23,25 +25,25 @@ public class StateMachineTableModel extends AbstractTableModel {
   }
   @Override
   public int getColumnCount() {
-    return 1 + ListSequence.fromList(SLinkOperations.getChildren(myNode, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba3L, "events"))).count();
+    return 1 + ListSequence.fromList(SLinkOperations.getChildren(myNode, LINKS.events$_8qd)).count();
   }
   @Override
   public int getRowCount() {
-    return 1 + ListSequence.fromList(SLinkOperations.getChildren(myNode, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba5L, "states"))).count();
+    return 1 + ListSequence.fromList(SLinkOperations.getChildren(myNode, LINKS.states$_8Sf)).count();
   }
   @Override
   public SNode getValueAt(int row, int column) {
     if (row == 0 && column > 0) {
-      return ListSequence.fromList(SLinkOperations.getChildren(myNode, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba3L, "events"))).getElement(column - 1);
+      return ListSequence.fromList(SLinkOperations.getChildren(myNode, LINKS.events$_8qd)).getElement(column - 1);
     }
     if (column == 0 && row > 0) {
-      return ListSequence.fromList(SLinkOperations.getChildren(myNode, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba5L, "states"))).getElement(row - 1);
+      return ListSequence.fromList(SLinkOperations.getChildren(myNode, LINKS.states$_8Sf)).getElement(row - 1);
     }
     if (row > 0 && column > 0) {
-      SNode event = ListSequence.fromList(SLinkOperations.getChildren(myNode, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba3L, "events"))).getElement(column - 1);
-      SNode state = ListSequence.fromList(SLinkOperations.getChildren(myNode, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba5L, "states"))).getElement(row - 1);
-      for (SNode transition : ListSequence.fromList(SLinkOperations.getChildren(myNode, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba4L, "transitions")))) {
-        if (SLinkOperations.getTarget(SLinkOperations.getTarget(transition, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c845743dL, 0xa99ffe1c845743fL, "trigger")), MetaAdapterFactory.getReferenceLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8457446L, 0xa99ffe1c8457447L, "event")) == event && SLinkOperations.getTarget(SLinkOperations.getTarget(transition, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c845743dL, 0xa99ffe1c845743eL, "fromState")), MetaAdapterFactory.getReferenceLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8457444L, 0xa99ffe1c8457445L, "state")) == state) {
+      SNode event = ListSequence.fromList(SLinkOperations.getChildren(myNode, LINKS.events$_8qd)).getElement(column - 1);
+      SNode state = ListSequence.fromList(SLinkOperations.getChildren(myNode, LINKS.states$_8Sf)).getElement(row - 1);
+      for (SNode transition : ListSequence.fromList(SLinkOperations.getChildren(myNode, LINKS.transitions$_8De))) {
+        if (SLinkOperations.getTarget(SLinkOperations.getTarget(transition, LINKS.trigger$qlp2), LINKS.event$qnvG) == event && SLinkOperations.getTarget(SLinkOperations.getTarget(transition, LINKS.fromState$qla1), LINKS.state$qn0G) == state) {
           return transition;
         }
       }
@@ -51,14 +53,14 @@ public class StateMachineTableModel extends AbstractTableModel {
   @Override
   public void createElement(int row, int column) {
     if (row > 0 && column > 0) {
-      SNode event = ListSequence.fromList(SLinkOperations.getChildren(myNode, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba3L, "events"))).getElement(column - 1);
-      SNode state = ListSequence.fromList(SLinkOperations.getChildren(myNode, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba5L, "states"))).getElement(row - 1);
-      SNode transition = SNodeFactoryOperations.createNewNode(SNodeFactoryOperations.asInstanceConcept(MetaAdapterFactory.getConcept(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c845743dL, "jetbrains.mps.samples.multipleProjections.stateMachine.structure.Transition")), null);
-      SLinkOperations.setTarget(transition, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c845743dL, 0xa99ffe1c845743fL, "trigger"), SNodeFactoryOperations.createNewNode(SNodeFactoryOperations.asInstanceConcept(MetaAdapterFactory.getConcept(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8457446L, "jetbrains.mps.samples.multipleProjections.stateMachine.structure.EventReference")), null));
-      SLinkOperations.setTarget(SLinkOperations.getTarget(transition, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c845743dL, 0xa99ffe1c845743fL, "trigger")), MetaAdapterFactory.getReferenceLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8457446L, 0xa99ffe1c8457447L, "event"), event);
-      SLinkOperations.setTarget(transition, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c845743dL, 0xa99ffe1c845743eL, "fromState"), SNodeFactoryOperations.createNewNode(SNodeFactoryOperations.asInstanceConcept(MetaAdapterFactory.getConcept(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8457444L, "jetbrains.mps.samples.multipleProjections.stateMachine.structure.StateReference")), null));
-      SLinkOperations.setTarget(SLinkOperations.getTarget(transition, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c845743dL, 0xa99ffe1c845743eL, "fromState")), MetaAdapterFactory.getReferenceLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8457444L, 0xa99ffe1c8457445L, "state"), state);
-      ListSequence.fromList(SLinkOperations.getChildren(myNode, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba4L, "transitions"))).addElement(transition);
+      SNode event = ListSequence.fromList(SLinkOperations.getChildren(myNode, LINKS.events$_8qd)).getElement(column - 1);
+      SNode state = ListSequence.fromList(SLinkOperations.getChildren(myNode, LINKS.states$_8Sf)).getElement(row - 1);
+      SNode transition = SNodeFactoryOperations.createNewNode(CONCEPTS.Transition$Zj, null);
+      SLinkOperations.setTarget(transition, LINKS.trigger$qlp2, SNodeFactoryOperations.createNewNode(CONCEPTS.EventReference$dP, null));
+      SLinkOperations.setTarget(SLinkOperations.getTarget(transition, LINKS.trigger$qlp2), LINKS.event$qnvG, event);
+      SLinkOperations.setTarget(transition, LINKS.fromState$qla1, SNodeFactoryOperations.createNewNode(CONCEPTS.StateReference$cR, null));
+      SLinkOperations.setTarget(SLinkOperations.getTarget(transition, LINKS.fromState$qla1), LINKS.state$qn0G, state);
+      ListSequence.fromList(SLinkOperations.getChildren(myNode, LINKS.transitions$_8De)).addElement(transition);
     }
   }
   @Override
@@ -66,23 +68,23 @@ public class StateMachineTableModel extends AbstractTableModel {
     if (columnNumber <= 0) {
       return;
     }
-    ListSequence.fromList(SLinkOperations.getChildren(myNode, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba3L, "events"))).insertElement(columnNumber - 1, SNodeFactoryOperations.createNewNode(SNodeFactoryOperations.asInstanceConcept(MetaAdapterFactory.getConcept(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c845743bL, "jetbrains.mps.samples.multipleProjections.stateMachine.structure.Event")), null));
+    ListSequence.fromList(SLinkOperations.getChildren(myNode, LINKS.events$_8qd)).insertElement(columnNumber - 1, SNodeFactoryOperations.createNewNode(CONCEPTS.Event$Yl, null));
   }
   @Override
   public void insertRow(int rowNumber) {
     if (rowNumber <= 0) {
       return;
     }
-    ListSequence.fromList(SLinkOperations.getChildren(myNode, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba5L, "states"))).insertElement(rowNumber - 1, SNodeFactoryOperations.createNewNode(SNodeFactoryOperations.asInstanceConcept(MetaAdapterFactory.getConcept(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8457442L, "jetbrains.mps.samples.multipleProjections.stateMachine.structure.State")), null));
+    ListSequence.fromList(SLinkOperations.getChildren(myNode, LINKS.states$_8Sf)).insertElement(rowNumber - 1, SNodeFactoryOperations.createNewNode(CONCEPTS.State$bT, null));
   }
   @Override
   public void deleteColumn(int columnNumber) {
     if (columnNumber <= 0) {
       return;
     }
-    SNode event = ListSequence.fromList(SLinkOperations.getChildren(myNode, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba3L, "events"))).getElement(columnNumber - 1);
-    for (SNode transition : ListSequence.fromList(SLinkOperations.getChildren(myNode, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba4L, "transitions")))) {
-      if (SLinkOperations.getTarget(SLinkOperations.getTarget(transition, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c845743dL, 0xa99ffe1c845743fL, "trigger")), MetaAdapterFactory.getReferenceLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8457446L, 0xa99ffe1c8457447L, "event")) == event) {
+    SNode event = ListSequence.fromList(SLinkOperations.getChildren(myNode, LINKS.events$_8qd)).getElement(columnNumber - 1);
+    for (SNode transition : ListSequence.fromList(SLinkOperations.getChildren(myNode, LINKS.transitions$_8De))) {
+      if (SLinkOperations.getTarget(SLinkOperations.getTarget(transition, LINKS.trigger$qlp2), LINKS.event$qnvG) == event) {
         SNodeOperations.deleteNode(transition);
       }
     }
@@ -92,11 +94,11 @@ public class StateMachineTableModel extends AbstractTableModel {
   public SubstituteInfo getSubstituteInfo(final int row, final int column) {
     SContainmentLink link = null;
     if (row == 0 && column > 0) {
-      link = MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba3L, "events");
+      link = LINKS.events$_8qd;
     } else if (column == 0 && row > 0) {
-      link = MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba5L, "states");
+      link = LINKS.states$_8Sf;
     } else if (row > 0 && column > 0) {
-      link = MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba4L, "transitions");
+      link = LINKS.transitions$_8De;
     }
     if (link == null) {
       return null;
@@ -108,15 +110,33 @@ public class StateMachineTableModel extends AbstractTableModel {
     if (rowNumber <= 0) {
       return;
     }
-    SNode state = ListSequence.fromList(SLinkOperations.getChildren(myNode, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba5L, "states"))).getElement(rowNumber - 1);
-    for (SNode transition : ListSequence.fromList(SLinkOperations.getChildren(myNode, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba4L, "transitions")))) {
-      if (SLinkOperations.getTarget(SLinkOperations.getTarget(transition, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c845743dL, 0xa99ffe1c845743eL, "fromState")), MetaAdapterFactory.getReferenceLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8457444L, 0xa99ffe1c8457445L, "state")) == state) {
+    SNode state = ListSequence.fromList(SLinkOperations.getChildren(myNode, LINKS.states$_8Sf)).getElement(rowNumber - 1);
+    for (SNode transition : ListSequence.fromList(SLinkOperations.getChildren(myNode, LINKS.transitions$_8De))) {
+      if (SLinkOperations.getTarget(SLinkOperations.getTarget(transition, LINKS.fromState$qla1), LINKS.state$qn0G) == state) {
         SNodeOperations.deleteNode(transition);
-      } else if (SLinkOperations.getTarget(SLinkOperations.getTarget(transition, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c845743dL, 0xa99ffe1c8457440L, "toState")), MetaAdapterFactory.getReferenceLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8457444L, 0xa99ffe1c8457445L, "state")) == state) {
-        SLinkOperations.setTarget(SLinkOperations.getTarget(transition, MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c845743dL, 0xa99ffe1c8457440L, "toState")), MetaAdapterFactory.getReferenceLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8457444L, 0xa99ffe1c8457445L, "state"), null);
+      } else if (SLinkOperations.getTarget(SLinkOperations.getTarget(transition, LINKS.toState$qlC3), LINKS.state$qn0G) == state) {
+        SLinkOperations.setTarget(SLinkOperations.getTarget(transition, LINKS.toState$qlC3), LINKS.state$qn0G, null);
       }
     }
     SNodeOperations.deleteNode(state);
   }
 
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink events$_8qd = MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba3L, "events");
+    /*package*/ static final SContainmentLink states$_8Sf = MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba5L, "states");
+    /*package*/ static final SContainmentLink fromState$qla1 = MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c845743dL, 0xa99ffe1c845743eL, "fromState");
+    /*package*/ static final SReferenceLink state$qn0G = MetaAdapterFactory.getReferenceLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8457444L, 0xa99ffe1c8457445L, "state");
+    /*package*/ static final SContainmentLink trigger$qlp2 = MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c845743dL, 0xa99ffe1c845743fL, "trigger");
+    /*package*/ static final SReferenceLink event$qnvG = MetaAdapterFactory.getReferenceLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8457446L, 0xa99ffe1c8457447L, "event");
+    /*package*/ static final SContainmentLink transitions$_8De = MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8456ba1L, 0xa99ffe1c8456ba4L, "transitions");
+    /*package*/ static final SContainmentLink toState$qlC3 = MetaAdapterFactory.getContainmentLink(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c845743dL, 0xa99ffe1c8457440L, "toState");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept Transition$Zj = MetaAdapterFactory.getConcept(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c845743dL, "jetbrains.mps.samples.multipleProjections.stateMachine.structure.Transition");
+    /*package*/ static final SConcept EventReference$dP = MetaAdapterFactory.getConcept(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8457446L, "jetbrains.mps.samples.multipleProjections.stateMachine.structure.EventReference");
+    /*package*/ static final SConcept StateReference$cR = MetaAdapterFactory.getConcept(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8457444L, "jetbrains.mps.samples.multipleProjections.stateMachine.structure.StateReference");
+    /*package*/ static final SConcept Event$Yl = MetaAdapterFactory.getConcept(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c845743bL, "jetbrains.mps.samples.multipleProjections.stateMachine.structure.Event");
+    /*package*/ static final SConcept State$bT = MetaAdapterFactory.getConcept(0x530533eef7894c1eL, 0xba56de1bbf3afda7L, 0xa99ffe1c8457442L, "jetbrains.mps.samples.multipleProjections.stateMachine.structure.State");
+  }
 }

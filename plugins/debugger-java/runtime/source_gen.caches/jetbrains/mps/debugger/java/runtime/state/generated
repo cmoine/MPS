@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="3f9s7txrtorzt36neismx6ucom19j60" />
+<product version="3" modelHash="-avkmfi67puk3zjd4kb4fbs9y0okl3dj">
+  <files names="DebugSession.java:JavaUiStateImpl.java:PausedJavaUiState.java:RunningJavaUiState.java:SessionStopDisposer.java" />
+</product>
 

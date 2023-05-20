@@ -16,7 +16,6 @@
 package jetbrains.mps.generator.impl.query;
 
 import jetbrains.mps.generator.impl.GenerationFailureException;
-import jetbrains.mps.generator.runtime.GenerationException;
 import jetbrains.mps.generator.template.InlineSwitchCaseContext;
 import org.jetbrains.annotations.NotNull;
 

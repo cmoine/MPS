@@ -3,12 +3,12 @@
     <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
     <module name="mps-core" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-    <option name="ALTERNATIVE_JRE_PATH" value="" />
+    <option name="ALTERNATIVE_JRE_PATH" />
     <option name="PACKAGE_NAME" value="jetbrains.mps.idea.core.tests" />
     <option name="MAIN_CLASS_NAME" value="jetbrains.mps.idea.core.tests.MiscTestSuite" />
     <option name="METHOD_NAME" value="" />
     <option name="TEST_OBJECT" value="class" />
-    <option name="VM_PARAMETERS" value="-ea -Dmps.make.debug=false -Didea.platform.prefix=Idea -Didea.config.path=$IDEA_PLUGINS_SANDBOX_FOLDER$/config -Didea.system.path=$IDEA_PLUGINS_SANDBOX_FOLDER$/system -Didea.plugins.path=$PROJECT_DIR$" />
+    <option name="VM_PARAMETERS" value="-ea -Dmps.make.debug=false -Didea.platform.prefix=Idea -Didea.config.path=$PROJECT_DIR$/sandbox/tests.misc/config -Didea.system.path=$PROJECT_DIR$/sandbox/tests.misc/system -Didea.log.path=$PROJECT_DIR$/sandbox/tests.misc/log -Didea.home.path=$PROJECT_DIR$/idea_home -Didea.plugins.path=$PROJECT_DIR$ -Didea.log.leaked.projects.in.tests=false" />
     <option name="PARAMETERS" value="" />
     <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
     <option name="ENV_VARIABLES" />
@@ -32,7 +32,8 @@
     <method>
       <option name="BuildArtifacts" enabled="true">
         <artifact name="mps-common:jar" />
-        <artifact name="mps-jps-plugin:jar" />
+        <artifact name="mps-core-jps-plugin:jar" />
+        <artifact name="mps-java-jps-plugin:jar" />
       </option>
     </method>
   </configuration>

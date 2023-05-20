@@ -2,7 +2,7 @@
 <model ref="r:222f0e6e-34ee-4504-a848-5e0f34db2f2f(jetbrains.mps.transformation.test.inputLang.constraints)">
   <persistence version="9" />
   <languages>
-    <use id="3f4bc5f5-c6c1-4a28-8b10-c83066ffa4a1" name="jetbrains.mps.lang.constraints" version="0" />
+    <devkit ref="00000000-0000-4000-0000-5604ebd4f22c(jetbrains.mps.devkit.aspect.constraints)" />
   </languages>
   <imports>
     <import index="tpm0" ref="r:00000000-0000-4000-0000-011c895905f4(jetbrains.mps.transformation.test.inputLang.structure)" />
@@ -31,7 +31,7 @@
     <property role="3GE5qa" value="RefTest" />
     <ref role="1M2myG" to="tpm0:2S48fJgAlS7" resolve="RefTestParamRef" />
     <node concept="1N5Pfh" id="2S48fJgAQiU" role="1Mr941">
-      <ref role="1N5Vy1" to="tpm0:2S48fJgAlS8" />
+      <ref role="1N5Vy1" to="tpm0:2S48fJgAlS8" resolve="declaration" />
       <node concept="1dDu$B" id="2S48fJgAQiV" role="1N6uqs">
         <ref role="1dDu$A" to="tpm0:2S48fJgAlS0" resolve="RefTestParam" />
       </node>
@@ -41,7 +41,7 @@
     <property role="3GE5qa" value="RefTest" />
     <ref role="1M2myG" to="tpm0:2S48fJgAlS9" resolve="RefTestMethodCall" />
     <node concept="1N5Pfh" id="59r$iG980Nz" role="1Mr941">
-      <ref role="1N5Vy1" to="tpm0:2S48fJgAlSa" />
+      <ref role="1N5Vy1" to="tpm0:2S48fJgAlSa" resolve="method" />
       <node concept="1dDu$B" id="59r$iG980N$" role="1N6uqs">
         <ref role="1dDu$A" to="tpm0:2S48fJgAlRY" resolve="RefTestMethod" />
       </node>

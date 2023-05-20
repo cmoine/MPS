@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-bz2evv5v8luqzd3tyqpakjt53zd5wj4" />
+<product version="3" modelHash="8distzdshzdlauwklruep9mak1x3xoq">
+  <files names="Address.java:Person.java" />
+</product>
 

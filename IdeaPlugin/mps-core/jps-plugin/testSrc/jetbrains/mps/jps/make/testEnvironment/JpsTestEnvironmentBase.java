@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ import java.io.File;
 
 public abstract class JpsTestEnvironmentBase<B extends MpsBean> implements TestEnvironment<B> {
   @NonNls
-  public static final String[] MPS_LANGUAGE_LOCATIONS = {"mps-core/languages","mps-core/lib"};
+  public static final String[] MPS_LANGUAGE_LOCATIONS = {"mps-core/languages"};
 
   protected final MpsJpsBuildTestCase myTestCase;
 
@@ -48,8 +48,12 @@ public abstract class JpsTestEnvironmentBase<B extends MpsBean> implements TestE
 
   private String getLanguageLocations() {
     String separator = ";";
-    final String projectDirPath = new ProjectDirFinder().findProjectDir().getAbsolutePath();
-    String[] dirsToScan = {PathManager.getPluginsPath(), projectDirPath};
+    final File projectDir = new ProjectDirFinder().findProjectDir();
+    /*
+     * Removing PathManager.getPluginsPath() from the list of dirsToScan because subclasses of JpsTestEnvironmentBase class
+     * are used only in JPS tests (executed now with explicitly specified classpath / no IDEA platform)
+     */
+    File[] dirsToScan = {/*PathManager.getPluginsPath(),*/ projectDir};
     StringBuilder sb = new StringBuilder();
     for (String langLocation : MPS_LANGUAGE_LOCATIONS) {
       File locFile = new FileFinder(dirsToScan).checkedFind(langLocation);

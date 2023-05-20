@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,27 +19,57 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Priority;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Types of messages reported through {@link IMessageHandler}.
+ * Note, this is not a replacement for logging facilities. {@linkplain IMessage Messages} are intended for end-user
+ * and thus levels other than 'severe issue', 'worth mentioning' and 'if you are curious' do not make sense here.
+ * If you need trace/debug levels, use {@link java.util.logging.Logger}.
+ */
 public enum MessageKind {
-  TRACE,
-  DEBUG,
-  INFORMATION,
-  WARNING,
-  ERROR,
-  FATAL;
+  INFORMATION, WARNING, ERROR;
 
+  /**
+   * @return {@code true} if this enumeration (LHS) value represents a message of at least the same severity than the one supplied (RHS).
+   */
+  public boolean isSameOrGreaterSeverityThan(MessageKind kind) {
+    // ERROR.isSameOrGreaterSeverityThan(ERROR)         : true
+    // ERROR.isSameOrGreaterSeverityThan(WARNING)       : true
+    // WARNING.isSameOrGreaterSeverityThan(ERROR)       : false
+    // INFORMATION.isSameOrGreaterSeverityThan(WARNING) : false
+    // WARNING.isSameOrGreaterSeverityThan(INFORMATION) : true
+    return ordinal() >= kind.ordinal();
+  }
+
+  /**
+   * @param msg never {@code null}
+   * @return {@code true} if message's kind is exactly the one identified by {@code this}
+   */
+  public boolean is(IMessage msg) {
+    return msg.getKind() == this;
+  }
+
+  /**
+   * @deprecated Keep while we transit log4j uses; new code shall use {@link java.util.logging.Level}
+   */
+  @SuppressWarnings("UnstableApiUsage")
+  @Deprecated(since = "2022.1", forRemoval = true)
   @NotNull
   public static MessageKind fromPriority(Priority level) {
-    if (level.equals(Level.FATAL)) {
-      return MessageKind.FATAL;
-    } else if (level.equals(Level.ERROR)) {
+    if (level.equals(Level.FATAL) || level.equals(Level.ERROR)) {
       return MessageKind.ERROR;
     } else if (level.equals(Level.WARN)) {
       return MessageKind.WARNING;
-    } else if (level.equals(Level.INFO)) {
-      return MessageKind.INFORMATION;
-    } else if (level.equals(Level.DEBUG)) {
-      return MessageKind.DEBUG;
     }
-    return MessageKind.TRACE;
+    return MessageKind.INFORMATION;
+  }
+
+  @NotNull
+  public static MessageKind fromPriority(java.util.logging.Level level) {
+    if (level.equals(java.util.logging.Level.SEVERE)) {
+      return MessageKind.ERROR;
+    } else if (level.equals(java.util.logging.Level.WARNING)) {
+      return MessageKind.WARNING;
+    }
+    return MessageKind.INFORMATION;
   }
 }

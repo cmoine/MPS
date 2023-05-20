@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-9exp9mf5ik2bq3eoe17vvhff5gyp6r8" />
+<product version="3" modelHash="-evl6ybhzw7aam66s1jwxcf0sk2qf9d4">
+  <files names="AssertEquals_Editor.java:AssertEquals_EditorBuilder_a.java:AssertFalse_Editor.java:AssertFalse_EditorBuilder_a.java:AssertIsNotNull_Editor.java:AssertIsNotNull_EditorBuilder_a.java:AssertIsNull_Editor.java:AssertIsNull_EditorBuilder_a.java:AssertSame_Editor.java:AssertSame_EditorBuilder_a.java:AssertThrows_Editor.java:AssertThrows_EditorBuilder_a.java:AssertTrue_Editor.java:AssertTrue_EditorBuilder_a.java:BTestCase_Editor.java:BTestCase_EditorBuilder_a.java:EditorAspectDescriptorImpl.java:Fail_Editor.java:Fail_EditorBuilder_a.java:MessageComponent.java:MessageComponent_ComponentBuilder_a.java:Message_Editor.java:Message_EditorBuilder_a.java:PrepareMethod_Editor.java:PrepareMethod_EditorBuilder_a.java:TestMethodList_Editor.java:TestMethodList_EditorBuilder_a.java:TestMethod_Editor.java:TestMethod_EditorBuilder_a.java" />
+</product>
 

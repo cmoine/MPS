@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="9ovk4uqrflq2aj8kw5g5mlniy36v9eh" />
+<product version="3" modelHash="edoaft72zmq2ojj5auntf3ueluwww45">
+  <files names="BehaviorAspectDescriptor.java:TransformationLocation_WithFeatures__BehaviorDescriptor.java" />
+</product>
 

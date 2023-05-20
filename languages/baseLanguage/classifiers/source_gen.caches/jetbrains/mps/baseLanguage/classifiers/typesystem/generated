@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="aok75qqr98gleuxe1j51vx132w3r6ee" />
+<product version="3" modelHash="e7p1ju5p8z3dhadft18m2sixipc0edb">
+  <files names="BaseClassifierType_subtypeOf_Object_SubtypingRule.java:MakeDefaultClassifierFieldDeclarationPrivate_QuickFix.java:MakeDefaultClassifierMethodDeclarationPrivate_QuickFix.java:TypesystemDescriptor.java:check_DefaultClassifierFieldDeclarationVisibility_NonTypesystemRule.java:check_DefaultClassifierMethodDeclarationVisibility_NonTypesystemRule.java:check_IMemberOperation_NonTypesystemRule.java:typeof_DefaultClassifierFieldAccessOperation_InferenceRule.java:typeof_DefaultMethodCallOperation_InferenceRule.java:typeof_SuperClassifierExpresson_InferenceRule.java:typeof_ThisClassifierExpresson_InferenceRule.java" />
+</product>
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,15 +15,15 @@
  */
 package jetbrains.mps.nodeEditor;
 
-import jetbrains.mps.errors.IErrorReporter;
+import com.intellij.ui.JBColor;
 import jetbrains.mps.errors.MessageStatus;
-import jetbrains.mps.errors.messageTargets.MessageTarget;
+import jetbrains.mps.errors.item.NodeReportItem;
 import jetbrains.mps.ide.util.ColorAndGraphicsUtil;
 import jetbrains.mps.nodeEditor.cells.EditorCell_Constant;
 import jetbrains.mps.nodeEditor.cells.EditorCell_Error;
 import jetbrains.mps.nodeEditor.cells.EditorCell_Property;
-import jetbrains.mps.nodeEditor.cells.PropertyAccessor;
 import jetbrains.mps.nodeEditor.messageTargets.EditorMessageWithTarget;
+import jetbrains.mps.openapi.editor.ColorConstants;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.cells.EditorCell_Collection;
 import jetbrains.mps.openapi.editor.message.EditorMessageOwner;
@@ -41,18 +41,32 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class HighlighterMessage extends EditorMessageWithTarget {
-  private IErrorReporter myErrorReporter;
+  private final NodeReportItem myReportItem;
 
-  public HighlighterMessage(SNode errorNode, MessageStatus status, MessageTarget target, Color color, String string, EditorMessageOwner owner) {
-    super(errorNode, status, target, color, string, owner);
+  public static Color getMessageColor(MessageStatus messageStatus) {
+    if (messageStatus == MessageStatus.ERROR) {
+      return MPSColors.RED;
+    }
+    if (messageStatus == MessageStatus.WARNING) {
+      return new JBColor(ColorConstants.WARNING, ColorConstants.WARNING_DARK);
+    }
+    if (messageStatus == MessageStatus.OK) {
+      return JBColor.lightGray;
+    }
+    return JBColor.BLACK;
   }
 
-  public void setErrorReporter(IErrorReporter errorReporter) {
-    myErrorReporter = errorReporter;
+  public HighlighterMessage(EditorMessageOwner owner, NodeReportItem reportItem, SNode node) {
+    super(node, reportItem.getSeverity(), reportItem.getMessageTarget(), getMessageColor(reportItem.getSeverity()),
+          reportItem.getMessage(), owner);
+    if (!node.getReference().equals(reportItem.getNode())) {
+      throw new IllegalStateException();
+    }
+    myReportItem = reportItem;
   }
 
-  public IErrorReporter getErrorReporter() {
-    return myErrorReporter;
+  public NodeReportItem getReportItem() {
+    return myReportItem;
   }
 
   @Override
@@ -61,11 +75,6 @@ public class HighlighterMessage extends EditorMessageWithTarget {
       return false;
     }
     return super.sameAs(message);
-  }
-
-  @Override
-  public EditorCell getCellForParentNodeInMainEditor(EditorComponent editor) {
-    return super.getCellForParentNodeInMainEditor(editor);
   }
 
   @Override
@@ -150,9 +159,8 @@ public class HighlighterMessage extends EditorMessageWithTarget {
   }
 
   public static AnchorCellType getAnchorCellType(EditorCell cell, boolean prefixCell) {
-    if (cell instanceof EditorCell_Property && ((EditorCell_Property) cell).getModelAccessor() instanceof PropertyAccessor) {
-      PropertyAccessor accessor = (PropertyAccessor) ((EditorCell_Property) cell).getModelAccessor();
-      if (SNodeUtil.property_INamedConcept_name.getName().equals(accessor.getPropertyName())) {
+    if (cell.getCellContext() != null && cell.getCellContext().getPropertyInfo() != null) {
+      if (SNodeUtil.property_INamedConcept_name.getName().equals(cell.getCellContext().getPropertyInfo().getProperty().getName())) {
         return AnchorCellType.NAME;
       }
     }
@@ -209,7 +217,7 @@ public class HighlighterMessage extends EditorMessageWithTarget {
       int leftInset = isFirst ? myLeftInset : another.myLeftInset;
       int width = myWidth + another.myWidth;
       int effectiveWidth = isFirst ? myWidth - myLeftInset + another.myLeftInset + another.myEffectiveWidth :
-          another.myWidth - another.myLeftInset + myLeftInset + myEffectiveWidth;
+                           another.myWidth - another.myLeftInset + myLeftInset + myEffectiveWidth;
       return new Region(x, y, leftInset, effectiveWidth, width);
     }
 

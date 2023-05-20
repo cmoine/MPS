@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-5zua0ww3cqtuk36ywrcpy80x6zr0p5o" />
+<product version="3" modelHash="33u9mrart7fvj2sqe0lna5pgb8t99s8">
+  <files names="Money_extends_java_lang_Object_SubtypingRule.java:TypesystemDescriptor.java:typeof_ConvertTo_InferenceRule.java:typeof_GetAmount_InferenceRule.java:typeof_GetCurrency_InferenceRule.java:typeof_MoneyLiteral_InferenceRule.java:typeof_MovingAverage_InferenceRule.java:typeof_StockPriceInquiry_InferenceRule.java" />
+</product>
 

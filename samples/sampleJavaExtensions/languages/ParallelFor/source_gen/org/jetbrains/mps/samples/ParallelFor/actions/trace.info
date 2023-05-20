@@ -2,28 +2,30 @@
 <debug-info version="2">
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <root>
     <file name="ActionAspectDescriptorImpl.java">
-      <unit at="13,0,34,0" name="org.jetbrains.mps.samples.ParallelFor.actions.ActionAspectDescriptorImpl" />
-    </file>
-    <file name="QueriesGenerated.java">
-      <unit at="6,0,8,0" name="org.jetbrains.mps.samples.ParallelFor.actions.QueriesGenerated" />
+      <unit at="12,0,28,0" name="org.jetbrains.mps.samples.ParallelFor.actions.ActionAspectDescriptorImpl" />
     </file>
   </root>
   <root nodeRef="r:d37d8304-386b-47d4-9fb0-209be430470a(org.jetbrains.mps.samples.ParallelFor.actions)/8923957828369569660">
     <file name="ParallelLoopVariable_Factory.java">
-      <node id="8923957828369582242" at="13,91,14,168" concept="0" />
-      <node id="7793246093816046408" at="14,168,15,158" concept="0" />
-      <node id="8923957828369569661" at="13,0,17,0" concept="1" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SModel;)V" />
-      <scope id="8923957828369569661" at="13,91,15,158" />
-      <scope id="8923957828369569661" at="13,0,17,0">
+      <node id="8923957828369582242" at="14,102,15,68" concept="0" />
+      <node id="7793246093816046408" at="15,68,16,64" concept="0" />
+      <node id="8923957828369569660" at="21,0,22,0" concept="2" trace="isFinal$gvTP" />
+      <node id="8923957828369569660" at="22,0,23,0" concept="2" trace="name$MnvL" />
+      <node id="8923957828369569661" at="14,0,18,0" concept="1" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <scope id="8923957828369569661" at="14,102,16,64" />
+      <scope id="8923957828369569661" at="14,0,18,0">
         <var name="enclosingNode" id="8923957828369569661" />
+        <var name="index" id="8923957828369569661" />
         <var name="model" id="8923957828369569661" />
         <var name="newNode" id="8923957828369569661" />
         <var name="sampleNode" id="8923957828369569661" />
       </scope>
-      <unit id="8923957828369569661" at="12,0,18,0" name="org.jetbrains.mps.samples.ParallelFor.actions.ParallelLoopVariable_Factory$NodeFactory_8923957828369569661" />
-      <unit id="8923957828369569660" at="11,0,19,0" name="org.jetbrains.mps.samples.ParallelFor.actions.ParallelLoopVariable_Factory" />
+      <unit id="8923957828369569660" at="20,0,24,0" name="org.jetbrains.mps.samples.ParallelFor.actions.ParallelLoopVariable_Factory$PROPS" />
+      <unit id="8923957828369569661" at="13,0,19,0" name="org.jetbrains.mps.samples.ParallelFor.actions.ParallelLoopVariable_Factory$NodeFactory_8923957828369569661" />
+      <unit id="8923957828369569660" at="12,0,25,0" name="org.jetbrains.mps.samples.ParallelFor.actions.ParallelLoopVariable_Factory" />
     </file>
   </root>
 </debug-info>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,18 +20,20 @@ import jetbrains.mps.make.dependencies.graph.Graph;
 import jetbrains.mps.make.dependencies.graph.Graphs;
 import jetbrains.mps.make.dependencies.graph.IVertex;
 import jetbrains.mps.util.GraphUtil;
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-public class GraphTestCase extends TestCase {
+public class GraphTestCase {
   private IntGraph myGraph;
   private static final int N = 6;
 
-  @Override
+  @Before
   public void setUp() {
     myGraph = new IntGraph(N);
     myGraph.addEdges(0, 1, 2);
@@ -40,8 +42,9 @@ public class GraphTestCase extends TestCase {
     myGraph.addEdges(4, 5);
   }
 
+  @Test
   public void testCreation1() {
-    assertEquals("0 -> 1, 2\n" +
+    Assert.assertEquals("0 -> 1, 2\n" +
       "1 -> 3\n" +
       "2 -> \n" +
       "3 -> 2\n" +
@@ -49,9 +52,10 @@ public class GraphTestCase extends TestCase {
       "5 -> \n", myGraph.getGraph().toString());
   }
 
+  @Test
   public void testTranspose1() {
     Graph transposed = getTransposed(myGraph.getGraph());
-    assertEquals("0 -> \n" +
+    Assert.assertEquals("0 -> \n" +
       "1 -> 0\n" +
       "2 -> 0, 3\n" +
       "3 -> 1\n" +
@@ -59,48 +63,50 @@ public class GraphTestCase extends TestCase {
       "5 -> 4\n", transposed.toString());
   }
 
+  @Test
   public void testStronglyConnectedComponents1() {
     myGraph.addEdges(5, 0);
-    List<List<IntVertex>> components = Graphs.findStronglyConnectedComponents(myGraph.getGraph());
+    List<List<IntVertex>> components = myGraph.getGraph().sccReverse();
 
-    assertEquals(N, components.size());
+    Assert.assertEquals(N, components.size());
 
-    assertEquals(1, components.get(0).size());
-    assertTrue(components.get(0).contains(new IntVertex(4)));
+    Assert.assertEquals(1, components.get(0).size());
+    Assert.assertTrue(components.get(0).contains(new IntVertex(4)));
 
-    assertEquals(1, components.get(1).size());
-    assertTrue(components.get(1).contains(new IntVertex(5)));
+    Assert.assertEquals(1, components.get(1).size());
+    Assert.assertTrue(components.get(1).contains(new IntVertex(5)));
 
-    assertEquals(1, components.get(2).size());
-    assertTrue(components.get(2).contains(new IntVertex(0)));
+    Assert.assertEquals(1, components.get(2).size());
+    Assert.assertTrue(components.get(2).contains(new IntVertex(0)));
 
-    assertEquals(1, components.get(3).size());
-    assertTrue(components.get(3).contains(new IntVertex(1)));
+    Assert.assertEquals(1, components.get(3).size());
+    Assert.assertTrue(components.get(3).contains(new IntVertex(1)));
 
-    assertEquals(1, components.get(4).size());
-    assertTrue(components.get(4).contains(new IntVertex(3)));
+    Assert.assertEquals(1, components.get(4).size());
+    Assert.assertTrue(components.get(4).contains(new IntVertex(3)));
 
-    assertEquals(1, components.get(5).size());
-    assertTrue(components.get(5).contains(new IntVertex(2)));
+    Assert.assertEquals(1, components.get(5).size());
+    Assert.assertTrue(components.get(5).contains(new IntVertex(2)));
   }
 
+  @Test
   public void testStronglyConnectedComponents2() {
     myGraph.addEdges(5, 4);
     myGraph.addEdges(4, 0);
     myGraph.addEdges(2, 0);
-    List<List<Integer>> components = Graphs.findStronglyConnectedComponents(myGraph.getGraph());
+    List<List<IntVertex>> components = myGraph.getGraph().sccReverse();
 
-    assertEquals(2, components.size());
+    Assert.assertEquals(2, components.size());
 
-    assertEquals(2, components.get(0).size());
-    assertEquals(N - 2, components.get(1).size());
+    Assert.assertEquals(2, components.get(0).size());
+    Assert.assertEquals(N - 2, components.get(1).size());
 
-    assertTrue(components.get(0).contains(new IntVertex(5)));
-    assertTrue(components.get(0).contains(new IntVertex(4)));
-    assertTrue(components.get(1).contains(new IntVertex(0)));
-    assertTrue(components.get(1).contains(new IntVertex(1)));
-    assertTrue(components.get(1).contains(new IntVertex(2)));
-    assertTrue(components.get(1).contains(new IntVertex(3)));
+    Assert.assertTrue(components.get(0).contains(new IntVertex(5)));
+    Assert.assertTrue(components.get(0).contains(new IntVertex(4)));
+    Assert.assertTrue(components.get(1).contains(new IntVertex(0)));
+    Assert.assertTrue(components.get(1).contains(new IntVertex(1)));
+    Assert.assertTrue(components.get(1).contains(new IntVertex(2)));
+    Assert.assertTrue(components.get(1).contains(new IntVertex(3)));
   }
 
   public <V extends IVertex> Graph<VertexDecorator<V>> getTransposed(Graph<V> graph0) {
@@ -108,7 +114,7 @@ public class GraphTestCase extends TestCase {
     int[][] graph = Graphs.graphToIntInt(vertices, false, false);
     int[][] transposed = GraphUtil.transpose(graph);
 
-    Graph result = new Graph();
+    Graph<VertexDecorator<V>> result = new Graph<>();
     VertexDecorator<V>[] vertices_ = new VertexDecorator[vertices.length];
     for(int i = 0; i < vertices.length; i++) {
       vertices_[i] = new VertexDecorator<V>((V) vertices[i]);

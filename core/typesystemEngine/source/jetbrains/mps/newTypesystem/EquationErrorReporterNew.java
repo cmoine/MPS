@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,11 +20,10 @@ import jetbrains.mps.errors.IErrorReporter;
 import jetbrains.mps.errors.MessageStatus;
 import jetbrains.mps.errors.messageTargets.MessageTarget;
 import jetbrains.mps.errors.messageTargets.NodeMessageTarget;
-import jetbrains.mps.smodel.MPSModuleRepository;
-import org.jetbrains.mps.openapi.model.SNode;
-import org.jetbrains.mps.openapi.model.SNodeReference;
 import jetbrains.mps.typesystem.PresentationManager;
 import jetbrains.mps.typesystem.inference.EquationInfo;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.openapi.model.SNode;
 
 public class EquationErrorReporterNew extends AbstractErrorReporter implements IErrorReporter {
   private jetbrains.mps.newTypesystem.state.State myState;
@@ -34,24 +33,23 @@ public class EquationErrorReporterNew extends AbstractErrorReporter implements I
   private SNode myLeft;
   private SNode myRight;
 
-  private SNodeReference mySNodePointer;
+  /*
+   * I know it's not nice to keep SNode instead of SNodeReference, but we keep left and right anyway, and it's too much job to ensure
+   * SNodeReference could get resolved any time one asks #getSNode(). Besides, usage pattern seems to be to get IErrorReporter instances and process
+   * them right away. Hope, with the explicit javadoc for #getSNode() nobody would assume value of this method could be safely used outside of original read.
+   */
+  private final @NotNull SNode myNode;
 
-  public EquationErrorReporterNew(SNode node, jetbrains.mps.newTypesystem.state.State state, String before, SNode left, String between, SNode right,
-                                  String after, String ruleModel, String ruleId) {
-    super(ruleModel, ruleId);
+  public EquationErrorReporterNew(@NotNull SNode node, jetbrains.mps.newTypesystem.state.State state, String before, SNode left, String between, SNode right,
+                                  String after, EquationInfo info) {
+    super(info == null ? null : info.getRuleNode());
     myState = state;
     myBefore = before;
     myAfter = after;
     myBetween = between;
     myLeft = left;
     myRight = right;
-    mySNodePointer = new jetbrains.mps.smodel.SNodePointer(node);
-  }
-
-  public EquationErrorReporterNew(SNode node, jetbrains.mps.newTypesystem.state.State state, String before, SNode left, String between, SNode right,
-                                  String after, EquationInfo info) {
-    this(node, state, before, left, between, right, after, info != null ? info.getRuleModel() : null,
-      info != null ? info.getRuleId() : null);
+    myNode = node;
   }
 
   @Override
@@ -78,8 +76,9 @@ public class EquationErrorReporterNew extends AbstractErrorReporter implements I
     return new NodeMessageTarget();
   }
 
+  @NotNull
   @Override
   public SNode getSNode() {
-    return mySNodePointer.resolve(MPSModuleRepository.getInstance());
+    return myNode;
   }
 }

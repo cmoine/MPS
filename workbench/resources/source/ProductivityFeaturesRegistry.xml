@@ -50,7 +50,7 @@
             successive-show="4"
             />
     <feature
-            id="navigation.gotoOverriden"
+            id="navigation.gotoOverridden"
             tip-file="GoToOverriden.html"
             min-usage-count="5"
             first-show="1"

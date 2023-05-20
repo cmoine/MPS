@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.java.usages;
 
 import com.intellij.openapi.application.QueryExecutorBase;
+import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.IndexNotReadyException;
 import com.intellij.openapi.project.Project;
@@ -70,7 +70,7 @@ public class MPSReferenceSearch extends QueryExecutorBase<PsiReference, Referenc
   }
 
   @Override
-  public void processQuery(@NotNull SearchParameters queryParameters, final @NotNull Processor<PsiReference> consumer) {
+  public void processQuery(@NotNull SearchParameters queryParameters, @NotNull Processor<? super PsiReference> consumer) {
     if (!(queryParameters.getEffectiveSearchScope() instanceof GlobalSearchScope)) {
       return;
     }
@@ -90,49 +90,46 @@ public class MPSReferenceSearch extends QueryExecutorBase<PsiReference, Referenc
         if (DumbService.getInstance(project).isDumb()) {
           return;
         }
-
-        if (psiTarget instanceof LightElement) {
-          // we don't handle light psi elements we don't know about
-          // we may not be able to compute their node id and their Java meaning can be represented in baseLanguage
-          // in a special way
-          return;
-        }
-
-        // if MPSReferenceSearch is moved to mps-core, it will be MPS2PsiMapperUtil.getNodeId
-        final SNode targetNode = getNodeForElement(psiTarget);
-        if (targetNode == null) {
-          // it can't be referenced from MPS
-          return;
-        }
-
-        Set<SNode> targetNodes = new HashSet<SNode>(1);
-        targetNodes.add(targetNode);
-
-        Set<SReference> references;
         try {
-          references = FindUsagesFacade.getInstance().findUsages(new IdeaSearchScope(scope), targetNodes, null);
-        } catch (IndexNotReadyException e) {
-          // DumbService doesn't seem to work
-          return;
-        }
+          if (psiTarget instanceof LightElement) {
+            // we don't handle light psi elements we don't know about
+            // we may not be able to compute their node id and their Java meaning can be represented in baseLanguage
+            // in a special way
+            return;
+          }
 
-        for (SReference sReference : references) {
-          SNode source = sReference.getSourceNode();
-          MPSPsiNode psiNode = (MPSPsiNode) psiProvider.getPsi(source);
-          // the source could have come from the psi stub itself
-          if (psiNode == null) return;
-          String refRole = sReference.getRole();
-          MPSPsiRef[] refs = psiNode.getReferences(refRole);
-          if (refs.length == 0) continue;
+          // if MPSReferenceSearch is moved to mps-core, it will be MPS2PsiMapperUtil.getNodeId
+          final SNode targetNode = getNodeForElement(psiTarget);
+          if (targetNode == null) {
+            // it can't be referenced from MPS
+            return;
+          }
 
-          for (MPSPsiRef r : refs) {
-            if (targetNode.getNodeId().equals(r.getNodeId())) {
-              // it's our reference: giving it out to find usages
-              consumer.process(r.getReference());
+          Set<SNode> targetNodes = new HashSet<SNode>(1);
+          targetNodes.add(targetNode);
+
+          Set<SReference> references = FindUsagesFacade.getInstance().findUsages(new IdeaSearchScope(scope), targetNodes, null);
+
+          for (SReference sReference : references) {
+            SNode source = sReference.getSourceNode();
+            MPSPsiNode psiNode = (MPSPsiNode) psiProvider.getPsi(source);
+            // the source could have come from the psi stub itself
+            if (psiNode == null) return;
+            String refRole = sReference.getLink().getName();
+            MPSPsiRef[] refs = psiNode.getReferences(refRole);
+            if (refs.length == 0) continue;
+
+            for (MPSPsiRef r : refs) {
+              if (targetNode.getNodeId().equals(r.getNodeId())) {
+                // it's our reference: giving it out to find usages
+                consumer.process(r.getReference());
+              }
             }
           }
+        } catch (IndexNotReadyException | ProcessCanceledException e) {
+          // DumbService doesn't seem to work
+          // ignore and return
         }
-
       }
 
     });

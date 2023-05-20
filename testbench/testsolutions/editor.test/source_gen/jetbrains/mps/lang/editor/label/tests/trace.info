@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <root nodeRef="r:40a702b4-7737-42f4-8412-0355208396f3(jetbrains.mps.lang.editor.label.tests)/1070136247797346640">
+    <file name="LabelWithBrackets_Click_Test.java">
+      <node id="1070136247797346640" at="21,41,22,60" concept="7" />
+      <node id="1070136247797346640" at="26,63,27,36" concept="2" />
+      <node id="1070136247797346640" at="32,52,33,19" concept="7" />
+      <node id="1070136247797346640" at="37,51,38,72" concept="2" />
+      <node id="1070136247797484342" at="38,72,39,92" concept="5" />
+      <node id="1070136247797347244" at="40,7,41,30" concept="4" />
+      <node id="1070136247797347244" at="41,30,42,29" concept="4" />
+      <node id="1070136247797347244" at="42,29,43,121" concept="4" />
+      <node id="1070136247797347244" at="43,121,44,120" concept="2" />
+      <node id="1070136247797347244" at="44,120,45,119" concept="2" />
+      <node id="1070136247797346646" at="46,7,47,25" concept="2" />
+      <node id="1070136247797346640" at="18,0,20,0" concept="6" trace="ourParametersCacheExtension" />
+      <node id="1070136247797346640" at="21,0,24,0" concept="1" trace="LabelWithBrackets_Click_Test#()V" />
+      <node id="1070136247797346640" at="32,0,35,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="1070136247797346640" at="25,0,29,0" concept="3" trace="test_LabelWithBrackets_Click#()V" />
+      <node id="1070136247797347244" at="39,92,46,7" concept="0" />
+      <node id="1070136247797346640" at="36,0,49,0" concept="3" trace="testMethodImpl#()V" />
+      <scope id="1070136247797346640" at="21,41,22,60" />
+      <scope id="1070136247797346640" at="26,63,27,36" />
+      <scope id="1070136247797346640" at="32,52,33,19" />
+      <scope id="1070136247797346640" at="21,0,24,0" />
+      <scope id="1070136247797346640" at="32,0,35,0">
+        <var name="owner" id="1070136247797346640" />
+      </scope>
+      <scope id="1070136247797346640" at="25,0,29,0" />
+      <scope id="1070136247797347244" at="40,7,45,119">
+        <var name="eventTargetComponent_l63k4n_b0" id="1070136247797347244" />
+        <var name="x_l63k4n_b0" id="1070136247797347244" />
+        <var name="y_l63k4n_b0" id="1070136247797347244" />
+      </scope>
+      <scope id="1070136247797346640" at="37,51,47,25" />
+      <scope id="1070136247797346640" at="36,0,49,0" />
+      <unit id="1070136247797346640" at="30,0,50,0" name="jetbrains.mps.lang.editor.label.tests.LabelWithBrackets_Click_Test$TestBody" />
+      <unit id="1070136247797346640" at="16,0,51,0" name="jetbrains.mps.lang.editor.label.tests.LabelWithBrackets_Click_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:40a702b4-7737-42f4-8412-0355208396f3(jetbrains.mps.lang.editor.label.tests)/1848195745380699572">
+    <file name="LabelWithBrackets_AddText_Test.java">
+      <node id="1848195745380699572" at="19,43,20,60" concept="7" />
+      <node id="1848195745380699572" at="24,65,25,36" concept="2" />
+      <node id="1848195745380699572" at="30,52,31,19" concept="7" />
+      <node id="1848195745380699572" at="35,51,36,72" concept="2" />
+      <node id="6546125805699762261" at="36,72,37,25" concept="2" />
+      <node id="1848195745380699572" at="16,0,18,0" concept="6" trace="ourParametersCacheExtension" />
+      <node id="1848195745380699572" at="19,0,22,0" concept="1" trace="LabelWithBrackets_AddText_Test#()V" />
+      <node id="1848195745380699572" at="30,0,33,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="1848195745380699572" at="23,0,27,0" concept="3" trace="test_LabelWithBrackets_AddText#()V" />
+      <node id="1848195745380699572" at="34,0,39,0" concept="3" trace="testMethodImpl#()V" />
+      <scope id="1848195745380699572" at="19,43,20,60" />
+      <scope id="1848195745380699572" at="24,65,25,36" />
+      <scope id="1848195745380699572" at="30,52,31,19" />
+      <scope id="1848195745380699572" at="35,51,37,25" />
+      <scope id="1848195745380699572" at="19,0,22,0" />
+      <scope id="1848195745380699572" at="30,0,33,0">
+        <var name="owner" id="1848195745380699572" />
+      </scope>
+      <scope id="1848195745380699572" at="23,0,27,0" />
+      <scope id="1848195745380699572" at="34,0,39,0" />
+      <unit id="1848195745380699572" at="28,0,40,0" name="jetbrains.mps.lang.editor.label.tests.LabelWithBrackets_AddText_Test$TestBody" />
+      <unit id="1848195745380699572" at="14,0,41,0" name="jetbrains.mps.lang.editor.label.tests.LabelWithBrackets_AddText_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:40a702b4-7737-42f4-8412-0355208396f3(jetbrains.mps.lang.editor.label.tests)/6546125805699762592">
+    <file name="LabelWithBrackets_RemoveText_Test.java">
+      <node id="6546125805699762592" at="19,46,20,60" concept="7" />
+      <node id="6546125805699762592" at="24,68,25,36" concept="2" />
+      <node id="6546125805699762592" at="30,52,31,19" concept="7" />
+      <node id="6546125805699762592" at="35,51,36,72" concept="2" />
+      <node id="6546125805699762859" at="36,72,37,72" concept="2" />
+      <node id="6546125805699762890" at="37,72,38,72" concept="2" />
+      <node id="6546125805699762904" at="38,72,39,72" concept="2" />
+      <node id="6546125805699762920" at="39,72,40,72" concept="2" />
+      <node id="6546125805699762592" at="16,0,18,0" concept="6" trace="ourParametersCacheExtension" />
+      <node id="6546125805699762592" at="19,0,22,0" concept="1" trace="LabelWithBrackets_RemoveText_Test#()V" />
+      <node id="6546125805699762592" at="30,0,33,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="6546125805699762592" at="23,0,27,0" concept="3" trace="test_LabelWithBrackets_RemoveText#()V" />
+      <node id="6546125805699762592" at="34,0,42,0" concept="3" trace="testMethodImpl#()V" />
+      <scope id="6546125805699762592" at="19,46,20,60" />
+      <scope id="6546125805699762592" at="24,68,25,36" />
+      <scope id="6546125805699762592" at="30,52,31,19" />
+      <scope id="6546125805699762592" at="19,0,22,0" />
+      <scope id="6546125805699762592" at="30,0,33,0">
+        <var name="owner" id="6546125805699762592" />
+      </scope>
+      <scope id="6546125805699762592" at="23,0,27,0" />
+      <scope id="6546125805699762592" at="35,51,40,72" />
+      <scope id="6546125805699762592" at="34,0,42,0" />
+      <unit id="6546125805699762592" at="28,0,43,0" name="jetbrains.mps.lang.editor.label.tests.LabelWithBrackets_RemoveText_Test$TestBody" />
+      <unit id="6546125805699762592" at="14,0,44,0" name="jetbrains.mps.lang.editor.label.tests.LabelWithBrackets_RemoveText_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:40a702b4-7737-42f4-8412-0355208396f3(jetbrains.mps.lang.editor.label.tests)/6546125805699762938">
+    <file name="LabelWithBrackets_Update_Test.java">
+      <node id="6546125805699762938" at="21,42,22,60" concept="7" />
+      <node id="6546125805699762938" at="26,64,27,36" concept="2" />
+      <node id="6546125805699762938" at="32,52,33,19" concept="7" />
+      <node id="6546125805699762938" at="37,51,38,72" concept="2" />
+      <node id="6546125805699763087" at="38,72,39,79" concept="2" />
+      <node id="6546125805699762938" at="18,0,20,0" concept="6" trace="ourParametersCacheExtension" />
+      <node id="6546125805699762938" at="21,0,24,0" concept="1" trace="LabelWithBrackets_Update_Test#()V" />
+      <node id="6546125805699762938" at="32,0,35,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="6546125805699762938" at="25,0,29,0" concept="3" trace="test_LabelWithBrackets_Update#()V" />
+      <node id="6546125805699762938" at="36,0,41,0" concept="3" trace="testMethodImpl#()V" />
+      <scope id="6546125805699762938" at="21,42,22,60" />
+      <scope id="6546125805699762938" at="26,64,27,36" />
+      <scope id="6546125805699762938" at="32,52,33,19" />
+      <scope id="6546125805699762938" at="37,51,39,79" />
+      <scope id="6546125805699762938" at="21,0,24,0" />
+      <scope id="6546125805699762938" at="32,0,35,0">
+        <var name="owner" id="6546125805699762938" />
+      </scope>
+      <scope id="6546125805699762938" at="25,0,29,0" />
+      <scope id="6546125805699762938" at="36,0,41,0" />
+      <unit id="6546125805699762938" at="30,0,42,0" name="jetbrains.mps.lang.editor.label.tests.LabelWithBrackets_Update_Test$TestBody" />
+      <unit id="6546125805699762938" at="16,0,43,0" name="jetbrains.mps.lang.editor.label.tests.LabelWithBrackets_Update_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:40a702b4-7737-42f4-8412-0355208396f3(jetbrains.mps.lang.editor.label.tests)/6546125805699826788">
+    <file name="LabelWithBrackets_Undo_Test.java">
+      <node id="6546125805699826788" at="19,40,20,60" concept="7" />
+      <node id="6546125805699826788" at="24,62,25,36" concept="2" />
+      <node id="6546125805699826788" at="30,52,31,19" concept="7" />
+      <node id="6546125805699826788" at="35,51,36,72" concept="2" />
+      <node id="6546125805699827546" at="36,72,37,22" concept="2" />
+      <node id="1954244792706921853" at="37,22,38,28" concept="2" />
+      <node id="6546125805699826788" at="16,0,18,0" concept="6" trace="ourParametersCacheExtension" />
+      <node id="6546125805699826788" at="19,0,22,0" concept="1" trace="LabelWithBrackets_Undo_Test#()V" />
+      <node id="6546125805699826788" at="30,0,33,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="6546125805699826788" at="23,0,27,0" concept="3" trace="test_LabelWithBrackets_Undo#()V" />
+      <node id="6546125805699826788" at="34,0,40,0" concept="3" trace="testMethodImpl#()V" />
+      <scope id="6546125805699826788" at="19,40,20,60" />
+      <scope id="6546125805699826788" at="24,62,25,36" />
+      <scope id="6546125805699826788" at="30,52,31,19" />
+      <scope id="6546125805699826788" at="19,0,22,0" />
+      <scope id="6546125805699826788" at="30,0,33,0">
+        <var name="owner" id="6546125805699826788" />
+      </scope>
+      <scope id="6546125805699826788" at="35,51,38,28" />
+      <scope id="6546125805699826788" at="23,0,27,0" />
+      <scope id="6546125805699826788" at="34,0,40,0" />
+      <unit id="6546125805699826788" at="28,0,41,0" name="jetbrains.mps.lang.editor.label.tests.LabelWithBrackets_Undo_Test$TestBody" />
+      <unit id="6546125805699826788" at="14,0,42,0" name="jetbrains.mps.lang.editor.label.tests.LabelWithBrackets_Undo_Test" />
+    </file>
+  </root>
+</debug-info>
+

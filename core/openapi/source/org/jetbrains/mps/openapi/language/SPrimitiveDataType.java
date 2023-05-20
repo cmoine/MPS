@@ -17,7 +17,10 @@ package org.jetbrains.mps.openapi.language;
 
 /**
  * It represents primitive data types, such as int, string or boolean.
+ *
+ * @deprecated Use one of SPrimitiveTypes
  */
+@Deprecated(since = "2018.3", forRemoval = true)
 public interface SPrimitiveDataType extends SDataType {
   int STRING = 0;
   int BOOL = 1;

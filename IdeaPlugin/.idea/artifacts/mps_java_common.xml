@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="mps-java-common">
-    <output-path>$PROJECT_DIR$/mps-java/lib</output-path>
-    <root id="archive" name="mps-java-common.jar">
-      <element id="module-output" name="mps-java-common" />
-    </root>
-  </artifact>
-</component>

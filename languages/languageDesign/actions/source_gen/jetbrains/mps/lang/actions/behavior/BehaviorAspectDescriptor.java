@@ -7,69 +7,25 @@ import jetbrains.mps.core.aspects.behaviour.api.BHDescriptor;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor {
-  private final BHDescriptor myNodeSubstituteActions__BehaviorDescriptor = new NodeSubstituteActions__BehaviorDescriptor();
-  private final BHDescriptor myNodeSubstituteActionsBuilder__BehaviorDescriptor = new NodeSubstituteActionsBuilder__BehaviorDescriptor();
-  private final BHDescriptor mySideTransformHintSubstituteActionsBuilder__BehaviorDescriptor = new SideTransformHintSubstituteActionsBuilder__BehaviorDescriptor();
-  private final BHDescriptor mySideTransformHintSubstituteActions__BehaviorDescriptor = new SideTransformHintSubstituteActions__BehaviorDescriptor();
-  private final BHDescriptor myNodeSubstitutePreconditionFunction__BehaviorDescriptor = new NodeSubstitutePreconditionFunction__BehaviorDescriptor();
-  private final BHDescriptor mySideTransformHintSubstitutePreconditionFunction__BehaviorDescriptor = new SideTransformHintSubstitutePreconditionFunction__BehaviorDescriptor();
   private final BHDescriptor myNodeFactories__BehaviorDescriptor = new NodeFactories__BehaviorDescriptor();
   private final BHDescriptor myNodeFactory__BehaviorDescriptor = new NodeFactory__BehaviorDescriptor();
   private final BHDescriptor myNodeSetupFunction__BehaviorDescriptor = new NodeSetupFunction__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_CanSubstitute__BehaviorDescriptor = new QueryFunction_CanSubstitute__BehaviorDescriptor();
-  private final BHDescriptor myConceptFunctionParameter_pattern__BehaviorDescriptor = new ConceptFunctionParameter_pattern__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_Substitute_Handler__BehaviorDescriptor = new QueryFunction_Substitute_Handler__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_SubstituteString__BehaviorDescriptor = new QueryFunction_SubstituteString__BehaviorDescriptor();
-  private final BHDescriptor myConceptFunctionParameter_parameterObject__BehaviorDescriptor = new ConceptFunctionParameter_parameterObject__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_ParameterizedSubstitute_Query__BehaviorDescriptor = new QueryFunction_ParameterizedSubstitute_Query__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_ParameterizedSubstitute_String__BehaviorDescriptor = new QueryFunction_ParameterizedSubstitute_String__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_ParameterizedSubstitute_Handler__BehaviorDescriptor = new QueryFunction_ParameterizedSubstitute_Handler__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_SubstituteWrapper__BehaviorDescriptor = new QueryFunction_SubstituteWrapper__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_RemoveBy_Condition__BehaviorDescriptor = new QueryFunction_RemoveBy_Condition__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_SideTransform_String__BehaviorDescriptor = new QueryFunction_SideTransform_String__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_SideTransform_Handler__BehaviorDescriptor = new QueryFunction_SideTransform_Handler__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_ParameterizedSideTransform_Query__BehaviorDescriptor = new QueryFunction_ParameterizedSideTransform_Query__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_ParameterizedSideTransform_Handler__BehaviorDescriptor = new QueryFunction_ParameterizedSideTransform_Handler__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_SideTransform_ConceptHandler__BehaviorDescriptor = new QueryFunction_SideTransform_ConceptHandler__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_SideTransform_NodeQuery__BehaviorDescriptor = new QueryFunction_SideTransform_NodeQuery__BehaviorDescriptor();
-  private final BHDescriptor mySubstituteNodeBuilderVariableReference__BehaviorDescriptor = new SubstituteNodeBuilderVariableReference__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_Substitute_CommonInitializer__BehaviorDescriptor = new QueryFunction_Substitute_CommonInitializer__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_SubstituteVariableInitializer__BehaviorDescriptor = new QueryFunction_SubstituteVariableInitializer__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_ST_RemoveBy_Condition__BehaviorDescriptor = new QueryFunction_ST_RemoveBy_Condition__BehaviorDescriptor();
-  private final BHDescriptor myRemoveSTByConditionPart__BehaviorDescriptor = new RemoveSTByConditionPart__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_GenericSubstituteMenuPart__BehaviorDescriptor = new QueryFunction_GenericSubstituteMenuPart__BehaviorDescriptor();
-  private final BHDescriptor myConceptFunctionParameter_childSetter__BehaviorDescriptor = new ConceptFunctionParameter_childSetter__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_ParameterizedSubstitute_Icon__BehaviorDescriptor = new QueryFunction_ParameterizedSubstitute_Icon__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_SubstituteIcon__BehaviorDescriptor = new QueryFunction_SubstituteIcon__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_SideTransform_Icon__BehaviorDescriptor = new QueryFunction_SideTransform_Icon__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_STVariableInitializer__BehaviorDescriptor = new QueryFunction_STVariableInitializer__BehaviorDescriptor();
-  private final BHDescriptor mySideTransformVariableReference__BehaviorDescriptor = new SideTransformVariableReference__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_ST_CommonInitializer__BehaviorDescriptor = new QueryFunction_ST_CommonInitializer__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_ReturnSmallPart__BehaviorDescriptor = new QueryFunction_ReturnSmallPart__BehaviorDescriptor();
-  private final BHDescriptor myConceptFunctionParameter_strictly__BehaviorDescriptor = new ConceptFunctionParameter_strictly__BehaviorDescriptor();
   private final BHDescriptor myPasteWrappers__BehaviorDescriptor = new PasteWrappers__BehaviorDescriptor();
+  private final BHDescriptor myPasteWrapper__BehaviorDescriptor = new PasteWrapper__BehaviorDescriptor();
   private final BHDescriptor myConceptFunctionParameter_nodeToPasteWrap__BehaviorDescriptor = new ConceptFunctionParameter_nodeToPasteWrap__BehaviorDescriptor();
   private final BHDescriptor myQueryFunction_PasteWrapper__BehaviorDescriptor = new QueryFunction_PasteWrapper__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_ActionType__BehaviorDescriptor = new QueryFunction_ActionType__BehaviorDescriptor();
-  private final BHDescriptor mySmartActionParameterReference__BehaviorDescriptor = new SmartActionParameterReference__BehaviorDescriptor();
-  private final BHDescriptor myIsSmartActionApplicableFunction__BehaviorDescriptor = new IsSmartActionApplicableFunction__BehaviorDescriptor();
-  private final BHDescriptor myConceptFunctionParameter_OperationContext__BehaviorDescriptor = new ConceptFunctionParameter_OperationContext__BehaviorDescriptor();
-  private final BHDescriptor myGetActionUIFunction__BehaviorDescriptor = new GetActionUIFunction__BehaviorDescriptor();
-  private final BHDescriptor myExecuteSmartActionFunction__BehaviorDescriptor = new ExecuteSmartActionFunction__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_Substitute_SelectionHandler__BehaviorDescriptor = new QueryFunction_Substitute_SelectionHandler__BehaviorDescriptor();
-  private final BHDescriptor myConceptFunctionParameter_createdNode__BehaviorDescriptor = new ConceptFunctionParameter_createdNode__BehaviorDescriptor();
   private final BHDescriptor myPastePostProcessor__BehaviorDescriptor = new PastePostProcessor__BehaviorDescriptor();
   private final BHDescriptor myNF_Node_InsertNewNextSiblingOperation__BehaviorDescriptor = new NF_Node_InsertNewNextSiblingOperation__BehaviorDescriptor();
   private final BHDescriptor myNF_Node_InsertNewPrevSiblingOperation__BehaviorDescriptor = new NF_Node_InsertNewPrevSiblingOperation__BehaviorDescriptor();
   private final BHDescriptor myNF_Node_ReplaceWithNewOperation__BehaviorDescriptor = new NF_Node_ReplaceWithNewOperation__BehaviorDescriptor();
   private final BHDescriptor myNF_Link_SetNewChildOperation__BehaviorDescriptor = new NF_Link_SetNewChildOperation__BehaviorDescriptor();
   private final BHDescriptor myNF_LinkList_AddNewChildOperation__BehaviorDescriptor = new NF_LinkList_AddNewChildOperation__BehaviorDescriptor();
-  private final BHDescriptor myConceptFunctionParameter_targetNode__BehaviorDescriptor = new ConceptFunctionParameter_targetNode__BehaviorDescriptor();
+  private final BHDescriptor myNodeSetupFunction_Index__BehaviorDescriptor = new NodeSetupFunction_Index__BehaviorDescriptor();
   private final BHDescriptor myNF_Model_CreateNewNodeOperation__BehaviorDescriptor = new NF_Model_CreateNewNodeOperation__BehaviorDescriptor();
   private final BHDescriptor myNF_Model_CreateNewRootNodeOperation__BehaviorDescriptor = new NF_Model_CreateNewRootNodeOperation__BehaviorDescriptor();
   private final BHDescriptor myNodeSetupFunction_SampleNode__BehaviorDescriptor = new NodeSetupFunction_SampleNode__BehaviorDescriptor();
@@ -81,7 +37,6 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
   private final BHDescriptor myCopyPasteHandlers__BehaviorDescriptor = new CopyPasteHandlers__BehaviorDescriptor();
   private final BHDescriptor myPastePostProcessFunction__BehaviorDescriptor = new PastePostProcessFunction__BehaviorDescriptor();
   private final BHDescriptor myConceptFunctionParameter_nodeToPastePostProcess__BehaviorDescriptor = new ConceptFunctionParameter_nodeToPastePostProcess__BehaviorDescriptor();
-  private final BHDescriptor myQueryFunction_IconNode__BehaviorDescriptor = new QueryFunction_IconNode__BehaviorDescriptor();
   private final BHDescriptor myNF_Concept_NewInstance__BehaviorDescriptor = new NF_Concept_NewInstance__BehaviorDescriptor();
 
   public BehaviorAspectDescriptor() {
@@ -89,379 +44,63 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
 
   @Nullable
   public BHDescriptor getDescriptor(@NotNull SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_846f5o_a0wc.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return myConceptFunctionParameter_OperationContext__BehaviorDescriptor;
-          }
-          break;
-        case 1:
-          if (true) {
-            return myConceptFunctionParameter_childSetter__BehaviorDescriptor;
-          }
-          break;
-        case 2:
-          if (true) {
-            return myConceptFunctionParameter_createdNode__BehaviorDescriptor;
-          }
-          break;
-        case 3:
-          if (true) {
-            return myConceptFunctionParameter_nodeToCopyPreProcess__BehaviorDescriptor;
-          }
-          break;
-        case 4:
-          if (true) {
-            return myConceptFunctionParameter_nodeToCopyPreProcessOriginal__BehaviorDescriptor;
-          }
-          break;
-        case 5:
-          if (true) {
-            return myConceptFunctionParameter_nodeToPastePostProcess__BehaviorDescriptor;
-          }
-          break;
-        case 6:
-          if (true) {
-            return myConceptFunctionParameter_nodeToPasteWrap__BehaviorDescriptor;
-          }
-          break;
-        case 7:
-          if (true) {
-            return myConceptFunctionParameter_parameterObject__BehaviorDescriptor;
-          }
-          break;
-        case 8:
-          if (true) {
-            return myConceptFunctionParameter_pattern__BehaviorDescriptor;
-          }
-          break;
-        case 9:
-          if (true) {
-            return myConceptFunctionParameter_strictly__BehaviorDescriptor;
-          }
-          break;
-        case 10:
-          if (true) {
-            return myConceptFunctionParameter_targetNode__BehaviorDescriptor;
-          }
-          break;
-        case 11:
-          if (true) {
-            return myCopyPasteHandlers__BehaviorDescriptor;
-          }
-          break;
-        case 12:
-          if (true) {
-            return myCopyPreProcessFunction__BehaviorDescriptor;
-          }
-          break;
-        case 13:
-          if (true) {
-            return myCopyPreProcessor__BehaviorDescriptor;
-          }
-          break;
-        case 14:
-          if (true) {
-            return myExecuteSmartActionFunction__BehaviorDescriptor;
-          }
-          break;
-        case 15:
-          if (true) {
-            return myGetActionUIFunction__BehaviorDescriptor;
-          }
-          break;
-        case 16:
-          if (true) {
-            return myIsSmartActionApplicableFunction__BehaviorDescriptor;
-          }
-          break;
-        case 17:
-          if (true) {
-            return myNF_Concept_NewInstance__BehaviorDescriptor;
-          }
-          break;
-        case 18:
-          if (true) {
-            return myNF_LinkList_AddNewChildOperation__BehaviorDescriptor;
-          }
-          break;
-        case 19:
-          if (true) {
-            return myNF_Link_SetNewChildOperation__BehaviorDescriptor;
-          }
-          break;
-        case 20:
-          if (true) {
-            return myNF_Model_CreateNewNodeOperation__BehaviorDescriptor;
-          }
-          break;
-        case 21:
-          if (true) {
-            return myNF_Model_CreateNewRootNodeOperation__BehaviorDescriptor;
-          }
-          break;
-        case 22:
-          if (true) {
-            return myNF_Node_InsertNewNextSiblingOperation__BehaviorDescriptor;
-          }
-          break;
-        case 23:
-          if (true) {
-            return myNF_Node_InsertNewPrevSiblingOperation__BehaviorDescriptor;
-          }
-          break;
-        case 24:
-          if (true) {
-            return myNF_Node_ReplaceWithNewOperation__BehaviorDescriptor;
-          }
-          break;
-        case 25:
-          if (true) {
-            return myNodeFactories__BehaviorDescriptor;
-          }
-          break;
-        case 26:
-          if (true) {
-            return myNodeFactory__BehaviorDescriptor;
-          }
-          break;
-        case 27:
-          if (true) {
-            return myNodeSetupFunction__BehaviorDescriptor;
-          }
-          break;
-        case 28:
-          if (true) {
-            return myNodeSetupFunction_EnclosingNode__BehaviorDescriptor;
-          }
-          break;
-        case 29:
-          if (true) {
-            return myNodeSetupFunction_SampleNode__BehaviorDescriptor;
-          }
-          break;
-        case 30:
-          if (true) {
-            return myNodeSubstituteActions__BehaviorDescriptor;
-          }
-          break;
-        case 31:
-          if (true) {
-            return myNodeSubstituteActionsBuilder__BehaviorDescriptor;
-          }
-          break;
-        case 32:
-          if (true) {
-            return myNodeSubstitutePreconditionFunction__BehaviorDescriptor;
-          }
-          break;
-        case 33:
-          if (true) {
-            return myPastePostProcessFunction__BehaviorDescriptor;
-          }
-          break;
-        case 34:
-          if (true) {
-            return myPastePostProcessor__BehaviorDescriptor;
-          }
-          break;
-        case 35:
-          if (true) {
-            return myPasteWrappers__BehaviorDescriptor;
-          }
-          break;
-        case 36:
-          if (true) {
-            return myQueryFunction_ActionType__BehaviorDescriptor;
-          }
-          break;
-        case 37:
-          if (true) {
-            return myQueryFunction_CanSubstitute__BehaviorDescriptor;
-          }
-          break;
-        case 38:
-          if (true) {
-            return myQueryFunction_GenericSubstituteMenuPart__BehaviorDescriptor;
-          }
-          break;
-        case 39:
-          if (true) {
-            return myQueryFunction_IconNode__BehaviorDescriptor;
-          }
-          break;
-        case 40:
-          if (true) {
-            return myQueryFunction_ParameterizedSideTransform_Handler__BehaviorDescriptor;
-          }
-          break;
-        case 41:
-          if (true) {
-            return myQueryFunction_ParameterizedSideTransform_Query__BehaviorDescriptor;
-          }
-          break;
-        case 42:
-          if (true) {
-            return myQueryFunction_ParameterizedSubstitute_Handler__BehaviorDescriptor;
-          }
-          break;
-        case 43:
-          if (true) {
-            return myQueryFunction_ParameterizedSubstitute_Icon__BehaviorDescriptor;
-          }
-          break;
-        case 44:
-          if (true) {
-            return myQueryFunction_ParameterizedSubstitute_Query__BehaviorDescriptor;
-          }
-          break;
-        case 45:
-          if (true) {
-            return myQueryFunction_ParameterizedSubstitute_String__BehaviorDescriptor;
-          }
-          break;
-        case 46:
-          if (true) {
-            return myQueryFunction_PasteWrapper__BehaviorDescriptor;
-          }
-          break;
-        case 47:
-          if (true) {
-            return myQueryFunction_RemoveBy_Condition__BehaviorDescriptor;
-          }
-          break;
-        case 48:
-          if (true) {
-            return myQueryFunction_ReturnSmallPart__BehaviorDescriptor;
-          }
-          break;
-        case 49:
-          if (true) {
-            return myQueryFunction_STVariableInitializer__BehaviorDescriptor;
-          }
-          break;
-        case 50:
-          if (true) {
-            return myQueryFunction_ST_CommonInitializer__BehaviorDescriptor;
-          }
-          break;
-        case 51:
-          if (true) {
-            return myQueryFunction_ST_RemoveBy_Condition__BehaviorDescriptor;
-          }
-          break;
-        case 52:
-          if (true) {
-            return myQueryFunction_SideTransform_ConceptHandler__BehaviorDescriptor;
-          }
-          break;
-        case 53:
-          if (true) {
-            return myQueryFunction_SideTransform_Handler__BehaviorDescriptor;
-          }
-          break;
-        case 54:
-          if (true) {
-            return myQueryFunction_SideTransform_Icon__BehaviorDescriptor;
-          }
-          break;
-        case 55:
-          if (true) {
-            return myQueryFunction_SideTransform_NodeQuery__BehaviorDescriptor;
-          }
-          break;
-        case 56:
-          if (true) {
-            return myQueryFunction_SideTransform_String__BehaviorDescriptor;
-          }
-          break;
-        case 57:
-          if (true) {
-            return myQueryFunction_SubstituteIcon__BehaviorDescriptor;
-          }
-          break;
-        case 58:
-          if (true) {
-            return myQueryFunction_SubstituteString__BehaviorDescriptor;
-          }
-          break;
-        case 59:
-          if (true) {
-            return myQueryFunction_SubstituteVariableInitializer__BehaviorDescriptor;
-          }
-          break;
-        case 60:
-          if (true) {
-            return myQueryFunction_SubstituteWrapper__BehaviorDescriptor;
-          }
-          break;
-        case 61:
-          if (true) {
-            return myQueryFunction_Substitute_CommonInitializer__BehaviorDescriptor;
-          }
-          break;
-        case 62:
-          if (true) {
-            return myQueryFunction_Substitute_Handler__BehaviorDescriptor;
-          }
-          break;
-        case 63:
-          if (true) {
-            return myQueryFunction_Substitute_SelectionHandler__BehaviorDescriptor;
-          }
-          break;
-        case 64:
-          if (true) {
-            return myRemoveSTByConditionPart__BehaviorDescriptor;
-          }
-          break;
-        case 65:
-          if (true) {
-            return mySideTransformHintSubstituteActions__BehaviorDescriptor;
-          }
-          break;
-        case 66:
-          if (true) {
-            return mySideTransformHintSubstituteActionsBuilder__BehaviorDescriptor;
-          }
-          break;
-        case 67:
-          if (true) {
-            return mySideTransformHintSubstitutePreconditionFunction__BehaviorDescriptor;
-          }
-          break;
-        case 68:
-          if (true) {
-            return mySideTransformVariableReference__BehaviorDescriptor;
-          }
-          break;
-        case 69:
-          if (true) {
-            return mySmartActionParameterReference__BehaviorDescriptor;
-          }
-          break;
-        case 70:
-          if (true) {
-            return mySubstituteNodeBuilderVariableReference__BehaviorDescriptor;
-          }
-          break;
-        default:
-          // default 
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return myConceptFunctionParameter_nodeToCopyPreProcess__BehaviorDescriptor;
+      case 1:
+        return myConceptFunctionParameter_nodeToCopyPreProcessOriginal__BehaviorDescriptor;
+      case 2:
+        return myConceptFunctionParameter_nodeToPastePostProcess__BehaviorDescriptor;
+      case 3:
+        return myConceptFunctionParameter_nodeToPasteWrap__BehaviorDescriptor;
+      case 4:
+        return myCopyPasteHandlers__BehaviorDescriptor;
+      case 5:
+        return myCopyPreProcessFunction__BehaviorDescriptor;
+      case 6:
+        return myCopyPreProcessor__BehaviorDescriptor;
+      case 7:
+        return myNF_Concept_NewInstance__BehaviorDescriptor;
+      case 8:
+        return myNF_LinkList_AddNewChildOperation__BehaviorDescriptor;
+      case 9:
+        return myNF_Link_SetNewChildOperation__BehaviorDescriptor;
+      case 10:
+        return myNF_Model_CreateNewNodeOperation__BehaviorDescriptor;
+      case 11:
+        return myNF_Model_CreateNewRootNodeOperation__BehaviorDescriptor;
+      case 12:
+        return myNF_Node_InsertNewNextSiblingOperation__BehaviorDescriptor;
+      case 13:
+        return myNF_Node_InsertNewPrevSiblingOperation__BehaviorDescriptor;
+      case 14:
+        return myNF_Node_ReplaceWithNewOperation__BehaviorDescriptor;
+      case 15:
+        return myNodeFactories__BehaviorDescriptor;
+      case 16:
+        return myNodeFactory__BehaviorDescriptor;
+      case 17:
+        return myNodeSetupFunction__BehaviorDescriptor;
+      case 18:
+        return myNodeSetupFunction_EnclosingNode__BehaviorDescriptor;
+      case 19:
+        return myNodeSetupFunction_Index__BehaviorDescriptor;
+      case 20:
+        return myNodeSetupFunction_SampleNode__BehaviorDescriptor;
+      case 21:
+        return myPastePostProcessFunction__BehaviorDescriptor;
+      case 22:
+        return myPastePostProcessor__BehaviorDescriptor;
+      case 23:
+        return myPasteWrapper__BehaviorDescriptor;
+      case 24:
+        return myPasteWrappers__BehaviorDescriptor;
+      case 25:
+        return myQueryFunction_PasteWrapper__BehaviorDescriptor;
+      default:
     }
     return null;
   }
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
-  }
-  private static final Map<SAbstractConcept, Integer> indices_846f5o_a0wc = buildConceptIndices(MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x11f8f139b1dL, "jetbrains.mps.lang.actions.structure.ConceptFunctionParameter_OperationContext"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x1175fd19500L, "jetbrains.mps.lang.actions.structure.ConceptFunctionParameter_childSetter"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x61f403867e2f6f6L, "jetbrains.mps.lang.actions.structure.ConceptFunctionParameter_createdNode"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x528ba37dd3326034L, "jetbrains.mps.lang.actions.structure.ConceptFunctionParameter_nodeToCopyPreProcess"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x528ba37dd3326068L, "jetbrains.mps.lang.actions.structure.ConceptFunctionParameter_nodeToCopyPreProcessOriginal"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x53a34ae13c0d287bL, "jetbrains.mps.lang.actions.structure.ConceptFunctionParameter_nodeToPastePostProcess"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x11c51740034L, "jetbrains.mps.lang.actions.structure.ConceptFunctionParameter_nodeToPasteWrap"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x1121ecda6bbL, "jetbrains.mps.lang.actions.structure.ConceptFunctionParameter_parameterObject"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x1121e2c89d1L, "jetbrains.mps.lang.actions.structure.ConceptFunctionParameter_pattern"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x11976233a0aL, "jetbrains.mps.lang.actions.structure.ConceptFunctionParameter_strictly"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x4b4c9b482992dc34L, "jetbrains.mps.lang.actions.structure.ConceptFunctionParameter_targetNode"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x528ba37dd3383e1eL, "jetbrains.mps.lang.actions.structure.CopyPasteHandlers"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x528ba37dd3317b9fL, "jetbrains.mps.lang.actions.structure.CopyPreProcessFunction"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x528ba37dd3311946L, "jetbrains.mps.lang.actions.structure.CopyPreProcessor"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x11f8f52c18fL, "jetbrains.mps.lang.actions.structure.ExecuteSmartActionFunction"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x11f8f5118d4L, "jetbrains.mps.lang.actions.structure.GetActionUIFunction"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x11f8effcd77L, "jetbrains.mps.lang.actions.structure.IsSmartActionApplicableFunction"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x6bea674d717de5f4L, "jetbrains.mps.lang.actions.structure.NF_Concept_NewInstance"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0xaa57300a39f8701L, "jetbrains.mps.lang.actions.structure.NF_LinkList_AddNewChildOperation"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0xaa57300a39f86feL, "jetbrains.mps.lang.actions.structure.NF_Link_SetNewChildOperation"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x4c0fd74709e9e128L, "jetbrains.mps.lang.actions.structure.NF_Model_CreateNewNodeOperation"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x4c0fd74709e9f70cL, "jetbrains.mps.lang.actions.structure.NF_Model_CreateNewRootNodeOperation"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0xaa57300a39f86f8L, "jetbrains.mps.lang.actions.structure.NF_Node_InsertNewNextSiblingOperation"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0xaa57300a39f86faL, "jetbrains.mps.lang.actions.structure.NF_Node_InsertNewPrevSiblingOperation"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0xaa57300a39f86fcL, "jetbrains.mps.lang.actions.structure.NF_Node_ReplaceWithNewOperation"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x10dc7f106b2L, "jetbrains.mps.lang.actions.structure.NodeFactories"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x10dc7f1f421L, "jetbrains.mps.lang.actions.structure.NodeFactory"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x10dc7f89eecL, "jetbrains.mps.lang.actions.structure.NodeSetupFunction"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x4d7fc32c166cf35eL, "jetbrains.mps.lang.actions.structure.NodeSetupFunction_EnclosingNode"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x4d7fc32c166cf25dL, "jetbrains.mps.lang.actions.structure.NodeSetupFunction_SampleNode"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x102ebc25367L, "jetbrains.mps.lang.actions.structure.NodeSubstituteActions"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x102ebd2e9eaL, "jetbrains.mps.lang.actions.structure.NodeSubstituteActionsBuilder"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x10ccb7b7b84L, "jetbrains.mps.lang.actions.structure.NodeSubstitutePreconditionFunction"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x53a34ae13c0cee4fL, "jetbrains.mps.lang.actions.structure.PastePostProcessFunction"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x7d4ebb4f893516cL, "jetbrains.mps.lang.actions.structure.PastePostProcessor"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x11c51553d4eL, "jetbrains.mps.lang.actions.structure.PasteWrappers"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x11e73a269d4L, "jetbrains.mps.lang.actions.structure.QueryFunction_ActionType"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x1121e2acf26L, "jetbrains.mps.lang.actions.structure.QueryFunction_CanSubstitute"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x1175fc590cfL, "jetbrains.mps.lang.actions.structure.QueryFunction_GenericSubstituteMenuPart"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x58d3fff801434049L, "jetbrains.mps.lang.actions.structure.QueryFunction_IconNode"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x1122905dd10L, "jetbrains.mps.lang.actions.structure.QueryFunction_ParameterizedSideTransform_Handler"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x11228ff0cb4L, "jetbrains.mps.lang.actions.structure.QueryFunction_ParameterizedSideTransform_Query"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x1121ee2e40fL, "jetbrains.mps.lang.actions.structure.QueryFunction_ParameterizedSubstitute_Handler"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x1181cb91355L, "jetbrains.mps.lang.actions.structure.QueryFunction_ParameterizedSubstitute_Icon"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x1121ece8624L, "jetbrains.mps.lang.actions.structure.QueryFunction_ParameterizedSubstitute_Query"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x1121ee13382L, "jetbrains.mps.lang.actions.structure.QueryFunction_ParameterizedSubstitute_String"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x11c51746008L, "jetbrains.mps.lang.actions.structure.QueryFunction_PasteWrapper"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x11223572c26L, "jetbrains.mps.lang.actions.structure.QueryFunction_RemoveBy_Condition"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x118ccd8c942L, "jetbrains.mps.lang.actions.structure.QueryFunction_ReturnSmallPart"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x1182d1b57deL, "jetbrains.mps.lang.actions.structure.QueryFunction_STVariableInitializer"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x1182d37f835L, "jetbrains.mps.lang.actions.structure.QueryFunction_ST_CommonInitializer"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x116cdd863ddL, "jetbrains.mps.lang.actions.structure.QueryFunction_ST_RemoveBy_Condition"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x1122a0de432L, "jetbrains.mps.lang.actions.structure.QueryFunction_SideTransform_ConceptHandler"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x112285d125eL, "jetbrains.mps.lang.actions.structure.QueryFunction_SideTransform_Handler"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x1181cc7eba9L, "jetbrains.mps.lang.actions.structure.QueryFunction_SideTransform_Icon"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x11266483c18L, "jetbrains.mps.lang.actions.structure.QueryFunction_SideTransform_NodeQuery"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x112285ab108L, "jetbrains.mps.lang.actions.structure.QueryFunction_SideTransform_String"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x1181cbf9d29L, "jetbrains.mps.lang.actions.structure.QueryFunction_SubstituteIcon"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x1121eb0d54dL, "jetbrains.mps.lang.actions.structure.QueryFunction_SubstituteString"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x1129d121a7cL, "jetbrains.mps.lang.actions.structure.QueryFunction_SubstituteVariableInitializer"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x11222a97b92L, "jetbrains.mps.lang.actions.structure.QueryFunction_SubstituteWrapper"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x11274dc9ebaL, "jetbrains.mps.lang.actions.structure.QueryFunction_Substitute_CommonInitializer"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x1121e310c5dL, "jetbrains.mps.lang.actions.structure.QueryFunction_Substitute_Handler"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x61f4038641e3123L, "jetbrains.mps.lang.actions.structure.QueryFunction_Substitute_SelectionHandler"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x116cddb8de5L, "jetbrains.mps.lang.actions.structure.RemoveSTByConditionPart"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x108fad1c116L, "jetbrains.mps.lang.actions.structure.SideTransformHintSubstituteActions"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x108facec6d2L, "jetbrains.mps.lang.actions.structure.SideTransformHintSubstituteActionsBuilder"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x10cd4def236L, "jetbrains.mps.lang.actions.structure.SideTransformHintSubstitutePreconditionFunction"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x1182d21ed8dL, "jetbrains.mps.lang.actions.structure.SideTransformVariableReference"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x11f8ef01705L, "jetbrains.mps.lang.actions.structure.SmartActionParameterReference"), MetaAdapterFactory.getConcept(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x112668f8fe4L, "jetbrains.mps.lang.actions.structure.SubstituteNodeBuilderVariableReference"));
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x528ba37dd3326034L), MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x528ba37dd3326068L), MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x53a34ae13c0d287bL), MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x11c51740034L), MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x528ba37dd3383e1eL), MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x528ba37dd3317b9fL), MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x528ba37dd3311946L), MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x6bea674d717de5f4L), MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0xaa57300a39f8701L), MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0xaa57300a39f86feL), MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x4c0fd74709e9e128L), MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x4c0fd74709e9f70cL), MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0xaa57300a39f86f8L), MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0xaa57300a39f86faL), MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0xaa57300a39f86fcL), MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x10dc7f106b2L), MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x10dc7f1f421L), MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x10dc7f89eecL), MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x4d7fc32c166cf35eL), MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x163faec98ba93877L), MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x4d7fc32c166cf25dL), MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x53a34ae13c0cee4fL), MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x7d4ebb4f893516cL), MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x11c51563250L), MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x11c51553d4eL), MetaIdFactory.conceptId(0xaee9cad2acd44608L, 0xaef20004f6a1cdbdL, 0x11c51746008L)).seal();
 }

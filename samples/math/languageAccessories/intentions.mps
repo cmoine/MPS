@@ -3,10 +3,10 @@
   <persistence version="9" />
   <languages>
     <use id="3304fc6e-7c6b-401e-a016-b944934bb21f" name="jetbrains.mps.baseLanguage.math" version="0" />
-    <use id="d7a92d38-f7db-40d0-8431-763b0c3c9f20" name="jetbrains.mps.lang.intentions" version="0" />
-    <use id="3a13115c-633c-4c5c-bbcc-75c4219e9555" name="jetbrains.mps.lang.quotation" version="0" />
-    <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="4" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="d7a92d38-f7db-40d0-8431-763b0c3c9f20" name="jetbrains.mps.lang.intentions" version="1" />
+    <use id="3a13115c-633c-4c5c-bbcc-75c4219e9555" name="jetbrains.mps.lang.quotation" version="5" />
+    <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="19" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -69,9 +69,12 @@
       </concept>
     </language>
     <language id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel">
+      <concept id="1177026924588" name="jetbrains.mps.lang.smodel.structure.RefConcept_Reference" flags="nn" index="chp4Y">
+        <reference id="1177026940964" name="conceptDeclaration" index="cht4Q" />
+      </concept>
       <concept id="2396822768958367367" name="jetbrains.mps.lang.smodel.structure.AbstractTypeCastExpression" flags="nn" index="$5XWr">
-        <reference id="6733348108486823428" name="concept" index="1m5ApE" />
         <child id="6733348108486823193" name="leftExpression" index="1m5AlR" />
+        <child id="3906496115198199033" name="conceptArgument" index="3oSUPX" />
       </concept>
       <concept id="1140131837776" name="jetbrains.mps.lang.smodel.structure.Node_ReplaceWithAnotherOperation" flags="nn" index="1P9Npp">
         <child id="1140131861877" name="replacementNode" index="1P9ThW" />
@@ -105,7 +108,7 @@
       <node concept="3clFbS" id="i09b8Wm" role="2VODD2">
         <node concept="3clFbF" id="i09biQ1" role="3cqZAp">
           <node concept="Xl_RD" id="i09biQ2" role="3clFbG">
-            <property role="Xl_RC" value="Use java notation for division operation" />
+            <property role="Xl_RC" value="Use Java Notation for Division Operation" />
           </node>
         </node>
       </node>
@@ -123,7 +126,7 @@
                       <node concept="2OqwBi" id="i09bwRm" role="2c44t1">
                         <node concept="2Sf5sV" id="i09bwQ7" role="2Oq$k0" />
                         <node concept="3TrEf2" id="i09bxkt" role="2OqNvi">
-                          <ref role="3Tt5mk" to="39kg:i0959Gq" />
+                          <ref role="3Tt5mk" to="39kg:i0959Gq" resolve="denominator" />
                         </node>
                       </node>
                     </node>
@@ -133,7 +136,7 @@
                       <node concept="2OqwBi" id="i09bvPl" role="2c44t1">
                         <node concept="2Sf5sV" id="i09bvNB" role="2Oq$k0" />
                         <node concept="3TrEf2" id="i09bwgg" role="2OqNvi">
-                          <ref role="3Tt5mk" to="39kg:i0959tZ" />
+                          <ref role="3Tt5mk" to="39kg:i0959tZ" resolve="numerator" />
                         </node>
                       </node>
                     </node>
@@ -154,7 +157,7 @@
       <node concept="3clFbS" id="i09ba11" role="2VODD2">
         <node concept="3clFbF" id="i09blAN" role="3cqZAp">
           <node concept="Xl_RD" id="i09blAO" role="3clFbG">
-            <property role="Xl_RC" value="Use fraction notation for division operation" />
+            <property role="Xl_RC" value="Use Fraction Notation for Division Operation" />
           </node>
         </node>
       </node>
@@ -172,7 +175,7 @@
                       <node concept="2OqwBi" id="i09c31t" role="2c44t1">
                         <node concept="2Sf5sV" id="i09c2V6" role="2Oq$k0" />
                         <node concept="3TrEf2" id="i09c3wr" role="2OqNvi">
-                          <ref role="3Tt5mk" to="tpee:fJuHU4s" />
+                          <ref role="3Tt5mk" to="tpee:fJuHU4s" resolve="leftExpression" />
                         </node>
                       </node>
                     </node>
@@ -182,7 +185,7 @@
                       <node concept="2OqwBi" id="i09c3Xx" role="2c44t1">
                         <node concept="2Sf5sV" id="i09c3W2" role="2Oq$k0" />
                         <node concept="3TrEf2" id="i09c4yV" role="2OqNvi">
-                          <ref role="3Tt5mk" to="tpee:fJuHU4r" />
+                          <ref role="3Tt5mk" to="tpee:fJuHU4r" resolve="rightExpression" />
                         </node>
                       </node>
                     </node>
@@ -202,7 +205,7 @@
       <node concept="3clFbS" id="i1m$gSL" role="2VODD2">
         <node concept="3clFbF" id="i1m$iLJ" role="3cqZAp">
           <node concept="Xl_RD" id="i1m$nBl" role="3clFbG">
-            <property role="Xl_RC" value="Explicitly specify math context for operation with big decimals" />
+            <property role="Xl_RC" value="Explicitly Specify Math Context for Operation with Big Decimals" />
           </node>
         </node>
       </node>
@@ -217,8 +220,10 @@
                 <ref role="37wK5l" to="r3rn:i1QGRpq" resolve="convert2" />
                 <ref role="1Pybhc" to="r3rn:i1mL5Hy" resolve="MathUtil" />
                 <node concept="1PxgMI" id="i1QKnh_" role="37wK5m">
-                  <ref role="1m5ApE" to="tpee:fJuHJVf" resolve="BinaryOperation" />
                   <node concept="2Sf5sV" id="i1QKnhA" role="1m5AlR" />
+                  <node concept="chp4Y" id="714IaVdGZ0Z" role="3oSUPX">
+                    <ref role="cht4Q" to="tpee:fJuHJVf" resolve="BinaryOperation" />
+                  </node>
                 </node>
               </node>
             </node>
@@ -245,7 +250,7 @@
       <node concept="3clFbS" id="i1QK1bm" role="2VODD2">
         <node concept="3clFbF" id="i1QKdkd" role="3cqZAp">
           <node concept="Xl_RD" id="i1QKdke" role="3clFbG">
-            <property role="Xl_RC" value="Use default math context" />
+            <property role="Xl_RC" value="Use Default Math Context" />
           </node>
         </node>
       </node>

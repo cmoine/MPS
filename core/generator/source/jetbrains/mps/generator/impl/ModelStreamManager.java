@@ -40,7 +40,7 @@ public interface ModelStreamManager {
   /**
    * @return model this stream manager is associated with
    */
-  public SModelReference getModel();
+  SModelReference getModel();
 
   /**
    * Access location where generated files for the model reside.
@@ -48,14 +48,14 @@ public interface ModelStreamManager {
    * @return named stream accessor
    */
   @NotNull
-  public MultiStreamDataSource getOutputLocation();
+  MultiStreamDataSource getOutputLocation();
 
   /**
    * Access location where generated cache files for the model reside.
    * IMPLEMENTATION NOTE: Now, for BL/Java this is equivalent to a folder under source_gen.caches/ with a name corresponding to model long name
    * @return named stream accessor
    */
-  public MultiStreamDataSource getCachesLocation();
+  MultiStreamDataSource getCachesLocation();
 
   /**
    * Knows where data associated with the model is kept.

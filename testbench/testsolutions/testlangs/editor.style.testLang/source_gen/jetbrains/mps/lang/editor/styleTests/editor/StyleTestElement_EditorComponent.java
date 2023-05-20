@@ -16,10 +16,6 @@ public class StyleTestElement_EditorComponent implements ConceptEditorComponent 
     return Collections.emptyList();
   }
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createComponent_xnjtth_a(editorContext, node);
-  }
-  private EditorCell createComponent_xnjtth_a(EditorContext editorContext, SNode node) {
-    EditorCell editorCell = editorContext.getCellFactory().createEditorComponentCell(node, "jetbrains.mps.lang.core.editor.alias");
-    return editorCell;
+    return new StyleTestElement_EditorComponent_ComponentBuilder_a(editorContext, node).createCell();
   }
 }

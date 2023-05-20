@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <root>
+    <file name="ConstraintsAspectDescriptor.java">
+      <unit at="13,0,33,0" name="jetbrains.mps.samples.ChemMastery.constraints.ConstraintsAspectDescriptor" />
+    </file>
+  </root>
+  <root nodeRef="r:997593df-af82-42f2-9730-e4b9efa419fd(jetbrains.mps.samples.ChemMastery.constraints)/3123291046851838087">
+    <file name="CompoundComponentWithCardinality_Constraints.java">
+      <node id="3123291046851838087" at="20,57,21,56" concept="9" />
+      <node id="3123291046851838088" at="25,66,26,67" concept="9" />
+      <node id="3123291046851838088" at="29,109,30,100" concept="5" />
+      <node id="3123291046851838088" at="31,53,32,174" concept="2" />
+      <node id="3123291046851838088" at="33,7,34,20" concept="6" />
+      <node id="3123291046851838392" at="36,82,37,31" concept="6" />
+      <node id="3123291046851838087" at="41,84,42,119" concept="5" />
+      <node id="3123291046851838088" at="42,119,43,75" concept="2" />
+      <node id="3123291046851838087" at="43,75,44,22" concept="6" />
+      <node id="3123291046851838087" at="48,0,49,0" concept="7" trace="CompoundComponentWithCardinality$_V" />
+      <node id="3123291046851838087" at="52,0,53,0" concept="7" trace="cardinality$Vf8r" />
+      <node id="3123291046851838087" at="20,0,23,0" concept="1" trace="CompoundComponentWithCardinality_Constraints#()V" />
+      <node id="3123291046851838088" at="25,0,28,0" concept="1" trace="Cardinality_Property#(Ljetbrains/mps/smodel/runtime/ConstraintsDescriptor;)V" />
+      <node id="3123291046851838088" at="30,100,33,7" concept="3" />
+      <node id="3123291046851838088" at="36,0,39,0" concept="8" trace="staticValidateProperty#(Lorg/jetbrains/mps/openapi/model/SNode;I)Z" />
+      <node id="3123291046851838087" at="40,0,46,0" concept="4" trace="getSpecifiedProperties#()Ljava/util/Map;" />
+      <node id="3123291046851838088" at="28,0,36,0" concept="4" trace="validateValue#(Lorg/jetbrains/mps/openapi/model/SNode;Ljava/lang/Object;Ljetbrains/mps/smodel/runtime/CheckingNodeContext;)Z" />
+      <scope id="3123291046851838087" at="20,57,21,56" />
+      <scope id="3123291046851838088" at="25,66,26,67" />
+      <scope id="3123291046851838088" at="31,53,32,174" />
+      <scope id="3123291046851838143" at="36,82,37,31" />
+      <scope id="3123291046851838087" at="20,0,23,0" />
+      <scope id="3123291046851838088" at="25,0,28,0">
+        <var name="container" id="3123291046851838088" />
+      </scope>
+      <scope id="3123291046851838088" at="36,0,39,0">
+        <var name="node" id="3123291046851838088" />
+        <var name="propertyValue" id="3123291046851838088" />
+      </scope>
+      <scope id="3123291046851838087" at="41,84,44,22">
+        <var name="properties" id="3123291046851838087" />
+      </scope>
+      <scope id="3123291046851838088" at="29,109,34,20">
+        <var name="result" id="3123291046851838088" />
+      </scope>
+      <scope id="3123291046851838087" at="40,0,46,0" />
+      <scope id="3123291046851838088" at="28,0,36,0">
+        <var name="checkingNodeContext" id="3123291046851838088" />
+        <var name="node" id="3123291046851838088" />
+        <var name="propertyValue" id="3123291046851838088" />
+      </scope>
+      <unit id="3123291046851838087" at="47,0,50,0" name="jetbrains.mps.samples.ChemMastery.constraints.CompoundComponentWithCardinality_Constraints$CONCEPTS" />
+      <unit id="3123291046851838087" at="51,0,54,0" name="jetbrains.mps.samples.ChemMastery.constraints.CompoundComponentWithCardinality_Constraints$PROPS" />
+      <unit id="3123291046851838088" at="24,0,40,0" name="jetbrains.mps.samples.ChemMastery.constraints.CompoundComponentWithCardinality_Constraints$Cardinality_Property" />
+      <unit id="3123291046851838087" at="19,0,55,0" name="jetbrains.mps.samples.ChemMastery.constraints.CompoundComponentWithCardinality_Constraints" />
+    </file>
+  </root>
+  <root nodeRef="r:997593df-af82-42f2-9730-e4b9efa419fd(jetbrains.mps.samples.ChemMastery.constraints)/3123291046853913312">
+    <file name="Element_Constraints.java">
+      <node id="3123291046853913312" at="18,32,19,31" concept="9" />
+      <node id="3123291046853913313" at="23,66,24,67" concept="9" />
+      <node id="2188626131389676940" at="27,40,28,69" concept="5" />
+      <node id="2188626131389682194" at="29,23,30,72" concept="6" />
+      <node id="2188626131389683068" at="31,14,32,18" concept="6" />
+      <node id="3123291046853913312" at="37,84,38,119" concept="5" />
+      <node id="3123291046853913313" at="38,119,39,75" concept="2" />
+      <node id="3123291046853913312" at="39,75,40,22" concept="6" />
+      <node id="3123291046853913312" at="44,0,45,0" concept="7" trace="Element$LI" />
+      <node id="3123291046853913312" at="48,0,49,0" concept="7" trace="details_url$Z4AP" />
+      <node id="3123291046853913312" at="49,0,50,0" concept="7" trace="id$GqdZ" />
+      <node id="2188626131389682317" at="31,12,33,7" concept="0" />
+      <node id="3123291046853913312" at="18,0,21,0" concept="1" trace="Element_Constraints#()V" />
+      <node id="3123291046853913313" at="23,0,26,0" concept="1" trace="Details_url_Property#(Ljetbrains/mps/smodel/runtime/ConstraintsDescriptor;)V" />
+      <node id="2188626131389678463" at="28,69,33,7" concept="3" />
+      <node id="3123291046853913312" at="36,0,42,0" concept="4" trace="getSpecifiedProperties#()Ljava/util/Map;" />
+      <node id="3123291046853913313" at="26,0,35,0" concept="4" trace="getValue#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/Object;" />
+      <scope id="3123291046853913312" at="18,32,19,31" />
+      <scope id="3123291046853913313" at="23,66,24,67" />
+      <scope id="2188626131389678465" at="29,23,30,72" />
+      <scope id="2188626131389682318" at="31,14,32,18" />
+      <scope id="3123291046853913312" at="18,0,21,0" />
+      <scope id="3123291046853913313" at="23,0,26,0">
+        <var name="container" id="3123291046853913313" />
+      </scope>
+      <scope id="3123291046853913312" at="37,84,40,22">
+        <var name="properties" id="3123291046853913312" />
+      </scope>
+      <scope id="3123291046853913532" at="27,40,33,7">
+        <var name="id" id="2188626131389676941" />
+      </scope>
+      <scope id="3123291046853913312" at="36,0,42,0" />
+      <scope id="3123291046853913313" at="26,0,35,0">
+        <var name="node" id="3123291046853913313" />
+      </scope>
+      <unit id="3123291046853913312" at="43,0,46,0" name="jetbrains.mps.samples.ChemMastery.constraints.Element_Constraints$CONCEPTS" />
+      <unit id="3123291046853913312" at="47,0,51,0" name="jetbrains.mps.samples.ChemMastery.constraints.Element_Constraints$PROPS" />
+      <unit id="3123291046853913313" at="22,0,36,0" name="jetbrains.mps.samples.ChemMastery.constraints.Element_Constraints$Details_url_Property" />
+      <unit id="3123291046853913312" at="17,0,52,0" name="jetbrains.mps.samples.ChemMastery.constraints.Element_Constraints" />
+    </file>
+  </root>
+  <root nodeRef="r:997593df-af82-42f2-9730-e4b9efa419fd(jetbrains.mps.samples.ChemMastery.constraints)/7995886393885134324">
+    <file name="Compound_Constraints.java">
+      <node id="7995886393885134324" at="20,33,21,32" concept="9" />
+      <node id="3123291046854257619" at="25,66,26,67" concept="9" />
+      <node id="3123291046854257619" at="29,109,30,100" concept="5" />
+      <node id="3123291046854257619" at="31,53,32,174" concept="2" />
+      <node id="3123291046854257619" at="33,7,34,20" concept="6" />
+      <node id="3123291046854257978" at="36,82,37,31" concept="6" />
+      <node id="7995886393885134324" at="41,84,42,119" concept="5" />
+      <node id="3123291046854257619" at="42,119,43,75" concept="2" />
+      <node id="7995886393885134324" at="43,75,44,22" concept="6" />
+      <node id="7995886393885134324" at="48,0,49,0" concept="7" trace="Compound$vn" />
+      <node id="7995886393885134324" at="52,0,53,0" concept="7" trace="cardinality$ubQr" />
+      <node id="7995886393885134324" at="20,0,23,0" concept="1" trace="Compound_Constraints#()V" />
+      <node id="3123291046854257619" at="25,0,28,0" concept="1" trace="Cardinality_Property#(Ljetbrains/mps/smodel/runtime/ConstraintsDescriptor;)V" />
+      <node id="3123291046854257619" at="30,100,33,7" concept="3" />
+      <node id="3123291046854257619" at="36,0,39,0" concept="8" trace="staticValidateProperty#(Lorg/jetbrains/mps/openapi/model/SNode;I)Z" />
+      <node id="7995886393885134324" at="40,0,46,0" concept="4" trace="getSpecifiedProperties#()Ljava/util/Map;" />
+      <node id="3123291046854257619" at="28,0,36,0" concept="4" trace="validateValue#(Lorg/jetbrains/mps/openapi/model/SNode;Ljava/lang/Object;Ljetbrains/mps/smodel/runtime/CheckingNodeContext;)Z" />
+      <scope id="7995886393885134324" at="20,33,21,32" />
+      <scope id="3123291046854257619" at="25,66,26,67" />
+      <scope id="3123291046854257619" at="31,53,32,174" />
+      <scope id="3123291046854257675" at="36,82,37,31" />
+      <scope id="7995886393885134324" at="20,0,23,0" />
+      <scope id="3123291046854257619" at="25,0,28,0">
+        <var name="container" id="3123291046854257619" />
+      </scope>
+      <scope id="3123291046854257619" at="36,0,39,0">
+        <var name="node" id="3123291046854257619" />
+        <var name="propertyValue" id="3123291046854257619" />
+      </scope>
+      <scope id="7995886393885134324" at="41,84,44,22">
+        <var name="properties" id="7995886393885134324" />
+      </scope>
+      <scope id="3123291046854257619" at="29,109,34,20">
+        <var name="result" id="3123291046854257619" />
+      </scope>
+      <scope id="7995886393885134324" at="40,0,46,0" />
+      <scope id="3123291046854257619" at="28,0,36,0">
+        <var name="checkingNodeContext" id="3123291046854257619" />
+        <var name="node" id="3123291046854257619" />
+        <var name="propertyValue" id="3123291046854257619" />
+      </scope>
+      <unit id="7995886393885134324" at="47,0,50,0" name="jetbrains.mps.samples.ChemMastery.constraints.Compound_Constraints$CONCEPTS" />
+      <unit id="7995886393885134324" at="51,0,54,0" name="jetbrains.mps.samples.ChemMastery.constraints.Compound_Constraints$PROPS" />
+      <unit id="3123291046854257619" at="24,0,40,0" name="jetbrains.mps.samples.ChemMastery.constraints.Compound_Constraints$Cardinality_Property" />
+      <unit id="7995886393885134324" at="19,0,55,0" name="jetbrains.mps.samples.ChemMastery.constraints.Compound_Constraints" />
+    </file>
+  </root>
+</debug-info>
+

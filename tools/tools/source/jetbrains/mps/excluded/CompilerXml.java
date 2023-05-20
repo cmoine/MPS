@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,19 +15,17 @@
  */
 package jetbrains.mps.excluded;
 
+import jetbrains.mps.core.platform.Platform;
 import jetbrains.mps.util.JDOMUtil;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map.Entry;
 
 class CompilerXml {
   // compiler.xml constants
@@ -35,20 +33,25 @@ class CompilerXml {
   private static final String COMPILER_CONFIGURATION = "CompilerConfiguration";
   private static final String DIRECTORY = "directory";
   private static final String URL = "url";
+  private final Platform myPlatform;
+
+  public CompilerXml(Platform mpsPlatform) {
+    myPlatform = mpsPlatform;
+  }
 
   // excludes generated dirs of the sourceDirs. also excludes explicitly the excludeDirs
-  public static void updateCompilerExcludes(File compilerXmlFile, File[] sourceDirs, File[] excludeDirs) throws JDOMException, IOException {
+  public void updateCompilerExcludes(File compilerXmlFile, File[] sourceDirs, File[] excludeDirs) throws JDOMException, IOException {
     Document compiler = JDOMUtil.loadDocument(compilerXmlFile);
 
     Element rootElement = Utils.getComponentWithName(compiler, COMPILER_CONFIGURATION);
     Element excludeXml = rootElement.getChild("excludeFromCompile");
     excludeXml.removeChildren(DIRECTORY);
 
-    List<String> paths = new ArrayList<String>();
-    for (Entry<String, Collection<String>> module : Utils.collectMPSCompiledModulesInfo(sourceDirs).entrySet()) {
-      for (String sourcePath : module.getValue()) {
-        paths.add(convertRelPathToProject(sourcePath));
-      }
+    List<String> paths = new ArrayList<>();
+    MPSModuleCollector moduleCollector = new MPSModuleCollector(myPlatform);
+    moduleCollector.collect(sourceDirs);
+    for (DescriptorEntry module : moduleCollector.getOutcome()) {
+      module.getSourcePaths().stream().map(CompilerXml::convertRelPathToProject).forEach(paths::add);
     }
 
     Collections.sort(paths);
@@ -67,7 +70,7 @@ class CompilerXml {
     JDOMUtil.writeDocument(compiler, compilerXmlFile);
   }
 
-  @NotNull
+  // in fact, convertAbsolutePathToProjectRelative
   private static String convertRelPathToProject(String sourcePath) {
     return PATH_START_PROJECT + Utils.getRelativeProjectPath(sourcePath);
   }

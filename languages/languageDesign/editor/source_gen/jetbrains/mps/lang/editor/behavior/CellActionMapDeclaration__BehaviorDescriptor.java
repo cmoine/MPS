@@ -5,43 +5,165 @@ package jetbrains.mps.lang.editor.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
+import jetbrains.mps.scope.Scope;
 import java.util.List;
+import org.jetbrains.mps.openapi.language.SEnumerationLiteral;
+import java.util.function.Consumer;
 import java.util.Arrays;
 import org.jetbrains.annotations.NotNull;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPointerOperations;
+import jetbrains.mps.smodel.SNodePointer;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SConceptOperations;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import jetbrains.mps.lang.scopes.runtime.ScopeUtils;
+import jetbrains.mps.scope.FilteringScope;
+import jetbrains.mps.scope.ModelPlusImportedScope;
+import jetbrains.mps.lang.structure.behavior.AbstractConceptDeclaration__BehaviorDescriptor;
+import jetbrains.mps.lang.core.behavior.ScopeProvider__BehaviorDescriptor;
+import jetbrains.mps.internal.collections.runtime.ListSequence;
+import java.util.ArrayList;
+import jetbrains.mps.baseLanguage.closures.runtime.Wrappers;
+import java.util.Objects;
+import jetbrains.mps.internal.collections.runtime.Sequence;
+import java.util.Collections;
+import jetbrains.mps.internal.collections.runtime.IWhereFilter;
+import jetbrains.mps.internal.collections.runtime.IVisitor;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SInterfaceConcept;
 
 public final class CellActionMapDeclaration__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10951978cfeL, "jetbrains.mps.lang.editor.structure.CellActionMapDeclaration");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<SNode> getBaseConcept_id2hxg_BDjKM8 = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getBaseConcept").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("2hxg_BDjKM8").registry(REGISTRY).build();
-  public static final SMethod<Void> setBaseConcept_id5r_35Ihc58c = new SMethodBuilder<Void>(new SJavaCompoundTypeImpl(Void.class)).name("setBaseConcept").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("5r_35Ihc58c").registry(REGISTRY).build(SMethodBuilder.createJavaParameter((Class<SNode>) ((Class) Object.class), ""));
+  public static final SMethod<SNode> getBaseConcept_id2hxg_BDjKM8 = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getBaseConcept").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(2621449412040133768L).languageId(0x8389f407dc1158b7L, 0xc72da2b97cce4447L).build2();
+  public static final SMethod<Void> setBaseConcept_id5r_35Ihc58c = new SMethodBuilder<Void>(new SJavaCompoundTypeImpl(Void.class)).name("setBaseConcept").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(6261424444345963020L).languageId(0x8389f407dc1158b7L, 0xc72da2b97cce4447L).build2(SMethodBuilder.createJavaParameter((Class<SNode>) ((Class) Object.class), ""));
+  public static final SMethod<SNode> getApplicableConcept_id1hkJY7harvo = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getApplicableConcept").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1465006755399972824L).languageId(0xa83a7ff23bde13baL, 0x18bc659203a64e29L).build2();
+  public static final SMethod<Scope> getScope_id52_Geb4QDV$ = new SMethodBuilder<Scope>(new SJavaCompoundTypeImpl(Scope.class)).name("getScope").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(5811245382203252452L).languageId(0x9b92103b95ca8c0cL, 0xceab519525ea4f22L).build2(SMethodBuilder.createJavaParameter((Class<SAbstractConcept>) ((Class) Object.class), ""), SMethodBuilder.createJavaParameter((Class<SNode>) ((Class) Object.class), ""));
+  public static final SMethod<Iterable<ImportCycle>> detectCycles_id7pqJbakYMN2 = new SMethodBuilder<Iterable<ImportCycle>>(new SJavaCompoundTypeImpl((Class<Iterable<ImportCycle>>) ((Class) Object.class))).name("detectCycles").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(8528336319569145026L).languageId(0xa83a7ff23bde13baL, 0x18bc659203a64e29L).build2();
+  /*package*/ static final SMethod<Void> detectCycles_id5Sx2dSLQoMP = new SMethodBuilder<Void>(new SJavaCompoundTypeImpl(Void.class)).name("detectCycles").modifiers(0, AccessPrivileges.PRIVATE).concept(CONCEPT).baseMethodId(6782712264208780469L).languageId(0xa83a7ff23bde13baL, 0x18bc659203a64e29L).build2(SMethodBuilder.createJavaParameter((Class<Iterable<SNode>>) ((Class) Object.class), ""), SMethodBuilder.createJavaParameter((Class<SNode>) ((Class) Object.class), ""), SMethodBuilder.createJavaParameter((Class<List<ImportCycle>>) ((Class) Object.class), ""));
+  public static final SMethod<Void> forEachActionOfType_id2pg2GNQfgVG = new SMethodBuilder<Void>(new SJavaCompoundTypeImpl(Void.class)).name("forEachActionOfType").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(2760718446998916844L).languageId(0xa83a7ff23bde13baL, 0x18bc659203a64e29L).build2(SMethodBuilder.createJavaParameter((Class<SEnumerationLiteral>) ((Class) Object.class), ""), SMethodBuilder.createJavaParameter(Consumer.class, ""));
+  /*package*/ static final SMethod<Void> forEachActionOfType_id2pg2GNQaQaM = new SMethodBuilder<Void>(new SJavaCompoundTypeImpl(Void.class)).name("forEachActionOfType").modifiers(0, AccessPrivileges.PRIVATE).concept(CONCEPT).baseMethodId(2760718446997758642L).languageId(0xa83a7ff23bde13baL, 0x18bc659203a64e29L).build2(SMethodBuilder.createJavaParameter((Class<SEnumerationLiteral>) ((Class) Object.class), ""), SMethodBuilder.createJavaParameter((Class<Iterable<SNode>>) ((Class) Object.class), ""), SMethodBuilder.createJavaParameter(Consumer.class, ""));
+  public static final SMethod<Iterable<SNode>> collectItemsOfType_id5Sx2dSLnOI$ = new SMethodBuilder<Iterable<SNode>>(new SJavaCompoundTypeImpl((Class<Iterable<SNode>>) ((Class) Object.class))).name("collectItemsOfType").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(6782712264200768420L).languageId(0xa83a7ff23bde13baL, 0x18bc659203a64e29L).build2(SMethodBuilder.createJavaParameter((Class<SEnumerationLiteral>) ((Class) Object.class), ""));
+  public static final SMethod<Boolean> containsItemOfType_id2pg2GNQgnKJ = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("containsItemOfType").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(2760718446999206959L).languageId(0xa83a7ff23bde13baL, 0x18bc659203a64e29L).build2(SMethodBuilder.createJavaParameter((Class<SEnumerationLiteral>) ((Class) Object.class), ""));
 
-  private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getBaseConcept_id2hxg_BDjKM8, setBaseConcept_id5r_35Ihc58c);
+  private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getBaseConcept_id2hxg_BDjKM8, setBaseConcept_id5r_35Ihc58c, getApplicableConcept_id1hkJY7harvo, getScope_id52_Geb4QDV$, detectCycles_id7pqJbakYMN2, detectCycles_id5Sx2dSLQoMP, forEachActionOfType_id2pg2GNQfgVG, forEachActionOfType_id2pg2GNQaQaM, collectItemsOfType_id5Sx2dSLnOI$, containsItemOfType_id2pg2GNQgnKJ);
 
   private static void ___init___(@NotNull SNode __thisNode__) {
   }
 
   /*package*/ static SNode getBaseConcept_id2hxg_BDjKM8(@NotNull SNode __thisNode__) {
-    return SLinkOperations.getTarget(__thisNode__, MetaAdapterFactory.getReferenceLink(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10951978cfeL, 0x10951978d00L, "applicableConcept"));
+    return SLinkOperations.getTarget(__thisNode__, LINKS.applicableConcept$ZC38);
   }
   /*package*/ static void setBaseConcept_id5r_35Ihc58c(@NotNull SNode __thisNode__, SNode baseConcept) {
-    SLinkOperations.setTarget(__thisNode__, MetaAdapterFactory.getReferenceLink(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10951978cfeL, 0x10951978d00L, "applicableConcept"), baseConcept);
+    SLinkOperations.setTarget(__thisNode__, LINKS.applicableConcept$ZC38, baseConcept);
+  }
+  /*package*/ static SNode getApplicableConcept_id1hkJY7harvo(@NotNull SNode __thisNode__) {
+    if ((SLinkOperations.getTarget(__thisNode__, LINKS.applicableConcept$ZC38) != null)) {
+      return SLinkOperations.getTarget(__thisNode__, LINKS.applicableConcept$ZC38);
+    } else {
+      return SPointerOperations.resolveNode(new SNodePointer("r:00000000-0000-4000-0000-011c89590288(jetbrains.mps.lang.core.structure)", "1133920641626"), __thisNode__.getModel().getRepository());
+    }
+  }
+  /*package*/ static Scope getScope_id52_Geb4QDV$(@NotNull SNode __thisNode__, SAbstractConcept kind, SNode child) {
+
+    // override what action maps we are able to import from
+    // based on compatibility of applicable concepts
+    if (SConceptOperations.isExactly(SNodeOperations.asSConcept(kind), CONCEPTS.CellActionMapDeclaration$QS) && ScopeUtils.comeFrom(LINKS.imports$QP4v, __thisNode__, child)) {
+      return new FilteringScope(new ModelPlusImportedScope(SNodeOperations.getModel(__thisNode__), false, CONCEPTS.CellActionMapDeclaration$QS)) {
+        @Override
+        public boolean isExcluded(SNode node) {
+          return !((boolean) AbstractConceptDeclaration__BehaviorDescriptor.isSubconceptOf_id73yVtVlWOga.invoke(CellActionMapDeclaration__BehaviorDescriptor.getApplicableConcept_id1hkJY7harvo.invoke(__thisNode__), CellActionMapDeclaration__BehaviorDescriptor.getApplicableConcept_id1hkJY7harvo.invoke(SNodeOperations.cast(node, CONCEPTS.CellActionMapDeclaration$QS))));
+        }
+      };
+    }
+
+    return ((Scope) ScopeProvider__BehaviorDescriptor.getScope_id52_Geb4QDV$.invoke0(__thisNode__, CONCEPTS.ScopeProvider$aq, kind, child));
+  }
+  /*package*/ static Iterable<ImportCycle> detectCycles_id7pqJbakYMN2(@NotNull SNode __thisNode__) {
+    List<ImportCycle> cycles = ListSequence.fromList(new ArrayList<ImportCycle>());
+    for (SNode imp : SLinkOperations.getChildren(__thisNode__, LINKS.imports$QP4v)) {
+      CellActionMapDeclaration__BehaviorDescriptor.detectCycles_id5Sx2dSLQoMP.invokeSpecial(__thisNode__, ListSequence.fromList(new ArrayList<SNode>()), imp, cycles);
+    }
+    return cycles;
+  }
+  /*package*/ static void detectCycles_id5Sx2dSLQoMP(@NotNull final SNode __thisNode__, Iterable<SNode> traceback, final SNode next, final List<ImportCycle> accumulator) {
+    final Wrappers._T<Iterable<SNode>> _traceback = new Wrappers._T<Iterable<SNode>>(traceback);
+
+    if (Objects.equals(SLinkOperations.getTarget(next, LINKS.cellActionMap$$ow7), __thisNode__)) {
+      // `next` import completes a cycle starting in this action map
+      ListSequence.fromList(accumulator).addElement(new ImportCycle(Sequence.fromIterable(_traceback.value).concat(ListSequence.fromList(Collections.singletonList(next)))));
+      return;
+    }
+
+    if (Sequence.fromIterable(_traceback.value).any(new IWhereFilter<SNode>() {
+      public boolean accept(SNode imp) {
+        return Objects.equals(SLinkOperations.getTarget(next, LINKS.cellActionMap$$ow7), SLinkOperations.getTarget(imp, LINKS.cellActionMap$$ow7));
+      }
+    })) {
+      // Found a cycle which, however, doesn't contain this action map.
+      // Ignore here, it is detected from a different starting point.
+      return;
+    }
+
+    _traceback.value = Sequence.fromIterable(_traceback.value).concat(ListSequence.fromList(Collections.singletonList(next)));
+    ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(next, LINKS.cellActionMap$$ow7), LINKS.imports$QP4v)).visitAll(new IVisitor<SNode>() {
+      public void visit(SNode imp) {
+        CellActionMapDeclaration__BehaviorDescriptor.detectCycles_id5Sx2dSLQoMP.invokeSpecial(__thisNode__, _traceback.value, imp, accumulator);
+      }
+    });
+  }
+  /*package*/ static void forEachActionOfType_id2pg2GNQfgVG(@NotNull SNode __thisNode__, SEnumerationLiteral actionId, Consumer<? super SNode> f) {
+    CellActionMapDeclaration__BehaviorDescriptor.forEachActionOfType_id2pg2GNQaQaM.invokeSpecial(__thisNode__, actionId, Collections.<SNode>emptyList(), f);
+  }
+  /*package*/ static void forEachActionOfType_id2pg2GNQaQaM(@NotNull SNode __thisNode__, final SEnumerationLiteral actionId, Iterable<SNode> visited, final Consumer<? super SNode> f) {
+    final Wrappers._T<Iterable<SNode>> _visited = new Wrappers._T<Iterable<SNode>>(visited);
+    if (Sequence.fromIterable(_visited.value).contains(__thisNode__)) {
+      // cycle in imports detected, ignore this action map
+      return;
+    }
+
+    _visited.value = Sequence.fromIterable(_visited.value).concat(Sequence.fromIterable(Sequence.<SNode>singleton(__thisNode__)));
+
+    // first handle imports
+    ListSequence.fromList(SLinkOperations.getChildren(__thisNode__, LINKS.imports$QP4v)).visitAll(new IVisitor<SNode>() {
+      public void visit(SNode imp) {
+        if ((boolean) CellActionMapImportSelector__BehaviorDescriptor.selectsActionId_id3XXPjz_pJfc.invoke(SLinkOperations.getTarget(imp, LINKS.selector$hL1R), actionId)) {
+          CellActionMapDeclaration__BehaviorDescriptor.forEachActionOfType_id2pg2GNQaQaM.invoke(SLinkOperations.getTarget(imp, LINKS.cellActionMap$$ow7), actionId, _visited.value, f);
+        }
+      }
+    });
+
+
+    // then handle actions defined directly in this action map
+    ListSequence.fromList(SLinkOperations.getChildren(__thisNode__, LINKS.item$ZCi9)).visitAll(new IVisitor<SNode>() {
+      public void visit(SNode it) {
+        if (Objects.equals(CellActionMapItem__BehaviorDescriptor.getActionId_idJCy0JrvU0M.invoke(it), actionId)) {
+          f.accept(it);
+        }
+      }
+    });
+  }
+  /*package*/ static Iterable<SNode> collectItemsOfType_id5Sx2dSLnOI$(@NotNull SNode __thisNode__, SEnumerationLiteral actionId) {
+    final List<SNode> result = ListSequence.fromList(new ArrayList<SNode>());
+    Consumer<? super SNode> add = (SNode item) -> ListSequence.fromList(result).addElement(item);
+    CellActionMapDeclaration__BehaviorDescriptor.forEachActionOfType_id2pg2GNQfgVG.invoke(__thisNode__, actionId, add);
+    return result;
+  }
+  /*package*/ static boolean containsItemOfType_id2pg2GNQgnKJ(@NotNull SNode __thisNode__, SEnumerationLiteral actionId) {
+    return Sequence.fromIterable(CellActionMapDeclaration__BehaviorDescriptor.collectItemsOfType_id5Sx2dSLnOI$.invoke(__thisNode__, actionId)).isNotEmpty();
   }
 
   /*package*/ CellActionMapDeclaration__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -61,6 +183,25 @@ public final class CellActionMapDeclaration__BehaviorDescriptor extends BaseBHDe
       case 1:
         setBaseConcept_id5r_35Ihc58c(node, (SNode) parameters[0]);
         return null;
+      case 2:
+        return (T) ((SNode) getApplicableConcept_id1hkJY7harvo(node));
+      case 3:
+        return (T) ((Scope) getScope_id52_Geb4QDV$(node, (SAbstractConcept) parameters[0], (SNode) parameters[1]));
+      case 4:
+        return (T) ((Iterable<ImportCycle>) detectCycles_id7pqJbakYMN2(node));
+      case 5:
+        detectCycles_id5Sx2dSLQoMP(node, (Iterable<SNode>) parameters[0], (SNode) parameters[1], (List<ImportCycle>) parameters[2]);
+        return null;
+      case 6:
+        forEachActionOfType_id2pg2GNQfgVG(node, (SEnumerationLiteral) parameters[0], (Consumer<? super SNode>) parameters[1]);
+        return null;
+      case 7:
+        forEachActionOfType_id2pg2GNQaQaM(node, (SEnumerationLiteral) parameters[0], (Iterable<SNode>) parameters[1], (Consumer<? super SNode>) parameters[2]);
+        return null;
+      case 8:
+        return (T) ((Iterable<SNode>) collectItemsOfType_id5Sx2dSLnOI$(node, (SEnumerationLiteral) parameters[0]));
+      case 9:
+        return (T) ((Boolean) containsItemOfType_id2pg2GNQgnKJ(node, (SEnumerationLiteral) parameters[0]));
       default:
         throw new BHMethodNotFoundException(this, method);
     }
@@ -88,5 +229,18 @@ public final class CellActionMapDeclaration__BehaviorDescriptor extends BaseBHDe
   @Override
   public SAbstractConcept getConcept() {
     return CONCEPT;
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SReferenceLink applicableConcept$ZC38 = MetaAdapterFactory.getReferenceLink(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10951978cfeL, 0x10951978d00L, "applicableConcept");
+    /*package*/ static final SContainmentLink imports$QP4v = MetaAdapterFactory.getContainmentLink(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10951978cfeL, 0x765abcb2949869d3L, "imports");
+    /*package*/ static final SReferenceLink cellActionMap$$ow7 = MetaAdapterFactory.getReferenceLink(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x765abcb2949869d7L, 0x765abcb2949869d8L, "cellActionMap");
+    /*package*/ static final SContainmentLink selector$hL1R = MetaAdapterFactory.getContainmentLink(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x765abcb2949869d7L, 0x4f883d04113872dbL, "selector");
+    /*package*/ static final SContainmentLink item$ZCi9 = MetaAdapterFactory.getContainmentLink(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10951978cfeL, 0x10951978d01L, "item");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept CellActionMapDeclaration$QS = MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10951978cfeL, "jetbrains.mps.lang.editor.structure.CellActionMapDeclaration");
+    /*package*/ static final SInterfaceConcept ScopeProvider$aq = MetaAdapterFactory.getInterfaceConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x33d23ee961a0cbf3L, "jetbrains.mps.lang.core.structure.ScopeProvider");
   }
 }

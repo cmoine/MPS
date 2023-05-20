@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <root nodeRef="r:5c426f30-a9c9-463b-90a5-2fae21a10696(jetbrains.mps.ide.migration.check)/1315974995649613340">
+    <file name="DependencyProblem.java">
+      <node id="1315974995649624200" at="14,0,15,0" concept="2" trace="myMessage" />
+      <node id="1315974995649613345" at="16,60,17,18" concept="6" />
+      <node id="1315974995649624204" at="17,18,18,24" concept="1" />
+      <node id="1315974995649631468" at="21,30,22,21" concept="5" />
+      <node id="8429637132261943656" at="27,39,28,44" concept="5" />
+      <node id="1315974995649613426" at="31,31,32,35" concept="5" />
+      <node id="1315974995649613353" at="21,0,24,0" concept="3" trace="getMessage#()Ljava/lang/String;" />
+      <node id="1315974995649613422" at="31,0,34,0" concept="3" trace="getCategory#()Ljava/lang/String;" />
+      <node id="1315974995649613341" at="16,0,20,0" concept="0" trace="DependencyProblem#(Lorg/jetbrains/mps/openapi/module/SModule;Ljava/lang/String;)V" />
+      <node id="8429637132261942953" at="25,0,30,0" concept="3" trace="getModule#()Lorg/jetbrains/mps/openapi/module/SModuleReference;" />
+      <scope id="1315974995649613356" at="21,30,22,21" />
+      <scope id="8429637132261942965" at="27,39,28,44" />
+      <scope id="1315974995649613425" at="31,31,32,35" />
+      <scope id="1315974995649613344" at="16,60,18,24" />
+      <scope id="1315974995649613353" at="21,0,24,0" />
+      <scope id="1315974995649613422" at="31,0,34,0" />
+      <scope id="1315974995649613341" at="16,0,20,0">
+        <var name="message" id="1315974995649623700" />
+        <var name="module" id="1315974995649613348" />
+      </scope>
+      <scope id="8429637132261942953" at="25,0,30,0" />
+      <unit id="1315974995649613340" at="12,0,35,0" name="jetbrains.mps.ide.migration.check.DependencyProblem" />
+    </file>
+  </root>
+  <root nodeRef="r:5c426f30-a9c9-463b-90a5-2fae21a10696(jetbrains.mps.ide.migration.check)/2620437876317548374">
+    <file name="MissingMigrationProblem.java">
+      <node id="8054806207102338373" at="17,70,18,29" concept="6" />
+      <node id="8054806207101933757" at="22,0,23,0" concept="2" trace="myScriptReference" />
+      <node id="8054806207102025506" at="23,0,24,0" concept="2" trace="myUsedVersion" />
+      <node id="2620437876317548383" at="25,95,26,64" concept="6" />
+      <node id="8054806207101935111" at="26,64,27,36" concept="1" />
+      <node id="7747342870461302343" at="27,36,28,34" concept="1" />
+      <node id="7747342870461429439" at="30,32,31,52" concept="4" />
+      <node id="2620437876317548398" at="31,52,32,265" concept="5" />
+      <node id="8054806207102341421" at="37,0,38,0" concept="2" trace="myScriptReference" />
+      <node id="8054806207102341424" at="38,0,39,0" concept="2" trace="myUsedVersion" />
+      <node id="8054806207102341436" at="40,96,41,44" concept="6" />
+      <node id="8054806207102341442" at="41,44,42,36" concept="1" />
+      <node id="5375498624335123121" at="42,36,43,34" concept="1" />
+      <node id="8054806207102341492" at="45,32,46,318" concept="5" />
+      <node id="2620437876317548405" at="51,31,52,32" concept="5" />
+      <node id="8429637132261968948" at="57,39,58,23" concept="5" />
+      <node id="8054806207102337685" at="17,0,20,0" concept="0" trace="MissingMigrationProblem#(Lorg/jetbrains/mps/openapi/module/SModuleReference;)V" />
+      <node id="8054806207102341446" at="45,0,48,0" concept="3" trace="getMessage#()Ljava/lang/String;" />
+      <node id="2620437876317548401" at="51,0,54,0" concept="3" trace="getCategory#()Ljava/lang/String;" />
+      <node id="2620437876317548394" at="30,0,34,0" concept="3" trace="getMessage#()Ljava/lang/String;" />
+      <node id="2620437876317548379" at="25,0,30,0" concept="0" trace="MissingMigrationScriptProblem#(Ljetbrains/mps/lang/migration/runtime/base/MigrationScriptReference;I)V" />
+      <node id="8054806207102341428" at="40,0,45,0" concept="0" trace="MissingRefactoringLogProblem#(Ljetbrains/mps/lang/migration/runtime/base/RefactoringScriptReference;I)V" />
+      <node id="8429637132261966148" at="55,0,60,0" concept="3" trace="getModule#()Lorg/jetbrains/mps/openapi/module/SModuleReference;" />
+      <scope id="8054806207102337689" at="17,70,18,29" />
+      <scope id="8054806207102341449" at="45,32,46,318" />
+      <scope id="2620437876317548404" at="51,31,52,32" />
+      <scope id="8429637132261966160" at="57,39,58,23" />
+      <scope id="2620437876317548397" at="30,32,32,265">
+        <var name="l" id="7747342870461429440" />
+      </scope>
+      <scope id="8054806207102337685" at="17,0,20,0">
+        <var name="migrationProvider" id="8054806207102338217" />
+      </scope>
+      <scope id="2620437876317548382" at="25,95,28,34" />
+      <scope id="8054806207102341435" at="40,96,43,34" />
+      <scope id="8054806207102341446" at="45,0,48,0" />
+      <scope id="2620437876317548401" at="51,0,54,0" />
+      <scope id="2620437876317548394" at="30,0,34,0" />
+      <scope id="2620437876317548379" at="25,0,30,0">
+        <var name="migration" id="7169392655264809883" />
+        <var name="usedVersion" id="8054806207102020475" />
+      </scope>
+      <scope id="8054806207102341428" at="40,0,45,0">
+        <var name="migration" id="8054806207102341429" />
+        <var name="usedVersion" id="8054806207102341431" />
+      </scope>
+      <scope id="8429637132261966148" at="55,0,60,0" />
+      <unit id="8054806207102341420" at="36,0,49,0" name="jetbrains.mps.ide.migration.check.MissingMigrationProblem$MissingRefactoringLogProblem" />
+      <unit id="8054806207102331606" at="21,0,35,0" name="jetbrains.mps.ide.migration.check.MissingMigrationProblem$MissingMigrationScriptProblem" />
+      <unit id="2620437876317548374" at="14,0,61,0" name="jetbrains.mps.ide.migration.check.MissingMigrationProblem" />
+    </file>
+  </root>
+  <root nodeRef="r:5c426f30-a9c9-463b-90a5-2fae21a10696(jetbrains.mps.ide.migration.check)/699020670023251098">
+    <file name="DependencyOnNotMigratedLibProblem.java">
+      <node id="699020670023439303" at="14,0,15,0" concept="2" trace="myDepModule" />
+      <node id="699020670023440403" at="15,0,16,0" concept="2" trace="myProjectModule" />
+      <node id="699020670023431824" at="16,86,17,25" concept="6" />
+      <node id="699020670023441699" at="17,25,18,36" concept="1" />
+      <node id="699020670023439307" at="18,36,19,28" concept="1" />
+      <node id="699020670023438194" at="21,30,22,150" concept="5" />
+      <node id="8429637132261938980" at="26,39,27,44" concept="5" />
+      <node id="699020670023467254" at="30,31,31,40" concept="5" />
+      <node id="699020670023251122" at="21,0,24,0" concept="3" trace="getMessage#()Ljava/lang/String;" />
+      <node id="699020670023466300" at="29,0,33,0" concept="3" trace="getCategory#()Ljava/lang/String;" />
+      <node id="699020670023251106" at="16,0,21,0" concept="0" trace="DependencyOnNotMigratedLibProblem#(Lorg/jetbrains/mps/openapi/module/SModule;Lorg/jetbrains/mps/openapi/module/SModule;)V" />
+      <node id="8429637132261936971" at="24,0,29,0" concept="3" trace="getModule#()Lorg/jetbrains/mps/openapi/module/SModuleReference;" />
+      <scope id="699020670023251125" at="21,30,22,150" />
+      <scope id="8429637132261936983" at="26,39,27,44" />
+      <scope id="699020670023466304" at="30,31,31,40" />
+      <scope id="699020670023251113" at="16,86,19,28" />
+      <scope id="699020670023251122" at="21,0,24,0" />
+      <scope id="699020670023466300" at="29,0,33,0" />
+      <scope id="699020670023251106" at="16,0,21,0">
+        <var name="depModule" id="699020670023412929" />
+        <var name="projectModule" id="699020670023412600" />
+      </scope>
+      <scope id="8429637132261936971" at="24,0,29,0" />
+      <unit id="699020670023251098" at="12,0,34,0" name="jetbrains.mps.ide.migration.check.DependencyOnNotMigratedLibProblem" />
+    </file>
+  </root>
+</debug-info>
+

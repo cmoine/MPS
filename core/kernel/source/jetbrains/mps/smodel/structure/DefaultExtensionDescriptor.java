@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,16 +15,41 @@
  */
 package jetbrains.mps.smodel.structure;
 
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 
 public class DefaultExtensionDescriptor implements ExtensionDescriptor {
+  private final Collection<ExtensionPoint> myExtensionPoints;
+  private final Collection<Extension> myExtensions;
+
+  public DefaultExtensionDescriptor() {
+    myExtensionPoints = Collections.emptyList();
+    myExtensions = Collections.emptyList();
+  }
+
+  public DefaultExtensionDescriptor(@Nullable Collection<? extends ExtensionPoint> extPoints, @Nullable Collection<? extends Extension> extensions) {
+    myExtensionPoints = extPoints == null ? Collections.emptyList() : Collections.unmodifiableCollection(extPoints);
+    myExtensions = extensions == null ? Collections.emptyList() : Collections.unmodifiableCollection(extensions);
+  }
+
+  public DefaultExtensionDescriptor(ExtensionPoint<?>... extensionPoints) {
+    this(Arrays.asList(extensionPoints), null);
+  }
+
+  public DefaultExtensionDescriptor(Extension<?>... extensions) {
+    this(null, Arrays.asList(extensions));
+  }
+
   @Override
   public Iterable<? extends ExtensionPoint> getExtensionPoints() {
-      return Collections.emptyList();
+    return myExtensionPoints;
   }
 
   @Override
   public Iterable<? extends Extension> getExtensions() {
-    return Collections.emptyList();
+    return myExtensions;
   }
 }

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="5317rg6k7iz2x3j2mszmgxtzgw7u3zy" />
+<product version="3" modelHash="jrpcv8e8q45o693gozdpj68qsulu5l">
+  <files names="ConstraintsAspectDescriptor.java:ConvertTo_Constraints.java:GetAmount_Constraints.java:GetCurrency_Constraints.java:MoneyLiteral_Constraints.java" />
+</product>
 

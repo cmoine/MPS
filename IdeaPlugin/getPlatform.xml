@@ -1,0 +1,38 @@
+<project name="Get IDEA CE for MPS as IDEA Plugin build" default="default">
+  <!-- To use this script, set home.idea_ce parameter to a location where extracted IDEA CE would be stored (e.g. $ProjectFileDir$/build/IDEA)  -->
+  <loadproperties srcfile="../build/version.properties" description="Load platform url to download"/>
+  <property name="idea_build_number" value ="${idea.platform.version}"/>
+  <property name="idea_ce.url"
+            value="https://www.jetbrains.com/intellij-repository/releases/com/jetbrains/intellij/idea/ideaIC/${idea_build_number}/ideaIC-${idea_build_number}.zip"/>
+  <!--
+     to access IDEA snapshot build, use another value:
+     value="https://www.jetbrains.com/intellij-repository/snapshots/com/jetbrains/intellij/idea/ideaIC/${idea_build_number}-EAP-SNAPSHOT/ideaIC-${idea_build_number}-EAP-SNAPSHOT.zip"
+  -->
+
+  <target name="clean">
+    <delete file="home.idea_ce"/>
+  </target>
+
+  <target name="check-platform-folder-missing" description="if platform folder exists">
+    <condition property="platform.folder.missing" value="true" else="false">
+      <not>
+        <available file="${home.idea_ce}/build.txt"/>
+      </not>
+    </condition>
+  </target>
+
+  <target name="get-platform" depends="check-platform-folder-missing" if="${platform.folder.missing}" description="gets platform">
+    <echo message="Downloading platform"/>
+    <delete file = "${home.idea_ce}"/>
+    <get src="${idea_ce.url}" dest="ideaIC.zip" verbose="true"/>
+    <unzip src="ideaIC.zip" dest="${home.idea_ce}"/>
+    <delete file="ideaIC.zip"/>
+  </target>
+
+  <target name="print-message" depends="check-platform-folder-missing" unless="${platform.folder.missing}" description="prints warning">
+    <echo message="Platform seems to already exist"/>
+  </target>
+  
+  <target name="default" depends="get-platform, print-message" >
+  </target>
+</project>

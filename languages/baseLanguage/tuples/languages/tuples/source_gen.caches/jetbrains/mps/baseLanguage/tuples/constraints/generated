@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="1s82biost3enfxxatydb67oj71ylq8t" />
+<product version="3" modelHash="a53snccujat6a9g2zjveof7sylvms1c">
+  <files names="ConstraintsAspectDescriptor.java:NamedTupleComponentAccessOperation_Constraints.java:NamedTupleComponentDeclaration_Constraints.java:NamedTupleComponentReference_Constraints.java:NamedTupleType_Constraints.java" />
+</product>
 

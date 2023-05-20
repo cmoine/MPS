@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="4s8mhe7chlbcv6jvmbwf00zguvwrunr" />
+<product version="3" modelHash="-ccxy24ln8ve36gzb9ohkqhf5c61wkgf">
+  <files names="AbstractCommentAction.java:CellAction_Comment.java:CellAction_CommentOrUncomment.java:CellAction_CommentOrUncommentChild.java:CellAction_CommentOrUncommentCurrentSelectedNode.java:CellAction_CommentOrUncommentNode.java:CellAction_CreateChildRangeSelection.java:CellAction_DeleteEasily.java:CellAction_DeleteSPropertyOrNode.java:CellAction_DeleteSimple.java:CellAction_DeleteSmart.java:CellAction_InsertPlaceholder.java:CellAction_Uncomment.java:CommentMultipleNodesAction.java:CommentUtil.java:NodeCommenter.java:NodeUncommenter.java" />
+</product>
 

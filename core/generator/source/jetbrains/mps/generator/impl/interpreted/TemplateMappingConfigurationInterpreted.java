@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,12 @@ package jetbrains.mps.generator.impl.interpreted;
 
 import jetbrains.mps.generator.impl.GenerationFailureException;
 import jetbrains.mps.generator.impl.RuleUtil;
+import jetbrains.mps.generator.impl.TemplateQueryException;
 import jetbrains.mps.generator.impl.query.MapConfigurationCondition;
+import jetbrains.mps.generator.impl.query.QueryKey;
+import jetbrains.mps.generator.impl.query.QueryKeyImpl;
+import jetbrains.mps.generator.runtime.LabelDeclaration;
+import jetbrains.mps.generator.runtime.ReferenceReductionRule;
 import jetbrains.mps.generator.runtime.TemplateCreateRootRule;
 import jetbrains.mps.generator.runtime.TemplateDropAttributeRule;
 import jetbrains.mps.generator.runtime.TemplateDropRootRule;
@@ -54,6 +59,8 @@ public class TemplateMappingConfigurationInterpreted implements TemplateMappingC
   private List<TemplateMappingScript> myPreScripts;
   private List<TemplateMappingScript> myPostScripts;
   private List<TemplateDropAttributeRule> myDropAttributeRules;
+  private List<ReferenceReductionRule> myReferenceReductionRules;
+  private List<LabelDeclaration> myLabels;
 
   private MapConfigurationCondition myCondition;
   private volatile boolean myInitialized = false;
@@ -68,15 +75,17 @@ public class TemplateMappingConfigurationInterpreted implements TemplateMappingC
       return;
     }
     synchronized (this) {
-      myCreateRootRules = new ArrayList<TemplateCreateRootRule>(5);
-      myRootMappingRules = new ArrayList<TemplateRootMappingRule>(5);
-      myWeavingRules = new ArrayList<TemplateWeavingRule>(5);
-      myDropRootRules = new ArrayList<TemplateDropRootRule>(5);
-      myDropAttributeRules = new ArrayList<TemplateDropAttributeRule>(5);
-      myPreScripts = new ArrayList<TemplateMappingScript>(5);
-      myPostScripts = new ArrayList<TemplateMappingScript>(5);
-      ArrayList<TemplateReductionRule> reductionRules = new ArrayList<TemplateReductionRule>(20);
-      ArrayList<TemplateReductionRule> patternRules = new ArrayList<TemplateReductionRule>(5);
+      myCreateRootRules = new ArrayList<>(5);
+      myRootMappingRules = new ArrayList<>(5);
+      myWeavingRules = new ArrayList<>(5);
+      myDropRootRules = new ArrayList<>(5);
+      myDropAttributeRules = new ArrayList<>(5);
+      myReferenceReductionRules = new ArrayList<>(5);
+      myPreScripts = new ArrayList<>(5);
+      myPostScripts = new ArrayList<>(5);
+      myLabels = new ArrayList<>(5);
+      ArrayList<TemplateReductionRule> reductionRules = new ArrayList<>(20);
+      ArrayList<TemplateReductionRule> patternRules = new ArrayList<>(5);
 
       for (SNode child : myMappingConfiguration.getChildren()) {
         final SConcept childConcept = child.getConcept();
@@ -92,6 +101,8 @@ public class TemplateMappingConfigurationInterpreted implements TemplateMappingC
           myWeavingRules.add(new TemplateWeavingRuleInterpreted(child));
         } else if (RuleUtil.concept_DropRootRule.equals(childConcept)) {
           myDropRootRules.add(new TemplateDropRuleInterpreted(child));
+        } else if (RuleUtil.concept_ReferenceReductionRule.equals(childConcept)) {
+          myReferenceReductionRules.add(new RefReductionRuleInterpreted(child));
         } else if (RuleUtil.concept_MappingScriptReference.equals(childConcept)) {
           SNode mappingScript = RuleUtil.getMappingScriptReference_Script(child);
           if (mappingScript == null) {
@@ -109,9 +120,12 @@ public class TemplateMappingConfigurationInterpreted implements TemplateMappingC
       if (patternRules.isEmpty()) {
         myReductionRules = reductionRules;
       } else {
-        myReductionRules = new ArrayList<TemplateReductionRule>(patternRules.size() + reductionRules.size());
+        myReductionRules = new ArrayList<>(patternRules.size() + reductionRules.size());
         myReductionRules.addAll(patternRules);
         myReductionRules.addAll(reductionRules);
+      }
+      for (SNode ld : RuleUtil.getMappingConfiguration_LabelDeclarations(myMappingConfiguration)) {
+        myLabels.add(new LabelDeclarationImpl(ld, this));
       }
       myInitialized = true;
     }
@@ -128,18 +142,19 @@ public class TemplateMappingConfigurationInterpreted implements TemplateMappingC
   }
 
   @Override
-  public boolean isApplicable(ITemplateGenerator generator) throws GenerationFailureException {
+  public boolean isApplicable(@NotNull ITemplateGenerator generator) throws GenerationFailureException {
     try {
       if (myCondition == null) {
-        myCondition = generator.getGeneratorSessionContext().getQueryProvider(getMappingNode()).getMapConfigurationCondition(myMappingConfiguration);
+        SNode condition = RuleUtil.getMappingConfiguration_IsApplicable(myMappingConfiguration);
+        QueryKey identity = condition == null ? QueryKeyImpl.invalid() : new QueryKeyImpl(getMappingNode(), condition.getNodeId());
+        myCondition = generator.getQueryProvider(getMappingNode()).getMapConfigurationCondition(identity);
       }
       return myCondition.check(new TemplateQueryContext(getMappingNode(), generator));
     } catch (GenerationFailureException ex) {
       throw ex;
     } catch(Throwable th) {
       // FIXME technically, this catch shall be inside DefaultQueryExecutionContext, where all such catch are kept. But there's no corresponding method in DQEC
-      generator.getLogger().error(getMappingNode(), "error executing condition (see exception)");
-      GenerationFailureException ex = new GenerationFailureException(th);
+      TemplateQueryException ex = new TemplateQueryException("error executing map config condition", th);
       ex.setTemplateModelLocation(getMappingNode());
       throw ex;
     }
@@ -197,6 +212,20 @@ public class TemplateMappingConfigurationInterpreted implements TemplateMappingC
   public Collection<TemplateDropAttributeRule> getDropAttributeRules() {
     init();
     return myDropAttributeRules;
+  }
+
+  @NotNull
+  @Override
+  public Collection<ReferenceReductionRule> getReferenceReductionRules() {
+    init();
+    return myReferenceReductionRules;
+  }
+
+  @NotNull
+  @Override
+  public Collection<LabelDeclaration> getLabels() {
+    init();
+    return myLabels;
   }
 
   @Override

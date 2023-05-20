@@ -6,84 +6,9 @@ import jetbrains.mps.nodeEditor.DefaultNodeEditor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Collection;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import org.jetbrains.mps.openapi.module.SModule;
-import jetbrains.mps.baseLanguage.tuples.runtime.Tuples;
-import jetbrains.mps.baseLanguage.closures.runtime._FunctionTypes;
-import jetbrains.mps.baseLanguage.tuples.runtime.MultiTuple;
-import jetbrains.mps.smodel.ModuleRepositoryFacade;
-import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Image;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Constant;
 
 public class UsesPlatformCheckbox_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createCollection_7xa7wl_a(editorContext, node);
-  }
-  private EditorCell createCollection_7xa7wl_a(EditorContext editorContext, SNode node) {
-    EditorCell_Collection editorCell = EditorCell_Collection.createHorizontal(editorContext, node);
-    editorCell.setCellId("Collection_7xa7wl_a");
-    editorCell.setBig(true);
-    Checkbox_ActionMap_5.setCellActions(editorCell, node, editorContext);
-    editorCell.addKeyMap(new Checkbox_KeyMap_5());
-    editorCell.addEditorCell(this.createAlternation_7xa7wl_a0(editorContext, node));
-    editorCell.addEditorCell(this.createConstant_7xa7wl_b0(editorContext, node));
-    return editorCell;
-  }
-  private EditorCell createAlternation_7xa7wl_a0(EditorContext editorContext, SNode node) {
-    boolean alternationCondition = true;
-    alternationCondition = UsesPlatformCheckbox_Editor.renderingCondition_7xa7wl_a0a(node, editorContext);
-    EditorCell editorCell = null;
-    if (alternationCondition) {
-      editorCell = this.createImage_7xa7wl_a0a(editorContext, node);
-    } else {
-      editorCell = this.createImage_7xa7wl_a0a_0(editorContext, node);
-    }
-    return editorCell;
-  }
-  private static boolean renderingCondition_7xa7wl_a0a(SNode node, EditorContext editorContext) {
-    return SPropertyOperations.getBoolean(node, MetaAdapterFactory.getProperty(0xafb9a5fdbc5d4169L, 0xa22542d8823d623aL, 0x61552ecc953bf2a9L, 0x61552ecc953bf2aaL, "property"));
-  }
-  private EditorCell createImage_7xa7wl_a0a(final EditorContext editorContext, final SNode node) {
-    SModule imageModule;
-    String imagePath;
-    {
-      Tuples._2<SModule, String> _tmp_7xa7wl_a0c0e = (new _FunctionTypes._return_P0_E0<Tuples._2<SModule, String>>() {
-        public Tuples._2<SModule, String> invoke() {
-          return MultiTuple.<SModule,String>from(ModuleRepositoryFacade.getInstance().getModule(PersistenceFacade.getInstance().createModuleReference("90966cb5-4f67-429a-b7ba-d0fded4ede71(jetbrains.mps.lang.editor.forms.runtime)")), "${module}/icons/checkBoxSelected.png");
-        }
-      }).invoke();
-      imageModule = _tmp_7xa7wl_a0c0e._0();
-      imagePath = _tmp_7xa7wl_a0c0e._1();
-    }
-    EditorCell_Image editorCell = EditorCell_Image.createImageCell(editorContext, node, imageModule, imagePath);
-    editorCell.setCellId("Image_7xa7wl_a0a");
-    editorCell.setDescent(-1);
-    return editorCell;
-  }
-  private EditorCell createImage_7xa7wl_a0a_0(final EditorContext editorContext, final SNode node) {
-    SModule imageModule;
-    String imagePath;
-    {
-      Tuples._2<SModule, String> _tmp_7xa7wl_a0c0f = (new _FunctionTypes._return_P0_E0<Tuples._2<SModule, String>>() {
-        public Tuples._2<SModule, String> invoke() {
-          return MultiTuple.<SModule,String>from(ModuleRepositoryFacade.getInstance().getModule(PersistenceFacade.getInstance().createModuleReference("90966cb5-4f67-429a-b7ba-d0fded4ede71(jetbrains.mps.lang.editor.forms.runtime)")), "${module}/icons/checkBox.png");
-        }
-      }).invoke();
-      imageModule = _tmp_7xa7wl_a0c0f._0();
-      imagePath = _tmp_7xa7wl_a0c0f._1();
-    }
-    EditorCell_Image editorCell = EditorCell_Image.createImageCell(editorContext, node, imageModule, imagePath);
-    editorCell.setCellId("Image_7xa7wl_a0a_0");
-    editorCell.setDescent(-1);
-    return editorCell;
-  }
-  private EditorCell createConstant_7xa7wl_b0(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, "the label");
-    editorCell.setCellId("Constant_7xa7wl_b0");
-    editorCell.setDefaultText("");
-    return editorCell;
+    return new UsesPlatformCheckbox_EditorBuilder_a(editorContext, node).createCell();
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ public abstract class BaseScope implements SearchScope {
   @NotNull
   @Override
   public Iterable<SModel> getModels() {
-    List<SModel> models = new ArrayList<SModel>();
+    List<SModel> models = new ArrayList<>();
     for (SModule module : getModules()) {
       for (SModel model : module.getModels()) {
         models.add(model);
@@ -42,26 +42,19 @@ public abstract class BaseScope implements SearchScope {
   }
 
   @Override
-  public SModule resolve(SModuleReference reference) {
-    // todo: review this code!
-    // todo: extract if outside from for statement?
+  public SModule resolve(@NotNull SModuleReference reference) {
+    // here used to be a code that matched modules by id or by name, likely to handle missing/outdated names in references.
+    // Now we left this matching decision to SModuleReference implementation which in fact now checks module id only and ignores module name.
     for (SModule module : getModules()) {
-      if (reference.getModuleId() != null) {
-        if (reference.getModuleId().equals(module.getModuleId())) {
-          return module;
-        }
-      } else {
-        if (module.getModuleName().equals(reference.getModuleName())) {
-          return module;
-        }
+      if (module.getModuleReference().equals(reference)) {
+        return module;
       }
     }
     return null;
   }
 
   @Override
-  public SModel resolve(org.jetbrains.mps.openapi.model.SModelReference reference) {
-    // todo: like module resolve!
+  public SModel resolve(@NotNull org.jetbrains.mps.openapi.model.SModelReference reference) {
     for (SModel model : getModels()) {
       if (model.getReference().equals(reference)) {
         return model;

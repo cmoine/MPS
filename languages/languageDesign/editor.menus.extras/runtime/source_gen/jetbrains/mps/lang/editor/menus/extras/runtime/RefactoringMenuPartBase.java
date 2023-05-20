@@ -6,8 +6,11 @@ import jetbrains.mps.lang.editor.menus.SingleItemMenuPart;
 import jetbrains.mps.openapi.editor.menus.transformation.TransformationMenuItem;
 import jetbrains.mps.openapi.editor.menus.transformation.TransformationMenuContext;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.module.SRepository;
+import jetbrains.mps.project.Project;
+import jetbrains.mps.project.ProjectRepository;
 import jetbrains.mps.refactoring.framework.IRefactoring;
-import jetbrains.mps.refactoring.framework.RefactoringUtil;
+import jetbrains.mps.refactoring.runtime.access.RefactoringAccess;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class RefactoringMenuPartBase extends SingleItemMenuPart<TransformationMenuItem, TransformationMenuContext> {
@@ -20,7 +23,17 @@ public abstract class RefactoringMenuPartBase extends SingleItemMenuPart<Transfo
   @Nullable
   @Override
   protected TransformationMenuItem createItem(TransformationMenuContext context) {
-    IRefactoring refactoring = RefactoringUtil.getRefactoringByClassName(myRefactoringClassName);
+    SRepository repo = context.getEditorContext().getRepository();
+    Project project = null;
+    // FIXME don't know what would be proper way to access Project here.
+    //      Perhaps, add ComponentHost to the context, and access instance through CH directly
+    //      Don't feel another RA.getInstance(CH) is worth it
+    if (repo instanceof ProjectRepository) {
+      project = ((ProjectRepository) repo).getProject();
+    } else {
+      return null;
+    }
+    IRefactoring refactoring = RefactoringAccess.getInstance(project).getRefactoringByClassName(myRefactoringClassName);
     if (refactoring == null) {
       return null;
     }

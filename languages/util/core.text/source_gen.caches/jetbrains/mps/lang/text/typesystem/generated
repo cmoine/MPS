@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="95ry2txt2t0xsl5l3je45gh45bnt37a">
+  <files names="AddEmptyParagraphLetterToEmptyParagraph_QuickFix.java:AddWordToEmptyLine_QuickFix.java:RemoveSpacesFromWord_QuickFix.java:TurnIntoBulletLine_QuickFix.java:TurnIntoBulletPoint_QuickFix.java:TurnIntoNumberedLine_QuickFix.java:TurnIntoNumberedPoint_QuickFix.java:TurnWordIntoLink_QuickFix.java:TypesystemDescriptor.java:check_Empty_Paragraph_NonTypesystemRule.java:check_Line_Can_Be_Bullet_NonTypesystemRule.java:check_Line_Can_Be_Numbered_NonTypesystemRule.java:check_Line_NonTypesystemRule.java:check_Paragraph_Can_Be_Bullet_NonTypesystemRule.java:check_Paragraph_Can_Be_NumberedPoint_NonTypesystemRule.java:check_Word_NonTypesystemRule.java" />
+</product>
+

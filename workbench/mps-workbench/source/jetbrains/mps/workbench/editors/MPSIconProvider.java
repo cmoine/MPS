@@ -19,7 +19,7 @@ import com.intellij.ide.FileIconProvider;
 import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import jetbrains.mps.ide.projectPane.Icons;
+import jetbrains.mps.ide.icons.IdeIcons;
 import jetbrains.mps.workbench.languagesFs.MPSLanguageVirtualFile;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -46,9 +46,9 @@ public class MPSIconProvider implements FileIconProvider, ApplicationComponent {
 
   @Override
   @Nullable
-  public Icon getIcon(final VirtualFile file, int flags, final Project project) {
+  public Icon getIcon(@NotNull final VirtualFile file, int flags, final Project project) {
     if (file instanceof MPSLanguageVirtualFile) {
-      return Icons.LANGUAGE_ICON;
+      return IdeIcons.LANGUAGE_ICON;
     }
     return null;
   }

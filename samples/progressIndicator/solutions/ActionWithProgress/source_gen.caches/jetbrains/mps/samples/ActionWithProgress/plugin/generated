@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-9dj0b7nqje8dquhcf8ppdjvh5ay19z9" />
+<product version="3" modelHash="-1vhu8hcepx2o9l1ijuk025z4p1sluu4">
+  <files names="ActionWithProgress_ApplicationPlugin.java:BackgroundableProgressAction_Action.java:ModalProgressAction_Action.java:ProgressActionsGroup_ActionGroup.java" />
+</product>
 

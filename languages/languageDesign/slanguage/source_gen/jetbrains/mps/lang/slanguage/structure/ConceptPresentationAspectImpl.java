@@ -4,24 +4,43 @@ package jetbrains.mps.lang.slanguage.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_AspectModelRefExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Model_IsAspectOperation = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_AspectModelRefExpression;
+  private ConceptPresentation props_Model_IsAspectOperation;
+  private ConceptPresentation props_OfAspectOperation;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.AspectModelRefExpression:
+        if (props_AspectModelRefExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("aspectModel");
+          props_AspectModelRefExpression = cpb.create();
+        }
         return props_AspectModelRefExpression;
-      case 1:
+      case LanguageConceptSwitch.Model_IsAspectOperation:
+        if (props_Model_IsAspectOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("isAspectModel");
+          props_Model_IsAspectOperation = cpb.create();
+        }
         return props_Model_IsAspectOperation;
+      case LanguageConceptSwitch.OfAspectOperation:
+        if (props_OfAspectOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("filter models by their aspect");
+          cpb.rawPresentation("ofAspect");
+          props_OfAspectOperation = cpb.create();
+        }
+        return props_OfAspectOperation;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

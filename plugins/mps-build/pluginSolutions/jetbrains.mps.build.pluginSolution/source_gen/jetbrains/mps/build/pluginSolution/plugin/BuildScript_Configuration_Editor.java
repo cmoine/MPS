@@ -16,18 +16,19 @@ import com.intellij.openapi.options.ConfigurationException;
 
 public class BuildScript_Configuration_Editor extends SettingsEditorEx<BuildScript_Configuration> {
   private NodeByConceptChooser myChooser;
-  private NodeByConcept_Configuration_Editor myNode;
+  private NodeByConcept_Configuration_Editor myNodePointer;
   private AntSettings_Configuration_Editor mySettings;
   public void disposeEditor() {
     myChooser.dispose();
-    Disposer.dispose(myNode);
+    Disposer.dispose(myNodePointer);
     Disposer.dispose(mySettings);
   }
+
   @NotNull
   public JPanel createEditor() {
     JPanel panel = new JPanel(new GridBagLayout());
 
-    myChooser = myNode.createEditor();
+    myChooser = myNodePointer.createEditor();
     panel.add(new JLabel("Build project:"), LayoutUtil.createLabelConstraints(0));
     panel.add(myChooser, LayoutUtil.createFieldConstraints(1));
 
@@ -36,16 +37,18 @@ public class BuildScript_Configuration_Editor extends SettingsEditorEx<BuildScri
 
     return panel;
   }
+
   public void applyEditorTo(final BuildScript_Configuration configuration) throws ConfigurationException {
-    myNode.applyEditorTo(configuration.getNode());
+    myNodePointer.applyEditorTo(configuration.getNodePointer());
     mySettings.applyEditorTo(configuration.getSettings());
   }
+
   public void resetEditorFrom(final BuildScript_Configuration configuration) {
-    myNode.resetEditorFrom(configuration.getNode());
+    myNodePointer.resetEditorFrom(configuration.getNodePointer());
     mySettings.resetEditorFrom(configuration.getSettings());
   }
-  public BuildScript_Configuration_Editor(NodeByConcept_Configuration_Editor node, AntSettings_Configuration_Editor settings) {
-    myNode = node;
+  public BuildScript_Configuration_Editor(NodeByConcept_Configuration_Editor nodePointer, AntSettings_Configuration_Editor settings) {
+    myNodePointer = nodePointer;
     mySettings = settings;
   }
 }

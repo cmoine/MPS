@@ -24,10 +24,13 @@ import org.jetbrains.mps.openapi.persistence.NavigationParticipant.NavigationTar
 
 /**
  * Bridges OpenAPI {@link NavigationTarget} with IDEA's {@link NavigationItem}
- * Although may be package-local for use in RootChooseModel only, ImportHelper needs access to NavigationTarget (due to the nature
- * of BaseMPSChooseModel, which forcefully wraps elements into NavigationItem, and ImportHelper needs different navigation than
- * that in this class (perhaps, shall subclass RootChooseModel in ImportHelper then?).
- * FIXME It' bad idea to associate particular behavior (here, navigation) with a data model for element chooser.
+ * The only use left is one in {@code jetbrains.mps.idea.core.navigation.MPSIdeaGotoClassContributor}, where {@link NavigationItem} is
+ * needed for a {@link NavigationTarget}. Though use of {@link jetbrains.mps.workbench.choose.NodePointerNavigationItem} is possible,
+ * need to deal with {@link #navigate(boolean)} implementation anyway, so this class persists.
+ * XXX Perhaps, shall relocate next to its only client and become package-local?
+ * <p/>
+ * Generally, it's a bad idea to associate particular behavior (here, navigation) with a data model for element chooser, but AFAIK
+ * with {@link com.intellij.navigation.GotoClassContributor} there's no other way but to handle navigation here.
  */
 public final class RootNodeElement implements NavigationItem {
   private final Project myProject;

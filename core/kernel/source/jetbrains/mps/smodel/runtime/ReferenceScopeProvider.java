@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,25 +16,30 @@
 package jetbrains.mps.smodel.runtime;
 
 import jetbrains.mps.scope.Scope;
-import jetbrains.mps.smodel.IOperationContext;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.model.SNodeReference;
-import jetbrains.mps.smodel.search.ISearchScope;
 
 public interface ReferenceScopeProvider {
-
-  @Deprecated
-  ISearchScope createSearchScope(IOperationContext operationContext, ReferenceConstraintsContext _context);
-
-  Scope createScope(IOperationContext operationContext, ReferenceConstraintsContext _context);
-
-  boolean hasPresentation();
-
-  String getPresentation(IOperationContext operationContext, ReferencePresentationContext _context);
+  // since 2019.3
+  default Scope createScope(ReferenceConstraintsContext _context) {
+    return null;
+  }
 
   /**
    * For convenience navigation from errors in search scope to the checking function
    *
    * @return pointer to corresponding ConceptFunction node or null
    */
+  @Nullable
   SNodeReference getSearchScopeValidatorNode();
+
+  /**
+   * @return default implementation that provides scope from node's hierarchy aka "inherited".
+   * @since 2021.2
+   */
+  static ReferenceScopeProvider fromHierarchy(@NotNull final SAbstractConcept concept, @Nullable final SNodeReference declarationNode) {
+    return new HierarchyScopeProvider(concept, declarationNode);
+  }
 }

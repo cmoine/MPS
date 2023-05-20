@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="adp8m6zrkfdc6jpwpatfodl5m2ouuhb" />
+<product version="3" modelHash="-ei9y0mz2s1zgh5s0lhprqqvk93qbbzn">
+  <files names="InlineConstant_Intention.java:IntentionsDescriptor.java:IntroduceConstant_Intention.java:SafeRemoveConstant_Intention.java" />
+</product>
 

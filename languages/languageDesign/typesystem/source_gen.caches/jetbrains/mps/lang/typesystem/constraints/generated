@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="3uluoxw69fli12r4m9c2ogfmneia8nv" />
+<product version="3" modelHash="azmh8d7nds76jfxcidvgh2tkk1q1dmq">
+  <files names="AbstractEquationStatement_Constraints.java:AbstractReportStatement_Constraints.java:ApplicableNodeReference_Constraints.java:CheckingRuleReference_Constraints.java:ComparisonRule_Constraints.java:ConceptReference_Constraints.java:ConstraintsAspectDescriptor.java:InequationReference_Constraints.java:InequationReplacementRule_Constraints.java:InferenceRule_Constraints.java:LinkPatternVariableReference_Constraints.java:NonTypesystemRule_Constraints.java:PatternVariableReference_Constraints.java:PropertyMessageTarget_Constraints.java:PropertyPatternVariableReference_Constraints.java:QuickFixArgumentReference_Constraints.java:QuickFixFieldReference_Constraints.java:ReferenceMessageTarget_Constraints.java:SubstituteTypeRule_Constraints.java:SubtypingRule_Constraints.java:TypeVarReference_Constraints.java:TypeVarScope.java:TypesystemIntentionArgument_Constraints.java:TypesystemQuickFix_Constraints.java:WhenConcreteVariableReference_Constraints.java" />
+</product>
 

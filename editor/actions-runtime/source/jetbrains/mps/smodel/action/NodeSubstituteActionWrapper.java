@@ -18,6 +18,11 @@ package jetbrains.mps.smodel.action;
 import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.cells.SubstituteAction;
+import jetbrains.mps.openapi.editor.menus.IconResourceProvider;
+import jetbrains.mps.openapi.editor.menus.substitute.SubstitutionAcceptable;
+import jetbrains.mps.openapi.editor.menus.style.EditorMenuItemStyle;
+import jetbrains.mps.openapi.editor.menus.EditorMenuTraceInfo;
+import jetbrains.mps.smodel.runtime.IconResource;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNode;
 
@@ -25,8 +30,8 @@ import org.jetbrains.mps.openapi.model.SNode;
  * Igor Alshannikov
  * Jan 30, 2006
  */
-public class NodeSubstituteActionWrapper implements SubstituteAction {
-  private SubstituteAction mySubstituteAction;
+public class NodeSubstituteActionWrapper implements SubstituteAction, IconResourceProvider {
+  private final SubstituteAction mySubstituteAction;
 
   public NodeSubstituteActionWrapper(SubstituteAction substituteAction) {
     mySubstituteAction = substituteAction;
@@ -43,6 +48,11 @@ public class NodeSubstituteActionWrapper implements SubstituteAction {
   }
 
   @Override
+  public boolean isAcceptable(String pattern, SubstitutionAcceptable acceptable) {
+    return mySubstituteAction.isAcceptable(pattern, acceptable);
+  }
+
+  @Override
   public SNode getActionType(String pattern) {
     return mySubstituteAction.getActionType(pattern);
   }
@@ -50,6 +60,12 @@ public class NodeSubstituteActionWrapper implements SubstituteAction {
   @Override
   public SNode getIconNode(String pattern) {
     return mySubstituteAction.getIconNode(pattern);
+  }
+
+  @Nullable
+  @Override
+  public IconResource getIcon(String pattern) {
+    return mySubstituteAction instanceof IconResourceProvider ? ((IconResourceProvider) mySubstituteAction).getIcon(pattern) : null;
   }
 
   @Override
@@ -95,5 +111,15 @@ public class NodeSubstituteActionWrapper implements SubstituteAction {
   @Override
   public Object getParameterObject() {
     return mySubstituteAction.getParameterObject();
+  }
+
+  @Override
+  public EditorMenuTraceInfo getEditorMenuTraceInfo() {
+    return mySubstituteAction.getEditorMenuTraceInfo();
+  }
+
+  @Override
+  public void customize(String pattern, EditorMenuItemStyle style) {
+    mySubstituteAction.customize(pattern, style);
   }
 }

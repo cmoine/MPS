@@ -1,3 +1,18 @@
+/*
+ * Copyright 2003-2018 JetBrains s.r.o.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package jetbrains.mps.idea.java.psi;
 
 import com.intellij.openapi.project.Project;
@@ -24,8 +39,8 @@ import jetbrains.mps.ide.platform.watching.ReloadParticipant;
 import jetbrains.mps.idea.java.psi.JavaPsiListener.FSMove;
 import jetbrains.mps.idea.java.psi.JavaPsiListener.FSRename;
 import jetbrains.mps.idea.java.psi.JavaPsiListener.PsiEvent;
-import org.jetbrains.mps.openapi.util.ProgressMonitor;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.openapi.util.ProgressMonitor;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -56,39 +71,25 @@ public class PsiChangeProcessor extends ReloadParticipant {
   @Override
   public void update(ProgressMonitor monitor) {
 
-    monitor.start("PSI update", 1);
+    monitor.start("PSI update", changeData.size() + 1);
 
-    Runnable notify = new Runnable() {
-      @Override
-      public void run() {
-        try {
-          for (Entry<Project, PsiChangeData> e : changeData.entrySet()) {
-            final Project project = e.getKey();
-            final PsiChangeData change = e.getValue();
+    try {
+      for (Entry<Project, PsiChangeData> e : changeData.entrySet()) {
+        final Project project = e.getKey();
+        final PsiChangeData change = e.getValue();
 
-            // we do update asynchronously, so we want to check if project is live yet
-            if (project.isDisposed()) continue;
-
-            project.getComponent(PsiChangesWatcher.class).notifyListeners(change);
-          }
-        } finally {
-          // clean-up
-          changeData = new HashMap<Project, PsiChangeData>();
+        // we do update asynchronously, so we want to check if project is live yet
+        if (project.isDisposed()) {
+          continue;
         }
+
+        project.getComponent(PsiChangesWatcher.class).notifyListeners(change);
+        monitor.advance(1);
       }
-
-    };
-
-    notify.run();
-
-    // the following code shouldn't be needed any more, because update happens in reload session
-    // let's leave it for now, and look how it works (including when from ReloadSession.flush())
-
-//    if (ModelAccess.instance().isInsideCommand()) {
-//      notify.run();
-//    } else {
-//      ModelAccess.instance().runUndoTransparentCommand(notify);
-//    }
+    } finally {
+      // clean-up
+      changeData = new HashMap<>();
+    }
 
     monitor.done();
   }
@@ -96,7 +97,9 @@ public class PsiChangeProcessor extends ReloadParticipant {
   @Override
   public boolean isEmpty() {
     for (PsiChangeData data : changeData.values()) {
-      if (data.isNotEmpty()) return false;
+      if (data.isNotEmpty()) {
+        return false;
+      }
     }
     return true;
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.java.convert;
 
 import com.intellij.facet.FacetManager;
@@ -41,8 +40,7 @@ import com.intellij.psi.PsiJavaFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.PsiMethod;
 import jetbrains.mps.extapi.model.SModelBase;
-import jetbrains.mps.ide.java.newparser.JavaParseException;
-import jetbrains.mps.ide.java.newparser.JavaToMpsConverter;
+import jetbrains.mps.extapi.persistence.ModelFactoryService;
 import jetbrains.mps.ide.messages.MessagesViewTool;
 import jetbrains.mps.ide.platform.watching.ReloadManager;
 import jetbrains.mps.ide.project.ProjectHelper;
@@ -52,23 +50,23 @@ import jetbrains.mps.idea.core.facet.MPSFacetType;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiNode;
 import jetbrains.mps.idea.core.refactoring.NodePtr;
 import jetbrains.mps.idea.java.psiStubs.JavaForeignIdBuilder;
+import jetbrains.mps.java.core.newparser.JavaToMpsConverter;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.progress.ProgressMonitorAdapter;
 import jetbrains.mps.project.MPSProject;
-import jetbrains.mps.smodel.DynamicReference;
-import jetbrains.mps.smodel.StaticReference;
 import jetbrains.mps.util.SNodeOperations;
-import jetbrains.mps.vfs.FileSystem;
 import jetbrains.mps.vfs.IFile;
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.openapi.model.ResolveInfo;
 import org.jetbrains.mps.openapi.model.SModel;
+import org.jetbrains.mps.openapi.model.SModelName;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SReference;
 import org.jetbrains.mps.openapi.module.FindUsagesFacade;
 import org.jetbrains.mps.openapi.module.SModule;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -79,10 +77,9 @@ import java.util.Set;
 /**
  * danilla 6/5/13
  */
-
 public class ConvertPackageToModel extends AnAction {
 
-  private static Logger LOG = Logger.getLogger("Convert java to mps");
+  private static final Logger LOG = Logger.getLogger(ConvertPackageToModel.class);
 
   public ConvertPackageToModel() {
     super("Convert Java to MPS", "", null);
@@ -134,23 +131,15 @@ public class ConvertPackageToModel extends AnAction {
       }
     }
 
-    final JavaToMpsConverter parser = new JavaToMpsConverter(mpsModule, mpsProject.getRepository(), true, true, project.getComponent(MessagesViewTool.class).newHandler());
-    final List<IFile> javaFiles = toIFiles(psiJavaFiles);
+    final JavaToMpsConverter parser = new JavaToMpsConverter(mpsModule, mpsProject.getRepository(), true, true, mpsProject.getComponent(ModelFactoryService.class), project.getService(MessagesViewTool.class).newHandler());
+    final List<IFile> javaFiles = toIFiles(mpsProject, psiJavaFiles);
 
     ApplicationManager.getApplication().saveAll();
 
     ProgressManager.getInstance().run(new Task.Modal(null, "Convert to MPS", false) {
       @Override
       public void run(@NotNull final ProgressIndicator progressIndicator) {
-
-        try {
-          parser.convertToMps(javaFiles, new ProgressMonitorAdapter(progressIndicator));
-
-        } catch (JavaParseException exc) {
-          throw new RuntimeException(exc);
-        } catch (IOException exc) {
-          throw new RuntimeException(exc);
-        }
+        parser.convertToMps(javaFiles, new ProgressMonitorAdapter(progressIndicator));
       }
     });
 
@@ -175,24 +164,23 @@ public class ConvertPackageToModel extends AnAction {
             continue;
           }
 
-          if (!(ref instanceof StaticReference)) {
+          if (SLinkOperations.isDynamic(ref)) {
             referencesToFix.add(ref);
             continue;
           }
 
           SNode source = ref.getSourceNode();
-          String role = ref.getRole();
           SModelReference targetModelRef = ref.getTargetSModelReference();
           SNode targetNode = ref.getTargetNode();
 
           // TODO need to make it more efficient (maintain this data in DirParser)
 
           SModelReference newModelRef = null;
-          String modelName = targetModelRef.getModelName();
-          modelName = modelName.substring(0, modelName.indexOf('@'));
+          final SModelName modelName = targetModelRef.getName().withoutStereotype();
           for (SModel model : parser.getModels()) {
-            if (modelName.equals(model.getModelName())) {
+            if (modelName.equals(model.getName())) {
               newModelRef = model.getReference();
+              break;
             }
           }
 
@@ -202,15 +190,14 @@ public class ConvertPackageToModel extends AnAction {
           }
 
           String resolveInfo = SNodeOperations.getResolveInfo(targetNode);
-          SReference tempDynamicRef = new DynamicReference(role, source, newModelRef, resolveInfo);
-          referencesToFix.add(tempDynamicRef);
-          source.setReference(role, tempDynamicRef);
+          source.setReference(ref.getLink(), SNodeOperations.qualifiedResolveInfo(ref.getLink(), newModelRef, resolveInfo));
+          referencesToFix.add(source.getReference(ref.getLink()));
 
           SModel sourceModel = source.getModel();
           ((SModelBase) sourceModel).deleteModelImport(targetModelRef);
           if (!newModelRef.equals(sourceModel.getReference())) {
             // avoiding self-import
-            ((SModelBase) sourceModel).addModelImport(newModelRef, false);
+            ((SModelBase) sourceModel).addModelImport(newModelRef);
           }
 
           // better create static references right away
@@ -222,20 +209,20 @@ public class ConvertPackageToModel extends AnAction {
 
         for (SReference ref : referencesToFix) {
           SNode target = ref.getTargetNode();
-          if (target == null) continue;
+          if (target == null) {
+            continue;
+          }
 
           SNode source = ref.getSourceNode();
-          String role = ref.getRole();
 
-          SReference finalStaticRef = StaticReference.create(role, source, target, ((DynamicReference) ref).getResolveInfo());
-          source.setReference(role, finalStaticRef);
+          source.setReference(ref.getLink(), ResolveInfo.of(target.getReference(), SLinkOperations.getResolveInfo(ref)));
         }
 
         // here more complicated logic can be written
         // e.g. not delete, but rather unmark as source dir -- in case if
         // the resulting model(s) don't fall into the same directory where java was
         for (IFile file : parser.getSuccessfulFiles()) {
-          file.delete();
+          file.deleteIfExists();
         }
 
         if (wasUnresolved) {
@@ -275,12 +262,16 @@ public class ConvertPackageToModel extends AnAction {
     return false;
   }
 
-  private List<IFile> toIFiles(List<? extends PsiFile> psiFiles) {
-    List<IFile> result = new ArrayList<IFile>(psiFiles.size());
+  private static List<IFile> toIFiles(MPSProject mpsProject, List<? extends PsiFile> psiFiles) {
+    List<IFile> result = new ArrayList<>(psiFiles.size());
 
     for (PsiFile file : psiFiles) {
-      VirtualFile vfile = file.getVirtualFile();
-      IFile ifile = new IdeaFileSystem().getFile(vfile.getPath());
+      VirtualFile vf = file.getVirtualFile();
+      IdeaFileSystem fs = mpsProject.getFileSystem();
+      if (!fs.canConvert(vf)) {
+        continue;
+      }
+      IFile ifile = fs.fromVirtualFile(vf);
       result.add(ifile);
     }
 

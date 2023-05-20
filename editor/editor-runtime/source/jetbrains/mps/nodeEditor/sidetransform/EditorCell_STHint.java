@@ -21,8 +21,6 @@ import jetbrains.mps.editor.runtime.cells.AbstractCellAction;
 import jetbrains.mps.editor.runtime.cells.KeyMapActionImpl;
 import jetbrains.mps.editor.runtime.cells.KeyMapImpl;
 import jetbrains.mps.editor.runtime.style.StyleAttributes;
-import jetbrains.mps.nodeEditor.CellSide;
-import jetbrains.mps.nodeEditor.cellActions.OldNewCompositeSideTransformSubstituteInfo;
 import jetbrains.mps.nodeEditor.cellActions.SideTransformSubstituteInfo;
 import jetbrains.mps.nodeEditor.cellActions.SideTransformSubstituteInfo.Side;
 import jetbrains.mps.nodeEditor.cells.DefaultCellInfo;
@@ -34,9 +32,9 @@ import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.CellActionType;
 import jetbrains.mps.openapi.editor.cells.CellInfo;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
+import jetbrains.mps.openapi.editor.cells.EditorCellContext;
 import jetbrains.mps.openapi.editor.cells.EditorCell_Collection;
 import jetbrains.mps.openapi.editor.cells.KeyMap;
-import jetbrains.mps.util.annotation.ToRemove;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNode;
@@ -50,14 +48,11 @@ public class EditorCell_STHint extends EditorCell_Constant {
 
   @Nullable
   private final CellInfo myRestoreSelectionCellInfo;
-  private final String mySideTransformTag;
   @NotNull
   private final EditorCell myBigCell;
   @NotNull
   private final EditorCell myAnchorCell;
-  @Nullable
-  private final CellSide myOldSide;
-  @Nullable
+  @NotNull
   private final Side mySide;
   private boolean myInstalled;
 
@@ -66,32 +61,11 @@ public class EditorCell_STHint extends EditorCell_Constant {
     return stHintCell instanceof EditorCell_STHint ? (EditorCell_STHint) stHintCell : null;
   }
 
-
-  /**
-   * @deprecated after MPS 3.4 side transform actions will be migrated from actions aspect to editor aspect
-   * so the will be referenced directly from editor and  anchor tag will not be used.
-   * Use {@link EditorCell_STHint#EditorCell_STHint(EditorCell, EditorCell, Side, CellInfo)}  }
-   */
-  @Deprecated
-  @ToRemove(version = 3.5)
-  public EditorCell_STHint(@NotNull EditorCell bigCell, @NotNull EditorCell anchorCell, @NotNull CellSide oldSide, @NotNull String sideTransformTag,
-      @Nullable CellInfo restoreSelectionCellInto) {
-    this(bigCell, anchorCell, oldSide, sideTransformTag, null, restoreSelectionCellInto);
-  }
-
   public EditorCell_STHint(@NotNull EditorCell bigCell, @NotNull EditorCell anchorCell, @NotNull Side side, @Nullable CellInfo restoreSelectionCellInto) {
-    this(bigCell, anchorCell, null, null, side, restoreSelectionCellInto);
-  }
-
-  private EditorCell_STHint(@NotNull EditorCell bigCell, @NotNull EditorCell anchorCell, @Nullable CellSide oldSide, @Nullable String sideTransformTag,
-      @Nullable Side side,
-      @Nullable CellInfo restoreSelectionCellInto) {
     super(anchorCell.getContext(), anchorCell.getSNode(), "");
     assert bigCell.isBig();
     myBigCell = bigCell;
     myAnchorCell = anchorCell;
-    myOldSide = oldSide;
-    mySideTransformTag = sideTransformTag;
     mySide = side;
     myRestoreSelectionCellInfo = restoreSelectionCellInto;
     init();
@@ -122,16 +96,11 @@ public class EditorCell_STHint extends EditorCell_Constant {
     addKeyMap(keyMap);
 
     // create the hint's auto-completion menu
-    if (mySide != null) {
-      assert myOldSide == null && mySideTransformTag == null;
-      setSubstituteInfo(new SideTransformSubstituteInfo(myAnchorCell, mySide));
-    } else {
-      assert myOldSide != null && mySideTransformTag != null;
-      setSubstituteInfo(OldNewCompositeSideTransformSubstituteInfo.createSubstituteInfo(myOldSide, myAnchorCell, mySideTransformTag));
-    }
+    setSubstituteInfo(new SideTransformSubstituteInfo(myAnchorCell, mySide));
   }
 
 
+  @NotNull
   @Override
   public CellInfo getCellInfo() {
     return new STHintCellInfo(EditorCell_STHint.this, myAnchorCell);
@@ -140,14 +109,14 @@ public class EditorCell_STHint extends EditorCell_Constant {
   @Override
   public void changeText(String text) {
     super.changeText(text);
-    if ("".equals(getText())) {
+    if (getText() != null && getText().isEmpty()) {
       SideTransformInfoUtil.removeTransformInfo(getSNode());
     }
   }
 
   @Override
   public void setCaretPosition(int position, boolean selection) {
-    if (position != getText().length() && myOldSide == CellSide.LEFT) {
+    if (position != getText().length() && !isRight()) {
       validate(true, false);
     }
     super.setCaretPosition(position, selection);
@@ -185,25 +154,37 @@ public class EditorCell_STHint extends EditorCell_Constant {
           jetbrains.mps.nodeEditor.cells.EditorCell_Collection.createHorizontal(getContext(), getSNode());
       wrapperCell.setSelectable(false);
       wrapperCell.setBig(true);
+      EditorCellContext cellContext = myBigCell.getCellContext();
+      assert cellContext != null;
+      wrapperCell.setCellContext(cellContext);
       wrapperCell.setCanBeSynchronized(myBigCell instanceof SynchronizeableEditorCell && ((SynchronizeableEditorCell) myBigCell).canBeSynchronized());
       myBigCell.setBig(false);
-      if (myOldSide == CellSide.LEFT) {
+      if (!isRight()) {
         wrapperCell.addEditorCell(this);
       }
       wrapperCell.addEditorCell(myBigCell);
-      if (myOldSide == CellSide.RIGHT) {
+      if (isRight()) {
         wrapperCell.addEditorCell(this);
       }
       return wrapperCell;
     }
 
     EditorCell_Collection cellCollection = myAnchorCell.getParent();
-    if (myOldSide == CellSide.RIGHT) {
+    if (isRight()) {
       cellCollection.addEditorCellAfter(this, myAnchorCell);
     } else {
       cellCollection.addEditorCellBefore(this, myAnchorCell);
     }
     return myBigCell;
+  }
+
+  private boolean isRight() {
+    return mySide == Side.RIGHT;
+  }
+
+  @NotNull
+  public Side getSide() {
+    return mySide;
   }
 
   public EditorCell uninstall() {
@@ -235,7 +216,7 @@ public class EditorCell_STHint extends EditorCell_Constant {
   private static class STHintCellInfo extends DefaultCellInfo {
     CellInfo myAnchorCellInfo;
 
-    public STHintCellInfo(EditorCell_STHint rightTransformHintCell, EditorCell anchorCell) {
+    STHintCellInfo(EditorCell_STHint rightTransformHintCell, EditorCell anchorCell) {
       super(rightTransformHintCell);
       myAnchorCellInfo = anchorCell.getCellInfo();
     }

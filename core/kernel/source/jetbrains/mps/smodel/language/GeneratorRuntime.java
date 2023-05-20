@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ public interface GeneratorRuntime {
    * Identifies this generator runtime module
    */
   @NotNull
-  public SModuleReference getModuleReference();
+  SModuleReference getModuleReference();
 
   /**
    * IMPLEMENTATION NOTE: Now GeneratorRuntime is instantiated with appropriate runtime instance of its language, which is
@@ -45,4 +45,14 @@ public interface GeneratorRuntime {
    */
   @NotNull
   LanguageRuntime getSourceLanguage();
+
+  /**
+   * PROVISIONAL CODE. Intended to address need in interpreted generators to perform some cleanup (drop model listeners)
+   * Module lifecycle management shall be part of generic ModuleRuntime, rather than specific to GeneratorRuntime
+   * FIXME if sustains, need better (explicit) contract regarding the moment/state of the module when the method is invoked
+   * @since 2019.3
+   */
+  default void deactivate() {
+    // no-op
+  }
 }

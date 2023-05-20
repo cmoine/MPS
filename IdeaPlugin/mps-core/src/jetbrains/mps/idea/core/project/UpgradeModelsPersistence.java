@@ -57,6 +57,9 @@ public class UpgradeModelsPersistence implements ProjectComponent {
               if (facet == null) {
                 continue;
               }
+              if(facet.getSolution() == null) {
+                continue;
+              }
               for (SModel model : facet.getSolution().getModels()) {
                 if (!((model instanceof DefaultSModelDescriptor))) {
                   continue;

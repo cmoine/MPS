@@ -4,36 +4,65 @@ package jetbrains.mps.samples.Shapes.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_Canvas = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Circle = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Color = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ColorReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Shape = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Square = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_Canvas;
+  private ConceptPresentation props_Circle;
+  private ConceptPresentation props_Color;
+  private ConceptPresentation props_ColorReference;
+  private ConceptPresentation props_Shape;
+  private ConceptPresentation props_Square;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.Canvas:
+        if (props_Canvas == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Canvas = cpb.create();
+        }
         return props_Canvas;
-      case 1:
+      case LanguageConceptSwitch.Circle:
+        if (props_Circle == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("circle");
+          props_Circle = cpb.create();
+        }
         return props_Circle;
-      case 2:
+      case LanguageConceptSwitch.Color:
+        if (props_Color == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Color = cpb.create();
+        }
         return props_Color;
-      case 3:
+      case LanguageConceptSwitch.ColorReference:
+        if (props_ColorReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x16bafbb4c6cd4cc5L, 0x83327c6de8729b3fL, 0x3a2b0182df2201afL, 0x3a2b0182df22029aL, "target", "", "");
+          props_ColorReference = cpb.create();
+        }
         return props_ColorReference;
-      case 4:
+      case LanguageConceptSwitch.Shape:
+        if (props_Shape == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_Shape = cpb.create();
+        }
         return props_Shape;
-      case 5:
+      case LanguageConceptSwitch.Square:
+        if (props_Square == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("square");
+          props_Square = cpb.create();
+        }
         return props_Square;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

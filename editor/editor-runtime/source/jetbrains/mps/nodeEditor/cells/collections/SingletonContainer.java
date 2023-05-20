@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 public class SingletonContainer<T> extends AbstractContainer<T> {
 
   public static <T> Container<T> getInstance(T item) {
-    return new UnmodifiableContainer<T>(new SingletonContainer<T>(item));
+    return new UnmodifiableContainer<>(new SingletonContainer<>(item));
   }
 
   private SingletonContainer(T item) {

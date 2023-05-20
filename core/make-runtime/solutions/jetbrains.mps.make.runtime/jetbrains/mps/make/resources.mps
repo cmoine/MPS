@@ -2,8 +2,8 @@
 <model ref="r:4ea5a78b-cb8a-4831-b227-f7860a22491d(jetbrains.mps.make.resources)">
   <persistence version="9" />
   <languages>
-    <use id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections" version="0" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections" version="1" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports>
     <import index="i9so" ref="r:9e5578e0-37f0-4c9b-a301-771bcb453678(jetbrains.mps.make.script)" />
@@ -23,9 +23,7 @@
         <child id="1068580123134" name="parameter" index="3clF46" />
         <child id="1068580123135" name="body" index="3clF47" />
       </concept>
-      <concept id="1068580123165" name="jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" flags="ig" index="3clFb_">
-        <property id="1178608670077" name="isAbstract" index="1EzhhJ" />
-      </concept>
+      <concept id="1068580123165" name="jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" flags="ig" index="3clFb_" />
       <concept id="1068580123136" name="jetbrains.mps.baseLanguage.structure.StatementList" flags="sn" stub="5293379017992965193" index="3clFbS" />
       <concept id="1068581517677" name="jetbrains.mps.baseLanguage.structure.VoidType" flags="in" index="3cqZAl" />
       <concept id="1107461130800" name="jetbrains.mps.baseLanguage.structure.Classifier" flags="ng" index="3pOWGL">
@@ -56,7 +54,6 @@
     <property role="TrG5h" value="IResource" />
     <node concept="3Tm1VV" id="5mqBoD3U3WQ" role="1B3o_S" />
     <node concept="3clFb_" id="2$fvvfbk0K3" role="jymVt">
-      <property role="1EzhhJ" value="true" />
       <property role="TrG5h" value="describe" />
       <node concept="17QB3L" id="2$fvvfbk0K8" role="3clF45" />
       <node concept="3Tm1VV" id="2$fvvfbk0K5" role="1B3o_S" />
@@ -67,7 +64,6 @@
     <property role="TrG5h" value="IPropertiesAccessor" />
     <node concept="3Tm1VV" id="2U8Fq3GMElO" role="1B3o_S" />
     <node concept="3clFb_" id="2U8Fq3GMElP" role="jymVt">
-      <property role="1EzhhJ" value="true" />
       <property role="TrG5h" value="forResource" />
       <node concept="37vLTG" id="2U8Fq3GMEnF" role="3clF46">
         <property role="TrG5h" value="res" />
@@ -82,7 +78,6 @@
       <node concept="3clFbS" id="2U8Fq3GMElS" role="3clF47" />
     </node>
     <node concept="3clFb_" id="1TDZrawdcdT" role="jymVt">
-      <property role="1EzhhJ" value="true" />
       <property role="TrG5h" value="global" />
       <node concept="3uibUv" id="1TDZrawdcdW" role="3clF45">
         <ref role="3uigEE" to="i9so:5XvfMqim0Fp" resolve="IPropertiesPool" />
@@ -95,7 +90,6 @@
     <property role="TrG5h" value="IPropertiesPersistence" />
     <node concept="3Tm1VV" id="1ksNK$EJI$t" role="1B3o_S" />
     <node concept="3clFb_" id="1ksNK$EJI$f" role="jymVt">
-      <property role="1EzhhJ" value="true" />
       <property role="TrG5h" value="loadValues" />
       <node concept="37vLTG" id="3keQSVbizto" role="3clF46">
         <property role="TrG5h" value="store" />
@@ -115,7 +109,6 @@
       <node concept="3clFbS" id="1ksNK$EJI$k" role="3clF47" />
     </node>
     <node concept="3clFb_" id="1ksNK$EJI$l" role="jymVt">
-      <property role="1EzhhJ" value="true" />
       <property role="TrG5h" value="storeValues" />
       <node concept="37vLTG" id="2tTu$hNLl7" role="3clF46">
         <property role="TrG5h" value="store" />
@@ -139,7 +132,6 @@
     <property role="TrG5h" value="IResourceWithProperties" />
     <node concept="3Tm1VV" id="2$fvvfbjW2b" role="1B3o_S" />
     <node concept="3clFb_" id="2$fvvfbk0JP" role="jymVt">
-      <property role="1EzhhJ" value="true" />
       <property role="TrG5h" value="getProperties" />
       <node concept="3uibUv" id="2$fvvfbk0JU" role="3clF45">
         <ref role="3uigEE" node="2$fvvfbjW4o" resolve="IPropertiesIO" />
@@ -152,7 +144,6 @@
     <property role="TrG5h" value="IPropertiesIO" />
     <node concept="3Tm1VV" id="2$fvvfbjW4p" role="1B3o_S" />
     <node concept="3clFb_" id="2$fvvfbjW4w" role="jymVt">
-      <property role="1EzhhJ" value="true" />
       <property role="TrG5h" value="getKey" />
       <node concept="3uibUv" id="2$fvvfbjW4_" role="3clF45">
         <ref role="3uigEE" to="wyt6:~Object" resolve="Object" />
@@ -161,7 +152,6 @@
       <node concept="3clFbS" id="2$fvvfbjW4z" role="3clF47" />
     </node>
     <node concept="3clFb_" id="2$fvvfbjW2d" role="jymVt">
-      <property role="1EzhhJ" value="true" />
       <property role="TrG5h" value="readProperties" />
       <node concept="3rvAFt" id="2$fvvfbjW43" role="3clF45">
         <node concept="17QB3L" id="2$fvvfbjW46" role="3rvQeY" />
@@ -174,7 +164,6 @@
       </node>
     </node>
     <node concept="3clFb_" id="2$fvvfbk0Jm" role="jymVt">
-      <property role="1EzhhJ" value="true" />
       <property role="TrG5h" value="writeProperties" />
       <node concept="37vLTG" id="2$fvvfbk0Jz" role="3clF46">
         <property role="TrG5h" value="store" />

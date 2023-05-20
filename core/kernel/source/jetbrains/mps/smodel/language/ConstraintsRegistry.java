@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,32 +15,35 @@
  */
 package jetbrains.mps.smodel.language;
 
-import jetbrains.mps.smodel.adapter.ids.MetaIdHelper;
-import jetbrains.mps.smodel.adapter.ids.SConceptId;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.smodel.runtime.BaseConstraintsAspectDescriptor;
+import jetbrains.mps.core.aspects.behaviour.SConceptC3StarMRO;
+import jetbrains.mps.core.aspects.constraints.rules.RulesConstraintsRegistry;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.smodel.runtime.ConstraintsAspectDescriptor;
 import jetbrains.mps.smodel.runtime.ConstraintsDescriptor;
-import jetbrains.mps.smodel.runtime.base.BaseConstraintsDescriptor;
 import jetbrains.mps.smodel.runtime.illegal.IllegalConstraintsDescriptor;
 import jetbrains.mps.smodel.runtime.interpreted.ConstraintsAspectInterpreted;
-import jetbrains.mps.util.annotation.ToRemove;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class ConstraintsRegistry implements CoreAspectRegistry {
-  private static final Logger LOG = LogManager.getLogger(ConstraintsRegistry.class);
-  private final ConceptInLoadingStorage<SAbstractConcept> myStorage = new ConceptInLoadingStorage<SAbstractConcept>();
-  private final Map<SAbstractConcept, ConstraintsDescriptor> myConstraintsDescriptors = new ConcurrentHashMap<SAbstractConcept, ConstraintsDescriptor>();
-  private final LanguageRegistry myLanguageRegistry;
+/**
+ * Here we track constraints descriptors, both legacy and new.
+ *
+ * todo probably, here we will mirror all the methods from {@link RulesConstraintsRegistry}
+ */
+public final class ConstraintsRegistry implements CoreAspectRegistry {
+  private static final Logger LOG = Logger.getLogger(ConstraintsRegistry.class);
 
-  public ConstraintsRegistry(LanguageRegistry languageRegistry) {
+  private final ConceptInLoadingStorage<SAbstractConcept> myStorage = new ConceptInLoadingStorage<>();
+  private final Map<SAbstractConcept, ConstraintsDescriptor> myConstraintsDescriptors = new ConcurrentHashMap<>();
+  private final LanguageRegistry myLanguageRegistry;
+  private final RulesConstraintsRegistry myNewCounterpart;
+
+  public ConstraintsRegistry(@NotNull LanguageRegistry languageRegistry, SConceptC3StarMRO mro) {
     myLanguageRegistry = languageRegistry;
+    myNewCounterpart = new RulesConstraintsRegistry(languageRegistry, mro);
   }
 
   @NotNull
@@ -52,7 +55,6 @@ public class ConstraintsRegistry implements CoreAspectRegistry {
     }
 
     if (!myStorage.startLoading(concept)) {
-      // method ConstraintsDescriptor.getConceptFqName() is not in use, therefore we don't care to supply meaningful value
       return new IllegalConstraintsDescriptor(concept);
     }
 
@@ -62,7 +64,7 @@ public class ConstraintsRegistry implements CoreAspectRegistry {
         ConstraintsAspectDescriptor aspectDescriptor = null;
         if (languageRuntime == null) {
           // Then language was just renamed and was not re-generated then it can happen that it has no
-          LOG.warn("No language for: " + concept + ", while looking for constraints descriptor.");
+          LOG.warning("No language for: " + concept + ", while looking for constraints descriptor.");
         } else {
           aspectDescriptor = languageRuntime.getAspect(ConstraintsAspectDescriptor.class);
         }
@@ -72,12 +74,7 @@ public class ConstraintsRegistry implements CoreAspectRegistry {
         }
 
         //todo simplify following if after 3.4
-        if (aspectDescriptor instanceof BaseConstraintsAspectDescriptor) {
-          descriptor = ((BaseConstraintsAspectDescriptor) aspectDescriptor).getConstraints(concept);
-        } else {
-          //can't remove id here before 3.4
-          descriptor = aspectDescriptor.getDescriptor(MetaIdHelper.getConcept(concept));
-        }
+        descriptor = aspectDescriptor.getConstraints(concept);
       } catch (Throwable e) {
         LOG.error("Exception while constraints descriptor creating", e);
       }
@@ -87,6 +84,9 @@ public class ConstraintsRegistry implements CoreAspectRegistry {
       }
 
       myConstraintsDescriptors.put(concept, descriptor);
+      // FIXME perhaps, shall move BaseConstraintDescriptor initialization out of constructor into dedicated init(ConstraintsRegistry) method
+      //       so that (a) there's no getInstance() access; (b) predictable/controlled moment to access other registries; (c) no protected
+      //       overridden methods invoked from constructor. Drawback - non-final fields.
 
       return descriptor;
     } finally {
@@ -95,27 +95,13 @@ public class ConstraintsRegistry implements CoreAspectRegistry {
 
   }
 
-  /**
-   * Use {@link jetbrains.mps.smodel.language.ConceptRegistryUtil#getConstraintsDescriptor(org.jetbrains.mps.openapi.language.SAbstractConcept)}
-   * if you got SConcept
-   */
-  @NotNull
-  @Deprecated
-  @ToRemove(version = 3.4)
-  public ConstraintsDescriptor getConstraintsDescriptor(@NotNull SConceptId conceptId) {
-    String cname = "<ConstraintsRegistry: this name must not be used>";
-
-    ConstraintsDescriptor cd = getConstraintsDescriptor(MetaAdapterFactory.getConceptById(conceptId));
-    //todo !=BaseConstraintsDescriptor is better to be removed, now this is a hack to provide compatibility
-    if (!(cd instanceof IllegalConstraintsDescriptor) && cd.getClass() != BaseConstraintsDescriptor.class) {
-      return cd;
-    }
-
-    return getConstraintsDescriptor(MetaAdapterFactory.getInterfaceConcept(conceptId, cname));
+  public RulesConstraintsRegistry getNewRegistry() {
+    return myNewCounterpart;
   }
 
   @Override
   public void clear() {
     myConstraintsDescriptors.clear();
+    myNewCounterpart.clear();
   }
 }

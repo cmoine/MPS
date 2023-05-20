@@ -15,11 +15,14 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 /**
- * This class was copied from Idea's util.jar not to get it all in our core
+ * Map from key to multiple values
+ * By default the collection (which is stored as a value in the map) is <code>java.util.List</code>-based.
+ * Thus the order is preserved
  *
  * @author Dmitry Avdeev
  */
 public class MultiMap<K, V> implements Serializable {
+  private static final long serialVersionUID = -2632269270151455493L;
 
   public static final MultiMap EMPTY = new MultiMap() {
     @Override
@@ -27,7 +30,6 @@ public class MultiMap<K, V> implements Serializable {
       return Collections.emptyMap();
     }
   };
-  private static final long serialVersionUID = -2632269270151455493L;
 
   private final Map<K, Collection<V>> myMap;
   private Collection<V> values;
@@ -41,15 +43,15 @@ public class MultiMap<K, V> implements Serializable {
   }
 
   protected Map<K, Collection<V>> createMap() {
-    return new HashMap<K, Collection<V>>();
+    return new HashMap<>();
   }
 
   protected Map<K, Collection<V>> createMap(int i, float v) {
-    return new HashMap<K, Collection<V>>(i, v);
+    return new HashMap<>(i, v);
   }
 
   protected Collection<V> createCollection() {
-    return new ArrayList<V>();
+    return new ArrayList<>();
   }
 
   protected Collection<V> createEmptyCollection() {
@@ -148,6 +150,7 @@ public class MultiMap<K, V> implements Serializable {
   public Collection<? extends V> values() {
     if (values == null) {
       values = new AbstractCollection<V>() {
+        @NotNull
         @Override
         public Iterator<V> iterator() {
           return new Iterator<V>() {
@@ -222,12 +225,12 @@ public class MultiMap<K, V> implements Serializable {
 
   @NotNull
   public static <K, V> MultiMap<K, V> create() {
-    return new MultiMap<K, V>();
+    return new MultiMap<>();
   }
 
   @NotNull
   public static <K, V> MultiMap<K, V> create(int i, float v) {
-    return new MultiMap<K, V>(i, v);
+    return new MultiMap<>(i, v);
   }
 
   @Override

@@ -4,46 +4,62 @@ package jetbrains.mps.lang.editor.imageGen.tests;
 
 import jetbrains.mps.MPSLaunch;
 import jetbrains.mps.lang.test.runtime.BaseTransformationTest;
-import org.junit.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCacheExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCache;
+import org.junit.jupiter.api.Test;
 import jetbrains.mps.lang.test.runtime.BaseTestBody;
+import jetbrains.mps.lang.test.runtime.TransformationTest;
 import java.awt.image.BufferedImage;
-import junit.framework.Assert;
+import org.junit.Assert;
 import java.io.IOException;
 
 @MPSLaunch
 public class ImageExport_Test extends BaseTransformationTest {
+  @RegisterExtension
+  private static final TestParametersCacheExtension ourParametersCacheExtension = new TestParametersCacheExtension(new TestParametersCache(ImageExport_Test.class, "${mps_home}", "r:57812925-2ef0-43c6-8314-0222b2c13acf(jetbrains.mps.lang.editor.imageGen.tests@tests)", false));
+
+  public ImageExport_Test() {
+    super(ourParametersCacheExtension.getParametersCache());
+  }
+
   @Test
   public void test_manuallyExportedImage() throws Throwable {
-    initTest("${mps_home}", "r:57812925-2ef0-43c6-8314-0222b2c13acf(jetbrains.mps.lang.editor.imageGen.tests@tests)", false);
-    runTest("jetbrains.mps.lang.editor.imageGen.tests.ImageExport_Test$TestBody", "test_manuallyExportedImage", true);
+    new TestBody(this).test_manuallyExportedImage();
   }
   @Test
   public void test_imageExportedByGenerator() throws Throwable {
-    initTest("${mps_home}", "r:57812925-2ef0-43c6-8314-0222b2c13acf(jetbrains.mps.lang.editor.imageGen.tests@tests)", false);
-    runTest("jetbrains.mps.lang.editor.imageGen.tests.ImageExport_Test$TestBody", "test_imageExportedByGenerator", true);
+    new TestBody(this).test_imageExportedByGenerator();
   }
 
-  @MPSLaunch
-  public static class TestBody extends BaseTestBody {
-    public void test_manuallyExportedImage() throws Exception {
-      ImageLoader imageloader = new ImageLoader("ManuallyExportedImage.gif");
-      try {
-        BufferedImage image = imageloader.getImage();
-        Assert.assertNotNull(image);
-      } catch (IOException e) {
-        Assert.fail("exception on loading image: " + e);
-      }
-    }
-    public void test_imageExportedByGenerator() throws Exception {
-      ImageLoader imageloader = new ImageLoader(Cls.class.getSimpleName() + ".png");
-      try {
-        BufferedImage image = imageloader.getImage();
-        Assert.assertNotNull(image);
-      } catch (IOException e) {
-        Assert.fail("exception on loading image: " + e);
-      }
+  /*package*/ static class TestBody extends BaseTestBody {
+
+    /*package*/ TestBody(TransformationTest owner) {
+      super(owner);
     }
 
+    public void test_manuallyExportedImage() throws Exception {
+      runWithinCommand(() -> {
+        ImageLoader imageloader = new ImageLoader("ManuallyExportedImage.gif");
+        try {
+          BufferedImage image = imageloader.getImage();
+          Assert.assertNotNull(image);
+        } catch (IOException e) {
+          Assert.fail("exception on loading image: " + e);
+        }
+      });
+    }
+    public void test_imageExportedByGenerator() throws Exception {
+      runWithinCommand(() -> {
+        ImageLoader imageloader = new ImageLoader(Cls.class.getSimpleName() + ".png");
+        try {
+          BufferedImage image = imageloader.getImage();
+          Assert.assertNotNull(image);
+        } catch (IOException e) {
+          Assert.fail("exception on loading image: " + e);
+        }
+      });
+    }
 
   }
 }

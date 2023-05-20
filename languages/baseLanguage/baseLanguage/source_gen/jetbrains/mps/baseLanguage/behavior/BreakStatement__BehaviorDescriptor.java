@@ -5,13 +5,10 @@ package jetbrains.mps.baseLanguage.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.List;
 import java.util.Arrays;
@@ -22,15 +19,18 @@ import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public final class BreakStatement__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfbe39a867fL, "jetbrains.mps.baseLanguage.structure.BreakStatement");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<SNode> getLoop_idhEwIHvD = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getLoop").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("hEwIHvD").registry(REGISTRY).build();
-  public static final SMethod<SNode> getSwitch_idhEwIHvX = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getSwitch").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("hEwIHvX").registry(REGISTRY).build();
-  public static final SMethod<SNode> getLoopOrSwitch_idhEwIHwh = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getLoopOrSwitch").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("hEwIHwh").registry(REGISTRY).build();
-  public static final SMethod<Boolean> isGuardClauseStatement_idi0z$q7V = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isGuardClauseStatement").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("i0z$q7V").registry(REGISTRY).build();
+  public static final SMethod<SNode> getLoop_idhEwIHvD = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getLoop").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1213877377001L).languageId(0xa443f952ceaf5816L, 0xf3061a5392264cc5L).build2();
+  public static final SMethod<SNode> getSwitch_idhEwIHvX = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getSwitch").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1213877377021L).languageId(0xa443f952ceaf5816L, 0xf3061a5392264cc5L).build2();
+  public static final SMethod<SNode> getLoopOrSwitch_idhEwIHwh = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getLoopOrSwitch").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1213877377041L).languageId(0xa443f952ceaf5816L, 0xf3061a5392264cc5L).build2();
+  public static final SMethod<Boolean> isGuardClauseStatement_idi0z$q7V = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isGuardClauseStatement").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1237547327995L).languageId(0xa443f952ceaf5816L, 0xf3061a5392264cc5L).build2();
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getLoop_idhEwIHvD, getSwitch_idhEwIHvX, getLoopOrSwitch_idhEwIHwh, isGuardClauseStatement_idi0z$q7V);
 
@@ -39,53 +39,53 @@ public final class BreakStatement__BehaviorDescriptor extends BaseBHDescriptor {
 
   /*package*/ static SNode getLoop_idhEwIHvD(@NotNull SNode __thisNode__) {
     SNode loopOrSwitch = BreakStatement__BehaviorDescriptor.getLoopOrSwitch_idhEwIHwh.invoke(__thisNode__);
-    if (SNodeOperations.isInstanceOf(loopOrSwitch, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10cb1ac5adeL, "jetbrains.mps.baseLanguage.structure.AbstractLoopStatement"))) {
-      return SNodeOperations.cast(loopOrSwitch, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10cb1ac5adeL, "jetbrains.mps.baseLanguage.structure.AbstractLoopStatement"));
+    if (SNodeOperations.isInstanceOf(loopOrSwitch, CONCEPTS.AbstractLoopStatement$Xv)) {
+      return SNodeOperations.cast(loopOrSwitch, CONCEPTS.AbstractLoopStatement$Xv);
     }
     return null;
   }
   /*package*/ static SNode getSwitch_idhEwIHvX(@NotNull SNode __thisNode__) {
     SNode loopOrSwitch = BreakStatement__BehaviorDescriptor.getLoopOrSwitch_idhEwIHwh.invoke(__thisNode__);
-    if (SNodeOperations.isInstanceOf(loopOrSwitch, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10ef02a8c6aL, "jetbrains.mps.baseLanguage.structure.SwitchStatement"))) {
-      return SNodeOperations.cast(loopOrSwitch, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10ef02a8c6aL, "jetbrains.mps.baseLanguage.structure.SwitchStatement"));
+    if (SNodeOperations.isInstanceOf(loopOrSwitch, CONCEPTS.SwitchStatement$kN)) {
+      return SNodeOperations.cast(loopOrSwitch, CONCEPTS.SwitchStatement$kN);
     }
     return null;
   }
   /*package*/ static SNode getLoopOrSwitch_idhEwIHwh(@NotNull SNode __thisNode__) {
-    for (SNode item : SNodeOperations.getNodeAncestorsWhereConceptInList(__thisNode__, new SAbstractConcept[]{MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10cb1ac5adeL, "jetbrains.mps.baseLanguage.structure.AbstractLoopStatement"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10ef02a8c6aL, "jetbrains.mps.baseLanguage.structure.SwitchStatement")}, false)) {
-      if (SNodeOperations.isInstanceOf(item, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10ef02a8c6aL, "jetbrains.mps.baseLanguage.structure.SwitchStatement"))) {
-        SNode switchStatement = SNodeOperations.cast(item, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10ef02a8c6aL, "jetbrains.mps.baseLanguage.structure.SwitchStatement"));
-        if ((SLinkOperations.getTarget(__thisNode__, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfbe39a867fL, 0x7dae85d6eb42f8c4L, "loopLabelReference")) != null)) {
-          SNode loopLabel = SLinkOperations.getTarget(SLinkOperations.getTarget(__thisNode__, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfbe39a867fL, 0x7dae85d6eb42f8c4L, "loopLabelReference")), MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x50c493bf9555129L, 0x50c493bf955512aL, "loopLabel"));
+    for (SNode item : SNodeOperations.getNodeAncestorsWhereConceptInList(__thisNode__, new SAbstractConcept[]{CONCEPTS.AbstractLoopStatement$Xv, CONCEPTS.SwitchStatement$kN}, false)) {
+      if (SNodeOperations.isInstanceOf(item, CONCEPTS.SwitchStatement$kN)) {
+        SNode switchStatement = SNodeOperations.cast(item, CONCEPTS.SwitchStatement$kN);
+        if ((SLinkOperations.getTarget(__thisNode__, LINKS.loopLabelReference$_Wnw) != null)) {
+          SNode loopLabel = SLinkOperations.getTarget(SLinkOperations.getTarget(__thisNode__, LINKS.loopLabelReference$_Wnw), LINKS.loopLabel$tAsM);
           if ((loopLabel != null)) {
-            if (loopLabel == SLinkOperations.getTarget(switchStatement, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10ef02a8c6aL, 0x4091554b655a230eL, "switchLabel"))) {
+            if (loopLabel == SLinkOperations.getTarget(switchStatement, LINKS.switchLabel$nNiT)) {
               return switchStatement;
             }
           }
         } else {
-          if (SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfbe39a867fL, 0x11745bfb2d8L, "label")) == null) {
+          if (SPropertyOperations.getString(__thisNode__, PROPS.label$pRTe) == null) {
             return switchStatement;
           } else {
-            if (SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfbe39a867fL, 0x11745bfb2d8L, "label")).equals(SPropertyOperations.getString(switchStatement, MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10ef02a8c6aL, 0x117b7e94b9bL, "label")))) {
+            if (SPropertyOperations.getString(__thisNode__, PROPS.label$pRTe).equals(SPropertyOperations.getString(switchStatement, PROPS.label$vLWZ))) {
               return switchStatement;
             }
           }
         }
       }
-      if (SNodeOperations.isInstanceOf(item, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10cb1ac5adeL, "jetbrains.mps.baseLanguage.structure.AbstractLoopStatement"))) {
-        SNode loop = SNodeOperations.cast(item, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10cb1ac5adeL, "jetbrains.mps.baseLanguage.structure.AbstractLoopStatement"));
-        if ((SLinkOperations.getTarget(__thisNode__, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfbe39a867fL, 0x7dae85d6eb42f8c4L, "loopLabelReference")) != null)) {
-          SNode loopLabel = SLinkOperations.getTarget(SLinkOperations.getTarget(__thisNode__, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfbe39a867fL, 0x7dae85d6eb42f8c4L, "loopLabelReference")), MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x50c493bf9555129L, 0x50c493bf955512aL, "loopLabel"));
+      if (SNodeOperations.isInstanceOf(item, CONCEPTS.AbstractLoopStatement$Xv)) {
+        SNode loop = SNodeOperations.cast(item, CONCEPTS.AbstractLoopStatement$Xv);
+        if ((SLinkOperations.getTarget(__thisNode__, LINKS.loopLabelReference$_Wnw) != null)) {
+          SNode loopLabel = SLinkOperations.getTarget(SLinkOperations.getTarget(__thisNode__, LINKS.loopLabelReference$_Wnw), LINKS.loopLabel$tAsM);
           if ((loopLabel != null)) {
-            if (loopLabel == SLinkOperations.getTarget(loop, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10cb1ac5adeL, 0x50c493bf9555131L, "loopLabel"))) {
+            if (loopLabel == SLinkOperations.getTarget(loop, LINKS.loopLabel$sgvV)) {
               return loop;
             }
           }
         } else {
-          if (SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfbe39a867fL, 0x11745bfb2d8L, "label")) == null) {
+          if (SPropertyOperations.getString(__thisNode__, PROPS.label$pRTe) == null) {
             return loop;
           } else {
-            if (SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfbe39a867fL, 0x11745bfb2d8L, "label")).equals(SPropertyOperations.getString(loop, MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10cb1ac5adeL, 0x11745b5371dL, "label")))) {
+            if (SPropertyOperations.getString(__thisNode__, PROPS.label$pRTe).equals(SPropertyOperations.getString(loop, PROPS.label$nCHj))) {
               return loop;
             }
           }
@@ -99,7 +99,6 @@ public final class BreakStatement__BehaviorDescriptor extends BaseBHDescriptor {
   }
 
   /*package*/ BreakStatement__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -149,5 +148,23 @@ public final class BreakStatement__BehaviorDescriptor extends BaseBHDescriptor {
   @Override
   public SAbstractConcept getConcept() {
     return CONCEPT;
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept AbstractLoopStatement$Xv = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10cb1ac5adeL, "jetbrains.mps.baseLanguage.structure.AbstractLoopStatement");
+    /*package*/ static final SConcept SwitchStatement$kN = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10ef02a8c6aL, "jetbrains.mps.baseLanguage.structure.SwitchStatement");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink loopLabelReference$_Wnw = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfbe39a867fL, 0x7dae85d6eb42f8c4L, "loopLabelReference");
+    /*package*/ static final SReferenceLink loopLabel$tAsM = MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x50c493bf9555129L, 0x50c493bf955512aL, "loopLabel");
+    /*package*/ static final SContainmentLink switchLabel$nNiT = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10ef02a8c6aL, 0x4091554b655a230eL, "switchLabel");
+    /*package*/ static final SContainmentLink loopLabel$sgvV = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10cb1ac5adeL, 0x50c493bf9555131L, "loopLabel");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty label$pRTe = MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfbe39a867fL, 0x11745bfb2d8L, "label");
+    /*package*/ static final SProperty label$vLWZ = MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10ef02a8c6aL, 0x117b7e94b9bL, "label");
+    /*package*/ static final SProperty label$nCHj = MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10cb1ac5adeL, 0x11745b5371dL, "label");
   }
 }

@@ -1,9 +1,0 @@
-<components>
-  <project-components>
-    <component>
-      <implementation-class>jetbrains.mps.ide.projectPane.favorites.MPSFavoritesManager</implementation-class>
-    </component>
-
-
-  </project-components>
-</components>

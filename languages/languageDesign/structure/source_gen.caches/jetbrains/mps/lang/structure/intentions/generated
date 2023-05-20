@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="c27h3iuffnvo3lu4kbiyqqadgytkqjy" />
+<product version="3" modelHash="7j7wosh70y5pbgi5kmk9ng4tdwzp1ri">
+  <files names="AddDeprecatedAnnotation_Intention.java:AddExperimentalApiAnnotation_Intention.java:AddSeeAlso_Intention.java:AnnotateAsMarker_Intention.java:AnnotateToDocument_Intention.java:AttachSmartReferenceAttribute_Intention.java:ConceptConversionHelper.java:ConceptIconHelper.java:ConvertConceptAndInterface_Intention.java:CreateConceptFromUsageHelper.java:CreateConceptFromUsageInConcept_Intention.java:CreateConceptFromUsageInIntfcRef_Intention.java:CreateConceptFromUsageInLinkDecl_Intention.java:CreateConceptIcon_Intention.java:ForbidIncomingReferencesInSubconcepts_Intention.java:IntentionsDescriptor.java:MakeFinal_Intention.java:MakeRootable_Intention.java:SwitchAssociationAggregationLink_Intention.java:ToggleConceptAbstract_Intention.java:_Adapters.java" />
+</product>
 

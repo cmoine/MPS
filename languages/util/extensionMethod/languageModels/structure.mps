@@ -2,8 +2,7 @@
 <model ref="r:4f6f8ed5-c3d7-49f4-b0dd-d70029feffdf(jetbrains.mps.baseLanguage.extensionMethods.structure)">
   <persistence version="9" />
   <languages>
-    <use id="c72da2b9-7cce-4447-8389-f407dc1158b7" name="jetbrains.mps.lang.structure" version="3" />
-    <use id="982eb8df-2c96-4bd7-9963-11712ea622e5" name="jetbrains.mps.lang.resources" version="2" />
+    <devkit ref="78434eb8-b0e5-444b-850d-e7c4ad2da9ab(jetbrains.mps.devkit.aspect.structure)" />
   </languages>
   <imports>
     <import index="tpee" ref="r:00000000-0000-4000-0000-011c895902ca(jetbrains.mps.baseLanguage.structure)" />
@@ -56,24 +55,23 @@
     <property role="EcuMT" value="1894531970723270160" />
     <ref role="1TJDcQ" node="6XkcKt_ivkp" resolve="BaseExtensionMethodContainer" />
     <node concept="1TJgyj" id="1DaIGCE_pNY" role="1TKVEi">
-      <property role="20lmBu" value="aggregation" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="type" />
-      <property role="20lbJX" value="1" />
+      <property role="20lbJX" value="fLJekj4/1" />
       <property role="IQ2ns" value="1894531970723323134" />
       <ref role="20lvS9" to="tpee:fz3vP1H" resolve="Type" />
     </node>
   </node>
   <node concept="1TIwiD" id="1m3OroNmkwV">
     <property role="TrG5h" value="ExtensionMethodCall" />
-    <property role="2_RsDV" value="none" />
+    <property role="2_RsDV" value="4G1g3fIR8JG/none" />
     <property role="EcuMT" value="1550313277221324859" />
     <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="1m3OroNmkwW" role="1TKVEi">
-      <property role="20lmBu" value="reference" />
       <property role="20kJfa" value="extension" />
-      <property role="20lbJX" value="1" />
+      <property role="20lbJX" value="fLJekj4/1" />
       <property role="IQ2ns" value="1550313277221324860" />
-      <ref role="20ksaX" to="tpee:fz7wK6H" />
+      <ref role="20ksaX" to="tpee:fz7wK6H" resolve="baseMethodDeclaration" />
       <ref role="20lvS9" node="1m3OroNpuvT" resolve="ExtensionMethodDeclaration" />
     </node>
     <node concept="PrWs8" id="1m3OroNnQsi" role="PzmwI">
@@ -91,7 +89,7 @@
       <ref role="PrY4T" to="tpee:h9ngReX" resolve="ClassifierMember" />
     </node>
     <node concept="1TJgyj" id="6XkcKt_dOwi" role="1TKVEi">
-      <property role="20lmBu" value="aggregation" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="extendedType" />
       <property role="IQ2ns" value="8022092943109605394" />
       <ref role="20lvS9" to="tpee:fz3vP1H" resolve="Type" />
@@ -101,7 +99,7 @@
     <property role="R5$K7" value="false" />
     <property role="R5$K2" value="false" />
     <property role="TrG5h" value="ThisExtensionExpression" />
-    <property role="2_RsDV" value="none" />
+    <property role="2_RsDV" value="4G1g3fIR8JG/none" />
     <property role="34LRSv" value="this" />
     <property role="EcuMT" value="3316739663067157299" />
     <ref role="1TJDcQ" to="tpee:fz3vP1J" resolve="Expression" />
@@ -130,32 +128,31 @@
       <ref role="PrY4T" to="tpee:hoSGL_l" resolve="IMemberContainer" />
     </node>
     <node concept="1TJgyj" id="6XkcKt_ivkr" role="1TKVEi">
-      <property role="20lmBu" value="aggregation" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="methods" />
-      <property role="20lbJX" value="0..n" />
+      <property role="20lbJX" value="fLJekj5/0..n" />
       <property role="IQ2ns" value="8022092943110829339" />
       <ref role="20lvS9" node="1m3OroNpuvT" resolve="ExtensionMethodDeclaration" />
     </node>
     <node concept="1TJgyj" id="1HybphbILLv" role="1TKVEi">
-      <property role="20lmBu" value="aggregation" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="staticFields" />
-      <property role="20lbJX" value="0..n" />
+      <property role="20lbJX" value="fLJekj5/0..n" />
       <property role="IQ2ns" value="1973189701690661983" />
       <ref role="20lvS9" node="1HybphbKaZR" resolve="ExtensionStaticFieldDeclaration" />
     </node>
   </node>
   <node concept="1TIwiD" id="1HybphbJvJ7">
     <property role="TrG5h" value="ExtensionStaticFieldReference" />
-    <property role="2_RsDV" value="none" />
+    <property role="2_RsDV" value="4G1g3fIR8JG/none" />
     <property role="EcuMT" value="1973189701690850247" />
     <ref role="1TJDcQ" to="tpee:fz7vLUo" resolve="VariableReference" />
     <node concept="1TJgyj" id="1v5QYNcnuLX" role="1TKVEi">
-      <property role="20lmBu" value="reference" />
       <property role="20kJfa" value="staticFieldDeclaration" />
-      <property role="20lbJX" value="1" />
+      <property role="20lbJX" value="fLJekj4/1" />
       <property role="IQ2ns" value="1713017043371814013" />
       <ref role="20lvS9" node="1HybphbKaZR" resolve="ExtensionStaticFieldDeclaration" />
-      <ref role="20ksaX" to="tpee:fzcqZ_w" />
+      <ref role="20ksaX" to="tpee:fzcqZ_w" resolve="variableDeclaration" />
     </node>
   </node>
   <node concept="1TIwiD" id="1HybphbKaZR">
@@ -168,15 +165,14 @@
     <property role="R5$K2" value="false" />
     <property role="R4oN_" value="local extended method call" />
     <property role="TrG5h" value="LocalExtendedMethodCall" />
-    <property role="2_RsDV" value="none" />
+    <property role="2_RsDV" value="4G1g3fIR8JG/none" />
     <property role="EcuMT" value="7685333756920172912" />
     <ref role="1TJDcQ" to="tpee:fz7wK6G" resolve="BaseMethodCall" />
     <node concept="1TJgyj" id="6EBM_lhyT5L" role="1TKVEi">
-      <property role="20lmBu" value="reference" />
       <property role="20kJfa" value="instanceMethodDeclaration" />
-      <property role="20lbJX" value="1" />
+      <property role="20lbJX" value="fLJekj4/1" />
       <property role="IQ2ns" value="7685333756920172913" />
-      <ref role="20ksaX" to="tpee:fz7wK6H" />
+      <ref role="20ksaX" to="tpee:fz7wK6H" resolve="baseMethodDeclaration" />
       <ref role="20lvS9" to="tpee:fzclF8t" resolve="InstanceMethodDeclaration" />
     </node>
   </node>

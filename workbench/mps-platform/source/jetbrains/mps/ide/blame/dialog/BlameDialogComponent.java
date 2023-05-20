@@ -59,7 +59,7 @@ public class BlameDialogComponent implements ApplicationComponent, PersistentSta
   }
 
   @Override
-  public void loadState(MyState state) {
+  public void loadState(@NotNull MyState state) {
     myDialogState = state;
   }
 

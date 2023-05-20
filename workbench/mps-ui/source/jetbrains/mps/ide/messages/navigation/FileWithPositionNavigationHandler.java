@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,6 @@
  */
 package jetbrains.mps.ide.messages.navigation;
 
-import com.intellij.openapi.editor.ScrollType;
-import com.intellij.openapi.fileEditor.FileEditor;
-import com.intellij.openapi.fileEditor.FileEditorManager;
-import com.intellij.openapi.fileEditor.TextEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -48,6 +44,7 @@ class FileWithPositionNavigationHandler implements NavigatableFactory {
     if (vf == null) {
       return NonNavigatable.INSTANCE;
     }
-    return new VirtualFileNavigatable(myProject, vf).offset(pos.getOffset());
+    final VirtualFileNavigatable rv = new VirtualFileNavigatable(myProject, vf);
+    return pos.getLine() != -1 ? rv.at(pos.getLine(), pos.getColumn()) : rv.offset(pos.getOffset());
   }
 }

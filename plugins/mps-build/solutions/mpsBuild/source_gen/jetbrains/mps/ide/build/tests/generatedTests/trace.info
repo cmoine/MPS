@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
-  <root nodeRef="r:12897c41-1d23-444a-8c3d-8a254e74f9b6(jetbrains.mps.ide.build.tests.generatedTests)/1029938204559090527">
+  <root nodeRef="r:12897c41-1d23-444a-8c3d-8a254e74f9b6(jetbrains.mps.ide.build.tests.generatedTests)/7480536294516597110">
     <file name="mpsTestModules.xml">
-      <unit id="1029938204559090527" at="1,0,1328,10" name="jetbrains.mps.ide.build.tests.generatedTests.mpsTestModules" />
+      <unit id="7480536294516597110" at="1,0,1073,10" name="jetbrains.mps.ide.build.tests.generatedTests.mpsTestModules" />
     </file>
   </root>
 </debug-info>

@@ -1,0 +1,10 @@
+<ivy-module version="2.0"  xmlns:m="http://www.inversoft.com/schemas/savant-2.0/base">
+  <info organisation="org.jetbrains.mps" module="idea-platform"/>
+  <dependencies>
+    <dependency org="com.googlecode.java-diff-utils" name="diffutils" rev="1.2.1">
+      <artifact name="diffutils" ext="jar"/>
+      <artifact name="diffutils" m:classifier="sources" ext="jar"/>
+      <artifact name="diffutils" m:classifier="javadoc" ext="jar"/>
+    </dependency>
+  </dependencies>
+</ivy-module>

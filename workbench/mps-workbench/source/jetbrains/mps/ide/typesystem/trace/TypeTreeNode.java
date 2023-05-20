@@ -16,7 +16,7 @@
 package jetbrains.mps.ide.typesystem.trace;
 
 import java.awt.Color;
-import jetbrains.mps.smodel.IOperationContext;
+
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.nodeEditor.EditorComponent;
 import jetbrains.mps.ide.icons.IdeIcons;

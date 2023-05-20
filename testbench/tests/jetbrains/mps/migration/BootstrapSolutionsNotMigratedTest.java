@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -67,8 +67,11 @@ public class BootstrapSolutionsNotMigratedTest extends BaseCheckModulesTest {
   @Parameters
   public static List<Object[]> testParameters() throws InvocationTargetException, InterruptedException {
     initEnvironment();
-    return createTestParametersFromModules(getContextProject().getProjectModulesWithGenerators().stream().filter(
-        (module) -> Solution.isBootstrapSolution(module.getModuleReference())).collect(Collectors.toList()));
+    // 'bootstrap' in the name means 'MPS-distributed solution with stub models', rather than 'solution MPS needs to bootstrap itself'
+    // for these solutions, we don't keep cached record of imports/languages versions as we do for other modules.
+    // Don't try to understand the naming reason, it's historical artifact.
+    return createTestParametersFromModules(getContextProject().getProjectModules(Solution.class).stream().filter(
+        (module) -> module.getModuleDescriptor().isReadOnlyStubModule()).collect(Collectors.toList()));
   }
 
 }

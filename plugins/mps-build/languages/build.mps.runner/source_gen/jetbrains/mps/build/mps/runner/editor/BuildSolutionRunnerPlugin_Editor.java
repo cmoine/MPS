@@ -6,27 +6,9 @@ import jetbrains.mps.nodeEditor.DefaultNodeEditor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Collection;
-import jetbrains.mps.openapi.editor.style.Style;
-import jetbrains.mps.editor.runtime.style.StyleImpl;
-import jetbrains.mps.build.editor.buildStyles_StyleSheet;
 
 public class BuildSolutionRunnerPlugin_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createCollection_k2ph2p_a(editorContext, node);
-  }
-  private EditorCell createCollection_k2ph2p_a(EditorContext editorContext, SNode node) {
-    EditorCell_Collection editorCell = EditorCell_Collection.createIndent2(editorContext, node);
-    editorCell.setCellId("Collection_k2ph2p_a");
-    editorCell.setBig(true);
-    editorCell.addEditorCell(this.createComponent_k2ph2p_a0(editorContext, node));
-    return editorCell;
-  }
-  private EditorCell createComponent_k2ph2p_a0(EditorContext editorContext, SNode node) {
-    EditorCell editorCell = editorContext.getCellFactory().createEditorComponentCell(node, "jetbrains.mps.lang.core.editor.alias");
-    Style style = new StyleImpl();
-    buildStyles_StyleSheet.apply_plugin(style, editorCell);
-    editorCell.getStyle().putAll(style);
-    return editorCell;
+    return new BuildSolutionRunnerPlugin_EditorBuilder_a(editorContext, node).createCell();
   }
 }

@@ -4,7 +4,6 @@ package jetbrains.mps.transformation.test.inputLang.generator.outputLang.templat
 
 import jetbrains.mps.generator.runtime.Generated;
 import jetbrains.mps.generator.runtime.TemplateModelBase;
-import jetbrains.mps.generator.runtime.TemplateModel;
 import java.util.Collection;
 import jetbrains.mps.generator.runtime.TemplateMappingConfiguration;
 import jetbrains.mps.generator.runtime.TemplateSwitchMapping;
@@ -12,13 +11,14 @@ import org.jetbrains.mps.openapi.model.SModelReference;
 import jetbrains.mps.generator.runtime.TemplateModule;
 import jetbrains.mps.generator.runtime.TemplateUtil;
 import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
+import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.generator.runtime.TemplateDeclaration;
+import jetbrains.mps.generator.runtime.TemplateDeclarationKey;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 import jetbrains.mps.smodel.SNodePointer;
-import org.jetbrains.mps.openapi.model.SNode;
 
 @Generated
-public class TemplateModelImpl extends TemplateModelBase implements TemplateModel {
+public class TemplateModelImpl extends TemplateModelBase {
   private final Collection<TemplateMappingConfiguration> mappings;
   private final Collection<TemplateSwitchMapping> switches;
   private final SModelReference model;
@@ -40,20 +40,21 @@ public class TemplateModelImpl extends TemplateModelBase implements TemplateMode
   public Collection<TemplateSwitchMapping> getSwitches() {
     return switches;
   }
-  public TemplateDeclaration loadTemplate(SNodeReference template, Object... arguments) {
-    if (!(model.equals(template.getModelReference()))) {
+
+  @Nullable
+  @Override
+  public TemplateDeclaration loadTemplate(TemplateDeclarationKey key) {
+    if (!(model.equals(key.getSourceModel()))) {
       return null;
     }
+    final SNodeReference template = key.getSourceNode();
     if (template.equals(new SNodePointer("r:f37420d7-c952-44cf-aaac-346288c56298(jetbrains.mps.transformation.test.inputLang.generator.outputLang.template.test_TemplateCallArguments@generator)", "6736062018948461339"))) {
-      TemplateUtil.assertTemplateParametersCount(template, 3, arguments.length);
-      return new Template_reduce_InputNode((String) arguments[0], (Integer) arguments[1], (SNode) arguments[2]);
+      return new Template_reduce_InputNode();
     }
     if (template.equals(new SNodePointer("r:f37420d7-c952-44cf-aaac-346288c56298(jetbrains.mps.transformation.test.inputLang.generator.outputLang.template.test_TemplateCallArguments@generator)", "6736062018948578754"))) {
-      TemplateUtil.assertTemplateParametersCount(template, 1, arguments.length);
-      return new Template_produce_OutputNode((String) arguments[0]);
+      return new Template_produce_OutputNode();
     }
     if (template.equals(new SNodePointer("r:f37420d7-c952-44cf-aaac-346288c56298(jetbrains.mps.transformation.test.inputLang.generator.outputLang.template.test_TemplateCallArguments@generator)", "6736062018948453396"))) {
-      TemplateUtil.assertTemplateParametersCount(template, 0, arguments.length);
       return new Template_MyOutputRoot2();
     }
     return null;

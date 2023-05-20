@@ -5,6 +5,7 @@
       <modulePath path="$PROJECT_DIR$/languages/jetbrains.mps.samples.customAspect.docLanguage/jetbrains.mps.samples.customAspect.documentation.mpl" folder="" />
       <modulePath path="$PROJECT_DIR$/languages/jetbrains.mps.samples.customAspect.sampleLanguage/jetbrains.mps.samples.customAspect.sampleLanguage.mpl" folder="sample" />
       <modulePath path="$PROJECT_DIR$/languages/jetbrains.mps.samples.customAspect.sampleLanguage/sandbox/jetbrains.mps.samples.customAspect.sampleLanguage.sandbox.msd" folder="sample" />
+      <modulePath path="$PROJECT_DIR$/solutions/SampleCustomAspect.build/SampleCustomAspect.build.msd" folder="" />
       <modulePath path="$PROJECT_DIR$/solutions/jetbrains.mps.samples.customAspect.documentation.pluginSolution/jetbrains.mps.samples.customAspect.documentation.pluginSolution.msd" folder="" />
       <modulePath path="$PROJECT_DIR$/solutions/jetbrains.mps.samples.customAspect.documentation.runtime/jetbrains.mps.samples.customAspect.documentation.runtime.msd" folder="" />
     </projectModules>

@@ -2,9 +2,9 @@
 <model ref="r:4df57e9b-2a09-44c7-b16d-4af6620e3aaa(jetbrains.mps.lang.access.intentions)">
   <persistence version="9" />
   <languages>
-    <use id="d7a92d38-f7db-40d0-8431-763b0c3c9f20" name="jetbrains.mps.lang.intentions" version="0" />
+    <use id="d7a92d38-f7db-40d0-8431-763b0c3c9f20" name="jetbrains.mps.lang.intentions" version="1" />
     <use id="13744753-c81f-424a-9c1b-cf8943bf4e86" name="jetbrains.mps.lang.sharedConcepts" version="0" />
-    <use id="aee9cad2-acd4-4608-aef2-0004f6a1cdbd" name="jetbrains.mps.lang.actions" version="3" />
+    <use id="aee9cad2-acd4-4608-aef2-0004f6a1cdbd" name="jetbrains.mps.lang.actions" version="4" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -162,7 +162,7 @@
             <node concept="2OqwBi" id="7DH4b15vgjl" role="33vP2m">
               <node concept="1XNTG" id="7DH4b15vgjk" role="2Oq$k0" />
               <node concept="liA8E" id="7DH4b15vgjp" role="2OqNvi">
-                <ref role="37wK5l" to="cj4x:~EditorContext.getSelectedNodes():java.util.List" resolve="getSelectedNodes" />
+                <ref role="37wK5l" to="cj4x:~EditorContext.getSelectedNodes()" resolve="getSelectedNodes" />
               </node>
             </node>
           </node>
@@ -228,7 +228,7 @@
           <node concept="2OqwBi" id="7DH4b15vgkA" role="3clFbG">
             <node concept="1XNTG" id="7DH4b15vgk_" role="2Oq$k0" />
             <node concept="liA8E" id="7DH4b15vgkE" role="2OqNvi">
-              <ref role="37wK5l" to="cj4x:~EditorContext.select(org.jetbrains.mps.openapi.model.SNode):void" resolve="select" />
+              <ref role="37wK5l" to="cj4x:~EditorContext.select(org.jetbrains.mps.openapi.model.SNode)" resolve="select" />
               <node concept="2OqwBi" id="7DH4b15vgkV" role="37wK5m">
                 <node concept="2OqwBi" id="7DH4b15vgkQ" role="2Oq$k0">
                   <node concept="2OqwBi" id="7DH4b15vgkL" role="2Oq$k0">

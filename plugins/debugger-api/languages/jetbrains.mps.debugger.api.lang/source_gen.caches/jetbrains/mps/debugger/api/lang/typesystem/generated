@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="1khyg643onpambk33no32y6hpw7zgd6" />
+<product version="3" modelHash="-4uuj5a0qgaxkals5ahd8y0z9rqy9mto">
+  <files names="DebuggerIsDebugger_ComparisonRule.java:DebuggerTypeIsDebuggerType_SubtypingRule.java:Pattern_wcp5kc_a0a0a0f.java:TypesystemDescriptor.java:check_DebuggerReferenceThrowableIsCaught_NonTypesystemRule.java:typeof_CreateBreakpointOperation_InferenceRule.java:typeof_DebuggerConfiguration_InferenceRule.java:typeof_DebuggerReference_InferenceRule.java" />
+</product>
 

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-7ed9jzyv092in6vgwdja65k40v8wtrn" />
+<product version="3" modelHash="-3x7wogopx85vam0c9ixbdsr97i4wyb7">
+  <files names="Complex.java:Complex2.java:ComplexOperators.java:StringOperators.java:TestComplex.java" />
+</product>
 

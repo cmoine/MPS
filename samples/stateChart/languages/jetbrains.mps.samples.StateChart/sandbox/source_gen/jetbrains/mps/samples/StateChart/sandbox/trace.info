@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <root nodeRef="r:9e213040-ebb9-4760-9472-e2782f8f9b3b(jetbrains.mps.samples.StateChart.sandbox)/1480846759627688991">
+    <file name="Printer.xml">
+      <unit id="1480846759627688991" at="1,0,21,8" name="jetbrains.mps.samples.StateChart.sandbox.Printer" />
+    </file>
+  </root>
+</debug-info>
+

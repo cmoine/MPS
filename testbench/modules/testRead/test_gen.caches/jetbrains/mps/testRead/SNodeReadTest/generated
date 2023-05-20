@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="7ofr1jpi2okp2bkkahpam4shvz6i2lo" />
+<product version="3" modelHash="42zfea9djo7a04snf2nihtbtoxyz9bj">
+  <files names="SNodeReadAccess_Test.java:StatCountNodeReadAccessInEditorListener.java" />
+</product>
 

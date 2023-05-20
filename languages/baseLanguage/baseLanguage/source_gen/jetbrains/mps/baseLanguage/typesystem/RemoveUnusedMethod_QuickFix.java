@@ -15,6 +15,6 @@ public class RemoveUnusedMethod_QuickFix extends QuickFix_Runtime {
     return "Remove method";
   }
   public void execute(SNode node) {
-    SNodeOperations.detachNode(node);
+    SNodeOperations.deleteNode(node);
   }
 }

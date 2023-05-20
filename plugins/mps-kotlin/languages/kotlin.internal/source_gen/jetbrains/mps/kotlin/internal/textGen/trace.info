@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <root>
+    <file name="TextGenAspectDescriptor.java">
+      <unit at="12,0,29,0" name="jetbrains.mps.kotlin.internal.textGen.TextGenAspectDescriptor" />
+    </file>
+  </root>
+  <root nodeRef="r:07cb333d-0d6b-4a42-a118-e68ac12e1fb4(jetbrains.mps.kotlin.internal.textGen)/6573432175633994526">
+    <file name="TextGenAspectDescriptor.java">
+      <node id="6573432175633994526" at="22,47,23,43" concept="3" />
+      <scope id="6573432175633994526" at="22,47,23,43" />
+    </file>
+    <file name="TextReference_TextGen.java">
+      <node id="6573432175633994526" at="16,54,17,55" concept="2" />
+      <node id="6573432175633997026" at="17,55,18,86" concept="0" />
+      <node id="6573432175634106583" at="18,86,19,111" concept="0" />
+      <node id="6573432175633994526" at="23,0,24,0" concept="4" trace="name$MnvL" />
+      <node id="6573432175633994526" at="27,0,28,0" concept="4" trace="imports$Jy06" />
+      <node id="6573432175633994526" at="15,0,21,0" concept="1" trace="generateText#(Ljetbrains/mps/text/rt/TextGenContext;)V" />
+      <scope id="6573432175633994526" at="16,54,19,111">
+        <var name="tgs" id="6573432175633994526" />
+      </scope>
+      <scope id="6573432175633994526" at="15,0,21,0">
+        <var name="ctx" id="6573432175633994526" />
+      </scope>
+      <unit id="6573432175633994526" at="22,0,25,0" name="jetbrains.mps.kotlin.internal.textGen.TextReference_TextGen$PROPS" />
+      <unit id="6573432175633994526" at="26,0,29,0" name="jetbrains.mps.kotlin.internal.textGen.TextReference_TextGen$LINKS" />
+      <unit id="6573432175633994526" at="14,0,30,0" name="jetbrains.mps.kotlin.internal.textGen.TextReference_TextGen" />
+    </file>
+  </root>
+  <root nodeRef="r:07cb333d-0d6b-4a42-a118-e68ac12e1fb4(jetbrains.mps.kotlin.internal.textGen)/6573432175634095529">
+    <file name="InternalKotlinTextGen.java">
+      <node id="6573432175634096939" at="16,81,17,55" concept="2" />
+      <node id="6573432175634102212" at="19,35,20,98" concept="0" />
+      <node id="6573432175634095529" at="26,0,27,0" concept="4" trace="description$xZhf" />
+      <node id="6573432175634101737" at="19,0,22,0" concept="1" trace="visit#(Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <node id="6573432175634100593" at="17,55,22,7" concept="0" />
+      <node id="6573432175634096939" at="16,0,24,0" concept="5" trace="imports#(Ljava/lang/Iterable;Ljetbrains/mps/text/rt/TextGenContext;)V" />
+      <scope id="6573432175634101738" at="19,35,20,98" />
+      <scope id="6573432175634101737" at="19,0,22,0">
+        <var name="it" id="6573432175634101737" />
+      </scope>
+      <scope id="6573432175634096939" at="16,81,22,7">
+        <var name="tgs" id="6573432175634096939" />
+      </scope>
+      <scope id="6573432175634096939" at="16,0,24,0">
+        <var name="ctx" id="6573432175634096939" />
+        <var name="headers" id="6573432175634097296" />
+      </scope>
+      <unit id="6573432175634095529" at="25,0,28,0" name="jetbrains.mps.kotlin.internal.textGen.InternalKotlinTextGen$PROPS" />
+      <unit id="6573432175634101737" at="18,48,22,5" name="jetbrains.mps.kotlin.internal.textGen.InternalKotlinTextGen$1" />
+      <unit id="6573432175634095529" at="15,0,29,0" name="jetbrains.mps.kotlin.internal.textGen.InternalKotlinTextGen" />
+    </file>
+  </root>
+</debug-info>
+

@@ -22,14 +22,14 @@ import java.util.Collections;
 import java.util.Set;
 
 public class BaseHelginsDescriptor implements IHelginsDescriptor {
-  protected Set<InferenceRule_Runtime> myInferenceRules = new THashSet<InferenceRule_Runtime>();
-  protected Set<NonTypesystemRule_Runtime> myNonTypesystemRules = new THashSet<NonTypesystemRule_Runtime>();
-  protected Set<SubtypingRule_Runtime> mySubtypingRules = new THashSet<SubtypingRule_Runtime>();
-  protected Set<SubstituteType_Runtime> mySubstituteTypeRules = new THashSet<SubstituteType_Runtime>();
-  protected Set<ComparisonRule_Runtime> myComparisonRules = new THashSet<ComparisonRule_Runtime>();
-  protected Set<InequationReplacementRule_Runtime> myInequationReplacementRules = new THashSet<InequationReplacementRule_Runtime>();
-  protected Set<IVariableConverter_Runtime> myVariableConverters = new THashSet<IVariableConverter_Runtime>();
-  protected Set<IOverloadedOpsTypesProvider> myOverloadedOperationsTypesProviders = new THashSet<IOverloadedOpsTypesProvider>();
+  protected Set<InferenceRule_Runtime> myInferenceRules = new THashSet<>();
+  protected Set<NonTypesystemRule_Runtime> myNonTypesystemRules = new THashSet<>();
+  protected Set<SubtypingRule_Runtime> mySubtypingRules = new THashSet<>();
+  protected Set<SubstituteType_Runtime> mySubstituteTypeRules = new THashSet<>();
+  protected Set<ComparisonRule_Runtime> myComparisonRules = new THashSet<>();
+  protected Set<InequationReplacementRule_Runtime> myInequationReplacementRules = new THashSet<>();
+  protected Set<IVariableConverter_Runtime> myVariableConverters = new THashSet<>();
+  protected Set<IOverloadedOpsTypesProvider> myOverloadedOperationsTypesProviders = new THashSet<>();
 
   @Override
   public Set<InferenceRule_Runtime> getInferenceRules() {

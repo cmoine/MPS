@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-8r0rosmppykkcx5ztg1lqofv6kkzbbk" />
+<product version="3" modelHash="69ita0ut73trkt35db3w5tapcpip26t">
+  <files names="AsBuilderStatement_DataFlow.java:BeanPropertyBuilder_DataFlow.java:BuilderCreator_DataFlow.java:BuilderStatement_DataFlow.java:DataFlowAspectDescriptorImpl.java:SimpleBuilderPropertyBuilder_DataFlow.java" />
+</product>
 

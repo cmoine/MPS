@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="migration-platform">
+    <output-path>$PROJECT_DIR$/plugins/mps-migration/migration-platform/lib</output-path>
+    <root id="archive" name="migration-platform.jar">
+      <element id="module-output" name="migration-platform" />
+    </root>
+  </artifact>
+</component>

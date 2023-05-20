@@ -5,13 +5,11 @@
   <name>name</name>
   <description>description</description>
   <version>version</version>
-  <vendor url="url" logo="mock">vendor</vendor>
-  <idea-version since-build="143.1" />
+  <vendor url="url">vendor</vendor>
+  <idea-version since-build="222.1" />
   
-  <application-components>
-    <component>
-      <implementation-class>jetbrains.mps.debugger.java.runtime.ui.actions.Runtime_PluginInitializer</implementation-class>
-    </component>
-  </application-components>
   
+  <extensions defaultExtensionNs="com.intellij">
+    <mps.PluginComponentContributor application="jetbrains.mps.debugger.java.runtime.ui.actions.Runtime_ApplicationPlugin" />
+  </extensions>
 </idea-plugin>

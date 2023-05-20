@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-2ybxb3sepc6v568lv61jxu85bqtzpy6" />
+<product version="3" modelHash="-90nk1s9tat5fxcqyvcoxw9hof2rq6yj">
+  <files names="CompleteColumnInDecisionTable_Test.java:CompleteRowInDecisionTable_Test.java:Complete_Statement_CellInDecisionTable_Test.java:Complete_WrapLVD_CellInDecisionTable_Test.java:TableColumnsDefaultWrapping_Test.java:TypeCellInDecisionTable_Test.java:TypeColumnInDecisionTable_Test.java:TypeRowInDecisionTable_Test.java" />
+</product>
 

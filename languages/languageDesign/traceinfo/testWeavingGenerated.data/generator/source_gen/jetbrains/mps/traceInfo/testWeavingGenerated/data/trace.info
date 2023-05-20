@@ -2,7 +2,7 @@
 <debug-info version="2">
   <root>
     <file name="Generator.java">
-      <unit at="18,0,60,0" name="jetbrains.mps.traceInfo.testWeavingGenerated.data.Generator" />
+      <unit at="18,0,53,0" name="jetbrains.mps.traceInfo.testWeavingGenerated.data.Generator" />
     </file>
   </root>
 </debug-info>

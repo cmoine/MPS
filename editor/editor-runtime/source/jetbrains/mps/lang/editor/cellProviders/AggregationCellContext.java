@@ -16,19 +16,19 @@
 package jetbrains.mps.lang.editor.cellProviders;
 
 import jetbrains.mps.nodeEditor.cellMenu.BasicCellContext;
+import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.model.SNode;
 
-/**
- * Igor Alshannikov
- * Date: Nov 29, 2006
- */
 public class AggregationCellContext extends BasicCellContext {
-  public static final Object LINK_DECLARATION = new Object();
-  public static final Object CURRENT_CHILD_NODE = new Object();
+  public static final EditorContextKey<SContainmentLink> LINK = new EditorContextKey<>();
+  public static final EditorContextKey<SAbstractConcept> CHILD_CONCEPT = new EditorContextKey<>();
+  public static final EditorContextKey<SNode> CURRENT_CHILD_NODE = new EditorContextKey<>();
 
-  public AggregationCellContext(SNode parentNode, SNode currentChild, SNode linkDeclaration) {
+  public AggregationCellContext(SNode parentNode, SNode currentChild, SContainmentLink link, SAbstractConcept childConcept) {
     super(parentNode);
-    put(LINK_DECLARATION, linkDeclaration);
+    put(LINK, link);
+    put(CHILD_CONCEPT, childConcept);
     put(CURRENT_CHILD_NODE, currentChild);
   }
 }

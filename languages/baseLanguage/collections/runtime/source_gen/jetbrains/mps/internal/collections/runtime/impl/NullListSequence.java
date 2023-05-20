@@ -35,11 +35,11 @@ public class NullListSequence<T> extends NullCollectionSequence<T> implements IL
   }
   @Override
   public ListIterator<T> listIterator() {
-    return new NullListSequence.EmptyListIterator<T>();
+    return new EmptyListIterator<T>();
   }
   @Override
   public ListIterator<T> listIterator(int index) {
-    return new NullListSequence.EmptyListIterator<T>();
+    return new EmptyListIterator<T>();
   }
   @Override
   public T remove(int index) {

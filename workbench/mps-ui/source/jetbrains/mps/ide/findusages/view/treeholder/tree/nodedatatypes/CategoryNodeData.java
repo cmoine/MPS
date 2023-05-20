@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,12 +17,10 @@ package jetbrains.mps.ide.findusages.view.treeholder.tree.nodedatatypes;
 
 import jetbrains.mps.ide.findusages.CantLoadSomethingException;
 import jetbrains.mps.ide.findusages.CantSaveSomethingException;
-import jetbrains.mps.ide.findusages.view.treeholder.tree.TextOptions;
-import jetbrains.mps.ide.findusages.view.treeholder.treeview.INodeRepresentator;
+import jetbrains.mps.ide.findusages.model.CategoryKind;
 import jetbrains.mps.ide.findusages.view.treeholder.treeview.path.PathItemRole;
 import jetbrains.mps.ide.icons.IdeIcons;
 import jetbrains.mps.project.Project;
-import jetbrains.mps.util.NameUtil;
 import org.jdom.Element;
 
 import javax.swing.Icon;
@@ -32,37 +30,30 @@ public class CategoryNodeData extends BaseNodeData {
   private static final String CATEGORY_KIND = "category_kind";
 
   private String myCategoryKindName = "";
+  private final Icon myIcon;
   private String myCategory = "";
-  private INodeRepresentator myNodeRepresentator;
 
-  public CategoryNodeData(PathItemRole role, String categoryKindName, String category, boolean resultsSection,
-      INodeRepresentator nodeRepresentator) {
-    super(role, "<b>" + category + "</b>", "", true, false, resultsSection);
-    myCategoryKindName = categoryKindName;
+  // in fact, resultsSection is useless (===true) as UsagesTree doesn't show categories in 'search elements' section at all
+  public CategoryNodeData(PathItemRole role, CategoryKind categoryKind, String category, boolean resultsSection) {
+    super(role, category, null, false, resultsSection);
+    myIcon = categoryKind.getIcon();
     myCategory = category;
-    myNodeRepresentator = nodeRepresentator;
+    myCategoryKindName = categoryKind.getName();
   }
 
   public CategoryNodeData(Element element, Project project) throws CantLoadSomethingException {
     read(element, project);
+    myIcon = null;
   }
 
   @Override
-  public Icon getIcon() {
-    if (myNodeRepresentator == null) {
-      return IdeIcons.CLOSED_FOLDER;
-    } else {
-      return myNodeRepresentator.getCategoryIcon(myCategory);
-    }
+  public Icon getIcon(PresentationContext presentationContext) {
+    return myIcon != null ? myIcon : IdeIcons.CLOSED_FOLDER;
   }
 
   @Override
   public Object getIdObject() {
     return myCategory + "!!!" + myCategoryKindName;
-  }
-
-  public String getCategoryKindName() {
-    return myCategoryKindName;
   }
 
   @Override
@@ -79,18 +70,5 @@ public class CategoryNodeData extends BaseNodeData {
     super.read(element, project);
     myCategory = element.getAttributeValue(CATEGORY);
     myCategoryKindName = element.getAttributeValue(CATEGORY_KIND);
-  }
-
-  @Override
-  public String getText(TextOptions options) {
-    if (myNodeRepresentator == null) {
-      String counter = "";
-      if (options.myCounters && isResultsSection()) {
-        counter = (" <b>(" + NameUtil.formatNumericalString(options.mySubresultsCount, "usage") + ")</b>");
-      }
-      return super.getText(options) + counter;
-    } else {
-      return myNodeRepresentator.getCategoryText(options, myCategory, isResultsSection());
-    }
   }
 }

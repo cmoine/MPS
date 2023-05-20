@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="mps.jetbrains.mps.dataFlow.runtime_auto" type="mps.solution.library">
+    <CLASSES>
+      <root url="jar://$APPLICATION_PLUGINS_DIR$/mps-core/lib/mps-core.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <MPS_MODULE_XML>
+      <root url="jar://$APPLICATION_PLUGINS_DIR$/mps-core/languages/runtimes/jetbrains.mps.dataFlow.runtime.jar!/META-INF/module.xml" />
+    </MPS_MODULE_XML>
+    <SOURCES />
+  </library>
+</component>

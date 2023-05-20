@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,284 +15,69 @@
  */
 package jetbrains.mps.reloading;
 
-import jetbrains.mps.util.ClassPathReader;
 import jetbrains.mps.util.ClassType;
-import jetbrains.mps.util.Pair;
 import jetbrains.mps.util.PathManager;
-import jetbrains.mps.util.SystemInfo;
-import jetbrains.mps.util.URLUtil;
-import jetbrains.mps.vfs.impl.IoFile;
-import jetbrains.mps.vfs.path.UniPath;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-import org.jetbrains.annotations.NotNull;
-import sun.misc.Launcher;
+import jetbrains.mps.vfs.IFileSystem;
+import jetbrains.mps.vfs.QualifiedPath;
+import jetbrains.mps.vfs.VFSManager;
+import jetbrains.mps.vfs.util.PathUtil;
+import org.jetbrains.mps.annotations.Internal;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.Collection;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
+//todo [MM] rename this class, possibly make it a component
 public final class CommonPaths {
-  private static final Logger LOG = LogManager.getLogger(CommonPaths.class);
-
-  private static final String REQUESTER_STRING = "Common paths";
-  private static final ClassPathCachingFacility ourClassPathCachingFacility = ClassPathCachingFacility.getInstance();
-
-
   //--------paths-----------
 
-  public static List<String> getMPSPaths(ClassType type) {
+  public static List<QualifiedPath> getPaths(ClassType type) {
+    Predicate<QualifiedPath> toolsPredicate = s -> s.getPath().contains("jdk.jdi") || s.getPath().contains("tools.jar");
     if (type == ClassType.JDK) {
-      return getJDKPath();
+      return getJDKPathInternal().stream().filter(toolsPredicate.negate()).collect(Collectors.toList());
     } else if (type == ClassType.JDK_TOOLS) {
-      return getJDK_ToolsPath();
+      return getJDKPathInternal().stream().filter(toolsPredicate).collect(Collectors.toList());
     }
+    String s = "CommonPaths no longer serves as a list of hard-coded libraries, ClassType '%s' is not supported";
+    throw new IllegalArgumentException(String.format(s, type.getTypeString()));
+    // it's only jdk/jdk-tools we can not manage in JDK.msd; for those PredefinedRootClassTypeConfig shall help
 
-    final CompositeClassPathItem result = new CompositeClassPathItem();
-    for (String path : new ClassPathReader(PathManager.getHomePath(), Collections.singletonList(type)).read()) {
-      addIfExists(result, path);
-    }
-    if (type == ClassType.ANNOTATIONS) {
-      addAnnotations(result);
-    } else if (type == ClassType.OPENAPI) {
-      addOpenAPIJars(result);
-    } else if (type == ClassType.CORE) {
-      addCoreJars(result);
-    } else if (type == ClassType.EDITOR) {
-      addEditorJars(result);
-    } else if (type == ClassType.IDEA_PLATFORM) {
-      addRepackedIdeaJars(result);
-    } else if (type == ClassType.IDEA) {
-      addIdeaJars(result);
-    } else if (type == ClassType.PLATFORM) {
-      addPlatformJars(result);
-    } else if (type == ClassType.WORKBENCH) {
-      addWorkbenchJars(result);
-    } else if (type == ClassType.TEST) {
-      addTestJars(result);
-    }
-    return itemToPath(result);
-  }
-
-  public static List<String> getJDKPath() {
-    return itemToPath(getJDKClassPath());
-  }
-
-  private static List<String> getJDK_ToolsPath() {
-    String jarLocation = getJarFileLocation("com.sun.jdi.Field");
-    if (jarLocation != null) {
-      File file = new File(jarLocation);
-      if (file.exists()) {
-        return Collections.singletonList(file.getAbsolutePath());
-      }
-    }
-    return Collections.emptyList();
-  }
-
-  private static String getJarFileLocation(@NotNull String classFQName) {
-    try {
-      Class cls = Class.forName(classFQName);
-      String classFileResourceLocation = "/" + classFQName.replaceAll("\\.", "/") + ".class";
-      String classFileResourceURL = cls.getResource(classFileResourceLocation).toString();
-      Pair<String, String> urls = URLUtil.splitJarUrl(classFileResourceURL);
-      if (urls == null) {
-        return null;
-      }
-      return URLDecoder.decode(urls.o1, Charset.defaultCharset().name()).replace('/', File.separatorChar);
-    } catch (ClassNotFoundException | UnsupportedEncodingException e) {
-      LOG.warn("", e);
-      return null;
-    }
-  }
-
-  public static String getBaseMPSPath() {
-    String classesPath = PathManager.getHomePath() + File.separator + "classes";
-    if (new File(classesPath).exists()) {
-      return classesPath;
-    }
-    String mpsJarPath = PathManager.getHomePath() + File.separator + "lib" + File.separatorChar + "mps-boot.jar";
-    if (new File(mpsJarPath).exists()) {
-      return mpsJarPath;
-    }
-    return null;
-  }
-
-  //------classpaths : JDK--------
-
-  private static List<String> getJDKJars() {
-    List<String> result = new ArrayList<String>();
-
-    if (SystemInfo.isMac && !SystemInfo.isJavaVersionAtLeast("1.7")) {
-      // in apple jdk's (< jdk7) rt.jar classes contains in classes.jar
-      result.add("classes.jar");
-    } else {
-      result.add("rt.jar");
-    }
-
-    result.add("jsse.jar");
-    result.add("jce.jar");
-    result.add("charsets.jar");
-    return result;
+//    for (String path : new ClassPathReader(PathManager.getHomePath(), Collections.singletonList(type)).read()) {
+//      // inactive code, it's unlikely we need to specify jdk/idea jars through idea.additional.classpath.txt;
+//      // left as a reminder to deal with CPR some day (leave just to augment classpath for Launcher, perhaps)?
+//      addIfExists(result, path);
+//    }
   }
 
   /**
-   * @deprecated Since MPS 3.3 used only inside this class, so should become private.
+   * Don't use outside of MPS
    */
-  @Deprecated
-  public static IClassPathItem getJDKClassPath() {
-    CompositeClassPathItem composite = new CompositeClassPathItem();
-    for (String s : getJDKJars()) {
-      addJarForName(composite, s);
-    }
-    return composite;
+  @Internal
+  public static List<String> getJDKToolsPath() {
+    // FIXME is there true need for the method?
+    return getPaths(ClassType.JDK_TOOLS).stream().map(QualifiedPath::getPath).collect(Collectors.toList());
   }
 
-  private static void addJarForName(CompositeClassPathItem composite, String name) {
-    RealClassPathItem rtJar = findBootstrapJarByName(name);
-    if (rtJar != null) {
-      composite.add(rtJar);
-    } else {
-      LOG.error("Can't find " + name + ". Make sure you are using JDK 5.0");
-    }
+  @Deprecated(since = "2021.3", forRemoval = true)
+  public static List<String> getJDKPath() {
+    // XXX there's only 1 use of the method, does it justify its existence?
+    return getJDKPathInternal().stream()
+                               .map(QualifiedPath::getPath)
+                               .collect(Collectors.toList());
   }
 
-  private static RealClassPathItem findBootstrapJarByName(String name) {
-    for (URL url : Launcher.getBootstrapClassPath().getURLs()) {
-      try {
-        File file = new File(url.toURI());
-        if (!file.exists()) continue;
-
-        if (file.getName().equals(name)) {
-          String canonicalPath = file.getCanonicalPath();
-          return ourClassPathCachingFacility.createFromPath(canonicalPath, REQUESTER_STRING);
-        }
-      } catch (URISyntaxException | IOException e) {
-        LOG.error(null, e);
-      }
-    }
-    return null;
+  private static List<QualifiedPath> getJDKPathInternal() {
+    return SDKDiscovery.discover();
   }
 
-  //------classpaths : MPS--------
-
-  public static IClassPathItem getMPSClassPath() {
-    CompositeClassPathItem result = new CompositeClassPathItem();
-    addCoreJars(result);
-    addEditorJars(result);
-    addPlatformJars(result);
-    addIdeaJars(result);
-    addWorkbenchJars(result);
-    addClasses(result);
-    return result;
-  }
-
-  private static void addAnnotations(CompositeClassPathItem result) {
-    addIfExists(result, "lib/annotations.jar");
-  }
-
-  private static void addOpenAPIJars(CompositeClassPathItem result) {
-    addIfExists(result, "lib/mps-openapi.jar");
-  }
-
-  private static void addCoreJars(CompositeClassPathItem result) {
-    addIfExists(result, "lib/mps-annotations.jar");
-    addIfExists(result, "lib/mps-logging.jar");
-    addIfExists(result, "lib/mps-messaging.jar");
-    addIfExists(result, "lib/mps-core.jar");
-    addIfExists(result, "lib/mps-boot-util.jar");
-    addIfExists(result, "lib/mps-closures.jar");
-    addIfExists(result, "lib/mps-collections.jar");
-    addIfExists(result, "lib/mps-tuples.jar");
-    addIfExists(result, "lib/log4j.jar");
-    addIfExists(result, "lib/trove4j.jar");
-    addIfExists(result, "lib/jdom.jar");
-    addIfExists(result, "lib/ecj-4.5.2.jar");
-    addIfExists(result, "lib/guava-17.0.jar");
-    addIfExists(result, "lib/xstream-1.4.8.jar");
-    addIfExists(result, "lib/diffutils-1.2.1.jar");
-    addIfExists(result, "lib/asm4-all.jar");
-    addIfExists(result, "lib/asm-all.jar");
-  }
-
-  private static void addEditorJars(CompositeClassPathItem result) {
-    addIfExists(result, "lib/mps-editor.jar");
-    addIfExists(result, "lib/mps-editor-api.jar");
-    addIfExists(result, "lib/mps-editor-runtime.jar");
-  }
-
-  private static void addRepackedIdeaJars(CompositeClassPathItem result) {
-    addIfExists(result, "lib/platform-api.jar");
-    addIfExists(result, "lib/platform.jar");
-  }
-
-  private static void addIdeaJars(CompositeClassPathItem result) {
-    addRepackedIdeaJars(result);
-    addIfExists(result, "lib/sanselan-0.98-snapshot.jar");
-    addIfExists(result, "lib/util.jar");
-    addIfExists(result, "lib/extensions.jar");
-    addIfExists(result, "lib/picocontainer.jar");
-    addIfExists(result, "lib/forms_rt.jar");
-  }
-
-  private static void addPlatformJars(CompositeClassPathItem result) {
-    addIfExists(result, "lib/mps-platform.jar");
-    addIfExists(result, "lib/mps-icons.jar");
-  }
-
-  private static void addWorkbenchJars(CompositeClassPathItem result) {
-    addIfExists(result, "lib/mps-workbench.jar");
-    addIfExists(result, "lib/junit-4.12.jar");
-  }
-
-  private static void addTestJars(CompositeClassPathItem result) {
-    addIfExists(result, "lib/mps-test.jar");
-    addIfExists(result, "lib/mps-environment.jar");
-    addIfExists(result, "lib/junit-4.12.jar");
-  }
-
-  private static void addClasses(final CompositeClassPathItem result) {
-    String homePath = PathManager.getHomePath();
-    ClassPathReader classPathReader = new ClassPathReader(PathManager.getHomePath(), Arrays.asList(ClassType.values()));
-    classPathReader.read().stream().forEach(param -> {
-      File dir = new File(homePath, param);
-      if (dir.exists()) {
-        result.add(ourClassPathCachingFacility.createFromPath(dir.getAbsolutePath(), REQUESTER_STRING));
-      }
-    });
-  }
-
-  private static void addIfExists(CompositeClassPathItem item, String path) {
-    String dependentPath = UniPath.fromString(path).toSystemPath().toString(); // fixme waiting for Path#resolve method to resolve children in fs
+  private static void addIfExists(Collection<QualifiedPath> item, String path) {
     for (String basePath : PathManager.getHomePaths()) {
-      UniPath fullPath = UniPath.fromString(basePath + File.separator + dependentPath).toSystemPath();
-      if (new IoFile(fullPath).exists()) {
-        item.add(ourClassPathCachingFacility.createFromPath(fullPath.toString(), REQUESTER_STRING));
+      String fullPath = PathUtil.toSystemIndependent(basePath) + IFileSystem.SEPARATOR + path;
+      if (new File(fullPath).exists()) {
+        item.add(new QualifiedPath(path.endsWith(".jar") ? VFSManager.JAR_FS : VFSManager.FILE_FS, fullPath));
       }
     }
-  }
-
-  //--------utils-----------
-
-  private static List<String> itemToPath(IClassPathItem cp) {
-    List<String> result = new ArrayList<String>();
-    for (IClassPathItem item : cp.flatten()) {
-      if (item instanceof FileClassPathItem) {
-        result.add(((FileClassPathItem) item).getPath());
-      } else if (item instanceof JarFileClassPathItem) {
-        result.add(((JarFileClassPathItem) item).getFile().getAbsolutePath());
-      } else {
-        throw new IllegalArgumentException(item.getClass().getName());
-      }
-    }
-
-    return result;
   }
 }

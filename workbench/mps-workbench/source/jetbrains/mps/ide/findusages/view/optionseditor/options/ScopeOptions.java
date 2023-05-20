@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,17 +20,15 @@ import jetbrains.mps.ide.findusages.model.scopes.GlobalScope;
 import jetbrains.mps.ide.findusages.model.scopes.ModelsScope;
 import jetbrains.mps.ide.findusages.model.scopes.ModulesScope;
 import jetbrains.mps.ide.findusages.model.scopes.ProjectScope;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.project.Project;
 import jetbrains.mps.smodel.ModuleRepositoryFacade;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.mps.openapi.module.SModule;
+import org.jetbrains.mps.openapi.model.SModelName;
 
 // FIXME myModel and myModule are DEFAULT_VALUE - why do we serialize this
 public class ScopeOptions extends BaseOptions {
-  private static final Logger LOG = LogManager.getLogger(ScopeOptions.class);
   private static final String SCOPE_TYPE = "scope_type";
   private static final String MODEL = "model";
   private static final String MODULE = "module";
@@ -85,19 +83,22 @@ public class ScopeOptions extends BaseOptions {
     myModule = module;
   }
 
-  public FindUsagesScope getScope(Project project) {
+  // XXX expects model read despite no SModel/SNode comes in here, only Project
+  public FindUsagesScope getScope(final Project project) {
+    // XXX as long as we serialize model and module name instead of a respective reference, treat all models/modules with the same name
+    //     as scope (despite the fact user may have picked a specific one. OTOH, he may have entered name and its intention is not obvious).
     switch (myScopeType) {
       case GLOBAL:
-        return new GlobalScope();
+        return new GlobalScope(project);
       case PROJECT:
         return new ProjectScope(project);
       case MODULE:
-        return new ModulesScope(new ModuleRepositoryFacade(project).getModule(myModule, SModule.class));
+        return new ModulesScope(new ModuleRepositoryFacade(project).getModulesByName(myModule));
       case MODEL:
-        return new ModelsScope(new ModuleRepositoryFacade(project).getModelByName(myModel));
+        return new ModelsScope(new ModuleRepositoryFacade(project).getModelsByName(new SModelName(myModel)));
       default:
-        LOG.error("Illegal scope type: " + myScopeType);
-        return new GlobalScope();
+        Logger.getLogger(ScopeOptions.class).error("Illegal scope type: " + myScopeType);
+        return new GlobalScope(project);
     }
   }
 
@@ -119,6 +120,6 @@ public class ScopeOptions extends BaseOptions {
   }
 
   public enum ScopeType {
-    GLOBAL, PROJECT, MODULE, MODEL;
+    GLOBAL, PROJECT, MODULE, MODEL
   }
 }

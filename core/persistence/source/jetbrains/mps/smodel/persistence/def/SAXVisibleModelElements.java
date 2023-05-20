@@ -26,7 +26,7 @@ import java.util.Map;
  */
 public class SAXVisibleModelElements implements VisibleModelElements {
 
-  private Map<Integer, SModelReference> myVisibleModelElements = new HashMap<Integer, SModelReference>();
+  private Map<Integer, SModelReference> myVisibleModelElements = new HashMap<>();
 
   @Override
   public SModelReference getModelUID(int index) {

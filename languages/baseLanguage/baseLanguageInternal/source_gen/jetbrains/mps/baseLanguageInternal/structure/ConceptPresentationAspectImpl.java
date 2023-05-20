@@ -4,96 +4,244 @@ package jetbrains.mps.baseLanguageInternal.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_ConstantValue = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ExtractStatementListExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ExtractStatementListInnerExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ExtractStaticInnerClassConcept = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ExtractStaticInnerClassCreator = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ExtractStaticInnerClassExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ExtractStaticMethodExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ExtractStaticMethod_CallExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ExtractToConstantExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ExtractToConstantRefExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InternalAnonymousClass = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InternalAnonymousClassCreator = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InternalClassCreator = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InternalClassExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InternalClassifierType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InternalNewExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InternalPartialFieldReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InternalPartialInstanceMethodCall = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InternalStaticFieldReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InternalStaticMethodCall = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InternalSuperMethodCallOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InternalThisExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InternalTypedStaticFieldReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InternalVariableReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TypeHintExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_WeakClassReference = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_ConstantValue;
+  private ConceptPresentation props_ExtractStatementListExpression;
+  private ConceptPresentation props_ExtractStatementListInnerExpression;
+  private ConceptPresentation props_ExtractStaticInnerClassConcept;
+  private ConceptPresentation props_ExtractStaticInnerClassCreator;
+  private ConceptPresentation props_ExtractStaticInnerClassExpression;
+  private ConceptPresentation props_ExtractStaticMethodExpression;
+  private ConceptPresentation props_ExtractStaticMethod_CallExpression;
+  private ConceptPresentation props_ExtractToConstantExpression;
+  private ConceptPresentation props_ExtractToConstantRefExpression;
+  private ConceptPresentation props_ExtractToSingleConstantExpression;
+  private ConceptPresentation props_InternalAnonymousClass;
+  private ConceptPresentation props_InternalAnonymousClassCreator;
+  private ConceptPresentation props_InternalClassCreator;
+  private ConceptPresentation props_InternalClassExpression;
+  private ConceptPresentation props_InternalClassifierType;
+  private ConceptPresentation props_InternalLambdaExpression;
+  private ConceptPresentation props_InternalNewExpression;
+  private ConceptPresentation props_InternalPartialFieldReference;
+  private ConceptPresentation props_InternalPartialInstanceMethodCall;
+  private ConceptPresentation props_InternalStaticFieldReference;
+  private ConceptPresentation props_InternalStaticMethodCall;
+  private ConceptPresentation props_InternalSuperMethodCallOperation;
+  private ConceptPresentation props_InternalThisExpression;
+  private ConceptPresentation props_InternalTypedStaticFieldReference;
+  private ConceptPresentation props_InternalVariableReference;
+  private ConceptPresentation props_WeakClassReference;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.ConstantValue:
+        if (props_ConstantValue == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("constant value");
+          props_ConstantValue = cpb.create();
+        }
         return props_ConstantValue;
-      case 1:
+      case LanguageConceptSwitch.ExtractStatementListExpression:
+        if (props_ExtractStatementListExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("extract statements");
+          props_ExtractStatementListExpression = cpb.create();
+        }
         return props_ExtractStatementListExpression;
-      case 2:
+      case LanguageConceptSwitch.ExtractStatementListInnerExpression:
+        if (props_ExtractStatementListInnerExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ExtractStatementListInnerExpression");
+          props_ExtractStatementListInnerExpression = cpb.create();
+        }
         return props_ExtractStatementListInnerExpression;
-      case 3:
+      case LanguageConceptSwitch.ExtractStaticInnerClassConcept:
+        if (props_ExtractStaticInnerClassConcept == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_ExtractStaticInnerClassConcept = cpb.create();
+        }
         return props_ExtractStaticInnerClassConcept;
-      case 4:
+      case LanguageConceptSwitch.ExtractStaticInnerClassCreator:
+        if (props_ExtractStaticInnerClassCreator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x11857355952L, 0xf8c78301adL, "baseMethodDeclaration", "", "");
+          props_ExtractStaticInnerClassCreator = cpb.create();
+        }
         return props_ExtractStaticInnerClassCreator;
-      case 5:
+      case LanguageConceptSwitch.ExtractStaticInnerClassExpression:
+        if (props_ExtractStaticInnerClassExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("extract static inner class");
+          props_ExtractStaticInnerClassExpression = cpb.create();
+        }
         return props_ExtractStaticInnerClassExpression;
-      case 6:
+      case LanguageConceptSwitch.ExtractStaticMethodExpression:
+        if (props_ExtractStaticMethodExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("extract static method");
+          props_ExtractStaticMethodExpression = cpb.create();
+        }
         return props_ExtractStaticMethodExpression;
-      case 7:
+      case LanguageConceptSwitch.ExtractStaticMethod_CallExpression:
+        if (props_ExtractStaticMethod_CallExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("extract static method invocation");
+          cpb.presentationByReference(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x11857355952L, 0xf8c78301adL, "baseMethodDeclaration", "", "");
+          props_ExtractStaticMethod_CallExpression = cpb.create();
+        }
         return props_ExtractStaticMethod_CallExpression;
-      case 8:
+      case LanguageConceptSwitch.ExtractToConstantExpression:
+        if (props_ExtractToConstantExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("extract to constant");
+          props_ExtractToConstantExpression = cpb.create();
+        }
         return props_ExtractToConstantExpression;
-      case 9:
+      case LanguageConceptSwitch.ExtractToConstantRefExpression:
+        if (props_ExtractToConstantRefExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xdf345b11b8c74213L, 0xac6648d2a9b75d88L, 0x162724dabcdc671L, 0x162724dabcdc672L, "original", "", "");
+          props_ExtractToConstantRefExpression = cpb.create();
+        }
         return props_ExtractToConstantRefExpression;
-      case 10:
+      case LanguageConceptSwitch.ExtractToSingleConstantExpression:
+        if (props_ExtractToSingleConstantExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("extract to single constant");
+          props_ExtractToSingleConstantExpression = cpb.create();
+        }
+        return props_ExtractToSingleConstantExpression;
+      case LanguageConceptSwitch.InternalAnonymousClass:
+        if (props_InternalAnonymousClass == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("_anonymous class");
+          cpb.presentationByName();
+          props_InternalAnonymousClass = cpb.create();
+        }
         return props_InternalAnonymousClass;
-      case 11:
+      case LanguageConceptSwitch.InternalAnonymousClassCreator:
+        if (props_InternalAnonymousClassCreator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("_anonymous class");
+          props_InternalAnonymousClassCreator = cpb.create();
+        }
         return props_InternalAnonymousClassCreator;
-      case 12:
+      case LanguageConceptSwitch.InternalClassCreator:
+        if (props_InternalClassCreator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("internal class creator");
+          cpb.rawPresentation("_class");
+          props_InternalClassCreator = cpb.create();
+        }
         return props_InternalClassCreator;
-      case 13:
+      case LanguageConceptSwitch.InternalClassExpression:
+        if (props_InternalClassExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("internal class expression");
+          cpb.rawPresentation("_<type>.class");
+          props_InternalClassExpression = cpb.create();
+        }
         return props_InternalClassExpression;
-      case 14:
+      case LanguageConceptSwitch.InternalClassifierType:
+        if (props_InternalClassifierType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("_classifier type");
+          props_InternalClassifierType = cpb.create();
+        }
         return props_InternalClassifierType;
-      case 15:
+      case LanguageConceptSwitch.InternalLambdaExpression:
+        if (props_InternalLambdaExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("InternalLambdaExpression");
+          props_InternalLambdaExpression = cpb.create();
+        }
+        return props_InternalLambdaExpression;
+      case LanguageConceptSwitch.InternalNewExpression:
+        if (props_InternalNewExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("internal new expression");
+          cpb.rawPresentation("_new");
+          props_InternalNewExpression = cpb.create();
+        }
         return props_InternalNewExpression;
-      case 16:
+      case LanguageConceptSwitch.InternalPartialFieldReference:
+        if (props_InternalPartialFieldReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("_field reference");
+          props_InternalPartialFieldReference = cpb.create();
+        }
         return props_InternalPartialFieldReference;
-      case 17:
+      case LanguageConceptSwitch.InternalPartialInstanceMethodCall:
+        if (props_InternalPartialInstanceMethodCall == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("_method call");
+          props_InternalPartialInstanceMethodCall = cpb.create();
+        }
         return props_InternalPartialInstanceMethodCall;
-      case 18:
+      case LanguageConceptSwitch.InternalStaticFieldReference:
+        if (props_InternalStaticFieldReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("internal static field reference");
+          cpb.rawPresentation("_static field reference");
+          props_InternalStaticFieldReference = cpb.create();
+        }
         return props_InternalStaticFieldReference;
-      case 19:
+      case LanguageConceptSwitch.InternalStaticMethodCall:
+        if (props_InternalStaticMethodCall == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("internal static method call");
+          cpb.rawPresentation("_static method call");
+          props_InternalStaticMethodCall = cpb.create();
+        }
         return props_InternalStaticMethodCall;
-      case 20:
+      case LanguageConceptSwitch.InternalSuperMethodCallOperation:
+        if (props_InternalSuperMethodCallOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("_super method call");
+          props_InternalSuperMethodCallOperation = cpb.create();
+        }
         return props_InternalSuperMethodCallOperation;
-      case 21:
+      case LanguageConceptSwitch.InternalThisExpression:
+        if (props_InternalThisExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("_this");
+          props_InternalThisExpression = cpb.create();
+        }
         return props_InternalThisExpression;
-      case 22:
+      case LanguageConceptSwitch.InternalTypedStaticFieldReference:
+        if (props_InternalTypedStaticFieldReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("internal typed static field reference");
+          cpb.rawPresentation("_typed static field reference");
+          props_InternalTypedStaticFieldReference = cpb.create();
+        }
         return props_InternalTypedStaticFieldReference;
-      case 23:
+      case LanguageConceptSwitch.InternalVariableReference:
+        if (props_InternalVariableReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("internal variable/parameter reference");
+          cpb.rawPresentation("_<variable reference>");
+          props_InternalVariableReference = cpb.create();
+        }
         return props_InternalVariableReference;
-      case 24:
-        return props_TypeHintExpression;
-      case 25:
+      case LanguageConceptSwitch.WeakClassReference:
+        if (props_WeakClassReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("weak reference to a class");
+          cpb.rawPresentation("class name");
+          props_WeakClassReference = cpb.create();
+        }
         return props_WeakClassReference;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

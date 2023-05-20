@@ -17,7 +17,7 @@ public class FilteringSequence<U> extends AbstractChainedSequence<U, U> implemen
   }
   @Override
   public Iterator<U> iterator() {
-    return new FilteringSequence.FilteringIterator();
+    return new FilteringIterator();
   }
   private class FilteringIterator implements Iterator<U> {
     private Iterator<U> inputIterator;
@@ -43,7 +43,7 @@ public class FilteringSequence<U> extends AbstractChainedSequence<U, U> implemen
       if (hasNext.unknown()) {
         moveToNext();
       }
-      if (!((hasNext.hasNext()))) {
+      if (!(hasNext.hasNext())) {
         throw new NoSuchElementException();
       }
       return clearNext();

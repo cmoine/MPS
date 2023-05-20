@@ -1,17 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
   <root>
     <file name="QueriesGenerated.java">
-      <unit at="10,0,19,0" name="jetbrains.mps.execution.demo.generator.template.main.QueriesGenerated" />
+      <unit at="61,0,64,0" name="jetbrains.mps.execution.demo.generator.template.main.QueriesGenerated$PROPS" />
+      <unit at="42,0,60,0" name="jetbrains.mps.execution.demo.generator.template.main.QueriesGenerated$PVQ" />
+      <unit at="19,0,65,0" name="jetbrains.mps.execution.demo.generator.template.main.QueriesGenerated" />
     </file>
   </root>
   <root nodeRef="r:13514475-e043-48f5-9c6a-9b1a9c9c6b4e(jetbrains.mps.execution.demo.generator.template.main@generator)/823947676949193256">
     <file name="QueriesGenerated.java">
-      <node id="823947676949193266" at="12,111,13,175" concept="0" />
-      <node id="823947676949193301" at="15,111,16,175" concept="0" />
-      <scope id="823947676949193265" at="12,111,13,175" />
-      <scope id="823947676949193300" at="15,111,16,175" />
+      <node id="823947676949193266" at="24,88,25,78" concept="1" />
+      <node id="823947676949193301" at="27,88,28,78" concept="1" />
+      <node id="823947676949193263" at="32,14,33,191" concept="0" />
+      <node id="823947676949193298" at="33,191,34,176" concept="0" />
+      <node id="823947676949193263" at="51,15,52,66" concept="1" />
+      <node id="823947676949193298" at="53,15,54,66" concept="1" />
+      <node id="823947676949193264" at="24,0,27,0" concept="2" trace="propertyMacro_GetValue_1_0#(Ljetbrains/mps/generator/template/PropertyMacroContext;)Ljava/lang/Object;" />
+      <node id="823947676949193299" at="27,0,30,0" concept="2" trace="propertyMacro_GetValue_1_1#(Ljetbrains/mps/generator/template/PropertyMacroContext;)Ljava/lang/Object;" />
+      <scope id="823947676949193265" at="24,88,25,78" />
+      <scope id="823947676949193300" at="27,88,28,78" />
+      <scope id="823947676949193263" at="51,15,52,66" />
+      <scope id="823947676949193298" at="53,15,54,66" />
+      <scope id="823947676949193264" at="24,0,27,0">
+        <var name="_context" id="823947676949193264" />
+      </scope>
+      <scope id="823947676949193299" at="27,0,30,0">
+        <var name="_context" id="823947676949193299" />
+      </scope>
     </file>
   </root>
 </debug-info>

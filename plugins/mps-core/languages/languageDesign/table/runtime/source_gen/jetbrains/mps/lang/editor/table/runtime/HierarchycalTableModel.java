@@ -5,7 +5,6 @@ package jetbrains.mps.lang.editor.table.runtime;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.annotations.NotNull;
-import jetbrains.mps.smodel.adapter.MetaAdapterByDeclaration;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
@@ -18,11 +17,11 @@ public class HierarchycalTableModel extends AbstractTableModel {
   private SContainmentLink myColumnsLinkDeclaration;
   private int myColumnCount;
   private int myRowCount;
-  public HierarchycalTableModel(@NotNull SNode tableNode, @NotNull SNode rowsLinkDeclaration, @NotNull SNode cellsLinkDeclaration) {
+  public HierarchycalTableModel(@NotNull SNode tableNode, @NotNull SContainmentLink rowsLink, @NotNull SContainmentLink cellsLink) {
     myTableNode = tableNode;
-    myRowsLinkDeclaration = MetaAdapterByDeclaration.getContainmentLink(rowsLinkDeclaration);
+    myRowsLinkDeclaration = rowsLink;
     assert SNodeOperations.getConcept(myTableNode).getContainmentLinks().contains(myRowsLinkDeclaration);
-    myColumnsLinkDeclaration = MetaAdapterByDeclaration.getContainmentLink(cellsLinkDeclaration);
+    myColumnsLinkDeclaration = cellsLink;
     assert myRowsLinkDeclaration.getTargetConcept().getContainmentLinks().contains(myColumnsLinkDeclaration);
 
     myRowCount = ListSequence.fromList(getRows()).count();
@@ -52,10 +51,10 @@ public class HierarchycalTableModel extends AbstractTableModel {
   @Override
   public void insertRow(int rowNumber) {
     SAbstractConcept crow = myRowsLinkDeclaration.getTargetConcept();
-    SNode newRow = SNodeFactoryOperations.createNewNode(SNodeFactoryOperations.asInstanceConcept(crow), null);
+    SNode newRow = SNodeFactoryOperations.createNewNode(crow, null);
     for (int i = 0; i < getColumnCount(); i++) {
       SAbstractConcept cCol = myColumnsLinkDeclaration.getTargetConcept();
-      newRow.addChild(myColumnsLinkDeclaration, SNodeFactoryOperations.createNewNode(SNodeFactoryOperations.asInstanceConcept(cCol), null));
+      newRow.addChild(myColumnsLinkDeclaration, SNodeFactoryOperations.createNewNode(cCol, null));
     }
     Utils.insertElementAt(getRows(), newRow, rowNumber);
   }
@@ -69,7 +68,7 @@ public class HierarchycalTableModel extends AbstractTableModel {
   public void insertColumn(int columnNumber) {
     for (SNode row : ListSequence.fromList(getRows())) {
       SAbstractConcept concept = myColumnsLinkDeclaration.getTargetConcept();
-      SNode newColumn = SNodeFactoryOperations.createNewNode(SNodeFactoryOperations.asInstanceConcept(concept), null);
+      SNode newColumn = SNodeFactoryOperations.createNewNode(concept, null);
       Utils.insertElementAt(getColumns(row), newColumn, columnNumber);
     }
   }

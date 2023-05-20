@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="d3qbpy4al8gh5fjwcxjb5cbqoltj6kj" />
+<product version="3" modelHash="-e5xu6vmyrgcq7bh6ga4fx5ohgts5o4v">
+  <files names="AbstractMigrationScriptHelper.java:MigrationScriptsTool_Tool.java:MigrationScriptsView.java:PluginSolution_ApplicationPlugin.java:PluginSolution_ProjectPlugin.java:RunMigrationScriptAction.java:RunMigrationScriptsDialog.java:RunMigrationScripts_Action.java:ScriptsActionGroupHelper.java:ScriptsForSelection_ActionGroup.java:ScriptsGlobally_ActionGroup.java:ScriptsMenuBuilder.java" />
+</product>
 

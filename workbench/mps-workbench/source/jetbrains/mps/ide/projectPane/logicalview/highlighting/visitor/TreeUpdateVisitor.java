@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,76 +19,56 @@ import jetbrains.mps.ide.projectPane.logicalview.highlighting.visitor.updates.No
 import jetbrains.mps.ide.projectPane.logicalview.highlighting.visitor.updates.TreeNodeUpdater;
 import jetbrains.mps.ide.ui.tree.MPSTreeNode;
 import jetbrains.mps.ide.ui.tree.TreeNodeVisitor;
-import jetbrains.mps.ide.ui.tree.module.NamespaceTextNode;
-import jetbrains.mps.ide.ui.tree.module.ProjectModuleTreeNode;
-import jetbrains.mps.ide.ui.tree.module.ProjectTreeNode;
-import jetbrains.mps.ide.ui.tree.smodel.SModelTreeNode;
-import jetbrains.mps.project.Project;
-import jetbrains.mps.smodel.ModelReadRunnable;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.concurrent.Executor;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Visitor that updates tree elements
  */
 public abstract class TreeUpdateVisitor implements TreeNodeVisitor {
-  protected final Project myProject;
   private TreeNodeUpdater myUpdater;
-  private Executor myExecutor;
 
-  protected TreeUpdateVisitor(@NotNull Project mpsProject) {
-    myProject = mpsProject;
+  @SuppressWarnings("WeakerAccess")
+  protected TreeUpdateVisitor() {
   }
 
-  @Override
-  public void visitNamespaceNode(@NotNull NamespaceTextNode node) {
+  /**
+   * Provide a visitor that get post-notification about parents of all nodes visited by the main visitor.
+   * Parent nodes are reported in a reverse order.
+   * This visitor doesn't get model read as it's assumed it deals with state of tree nodes only.
+   * @return {@code null} if visitor is not interested in post-processing notifications
+   */
+  @Nullable
+  public TreeNodeVisitor getParentUpdater() {
+    return null;
   }
 
-  @Override
-  public void visitModuleNode(@NotNull ProjectModuleTreeNode node) {
-  }
-
-  @Override
-  public void visitProjectNode(@NotNull ProjectTreeNode node) {
-  }
-
-  @Override
-  public void visitModelNode(@NotNull SModelTreeNode node) {
-  }
-
-  protected final void scheduleModelRead(final MPSTreeNode node, final Runnable readAction) {
-    schedule(node, new ModelReadRunnable(myProject.getModelAccess(), readAction));
-  }
-  protected final void schedule(final MPSTreeNode node, final Runnable runnable) {
-    final Executor ex = myExecutor;
-    if (ex == null) {
-      return;
-    }
-    ex.execute(new Runnable() {
-      @Override
-      public void run() {
-        boolean disposed = node.getTree() == null;
-        if (disposed) {
-          return;
-        }
-        runnable.run();
-      }
-    });
-  }
-
-  protected void addUpdate(MPSTreeNode node, NodeUpdate r) {
+  /**
+   * request UI refresh of a tree node. Presumably, tree node got all relevant settings (e.g. with tree messages) and
+   * just need to reflect the state in its UI presentation ({@link MPSTreeNode#renewPresentation()}
+   */
+  protected final void requestTreeRefresh(MPSTreeNode node) {
     final TreeNodeUpdater u = myUpdater;
     if (u != null) {
-      u.addUpdate(node, r);
+      u.addUpdate(node);
+    }
+  }
+
+  /**
+   * @deprecated see {@link TreeNodeUpdater#addUpdate(MPSTreeNode, NodeUpdate)}
+   */
+  @Deprecated(since = "2020.3", forRemoval = true)
+  protected final void addUpdate(MPSTreeNode node, @Nullable NodeUpdate r) {
+    final TreeNodeUpdater u = myUpdater;
+    if (u != null) {
+      if (r == null) {
+        u.addUpdate(node);
+      } else {
+        u.addUpdate(node, r);
+      }
     }
   }
   public TreeUpdateVisitor setUpdater(TreeNodeUpdater updater) {
     myUpdater = updater;
-    return this;
-  }
-  public TreeUpdateVisitor setExecutor(Executor executor) {
-    myExecutor = executor;
     return this;
   }
 }

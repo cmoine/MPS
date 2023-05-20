@@ -5,11 +5,10 @@ package jetbrains.mps.baseLanguage.scripts;
 import jetbrains.mps.lang.script.runtime.BaseMigrationScript;
 import jetbrains.mps.lang.script.runtime.AbstractMigrationRefactoring;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.model.SNode;
 import java.util.List;
 import jetbrains.mps.internal.collections.runtime.Sequence;
-import jetbrains.mps.baseLanguage.util.OverridingMethodsFinder;
+import jetbrains.mps.baseLanguage.util.OverridingMethodsCalculator;
 import jetbrains.mps.internal.collections.runtime.IWhereFilter;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
@@ -18,8 +17,12 @@ import jetbrains.mps.internal.collections.runtime.SetSequence;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
-import jetbrains.mps.smodel.SModelUtil_new;
-import jetbrains.mps.smodel.SReference;
+import jetbrains.mps.smodel.builder.SNodeBuilder;
+import jetbrains.mps.smodel.SNodePointer;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 
 public final class AddMissingOverrideAnnotations_MigrationScript extends BaseMigrationScript {
   public AddMissingOverrideAnnotations_MigrationScript() {
@@ -35,15 +38,15 @@ public final class AddMissingOverrideAnnotations_MigrationScript extends BaseMig
       }
       @Override
       public SAbstractConcept getApplicableConcept() {
-        return MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c108ca66L, "jetbrains.mps.baseLanguage.structure.ClassConcept");
+        return CONCEPTS.ClassConcept$bK;
       }
       @Override
       public boolean isApplicableInstanceNode(SNode node) {
-        List<SNode> instanceMethods = Sequence.fromIterable(OverridingMethodsFinder.getInstanceMethods(node)).where(new IWhereFilter<SNode>() {
+        List<SNode> instanceMethods = Sequence.fromIterable(OverridingMethodsCalculator.getInstanceMethods(node)).where(new IWhereFilter<SNode>() {
           public boolean accept(SNode it) {
-            return OverridingMethodsFinder.canOverride(it) && ListSequence.fromList(SLinkOperations.getChildren(it, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x114a6be947aL, 0x114a6beb0bdL, "annotation"))).all(new IWhereFilter<SNode>() {
+            return OverridingMethodsCalculator.canOverride(it) && ListSequence.fromList(SLinkOperations.getChildren(it, LINKS.annotation$K49I)).all(new IWhereFilter<SNode>() {
               public boolean accept(SNode it) {
-                return !("java.lang.Override".equals(INamedConcept__BehaviorDescriptor.getFqName_idhEwIO9y.invoke(SLinkOperations.getTarget(it, MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x114a6b4ccabL, 0x114a6b85d40L, "annotation")))));
+                return !("java.lang.Override".equals(INamedConcept__BehaviorDescriptor.getFqName_idhEwIO9y.invoke(SLinkOperations.getTarget(it, LINKS.annotation$12Ek))));
               }
             });
           }
@@ -51,23 +54,23 @@ public final class AddMissingOverrideAnnotations_MigrationScript extends BaseMig
         if (ListSequence.fromList(instanceMethods).isEmpty()) {
           return false;
         }
-        OverridingMethodsFinder finder = new OverridingMethodsFinder(node, instanceMethods);
+        OverridingMethodsCalculator finder = new OverridingMethodsCalculator(node, instanceMethods);
         return SetSequence.fromSet(finder.getOverridingMethods()).isNotEmpty();
       }
       @Override
       public void doUpdateInstanceNode(SNode node) {
-        List<SNode> instanceMethods = Sequence.fromIterable(OverridingMethodsFinder.getInstanceMethods(node)).where(new IWhereFilter<SNode>() {
+        List<SNode> instanceMethods = Sequence.fromIterable(OverridingMethodsCalculator.getInstanceMethods(node)).where(new IWhereFilter<SNode>() {
           public boolean accept(SNode it) {
-            return OverridingMethodsFinder.canOverride(it) && ListSequence.fromList(SLinkOperations.getChildren(it, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x114a6be947aL, 0x114a6beb0bdL, "annotation"))).all(new IWhereFilter<SNode>() {
+            return OverridingMethodsCalculator.canOverride(it) && ListSequence.fromList(SLinkOperations.getChildren(it, LINKS.annotation$K49I)).all(new IWhereFilter<SNode>() {
               public boolean accept(SNode it) {
-                return !("java.lang.Override".equals(INamedConcept__BehaviorDescriptor.getFqName_idhEwIO9y.invoke(SLinkOperations.getTarget(it, MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x114a6b4ccabL, 0x114a6b85d40L, "annotation")))));
+                return !("java.lang.Override".equals(INamedConcept__BehaviorDescriptor.getFqName_idhEwIO9y.invoke(SLinkOperations.getTarget(it, LINKS.annotation$12Ek))));
               }
             });
           }
         }).toListSequence();
-        OverridingMethodsFinder finder = new OverridingMethodsFinder(node, instanceMethods);
+        OverridingMethodsCalculator finder = new OverridingMethodsCalculator(node, instanceMethods);
         for (SNode meth : SetSequence.fromSet(finder.getOverridingMethods())) {
-          ListSequence.fromList(SLinkOperations.getChildren(meth, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x114a6be947aL, 0x114a6beb0bdL, "annotation"))).addElement(createAnnotationInstance_eltaeh_a0a0a2a0a());
+          ListSequence.fromList(SLinkOperations.getChildren(meth, LINKS.annotation$K49I)).addElement(createAnnotationInstance_eltaeh_a0a0a2a0a());
         }
       }
       @Override
@@ -84,8 +87,18 @@ public final class AddMissingOverrideAnnotations_MigrationScript extends BaseMig
   }
   private static SNode createAnnotationInstance_eltaeh_a0a0a2a0a() {
     PersistenceFacade facade = PersistenceFacade.getInstance();
-    SNode n1 = SModelUtil_new.instantiateConceptDeclaration(MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x114a6b4ccabL, "jetbrains.mps.baseLanguage.structure.AnnotationInstance"), null, null, false);
-    n1.setReference(MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x114a6b4ccabL, 0x114a6b85d40L, "annotation"), SReference.create(MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x114a6b4ccabL, 0x114a6b85d40L, "annotation"), n1, facade.createModelReference("6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)"), facade.createNodeId("~Override")));
-    return n1;
+    SNodeBuilder n0 = new SNodeBuilder().init(CONCEPTS.AnnotationInstance$yl);
+    n0.setReference(LINKS.annotation$12Ek, new SNodePointer(facade.createModelReference("6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)"), facade.createNodeId("~Override")));
+    return n0.getResult();
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept ClassConcept$bK = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c108ca66L, "jetbrains.mps.baseLanguage.structure.ClassConcept");
+    /*package*/ static final SConcept AnnotationInstance$yl = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x114a6b4ccabL, "jetbrains.mps.baseLanguage.structure.AnnotationInstance");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink annotation$K49I = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x114a6be947aL, 0x114a6beb0bdL, "annotation");
+    /*package*/ static final SReferenceLink annotation$12Ek = MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x114a6b4ccabL, 0x114a6b85d40L, "annotation");
   }
 }

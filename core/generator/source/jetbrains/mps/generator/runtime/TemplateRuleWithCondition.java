@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,8 @@ public interface TemplateRuleWithCondition extends TemplateRule {
 
   /**
    * Tell whether rule can be applied in the context
+   * FIXME shall throw GenerationFailureException (neither Dismiss/Abandon nor Cancel could not get thrown from within) but has to
+   *       re-generate generated generators that implement this method (either with narrowed throws or without any at all)
    * @since 3.3
    */
   boolean isApplicable(@NotNull TemplateContext context) throws GenerationException;

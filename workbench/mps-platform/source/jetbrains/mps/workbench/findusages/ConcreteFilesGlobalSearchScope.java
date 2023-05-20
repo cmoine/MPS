@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,11 @@
 package jetbrains.mps.workbench.findusages;
 
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.search.GlobalSearchScope;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 
@@ -30,13 +32,18 @@ public class ConcreteFilesGlobalSearchScope extends GlobalSearchScope {
     myScopeFiles = scopeFiles;
   }
 
+  public ConcreteFilesGlobalSearchScope(@Nullable Project project, Collection<VirtualFile> scopeFiles) {
+    super(project);
+    myScopeFiles = scopeFiles;
+  }
+
   @Override
-  public boolean contains(VirtualFile file) {
+  public boolean contains(@NotNull VirtualFile file) {
     return myScopeFiles.contains(file);
   }
 
   @Override
-  public int compare(VirtualFile file1, VirtualFile file2) {
+  public int compare(@NotNull VirtualFile file1, @NotNull VirtualFile file2) {
     return file1.getPath().compareTo(file2.getPath());
   }
 

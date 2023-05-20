@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,26 +17,30 @@ package jetbrains.mps.core.aspects.behaviour;
 
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import jetbrains.mps.core.aspects.behaviour.api.SMethodId;
-import jetbrains.mps.smodel.persistence.def.v9.IdEncoder;
-import jetbrains.mps.smodel.persistence.def.v9.IdEncoder.EncodingException;
-import jetbrains.mps.util.EqualUtil;
+import jetbrains.mps.smodel.JavaFriendlyBase64;
+import jetbrains.mps.smodel.SNodeId.Regular;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.annotations.Immutable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.model.SNodeId;
+import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
+
+import java.util.Objects;
 
 /**
  * Represents a handle which uniquely identifies {@link SMethod} within the concept (including all the ancestors).
  * This implementation is based on the NodeId of the method node (in the behavior aspect of the concept)
+ * @deprecated replaced with SMethodIdV2
  */
 @Immutable
+@Deprecated(since = "2022.2")
 public final class SMethodTrimmedId implements SMethodId {
   private final SAbstractConcept myConcept;
-  private final SNodeId myNodeId;
+  final SNodeId myNodeId;
 
   /**
-   * @param concept is null iff is is a virtual method id (for them the concept does not belong to the id)
+   * @param concept is null iff it is a virtual method id (for them the concept does not belong to the id)
    */
   private SMethodTrimmedId(@Nullable SAbstractConcept concept, @NotNull SNodeId id) {
     myConcept = concept;
@@ -45,15 +49,17 @@ public final class SMethodTrimmedId implements SMethodId {
 
   @Override
   public int hashCode() {
-    int conceptHash = myConcept != null ? myConcept.hashCode() : 0;
-    return myNodeId.hashCode() + 31 * conceptHash;
+    // please do not change, it is equal to the SMethodIdV2 counterpart
+    return Long.hashCode(SMethodIdV2.nodeIdToLong(myNodeId));
   }
 
   @Override
   public boolean equals(Object o) {
     if (o instanceof SMethodTrimmedId) {
       return ((SMethodTrimmedId) o).myNodeId.equals(myNodeId) &&
-          EqualUtil.equals(((SMethodTrimmedId) o).myConcept, myConcept);
+          Objects.equals(((SMethodTrimmedId) o).myConcept, myConcept);
+    } else if (o instanceof SMethodIdV2) {
+      return o.equals(this);
     }
     return false;
   }
@@ -65,11 +71,39 @@ public final class SMethodTrimmedId implements SMethodId {
 
   @NotNull
   public static SMethodTrimmedId create(@NotNull String name, @Nullable SAbstractConcept concept, @NotNull String trimmedId) {
+    SNodeId nodeId = fromText(trimmedId);
+    return new SMethodTrimmedId(concept, nodeId);
+  }
+
+  /**
+   * @param nodeId identity of the method declaration node
+   * @return serializable value that identifies the method
+   */
+  public static String toText(@NotNull SNodeId nodeId) {
+    if (nodeId instanceof jetbrains.mps.smodel.SNodeId.Regular) {
+      return new JavaFriendlyBase64().toString(((Regular) nodeId).getId());
+    }
+    // XXX this is not a nice fallback as toString() gives value prefixed
+    // with id kind. Generally we shall never get here, provided behavior models
+    // are backed with regular SNodeId. However, if we imagine behavior model
+    // with custom identity, I don't feel there's an easy way to deal with 'kind:'
+    // mechanism. We need one to tell different SNodeId implementations to parse
+    // value back, and escaping comes to mind (with dark magic not to contradict with
+    // node's own serialization format), or a dedicated method to give value ready for
+    // injecting into method name, with 'kind:' encoded according to SNodeId's
+    // implementation (with extra API methods in PersistenceFacade)
+    return nodeId.toString();
+  }
+
+  /**
+   * @param serializedNodeId value created by {@link #toText(SNodeId)}
+   */
+  public static SNodeId fromText(@NotNull String serializedNodeId) {
     try {
-      SNodeId nodeId = new IdEncoder().parseNodeId(trimmedId);
-      return new SMethodTrimmedId(concept, nodeId);
-    } catch (EncodingException e) {
-      throw new RuntimeException(e);
+      return new Regular(new JavaFriendlyBase64().parseLong(serializedNodeId));
+    } catch (IllegalArgumentException ex) {
+      return PersistenceFacade.getInstance().createNodeId(serializedNodeId);
+      // if there's another IAE, I can't do anything, just let RTE go up.
     }
   }
 

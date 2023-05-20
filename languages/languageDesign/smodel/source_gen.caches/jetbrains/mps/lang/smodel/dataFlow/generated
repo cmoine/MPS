@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-9l4d00l4uv0jnz6wl25paucykk1jr30" />
+<product version="3" modelHash="-7c72tcq2m5godehspc09wqj0njkv3wt">
+  <files names="AbstractPointerResolveOperation_DataFlow.java:AbstractTypeCastExpression_DataFlow.java:AttributeAccess_DataFlow.java:ConceptSwitchStatement_DataFlow.java:Concept_IsSubConceptOfOperation_DataFlow.java:Concept_IsSuperConceptOfOperation_DataFlow.java:DataFlowAspectDescriptorImpl.java:EnumSwitchCaseBody_Expression_DataFlow.java:EnumSwitchCaseBody_StatementList_DataFlow.java:EnumSwitchExpression_DataFlow.java:ExactConceptCase_DataFlow.java:IfInstanceOfStatement_DataFlow.java:IfInstanceOfVarReference_DataFlow.java:LinkAttributeQualifier_DataFlow.java:ModelReferenceExpression_DataFlow.java:Node_IsInstanceOfOperation_DataFlow.java:OfConceptOperation_DataFlow.java:OperationParm_Concept_DataFlow.java:PoundExpression_DataFlow.java:PropertyAttributeQualifier_DataFlow.java:SNodeOperation_DataFlow.java:SemanticDowncastExpression_DataFlow.java:SubconceptCase_DataFlow.java" />
+</product>
 

@@ -8,190 +8,158 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1164879751025:jetbrains.mps.baseLanguage.structure.TryCatchStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/5351203823916750322:jetbrains.mps.baseLanguage.structure.TryUniversalStatement" />
   <root nodeRef="r:39c01cc7-82c8-4706-9a38-48a33acb0535(jetbrains.mps.ide.findusages.view.optionseditor)/28859145781927652">
     <file name="DefaultSearchOptionsComponent.java">
-      <node id="28859145781927985" at="21,0,22,0" concept="2" trace="myDefaultOptions" />
-      <node id="28859145781927989" at="22,0,23,0" concept="2" trace="myProject" />
-      <node id="28859145781927992" at="23,0,24,0" concept="2" trace="myState" />
-      <node id="28859145781928003" at="24,83,25,24" concept="1" />
+      <node id="28859145781927985" at="19,0,20,0" concept="2" trace="myDefaultOptions" />
+      <node id="28859145781927989" at="20,0,21,0" concept="2" trace="myProject" />
+      <node id="28859145781928003" at="22,57,23,24" concept="1" />
+      <node id="1423717443162481967" at="23,24,24,73" concept="8" />
       <node id="28859145781928011" at="27,54,28,28" concept="7" />
-      <node id="28859145781928017" at="33,36,34,63" concept="7" />
-      <node id="28859145781928040" at="44,35,45,21" concept="7" />
-      <node id="28859145781928042" at="46,5,47,86" concept="1" />
-      <node id="28859145781928052" at="47,86,48,19" concept="7" />
-      <node id="28859145781928060" at="51,40,52,38" concept="1" />
-      <node id="28859145781928073" at="53,35,54,13" concept="7" />
-      <node id="28859145781928074" at="55,5,56,84" concept="1" />
-      <node id="28859145781928113" at="62,25,63,57" concept="1" />
-      <node id="28859145781928123" at="64,30,65,17" concept="7" />
-      <node id="28859145781928124" at="66,9,67,88" concept="1" />
-      <node id="28859145781927995" at="24,0,27,0" concept="0" trace="DefaultSearchOptionsComponent#(Lcom/intellij/openapi/project/Project;Ljetbrains/mps/ide/make/StartupModuleMaker;)V" />
+      <node id="1423717443162424617" at="31,75,32,103" concept="7" />
+      <node id="28859145781928052" at="35,29,36,83" concept="7" />
+      <node id="28859145781928074" at="39,40,40,82" concept="1" />
       <node id="28859145781928007" at="27,0,30,0" concept="5" trace="getDefaultOptions#()Ljetbrains/mps/ide/findusages/view/optionseditor/DefaultOptionsContainer;" />
-      <node id="28859145781928023" at="36,0,39,0" concept="5" trace="initComponent#()V" />
-      <node id="28859145781928027" at="39,0,42,0" concept="5" trace="disposeComponent#()V" />
-      <node id="28859145781928035" at="43,29,46,5" concept="4" />
-      <node id="28859145781928068" at="52,38,55,5" concept="4" />
-      <node id="28859145781928118" at="63,57,66,9" concept="4" />
-      <node id="28859145781928098" at="71,0,74,0" concept="5" trace="projectClosed#()V" />
-      <node id="28859145781928013" at="30,0,36,0" concept="5" trace="getComponentName#()Ljava/lang/String;" />
-      <node id="28859145781928031" at="42,0,50,0" concept="5" trace="getState#()Lorg/jdom/Element;" />
-      <node id="28859145781928054" at="50,0,58,0" concept="5" trace="loadState#(Lorg/jdom/Element;)V" />
-      <node id="28859145781928095" at="61,0,69,0" concept="5" trace="run#()V" />
-      <node id="28859145781928087" at="59,31,69,7" concept="1" />
-      <node id="28859145781928083" at="58,0,71,0" concept="5" trace="projectOpened#()V" />
-      <scope id="28859145781928026" at="37,31,37,31" />
-      <scope id="28859145781928030" at="40,34,40,34" />
-      <scope id="28859145781928101" at="72,31,72,31" />
-      <scope id="28859145781928002" at="24,83,25,24" />
+      <node id="1423717443162424614" at="31,0,34,0" concept="11" trace="getOptions#(Ljetbrains/mps/project/MPSProject;)Ljetbrains/mps/ide/findusages/view/optionseditor/DefaultOptionsContainer;" />
+      <node id="28859145781927995" at="22,0,26,0" concept="0" trace="DefaultSearchOptionsComponent#(Lcom/intellij/openapi/project/Project;)V" />
+      <node id="28859145781928031" at="34,0,38,0" concept="5" trace="getState#()Lorg/jdom/Element;" />
+      <node id="28859145781928054" at="38,0,42,0" concept="5" trace="loadState#(Lorg/jdom/Element;)V" />
       <scope id="28859145781928010" at="27,54,28,28" />
-      <scope id="28859145781928016" at="33,36,34,63" />
-      <scope id="28859145781928039" at="44,35,45,21" />
-      <scope id="28859145781928072" at="53,35,54,13" />
-      <scope id="28859145781928122" at="64,30,65,17" />
-      <scope id="28859145781927995" at="24,0,27,0">
-        <var name="maker" id="28859145781928000" />
+      <scope id="1423717443162424616" at="31,75,32,103" />
+      <scope id="28859145781928034" at="35,29,36,83" />
+      <scope id="28859145781928059" at="39,40,40,82" />
+      <scope id="28859145781928002" at="22,57,24,73" />
+      <scope id="28859145781928007" at="27,0,30,0" />
+      <scope id="1423717443162424614" at="31,0,34,0">
+        <var name="mpsProject" id="1423717443162424626" />
+      </scope>
+      <scope id="28859145781927995" at="22,0,26,0">
         <var name="project" id="28859145781927998" />
       </scope>
-      <scope id="28859145781928007" at="27,0,30,0" />
-      <scope id="28859145781928023" at="36,0,39,0" />
-      <scope id="28859145781928027" at="39,0,42,0" />
-      <scope id="28859145781928098" at="71,0,74,0" />
-      <scope id="28859145781928034" at="43,29,48,19" />
-      <scope id="28859145781928059" at="51,40,56,84" />
-      <scope id="28859145781928112" at="62,25,67,88" />
-      <scope id="28859145781928013" at="30,0,36,0" />
-      <scope id="28859145781928031" at="42,0,50,0" />
-      <scope id="28859145781928054" at="50,0,58,0">
+      <scope id="28859145781928031" at="34,0,38,0" />
+      <scope id="28859145781928054" at="38,0,42,0">
         <var name="state" id="28859145781928057" />
       </scope>
-      <scope id="28859145781928095" at="61,0,69,0" />
-      <scope id="28859145781928086" at="59,31,69,7" />
-      <scope id="28859145781928083" at="58,0,71,0" />
-      <unit id="28859145781928094" at="60,70,69,5" name="jetbrains.mps.ide.findusages.view.optionseditor.DefaultSearchOptionsComponent$1" />
-      <unit id="28859145781927652" at="18,0,75,0" name="jetbrains.mps.ide.findusages.view.optionseditor.DefaultSearchOptionsComponent" />
+      <unit id="28859145781927652" at="15,0,43,0" name="jetbrains.mps.ide.findusages.view.optionseditor.DefaultSearchOptionsComponent" />
     </file>
   </root>
   <root nodeRef="r:39c01cc7-82c8-4706-9a38-48a33acb0535(jetbrains.mps.ide.findusages.view.optionseditor)/28859145781927653">
     <file name="DefaultOptionsContainer.java">
-      <node id="28859145781927668" at="20,0,21,0" concept="9" trace="DEFAULT_SEARCH_OPTIONS" />
-      <node id="28859145781927672" at="21,0,22,0" concept="9" trace="SEARCH_OPTION" />
-      <node id="28859145781927676" at="22,0,23,0" concept="9" trace="FINDERS_OPTION" />
-      <node id="28859145781927680" at="23,0,24,0" concept="9" trace="NODE_ID" />
-      <node id="28859145781927684" at="24,0,25,0" concept="9" trace="LOG" />
-      <node id="28859145781927655" at="25,0,26,0" concept="2" trace="myDefaultFinders" />
-      <node id="28859145781927664" at="26,0,27,0" concept="2" trace="myDefaultOptions" />
-      <node id="28859145781927699" at="29,68,30,56" concept="6" />
-      <node id="28859145781927705" at="30,56,31,59" concept="6" />
-      <node id="28859145781927717" at="31,59,32,89" concept="1" />
-      <node id="28859145781927722" at="32,89,33,18" concept="7" />
-      <node id="28859145781927732" at="35,95,36,52" concept="1" />
-      <node id="28859145781927743" at="36,52,37,76" concept="1" />
-      <node id="28859145781927783" at="39,58,40,205" concept="6" />
-      <node id="28859145781927800" at="40,205,41,88" concept="7" />
-      <node id="28859145781927969" at="43,54,44,89" concept="6" />
-      <node id="2034046503361591517" at="46,25,47,111" concept="1" />
-      <node id="5345717287656008481" at="49,7,50,32" concept="7" />
-      <node id="28859145781927808" at="52,51,53,72" concept="6" />
-      <node id="28859145781927826" at="54,9,55,49" concept="6" />
-      <node id="28859145781927832" at="55,49,56,45" concept="1" />
-      <node id="28859145781927838" at="56,45,57,46" concept="1" />
-      <node id="28859145781927850" at="58,51,59,56" concept="6" />
-      <node id="28859145781927856" at="59,56,60,44" concept="1" />
-      <node id="28859145781927862" at="60,44,61,59" concept="1" />
-      <node id="28859145781927871" at="61,59,62,52" concept="1" />
-      <node id="28859145781927817" at="64,44,65,43" concept="1" />
-      <node id="28859145781927876" at="66,5,67,33" concept="7" />
-      <node id="28859145781927920" at="70,9,71,52" concept="6" />
-      <node id="28859145781927927" at="71,52,72,63" concept="1" />
-      <node id="7316555209513624079" at="72,63,73,0" concept="8" />
-      <node id="28859145781927891" at="73,0,74,31" concept="1" />
-      <node id="28859145781927944" at="75,68,76,58" concept="6" />
-      <node id="28859145781927951" at="76,58,77,50" concept="6" />
-      <node id="28859145781927956" at="77,50,78,38" concept="1" />
-      <node id="28859145781927962" at="78,38,79,38" concept="1" />
-      <node id="28859145781927898" at="81,44,82,54" concept="1" />
-      <node id="28859145781927907" at="82,54,83,31" concept="1" />
-      <node id="28859145781927911" at="83,31,84,44" concept="1" />
-      <node id="28859145781927689" at="27,0,29,0" concept="0" trace="DefaultOptionsContainer#()V" />
-      <node id="2034046503361591515" at="46,0,49,0" concept="5" trace="run#()V" />
-      <node id="28859145781927724" at="35,0,39,0" concept="5" trace="setDefaultSearchOptions#(Ljava/lang/String;Ljetbrains/mps/ide/findusages/view/optionseditor/FindUsagesOptions;)V" />
-      <node id="28859145781927752" at="39,0,43,0" concept="5" trace="createDefaultSearchOptions#()Ljetbrains/mps/ide/findusages/view/optionseditor/FindUsagesOptions;" />
-      <node id="2034046503361591511" at="44,89,49,7" concept="1" />
-      <node id="28859145781927693" at="29,0,35,0" concept="5" trace="getDefaultSearchOptions#(Ljava/lang/String;)Ljetbrains/mps/ide/findusages/view/optionseditor/FindUsagesOptions;" />
-      <node id="28859145781927843" at="57,46,63,7" concept="3" />
-      <node id="28859145781927933" at="74,31,80,7" concept="3" />
-      <node id="5345717287655999198" at="43,0,52,0" concept="5" trace="createDefaultFindersOption#()Ljetbrains/mps/ide/findusages/view/optionseditor/options/FindersOptions;" />
-      <node id="28859145781927814" at="53,72,66,5" concept="10" />
-      <node id="28859145781927895" at="69,62,85,5" concept="10" />
-      <node id="28859145781927802" at="52,0,69,0" concept="5" trace="writeOptions#(Ljetbrains/mps/project/MPSProject;)Lorg/jdom/Element;" />
-      <node id="28859145781927878" at="69,0,87,0" concept="5" trace="readOptions#(Lorg/jdom/Element;Ljetbrains/mps/project/MPSProject;)V" />
-      <scope id="28859145781927692" at="27,36,27,36" />
-      <scope id="2034046503361591516" at="46,25,47,111" />
-      <scope id="28859145781927815" at="64,0,65,43">
-        <var name="e" id="28859145781927823" />
-      </scope>
-      <scope id="28859145781927816" at="64,44,65,43" />
-      <scope id="28859145781927689" at="27,0,29,0" />
-      <scope id="28859145781927731" at="35,95,37,76" />
-      <scope id="28859145781927755" at="39,58,41,88">
+      <node id="28859145781927653" at="19,0,20,0" concept="10" trace="LOG" />
+      <node id="28859145781927668" at="20,0,21,0" concept="10" trace="DEFAULT_SEARCH_OPTIONS" />
+      <node id="28859145781927672" at="21,0,22,0" concept="10" trace="SEARCH_OPTION" />
+      <node id="28859145781927676" at="22,0,23,0" concept="10" trace="FINDERS_OPTION" />
+      <node id="28859145781927680" at="23,0,24,0" concept="10" trace="NODE_ID" />
+      <node id="28859145781927655" at="24,0,25,0" concept="2" trace="myDefaultFinders" />
+      <node id="28859145781927664" at="25,0,26,0" concept="2" trace="myDefaultOptions" />
+      <node id="28859145781927699" at="28,68,29,56" concept="6" />
+      <node id="28859145781927705" at="29,56,30,59" concept="6" />
+      <node id="28859145781927717" at="30,59,31,89" concept="1" />
+      <node id="28859145781927722" at="31,89,32,18" concept="7" />
+      <node id="28859145781927732" at="34,95,35,52" concept="1" />
+      <node id="28859145781927743" at="35,52,36,76" concept="1" />
+      <node id="28859145781927783" at="38,58,39,205" concept="6" />
+      <node id="28859145781927800" at="39,205,40,88" concept="7" />
+      <node id="1717591119402194779" at="42,55,43,91" concept="7" />
+      <node id="28859145781927808" at="45,51,46,72" concept="6" />
+      <node id="28859145781927826" at="47,9,48,49" concept="6" />
+      <node id="28859145781927832" at="48,49,49,45" concept="1" />
+      <node id="28859145781927838" at="49,45,50,46" concept="1" />
+      <node id="28859145781927850" at="51,51,52,56" concept="6" />
+      <node id="28859145781927856" at="52,56,53,44" concept="1" />
+      <node id="28859145781927862" at="53,44,54,59" concept="1" />
+      <node id="28859145781927871" at="54,59,55,52" concept="1" />
+      <node id="7981051971753669952" at="58,31,59,45" concept="1" />
+      <node id="28859145781927876" at="61,5,62,33" concept="7" />
+      <node id="28859145781927920" at="65,9,66,52" concept="6" />
+      <node id="28859145781927927" at="66,52,67,63" concept="1" />
+      <node id="7316555209513624079" at="67,63,68,0" concept="9" />
+      <node id="28859145781927891" at="68,0,69,31" concept="1" />
+      <node id="28859145781927944" at="70,68,71,58" concept="6" />
+      <node id="28859145781927951" at="71,58,72,50" concept="6" />
+      <node id="28859145781927956" at="72,50,73,38" concept="1" />
+      <node id="28859145781927962" at="73,38,74,38" concept="1" />
+      <node id="28859145781927898" at="76,44,77,54" concept="1" />
+      <node id="28859145781927907" at="77,54,78,31" concept="1" />
+      <node id="7981051971753716338" at="79,31,80,46" concept="1" />
+      <node id="28859145781927689" at="26,0,28,0" concept="0" trace="DefaultOptionsContainer#()V" />
+      <node id="5345717287655999198" at="42,0,45,0" concept="5" trace="createDefaultFindersOption#()Ljetbrains/mps/ide/findusages/view/optionseditor/options/FindersOptions;" />
+      <node id="7981051971753669952" at="57,44,60,7" concept="4" />
+      <node id="7981051971753716338" at="78,31,81,7" concept="4" />
+      <node id="28859145781927724" at="34,0,38,0" concept="5" trace="setDefaultSearchOptions#(Ljava/lang/String;Ljetbrains/mps/ide/findusages/view/optionseditor/FindUsagesOptions;)V" />
+      <node id="28859145781927752" at="38,0,42,0" concept="5" trace="createDefaultSearchOptions#()Ljetbrains/mps/ide/findusages/view/optionseditor/FindUsagesOptions;" />
+      <node id="28859145781927693" at="28,0,34,0" concept="5" trace="getDefaultSearchOptions#(Ljava/lang/String;)Ljetbrains/mps/ide/findusages/view/optionseditor/FindUsagesOptions;" />
+      <node id="28859145781927843" at="50,46,56,7" concept="3" />
+      <node id="28859145781927933" at="69,31,75,7" concept="3" />
+      <node id="28859145781927814" at="46,72,61,5" concept="12" />
+      <node id="28859145781927895" at="64,62,82,5" concept="12" />
+      <node id="28859145781927802" at="45,0,64,0" concept="5" trace="writeOptions#(Ljetbrains/mps/project/MPSProject;)Lorg/jdom/Element;" />
+      <node id="28859145781927878" at="64,0,84,0" concept="5" trace="readOptions#(Lorg/jdom/Element;Ljetbrains/mps/project/MPSProject;)V" />
+      <scope id="28859145781927692" at="26,36,26,36" />
+      <scope id="5345717287655999201" at="42,55,43,91" />
+      <scope id="7981051971753669952" at="58,31,59,45" />
+      <scope id="7981051971753716338" at="79,31,80,46" />
+      <scope id="28859145781927689" at="26,0,28,0" />
+      <scope id="28859145781927731" at="34,95,36,76" />
+      <scope id="28859145781927755" at="38,58,40,88">
         <var name="scopeOptions" id="28859145781927784" />
       </scope>
-      <scope id="2034046503361591515" at="46,0,49,0" />
-      <scope id="28859145781927896" at="81,0,84,44">
-        <var name="e" id="28859145781927917" />
-      </scope>
-      <scope id="28859145781927897" at="81,44,84,44" />
-      <scope id="28859145781927698" at="29,68,33,18">
+      <scope id="5345717287655999198" at="42,0,45,0" />
+      <scope id="28859145781927816" at="57,44,60,7" />
+      <scope id="28859145781927698" at="28,68,32,18">
         <var name="finders" id="28859145781927706" />
         <var name="result" id="28859145781927700" />
       </scope>
-      <scope id="28859145781927724" at="35,0,39,0">
+      <scope id="28859145781927724" at="34,0,38,0">
         <var name="concept" id="28859145781927727" />
         <var name="defaultSearchOptions" id="28859145781927729" />
       </scope>
-      <scope id="28859145781927752" at="39,0,43,0" />
-      <scope id="28859145781927849" at="58,51,62,52">
+      <scope id="28859145781927752" at="38,0,42,0" />
+      <scope id="28859145781927849" at="51,51,55,52">
         <var name="optionXML" id="28859145781927851" />
       </scope>
-      <scope id="28859145781927943" at="75,68,79,38">
+      <scope id="28859145781927815" at="57,5,61,5">
+        <var name="e" id="28859145781927823" />
+      </scope>
+      <scope id="28859145781927943" at="70,68,74,38">
         <var name="np" id="28859145781927945" />
         <var name="opt" id="28859145781927952" />
       </scope>
-      <scope id="28859145781927693" at="29,0,35,0">
+      <scope id="28859145781927897" at="76,44,81,7" />
+      <scope id="28859145781927693" at="28,0,34,0">
         <var name="concept" id="28859145781927696" />
       </scope>
-      <scope id="28859145781927843" at="57,46,63,7">
+      <scope id="28859145781927843" at="50,46,56,7">
         <var name="np" id="28859145781927847" />
       </scope>
-      <scope id="28859145781927933" at="74,31,80,7">
+      <scope id="28859145781927933" at="69,31,75,7">
         <var name="findersXML" id="28859145781927941" />
       </scope>
-      <scope id="5345717287655999201" at="43,54,50,32">
-        <var name="findersOptions" id="28859145781927970" />
+      <scope id="28859145781927896" at="76,5,82,5">
+        <var name="e" id="28859145781927917" />
       </scope>
-      <scope id="5345717287655999198" at="43,0,52,0" />
-      <scope id="28859145781927825" at="54,9,63,7">
+      <scope id="28859145781927825" at="47,9,56,7">
         <var name="soXML" id="28859145781927827" />
       </scope>
-      <scope id="28859145781927919" at="70,9,80,7">
+      <scope id="28859145781927919" at="65,9,75,7">
         <var name="soXML" id="28859145781927921" />
       </scope>
-      <scope id="28859145781927807" at="52,51,67,33">
+      <scope id="28859145781927807" at="45,51,62,33">
         <var name="defaultFindOptionsXML" id="28859145781927809" />
       </scope>
-      <scope id="28859145781927885" at="69,62,85,5" />
-      <scope id="28859145781927802" at="52,0,69,0">
+      <scope id="28859145781927885" at="64,62,82,5" />
+      <scope id="28859145781927802" at="45,0,64,0">
         <var name="project" id="28859145781927805" />
       </scope>
-      <scope id="28859145781927878" at="69,0,87,0">
+      <scope id="28859145781927878" at="64,0,84,0">
         <var name="project" id="28859145781927883" />
         <var name="state" id="28859145781927881" />
       </scope>
-      <unit id="2034046503361591515" at="45,45,49,5" name="jetbrains.mps.ide.findusages.view.optionseditor.DefaultOptionsContainer$1" />
-      <unit id="28859145781927653" at="19,0,88,0" name="jetbrains.mps.ide.findusages.view.optionseditor.DefaultOptionsContainer" />
+      <unit id="28859145781927653" at="17,0,85,0" name="jetbrains.mps.ide.findusages.view.optionseditor.DefaultOptionsContainer" />
     </file>
   </root>
 </debug-info>

@@ -12,7 +12,7 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1164879751025:jetbrains.mps.baseLanguage.structure.TryCatchStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/5351203823916750322:jetbrains.mps.baseLanguage.structure.TryUniversalStatement" />
   <root nodeRef="r:3d2d6458-be1d-4607-90a0-8d4a439d7355(jetbrains.mps.baseLanguage.checkedbox.sandbox.test)/4726684212254663530">
     <file name="BarCheckedDots.java">
       <node id="297042804010031658" at="8,0,9,0" concept="10" trace="myString" />
@@ -35,8 +35,8 @@
       <node id="297042804010030398" at="55,5,56,16" concept="7" />
       <node id="297042804011726451" at="59,36,60,35" concept="7" />
       <node id="297042804011726451" at="61,5,62,16" concept="7" />
-      <node id="297042804014275286" at="67,42,68,23" concept="7" />
-      <node id="297042804014275276" at="71,5,72,0" concept="9" />
+      <node id="297042804014275276" at="65,36,66,72" concept="1" />
+      <node id="297042804014275276" at="67,5,68,0" concept="9" />
       <node id="297042804013719011" at="29,0,31,0" concept="11" trace="method4#()V" />
       <node id="297042804011814898" at="18,0,21,0" concept="5" trace="method1#(Ljava/lang/String;)V" />
       <node id="297042804011817350" at="22,0,25,0" concept="11" trace="method2#(Ljava/lang/String;)Ljava/lang/String;" />
@@ -44,31 +44,29 @@
       <node id="297042804014295845" at="46,71,49,5" concept="4" />
       <node id="297042804010030398" at="52,142,55,5" concept="4" />
       <node id="297042804011726451" at="58,80,61,5" concept="4" />
-      <node id="297042804014275282" at="67,0,70,0" concept="5" trace="invoke#(Ljava/lang/Integer;)Ljava/lang/Integer;" />
+      <node id="297042804014275276" at="64,113,67,5" concept="4" />
       <node id="297042804012945407" at="25,0,29,0" concept="11" trace="method3#(Ljetbrains/mps/baseLanguage/closures/runtime/_FunctionTypes/_return_P1_E0;)Ljava/lang/String;" />
       <node id="297042804014275273" at="33,67,37,5" concept="12" />
       <node id="297042804010021456" at="12,0,17,0" concept="5" trace="innerMethod#(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;" />
-      <node id="297042804014275276" at="65,36,70,11" concept="1" />
       <node id="297042804017815313" at="40,0,46,0" concept="11" trace="check_pdjdqn_a1a4#(Ljava/lang/Object;)Ljava/lang/Class;" />
       <node id="297042804014295845" at="46,0,52,0" concept="11" trace="check_pdjdqn_a0a6#(Ljava/lang/Object;)Ljava/lang/Class;" />
       <node id="297042804010030398" at="52,0,58,0" concept="11" trace="check_pdjdqn_a0a11#(Ljetbrains/mps/baseLanguage/checkedbox/sandbox/test/BarCheckedDots;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;" />
       <node id="297042804011726451" at="58,0,64,0" concept="11" trace="check_pdjdqn_a0a1a11#(Ljetbrains/mps/baseLanguage/checkedbox/sandbox/test/BarCheckedDots;)Ljava/lang/String;" />
-      <node id="297042804014275276" at="64,113,71,5" concept="4" />
+      <node id="297042804014275276" at="64,0,70,0" concept="11" trace="check_pdjdqn_a0a2a11#(Ljetbrains/mps/baseLanguage/checkedbox/sandbox/test/BarCheckedDots;)V" />
       <node id="297042804010023901" at="31,0,39,0" concept="11" trace="main#([Ljava/lang/String;)V" />
-      <node id="297042804014275276" at="64,0,74,0" concept="11" trace="check_pdjdqn_a0a2a11#(Ljetbrains/mps/baseLanguage/checkedbox/sandbox/test/BarCheckedDots;)V" />
       <scope id="297042804013713262" at="29,64,29,64" />
-      <scope id="297042804014275290" at="36,0,36,27">
-        <var name="e" id="297042804014275292" />
-      </scope>
       <scope id="297042804014275291" at="36,27,36,27" />
       <scope id="297042804011814902" at="18,35,19,36" />
       <scope id="297042804011817353" at="22,61,23,14" />
       <scope id="297042804014275274" at="34,9,35,49" />
+      <scope id="297042804014275290" at="36,5,37,5">
+        <var name="e" id="297042804014275292" />
+      </scope>
       <scope id="297042804017815313" at="41,36,42,42" />
       <scope id="297042804014295845" at="47,36,48,42" />
       <scope id="297042804010030398" at="53,36,54,93" />
       <scope id="297042804011726451" at="59,36,60,35" />
-      <scope id="297042804014275285" at="67,42,68,23" />
+      <scope id="297042804014275276" at="65,36,66,72" />
       <scope id="297042804012945408" at="25,124,27,14" />
       <scope id="297042804013719011" at="29,0,31,0" />
       <scope id="297042804010021460" at="12,49,15,14" />
@@ -78,9 +76,6 @@
       <scope id="297042804011817350" at="22,0,25,0">
         <var name="val" id="297042804012946187" />
       </scope>
-      <scope id="297042804014275282" at="67,0,70,0">
-        <var name="a" id="297042804014275282" />
-      </scope>
       <scope id="297042804012945407" at="25,0,29,0">
         <var name="f" id="297042804013703587" />
       </scope>
@@ -88,11 +83,11 @@
       <scope id="297042804014295845" at="46,71,50,16" />
       <scope id="297042804010030398" at="52,142,56,16" />
       <scope id="297042804011726451" at="58,80,62,16" />
+      <scope id="297042804014275276" at="64,113,68,0" />
       <scope id="297042804010021456" at="12,0,17,0">
         <var name="a" id="297042804010021472" />
         <var name="b" id="297042804010021480" />
       </scope>
-      <scope id="297042804014275276" at="65,36,70,11" />
       <scope id="297042804010023907" at="31,42,37,5" />
       <scope id="297042804017815313" at="40,0,46,0">
         <var name="checkedDotOperand" id="297042804017815313" />
@@ -102,21 +97,19 @@
       </scope>
       <scope id="297042804010030398" at="52,0,58,0">
         <var name="checkedDotOperand" id="297042804010030398" />
-        <var name="myString_pdjdqn_a0a0a11" id="297042804010030398" />
-        <var name="myString_pdjdqn_b0a0a11" id="297042804010030398" />
+        <var name="myString_pdjdqn_a0a0a11" id="4726684212254665019" />
+        <var name="myString_pdjdqn_b0a0a11" id="4726684212254665028" />
       </scope>
       <scope id="297042804011726451" at="58,0,64,0">
         <var name="checkedDotOperand" id="297042804011726451" />
       </scope>
+      <scope id="297042804014275276" at="64,0,70,0">
+        <var name="checkedDotOperand" id="297042804014275276" />
+      </scope>
       <scope id="297042804010023901" at="31,0,39,0">
         <var name="args" id="297042804010023902" />
       </scope>
-      <scope id="297042804014275276" at="64,113,72,0" />
-      <scope id="297042804014275276" at="64,0,74,0">
-        <var name="checkedDotOperand" id="297042804014275276" />
-      </scope>
-      <unit id="297042804014275282" at="66,52,70,7" name="jetbrains.mps.baseLanguage.checkedbox.sandbox.test.BarCheckedDots$1" />
-      <unit id="4726684212254663530" at="7,0,75,0" name="jetbrains.mps.baseLanguage.checkedbox.sandbox.test.BarCheckedDots" />
+      <unit id="4726684212254663530" at="7,0,71,0" name="jetbrains.mps.baseLanguage.checkedbox.sandbox.test.BarCheckedDots" />
     </file>
   </root>
   <root nodeRef="r:3d2d6458-be1d-4607-90a0-8d4a439d7355(jetbrains.mps.baseLanguage.checkedbox.sandbox.test)/53796356308657384">
@@ -134,14 +127,14 @@
       <node id="3905905920761566044" at="26,31,27,31" concept="1" />
       <node id="3905905920761566055" at="27,31,28,35" concept="1" />
       <node id="3905905920761566071" at="28,35,29,31" concept="1" />
-      <node id="2400318052853024397" at="29,31,30,53" concept="8" />
-      <node id="2400318052853024269" at="30,53,31,31" concept="1" />
+      <node id="2400318052853024397" at="29,31,30,52" concept="8" />
+      <node id="2400318052853024269" at="30,52,31,31" concept="1" />
       <node id="2319519288049912862" at="33,24,34,13" concept="7" />
       <node id="1023687332192250976" at="36,26,37,72" concept="6" />
       <node id="1023687332192250993" at="37,72,38,19" concept="6" />
       <node id="1023687332192250999" at="39,28,40,33" concept="1" />
-      <node id="831786216887884121" at="43,42,44,53" concept="8" />
-      <node id="831786216887884124" at="44,53,45,69" concept="1" />
+      <node id="831786216887884121" at="43,42,44,52" concept="8" />
+      <node id="831786216887884124" at="44,52,45,69" concept="1" />
       <node id="1023687332192249984" at="47,46,48,35" concept="1" />
       <node id="4741735385321338886" at="48,35,49,20" concept="7" />
       <node id="1023687332192250962" at="51,56,52,35" concept="1" />
@@ -256,17 +249,17 @@
       </scope>
       <scope id="53796356308657442" at="61,0,67,0">
         <var name="checkedDotOperand" id="53796356308657442" />
-        <var name="foo2" id="53796356308657442" />
-        <var name="s" id="53796356308657442" />
-        <var name="t" id="53796356308657442" />
+        <var name="foo2" id="3021153905150326112" />
+        <var name="s" id="3021153905151751701" />
+        <var name="t" id="3021153905151618206" />
       </scope>
       <scope id="53796356308818305" at="67,0,73,0">
         <var name="checkedDotOperand" id="53796356308818305" />
-        <var name="s" id="53796356308818305" />
+        <var name="s" id="3021153905151726000" />
       </scope>
       <scope id="53796356308657431" at="73,0,79,0">
         <var name="checkedDotOperand" id="53796356308657431" />
-        <var name="s" id="53796356308657431" />
+        <var name="s" id="3021153905151720135" />
       </scope>
       <scope id="2319519288049912980" at="79,0,85,0">
         <var name="checkedDotOperand" id="2319519288049912980" />
@@ -278,7 +271,7 @@
       </scope>
       <scope id="3905905920761566061" at="91,0,97,0">
         <var name="checkedDotOperand" id="3905905920761566061" />
-        <var name="myString" id="3905905920761566061" />
+        <var name="myString" id="3021153905120367411" />
       </scope>
       <scope id="3905905920761566072" at="97,0,103,0">
         <var name="checkedDotOperand" id="3905905920761566072" />
@@ -290,7 +283,7 @@
       </scope>
       <scope id="1023687332192251005" at="109,0,115,0">
         <var name="checkedDotOperand" id="1023687332192251005" />
-        <var name="s" id="1023687332192251005" />
+        <var name="s" id="1023687332192535013" />
       </scope>
       <scope id="831786216887884151" at="115,0,121,0">
         <var name="checkedDotOperand" id="831786216887884151" />

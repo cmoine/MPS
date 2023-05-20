@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-d9aj71ue70q7fgx9zjyx8gzuyl298xb" />
+<product version="3" modelHash="b6qnveit709vavf9l30kui2cra9viqc">
+  <files names="CodeAddition_ActionGroup.java:PluginSolution_ApplicationPlugin.java:ShowDoc_Action.java" />
+</product>
 

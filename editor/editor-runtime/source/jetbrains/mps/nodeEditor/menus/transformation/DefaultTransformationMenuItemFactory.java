@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,19 +15,18 @@
  */
 package jetbrains.mps.nodeEditor.menus.transformation;
 
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.nodeEditor.menus.MenuItemFactory;
 import jetbrains.mps.openapi.editor.descriptor.TransformationMenu;
 import jetbrains.mps.openapi.editor.menus.transformation.TransformationMenuContext;
 import jetbrains.mps.openapi.editor.menus.transformation.TransformationMenuItem;
 import jetbrains.mps.openapi.editor.menus.transformation.TransformationMenuLookup;
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SLanguage;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * A straightforward implementation of {@link MenuItemFactory}. Looks up the menus and returns items created by each menu, concatenated.
@@ -44,13 +43,13 @@ class DefaultTransformationMenuItemFactory implements MenuItemFactory<Transforma
   @Override
   public List<TransformationMenuItem> createItems(@NotNull TransformationMenuContext context, @NotNull TransformationMenuLookup menuLookup) {
     Collection<TransformationMenu> menus = menuLookup.lookup(myUsedLanguages, context.getMenuLocation());
-    if (LOGGER.isTraceEnabled()) {
+    if (LOGGER.isTraceLevel()) {
       LOGGER.trace("Menu lookup " + menuLookup + " returned " + menus);
     }
 
     List<TransformationMenuItem> result = new ArrayList<>();
     for (TransformationMenu menu : menus) {
-      if (LOGGER.isTraceEnabled()) {
+      if (LOGGER.isTraceLevel()) {
         LOGGER.trace("Creating items of menu " + menu);
       }
       result.addAll(menu.createMenuItems(context));

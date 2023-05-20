@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -73,24 +73,16 @@ public final class EditorNavigator {
   }
 
   public EditorNavigator selectIfChild() {
-    mySelectCondition = new Condition<SNode>() {
-      @Override
-      public boolean met(SNode node) {
-        return node.getParent() != null;
-      }
-    };
+    mySelectCondition = node -> node.getParent() != null;
     return this;
   }
 
 
   public void open(@NotNull final SNodeReference node) {
-    myProject.getModelAccess().runWriteInEDT(new Runnable() {
-      @Override
-      public void run() {
-        SNode target = node.resolve(myProject.getRepository());
-        if (target != null) {
-          NavigationSupport.getInstance().openNode(myProject, target, needFocus(target), needSelection(target));
-        }
+    myProject.getModelAccess().runReadInEDT(() -> {
+      SNode target = node.resolve(myProject.getRepository());
+      if (target != null) {
+        NavigationSupport.getInstance().openNode(myProject, target, needFocus(target), needSelection(target));
       }
     });
   }

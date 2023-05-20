@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,55 +16,50 @@
 package jetbrains.mps.ide.persistence;
 
 import com.intellij.openapi.components.ApplicationComponent;
-import com.intellij.openapi.util.KeyedExtensionCollector;
 import jetbrains.mps.ide.MPSCoreComponents;
-import org.apache.log4j.LogManager;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.persistence.PersistenceRegistry;
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
+/*
+ * XXX likely shall get merged into ModelFactoryRegister, no reason for a distinct
+ */
 public class PersistenceComponent implements ApplicationComponent {
-  private static final Logger LOG = LogManager.getLogger(PersistenceComponent.class);
+  private static final Logger LOG = Logger.getLogger(PersistenceComponent.class);
 
-  private final static KeyedExtensionCollector<ModelRootSettingsEditorProvider, String> oursCollector =
-    new KeyedExtensionCollector<ModelRootSettingsEditorProvider, String>("com.intellij.mps.modelRootSettings") {
-      @NotNull
-      @Override
-      protected String keyToString(@NotNull String key) {
-        return key;
-      }
-    };
 
-  public PersistenceComponent(MPSCoreComponents components) {
-  }
-
-  public static ModelRootSettingsEditor getModelRootSettingsEditor(String type) {
-    List<ModelRootSettingsEditorProvider> providers = oursCollector.forKey(type);
-    if (providers.isEmpty()) return null;
-    LOG.assertLog(providers.size() == 1, "Assertion failed.");
-    return providers.get(0).createEditor();
+  public PersistenceComponent() {
   }
 
   @Override
   public void initComponent() {
-    PersistenceRegistry registry = PersistenceRegistry.getInstance();
+    final MPSCoreComponents mpsCore = MPSCoreComponents.getInstance();
+    PersistenceRegistry registry = mpsCore.getPlatform().findComponent(PersistenceRegistry.class);
+
+    final ModelIdFactoryExtension[] idFactories = ModelIdFactoryExtension.EXTENSION_POINT.getExtensions();
+    for (ModelIdFactoryExtension idFactory : idFactories) {
+      try {
+        registry.setModelIdFactory(idFactory.getType(), idFactory.createInstance());
+      } catch (RuntimeException ex) {
+        LOG.error(String.format("Failed to instantiate model id factory extension (class %s from plugin %s)", idFactory.myImplementationClass, idFactory.getPluginDescriptor().getPluginId()), ex);
+      }
+    }
 
     ModelRootFactoryEP[] extensions = ModelRootFactoryEP.EP_NAME.getExtensions();
     for (ModelRootFactoryEP extension : extensions) {
-      registry.setModelRootFactory(extension.rootType, extension.getFactory());
+      try {
+        registry.setModelRootFactory(extension.rootType, extension.createInstance());
+      } catch (RuntimeException ex) {
+        String f = "Failed to instantiate model root factory extension (class %s from plugin %s)";
+        String m = String.format(f, extension.className, extension.getPluginDescriptor().getPluginId());
+        LOG.error(m);
+      }
     }
-  }
-
-  @Override
-  public void disposeComponent() {
-
   }
 
   @NotNull
   @Override
   public String getComponentName() {
-    return "MPS custom persistence";
+    return "ModelRootFactory Register Component";
   }
 }

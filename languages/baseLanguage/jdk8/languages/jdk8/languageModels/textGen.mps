@@ -3,8 +3,7 @@
   <persistence version="9" />
   <attribute name="concise" value="true" />
   <languages>
-    <use id="b83431fe-5c8f-40bc-8a36-65e25f4dd253" name="jetbrains.mps.lang.textGen" version="0" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="fa73d85a-ac7f-447b-846c-fcdc41caa600(jetbrains.mps.devkit.aspect.textgen)" />
   </languages>
   <imports>
     <import index="dmyu" ref="r:c6eeedda-084d-4659-9c4d-80b7768f2bb2(jetbrains.mps.baseLanguage.textGen)" />
@@ -54,7 +53,7 @@
     </language>
   </registry>
   <node concept="WtQ9Q" id="5_deIS4VsfG">
-    <ref role="WuzLi" to="jqf9:1vrGgVFsInp" resolve="SuperInterfaceMethodCall" />
+    <ref role="WuzLi" to="jqf9:1vrGgVFsInp" resolve="SuperInterfaceMethodCall_old" />
     <node concept="11bSqf" id="5_deIS4VsfH" role="11c4hB">
       <node concept="3clFbS" id="5_deIS4VsfI" role="2VODD2">
         <node concept="lc7rE" id="5_deIS4Vt$4" role="3cqZAp">
@@ -65,7 +64,7 @@
               <node concept="37Cfm0" id="6fUw26UkGHH" role="2OqNvi">
                 <node concept="1aIX9F" id="6fUw26UkGHI" role="37CeNk">
                   <node concept="26LbJo" id="5_deIS4Vu0a" role="1aIX9E">
-                    <ref role="26LbJp" to="jqf9:1vrGgVFtizu" />
+                    <ref role="26LbJp" to="jqf9:1vrGgVFtizu" resolve="classifier_old" />
                   </node>
                 </node>
               </node>
@@ -77,6 +76,18 @@
           <node concept="1bDJIP" id="5_deIS4Vv_d" role="lcghm">
             <ref role="1rvKf6" to="dmyu:hYHLMDp" resolve="methodCall" />
             <node concept="117lpO" id="5_deIS4Vxcu" role="1ryhcI" />
+          </node>
+        </node>
+      </node>
+    </node>
+  </node>
+  <node concept="WtQ9Q" id="4c$BrPwIrcM">
+    <ref role="WuzLi" to="jqf9:43H3v3JgacM" resolve="DefaultModifier_old" />
+    <node concept="11bSqf" id="4c$BrPwIrcN" role="11c4hB">
+      <node concept="3clFbS" id="4c$BrPwIrcO" role="2VODD2">
+        <node concept="lc7rE" id="4c$BrPwIrd9" role="3cqZAp">
+          <node concept="la8eA" id="4c$BrPwIrdv" role="lcghm">
+            <property role="lacIc" value="default" />
           </node>
         </node>
       </node>

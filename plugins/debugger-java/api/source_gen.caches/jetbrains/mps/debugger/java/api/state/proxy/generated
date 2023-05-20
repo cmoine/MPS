@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="3gc5pigph96mxp8cirnixvpqhkrgymi" />
+<product version="3" modelHash="-9h6gex9nusqk7c9h4r2ucyatpb6r94x">
+  <files names="JavaLocation.java:JavaStackFrame.java:JavaThread.java:JavaValue.java:ProxyForJava.java:ValueWrapper.java:ValueWrapperFactory.java" />
+</product>
 

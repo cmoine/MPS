@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,8 @@
 package jetbrains.mps.smodel.adapter.structure.ref;
 
 import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
-import jetbrains.mps.smodel.adapter.ids.SContainmentLinkId;
-import jetbrains.mps.smodel.adapter.ids.SReferenceLinkId;
 import jetbrains.mps.smodel.adapter.structure.FormatException;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.smodel.adapter.structure.concept.InvalidConcept;
-import jetbrains.mps.smodel.adapter.structure.link.SContainmentLinkAdapter;
-import jetbrains.mps.smodel.adapter.structure.property.InvalidProperty;
-import jetbrains.mps.smodel.runtime.LinkDescriptor;
 import jetbrains.mps.smodel.runtime.ReferenceDescriptor;
 import jetbrains.mps.util.NameUtil;
 import org.jetbrains.annotations.NotNull;
@@ -41,7 +35,7 @@ public final class InvalidReferenceLink extends SReferenceLinkAdapter {
   private final String myConcept;
 
   public InvalidReferenceLink(@Nullable String concept, @NotNull String name) {
-    super(name);
+    super(MetaIdFactory.INVALID_REF_ID, name);
     if (concept != null) {
       myConcept = concept;
     } else {
@@ -69,13 +63,7 @@ public final class InvalidReferenceLink extends SReferenceLinkAdapter {
 
   @Nullable
   @Override
-  public ReferenceDescriptor getReferenceDescriptor() {
-    return null;
-  }
-
-  @Nullable
-  @Override
-  public SNode getDeclarationNode() {
+  protected ReferenceDescriptor getReferenceDescriptor() {
     return null;
   }
 

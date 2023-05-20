@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,7 @@
  */
 package jetbrains.mps.smodel.persistence.def;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.LogManager;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.util.JDOMUtil;
 import jetbrains.mps.vfs.IFile;
 import org.jdom.Element;
@@ -24,11 +23,10 @@ import org.jdom.JDOMException;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class DefaultMetadataPersistence {
-  private static final Logger LOG = LogManager.getLogger(DefaultMetadataPersistence.class);
+  private static final Logger LOG = Logger.getLogger(DefaultMetadataPersistence.class);
 
   private static final String ENTRY = "entry";
   private static final String KEY = "key";
@@ -36,9 +34,9 @@ public class DefaultMetadataPersistence {
 
   public static Map<String, String> load(IFile file) {
     try {
-      Map<String, String> result = new HashMap<String, String>();
+      Map<String, String> result = new HashMap<>();
       Element root = JDOMUtil.loadDocument(file).getRootElement();
-      for (Element entry : (List<Element>) root.getChildren(ENTRY)) {
+      for (Element entry : root.getChildren(ENTRY)) {
         result.put(entry.getChild(KEY).getText(), entry.getChild(VALUE).getText());
       }
       return result;

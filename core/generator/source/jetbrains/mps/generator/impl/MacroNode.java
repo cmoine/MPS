@@ -17,7 +17,6 @@ package jetbrains.mps.generator.impl;
 
 import jetbrains.mps.generator.GenerationCanceledException;
 import jetbrains.mps.generator.runtime.TemplateContext;
-import jetbrains.mps.generator.runtime.TemplateExecutionEnvironment;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNode;
@@ -31,16 +30,16 @@ import java.util.List;
  */
 interface MacroNode {
   @NotNull
-  public abstract List<SNode> apply(@NotNull TemplateContext templateContext) throws DismissTopMappingRuleException, GenerationFailureException,
-      GenerationCanceledException;
+  List<SNode> apply(@NotNull TemplateContext templateContext) throws DismissTopMappingRuleException, GenerationFailureException,
+                                                                     GenerationCanceledException;
   @Nullable
-  public MacroNode getNextMacro();
+  MacroNode getNextMacro();
 
   @NotNull
-  public SNodeReference getMacroNodeRef();
+  SNodeReference getMacroNodeRef();
 
   @Nullable
-  public String getMappingLabel();
+  String getMappingLabel();
 
   interface Factory {
     MacroNode create(@NotNull SNode macro, @NotNull TemplateNode templateNode, @Nullable MacroNode next);

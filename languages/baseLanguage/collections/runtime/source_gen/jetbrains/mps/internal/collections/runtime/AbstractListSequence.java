@@ -90,7 +90,7 @@ public abstract class AbstractListSequence<T> extends AbstractCollectionSequence
   }
   @Override
   public boolean isNotEmpty() {
-    return !((getList().isEmpty()));
+    return !(getList().isEmpty());
   }
   @Override
   public T removeElementAt(int idx) {

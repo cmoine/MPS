@@ -4,37 +4,25 @@ package jetbrains.mps.testbench.junit.suites;
 
 import org.junit.runner.RunWith;
 import jetbrains.mps.testbench.junit.runners.TeamCityParameterizedRunner;
-import jetbrains.mps.tool.environment.Environment;
+import jetbrains.mps.annotations.GeneratedClass;
+import jetbrains.mps.tool.environment.IdeaEnvironment;
 import jetbrains.mps.project.Project;
 import org.junit.runners.Parameterized;
 import java.util.List;
 import java.lang.reflect.InvocationTargetException;
 import jetbrains.mps.tool.environment.EnvironmentConfig;
-import jetbrains.mps.tool.environment.IdeaEnvironment;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import java.util.ArrayList;
 import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.util.Processor;
 import org.junit.Before;
 import java.io.File;
 import org.junit.After;
-import jetbrains.mps.baseLanguage.closures.runtime.Wrappers;
-import jetbrains.mps.make.MPSCompilationResult;
-import jetbrains.mps.smodel.MPSModuleRepository;
-import jetbrains.mps.make.ModuleMaker;
-import jetbrains.mps.util.IterableUtil;
-import jetbrains.mps.progress.EmptyProgressMonitor;
-import jetbrains.mps.compiler.JavaCompilerOptionsComponent;
-import jetbrains.mps.smodel.ModelAccess;
-import jetbrains.mps.classloading.ClassLoaderManager;
 
 @RunWith(value = TeamCityParameterizedRunner.class)
+@GeneratedClass(node = "r:984811b0-078d-45d7-bf58-fa501204c2fc(jetbrains.mps.testbench.junit.suites)/7308922687953975578", model = "r:984811b0-078d-45d7-bf58-fa501204c2fc(jetbrains.mps.testbench.junit.suites)")
 public class BaseProjectsTest {
-  public static final String MIGRATION_PLUGIN = "migrationAssistant";
-  public static final String MIGRATION_PLUGIN_ID = "jetbrains.mps.ide.migration.assistant";
-
-  private static Environment ourEnv;
+  private static IdeaEnvironment ourEnv;
 
   private String myProjectDir;
   private Project myProject;
@@ -45,29 +33,26 @@ public class BaseProjectsTest {
 
   @Parameterized.Parameters
   public static List<Object[]> testParameters() throws InvocationTargetException, InterruptedException {
-    EnvironmentConfig defaultConfig = EnvironmentConfig.defaultConfig();
-    // todo generalize it when there are more tests 
-    defaultConfig.addPlugin(MIGRATION_PLUGIN, MIGRATION_PLUGIN_ID);
+    // At the moment, there's only IDEA-started test, and seems that set of plugins is controlled by 'testbench' module classpath
+    EnvironmentConfig config = EnvironmentConfig.defaultConfig().setCreatePluginClassLoaders(true).withAutomaticPluginDiscovery().withTestModeOn();
 
-    ourEnv = IdeaEnvironment.getOrCreate(defaultConfig);
+    ourEnv = new IdeaEnvironment(config);
+    ourEnv.init();
     String projectsDir = System.getProperty("projects_dir");
     VirtualFile projectsRoot = LocalFileSystem.getInstance().findFileByPath(projectsDir);
 
     final List<Object[]> projects = new ArrayList<Object[]>();
-    VfsUtil.processFilesRecursively(projectsRoot, new Processor<VirtualFile>() {
-      public boolean process(VirtualFile file) {
-        if (!(file.isValid()) || !(file.isDirectory())) {
-          return true;
-        }
-        // is a project dir? 
-        if (!(file.getName().equals(com.intellij.openapi.project.Project.DIRECTORY_STORE_FOLDER))) {
-          return true;
-        }
-        projects.add(new String[]{file.getParent().getPath()});
+    VfsUtil.processFilesRecursively(projectsRoot, (VirtualFile file) -> {
+      if (!(file.isValid()) || !(file.isDirectory())) {
         return true;
       }
+      // is a project dir?
+      if (!(file.getName().equals(com.intellij.openapi.project.Project.DIRECTORY_STORE_FOLDER))) {
+        return true;
+      }
+      projects.add(new String[]{file.getParent().getPath()});
+      return true;
     });
-    make(null);
 
     return projects;
   }
@@ -75,30 +60,14 @@ public class BaseProjectsTest {
   @Before
   public void openProject() {
     myProject = ourEnv.openProject(new File(myProjectDir));
-    make(myProject);
+    new TestMakeUtil(ourEnv.getPlatform()).make(myProject);
   }
 
   @After
   public void closeProject() {
-    myProject.dispose();
+    ourEnv.closeProject(myProject);
   }
 
-  protected static void make(Project p) {
-    final Wrappers._T<MPSCompilationResult> mpsCompilationResult = new Wrappers._T<MPSCompilationResult>();
-    (p == null ? MPSModuleRepository.getInstance() : p.getRepository()).getModelAccess().runReadAction(new Runnable() {
-      public void run() {
-        ModuleMaker maker = new ModuleMaker();
-        mpsCompilationResult.value = maker.make(IterableUtil.asCollection(MPSModuleRepository.getInstance().getModules()), new EmptyProgressMonitor(), JavaCompilerOptionsComponent.DEFAULT_JAVA_COMPILER_OPTIONS);
-      }
-    });
-    if (mpsCompilationResult.value.isReloadingNeeded()) {
-      ModelAccess.instance().runWriteAction(new Runnable() {
-        public void run() {
-          ClassLoaderManager.getInstance().reloadModules(mpsCompilationResult.value.getChangedModules());
-        }
-      });
-    }
-  }
 
   public Project getContextProject() {
     return myProject;

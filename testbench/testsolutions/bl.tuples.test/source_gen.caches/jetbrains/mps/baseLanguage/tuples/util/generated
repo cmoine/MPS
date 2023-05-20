@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-9spogd1epvkhvl17ha3xvc3jbjoiaps" />
+<product version="3" modelHash="9g2d6lmlxuo704lyom1cduya98x2pu8">
+  <files names="A.java:Foo.java:MPS11114.java:Questionnable.java:Sample.java:SharedPair.java:Sum.java:Tpl.java" />
+</product>
 

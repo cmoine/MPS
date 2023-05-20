@@ -59,7 +59,16 @@ public abstract class AbstractLeftColumn {
     return null;
   }
 
-  public abstract void relayout();
+  public void mouseMoved(MouseEvent e) {
+  }
+
+  public void mouseExited() {
+  }
+
+  public abstract void relayout(boolean updateFolding);
+
+  public void editorRebuilt() {
+  }
 
   public void mousePressed(MouseEvent e) {
     if (e.isPopupTrigger()) {

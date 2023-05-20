@@ -4,36 +4,66 @@ package jetbrains.mps.samples.attribute.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_CommentAttribute = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CommentAttribute2 = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_HandlerAsChild = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_HandlerAsRoot = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SubConceptToTransform = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SubConceptToTransformNested = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_CommentAttribute;
+  private ConceptPresentation props_CommentAttribute2;
+  private ConceptPresentation props_HandlerAsChild;
+  private ConceptPresentation props_HandlerAsRoot;
+  private ConceptPresentation props_SubConceptToTransform;
+  private ConceptPresentation props_SubConceptToTransformNested;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.CommentAttribute:
+        if (props_CommentAttribute == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("CommentAttribute");
+          props_CommentAttribute = cpb.create();
+        }
         return props_CommentAttribute;
-      case 1:
+      case LanguageConceptSwitch.CommentAttribute2:
+        if (props_CommentAttribute2 == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("CommentAttribute2");
+          props_CommentAttribute2 = cpb.create();
+        }
         return props_CommentAttribute2;
-      case 2:
+      case LanguageConceptSwitch.HandlerAsChild:
+        if (props_HandlerAsChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_HandlerAsChild = cpb.create();
+        }
         return props_HandlerAsChild;
-      case 3:
+      case LanguageConceptSwitch.HandlerAsRoot:
+        if (props_HandlerAsRoot == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_HandlerAsRoot = cpb.create();
+        }
         return props_HandlerAsRoot;
-      case 4:
+      case LanguageConceptSwitch.SubConceptToTransform:
+        if (props_SubConceptToTransform == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_SubConceptToTransform = cpb.create();
+        }
         return props_SubConceptToTransform;
-      case 5:
+      case LanguageConceptSwitch.SubConceptToTransformNested:
+        if (props_SubConceptToTransformNested == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_SubConceptToTransformNested = cpb.create();
+        }
         return props_SubConceptToTransformNested;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="ai1v2dcwybj52iuimapr5g7h8t78le2" />
+<product version="3" modelHash="dy6kpw09b2zyx9ehz6p7lj5oc55nqrn">
+  <files names="AbstractStateMachineElement_Constraints.java:ConstraintsAspectDescriptor.java:EventReference_Constraints.java:StateReference_Constraints.java" />
+</product>
 

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-8g3cs4a3atk5plo3rbtdwph2dlci6ke" />
+<product version="3" modelHash="behy4sfu92vg9glci8dsszzpd3vpest">
+  <files names="ActionAspectDescriptorImpl.java:ApplicableTypesInfo.java:CollectionTypeCreationUtil.java:CustomContainerDeclaration_make_public.java:Default.java:closure_operations.java:creators.java:replace_sequence_type.java:set_ascending_order.java:single_argument_operations.java" />
+</product>
 

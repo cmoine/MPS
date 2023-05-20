@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-a3v4yxep86n942xq4h3j4m9euvjufrg" />
+<product version="3" modelHash="7t40i1i0u2pidkzdmj2b7ctkwimfmyx">
+  <files names="EditorAspectDescriptorImpl.java:ExportAsImage_Editor.java:ExportAsImage_EditorBuilder_a.java" />
+</product>
 

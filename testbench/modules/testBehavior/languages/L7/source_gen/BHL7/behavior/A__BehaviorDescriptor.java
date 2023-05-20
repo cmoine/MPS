@@ -5,12 +5,9 @@ package BHL7.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.List;
 import java.util.Arrays;
@@ -26,18 +23,17 @@ import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
 
 public final class A__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x559729dec0466d3cL, "BHL7.structure.A");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<Integer> nonVirtualMethod_id5mnatV0hAPp = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("nonVirtualMethod").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("5mnatV0hAPp").registry(REGISTRY).build();
-  public static final SMethod<Object> virtualMethod_id5mnatV0hAPC = new SMethodBuilder<Object>(new SJavaCompoundTypeImpl(Object.class)).name("virtualMethod").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("5mnatV0hAPC").registry(REGISTRY).build();
-  public static final SMethod<Integer> staticMethod_id5mnatV0hAQH = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("staticMethod").modifiers(SModifiersImpl.create(1, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("5mnatV0hAQH").registry(REGISTRY).build();
-  public static final SMethod<Object> staticVirtualMethod_id5mnatV0hATt = new SMethodBuilder<Object>(new SJavaCompoundTypeImpl(Object.class)).name("staticVirtualMethod").modifiers(SModifiersImpl.create(9, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("5mnatV0hATt").registry(REGISTRY).build();
-  public static final SMethod<Void> justVoidReturnTypeMethod1_id5mnatV0hB9t = new SMethodBuilder<Void>(new SJavaCompoundTypeImpl(Void.class)).name("justVoidReturnTypeMethod1").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("5mnatV0hB9t").registry(REGISTRY).build();
-  public static final SMethod<Void> justVoidReturnTypeMethod2_id4XEqvthVyKi = new SMethodBuilder<Void>(new SJavaCompoundTypeImpl(Void.class)).name("justVoidReturnTypeMethod2").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("4XEqvthVyKi").registry(REGISTRY).build();
-  public static final SMethod<Boolean> boolMethod1_id2eC$PxWCtoT = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("boolMethod1").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("2eC$PxWCtoT").registry(REGISTRY).build();
-  public static final SMethod<Boolean> boolMethod2_idjZ8XPdgmd$ = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("boolMethod2").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("jZ8XPdgmd$").registry(REGISTRY).build();
-  public static final SMethod<Iterable<Boolean>> seqMethod_id2eC$PxWCGmD = new SMethodBuilder<Iterable<Boolean>>(new SJavaCompoundTypeImpl((Class<Iterable<Boolean>>) ((Class) Object.class))).name("seqMethod").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("2eC$PxWCGmD").registry(REGISTRY).build();
-  public static final SMethod<Iterable<Boolean>> seqMethod2_id2eC$PxWDDfD = new SMethodBuilder<Iterable<Boolean>>(new SJavaCompoundTypeImpl((Class<Iterable<Boolean>>) ((Class) Object.class))).name("seqMethod2").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("2eC$PxWDDfD").registry(REGISTRY).build();
+  public static final SMethod<Integer> nonVirtualMethod_id5mnatV0hAPp = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("nonVirtualMethod").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(6167444251392503129L).languageId(0xb1e014d3f948db39L, 0x4239359f64574d2aL).build2();
+  public static final SMethod<Object> virtualMethod_id5mnatV0hAPC = new SMethodBuilder<Object>(new SJavaCompoundTypeImpl(Object.class)).name("virtualMethod").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(6167444251392503144L).languageId(0xb1e014d3f948db39L, 0x4239359f64574d2aL).build2();
+  public static final SMethod<Integer> staticMethod_id5mnatV0hAQH = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("staticMethod").modifiers(1, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(6167444251392503213L).languageId(0xb1e014d3f948db39L, 0x4239359f64574d2aL).build2();
+  public static final SMethod<Object> staticVirtualMethod_id5mnatV0hATt = new SMethodBuilder<Object>(new SJavaCompoundTypeImpl(Object.class)).name("staticVirtualMethod").modifiers(9, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(6167444251392503389L).languageId(0xb1e014d3f948db39L, 0x4239359f64574d2aL).build2();
+  public static final SMethod<Void> justVoidReturnTypeMethod1_id5mnatV0hB9t = new SMethodBuilder<Void>(new SJavaCompoundTypeImpl(Void.class)).name("justVoidReturnTypeMethod1").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(6167444251392504413L).languageId(0xb1e014d3f948db39L, 0x4239359f64574d2aL).build2();
+  public static final SMethod<Void> justVoidReturnTypeMethod2_id4XEqvthVyKi = new SMethodBuilder<Void>(new SJavaCompoundTypeImpl(Void.class)).name("justVoidReturnTypeMethod2").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(5722502787480038418L).languageId(0xb1e014d3f948db39L, 0x4239359f64574d2aL).build2();
+  public static final SMethod<Boolean> boolMethod1_id2eC$PxWCtoT = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("boolMethod1").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(2569465595672254009L).languageId(0xb1e014d3f948db39L, 0x4239359f64574d2aL).build2();
+  public static final SMethod<Boolean> boolMethod2_idjZ8XPdgmd$ = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("boolMethod2").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(360045928603804516L).languageId(0xb1e014d3f948db39L, 0x4239359f64574d2aL).build2();
+  public static final SMethod<Iterable<Boolean>> seqMethod_id2eC$PxWCGmD = new SMethodBuilder<Iterable<Boolean>>(new SJavaCompoundTypeImpl((Class<Iterable<Boolean>>) ((Class) Object.class))).name("seqMethod").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(2569465595672315305L).languageId(0xb1e014d3f948db39L, 0x4239359f64574d2aL).build2();
+  public static final SMethod<Iterable<Boolean>> seqMethod2_id2eC$PxWDDfD = new SMethodBuilder<Iterable<Boolean>>(new SJavaCompoundTypeImpl((Class<Iterable<Boolean>>) ((Class) Object.class))).name("seqMethod2").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(2569465595672564713L).languageId(0xb1e014d3f948db39L, 0x4239359f64574d2aL).build2();
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(nonVirtualMethod_id5mnatV0hAPp, virtualMethod_id5mnatV0hAPC, staticMethod_id5mnatV0hAQH, staticVirtualMethod_id5mnatV0hATt, justVoidReturnTypeMethod1_id5mnatV0hB9t, justVoidReturnTypeMethod2_id4XEqvthVyKi, boolMethod1_id2eC$PxWCtoT, boolMethod2_idjZ8XPdgmd$, seqMethod_id2eC$PxWCGmD, seqMethod2_id2eC$PxWDDfD);
 
@@ -87,7 +83,6 @@ public final class A__BehaviorDescriptor extends BaseBHDescriptor {
   }
 
   /*package*/ A__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override

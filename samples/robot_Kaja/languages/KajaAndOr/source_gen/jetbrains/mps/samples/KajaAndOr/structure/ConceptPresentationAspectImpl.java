@@ -4,27 +4,41 @@ package jetbrains.mps.samples.KajaAndOr.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_And = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_LogicalOperator = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Or = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_And;
+  private ConceptPresentation props_LogicalOperator;
+  private ConceptPresentation props_Or;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.And:
+        if (props_And == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("and");
+          props_And = cpb.create();
+        }
         return props_And;
-      case 1:
+      case LanguageConceptSwitch.LogicalOperator:
+        if (props_LogicalOperator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_LogicalOperator = cpb.create();
+        }
         return props_LogicalOperator;
-      case 2:
+      case LanguageConceptSwitch.Or:
+        if (props_Or == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("or");
+          props_Or = cpb.create();
+        }
         return props_Or;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

@@ -21,12 +21,12 @@ public class ListOperations_Test extends TestCase {
   }
   public void test_2() {
     List<List<Boolean>> llb = ListSequence.fromListAndArray(new ArrayList<List<Boolean>>(), ListSequence.fromListAndArray(new ArrayList<Boolean>(), false, true));
-    Assert.assertSame(2, ListSequence.fromList(ListSequence.fromList(llb).first()).count());
-    Assert.assertSame(false, ListSequence.fromList(ListSequence.fromList(llb).first()).first());
+    org.junit.Assert.assertSame(2, ListSequence.fromList(ListSequence.fromList(llb).first()).count());
+    org.junit.Assert.assertSame(false, ListSequence.fromList(ListSequence.fromList(llb).first()).first());
   }
   public void test_3() {
     List<Integer> li = Arrays.asList(1, 2, 3, 4, 5);
     List<Integer> lo = ListSequence.fromList(li).concat(ListSequence.fromList(li)).distinct().toListSequence();
-    Assert.assertEquals(li, lo);
+    org.junit.Assert.assertEquals(li, lo);
   }
 }

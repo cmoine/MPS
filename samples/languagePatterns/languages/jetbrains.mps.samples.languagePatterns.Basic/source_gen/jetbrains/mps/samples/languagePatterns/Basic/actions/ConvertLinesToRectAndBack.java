@@ -6,65 +6,89 @@ import jetbrains.mps.openapi.actions.descriptor.NodeFactory;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SModel;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SProperty;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 
 public class ConvertLinesToRectAndBack {
   public static class NodeFactory_3548406301613038524 implements NodeFactory {
-    public void setup(SNode newNode, SNode sampleNode, SNode enclosingNode, SModel model) {
+    public void setup(SNode newNode, SNode sampleNode, SNode enclosingNode, int index, SModel model) {
       {
         final SNode rect = sampleNode;
-        if (SNodeOperations.isInstanceOf(rect, MetaAdapterFactory.getConcept(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb26647490L, "jetbrains.mps.samples.languagePatterns.Basic.structure.DrawRect"))) {
-          SPropertyOperations.set(newNode, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265dade0L, 0x313e78bb265dade1L, "x1"), "" + (SPropertyOperations.getInteger(rect, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb26647490L, 0x313e78bb26647507L, "upperLeftX"))));
-          SPropertyOperations.set(newNode, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265dade0L, 0x313e78bb265dade3L, "y1"), "" + (SPropertyOperations.getInteger(rect, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb26647490L, 0x313e78bb26647509L, "upperLeftY"))));
-          SPropertyOperations.set(newNode, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265dade0L, 0x313e78bb265dade6L, "x2"), "" + (SPropertyOperations.getInteger(rect, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb26647490L, 0x313e78bb2664750cL, "lowerRightX"))));
-          SPropertyOperations.set(newNode, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265dade0L, 0x313e78bb265dadeaL, "y2"), "" + (SPropertyOperations.getInteger(rect, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb26647490L, 0x313e78bb26647510L, "lowerRightY"))));
+        if (SNodeOperations.isInstanceOf(rect, CONCEPTS.DrawRect$td)) {
+          SPropertyOperations.assign(newNode, PROPS.x1$rSf$, SPropertyOperations.getInteger(rect, PROPS.upperLeftX$8sz1));
+          SPropertyOperations.assign(newNode, PROPS.y1$rSHA, SPropertyOperations.getInteger(rect, PROPS.upperLeftY$8t13));
+          SPropertyOperations.assign(newNode, PROPS.x2$rYlY, SPropertyOperations.getInteger(rect, PROPS.lowerRightX$8yDr));
+          SPropertyOperations.assign(newNode, PROPS.y2$rZi2, SPropertyOperations.getInteger(rect, PROPS.lowerRightY$8z_v));
         }
       }
       {
         final SNode line = sampleNode;
-        if (SNodeOperations.isInstanceOf(line, MetaAdapterFactory.getConcept(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265dade0L, "jetbrains.mps.samples.languagePatterns.Basic.structure.DrawLine"))) {
-          SPropertyOperations.set(newNode, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265dade0L, 0x313e78bb265dade1L, "x1"), "" + (SPropertyOperations.getInteger(line, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265dade0L, 0x313e78bb265dade1L, "x1"))));
-          SPropertyOperations.set(newNode, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265dade0L, 0x313e78bb265dade3L, "y1"), "" + (SPropertyOperations.getInteger(line, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265dade0L, 0x313e78bb265dade3L, "y1"))));
-          SPropertyOperations.set(newNode, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265dade0L, 0x313e78bb265dade6L, "x2"), "" + (SPropertyOperations.getInteger(line, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265dade0L, 0x313e78bb265dade6L, "x2"))));
-          SPropertyOperations.set(newNode, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265dade0L, 0x313e78bb265dadeaL, "y2"), "" + (SPropertyOperations.getInteger(line, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265dade0L, 0x313e78bb265dadeaL, "y2"))));
+        if (SNodeOperations.isInstanceOf(line, CONCEPTS.DrawLine$NG)) {
+          SPropertyOperations.assign(newNode, PROPS.x1$rSf$, SPropertyOperations.getInteger(line, PROPS.x1$rSf$));
+          SPropertyOperations.assign(newNode, PROPS.y1$rSHA, SPropertyOperations.getInteger(line, PROPS.y1$rSHA));
+          SPropertyOperations.assign(newNode, PROPS.x2$rYlY, SPropertyOperations.getInteger(line, PROPS.x2$rYlY));
+          SPropertyOperations.assign(newNode, PROPS.y2$rZi2, SPropertyOperations.getInteger(line, PROPS.y2$rZi2));
         }
       }
       {
         final SNode command = sampleNode;
-        if (SNodeOperations.isInstanceOf(command, MetaAdapterFactory.getConcept(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265d1022L, "jetbrains.mps.samples.languagePatterns.Basic.structure.DrawCommand"))) {
-          SLinkOperations.setTarget(newNode, MetaAdapterFactory.getContainmentLink(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265d1022L, 0x313e78bb26670129L, "lineStyle"), SLinkOperations.getTarget(command, MetaAdapterFactory.getContainmentLink(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265d1022L, 0x313e78bb26670129L, "lineStyle")));
+        if (SNodeOperations.isInstanceOf(command, CONCEPTS.DrawCommand$GH)) {
+          SLinkOperations.setTarget(newNode, LINKS.lineStyle$ejgF, SLinkOperations.getTarget(command, LINKS.lineStyle$ejgF));
         }
       }
     }
   }
   public static class NodeFactory_3548406301613072220 implements NodeFactory {
-    public void setup(SNode newNode, SNode sampleNode, SNode enclosingNode, SModel model) {
+    public void setup(SNode newNode, SNode sampleNode, SNode enclosingNode, int index, SModel model) {
       {
         final SNode rect = sampleNode;
-        if (SNodeOperations.isInstanceOf(rect, MetaAdapterFactory.getConcept(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb26647490L, "jetbrains.mps.samples.languagePatterns.Basic.structure.DrawRect"))) {
-          SPropertyOperations.set(newNode, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb26647490L, 0x313e78bb26647507L, "upperLeftX"), "" + (SPropertyOperations.getInteger(rect, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb26647490L, 0x313e78bb26647507L, "upperLeftX"))));
-          SPropertyOperations.set(newNode, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb26647490L, 0x313e78bb26647509L, "upperLeftY"), "" + (SPropertyOperations.getInteger(rect, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb26647490L, 0x313e78bb26647509L, "upperLeftY"))));
-          SPropertyOperations.set(newNode, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb26647490L, 0x313e78bb2664750cL, "lowerRightX"), "" + (SPropertyOperations.getInteger(rect, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb26647490L, 0x313e78bb2664750cL, "lowerRightX"))));
-          SPropertyOperations.set(newNode, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb26647490L, 0x313e78bb26647510L, "lowerRightY"), "" + (SPropertyOperations.getInteger(rect, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb26647490L, 0x313e78bb26647510L, "lowerRightY"))));
+        if (SNodeOperations.isInstanceOf(rect, CONCEPTS.DrawRect$td)) {
+          SPropertyOperations.assign(newNode, PROPS.upperLeftX$8sz1, SPropertyOperations.getInteger(rect, PROPS.upperLeftX$8sz1));
+          SPropertyOperations.assign(newNode, PROPS.upperLeftY$8t13, SPropertyOperations.getInteger(rect, PROPS.upperLeftY$8t13));
+          SPropertyOperations.assign(newNode, PROPS.lowerRightX$8yDr, SPropertyOperations.getInteger(rect, PROPS.lowerRightX$8yDr));
+          SPropertyOperations.assign(newNode, PROPS.lowerRightY$8z_v, SPropertyOperations.getInteger(rect, PROPS.lowerRightY$8z_v));
         }
       }
       {
         final SNode line = sampleNode;
-        if (SNodeOperations.isInstanceOf(line, MetaAdapterFactory.getConcept(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265dade0L, "jetbrains.mps.samples.languagePatterns.Basic.structure.DrawLine"))) {
-          SPropertyOperations.set(newNode, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb26647490L, 0x313e78bb26647507L, "upperLeftX"), "" + (SPropertyOperations.getInteger(line, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265dade0L, 0x313e78bb265dade1L, "x1"))));
-          SPropertyOperations.set(newNode, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb26647490L, 0x313e78bb26647509L, "upperLeftY"), "" + (SPropertyOperations.getInteger(line, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265dade0L, 0x313e78bb265dade3L, "y1"))));
-          SPropertyOperations.set(newNode, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb26647490L, 0x313e78bb2664750cL, "lowerRightX"), "" + (SPropertyOperations.getInteger(line, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265dade0L, 0x313e78bb265dade6L, "x2"))));
-          SPropertyOperations.set(newNode, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb26647490L, 0x313e78bb26647510L, "lowerRightY"), "" + (SPropertyOperations.getInteger(line, MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265dade0L, 0x313e78bb265dadeaL, "y2"))));
+        if (SNodeOperations.isInstanceOf(line, CONCEPTS.DrawLine$NG)) {
+          SPropertyOperations.assign(newNode, PROPS.upperLeftX$8sz1, SPropertyOperations.getInteger(line, PROPS.x1$rSf$));
+          SPropertyOperations.assign(newNode, PROPS.upperLeftY$8t13, SPropertyOperations.getInteger(line, PROPS.y1$rSHA));
+          SPropertyOperations.assign(newNode, PROPS.lowerRightX$8yDr, SPropertyOperations.getInteger(line, PROPS.x2$rYlY));
+          SPropertyOperations.assign(newNode, PROPS.lowerRightY$8z_v, SPropertyOperations.getInteger(line, PROPS.y2$rZi2));
         }
       }
       {
         final SNode command = sampleNode;
-        if (SNodeOperations.isInstanceOf(command, MetaAdapterFactory.getConcept(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265d1022L, "jetbrains.mps.samples.languagePatterns.Basic.structure.DrawCommand"))) {
-          SLinkOperations.setTarget(newNode, MetaAdapterFactory.getContainmentLink(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265d1022L, 0x313e78bb26670129L, "lineStyle"), SLinkOperations.getTarget(command, MetaAdapterFactory.getContainmentLink(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265d1022L, 0x313e78bb26670129L, "lineStyle")));
+        if (SNodeOperations.isInstanceOf(command, CONCEPTS.DrawCommand$GH)) {
+          SLinkOperations.setTarget(newNode, LINKS.lineStyle$ejgF, SLinkOperations.getTarget(command, LINKS.lineStyle$ejgF));
         }
       }
     }
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept DrawRect$td = MetaAdapterFactory.getConcept(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb26647490L, "jetbrains.mps.samples.languagePatterns.Basic.structure.DrawRect");
+    /*package*/ static final SConcept DrawLine$NG = MetaAdapterFactory.getConcept(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265dade0L, "jetbrains.mps.samples.languagePatterns.Basic.structure.DrawLine");
+    /*package*/ static final SConcept DrawCommand$GH = MetaAdapterFactory.getConcept(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265d1022L, "jetbrains.mps.samples.languagePatterns.Basic.structure.DrawCommand");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty x1$rSf$ = MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265dade0L, 0x313e78bb265dade1L, "x1");
+    /*package*/ static final SProperty upperLeftX$8sz1 = MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb26647490L, 0x313e78bb26647507L, "upperLeftX");
+    /*package*/ static final SProperty y1$rSHA = MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265dade0L, 0x313e78bb265dade3L, "y1");
+    /*package*/ static final SProperty upperLeftY$8t13 = MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb26647490L, 0x313e78bb26647509L, "upperLeftY");
+    /*package*/ static final SProperty x2$rYlY = MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265dade0L, 0x313e78bb265dade6L, "x2");
+    /*package*/ static final SProperty lowerRightX$8yDr = MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb26647490L, 0x313e78bb2664750cL, "lowerRightX");
+    /*package*/ static final SProperty y2$rZi2 = MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265dade0L, 0x313e78bb265dadeaL, "y2");
+    /*package*/ static final SProperty lowerRightY$8z_v = MetaAdapterFactory.getProperty(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb26647490L, 0x313e78bb26647510L, "lowerRightY");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink lineStyle$ejgF = MetaAdapterFactory.getContainmentLink(0x7a6f7ef73988464bL, 0x8cc51182671c136eL, 0x313e78bb265d1022L, 0x313e78bb26670129L, "lineStyle");
   }
 }

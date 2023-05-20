@@ -66,7 +66,7 @@ public class MPSBinaryModelFileType implements FileType {
 
   @Nullable
   @Override
-  public String getCharset(@NotNull VirtualFile file, byte[] content) {
+  public String getCharset(@NotNull VirtualFile file, @NotNull byte[] content) {
     return "utf8";//todo ? (wtf? see ClassFileType)
   }
 }

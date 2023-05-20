@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-2ek9johkj98liyzgo1ys8ewil7tcjt4" />
+<product version="3" modelHash="-ctl7mjfw9czz364cacqmmy85e0xebbc">
+  <files names="AssertEquals_DataFlow.java:AssertFalse_DataFlow.java:AssertIsNotNull_DataFlow.java:AssertIsNull_DataFlow.java:AssertSame_DataFlow.java:AssertThrows_DataFlow.java:AssertTrue_DataFlow.java:DataFlowAspectDescriptorImpl.java:Message_DataFlow.java" />
+</product>
 

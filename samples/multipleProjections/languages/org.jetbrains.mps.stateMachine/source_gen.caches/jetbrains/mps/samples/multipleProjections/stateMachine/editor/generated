@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-96swnvvfo1yft5y5rf4mvlrw29wmn23" />
+<product version="3" modelHash="-8b7hiega857eh4uojzuvttyfzn4h38i">
+  <files names="EditorAspectDescriptorImpl.java:EventReference_Editor.java:EventReference_EditorBuilder_a.java:EventReference_SubstituteMenu.java:Event_Editor.java:Event_EditorBuilder_a.java:StateMachine_Editor.java:StateMachine_EditorBuilder_a.java:StateReference_Editor.java:StateReference_EditorBuilder_a.java:StateReference_SubstituteMenu.java:State_Editor.java:State_EditorBuilder_a.java:Transition_Editor.java:Transition_EditorBuilder_a.java" />
+</product>
 

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="ct7hodzdnbptsrltr88jro3sclrg7wk" />
+<product version="3" modelHash="-bezqjl7xa10r1d8bsw1wwnmck0ade71">
+  <files names="CurrentLinePositionComponent.java:InTextPositionComponent.java" />
+</product>
 

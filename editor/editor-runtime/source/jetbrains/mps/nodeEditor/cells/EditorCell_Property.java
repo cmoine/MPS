@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2016 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,9 @@
  */
 package jetbrains.mps.nodeEditor.cells;
 
-import jetbrains.mps.nodeEditor.IntelligentInputUtil;
+import jetbrains.mps.nodeEditor.cells.ModelAccessor.ReadOnly;
 import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.SubstituteInfo;
-import jetbrains.mps.smodel.MPSModuleRepository;
 import jetbrains.mps.smodel.ModelAccessHelper;
 import jetbrains.mps.smodel.NodeReadAccessCasterInEditor;
 import jetbrains.mps.smodel.NodeReadAccessInEditorListener;
@@ -40,18 +39,19 @@ public class EditorCell_Property extends EditorCell_Label implements Synchronize
   private String myLastModelText;
 
   public EditorCell_Property(EditorContext editorContext, ModelAccessor accessor, SNode node) {
-    super(editorContext, node, accessor.getText());
+    super(editorContext, node, null);
     myModelAccessor = accessor;
     if (myModelAccessor instanceof TransactionalPropertyAccessor) {
       TransactionalPropertyAccessor propertyAccessor = (TransactionalPropertyAccessor) myModelAccessor;
       propertyAccessor.setCell(this);
     }
-    synchronizeViewWithModel();
+    synchronizeViewWithModel_internal();
   }
 
   public static EditorCell_Property create(jetbrains.mps.openapi.editor.EditorContext editorContext, ModelAccessor modelAccessor, SNode node) {
     NodeReadAccessInEditorListener listener = NodeReadAccessCasterInEditor.getReadAccessListener();
-    if (modelAccessor instanceof PropertyAccessor) {
+    // todo are there situations when the listener's cleanlyReadAccessProperties are not empty? If yes, should not we always clean it
+    if (modelAccessor instanceof IPropertyAccessor) {
       if (listener != null) {
         listener.clearCleanlyReadAccessProperties();
       }
@@ -72,9 +72,15 @@ public class EditorCell_Property extends EditorCell_Label implements Synchronize
 
   @Override
   public void synchronizeViewWithModel() {
+    synchronizeViewWithModel_internal();
+  }
+
+  private void synchronizeViewWithModel_internal() {
     String text = myModelAccessor.getText();
     myLastModelText = text;
-    setErrorState(!isValidText(text));
+    if (!(myModelAccessor instanceof ReadOnly)) {
+      setErrorState(!isValidText(text));
+    }
     setText(text);
   }
 
@@ -83,12 +89,7 @@ public class EditorCell_Property extends EditorCell_Label implements Synchronize
     boolean oldSelected = isSelected();
     super.setSelected(selected);
     if (oldSelected && !selected && isTransactional()) {
-      final Runnable commitCommand = new Runnable() {
-        @Override
-        public void run() {
-          commit();
-        }
-      };
+      final Runnable commitCommand = () -> commit();
       if (myCommitInCommand) {
         getModelAccess().executeCommandInEDT(commitCommand);
       } else {
@@ -116,7 +117,7 @@ public class EditorCell_Property extends EditorCell_Label implements Synchronize
     // a solution for MPS-13531
     // better solution is to redispatch all currently waiting EDT commands inside MPSProject.dispose() method
     // currently not available - not possible to redispatch all waiting commands from AWT Thread.
-    if (!SNodeUtil.isAccessible(getSNode(), MPSModuleRepository.getInstance())) {
+    if (!SNodeUtil.isAccessible(getSNode(), getContext().getRepository())) {
       return false;
     }
     if (myCommitInProgress) {
@@ -124,9 +125,9 @@ public class EditorCell_Property extends EditorCell_Label implements Synchronize
     }
     myCommitInProgress = true;
     try {
-      boolean result = false;
       if (isTransactional()) {
         TransactionalModelAccessor transactionalModelAccessor = (TransactionalModelAccessor) myModelAccessor;
+        boolean result = false;
         if (transactionalModelAccessor.hasValueToCommit()) {
           transactionalModelAccessor.commit();
           result = true;
@@ -162,25 +163,17 @@ public class EditorCell_Property extends EditorCell_Label implements Synchronize
 
   @Override
   public boolean isValidText(final String text) {
-    return new ModelAccessHelper(getModelAccess()).runReadAction(new Computable<Boolean>() {
-      @Override
-      public Boolean compute() {
-        return myModelAccessor.isValidText(text);
-      }
-    });
+    return new ModelAccessHelper(getModelAccess()).runReadAction(() -> myModelAccessor.isValidText(text));
   }
 
   @Override
   public SubstituteInfo getSubstituteInfo() {
     final SubstituteInfo substituteInfo = super.getSubstituteInfo();
-    return new ModelAccessHelper(getModelAccess()).runReadAction(new Computable<SubstituteInfo>() {
-      @Override
-      public SubstituteInfo compute() {
-        if (substituteInfo != null) {
-          substituteInfo.setOriginalText(myModelAccessor.getText());
-        }
-        return substituteInfo;
+    return new ModelAccessHelper(getModelAccess()).runReadAction(() -> {
+      if (substituteInfo != null) {
+        substituteInfo.setOriginalText(myModelAccessor.getText());
       }
+      return substituteInfo;
     });
   }
 

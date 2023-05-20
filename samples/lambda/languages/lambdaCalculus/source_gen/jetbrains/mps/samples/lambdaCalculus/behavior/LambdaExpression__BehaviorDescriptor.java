@@ -5,13 +5,10 @@ package jetbrains.mps.samples.lambdaCalculus.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.List;
 import java.util.Arrays;
@@ -23,15 +20,18 @@ import java.util.ArrayList;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SInterfaceConcept;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 
 public final class LambdaExpression__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x37d11ba7d7ec98e9L, "jetbrains.mps.samples.lambdaCalculus.structure.LambdaExpression");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<SNode> getOuterApplication_id18EhrW3IG0h = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getOuterApplication").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("18EhrW3IG0h").registry(REGISTRY).build();
-  public static final SMethod<Boolean> hasParameterRefs_id6qD99pUaonP = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("hasParameterRefs").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("6qD99pUaonP").registry(REGISTRY).build();
-  public static final SMethod<Boolean> isInFull_id6nQdzuslK0D = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isInFull").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("6nQdzuslK0D").registry(REGISTRY).build();
-  public static final SMethod<List<SNode>> getOuterVariables_id4zrttnsimEk = new SMethodBuilder<List<SNode>>(new SJavaCompoundTypeImpl((Class<List<SNode>>) ((Class) Object.class))).name("getOuterVariables").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("4zrttnsimEk").registry(REGISTRY).build();
+  public static final SMethod<SNode> getOuterApplication_id18EhrW3IG0h = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getOuterApplication").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1308935328408190993L).languageId(0xadf0aaee45eb2895L, 0x7c9e280794ad4afcL).build2();
+  public static final SMethod<Boolean> hasParameterRefs_id6qD99pUaonP = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("hasParameterRefs").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(7397484091645986293L).languageId(0xadf0aaee45eb2895L, 0x7c9e280794ad4afcL).build2();
+  public static final SMethod<Boolean> isInFull_id6nQdzuslK0D = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isInFull").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(7347119454575591465L).languageId(0xadf0aaee45eb2895L, 0x7c9e280794ad4afcL).build2();
+  public static final SMethod<List<SNode>> getOuterVariables_id4zrttnsimEk = new SMethodBuilder<List<SNode>>(new SJavaCompoundTypeImpl((Class<List<SNode>>) ((Class) Object.class))).name("getOuterVariables").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(5249919352014727828L).languageId(0xadf0aaee45eb2895L, 0x7c9e280794ad4afcL).build2();
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getOuterApplication_id18EhrW3IG0h, hasParameterRefs_id6qD99pUaonP, isInFull_id6nQdzuslK0D, getOuterVariables_id4zrttnsimEk);
 
@@ -39,27 +39,27 @@ public final class LambdaExpression__BehaviorDescriptor extends BaseBHDescriptor
   }
 
   /*package*/ static SNode getOuterApplication_id18EhrW3IG0h(@NotNull SNode __thisNode__) {
-    if (!((SNodeOperations.isInstanceOf(SNodeOperations.getParent(__thisNode__), MetaAdapterFactory.getConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x37d11ba7d7ee2dddL, "jetbrains.mps.samples.lambdaCalculus.structure.LambdaApplication")) && SLinkOperations.getTarget(SNodeOperations.cast(SNodeOperations.getParent(__thisNode__), MetaAdapterFactory.getConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x37d11ba7d7ee2dddL, "jetbrains.mps.samples.lambdaCalculus.structure.LambdaApplication")), MetaAdapterFactory.getContainmentLink(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x37d11ba7d7ee2dddL, 0x37d11ba7d7ee2de0L, "function")) == __thisNode__)) && SNodeOperations.isInstanceOf(__thisNode__, MetaAdapterFactory.getConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x37d11ba7d7ee2dddL, "jetbrains.mps.samples.lambdaCalculus.structure.LambdaApplication"))) {
-      return SNodeOperations.cast(__thisNode__, MetaAdapterFactory.getConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x37d11ba7d7ee2dddL, "jetbrains.mps.samples.lambdaCalculus.structure.LambdaApplication"));
+    if (!(SNodeOperations.isInstanceOf(SNodeOperations.getParent(__thisNode__), CONCEPTS.LambdaApplication$Mv) && SLinkOperations.getTarget(SNodeOperations.cast(SNodeOperations.getParent(__thisNode__), CONCEPTS.LambdaApplication$Mv), LINKS.function$pPIV) == __thisNode__) && SNodeOperations.isInstanceOf(__thisNode__, CONCEPTS.LambdaApplication$Mv)) {
+      return SNodeOperations.cast(__thisNode__, CONCEPTS.LambdaApplication$Mv);
 
-    } else if (SNodeOperations.getParent(__thisNode__) != null && !(SNodeOperations.isInstanceOf(SNodeOperations.getParent(__thisNode__), MetaAdapterFactory.getConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x448ba254edbfc79fL, "jetbrains.mps.samples.lambdaCalculus.structure.LetExpression"))) && !(SNodeOperations.isInstanceOf(SNodeOperations.getParent(__thisNode__), MetaAdapterFactory.getConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x37d11ba7d7fc0389L, "jetbrains.mps.samples.lambdaCalculus.structure.Program")))) {
-      return LambdaExpression__BehaviorDescriptor.getOuterApplication_id18EhrW3IG0h.invoke(SNodeOperations.cast(SNodeOperations.getParent(__thisNode__), MetaAdapterFactory.getConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x37d11ba7d7ec98e9L, "jetbrains.mps.samples.lambdaCalculus.structure.LambdaExpression")));
+    } else if (SNodeOperations.getParent(__thisNode__) != null && !(SNodeOperations.isInstanceOf(SNodeOperations.getParent(__thisNode__), CONCEPTS.LetExpression$k5)) && !(SNodeOperations.isInstanceOf(SNodeOperations.getParent(__thisNode__), CONCEPTS.Program$Hh))) {
+      return LambdaExpression__BehaviorDescriptor.getOuterApplication_id18EhrW3IG0h.invoke(SNodeOperations.cast(SNodeOperations.getParent(__thisNode__), CONCEPTS.LambdaExpression$CI));
     }
     return null;
   }
   /*package*/ static boolean hasParameterRefs_id6qD99pUaonP(@NotNull SNode __thisNode__) {
     SNode node = __thisNode__;
     node = SNodeOperations.getParent(node);
-    while (node != null && !((SNodeOperations.isInstanceOf(node, MetaAdapterFactory.getInterfaceConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x48db75d5dc496a4fL, "jetbrains.mps.samples.lambdaCalculus.structure.VariableOwner")) && !(ListSequence.fromList(VariableOwner__BehaviorDescriptor.getVariables_id7M_MU5__$7C.invoke(SNodeOperations.cast(node, MetaAdapterFactory.getInterfaceConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x48db75d5dc496a4fL, "jetbrains.mps.samples.lambdaCalculus.structure.VariableOwner")))).contains(SNodeOperations.as(__thisNode__, MetaAdapterFactory.getConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x48db75d5dc496b12L, "jetbrains.mps.samples.lambdaCalculus.structure.Variable"))))))) {
+    while (node != null && !(SNodeOperations.isInstanceOf(node, CONCEPTS.VariableOwner$q4) && !(ListSequence.fromList(VariableOwner__BehaviorDescriptor.getVariables_id7M_MU5__$7C.invoke(SNodeOperations.cast(node, CONCEPTS.VariableOwner$q4))).contains(SNodeOperations.as(__thisNode__, CONCEPTS.Variable$UB))))) {
       node = SNodeOperations.getParent(node);
     }
-    if (SNodeOperations.isInstanceOf(node, MetaAdapterFactory.getConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x448ba254edbfc79fL, "jetbrains.mps.samples.lambdaCalculus.structure.LetExpression"))) {
+    if (SNodeOperations.isInstanceOf(node, CONCEPTS.LetExpression$k5)) {
       return true;
     }
-    if (!(SNodeOperations.isInstanceOf(node, MetaAdapterFactory.getConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x37d11ba7d7ec98e9L, "jetbrains.mps.samples.lambdaCalculus.structure.LambdaExpression")))) {
+    if (!(SNodeOperations.isInstanceOf(node, CONCEPTS.LambdaExpression$CI))) {
       return false;
     }
-    return (boolean) LambdaExpression__BehaviorDescriptor.isInFull_id6nQdzuslK0D.invoke(SNodeOperations.cast(node, MetaAdapterFactory.getConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x37d11ba7d7ec98e9L, "jetbrains.mps.samples.lambdaCalculus.structure.LambdaExpression")));
+    return (boolean) LambdaExpression__BehaviorDescriptor.isInFull_id6nQdzuslK0D.invoke(SNodeOperations.cast(node, CONCEPTS.LambdaExpression$CI));
   }
   /*package*/ static boolean isInFull_id6nQdzuslK0D(@NotNull SNode __thisNode__) {
     SNode appl = LambdaExpression__BehaviorDescriptor.getOuterApplication_id18EhrW3IG0h.invoke(__thisNode__);
@@ -69,19 +69,18 @@ public final class LambdaExpression__BehaviorDescriptor extends BaseBHDescriptor
     return (boolean) LambdaApplication__BehaviorDescriptor.isFullApplication_id18EhrW3IFXQ.invoke(LambdaExpression__BehaviorDescriptor.getOuterApplication_id18EhrW3IG0h.invoke(__thisNode__));
   }
   /*package*/ static List<SNode> getOuterVariables_id4zrttnsimEk(@NotNull SNode __thisNode__) {
-    List<SNode> allVar = SNodeOperations.getNodeDescendants(__thisNode__, MetaAdapterFactory.getConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x48db75d5dc496b12L, "jetbrains.mps.samples.lambdaCalculus.structure.Variable"), false, new SAbstractConcept[]{});
-    List<SNode> allRef = SNodeOperations.getNodeDescendants(__thisNode__, MetaAdapterFactory.getConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x48db75d5dc496b08L, "jetbrains.mps.samples.lambdaCalculus.structure.VariableReference"), false, new SAbstractConcept[]{});
+    List<SNode> allVar = SNodeOperations.getNodeDescendants(__thisNode__, CONCEPTS.Variable$UB, false, new SAbstractConcept[]{});
+    List<SNode> allRef = SNodeOperations.getNodeDescendants(__thisNode__, CONCEPTS.VariableReference$FA, false, new SAbstractConcept[]{});
     List<SNode> result = new ArrayList<SNode>();
     for (SNode ref : allRef) {
-      if (!(ListSequence.fromList(allVar).contains(SLinkOperations.getTarget(ref, MetaAdapterFactory.getReferenceLink(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x48db75d5dc496b08L, 0x48db75d5dc497af4L, "variable")))) && !(ListSequence.fromList(result).contains(SLinkOperations.getTarget(ref, MetaAdapterFactory.getReferenceLink(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x48db75d5dc496b08L, 0x48db75d5dc497af4L, "variable"))))) {
-        ListSequence.fromList(result).addElement(SLinkOperations.getTarget(ref, MetaAdapterFactory.getReferenceLink(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x48db75d5dc496b08L, 0x48db75d5dc497af4L, "variable")));
+      if (!(ListSequence.fromList(allVar).contains(SLinkOperations.getTarget(ref, LINKS.variable$1fXu))) && !(ListSequence.fromList(result).contains(SLinkOperations.getTarget(ref, LINKS.variable$1fXu)))) {
+        ListSequence.fromList(result).addElement(SLinkOperations.getTarget(ref, LINKS.variable$1fXu));
       }
     }
     return result;
   }
 
   /*package*/ LambdaExpression__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -131,5 +130,20 @@ public final class LambdaExpression__BehaviorDescriptor extends BaseBHDescriptor
   @Override
   public SAbstractConcept getConcept() {
     return CONCEPT;
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept LambdaApplication$Mv = MetaAdapterFactory.getConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x37d11ba7d7ee2dddL, "jetbrains.mps.samples.lambdaCalculus.structure.LambdaApplication");
+    /*package*/ static final SConcept Program$Hh = MetaAdapterFactory.getConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x37d11ba7d7fc0389L, "jetbrains.mps.samples.lambdaCalculus.structure.Program");
+    /*package*/ static final SConcept LetExpression$k5 = MetaAdapterFactory.getConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x448ba254edbfc79fL, "jetbrains.mps.samples.lambdaCalculus.structure.LetExpression");
+    /*package*/ static final SConcept LambdaExpression$CI = MetaAdapterFactory.getConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x37d11ba7d7ec98e9L, "jetbrains.mps.samples.lambdaCalculus.structure.LambdaExpression");
+    /*package*/ static final SInterfaceConcept VariableOwner$q4 = MetaAdapterFactory.getInterfaceConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x48db75d5dc496a4fL, "jetbrains.mps.samples.lambdaCalculus.structure.VariableOwner");
+    /*package*/ static final SConcept Variable$UB = MetaAdapterFactory.getConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x48db75d5dc496b12L, "jetbrains.mps.samples.lambdaCalculus.structure.Variable");
+    /*package*/ static final SConcept VariableReference$FA = MetaAdapterFactory.getConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x48db75d5dc496b08L, "jetbrains.mps.samples.lambdaCalculus.structure.VariableReference");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink function$pPIV = MetaAdapterFactory.getContainmentLink(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x37d11ba7d7ee2dddL, 0x37d11ba7d7ee2de0L, "function");
+    /*package*/ static final SReferenceLink variable$1fXu = MetaAdapterFactory.getReferenceLink(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x48db75d5dc496b08L, 0x48db75d5dc497af4L, "variable");
   }
 }

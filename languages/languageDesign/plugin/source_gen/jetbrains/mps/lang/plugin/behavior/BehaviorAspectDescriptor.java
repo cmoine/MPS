@@ -7,9 +7,9 @@ import jetbrains.mps.core.aspects.behaviour.api.BHDescriptor;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor {
   private final BHDescriptor myActionDeclaration__BehaviorDescriptor = new ActionDeclaration__BehaviorDescriptor();
@@ -57,7 +57,9 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
   private final BHDescriptor myNumberToolShortcut__BehaviorDescriptor = new NumberToolShortcut__BehaviorDescriptor();
   private final BHDescriptor myToolKeystroke__BehaviorDescriptor = new ToolKeystroke__BehaviorDescriptor();
   private final BHDescriptor myAbstractToolKeystroke__BehaviorDescriptor = new AbstractToolKeystroke__BehaviorDescriptor();
+  private final BHDescriptor myConceptFunctionParameter_NodeReference__BehaviorDescriptor = new ConceptFunctionParameter_NodeReference__BehaviorDescriptor();
   private final BHDescriptor myKeymapChangesDeclaration__BehaviorDescriptor = new KeymapChangesDeclaration__BehaviorDescriptor();
+  private final BHDescriptor mySimpleShortcutChange__BehaviorDescriptor = new SimpleShortcutChange__BehaviorDescriptor();
   private final BHDescriptor myActionParameterReference__BehaviorDescriptor = new ActionParameterReference__BehaviorDescriptor();
   private final BHDescriptor myOrderConstraints__BehaviorDescriptor = new OrderConstraints__BehaviorDescriptor();
   private final BHDescriptor myOrder__BehaviorDescriptor = new Order__BehaviorDescriptor();
@@ -72,378 +74,159 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
   private final BHDescriptor myConceptFunctionParameter_Model__BehaviorDescriptor = new ConceptFunctionParameter_Model__BehaviorDescriptor();
   private final BHDescriptor myPluginDependency__BehaviorDescriptor = new PluginDependency__BehaviorDescriptor();
   private final BHDescriptor myIdeaPluginDependency__BehaviorDescriptor = new IdeaPluginDependency__BehaviorDescriptor();
+  private final BHDescriptor myTabbedToolDeclaration__BehaviorDescriptor = new TabbedToolDeclaration__BehaviorDescriptor();
   private final BHDescriptor myParameterizedShortcutChange__BehaviorDescriptor = new ParameterizedShortcutChange__BehaviorDescriptor();
   private final BHDescriptor myBaseToolDeclaration__BehaviorDescriptor = new BaseToolDeclaration__BehaviorDescriptor();
   private final BHDescriptor myConceptsBlock__BehaviorDescriptor = new ConceptsBlock__BehaviorDescriptor();
   private final BHDescriptor myCreateBlock__BehaviorDescriptor = new CreateBlock__BehaviorDescriptor();
   private final BHDescriptor myConceptFunctionParameter_SConceptClass__BehaviorDescriptor = new ConceptFunctionParameter_SConceptClass__BehaviorDescriptor();
-  private final BHDescriptor myOldConceptsBlock__BehaviorDescriptor = new OldConceptsBlock__BehaviorDescriptor();
-  private final BHDescriptor myOldCreateBlock__BehaviorDescriptor = new OldCreateBlock__BehaviorDescriptor();
-  private final BHDescriptor myConceptFunctionParameter_Concept__BehaviorDescriptor = new ConceptFunctionParameter_Concept__BehaviorDescriptor();
 
   public BehaviorAspectDescriptor() {
   }
 
   @Nullable
   public BHDescriptor getDescriptor(@NotNull SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_846f5o_a0tc.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return myAbstractToolKeystroke__BehaviorDescriptor;
-          }
-          break;
-        case 1:
-          if (true) {
-            return myActionDataParameterDeclaration__BehaviorDescriptor;
-          }
-          break;
-        case 2:
-          if (true) {
-            return myActionDataParameterReferenceOperation__BehaviorDescriptor;
-          }
-          break;
-        case 3:
-          if (true) {
-            return myActionDeclaration__BehaviorDescriptor;
-          }
-          break;
-        case 4:
-          if (true) {
-            return myActionGroupDeclaration__BehaviorDescriptor;
-          }
-          break;
-        case 5:
-          if (true) {
-            return myActionParameter__BehaviorDescriptor;
-          }
-          break;
-        case 6:
-          if (true) {
-            return myActionParameterDeclaration__BehaviorDescriptor;
-          }
-          break;
-        case 7:
-          if (true) {
-            return myActionParameterReference__BehaviorDescriptor;
-          }
-          break;
-        case 8:
-          if (true) {
-            return myActionParameterReferenceOperation__BehaviorDescriptor;
-          }
-          break;
-        case 9:
-          if (true) {
-            return myActionType__BehaviorDescriptor;
-          }
-          break;
-        case 10:
-          if (true) {
-            return myBaseNodeBlock__BehaviorDescriptor;
-          }
-          break;
-        case 11:
-          if (true) {
-            return myBaseToolDeclaration__BehaviorDescriptor;
-          }
-          break;
-        case 12:
-          if (true) {
-            return myBuildGroupBlock__BehaviorDescriptor;
-          }
-          break;
-        case 13:
-          if (true) {
-            return myConceptFunctionParameter_AnActionEvent__BehaviorDescriptor;
-          }
-          break;
-        case 14:
-          if (true) {
-            return myConceptFunctionParameter_Concept__BehaviorDescriptor;
-          }
-          break;
-        case 15:
-          if (true) {
-            return myConceptFunctionParameter_IModule__BehaviorDescriptor;
-          }
-          break;
-        case 16:
-          if (true) {
-            return myConceptFunctionParameter_MPSProject__BehaviorDescriptor;
-          }
-          break;
-        case 17:
-          if (true) {
-            return myConceptFunctionParameter_Model__BehaviorDescriptor;
-          }
-          break;
-        case 18:
-          if (true) {
-            return myConceptFunctionParameter_OperationContext__BehaviorDescriptor;
-          }
-          break;
-        case 19:
-          if (true) {
-            return myConceptFunctionParameter_Project__BehaviorDescriptor;
-          }
-          break;
-        case 20:
-          if (true) {
-            return myConceptFunctionParameter_SConceptClass__BehaviorDescriptor;
-          }
-          break;
-        case 21:
-          if (true) {
-            return myConceptFunctionParameter_node__BehaviorDescriptor;
-          }
-          break;
-        case 22:
-          if (true) {
-            return myConceptsBlock__BehaviorDescriptor;
-          }
-          break;
-        case 23:
-          if (true) {
-            return myCreateBlock__BehaviorDescriptor;
-          }
-          break;
-        case 24:
-          if (true) {
-            return myCreateNodeAspectBlock__BehaviorDescriptor;
-          }
-          break;
-        case 25:
-          if (true) {
-            return myCustomCondition__BehaviorDescriptor;
-          }
-          break;
-        case 26:
-          if (true) {
-            return myDisposeBlock__BehaviorDescriptor;
-          }
-          break;
-        case 27:
-          if (true) {
-            return myDoUpdateBlock__BehaviorDescriptor;
-          }
-          break;
-        case 28:
-          if (true) {
-            return myEditorTab__BehaviorDescriptor;
-          }
-          break;
-        case 29:
-          if (true) {
-            return myEnumerateChildrenFunction__BehaviorDescriptor;
-          }
-          break;
-        case 30:
-          if (true) {
-            return myExecuteBlock__BehaviorDescriptor;
-          }
-          break;
-        case 31:
-          if (true) {
-            return myGetComponentBlock__BehaviorDescriptor;
-          }
-          break;
-        case 32:
-          if (true) {
-            return myGetNodeBlock__BehaviorDescriptor;
-          }
-          break;
-        case 33:
-          if (true) {
-            return myGetNodesBlock__BehaviorDescriptor;
-          }
-          break;
-        case 34:
-          if (true) {
-            return myGroupAnchor__BehaviorDescriptor;
-          }
-          break;
-        case 35:
-          if (true) {
-            return myGroupType__BehaviorDescriptor;
-          }
-          break;
-        case 36:
-          if (true) {
-            return myIdeaInitializerDescriptor__BehaviorDescriptor;
-          }
-          break;
-        case 37:
-          if (true) {
-            return myIdeaPluginDependency__BehaviorDescriptor;
-          }
-          break;
-        case 38:
-          if (true) {
-            return myInitBlock__BehaviorDescriptor;
-          }
-          break;
-        case 39:
-          if (true) {
-            return myIsApplicableBlock__BehaviorDescriptor;
-          }
-          break;
-        case 40:
-          if (true) {
-            return myIsApplicableTabBlock__BehaviorDescriptor;
-          }
-          break;
-        case 41:
-          if (true) {
-            return myKeyMapKeystroke__BehaviorDescriptor;
-          }
-          break;
-        case 42:
-          if (true) {
-            return myKeymapChangesDeclaration__BehaviorDescriptor;
-          }
-          break;
-        case 43:
-          if (true) {
-            return myListenBlock__BehaviorDescriptor;
-          }
-          break;
-        case 44:
-          if (true) {
-            return myMPSPluginDependency__BehaviorDescriptor;
-          }
-          break;
-        case 45:
-          if (true) {
-            return myNumberToolShortcut__BehaviorDescriptor;
-          }
-          break;
-        case 46:
-          if (true) {
-            return myOldConceptsBlock__BehaviorDescriptor;
-          }
-          break;
-        case 47:
-          if (true) {
-            return myOldCreateBlock__BehaviorDescriptor;
-          }
-          break;
-        case 48:
-          if (true) {
-            return myOnAfterReadBlock__BehaviorDescriptor;
-          }
-          break;
-        case 49:
-          if (true) {
-            return myOnBeforeWriteBlock__BehaviorDescriptor;
-          }
-          break;
-        case 50:
-          if (true) {
-            return myOrder__BehaviorDescriptor;
-          }
-          break;
-        case 51:
-          if (true) {
-            return myOrderConstraints__BehaviorDescriptor;
-          }
-          break;
-        case 52:
-          if (true) {
-            return myOrderReference__BehaviorDescriptor;
-          }
-          break;
-        case 53:
-          if (true) {
-            return myParameterizedShortcutChange__BehaviorDescriptor;
-          }
-          break;
-        case 54:
-          if (true) {
-            return myPersistentPropertyDeclaration__BehaviorDescriptor;
-          }
-          break;
-        case 55:
-          if (true) {
-            return myPersistentPropertyReference__BehaviorDescriptor;
-          }
-          break;
-        case 56:
-          if (true) {
-            return myPluginDependency__BehaviorDescriptor;
-          }
-          break;
-        case 57:
-          if (true) {
-            return myPreferencePage__BehaviorDescriptor;
-          }
-          break;
-        case 58:
-          if (true) {
-            return myPreferencePageCommitBlock__BehaviorDescriptor;
-          }
-          break;
-        case 59:
-          if (true) {
-            return myPreferencePageIsModifiedBlock__BehaviorDescriptor;
-          }
-          break;
-        case 60:
-          if (true) {
-            return myPreferencePageResetBlock__BehaviorDescriptor;
-          }
-          break;
-        case 61:
-          if (true) {
-            return myPreferencesComponentDeclaration__BehaviorDescriptor;
-          }
-          break;
-        case 62:
-          if (true) {
-            return myPreferencesComponentType__BehaviorDescriptor;
-          }
-          break;
-        case 63:
-          if (true) {
-            return myToStringConceptFunction__BehaviorDescriptor;
-          }
-          break;
-        case 64:
-          if (true) {
-            return myToolKeystroke__BehaviorDescriptor;
-          }
-          break;
-        case 65:
-          if (true) {
-            return myToolType__BehaviorDescriptor;
-          }
-          break;
-        case 66:
-          if (true) {
-            return myUpdateBlock__BehaviorDescriptor;
-          }
-          break;
-        case 67:
-          if (true) {
-            return myUpdateGroupFunction__BehaviorDescriptor;
-          }
-          break;
-        default:
-          // default 
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return myAbstractToolKeystroke__BehaviorDescriptor;
+      case 1:
+        return myActionDataParameterDeclaration__BehaviorDescriptor;
+      case 2:
+        return myActionDataParameterReferenceOperation__BehaviorDescriptor;
+      case 3:
+        return myActionDeclaration__BehaviorDescriptor;
+      case 4:
+        return myActionGroupDeclaration__BehaviorDescriptor;
+      case 5:
+        return myActionParameter__BehaviorDescriptor;
+      case 6:
+        return myActionParameterDeclaration__BehaviorDescriptor;
+      case 7:
+        return myActionParameterReference__BehaviorDescriptor;
+      case 8:
+        return myActionParameterReferenceOperation__BehaviorDescriptor;
+      case 9:
+        return myActionType__BehaviorDescriptor;
+      case 10:
+        return myBaseNodeBlock__BehaviorDescriptor;
+      case 11:
+        return myBaseToolDeclaration__BehaviorDescriptor;
+      case 12:
+        return myBuildGroupBlock__BehaviorDescriptor;
+      case 13:
+        return myConceptFunctionParameter_AnActionEvent__BehaviorDescriptor;
+      case 14:
+        return myConceptFunctionParameter_IModule__BehaviorDescriptor;
+      case 15:
+        return myConceptFunctionParameter_MPSProject__BehaviorDescriptor;
+      case 16:
+        return myConceptFunctionParameter_Model__BehaviorDescriptor;
+      case 17:
+        return myConceptFunctionParameter_NodeReference__BehaviorDescriptor;
+      case 18:
+        return myConceptFunctionParameter_OperationContext__BehaviorDescriptor;
+      case 19:
+        return myConceptFunctionParameter_Project__BehaviorDescriptor;
+      case 20:
+        return myConceptFunctionParameter_SConceptClass__BehaviorDescriptor;
+      case 21:
+        return myConceptFunctionParameter_node__BehaviorDescriptor;
+      case 22:
+        return myConceptsBlock__BehaviorDescriptor;
+      case 23:
+        return myCreateBlock__BehaviorDescriptor;
+      case 24:
+        return myCreateNodeAspectBlock__BehaviorDescriptor;
+      case 25:
+        return myCustomCondition__BehaviorDescriptor;
+      case 26:
+        return myDisposeBlock__BehaviorDescriptor;
+      case 27:
+        return myDoUpdateBlock__BehaviorDescriptor;
+      case 28:
+        return myEditorTab__BehaviorDescriptor;
+      case 29:
+        return myEnumerateChildrenFunction__BehaviorDescriptor;
+      case 30:
+        return myExecuteBlock__BehaviorDescriptor;
+      case 31:
+        return myGetComponentBlock__BehaviorDescriptor;
+      case 32:
+        return myGetNodeBlock__BehaviorDescriptor;
+      case 33:
+        return myGetNodesBlock__BehaviorDescriptor;
+      case 34:
+        return myGroupAnchor__BehaviorDescriptor;
+      case 35:
+        return myGroupType__BehaviorDescriptor;
+      case 36:
+        return myIdeaInitializerDescriptor__BehaviorDescriptor;
+      case 37:
+        return myIdeaPluginDependency__BehaviorDescriptor;
+      case 38:
+        return myInitBlock__BehaviorDescriptor;
+      case 39:
+        return myIsApplicableBlock__BehaviorDescriptor;
+      case 40:
+        return myIsApplicableTabBlock__BehaviorDescriptor;
+      case 41:
+        return myKeyMapKeystroke__BehaviorDescriptor;
+      case 42:
+        return myKeymapChangesDeclaration__BehaviorDescriptor;
+      case 43:
+        return myListenBlock__BehaviorDescriptor;
+      case 44:
+        return myMPSPluginDependency__BehaviorDescriptor;
+      case 45:
+        return myNumberToolShortcut__BehaviorDescriptor;
+      case 46:
+        return myOnAfterReadBlock__BehaviorDescriptor;
+      case 47:
+        return myOnBeforeWriteBlock__BehaviorDescriptor;
+      case 48:
+        return myOrder__BehaviorDescriptor;
+      case 49:
+        return myOrderConstraints__BehaviorDescriptor;
+      case 50:
+        return myOrderReference__BehaviorDescriptor;
+      case 51:
+        return myParameterizedShortcutChange__BehaviorDescriptor;
+      case 52:
+        return myPersistentPropertyDeclaration__BehaviorDescriptor;
+      case 53:
+        return myPersistentPropertyReference__BehaviorDescriptor;
+      case 54:
+        return myPluginDependency__BehaviorDescriptor;
+      case 55:
+        return myPreferencePage__BehaviorDescriptor;
+      case 56:
+        return myPreferencePageCommitBlock__BehaviorDescriptor;
+      case 57:
+        return myPreferencePageIsModifiedBlock__BehaviorDescriptor;
+      case 58:
+        return myPreferencePageResetBlock__BehaviorDescriptor;
+      case 59:
+        return myPreferencesComponentDeclaration__BehaviorDescriptor;
+      case 60:
+        return myPreferencesComponentType__BehaviorDescriptor;
+      case 61:
+        return mySimpleShortcutChange__BehaviorDescriptor;
+      case 62:
+        return myTabbedToolDeclaration__BehaviorDescriptor;
+      case 63:
+        return myToStringConceptFunction__BehaviorDescriptor;
+      case 64:
+        return myToolKeystroke__BehaviorDescriptor;
+      case 65:
+        return myToolType__BehaviorDescriptor;
+      case 66:
+        return myUpdateBlock__BehaviorDescriptor;
+      case 67:
+        return myUpdateGroupFunction__BehaviorDescriptor;
+      default:
     }
     return null;
   }
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
-  }
-  private static final Map<SAbstractConcept, Integer> indices_846f5o_a0tc = buildConceptIndices(MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x68b8d4843e384caL, "jetbrains.mps.lang.plugin.structure.AbstractToolKeystroke"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11b69e025e0L, "jetbrains.mps.lang.plugin.structure.ActionDataParameterDeclaration"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11b69e60be0L, "jetbrains.mps.lang.plugin.structure.ActionDataParameterReferenceOperation"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1181ca87c38L, "jetbrains.mps.lang.plugin.structure.ActionDeclaration"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1181da058d2L, "jetbrains.mps.lang.plugin.structure.ActionGroupDeclaration"), MetaAdapterFactory.getInterfaceConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11b737a6b7cL, "jetbrains.mps.lang.plugin.structure.ActionParameter"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x118b812427fL, "jetbrains.mps.lang.plugin.structure.ActionParameterDeclaration"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1947b3e0f0959deeL, "jetbrains.mps.lang.plugin.structure.ActionParameterReference"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x118d0b7fab3L, "jetbrains.mps.lang.plugin.structure.ActionParameterReferenceOperation"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x118c26632a3L, "jetbrains.mps.lang.plugin.structure.ActionType"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x33f4c34299ffc088L, "jetbrains.mps.lang.plugin.structure.BaseNodeBlock"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x5adc7622e710bddcL, "jetbrains.mps.lang.plugin.structure.BaseToolDeclaration"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1190f786becL, "jetbrains.mps.lang.plugin.structure.BuildGroupBlock"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1181d54406fL, "jetbrains.mps.lang.plugin.structure.ConceptFunctionParameter_AnActionEvent"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x6ac26e7c3218be7fL, "jetbrains.mps.lang.plugin.structure.ConceptFunctionParameter_Concept"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11870797a07L, "jetbrains.mps.lang.plugin.structure.ConceptFunctionParameter_IModule"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x118707cdfb8L, "jetbrains.mps.lang.plugin.structure.ConceptFunctionParameter_MPSProject"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x513f22c4bae4fb15L, "jetbrains.mps.lang.plugin.structure.ConceptFunctionParameter_Model"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x118565418cbL, "jetbrains.mps.lang.plugin.structure.ConceptFunctionParameter_OperationContext"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11aa1691a43L, "jetbrains.mps.lang.plugin.structure.ConceptFunctionParameter_Project"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x6785022a196ed912L, "jetbrains.mps.lang.plugin.structure.ConceptFunctionParameter_SConceptClass"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1184b3b848fL, "jetbrains.mps.lang.plugin.structure.ConceptFunctionParameter_node"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x6785022a196e8effL, "jetbrains.mps.lang.plugin.structure.ConceptsBlock"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x6785022a196e8f01L, "jetbrains.mps.lang.plugin.structure.CreateBlock"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x33f4c34299ff0d26L, "jetbrains.mps.lang.plugin.structure.CreateNodeAspectBlock"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x4cdc1c9014f46cb3L, "jetbrains.mps.lang.plugin.structure.CustomCondition"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11aa167474fL, "jetbrains.mps.lang.plugin.structure.DisposeBlock"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1181d51127eL, "jetbrains.mps.lang.plugin.structure.DoUpdateBlock"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x33f4c34299ff0d2fL, "jetbrains.mps.lang.plugin.structure.EditorTab"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x120b44d9194L, "jetbrains.mps.lang.plugin.structure.EnumerateChildrenFunction"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1181d5d8548L, "jetbrains.mps.lang.plugin.structure.ExecuteBlock"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11aba5b01c0L, "jetbrains.mps.lang.plugin.structure.GetComponentBlock"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1184b2b7acbL, "jetbrains.mps.lang.plugin.structure.GetNodeBlock"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1184b2c2cdeL, "jetbrains.mps.lang.plugin.structure.GetNodesBlock"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11840f36089L, "jetbrains.mps.lang.plugin.structure.GroupAnchor"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119240f9168L, "jetbrains.mps.lang.plugin.structure.GroupType"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x45b64b294c2b3514L, "jetbrains.mps.lang.plugin.structure.IdeaInitializerDescriptor"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x516313f5e8537eecL, "jetbrains.mps.lang.plugin.structure.IdeaPluginDependency"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11aa166ea48L, "jetbrains.mps.lang.plugin.structure.InitBlock"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x118b833c6a5L, "jetbrains.mps.lang.plugin.structure.IsApplicableBlock"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x33f4c34299ff128fL, "jetbrains.mps.lang.plugin.structure.IsApplicableTabBlock"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11919c665d4L, "jetbrains.mps.lang.plugin.structure.KeyMapKeystroke"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x15afe07f2a9bb075L, "jetbrains.mps.lang.plugin.structure.KeymapChangesDeclaration"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x33f4c34299ffc090L, "jetbrains.mps.lang.plugin.structure.ListenBlock"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x2d2ad2584076330L, "jetbrains.mps.lang.plugin.structure.MPSPluginDependency"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x68b8d4843b76107L, "jetbrains.mps.lang.plugin.structure.NumberToolShortcut"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x6ac26e7c3218aa1eL, "jetbrains.mps.lang.plugin.structure.OldConceptsBlock"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x6ac26e7c3218be7cL, "jetbrains.mps.lang.plugin.structure.OldCreateBlock"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119e1f720a6L, "jetbrains.mps.lang.plugin.structure.OnAfterReadBlock"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119e1f3f82bL, "jetbrains.mps.lang.plugin.structure.OnBeforeWriteBlock"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x22035699bdd78147L, "jetbrains.mps.lang.plugin.structure.Order"), MetaAdapterFactory.getInterfaceConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x22035699bdd78145L, "jetbrains.mps.lang.plugin.structure.OrderConstraints"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x22035699bdd79211L, "jetbrains.mps.lang.plugin.structure.OrderReference"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x55f30a5d1e096c3aL, "jetbrains.mps.lang.plugin.structure.ParameterizedShortcutChange"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119c44cfd36L, "jetbrains.mps.lang.plugin.structure.PersistentPropertyDeclaration"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119c466b22aL, "jetbrains.mps.lang.plugin.structure.PersistentPropertyReference"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x516313f5e8537ee9L, "jetbrains.mps.lang.plugin.structure.PluginDependency"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119e269a79fL, "jetbrains.mps.lang.plugin.structure.PreferencePage"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119e291160cL, "jetbrains.mps.lang.plugin.structure.PreferencePageCommitBlock"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119e7219d37L, "jetbrains.mps.lang.plugin.structure.PreferencePageIsModifiedBlock"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119e28fc2f6L, "jetbrains.mps.lang.plugin.structure.PreferencePageResetBlock"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119c44c226fL, "jetbrains.mps.lang.plugin.structure.PreferencesComponentDeclaration"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119c497fc64L, "jetbrains.mps.lang.plugin.structure.PreferencesComponentType"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11db00924aaL, "jetbrains.mps.lang.plugin.structure.ToStringConceptFunction"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x68b8d4843b765b0L, "jetbrains.mps.lang.plugin.structure.ToolKeystroke"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11961ebbf24L, "jetbrains.mps.lang.plugin.structure.ToolType"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x118b8325461L, "jetbrains.mps.lang.plugin.structure.UpdateBlock"), MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x120b44b9ee2L, "jetbrains.mps.lang.plugin.structure.UpdateGroupFunction"));
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x68b8d4843e384caL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11b69e025e0L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11b69e60be0L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1181ca87c38L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1181da058d2L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11b737a6b7cL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x118b812427fL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1947b3e0f0959deeL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x118d0b7fab3L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x118c26632a3L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x33f4c34299ffc088L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x5adc7622e710bddcL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1190f786becL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1181d54406fL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11870797a07L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x118707cdfb8L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x513f22c4bae4fb15L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0xb6b688a943085fcL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x118565418cbL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11aa1691a43L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x6785022a196ed912L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1184b3b848fL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x6785022a196e8effL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x6785022a196e8f01L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x33f4c34299ff0d26L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x4cdc1c9014f46cb3L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11aa167474fL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1181d51127eL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x33f4c34299ff0d2fL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x120b44d9194L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1181d5d8548L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11aba5b01c0L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1184b2b7acbL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x1184b2c2cdeL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11840f36089L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119240f9168L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x45b64b294c2b3514L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x516313f5e8537eecL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11aa166ea48L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x118b833c6a5L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x33f4c34299ff128fL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11919c665d4L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x15afe07f2a9bb075L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x33f4c34299ffc090L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x2d2ad2584076330L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x68b8d4843b76107L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119e1f720a6L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119e1f3f82bL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x22035699bdd78147L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x22035699bdd78145L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x22035699bdd79211L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x55f30a5d1e096c3aL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119c44cfd36L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119c466b22aL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x516313f5e8537ee9L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119e269a79fL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119e291160cL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119e7219d37L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119e28fc2f6L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119c44c226fL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x119c497fc64L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x15afe07f2a9bb076L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x51d51510f17223c5L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11db00924aaL), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x68b8d4843b765b0L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x11961ebbf24L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x118b8325461L), MetaIdFactory.conceptId(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x120b44b9ee2L)).seal();
 }

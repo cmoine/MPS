@@ -7,12 +7,15 @@ import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.internal.collections.runtime.Sequence;
 import jetbrains.mps.core.xml.behavior.XmlElement__BehaviorDescriptor;
+import jetbrains.mps.core.xml.behavior.XmlPart__BehaviorDescriptor;
+import org.jetbrains.mps.openapi.language.SProperty;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 
 public class XmlElement_TextGen extends TextGenDescriptorBase {
   @Override
@@ -23,13 +26,13 @@ public class XmlElement_TextGen extends TextGenDescriptorBase {
       tgs.indent();
     }
     tgs.append("<");
-    tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), MetaAdapterFactory.getProperty(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c54b10b2L, 0x5c842a42c54b10b6L, "tagName")));
-    if (ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), MetaAdapterFactory.getContainmentLink(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c54b10b2L, 0x5c842a42c54b10b5L, "attributes"))).isNotEmpty()) {
+    tgs.append(XmlCharEscape.escapeIdentifier(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.tagName$ZoHR)));
+    if (ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.attributes$ZouQ)).isNotEmpty()) {
       tgs.append(" ");
     }
     ctx.getBuffer().area().increaseIndent();
     {
-      Iterable<SNode> collection = SLinkOperations.getChildren(ctx.getPrimaryInput(), MetaAdapterFactory.getContainmentLink(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c54b10b2L, 0x5c842a42c54b10b5L, "attributes"));
+      Iterable<SNode> collection = SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.attributes$ZouQ);
       final SNode lastItem = Sequence.fromIterable(collection).last();
       for (SNode item : collection) {
         tgs.appendNode(item);
@@ -39,16 +42,18 @@ public class XmlElement_TextGen extends TextGenDescriptorBase {
       }
     }
     ctx.getBuffer().area().decreaseIndent();
-    if (ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), MetaAdapterFactory.getContainmentLink(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c54b10b2L, 0x16838b3fce9a4922L, "content"))).isEmpty() && SPropertyOperations.getBoolean(ctx.getPrimaryInput(), MetaAdapterFactory.getProperty(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c54b10b2L, 0x61218fae7b61b5d5L, "shortEmptyNotation"))) {
+    if (ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.content$zkQy)).isEmpty() && SPropertyOperations.getBoolean(ctx.getPrimaryInput(), PROPS.shortEmptyNotation$B8Gv)) {
       tgs.append(" />");
       return;
     }
     tgs.append(">");
     if ((boolean) XmlElement__BehaviorDescriptor.isMultiline_id7HilnpQ3Ckr.invoke(ctx.getPrimaryInput())) {
-      tgs.newLine();
+      if (!((boolean) XmlPart__BehaviorDescriptor.isEmptyTextOnLineWithOpenTag_id1Q3yR6CdyTo.invoke(ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.content$zkQy)).first()))) {
+        tgs.newLine();
+      }
       ctx.getBuffer().area().increaseIndent();
       tgs.indent();
-      for (SNode item : SLinkOperations.getChildren(ctx.getPrimaryInput(), MetaAdapterFactory.getContainmentLink(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c54b10b2L, 0x16838b3fce9a4922L, "content"))) {
+      for (SNode item : SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.content$zkQy)) {
         tgs.appendNode(item);
       }
       ctx.getBuffer().area().decreaseIndent();
@@ -57,14 +62,24 @@ public class XmlElement_TextGen extends TextGenDescriptorBase {
     } else {
       ctx.getBuffer().area().increaseIndent();
       ctx.getBuffer().area().increaseIndent();
-      for (SNode item : SLinkOperations.getChildren(ctx.getPrimaryInput(), MetaAdapterFactory.getContainmentLink(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c54b10b2L, 0x16838b3fce9a4922L, "content"))) {
+      for (SNode item : SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.content$zkQy)) {
         tgs.appendNode(item);
       }
       ctx.getBuffer().area().decreaseIndent();
       ctx.getBuffer().area().decreaseIndent();
     }
     tgs.append("</");
-    tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), MetaAdapterFactory.getProperty(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c54b10b2L, 0x5c842a42c54b10b6L, "tagName")));
+    tgs.append(XmlCharEscape.escapeIdentifier(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.tagName$ZoHR)));
     tgs.append(">");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty tagName$ZoHR = MetaAdapterFactory.getProperty(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c54b10b2L, 0x5c842a42c54b10b6L, "tagName");
+    /*package*/ static final SProperty shortEmptyNotation$B8Gv = MetaAdapterFactory.getProperty(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c54b10b2L, 0x61218fae7b61b5d5L, "shortEmptyNotation");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink attributes$ZouQ = MetaAdapterFactory.getContainmentLink(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c54b10b2L, 0x5c842a42c54b10b5L, "attributes");
+    /*package*/ static final SContainmentLink content$zkQy = MetaAdapterFactory.getContainmentLink(0x479c7a8c02f943b5L, 0x9139d910cb22f298L, 0x5c842a42c54b10b2L, 0x16838b3fce9a4922L, "content");
   }
 }

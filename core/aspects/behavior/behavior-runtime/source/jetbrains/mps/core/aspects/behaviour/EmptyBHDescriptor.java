@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  */
 package jetbrains.mps.core.aspects.behaviour;
 
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import org.jetbrains.annotations.NotNull;
@@ -34,11 +33,18 @@ import java.util.List;
  * It acts exactly as if it has no methods.
  */
 public final class EmptyBHDescriptor extends BaseBHDescriptor {
+  // XXX seems that the reason for this class to extend BaseBHD, not implementing BHDescriptor only
+  //     is that we get behaviors of super-concepts through default logic of BaseBHD.
+  // YYY yes
   private final SAbstractConcept myConcept;
 
-  public EmptyBHDescriptor(BehaviorRegistry behaviorRegistry, @NotNull SAbstractConcept concept) {
-    super(behaviorRegistry);
+  public EmptyBHDescriptor(@NotNull SAbstractConcept concept) {
     myConcept = concept;
+  }
+
+  @Override
+  public String toString() {
+    return getConcept() + " EmptyBHDescriptor";
   }
 
   @NotNull
@@ -48,18 +54,18 @@ public final class EmptyBHDescriptor extends BaseBHDescriptor {
   }
 
   @Override
-  protected void initNode(@NotNull SNode node, @NotNull SConstructor constructor, @NotNull Object... parameters) {
+  protected void initNode(@NotNull SNode node, @NotNull SConstructor constructor, @Nullable Object... parameters) {
     // NOP
   }
 
   @Override
-  protected <T> T invokeSpecial0(@NotNull SNode node, @NotNull SMethod<T> method, @NotNull Object... parameters) {
+  protected <T> T invokeSpecial0(@NotNull SNode node, @NotNull SMethod<T> method, @Nullable Object... parameters) {
     // TODO review contract; see MPS-22391
     return null;
   }
 
   @Override
-  protected <T> T invokeSpecial0(@NotNull SAbstractConcept concept, @NotNull SMethod<T> method, @NotNull Object... parameters) {
+  protected <T> T invokeSpecial0(@NotNull SAbstractConcept concept, @NotNull SMethod<T> method, @Nullable Object... parameters) {
     // TODO review contract; see MPS-22391
     return null;
   }

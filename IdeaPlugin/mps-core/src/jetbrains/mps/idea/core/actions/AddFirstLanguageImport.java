@@ -29,7 +29,7 @@ import java.util.Set;
 /**
  * Created by danilla on 04/12/15.
  */
-public class AddFirstLanguageImport extends AddLanguageImport_Action {
+public class AddFirstLanguageImport extends UseLanguageAction {
   @Override
   public void doUpdate(@NotNull final AnActionEvent event, final Map<String, Object> params) {
     super.doUpdate(event, params);

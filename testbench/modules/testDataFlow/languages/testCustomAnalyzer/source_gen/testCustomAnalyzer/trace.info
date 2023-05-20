@@ -2,7 +2,7 @@
 <debug-info version="2">
   <root>
     <file name="Language.java">
-      <unit at="23,0,90,0" name="testCustomAnalyzer.Language" />
+      <unit at="22,0,71,0" name="testCustomAnalyzer.Language" />
     </file>
   </root>
 </debug-info>

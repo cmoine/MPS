@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-59okebulh5nlcvo7kfkezc51v8x3c60" />
+<product version="3" modelHash="ac2fcl3spx7h3o6brrc9wri1zcvv2h5">
+  <files names="ConvertToItems_Intention.java:ConvertToList_Intention.java:IntentionsDescriptor.java" />
+</product>
 

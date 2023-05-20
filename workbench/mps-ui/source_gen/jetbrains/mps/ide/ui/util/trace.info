@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
   <root nodeRef="r:92932ea9-7c1a-42ec-ba50-b485e2406f2b(jetbrains.mps.ide.ui.util)/4744614252206716878">
     <file name="NodeAttributesUtil.java">
-      <node id="4744614252206717045" at="12,54,13,642" concept="0" />
-      <node id="4744614252206717004" at="12,0,15,0" concept="1" trace="isDeprecatedNode#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
-      <scope id="4744614252206717007" at="12,54,13,642" />
-      <scope id="4744614252206717004" at="12,0,15,0">
+      <node id="4744614252206717045" at="15,54,16,240" concept="0" />
+      <node id="4744614252206716878" at="20,0,21,0" concept="1" trace="DeprecatedNodeAnnotation$zV" />
+      <node id="4744614252206716878" at="21,0,22,0" concept="1" trace="IStructureDeprecatable$Wl" />
+      <node id="4744614252206717004" at="15,0,18,0" concept="2" trace="isDeprecatedNode#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <scope id="4744614252206717007" at="15,54,16,240" />
+      <scope id="4744614252206717004" at="15,0,18,0">
         <var name="node" id="4744614252206717018" />
       </scope>
-      <unit id="4744614252206716878" at="11,0,16,0" name="jetbrains.mps.ide.ui.util.NodeAttributesUtil" />
+      <unit id="4744614252206716878" at="19,0,23,0" name="jetbrains.mps.ide.ui.util.NodeAttributesUtil$CONCEPTS" />
+      <unit id="4744614252206716878" at="13,0,24,0" name="jetbrains.mps.ide.ui.util.NodeAttributesUtil" />
     </file>
   </root>
 </debug-info>

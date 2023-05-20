@@ -4,33 +4,58 @@ package jetbrains.mps.traceInfo.testWeavingGenerated.data.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_ChildConceptWeave = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ChildConceptWeaveEach = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ChildConceptWeaveEachMany = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ChildConceptWeaveMany = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RootConcept = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_ChildConceptWeave;
+  private ConceptPresentation props_ChildConceptWeaveEach;
+  private ConceptPresentation props_ChildConceptWeaveEachMany;
+  private ConceptPresentation props_ChildConceptWeaveMany;
+  private ConceptPresentation props_RootConcept;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.ChildConceptWeave:
+        if (props_ChildConceptWeave == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_ChildConceptWeave = cpb.create();
+        }
         return props_ChildConceptWeave;
-      case 1:
+      case LanguageConceptSwitch.ChildConceptWeaveEach:
+        if (props_ChildConceptWeaveEach == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_ChildConceptWeaveEach = cpb.create();
+        }
         return props_ChildConceptWeaveEach;
-      case 2:
+      case LanguageConceptSwitch.ChildConceptWeaveEachMany:
+        if (props_ChildConceptWeaveEachMany == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_ChildConceptWeaveEachMany = cpb.create();
+        }
         return props_ChildConceptWeaveEachMany;
-      case 3:
+      case LanguageConceptSwitch.ChildConceptWeaveMany:
+        if (props_ChildConceptWeaveMany == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_ChildConceptWeaveMany = cpb.create();
+        }
         return props_ChildConceptWeaveMany;
-      case 4:
+      case LanguageConceptSwitch.RootConcept:
+        if (props_RootConcept == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_RootConcept = cpb.create();
+        }
         return props_RootConcept;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

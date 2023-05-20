@@ -4,6 +4,8 @@
       <root url="jar://$PROJECT_DIR$/mps-core/lib/mps-environment.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../core/tool/environment/source_gen" />
+    </SOURCES>
   </library>
 </component>

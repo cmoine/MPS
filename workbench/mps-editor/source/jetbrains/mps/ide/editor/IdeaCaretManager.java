@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,45 +16,53 @@
 package jetbrains.mps.ide.editor;
 
 import com.intellij.concurrency.JobScheduler;
-import com.intellij.openapi.components.ApplicationComponent;
-import jetbrains.mps.nodeEditor.EditorSettings;
+import com.intellij.openapi.Disposable;
+import com.intellij.openapi.editor.ex.EditorSettingsExternalizable;
+import jetbrains.mps.core.platform.DynamicComponentWarden;
+import jetbrains.mps.core.platform.DynamicComponentWarden.Token;
+import jetbrains.mps.editor.EditorComponentTrackService;
+import jetbrains.mps.ide.MPSCoreComponents;
 import jetbrains.mps.nodeEditor.EditorSettingsListener;
 import jetbrains.mps.nodeEditor.caret.CaretManager;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * IDEA Platform -specific MPS caret manager
  * User: shatalin
  * Date: 29/07/16
  */
-public class IdeaCaretManager extends CaretManager implements ApplicationComponent, EditorSettingsListener {
-  private final EditorSettings mySettings;
+public class IdeaCaretManager extends CaretManager implements EditorSettingsListener, Disposable {
+  private Token myComponentTracker;
 
-  public IdeaCaretManager(EditorSettings editorSettings) {
-    mySettings = editorSettings;
-  }
-
-  @Override
-  public void initComponent() {
+  public IdeaCaretManager() {
     CaretManager.ourInstance = this;
-    mySettings.addEditorSettingsListener(this);
+    MPSCoreComponents cc = MPSCoreComponents.getInstance();
+    // FIXME provisional placement not to add dedicated app listener/component for EditorComponentTrackService
+    //   I'd like to test this approach first. Eventually, likely need something as MPSEditor ComponentPlugin
+    //   Now we piggy-back IdeaCaretManager from [mps-editor]
+    final DynamicComponentWarden dcw = cc.getPlatform().findComponent(DynamicComponentWarden.class);
+    myComponentTracker = dcw.publish(EditorComponentTrackService.class, new EditorComponentTracker());
   }
 
   @Override
-  public void disposeComponent() {
-  }
-
-  @NotNull
-  @Override
-  public String getComponentName() {
-    return "IDEA Platform -specific MPS caret manager";
+  public void dispose() {
+    if (myComponentTracker != null) {
+      myComponentTracker.discard();
+      myComponentTracker = null;
+    }
   }
 
   @Override
   protected ScheduledFuture<?> start() {
-    return JobScheduler.getScheduler().scheduleWithFixedDelay(new Blink(), mySettings.getCaretBlinkPeriod(), mySettings.getCaretBlinkPeriod(),
+    EditorSettingsExternalizable settingsExternalizable = EditorSettingsExternalizable.getInstance();
+    boolean blinkCaret = settingsExternalizable.isBlinkCaret();
+    if (!blinkCaret) {
+      return null;
+    }
+    int blinkPeriod = settingsExternalizable.getBlinkPeriod();
+    return JobScheduler.getScheduler().scheduleWithFixedDelay(new Blink(), blinkPeriod, blinkPeriod,
         TimeUnit.MILLISECONDS);
   }
 

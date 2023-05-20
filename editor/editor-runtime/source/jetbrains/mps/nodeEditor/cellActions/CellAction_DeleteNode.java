@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,14 @@ package jetbrains.mps.nodeEditor.cellActions;
 
 import jetbrains.mps.editor.runtime.cells.AbstractCellAction;
 import jetbrains.mps.editor.runtime.cells.ReadOnlyUtil;
+import jetbrains.mps.editor.runtime.deletionApprover.DeletionApproverUtil;
 import jetbrains.mps.editor.runtime.impl.CellUtil;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.AttributeOperations;
 import jetbrains.mps.openapi.editor.EditorComponent;
 import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.selection.SelectionManager;
+import jetbrains.mps.smodel.SNodeUtil;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.model.SNode;
 
@@ -50,6 +53,10 @@ public class CellAction_DeleteNode extends AbstractCellAction {
 
   @Override
   public boolean canExecute(EditorContext context) {
+    final SNode nodeToDelete = getNodeToDelete(context);
+    if (nodeToDelete == null || nodeToDelete.getParent() == null) {
+      return false;
+    }
     EditorCell cell = context.getEditorComponent().findNodeCell(mySemanticNode);
     return cell != null && cell.getParent() != null && !ReadOnlyUtil.isCellOrSelectionReadOnlyInEditor(context.getEditorComponent(), cell);
   }
@@ -58,15 +65,25 @@ public class CellAction_DeleteNode extends AbstractCellAction {
   public void execute(EditorContext context) {
     SNode nodeToDelete = getNodeToDelete(context);
     SNode parent = nodeToDelete.getParent();
-    SContainmentLink containmentLink = nodeToDelete.getContainmentLink();
+    SContainmentLink containmentLink;
+    if (AttributeOperations.isChildAttribute(nodeToDelete)){
+      containmentLink = SNodeUtil.getChildLink(nodeToDelete);
+    } else {
+      containmentLink = nodeToDelete.getContainmentLink();
+    }
     boolean isForward = myDirection == DeleteDirection.FORWARD;
 
+
+    if (DeletionApproverUtil.approve(context, nodeToDelete)) {
+      return;
+    }
+
     boolean selectStart = isForward;
-    SNode siblingToSelect = getSiblingToSelect(parent, nodeToDelete, isForward);
+    SNode siblingToSelect = getSiblingToSelect(parent, nodeToDelete, isForward, containmentLink);
 
     if (siblingToSelect == null) {
       selectStart = !isForward;
-      siblingToSelect = getSiblingToSelect(parent, nodeToDelete, !isForward);
+      siblingToSelect = getSiblingToSelect(parent, nodeToDelete, !isForward, containmentLink);
     }
     nodeToDelete.delete();
     context.flushEvents();
@@ -77,9 +94,8 @@ public class CellAction_DeleteNode extends AbstractCellAction {
     return CellUtil.getNodeToDelete(mySemanticNode);
   }
 
-  private SNode getSiblingToSelect(SNode parent, SNode node, boolean isNext) {
-    SContainmentLink containmentLink = node.getContainmentLink();
-    Iterator<? extends SNode> iterator = parent.getChildren(containmentLink).iterator();
+  private SNode getSiblingToSelect(SNode parent, SNode node, boolean isNext, SContainmentLink containmentLink) {
+    Iterator<? extends SNode> iterator = AttributeOperations.getChildNodesAndAttributes(parent, containmentLink).iterator();
     SNode prev = null;
     while (iterator.hasNext()) {
       SNode child = iterator.next();
@@ -114,7 +130,7 @@ public class CellAction_DeleteNode extends AbstractCellAction {
 
 
   private void selectNullCell(EditorComponent editorComponent, SNode parent, SContainmentLink link) {
-    EditorCell nullCell = editorComponent.findNodeCellWithRole(parent, link.getName());
+    EditorCell nullCell = editorComponent.findNodeCellWithRole(parent, link);
     if (nullCell != null) {
       ((jetbrains.mps.nodeEditor.EditorComponent) editorComponent).changeSelectionWRTFocusPolicy(nullCell);
       return;

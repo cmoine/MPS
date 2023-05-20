@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  */
 package jetbrains.mps.util;
 
-import jetbrains.mps.util.annotation.ToRemove;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SModelName;
@@ -30,6 +29,7 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
@@ -54,8 +54,8 @@ public class NameUtil {
     };
   }
 
-  private static final Map<Character, String> ESCAPE_INVISIBLE_CHARS_MAP = new HashMap<Character, String>();
-  private static final Map<Character, String> ESCAPE_MAP = new HashMap<Character, String>();
+  private static final Map<Character, String> ESCAPE_INVISIBLE_CHARS_MAP = new HashMap<>();
+  private static final Map<Character, String> ESCAPE_MAP = new HashMap<>();
 
   static {
     ESCAPE_INVISIBLE_CHARS_MAP.put('\000', "\\000");
@@ -81,22 +81,22 @@ public class NameUtil {
         "into", "like", "near", "of", "off", "on", "onto", "on top of",
         "out of", "outside", "over", "past", "since", "through", "to", "toward",
         "under", "underneath", "until", "up", "upon", "with", "within", "without"};
-    PREPOSITIONS = new HashSet<String>(Arrays.asList(preps));
+    PREPOSITIONS = new HashSet<>(Arrays.asList(preps));
 
     String[] articles = {"a", "an", "the"};
-    ARTICLES = new HashSet<String>(Arrays.asList(articles));
+    ARTICLES = new HashSet<>(Arrays.asList(articles));
 
     String[] particles = {"and", "or", "not", "as"};
-    PARTICLES = new HashSet<String>(Arrays.asList(particles));
+    PARTICLES = new HashSet<>(Arrays.asList(particles));
   }
 
   // ------ Naming policy methods --------
   public static boolean satisfiesNamingPolicy(String s) {
-    return EqualUtil.equals(captionWithNamingPolicy(s), s);
+    return Objects.equals(captionWithNamingPolicy(s), s);
   }
 
   public static boolean satisfiesPartNamingPolicy(String s) {
-    return EqualUtil.equals(captionPartWithNamingPolicy(s), s);
+    return Objects.equals(captionPartWithNamingPolicy(s), s);
   }
 
   public static String captionWithNamingPolicy(String s) {
@@ -136,10 +136,10 @@ public class NameUtil {
     StringBuilder result = new StringBuilder(s.length());
     StringTokenizer st = new StringTokenizer(s);
 
-    if (s.startsWith(" ")) result.append(" ");
+    if (s.startsWith(" ")) result.append(' ');
 
     while (st.hasMoreTokens()) {
-      result.append(wordWithNamingPolicy(st.nextToken())).append(" ");
+      result.append(wordWithNamingPolicy(st.nextToken())).append(' ');
     }
 
     if (!s.endsWith(" ")) {
@@ -225,7 +225,7 @@ public class NameUtil {
     StringBuilder result = new StringBuilder(s.length());
     StringTokenizer st = new StringTokenizer(s);
     while (st.hasMoreTokens()) {
-      result.append(decapitalize(st.nextToken())).append(" ");
+      result.append(decapitalize(st.nextToken())).append(' ');
     }
     return result.substring(0, result.length() - 1);
   }
@@ -301,8 +301,8 @@ public class NameUtil {
 
   public static List<String> splitByCamels(String source) {
     if (source == null) return null;
-    List<String> result = new ArrayList<String>();
-    StringBuffer current = new StringBuffer();
+    List<String> result = new ArrayList<>();
+    StringBuilder current = new StringBuilder();
     for (int i = source.length() - 1; i >= 0; i--) {
       char c = source.charAt(i);
       current.insert(0, c);
@@ -318,7 +318,10 @@ public class NameUtil {
   }
 
   public static String shortNameFromLongName(String fqName) {
-    if (fqName == null) return fqName;
+    if (fqName == null) {
+      return null;
+    }
+
     int offset = fqName.lastIndexOf('.');
     if (offset < 0) return fqName;
 
@@ -327,7 +330,7 @@ public class NameUtil {
 
   public static String namespaceFromLongName(String fqName) {
     if (fqName == null) {
-      return fqName;
+      return null;
     }
     int offset = fqName.lastIndexOf('.');
     if (offset < 0) {
@@ -364,7 +367,7 @@ public class NameUtil {
     SModel model = node.getModel();
     if (model == null) return name;
 
-    return getModelLongName(model) + "." + name;
+    return getModelLongName(model) + '.' + name;
   }
 
   public static String compactNodeFQName(SNode node) {
@@ -376,7 +379,7 @@ public class NameUtil {
     if (model == null) {
       return name;
     }
-    return compactNamespace(getModelLongName(model)) + "." + name;
+    return compactNamespace(getModelLongName(model)) + '.' + name;
   }
 
   /**
@@ -384,8 +387,7 @@ public class NameUtil {
    * @param model not null
    * @return qualified name of the model without stereotype
    */
-  @Deprecated
-  @ToRemove(version = 3.4)
+@Deprecated(since = "3.4", forRemoval = true)
   public static String getModelLongName(SModel model) {
     return model.getName().getLongName();
   }
@@ -395,8 +397,7 @@ public class NameUtil {
    * @param modelRef not null
    * @return qualified name of the model without stereotype
    */
-  @Deprecated
-  @ToRemove(version = 3.4)
+@Deprecated(since = "3.4", forRemoval = true)
   public static String getModelLongName(SModelReference modelRef) {
     return modelRef.getName().getLongName();
   }
@@ -545,7 +546,7 @@ public class NameUtil {
 
       for (int i = 0; i < parts.length; i++) {
         if (i != 0) {
-          result.append(".");
+          result.append('.');
         }
 
         if (i < parts.length - 2) {

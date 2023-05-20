@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="2c1vly0n643qyy7alf1js04lsvre1yd" />
+<product version="3" modelHash="-adcffkmdklrinhdlmx27z2caqxi90z7">
+  <files names="TypesystemDescriptor.java:typeof_ActionTestContainer_InferenceRule.java" />
+</product>
 

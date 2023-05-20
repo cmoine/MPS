@@ -15,20 +15,32 @@
  */
 package jetbrains.mps.ide.compiler;
 
-import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SearchableConfigurable;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.project.ProjectManager;
+import com.intellij.openapi.ui.MessageType;
+import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.wm.ToolWindowId;
+import com.intellij.openapi.wm.ToolWindowManager;
+import com.intellij.util.ui.UIUtil;
+import jetbrains.mps.compiler.JavaCompilerOptionsComponent;
 import jetbrains.mps.compiler.JavaCompilerOptionsComponent.JavaVersion;
 import jetbrains.mps.ide.compiler.CompilerSettingsComponent.CompilerState;
+import jetbrains.mps.ide.project.ProjectHelper;
+import jetbrains.mps.internal.collections.runtime.MapSequence;
+import jetbrains.mps.make.ModuleMaker;
+import jetbrains.mps.progress.EmptyProgressMonitor;
+import jetbrains.mps.project.MPSProject;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.JComponent;
+import java.util.HashSet;
 
 public class CompilerSettingsConfigurable implements SearchableConfigurable {
   private CompilerSettingsPreferencePage myCompilerSettingsPreferencePage;
-  private Project myProject;
+  private final Project myProject;
 
   public CompilerSettingsConfigurable(Project project) {
     myProject = project;
@@ -55,7 +67,7 @@ public class CompilerSettingsConfigurable implements SearchableConfigurable {
   @Nullable
   @Override
   public String getHelpTopic() {
-    return null;
+    return "Compiler._Java_Compiler";
   }
 
   @Nullable
@@ -70,7 +82,7 @@ public class CompilerSettingsConfigurable implements SearchableConfigurable {
   }
 
   @Override
-  public void apply() throws ConfigurationException {
+  public void apply() {
     getPreferencePage().commit();
     CompilerState compilerState = new CompilerState();
     JavaVersion selectedTargetJavaVersion = getPreferencePage().getSelectedTargetJavaVersion();
@@ -79,7 +91,21 @@ public class CompilerSettingsConfigurable implements SearchableConfigurable {
     } else {
       compilerState.setTargetVersion(null);
     }
-    CompilerSettingsComponent.getInstance(myProject).loadState(compilerState);
+    CompilerSettingsComponent instance = CompilerSettingsComponent.getInstance(myProject);
+    MPSProject project = ProjectHelper.fromIdeaProject(myProject);
+    JavaVersion oldJavaVer = JavaCompilerOptionsComponent.getInstance().getJavaCompilerOptions(project).getTargetJavaVersion();
+    instance.loadState(compilerState);
+    if (selectedTargetJavaVersion != oldJavaVer) {
+      UIUtil.invokeLaterIfNeeded(() -> {
+        int res = Messages.showYesNoDialog(
+            String.format("The project must be reloaded in order to apply changes in Java version.\nReload the project '%s'?",
+                            project.getName()), "Reload Project", null);
+        if (res == Messages.NO) return;
+
+        new ModuleMaker().clean(new HashSet<>(project.getProjectModules()), new EmptyProgressMonitor());
+        ProjectManager.getInstance().reloadProject(myProject);
+      });
+    }
   }
 
   @Override

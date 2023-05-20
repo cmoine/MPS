@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model ref="r:458e004e-8ebd-4662-bdad-23d1dac3913c(TestLanguage.constraints)" content="root">
+  <persistence version="9" />
+  <imports>
+    <import index="8f0y" ref="r:98395163-4b79-4816-934b-611fd70a3d78(TestLanguage.structure)" implicit="true" />
+  </imports>
+  <registry>
+    <language id="3f4bc5f5-c6c1-4a28-8b10-c83066ffa4a1" name="jetbrains.mps.lang.constraints">
+      <concept id="1213093968558" name="jetbrains.mps.lang.constraints.structure.ConceptConstraints" flags="ng" index="1M2fIO">
+        <reference id="1213093996982" name="concept" index="1M2myG" />
+      </concept>
+    </language>
+  </registry>
+  <node concept="1M2fIO" id="68ZF3WBO7bw">
+    <ref role="1M2myG" to="8f0y:21vA1rjfd1A" resolve="TestConcept" />
+  </node>
+</model>
+

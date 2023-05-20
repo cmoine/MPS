@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <root nodeRef="r:71718df8-4cce-453f-a660-5133048de06c(jetbrains.mps.migrationTest@tests)/7948043932933885479">
+    <file name="MigrateTryStatement_Test.java">
+      <node id="7948043932933885479" at="34,37,35,60" concept="6" />
+      <node id="7948043932933885479" at="39,64,40,36" concept="1" />
+      <node id="7948043932933885479" at="45,52,46,19" concept="6" />
+      <node id="7948043932933885479" at="50,46,51,202" concept="4" />
+      <node id="7948043932933885479" at="54,47,55,202" concept="4" />
+      <node id="7948043932933885479" at="58,51,59,62" concept="4" />
+      <node id="6410786926917441054" at="62,43,63,18" concept="4" />
+      <node id="7948043932933885479" at="68,0,69,0" concept="5" trace="TestNode$zF" />
+      <node id="7948043932933885479" at="72,0,73,0" concept="5" trace="nodeToCheck$OBcW" />
+      <node id="7948043932933885479" at="28,0,30,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="7948043932933885479" at="31,0,33,0" concept="2" trace="myCommandExtension" />
+      <node id="7948043932933885479" at="34,0,37,0" concept="0" trace="MigrateTryStatement_Test#()V" />
+      <node id="7948043932933885479" at="45,0,48,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="7948043932933885479" at="38,0,42,0" concept="3" trace="test_MigrateTryStatement_Test#()V" />
+      <node id="7948043932933885479" at="49,0,53,0" concept="3" trace="getInputNodes#()Ljava/util/Collection;" />
+      <node id="7948043932933885479" at="53,0,57,0" concept="3" trace="getOutputNodes#()Ljava/util/Collection;" />
+      <node id="7948043932933885479" at="57,0,61,0" concept="3" trace="getMigrationScript#()[Ljetbrains/mps/lang/migration/runtime/base/MigrationScript;" />
+      <node id="6410786926917441054" at="61,0,65,0" concept="3" trace="shouldCheckStableIds#()Z" />
+      <scope id="7948043932933885479" at="34,37,35,60" />
+      <scope id="7948043932933885479" at="39,64,40,36" />
+      <scope id="7948043932933885479" at="45,52,46,19" />
+      <scope id="7948043932933885479" at="50,46,51,202" />
+      <scope id="7948043932933885479" at="54,47,55,202" />
+      <scope id="7948043932933885479" at="58,51,59,62" />
+      <scope id="6410786926917441054" at="62,43,63,18" />
+      <scope id="7948043932933885479" at="34,0,37,0" />
+      <scope id="7948043932933885479" at="45,0,48,0">
+        <var name="owner" id="7948043932933885479" />
+      </scope>
+      <scope id="7948043932933885479" at="38,0,42,0" />
+      <scope id="7948043932933885479" at="49,0,53,0" />
+      <scope id="7948043932933885479" at="53,0,57,0" />
+      <scope id="7948043932933885479" at="57,0,61,0" />
+      <scope id="6410786926917441054" at="61,0,65,0" />
+      <unit id="7948043932933885479" at="67,0,70,0" name="jetbrains.mps.migrationTest.MigrateTryStatement_Test$CONCEPTS" />
+      <unit id="7948043932933885479" at="71,0,74,0" name="jetbrains.mps.migrationTest.MigrateTryStatement_Test$LINKS" />
+      <unit id="7948043932933885479" at="43,0,66,0" name="jetbrains.mps.migrationTest.MigrateTryStatement_Test$TestBody" />
+      <unit id="7948043932933885479" at="26,0,75,0" name="jetbrains.mps.migrationTest.MigrateTryStatement_Test" />
+    </file>
+  </root>
+</debug-info>
+

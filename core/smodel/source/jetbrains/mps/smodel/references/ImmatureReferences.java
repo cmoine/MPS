@@ -1,151 +1,53 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Copyright 2000-2022 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 package jetbrains.mps.smodel.references;
 
-import jetbrains.mps.components.CoreComponent;
-import jetbrains.mps.project.ModuleId;
-import jetbrains.mps.project.structure.modules.ModuleReference;
-import jetbrains.mps.smodel.SModelId;
-import jetbrains.mps.smodel.SReferenceBase;
-import org.jetbrains.mps.openapi.model.SModel;
-import org.jetbrains.mps.openapi.model.SModelReference;
-import org.jetbrains.mps.openapi.module.SModule;
-import org.jetbrains.mps.openapi.module.SRepository;
-import org.jetbrains.mps.openapi.module.SRepositoryContentAdapter;
-import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
+import gnu.trove.THashSet;
+import jetbrains.mps.smodel.StaticReference;
+import jetbrains.mps.util.Pair;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
+import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.mps.openapi.model.SReference;
 
-import java.util.Map.Entry;
-import java.util.NoSuchElementException;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.ConcurrentMap;
+import java.util.Set;
 
 
-public class ImmatureReferences implements CoreComponent {
-  // How many threads _simultaneously_ accessing the pool are allowed to succeed without congestion
-  private static final int POOL_SIZE = 4;
+// This is an implementation friend of MA class.
+// MA with its command start/finish events controls ImmatureReferences instances, there's only 1 command thread,
+// we resort to thread-local non-synchronized collection of references that need to be
+// processed once command is over.
+// With present approach, nodes created in threads other than command one won't get their references recorded here. Though it's slightly different from the
+// earlier approach (where any thread producing a node b/w enable/disable got it recorded), it's still valid, as there never was a guarantee than the parallel
+// thread producing nodes would get exactly b/w enable/disable calls. If, however, there's explicit synchronization b/w threads to accomplish that, I'd better
+// figure it out. This mechanism is internal implementation detail, and there should be no code to rely on/utilize it
+//
+public final class ImmatureReferences {
+  private final Set<Pair<SNode, SReferenceLink>> myReferences = new THashSet<>();
 
-  private static final Object PRESENT = new Object();
-
-  private static ImmatureReferences INSTANCE;
-  private final SModelReference myVirtualRef;
-
-  // FIXME shall retrieve instance per SRepository
-  public static ImmatureReferences getInstance() {
-    return INSTANCE;
-  }
-
-  // seems sufficient to keep immature references per SRepository (unlike SModelRepository, which used to track models from all repositories)
-  // however, shall fix getInstance to respect actual repository
-  private final SRepository myRepository;
-  private final SRepositoryContentAdapter myReposListener = new MyRepositoryAdapter();
-
-  private final ConcurrentMap<SModelReference, ConcurrentMap<SReferenceBase, Object>> myReferences =
-      new ConcurrentHashMap<SModelReference, ConcurrentMap<SReferenceBase, Object>>();
-
-  private ConcurrentLinkedQueue<ConcurrentMap<SReferenceBase, Object>> myReferencesSetPool = new ConcurrentLinkedQueue<ConcurrentMap<SReferenceBase, Object>>();
-
-  private boolean myDisabled = true;
-
-  public ImmatureReferences(SRepository repository) {
-    myRepository = repository;
-    for (int i = 0; i < POOL_SIZE; i++) {
-      myReferencesSetPool.add(new ConcurrentHashMap<SReferenceBase, Object>());
-    }
-    myVirtualRef = PersistenceFacade.getInstance().createModelReference(new ModuleReference("$ImmatureRefsModuleRef$", ModuleId.regular()), SModelId.generate(), "$ImmatureRefsModelRef$");
-  }
-
-  public void enable() {
-    myDisabled = false;
-  }
-
-  public void disable() {
-    myDisabled = true;
-    cleanup();
-  }
-
-  @Override
-  public void init() {
-    if (INSTANCE != null) {
-      throw new IllegalStateException("double initialization");
-    }
-
-    INSTANCE = this;
-    myReposListener.subscribeTo(myRepository);
-  }
-
-  @Override
-  public void dispose() {
-    myReposListener.unsubscribeFrom(myRepository);
-    INSTANCE = null;
+  public ImmatureReferences() {
   }
 
   public void cleanup() {
-    for (Entry<SModelReference, ConcurrentMap<SReferenceBase, Object>> entry : myReferences.entrySet()) {
-      for (SReferenceBase r : entry.getValue().keySet()) {
-        r.makeIndirect(true);
+    if (myReferences.isEmpty()) {
+      return;
+    }
+    for (Pair<SNode, SReferenceLink> r : myReferences) {
+      // XXX in case beforeModelRemoved() code that used to be here is vital,
+      // could check r.getTargetSModelReference().anyMatch(modelsRemoved.all().getReference()) here to avoid maturing references that point nowhere
+      final SReference ref = r.o1.getReference(r.o2);
+      // FIXME there's no mechanism now to replace AssociationData except via SReference impl
+      //       likely, need to use smodel.SNode rather than openapi.SNode, but don't want to move this class to [kernel]
+      if (ref instanceof StaticReference) {
+        ((StaticReference) ref).makeIndirect(true);
       }
     }
-    myReferences.clear();
   }
 
-  public void add(SReferenceBase ref) {
-    if (myDisabled) return;
-    SModel model = ref.getSourceNode().getModel();
-    SModelReference modelRef = model == null ? myVirtualRef : model.getReference();
-    ConcurrentMap<SReferenceBase, Object> refSet = getOrCreateRefSet(modelRef);
-    refSet.put(ref, PRESENT);
-  }
-
-  public void remove(SReferenceBase ref) {
-    if (myDisabled) return;
-
-    SModel model = ref.getSourceNode().getModel();
-
-    SModelReference modelRef = model == null ? myVirtualRef : model.getReference();
-    ConcurrentMap<SReferenceBase, Object> refSet = myReferences.get(modelRef);
-    if (refSet != null) {
-      refSet.remove(ref);
-    }
-  }
-
-  private ConcurrentMap<SReferenceBase, Object> getOrCreateRefSet(SModelReference modelRef) {
-    ConcurrentMap<SReferenceBase, Object> pooledSet;
-    try {
-      pooledSet = myReferencesSetPool.remove();
-    } catch (NoSuchElementException e) {
-      pooledSet = new ConcurrentHashMap<SReferenceBase, Object>();
-    }
-    ConcurrentMap<SReferenceBase, Object> usedSet = myReferences.putIfAbsent(modelRef, pooledSet);
-    if (usedSet == null) {
-      usedSet = pooledSet;
-      pooledSet = new ConcurrentHashMap<SReferenceBase, Object>();
-    }
-    myReferencesSetPool.add(pooledSet);
-    return usedSet;
-  }
-
-  private class MyRepositoryAdapter extends SRepositoryContentAdapter {
-    @Override
-    public void beforeModelRemoved(SModule module, SModel model) {
-      super.beforeModelRemoved(module, model);
-      ConcurrentMap<SReferenceBase, Object> refSet = myReferences.remove(model.getReference());
-      if (refSet != null) {
-        refSet.clear();
-      }
-    }
+  /**
+   * both parameters are non-null
+   */
+  public void add(SNode node, SReferenceLink link) {
+    myReferences.add(new Pair<>(node, link));
   }
 }

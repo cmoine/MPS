@@ -15,10 +15,24 @@
  */
 package jetbrains.mps.nodeEditor;
 
+import com.intellij.openapi.ui.JBPopupMenu;
+import com.intellij.openapi.ui.Messages;
+import com.intellij.util.ui.JBUI.Borders;
+import jetbrains.mps.errors.item.NodeReportItem;
+import jetbrains.mps.errors.item.RuleIdFlavouredItem;
+import jetbrains.mps.errors.item.RuleIdFlavouredItem.TypesystemRuleId;
+import jetbrains.mps.ide.ThreadUtils;
+import jetbrains.mps.openapi.navigation.EditorNavigator;
+import jetbrains.mps.project.MPSProject;
+import jetbrains.mps.project.Project;
+import org.jetbrains.mps.openapi.model.SNodeReference;
+
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
@@ -32,12 +46,13 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MPSErrorDialog extends JDialog {
   private static final int MIN_SIDE_PADDING = 30;
 
-  private List<JButton> myButtons = new ArrayList<JButton>();
+  private List<JButton> myButtons = new ArrayList<>();
   private boolean myIsInitialized = false;
   private JTextField myField;
   private final Window myOwner;
@@ -52,18 +67,38 @@ public class MPSErrorDialog extends JDialog {
     }
   };
 
-  public MPSErrorDialog(Frame frame, String error, String title) {
-    this(frame, error, title, true);
+  public MPSErrorDialog(Frame frame, String text, String title) {
+    this(frame, text, title, true);
   }
 
-  public MPSErrorDialog(Window window, String error, String title, boolean initializeUI) throws HeadlessException {
+  public MPSErrorDialog(Window window, String text, String title, boolean initializeUI) throws HeadlessException {
     super(window, title, Dialog.DEFAULT_MODALITY_TYPE);
     myOwner = window;
-    init(error);
+    init(text);
     if (initializeUI) {
       initializeUI();
       setVisible(true);
     }
+  }
+
+  static void showCellErrorDialog(Project project, Window window, HighlighterMessage message) {
+    if (message == null || message.getReportItem() == null) {
+      return;
+    }
+    final NodeReportItem herror = message.getReportItem();
+    ThreadUtils.runInUIThreadNoWait(() -> {
+      String msg = message.getMessage(); // assuming no html wrapping going below
+      final MPSErrorDialog dialog = new MPSErrorDialog(window, msg, message.getStatus().getPresentation(), false);
+      List<TypesystemRuleId> ruleIds = new ArrayList<>(RuleIdFlavouredItem.FLAVOUR_RULE_ID.getCollection(herror));
+      if (!ruleIds.isEmpty()) {
+        final JButton button = new JButton();
+        AbstractAction action = new GoToRuleAction("Go To Rule", ruleIds, dialog, button, project);
+        button.setAction(action);
+        dialog.addButton(button);
+      }
+      dialog.initializeUI();
+      dialog.setVisible(true);
+    });
   }
 
   private void init(String error) {
@@ -93,8 +128,8 @@ public class MPSErrorDialog extends JDialog {
     int minPanelWidth = Math.max(2 * MIN_SIDE_PADDING + buttonsWidth, 2 * MIN_SIDE_PADDING + textWidth);
     int calculatedButtonsPadding = (minPanelWidth - buttonsWidth) / 2;
     int calculatedTextPadding = (minPanelWidth - textWidth) / 2;
-    panel.setBorder(new EmptyBorder(5, calculatedButtonsPadding, 15, calculatedButtonsPadding));
-    myField.setBorder(new EmptyBorder(20, calculatedTextPadding, 5, calculatedTextPadding));
+    panel.setBorder(Borders.empty(5, calculatedButtonsPadding, 15, calculatedButtonsPadding));
+    myField.setBorder(Borders.empty(20, calculatedTextPadding, 5, calculatedTextPadding));
     add(myField, BorderLayout.CENTER);
     add(panel, BorderLayout.SOUTH);
     pack();
@@ -113,5 +148,42 @@ public class MPSErrorDialog extends JDialog {
   public void setVisible(boolean b) {
     assert !b || myIsInitialized;
     super.setVisible(b);
+  }
+
+  private static class GoToRuleAction extends AbstractAction {
+    private final List<TypesystemRuleId> myRuleIds;
+    private final MPSErrorDialog myDialog;
+    private final JButton myButton;
+    private final Project myProject;
+
+    public GoToRuleAction(String message, List<TypesystemRuleId> ruleIds, MPSErrorDialog dialog, JButton button, Project project) {
+      super(message);
+      myRuleIds = ruleIds;
+      myDialog = dialog;
+      myButton = button;
+      myProject = project;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      if (myRuleIds.size() > 1) {
+        JBPopupMenu popupMenu = new JBPopupMenu();
+        List<TypesystemRuleId> ruleIds = new ArrayList<>(myRuleIds);
+        while (ruleIds.size() > 1) {
+          TypesystemRuleId ruleId = ruleIds.remove(ruleIds.size() - 1);
+          popupMenu.add(new GoToRuleAction("Go To Rule " + ruleId, Collections.singletonList(ruleId), myDialog, myButton, myProject));
+        }
+        popupMenu.add(new GoToRuleAction("Go To Immediate Rule", Collections.singletonList(ruleIds.remove(0)), myDialog, myButton, myProject));
+        popupMenu.show(myButton, 0, myButton.getHeight());
+      } else {
+        SNodeReference sourceNode = myRuleIds.get(0).getSourceNode();
+        if (sourceNode == null) {
+          Messages.showWarningDialog(((MPSProject) myProject).getProject(), "Impossible to find rule source node", "No Rule Declaration");
+          return;
+        }
+        new EditorNavigator(myProject).shallSelect(true).open(sourceNode);
+        myDialog.dispose();
+      }
+    }
   }
 }

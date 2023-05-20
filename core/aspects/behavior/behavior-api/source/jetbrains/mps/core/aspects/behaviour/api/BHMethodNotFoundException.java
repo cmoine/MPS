@@ -20,12 +20,12 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Thrown whenever the method could not be found via the specific BHDescriptor
  */
-public final class BHMethodNotFoundException extends RuntimeException {
+public class BHMethodNotFoundException extends RuntimeException {
   public BHMethodNotFoundException(@NotNull BHDescriptor descriptor, @NotNull SMethod method) {
     super("The method '" + method + "' could not be found within the '" + descriptor + "'.");
   }
 
-  public BHMethodNotFoundException(String msg) {
-    super(msg);
+  public BHMethodNotFoundException(@NotNull String message) {
+    super(message);
   }
 }

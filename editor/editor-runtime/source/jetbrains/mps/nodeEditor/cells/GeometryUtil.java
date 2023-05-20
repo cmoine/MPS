@@ -30,8 +30,8 @@ public class GeometryUtil {
   public static Rectangle getBounds(EditorCell... cells) {
     assert cells.length > 0;
     Rectangle result = null;
-    for (int i = 0; i < cells.length; i++) {
-      Rectangle nextRectangle = new Rectangle(cells[i].getX(), cells[i].getY(), cells[i].getWidth(), cells[i].getHeight());
+    for (EditorCell cell : cells) {
+      Rectangle nextRectangle = new Rectangle(cell.getX(), cell.getY(), cell.getWidth(), cell.getHeight());
       result = result == null ? nextRectangle : result.union(nextRectangle);
     }
     return result;
@@ -57,27 +57,17 @@ public class GeometryUtil {
   }
 
   public static boolean isFirstPositionInBigCell(EditorCell cell) {
-    if (cell instanceof WithCaret) {
-      return ((WithCaret) cell).isFirstCaretPosition() && CellTraversalUtil.getFirstLeaf(CellTraversalUtil.getContainingBigCell(cell)) == cell;
+    if (CellTraversalUtil.getFirstLeaf(CellTraversalUtil.getContainingBigCell(cell)) != cell) {
+      return false;
     }
-    if (cell instanceof jetbrains.mps.nodeEditor.cells.EditorCell) {
-      // TODO: remove this option after MPS 3.4
-      return ((jetbrains.mps.nodeEditor.cells.EditorCell) cell).isFirstCaretPosition() &&
-          CellTraversalUtil.getFirstLeaf(CellTraversalUtil.getContainingBigCell(cell)) == cell;
-    }
-    return false;
+    return !(cell instanceof WithCaret) || ((WithCaret) cell).isFirstCaretPosition();
   }
 
   public static boolean isLastPositionInBigCell(EditorCell cell) {
-    if (cell instanceof WithCaret) {
-      return ((WithCaret) cell).isLastCaretPosition() && CellTraversalUtil.getLastLeaf(CellTraversalUtil.getContainingBigCell(cell)) == cell;
+    if (CellTraversalUtil.getLastLeaf(CellTraversalUtil.getContainingBigCell(cell)) != cell) {
+      return false;
     }
-    if (cell instanceof jetbrains.mps.nodeEditor.cells.EditorCell) {
-      // TODO: remove this option after MPS 3.4
-      return ((jetbrains.mps.nodeEditor.cells.EditorCell) cell).isLastCaretPosition() &&
-          CellTraversalUtil.getLastLeaf(CellTraversalUtil.getContainingBigCell(cell)) == cell;
-    }
-    return false;
+    return !(cell instanceof WithCaret) || ((WithCaret) cell).isLastCaretPosition();
   }
 
 }

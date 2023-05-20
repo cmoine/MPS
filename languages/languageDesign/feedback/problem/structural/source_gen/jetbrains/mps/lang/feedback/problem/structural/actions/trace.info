@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <root>
+    <file name="ActionAspectDescriptorImpl.java">
+      <unit at="12,0,42,0" name="jetbrains.mps.lang.feedback.problem.structural.actions.ActionAspectDescriptorImpl" />
+    </file>
+  </root>
+  <root nodeRef="r:aeb1fd1a-9257-4e9f-be62-5ac0e9946487(jetbrains.mps.lang.feedback.problem.structural.actions)/7716791493892398446">
+    <file name="DefaultKindSetting.java">
+      <node id="7716791493892398464" at="17,102,18,199" concept="0" />
+      <node id="693143365153573630" at="18,199,19,56" concept="2" />
+      <node id="693143365153573636" at="19,56,20,176" concept="0" />
+      <node id="693143365153573643" at="20,176,21,25" concept="0" />
+      <node id="2554379189374330338" at="25,102,26,199" concept="0" />
+      <node id="1054866243096622789" at="26,199,27,56" concept="2" />
+      <node id="1054866243096648198" at="27,56,28,176" concept="0" />
+      <node id="1054866243096655006" at="28,176,29,25" concept="0" />
+      <node id="1640022677634389058" at="33,102,34,199" concept="0" />
+      <node id="1640022677634389066" at="34,199,35,56" concept="2" />
+      <node id="1640022677634389072" at="35,56,36,176" concept="0" />
+      <node id="1640022677634389079" at="36,176,37,25" concept="0" />
+      <node id="2559059706675259172" at="41,102,42,199" concept="0" />
+      <node id="2559059706675259180" at="42,199,43,56" concept="2" />
+      <node id="2559059706675259186" at="43,56,44,176" concept="0" />
+      <node id="2559059706675259193" at="44,176,45,25" concept="0" />
+      <node id="5741876244398307752" at="49,102,50,199" concept="0" />
+      <node id="5741876244398307760" at="50,199,51,56" concept="2" />
+      <node id="5741876244398307766" at="51,56,52,176" concept="0" />
+      <node id="5741876244398307773" at="52,176,53,25" concept="0" />
+      <node id="5741876244398307920" at="57,102,58,199" concept="0" />
+      <node id="5741876244398307928" at="58,199,59,56" concept="2" />
+      <node id="5741876244398307934" at="59,56,60,176" concept="0" />
+      <node id="5741876244398307941" at="60,176,61,25" concept="0" />
+      <node id="7574732359718303546" at="65,102,66,198" concept="0" />
+      <node id="7574732359718303554" at="66,198,67,56" concept="2" />
+      <node id="7574732359718303560" at="67,56,68,176" concept="0" />
+      <node id="7574732359718303567" at="68,176,69,25" concept="0" />
+      <node id="7574732359718304022" at="73,102,74,198" concept="0" />
+      <node id="7574732359718304030" at="74,198,75,56" concept="2" />
+      <node id="7574732359718304036" at="75,56,76,176" concept="0" />
+      <node id="7574732359718304043" at="76,176,77,25" concept="0" />
+      <node id="7716791493892398446" at="82,0,83,0" concept="3" trace="kind$EscU" />
+      <node id="7716791493892398447" at="17,0,23,0" concept="1" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <node id="2554379189374330335" at="25,0,31,0" concept="1" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <node id="1640022677634389055" at="33,0,39,0" concept="1" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <node id="2559059706675259169" at="41,0,47,0" concept="1" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <node id="5741876244398307749" at="49,0,55,0" concept="1" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <node id="5741876244398307917" at="57,0,63,0" concept="1" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <node id="7574732359718303543" at="65,0,71,0" concept="1" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <node id="7574732359718304019" at="73,0,79,0" concept="1" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <scope id="7716791493892398447" at="17,102,21,25">
+        <var name="importer" id="693143365153573631" />
+      </scope>
+      <scope id="2554379189374330335" at="25,102,29,25">
+        <var name="importer" id="1054866243096622790" />
+      </scope>
+      <scope id="1640022677634389055" at="33,102,37,25">
+        <var name="importer" id="1640022677634389067" />
+      </scope>
+      <scope id="2559059706675259169" at="41,102,45,25">
+        <var name="importer" id="2559059706675259181" />
+      </scope>
+      <scope id="5741876244398307749" at="49,102,53,25">
+        <var name="importer" id="5741876244398307761" />
+      </scope>
+      <scope id="5741876244398307917" at="57,102,61,25">
+        <var name="importer" id="5741876244398307929" />
+      </scope>
+      <scope id="7574732359718303543" at="65,102,69,25">
+        <var name="importer" id="7574732359718303555" />
+      </scope>
+      <scope id="7574732359718304019" at="73,102,77,25">
+        <var name="importer" id="7574732359718304031" />
+      </scope>
+      <scope id="7716791493892398447" at="17,0,23,0">
+        <var name="enclosingNode" id="7716791493892398447" />
+        <var name="index" id="7716791493892398447" />
+        <var name="model" id="7716791493892398447" />
+        <var name="newNode" id="7716791493892398447" />
+        <var name="sampleNode" id="7716791493892398447" />
+      </scope>
+      <scope id="2554379189374330335" at="25,0,31,0">
+        <var name="enclosingNode" id="2554379189374330335" />
+        <var name="index" id="2554379189374330335" />
+        <var name="model" id="2554379189374330335" />
+        <var name="newNode" id="2554379189374330335" />
+        <var name="sampleNode" id="2554379189374330335" />
+      </scope>
+      <scope id="1640022677634389055" at="33,0,39,0">
+        <var name="enclosingNode" id="1640022677634389055" />
+        <var name="index" id="1640022677634389055" />
+        <var name="model" id="1640022677634389055" />
+        <var name="newNode" id="1640022677634389055" />
+        <var name="sampleNode" id="1640022677634389055" />
+      </scope>
+      <scope id="2559059706675259169" at="41,0,47,0">
+        <var name="enclosingNode" id="2559059706675259169" />
+        <var name="index" id="2559059706675259169" />
+        <var name="model" id="2559059706675259169" />
+        <var name="newNode" id="2559059706675259169" />
+        <var name="sampleNode" id="2559059706675259169" />
+      </scope>
+      <scope id="5741876244398307749" at="49,0,55,0">
+        <var name="enclosingNode" id="5741876244398307749" />
+        <var name="index" id="5741876244398307749" />
+        <var name="model" id="5741876244398307749" />
+        <var name="newNode" id="5741876244398307749" />
+        <var name="sampleNode" id="5741876244398307749" />
+      </scope>
+      <scope id="5741876244398307917" at="57,0,63,0">
+        <var name="enclosingNode" id="5741876244398307917" />
+        <var name="index" id="5741876244398307917" />
+        <var name="model" id="5741876244398307917" />
+        <var name="newNode" id="5741876244398307917" />
+        <var name="sampleNode" id="5741876244398307917" />
+      </scope>
+      <scope id="7574732359718303543" at="65,0,71,0">
+        <var name="enclosingNode" id="7574732359718303543" />
+        <var name="index" id="7574732359718303543" />
+        <var name="model" id="7574732359718303543" />
+        <var name="newNode" id="7574732359718303543" />
+        <var name="sampleNode" id="7574732359718303543" />
+      </scope>
+      <scope id="7574732359718304019" at="73,0,79,0">
+        <var name="enclosingNode" id="7574732359718304019" />
+        <var name="index" id="7574732359718304019" />
+        <var name="model" id="7574732359718304019" />
+        <var name="newNode" id="7574732359718304019" />
+        <var name="sampleNode" id="7574732359718304019" />
+      </scope>
+      <unit id="7716791493892398446" at="81,0,84,0" name="jetbrains.mps.lang.feedback.problem.structural.actions.DefaultKindSetting$LINKS" />
+      <unit id="7716791493892398447" at="16,0,24,0" name="jetbrains.mps.lang.feedback.problem.structural.actions.DefaultKindSetting$NodeFactory_7716791493892398447" />
+      <unit id="2554379189374330335" at="24,0,32,0" name="jetbrains.mps.lang.feedback.problem.structural.actions.DefaultKindSetting$NodeFactory_2554379189374330335" />
+      <unit id="1640022677634389055" at="32,0,40,0" name="jetbrains.mps.lang.feedback.problem.structural.actions.DefaultKindSetting$NodeFactory_1640022677634389055" />
+      <unit id="2559059706675259169" at="40,0,48,0" name="jetbrains.mps.lang.feedback.problem.structural.actions.DefaultKindSetting$NodeFactory_2559059706675259169" />
+      <unit id="5741876244398307749" at="48,0,56,0" name="jetbrains.mps.lang.feedback.problem.structural.actions.DefaultKindSetting$NodeFactory_5741876244398307749" />
+      <unit id="5741876244398307917" at="56,0,64,0" name="jetbrains.mps.lang.feedback.problem.structural.actions.DefaultKindSetting$NodeFactory_5741876244398307917" />
+      <unit id="7574732359718303543" at="64,0,72,0" name="jetbrains.mps.lang.feedback.problem.structural.actions.DefaultKindSetting$NodeFactory_7574732359718303543" />
+      <unit id="7574732359718304019" at="72,0,80,0" name="jetbrains.mps.lang.feedback.problem.structural.actions.DefaultKindSetting$NodeFactory_7574732359718304019" />
+      <unit id="7716791493892398446" at="15,0,85,0" name="jetbrains.mps.lang.feedback.problem.structural.actions.DefaultKindSetting" />
+    </file>
+  </root>
+</debug-info>
+

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 package jetbrains.mps.extapi.module;
 
+import jetbrains.mps.logging.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SModuleReference;
@@ -31,10 +32,10 @@ import java.util.concurrent.atomic.AtomicInteger;
  * This class dispatches repository events to SRepositoryListener clients
  */
 public class SRepositoryEventsDispatcher {
-  private final List<SRepositoryListener> myListeners = new CopyOnWriteArrayList<SRepositoryListener>();
+  private final List<SRepositoryListener> myListeners = new CopyOnWriteArrayList<>();
 
   // AtomicInteger is not to guard against registration from parallel threads, rather a convenient way to have modifiable Integer
-  private final ConcurrentHashMap<SRepositoryListener, AtomicInteger> myListenerCount = new ConcurrentHashMap<SRepositoryListener, AtomicInteger>();
+  private final ConcurrentHashMap<SRepositoryListener, AtomicInteger> myListenerCount = new ConcurrentHashMap<>();
 
   private final SRepository myRepository;
 
@@ -72,7 +73,11 @@ public class SRepositoryEventsDispatcher {
   public final void fireModuleAdded(@NotNull SModule module) {
     myRepository.getModelAccess().checkWriteAccess();
     for (SRepositoryListener listener : myListeners) {
-      listener.moduleAdded(module);
+      try {
+        listener.moduleAdded(module);
+      } catch (Throwable t) {
+        Logger.getLogger(SRepositoryEventsDispatcher.class).error("on moduleAdded", t);
+      }
     }
   }
 
@@ -82,14 +87,22 @@ public class SRepositoryEventsDispatcher {
   public final void fireBeforeModuleRemoved(@NotNull SModule module) {
     myRepository.getModelAccess().checkWriteAccess();
     for (SRepositoryListener listener : myListeners) {
-      listener.beforeModuleRemoved(module);
+      try {
+        listener.beforeModuleRemoved(module);
+      } catch (Throwable t) {
+        Logger.getLogger(SRepositoryEventsDispatcher.class).error("on moduleRemoved", t);
+      }
     }
   }
 
   public final void fireModuleRemoved(@NotNull SModuleReference module) {
     myRepository.getModelAccess().checkWriteAccess();
     for (SRepositoryListener listener : myListeners) {
-      listener.moduleRemoved(module);
+      try {
+        listener.moduleRemoved(module);
+      } catch (Throwable t) {
+        Logger.getLogger(SRepositoryEventsDispatcher.class).error("on beforeModuleRemoved", t);
+      }
     }
   }
 

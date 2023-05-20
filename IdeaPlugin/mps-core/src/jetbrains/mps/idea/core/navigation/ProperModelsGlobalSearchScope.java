@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,20 +16,23 @@
 
 package jetbrains.mps.idea.core.navigation;
 
-import jetbrains.mps.project.GlobalScope;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.module.SModule;
+import org.jetbrains.mps.openapi.module.SRepository;
 
 /**
- * Created by danilla on 27/05/16.
+ * All 'proper' models available from the given repository
  */
 public class ProperModelsGlobalSearchScope extends ProperModelsSearchScope {
+  private final SRepository myRepository;
+
+  /*package*/ ProperModelsGlobalSearchScope(@NotNull SRepository repository) {
+    myRepository = repository;
+  }
+
   @NotNull
   @Override
   public Iterable<SModule> getModules() {
-    // currently MPS's GlobalScope doesn't depend on project, it's completely global:
-    // will include stuff from other projects, too
-    // However, we could refine it, by filtering out what belongs to other opened projects.
-    return GlobalScope.getInstance().getModules();
+    return myRepository.getModules();
   }
 }

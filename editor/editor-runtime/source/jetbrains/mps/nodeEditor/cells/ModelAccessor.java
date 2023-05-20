@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,22 @@
  */
 package jetbrains.mps.nodeEditor.cells;
 
+import java.util.Objects;
+
 public interface ModelAccessor {
   String getText();
   void setText(String text);
   boolean isValidText(String text);
+
+  abstract class ReadOnly implements ModelAccessor {
+    @Override
+    public void setText(String text) {
+      // no-op
+    }
+
+    @Override
+    public boolean isValidText(String text) {
+      return Objects.equals(text, getText());
+    }
+  }
 }

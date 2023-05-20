@@ -5,12 +5,9 @@ package jetbrains.mps.lang.plugin.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.List;
 import java.util.Arrays;
@@ -21,12 +18,12 @@ import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
 import java.util.regex.Pattern;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public final class NumberToolShortcut__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x68b8d4843b76107L, "jetbrains.mps.lang.plugin.structure.NumberToolShortcut");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<Integer> getNumber_idqbzkx46jl9 = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("getNumber").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("qbzkx46jl9").registry(REGISTRY).build();
+  public static final SMethod<Integer> getNumber_idqbzkx46jl9 = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("getNumber").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(471625927510013257L).languageId(0xaeba0a1039153ab1L, 0x28f9e4973b424291L).build2();
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getNumber_idqbzkx46jl9);
 
@@ -34,15 +31,14 @@ public final class NumberToolShortcut__BehaviorDescriptor extends BaseBHDescript
   }
 
   /*package*/ static int getNumber_idqbzkx46jl9(@NotNull SNode __thisNode__) {
-    if (REGEXP_k3b4z8_a0a0a9.matcher(SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x68b8d4843b76107L, 0x68b8d4843b76123L, "number"))).matches()) {
-      return Integer.parseInt(SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x68b8d4843b76107L, 0x68b8d4843b76123L, "number")));
+    if (REGEXP.matcher(SPropertyOperations.getString(__thisNode__, PROPS.number$WFYX)).matches()) {
+      return Integer.parseInt(SPropertyOperations.getString(__thisNode__, PROPS.number$WFYX));
     } else {
       return -1;
     }
   }
 
   /*package*/ NumberToolShortcut__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -87,5 +83,9 @@ public final class NumberToolShortcut__BehaviorDescriptor extends BaseBHDescript
   public SAbstractConcept getConcept() {
     return CONCEPT;
   }
-  private static Pattern REGEXP_k3b4z8_a0a0a9 = Pattern.compile("\\d", 0);
+  private static final Pattern REGEXP = Pattern.compile("\\d", 0);
+
+  private static final class PROPS {
+    /*package*/ static final SProperty number$WFYX = MetaAdapterFactory.getProperty(0x28f9e4973b424291L, 0xaeba0a1039153ab1L, 0x68b8d4843b76107L, 0x68b8d4843b76123L, "number");
+  }
 }

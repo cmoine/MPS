@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 package jetbrains.mps.smodel;
 
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.smodel.ModelListenerTest.AccessCountListener1;
 import jetbrains.mps.smodel.ModelListenerTest.AccessCountListener2;
 import jetbrains.mps.smodel.ModelListenerTest.AccessCountListener3;
@@ -24,6 +25,7 @@ import jetbrains.mps.smodel.TestModelFactory.TestRepository;
 import jetbrains.mps.testbench.PerformanceMessenger;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
+import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.module.SRepository;
 import org.junit.Assert;
 import org.junit.Before;
@@ -53,13 +55,6 @@ public class ModelPerformanceTest {
 
   private final TestModelAccess myTestModelAccess = new TestModelAccess();
   private final SRepository myTestRepo = new TestRepository(myTestModelAccess);
-
-  @Before
-  public void setUp() {
-    TestUndoHandler uh = new TestUndoHandler();
-    uh.needsUndo(false); // undo is not our focus here, we merely need to avoid NPE from ModelAccess.instance().isInsideCommand()
-    UndoHelper.getInstance().setUndoHandler(uh);
-  }
 
   /**
    * Ensure parallel reads are viable.
@@ -116,7 +111,9 @@ public class ModelPerformanceTest {
           }
 
           @Override
-          public void describeTo(Description description) {description.appendText(String.format("less than %d", baselineMillis)); }
+          public void describeTo(Description description) {
+            description.appendText(String.format("less than %d", baselineMillis));
+          }
         });
         myErrors.checkThat(threads[i].getName(), threads[i].getElapsedMillis(), new BaseMatcher<Long>() {
           @Override
@@ -128,7 +125,9 @@ public class ModelPerformanceTest {
           }
 
           @Override
-          public void describeTo(Description description) { description.appendText(String.format("greater than %d", baselineMillis/4)); }
+          public void describeTo(Description description) {
+            description.appendText(String.format("greater than %d", baselineMillis / 4));
+          }
         });
         averageElapsedMillis += threads[i].getElapsedMillis();
         if (threads[i].getElapsedMillis() < minElapsedMillis) {
@@ -165,7 +164,7 @@ public class ModelPerformanceTest {
     org.jetbrains.mps.openapi.model.SModel m1 = m1f.createModel(10, 25, 15, 5, 4);
     final int actualNodes = m1f.countModelNodes();
     // 10, 25, 15, 5, 4 == 97760 nodes. It takes about 50 ms to walk this model in avg. I use twice as much time to account for slower build agents
-    final long baselineMillis = 50*2;
+    final long baselineMillis = 50 * 2;
     ourStats.report("singleThreadBaselineMillis", baselineMillis);
     final int testRuns = 10;
     long elapsed = 0;
@@ -187,6 +186,61 @@ public class ModelPerformanceTest {
     if (averageMillis < baselineMillis / 5) {
       final String fmt =
           "Walking model of %d nodes took less than 20%% of baseline. Actual average time for %d runs was %d ms, while baseline is %d ms. Re-consider baseline value";
+      Assert.fail(String.format(fmt, actualNodes, testRuns, averageMillis, baselineMillis));
+    }
+  }
+
+  /**
+   * ensure node.multiChild operation in smodel language consumes O(1) time (was O(n) before optimisation)
+   */
+  @Test
+  public void testRoleAccessTime() throws InterruptedException {
+    final TestModelFactory m1f = new TestModelFactory();
+    org.jetbrains.mps.openapi.model.SModel m1 = m1f.createModel(1, 1000000);
+    SNode rootNode = m1.getRootNodes().iterator().next();
+    final int actualNodes = m1f.countModelNodes();
+    final long expectedMillis = 40; //spent time at the moment of test creation
+    final long baselineMillis = expectedMillis * 2;
+    ourStats.report("roleAccessBaselineMillis", baselineMillis);
+    final int testRuns = 10;
+    final long[] elapsed = {0};
+    for (int i = 0; i < testRuns; i++) {
+      final CountDownLatch stopLatch = new CountDownLatch(1);
+      final int currentRunNumber = i;
+      Thread thread = new Thread("Test thread") {
+        @Override
+        public void run() {
+          final long start = System.nanoTime();
+          for (int j = 0; j < 1000000; j++) {
+            SLinkOperations.getChildren(rootNode, TestModelFactory.ourRole).iterator().next();
+          }
+          elapsed[0] += System.nanoTime() - start;
+          if (currentRunNumber == 0) {
+            ourStats.report("roleAccessFirstRunMillis", elapsed[0] / 1000000);
+          }
+          stopLatch.countDown();
+        }
+      };
+      thread.start();
+      boolean finishOk = stopLatch.await(10, TimeUnit.SECONDS);
+      if (!finishOk) {
+        Throwable th = new Throwable("Test hung");
+        th.setStackTrace(thread.getStackTrace());
+        myErrors.addError(th);
+        Assert.fail("Test hung. See log for details");
+        break;
+      }
+    }
+    long averageMillis = elapsed[0] / 1000000 / testRuns;
+    ourStats.report("roleAccessAvgMillis", averageMillis);
+    if (averageMillis > baselineMillis) {
+      final String fmt = "Role access to a role with %d nodes was expected to take less than %d ms. Actual average time for %d runs was %d ms";
+      Assert.fail(String.format(fmt, actualNodes, baselineMillis, testRuns, averageMillis));
+    }
+    // guard if it's too fast
+    if (averageMillis < baselineMillis / 5) {
+      final String fmt =
+          "Role access to a role with %d nodes took less than 20%% of baseline. Actual average time for %d runs was %d ms, while baseline is %d ms. Re-consider baseline value";
       Assert.fail(String.format(fmt, actualNodes, testRuns, averageMillis, baselineMillis));
     }
   }

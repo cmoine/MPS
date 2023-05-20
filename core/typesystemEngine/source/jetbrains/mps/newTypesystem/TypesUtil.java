@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,28 +16,32 @@
 package jetbrains.mps.newTypesystem;
 
 import gnu.trove.THashSet;
-import jetbrains.mps.lang.pattern.util.IMatchModifier;
-import jetbrains.mps.lang.pattern.util.MatchingUtil;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.lang.typesystem.runtime.HUtil;
 import jetbrains.mps.newTypesystem.state.Equations;
 import jetbrains.mps.newTypesystem.state.State;
-import jetbrains.mps.smodel.SModelUtil_new;
+import jetbrains.mps.smodel.SNodeMatcher;
+import jetbrains.mps.smodel.SNodeMatcher.AggregationMatchStrategy;
+import jetbrains.mps.smodel.SNodeMatcher.AssociationMatchStrategy;
+import jetbrains.mps.smodel.SNodeMatcher.EqualUserValues;
+import jetbrains.mps.smodel.SNodeMatcher.SameOrderChildMatch;
 import jetbrains.mps.smodel.SNodeUtil;
 import jetbrains.mps.typesystem.inference.EquationInfo;
 import jetbrains.mps.typesystemEngine.util.LatticeUtil;
 import jetbrains.mps.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SReference;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.function.BiPredicate;
 
 public class TypesUtil {
 
@@ -61,12 +65,7 @@ public class TypesUtil {
         return true;
       }
     }
-    for (SNode referent : getNodeReferents(node)) {
-      if (referent != null && TypesUtil.isVariable(referent)) {
-        return true;
-      }
-    }
-    return false;
+    return getNodeReferents(node).stream().anyMatch(TypesUtil::isVariable);
   }
 
   public static int depth(SNode sNode) {
@@ -84,7 +83,7 @@ public class TypesUtil {
 
 
   public static List<SNode> getVariables(SNode node, State state) {
-    List<SNode> result = new LinkedList<SNode>();
+    List<SNode> result = new LinkedList<>();
     getVariablesInside(node, result, state);
     return result;
   }
@@ -115,8 +114,7 @@ public class TypesUtil {
 
   @NotNull
   public static List<SNode> getNodeReferents(@NotNull SNode node) {
-    if (node == null) return Collections.emptyList();
-    final List<SNode> result = new ArrayList<SNode>();
+    final List<SNode> result = new ArrayList<>();
     for (SReference ref : node.getReferences()) {
       result.add(ref.getTargetNode());
     }
@@ -127,23 +125,22 @@ public class TypesUtil {
     return match(left, right, null);
   }
 
-  public static boolean match(SNode left, SNode right, /*out*/ Collection<Pair<SNode, SNode>> matchingPairs) {
-    if (left == right) return true;
-    if (left == null || right == null) return false;
-
-    if (TypesUtil.isVariable(left) || TypesUtil.isVariable(right)) {
-      if (matchingPairs != null) {
-        matchingPairs.add(new Pair<SNode, SNode>(left, right));
-      }
+  public static boolean match(SNode left, SNode right, /*out*/ @Nullable Collection<Pair<SNode, SNode>> matchingPairs) {
+    if (left == right) {
       return true;
     }
+    if (left == null || right == null) {
+      return false;
+    }
+    // condition above needed for first nm.test() call (to prevent NPE)
 
     MatchingNodesCollector matchingNodesCollector = new MatchingNodesCollector();
-    boolean match = MatchingUtil.matchNodes(left, right, matchingNodesCollector, false);
+    final SNodeMatcher nm = new SNodeMatcher(new EqualUserValues(), matchingNodesCollector, matchingNodesCollector);
+    nm.withAttributes(false);
+    boolean match = nm.test(left, right) || nm.match(left, right);
     if (match && matchingPairs != null) {
       matchingPairs.addAll(matchingNodesCollector.myMatchingPairs);
     }
-
     return match;
   }
 
@@ -178,7 +175,7 @@ public class TypesUtil {
 
   @Deprecated
   public static boolean match(SNode left, SNode right, Equations equations, @Nullable EquationInfo info) {
-    THashSet<Pair<SNode, SNode>> matchingPairs = new THashSet<Pair<SNode, SNode>>();
+    THashSet<Pair<SNode, SNode>> matchingPairs = new THashSet<>();
     boolean match = match(left, right, matchingPairs);
     if (match && equations != null) {
       equations.addEquations(matchingPairs, info);
@@ -188,7 +185,7 @@ public class TypesUtil {
 
   public static SNode cleanupMeet(SNode type) {
     // Dirty hack to avoid meet type to appear inside fully reified type
-    Set<SNode> newArgs = new THashSet<SNode>();
+    Set<SNode> newArgs = new THashSet<>();
     final List<SNode> arguments = LatticeUtil.getMeetArguments(type);
     boolean addTheRest = false;
     for (SNode arg : arguments) {
@@ -204,34 +201,32 @@ public class TypesUtil {
     return type;
   }
 
-  private static class MatchingNodesCollector implements IMatchModifier {
-    private final Set<Pair<SNode, SNode>> myMatchingPairs = new THashSet<Pair<SNode, SNode>>();
+  private static class MatchingNodesCollector implements BiPredicate<SNode, SNode>, AssociationMatchStrategy, AggregationMatchStrategy {
+    private final AggregationMatchStrategy myDelegate2 = new SameOrderChildMatch();
+
+    private final Set<Pair<SNode, SNode>> myMatchingPairs = new THashSet<>();
 
     @Override
-    public boolean accept(SNode node1, SNode node2) {
-      return TypesUtil.isVariable(node1) || TypesUtil.isVariable(node2);
+    public boolean match(@NotNull SNode node1, @NotNull SNode node2, @NotNull SReferenceLink link) {
+      // pretty much IdenticalTargetNode match strategy, with additional check
+      final SNode target1 = node1.getReferenceTarget(link);
+      final SNode target2 = node2.getReferenceTarget(link);
+      return test(target1, target2) || target1 == target2;
     }
 
     @Override
-    public boolean acceptList(List<SNode> nodes1, List<SNode> nodes2) {
+    public boolean match(@NotNull SNode node1, @NotNull SNode node2, @NotNull SContainmentLink link, @NotNull final BiPredicate<SNode, SNode> childMatcher) {
+      return myDelegate2.match(node1, node2, link, this.or(childMatcher));
+    }
+
+    @Override
+    public boolean test(SNode node1, SNode node2) {
+      if (TypesUtil.isVariable(node1) || TypesUtil.isVariable(node2)) {
+        myMatchingPairs.add(new Pair<>(node1, node2));
+        return true;
+      }
       return false;
     }
-
-    @Override
-    public void performAction(SNode node1, SNode node2) {
-      if (myMatchingPairs != null) {
-        myMatchingPairs.add(new Pair<SNode, SNode>(node1, node2));
-      }
-    }
-
-    @Override
-    public void performGroupAction(List<SNode> nodes1, List<SNode> nodes2) {
-    }
   }
-
-  public static SNode createRuntimeErrorType() {
-    return SModelUtil_new.instantiateConceptDeclaration(SNodeUtil.concept_RuntimeErrorType, null, null, false);
-  }
-
 }
 

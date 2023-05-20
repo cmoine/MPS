@@ -42,9 +42,9 @@ public class PartitioningSolver {
   /*
    *   Each entry defines a set of mappings, which should be applied together.
    */
-  private final List<Group> mySameStepGroups = new ArrayList<Group>();
+  private final List<Group> mySameStepGroups = new ArrayList<>();
   private final PriorityConflicts myConflicts;
-  private final Set<TemplateMappingConfiguration> myConfigurations = new LinkedHashSet<TemplateMappingConfiguration>();
+  private final Set<TemplateMappingConfiguration> myConfigurations = new LinkedHashSet<>();
 
   public PartitioningSolver(@NotNull PriorityConflicts priorityConflicts) {
     myConflicts = priorityConflicts;
@@ -60,7 +60,7 @@ public class PartitioningSolver {
   }
 
   public void registerCoherent(Collection<TemplateMappingConfiguration> coherentMappings, MappingPriorityRule rule) {
-    ArrayList<Group> groups = new ArrayList<Group>(coherentMappings.size());
+    ArrayList<Group> groups = new ArrayList<>(coherentMappings.size());
     for (TemplateMappingConfiguration m : coherentMappings) {
       groups.add(new Group(m));
     }
@@ -104,7 +104,7 @@ public class PartitioningSolver {
     myPriorityGraph.replaceWeakEdgesWithStrict();
 
     boolean topPriorityGroup = false;
-    ArrayDeque<Collection<Group>> stack = new ArrayDeque<Collection<Group>>();
+    ArrayDeque<Collection<Group>> stack = new ArrayDeque<>();
     while (!myPriorityGraph.isEmpty()) {
       Collection<Group> step = myPriorityGraph.getGroupsNotInDependency();
       if (step.isEmpty()) {
@@ -128,7 +128,7 @@ public class PartitioningSolver {
         myPriorityGraph.dropEdgesOf(step);
       }
     }
-    ArrayList<GenerationPhase> rv = new ArrayList<GenerationPhase>(stack.size());
+    ArrayList<GenerationPhase> rv = new ArrayList<>(stack.size());
     while (!stack.isEmpty()) {
       rv.add(new GenerationPhase(stack.pop()));
     }
@@ -139,9 +139,9 @@ public class PartitioningSolver {
    * Process groups of 'run together' to join intersecting into a single group
    */
   private List<Group> joinSameStepMappings() {
-    ArrayList<Group> rv = new ArrayList<Group>(mySameStepGroups.size());
-    ArrayList<Group> toMerge = new ArrayList<Group>();
-    LinkedList<Group> queue = new LinkedList<Group>(mySameStepGroups);
+    ArrayList<Group> rv = new ArrayList<>(mySameStepGroups.size());
+    ArrayList<Group> toMerge = new ArrayList<>();
+    LinkedList<Group> queue = new LinkedList<>(mySameStepGroups);
     while (!queue.isEmpty()) {
       Group head = queue.removeFirst();
       for (Iterator<Group> it = queue.iterator(); it.hasNext(); ) {
@@ -170,11 +170,6 @@ public class PartitioningSolver {
   }
 
   static void sort(List<TemplateMappingConfiguration> mappingSet) {
-    Collections.sort(mappingSet, new Comparator<TemplateMappingConfiguration>() {
-      @Override
-      public int compare(TemplateMappingConfiguration o1, TemplateMappingConfiguration o2) {
-        return SNodePointer.serialize(o1.getMappingNode()).compareTo((SNodePointer.serialize(o2.getMappingNode())));
-      }
-    });
+    Collections.sort(mappingSet, (o1, o2) -> SNodePointer.serialize(o1.getMappingNode()).compareTo((SNodePointer.serialize(o2.getMappingNode()))));
   }
 }

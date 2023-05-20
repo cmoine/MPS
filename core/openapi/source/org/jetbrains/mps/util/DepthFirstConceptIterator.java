@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ import java.util.Iterator;
 public class DepthFirstConceptIterator implements Iterable<SAbstractConcept>, Iterator<SAbstractConcept> {
   private final SAbstractConcept myStart;
   private SConcept myCurrent; // super-concepts hierarchy or null once all super-concepts are over
-  private final Deque<SInterfaceConcept> myInterfaces = new ArrayDeque<SInterfaceConcept>();
+  private final Deque<SInterfaceConcept> myInterfaces = new ArrayDeque<>();
 
   public DepthFirstConceptIterator(@NotNull SAbstractConcept start) {
     myStart = start;
@@ -56,11 +56,11 @@ public class DepthFirstConceptIterator implements Iterable<SAbstractConcept>, It
   public SAbstractConcept next() {
     if (myCurrent == null) {
       final SInterfaceConcept rv = myInterfaces.removeFirst();
-      queue(rv.getSuperInterfaces());
+      queueSuperInterfaces(rv);
       return rv;
     } else {
       SConcept rv = myCurrent;
-      queue(myCurrent.getSuperInterfaces());
+      queueSuperInterfaces(myCurrent);
       myCurrent = myCurrent.getSuperConcept();
       return rv;
     }
@@ -71,15 +71,11 @@ public class DepthFirstConceptIterator implements Iterable<SAbstractConcept>, It
     throw new UnsupportedOperationException();
   }
 
-  private void queue(Iterable<SInterfaceConcept> superInterfaces) {
-    if (superInterfaces != null) {
-      //myInterfaces.addAll(IterableUtil.asList(superInterfaces));    IterableUtil shall move out from kernel module to some utility location
-      for (SInterfaceConcept ic : superInterfaces) {
-        myInterfaces.add(ic);
-      }
-    }
+  private void queueSuperInterfaces(SAbstractConcept ac) {
+    ac.getSuperInterfaces().forEach(myInterfaces::add);
   }
 
+  @NotNull
   @Override
   public Iterator<SAbstractConcept> iterator() {
     reset();

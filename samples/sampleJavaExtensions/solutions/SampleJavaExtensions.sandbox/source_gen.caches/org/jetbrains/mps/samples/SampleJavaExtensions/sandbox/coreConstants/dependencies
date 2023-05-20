@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<dependenciesRoot>
-  <dependency className="org.jetbrains.mps.samples.SampleJavaExtensions.sandbox.coreConstants.CoreConstants" file="CoreConstants.java" />
-</dependenciesRoot>
-

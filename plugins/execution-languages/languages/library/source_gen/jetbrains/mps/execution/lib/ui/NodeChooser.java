@@ -5,11 +5,6 @@ package jetbrains.mps.execution.lib.ui;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNodeReference;
-import java.util.List;
-import jetbrains.mps.baseLanguage.closures.runtime._FunctionTypes;
-import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.internal.collections.runtime.ListSequence;
-import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import org.jetbrains.mps.openapi.module.FindUsagesFacade;
@@ -19,31 +14,29 @@ import com.intellij.openapi.project.Project;
 import jetbrains.mps.workbench.MPSDataKeys;
 import jetbrains.mps.project.MPSProject;
 import jetbrains.mps.baseLanguage.closures.runtime.Wrappers;
+import java.util.List;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.progress.Task;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.progress.ProgressIndicator;
+import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.progress.ProgressMonitorAdapter;
 import jetbrains.mps.internal.collections.runtime.ISelector;
+import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.ide.platform.dialogs.choosers.NodeChooserDialog;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import jetbrains.mps.smodel.ModelAccess;
-import org.jetbrains.mps.openapi.model.SModel;
-import jetbrains.mps.internal.collections.runtime.Sequence;
+import jetbrains.mps.smodel.ModelAccessHelper;
+import org.jetbrains.mps.openapi.module.SearchScope;
 import org.jetbrains.mps.openapi.util.ProgressMonitor;
-import jetbrains.mps.smodel.SNodePointer;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SModelOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.internal.collections.runtime.IVisitor;
-import jetbrains.mps.smodel.MPSModuleRepository;
+import org.jetbrains.mps.openapi.language.SInterfaceConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public abstract class NodeChooser extends TextFieldWithBrowseButton.NoPathCompletion {
   @Nullable
   private SNodeReference myNodePointer;
-  private final List<_FunctionTypes._void_P1_E0<? super SNode>> myListeners = ListSequence.fromList(new ArrayList<_FunctionTypes._void_P1_E0<? super SNode>>());
 
   public NodeChooser() {
     addActionListener(new ActionListener() {
@@ -60,14 +53,12 @@ public abstract class NodeChooser extends TextFieldWithBrowseButton.NoPathComple
         final Wrappers._T<List<SNodeReference>> toChooseFrom = new Wrappers._T<List<SNodeReference>>();
         ProgressManager.getInstance().run(new Task.Modal(project, "Searching for nodes", false) {
           public void run(@NotNull final ProgressIndicator indicator) {
-            mpsProject.getModelAccess().runReadAction(new Runnable() {
-              public void run() {
-                toChooseFrom.value = ListSequence.fromList(findToChooseFromOnInit(findUsegesManager, new ProgressMonitorAdapter(indicator))).select(new ISelector<SNode, SNodeReference>() {
-                  public SNodeReference select(SNode it) {
-                    return SNodeOperations.getPointer(it);
-                  }
-                }).toListSequence();
-              }
+            mpsProject.getModelAccess().runReadAction(() -> {
+              toChooseFrom.value = ListSequence.fromList(findToChooseFromOnInit(findUsegesManager, mpsProject.getScope(), new ProgressMonitorAdapter(indicator))).select(new ISelector<SNode, SNodeReference>() {
+                public SNodeReference select(SNode it) {
+                  return SNodeOperations.getPointer(it);
+                }
+              }).toListSequence();
             });
           }
         });
@@ -76,84 +67,36 @@ public abstract class NodeChooser extends TextFieldWithBrowseButton.NoPathComple
         chooserDialog.show();
         final SNodeReference result = chooserDialog.getResult();
         if (result != null) {
-          mpsProject.getModelAccess().runReadAction(new Runnable() {
-            public void run() {
-              SNode resultNode = result.resolve(mpsProject.getRepository());
-              if (resultNode != null) {
-                setNode(resultNode);
-              }
-            }
-          });
+          setNode(result);
+          setText(new ModelAccessHelper(mpsProject.getModelAccess()).runReadAction(() -> {
+            SNode resultNode = result.resolve(mpsProject.getRepository());
+            return (resultNode == null ? null : getFqName(resultNode));
+          }));
         }
       }
     });
-
-    addKeyListener(new KeyAdapter() {
-      @Override
-      public void keyReleased(KeyEvent event) {
-        final String text = getText();
-        if ((text == null || text.length() == 0)) {
-          setNode(null);
-          return;
-        }
-        final int lastDot = text.lastIndexOf(".");
-        if (lastDot <= 0) {
-          setNode(null);
-          return;
-        }
-
-        ModelAccess.instance().runReadAction(new Runnable() {
-          public void run() {
-            Iterable<SModel> models = getModels(text.substring(0, lastDot));
-            SNode foundNode = null;
-            for (SModel model : Sequence.fromIterable(models)) {
-              Iterable<SNode> nodes = findNodes(model, text);
-              if (!(Sequence.fromIterable(nodes).isEmpty())) {
-                foundNode = Sequence.fromIterable(nodes).first();
-                break;
-              }
-            }
-            setNode(foundNode);
-          }
-        });
-      }
-    });
+    // we don't support entering name of the node manually
+    setEditable(false);
   }
 
-  protected abstract Iterable<SNode> findNodes(SModel model, String fqName);
+  protected abstract List<SNode> findToChooseFromOnInit(FindUsagesFacade manager, SearchScope scope, ProgressMonitor monitor);
 
-  protected abstract Iterable<SModel> getModels(String model);
-
-  protected abstract List<SNode> findToChooseFromOnInit(FindUsagesFacade manager, ProgressMonitor monitor);
-
-  public SNode getNode() {
-    return check_qnl8bg_a0a11(this.myNodePointer, this);
+  @Nullable
+  public SNodeReference getNode() {
+    return this.myNodePointer;
   }
 
-  public void setNode(SNode node) {
-    if (check_qnl8bg_a0a0n(this.myNodePointer, this) == node) {
-      return;
-    }
-    if (node == null) {
-      if (this.myNodePointer == null) {
-        this.setText(null);
-        return;
-      } else {
-        myNodePointer = null;
-      }
-    } else {
-      this.myNodePointer = new SNodePointer(node);
-      this.setText(getFqName(node));
-    }
-    this.fireNodeChanged();
+  public void setNode(SNodeReference node) {
+    myNodePointer = node;
   }
 
-  public String getFqName(SNode node) {
+  public static String getFqName(SNode node) {
     String modelName = SModelOperations.getModelName(SNodeOperations.getModel(node));
 
+    // XXX why not node.getFqName or node/.getPresentation?
     String nodeName;
-    if (SNodeOperations.isInstanceOf(node, MetaAdapterFactory.getInterfaceConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, "jetbrains.mps.lang.core.structure.INamedConcept"))) {
-      nodeName = SPropertyOperations.getString(SNodeOperations.cast(node, MetaAdapterFactory.getInterfaceConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, "jetbrains.mps.lang.core.structure.INamedConcept")), MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name"));
+    if (SNodeOperations.isInstanceOf(node, CONCEPTS.INamedConcept$Kd)) {
+      nodeName = SPropertyOperations.getString(SNodeOperations.cast(node, CONCEPTS.INamedConcept$Kd), PROPS.name$MnvL);
     } else {
       nodeName = node.getNodeId().toString();
     }
@@ -161,42 +104,14 @@ public abstract class NodeChooser extends TextFieldWithBrowseButton.NoPathComple
     if ((modelName == null || modelName.length() == 0)) {
       return nodeName;
     }
-    return modelName + "." + nodeName;
+    return modelName + '.' + nodeName;
   }
 
-  public void addNodeChangeListener(@NotNull _FunctionTypes._void_P1_E0<? super SNode> listener) {
-    ListSequence.fromList(this.myListeners).addElement(listener);
+  private static final class CONCEPTS {
+    /*package*/ static final SInterfaceConcept INamedConcept$Kd = MetaAdapterFactory.getInterfaceConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, "jetbrains.mps.lang.core.structure.INamedConcept");
   }
 
-  private void fireNodeChanged() {
-    ListSequence.fromList(this.myListeners).visitAll(new IVisitor<_FunctionTypes._void_P1_E0<? super SNode>>() {
-      public void visit(_FunctionTypes._void_P1_E0<? super SNode> it) {
-        it.invoke(check_qnl8bg_a0a0a0a0a0t(NodeChooser.this.myNodePointer, NodeChooser.this));
-      }
-    });
-  }
-
-  @Override
-  public void dispose() {
-    super.dispose();
-    ListSequence.fromList(myListeners).clear();
-  }
-  private static SNode check_qnl8bg_a0a11(SNodeReference checkedDotOperand, NodeChooser checkedDotThisExpression) {
-    if (null != checkedDotOperand) {
-      return checkedDotOperand.resolve(MPSModuleRepository.getInstance());
-    }
-    return null;
-  }
-  private static SNode check_qnl8bg_a0a0n(SNodeReference checkedDotOperand, NodeChooser checkedDotThisExpression) {
-    if (null != checkedDotOperand) {
-      return checkedDotOperand.resolve(MPSModuleRepository.getInstance());
-    }
-    return null;
-  }
-  private static SNode check_qnl8bg_a0a0a0a0a0t(SNodeReference checkedDotOperand, NodeChooser checkedDotThisExpression) {
-    if (null != checkedDotOperand) {
-      return checkedDotOperand.resolve(MPSModuleRepository.getInstance());
-    }
-    return null;
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }

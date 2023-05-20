@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ import org.jetbrains.mps.openapi.module.SModule;
 
 /**
  * Denotes modules that represent intermediate/incomplete or otherwise transient state.
- * @see {@link jetbrains.mps.extapi.model.TransientSModel}
+ * @see jetbrains.mps.extapi.model.TransientSModel
  * @author Artem Tikhomirov
  */
 public interface TransientSModule extends SModule {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import jetbrains.mps.generator.impl.reference.PostponedReference;
 import jetbrains.mps.generator.impl.reference.ReferenceInfo;
 import jetbrains.mps.generator.impl.reference.ReferenceInfo_CopiedInputNode;
 import jetbrains.mps.smodel.FastNodeFinderManager;
-import jetbrains.mps.smodel.StaticReference;
+import jetbrains.mps.smodel.SNodeImplAccess;
 import jetbrains.mps.smodel.nodeidmap.INodeIdToNodeMap;
 import jetbrains.mps.smodel.nodeidmap.UniversalOptimizedNodeIdMap;
 import jetbrains.mps.util.SNodeOperations;
@@ -50,11 +50,11 @@ import java.util.Set;
  * @author Artem Tikhomirov
  */
 public abstract class DeltaBuilder {
-  private final List<DeltaRoot> myDelta = new ArrayList<DeltaRoot>();
-  private final List<ReplacedRoot> myReplacedRoots = new ArrayList<ReplacedRoot>(); // view: myDelta.select(ReplacedRoot)
-  private final List<NewRoot> myNewRoots = new ArrayList<NewRoot>(); // view: myDelta.select(NewRoot)
+  private final List<DeltaRoot> myDelta = new ArrayList<>();
+  private final List<ReplacedRoot> myReplacedRoots = new ArrayList<>(); // view: myDelta.select(ReplacedRoot)
+  private final List<NewRoot> myNewRoots = new ArrayList<>(); // view: myDelta.select(NewRoot)
   private final List<CopyRoot> myCopyRoots; // view: myDelta.select(CopyRoot)
-  private final List<DeletedRoot> myDeletedRoots = new ArrayList<DeletedRoot>(); // view: myDelta.select(DeletedRoot)
+  private final List<DeletedRoot> myDeletedRoots = new ArrayList<>(); // view: myDelta.select(DeletedRoot)
   private final UniversalOptimizedNodeIdMap myNewNodes = new UniversalOptimizedNodeIdMap();
 
   protected DeltaBuilder(List<CopyRoot> rootsStorage) {
@@ -62,10 +62,10 @@ public abstract class DeltaBuilder {
   }
 
   public static DeltaBuilder newSingleThreadDeltaBuilder() {
-    return new DeltaBuilder(new ArrayList<CopyRoot>()) {
-      private final Deque<SNode> myNestedCopyRoots = new ArrayDeque<SNode>();
+    return new DeltaBuilder(new ArrayList<>()) {
+      private final Deque<SNode> myNestedCopyRoots = new ArrayDeque<>();
       private CopyRoot myCurrentRoot;
-      private final List<SubTree> myCurrentFragments = new ArrayList<SubTree>();
+      private final List<SubTree> myCurrentFragments = new ArrayList<>();
 
       @Override
       protected Deque<SNode> getNestedCopyRoots() {
@@ -101,15 +101,15 @@ public abstract class DeltaBuilder {
 
   public static DeltaBuilder newConcurrentDeltaBuilder() {
     return new DeltaBuilder(Collections.synchronizedList(new ArrayList<CopyRoot>())) {
-      private final ThreadLocal<CopyRoot> myCurrentRoot = new ThreadLocal<CopyRoot>();
-      private final ThreadLocal<Deque<SNode>> myNestedCopyRoots = new ThreadLocal<Deque<SNode>>();
-      private final ThreadLocal<List<SubTree>> myCurrentFragments = new ThreadLocal<List<SubTree>>();
+      private final ThreadLocal<CopyRoot> myCurrentRoot = new ThreadLocal<>();
+      private final ThreadLocal<Deque<SNode>> myNestedCopyRoots = new ThreadLocal<>();
+      private final ThreadLocal<List<SubTree>> myCurrentFragments = new ThreadLocal<>();
 
       @Override
       protected Deque<SNode> getNestedCopyRoots() {
         Deque<SNode> ncr = myNestedCopyRoots.get();
         if (ncr == null) {
-          myNestedCopyRoots.set(ncr = new ArrayDeque<SNode>());
+          myNestedCopyRoots.set(ncr = new ArrayDeque<>());
         }
         return ncr;
       }
@@ -136,7 +136,7 @@ public abstract class DeltaBuilder {
       @Override
       protected void initCurrentFragments() {
         assert myCurrentFragments.get() == null;
-        myCurrentFragments.set(new ArrayList<SubTree>());
+        myCurrentFragments.set(new ArrayList<>());
       }
 
       @Override
@@ -169,7 +169,7 @@ public abstract class DeltaBuilder {
     assert getCurrentRoot().myRoot == node;
 
     final List<SubTree> fragments = getCurrentFragments();
-    getCurrentRoot().mySubTrees = fragments.toArray(new SubTree[fragments.size()]);
+    getCurrentRoot().mySubTrees = fragments.toArray(new SubTree[0]);
     setCurrentRoot(null);
     clearCurrentFragments();
   }
@@ -331,7 +331,7 @@ public abstract class DeltaBuilder {
   }
 
   public void prepareReferences(SModel inputModel, TemplateGenerator generator) {
-    HashSet<SNode> allReplacedNodes = new HashSet<SNode>();
+    HashSet<SNode> allReplacedNodes = new HashSet<>();
     for (CopyRoot root : myCopyRoots) {
       allReplacedNodes.addAll(root.getReplacedNodes());
     }
@@ -360,7 +360,6 @@ public abstract class DeltaBuilder {
           continue;
         }
         for (SReference reference : next.getReferences()) {
-          assert reference instanceof PostponedReference == false : "!!! unexpected PostponedReference in the input model";
           if (!inputModelRef.equals(reference.getTargetSModelReference())) {
             continue;
           }
@@ -381,15 +380,9 @@ public abstract class DeltaBuilder {
     }
     // make references to point to node directly, not (ModelId+NodeId)
     // as it would be impossible to resolve model once root is detached
+    // OTOH, it does happen automatically on node detach, isn't it?
     for (SNode rn : allReplacedNodes) {
-      for (SNode n : SNodeUtil.getDescendants(rn)) {
-        for (SReference r : n.getReferences()) {
-          if (!inputModelRef.equals(r.getTargetSModelReference()) || ! (r instanceof StaticReference)) {
-            continue;
-          }
-          ((StaticReference) r).makeDirect();
-        }
-      }
+      new SNodeImplAccess(rn).makeReferencesDirectWhen(inputModelRef);
     }
   }
 
@@ -494,7 +487,7 @@ public abstract class DeltaBuilder {
     public final List<SNode> myReplacements;
     public ReplacedRoot(@NotNull SNode oldRoot, @NotNull SNode newRoot) {
       myReplacedRoot = oldRoot;
-      myReplacements = new ArrayList<SNode>(4);
+      myReplacements = new ArrayList<>(4);
       myReplacements.add(newRoot);
     }
   }
@@ -549,7 +542,7 @@ public abstract class DeltaBuilder {
       if (mySubTrees == null) {
         return Collections.emptySet();
       }
-      HashSet<SNode> rv = new HashSet<SNode>(mySubTrees.length);
+      HashSet<SNode> rv = new HashSet<>(mySubTrees.length);
       for (SubTree tree : mySubTrees) {
         if (!tree.isSourceCopy()) {
           rv.add(tree.myInputNode);
@@ -568,7 +561,7 @@ public abstract class DeltaBuilder {
     public SubTree(@NotNull SNode inputNode, @NotNull SContainmentLink roleInParent, @NotNull Collection<SNode> subTree) {
       myInputNode = inputNode;
       myRoleInParent = roleInParent;
-      myReplacement = subTree instanceof List ? (List<SNode>) subTree : new ArrayList<SNode>(subTree);
+      myReplacement = subTree instanceof List ? (List<SNode>) subTree : new ArrayList<>(subTree);
     }
 
     public SubTree(@NotNull SNode inputNode) {

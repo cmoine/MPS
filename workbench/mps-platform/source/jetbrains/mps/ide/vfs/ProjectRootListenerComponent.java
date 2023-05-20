@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,22 +15,24 @@
  */
 package jetbrains.mps.ide.vfs;
 
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.project.Project;
-import com.intellij.util.containers.HashMap;
 import jetbrains.mps.ide.platform.watching.WatchedRoots;
-import jetbrains.mps.vfs.FileListener;
-import jetbrains.mps.vfs.FileSystemEvent;
-import jetbrains.mps.vfs.FileSystemListener;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.vfs.IFile;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import jetbrains.mps.vfs.refresh.CachingFileSystem;
+import jetbrains.mps.vfs.refresh.FileListener;
+import jetbrains.mps.vfs.refresh.FileSystemEvent;
+import jetbrains.mps.vfs.refresh.FileSystemListener;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.util.ProgressMonitor;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Map;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Adds listener to the local file system, which boosts the project reading.
@@ -47,60 +49,90 @@ import java.util.Map;
  *
  * AP
  */
-public final class ProjectRootListenerComponent implements ProjectComponent {
-  private static final Logger LOG = LogManager.getLogger(ProjectRootListenerComponent.class);
+public final class ProjectRootListenerComponent implements Disposable {
+  private static final Logger LOG = Logger.getLogger(ProjectRootListenerComponent.class);
+  private static final List<String> EXCLUDED_FOLDERS = Collections.singletonList(".git");
 
-  private final IdeaFileSystem myFileSystem;
   private final Project myProject;
-  private final Map<Project, FileListener> myProject2ListenerMap = new HashMap<>();
-  private IFile myFile;
+  private final List<EmptyFSListener> myListeners = new ArrayList<>();
+  private CachingFileSystem myFileSystem;
 
-  public ProjectRootListenerComponent(@NotNull IdeaFileSystem fileSystem, Project project) {
-    myFileSystem = fileSystem;
-    myProject = project;
+  // XXX can not use MPSProject here as MPSProject depends on this service
+  public ProjectRootListenerComponent(Project ideaProject) {
+    // XXX not sure I can convert this a StartupActivity - I need to get this hack as early as possible, otherwise
+    //     there's no value in these additional 'top' listeners.
+    myProject = ideaProject;
   }
 
-  @Override
-  public void initComponent() {
+  public void boostProjectRead(@NotNull IdeaFileSystem fs) {
+    // FIXME is there's anything in MPSProject better suited to find out project root. If not, why?
+    //       if yes, can pass here to use instead of ideaProject.getBasePath() guess
     String basePath = myProject.getBasePath();
-    if (basePath!= null) {
-      myFile = myFileSystem.getFile(basePath);
-      EmptyFSListener listener = new EmptyFSListener();
-      ApplicationManager.getApplication().runReadAction(() -> {myFile.addListener(listener);});
-      myProject2ListenerMap.put(myProject, listener);
+    if (basePath != null) {
+      myFileSystem = fs;
+      IFile projectBase = fs.getFile(basePath);
+      List<EmptyFSListener> newListeners = new ArrayList<>();
+      ApplicationManager.getApplication().runReadAction(() -> {
+        List<IFile> children = projectBase.getChildren();
+        if (children == null) {
+          addEmptyListener(fs, projectBase);
+        } else {
+          for (IFile child : children) {
+            if (listenTo(child)) {
+              addEmptyListener(fs, child);
+            }
+          }
+        }
+      });
     } else {
-      LOG.warn("Could not find base path of the project " + myProject);
+      LOG.warning("Could not find base path of the project " + myProject);
     }
   }
 
-  @Override
-  public void disposeComponent() {
-    FileListener listener = myProject2ListenerMap.remove(myProject);
-    ApplicationManager.getApplication().runReadAction(() -> {myFile.removeListener(listener);});
+  private void addEmptyListener(CachingFileSystem fs, IFile file) {
+    EmptyFSListener listener = new EmptyFSListener(file);
+    fs.addListener(listener);
+    myListeners.add(listener);
   }
 
-  @NotNull
-  @Override
-  public String getComponentName() {
-    return "Project Root Listener";
-  }
-
-  @Override
-  public void projectOpened() {
+  private static boolean listenTo(@NotNull IFile childOfProjectDir) {
+    return !EXCLUDED_FOLDERS.contains(childOfProjectDir.getName());
   }
 
   @Override
-  public void projectClosed() {
+  public void dispose() {
+    if (myFileSystem == null) {
+      return;
+    }
+    ApplicationManager.getApplication().runReadAction(() -> {
+      for (EmptyFSListener listener : myListeners) {
+        myFileSystem.removeListener(listener);
+      }
+      myListeners.clear();
+      myFileSystem = null;
+    });
   }
 
-  private static class EmptyFSListener implements FileListener {
+  private static class EmptyFSListener implements FileSystemListener {
+    private final IFile myFileIListenTo;
+
+    public EmptyFSListener(@NotNull IFile fileIListenTo) {
+      myFileIListenTo = fileIListenTo;
+    }
+
+    @Nullable
+    @Override
+    public IFile getFileToListen() {
+      return myFileIListenTo;
+    }
+
     @Override
     public String toString() {
       return "EMPTY LISTENER";
     }
 
     @Override
-    public void update(ProgressMonitor monitor, @NotNull FileSystemEvent event) {
+    public void update(@NotNull ProgressMonitor monitor, @NotNull FileSystemEvent event) {
     }
   }
 }

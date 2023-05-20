@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,13 +21,13 @@ import org.jetbrains.mps.openapi.model.SNodeId;
  * @author Evgeny Gerashchenko
  * @since 11/22/10
  */
-public class NodeLineContent extends LineContent {
+public final class NodeLineContent extends LineContent {
   public NodeLineContent(SNodeId nodeId) {
     super(nodeId);
   }
 
   @Override
   public String toString() {
-    return "N{" + getNodeId() + "}";
+    return String.format("N{%s}", getNodeId());
   }
 }

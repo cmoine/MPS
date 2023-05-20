@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-3vpu8vxls9sdqzhkg4b6j69pdn9fts1" />
+<product version="3" modelHash="-7hr4anr81pwd7muwt8mycwf83i7btpq">
+  <files names="BitemporalCollection.java:BitemporalCollectionSuperclassTester.java:BitemporalCollectionTester.java:Currency.java:DateRange.java:DateRangeTester.java:DoubleRange.java:DoubleRangeTester.java:MfDate.java:MfDateTester.java:MfTester.java:Money.java:MoneyTester.java:NamedObject.java:Quantity.java:QuantityTester.java:Registry.java:SingleTemporalCollection.java:SingleTemporalCollectionTester.java:TemporalCollection.java:TemporalCollectionTester.java:Unit.java" />
+</product>
 

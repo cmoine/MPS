@@ -34,9 +34,8 @@ import org.jetbrains.annotations.NotNull;
 )
 public class ProjectViewImpl extends com.intellij.ide.projectView.impl.ProjectViewImpl {
 
-  public ProjectViewImpl(@NotNull Project project,
-      FileEditorManager fileEditorManager, ToolWindowManagerEx toolWindowManager) {
-    super(project, fileEditorManager, toolWindowManager);
+  public ProjectViewImpl(@NotNull Project project) {
+    super(project);
   }
 
   @Override
@@ -70,28 +69,19 @@ public class ProjectViewImpl extends com.intellij.ide.projectView.impl.ProjectVi
   }
 
   @Override
-  public void loadState(Element parentNode) {
+  public void loadState(@NotNull Element parentNode) {
     // simply forward to the superclass's implementation
     // we mimic the IDEA's mechanism to store/load tree state
     super.loadState(parentNode);
   }
 
-  private boolean viewSelectionChangedOverride() {
+  private void viewSelectionChangedOverride() {
     // the current view ID is set in the super.showPane(), which must be called before
     final AbstractProjectViewPane newPane = getProjectViewPaneById(getCurrentViewId());
-    if (newPane == null) {
-      return false;
-    }
     if (!(newPane instanceof ProjectViewPaneOverride)) {
-      return false;
+      return;
     }
 
     ((ProjectViewPaneOverride) newPane).restoreExpandedPathsOverride();
-    return true;
-  }
-
-  @Override
-  protected boolean isShowMembersOptionSupported() {
-    return false;
   }
 }

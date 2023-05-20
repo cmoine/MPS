@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-46lj5fzqz669sui13dwco8tari8avty" />
+<product version="3" modelHash="-d887f1wwfa06i64v2j35arbbb15px6z">
+  <files names="Create_TextMacro_Contribution.java:EditorAspectDescriptorImpl.java:ElementMacro_Editor.java:ElementMacro_EditorBuilder_a.java:TextMacro_Editor.java:TextMacro_EditorBuilder_a.java:XmlLiteral_Editor.java:XmlLiteral_EditorBuilder_a.java" />
+</product>
 

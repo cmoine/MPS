@@ -9,9 +9,9 @@ import java.util.Arrays;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SConceptOperations;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.lang.pattern.IMatchingPattern;
-import jetbrains.mps.lang.typesystem.runtime.HUtil;
-import jetbrains.mps.typesystem.inference.TypeChecker;
+import jetbrains.mps.typechecking.TypecheckingFacade;
+import org.jetbrains.mps.openapi.language.SProperty;
+import org.jetbrains.mps.openapi.language.SConcept;
 
 public class Queries {
   private Queries() {
@@ -20,18 +20,25 @@ public class Queries {
     List<SNode> leastCommonSupertypes = SubtypingUtil.leastCommonSuperTypes(Arrays.asList(leftType, rightType), null);
     if (leastCommonSupertypes.isEmpty()) {
       SNode runtimeErrorType = SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x113f84956f9L, "jetbrains.mps.lang.typesystem.structure.RuntimeErrorType"));
-      SPropertyOperations.set(runtimeErrorType, MetaAdapterFactory.getProperty(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x113f84956f9L, 0x113f84956faL, "errorText"), "incompatible types");
+      SPropertyOperations.assign(runtimeErrorType, PROPS.errorText$leWQ, "incompatible types");
       return runtimeErrorType;
     }
     SNode type = leastCommonSupertypes.iterator().next();
     {
-      IMatchingPattern pattern_j6k1pf_d0b = HUtil.createMatchingPatternByConcept(MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10f0ad8bde4L, "jetbrains.mps.baseLanguage.structure.PrimitiveType"));
-      SNode coercedNode_j6k1pf_d0b = TypeChecker.getInstance().getRuntimeSupport().coerce_(type, pattern_j6k1pf_d0b);
+      SNode coercedNode_j6k1pf_d0b = TypecheckingFacade.getFromContext().coerceType(type, CONCEPTS.PrimitiveType$sR);
       if (coercedNode_j6k1pf_d0b != null) {
         return coercedNode_j6k1pf_d0b;
       } else {
         return type;
       }
     }
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty errorText$leWQ = MetaAdapterFactory.getProperty(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x113f84956f9L, 0x113f84956faL, "errorText");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept PrimitiveType$sR = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10f0ad8bde4L, "jetbrains.mps.baseLanguage.structure.PrimitiveType");
   }
 }

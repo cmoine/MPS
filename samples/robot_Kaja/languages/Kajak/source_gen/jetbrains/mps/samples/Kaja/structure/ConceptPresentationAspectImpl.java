@@ -4,105 +4,249 @@ package jetbrains.mps.samples.Kaja.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_AbstractCommand = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CommandList = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CommentLine = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Direction = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Drop = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_East = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_EmptyLine = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Heading = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IfStatement = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IsFull = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IsMark = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IsWall = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_LeftTurn = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Library = new ConceptPresentationBuilder().icon(IconContainer.RESOURCE_a0a0n).create();
-  private final ConceptPresentation props_LogicalExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Looking = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_North = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Not = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Pick = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Repeat = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Require = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RoutineCall = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RoutineDefinition = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Script = new ConceptPresentationBuilder().icon(IconContainer.RESOURCE_a0a0x).create();
-  private final ConceptPresentation props_South = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Step = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TraceMessage = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_West = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_While = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_AbstractCommand;
+  private ConceptPresentation props_CommandList;
+  private ConceptPresentation props_CommentLine;
+  private ConceptPresentation props_Direction;
+  private ConceptPresentation props_Drop;
+  private ConceptPresentation props_East;
+  private ConceptPresentation props_EmptyLine;
+  private ConceptPresentation props_Heading;
+  private ConceptPresentation props_IfStatement;
+  private ConceptPresentation props_IsFull;
+  private ConceptPresentation props_IsMark;
+  private ConceptPresentation props_IsWall;
+  private ConceptPresentation props_LeftTurn;
+  private ConceptPresentation props_Library;
+  private ConceptPresentation props_LogicalExpression;
+  private ConceptPresentation props_Looking;
+  private ConceptPresentation props_North;
+  private ConceptPresentation props_Not;
+  private ConceptPresentation props_Pick;
+  private ConceptPresentation props_Repeat;
+  private ConceptPresentation props_Require;
+  private ConceptPresentation props_RoutineCall;
+  private ConceptPresentation props_RoutineDefinition;
+  private ConceptPresentation props_Script;
+  private ConceptPresentation props_South;
+  private ConceptPresentation props_Step;
+  private ConceptPresentation props_TraceMessage;
+  private ConceptPresentation props_West;
+  private ConceptPresentation props_While;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.AbstractCommand:
+        if (props_AbstractCommand == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_AbstractCommand = cpb.create();
+        }
         return props_AbstractCommand;
-      case 1:
+      case LanguageConceptSwitch.CommandList:
+        if (props_CommandList == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("CommandList");
+          props_CommandList = cpb.create();
+        }
         return props_CommandList;
-      case 2:
+      case LanguageConceptSwitch.CommentLine:
+        if (props_CommentLine == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("#");
+          props_CommentLine = cpb.create();
+        }
         return props_CommentLine;
-      case 3:
+      case LanguageConceptSwitch.Direction:
+        if (props_Direction == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_Direction = cpb.create();
+        }
         return props_Direction;
-      case 4:
+      case LanguageConceptSwitch.Drop:
+        if (props_Drop == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("drop");
+          props_Drop = cpb.create();
+        }
         return props_Drop;
-      case 5:
+      case LanguageConceptSwitch.East:
+        if (props_East == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("east");
+          props_East = cpb.create();
+        }
         return props_East;
-      case 6:
+      case LanguageConceptSwitch.EmptyLine:
+        if (props_EmptyLine == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("<empty>");
+          props_EmptyLine = cpb.create();
+        }
         return props_EmptyLine;
-      case 7:
+      case LanguageConceptSwitch.Heading:
+        if (props_Heading == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("heading");
+          props_Heading = cpb.create();
+        }
         return props_Heading;
-      case 8:
+      case LanguageConceptSwitch.IfStatement:
+        if (props_IfStatement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("if");
+          props_IfStatement = cpb.create();
+        }
         return props_IfStatement;
-      case 9:
+      case LanguageConceptSwitch.IsFull:
+        if (props_IsFull == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("full");
+          props_IsFull = cpb.create();
+        }
         return props_IsFull;
-      case 10:
+      case LanguageConceptSwitch.IsMark:
+        if (props_IsMark == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("mark");
+          props_IsMark = cpb.create();
+        }
         return props_IsMark;
-      case 11:
+      case LanguageConceptSwitch.IsWall:
+        if (props_IsWall == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("wall ahead");
+          props_IsWall = cpb.create();
+        }
         return props_IsWall;
-      case 12:
+      case LanguageConceptSwitch.LeftTurn:
+        if (props_LeftTurn == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("turnLeft");
+          props_LeftTurn = cpb.create();
+        }
         return props_LeftTurn;
-      case 13:
+      case LanguageConceptSwitch.Library:
+        if (props_Library == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.icon(IconContainer.RESOURCE_a0a2a0a31b0eb);
+          props_Library = cpb.create();
+        }
         return props_Library;
-      case 14:
+      case LanguageConceptSwitch.LogicalExpression:
+        if (props_LogicalExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_LogicalExpression = cpb.create();
+        }
         return props_LogicalExpression;
-      case 15:
+      case LanguageConceptSwitch.Looking:
+        if (props_Looking == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("looking");
+          props_Looking = cpb.create();
+        }
         return props_Looking;
-      case 16:
+      case LanguageConceptSwitch.North:
+        if (props_North == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("north");
+          props_North = cpb.create();
+        }
         return props_North;
-      case 17:
+      case LanguageConceptSwitch.Not:
+        if (props_Not == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("not");
+          props_Not = cpb.create();
+        }
         return props_Not;
-      case 18:
+      case LanguageConceptSwitch.Pick:
+        if (props_Pick == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("pick");
+          props_Pick = cpb.create();
+        }
         return props_Pick;
-      case 19:
+      case LanguageConceptSwitch.Repeat:
+        if (props_Repeat == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("repeat");
+          props_Repeat = cpb.create();
+        }
         return props_Repeat;
-      case 20:
+      case LanguageConceptSwitch.Require:
+        if (props_Require == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("require");
+          props_Require = cpb.create();
+        }
         return props_Require;
-      case 21:
+      case LanguageConceptSwitch.RoutineCall:
+        if (props_RoutineCall == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x49a08c51fe543ccL, 0xbd998b46d641d7f5L, 0x2de971c785ed6f92L, 0x2de971c785ede3ccL, "definition", "", "");
+          props_RoutineCall = cpb.create();
+        }
         return props_RoutineCall;
-      case 22:
+      case LanguageConceptSwitch.RoutineDefinition:
+        if (props_RoutineDefinition == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_RoutineDefinition = cpb.create();
+        }
         return props_RoutineDefinition;
-      case 23:
+      case LanguageConceptSwitch.Script:
+        if (props_Script == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.icon(IconContainer.RESOURCE_a0a2a0a32b0eb);
+          props_Script = cpb.create();
+        }
         return props_Script;
-      case 24:
+      case LanguageConceptSwitch.South:
+        if (props_South == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("south");
+          props_South = cpb.create();
+        }
         return props_South;
-      case 25:
+      case LanguageConceptSwitch.Step:
+        if (props_Step == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("step");
+          props_Step = cpb.create();
+        }
         return props_Step;
-      case 26:
+      case LanguageConceptSwitch.TraceMessage:
+        if (props_TraceMessage == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("trace");
+          props_TraceMessage = cpb.create();
+        }
         return props_TraceMessage;
-      case 27:
+      case LanguageConceptSwitch.West:
+        if (props_West == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("west");
+          props_West = cpb.create();
+        }
         return props_West;
-      case 28:
+      case LanguageConceptSwitch.While:
+        if (props_While == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("while");
+          props_While = cpb.create();
+        }
         return props_While;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

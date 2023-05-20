@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,10 @@ package jetbrains.mps.smodel;
 
 import jetbrains.mps.components.CoreComponent;
 import jetbrains.mps.extapi.module.SRepositoryRegistry;
-import jetbrains.mps.extapi.persistence.FileDataSource;
-import jetbrains.mps.extapi.persistence.FolderDataSource;
+import jetbrains.mps.extapi.persistence.FileSystemBasedDataSource;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.util.Computable;
 import jetbrains.mps.util.ModelComputeRunnable;
-import jetbrains.mps.util.annotation.ToRemove;
 import jetbrains.mps.vfs.IFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -50,22 +49,13 @@ import java.util.concurrent.CopyOnWriteArrayList;
  *                    i.e. instead we'd have smth like SRepo.getService(SModelFileTracker.class)
  */
 public class SModelFileTracker {
-  private static final List<SModelFileTracker> ourModelTrackers = new CopyOnWriteArrayList<SModelFileTracker>();
+  private static final List<SModelFileTracker> ourModelTrackers = new CopyOnWriteArrayList<>();
 
   private final RepositoryModelTracker myListener = new RepositoryModelTracker();
   private final SRepository myRepository;
 
   private SModelFileTracker(SRepository repository) {
     myRepository = repository;
-  }
-
-  /**
-   * @deprecated use {@link #getInstance(SRepository)}
-   */
-  @Deprecated
-  @ToRemove(version = 3.3)
-  public static SModelFileTracker getInstance() {
-    return getInstance(MPSModuleRepository.getInstance());
   }
 
   @NotNull
@@ -105,6 +95,20 @@ public class SModelFileTracker {
     // FIXME At the moment, there's no notification mechanism to find out about repository gone.
   }
 
+  /**
+   * lightweight alternative to {@link #findModel(IFile)}
+   */
+  @Nullable
+  public SModelReference modelFor(@Nullable IFile modelFile) {
+    if (modelFile == null) {
+      return null;
+    }
+    return myListener.findModel(modelFile);
+  }
+
+  /**
+   * prefer {@link #modelFor(IFile)} if all you need is SModelReference
+   */
   @Nullable
   public SModel findModel(@Nullable IFile modelFile) {
     if (modelFile == null) {
@@ -133,7 +137,7 @@ public class SModelFileTracker {
         if (myRepository.getModelAccess().canRead()) {
           return compute();
         } else {
-          return new ModelComputeRunnable<SModel>(this).runRead(myRepository.getModelAccess());
+          return new ModelComputeRunnable<>(this).runRead(myRepository.getModelAccess());
         }
       }
     }
@@ -156,7 +160,7 @@ public class SModelFileTracker {
   }
 
   private static class RepositoryModelTracker extends SRepositoryContentAdapter {
-    private final Map<IFile, SModelReference> myPathsToModels = new HashMap<IFile, SModelReference>(256);
+    private final Map<IFile, SModelReference> myPathsToModels = new HashMap<>(256);
 
     @Override
     protected void startListening(SModel model) {
@@ -180,24 +184,27 @@ public class SModelFileTracker {
 
     private void addModelToFileCache(SModel md) {
       DataSource source = md.getSource();
-      if (!(source instanceof FileDataSource || source instanceof FolderDataSource)) {
+      if (!(source instanceof FileSystemBasedDataSource)) {
         return;
       }
 
-      IFile file = source instanceof FileDataSource
-          ? ((FileDataSource) source).getFile()
-          : ((FolderDataSource) source).getFolder();
-      myPathsToModels.put(file, md.getReference());
+      var ds = (FileSystemBasedDataSource) source;
+      for (var file : ds.getAffectedFiles()) {
+        Logger.getLogger(SModelFileTracker.class).debug("path->model:" + file + md.getReference());
+        myPathsToModels.put(file, md.getReference());
+      }
     }
 
     private void removeModelFromFileCache(SModel md) {
       DataSource source = md.getSource();
-      if (!(source instanceof FileDataSource || source instanceof FolderDataSource)) return;
+      if (!(source instanceof FileSystemBasedDataSource)) {
+        return;
+      }
 
-      IFile file = source instanceof FileDataSource
-          ? ((FileDataSource) source).getFile()
-          : ((FolderDataSource) source).getFolder();
-      myPathsToModels.remove(file);
+      var ds = (FileSystemBasedDataSource) source;
+      for (var file : ds.getAffectedFiles()) {
+        myPathsToModels.remove(file, md.getReference());
+      }
     }
 
     /*package*/ SModelReference findModel(IFile modelFile) {

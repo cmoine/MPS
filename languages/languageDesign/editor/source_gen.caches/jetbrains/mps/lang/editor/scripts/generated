@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-d1yxbebhehm5egcxzamv7fu2w1w8nmb" />
+<product version="3" modelHash="8mvcb4nowji07yj8e2s6bxrrg0583k8">
+  <files names="HorizontalGapMigration_MigrationScript.java:ScriptsDescriptor.java:SmartRefGeneratedMenuMigration_MigrationScript.java" />
+</product>
 

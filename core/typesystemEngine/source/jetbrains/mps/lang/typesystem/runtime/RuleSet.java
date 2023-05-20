@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,8 @@ package jetbrains.mps.lang.typesystem.runtime;
 import gnu.trove.THashSet;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SConceptOperations;
 import jetbrains.mps.languageScope.LanguageScope;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.newTypesystem.rules.SingleTermRules;
-import org.apache.log4j.Logger;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.model.SNode;
 
@@ -38,9 +38,9 @@ public class RuleSet<T extends IApplicableToConcept> {
   private Logger LOG = Logger.getLogger(RuleSet.class);
 
   private static final String TYPESYSTEM_SUFFIX = ".typesystem";
-  private ConcurrentMap<SAbstractConcept, Set<T>> myRules = new ConcurrentHashMap<SAbstractConcept, /* synchronized */ Set<T>>();
+  private final ConcurrentMap<SAbstractConcept, Set<T>> myRules = new ConcurrentHashMap<>();
 
-  private SingleTermRules<T> mySingleTermRules = new SingleTermRules<T>() {
+  private final SingleTermRules<T> mySingleTermRules = new SingleTermRules<T>() {
 
     @Override
     protected List<SAbstractConcept> getParents(SAbstractConcept nextConcept) {
@@ -63,8 +63,7 @@ public class RuleSet<T extends IApplicableToConcept> {
     for (T rule : rules) {
       try {
         addRule_internal(rule);
-      }
-      catch (Throwable ex) {
+      } catch (Throwable ex) {
         LOG.error("Error initializing rule '"+String.valueOf(rule)+"'", ex);
       }
     }
@@ -81,7 +80,7 @@ public class RuleSet<T extends IApplicableToConcept> {
     SAbstractConcept concept = rule.getApplicableConcept();
     Set<T> existingRules = myRules.get(concept);
     while (existingRules == null) {
-      myRules.putIfAbsent(concept, Collections.synchronizedSet(new THashSet<T>(2)));
+      myRules.putIfAbsent(concept, Collections.synchronizedSet(new THashSet<>(2)));
       existingRules = myRules.get(concept);
     }
     existingRules.add(rule);
@@ -99,7 +98,7 @@ public class RuleSet<T extends IApplicableToConcept> {
   private Iterable<T> getAllApplicableTo(SAbstractConcept concept, LanguageScope scope) {
     if (!myRules.containsKey(concept)) return Collections.emptyList();
 
-    List<T> result = new ArrayList<T>(4);
+    List<T> result = new ArrayList<>(4);
     Set<T> rules = myRules.get(concept);
     synchronized (rules) {
       for (T rule : rules) {

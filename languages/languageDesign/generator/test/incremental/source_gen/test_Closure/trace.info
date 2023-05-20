@@ -70,11 +70,11 @@
   </root>
   <root nodeRef="r:8996236a-10cc-4947-8fd2-f9b4ae2db88b(test_Closure)/8250748122682269925">
     <file name="Singleton.java">
-      <node id="8250748122682269935" at="7,22,8,65" concept="7" />
+      <node id="8250748122682269935" at="7,22,8,64" concept="7" />
       <node id="8250748122682269931" at="10,0,12,0" concept="4" trace="defaultMeth#()V" />
       <node id="8250748122682269927" at="7,0,10,0" concept="0" trace="Singleton#()V" />
       <scope id="8250748122682269934" at="10,29,10,29" />
-      <scope id="8250748122682269930" at="7,22,8,65" />
+      <scope id="8250748122682269930" at="7,22,8,64" />
       <scope id="8250748122682269931" at="10,0,12,0" />
       <scope id="8250748122682269927" at="7,0,10,0" />
       <unit id="8250748122682269925" at="6,0,13,0" name="test_Closure.Singleton" />

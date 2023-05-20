@@ -17,7 +17,7 @@ package jetbrains.mps.smodel.adapter.ids;
 
 import org.jetbrains.annotations.NotNull;
 
-public final class SPropertyId  extends SConceptFeatureId{
+public final class SPropertyId  extends SConceptFeatureId {
   private final long myPropertyId;
 
   public SPropertyId(@NotNull SConceptId conceptId, long propertyId) {
@@ -37,9 +37,7 @@ public final class SPropertyId  extends SConceptFeatureId{
     SPropertyId that = (SPropertyId) o;
 
     if (myPropertyId != that.myPropertyId) return false;
-    if (!getConceptId().equals(that.getConceptId())) return false;
-
-    return true;
+    return getConceptId().equals(that.getConceptId());
   }
 
   @Override
@@ -54,7 +52,7 @@ public final class SPropertyId  extends SConceptFeatureId{
   }
 
   public static SPropertyId deserialize(String s) {
-    int split = s.lastIndexOf("/");
+    int split = s.lastIndexOf('/');
     SConceptId concept = SConceptId.deserialize(s.substring(0, split));
     long prop = Long.parseLong(s.substring(split + 1));
     return new SPropertyId(concept, prop);

@@ -17,7 +17,11 @@ package jetbrains.mps.persistence;
 
 import org.jetbrains.mps.openapi.persistence.Memento;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * evgeny, 11/16/12
@@ -57,14 +61,14 @@ public class MementoImpl implements Memento {
       throw new IllegalArgumentException("Null key in memento doesn't make sense");
     }
     if (values == null) {
-      values = new LinkedHashMap<String, String>();
+      values = new LinkedHashMap<>();
     }
     values.put(key, value);
   }
 
   @Override
   public Iterable<String> getKeys() {
-    return values == null ? Collections.<String>emptyList() : Collections.unmodifiableCollection(values.keySet());
+    return values == null ? Collections.emptyList() : Collections.unmodifiableCollection(values.keySet());
   }
 
   @Override
@@ -82,7 +86,7 @@ public class MementoImpl implements Memento {
     if (children == null) return Collections.emptySet();
     List<Memento> mementos = children.get(type);
     if (mementos == null) return Collections.emptySet();
-    return Collections.unmodifiableList(new ArrayList<Memento>(mementos));
+    return Collections.unmodifiableList(new ArrayList<>(mementos));
   }
 
   @Override
@@ -96,7 +100,7 @@ public class MementoImpl implements Memento {
   @Override
   public Iterable<Memento> getChildren() {
     if (children == null) return Collections.emptyList();
-    List<Memento> mementos = new ArrayList<Memento>();
+    List<Memento> mementos = new ArrayList<>();
     for (List<Memento> mementoList : children.values()) {
       mementos.addAll(mementoList);
     }
@@ -106,10 +110,10 @@ public class MementoImpl implements Memento {
   @Override
   public Memento createChild(String type) {
     if (children == null) {
-      children = new LinkedHashMap<String, List<Memento>>();
+      children = new LinkedHashMap<>();
     }
     if (!children.containsKey(type)) {
-      children.put(type, new ArrayList<Memento>());
+      children.put(type, new ArrayList<>());
     }
     Memento m = new MementoImpl(type);
     children.get(type).add(m);
@@ -125,9 +129,9 @@ public class MementoImpl implements Memento {
       }
     }
     if (children != null) {
-      m.children = new LinkedHashMap<String, List<Memento>>();
+      m.children = new LinkedHashMap<>();
       for (Map.Entry<String, List<Memento>> entry : children.entrySet()) {
-        List<Memento> copy = new ArrayList<Memento>();
+        List<Memento> copy = new ArrayList<>();
         for (Memento memento : entry.getValue()) {
           copy.add(memento.copy());
         }
@@ -142,17 +146,25 @@ public class MementoImpl implements Memento {
 
   @Override
   public boolean equals(Object obj) {
-    if(obj == null || !(obj instanceof MementoImpl))
+    if(!(obj instanceof MementoImpl))
       return false;
 
     MementoImpl memento = (MementoImpl) obj;
 
     boolean equals = true;
-    equals = equals && (type == null ? memento.type == null : type.equals(memento.type));
-    equals = equals && (values == null ? memento.values == null : values.equals(memento.values));
-    equals = equals && (children == null ? memento.children == null : children.equals(memento.children));
-    equals = equals && (text == null ? memento.text == null : text.equals(memento.text));
+    equals &= type == null ? memento.type == null : type.equals(memento.type);
+    equals &= values == null ? memento.values == null : values.equals(memento.values);
+    equals &= children == null ? memento.children == null : children.equals(memento.children);
+    equals &= text == null ? memento.text == null : text.equals(memento.text);
 
     return equals;
+  }
+
+  @Override
+  public int hashCode() {
+    int hash = type != null ? type.hashCode() : 1;
+    hash = hash * 17 + (values != null ? values.hashCode() : 1);
+    hash = hash * 23 + (children != null ? children.hashCode() : 1);
+    return hash * 31 + (text != null ? text.hashCode() : 1);
   }
 }

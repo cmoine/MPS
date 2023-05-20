@@ -7,7 +7,6 @@ import jetbrains.mps.openapi.actions.descriptor.ActionAspectDescriptor;
 import java.util.Collection;
 import jetbrains.mps.openapi.actions.descriptor.NodeFactory;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor implements ActionAspectDescriptor {
@@ -16,22 +15,22 @@ public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor imple
   @Override
   public Collection<NodeFactory> getFactories(SAbstractConcept concept) {
     if (LANGUAGE_FQ_NAME.equals(concept.getLanguage().getQualifiedName())) {
-      switch (Arrays.binarySearch(stringSwitchCases_tpto26_a0a0a0c, concept.getName())) {
-        case 0:
+      switch (concept.getName()) {
+        case "AbstractEquationStatement":
           return Collections.<NodeFactory>singletonList(new _AbstractEquationStatement_factory.NodeFactory_1174664649250());
-        case 1:
-          return Collections.<NodeFactory>singletonList(new _AbstractEquationStatement_factory.NodeFactory_1178879020940());
-        case 2:
-          return Collections.<NodeFactory>singletonList(new MessageFactories.NodeFactory_1005490780642154321());
-        case 3:
-          return Collections.<NodeFactory>singletonList(new _AbstractEquationStatement_factory.NodeFactory_1177408248539());
-        case 4:
+        case "AbstractReportStatement":
           return Collections.<NodeFactory>singletonList(new MessageFactories.NodeFactory_1005490780641997347());
-        case 5:
+        case "CoerceExpression":
+          return Collections.<NodeFactory>singletonList(new _AbstractEquationStatement_factory.NodeFactory_1178879020940());
+        case "InfoStatement":
+          return Collections.<NodeFactory>singletonList(new MessageFactories.NodeFactory_1005490780642154321());
+        case "IsSubtypeExpression":
+          return Collections.<NodeFactory>singletonList(new _AbstractEquationStatement_factory.NodeFactory_1177408248539());
+        case "ReportErrorStatement":
           return Collections.<NodeFactory>singletonList(new MessageFactories.NodeFactory_1005490780642123875());
-        case 6:
+        case "TypeOfExpression":
           return Collections.<NodeFactory>singletonList(new _AbstractEquationStatement_factory.NodeFactory_1179476271703());
-        case 7:
+        case "WarningStatement":
           return Collections.<NodeFactory>singletonList(new MessageFactories.NodeFactory_1005490780642148227());
         default:
       }
@@ -39,9 +38,4 @@ public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor imple
     return Collections.<NodeFactory>emptyList();
   }
 
-  @Override
-  public boolean hasBuilders() {
-    return false;
-  }
-  private static String[] stringSwitchCases_tpto26_a0a0a0c = new String[]{"AbstractEquationStatement", "CoerceExpression", "InfoStatement", "IsSubtypeExpression", "MessageStatement", "ReportErrorStatement", "TypeOfExpression", "WarningStatement"};
 }

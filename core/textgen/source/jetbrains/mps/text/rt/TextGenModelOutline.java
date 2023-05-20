@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,11 @@ package jetbrains.mps.text.rt;
 
 import jetbrains.mps.text.TextUnit;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
+
+import java.nio.charset.Charset;
 
 /**
  * WORK IN PROGRESS
@@ -46,7 +49,36 @@ public interface TextGenModelOutline {
    * @param unitName name of the unit
    * @param input sequence of inputs, primary input first. FIXME could be empty? Generally, why not?
    */
-  void registerTextUnit(@NotNull String unitName, SNode... input);
+  default void registerTextUnit(@NotNull String unitName, SNode... input) {
+    registerTextUnit(unitName, null, null, input);
+  }
+
+  /**
+   * {@link #registerTextUnit(String, SNode...)} alternative with explicit encoding
+   * @param unitName name of the unit
+   * @param encoding {@code null} indicates use default
+   * @param input @see {@link #registerTextUnit(String, SNode...)} above
+   */
+  default void registerTextUnit(@NotNull String unitName, @Nullable Charset encoding, SNode... input) {
+    registerTextUnit(unitName, null, encoding, input);
+  }
+
+  default void registerTextUnit(@NotNull String unitName, @Nullable String path, SNode... input) {
+    registerTextUnit(unitName, path, null, input);
+  }
+
+  /**
+   * Complete set of options to construct a text unit.
+   *
+   * XXX perhaps, worth to add UnitBuilder to stop growing list of parameters.
+   *
+   * {@link #registerTextUnit(String, SNode...)} alternative with an optional path and encoding
+   * @param unitName name of the unit
+   * @param unitPath path to the unit, defaults to qualified model name unless specified
+   * @param encoding {@code null} indicates use default
+   * @param input @see {@link #registerTextUnit(String, SNode...)} above
+   */
+  void registerTextUnit(@NotNull String unitName, @Nullable String unitPath, @Nullable Charset encoding, SNode... input);
 
 //  XXX perhaps, generation of a binary file shall start this way
 //  void registerBinaryUnit(@NotNull String unitName, SNode... input);

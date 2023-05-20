@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-rzckte8ndndq9pcydxdkogbfe4rsuu" />
+<product version="3" modelHash="-3snibrgd35cl8rvsb71wo2vggabdwnm">
+  <files names="TypesystemDescriptor.java:typeof_ConceptFunctionParameter_childNode_InferenceRule.java:typeof_ConceptFunctionParameter_node_InferenceRule.java:typeof_ConceptFunctionParameter_parameter_InferenceRule.java:typeof_ForConceptParameterDeclaration_InferenceRule.java" />
+</product>
 

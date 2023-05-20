@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MPSProject">
+    <projectModules>
+      <modulePath path="$PROJECT_DIR$/languages/jetbrains.mps.samples.PropertyDefinition/jetbrains.mps.samples.PropertyDefinition.mpl" folder="" />
+      <modulePath path="$PROJECT_DIR$/languages/jetbrains.mps.samples.PropertyDefinition/sandbox/jetbrains.mps.samples.PropertyDefinition.sandbox.msd" folder="" />
+      <modulePath path="$PROJECT_DIR$/solutions/jetbrains.mps.samples.propertyPersistence.build/jetbrains.mps.samples.propertyPersistence.build.msd" folder="" />
+      <modulePath path="$PROJECT_DIR$/solutions/jetbrains.mps.samples.propertyPersistence.ideaPlugin/jetbrains.mps.samples.propertyPersistence.ideaPlugin.msd" folder="" />
+      <modulePath path="$PROJECT_DIR$/solutions/jetbrains.mps.samples.propertyPersistenceDef/jetbrains.mps.samples.propertyPersistenceDef.msd" folder="" />
+    </projectModules>
+  </component>
+</project>

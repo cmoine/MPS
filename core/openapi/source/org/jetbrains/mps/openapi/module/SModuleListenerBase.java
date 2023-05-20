@@ -21,8 +21,11 @@ import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SModelReference;
 
 /**
- * Bare implementation of {@link SModuleListener} intended for subclassing
+ * Bare implementation of {@link SModuleListener} intended for subclassing.
+ * Now, with default methods inside the interface, of no real use.
+ * See {@link SRepositoryListenerBase} for considerations about removal of the class
  */
+@Deprecated(since = "2021.1", forRemoval = true)
 public class SModuleListenerBase implements SModuleListener {
   @Override
   public void modelAdded(SModule module, SModel model) {
@@ -44,9 +47,7 @@ public class SModuleListenerBase implements SModuleListener {
   public void modelRenamed(SModule module, SModel model, SModelReference oldRef) {
   }
 
-  /**
-   * To be pulled up
-   */
+  @Override
   public void moduleRenamed(@NotNull SModule module, @NotNull SModuleReference oldRef) {
   }
 

@@ -11,15 +11,17 @@ import org.jetbrains.mps.openapi.model.SNode;
 import java.util.List;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.openapi.editor.cells.CellTraversalUtil;
 import jetbrains.mps.smodel.action.SNodeFactoryOperations;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 
 public class TypeVariableDeclaration_addAuxBoundAfterBound_KeyMap extends KeyMapImpl {
   public TypeVariableDeclaration_addAuxBoundAfterBound_KeyMap() {
     this.setApplicableToEveryModel(false);
     KeyMapAction action;
-    action = new TypeVariableDeclaration_addAuxBoundAfterBound_KeyMap.TypeVariableDeclaration_addAuxBoundAfterBound_KeyMap_Action0();
+    action = new TypeVariableDeclaration_addAuxBoundAfterBound_KeyMap_Action0();
     this.putAction("any", "&", action);
   }
   public static class TypeVariableDeclaration_addAuxBoundAfterBound_KeyMap_Action0 extends KeyMapActionImpl {
@@ -50,14 +52,14 @@ public class TypeVariableDeclaration_addAuxBoundAfterBound_KeyMap extends KeyMap
         return false;
       }
 
-      // Selected node should be within TypeVariableDeclaration 
+      // Selected node should be within TypeVariableDeclaration
       SNode selectedNode = ListSequence.fromList(selectedNodes).first();
-      SNode typeVarDeclaration = SNodeOperations.getNodeAncestor(selectedNode, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x1024639ed74L, "jetbrains.mps.baseLanguage.structure.TypeVariableDeclaration"), true, false);
+      SNode typeVarDeclaration = SNodeOperations.getNodeAncestor(selectedNode, CONCEPTS.TypeVariableDeclaration$4Y, true, false);
       if (typeVarDeclaration == null) {
         return false;
       }
 
-      // Next cell should belong to some other SNode, not our typeVarDeclaration 
+      // Next cell should belong to some other SNode, not our typeVarDeclaration
       EditorCell selectedCell = editorContext.getSelectedCell();
       EditorCell nextLeaf = CellTraversalUtil.getNextLeaf(selectedCell);
       if (nextLeaf == null) {
@@ -67,11 +69,19 @@ public class TypeVariableDeclaration_addAuxBoundAfterBound_KeyMap extends KeyMap
       return nextCellNode != null && nextCellNode != typeVarDeclaration;
     }
     private void execute_internal(final EditorContext editorContext, final SNode node, final List<SNode> selectedNodes) {
-      SNode typeVarDeclaration = SNodeOperations.getNodeAncestor(ListSequence.fromList(selectedNodes).first(), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x1024639ed74L, "jetbrains.mps.baseLanguage.structure.TypeVariableDeclaration"), true, false);
-      SNodeFactoryOperations.addNewChild(typeVarDeclaration, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x1024639ed74L, 0x11ae913a476L, "auxBounds"), SNodeFactoryOperations.asInstanceConcept(MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x101de48bf9eL, "jetbrains.mps.baseLanguage.structure.ClassifierType")));
+      SNode typeVarDeclaration = SNodeOperations.getNodeAncestor(ListSequence.fromList(selectedNodes).first(), CONCEPTS.TypeVariableDeclaration$4Y, true, false);
+      SNodeFactoryOperations.addNewChild(typeVarDeclaration, LINKS.auxBounds$jgLr, null);
     }
     public String getKeyStroke() {
       return " &";
     }
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept TypeVariableDeclaration$4Y = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x1024639ed74L, "jetbrains.mps.baseLanguage.structure.TypeVariableDeclaration");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink auxBounds$jgLr = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x1024639ed74L, 0x11ae913a476L, "auxBounds");
   }
 }

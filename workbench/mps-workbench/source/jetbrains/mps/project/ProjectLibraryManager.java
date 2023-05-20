@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,52 +15,44 @@
  */
 package jetbrains.mps.project;
 
-import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.project.ProjectManagerListener;
 import jetbrains.mps.ide.MPSCoreComponents;
+import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.library.BaseLibraryManager;
+import jetbrains.mps.library.contributor.LibraryContributor;
 import jetbrains.mps.util.MacrosFactory;
 import jetbrains.mps.util.PathManager;
 import jetbrains.mps.vfs.FileSystem;
 import jetbrains.mps.vfs.IFile;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.util.Collections;
 
 @State(
   name = "ProjectLibraryManager",
   storages = @Storage("libraries.xml")
 )
-public class ProjectLibraryManager extends BaseLibraryManager implements ProjectComponent {
-  private Project myProject;
+public class ProjectLibraryManager extends BaseLibraryManager {
+  private final Project myProject;
 
-  public ProjectLibraryManager(Project project, DumbService dumbService, MPSCoreComponents coreComponents) {
-    super(coreComponents);
+  public static ProjectLibraryManager getInstance(Project ideaProject) {
+    return ideaProject.getService(ProjectLibraryManager.class);
+  }
+
+  public ProjectLibraryManager(Project project) {
+    // could not use MPSProject here as it depends from this component
     myProject = project;
-  }
-
-  @Override
-  public void initComponent() {
-    if (!myProject.isDefault()) {
-      super.initComponent();
+    if (null == DumbService.getInstance(project)) {
+      // DumbService dependency introduced in 90f537f7 to address MPS-12136.
+      // Likely, there's no such issue anymore, but better safe than sorry, ask DS to get
+      // initialized in advance
+      throw new IllegalStateException();
     }
-  }
-
-  @Override
-  public void disposeComponent() {
-    if (!myProject.isDefault()) {
-      super.disposeComponent();
-    }
-  }
-
-  @Override
-  public void projectOpened() {
-  }
-
-  @Override
-  public void projectClosed() {
   }
 
   @Override
@@ -74,7 +66,9 @@ public class ProjectLibraryManager extends BaseLibraryManager implements Project
   }
 
   private IFile getAnchorIFile() {
-    return FileSystem.getInstance().getFileByPath(getAnchorFile().getPath());
+    // FIXME createContributor() in superclass takes IFileSystem, can I use it here?
+    //       perhaps, MPSProject.getFileSystem?
+    return FileSystem.getInstance().getFile(getAnchorFile().getPath());
   }
 
   private File getAnchorFile() {
@@ -83,8 +77,27 @@ public class ProjectLibraryManager extends BaseLibraryManager implements Project
     return new File(PathManager.getHomePath());
   }
 
-  @Override
-  public String toString() {
-    return "ProjectLibraryManager [" + myProject.getName() + "]";
+  public static class ProjectListener implements ProjectManagerListener {
+    private LibraryContributor myContributor;
+
+    @Override
+    public void projectOpened(@NotNull Project project) {
+      if (project.isDefault()) {
+        return;
+      }
+      myContributor = ProjectLibraryManager.getInstance(project).createContributor(ProjectHelper.fromIdeaProject(project).getFileSystem());
+      MPSCoreComponents.getInstance().getLibraryInitializer().load(Collections.singletonList(myContributor));
+    }
+
+    @Override
+    public void projectClosed(@NotNull Project project) {
+      if (project.isDefault()) {
+        return;
+      }
+      if (myContributor != null) {
+        MPSCoreComponents.getInstance().getLibraryInitializer().unload(Collections.singletonList(myContributor));
+        myContributor = null;
+      }
+    }
   }
 }

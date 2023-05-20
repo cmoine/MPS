@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2016 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ public class DelayedChanges {
 
   private static final String MAP_SRC_TEMP_NODE = "mapSrcTempNode";
 
-  private final List<NodePostProcessor> myPostProcessors = new ArrayList<NodePostProcessor>();
+  private final List<NodePostProcessor> myPostProcessors = new ArrayList<>();
 
   public DelayedChanges() {
   }
@@ -51,20 +51,22 @@ public class DelayedChanges {
   public void doAllChanges(@NotNull TemplateGenerator generator) throws GenerationFailureException {
     SNode[] newOutputNodes = new SNode[myPostProcessors.size()];
     int i = 0;
+    ChildAdopter ca = new ChildAdopter(generator);
     for (NodePostProcessor p : myPostProcessors) {
       SNode child = p.substitute();
       if (child != p.getOutputAnchor()) {
-        ChildAdopter ca = new ChildAdopter(generator);
-        ca.checkIsExpectedLanguage(Collections.singletonList(child), p.getTemplateNode(), p.getTemplateContext());
+        generator.checkIsExpectedLanguage(Collections.singletonList(child), p.getTemplateNode(), p.getTemplateContext());
         child = ca.adopt(child, p.getTemplateContext());
         generator.replacePlaceholderNode(p, child);
       }
-
+      // even if not replaced, chances are there's post-processing code
       newOutputNodes[i++] = child;
     }
     i = 0;
     for (NodePostProcessor p : myPostProcessors) {
-      p.postProcess(newOutputNodes[i++]);
+      if (newOutputNodes[i] != null) {
+        p.postProcess(newOutputNodes[i++]);
+      }
     }
     myPostProcessors.clear();
   }

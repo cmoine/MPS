@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="2w1qm3dmyrmtljfl9fvt9i18zlskxoy" />
+<product version="3" modelHash="-219xn8ng85ebl8qsogu9fn8mp4e6ifz">
+  <files names="AbstractTableModel.java:ColumnNotFoundException.java:EditorCell_Table.java:HierarchycalTableModel.java:HierarchycalTableModelWithHeader.java:TableColumnSelection.java:TableModel.java:TableModelCreator.java:TableModelFactory.java:Utils.java:XYCTableModel.java" />
+</product>
 

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-7fwi0e8gg1mz45tzbaxrklehum67z03" />
+<product version="3" modelHash="-9rvqjo6xypcwcg37bkgo1sxqdyb0crt">
+  <files names="TestClass.java:TraceInfoTest.java" />
+</product>
 

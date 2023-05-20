@@ -5,14 +5,12 @@ package jetbrains.mps.lang.editor.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.mps.openapi.language.SConcept;
 import java.util.List;
 import java.util.Arrays;
 import org.jetbrains.annotations.NotNull;
@@ -20,28 +18,47 @@ import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SInterfaceConcept;
 
 public final class StyleClassItem__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1143b191dc6L, "jetbrains.mps.lang.editor.structure.StyleClassItem");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<Boolean> isApplicableTo_idhEUcU7K = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isApplicableTo").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("hEUcU7K").registry(REGISTRY).build(SMethodBuilder.createJavaParameter((Class<SNode>) ((Class) Object.class), ""));
-  public static final SMethod<SNode> getStyleContainer_id6VCLXpKS8DC = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getStyleContainer").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("6VCLXpKS8DC").registry(REGISTRY).build();
+  public static final SMethod<Boolean> isApplicableToCell_idhEUcU7K = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isApplicableToCell").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1214304723440L).languageId(0xa83a7ff23bde13baL, 0x18bc659203a64e29L).build2(SMethodBuilder.createJavaParameter((Class<SNode>) ((Class) Object.class), ""));
+  public static final SMethod<Boolean> isApplicableToCellConcept_id2u3gVK1lsco = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isApplicableToCellConcept").modifiers(9, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(2847193864183595800L).languageId(0xa83a7ff23bde13baL, 0x18bc659203a64e29L).build2(SMethodBuilder.createJavaParameter((Class<SConcept>) ((Class) Object.class), ""));
+  public static final SMethod<Boolean> isApplicableForLayout_iditlittOTie = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isApplicableForLayout").modifiers(9, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(332515575061517454L).languageId(0xa83a7ff23bde13baL, 0x18bc659203a64e29L).build2(SMethodBuilder.createJavaParameter((Class<SConcept>) ((Class) Object.class), ""));
+  public static final SMethod<Boolean> isApplicableInLayout_iditlittOTkB = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isApplicableInLayout").modifiers(9, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(332515575061517607L).languageId(0xa83a7ff23bde13baL, 0x18bc659203a64e29L).build2(SMethodBuilder.createJavaParameter((Class<SConcept>) ((Class) Object.class), ""));
+  public static final SMethod<SNode> getStyleContainer_id6VCLXpKS8DC = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getStyleContainer").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(7991857262599637608L).languageId(0xa83a7ff23bde13baL, 0x18bc659203a64e29L).build2();
 
-  private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(isApplicableTo_idhEUcU7K, getStyleContainer_id6VCLXpKS8DC);
+  private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(isApplicableToCell_idhEUcU7K, isApplicableToCellConcept_id2u3gVK1lsco, isApplicableForLayout_iditlittOTie, isApplicableInLayout_iditlittOTkB, getStyleContainer_id6VCLXpKS8DC);
 
   private static void ___init___(@NotNull SNode __thisNode__) {
   }
 
-  /*package*/ static boolean isApplicableTo_idhEUcU7K(@NotNull SNode __thisNode__, SNode cellModel) {
+  @Deprecated
+  /*package*/ static boolean isApplicableToCell_idhEUcU7K(@NotNull SNode __thisNode__, SNode cellModel) {
+    // Since MPS 3.5 is deprecated.
+    // Use one of isApplicableToCellConcept/isApplicableForLayout/isApplicableInLayout
+    // methods instead
+    return true;
+  }
+  /*package*/ static boolean isApplicableToCellConcept_id2u3gVK1lsco(@NotNull SAbstractConcept __thisConcept__, SConcept cellConcept) {
+    // Return true if this StyleClassItem may be applied to the cell with the specified concept
+    return true;
+  }
+  /*package*/ static boolean isApplicableForLayout_iditlittOTie(@NotNull SAbstractConcept __thisConcept__, SConcept layoutConcept) {
+    // Return true if this StyleClassItem may be applied for the cell having specified layout
+    // null passed as an argument for cells having no layouts (e.g. CellModel_Constant instance)
+    return true;
+  }
+  /*package*/ static boolean isApplicableInLayout_iditlittOTkB(@NotNull SAbstractConcept __thisConcept__, SConcept layoutConcept) {
+    // Return true if this StyleClassItem may be applied for the cell located inside specified layout
     return true;
   }
   /*package*/ static SNode getStyleContainer_id6VCLXpKS8DC(@NotNull SNode __thisNode__) {
-    return SNodeOperations.as(SNodeOperations.getParent(__thisNode__), MetaAdapterFactory.getInterfaceConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11beb039542L, "jetbrains.mps.lang.editor.structure.IStyleContainer"));
+    return SNodeOperations.as(SNodeOperations.getParent(__thisNode__), CONCEPTS.IStyleContainer$rq);
   }
 
   /*package*/ StyleClassItem__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -57,8 +74,8 @@ public final class StyleClassItem__BehaviorDescriptor extends BaseBHDescriptor {
     }
     switch (methodIndex) {
       case 0:
-        return (T) ((Boolean) isApplicableTo_idhEUcU7K(node, (SNode) parameters[0]));
-      case 1:
+        return (T) ((Boolean) isApplicableToCell_idhEUcU7K(node, (SNode) parameters[0]));
+      case 4:
         return (T) ((SNode) getStyleContainer_id6VCLXpKS8DC(node));
       default:
         throw new BHMethodNotFoundException(this, method);
@@ -72,6 +89,12 @@ public final class StyleClassItem__BehaviorDescriptor extends BaseBHDescriptor {
       throw new BHMethodNotFoundException(this, method);
     }
     switch (methodIndex) {
+      case 1:
+        return (T) ((Boolean) isApplicableToCellConcept_id2u3gVK1lsco(concept, (SConcept) parameters[0]));
+      case 2:
+        return (T) ((Boolean) isApplicableForLayout_iditlittOTie(concept, (SConcept) parameters[0]));
+      case 3:
+        return (T) ((Boolean) isApplicableInLayout_iditlittOTkB(concept, (SConcept) parameters[0]));
       default:
         throw new BHMethodNotFoundException(this, method);
     }
@@ -87,5 +110,9 @@ public final class StyleClassItem__BehaviorDescriptor extends BaseBHDescriptor {
   @Override
   public SAbstractConcept getConcept() {
     return CONCEPT;
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SInterfaceConcept IStyleContainer$rq = MetaAdapterFactory.getInterfaceConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11beb039542L, "jetbrains.mps.lang.editor.structure.IStyleContainer");
   }
 }

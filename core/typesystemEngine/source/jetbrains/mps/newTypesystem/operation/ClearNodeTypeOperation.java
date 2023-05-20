@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@ package jetbrains.mps.newTypesystem.operation;
 
 import jetbrains.mps.errors.IErrorReporter;
 import jetbrains.mps.newTypesystem.state.State;
+import jetbrains.mps.smodel.SNodeUtil;
 import org.jetbrains.mps.openapi.model.SNode;
 
 import java.util.List;
@@ -52,6 +53,6 @@ public class ClearNodeTypeOperation extends AbstractOperation {
 
   @Override
   public String getPresentation() {
-    return "Type and errors cleared for node: " + myNode;
+    return String.format("Type and errors cleared for node: %s", SNodeUtil.getPresentation(myNode));
   }
 }

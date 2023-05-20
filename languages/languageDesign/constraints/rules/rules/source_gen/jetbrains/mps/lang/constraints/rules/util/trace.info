@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <root nodeRef="r:2375bfe1-47cd-48de-8bde-6170425d6ec2(jetbrains.mps.lang.constraints.rules.util)/4310380201428821519">
+    <file name="RequiredDefsCalculator.java">
+      <node id="2716118816011280989" at="25,0,26,0" concept="2" trace="myMemorized" />
+      <node id="2716118816011595667" at="31,55,32,30" concept="6" />
+      <node id="2716118816011502613" at="36,63,37,58" concept="6" />
+      <node id="2716118816011552412" at="38,5,39,96" concept="1" />
+      <node id="2716118816011484352" at="39,96,40,140" concept="5" />
+      <node id="2716118816015995798" at="42,39,43,48" concept="5" />
+      <node id="2716118816011484376" at="43,48,44,127" concept="6" />
+      <node id="2716118816011484399" at="50,44,51,81" concept="6" />
+      <node id="2716118816011509914" at="55,24,56,121" concept="1" />
+      <node id="2716118816011484413" at="56,121,57,24" concept="6" />
+      <node id="4310380201428821519" at="61,0,62,0" concept="7" trace="TypedDefReference$yw" />
+      <node id="4310380201428821519" at="62,0,63,0" concept="7" trace="DefForRule$_k" />
+      <node id="4310380201428821519" at="66,0,67,0" concept="7" trace="declaration$xU6a" />
+      <node id="4310380201428821519" at="67,0,68,0" concept="7" trace="condition$h$Ae" />
+      <node id="4310380201428865954" at="27,0,29,0" concept="0" trace="RequiredDefsCalculator#()V" />
+      <node id="2716118816011490648" at="35,48,38,5" concept="3" />
+      <node id="2716118816011484397" at="50,0,53,0" concept="4" trace="accept#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="629795297587671087" at="30,0,34,0" concept="4" trace="calculate#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/util/List;" />
+      <node id="2716118816011484374" at="42,0,46,0" concept="4" trace="accept#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="2716118816011484392" at="48,44,53,19" concept="6" />
+      <node id="2716118816011484360" at="40,140,46,7" concept="5" />
+      <node id="2716118816011484390" at="48,0,55,0" concept="4" trace="select#(Lorg/jetbrains/mps/openapi/model/SNode;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="2716118816011484384" at="46,7,55,24" concept="5" />
+      <node id="2716118816011484350" at="35,0,59,0" concept="4" trace="calculate0#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/util/List;" />
+      <scope id="4310380201428865958" at="27,35,27,35" />
+      <scope id="4310380201428867806" at="31,55,32,30" />
+      <scope id="2716118816011490650" at="36,63,37,58" />
+      <scope id="2716118816011484398" at="50,44,51,81" />
+      <scope id="4310380201428865954" at="27,0,29,0" />
+      <scope id="2716118816011484375" at="42,39,44,127">
+        <var name="calculate0" id="2716118816015995799" />
+      </scope>
+      <scope id="2716118816011484397" at="50,0,53,0">
+        <var name="ref" id="2716118816011484397" />
+      </scope>
+      <scope id="629795297587671087" at="30,0,34,0">
+        <var name="member" id="4310380201428870910" />
+      </scope>
+      <scope id="2716118816011484374" at="42,0,46,0">
+        <var name="it" id="2716118816011484374" />
+      </scope>
+      <scope id="2716118816011484391" at="48,44,53,19" />
+      <scope id="2716118816011484390" at="48,0,55,0">
+        <var name="def" id="2716118816011484390" />
+      </scope>
+      <scope id="2716118816011484351" at="35,48,57,24">
+        <var name="defsDeclWithApplicabilityOrCustomCell" id="2716118816011484361" />
+        <var name="requiredDefs" id="2716118816011484385" />
+        <var name="usedDefs" id="2716118816011484353" />
+      </scope>
+      <scope id="2716118816011484350" at="35,0,59,0">
+        <var name="member" id="2716118816011487995" />
+      </scope>
+      <unit id="2716118816011484397" at="49,57,53,9" name="jetbrains.mps.lang.constraints.rules.util.RequiredDefsCalculator$2$1" />
+      <unit id="4310380201428821519" at="60,0,64,0" name="jetbrains.mps.lang.constraints.rules.util.RequiredDefsCalculator$CONCEPTS" />
+      <unit id="4310380201428821519" at="65,0,69,0" name="jetbrains.mps.lang.constraints.rules.util.RequiredDefsCalculator$LINKS" />
+      <unit id="2716118816011484374" at="41,236,46,5" name="jetbrains.mps.lang.constraints.rules.util.RequiredDefsCalculator$1" />
+      <unit id="2716118816011484390" at="47,109,55,5" name="jetbrains.mps.lang.constraints.rules.util.RequiredDefsCalculator$2" />
+      <unit id="4310380201428821519" at="24,0,70,0" name="jetbrains.mps.lang.constraints.rules.util.RequiredDefsCalculator" />
+    </file>
+  </root>
+</debug-info>
+

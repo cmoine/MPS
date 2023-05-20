@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 package jetbrains.mps.nodeEditor.selection;
 
 import jetbrains.mps.editor.runtime.style.StyleAttributesUtil;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.nodeEditor.EditorComponent;
 import jetbrains.mps.nodeEditor.FocusPolicyUtil;
 import jetbrains.mps.nodeEditor.cells.EditorCell_Error;
@@ -28,9 +29,8 @@ import jetbrains.mps.openapi.editor.selection.SelectionInfo;
 import jetbrains.mps.openapi.editor.selection.SelectionListener;
 import jetbrains.mps.openapi.editor.selection.SelectionManager;
 import jetbrains.mps.openapi.editor.selection.SelectionStoreException;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNode;
 
 import java.util.ArrayList;
@@ -40,12 +40,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class SelectionManagerImpl implements SelectionManager {
-  private static final Logger LOG = LogManager.getLogger(SelectionManagerImpl.class);
+  private static final Logger LOG = Logger.getLogger(SelectionManagerImpl.class);
 
   @NotNull
   private EditorComponent myEditorComponent;
-  private Deque<Selection> mySelectionStack = new LinkedList<Selection>();
-  private List<SelectionListener> mySelectionListeners = new LinkedList<SelectionListener>();
+  private Deque<Selection> mySelectionStack = new LinkedList<>();
+  private List<SelectionListener> mySelectionListeners = new LinkedList<>();
 
   public SelectionManagerImpl(@NotNull EditorComponent editorComponent) {
     myEditorComponent = editorComponent;
@@ -60,10 +60,12 @@ public class SelectionManagerImpl implements SelectionManager {
     doChangeSelection(oldSelection, null);
   }
 
+  @Nullable
   public Selection getSelection() {
     return mySelectionStack.isEmpty() ? null : mySelectionStack.getLast();
   }
 
+  @Nullable
   public Selection getDeepestSelection() {
     return mySelectionStack.isEmpty() ? null : mySelectionStack.getFirst();
   }
@@ -136,18 +138,18 @@ public class SelectionManagerImpl implements SelectionManager {
 
   @Override
   public Iterable<Selection> getSelectionStackIterable() {
-    return new ArrayList<Selection>(mySelectionStack);
+    return new ArrayList<>(mySelectionStack);
   }
 
   @Override
   public List<SelectionInfo> getSelectionInfoStack() {
-    List<SelectionInfo> result = new ArrayList<SelectionInfo>();
+    List<SelectionInfo> result = new ArrayList<>();
     try {
       for (Selection nextSelection : mySelectionStack) {
         result.add(nextSelection.getSelectionInfo());
       }
     } catch (SelectionStoreException e) {
-      LOG.error(null, e);
+      LOG.error(e);
       // unable to store selection - cleaning selection stack
       result.clear();
     }
@@ -156,7 +158,7 @@ public class SelectionManagerImpl implements SelectionManager {
 
   @Override
   public void setSelectionInfoStack(@NotNull List<SelectionInfo> selectionStack) {
-    List<Selection> newSelectionStack = new ArrayList<Selection>();
+    List<Selection> newSelectionStack = new ArrayList<>();
     for (SelectionInfo nextSelectionInfo : selectionStack) {
       Selection selection = nextSelectionInfo.createSelection(myEditorComponent);
       if (selection != null) {
@@ -216,7 +218,7 @@ public class SelectionManagerImpl implements SelectionManager {
       try {
         nextListener.selectionChanged(myEditorComponent, oldSelection, newSelection);
       } catch (Exception e) {
-        LOG.error(null, e);
+        LOG.error(e);
       }
     }
   }
@@ -275,7 +277,7 @@ public class SelectionManagerImpl implements SelectionManager {
   }
 
   private EditorCell_Label refineUsingCursorPositioningRules(EditorCell_Label labelCell, String cellId, boolean isFirstPositionRequested,
-      boolean isLastPositionRequested) {
+                                                             boolean isLastPositionRequested) {
     if (isFirstPositionRequested && !StyleAttributesUtil.isFirstPositionAllowed(labelCell.getStyle())) {
       return getNextApplicableCell(labelCell, false, SelectionManager.FIRST_EDITABLE_CELL.equals(cellId));
     }
@@ -302,11 +304,12 @@ public class SelectionManagerImpl implements SelectionManager {
     EditorCell cell = findCell(node, cellId);
     if (cell instanceof EditorCell_Label) {
       EditorCell_Label label = (EditorCell_Label) cell;
-      if (selectionStart == -1) {
-        selectionStart = label.getText().length();
+      // Interpret negative values as indexes from the back, stop at 0, if necessary
+      if (selectionStart < 0) {
+        selectionStart = Math.max(label.getText().length() + 1 + selectionStart, 0);
       }
-      if (selectionEnd == -1) {
-        selectionEnd = label.getText().length();
+      if (selectionEnd < 0) {
+        selectionEnd = Math.max(label.getText().length() + 1 + selectionEnd, 0);
       }
 
       setSelection(label, selectionEnd, selectionStart, selectionEnd);
@@ -348,13 +351,14 @@ public class SelectionManagerImpl implements SelectionManager {
   }
 
   private boolean shouldUseForwardIterator(String cellId) {
-    String[] selectorsShouldUseBackwardIterator = new String[]{LAST_CELL, LAST_EDITABLE_CELL,LAST_ERROR_CELL};
-    return !Arrays.stream(selectorsShouldUseBackwardIterator).anyMatch(s -> s.equals(cellId));
+    String[] selectorsShouldUseBackwardIterator = new String[]{LAST_CELL, LAST_EDITABLE_CELL, LAST_ERROR_CELL};
+    return Arrays.stream(selectorsShouldUseBackwardIterator).noneMatch(s -> s.equals(cellId));
   }
 
   private boolean shouldIgnoreChildNodes(String cellId) {
-    String[] selectorsShouldNotIgnoreChildNodes = new String[]{FIRST_CELL, LAST_CELL, FIRST_EDITABLE_CELL, LAST_EDITABLE_CELL, FIRST_ERROR_CELL, LAST_ERROR_CELL};
-    return !Arrays.stream(selectorsShouldNotIgnoreChildNodes).anyMatch(s -> s.equals(cellId));
+    String[] selectorsShouldNotIgnoreChildNodes =
+        new String[]{FIRST_CELL, LAST_CELL, FIRST_EDITABLE_CELL, LAST_EDITABLE_CELL, FIRST_ERROR_CELL, LAST_ERROR_CELL};
+    return Arrays.stream(selectorsShouldNotIgnoreChildNodes).noneMatch(s -> s.equals(cellId));
   }
 
   private boolean isSpecifiedById(EditorCell cell, String requestedCellId) {
@@ -388,4 +392,6 @@ public class SelectionManagerImpl implements SelectionManager {
     }
     return false;
   }
+
 }
+

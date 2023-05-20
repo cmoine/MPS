@@ -5,13 +5,12 @@ package jetbrains.mps.baseLanguage.tuples.util;
 import java.util.List;
 import jetbrains.mps.baseLanguage.tuples.runtime.Tuples;
 import jetbrains.mps.internal.collections.runtime.Sequence;
-import jetbrains.mps.internal.collections.runtime.ArrayUtils;
 import jetbrains.mps.baseLanguage.tuples.runtime.MultiTuple;
 
 public class MPS11114 {
   public MPS11114() {
   }
   public static List<Tuples._2<Integer, String>> returnTuples() {
-    return Sequence.fromIterable(Sequence.fromArray(ArrayUtils.asArray(MultiTuple.<Integer,String>from(1, "foo"), MultiTuple.<Integer,String>from(2, "bar")))).toListSequence();
+    return Sequence.fromIterable(Sequence.fromArray(Tuples.asArray(MultiTuple.<Integer,String>from(1, "foo"), MultiTuple.<Integer,String>from(2, "bar")))).toListSequence();
   }
 }

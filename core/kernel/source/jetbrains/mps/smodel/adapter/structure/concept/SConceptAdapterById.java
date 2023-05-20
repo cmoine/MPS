@@ -31,8 +31,6 @@ import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.language.SLanguage;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
-import org.jetbrains.mps.openapi.model.SNodeReference;
-import org.jetbrains.mps.openapi.module.SRepository;
 
 public final class SConceptAdapterById extends SConceptAdapter implements SConcept {
   public static final String CONCEPT_PREFIX = "c";
@@ -113,13 +111,18 @@ public final class SConceptAdapterById extends SConceptAdapter implements SConce
   }
 
   @Override
+  protected boolean isBootstrap() {
+    return myIsBootstrap;
+  }
+
+  @Override
   protected SNode findInModel(SModel structureModel) {
     return structureModel.getNode(new Regular(myConceptId.getIdValue()));
   }
 
   @Override
   public String serialize() {
-    return CONCEPT_PREFIX + ID_DELIM + myConceptId.serialize() + ID_DELIM + myFqName;
+    return CONCEPT_PREFIX + ID_DELIM + myConceptId.serialize() + ID_DELIM + getQualifiedName();
   }
 
   public static SConceptAdapterById deserialize(String s) {

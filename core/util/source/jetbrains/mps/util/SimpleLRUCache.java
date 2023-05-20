@@ -34,12 +34,12 @@ public class SimpleLRUCache<K> {
   private final AtomicInteger roomLeftSecondLevel;
 
   private final ConcurrentHashMap<K, K> firstLevelCache; // aka L1
-  private final ConcurrentLinkedQueue<K> firstLevelQueue = new ConcurrentLinkedQueue<K>(); // aka Q1
+  private final ConcurrentLinkedQueue<K> firstLevelQueue = new ConcurrentLinkedQueue<>(); // aka Q1
 
   private final ConcurrentHashMap<K, K> secondLevelCache; // aka L2
-  private final ConcurrentLinkedQueue<K> secondLevelQueue = new ConcurrentLinkedQueue<K>(); // aka Q2
+  private final ConcurrentLinkedQueue<K> secondLevelQueue = new ConcurrentLinkedQueue<>(); // aka Q2
 
-  private final ConcurrentHashMap<K, K> transitionalCache = new ConcurrentHashMap<K, K>();
+  private final ConcurrentHashMap<K, K> transitionalCache = new ConcurrentHashMap<>();
 
   private int promotesBeforeCleanupInitialValue;
   private final AtomicInteger promotesBeforeCleanup;
@@ -50,8 +50,8 @@ public class SimpleLRUCache<K> {
     roomLeftFirstLevel = new AtomicInteger(sizeL1);
     roomLeftSecondLevel = new AtomicInteger(sizeL2);
     // compensate HashMap size for default load factor of 0.75
-    firstLevelCache = new ConcurrentHashMap<K, K>(sizeL1 * 4 / 3);
-    secondLevelCache = new ConcurrentHashMap<K, K>(sizeL2 * 4 / 3);
+    firstLevelCache = new ConcurrentHashMap<>(sizeL1 * 4 / 3);
+    secondLevelCache = new ConcurrentHashMap<>(sizeL2 * 4 / 3);
     promotesBeforeCleanupInitialValue = (int) (maxSize * CLEANUP_Q1_RATIO);
     promotesBeforeCleanup = new AtomicInteger(promotesBeforeCleanupInitialValue);
   }

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="d9ixkstkcyl3kzrbyh4tbx4n2g15gcv" />
+<product version="3" modelHash="-cyolm70ai9javt4rjai9uyb1fzz8608">
+  <files names="AbstractAntiquotation_DataFlow.java:DataFlowAspectDescriptorImpl.java:ModelNodeInitializer_DataFlow.java:NodeBuilder_DataFlow.java:Quotation_DataFlow.java" />
+</product>
 

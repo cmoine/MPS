@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,27 +15,30 @@
  */
 package jetbrains.mps.messages;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import jetbrains.mps.logging.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.module.SModule;
 
+import java.time.Instant;
+
 /**
  * @author Kostik
  */
 public class Message implements IMessage {
-  private static final Logger LOG = LogManager.getLogger(Message.class);
+  private static final Logger LOG = Logger.getLogger(Message.class);
 
-  private String mySender;
-  private MessageKind myKind;
-  private String myText;
+  private final String mySender;
+  private final MessageKind myKind;
+  private final String myText;
+  private final Instant myCreationTime = Instant.now();
   private Throwable myException;
   private String myHelpUrl;
-  private long myCreationTime = System.currentTimeMillis();
-  private Object myHintObject; public Message(MessageKind kind, @Nullable String sender, String text) {
+  private Object myHintObject;
+
+  public Message(MessageKind kind, @Nullable String sender, String text) {
     myKind = kind;
     mySender = sender;
     myText = text;
@@ -61,7 +64,7 @@ public class Message implements IMessage {
   /**
    * @return <code>this</code> for convenience
    */
-  public Message setException(Throwable exception) {
+  public Message setException(@Nullable Throwable exception) {
     myException = exception;
     return this;
   }
@@ -93,7 +96,7 @@ public class Message implements IMessage {
 
   @Override
   public long getCreationTime() {
-    return myCreationTime;
+    return myCreationTime.toEpochMilli();
   }
 
   /**
@@ -139,5 +142,9 @@ public class Message implements IMessage {
       m.setException(ex);
     }
     return m;
+  }
+
+  public static IMessage info(@NotNull Class<?> sender, @NotNull String text, @Nullable Object hint, @Nullable Throwable ex) {
+    return new Message(MessageKind.INFORMATION, sender, text).setHintObject(hint).setException(ex);
   }
 }

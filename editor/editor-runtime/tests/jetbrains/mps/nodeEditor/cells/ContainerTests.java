@@ -34,6 +34,7 @@ import jetbrains.mps.openapi.editor.message.SimpleEditorMessage;
 import jetbrains.mps.openapi.editor.style.Style;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.language.SConceptFeature;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.util.Condition;
 import org.junit.AfterClass;
@@ -234,12 +235,19 @@ public class ContainerTests<T> extends AbstractContainerParameterizedTest<T> {
       return null;
     }
 
+  @Deprecated(since = "2018.2", forRemoval = true)
     @Override
-    public void setRole(String role) {
+    public String getRole() {
+      return null;
     }
 
     @Override
-    public String getRole() {
+    public void setSRole(SConceptFeature role) {
+
+    }
+
+    @Override
+    public SConceptFeature getSRole() {
       return null;
     }
 

@@ -31,15 +31,10 @@ import java.util.*;
 public class SubtypingUtil {
 
   public static Set<SNode> mostSpecificTypes(Set<SNode> nodes) {
-    Set<SNode> residualNodes = new THashSet<SNode>(nodes);
+    Set<SNode> residualNodes = new THashSet<>(nodes);
     while (residualNodes.size() > 1) {
-      List<SNode> nodesToIterate = new ArrayList<SNode>(residualNodes);
-      Collections.sort(nodesToIterate, new Comparator<SNode>() {
-        @Override
-        public int compare(SNode o1, SNode o2) {
-          return TypesUtil.depth(o2) - TypesUtil.depth(o1);
-        }
-      });
+      List<SNode> nodesToIterate = new ArrayList<>(residualNodes);
+      Collections.sort(nodesToIterate, (o1, o2) -> TypesUtil.depth(o2) - TypesUtil.depth(o1));
       boolean wasChange = false;
       int size = nodesToIterate.size();
       for (int i = 0; i < size; i++) {
@@ -87,15 +82,10 @@ public class SubtypingUtil {
     if (types.isEmpty()) return  null;
     if (types.size() == 1) return types.iterator().next();
     if (types.size() > 1) {
-      Collections.sort(types, new Comparator<SNode>() {
-        @Override
-        public int compare(SNode node1, SNode node2) {
-          return node1.getPresentation().compareTo(node2.getPresentation());
-        }
-      });
+      Collections.sort(types, (node1, node2) -> node1.getPresentation().compareTo(node2.getPresentation()));
       types = SubtypingUtil.eliminateSubTypes(types);
     }
-    return LatticeUtil.meetNodes(new THashSet<SNode>(SubtypingUtil.leastCommonSuperTypes(types, context)));
+    return LatticeUtil.meetNodes(new THashSet<>(SubtypingUtil.leastCommonSuperTypes(types, context)));
   }
 
   public static List<SNode> leastCommonSuperTypes(List<SNode> types, TypeCheckingContext context) {
@@ -127,10 +117,10 @@ public class SubtypingUtil {
     StructuralNodeSet<?> frontier = new StructuralNodeSet();
     StructuralNodeSet<?> newFrontier = new StructuralNodeSet();
     StructuralNodeSet<?> yetPassed = new StructuralNodeSet();
-    Set<SNode> result = new THashSet<SNode>();
+    Set<SNode> result = new THashSet<>();
     frontier.add(left);
     while (!frontier.isEmpty()) {
-      Set<SNode> yetPassedRaw = new THashSet<SNode>();
+      Set<SNode> yetPassedRaw = new THashSet<>();
       //collecting a set of frontier's ancestors
       StructuralNodeSet<?> ancestors = new StructuralNodeSet();
       for (SNode node : frontier) {
@@ -147,9 +137,7 @@ public class SubtypingUtil {
           }
         }
       }
-      for (SNode passedNodeRaw : yetPassedRaw) {
-        yetPassed.add(passedNodeRaw);
-      }
+      yetPassed.addAll(yetPassedRaw);
       for (SNode passedNode : yetPassed) {
         ancestors.removeStructurally(passedNode);
       }
@@ -170,8 +158,8 @@ public class SubtypingUtil {
     abstract boolean inRelation(SNode left, SNode right);
 
     public List<SNode> doEliminate (Collection<SNode> types) {
-      List<SNode> result = new LinkedList<SNode>();
-      Set<SNode> toRemove = new THashSet<SNode>();
+      List<SNode> result = new LinkedList<>();
+      Set<SNode> toRemove = new THashSet<>();
       for (SNode current : types) {
         boolean toAdd = true;
         for (SNode resultType : result) {

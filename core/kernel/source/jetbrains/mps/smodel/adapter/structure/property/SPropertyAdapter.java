@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,78 +15,82 @@
  */
 package jetbrains.mps.smodel.adapter.structure.property;
 
-import jetbrains.mps.core.aspects.behaviour.SMethodTrimmedId;
-import jetbrains.mps.smodel.MPSModuleRepository;
-import jetbrains.mps.smodel.SNodeId;
-import jetbrains.mps.smodel.SNodeUtil;
+import jetbrains.mps.smodel.adapter.ids.SPropertyId;
+import jetbrains.mps.smodel.adapter.ids.STypeId;
 import jetbrains.mps.smodel.adapter.structure.FormatException;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.smodel.adapter.structure.concept.SDataTypeAdapter;
-import jetbrains.mps.smodel.adapter.structure.concept.SPrimitiveDataTypeAdapter;
-import jetbrains.mps.smodel.behaviour.BHReflection;
-import jetbrains.mps.smodel.runtime.LinkDescriptor;
+import jetbrains.mps.smodel.adapter.structure.types.InvalidDataType;
+import jetbrains.mps.smodel.adapter.structure.types.TypeRegistry;
 import jetbrains.mps.smodel.runtime.PropertyDescriptor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.language.SDataType;
-import org.jetbrains.mps.openapi.language.SPrimitiveDataType;
 import org.jetbrains.mps.openapi.language.SProperty;
-import org.jetbrains.mps.openapi.model.SModel;
-import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.mps.openapi.language.SType;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 
 public abstract class SPropertyAdapter implements SProperty {
   public static final String ID_DELIM = ":";
 
-  protected String myPropertyName;
+  protected final SPropertyId myPropertyId;
+  protected final String myPropertyName;
 
-  public SPropertyAdapter(String name) {
+  public SPropertyAdapter(@NotNull SPropertyId propertyId, @NotNull String name) {
+    myPropertyId = propertyId;
     myPropertyName = name;
   }
 
   @NotNull
   public abstract SAbstractConcept getOwner();
 
+  @NotNull
+  public final SPropertyId getId() {
+    return myPropertyId;
+  }
+
   @Nullable
-  public abstract PropertyDescriptor getPropertyDescriptor();
+  protected abstract PropertyDescriptor getPropertyDescriptor();
 
   @Override
-  public String toString() {
-    return myPropertyName;
+  public boolean isValid() {
+    return getPropertyDescriptor() != null;
   }
 
   @Override
+  public String toString() {
+    return getName();
+  }
+
+  @Override
+  @NotNull
   public SDataType getType() {
-    // TODO reimplement using ConceptDescriptor
-    SNode propertyNode = getDeclarationNode();
-    if (propertyNode == null) {
-      return null;
+    PropertyDescriptor pd = getPropertyDescriptor();
+    if (pd == null) {
+      return new InvalidDataType("??? (no property descriptor)");
     }
 
-    SNode dataType = propertyNode.getReferenceTarget("dataType");
-    if (dataType == null) {
-      return null;
+    final STypeId dataTypeId = pd.getDataTypeId();
+    if (dataTypeId != null) {
+      final SType type = TypeRegistry.getInstance().getType(dataTypeId);
+      if (type instanceof SDataType) {
+        return (SDataType) type;
+      }
+      return new InvalidDataType(type.toString() + " (not a data type)");
     }
-    if (dataType.isInstanceOfConcept(SNodeUtil.concept_PrimitiveDataTypeDeclaration)) {
-      Boolean isBoolean = (Boolean) BHReflection.invoke(dataType, SMethodTrimmedId.create("isBoolean",
-          MetaAdapterFactory.getConcept(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xfc3652de27L,
-              "jetbrains.mps.lang.structure.structure.PrimitiveDataTypeDeclaration"), "hKtG1tp"));
-      Boolean isInteger = (Boolean) BHReflection.invoke(dataType, SMethodTrimmedId.create("isInteger",
-          MetaAdapterFactory.getConcept(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xfc3652de27L,
-              "jetbrains.mps.lang.structure.structure.PrimitiveDataTypeDeclaration"), "hKtFYCF"));
 
-      return new SPrimitiveDataTypeAdapter((
-          isBoolean ? SPrimitiveDataType.BOOL : ((isInteger ? SPrimitiveDataType.INT : SPrimitiveDataType.STRING)))
-      );
-    }
-    return new SDataTypeAdapter();
+    return new InvalidDataType("??? (type id not specified)");
   }
 
   @Override
   public boolean isValid(String string) {
-    // TODO implement
-    return true;
+    return getType().fromString(string) != SType.NOT_A_VALUE;
+  }
+
+  @Nullable
+  @Override
+  public SNodeReference getSourceNode() {
+    final PropertyDescriptor pd = getPropertyDescriptor();
+    return pd == null ? null : pd.getSourceNode();
   }
 
   public abstract String serialize();

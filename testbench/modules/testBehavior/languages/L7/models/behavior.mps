@@ -2,7 +2,7 @@
 <model ref="r:c2ede4d9-ba61-4abd-becb-13ff09cc0b21(BHL7.behavior)">
   <persistence version="9" />
   <languages>
-    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="0" />
+    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="2" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -796,6 +796,30 @@
     </node>
     <node concept="13hLZK" id="6r9lTJu8BJK" role="13h7CW">
       <node concept="3clFbS" id="6r9lTJu8BJL" role="2VODD2" />
+    </node>
+  </node>
+  <node concept="13h7C7" id="6nxN9oSBS4X">
+    <ref role="13h7C2" to="n871:6nxN9oSBS4W" resolve="L" />
+    <node concept="13i0hz" id="6nxN9oSBS58" role="13h7CS">
+      <property role="TrG5h" value="foo" />
+      <property role="13i0it" value="true" />
+      <property role="13i0iv" value="true" />
+      <node concept="3Tm1VV" id="6nxN9oSBS59" role="1B3o_S" />
+      <node concept="10Oyi0" id="6nxN9oSBS5z" role="3clF45" />
+      <node concept="3clFbS" id="6nxN9oSBS5b" role="3clF47" />
+    </node>
+    <node concept="13i0hz" id="6nxN9oSBS5Q" role="13h7CS">
+      <property role="TrG5h" value="bar" />
+      <property role="13i0it" value="true" />
+      <property role="13i0iv" value="true" />
+      <node concept="3Tm1VV" id="6nxN9oSBS5R" role="1B3o_S" />
+      <node concept="3uibUv" id="6nxN9oSBS6a" role="3clF45">
+        <ref role="3uigEE" to="wyt6:~Object" resolve="Object" />
+      </node>
+      <node concept="3clFbS" id="6nxN9oSBS5T" role="3clF47" />
+    </node>
+    <node concept="13hLZK" id="6nxN9oSBS4Y" role="13h7CW">
+      <node concept="3clFbS" id="6nxN9oSBS4Z" role="2VODD2" />
     </node>
   </node>
 </model>

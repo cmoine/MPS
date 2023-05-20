@@ -1,38 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
   <root nodeRef="r:6ff1dacd-2ea5-47a0-9336-2eaecdee8a37(jetbrains.mps.execution.languages.plugin)/6863272677075182370">
-    <file name="Languages_PluginInitializer.java">
-      <node id="6863272677075182370" at="15,43,16,20" concept="3" />
-      <node id="6863272677075182370" at="22,36,23,83" concept="4" />
-      <node id="6863272677075182370" at="23,83,24,37" concept="3" />
-      <node id="6863272677075182370" at="26,0,28,0" concept="2" trace="initComponent#()V" />
-      <node id="6863272677075182370" at="28,0,30,0" concept="2" trace="disposeComponent#()V" />
-      <node id="6863272677075182370" at="14,0,18,0" concept="2" trace="create#(Ljava/lang/Class;)null" />
-      <node id="6863272677075182370" at="12,40,18,7" concept="1" />
-      <node id="6863272677075182370" at="20,0,26,0" concept="2" trace="getComponentName#()Ljava/lang/String;" />
-      <node id="6863272677075182370" at="12,0,20,0" concept="0" trace="Languages_PluginInitializer#()V" />
-      <scope id="6863272677075182370" at="26,31,26,31" />
-      <scope id="6863272677075182370" at="28,34,28,34" />
-      <scope id="6863272677075182370" at="15,43,16,20" />
-      <scope id="6863272677075182370" at="22,36,24,37" />
-      <scope id="6863272677075182370" at="26,0,28,0" />
-      <scope id="6863272677075182370" at="28,0,30,0" />
-      <scope id="6863272677075182370" at="14,0,18,0">
-        <var name="klass" id="6863272677075182370" />
-      </scope>
-      <scope id="6863272677075182370" at="12,40,18,7" />
-      <scope id="6863272677075182370" at="20,0,26,0" />
-      <scope id="6863272677075182370" at="12,0,20,0" />
-      <unit id="6863272677075182370" at="13,54,18,5" name="jetbrains.mps.execution.languages.plugin.Languages_PluginInitializer$1" />
-      <unit id="6863272677075182370" at="11,0,31,0" name="jetbrains.mps.execution.languages.plugin.Languages_PluginInitializer" />
-    </file>
     <file name="plugin.xml">
-      <unit id="6863272677075182370" at="1,0,24,14" name="jetbrains.mps.execution.languages.plugin.plugin" />
+      <unit id="6863272677075182370" at="1,0,20,14" name="jetbrains.mps.execution.languages.plugin.plugin" />
     </file>
   </root>
 </debug-info>

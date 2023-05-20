@@ -16,9 +16,11 @@
 package jetbrains.mps.util;
 
 /**
+ * @deprecated use {@link java.util.function.Consumer}
  * Igor Alshannikov
  * Jul 17, 2008
  */
+@Deprecated(since = "2023.1", forRemoval = true)
 public interface Setter<T> {
   void set(T o);
 }

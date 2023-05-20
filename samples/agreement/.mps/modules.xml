@@ -2,11 +2,11 @@
 <project version="4">
   <component name="MPSProject">
     <projectModules>
-      <modulePath path="$PROJECT_DIR$/../formulaLanguage/language/jetbrains.mps.samples.formulaLanguage.mpl" folder="" />
-      <modulePath path="$PROJECT_DIR$/../formulaLanguage/runtime/jetbrains.mps.samples.formula.runtime.msd" folder="" />
       <modulePath path="$PROJECT_DIR$/agreementLanguage/jetbrains.mps.samples.agreementLanguage.mpl" folder="" />
       <modulePath path="$PROJECT_DIR$/framework/jetbrains.mps.samples.agreement.framework.msd" folder="" />
       <modulePath path="$PROJECT_DIR$/sandbox/jetbrains.mps.samples.agreementLanguage.sandbox.msd" folder="" />
+      <modulePath path="$PROJECT_DIR$/../formulaLanguage/language/jetbrains.mps.samples.formulaLanguage.mpl" folder="" />
+      <modulePath path="$PROJECT_DIR$/../formulaLanguage/runtime/jetbrains.mps.samples.formula.runtime.msd" folder="" />
     </projectModules>
   </component>
 </project>

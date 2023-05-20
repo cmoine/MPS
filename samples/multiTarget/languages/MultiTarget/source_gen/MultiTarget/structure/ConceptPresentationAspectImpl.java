@@ -4,30 +4,49 @@ package MultiTarget.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_Container = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Member = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_NumericValue = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_StringValue = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_Container;
+  private ConceptPresentation props_Member;
+  private ConceptPresentation props_NumericValue;
+  private ConceptPresentation props_StringValue;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.Container:
+        if (props_Container == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Container = cpb.create();
+        }
         return props_Container;
-      case 1:
+      case LanguageConceptSwitch.Member:
+        if (props_Member == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_Member = cpb.create();
+        }
         return props_Member;
-      case 2:
+      case LanguageConceptSwitch.NumericValue:
+        if (props_NumericValue == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("numeric value");
+          props_NumericValue = cpb.create();
+        }
         return props_NumericValue;
-      case 3:
+      case LanguageConceptSwitch.StringValue:
+        if (props_StringValue == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("string value");
+          props_StringValue = cpb.create();
+        }
         return props_StringValue;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

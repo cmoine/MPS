@@ -2,10 +2,7 @@
 <model ref="r:a6e35534-2557-4640-a71b-fb8044ae6d8e(jetbrains.mps.baseLanguage.constructors.dataFlow)">
   <persistence version="9" />
   <languages>
-    <use id="7fa12e9c-b949-4976-b4fa-19accbc320b4" name="jetbrains.mps.lang.dataFlow" version="0" />
-    <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="4" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="00000000-0000-4000-0000-443879f56b80(jetbrains.mps.devkit.aspect.dataflow)" />
   </languages>
   <imports>
     <import index="fbxt" ref="r:bd4b8fd9-079b-4b11-a733-9c0bea3600f2(jetbrains.mps.baseLanguage.constructors.structure)" />
@@ -77,7 +74,7 @@
           <node concept="2OqwBi" id="3hX9owuCygl" role="1DdaDG">
             <node concept="3__QtB" id="3hX9owuCygk" role="2Oq$k0" />
             <node concept="3Tsc0h" id="3hX9owuCygr" role="2OqNvi">
-              <ref role="3TtcxE" to="fbxt:5UC0dNSN770" />
+              <ref role="3TtcxE" to="fbxt:5UC0dNSN770" resolve="element" />
             </node>
           </node>
           <node concept="3cpWsn" id="3hX9owuCygd" role="1Duv9x">

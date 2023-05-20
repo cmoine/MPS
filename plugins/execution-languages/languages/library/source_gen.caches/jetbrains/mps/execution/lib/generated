@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="altj21jj7nag73gc2cwl4cseams5dky" />
+<product version="3" modelHash="bgb5fly52ibenvxr0prkmv2c01yx1vz">
+  <files names="ClonableList.java:ExecutionTool.java:NodeByConcept_Configuration.java:NodeByConcept_Configuration_Editor.java:NodeBySeveralConcepts_Configuration.java:NodeBySeveralConcepts_Configuration_Editor.java:NodesDescriptor.java:PointerUtils.java" />
+</product>
 

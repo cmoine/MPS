@@ -5,12 +5,9 @@ package jetbrains.mps.execution.commands.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import org.jetbrains.mps.openapi.model.SNode;
 import java.util.List;
@@ -24,20 +21,23 @@ import jetbrains.mps.lang.core.behavior.BaseConcept__BehaviorDescriptor;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SInterfaceConcept;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public final class CommandParameterDeclaration__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0xf3347d8a0e794f35L, 0x8ac91574f25c986fL, 0x65afee7b2c712158L, "jetbrains.mps.execution.commands.structure.CommandParameterDeclaration");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<Boolean> isRequired_id7c4O8d8q0tV = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isRequired").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("7c4O8d8q0tV").registry(REGISTRY).build();
-  public static final SMethod<Boolean> generateField_id7mEQKPeolUk = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("generateField").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("7mEQKPeolUk").registry(REGISTRY).build();
-  public static final SMethod<String> getSetterName_id6mJVBGGsi5s = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getSetterName").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("6mJVBGGsi5s").registry(REGISTRY).build();
-  public static final SMethod<String> getSetterLongName_id3gpm$NHlR8F = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getSetterLongName").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("3gpm$NHlR8F").registry(REGISTRY).build();
-  /*package*/ static final SMethod<String> getUpperCaseName_id6mJVBGGsi5H = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getUpperCaseName").modifiers(SModifiersImpl.create(0, AccessPrivileges.PRIVATE)).concept(CONCEPT).id("6mJVBGGsi5H").registry(REGISTRY).build();
-  public static final SMethod<String> getFieldName_id6mJVBGGspQq = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getFieldName").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("6mJVBGGspQq").registry(REGISTRY).build();
-  public static final SMethod<String> getFieldName_id6mJVBGGsi69 = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getFieldName").modifiers(SModifiersImpl.create(1, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("6mJVBGGsi69").registry(REGISTRY).build(SMethodBuilder.createJavaParameter(String.class, ""));
-  public static final SMethod<String> getTypeSuffix_id3gpm$NHlXW7 = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getTypeSuffix").modifiers(SModifiersImpl.create(1, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("3gpm$NHlXW7").registry(REGISTRY).build(SMethodBuilder.createJavaParameter((Class<SNode>) ((Class) Object.class), ""));
-  public static final SMethod<String> getUpperCaseName_id6mJVBGGsi5Q = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getUpperCaseName").modifiers(SModifiersImpl.create(1, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("6mJVBGGsi5Q").registry(REGISTRY).build(SMethodBuilder.createJavaParameter(String.class, ""));
+  public static final SMethod<Boolean> isRequired_id7c4O8d8q0tV = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isRequired").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(8287978476542625659L).languageId(0x8ac91574f25c986fL, 0xf3347d8a0e794f35L).build2();
+  public static final SMethod<Boolean> generateField_id7mEQKPeolUk = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("generateField").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(8478830098674441876L).languageId(0x8ac91574f25c986fL, 0xf3347d8a0e794f35L).build2();
+  public static final SMethod<String> getSetterName_id6mJVBGGsi5s = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getSetterName").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(7327337331549086044L).languageId(0x8ac91574f25c986fL, 0xf3347d8a0e794f35L).build2();
+  public static final SMethod<String> getSetterLongName_id3gpm$NHlR8F = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getSetterLongName").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(3754131050835964459L).languageId(0x8ac91574f25c986fL, 0xf3347d8a0e794f35L).build2();
+  /*package*/ static final SMethod<String> getUpperCaseName_id6mJVBGGsi5H = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getUpperCaseName").modifiers(0, AccessPrivileges.PRIVATE).concept(CONCEPT).baseMethodId(7327337331549086061L).languageId(0x8ac91574f25c986fL, 0xf3347d8a0e794f35L).build2();
+  public static final SMethod<String> getFieldName_id6mJVBGGspQq = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getFieldName").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(7327337331549117850L).languageId(0x8ac91574f25c986fL, 0xf3347d8a0e794f35L).build2();
+  public static final SMethod<String> getFieldName_id6mJVBGGsi69 = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getFieldName").modifiers(1, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(7327337331549086089L).languageId(0x8ac91574f25c986fL, 0xf3347d8a0e794f35L).build2(SMethodBuilder.createJavaParameter(String.class, ""));
+  public static final SMethod<String> getTypeSuffix_id3gpm$NHlXW7 = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getTypeSuffix").modifiers(1, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(3754131050835992327L).languageId(0x8ac91574f25c986fL, 0xf3347d8a0e794f35L).build2(SMethodBuilder.createJavaParameter((Class<SNode>) ((Class) Object.class), ""));
+  public static final SMethod<String> getUpperCaseName_id6mJVBGGsi5Q = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getUpperCaseName").modifiers(1, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(7327337331549086070L).languageId(0x8ac91574f25c986fL, 0xf3347d8a0e794f35L).build2(SMethodBuilder.createJavaParameter(String.class, ""));
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(isRequired_id7c4O8d8q0tV, generateField_id7mEQKPeolUk, getSetterName_id6mJVBGGsi5s, getSetterLongName_id3gpm$NHlR8F, getUpperCaseName_id6mJVBGGsi5H, getFieldName_id6mJVBGGspQq, getFieldName_id6mJVBGGsi69, getTypeSuffix_id3gpm$NHlXW7, getUpperCaseName_id6mJVBGGsi5Q);
 
@@ -51,29 +51,28 @@ public final class CommandParameterDeclaration__BehaviorDescriptor extends BaseB
     return true;
   }
   /*package*/ static String getSetterName_id6mJVBGGsi5s(@NotNull SNode __thisNode__) {
-    return "set" + CommandParameterDeclaration__BehaviorDescriptor.getUpperCaseName_id6mJVBGGsi5H.invoke(__thisNode__);
+    return "set" + CommandParameterDeclaration__BehaviorDescriptor.getUpperCaseName_id6mJVBGGsi5H.invokeSpecial(__thisNode__);
   }
   /*package*/ static String getSetterLongName_id3gpm$NHlR8F(@NotNull SNode __thisNode__) {
-    return CommandParameterDeclaration__BehaviorDescriptor.getSetterName_id6mJVBGGsi5s.invoke(__thisNode__) + "_" + CommandParameterDeclaration__BehaviorDescriptor.getTypeSuffix_id3gpm$NHlXW7.invoke(SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0xf3347d8a0e794f35L, 0x8ac91574f25c986fL, 0x65afee7b2c712158L, "jetbrains.mps.execution.commands.structure.CommandParameterDeclaration").getDeclarationNode()), SLinkOperations.getTarget(__thisNode__, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x450368d90ce15bc3L, 0x4ed4d318133c80ceL, "type")));
+    return CommandParameterDeclaration__BehaviorDescriptor.getSetterName_id6mJVBGGsi5s.invoke(__thisNode__) + "_" + CommandParameterDeclaration__BehaviorDescriptor.getTypeSuffix_id3gpm$NHlXW7.invoke(SNodeOperations.asSConcept(CONCEPTS.CommandParameterDeclaration$BK), SLinkOperations.getTarget(__thisNode__, LINKS.type$a1UY));
   }
   /*package*/ static String getUpperCaseName_id6mJVBGGsi5H(@NotNull SNode __thisNode__) {
-    return (String) CommandParameterDeclaration__BehaviorDescriptor.getUpperCaseName_id6mJVBGGsi5Q.invoke(SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0xf3347d8a0e794f35L, 0x8ac91574f25c986fL, 0x65afee7b2c712158L, "jetbrains.mps.execution.commands.structure.CommandParameterDeclaration").getDeclarationNode()), SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name")));
+    return (String) CommandParameterDeclaration__BehaviorDescriptor.getUpperCaseName_id6mJVBGGsi5Q.invoke(SNodeOperations.asSConcept(CONCEPTS.CommandParameterDeclaration$BK), SPropertyOperations.getString(__thisNode__, PROPS.name$MnvL));
   }
   /*package*/ static String getFieldName_id6mJVBGGspQq(@NotNull SNode __thisNode__) {
-    return CommandParameterDeclaration__BehaviorDescriptor.getFieldName_id6mJVBGGsi69.invoke(SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0xf3347d8a0e794f35L, 0x8ac91574f25c986fL, 0x65afee7b2c712158L, "jetbrains.mps.execution.commands.structure.CommandParameterDeclaration").getDeclarationNode()), SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name"))) + "_" + CommandParameterDeclaration__BehaviorDescriptor.getTypeSuffix_id3gpm$NHlXW7.invoke(SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0xf3347d8a0e794f35L, 0x8ac91574f25c986fL, 0x65afee7b2c712158L, "jetbrains.mps.execution.commands.structure.CommandParameterDeclaration").getDeclarationNode()), SLinkOperations.getTarget(__thisNode__, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x450368d90ce15bc3L, 0x4ed4d318133c80ceL, "type")));
+    return CommandParameterDeclaration__BehaviorDescriptor.getFieldName_id6mJVBGGsi69.invoke(SNodeOperations.asSConcept(CONCEPTS.CommandParameterDeclaration$BK), SPropertyOperations.getString(__thisNode__, PROPS.name$MnvL)) + "_" + CommandParameterDeclaration__BehaviorDescriptor.getTypeSuffix_id3gpm$NHlXW7.invoke(SNodeOperations.asSConcept(CONCEPTS.CommandParameterDeclaration$BK), SLinkOperations.getTarget(__thisNode__, LINKS.type$a1UY));
   }
   /*package*/ static String getFieldName_id6mJVBGGsi69(@NotNull SAbstractConcept __thisConcept__, String name) {
-    return "my" + CommandParameterDeclaration__BehaviorDescriptor.getUpperCaseName_id6mJVBGGsi5Q.invoke(SNodeOperations.asSConcept(MetaAdapterFactory.getConcept(0xf3347d8a0e794f35L, 0x8ac91574f25c986fL, 0x65afee7b2c712158L, "jetbrains.mps.execution.commands.structure.CommandParameterDeclaration").getDeclarationNode()), name);
+    return "my" + CommandParameterDeclaration__BehaviorDescriptor.getUpperCaseName_id6mJVBGGsi5Q.invoke(SNodeOperations.asSConcept(CONCEPTS.CommandParameterDeclaration$BK), name);
   }
   /*package*/ static String getTypeSuffix_id3gpm$NHlXW7(@NotNull SAbstractConcept __thisConcept__, SNode type) {
-    return IGeneratedToClass__BehaviorDescriptor.getValidClassName_id3gpm$NHlLi1.invoke(SNodeOperations.asSConcept(MetaAdapterFactory.getInterfaceConcept(0x73c1a49099fa4d0dL, 0x8292b8985697c74bL, 0xd244b712f9dcdabL, "jetbrains.mps.execution.common.structure.IGeneratedToClass").getDeclarationNode()), BaseConcept__BehaviorDescriptor.getPresentation_idhEwIMiw.invoke(type));
+    return IGeneratedToClass__BehaviorDescriptor.getValidClassName_id3gpm$NHlLi1.invoke(SNodeOperations.asSConcept(CONCEPTS.IGeneratedToClass$Cg), BaseConcept__BehaviorDescriptor.getPresentation_idhEwIMiw.invoke(type));
   }
   /*package*/ static String getUpperCaseName_id6mJVBGGsi5Q(@NotNull SAbstractConcept __thisConcept__, String name) {
     return name.substring(0, 1).toUpperCase() + name.substring(1);
   }
 
   /*package*/ CommandParameterDeclaration__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -133,5 +132,18 @@ public final class CommandParameterDeclaration__BehaviorDescriptor extends BaseB
   @Override
   public SAbstractConcept getConcept() {
     return CONCEPT;
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept CommandParameterDeclaration$BK = MetaAdapterFactory.getConcept(0xf3347d8a0e794f35L, 0x8ac91574f25c986fL, 0x65afee7b2c712158L, "jetbrains.mps.execution.commands.structure.CommandParameterDeclaration");
+    /*package*/ static final SInterfaceConcept IGeneratedToClass$Cg = MetaAdapterFactory.getInterfaceConcept(0x73c1a49099fa4d0dL, 0x8292b8985697c74bL, 0xd244b712f9dcdabL, "jetbrains.mps.execution.common.structure.IGeneratedToClass");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink type$a1UY = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x450368d90ce15bc3L, 0x4ed4d318133c80ceL, "type");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,11 @@
 package jetbrains.mps.smodel.persistence.def.v9;
 
 import jetbrains.mps.persistence.registry.IdInfoRegistry;
+import jetbrains.mps.smodel.JavaFriendlyBase64;
 import jetbrains.mps.smodel.SNodeId.Foreign;
 import jetbrains.mps.smodel.SNodeId.Regular;
 import jetbrains.mps.smodel.StaticReference;
+import jetbrains.mps.smodel.StringBasedIdForJavaStubMethods;
 import jetbrains.mps.smodel.adapter.ids.SConceptId;
 import jetbrains.mps.smodel.adapter.ids.SContainmentLinkId;
 import jetbrains.mps.smodel.adapter.ids.SLanguageId;
@@ -33,8 +35,6 @@ import org.jetbrains.mps.openapi.model.SReference;
 import org.jetbrains.mps.openapi.module.SModuleReference;
 import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
 
-import java.util.Arrays;
-
 /**
  * Intention is to keep all serialize/de-serialize code in a single place.
  * <p/>
@@ -47,8 +47,11 @@ public final class IdEncoder implements IdInfoRegistry.IndexEncoder {
   // separator for import in serialized reference target
   private static final char REF_TARGET_IMPORT_SEPARATOR = ':';
   private static final String DYNAMIC_REFERENCE_ID = "^";
+  private final JavaFriendlyBase64 myBase64 = new JavaFriendlyBase64();
+  private final PersistenceFacade myPersistenceFacade;
 
   public IdEncoder() {
+    myPersistenceFacade = PersistenceFacade.getInstance();
   }
 
   public String toText(SLanguageId langId) {
@@ -94,36 +97,43 @@ public final class IdEncoder implements IdInfoRegistry.IndexEncoder {
   public String toText(SNodeId nodeId) {
     if (nodeId instanceof Regular) {
       final long v = ((Regular) nodeId).getId();
-      return toStringB64(v);
+      return myBase64.toString(v);
     }
     // fall-through
-    return nodeId.toString();
+    return myPersistenceFacade.asString(nodeId);
   }
 
   public SNodeId parseNodeId(String text) throws EncodingException {
-    if (!text.startsWith(Foreign.ID_PREFIX)) {
-      long v = parseLongB64(text);
-      return new Regular(v);
+    if (!text.startsWith(Foreign.ID_PREFIX) && !text.startsWith(StringBasedIdForJavaStubMethods.ID_PREFIX)) {
+      try {
+        long v = myBase64.parseLong(text);
+        return new Regular(v);
+      } catch (IllegalArgumentException ex) {
+        // ignore, try PF factory
+      }
+      // fall-through
     }
-    // fall-through
-    return jetbrains.mps.smodel.SNodeId.fromString(text);
+    try {
+      return myPersistenceFacade.createNodeId(text);
+    } catch (IllegalArgumentException ex) {
+      throw new EncodingException(ex);
+    }
   }
 
   public String toText(SModelReference mr) {
-    return PersistenceFacade.getInstance().asString(mr);
+    return myPersistenceFacade.asString(mr);
   }
 
   public SModelReference parseModelReference(String text) {
-    return PersistenceFacade.getInstance().createModelReference(text);
+    return myPersistenceFacade.createModelReference(text);
   }
 
   public String toText(SModuleReference ref) {
-//    return PersistenceFacade.getInstance().asString(ref); FIXME add counterpart for createModuleReference
-    return ref.toString();
+    return myPersistenceFacade.asString(ref);
   }
 
   public SModuleReference parseModuleReference(String text) {
-    return PersistenceFacade.getInstance().createModuleReference(text);
+    return myPersistenceFacade.createModuleReference(text);
   }
 
   public String toTextLocal(SReference ref) {
@@ -176,111 +186,34 @@ public final class IdEncoder implements IdInfoRegistry.IndexEncoder {
     int separatorIndex = referenceTarget.indexOf(REF_TARGET_IMPORT_SEPARATOR);
     assert separatorIndex >= 0;
     final SModelReference modelRef = separatorIndex == 0 ? null : imports.getModelReference(referenceTarget.substring(0, separatorIndex));
-    SNodeId nodeId = parseLocalNodeReference(referenceTarget.substring(separatorIndex + 1, referenceTarget.length()));
-    return new Pair<SModelReference, SNodeId>(modelRef, nodeId);
+    SNodeId nodeId = parseLocalNodeReference(referenceTarget.substring(separatorIndex + 1));
+    return new Pair<>(modelRef, nodeId);
   }
 
   /**
-   * Dedicated alternative of the {@link #parseExternalNodeReference(String)} that cares about target node id only, for indexing purposes,
+   * Dedicated alternative of the {@link #parseExternalNodeReference(ImportsHelper, String)} that cares about target node id only, for indexing purposes,
    * see {@link jetbrains.mps.smodel.persistence.def.v9.Indexer9}
    */
   @Nullable
   SNodeId parseExternalNodeReference(String referenceTarget) {
     int separatorIndex = referenceTarget.indexOf(REF_TARGET_IMPORT_SEPARATOR);
     assert separatorIndex >= 0;
-    return parseLocalNodeReference(referenceTarget.substring(separatorIndex + 1, referenceTarget.length()));
+    return parseLocalNodeReference(referenceTarget.substring(separatorIndex + 1));
   }
 
-  // length shall be 2^^6 = 64 (10 digits + 2x26 letters + '$' and '_' - basically, regular ASCII chars with isJavaIdentifierPart == true, for the sake of use
-  // in generated code (e.g. method names). Important: charAt(0) shall be '0', we use this to strip leading zeros.
-  private final char[] myIndexChars = "0123456789abcdefghijklmnopqrstuvwxyz$_ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
-  private static final char MIN_CHAR = '$';
-  private static final char MAX_CHAR = 'z';
-  private final int[] myCharToValue = new int[MAX_CHAR - MIN_CHAR + 1];
-  private final char[] myBufferLong = new char[11]; // ceil(sizeof(long) / sizeof(indexChars)) = ceil(64 bits / 6) = 11;
-  private final char[] myBufferInt = new char[6]; // ceil(32 bits / 6) = ceil(5.33) = 6;
-
-  {
-    Arrays.fill(myCharToValue, -1);
-    for (int i = 0; i < myIndexChars.length; i++) {
-      int charValue = myIndexChars[i];
-      myCharToValue[charValue - MIN_CHAR] = i;
-    }
-  }
-
-  private String toStringB64(long v) {
-    for (int i = myBufferLong.length - 1; i >= 0; i--) {
-      myBufferLong[i] = myIndexChars[((int) v & 0x3F)];
-      v = v >>> 6;
-    }
-    // strip leading zeros, up to last digit, which is kept anyway (if it's zero, fine)
-    for (int i = 0; i < myBufferLong.length - 1; i++) {
-      if (myBufferLong[i] != '0') {
-        return new String(myBufferLong, i, myBufferLong.length - i);
-      }
-    }
-    return new String(myBufferLong, myBufferLong.length - 1, 1);
-  }
-
-  private long parseLongB64(String text) throws EncodingException {
-    long result = 0;
-    for (int i = 0, x = text.length(), shift = 0; i < x; i++, shift = 6) {
-      result <<= shift;
-      char c = text.charAt(i);
-      if (c - MIN_CHAR < 0 || c - MIN_CHAR >= myCharToValue.length) {
-        throw new EncodingException("String \"" + text + "\" cannot be parsed as long value: invalid character \"" + c + "\"");
-      }
-      int value = myCharToValue[c - MIN_CHAR];
-      if (value < 0) {
-        throw new EncodingException("String \"" + text + "\" cannot be parsed as long value: invalid character \"" + c + "\"");
-      }
-      result |= value;
-    }
-    return result;
-  }
-
-  // at least 5, at most 6 character string encoding. Leading zero is removed only if it's sixth symbol.
-  private String indexValue(int v) {
-    myBufferInt[5] = myIndexChars[v & 0x3F];
-    v >>= 6;
-    myBufferInt[4] = myIndexChars[v & 0x3F];
-    v >>= 6;
-    myBufferInt[3] = myIndexChars[v & 0x3F];
-    v >>= 6;
-    myBufferInt[2] = myIndexChars[v & 0x3F];
-    v >>= 6;
-    myBufferInt[1] = myIndexChars[v & 0x3F];
-    v >>= 6;
-    // 5 times x 6 bits = we've got only 2 bits left of integer's total 32
-    v &= 0x3;
-    if (v != 0) {
-      myBufferInt[0] = myIndexChars[v];
-      return new String(myBufferInt);
-    }
-    return new String(myBufferInt, 1, 5);
-  }
 
   @Override
   public String index(int key) {
-    return indexValue(key);
-  }
-
-  public static void main(String[] args) {
-    IdEncoder x = new IdEncoder();
-    final long[] test = {0, 1, 15, 63, 64, 65, 123, 9834503475l, Long.MAX_VALUE, Long.MIN_VALUE};
-    for (long l : test) {
-      final String s = x.toStringB64(l);
-      try {
-        System.out.printf("%d: toString: %s, fromString:%d\n", l, s, x.parseLongB64(s));
-      } catch (EncodingException e) {
-        e.printStackTrace();
-      }
-    }
+    return myBase64.indexValue(key);
   }
 
   public static class EncodingException extends Exception {
     public EncodingException(String message) {
       super(message);
+    }
+
+    public EncodingException(Throwable cause) {
+      super(cause);
     }
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 
+/**
+ * Platform-independent abstraction of an editor for SNode. Agnostic of IDEA and underlying platform UI.
+ * {@apiNote shall not expose any Swing/Platform UI objects in API}
+ */
 public interface Editor {
 
   EditorComponent getCurrentEditorComponent();

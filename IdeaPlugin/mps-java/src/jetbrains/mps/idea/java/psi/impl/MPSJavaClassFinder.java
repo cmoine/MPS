@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package jetbrains.mps.idea.java.psi.impl;
 
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -41,7 +42,6 @@ import jetbrains.mps.idea.java.util.ClassUtil;
 import jetbrains.mps.smodel.FastNodeFinder;
 import jetbrains.mps.smodel.FastNodeFinderManager;
 import jetbrains.mps.smodel.ModelAccessHelper;
-import jetbrains.mps.util.Computable;
 import jetbrains.mps.vfs.IFile;
 import jetbrains.mps.workbench.goTo.index.SNodeDescriptor;
 import org.jetbrains.annotations.NotNull;
@@ -49,6 +49,8 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.EditableSModel;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.mps.openapi.module.ModelAccess;
+import org.jetbrains.mps.openapi.module.SRepository;
 import org.jetbrains.mps.openapi.module.SearchScope;
 import org.jetbrains.mps.openapi.persistence.DataSource;
 
@@ -70,7 +72,9 @@ public class MPSJavaClassFinder extends PsiElementFinder {
   @Override
   public PsiClass findClass(@NotNull String qualifiedName, @NotNull GlobalSearchScope scope) {
     final PsiClass[] classes = findClasses(qualifiedName, scope);
-    if (classes.length == 1) return classes[0];
+    if (classes.length == 1) {
+      return classes[0];
+    }
 
     return null;
   }
@@ -84,13 +88,15 @@ public class MPSJavaClassFinder extends PsiElementFinder {
       return PsiClass.EMPTY_ARRAY;
     }
 
-    return new ModelAccessHelper(ProjectHelper.getModelAccess(project)).runReadAction(new Computable<PsiClass[]>() {
-      @Override
-      public PsiClass[] compute() {
-        CollectConsumer<SNode> consumer = new CollectConsumer<SNode>(new ArrayList<SNode>());
-        findMPSClasses(qualifiedName, consumer, scope);
-        return toPsiClasses(consumer.getResult());
-      }
+    final ModelAccess modelAccess = ProjectHelper.getModelAccess(project);
+    if (modelAccess == null) {
+      return PsiClass.EMPTY_ARRAY;
+    }
+
+    return new ModelAccessHelper(modelAccess).runReadAction(() -> {
+      CollectConsumer<SNode> consumer = new CollectConsumer<>(new ArrayList<>());
+      findMPSClasses(qualifiedName, consumer, scope);
+      return toPsiClasses(consumer.getResult());
     });
   }
 
@@ -102,13 +108,15 @@ public class MPSJavaClassFinder extends PsiElementFinder {
       return PsiClass.EMPTY_ARRAY;
     }
 
-    return new ModelAccessHelper(ProjectHelper.getModelAccess(project)).runReadAction(new Computable<PsiClass[]>() {
-      @Override
-      public PsiClass[] compute() {
-        CollectConsumer<SNode> consumer = new CollectConsumer<SNode>(new ArrayList<SNode>());
-        findMPSClasses(psiPackage, consumer, scope);
-        return toPsiClasses(consumer.getResult());
-      }
+    final ModelAccess modelAccess = ProjectHelper.getModelAccess(project);
+    if (modelAccess == null) {
+      return PsiClass.EMPTY_ARRAY;
+    }
+
+    return new ModelAccessHelper(modelAccess).runReadAction(() -> {
+      CollectConsumer<SNode> consumer = new CollectConsumer<>(new ArrayList<>());
+      findMPSClasses(psiPackage, consumer, scope);
+      return toPsiClasses(consumer.getResult());
     });
   }
 
@@ -116,10 +124,14 @@ public class MPSJavaClassFinder extends PsiElementFinder {
    * read access required
    */
   private void findMPSClasses(PsiPackage psiPackage, Consumer<SNode> consumer, GlobalSearchScope scope) {
-    final FileBasedIndex fileBasedIndex = FileBasedIndex.getInstance();
-    String key = psiPackage.getQualifiedName();
-    List<Collection<SNodeDescriptor>> values = fileBasedIndex.getValues(MPSJavaPackageIndex.ID, key, scope);
-    collectNodes(consumer, values);
+    try {
+      final FileBasedIndex fileBasedIndex = FileBasedIndex.getInstance();
+      String key = psiPackage.getQualifiedName();
+      List<Collection<SNodeDescriptor>> values = fileBasedIndex.getValues(MPSJavaPackageIndex.ID, key, scope);
+      collectNodes(consumer, values);
+    } catch (ProcessCanceledException ex) {
+      // ignore exception, do not report, consumer has to be satisfied with what have got so far
+    }
   }
 
   /**
@@ -129,41 +141,47 @@ public class MPSJavaClassFinder extends PsiElementFinder {
 
     // first try changed models
     SearchScope mpsSearchScope = new IdeaSearchScope(scope, true);
-    CollectConsumer<VirtualFile> processedFilesConsumer = new CollectConsumer<VirtualFile>();
+    CollectConsumer<VirtualFile> processedFilesConsumer = new CollectConsumer<>();
 
     for (SModel model : mpsSearchScope.getModels()) {
       boolean changed = model instanceof EditableSModel && ((EditableSModel) model).isChanged();
-      if (!changed) continue;
+      if (!changed) {
+        continue;
+      }
 
       findInModel(model, qname, processedFilesConsumer, consumer);
     }
 
     final Collection<VirtualFile> filesOfChangedModels = processedFilesConsumer.getResult();
 
-    // now index
-    final FileBasedIndex fileBasedIndex = FileBasedIndex.getInstance();
-    GlobalSearchScope truncatedScope = new DelegatingGlobalSearchScope(scope) {
-      @Override
-      public boolean contains(VirtualFile file) {
-        if (filesOfChangedModels.contains(file)) return false;
-        return super.contains(file);
-      }
-    };
-    List<Collection<SNodeDescriptor>> values = fileBasedIndex.getValues(MPSFQNameJavaClassIndex.ID, qname, truncatedScope);
-    collectNodes(consumer, values);
-
+    try {
+      // now index
+      final FileBasedIndex fileBasedIndex = FileBasedIndex.getInstance();
+      GlobalSearchScope truncatedScope = new DelegatingGlobalSearchScope(scope) {
+        @Override
+        public boolean contains(@NotNull VirtualFile file) {
+          return !filesOfChangedModels.contains(file) && super.contains(file);
+        }
+      };
+      List<Collection<SNodeDescriptor>> values = fileBasedIndex.getValues(MPSFQNameJavaClassIndex.ID, qname, truncatedScope);
+      collectNodes(consumer, values);
+    } catch (ProcessCanceledException ex) {
+      // ignore exception, do not report, consumer has to be satisfied with what have got so far
+    }
   }
 
   private void findInModel(SModel model, String qname, Consumer<VirtualFile> processedConsumer, Consumer<SNode> consumer) {
-    String packageName = model.getModelName();
-    if (!qname.startsWith(packageName + ".")) return;
+    String packageName = model.getName().getLongName();
+    if (!qname.startsWith(packageName + ".")) {
+      return;
+    }
 
     // Fix for MPS-19687 Import of Mps class in Java class breaks after any editing of Mps class.
     // It would be better to use some single interface like FileSystemBasedDataSource, but its method
     // getAffectedFiles() gives us only the folder in case of FolderDataSource, not the actual files
     // Should consider changing it to return all _files_ not folders.
     DataSource dataSource = model.getSource();
-    List<IFile> dataSourceFiles = new ArrayList<IFile>();
+    List<IFile> dataSourceFiles = new ArrayList<>();
     if (dataSource instanceof FileDataSource) {
       dataSourceFiles.add(((FileDataSource) dataSource).getFile());
     } else if (dataSource instanceof FolderDataSource) {
@@ -173,8 +191,13 @@ public class MPSJavaClassFinder extends PsiElementFinder {
       }
     } else if (dataSource instanceof FolderSetDataSource) {
       for (IFile file : ((FolderSetDataSource) dataSource).getAffectedFiles()) {
+        if (file.getChildren() == null) {
+          continue;
+        }
         for (IFile child : file.getChildren()) {
-          if (child.isDirectory()) continue;
+          if (child.isDirectory()) {
+            continue;
+          }
           dataSourceFiles.add(child);
         }
       }
@@ -189,34 +212,40 @@ public class MPSJavaClassFinder extends PsiElementFinder {
 
     FastNodeFinder fastFinder = FastNodeFinderManager.get(model);
     List<SNode> classes = fastFinder.getNodes(jetbrains.mps.smodel.SNodeUtil.concept_Classifier, true);
-    if (classes.isEmpty()) return;
+    if (classes.isEmpty()) {
+      return;
+    }
 
-    for (SNode claz : classes) {
-      if (qname.equals(ClassUtil.getClassFQName(claz))) {
-        consumer.consume(claz);
+    for (SNode classNode : classes) {
+      if (qname.equals(ClassUtil.getClassFQName(classNode))) {
+        consumer.consume(classNode);
       }
     }
   }
 
   private void collectNodes(Consumer<SNode> consumer, List<Collection<SNodeDescriptor>> values) {
+    final SRepository projectRepo = ProjectHelper.getProjectRepository(myProject);
     for (Collection<SNodeDescriptor> value : values) {
       for (SNodeDescriptor descriptor : value) {
-        SNode node = descriptor.getNodeReference().resolve(ProjectHelper.getProjectRepository(myProject));
-        if (node == null) continue;
+        SNode node = descriptor.getNodeReference().resolve(projectRepo);
+        if (node == null) {
+          continue;
+        }
         consumer.consume(node);
       }
     }
   }
 
   private PsiClass[] toPsiClasses(Iterable<SNode> classes) {
-    List<PsiClass> result = new ArrayList<PsiClass>();
+    final MPSPsiProvider psiProvider = MPSPsiProvider.getInstance(myProject);
+    List<PsiClass> result = new ArrayList<>();
     for (SNode n : classes) {
-      final PsiElement psi = MPSPsiProvider.getInstance(myProject).getPsi(n);
+      final PsiElement psi = psiProvider.getPsi(n);
       if (psi instanceof PsiClass) {
         result.add((PsiClass) psi);
       }
     }
 
-    return result.isEmpty() ? PsiClass.EMPTY_ARRAY : result.toArray(new PsiClass[result.size()]);
+    return result.isEmpty() ? PsiClass.EMPTY_ARRAY : result.toArray(new PsiClass[0]);
   }
 }

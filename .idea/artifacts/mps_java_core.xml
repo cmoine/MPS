@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="mps-java-core">
+    <output-path>$PROJECT_DIR$/plugins/mps-java/lib</output-path>
+    <root id="archive" name="java-core.jar">
+      <element id="module-output" name="mps-java-core" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <root nodeRef="r:7e41ccd9-b50d-4931-a041-45bf9dd59910(jetbrains.mps.generator.tests.lm2k@tests)/5115635449434779858">
+    <file name="LM2K.java">
+      <node id="5115635449434779861" at="16,0,17,0" concept="1" trace="myArg_IN" />
+      <node id="5115635449434779875" at="17,0,18,0" concept="1" trace="myArg_OUT" />
+      <node id="5115635449434779895" at="18,0,19,0" concept="1" trace="myArg_GP_Interpreted" />
+      <node id="5115635449434779861" at="22,34,23,112" concept="0" />
+      <node id="5115635449434779875" at="23,112,24,114" concept="0" />
+      <node id="5115635449434779895" at="24,114,25,153" concept="0" />
+      <node id="5115635449434779910" at="29,40,30,41" concept="3" />
+      <node id="5115635449434779910" at="30,41,31,24" concept="3" />
+      <node id="5115635449434779910" at="31,24,32,18" concept="0" />
+      <node id="5115635449434779910" at="32,18,33,67" concept="0" />
+      <node id="5115635449434779910" at="33,67,34,18" concept="0" />
+      <node id="5115635449434779910" at="34,18,35,26" concept="3" />
+      <node id="5115635449434779910" at="35,26,36,74" concept="3" />
+      <node id="5115635449434779910" at="36,74,37,43" concept="0" />
+      <node id="5115635449434779858" at="21,0,27,0" concept="2" trace="prepareArguments#()V" />
+      <node id="5115635449434779910" at="28,0,39,0" concept="2" trace="testTransformAndMatch0#()V" />
+      <scope id="5115635449434779858" at="22,34,25,153" />
+      <scope id="5115635449434779858" at="21,0,27,0" />
+      <scope id="5115635449434779910" at="29,40,37,43">
+        <var name="i" id="5115635449434779910" />
+        <var name="ma" id="5115635449434779910" />
+        <var name="rm" id="5115635449434779910" />
+        <var name="t" id="5115635449434779910" />
+      </scope>
+      <scope id="5115635449434779910" at="28,0,39,0" />
+      <unit id="5115635449434779858" at="12,0,41,0" name="jetbrains.mps.generator.tests.lm2k.LM2K" />
+    </file>
+  </root>
+</debug-info>
+

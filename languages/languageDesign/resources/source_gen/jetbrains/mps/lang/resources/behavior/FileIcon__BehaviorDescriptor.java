@@ -5,15 +5,12 @@ package jetbrains.mps.lang.resources.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import java.util.List;
 import jetbrains.mps.baseLanguage.tuples.runtime.Tuples;
 import jetbrains.mps.vfs.IFile;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.Arrays;
 import org.jetbrains.annotations.NotNull;
@@ -21,79 +18,77 @@ import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import org.jetbrains.mps.openapi.model.SModel;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.generator.fileGenerator.FileGenerationUtil;
 import jetbrains.mps.util.MacrosFactory;
-import jetbrains.mps.project.AbstractModule;
 import jetbrains.mps.util.FileUtil;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import java.util.ArrayList;
-import jetbrains.mps.internal.collections.runtime.IWhereFilter;
-import org.apache.log4j.Logger;
-import org.apache.log4j.LogManager;
-import jetbrains.mps.vfs.FileSystem;
+import jetbrains.mps.internal.collections.runtime.NotNullWhereFilter;
+import jetbrains.mps.vfs.util.PathFormatChecker;
 import java.io.InputStream;
 import jetbrains.mps.baseLanguage.tuples.runtime.MultiTuple;
 import jetbrains.mps.util.ReadUtil;
 import java.io.IOException;
-import org.apache.log4j.Level;
 import org.jetbrains.mps.openapi.module.SModule;
 import jetbrains.mps.util.MacroHelper;
+import jetbrains.mps.vfs.FileSystem;
 import javax.swing.ImageIcon;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public final class FileIcon__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x7c8b08a50a39c6bbL, "jetbrains.mps.lang.resources.structure.FileIcon");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<List<Tuples._2<IFile, byte[]>>> generate_id7Mb2akaesv8 = new SMethodBuilder<List<Tuples._2<IFile, byte[]>>>(new SJavaCompoundTypeImpl((Class<List<Tuples._2<IFile, byte[]>>>) ((Class) Object.class))).name("generate").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("7Mb2akaesv8").registry(REGISTRY).build(SMethodBuilder.createJavaParameter(IFile.class, ""));
-  /*package*/ static final SMethod<Tuples._2<IFile, byte[]>> copyFile_id34SjXUxB1C6 = new SMethodBuilder<Tuples._2<IFile, byte[]>>(new SJavaCompoundTypeImpl((Class<Tuples._2<IFile, byte[]>>) ((Class) Object.class))).name("copyFile").modifiers(SModifiersImpl.create(0, AccessPrivileges.PRIVATE)).concept(CONCEPT).id("34SjXUxB1C6").registry(REGISTRY).build(SMethodBuilder.createJavaParameter(String.class, ""), SMethodBuilder.createJavaParameter(IFile.class, ""));
-  public static final SMethod<Boolean> isValid_id7Mb2akaestJ = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isValid").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("7Mb2akaestJ").registry(REGISTRY).build();
-  public static final SMethod<String> getFilename_id7Mb2akaesuN = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getFilename").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("7Mb2akaesuN").registry(REGISTRY).build();
-  public static final SMethod<String> getResourceId_id2p1v3tOadt0 = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getResourceId").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("2p1v3tOadt0").registry(REGISTRY).build();
+  public static final SMethod<List<Tuples._2<IFile, byte[]>>> generate_id7Mb2akaesv8 = new SMethodBuilder<List<Tuples._2<IFile, byte[]>>>(new SJavaCompoundTypeImpl((Class<List<Tuples._2<IFile, byte[]>>>) ((Class) Object.class))).name("generate").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(8974276187400030152L).languageId(0x996311712ea622e5L, 0x982eb8df2c964bd7L).build2(SMethodBuilder.createJavaParameter(IFile.class, ""));
+  /*package*/ static final SMethod<Tuples._2<IFile, byte[]>> copyFile_id34SjXUxB1C6 = new SMethodBuilder<Tuples._2<IFile, byte[]>>(new SJavaCompoundTypeImpl((Class<Tuples._2<IFile, byte[]>>) ((Class) Object.class))).name("copyFile").modifiers(0, AccessPrivileges.PRIVATE).concept(CONCEPT).baseMethodId(3546672524166961670L).languageId(0x996311712ea622e5L, 0x982eb8df2c964bd7L).build2(SMethodBuilder.createJavaParameter(String.class, ""), SMethodBuilder.createJavaParameter(IFile.class, ""), SMethodBuilder.createJavaParameter(Boolean.TYPE, ""));
+  public static final SMethod<Boolean> isValid_id7Mb2akaestJ = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isValid").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(8974276187400030063L).languageId(0x996311712ea622e5L, 0x982eb8df2c964bd7L).build2();
+  public static final SMethod<String> getFilename_id7Mb2akaesuN = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getFilename").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(8974276187400030131L).languageId(0x996311712ea622e5L, 0x982eb8df2c964bd7L).build2();
+  public static final SMethod<String> getResourceId_id2p1v3tOadt0 = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getResourceId").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(2756621024541333312L).languageId(0x996311712ea622e5L, 0x982eb8df2c964bd7L).build2();
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(generate_id7Mb2akaesv8, copyFile_id34SjXUxB1C6, isValid_id7Mb2akaestJ, getFilename_id7Mb2akaesuN, getResourceId_id2p1v3tOadt0);
 
   private static void ___init___(@NotNull SNode __thisNode__) {
   }
 
-  /*package*/ static List<Tuples._2<IFile, byte[]>> generate_id7Mb2akaesv8(@NotNull SNode __thisNode__, IFile outputRoot) {
-    if (isEmptyString(SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x7c8b08a50a39c6bbL, 0x26417c377428f6b3L, "file")))) {
-      // todo compatibility code to be removed after 3.4 
+  /*package*/ static List<Tuples._2<IFile, byte[]>> generate_id7Mb2akaesv8(@NotNull SNode __thisNode__, IFile outputDir) {
+    if (isEmptyString(SPropertyOperations.getString(__thisNode__, PROPS.file$686H))) {
+      // todo compatibility code to be removed after 3.4
       return null;
     }
 
     SModel model = SNodeOperations.getModel(__thisNode__);
-    IFile outputDir = FileGenerationUtil.getDefaultOutputDir(model, outputRoot);
 
-    String source = MacrosFactory.forModule((AbstractModule) model.getModule()).expandPath(SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x7c8b08a50a39c6bbL, 0x26417c377428f6b3L, "file")));
+    String source = MacrosFactory.forModule(model.getModule()).expandPath(SPropertyOperations.getString(__thisNode__, PROPS.file$686H));
     final String name = FileUtil.getNameWithoutExtension(source);
     final String ext = FileUtil.getExtension(source);
 
-    // copy 
+    // copy
     List<Tuples._2<IFile, byte[]>> res = ListSequence.fromList(new ArrayList<Tuples._2<IFile, byte[]>>());
-    ListSequence.fromList(res).addElement(FileIcon__BehaviorDescriptor.copyFile_id34SjXUxB1C6.invoke(__thisNode__, source, outputDir));
-    // list of suffixes can be found in ImageLoader.ImgeDescList.create() 
-    ListSequence.fromList(res).addElement(FileIcon__BehaviorDescriptor.copyFile_id34SjXUxB1C6.invoke(__thisNode__, name + "@2x." + ext, outputDir));
-    ListSequence.fromList(res).addElement(FileIcon__BehaviorDescriptor.copyFile_id34SjXUxB1C6.invoke(__thisNode__, name + "@2x_dark." + ext, outputDir));
-    ListSequence.fromList(res).addElement(FileIcon__BehaviorDescriptor.copyFile_id34SjXUxB1C6.invoke(__thisNode__, name + "_dark." + ext, outputDir));
-    return ListSequence.fromList(res).where(new IWhereFilter<Tuples._2<IFile, byte[]>>() {
-      public boolean accept(Tuples._2<IFile, byte[]> it) {
-        return it != null;
-      }
-    }).toListSequence();
+    ListSequence.fromList(res).addElement(FileIcon__BehaviorDescriptor.copyFile_id34SjXUxB1C6.invokeSpecial(__thisNode__, source, outputDir, ((boolean) true)));
+    // list of suffixes can be found in ImageLoader.ImgeDescList.create()
+    ListSequence.fromList(res).addElement(FileIcon__BehaviorDescriptor.copyFile_id34SjXUxB1C6.invokeSpecial(__thisNode__, name + "@2x." + ext, outputDir, ((boolean) false)));
+    ListSequence.fromList(res).addElement(FileIcon__BehaviorDescriptor.copyFile_id34SjXUxB1C6.invokeSpecial(__thisNode__, name + "@2x_dark." + ext, outputDir, ((boolean) false)));
+    ListSequence.fromList(res).addElement(FileIcon__BehaviorDescriptor.copyFile_id34SjXUxB1C6.invokeSpecial(__thisNode__, name + "_dark." + ext, outputDir, ((boolean) false)));
+    return ListSequence.fromList(res).where(new NotNullWhereFilter<Tuples._2<IFile, byte[]>>()).toListSequence();
   }
-  protected static Logger LOG = LogManager.getLogger(FileIcon__BehaviorDescriptor.class);
-  /*package*/ static Tuples._2<IFile, byte[]> copyFile_id34SjXUxB1C6(@NotNull SNode __thisNode__, String source, IFile outputDir) {
-    if (source == null) {
-      return null;
+  /*package*/ static Tuples._2<IFile, byte[]> copyFile_id34SjXUxB1C6(@NotNull SNode __thisNode__, String source, IFile outputDir, boolean mustExist) {
+    IFile sourceFile;
+    try {
+      sourceFile = outputDir.getFileSystem().getFile(source);
+    } catch (PathFormatChecker.PathFormatException fe) {
+      if (!(mustExist)) {
+        return null;
+      }
+      throw new ResourceGenerationException("Failed to obtain source file " + source, fe);
     }
-    IFile sourceFile = FileSystem.getInstance().getFileByPath(source);
-    IFile toFile = outputDir.getDescendant(sourceFile.getName());
+    IFile toFile = outputDir.findChild(sourceFile.getName());
 
     if (!(sourceFile.exists())) {
-      return null;
+      if (!(mustExist)) {
+        return null;
+      }
+      throw new ResourceGenerationException("File to copy does not exist: " + source);
     }
 
     InputStream is = null;
@@ -102,9 +97,7 @@ public final class FileIcon__BehaviorDescriptor extends BaseBHDescriptor {
       is = sourceFile.openInputStream();
       res = MultiTuple.<IFile,byte[]>from(toFile, ReadUtil.read(is));
     } catch (IOException e) {
-      if (LOG.isEnabledFor(Level.ERROR)) {
-        LOG.error("", e);
-      }
+      throw new ResourceGenerationException("Exception on copying" + source, e);
     } finally {
       FileUtil.closeFileSafe(is);
     }
@@ -112,19 +105,23 @@ public final class FileIcon__BehaviorDescriptor extends BaseBHDescriptor {
   }
   /*package*/ static boolean isValid_id7Mb2akaestJ(@NotNull SNode __thisNode__) {
     SModule module = SNodeOperations.getModel(__thisNode__).getModule();
-    if (!(module instanceof AbstractModule)) {
+    if (module == null) {
       return false;
     }
-    MacroHelper macroHelper = MacrosFactory.forModule((AbstractModule) module);
+    MacroHelper macroHelper = MacrosFactory.forModule(module);
     if (macroHelper == null) {
       return false;
     }
-    String path = macroHelper.expandPath(SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x7c8b08a50a39c6bbL, 0x26417c377428f6b3L, "file")));
+    String path = macroHelper.expandPath(SPropertyOperations.getString(__thisNode__, PROPS.file$686H));
     if (path == null) {
       return false;
     }
-    IFile file = FileSystem.getInstance().getFileByPath(path);
-    if (!(file.exists())) {
+    try {
+      IFile file = FileSystem.getInstance().getFile(path);
+      if (!(file.exists())) {
+        return false;
+      }
+    } catch (PathFormatChecker.PathFormatException pfe) {
       return false;
     }
     try {
@@ -139,14 +136,13 @@ public final class FileIcon__BehaviorDescriptor extends BaseBHDescriptor {
     return ((String) Icon__BehaviorDescriptor.getResourceId_id2p1v3tOadt0.invoke(__thisNode__));
   }
   /*package*/ static String getResourceId_id2p1v3tOadt0(@NotNull SNode __thisNode__) {
-    if (isEmptyString(SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x7c8b08a50a39c6bbL, 0x26417c377428f6b3L, "file")))) {
+    if (isEmptyString(SPropertyOperations.getString(__thisNode__, PROPS.file$686H))) {
       return null;
     }
-    return SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x7c8b08a50a39c6bbL, 0x26417c377428f6b3L, "file")).substring(SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x7c8b08a50a39c6bbL, 0x26417c377428f6b3L, "file")).lastIndexOf("/") + 1);
+    return SPropertyOperations.getString(__thisNode__, PROPS.file$686H).substring(SPropertyOperations.getString(__thisNode__, PROPS.file$686H).lastIndexOf('/') + 1);
   }
 
   /*package*/ FileIcon__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -164,7 +160,7 @@ public final class FileIcon__BehaviorDescriptor extends BaseBHDescriptor {
       case 0:
         return (T) ((List<Tuples._2<IFile, byte[]>>) generate_id7Mb2akaesv8(node, (IFile) parameters[0]));
       case 1:
-        return (T) ((Tuples._2<IFile, byte[]>) copyFile_id34SjXUxB1C6(node, (String) parameters[0], (IFile) parameters[1]));
+        return (T) ((Tuples._2<IFile, byte[]>) copyFile_id34SjXUxB1C6(node, (String) parameters[0], (IFile) parameters[1], ((boolean) (Boolean) parameters[2])));
       case 2:
         return (T) ((Boolean) isValid_id7Mb2akaestJ(node));
       case 3:
@@ -200,6 +196,10 @@ public final class FileIcon__BehaviorDescriptor extends BaseBHDescriptor {
     return CONCEPT;
   }
   private static boolean isEmptyString(String str) {
-    return str == null || str.length() == 0;
+    return str == null || str.isEmpty();
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty file$686H = MetaAdapterFactory.getProperty(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x7c8b08a50a39c6bbL, 0x26417c377428f6b3L, "file");
   }
 }

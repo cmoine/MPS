@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,18 +19,21 @@ import jetbrains.mps.smodel.structure.Extension;
 import jetbrains.mps.smodel.structure.ExtensionDescriptor;
 import jetbrains.mps.smodel.structure.ExtensionPoint;
 import org.jmock.Expectations;
-import org.jmock.Mockery;
-import org.jmock.integration.junit4.JMock;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 
 public class ExtensionRegistryTest {
 
@@ -39,24 +42,16 @@ public class ExtensionRegistryTest {
 
   @Rule
   public final JUnitRuleMockery context = new JUnitRuleMockery();
-  private ExtensionRegistry myExtensionRegistry;
+  private BaseExtensionRegistry myExtensionRegistry;
 
   @Before
   public void createContext() {
-    if (ExtensionRegistry.getInstance() == null) {
-      myExtensionRegistry = new ExtensionRegistry(null, null);
-      myExtensionRegistry.init();
-    }
+    myExtensionRegistry = new BaseExtensionRegistry();
   }
 
   @After
   public void checkAndCleanup() {
-    if (myExtensionRegistry != null) {
-      assert myExtensionRegistry == ExtensionRegistry.getInstance();
-      ExtensionRegistry.getInstance().dispose();
-      assertNull(ExtensionRegistry.getInstance());
-      this.myExtensionRegistry = null;
-    }
+    myExtensionRegistry = null;
   }
 
   @Test
@@ -66,10 +61,10 @@ public class ExtensionRegistryTest {
       new ExtensionPoint[]{ep1},
       new Extension[]{mockExtension("e1", EP1)}
     );
-    ExtensionRegistry.getInstance().registerExtensionDescriptor(ed);
-    assertEquals(ep1, ExtensionRegistry.getInstance().getExtensionPoint(EP1));
-    ExtensionRegistry.getInstance().unregisterExtensionDescriptor(ed);
-    assertNull(ExtensionRegistry.getInstance().getExtensionPoint(EP1));
+    myExtensionRegistry.registerExtensionDescriptor(ed);
+    assertEquals(ep1, myExtensionRegistry.getExtensionPoint(EP1));
+    myExtensionRegistry.unregisterExtensionDescriptor(ed);
+    assertNull(myExtensionRegistry.getExtensionPoint(EP1));
   }
 
   @Test
@@ -83,10 +78,10 @@ public class ExtensionRegistryTest {
       new ExtensionPoint[]{},
       new Extension[]{mockExtension("e1", EP1)}
     );
-    ExtensionRegistry.getInstance().registerExtensionDescriptor(ed1);
-    ExtensionRegistry.getInstance().registerExtensionDescriptor(ed2);
-    ExtensionRegistry.getInstance().unregisterExtensionDescriptor(ed2);
-    ExtensionRegistry.getInstance().registerExtensionDescriptor(ed1);
+    myExtensionRegistry.registerExtensionDescriptor(ed1);
+    myExtensionRegistry.registerExtensionDescriptor(ed2);
+    myExtensionRegistry.unregisterExtensionDescriptor(ed2);
+    myExtensionRegistry.registerExtensionDescriptor(ed1);
   }
 
   @Test
@@ -100,10 +95,10 @@ public class ExtensionRegistryTest {
       new ExtensionPoint[]{},
       new Extension[]{mockExtension("e1", EP1)}
     );
-    ExtensionRegistry.getInstance().registerExtensionDescriptor(ed2);
-    ExtensionRegistry.getInstance().registerExtensionDescriptor(ed1);
-    ExtensionRegistry.getInstance().unregisterExtensionDescriptor(ed1);
-    ExtensionRegistry.getInstance().unregisterExtensionDescriptor(ed2);
+    myExtensionRegistry.registerExtensionDescriptor(ed2);
+    myExtensionRegistry.registerExtensionDescriptor(ed1);
+    myExtensionRegistry.unregisterExtensionDescriptor(ed1);
+    myExtensionRegistry.unregisterExtensionDescriptor(ed2);
   }
 
   @Test
@@ -117,10 +112,10 @@ public class ExtensionRegistryTest {
       new ExtensionPoint[]{},
       new Extension[]{mockExtension("e1", EP1)}
     );
-    ExtensionRegistry.getInstance().registerExtensionDescriptor(ed1);
-    ExtensionRegistry.getInstance().registerExtensionDescriptor(ed2);
-    ExtensionRegistry.getInstance().unregisterExtensionDescriptor(ed1);
-    ExtensionRegistry.getInstance().unregisterExtensionDescriptor(ed2);
+    myExtensionRegistry.registerExtensionDescriptor(ed1);
+    myExtensionRegistry.registerExtensionDescriptor(ed2);
+    myExtensionRegistry.unregisterExtensionDescriptor(ed1);
+    myExtensionRegistry.unregisterExtensionDescriptor(ed2);
   }
 
   @Test
@@ -134,10 +129,10 @@ public class ExtensionRegistryTest {
       new ExtensionPoint[]{},
       new Extension[]{mockExtension("e1", EP1)}
     );
-    ExtensionRegistry.getInstance().registerExtensionDescriptor(ed2);
-    ExtensionRegistry.getInstance().registerExtensionDescriptor(ed1);
-    ExtensionRegistry.getInstance().unregisterExtensionDescriptor(ed2);
-    ExtensionRegistry.getInstance().unregisterExtensionDescriptor(ed1);
+    myExtensionRegistry.registerExtensionDescriptor(ed2);
+    myExtensionRegistry.registerExtensionDescriptor(ed1);
+    myExtensionRegistry.unregisterExtensionDescriptor(ed2);
+    myExtensionRegistry.unregisterExtensionDescriptor(ed1);
   }
 
   @Test
@@ -155,27 +150,22 @@ public class ExtensionRegistryTest {
       new ExtensionPoint[]{},
       new Extension[]{mockExtension("e2", EP1)}
     );
-    ExtensionRegistry.getInstance().registerExtensionDescriptor(ed3);
-    ExtensionRegistry.getInstance().registerExtensionDescriptor(ed2);
-    ExtensionRegistry.getInstance().registerExtensionDescriptor(ed1);
+    myExtensionRegistry.registerExtensionDescriptor(ed3);
+    myExtensionRegistry.registerExtensionDescriptor(ed2);
+    myExtensionRegistry.registerExtensionDescriptor(ed1);
 
-    Iterable<Extension<?>> extensions = ep1.getExtensions();
-    List<Extension> extensionList = new ArrayList();
-    for (Iterator<Extension> it = ExtensionRegistry.getInstance().getExtensions(ep1).iterator(); it.hasNext(); ) {
+    List<Extension> extensionList = new ArrayList<>();
+    for (Iterator<Extension> it = myExtensionRegistry.getExtensions(ep1).iterator(); it.hasNext(); ) {
       extensionList.add(it.next());
     }
     assertSame(2, extensionList.size());
-    Collections.sort(extensionList, new Comparator<Extension>() {
-      @Override
-      public int compare(Extension o1, Extension o2) {
-        return String.CASE_INSENSITIVE_ORDER.compare(String.valueOf(o1), String.valueOf(o2));
-      }
-    });
+
+    extensionList.sort(Comparator.comparing(String::valueOf, String.CASE_INSENSITIVE_ORDER));
     assertEquals("[e1, e2]", extensionList.toString());
 
-    ExtensionRegistry.getInstance().unregisterExtensionDescriptor(ed3);
-    ExtensionRegistry.getInstance().unregisterExtensionDescriptor(ed2);
-    ExtensionRegistry.getInstance().unregisterExtensionDescriptor(ed1);
+    myExtensionRegistry.unregisterExtensionDescriptor(ed3);
+    myExtensionRegistry.unregisterExtensionDescriptor(ed2);
+    myExtensionRegistry.unregisterExtensionDescriptor(ed1);
   }
 
   private ExtensionDescriptor mockExtensionDescriptor(String name, final ExtensionPoint[] extensionPoints, final Extension[] extensions) {

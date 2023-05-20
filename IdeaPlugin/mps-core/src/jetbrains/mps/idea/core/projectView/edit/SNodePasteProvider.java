@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,6 @@ import jetbrains.mps.project.Project;
 import jetbrains.mps.resolve.ResolverComponent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.EditableSModel;
-import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SReference;
 
@@ -37,14 +36,12 @@ import java.util.Set;
  * Date: 5/4/12
  */
 public class SNodePasteProvider implements com.intellij.ide.PasteProvider, Runnable {
-  private Project myProject;
-  private SModel myModel;
-  private EditableSModel myModelDescriptor;
+  private final Project myProject;
+  private final EditableSModel myModel;
 
-  public SNodePasteProvider(SModel sModel, Project project, EditableSModel modelDescriptor) {
+  public SNodePasteProvider(EditableSModel sModel, Project project) {
     myProject = project;
     myModel = sModel;
-    myModelDescriptor = modelDescriptor;
   }
 
   @Override
@@ -99,7 +96,7 @@ public class SNodePasteProvider implements com.intellij.ide.PasteProvider, Runna
       }
       pasteProcessor.pasteAsRoots(myModel, "");
       ResolverComponent.getInstance().resolveScopesOnly(referencesToResolve, myProject.getRepository());
-      myModelDescriptor.save();
+      myModel.save();
     };
   }
 }

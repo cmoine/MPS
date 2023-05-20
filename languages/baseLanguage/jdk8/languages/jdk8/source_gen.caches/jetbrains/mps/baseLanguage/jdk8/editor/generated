@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-7a1bjd4m9wmqe8jn6c7m8mb3xo12lxb" />
+<product version="3" modelHash="49sxxw4mgqkncbvji6pl2ciiab7s5x1">
+  <files names="DefaultModifier_old_Editor.java:DefaultModifier_old_EditorBuilder_a.java:DefaultModifier_old_SubstituteMenu.java:DeleteDefault.java:EditorAspectDescriptorImpl.java:SuperInterfaceMethodCall_actions.java:SuperInterfaceMethodCall_old_Editor.java:SuperInterfaceMethodCall_old_EditorBuilder_a.java:SuperInterfaceMethodCall_old_SubstituteMenu.java" />
+</product>
 

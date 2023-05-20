@@ -16,6 +16,7 @@
 package org.jetbrains.mps.openapi.model;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.module.SModuleReference;
 import org.jetbrains.mps.openapi.module.SRepository;
 
@@ -48,6 +49,7 @@ public interface SModelReference {
    * Returns module reference when it is a part of this model reference and is available, or null otherwise.
    * Globally unique SModelIds do not require module references.
    */
+  @Nullable
   SModuleReference getModuleReference();
 
   /**

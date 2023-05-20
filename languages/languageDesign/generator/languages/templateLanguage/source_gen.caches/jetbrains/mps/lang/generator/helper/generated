@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-2xtl2ngl9zt18ci0rokuitt0v9bw6tr" />
+<product version="3" modelHash="-3gsc1x5ge9ko67168eubg5u389ybcb">
+  <files names="EditingUtil.java:GeneratorFragmentLookup.java:QueriesUtil.java" />
+</product>
 

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <root nodeRef="r:8c2c686e-0560-4068-b995-6ed0bbb54d9a(jetbrains.mps.test.smodel@tests)/2078952294001069456">
+    <file name="IgnoreNodeOrderTest.java">
+      <node id="2078952294001069487" at="17,0,18,0" concept="1" trace="myArg_IN" />
+      <node id="2078952294001069460" at="18,0,19,0" concept="1" trace="myArg_OUT" />
+      <node id="2078952294001069487" at="22,34,23,106" concept="0" />
+      <node id="2078952294001069460" at="23,106,24,111" concept="0" />
+      <node id="2078952294001069531" at="28,40,29,41" concept="3" />
+      <node id="2078952294001069531" at="29,41,30,24" concept="3" />
+      <node id="2078952294001069531" at="30,24,31,18" concept="0" />
+      <node id="2078952294001069531" at="31,18,32,18" concept="0" />
+      <node id="2078952294001069531" at="32,18,33,26" concept="3" />
+      <node id="2078952294001069531" at="33,26,34,144" concept="3" />
+      <node id="2078952294001069531" at="34,144,35,43" concept="0" />
+      <node id="2078952294001069456" at="21,0,26,0" concept="2" trace="prepareArguments#()V" />
+      <node id="2078952294001069531" at="27,0,37,0" concept="2" trace="testTransformAndMatch0#()V" />
+      <scope id="2078952294001069456" at="22,34,24,111" />
+      <scope id="2078952294001069456" at="21,0,26,0" />
+      <scope id="2078952294001069531" at="28,40,35,43">
+        <var name="i" id="2078952294001069531" />
+        <var name="ma" id="2078952294001069531" />
+        <var name="rm" id="2078952294001069531" />
+        <var name="t" id="2078952294001069531" />
+      </scope>
+      <scope id="2078952294001069531" at="27,0,37,0" />
+      <unit id="2078952294001069456" at="13,0,39,0" name="jetbrains.mps.test.smodel.IgnoreNodeOrderTest" />
+    </file>
+  </root>
+  <root nodeRef="r:8c2c686e-0560-4068-b995-6ed0bbb54d9a(jetbrains.mps.test.smodel@tests)/9177601187676038197">
+    <file name="BasicTest1.java">
+      <node id="2681075272524175444" at="16,0,17,0" concept="1" trace="myArg_A" />
+      <node id="2681075272524175463" at="17,0,18,0" concept="1" trace="myArg_B" />
+      <node id="3550237152253148823" at="18,0,19,0" concept="1" trace="myArg_NoClosures" />
+      <node id="3550237152253137142" at="19,0,20,0" concept="1" trace="myArg_ClosuresOnlyPlan" />
+      <node id="2681075272524175444" at="23,34,24,104" concept="0" />
+      <node id="2681075272524175463" at="24,104,25,107" concept="0" />
+      <node id="3550237152253148823" at="25,107,26,125" concept="0" />
+      <node id="3550237152253137142" at="26,125,27,139" concept="0" />
+      <node id="2681075272524175470" at="31,40,32,41" concept="3" />
+      <node id="2681075272524175470" at="32,41,33,23" concept="3" />
+      <node id="2681075272524175470" at="33,23,34,18" concept="0" />
+      <node id="2681075272524175470" at="34,18,35,18" concept="0" />
+      <node id="2681075272524175470" at="35,18,36,24" concept="3" />
+      <node id="2681075272524175470" at="36,24,37,74" concept="3" />
+      <node id="2681075272524175470" at="37,74,38,43" concept="0" />
+      <node id="3550237152253137119" at="41,40,42,41" concept="3" />
+      <node id="3550237152253137119" at="42,41,43,23" concept="3" />
+      <node id="3550237152253137119" at="43,23,44,18" concept="0" />
+      <node id="3550237152253137119" at="44,18,45,69" concept="0" />
+      <node id="3550237152253137119" at="45,69,46,18" concept="0" />
+      <node id="3550237152253137119" at="46,18,47,33" concept="3" />
+      <node id="3550237152253137119" at="47,33,48,74" concept="3" />
+      <node id="3550237152253137119" at="48,74,49,43" concept="0" />
+      <node id="9177601187676038197" at="22,0,29,0" concept="2" trace="prepareArguments#()V" />
+      <node id="2681075272524175470" at="30,0,40,0" concept="2" trace="testTransformAndMatch0#()V" />
+      <node id="3550237152253137119" at="40,0,51,0" concept="2" trace="testTransformAndMatch1#()V" />
+      <scope id="9177601187676038197" at="23,34,27,139" />
+      <scope id="9177601187676038197" at="22,0,29,0" />
+      <scope id="2681075272524175470" at="31,40,38,43">
+        <var name="i" id="2681075272524175470" />
+        <var name="ma" id="2681075272524175470" />
+        <var name="rm" id="2681075272524175470" />
+        <var name="t" id="2681075272524175470" />
+      </scope>
+      <scope id="3550237152253137119" at="41,40,49,43">
+        <var name="i" id="3550237152253137119" />
+        <var name="ma" id="3550237152253137119" />
+        <var name="rm" id="3550237152253137119" />
+        <var name="t" id="3550237152253137119" />
+      </scope>
+      <scope id="2681075272524175470" at="30,0,40,0" />
+      <scope id="3550237152253137119" at="40,0,51,0" />
+      <unit id="9177601187676038197" at="12,0,53,0" name="jetbrains.mps.test.smodel.BasicTest1" />
+    </file>
+  </root>
+</debug-info>
+

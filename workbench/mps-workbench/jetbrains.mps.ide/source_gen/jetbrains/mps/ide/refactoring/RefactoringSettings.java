@@ -4,6 +4,7 @@ package jetbrains.mps.ide.refactoring;
 
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
+import jetbrains.mps.annotations.GeneratedClass;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.openapi.application.ApplicationManager;
@@ -13,7 +14,8 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 @State(name = "MpsRefactoringSettings", storages = @Storage(value = "refactoringSettings.xml")
-)
+, reportStatistic = true)
+@GeneratedClass(node = "r:5a764b6f-e05f-4050-b22c-cbcad1577f1b(jetbrains.mps.ide.refactoring)/7420671084264343427", model = "r:5a764b6f-e05f-4050-b22c-cbcad1577f1b(jetbrains.mps.ide.refactoring)")
 public class RefactoringSettings implements PersistentStateComponent<RefactoringSettings>, ApplicationComponent {
 
   public boolean SAFE_DELETE = true;

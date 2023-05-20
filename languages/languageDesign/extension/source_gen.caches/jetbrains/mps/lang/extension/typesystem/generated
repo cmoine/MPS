@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="darnklslcg1lfvfnw97ut7ps0w8ethx" />
+<product version="3" modelHash="-90lesz1gzgoq8t3qxm9fmiuz1k3y8lc">
+  <files names="ExtensionPointType_supertypes_SubtypingRule.java:TypesystemDescriptor.java:check_ExtensionPointDeclaration_NonTypesystemRule.java:check_IHasUniqueId_NonTypesystemRule.java:check_IRegisterable_NonTypesystemRule.java:typeof_ExtensionFieldReference_InferenceRule.java:typeof_ExtensionObjectGetter_InferenceRule.java:typeof_ExtensionPointExpression_InferenceRule.java:typeof_GetExtensionObjectsOperation_InferenceRule.java" />
+</product>
 

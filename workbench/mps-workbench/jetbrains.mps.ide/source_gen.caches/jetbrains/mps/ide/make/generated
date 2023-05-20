@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="1sk3ekhk7sfihy9y1m06mrkz8f1iua4" />
+<product version="3" modelHash="-3aq5zts6jmmm7e1c9sljq7heeynsyws">
+  <files names="MakeSettingsPanel.java:TextPreviewFile.java" />
+</product>
 

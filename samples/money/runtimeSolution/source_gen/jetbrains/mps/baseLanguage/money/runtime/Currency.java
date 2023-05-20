@@ -52,7 +52,7 @@ public class Currency {
   }
   @Override
   public boolean equals(Object o) {
-    if (!((o instanceof Currency))) {
+    if (!(o instanceof Currency)) {
       return false;
     } else {
       Currency c = (Currency) o;

@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="lang.test.matcher">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/mps-core/lib/jetbrains.mps.lang.test.matcher.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

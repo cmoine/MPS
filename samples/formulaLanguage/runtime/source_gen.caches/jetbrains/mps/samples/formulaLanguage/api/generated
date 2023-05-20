@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="30pgtcu45v47q4jgfoav7a9qochjsg0" />
+<product version="3" modelHash="-6etskgj57n6jaiuwudb3mnqvt0x3tx0">
+  <files names="DoubleConstant.java:Function.java:IfFunction.java:MultiplyOperation.java" />
+</product>
 

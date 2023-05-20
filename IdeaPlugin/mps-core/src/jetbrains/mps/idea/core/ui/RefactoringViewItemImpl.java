@@ -71,14 +71,15 @@ public class RefactoringViewItemImpl implements RefactoringViewItem {
     init(callback, disposeAction, searchResults, refactoringContext.getRefactoring().getUserFriendlyName());
   }
 
-  private void init(final RefactoringViewAction callback, Runnable disposeAction, SearchResults searchResults, String name) {
+  private void init(final RefactoringViewAction callback, Runnable disposeAction, SearchResults<?> searchResults, String name) {
     List<UsageTarget> usageTargets = new LinkedList<UsageTarget>();
     UsageViewManager viewManager = UsageViewManager.getInstance(myProject);
 
     myCallback = callback;
     myDisposeAction = disposeAction;
 
-    for (Object searchedNode : searchResults.getAliveNodes()) {
+    for (SearchResult<?> searchResult : searchResults.getNotNullResults()) {
+      Object searchedNode = searchResult.getObject();
       if (searchedNode instanceof SNode) {
         usageTargets.add(new NodeUsageTarget(new jetbrains.mps.smodel.SNodePointer((SNode) searchedNode), myProject));
       }
@@ -86,7 +87,7 @@ public class RefactoringViewItemImpl implements RefactoringViewItem {
 
     List<Usage> usages = new ArrayList<Usage>();
     Set<SNode> nodes = new HashSet<SNode>();
-    for (SearchResult searchResult : (List<SearchResult>) searchResults.getSearchResults()) {
+    for (SearchResult searchResult : searchResults.getSearchResults()) {
       if (searchResult instanceof PsiSearchResult) {
 
         PsiReference psiRef = ((PsiSearchResult) searchResult).getReference();

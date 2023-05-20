@@ -1,9 +1,13 @@
 <component name="libraryTable">
   <library name="mps-tool">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/mps-core/lib/mps-tool.jar!/" />
+      <root url="jar://$PROJECT_DIR$/mps-core/lib/mpsant/mps-tool.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../core/tool/builder/source_gen" />
+      <root url="file://$PROJECT_DIR$/../core/tool/common/source_gen" />
+      <root url="file://$PROJECT_DIR$/../plugins/mps-build/languages/solutions/jetbrains.mps.build.mps.runner.runtime/source_gen" />
+    </SOURCES>
   </library>
 </component>

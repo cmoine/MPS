@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-9nw2zzy29yn9ztlzj4ee2r51b2rcn20" />
+<product version="3" modelHash="eusfdvh5b8s2168u3u8e3dw01h86v75">
+  <files names="BehaviorAspectDescriptor.java:PrivateFieldReferenceOperation__BehaviorDescriptor.java:PrivateInstanceMethodCallOperation__BehaviorDescriptor.java:PrivateStaticFieldReference__BehaviorDescriptor.java" />
+</product>
 

@@ -3,7 +3,7 @@
     <code>MPS</code>
 
     <channel id="MPS20EAP" name="MPS 2" status="eap"
-             url="http://confluence.jetbrains.net/display/MPS/JetBrains+MPS+2.5+Download+Page"
+             url="https://www.jetbrains.com/mps/download/previous.html"
              feedback="http://youtrack.jetbrains.net"
              majorVersion="2">
       <build number="117.9448" version="2.5.4">
@@ -12,7 +12,7 @@
     </channel>
 
     <channel id="MPS20" name="MPS 2" status="release"
-             url="http://confluence.jetbrains.net/display/MPS/JetBrains+MPS+2.5+Download+Page"
+             url="https://www.jetbrains.com/mps/download/previous.html"
              feedback="http://youtrack.jetbrains.net"
              majorVersion="2">
       <build number="117.9448" version="2.5.4">
@@ -21,7 +21,7 @@
     </channel>
 
     <channel id="MPS25EAP" name="MPS 2.5" status="eap"
-             url="http://confluence.jetbrains.net/display/MPS/JetBrains+MPS+2.5+Download+Page"
+             url="https://www.jetbrains.com/mps/download/previous.html"
              feedback="http://youtrack.jetbrains.net"
              majorVersion="2" minorVersoin="5">
       <build number="117.9448" version="2.5.4">
@@ -30,7 +30,7 @@
     </channel>
 
     <channel id="MPS25" name="MPS 2.5" status="release"
-             url="http://confluence.jetbrains.net/display/MPS/JetBrains+MPS+2.5+Download+Page"
+             url="https://www.jetbrains.com/mps/download/previous.html"
              feedback="http://youtrack.jetbrains.net"
              majorVersion="2" minorVersoin="5">
       <build number="117.9448" version="2.5.4">
@@ -39,7 +39,7 @@
     </channel>
 
     <channel id="MPS30EAP" name="MPS 3.0" status="eap"
-             url="http://confluence.jetbrains.net/display/MPS/JetBrains+MPS+3.0+Download+Page"
+             url="https://www.jetbrains.com/mps/download/previous.html"
              feedback="http://youtrack.jetbrains.net"
              majorVersion="3" minorVersoin="0">
       <build number="129.516" version="3.0.5">
@@ -48,7 +48,7 @@
     </channel>
 
     <channel id="MPS30" name="MPS 3.0" status="release"
-             url="http://confluence.jetbrains.net/display/MPS/JetBrains+MPS+3.0+Download+Page"
+             url="https://www.jetbrains.com/mps/download/previous.html"
              feedback="http://youtrack.jetbrains.net"
              majorVersion="3" minorVersoin="0">
       <build number="129.516" version="3.0.5">
@@ -57,7 +57,7 @@
     </channel>
 
     <channel id="MPS31EAP" name="MPS 3.1" status="eap"
-             url="http://confluence.jetbrains.com/display/MPS/JetBrains+MPS+3.1+Download+Page"
+             url="https://www.jetbrains.com/mps/download/previous.html"
              feedback="http://youtrack.jetbrains.net"
              majorVersion="3" minorVersoin="1">
       <build number="135.1483" version="3.1.6">
@@ -66,7 +66,7 @@
     </channel>
 
     <channel id="MPS31" name="MPS 3.1" status="release"
-             url="http://confluence.jetbrains.com/display/MPS/JetBrains+MPS+3.1+Download+Page"
+             url="https://www.jetbrains.com/mps/download/previous.html"
              feedback="http://youtrack.jetbrains.net"
              majorVersion="3" minorVersoin="1">
       <build number="135.1483" version="3.1.6">
@@ -75,7 +75,7 @@
     </channel>
 
     <channel id="MPS32EAP" name="MPS 3.2" status="eap"
-             url="http://confluence.jetbrains.com/display/MPS/JetBrains+MPS+3.2+Download+Page"
+             url="https://www.jetbrains.com/mps/download/previous.html"
              feedback="http://youtrack.jetbrains.net"
              majorVersion="3" minorVersoin="2">
       <build number="139.2747" version="3.2.4">
@@ -84,7 +84,7 @@
     </channel>
 
     <channel id="MPS32" name="MPS 3.2" status="release"
-             url="http://confluence.jetbrains.com/display/MPS/JetBrains+MPS+3.2+Download+Page"
+             url="https://www.jetbrains.com/mps/download/previous.html"
              feedback="http://youtrack.jetbrains.net"
              majorVersion="3" minorVersoin="2">
       <build number="139.2747" version="3.2.4">
@@ -93,7 +93,7 @@
     </channel>
 
     <channel id="MPS33EAP" name="MPS 3.3" status="eap"
-             url="http://confluence.jetbrains.com/display/MPS/JetBrains+MPS+3.3+Download+Page"
+             url="https://www.jetbrains.com/mps/download/previous.html"
              feedback="http://youtrack.jetbrains.net"
              majorVersion="3" minorVersoin="3">
       <build number="143.1301" version="3.3.5">
@@ -102,7 +102,7 @@
     </channel>
 
     <channel id="MPS33" name="MPS 3.3" status="release"
-             url="http://confluence.jetbrains.com/display/MPS/JetBrains+MPS+3.3+Download+Page"
+             url="https://www.jetbrains.com/mps/download/previous.html"
              feedback="http://youtrack.jetbrains.net"
              majorVersion="3" minorVersoin="3">
       <build number="143.1301" version="3.3.5">
@@ -111,13 +111,341 @@
     </channel>
 
     <channel id="MPS34EAP" name="MPS 3.4" status="eap"
-             url="http://confluence.jetbrains.com/display/MPS/JetBrains+MPS+3.4+EAP+Download+Page"
+             url="https://www.jetbrains.com/mps/download/previous.html"
              feedback="http://youtrack.jetbrains.net"
              majorVersion="3" minorVersoin="4">
-      <build number="145.728" version="3.4 EAP2">
-        <message>JetBrains MPS 3.4 EAP2 is available.</message>
+      <build number="162.2317" version="3.4.4">
+        <message>JetBrains MPS 3.4.4 is available.</message>
       </build>
     </channel>
 
+    <channel id="MPS34" name="MPS 3.4" status="release"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="3" minorVersoin="4">
+      <build number="162.2317" version="3.4.4">
+        <message>JetBrains MPS 3.4.4 is available.</message>
+      </build>
+    </channel>
+
+    <channel id="MPS171EAP" name="MPS 2017.1" status="eap"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2017" minorVersoin="1">
+      <build number="171.1448" version="2017.1.3">
+        <message>JetBrains MPS 2017.1.3 is available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+
+    <channel id="MPS171" name="MPS 2017.1" status="release"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2017" minorVersoin="1">
+      <build number="171.1448" version="2017.1.3">
+        <message>JetBrains MPS 2017.1.3 is available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+
+    <channel id="MPS172EAP" name="MPS 2017.2" status="eap"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2017" minorVersoin="2">
+      <build number="172.1493" version="2017.2.3">
+        <message>JetBrains MPS 2017.2.3 is available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+
+    <channel id="MPS172" name="MPS 2017.2" status="release"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2017" minorVersoin="2">
+      <build number="172.1493" version="2017.2.3">
+        <message>JetBrains MPS 2017.2.3 is available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+
+    <channel id="MPS173EAP" name="MPS 2017.3" status="eap"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2017" minorVersoin="3">
+      <build number="173.1812" version="2017.3.6">
+        <message>JetBrains MPS 2017.3.6 is available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+
+    <channel id="MPS173" name="MPS 2017.3" status="release"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2017" minorVersoin="3">
+      <build number="173.1812" version="2017.3.6">
+        <message>JetBrains MPS 2017.3.6 is available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+
+    <channel id="MPS181EAP" name="MPS 2018.1" status="eap"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2018" minorVersoin="1">
+      <build number="181.1469" version="2018.1.5">
+        <message>JetBrains MPS 2018.1.5 is available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+
+    <channel id="MPS181" name="MPS 2018.1" status="release"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2018" minorVersoin="1">
+      <build number="181.1469" version="2018.1.5">
+        <message>JetBrains MPS 2018.1.5 is available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+
+    <channel id="MPS182EAP" name="MPS 2018.2" status="eap"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2018" minorVersoin="2">
+      <build number="182.1603" version="2018.2.6">
+        <message>JetBrains MPS 2018.2.6 is available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+
+    <channel id="MPS182" name="MPS 2018.2" status="release"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2018" minorVersoin="2">
+      <build number="182.1603" version="2018.2.6">
+        <message>JetBrains MPS 2018.2.6 is available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+
+    <channel id="MPS183EAP" name="MPS 2018.3" status="eap"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2018" minorVersoin="3">
+      <build number="183.1868" version="2018.3.7">
+        <message>JetBrains MPS 2018.3.7 is available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+
+    <channel id="MPS183" name="MPS 2018.3" status="release"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2018" minorVersoin="3">
+      <build number="183.1868" version="2018.3.7">
+        <message>JetBrains MPS 2018.3.7 is available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+
+    <channel id="MPS191EAP" name="MPS 2019.1" status="eap"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2019" minorVersoin="1">
+      <build number="191.1698" version="2019.1.6">
+        <message>JetBrains MPS 2019.1.6 is now available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+
+    <channel id="MPS191" name="MPS 2019.1" status="release"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2019" minorVersoin="1">
+      <build number="191.1698" version="2019.1.6">
+        <message>JetBrains MPS 2019.1.6 is available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+
+    <channel id="MPS192EAP" name="MPS 2019.2" status="eap"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2019" minorVersoin="2">
+      <build number="192.2456" version="2019.2.4">
+        <message>JetBrains MPS 2019.2.4 is now available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+
+    <channel id="MPS192" name="MPS 2019.2" status="release"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2019" minorVersoin="2">
+      <build number="192.2456" version="2019.2.4">
+        <message>JetBrains MPS 2019.2.4 is available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+
+    <channel id="MPS193EAP" name="MPS 2019.3" status="eap"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2019" minorVersoin="3">
+      <build number="193.1623" version="2019.3.7">
+        <message>JetBrains MPS 2019.3.7 is now available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+
+    <channel id="MPS193" name="MPS 2019.3" status="release"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2019" minorVersoin="3">
+      <build number="193.1623" version="2019.3.7">
+        <message>JetBrains MPS 2019.3.7 is now available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+
+    <channel id="MPS201EAP" name="MPS 2020.1" status="eap"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2020" minorVersoin="1">
+      <build number="201.8743.1619" version="2020.1.7">
+        <message>JetBrains MPS 2020.1.7 is now available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+
+    <channel id="MPS201" name="MPS 2020.1" status="release"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2020" minorVersoin="1">
+      <build number="201.8743.1619" version="2020.1.7">
+        <message>JetBrains MPS 2020.1.7 is now available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+
+    <channel id="MPS202EAP" name="MPS 2020.2" status="eap"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2020" minorVersoin="2">
+      <build number="202.8194.1069" version="2020.2.3">
+        <message>JetBrains MPS 2020.2.3 is now available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+
+    <channel id="MPS202" name="MPS 2020.2" status="release"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2020" minorVersoin="2">
+      <build number="202.8194.1069" version="2020.2.3">
+        <message>JetBrains MPS 2020.2.3 is now available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+    <channel id="MPS203EAP" name="MPS 2020.3" status="eap"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2020" minorVersoin="3">
+      <build number="203.8084.3348" version="2020.3.5">
+        <message>JetBrains MPS 2020.3.5 is now available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+    <channel id="MPS203" name="MPS 2020.3" status="release"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2020" minorVersoin="3">
+      <build number="203.8084.3437" version="2020.3.6">
+        <message>JetBrains MPS 2020.3.6 is now available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+    <channel id="MPS211EAP" name="MPS 2021.1" status="eap"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2021" minorVersoin="1">
+      <build number="211.7628.1509" version="2021.1.4">
+        <message>JetBrains MPS 2021.1.4 is now available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+    <channel id="MPS211" name="MPS 2021.1" status="release"
+             url="https://www.jetbrains.com/mps/download/previous.html"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2021" minorVersoin="1">
+      <build number="211.7628.1509" version="2021.1.4">
+        <message>JetBrains MPS 2021.1.4 is now available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+    <channel id="MPS212EAP" name="MPS 2021.2" status="eap"
+             url="https://www.jetbrains.com/mps/download"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2021" minorVersoin="2">
+      <build number="212.5284.1433" version="2021.2.6">
+        <message>JetBrains MPS 2021.2.6 is now available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+    <channel id="MPS212" name="MPS 2021.2" status="release"
+             url="https://www.jetbrains.com/mps/download"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2021" minorVersoin="2">
+      <build number="212.5284.1433" version="2021.2.6">
+        <message>JetBrains MPS 2021.2.6 is now available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download/previous.html" download="true"/>
+      </build>
+    </channel>
+    <channel id="MPS213EAP" name="MPS 2021.3" status="eap"
+             url="https://www.jetbrains.com/mps/nextversion"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2021" minorVersoin="3">
+      <build number="213.7172.1022" version="2021.3.2">
+        <message>JetBrains MPS 2021.3.2 is now available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download" download="true"/>
+      </build>
+    </channel>
+    <channel id="MPS213" name="MPS 2021.3" status="release"
+             url="https://www.jetbrains.com/mps/download"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2021" minorVersoin="3">
+      <build number="213.7172.1022" version="2021.3.2">
+        <message>JetBrains MPS 2021.3.2 is now available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download" download="true"/>
+      </build>
+    </channel>
+
+    <channel id="MPS222" name="MPS 2022.2" status="release"
+             url="https://www.jetbrains.com/mps/download"
+             feedback="https://youtrack.jetbrains.com/issues/MPS"
+             majorVersion="2022" minorVersoin="2">
+      <build number="222.3345.1295" version="2022.2">
+        <message>JetBrains MPS 2022.2 is now available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download" download="true"/>
+      </build>
+    </channel>
+    <channel id="MPS223EAP" name="MPS 2022.3" status="eap"
+             url="https://www.jetbrains.com/mps/nextversion"
+             feedback="http://youtrack.jetbrains.net"
+             majorVersion="2022" minorVersoin="3">
+      <build number="223.8836.1121" version="2022.3">
+        <message>JetBrains MPS 2022.3 RC1 is now available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/nextversion" download="true"/>
+      </build>
+    </channel>
+    <channel id="MPS223" name="MPS 2022.3" status="release"
+             url="https://www.jetbrains.com/mps/download"
+             feedback="https://youtrack.jetbrains.com/issues/MPS"
+             majorVersion="2022" minorVersoin="3">
+      <build number="223.8836.1185" version="2022.3">
+        <message>JetBrains MPS 2022.3 is now available.</message>
+        <button name="Download" url="https://www.jetbrains.com/mps/download" download="true"/>
+      </build>
+    </channel>
   </product>
 </products>

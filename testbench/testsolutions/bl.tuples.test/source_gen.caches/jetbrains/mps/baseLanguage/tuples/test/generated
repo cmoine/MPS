@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-5we4x19v8ha4a2vbxh8h33ed10dmv73" />
+<product version="3" modelHash="-7m575twgbkk7setonf7p91covqqfcij">
+  <files names="Bool.java:Data.java:ExtendedNamedTuples.java:ExtendedNamedTuples_Test.java:GenericNamedTuples_Test.java:ISample.java:IndexedTuples_Test.java:IntPair.java:MPS14511_Test.java:MPS15234_Test.java:MPS7408.java:NamedTupleInFunctionType.java:NamedTuples_Test.java:Nulls.java:Pair.java:Record.java:Sample.java" />
+</product>
 

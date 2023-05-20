@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <root nodeRef="r:c677fbe5-7383-4702-bb5b-4cafd7c3a08b(jetbrains.mps.generator.tests.callsite@tests)/2676503840832083128">
+    <file name="CallSiteNodeForTemplateCall.java">
+      <node id="2676503840832083599" at="16,0,17,0" concept="1" trace="myArg_INPUT" />
+      <node id="2676503840832083648" at="17,0,18,0" concept="1" trace="myArg_OUTPUT" />
+      <node id="2676503840832083613" at="18,0,19,0" concept="1" trace="myArg_GP_Compiled" />
+      <node id="2676503840832083633" at="19,0,20,0" concept="1" trace="myArg_GP_Interpreted" />
+      <node id="2676503840832083599" at="23,34,24,122" concept="0" />
+      <node id="2676503840832083648" at="24,122,25,124" concept="0" />
+      <node id="2676503840832083613" at="25,124,26,148" concept="0" />
+      <node id="2676503840832083633" at="26,148,27,157" concept="0" />
+      <node id="2676503840832083663" at="31,40,32,41" concept="3" />
+      <node id="2676503840832083663" at="32,41,33,27" concept="3" />
+      <node id="2676503840832083663" at="33,27,34,18" concept="0" />
+      <node id="2676503840832083663" at="34,18,35,64" concept="0" />
+      <node id="2676503840832083663" at="35,64,36,18" concept="0" />
+      <node id="2676503840832083663" at="36,18,37,29" concept="3" />
+      <node id="2676503840832083663" at="37,29,38,74" concept="3" />
+      <node id="2676503840832083663" at="38,74,39,43" concept="0" />
+      <node id="2676503840832083677" at="42,40,43,41" concept="3" />
+      <node id="2676503840832083677" at="43,41,44,27" concept="3" />
+      <node id="2676503840832083677" at="44,27,45,18" concept="0" />
+      <node id="2676503840832083677" at="45,18,46,67" concept="0" />
+      <node id="2676503840832083677" at="46,67,47,18" concept="0" />
+      <node id="2676503840832083677" at="47,18,48,29" concept="3" />
+      <node id="2676503840832083677" at="48,29,49,74" concept="3" />
+      <node id="2676503840832083677" at="49,74,50,43" concept="0" />
+      <node id="2676503840832083128" at="22,0,29,0" concept="2" trace="prepareArguments#()V" />
+      <node id="2676503840832083663" at="30,0,41,0" concept="2" trace="testTransformAndMatch0#()V" />
+      <node id="2676503840832083677" at="41,0,52,0" concept="2" trace="testTransformAndMatch1#()V" />
+      <scope id="2676503840832083128" at="23,34,27,157" />
+      <scope id="2676503840832083128" at="22,0,29,0" />
+      <scope id="2676503840832083663" at="31,40,39,43">
+        <var name="i" id="2676503840832083663" />
+        <var name="ma" id="2676503840832083663" />
+        <var name="rm" id="2676503840832083663" />
+        <var name="t" id="2676503840832083663" />
+      </scope>
+      <scope id="2676503840832083677" at="42,40,50,43">
+        <var name="i" id="2676503840832083677" />
+        <var name="ma" id="2676503840832083677" />
+        <var name="rm" id="2676503840832083677" />
+        <var name="t" id="2676503840832083677" />
+      </scope>
+      <scope id="2676503840832083663" at="30,0,41,0" />
+      <scope id="2676503840832083677" at="41,0,52,0" />
+      <unit id="2676503840832083128" at="12,0,54,0" name="jetbrains.mps.generator.tests.callsite.CallSiteNodeForTemplateCall" />
+    </file>
+  </root>
+</debug-info>
+

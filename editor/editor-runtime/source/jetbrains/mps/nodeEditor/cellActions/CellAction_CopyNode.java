@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import jetbrains.mps.baseLanguage.tuples.runtime.Tuples._4;
 import jetbrains.mps.editor.runtime.cells.AbstractCellAction;
 import jetbrains.mps.ide.datatransfer.CopyPasteUtil;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.AttributeOperations;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.nodeEditor.EditorComponent;
 import jetbrains.mps.nodeEditor.text.TextRenderUtil;
 import jetbrains.mps.openapi.editor.EditorContext;
@@ -29,8 +30,6 @@ import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.cells.EditorCell_Collection;
 import jetbrains.mps.openapi.editor.selection.SelectionManager;
 import jetbrains.mps.util.SNodeOperations;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.util.Condition;
 
@@ -47,7 +46,7 @@ import java.util.Set;
  * Time: Nov 26, 2003 2:06:41 PM
  */
 public class CellAction_CopyNode extends AbstractCellAction {
-  private static final Logger LOG = LogManager.getLogger(CellAction_CopyNode.class);
+  private static final Logger LOG = Logger.getLogger(CellAction_CopyNode.class);
 
   @Override
   public boolean canExecute(EditorContext context) {
@@ -87,25 +86,22 @@ public class CellAction_CopyNode extends AbstractCellAction {
       LOG.debug("Copy node : " + SNodeOperations.getDebugText(selectedCells.get(0).getSNode()));
     }
 
-    List<SNode> copyNodeList = new ArrayList<SNode>();
-    List<SNode> deleteNodeList = new ArrayList<SNode>();
-    Map<SNode, Set<SNode>> nodesAndAttributes = new HashMap<SNode, Set<SNode>>();
+    List<SNode> copyNodeList = new ArrayList<>();
+    List<SNode> deleteNodeList = new ArrayList<>();
+    Map<SNode, Set<SNode>> nodesAndAttributes = new HashMap<>();
     for (EditorCell selectedCell : selectedCells) {
       SNode node = selectedCell.getSNode();
       final SNode parent = node.getParent();
       if (parent != null && AttributeOperations.isAttribute(node)) {
-        Condition<EditorCell> condition = new Condition<EditorCell>() {
-          @Override
-          public boolean met(EditorCell object) {
-            SNode selectedNode = object.getSNode();
-            return selectedNode != null &&
-                    selectedNode.getParent() == parent && AttributeOperations.isAttribute(selectedNode);
-          }
+        Condition<EditorCell> condition = object -> {
+          SNode selectedNode = object.getSNode();
+          return selectedNode != null &&
+                  selectedNode.getParent() == parent && AttributeOperations.isAttribute(selectedNode);
         };
 
         //Store the attribute by default. Store the parent only of it is also part of the selection.
         SNode nodeToDelete = node;
-        Set<SNode> selectedAttributes = new HashSet<SNode>();
+        Set<SNode> selectedAttributes = new HashSet<>();
         selectedAttributes.add(node);
         if (selectedCell instanceof EditorCell_Collection) {
           for (EditorCell cell : CellTraversalUtil.iterateTree(selectedCell, selectedCell, true)) {
@@ -126,6 +122,6 @@ public class CellAction_CopyNode extends AbstractCellAction {
         deleteNodeList.add(node);
       }
     }
-    return new MultiTuple._4<List<SNode>, List<SNode>, Map<SNode, Set<SNode>>, String> (copyNodeList, deleteNodeList, nodesAndAttributes, textBuilder.getText());
+    return new MultiTuple._4<>(copyNodeList, deleteNodeList, nodesAndAttributes, textBuilder.getText());
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,17 +15,29 @@
  */
 package jetbrains.mps.ide.ui.tree;
 
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.annotations.Immutable;
+
 import java.awt.Color;
 
+@Immutable
 public class TreeMessage {
-  private Color myColor;
-  private String myAdditionalText;
-  private TreeMessageOwner myOwner;
+  private final Color myColor;
+  private final String myAdditionalText;
+  private final TreeMessageOwner myOwner;
 
-  public TreeMessage(Color color, String additionalText, TreeMessageOwner owner) {
+  // FIXME Either get rid of TreeMessageOwner, or pass a reasonable value in here
+  //       I don't quite buy the reason to have null for owner, but it's the way it is with DependencyTree.
+  //       Guess, need to refactor that some day. OTOH, if there's no use for the owner, why introduce a possible memory leak with
+  //       a reference to an object?
+  public TreeMessage(Color color, String additionalText, @Nullable TreeMessageOwner owner) {
     myColor = color;
     myAdditionalText = additionalText;
     myOwner = owner;
+  }
+
+  protected TreeMessage(TreeMessageOwner owner) {
+    this(null, null, owner);
   }
 
   public Color getColor() {

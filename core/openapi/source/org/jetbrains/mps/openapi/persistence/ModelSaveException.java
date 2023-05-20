@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +18,13 @@ package org.jetbrains.mps.openapi.persistence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SModel.Problem;
 
+import java.util.Collections;
+
 /**
  * The exception is thrown when AST content doesn't fit into the persistence format.
  * For example: empty lists or properties, errors in associativity or unsupported concepts.
  */
 public class ModelSaveException extends Exception {
-
   @NotNull
   private final Iterable<Problem> myProblems;
 
@@ -35,6 +36,10 @@ public class ModelSaveException extends Exception {
   public ModelSaveException(String message, @NotNull Iterable<Problem> problems, Throwable cause) {
     super(message, cause);
     myProblems = problems;
+  }
+
+  public ModelSaveException(@NotNull Problem p) {
+    this(p.getText(), Collections.singleton(p));
   }
 
   @NotNull

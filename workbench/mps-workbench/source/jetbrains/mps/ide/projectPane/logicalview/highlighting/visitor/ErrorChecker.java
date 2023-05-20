@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,116 +15,159 @@
  */
 package jetbrains.mps.ide.projectPane.logicalview.highlighting.visitor;
 
-import jetbrains.mps.ide.projectPane.logicalview.highlighting.visitor.updates.ErrorStateNodeUpdate;
+import jetbrains.mps.errors.item.ModelReportItem;
+import jetbrains.mps.errors.item.ModuleReportItem;
+import jetbrains.mps.extapi.model.TransientSModel;
+import jetbrains.mps.ide.ui.tree.ErrorState;
 import jetbrains.mps.ide.ui.tree.MPSTreeNode;
+import jetbrains.mps.ide.ui.tree.TreeErrorMessage;
+import jetbrains.mps.ide.ui.tree.TreeMessage;
+import jetbrains.mps.ide.ui.tree.TreeMessageOwner;
+import jetbrains.mps.ide.ui.tree.TreeNodeVisitor;
+import jetbrains.mps.ide.ui.tree.module.NamespaceTextNode;
 import jetbrains.mps.ide.ui.tree.module.ProjectModuleTreeNode;
 import jetbrains.mps.ide.ui.tree.module.ProjectTreeNode;
 import jetbrains.mps.ide.ui.tree.smodel.SModelTreeNode;
-import jetbrains.mps.project.Project;
-import jetbrains.mps.project.StandaloneMPSProject;
+import jetbrains.mps.progress.EmptyProgressMonitor;
+import jetbrains.mps.project.MPSProject;
 import jetbrains.mps.project.validation.MessageCollectProcessor;
+import jetbrains.mps.project.validation.ModelValidator;
 import jetbrains.mps.project.validation.ValidationUtil;
-import jetbrains.mps.project.validation.ValidationProblem;
-import jetbrains.mps.project.validation.ValidationProblem.Severity;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SModel;
-import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SModuleReference;
-import org.jetbrains.mps.openapi.util.Processor;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
+import java.util.Iterator;
+import java.util.Set;
 
-public class ErrorChecker extends TreeUpdateVisitor {
-  public ErrorChecker(Project mpsProject) {
-    super(mpsProject);
+/**
+ * visitXXX methods require model read
+ */
+public class ErrorChecker extends TreeUpdateVisitor implements TreeMessageOwner {
+  private final MPSProject myProject;
+
+  public ErrorChecker(MPSProject mpsProject) {
+    myProject = mpsProject;
+  }
+
+  @Nullable
+  public TreeNodeVisitor getParentUpdater() {
+    return new TreeNodeVisitor() {
+      @Override
+      public void visitModuleNode(@NotNull ProjectModuleTreeNode node) {
+        // Though there could be messages for the node itself, still need to pull derived state from children
+        // as it might be more severe, and cell renderer can not walk tree hierarchy to figure out if there are.
+        // Note, if the node got any 'original' state, it's preserved.
+        deriveFromChildren(node);
+      }
+
+      private void deriveFromChildren(MPSTreeNode node) {
+        boolean derivedErrors = false, derivedWarnings = false;
+        for (Iterator<MPSTreeNode> it = node.getChildrenSnapshot().iterator(); it.hasNext(); ) {
+          final Collection<TreeErrorMessage> childMessages = it.next().findMessages(TreeErrorMessage.class);
+          if (childMessages.stream().anyMatch(TreeErrorMessage::isError)) {
+            derivedErrors = true;
+            // no need to check other children, nothing gonna override error severity
+            break;
+          } else if (childMessages.stream().anyMatch(TreeErrorMessage::isWarning)) {
+            derivedWarnings = true;
+          }
+        }
+        if (derivedErrors) {
+          // Indicate 'derived' error status so that one can tell derived status from truly calculated when
+          // presenting an indication to user (e.g. don't show error indicator/balloon for derived messages)
+          resetDerivedOnly(node, msg(ErrorState.ERROR, "Descendants with errors", false));
+        } else if (derivedWarnings) {
+          resetDerivedOnly(node, msg(ErrorState.WARNING, "Descendants with warnings", false));
+        }
+      }
+
+      @Override
+      public void visitNamespaceNode(@NotNull NamespaceTextNode node) {
+        // namespace nodes got only 'derived' error states, it's ok to reset derived messages only.
+        deriveFromChildren(node);
+      }
+    };
   }
 
   @Override
   public void visitModelNode(@NotNull final SModelTreeNode node) {
-    final SModelReference mr = node.getModel().getReference();
-    scheduleModelRead(node, new Runnable() {
-      @Override
-      public void run() {
-        final SModel modelDescriptor = mr.resolve(myProject.getRepository());
-        if (modelDescriptor == null || !(modelDescriptor.isLoaded())) {
-          return;
-        }
-
-        final List<String> errors = new ArrayList<String>();
-        final List<String> warnings = new ArrayList<String>();
-        ValidationUtil.validateModel(modelDescriptor, new Processor<ValidationProblem>() {
-          @Override
-          public boolean process(ValidationProblem problem) {
-            if (problem.getSeverity() == Severity.ERROR) {
-              errors.add(problem.getMessage());
-            } else {
-              warnings.add(problem.getMessage());
-            }
-            return true;
-          }
-        });
-        schedule(node, new ErrorReport(node, errors, warnings));
-      }
-    });
+    final SModel model = node.getModel();
+    if (model instanceof TransientSModel) {
+      // generally, transient models one see in a project pane are generator artifacts and of no interest for validation
+      return;
+    }
+    MessageCollectProcessor<ModelReportItem> collector = new MessageCollectProcessor<>(true);
+    final ModelValidator modelValidator = new ModelValidator(myProject.getPlatform(), model);
+    modelValidator.skipUnlessLoaded(); // no reason to load all the models unless user gets to one
+    modelValidator.validate(collector, new EmptyProgressMonitor());
+    reset(node, createNodeUpdate(collector));
   }
 
   @Override
   public void visitModuleNode(@NotNull final ProjectModuleTreeNode node) {
     final SModuleReference mr = node.getModule().getModuleReference();
-    scheduleModelRead(node, new Runnable() {
-      @Override
-      public void run() {
-        SModule module = mr.resolve(myProject.getRepository());
+    SModule module = mr.resolve(myProject.getRepository());
+    if (module != null) {
+      MessageCollectProcessor<ModuleReportItem> collector = new MessageCollectProcessor<>(true);
+      ValidationUtil.validateModule(module, collector);
+      reset(node, createNodeUpdate(collector));
+    }
+  }
 
-        MessageCollectProcessor collector = new MessageCollectProcessor(true);
-        if (module != null) {
-          ValidationUtil.validateModule(module, collector);
-        }
-        schedule(node, new ErrorReport(node, collector.getErrors(), collector.getWarnings()));
-      }
-    });
+  /*package*/ Collection<TreeErrorMessage> createNodeUpdate(MessageCollectProcessor<?> messages) {
+    final ArrayList<TreeErrorMessage> msg = new ArrayList<>();
+    messages.getErrors().stream().map(this::newError).forEach(msg::add);
+    messages.getWarnings().stream().map(this::newWarning).forEach(msg::add);
+    messages.getInfos().stream().map(s -> msg(ErrorState.NONE, s, true)).forEach(msg::add);
+    return msg;
+  }
 
+  private TreeErrorMessage msg(ErrorState errorState, String msg, boolean original) {
+    return new TreeErrorMessage(errorState, msg, this, !original);
+  }
+
+  private TreeErrorMessage newError(String msg) {
+    return msg(ErrorState.ERROR, msg, true);
+  }
+
+  private TreeErrorMessage newWarning(String msg) {
+    return msg(ErrorState.WARNING, msg, true);
   }
 
   @Override
   public void visitProjectNode(@NotNull final ProjectTreeNode node) {
-    String errors = ((StandaloneMPSProject) node.getProject()).getErrors();
-    addUpdate(node, new ErrorStateNodeUpdate(errors, false));
+    // FIXME stupid code Project.getErrors():String
+    String errors = ((MPSProject) node.getProject()).getErrors();
+    if (errors.isBlank()) {
+      reset(node, Collections.emptyList());
+    } else {
+      reset(node, Collections.singleton(newError(errors)));
+    }
   }
 
-  private class ErrorReport implements Runnable {
-    private final MPSTreeNode myNode;
-    private final List<String> errors;
-    private final List<String> warns;
-
-    public ErrorReport(MPSTreeNode node, List<String> errors, List<String> warns) {
-      myNode = node;
-      this.errors = errors;
-      this.warns = warns == null ? Collections.<String>emptyList() : warns;
+  // arguments are not null, tree messages are supposed to be with `this` as owner
+  private void reset(MPSTreeNode node, Collection<TreeErrorMessage> messages) {
+    final Set<TreeMessage> removed = node.removeTreeMessages(this);
+    messages.forEach(node::addTreeMessage);
+    if (!removed.isEmpty() || !messages.isEmpty()) {
+      requestTreeRefresh(node);
     }
+  }
 
-
-    @Override
-    public void run() {
-      StringBuilder result = new StringBuilder();
-      if (errors.isEmpty() && warns.isEmpty()) {
-        addUpdate(myNode, new ErrorStateNodeUpdate(null, true));
-      } else {
-        result.append("<html>");
-        for (String error : errors) {
-          result.append(error);
-          result.append("<br>");
-        }
-        for (String warn : warns) {
-          result.append("warn: ");
-          result.append(warn);
-          result.append("<br>");
-        }
-        addUpdate(myNode, new ErrorStateNodeUpdate(result.toString(), errors.isEmpty()));
-      }
-    }
+  // arguments are not null
+  private void resetDerivedOnly(MPSTreeNode node, TreeErrorMessage msg) {
+    assert msg.isDerivedFromDescendant();
+    // remove any derived message with this owner, and replace them with a new one
+    final Collection<TreeErrorMessage> messages = node.findMessages(TreeErrorMessage.class);
+    messages.removeIf(TreeErrorMessage::isOriginal);
+    messages.forEach(node::removeTreeMessage);
+    node.addTreeMessage(msg);
+    requestTreeRefresh(node);
   }
 }

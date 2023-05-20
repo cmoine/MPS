@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <root nodeRef="r:03d3090f-cc5b-43a6-b212-e089f946314d(jetbrains.mps.vcs.mergehints.runtime)/1277106018273911117">
+    <file name="VCSAspectDescriptor.java">
+      <node id="5705146868101498976" at="12,0,14,0" concept="2" trace="getVCSDescriptor#(Lorg/jetbrains/mps/openapi/language/SAbstractConcept;)Ljetbrains/mps/vcs/mergehints/runtime/VCSConceptAspect;" />
+      <scope id="5705146868101498976" at="12,0,14,0">
+        <var name="c" id="5705146868101498980" />
+      </scope>
+      <unit id="1277106018274215677" at="15,0,17,0" name="jetbrains.mps.vcs.mergehints.runtime.VCSAspectDescriptor$BaseVcsAspectDescriptor" />
+      <unit id="1277106018273911117" at="10,0,18,0" name="jetbrains.mps.vcs.mergehints.runtime.VCSAspectDescriptor" />
+    </file>
+  </root>
+  <root nodeRef="r:03d3090f-cc5b-43a6-b212-e089f946314d(jetbrains.mps.vcs.mergehints.runtime)/5705146868101010166">
+    <file name="VCSAspectUtil.java">
+      <node id="5705146868101487607" at="19,75,20,46" concept="4" />
+      <node id="5705146868101488922" at="23,68,24,60" concept="4" />
+      <node id="5705146868102551974" at="27,75,28,60" concept="4" />
+      <node id="5705146868102552057" at="31,73,32,60" concept="4" />
+      <node id="5705146868101474777" at="35,67,36,90" concept="3" />
+      <node id="5705146868101484823" at="36,90,37,62" concept="4" />
+      <node id="5705146868101486999" at="40,36,41,52" concept="4" />
+      <node id="5705146868101486999" at="42,5,43,16" concept="4" />
+      <node id="5705146868101488923" at="46,36,47,53" concept="4" />
+      <node id="5705146868101488923" at="48,5,49,16" concept="4" />
+      <node id="5705146868102551975" at="52,36,53,53" concept="4" />
+      <node id="5705146868102551975" at="54,5,55,16" concept="4" />
+      <node id="5705146868102552058" at="58,36,59,53" concept="4" />
+      <node id="5705146868102552058" at="60,5,61,16" concept="4" />
+      <node id="5705146868101505664" at="64,36,65,51" concept="4" />
+      <node id="5705146868101505664" at="66,5,67,16" concept="4" />
+      <node id="5705146868101488302" at="70,36,71,68" concept="4" />
+      <node id="5705146868101488302" at="72,5,73,16" concept="4" />
+      <node id="5705146868101067826" at="16,0,18,0" concept="0" trace="VCSAspectUtil#()V" />
+      <node id="5705146868101618580" at="19,0,22,0" concept="5" trace="getDefaultMergeStrategy#(Lorg/jetbrains/mps/openapi/language/SAbstractConcept;)Ljetbrains/mps/vcs/util/MergeStrategy;" />
+      <node id="5705146868101618903" at="23,0,26,0" concept="5" trace="getDefaultMergeStrategy#(Lorg/jetbrains/mps/openapi/language/SProperty;)Ljetbrains/mps/vcs/util/MergeStrategy;" />
+      <node id="5705146868102551972" at="27,0,30,0" concept="5" trace="getDefaultMergeStrategy#(Lorg/jetbrains/mps/openapi/language/SContainmentLink;)Ljetbrains/mps/vcs/util/MergeStrategy;" />
+      <node id="5705146868102552055" at="31,0,34,0" concept="5" trace="getDefaultMergeStrategy#(Lorg/jetbrains/mps/openapi/language/SReferenceLink;)Ljetbrains/mps/vcs/util/MergeStrategy;" />
+      <node id="5705146868101486999" at="39,86,42,5" concept="1" />
+      <node id="5705146868101488923" at="45,99,48,5" concept="1" />
+      <node id="5705146868102551975" at="51,106,54,5" concept="1" />
+      <node id="5705146868102552058" at="57,104,60,5" concept="1" />
+      <node id="5705146868101505664" at="63,113,66,5" concept="1" />
+      <node id="5705146868101488302" at="69,92,72,5" concept="1" />
+      <node id="5705146868101619194" at="35,0,39,0" concept="5" trace="getVCSAspect#(Lorg/jetbrains/mps/openapi/language/SAbstractConcept;)Ljetbrains/mps/vcs/mergehints/runtime/VCSConceptAspect;" />
+      <node id="5705146868101486999" at="39,0,45,0" concept="5" trace="check_1naywg_a0a2#(Ljetbrains/mps/vcs/mergehints/runtime/VCSConceptAspect;)Ljetbrains/mps/vcs/util/MergeStrategy;" />
+      <node id="5705146868101488923" at="45,0,51,0" concept="5" trace="check_1naywg_a0a4#(Ljetbrains/mps/vcs/mergehints/runtime/VCSConceptAspect;Lorg/jetbrains/mps/openapi/language/SProperty;)Ljetbrains/mps/vcs/util/MergeStrategy;" />
+      <node id="5705146868102551975" at="51,0,57,0" concept="5" trace="check_1naywg_a0a6#(Ljetbrains/mps/vcs/mergehints/runtime/VCSConceptAspect;Lorg/jetbrains/mps/openapi/language/SContainmentLink;)Ljetbrains/mps/vcs/util/MergeStrategy;" />
+      <node id="5705146868102552058" at="57,0,63,0" concept="5" trace="check_1naywg_a0a8#(Ljetbrains/mps/vcs/mergehints/runtime/VCSConceptAspect;Lorg/jetbrains/mps/openapi/language/SReferenceLink;)Ljetbrains/mps/vcs/util/MergeStrategy;" />
+      <node id="5705146868101505664" at="63,0,69,0" concept="5" trace="check_1naywg_a1a01#(Ljetbrains/mps/vcs/mergehints/runtime/VCSAspectDescriptor;Lorg/jetbrains/mps/openapi/language/SAbstractConcept;)Ljetbrains/mps/vcs/mergehints/runtime/VCSConceptAspect;" />
+      <node id="5705146868101488302" at="69,0,75,0" concept="5" trace="check_1naywg_a0b0k#(Ljetbrains/mps/smodel/language/LanguageRuntime;)Ljetbrains/mps/vcs/mergehints/runtime/VCSAspectDescriptor;" />
+      <scope id="5705146868101067830" at="16,27,16,27" />
+      <scope id="5705146868101012022" at="19,75,20,46" />
+      <scope id="5705146868101488921" at="23,68,24,60" />
+      <scope id="5705146868102551973" at="27,75,28,60" />
+      <scope id="5705146868102552056" at="31,73,32,60" />
+      <scope id="5705146868101486999" at="40,36,41,52" />
+      <scope id="5705146868101488923" at="46,36,47,53" />
+      <scope id="5705146868102551975" at="52,36,53,53" />
+      <scope id="5705146868102552058" at="58,36,59,53" />
+      <scope id="5705146868101505664" at="64,36,65,51" />
+      <scope id="5705146868101488302" at="70,36,71,68" />
+      <scope id="5705146868101067826" at="16,0,18,0" />
+      <scope id="5705146868101474767" at="35,67,37,62">
+        <var name="runtime" id="5705146868101474778" />
+      </scope>
+      <scope id="5705146868101618580" at="19,0,22,0">
+        <var name="c" id="5705146868101012231" />
+      </scope>
+      <scope id="5705146868101618903" at="23,0,26,0">
+        <var name="p" id="5705146868101488933" />
+      </scope>
+      <scope id="5705146868102551972" at="27,0,30,0">
+        <var name="l" id="5705146868102551982" />
+      </scope>
+      <scope id="5705146868102552055" at="31,0,34,0">
+        <var name="l" id="5705146868102552065" />
+      </scope>
+      <scope id="5705146868101619194" at="35,0,39,0">
+        <var name="c" id="5705146868101474812" />
+      </scope>
+      <scope id="5705146868101486999" at="39,86,43,16" />
+      <scope id="5705146868101488923" at="45,99,49,16" />
+      <scope id="5705146868102551975" at="51,106,55,16" />
+      <scope id="5705146868102552058" at="57,104,61,16" />
+      <scope id="5705146868101505664" at="63,113,67,16" />
+      <scope id="5705146868101488302" at="69,92,73,16" />
+      <scope id="5705146868101486999" at="39,0,45,0">
+        <var name="checkedDotOperand" id="5705146868101486999" />
+      </scope>
+      <scope id="5705146868101488923" at="45,0,51,0">
+        <var name="checkedDotOperand" id="5705146868101488923" />
+        <var name="p" id="5705146868101496911" />
+      </scope>
+      <scope id="5705146868102551975" at="51,0,57,0">
+        <var name="checkedDotOperand" id="5705146868102551975" />
+        <var name="l" id="5705146868102551981" />
+      </scope>
+      <scope id="5705146868102552058" at="57,0,63,0">
+        <var name="checkedDotOperand" id="5705146868102552058" />
+        <var name="l" id="5705146868102552064" />
+      </scope>
+      <scope id="5705146868101505664" at="63,0,69,0">
+        <var name="c" id="5705146868101507079" />
+        <var name="checkedDotOperand" id="5705146868101505664" />
+      </scope>
+      <scope id="5705146868101488302" at="69,0,75,0">
+        <var name="checkedDotOperand" id="5705146868101488302" />
+      </scope>
+      <unit id="5705146868101010166" at="14,0,76,0" name="jetbrains.mps.vcs.mergehints.runtime.VCSAspectUtil" />
+    </file>
+  </root>
+  <root nodeRef="r:03d3090f-cc5b-43a6-b212-e089f946314d(jetbrains.mps.vcs.mergehints.runtime)/5705146868101498685">
+    <file name="VCSConceptAspect.java">
+      <node id="5705146868101498899" at="14,0,16,0" concept="2" trace="getDefaultStrategy#()Ljetbrains/mps/vcs/util/MergeStrategy;" />
+      <node id="5705146868101499440" at="16,0,18,0" concept="2" trace="getDefaultStrategy#(Lorg/jetbrains/mps/openapi/language/SProperty;)Ljetbrains/mps/vcs/util/MergeStrategy;" />
+      <node id="5705146868102538188" at="18,0,20,0" concept="2" trace="getDefaultStrategy#(Lorg/jetbrains/mps/openapi/language/SContainmentLink;)Ljetbrains/mps/vcs/util/MergeStrategy;" />
+      <node id="5705146868102538218" at="20,0,22,0" concept="2" trace="getDefaultStrategy#(Lorg/jetbrains/mps/openapi/language/SReferenceLink;)Ljetbrains/mps/vcs/util/MergeStrategy;" />
+      <scope id="5705146868101498899" at="14,0,16,0" />
+      <scope id="5705146868101499440" at="16,0,18,0">
+        <var name="p" id="5705146868101499642" />
+      </scope>
+      <scope id="5705146868102538188" at="18,0,20,0">
+        <var name="l" id="5705146868102538193" />
+      </scope>
+      <scope id="5705146868102538218" at="20,0,22,0">
+        <var name="l" id="5705146868102538223" />
+      </scope>
+      <unit id="5705146868101585987" at="23,0,25,0" name="jetbrains.mps.vcs.mergehints.runtime.VCSConceptAspect$BaseVCSConceptAspect" />
+      <unit id="5705146868101498685" at="12,0,26,0" name="jetbrains.mps.vcs.mergehints.runtime.VCSConceptAspect" />
+    </file>
+  </root>
+</debug-info>
+

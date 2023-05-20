@@ -4,76 +4,335 @@ package jetbrains.mps.lang.structure.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
+import jetbrains.mps.lang.structure.plugin.URLFunction_HelpCenterDocUrl;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_AbstractConceptDeclaration = new ConceptPresentationBuilder().deprecated(MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x1103553c5ffL, 0x2237c3bc85b3755cL, "helpURL"), MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x1103553c5ffL, 0x46ab0ad5826c74caL, "conceptAlias"), MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x1103553c5ffL, 0x403a32c5772bbe20L, "conceptShortDescription"), MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x1103553c5ffL, 0x403a32c5772c7ec2L, "abstract"), MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x1103553c5ffL, 0x403a32c5772c7ec7L, "final"), MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x1103553c5ffL, 0x16096a174f259419L, "intConceptId"), MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x1103553c5ffL, 0x5d2e6079771f8cc0L, "conceptId"), MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x1103553c5ffL, 0x7cf94884f2237423L, "languageId"), MetaAdapterFactory.getReferenceLink(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x1103553c5ffL, 0x45b8a887cfd27b2cL, "sourceNode")).create();
-  private final ConceptPresentation props_AggregationLinkDeclarationScopeKind = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AttributeInfo = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AttributeInfo_AttributedConcept = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AttributeInfo_IsMultiple = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptDeclaration = new ConceptPresentationBuilder().deprecated(MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979ba0450L, 0xff49c1d648L, "rootable"), MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979ba0450L, 0x10e328118ddL, "iconPath"), MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979ba0450L, 0x4b014033eedc8a48L, "staticScope"), MetaAdapterFactory.getReferenceLink(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979ba0450L, 0xf979be93cfL, "extends")).icon(IconContainer.RESOURCE_a0a0f).create();
-  private final ConceptPresentation props_ConstrainedDataTypeDeclaration = new ConceptPresentationBuilder().icon(IconContainer.RESOURCE_a0a0g).create();
-  private final ConceptPresentation props_DataTypeDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DeprecatedNodeAnnotation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_EnumerationDataTypeDeclaration = new ConceptPresentationBuilder().icon(IconContainer.RESOURCE_a0a0j).create();
-  private final ConceptPresentation props_EnumerationMemberDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IConceptAspect = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IStructureDeprecatable = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InterfaceConceptDeclaration = new ConceptPresentationBuilder().icon(IconContainer.RESOURCE_a0a0n).create();
-  private final ConceptPresentation props_InterfaceConceptReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_LinkDeclaration = new ConceptPresentationBuilder().icon(IconContainer.RESOURCE_a0a0p).create();
-  private final ConceptPresentation props_PrimitiveDataTypeDeclaration = new ConceptPresentationBuilder().icon(IconContainer.RESOURCE_a0a0q).create();
-  private final ConceptPresentation props_PropertyDeclaration = new ConceptPresentationBuilder().icon(IconContainer.RESOURCE_a0a0r).create();
-  private final ConceptPresentation props_ReferenceLinkDeclartionScopeKind = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_AbstractConceptDeclaration;
+  private ConceptPresentation props_AggregationLinkDeclarationScopeKind;
+  private ConceptPresentation props_AttributeInfo;
+  private ConceptPresentation props_AttributeInfo_AttributedConcept;
+  private ConceptPresentation props_AttributeInfo_IsMultiple;
+  private ConceptPresentation props_ConceptDeclaration;
+  private ConceptPresentation props_ConceptDeclarationReference;
+  private ConceptPresentation props_ConstrainedDataTypeDeclaration;
+  private ConceptPresentation props_DataTypeDeclaration;
+  private ConceptPresentation props_DeprecatedNodeAnnotation;
+  private ConceptPresentation props_DocumentationObjective;
+  private ConceptPresentation props_DocumentationObjectiveRef;
+  private ConceptPresentation props_DocumentedNodeAnnotation;
+  private ConceptPresentation props_EnumCustomMethodReplacementInfo;
+  private ConceptPresentation props_EnumMigrationInfo;
+  private ConceptPresentation props_EnumPropertyMigrationInfo;
+  private ConceptPresentation props_EnumerationDataTypeDeclaration_Old;
+  private ConceptPresentation props_EnumerationDeclaration;
+  private ConceptPresentation props_EnumerationMemberDeclaration;
+  private ConceptPresentation props_EnumerationMemberDeclaration_Old;
+  private ConceptPresentation props_ExperimentalAPINodeAttribute;
+  private ConceptPresentation props_IConceptAspect;
+  private ConceptPresentation props_IEnumeration;
+  private ConceptPresentation props_INamedAspect;
+  private ConceptPresentation props_INamedStructureElement;
+  private ConceptPresentation props_IStructureDeprecatable;
+  private ConceptPresentation props_IStructureElement;
+  private ConceptPresentation props_InterfaceConceptDeclaration;
+  private ConceptPresentation props_InterfaceConceptReference;
+  private ConceptPresentation props_LinkDeclaration;
+  private ConceptPresentation props_MarkerInterfaceAttribute;
+  private ConceptPresentation props_PrimitiveDataTypeDeclaration;
+  private ConceptPresentation props_PropertyDeclaration;
+  private ConceptPresentation props_RefPresentationTemplate;
+  private ConceptPresentation props_ReferenceLinkDeclartionScopeKind;
+  private ConceptPresentation props_SmartReferenceAttribute;
+  private ConceptPresentation props_StructureAspectDeputy;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.AbstractConceptDeclaration:
+        if (props_AbstractConceptDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x1103553c5ffL);
+          cpb.deprecateProperty(0x2237c3bc85b3755cL, "oldHelpURL");
+          cpb.deprecateProperty(0x16096a174f259419L, "intConceptId");
+          props_AbstractConceptDeclaration = cpb.create();
+        }
         return props_AbstractConceptDeclaration;
-      case 1:
+      case LanguageConceptSwitch.AggregationLinkDeclarationScopeKind:
+        if (props_AggregationLinkDeclarationScopeKind == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_AggregationLinkDeclarationScopeKind = cpb.create();
+        }
         return props_AggregationLinkDeclarationScopeKind;
-      case 2:
+      case LanguageConceptSwitch.AttributeInfo:
+        if (props_AttributeInfo == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("@attribute info");
+          props_AttributeInfo = cpb.create();
+        }
         return props_AttributeInfo;
-      case 3:
+      case LanguageConceptSwitch.AttributeInfo_AttributedConcept:
+        if (props_AttributeInfo_AttributedConcept == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x5405fd03496acb49L, 0x5405fd03496acc99L, "concept", "", "");
+          props_AttributeInfo_AttributedConcept = cpb.create();
+        }
         return props_AttributeInfo_AttributedConcept;
-      case 4:
+      case LanguageConceptSwitch.AttributeInfo_IsMultiple:
+        if (props_AttributeInfo_IsMultiple == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("AttributeInfo_IsMultiple");
+          props_AttributeInfo_IsMultiple = cpb.create();
+        }
         return props_AttributeInfo_IsMultiple;
-      case 5:
+      case LanguageConceptSwitch.ConceptDeclaration:
+        if (props_ConceptDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979ba0450L);
+          cpb.deprecateProperty(0x10e328118ddL, "iconPath");
+          cpb.presentationByName();
+          cpb.helpUrl(HELP_URL);
+          cpb.icon(IconContainer.RESOURCE_a0a4a0a5b0mb);
+          props_ConceptDeclaration = cpb.create();
+        }
         return props_ConceptDeclaration;
-      case 6:
+      case LanguageConceptSwitch.ConceptDeclarationReference:
+        if (props_ConceptDeclarationReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x6ed0e6c2f31b3f42L, 0x6ed0e6c2f31b3f67L, "cpnt", "", "");
+          props_ConceptDeclarationReference = cpb.create();
+        }
+        return props_ConceptDeclarationReference;
+      case LanguageConceptSwitch.ConstrainedDataTypeDeclaration:
+        if (props_ConstrainedDataTypeDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.helpUrl(HELP_URL1);
+          cpb.icon(IconContainer.RESOURCE_a0a3a0a7b0mb);
+          props_ConstrainedDataTypeDeclaration = cpb.create();
+        }
         return props_ConstrainedDataTypeDeclaration;
-      case 7:
+      case LanguageConceptSwitch.DataTypeDeclaration:
+        if (props_DataTypeDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_DataTypeDeclaration = cpb.create();
+        }
         return props_DataTypeDeclaration;
-      case 8:
+      case LanguageConceptSwitch.DeprecatedNodeAnnotation:
+        if (props_DeprecatedNodeAnnotation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_DeprecatedNodeAnnotation = cpb.create();
+        }
         return props_DeprecatedNodeAnnotation;
-      case 9:
-        return props_EnumerationDataTypeDeclaration;
-      case 10:
+      case LanguageConceptSwitch.DocumentationObjective:
+        if (props_DocumentationObjective == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_DocumentationObjective = cpb.create();
+        }
+        return props_DocumentationObjective;
+      case LanguageConceptSwitch.DocumentationObjectiveRef:
+        if (props_DocumentationObjectiveRef == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("smart reference to documentable target");
+          cpb.presentationByReference(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x6d1df6c2700b0eb5L, 0x6d1df6c2700b0eb6L, "target", "", "");
+          props_DocumentationObjectiveRef = cpb.create();
+        }
+        return props_DocumentationObjectiveRef;
+      case LanguageConceptSwitch.DocumentedNodeAnnotation:
+        if (props_DocumentedNodeAnnotation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("DocumentedNodeAnnotation");
+          props_DocumentedNodeAnnotation = cpb.create();
+        }
+        return props_DocumentedNodeAnnotation;
+      case LanguageConceptSwitch.EnumCustomMethodReplacementInfo:
+        if (props_EnumCustomMethodReplacementInfo == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x2e9237b686f1e943L, 0x2e9237b686f1e948L, "enum", "", "");
+          props_EnumCustomMethodReplacementInfo = cpb.create();
+        }
+        return props_EnumCustomMethodReplacementInfo;
+      case LanguageConceptSwitch.EnumMigrationInfo:
+        if (props_EnumMigrationInfo == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("EnumMigrationInfo");
+          props_EnumMigrationInfo = cpb.create();
+        }
+        return props_EnumMigrationInfo;
+      case LanguageConceptSwitch.EnumPropertyMigrationInfo:
+        if (props_EnumPropertyMigrationInfo == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("EnumPropertyMigrationInfo");
+          props_EnumPropertyMigrationInfo = cpb.create();
+        }
+        return props_EnumPropertyMigrationInfo;
+      case LanguageConceptSwitch.EnumerationDataTypeDeclaration_Old:
+        if (props_EnumerationDataTypeDeclaration_Old == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.deprecated(true);
+          cpb.presentationByName();
+          cpb.icon(IconContainer.RESOURCE_a0a3a0a61b0mb);
+          props_EnumerationDataTypeDeclaration_Old = cpb.create();
+        }
+        return props_EnumerationDataTypeDeclaration_Old;
+      case LanguageConceptSwitch.EnumerationDeclaration:
+        if (props_EnumerationDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.helpUrl(HELP_URL2);
+          cpb.icon(IconContainer.RESOURCE_a0a3a0a71b0mb);
+          props_EnumerationDeclaration = cpb.create();
+        }
+        return props_EnumerationDeclaration;
+      case LanguageConceptSwitch.EnumerationMemberDeclaration:
+        if (props_EnumerationMemberDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x2e770ca32c607c60L);
+          cpb.deprecateAssociation(0xc7a22b1ac1ed15fL, "oldMember");
+          cpb.presentationByName();
+          props_EnumerationMemberDeclaration = cpb.create();
+        }
         return props_EnumerationMemberDeclaration;
-      case 11:
+      case LanguageConceptSwitch.EnumerationMemberDeclaration_Old:
+        if (props_EnumerationMemberDeclaration_Old == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.deprecated(true);
+          cpb.rawPresentation("EnumerationMemberDeclaration_Old");
+          props_EnumerationMemberDeclaration_Old = cpb.create();
+        }
+        return props_EnumerationMemberDeclaration_Old;
+      case LanguageConceptSwitch.ExperimentalAPINodeAttribute:
+        if (props_ExperimentalAPINodeAttribute == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_ExperimentalAPINodeAttribute = cpb.create();
+        }
+        return props_ExperimentalAPINodeAttribute;
+      case LanguageConceptSwitch.IConceptAspect:
+        if (props_IConceptAspect == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IConceptAspect = cpb.create();
+        }
         return props_IConceptAspect;
-      case 12:
+      case LanguageConceptSwitch.IEnumeration:
+        if (props_IEnumeration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.deprecated(true);
+          props_IEnumeration = cpb.create();
+        }
+        return props_IEnumeration;
+      case LanguageConceptSwitch.INamedAspect:
+        if (props_INamedAspect == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_INamedAspect = cpb.create();
+        }
+        return props_INamedAspect;
+      case LanguageConceptSwitch.INamedStructureElement:
+        if (props_INamedStructureElement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_INamedStructureElement = cpb.create();
+        }
+        return props_INamedStructureElement;
+      case LanguageConceptSwitch.IStructureDeprecatable:
+        if (props_IStructureDeprecatable == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IStructureDeprecatable = cpb.create();
+        }
         return props_IStructureDeprecatable;
-      case 13:
+      case LanguageConceptSwitch.IStructureElement:
+        if (props_IStructureElement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IStructureElement = cpb.create();
+        }
+        return props_IStructureElement;
+      case LanguageConceptSwitch.InterfaceConceptDeclaration:
+        if (props_InterfaceConceptDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.helpUrl(HELP_URL3);
+          cpb.icon(IconContainer.RESOURCE_a0a3a0a72b0mb);
+          props_InterfaceConceptDeclaration = cpb.create();
+        }
         return props_InterfaceConceptDeclaration;
-      case 14:
+      case LanguageConceptSwitch.InterfaceConceptReference:
+        if (props_InterfaceConceptReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x110356fc618L, 0x110356fe029L, "intfc", "", "");
+          props_InterfaceConceptReference = cpb.create();
+        }
         return props_InterfaceConceptReference;
-      case 15:
+      case LanguageConceptSwitch.LinkDeclaration:
+        if (props_LinkDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.helpUrl(HELP_URL4);
+          cpb.icon(IconContainer.RESOURCE_a0a3a0a92b0mb);
+          props_LinkDeclaration = cpb.create();
+        }
         return props_LinkDeclaration;
-      case 16:
+      case LanguageConceptSwitch.MarkerInterfaceAttribute:
+        if (props_MarkerInterfaceAttribute == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("@marker interface");
+          props_MarkerInterfaceAttribute = cpb.create();
+        }
+        return props_MarkerInterfaceAttribute;
+      case LanguageConceptSwitch.PrimitiveDataTypeDeclaration:
+        if (props_PrimitiveDataTypeDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.helpUrl(HELP_URL5);
+          cpb.icon(IconContainer.RESOURCE_a0a3a0a13b0mb);
+          props_PrimitiveDataTypeDeclaration = cpb.create();
+        }
         return props_PrimitiveDataTypeDeclaration;
-      case 17:
+      case LanguageConceptSwitch.PropertyDeclaration:
+        if (props_PropertyDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.helpUrl(HELP_URL6);
+          cpb.icon(IconContainer.RESOURCE_a0a3a0a23b0mb);
+          props_PropertyDeclaration = cpb.create();
+        }
         return props_PropertyDeclaration;
-      case 18:
+      case LanguageConceptSwitch.RefPresentationTemplate:
+        if (props_RefPresentationTemplate == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("template");
+          props_RefPresentationTemplate = cpb.create();
+        }
+        return props_RefPresentationTemplate;
+      case LanguageConceptSwitch.ReferenceLinkDeclartionScopeKind:
+        if (props_ReferenceLinkDeclartionScopeKind == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_ReferenceLinkDeclartionScopeKind = cpb.create();
+        }
         return props_ReferenceLinkDeclartionScopeKind;
+      case LanguageConceptSwitch.SmartReferenceAttribute:
+        if (props_SmartReferenceAttribute == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("@smart reference");
+          props_SmartReferenceAttribute = cpb.create();
+        }
+        return props_SmartReferenceAttribute;
+      case LanguageConceptSwitch.StructureAspectDeputy:
+        if (props_StructureAspectDeputy == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.experimental(true);
+          cpb.rawPresentation("StructureAspectDeputy");
+          props_StructureAspectDeputy = cpb.create();
+        }
+        return props_StructureAspectDeputy;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
+  private static final String HELP_URL = URLFunction_HelpCenterDocUrl.getUrl() + "structure.html#conceptsandconceptinterfaces";
+  private static final String HELP_URL1 = URLFunction_HelpCenterDocUrl.getUrl() + "structure.html#constraineddatatypes";
+  private static final String HELP_URL2 = URLFunction_HelpCenterDocUrl.getUrl() + "structure.html#enumerationds";
+  private static final String HELP_URL3 = URLFunction_HelpCenterDocUrl.getUrl() + "structure.html#conceptsandconceptinterfaces";
+  private static final String HELP_URL4 = URLFunction_HelpCenterDocUrl.getUrl() + "structure.html#conceptmembers";
+  private static final String HELP_URL5 = URLFunction_HelpCenterDocUrl.getUrl() + "structure.html#conceptmembers";
+  private static final String HELP_URL6 = URLFunction_HelpCenterDocUrl.getUrl() + "structure.html#conceptmembers";
 }

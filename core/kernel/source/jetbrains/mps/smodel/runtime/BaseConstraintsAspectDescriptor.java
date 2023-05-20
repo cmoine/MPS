@@ -15,22 +15,5 @@
  */
 package jetbrains.mps.smodel.runtime;
 
-import jetbrains.mps.smodel.adapter.ids.SConceptId;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.util.annotation.ToRemove;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.mps.openapi.language.SAbstractConcept;
-
 public abstract class BaseConstraintsAspectDescriptor implements ConstraintsAspectDescriptor {
-  @Nullable
-  @Override
-  @ToRemove(version = 3.4)
-  public ConstraintsDescriptor getDescriptor(@NotNull SConceptId conceptId) {
-    return getConstraints(MetaAdapterFactory.getConceptById(conceptId));
-  }
-
-  @Nullable
-  //todo move to interface after 3.4
-  public abstract ConstraintsDescriptor getConstraints(@NotNull SAbstractConcept concept);
 }

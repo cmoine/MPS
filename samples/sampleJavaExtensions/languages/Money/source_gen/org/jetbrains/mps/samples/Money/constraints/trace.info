@@ -12,145 +12,153 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
   <root>
     <file name="ConstraintsAspectDescriptor.java">
-      <unit at="13,0,60,0" name="org.jetbrains.mps.samples.Money.constraints.ConstraintsAspectDescriptor" />
+      <unit at="13,0,35,0" name="org.jetbrains.mps.samples.Money.constraints.ConstraintsAspectDescriptor" />
     </file>
   </root>
   <root nodeRef="r:287f3730-82f2-4e81-b8c8-89838004f6d4(org.jetbrains.mps.samples.Money.constraints)/1790427706118304183">
     <file name="GetCurrency_Constraints.java">
-      <node id="1790427706118304183" at="18,36,19,161" concept="9" />
-      <node id="1790427706118304183" at="23,43,24,16" concept="5" />
-      <node id="1790427706118304183" at="27,200,28,96" concept="4" />
-      <node id="1790427706118304183" at="28,96,29,0" concept="6" />
-      <node id="1790427706118304183" at="30,51,31,67" concept="1" />
-      <node id="1790427706118304183" at="32,5,33,0" concept="6" />
-      <node id="1790427706118304183" at="33,0,34,18" concept="5" />
-      <node id="1790427706118304186" at="36,148,37,818" concept="5" />
-      <node id="1790427706118304183" at="39,0,40,0" concept="7" trace="canBeChildBreakingPoint" />
-      <node id="1790427706118304183" at="18,0,21,0" concept="0" trace="GetCurrency_Constraints#()V" />
-      <node id="1790427706118304183" at="29,0,32,5" concept="2" />
-      <node id="1790427706118304183" at="36,0,39,0" concept="8" trace="static_canBeAChild#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/smodel/IOperationContext;)Z" />
-      <node id="1790427706118304183" at="22,0,26,0" concept="3" trace="hasOwnCanBeChildMethod#()Z" />
-      <node id="1790427706118304183" at="26,0,36,0" concept="3" trace="canBeChild#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/smodel/IOperationContext;Ljetbrains/mps/smodel/runtime/CheckingNodeContext;)Z" />
-      <scope id="1790427706118304183" at="18,36,19,161" />
-      <scope id="1790427706118304183" at="23,43,24,16" />
-      <scope id="1790427706118304183" at="30,51,31,67" />
-      <scope id="1790427706118304185" at="36,148,37,818" />
-      <scope id="1790427706118304183" at="18,0,21,0" />
-      <scope id="1790427706118304183" at="36,0,39,0">
+      <node id="1790427706118304183" at="22,36,23,35" concept="9" />
+      <node id="1790427706118304183" at="30,127,31,128" concept="4" />
+      <node id="1790427706118304183" at="31,128,32,0" concept="6" />
+      <node id="1790427706118304183" at="33,55,34,71" concept="1" />
+      <node id="1790427706118304183" at="35,9,36,0" concept="6" />
+      <node id="1790427706118304183" at="36,0,37,22" concept="5" />
+      <node id="1227128029536582887" at="41,128,42,315" concept="5" />
+      <node id="1790427706118304183" at="44,0,45,0" concept="7" trace="canBeChildBreakingPoint" />
+      <node id="1790427706118304183" at="47,0,48,0" concept="7" trace="GetCurrency$LD" />
+      <node id="1790427706118304183" at="48,0,49,0" concept="7" trace="DotExpression$yW" />
+      <node id="1790427706118304183" at="49,0,50,0" concept="7" trace="MoneyType$Rd" />
+      <node id="1790427706118304183" at="53,0,54,0" concept="7" trace="operand$w6IR" />
+      <node id="1790427706118304183" at="22,0,25,0" concept="0" trace="GetCurrency_Constraints#()V" />
+      <node id="1790427706118304183" at="32,0,35,9" concept="2" />
+      <node id="1790427706118304183" at="41,0,44,0" concept="8" trace="staticCanBeAChild#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/language/SAbstractConcept;Lorg/jetbrains/mps/openapi/language/SContainmentLink;)Z" />
+      <node id="1790427706118304183" at="29,0,39,0" concept="3" trace="invoke#(Ljetbrains/mps/smodel/runtime/ConstraintContext_CanBeChild;Ljetbrains/mps/smodel/runtime/CheckingNodeContext;)Ljava/lang/Boolean;" />
+      <node id="1790427706118304183" at="27,103,39,6" concept="5" />
+      <node id="1790427706118304183" at="26,0,41,0" concept="3" trace="calculateCanBeChildConstraint#()Ljetbrains/mps/smodel/runtime/ConstraintFunction;" />
+      <scope id="1790427706118304183" at="22,36,23,35" />
+      <scope id="1790427706118304183" at="33,55,34,71" />
+      <scope id="1227128029536582886" at="41,128,42,315" />
+      <scope id="1790427706118304183" at="22,0,25,0" />
+      <scope id="1790427706118304183" at="41,0,44,0">
         <var name="childConcept" id="1790427706118304183" />
         <var name="link" id="1790427706118304183" />
         <var name="node" id="1790427706118304183" />
-        <var name="operationContext" id="1790427706118304183" />
         <var name="parentNode" id="1790427706118304183" />
       </scope>
-      <scope id="1790427706118304183" at="22,0,26,0" />
-      <scope id="1790427706118304183" at="27,200,34,18">
+      <scope id="1790427706118304183" at="30,127,37,22">
         <var name="result" id="1790427706118304183" />
       </scope>
-      <scope id="1790427706118304183" at="26,0,36,0">
+      <scope id="1790427706118304183" at="29,0,39,0">
         <var name="checkingNodeContext" id="1790427706118304183" />
-        <var name="childConcept" id="1790427706118304183" />
-        <var name="link" id="1790427706118304183" />
-        <var name="node" id="1790427706118304183" />
-        <var name="operationContext" id="1790427706118304183" />
-        <var name="parentNode" id="1790427706118304183" />
+        <var name="context" id="1790427706118304183" />
       </scope>
-      <unit id="1790427706118304183" at="17,0,41,0" name="org.jetbrains.mps.samples.Money.constraints.GetCurrency_Constraints" />
+      <scope id="1790427706118304183" at="27,103,39,6" />
+      <scope id="1790427706118304183" at="26,0,41,0" />
+      <unit id="1790427706118304183" at="52,0,55,0" name="org.jetbrains.mps.samples.Money.constraints.GetCurrency_Constraints$LINKS" />
+      <unit id="1790427706118304183" at="46,0,51,0" name="org.jetbrains.mps.samples.Money.constraints.GetCurrency_Constraints$CONCEPTS" />
+      <unit id="1790427706118304183" at="28,15,39,5" name="org.jetbrains.mps.samples.Money.constraints.GetCurrency_Constraints$1" />
+      <unit id="1790427706118304183" at="21,0,56,0" name="org.jetbrains.mps.samples.Money.constraints.GetCurrency_Constraints" />
     </file>
   </root>
   <root nodeRef="r:287f3730-82f2-4e81-b8c8-89838004f6d4(org.jetbrains.mps.samples.Money.constraints)/1790427706118381728">
     <file name="ConvertTo_Constraints.java">
-      <node id="1790427706118381728" at="18,34,19,159" concept="9" />
-      <node id="1790427706118381728" at="23,43,24,16" concept="5" />
-      <node id="1790427706118381728" at="27,200,28,96" concept="4" />
-      <node id="1790427706118381728" at="28,96,29,0" concept="6" />
-      <node id="1790427706118381728" at="30,51,31,67" concept="1" />
-      <node id="1790427706118381728" at="32,5,33,0" concept="6" />
-      <node id="1790427706118381728" at="33,0,34,18" concept="5" />
-      <node id="1790427706118381731" at="36,148,37,818" concept="5" />
-      <node id="1790427706118381728" at="39,0,40,0" concept="7" trace="canBeChildBreakingPoint" />
-      <node id="1790427706118381728" at="18,0,21,0" concept="0" trace="ConvertTo_Constraints#()V" />
-      <node id="1790427706118381728" at="29,0,32,5" concept="2" />
-      <node id="1790427706118381728" at="36,0,39,0" concept="8" trace="static_canBeAChild#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/smodel/IOperationContext;)Z" />
-      <node id="1790427706118381728" at="22,0,26,0" concept="3" trace="hasOwnCanBeChildMethod#()Z" />
-      <node id="1790427706118381728" at="26,0,36,0" concept="3" trace="canBeChild#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/smodel/IOperationContext;Ljetbrains/mps/smodel/runtime/CheckingNodeContext;)Z" />
-      <scope id="1790427706118381728" at="18,34,19,159" />
-      <scope id="1790427706118381728" at="23,43,24,16" />
-      <scope id="1790427706118381728" at="30,51,31,67" />
-      <scope id="1790427706118381730" at="36,148,37,818" />
-      <scope id="1790427706118381728" at="18,0,21,0" />
-      <scope id="1790427706118381728" at="36,0,39,0">
+      <node id="1790427706118381728" at="22,34,23,33" concept="9" />
+      <node id="1790427706118381728" at="30,127,31,128" concept="4" />
+      <node id="1790427706118381728" at="31,128,32,0" concept="6" />
+      <node id="1790427706118381728" at="33,55,34,71" concept="1" />
+      <node id="1790427706118381728" at="35,9,36,0" concept="6" />
+      <node id="1790427706118381728" at="36,0,37,22" concept="5" />
+      <node id="1227128029536582906" at="41,128,42,315" concept="5" />
+      <node id="1790427706118381728" at="44,0,45,0" concept="7" trace="canBeChildBreakingPoint" />
+      <node id="1790427706118381728" at="47,0,48,0" concept="7" trace="ConvertTo$6S" />
+      <node id="1790427706118381728" at="48,0,49,0" concept="7" trace="DotExpression$yW" />
+      <node id="1790427706118381728" at="49,0,50,0" concept="7" trace="MoneyType$Rd" />
+      <node id="1790427706118381728" at="53,0,54,0" concept="7" trace="operand$w6IR" />
+      <node id="1790427706118381728" at="22,0,25,0" concept="0" trace="ConvertTo_Constraints#()V" />
+      <node id="1790427706118381728" at="32,0,35,9" concept="2" />
+      <node id="1790427706118381728" at="41,0,44,0" concept="8" trace="staticCanBeAChild#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/language/SAbstractConcept;Lorg/jetbrains/mps/openapi/language/SContainmentLink;)Z" />
+      <node id="1790427706118381728" at="29,0,39,0" concept="3" trace="invoke#(Ljetbrains/mps/smodel/runtime/ConstraintContext_CanBeChild;Ljetbrains/mps/smodel/runtime/CheckingNodeContext;)Ljava/lang/Boolean;" />
+      <node id="1790427706118381728" at="27,103,39,6" concept="5" />
+      <node id="1790427706118381728" at="26,0,41,0" concept="3" trace="calculateCanBeChildConstraint#()Ljetbrains/mps/smodel/runtime/ConstraintFunction;" />
+      <scope id="1790427706118381728" at="22,34,23,33" />
+      <scope id="1790427706118381728" at="33,55,34,71" />
+      <scope id="1227128029536582905" at="41,128,42,315" />
+      <scope id="1790427706118381728" at="22,0,25,0" />
+      <scope id="1790427706118381728" at="41,0,44,0">
         <var name="childConcept" id="1790427706118381728" />
         <var name="link" id="1790427706118381728" />
         <var name="node" id="1790427706118381728" />
-        <var name="operationContext" id="1790427706118381728" />
         <var name="parentNode" id="1790427706118381728" />
       </scope>
-      <scope id="1790427706118381728" at="22,0,26,0" />
-      <scope id="1790427706118381728" at="27,200,34,18">
+      <scope id="1790427706118381728" at="30,127,37,22">
         <var name="result" id="1790427706118381728" />
       </scope>
-      <scope id="1790427706118381728" at="26,0,36,0">
+      <scope id="1790427706118381728" at="29,0,39,0">
         <var name="checkingNodeContext" id="1790427706118381728" />
-        <var name="childConcept" id="1790427706118381728" />
-        <var name="link" id="1790427706118381728" />
-        <var name="node" id="1790427706118381728" />
-        <var name="operationContext" id="1790427706118381728" />
-        <var name="parentNode" id="1790427706118381728" />
+        <var name="context" id="1790427706118381728" />
       </scope>
-      <unit id="1790427706118381728" at="17,0,41,0" name="org.jetbrains.mps.samples.Money.constraints.ConvertTo_Constraints" />
+      <scope id="1790427706118381728" at="27,103,39,6" />
+      <scope id="1790427706118381728" at="26,0,41,0" />
+      <unit id="1790427706118381728" at="52,0,55,0" name="org.jetbrains.mps.samples.Money.constraints.ConvertTo_Constraints$LINKS" />
+      <unit id="1790427706118381728" at="46,0,51,0" name="org.jetbrains.mps.samples.Money.constraints.ConvertTo_Constraints$CONCEPTS" />
+      <unit id="1790427706118381728" at="28,15,39,5" name="org.jetbrains.mps.samples.Money.constraints.ConvertTo_Constraints$1" />
+      <unit id="1790427706118381728" at="21,0,56,0" name="org.jetbrains.mps.samples.Money.constraints.ConvertTo_Constraints" />
     </file>
   </root>
   <root nodeRef="r:287f3730-82f2-4e81-b8c8-89838004f6d4(org.jetbrains.mps.samples.Money.constraints)/3607579524910558859">
     <file name="MoneyLiteral_Constraints.java">
-      <node id="3607579524910558859" at="9,37,10,162" concept="9" />
-      <node id="3607579524910558859" at="9,0,12,0" concept="0" trace="MoneyLiteral_Constraints#()V" />
-      <scope id="3607579524910558859" at="9,37,10,162" />
-      <scope id="3607579524910558859" at="9,0,12,0" />
-      <unit id="3607579524910558859" at="8,0,14,0" name="org.jetbrains.mps.samples.Money.constraints.MoneyLiteral_Constraints" />
+      <node id="3607579524910558859" at="10,37,11,36" concept="9" />
+      <node id="3607579524910558859" at="15,0,16,0" concept="7" trace="MoneyLiteral$zI" />
+      <node id="3607579524910558859" at="10,0,13,0" concept="0" trace="MoneyLiteral_Constraints#()V" />
+      <scope id="3607579524910558859" at="10,37,11,36" />
+      <scope id="3607579524910558859" at="10,0,13,0" />
+      <unit id="3607579524910558859" at="14,0,17,0" name="org.jetbrains.mps.samples.Money.constraints.MoneyLiteral_Constraints$CONCEPTS" />
+      <unit id="3607579524910558859" at="9,0,18,0" name="org.jetbrains.mps.samples.Money.constraints.MoneyLiteral_Constraints" />
     </file>
   </root>
   <root nodeRef="r:287f3730-82f2-4e81-b8c8-89838004f6d4(org.jetbrains.mps.samples.Money.constraints)/5447719361346553527">
     <file name="GetAmount_Constraints.java">
-      <node id="5447719361346553527" at="18,34,19,159" concept="9" />
-      <node id="5447719361346553527" at="23,43,24,16" concept="5" />
-      <node id="5447719361346553527" at="27,200,28,96" concept="4" />
-      <node id="5447719361346553527" at="28,96,29,0" concept="6" />
-      <node id="5447719361346553527" at="30,51,31,67" concept="1" />
-      <node id="5447719361346553527" at="32,5,33,0" concept="6" />
-      <node id="5447719361346553527" at="33,0,34,18" concept="5" />
-      <node id="5447719361346553530" at="36,148,37,818" concept="5" />
-      <node id="5447719361346553527" at="39,0,40,0" concept="7" trace="canBeChildBreakingPoint" />
-      <node id="5447719361346553527" at="18,0,21,0" concept="0" trace="GetAmount_Constraints#()V" />
-      <node id="5447719361346553527" at="29,0,32,5" concept="2" />
-      <node id="5447719361346553527" at="36,0,39,0" concept="8" trace="static_canBeAChild#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/smodel/IOperationContext;)Z" />
-      <node id="5447719361346553527" at="22,0,26,0" concept="3" trace="hasOwnCanBeChildMethod#()Z" />
-      <node id="5447719361346553527" at="26,0,36,0" concept="3" trace="canBeChild#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/smodel/IOperationContext;Ljetbrains/mps/smodel/runtime/CheckingNodeContext;)Z" />
-      <scope id="5447719361346553527" at="18,34,19,159" />
-      <scope id="5447719361346553527" at="23,43,24,16" />
-      <scope id="5447719361346553527" at="30,51,31,67" />
-      <scope id="5447719361346553529" at="36,148,37,818" />
-      <scope id="5447719361346553527" at="18,0,21,0" />
-      <scope id="5447719361346553527" at="36,0,39,0">
+      <node id="5447719361346553527" at="22,34,23,33" concept="9" />
+      <node id="5447719361346553527" at="30,127,31,128" concept="4" />
+      <node id="5447719361346553527" at="31,128,32,0" concept="6" />
+      <node id="5447719361346553527" at="33,55,34,71" concept="1" />
+      <node id="5447719361346553527" at="35,9,36,0" concept="6" />
+      <node id="5447719361346553527" at="36,0,37,22" concept="5" />
+      <node id="1227128029536582868" at="41,128,42,315" concept="5" />
+      <node id="5447719361346553527" at="44,0,45,0" concept="7" trace="canBeChildBreakingPoint" />
+      <node id="5447719361346553527" at="47,0,48,0" concept="7" trace="GetAmount$vs" />
+      <node id="5447719361346553527" at="48,0,49,0" concept="7" trace="DotExpression$yW" />
+      <node id="5447719361346553527" at="49,0,50,0" concept="7" trace="MoneyType$Rd" />
+      <node id="5447719361346553527" at="53,0,54,0" concept="7" trace="operand$w6IR" />
+      <node id="5447719361346553527" at="22,0,25,0" concept="0" trace="GetAmount_Constraints#()V" />
+      <node id="5447719361346553527" at="32,0,35,9" concept="2" />
+      <node id="5447719361346553527" at="41,0,44,0" concept="8" trace="staticCanBeAChild#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/language/SAbstractConcept;Lorg/jetbrains/mps/openapi/language/SContainmentLink;)Z" />
+      <node id="5447719361346553527" at="29,0,39,0" concept="3" trace="invoke#(Ljetbrains/mps/smodel/runtime/ConstraintContext_CanBeChild;Ljetbrains/mps/smodel/runtime/CheckingNodeContext;)Ljava/lang/Boolean;" />
+      <node id="5447719361346553527" at="27,103,39,6" concept="5" />
+      <node id="5447719361346553527" at="26,0,41,0" concept="3" trace="calculateCanBeChildConstraint#()Ljetbrains/mps/smodel/runtime/ConstraintFunction;" />
+      <scope id="5447719361346553527" at="22,34,23,33" />
+      <scope id="5447719361346553527" at="33,55,34,71" />
+      <scope id="1227128029536582867" at="41,128,42,315" />
+      <scope id="5447719361346553527" at="22,0,25,0" />
+      <scope id="5447719361346553527" at="41,0,44,0">
         <var name="childConcept" id="5447719361346553527" />
         <var name="link" id="5447719361346553527" />
         <var name="node" id="5447719361346553527" />
-        <var name="operationContext" id="5447719361346553527" />
         <var name="parentNode" id="5447719361346553527" />
       </scope>
-      <scope id="5447719361346553527" at="22,0,26,0" />
-      <scope id="5447719361346553527" at="27,200,34,18">
+      <scope id="5447719361346553527" at="30,127,37,22">
         <var name="result" id="5447719361346553527" />
       </scope>
-      <scope id="5447719361346553527" at="26,0,36,0">
+      <scope id="5447719361346553527" at="29,0,39,0">
         <var name="checkingNodeContext" id="5447719361346553527" />
-        <var name="childConcept" id="5447719361346553527" />
-        <var name="link" id="5447719361346553527" />
-        <var name="node" id="5447719361346553527" />
-        <var name="operationContext" id="5447719361346553527" />
-        <var name="parentNode" id="5447719361346553527" />
+        <var name="context" id="5447719361346553527" />
       </scope>
-      <unit id="5447719361346553527" at="17,0,41,0" name="org.jetbrains.mps.samples.Money.constraints.GetAmount_Constraints" />
+      <scope id="5447719361346553527" at="27,103,39,6" />
+      <scope id="5447719361346553527" at="26,0,41,0" />
+      <unit id="5447719361346553527" at="52,0,55,0" name="org.jetbrains.mps.samples.Money.constraints.GetAmount_Constraints$LINKS" />
+      <unit id="5447719361346553527" at="46,0,51,0" name="org.jetbrains.mps.samples.Money.constraints.GetAmount_Constraints$CONCEPTS" />
+      <unit id="5447719361346553527" at="28,15,39,5" name="org.jetbrains.mps.samples.Money.constraints.GetAmount_Constraints$1" />
+      <unit id="5447719361346553527" at="21,0,56,0" name="org.jetbrains.mps.samples.Money.constraints.GetAmount_Constraints" />
     </file>
   </root>
 </debug-info>

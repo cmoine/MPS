@@ -26,7 +26,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.Icon;
-import java.util.Collection;
 
 /**
  * evgeny, 10/26/11
@@ -40,7 +39,9 @@ public class MPSFacetType extends FacetType<MPSFacet, MPSFacetConfiguration> {
 
   @Override
   public MPSFacetConfiguration createDefaultConfiguration() {
-    return new MPSFacetConfiguration();
+    final MPSFacetConfiguration mpsFacetConfiguration = new MPSFacetConfiguration();
+    mpsFacetConfiguration.noStateLoaded();
+    return mpsFacetConfiguration;
   }
 
   @Override

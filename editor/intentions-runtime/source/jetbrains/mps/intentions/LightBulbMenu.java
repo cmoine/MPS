@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,29 +15,41 @@
  */
 package jetbrains.mps.intentions;
 
-import jetbrains.mps.ide.tooltips.MPSToolTipManager;
-import jetbrains.mps.ide.tooltips.TooltipComponent;
+import com.intellij.ide.HelpTooltipManager;
+import com.intellij.openapi.keymap.KeymapUtil;
 import jetbrains.mps.intentions.icons.Icons;
 
 import javax.swing.JLabel;
-import javax.swing.ToolTipManager;
+import javax.swing.KeyStroke;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public abstract class LightBulbMenu extends JLabel implements TooltipComponent {
+// to become final and/or package-local once MPS-extensions stop using it
+public class LightBulbMenu extends JLabel {
+
+  private final Runnable myOnActivate;
+
+  /**
+   * @deprecated use alternative that takes arguments
+   */
+  @Deprecated(since = "2022.2", forRemoval = true)
   public LightBulbMenu() {
+    this(KeyStroke.getKeyStroke("alt ENTER"), () -> {});
+    // empty runnable is ok, there's override of activate() method
+  }
+
+  public LightBulbMenu(KeyStroke shortcut, Runnable onActivate) {
     super(Icons.INTENTION);
+    myOnActivate = onActivate;
 
     setBorder(new EmptyBorder(0, 2, 1, 2));
     setBackground(Color.WHITE);
 
-    ToolTipManager.sharedInstance().unregisterComponent(this);
-    if (MPSToolTipManager.getInstance() != null) {
-      MPSToolTipManager.getInstance().registerComponent(this);
-    }
+    setToolTipText("Click or press");
+    putClientProperty(HelpTooltipManager.SHORTCUT_PROPERTY, KeymapUtil.getKeystrokeText(shortcut));
 
     setPreferredSize(new Dimension(getWidth(), getHeight()));
     setSize(getWidth(), getHeight());
@@ -51,11 +63,6 @@ public abstract class LightBulbMenu extends JLabel implements TooltipComponent {
   }
 
   @Override
-  public String getMPSTooltipText(MouseEvent event) {
-    return "Click or press Alt+Enter";
-  }
-
-  @Override
   public int getWidth() {
     return getIcon().getIconWidth() + 6;
   }
@@ -65,5 +72,12 @@ public abstract class LightBulbMenu extends JLabel implements TooltipComponent {
     return getIcon().getIconHeight();
   }
 
-  public abstract void activate();
+  /**
+   * pass runnable code in constructor, don't override
+   */
+  @Deprecated(since = "2022.2",forRemoval = true)
+  public void activate() {
+    assert myOnActivate != null : "legacy code has to override the method";
+    myOnActivate.run();
+  }
 }

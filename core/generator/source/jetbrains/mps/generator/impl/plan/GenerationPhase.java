@@ -47,7 +47,7 @@ class GenerationPhase {
 
 
   public List<Group> getGroups() {
-    return new ArrayList<Group>(myPhaseElements);
+    return new ArrayList<>(myPhaseElements);
   }
 
 
@@ -55,10 +55,10 @@ class GenerationPhase {
     // ordering is important as there might be more than 1 group with the same generator, and in addition there might be group
     // with this generator as the only one. Ordering ensures this single group is always attached to the same groupWithFewModules
     // and that these groups with few generators are in the same order each time generation plan is queried.
-    LinkedHashMap<TemplateModule, Group> groupByModule = new LinkedHashMap<TemplateModule, Group>();
-    LinkedHashMap<Group, Set<TemplateModule>> groupsWithFewModules = new LinkedHashMap<Group, Set<TemplateModule>>();
-    ArrayList<Group> step = new ArrayList<Group>();
-    Group[] phaseElements = myPhaseElements.toArray(new Group[myPhaseElements.size()]);
+    LinkedHashMap<TemplateModule, Group> groupByModule = new LinkedHashMap<>();
+    LinkedHashMap<Group, Set<TemplateModule>> groupsWithFewModules = new LinkedHashMap<>();
+    ArrayList<Group> step = new ArrayList<>();
+    Group[] phaseElements = myPhaseElements.toArray(new Group[0]);
     Arrays.sort(phaseElements, new GroupComparator());
     for (Group g : phaseElements) {
       final Set<TemplateModule> involvedGenerators = getInvolvedGenerators(g);
@@ -86,7 +86,7 @@ class GenerationPhase {
   }
 
   private static List<TemplateMappingConfiguration> asList(Collection<Group> groups) {
-    ArrayList<TemplateMappingConfiguration> stepAsList = new ArrayList<TemplateMappingConfiguration>();
+    ArrayList<TemplateMappingConfiguration> stepAsList = new ArrayList<>();
     for (Group g : groups) {
       stepAsList.addAll(g.getElements());
     }
@@ -95,7 +95,7 @@ class GenerationPhase {
   }
 
   private static Set<TemplateModule> getInvolvedGenerators(Group mappings) {
-    HashSet<TemplateModule> rv = new HashSet<TemplateModule>();
+    HashSet<TemplateModule> rv = new HashSet<>();
     for (TemplateMappingConfiguration tmc : mappings.getElements()) {
       rv.add(tmc.getModel().getModule());
     }
@@ -105,9 +105,9 @@ class GenerationPhase {
   private static class GroupComparator implements Comparator<Group> {
     @Override
     public int compare(Group g1, Group g2) {
-      HashSet<TemplateMappingConfiguration> g1Unique = new HashSet<TemplateMappingConfiguration>(g1.getElements());
+      HashSet<TemplateMappingConfiguration> g1Unique = new HashSet<>(g1.getElements());
       g1Unique.removeAll(g2.getElements());
-      HashSet<TemplateMappingConfiguration> g2Unique = new HashSet<TemplateMappingConfiguration>(g2.getElements());
+      HashSet<TemplateMappingConfiguration> g2Unique = new HashSet<>(g2.getElements());
       g2Unique.removeAll(g1.getElements());
       if (g1Unique.size() != g2Unique.size()) {
         return g1Unique.size() - g2Unique.size();
@@ -116,8 +116,8 @@ class GenerationPhase {
         assert g2Unique.isEmpty();
         return 0;
       }
-      TemplateMappingConfiguration[] e1 = g1Unique.toArray(new TemplateMappingConfiguration[g1Unique.size()]);
-      TemplateMappingConfiguration[] e2 = g2Unique.toArray(new TemplateMappingConfiguration[g2Unique.size()]);
+      TemplateMappingConfiguration[] e1 = g1Unique.toArray(new TemplateMappingConfiguration[0]);
+      TemplateMappingConfiguration[] e2 = g2Unique.toArray(new TemplateMappingConfiguration[0]);
       final MapCfgComparator comparator = new MapCfgComparator();
       Arrays.sort(e1, comparator);
       Arrays.sort(e2, comparator);

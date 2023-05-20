@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,19 +18,23 @@ package jetbrains.mps.nodeEditor.cells;
 import jetbrains.mps.nodeEditor.cells.EditorCell_Label.DummyUndoableAction;
 import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
-import jetbrains.mps.smodel.UndoHelper;
-import jetbrains.mps.smodel.UndoRunnable.Base;
+import jetbrains.mps.smodel.ModelCommandContext;
+import jetbrains.mps.smodel.ModelCommandContext.Provider;
+import org.jetbrains.mps.openapi.language.SDataType;
+import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.mps.openapi.module.ModelAccess;
 
 public class TransactionalPropertyAccessor extends PropertyAccessor implements TransactionalModelAccessor {
-  private String myOldValue;
-  private String myUncommittedValue;
+  private Object myOldValue;
+  private Object myUncommittedValue;
   private boolean myHasValueToCommit = false;
 
   private EditorCell myEditorCell;
 
-  public TransactionalPropertyAccessor(SNode node, String propertyName, boolean readOnly, boolean allowEmptyText, EditorContext editorContext) {
-    super(node, propertyName, readOnly, allowEmptyText, editorContext);
+  public TransactionalPropertyAccessor(SNode node, SProperty property, boolean readOnly, boolean allowEmptyText,
+                                       EditorContext editorContext) {
+    super(node, property, readOnly, allowEmptyText, editorContext);
   }
 
   void setCell(EditorCell editorCell) {
@@ -38,7 +42,7 @@ public class TransactionalPropertyAccessor extends PropertyAccessor implements T
   }
 
   @Override
-  public String doGetValue() {
+  public Object doGetValue() {
     if (myHasValueToCommit) {
       return myUncommittedValue;
     }
@@ -46,8 +50,8 @@ public class TransactionalPropertyAccessor extends PropertyAccessor implements T
   }
 
   @Override
-  public void doSetValue(String newText) {
-    myUncommittedValue = newText;
+  public void doSetValue(Object newValue) {
+    myUncommittedValue = newValue;
     myHasValueToCommit = true;
     myOldValue = super.doGetValue();
   }
@@ -68,13 +72,19 @@ public class TransactionalPropertyAccessor extends PropertyAccessor implements T
   @Override
   public void commit() {
     if (myHasValueToCommit) {
-      doCommit(myOldValue, myUncommittedValue);
+      doCommit0(myOldValue, myUncommittedValue);
 
-      getRepository().getModelAccess().executeCommand(new Base(null, getGroupId()) {
+      final ModelAccess modelAccess = getRepository().getModelAccess();
+      modelAccess.executeCommand(new ChangePropertyEditorCommand(myEditorCell.getContext(), getGroupId()) {
         @Override
-        public void run() {
+        protected void doExecute() {
           resetUncommittedValue();
-          UndoHelper.getInstance().addUndoableAction(new DummyUndoableAction(getNode()));
+          if (modelAccess instanceof ModelCommandContext.Provider) {
+            final ModelCommandContext cc = ((Provider) modelAccess).getCommandContext(myEditorCell.getContext().getModel());
+            if (cc != null) {
+              cc.registerActionWithUndo(new DummyUndoableAction(getNode()));
+            }
+          }
         }
       });
 
@@ -83,6 +93,12 @@ public class TransactionalPropertyAccessor extends PropertyAccessor implements T
     }
   }
 
+  protected void doCommit0(Object oldValue, Object newValue) {
+    SDataType type = getProperty().getType();
+    doCommit(type.toString(oldValue), type.toString(newValue));
+  }
+
+  @Deprecated
   protected void doCommit(String oldValue, String newValue) {
   }
 

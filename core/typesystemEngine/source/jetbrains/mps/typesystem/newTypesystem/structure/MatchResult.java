@@ -33,8 +33,8 @@ public class MatchResult<M, T> {
   }
 
   public void addEquation(Type<M, T> t1, Type<M, T> t2) {
-    if (myEquations == null) myEquations = new ArrayList<Pair<Type<M, T>, Type<M, T>>>(1);
-    myEquations.add(new Pair<Type<M, T>, Type<M, T>>(t1, t2));
+    if (myEquations == null) myEquations = new ArrayList<>(1);
+    myEquations.add(new Pair<>(t1, t2));
   }
 
   public boolean isCorrectMatch() {

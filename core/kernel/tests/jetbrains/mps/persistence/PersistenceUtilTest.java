@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,34 +15,48 @@
  */
 package jetbrains.mps.persistence;
 
-import jetbrains.mps.CoreMpsTest;
-import jetbrains.mps.PlatformMpsTest;
+import jetbrains.mps.extapi.persistence.ModelFactoryService;
+import jetbrains.mps.smodel.SModelId;
 import jetbrains.mps.smodel.SNodeUtil;
-import jetbrains.mps.smodel.tempmodel.TempModuleOptions;
-import jetbrains.mps.smodel.tempmodel.TemporaryModels;
-import jetbrains.mps.testbench.WriteAction;
-import jetbrains.mps.util.EqualUtil;
-import jetbrains.mps.util.Reference;
+import jetbrains.mps.smodel.TrivialModelDescriptor;
+import jetbrains.mps.tool.environment.Environment;
+import jetbrains.mps.tool.environment.EnvironmentAware;
 import org.jdom.Element;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.model.SModel;
+import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SReference;
+import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
 import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.Test;
 
 import java.util.Iterator;
+import java.util.Objects;
 
-public class PersistenceUtilTest extends CoreMpsTest {
+public class PersistenceUtilTest implements EnvironmentAware {
 
-  @Rule
-  public WriteAction wa = new WriteAction(); // FIXME shall pass proper ModelAccess in there
+  private Environment myEnvironment;
+  private ModelFactoryService myModelFactoryService;
+
+  @Override
+  public void setEnvironment(@NotNull Environment env) {
+    myEnvironment = env;
+    myModelFactoryService = env.getPlatform().findComponent(ModelFactoryService.class);
+  }
+
+  /*package*/ Environment getEnvironment() {
+    return myEnvironment;
+  }
 
   private SModel createTestModel() {
-    SModel result = TemporaryModels.getInstance().create(false, TempModuleOptions.forDefaultModule());
-    result.addRootNode(new jetbrains.mps.smodel.SNode(SNodeUtil.concept_BaseConcept));
-    return result;
+    PersistenceFacade pf = myEnvironment.getPlatform().findComponent(PersistenceRegistry.class);
+    SModelReference mr = pf.createModelReference(null, SModelId.generate(), "persistence.util.test");
+    jetbrains.mps.smodel.SModel modelData = new jetbrains.mps.smodel.SModel(mr);
+    modelData.addRootNode(new jetbrains.mps.smodel.SNode(SNodeUtil.concept_BaseConcept));
+    return new TrivialModelDescriptor(modelData);
   }
 
   private boolean modelsEquals(SModel a, SModel b) {
@@ -60,11 +74,12 @@ public class PersistenceUtilTest extends CoreMpsTest {
   }
 
   private boolean nodesEquals(SNode a, SNode b) {
-    if (!EqualUtil.equals(a.getConcept(), b.getConcept())) {
+    // pretty much identical to NodesMatcher (which is in [gensources], unfortunately)
+    if (!Objects.equals(a.getConcept(), b.getConcept())) {
       return false;
     }
 
-    if (!EqualUtil.equals(a.getNodeId(), b.getNodeId())) {
+    if (!Objects.equals(a.getNodeId(), b.getNodeId())) {
       return false;
     }
 
@@ -85,7 +100,7 @@ public class PersistenceUtilTest extends CoreMpsTest {
       if (!aProperties.hasNext() || !bProperties.hasNext()) {
         return false;
       }
-      if (!EqualUtil.equals(aProperties.next(), bProperties.next())) {
+      if (!Objects.equals(aProperties.next(), bProperties.next())) {
         return false;
       }
     }
@@ -98,10 +113,10 @@ public class PersistenceUtilTest extends CoreMpsTest {
       }
       SReference aRef = aReferences.next();
       SReference bRef = bReferences.next();
-      if (!EqualUtil.equals(aRef.getLink(), bRef.getLink())) {
+      if (!Objects.equals(aRef.getLink(), bRef.getLink())) {
         return false;
       }
-      if (!EqualUtil.equals(aRef.getTargetNodeReference(), bRef.getTargetNodeReference())) {
+      if (!Objects.equals(aRef.getTargetNodeReference(), bRef.getTargetNodeReference())) {
         return false;
       }
     }
@@ -112,56 +127,76 @@ public class PersistenceUtilTest extends CoreMpsTest {
   @Test
   public void binaryModelPersistence() {
     SModel original = createTestModel();
-    byte[] saved = PersistenceUtil.saveBinaryModel(original);
-    SModel loaded = PersistenceUtil.loadBinaryModel(saved);
+    byte[] saved = saveBinaryModel(original);
+    SModel loaded = loadBinaryModel(saved);
     Assert.assertTrue(modelsEquals(original, loaded));
   }
 
   @Test
   public void doubleBinary() {
     SModel original = createTestModel();
-    byte[] saved1 = PersistenceUtil.saveBinaryModel(original);
-    SModel loaded1 = PersistenceUtil.loadBinaryModel(saved1);
-    byte[] saved2 = PersistenceUtil.saveBinaryModel(loaded1);
-    SModel loaded2 = PersistenceUtil.loadBinaryModel(saved2);
+    byte[] saved1 = saveBinaryModel(original);
+    SModel loaded1 = loadBinaryModel(saved1);
+    byte[] saved2 = saveBinaryModel(loaded1);
+    SModel loaded2 = loadBinaryModel(saved2);
     Assert.assertTrue(modelsEquals(original, loaded2));
   }
 
   @Test
   public void xmlModelPersistence() {
     SModel original = createTestModel();
-    Element saved = PersistenceUtil.saveModelToXml(original);
-    SModel loaded = PersistenceUtil.loadModelFromXml(saved);
+    Element saved = saveModelToXml(original);
+    SModel loaded = loadModelFromXml(saved);
     Assert.assertTrue(modelsEquals(original, loaded));
   }
 
   @Test
   public void doubleXml() {
     SModel original = createTestModel();
-    Element saved1 = PersistenceUtil.saveModelToXml(original);
-    SModel loaded1 = PersistenceUtil.loadModelFromXml(saved1);
-    Element saved2 = PersistenceUtil.saveModelToXml(loaded1);
-    SModel loaded2 = PersistenceUtil.loadModelFromXml(saved2);
+    Element saved1 = saveModelToXml(original);
+    SModel loaded1 = loadModelFromXml(saved1);
+    Element saved2 = saveModelToXml(loaded1);
+    SModel loaded2 = loadModelFromXml(saved2);
     Assert.assertTrue(modelsEquals(original, loaded2));
   }
 
   @Test
   public void binaryToXml() {
     SModel original = createTestModel();
-    byte[] binary = PersistenceUtil.saveBinaryModel(original);
-    SModel loadedFromBinary = PersistenceUtil.loadBinaryModel(binary);
-    Element savedToXml = PersistenceUtil.saveModelToXml(loadedFromBinary);
-    SModel loadedFromXml = PersistenceUtil.loadModelFromXml(savedToXml);
+    byte[] binary = saveBinaryModel(original);
+    SModel loadedFromBinary = loadBinaryModel(binary);
+    Element savedToXml = saveModelToXml(loadedFromBinary);
+    SModel loadedFromXml = loadModelFromXml(savedToXml);
     Assert.assertTrue(modelsEquals(original, loadedFromXml));
   }
 
   @Test
   public void xmlToBinary() {
     SModel original = createTestModel();
-    Element xml = PersistenceUtil.saveModelToXml(original);
-    SModel loadedFromXml = PersistenceUtil.loadModelFromXml(xml);
-    byte[] savedToBinary = PersistenceUtil.saveBinaryModel(loadedFromXml);
-    SModel loadedFromBinary = PersistenceUtil.loadBinaryModel(savedToBinary);
+    Element xml = saveModelToXml(original);
+    SModel loadedFromXml = loadModelFromXml(xml);
+    byte[] savedToBinary = saveBinaryModel(loadedFromXml);
+    SModel loadedFromBinary = loadBinaryModel(savedToBinary);
     Assert.assertTrue(modelsEquals(original, loadedFromBinary));
+  }
+
+  @Nullable
+  private SModel loadBinaryModel(byte[] content) {
+    return PersistenceUtil.loadModel(content, myModelFactoryService.getFactoryByType(PreinstalledModelFactoryTypes.BINARY));
+  }
+
+  @Nullable
+  private byte[] saveBinaryModel(SModel model) {
+    return PersistenceUtil.modelAsBytes(model, myModelFactoryService.getFactoryByType(PreinstalledModelFactoryTypes.BINARY));
+  }
+
+  @Nullable
+  private SModel loadModelFromXml(Element xml) {
+    return PersistenceUtil.loadModelFromXml(xml, myModelFactoryService);
+  }
+
+  @Nullable
+  private Element saveModelToXml(SModel model) {
+    return PersistenceUtil.saveModelToXml(model, myModelFactoryService);
   }
 }

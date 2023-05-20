@@ -2,11 +2,11 @@
 <model ref="r:7ed7a88c-17bf-40a5-be72-b50cea0614c7(jetbrains.mps.lang.descriptor.editor)">
   <persistence version="9" />
   <languages>
-    <use id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor" version="4" />
+    <use id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor" version="14" />
   </languages>
   <imports>
     <import index="yv2q" ref="r:cdf8afc0-fdc6-47ca-b829-7b2226168efa(jetbrains.mps.lang.descriptor.structure)" />
-    <import index="hypd" ref="r:aa31e43e-9240-4f4d-b6db-5c1c9a86c59e(jetbrains.mps.lang.project.structure)" implicit="true" />
+    <import index="hypd" ref="r:aa31e43e-9240-4f4d-b6db-5c1c9a86c59e(jetbrains.mps.lang.project.structure)" />
     <import index="tpck" ref="r:00000000-0000-4000-0000-011c89590288(jetbrains.mps.lang.core.structure)" implicit="true" />
   </imports>
   <registry>
@@ -19,12 +19,7 @@
       <concept id="1080736578640" name="jetbrains.mps.lang.editor.structure.BaseEditorComponent" flags="ig" index="2wURMF">
         <child id="1080736633877" name="cellModel" index="2wV5jI" />
       </concept>
-      <concept id="1088013125922" name="jetbrains.mps.lang.editor.structure.CellModel_RefCell" flags="sg" stub="730538219795941030" index="1iCGBv">
-        <child id="1088186146602" name="editorComponent" index="1sWHZn" />
-      </concept>
-      <concept id="1088185857835" name="jetbrains.mps.lang.editor.structure.InlineEditorComponent" flags="ig" index="1sVBvm" />
       <concept id="1139848536355" name="jetbrains.mps.lang.editor.structure.CellModel_WithRole" flags="ng" index="1$h60E">
-        <property id="1140017977771" name="readOnly" index="1Intyy" />
         <reference id="1140103550593" name="relationDeclaration" index="1NtTu8" />
       </concept>
       <concept id="1073389446423" name="jetbrains.mps.lang.editor.structure.CellModel_Collection" flags="sn" stub="3013115976261988961" index="3EZMnI">
@@ -58,17 +53,15 @@
   </node>
   <node concept="24kQdi" id="3pzUVOrWgYp">
     <ref role="1XX52x" to="yv2q:3pzUVOrWgq3" resolve="GeneratorDescriptor" />
-    <node concept="3EZMnI" id="3pzUVOrWgYr" role="2wV5jI">
+    <node concept="3EZMnI" id="6$7WZDXZ7x9" role="2wV5jI">
+      <node concept="2iRkQZ" id="6$7WZDXZ7xa" role="2iSdaV" />
       <node concept="3F0ifn" id="3pzUVOrWiXw" role="3EZMnx">
-        <property role="3F0ifm" value="generator descriptor for " />
+        <property role="3F0ifm" value="generator descriptor " />
       </node>
-      <node concept="1iCGBv" id="3pzUVOrWgYz" role="3EZMnx">
-        <ref role="1NtTu8" to="yv2q:3pzUVOrWgq4" resolve="generator" />
-        <node concept="1sVBvm" id="3pzUVOrWgY_" role="1sWHZn">
-          <node concept="3F0A7n" id="3pzUVOrWiXt" role="2wV5jI">
-            <property role="1Intyy" value="true" />
-            <ref role="1NtTu8" to="hypd:eY0iPzBCD4" resolve="generatorUID" />
-          </node>
+      <node concept="3EZMnI" id="6$7WZDXZ7xA" role="3EZMnx">
+        <node concept="l2Vlx" id="6$7WZDXZ7xB" role="2iSdaV" />
+        <node concept="3F1sOY" id="6$7WZDXZ7xu" role="3EZMnx">
+          <ref role="1NtTu8" to="yv2q:6$7WZDXZ7wW" resolve="generator" />
         </node>
       </node>
     </node>

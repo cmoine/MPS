@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-9748m2m7r34hyhl1jr27veqbh527nlw" />
+<product version="3" modelHash="-e3t4wodc85c9weqow0ysazm1uludvn6">
+  <files names="Currency.java:NotCompatibleCurrencies.java" />
+</product>
 

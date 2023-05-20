@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,12 @@
  */
 package jetbrains.mps.nodeEditor.menus.substitute;
 
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.nodeEditor.menus.MenuItemFactory;
 import jetbrains.mps.openapi.editor.descriptor.SubstituteMenu;
 import jetbrains.mps.openapi.editor.menus.substitute.SubstituteMenuContext;
 import jetbrains.mps.openapi.editor.menus.substitute.SubstituteMenuItem;
 import jetbrains.mps.openapi.editor.menus.substitute.SubstituteMenuLookup;
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SLanguage;
 
@@ -43,13 +43,13 @@ class DefaultSubstituteMenuItemFactory implements MenuItemFactory<SubstituteMenu
   @NotNull
   public List<SubstituteMenuItem> createItems(@NotNull SubstituteMenuContext context, @NotNull SubstituteMenuLookup menuLookup) {
     Collection<SubstituteMenu> menus = menuLookup.lookup(myUsedLanguages);
-    if (LOGGER.isTraceEnabled()) {
+    if (LOGGER.isTraceLevel()) {
       LOGGER.trace("Menu lookup " + menuLookup + " returned " + menus);
     }
 
     List<SubstituteMenuItem> result = new ArrayList<>();
     for (SubstituteMenu menu : menus) {
-      if (LOGGER.isTraceEnabled()) {
+      if (LOGGER.isTraceLevel()) {
         LOGGER.trace("Creating items of menu " + menu);
       }
       result.addAll(menu.createMenuItems(context));

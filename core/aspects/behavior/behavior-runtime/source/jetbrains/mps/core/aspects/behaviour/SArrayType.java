@@ -19,9 +19,6 @@ import jetbrains.mps.core.aspects.behaviour.api.SAbstractType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * An array type
  */

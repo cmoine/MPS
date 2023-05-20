@@ -1,11 +1,5 @@
 <component name="DependencyValidationManager">
   <state>
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
-    <deny_rule from_scope="workbench" to_scope="plugins" is_deny="true" />
-    <deny_rule from_scope="platform" to_scope="plugins" is_deny="true" />
-    <deny_rule from_scope="core" to_scope="plugins" is_deny="true" />
-    <deny_rule from_scope="platform" to_scope="workbench" is_deny="true" />
-    <deny_rule from_scope="core" to_scope="workbench" is_deny="true" />
-    <deny_rule from_scope="core" to_scope="platform" is_deny="true" />
   </state>
 </component>

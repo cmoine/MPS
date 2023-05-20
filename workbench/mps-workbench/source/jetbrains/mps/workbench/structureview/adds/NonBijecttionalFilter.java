@@ -19,7 +19,7 @@ import com.intellij.ide.util.treeView.smartTree.ActionPresentation;
 import com.intellij.ide.util.treeView.smartTree.ActionPresentationData;
 import com.intellij.ide.util.treeView.smartTree.Filter;
 import com.intellij.ide.util.treeView.smartTree.TreeElement;
-import jetbrains.mps.workbench.structureview.adds.icons.Icons;
+import jetbrains.mps.icons.MPSIcons.Generator;
 import jetbrains.mps.workbench.structureview.nodes.AspectTreeElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,7 +39,7 @@ public class NonBijecttionalFilter implements Filter {
   @Override
   @NotNull
   public ActionPresentation getPresentation() {
-    return new ActionPresentationData("Show Indirect","", Icons.OUTPUT);
+    return new ActionPresentationData("Show Indirect", "", Generator.Output);
   }
 
   @Override

@@ -11,9 +11,12 @@ import jetbrains.mps.baseLanguage.behavior.Classifier__BehaviorDescriptor;
 import jetbrains.mps.internal.collections.runtime.IWhereFilter;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.baseLanguage.behavior.ClassConcept__BehaviorDescriptor;
 import jetbrains.mps.internal.collections.runtime.IMapping;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 
 public class DispatchMethodCollector {
   private Map<DispatchGroupDescriptor, DispatchGroup> groups = MapSequence.fromMap(new HashMap<DispatchGroupDescriptor, DispatchGroup>());
@@ -22,7 +25,7 @@ public class DispatchMethodCollector {
   }
   private void fill(SNode classToCheck) {
 
-    // Instance methods 
+    // Instance methods
 
     SNode clas = classToCheck;
 
@@ -35,14 +38,14 @@ public class DispatchMethodCollector {
       })) {
         addMethod(m);
       }
-      clas = SLinkOperations.getTarget(SLinkOperations.getTarget(SNodeOperations.cast(clas, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c108ca66L, "jetbrains.mps.baseLanguage.structure.ClassConcept")), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c108ca66L, 0x10f6353296dL, "superclass")), MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x101de48bf9eL, 0x101de490babL, "classifier"));
+      clas = SLinkOperations.getTarget(SLinkOperations.getTarget(SNodeOperations.cast(clas, CONCEPTS.ClassConcept$bK), LINKS.superclass$Mp9$), LINKS.classifier$cxMr);
     }
 
     for (DispatchGroup g : Sequence.fromIterable(MapSequence.fromMap(groups).values())) {
       g.finalize();
     }
 
-    // Now static methods. They're simpler. No need to take superclasses into account 
+    // Now static methods. They're simpler. No need to take superclasses into account
     for (SNode m : Sequence.fromIterable(ClassConcept__BehaviorDescriptor.staticMethods_id4_LVZ3pCeXr.invoke(classToCheck)).where(new IWhereFilter<SNode>() {
       public boolean accept(SNode it) {
         return DispatchUtil.isReadyMethod(it);
@@ -61,7 +64,7 @@ public class DispatchMethodCollector {
     DispatchGroupDescriptor desc = new DispatchGroupDescriptor(method);
     DispatchGroup group = MapSequence.fromMap(groups).get(desc);
     if (group == null) {
-      group = new DispatchGroup(desc, SNodeOperations.getNodeAncestor(method, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c108ca66L, "jetbrains.mps.baseLanguage.structure.ClassConcept"), false, false));
+      group = new DispatchGroup(desc, SNodeOperations.getNodeAncestor(method, CONCEPTS.ClassConcept$bK, false, false));
       MapSequence.fromMap(groups).put(desc, group);
     }
 
@@ -69,5 +72,14 @@ public class DispatchMethodCollector {
   }
   public Iterable<DispatchGroup> getGroups() {
     return MapSequence.fromMap(groups).values();
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept ClassConcept$bK = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c108ca66L, "jetbrains.mps.baseLanguage.structure.ClassConcept");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink superclass$Mp9$ = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c108ca66L, 0x10f6353296dL, "superclass");
+    /*package*/ static final SReferenceLink classifier$cxMr = MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x101de48bf9eL, 0x101de490babL, "classifier");
   }
 }

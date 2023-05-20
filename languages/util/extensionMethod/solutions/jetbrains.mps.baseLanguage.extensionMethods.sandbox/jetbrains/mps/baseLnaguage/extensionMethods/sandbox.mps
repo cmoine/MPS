@@ -3,7 +3,7 @@
   <persistence version="9" />
   <languages>
     <use id="5dc5fc0d-37ef-4782-8192-8b5ce1f69f80" name="jetbrains.mps.baseLanguage.extensionMethods" version="0" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -147,7 +147,7 @@
       <node concept="3clFbS" id="5SZJ3zZTB98" role="3clF47">
         <node concept="3clFbF" id="6EBM_lhyQTd" role="3cqZAp">
           <node concept="Vb5G_" id="6xkNu_iwnMm" role="3clFbG">
-            <ref role="37wK5l" to="wyt6:~String.charAt(int):char" resolve="charAt" />
+            <ref role="37wK5l" to="wyt6:~String.charAt(int)" resolve="charAt" />
             <node concept="3cmrfG" id="6EBM_lhyQTk" role="37wK5m">
               <property role="3cmrfH" value="2" />
             </node>
@@ -155,7 +155,7 @@
         </node>
         <node concept="3clFbF" id="6EBM_lhyT4F" role="3cqZAp">
           <node concept="Vb5G_" id="6xkNu_iwnLl" role="3clFbG">
-            <ref role="37wK5l" to="wyt6:~String.charAt(int):char" resolve="charAt" />
+            <ref role="37wK5l" to="wyt6:~String.charAt(int)" resolve="charAt" />
             <node concept="3cmrfG" id="6EBM_lhyT4J" role="37wK5m">
               <property role="3cmrfH" value="3" />
             </node>
@@ -163,7 +163,7 @@
         </node>
         <node concept="3clFbF" id="6EBM_lhz7$6" role="3cqZAp">
           <node concept="Vb5G_" id="6EBM_lhz7$7" role="3clFbG">
-            <ref role="37wK5l" to="wyt6:~String.charAt(int):char" resolve="charAt" />
+            <ref role="37wK5l" to="wyt6:~String.charAt(int)" resolve="charAt" />
             <node concept="3cmrfG" id="6EBM_lhz7$8" role="37wK5m">
               <property role="3cmrfH" value="4" />
             </node>
@@ -171,7 +171,7 @@
         </node>
         <node concept="3clFbF" id="6EBM_lhz7$a" role="3cqZAp">
           <node concept="Vb5G_" id="6xkNu_iwnLk" role="3clFbG">
-            <ref role="37wK5l" to="wyt6:~String.contains(java.lang.CharSequence):boolean" resolve="contains" />
+            <ref role="37wK5l" to="wyt6:~String.contains(java.lang.CharSequence)" resolve="contains" />
             <node concept="Xl_RD" id="6EBM_lhz7$h" role="37wK5m">
               <property role="Xl_RC" value="" />
             </node>
@@ -179,7 +179,7 @@
         </node>
         <node concept="3clFbF" id="6EBM_lhz7$j" role="3cqZAp">
           <node concept="Vb5G_" id="6xkNu_iwnLj" role="3clFbG">
-            <ref role="37wK5l" to="wyt6:~String.contains(java.lang.CharSequence):boolean" resolve="contains" />
+            <ref role="37wK5l" to="wyt6:~String.contains(java.lang.CharSequence)" resolve="contains" />
             <node concept="Xl_RD" id="6EBM_lhz7$n" role="37wK5m">
               <property role="Xl_RC" value="" />
             </node>
@@ -187,7 +187,7 @@
         </node>
         <node concept="3clFbF" id="6EBM_lhz7$p" role="3cqZAp">
           <node concept="Vb5G_" id="6EBM_lhz7$q" role="3clFbG">
-            <ref role="37wK5l" to="wyt6:~String.contains(java.lang.CharSequence):boolean" resolve="contains" />
+            <ref role="37wK5l" to="wyt6:~String.contains(java.lang.CharSequence)" resolve="contains" />
             <node concept="Xl_RD" id="6EBM_lhz7$r" role="37wK5m">
               <property role="Xl_RC" value="df" />
             </node>
@@ -195,7 +195,7 @@
         </node>
         <node concept="3clFbF" id="6xkNu_iwjx9" role="3cqZAp">
           <node concept="Vb5G_" id="6xkNu_iwjxa" role="3clFbG">
-            <ref role="37wK5l" to="wyt6:~String.charAt(int):char" resolve="charAt" />
+            <ref role="37wK5l" to="wyt6:~String.charAt(int)" resolve="charAt" />
             <node concept="3cmrfG" id="6xkNu_iwjxb" role="37wK5m">
               <property role="3cmrfH" value="1" />
             </node>
@@ -203,7 +203,7 @@
         </node>
         <node concept="3clFbF" id="AconhCZAPr" role="3cqZAp">
           <node concept="Vb5G_" id="AconhCZAPz" role="3clFbG">
-            <ref role="37wK5l" to="wyt6:~String.charAt(int):char" resolve="charAt" />
+            <ref role="37wK5l" to="wyt6:~String.charAt(int)" resolve="charAt" />
             <node concept="3cmrfG" id="AconhCZAPy" role="37wK5m">
               <property role="3cmrfH" value="1" />
             </node>
@@ -312,7 +312,7 @@
               <ref role="3cqZAo" node="3VdvqYUcKjB" resolve="my" />
             </node>
             <node concept="liA8E" id="3VdvqYUddSr" role="2OqNvi">
-              <ref role="37wK5l" to="wyt6:~Object.hashCode():int" resolve="hashCode" />
+              <ref role="37wK5l" to="wyt6:~Object.hashCode()" resolve="hashCode" />
             </node>
           </node>
         </node>

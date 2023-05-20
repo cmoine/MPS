@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-10ii8f54klu6xv923ch83phjq85eph7" />
+<product version="3" modelHash="-1hzorhs7s03nvo88v60yrlt80164jfx">
+  <files names="AbstractMakeService.java:CoreMakeTask.java" />
+</product>
 

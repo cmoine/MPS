@@ -1,0 +1,40 @@
+<component name="libraryTable">
+  <library name="MPS runtime">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/mps-test.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-persistence.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-core.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-editor.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-workbench.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-icons.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-platform.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-generator.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-project-check.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-editor-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-openapi.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-environment.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-editor-runtime.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-behavior-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-boot-util.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-behavior-runtime.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-references.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-messaging.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-tuples.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-closures.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-textgen.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-constraints-runtime.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-logging.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-collections.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-messages-for-rules.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-context.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-messages-for-legacy-constraints.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-messages-for-structure.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-messages-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-problem.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-feedback-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mps-annotations.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

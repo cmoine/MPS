@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-5fuqcwq4vw6bh1on0w5uqm0xx5yc0en" />
+<product version="3" modelHash="-69se9jat458ext43me52zv5s9whkrho">
+  <files names="DefaultMenuReferences_Finder.java:FindMenuUsagesFromMenuType_Finder.java:FindUsagesDescriptor.java:TMDefaultMenuReferences_Finder.java" />
+</product>
 

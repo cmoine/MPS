@@ -2,15 +2,14 @@
 <model ref="r:b76e6387-9e47-4e56-8a9c-59cb9d383183(jetbrains.mps.lang.editor.menus.extras.behavior)">
   <persistence version="9" />
   <languages>
-    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="0" />
+    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="2" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
     <import index="tpcb" ref="r:00000000-0000-4000-0000-011c89590297(jetbrains.mps.lang.editor.behavior)" />
-    <import index="tpc2" ref="r:00000000-0000-4000-0000-011c8959029e(jetbrains.mps.lang.editor.structure)" />
     <import index="tpee" ref="r:00000000-0000-4000-0000-011c895902ca(jetbrains.mps.baseLanguage.structure)" />
     <import index="tpek" ref="r:00000000-0000-4000-0000-011c895902c0(jetbrains.mps.baseLanguage.behavior)" />
-    <import index="91lp" ref="1ed103c3-3aa6-49b7-9c21-6765ee11f224/java:jetbrains.mps.intentions(MPS.Editor/)" />
+    <import index="nddn" ref="1ed103c3-3aa6-49b7-9c21-6765ee11f224/java:jetbrains.mps.openapi.intentions(MPS.Editor/)" />
     <import index="a1gu" ref="r:8333260e-1c41-48f8-b34d-821761a2600f(jetbrains.mps.lang.editor.menus.extras.structure)" implicit="true" />
   </imports>
   <registry>
@@ -133,8 +132,8 @@
       <node concept="3clFbS" id="291CjQFhGNV" role="3clF47">
         <node concept="3clFbF" id="291CjQFhGYM" role="3cqZAp">
           <node concept="2c44tf" id="291CjQFhGYC" role="3clFbG">
-            <node concept="3uibUv" id="291CjQFhH3m" role="2c44tc">
-              <ref role="3uigEE" to="91lp:~IntentionExecutable" resolve="IntentionExecutable" />
+            <node concept="3uibUv" id="1OFqWOBMlvC" role="2c44tc">
+              <ref role="3uigEE" to="nddn:~IntentionExecutable" resolve="IntentionExecutable" />
             </node>
           </node>
         </node>

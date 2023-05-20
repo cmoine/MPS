@@ -19,6 +19,7 @@ import com.intellij.ide.BrowserUtil;
 import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.smodel.NodeReadAccessCasterInEditor;
 import jetbrains.mps.smodel.NodeReadAccessInEditorListener;
+import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 import jetbrains.mps.util.Pair;
@@ -46,9 +47,9 @@ public class EditorCell_URL extends EditorCell_Property {
     }
   }
 
-  public static EditorCell_URL create(EditorContext editorContext, SNode node, String propertyName) {
+  public static EditorCell_URL create(EditorContext editorContext, SNode node, SProperty property) {
     NodeReadAccessInEditorListener listener = NodeReadAccessCasterInEditor.getReadAccessListener();
-    ModelAccessor accessor = new PropertyAccessor(node, propertyName, false, true, editorContext);
+    ModelAccessor accessor = new PropertyAccessor(node, property, false, true, editorContext);
     if (listener != null) {
       listener.clearCleanlyReadAccessProperties();
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,10 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * Only TransientModelWithMetaInfo uses this class. As long as TransientModelWithMetaInfo is unused, no reason to strive for no deprecated api usages here
  * Evgeny Gryaznov, Sep 22, 2010
  */
-public class TransientModelPersistence {
+/*package*/ class TransientModelPersistence {
 
   private static final int VERSION = 6;
   private final SModelReference myModelReference;

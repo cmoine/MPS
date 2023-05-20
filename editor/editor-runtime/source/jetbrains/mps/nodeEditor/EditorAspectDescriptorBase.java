@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +15,17 @@
  */
 package jetbrains.mps.nodeEditor;
 
+import jetbrains.mps.editor.runtime.style.StyleAttributes;
 import jetbrains.mps.openapi.editor.descriptor.ConceptEditor;
 import jetbrains.mps.openapi.editor.descriptor.ConceptEditorComponent;
 import jetbrains.mps.openapi.editor.descriptor.EditorAspectDescriptor;
 import jetbrains.mps.openapi.editor.descriptor.NamedMenuId;
 import jetbrains.mps.openapi.editor.descriptor.SubstituteMenu;
 import jetbrains.mps.openapi.editor.descriptor.TransformationMenu;
+import jetbrains.mps.openapi.editor.menus.style.EditorMenuItemCustomizer;
 import jetbrains.mps.smodel.language.LanguageRuntime;
 import jetbrains.mps.smodel.language.LanguageRuntimeAware;
+import jetbrains.mps.smodel.runtime.AspectExtensionsAware;
 import jetbrains.mps.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
@@ -37,7 +40,7 @@ import java.util.stream.Collectors;
 /**
  * @author simon
  */
-public class EditorAspectDescriptorBase implements EditorAspectDescriptor, LanguageRuntimeAware {
+public class EditorAspectDescriptorBase implements EditorAspectDescriptor, LanguageRuntimeAware, AspectExtensionsAware {
   private EditorsCache myEditorsCache;
   private EditorComponentsCache myEditorComponentsCache;
 
@@ -47,9 +50,12 @@ public class EditorAspectDescriptorBase implements EditorAspectDescriptor, Langu
   private DefaultSubstituteMenusCache myDefaultSubstituteMenusCache;
   private NamedSubstituteMenusCache myNamedSubstituteMenusCache;
 
+  // remove once StyleAttributeProvider subclasses generate forgetAttributes() code
+  //    or there's another mechanism to dispose StyleAttribute instances
+  private SLanguage myThisLanguageIdentity;
+
   @NotNull
   public Collection<ConceptEditor> getEditors(final SAbstractConcept concept) {
-    clearCachesIfStale();
     return myEditorsCache.get(concept);
   }
 
@@ -60,7 +66,6 @@ public class EditorAspectDescriptorBase implements EditorAspectDescriptor, Langu
 
   @NotNull
   public Collection<ConceptEditorComponent> getEditorComponents(final SAbstractConcept concept, final String editorComponentId) {
-    clearCachesIfStale();
     return myEditorComponentsCache.get(new Pair<>(concept, editorComponentId));
   }
 
@@ -72,7 +77,6 @@ public class EditorAspectDescriptorBase implements EditorAspectDescriptor, Langu
   @NotNull
   @Override
   public Collection<TransformationMenu> getDefaultTransformationMenus(@NotNull SAbstractConcept concept, @NotNull Collection<SLanguage> usedLanguages) {
-    clearCachesIfStale();
     return myDefaultTransformationMenusCache.getInLanguages(concept, toNamespaces(usedLanguages));
   }
 
@@ -85,7 +89,6 @@ public class EditorAspectDescriptorBase implements EditorAspectDescriptor, Langu
   @NotNull
   @Override
   public Collection<TransformationMenu> getNamedTransformationMenus(@NotNull NamedMenuId menuId, @NotNull Collection<SLanguage> usedLanguages) {
-    clearCachesIfStale();
     return myNamedTransformationMenusCache.getInLanguages(menuId, toNamespaces(usedLanguages));
   }
 
@@ -101,6 +104,7 @@ public class EditorAspectDescriptorBase implements EditorAspectDescriptor, Langu
 
   @Override
   public void setLanguageRuntime(@NotNull LanguageRuntime languageRuntime) {
+    myThisLanguageIdentity = languageRuntime.getIdentity();
     myEditorsCache = new EditorsCache(languageRuntime);
     myEditorComponentsCache = new EditorComponentsCache(languageRuntime);
     myDefaultTransformationMenusCache = new DefaultTransformationMenusCache(languageRuntime);
@@ -109,19 +113,9 @@ public class EditorAspectDescriptorBase implements EditorAspectDescriptor, Langu
     myNamedSubstituteMenusCache= new NamedSubstituteMenusCache(languageRuntime);
   }
 
-  private void clearCachesIfStale() {
-    ValidEditorDescriptorsCache cache = ValidEditorDescriptorsCache.getInstance();
-
-    if (!cache.isDescriptorValid(this)) {
-      clearAllCaches();
-      cache.markDescriptorValid(this);
-    }
-  }
-
   @NotNull
   @Override
   public Collection<SubstituteMenu> getDefaultSubstituteMenus(SAbstractConcept concept, @NotNull Collection<SLanguage> usedLanguages) {
-    clearCachesIfStale();
     return myDefaultSubstituteMenusCache.getInLanguages(concept, toNamespaces(usedLanguages));
   }
 
@@ -134,7 +128,6 @@ public class EditorAspectDescriptorBase implements EditorAspectDescriptor, Langu
   @NotNull
   @Override
   public Collection<SubstituteMenu> getNamedSubstituteMenus(NamedMenuId menuId, @NotNull Collection<SLanguage> usedLanguages) {
-    clearCachesIfStale();
     return myNamedSubstituteMenusCache.getInLanguages(menuId, toNamespaces(usedLanguages));
   }
 
@@ -142,6 +135,28 @@ public class EditorAspectDescriptorBase implements EditorAspectDescriptor, Langu
   @Override
   public Collection<SubstituteMenu> getDeclaredNamedSubstituteMenus(NamedMenuId menuId) {
     return Collections.emptyList();
+  }
+
+
+  @NotNull
+  public Collection<EditorMenuItemCustomizer> getEditorMenuItemCustomizers() {
+    return Collections.emptyList();
+  }
+
+  @Override
+  public void dispose() {
+    // may generate this code only in subclasses implementing StyleAttributeProvider,
+    // just want to get rid of LanguageRegistryListener in StylesAttributes ASAP, thus need to make
+    // it functional for existing languages out there.
+    StyleAttributes.getInstance().forgetAttributes(myThisLanguageIdentity);
+    clearAllCaches();
+  }
+
+  @Override
+  public void extensionsChanged() {
+    // XXX I wonder if StyleAttributes might be affected by extensions to this language.
+    //     If yes, need to clear StyleAttributes as well, see #dispose(), above.
+    clearAllCaches();
   }
 
   private void clearAllCaches() {

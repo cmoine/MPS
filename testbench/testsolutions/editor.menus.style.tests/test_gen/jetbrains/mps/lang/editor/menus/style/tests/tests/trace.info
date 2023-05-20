@@ -1,0 +1,1222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144226303539:jetbrains.mps.baseLanguage.structure.ForeachStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1076505808687:jetbrains.mps.baseLanguage.structure.WhileStatement" />
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/2739111710909360159">
+    <file name="TestCompletionCustomization_ContextMatcher_CustomActionRererenceNoStyling_Test.java">
+      <node id="2739111710909360159" at="24,91,25,60" concept="12" />
+      <node id="2739111710909360159" at="29,113,30,36" concept="2" />
+      <node id="2739111710909360159" at="35,52,36,19" concept="12" />
+      <node id="2739111710909360159" at="40,51,41,72" concept="2" />
+      <node id="2739111710909360163" at="41,72,42,180" concept="2" />
+      <node id="2739111710909360175" at="43,53,44,73" concept="2" />
+      <node id="2739111710909360177" at="44,73,45,102" concept="6" />
+      <node id="2739111710909360183" at="45,102,46,75" concept="2" />
+      <node id="2739111710909360189" at="46,75,47,84" concept="2" />
+      <node id="2739111710909360159" at="21,0,23,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="2739111710909360159" at="24,0,27,0" concept="1" trace="TestCompletionCustomization_ContextMatcher_CustomActionRererenceNoStyling_Test#()V" />
+      <node id="2739111710909360159" at="35,0,38,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="2739111710909360159" at="28,0,32,0" concept="5" trace="test_TestCompletionCustomization_ContextMatcher_CustomActionRererenceNoStyling#()V" />
+      <node id="2739111710909360171" at="42,180,48,16" concept="2" />
+      <node id="2739111710909360159" at="39,0,50,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="2739111710909360159" at="24,91,25,60" />
+      <scope id="2739111710909360159" at="29,113,30,36" />
+      <scope id="2739111710909360159" at="35,52,36,19" />
+      <scope id="2739111710909360159" at="24,0,27,0" />
+      <scope id="2739111710909360159" at="35,0,38,0">
+        <var name="owner" id="2739111710909360159" />
+      </scope>
+      <scope id="2739111710909360159" at="28,0,32,0" />
+      <scope id="2739111710909360174" at="43,53,47,84">
+        <var name="nodeSubstituteChooser" id="2739111710909360178" />
+      </scope>
+      <scope id="2739111710909360159" at="40,51,48,16" />
+      <scope id="2739111710909360159" at="39,0,50,0" />
+      <unit id="2739111710909360159" at="33,0,51,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_CustomActionRererenceNoStyling_Test$TestBody" />
+      <unit id="2739111710909360159" at="19,0,52,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_CustomActionRererenceNoStyling_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/2739111710911113674">
+    <file name="TestCompletionCustomization_ContextMatcher_CustomActionRererenceWithStyling_Test.java">
+      <node id="2739111710911113674" at="24,93,25,60" concept="12" />
+      <node id="2739111710911113674" at="29,115,30,36" concept="2" />
+      <node id="2739111710911113674" at="35,52,36,19" concept="12" />
+      <node id="2739111710911113674" at="40,51,41,72" concept="2" />
+      <node id="2739111710911113678" at="41,72,42,180" concept="2" />
+      <node id="2739111710911113690" at="43,53,44,73" concept="2" />
+      <node id="2739111710911113692" at="44,73,45,102" concept="6" />
+      <node id="2739111710911113698" at="45,102,46,75" concept="2" />
+      <node id="2739111710911113704" at="46,75,47,84" concept="2" />
+      <node id="2739111710911113674" at="21,0,23,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="2739111710911113674" at="24,0,27,0" concept="1" trace="TestCompletionCustomization_ContextMatcher_CustomActionRererenceWithStyling_Test#()V" />
+      <node id="2739111710911113674" at="35,0,38,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="2739111710911113674" at="28,0,32,0" concept="5" trace="test_TestCompletionCustomization_ContextMatcher_CustomActionRererenceWithStyling#()V" />
+      <node id="2739111710911113686" at="42,180,48,15" concept="2" />
+      <node id="2739111710911113674" at="39,0,50,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="2739111710911113674" at="24,93,25,60" />
+      <scope id="2739111710911113674" at="29,115,30,36" />
+      <scope id="2739111710911113674" at="35,52,36,19" />
+      <scope id="2739111710911113674" at="24,0,27,0" />
+      <scope id="2739111710911113674" at="35,0,38,0">
+        <var name="owner" id="2739111710911113674" />
+      </scope>
+      <scope id="2739111710911113674" at="28,0,32,0" />
+      <scope id="2739111710911113689" at="43,53,47,84">
+        <var name="nodeSubstituteChooser" id="2739111710911113693" />
+      </scope>
+      <scope id="2739111710911113674" at="40,51,48,15" />
+      <scope id="2739111710911113674" at="39,0,50,0" />
+      <unit id="2739111710911113674" at="33,0,51,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_CustomActionRererenceWithStyling_Test$TestBody" />
+      <unit id="2739111710911113674" at="19,0,52,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_CustomActionRererenceWithStyling_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/2739111710912337300">
+    <file name="TestCompletionCustomization_ContextMatcher_CustomActionChildLink_Test.java">
+      <node id="2739111710912337300" at="25,82,26,60" concept="12" />
+      <node id="2739111710912337300" at="30,104,31,36" concept="2" />
+      <node id="2739111710912337300" at="36,52,37,19" concept="12" />
+      <node id="2739111710912337300" at="41,51,42,72" concept="2" />
+      <node id="2739111710914974520" at="42,72,43,60" concept="6" />
+      <node id="2739111710912337304" at="43,60,44,150" concept="2" />
+      <node id="2739111710912337319" at="45,53,46,73" concept="2" />
+      <node id="2739111710912337321" at="46,73,47,102" concept="6" />
+      <node id="2739111710912337327" at="47,102,48,75" concept="2" />
+      <node id="2739111710912337333" at="48,75,49,84" concept="2" />
+      <node id="2739111710912977039" at="50,16,51,66" concept="2" />
+      <node id="2739111710912982178" at="51,66,52,69" concept="2" />
+      <node id="2739111710913380288" at="52,69,53,65" concept="6" />
+      <node id="2739111710913092926" at="53,65,54,157" concept="2" />
+      <node id="2739111710912972249" at="55,53,56,73" concept="2" />
+      <node id="2739111710912972251" at="56,73,57,102" concept="6" />
+      <node id="2739111710912972257" at="57,102,58,75" concept="2" />
+      <node id="2739111710912972263" at="58,75,59,84" concept="2" />
+      <node id="2739111710912337300" at="22,0,24,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="2739111710912337300" at="25,0,28,0" concept="1" trace="TestCompletionCustomization_ContextMatcher_CustomActionChildLink_Test#()V" />
+      <node id="2739111710912337300" at="36,0,39,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="2739111710912337300" at="29,0,33,0" concept="5" trace="test_TestCompletionCustomization_ContextMatcher_CustomActionChildLink#()V" />
+      <node id="2739111710912337315" at="44,150,50,16" concept="2" />
+      <node id="2739111710912972245" at="54,157,60,15" concept="2" />
+      <node id="2739111710912337300" at="40,0,62,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="2739111710912337300" at="25,82,26,60" />
+      <scope id="2739111710912337300" at="30,104,31,36" />
+      <scope id="2739111710912337300" at="36,52,37,19" />
+      <scope id="2739111710912337300" at="25,0,28,0" />
+      <scope id="2739111710912337300" at="36,0,39,0">
+        <var name="owner" id="2739111710912337300" />
+      </scope>
+      <scope id="2739111710912337300" at="29,0,33,0" />
+      <scope id="2739111710912337318" at="45,53,49,84">
+        <var name="nodeSubstituteChooser" id="2739111710912337322" />
+      </scope>
+      <scope id="2739111710912972248" at="55,53,59,84">
+        <var name="nodeSubstituteChooser" id="2739111710912972252" />
+      </scope>
+      <scope id="2739111710912337300" at="41,51,60,15">
+        <var name="currentNode" id="2739111710913380289" />
+        <var name="parent" id="2739111710914974521" />
+      </scope>
+      <scope id="2739111710912337300" at="40,0,62,0" />
+      <unit id="2739111710912337300" at="34,0,63,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_CustomActionChildLink_Test$TestBody" />
+      <unit id="2739111710912337300" at="20,0,64,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_CustomActionChildLink_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/3806643308052492268">
+    <file name="TestCompletionCustomization_ContextMatcher_CustomActionEnumNoStyling_Test.java">
+      <node id="3806643308052492268" at="24,86,25,60" concept="12" />
+      <node id="3806643308052492268" at="29,108,30,36" concept="2" />
+      <node id="3806643308052492268" at="35,52,36,19" concept="12" />
+      <node id="3806643308052492268" at="40,51,41,72" concept="2" />
+      <node id="3806643308052492272" at="41,72,42,143" concept="2" />
+      <node id="3806643308052492286" at="43,53,44,73" concept="2" />
+      <node id="3806643308052492288" at="44,73,45,102" concept="6" />
+      <node id="3806643308052492294" at="45,102,46,75" concept="2" />
+      <node id="3806643308052492300" at="46,75,47,84" concept="2" />
+      <node id="3806643308052492268" at="21,0,23,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="3806643308052492268" at="24,0,27,0" concept="1" trace="TestCompletionCustomization_ContextMatcher_CustomActionEnumNoStyling_Test#()V" />
+      <node id="3806643308052492268" at="35,0,38,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="3806643308052492268" at="28,0,32,0" concept="5" trace="test_TestCompletionCustomization_ContextMatcher_CustomActionEnumNoStyling#()V" />
+      <node id="3806643308052492282" at="42,143,48,16" concept="2" />
+      <node id="3806643308052492268" at="39,0,50,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="3806643308052492268" at="24,86,25,60" />
+      <scope id="3806643308052492268" at="29,108,30,36" />
+      <scope id="3806643308052492268" at="35,52,36,19" />
+      <scope id="3806643308052492268" at="24,0,27,0" />
+      <scope id="3806643308052492268" at="35,0,38,0">
+        <var name="owner" id="3806643308052492268" />
+      </scope>
+      <scope id="3806643308052492268" at="28,0,32,0" />
+      <scope id="3806643308052492285" at="43,53,47,84">
+        <var name="nodeSubstituteChooser" id="3806643308052492289" />
+      </scope>
+      <scope id="3806643308052492268" at="40,51,48,16" />
+      <scope id="3806643308052492268" at="39,0,50,0" />
+      <unit id="3806643308052492268" at="33,0,51,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_CustomActionEnumNoStyling_Test$TestBody" />
+      <unit id="3806643308052492268" at="19,0,52,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_CustomActionEnumNoStyling_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/3806643308053010695">
+    <file name="TestCompletionCustomization_ContextMatcher_CustomActionEnumWithStyling_Test.java">
+      <node id="3806643308053010695" at="24,88,25,60" concept="12" />
+      <node id="3806643308053010695" at="29,110,30,36" concept="2" />
+      <node id="3806643308053010695" at="35,52,36,19" concept="12" />
+      <node id="3806643308053010695" at="40,51,41,72" concept="2" />
+      <node id="3806643308053010699" at="41,72,42,143" concept="2" />
+      <node id="3806643308053010711" at="43,53,44,73" concept="2" />
+      <node id="3806643308053010713" at="44,73,45,102" concept="6" />
+      <node id="3806643308053010719" at="45,102,46,75" concept="2" />
+      <node id="3806643308053010725" at="46,75,47,84" concept="2" />
+      <node id="3806643308053010695" at="21,0,23,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="3806643308053010695" at="24,0,27,0" concept="1" trace="TestCompletionCustomization_ContextMatcher_CustomActionEnumWithStyling_Test#()V" />
+      <node id="3806643308053010695" at="35,0,38,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="3806643308053010695" at="28,0,32,0" concept="5" trace="test_TestCompletionCustomization_ContextMatcher_CustomActionEnumWithStyling#()V" />
+      <node id="3806643308053010707" at="42,143,48,15" concept="2" />
+      <node id="3806643308053010695" at="39,0,50,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="3806643308053010695" at="24,88,25,60" />
+      <scope id="3806643308053010695" at="29,110,30,36" />
+      <scope id="3806643308053010695" at="35,52,36,19" />
+      <scope id="3806643308053010695" at="24,0,27,0" />
+      <scope id="3806643308053010695" at="35,0,38,0">
+        <var name="owner" id="3806643308053010695" />
+      </scope>
+      <scope id="3806643308053010695" at="28,0,32,0" />
+      <scope id="3806643308053010710" at="43,53,47,84">
+        <var name="nodeSubstituteChooser" id="3806643308053010714" />
+      </scope>
+      <scope id="3806643308053010695" at="40,51,48,15" />
+      <scope id="3806643308053010695" at="39,0,50,0" />
+      <unit id="3806643308053010695" at="33,0,51,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_CustomActionEnumWithStyling_Test$TestBody" />
+      <unit id="3806643308053010695" at="19,0,52,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_CustomActionEnumWithStyling_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/4151313971380872174">
+    <file name="TestCompletionCustomization_ContextMatcher_ReferenceInlinePrimaryNoStyling_Test.java">
+      <node id="4151313971380872174" at="24,92,25,60" concept="12" />
+      <node id="4151313971380872174" at="29,114,30,36" concept="2" />
+      <node id="4151313971380872174" at="35,52,36,19" concept="12" />
+      <node id="4151313971380872174" at="40,51,41,72" concept="2" />
+      <node id="4151313971380872184" at="42,53,43,73" concept="2" />
+      <node id="4151313971380872186" at="43,73,44,102" concept="6" />
+      <node id="4151313971380872192" at="44,102,45,75" concept="2" />
+      <node id="4151313971380872198" at="45,75,46,84" concept="2" />
+      <node id="4151313971380872174" at="21,0,23,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="4151313971380872174" at="24,0,27,0" concept="1" trace="TestCompletionCustomization_ContextMatcher_ReferenceInlinePrimaryNoStyling_Test#()V" />
+      <node id="4151313971380872174" at="35,0,38,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="4151313971380872174" at="28,0,32,0" concept="5" trace="test_TestCompletionCustomization_ContextMatcher_ReferenceInlinePrimaryNoStyling#()V" />
+      <node id="4151313971380872180" at="41,72,47,16" concept="2" />
+      <node id="4151313971380872174" at="39,0,49,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="4151313971380872174" at="24,92,25,60" />
+      <scope id="4151313971380872174" at="29,114,30,36" />
+      <scope id="4151313971380872174" at="35,52,36,19" />
+      <scope id="4151313971380872174" at="24,0,27,0" />
+      <scope id="4151313971380872174" at="35,0,38,0">
+        <var name="owner" id="4151313971380872174" />
+      </scope>
+      <scope id="4151313971380872174" at="28,0,32,0" />
+      <scope id="4151313971380872183" at="42,53,46,84">
+        <var name="nodeSubstituteChooser" id="4151313971380872187" />
+      </scope>
+      <scope id="4151313971380872174" at="40,51,47,16" />
+      <scope id="4151313971380872174" at="39,0,49,0" />
+      <unit id="4151313971380872174" at="33,0,50,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_ReferenceInlinePrimaryNoStyling_Test$TestBody" />
+      <unit id="4151313971380872174" at="19,0,51,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_ReferenceInlinePrimaryNoStyling_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/4151313971380872201">
+    <file name="TestCompletionCustomization_ContextMatcher_ReferenceInlinePrimaryWithStyling_Test.java">
+      <node id="4151313971380872201" at="24,94,25,60" concept="12" />
+      <node id="4151313971380872201" at="29,116,30,36" concept="2" />
+      <node id="4151313971380872201" at="35,52,36,19" concept="12" />
+      <node id="4151313971380872201" at="40,51,41,72" concept="2" />
+      <node id="4151313971380872211" at="42,53,43,73" concept="2" />
+      <node id="4151313971380872213" at="43,73,44,102" concept="6" />
+      <node id="4151313971380872219" at="44,102,45,75" concept="2" />
+      <node id="4151313971380872225" at="45,75,46,84" concept="2" />
+      <node id="4151313971380872201" at="21,0,23,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="4151313971380872201" at="24,0,27,0" concept="1" trace="TestCompletionCustomization_ContextMatcher_ReferenceInlinePrimaryWithStyling_Test#()V" />
+      <node id="4151313971380872201" at="35,0,38,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="4151313971380872201" at="28,0,32,0" concept="5" trace="test_TestCompletionCustomization_ContextMatcher_ReferenceInlinePrimaryWithStyling#()V" />
+      <node id="4151313971380872207" at="41,72,47,15" concept="2" />
+      <node id="4151313971380872201" at="39,0,49,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="4151313971380872201" at="24,94,25,60" />
+      <scope id="4151313971380872201" at="29,116,30,36" />
+      <scope id="4151313971380872201" at="35,52,36,19" />
+      <scope id="4151313971380872201" at="24,0,27,0" />
+      <scope id="4151313971380872201" at="35,0,38,0">
+        <var name="owner" id="4151313971380872201" />
+      </scope>
+      <scope id="4151313971380872201" at="28,0,32,0" />
+      <scope id="4151313971380872210" at="42,53,46,84">
+        <var name="nodeSubstituteChooser" id="4151313971380872214" />
+      </scope>
+      <scope id="4151313971380872201" at="40,51,47,15" />
+      <scope id="4151313971380872201" at="39,0,49,0" />
+      <unit id="4151313971380872201" at="33,0,50,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_ReferenceInlinePrimaryWithStyling_Test$TestBody" />
+      <unit id="4151313971380872201" at="19,0,51,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_ReferenceInlinePrimaryWithStyling_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/4639084645851051480">
+    <file name="TestCompletionCustomization_ContextMatcher_ReferenceNoStyling_Test.java">
+      <node id="4639084645851051480" at="24,79,25,60" concept="12" />
+      <node id="4639084645851051480" at="29,101,30,36" concept="2" />
+      <node id="4639084645851051480" at="35,52,36,19" concept="12" />
+      <node id="4639084645851051480" at="40,51,41,72" concept="2" />
+      <node id="4639084645851051490" at="42,53,43,73" concept="2" />
+      <node id="4639084645851051492" at="43,73,44,102" concept="6" />
+      <node id="4639084645851051498" at="44,102,45,75" concept="2" />
+      <node id="4639084645851051504" at="45,75,46,84" concept="2" />
+      <node id="4639084645851051480" at="21,0,23,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="4639084645851051480" at="24,0,27,0" concept="1" trace="TestCompletionCustomization_ContextMatcher_ReferenceNoStyling_Test#()V" />
+      <node id="4639084645851051480" at="35,0,38,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="4639084645851051480" at="28,0,32,0" concept="5" trace="test_TestCompletionCustomization_ContextMatcher_ReferenceNoStyling#()V" />
+      <node id="4639084645851051486" at="41,72,47,16" concept="2" />
+      <node id="4639084645851051480" at="39,0,49,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="4639084645851051480" at="24,79,25,60" />
+      <scope id="4639084645851051480" at="29,101,30,36" />
+      <scope id="4639084645851051480" at="35,52,36,19" />
+      <scope id="4639084645851051480" at="24,0,27,0" />
+      <scope id="4639084645851051480" at="35,0,38,0">
+        <var name="owner" id="4639084645851051480" />
+      </scope>
+      <scope id="4639084645851051480" at="28,0,32,0" />
+      <scope id="4639084645851051489" at="42,53,46,84">
+        <var name="nodeSubstituteChooser" id="4639084645851051493" />
+      </scope>
+      <scope id="4639084645851051480" at="40,51,47,16" />
+      <scope id="4639084645851051480" at="39,0,49,0" />
+      <unit id="4639084645851051480" at="33,0,50,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_ReferenceNoStyling_Test$TestBody" />
+      <unit id="4639084645851051480" at="19,0,51,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_ReferenceNoStyling_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/4639084645851051930">
+    <file name="TestCompletionCustomization_ContextMatcher_ReferenceWithStyling_Test.java">
+      <node id="4639084645851051930" at="24,81,25,60" concept="12" />
+      <node id="4639084645851051930" at="29,103,30,36" concept="2" />
+      <node id="4639084645851051930" at="35,52,36,19" concept="12" />
+      <node id="4639084645851051930" at="40,51,41,72" concept="2" />
+      <node id="4639084645851051940" at="42,53,43,73" concept="2" />
+      <node id="4639084645851051942" at="43,73,44,102" concept="6" />
+      <node id="4639084645851051948" at="44,102,45,75" concept="2" />
+      <node id="4639084645851051954" at="45,75,46,84" concept="2" />
+      <node id="4639084645851051930" at="21,0,23,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="4639084645851051930" at="24,0,27,0" concept="1" trace="TestCompletionCustomization_ContextMatcher_ReferenceWithStyling_Test#()V" />
+      <node id="4639084645851051930" at="35,0,38,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="4639084645851051930" at="28,0,32,0" concept="5" trace="test_TestCompletionCustomization_ContextMatcher_ReferenceWithStyling#()V" />
+      <node id="4639084645851051936" at="41,72,47,15" concept="2" />
+      <node id="4639084645851051930" at="39,0,49,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="4639084645851051930" at="24,81,25,60" />
+      <scope id="4639084645851051930" at="29,103,30,36" />
+      <scope id="4639084645851051930" at="35,52,36,19" />
+      <scope id="4639084645851051930" at="24,0,27,0" />
+      <scope id="4639084645851051930" at="35,0,38,0">
+        <var name="owner" id="4639084645851051930" />
+      </scope>
+      <scope id="4639084645851051930" at="28,0,32,0" />
+      <scope id="4639084645851051939" at="42,53,46,84">
+        <var name="nodeSubstituteChooser" id="4639084645851051943" />
+      </scope>
+      <scope id="4639084645851051930" at="40,51,47,15" />
+      <scope id="4639084645851051930" at="39,0,49,0" />
+      <unit id="4639084645851051930" at="33,0,50,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_ReferenceWithStyling_Test$TestBody" />
+      <unit id="4639084645851051930" at="19,0,51,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_ReferenceWithStyling_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/4639084645851223280">
+    <file name="TestCompletionCustomization_ContextMatcher_ChildInLink_Test.java">
+      <node id="4639084645851223280" at="24,72,25,60" concept="12" />
+      <node id="4639084645851223280" at="29,94,30,36" concept="2" />
+      <node id="4639084645851223280" at="35,52,36,19" concept="12" />
+      <node id="4639084645851223280" at="40,51,41,72" concept="2" />
+      <node id="4639084645851223294" at="42,53,43,73" concept="2" />
+      <node id="4639084645851223296" at="43,73,44,102" concept="6" />
+      <node id="4639084645851223302" at="44,102,45,75" concept="2" />
+      <node id="4639084645851223308" at="45,75,46,84" concept="2" />
+      <node id="4639084645851223311" at="47,16,48,69" concept="2" />
+      <node id="4639084645851223317" at="49,53,50,73" concept="2" />
+      <node id="4639084645851223319" at="50,73,51,102" concept="6" />
+      <node id="4639084645851223325" at="51,102,52,75" concept="2" />
+      <node id="4639084645851223331" at="52,75,53,84" concept="2" />
+      <node id="4639084645851223280" at="21,0,23,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="4639084645851223280" at="24,0,27,0" concept="1" trace="TestCompletionCustomization_ContextMatcher_ChildInLink_Test#()V" />
+      <node id="4639084645851223280" at="35,0,38,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="4639084645851223280" at="28,0,32,0" concept="5" trace="test_TestCompletionCustomization_ContextMatcher_ChildInLink#()V" />
+      <node id="4639084645851223290" at="41,72,47,16" concept="2" />
+      <node id="4639084645851223313" at="48,69,54,15" concept="2" />
+      <node id="4639084645851223280" at="39,0,56,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="4639084645851223280" at="24,72,25,60" />
+      <scope id="4639084645851223280" at="29,94,30,36" />
+      <scope id="4639084645851223280" at="35,52,36,19" />
+      <scope id="4639084645851223280" at="24,0,27,0" />
+      <scope id="4639084645851223280" at="35,0,38,0">
+        <var name="owner" id="4639084645851223280" />
+      </scope>
+      <scope id="4639084645851223280" at="28,0,32,0" />
+      <scope id="4639084645851223293" at="42,53,46,84">
+        <var name="nodeSubstituteChooser" id="4639084645851223297" />
+      </scope>
+      <scope id="4639084645851223316" at="49,53,53,84">
+        <var name="nodeSubstituteChooser" id="4639084645851223320" />
+      </scope>
+      <scope id="4639084645851223280" at="40,51,54,15" />
+      <scope id="4639084645851223280" at="39,0,56,0" />
+      <unit id="4639084645851223280" at="33,0,57,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_ChildInLink_Test$TestBody" />
+      <unit id="4639084645851223280" at="19,0,58,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_ChildInLink_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/4639084645851282601">
+    <file name="TestCompletionCustomization_ContextMatcher_NoFeatureNoStyling_Test.java">
+      <node id="4639084645851282601" at="24,79,25,60" concept="12" />
+      <node id="4639084645851282601" at="29,101,30,36" concept="2" />
+      <node id="4639084645851282601" at="35,52,36,19" concept="12" />
+      <node id="4639084645851282601" at="40,51,41,72" concept="2" />
+      <node id="4639084645851282611" at="42,53,43,73" concept="2" />
+      <node id="4639084645851282613" at="43,73,44,102" concept="6" />
+      <node id="4639084645851282619" at="44,102,45,75" concept="2" />
+      <node id="4639084645851282625" at="45,75,46,84" concept="2" />
+      <node id="4639084645851282601" at="21,0,23,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="4639084645851282601" at="24,0,27,0" concept="1" trace="TestCompletionCustomization_ContextMatcher_NoFeatureNoStyling_Test#()V" />
+      <node id="4639084645851282601" at="35,0,38,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="4639084645851282601" at="28,0,32,0" concept="5" trace="test_TestCompletionCustomization_ContextMatcher_NoFeatureNoStyling#()V" />
+      <node id="4639084645851282607" at="41,72,47,16" concept="2" />
+      <node id="4639084645851282601" at="39,0,49,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="4639084645851282601" at="24,79,25,60" />
+      <scope id="4639084645851282601" at="29,101,30,36" />
+      <scope id="4639084645851282601" at="35,52,36,19" />
+      <scope id="4639084645851282601" at="24,0,27,0" />
+      <scope id="4639084645851282601" at="35,0,38,0">
+        <var name="owner" id="4639084645851282601" />
+      </scope>
+      <scope id="4639084645851282601" at="28,0,32,0" />
+      <scope id="4639084645851282610" at="42,53,46,84">
+        <var name="nodeSubstituteChooser" id="4639084645851282614" />
+      </scope>
+      <scope id="4639084645851282601" at="40,51,47,16" />
+      <scope id="4639084645851282601" at="39,0,49,0" />
+      <unit id="4639084645851282601" at="33,0,50,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_NoFeatureNoStyling_Test$TestBody" />
+      <unit id="4639084645851282601" at="19,0,51,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_NoFeatureNoStyling_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/4639084645851282628">
+    <file name="TestCompletionCustomization_ContextMatcher_NoFeatureWithStyling_Test.java">
+      <node id="4639084645851282628" at="24,81,25,60" concept="12" />
+      <node id="4639084645851282628" at="29,103,30,36" concept="2" />
+      <node id="4639084645851282628" at="35,52,36,19" concept="12" />
+      <node id="4639084645851282628" at="40,51,41,72" concept="2" />
+      <node id="4639084645851282638" at="42,53,43,73" concept="2" />
+      <node id="4639084645851282640" at="43,73,44,102" concept="6" />
+      <node id="4639084645851282646" at="44,102,45,75" concept="2" />
+      <node id="4639084645851282652" at="45,75,46,84" concept="2" />
+      <node id="4639084645851282628" at="21,0,23,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="4639084645851282628" at="24,0,27,0" concept="1" trace="TestCompletionCustomization_ContextMatcher_NoFeatureWithStyling_Test#()V" />
+      <node id="4639084645851282628" at="35,0,38,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="4639084645851282628" at="28,0,32,0" concept="5" trace="test_TestCompletionCustomization_ContextMatcher_NoFeatureWithStyling#()V" />
+      <node id="4639084645851282634" at="41,72,47,15" concept="2" />
+      <node id="4639084645851282628" at="39,0,49,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="4639084645851282628" at="24,81,25,60" />
+      <scope id="4639084645851282628" at="29,103,30,36" />
+      <scope id="4639084645851282628" at="35,52,36,19" />
+      <scope id="4639084645851282628" at="24,0,27,0" />
+      <scope id="4639084645851282628" at="35,0,38,0">
+        <var name="owner" id="4639084645851282628" />
+      </scope>
+      <scope id="4639084645851282628" at="28,0,32,0" />
+      <scope id="4639084645851282637" at="42,53,46,84">
+        <var name="nodeSubstituteChooser" id="4639084645851282641" />
+      </scope>
+      <scope id="4639084645851282628" at="40,51,47,15" />
+      <scope id="4639084645851282628" at="39,0,49,0" />
+      <unit id="4639084645851282628" at="33,0,50,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_NoFeatureWithStyling_Test$TestBody" />
+      <unit id="4639084645851282628" at="19,0,51,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_NoFeatureWithStyling_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/4639084645853212578">
+    <file name="TestCompletionCustomization_ContextMatcher_ChildToSubstitute_Test.java">
+      <node id="4639084645853212578" at="24,78,25,60" concept="12" />
+      <node id="4639084645853212578" at="29,100,30,36" concept="2" />
+      <node id="4639084645853212578" at="35,52,36,19" concept="12" />
+      <node id="4639084645853212578" at="40,51,41,72" concept="2" />
+      <node id="4639084645853212592" at="42,53,43,73" concept="2" />
+      <node id="4639084645853212594" at="43,73,44,102" concept="6" />
+      <node id="4639084645853212600" at="44,102,45,75" concept="2" />
+      <node id="4639084645853212606" at="45,75,46,84" concept="2" />
+      <node id="4639084645853212609" at="47,16,48,69" concept="2" />
+      <node id="4639084645853307733" at="48,69,49,71" concept="2" />
+      <node id="4639084645853212615" at="50,53,51,73" concept="2" />
+      <node id="4639084645853212617" at="51,73,52,102" concept="6" />
+      <node id="4639084645853212623" at="52,102,53,75" concept="2" />
+      <node id="4639084645853212629" at="53,75,54,84" concept="2" />
+      <node id="4639084645853212578" at="21,0,23,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="4639084645853212578" at="24,0,27,0" concept="1" trace="TestCompletionCustomization_ContextMatcher_ChildToSubstitute_Test#()V" />
+      <node id="4639084645853212578" at="35,0,38,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="4639084645853212578" at="28,0,32,0" concept="5" trace="test_TestCompletionCustomization_ContextMatcher_ChildToSubstitute#()V" />
+      <node id="4639084645853212588" at="41,72,47,16" concept="2" />
+      <node id="4639084645853212611" at="49,71,55,15" concept="2" />
+      <node id="4639084645853212578" at="39,0,57,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="4639084645853212578" at="24,78,25,60" />
+      <scope id="4639084645853212578" at="29,100,30,36" />
+      <scope id="4639084645853212578" at="35,52,36,19" />
+      <scope id="4639084645853212578" at="24,0,27,0" />
+      <scope id="4639084645853212578" at="35,0,38,0">
+        <var name="owner" id="4639084645853212578" />
+      </scope>
+      <scope id="4639084645853212578" at="28,0,32,0" />
+      <scope id="4639084645853212591" at="42,53,46,84">
+        <var name="nodeSubstituteChooser" id="4639084645853212595" />
+      </scope>
+      <scope id="4639084645853212614" at="50,53,54,84">
+        <var name="nodeSubstituteChooser" id="4639084645853212618" />
+      </scope>
+      <scope id="4639084645853212578" at="40,51,55,15" />
+      <scope id="4639084645853212578" at="39,0,57,0" />
+      <unit id="4639084645853212578" at="33,0,58,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_ChildToSubstitute_Test$TestBody" />
+      <unit id="4639084645853212578" at="19,0,59,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_ChildToSubstitute_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/5310043668062139505">
+    <file name="TestCompletionCustomization_ContextMatcher_SimpleSubstituteMenu_Test.java">
+      <node id="5310043668062139505" at="24,81,25,60" concept="12" />
+      <node id="5310043668062139505" at="29,103,30,36" concept="2" />
+      <node id="5310043668062139505" at="35,52,36,19" concept="12" />
+      <node id="5310043668062139505" at="40,51,41,72" concept="2" />
+      <node id="5310043668062139516" at="42,53,43,73" concept="2" />
+      <node id="5310043668062139518" at="43,73,44,102" concept="6" />
+      <node id="5310043668062139524" at="44,102,45,75" concept="2" />
+      <node id="5310043668062139530" at="45,75,46,84" concept="2" />
+      <node id="5310043668062410436" at="47,16,48,69" concept="2" />
+      <node id="5310043668062335549" at="49,53,50,73" concept="2" />
+      <node id="5310043668062335551" at="50,73,51,102" concept="6" />
+      <node id="5310043668062335557" at="51,102,52,75" concept="2" />
+      <node id="5310043668062335563" at="52,75,53,84" concept="2" />
+      <node id="5310043668062139505" at="21,0,23,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="5310043668062139505" at="24,0,27,0" concept="1" trace="TestCompletionCustomization_ContextMatcher_SimpleSubstituteMenu_Test#()V" />
+      <node id="5310043668062139505" at="35,0,38,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5310043668062139505" at="28,0,32,0" concept="5" trace="test_TestCompletionCustomization_ContextMatcher_SimpleSubstituteMenu#()V" />
+      <node id="5310043668062139512" at="41,72,47,16" concept="2" />
+      <node id="5310043668062335545" at="48,69,54,15" concept="2" />
+      <node id="5310043668062139505" at="39,0,56,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="5310043668062139505" at="24,81,25,60" />
+      <scope id="5310043668062139505" at="29,103,30,36" />
+      <scope id="5310043668062139505" at="35,52,36,19" />
+      <scope id="5310043668062139505" at="24,0,27,0" />
+      <scope id="5310043668062139505" at="35,0,38,0">
+        <var name="owner" id="5310043668062139505" />
+      </scope>
+      <scope id="5310043668062139505" at="28,0,32,0" />
+      <scope id="5310043668062139515" at="42,53,46,84">
+        <var name="nodeSubstituteChooser" id="5310043668062139519" />
+      </scope>
+      <scope id="5310043668062335548" at="49,53,53,84">
+        <var name="nodeSubstituteChooser" id="5310043668062335552" />
+      </scope>
+      <scope id="5310043668062139505" at="40,51,54,15" />
+      <scope id="5310043668062139505" at="39,0,56,0" />
+      <unit id="5310043668062139505" at="33,0,57,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_SimpleSubstituteMenu_Test$TestBody" />
+      <unit id="5310043668062139505" at="19,0,58,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_SimpleSubstituteMenu_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/5310043668062443902">
+    <file name="TestCompletionCustomization_ContextMatcher_DefaultSubstituteMenu_Test.java">
+      <node id="5310043668062443902" at="24,82,25,60" concept="12" />
+      <node id="5310043668062443902" at="29,104,30,36" concept="2" />
+      <node id="5310043668062443902" at="35,52,36,19" concept="12" />
+      <node id="5310043668062443902" at="40,51,41,72" concept="2" />
+      <node id="5310043668062443914" at="42,53,43,73" concept="2" />
+      <node id="5310043668062443916" at="43,73,44,102" concept="6" />
+      <node id="5310043668062443922" at="44,102,45,75" concept="2" />
+      <node id="5310043668062443928" at="45,75,46,84" concept="2" />
+      <node id="5310043668062443931" at="47,16,48,69" concept="2" />
+      <node id="5310043668062443937" at="49,53,50,73" concept="2" />
+      <node id="5310043668062443939" at="50,73,51,102" concept="6" />
+      <node id="5310043668062443945" at="51,102,52,75" concept="2" />
+      <node id="5310043668062443951" at="52,75,53,84" concept="2" />
+      <node id="5310043668062443902" at="21,0,23,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="5310043668062443902" at="24,0,27,0" concept="1" trace="TestCompletionCustomization_ContextMatcher_DefaultSubstituteMenu_Test#()V" />
+      <node id="5310043668062443902" at="35,0,38,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5310043668062443902" at="28,0,32,0" concept="5" trace="test_TestCompletionCustomization_ContextMatcher_DefaultSubstituteMenu#()V" />
+      <node id="5310043668062443910" at="41,72,47,16" concept="2" />
+      <node id="5310043668062443933" at="48,69,54,15" concept="2" />
+      <node id="5310043668062443902" at="39,0,56,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="5310043668062443902" at="24,82,25,60" />
+      <scope id="5310043668062443902" at="29,104,30,36" />
+      <scope id="5310043668062443902" at="35,52,36,19" />
+      <scope id="5310043668062443902" at="24,0,27,0" />
+      <scope id="5310043668062443902" at="35,0,38,0">
+        <var name="owner" id="5310043668062443902" />
+      </scope>
+      <scope id="5310043668062443902" at="28,0,32,0" />
+      <scope id="5310043668062443913" at="42,53,46,84">
+        <var name="nodeSubstituteChooser" id="5310043668062443917" />
+      </scope>
+      <scope id="5310043668062443936" at="49,53,53,84">
+        <var name="nodeSubstituteChooser" id="5310043668062443940" />
+      </scope>
+      <scope id="5310043668062443902" at="40,51,54,15" />
+      <scope id="5310043668062443902" at="39,0,56,0" />
+      <unit id="5310043668062443902" at="33,0,57,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_DefaultSubstituteMenu_Test$TestBody" />
+      <unit id="5310043668062443902" at="19,0,58,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_DefaultSubstituteMenu_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/5310043668063022762">
+    <file name="TestCompletionCustomization_ContextMatcher_ParameterizedSubstituteMenu_Test.java">
+      <node id="5310043668063022762" at="24,88,25,60" concept="12" />
+      <node id="5310043668063022762" at="29,110,30,36" concept="2" />
+      <node id="5310043668063022762" at="35,52,36,19" concept="12" />
+      <node id="5310043668063022762" at="40,51,41,72" concept="2" />
+      <node id="5310043668063022774" at="42,53,43,73" concept="2" />
+      <node id="5310043668063022776" at="43,73,44,102" concept="6" />
+      <node id="5310043668063022782" at="44,102,45,75" concept="2" />
+      <node id="5310043668063022788" at="45,75,46,84" concept="2" />
+      <node id="5310043668063022791" at="47,16,48,69" concept="2" />
+      <node id="5310043668063022797" at="49,53,50,73" concept="2" />
+      <node id="5310043668063022799" at="50,73,51,102" concept="6" />
+      <node id="5310043668063022805" at="51,102,52,75" concept="2" />
+      <node id="5310043668063022811" at="52,75,53,84" concept="2" />
+      <node id="5310043668063022762" at="21,0,23,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="5310043668063022762" at="24,0,27,0" concept="1" trace="TestCompletionCustomization_ContextMatcher_ParameterizedSubstituteMenu_Test#()V" />
+      <node id="5310043668063022762" at="35,0,38,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5310043668063022762" at="28,0,32,0" concept="5" trace="test_TestCompletionCustomization_ContextMatcher_ParameterizedSubstituteMenu#()V" />
+      <node id="5310043668063022770" at="41,72,47,16" concept="2" />
+      <node id="5310043668063022793" at="48,69,54,15" concept="2" />
+      <node id="5310043668063022762" at="39,0,56,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="5310043668063022762" at="24,88,25,60" />
+      <scope id="5310043668063022762" at="29,110,30,36" />
+      <scope id="5310043668063022762" at="35,52,36,19" />
+      <scope id="5310043668063022762" at="24,0,27,0" />
+      <scope id="5310043668063022762" at="35,0,38,0">
+        <var name="owner" id="5310043668063022762" />
+      </scope>
+      <scope id="5310043668063022762" at="28,0,32,0" />
+      <scope id="5310043668063022773" at="42,53,46,84">
+        <var name="nodeSubstituteChooser" id="5310043668063022777" />
+      </scope>
+      <scope id="5310043668063022796" at="49,53,53,84">
+        <var name="nodeSubstituteChooser" id="5310043668063022800" />
+      </scope>
+      <scope id="5310043668063022762" at="40,51,54,15" />
+      <scope id="5310043668063022762" at="39,0,56,0" />
+      <unit id="5310043668063022762" at="33,0,57,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_ParameterizedSubstituteMenu_Test$TestBody" />
+      <unit id="5310043668063022762" at="19,0,58,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_ParameterizedSubstituteMenu_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/5310043668063086042">
+    <file name="TestCompletionCustomization_ContextMatcher_WrapSubstituteMenu_Test.java">
+      <node id="5310043668063086042" at="24,79,25,60" concept="12" />
+      <node id="5310043668063086042" at="29,101,30,36" concept="2" />
+      <node id="5310043668063086042" at="35,52,36,19" concept="12" />
+      <node id="5310043668063086042" at="40,51,41,72" concept="2" />
+      <node id="5310043668063086054" at="42,53,43,73" concept="2" />
+      <node id="5310043668063086056" at="43,73,44,102" concept="6" />
+      <node id="5310043668063086062" at="44,102,45,75" concept="2" />
+      <node id="5310043668063086068" at="45,75,46,84" concept="2" />
+      <node id="5310043668063086071" at="47,16,48,69" concept="2" />
+      <node id="5310043668063086077" at="49,53,50,73" concept="2" />
+      <node id="5310043668063086079" at="50,73,51,102" concept="6" />
+      <node id="5310043668063086085" at="51,102,52,75" concept="2" />
+      <node id="5310043668063086091" at="52,75,53,84" concept="2" />
+      <node id="5310043668063086042" at="21,0,23,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="5310043668063086042" at="24,0,27,0" concept="1" trace="TestCompletionCustomization_ContextMatcher_WrapSubstituteMenu_Test#()V" />
+      <node id="5310043668063086042" at="35,0,38,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5310043668063086042" at="28,0,32,0" concept="5" trace="test_TestCompletionCustomization_ContextMatcher_WrapSubstituteMenu#()V" />
+      <node id="5310043668063086050" at="41,72,47,16" concept="2" />
+      <node id="5310043668063086073" at="48,69,54,15" concept="2" />
+      <node id="5310043668063086042" at="39,0,56,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="5310043668063086042" at="24,79,25,60" />
+      <scope id="5310043668063086042" at="29,101,30,36" />
+      <scope id="5310043668063086042" at="35,52,36,19" />
+      <scope id="5310043668063086042" at="24,0,27,0" />
+      <scope id="5310043668063086042" at="35,0,38,0">
+        <var name="owner" id="5310043668063086042" />
+      </scope>
+      <scope id="5310043668063086042" at="28,0,32,0" />
+      <scope id="5310043668063086053" at="42,53,46,84">
+        <var name="nodeSubstituteChooser" id="5310043668063086057" />
+      </scope>
+      <scope id="5310043668063086076" at="49,53,53,84">
+        <var name="nodeSubstituteChooser" id="5310043668063086080" />
+      </scope>
+      <scope id="5310043668063086042" at="40,51,54,15" />
+      <scope id="5310043668063086042" at="39,0,56,0" />
+      <unit id="5310043668063086042" at="33,0,57,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_WrapSubstituteMenu_Test$TestBody" />
+      <unit id="5310043668063086042" at="19,0,58,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_WrapSubstituteMenu_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/5310043668063146794">
+    <file name="TestCompletionCustomization_ContextMatcher_BooleanPropertyWithStyling_Test.java">
+      <node id="5310043668063146794" at="24,87,25,60" concept="12" />
+      <node id="5310043668063146794" at="29,109,30,36" concept="2" />
+      <node id="5310043668063146794" at="35,52,36,19" concept="12" />
+      <node id="5310043668063146794" at="40,51,41,72" concept="2" />
+      <node id="5310043668063146829" at="42,53,43,73" concept="2" />
+      <node id="5310043668063146831" at="43,73,44,102" concept="6" />
+      <node id="5310043668063146837" at="44,102,45,75" concept="2" />
+      <node id="5310043668063146843" at="45,75,46,84" concept="2" />
+      <node id="5310043668063146794" at="21,0,23,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="5310043668063146794" at="24,0,27,0" concept="1" trace="TestCompletionCustomization_ContextMatcher_BooleanPropertyWithStyling_Test#()V" />
+      <node id="5310043668063146794" at="35,0,38,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5310043668063146794" at="28,0,32,0" concept="5" trace="test_TestCompletionCustomization_ContextMatcher_BooleanPropertyWithStyling#()V" />
+      <node id="5310043668063146825" at="41,72,47,15" concept="2" />
+      <node id="5310043668063146794" at="39,0,49,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="5310043668063146794" at="24,87,25,60" />
+      <scope id="5310043668063146794" at="29,109,30,36" />
+      <scope id="5310043668063146794" at="35,52,36,19" />
+      <scope id="5310043668063146794" at="24,0,27,0" />
+      <scope id="5310043668063146794" at="35,0,38,0">
+        <var name="owner" id="5310043668063146794" />
+      </scope>
+      <scope id="5310043668063146794" at="28,0,32,0" />
+      <scope id="5310043668063146828" at="42,53,46,84">
+        <var name="nodeSubstituteChooser" id="5310043668063146832" />
+      </scope>
+      <scope id="5310043668063146794" at="40,51,47,15" />
+      <scope id="5310043668063146794" at="39,0,49,0" />
+      <unit id="5310043668063146794" at="33,0,50,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_BooleanPropertyWithStyling_Test$TestBody" />
+      <unit id="5310043668063146794" at="19,0,51,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_BooleanPropertyWithStyling_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/5310043668063168541">
+    <file name="TestCompletionCustomization_ContextMatcher_BooleanPropertyNoStyling_Test.java">
+      <node id="5310043668063168541" at="24,85,25,60" concept="12" />
+      <node id="5310043668063168541" at="29,107,30,36" concept="2" />
+      <node id="5310043668063168541" at="35,52,36,19" concept="12" />
+      <node id="5310043668063168541" at="40,51,41,72" concept="2" />
+      <node id="5310043668063168551" at="42,53,43,73" concept="2" />
+      <node id="5310043668063168553" at="43,73,44,102" concept="6" />
+      <node id="5310043668063168559" at="44,102,45,75" concept="2" />
+      <node id="5310043668063168565" at="45,75,46,84" concept="2" />
+      <node id="5310043668063168541" at="21,0,23,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="5310043668063168541" at="24,0,27,0" concept="1" trace="TestCompletionCustomization_ContextMatcher_BooleanPropertyNoStyling_Test#()V" />
+      <node id="5310043668063168541" at="35,0,38,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5310043668063168541" at="28,0,32,0" concept="5" trace="test_TestCompletionCustomization_ContextMatcher_BooleanPropertyNoStyling#()V" />
+      <node id="5310043668063168547" at="41,72,47,16" concept="2" />
+      <node id="5310043668063168541" at="39,0,49,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="5310043668063168541" at="24,85,25,60" />
+      <scope id="5310043668063168541" at="29,107,30,36" />
+      <scope id="5310043668063168541" at="35,52,36,19" />
+      <scope id="5310043668063168541" at="24,0,27,0" />
+      <scope id="5310043668063168541" at="35,0,38,0">
+        <var name="owner" id="5310043668063168541" />
+      </scope>
+      <scope id="5310043668063168541" at="28,0,32,0" />
+      <scope id="5310043668063168550" at="42,53,46,84">
+        <var name="nodeSubstituteChooser" id="5310043668063168554" />
+      </scope>
+      <scope id="5310043668063168541" at="40,51,47,16" />
+      <scope id="5310043668063168541" at="39,0,49,0" />
+      <unit id="5310043668063168541" at="33,0,50,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_BooleanPropertyNoStyling_Test$TestBody" />
+      <unit id="5310043668063168541" at="19,0,51,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_BooleanPropertyNoStyling_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/5310043668063170627">
+    <file name="TestCompletionCustomization_ContextMatcher_EnumPropertyNoStyling_Test.java">
+      <node id="5310043668063170627" at="24,82,25,60" concept="12" />
+      <node id="5310043668063170627" at="29,104,30,36" concept="2" />
+      <node id="5310043668063170627" at="35,52,36,19" concept="12" />
+      <node id="5310043668063170627" at="40,51,41,72" concept="2" />
+      <node id="5310043668063170637" at="42,53,43,73" concept="2" />
+      <node id="5310043668063170639" at="43,73,44,102" concept="6" />
+      <node id="5310043668063170645" at="44,102,45,75" concept="2" />
+      <node id="5310043668063170651" at="45,75,46,84" concept="2" />
+      <node id="5310043668063170627" at="21,0,23,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="5310043668063170627" at="24,0,27,0" concept="1" trace="TestCompletionCustomization_ContextMatcher_EnumPropertyNoStyling_Test#()V" />
+      <node id="5310043668063170627" at="35,0,38,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5310043668063170627" at="28,0,32,0" concept="5" trace="test_TestCompletionCustomization_ContextMatcher_EnumPropertyNoStyling#()V" />
+      <node id="5310043668063170633" at="41,72,47,16" concept="2" />
+      <node id="5310043668063170627" at="39,0,49,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="5310043668063170627" at="24,82,25,60" />
+      <scope id="5310043668063170627" at="29,104,30,36" />
+      <scope id="5310043668063170627" at="35,52,36,19" />
+      <scope id="5310043668063170627" at="24,0,27,0" />
+      <scope id="5310043668063170627" at="35,0,38,0">
+        <var name="owner" id="5310043668063170627" />
+      </scope>
+      <scope id="5310043668063170627" at="28,0,32,0" />
+      <scope id="5310043668063170636" at="42,53,46,84">
+        <var name="nodeSubstituteChooser" id="5310043668063170640" />
+      </scope>
+      <scope id="5310043668063170627" at="40,51,47,16" />
+      <scope id="5310043668063170627" at="39,0,49,0" />
+      <unit id="5310043668063170627" at="33,0,50,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_EnumPropertyNoStyling_Test$TestBody" />
+      <unit id="5310043668063170627" at="19,0,51,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_EnumPropertyNoStyling_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/5310043668063170654">
+    <file name="TestCompletionCustomization_ContextMatcher_EnumPropertyWithStyling_Test.java">
+      <node id="5310043668063170654" at="24,84,25,60" concept="12" />
+      <node id="5310043668063170654" at="29,106,30,36" concept="2" />
+      <node id="5310043668063170654" at="35,52,36,19" concept="12" />
+      <node id="5310043668063170654" at="40,51,41,72" concept="2" />
+      <node id="5310043668063170664" at="42,53,43,73" concept="2" />
+      <node id="5310043668063170666" at="43,73,44,102" concept="6" />
+      <node id="5310043668063170672" at="44,102,45,75" concept="2" />
+      <node id="5310043668063170678" at="45,75,46,84" concept="2" />
+      <node id="5310043668063170654" at="21,0,23,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="5310043668063170654" at="24,0,27,0" concept="1" trace="TestCompletionCustomization_ContextMatcher_EnumPropertyWithStyling_Test#()V" />
+      <node id="5310043668063170654" at="35,0,38,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5310043668063170654" at="28,0,32,0" concept="5" trace="test_TestCompletionCustomization_ContextMatcher_EnumPropertyWithStyling#()V" />
+      <node id="5310043668063170660" at="41,72,47,15" concept="2" />
+      <node id="5310043668063170654" at="39,0,49,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="5310043668063170654" at="24,84,25,60" />
+      <scope id="5310043668063170654" at="29,106,30,36" />
+      <scope id="5310043668063170654" at="35,52,36,19" />
+      <scope id="5310043668063170654" at="24,0,27,0" />
+      <scope id="5310043668063170654" at="35,0,38,0">
+        <var name="owner" id="5310043668063170654" />
+      </scope>
+      <scope id="5310043668063170654" at="28,0,32,0" />
+      <scope id="5310043668063170663" at="42,53,46,84">
+        <var name="nodeSubstituteChooser" id="5310043668063170667" />
+      </scope>
+      <scope id="5310043668063170654" at="40,51,47,15" />
+      <scope id="5310043668063170654" at="39,0,49,0" />
+      <unit id="5310043668063170654" at="33,0,50,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_EnumPropertyWithStyling_Test$TestBody" />
+      <unit id="5310043668063170654" at="19,0,51,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_EnumPropertyWithStyling_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/7595250613974157823">
+    <file name="TestCompletionCustomization_ContextMatcher_EditingChildPropertyAndLink_Test.java">
+      <node id="7595250613974157823" at="24,88,25,60" concept="12" />
+      <node id="7595250613974157823" at="29,110,30,36" concept="2" />
+      <node id="7595250613974157823" at="35,52,36,19" concept="12" />
+      <node id="7595250613974157823" at="40,51,41,72" concept="2" />
+      <node id="7595250613974157829" at="42,53,43,73" concept="2" />
+      <node id="7595250613974157831" at="43,73,44,102" concept="6" />
+      <node id="7595250613974191371" at="44,102,45,71" concept="8" />
+      <node id="7595250613974157837" at="45,71,46,75" concept="2" />
+      <node id="7595250613974157843" at="46,75,47,85" concept="2" />
+      <node id="7595250613974195231" at="47,85,48,71" concept="2" />
+      <node id="7595250613974217026" at="48,71,49,73" concept="2" />
+      <node id="7595250613974541567" at="49,73,50,88" concept="2" />
+      <node id="7595250613974241683" at="50,88,51,75" concept="2" />
+      <node id="7595250613974233956" at="51,75,52,85" concept="2" />
+      <node id="7595250613974238333" at="52,85,53,73" concept="2" />
+      <node id="7595250613974217160" at="53,73,54,73" concept="2" />
+      <node id="7595250613974220593" at="54,73,55,75" concept="2" />
+      <node id="7595250613974157823" at="21,0,23,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="7595250613974157823" at="24,0,27,0" concept="1" trace="TestCompletionCustomization_ContextMatcher_EditingChildPropertyAndLink_Test#()V" />
+      <node id="7595250613974157823" at="35,0,38,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="7595250613974157823" at="28,0,32,0" concept="5" trace="test_TestCompletionCustomization_ContextMatcher_EditingChildPropertyAndLink#()V" />
+      <node id="7595250613974157825" at="41,72,56,15" concept="2" />
+      <node id="7595250613974157823" at="39,0,58,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="7595250613974157823" at="24,88,25,60" />
+      <scope id="7595250613974157823" at="29,110,30,36" />
+      <scope id="7595250613974157823" at="35,52,36,19" />
+      <scope id="7595250613974157823" at="24,0,27,0" />
+      <scope id="7595250613974157823" at="35,0,38,0">
+        <var name="owner" id="7595250613974157823" />
+      </scope>
+      <scope id="7595250613974157823" at="28,0,32,0" />
+      <scope id="7595250613974157828" at="42,53,55,75">
+        <var name="nodeSubstituteChooser" id="7595250613974157832" />
+      </scope>
+      <scope id="7595250613974157823" at="40,51,56,15" />
+      <scope id="7595250613974157823" at="39,0,58,0" />
+      <unit id="7595250613974157823" at="33,0,59,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_EditingChildPropertyAndLink_Test$TestBody" />
+      <unit id="7595250613974157823" at="19,0,60,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_EditingChildPropertyAndLink_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/8199816903239853065">
+    <file name="TestCompletionCustomization_Style_Test.java">
+      <node id="8199816903239853065" at="26,51,27,60" concept="12" />
+      <node id="8199816903239853065" at="31,73,32,36" concept="2" />
+      <node id="8199816903239853065" at="37,52,38,19" concept="12" />
+      <node id="8199816903239853065" at="42,51,43,53" concept="2" />
+      <node id="8199816903239938842" at="43,53,44,0" concept="9" />
+      <node id="8199816903239853079" at="45,53,46,73" concept="2" />
+      <node id="8199816903239853081" at="46,73,47,102" concept="6" />
+      <node id="8199816903239853087" at="47,102,48,75" concept="2" />
+      <node id="8199816903239856701" at="48,75,49,102" concept="6" />
+      <node id="8199816903239926816" at="49,102,50,69" concept="6" />
+      <node id="8199816903239855383" at="50,69,51,52" concept="2" />
+      <node id="8199816903239927788" at="51,52,52,41" concept="2" />
+      <node id="8199816903239929170" at="52,41,53,43" concept="2" />
+      <node id="8646897227238505299" at="53,43,54,46" concept="2" />
+      <node id="1507422355002152423" at="54,46,55,104" concept="2" />
+      <node id="8199816903239930018" at="55,104,56,94" concept="2" />
+      <node id="8199816903239934852" at="56,94,57,90" concept="2" />
+      <node id="8199816903239853065" at="23,0,25,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="8199816903239853065" at="26,0,29,0" concept="1" trace="TestCompletionCustomization_Style_Test#()V" />
+      <node id="8199816903239853065" at="37,0,40,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="8199816903239853065" at="30,0,34,0" concept="5" trace="test_TestCompletionCustomization_Style#()V" />
+      <node id="8199816903239853075" at="44,0,58,15" concept="2" />
+      <node id="8199816903239853065" at="41,0,60,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="8199816903239853065" at="26,51,27,60" />
+      <scope id="8199816903239853065" at="31,73,32,36" />
+      <scope id="8199816903239853065" at="37,52,38,19" />
+      <scope id="8199816903239853065" at="26,0,29,0" />
+      <scope id="8199816903239853065" at="37,0,40,0">
+        <var name="owner" id="8199816903239853065" />
+      </scope>
+      <scope id="8199816903239853065" at="30,0,34,0" />
+      <scope id="8199816903239853078" at="45,53,57,90">
+        <var name="currentSubstituteAction" id="8199816903239856702" />
+        <var name="impl" id="8199816903239926817" />
+        <var name="nodeSubstituteChooser" id="8199816903239853082" />
+      </scope>
+      <scope id="8199816903239853065" at="42,51,58,15" />
+      <scope id="8199816903239853065" at="41,0,60,0" />
+      <unit id="8199816903239853065" at="35,0,61,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_Style_Test$TestBody" />
+      <unit id="8199816903239853065" at="21,0,62,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_Style_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/8199816903240221461">
+    <file name="TestCompletionCustomization_ContextMatcher_ChildInLinkInlineMenu_Test.java">
+      <node id="8199816903240221461" at="24,82,25,60" concept="12" />
+      <node id="8199816903240221461" at="29,104,30,36" concept="2" />
+      <node id="8199816903240221461" at="35,52,36,19" concept="12" />
+      <node id="8199816903240221461" at="40,51,41,72" concept="2" />
+      <node id="8199816903240221473" at="42,53,43,73" concept="2" />
+      <node id="8199816903240221475" at="43,73,44,102" concept="6" />
+      <node id="8199816903240221481" at="44,102,45,75" concept="2" />
+      <node id="8199816903240221487" at="45,75,46,84" concept="2" />
+      <node id="8199816903240221490" at="47,16,48,69" concept="2" />
+      <node id="8199816903240221496" at="49,53,50,73" concept="2" />
+      <node id="8199816903240221498" at="50,73,51,102" concept="6" />
+      <node id="8199816903240221504" at="51,102,52,75" concept="2" />
+      <node id="8199816903240221510" at="52,75,53,84" concept="2" />
+      <node id="8199816903240221461" at="21,0,23,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="8199816903240221461" at="24,0,27,0" concept="1" trace="TestCompletionCustomization_ContextMatcher_ChildInLinkInlineMenu_Test#()V" />
+      <node id="8199816903240221461" at="35,0,38,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="8199816903240221461" at="28,0,32,0" concept="5" trace="test_TestCompletionCustomization_ContextMatcher_ChildInLinkInlineMenu#()V" />
+      <node id="8199816903240221469" at="41,72,47,16" concept="2" />
+      <node id="8199816903240221492" at="48,69,54,15" concept="2" />
+      <node id="8199816903240221461" at="39,0,56,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="8199816903240221461" at="24,82,25,60" />
+      <scope id="8199816903240221461" at="29,104,30,36" />
+      <scope id="8199816903240221461" at="35,52,36,19" />
+      <scope id="8199816903240221461" at="24,0,27,0" />
+      <scope id="8199816903240221461" at="35,0,38,0">
+        <var name="owner" id="8199816903240221461" />
+      </scope>
+      <scope id="8199816903240221461" at="28,0,32,0" />
+      <scope id="8199816903240221472" at="42,53,46,84">
+        <var name="nodeSubstituteChooser" id="8199816903240221476" />
+      </scope>
+      <scope id="8199816903240221495" at="49,53,53,84">
+        <var name="nodeSubstituteChooser" id="8199816903240221499" />
+      </scope>
+      <scope id="8199816903240221461" at="40,51,54,15" />
+      <scope id="8199816903240221461" at="39,0,56,0" />
+      <unit id="8199816903240221461" at="33,0,57,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_ChildInLinkInlineMenu_Test$TestBody" />
+      <unit id="8199816903240221461" at="19,0,58,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_ChildInLinkInlineMenu_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/8373324885176752930">
+    <file name="TestCompletionCustomization_ContextMatcher_CustomActionNoFeatureNoStyling_Test.java">
+      <node id="8373324885176752930" at="24,91,25,60" concept="12" />
+      <node id="8373324885176752930" at="29,113,30,36" concept="2" />
+      <node id="8373324885176752930" at="35,52,36,19" concept="12" />
+      <node id="8373324885176752930" at="40,51,41,72" concept="2" />
+      <node id="8373324885176815402" at="41,72,42,175" concept="2" />
+      <node id="8373324885176752940" at="43,53,44,73" concept="2" />
+      <node id="8373324885176752942" at="44,73,45,102" concept="6" />
+      <node id="8373324885176752948" at="45,102,46,75" concept="2" />
+      <node id="8373324885176752954" at="46,75,47,84" concept="2" />
+      <node id="8373324885176752930" at="21,0,23,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="8373324885176752930" at="24,0,27,0" concept="1" trace="TestCompletionCustomization_ContextMatcher_CustomActionNoFeatureNoStyling_Test#()V" />
+      <node id="8373324885176752930" at="35,0,38,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="8373324885176752930" at="28,0,32,0" concept="5" trace="test_TestCompletionCustomization_ContextMatcher_CustomActionNoFeatureNoStyling#()V" />
+      <node id="8373324885176752936" at="42,175,48,16" concept="2" />
+      <node id="8373324885176752930" at="39,0,50,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="8373324885176752930" at="24,91,25,60" />
+      <scope id="8373324885176752930" at="29,113,30,36" />
+      <scope id="8373324885176752930" at="35,52,36,19" />
+      <scope id="8373324885176752930" at="24,0,27,0" />
+      <scope id="8373324885176752930" at="35,0,38,0">
+        <var name="owner" id="8373324885176752930" />
+      </scope>
+      <scope id="8373324885176752930" at="28,0,32,0" />
+      <scope id="8373324885176752939" at="43,53,47,84">
+        <var name="nodeSubstituteChooser" id="8373324885176752943" />
+      </scope>
+      <scope id="8373324885176752930" at="40,51,48,16" />
+      <scope id="8373324885176752930" at="39,0,50,0" />
+      <unit id="8373324885176752930" at="33,0,51,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_CustomActionNoFeatureNoStyling_Test$TestBody" />
+      <unit id="8373324885176752930" at="19,0,52,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_CustomActionNoFeatureNoStyling_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/8373324885176989047">
+    <file name="CustomizationTestHelper.java">
+      <node id="8373324885177004253" at="34,56,35,77" concept="6" />
+      <node id="3806643308052253809" at="38,99,39,82" concept="2" />
+      <node id="3806643308052253815" at="39,82,40,28" concept="7" />
+      <node id="2739111710912891642" at="43,9,44,53" concept="2" />
+      <node id="2739111710912697691" at="44,53,45,0" concept="9" />
+      <node id="8373324885177025429" at="45,0,46,20" concept="7" />
+      <node id="3806643308052421163" at="52,56,53,77" concept="6" />
+      <node id="3806643308052421191" at="55,146,56,96" concept="2" />
+      <node id="3806643308052421197" at="56,96,57,26" concept="7" />
+      <node id="3806643308052704392" at="59,9,60,53" concept="2" />
+      <node id="3806643308052421199" at="60,53,61,20" concept="7" />
+      <node id="2739111710909371184" at="67,56,68,77" concept="6" />
+      <node id="2739111710909371215" at="70,207,71,87" concept="2" />
+      <node id="2739111710909371223" at="71,87,72,26" concept="7" />
+      <node id="2739111710913872672" at="75,48,76,27" concept="7" />
+      <node id="2739111710912895059" at="79,9,80,53" concept="2" />
+      <node id="2739111710912895006" at="80,53,81,0" concept="9" />
+      <node id="2739111710909371250" at="81,0,82,20" concept="7" />
+      <node id="2739111710912347247" at="88,56,89,77" concept="6" />
+      <node id="2739111710915099811" at="91,211,92,109" concept="6" />
+      <node id="2739111710915099819" at="93,39,94,141" concept="2" />
+      <node id="2739111710915099831" at="95,20,96,76" concept="2" />
+      <node id="2739111710915099836" at="97,13,98,31" concept="7" />
+      <node id="2739111710915142333" at="101,45,102,53" concept="7" />
+      <node id="2739111710912347256" at="104,12,105,27" concept="2" />
+      <node id="2739111710912921075" at="106,9,107,53" concept="2" />
+      <node id="2739111710912347296" at="107,53,108,20" concept="7" />
+      <node id="2739111710912672022" at="112,92,113,131" concept="7" />
+      <node id="3806643308052253708" at="118,43,119,20" concept="7" />
+      <node id="3806643308052253714" at="121,47,122,21" concept="7" />
+      <node id="3806643308052253720" at="124,36,125,49" concept="7" />
+      <node id="3806643308052253728" at="127,42,128,20" concept="7" />
+      <node id="3806643308052253734" at="130,39,131,20" concept="7" />
+      <node id="3806643308052253742" at="133,45,134,20" concept="7" />
+      <node id="3806643308052253752" at="136,60,137,20" concept="7" />
+      <node id="3806643308052253760" at="139,48,140,20" concept="7" />
+      <node id="3806643308052253768" at="142,55,143,20" concept="7" />
+      <node id="3806643308052253776" at="145,51,146,18" concept="7" />
+      <node id="3806643308052253784" at="148,55,149,21" concept="7" />
+      <node id="3806643308052253792" at="151,47,152,20" concept="7" />
+      <node id="3806643308052361846" at="154,86,155,39" concept="6" />
+      <node id="3806643308052387205" at="156,123,157,53" concept="2" />
+      <node id="3806643308052308071" at="158,9,159,159" concept="7" />
+      <node id="8373324885176989047" at="165,0,166,0" concept="10" trace="stringProperty$OUoz" />
+      <node id="8373324885176989047" at="166,0,167,0" concept="10" trace="customActionEnumProperty$1pgg" />
+      <node id="8373324885176989047" at="167,0,168,0" concept="10" trace="name$MnvL" />
+      <node id="8373324885176989047" at="171,0,172,0" concept="10" trace="customActionReference$peXD" />
+      <node id="8373324885176989047" at="172,0,173,0" concept="10" trace="customActionChildInMatchingLink$ss1j" />
+      <node id="8373324885176989047" at="176,0,177,0" concept="10" trace="TestCompletionCustomization_ContextMatcherChildInMatchingLink$VP" />
+      <node id="8373324885176989047" at="177,0,178,0" concept="10" trace="TestCompletionCustomization_ParentTestContextMatcher$Un" />
+      <node id="2739111710915099829" at="95,18,97,13" concept="0" />
+      <node id="2739111710912742846" at="112,0,115,0" concept="11" trace="createEmptyAction#(Ljetbrains/mps/openapi/editor/EditorComponent;)Ljetbrains/mps/openapi/editor/cells/SubstituteAction;" />
+      <node id="3806643308052253702" at="118,0,121,0" concept="5" trace="getIconNode#(Ljava/lang/String;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="3806643308052253710" at="121,0,124,0" concept="5" trace="isReferentPresentation#()Z" />
+      <node id="3806643308052253716" at="124,0,127,0" concept="5" trace="getSourceNode#()Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="3806643308052253724" at="127,0,130,0" concept="5" trace="getParameterObject#()Ljava/lang/Object;" />
+      <node id="3806643308052253730" at="130,0,133,0" concept="5" trace="getOutputConcept#()Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="3806643308052253736" at="133,0,136,0" concept="5" trace="getActionType#(Ljava/lang/String;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="3806643308052253744" at="136,0,139,0" concept="5" trace="getActionType#(Ljava/lang/String;Ljetbrains/mps/openapi/editor/cells/EditorCell;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="3806643308052253754" at="139,0,142,0" concept="5" trace="getMatchingText#(Ljava/lang/String;)Ljava/lang/String;" />
+      <node id="3806643308052253762" at="142,0,145,0" concept="5" trace="getVisibleMatchingText#(Ljava/lang/String;)Ljava/lang/String;" />
+      <node id="3806643308052253770" at="145,0,148,0" concept="5" trace="getDescriptionText#(Ljava/lang/String;)Ljava/lang/String;" />
+      <node id="3806643308052253778" at="148,0,151,0" concept="5" trace="canSubstituteStrictly#(Ljava/lang/String;)Z" />
+      <node id="3806643308052253786" at="151,0,154,0" concept="5" trace="canSubstitute#(Ljava/lang/String;)Z" />
+      <node id="3806643308052366408" at="155,39,158,9" concept="13" />
+      <node id="3806643308052326367" at="38,0,42,0" concept="5" trace="invoke#(Ljetbrains/mps/openapi/editor/EditorContext;Ljava/lang/String;Ljava/lang/String;Lorg/jetbrains/mps/openapi/model/SNode;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="3806643308052421174" at="54,295,58,14" concept="2" />
+      <node id="2739111710913871358" at="74,0,78,0" concept="5" trace="getParameterObject#()Ljava/lang/Object;" />
+      <node id="2739111710915127360" at="100,0,104,0" concept="5" trace="getOutputConcept#()Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="2739111710915099817" at="92,109,97,13" concept="4" />
+      <node id="8373324885176902298" at="36,43,42,14" concept="2" />
+      <node id="3806643308052421170" at="53,77,59,9" concept="3" />
+      <node id="3806643308052253794" at="154,0,161,0" concept="5" trace="substitute#(Ljetbrains/mps/openapi/editor/EditorContext;Ljava/lang/String;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="8373324885177094018" at="35,77,43,9" concept="3" />
+      <node id="2739111710909371196" at="69,176,78,13" concept="2" />
+      <node id="3806643308052421158" at="52,0,63,0" concept="5" trace="createActions#()Ljava/util/List;" />
+      <node id="2739111710910680424" at="68,77,79,9" concept="3" />
+      <node id="3806643308052421153" at="50,104,63,6" concept="7" />
+      <node id="8373324885176894071" at="34,0,48,0" concept="5" trace="createActions#()Ljava/util/List;" />
+      <node id="2739111710915099794" at="90,379,104,12" concept="6" />
+      <node id="3806643308052421144" at="50,0,65,0" concept="11" trace="createEnumPropertySubstituteInfo#(Ljetbrains/mps/openapi/editor/EditorComponent;)Ljetbrains/mps/openapi/editor/cells/SubstituteInfo;" />
+      <node id="8373324885176989342" at="32,135,48,6" concept="7" />
+      <node id="2739111710909371179" at="67,0,84,0" concept="5" trace="createActions#()Ljava/util/List;" />
+      <node id="2739111710912347254" at="89,77,106,9" concept="3" />
+      <node id="8373324885176989223" at="32,0,50,0" concept="11" trace="createTextPropertySubstituteInfo#(Ljetbrains/mps/openapi/editor/EditorComponent;null)Ljetbrains/mps/openapi/editor/cells/SubstituteInfo;" />
+      <node id="2739111710909371174" at="65,126,84,6" concept="7" />
+      <node id="2739111710909371168" at="65,0,86,0" concept="11" trace="createReferenceSubstituteInfo#(Ljetbrains/mps/openapi/editor/EditorComponent;Lorg/jetbrains/mps/openapi/model/SNode;)Ljetbrains/mps/openapi/editor/cells/SubstituteInfo;" />
+      <node id="2739111710912347242" at="88,0,110,0" concept="5" trace="createActions#()Ljava/util/List;" />
+      <node id="2739111710912347237" at="86,147,110,6" concept="7" />
+      <node id="2739111710912347229" at="86,0,112,0" concept="11" trace="createChildSubstituteInfo#(Ljetbrains/mps/openapi/editor/EditorComponent;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;)Ljetbrains/mps/openapi/editor/cells/SubstituteInfo;" />
+      <node id="3806643308052253697" at="116,240,161,6" concept="7" />
+      <node id="3806643308052465954" at="116,0,163,0" concept="11" trace="createAction#(Ljetbrains/mps/openapi/editor/EditorComponent;Ljava/lang/String;Ljetbrains/mps/baseLanguage/closures/runtime/_FunctionTypes/_return_P4_E0;)Ljetbrains/mps/openapi/editor/cells/SubstituteAction;" />
+      <scope id="2739111710913871363" at="75,48,76,27" />
+      <scope id="2739111710915099818" at="93,39,94,141" />
+      <scope id="2739111710915099830" at="95,20,96,76" />
+      <scope id="2739111710915127365" at="101,45,102,53" />
+      <scope id="2739111710912671852" at="112,92,113,131" />
+      <scope id="3806643308052253707" at="118,43,119,20" />
+      <scope id="3806643308052253713" at="121,47,122,21" />
+      <scope id="3806643308052253719" at="124,36,125,49" />
+      <scope id="3806643308052253727" at="127,42,128,20" />
+      <scope id="3806643308052253733" at="130,39,131,20" />
+      <scope id="3806643308052253741" at="133,45,134,20" />
+      <scope id="3806643308052253751" at="136,60,137,20" />
+      <scope id="3806643308052253759" at="139,48,140,20" />
+      <scope id="3806643308052253767" at="142,55,143,20" />
+      <scope id="3806643308052253775" at="145,51,146,18" />
+      <scope id="3806643308052253783" at="148,55,149,21" />
+      <scope id="3806643308052253791" at="151,47,152,20" />
+      <scope id="3806643308052366410" at="156,123,157,53" />
+      <scope id="3806643308052326369" at="38,99,40,28" />
+      <scope id="3806643308052421190" at="55,146,57,26" />
+      <scope id="2739111710909371214" at="70,207,72,26" />
+      <scope id="2739111710912742846" at="112,0,115,0">
+        <var name="editorComponent" id="2739111710912672044" />
+      </scope>
+      <scope id="3806643308052253702" at="118,0,121,0">
+        <var name="p0" id="3806643308052253705" />
+      </scope>
+      <scope id="3806643308052253710" at="121,0,124,0" />
+      <scope id="3806643308052253716" at="124,0,127,0" />
+      <scope id="3806643308052253724" at="127,0,130,0" />
+      <scope id="3806643308052253730" at="130,0,133,0" />
+      <scope id="3806643308052253736" at="133,0,136,0">
+        <var name="p0" id="3806643308052253739" />
+      </scope>
+      <scope id="3806643308052253744" at="136,0,139,0">
+        <var name="p0" id="3806643308052253747" />
+        <var name="p1" id="3806643308052253749" />
+      </scope>
+      <scope id="3806643308052253754" at="139,0,142,0">
+        <var name="p0" id="3806643308052253757" />
+      </scope>
+      <scope id="3806643308052253762" at="142,0,145,0">
+        <var name="p0" id="3806643308052253765" />
+      </scope>
+      <scope id="3806643308052253770" at="145,0,148,0">
+        <var name="p0" id="3806643308052253773" />
+      </scope>
+      <scope id="3806643308052253778" at="148,0,151,0">
+        <var name="p0" id="3806643308052253781" />
+      </scope>
+      <scope id="3806643308052253786" at="151,0,154,0">
+        <var name="p0" id="3806643308052253789" />
+      </scope>
+      <scope id="3806643308052326367" at="38,0,42,0">
+        <var name="context" id="3806643308052326367" />
+        <var name="parent" id="3806643308052326367" />
+        <var name="pattern" id="3806643308052326367" />
+        <var name="text" id="3806643308052326367" />
+      </scope>
+      <scope id="3806643308052421173" at="54,295,58,14" />
+      <scope id="2739111710913871358" at="74,0,78,0" />
+      <scope id="2739111710915127360" at="100,0,104,0" />
+      <scope id="3806643308052253802" at="154,86,159,159">
+        <var name="parent" id="3806643308052361847" />
+      </scope>
+      <scope id="8373324885177094024" at="36,43,42,14" />
+      <scope id="3806643308052421170" at="53,77,59,9">
+        <var name="member" id="3806643308052421171" />
+      </scope>
+      <scope id="2739111710915099810" at="91,211,98,31">
+        <var name="newInstance" id="2739111710915099812" />
+      </scope>
+      <scope id="3806643308052253794" at="154,0,161,0">
+        <var name="editorContext" id="3806643308052253797" />
+        <var name="pattern" id="3806643308052253800" />
+      </scope>
+      <scope id="8373324885177094018" at="35,77,43,9">
+        <var name="text" id="8373324885177094020" />
+      </scope>
+      <scope id="3806643308052421162" at="52,56,61,20">
+        <var name="list" id="3806643308052421164" />
+      </scope>
+      <scope id="2739111710910680426" at="69,176,78,13" />
+      <scope id="3806643308052421158" at="52,0,63,0" />
+      <scope id="2739111710910680424" at="68,77,79,9">
+        <var name="child" id="2739111710910680427" />
+      </scope>
+      <scope id="8373324885176894076" at="34,56,46,20">
+        <var name="list" id="8373324885177004254" />
+      </scope>
+      <scope id="3806643308052421152" at="50,104,63,6" />
+      <scope id="8373324885176894071" at="34,0,48,0" />
+      <scope id="3806643308052421144" at="50,0,65,0">
+        <var name="editorComponent" id="3806643308052421145" />
+      </scope>
+      <scope id="2739111710909371183" at="67,56,82,20">
+        <var name="list" id="2739111710909371185" />
+      </scope>
+      <scope id="2739111710912347255" at="90,379,105,27">
+        <var name="action" id="2739111710915099795" />
+      </scope>
+      <scope id="8373324885176989229" at="32,135,48,6" />
+      <scope id="2739111710909371179" at="67,0,84,0" />
+      <scope id="2739111710912347254" at="89,77,106,9">
+        <var name="concept" id="2739111710912347283" />
+      </scope>
+      <scope id="8373324885176989223" at="32,0,50,0">
+        <var name="editorComponent" id="8373324885177228279" />
+        <var name="matchingTexts" id="8373324885176989224" />
+      </scope>
+      <scope id="2739111710909371173" at="65,126,84,6" />
+      <scope id="2739111710912347246" at="88,56,108,20">
+        <var name="list" id="2739111710912347248" />
+      </scope>
+      <scope id="2739111710909371168" at="65,0,86,0">
+        <var name="currentNode" id="2739111710911726846" />
+        <var name="editorComponent" id="2739111710909371169" />
+      </scope>
+      <scope id="2739111710912347242" at="88,0,110,0" />
+      <scope id="2739111710912347236" at="86,147,110,6" />
+      <scope id="2739111710912347229" at="86,0,112,0">
+        <var name="currentChild" id="2739111710913358067" />
+        <var name="editorComponent" id="2739111710912347230" />
+        <var name="parentNode" id="2739111710912347232" />
+      </scope>
+      <scope id="3806643308052253205" at="116,240,161,6" />
+      <scope id="3806643308052465954" at="116,0,163,0">
+        <var name="editorComponent" id="3806643308052253817" />
+        <var name="substitute" id="3806643308052290410" />
+        <var name="text" id="3806643308052259776" />
+      </scope>
+      <unit id="8373324885176989047" at="170,0,174,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.CustomizationTestHelper$LINKS" />
+      <unit id="8373324885176989047" at="175,0,179,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.CustomizationTestHelper$CONCEPTS" />
+      <unit id="3806643308052326367" at="37,59,42,11" name="jetbrains.mps.lang.editor.menus.style.tests.tests.CustomizationTestHelper$1$1" />
+      <unit id="8373324885176989047" at="164,0,169,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.CustomizationTestHelper$PROPS" />
+      <unit id="2739111710913868666" at="70,23,78,11" name="jetbrains.mps.lang.editor.menus.style.tests.tests.CustomizationTestHelper$3$1" />
+      <unit id="3806643308052421156" at="51,15,63,5" name="jetbrains.mps.lang.editor.menus.style.tests.tests.CustomizationTestHelper$2" />
+      <unit id="2739111710915123609" at="91,40,104,11" name="jetbrains.mps.lang.editor.menus.style.tests.tests.CustomizationTestHelper$4$1" />
+      <unit id="8373324885176894067" at="33,15,48,5" name="jetbrains.mps.lang.editor.menus.style.tests.tests.CustomizationTestHelper$1" />
+      <unit id="2739111710909371177" at="66,15,84,5" name="jetbrains.mps.lang.editor.menus.style.tests.tests.CustomizationTestHelper$3" />
+      <unit id="2739111710912347240" at="87,15,110,5" name="jetbrains.mps.lang.editor.menus.style.tests.tests.CustomizationTestHelper$4" />
+      <unit id="3806643308052253700" at="117,15,161,5" name="jetbrains.mps.lang.editor.menus.style.tests.tests.CustomizationTestHelper$5" />
+      <unit id="8373324885176989047" at="31,0,180,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.CustomizationTestHelper" />
+    </file>
+  </root>
+  <root nodeRef="r:e67a2364-cd3f-43c0-b822-e9e7747803fc(jetbrains.mps.lang.editor.menus.style.tests.tests@tests)/8373324885177967313">
+    <file name="TestCompletionCustomization_ContextMatcher_CustomActionNoFeatureWithStyling_Test.java">
+      <node id="8373324885177967313" at="24,93,25,60" concept="12" />
+      <node id="8373324885177967313" at="29,115,30,36" concept="2" />
+      <node id="8373324885177967313" at="35,52,36,19" concept="12" />
+      <node id="8373324885177967313" at="40,51,41,72" concept="2" />
+      <node id="8373324885177967317" at="41,72,42,175" concept="2" />
+      <node id="8373324885177967331" at="43,53,44,73" concept="2" />
+      <node id="8373324885177967333" at="44,73,45,102" concept="6" />
+      <node id="8373324885177967339" at="45,102,46,75" concept="2" />
+      <node id="8373324885177967345" at="46,75,47,84" concept="2" />
+      <node id="8373324885177967313" at="21,0,23,0" concept="10" trace="ourParametersCacheExtension" />
+      <node id="8373324885177967313" at="24,0,27,0" concept="1" trace="TestCompletionCustomization_ContextMatcher_CustomActionNoFeatureWithStyling_Test#()V" />
+      <node id="8373324885177967313" at="35,0,38,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="8373324885177967313" at="28,0,32,0" concept="5" trace="test_TestCompletionCustomization_ContextMatcher_CustomActionNoFeatureWithStyling#()V" />
+      <node id="8373324885177967327" at="42,175,48,15" concept="2" />
+      <node id="8373324885177967313" at="39,0,50,0" concept="5" trace="testMethodImpl#()V" />
+      <scope id="8373324885177967313" at="24,93,25,60" />
+      <scope id="8373324885177967313" at="29,115,30,36" />
+      <scope id="8373324885177967313" at="35,52,36,19" />
+      <scope id="8373324885177967313" at="24,0,27,0" />
+      <scope id="8373324885177967313" at="35,0,38,0">
+        <var name="owner" id="8373324885177967313" />
+      </scope>
+      <scope id="8373324885177967313" at="28,0,32,0" />
+      <scope id="8373324885177967330" at="43,53,47,84">
+        <var name="nodeSubstituteChooser" id="8373324885177967334" />
+      </scope>
+      <scope id="8373324885177967313" at="40,51,48,15" />
+      <scope id="8373324885177967313" at="39,0,50,0" />
+      <unit id="8373324885177967313" at="33,0,51,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_CustomActionNoFeatureWithStyling_Test$TestBody" />
+      <unit id="8373324885177967313" at="19,0,52,0" name="jetbrains.mps.lang.editor.menus.style.tests.tests.TestCompletionCustomization_ContextMatcher_CustomActionNoFeatureWithStyling_Test" />
+    </file>
+  </root>
+</debug-info>
+

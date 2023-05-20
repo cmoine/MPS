@@ -12,24 +12,25 @@ import java.util.List;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.internal.collections.runtime.IWhereFilter;
 import jetbrains.mps.lang.generator.helper.EditingUtil;
 import jetbrains.mps.editor.runtime.selection.SelectionUtil;
 import jetbrains.mps.openapi.editor.selection.SelectionManager;
 import jetbrains.mps.openapi.editor.EditorInspector;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class MacrosSwitch_KeyMap extends KeyMapImpl {
   public MacrosSwitch_KeyMap() {
     this.setApplicableToEveryModel(true);
     KeyMapAction action;
-    action = new MacrosSwitch_KeyMap.MacrosSwitch_KeyMap_Action0();
+    action = new MacrosSwitch_KeyMap_Action0();
     this.putAction("ctrl+shift", "VK_F", action);
-    action = new MacrosSwitch_KeyMap.MacrosSwitch_KeyMap_Action1();
+    action = new MacrosSwitch_KeyMap_Action1();
     this.putAction("ctrl+shift", "VK_M", action);
-    action = new MacrosSwitch_KeyMap.MacrosSwitch_KeyMap_Action2();
+    action = new MacrosSwitch_KeyMap_Action2();
     this.putAction("ctrl+shift", "VK_M", action);
-    action = new MacrosSwitch_KeyMap.MacrosSwitch_KeyMap_Action3();
+    action = new MacrosSwitch_KeyMap_Action3();
     this.putAction("ctrl+shift", "VK_M", action);
   }
   public static class MacrosSwitch_KeyMap_Action0 extends KeyMapActionImpl {
@@ -37,7 +38,7 @@ public class MacrosSwitch_KeyMap extends KeyMapImpl {
       this.setShownInPopupMenu(true);
     }
     public String getDescriptionText() {
-      return "create template fragmet";
+      return "create template fragment";
     }
     public boolean isMenuAlwaysShown() {
       return false;
@@ -61,7 +62,7 @@ public class MacrosSwitch_KeyMap extends KeyMapImpl {
       if (ListSequence.fromList(selectedNodes).count() != 1) {
         return false;
       }
-      if (SNodeOperations.getNodeAncestorWhereConceptInList(node, new SAbstractConcept[]{MetaAdapterFactory.getConcept(0xb401a68083254110L, 0x8fd384331ff25befL, 0xfe43cb41d0L, "jetbrains.mps.lang.generator.structure.TemplateDeclaration"), MetaAdapterFactory.getConcept(0xb401a68083254110L, 0x8fd384331ff25befL, 0x7b85dded0be53d6cL, "jetbrains.mps.lang.generator.structure.InlineTemplateWithContext_RuleConsequence")}, false, false) == null) {
+      if (SNodeOperations.getNodeAncestorWhereConceptInList(node, new SAbstractConcept[]{CONCEPTS.TemplateDeclaration$5G, CONCEPTS.InlineTemplateWithContext_RuleConsequence$9i}, false, false) == null) {
         return false;
       }
       if (ListSequence.fromList(SNodeOperations.getNodeAncestors(node, null, false)).where(new IWhereFilter<SNode>() {
@@ -77,7 +78,7 @@ public class MacrosSwitch_KeyMap extends KeyMapImpl {
       return true;
     }
     private void execute_internal(final EditorContext editorContext, final SNode node, final List<SNode> selectedNodes) {
-      // do not hang <TF> on other attributes 
+      // do not hang <TF> on other attributes
       SNode applyToNode = ListSequence.fromList(SNodeOperations.getNodeAncestors(node, null, true)).where(new IWhereFilter<SNode>() {
         public boolean accept(SNode it) {
           return !(SNodeOperations.isAttribute(it));
@@ -122,7 +123,7 @@ public class MacrosSwitch_KeyMap extends KeyMapImpl {
     }
     private void execute_internal(final EditorContext editorContext, final SNode node, final List<SNode> selectedNodes) {
       SNode nodeMacro = EditingUtil.addNodeMacro(node);
-      // set caret 
+      // set caret
       SelectionUtil.selectLabelCellAnSetCaret(editorContext, nodeMacro, SelectionManager.FIRST_CELL, 1);
     }
     public String getKeyStroke() {
@@ -162,7 +163,7 @@ public class MacrosSwitch_KeyMap extends KeyMapImpl {
     }
     private void execute_internal(final EditorContext editorContext, final SNode node, final List<SNode> selectedNodes) {
       SNode propertyMacro = EditingUtil.addPropertyMacro(node, editorContext.getSelectedCell());
-      // set caret 
+      // set caret
       SelectionUtil.selectCell(editorContext, propertyMacro, SelectionManager.FIRST_CELL);
       EditorInspector inspector = editorContext.getInspector();
       assert inspector != null;
@@ -205,7 +206,7 @@ public class MacrosSwitch_KeyMap extends KeyMapImpl {
     }
     private void execute_internal(final EditorContext editorContext, final SNode node, final List<SNode> selectedNodes) {
       SNode referenceMacro = EditingUtil.addReferenceMacro(node, editorContext.getSelectedCell());
-      // set caret 
+      // set caret
       SelectionUtil.selectLabelCellAnSetCaret(editorContext, referenceMacro, SelectionManager.FIRST_CELL, 2);
       EditorInspector inspector = editorContext.getInspector();
       assert inspector != null;
@@ -214,5 +215,10 @@ public class MacrosSwitch_KeyMap extends KeyMapImpl {
     public String getKeyStroke() {
       return "ctrl shift M";
     }
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept TemplateDeclaration$5G = MetaAdapterFactory.getConcept(0xb401a68083254110L, 0x8fd384331ff25befL, 0xfe43cb41d0L, "jetbrains.mps.lang.generator.structure.TemplateDeclaration");
+    /*package*/ static final SConcept InlineTemplateWithContext_RuleConsequence$9i = MetaAdapterFactory.getConcept(0xb401a68083254110L, 0x8fd384331ff25befL, 0x7b85dded0be53d6cL, "jetbrains.mps.lang.generator.structure.InlineTemplateWithContext_RuleConsequence");
   }
 }

@@ -4,33 +4,60 @@ package jetbrains.mps.sampleXML.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_Attribute = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Document = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Element = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ElementPart = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Text = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_Attribute;
+  private ConceptPresentation props_Document;
+  private ConceptPresentation props_Element;
+  private ConceptPresentation props_ElementPart;
+  private ConceptPresentation props_Text;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.Attribute:
+        if (props_Attribute == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("attribute");
+          cpb.presentationByName();
+          props_Attribute = cpb.create();
+        }
         return props_Attribute;
-      case 1:
+      case LanguageConceptSwitch.Document:
+        if (props_Document == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Document = cpb.create();
+        }
         return props_Document;
-      case 2:
+      case LanguageConceptSwitch.Element:
+        if (props_Element == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("element");
+          cpb.presentationByName();
+          props_Element = cpb.create();
+        }
         return props_Element;
-      case 3:
+      case LanguageConceptSwitch.ElementPart:
+        if (props_ElementPart == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_ElementPart = cpb.create();
+        }
         return props_ElementPart;
-      case 4:
+      case LanguageConceptSwitch.Text:
+        if (props_Text == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("text");
+          cpb.presentationByName();
+          props_Text = cpb.create();
+        }
         return props_Text;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

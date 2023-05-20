@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="52zti14rtelre179al93w7j2w2l1gmk" />
+<product version="3" modelHash="4p30awdfggz6puk9i9kefl2vzr3uuv6">
+  <files names="ConstraintsAspectDescriptor.java:ExportAsImage_Constraints.java" />
+</product>
 

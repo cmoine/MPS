@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,11 @@
  */
 package jetbrains.mps.nodeEditor;
 
-
 import jetbrains.mps.editor.runtime.commands.EditorComputable;
 import jetbrains.mps.nodeEditor.cells.APICellAdapter;
+import jetbrains.mps.nodeEditor.keyboard.TextChangeEvent;
 import jetbrains.mps.nodeEditor.keymaps.KeymapHandler;
+import jetbrains.mps.openapi.editor.cells.CellActionType;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.cells.KeyMapAction;
 import jetbrains.mps.util.Pair;
@@ -27,17 +28,15 @@ import java.awt.event.KeyEvent;
 import java.util.Collection;
 
 public class EditorComponentKeyboardHandler implements KeyboardHandler {
+
   private final KeymapHandler<KeyEvent> myKeymapHandler;
 
-  public EditorComponentKeyboardHandler(KeymapHandler<KeyEvent> keymapHandler) {
+  EditorComponentKeyboardHandler(KeymapHandler<KeyEvent> keymapHandler) {
     myKeymapHandler = keymapHandler;
   }
 
   @Override
   public boolean processKeyPressed(final EditorContext editorContext, final KeyEvent keyEvent) {
-    EditorComponent nodeEditor = editorContext.getNodeEditorComponent();
-    nodeEditor.hideMessageToolTip();
-
     if (processKeyMaps(editorContext, keyEvent)) {
       return true;
     }
@@ -60,26 +59,28 @@ public class EditorComponentKeyboardHandler implements KeyboardHandler {
 
   @Override
   public boolean processKeyTyped(EditorContext editorContext, final KeyEvent keyEvent) {
-    EditorComponent nodeEditor = editorContext.getNodeEditorComponent();
-    nodeEditor.hideMessageToolTip();
-
     if (processKeyMaps(editorContext, keyEvent)) {
       return true;
     }
 
-    final EditorCell selectedCell = editorContext.getSelectedCell();
-    if (selectedCell != null && ((jetbrains.mps.nodeEditor.cells.EditorCell) selectedCell).processKeyTyped(keyEvent, false)) {
+    // normal keys + TAB ESC
+    jetbrains.mps.nodeEditor.cells.EditorCell selectedCell = (jetbrains.mps.nodeEditor.cells.EditorCell) editorContext.getSelectedCell();
+    if (selectedCell == null) {
+      return false;
+    }
+
+    if (selectedCell.processKeyTyped(keyEvent, false)) {
       keyEvent.consume();
       return true;
     }
 
-    jetbrains.mps.openapi.editor.cells.CellActionType actionType = editorContext.getNodeEditorComponent().getActionType(keyEvent, editorContext);
-
-    if (selectedCell != null) {
-      final boolean strictMatching = jetbrains.mps.openapi.editor.cells.CellActionType.RIGHT_TRANSFORM.equals(actionType) ||
-          jetbrains.mps.openapi.editor.cells.CellActionType.LEFT_TRANSFORM.equals(actionType);
-
-      if (selectedCell.isErrorState() && strictMatching) {
+    CellActionType actionType = editorContext.getEditorComponent().isAutomaticSubstitutionEnabled() ? editorContext.getNodeEditorComponent().getActionType(keyEvent, editorContext) : null;
+    if (actionType != null) {
+      // we only trigger autovalidation of an error cell when doing RIGHT_TRANSFORM (typing space at the end of an error cell)
+      // trying to validate for LEFT_TRANSFORM will yield no results since the completion popup will not have an exact match available
+      boolean autoValidate = actionType == CellActionType.RIGHT_TRANSFORM;
+      boolean errorState = selectedCell.isErrorState();
+      if (errorState && autoValidate) {
         EditorComputable<Boolean> validateCommand = new EditorComputable<Boolean>(editorContext) {
           @Override
           protected Boolean doCompute() {
@@ -87,19 +88,17 @@ public class EditorComponentKeyboardHandler implements KeyboardHandler {
           }
         };
         editorContext.getRepository().getModelAccess().executeCommand(validateCommand);
-
-        if (validateCommand.getResult()) return true;
-      }
-
-      if (actionType != null
-          && !(selectedCell.isErrorState() && jetbrains.mps.openapi.editor.cells.CellActionType.RIGHT_TRANSFORM.equals(actionType))) {
+        if (validateCommand.getResult()) {
+          return true;
+        }
+      } else {
         if (editorContext.getEditorComponent().getActionHandler().executeAction(selectedCell, actionType)) {
           return true;
         }
       }
     }
 
-    if (selectedCell != null && ((jetbrains.mps.nodeEditor.cells.EditorCell) selectedCell).processKeyTyped(keyEvent, true)) {
+    if (selectedCell.processKeyTyped(keyEvent, true)) {
       keyEvent.consume();
       return true;
     }
@@ -130,7 +129,7 @@ public class EditorComponentKeyboardHandler implements KeyboardHandler {
     }
 
     Collection<Pair<KeyMapAction, EditorCell>> actionCellPairs = myKeymapHandler.getActions(selectedCell, keyEvent, editorContext);
-    if (actionCellPairs.size() == 0) {
+    if (actionCellPairs.isEmpty()) {
       return false;
     }
     Pair<KeyMapAction, EditorCell> first = actionCellPairs.iterator().next();
@@ -141,5 +140,11 @@ public class EditorComponentKeyboardHandler implements KeyboardHandler {
       myKeymapHandler.showActionsMenu(actionCellPairs, editorContext, selectedCell);
     }
     return true;
+  }
+
+  @Override
+  public boolean processTextChanged(EditorContext editorContext, TextChangeEvent textChangeEvent) {
+    EditorCell selectedCell = editorContext.getSelectedCell();
+    return selectedCell != null && ((jetbrains.mps.nodeEditor.cells.EditorCell) selectedCell).processTextChanged(textChangeEvent);
   }
 }

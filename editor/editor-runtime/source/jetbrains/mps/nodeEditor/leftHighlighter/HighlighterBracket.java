@@ -29,18 +29,18 @@ import java.awt.Rectangle;
  * Date: 02.03.2010
  */
 public class HighlighterBracket {
-  private static final int BRACKET_LINE_THICKNESS = 2;
-  private static final int ADDITIONAL_HORIZONTAL_SHIFT = 3;
+  private static final int BRACKET_LINE_THICKNESS = 1;
+  private static final int ADDITIONAL_HORIZONTAL_SHIFT = 8;
 
-  private BracketEdge myBegginingEdge = new BracketEdge(0, true);
-  private BracketEdge myEndingEdge = new BracketEdge(0, false);
-  private Color myColor;
-  private CellInfo myCellInfo;
-  private EditorComponent myEditor;
-  private CellInfo mySecondCellInfo;
+  private final BracketEdge myBegginingEdge = new BracketEdge(0, true);
+  private final BracketEdge myEndingEdge = new BracketEdge(0, false);
+  private final Color myColor;
+  private final CellInfo myCellInfo;
+  private final EditorComponent myEditor;
+  private final CellInfo mySecondCellInfo;
   // level should be at least 1 
   private int myLevel = 1;
-  private boolean myRightToLeft;
+  private final boolean myRightToLeft;
 
   public static int getBracketWidth(int level) {
     return 2 * BRACKET_LINE_THICKNESS + (level - 1) * BRACKET_LINE_THICKNESS * 3 / 2 + ADDITIONAL_HORIZONTAL_SHIFT;
@@ -89,15 +89,7 @@ public class HighlighterBracket {
       return;
     }
     g.setColor(myColor);
-    int horizontalSegmentLength = bracketWidth - BRACKET_LINE_THICKNESS - ADDITIONAL_HORIZONTAL_SHIFT;
-    g.fillRect(getHorizontalSegmentStartX(horizontalSegmentLength), getY1(), horizontalSegmentLength, BRACKET_LINE_THICKNESS);
     g.fillRect(getVerticalSegmentStartX(bracketWidth), getY1(), BRACKET_LINE_THICKNESS, getY2() - getY1());
-    g.fillRect(getHorizontalSegmentStartX(horizontalSegmentLength), getY2() - BRACKET_LINE_THICKNESS, horizontalSegmentLength, BRACKET_LINE_THICKNESS);
-  }
-
-  private int getHorizontalSegmentStartX(int horizontalSegmentLength) {
-    // +1 is added here because of Graphics.fillRect() specific see javadoc for details
-    return myRightToLeft ? ADDITIONAL_HORIZONTAL_SHIFT + 1 : -horizontalSegmentLength - ADDITIONAL_HORIZONTAL_SHIFT;
   }
 
   private int getVerticalSegmentStartX(int bracketWidth) {
@@ -135,7 +127,7 @@ public class HighlighterBracket {
 
   public class BracketEdge implements Comparable<BracketEdge> {
     public int myY;
-    private boolean myBeginning;
+    private final boolean myBeginning;
 
     public BracketEdge(int y, boolean beginning) {
       myY = y;
@@ -147,20 +139,20 @@ public class HighlighterBracket {
       return HighlighterBracket.this;
     }
 
-    public boolean isBeggining() {
+    public boolean isBeginning() {
       return myBeginning;
     }
 
     @Override
-    public int compareTo(BracketEdge o) {
+    public int compareTo(@NotNull BracketEdge o) {
       if (myY == o.myY) {
-        if (isBeggining() && !o.isBeggining()) {
+        if (isBeginning() && !o.isBeginning()) {
           return 1;
-        } else if (isBeggining() && o.isBeggining()) {
+        } else if (isBeginning() && o.isBeginning()) {
           return o.getBracket().getY2() - getBracket().getY2();
-        } else if (!isBeggining() && o.isBeggining()) {
+        } else if (!isBeginning() && o.isBeginning()) {
           return -1;
-        } else if (!isBeggining() && !o.isBeggining()) {
+        } else if (!isBeginning() && !o.isBeginning()) {
           return o.getBracket().getY1() - getBracket().getY1();
         }
       }

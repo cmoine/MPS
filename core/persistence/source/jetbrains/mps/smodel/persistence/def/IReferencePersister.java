@@ -21,21 +21,21 @@ import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SReference;
 
 public interface IReferencePersister {
-  public void fillFields(Element linkElement, SNode sourceNode, boolean useUIDs);
+  void fillFields(Element linkElement, SNode sourceNode, boolean useUIDs);
 
-  public int getImportIndex();
+  int getImportIndex();
 
-  public SNode getSourceNode();
+  SNode getSourceNode();
 
-  public String getRole();
+  String getRole();
 
-  public String getTargetId();
+  String getTargetId();
 
-  public String getResolveInfo();
+  String getResolveInfo();
 
-  public String getExtResolveInfo();
+  String getExtResolveInfo();
 
-  public void createReferenceInModel(SModel model, VisibleModelElements visibleModelElements);
+  void createReferenceInModel(SModel model, VisibleModelElements visibleModelElements);
 
-  public void saveReference(Element parentElement, SReference reference, boolean useUIDs, VisibleModelElements visibleModelElements);
+  void saveReference(Element parentElement, SReference reference, boolean useUIDs, VisibleModelElements visibleModelElements);
 }

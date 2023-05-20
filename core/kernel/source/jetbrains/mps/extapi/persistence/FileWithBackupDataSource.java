@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,16 +15,15 @@
  */
 package jetbrains.mps.extapi.persistence;
 
-import jetbrains.mps.vfs.FileSystemEvent;
-import org.jetbrains.mps.openapi.util.ProgressMonitor;
-import jetbrains.mps.vfs.FileSystem;
-import jetbrains.mps.vfs.FileSystemListener;
+import jetbrains.mps.vfs.openapi.FileSystem;
+import jetbrains.mps.vfs.refresh.CachingFileSystem;
+import jetbrains.mps.vfs.refresh.FileListeningPreferences;
+import jetbrains.mps.vfs.refresh.FileSystemEvent;
+import jetbrains.mps.vfs.refresh.FileSystemListener;
 import jetbrains.mps.vfs.IFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.persistence.ModelRoot;
-
-import java.util.Arrays;
-import java.util.Collections;
+import org.jetbrains.mps.openapi.util.ProgressMonitor;
 
 /**
  * This data source allows to track a backup file along with the main file.
@@ -35,8 +34,8 @@ import java.util.Collections;
 public class FileWithBackupDataSource extends FileDataSource {
   private BackupFileListener myBackupFileListener;
 
-  public FileWithBackupDataSource(@NotNull IFile file, ModelRoot modelRoot) {
-    super(file, modelRoot);
+  public FileWithBackupDataSource(@NotNull IFile file) {
+    super(file);
   }
 
   @NotNull
@@ -59,7 +58,7 @@ public class FileWithBackupDataSource extends FileDataSource {
   }
 
   @Override
-  public void update(ProgressMonitor monitor, @NotNull FileSystemEvent event) {
+  public void update(@NotNull ProgressMonitor monitor, @NotNull FileSystemEvent event) {
     IFile mainFile = getFile();
     IFile backupFile = getBackupFile();
     boolean isChanged = false;
@@ -87,27 +86,20 @@ public class FileWithBackupDataSource extends FileDataSource {
     super.startListening();
     IFile backupFile = getBackupFile();
     myBackupFileListener = new BackupFileListener(backupFile);
-    backupFile.getFileSystem().addListener(myBackupFileListener);
+    FileSystem fs = backupFile.getFileSystem();
+    if (fs instanceof CachingFileSystem){
+      ((CachingFileSystem) fs).addListener(myBackupFileListener);
+    }
   }
 
   @Override
   protected void stopListening() {
-    getBackupFile().getFileSystem().removeListener(myBackupFileListener);
+    FileSystem fs = getBackupFile().getFileSystem();
+    if (fs instanceof CachingFileSystem) {
+      ((CachingFileSystem) fs).removeListener(myBackupFileListener);
+    }
     myBackupFileListener = null;
     super.stopListening();
-  }
-
-  @Override
-  public Iterable<FileSystemListener> getListenerDependencies() {
-    FileSystemListener backupFileListener = myBackupFileListener;
-    FileSystemListener parent = getParentListener();
-    if (backupFileListener != null && parent != null) {
-      return Arrays.asList(parent, backupFileListener);
-    }
-    if (parent != null) {
-      return Collections.singleton(parent);
-    }
-    return backupFileListener != null ? Collections.singleton(backupFileListener) : null;
   }
 
   private class BackupFileListener implements FileSystemListener {
@@ -123,18 +115,21 @@ public class FileWithBackupDataSource extends FileDataSource {
       return path;
     }
 
+    @NotNull
     @Override
-    public Iterable<FileSystemListener> getListenerDependencies() {
-      return null;
+    public FileListeningPreferences listeningPreferences() {
+      return FileListeningPreferences.construct()
+                                     .notifyOnAncestorChange() // for when we under .jar
+                                     .build();
     }
 
     @Override
-    public void update(ProgressMonitor monitor, @NotNull FileSystemEvent event) {
+    public void update(@NotNull ProgressMonitor monitor, @NotNull FileSystemEvent event) {
       event.notify(FileWithBackupDataSource.this);
     }
   }
 
   public static FileWithBackupDataSource create(FileDataSource source) {
-    return new FileWithBackupDataSource(source.getFile(), source.myModelRoot);
+    return new FileWithBackupDataSource(source.getFile());
   }
 }

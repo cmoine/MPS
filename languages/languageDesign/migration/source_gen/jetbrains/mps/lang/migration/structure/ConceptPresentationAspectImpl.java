@@ -4,129 +4,354 @@ package jetbrains.mps.lang.migration.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
+import jetbrains.mps.lang.migration.plugin.URLFunction_HelpCenterDocUrl;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_AbstractNodeReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ClassifierMemberData = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptMigrationReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConsequenceFunction = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DataDependency = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DataDependencyReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DirectNodeReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ExecuteAfterDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IMigrationUnit = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IncludeMigrationPart = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_LinkPatternVariableReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ListPatternVariableReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MigrationScript = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MigrationScriptReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MoveConcept = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MoveConceptMember = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MoveContainmentLink = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MoveNodeMigrationPart = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MoveNodeSpecialization = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MoveProperty = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MoveReferenceLink = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_NodePatternVariableReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_OrderDependency = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ProducedDataDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PropertyPatternVariableReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PureMigrationPart = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PureMigrationScript = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_QuotationConsequence = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RefactoringLog = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RefactoringOption = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RefactoringOptions = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RefactoringOrderDependency = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RefactoringPart = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ReflectionNodeReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RequiredDataDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TransformConsequence = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TransformStatement = new ConceptPresentationBuilder().deprecated().create();
+  private ConceptPresentation props_AbstractNodeReference;
+  private ConceptPresentation props_AnnotationDataDependency;
+  private ConceptPresentation props_ClassifierMemberData;
+  private ConceptPresentation props_ConceptMigrationReference;
+  private ConceptPresentation props_ConsequenceFunction;
+  private ConceptPresentation props_DataDependency;
+  private ConceptPresentation props_DataDependencyReference;
+  private ConceptPresentation props_DirectNodeReference;
+  private ConceptPresentation props_ExecuteAfterDeclaration;
+  private ConceptPresentation props_GetDataExpression;
+  private ConceptPresentation props_IMigrationUnit;
+  private ConceptPresentation props_IncludeMigrationPart;
+  private ConceptPresentation props_LinkPatternVariableReference;
+  private ConceptPresentation props_ListPatternVariableReference;
+  private ConceptPresentation props_MigrationScript;
+  private ConceptPresentation props_MigrationScriptReference;
+  private ConceptPresentation props_MoveConcept;
+  private ConceptPresentation props_MoveConceptMember;
+  private ConceptPresentation props_MoveContainmentLink;
+  private ConceptPresentation props_MoveNodeMigrationPart;
+  private ConceptPresentation props_MoveNodeSpecialization;
+  private ConceptPresentation props_MoveProperty;
+  private ConceptPresentation props_MoveReferenceLink;
+  private ConceptPresentation props_NodePatternVariableReference;
+  private ConceptPresentation props_OrderDependency;
+  private ConceptPresentation props_ProducedAnnotationDataDeclaration;
+  private ConceptPresentation props_ProducedDataDeclaration;
+  private ConceptPresentation props_PropertyPatternVariableReference;
+  private ConceptPresentation props_PureMigrationPart;
+  private ConceptPresentation props_PureMigrationScript;
+  private ConceptPresentation props_PutDataExpression;
+  private ConceptPresentation props_QuotationConsequence;
+  private ConceptPresentation props_RefactoringLog;
+  private ConceptPresentation props_RefactoringOption;
+  private ConceptPresentation props_RefactoringOptions;
+  private ConceptPresentation props_RefactoringOrderDependency;
+  private ConceptPresentation props_RefactoringPart;
+  private ConceptPresentation props_ReflectionNodeReference;
+  private ConceptPresentation props_RequiredAnnotationDataDeclaration;
+  private ConceptPresentation props_RequiredDataDeclaration;
+  private ConceptPresentation props_TransformConsequence;
+  private ConceptPresentation props_TransformStatement;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.AbstractNodeReference:
+        if (props_AbstractNodeReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_AbstractNodeReference = cpb.create();
+        }
         return props_AbstractNodeReference;
-      case 1:
+      case LanguageConceptSwitch.AnnotationDataDependency:
+        if (props_AnnotationDataDependency == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_AnnotationDataDependency = cpb.create();
+        }
+        return props_AnnotationDataDependency;
+      case LanguageConceptSwitch.ClassifierMemberData:
+        if (props_ClassifierMemberData == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ClassifierMemberData");
+          props_ClassifierMemberData = cpb.create();
+        }
         return props_ClassifierMemberData;
-      case 2:
+      case LanguageConceptSwitch.ConceptMigrationReference:
+        if (props_ConceptMigrationReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ConceptMigrationReference");
+          props_ConceptMigrationReference = cpb.create();
+        }
         return props_ConceptMigrationReference;
-      case 3:
+      case LanguageConceptSwitch.ConsequenceFunction:
+        if (props_ConsequenceFunction == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("function");
+          props_ConsequenceFunction = cpb.create();
+        }
         return props_ConsequenceFunction;
-      case 4:
+      case LanguageConceptSwitch.DataDependency:
+        if (props_DataDependency == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_DataDependency = cpb.create();
+        }
         return props_DataDependency;
-      case 5:
+      case LanguageConceptSwitch.DataDependencyReference:
+        if (props_DataDependencyReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x9074634404fd4286L, 0x97d5b46ae6a81709L, 0x63476c2ad9bcd736L, 0x63476c2ad9bcd739L, "dataDependency", "", "");
+          props_DataDependencyReference = cpb.create();
+        }
         return props_DataDependencyReference;
-      case 6:
+      case LanguageConceptSwitch.DirectNodeReference:
+        if (props_DirectNodeReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x9074634404fd4286L, 0x97d5b46ae6a81709L, 0x67236d4a58303771L, 0x67236d4a58303a10L, "target", "", "");
+          props_DirectNodeReference = cpb.create();
+        }
         return props_DirectNodeReference;
-      case 7:
+      case LanguageConceptSwitch.ExecuteAfterDeclaration:
+        if (props_ExecuteAfterDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("execute after");
+          props_ExecuteAfterDeclaration = cpb.create();
+        }
         return props_ExecuteAfterDeclaration;
-      case 8:
+      case LanguageConceptSwitch.GetDataExpression:
+        if (props_GetDataExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("getData");
+          props_GetDataExpression = cpb.create();
+        }
+        return props_GetDataExpression;
+      case LanguageConceptSwitch.IMigrationUnit:
+        if (props_IMigrationUnit == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IMigrationUnit = cpb.create();
+        }
         return props_IMigrationUnit;
-      case 9:
+      case LanguageConceptSwitch.IncludeMigrationPart:
+        if (props_IncludeMigrationPart == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("include");
+          props_IncludeMigrationPart = cpb.create();
+        }
         return props_IncludeMigrationPart;
-      case 10:
+      case LanguageConceptSwitch.LinkPatternVariableReference:
+        if (props_LinkPatternVariableReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x9074634404fd4286L, 0x97d5b46ae6a81709L, 0x2cb3222730d5c47bL, 0x2cb3222730d5c47cL, "declaration", "", "");
+          props_LinkPatternVariableReference = cpb.create();
+        }
         return props_LinkPatternVariableReference;
-      case 11:
+      case LanguageConceptSwitch.ListPatternVariableReference:
+        if (props_ListPatternVariableReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x9074634404fd4286L, 0x97d5b46ae6a81709L, 0x550f7de0eda8c07aL, 0x550f7de0eda8c07bL, "declaration", "", "");
+          props_ListPatternVariableReference = cpb.create();
+        }
         return props_ListPatternVariableReference;
-      case 12:
+      case LanguageConceptSwitch.MigrationScript:
+        if (props_MigrationScript == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.helpUrl(HELP_URL);
+          cpb.icon(IconContainer.RESOURCE_a0a3a0a41b0rb);
+          props_MigrationScript = cpb.create();
+        }
         return props_MigrationScript;
-      case 13:
+      case LanguageConceptSwitch.MigrationScriptReference:
+        if (props_MigrationScriptReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("MigrationScriptReference");
+          props_MigrationScriptReference = cpb.create();
+        }
         return props_MigrationScriptReference;
-      case 14:
+      case LanguageConceptSwitch.MoveConcept:
+        if (props_MoveConcept == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("MoveConcept");
+          props_MoveConcept = cpb.create();
+        }
         return props_MoveConcept;
-      case 15:
+      case LanguageConceptSwitch.MoveConceptMember:
+        if (props_MoveConceptMember == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_MoveConceptMember = cpb.create();
+        }
         return props_MoveConceptMember;
-      case 16:
+      case LanguageConceptSwitch.MoveContainmentLink:
+        if (props_MoveContainmentLink == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("MoveContainmentLink");
+          props_MoveContainmentLink = cpb.create();
+        }
         return props_MoveContainmentLink;
-      case 17:
+      case LanguageConceptSwitch.MoveNodeMigrationPart:
+        if (props_MoveNodeMigrationPart == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("move");
+          props_MoveNodeMigrationPart = cpb.create();
+        }
         return props_MoveNodeMigrationPart;
-      case 18:
+      case LanguageConceptSwitch.MoveNodeSpecialization:
+        if (props_MoveNodeSpecialization == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_MoveNodeSpecialization = cpb.create();
+        }
         return props_MoveNodeSpecialization;
-      case 19:
+      case LanguageConceptSwitch.MoveProperty:
+        if (props_MoveProperty == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("MoveProperty");
+          props_MoveProperty = cpb.create();
+        }
         return props_MoveProperty;
-      case 20:
+      case LanguageConceptSwitch.MoveReferenceLink:
+        if (props_MoveReferenceLink == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("MoveReferenceLink");
+          props_MoveReferenceLink = cpb.create();
+        }
         return props_MoveReferenceLink;
-      case 21:
+      case LanguageConceptSwitch.NodePatternVariableReference:
+        if (props_NodePatternVariableReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x9074634404fd4286L, 0x97d5b46ae6a81709L, 0x6877ea6323b8f1a3L, 0x6877ea6323b8f1a4L, "declaration", "", "");
+          props_NodePatternVariableReference = cpb.create();
+        }
         return props_NodePatternVariableReference;
-      case 22:
+      case LanguageConceptSwitch.OrderDependency:
+        if (props_OrderDependency == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x9074634404fd4286L, 0x97d5b46ae6a81709L, 0x398343344f099b7aL, 0x398343344f099b7bL, "script", "", "");
+          props_OrderDependency = cpb.create();
+        }
         return props_OrderDependency;
-      case 23:
+      case LanguageConceptSwitch.ProducedAnnotationDataDeclaration:
+        if (props_ProducedAnnotationDataDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("produces annotation data");
+          props_ProducedAnnotationDataDeclaration = cpb.create();
+        }
+        return props_ProducedAnnotationDataDeclaration;
+      case LanguageConceptSwitch.ProducedDataDeclaration:
+        if (props_ProducedDataDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("produces data");
+          props_ProducedDataDeclaration = cpb.create();
+        }
         return props_ProducedDataDeclaration;
-      case 24:
+      case LanguageConceptSwitch.PropertyPatternVariableReference:
+        if (props_PropertyPatternVariableReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x9074634404fd4286L, 0x97d5b46ae6a81709L, 0x2cb3222730cfcbccL, 0x2cb3222730cfe469L, "declaration", "", "");
+          props_PropertyPatternVariableReference = cpb.create();
+        }
         return props_PropertyPatternVariableReference;
-      case 25:
+      case LanguageConceptSwitch.PureMigrationPart:
+        if (props_PureMigrationPart == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_PureMigrationPart = cpb.create();
+        }
         return props_PureMigrationPart;
-      case 26:
+      case LanguageConceptSwitch.PureMigrationScript:
+        if (props_PureMigrationScript == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_PureMigrationScript = cpb.create();
+        }
         return props_PureMigrationScript;
-      case 27:
+      case LanguageConceptSwitch.PutDataExpression:
+        if (props_PutDataExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("insert migration data into the model");
+          cpb.rawPresentation("putData");
+          props_PutDataExpression = cpb.create();
+        }
+        return props_PutDataExpression;
+      case LanguageConceptSwitch.QuotationConsequence:
+        if (props_QuotationConsequence == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("quotation");
+          props_QuotationConsequence = cpb.create();
+        }
         return props_QuotationConsequence;
-      case 28:
+      case LanguageConceptSwitch.RefactoringLog:
+        if (props_RefactoringLog == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_RefactoringLog = cpb.create();
+        }
         return props_RefactoringLog;
-      case 29:
+      case LanguageConceptSwitch.RefactoringOption:
+        if (props_RefactoringOption == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("RefactoringOption");
+          props_RefactoringOption = cpb.create();
+        }
         return props_RefactoringOption;
-      case 30:
+      case LanguageConceptSwitch.RefactoringOptions:
+        if (props_RefactoringOptions == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("RefactoringOptions");
+          props_RefactoringOptions = cpb.create();
+        }
         return props_RefactoringOptions;
-      case 31:
+      case LanguageConceptSwitch.RefactoringOrderDependency:
+        if (props_RefactoringOrderDependency == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x9074634404fd4286L, 0x97d5b46ae6a81709L, 0x1bf9eb43276b6d9dL, 0x1bf9eb43276b6d9eL, "refactoring", "", "");
+          props_RefactoringOrderDependency = cpb.create();
+        }
         return props_RefactoringOrderDependency;
-      case 32:
+      case LanguageConceptSwitch.RefactoringPart:
+        if (props_RefactoringPart == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("RefactoringPart");
+          props_RefactoringPart = cpb.create();
+        }
         return props_RefactoringPart;
-      case 33:
+      case LanguageConceptSwitch.ReflectionNodeReference:
+        if (props_ReflectionNodeReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ReflectionNodeReference");
+          props_ReflectionNodeReference = cpb.create();
+        }
         return props_ReflectionNodeReference;
-      case 34:
+      case LanguageConceptSwitch.RequiredAnnotationDataDeclaration:
+        if (props_RequiredAnnotationDataDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("requires annotation data");
+          props_RequiredAnnotationDataDeclaration = cpb.create();
+        }
+        return props_RequiredAnnotationDataDeclaration;
+      case LanguageConceptSwitch.RequiredDataDeclaration:
+        if (props_RequiredDataDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("requires data");
+          props_RequiredDataDeclaration = cpb.create();
+        }
         return props_RequiredDataDeclaration;
-      case 35:
+      case LanguageConceptSwitch.TransformConsequence:
+        if (props_TransformConsequence == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_TransformConsequence = cpb.create();
+        }
         return props_TransformConsequence;
-      case 36:
+      case LanguageConceptSwitch.TransformStatement:
+        if (props_TransformStatement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.deprecated(true);
+          cpb.rawPresentation("transform");
+          props_TransformStatement = cpb.create();
+        }
         return props_TransformStatement;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
+  private static final String HELP_URL = URLFunction_HelpCenterDocUrl.getUrl() + "migrations.html#defininglanguagemigrations";
 }

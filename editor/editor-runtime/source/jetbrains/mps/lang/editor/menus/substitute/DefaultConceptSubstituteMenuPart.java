@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 package jetbrains.mps.lang.editor.menus.substitute;
 
 import jetbrains.mps.lang.editor.menus.CompositeMenuPart;
+import jetbrains.mps.lang.editor.menus.EditorMenuDescriptorBase;
 import jetbrains.mps.lang.editor.menus.MenuPart;
 import jetbrains.mps.openapi.editor.menus.substitute.SubstituteMenuContext;
 import jetbrains.mps.openapi.editor.menus.substitute.SubstituteMenuItem;
@@ -43,7 +44,9 @@ class DefaultConceptSubstituteMenuPart implements SubstituteMenuPart {
   public List<SubstituteMenuItem> createItems(SubstituteMenuContext context) {
     List<MenuPart<SubstituteMenuItem, SubstituteMenuContext>> result = new ArrayList<>();
     if (myConcept instanceof SConcept && !myConcept.isAbstract()) {
-      result.add(new ConstraintsFilteringSubstituteMenuPartDecorator(new SimpleConceptSubstituteMenuPart(myConcept), myConcept));
+      final EditorMenuDescriptorBase emd = new EditorMenuDescriptorBase("simple substitute menu part for concept: " + myConcept.getName(), null);
+      final SimpleConceptSubstituteMenuPart mp = new SimpleConceptSubstituteMenuPart(myConcept, emd);
+      result.add(new ConstraintsFilteringSubstituteMenuPartDecorator(mp, myConcept));
     }
     result.add(new DefaultConceptMenusSubstituteMenuPart(ConceptDescendantsCache.getInstance().getDirectDescendants(myConcept)));
     return new CompositeMenuPart<>(result).createItems(context);

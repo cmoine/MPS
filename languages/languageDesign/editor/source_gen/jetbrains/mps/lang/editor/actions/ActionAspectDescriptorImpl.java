@@ -7,7 +7,6 @@ import jetbrains.mps.openapi.actions.descriptor.ActionAspectDescriptor;
 import java.util.Collection;
 import jetbrains.mps.openapi.actions.descriptor.NodeFactory;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor implements ActionAspectDescriptor {
@@ -16,26 +15,26 @@ public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor imple
   @Override
   public Collection<NodeFactory> getFactories(SAbstractConcept concept) {
     if (LANGUAGE_FQ_NAME.equals(concept.getLanguage().getQualifiedName())) {
-      switch (Arrays.binarySearch(stringSwitchCases_tpto26_a0a0a0c, concept.getName())) {
-        case 0:
+      switch (concept.getName()) {
+        case "AttributeStyleClassItem":
           return Collections.<NodeFactory>singletonList(new StyleClassItem.NodeFactory_4088952938557965240());
-        case 1:
+        case "BooleanStyleSheetItem":
           return Collections.<NodeFactory>singletonList(new StyleClassItem.NodeFactory_1222178769288());
-        case 2:
+        case "CellModel_Alternation":
           return Collections.<NodeFactory>singletonList(new EDTL_node_factories.NodeFactory_1165441265075());
-        case 3:
+        case "CellModel_Collection":
           return Collections.<NodeFactory>singletonList(new EDTL_node_factories.NodeFactory_1159287296418());
-        case 4:
+        case "CellModel_ContextAssistant":
           return Collections.<NodeFactory>singletonList(new EDTL_node_factories.NodeFactory_5571273656752866301());
-        case 5:
+        case "CellModel_Property":
           return Collections.<NodeFactory>singletonList(new EDTL_node_factories.NodeFactory_1158947460472());
-        case 6:
+        case "CellModel_RefNodeList":
           return Collections.<NodeFactory>singletonList(new EDTL_node_factories.NodeFactory_1239813377368());
-        case 7:
+        case "ColorStyleClassItem":
           return Collections.<NodeFactory>singletonList(new StyleClassItem.NodeFactory_1222177342204());
-        case 8:
+        case "FloatStyleClassItem":
           return Collections.<NodeFactory>singletonList(new StyleClassItem.NodeFactory_1222178992987());
-        case 9:
+        case "IExtensibleTransformationMenuPart":
           return Collections.<NodeFactory>singletonList(new IExtensibleMenuPart_factory.NodeFactory_7985135009829579183());
         default:
       }
@@ -43,9 +42,4 @@ public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor imple
     return Collections.<NodeFactory>emptyList();
   }
 
-  @Override
-  public boolean hasBuilders() {
-    return false;
-  }
-  private static String[] stringSwitchCases_tpto26_a0a0a0c = new String[]{"AttributeStyleClassItem", "BooleanStyleSheetItem", "CellModel_Alternation", "CellModel_Collection", "CellModel_ContextAssistant", "CellModel_Property", "CellModel_RefNodeList", "ColorStyleClassItem", "FloatStyleClassItem", "IExtensibleTransformationMenuPart"};
 }

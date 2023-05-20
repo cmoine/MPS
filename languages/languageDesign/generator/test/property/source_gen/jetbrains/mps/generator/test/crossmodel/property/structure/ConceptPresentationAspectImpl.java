@@ -4,27 +4,42 @@ package jetbrains.mps.generator.test.crossmodel.property.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_Bean = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BeanProperty = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InitOp = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_Bean;
+  private ConceptPresentation props_BeanProperty;
+  private ConceptPresentation props_InitOp;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.Bean:
+        if (props_Bean == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Bean = cpb.create();
+        }
         return props_Bean;
-      case 1:
+      case LanguageConceptSwitch.BeanProperty:
+        if (props_BeanProperty == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_BeanProperty = cpb.create();
+        }
         return props_BeanProperty;
-      case 2:
+      case LanguageConceptSwitch.InitOp:
+        if (props_InitOp == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("InitOp");
+          props_InitOp = cpb.create();
+        }
         return props_InitOp;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

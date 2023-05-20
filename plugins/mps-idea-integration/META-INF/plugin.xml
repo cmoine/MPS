@@ -1,0 +1,38 @@
+<!DOCTYPE idea-plugin PUBLIC "Plugin/DTD" "http://plugins.intellij.net/plugin.dtd">
+<idea-plugin>
+  <id>jetbrains.mps.ideaIntegration</id>
+  <name>Idea Integration for MPS</name>
+  <description>Connects MPS to IDEA</description>
+  <vendor url="http://www.jetbrains.com/mps/">JetBrains</vendor>
+
+  <application-components>
+    <component>
+      <implementation-class>jetbrains.mps.plugin.IdeaGoToDeclarationInitializer</implementation-class>
+    </component>
+  </application-components>
+
+  <project-components>
+    <component>
+        <implementation-class>jetbrains.mps.plugin.MPSProjectIDEHandler</implementation-class>
+    </component>
+    <component>
+        <implementation-class>jetbrains.mps.plugin.PluginStateMonitor</implementation-class>
+    </component>
+    <component>
+      <interface-class>jetbrains.mps.internal.make.runtime.java.IdeaJavaCompiler</interface-class>
+      <implementation-class>jetbrains.mps.plugin.IdeaJavaCompilerImpl</implementation-class>
+    </component>
+  </project-components>
+
+  <actions>
+    <action id="install.idea.plugin" text="Install IntelliJ IDEA Plugin"
+            class="jetbrains.mps.plugin.InstallIDEAPlugin_Action">
+      <add-to-group group-id="ToolsMenu" relative-to-action="Internal" anchor="after"/>
+    </action>
+  </actions>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <mps.CodeNavigationProvider implementation="jetbrains.mps.plugin.IdeaCodeNavigationProvider"/>
+    <errorHandler implementation="jetbrains.mps.ide.blame.CharismaReporter"/>
+  </extensions>
+</idea-plugin>

@@ -4,37 +4,20 @@ package jetbrains.mps.lang.scopes.runtime;
 
 import jetbrains.mps.scope.Scope;
 import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.scope.CompositeScope;
-import jetbrains.mps.util.annotation.ToRemove;
-import jetbrains.mps.scope.SimpleRoleScope;
-import jetbrains.mps.smodel.adapter.MetaAdapterByDeclaration;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class CompositeWithParentScope {
-  public static Scope from(Scope original, SNode node, SNode kind) {
-    // todo: from? 
-    Scope nextScope = Scope.getScope(Scope.parent(node), node, kind);
+  public static Scope from(Scope original, SNode node, SAbstractConcept kind) {
+    // todo: from?
+    Scope nextScope = ScopeUtils.parentScope(node, kind);
     return (nextScope == null ? original : new CompositeScope(original, nextScope));
   }
-  public static Scope from(Iterable<SNode> elements, SNode node, SNode kind) {
-    return (elements != null ? from(new NamedElementsScope(elements), node, kind) : parentScope(node, kind));
+  public static Scope from(Iterable<SNode> elements, SNode node, SAbstractConcept kind) {
+    return (elements != null ? from(new NamedElementsScope(elements), node, kind) : ScopeUtils.parentScope(node, kind));
   }
-  public static Scope from(SNode element, SNode node, SNode kind) {
-    return ((element != null) ? from(new NamedElementsScope(element), node, kind) : parentScope(node, kind));
+  public static Scope from(SNode element, SNode node, SAbstractConcept kind) {
+    return ((element != null) ? from(new NamedElementsScope(element), node, kind) : ScopeUtils.parentScope(node, kind));
   }
-  @Deprecated
-  @ToRemove(version = 3.4)
-  public static Scope fromLink(SNode link, SNode node, SNode kind) {
-    return from(new SimpleRoleScope(node, MetaAdapterByDeclaration.getContainmentLink(link), MetaAdapterByDeclaration.getConcept(kind)) {
-      @Override
-      public String getName(SNode child) {
-        return SPropertyOperations.getString(SNodeOperations.cast(child, MetaAdapterFactory.getInterfaceConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, "jetbrains.mps.lang.core.structure.INamedConcept")), MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name"));
-      }
-    }, node, kind);
-  }
-  public static Scope parentScope(SNode node, SNode kind) {
-    return Scope.getScope(Scope.parent(node), node, kind);
-  }
+
 }

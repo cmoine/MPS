@@ -4,51 +4,66 @@ package jetbrains.mps.refactoringTest;
 
 import jetbrains.mps.MPSLaunch;
 import jetbrains.mps.lang.test.runtime.BaseTransformationTest;
-import org.junit.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCacheExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCache;
+import org.junit.jupiter.api.Test;
 import jetbrains.mps.lang.test.runtime.BaseTestBody;
+import jetbrains.mps.lang.test.runtime.TransformationTest;
 import jetbrains.mps.baseLanguage.util.plugin.refactorings.IntroduceLocalVariableRefactoring;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import java.util.List;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import java.util.ArrayList;
-import junit.framework.Assert;
+import org.junit.Assert;
 import jetbrains.mps.lang.test.matcher.NodesMatcher;
 
 @MPSLaunch
 public class IntroduceVariableFromWildcards_Test extends BaseTransformationTest {
-  @Test
-  public void test_IntroduceVariableFromWildcardsTest() throws Throwable {
-    initTest("${mps_home}", "r:4dc6ffb5-4bbb-4773-b0b7-e52989ceb56f(jetbrains.mps.refactoringTest@tests)", false);
-    runTest("jetbrains.mps.refactoringTest.IntroduceVariableFromWildcards_Test$TestBody", "test_IntroduceVariableFromWildcardsTest", true);
+  @RegisterExtension
+  private static final TestParametersCacheExtension ourParametersCacheExtension = new TestParametersCacheExtension(new TestParametersCache(IntroduceVariableFromWildcards_Test.class, "${mps_home}", "r:4dc6ffb5-4bbb-4773-b0b7-e52989ceb56f(jetbrains.mps.refactoringTest@tests)", false));
+
+  public IntroduceVariableFromWildcards_Test() {
+    super(ourParametersCacheExtension.getParametersCache());
   }
 
-  @MPSLaunch
-  public static class TestBody extends BaseTestBody {
-    public void test_IntroduceVariableFromWildcardsTest() throws Exception {
-      addNodeById("6974242407276767366");
-      addNodeById("6974242407276777253");
-      IntroduceLocalVariableRefactoring refactoring = new IntroduceLocalVariableRefactoring();
-      refactoring.init(SNodeOperations.cast(getNodeById("6974242407276767373"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x116b46a08c4L, "jetbrains.mps.baseLanguage.structure.DotExpression")), null);
-      refactoring.setName("b");
-      refactoring.setReplacingAll(true);
-      refactoring.doRefactoring();
-      refactoring.init(SNodeOperations.cast(getNodeById("6974242407276767385"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x116b46a08c4L, "jetbrains.mps.baseLanguage.structure.DotExpression")), null);
-      refactoring.setName("b");
-      refactoring.setReplacingAll(true);
-      refactoring.doRefactoring();
-      refactoring.init(SNodeOperations.cast(getNodeById("6974242407276767398"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x116b46a08c4L, "jetbrains.mps.baseLanguage.structure.DotExpression")), null);
-      refactoring.setName("b");
-      refactoring.setReplacingAll(true);
-      refactoring.doRefactoring();
-      {
-        List<SNode> nodesBefore = ListSequence.fromListAndArray(new ArrayList<SNode>(), SNodeOperations.cast(getNodeById("6974242407276767367"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c108ca66L, "jetbrains.mps.baseLanguage.structure.ClassConcept")));
-        List<SNode> nodesAfter = ListSequence.fromListAndArray(new ArrayList<SNode>(), SNodeOperations.cast(getNodeById("6974242407276777254"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c108ca66L, "jetbrains.mps.baseLanguage.structure.ClassConcept")));
-        Assert.assertNull("The nodes '" + nodesBefore + "' and '" + nodesAfter + "' do not match!", new NodesMatcher().match(nodesBefore, nodesAfter));
-      }
+  @Test
+  public void test_IntroduceVariableFromWildcardsTest() throws Throwable {
+    new TestBody(this).test_IntroduceVariableFromWildcardsTest();
+  }
+
+  /*package*/ static class TestBody extends BaseTestBody {
+
+    /*package*/ TestBody(TransformationTest owner) {
+      super(owner);
     }
 
+    public void test_IntroduceVariableFromWildcardsTest() throws Exception {
+      runWithinCommand(() -> {
+        addNodeById("6974242407276767366");
+        addNodeById("6974242407276777253");
+      });
+      runWithinCommand(() -> {
+        IntroduceLocalVariableRefactoring refactoring = new IntroduceLocalVariableRefactoring();
+        refactoring.init(getNodeById("6974242407276767373"), null);
+        refactoring.setName("b");
+        refactoring.setReplacingAll(true);
+        refactoring.doRefactoring();
+        refactoring.init(getNodeById("6974242407276767385"), null);
+        refactoring.setName("b");
+        refactoring.setReplacingAll(true);
+        refactoring.doRefactoring();
+        refactoring.init(getNodeById("6974242407276767398"), null);
+        refactoring.setName("b");
+        refactoring.setReplacingAll(true);
+        refactoring.doRefactoring();
+        {
+          List<SNode> nodesBefore = ListSequence.fromListAndArray(new ArrayList<SNode>(), getNodeById("6974242407276767367"));
+          List<SNode> nodesAfter = ListSequence.fromListAndArray(new ArrayList<SNode>(), getNodeById("6974242407276777254"));
+          Assert.assertTrue("The nodes '" + nodesBefore + "' and '" + nodesAfter + "' do not match!", new NodesMatcher(nodesBefore, nodesAfter).diff().isEmpty());
+        }
+      });
+    }
 
   }
 }

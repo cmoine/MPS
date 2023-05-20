@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,10 @@ package jetbrains.mps.newTypesystem.state.blocks;
 
 import jetbrains.mps.newTypesystem.TypesUtil;
 import jetbrains.mps.newTypesystem.state.State;
-import org.jetbrains.mps.openapi.model.SNode;
+import jetbrains.mps.smodel.SNodeUtil;
 import jetbrains.mps.util.CollectionUtil;
 import jetbrains.mps.util.Pair;
+import org.jetbrains.mps.openapi.model.SNode;
 
 import java.util.List;
 import java.util.Set;
@@ -29,13 +30,19 @@ public class WhenConcreteBlock extends Block {
   private final SNode myArgument;
   protected final ConditionKind myConditionKind;
   private final boolean mySkipError;
+  private final String myWarningMessage;
 
-  public WhenConcreteBlock(State state, Runnable runnable, String nodeModel, String nodeId, SNode argument, boolean isShallow, boolean skipError) {
+  public WhenConcreteBlock(State state, Runnable runnable, String nodeModel, String nodeId, SNode argument, boolean isShallow, boolean skipError, String warningMessage) {
     super(state, nodeModel, nodeId);
     myRunnable = runnable;
     myArgument = argument;
     myConditionKind = isShallow ? ConditionKind.SHALLOW : ConditionKind.CONCRETE;
     mySkipError = skipError;
+    myWarningMessage = warningMessage;
+  }
+
+  public WhenConcreteBlock(State state, Runnable runnable, String nodeModel, String nodeId, SNode argument, boolean isShallow, boolean skipError) {
+    this(state, runnable, nodeModel, nodeId, argument, isShallow, skipError, null);
   }
 
   public String toString() {
@@ -53,7 +60,7 @@ public class WhenConcreteBlock extends Block {
 
   @Override
   public Set<Pair<SNode, ConditionKind>> getInitialInputs() {
-    Pair<SNode, ConditionKind> input = new Pair<SNode, ConditionKind>(myArgument, myConditionKind);
+    Pair<SNode, ConditionKind> input = new Pair<>(myArgument, myConditionKind);
     return CollectionUtil.set(input);
   }
 
@@ -61,6 +68,10 @@ public class WhenConcreteBlock extends Block {
     return mySkipError;
   }
 
+  public String getWarningMessage() {
+    return myWarningMessage;
+  }
+  
   @Override
   public Set<SNode> getInputs() {
     return CollectionUtil.set(myArgument);
@@ -68,12 +79,12 @@ public class WhenConcreteBlock extends Block {
 
   @Override
   public String getPresentation() {
-    return "when concrete (" + myArgument + ") " + myConditionKind.getPresentation();
+    return String.format("when concrete (%s) %s", SNodeUtil.getPresentation(myArgument), myConditionKind.getPresentation());
   }
 
   @Override
   public String getShortPresentation() {
-    return myConditionKind.getPresentation() + myArgument;
+    return myConditionKind.getPresentation() + SNodeUtil.getPresentation(myArgument);
   }
 
   @Override

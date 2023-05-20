@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="ee2uk8gwx0c6bwyd3xqtcrqq0gvfq39" />
+<product version="3" modelHash="7xpfj97pizgrzj5fngbd12ylmkxpx24">
+  <files names="EditorAspectDescriptorImpl.java:MultipleEditorsTestEditorComponentChild_compactRich.java:MultipleEditorsTestEditorComponentChild_compactRich_ComponentBuilder_a.java:MultipleEditorsTestMostSpecificChild_compact_rich_Editor.java:MultipleEditorsTestMostSpecificChild_compact_rich_EditorBuilder_a.java" />
+</product>
 

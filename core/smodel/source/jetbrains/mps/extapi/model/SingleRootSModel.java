@@ -22,6 +22,5 @@ import org.jetbrains.mps.openapi.model.SNode;
  * evgeny, 3/22/13
  */
 public interface SingleRootSModel extends SModel {
-
   SNode getRoot();
 }

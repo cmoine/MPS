@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-923u251lb35guz5bb1uv3hif1tp9u8p" />
+<product version="3" modelHash="amamgejx7m9omkwspivnky6my6s003">
+  <files names="Car_Editor.java:Car_EditorBuilder_a.java:EditorAspectDescriptorImpl.java:Person_Editor.java:Person_EditorBuilder_a.java" />
+</product>
 

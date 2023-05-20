@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,9 @@
 package jetbrains.mps.smodel;
 
 import jetbrains.mps.logging.Logger;
-import jetbrains.mps.smodel.legacy.ConceptMetaInfoConverter;
-import jetbrains.mps.util.InternUtil;
+import jetbrains.mps.smodel.AssociationData.DirectNode;
+import jetbrains.mps.smodel.AssociationData.IndirectNodePtr;
 import jetbrains.mps.util.WeakSet;
-import jetbrains.mps.util.annotation.ToRemove;
-import org.apache.log4j.Level;
-import org.apache.log4j.LogManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.annotations.Immutable;
@@ -32,126 +29,63 @@ import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeId;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 import java.util.Set;
-import java.util.Stack;
 
 public abstract class SReference implements org.jetbrains.mps.openapi.model.SReference {
   public static final SReference[] EMPTY_ARRAY = new SReference[0];
-  private static final Set<SReference> ourErrorReportedRefs = new WeakSet<SReference>();
-  private final static ThreadLocal<Boolean> ourLoggingOff = new ThreadLocal<Boolean>() {
-    @Override
-    protected Boolean initialValue() {
-      return false;
-    }
-  };
+  private static final Set<SReference> ourErrorReportedRefs = new WeakSet<>();
+
   protected final SNode mySourceNode; // made protected only for assert in DynamicReference
-  private SReferenceLink myRoleId;
-  private volatile String myResolveInfo;
+  private final SReferenceLink myRoleId;
 
-  /**
-   * role must be "genuine", interned
-   */
-  @Deprecated
-  protected SReference(String role, SNode sourceNode) {
-    mySourceNode = sourceNode;
-    assert sourceNode != null;
-    myRoleId = ((ConceptMetaInfoConverter) sourceNode.getConcept()).convertAssociation(role);
-  }
-
-  protected SReference(SReferenceLink role, SNode sourceNode) {
+  protected SReference(@NotNull SReferenceLink role, SNode sourceNode) {
     myRoleId = role;
     mySourceNode = sourceNode;
   }
 
+  /**
+   * @deprecated Constructing SReference objects with purpose to {@code SNode.setReference()} is discouraged,
+   *             use alternative {@code SNode.setReference()} methods.
+   *             This method have to stay for at least a year to facilitate migration of user code.
+   *             Generally, clients have to use smodel language to manipulate references, but there could be code that does that
+   *             through SNode OpenAPI.
+   */
+  @Deprecated(since = "2021.2")
   public static SReference create(SReferenceLink id, SNode sourceNode, SNode targetNode) {
+    // XXX 1 use in MPS (Generator impl)
     if (sourceNode.getModel() != null && targetNode.getModel() != null) {
       // 'mature' reference
-      return new StaticReference(id, sourceNode, targetNode.getModel().getReference(), targetNode.getNodeId(), targetNode.getName());
+      final IndirectNodePtr ad = new IndirectNodePtr(targetNode.getModel().getReference(), targetNode.getNodeId(), targetNode.getName());
+      return new StaticReference(id, sourceNode, ad);
     }
-    return new StaticReference(id, sourceNode, targetNode);
-  }
-
-  @Deprecated
-  @ToRemove(version = 3.2)
-  public static SReference create(String role, SNode sourceNode, SNode targetNode) {
-    if (sourceNode.getModel() != null && targetNode.getModel() != null) {
-      // 'mature' reference
-      return new StaticReference(role, sourceNode, targetNode.getModel().getReference(), targetNode.getNodeId(), targetNode.getName());
-    }
-    return new StaticReference(role, sourceNode, targetNode);
-  }
-
-  public static SReference create(SReferenceLink role, SNode sourceNode, SModelReference targetModelReference, SNodeId targetNodeId) {
-    return new StaticReference(role, sourceNode, targetModelReference, targetNodeId, null);
-  }
-  public static SReference create(SReferenceLink role, SNode sourceNode, SModelReference targetModelReference, SNodeId targetNodeId, String resolveInfo) {
-    return new StaticReference(role, sourceNode, targetModelReference, targetNodeId, resolveInfo);
-  }
-
-  @Deprecated
-  @ToRemove(version = 3.2)
-  public static SReference create(String role, SNode sourceNode, SModelReference targetModelReference, SNodeId targetNodeId) {
-    return new StaticReference(role, sourceNode, targetModelReference, targetNodeId, null);
-  }
-
-  @Deprecated
-  @ToRemove(version = 3.3)
-  public static SReference create(String role, SNode sourceNode, SModelReference targetModelReference, SNodeId targetNodeId, String resolveInfo) {
-    return new StaticReference(role, sourceNode, targetModelReference, targetNodeId, resolveInfo);
-  }
-
-  @Deprecated
-  @ToRemove(version = 3.3)
-  public static SReference create(String role, SNode sourceNode, SNodeReference pointer, String resolveInfo) {
-    return create(role, sourceNode, pointer.getModelReference(), pointer.getNodeId(), resolveInfo);
-  }
-
-  @Deprecated
-  @ToRemove(version = 3.3)
-  public static SReference create(String role, SNode sourceNode, SNode targetNode, String resolveInfo) {
-    SReference ref = create(role, sourceNode, targetNode);
-    ref.setResolveInfo(resolveInfo);
-    return ref;
+    return new StaticReference(id, sourceNode, new DirectNode(targetNode));
   }
 
   /**
-   * @return Whether logging was really disabled by this call, i.e. it wasn't already disabled before
+   * @deprecated see {@link #create(SReferenceLink, SNode, SNode)}, above, for explanation
    */
-  public static boolean disableLogging() {
-    boolean wasOff = ourLoggingOff.get();
-    ourLoggingOff.set(true);
-    return !wasOff;
+  @Deprecated(since = "2021.2")
+  public static SReference create(SReferenceLink role, SNode sourceNode, SModelReference targetModelReference, SNodeId targetNodeId) {
+    // XXX no uses in MPS or mbeddr
+    return create(role, sourceNode, targetModelReference, targetNodeId, null);
   }
-
-  public static void enableLogging() {
-    ourLoggingOff.set(false);
+  /**
+   * create 'mature' reference
+   * @deprecated see {@link #create(SReferenceLink, SNode, SNode)}, above, for explanation
+   */
+  @Deprecated(since = "2021.2")
+  public static SReference create(SReferenceLink role, SNode sourceNode, SModelReference targetModelReference, SNodeId targetNodeId, String resolveInfo) {
+    // XXX no uses of the method in MPS outside of this class
+    return new StaticReference(role, sourceNode, new IndirectNodePtr(targetModelReference, targetNodeId, resolveInfo));
   }
-
-  public static SNode getTargetNodeSilently(org.jetbrains.mps.openapi.model.SReference ref) {
-    boolean needToEnableLogging = false;
-    try {
-      needToEnableLogging = disableLogging();
-      return ref.getTargetNode();
-    } finally {
-      if (needToEnableLogging) {
-        enableLogging();
-      }
-    }
-  }
-
-  @Override
-  @Deprecated
-  @ToRemove(version = 3.2)
-  public String getRole() {
-    return myRoleId.getRoleName();
-  }
-
-  @Deprecated
-  @ToRemove(version = 3.2)
-  public void setRole(String newRole) {
-    myRoleId = ((ConceptMetaInfoConverter) mySourceNode.getConcept()).convertAssociation(newRole);
+  /**
+   * @deprecated see {@link #create(SReferenceLink, SNode, SNode)}, above, for explanation
+   */
+  @Deprecated(since = "2021.2")
+  public static SReference create(SReferenceLink role, SNode sourceNode, SNodeReference pointer, String resolveInfo) {
+    // 2 uses in MPS own internal classes: 1 in SNode impl, +1 in Generator
+    return create(role, sourceNode, pointer.getModelReference(), pointer.getNodeId(), resolveInfo);
   }
 
   @Override
@@ -168,7 +102,22 @@ public abstract class SReference implements org.jetbrains.mps.openapi.model.SRef
 
   @Override
   public final SNode getTargetNode() {
-    return getTargetNode_internal();
+    return getTargetNode_internal(new LegacyLogReporter(this));
+  }
+
+  /**
+   * Auxiliary, implementation-bound alternative to {@link #getTargetNode()} with extended control over error reporting
+   */
+  public final SNode getTargetNode(@NotNull ProblemReporter report) {
+    final SNode rv = getTargetNode_internal(report);
+    if (report instanceof ResolveProcess) {
+      if (rv == null) {
+        ((ResolveProcess) report).unresolved(this);
+      } else {
+        ((ResolveProcess) report).resolved(this, rv);
+      }
+    }
+    return rv;
   }
 
   @Override
@@ -176,18 +125,9 @@ public abstract class SReference implements org.jetbrains.mps.openapi.model.SRef
     return new SNodePointer(getTargetSModelReference(), getTargetNodeId());
   }
 
-  //-------- factory methods -----------
-
   @Override
   @Nullable
   public abstract SModelReference getTargetSModelReference();
-
-  @Deprecated
-  /**
-   * Use method in SReferenceBase class, as when you change ref, you know what ref it is
-   * @Deprecated in 3.0
-   */
-  public abstract void setTargetSModelReference(@NotNull SModelReference targetModelReference);
 
   @Override
   @Nullable
@@ -197,7 +137,7 @@ public abstract class SReference implements org.jetbrains.mps.openapi.model.SRef
   }
 
   public void makeDirect() {
-
+    // no-op by default
   }
 
   public boolean makeIndirect() {
@@ -205,49 +145,46 @@ public abstract class SReference implements org.jetbrains.mps.openapi.model.SRef
   }
 
   public String getResolveInfo() {
-    return myResolveInfo;
+    return null;
   }
+
+  public void setResolveInfo(String info) {
+    // no-op
+  }
+
+  /*package*/ AssociationData getData() {
+    // FIXME shall be abstract but might require change in MPS-extensions or mbeddr
+    return null;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(getData()) + getSourceNode().hashCode()*31 + getLink().hashCode()*17;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj.getClass() != getClass()) {
+      return false;
+    }
+    final SReference other = (SReference) obj;
+    // XXX I didn't implement equals for AssociationData as it seems sufficient for now just to
+    //     rely on == (tests pass). However, one day we might need to look deeper into AssociationData equality.
+    return Objects.equals(getData(), other.getData()) && getSourceNode() == other.getSourceNode() && getLink().equals(other.getLink());
+  }
+
+  protected abstract SNode getTargetNode_internal(/*not null*/ ProblemReporter reporter);
 
   //-------- error logging -----------
 
-  public void setResolveInfo(String info) {
-    myResolveInfo = InternUtil.intern(info);
-  }
-
-  protected abstract SNode getTargetNode_internal();
-
   /**
    * prints error to log
-   * @param onlyWarn if true then warning must be printed out. Must be true almost always.
+   * @deprecated don't use directly, stick to {@link ProblemReporter} instead
+   *             would be removed once I settle its only use in StaticReference#makeIndirect(boolean)
    */
-  protected final void error(String message, boolean onlyWarn, ProblemDescription... problems) {
-    if (!ourLoggingOff.get()) {
-      //skip errors in java stubs because they can have reference to classes that doesn't present in the class path
-      SModel model = getSourceNode().getModel();
-      if (model != null && SModelStereotype.isStubModel(model)) {
-        return;
-      }
-
-      synchronized (ourErrorReportedRefs) {
-        if (!ourErrorReportedRefs.contains(this)) {
-          ourErrorReportedRefs.add(this);
-
-          String msg = String.format("Could not resolve reference '%s' from %s.", getRole(), getSourceNode());
-          msg += "\n" + getSourceNode().getReference();
-          if (message != null) {
-            msg += "\n" + " -- " + message;
-          }
-          // fixme AP: multiline log messages is a bad style
-          Logger log = Logger.wrap(LogManager.getLogger(this.getClass()));
-          if (onlyWarn) log.warning(msg); else log.error(msg);
-          if (problems != null) {
-            for (ProblemDescription pd : problems) {
-              if (onlyWarn) log.warning(pd.getMessage(), pd.getNode()); else log.error(pd.getMessage(), pd.getNode());
-            }
-          }
-        }
-      }
-    }
+  @Deprecated
+  protected final void error(String message, ProblemDescription... problems) {
+    new LegacyLogReporter(this).error(message, problems);
   }
 
   @Immutable
@@ -268,6 +205,106 @@ public abstract class SReference implements org.jetbrains.mps.openapi.model.SRef
 
     public String getMessage() {
       return myMessage;
+    }
+  }
+
+  /**
+   * PROVISIONAL API, DON'T USE OUTSIDE OF MPS CORE
+   * Right now just captures different uses of #error() method.
+   *
+   * I don't feel distinction warning/error is right, nor use of ProblemDescription object appeals to me.
+   * Perhaps, a method should return a Message object that could be further populated with extra info, and
+   * then finalized with done() (or error/warning if distinction is necessary)
+   */
+  public interface ProblemReporter {
+    default void warn(String message) {
+      // no-op
+    }
+    default void error(String message, ProblemDescription... details) {
+      // no-op
+    }
+  }
+
+
+  /**
+   * PROVISIONAL API, DON'T USE OUTSIDE OF MPS CORE
+   * Extension to {@link ProblemReporter} that receives final outcome of the resolution process, for use with {@link #getTargetNode(ProblemReporter)}
+   */
+  public interface ResolveProcess extends ProblemReporter {
+    default void unresolved(@NotNull org.jetbrains.mps.openapi.model.SReference ref) {
+      // no-op
+    }
+    default void resolved(@NotNull org.jetbrains.mps.openapi.model.SReference ref, @NotNull SNode target) {
+      // no-op
+    }
+  }
+
+  private static final class LegacyLogReporter implements ProblemReporter {
+    private final SReference myRef;
+
+    /*package*/ LegacyLogReporter(/*not null*/ SReference ref) {
+      myRef = ref;
+    }
+
+    private Logger log() {
+      return Logger.getLogger(SReference.class);
+    }
+
+    @Override
+    public void warn(String message) {
+      if (isStubModel(myRef.getSourceNode().getModel())) {
+        return;
+      }
+      // I don't like the design, but would like to change ProblemReporter API anyway, to be more focused on what's going
+      // on rather than on exact ways to report a message. Don't want to bother with this at the moment as my goal at the moment is getTargetNodeSilently()
+      log().warning(message);
+    }
+
+    private boolean isStubModel(SModel model) {
+      return model != null && SModelStereotype.isStubModel(model);
+    }
+
+    @Override
+    public void error(String message, ProblemDescription... problems) {
+      final SNode sourceNode = myRef.getSourceNode();
+      //skip errors in java stubs because they can have reference to classes that doesn't present in the class path
+      SModel model = sourceNode.getModel();
+      if (isStubModel(model)) {
+        return;
+      }
+
+      // XXX synchronized?!
+      final boolean shallReport;
+      synchronized (ourErrorReportedRefs) {
+        shallReport = ourErrorReportedRefs.add(myRef);
+      }
+      if (!shallReport) {
+        return;
+      }
+      // beware, don't use node.getPresentation() or toString() (which may invoke getPresentation()) to represent a source node
+      // as it ends up in behavior method that may try to access references we are about to report as broken (see MPS-28126 and related)
+      // Perhaps, even getName() is bad (getProperty(SNodeUtil.INamedConcept_name) might be better) as smodel.SNode.getName impl goes through
+      // SNodeAccessUtil which may trigger property constraint execution.
+      String srcNodePresentation = sourceNode.getName();
+      if (srcNodePresentation == null) {
+        srcNodePresentation = String.format("<unnamed> %s[%s] (%s)", sourceNode.getConcept().getName(), sourceNode.getNodeId(), model == null ? "detached" : model.getName());
+      }
+      String msg = String.format("Could not resolve reference '%s' from %s.", myRef.getLink().getName(), srcNodePresentation);
+      msg += "\n" + sourceNode.getReference();
+      if (message != null) {
+        msg += "\n" + " -- " + message;
+      }
+      // fixme AP: multiline log messages is a bad style
+      final Logger log = log();
+      // don't remove SNodeReference hint from the message! Generator tracks errors/warnings
+      // with dedicated log listener, and if there's no hint to an element of transient model, it doesn't record the message!
+      // see GenerationSession.TrackHintObjectsInLog
+      log.error(msg, sourceNode.getReference());
+      if (problems != null) {
+        for (ProblemDescription pd : problems) {
+          log.error(pd.getMessage(), pd.getNode());
+        }
+      }
     }
   }
 }

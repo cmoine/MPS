@@ -12,16 +12,18 @@ import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.smodel.Language;
 import java.util.Set;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.internal.collections.runtime.SetSequence;
 import jetbrains.mps.errors.messageTargets.MessageTarget;
-import jetbrains.mps.errors.messageTargets.NodeMessageTarget;
 import jetbrains.mps.errors.messageTargets.PropertyMessageTarget;
 import jetbrains.mps.errors.IErrorReporter;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.errors.BaseQuickFixProvider;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.model.SModel;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SProperty;
+import org.jetbrains.mps.openapi.language.SConcept;
 
 public class check_ExtendedAnalyzersAreInExtendedLanguages_NonTypesystemRule extends AbstractNonTypesystemRule_Runtime implements NonTypesystemRule_Runtime {
   public check_ExtendedAnalyzersAreInExtendedLanguages_NonTypesystemRule() {
@@ -33,7 +35,7 @@ public class check_ExtendedAnalyzersAreInExtendedLanguages_NonTypesystemRule ext
     }
     Language ruleLanguage = ((Language) module);
     Set<Language> extendedLanguages = ruleLanguage.getAllExtendedLanguages();
-    SNode analyzer = SLinkOperations.getTarget(rule, MetaAdapterFactory.getReferenceLink(0x97a52717898f4598L, 0x8150573d9fd03868L, 0x5faaa6bbd57b6c8L, 0x3952cf7bd76e6440L, "analyzer"));
+    SNode analyzer = SLinkOperations.getTarget(rule, LINKS.analyzer$KJM4);
     if (analyzer == null) {
       return;
     }
@@ -44,11 +46,10 @@ public class check_ExtendedAnalyzersAreInExtendedLanguages_NonTypesystemRule ext
     Language analyzerLanguage = ((Language) analyzerModule);
     if (analyzerLanguage != ruleLanguage && !(SetSequence.fromSet(extendedLanguages).contains(analyzerLanguage))) {
       {
-        MessageTarget errorTarget = new NodeMessageTarget();
-        errorTarget = new PropertyMessageTarget("name");
-        IErrorReporter _reporter_2309309498 = typeCheckingContext.reportTypeError(rule, "language " + analyzerLanguage.getModuleName() + " of analyzer " + SPropertyOperations.getString(analyzer, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name")) + " is not extended by " + ruleLanguage.getModuleName(), "r:139daa25-c5a7-4ac9-85a2-eb14d22e8f56(jetbrains.mps.lang.dataFlow.analyzers.typesystem)", "1235136520823", null, errorTarget);
+        final MessageTarget errorTarget = new PropertyMessageTarget(PROPS.name$MnvL);
+        IErrorReporter _reporter_2309309498 = typeCheckingContext.reportTypeError(rule, "language " + analyzerLanguage.getModuleName() + " of analyzer " + SPropertyOperations.getString(analyzer, PROPS.name$MnvL) + " is not extended by " + ruleLanguage.getModuleName(), "r:139daa25-c5a7-4ac9-85a2-eb14d22e8f56(jetbrains.mps.lang.dataFlow.analyzers.typesystem)", "1235136520823", null, errorTarget);
         {
-          BaseQuickFixProvider intentionProvider = new BaseQuickFixProvider("jetbrains.mps.lang.structure.typesystem.AddExtendedLanguage_QuickFix", false);
+          BaseQuickFixProvider intentionProvider = new BaseQuickFixProvider("jetbrains.mps.lang.structure.typesystem.AddExtendedLanguage_QuickFix", "5837229161636473320", false);
           intentionProvider.putArgument("extLang", analyzerLanguage);
           intentionProvider.putArgument("lang", ruleLanguage);
           _reporter_2309309498.addIntentionProvider(intentionProvider);
@@ -57,7 +58,7 @@ public class check_ExtendedAnalyzersAreInExtendedLanguages_NonTypesystemRule ext
     }
   }
   public SAbstractConcept getApplicableConcept() {
-    return MetaAdapterFactory.getConcept(0x97a52717898f4598L, 0x8150573d9fd03868L, 0x5faaa6bbd57b6c8L, "jetbrains.mps.lang.dataFlow.analyzers.structure.Rule");
+    return CONCEPTS.Rule$N8;
   }
   public IsApplicableStatus isApplicableAndPattern(SNode argument) {
     return new IsApplicableStatus(argument.getConcept().isSubConceptOf(getApplicableConcept()), null);
@@ -76,5 +77,17 @@ public class check_ExtendedAnalyzersAreInExtendedLanguages_NonTypesystemRule ext
       return checkedDotOperand.getModule();
     }
     return null;
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SReferenceLink analyzer$KJM4 = MetaAdapterFactory.getReferenceLink(0x97a52717898f4598L, 0x8150573d9fd03868L, 0x5faaa6bbd57b6c8L, 0x3952cf7bd76e6440L, "analyzer");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept Rule$N8 = MetaAdapterFactory.getConcept(0x97a52717898f4598L, 0x8150573d9fd03868L, 0x5faaa6bbd57b6c8L, "jetbrains.mps.lang.dataFlow.analyzers.structure.Rule");
   }
 }

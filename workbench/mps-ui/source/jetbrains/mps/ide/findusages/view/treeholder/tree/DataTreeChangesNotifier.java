@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  */
 package jetbrains.mps.ide.findusages.view.treeholder.tree;
 
-import jetbrains.mps.smodel.CommandListenerAdapter;
 import jetbrains.mps.smodel.SNodePointer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -27,6 +26,7 @@ import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SModuleReference;
 import org.jetbrains.mps.openapi.module.SRepository;
 import org.jetbrains.mps.openapi.module.SRepositoryContentAdapter;
+import org.jetbrains.mps.openapi.repository.CommandListener;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -42,9 +42,9 @@ import java.util.Set;
 public class DataTreeChangesNotifier extends SRepositoryContentAdapter {
   private final MyCommandListener myChangeDispatch = new MyCommandListener();
 
-  private final Map<IChangeListener, Set<SNodeReference>> myNodeListeners = new HashMap<IChangeListener, Set<SNodeReference>>();
-  private final Map<IChangeListener, Set<SModelReference>> myModelListeners = new HashMap<IChangeListener, Set<SModelReference>>();
-  private final Map<IChangeListener, Set<SModuleReference>> myModuleListeners = new HashMap<IChangeListener, Set<SModuleReference>>();
+  private final Map<IChangeListener, Set<SNodeReference>> myNodeListeners = new HashMap<>();
+  private final Map<IChangeListener, Set<SModelReference>> myModelListeners = new HashMap<>();
+  private final Map<IChangeListener, Set<SModuleReference>> myModuleListeners = new HashMap<>();
 
   public DataTreeChangesNotifier() {
   }
@@ -116,7 +116,7 @@ public class DataTreeChangesNotifier extends SRepositoryContentAdapter {
   public void nodeRemoved(@NotNull SNodeRemoveEvent event) {
     // SNode.getReference() for deleted node produces invalid pointer
     final SNodeReference ptr = new SNodePointer(event.getModel().getReference(), event.getChild().getNodeId());
-    ArrayList<IChangeListener> toNotify = new ArrayList<IChangeListener>();
+    ArrayList<IChangeListener> toNotify = new ArrayList<>();
     for (IChangeListener l : myNodeListeners.keySet()) {
       if (myNodeListeners.get(l).contains(ptr)) {
         toNotify.add(l);
@@ -128,7 +128,7 @@ public class DataTreeChangesNotifier extends SRepositoryContentAdapter {
   @Override
   public void modelRemoved(SModule module, SModelReference ref) {
     super.modelRemoved(module, ref);
-    ArrayList<IChangeListener> toNotify = new ArrayList<IChangeListener>();
+    ArrayList<IChangeListener> toNotify = new ArrayList<>();
     for (IChangeListener l : myModelListeners.keySet()) {
       if (myModelListeners.get(l).contains(ref)) {
         toNotify.add(l);
@@ -140,7 +140,7 @@ public class DataTreeChangesNotifier extends SRepositoryContentAdapter {
   @Override
   public void moduleRemoved(@NotNull SModuleReference module) {
     super.moduleRemoved(module);
-    ArrayList<IChangeListener> toNotify = new ArrayList<IChangeListener>();
+    ArrayList<IChangeListener> toNotify = new ArrayList<>();
     for (IChangeListener l : myModuleListeners.keySet()) {
       if (myModuleListeners.get(l).contains(module)) {
         toNotify.add(l);
@@ -149,8 +149,8 @@ public class DataTreeChangesNotifier extends SRepositoryContentAdapter {
     myChangeDispatch.changed(toNotify);
   }
 
-  private static class MyCommandListener extends CommandListenerAdapter {
-    private final Set<IChangeListener> myListeners2Notify = new HashSet<IChangeListener>();
+  private static class MyCommandListener implements CommandListener {
+    private final Set<IChangeListener> myListeners2Notify = new HashSet<>();
 
     public void changed(Collection<IChangeListener> toNotify) {
       if (toNotify.isEmpty()) {
@@ -163,7 +163,7 @@ public class DataTreeChangesNotifier extends SRepositoryContentAdapter {
 
     @Override
     public void commandFinished() {
-      ArrayList<IChangeListener> toNotify = new ArrayList<IChangeListener>();
+      ArrayList<IChangeListener> toNotify = new ArrayList<>();
       synchronized (this) {
         toNotify.addAll(myListeners2Notify);
         myListeners2Notify.clear();

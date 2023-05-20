@@ -9,11 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Collection;
-import jetbrains.mps.openapi.editor.style.Style;
-import jetbrains.mps.editor.runtime.style.StyleImpl;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Constant;
-import jetbrains.mps.editor.runtime.style.StyleAttributes;
 
 public class BaseConcept_comment_Editor extends DefaultNodeEditor {
   private Collection<String> myContextHints = Arrays.asList(new String[]{"jetbrains.mps.lang.core.editor.BaseEditorContextHints.comment"});
@@ -23,66 +18,9 @@ public class BaseConcept_comment_Editor extends DefaultNodeEditor {
     return myContextHints;
   }
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createCollection_vav8l6_a(editorContext, node);
+    return new BaseConcept_comment_EditorBuilder_a(editorContext, node).createCell();
   }
   public EditorCell createInspectedCell(EditorContext editorContext, SNode node) {
-    return this.createNextEditor_vav8l6_a(editorContext, node);
-  }
-  private EditorCell createCollection_vav8l6_a(EditorContext editorContext, SNode node) {
-    EditorCell_Collection editorCell = EditorCell_Collection.createIndent2(editorContext, node);
-    editorCell.setCellId("Collection_vav8l6_a");
-    editorCell.setBig(true);
-    Style style = new StyleImpl();
-    BaseStyleSheet_StyleSheet.apply_Comment(style, editorCell);
-    editorCell.getStyle().putAll(style);
-    editorCell.addEditorCell(this.createConstant_vav8l6_a0(editorContext, node));
-    editorCell.addEditorCell(this.createNextEditor_vav8l6_b0(editorContext, node));
-    editorCell.addEditorCell(this.createConstant_vav8l6_c0(editorContext, node));
-    return editorCell;
-  }
-  private EditorCell createConstant_vav8l6_a0(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, "/*");
-    editorCell.setCellId("LEFT_COMMENT_ANCHOR");
-    Style style = new StyleImpl();
-    style.set(StyleAttributes.PUNCTUATION_RIGHT, 0, true);
-    editorCell.getStyle().putAll(style);
-    BaseConcept_comment_Actions.setCellActions(editorCell, node, editorContext);
-    editorCell.setDefaultText("");
-    return editorCell;
-  }
-  private EditorCell createNextEditor_vav8l6_b0(EditorContext editorContext, SNode node) {
-    try {
-      editorContext.getCellFactory().pushCellContext();
-      editorContext.getCellFactory().removeCellContextHints(new String[]{"jetbrains.mps.lang.core.editor.BaseEditorContextHints.comment"});
-      {
-        EditorCell editorCell = editorContext.getCellFactory().createEditorCell(node, false, BaseConcept_comment_Editor.class);
-        return editorCell;
-      }
-    } finally {
-      editorContext.getCellFactory().popCellContext();
-    }
-  }
-  private EditorCell createConstant_vav8l6_c0(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, "*/");
-    editorCell.setCellId("RIGHT_COMMENT_ANCHOR");
-    Style style = new StyleImpl();
-    style.set(StyleAttributes.PUNCTUATION_LEFT, 0, true);
-    editorCell.getStyle().putAll(style);
-    BaseConcept_comment_Actions.setCellActions(editorCell, node, editorContext);
-    editorCell.setDefaultText("");
-    return editorCell;
-  }
-  private EditorCell createNextEditor_vav8l6_a(EditorContext editorContext, SNode node) {
-    try {
-      editorContext.getCellFactory().pushCellContext();
-      editorContext.getCellFactory().removeCellContextHints(new String[]{"jetbrains.mps.lang.core.editor.BaseEditorContextHints.comment"});
-      {
-        EditorCell editorCell = editorContext.getCellFactory().createEditorCell(node, true, BaseConcept_comment_Editor.class);
-        editorCell.setBig(true);
-        return editorCell;
-      }
-    } finally {
-      editorContext.getCellFactory().popCellContext();
-    }
+    return new BaseConcept_comment_InspectorBuilder_a(editorContext, node).createCell();
   }
 }

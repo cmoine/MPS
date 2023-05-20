@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,11 @@ package jetbrains.mps.text.impl;
 import jetbrains.mps.text.TextUnit;
 import jetbrains.mps.text.rt.TextGenModelOutline;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +32,7 @@ import java.util.List;
 public final class ModelOutline implements TextGenModelOutline {
 
   private final SModel myModel;
-  private final List<TextUnit> myTextUnits = new ArrayList<TextUnit>();
+  private final List<TextUnit> myTextUnits = new ArrayList<>();
 
   public ModelOutline(@NotNull SModel model) {
     myModel = model;
@@ -47,12 +49,8 @@ public final class ModelOutline implements TextGenModelOutline {
   }
 
   @Override
-  public void registerTextUnit(@NotNull String unitName, SNode... input) {
-    // XXX Do I need to consider distinction between java and plain text units? lang.BL already has custom units (RegularTextUnit2) is there
-    // any other language that needs dependencies and trace info collected?
-//    final boolean needsJava = SModelOperations.getAllLanguageImports(model).contains(MetaAdapterFactory.getLanguage(BootstrapLanguages.baseLanguageRef()));
-//    registerTextUnit(needsJava ? new JavaTextUnit(root, name) : new RegularTextUnit(root, name));
-    registerTextUnit(new RegularTextUnit(input[0], unitName));
+  public void registerTextUnit(@NotNull String unitName, @Nullable String unitPath, @Nullable Charset encoding, SNode... input) {
+    registerTextUnit(new RegularTextUnit(input[0], unitName, unitPath, encoding));
   }
 
   @NotNull

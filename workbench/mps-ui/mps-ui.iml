@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+  <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/classes" />
     <output-test url="file://$MODULE_DIR$/classes" />
     <exclude-output />
@@ -23,6 +23,7 @@
     <orderEntry type="module" module-name="editor-api" />
     <orderEntry type="module" module-name="make-runtime" />
     <orderEntry type="module" module-name="kernel-resources" />
-    <orderEntry type="module" module-name="debuginfo-api" />
+    <orderEntry type="module" module-name="debuginfo-impl" />
+    <orderEntry type="module" module-name="java-stub" />
   </component>
 </module>

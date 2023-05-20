@@ -5,53 +5,74 @@ package jetbrains.mps.execution.demo.pluginSolution.plugin;
 import java.util.List;
 import com.intellij.execution.junit.RuntimeConfigurationProducer;
 import com.intellij.execution.configurations.ConfigurationType;
+import com.intellij.execution.configurations.ConfigurationFactory;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import java.util.ArrayList;
 import jetbrains.mps.execution.api.configurations.BaseMpsProducer;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.plugins.runconfigs.MPSPsiElement;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import com.intellij.execution.impl.RunManagerImpl;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SProperty;
 
-public class DemoApplication_Producer {
-  private static final String CONFIGURATION_FACTORY_CLASS_NAME = "jetbrains.mps.execution.demo.pluginSolution.plugin.DemoApplication_Configuration_Factory";
-
-  public DemoApplication_Producer() {
-  }
+public final class DemoApplication_Producer {
 
   public static List<RuntimeConfigurationProducer> getProducers(ConfigurationType configurationType) {
+    ConfigurationFactory configurationFactory = null;
+    // assume the one with id matching configuration kind is the primary one.
+    // In fact, though technically we support more that one factory per type (aka 'foreign' factories), all factories
+    // bear same id (due to overlook of template author, I believe), and we effectively take the fist registerd one, which I don't
+    // mind as 'foreign' factories do not work anyway.
+    for (ConfigurationFactory f : configurationType.getConfigurationFactories()) {
+      if (f.getId().equals(configurationType.getId())) {
+        configurationFactory = f;
+        break;
+      }
+    }
+    if (configurationFactory == null) {
+      configurationFactory = configurationType.getConfigurationFactories()[0];
+    }
     List<RuntimeConfigurationProducer> creators = ListSequence.fromList(new ArrayList<RuntimeConfigurationProducer>());
-    ListSequence.fromList(creators).addElement(new DemoApplication_Producer.ProducerPart_NodeSomeConcept_rh22bz_a(configurationType, CONFIGURATION_FACTORY_CLASS_NAME));
+    ListSequence.fromList(creators).addElement(new ProducerPart_NodeSomeConcept_rh22bz_a(configurationFactory));
     return creators;
   }
 
   public static final class ProducerPart_NodeSomeConcept_rh22bz_a extends BaseMpsProducer<SNode> {
-    public ProducerPart_NodeSomeConcept_rh22bz_a(ConfigurationType configurationType, String factoryName) {
-      super(configurationType, factoryName);
+    public ProducerPart_NodeSomeConcept_rh22bz_a(ConfigurationFactory configurationFactory) {
+      super(configurationFactory);
     }
 
     @Override
     protected boolean isApplicable(Object source) {
-      return source instanceof SNode && SNodeOperations.isInstanceOf(((SNode) source), MetaAdapterFactory.getConcept(0xe6081818930c4926L, 0xbdef3537bcc59087L, 0x446739e63be33684L, "jetbrains.mps.execution.demo.structure.SomeConcept"));
+      return source instanceof SNode && SNodeOperations.isInstanceOf(((SNode) source), CONCEPTS.SomeConcept$LS);
     }
 
     @Override
     protected DemoApplication_Configuration doCreateConfiguration(final SNode source) {
       setSourceElement(MPSPsiElement.createFor(source, getMpsProject()));
-      if (!(SPropertyOperations.getBoolean(source, MetaAdapterFactory.getProperty(0xe6081818930c4926L, 0xbdef3537bcc59087L, 0x446739e63be33684L, 0x446739e63be7cbc4L, "valid")))) {
+      if (!(SPropertyOperations.getBoolean(source, PROPS.valid$x_$w))) {
         return null;
       }
-      DemoApplication_Configuration configuration = ((DemoApplication_Configuration) getConfigurationFactory().createConfiguration("" + "SomeNode " + SPropertyOperations.getString(source, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name")), (DemoApplication_Configuration) RunManagerImpl.getInstanceImpl(getContext().getProject()).getConfigurationTemplate(getConfigurationFactory()).getConfiguration()));
+      DemoApplication_Configuration configuration = ((DemoApplication_Configuration) getConfigurationFactory().createConfiguration("" + "SomeNode " + SPropertyOperations.getString(source, PROPS.name$MnvL), getContext().getRunManager().getConfigurationTemplate(getConfigurationFactory()).getConfiguration()));
       configuration.getNode().setNode(source);
       return configuration;
     }
 
 
     @Override
-    public DemoApplication_Producer.ProducerPart_NodeSomeConcept_rh22bz_a clone() {
-      return (DemoApplication_Producer.ProducerPart_NodeSomeConcept_rh22bz_a) super.clone();
+    public ProducerPart_NodeSomeConcept_rh22bz_a clone() {
+      return (ProducerPart_NodeSomeConcept_rh22bz_a) super.clone();
     }
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept SomeConcept$LS = MetaAdapterFactory.getConcept(0xe6081818930c4926L, 0xbdef3537bcc59087L, 0x446739e63be33684L, "jetbrains.mps.execution.demo.structure.SomeConcept");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty valid$x_$w = MetaAdapterFactory.getProperty(0xe6081818930c4926L, 0xbdef3537bcc59087L, 0x446739e63be33684L, 0x446739e63be7cbc4L, "valid");
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }

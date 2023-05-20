@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-98g1igf47wgu7rpgeqzrnhnj2pgoftu" />
+<product version="3" modelHash="7zcdy2bo0n6ip5os9xuudpccqy3rbqf">
+  <files names="ActionAspectDescriptorImpl.java:MethodToClassifierMethod_PasteWrapper_0.java:adapt_toBL_PasteWrapper_0.java" />
+</product>
 

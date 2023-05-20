@@ -4,26 +4,26 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <root nodeRef="r:e60874cf-5ffd-4123-9760-5f88ff8e0a5a(jetbrains.mps.debugger.api.ui.icons)/4474271214083117745">
     <file name="Icons.java">
-      <node id="4474271214083120006" at="10,0,11,0" concept="1" trace="BREAKPOINT" />
-      <node id="4474271214083120015" at="11,0,12,0" concept="1" trace="INV_BREAKPOINT" />
-      <node id="4474271214083120024" at="12,0,13,0" concept="1" trace="DISABLED_BREAKPOINT" />
-      <node id="4474271214083120033" at="13,0,14,0" concept="1" trace="MUTED_BREAKPOINT" />
-      <node id="4474271214083120042" at="14,0,15,0" concept="1" trace="SHOW_AS_TREE" />
-      <node id="4474271214083120051" at="15,0,16,0" concept="1" trace="FRAMES" />
-      <node id="4474271214083120060" at="16,0,17,0" concept="1" trace="VARIABLES" />
-      <node id="4474271214083120069" at="17,0,18,0" concept="1" trace="WATCHES" />
-      <node id="1448601812508365354" at="18,0,19,0" concept="1" trace="BREAKPOINTS_DIALOG_DELETE" />
-      <node id="4483014192700707398" at="19,0,20,0" concept="1" trace="BREAKPOINTS_DIALOG_ADD" />
-      <node id="1448601812508365359" at="20,0,21,0" concept="1" trace="BREAKPOINTS_DIALOG_GOTO" />
-      <node id="1448601812508365364" at="21,0,22,0" concept="1" trace="BREAKPOINTS_DIALOG_GROUP_BY_MODEL" />
-      <node id="1448601812508365369" at="22,0,23,0" concept="1" trace="BREAKPOINTS_DIALOG_GROUP_BY_MODULE" />
-      <node id="1448601812508365374" at="23,0,24,0" concept="1" trace="BREAKPOINTS_DIALOG_GROUP_BY_ROOT" />
-      <node id="1448601812508365379" at="24,0,25,0" concept="1" trace="BREAKPOINTS_DIALOG_VIEW_SOURCE" />
-      <node id="1448601812508365384" at="25,0,26,0" concept="1" trace="BREAKPOINTS_DIALOG_TREE_VIEW" />
-      <node id="4474271214083120078" at="26,0,28,0" concept="0" trace="Icons#()V" />
-      <scope id="4474271214083120081" at="26,18,26,18" />
-      <scope id="4474271214083120078" at="26,0,28,0" />
-      <unit id="4474271214083117745" at="9,0,29,0" name="jetbrains.mps.debugger.api.ui.icons.Icons" />
+      <node id="4474271214083120006" at="12,0,13,0" concept="1" trace="BREAKPOINT" />
+      <node id="4474271214083120015" at="13,0,14,0" concept="1" trace="INV_BREAKPOINT" />
+      <node id="4474271214083120024" at="14,0,15,0" concept="1" trace="DISABLED_BREAKPOINT" />
+      <node id="4474271214083120033" at="15,0,16,0" concept="1" trace="MUTED_BREAKPOINT" />
+      <node id="4474271214083120042" at="16,0,17,0" concept="1" trace="SHOW_AS_TREE" />
+      <node id="4474271214083120051" at="17,0,18,0" concept="1" trace="FRAMES" />
+      <node id="4474271214083120060" at="18,0,19,0" concept="1" trace="VARIABLES" />
+      <node id="4474271214083120069" at="19,0,20,0" concept="1" trace="WATCHES" />
+      <node id="1448601812508365354" at="20,0,21,0" concept="1" trace="BREAKPOINTS_DIALOG_DELETE" />
+      <node id="4483014192700707398" at="21,0,22,0" concept="1" trace="BREAKPOINTS_DIALOG_ADD" />
+      <node id="1448601812508365359" at="22,0,23,0" concept="1" trace="BREAKPOINTS_DIALOG_GOTO" />
+      <node id="1448601812508365364" at="23,0,24,0" concept="1" trace="BREAKPOINTS_DIALOG_GROUP_BY_MODEL" />
+      <node id="1448601812508365369" at="24,0,25,0" concept="1" trace="BREAKPOINTS_DIALOG_GROUP_BY_MODULE" />
+      <node id="1448601812508365374" at="25,0,26,0" concept="1" trace="BREAKPOINTS_DIALOG_GROUP_BY_ROOT" />
+      <node id="1448601812508365379" at="26,0,27,0" concept="1" trace="BREAKPOINTS_DIALOG_VIEW_SOURCE" />
+      <node id="1448601812508365384" at="27,0,28,0" concept="1" trace="BREAKPOINTS_DIALOG_TREE_VIEW" />
+      <node id="4474271214083120078" at="28,0,30,0" concept="0" trace="Icons#()V" />
+      <scope id="4474271214083120081" at="28,18,28,18" />
+      <scope id="4474271214083120078" at="28,0,30,0" />
+      <unit id="4474271214083117745" at="10,0,31,0" name="jetbrains.mps.debugger.api.ui.icons.Icons" />
     </file>
   </root>
 </debug-info>

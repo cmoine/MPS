@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <root>
+    <file name="ConceptPresentationAspectImpl.java">
+      <unit at="11,0,37,0" name="testWrappedType.structure.ConceptPresentationAspectImpl" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <unit at="10,0,30,0" name="testWrappedType.structure.LanguageConceptSwitch" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <unit at="17,0,79,0" name="testWrappedType.structure.StructureAspectDescriptor" />
+    </file>
+  </root>
+  <root nodeRef="r:58c474dc-af49-44e4-a2d1-3b8edbb18985(testWrappedType.structure)/1252378774017430204">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="1252378774017430204" at="13,0,14,0" concept="1" trace="props_WrapperType" />
+      <node id="1252378774017430204" at="28,40,29,76" concept="3" />
+      <node id="1252378774017430204" at="29,76,30,43" concept="0" />
+      <node id="1252378774017430204" at="31,9,32,33" concept="4" />
+      <node id="1252378774017430204" at="27,45,31,9" concept="2" />
+      <scope id="1252378774017430204" at="28,40,30,43">
+        <var name="cpb" id="1252378774017430204" />
+      </scope>
+      <scope id="1252378774017430204" at="27,45,32,33" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="1252378774017430204" at="13,0,14,0" concept="6" trace="WrapperType" />
+      <node id="1252378774017430204" at="17,52,18,50" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="1252378774017430204" at="19,0,20,0" concept="1" trace="myConceptWrapperType" />
+      <node id="1252378774017430204" at="44,45,45,36" concept="4" />
+      <node id="1252378774017430204" at="67,69,68,161" concept="3" />
+      <node id="1252378774017430204" at="68,161,69,33" concept="0" />
+      <node id="1252378774017430204" at="69,33,70,57" concept="5" />
+      <node id="1252378774017430204" at="70,57,71,70" concept="0" />
+      <node id="1252378774017430204" at="71,70,72,102" concept="0" />
+      <node id="1252378774017430204" at="72,102,73,17" concept="0" />
+      <node id="1252378774017430205" at="73,17,74,195" concept="0" />
+      <node id="1252378774017430204" at="74,195,75,54" concept="0" />
+      <node id="1252378774017430204" at="75,54,76,22" concept="4" />
+      <node id="1252378774017430204" at="67,0,78,0" concept="7" trace="createDescriptorForWrapperType#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="1252378774017430204" at="44,45,45,36" />
+      <scope id="1252378774017430204" at="67,69,76,22">
+        <var name="b" id="1252378774017430204" />
+      </scope>
+      <scope id="1252378774017430204" at="67,0,78,0" />
+    </file>
+  </root>
+  <root nodeRef="r:58c474dc-af49-44e4-a2d1-3b8edbb18985(testWrappedType.structure)/1252378774017430315">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="1252378774017430315" at="12,0,13,0" concept="1" trace="props_TypeWithUnits" />
+      <node id="1252378774017430315" at="21,42,22,76" concept="3" />
+      <node id="1252378774017430315" at="22,76,23,47" concept="0" />
+      <node id="1252378774017430315" at="23,47,24,45" concept="0" />
+      <node id="1252378774017430315" at="25,9,26,35" concept="4" />
+      <node id="1252378774017430315" at="20,47,25,9" concept="2" />
+      <scope id="1252378774017430315" at="21,42,24,45">
+        <var name="cpb" id="1252378774017430315" />
+      </scope>
+      <scope id="1252378774017430315" at="20,47,26,35" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="1252378774017430315" at="12,0,13,0" concept="6" trace="TypeWithUnits" />
+      <node id="1252378774017430315" at="16,116,17,52" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="1252378774017430315" at="18,0,19,0" concept="1" trace="myConceptTypeWithUnits" />
+      <node id="1252378774017430315" at="42,47,43,38" concept="4" />
+      <node id="1252378774017430315" at="56,71,57,163" concept="3" />
+      <node id="1252378774017430315" at="57,163,58,34" concept="0" />
+      <node id="1252378774017430315" at="58,34,59,53" concept="5" />
+      <node id="1252378774017430315" at="59,53,60,76" concept="0" />
+      <node id="1252378774017430315" at="60,76,61,102" concept="0" />
+      <node id="1252378774017430315" at="61,102,62,17" concept="0" />
+      <node id="1252378774017430316" at="62,17,63,110" concept="0" />
+      <node id="1252378774017430315" at="63,110,64,54" concept="0" />
+      <node id="1252378774017430315" at="64,54,65,22" concept="4" />
+      <node id="1252378774017430315" at="56,0,67,0" concept="7" trace="createDescriptorForTypeWithUnits#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="1252378774017430315" at="42,47,43,38" />
+      <scope id="1252378774017430315" at="56,71,65,22">
+        <var name="b" id="1252378774017430315" />
+      </scope>
+      <scope id="1252378774017430315" at="56,0,67,0" />
+    </file>
+  </root>
+</debug-info>
+

@@ -65,7 +65,7 @@ public class SParameterImpl implements SParameter {
    * NB: ignores parameter names
    */
   public static List<SParameter> fromList(List<? extends SAbstractType> types) {
-    List<SParameter> result = new ArrayList<SParameter>();
+    List<SParameter> result = new ArrayList<>();
     for (SAbstractType type : types) {
       result.add(new SParameterImpl(type, ""));
     }

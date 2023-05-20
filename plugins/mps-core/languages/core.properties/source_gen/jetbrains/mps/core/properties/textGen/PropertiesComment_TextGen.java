@@ -7,6 +7,7 @@ import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
 import jetbrains.mps.core.properties.util.PropEscapeUtil;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
+import org.jetbrains.mps.openapi.language.SProperty;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class PropertiesComment_TextGen extends TextGenDescriptorBase {
@@ -14,7 +15,11 @@ public class PropertiesComment_TextGen extends TextGenDescriptorBase {
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
     tgs.append("# ");
-    tgs.append(PropEscapeUtil.escapeComment(SPropertyOperations.getString(ctx.getPrimaryInput(), MetaAdapterFactory.getProperty(0x58f98fef90ad4b72L, 0xa390fad66ec7005aL, 0x36fb0dc9fd3a3ad9L, 0x36fb0dc9fd3a3adaL, "text"))));
+    tgs.append(PropEscapeUtil.escapeComment(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.text$qu57)));
     tgs.newLine();
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty text$qu57 = MetaAdapterFactory.getProperty(0x58f98fef90ad4b72L, 0xa390fad66ec7005aL, 0x36fb0dc9fd3a3ad9L, 0x36fb0dc9fd3a3adaL, "text");
   }
 }

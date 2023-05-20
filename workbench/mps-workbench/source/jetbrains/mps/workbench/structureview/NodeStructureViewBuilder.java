@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2016 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,22 +54,22 @@ public class NodeStructureViewBuilder extends TreeBasedStructureViewBuilder {
       }
 
       @Override
-      public void addEditorPositionListener(FileEditorPositionListener p0) {
+      public void addEditorPositionListener(@NotNull FileEditorPositionListener p0) {
 
       }
 
       @Override
-      public void removeEditorPositionListener(FileEditorPositionListener p0) {
+      public void removeEditorPositionListener(@NotNull FileEditorPositionListener p0) {
 
       }
 
       @Override
-      public void addModelListener(ModelListener p0) {
+      public void addModelListener(@NotNull ModelListener p0) {
 
       }
 
       @Override
-      public void removeModelListener(ModelListener p0) {
+      public void removeModelListener(@NotNull ModelListener p0) {
 
       }
 
@@ -98,7 +98,7 @@ public class NodeStructureViewBuilder extends TreeBasedStructureViewBuilder {
       @Override
       @NotNull
       public Sorter[] getSorters() {
-        return new Sorter[]{new AspectSorter(), new AspectNodeSorter(myProject)};
+        return new Sorter[]{new AspectSorter(), new AspectNodeSorter()};
       }
 
       @Override

@@ -13,7 +13,7 @@ public class sim {
     System.out.println((eval()));
   }
   public static Object eval() {
-    return (Integer) let_2167053794906818091(new sim.Function_2167053794906818092());
+    return (Integer) let_2167053794906818091(new Function_2167053794906818092());
   }
   public static class Function_2167053794906818092 extends Function {
     private List myOuterVars = new ArrayList();
@@ -34,7 +34,7 @@ public class sim {
       return 1;
     }
     public Function copy() {
-      return new sim.Function_2167053794906818092(myOuterVars);
+      return new Function_2167053794906818092(myOuterVars);
     }
   }
   public static Object let_2167053794906818091(Function sq) {

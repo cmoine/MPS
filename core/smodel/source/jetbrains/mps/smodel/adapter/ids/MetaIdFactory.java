@@ -27,6 +27,8 @@ public abstract class MetaIdFactory {
   public static final SPropertyId INVALID_PROP_ID = new SPropertyId(INVALID_CONCEPT_ID, 0);
   public static final SReferenceLinkId INVALID_REF_ID = new SReferenceLinkId(INVALID_CONCEPT_ID, 0);
   public static final SContainmentLinkId INVALID_LINK_ID = new SContainmentLinkId(INVALID_CONCEPT_ID, 0);
+  public static final SDataTypeId INVALID_DATATYPE_ID = new SDataTypeId(INVALID_LANGUAGE_ID, 0);
+  public static final SEnumerationLiteralId INVALID_ENUM_LITERAL_ID = new SEnumerationLiteralId(INVALID_DATATYPE_ID, 0);
   public static final String INVALID_CONCEPT_NAME = "$UnknownConceptName$";
 
   @Deprecated
@@ -51,13 +53,21 @@ public abstract class MetaIdFactory {
     return new SConceptId(langId, concept);
   }
 
+  public static SDataTypeId dataTypeId(long uuidHigh, long uuidLow, long dataType) {
+    return dataTypeId(langId(uuidHigh, uuidLow), dataType);
+  }
+
+  public static SDataTypeId dataTypeId(SLanguageId langId, long dataType) {
+    return new SDataTypeId(langId, dataType);
+  }
+
   @Deprecated
   public static SPropertyId propId(UUID lang, long concept, long prop) {
     return new SPropertyId(conceptId(lang, concept), prop);
   }
 
   public static SPropertyId propId(long uuidHigh, long uuidLow, long concept, long prop) {
-    return new SPropertyId(conceptId(new UUID(uuidHigh, uuidLow), concept), prop);
+    return new SPropertyId(conceptId(uuidHigh, uuidLow, concept), prop);
   }
 
   public static SPropertyId propId(SConceptId concept, long prop) {
@@ -70,7 +80,7 @@ public abstract class MetaIdFactory {
   }
 
   public static SReferenceLinkId refId(long uuidHigh, long uuidLow, long concept, long ref) {
-    return new SReferenceLinkId(conceptId(new UUID(uuidHigh, uuidLow), concept), ref);
+    return new SReferenceLinkId(conceptId(uuidHigh, uuidLow, concept), ref);
   }
 
   public static SReferenceLinkId refId(SConceptId concept, long ref) {
@@ -83,10 +93,18 @@ public abstract class MetaIdFactory {
   }
 
   public static SContainmentLinkId linkId(long uuidHigh, long uuidLow, long concept, long link) {
-    return new SContainmentLinkId(conceptId(new UUID(uuidHigh, uuidLow), concept), link);
+    return new SContainmentLinkId(conceptId(uuidHigh, uuidLow, concept), link);
   }
 
   public static SContainmentLinkId linkId(SConceptId concept, long link) {
     return new SContainmentLinkId(concept, link);
+  }
+
+  public static SEnumerationLiteralId enumLiteralId(long uuidHigh, long uuidLow, long concept, long enumLiteral) {
+    return new SEnumerationLiteralId(dataTypeId(uuidHigh, uuidLow, concept), enumLiteral);
+  }
+
+  public static SEnumerationLiteralId enumLiteralId(SDataTypeId dataTypeId, long enumLiteral) {
+    return new SEnumerationLiteralId(dataTypeId, enumLiteral);
   }
 }

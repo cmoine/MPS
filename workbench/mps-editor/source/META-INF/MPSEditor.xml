@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<components>
+<idea-plugin>
+
+  <applicationListeners>
+    <listener class="jetbrains.mps.nodeEditor.EditorSettingsUISettingsListener" topic="com.intellij.ide.ui.UISettingsListener"/>
+  </applicationListeners>
 
   <extensionPoints>
-    <extensionPoint qualifiedName="jetbrains.mps.editorOpenHandler"
-                    interface="jetbrains.mps.ide.editor.EditorOpenHandler"/>
     <extensionPoint qualifiedName="jetbrains.mps.NodeEditorFactory"
                     area="IDEA_PROJECT"
                     interface="jetbrains.mps.ide.editor.NodeEditorFactory"/>
@@ -21,27 +23,19 @@
     </component>
 
     <component>
-      <implementation-class>jetbrains.mps.nodeEditor.EditorSettings</implementation-class>
-    </component>
-
-    <component>
       <implementation-class>jetbrains.mps.nodeEditor.cells.contextAssistant.ContextAssistantSettings</implementation-class>
     </component>
 
     <component>
-      <implementation-class>jetbrains.mps.ide.editor.MPSFileNodeEditorProvider</implementation-class>
-    </component>
-
-    <component>
-      <implementation-class>jetbrains.mps.editor.runtime.impl.LanguagesKeymapManager</implementation-class>
-    </component>
-
-    <component>
-      <implementation-class>jetbrains.mps.intentions.IntentionsManager</implementation-class>
-    </component>
-
-    <component>
       <implementation-class>jetbrains.mps.ide.editor.resolver.EditorResolverComponent</implementation-class>
+    </component>
+
+    <component>
+      <implementation-class>jetbrains.mps.typesystem.checking.EditorCheckerComponent</implementation-class>
+    </component>
+
+    <component>
+      <implementation-class>jetbrains.mps.ide.editor.StyleRegistryIdeaImpl</implementation-class>
     </component>
   </application-components>
 
@@ -77,24 +71,36 @@
       <implementation-class>jetbrains.mps.ide.editor.warningPanel.MPSEditorWarningsManager</implementation-class>
     </component>
 
-    <component>
-      <implementation-class>com.intellij.openapi.fileEditor.FileEditorDataProviderManager</implementation-class>
-    </component>
-
-    <component>
-      <implementation-class>jetbrains.mps.ide.editor.StyleRegistryIdeaImpl</implementation-class>
-    </component>
-
-    <component>
-      <implementation-class>jetbrains.mps.nodeEditor.hintsSettings.ConceptEditorHintSettingsComponent</implementation-class>
-    </component>
   </project-components>
 
   <extensions defaultExtensionNs="com.intellij">
+    <applicationService serviceImplementation="jetbrains.mps.nodeEditor.EditorSettings"/>
+    <applicationService serviceImplementation="jetbrains.mps.intentions.IntentionsManager"/>
+    <projectService serviceImplementation="jetbrains.mps.nodeEditor.hintsSettings.ConceptEditorHintSettingsComponent" />
+    <projectService serviceImplementation="jetbrains.mps.ide.editor.EditorTrackService" />
+
+    <fileEditorProvider implementation="jetbrains.mps.ide.editor.MPSFileNodeEditorProvider"/>
+
     <fileIconProvider implementation="jetbrains.mps.ide.editor.icons.NodeFileIconProvider"/>
     <mps.editorWarningsProvider implementation="jetbrains.mps.ide.editor.warningPanel.TransientModelWarningsProvider"/>
     <mps.editorWarningsProvider implementation="jetbrains.mps.ide.editor.warningPanel.PackagedModelWarningsProvider"/>
     <mps.editorWarningsProvider implementation="jetbrains.mps.ide.editor.warningPanel.ModelProblemsProvider"/>
     <mps.editorWarningsProvider implementation="jetbrains.mps.ide.editor.warningPanel.UnresolvedModelImportsProvider"/>
+
+    <customizableActionGroupProvider implementation="jetbrains.mps.ide.editor.MPSEditorCustomizableActionGroupProvider"/>
+    <!--Editor-->
+    <applicationConfigurable groupId="editor" groupWeight="200" instance="jetbrains.mps.nodeEditor.EditorSettingsConfigurable"
+                             bundle="jetbrains.mps.nodeEditor.resources.EditorSettingsBundle" key="title.editor.settings"
+                             id="mps.editor.settings" order="before preferences.editor"/>
+    <!--Editor Hints-->
+    <projectConfigurable groupId="editor" groupWeight="180" dynamic="true"
+                         instance="jetbrains.mps.nodeEditor.hintsSettings.ConceptEditorHintConfigurable"
+                         displayName="Editor Hints" order="after preferences.sourceCode" nonDefaultProject="true"/>
   </extensions>
-</components>
+
+  <actions>
+    <action id="MPS.Editor.ShowIntentionMenu" class="com.intellij.openapi.actionSystem.EmptyAction" text="Show Intention Popup">
+      <keyboard-shortcut first-keystroke="alt ENTER" keymap="$default"/>
+    </action>
+  </actions>
+</idea-plugin>

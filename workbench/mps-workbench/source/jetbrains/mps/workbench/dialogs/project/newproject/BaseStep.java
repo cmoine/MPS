@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,16 +18,28 @@ package jetbrains.mps.workbench.dialogs.project.newproject;
 import com.intellij.ide.BrowserUtil;
 import com.intellij.ide.wizard.CommitStepException;
 import com.intellij.ide.wizard.StepAdapter;
-import org.apache.log4j.Logger;
-import org.apache.log4j.LogManager;
+import jetbrains.mps.logging.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -35,7 +47,6 @@ import java.io.IOException;
 import java.net.URL;
 
 public abstract class BaseStep extends StepAdapter {
-  private static final Logger LOG = LogManager.getLogger(BaseStep.class);
 
   private JPanel myComponent;
 
@@ -114,7 +125,7 @@ public abstract class BaseStep extends StepAdapter {
       try {
         bim = ImageIO.read(imageUrl);
       } catch (IOException e) {
-        LOG.error("Can't read image: ", e);
+        Logger.getLogger(BaseStep.class).error("Can't read image: ", e);
       }
       assert bim != null : "Icon was not read. The possible reason is that PNG format was not recognized";
       Graphics graphics = bim.getGraphics();

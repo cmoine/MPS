@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dev-kit name="jetbrains.mps.devkit.aspect.migration" uuid="2787ae0c-1f54-4fbf-b0b7-caf2b5beecbc">
+  <exported-language name="90746344-04fd-4286-97d5-b46ae6a81709(jetbrains.mps.lang.migration)" />
+  <exported-language name="1a8554c4-eb84-43ba-8c34-6f0d90c6e75a(jetbrains.mps.lang.smodel.query)" />
+  <extendedDevKits>
+    <extendedDevKit>fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)</extendedDevKit>
+  </extendedDevKits>
+  <exported-solutions>
+    <exported-solution>528ff3b9-5fc4-40dd-931f-c6ce3650640e(jetbrains.mps.lang.migration.runtime)</exported-solution>
+  </exported-solutions>
+</dev-kit>
+

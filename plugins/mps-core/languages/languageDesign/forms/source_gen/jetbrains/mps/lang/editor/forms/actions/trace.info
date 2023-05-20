@@ -2,38 +2,45 @@
 <debug-info version="2">
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <root>
     <file name="ActionAspectDescriptorImpl.java">
-      <unit at="13,0,36,0" name="jetbrains.mps.lang.editor.forms.actions.ActionAspectDescriptorImpl" />
-    </file>
-    <file name="QueriesGenerated.java">
-      <unit at="6,0,8,0" name="jetbrains.mps.lang.editor.forms.actions.QueriesGenerated" />
+      <unit at="12,0,30,0" name="jetbrains.mps.lang.editor.forms.actions.ActionAspectDescriptorImpl" />
     </file>
   </root>
   <root nodeRef="r:fa8ccb4f-be82-497d-8a1d-abe52be0e6b9(jetbrains.mps.lang.editor.forms.actions)/5347446703373799064">
     <file name="CellModel_Checkbox_NodeFactories.java">
-      <node id="5347446703373799119" at="15,91,16,410" concept="0" />
-      <node id="5347446703373814562" at="20,91,21,175" concept="0" />
-      <node id="5347446703373815100" at="21,175,22,174" concept="0" />
-      <node id="5347446703373799065" at="15,0,18,0" concept="1" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SModel;)V" />
-      <node id="5347446703373814501" at="20,0,24,0" concept="1" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SModel;)V" />
-      <scope id="5347446703373799065" at="15,91,16,410" />
-      <scope id="5347446703373814501" at="20,91,22,174" />
-      <scope id="5347446703373799065" at="15,0,18,0">
+      <node id="5347446703373799119" at="18,102,19,129" concept="0" />
+      <node id="5347446703373814562" at="23,102,24,71" concept="0" />
+      <node id="5347446703373815100" at="24,71,25,70" concept="0" />
+      <node id="5347446703373799064" at="30,0,31,0" concept="2" trace="ui$innv" />
+      <node id="5347446703373799064" at="34,0,35,0" concept="2" trace="CheckboxUI_Text$kO" />
+      <node id="5347446703373799064" at="38,0,39,0" concept="2" trace="falseText$JZn5" />
+      <node id="5347446703373799064" at="39,0,40,0" concept="2" trace="trueText$JTXI" />
+      <node id="5347446703373799065" at="18,0,21,0" concept="1" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <node id="5347446703373814501" at="23,0,27,0" concept="1" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <scope id="5347446703373799065" at="18,102,19,129" />
+      <scope id="5347446703373814501" at="23,102,25,70" />
+      <scope id="5347446703373799065" at="18,0,21,0">
         <var name="enclosingNode" id="5347446703373799065" />
+        <var name="index" id="5347446703373799065" />
         <var name="model" id="5347446703373799065" />
         <var name="newNode" id="5347446703373799065" />
         <var name="sampleNode" id="5347446703373799065" />
       </scope>
-      <scope id="5347446703373814501" at="20,0,24,0">
+      <scope id="5347446703373814501" at="23,0,27,0">
         <var name="enclosingNode" id="5347446703373814501" />
+        <var name="index" id="5347446703373814501" />
         <var name="model" id="5347446703373814501" />
         <var name="newNode" id="5347446703373814501" />
         <var name="sampleNode" id="5347446703373814501" />
       </scope>
-      <unit id="5347446703373799065" at="14,0,19,0" name="jetbrains.mps.lang.editor.forms.actions.CellModel_Checkbox_NodeFactories$NodeFactory_5347446703373799065" />
-      <unit id="5347446703373814501" at="19,0,25,0" name="jetbrains.mps.lang.editor.forms.actions.CellModel_Checkbox_NodeFactories$NodeFactory_5347446703373814501" />
-      <unit id="5347446703373799064" at="13,0,26,0" name="jetbrains.mps.lang.editor.forms.actions.CellModel_Checkbox_NodeFactories" />
+      <unit id="5347446703373799064" at="29,0,32,0" name="jetbrains.mps.lang.editor.forms.actions.CellModel_Checkbox_NodeFactories$LINKS" />
+      <unit id="5347446703373799064" at="33,0,36,0" name="jetbrains.mps.lang.editor.forms.actions.CellModel_Checkbox_NodeFactories$CONCEPTS" />
+      <unit id="5347446703373799064" at="37,0,41,0" name="jetbrains.mps.lang.editor.forms.actions.CellModel_Checkbox_NodeFactories$PROPS" />
+      <unit id="5347446703373799065" at="17,0,22,0" name="jetbrains.mps.lang.editor.forms.actions.CellModel_Checkbox_NodeFactories$NodeFactory_5347446703373799065" />
+      <unit id="5347446703373814501" at="22,0,28,0" name="jetbrains.mps.lang.editor.forms.actions.CellModel_Checkbox_NodeFactories$NodeFactory_5347446703373814501" />
+      <unit id="5347446703373799064" at="16,0,42,0" name="jetbrains.mps.lang.editor.forms.actions.CellModel_Checkbox_NodeFactories" />
     </file>
   </root>
 </debug-info>

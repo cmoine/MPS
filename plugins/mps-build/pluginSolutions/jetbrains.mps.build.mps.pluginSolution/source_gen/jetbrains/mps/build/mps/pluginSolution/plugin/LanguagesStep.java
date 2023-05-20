@@ -4,10 +4,9 @@ package jetbrains.mps.build.mps.pluginSolution.plugin;
 
 import jetbrains.mps.project.Project;
 import javax.swing.JComponent;
-import org.jetbrains.mps.openapi.module.SModule;
 import java.util.List;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
-import java.util.Comparator;
+import org.jetbrains.mps.openapi.module.SModule;
 import jetbrains.mps.project.Solution;
 import jetbrains.mps.smodel.Language;
 import jetbrains.mps.ide.ui.tree.module.NamespaceTreeBuilder;
@@ -22,20 +21,21 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.EmptyBorder;
 import jetbrains.mps.ide.common.LayoutUtil;
-import org.jetbrains.annotations.NotNull;
 import jetbrains.mps.ide.ui.tree.MPSTreeNode;
-import jetbrains.mps.project.StandaloneMPSProject;
+import jetbrains.mps.project.MPSProject;
 
 public class LanguagesStep extends AbstractStep {
   private final AbstractBuildGenerator myGenerator;
   private CheckBoxTree myCheckTree;
   private final Project myProject;
   private final IErrorHandler myHandler;
+
   public LanguagesStep(Project project, AbstractBuildGenerator generator, IErrorHandler handler) {
     this.myGenerator = generator;
     this.myProject = project;
     this.myHandler = handler;
   }
+
   @Override
   public void _init() {
     super._init();
@@ -45,32 +45,31 @@ public class LanguagesStep extends AbstractStep {
     }
     this.myHandler.setErrorText(errorText);
   }
+
   @Override
   public JComponent createMainComponent() {
     this.myCheckTree = this.createCheckTree();
     return this.myCheckTree;
   }
+
   public CheckBoxTree createCheckTree() {
-    Iterable<? extends SModule> allModules = this.myProject.getModules();
-    ModulesListData data = new ModulesListData(allModules);
+    ModulesListData data = new ModulesListData(this.myProject.getProjectModules());
     List<ModuleData> children = data.getModules();
-    ListSequence.fromList(children).sort(new Comparator<ModuleData>() {
-      public int compare(ModuleData data1, ModuleData data2) {
-        SModule module1 = data1.getModule();
-        SModule module2 = data2.getModule();
-        if (module1.getClass().getName().equals(module2.getClass().getName())) {
-          return data1.getText().compareToIgnoreCase(data2.getText());
-        } else if (module1 instanceof Solution) {
-          return -1;
-        } else if (module2 instanceof Solution) {
-          return 1;
-        } else if (module1 instanceof Language) {
-          return -1;
-        }
+    ListSequence.fromList(children).sort((ModuleData data1, ModuleData data2) -> {
+      SModule module1 = data1.getModule();
+      SModule module2 = data2.getModule();
+      if (module1.getClass().getName().equals(module2.getClass().getName())) {
+        return data1.getText().compareToIgnoreCase(data2.getText());
+      } else if (module1 instanceof Solution) {
+        return -1;
+      } else if (module2 instanceof Solution) {
         return 1;
+      } else if (module1 instanceof Language) {
+        return -1;
       }
+      return 1;
     }, true);
-    NamespaceTreeBuilder builder = new LanguagesStep.MyTreeBuilder(this.myProject);
+    NamespaceTreeBuilder builder = new MyTreeBuilder(this.myProject);
     for (ModuleData moduleData : ListSequence.fromList(children)) {
       builder.addNode(new CheckBoxNode(moduleData, false));
     }
@@ -81,6 +80,7 @@ public class LanguagesStep extends AbstractStep {
     tree.checkNodeRecursively(allModulesNode, true);
     return tree;
   }
+
   public <N extends NodeData> void fillChildren(CheckBoxNode<N> node) {
     int childCount = node.getChildCount();
     for (int i = 0; i < childCount; i++) {
@@ -92,10 +92,12 @@ public class LanguagesStep extends AbstractStep {
       this.fillChildren(child);
     }
   }
+
   @Override
   public String getDescription() {
     return "Select languages and solutions included in build script.";
   }
+
   @Override
   public void _commit(boolean finish) {
     Set<NodeData> selectedItems = this.myCheckTree.getSelectedItems();
@@ -104,24 +106,24 @@ public class LanguagesStep extends AbstractStep {
       this.fillWithParents(item, modules);
     }
     List<NodeData> toSort = ListSequence.fromListWithValues(new LinkedList<NodeData>(), modules);
-    ListSequence.fromList(toSort).sort(new Comparator<NodeData>() {
-      public int compare(NodeData a, NodeData b) {
-        if ((a instanceof NamespaceData) && (b instanceof ModuleData)) {
-          return -1;
-        } else if ((a instanceof ModuleData) && (b instanceof NamespaceData)) {
-          return 1;
-        }
-        return a.getText().compareToIgnoreCase(b.getText());
+    ListSequence.fromList(toSort).sort((NodeData a, NodeData b) -> {
+      if ((a instanceof NamespaceData) && (b instanceof ModuleData)) {
+        return -1;
+      } else if ((a instanceof ModuleData) && (b instanceof NamespaceData)) {
+        return 1;
       }
+      return a.getText().compareToIgnoreCase(b.getText());
     }, true);
     this.myGenerator.setModules(toSort);
   }
+
   public void fillWithParents(NodeData item, Set<NodeData> collection) {
     SetSequence.fromSet(collection).addElement(item);
     if (item.getParent() != null) {
       this.fillWithParents(item.getParent(), collection);
     }
   }
+
   @Override
   protected JPanel createStepPanel() {
     JPanel stepPanel = new JPanel(new GridBagLayout());
@@ -131,15 +133,12 @@ public class LanguagesStep extends AbstractStep {
     stepPanel.add(mainComponent, LayoutUtil.createPanelConstraints(1));
     return stepPanel;
   }
-  @NotNull
-  @Override
-  public String getImageText() {
-    return "Included Modules";
-  }
+
   @Override
   protected boolean doLimitStepPanelHeight() {
     return true;
   }
+
   public static class MyTreeBuilder extends NamespaceTreeBuilder<CheckBoxNode, CheckBoxNamespaceNode> {
     private final Project myProject;
     public MyTreeBuilder(Project mpsProject) {
@@ -169,10 +168,7 @@ public class LanguagesStep extends AbstractStep {
       String namespace = "";
       if (data instanceof ModuleData) {
         ModuleData moduleData = (ModuleData) data;
-        namespace = ((StandaloneMPSProject) this.myProject).getFolderFor(moduleData.getModule());
-      }
-      if (namespace == null) {
-        return "";
+        namespace = ((MPSProject) this.myProject).getVirtualFolder(moduleData.getModule());
       }
       return namespace;
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 package jetbrains.mps.generator.impl;
 
 import jetbrains.mps.module.ReloadableModule;
+import jetbrains.mps.project.facets.GenerationTargetFacet;
 import jetbrains.mps.vfs.IFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SModel;
@@ -31,9 +32,30 @@ public class ModelStreamProviderImpl implements ModelStreamManager.Provider {
     if (module.isPackaged() && module instanceof ReloadableModule) {
       return new DeployedStreamManager(model.getReference(), (ReloadableModule) module);
     } else {
-      final IFile outputDir = DefaultStreamManager.Provider.getOutputDir(model);
-      final IFile cachesDir = DefaultStreamManager.Provider.getCachesDir(model);
+      final IFile outputDir = getOutputDir(model);
+      final IFile cachesDir = getCachesDir(model);
       return new DefaultStreamManager(model.getReference(), outputDir, cachesDir);
     }
+  }
+
+  private static IFile getOutputDir(SModel model) {
+    final GenerationTargetFacet gtf = GenerationTargetFacet.find(model);
+    IFile loc = gtf == null ? null : gtf.getOutputLocation(model);
+    if (loc == null) {
+      throw new IllegalArgumentException(String.format("No output location for %s", model.getName()));
+    }
+    return loc;
+  }
+
+  private static IFile getCachesDir(SModel model) {
+    // seems to be intentional that we don't look into overridden output dir when constriction location for caches
+    // as we might direct output to a public location but still keep caches in our own space
+    final GenerationTargetFacet gtf = GenerationTargetFacet.find(model);
+    // FIXME likely need to iterate over all GTFs ans find the one that answers with outputCacheLocation != null
+    IFile loc = gtf == null ? null : gtf.getOutputCacheLocation(model);
+    if (loc == null) {
+      throw new IllegalArgumentException(String.format("No cache location for %s", model.getName()));
+    }
+    return loc;
   }
 }

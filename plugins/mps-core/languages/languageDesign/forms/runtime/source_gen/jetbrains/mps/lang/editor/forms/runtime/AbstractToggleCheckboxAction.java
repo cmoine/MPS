@@ -28,13 +28,13 @@ public abstract class AbstractToggleCheckboxAction {
     EditorCell selectedCell = editorContext.getSelectedCell();
 
     if (selectedCell == null || selectedCell instanceof EditorCell_Collection) {
-      // No need to save selection, it will be restored by normal means 
+      // No need to save selection, it will be restored by normal means
       return null;
     }
 
     EditorCell_Collection parent = selectedCell.getParent();
     if (parent.getCellsCount() < EXPECTED_CHILD_INDEX + 1 || IterableUtil.get(parent, EXPECTED_CHILD_INDEX) != selectedCell) {
-      // No need to save selection, it will be restored by normal means 
+      // No need to save selection, it will be restored by normal means
       return null;
     }
 

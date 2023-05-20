@@ -5,11 +5,12 @@ package jetbrains.mps.samples.notesOrganizer.editor;
 import jetbrains.mps.lang.editor.forms.runtime.AbstractToggleCheckboxAction;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.nodeEditor.selectionRestoring.CellSelector;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.cells.EditorCell_Label;
 import jetbrains.mps.nodeEditor.selectionRestoring.LabelCellSelector;
+import org.jetbrains.mps.openapi.language.SProperty;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class ToggleCheckboxAction_gjf57x_b0 extends AbstractToggleCheckboxAction {
   private final SNode myNode;
@@ -19,11 +20,15 @@ public class ToggleCheckboxAction_gjf57x_b0 extends AbstractToggleCheckboxAction
   }
 
   protected void doExecute() {
-    SPropertyOperations.set(myNode, MetaAdapterFactory.getProperty(0x4b0f115a88684d72L, 0x8d6197071eaaa5f1L, 0x7ba12f0b163df360L, 0x36042ea3549551c8L, "active"), "" + (!(SPropertyOperations.getBoolean(myNode, MetaAdapterFactory.getProperty(0x4b0f115a88684d72L, 0x8d6197071eaaa5f1L, 0x7ba12f0b163df360L, 0x36042ea3549551c8L, "active")))));
+    SPropertyOperations.assign(myNode, PROPS.active$jVBo, !(SPropertyOperations.getBoolean(myNode, PROPS.active$jVBo)));
   }
 
   protected CellSelector createCellSelector(EditorCell selectedCell) {
     EditorCell_Label label = (EditorCell_Label) selectedCell;
     return new LabelCellSelector(label.getCaretPosition(), label.getSelectionStart(), label.getSelectionEnd());
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty active$jVBo = MetaAdapterFactory.getProperty(0x4b0f115a88684d72L, 0x8d6197071eaaa5f1L, 0x7ba12f0b163df360L, 0x36042ea3549551c8L, "active");
   }
 }

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="4h0oqa4isbjkx1elvs0voru93r6c5zi" />
+<product version="3" modelHash="22ro8oixa1xucxu9n5lzi0vzf6ru54r">
+  <files names="Mapping_main.java:QueriesGenerated.java:TemplateModelImpl.java:Template_reduce_BuildWall.java:Template_reduce_DestroyWall.java:Template_reduce_DropMark.java:Template_reduce_PickMark.java" />
+</product>
 

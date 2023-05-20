@@ -38,12 +38,23 @@ public abstract class AbstractCollapseCellAction extends AbstractCellAction {
 
   @Override
   public boolean canExecute(EditorContext context) {
-    return getAnchorCell(context.getSelectedCell(), context) != null;
+    EditorCell_Collection cell = getAnchorCell(context.getSelectedCell(), context);
+    if (cell == null) {
+      return false;
+    }
+    Queue<EditorCell_Collection> cellsToProcess = new LinkedList<>();
+    cellsToProcess.offer(cell);
+    while (!cellsToProcess.isEmpty()) {
+      EditorCell_Collection nextCollection = cellsToProcess.poll();
+      if (nextCollection.isFoldable()) return true;
+      offerChildCollections(cellsToProcess, nextCollection);
+    }
+    return false;
   }
 
   @Override
   public void execute(EditorContext context) {
-    Queue<EditorCell_Collection> cellsToProcess = new LinkedList<EditorCell_Collection>();
+    Queue<EditorCell_Collection> cellsToProcess = new LinkedList<>();
     cellsToProcess.offer(getAnchorCell(context.getSelectedCell(), context));
     while (!cellsToProcess.isEmpty()) {
       EditorCell_Collection nextCollection = cellsToProcess.poll();

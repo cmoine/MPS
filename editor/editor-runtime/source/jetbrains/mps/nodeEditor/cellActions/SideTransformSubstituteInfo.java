@@ -16,16 +16,19 @@
 package jetbrains.mps.nodeEditor.cellActions;
 
 import jetbrains.mps.editor.runtime.SideTransformInfoUtil;
+import jetbrains.mps.lang.editor.menus.transformation.DefaultTransformationMenuLookup;
 import jetbrains.mps.lang.editor.menus.transformation.MenuLocations;
-import jetbrains.mps.nodeEditor.cellMenu.AbstractSubstituteInfo;
-import jetbrains.mps.nodeEditor.menus.transformation.DefaultTransformationMenuContext;
+import jetbrains.mps.nodeEditor.cellMenu.TransformationMenuSubstituteInfo;
 import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.cells.SubstituteAction;
 import jetbrains.mps.openapi.editor.menus.transformation.TransformationMenuContext;
+import jetbrains.mps.openapi.editor.menus.transformation.TransformationMenuLookup;
 import jetbrains.mps.smodel.action.NodeSubstituteActionWrapper;
+import jetbrains.mps.smodel.language.LanguageRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.model.SNode;
 
 import java.util.List;
@@ -34,7 +37,7 @@ import java.util.stream.Collectors;
 /**
  * @author simon
  */
-public class SideTransformSubstituteInfo extends AbstractSubstituteInfo {
+public class SideTransformSubstituteInfo extends TransformationMenuSubstituteInfo {
   private final Side mySide;
 
 
@@ -48,6 +51,14 @@ public class SideTransformSubstituteInfo extends AbstractSubstituteInfo {
     return wrapToRemovingSTInfoActions(super.createActions());
   }
 
+  @Nullable
+  @Override
+  protected TransformationMenuLookup getImplicitMenuLookup(TransformationMenuContext context) {
+    SAbstractConcept targetConcept = context.getNodeLocation().getContextNode().getConcept();
+    return new DefaultTransformationMenuLookup(LanguageRegistry.getInstance(context.getEditorContext().getRepository()),
+                                               targetConcept);
+  }
+
   @NotNull
   @Override
   protected String getMenuLocation() {
@@ -58,7 +69,7 @@ public class SideTransformSubstituteInfo extends AbstractSubstituteInfo {
     return actions.stream().map(action -> new NodeSubstituteActionWrapper(action) {
       @Override
       public SNode substitute(@Nullable EditorContext context, String pattern) {
-        getEditorContext().getRepository().getModelAccess().executeCommand(() -> SideTransformInfoUtil.removeTransformInfo(getSourceNode()));
+        SideTransformInfoUtil.removeTransformInfo(getSourceNode());
         return super.substitute(context, pattern);
       }
 
@@ -67,7 +78,6 @@ public class SideTransformSubstituteInfo extends AbstractSubstituteInfo {
       }
     }).collect(Collectors.toList());
   }
-
 
   public enum Side {
     LEFT(MenuLocations.LEFT_SIDE_TRANSFORM),

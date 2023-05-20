@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,35 +13,50 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.core.actions;
 
 import com.intellij.ide.projectView.ProjectView;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.LangDataKeys;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.module.Module;
 import com.intellij.psi.PsiDirectory;
+import jetbrains.mps.extapi.persistence.FileDataSource;
+import jetbrains.mps.extapi.persistence.ModelFactoryService;
+import jetbrains.mps.extapi.persistence.SourceRoot;
+import jetbrains.mps.extapi.persistence.datasource.DataSourceFactoryFromName;
+import jetbrains.mps.extapi.persistence.datasource.PreinstalledDataSourceTypes;
 import jetbrains.mps.fileTypes.FileIcons;
 import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.idea.core.MPSBundle;
+import jetbrains.mps.idea.core.project.module.ModuleMPSSupport;
 import jetbrains.mps.idea.core.ui.CreateFromTemplateDialog;
 import jetbrains.mps.kernel.model.MissingDependenciesFixer;
+import jetbrains.mps.logging.Logger;
+import jetbrains.mps.persistence.ModelCannotBeCreatedException;
+import jetbrains.mps.persistence.PreinstalledModelFactoryTypes;
 import jetbrains.mps.project.MPSExtentions;
+import jetbrains.mps.project.MPSProject;
 import jetbrains.mps.project.ModelsAutoImportsManager;
 import jetbrains.mps.smodel.ModelAccessHelper;
+import jetbrains.mps.smodel.ModelImports;
 import jetbrains.mps.smodel.ModuleRepositoryFacade;
-import jetbrains.mps.smodel.SModelStereotype;
 import jetbrains.mps.util.Computable;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import jetbrains.mps.vfs.IFile;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.openapi.language.SLanguage;
 import org.jetbrains.mps.openapi.model.EditableSModel;
 import org.jetbrains.mps.openapi.model.SModel;
-import org.jetbrains.mps.openapi.model.SModel.Problem;
-import org.jetbrains.mps.openapi.model.SModelListenerBase;
+import org.jetbrains.mps.openapi.model.SModelName;
+import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.module.SRepository;
-import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
+import org.jetbrains.mps.openapi.persistence.DataSource;
+import org.jetbrains.mps.openapi.persistence.ModelFactory;
+import org.jetbrains.mps.openapi.persistence.datasource.DataSourceType;
 
 import javax.lang.model.SourceVersion;
-import java.io.IOException;
+import java.io.File;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,7 +64,6 @@ import java.util.Map;
  * Created by danilla on 28/10/15.
  */
 public class NewModelAction extends NewModelActionBase {
-  private static Logger LOG = LogManager.getLogger(NewModelAction.class);
 
   private static final ModelTemplate EMPTY_MODEL = new ModelTemplateBase("EMPTY", MPSBundle.message("new.model.template.empty.presentation"), FileIcons.MODEL_ICON);
 
@@ -60,14 +74,16 @@ public class NewModelAction extends NewModelActionBase {
   @Override
   public void actionPerformed(final AnActionEvent anActionEvent) {
     SRepository repository = ProjectHelper.getProjectRepository(myProject);
+    final ModuleRepositoryFacade repositoryFacade = new ModuleRepositoryFacade(repository);
     Map<String, ModelTemplate> namesToTemplates = new HashMap<String, ModelTemplate>();
+    final Module ideaModule = anActionEvent.getData(LangDataKeys.MODULE); // not null ensured by isEnabled in superclass
     CreateFromTemplateDialog dialog = new CreateFromTemplateDialog(myProject) {
       @Override
       protected void doOKAction() {
         final ModelTemplate template = namesToTemplates.get(getKindCombo().getSelectedName());
         String shortModelName = getNameField().getText().trim();
         final String modelName = myModelPrefix.isEmpty() ? shortModelName : myModelPrefix + "." + shortModelName;
-        if (!isModelNameValid(modelName)) {
+        if (!isModelNameValid(repositoryFacade, modelName)) {
           return;
         }
 
@@ -78,32 +94,35 @@ public class NewModelAction extends NewModelActionBase {
 
             EditableSModel model = null;
             try {
-              model = (EditableSModel) myModelRoot.createModel(modelName, myRootForModel, null, PersistenceFacade.getInstance().getModelFactory(MPSExtentions.MODEL));
-              model.setChanged(true);
-              model.save();
-            } catch (IOException e) {
-              LOG.error("Can't create per-root model " + modelName + " under " + path, e);
+              // repository != null means there's MPSProject, and its getComponent is capable to answer CoreComponents
+              ModelFactory modelFactory = ProjectHelper.fromIdeaProject(myProject).getComponent(ModelFactoryService.class).getFactoryByType(PreinstalledModelFactoryTypes.PLAIN_XML);
+              SModelName sModelName = new SModelName(modelName);
+              model = (EditableSModel) myModelRoot.createModel(sModelName, mySourceRoot, createDataSourceFactory(), modelFactory);
+            } catch (ModelCannotBeCreatedException e) {
+              Logger.getLogger(NewModelAction.class).error("Can't create model " + modelName + " under " + path, e);
               return null;
             }
 
-            // FIXME something bad: see MPS-18545 SModel api: createModel(), setChanged(), isLoaded(), save()
-            // model.getSModel() ?
             template.preConfigure(model);
 
-            //Hack for update ProjectView
-            model.addModelListener(new SModelListenerBase() {
-
-              @Override
-              public void modelSaved(SModel sModel) {
-                ProjectView.getInstance(myProject).refresh();
-                sModel.removeModelListener(this); //need to refresh once
-              }
-            });
-
-            ModelsAutoImportsManager.doAutoImport(myModelRoot.getModule(), model);
+            final MPSProject mpsProject = ProjectHelper.fromIdeaProject(myProject);
+            if (mpsProject != null) {
+              mpsProject.getComponent(ModelsAutoImportsManager.class).performImports(myModelRoot.getModule(), model);
+            }
             new MissingDependenciesFixer(model).fixModuleDependencies();
 
-            return model;
+            model.save(); // just in case performImports or fixModuleDependencies touched the model and didn't save it - fixImports, below
+            // may reload module (when/if project libraries change), and AbstractModule.doUpdateModelsSet doesn't reload models in changed state.
+
+            final Collection<SLanguage> usedLanguages = new ModelImports(model).getUsedLanguages();
+            if (usedLanguages.isEmpty()) {
+              return model;
+            }
+            final SModelReference modelReference = model.getReference();
+
+            ModuleMPSSupport.getInstance().fixImports(ideaModule, usedLanguages);
+            // chances are fixImports reloads module with the model, therefore need to take the new one
+            return modelReference.resolve(repository);
           }
         });
         if (newModel == null) {
@@ -115,33 +134,34 @@ public class NewModelAction extends NewModelActionBase {
           close(OK_EXIT_CODE);
         }
 
-        //Hack for update ProjectView
-        repository.getModelAccess().runWriteAction(new Runnable() {
-          @Override
-          public void run() {
-            ((EditableSModel) newModel).save();
-          }
-        });
+        // Not sure there's a need to do it explicitly, just a better alternative to postponed model.save and save listener to do the same
+        // (see fbe9056fa1184378a2256f75a6ffd6f04f01cf88)
+        ApplicationManager.getApplication().invokeLater(() -> ProjectView.getInstance(myProject).refresh());
       }
 
-      private boolean isModelNameValid(String modelName) {
-        if (modelName.length() == 0) {
-          showError(MPSBundle.message("create.new.model.dialog.error.empty.name"));
-          return false;
-        }
+      private boolean isModelNameValid(final ModuleRepositoryFacade repositoryFacade, final String modelName) {
+        try {
+          if (modelName.length() == 0) {
+            showError(MPSBundle.message("create.new.model.dialog.error.empty.name"));
+            return false;
+          }
 
-        if (new ModuleRepositoryFacade(repository).getModelByName(modelName) != null) {
-          showError(MPSBundle.message("create.new.model.dialog.error.model.exists", modelName));
-          return false;
-        }
+          if (modelName.endsWith(".")) {
+            showError(MPSBundle.message("create.new.model.dialog.error.empty.short.name"));
+            return false;
+          }
 
-        if (modelName.endsWith(".")) {
-          showError(MPSBundle.message("create.new.model.dialog.error.empty.short.name"));
-          return false;
-        }
-
-        if (!(SourceVersion.isName(SModelStereotype.withoutStereotype(modelName)))) {
-          showError(MPSBundle.message("create.new.model.dialog.error.invalid.java", modelName));
+          final SModelName mn = new SModelName(modelName);
+          if (!(SourceVersion.isName(mn.getLongName()))) {
+            showError(MPSBundle.message("create.new.model.dialog.error.invalid.java", modelName));
+            return false;
+          }
+          if (new ModelAccessHelper(repositoryFacade.getRepository()).runReadAction(() -> !repositoryFacade.getModelsByName(mn).isEmpty())) {
+            showError(MPSBundle.message("create.new.model.dialog.error.model.exists", modelName));
+            return false;
+          }
+        } catch (Exception ex) {
+          showError(ex.getMessage());
           return false;
         }
         return true;
@@ -160,4 +180,26 @@ public class NewModelAction extends NewModelActionBase {
     }
     dialog.show();
   }
+
+  @NotNull
+  private DataSourceFactoryFromName createDataSourceFactory() {
+    return new DataSourceFactoryFromName() {
+      @NotNull
+      @Override
+      public DataSourceType getType() {
+        return PreinstalledDataSourceTypes.MPS;
+      }
+
+      @NotNull
+      @Override
+      public DataSource create(@NotNull SModelName modelName, @NotNull SourceRoot sourceRoot) {
+        String modelFilePath = modelName.getLongName();
+        modelFilePath = modelFilePath.replace('.', File.separatorChar) + MPSExtentions.DOT_MODEL;
+        modelFilePath = sourceRoot.getAbsolutePath().getPath() + File.separator + modelFilePath;
+        IFile modelFile = sourceRoot.getAbsolutePath().getFileSystem().getFile(modelFilePath);
+        return new FileDataSource(modelFile);
+      }
+    };
+  }
+
 }

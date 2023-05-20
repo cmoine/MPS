@@ -5,69 +5,80 @@ package jetbrains.mps.lang.structure.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
+import org.jetbrains.mps.openapi.language.SAbstractLink;
 import java.util.List;
 import java.util.Arrays;
 import org.jetbrains.annotations.NotNull;
-import jetbrains.mps.kernel.model.SModelUtil;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
+import org.jetbrains.mps.openapi.language.SEnumerationLiteral;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SEnumOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import java.util.Objects;
+import jetbrains.mps.smodel.adapter.MetaAdapterByDeclaration;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
+import org.jetbrains.mps.openapi.language.SProperty;
+import org.jetbrains.mps.openapi.language.SConcept;
 
 public final class LinkDeclaration__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979bd086aL, "jetbrains.mps.lang.structure.structure.LinkDeclaration");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<SNode> getGenuineLink_idhEwIf_V = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getGenuineLink").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("hEwIf_V").registry(REGISTRY).build();
-  public static final SMethod<String> getGenuineRole_idhEwIfAe = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getGenuineRole").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("hEwIfAe").registry(REGISTRY).build();
-  public static final SMethod<Boolean> isSingular_idhEwIfAt = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isSingular").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("hEwIfAt").registry(REGISTRY).build();
-  public static final SMethod<String> getPresentation_idhEwIMiw = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getPresentation").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("hEwIMiw").registry(REGISTRY).build();
-  public static final SMethod<Boolean> isAtLeastOneCardinality_id2VYdUfnkjmB = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isAtLeastOneCardinality").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("2VYdUfnkjmB").registry(REGISTRY).build();
-  public static final SMethod<SNode> getConceptDeclaration_id7jb4LXpbWaP = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getConceptDeclaration").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("7jb4LXpbWaP").registry(REGISTRY).build();
+  public static final SMethod<SNode> getGenuineLink_idhEwIf_V = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getGenuineLink").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1213877254523L).languageId(0x8389f407dc1158b7L, 0xc72da2b97cce4447L).build2();
+  public static final SMethod<String> getGenuineRole_idhEwIfAe = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getGenuineRole").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1213877254542L).languageId(0x8389f407dc1158b7L, 0xc72da2b97cce4447L).build2();
+  public static final SMethod<Boolean> isSingular_idhEwIfAt = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isSingular").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1213877254557L).languageId(0x8389f407dc1158b7L, 0xc72da2b97cce4447L).build2();
+  public static final SMethod<Boolean> isAtLeastOneCardinality_id2VYdUfnkjmB = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isAtLeastOneCardinality").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(3386205146660812199L).languageId(0x8389f407dc1158b7L, 0xc72da2b97cce4447L).build2();
+  public static final SMethod<String> getPresentation_idhEwIMiw = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getPresentation").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1213877396640L).languageId(0x9b92103b95ca8c0cL, 0xceab519525ea4f22L).build2();
+  public static final SMethod<SNode> getConceptDeclaration_id7jb4LXpbWaP = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getConceptDeclaration").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(8415841354033119925L).languageId(0x8389f407dc1158b7L, 0xc72da2b97cce4447L).build2();
+  public static final SMethod<Boolean> is_id4MKjpUYniHA = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("is").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(5526002086977547110L).languageId(0x8389f407dc1158b7L, 0xc72da2b97cce4447L).build2(SMethodBuilder.createJavaParameter(SAbstractLink.class, ""));
 
-  private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getGenuineLink_idhEwIf_V, getGenuineRole_idhEwIfAe, isSingular_idhEwIfAt, getPresentation_idhEwIMiw, isAtLeastOneCardinality_id2VYdUfnkjmB, getConceptDeclaration_id7jb4LXpbWaP);
+  private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getGenuineLink_idhEwIf_V, getGenuineRole_idhEwIfAe, isSingular_idhEwIfAt, isAtLeastOneCardinality_id2VYdUfnkjmB, getPresentation_idhEwIMiw, getConceptDeclaration_id7jb4LXpbWaP, is_id4MKjpUYniHA);
 
   private static void ___init___(@NotNull SNode __thisNode__) {
   }
 
   /*package*/ static SNode getGenuineLink_idhEwIf_V(@NotNull SNode __thisNode__) {
-    if (__thisNode__ == null) {
-      return null;
+    if (SLinkOperations.getTarget(__thisNode__, LINKS.specializedLink$7ZCN) == null) {
+      return __thisNode__;
     }
-    return SModelUtil.getGenuineLinkDeclaration(__thisNode__);
+    return LinkDeclaration__BehaviorDescriptor.getGenuineLink_idhEwIf_V.invoke(SLinkOperations.getTarget(__thisNode__, LINKS.specializedLink$7ZCN));
   }
+  @Deprecated(since = "2019.3", forRemoval = true)
   /*package*/ static String getGenuineRole_idhEwIfAe(@NotNull SNode __thisNode__) {
-    if (__thisNode__ == null) {
-      return null;
-    }
-    return SModelUtil.getGenuineLinkRole(__thisNode__);
+    return SPropertyOperations.getString(LinkDeclaration__BehaviorDescriptor.getGenuineLink_idhEwIf_V.invoke(__thisNode__), PROPS.role$Nsjf);
   }
   /*package*/ static boolean isSingular_idhEwIfAt(@NotNull SNode __thisNode__) {
-    SNode genuineLinkDeclaration = SModelUtil.getGenuineLinkDeclaration(__thisNode__);
-    return SPropertyOperations.hasValue(genuineLinkDeclaration, MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979bd086aL, 0xf98054bb04L, "sourceCardinality"), "0..1", "0..1") || SPropertyOperations.hasValue(genuineLinkDeclaration, MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979bd086aL, 0xf98054bb04L, "sourceCardinality"), "1", "0..1");
-  }
-  /*package*/ static String getPresentation_idhEwIMiw(@NotNull SNode __thisNode__) {
-    return SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979bd086aL, 0xf98052f333L, "role"));
+    SEnumerationLiteral cardinality = SPropertyOperations.getEnum(LinkDeclaration__BehaviorDescriptor.getGenuineLink_idhEwIf_V.invoke(__thisNode__), PROPS.sourceCardinality$cxYK);
+    return SEnumOperations.isMember(cardinality, 0xfc6f3944c3L) || SEnumOperations.isMember(cardinality, 0xfc6f3944c4L);
   }
   /*package*/ static boolean isAtLeastOneCardinality_id2VYdUfnkjmB(@NotNull SNode __thisNode__) {
-    SNode genuineLink = LinkDeclaration__BehaviorDescriptor.getGenuineLink_idhEwIf_V.invoke(__thisNode__);
-    return SPropertyOperations.hasValue(genuineLink, MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979bd086aL, 0xf98054bb04L, "sourceCardinality"), "1", "0..1") || SPropertyOperations.hasValue(genuineLink, MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979bd086aL, 0xf98054bb04L, "sourceCardinality"), "1..n", "0..1");
+    SEnumerationLiteral cardinality = SPropertyOperations.getEnum(LinkDeclaration__BehaviorDescriptor.getGenuineLink_idhEwIf_V.invoke(__thisNode__), PROPS.sourceCardinality$cxYK);
+    return SEnumOperations.isMember(cardinality, 0xfc6f3944c4L) || SEnumOperations.isMember(cardinality, 0xfc6f3944c6L);
+  }
+  /*package*/ static String getPresentation_idhEwIMiw(@NotNull SNode __thisNode__) {
+    return SPropertyOperations.getString(__thisNode__, PROPS.role$Nsjf);
   }
   /*package*/ static SNode getConceptDeclaration_id7jb4LXpbWaP(@NotNull SNode __thisNode__) {
-    return SNodeOperations.getNodeAncestor(__thisNode__, MetaAdapterFactory.getConcept(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x1103553c5ffL, "jetbrains.mps.lang.structure.structure.AbstractConceptDeclaration"), false, false);
+    return SNodeOperations.getNodeAncestor(__thisNode__, CONCEPTS.AbstractConceptDeclaration$KA, false, false);
+  }
+  /*package*/ static boolean is_id4MKjpUYniHA(@NotNull SNode __thisNode__, SAbstractLink link) {
+    if (SEnumOperations.isMember(SPropertyOperations.getEnum(__thisNode__, PROPS.metaClass$PeKc), 0xfc6f4e95b9L)) {
+      return Objects.equals(MetaAdapterByDeclaration.getContainmentLink(__thisNode__), link);
+    }
+    if (SEnumOperations.isMember(SPropertyOperations.getEnum(__thisNode__, PROPS.metaClass$PeKc), 0xfc6f4e95b8L)) {
+      return Objects.equals(MetaAdapterByDeclaration.getReferenceLink(__thisNode__), link);
+    }
+    throw new IllegalStateException(SEnumOperations.getMemberName0(SPropertyOperations.getEnum(__thisNode__, PROPS.metaClass$PeKc)));
   }
 
   /*package*/ LinkDeclaration__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -89,11 +100,13 @@ public final class LinkDeclaration__BehaviorDescriptor extends BaseBHDescriptor 
       case 2:
         return (T) ((Boolean) isSingular_idhEwIfAt(node));
       case 3:
-        return (T) ((String) getPresentation_idhEwIMiw(node));
-      case 4:
         return (T) ((Boolean) isAtLeastOneCardinality_id2VYdUfnkjmB(node));
+      case 4:
+        return (T) ((String) getPresentation_idhEwIMiw(node));
       case 5:
         return (T) ((SNode) getConceptDeclaration_id7jb4LXpbWaP(node));
+      case 6:
+        return (T) ((Boolean) is_id4MKjpUYniHA(node, (SAbstractLink) parameters[0]));
       default:
         throw new BHMethodNotFoundException(this, method);
     }
@@ -121,5 +134,19 @@ public final class LinkDeclaration__BehaviorDescriptor extends BaseBHDescriptor 
   @Override
   public SAbstractConcept getConcept() {
     return CONCEPT;
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SReferenceLink specializedLink$7ZCN = MetaAdapterFactory.getReferenceLink(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979bd086aL, 0xf98051c244L, "specializedLink");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty role$Nsjf = MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979bd086aL, 0xf98052f333L, "role");
+    /*package*/ static final SProperty sourceCardinality$cxYK = MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979bd086aL, 0xf98054bb04L, "sourceCardinality");
+    /*package*/ static final SProperty metaClass$PeKc = MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979bd086aL, 0xf980556927L, "metaClass");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept AbstractConceptDeclaration$KA = MetaAdapterFactory.getConcept(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x1103553c5ffL, "jetbrains.mps.lang.structure.structure.AbstractConceptDeclaration");
   }
 }

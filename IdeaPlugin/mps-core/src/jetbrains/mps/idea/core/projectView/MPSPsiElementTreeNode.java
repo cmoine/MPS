@@ -60,7 +60,7 @@ public class MPSPsiElementTreeNode extends BasePsiNode<MPSPsiRootNode> {
 
   @Nullable
   @Override
-  protected Collection<AbstractTreeNode> getChildrenImpl() {
+  protected Collection<AbstractTreeNode<?>> getChildrenImpl() {
     return null;
   }
 

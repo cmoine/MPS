@@ -4,8 +4,6 @@ package jetbrains.mps.lang.quotation.generator.baseLanguage.template.util;
 
 import jetbrains.mps.generator.template.TemplateQueryContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class QuotationUtil {
   public QuotationUtil() {
@@ -19,14 +17,5 @@ public class QuotationUtil {
     }
     genContext.putTransientObject(quotation, id);
     return id.toString();
-  }
-  public static <K, V> ConcurrentMap<K, V> getBuilderMap(TemplateQueryContext genContext, SNode builder, String prefix) {
-    String key = "QUtil/" + prefix + "/" + builder.getNodeId();
-    ConcurrentMap<K, V> map = (ConcurrentMap<K, V>) genContext.getTransientObject(key);
-    if (map == null) {
-      map = new ConcurrentHashMap<K, V>();
-      genContext.putTransientObject(key, map);
-    }
-    return map;
   }
 }

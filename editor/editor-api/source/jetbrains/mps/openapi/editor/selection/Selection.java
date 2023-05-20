@@ -39,7 +39,11 @@ public interface Selection {
 
   boolean isSame(Selection another);
 
-  public boolean canExecuteAction(CellActionType type);
+  default boolean isExactlyCoveringCell(EditorCell cell) {
+    return false;
+  }
+
+  boolean canExecuteAction(CellActionType type);
 
   void executeAction(CellActionType type);
 
@@ -56,4 +60,13 @@ public interface Selection {
   List<SNode> getSelectedNodes();
 
   void ensureVisible();
+
+  void setDirection(SelectionDirection direction);
+
+  SelectionDirection getDirection();
+
+  enum SelectionDirection {
+    LEFT, RIGHT, NONE
+  }
+
 }

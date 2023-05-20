@@ -15,7 +15,6 @@
  */
 package jetbrains.mps.project;
 
-import jetbrains.mps.util.annotation.ToRemove;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.module.SModule;
@@ -23,8 +22,7 @@ import org.jetbrains.mps.openapi.module.SModule;
 /**
  * @deprecated see {@link jetbrains.mps.smodel.IOperationContext}
  */
-@Deprecated
-@ToRemove(version = 3.3)
+@Deprecated(since = "3.3", forRemoval = true)
 public class ProjectOperationContext extends StandaloneMPSContext {
   private Project myProject;
 

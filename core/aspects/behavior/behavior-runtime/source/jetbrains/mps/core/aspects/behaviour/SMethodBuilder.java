@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SAbstractType;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import jetbrains.mps.core.aspects.behaviour.api.SParameter;
+import jetbrains.mps.smodel.language.ConceptRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 
@@ -34,20 +35,37 @@ public final class SMethodBuilder<T> {
   private SModifiersImpl myModifiers;
   private final SAbstractType myReturnType;
   private SAbstractConcept myConcept;
+  @Deprecated
   private String myId64; // base = 64
   private BehaviorRegistry myRegistry;
+  private long myBaseMethodId;
+  private long myLangIdLo;
+  private long myLangIdHi;
 
   public SMethodBuilder(SAbstractType returnType) {
     myReturnType = returnType;
   }
 
+  @Deprecated
   public SMethod<T> build(SParameter... paramTypes) {
     return build(Arrays.asList(paramTypes));
   }
 
+  @Deprecated
   public SMethod<T> build(List<SParameter> paramTypes) {
     SMethodTrimmedId methodId = SMethodTrimmedId.create("", myModifiers.isVirtual() ? null : myConcept, myId64);
-    return SMethodImpl.create(myName, myModifiers, myReturnType, myConcept, methodId, myRegistry, paramTypes);
+    final BehaviorRegistry registry = myRegistry != null ? myRegistry : ConceptRegistry.getInstance().getBehaviorRegistry();
+    return SMethodImpl.create(myName, myModifiers, myReturnType, myConcept, methodId, registry, paramTypes);
+  }
+
+  public SMethod<T> build2(SParameter... paramTypes) {
+    return build2(Arrays.asList(paramTypes));
+  }
+
+  public SMethod<T> build2(List<SParameter> paramTypes) {
+    var methodId = SMethodIdV2.create("", myBaseMethodId, myLangIdHi ^ myLangIdLo);
+    final BehaviorRegistry registry = myRegistry != null ? myRegistry : ConceptRegistry.getInstance().getBehaviorRegistry();
+    return SMethodImpl.create(myName, myModifiers, myReturnType, myConcept, methodId, registry, paramTypes);
   }
 
   public SMethodBuilder<T> name(@NotNull String name) {
@@ -60,26 +78,37 @@ public final class SMethodBuilder<T> {
     return this;
   }
 
+  public SMethodBuilder<T> modifiers(int mask, @NotNull AccessPrivileges accessPrivileges) {
+    myModifiers = SModifiersImpl.create(mask, accessPrivileges);
+    return this;
+  }
+
   public SMethodBuilder<T> concept(@NotNull SAbstractConcept concept) {
     myConcept = concept;
     return this;
   }
 
+  @Deprecated
   public SMethodBuilder<T> id(@NotNull String id) {
     myId64 = id;
     return this;
   }
 
-  public SMethodBuilder<T> registry(@NotNull BehaviorRegistry registry) {
-    myRegistry = registry;
+  public SMethodBuilder<T> baseMethodId(long id) {
+    myBaseMethodId = id;
     return this;
   }
 
-  public int a() {
-    return 1;
+  public SMethodBuilder<T> languageId(long lo, long hi) {
+    myLangIdLo = lo;
+    myLangIdHi = hi;
+    return this;
   }
-  public <T1> T1 foo(T1 t) {
-    return (T1) ((Integer) a());
+
+  @Deprecated(since = "2019.3", forRemoval = true)
+  public SMethodBuilder<T> registry(@NotNull BehaviorRegistry registry) {
+    myRegistry = registry;
+    return this;
   }
 
   public static SParameter createVarArgPrm(Class<?> aClass, String name) {

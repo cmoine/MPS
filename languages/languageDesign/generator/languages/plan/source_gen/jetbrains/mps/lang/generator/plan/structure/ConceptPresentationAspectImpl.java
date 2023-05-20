@@ -4,33 +4,178 @@ package jetbrains.mps.lang.generator.plan.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_ApplyGenerators = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Checkpoint = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Plan = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Step = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Transform = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_ApplyGenerators;
+  private ConceptPresentation props_Checkpoint;
+  private ConceptPresentation props_CheckpointDeclaration;
+  private ConceptPresentation props_CheckpointSpecification;
+  private ConceptPresentation props_CheckpointSynchronization;
+  private ConceptPresentation props_ConceptListSelector;
+  private ConceptPresentation props_DeclaredCheckpointSpec;
+  private ConceptPresentation props_DocumentationLine;
+  private ConceptPresentation props_DocumentationStep;
+  private ConceptPresentation props_Fork;
+  private ConceptPresentation props_ForkSelector;
+  private ConceptPresentation props_InPlaceCheckpointRefSpec;
+  private ConceptPresentation props_InPlaceCheckpointSpec;
+  private ConceptPresentation props_IncludePlan;
+  private ConceptPresentation props_LanguageEntry;
+  private ConceptPresentation props_Plan;
+  private ConceptPresentation props_Step;
+  private ConceptPresentation props_TextDocLine;
+  private ConceptPresentation props_Transform;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.ApplyGenerators:
+        if (props_ApplyGenerators == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("Collection of generators to apply directly");
+          cpb.rawPresentation("ApplyGenerators");
+          props_ApplyGenerators = cpb.create();
+        }
         return props_ApplyGenerators;
-      case 1:
+      case LanguageConceptSwitch.Checkpoint:
+        if (props_Checkpoint == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("Synchronization point of a generation plan");
+          cpb.rawPresentation("persist/synchronize checkpoint");
+          props_Checkpoint = cpb.create();
+        }
         return props_Checkpoint;
-      case 2:
+      case LanguageConceptSwitch.CheckpointDeclaration:
+        if (props_CheckpointDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("Declaration of a checkpoint suitable for reuse, with no persistence/synchronization semantics attached.");
+          cpb.presentationByName();
+          props_CheckpointDeclaration = cpb.create();
+        }
+        return props_CheckpointDeclaration;
+      case LanguageConceptSwitch.CheckpointSpecification:
+        if (props_CheckpointSpecification == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_CheckpointSpecification = cpb.create();
+        }
+        return props_CheckpointSpecification;
+      case LanguageConceptSwitch.CheckpointSynchronization:
+        if (props_CheckpointSynchronization == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("Take external references associated with the given checkpoint");
+          cpb.rawPresentation("synchronize with checkpoint");
+          props_CheckpointSynchronization = cpb.create();
+        }
+        return props_CheckpointSynchronization;
+      case LanguageConceptSwitch.ConceptListSelector:
+        if (props_ConceptListSelector == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ConceptListSelector");
+          props_ConceptListSelector = cpb.create();
+        }
+        return props_ConceptListSelector;
+      case LanguageConceptSwitch.DeclaredCheckpointSpec:
+        if (props_DeclaredCheckpointSpec == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("use a pure checkpoint declared elsewhere");
+          cpb.presentationByReference(0x7ab1a6fa0a114b95L, 0x9e4875f363d6cb00L, 0x340cd07aed7cb2fdL, 0x340cd07aed7cb300L, "cpDecl", "", "");
+          props_DeclaredCheckpointSpec = cpb.create();
+        }
+        return props_DeclaredCheckpointSpec;
+      case LanguageConceptSwitch.DocumentationLine:
+        if (props_DocumentationLine == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_DocumentationLine = cpb.create();
+        }
+        return props_DocumentationLine;
+      case LanguageConceptSwitch.DocumentationStep:
+        if (props_DocumentationStep == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("document the plan");
+          cpb.rawPresentation("DocumentationStep");
+          props_DocumentationStep = cpb.create();
+        }
+        return props_DocumentationStep;
+      case LanguageConceptSwitch.Fork:
+        if (props_Fork == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("fork a new transformation branch with specified plan");
+          cpb.rawPresentation("fork");
+          props_Fork = cpb.create();
+        }
+        return props_Fork;
+      case LanguageConceptSwitch.ForkSelector:
+        if (props_ForkSelector == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_ForkSelector = cpb.create();
+        }
+        return props_ForkSelector;
+      case LanguageConceptSwitch.InPlaceCheckpointRefSpec:
+        if (props_InPlaceCheckpointRefSpec == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("reference another checkpoint step with in-place declaration");
+          cpb.presentationByReference(0x7ab1a6fa0a114b95L, 0x9e4875f363d6cb00L, 0x340cd07aed7cb32cL, 0x340cd07aed7cb32fL, "checkpoint", "", "");
+          props_InPlaceCheckpointRefSpec = cpb.create();
+        }
+        return props_InPlaceCheckpointRefSpec;
+      case LanguageConceptSwitch.InPlaceCheckpointSpec:
+        if (props_InPlaceCheckpointSpec == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("define checkpoint right here");
+          cpb.presentationByName();
+          props_InPlaceCheckpointSpec = cpb.create();
+        }
+        return props_InPlaceCheckpointSpec;
+      case LanguageConceptSwitch.IncludePlan:
+        if (props_IncludePlan == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("aggregate existing plan");
+          cpb.rawPresentation("include plan");
+          props_IncludePlan = cpb.create();
+        }
+        return props_IncludePlan;
+      case LanguageConceptSwitch.LanguageEntry:
+        if (props_LanguageEntry == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("LanguageEntry");
+          props_LanguageEntry = cpb.create();
+        }
+        return props_LanguageEntry;
+      case LanguageConceptSwitch.Plan:
+        if (props_Plan == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("Sequence of transformation steps");
+          cpb.presentationByName();
+          props_Plan = cpb.create();
+        }
         return props_Plan;
-      case 3:
+      case LanguageConceptSwitch.Step:
+        if (props_Step == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_Step = cpb.create();
+        }
         return props_Step;
-      case 4:
+      case LanguageConceptSwitch.TextDocLine:
+        if (props_TextDocLine == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TextDocLine");
+          props_TextDocLine = cpb.create();
+        }
+        return props_TextDocLine;
+      case LanguageConceptSwitch.Transform:
+        if (props_Transform == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("Collection of languages to reduce (iow, generators to apply)");
+          cpb.rawPresentation("Transform");
+          props_Transform = cpb.create();
+        }
         return props_Transform;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

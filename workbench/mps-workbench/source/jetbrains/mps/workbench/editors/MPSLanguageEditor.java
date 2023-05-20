@@ -21,13 +21,10 @@ import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.fileEditor.FileEditorLocation;
 import com.intellij.openapi.fileEditor.FileEditorState;
 import com.intellij.openapi.fileEditor.FileEditorStateLevel;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.UserDataHolderBase;
+import com.intellij.openapi.vfs.VirtualFile;
 import jetbrains.mps.ide.hierarchy.LanguageHierarchiesComponent;
-import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.project.MPSProject;
-import jetbrains.mps.project.ProjectOperationContext;
-import jetbrains.mps.smodel.ModelAccess;
 import jetbrains.mps.workbench.languagesFs.MPSLanguageVirtualFile;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -40,10 +37,16 @@ public class MPSLanguageEditor extends UserDataHolderBase implements FileEditor 
   private final MPSLanguageVirtualFile myFile;
   private final LanguageHierarchiesComponent myHierarchiesComponent;
 
-  public MPSLanguageEditor(final MPSProject project, final MPSLanguageVirtualFile file) {
+  public MPSLanguageEditor(final MPSProject project, @NotNull MPSLanguageVirtualFile file) {
     myFile = file;
     myHierarchiesComponent = new LanguageHierarchiesComponent(myFile.getLanguage(), project);
     myHierarchiesComponent.rebuild();
+  }
+
+  @Override
+  @NotNull
+  public VirtualFile getFile() {
+    return myFile;
   }
 
   @Override
@@ -68,12 +71,7 @@ public class MPSLanguageEditor extends UserDataHolderBase implements FileEditor 
   @Override
   @NotNull
   public FileEditorState getState(@NotNull FileEditorStateLevel level) {
-    return new FileEditorState() {
-      @Override
-      public boolean canBeMergedWith(FileEditorState otherState, FileEditorStateLevel level) {
-        return false;
-      }
-    };
+    return (otherState, level1) -> false;
   }
 
   @Override

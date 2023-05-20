@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +15,12 @@
  */
 package jetbrains.mps.ide.messages.navigation;
 
-import com.intellij.openapi.components.AbstractProjectComponent;
 import com.intellij.openapi.project.Project;
 import jetbrains.mps.ide.navigation.NavigatableFactory;
+import jetbrains.mps.ide.project.ProjectHelper;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.messages.IMessage;
 import jetbrains.mps.project.MPSProject;
-import jetbrains.mps.util.annotation.ToRemove;
-import org.apache.log4j.LogManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +28,11 @@ import java.util.List;
 /**
  * Facilitate navigation to different kinds of {@link IMessage#getHintObject() hint objects} from {@link IMessage}.
  */
-public class NavigationManager extends AbstractProjectComponent {
-  private final List<NavigatableFactory> myHandlers = new ArrayList<NavigatableFactory>();
+public class NavigationManager  {
+  private final List<NavigatableFactory> myHandlers = new ArrayList<>();
 
-  public NavigationManager(Project ideaProject, MPSProject mpsProject) {
-    super(ideaProject);
+  public NavigationManager(Project ideaProject) {
+    MPSProject mpsProject = ProjectHelper.fromIdeaProject(ideaProject);
     myHandlers.add(new FileWithPositionNavigationHandler(ideaProject));
     myHandlers.add(new FileWithLogicalPositionNavigationHandler(ideaProject));
     myHandlers.add(new NodePointerNavigationHandler(mpsProject));
@@ -49,15 +48,6 @@ public class NavigationManager extends AbstractProjectComponent {
   }
 
   /**
-   * @deprecated use {@link #navigateTo(Object,boolean)} instead
-   */
-  @Deprecated
-  @ToRemove(version = 3.4)
-  public void navigateTo(Project project, Object o, boolean focus, boolean select) {
-    navigateTo(o, focus);
-  }
-
-  /**
    * There's no requirement about model read or EDT thread.
    * @param o hint object that (usually) describes origin/location of a message
    * @param focus <code>false</code> is handy when user navigates through messages using keyboard, and would like to stay in messages view
@@ -65,7 +55,7 @@ public class NavigationManager extends AbstractProjectComponent {
   public void navigateTo(Object o, boolean focus) {
     final List<NavigatableFactory> handlers = getHandlers(o);
     if (handlers.isEmpty()) {
-      LogManager.getLogger(NavigationManager.class).warn("Can't navigate to " + o + ". There is no navigation handler for it.");
+      Logger.getLogger(NavigationManager.class).warning(String.format("Can't navigate to %s. There is no navigation handler for it.", o));
       return;
     }
     for (NavigatableFactory h : handlers) {
@@ -74,7 +64,7 @@ public class NavigationManager extends AbstractProjectComponent {
   }
 
   private List<NavigatableFactory> getHandlers(Object o) {
-    ArrayList<NavigatableFactory> result = new ArrayList<NavigatableFactory>(4);
+    ArrayList<NavigatableFactory> result = new ArrayList<>(4);
     for (NavigatableFactory f : myHandlers) {
       if (f.canCreate(o)) {
         result.add(f);

@@ -4,78 +4,173 @@ package jetbrains.mps.baseLanguage.unitTest.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_AfterTest = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AssertEquals = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AssertFalse = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AssertInNotNull = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AssertIsNull = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AssertSame = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AssertThrows = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AssertTrue = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BTestCase = new ConceptPresentationBuilder().icon(IconContainer.RESOURCE_a0a0i).create();
-  private final ConceptPresentation props_BeforeTest = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BinaryAssert = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Fail = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ITestCase = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ITestMethod = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ITestable = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Message = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MessageHolder = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PrepareMethod = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestMethod = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestMethodList = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_AfterTest;
+  private ConceptPresentation props_AssertEquals;
+  private ConceptPresentation props_AssertFalse;
+  private ConceptPresentation props_AssertIsNotNull;
+  private ConceptPresentation props_AssertIsNull;
+  private ConceptPresentation props_AssertSame;
+  private ConceptPresentation props_AssertThrows;
+  private ConceptPresentation props_AssertTrue;
+  private ConceptPresentation props_BTestCase;
+  private ConceptPresentation props_BeforeTest;
+  private ConceptPresentation props_BinaryAssert;
+  private ConceptPresentation props_Fail;
+  private ConceptPresentation props_ITestCase;
+  private ConceptPresentation props_ITestMethod;
+  private ConceptPresentation props_ITestable;
+  private ConceptPresentation props_Message;
+  private ConceptPresentation props_MessageHolder;
+  private ConceptPresentation props_PrepareMethod;
+  private ConceptPresentation props_TestMethod;
+  private ConceptPresentation props_TestMethodList;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.AfterTest:
+        if (props_AfterTest == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("afterTest");
+          props_AfterTest = cpb.create();
+        }
         return props_AfterTest;
-      case 1:
+      case LanguageConceptSwitch.AssertEquals:
+        if (props_AssertEquals == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("assert equals");
+          props_AssertEquals = cpb.create();
+        }
         return props_AssertEquals;
-      case 2:
+      case LanguageConceptSwitch.AssertFalse:
+        if (props_AssertFalse == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("assert false");
+          props_AssertFalse = cpb.create();
+        }
         return props_AssertFalse;
-      case 3:
-        return props_AssertInNotNull;
-      case 4:
+      case LanguageConceptSwitch.AssertIsNotNull:
+        if (props_AssertIsNotNull == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("assert is not null");
+          props_AssertIsNotNull = cpb.create();
+        }
+        return props_AssertIsNotNull;
+      case LanguageConceptSwitch.AssertIsNull:
+        if (props_AssertIsNull == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("assert is null");
+          props_AssertIsNull = cpb.create();
+        }
         return props_AssertIsNull;
-      case 5:
+      case LanguageConceptSwitch.AssertSame:
+        if (props_AssertSame == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("assert same (\"==\")");
+          props_AssertSame = cpb.create();
+        }
         return props_AssertSame;
-      case 6:
+      case LanguageConceptSwitch.AssertThrows:
+        if (props_AssertThrows == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("assert throws");
+          props_AssertThrows = cpb.create();
+        }
         return props_AssertThrows;
-      case 7:
+      case LanguageConceptSwitch.AssertTrue:
+        if (props_AssertTrue == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("assert true");
+          props_AssertTrue = cpb.create();
+        }
         return props_AssertTrue;
-      case 8:
+      case LanguageConceptSwitch.BTestCase:
+        if (props_BTestCase == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.icon(IconContainer.RESOURCE_a0a2a0a8b0v);
+          props_BTestCase = cpb.create();
+        }
         return props_BTestCase;
-      case 9:
+      case LanguageConceptSwitch.BeforeTest:
+        if (props_BeforeTest == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("beforeTest");
+          props_BeforeTest = cpb.create();
+        }
         return props_BeforeTest;
-      case 10:
+      case LanguageConceptSwitch.BinaryAssert:
+        if (props_BinaryAssert == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_BinaryAssert = cpb.create();
+        }
         return props_BinaryAssert;
-      case 11:
+      case LanguageConceptSwitch.Fail:
+        if (props_Fail == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("fail");
+          props_Fail = cpb.create();
+        }
         return props_Fail;
-      case 12:
+      case LanguageConceptSwitch.ITestCase:
+        if (props_ITestCase == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_ITestCase = cpb.create();
+        }
         return props_ITestCase;
-      case 13:
+      case LanguageConceptSwitch.ITestMethod:
+        if (props_ITestMethod == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_ITestMethod = cpb.create();
+        }
         return props_ITestMethod;
-      case 14:
+      case LanguageConceptSwitch.ITestable:
+        if (props_ITestable == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_ITestable = cpb.create();
+        }
         return props_ITestable;
-      case 15:
+      case LanguageConceptSwitch.Message:
+        if (props_Message == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("message");
+          props_Message = cpb.create();
+        }
         return props_Message;
-      case 16:
+      case LanguageConceptSwitch.MessageHolder:
+        if (props_MessageHolder == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_MessageHolder = cpb.create();
+        }
         return props_MessageHolder;
-      case 17:
+      case LanguageConceptSwitch.PrepareMethod:
+        if (props_PrepareMethod == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_PrepareMethod = cpb.create();
+        }
         return props_PrepareMethod;
-      case 18:
+      case LanguageConceptSwitch.TestMethod:
+        if (props_TestMethod == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_TestMethod = cpb.create();
+        }
         return props_TestMethod;
-      case 19:
+      case LanguageConceptSwitch.TestMethodList:
+        if (props_TestMethodList == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestMethodList");
+          props_TestMethodList = cpb.create();
+        }
         return props_TestMethodList;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

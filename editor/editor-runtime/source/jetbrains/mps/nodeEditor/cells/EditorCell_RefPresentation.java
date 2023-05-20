@@ -16,27 +16,45 @@
 package jetbrains.mps.nodeEditor.cells;
 
 import jetbrains.mps.openapi.editor.EditorContext;
-import jetbrains.mps.smodel.constraints.ModelConstraints;
-import jetbrains.mps.util.EqualUtil;
+import jetbrains.mps.smodel.action.IReferentPresentationProvider;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 import org.jetbrains.mps.openapi.model.SNode;
-import org.jetbrains.mps.openapi.model.SReference;
 
-public class EditorCell_RefPresentation {
+import java.util.Objects;
 
-  public static EditorCell_Property create(EditorContext context, SNode node, SNode refNode, String role) {
-    MyAccessor accessor = new MyAccessor(node, refNode, role);
+public final class EditorCell_RefPresentation {
+
+  private EditorCell_RefPresentation() {
+  }
+
+  private static SReferenceLink getLinkByRole(SConcept concept, String role) {
+    for (SReferenceLink link : concept.getReferenceLinks()) {
+      if (link.getName().equals(role)) {
+        return link;
+      }
+    }
+    return null;
+  }
+
+  @NotNull
+  public static EditorCell_Property create(@NotNull EditorContext context, @NotNull SNode node, @Nullable SNode refNode,
+                                           @NotNull IReferentPresentationProvider presentationProvider) {
+    MyAccessor accessor = new MyAccessor(node, refNode, presentationProvider);
     return EditorCell_Property.create(context, accessor, node);
   }
 
   private static class MyAccessor implements ModelAccessor {
     private SNode myNode;
     private SNode myRefNode;
-    private String myRole;
+    private IReferentPresentationProvider myPresentationProvider;
 
-    public MyAccessor(SNode node, SNode refNode, String role) {
+    MyAccessor(SNode node, SNode refNode, IReferentPresentationProvider presentationProvider) {
       myNode = node;
       myRefNode = refNode;
-      myRole = role;
+      myPresentationProvider = presentationProvider;
     }
 
     @Override
@@ -44,16 +62,7 @@ public class EditorCell_RefPresentation {
       if (myRefNode == null) {
         return null;
       }
-      SReference ref = myRefNode.getReference(myRole);
-      if(ref == null) {
-        // FIXME throw exception if reference is null
-        return myNode.getPresentation();
-      }
-      String presentation = ModelConstraints.getReferenceDescriptor(ref).getReferencePresentation(myNode, true, false, true);
-      if (presentation == null) {
-        return myNode.getPresentation();
-      }
-      return presentation;
+      return myPresentationProvider.getPresentation(myRefNode, myNode);
     }
 
     @Override
@@ -62,7 +71,7 @@ public class EditorCell_RefPresentation {
 
     @Override
     public boolean isValidText(String text) {
-      return EqualUtil.equals(getText(), text);
+      return Objects.equals(getText(), text);
     }
   }
 }

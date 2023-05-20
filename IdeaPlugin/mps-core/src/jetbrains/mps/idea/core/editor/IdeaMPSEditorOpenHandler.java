@@ -15,9 +15,10 @@
  */
 package jetbrains.mps.idea.core.editor;
 
+import com.intellij.openapi.project.Project;
 import jetbrains.mps.ide.editor.NodeEditorFactoryBase;
+import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.openapi.editor.Editor;
-import jetbrains.mps.project.Project;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SNode;
 
@@ -38,7 +39,7 @@ public class IdeaMPSEditorOpenHandler extends NodeEditorFactoryBase {
 
   @Override
   public Editor create(@NotNull Context context) {
-    return new IdeaNodeEditor(myProject, context.getNode());
+    return new IdeaNodeEditor(ProjectHelper.fromIdeaProject(myProject), context.getNode());
   }
 
   @Override

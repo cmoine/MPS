@@ -37,7 +37,7 @@ public final class ConceptInLoadingStorage<T> {
   private final ThreadLocal<Set<T>> mySet = new ThreadLocal<Set<T>>() {
     @Override
     protected Set<T> initialValue() {
-      return new HashSet<T>();
+      return new HashSet<>();
     }
   };
 
@@ -46,7 +46,6 @@ public final class ConceptInLoadingStorage<T> {
    * @return true iff loading has been started successfully (i.e. the concept is not already in a loading state)
    */
   public boolean startLoading(@NotNull T concept) {
-//    return true;
     return mySet.get().add(concept);
   }
 

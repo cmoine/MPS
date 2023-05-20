@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ import com.intellij.ui.CheckedTreeNode;
 import com.intellij.ui.ColoredSideBorder;
 import com.intellij.ui.ColoredTreeCellRenderer;
 import com.intellij.ui.JBColor;
-import com.intellij.ui.LayeredIcon;
 import jetbrains.mps.generator.impl.RuleUtil;
 import jetbrains.mps.icons.MPSIcons.Nodes;
 import jetbrains.mps.icons.MPSIcons.Nodes.Models;
@@ -34,10 +33,7 @@ import jetbrains.mps.project.structure.modules.mappingpriorities.MappingConfig_R
 import jetbrains.mps.project.structure.modules.mappingpriorities.MappingConfig_RefSet;
 import jetbrains.mps.project.structure.modules.mappingpriorities.MappingConfig_SimpleRef;
 import jetbrains.mps.smodel.Generator;
-import jetbrains.mps.smodel.MPSModuleRepository;
-import jetbrains.mps.smodel.ModelAccess;
 import jetbrains.mps.smodel.SNodePointer;
-import jetbrains.mps.util.Computable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SModelReference;
@@ -45,6 +41,7 @@ import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SModuleReference;
+import org.jetbrains.mps.openapi.module.SRepository;
 import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
 
 import javax.swing.BorderFactory;
@@ -61,6 +58,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class GeneratorPrioritiesTree {
 
@@ -68,19 +66,18 @@ public class GeneratorPrioritiesTree {
   private CheckboxTree myCheckboxTree;
 
   // FIXME isRight = !isLeft, depGenerators used only when isRight - bloody sh!t. Why not initTree is package local, so that caller could configure this Tree(?!) as needed?
-  public GeneratorPrioritiesTree(@NotNull final Generator generator, @NotNull MappingConfig_AbstractRef mapping, boolean isLeft, final Set<SModuleReference> depGenerators) {
-    myRootNode = new CheckedTreeNodeEx(null, "Generators", createRootIcon());
+  public GeneratorPrioritiesTree(@NotNull final SRepository repo, @NotNull final Generator generator, @NotNull MappingConfig_AbstractRef mapping,
+                                 boolean isLeft, final Set<SModuleReference> depGenerators) {
+    myRootNode = new CheckedTreeNodeEx(null, "Generators", Nodes.Generator);
     final boolean isRight = !isLeft;
 
-    ModelAccess.instance().runReadAction(new Runnable() {
-      @Override
-      public void run() {
-        initTree(generator);
-        if (isRight) {
-          for (SModuleReference ref : depGenerators) {
-            SModule gen = ref.resolve(MPSModuleRepository.getInstance());
-            if (gen instanceof Generator)
-              initTree((Generator) gen);
+    repo.getModelAccess().runReadAction(() -> {
+      initTree(generator);
+      if (isRight) {
+        for (SModuleReference ref : depGenerators) {
+          SModule gen = ref.resolve(repo);
+          if (gen instanceof Generator) {
+            initTree((Generator) gen);
           }
         }
       }
@@ -91,9 +88,15 @@ public class GeneratorPrioritiesTree {
     myCheckboxTree = new CheckboxTree(getCheckboxTreeCellRenderer(), myRootNode, new CheckPolicy(true, true, false, true));
     myCheckboxTree.addFocusListener(new FocusListener() {
       @Override
-      public void focusGained(FocusEvent e) { if(myCheckboxTree.getSelectionCount() == 0) myCheckboxTree.setSelectionRow(0); }
+      public void focusGained(FocusEvent e) {
+        if (myCheckboxTree.getSelectionCount() == 0) {
+          myCheckboxTree.setSelectionRow(0);
+        }
+      }
+
       @Override
-      public void focusLost(FocusEvent e) {}
+      public void focusLost(FocusEvent e) {
+      }
     });
     myCheckboxTree.setRootVisible(isRight);
     expandAllRows(myCheckboxTree);
@@ -175,7 +178,7 @@ public class GeneratorPrioritiesTree {
       CheckedTreeNodeEx child = (CheckedTreeNodeEx) children.nextElement();
 
       if (child.getUserObject().equals(modRef)) {
-        if (mapping.getNodeID().equals("*")) {
+        if (mapping.includesAll()) {
           child.setChecked(true);
         } else {
           setCheckedStateForNode(child, mapping);
@@ -198,11 +201,7 @@ public class GeneratorPrioritiesTree {
 
   public MappingConfig_AbstractRef getEditResult() {
     setCheckedUnder(myRootNode);
-    return ModelAccess.instance().runReadAction(new Computable<MappingConfig_AbstractRef>() {
-      public MappingConfig_AbstractRef compute() {
-        return getRootMapping();
-      }
-    });
+    return getRootMapping();
   }
 
   private MappingConfig_AbstractRef getRootMapping() {
@@ -278,13 +277,11 @@ public class GeneratorPrioritiesTree {
   }
 
   private static boolean setCheckedUnder(CheckedTreeNodeEx root) {
-    boolean childChecks = false;
-    Enumeration<CheckedTreeNodeEx> children = root.children();
-    while (children.hasMoreElements()) {
-      CheckedTreeNodeEx child = children.nextElement();
-      childChecks = childChecks | setCheckedUnder(child);
-    }
-    boolean checksUnder = root.isChecked() || childChecks;
+    AtomicBoolean childChecks = new AtomicBoolean(false);
+    Collections.list(root.children()).forEach(child -> {
+      childChecks.set(childChecks.get() | setCheckedUnder(((CheckedTreeNodeEx) child)));
+    });
+    boolean checksUnder = root.isChecked() || childChecks.get();
     root.setChecksUnder(checksUnder);
     return checksUnder;
   }
@@ -300,6 +297,7 @@ public class GeneratorPrioritiesTree {
   public static CheckboxTreeCellRenderer getCheckboxTreeCellRenderer() {
     return getCheckboxTreeCellRenderer(true);
   }
+
   public static CheckboxTreeCellRenderer getCheckboxTreeCellRenderer(final boolean withCheckboxes) {
     return new CheckboxTreeCellRenderer() {
       @Override
@@ -317,43 +315,36 @@ public class GeneratorPrioritiesTree {
           checkBox.setSelected(checkedTreeNode.isChecked());
           checkBox.setVisible(withCheckboxes);
 
-          if(checkedTreeNode.equals(tree.getModel().getRoot())) {
-            if(!GeneratorPrioritiesTree.setCheckedUnder(checkedTreeNode))
+          if (checkedTreeNode.equals(tree.getModel().getRoot())) {
+            if (!GeneratorPrioritiesTree.setCheckedUnder(checkedTreeNode)) {
               tree.setBorder(new ColoredSideBorder(JBColor.RED, JBColor.RED, JBColor.RED, JBColor.RED, 1));
-            else
+            } else {
               tree.setBorder(BorderFactory.createEmptyBorder());
+            }
           }
         }
       }
     };
   }
 
-  public static final void expandAllRows(JTree tree) {
+  public static void expandAllRows(JTree tree) {
     for (int i = 0; i < tree.getRowCount(); i++) {
       tree.expandRow(i);
     }
   }
 
   private static void checkChildren(CheckboxTree checkboxTree) {
-    if(checkboxTree.getModel().getRoot() instanceof CheckedTreeNodeEx) {
-      Queue<CheckedTreeNodeEx> treeNodes = new LinkedList<CheckedTreeNodeEx>();
+    if (checkboxTree.getModel().getRoot() instanceof CheckedTreeNodeEx) {
+      Queue<CheckedTreeNodeEx> treeNodes = new LinkedList<>();
       treeNodes.add((CheckedTreeNodeEx) checkboxTree.getModel().getRoot());
       while (!treeNodes.isEmpty()) {
         CheckedTreeNodeEx treeNode = treeNodes.poll();
-        treeNodes.addAll(Collections.list(treeNode.children()));
-        if(treeNode.getParent() instanceof CheckedTreeNodeEx && ((CheckedTreeNodeEx)treeNode.getParent()).isChecked()) {
+        treeNodes.addAll((List)Collections.list(treeNode.children()));
+        if (treeNode.getParent() instanceof CheckedTreeNodeEx && ((CheckedTreeNodeEx) treeNode.getParent()).isChecked()) {
           treeNode.setChecked(true);
         }
       }
     }
-  }
-
-  private static Icon createRootIcon() {
-    LayeredIcon layeredIcon = new LayeredIcon(3);
-    layeredIcon.setIcon(Nodes.Generator, 0, +2, -2);
-    layeredIcon.setIcon(Nodes.Generator, 1, 0, 0);
-    layeredIcon.setIcon(Nodes.Generator, 2, -2, +2);
-    return layeredIcon;
   }
 
   private static class CheckedTreeNodeEx extends CheckedTreeNode {
@@ -390,7 +381,7 @@ public class GeneratorPrioritiesTree {
     }
 
     /*package*/ List<CheckedTreeNodeEx> getChildrenWithChecks() {
-      List<CheckedTreeNodeEx> result = new ArrayList<CheckedTreeNodeEx>();
+      List<CheckedTreeNodeEx> result = new ArrayList<>();
       Enumeration children = children();
       while (children.hasMoreElements()) {
         CheckedTreeNodeEx child = (CheckedTreeNodeEx) children.nextElement();

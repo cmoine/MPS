@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,9 +34,7 @@ import jetbrains.mps.openapi.editor.Editor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.cells.EditorCell_Collection;
 import jetbrains.mps.project.MPSProject;
-import jetbrains.mps.project.ProjectOperationContext;
 import jetbrains.mps.smodel.SNodePointer;
-import jetbrains.mps.util.annotation.ToRemove;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeReference;
@@ -64,35 +62,17 @@ public class MPSEditorOpener {
         }
       }
     }
-    Editor nodeEditor = legacyCreateEditorFor(node);
-    if (nodeEditor != null) {
-      return nodeEditor;
-    }
     return new NodeEditor(myProject, node);
   }
 
-  @ToRemove(version = 3.4)
-  private Editor legacyCreateEditorFor(SNode node) {
-    ProjectOperationContext operationContext = new ProjectOperationContext(myProject);
-    for (EditorOpenHandler handler : EditorOpenHandler.EP_OPEN_HANDLERS.getExtensions()) {
-      if (handler.canOpen(operationContext, node)) {
-        Editor nodeEditor = handler.open(operationContext, node);
-        if (nodeEditor != null) {
-          return nodeEditor;
-        }
-      }
-    }
-    return null;
-  }
-
   /**
-   * Requires: model write, EDT.
+   * Requires: model read, EDT.
    */
   public Editor openNode(@NotNull final SNode node, final boolean focus, final boolean select) {
     ThreadUtils.assertEDT();
-    myProject.getModelAccess().checkWriteAccess();
+    myProject.getModelAccess().checkReadAccess();
 
-    myProject.getComponent(IdeDocumentHistory.class).includeCurrentCommandAsNavigation();
+    myProject.getProject().getService(IdeDocumentHistory.class).includeCurrentCommandAsNavigation();
     /* TODO use SNodeReference instead of SNode */
     return doOpenNode(node, focus, select);
   }

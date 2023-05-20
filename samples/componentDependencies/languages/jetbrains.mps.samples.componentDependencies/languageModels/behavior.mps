@@ -2,7 +2,7 @@
 <model ref="r:2b855002-fb92-4fa1-acaa-ec457490e763(jetbrains.mps.samples.componentDependencies.behavior)">
   <persistence version="9" />
   <languages>
-    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="0" />
+    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="2" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -105,7 +105,7 @@
             <node concept="2OqwBi" id="7SUlOxgzCTv" role="2Oq$k0">
               <node concept="13iPFW" id="7SUlOxgzCTw" role="2Oq$k0" />
               <node concept="3Tsc0h" id="7SUlOxgzCTx" role="2OqNvi">
-                <ref role="3TtcxE" to="ktbj:5pu6noS56YC" />
+                <ref role="3TtcxE" to="ktbj:5pu6noS56YC" resolve="component" />
               </node>
             </node>
             <node concept="3goQfb" id="7SUlOxgzCTy" role="2OqNvi">
@@ -117,7 +117,7 @@
                         <ref role="3cqZAo" node="7SUlOxgzCTD" resolve="it" />
                       </node>
                       <node concept="3Tsc0h" id="7SUlOxgzCTC" role="2OqNvi">
-                        <ref role="3TtcxE" to="ktbj:5pu6noS5f57" />
+                        <ref role="3TtcxE" to="ktbj:5pu6noS5f57" resolve="dep" />
                       </node>
                     </node>
                   </node>

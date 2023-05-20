@@ -1,95 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1163670490218:jetbrains.mps.baseLanguage.structure.SwitchStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1164991038168:jetbrains.mps.baseLanguage.structure.ThrowStatement" />
   <root>
-    <file name="AbstractCommand_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.AbstractCommand_BehaviorDescriptor" />
-    </file>
     <file name="BehaviorAspectDescriptor.java">
-      <unit at="13,0,41,0" name="jetbrains.mps.samples.Kaja.behavior.BehaviorAspectDescriptor" />
+      <unit at="14,0,32,0" name="jetbrains.mps.samples.Kaja.behavior.BehaviorAspectDescriptor" />
     </file>
-    <file name="CommandList_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.CommandList_BehaviorDescriptor" />
-    </file>
-    <file name="CommentLine_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.CommentLine_BehaviorDescriptor" />
-    </file>
-    <file name="Direction_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.Direction_BehaviorDescriptor" />
-    </file>
-    <file name="Drop_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.Drop_BehaviorDescriptor" />
-    </file>
-    <file name="East_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.East_BehaviorDescriptor" />
-    </file>
-    <file name="EmptyLine_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.EmptyLine_BehaviorDescriptor" />
-    </file>
-    <file name="Heading_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.Heading_BehaviorDescriptor" />
-    </file>
-    <file name="IfStatement_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.IfStatement_BehaviorDescriptor" />
-    </file>
-    <file name="IsFull_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.IsFull_BehaviorDescriptor" />
-    </file>
-    <file name="IsMark_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.IsMark_BehaviorDescriptor" />
-    </file>
-    <file name="IsWall_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.IsWall_BehaviorDescriptor" />
-    </file>
-    <file name="LeftTurn_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.LeftTurn_BehaviorDescriptor" />
-    </file>
-    <file name="Library_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.Library_BehaviorDescriptor" />
-    </file>
-    <file name="LogicalExpression_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.LogicalExpression_BehaviorDescriptor" />
-    </file>
-    <file name="Looking_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.Looking_BehaviorDescriptor" />
-    </file>
-    <file name="North_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.North_BehaviorDescriptor" />
-    </file>
-    <file name="Not_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.Not_BehaviorDescriptor" />
-    </file>
-    <file name="Pick_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.Pick_BehaviorDescriptor" />
-    </file>
-    <file name="Repeat_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.Repeat_BehaviorDescriptor" />
-    </file>
-    <file name="Require_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.Require_BehaviorDescriptor" />
-    </file>
-    <file name="RoutineCall_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.RoutineCall_BehaviorDescriptor" />
-    </file>
-    <file name="RoutineDefinition_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.RoutineDefinition_BehaviorDescriptor" />
-    </file>
-    <file name="Script_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.Script_BehaviorDescriptor" />
-    </file>
-    <file name="South_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.South_BehaviorDescriptor" />
-    </file>
-    <file name="Step_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.Step_BehaviorDescriptor" />
-    </file>
-    <file name="TraceMessage_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.TraceMessage_BehaviorDescriptor" />
-    </file>
-    <file name="West_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.West_BehaviorDescriptor" />
-    </file>
-    <file name="While_BehaviorDescriptor.java">
-      <unit at="11,0,17,0" name="jetbrains.mps.samples.Kaja.behavior.While_BehaviorDescriptor" />
+  </root>
+  <root nodeRef="r:9461eebf-33f0-4947-a908-658b211e1611(jetbrains.mps.samples.Kaja.behavior)/291854204099785079">
+    <file name="CommentLine__BehaviorDescriptor.java">
+      <node id="291854204099785079" at="25,0,26,0" concept="6" trace="CONCEPT" />
+      <node id="291854204099785079" at="27,0,28,0" concept="6" trace="getTextualRepresentation_idfB3l80ylIb" />
+      <node id="291854204099785079" at="28,0,29,0" concept="6" trace="isTODOComment_idfB3l7ZufMD" />
+      <node id="291854204099785079" at="30,0,31,0" concept="6" trace="BH_METHODS" />
+      <node id="291854204099785174" at="35,96,36,77" concept="5" />
+      <node id="291854204099794698" at="38,86,39,294" concept="5" />
+      <node id="291854204099785079" at="46,114,47,21" concept="1" />
+      <node id="291854204099785079" at="51,114,52,49" concept="4" />
+      <node id="291854204099785079" at="53,26,54,56" concept="9" />
+      <node id="291854204099785079" at="57,13,58,74" concept="5" />
+      <node id="291854204099785079" at="59,13,60,64" concept="5" />
+      <node id="291854204099785079" at="61,14,62,58" concept="9" />
+      <node id="291854204099785079" at="67,128,68,49" concept="4" />
+      <node id="291854204099785079" at="69,26,70,56" concept="9" />
+      <node id="291854204099785079" at="73,14,74,58" concept="9" />
+      <node id="291854204099785079" at="80,48,81,22" concept="5" />
+      <node id="291854204099785079" at="86,40,87,19" concept="5" />
+      <node id="291854204099803395" at="89,56,90,45" concept="5" />
+      <node id="291854204099785079" at="94,0,95,0" concept="6" trace="text$nAoW" />
+      <node id="291854204099785079" at="98,0,99,0" concept="6" trace="IGenericComment$bD" />
+      <node id="291854204099785079" at="32,0,34,0" concept="7" trace="___init___#(Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <node id="291854204099785079" at="42,0,44,0" concept="0" trace="CommentLine__BehaviorDescriptor#()V" />
+      <node id="291854204099785079" at="35,0,38,0" concept="7" trace="getTextualRepresentation_idfB3l80ylIb#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
+      <node id="291854204099785079" at="38,0,41,0" concept="7" trace="isTODOComment_idfB3l7ZufMD#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="291854204099785079" at="52,49,55,5" concept="2" />
+      <node id="291854204099785079" at="68,49,71,5" concept="2" />
+      <node id="291854204099803395" at="89,0,92,0" concept="7" trace="trim_jfe8uy_a0a0a0k#(Ljava/lang/String;)Ljava/lang/String;" />
+      <node id="291854204099785079" at="45,0,49,0" concept="3" trace="initNode#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/core/aspects/behaviour/api/SConstructor;[Ljava/lang/Object;)V" />
+      <node id="291854204099785079" at="71,5,75,5" concept="8" />
+      <node id="291854204099785079" at="78,0,83,0" concept="3" trace="getDeclaredMethods#()Ljava/util/List;" />
+      <node id="291854204099785079" at="84,0,89,0" concept="3" trace="getConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="291854204099785079" at="55,5,63,5" concept="8" />
+      <node id="291854204099785079" at="66,0,77,0" concept="3" trace="invokeSpecial0#(Lorg/jetbrains/mps/openapi/language/SAbstractConcept;Ljetbrains/mps/core/aspects/behaviour/api/SMethod;[Ljava/lang/Object;)null" />
+      <node id="291854204099785079" at="50,0,65,0" concept="3" trace="invokeSpecial0#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/core/aspects/behaviour/api/SMethod;[Ljava/lang/Object;)null" />
+      <scope id="291854204099785079" at="32,63,32,63" />
+      <scope id="291854204099785079" at="42,49,42,49" />
+      <scope id="291854204099785171" at="35,96,36,77" />
+      <scope id="291854204099794693" at="38,86,39,294" />
+      <scope id="291854204099785079" at="46,114,47,21" />
+      <scope id="291854204099785079" at="53,26,54,56" />
+      <scope id="291854204099785079" at="57,13,58,74" />
+      <scope id="291854204099785079" at="59,13,60,64" />
+      <scope id="291854204099785079" at="61,14,62,58" />
+      <scope id="291854204099785079" at="69,26,70,56" />
+      <scope id="291854204099785079" at="73,14,74,58" />
+      <scope id="291854204099785079" at="80,48,81,22" />
+      <scope id="291854204099785079" at="86,40,87,19" />
+      <scope id="291854204099803395" at="89,56,90,45" />
+      <scope id="291854204099785079" at="32,0,34,0">
+        <var name="__thisNode__" id="291854204099785079" />
+      </scope>
+      <scope id="291854204099785079" at="42,0,44,0" />
+      <scope id="291854204099785079" at="35,0,38,0">
+        <var name="__thisNode__" id="291854204099785079" />
+      </scope>
+      <scope id="291854204099785079" at="38,0,41,0">
+        <var name="__thisNode__" id="291854204099785079" />
+      </scope>
+      <scope id="291854204099803395" at="89,0,92,0">
+        <var name="str" id="291854204099803395" />
+      </scope>
+      <scope id="291854204099785079" at="45,0,49,0">
+        <var name="constructor" id="291854204099785079" />
+        <var name="node" id="291854204099785079" />
+        <var name="parameters" id="291854204099785079" />
+      </scope>
+      <scope id="291854204099785079" at="78,0,83,0" />
+      <scope id="291854204099785079" at="84,0,89,0" />
+      <scope id="291854204099785079" at="67,128,75,5">
+        <var name="methodIndex" id="291854204099785079" />
+      </scope>
+      <scope id="291854204099785079" at="66,0,77,0">
+        <var name="concept" id="291854204099785079" />
+        <var name="method" id="291854204099785079" />
+        <var name="parameters" id="291854204099785079" />
+      </scope>
+      <scope id="291854204099785079" at="51,114,63,5">
+        <var name="methodIndex" id="291854204099785079" />
+      </scope>
+      <scope id="291854204099785079" at="50,0,65,0">
+        <var name="method" id="291854204099785079" />
+        <var name="node" id="291854204099785079" />
+        <var name="parameters" id="291854204099785079" />
+      </scope>
+      <unit id="291854204099785079" at="93,0,96,0" name="jetbrains.mps.samples.Kaja.behavior.CommentLine__BehaviorDescriptor$PROPS" />
+      <unit id="291854204099785079" at="97,0,100,0" name="jetbrains.mps.samples.Kaja.behavior.CommentLine__BehaviorDescriptor$CONCEPTS" />
+      <unit id="291854204099785079" at="24,0,101,0" name="jetbrains.mps.samples.Kaja.behavior.CommentLine__BehaviorDescriptor" />
     </file>
   </root>
 </debug-info>

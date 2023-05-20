@@ -5,12 +5,9 @@ package jetbrains.mps.lang.generator.generationContext.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.List;
 import java.util.Arrays;
@@ -21,12 +18,13 @@ import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 
 public final class GenerationContextOp_UserObjectAccessBase__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0xd7706f639be2479cL, 0xa3daae92af1e64d5L, 0x11b8fe60348L, "jetbrains.mps.lang.generator.generationContext.structure.GenerationContextOp_UserObjectAccessBase");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<Boolean> isLValueInAssignment_idhIg3nxk = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isLValueInAssignment").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("hIg3nxk").registry(REGISTRY).build();
+  public static final SMethod<Boolean> isLValueInAssignment_idhIg3nxk = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isLValueInAssignment").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1217892546644L).languageId(0xa3daae92af1e64d5L, 0xd7706f639be2479cL).build2();
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(isLValueInAssignment_idhIg3nxk);
 
@@ -35,8 +33,8 @@ public final class GenerationContextOp_UserObjectAccessBase__BehaviorDescriptor 
 
   /*package*/ static boolean isLValueInAssignment_idhIg3nxk(@NotNull SNode __thisNode__) {
     SNode mayBeAssignment = SNodeOperations.getParent(SNodeOperations.getParent(__thisNode__));
-    if (SNodeOperations.isInstanceOf(mayBeAssignment, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c77f1e96L, "jetbrains.mps.baseLanguage.structure.AssignmentExpression"))) {
-      if (SNodeOperations.getParent(__thisNode__) == SLinkOperations.getTarget(SNodeOperations.cast(mayBeAssignment, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c77f1e96L, "jetbrains.mps.baseLanguage.structure.AssignmentExpression")), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x11b0d00332cL, 0xf8c77f1e97L, "lValue"))) {
+    if (SNodeOperations.isInstanceOf(mayBeAssignment, CONCEPTS.AssignmentExpression$SE)) {
+      if (SNodeOperations.getParent(__thisNode__) == SLinkOperations.getTarget(SNodeOperations.cast(mayBeAssignment, CONCEPTS.AssignmentExpression$SE), LINKS.lValue$splI)) {
         return true;
       }
     }
@@ -44,7 +42,6 @@ public final class GenerationContextOp_UserObjectAccessBase__BehaviorDescriptor 
   }
 
   /*package*/ GenerationContextOp_UserObjectAccessBase__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -88,5 +85,13 @@ public final class GenerationContextOp_UserObjectAccessBase__BehaviorDescriptor 
   @Override
   public SAbstractConcept getConcept() {
     return CONCEPT;
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept AssignmentExpression$SE = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c77f1e96L, "jetbrains.mps.baseLanguage.structure.AssignmentExpression");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink lValue$splI = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x11b0d00332cL, 0xf8c77f1e97L, "lValue");
   }
 }

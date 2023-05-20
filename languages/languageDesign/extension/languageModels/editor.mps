@@ -2,7 +2,7 @@
 <model ref="r:322cf3da-5abf-4bd1-9dec-f21af259347a(jetbrains.mps.lang.extension.editor)">
   <persistence version="9" />
   <languages>
-    <use id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor" version="4" />
+    <use id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor" version="14" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -57,9 +57,6 @@
         <property id="1139852716018" name="noTargetText" index="1$x2rV" />
         <property id="1140017977771" name="readOnly" index="1Intyy" />
         <reference id="1140103550593" name="relationDeclaration" index="1NtTu8" />
-      </concept>
-      <concept id="1073389214265" name="jetbrains.mps.lang.editor.structure.EditorCellModel" flags="ng" index="3EYTF0">
-        <property id="1130859485024" name="attractsFocus" index="1cu_pB" />
       </concept>
       <concept id="1073389446423" name="jetbrains.mps.lang.editor.structure.CellModel_Collection" flags="sn" stub="3013115976261988961" index="3EZMnI">
         <child id="1106270802874" name="cellLayout" index="2iSdaV" />
@@ -269,7 +266,6 @@
     <ref role="1XX52x" to="v54s:5JRjEZJSe_0" resolve="ExtensionPointExpression" />
     <node concept="3EZMnI" id="5JRjEZJSe_4" role="2wV5jI">
       <node concept="PMmxH" id="2wdLO7KhYdk" role="3EZMnx">
-        <property role="1cu_pB" value="0" />
         <ref role="PMmxG" to="tpco:2wZex4PafBj" resolve="alias" />
         <ref role="1k5W1q" to="tpen:hgVS8CF" resolve="KeyWord" />
       </node>
@@ -355,7 +351,6 @@
     <ref role="1XX52x" to="v54s:2KgYA8kbFkS" resolve="ExtensionPointType" />
     <node concept="3EZMnI" id="2KgYA8kbLuW" role="2wV5jI">
       <node concept="PMmxH" id="2wdLO7KhY75" role="3EZMnx">
-        <property role="1cu_pB" value="0" />
         <ref role="PMmxG" to="tpco:2wZex4PafBj" resolve="alias" />
         <ref role="1k5W1q" to="tpen:hgVS8CF" resolve="KeyWord" />
       </node>
@@ -389,7 +384,6 @@
     <ref role="1XX52x" to="v54s:2KgYA8kbJt7" resolve="GetExtensionObjectsOperation" />
     <node concept="3EZMnI" id="2KgYA8kbNry" role="2wV5jI">
       <node concept="PMmxH" id="2wdLO7KhY2E" role="3EZMnx">
-        <property role="1cu_pB" value="0" />
         <ref role="PMmxG" to="tpco:2wZex4PafBj" resolve="alias" />
       </node>
       <node concept="l2Vlx" id="aRphP9UyfR" role="2iSdaV" />

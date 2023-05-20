@@ -97,13 +97,7 @@
           <node concept="2pNUuL" id="7ZoWiKceyzf" role="2pNNFR">
             <property role="2pNUuO" value="since-build" />
             <node concept="2pMdtt" id="7ZoWiKceyzC" role="2pMdts">
-              <property role="2pMdty" value="143.1" />
-            </node>
-          </node>
-          <node concept="2pNUuL" id="4CpCtD$GUku" role="2pNNFR">
-            <property role="2pNUuO" value="until-build" />
-            <node concept="2pMdtt" id="4CpCtD$GUky" role="2pMdts">
-              <property role="2pMdty" value="163.1" />
+              <property role="2pMdty" value="193.1" />
             </node>
           </node>
         </node>

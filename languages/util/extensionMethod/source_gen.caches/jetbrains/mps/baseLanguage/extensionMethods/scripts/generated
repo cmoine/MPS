@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-amlsh7fkab7gqt47j1uc87bh0va2ewg" />
+<product version="3" modelHash="53gopwsm4ypw232uh9o9e85odvjtfc9">
+  <files names="ConvertExtensionMethodCallToLocal_MigrationScript.java:ScriptsDescriptor.java" />
+</product>
 

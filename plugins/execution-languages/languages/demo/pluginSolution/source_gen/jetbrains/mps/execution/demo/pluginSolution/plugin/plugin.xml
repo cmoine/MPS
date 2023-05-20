@@ -5,13 +5,11 @@
   <name>a</name>
   <description>a</description>
   <version>a</version>
-  <vendor url="a" logo="a">a</vendor>
-  <idea-version since-build="143.1" />
+  <vendor url="a">a</vendor>
+  <idea-version since-build="222.1" />
   
-  <application-components>
-    <component>
-      <implementation-class>jetbrains.mps.execution.demo.pluginSolution.plugin.PluginSolution_PluginInitializer</implementation-class>
-    </component>
-  </application-components>
   
+  <extensions defaultExtensionNs="com.intellij">
+    <mps.PluginComponentContributor application="jetbrains.mps.execution.demo.pluginSolution.plugin.PluginSolution_ApplicationPlugin" />
+  </extensions>
 </idea-plugin>

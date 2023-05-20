@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,15 +58,12 @@ public class TestEditorEnvironment {
 
   private static class TestEditorComponent extends HeadlessEditorComponent {
     private TestEditorComponent() {
-      super(null, new MPSModuleRepository());
+      super(new MPSModuleRepository(null));
+      // I could have used 'new SRepositoryRegistry()' instead of null, but don't see a point unless there's a need.
     }
-
     @Override
-    protected void acquireTypeCheckingContext() {
-    }
-
-    @Override
-    protected void releaseTypeCheckingContext() {
+    public boolean isReadOnly() {
+      return false;
     }
   }
 }

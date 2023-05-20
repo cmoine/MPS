@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-8e5fejhtbl0xj8xrk1be8kst44xazbh" />
+<product version="3" modelHash="-6tg1okvfkuufena3rf5ydjh6g11z5f0" parametersHash="a7y06d854is3tqvgak3b8mgxsuvqmq7">
+  <files names="MessageSequence_TextGen.java:OutputMessage_TextGen.java:TextGenAspectDescriptor.java" />
+</product>
 

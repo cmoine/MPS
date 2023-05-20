@@ -4,45 +4,121 @@ package jetbrains.mps.lang.editor.styleTests.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_HugePriorityStyle = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_LeafNode = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_NodeContainer = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PriorityStyle = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PriorityStyleCopy = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestConceptWithStyleAttributes = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestInheritedAttribute = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TestSimpleAttribute = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_UnapplyPriorityStyleCopy = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_CustomFontContainer;
+  private ConceptPresentation props_HugePriorityStyle;
+  private ConceptPresentation props_LeafNode;
+  private ConceptPresentation props_NodeContainer;
+  private ConceptPresentation props_PriorityStyle;
+  private ConceptPresentation props_PriorityStyleCopy;
+  private ConceptPresentation props_SerifFromQueryNode;
+  private ConceptPresentation props_SerifNode;
+  private ConceptPresentation props_TestConceptWithStyleAttributes;
+  private ConceptPresentation props_TestInheritedAttribute;
+  private ConceptPresentation props_TestSimpleAttribute;
+  private ConceptPresentation props_URLCellContainer;
+  private ConceptPresentation props_UnapplyPriorityStyleCopy;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.CustomFontContainer:
+        if (props_CustomFontContainer == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("customFontContainer");
+          props_CustomFontContainer = cpb.create();
+        }
+        return props_CustomFontContainer;
+      case LanguageConceptSwitch.HugePriorityStyle:
+        if (props_HugePriorityStyle == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("hugePriorityStyle");
+          props_HugePriorityStyle = cpb.create();
+        }
         return props_HugePriorityStyle;
-      case 1:
+      case LanguageConceptSwitch.LeafNode:
+        if (props_LeafNode == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("leaf");
+          props_LeafNode = cpb.create();
+        }
         return props_LeafNode;
-      case 2:
+      case LanguageConceptSwitch.NodeContainer:
+        if (props_NodeContainer == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_NodeContainer = cpb.create();
+        }
         return props_NodeContainer;
-      case 3:
+      case LanguageConceptSwitch.PriorityStyle:
+        if (props_PriorityStyle == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("priorityStyle");
+          props_PriorityStyle = cpb.create();
+        }
         return props_PriorityStyle;
-      case 4:
+      case LanguageConceptSwitch.PriorityStyleCopy:
+        if (props_PriorityStyleCopy == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("priorityStyleCopy");
+          props_PriorityStyleCopy = cpb.create();
+        }
         return props_PriorityStyleCopy;
-      case 5:
+      case LanguageConceptSwitch.SerifFromQueryNode:
+        if (props_SerifFromQueryNode == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("serifFromQueryNode");
+          props_SerifFromQueryNode = cpb.create();
+        }
+        return props_SerifFromQueryNode;
+      case LanguageConceptSwitch.SerifNode:
+        if (props_SerifNode == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("serifNode");
+          props_SerifNode = cpb.create();
+        }
+        return props_SerifNode;
+      case LanguageConceptSwitch.TestConceptWithStyleAttributes:
+        if (props_TestConceptWithStyleAttributes == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TestConceptWithStyleAttributes");
+          props_TestConceptWithStyleAttributes = cpb.create();
+        }
         return props_TestConceptWithStyleAttributes;
-      case 6:
+      case LanguageConceptSwitch.TestInheritedAttribute:
+        if (props_TestInheritedAttribute == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("test-inherited-attribute");
+          props_TestInheritedAttribute = cpb.create();
+        }
         return props_TestInheritedAttribute;
-      case 7:
+      case LanguageConceptSwitch.TestSimpleAttribute:
+        if (props_TestSimpleAttribute == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("test-simple-attribute");
+          props_TestSimpleAttribute = cpb.create();
+        }
         return props_TestSimpleAttribute;
-      case 8:
+      case LanguageConceptSwitch.URLCellContainer:
+        if (props_URLCellContainer == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("URLCellContainer");
+          props_URLCellContainer = cpb.create();
+        }
+        return props_URLCellContainer;
+      case LanguageConceptSwitch.UnapplyPriorityStyleCopy:
+        if (props_UnapplyPriorityStyleCopy == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("unapplyPriorityStyleCopy");
+          props_UnapplyPriorityStyleCopy = cpb.create();
+        }
         return props_UnapplyPriorityStyleCopy;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

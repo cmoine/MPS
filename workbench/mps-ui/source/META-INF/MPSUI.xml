@@ -1,18 +1,22 @@
-<components>
+<idea-plugin>
   <project-components>
     <component>
       <implementation-class>jetbrains.mps.ide.findusages.view.UsagesViewTool</implementation-class>
     </component>
     <component>
-      <implementation-class>jetbrains.mps.ide.messages.MessagesViewTool</implementation-class>
-    </component>
-    <component>
       <implementation-class>jetbrains.mps.ide.platform.actions.AnalyzeDependenciesViewTool</implementation-class>
     </component>
-    <component>
-      <implementation-class>jetbrains.mps.ide.messages.navigation.NavigationManager</implementation-class>
-    </component>
   </project-components>
+  <extensions defaultExtensionNs="com.intellij">
+    <projectService serviceImplementation="jetbrains.mps.ide.messages.navigation.NavigationManager"/>
+    <projectService serviceImplementation="jetbrains.mps.ide.messages.MessagesViewTool"/>
+    <postStartupActivity implementation="jetbrains.mps.ide.messages.MessagesViewTool$MessageViewToolInitialization"/>
+  </extensions>
+
+  <applicationListeners>
+    <listener class="jetbrains.mps.ide.messages.MessagesViewTool$MessagesViewProjectListener"
+              topic="com.intellij.openapi.project.ProjectManagerListener"/>
+  </applicationListeners>
 
   <extensionPoints>
     <extensionPoint qualifiedName="com.intellij.mps.modelRootEntry" beanClass="jetbrains.mps.ide.ui.dialogs.properties.persistence.ModelRootEntryEP"/>
@@ -25,13 +29,44 @@
                     interface="jetbrains.mps.ide.ui.tree.TreeHighlighterExtension"/>
   </extensionPoints>
 
+  <actions>
+    <action id="jetbrains.mps.ui.usage.tree.open" text="Navigate" description="Open editor for selected element" class="jetbrains.mps.ide.findusages.view.NavigateAction">
+      <keyboard-shortcut first-keystroke="ENTER" keymap="$default"/>
+      <keyboard-shortcut first-keystroke="F4" keymap="$default"/>
+    </action>
+    <action id="jetbrains.mps.ui.usage.tree.reveal-in-project" text="Reveal in Project Tree" class="jetbrains.mps.ide.findusages.view.RevealInProjectAction">
+      <keyboard-shortcut first-keystroke="alt F1" keymap="$default"/>
+    </action>
+    <group id="jetbrains.mps.ui.usage.tree.popup" popup="true">
+      <action id="jetbrains.mps.ui.usage.tree.include" text="Include" class="jetbrains.mps.ide.findusages.view.IncludeAction">
+        <keyboard-shortcut first-keystroke="INSERT" keymap="$default"/>
+      </action>
+      <action id="jetbrains.mps.ui.usage.tree.exclude" text="Exclude" class="jetbrains.mps.ide.findusages.view.ExcludeAction">
+        <keyboard-shortcut first-keystroke="DELETE" keymap="$default"/>
+      </action>
+      <action id="jetbrains.mps.ui.usage.tree.selected-only" text="Include selected only" class="jetbrains.mps.ide.findusages.view.SelectedOnlyAction"/>
+    </group>
+  </actions>
+
   <extensions defaultExtensionNs="com.intellij">
-    <mps.modelRootEntry rootType="java_classes" className="jetbrains.mps.ide.java.ui.JavaClassStubsModelRootEntryFactory"/>
+    <mps.modelRootEntry rootType="default" title="&amp;Default" className="jetbrains.mps.ide.ui.dialogs.properties.roots.editors.FileBasedModelRootEntryFactory"/>
+    <mps.modelRootEntry rootType="java_classes" title="Java &amp;Classes" className="jetbrains.mps.ide.java.ui.JavaClassStubsModelRootEntryFactory"/>
     <mps.facetTabFactory facetType="java" className="jetbrains.mps.ide.java.ui.JavaModuleFacetTabFactory"/>
     <mps.facetTabFactory facetType="generator" className="jetbrains.mps.ide.generator.CustomGenFacetTabFactory"/>
+    <mps.facetTabFactory facetType="unknown" className="jetbrains.mps.ide.ui.dialogs.properties.tabs.UnknownFacetTabFactory"/>
+    <mps.facetTabFactory facetType="plaintext" className="jetbrains.mps.ide.plaintext.PlainTextFacetTabFactory"/>
     <mps.projectGroupTemplateEP implementation="jetbrains.mps.workbench.dialogs.project.newproject.SolutionProjectsGroup"/>
     <mps.solutionProjectTemplateEP implementation="jetbrains.mps.workbench.dialogs.project.newproject.DefaultSolutionProjectTemplate"/>
     <mps.projectGroupTemplateEP implementation="jetbrains.mps.workbench.dialogs.project.newproject.OtherProjectsGroup"/>
     <mps.otherProjectTemplateEP implementation="jetbrains.mps.workbench.dialogs.project.newproject.EmptyProjectTemplate"/>
   </extensions>
-</components>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <registryKey key="mps.ProjectPane.messages.use.underline" defaultValue="true" description="Underline tree elements with errors or warnings" restartRequired="false"/>
+    <registryKey key="mps.ProjectPane.messages.use.indicator" defaultValue="true" description="Show dedicated control for a tree elements with errors or warnings" restartRequired="false"/>
+    <registryKey key="mps.ProjectPane.messages.error.only" defaultValue="false" description="Do not show warning and informational messages in the project tree" restartRequired="false"/>
+    <registryKey key="mps.ProjectPane.show.descriptor.generator" defaultValue="false" description="Show @descriptor model in Generator modules" restartRequired="false"/>
+    <registryKey key="mps.ProjectPane.show.descriptor.solution" defaultValue="false" description="Show @descriptor model in Solution modules" restartRequired="false"/>
+    <registryKey key="ide.favorites.tool.window.applicable" defaultValue="true" description="Allows to enable the Favorites tool window" restartRequired="false"/>
+  </extensions>
+</idea-plugin>

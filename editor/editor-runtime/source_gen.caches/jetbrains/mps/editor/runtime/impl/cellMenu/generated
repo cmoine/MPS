@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-116ug58cymjsgetgv0dqw76nywxhyth" />
+<product version="3" modelHash="-3vje9j54ptblis5ih1x1a9irl750jgn">
+  <files names="EnumSPropertySubstituteInfo.java:EnumSPropertyTransformationItemFactory.java" />
+</product>
 

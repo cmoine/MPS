@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="bkpuz9gze6lwdkhf1dir2mkse3z5io5" />
+<product version="3" modelHash="-47s6o2vx2ndyuwx17zjt2v9h5odigzo">
+  <files names="ConstraintsAspectDescriptor.java:LanguageDescriptor_Constraints.java" />
+</product>
 

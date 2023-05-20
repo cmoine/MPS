@@ -1,35 +1,35 @@
-<components>
+<!--
+  ~ Copyright 2003-2020 JetBrains s.r.o.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<idea-plugin>
   <actions>
     <group id="MPS.MessagesView" popup="false"/>
   </actions>
 
   <application-components>
     <component>
+      <implementation-class>jetbrains.mps.ide.MPSCoreComponents</implementation-class>
+    </component>
+
+    <component>
       <implementation-class>jetbrains.mps.ide.project.WorkbenchPathMacros</implementation-class>
     </component>
 
     <component>
-      <implementation-class>jetbrains.mps.nodefs.NodeVirtualFileSystem</implementation-class>
-    </component>
-
-    <component>
-      <implementation-class>jetbrains.mps.ide.undo.OnReloadingUndoCleaner</implementation-class>
-    </component>
-
-    <component>
-      <implementation-class>jetbrains.mps.workbench.findusages.MPSModelsFastFindSupport</implementation-class>
-    </component>
-
-    <component>
       <implementation-class>jetbrains.mps.workbench.findusages.InternalModelsFindUsagesParticipant</implementation-class>
-    </component>
-
-    <component>
-      <implementation-class>jetbrains.mps.VisibleModuleRegistry</implementation-class>
-    </component>
-
-    <component>
-      <implementation-class>jetbrains.mps.ide.save.MPSFilesSaver</implementation-class>
     </component>
 
     <component>
@@ -41,23 +41,26 @@
     </component>
 
     <component>
-      <implementation-class>jetbrains.mps.ide.diagnostic.MPSErrorReporterConfigurable</implementation-class>
-    </component>
-
-    <component>
-      <implementation-class>jetbrains.mps.workbench.goTo.index.MPSModelNavigationContributor</implementation-class>
-    </component>
-
-    <component>
-      <implementation-class>jetbrains.mps.workbench.goTo.index.JavaStubNavigationContributor</implementation-class>
-    </component>
-
-    <component>
       <implementation-class>jetbrains.mps.persistence.ModelFactoryRegister</implementation-class>
     </component>
 
     <component>
-      <implementation-class>jetbrains.mps.ide.platform.actions.core.RefactoringActionsExtensionComponent</implementation-class>
+      <implementation-class>jetbrains.mps.persistence.DataSourceFactoryRuleRegistrar</implementation-class>
+    </component>
+
+    <component>
+      <implementation-class>jetbrains.mps.ide.vfs.IdeaFileSystem</implementation-class>
+    </component>
+    <component>
+      <interface-class>org.jetbrains.mps.openapi.module.ModelAccess</interface-class>
+      <implementation-class>jetbrains.mps.smodel.WorkbenchModelAccess</implementation-class>
+    </component>
+    <component>
+      <implementation-class>jetbrains.mps.ide.persistence.PersistenceComponent</implementation-class>
+    </component>
+    <component>
+      <interface-class>jetbrains.mps.ide.platform.watching.ReloadManager</interface-class>
+      <implementation-class>jetbrains.mps.ide.platform.watching.ReloadManagerComponent</implementation-class>
     </component>
   </application-components>
 
@@ -72,7 +75,18 @@
     <component>
       <implementation-class>jetbrains.mps.nodefs.FileSystemProjectBridge</implementation-class>
     </component>
+    <component>
+      <implementation-class>jetbrains.mps.ide.undo.OnReloadingUndoCleaner</implementation-class>
+    </component>    <!-- migration: versions handling -->
   </project-components>
+
+  <applicationListeners>
+    <listener class="jetbrains.mps.help.PlatformHelpURLProvider" topic="com.intellij.ide.AppLifecycleListener"/>
+    <listener class="jetbrains.mps.ide.save.IdeMPSFileSaver" topic="com.intellij.openapi.fileEditor.FileDocumentManagerListener" activeInHeadlessMode="false"/>
+    <listener class="jetbrains.mps.ide.platform.watching.ModelCacheReloader" topic="com.intellij.openapi.vfs.newvfs.BulkFileListener"/>
+    <listener class="jetbrains.mps.ide.platform.watching.FSChangesWatcher" topic="com.intellij.openapi.vfs.newvfs.BulkFileListener"/>
+    <listener class="jetbrains.mps.repository.FSNotificationsCleaner" topic="com.intellij.ide.AppLifecycleListener"/>
+  </applicationListeners>
 
   <extensionPoints>
     <extensionPoint qualifiedName="com.intellij.mps.LanguageLibrary"
@@ -81,14 +95,32 @@
                     beanClass="jetbrains.mps.VisibleModuleMask"/>
     <extensionPoint qualifiedName="com.intellij.mps.modelRootFactory"
                     beanClass="jetbrains.mps.ide.persistence.ModelRootFactoryEP"/>
-    <extensionPoint qualifiedName="com.intellij.mps.modelRootSettings"
-                    beanClass="jetbrains.mps.ide.persistence.ModelRootSettingsEP"/>
+    <extensionPoint qualifiedName="com.intellij.mps.modelIdFactory"
+                    beanClass="jetbrains.mps.ide.persistence.ModelIdFactoryExtension"/>
     <extensionPoint qualifiedName="com.intellij.mps.ModelFactoryProvider"
                     beanClass="jetbrains.mps.persistence.ModelFactoryRegister$ModelFactoryProvider"/>
+    <extensionPoint qualifiedName="com.intellij.mps.DataSourceFactoryRuleProvider"
+                    beanClass="jetbrains.mps.persistence.DataSourceFactoryRuleProvider"/>
+    <extensionPoint qualifiedName="com.intellij.mps.PluginComponentContributor"
+                    beanClass="jetbrains.mps.plugins.ComponentContributorExtension"/>
+    <extensionPoint qualifiedName="com.intellij.mps.gotoParticipant"
+                    interface="org.jetbrains.mps.openapi.persistence.NavigationParticipant"
+                    area="IDEA_PROJECT"/>
   </extensionPoints>
 
   <extensions defaultExtensionNs="com.intellij">
+    <applicationService serviceImplementation="jetbrains.mps.ide.icons.GlobalIconManager"/>
+    <applicationService serviceImplementation="jetbrains.mps.VisibleModuleRegistry"/>
+    <applicationService serviceImplementation="jetbrains.mps.ide.platform.watching.WatchedRoots"/>
+    <applicationService serviceImplementation="jetbrains.mps.repository.FSNotificationsImprover"/>
+
+    <projectService serviceInterface="jetbrains.mps.migration.global.MigrationProperties"
+            serviceImplementation="jetbrains.mps.migration.global.ProjectMigrationProperties"/>
+    <projectService serviceImplementation="jetbrains.mps.ide.vfs.ProjectRootListenerComponent" />
+
     <fileTypeFactory implementation="jetbrains.mps.fileTypes.MPSFileTypeFactory"/>
+
+    <virtualFileSystem implementationClass="jetbrains.mps.nodefs.NodeVirtualFileSystem" key="mps" physical="false"/>
 
     <!--For file selection dialog-->
     <getDataRule key="context.ProjectFileDirectory"
@@ -96,11 +128,18 @@
 
     <getDataRule key="MPS_MPSProject" implementationClass="jetbrains.mps.ide.dataExtraction.MPSProjectRule"/>
     <getDataRule key="MPS_Frame" implementationClass="jetbrains.mps.ide.dataExtraction.FrameRule"/>
-    <getDataRule key="MPS_IOperationContext"
-                 implementationClass="jetbrains.mps.ide.dataExtraction.ContextRule"/>
 
     <fileBasedIndex implementation="jetbrains.mps.workbench.findusages.MPSModelsIndexer"/>
     <fileBasedIndex implementation="jetbrains.mps.workbench.index.RootNodeNameIndex"/>
+    <fileBasedIndex implementation="jetbrains.mps.workbench.index.PropertyValueIndex"/>
     <editorTabTitleProvider implementation="jetbrains.mps.fileTypes.MPSEditorTabTitleProvider"/>
+    <spellchecker.bundledDictionaryProvider implementation="jetbrains.mps.spellchecker.MPSBundledDictionariesProvider"/>
+    <!-- XXX Does MPSModelsFastFindSupport need to be part of MPSCore.xml and not mps-workbench/source/META-INF/MPSComponents.xml? -->
+    <postStartupActivity implementation="jetbrains.mps.workbench.findusages.MPSModelsFastFindSupport$Plug" />
+    <mps.gotoParticipant implementation="jetbrains.mps.workbench.goTo.index.MPSModelNavigationContributor" />
+    <mps.gotoParticipant implementation="jetbrains.mps.workbench.goTo.index.JavaStubNavigationContributor"/>
+    <registryKey key="mps.module.visibility.mask.always" defaultValue="false" description="MPS: always use visibility mask to show modules" restartRequired="false"/>
+    <registryKey key="mps.module.rename.show.details" defaultValue="false" description="MPS: Rename Module Dialog to show extra details" restartRequired="false"/>
+    <registryKey key="mps.module.rename.related.ignore" defaultValue="false" description="MPS: Rename Module Dialog to ignore 'related' modules" restartRequired="false"/>
   </extensions>
-</components>
+</idea-plugin>

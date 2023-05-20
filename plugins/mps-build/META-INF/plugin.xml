@@ -14,20 +14,20 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin version="2" xmlns:xi="http://www.w3.org/2001/XInclude">
+<idea-plugin xmlns:xi="http://www.w3.org/2001/XInclude">
   <id>jetbrains.mps.build</id>
-  <name>MPS Build languages</name>
+  <name>MPS Build Languages</name>
   <description>Declarative build languages</description>
   <category>Custom Languages</category>
-  <version>3.4.5</version>
-  <vendor url="http://www.jetbrains.com" logo="/MPS_16.png" email="support@jetbrains.com">JetBrains s.r.o.</vendor>
-  <idea-version since-build="145.1" until-build="164.1"/>
+  <version>2023.1</version>
+  <vendor url="http://www.jetbrains.com" email="support@jetbrains.com">JetBrains</vendor>
+  <idea-version since-build="231.1" until-build="232.1"/>
   <depends>jetbrains.mps.core</depends>
   <depends optional="true" config-file="pluginSolutions.xml">jetbrains.mps.execution.configurations</depends>
 
   <extensions defaultExtensionNs="com.intellij">
-    <mps.LanguageLibrary dir="/languages"/>
-    <mps.LanguageLibrary dir="/solutions"/>
+    <mps.LanguageLibrary dir="/languages" hide="true"/>
+    <mps.LanguageLibrary dir="/solutions" hide="true"/>
     <errorHandler implementation="jetbrains.mps.ide.blame.CharismaReporter"/>
   </extensions>
 </idea-plugin>

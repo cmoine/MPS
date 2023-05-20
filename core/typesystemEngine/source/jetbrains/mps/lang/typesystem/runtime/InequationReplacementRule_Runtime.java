@@ -15,26 +15,20 @@
  */
 package jetbrains.mps.lang.typesystem.runtime;
 
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactoryByName;
-import jetbrains.mps.util.annotation.ToRemove;
+import jetbrains.mps.typesystem.inference.EquationInfo;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.typesystem.inference.EquationInfo;
 
 public abstract class InequationReplacementRule_Runtime implements IRuleWithTwoApplicableNodes {
 
+  // weak, lessThan, equationInfo parameters seem to be ignored
   public boolean checkInequation(SNode subtype, SNode supertype, EquationInfo equationInfo, IsApplicable2Status status, boolean weak, boolean lessThan) {
     return false;
   }
 
   //todo generate this method
-  public boolean checkInequation(SNode subtype, SNode supertype, EquationInfo equationInfo, IsApplicable2Status status, boolean weak) {
-    return checkInequation(subtype, supertype, equationInfo, status, weak, true);
-  }
-
-  //todo generate this method
-  public boolean checkInequation(SNode subtype, SNode supertype, EquationInfo equationInfo, IsApplicable2Status status) {
-    return checkInequation(subtype, supertype, equationInfo, status, true, true);
+  public boolean checkInequation(SNode subtype, SNode supertype, IsApplicable2Status status, boolean weak) {
+    return checkInequation(subtype, supertype, null, status, weak, true);
   }
 
   @Override

@@ -4,66 +4,145 @@ package jetbrains.mps.samples.SwingBuilder.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_Button = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Component = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Converter = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ElementReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_EmptyComponent = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Filter = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Frame = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Label = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Map = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Panel = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Pipeline = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SourceDataType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SwingBuilderMember = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TargetDataType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TextField = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Transformers = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_Button;
+  private ConceptPresentation props_Component;
+  private ConceptPresentation props_Converter;
+  private ConceptPresentation props_ElementReference;
+  private ConceptPresentation props_EmptyComponent;
+  private ConceptPresentation props_Filter;
+  private ConceptPresentation props_Frame;
+  private ConceptPresentation props_Label;
+  private ConceptPresentation props_Map;
+  private ConceptPresentation props_Panel;
+  private ConceptPresentation props_Pipeline;
+  private ConceptPresentation props_SourceDataType;
+  private ConceptPresentation props_SwingBuilderMember;
+  private ConceptPresentation props_TargetDataType;
+  private ConceptPresentation props_TextField;
+  private ConceptPresentation props_Transformers;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.Button:
+        if (props_Button == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("button");
+          props_Button = cpb.create();
+        }
         return props_Button;
-      case 1:
+      case LanguageConceptSwitch.Component:
+        if (props_Component == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_Component = cpb.create();
+        }
         return props_Component;
-      case 2:
+      case LanguageConceptSwitch.Converter:
+        if (props_Converter == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Converter = cpb.create();
+        }
         return props_Converter;
-      case 3:
+      case LanguageConceptSwitch.ElementReference:
+        if (props_ElementReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xb4dbff0c8c314a79L, 0xa45a98e5fd0530e7L, 0xd0f6999e83a1e8aL, 0xd0f6999e83a1e8bL, "element", "", "");
+          props_ElementReference = cpb.create();
+        }
         return props_ElementReference;
-      case 4:
+      case LanguageConceptSwitch.EmptyComponent:
+        if (props_EmptyComponent == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("<empty>");
+          props_EmptyComponent = cpb.create();
+        }
         return props_EmptyComponent;
-      case 5:
+      case LanguageConceptSwitch.Filter:
+        if (props_Filter == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Filter = cpb.create();
+        }
         return props_Filter;
-      case 6:
+      case LanguageConceptSwitch.Frame:
+        if (props_Frame == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("frame");
+          props_Frame = cpb.create();
+        }
         return props_Frame;
-      case 7:
+      case LanguageConceptSwitch.Label:
+        if (props_Label == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("label");
+          props_Label = cpb.create();
+        }
         return props_Label;
-      case 8:
+      case LanguageConceptSwitch.Map:
+        if (props_Map == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Map = cpb.create();
+        }
         return props_Map;
-      case 9:
+      case LanguageConceptSwitch.Panel:
+        if (props_Panel == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("panel");
+          props_Panel = cpb.create();
+        }
         return props_Panel;
-      case 10:
+      case LanguageConceptSwitch.Pipeline:
+        if (props_Pipeline == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Pipeline = cpb.create();
+        }
         return props_Pipeline;
-      case 11:
+      case LanguageConceptSwitch.SourceDataType:
+        if (props_SourceDataType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("source data type");
+          props_SourceDataType = cpb.create();
+        }
         return props_SourceDataType;
-      case 12:
+      case LanguageConceptSwitch.SwingBuilderMember:
+        if (props_SwingBuilderMember == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("UI Builder");
+          props_SwingBuilderMember = cpb.create();
+        }
         return props_SwingBuilderMember;
-      case 13:
+      case LanguageConceptSwitch.TargetDataType:
+        if (props_TargetDataType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("target data type");
+          props_TargetDataType = cpb.create();
+        }
         return props_TargetDataType;
-      case 14:
+      case LanguageConceptSwitch.TextField:
+        if (props_TextField == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("text field");
+          props_TextField = cpb.create();
+        }
         return props_TextField;
-      case 15:
+      case LanguageConceptSwitch.Transformers:
+        if (props_Transformers == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("transformers");
+          props_Transformers = cpb.create();
+        }
         return props_Transformers;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

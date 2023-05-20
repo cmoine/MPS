@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package jetbrains.mps.smodel;
 import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.model.SNode;
 
-class PropertyChangeUndoableAction extends SNodeUndoableAction {
+final class PropertyChangeUndoableAction extends SNodeUndoableAction {
   private final SProperty myProperty;
   private final String myOldValue;
   private final String myNewValue;
@@ -31,12 +31,12 @@ class PropertyChangeUndoableAction extends SNodeUndoableAction {
   }
 
   @Override
-  protected void doUndo() {
+  public void undo() {
     getAffectedNode().setProperty(myProperty, myOldValue);
   }
 
   @Override
-  protected void doRedo() {
+  public void redo() {
     getAffectedNode().setProperty(myProperty, myNewValue);
   }
 }

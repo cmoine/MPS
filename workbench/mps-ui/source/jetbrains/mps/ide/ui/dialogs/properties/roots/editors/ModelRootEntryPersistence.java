@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,57 +16,64 @@
 package jetbrains.mps.ide.ui.dialogs.properties.roots.editors;
 
 import jetbrains.mps.ide.ui.dialogs.properties.persistence.ModelRootEntryEP;
-import jetbrains.mps.persistence.PersistenceRegistry;
+import jetbrains.mps.project.MPSProject;
 import jetbrains.mps.project.structure.model.ModelRootDescriptor;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.persistence.ModelRoot;
+import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
 import org.jetbrains.mps.openapi.ui.persistence.ModelRootEntry;
 import org.jetbrains.mps.openapi.ui.persistence.ModelRootEntryFactory;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.function.BiConsumer;
 
 /**
  * Registry with UI components ({@link org.jetbrains.mps.openapi.ui.persistence.ModelRootEntryEditor editors})
  * for {@link ModelRootEntry}.
- * To populate from extension point, instantiate and invoke {@link #initFromEP()}.
  */
 final class ModelRootEntryPersistence {
-  private final Map<String, ModelRootEntryFactory> myModelRootEntries = new HashMap<String, ModelRootEntryFactory>();
+  private final MPSProject myProject;
+  private final PersistenceFacade myPersistenceFacade;
+  // list with sequential search is perfectly ok, we don't expect it to grow too big
 
-  public ModelRootEntryPersistence() {
+  public ModelRootEntryPersistence(MPSProject mpsProject, PersistenceFacade persistenceFacade) {
+    myProject = mpsProject;
+    myPersistenceFacade = persistenceFacade;
   }
 
-  public ModelRootEntryPersistence initFromEP() {
-    ModelRootEntryEP[] extensions = ModelRootEntryEP.EP_NAME.getExtensions();
-    for (ModelRootEntryEP extension : extensions) {
-      addModelRootEntry(extension.rootType, extension.getModelRootEntryFactory());
+  public ModelRootEntryPersistence(MPSProject mpsProject) {
+    myProject = mpsProject;
+    myPersistenceFacade = null;
+    // myPersistenceFacade is in use in unused getModelRootEntry() method
+  }
+
+    @Nullable
+  public ModelRootEntry<?> getModelRootEntry(ModelRoot modelRoot) {
+    final String kind = modelRoot.getType();
+    for (ModelRootEntryEP extension : ModelRootEntryEP.EP_NAME.getExtensionList()) {
+      if (kind.equals(extension.rootType)) {
+        final ModelRootEntryFactory<ModelRoot> mreFactory = extension.getModelRootEntryFactory(myProject);
+        return mreFactory.getModelRootEntry(modelRoot);
+      }
     }
-    // XXX why not through ExtPoint?
-    addModelRootEntry(PersistenceRegistry.DEFAULT_MODEL_ROOT, new FileBasedModelRootEntryFactory());
-    return this;
+    return null;
   }
 
-  // may become public, if there's scenario to populate the registry not from EP
-  private void addModelRootEntry(String type, @NotNull ModelRootEntryFactory factory) {
-    myModelRootEntries.put(type, factory);
+  public void foreachTypeAndName(BiConsumer<String,String> c) {
+    for (ModelRootEntryEP extension : ModelRootEntryEP.EP_NAME.getExtensionList()) {
+      c.accept(extension.rootType, extension.getTitle());
+    }
   }
 
-  public ModelRootEntry getModelRootEntry(ModelRoot modelRoot) {
-    if(!myModelRootEntries.containsKey(modelRoot.getType()))
-      return null;
-
-    ModelRootEntryFactory factory = myModelRootEntries.get(modelRoot.getType());
-    return factory.getModelRootEntry(modelRoot);
-  }
-
-  public Set<String> getModelRootTypes() {
-    return myModelRootEntries.keySet();
-  }
-
-  public ModelRootEntry getModelRootEntry(ModelRootDescriptor descriptor) {
-    ModelRoot modelRoot = PersistenceRegistry.getInstance().getModelRootFactory(descriptor.getType()).create();
+  /**
+   * @deprecated Use of this method is discouraged, as it gives a detached ModelRoot instance in an unknown state.
+   *             The only legitimate use now is when there's no SModule instance, but we need to configure a new one.
+   *             As we can't edit MR based solely on its persistence (aka ModelRootDescriptor), we have to instantiate
+   *             fake MR instances here. This scenario is handled directly in MPSFacetSourcesTab, and the method is unused
+   *             and will be removed in the next release
+   */
+  @Deprecated(since = "2022.3", forRemoval = true)
+  public ModelRootEntry<?> getModelRootEntry(ModelRootDescriptor descriptor) {
+    ModelRoot modelRoot = myPersistenceFacade.getModelRootFactory(descriptor.getType()).create();
     modelRoot.load(descriptor.getMemento());
 
     return getModelRootEntry(modelRoot);

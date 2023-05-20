@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,27 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.build;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
-import jetbrains.mps.generator.DefaultModifiableGenerationSettings;
-import jetbrains.mps.generator.GenerationSettingsProvider;
+import jetbrains.mps.core.platform.Platform;
+import jetbrains.mps.ide.MPSCoreComponents;
 import jetbrains.mps.ide.messages.MessagesViewTool;
 import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.internal.make.cfg.JavaCompileFacetInitializer;
-import jetbrains.mps.internal.make.runtime.script.MessageFeedbackStrategy;
+import jetbrains.mps.make.IMakeService;
+import jetbrains.mps.make.MakeServiceComponent;
 import jetbrains.mps.make.MakeSession;
 import jetbrains.mps.make.resources.IResource;
-import jetbrains.mps.make.script.IConfigMonitor;
-import jetbrains.mps.make.script.IFeedback;
-import jetbrains.mps.make.script.IJobMonitor;
 import jetbrains.mps.make.script.IPropertiesPool;
 import jetbrains.mps.make.script.IResult;
 import jetbrains.mps.make.script.IScriptController;
+import jetbrains.mps.make.script.PropertyPoolInitializer;
 import jetbrains.mps.messages.IMessageHandler;
 import jetbrains.mps.smodel.resources.ModelsToResources;
-import jetbrains.mps.tool.builder.make.BuildMakeService;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SModel;
 
@@ -52,32 +50,25 @@ public class GenerateModelsInProcess {
   }
 
   public void generate(@Nullable final MPSMakeConfigurator makeConfigurator) {
-    GenerationSettingsProvider.getInstance().setGenerationSettings(new DefaultModifiableGenerationSettings());
-    Iterable<IResource> resources = new ModelsToResources(myModels).resources(false);
-    MessagesViewTool messagesView = myProject.getComponent(MessagesViewTool.class);
+    Iterable<IResource> resources = new ModelsToResources(myModels).resources();
+    MessagesViewTool messagesView = myProject.getService(MessagesViewTool.class);
     IMessageHandler msgHandler = messagesView.newHandler("MPS generator");
-    final MessageFeedbackStrategy mfs = new MessageFeedbackStrategy(msgHandler);
 
     final MakeSession makeSession = new MakeSession(ProjectHelper.fromIdeaProject(myProject), msgHandler, true);
-    BuildMakeService makeService = new BuildMakeService();
-    IScriptController controller = new IScriptController.Stub(new IConfigMonitor.Stub(), new IJobMonitor.Stub() {
+    JavaCompileFacetInitializer jcfi = new JavaCompileFacetInitializer().skipCompilation(true);
+    Platform mpsPlaf = ApplicationManager.getApplication().getComponent(MPSCoreComponents.class).getPlatform();
+    IMakeService makeService = mpsPlaf.findComponent(MakeServiceComponent.class).get();
+    IScriptController controller = new IScriptController.Stub2(makeSession, jcfi, new PropertyPoolInitializer() {
       @Override
-      public void reportFeedback(IFeedback feedback) {
-        mfs.reportFeedback(feedback);
-      }
-    }) {
-      @Override
-      public void setup(IPropertiesPool ppool) {
-        // this should always be done
-        new jetbrains.mps.internal.make.cfg.TextGenFacetInitializer(makeSession).populate(ppool);
-        new JavaCompileFacetInitializer().skipCompilation(true).populate(ppool);
+      public void populate(IPropertiesPool ppool) {
         // now custom configuration
         if (makeConfigurator != null) {
           makeConfigurator.configureProperties(ppool);
         }
       }
-    };
+    });
+    makeService.openNewSession(makeSession);
     Future<IResult> future = makeService.make(makeSession, resources, null, controller);
-    // todo write message at the botoom of the window like idea does after compilation
+    // todo write message at the bottom of the window like idea does after compilation
   }
 }

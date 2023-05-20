@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,6 +62,8 @@ public class ModelProblemMessage extends DefaultEditorMessage {
       return;
     }
     if (isWarning()) {
+      // JFTR, we use WARNING_ATTRIBUTES for WarningPanel, too. Do I need to switch to ec.getStyleRegistry()
+      //       and "WARNING_PANEL" style?
       ((jetbrains.mps.nodeEditor.cells.EditorCell) cell).paintSelection(g, EditorColorsManager.getInstance().getGlobalScheme().getAttributes(
           TextAttributesKey.createTextAttributesKey("WARNING_ATTRIBUTES")).getBackgroundColor(), false);
     } else {

@@ -4,23 +4,25 @@ package jetbrains.mps.baseLanguage.lightweightdsl.typesystem;
 
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.baseLanguage.closures.runtime._FunctionTypes;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import org.jetbrains.mps.openapi.language.SProperty;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 
 public class ClassLikeMethodFixer implements ClassLikeMethodProblemVisitor {
   public void visitName(SNode method, String corrected) throws ClassLikeMethodChecker.StopMethodCheckerException {
-    SPropertyOperations.set(method, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name"), corrected);
+    SPropertyOperations.assign(method, PROPS.name$MnvL, corrected);
   }
 
   public void visitReturnType(SNode method, _FunctionTypes._return_P0_E0<? extends SNode> getCorrected) {
-    SLinkOperations.setTarget(method, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, 0xf8cc56b1fdL, "returnType"), getCorrected.invoke());
+    SLinkOperations.setTarget(method, LINKS.returnType$5xoi, getCorrected.invoke());
   }
 
   public void visitMissingParam(SNode method, int index, _FunctionTypes._return_P0_E0<? extends SNode> getCorrected) {
-    ListSequence.fromList(SLinkOperations.getChildren(method, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, 0xf8cc56b1feL, "parameter"))).insertElement(index, getCorrected.invoke());
+    ListSequence.fromList(SLinkOperations.getChildren(method, LINKS.parameter$5xBj)).insertElement(index, getCorrected.invoke());
   }
 
   public void visitOddParam(SNode param) throws ClassLikeMethodChecker.StopMethodCheckerException {
@@ -32,10 +34,20 @@ public class ClassLikeMethodFixer implements ClassLikeMethodProblemVisitor {
   }
 
   public void visitParamName(SNode param, String corrected) throws ClassLikeMethodChecker.StopMethodCheckerException {
-    SPropertyOperations.set(param, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name"), corrected);
+    SPropertyOperations.assign(param, PROPS.name$MnvL, corrected);
   }
 
   public void visitParamType(SNode param, _FunctionTypes._return_P0_E0<? extends SNode> getCorrected) throws ClassLikeMethodChecker.StopMethodCheckerException {
-    SLinkOperations.setTarget(param, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x450368d90ce15bc3L, 0x4ed4d318133c80ceL, "type"), getCorrected.invoke());
+    SLinkOperations.setTarget(param, LINKS.type$a1UY, getCorrected.invoke());
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink returnType$5xoi = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, 0xf8cc56b1fdL, "returnType");
+    /*package*/ static final SContainmentLink parameter$5xBj = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, 0xf8cc56b1feL, "parameter");
+    /*package*/ static final SContainmentLink type$a1UY = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x450368d90ce15bc3L, 0x4ed4d318133c80ceL, "type");
   }
 }

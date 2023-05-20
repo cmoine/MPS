@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 
 public class DefaultCompletionTextField extends CompletionTextField {
 
-  private List<String> myPossibleValues = new ArrayList<String>();
+  private List<String> myPossibleValues = new ArrayList<>();
 
   public DefaultCompletionTextField(List<String> possibleValues) {
     myPossibleValues.addAll(possibleValues);
@@ -31,7 +31,7 @@ public class DefaultCompletionTextField extends CompletionTextField {
 
   @Override
   public List<String> getProposals(String text) {
-    List<String> result = new ArrayList<String>();
+    List<String> result = new ArrayList<>();
     Pattern pattern = Pattern.compile(PatternUtil.getExactItemPatternBuilder(text, true, true) + ".*");
     for (String possibleValue : myPossibleValues) {
       if (pattern.matcher(possibleValue).matches()) {

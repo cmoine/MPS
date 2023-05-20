@@ -28,7 +28,7 @@ import java.util.ListIterator;
  */
 public class CellMessagesUtil {
   public static <T extends SimpleEditorMessage> List<T> getMessages(EditorCell cell, Class<T> clazz) {
-    List<T> result = new ArrayList<T>();
+    List<T> result = new ArrayList<>();
     for (SimpleEditorMessage message : cell.getMessages()) {
       if (clazz.isInstance(message)) {
         result.add((T) message);

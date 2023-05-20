@@ -10,84 +10,84 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
   <root nodeRef="r:b522c221-948b-4fac-886a-2badf29b5fb4(jetbrains.mps.ide.hierarchy.toggle)/5797068448049410625">
     <file name="GroupedToggleAction.java">
-      <node id="5797068448049415441" at="10,0,11,0" concept="2" trace="mySelected" />
-      <node id="5797068448049415445" at="11,0,12,0" concept="2" trace="myGroup" />
-      <node id="5797068448049415461" at="12,101,13,35" concept="7" />
-      <node id="5797068448049415465" at="13,35,14,35" concept="1" />
-      <node id="5797068448049415475" at="16,49,17,20" concept="1" />
-      <node id="5797068448049415485" at="20,46,21,22" concept="6" />
-      <node id="5797068448049415499" at="25,19,26,13" concept="6" />
-      <node id="5797068448049415500" at="27,5,28,22" concept="1" />
-      <node id="5797068448049415509" at="29,26,30,36" concept="1" />
-      <node id="5797068448049415514" at="31,5,32,13" concept="1" />
-      <node id="5797068448049415520" at="34,26,35,23" concept="1" />
-      <node id="5797068448049415524" at="35,23,36,15" concept="1" />
-      <node id="5797068448049415526" at="38,0,39,0" concept="5" trace="select#()V" />
-      <node id="5797068448049415530" at="39,0,41,0" concept="5" trace="unselect#()V" />
-      <node id="5797068448049415469" at="16,0,19,0" concept="5" trace="setGroup#(Ljetbrains/mps/ide/hierarchy/toggle/ToggleActionGroup;)V" />
-      <node id="5797068448049415495" at="24,59,27,5" concept="4" />
-      <node id="5797068448049415504" at="28,22,31,5" concept="4" />
-      <node id="5797068448049415449" at="12,0,16,0" concept="0" trace="GroupedToggleAction#(Ljava/lang/String;Ljava/lang/String;Ljavax/swing/Icon;Z)V" />
-      <node id="5797068448049415479" at="19,0,23,0" concept="5" trace="isSelected#(Lcom/intellij/openapi/actionSystem/AnActionEvent;)Z" />
-      <node id="5797068448049415516" at="34,0,38,0" concept="5" trace="deselect#()V" />
-      <node id="5797068448049415487" at="23,0,34,0" concept="5" trace="setSelected#(Lcom/intellij/openapi/actionSystem/AnActionEvent;Z)V" />
-      <scope id="5797068448049415533" at="39,26,39,26" />
-      <scope id="5797068448049415474" at="16,49,17,20" />
-      <scope id="5797068448049415484" at="20,46,21,22" />
-      <scope id="5797068448049415498" at="25,19,26,13" />
-      <scope id="5797068448049415508" at="29,26,30,36" />
-      <scope id="5797068448049415526" at="38,0,39,0" />
-      <scope id="5797068448049415460" at="12,101,14,35" />
-      <scope id="5797068448049415519" at="34,26,36,15" />
-      <scope id="5797068448049415530" at="39,0,41,0" />
-      <scope id="5797068448049415469" at="16,0,19,0">
+      <node id="5797068448049415441" at="12,0,13,0" concept="2" trace="mySelected" />
+      <node id="5797068448049415445" at="13,0,14,0" concept="2" trace="myGroup" />
+      <node id="5797068448049415461" at="14,101,15,35" concept="7" />
+      <node id="5797068448049415465" at="15,35,16,35" concept="1" />
+      <node id="5797068448049415475" at="18,49,19,20" concept="1" />
+      <node id="5797068448049415485" at="22,46,23,22" concept="6" />
+      <node id="5797068448049415499" at="27,19,28,13" concept="6" />
+      <node id="5797068448049415500" at="29,5,30,22" concept="1" />
+      <node id="5797068448049415509" at="31,26,32,36" concept="1" />
+      <node id="5797068448049415514" at="33,5,34,13" concept="1" />
+      <node id="5797068448049415520" at="36,26,37,23" concept="1" />
+      <node id="5797068448049415524" at="37,23,38,15" concept="1" />
+      <node id="5797068448049415526" at="40,0,41,0" concept="5" trace="select#()V" />
+      <node id="5797068448049415530" at="41,0,43,0" concept="5" trace="unselect#()V" />
+      <node id="5797068448049415469" at="18,0,21,0" concept="5" trace="setGroup#(Ljetbrains/mps/ide/hierarchy/toggle/ToggleActionGroup;)V" />
+      <node id="5797068448049415495" at="26,59,29,5" concept="4" />
+      <node id="5797068448049415504" at="30,22,33,5" concept="4" />
+      <node id="5797068448049415449" at="14,0,18,0" concept="0" trace="GroupedToggleAction#(Ljava/lang/String;Ljava/lang/String;Ljavax/swing/Icon;Z)V" />
+      <node id="5797068448049415479" at="21,0,25,0" concept="5" trace="isSelected#(Lcom/intellij/openapi/actionSystem/AnActionEvent;)Z" />
+      <node id="5797068448049415516" at="36,0,40,0" concept="5" trace="deselect#()V" />
+      <node id="5797068448049415487" at="25,0,36,0" concept="5" trace="setSelected#(Lcom/intellij/openapi/actionSystem/AnActionEvent;Z)V" />
+      <scope id="5797068448049415533" at="41,26,41,26" />
+      <scope id="5797068448049415474" at="18,49,19,20" />
+      <scope id="5797068448049415484" at="22,46,23,22" />
+      <scope id="5797068448049415498" at="27,19,28,13" />
+      <scope id="5797068448049415508" at="31,26,32,36" />
+      <scope id="5797068448049415526" at="40,0,41,0" />
+      <scope id="5797068448049415460" at="14,101,16,35" />
+      <scope id="5797068448049415519" at="36,26,38,15" />
+      <scope id="5797068448049415530" at="41,0,43,0" />
+      <scope id="5797068448049415469" at="18,0,21,0">
         <var name="group" id="5797068448049415472" />
       </scope>
-      <scope id="5797068448049415449" at="12,0,16,0">
+      <scope id="5797068448049415449" at="14,0,18,0">
         <var name="description" id="5797068448049415454" />
         <var name="icon" id="5797068448049415456" />
         <var name="initiallySelected" id="5797068448049415458" />
         <var name="text" id="5797068448049415452" />
       </scope>
-      <scope id="5797068448049415479" at="19,0,23,0">
+      <scope id="5797068448049415479" at="21,0,25,0">
         <var name="e" id="5797068448049415482" />
       </scope>
-      <scope id="5797068448049415516" at="34,0,38,0" />
-      <scope id="5797068448049415494" at="24,59,32,13" />
-      <scope id="5797068448049415487" at="23,0,34,0">
+      <scope id="5797068448049415516" at="36,0,40,0" />
+      <scope id="5797068448049415494" at="26,59,34,13" />
+      <scope id="5797068448049415487" at="25,0,36,0">
         <var name="e" id="5797068448049415490" />
         <var name="state" id="5797068448049415492" />
       </scope>
-      <unit id="5797068448049410625" at="9,0,42,0" name="jetbrains.mps.ide.hierarchy.toggle.GroupedToggleAction" />
+      <unit id="5797068448049410625" at="10,0,44,0" name="jetbrains.mps.ide.hierarchy.toggle.GroupedToggleAction" />
     </file>
   </root>
   <root nodeRef="r:b522c221-948b-4fac-886a-2badf29b5fb4(jetbrains.mps.ide.hierarchy.toggle)/5797068448049415641">
     <file name="ToggleActionGroup.java">
-      <node id="5797068448049415643" at="9,0,10,0" concept="2" trace="myActions" />
-      <node id="5797068448049415660" at="12,47,13,26" concept="1" />
-      <node id="5797068448049415665" at="13,26,14,26" concept="1" />
-      <node id="5797068448049415686" at="18,28,19,25" concept="1" />
-      <node id="5797068448049415650" at="10,0,12,0" concept="0" trace="ToggleActionGroup#()V" />
-      <node id="5797068448049415681" at="17,49,20,7" concept="4" />
-      <node id="5797068448049415654" at="12,0,16,0" concept="5" trace="add#(Ljetbrains/mps/ide/hierarchy/toggle/GroupedToggleAction;)V" />
-      <node id="5797068448049415676" at="16,59,21,5" concept="3" />
-      <node id="5797068448049415670" at="16,0,23,0" concept="5" trace="changeSelection#(Ljetbrains/mps/ide/hierarchy/toggle/GroupedToggleAction;)V" />
-      <scope id="5797068448049415653" at="10,30,10,30" />
-      <scope id="5797068448049415685" at="18,28,19,25" />
-      <scope id="5797068448049415650" at="10,0,12,0" />
-      <scope id="5797068448049415659" at="12,47,14,26" />
-      <scope id="5797068448049415680" at="17,49,20,7" />
-      <scope id="5797068448049415654" at="12,0,16,0">
+      <node id="5797068448049415643" at="11,0,12,0" concept="2" trace="myActions" />
+      <node id="5797068448049415660" at="14,47,15,26" concept="1" />
+      <node id="5797068448049415665" at="15,26,16,26" concept="1" />
+      <node id="5797068448049415686" at="20,28,21,25" concept="1" />
+      <node id="5797068448049415650" at="12,0,14,0" concept="0" trace="ToggleActionGroup#()V" />
+      <node id="5797068448049415681" at="19,49,22,7" concept="4" />
+      <node id="5797068448049415654" at="14,0,18,0" concept="5" trace="add#(Ljetbrains/mps/ide/hierarchy/toggle/GroupedToggleAction;)V" />
+      <node id="5797068448049415676" at="18,59,23,5" concept="3" />
+      <node id="5797068448049415670" at="18,0,25,0" concept="5" trace="changeSelection#(Ljetbrains/mps/ide/hierarchy/toggle/GroupedToggleAction;)V" />
+      <scope id="5797068448049415653" at="12,30,12,30" />
+      <scope id="5797068448049415685" at="20,28,21,25" />
+      <scope id="5797068448049415650" at="12,0,14,0" />
+      <scope id="5797068448049415659" at="14,47,16,26" />
+      <scope id="5797068448049415680" at="19,49,22,7" />
+      <scope id="5797068448049415654" at="14,0,18,0">
         <var name="action" id="5797068448049415657" />
       </scope>
-      <scope id="5797068448049415675" at="16,59,21,5" />
-      <scope id="5797068448049415676" at="16,59,21,5">
+      <scope id="5797068448049415675" at="18,59,23,5" />
+      <scope id="5797068448049415676" at="18,59,23,5">
         <var name="child" id="5797068448049415678" />
       </scope>
-      <scope id="5797068448049415670" at="16,0,23,0">
+      <scope id="5797068448049415670" at="18,0,25,0">
         <var name="action" id="5797068448049415673" />
       </scope>
-      <unit id="5797068448049415641" at="8,0,24,0" name="jetbrains.mps.ide.hierarchy.toggle.ToggleActionGroup" />
+      <unit id="5797068448049415641" at="9,0,26,0" name="jetbrains.mps.ide.hierarchy.toggle.ToggleActionGroup" />
     </file>
   </root>
 </debug-info>

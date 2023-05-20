@@ -1,123 +1,186 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
   <root nodeRef="r:9dd38274-05d8-45ba-a41e-44ac52909443(jetbrains.mps.lang.editor.forms.test@tests)/5347446703374107785">
     <file name="TextCheckbox_SPACE_Toggles_Test.java">
-      <node id="5347446703374107785" at="15,66,16,114" concept="1" />
-      <node id="5347446703374107785" at="16,114,17,114" concept="1" />
-      <node id="5347446703374107785" at="23,51,24,72" concept="1" />
-      <node id="5347446703374107802" at="24,72,25,82" concept="1" />
-      <node id="5347446703374107785" at="14,0,19,0" concept="2" trace="test_TextCheckbox_SPACE_Toggles#()V" />
-      <node id="5347446703374107785" at="22,0,27,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="5347446703374107785" at="15,66,17,114" />
-      <scope id="5347446703374107785" at="23,51,25,82" />
-      <scope id="5347446703374107785" at="14,0,19,0" />
-      <scope id="5347446703374107785" at="22,0,27,0" />
-      <unit id="5347446703374107785" at="20,0,28,0" name="jetbrains.mps.lang.editor.forms.test.TextCheckbox_SPACE_Toggles_Test$TestBody" />
-      <unit id="5347446703374107785" at="12,0,29,0" name="jetbrains.mps.lang.editor.forms.test.TextCheckbox_SPACE_Toggles_Test" />
+      <node id="5347446703374107785" at="21,44,22,60" concept="6" />
+      <node id="5347446703374107785" at="26,66,27,36" concept="2" />
+      <node id="5347446703374107785" at="32,52,33,19" concept="6" />
+      <node id="5347446703374107785" at="37,51,38,72" concept="2" />
+      <node id="5347446703374107802" at="38,72,39,82" concept="2" />
+      <node id="5347446703374107785" at="18,0,20,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="5347446703374107785" at="21,0,24,0" concept="1" trace="TextCheckbox_SPACE_Toggles_Test#()V" />
+      <node id="5347446703374107785" at="32,0,35,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5347446703374107785" at="25,0,29,0" concept="3" trace="test_TextCheckbox_SPACE_Toggles#()V" />
+      <node id="5347446703374107785" at="36,0,41,0" concept="3" trace="testMethodImpl#()V" />
+      <scope id="5347446703374107785" at="21,44,22,60" />
+      <scope id="5347446703374107785" at="26,66,27,36" />
+      <scope id="5347446703374107785" at="32,52,33,19" />
+      <scope id="5347446703374107785" at="37,51,39,82" />
+      <scope id="5347446703374107785" at="21,0,24,0" />
+      <scope id="5347446703374107785" at="32,0,35,0">
+        <var name="owner" id="5347446703374107785" />
+      </scope>
+      <scope id="5347446703374107785" at="25,0,29,0" />
+      <scope id="5347446703374107785" at="36,0,41,0" />
+      <unit id="5347446703374107785" at="30,0,42,0" name="jetbrains.mps.lang.editor.forms.test.TextCheckbox_SPACE_Toggles_Test$TestBody" />
+      <unit id="5347446703374107785" at="16,0,43,0" name="jetbrains.mps.lang.editor.forms.test.TextCheckbox_SPACE_Toggles_Test" />
     </file>
   </root>
   <root nodeRef="r:9dd38274-05d8-45ba-a41e-44ac52909443(jetbrains.mps.lang.editor.forms.test@tests)/5347446703375532576">
     <file name="TextCheckbox_CLICK_Toggles_Test.java">
-      <node id="5347446703375532576" at="15,66,16,114" concept="1" />
-      <node id="5347446703375532576" at="16,114,17,114" concept="1" />
-      <node id="5347446703375532576" at="23,51,24,72" concept="1" />
-      <node id="5347446703375532775" at="25,7,26,28" concept="3" />
-      <node id="5347446703375532775" at="26,28,27,28" concept="3" />
-      <node id="5347446703375532775" at="27,28,28,121" concept="3" />
-      <node id="5347446703375532775" at="28,121,29,120" concept="1" />
-      <node id="5347446703375532775" at="29,120,30,119" concept="1" />
-      <node id="5347446703375532576" at="14,0,19,0" concept="2" trace="test_TextCheckbox_CLICK_Toggles#()V" />
-      <node id="5347446703375532775" at="24,72,31,7" concept="0" />
-      <node id="5347446703375532576" at="22,0,33,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="5347446703375532576" at="15,66,17,114" />
-      <scope id="5347446703375532576" at="14,0,19,0" />
-      <scope id="5347446703375532775" at="25,7,30,119">
+      <node id="5347446703375532576" at="21,44,22,60" concept="6" />
+      <node id="5347446703375532576" at="26,66,27,36" concept="2" />
+      <node id="5347446703375532576" at="32,52,33,19" concept="6" />
+      <node id="5347446703375532576" at="37,51,38,72" concept="2" />
+      <node id="5347446703375532775" at="39,7,40,28" concept="4" />
+      <node id="5347446703375532775" at="40,28,41,28" concept="4" />
+      <node id="5347446703375532775" at="41,28,42,121" concept="4" />
+      <node id="5347446703375532775" at="42,121,43,120" concept="2" />
+      <node id="5347446703375532775" at="43,120,44,119" concept="2" />
+      <node id="5347446703375532576" at="18,0,20,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="5347446703375532576" at="21,0,24,0" concept="1" trace="TextCheckbox_CLICK_Toggles_Test#()V" />
+      <node id="5347446703375532576" at="32,0,35,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5347446703375532576" at="25,0,29,0" concept="3" trace="test_TextCheckbox_CLICK_Toggles#()V" />
+      <node id="5347446703375532775" at="38,72,45,7" concept="0" />
+      <node id="5347446703375532576" at="36,0,47,0" concept="3" trace="testMethodImpl#()V" />
+      <scope id="5347446703375532576" at="21,44,22,60" />
+      <scope id="5347446703375532576" at="26,66,27,36" />
+      <scope id="5347446703375532576" at="32,52,33,19" />
+      <scope id="5347446703375532576" at="21,0,24,0" />
+      <scope id="5347446703375532576" at="32,0,35,0">
+        <var name="owner" id="5347446703375532576" />
+      </scope>
+      <scope id="5347446703375532576" at="25,0,29,0" />
+      <scope id="5347446703375532775" at="39,7,44,119">
         <var name="eventTargetComponent_qbnwfg_a0" id="5347446703375532775" />
         <var name="x_qbnwfg_a0" id="5347446703375532775" />
         <var name="y_qbnwfg_a0" id="5347446703375532775" />
       </scope>
-      <scope id="5347446703375532576" at="23,51,31,7" />
-      <scope id="5347446703375532576" at="22,0,33,0" />
-      <unit id="5347446703375532576" at="20,0,34,0" name="jetbrains.mps.lang.editor.forms.test.TextCheckbox_CLICK_Toggles_Test$TestBody" />
-      <unit id="5347446703375532576" at="12,0,35,0" name="jetbrains.mps.lang.editor.forms.test.TextCheckbox_CLICK_Toggles_Test" />
+      <scope id="5347446703375532576" at="37,51,45,7" />
+      <scope id="5347446703375532576" at="36,0,47,0" />
+      <unit id="5347446703375532576" at="30,0,48,0" name="jetbrains.mps.lang.editor.forms.test.TextCheckbox_CLICK_Toggles_Test$TestBody" />
+      <unit id="5347446703375532576" at="16,0,49,0" name="jetbrains.mps.lang.editor.forms.test.TextCheckbox_CLICK_Toggles_Test" />
     </file>
   </root>
   <root nodeRef="r:9dd38274-05d8-45ba-a41e-44ac52909443(jetbrains.mps.lang.editor.forms.test@tests)/5347446703375533173">
     <file name="TextCheckbox_SPACE_KeepsSelection_Test.java">
-      <node id="5347446703375533173" at="15,73,16,114" concept="1" />
-      <node id="5347446703375533173" at="16,114,17,121" concept="1" />
-      <node id="5347446703375533173" at="23,51,24,72" concept="1" />
-      <node id="5347446703375533560" at="24,72,25,82" concept="1" />
-      <node id="5347446703375533173" at="14,0,19,0" concept="2" trace="test_TextCheckbox_SPACE_KeepsSelection#()V" />
-      <node id="5347446703375533173" at="22,0,27,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="5347446703375533173" at="15,73,17,121" />
-      <scope id="5347446703375533173" at="23,51,25,82" />
-      <scope id="5347446703375533173" at="14,0,19,0" />
-      <scope id="5347446703375533173" at="22,0,27,0" />
-      <unit id="5347446703375533173" at="20,0,28,0" name="jetbrains.mps.lang.editor.forms.test.TextCheckbox_SPACE_KeepsSelection_Test$TestBody" />
-      <unit id="5347446703375533173" at="12,0,29,0" name="jetbrains.mps.lang.editor.forms.test.TextCheckbox_SPACE_KeepsSelection_Test" />
+      <node id="5347446703375533173" at="21,51,22,60" concept="6" />
+      <node id="5347446703375533173" at="26,73,27,36" concept="2" />
+      <node id="5347446703375533173" at="32,52,33,19" concept="6" />
+      <node id="5347446703375533173" at="37,51,38,72" concept="2" />
+      <node id="5347446703375533560" at="38,72,39,82" concept="2" />
+      <node id="5347446703375533173" at="18,0,20,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="5347446703375533173" at="21,0,24,0" concept="1" trace="TextCheckbox_SPACE_KeepsSelection_Test#()V" />
+      <node id="5347446703375533173" at="32,0,35,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5347446703375533173" at="25,0,29,0" concept="3" trace="test_TextCheckbox_SPACE_KeepsSelection#()V" />
+      <node id="5347446703375533173" at="36,0,41,0" concept="3" trace="testMethodImpl#()V" />
+      <scope id="5347446703375533173" at="21,51,22,60" />
+      <scope id="5347446703375533173" at="26,73,27,36" />
+      <scope id="5347446703375533173" at="32,52,33,19" />
+      <scope id="5347446703375533173" at="37,51,39,82" />
+      <scope id="5347446703375533173" at="21,0,24,0" />
+      <scope id="5347446703375533173" at="32,0,35,0">
+        <var name="owner" id="5347446703375533173" />
+      </scope>
+      <scope id="5347446703375533173" at="25,0,29,0" />
+      <scope id="5347446703375533173" at="36,0,41,0" />
+      <unit id="5347446703375533173" at="30,0,42,0" name="jetbrains.mps.lang.editor.forms.test.TextCheckbox_SPACE_KeepsSelection_Test$TestBody" />
+      <unit id="5347446703375533173" at="16,0,43,0" name="jetbrains.mps.lang.editor.forms.test.TextCheckbox_SPACE_KeepsSelection_Test" />
     </file>
   </root>
   <root nodeRef="r:9dd38274-05d8-45ba-a41e-44ac52909443(jetbrains.mps.lang.editor.forms.test@tests)/7013563450911355542">
     <file name="PlatformCheckbox_CLICK_Toggles_Test.java">
-      <node id="7013563450911355542" at="15,70,16,114" concept="1" />
-      <node id="7013563450911355542" at="16,114,17,118" concept="1" />
-      <node id="7013563450911355542" at="23,51,24,72" concept="1" />
-      <node id="7013563450911355548" at="25,7,26,28" concept="3" />
-      <node id="7013563450911355548" at="26,28,27,28" concept="3" />
-      <node id="7013563450911355548" at="27,28,28,121" concept="3" />
-      <node id="7013563450911355548" at="28,121,29,120" concept="1" />
-      <node id="7013563450911355548" at="29,120,30,119" concept="1" />
-      <node id="7013563450911355542" at="14,0,19,0" concept="2" trace="test_PlatformCheckbox_CLICK_Toggles#()V" />
-      <node id="7013563450911355548" at="24,72,31,7" concept="0" />
-      <node id="7013563450911355542" at="22,0,33,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="7013563450911355542" at="15,70,17,118" />
-      <scope id="7013563450911355542" at="14,0,19,0" />
-      <scope id="7013563450911355548" at="25,7,30,119">
+      <node id="7013563450911355542" at="21,48,22,60" concept="6" />
+      <node id="7013563450911355542" at="26,70,27,36" concept="2" />
+      <node id="7013563450911355542" at="32,52,33,19" concept="6" />
+      <node id="7013563450911355542" at="37,51,38,72" concept="2" />
+      <node id="7013563450911355548" at="39,7,40,28" concept="4" />
+      <node id="7013563450911355548" at="40,28,41,28" concept="4" />
+      <node id="7013563450911355548" at="41,28,42,121" concept="4" />
+      <node id="7013563450911355548" at="42,121,43,120" concept="2" />
+      <node id="7013563450911355548" at="43,120,44,119" concept="2" />
+      <node id="7013563450911355542" at="18,0,20,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="7013563450911355542" at="21,0,24,0" concept="1" trace="PlatformCheckbox_CLICK_Toggles_Test#()V" />
+      <node id="7013563450911355542" at="32,0,35,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="7013563450911355542" at="25,0,29,0" concept="3" trace="test_PlatformCheckbox_CLICK_Toggles#()V" />
+      <node id="7013563450911355548" at="38,72,45,7" concept="0" />
+      <node id="7013563450911355542" at="36,0,47,0" concept="3" trace="testMethodImpl#()V" />
+      <scope id="7013563450911355542" at="21,48,22,60" />
+      <scope id="7013563450911355542" at="26,70,27,36" />
+      <scope id="7013563450911355542" at="32,52,33,19" />
+      <scope id="7013563450911355542" at="21,0,24,0" />
+      <scope id="7013563450911355542" at="32,0,35,0">
+        <var name="owner" id="7013563450911355542" />
+      </scope>
+      <scope id="7013563450911355542" at="25,0,29,0" />
+      <scope id="7013563450911355548" at="39,7,44,119">
         <var name="eventTargetComponent_y07yvj_a0" id="7013563450911355548" />
         <var name="x_y07yvj_a0" id="7013563450911355548" />
         <var name="y_y07yvj_a0" id="7013563450911355548" />
       </scope>
-      <scope id="7013563450911355542" at="23,51,31,7" />
-      <scope id="7013563450911355542" at="22,0,33,0" />
-      <unit id="7013563450911355542" at="20,0,34,0" name="jetbrains.mps.lang.editor.forms.test.PlatformCheckbox_CLICK_Toggles_Test$TestBody" />
-      <unit id="7013563450911355542" at="12,0,35,0" name="jetbrains.mps.lang.editor.forms.test.PlatformCheckbox_CLICK_Toggles_Test" />
+      <scope id="7013563450911355542" at="37,51,45,7" />
+      <scope id="7013563450911355542" at="36,0,47,0" />
+      <unit id="7013563450911355542" at="30,0,48,0" name="jetbrains.mps.lang.editor.forms.test.PlatformCheckbox_CLICK_Toggles_Test$TestBody" />
+      <unit id="7013563450911355542" at="16,0,49,0" name="jetbrains.mps.lang.editor.forms.test.PlatformCheckbox_CLICK_Toggles_Test" />
     </file>
   </root>
   <root nodeRef="r:9dd38274-05d8-45ba-a41e-44ac52909443(jetbrains.mps.lang.editor.forms.test@tests)/7013563450911355550">
     <file name="PlatformCheckbox_SPACE_InImage_Toggles_Test.java">
-      <node id="7013563450911355550" at="15,78,16,114" concept="1" />
-      <node id="7013563450911355550" at="16,114,17,126" concept="1" />
-      <node id="7013563450911355550" at="23,51,24,72" concept="1" />
-      <node id="7013563450911355554" at="24,72,25,82" concept="1" />
-      <node id="7013563450911355550" at="14,0,19,0" concept="2" trace="test_PlatformCheckbox_SPACE_InImage_Toggles#()V" />
-      <node id="7013563450911355550" at="22,0,27,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="7013563450911355550" at="15,78,17,126" />
-      <scope id="7013563450911355550" at="23,51,25,82" />
-      <scope id="7013563450911355550" at="14,0,19,0" />
-      <scope id="7013563450911355550" at="22,0,27,0" />
-      <unit id="7013563450911355550" at="20,0,28,0" name="jetbrains.mps.lang.editor.forms.test.PlatformCheckbox_SPACE_InImage_Toggles_Test$TestBody" />
-      <unit id="7013563450911355550" at="12,0,29,0" name="jetbrains.mps.lang.editor.forms.test.PlatformCheckbox_SPACE_InImage_Toggles_Test" />
+      <node id="7013563450911355550" at="21,56,22,60" concept="6" />
+      <node id="7013563450911355550" at="26,78,27,36" concept="2" />
+      <node id="7013563450911355550" at="32,52,33,19" concept="6" />
+      <node id="7013563450911355550" at="37,51,38,72" concept="2" />
+      <node id="7013563450911355554" at="38,72,39,82" concept="2" />
+      <node id="7013563450911355550" at="18,0,20,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="7013563450911355550" at="21,0,24,0" concept="1" trace="PlatformCheckbox_SPACE_InImage_Toggles_Test#()V" />
+      <node id="7013563450911355550" at="32,0,35,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="7013563450911355550" at="25,0,29,0" concept="3" trace="test_PlatformCheckbox_SPACE_InImage_Toggles#()V" />
+      <node id="7013563450911355550" at="36,0,41,0" concept="3" trace="testMethodImpl#()V" />
+      <scope id="7013563450911355550" at="21,56,22,60" />
+      <scope id="7013563450911355550" at="26,78,27,36" />
+      <scope id="7013563450911355550" at="32,52,33,19" />
+      <scope id="7013563450911355550" at="37,51,39,82" />
+      <scope id="7013563450911355550" at="21,0,24,0" />
+      <scope id="7013563450911355550" at="32,0,35,0">
+        <var name="owner" id="7013563450911355550" />
+      </scope>
+      <scope id="7013563450911355550" at="25,0,29,0" />
+      <scope id="7013563450911355550" at="36,0,41,0" />
+      <unit id="7013563450911355550" at="30,0,42,0" name="jetbrains.mps.lang.editor.forms.test.PlatformCheckbox_SPACE_InImage_Toggles_Test$TestBody" />
+      <unit id="7013563450911355550" at="16,0,43,0" name="jetbrains.mps.lang.editor.forms.test.PlatformCheckbox_SPACE_InImage_Toggles_Test" />
     </file>
   </root>
   <root nodeRef="r:9dd38274-05d8-45ba-a41e-44ac52909443(jetbrains.mps.lang.editor.forms.test@tests)/7013563450911367726">
     <file name="PlatformCheckbox_SPACE_InLabel_Toggles_Test.java">
-      <node id="7013563450911367726" at="15,78,16,114" concept="1" />
-      <node id="7013563450911367726" at="16,114,17,126" concept="1" />
-      <node id="7013563450911367726" at="23,51,24,72" concept="1" />
-      <node id="7013563450911367728" at="24,72,25,82" concept="1" />
-      <node id="7013563450911367726" at="14,0,19,0" concept="2" trace="test_PlatformCheckbox_SPACE_InLabel_Toggles#()V" />
-      <node id="7013563450911367726" at="22,0,27,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="7013563450911367726" at="15,78,17,126" />
-      <scope id="7013563450911367726" at="23,51,25,82" />
-      <scope id="7013563450911367726" at="14,0,19,0" />
-      <scope id="7013563450911367726" at="22,0,27,0" />
-      <unit id="7013563450911367726" at="20,0,28,0" name="jetbrains.mps.lang.editor.forms.test.PlatformCheckbox_SPACE_InLabel_Toggles_Test$TestBody" />
-      <unit id="7013563450911367726" at="12,0,29,0" name="jetbrains.mps.lang.editor.forms.test.PlatformCheckbox_SPACE_InLabel_Toggles_Test" />
+      <node id="7013563450911367726" at="21,56,22,60" concept="6" />
+      <node id="7013563450911367726" at="26,78,27,36" concept="2" />
+      <node id="7013563450911367726" at="32,52,33,19" concept="6" />
+      <node id="7013563450911367726" at="37,51,38,72" concept="2" />
+      <node id="7013563450911367728" at="38,72,39,82" concept="2" />
+      <node id="7013563450911367726" at="18,0,20,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="7013563450911367726" at="21,0,24,0" concept="1" trace="PlatformCheckbox_SPACE_InLabel_Toggles_Test#()V" />
+      <node id="7013563450911367726" at="32,0,35,0" concept="1" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="7013563450911367726" at="25,0,29,0" concept="3" trace="test_PlatformCheckbox_SPACE_InLabel_Toggles#()V" />
+      <node id="7013563450911367726" at="36,0,41,0" concept="3" trace="testMethodImpl#()V" />
+      <scope id="7013563450911367726" at="21,56,22,60" />
+      <scope id="7013563450911367726" at="26,78,27,36" />
+      <scope id="7013563450911367726" at="32,52,33,19" />
+      <scope id="7013563450911367726" at="37,51,39,82" />
+      <scope id="7013563450911367726" at="21,0,24,0" />
+      <scope id="7013563450911367726" at="32,0,35,0">
+        <var name="owner" id="7013563450911367726" />
+      </scope>
+      <scope id="7013563450911367726" at="25,0,29,0" />
+      <scope id="7013563450911367726" at="36,0,41,0" />
+      <unit id="7013563450911367726" at="30,0,42,0" name="jetbrains.mps.lang.editor.forms.test.PlatformCheckbox_SPACE_InLabel_Toggles_Test$TestBody" />
+      <unit id="7013563450911367726" at="16,0,43,0" name="jetbrains.mps.lang.editor.forms.test.PlatformCheckbox_SPACE_InLabel_Toggles_Test" />
     </file>
   </root>
 </debug-info>

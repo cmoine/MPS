@@ -5,10 +5,11 @@ package jetbrains.mps.lang.editor.formsTests.editor;
 import jetbrains.mps.lang.editor.forms.runtime.AbstractToggleCheckboxAction;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.nodeEditor.selectionRestoring.CellSelector;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.nodeEditor.selectionRestoring.WholeCellSelector;
+import org.jetbrains.mps.openapi.language.SProperty;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class ToggleCheckboxAction_3jyf1k_g0 extends AbstractToggleCheckboxAction {
   private final SNode myNode;
@@ -18,10 +19,14 @@ public class ToggleCheckboxAction_3jyf1k_g0 extends AbstractToggleCheckboxAction
   }
 
   protected void doExecute() {
-    SPropertyOperations.set(myNode, MetaAdapterFactory.getProperty(0xafb9a5fdbc5d4169L, 0xa22542d8823d623aL, 0x455f8dda63d636dL, 0x3bf28179462bcb27L, "booleanProperty2"), "" + (!(SPropertyOperations.getBoolean(myNode, MetaAdapterFactory.getProperty(0xafb9a5fdbc5d4169L, 0xa22542d8823d623aL, 0x455f8dda63d636dL, 0x3bf28179462bcb27L, "booleanProperty2")))));
+    SPropertyOperations.assign(myNode, PROPS.booleanProperty2$x84S, !(SPropertyOperations.getBoolean(myNode, PROPS.booleanProperty2$x84S)));
   }
 
   protected CellSelector createCellSelector(EditorCell selectedCell) {
     return new WholeCellSelector();
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty booleanProperty2$x84S = MetaAdapterFactory.getProperty(0xafb9a5fdbc5d4169L, 0xa22542d8823d623aL, 0x455f8dda63d636dL, 0x3bf28179462bcb27L, "booleanProperty2");
   }
 }

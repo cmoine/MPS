@@ -4,6 +4,14 @@
       <root url="jar://$PROJECT_DIR$/mps-core/lib/mps-editor.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../editor/editor-runtime/source" />
+      <root url="file://$PROJECT_DIR$/../editor/editor-runtime/source_gen" />
+      <root url="file://$PROJECT_DIR$/../editor/actions-runtime/source" />
+      <root url="file://$PROJECT_DIR$/../editor/actions-runtime/source_gen" />
+      <root url="file://$PROJECT_DIR$/../editor/intentions-runtime/source" />
+      <root url="file://$PROJECT_DIR$/../editor/typesystemIntegration/source" />
+      <root url="file://$PROJECT_DIR$/../editor/typesystemIntegration/source_gen" />
+    </SOURCES>
   </library>
 </component>

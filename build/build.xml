@@ -3,20 +3,19 @@
   <property name="resources" location="${basedir}/resources"/>
 
   <target name="platform">
-    <ant antfile="getIdeaPlatform.xml" target="force-resolve" inheritAll="true" useNativeBasedir="true"/>
-    <ant antfile="./jetpad/build.xml" target="resolve" inheritAll="true" useNativeBasedir="true"/>
+    <ant antfile="getDependencies.xml" target="install" inheritAll="true" useNativeBasedir="true"/>
   </target>
 
   <target name="getResourcesAndBuildAll">
-    <ant antfile="getResources.xml" inheritall="true" usenativebasedir="true" target="getHelp" />
-    <ant antfile="getResources.xml" inheritall="true" usenativebasedir="true" target="getMachelp" />
-    <ant antfile="getResources.xml" inheritall="true" usenativebasedir="true" target="getJdk" />
+    <ant antfile="getResources.xml" inheritall="true" usenativebasedir="true" target="getOpenjdkWin" />
     <ant antfile="mpsDistribution.xml" inheritAll="true" useNativeBasedir="true" target="buildDependents"/>
   </target>
 
   <target name="assemble">
     <ant antfile="mpsDistribution.xml" inheritAll="true" useNativeBasedir="true" target="assemble"/>
     <ant antfile="mpsDistribution.xml" inheritAll="true" useNativeBasedir="true" target="publishTCArtifacts"/>
+    <ant antfile="mpsMaven.xml" inheritAll="true" useNativeBasedir="true" target="assemble"/>
+    <ant antfile="mpsMaven.xml" inheritAll="true" useNativeBasedir="true" target="publishTCArtifact"/>
   </target>
 
   <target name="base" depends="platform, getResourcesAndBuildAll, assemble">
@@ -35,7 +34,6 @@
   </target>
 
   <target name="cleanResources">
-    <delete dir="${resources}/help"/>
-    <delete dir="${resources}/JDK"/>
+    <delete dir="${resources}/openJDK"/>
   </target>
 </project>

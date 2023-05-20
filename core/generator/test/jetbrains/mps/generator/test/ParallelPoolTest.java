@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,10 +19,9 @@ import jetbrains.mps.generator.GenerationCanceledException;
 import jetbrains.mps.generator.impl.GenerationFailureException;
 import jetbrains.mps.generator.impl.GenerationTaskPool;
 import jetbrains.mps.generator.impl.IGenerationTaskPool.GenerationTask;
+import jetbrains.mps.logging.Logger;
 import junit.framework.Assert;
 import junit.framework.TestCase;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +32,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class ParallelPoolTest extends TestCase {
 
-  private static Logger LOG = LogManager.getLogger(ParallelPoolTest.class);
+  private static Logger LOG = Logger.getLogger(ParallelPoolTest.class);
 
   private static class CustomTask implements GenerationTask {
     private AtomicBoolean isFinished = new AtomicBoolean(false);

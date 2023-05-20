@@ -6,27 +6,39 @@ import jetbrains.mps.scope.Scope;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.annotations.NotNull;
+import java.util.Collection;
 
 public abstract class DelegatingScope extends Scope {
   public DelegatingScope() {
   }
+
   protected abstract Scope getScope();
+
   @Nullable
   @Override
   public String getReferenceText(SNode contextNode, @NotNull SNode node) {
     return getScope().getReferenceText(contextNode, node);
   }
+
   @Nullable
   @Override
   public SNode resolve(SNode contextNode, @NotNull String refText) {
     return getScope().resolve(contextNode, refText);
   }
+
   @Override
   public Iterable<SNode> getAvailableElements(@Nullable String prefix) {
     return getScope().getAvailableElements(prefix);
   }
+
   @Override
   public boolean contains(SNode node) {
     return getScope().contains(node);
   }
+
+  @Override
+  public Collection<SNode> getAdditionalDependencies() {
+    return getScope().getAdditionalDependencies();
+  }
+
 }

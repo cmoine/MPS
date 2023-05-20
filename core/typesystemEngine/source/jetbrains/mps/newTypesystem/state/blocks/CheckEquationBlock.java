@@ -46,8 +46,8 @@ public class CheckEquationBlock extends RelationBlock {
 
   @Override
   public Set<Pair<SNode, ConditionKind>> getInitialInputs() {
-    return CollectionUtil.set(new Pair<SNode, ConditionKind>(myLeftNode, ConditionKind.CONCRETE),
-      new Pair<SNode, ConditionKind>(myRightNode, ConditionKind.CONCRETE));
+    return CollectionUtil.set(new Pair<>(myLeftNode, ConditionKind.CONCRETE),
+                              new Pair<>(myRightNode, ConditionKind.CONCRETE));
   }
 
   @Override

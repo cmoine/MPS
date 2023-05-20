@@ -12,10 +12,11 @@ public final class ScriptsDescriptor extends ScriptAspectBase {
   private final RefactoringScript[] myRefactoringScripts;
 
   public ScriptsDescriptor() {
-    myRefactoringScripts = new RefactoringScript[3];
+    myRefactoringScripts = new RefactoringScript[4];
     myRefactoringScripts[0] = new SModelLanguageEnhancements_MigrationScript();
     myRefactoringScripts[1] = new ShowAdapterUsages_MigrationScript();
     myRefactoringScripts[2] = new EscapeSpecialCharactersInProperties_MigrationScript();
+    myRefactoringScripts[3] = new SModelLanguageEnhancements_Pointers_MigrationScript();
   }
 
   @Override

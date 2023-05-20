@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,12 @@
 package jetbrains.mps.openapi.editor.update;
 
 import jetbrains.mps.openapi.editor.cells.EditorCell;
+import jetbrains.mps.openapi.editor.cells.EditorCellFactory;
 import jetbrains.mps.openapi.editor.menus.transformation.SNodeLocation;
 import jetbrains.mps.util.Computable;
 import jetbrains.mps.util.Pair;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 
@@ -114,12 +116,6 @@ public interface UpdateSession {
   EditorCell updateChildNodeCell(SNode node, @NotNull SNodeLocation location);
 
   /**
-   * @deprecated since MPS3.4 use {@link #updateAttributeCell(AttributeKind, EditorCell, SNode)}
-   */
-  @Deprecated
-  EditorCell updateRoleAttributeCell(Class attributeKind, EditorCell cellWithRole, SNode roleAttribute);
-
-  /**
    * Updating the {@link EditorCell} representing some attribute (see {@link AttributeKind}).
    * Attributed cell (representing complete node/or property/..) should be already updated and
    * passed as a parameter of this method call.
@@ -162,5 +158,14 @@ public interface UpdateSession {
    * @param role   - reference role
    * @return result od update computable execution
    */
-  <T> T updateReferencedNodeCell(Computable<T> update, SNode node, String role);
+  <T> T updateReferencedNodeCell(Computable<T> update, SNode node, SReferenceLink role);
+
+  /**
+   * Returning {@link EditorCellFactory} instance used inside current update session
+   * to create EditorCell instances.
+   *
+   * @return EditorCellFactory instance
+   */
+  @NotNull
+  EditorCellFactory getCellFactory();
 }

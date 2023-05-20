@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,7 @@
  */
 package jetbrains.mps.classloading;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import jetbrains.mps.logging.Logger;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -28,13 +27,13 @@ import java.util.Map;
 import java.util.Set;
 
 public class GraphHolder<V> {
-  private static final Logger LOG = LogManager.getLogger(GraphHolder.class);
+  private static final Logger LOG = Logger.getLogger(GraphHolder.class);
   private final Graph<V> myGraph;
   private final Graph<V> myConjugateGraph; // transposed graph
 
   public GraphHolder() {
-    myGraph = new Graph<V>();
-    myConjugateGraph = new Graph<V>();
+    myGraph = new Graph<>();
+    myConjugateGraph = new Graph<>();
   }
 
   public int getEdgesCount() {
@@ -96,27 +95,32 @@ public class GraphHolder<V> {
     return edgeRemoved;
   }
 
-  public Graph<V> getGraph() {
-    return myGraph;
-  }
-
-  public Graph<V> getConjugateGraph() {
-    return myConjugateGraph;
-  }
-
   public boolean contains(V v) {
     checkGraphsCorrectness();
-    return getVertices().contains(v);
+    return myGraph.containsVertex(v);
   }
 
-  public Collection<? extends V> getOutgoingEdges(V v) {
+  public void fillOutgoingEdgesShallow(Iterable<? extends V> vv, Collection<? super V> result) {
     checkGraphsCorrectness();
-    return myGraph.getOuts(v);
+    for(V v : vv) {
+      result.addAll(myGraph.getOuts(v));
+    }
+  }
+
+  public void fillOutgoingEdgesDeep(Iterable<? extends V> vv, Collection<? super V> result) {
+    checkGraphsCorrectness();
+    myGraph.dfs(vv, result::add);
+  }
+
+  public void fillIncomingEdgesDeep(Iterable<? extends V> vv, Collection<? super V> result) {
+    checkGraphsCorrectness();
+    myConjugateGraph.dfs(vv, result::add);
   }
 
   // TODO : merge with jetbrains.mps.util.Graph (mps.util.Graph needs to be modified for a bit)
-  static class Graph<V> {
-    private final Map<V, Set<V>> myOuts = new LinkedHashMap<V, Set<V>>();
+  //    FWIF, there's no more j.m.util.Graph, but jetbrains.mps.make.unittest.Graph, bidirectional.
+  private static class Graph<V> {
+    private final Map<V, Set<V>> myOuts = new LinkedHashMap<>();
     private int myEdgesCount;
 
     public int getEdgesCount() {
@@ -133,7 +137,7 @@ public class GraphHolder<V> {
 
     public boolean addVertex(V v) {
       if (containsVertex(v)) return false;
-      myOuts.put(v, new LinkedHashSet<V>());
+      myOuts.put(v, new LinkedHashSet<>());
       return true;
     }
 
@@ -174,7 +178,7 @@ public class GraphHolder<V> {
     }
 
     public void dfs(Iterable<? extends V> starts, VertexVisitor<V> visitor) {
-      new DfsTraversal<V>(this, starts, visitor).dfs();
+      new DfsTraversal<>(this, starts, visitor).dfs();
     }
 
     public Collection<V> getVertices() {
@@ -183,7 +187,7 @@ public class GraphHolder<V> {
 
     private static class DfsTraversal<V> {
       private final Graph<V> myGraph;
-      private final Set<V> myVisited = new HashSet<V>();
+      private final Set<V> myVisited = new HashSet<>();
       private final Iterable<? extends V> myStartVs;
       private final VertexVisitor<V> myVisitor;
 

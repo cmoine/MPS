@@ -15,6 +15,8 @@
  */
 package jetbrains.mps.util.containers;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Iterator;
 
 public class EmptyIterable<T> implements Iterable<T> {
@@ -24,6 +26,7 @@ public class EmptyIterable<T> implements Iterable<T> {
     return INSTANCE;
   }
 
+  @NotNull
   @Override
   public Iterator<T> iterator() {
     return EmptyIterator.getInstance();

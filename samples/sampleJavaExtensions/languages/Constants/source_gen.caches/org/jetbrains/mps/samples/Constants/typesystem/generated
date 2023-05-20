@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="3kbdbgbifj4yxs415xpq6nx1bxa01g3" />
+<product version="3" modelHash="-7p359w7lgqrn3j7smd3xdaded1dep7m">
+  <files names="TypesystemDescriptor.java:typeof_ConstantReference_InferenceRule.java:typeof_Constant_InferenceRule.java" />
+</product>
 

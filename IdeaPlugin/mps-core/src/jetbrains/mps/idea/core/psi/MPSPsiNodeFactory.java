@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,16 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.core.psi;
 
 import com.intellij.openapi.extensions.ExtensionPointName;
 import com.intellij.psi.PsiManager;
-import com.intellij.psi.PsiReference;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiNode;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiRef;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.model.SNodeId;
 
@@ -35,7 +34,7 @@ public interface MPSPsiNodeFactory {
 
   MPSPsiNode create(SNodeId id, SConcept concept, String containingRole, PsiManager manager);
 
-  MPSPsiRef createReferenceNode(String role, SAbstractConcept linkTargetConcept, SModelReference targetModel, SNodeId targetId, PsiManager manager);
+  MPSPsiRef createReferenceNode(SReferenceLink role, SAbstractConcept linkTargetConcept, SModelReference targetModel, SNodeId targetId, PsiManager manager);
 
-  MPSPsiRef createReferenceNode(String role, SAbstractConcept linkTargetConcept, String referenceText, PsiManager manager);
+  MPSPsiRef createReferenceNode(SReferenceLink role, SAbstractConcept linkTargetConcept, String referenceText, PsiManager manager);
 }

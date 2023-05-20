@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,17 +15,15 @@
  */
 package jetbrains.mps.smodel.action;
 
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.openapi.editor.EditorContext;
-import jetbrains.mps.util.SNodeOperations;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeUtil;
 
 public class DefaultSChildSetter extends AbstractChildNodeSetter {
-  private static final Logger LOG = LogManager.getLogger(DefaultSChildSetter.class);
+  private static final Logger LOG = Logger.getLogger(DefaultSChildSetter.class);
 
   private SContainmentLink myLink;
 

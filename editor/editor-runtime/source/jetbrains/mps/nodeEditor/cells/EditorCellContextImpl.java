@@ -17,10 +17,13 @@ package jetbrains.mps.nodeEditor.cells;
 
 import jetbrains.mps.openapi.editor.cells.EditorCellContext;
 import jetbrains.mps.openapi.editor.menus.transformation.SNodeLocation;
+import jetbrains.mps.openapi.editor.menus.transformation.SPropertyInfo;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -28,8 +31,9 @@ import java.util.Set;
  * Date: 4/24/13
  */
 public class EditorCellContextImpl implements EditorCellContext {
-  private Set<String> myHints = new HashSet<String>();
   private SNodeLocation myNodeLocation;
+  private SPropertyInfo myPropertyInfo;
+  private final Set<String> myHints = new HashSet<>();
 
   public EditorCellContextImpl(EditorCellContext parentContext) {
     myHints.addAll(parentContext.getHints());
@@ -42,19 +46,17 @@ public class EditorCellContextImpl implements EditorCellContext {
   }
 
   @Override
-  public boolean hasContextHint(String hint) {
-    return myHints.contains(hint);
-  }
-
-  @Override
   public SNodeLocation getNodeLocation() {
     return myNodeLocation;
   }
 
+  @Override
+  public SPropertyInfo getPropertyInfo() {
+    return myPropertyInfo;
+  }
+
   public void addHints(String... hints) {
-    for (String hint : hints) {
-      myHints.add(hint);
-    }
+    myHints.addAll(Arrays.asList(hints));
   }
 
   public void removeHints(String... hints) {
@@ -65,5 +67,26 @@ public class EditorCellContextImpl implements EditorCellContext {
 
   public void setNodeLocation(SNodeLocation location) {
     myNodeLocation = location;
+  }
+
+  public void setPropertyInfo(SPropertyInfo propertyInfo) {
+    myPropertyInfo = propertyInfo;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    EditorCellContextImpl that = (EditorCellContextImpl) o;
+    return Objects.equals(myHints, that.myHints) && Objects.equals(myNodeLocation, that.myNodeLocation);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(myHints, myNodeLocation);
   }
 }

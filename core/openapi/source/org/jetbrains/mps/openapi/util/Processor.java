@@ -21,12 +21,7 @@ package org.jetbrains.mps.openapi.util;
  * @param <T>
  */
 public interface Processor<T> {
-  Processor TRUE = new Processor() {
-    @Override
-    public boolean process(Object o) {
-      return true;
-    }
-  };
+  Processor TRUE = o -> true;
   /**
    * @param t consequently takes value of each element of the set this processor is passed to for processing.
    * @return {@code true} to continue processing or {@code false} to stop.

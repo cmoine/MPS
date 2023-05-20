@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,217 +19,82 @@ import com.intellij.compiler.instrumentation.FailSafeClassReader;
 import com.intellij.compiler.instrumentation.InstrumentationClassFinder;
 import com.intellij.compiler.instrumentation.InstrumenterClassWriter;
 import com.intellij.compiler.notNullVerification.NotNullVerifyingInstrumenter;
-import jetbrains.mps.make.CompilationErrorsHandler.ClassesErrorsTracker;
-import jetbrains.mps.project.MPSExtentions;
-import jetbrains.mps.reloading.IClassPathItem;
-import jetbrains.mps.reloading.RealClassPathItem;
-import jetbrains.mps.util.NameUtil;
-import jetbrains.mps.vfs.IFile;
-import org.eclipse.jdt.internal.compiler.ClassFile;
-import org.eclipse.jdt.internal.compiler.CompilationResult;
+import jetbrains.mps.reloading.SDKDiscovery;
+import jetbrains.mps.util.FileUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.mps.openapi.module.SModule;
+import org.jetbrains.org.objectweb.asm.ClassReader;
 import org.jetbrains.org.objectweb.asm.ClassWriter;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import static jetbrains.mps.project.SModuleOperations.getJavaFacet;
+import java.util.Collection;
 
 /**
- * Write compiled java classes to disk, also instruments the notnull annotations
- *
+ * Instruments the notnull annotations into compiled java classes
+ * <p>
  * fixme use bundle for this package
  * Created by apyshkin on 5/26/16.
  */
 public class ClassFileWriter {
-  private final static String OUTPUT_DIR_CANNOT_BE_CREATED = "Can't create %s directory";
-  private final static String MODULE_FOR_CLASS_NOT_FOUND = "It cannot be calculated in which module's output path the class file for %s must be placed";
   private final static String OUTPUT_DIR_IS_NOT_WRITEABLE = "Can't write to %s";
-  private final static String OUTPUT_CANNOT_BE_DELETED = "Can't delete %s";
 
-  private final ModulesContainer myModulesContainer;
   private final MessageSender mySender;
-  private final ChangedModulesTracker myChangedModulesTracker = new ChangedModulesTracker();
   private final InstrumentationClassFinder myFinder;
-  private final Map<String, InputStream> myClassFile2Bytes = new LinkedHashMap<>();
 
-  // fixme think about class path
-  public ClassFileWriter(ModulesContainer modulesContainer, CompositeTracer tracer, IClassPathItem classPath) {
-    myModulesContainer = modulesContainer;
-    mySender = tracer.getSender();
-    myFinder = createInstrumentationClassFinder(classPath);
-  }
-
-  @NotNull
-  private InstrumentationClassFinder createInstrumentationClassFinder(final IClassPathItem classPath) {
-    final URL[] urlsArr = convertClassPathToUrls(classPath);
-    return new InstrumentationClassFinder(urlsArr) { // fixme separate platform cp from usual cp
-      @Override
-      protected InputStream lookupClassBeforeClasspath(String internalClassName) {
-        return myClassFile2Bytes.get(internalClassName);
-      }
-    };
-  }
-
-  @NotNull
-  private static URL[] convertClassPathToUrls(IClassPathItem classPath) {
-    final List<URL> urls = new ArrayList<>();
-    for (RealClassPathItem flatten : classPath.flatten()) {
+  // intended for special scenario, the one where we don't access myModulesContainer -  #instrumentNotNull(java.io.File)
+  ClassFileWriter(@NotNull Collection<Path> classPath, @NotNull File javaHome, @NotNull MessageSender sender) {
+    mySender = sender;
+    final URL[] EMPTY_URLS = new URL[0];
+    URL[] jdkPlatformUrl = EMPTY_URLS;
+    if (SDKDiscovery.isModularRuntime(javaHome)) {
       try {
-        urls.add(new File(flatten.getPath()).toURI().toURL());
-      } catch (MalformedURLException e) {
-        e.printStackTrace();
+        jdkPlatformUrl = new URL[] { InstrumentationClassFinder.createJDKPlatformUrl(javaHome.getPath()) };
+      } catch (MalformedURLException ex) {
+        sender.error(String.format("Failed to get java home url for %s. %s", javaHome, ex.getMessage() == null ? ex.getClass().getName() : ex.getMessage()));
+        jdkPlatformUrl = EMPTY_URLS;
       }
     }
-    return urls.toArray(new URL[urls.size()]);
-  }
-
-  private void updateClassFile2BytesMap(List<CompilationResult> results) {
-    for (CompilationResult result : results) {
-      for (ClassFile classFile : result.getClassFiles()) {
-        String path = convertCompoundToPath(classFile.getCompoundName());
-        myClassFile2Bytes.put(path, new ByteArrayInputStream(classFile.getBytes()));
+    ArrayList<URL> urls = new ArrayList<>(classPath.size());
+    for (Path cpe : classPath) {
+      try {
+        urls.add(cpe.toUri().toURL());
+      } catch (MalformedURLException ex) {
+        // ignore just this one, make best effort to instrument classes
+        sender.error(String.format("Bad classpath element: %s, ignored. %s", cpe, ex.getMessage() == null ? ex.getClass().getName() : ex.getMessage()));
       }
     }
+    myFinder = new InstrumentationClassFinder(jdkPlatformUrl, urls.toArray(EMPTY_URLS));
   }
 
-  /**
-   * @return a set of changed modules
-   */
-  @NotNull
-  public Set<SModule> write(List<CompilationResult> results, ClassesErrorsTracker errorsTracker) {
-    updateClassFile2BytesMap(results);
-    for (CompilationResult result : results) {
-      for (ClassFile cf : result.getClassFiles()) {
-        writeClassFile(cf, errorsTracker);
-      }
+  public void instrumentNotNull(/*not null*/File classFile) {
+    if (!classFile.isFile() || !classFile.canWrite()) {
+      // XXX report odd intent?
+      mySender.error(String.format(OUTPUT_DIR_IS_NOT_WRITEABLE, classFile.getAbsolutePath()));
+      return;
     }
-    return myChangedModulesTracker.getModules();
-  }
-
-  private void writeClassFile(@NotNull ClassFile cf, ClassesErrorsTracker errorsTracker) {
-    String fqName = convertCompoundToFqName(cf.getCompoundName());
-    String containerClassName = getContainerClassName(fqName); // the name up to dollar sign
-    if (!myModulesContainer.containsClass(containerClassName)) {
-      mySender.error(String.format(MODULE_FOR_CLASS_NOT_FOUND, fqName));
-    } else {
-      SModule moduleForClass = myModulesContainer.getModuleContainingClass(containerClassName);
-      myChangedModulesTracker.addChanged(moduleForClass);
-      File outputDir = createOutputDir(fqName, moduleForClass);
-      String className = NameUtil.shortNameFromLongName(fqName);
-      File output = new File(outputDir, className + MPSExtentions.DOT_CLASSFILE);
-      if (!errorsTracker.hasError(containerClassName)) {
-        writeClassFile(cf, output);
-      } else {
-        if (output.exists() && !output.delete()) {
-          String errMsg = String.format(OUTPUT_CANNOT_BE_DELETED, output.getPath());
-          mySender.error(errMsg);
-        }
-      }
-    }
-  }
-
-  private void writeClassFile(ClassFile classFile, File output) {
+    FileInputStream is = null;
     FileOutputStream os = null;
     try {
-      os = new FileOutputStream(output);
-      byte[] classContent = instrumentNotNull(classFile.getBytes());
-      os.write(classContent);
-    } catch (IOException e) {
-      mySender.error(String.format(OUTPUT_DIR_IS_NOT_WRITEABLE, output.getAbsolutePath()));
+      is = new FileInputStream(classFile);
+      ClassReader reader = new FailSafeClassReader(is);
+      FileUtil.closeFileSafe(is);
+      is = null;
+      ClassWriter writer = new InstrumenterClassWriter(reader, ClassWriter.COMPUTE_FRAMES, myFinder);
+      // To understand why last parameter was added - see commits 250331a & 490d4e6 in IDEA Community
+      if (NotNullVerifyingInstrumenter.processClassFile(reader, writer, new String[]{NotNull.class.getName()})) {
+        os = new FileOutputStream(classFile);
+        os.write(writer.toByteArray());
+      }
+    } catch (Throwable th) {
+      mySender.error(th.getMessage() == null ? th.getClass().getName() : th.getMessage(), th);
     } finally {
-      assert os != null;
-      try {
-        os.close();
-      } catch (IOException e) {
-        mySender.error("IOException: ", e);
-      }
-    }
-  }
-
-  @NotNull
-  private File createOutputDir(String fqName, SModule m) {
-    File classesGen = getClassesGen(m);
-    String packageName = NameUtil.namespaceFromLongName(fqName);
-    File outputDir = new File(classesGen, NameUtil.pathFromNamespace(packageName));
-    if (!outputDir.exists() && !outputDir.mkdirs()) {
-      throw new RuntimeException(String.format(OUTPUT_DIR_CANNOT_BE_CREATED, outputDir.getPath()));
-    }
-    return outputDir;
-  }
-
-  @NotNull
-  private File getClassesGen(@NotNull SModule m) {
-    IFile classesGen = getJavaFacet(m).getClassesGen();
-    assert classesGen != null;
-    return new File(classesGen.getPath());
-  }
-
-  /**
-   * cuts the name up to the $ sign
-   */
-  @NotNull
-  private static String getContainerClassName(String fqName) {
-    String containerClassName = fqName;
-    if (containerClassName.contains("$")) {
-      int index = containerClassName.indexOf('$');
-      containerClassName = containerClassName.substring(0, index);
-    }
-    return containerClassName;
-  }
-
-  // FIXME
-  @NotNull
-  private byte[] instrumentNotNull(@NotNull byte[] classContent) throws MalformedURLException {
-    FailSafeClassReader reader = new FailSafeClassReader(classContent, 0, classContent.length);
-    ClassWriter writer = new InstrumenterClassWriter(reader, ClassWriter.COMPUTE_FRAMES, myFinder);
-    NotNullVerifyingInstrumenter.processClassFile(reader, writer);
-    return writer.toByteArray();
-//    return classContent;
-  }
-
-  @NotNull
-  public static String convertCompoundToFqName(char[][] compoundName) {
-    return convertCompoundToStringWithSep(compoundName, '.');
-  }
-
-  private static String convertCompoundToPath(char[][] compoundName) {
-    return convertCompoundToStringWithSep(compoundName, '/');
-  }
-
-  private static String convertCompoundToStringWithSep(char[][] compoundName, char separator) {
-    StringBuilder result = new StringBuilder();
-    for (int i = 0; i < compoundName.length; i++) {
-      char[] part = compoundName[i];
-      result.append(part);
-      if (i != compoundName.length - 1) {
-        result.append(separator);
-      }
-    }
-    return result.toString();
-  }
-
-  private static class ChangedModulesTracker {
-    private final Set<SModule> myModules = new HashSet<SModule>();
-
-    public void addChanged(@NotNull SModule module) {
-      myModules.add(module);
-    }
-
-    public Set<SModule> getModules() {
-      return myModules;
+      FileUtil.closeFileSafe(is);
+      FileUtil.closeFileSafe(os);
     }
   }
 }

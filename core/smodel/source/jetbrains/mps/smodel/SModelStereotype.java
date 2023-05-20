@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +15,7 @@
  */
 package jetbrains.mps.smodel;
 
-import jetbrains.mps.util.annotation.ToRemove;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SModel;
 
 /**
@@ -37,14 +35,6 @@ public class SModelStereotype {
 
   public static final String[] values = new String[]{NONE, GENERATOR, TESTS};
 
-  public static boolean isUserModel(@NotNull SModel model) {
-    return isUserModelStereotype(getStereotype(model));
-  }
-
-  public static boolean isUserModel(@NotNull String modelFqName) {
-    return isUserModelStereotype(getStereotype(modelFqName));
-  }
-
   private static boolean isUserModelStereotype(String stereotype) {
     return NONE.equals(stereotype) || GENERATOR.equals(stereotype) || TESTS.equals(stereotype) || DESCRIPTOR.equals(stereotype);
   }
@@ -61,7 +51,12 @@ public class SModelStereotype {
     return isTestModelStereotype(getStereotype(model));
   }
 
+  /**
+   * @deprecated use {@link #isStubModel(SModel)} instead, plain strings instead of objects are just bad design
+   */
+@Deprecated(since = "2018.2", forRemoval = true)
   public static boolean isStubModelStereotype(String stereotype) {
+    // there's 1 use in mbeddr
     return stereotype.endsWith(STUB_SUFFIX);
   }
 
@@ -94,8 +89,7 @@ public class SModelStereotype {
    * @deprecated use {@link org.jetbrains.mps.openapi.model.SModelName#getStereotype()}
    */
   @NotNull
-  @Deprecated
-  @ToRemove(version = 3.4)
+@Deprecated(since = "3.4", forRemoval = true)
   public static String getStereotype(String modelName) {
     int atIndex = modelName.lastIndexOf('@');
     if (atIndex == -1) {
@@ -105,34 +99,4 @@ public class SModelStereotype {
     }
   }
 
-  /**
-   * @deprecated use {@link org.jetbrains.mps.openapi.model.SModelName} instead
-   * @param name not null
-   * @return name without stereotype (if any)
-   */
-  @Deprecated
-  @ToRemove(version = 3.4)
-  public static String withoutStereotype(String name) {
-    int atIndex = name.lastIndexOf('@');
-    if (atIndex == -1) {
-      return name;
-    } else {
-      return name.substring(0, atIndex);
-    }
-  }
-
-  /**
-   * @deprecated use {@link org.jetbrains.mps.openapi.model.SModelName} instead
-   */
-  @Deprecated
-  @ToRemove(version = 3.4)
-  public static String withStereotype(@NotNull String modelName, @Nullable String stereotype) {
-    if (modelName.indexOf('@') != -1) {
-      throw new IllegalArgumentException("Model name already got stereotype");
-    }
-    if (stereotype == null || stereotype.isEmpty()) {
-      return modelName;
-    }
-    return modelName + '@' + stereotype;
-  }
 }

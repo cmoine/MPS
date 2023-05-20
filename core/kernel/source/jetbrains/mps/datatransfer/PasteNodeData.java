@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,38 +15,69 @@
  */
 package jetbrains.mps.datatransfer;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SLanguage;
-import org.jetbrains.mps.openapi.module.SModuleReference;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SReference;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
 /**
- * XXX why is this data modifiable? emptyPasteNodeData creates a copy with
- * modifiable collections, does it mean we intend to modify PasteNodeData after creation?
+ * immutable data
  */
 public class PasteNodeData {
-  private List<SNode> myNodes;
-  private Set<SReference> myRequireResolveReferences;
-  private Set<SLanguage> myNecessaryLanguages;
-  private Set<SModelReference> myNecessaryModels;
-  private SModelReference mySourceModel;
+  private final List<SNode> myNodes;
+  private final Set<SReference> myRequireResolveReferences;
+  private final Collection<AssociationLink> myCopiedLinks;
+  private final Set<SLanguage> myNecessaryLanguages;
+  private final Set<SModelReference> myNecessaryModels;
+  private final SModelReference mySourceModel;
 
+  // for paste scenario, legacy
   public PasteNodeData(List<SNode> nodes, Set<SReference> references,
                        SModelReference sourceModelRef,
                        Set<SLanguage> necessaryLanguages,
                        Set<SModelReference> necessaryModels) {
     myNodes = nodes;
     myRequireResolveReferences = references;
+    myCopiedLinks = Collections.emptyList();
     mySourceModel = sourceModelRef;
     myNecessaryLanguages = necessaryLanguages;
     myNecessaryModels = necessaryModels;
+  }
+
+  // for paste scenario, new
+  public PasteNodeData(PasteNodeData in, List<SNode> nodes, Set<SReference> references) {
+    this(nodes, references, in.mySourceModel, in.getNecessaryLanguages(), in.getNecessaryModels());
+  }
+
+    // for copy scenario
+  public PasteNodeData(SModelReference sourceModelRef,
+                       List<SNode> nodes,
+                       @NotNull Collection<AssociationLink> references,
+                       Set<SLanguage> necessaryLanguages,
+                       Set<SModelReference> necessaryModels) {
+    myNodes = nodes;
+    myRequireResolveReferences = Collections.emptySet();
+    myCopiedLinks = references;
+    mySourceModel = sourceModelRef;
+    myNecessaryLanguages = necessaryLanguages;
+    myNecessaryModels = necessaryModels;
+  }
+
+    // empty
+  private PasteNodeData(@Nullable SModelReference sourceModel) {
+    myNodes = Collections.emptyList();
+    myRequireResolveReferences = Collections.emptySet();
+    myCopiedLinks = Collections.emptyList();
+    mySourceModel = sourceModel;
+    myNecessaryLanguages = Collections.emptySet();
+    myNecessaryModels = Collections.emptySet();
   }
 
   public List<SNode> getNodes() {
@@ -55,6 +86,10 @@ public class PasteNodeData {
 
   public Set<SReference> getRequireResolveReferences() {
     return myRequireResolveReferences;
+  }
+
+  public Collection<AssociationLink> getCopiedLinks() {
+    return myCopiedLinks;
   }
 
   @Nullable
@@ -71,10 +106,6 @@ public class PasteNodeData {
   }
 
   public static PasteNodeData emptyPasteNodeData(SModelReference sourceModel) {
-    return new PasteNodeData(new ArrayList<SNode>(),
-      new HashSet<SReference>(),
-      sourceModel,
-      new HashSet<SLanguage>(),
-      new HashSet<SModelReference>());
+    return new PasteNodeData(sourceModel);
   }
 }

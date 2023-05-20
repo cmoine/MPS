@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,19 +15,15 @@
  */
 package jetbrains.mps.nodeEditor;
 
-import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
-import jetbrains.mps.ide.MPSCoreComponents;
 import jetbrains.mps.nodeEditor.checking.EditorChecker;
 import jetbrains.mps.nodeEditor.highlighter.HighlighterEditorTracker;
 import jetbrains.mps.openapi.editor.Editor;
-import jetbrains.mps.project.MPSProject;
 import org.jetbrains.annotations.NotNull;
 
 public class EmptyHighlighter extends Highlighter {
-  public EmptyHighlighter(MPSProject mpsProject, Project project, FileEditorManager fileEditorManager,
-      InspectorTool inspector, MPSCoreComponents coreComponents) {
-    super(mpsProject, project, fileEditorManager, inspector, coreComponents);
+  public EmptyHighlighter(Project project) {
+    super(project);
   }
 
   @Override

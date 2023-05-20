@@ -17,6 +17,7 @@ package org.jetbrains.mps.openapi.model;
 
 import org.jetbrains.mps.openapi.language.SLanguage;
 
+@Deprecated(since = "2018.3", forRemoval = true)
 public interface SModelScope {
 
   Iterable<? extends SModel> getModels();

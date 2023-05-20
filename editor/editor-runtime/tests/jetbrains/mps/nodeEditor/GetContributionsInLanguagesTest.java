@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.assertEquals;
@@ -37,48 +38,47 @@ import static org.junit.Assert.assertThat;
 
 public class GetContributionsInLanguagesTest {
   private Mockery context;
+  private EditorAspectContributionsCache<Object, String> descriptorToString;
+  private FakeLanguageRuntime base;
+  private FakeLanguageRuntime extending;
 
   @Before
   public void initMockery() throws Exception {
     context = new JUnit4Mockery();
-  }
-
-  @Test
-  public void singleLanguage() {
-    LanguageRuntime languageRuntime = new FakeLanguageRuntime()
-        .withNamespace("language namespace")
-        .withAspect(context.mock(EditorAspectDescriptor.class, "test"));
-    EditorAspectContributionsCache<Object, String> descriptorToString = new EditorAspectContributionsCache<Object, String>(languageRuntime) {
-      @NotNull
-      @Override
-      protected Collection<String> getDeclaredContributions(EditorAspectDescriptor descriptor, Object key) {
-        return Collections.singleton(descriptor.toString());
-      }
-    };
-    Object irrelevantKey = new Object();
-
-    Collection<String> contributions = descriptorToString.getInLanguages(irrelevantKey, Collections.singleton("language namespace"));
-
-    assertEquals(Collections.singletonList("test"), contributions);
-  }
-
-  @Test
-  public void usedExtendingLanguage() {
-    FakeLanguageRuntime base = new FakeLanguageRuntime()
+    base = new FakeLanguageRuntime()
         .withNamespace("base namespace")
         .withAspect(context.mock(EditorAspectDescriptor.class, "base descriptor"));
-    FakeLanguageRuntime extending = new FakeLanguageRuntime()
+    extending = new FakeLanguageRuntime()
         .withNamespace("extending namespace")
         .withAspect(context.mock(EditorAspectDescriptor.class, "extending descriptor"));
     base.extendWith(extending);
-
-    EditorAspectContributionsCache<Object, String> descriptorToString = new EditorAspectContributionsCache<Object, String>(base) {
+    descriptorToString = new EditorAspectContributionsCache<>(base) {
       @NotNull
       @Override
       protected Collection<String> getDeclaredContributions(EditorAspectDescriptor descriptor, Object key) {
         return Collections.singleton(descriptor.toString());
       }
     };
+  }
+
+  @Test
+  public void languageNoContributions() {
+    // extends dependency between languages, but no contribution
+    Object irrelevantKey = new Object();
+
+    Collection<String> contributions1 = descriptorToString.getInLanguages(irrelevantKey, Collections.singleton("base namespace"));
+    Collection<String> contributions2 = descriptorToString.getInLanguages(irrelevantKey, CollectionUtil.set("base namespace", "extending namespace"));
+
+    final List<String> baseOnly = Collections.singletonList("base descriptor");
+    assertEquals("extends between languages shall not affect contributions", baseOnly, contributions1);
+    assertEquals("extends between languages shall not affect contributions", baseOnly, contributions2);
+  }
+
+  @Test
+  public void usedContributorLanguage() {
+    // contribution in place; both base and extending are "in use"
+    extending.contributeTo(base);
+
     Object irrelevantKey = new Object();
 
     Collection<String> contributions = descriptorToString.getInLanguages(irrelevantKey, CollectionUtil.set("base namespace", "extending namespace"));
@@ -86,21 +86,9 @@ public class GetContributionsInLanguagesTest {
   }
 
   @Test
-  public void unusedExtendingLanguage() {
-    FakeLanguageRuntime base = new FakeLanguageRuntime()
-        .withNamespace("base namespace")
-        .withAspect(context.mock(EditorAspectDescriptor.class, "base descriptor"));
-    base.extendWith(
-        new FakeLanguageRuntime()
-            .withNamespace("unused extending namespace")
-            .withAspect(context.mock(EditorAspectDescriptor.class, "unused extending descriptor")));
-    EditorAspectContributionsCache<Object, String> descriptorToString = new EditorAspectContributionsCache<Object, String>(base) {
-      @NotNull
-      @Override
-      protected Collection<String> getDeclaredContributions(EditorAspectDescriptor descriptor, Object key) {
-        return Collections.singleton(descriptor.toString());
-      }
-    };
+  public void unusedContributorLanguage() {
+    // contribution in place; only base language is "in use"
+    extending.contributeTo(base);
     Object irrelevantKey = new Object();
 
     Collection<String> contributions = descriptorToString.getInLanguages(irrelevantKey, Collections.singleton("base namespace"));
@@ -111,6 +99,7 @@ public class GetContributionsInLanguagesTest {
     private final List<LanguageRuntime> myExtendingLanguages = new ArrayList<>();
     private ILanguageAspect myAspect;
     private String myNamespace;
+    private FakeLanguageRuntime myContribution;
 
     FakeLanguageRuntime withAspect(ILanguageAspect aspect) {
       myAspect = aspect;
@@ -125,6 +114,18 @@ public class GetContributionsInLanguagesTest {
 
     void extendWith(FakeLanguageRuntime extending) {
       myExtendingLanguages.add(extending);
+    }
+
+    void contributeTo(FakeLanguageRuntime targetLanguage) {
+      targetLanguage.myContribution = this;
+    }
+
+    @Override
+    public void forEachContributor(Consumer<LanguageRuntime> visitor, Class<? extends ILanguageAspect> aspectClass) {
+      // have to override as base class implementation needs LanguageRegistry
+      if (myContribution != null) {
+        visitor.accept(myContribution);
+      }
     }
 
     @NotNull
@@ -154,11 +155,6 @@ public class GetContributionsInLanguagesTest {
 
     @Override
     public int getVersion() {
-      throw new UnsupportedOperationException("not implemented");
-    }
-
-    @Override
-    protected String[] getExtendedLanguageIDs() {
       throw new UnsupportedOperationException("not implemented");
     }
   }

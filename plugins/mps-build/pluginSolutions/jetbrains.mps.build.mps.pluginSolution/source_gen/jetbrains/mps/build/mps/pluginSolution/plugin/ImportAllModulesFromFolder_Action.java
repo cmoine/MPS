@@ -10,27 +10,29 @@ import java.util.Map;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.ide.actions.MPSCommonDataKeys;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.internal.collections.runtime.MapSequence;
-import java.awt.Frame;
 import jetbrains.mps.project.MPSProject;
-import org.apache.log4j.Logger;
-import org.apache.log4j.LogManager;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.mps.openapi.module.ModelAccess;
-import jetbrains.mps.ide.ui.filechoosers.treefilechooser.TreeFileChooser;
-import jetbrains.mps.baseLanguage.closures.runtime.Wrappers;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.fileChooser.FileChooser;
+import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
+import com.intellij.openapi.project.ProjectUtil;
 import jetbrains.mps.vfs.IFile;
-import jetbrains.mps.build.behavior.BuildProject__BehaviorDescriptor;
-import jetbrains.mps.build.util.Context;
-import jetbrains.mps.vfs.FileSystem;
-import org.apache.log4j.Level;
+import org.jetbrains.mps.openapi.module.ModelAccess;
 import java.util.Collection;
 import jetbrains.mps.library.ModulesMiner;
 import jetbrains.mps.build.mps.util.VisibleModules;
 import java.util.List;
 import java.util.ArrayList;
+import jetbrains.mps.build.mps.util.PathConverter;
+import jetbrains.mps.ide.messages.DefaultMessageHandler;
 import org.jetbrains.mps.openapi.module.SModuleReference;
+import jetbrains.mps.internal.collections.runtime.ListSequence;
+import jetbrains.mps.messages.Message;
+import jetbrains.mps.messages.MessageKind;
+import jetbrains.mps.build.mps.util.ModuleLoader;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class ImportAllModulesFromFolder_Action extends BaseAction {
   private static final Icon ICON = MPSIcons.Actions.ImportModulesFromFolder;
@@ -51,18 +53,11 @@ public class ImportAllModulesFromFolder_Action extends BaseAction {
     }
     {
       SNode node = event.getData(MPSCommonDataKeys.NODE);
-      if (node != null && !(SNodeOperations.isInstanceOf(node, MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a13L, "jetbrains.mps.build.structure.BuildProject")))) {
+      if (node != null && !(SNodeOperations.isInstanceOf(node, CONCEPTS.BuildProject$ae))) {
         node = null;
       }
       MapSequence.fromMap(_params).put("node", node);
       if (node == null) {
-        return false;
-      }
-    }
-    {
-      Frame p = event.getData(MPSCommonDataKeys.FRAME);
-      MapSequence.fromMap(_params).put("frame", p);
-      if (p == null) {
         return false;
       }
     }
@@ -75,65 +70,50 @@ public class ImportAllModulesFromFolder_Action extends BaseAction {
     }
     return true;
   }
-  protected static Logger LOG = LogManager.getLogger(ImportAllModulesFromFolder_Action.class);
   @Override
   public void doExecute(@NotNull final AnActionEvent event, final Map<String, Object> _params) {
-    ModelAccess modelAccess = ((MPSProject) MapSequence.fromMap(_params).get("project")).getRepository().getModelAccess();
-    TreeFileChooser chooser = new TreeFileChooser();
-    chooser.setMode(TreeFileChooser.MODE_DIRECTORIES);
-    final Wrappers._T<IFile> projectFolder = new Wrappers._T<IFile>(null);
-    final Wrappers._T<String> basePath = new Wrappers._T<String>(null);
+    final MPSProject mpsProject = ((MPSProject) MapSequence.fromMap(_params).get("project"));
+    VirtualFile chosenDir = FileChooser.chooseFile(FileChooserDescriptorFactory.createSingleFolderDescriptor(), mpsProject.getProject(), ProjectUtil.guessProjectDir(mpsProject.getProject()));
+    if (chosenDir == null) {
+      return;
+    }
 
-    modelAccess.runReadAction(new Runnable() {
-      public void run() {
-        basePath.value = BuildProject__BehaviorDescriptor.getBasePath_id4jjtc7WZOyG.invoke(((SNode) MapSequence.fromMap(_params).get("node")), Context.defaultContext());
-        if (basePath.value != null && isNotEmptyString(basePath.value)) {
-          projectFolder.value = FileSystem.getInstance().getFileByPath(basePath.value);
+    final IFile dir = mpsProject.getFileSystem().fromVirtualFile(chosenDir);
+    ModelAccess modelAccess = mpsProject.getRepository().getModelAccess();
+    modelAccess.executeCommandInEDT(() -> {
+      Collection<ModulesMiner.ModuleHandle> modules = new ModulesMiner(mpsProject.getPlatform()).collectModules(dir).getCollectedModules();
+      VisibleModules visible = new VisibleModules(((SNode) MapSequence.fromMap(_params).get("node")));
+      visible.collect();
+
+      List<ImportModuleHelper> helpers = new ArrayList<ImportModuleHelper>();
+      final PathConverter pathConverter = new PathConverter(((SNode) MapSequence.fromMap(_params).get("node")));
+
+      DefaultMessageHandler msgHandler = new DefaultMessageHandler(mpsProject.getProject());
+
+      for (ModulesMiner.ModuleHandle handle : modules) {
+        SModuleReference modRef = handle.getDescriptor().getModuleReference();
+        if (visible.resolve(modRef) != null) {
+          continue;
         }
-      }
-    });
-    if (basePath.value == null) {
-      if (LOG.isEnabledFor(Level.ERROR)) {
-        LOG.error("working directory is not available");
-      }
-      return;
-    }
-    if (projectFolder.value != null) {
-      chooser.setInitialFile(projectFolder.value);
-    }
-    final IFile dir = chooser.showDialog(((Frame) MapSequence.fromMap(_params).get("frame")));
-    if (dir == null || !(dir.isDirectory())) {
-      return;
-    }
 
-    modelAccess.executeCommandInEDT(new Runnable() {
-      public void run() {
-        Collection<ModulesMiner.ModuleHandle> modules = new ModulesMiner().collectModules(dir).getCollectedModules();
-        VisibleModules visible = new VisibleModules(((SNode) MapSequence.fromMap(_params).get("node")));
-        visible.collect();
-
-        List<ImportModuleHelper> helpers = new ArrayList<ImportModuleHelper>();
-        for (ModulesMiner.ModuleHandle handle : modules) {
-          SModuleReference modRef = handle.getDescriptor().getModuleReference();
-          if (visible.resolve(modRef) != null) {
-            continue;
-          }
-
-          ImportModuleHelper helper = new ImportModuleHelper(((SNode) MapSequence.fromMap(_params).get("node")), handle.getFile(), handle.getDescriptor());
+        try {
+          SNode modulePath = ListSequence.fromList(pathConverter.convertPath(handle.getFile().getPath())).first();
+          ImportModuleHelper helper = new ImportModuleHelper(((SNode) MapSequence.fromMap(_params).get("node")), modulePath, handle.getDescriptor());
           helper.create();
           helpers.add(helper);
+        } catch (PathConverter.PathConvertException ex) {
+          msgHandler.handle(Message.createMessage(MessageKind.ERROR, ImportModuleHelper.class.getName(), ex.getMessage(), ex));
         }
-        visible = new VisibleModules(((SNode) MapSequence.fromMap(_params).get("node")));
-        visible.collect();
+      }
 
-        for (ImportModuleHelper helper : helpers) {
-          helper.update(visible);
-        }
-
+      ModuleLoader ml = new ModuleLoader(((SNode) MapSequence.fromMap(_params).get("node")), msgHandler);
+      for (ImportModuleHelper helper : helpers) {
+        helper.update(ml);
       }
     });
   }
-  private static boolean isNotEmptyString(String str) {
-    return str != null && str.length() > 0;
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept BuildProject$ae = MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a13L, "jetbrains.mps.build.structure.BuildProject");
   }
 }

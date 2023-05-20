@@ -51,7 +51,7 @@ public class EnumeratorIterator<T> implements IEnumerator.Iterator<T> {
   public static <U> IEnumerator.Iterator<U> fromIterator(java.util.Iterator<U> itr) {
     if (Sequence.IGNORE_NULL_VALUES) {
       if (itr == null) {
-        return EnumeratorIterator.Empty.instance();
+        return Empty.instance();
       }
     }
     if (itr instanceof IEnumerator.Iterator) {
@@ -60,7 +60,7 @@ public class EnumeratorIterator<T> implements IEnumerator.Iterator<T> {
     return new EnumeratorIterator<U>(itr);
   }
   protected static class Empty<U> implements IEnumerator.Iterator<U> {
-    private static EnumeratorIterator.Empty<Object> INSTANCE = new EnumeratorIterator.Empty<Object>();
+    private static Empty<Object> INSTANCE = new Empty<Object>();
     protected Empty() {
     }
     @Override
@@ -84,8 +84,8 @@ public class EnumeratorIterator<T> implements IEnumerator.Iterator<T> {
       throw new UnsupportedOperationException();
     }
     @SuppressWarnings(value = "unchecked")
-    public static <V> EnumeratorIterator.Empty<V> instance() {
-      return (EnumeratorIterator.Empty<V>) INSTANCE;
+    public static <V> Empty<V> instance() {
+      return (Empty<V>) INSTANCE;
     }
   }
 }

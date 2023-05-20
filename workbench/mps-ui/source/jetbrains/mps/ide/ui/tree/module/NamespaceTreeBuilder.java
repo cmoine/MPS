@@ -40,9 +40,9 @@ public abstract class NamespaceTreeBuilder<N extends MPSTreeNode, T extends MPST
 
   public void addNode(N node) {
     String namespace = getNamespace(node);
-    List<String> pathElements = new ArrayList<String>(Arrays.asList(namespace.split("\\.")));
+    List<String> pathElements = new ArrayList<>(Arrays.asList(namespace.split("\\.")));
 
-    if (pathElements.size() == 1 && pathElements.get(0).equals("")) {
+    if (pathElements.size() == 1 && pathElements.get(0).isEmpty()) {
       pathElements.remove(0);
     }
 
@@ -58,7 +58,7 @@ public abstract class NamespaceTreeBuilder<N extends MPSTreeNode, T extends MPST
     compactNodes(myRootNamespace);
 
     Enumeration children = myRootNamespace.children();
-    List<MPSTreeNode> oldChildren = new ArrayList<MPSTreeNode>();
+    List<MPSTreeNode> oldChildren = new ArrayList<>();
     while (children.hasMoreElements()) {
       oldChildren.add((MPSTreeNode) children.nextElement());
     }
@@ -69,8 +69,8 @@ public abstract class NamespaceTreeBuilder<N extends MPSTreeNode, T extends MPST
   }
 
   private void sortTree(T node) {
-    List<MPSTreeNode> nodes = new ArrayList<MPSTreeNode>();
-    List<T> namespaces = new ArrayList<T>();
+    List<MPSTreeNode> nodes = new ArrayList<>();
+    List<T> namespaces = new ArrayList<>();
     for (int i = 0; i < node.getChildCount(); i++) {
       MPSTreeNode child = (MPSTreeNode) node.getChildAt(i);
       if (myBuilder.isNamespaceNode(child)) {
@@ -115,7 +115,7 @@ public abstract class NamespaceTreeBuilder<N extends MPSTreeNode, T extends MPST
       myBuilder.setName(node, myBuilder.getName(node) + "." + myBuilder.getName(child));
 
       Enumeration children = child.children();
-      List<MPSTreeNode> oldChildren = new ArrayList<MPSTreeNode>();
+      List<MPSTreeNode> oldChildren = new ArrayList<>();
       while (children.hasMoreElements()) {
         oldChildren.add((MPSTreeNode) children.nextElement());
       }

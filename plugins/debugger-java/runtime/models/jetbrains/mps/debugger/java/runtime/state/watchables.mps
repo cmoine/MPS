@@ -2,7 +2,7 @@
 <model ref="r:50efd6f2-8d02-4682-b313-bd69c46e78df(jetbrains.mps.debugger.java.runtime.state.watchables)">
   <persistence version="9" />
   <languages>
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports>
     <import index="2s0o" ref="r:6ed9d174-6cbf-4569-b2b8-259c43efcbd9(jetbrains.mps.debugger.java.api.state.watchables)" />
@@ -27,7 +27,7 @@
         <child id="1068498886295" name="lValue" index="37vLTJ" />
       </concept>
       <concept id="1202948039474" name="jetbrains.mps.baseLanguage.structure.InstanceMethodCallOperation" flags="nn" index="liA8E" />
-      <concept id="1465982738277781862" name="jetbrains.mps.baseLanguage.structure.PlaceholderMember" flags="ng" index="2tJIrI" />
+      <concept id="1465982738277781862" name="jetbrains.mps.baseLanguage.structure.PlaceholderMember" flags="nn" index="2tJIrI" />
       <concept id="1188207840427" name="jetbrains.mps.baseLanguage.structure.AnnotationInstance" flags="nn" index="2AHcQZ">
         <reference id="1188208074048" name="annotation" index="2AI5Lk" />
       </concept>
@@ -145,11 +145,8 @@
         <child id="1163668922816" name="ifTrue" index="3K4E3e" />
         <child id="1163668934364" name="ifFalse" index="3K4GZi" />
       </concept>
-      <concept id="6329021646629104957" name="jetbrains.mps.baseLanguage.structure.TextCommentPart" flags="nn" index="3SKdUq">
-        <property id="6329021646629104958" name="text" index="3SKdUp" />
-      </concept>
       <concept id="6329021646629104954" name="jetbrains.mps.baseLanguage.structure.SingleLineComment" flags="nn" index="3SKdUt">
-        <child id="6329021646629175155" name="commentPart" index="3SKWNk" />
+        <child id="8356039341262087992" name="line" index="1aUNEU" />
       </concept>
       <concept id="1146644602865" name="jetbrains.mps.baseLanguage.structure.PublicVisibility" flags="nn" index="3Tm1VV" />
       <concept id="1146644623116" name="jetbrains.mps.baseLanguage.structure.PrivateVisibility" flags="nn" index="3Tm6S6" />
@@ -157,6 +154,14 @@
     <language id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core">
       <concept id="1169194658468" name="jetbrains.mps.lang.core.structure.INamedConcept" flags="ng" index="TrEIO">
         <property id="1169194664001" name="name" index="TrG5h" />
+      </concept>
+    </language>
+    <language id="c7fb639f-be78-4307-89b0-b5959c3fa8c8" name="jetbrains.mps.lang.text">
+      <concept id="155656958578482948" name="jetbrains.mps.lang.text.structure.Word" flags="nn" index="3oM_SD">
+        <property id="155656958578482949" name="value" index="3oM_SC" />
+      </concept>
+      <concept id="2535923850359271782" name="jetbrains.mps.lang.text.structure.Line" flags="nn" index="1PaTwC">
+        <child id="2535923850359271783" name="elements" index="1PaTwD" />
       </concept>
     </language>
   </registry>
@@ -954,8 +959,19 @@
       </node>
       <node concept="3clFbS" id="6k4GBOygGrt" role="3clF47">
         <node concept="3SKdUt" id="2KV5YDxCSjQ" role="3cqZAp">
-          <node concept="3SKdUq" id="2KV5YDxCSjR" role="3SKWNk">
-            <property role="3SKdUp" value=" todo from location???" />
+          <node concept="1PaTwC" id="ATZLwXocKx" role="1aUNEU">
+            <node concept="3oM_SD" id="ATZLwXocKy" role="1PaTwD">
+              <property role="3oM_SC" value="" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXocKz" role="1PaTwD">
+              <property role="3oM_SC" value="todo" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXocK$" role="1PaTwD">
+              <property role="3oM_SC" value="from" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXocK_" role="1PaTwD">
+              <property role="3oM_SC" value="location???" />
+            </node>
           </node>
         </node>
         <node concept="3cpWs6" id="2KV5YDxCSjS" role="3cqZAp">
@@ -996,11 +1012,11 @@
                         <ref role="3cqZAo" node="2KV5YDxCSiO" resolve="myMethod" />
                       </node>
                       <node concept="liA8E" id="2O4D8Qh1GsK" role="2OqNvi">
-                        <ref role="37wK5l" to="frkw:~TypeComponent.declaringType():com.sun.jdi.ReferenceType" resolve="declaringType" />
+                        <ref role="37wK5l" to="frkw:~TypeComponent.declaringType()" resolve="declaringType" />
                       </node>
                     </node>
                     <node concept="liA8E" id="2O4D8Qh1GsL" role="2OqNvi">
-                      <ref role="37wK5l" to="frkw:~ReferenceType.name():java.lang.String" resolve="name" />
+                      <ref role="37wK5l" to="frkw:~ReferenceType.name()" resolve="name" />
                     </node>
                   </node>
                   <node concept="Xl_RD" id="2O4D8Qh1GsM" role="3uHU7w">
@@ -1012,7 +1028,7 @@
                     <ref role="3cqZAo" node="2KV5YDxCSiO" resolve="myMethod" />
                   </node>
                   <node concept="liA8E" id="2O4D8Qh1GsP" role="2OqNvi">
-                    <ref role="37wK5l" to="frkw:~TypeComponent.name():java.lang.String" resolve="name" />
+                    <ref role="37wK5l" to="frkw:~TypeComponent.name()" resolve="name" />
                   </node>
                 </node>
               </node>
@@ -1099,7 +1115,7 @@
           <node concept="3cpWs6" id="2KV5YDxCSiL" role="3cqZAp">
             <node concept="2YIFZM" id="2KV5YDxCSiM" role="3cqZAk">
               <ref role="1Pybhc" to="33ny:~Collections" resolve="Collections" />
-              <ref role="37wK5l" to="33ny:~Collections.emptyList():java.util.List" resolve="emptyList" />
+              <ref role="37wK5l" to="33ny:~Collections.emptyList()" resolve="emptyList" />
             </node>
           </node>
         </node>
@@ -1348,7 +1364,7 @@
                             </node>
                           </node>
                           <node concept="liA8E" id="2KV5YDxCSaA" role="2OqNvi">
-                            <ref role="37wK5l" to="5qx8:~WatchpointEvent.field():com.sun.jdi.Field" resolve="field" />
+                            <ref role="37wK5l" to="5qx8:~WatchpointEvent.field()" resolve="field" />
                           </node>
                         </node>
                       </node>
@@ -1372,7 +1388,7 @@
                             </node>
                           </node>
                           <node concept="liA8E" id="2KV5YDxCSaI" role="2OqNvi">
-                            <ref role="37wK5l" to="5qx8:~WatchpointEvent.valueCurrent():com.sun.jdi.Value" resolve="valueCurrent" />
+                            <ref role="37wK5l" to="5qx8:~WatchpointEvent.valueCurrent()" resolve="valueCurrent" />
                           </node>
                         </node>
                       </node>
@@ -1396,7 +1412,7 @@
                             </node>
                           </node>
                           <node concept="liA8E" id="2KV5YDxCSaQ" role="2OqNvi">
-                            <ref role="37wK5l" to="5qx8:~ModificationWatchpointEvent.valueToBe():com.sun.jdi.Value" resolve="valueToBe" />
+                            <ref role="37wK5l" to="5qx8:~ModificationWatchpointEvent.valueToBe()" resolve="valueToBe" />
                           </node>
                         </node>
                       </node>
@@ -1407,7 +1423,7 @@
                           <ref role="3cqZAo" node="2KV5YDxCSa2" resolve="watchables" />
                         </node>
                         <node concept="liA8E" id="2KV5YDxCSaU" role="2OqNvi">
-                          <ref role="37wK5l" to="33ny:~List.add(java.lang.Object):boolean" resolve="add" />
+                          <ref role="37wK5l" to="33ny:~List.add(java.lang.Object)" resolve="add" />
                           <node concept="2ShNRf" id="2KV5YDxCSaV" role="37wK5m">
                             <node concept="1pGfFk" id="2KV5YDxCSaW" role="2ShVmc">
                               <ref role="37wK5l" node="2KV5YDxCSe0" resolve="JavaWatchpointWatchable" />
@@ -1450,7 +1466,7 @@
                           </node>
                         </node>
                         <node concept="liA8E" id="2KV5YDxCSbe" role="2OqNvi">
-                          <ref role="37wK5l" to="5qx8:~WatchpointEvent.field():com.sun.jdi.Field" resolve="field" />
+                          <ref role="37wK5l" to="5qx8:~WatchpointEvent.field()" resolve="field" />
                         </node>
                       </node>
                     </node>
@@ -1474,7 +1490,7 @@
                           </node>
                         </node>
                         <node concept="liA8E" id="2KV5YDxCSbm" role="2OqNvi">
-                          <ref role="37wK5l" to="5qx8:~WatchpointEvent.valueCurrent():com.sun.jdi.Value" resolve="valueCurrent" />
+                          <ref role="37wK5l" to="5qx8:~WatchpointEvent.valueCurrent()" resolve="valueCurrent" />
                         </node>
                       </node>
                     </node>
@@ -1485,7 +1501,7 @@
                         <ref role="3cqZAo" node="2KV5YDxCSa2" resolve="watchables" />
                       </node>
                       <node concept="liA8E" id="2KV5YDxCSbq" role="2OqNvi">
-                        <ref role="37wK5l" to="33ny:~List.add(java.lang.Object):boolean" resolve="add" />
+                        <ref role="37wK5l" to="33ny:~List.add(java.lang.Object)" resolve="add" />
                         <node concept="2ShNRf" id="2KV5YDxCSbr" role="37wK5m">
                           <node concept="1pGfFk" id="2KV5YDxCSbs" role="2ShVmc">
                             <ref role="37wK5l" node="2KV5YDxCSeF" resolve="JavaWatchpointWatchable" />
@@ -1525,7 +1541,7 @@
                         </node>
                       </node>
                       <node concept="liA8E" id="2KV5YDxCSbH" role="2OqNvi">
-                        <ref role="37wK5l" to="5qx8:~MethodExitEvent.method():com.sun.jdi.Method" resolve="method" />
+                        <ref role="37wK5l" to="5qx8:~MethodExitEvent.method()" resolve="method" />
                       </node>
                     </node>
                   </node>
@@ -1549,7 +1565,7 @@
                         </node>
                       </node>
                       <node concept="liA8E" id="2KV5YDxCSbP" role="2OqNvi">
-                        <ref role="37wK5l" to="5qx8:~MethodExitEvent.returnValue():com.sun.jdi.Value" resolve="returnValue" />
+                        <ref role="37wK5l" to="5qx8:~MethodExitEvent.returnValue()" resolve="returnValue" />
                       </node>
                     </node>
                   </node>
@@ -1560,7 +1576,7 @@
                       <ref role="3cqZAo" node="2KV5YDxCSa2" resolve="watchables" />
                     </node>
                     <node concept="liA8E" id="2KV5YDxCSbT" role="2OqNvi">
-                      <ref role="37wK5l" to="33ny:~List.add(java.lang.Object):boolean" resolve="add" />
+                      <ref role="37wK5l" to="33ny:~List.add(java.lang.Object)" resolve="add" />
                       <node concept="2ShNRf" id="2KV5YDxCSbU" role="37wK5m">
                         <node concept="1pGfFk" id="2KV5YDxCSbV" role="2ShVmc">
                           <ref role="37wK5l" node="2KV5YDxCSiU" resolve="JavaMethodWatchable" />
@@ -1584,7 +1600,7 @@
                       <ref role="3cqZAo" node="2KV5YDxCSa2" resolve="watchables" />
                     </node>
                     <node concept="liA8E" id="2KV5YDxCSc7" role="2OqNvi">
-                      <ref role="37wK5l" to="33ny:~List.add(java.lang.Object):boolean" resolve="add" />
+                      <ref role="37wK5l" to="33ny:~List.add(java.lang.Object)" resolve="add" />
                       <node concept="2ShNRf" id="2KV5YDxCSc8" role="37wK5m">
                         <node concept="1pGfFk" id="2KV5YDxCSc9" role="2ShVmc">
                           <ref role="37wK5l" node="2KV5YDxCSh8" resolve="JavaReturnWatchable" />
@@ -1621,7 +1637,7 @@
                       </node>
                     </node>
                     <node concept="liA8E" id="2KV5YDxCScp" role="2OqNvi">
-                      <ref role="37wK5l" to="5qx8:~MethodEntryEvent.method():com.sun.jdi.Method" resolve="method" />
+                      <ref role="37wK5l" to="5qx8:~MethodEntryEvent.method()" resolve="method" />
                     </node>
                   </node>
                 </node>
@@ -1632,7 +1648,7 @@
                     <ref role="3cqZAo" node="2KV5YDxCSa2" resolve="watchables" />
                   </node>
                   <node concept="liA8E" id="2KV5YDxCSct" role="2OqNvi">
-                    <ref role="37wK5l" to="33ny:~List.add(java.lang.Object):boolean" resolve="add" />
+                    <ref role="37wK5l" to="33ny:~List.add(java.lang.Object)" resolve="add" />
                     <node concept="2ShNRf" id="2KV5YDxCScu" role="37wK5m">
                       <node concept="1pGfFk" id="2KV5YDxCScv" role="2ShVmc">
                         <ref role="37wK5l" node="2KV5YDxCSiU" resolve="JavaMethodWatchable" />
@@ -1672,7 +1688,7 @@
                     </node>
                   </node>
                   <node concept="liA8E" id="2KV5YDxCScK" role="2OqNvi">
-                    <ref role="37wK5l" to="5qx8:~ExceptionEvent.exception():com.sun.jdi.ObjectReference" resolve="exception" />
+                    <ref role="37wK5l" to="5qx8:~ExceptionEvent.exception()" resolve="exception" />
                   </node>
                 </node>
               </node>
@@ -1683,7 +1699,7 @@
                   <ref role="3cqZAo" node="2KV5YDxCSa2" resolve="watchables" />
                 </node>
                 <node concept="liA8E" id="2KV5YDxCScO" role="2OqNvi">
-                  <ref role="37wK5l" to="33ny:~List.add(java.lang.Object):boolean" resolve="add" />
+                  <ref role="37wK5l" to="33ny:~List.add(java.lang.Object)" resolve="add" />
                   <node concept="2ShNRf" id="2KV5YDxCScP" role="37wK5m">
                     <node concept="1pGfFk" id="2KV5YDxCScQ" role="2ShVmc">
                       <ref role="37wK5l" node="2KV5YDxCSk1" resolve="JavaExceptionWatchable" />

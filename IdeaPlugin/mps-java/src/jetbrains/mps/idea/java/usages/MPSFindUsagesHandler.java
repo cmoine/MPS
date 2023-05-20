@@ -24,16 +24,12 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.SearchScope;
 import com.intellij.usageView.UsageInfo;
 import com.intellij.util.Processor;
-import jetbrains.mps.ide.findusages.findalgorithm.finders.GeneratedFinder;
-import jetbrains.mps.ide.findusages.findalgorithm.finders.ModuleClassReference;
-import jetbrains.mps.ide.findusages.model.SearchQuery;
-import jetbrains.mps.ide.findusages.model.SearchResult;
-import jetbrains.mps.ide.findusages.model.SearchResults;
 import jetbrains.mps.ide.findusages.view.FindUtils;
 import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiNode;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiProvider;
 import jetbrains.mps.idea.core.usages.IdeaSearchScope;
+import jetbrains.mps.progress.EmptyProgressMonitor;
 import jetbrains.mps.smodel.ModelAccessHelper;
 import jetbrains.mps.util.Computable;
 import org.jetbrains.annotations.NotNull;
@@ -42,6 +38,8 @@ import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.module.SModuleReference;
 import org.jetbrains.mps.openapi.module.SRepository;
 import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
+
+import java.util.List;
 
 /**
  * This handler is returned for our MPS PSI nodes.
@@ -58,9 +56,11 @@ public class MPSFindUsagesHandler extends FindUsagesHandler {
   }
 
   @Override
-  public boolean processElementUsages(@NotNull final PsiElement element, @NotNull final Processor<UsageInfo> processor, @NotNull final FindUsagesOptions options) {
+  public boolean processElementUsages(@NotNull final PsiElement element,
+                                      @NotNull final Processor<? super UsageInfo> processor,
+                                      @NotNull final FindUsagesOptions options) {
     final Project project = element.getProject();
-    SearchScope scope = options.searchScope;
+    final SearchScope scope = options.searchScope;
     final SRepository repository = ProjectHelper.getProjectRepository(element.getProject());
 
     assert element instanceof MPSPsiNode;
@@ -68,15 +68,13 @@ public class MPSFindUsagesHandler extends FindUsagesHandler {
 
     boolean cont = new ModelAccessHelper(repository.getModelAccess()).runReadAction(new Computable<Boolean>() {
       public Boolean compute() {
-        final SModuleReference langStructureModule = PersistenceFacade.getInstance().createModuleReference("c72da2b9-7cce-4447-8389-f407dc1158b7(jetbrains.mps.lang.structure)");
-        GeneratedFinder finder = FindUtils.getFinderByClass(new ModuleClassReference<GeneratedFinder>(langStructureModule, "jetbrains.mps.lang.structure.findUsages.NodeUsages_Finder"));
+        String nodeUsageFinder = "jetbrains.mps.lang.structure.findUsages.NodeUsages_Finder";
         SNode node = ((MPSPsiNode) element).getSNodeReference().resolve(repository);
 
-        SearchQuery query = new SearchQuery(node, new IdeaSearchScope((GlobalSearchScope) options.searchScope));
-        SearchResults<SNode> results = FindUtils.makeProvider(finder).getResults(query, null);
+        IdeaSearchScope ideaSearchScope = new IdeaSearchScope((GlobalSearchScope) scope);
+        List<SNode> results = FindUtils.executeFinder(nodeUsageFinder, node, ideaSearchScope, new EmptyProgressMonitor());
 
-        for (SearchResult<SNode> result : results.getSearchResults()) {
-          SNode usageNode = result.getObject();
+        for (SNode usageNode  : results) {
           PsiElement mpsNode = MPSPsiProvider.getInstance(project).getPsi(usageNode);
           UsageInfo usage = new MPSUsageInfo((MPSPsiNode) mpsNode);
           if (!processor.process(usage)) {

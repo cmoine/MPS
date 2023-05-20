@@ -4,48 +4,97 @@ package jetbrains.mps.samples.notesOrganizer.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_Category = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CategoryReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Note = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_NoteMetaInfo = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_NotePart = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Notes = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_NotesConfiguration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Priority = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Status = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TextNotePart = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_Category;
+  private ConceptPresentation props_CategoryReference;
+  private ConceptPresentation props_Note;
+  private ConceptPresentation props_NoteMetaInfo;
+  private ConceptPresentation props_NotePart;
+  private ConceptPresentation props_Notes;
+  private ConceptPresentation props_NotesConfiguration;
+  private ConceptPresentation props_Priority;
+  private ConceptPresentation props_Status;
+  private ConceptPresentation props_TextNotePart;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.Category:
+        if (props_Category == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Category = cpb.create();
+        }
         return props_Category;
-      case 1:
+      case LanguageConceptSwitch.CategoryReference:
+        if (props_CategoryReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x4b0f115a88684d72L, 0x8d6197071eaaa5f1L, 0x7ba12f0b163df334L, 0x7ba12f0b163df335L, "target", "", "");
+          props_CategoryReference = cpb.create();
+        }
         return props_CategoryReference;
-      case 2:
+      case LanguageConceptSwitch.Note:
+        if (props_Note == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("note");
+          props_Note = cpb.create();
+        }
         return props_Note;
-      case 3:
+      case LanguageConceptSwitch.NoteMetaInfo:
+        if (props_NoteMetaInfo == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_NoteMetaInfo = cpb.create();
+        }
         return props_NoteMetaInfo;
-      case 4:
+      case LanguageConceptSwitch.NotePart:
+        if (props_NotePart == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_NotePart = cpb.create();
+        }
         return props_NotePart;
-      case 5:
+      case LanguageConceptSwitch.Notes:
+        if (props_Notes == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("Notes list");
+          cpb.presentationByName();
+          props_Notes = cpb.create();
+        }
         return props_Notes;
-      case 6:
+      case LanguageConceptSwitch.NotesConfiguration:
+        if (props_NotesConfiguration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_NotesConfiguration = cpb.create();
+        }
         return props_NotesConfiguration;
-      case 7:
+      case LanguageConceptSwitch.Priority:
+        if (props_Priority == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Priority = cpb.create();
+        }
         return props_Priority;
-      case 8:
+      case LanguageConceptSwitch.Status:
+        if (props_Status == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Status = cpb.create();
+        }
         return props_Status;
-      case 9:
+      case LanguageConceptSwitch.TextNotePart:
+        if (props_TextNotePart == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TextNotePart");
+          props_TextNotePart = cpb.create();
+        }
         return props_TextNotePart;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 package jetbrains.mps.generator.impl.reference;
 
 import jetbrains.mps.generator.runtime.ReferenceResolver;
-import jetbrains.mps.generator.runtime.ReferenceResolver2;
 import jetbrains.mps.generator.runtime.TemplateContext;
 import jetbrains.mps.generator.template.ReferenceMacroContext;
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +27,7 @@ import org.jetbrains.mps.openapi.model.SNodeReference;
  * Base implementation of resolver, used both for interpreted and compiled templates
  * @author Artem Tikhomirov
  */
-public abstract class RefResolver implements ReferenceResolver, ReferenceResolver2 {
+public abstract class RefResolver implements ReferenceResolver {
   private final SNode myOutputNode;
   private final SReferenceLink myRole;
   protected final TemplateContext myContext;

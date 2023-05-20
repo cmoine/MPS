@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ import jetbrains.mps.project.Project;
 import jetbrains.mps.project.Solution;
 import jetbrains.mps.smodel.Language;
 import jetbrains.mps.util.NameUtil;
-import jetbrains.mps.vfs.IFile;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -32,11 +31,11 @@ public class ProjectDevKitTreeNode extends ProjectModuleTreeNode {
   private boolean myInitialized;
 
   protected ProjectDevKitTreeNode(@NotNull DevKit devkit, Project project, boolean shortNameOnly) {
-    super(devkit);
+    super(devkit, project);
     myProject = project;
     myShortNameOnly = shortNameOnly;
 
-    setNodeIdentifier(calculateNodeIdentifier());
+    setNodeIdentifier(devkit.getModuleId().toString()); // Generally, PersistenceFacade.asString() is better, but it's just an unique string, anyway
     setIcon(IdeIcons.DEVKIT_ICON);
   }
 
@@ -58,12 +57,6 @@ public class ProjectDevKitTreeNode extends ProjectModuleTreeNode {
       populate();
     }
     myInitialized = true;
-  }
-
-  public String calculateNodeIdentifier() {
-    IFile descriptorFile = getModule().getDescriptorFile();
-    assert descriptorFile != null;
-    return descriptorFile.getPath();
   }
 
   @Override

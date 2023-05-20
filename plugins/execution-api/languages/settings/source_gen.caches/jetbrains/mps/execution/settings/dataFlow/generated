@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-c58w9iax6i4eyjjwv0sdnf9v62iwhmq" />
+<product version="3" modelHash="-4rwtqa0vf9y243aay7qe46tfs2pq13p">
+  <files names="DataFlowAspectDescriptorImpl.java:ReportConfigurationErrorStatement_DataFlow.java" />
+</product>
 

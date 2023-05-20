@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-8hw281gn7xsdx1xqrz3w151ntfpzvfn" />
+<product version="3" modelHash="60szmspv861uyxwbz2ba4hfc3yciizs">
+  <files names="TypesystemDescriptor.java:typeof_AddressReference_InferenceRule.java:typeof_Address_InferenceRule.java:typeof_ItemReference_InferenceRule.java:typeof_Item_InferenceRule.java:typeof_SomeForm_InferenceRule.java:typeof_StreetOperation_InferenceRule.java:typeof_ZipOperation_InferenceRule.java" />
+</product>
 

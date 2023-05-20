@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jps-build-test">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/jps/jps-build-test.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

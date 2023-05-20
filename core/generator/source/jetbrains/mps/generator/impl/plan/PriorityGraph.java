@@ -54,8 +54,8 @@ class PriorityGraph {
   private final Set<TemplateMappingConfiguration> myNonTrivialEdges;
 
   public PriorityGraph() {
-    myRulePriorityEntries = new LinkedList<Entry>();
-    myNonTrivialEdges = new HashSet<TemplateMappingConfiguration>();
+    myRulePriorityEntries = new LinkedList<>();
+    myNonTrivialEdges = new HashSet<>();
   }
 
   public void addEdge(TemplateMappingConfiguration tmc, Collection<TemplateMappingConfiguration> appliedSooner, MappingPriorityRule rule) {
@@ -69,7 +69,7 @@ class PriorityGraph {
   }
 
   public void finalizeEdges(Collection<TemplateMappingConfiguration> allMapConfigurations) {
-    HashSet<TemplateMappingConfiguration> trivialEdges = new HashSet<TemplateMappingConfiguration>(allMapConfigurations);
+    HashSet<TemplateMappingConfiguration> trivialEdges = new HashSet<>(allMapConfigurations);
     trivialEdges.removeAll(myNonTrivialEdges);
     for (TemplateMappingConfiguration tmc : trivialEdges) {
       myRulePriorityEntries.add(newTrivialEdge(new Group(tmc)));
@@ -78,7 +78,7 @@ class PriorityGraph {
 
   public void replaceWeakEdgesWithStrict() {
     // inv: !weakEntry.isStrict && !weakEntry.isTrivial
-    final ArrayDeque<Entry> weakEntries = new ArrayDeque<Entry>();
+    final ArrayDeque<Entry> weakEntries = new ArrayDeque<>();
     for (Entry entry : myRulePriorityEntries) {
       if (!entry.isStrict() && !entry.isTrivial()) {
         weakEntries.add(entry);
@@ -100,7 +100,7 @@ class PriorityGraph {
     while (!weakEntries.isEmpty()) {
       Entry weak = weakEntries.removeFirst();
       myRulePriorityEntries.remove(weak); // weak edge will be replaced with new edges (either strong or weak)
-      Collection<Entry> toAdd = new ArrayList<Entry>();
+      Collection<Entry> toAdd = new ArrayList<>();
       for (Entry entry : myRulePriorityEntries) {
         if (entry.isTrivial()) {
           // trivial edges are there just for graph completeness, and should not take part in transformations
@@ -114,7 +114,7 @@ class PriorityGraph {
           continue;
         }
         final Entry newEntry;
-        HashSet<MappingPriorityRule> mergedRules = new HashSet<MappingPriorityRule>(entry.getRules());
+        HashSet<MappingPriorityRule> mergedRules = new HashSet<>(entry.getRules());
         mergedRules.addAll(weak.getRules());
         if (substituteForSooner) {
           // A <= B; X < A, Y <= A   -->  add rules X < B, Y <= B
@@ -140,8 +140,8 @@ class PriorityGraph {
          *                   if not, we need a rule to tell A 'not later' B
          */
         // What new lhs and rhs groups did we get?
-        HashSet<Group> addedSooner = new HashSet<Group>();
-        HashSet<Group> addedLater = new HashSet<Group>();
+        HashSet<Group> addedSooner = new HashSet<>();
+        HashSet<Group> addedLater = new HashSet<>();
         for (Entry e : toAdd) {
           addedSooner.add(e.sooner());
           addedLater.add(e.later());
@@ -156,7 +156,7 @@ class PriorityGraph {
          * are not in any relation with lhs elements, then we need explicit edge to record 'not later' knowledge
          * of the current weak edge.
          */
-        TransitiveClosure<Group> closureBuilder = new TransitiveClosure<Group>();
+        TransitiveClosure<Group> closureBuilder = new TransitiveClosure<>();
         for (Entry e : myRulePriorityEntries) {
           if (!e.isTrivial()) {
             closureBuilder.feed(e.sooner(), e.later());
@@ -164,7 +164,7 @@ class PriorityGraph {
         }
         // all elements to show up later than those we've added as 'sooner' for our weak.later()
         // iow, 'not later' than weak.later()
-        HashSet<Group> closure = new HashSet<Group>();
+        HashSet<Group> closure = new HashSet<>();
         for (Group l : addedSooner) {
           closure.addAll(closureBuilder.closure(l));
         }
@@ -184,10 +184,10 @@ class PriorityGraph {
     // if any of 'coherent' mappings happens before another group, make this group dependant from all coherent mappings.
     // if there's no mapping that establish relation for coherent mapping (i.e. only 'trivial' mappings), replace these trivial mappings with single
     // one with the coherent group
-    Collection<Entry> toRemove = new HashSet<Entry>();
+    Collection<Entry> toRemove = new HashSet<>();
     for (Group g : coherentMappings) {
-      Collection<Entry> hiPriCoherentToAdd = new HashSet<Entry>();
-      Collection<Entry> loPriCoherentToAdd = new HashSet<Entry>();
+      Collection<Entry> hiPriCoherentToAdd = new HashSet<>();
+      Collection<Entry> loPriCoherentToAdd = new HashSet<>();
       boolean coherentGroupNeedsTrivialEdge = true;
       for (Entry entry : myRulePriorityEntries) {
         final boolean soonerMatches = g.includes(entry.sooner());
@@ -221,15 +221,15 @@ class PriorityGraph {
         }
       }
 
-      HashSet<Entry> toAdd = new HashSet<Entry>();
+      HashSet<Entry> toAdd = new HashSet<>();
       // Remove duplicates, A<X, B<X, C<X, {ABC} is replaced with single {ABC} < X instead of 3 equivalent edges
-      MultiMap<Group, Entry> groupByLater = new MultiMap<Group, Entry>();
+      MultiMap<Group, Entry> groupByLater = new MultiMap<>();
       for (Entry e : hiPriCoherentToAdd) {
         assert e.sooner().equals(g);
         groupByLater.putValue(e.later(), e);
       }
       for (Group loPri : groupByLater.keySet()) {
-        Set<MappingPriorityRule> involvedRules = new HashSet<MappingPriorityRule>();
+        Set<MappingPriorityRule> involvedRules = new HashSet<>();
         boolean atLeastOneStrict = false; // A < X, B <= X, {AB} - strict edge if there's at least 1 strict edge
         for (Entry e : groupByLater.get(loPri)) {
           involvedRules.addAll(e.getRules());
@@ -238,13 +238,13 @@ class PriorityGraph {
         toAdd.add(new Entry(g, loPri, atLeastOneStrict, involvedRules));
       }
       // Remove duplicates, X<A, X<B, X<C, {ABC} is replaced with single X < {ABC} instead of 3 equivalent edges
-      MultiMap<Group, Entry> groupBySooner = new MultiMap<Group, Entry>();
+      MultiMap<Group, Entry> groupBySooner = new MultiMap<>();
       for (Entry e : loPriCoherentToAdd) {
         assert e.later().equals(g);
         groupBySooner.putValue(e.sooner(), e);
       }
       for (Group hiPri : groupBySooner.keySet()) {
-        Set<MappingPriorityRule> involvedRules = new HashSet<MappingPriorityRule>();
+        Set<MappingPriorityRule> involvedRules = new HashSet<>();
         boolean atLeastOneStrict = false; // X < A, X <= B, {AB} - strict edge if there's at least 1 strict edge
         for (Entry e : groupBySooner.get(hiPri)) {
           involvedRules.addAll(e.getRules());
@@ -265,11 +265,11 @@ class PriorityGraph {
 
 
   public Collection<Group> getGroupsNotInDependency() {
-    HashSet<Group> rv = new HashSet<Group>();
+    HashSet<Group> rv = new HashSet<>();
     // all groups that appear at 'sooner' side of rules
-    HashSet<Group> allSoonerGroups = new HashSet<Group>(myRulePriorityEntries.size() * 2);
+    HashSet<Group> allSoonerGroups = new HashSet<>(myRulePriorityEntries.size() * 2);
     // there might be multiple dependency edges from a single node, no need to check same node more than once
-    HashSet<Group> uniqueLaterGroups = new HashSet<Group>(myRulePriorityEntries.size() * 2);
+    HashSet<Group> uniqueLaterGroups = new HashSet<>(myRulePriorityEntries.size() * 2);
     for (Entry e : myRulePriorityEntries) {
       if (!e.isTrivial()) {
         allSoonerGroups.add(e.sooner());
@@ -313,7 +313,7 @@ class PriorityGraph {
   }
 
   void checkLowPrioLocksTopPrio(PriorityConflicts conflicts) {
-    ArrayList<Entry> toDrop = new ArrayList<Entry>();
+    ArrayList<Entry> toDrop = new ArrayList<>();
     for (Entry edge : myRulePriorityEntries) {
       if (edge.isTrivial()) {
         continue;
@@ -337,8 +337,8 @@ class PriorityGraph {
       }
       cd.feed(edge);
     }
-    ArrayList<Group> rv = new ArrayList<Group>();
-    HashSet<Entry> toDrop = new HashSet<Entry>();
+    ArrayList<Group> rv = new ArrayList<>();
+    HashSet<Entry> toDrop = new HashSet<>();
     Collection<Cycle> cycles = cd.detect();
     for (Cycle c : cycles) {
       rv.add(new Group(c.elements));
@@ -350,7 +350,7 @@ class PriorityGraph {
 
   void reportEdgesLeft(PriorityConflicts conflicts) {
     CycleDetector cd = new CycleDetector();
-    HashSet<MappingPriorityRule> rules = new HashSet<MappingPriorityRule>();
+    HashSet<MappingPriorityRule> rules = new HashSet<>();
     for (Entry edge : myRulePriorityEntries) {
       if (edge.isTrivial()) {
         continue;
@@ -375,7 +375,7 @@ class PriorityGraph {
   }
 
   private static Entry newTrivialEdge(Group g) {
-    return new Entry(new Group(), g, false, Collections.<MappingPriorityRule>emptyList());
+    return new Entry(new Group(), g, false, Collections.emptyList());
   }
 
   // Edge of dependency graph
@@ -390,7 +390,7 @@ class PriorityGraph {
       myLaterGroup = lowPriorityGroup;
       mySoonerGroup = highPriorityGroup;
       myStrict = strict;
-      myRules = new HashSet<MappingPriorityRule>(rules);
+      myRules = new HashSet<>(rules);
     }
 
     public Group later() {
@@ -431,8 +431,8 @@ class PriorityGraph {
   }
 
   static class CycleDetector {
-    private MultiMap<Group, Entry> soonerToEntry = new MultiMap<Group, Entry>();
-    private TransitiveClosure<Group> soonerToLater = new TransitiveClosure<Group>();
+    private MultiMap<Group, Entry> soonerToEntry = new MultiMap<>();
+    private TransitiveClosure<Group> soonerToLater = new TransitiveClosure<>();
 
     public void feed(Entry edge) {
       soonerToEntry.putValue(edge.sooner(), edge);
@@ -440,7 +440,7 @@ class PriorityGraph {
     }
 
     Collection<Cycle> detect() {
-      HashSet<Cycle> rv = new HashSet<Cycle>();
+      HashSet<Cycle> rv = new HashSet<>();
       for (Group g : soonerToEntry.keySet()) {
         // build closure of all possible rhs (later) elements
         // i.e. for A <= B, B <= C, C <= D, A <= X and given A, builds A := B, C, D, X
@@ -448,8 +448,8 @@ class PriorityGraph {
         if (!rhsClosure.contains(g)) {
           continue;
         }
-        HashSet<Group> actualCycleParticipants = new HashSet<Group>();
-        HashSet<Entry> toDrop = new HashSet<Entry>();
+        HashSet<Group> actualCycleParticipants = new HashSet<>();
+        HashSet<Entry> toDrop = new HashSet<>();
         for (Group cycleElementCandidate : rhsClosure) {
           boolean isActualCycleElement = false;
           // element in the rhsClosure not necessarily part of the cycle,
@@ -483,7 +483,7 @@ class PriorityGraph {
 
     // Rules involved in cycle inception
     public Collection<MappingPriorityRule> getRules() {
-      HashSet<MappingPriorityRule> rv = new HashSet<MappingPriorityRule>();
+      HashSet<MappingPriorityRule> rv = new HashSet<>();
       for (Entry edge : edges) {
         rv.addAll(edge.getRules());
       }
@@ -511,13 +511,13 @@ class PriorityGraph {
    * With another element, DxA, produces for A: {B,C,D,A}, for C:{D,A,B,C}
    */
   private static class TransitiveClosure<T> {
-    private final MultiMap<T,T> myMap = new MultiMap<T, T>();
+    private final MultiMap<T,T> myMap = new MultiMap<>();
     public void feed(T left, T right) {
       myMap.putValue(left, right);
     }
     public Set<T> closure(T element) {
-      HashSet<T> rhsClosure = new HashSet<T>();
-      ArrayDeque<T> rhsQueue = new ArrayDeque<T>();
+      HashSet<T> rhsClosure = new HashSet<>();
+      ArrayDeque<T> rhsQueue = new ArrayDeque<>();
       rhsQueue.addAll(myMap.get(element));
       while (!rhsQueue.isEmpty()) {
         T rhs = rhsQueue.removeFirst();

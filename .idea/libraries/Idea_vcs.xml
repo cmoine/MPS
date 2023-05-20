@@ -1,29 +1,13 @@
 <component name="libraryTable">
   <library name="Idea-vcs">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/plugins/git4idea/lib/resources_en.jar!/" />
-      <root url="jar://$PROJECT_DIR$/plugins/git4idea/lib/git4idea.jar!/" />
-      <root url="jar://$PROJECT_DIR$/plugins/git4idea/lib/trilead-ssh2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/plugins/cvsIntegration/lib/trilead-ssh2-build213.jar!/" />
-      <root url="jar://$PROJECT_DIR$/plugins/cvsIntegration/lib/cvs_util.jar!/" />
-      <root url="jar://$PROJECT_DIR$/plugins/cvsIntegration/lib/javacvs-src.jar!/" />
-      <root url="jar://$PROJECT_DIR$/plugins/cvsIntegration/lib/cvsIntegration.jar!/" />
-      <root url="jar://$PROJECT_DIR$/plugins/cvsIntegration/lib/resources_en.jar!/" />
-      <root url="jar://$PROJECT_DIR$/plugins/cvsIntegration/lib/smartcvs-src.jar!/" />
-      <root url="jar://$PROJECT_DIR$/plugins/git4idea/lib/ini4j-0.5.2-patched.jar!/" />
-      <root url="jar://$PROJECT_DIR$/plugins/svn4idea/lib/antlr.jar!/" />
-      <root url="jar://$PROJECT_DIR$/plugins/svn4idea/lib/sequence-library.jar!/" />
-      <root url="jar://$PROJECT_DIR$/plugins/svn4idea/lib/sqljet.jar!/" />
-      <root url="jar://$PROJECT_DIR$/plugins/svn4idea/lib/svn4idea.jar!/" />
-      <root url="jar://$PROJECT_DIR$/plugins/svn4idea/lib/svnkit-javahl.jar!/" />
-      <root url="jar://$PROJECT_DIR$/plugins/svn4idea/lib/svnkit.jar!/" />
-      <root url="jar://$PROJECT_DIR$/plugins/svn4idea/lib/trilead.jar!/" />
-      <root url="jar://$PROJECT_DIR$/plugins/git4idea/lib/remote-servers-git.jar!/" />
-      <root url="jar://$PROJECT_DIR$/plugins/git4idea/lib/git4idea-rt.jar!/" />
+      <root url="jar://$PROJECT_DIR$/plugins/vcs-git/lib/vcs-git.jar!/" />
+      <root url="jar://$PROJECT_DIR$/plugins/vcs-svn/lib/vcs-svn.jar!/" />
+      <root url="jar://$PROJECT_DIR$/plugins/vcs-git/lib/git4idea-rt.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/plugins/svn4idea/lib/svnkit-javahl16.zip!/" />
+      <root url="jar://$PROJECT_DIR$/lib/src/platform-sources.zip!/" />
     </SOURCES>
   </library>
 </component>

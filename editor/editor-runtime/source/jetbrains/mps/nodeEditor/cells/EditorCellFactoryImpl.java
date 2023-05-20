@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,10 @@
 package jetbrains.mps.nodeEditor.cells;
 
 import jetbrains.mps.logging.Logger;
+import jetbrains.mps.messages.Message;
+import jetbrains.mps.messages.MessageKind;
 import jetbrains.mps.nodeEditor.AbstractDefaultEditor;
-import jetbrains.mps.nodeEditor.EditorAspectDescriptorBase;
+import jetbrains.mps.nodeEditor.reflectiveEditor.ReflectiveHintsManager;
 import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.cells.EditorCellContext;
@@ -26,13 +28,12 @@ import jetbrains.mps.openapi.editor.descriptor.ConceptEditor;
 import jetbrains.mps.openapi.editor.descriptor.ConceptEditorComponent;
 import jetbrains.mps.openapi.editor.descriptor.EditorAspectDescriptor;
 import jetbrains.mps.openapi.editor.menus.transformation.SNodeLocation;
-import jetbrains.mps.smodel.language.ConceptRegistry;
-import jetbrains.mps.smodel.runtime.ConceptDescriptor;
+import jetbrains.mps.openapi.editor.menus.transformation.SPropertyInfo;
 import jetbrains.mps.util.SNodeOperations;
-import org.apache.log4j.LogManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SLanguage;
 import org.jetbrains.mps.openapi.model.SNode;
 
 import java.util.Collection;
@@ -43,32 +44,23 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Stream;
 
 /**
  * User: shatalin
  * Date: 4/24/13
  */
 public class EditorCellFactoryImpl implements EditorCellFactory {
-  private static final Logger LOG = Logger.wrap(LogManager.getLogger(EditorCellFactoryImpl.class));
+  private static final Logger LOG = Logger.getLogger(EditorCellFactoryImpl.class);
 
-  private static final EditorCellContext DEFAULT_CELL_CONTEXT = new EditorCellContext() {
-    @Override
-    public Collection<String> getHints() {
-      return Collections.emptySet();
-    }
-
-    @Override
-    public boolean hasContextHint(String hint) {
-      return false;
-    }
-  };
+  private static final EditorCellContext DEFAULT_CELL_CONTEXT = Collections::emptySet;
   public static final String BASE_COMMENT_HINT = "jetbrains.mps.lang.core.editor.BaseEditorContextHints.comment";
-  public static final String BASE_REFLECTIVE_EDITOR_HINT = "jetbrains.mps.lang.core.editor.BaseEditorContextHints.reflectiveEditor";
 
   private final EditorContext myEditorContext;
   private Deque<EditorCellContextImpl> myCellContextStack;
-  private ConceptEditorRegistry myConceptEditorRegistry = new ConceptEditorRegistry();
-  private Map<SNode, Set<Class<? extends ConceptEditor>>> myUsedEditors = new HashMap<SNode, Set<Class<? extends ConceptEditor>>>();
+  private final Map<SNode, Set<Class<? extends ConceptEditor>>> myUsedEditors = new HashMap<>();
+  private final Map<Collection<String>, Map<SConcept, Map<Collection<Class<? extends ConceptEditor>>, ConceptEditor>>> myEditorsCache = new HashMap<>();
+  private final Map<Collection<String>, Map<SConcept, Map<String, ConceptEditorComponent>>> myEditorComponentsCache = new HashMap<>();
 
   public EditorCellFactoryImpl(EditorContext editorContext) {
     myEditorContext = editorContext;
@@ -80,7 +72,7 @@ public class EditorCellFactoryImpl implements EditorCellFactory {
     if (myUsedEditors.containsKey(node)) {
       set = myUsedEditors.get(node);
     } else {
-      set = new HashSet<Class<? extends ConceptEditor>>();
+      set = new HashSet<>();
       myUsedEditors.put(node, set);
     }
     set.add(excludedEditor);
@@ -94,39 +86,50 @@ public class EditorCellFactoryImpl implements EditorCellFactory {
 
   @Override
   public EditorCell createEditorCell(SNode node, boolean isInspector) {
-    return createEditorCell_internal(node, isInspector, new HashSet<Class<? extends ConceptEditor>>());
+    return createEditorCell_internal(node, isInspector, Collections.emptySet());
   }
 
   private EditorCell createEditorCell_internal(SNode node, boolean isInspector, @NotNull Set<Class<? extends ConceptEditor>> excludedEditors) {
-    boolean isPushReflectiveEditorHintInContext = getCellContext().getHints().contains(BASE_REFLECTIVE_EDITOR_HINT);
-    SConcept concept = node.getConcept();
-    ConceptEditor editor = isPushReflectiveEditorHintInContext ? null : myConceptEditorRegistry.get(concept, excludedEditors);
+    EditorCellContext cellContext = getCellContext();
+    assert cellContext != null;
+    boolean shouldShowReflectiveEditor = ReflectiveHintsManager.shouldShowReflectiveEditor(cellContext);
+    boolean wasReflectiveEditorForParentCell = ReflectiveHintsManager.shouldShowReflectiveEditor(getParentCellContext());
     EditorCell result = null;
+    SConcept concept = node.getConcept();
+    ConceptEditor editor = shouldShowReflectiveEditor ? null : getCachedEditor(concept, excludedEditors);
     if (editor != null) {
       try {
         result = createCell(node, isInspector, editor);
         assert result.isBig() : "Non-big " + (isInspector ? "inspector " : "") + "cell was created by " + editor.getClass().getName() + " ConceptEditor.";
-      } catch (RuntimeException e) {
-        LOG.warning("Failed to create cell for node: " + SNodeOperations.getDebugText(node) + " using default editor", e, node);
-      } catch (AssertionError e) {
-        LOG.warning("Failed to create cell for node: " + SNodeOperations.getDebugText(node) + " using default editor", e, node);
-      } catch (NoClassDefFoundError e) {
+        reportSuccess(node);
+      } catch (RuntimeException | AssertionError | LinkageError e) {
+        reportError(node, e);
         LOG.warning("Failed to create cell for node: " + SNodeOperations.getDebugText(node) + " using default editor", e, node);
       }
     }
 
     if (result == null) {
-      //todo get rid of concept descriptor
-      //todo  simon: tried to get rid of concept descriptor, conept.isAbstract didn't work
-      ConceptDescriptor conceptDescriptor = ConceptRegistry.getInstance().getConceptDescriptor(node.getConcept());
-      editor = conceptDescriptor.isInterfaceConcept() || conceptDescriptor.isAbstract() ? new DefaultInterfaceEditor() :
-          AbstractDefaultEditor.createEditor(node, ConceptRegistry.getInstance().getConceptDescriptor(concept));
+      boolean shouldShowInterfaceEditor = concept.isValid() && concept.isAbstract() && !shouldShowReflectiveEditor;
+      editor = shouldShowInterfaceEditor ? new DefaultInterfaceEditor(getCellContext()) : AbstractDefaultEditor.createEditor(node, !wasReflectiveEditorForParentCell);
       result = createCell(node, isInspector, editor);
       assert result.isBig() : "Non-big " + (isInspector ? "inspector " : "") + "cell was created by DefaultEditor: " + editor.getClass().getName();
     }
-
-    result.setCellContext(getCellContext());
     return result;
+  }
+
+  private void reportSuccess(SNode node){
+    Message message = new Message(MessageKind.INFORMATION, this.getClass(), "");
+    message.setHintObject(node.getReference());
+    myEditorContext.getEditorComponent().getMessageHandler().handle(message);
+  }
+
+  private void reportError(SNode node, Throwable e) {
+    SLanguage language = node.getConcept().getLanguage();
+    String text = String.format("Error creating editor cell: Node: %s (%s from %s)", node.getPresentation(), node.getConcept().getName(), language.getQualifiedName());
+    Message message = new Message(MessageKind.ERROR, this.getClass(), text);
+    message.setException(e);
+    message.setHintObject(node.getReference());
+    myEditorContext.getEditorComponent().getMessageHandler().handle(message);
   }
 
   private EditorCell createCell(SNode node, boolean isInspector, ConceptEditor editor) {
@@ -135,15 +138,43 @@ public class EditorCellFactoryImpl implements EditorCellFactory {
 
   @Override
   public EditorCell createEditorComponentCell(SNode node, String editorComponentId) {
-    ConceptEditorComponent editorComponent = loadEditorComponent(node, editorComponentId);
-    EditorCell result = editorComponent.createEditorCell(myEditorContext, node);
-    result.setCellContext(getCellContext());
+    ConceptEditorComponent editorComponent = getCachedEditorComponent(node.getConcept(), editorComponentId);
+
+    EditorCell result = null;
+    if (editorComponent != null) {
+      try {
+        result = editorComponent.createEditorCell(myEditorContext, node);
+      } catch (RuntimeException | AssertionError | NoClassDefFoundError e) {
+        LOG.warning("Failed to create cell for node: " + SNodeOperations.getDebugText(node) + " using editor component: " + editorComponent.getClass(), e,
+                    node);
+      }
+    }
+
+    if (result == null) {
+      result = new DefaultEditorComponent(editorComponentId).createEditorCell(myEditorContext, node);
+    }
     return result;
+
   }
 
   @Override
   public EditorCellContext getCellContext() {
     return myCellContextStack == null ? DEFAULT_CELL_CONTEXT : myCellContextStack.getLast();
+  }
+
+  private EditorCellContext getParentCellContext() {
+    // Todo: this method is a hack needed to show attributes as children in default editor.
+    // When reflective editor is enabled for subtree of the attribute itself, it encloses the cell for attributed node.
+    // But when the attributed node itself is shown in reflective editor, the most straight way to show its attributes is to display them in underlying cells.
+    // This method does its best to distinguish such situations, but might fail in some situations.
+    if (myCellContextStack == null || myCellContextStack.isEmpty()) {
+      return DEFAULT_CELL_CONTEXT;
+    } else {
+      EditorCellContextImpl current = myCellContextStack.pollLast();
+      EditorCellContextImpl parent = myCellContextStack.peekLast();
+      myCellContextStack.addLast(current);
+      return parent == null ? DEFAULT_CELL_CONTEXT : parent;
+    }
   }
 
   @Override
@@ -155,7 +186,7 @@ public class EditorCellFactoryImpl implements EditorCellFactory {
   public void pushCellContext() {
     EditorCellContextImpl newCellContext = new EditorCellContextImpl(getCellContext());
     if (myCellContextStack == null) {
-      myCellContextStack = new LinkedList<EditorCellContextImpl>();
+      myCellContextStack = new LinkedList<>();
     }
     myCellContextStack.addLast(newCellContext);
   }
@@ -173,64 +204,83 @@ public class EditorCellFactoryImpl implements EditorCellFactory {
 
   @Override
   public void addCellContextHints(String... hints) {
-    if (myCellContextStack == null) {
-      throw new IllegalStateException("There is no CellContext in the stack");
-    }
+    checkContextExist();
     myCellContextStack.getLast().addHints(hints);
   }
 
   @Override
   public void removeCellContextHints(String... hints) {
-    if (myCellContextStack == null) {
-      throw new IllegalStateException("There is no CellContext in the stack");
-    }
+    checkContextExist();
     myCellContextStack.getLast().removeHints(hints);
   }
 
   public void setNodeLocation(SNodeLocation location) {
-    if (myCellContextStack == null) {
-      throw new IllegalStateException("There is no CellContext in the stack");
-    }
+    checkContextExist();
     myCellContextStack.getLast().setNodeLocation(location);
   }
 
-  private ConceptEditorComponent loadEditorComponent(SNode node, String editorComponentId) {
-    ConceptEditorComponent conceptEditorComponent = new ConceptEditorComponentRegistry(editorComponentId).get(node.getConcept());
-    if (conceptEditorComponent != null) {
-      return conceptEditorComponent;
-    }
+  @Override
+  public void setPropertyInfo(SPropertyInfo propertyInfo) {
+    checkContextExist();
+    myCellContextStack.getLast().setPropertyInfo(propertyInfo);
+  }
 
-    return new DefaultEditorComponent(editorComponentId);
+  private void checkContextExist() {
+    if (myCellContextStack == null) {
+      throw new IllegalStateException("There is no CellContext in the stack");
+    }
+  }
+
+  private ConceptEditor getCachedEditor(SConcept concept, Collection<Class<? extends ConceptEditor>> excludedEditors) {
+    final Collection<String> hints = getCellContext().getHints();
+    return myEditorsCache.computeIfAbsent(hints, c -> new HashMap<>()).computeIfAbsent(concept, c -> new HashMap<>()).computeIfAbsent(
+        excludedEditors, key -> new ConceptEditorRegistry(hints, key).get(concept));
+  }
+
+
+  private ConceptEditorComponent getCachedEditorComponent(SConcept concept, String editorComponentId) {
+    final Collection<String> hints = getCellContext().getHints();
+    return myEditorComponentsCache.computeIfAbsent(hints, c -> new HashMap<>()).computeIfAbsent(concept, c -> new HashMap<>()).computeIfAbsent(
+        editorComponentId, id -> new ConceptEditorComponentRegistry(hints, id).get(concept));
   }
 
   private class ConceptEditorRegistry extends AbstractEditorRegistry<ConceptEditor> {
-    private ConceptEditorRegistry() {
-      super(EditorCellFactoryImpl.this);
+    private final Collection<Class<? extends ConceptEditor>> myExcludedEditors;
+
+    private ConceptEditorRegistry(Collection<String> hints, Collection<Class<? extends ConceptEditor>> excludedEditors) {
+      super(hints, myEditorContext.getRepository());
+      myExcludedEditors = excludedEditors;
     }
 
     @NotNull
     @Override
-    protected Collection<ConceptEditor> get(EditorAspectDescriptor aspectDescriptor, SAbstractConcept concept) {
-      return aspectDescriptor.getEditors(concept);
+    protected Stream<ConceptEditor> get(@NotNull EditorAspectDescriptor aspectDescriptor, @NotNull SAbstractConcept concept) {
+      return aspectDescriptor.getEditors(concept).stream().filter(e -> !myExcludedEditors.contains(e.getClass()));
     }
   }
 
   private class ConceptEditorComponentRegistry extends AbstractEditorRegistry<ConceptEditorComponent> {
     private final String myEditorComponentId;
 
-    private ConceptEditorComponentRegistry(String editorComponentId) {
-      super(EditorCellFactoryImpl.this);
+    private ConceptEditorComponentRegistry(Collection<String> hints, String editorComponentId) {
+      super(hints, myEditorContext.getRepository());
       myEditorComponentId = editorComponentId;
     }
 
     @NotNull
     @Override
-    protected Collection<ConceptEditorComponent> get(EditorAspectDescriptor aspectDescriptor, SAbstractConcept concept) {
-      return aspectDescriptor.getEditorComponents(concept, myEditorComponentId);
+    protected Stream<ConceptEditorComponent> get(@NotNull EditorAspectDescriptor aspectDescriptor, @NotNull SAbstractConcept concept) {
+      return aspectDescriptor.getEditorComponents(concept, myEditorComponentId).stream();
     }
   }
 
   private static class DefaultInterfaceEditor implements ConceptEditor {
+    private final EditorCellContext myCellContext;
+
+    private DefaultInterfaceEditor(EditorCellContext cellContext) {
+      myCellContext = cellContext;
+    }
+
     @NotNull
     @Override
     public Collection<String> getContextHints() {
@@ -240,7 +290,9 @@ public class EditorCellFactoryImpl implements EditorCellFactory {
     @Override
     public EditorCell createEditorCell(EditorContext context, SNode node) {
       EditorCell_Error editorCell = new EditorCell_Error(context, node, "    ");
+      editorCell.setCellId("Error");
       editorCell.setBig(true);
+      editorCell.setCellContext(myCellContext);
       return editorCell;
     }
 
@@ -248,6 +300,7 @@ public class EditorCellFactoryImpl implements EditorCellFactory {
     public EditorCell createInspectedCell(EditorContext context, SNode node) {
       EditorCell_Constant editorCell = new EditorCell_Constant(context, node, SNodeOperations.getDebugText(node));
       editorCell.setBig(true);
+      editorCell.setCellContext(myCellContext);
       return editorCell;
     }
   }

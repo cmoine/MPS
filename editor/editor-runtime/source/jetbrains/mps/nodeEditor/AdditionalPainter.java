@@ -25,20 +25,20 @@ import java.awt.Rectangle;
  * Cyril.Konopko, 01.12.2009
  */
 public interface AdditionalPainter<Item> {
-  public boolean paintsAbove();
-  public void paint(Graphics g, EditorComponent editorComponent);
-  public boolean paintsBackground();
-  public void paintBackground(Graphics g, EditorComponent editorComponent);
+  boolean paintsAbove();
+  void paint(Graphics g, EditorComponent editorComponent);
+  boolean paintsBackground();
+  void paintBackground(Graphics g, EditorComponent editorComponent);
 
   //returns an item which this painter paints. if it paints itself then just return this
-  public Item getItem();
+  Item getItem();
 
-  public void afterAdding(EditorComponent editorComponent);
-  public void beforeRemoval(EditorComponent editorComponent);
-  public void onUpdate(EditorComponent editorComponent);
+  void afterAdding(EditorComponent editorComponent);
+  void beforeRemoval(EditorComponent editorComponent);
+  void onUpdate(EditorComponent editorComponent);
 
-  public Color getCellsFontColor(EditorCell_Label cell);
-  public Rectangle getCoverageArea(EditorComponent editorComponent);
+  Color getCellsFontColor(EditorCell_Label cell);
+  Rectangle getCoverageArea(EditorComponent editorComponent);
 
-  public boolean isAbove(AdditionalPainter additionalPainter, EditorComponent editorComponent);
+  boolean isAbove(AdditionalPainter additionalPainter, EditorComponent editorComponent);
 }

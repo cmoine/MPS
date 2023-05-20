@@ -21,15 +21,16 @@ import com.intellij.ide.CutProvider;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.vfs.VirtualFile;
+import org.jetbrains.annotations.NotNull;
 
 public class FilePaneCopyProvider implements CopyProvider, CutProvider {
   @Override
-  public void performCopy(DataContext dataContext) {
+  public void performCopy(@NotNull DataContext dataContext) {
     perform(dataContext, false);
   }
 
   @Override
-  public void performCut(DataContext dataContext) {
+  public void performCut(@NotNull DataContext dataContext) {
     perform(dataContext, true);
   }
 
@@ -46,22 +47,22 @@ public class FilePaneCopyProvider implements CopyProvider, CutProvider {
   }
 
   @Override
-  public boolean isCopyEnabled(DataContext dataContext) {
+  public boolean isCopyEnabled(@NotNull DataContext dataContext) {
     return isEnabled(dataContext, false);
   }
 
   @Override
-  public boolean isCopyVisible(DataContext dataContext) {
+  public boolean isCopyVisible(@NotNull DataContext dataContext) {
     return true;
   }
 
   @Override
-  public boolean isCutEnabled(DataContext dataContext) {
+  public boolean isCutEnabled(@NotNull DataContext dataContext) {
     return isEnabled(dataContext, true);
   }
 
   @Override
-  public boolean isCutVisible(DataContext dataContext) {
+  public boolean isCutVisible(@NotNull DataContext dataContext) {
     return true;
   }
 

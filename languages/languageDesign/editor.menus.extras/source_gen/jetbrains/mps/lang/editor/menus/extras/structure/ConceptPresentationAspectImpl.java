@@ -4,30 +4,54 @@ package jetbrains.mps.lang.editor.menus.extras.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_QueryFunctionParameter_IntentionExecutable = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TransformationMenuPart_Intention = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TransformationMenuPart_PluginAction = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TransformationMenuPart_Refactoring = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_QueryFunctionParameter_IntentionExecutable;
+  private ConceptPresentation props_TransformationMenuPart_Intention;
+  private ConceptPresentation props_TransformationMenuPart_PluginAction;
+  private ConceptPresentation props_TransformationMenuPart_Refactoring;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.QueryFunctionParameter_IntentionExecutable:
+        if (props_QueryFunctionParameter_IntentionExecutable == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("the runtime representation of the intention");
+          cpb.rawPresentation("intentionExecutable");
+          props_QueryFunctionParameter_IntentionExecutable = cpb.create();
+        }
         return props_QueryFunctionParameter_IntentionExecutable;
-      case 1:
+      case LanguageConceptSwitch.TransformationMenuPart_Intention:
+        if (props_TransformationMenuPart_Intention == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("performs an intention");
+          cpb.rawPresentation("intention");
+          props_TransformationMenuPart_Intention = cpb.create();
+        }
         return props_TransformationMenuPart_Intention;
-      case 2:
+      case LanguageConceptSwitch.TransformationMenuPart_PluginAction:
+        if (props_TransformationMenuPart_PluginAction == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("plugin action item");
+          cpb.rawPresentation("plugin action");
+          props_TransformationMenuPart_PluginAction = cpb.create();
+        }
         return props_TransformationMenuPart_PluginAction;
-      case 3:
+      case LanguageConceptSwitch.TransformationMenuPart_Refactoring:
+        if (props_TransformationMenuPart_Refactoring == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("performs a refactoring");
+          cpb.rawPresentation("refactoring");
+          props_TransformationMenuPart_Refactoring = cpb.create();
+        }
         return props_TransformationMenuPart_Refactoring;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

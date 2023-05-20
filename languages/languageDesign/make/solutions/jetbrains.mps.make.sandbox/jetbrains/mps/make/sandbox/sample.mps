@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<model ref="r:592314bc-6729-4503-84dc-fd04330640bd(jetbrains.mps.make.sandbox.sample)" doNotGenerate="true">
+<model ref="r:592314bc-6729-4503-84dc-fd04330640bd(jetbrains.mps.make.sandbox.sample)">
   <persistence version="9" />
+  <attribute name="doNotGenerate" value="true" />
   <languages>
-    <use id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections" version="0" />
+    <use id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections" version="1" />
     <use id="a247e09e-2435-45ba-b8d2-07e93feba96a" name="jetbrains.mps.baseLanguage.tuples" version="0" />
     <use id="696c1165-4a59-463b-bc5d-902caab85dd0" name="jetbrains.mps.make.facet" version="0" />
     <use id="dc54e1b2-86b3-49d2-9014-a76af17af22a" name="jetbrains.mps.make.outlook" version="0" />
     <use id="95f8a3e6-f994-4ca0-a65e-763c9bae2d3b" name="jetbrains.mps.make.script" version="0" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports>
     <import index="fn29" ref="r:6ba2667b-185e-45cd-ac65-e4b9d66da28e(jetbrains.mps.smodel.resources)" />
@@ -89,7 +90,6 @@
         <child id="8170824575195151990" name="resource" index="1RVmvv" />
       </concept>
       <concept id="6418371274763029565" name="jetbrains.mps.make.facet.structure.TargetDeclaration" flags="ng" index="15KeUm">
-        <property id="1675547159918562088" name="resourcesPolicy" index="2w7fpF" />
         <reference id="6418371274763029589" name="overrides" index="15KeVY" />
         <child id="2360002718792633290" name="job" index="ElM8M" />
         <child id="6418371274763146553" name="dependency" index="15LFui" />
@@ -166,13 +166,18 @@
         <reference id="682890046602397405" name="workStatement" index="h6dCW" />
       </concept>
       <concept id="3297237684108627658" name="jetbrains.mps.make.script.structure.AllWorkLeftExpression" flags="nn" index="1C$qFY" />
-      <concept id="7077360340906447917" name="jetbrains.mps.make.script.structure.ResultStatement" flags="nn" index="3D7k6m">
-        <property id="7077360340906447918" name="result" index="3D7k6l" />
-      </concept>
+      <concept id="7077360340906447917" name="jetbrains.mps.make.script.structure.ResultStatement" flags="nn" index="3D7k6m" />
     </language>
     <language id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core">
+      <concept id="1133920641626" name="jetbrains.mps.lang.core.structure.BaseConcept" flags="ng" index="2VYdi">
+        <child id="5169995583184591170" name="smodelAttribute" index="lGtFl" />
+      </concept>
       <concept id="1169194658468" name="jetbrains.mps.lang.core.structure.INamedConcept" flags="ng" index="TrEIO">
         <property id="1169194664001" name="name" index="TrG5h" />
+      </concept>
+      <concept id="4222318806802425298" name="jetbrains.mps.lang.core.structure.SuppressErrorsAnnotation" flags="ng" index="15s5l7">
+        <property id="8575328350543493365" name="message" index="huDt6" />
+        <property id="2423417345669755629" name="filter" index="1eyWvh" />
       </concept>
     </language>
     <language id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections">
@@ -183,7 +188,6 @@
     <property role="TrG5h" value="Generate" />
     <node concept="15KeUm" id="7fB872uci8p" role="15LFul">
       <property role="TrG5h" value="GenerateTarget" />
-      <property role="2w7fpF" value="TRANSFORM" />
       <node concept="2aLE7I" id="s2twedLntN" role="ElM8M">
         <node concept="ElOhj" id="s2twedLntO" role="2aLE7H">
           <node concept="3clFbS" id="s2twedLntP" role="2VODD2" />
@@ -191,7 +195,7 @@
       </node>
       <node concept="3D36IL" id="6AQAnCF_s$" role="3D36I5">
         <node concept="3D27Fh" id="4fBybD7JiMT" role="3D36IM">
-          <ref role="3uigEE" to="fn29:AA4r4ZpI9Q" resolve="CResource" />
+          <ref role="3uigEE" to="fn29:1Xl3kQ1uadv" resolve="TResource" />
         </node>
       </node>
     </node>
@@ -258,14 +262,16 @@
                 </node>
               </node>
             </node>
-            <node concept="3D7k6m" id="6mBwVAPiALU" role="3cqZAp">
-              <property role="3D7k6l" value="SUCCESS" />
-            </node>
+            <node concept="3D7k6m" id="6mBwVAPiALU" role="3cqZAp" />
           </node>
         </node>
         <node concept="bFUmx" id="1HN6OkgRjIw" role="bFwIG">
           <node concept="3clFbS" id="1HN6OkgRjIx" role="2VODD2">
             <node concept="3KaCP$" id="1HN6OkgRjIy" role="3cqZAp">
+              <node concept="15s5l7" id="e1yJTyIAMg" role="lGtFl">
+                <property role="1eyWvh" value="FLAVOUR_ISSUE_KIND=&quot;typesystem (typesystem)&quot;;FLAVOUR_MESSAGE=&quot;Error: Argument of switch should be enum of primitive&quot;;FLAVOUR_RULE_ID=&quot;[r:00000000-0000-4000-0000-011c895902c5(jetbrains.mps.baseLanguage.typesystem)/3306910260423168223]&quot;;" />
+                <property role="huDt6" value="Error: Argument of switch should be enum of primitive" />
+              </node>
               <node concept="3KbdKl" id="1HN6OkgRjIz" role="3KbHQx">
                 <node concept="2aLE6L" id="1HN6OkgRjI$" role="3Kbmr1">
                   <ref role="2aLE6K" node="s2twedLA4w" resolve="ABORT" />
@@ -397,7 +403,7 @@
       <property role="TrG5h" value="QQQ" />
       <ref role="15KeVY" node="7fB872uci8p" resolve="GenerateTarget" />
       <node concept="15KeVb" id="lXLYW0T1qz" role="15LFui">
-        <property role="3HPxAp" value="NOT_AFTER" />
+        <property role="3HPxAp" value="7fB872ucjBB/NOT_AFTER" />
         <ref role="15KeV8" node="7fB872ucjBx" resolve="GenerateSpecialTarget" />
       </node>
       <node concept="2aLE7I" id="s2twedLnt_" role="ElM8M">
@@ -437,9 +443,7 @@
                 </node>
               </node>
             </node>
-            <node concept="3D7k6m" id="s2twedLntG" role="3cqZAp">
-              <property role="3D7k6l" value="SUCCESS" />
-            </node>
+            <node concept="3D7k6m" id="s2twedLntG" role="3cqZAp" />
           </node>
         </node>
       </node>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,6 +34,10 @@ public class EditorPanelManagerImpl implements EditorPanelManager {
 
   @Override
   public void openEditor(@NotNull SNode node) {
+    // XXX there's no reason not to use EditorNavigator here, but as long as calling code comes with editor context, it's in proper
+    // model access state and EDT thread anyway, so using NavigationSupport here directly is ok.
+    // OTOH, why not use EditorNavigator directly, instead of EditorPanelManager? Perhaps, just to deal with embedded editors
+    // that are not allowed to open others?
     NavigationSupport.getInstance().openNode(myProject, node, true, false);
   }
 }

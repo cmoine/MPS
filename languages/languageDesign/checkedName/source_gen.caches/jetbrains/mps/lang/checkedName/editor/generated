@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-crzvupsbvlna15p28ysgtmixojflken" />
+<product version="3" modelHash="zijgvm359axcxwprqw2exrhlzy6soi">
+  <files names="EditorAspectDescriptorImpl.java:PropertyPointerType_Editor.java:PropertyPointerType_EditorBuilder_a.java:PropertyPointerValueOperation_Editor.java:PropertyPointerValueOperation_EditorBuilder_a.java:PropertyRefExpression_Editor.java:PropertyRefExpression_EditorBuilder_a.java:PropertyRefType_Editor.java:PropertyRefType_EditorBuilder_a.java" />
+</product>
 

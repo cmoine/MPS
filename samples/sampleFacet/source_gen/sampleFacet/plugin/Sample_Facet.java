@@ -24,8 +24,10 @@ import jetbrains.mps.make.script.IConfig;
 import jetbrains.mps.baseLanguage.tuples.runtime.Tuples;
 import jetbrains.mps.make.script.IPropertiesPool;
 import jetbrains.mps.baseLanguage.tuples.runtime.MultiTuple;
-import jetbrains.mps.smodel.resources.TResource;
+import jetbrains.mps.smodel.resources.DResource;
 import jetbrains.mps.internal.make.runtime.util.DeltaReconciler;
+import jetbrains.mps.internal.collections.runtime.ITranslator2;
+import jetbrains.mps.make.delta.IDelta;
 import jetbrains.mps.internal.make.runtime.util.FilesDelta;
 import jetbrains.mps.vfs.IFile;
 import jetbrains.mps.make.script.IFeedback;
@@ -36,8 +38,8 @@ public class Sample_Facet extends IFacet.Stub {
   private List<ITarget> targets = ListSequence.fromList(new ArrayList<ITarget>());
   private IFacet.Name name = new IFacet.Name("sampleFacet.Sample");
   public Sample_Facet() {
-    ListSequence.fromList(targets).addElement(new Sample_Facet.Target_readParams());
-    ListSequence.fromList(targets).addElement(new Sample_Facet.Target_reportFiles());
+    ListSequence.fromList(targets).addElement(new Target_readParams());
+    ListSequence.fromList(targets).addElement(new Target_reportFiles());
   }
   public Iterable<ITarget> targets() {
     return targets;
@@ -46,7 +48,7 @@ public class Sample_Facet extends IFacet.Stub {
     return null;
   }
   public Iterable<IFacet.Name> required() {
-    return Sequence.fromArray(new IFacet.Name[]{new IFacet.Name("jetbrains.mps.lang.core.Generate"), new IFacet.Name("jetbrains.mps.lang.core.TextGen")});
+    return Sequence.fromArray(new IFacet.Name[]{new IFacet.Name("jetbrains.mps.make.facets.Generate"), new IFacet.Name("jetbrains.mps.make.facets.TextGen")});
   }
   public Iterable<IFacet.Name> extended() {
     return null;
@@ -55,7 +57,7 @@ public class Sample_Facet extends IFacet.Stub {
     return this.name;
   }
   public IPropertiesPersistence propertiesPersistence() {
-    return new Sample_Facet.TargetProperties();
+    return new TargetProperties();
   }
   public static class Target_readParams implements ITargetEx2 {
     private static final ITarget.Name name = new ITarget.Name("sampleFacet.Sample.readParams");
@@ -88,6 +90,7 @@ public class Sample_Facet extends IFacet.Stub {
               }
               Target_configure.vars(pa.global()).parametersProvider().addParameter("count", 100500);
             default:
+              progressMonitor.done();
               return new IResult.SUCCESS(_output_kf1bs5_a0a);
           }
         }
@@ -100,13 +103,13 @@ public class Sample_Facet extends IFacet.Stub {
       return null;
     }
     public Iterable<ITarget.Name> after() {
-      return Sequence.fromArray(new ITarget.Name[]{new ITarget.Name("jetbrains.mps.lang.core.Generate.configure")});
+      return Sequence.fromArray(new ITarget.Name[]{new ITarget.Name("jetbrains.mps.make.facets.Generate.configure")});
     }
     public Iterable<ITarget.Name> notBefore() {
       return null;
     }
     public Iterable<ITarget.Name> before() {
-      return Sequence.fromArray(new ITarget.Name[]{new ITarget.Name("jetbrains.mps.lang.core.Generate.generate")});
+      return Sequence.fromArray(new ITarget.Name[]{new ITarget.Name("jetbrains.mps.make.facets.Generate.generate")});
     }
     public ITarget.Name getName() {
       return name;
@@ -141,8 +144,8 @@ public class Sample_Facet extends IFacet.Stub {
     public int workEstimate() {
       return 1;
     }
-    public static Sample_Facet.Target_readParams.Parameters vars(IPropertiesPool ppool) {
-      return ppool.properties(name, Sample_Facet.Target_readParams.Parameters.class);
+    public static Parameters vars(IPropertiesPool ppool) {
+      return ppool.properties(name, Parameters.class);
     }
     public static class Parameters extends MultiTuple._3<String, Integer, String> {
       public Parameters() {
@@ -180,21 +183,22 @@ public class Sample_Facet extends IFacet.Stub {
         @Override
         public IResult execute(final Iterable<IResource> rawInput, final IJobMonitor monitor, final IPropertiesAccessor pa, @NotNull final ProgressMonitor progressMonitor) {
           Iterable<IResource> _output_kf1bs5_a0b = null;
-          final Iterable<TResource> input = (Iterable<TResource>) (Iterable) rawInput;
+          final Iterable<DResource> input = (Iterable<DResource>) (Iterable) rawInput;
           switch (0) {
             case 0:
-              for (IResource resource : input) {
-                TResource tres = (TResource) resource;
-                new DeltaReconciler(tres.delta()).visitAll(new FilesDelta.Visitor() {
-                  @Override
-                  public boolean acceptWritten(IFile file) {
-                    monitor.reportFeedback(new IFeedback.INFORMATION(String.valueOf("written file: " + file)));
-                    return true;
-                  }
-                });
-                _output_kf1bs5_a0b = Sequence.fromIterable(_output_kf1bs5_a0b).concat(Sequence.fromIterable(Sequence.<IResource>singleton(resource)));
-              }
+              new DeltaReconciler(Sequence.fromIterable(input).translate(new ITranslator2<DResource, IDelta>() {
+                public Iterable<IDelta> translate(DResource tres) {
+                  return tres.delta();
+                }
+              })).visitAll(new FilesDelta.Visitor() {
+                @Override
+                public boolean acceptWritten(IFile file) {
+                  monitor.reportFeedback(new IFeedback.INFORMATION(String.valueOf("written file: " + file)));
+                  return true;
+                }
+              });
             default:
+              progressMonitor.done();
               return new IResult.SUCCESS(_output_kf1bs5_a0b);
           }
         }
@@ -207,7 +211,7 @@ public class Sample_Facet extends IFacet.Stub {
       return null;
     }
     public Iterable<ITarget.Name> after() {
-      return Sequence.fromArray(new ITarget.Name[]{new ITarget.Name("jetbrains.mps.lang.core.TextGen.textGen")});
+      return Sequence.fromArray(new ITarget.Name[]{new ITarget.Name("jetbrains.mps.make.facets.TextGen.textGen")});
     }
     public Iterable<ITarget.Name> notBefore() {
       return null;
@@ -225,11 +229,11 @@ public class Sample_Facet extends IFacet.Stub {
       return true;
     }
     public boolean producesOutput() {
-      return true;
+      return false;
     }
     public Iterable<Class<? extends IResource>> expectedInput() {
       List<Class<? extends IResource>> rv = ListSequence.fromList(new ArrayList<Class<? extends IResource>>());
-      ListSequence.fromList(rv).addElement(TResource.class);
+      ListSequence.fromList(rv).addElement(DResource.class);
       return rv;
     }
     public Iterable<Class<? extends IResource>> expectedOutput() {
@@ -253,7 +257,7 @@ public class Sample_Facet extends IFacet.Stub {
       {
         ITarget.Name name = new ITarget.Name("sampleFacet.Sample.readParams");
         if (properties.hasProperties(name)) {
-          Sample_Facet.Target_readParams.Parameters props = properties.properties(name, Sample_Facet.Target_readParams.Parameters.class);
+          Target_readParams.Parameters props = properties.properties(name, Target_readParams.Parameters.class);
           MapSequence.fromMap(store).put("sampleFacet.Sample.readParams.SomeParam", String.valueOf(props.SomeParam()));
           MapSequence.fromMap(store).put("sampleFacet.Sample.readParams.Count", String.valueOf(props.Count()));
           MapSequence.fromMap(store).put("sampleFacet.Sample.readParams.arch", String.valueOf(props.arch()));
@@ -264,7 +268,7 @@ public class Sample_Facet extends IFacet.Stub {
       try {
         {
           ITarget.Name name = new ITarget.Name("sampleFacet.Sample.readParams");
-          Sample_Facet.Target_readParams.Parameters props = properties.properties(name, Sample_Facet.Target_readParams.Parameters.class);
+          Target_readParams.Parameters props = properties.properties(name, Target_readParams.Parameters.class);
           if (MapSequence.fromMap(store).containsKey("sampleFacet.Sample.readParams.SomeParam")) {
             props.SomeParam(String.valueOf(MapSequence.fromMap(store).get("sampleFacet.Sample.readParams.SomeParam")));
           }

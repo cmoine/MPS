@@ -1,5 +1,5 @@
 /*
-* Copyright 2003-2012 JetBrains s.r.o.
+* Copyright 2003-2019 JetBrains s.r.o.
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -24,11 +24,10 @@ import com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode;
 import com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode;
 import com.intellij.ide.projectView.impl.nodes.PsiFileNode;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
+import jetbrains.mps.extapi.persistence.SourceRoot;
+import jetbrains.mps.extapi.persistence.SourceRootKinds;
 import jetbrains.mps.fileTypes.MPSFileTypeFactory;
 import jetbrains.mps.ide.platform.refactoring.ModelElementTargetChooser;
 import jetbrains.mps.ide.platform.refactoring.NodeLocation;
@@ -36,28 +35,30 @@ import jetbrains.mps.ide.platform.refactoring.NodeLocation.NodeLocationChild;
 import jetbrains.mps.ide.platform.refactoring.NodeLocation.NodeLocationRoot;
 import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.idea.core.MPSDataKeys;
-import jetbrains.mps.idea.core.facet.MPSConfigurationBean;
 import jetbrains.mps.idea.core.facet.MPSFacet;
 import jetbrains.mps.idea.core.facet.MPSFacetType;
 import jetbrains.mps.idea.core.projectView.MPSPsiElementTreeNode;
 import jetbrains.mps.idea.core.projectView.MPSPsiModelTreeNode;
 import jetbrains.mps.persistence.DefaultModelRoot;
 import jetbrains.mps.smodel.SModelFileTracker;
+import jetbrains.mps.util.FileUtil;
+import jetbrains.mps.util.Pair;
 import jetbrains.mps.vfs.IFile;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SRepository;
 import org.jetbrains.mps.openapi.persistence.ModelRoot;
 
 import javax.swing.JComponent;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class ModelOrNodeChooser extends ProjectViewPane implements ModelElementTargetChooser {
-  private Project myProject;
   private JComponent myComponent;
 
   public ModelOrNodeChooser(Project project) {
     super(project);
-    myProject = project;
     myComponent = createComponent();
   }
 
@@ -66,72 +67,153 @@ public class ModelOrNodeChooser extends ProjectViewPane implements ModelElementT
     return myComponent;
   }
 
+  @Override
+  public JComponent getPreferredFocusedComponent() {
+    return myTree;
+  }
 
   protected ProjectAbstractTreeStructureBase createStructure() {
-    return new ProjectTreeStructure(myProject, ID) {
-      public Object[] getChildElements(Object element) {
-        ArrayList<Object> result = new ArrayList<Object>();
-        for (Object o : super.getChildElements(element)) {
-          if (o instanceof PsiFileNode) {
-            PsiFileNode fileNode = (PsiFileNode) o;
-            VirtualFile vFile = fileNode.getVirtualFile();
-            if (vFile != null && vFile.getFileType().equals(MPSFileTypeFactory.MPS_FILE_TYPE)) {
-              result.add(o);
+    List<String> sourceRoots = new ArrayList<>();
+    ProjectHelper.fromIdeaProject(myProject).getModelAccess().runReadAction(() -> {
+      for (SModule module: ProjectHelper.fromIdeaProject(myProject).getProjectModules()) {
+        for (ModelRoot modelRoot : module.getModelRoots()) {
+          if (modelRoot instanceof DefaultModelRoot) {
+            for (SourceRoot sourceRoot : ((DefaultModelRoot) modelRoot).getSourceRoots(SourceRootKinds.SOURCES)) {
+              sourceRoots.add(sourceRoot.getAbsolutePath().getPath());
             }
-          } else if (o instanceof MPSPsiElementTreeNode || o instanceof MPSPsiModelTreeNode) {
-            result.add(o);
-          } else if (o instanceof PsiDirectoryNode) {
-            VirtualFile virtualFile = ((PsiDirectoryNode) o).getVirtualFile();
-            if (virtualFile != null && isModelRootOrParent(virtualFile)) {
-              result.add(o);
-            }
-          } else if (o instanceof ProjectViewModuleNode && hasModelRoots(((ProjectViewModuleNode) o).getValue())) {
-            result.add(o);
           }
         }
+      }
+    });
+    return new ProjectTreeStructure(myProject, ID) {
+      public Object[] getChildElements(Object element) {
+        final ArrayList<Object> result = new ArrayList<Object>();
+        ProjectHelper.fromIdeaProject(myProject).getModelAccess().runReadAction(() -> {
+          for (Object o : super.getChildElements(element)) {
+            if (o instanceof PsiFileNode) {
+              PsiFileNode fileNode = (PsiFileNode) o;
+              VirtualFile vFile = fileNode.getVirtualFile();
+              if (vFile != null && vFile.getFileType().equals(MPSFileTypeFactory.MPS_FILE_TYPE)) {
+                result.add(o);
+              }
+            } else if (o instanceof MPSPsiElementTreeNode || o instanceof MPSPsiModelTreeNode) {
+              result.add(o);
+            } else if (o instanceof PsiDirectoryNode) {
+              VirtualFile virtualFile = ((PsiDirectoryNode) o).getVirtualFile();
+              if (virtualFile == null) {
+                continue;
+              }
+              if (!(virtualFile.isDirectory())) {
+                continue;
+              }
+              if (!virtualFile.isInLocalFileSystem()) {
+                // no idea why restrict to local fs, just a replacement for ugly
+                //    LocalFileSystem.PROTOCOL.equals(VirtualFileManager.extractProtocol(virtualFile.getUrl()))
+                continue;
+              }
+              String virtualFilePath = virtualFile.getPath();
+              boolean containsSourceRoots = sourceRoots.stream().anyMatch(s -> FileUtil.isAncestor(virtualFilePath, s) || FileUtil.isAncestor(s, virtualFilePath));
+              if (containsSourceRoots) {
+                result.add(o);
+              }
+            } else if (o instanceof ProjectViewModuleNode && hasModelRoots(((ProjectViewModuleNode) o).getValue())) {
+              result.add(o);
+            }
+          }
+        });
         return result.toArray();
       }
     };
 
   }
 
+  // needs model read over project repo
   private boolean hasModelRoots(Module module) {
-    if (module == null) return false;
-    MPSFacet mpsFacet = FacetManager.getInstance(module).getFacetByType(MPSFacetType.ID);
-    if (mpsFacet == null || !mpsFacet.wasInitialized()) return false;
+    MPSFacet mpsFacet = getFacetIfInitialized(module);
+    if (mpsFacet == null) {
+      return false;
+    }
 
-    MPSConfigurationBean configurationBean = mpsFacet.getConfiguration().getBean();
-    return configurationBean != null && !(configurationBean.getModelRoots().isEmpty());
+    return mpsFacet.getSolution().getModelRoots().iterator().hasNext();
   }
 
-  private boolean isModelRootOrParent(VirtualFile virtualFile) {
-    if (!(virtualFile.isDirectory())) return false;
+  @Nullable
+  public static MPSFacet getFacetIfInitialized(@Nullable Module ideaModule) {
+    if (ideaModule == null) {
+      return null;
+    }
+    MPSFacet mpsFacet = FacetManager.getInstance(ideaModule).getFacetByType(MPSFacetType.ID);
+    if (mpsFacet != null && mpsFacet.wasInitialized()) {
+      return mpsFacet;
+    }
+    return null;
+  }
 
-    Module module = ModuleUtil.findModuleForFile(virtualFile, myProject);
-    if (module == null) return false;
-    MPSFacet mpsFacet = FacetManager.getInstance(module).getFacetByType(MPSFacetType.ID);
-    if (mpsFacet == null || !(mpsFacet.wasInitialized())) return false;
+  // needs model read over project repo
+  // XXX it tells if vf intersects with any model root path (either as parent or a child), which doesn't make too much sense to me.
+  // public solely to avoid duplucation of this cryptic logic from [Mark|Unmark]ModelRootAction
+  public static boolean isModelRootOrParent(MPSFacet mpsFacet, VirtualFile virtualFile) {
+    if (!(virtualFile.isDirectory())) {
+      return false;
+    }
+    if (!virtualFile.isInLocalFileSystem()) {
+      // no idea why restrict to local fs, just a replacement for ugly
+      //    LocalFileSystem.PROTOCOL.equals(VirtualFileManager.extractProtocol(virtualFile.getUrl()))
+      return false;
+    }
+    final String path = virtualFile.getPath();
 
-    MPSConfigurationBean configurationBean = mpsFacet.getConfiguration().getBean();
-    if (configurationBean == null) return false;
-
-    String url = virtualFile.getUrl();
-    if (!LocalFileSystem.PROTOCOL.equals(VirtualFileManager.extractProtocol(url))) return false;
-
-    String path = VirtualFileManager.extractPath(url);
-
-    for (ModelRoot mr : configurationBean.getModelRoots()) {
-      if (!(mr instanceof DefaultModelRoot)) continue;
-      for (String sourceRoot : ((DefaultModelRoot) mr).getFiles(DefaultModelRoot.SOURCE_ROOTS)) {
-        if (sourceRoot.startsWith(path)) return true;
+    for (ModelRoot mr : mpsFacet.getSolution().getModelRoots()) {
+      if (!(mr instanceof DefaultModelRoot)) {
+        continue;
+      }
+      for (SourceRoot sourceRoot : ((DefaultModelRoot) mr).getSourceRoots(SourceRootKinds.SOURCES)) {
+        String srcRootLocation = sourceRoot.getAbsolutePath().getPath();
+        if (FileUtil.isAncestor(path, srcRootLocation)) {
+          // vf is (grand-)parent of the source root
+          return true;
+        }
         // TODO this gives some unneeded items (like src_gen when src is source root)
-        if (path.startsWith(sourceRoot)) return true;
+        if (FileUtil.isAncestor(srcRootLocation, path)) {
+          // vf lies down under the model root
+          return true;
+        }
       }
     }
     return false;
   }
 
-  @Override
+  /*
+   * the only reason this code is public and resides here as it is almost identical to #isModelRootOrParent, above
+   * important difference here is that we check path for 'equals' instead of 'startsWith'
+   */
+  @Nullable
+  public static Pair<DefaultModelRoot, SourceRoot> getModelRoot(MPSFacet mpsFacet, VirtualFile virtualFile) {
+    if (!(virtualFile.isDirectory())) {
+      return null;
+    }
+    if (!virtualFile.isInLocalFileSystem()) {
+      // see #isModelRootOrParent
+      return null;
+    }
+    final String path = virtualFile.getPath();
+
+    for (ModelRoot mr : mpsFacet.getSolution().getModelRoots()) {
+      if (!(mr instanceof DefaultModelRoot)) {
+        continue;
+      }
+      for (SourceRoot sourceRoot : ((DefaultModelRoot) mr).getSourceRoots(SourceRootKinds.SOURCES)) {
+        String srcRootLocation = sourceRoot.getPath();
+        if (path.equals(srcRootLocation)) {
+          return new Pair<>(((DefaultModelRoot) mr), sourceRoot);
+        }
+      }
+    }
+    return null;
+  }
+
+
+    @Override
   public NodeLocation getSelectedObject() {
     SRepository repository = ProjectHelper.getProjectRepository(myProject);
     if ((getSelectedNode() != null) && (getSelectedNode().getUserObject() instanceof MPSPsiElementTreeNode)) {

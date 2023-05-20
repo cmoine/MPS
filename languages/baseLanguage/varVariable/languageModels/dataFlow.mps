@@ -2,9 +2,7 @@
 <model ref="r:04eb0d47-e25d-4def-b754-199026c42388(jetbrains.mps.baseLanguage.varVariable.dataFlow)">
   <persistence version="9" />
   <languages>
-    <use id="515552c7-fcc0-4ab4-9789-2f3c49344e85" name="jetbrains.mps.baseLanguage.varVariable" version="0" />
-    <use id="7fa12e9c-b949-4976-b4fa-19accbc320b4" name="jetbrains.mps.lang.dataFlow" version="0" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="00000000-0000-4000-0000-443879f56b80(jetbrains.mps.devkit.aspect.dataflow)" />
   </languages>
   <imports>
     <import index="dvap" ref="r:931e38db-856b-4b95-8ae0-a7cd13da6d32(jetbrains.mps.baseLanguage.varVariable.structure)" />
@@ -56,7 +54,7 @@
           <node concept="2OqwBi" id="6ZQeJ8QF3hq" role="3Ah4Yx">
             <node concept="3__QtB" id="6ZQeJ8QF3hn" role="2Oq$k0" />
             <node concept="3TrEf2" id="6ZQeJ8QF88U" role="2OqNvi">
-              <ref role="3Tt5mk" to="tpee:fz3vP1I" />
+              <ref role="3Tt5mk" to="tpee:fz3vP1I" resolve="initializer" />
             </node>
           </node>
         </node>
@@ -65,7 +63,7 @@
           <node concept="2OqwBi" id="6ZQeJ8QF3hE" role="1XBRO_">
             <node concept="3__QtB" id="6ZQeJ8QF3hB" role="2Oq$k0" />
             <node concept="3TrEf2" id="6ZQeJ8QF88X" role="2OqNvi">
-              <ref role="3Tt5mk" to="tpee:fz3vP1I" />
+              <ref role="3Tt5mk" to="tpee:fz3vP1I" resolve="initializer" />
             </node>
           </node>
         </node>

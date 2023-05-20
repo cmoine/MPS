@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="d9wr6k0sqnus1rq2zs29rbfxsg49egg" />
+<product version="3" modelHash="9ge8s4lvyi1mjk267whchipwb2woeyc">
+  <files names="BasicDiffRowTableUI.java:DiffRowTable.java" />
+</product>
 

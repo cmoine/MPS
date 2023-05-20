@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-8t9onib7rq5nufwqfzs85al2d7wilox" />
+<product version="3" modelHash="4y0wx1wcdr0vzy25wesm3ua6qsrs49s">
+  <files names="TypesystemDescriptor.java:typeof_LeftOperand_InferenceRule.java:typeof_RightOperand_InferenceRule.java" />
+</product>
 

@@ -1,0 +1,51 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="MoveConceptRefactoring_Test" type="JUnit Tests" factoryName="JUnit Tests">
+    <myJUnitSettings>
+      <MyState>
+        <option name="myModelRef" value="r:7da8cb5d-b937-4ac8-a4e8-0f345dfd2711(jetbrains.mps.refactoring.test.test@tests)" />
+        <option name="myModuleRef" value="64b24ebe-97a2-466e-83d8-bd3afefcbb41(refactoring.test)" />
+        <option name="myInProcess" value="false" />
+        <option name="myReuseCaches" value="true" />
+        <option name="myOverrideCachesLocation" value="false" />
+        <option name="myDebug" value="false" />
+        <option name="myCachesPath" value="$USER_HOME$/Library/Preferences/MPSJUnitRC0" />
+        <option name="myTestCases">
+          <list>
+            <option value="r:7da8cb5d-b937-4ac8-a4e8-0f345dfd2711(jetbrains.mps.refactoring.test.test@tests)/6006982468244433255" />
+          </list>
+        </option>
+        <option name="myTestMethods">
+          <list />
+        </option>
+        <option name="myRunType" value="2" />
+      </MyState>
+    </myJUnitSettings>
+    <myJavaRunParameters>
+      <MyState>
+        <option name="myJavaParameters">
+          <JavaRunParameters>
+            <option name="jrePath" value="" />
+            <option name="programParameters" value="" />
+            <option name="useAlternativeJre" value="false" />
+            <option name="vmOptions" value="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5061" />
+            <option name="workingDirectory" value="$PROJECT_DIR$" />
+          </JavaRunParameters>
+        </option>
+      </MyState>
+    </myJavaRunParameters>
+    <myDeploySettings>
+      <MyState>
+        <option name="myPluginsToDeploy">
+          <list>
+            <option value="r:874d959d-e3b4-4d04-b931-ca849af130dd(jetbrains.mps.ide.build)/6155501835148692817" />
+          </list>
+        </option>
+      </MyState>
+    </myDeploySettings>
+    <method v="2">
+      <option name="jetbrains.mps.execution.configurations.pluginSolution.plugin.MakeNodePointers_BeforeTask" enabled="true" />
+      <option name="jetbrains.mps.execution.configurations.implementation.plugin.plugin.ClearSettingsDirectoryBeforeRunTask_BeforeTask" enabled="true" />
+      <option name="jetbrains.mps.execution.configurations.implementation.plugin.plugin.AssemblePluginsBeforeTask_BeforeTask" enabled="true" />
+    </method>
+  </configuration>
+</component>

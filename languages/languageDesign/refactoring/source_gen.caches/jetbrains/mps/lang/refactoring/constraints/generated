@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="b2tdka5pjhndb2y5zf3x46iaybjiukw" />
+<product version="3" modelHash="-cluuzk8j5bdkvqm6mtr411ma00dsv0b">
+  <files names="ConstraintsAspectDescriptor.java:ContextMemberOperation_Constraints.java:ModelsToGenerateByDefault_Constraints.java:RefactoringAction_Constraints.java:RefactoringFieldReference_Constraints.java:RefactoringParameterReference_Constraints.java" />
+</product>
 

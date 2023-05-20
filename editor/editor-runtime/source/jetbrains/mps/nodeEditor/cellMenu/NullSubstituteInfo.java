@@ -25,12 +25,12 @@ import java.util.List;
 public class NullSubstituteInfo implements SubstituteInfo {
   @Override
   public List<SubstituteAction> getMatchingActions(String pattern, boolean strictMatching) {
-    return new ArrayList<SubstituteAction>();
+    return new ArrayList<>();
   }
 
   @Override
   public List<SubstituteAction> getSmartMatchingActions(String pattern, boolean strictMatching, EditorCell contextCell) {
-    return new ArrayList<SubstituteAction>();
+    return new ArrayList<>();
   }
 
   @Override

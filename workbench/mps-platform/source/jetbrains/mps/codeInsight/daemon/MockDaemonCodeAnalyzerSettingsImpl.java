@@ -18,10 +18,11 @@ package jetbrains.mps.codeInsight.daemon;
 import com.intellij.codeInsight.daemon.DaemonCodeAnalyzerSettings;
 import com.intellij.codeInsight.daemon.DaemonCodeAnalyzerSettingsImpl;
 import org.jdom.Element;
+import org.jetbrains.annotations.NotNull;
 
 public class MockDaemonCodeAnalyzerSettingsImpl extends DaemonCodeAnalyzerSettingsImpl {
   @Override
-  public void loadState(Element state) {
+  public void loadState(@NotNull Element state) {
   }
 
   @Override

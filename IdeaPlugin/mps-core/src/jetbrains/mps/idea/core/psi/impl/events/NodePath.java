@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,10 @@
 
 package jetbrains.mps.idea.core.psi.impl.events;
 
-import jetbrains.mps.smodel.ModelAccess;
-import jetbrains.mps.util.Computable;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeId;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -39,30 +38,17 @@ public final class NodePath {
   public static final NodePath EMPTY = new NodePath(Collections.<SNodeId>emptyList());
 
   public static NodePath forSNode (final SNode sNode) {
-    List<SNodeId> path = ModelAccess.instance().runReadAction(new Computable<List<SNodeId>>() {
-      @Override
-      public List<SNodeId> compute() {
-        LinkedList<SNodeId> path = new LinkedList<SNodeId>();
+    ArrayDeque<SNodeId> path = new ArrayDeque<>();
 
-        for (SNode sn = sNode; sn != null; sn = sn.getParent()) {
-          SNodeId nodeId = sn.getNodeId();
-          if (nodeId == null) return null;
-
-          path.addFirst(nodeId);
-        }
-        return path;
-      }
-    });
-
-    if (path == null) {
-      throw new IllegalArgumentException("null SNodeId");
+    for (SNode sn = sNode; sn != null; sn = sn.getParent()) {
+      path.addFirst(sn.getNodeId());
     }
 
     return new NodePath (path);
   }
 
   public NodePath (Collection<SNodeId> ids) {
-    myPath = new ArrayList<SNodeId>(ids);
+    myPath = new ArrayList<>(ids);
   }
 
   boolean isEmpty () {

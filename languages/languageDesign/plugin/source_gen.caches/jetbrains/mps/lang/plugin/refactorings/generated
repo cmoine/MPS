@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-47xtic2c6hy0467py5qbo5rhedazpe9" />
+<product version="3" modelHash="7rdand3exqghxln2wplm99aqzw1nb8f">
+  <files names="RefactoringAspectDescriptor.java:SortKeymapMembers.java:SortKeymapMembers_Target.java" />
+</product>
 

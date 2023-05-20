@@ -14,7 +14,7 @@ public class OfTypeSequence<U, V> extends AbstractChainedSequence<U, V> implemen
   }
   @Override
   public Iterator<V> iterator() {
-    return new OfTypeSequence.OfTypeIterator();
+    return new OfTypeIterator();
   }
   private boolean isOfType(U input) {
     return ClassUtils.isInstance(requestedType, input);

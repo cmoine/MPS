@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,63 +16,51 @@
 package jetbrains.mps.typesystem.inference;
 
 import jetbrains.mps.errors.QuickFixProvider;
-import jetbrains.mps.util.Pair;
+import jetbrains.mps.smodel.SNodePointer;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.mps.openapi.model.SNodeReference;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Stack;
 
 public class EquationInfo {
 
-  private String myErrorString;
-  private SNode myNodeWithError;
+  private final String myErrorString;
 
-  private String myRuleModel;
-  private String myRuleId;
-  private Stack<Pair<String, String>> myOuterRulesIds = null;
+  // Node can be null in case where language designer is sure that the equation can never fail. If such equation fails it is considered as an error.
+  @Nullable
+  private final SNode myNodeWithError;
+
+  private final SNodeReference myRule;
+  private ArrayDeque<SNodeReference> myOuterRulesIds = null;
 
   private List<QuickFixProvider> myIntentionProviders;
 
-  private int myInequationPriority;
-  private boolean myIsStrong = false;
+  private int myInequationPriority = 0;
 
-
-  public EquationInfo(SNode nodeWithError, String errorString) {
-    myErrorString = errorString;
-    myNodeWithError = nodeWithError;
-  }
-
-  public EquationInfo(SNode nodeWithError, String errorString, String ruleModel, String ruleId, int inequationPriority, QuickFixProvider intentionProvider) {
-    myErrorString = errorString;
-    myNodeWithError = nodeWithError;
-    myRuleModel = ruleModel;
-    myRuleId = ruleId;
+  public EquationInfo(@Nullable SNode nodeWithError, String errorString, String ruleModel, String ruleId, int inequationPriority, QuickFixProvider intentionProvider) {
+    this(nodeWithError, errorString, ruleModel, ruleId);
     myInequationPriority = inequationPriority;
     addIntentionProvider(intentionProvider);
   }
 
-  @Deprecated
-  public EquationInfo(SNode nodeWithError, String errorString, String ruleModel, String ruleId, int inequationPriority) {
-    this(nodeWithError, errorString, ruleModel, ruleId, inequationPriority, null);
-  }
-
-  public EquationInfo(SNode nodeWithError, String errorString, String ruleModel, String ruleId) {
+  public EquationInfo(@Nullable SNode nodeWithError, String errorString, String ruleModel, String ruleId) {
     myErrorString = errorString;
     myNodeWithError = nodeWithError;
-    myRuleModel = ruleModel;
-    myRuleId = ruleId;
+    myRule = ruleModel != null && ruleId != null ? new SNodePointer(ruleModel, ruleId) : null;
   }
 
   public EquationInfo(EquationInfo pattern) {
     myErrorString = pattern.myErrorString;
     myNodeWithError = pattern.myNodeWithError;
-    myRuleModel = pattern.myRuleModel;
-    myRuleId = pattern.myRuleId;
+    myRule = pattern.myRule;
     myInequationPriority = pattern.myInequationPriority;
     if (pattern.myIntentionProviders != null) {
       if (myIntentionProviders == null) {
-        myIntentionProviders = new ArrayList<QuickFixProvider>(pattern.myIntentionProviders);
+        myIntentionProviders = new ArrayList<>(pattern.myIntentionProviders);
       }
       myIntentionProviders.addAll(pattern.myIntentionProviders);
     }
@@ -82,65 +70,56 @@ public class EquationInfo {
     return myErrorString;
   }
 
+  @Nullable
   public SNode getNodeWithError() {
     return myNodeWithError;
   }
 
-  public String getRuleModel() {
-    return myRuleModel;
-  }
-
-  public String getRuleId() {
-    return myRuleId;
-  }
-
-  public void setIntentionProvider(QuickFixProvider intentionProvider) {
-    addIntentionProvider(intentionProvider);
+  @Nullable
+  public SNodeReference getRuleNode() {
+    return myRule;
   }
 
   public void addIntentionProvider(QuickFixProvider intentionProvider) {
+    if (intentionProvider == null) {
+      return;
+    }
     if (myIntentionProviders == null) {
-      myIntentionProviders = new ArrayList<QuickFixProvider>(1);
+      myIntentionProviders = new ArrayList<>(1);
     }
     myIntentionProviders.add(intentionProvider);
   }
 
   public List<QuickFixProvider> getIntentionProviders() {
-    ArrayList<QuickFixProvider> result = new ArrayList<QuickFixProvider>(1);
     if (myIntentionProviders != null) {
-      result.addAll(myIntentionProviders);
+      return new ArrayList<>(myIntentionProviders);
+    } else {
+      return Collections.emptyList();
     }
-    return result;
   }
 
-
-  public void pushOuterRuleId(String modelId, String ruleId) {
-    if (myOuterRulesIds == null) {
-      myOuterRulesIds = new Stack<Pair<String, String>>();
-    }
-    myOuterRulesIds.push(new Pair<String, String>(modelId, ruleId));
-  }
-
+  // set ids copied from outerInfo
   public void getOuterRulesIdFromInfo(EquationInfo outerInfo) {
     if (myOuterRulesIds == null) {
-      myOuterRulesIds = new Stack<Pair<String, String>>();
+      myOuterRulesIds = new ArrayDeque<>(4);
     }
-    for (Pair<String, String> id : outerInfo.getAdditionalRulesIds()) {
-      myOuterRulesIds.push(id);
+    if (outerInfo.myOuterRulesIds != null) {
+      for (SNodeReference id : outerInfo.myOuterRulesIds) {
+        myOuterRulesIds.push(id);
+      }
     }
-    myOuterRulesIds.push(new Pair<String, String>(outerInfo.getRuleModel(), outerInfo.getRuleId()));
+    myOuterRulesIds.push(outerInfo.getRuleNode());
   }
 
-  public List<Pair<String, String>> getAdditionalRulesIds() {
-    if (myOuterRulesIds == null) return new ArrayList<Pair<String, String>>();
-    return new ArrayList<Pair<String, String>>(myOuterRulesIds);
+  public List<SNodeReference> getAdditionalRulesIds() {
+    if (myOuterRulesIds == null) {
+      return Collections.emptyList();
+    }
+    return new ArrayList<>(myOuterRulesIds);
   }
 
   boolean isStrong() {
-    return myIsStrong;
+    return false;
   }
 
-  void setStrong() {
-    myIsStrong = true;
-  }
 }

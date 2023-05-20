@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="mpsdevkit">
+    <output-path>$PROJECT_DIR$/plugins/mps-devkit/lib</output-path>
+    <root id="archive" name="mpsdevkit.jar">
+      <element id="module-output" name="mps-devkit" />
+    </root>
+  </artifact>
+</component>

@@ -7,124 +7,143 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1076505808687:jetbrains.mps.baseLanguage.structure.WhileStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1163670490218:jetbrains.mps.baseLanguage.structure.SwitchStatement" />
   <root>
     <file name="ConceptPresentationAspectImpl.java">
-      <unit at="11,0,31,0" name="jetbrains.mps.generator.test.crossmodel.entity.structure.ConceptPresentationAspectImpl" />
+      <unit at="11,0,38,0" name="jetbrains.mps.generator.test.crossmodel.entity.structure.ConceptPresentationAspectImpl" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <unit at="10,0,30,0" name="jetbrains.mps.generator.test.crossmodel.entity.structure.LanguageConceptSwitch" />
     </file>
     <file name="StructureAspectDescriptor.java">
-      <unit at="20,0,76,0" name="jetbrains.mps.generator.test.crossmodel.entity.structure.StructureAspectDescriptor" />
+      <unit at="17,0,83,0" name="jetbrains.mps.generator.test.crossmodel.entity.structure.StructureAspectDescriptor" />
     </file>
   </root>
-  <root nodeRef="r:9b56ed90-436a-4093-aab2-2dfe5d09ce42(jetbrains.mps.generator.test.crossmodel.entity.structure)/4355167635271953286">
-    <file name="Kind.java">
-      <node id="4355167635271953286" at="13,0,14,0" concept="2" trace="myName" />
-      <node id="4355167635271953286" at="14,27,15,18" concept="6" />
-      <node id="4355167635271953286" at="17,0,18,0" concept="2" trace="myValue" />
-      <node id="4355167635271953286" at="18,32,19,18" concept="1" />
-      <node id="4355167635271953286" at="19,18,20,20" concept="1" />
-      <node id="4355167635271953286" at="22,25,23,19" concept="6" />
-      <node id="4355167635271953286" at="25,36,26,37" concept="6" />
-      <node id="4355167635271953286" at="28,43,29,68" concept="5" />
-      <node id="4355167635271953286" at="29,68,30,52" concept="1" />
-      <node id="4355167635271953286" at="30,52,31,52" concept="1" />
-      <node id="4355167635271953286" at="31,52,32,16" concept="6" />
-      <node id="4355167635271953286" at="34,35,35,19" concept="6" />
-      <node id="4355167635271953286" at="38,24,39,31" concept="6" />
-      <node id="4355167635271953286" at="41,51,42,21" concept="6" />
-      <node id="4355167635271953286" at="44,51,45,21" concept="6" />
-      <node id="4355167635271953286" at="46,5,47,29" concept="6" />
-      <node id="4355167635271953286" at="14,0,17,0" concept="4" trace="getName#()Ljava/lang/String;" />
-      <node id="4355167635271953286" at="22,0,25,0" concept="4" trace="getValue#()I" />
-      <node id="4355167635271953286" at="25,0,28,0" concept="4" trace="getValueAsString#()Ljava/lang/String;" />
-      <node id="4355167635271953286" at="34,0,37,0" concept="7" trace="getDefault#()Ljetbrains/mps/generator/test/crossmodel/entity/structure/Kind;" />
-      <node id="4355167635271953286" at="37,47,40,5" concept="3" />
-      <node id="4355167635271953286" at="40,5,43,5" concept="3" />
-      <node id="4355167635271953286" at="43,5,46,5" concept="3" />
-      <node id="4355167635271953286" at="18,0,22,0" concept="0" trace="Kind#(Ljava/lang/String;I)V" />
-      <node id="4355167635271953286" at="28,0,34,0" concept="7" trace="getConstants#()Ljava/util/List;" />
-      <node id="4355167635271953286" at="37,0,49,0" concept="7" trace="parseValue#(Ljava/lang/String;)Ljetbrains/mps/generator/test/crossmodel/entity/structure/Kind;" />
-      <scope id="4355167635271953286" at="14,27,15,18" />
-      <scope id="4355167635271953286" at="22,25,23,19" />
-      <scope id="4355167635271953286" at="25,36,26,37" />
-      <scope id="4355167635271953286" at="34,35,35,19" />
-      <scope id="4355167635271953286" at="38,24,39,31" />
-      <scope id="4355167635271953286" at="41,51,42,21" />
-      <scope id="4355167635271953286" at="44,51,45,21" />
-      <scope id="4355167635271953286" at="18,32,20,20" />
-      <scope id="4355167635271953286" at="14,0,17,0" />
-      <scope id="4355167635271953286" at="22,0,25,0" />
-      <scope id="4355167635271953286" at="25,0,28,0" />
-      <scope id="4355167635271953286" at="34,0,37,0" />
-      <scope id="4355167635271953286" at="18,0,22,0">
-        <var name="name" id="4355167635271953286" />
-        <var name="value" id="4355167635271953286" />
+  <root nodeRef="r:9b56ed90-436a-4093-aab2-2dfe5d09ce42(jetbrains.mps.generator.test.crossmodel.entity.structure)/4241665505353446794">
+    <file name="EnumerationDescriptor_Kind.java">
+      <node id="4241665505353446794" at="14,39,15,201" concept="9" />
+      <node id="4241665505353446796" at="18,0,19,0" concept="2" trace="myMember__1_0" />
+      <node id="4241665505353446797" at="19,0,20,0" concept="2" trace="myMember__2_0" />
+      <node id="4241665505353446794" at="21,0,22,0" concept="2" trace="myIndex" />
+      <node id="4241665505353446794" at="22,0,23,0" concept="2" trace="myMembers" />
+      <node id="4241665505353446794" at="26,62,27,25" concept="6" />
+      <node id="4241665505353446794" at="32,68,33,21" concept="6" />
+      <node id="4241665505353446794" at="39,29,40,18" concept="6" />
+      <node id="4241665505353446796" at="43,16,44,29" concept="6" />
+      <node id="4241665505353446797" at="45,16,46,29" concept="6" />
+      <node id="4241665505353446794" at="47,5,48,16" concept="6" />
+      <node id="4241665505353446794" at="53,73,54,39" concept="5" />
+      <node id="4241665505353446794" at="55,22,56,18" concept="6" />
+      <node id="4241665505353446794" at="57,5,58,32" concept="6" />
+      <node id="4241665505353446794" at="14,0,17,0" concept="0" trace="EnumerationDescriptor_Kind#()V" />
+      <node id="4241665505353446794" at="38,88,41,5" concept="3" />
+      <node id="4241665505353446794" at="54,39,57,5" concept="3" />
+      <node id="4241665505353446794" at="24,0,29,0" concept="4" trace="getDefault#()Ljetbrains/mps/smodel/runtime/EnumerationDescriptor/MemberDescriptor;" />
+      <node id="4241665505353446794" at="30,0,35,0" concept="4" trace="getMembers#()Ljava/util/List;" />
+      <node id="4241665505353446794" at="41,5,47,5" concept="10" />
+      <node id="4241665505353446794" at="51,0,60,0" concept="4" trace="getMember#(J)Ljetbrains/mps/smodel/runtime/EnumerationDescriptor/MemberDescriptor;" />
+      <node id="4241665505353446794" at="36,0,50,0" concept="4" trace="getMember#(Ljava/lang/String;)Ljetbrains/mps/smodel/runtime/EnumerationDescriptor/MemberDescriptor;" />
+      <scope id="4241665505353446794" at="14,39,15,201" />
+      <scope id="4241665505353446794" at="26,62,27,25" />
+      <scope id="4241665505353446794" at="32,68,33,21" />
+      <scope id="4241665505353446794" at="39,29,40,18" />
+      <scope id="4241665505353446796" at="43,16,44,29" />
+      <scope id="4241665505353446797" at="45,16,46,29" />
+      <scope id="4241665505353446794" at="55,22,56,18" />
+      <scope id="4241665505353446794" at="14,0,17,0" />
+      <scope id="4241665505353446794" at="24,0,29,0" />
+      <scope id="4241665505353446794" at="30,0,35,0" />
+      <scope id="4241665505353446794" at="53,73,58,32">
+        <var name="index" id="4241665505353446794" />
       </scope>
-      <scope id="4355167635271953286" at="28,43,32,16">
-        <var name="list" id="4355167635271953286" />
+      <scope id="4241665505353446794" at="51,0,60,0">
+        <var name="idValue" id="4241665505353446794" />
       </scope>
-      <scope id="4355167635271953286" at="28,0,34,0" />
-      <scope id="4355167635271953286" at="37,47,47,29" />
-      <scope id="4355167635271953286" at="37,0,49,0">
-        <var name="value" id="4355167635271953286" />
+      <scope id="4241665505353446794" at="38,88,48,16" />
+      <scope id="4241665505353446794" at="36,0,50,0">
+        <var name="memberName" id="4241665505353446794" />
       </scope>
-      <unit id="4355167635271953286" at="9,0,50,0" name="jetbrains.mps.generator.test.crossmodel.entity.structure.Kind" />
+      <unit id="4241665505353446794" at="12,0,61,0" name="jetbrains.mps.generator.test.crossmodel.entity.structure.EnumerationDescriptor_Kind" />
     </file>
-    <file name="Kind_PropertySupport.java">
-      <node id="4355167635271953286" at="11,24,12,18" concept="6" />
-      <node id="4355167635271953286" at="13,5,14,85" concept="5" />
-      <node id="4355167635271953286" at="15,33,16,39" concept="5" />
-      <node id="4355167635271953286" at="17,45,18,20" concept="6" />
-      <node id="4355167635271953286" at="20,5,21,17" concept="6" />
-      <node id="4355167635271953286" at="24,24,25,18" concept="6" />
-      <node id="4355167635271953286" at="26,5,27,85" concept="5" />
-      <node id="4355167635271953286" at="28,33,29,39" concept="5" />
-      <node id="4355167635271953286" at="30,45,31,43" concept="6" />
-      <node id="4355167635271953286" at="33,5,34,16" concept="6" />
-      <node id="4355167635271953286" at="36,49,37,43" concept="5" />
-      <node id="4355167635271953286" at="38,27,39,32" concept="6" />
-      <node id="4355167635271953286" at="40,5,41,14" concept="6" />
-      <node id="4355167635271953286" at="10,44,13,5" concept="3" />
-      <node id="4355167635271953286" at="16,39,19,7" concept="3" />
-      <node id="4355167635271953286" at="23,47,26,5" concept="3" />
-      <node id="4355167635271953286" at="29,39,32,7" concept="3" />
-      <node id="4355167635271953286" at="37,43,40,5" concept="3" />
-      <node id="4355167635271953286" at="14,85,20,5" concept="8" />
-      <node id="4355167635271953286" at="27,85,33,5" concept="8" />
-      <node id="4355167635271953286" at="36,0,43,0" concept="4" trace="fromInternalValue#(Ljava/lang/String;)Ljava/lang/String;" />
-      <node id="4355167635271953286" at="10,0,23,0" concept="4" trace="canSetValue#(Ljava/lang/String;)Z" />
-      <node id="4355167635271953286" at="23,0,36,0" concept="4" trace="toInternalValue#(Ljava/lang/String;)Ljava/lang/String;" />
-      <scope id="4355167635271953286" at="11,24,12,18" />
-      <scope id="4355167635271953286" at="17,45,18,20" />
-      <scope id="4355167635271953286" at="24,24,25,18" />
-      <scope id="4355167635271953286" at="30,45,31,43" />
-      <scope id="4355167635271953286" at="38,27,39,32" />
-      <scope id="4355167635271953286" at="15,33,19,7">
-        <var name="constant" id="4355167635271953286" />
+    <file name="StructureAspectDescriptor.java">
+      <node id="4241665505353446794" at="20,0,21,0" concept="2" trace="myEnumerationKind" />
+    </file>
+  </root>
+  <root nodeRef="r:9b56ed90-436a-4093-aab2-2dfe5d09ce42(jetbrains.mps.generator.test.crossmodel.entity.structure)/4355167635271935075">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="4355167635271935075" at="13,0,14,0" concept="2" trace="props_NodeA" />
+      <node id="4355167635271935075" at="28,34,29,76" concept="5" />
+      <node id="4355167635271935075" at="29,76,30,35" concept="1" />
+      <node id="4355167635271935075" at="30,35,31,37" concept="1" />
+      <node id="4355167635271935075" at="32,9,33,27" concept="6" />
+      <node id="4355167635271935075" at="27,39,32,9" concept="3" />
+      <scope id="4355167635271935075" at="28,34,31,37">
+        <var name="cpb" id="4355167635271935075" />
       </scope>
-      <scope id="4355167635271953286" at="28,33,32,7">
-        <var name="constant" id="4355167635271953286" />
+      <scope id="4355167635271935075" at="27,39,33,27" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="4355167635271935075" at="13,0,14,0" concept="7" trace="NodeA" />
+      <node id="4355167635271935075" at="17,44,18,44" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="4355167635271935075" at="19,0,20,0" concept="2" trace="myConceptNodeA" />
+      <node id="4355167635271935075" at="44,39,45,30" concept="6" />
+      <node id="4355167635271935075" at="73,63,74,186" concept="5" />
+      <node id="4355167635271935075" at="74,186,75,33" concept="1" />
+      <node id="4355167635271935075" at="75,33,76,71" concept="1" />
+      <node id="4355167635271935075" at="76,71,77,133" concept="1" />
+      <node id="4355167635271935075" at="77,133,78,17" concept="1" />
+      <node id="4355167635271953276" at="78,17,79,199" concept="1" />
+      <node id="4355167635271935075" at="79,199,80,22" concept="6" />
+      <node id="4355167635271935075" at="73,0,82,0" concept="8" trace="createDescriptorForNodeA#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="4355167635271935075" at="44,39,45,30" />
+      <scope id="4355167635271935075" at="73,63,80,22">
+        <var name="b" id="4355167635271935075" />
       </scope>
-      <scope id="4355167635271953286" at="36,49,41,14">
-        <var name="constant" id="4355167635271953286" />
+      <scope id="4355167635271935075" at="73,0,82,0" />
+    </file>
+  </root>
+  <root nodeRef="r:9b56ed90-436a-4093-aab2-2dfe5d09ce42(jetbrains.mps.generator.test.crossmodel.entity.structure)/4355167635271935478">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="4355167635271935478" at="12,0,13,0" concept="2" trace="props_Entry" />
+      <node id="4355167635271935478" at="21,34,22,76" concept="5" />
+      <node id="4355167635271935478" at="22,76,23,35" concept="1" />
+      <node id="4355167635271935478" at="23,35,24,37" concept="1" />
+      <node id="4355167635271935478" at="25,9,26,27" concept="6" />
+      <node id="4355167635271935478" at="20,39,25,9" concept="3" />
+      <scope id="4355167635271935478" at="21,34,24,37">
+        <var name="cpb" id="4355167635271935478" />
       </scope>
-      <scope id="4355167635271953286" at="36,0,43,0">
-        <var name="value" id="4355167635271953286" />
+      <scope id="4355167635271935478" at="20,39,26,27" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="4355167635271935478" at="12,0,13,0" concept="7" trace="Entry" />
+      <node id="4355167635271935478" at="16,116,17,44" concept="1" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="4355167635271935478" at="18,0,19,0" concept="2" trace="myConceptEntry" />
+      <node id="4355167635271935478" at="42,39,43,30" concept="6" />
+      <node id="4355167635271935478" at="60,63,61,186" concept="5" />
+      <node id="4355167635271935478" at="61,186,62,34" concept="1" />
+      <node id="4355167635271935478" at="62,34,63,71" concept="1" />
+      <node id="4355167635271935478" at="63,71,64,133" concept="1" />
+      <node id="4355167635271935478" at="64,133,65,17" concept="1" />
+      <node id="4241665505353453973" at="65,17,66,175" concept="1" />
+      <node id="3003826652066045294" at="66,175,67,169" concept="1" />
+      <node id="4355167635271952392" at="67,169,68,167" concept="1" />
+      <node id="4355167635271952394" at="68,167,69,167" concept="1" />
+      <node id="4355167635271952397" at="69,167,70,167" concept="1" />
+      <node id="4355167635271935478" at="70,167,71,22" concept="6" />
+      <node id="4355167635271935478" at="60,0,73,0" concept="8" trace="createDescriptorForEntry#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="4355167635271935478" at="42,39,43,30" />
+      <scope id="4355167635271935478" at="60,63,71,22">
+        <var name="b" id="4355167635271935478" />
       </scope>
-      <scope id="4355167635271953286" at="10,44,21,17">
-        <var name="constants" id="4355167635271953286" />
-      </scope>
-      <scope id="4355167635271953286" at="23,47,34,16">
-        <var name="constants" id="4355167635271953286" />
-      </scope>
-      <scope id="4355167635271953286" at="10,0,23,0">
-        <var name="value" id="4355167635271953286" />
-      </scope>
-      <scope id="4355167635271953286" at="23,0,36,0">
-        <var name="value" id="4355167635271953286" />
-      </scope>
-      <unit id="4355167635271953286" at="9,0,44,0" name="jetbrains.mps.generator.test.crossmodel.entity.structure.Kind_PropertySupport" />
+      <scope id="4355167635271935478" at="60,0,73,0" />
     </file>
   </root>
 </debug-info>

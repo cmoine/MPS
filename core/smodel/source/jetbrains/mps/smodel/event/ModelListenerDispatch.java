@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 package jetbrains.mps.smodel.event;
 
-import org.apache.log4j.Logger;
+import jetbrains.mps.logging.Logger;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SModel.Problem;
@@ -137,6 +137,13 @@ public final class ModelListenerDispatch implements org.jetbrains.mps.openapi.mo
         reportListenerError(l, t);
       }
     }
+  }
+
+  /**
+   * To prevent instance retaining, release any reference to user-supplied code when model is discarded.
+   */
+  public void clearListeners() {
+    myListeners.clear();
   }
 
   private void reportListenerError(SModelListener l, Throwable t) {

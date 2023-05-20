@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="mps-testing">
-    <output-path>$PROJECT_DIR$/plugins/mps-testing/lib</output-path>
-    <root id="archive" name="mps-testing.jar">
-      <element id="module-output" name="mps-testing" />
-    </root>
-  </artifact>
-</component>

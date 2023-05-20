@@ -23,5 +23,5 @@ import org.jetbrains.mps.openapi.model.SNode;
  * Date: 29/01/15
  */
 public interface NodeFactory {
-  void setup(SNode newNode, SNode sampleNode, SNode enclosingNode, SModel model);
+  void setup(SNode newNode, SNode sampleNode, SNode enclosingNode, int index, SModel model);
 }

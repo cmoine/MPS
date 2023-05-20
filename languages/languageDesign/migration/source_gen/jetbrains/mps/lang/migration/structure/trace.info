@@ -1,11 +1,1548 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
   <root>
     <file name="ConceptPresentationAspectImpl.java">
-      <unit at="11,0,133,0" name="jetbrains.mps.lang.migration.structure.ConceptPresentationAspectImpl" />
+      <unit at="12,0,358,0" name="jetbrains.mps.lang.migration.structure.ConceptPresentationAspectImpl" />
+    </file>
+    <file name="IconContainer.java">
+      <unit at="7,0,10,0" name="jetbrains.mps.lang.migration.structure.IconContainer" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <unit at="10,0,110,0" name="jetbrains.mps.lang.migration.structure.LanguageConceptSwitch" />
     </file>
     <file name="StructureAspectDescriptor.java">
-      <unit at="20,0,314,0" name="jetbrains.mps.lang.migration.structure.StructureAspectDescriptor" />
+      <unit at="17,0,616,0" name="jetbrains.mps.lang.migration.structure.StructureAspectDescriptor" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/2015900981881695631">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="2015900981881695631" at="45,0,46,0" concept="1" trace="props_RefactoringLog" />
+      <node id="2015900981881695631" at="284,43,285,76" concept="3" />
+      <node id="2015900981881695631" at="285,76,286,35" concept="0" />
+      <node id="2015900981881695631" at="286,35,287,46" concept="0" />
+      <node id="2015900981881695631" at="288,9,289,36" concept="4" />
+      <node id="2015900981881695631" at="283,48,288,9" concept="2" />
+      <scope id="2015900981881695631" at="284,43,287,46">
+        <var name="cpb" id="2015900981881695631" />
+      </scope>
+      <scope id="2015900981881695631" at="283,48,289,36" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="2015900981881695631" at="44,0,45,0" concept="6" trace="RefactoringLog" />
+      <node id="2015900981881695631" at="88,59,89,53" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="2015900981881695631" at="50,0,51,0" concept="1" trace="myConceptRefactoringLog" />
+      <node id="2015900981881695631" at="153,48,154,39" concept="4" />
+      <node id="2015900981881695631" at="512,72,513,177" concept="3" />
+      <node id="2015900981881695631" at="513,177,514,33" concept="0" />
+      <node id="2015900981881695631" at="514,33,515,71" concept="0" />
+      <node id="2015900981881695631" at="515,71,516,115" concept="0" />
+      <node id="2015900981881695631" at="516,115,517,17" concept="0" />
+      <node id="2015900981881695633" at="517,17,518,118" concept="0" />
+      <node id="3597905718825595708" at="518,118,519,200" concept="0" />
+      <node id="2015900981881695632" at="519,200,520,204" concept="0" />
+      <node id="2015900981881695634" at="520,204,521,196" concept="0" />
+      <node id="2015900981881695631" at="521,196,522,22" concept="4" />
+      <node id="2015900981881695631" at="512,0,524,0" concept="7" trace="createDescriptorForRefactoringLog#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="2015900981881695631" at="153,48,154,39" />
+      <scope id="2015900981881695631" at="512,72,522,22">
+        <var name="b" id="2015900981881695631" />
+      </scope>
+      <scope id="2015900981881695631" at="512,0,524,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/2015900981881695645">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="2015900981881695645" at="48,0,49,0" concept="1" trace="props_RefactoringOrderDependency" />
+      <node id="2015900981881695645" at="305,55,306,76" concept="3" />
+      <node id="2015900981881695645" at="306,76,307,145" concept="0" />
+      <node id="2015900981881695645" at="307,145,308,58" concept="0" />
+      <node id="2015900981881695645" at="309,9,310,48" concept="4" />
+      <node id="2015900981881695645" at="304,60,309,9" concept="2" />
+      <scope id="2015900981881695645" at="305,55,308,58">
+        <var name="cpb" id="2015900981881695645" />
+      </scope>
+      <scope id="2015900981881695645" at="304,60,310,48" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="2015900981881695645" at="47,0,48,0" concept="6" trace="RefactoringOrderDependency" />
+      <node id="2015900981881695645" at="91,57,92,65" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="2015900981881695645" at="53,0,54,0" concept="1" trace="myConceptRefactoringOrderDependency" />
+      <node id="2015900981881695645" at="159,60,160,51" concept="4" />
+      <node id="2015900981881695645" at="541,84,542,189" concept="3" />
+      <node id="2015900981881695645" at="542,189,543,34" concept="0" />
+      <node id="2015900981881695645" at="543,34,544,115" concept="0" />
+      <node id="2015900981881695645" at="544,115,545,17" concept="0" />
+      <node id="2015900981881695646" at="545,17,546,175" concept="0" />
+      <node id="2015900981881695645" at="546,175,547,22" concept="4" />
+      <node id="2015900981881695645" at="541,0,549,0" concept="7" trace="createDescriptorForRefactoringOrderDependency#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="2015900981881695645" at="159,60,160,51" />
+      <scope id="2015900981881695645" at="541,84,547,22">
+        <var name="b" id="2015900981881695645" />
+      </scope>
+      <scope id="2015900981881695645" at="541,0,549,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/2770867049910679810">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="2770867049910679810" at="41,0,42,0" concept="1" trace="props_PureMigrationPart" />
+      <node id="2770867049910679810" at="256,46,257,76" concept="3" />
+      <node id="2770867049910679810" at="257,76,258,49" concept="0" />
+      <node id="2770867049910679810" at="259,9,260,39" concept="4" />
+      <node id="2770867049910679810" at="255,51,259,9" concept="2" />
+      <scope id="2770867049910679810" at="256,46,258,49">
+        <var name="cpb" id="2770867049910679810" />
+      </scope>
+      <scope id="2770867049910679810" at="255,51,260,39" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="2770867049910679810" at="40,0,41,0" concept="6" trace="PureMigrationPart" />
+      <node id="2770867049910679810" at="84,71,85,56" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="2770867049910679810" at="46,0,47,0" concept="1" trace="myConceptPureMigrationPart" />
+      <node id="2770867049910679810" at="145,51,146,42" concept="4" />
+      <node id="2770867049910679810" at="470,75,471,180" concept="3" />
+      <node id="2770867049910679810" at="471,180,472,33" concept="0" />
+      <node id="2770867049910679810" at="472,33,473,115" concept="0" />
+      <node id="2770867049910679810" at="473,115,474,17" concept="0" />
+      <node id="2770867049910679810" at="474,17,475,22" concept="4" />
+      <node id="2770867049910679810" at="470,0,477,0" concept="7" trace="createDescriptorForPureMigrationPart#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="2770867049910679810" at="145,51,146,42" />
+      <scope id="2770867049910679810" at="470,75,475,22">
+        <var name="b" id="2770867049910679810" />
+      </scope>
+      <scope id="2770867049910679810" at="470,0,477,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/2770867049910679811">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="2770867049910679811" at="24,0,25,0" concept="1" trace="props_IncludeMigrationPart" />
+      <node id="2770867049910679811" at="137,49,138,76" concept="3" />
+      <node id="2770867049910679811" at="138,76,139,41" concept="0" />
+      <node id="2770867049910679811" at="139,41,140,52" concept="0" />
+      <node id="2770867049910679811" at="141,9,142,42" concept="4" />
+      <node id="2770867049910679811" at="136,54,141,9" concept="2" />
+      <scope id="2770867049910679811" at="137,49,140,52">
+        <var name="cpb" id="2770867049910679811" />
+      </scope>
+      <scope id="2770867049910679811" at="136,54,142,42" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="2770867049910679811" at="23,0,24,0" concept="6" trace="IncludeMigrationPart" />
+      <node id="2770867049910679811" at="67,53,68,59" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="2770867049910679811" at="29,0,30,0" concept="1" trace="myConceptIncludeMigrationPart" />
+      <node id="2770867049910679811" at="111,54,112,45" concept="4" />
+      <node id="2770867049910679811" at="294,78,295,183" concept="3" />
+      <node id="2770867049910679811" at="295,183,296,34" concept="0" />
+      <node id="2770867049910679811" at="296,34,297,72" concept="5" />
+      <node id="2770867049910679811" at="297,72,298,76" concept="0" />
+      <node id="2770867049910679811" at="298,76,299,115" concept="0" />
+      <node id="2770867049910679811" at="299,115,300,17" concept="0" />
+      <node id="2770867049910679904" at="300,17,301,170" concept="0" />
+      <node id="2770867049910679811" at="301,170,302,23" concept="0" />
+      <node id="2770867049910679811" at="302,23,303,22" concept="4" />
+      <node id="2770867049910679811" at="294,0,305,0" concept="7" trace="createDescriptorForIncludeMigrationPart#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="2770867049910679811" at="111,54,112,45" />
+      <scope id="2770867049910679811" at="294,78,303,22">
+        <var name="b" id="2770867049910679811" />
+      </scope>
+      <scope id="2770867049910679811" at="294,0,305,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/2864063292004102367">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="2864063292004102367" at="50,0,51,0" concept="1" trace="props_ReflectionNodeReference" />
+      <node id="2864063292004102367" at="319,52,320,76" concept="3" />
+      <node id="2864063292004102367" at="320,76,321,57" concept="0" />
+      <node id="2864063292004102367" at="321,57,322,55" concept="0" />
+      <node id="2864063292004102367" at="323,9,324,45" concept="4" />
+      <node id="2864063292004102367" at="318,57,323,9" concept="2" />
+      <scope id="2864063292004102367" at="319,52,322,55">
+        <var name="cpb" id="2864063292004102367" />
+      </scope>
+      <scope id="2864063292004102367" at="318,57,324,45" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="2864063292004102367" at="49,0,50,0" concept="6" trace="ReflectionNodeReference" />
+      <node id="2864063292004102367" at="93,54,94,62" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="2864063292004102367" at="55,0,56,0" concept="1" trace="myConceptReflectionNodeReference" />
+      <node id="2864063292004102367" at="163,57,164,48" concept="4" />
+      <node id="2864063292004102367" at="559,81,560,186" concept="3" />
+      <node id="2864063292004102367" at="560,186,561,34" concept="0" />
+      <node id="2864063292004102367" at="561,34,562,76" concept="5" />
+      <node id="2864063292004102367" at="562,76,563,76" concept="0" />
+      <node id="2864063292004102367" at="563,76,564,115" concept="0" />
+      <node id="2864063292004102367" at="564,115,565,17" concept="0" />
+      <node id="2864063292004103247" at="565,17,566,112" concept="0" />
+      <node id="2864063292004102809" at="566,112,567,114" concept="0" />
+      <node id="2864063292004103235" at="567,114,568,114" concept="0" />
+      <node id="2864063292004102367" at="568,114,569,22" concept="4" />
+      <node id="2864063292004102367" at="559,0,571,0" concept="7" trace="createDescriptorForReflectionNodeReference#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="2864063292004102367" at="163,57,164,48" />
+      <scope id="2864063292004102367" at="559,81,569,22">
+        <var name="b" id="2864063292004102367" />
+      </scope>
+      <scope id="2864063292004102367" at="559,0,571,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/3116305438947553624">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3116305438947553624" at="49,0,50,0" concept="1" trace="props_RefactoringPart" />
+      <node id="3116305438947553624" at="312,44,313,76" concept="3" />
+      <node id="3116305438947553624" at="313,76,314,49" concept="0" />
+      <node id="3116305438947553624" at="314,49,315,47" concept="0" />
+      <node id="3116305438947553624" at="316,9,317,37" concept="4" />
+      <node id="3116305438947553624" at="311,49,316,9" concept="2" />
+      <scope id="3116305438947553624" at="312,44,315,47">
+        <var name="cpb" id="3116305438947553624" />
+      </scope>
+      <scope id="3116305438947553624" at="311,49,317,37" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3116305438947553624" at="48,0,49,0" concept="6" trace="RefactoringPart" />
+      <node id="3116305438947553624" at="92,65,93,54" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3116305438947553624" at="54,0,55,0" concept="1" trace="myConceptRefactoringPart" />
+      <node id="3116305438947553624" at="161,49,162,40" concept="4" />
+      <node id="3116305438947553624" at="549,73,550,178" concept="3" />
+      <node id="3116305438947553624" at="550,178,551,34" concept="0" />
+      <node id="3116305438947553624" at="551,34,552,115" concept="0" />
+      <node id="3116305438947553624" at="552,115,553,17" concept="0" />
+      <node id="3628660716136424362" at="553,17,554,117" concept="0" />
+      <node id="3628660716136424364" at="554,117,555,201" concept="0" />
+      <node id="3628660716136424366" at="555,201,556,198" concept="0" />
+      <node id="3116305438947553624" at="556,198,557,22" concept="4" />
+      <node id="3116305438947553624" at="549,0,559,0" concept="7" trace="createDescriptorForRefactoringPart#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3116305438947553624" at="161,49,162,40" />
+      <scope id="3116305438947553624" at="549,73,557,22">
+        <var name="b" id="3116305438947553624" />
+      </scope>
+      <scope id="3116305438947553624" at="549,0,559,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/3116305438947559628">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3116305438947559628" at="13,0,14,0" concept="1" trace="props_AbstractNodeReference" />
+      <node id="3116305438947559628" at="62,50,63,76" concept="3" />
+      <node id="3116305438947559628" at="63,76,64,53" concept="0" />
+      <node id="3116305438947559628" at="65,9,66,43" concept="4" />
+      <node id="3116305438947559628" at="61,55,65,9" concept="2" />
+      <scope id="3116305438947559628" at="62,50,64,53">
+        <var name="cpb" id="3116305438947559628" />
+      </scope>
+      <scope id="3116305438947559628" at="61,55,66,43" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3116305438947559628" at="12,0,13,0" concept="6" trace="AbstractNodeReference" />
+      <node id="3116305438947559628" at="56,116,57,60" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3116305438947559628" at="18,0,19,0" concept="1" trace="myConceptAbstractNodeReference" />
+      <node id="3116305438947559628" at="89,55,90,46" concept="4" />
+      <node id="3116305438947559628" at="183,79,184,184" concept="3" />
+      <node id="3116305438947559628" at="184,184,185,33" concept="0" />
+      <node id="3116305438947559628" at="185,33,186,115" concept="0" />
+      <node id="3116305438947559628" at="186,115,187,17" concept="0" />
+      <node id="3116305438947559628" at="187,17,188,22" concept="4" />
+      <node id="3116305438947559628" at="183,0,190,0" concept="7" trace="createDescriptorForAbstractNodeReference#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3116305438947559628" at="89,55,90,46" />
+      <scope id="3116305438947559628" at="183,79,188,22">
+        <var name="b" id="3116305438947559628" />
+      </scope>
+      <scope id="3116305438947559628" at="183,0,190,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/3116305438947564637">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3116305438947564637" at="33,0,34,0" concept="1" trace="props_MoveNodeSpecialization" />
+      <node id="3116305438947564637" at="201,51,202,76" concept="3" />
+      <node id="3116305438947564637" at="202,76,203,54" concept="0" />
+      <node id="3116305438947564637" at="204,9,205,44" concept="4" />
+      <node id="3116305438947564637" at="200,56,204,9" concept="2" />
+      <scope id="3116305438947564637" at="201,51,203,54">
+        <var name="cpb" id="3116305438947564637" />
+      </scope>
+      <scope id="3116305438947564637" at="200,56,205,44" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3116305438947564637" at="32,0,33,0" concept="6" trace="MoveNodeSpecialization" />
+      <node id="3116305438947564637" at="76,60,77,61" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3116305438947564637" at="38,0,39,0" concept="1" trace="myConceptMoveNodeSpecialization" />
+      <node id="3116305438947564637" at="129,56,130,47" concept="4" />
+      <node id="3116305438947564637" at="391,80,392,185" concept="3" />
+      <node id="3116305438947564637" at="392,185,393,33" concept="0" />
+      <node id="3116305438947564637" at="393,33,394,115" concept="0" />
+      <node id="3116305438947564637" at="394,115,395,17" concept="0" />
+      <node id="3116305438947564637" at="395,17,396,22" concept="4" />
+      <node id="3116305438947564637" at="391,0,398,0" concept="7" trace="createDescriptorForMoveNodeSpecialization#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3116305438947564637" at="129,56,130,47" />
+      <scope id="3116305438947564637" at="391,80,396,22">
+        <var name="b" id="3116305438947564637" />
+      </scope>
+      <scope id="3116305438947564637" at="391,0,398,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/3116305438947623350">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3116305438947623350" at="29,0,30,0" concept="1" trace="props_MoveConcept" />
+      <node id="3116305438947623350" at="174,40,175,76" concept="3" />
+      <node id="3116305438947623350" at="175,76,176,45" concept="0" />
+      <node id="3116305438947623350" at="176,45,177,43" concept="0" />
+      <node id="3116305438947623350" at="178,9,179,33" concept="4" />
+      <node id="3116305438947623350" at="173,45,178,9" concept="2" />
+      <scope id="3116305438947623350" at="174,40,177,43">
+        <var name="cpb" id="3116305438947623350" />
+      </scope>
+      <scope id="3116305438947623350" at="173,45,179,33" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3116305438947623350" at="28,0,29,0" concept="6" trace="MoveConcept" />
+      <node id="3116305438947623350" at="72,63,73,50" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3116305438947623350" at="34,0,35,0" concept="1" trace="myConceptMoveConcept" />
+      <node id="3116305438947623350" at="121,45,122,36" concept="4" />
+      <node id="3116305438947623350" at="347,69,348,174" concept="3" />
+      <node id="3116305438947623350" at="348,174,349,34" concept="0" />
+      <node id="3116305438947623350" at="349,34,350,77" concept="5" />
+      <node id="3116305438947623350" at="350,77,351,76" concept="0" />
+      <node id="3116305438947623350" at="351,76,352,115" concept="0" />
+      <node id="3116305438947623350" at="352,115,353,17" concept="0" />
+      <node id="8415841354030700266" at="353,17,354,201" concept="0" />
+      <node id="8415841354030700269" at="354,201,355,201" concept="0" />
+      <node id="3116305438947623350" at="355,201,356,22" concept="4" />
+      <node id="3116305438947623350" at="347,0,358,0" concept="7" trace="createDescriptorForMoveConcept#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3116305438947623350" at="121,45,122,36" />
+      <scope id="3116305438947623350" at="347,69,356,22">
+        <var name="b" id="3116305438947623350" />
+      </scope>
+      <scope id="3116305438947623350" at="347,0,358,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/3116305438947623351">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3116305438947623351" at="35,0,36,0" concept="1" trace="props_MoveReferenceLink" />
+      <node id="3116305438947623351" at="214,46,215,76" concept="3" />
+      <node id="3116305438947623351" at="215,76,216,51" concept="0" />
+      <node id="3116305438947623351" at="216,51,217,49" concept="0" />
+      <node id="3116305438947623351" at="218,9,219,39" concept="4" />
+      <node id="3116305438947623351" at="213,51,218,9" concept="2" />
+      <scope id="3116305438947623351" at="214,46,217,49">
+        <var name="cpb" id="3116305438947623351" />
+      </scope>
+      <scope id="3116305438947623351" at="213,51,219,39" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3116305438947623351" at="34,0,35,0" concept="6" trace="MoveReferenceLink" />
+      <node id="3116305438947623351" at="78,51,79,56" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3116305438947623351" at="40,0,41,0" concept="1" trace="myConceptMoveReferenceLink" />
+      <node id="3116305438947623351" at="133,51,134,42" concept="4" />
+      <node id="3116305438947623351" at="409,75,410,180" concept="3" />
+      <node id="3116305438947623351" at="410,180,411,34" concept="0" />
+      <node id="3116305438947623351" at="411,34,412,72" concept="5" />
+      <node id="3116305438947623351" at="412,72,413,76" concept="0" />
+      <node id="3116305438947623351" at="413,76,414,115" concept="0" />
+      <node id="3116305438947623351" at="414,115,415,17" concept="0" />
+      <node id="8415841354033040061" at="415,17,416,201" concept="0" />
+      <node id="8415841354033040062" at="416,201,417,201" concept="0" />
+      <node id="3116305438947623351" at="417,201,418,22" concept="4" />
+      <node id="3116305438947623351" at="409,0,420,0" concept="7" trace="createDescriptorForMoveReferenceLink#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3116305438947623351" at="133,51,134,42" />
+      <scope id="3116305438947623351" at="409,75,418,22">
+        <var name="b" id="3116305438947623351" />
+      </scope>
+      <scope id="3116305438947623351" at="409,0,420,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/3116305438947623352">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3116305438947623352" at="30,0,31,0" concept="1" trace="props_MoveConceptMember" />
+      <node id="3116305438947623352" at="181,46,182,76" concept="3" />
+      <node id="3116305438947623352" at="182,76,183,49" concept="0" />
+      <node id="3116305438947623352" at="184,9,185,39" concept="4" />
+      <node id="3116305438947623352" at="180,51,184,9" concept="2" />
+      <scope id="3116305438947623352" at="181,46,183,49">
+        <var name="cpb" id="3116305438947623352" />
+      </scope>
+      <scope id="3116305438947623352" at="180,51,185,39" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3116305438947623352" at="29,0,30,0" concept="6" trace="MoveConceptMember" />
+      <node id="3116305438947623352" at="73,50,74,56" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3116305438947623352" at="35,0,36,0" concept="1" trace="myConceptMoveConceptMember" />
+      <node id="3116305438947623352" at="123,51,124,42" concept="4" />
+      <node id="3116305438947623352" at="358,75,359,180" concept="3" />
+      <node id="3116305438947623352" at="359,180,360,33" concept="0" />
+      <node id="3116305438947623352" at="360,33,361,77" concept="5" />
+      <node id="3116305438947623352" at="361,77,362,76" concept="0" />
+      <node id="3116305438947623352" at="362,76,363,115" concept="0" />
+      <node id="3116305438947623352" at="363,115,364,17" concept="0" />
+      <node id="3116305438947623352" at="364,17,365,22" concept="4" />
+      <node id="3116305438947623352" at="358,0,367,0" concept="7" trace="createDescriptorForMoveConceptMember#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3116305438947623352" at="123,51,124,42" />
+      <scope id="3116305438947623352" at="358,75,365,22">
+        <var name="b" id="3116305438947623352" />
+      </scope>
+      <scope id="3116305438947623352" at="358,0,367,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/3116305438947623353">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3116305438947623353" at="34,0,35,0" concept="1" trace="props_MoveProperty" />
+      <node id="3116305438947623353" at="207,41,208,76" concept="3" />
+      <node id="3116305438947623353" at="208,76,209,46" concept="0" />
+      <node id="3116305438947623353" at="209,46,210,44" concept="0" />
+      <node id="3116305438947623353" at="211,9,212,34" concept="4" />
+      <node id="3116305438947623353" at="206,46,211,9" concept="2" />
+      <scope id="3116305438947623353" at="207,41,210,44">
+        <var name="cpb" id="3116305438947623353" />
+      </scope>
+      <scope id="3116305438947623353" at="206,46,212,34" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3116305438947623353" at="33,0,34,0" concept="6" trace="MoveProperty" />
+      <node id="3116305438947623353" at="77,61,78,51" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3116305438947623353" at="39,0,40,0" concept="1" trace="myConceptMoveProperty" />
+      <node id="3116305438947623353" at="131,46,132,37" concept="4" />
+      <node id="3116305438947623353" at="398,70,399,175" concept="3" />
+      <node id="3116305438947623353" at="399,175,400,34" concept="0" />
+      <node id="3116305438947623353" at="400,34,401,72" concept="5" />
+      <node id="3116305438947623353" at="401,72,402,76" concept="0" />
+      <node id="3116305438947623353" at="402,76,403,115" concept="0" />
+      <node id="3116305438947623353" at="403,115,404,17" concept="0" />
+      <node id="8415841354033040057" at="404,17,405,201" concept="0" />
+      <node id="8415841354033040058" at="405,201,406,201" concept="0" />
+      <node id="3116305438947623353" at="406,201,407,22" concept="4" />
+      <node id="3116305438947623353" at="398,0,409,0" concept="7" trace="createDescriptorForMoveProperty#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3116305438947623353" at="131,46,132,37" />
+      <scope id="3116305438947623353" at="398,70,407,22">
+        <var name="b" id="3116305438947623353" />
+      </scope>
+      <scope id="3116305438947623353" at="398,0,409,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/3116305438947623354">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3116305438947623354" at="31,0,32,0" concept="1" trace="props_MoveContainmentLink" />
+      <node id="3116305438947623354" at="187,48,188,76" concept="3" />
+      <node id="3116305438947623354" at="188,76,189,53" concept="0" />
+      <node id="3116305438947623354" at="189,53,190,51" concept="0" />
+      <node id="3116305438947623354" at="191,9,192,41" concept="4" />
+      <node id="3116305438947623354" at="186,53,191,9" concept="2" />
+      <scope id="3116305438947623354" at="187,48,190,51">
+        <var name="cpb" id="3116305438947623354" />
+      </scope>
+      <scope id="3116305438947623354" at="186,53,192,41" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3116305438947623354" at="30,0,31,0" concept="6" trace="MoveContainmentLink" />
+      <node id="3116305438947623354" at="74,56,75,58" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3116305438947623354" at="36,0,37,0" concept="1" trace="myConceptMoveContainmentLink" />
+      <node id="3116305438947623354" at="125,53,126,44" concept="4" />
+      <node id="3116305438947623354" at="367,77,368,182" concept="3" />
+      <node id="3116305438947623354" at="368,182,369,34" concept="0" />
+      <node id="3116305438947623354" at="369,34,370,72" concept="5" />
+      <node id="3116305438947623354" at="370,72,371,76" concept="0" />
+      <node id="3116305438947623354" at="371,76,372,115" concept="0" />
+      <node id="3116305438947623354" at="372,115,373,17" concept="0" />
+      <node id="8415841354033040053" at="373,17,374,201" concept="0" />
+      <node id="8415841354033040054" at="374,201,375,201" concept="0" />
+      <node id="3116305438947623354" at="375,201,376,22" concept="4" />
+      <node id="3116305438947623354" at="367,0,378,0" concept="7" trace="createDescriptorForMoveContainmentLink#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3116305438947623354" at="125,53,126,44" />
+      <scope id="3116305438947623354" at="367,77,376,22">
+        <var name="b" id="3116305438947623354" />
+      </scope>
+      <scope id="3116305438947623354" at="367,0,378,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/3220955710218030028">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3220955710218030028" at="40,0,41,0" concept="1" trace="props_PropertyPatternVariableReference" />
+      <node id="3220955710218030028" at="249,61,250,76" concept="3" />
+      <node id="3220955710218030028" at="250,76,251,145" concept="0" />
+      <node id="3220955710218030028" at="251,145,252,64" concept="0" />
+      <node id="3220955710218030028" at="253,9,254,54" concept="4" />
+      <node id="3220955710218030028" at="248,66,253,9" concept="2" />
+      <scope id="3220955710218030028" at="249,61,252,64">
+        <var name="cpb" id="3220955710218030028" />
+      </scope>
+      <scope id="3220955710218030028" at="248,66,254,54" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3220955710218030028" at="39,0,40,0" concept="6" trace="PropertyPatternVariableReference" />
+      <node id="3220955710218030028" at="83,62,84,71" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3220955710218030028" at="45,0,46,0" concept="1" trace="myConceptPropertyPatternVariableReference" />
+      <node id="3220955710218030028" at="143,66,144,57" concept="4" />
+      <node id="3220955710218030028" at="460,90,461,195" concept="3" />
+      <node id="3220955710218030028" at="461,195,462,34" concept="0" />
+      <node id="3220955710218030028" at="462,34,463,63" concept="5" />
+      <node id="3220955710218030028" at="463,63,464,70" concept="0" />
+      <node id="3220955710218030028" at="464,70,465,115" concept="0" />
+      <node id="3220955710218030028" at="465,115,466,17" concept="0" />
+      <node id="3220955710218036329" at="466,17,467,170" concept="0" />
+      <node id="3220955710218030028" at="467,170,468,22" concept="4" />
+      <node id="3220955710218030028" at="460,0,470,0" concept="7" trace="createDescriptorForPropertyPatternVariableReference#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3220955710218030028" at="143,66,144,57" />
+      <scope id="3220955710218030028" at="460,90,468,22">
+        <var name="b" id="3220955710218030028" />
+      </scope>
+      <scope id="3220955710218030028" at="460,0,470,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/3220955710218421371">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3220955710218421371" at="25,0,26,0" concept="1" trace="props_LinkPatternVariableReference" />
+      <node id="3220955710218421371" at="144,57,145,76" concept="3" />
+      <node id="3220955710218421371" at="145,76,146,145" concept="0" />
+      <node id="3220955710218421371" at="146,145,147,60" concept="0" />
+      <node id="3220955710218421371" at="148,9,149,50" concept="4" />
+      <node id="3220955710218421371" at="143,62,148,9" concept="2" />
+      <scope id="3220955710218421371" at="144,57,147,60">
+        <var name="cpb" id="3220955710218421371" />
+      </scope>
+      <scope id="3220955710218421371" at="143,62,149,50" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3220955710218421371" at="24,0,25,0" concept="6" trace="LinkPatternVariableReference" />
+      <node id="3220955710218421371" at="68,59,69,67" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3220955710218421371" at="30,0,31,0" concept="1" trace="myConceptLinkPatternVariableReference" />
+      <node id="3220955710218421371" at="113,62,114,53" concept="4" />
+      <node id="3220955710218421371" at="305,86,306,191" concept="3" />
+      <node id="3220955710218421371" at="306,191,307,34" concept="0" />
+      <node id="3220955710218421371" at="307,34,308,63" concept="5" />
+      <node id="3220955710218421371" at="308,63,309,70" concept="0" />
+      <node id="3220955710218421371" at="309,70,310,115" concept="0" />
+      <node id="3220955710218421371" at="310,115,311,17" concept="0" />
+      <node id="3220955710218421372" at="311,17,312,170" concept="0" />
+      <node id="3220955710218421371" at="312,170,313,22" concept="4" />
+      <node id="3220955710218421371" at="305,0,315,0" concept="7" trace="createDescriptorForLinkPatternVariableReference#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3220955710218421371" at="113,62,114,53" />
+      <scope id="3220955710218421371" at="305,86,313,22">
+        <var name="b" id="3220955710218421371" />
+      </scope>
+      <scope id="3220955710218421371" at="305,0,315,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/3597905718825595712">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3597905718825595712" at="47,0,48,0" concept="1" trace="props_RefactoringOptions" />
+      <node id="3597905718825595712" at="298,47,299,76" concept="3" />
+      <node id="3597905718825595712" at="299,76,300,52" concept="0" />
+      <node id="3597905718825595712" at="300,52,301,50" concept="0" />
+      <node id="3597905718825595712" at="302,9,303,40" concept="4" />
+      <node id="3597905718825595712" at="297,52,302,9" concept="2" />
+      <scope id="3597905718825595712" at="298,47,301,50">
+        <var name="cpb" id="3597905718825595712" />
+      </scope>
+      <scope id="3597905718825595712" at="297,52,303,40" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3597905718825595712" at="46,0,47,0" concept="6" trace="RefactoringOptions" />
+      <node id="3597905718825595712" at="90,56,91,57" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3597905718825595712" at="52,0,53,0" concept="1" trace="myConceptRefactoringOptions" />
+      <node id="3597905718825595712" at="157,52,158,43" concept="4" />
+      <node id="3597905718825595712" at="533,76,534,181" concept="3" />
+      <node id="3597905718825595712" at="534,181,535,34" concept="0" />
+      <node id="3597905718825595712" at="535,34,536,115" concept="0" />
+      <node id="3597905718825595712" at="536,115,537,17" concept="0" />
+      <node id="3597905718825595718" at="537,17,538,199" concept="0" />
+      <node id="3597905718825595712" at="538,199,539,22" concept="4" />
+      <node id="3597905718825595712" at="533,0,541,0" concept="7" trace="createDescriptorForRefactoringOptions#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3597905718825595712" at="157,52,158,43" />
+      <scope id="3597905718825595712" at="533,76,539,22">
+        <var name="b" id="3597905718825595712" />
+      </scope>
+      <scope id="3597905718825595712" at="533,0,541,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/3597905718825595715">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3597905718825595715" at="46,0,47,0" concept="1" trace="props_RefactoringOption" />
+      <node id="3597905718825595715" at="291,46,292,76" concept="3" />
+      <node id="3597905718825595715" at="292,76,293,51" concept="0" />
+      <node id="3597905718825595715" at="293,51,294,49" concept="0" />
+      <node id="3597905718825595715" at="295,9,296,39" concept="4" />
+      <node id="3597905718825595715" at="290,51,295,9" concept="2" />
+      <scope id="3597905718825595715" at="291,46,294,49">
+        <var name="cpb" id="3597905718825595715" />
+      </scope>
+      <scope id="3597905718825595715" at="290,51,296,39" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3597905718825595715" at="45,0,46,0" concept="6" trace="RefactoringOption" />
+      <node id="3597905718825595715" at="89,53,90,56" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3597905718825595715" at="51,0,52,0" concept="1" trace="myConceptRefactoringOption" />
+      <node id="3597905718825595715" at="155,51,156,42" concept="4" />
+      <node id="3597905718825595715" at="524,75,525,180" concept="3" />
+      <node id="3597905718825595715" at="525,180,526,34" concept="0" />
+      <node id="3597905718825595715" at="526,34,527,115" concept="0" />
+      <node id="3597905718825595715" at="527,115,528,17" concept="0" />
+      <node id="3597905718825595716" at="528,17,529,114" concept="0" />
+      <node id="3597905718825650036" at="529,114,530,117" concept="0" />
+      <node id="3597905718825595715" at="530,117,531,22" concept="4" />
+      <node id="3597905718825595715" at="524,0,533,0" concept="7" trace="createDescriptorForRefactoringOption#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3597905718825595715" at="155,51,156,42" />
+      <scope id="3597905718825595715" at="524,75,531,22">
+        <var name="b" id="3597905718825595715" />
+      </scope>
+      <scope id="3597905718825595715" at="524,0,533,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/3897914186547825813">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3897914186547825813" at="16,0,17,0" concept="1" trace="props_ConceptMigrationReference" />
+      <node id="3897914186547825813" at="82,54,83,76" concept="3" />
+      <node id="3897914186547825813" at="83,76,84,59" concept="0" />
+      <node id="3897914186547825813" at="84,59,85,57" concept="0" />
+      <node id="3897914186547825813" at="86,9,87,47" concept="4" />
+      <node id="3897914186547825813" at="81,59,86,9" concept="2" />
+      <scope id="3897914186547825813" at="82,54,85,57">
+        <var name="cpb" id="3897914186547825813" />
+      </scope>
+      <scope id="3897914186547825813" at="81,59,87,47" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3897914186547825813" at="15,0,16,0" concept="6" trace="ConceptMigrationReference" />
+      <node id="3897914186547825813" at="59,59,60,64" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3897914186547825813" at="21,0,22,0" concept="1" trace="myConceptConceptMigrationReference" />
+      <node id="3897914186547825813" at="95,59,96,50" concept="4" />
+      <node id="3897914186547825813" at="210,83,211,188" concept="3" />
+      <node id="3897914186547825813" at="211,188,212,34" concept="0" />
+      <node id="3897914186547825813" at="212,34,213,115" concept="0" />
+      <node id="3897914186547825813" at="213,115,214,17" concept="0" />
+      <node id="3897914186547825814" at="214,17,215,209" concept="0" />
+      <node id="3897914186547825817" at="215,209,216,204" concept="0" />
+      <node id="3897914186547825813" at="216,204,217,22" concept="4" />
+      <node id="3897914186547825813" at="210,0,219,0" concept="7" trace="createDescriptorForConceptMigrationReference#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3897914186547825813" at="95,59,96,50" />
+      <scope id="3897914186547825813" at="210,83,217,22">
+        <var name="b" id="3897914186547825813" />
+      </scope>
+      <scope id="3897914186547825813" at="210,0,219,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/4144229974054253572">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="4144229974054253572" at="21,0,22,0" concept="1" trace="props_ExecuteAfterDeclaration" />
+      <node id="4144229974054253572" at="117,52,118,76" concept="3" />
+      <node id="4144229974054253572" at="118,76,119,47" concept="0" />
+      <node id="4144229974054253572" at="119,47,120,55" concept="0" />
+      <node id="4144229974054253572" at="121,9,122,45" concept="4" />
+      <node id="4144229974054253572" at="116,57,121,9" concept="2" />
+      <scope id="4144229974054253572" at="117,52,120,55">
+        <var name="cpb" id="4144229974054253572" />
+      </scope>
+      <scope id="4144229974054253572" at="116,57,122,45" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="4144229974054253572" at="20,0,21,0" concept="6" trace="ExecuteAfterDeclaration" />
+      <node id="4144229974054253572" at="64,58,65,62" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="4144229974054253572" at="26,0,27,0" concept="1" trace="myConceptExecuteAfterDeclaration" />
+      <node id="4144229974054253572" at="105,57,106,48" concept="4" />
+      <node id="4144229974054253572" at="263,81,264,186" concept="3" />
+      <node id="4144229974054253572" at="264,186,265,34" concept="0" />
+      <node id="4144229974054253572" at="265,34,266,71" concept="0" />
+      <node id="4144229974054253572" at="266,71,267,76" concept="0" />
+      <node id="4144229974054253572" at="267,76,268,115" concept="0" />
+      <node id="4144229974054253572" at="268,115,269,17" concept="0" />
+      <node id="4144229974054377645" at="269,17,270,204" concept="0" />
+      <node id="4144229974054253572" at="270,204,271,29" concept="0" />
+      <node id="4144229974054253572" at="271,29,272,22" concept="4" />
+      <node id="4144229974054253572" at="263,0,274,0" concept="7" trace="createDescriptorForExecuteAfterDeclaration#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="4144229974054253572" at="105,57,106,48" />
+      <scope id="4144229974054253572" at="263,81,272,22">
+        <var name="b" id="4144229974054253572" />
+      </scope>
+      <scope id="4144229974054253572" at="263,0,274,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/4144229974054378362">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="4144229974054378362" at="37,0,38,0" concept="1" trace="props_OrderDependency" />
+      <node id="4144229974054378362" at="228,44,229,76" concept="3" />
+      <node id="4144229974054378362" at="229,76,230,140" concept="0" />
+      <node id="4144229974054378362" at="230,140,231,47" concept="0" />
+      <node id="4144229974054378362" at="232,9,233,37" concept="4" />
+      <node id="4144229974054378362" at="227,49,232,9" concept="2" />
+      <scope id="4144229974054378362" at="228,44,231,47">
+        <var name="cpb" id="4144229974054378362" />
+      </scope>
+      <scope id="4144229974054378362" at="227,49,233,37" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="4144229974054378362" at="36,0,37,0" concept="6" trace="OrderDependency" />
+      <node id="4144229974054378362" at="80,67,81,54" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="4144229974054378362" at="42,0,43,0" concept="1" trace="myConceptOrderDependency" />
+      <node id="4144229974054378362" at="137,49,138,40" concept="4" />
+      <node id="4144229974054378362" at="430,73,431,178" concept="3" />
+      <node id="4144229974054378362" at="431,178,432,34" concept="0" />
+      <node id="4144229974054378362" at="432,34,433,115" concept="0" />
+      <node id="4144229974054378362" at="433,115,434,17" concept="0" />
+      <node id="4144229974054378363" at="434,17,435,170" concept="0" />
+      <node id="4144229974054378362" at="435,170,436,22" concept="4" />
+      <node id="4144229974054378362" at="430,0,438,0" concept="7" trace="createDescriptorForOrderDependency#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="4144229974054378362" at="137,49,138,40" />
+      <scope id="4144229974054378362" at="430,73,436,22">
+        <var name="b" id="4144229974054378362" />
+      </scope>
+      <scope id="4144229974054378362" at="430,0,438,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/4436301628118948495">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="4436301628118948495" at="52,0,53,0" concept="1" trace="props_RequiredDataDeclaration" />
+      <node id="4436301628118948495" at="333,52,334,76" concept="3" />
+      <node id="4436301628118948495" at="334,76,335,47" concept="0" />
+      <node id="4436301628118948495" at="335,47,336,55" concept="0" />
+      <node id="4436301628118948495" at="337,9,338,45" concept="4" />
+      <node id="4436301628118948495" at="332,57,337,9" concept="2" />
+      <scope id="4436301628118948495" at="333,52,336,55">
+        <var name="cpb" id="4436301628118948495" />
+      </scope>
+      <scope id="4436301628118948495" at="332,57,338,45" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="4436301628118948495" at="51,0,52,0" concept="6" trace="RequiredDataDeclaration" />
+      <node id="4436301628118948495" at="95,72,96,62" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="4436301628118948495" at="57,0,58,0" concept="1" trace="myConceptRequiredDataDeclaration" />
+      <node id="4436301628118948495" at="167,57,168,48" concept="4" />
+      <node id="4436301628118948495" at="582,81,583,186" concept="3" />
+      <node id="4436301628118948495" at="583,186,584,34" concept="0" />
+      <node id="4436301628118948495" at="584,34,585,71" concept="0" />
+      <node id="4436301628118948495" at="585,71,586,76" concept="0" />
+      <node id="4436301628118948495" at="586,76,587,115" concept="0" />
+      <node id="4436301628118948495" at="587,115,588,17" concept="0" />
+      <node id="7907688626602625066" at="588,17,589,204" concept="0" />
+      <node id="4436301628118948495" at="589,204,590,29" concept="0" />
+      <node id="4436301628118948495" at="590,29,591,22" concept="4" />
+      <node id="4436301628118948495" at="582,0,593,0" concept="7" trace="createDescriptorForRequiredDataDeclaration#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="4436301628118948495" at="167,57,168,48" />
+      <scope id="4436301628118948495" at="582,81,591,22">
+        <var name="b" id="4436301628118948495" />
+      </scope>
+      <scope id="4436301628118948495" at="582,0,593,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/4950161090496546961">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="4950161090496546961" at="18,0,19,0" concept="1" trace="props_DataDependency" />
+      <node id="4950161090496546961" at="96,43,97,76" concept="3" />
+      <node id="4950161090496546961" at="97,76,98,35" concept="0" />
+      <node id="4950161090496546961" at="98,35,99,46" concept="0" />
+      <node id="4950161090496546961" at="100,9,101,36" concept="4" />
+      <node id="4950161090496546961" at="95,48,100,9" concept="2" />
+      <scope id="4950161090496546961" at="96,43,99,46">
+        <var name="cpb" id="4950161090496546961" />
+      </scope>
+      <scope id="4950161090496546961" at="95,48,101,36" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="4950161090496546961" at="17,0,18,0" concept="6" trace="DataDependency" />
+      <node id="4950161090496546961" at="61,58,62,53" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="4950161090496546961" at="23,0,24,0" concept="1" trace="myConceptDataDependency" />
+      <node id="4950161090496546961" at="99,48,100,39" concept="4" />
+      <node id="4950161090496546961" at="230,72,231,177" concept="3" />
+      <node id="4950161090496546961" at="231,177,232,34" concept="0" />
+      <node id="4950161090496546961" at="232,34,233,71" concept="0" />
+      <node id="4950161090496546961" at="233,71,234,76" concept="0" />
+      <node id="4950161090496546961" at="234,76,235,71" concept="0" />
+      <node id="4950161090496546961" at="235,71,236,71" concept="0" />
+      <node id="4950161090496546961" at="236,71,237,115" concept="0" />
+      <node id="4950161090496546961" at="237,115,238,17" concept="0" />
+      <node id="5722749943445015285" at="238,17,239,170" concept="0" />
+      <node id="4950161090496546961" at="239,170,240,22" concept="4" />
+      <node id="4950161090496546961" at="230,0,242,0" concept="7" trace="createDescriptorForDataDependency#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="4950161090496546961" at="99,48,100,39" />
+      <scope id="4950161090496546961" at="230,72,240,22">
+        <var name="b" id="4950161090496546961" />
+      </scope>
+      <scope id="4950161090496546961" at="230,0,242,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/5168866961621042390">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="5168866961621042390" at="23,0,24,0" concept="1" trace="props_IMigrationUnit" />
+      <node id="5168866961621042390" at="131,43,132,76" concept="3" />
+      <node id="5168866961621042390" at="132,76,133,46" concept="0" />
+      <node id="5168866961621042390" at="134,9,135,36" concept="4" />
+      <node id="5168866961621042390" at="130,48,134,9" concept="2" />
+      <scope id="5168866961621042390" at="131,43,133,46">
+        <var name="cpb" id="5168866961621042390" />
+      </scope>
+      <scope id="5168866961621042390" at="130,48,135,36" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="5168866961621042390" at="22,0,23,0" concept="6" trace="IMigrationUnit" />
+      <node id="5168866961621042390" at="66,56,67,53" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="5168866961621042390" at="28,0,29,0" concept="1" trace="myConceptIMigrationUnit" />
+      <node id="5168866961621042390" at="109,48,110,39" concept="4" />
+      <node id="5168866961621042390" at="286,72,287,177" concept="3" />
+      <node id="5168866961621042390" at="287,177,288,19" concept="0" />
+      <node id="5168866961621042390" at="288,19,289,71" concept="0" />
+      <node id="5168866961621042390" at="289,71,290,115" concept="0" />
+      <node id="5168866961621042390" at="290,115,291,17" concept="0" />
+      <node id="5168866961621042390" at="291,17,292,22" concept="4" />
+      <node id="5168866961621042390" at="329,70,330,76" concept="0" />
+      <node id="5168866961621042390" at="480,76,481,76" concept="0" />
+      <node id="5168866961621042390" at="286,0,294,0" concept="7" trace="createDescriptorForIMigrationUnit#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="5168866961621042390" at="109,48,110,39" />
+      <scope id="5168866961621042390" at="286,72,292,22">
+        <var name="b" id="5168866961621042390" />
+      </scope>
+      <scope id="5168866961621042390" at="286,0,294,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/5636302460526173897">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="5636302460526173897" at="54,0,55,0" concept="1" trace="props_TransformStatement" />
+      <node id="5636302460526173897" at="346,47,347,76" concept="3" />
+      <node id="5636302460526173897" at="347,76,348,31" concept="0" />
+      <node id="5636302460526173897" at="348,31,349,43" concept="0" />
+      <node id="5636302460526173897" at="349,43,350,50" concept="0" />
+      <node id="5636302460526173897" at="351,9,352,40" concept="4" />
+      <node id="5636302460526173897" at="345,52,351,9" concept="2" />
+      <scope id="5636302460526173897" at="346,47,350,50">
+        <var name="cpb" id="5636302460526173897" />
+      </scope>
+      <scope id="5636302460526173897" at="345,52,352,40" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="5636302460526173897" at="53,0,54,0" concept="6" trace="TransformStatement" />
+      <node id="5636302460526173897" at="97,59,98,57" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="5636302460526173897" at="59,0,60,0" concept="1" trace="myConceptTransformStatement" />
+      <node id="5636302460526173897" at="171,52,172,43" concept="4" />
+      <node id="5636302460526173897" at="600,76,601,181" concept="3" />
+      <node id="5636302460526173897" at="601,181,602,34" concept="0" />
+      <node id="5636302460526173897" at="602,34,603,62" concept="5" />
+      <node id="5636302460526173897" at="603,62,604,70" concept="0" />
+      <node id="5636302460526173897" at="604,70,605,76" concept="0" />
+      <node id="5636302460526173897" at="605,76,606,115" concept="0" />
+      <node id="5636302460526173897" at="606,115,607,17" concept="0" />
+      <node id="5636302460526173934" at="607,17,608,196" concept="0" />
+      <node id="5636302460526173936" at="608,196,609,205" concept="0" />
+      <node id="5636302460526173940" at="609,205,610,200" concept="0" />
+      <node id="5636302460526173944" at="610,200,611,199" concept="0" />
+      <node id="5636302460526173897" at="611,199,612,25" concept="0" />
+      <node id="5636302460526173897" at="612,25,613,22" concept="4" />
+      <node id="5636302460526173897" at="600,0,615,0" concept="7" trace="createDescriptorForTransformStatement#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="5636302460526173897" at="171,52,172,43" />
+      <scope id="5636302460526173897" at="600,76,613,22">
+        <var name="b" id="5636302460526173897" />
+      </scope>
+      <scope id="5636302460526173897" at="600,0,615,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/5636302460526173939">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="5636302460526173939" at="53,0,54,0" concept="1" trace="props_TransformConsequence" />
+      <node id="5636302460526173939" at="340,49,341,76" concept="3" />
+      <node id="5636302460526173939" at="341,76,342,52" concept="0" />
+      <node id="5636302460526173939" at="343,9,344,42" concept="4" />
+      <node id="5636302460526173939" at="339,54,343,9" concept="2" />
+      <scope id="5636302460526173939" at="340,49,342,52">
+        <var name="cpb" id="5636302460526173939" />
+      </scope>
+      <scope id="5636302460526173939" at="339,54,344,42" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="5636302460526173939" at="52,0,53,0" concept="6" trace="TransformConsequence" />
+      <node id="5636302460526173939" at="96,62,97,59" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="5636302460526173939" at="58,0,59,0" concept="1" trace="myConceptTransformConsequence" />
+      <node id="5636302460526173939" at="169,54,170,45" concept="4" />
+      <node id="5636302460526173939" at="223,71,224,76" concept="0" />
+      <node id="5636302460526173939" at="504,34,505,76" concept="0" />
+      <node id="5636302460526173939" at="593,78,594,183" concept="3" />
+      <node id="5636302460526173939" at="594,183,595,19" concept="0" />
+      <node id="5636302460526173939" at="595,19,596,115" concept="0" />
+      <node id="5636302460526173939" at="596,115,597,17" concept="0" />
+      <node id="5636302460526173939" at="597,17,598,22" concept="4" />
+      <node id="5636302460526173939" at="593,0,600,0" concept="7" trace="createDescriptorForTransformConsequence#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="5636302460526173939" at="169,54,170,45" />
+      <scope id="5636302460526173939" at="593,78,598,22">
+        <var name="b" id="5636302460526173939" />
+      </scope>
+      <scope id="5636302460526173939" at="593,0,600,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/5636302460526210369">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="5636302460526210369" at="44,0,45,0" concept="1" trace="props_QuotationConsequence" />
+      <node id="5636302460526210369" at="277,49,278,76" concept="3" />
+      <node id="5636302460526210369" at="278,76,279,43" concept="0" />
+      <node id="5636302460526210369" at="279,43,280,52" concept="0" />
+      <node id="5636302460526210369" at="281,9,282,42" concept="4" />
+      <node id="5636302460526210369" at="276,54,281,9" concept="2" />
+      <scope id="5636302460526210369" at="277,49,280,52">
+        <var name="cpb" id="5636302460526210369" />
+      </scope>
+      <scope id="5636302460526210369" at="276,54,282,42" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="5636302460526210369" at="43,0,44,0" concept="6" trace="QuotationConsequence" />
+      <node id="5636302460526210369" at="87,56,88,59" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="5636302460526210369" at="49,0,50,0" concept="1" trace="myConceptQuotationConsequence" />
+      <node id="5636302460526210369" at="151,54,152,45" concept="4" />
+      <node id="5636302460526210369" at="502,78,503,183" concept="3" />
+      <node id="5636302460526210369" at="503,183,504,34" concept="0" />
+      <node id="5636302460526210369" at="505,76,506,115" concept="0" />
+      <node id="5636302460526210369" at="506,115,507,17" concept="0" />
+      <node id="6129256022887780734" at="507,17,508,198" concept="0" />
+      <node id="5636302460526210369" at="508,198,509,25" concept="0" />
+      <node id="5636302460526210369" at="509,25,510,22" concept="4" />
+      <node id="5636302460526210369" at="502,0,512,0" concept="7" trace="createDescriptorForQuotationConsequence#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="5636302460526210369" at="151,54,152,45" />
+      <scope id="5636302460526210369" at="502,78,510,22">
+        <var name="b" id="5636302460526210369" />
+      </scope>
+      <scope id="5636302460526210369" at="502,0,512,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/5636302460526210743">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="5636302460526210743" at="17,0,18,0" concept="1" trace="props_ConsequenceFunction" />
+      <node id="5636302460526210743" at="89,48,90,76" concept="3" />
+      <node id="5636302460526210743" at="90,76,91,42" concept="0" />
+      <node id="5636302460526210743" at="91,42,92,51" concept="0" />
+      <node id="5636302460526210743" at="93,9,94,41" concept="4" />
+      <node id="5636302460526210743" at="88,53,93,9" concept="2" />
+      <scope id="5636302460526210743" at="89,48,92,51">
+        <var name="cpb" id="5636302460526210743" />
+      </scope>
+      <scope id="5636302460526210743" at="88,53,94,41" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="5636302460526210743" at="16,0,17,0" concept="6" trace="ConsequenceFunction" />
+      <node id="5636302460526210743" at="60,64,61,58" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="5636302460526210743" at="22,0,23,0" concept="1" trace="myConceptConsequenceFunction" />
+      <node id="5636302460526210743" at="97,53,98,44" concept="4" />
+      <node id="5636302460526210743" at="219,77,220,182" concept="3" />
+      <node id="5636302460526210743" at="220,182,221,34" concept="0" />
+      <node id="5636302460526210743" at="221,34,222,76" concept="5" />
+      <node id="5636302460526210743" at="222,76,223,71" concept="0" />
+      <node id="5636302460526210743" at="224,76,225,115" concept="0" />
+      <node id="5636302460526210743" at="225,115,226,17" concept="0" />
+      <node id="5636302460526210743" at="226,17,227,24" concept="0" />
+      <node id="5636302460526210743" at="227,24,228,22" concept="4" />
+      <node id="5636302460526210743" at="219,0,230,0" concept="7" trace="createDescriptorForConsequenceFunction#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="5636302460526210743" at="97,53,98,44" />
+      <scope id="5636302460526210743" at="219,77,228,22">
+        <var name="b" id="5636302460526210743" />
+      </scope>
+      <scope id="5636302460526210743" at="219,0,230,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/5820409521797704955">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="5820409521797704955" at="39,0,40,0" concept="1" trace="props_ProducedDataDeclaration" />
+      <node id="5820409521797704955" at="242,52,243,76" concept="3" />
+      <node id="5820409521797704955" at="243,76,244,47" concept="0" />
+      <node id="5820409521797704955" at="244,47,245,55" concept="0" />
+      <node id="5820409521797704955" at="246,9,247,45" concept="4" />
+      <node id="5820409521797704955" at="241,57,246,9" concept="2" />
+      <scope id="5820409521797704955" at="242,52,245,55">
+        <var name="cpb" id="5820409521797704955" />
+      </scope>
+      <scope id="5820409521797704955" at="241,57,247,45" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="5820409521797704955" at="38,0,39,0" concept="6" trace="ProducedDataDeclaration" />
+      <node id="5820409521797704955" at="82,72,83,62" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="5820409521797704955" at="44,0,45,0" concept="1" trace="myConceptProducedDataDeclaration" />
+      <node id="5820409521797704955" at="141,57,142,48" concept="4" />
+      <node id="5820409521797704955" at="449,81,450,186" concept="3" />
+      <node id="5820409521797704955" at="450,186,451,34" concept="0" />
+      <node id="5820409521797704955" at="451,34,452,71" concept="0" />
+      <node id="5820409521797704955" at="452,71,453,76" concept="0" />
+      <node id="5820409521797704955" at="453,76,454,115" concept="0" />
+      <node id="5820409521797704955" at="454,115,455,17" concept="0" />
+      <node id="5820409521797704981" at="455,17,456,166" concept="0" />
+      <node id="5820409521797704955" at="456,166,457,29" concept="0" />
+      <node id="5820409521797704955" at="457,29,458,22" concept="4" />
+      <node id="5820409521797704955" at="449,0,460,0" concept="7" trace="createDescriptorForProducedDataDeclaration#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="5820409521797704955" at="141,57,142,48" />
+      <scope id="5820409521797704955" at="449,81,458,22">
+        <var name="b" id="5820409521797704955" />
+      </scope>
+      <scope id="5820409521797704955" at="449,0,460,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/6129256022887940218">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="6129256022887940218" at="26,0,27,0" concept="1" trace="props_ListPatternVariableReference" />
+      <node id="6129256022887940218" at="151,57,152,76" concept="3" />
+      <node id="6129256022887940218" at="152,76,153,145" concept="0" />
+      <node id="6129256022887940218" at="153,145,154,60" concept="0" />
+      <node id="6129256022887940218" at="155,9,156,50" concept="4" />
+      <node id="6129256022887940218" at="150,62,155,9" concept="2" />
+      <scope id="6129256022887940218" at="151,57,154,60">
+        <var name="cpb" id="6129256022887940218" />
+      </scope>
+      <scope id="6129256022887940218" at="150,62,156,50" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="6129256022887940218" at="25,0,26,0" concept="6" trace="ListPatternVariableReference" />
+      <node id="6129256022887940218" at="69,67,70,67" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="6129256022887940218" at="31,0,32,0" concept="1" trace="myConceptListPatternVariableReference" />
+      <node id="6129256022887940218" at="115,62,116,53" concept="4" />
+      <node id="6129256022887940218" at="315,86,316,191" concept="3" />
+      <node id="6129256022887940218" at="316,191,317,34" concept="0" />
+      <node id="6129256022887940218" at="317,34,318,63" concept="5" />
+      <node id="6129256022887940218" at="318,63,319,70" concept="0" />
+      <node id="6129256022887940218" at="319,70,320,115" concept="0" />
+      <node id="6129256022887940218" at="320,115,321,17" concept="0" />
+      <node id="6129256022887940219" at="321,17,322,170" concept="0" />
+      <node id="6129256022887940218" at="322,170,323,22" concept="4" />
+      <node id="6129256022887940218" at="315,0,325,0" concept="7" trace="createDescriptorForListPatternVariableReference#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="6129256022887940218" at="115,62,116,53" />
+      <scope id="6129256022887940218" at="315,86,323,22">
+        <var name="b" id="6129256022887940218" />
+      </scope>
+      <scope id="6129256022887940218" at="315,0,325,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/6807933448469990957">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="6807933448469990957" at="43,0,44,0" concept="1" trace="props_PutDataExpression" />
+      <node id="6807933448469990957" at="269,46,270,76" concept="3" />
+      <node id="6807933448469990957" at="270,76,271,64" concept="0" />
+      <node id="6807933448469990957" at="271,64,272,41" concept="0" />
+      <node id="6807933448469990957" at="272,41,273,49" concept="0" />
+      <node id="6807933448469990957" at="274,9,275,39" concept="4" />
+      <node id="6807933448469990957" at="268,51,274,9" concept="2" />
+      <scope id="6807933448469990957" at="269,46,273,49">
+        <var name="cpb" id="6807933448469990957" />
+      </scope>
+      <scope id="6807933448469990957" at="268,51,275,39" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="6807933448469990957" at="42,0,43,0" concept="6" trace="PutDataExpression" />
+      <node id="6807933448469990957" at="86,58,87,56" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="6807933448469990957" at="48,0,49,0" concept="1" trace="myConceptPutDataExpression" />
+      <node id="6807933448469990957" at="149,51,150,42" concept="4" />
+      <node id="6807933448469990957" at="490,75,491,180" concept="3" />
+      <node id="6807933448469990957" at="491,180,492,34" concept="0" />
+      <node id="6807933448469990957" at="492,34,493,63" concept="5" />
+      <node id="6807933448469990957" at="493,63,494,70" concept="0" />
+      <node id="6807933448469990957" at="494,70,495,115" concept="0" />
+      <node id="6807933448469990957" at="495,115,496,17" concept="0" />
+      <node id="6807933448469991411" at="496,17,497,196" concept="0" />
+      <node id="6807933448469991413" at="497,196,498,198" concept="0" />
+      <node id="6807933448469990957" at="498,198,499,23" concept="0" />
+      <node id="6807933448469990957" at="499,23,500,22" concept="4" />
+      <node id="6807933448469990957" at="490,0,502,0" concept="7" trace="createDescriptorForPutDataExpression#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="6807933448469990957" at="149,51,150,42" />
+      <scope id="6807933448469990957" at="490,75,500,22">
+        <var name="b" id="6807933448469990957" />
+      </scope>
+      <scope id="6807933448469990957" at="490,0,502,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/6807933448471189901">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="6807933448471189901" at="38,0,39,0" concept="1" trace="props_ProducedAnnotationDataDeclaration" />
+      <node id="6807933448471189901" at="235,62,236,76" concept="3" />
+      <node id="6807933448471189901" at="236,76,237,58" concept="0" />
+      <node id="6807933448471189901" at="237,58,238,65" concept="0" />
+      <node id="6807933448471189901" at="239,9,240,55" concept="4" />
+      <node id="6807933448471189901" at="234,67,239,9" concept="2" />
+      <scope id="6807933448471189901" at="235,62,238,65">
+        <var name="cpb" id="6807933448471189901" />
+      </scope>
+      <scope id="6807933448471189901" at="234,67,240,55" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="6807933448471189901" at="37,0,38,0" concept="6" trace="ProducedAnnotationDataDeclaration" />
+      <node id="6807933448471189901" at="81,54,82,72" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="6807933448471189901" at="43,0,44,0" concept="1" trace="myConceptProducedAnnotationDataDeclaration" />
+      <node id="6807933448471189901" at="139,67,140,58" concept="4" />
+      <node id="6807933448471189901" at="438,91,439,196" concept="3" />
+      <node id="6807933448471189901" at="439,196,440,34" concept="0" />
+      <node id="6807933448471189901" at="440,34,441,71" concept="0" />
+      <node id="6807933448471189901" at="441,71,442,76" concept="0" />
+      <node id="6807933448471189901" at="442,76,443,115" concept="0" />
+      <node id="6807933448471189901" at="443,115,444,17" concept="0" />
+      <node id="6807933448471189902" at="444,17,445,166" concept="0" />
+      <node id="6807933448471189901" at="445,166,446,40" concept="0" />
+      <node id="6807933448471189901" at="446,40,447,22" concept="4" />
+      <node id="6807933448471189901" at="438,0,449,0" concept="7" trace="createDescriptorForProducedAnnotationDataDeclaration#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="6807933448471189901" at="139,67,140,58" />
+      <scope id="6807933448471189901" at="438,91,447,22">
+        <var name="b" id="6807933448471189901" />
+      </scope>
+      <scope id="6807933448471189901" at="438,0,449,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/6807933448472075200">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="6807933448472075200" at="51,0,52,0" concept="1" trace="props_RequiredAnnotationDataDeclaration" />
+      <node id="6807933448472075200" at="326,62,327,76" concept="3" />
+      <node id="6807933448472075200" at="327,76,328,58" concept="0" />
+      <node id="6807933448472075200" at="328,58,329,65" concept="0" />
+      <node id="6807933448472075200" at="330,9,331,55" concept="4" />
+      <node id="6807933448472075200" at="325,67,330,9" concept="2" />
+      <scope id="6807933448472075200" at="326,62,329,65">
+        <var name="cpb" id="6807933448472075200" />
+      </scope>
+      <scope id="6807933448472075200" at="325,67,331,55" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="6807933448472075200" at="50,0,51,0" concept="6" trace="RequiredAnnotationDataDeclaration" />
+      <node id="6807933448472075200" at="94,62,95,72" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="6807933448472075200" at="56,0,57,0" concept="1" trace="myConceptRequiredAnnotationDataDeclaration" />
+      <node id="6807933448472075200" at="165,67,166,58" concept="4" />
+      <node id="6807933448472075200" at="571,91,572,196" concept="3" />
+      <node id="6807933448472075200" at="572,196,573,34" concept="0" />
+      <node id="6807933448472075200" at="573,34,574,71" concept="0" />
+      <node id="6807933448472075200" at="574,71,575,76" concept="0" />
+      <node id="6807933448472075200" at="575,76,576,115" concept="0" />
+      <node id="6807933448472075200" at="576,115,577,17" concept="0" />
+      <node id="6807933448472075201" at="577,17,578,204" concept="0" />
+      <node id="6807933448472075200" at="578,204,579,40" concept="0" />
+      <node id="6807933448472075200" at="579,40,580,22" concept="4" />
+      <node id="6807933448472075200" at="571,0,582,0" concept="7" trace="createDescriptorForRequiredAnnotationDataDeclaration#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="6807933448472075200" at="165,67,166,58" />
+      <scope id="6807933448472075200" at="571,91,580,22">
+        <var name="b" id="6807933448472075200" />
+      </scope>
+      <scope id="6807933448472075200" at="571,0,582,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/6807933448472489193">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="6807933448472489193" at="14,0,15,0" concept="1" trace="props_AnnotationDataDependency" />
+      <node id="6807933448472489193" at="68,53,69,76" concept="3" />
+      <node id="6807933448472489193" at="69,76,70,35" concept="0" />
+      <node id="6807933448472489193" at="70,35,71,56" concept="0" />
+      <node id="6807933448472489193" at="72,9,73,46" concept="4" />
+      <node id="6807933448472489193" at="67,58,72,9" concept="2" />
+      <scope id="6807933448472489193" at="68,53,71,56">
+        <var name="cpb" id="6807933448472489193" />
+      </scope>
+      <scope id="6807933448472489193" at="67,58,73,46" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="6807933448472489193" at="13,0,14,0" concept="6" trace="AnnotationDataDependency" />
+      <node id="6807933448472489193" at="57,60,58,63" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="6807933448472489193" at="19,0,20,0" concept="1" trace="myConceptAnnotationDataDependency" />
+      <node id="6807933448472489193" at="91,58,92,49" concept="4" />
+      <node id="6807933448472489193" at="190,82,191,187" concept="3" />
+      <node id="6807933448472489193" at="191,187,192,34" concept="0" />
+      <node id="6807933448472489193" at="192,34,193,71" concept="0" />
+      <node id="6807933448472489193" at="193,71,194,71" concept="0" />
+      <node id="6807933448472489193" at="194,71,195,71" concept="0" />
+      <node id="6807933448472489193" at="195,71,196,115" concept="0" />
+      <node id="6807933448472489193" at="196,115,197,17" concept="0" />
+      <node id="6807933448472489194" at="197,17,198,170" concept="0" />
+      <node id="6807933448472489193" at="198,170,199,22" concept="4" />
+      <node id="6807933448472489193" at="190,0,201,0" concept="7" trace="createDescriptorForAnnotationDataDependency#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="6807933448472489193" at="91,58,92,49" />
+      <scope id="6807933448472489193" at="190,82,199,22">
+        <var name="b" id="6807933448472489193" />
+      </scope>
+      <scope id="6807933448472489193" at="190,0,201,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/6807933448472898689">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="6807933448472898689" at="22,0,23,0" concept="1" trace="props_GetDataExpression" />
+      <node id="6807933448472898689" at="124,46,125,76" concept="3" />
+      <node id="6807933448472898689" at="125,76,126,41" concept="0" />
+      <node id="6807933448472898689" at="126,41,127,49" concept="0" />
+      <node id="6807933448472898689" at="128,9,129,39" concept="4" />
+      <node id="6807933448472898689" at="123,51,128,9" concept="2" />
+      <scope id="6807933448472898689" at="124,46,127,49">
+        <var name="cpb" id="6807933448472898689" />
+      </scope>
+      <scope id="6807933448472898689" at="123,51,129,39" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="6807933448472898689" at="21,0,22,0" concept="6" trace="GetDataExpression" />
+      <node id="6807933448472898689" at="65,62,66,56" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="6807933448472898689" at="27,0,28,0" concept="1" trace="myConceptGetDataExpression" />
+      <node id="6807933448472898689" at="107,51,108,42" concept="4" />
+      <node id="6807933448472898689" at="274,75,275,180" concept="3" />
+      <node id="6807933448472898689" at="275,180,276,34" concept="0" />
+      <node id="6807933448472898689" at="276,34,277,63" concept="5" />
+      <node id="6807933448472898689" at="277,63,278,70" concept="0" />
+      <node id="6807933448472898689" at="278,70,279,115" concept="0" />
+      <node id="6807933448472898689" at="279,115,280,17" concept="0" />
+      <node id="6807933448472899878" at="280,17,281,187" concept="0" />
+      <node id="6807933448474152583" at="281,187,282,194" concept="0" />
+      <node id="6807933448472898689" at="282,194,283,23" concept="0" />
+      <node id="6807933448472898689" at="283,23,284,22" concept="4" />
+      <node id="6807933448472898689" at="274,0,286,0" concept="7" trace="createDescriptorForGetDataExpression#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="6807933448472898689" at="107,51,108,42" />
+      <scope id="6807933448472898689" at="274,75,284,22">
+        <var name="b" id="6807933448472898689" />
+      </scope>
+      <scope id="6807933448472898689" at="274,0,286,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/7153805464398780214">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="7153805464398780214" at="19,0,20,0" concept="1" trace="props_DataDependencyReference" />
+      <node id="7153805464398780214" at="103,52,104,76" concept="3" />
+      <node id="7153805464398780214" at="104,76,105,148" concept="0" />
+      <node id="7153805464398780214" at="105,148,106,55" concept="0" />
+      <node id="7153805464398780214" at="107,9,108,45" concept="4" />
+      <node id="7153805464398780214" at="102,57,107,9" concept="2" />
+      <scope id="7153805464398780214" at="103,52,106,55">
+        <var name="cpb" id="7153805464398780214" />
+      </scope>
+      <scope id="7153805464398780214" at="102,57,108,45" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="7153805464398780214" at="18,0,19,0" concept="6" trace="DataDependencyReference" />
+      <node id="7153805464398780214" at="62,53,63,62" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="7153805464398780214" at="24,0,25,0" concept="1" trace="myConceptDataDependencyReference" />
+      <node id="7153805464398780214" at="101,57,102,48" concept="4" />
+      <node id="7153805464398780214" at="242,81,243,186" concept="3" />
+      <node id="7153805464398780214" at="243,186,244,34" concept="0" />
+      <node id="7153805464398780214" at="244,34,245,63" concept="5" />
+      <node id="7153805464398780214" at="245,63,246,70" concept="0" />
+      <node id="7153805464398780214" at="246,70,247,75" concept="0" />
+      <node id="7153805464398780214" at="247,75,248,115" concept="0" />
+      <node id="7153805464398780214" at="248,115,249,17" concept="0" />
+      <node id="7153805464398780217" at="249,17,250,178" concept="0" />
+      <node id="7153805464398780214" at="250,178,251,22" concept="4" />
+      <node id="7153805464398780214" at="242,0,253,0" concept="7" trace="createDescriptorForDataDependencyReference#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="7153805464398780214" at="101,57,102,48" />
+      <scope id="7153805464398780214" at="242,81,251,22">
+        <var name="b" id="7153805464398780214" />
+      </scope>
+      <scope id="7153805464398780214" at="242,0,253,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/7417095922908675018">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="7417095922908675018" at="28,0,29,0" concept="1" trace="props_MigrationScriptReference" />
+      <node id="7417095922908675018" at="167,53,168,76" concept="3" />
+      <node id="7417095922908675018" at="168,76,169,58" concept="0" />
+      <node id="7417095922908675018" at="169,58,170,56" concept="0" />
+      <node id="7417095922908675018" at="171,9,172,46" concept="4" />
+      <node id="7417095922908675018" at="166,58,171,9" concept="2" />
+      <scope id="7417095922908675018" at="167,53,170,56">
+        <var name="cpb" id="7417095922908675018" />
+      </scope>
+      <scope id="7417095922908675018" at="166,58,172,46" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="7417095922908675018" at="27,0,28,0" concept="6" trace="MigrationScriptReference" />
+      <node id="7417095922908675018" at="71,54,72,63" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="7417095922908675018" at="33,0,34,0" concept="1" trace="myConceptMigrationScriptReference" />
+      <node id="7417095922908675018" at="119,58,120,49" concept="4" />
+      <node id="7417095922908675018" at="338,82,339,187" concept="3" />
+      <node id="7417095922908675018" at="339,187,340,34" concept="0" />
+      <node id="7417095922908675018" at="340,34,341,115" concept="0" />
+      <node id="7417095922908675018" at="341,115,342,17" concept="0" />
+      <node id="7417095922908725794" at="342,17,343,118" concept="0" />
+      <node id="7417095922909370996" at="343,118,344,112" concept="0" />
+      <node id="7417095922908675018" at="344,112,345,22" concept="4" />
+      <node id="7417095922908675018" at="338,0,347,0" concept="7" trace="createDescriptorForMigrationScriptReference#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="7417095922908675018" at="119,58,120,49" />
+      <scope id="7417095922908675018" at="338,82,345,22">
+        <var name="b" id="7417095922908675018" />
+      </scope>
+      <scope id="7417095922908675018" at="338,0,347,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/7431903976166007326">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="7431903976166007326" at="32,0,33,0" concept="1" trace="props_MoveNodeMigrationPart" />
+      <node id="7431903976166007326" at="194,50,195,76" concept="3" />
+      <node id="7431903976166007326" at="195,76,196,38" concept="0" />
+      <node id="7431903976166007326" at="196,38,197,53" concept="0" />
+      <node id="7431903976166007326" at="198,9,199,43" concept="4" />
+      <node id="7431903976166007326" at="193,55,198,9" concept="2" />
+      <scope id="7431903976166007326" at="194,50,197,53">
+        <var name="cpb" id="7431903976166007326" />
+      </scope>
+      <scope id="7431903976166007326" at="193,55,199,43" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="7431903976166007326" at="31,0,32,0" concept="6" trace="MoveNodeMigrationPart" />
+      <node id="7431903976166007326" at="75,58,76,60" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="7431903976166007326" at="37,0,38,0" concept="1" trace="myConceptMoveNodeMigrationPart" />
+      <node id="7431903976166007326" at="127,55,128,46" concept="4" />
+      <node id="7431903976166007326" at="378,79,379,184" concept="3" />
+      <node id="7431903976166007326" at="379,184,380,34" concept="0" />
+      <node id="7431903976166007326" at="380,34,381,72" concept="5" />
+      <node id="7431903976166007326" at="381,72,382,76" concept="0" />
+      <node id="7431903976166007326" at="382,76,383,115" concept="0" />
+      <node id="7431903976166007326" at="383,115,384,17" concept="0" />
+      <node id="7431903976166276373" at="384,17,385,202" concept="0" />
+      <node id="7431903976166276375" at="385,202,386,199" concept="0" />
+      <node id="3116305438947564633" at="386,199,387,206" concept="0" />
+      <node id="7431903976166007326" at="387,206,388,20" concept="0" />
+      <node id="7431903976166007326" at="388,20,389,22" concept="4" />
+      <node id="7431903976166007326" at="378,0,391,0" concept="7" trace="createDescriptorForMoveNodeMigrationPart#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="7431903976166007326" at="127,55,128,46" />
+      <scope id="7431903976166007326" at="378,79,389,22">
+        <var name="b" id="7431903976166007326" />
+      </scope>
+      <scope id="7431903976166007326" at="378,0,391,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/7431903976166012785">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="7431903976166012785" at="20,0,21,0" concept="1" trace="props_DirectNodeReference" />
+      <node id="7431903976166012785" at="110,48,111,76" concept="3" />
+      <node id="7431903976166012785" at="111,76,112,140" concept="0" />
+      <node id="7431903976166012785" at="112,140,113,51" concept="0" />
+      <node id="7431903976166012785" at="114,9,115,41" concept="4" />
+      <node id="7431903976166012785" at="109,53,114,9" concept="2" />
+      <scope id="7431903976166012785" at="110,48,113,51">
+        <var name="cpb" id="7431903976166012785" />
+      </scope>
+      <scope id="7431903976166012785" at="109,53,115,41" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="7431903976166012785" at="19,0,20,0" concept="6" trace="DirectNodeReference" />
+      <node id="7431903976166012785" at="63,62,64,58" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="7431903976166012785" at="25,0,26,0" concept="1" trace="myConceptDirectNodeReference" />
+      <node id="7431903976166012785" at="103,53,104,44" concept="4" />
+      <node id="7431903976166012785" at="253,77,254,182" concept="3" />
+      <node id="7431903976166012785" at="254,182,255,34" concept="0" />
+      <node id="7431903976166012785" at="255,34,256,76" concept="5" />
+      <node id="7431903976166012785" at="256,76,257,76" concept="0" />
+      <node id="7431903976166012785" at="257,76,258,115" concept="0" />
+      <node id="7431903976166012785" at="258,115,259,17" concept="0" />
+      <node id="7431903976166013456" at="259,17,260,165" concept="0" />
+      <node id="7431903976166012785" at="260,165,261,22" concept="4" />
+      <node id="7431903976166012785" at="253,0,263,0" concept="7" trace="createDescriptorForDirectNodeReference#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="7431903976166012785" at="103,53,104,44" />
+      <scope id="7431903976166012785" at="253,77,261,22">
+        <var name="b" id="7431903976166012785" />
+      </scope>
+      <scope id="7431903976166012785" at="253,0,263,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/7431903976166443707">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="7431903976166443707" at="42,0,43,0" concept="1" trace="props_PureMigrationScript" />
+      <node id="7431903976166443707" at="262,48,263,76" concept="3" />
+      <node id="7431903976166443707" at="263,76,264,35" concept="0" />
+      <node id="7431903976166443707" at="264,35,265,51" concept="0" />
+      <node id="7431903976166443707" at="266,9,267,41" concept="4" />
+      <node id="7431903976166443707" at="261,53,266,9" concept="2" />
+      <scope id="7431903976166443707" at="262,48,265,51">
+        <var name="cpb" id="7431903976166443707" />
+      </scope>
+      <scope id="7431903976166443707" at="261,53,267,41" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="7431903976166443707" at="41,0,42,0" concept="6" trace="PureMigrationScript" />
+      <node id="7431903976166443707" at="85,56,86,58" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="7431903976166443707" at="47,0,48,0" concept="1" trace="myConceptPureMigrationScript" />
+      <node id="7431903976166443707" at="147,53,148,44" concept="4" />
+      <node id="7431903976166443707" at="477,77,478,182" concept="3" />
+      <node id="7431903976166443707" at="478,182,479,33" concept="0" />
+      <node id="7431903976166443707" at="479,33,480,76" concept="0" />
+      <node id="7431903976166443707" at="481,76,482,115" concept="0" />
+      <node id="7431903976166443707" at="482,115,483,17" concept="0" />
+      <node id="7431903976166443708" at="483,17,484,118" concept="0" />
+      <node id="2151301691306162408" at="484,118,485,117" concept="0" />
+      <node id="5168866961623780816" at="485,117,486,204" concept="0" />
+      <node id="7431903976166447091" at="486,204,487,196" concept="0" />
+      <node id="7431903976166443707" at="487,196,488,22" concept="4" />
+      <node id="7431903976166443707" at="477,0,490,0" concept="7" trace="createDescriptorForPureMigrationScript#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="7431903976166443707" at="147,53,148,44" />
+      <scope id="7431903976166443707" at="477,77,488,22">
+        <var name="b" id="7431903976166443707" />
+      </scope>
+      <scope id="7431903976166443707" at="477,0,490,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/7527743013695058339">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="7527743013695058339" at="36,0,37,0" concept="1" trace="props_NodePatternVariableReference" />
+      <node id="7527743013695058339" at="221,57,222,76" concept="3" />
+      <node id="7527743013695058339" at="222,76,223,145" concept="0" />
+      <node id="7527743013695058339" at="223,145,224,60" concept="0" />
+      <node id="7527743013695058339" at="225,9,226,50" concept="4" />
+      <node id="7527743013695058339" at="220,62,225,9" concept="2" />
+      <scope id="7527743013695058339" at="221,57,224,60">
+        <var name="cpb" id="7527743013695058339" />
+      </scope>
+      <scope id="7527743013695058339" at="220,62,226,50" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="7527743013695058339" at="35,0,36,0" concept="6" trace="NodePatternVariableReference" />
+      <node id="7527743013695058339" at="79,56,80,67" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="7527743013695058339" at="41,0,42,0" concept="1" trace="myConceptNodePatternVariableReference" />
+      <node id="7527743013695058339" at="135,62,136,53" concept="4" />
+      <node id="7527743013695058339" at="420,86,421,191" concept="3" />
+      <node id="7527743013695058339" at="421,191,422,34" concept="0" />
+      <node id="7527743013695058339" at="422,34,423,63" concept="5" />
+      <node id="7527743013695058339" at="423,63,424,70" concept="0" />
+      <node id="7527743013695058339" at="424,70,425,115" concept="0" />
+      <node id="7527743013695058339" at="425,115,426,17" concept="0" />
+      <node id="7527743013695058340" at="426,17,427,170" concept="0" />
+      <node id="7527743013695058339" at="427,170,428,22" concept="4" />
+      <node id="7527743013695058339" at="420,0,430,0" concept="7" trace="createDescriptorForNodePatternVariableReference#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="7527743013695058339" at="135,62,136,53" />
+      <scope id="7527743013695058339" at="420,86,428,22">
+        <var name="b" id="7527743013695058339" />
+      </scope>
+      <scope id="7527743013695058339" at="420,0,430,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/8352104482584315555">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="8352104482584315555" at="27,0,28,0" concept="1" trace="props_MigrationScript" />
+      <node id="8352104482584315555" at="158,44,159,76" concept="3" />
+      <node id="8352104482584315555" at="159,76,160,35" concept="0" />
+      <node id="8352104482584315555" at="160,35,161,32" concept="0" />
+      <node id="8352104482584315555" at="161,32,162,57" concept="0" />
+      <node id="8352104482584315555" at="162,57,163,47" concept="0" />
+      <node id="8352104482584315555" at="164,9,165,37" concept="4" />
+      <node id="6354210107034397076" at="356,0,357,0" concept="6" trace="HELP_URL" />
+      <node id="8352104482584315555" at="157,49,164,9" concept="2" />
+      <scope id="8352104482584315555" at="158,44,163,47">
+        <var name="cpb" id="8352104482584315555" />
+      </scope>
+      <scope id="8352104482584315555" at="157,49,165,37" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="8352104482584315555" at="26,0,27,0" concept="6" trace="MigrationScript" />
+      <node id="8352104482584315555" at="70,67,71,54" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="8352104482584315555" at="32,0,33,0" concept="1" trace="myConceptMigrationScript" />
+      <node id="8352104482584315555" at="117,49,118,40" concept="4" />
+      <node id="8352104482584315555" at="325,73,326,178" concept="3" />
+      <node id="8352104482584315555" at="326,178,327,33" concept="0" />
+      <node id="8352104482584315555" at="327,33,328,65" concept="5" />
+      <node id="8352104482584315555" at="328,65,329,70" concept="0" />
+      <node id="8352104482584315555" at="330,76,331,75" concept="0" />
+      <node id="8352104482584315555" at="331,75,332,115" concept="0" />
+      <node id="8352104482584315555" at="332,115,333,17" concept="0" />
+      <node id="5820409521797704727" at="333,17,334,118" concept="0" />
+      <node id="8352104482584315555" at="334,118,335,54" concept="0" />
+      <node id="8352104482584315555" at="335,54,336,22" concept="4" />
+      <node id="8352104482584315555" at="325,0,338,0" concept="7" trace="createDescriptorForMigrationScript#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="8352104482584315555" at="117,49,118,40" />
+      <scope id="8352104482584315555" at="325,73,336,22">
+        <var name="b" id="8352104482584315555" />
+      </scope>
+      <scope id="8352104482584315555" at="325,0,338,0" />
+    </file>
+  </root>
+  <root nodeRef="r:53885008-7612-46ff-8b11-27f1d42c3adb(jetbrains.mps.lang.migration.structure)/9088427053758923239">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="9088427053758923239" at="15,0,16,0" concept="1" trace="props_ClassifierMemberData" />
+      <node id="9088427053758923239" at="75,49,76,76" concept="3" />
+      <node id="9088427053758923239" at="76,76,77,54" concept="0" />
+      <node id="9088427053758923239" at="77,54,78,52" concept="0" />
+      <node id="9088427053758923239" at="79,9,80,42" concept="4" />
+      <node id="9088427053758923239" at="74,54,79,9" concept="2" />
+      <scope id="9088427053758923239" at="75,49,78,52">
+        <var name="cpb" id="9088427053758923239" />
+      </scope>
+      <scope id="9088427053758923239" at="74,54,80,42" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="9088427053758923239" at="14,0,15,0" concept="6" trace="ClassifierMemberData" />
+      <node id="9088427053758923239" at="58,63,59,59" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="9088427053758923239" at="20,0,21,0" concept="1" trace="myConceptClassifierMemberData" />
+      <node id="9088427053758923239" at="93,54,94,45" concept="4" />
+      <node id="9088427053758923239" at="201,78,202,183" concept="3" />
+      <node id="9088427053758923239" at="202,183,203,34" concept="0" />
+      <node id="9088427053758923239" at="203,34,204,115" concept="0" />
+      <node id="9088427053758923239" at="204,115,205,17" concept="0" />
+      <node id="9088427053758923240" at="205,17,206,202" concept="0" />
+      <node id="9088427053758923242" at="206,202,207,208" concept="0" />
+      <node id="9088427053758923239" at="207,208,208,22" concept="4" />
+      <node id="9088427053758923239" at="201,0,210,0" concept="7" trace="createDescriptorForClassifierMemberData#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="9088427053758923239" at="93,54,94,45" />
+      <scope id="9088427053758923239" at="201,78,208,22">
+        <var name="b" id="9088427053758923239" />
+      </scope>
+      <scope id="9088427053758923239" at="201,0,210,0" />
     </file>
   </root>
 </debug-info>

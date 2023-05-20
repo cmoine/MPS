@@ -17,6 +17,7 @@ package jetbrains.mps.project;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.annotations.Immutable;
+import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SModuleId;
 
 import java.util.UUID;
@@ -35,6 +36,11 @@ public abstract class ModuleId implements SModuleId {
 
   public static ModuleId foreign(String name) {
     return new Foreign(name);
+  }
+
+  // perhaps, shall be part of SModuleId, it's nothing but a marker
+  public static SModuleId invalid() {
+    return new Invalid();
   }
 
   public static ModuleId fromString(@NotNull String text) {
@@ -96,6 +102,23 @@ public abstract class ModuleId implements SModuleId {
 
     public String toString() {
       return NAME_ID_PREFIX + myName;
+    }
+  }
+
+  private static class Invalid implements SModuleId {
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      return obj instanceof Invalid;
+    }
+
+    @Override
+    public String toString() {
+      return "invalid-module-id";
     }
   }
 }

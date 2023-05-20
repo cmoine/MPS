@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-dnac5s0enfllrpgtvz3ssor3jxcqw07" />
+<product version="3" modelHash="aqabdqllx1eceb58twfzxwc7uxzx123">
+  <files names="CellModel_HierarchycalTable_Editor.java:CellModel_HierarchycalTable_EditorBuilder_a.java:CellModel_Table_Editor.java:CellModel_Table_EditorBuilder_a.java:CellModel_Table_InspectorBuilder_a.java:EditorAspectDescriptorImpl.java" />
+</product>
 

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <root>
+    <file name="MigrationDescriptor.java">
+      <unit at="11,0,17,0" name="jetbrains.mps.lang.textGen.migration.MigrationDescriptor" />
+    </file>
+  </root>
+  <root nodeRef="r:0c814c99-6fba-4760-b417-173ba762d19a(jetbrains.mps.lang.textGen.migration)/6421242514326035637">
+    <file name="UseDevkit.java">
+      <node id="6421242514326035637" at="18,0,19,0" concept="1" trace="description" />
+      <node id="6421242514326035637" at="19,30,20,23" concept="5" />
+      <node id="6421242514326035637" at="23,33,24,16" concept="5" />
+      <node id="6421242514326035637" at="26,41,27,17" concept="0" />
+      <node id="6421242514326035637" at="27,17,28,16" concept="5" />
+      <node id="6421242514326046083" at="30,42,31,74" concept="4" />
+      <node id="4687413725484701066" at="32,64,33,13" concept="5" />
+      <node id="6421242514326046534" at="34,5,35,60" concept="4" />
+      <node id="2410259565191240197" at="35,60,36,175" concept="4" />
+      <node id="2410259565191255212" at="37,56,38,13" concept="5" />
+      <node id="2410259565191203926" at="40,124,41,94" concept="6" />
+      <node id="2410259565191201186" at="41,94,42,13" concept="5" />
+      <node id="6421242514326047014" at="43,5,44,128" concept="0" />
+      <node id="6565560734624555207" at="44,128,45,153" concept="0" />
+      <node id="6565560734624550443" at="45,153,46,153" concept="0" />
+      <node id="6421242514326053289" at="46,153,47,157" concept="0" />
+      <node id="6421242514326054028" at="47,157,48,33" concept="0" />
+      <node id="6421242514326035637" at="50,50,51,147" concept="5" />
+      <node id="6421242514326035637" at="19,0,22,0" concept="3" trace="getCaption#()Ljava/lang/String;" />
+      <node id="4687413725484699994" at="31,74,34,5" concept="2" />
+      <node id="2410259565191245455" at="36,175,39,5" concept="2" />
+      <node id="6421242514326035637" at="50,0,53,0" concept="3" trace="getReference#()Ljetbrains/mps/lang/migration/runtime/base/MigrationScriptReference;" />
+      <node id="6421242514326035637" at="22,0,26,0" concept="3" trace="isRerunnable#()Z" />
+      <node id="6421242514326035637" at="26,0,30,0" concept="3" trace="execute#(Lorg/jetbrains/mps/openapi/module/SModule;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="2410259565191200452" at="39,5,43,5" concept="2" />
+      <node id="6421242514326035637" at="30,0,50,0" concept="3" trace="doExecute#(Lorg/jetbrains/mps/openapi/module/SModule;)V" />
+      <scope id="6421242514326035637" at="19,30,20,23" />
+      <scope id="6421242514326035637" at="23,33,24,16" />
+      <scope id="4687413725484699996" at="32,64,33,13" />
+      <scope id="2410259565191245457" at="37,56,38,13" />
+      <scope id="6421242514326035637" at="50,50,51,147" />
+      <scope id="6421242514326035637" at="26,41,28,16" />
+      <scope id="2410259565191200454" at="40,124,42,13" />
+      <scope id="6421242514326035637" at="19,0,22,0" />
+      <scope id="6421242514326035637" at="50,0,53,0" />
+      <scope id="6421242514326035637" at="22,0,26,0" />
+      <scope id="6421242514326035637" at="26,0,30,0">
+        <var name="m" id="6421242514326035637" />
+      </scope>
+      <scope id="6421242514326035637" at="30,42,48,33">
+        <var name="mi" id="6421242514326046535" />
+        <var name="textgenAspectModel" id="6421242514326046086" />
+        <var name="tgAspectDevkit" id="2410259565191240198" />
+      </scope>
+      <scope id="6421242514326035637" at="30,0,50,0">
+        <var name="m" id="6421242514326035637" />
+      </scope>
+      <unit id="6421242514326035637" at="17,0,55,0" name="jetbrains.mps.lang.textGen.migration.UseDevkit" />
+    </file>
+  </root>
+</debug-info>
+

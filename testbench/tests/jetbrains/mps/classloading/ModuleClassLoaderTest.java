@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,11 @@
  */
 package jetbrains.mps.classloading;
 
-import jetbrains.mps.tool.environment.Log4jInitializer;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import jetbrains.mps.logging.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.security.Permission;
 import java.util.Collection;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -34,15 +33,11 @@ import java.util.concurrent.TimeUnit;
  * @author apyshkin
  */
 public final class ModuleClassLoaderTest {
-  private static final Logger LOG = LogManager.getLogger(ModuleClassLoaderTest.class);
+  private static final Logger LOG = Logger.getLogger(ModuleClassLoaderTest.class);
 
   private static final long TIME_OUT_MS = 1000;
   private static final int DELAY_MS_TO_CHECK_DEADLOCK = 500;
-  private static final int NUMBER_OF_CHECKS = 1000;
-
-  static {
-    new Log4jInitializer().init();
-  }
+  private static final int NUMBER_OF_CHECKS = 0x1000;
 
   @Test
   public void moduleClassLoaderIsThreadSafe() {
@@ -62,30 +57,74 @@ public final class ModuleClassLoaderTest {
     executeConcurrentCheck(taskGenerator);
   }
 
+  private static void dumpThreadStack(final Thread thread) {
+    StringBuilder builder = new StringBuilder("\n");
+    try {
+      for (StackTraceElement element : thread.getStackTrace()) {
+        builder.append('\t').append(element.toString()).append('\n');
+      }
+    } catch (SecurityException e) { /* ignore */ }
+    LOG.info(builder.toString());
+  }
+
   private void executeConcurrentCheck(TaskGenerator taskGenerator) {
+//    resetSecurityManager();
+
     DeadlockDetector deadlockDetector = new DeadlockDetector(DELAY_MS_TO_CHECK_DEADLOCK);
 
     try {
-      int poolSize = taskGenerator.createTasks().size();
+      Collection<Callable<Object>> tasks = taskGenerator.createTasks();
+      int poolSize = tasks.size();
       ExecutorService pool = Executors.newFixedThreadPool(poolSize);
       for (int i = 0; i < NUMBER_OF_CHECKS; ++i) {
-        Collection<Callable<Object>> taskList = taskGenerator.createTasks();
-        pool.invokeAll(taskList, TIME_OUT_MS, TimeUnit.MILLISECONDS);
+        if ((i & (0x100 - 1)) == (0x100 - 1)) {
+          LOG.info(String.format("%d-th check", i));
+        }
+        pool.invokeAll(tasks, TIME_OUT_MS, TimeUnit.MILLISECONDS);
         if (deadlockDetector.isDeadlockDetected() || !taskGenerator.isSuccessful()) {
+          LOG.info("SMTH wrong");
           break;
         }
       }
+      LOG.info("STOPPING");
       pool.shutdownNow();
       deadlockDetector.stop();
+      taskGenerator.dispose();
     } catch (InterruptedException e) {
       LOG.error("", e);
       Assert.fail(e.getMessage());
     }
-    if (!taskGenerator.isSuccessful()) {
-      Assert.fail();
-    }
+    LOG.info("FINISHED");
     if (deadlockDetector.isDeadlockDetected()) {
       Assert.fail("Deadlock has been encountered during test execution");
     }
+    if (!taskGenerator.isSuccessful()) {
+      Assert.fail();
+    }
+  }
+
+  private void resetSecurityManager() {
+    LOG.info("Old security manager = " + System.getSecurityManager());
+    System.setSecurityManager(new SecurityManager() {
+      @Override
+      public void checkPermission(Permission perm) {
+      }
+
+      @Override
+      public void checkPermission(Permission perm, Object context) {
+      }
+
+      @Override
+      public void checkAccess(final Thread t) {
+        StackTraceElement[] list = Thread.currentThread().getStackTrace();
+        StackTraceElement element = list[3];
+        if (element.getMethodName().equals("interrupt")) {
+          LOG.warning("CheckAccess to interrupt(Thread = " + t.getName() + ") - "
+                   + element.getMethodName());
+          dumpThreadStack(Thread.currentThread());
+        }
+        super.checkAccess(t);
+      }
+    });
   }
 }

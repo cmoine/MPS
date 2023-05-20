@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-92sbchisi67x0vcedezx4x8yd08743t" />
+<product version="3" modelHash="-b1qdykdh2utdcc6i8n8zgg8ial6ml8q">
+  <files names="CanonicalPath.java:FileMPSProject.java:MapPathMacrosProvider.java:SetLibraryContributor.java" />
+</product>
 

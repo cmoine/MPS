@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1163670490218:jetbrains.mps.baseLanguage.structure.SwitchStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1076505808687:jetbrains.mps.baseLanguage.structure.WhileStatement" />
+  <root nodeRef="r:346759f7-f6a3-4d42-a3a1-c8d7b36649d7(jetbrains.mps.samples.fincalculator.support.runtime)/2369396721459591090">
+    <file name="SimulationFunctions.java">
+      <node id="2369396721459591578" at="9,45,10,15" concept="7" />
+      <node id="2369396721463659241" at="13,126,14,108" concept="7" />
+      <node id="5982026979499603763" at="18,0,19,0" concept="3" trace="month" />
+      <node id="5982026979499604577" at="19,0,20,0" concept="3" trace="paymentTowardsLoan" />
+      <node id="5982026979499604171" at="20,0,21,0" concept="3" trace="integest" />
+      <node id="5982026979499605231" at="21,0,22,0" concept="3" trace="remainingLoan" />
+      <node id="5982026979499636321" at="22,0,23,0" concept="3" trace="accumulatedInterest" />
+      <node id="5982026979499605372" at="24,139,25,25" concept="2" />
+      <node id="5982026979499605384" at="25,25,26,51" concept="2" />
+      <node id="5982026979499605396" at="26,51,27,31" concept="2" />
+      <node id="5982026979499605408" at="27,31,28,41" concept="2" />
+      <node id="5982026979499637757" at="28,41,29,53" concept="2" />
+      <node id="5982026979499930492" at="34,0,35,0" concept="3" trace="result" />
+      <node id="5982026979499930906" at="36,61,37,27" concept="2" />
+      <node id="5982026979499932545" at="41,26,42,15" concept="7" />
+      <node id="5982026979499933607" at="47,15,48,41" concept="7" />
+      <node id="5982026979499933611" at="49,15,50,60" concept="7" />
+      <node id="5982026979499933616" at="51,15,52,50" concept="7" />
+      <node id="5982026979499933621" at="53,15,54,55" concept="7" />
+      <node id="5982026979499933626" at="55,15,56,61" concept="7" />
+      <node id="5982026979499933629" at="57,7,58,19" concept="7" />
+      <node id="5982026979499876648" at="63,0,64,0" concept="3" trace="source" />
+      <node id="5982026979499878066" at="65,68,66,27" concept="2" />
+      <node id="5982026979499881670" at="70,26,71,27" concept="7" />
+      <node id="5982026979499892903" at="76,15,77,25" concept="7" />
+      <node id="5982026979499895614" at="78,15,79,36" concept="7" />
+      <node id="5982026979499896131" at="80,15,81,28" concept="7" />
+      <node id="5982026979499896151" at="82,15,83,34" concept="7" />
+      <node id="5982026979499905434" at="84,15,85,40" concept="7" />
+      <node id="5982026979499911947" at="86,7,87,19" concept="7" />
+      <node id="5982026979499916092" at="91,42,92,58" concept="7" />
+      <node id="5982026979499650516" at="96,119,97,59" concept="6" />
+      <node id="5982026979499681882" at="98,65,99,20" concept="7" />
+      <node id="5982026979499683576" at="100,5,101,0" concept="8" />
+      <node id="5982026979499650522" at="101,0,102,24" concept="6" />
+      <node id="5982026979499650526" at="102,24,103,29" concept="6" />
+      <node id="5982026979499650530" at="103,29,104,18" concept="6" />
+      <node id="5982026979499650536" at="105,29,106,62" concept="6" />
+      <node id="5982026979499650545" at="106,62,107,32" concept="2" />
+      <node id="5982026979499650549" at="107,32,108,60" concept="6" />
+      <node id="5982026979499650555" at="108,60,109,37" concept="2" />
+      <node id="5982026979499650559" at="109,37,110,17" concept="2" />
+      <node id="5982026979499650563" at="110,17,111,113" concept="2" />
+      <node id="5982026979499709936" at="112,52,113,33" concept="7" />
+      <node id="5982026979499650579" at="115,5,116,18" concept="7" />
+      <node id="2369396721459591395" at="9,0,12,0" concept="9" trace="balanceThreashhold#()D" />
+      <node id="2369396721463658257" at="13,0,16,0" concept="9" trace="compoundInterest#(DDDD)D" />
+      <node id="5982026979499930898" at="36,0,39,0" concept="1" trace="MortgageRowWrapper#(Ljetbrains/mps/samples/fincalculator/support/runtime/SimulationFunctions/MortgagePaymentResult;)V" />
+      <node id="5982026979499878057" at="65,0,68,0" concept="1" trace="MortgageDataWrapper#(Ljava/util/List;)V" />
+      <node id="5982026979499670382" at="97,59,100,5" concept="4" />
+      <node id="5982026979499697287" at="111,113,114,7" concept="4" />
+      <node id="5982026979499922751" at="40,0,44,0" concept="5" trace="getSize#()I" />
+      <node id="5982026979499870960" at="69,0,73,0" concept="5" trace="getSize#()I" />
+      <node id="5982026979499870978" at="90,0,94,0" concept="5" trace="getRow#(I)Ljetbrains/mps/samples/fincalculator/support/runtime/TableRow;" />
+      <node id="5982026979499605364" at="24,0,31,0" concept="1" trace="MortgagePaymentResult#(IDDDD)V" />
+      <node id="5982026979499650534" at="104,18,115,5" concept="12" />
+      <node id="5982026979499933602" at="45,44,57,7" concept="11" />
+      <node id="5982026979499889151" at="74,43,86,7" concept="11" />
+      <node id="5982026979499922759" at="44,0,60,0" concept="5" trace="getElement#(I)Ljava/lang/String;" />
+      <node id="5982026979499870968" at="73,0,89,0" concept="5" trace="getHeader#(I)Ljava/lang/String;" />
+      <node id="5982026979499650513" at="96,0,118,0" concept="9" trace="simulateMortgage#(DDD)Ljava/util/List;" />
+      <scope id="2369396721459591398" at="9,45,10,15" />
+      <scope id="2369396721463658260" at="13,126,14,108" />
+      <scope id="5982026979499930902" at="36,61,37,27" />
+      <scope id="5982026979499922755" at="41,26,42,15" />
+      <scope id="5982026979499933606" at="47,15,48,41" />
+      <scope id="5982026979499933610" at="49,15,50,60" />
+      <scope id="5982026979499933615" at="51,15,52,50" />
+      <scope id="5982026979499933620" at="53,15,54,55" />
+      <scope id="5982026979499933625" at="55,15,56,61" />
+      <scope id="5982026979499878061" at="65,68,66,27" />
+      <scope id="5982026979499870964" at="70,26,71,27" />
+      <scope id="5982026979499891964" at="76,15,77,25" />
+      <scope id="5982026979499895613" at="78,15,79,36" />
+      <scope id="5982026979499896130" at="80,15,81,28" />
+      <scope id="5982026979499896150" at="82,15,83,34" />
+      <scope id="5982026979499905433" at="84,15,85,40" />
+      <scope id="5982026979499870984" at="91,42,92,58" />
+      <scope id="5982026979499670384" at="98,65,99,20" />
+      <scope id="5982026979499697289" at="112,52,113,33" />
+      <scope id="2369396721459591395" at="9,0,12,0" />
+      <scope id="2369396721463658257" at="13,0,16,0">
+        <var name="initialAmount" id="2369396721463658365" />
+        <var name="interestRate" id="2369396721463658574" />
+        <var name="numberOfPayments" id="2369396721463658750" />
+        <var name="payments" id="2369396721463658436" />
+      </scope>
+      <scope id="5982026979499930898" at="36,0,39,0">
+        <var name="result" id="5982026979499930905" />
+      </scope>
+      <scope id="5982026979499878057" at="65,0,68,0">
+        <var name="source" id="5982026979499878065" />
+      </scope>
+      <scope id="5982026979499922751" at="40,0,44,0" />
+      <scope id="5982026979499870960" at="69,0,73,0" />
+      <scope id="5982026979499870978" at="90,0,94,0">
+        <var name="position" id="5982026979499870982" />
+      </scope>
+      <scope id="5982026979499605368" at="24,139,29,53" />
+      <scope id="5982026979499605364" at="24,0,31,0">
+        <var name="accumulatedInterest" id="5982026979499632361" />
+        <var name="integest" id="5982026979499605395" />
+        <var name="month" id="5982026979499605371" />
+        <var name="paymentTowardsLoan" id="5982026979499605383" />
+        <var name="remainingLoan" id="5982026979499605407" />
+      </scope>
+      <scope id="5982026979499650535" at="105,29,114,7">
+        <var name="interest" id="5982026979499650537" />
+        <var name="paymentTowardsLoan" id="5982026979499650550" />
+      </scope>
+      <scope id="5982026979499922765" at="45,44,58,19" />
+      <scope id="5982026979499870974" at="74,43,87,19" />
+      <scope id="5982026979499922759" at="44,0,60,0">
+        <var name="position" id="5982026979499922763" />
+      </scope>
+      <scope id="5982026979499870968" at="73,0,89,0">
+        <var name="position" id="5982026979499870972" />
+      </scope>
+      <scope id="5982026979499650515" at="96,119,116,18">
+        <var name="month" id="5982026979499650531" />
+        <var name="paidInterests" id="5982026979499650527" />
+        <var name="paidLoan" id="5982026979499650523" />
+        <var name="result" id="5982026979499650517" />
+      </scope>
+      <scope id="5982026979499650513" at="96,0,118,0">
+        <var name="interestRate" id="5982026979499650584" />
+        <var name="loan" id="5982026979499650582" />
+        <var name="monthlyPayment" id="5982026979499650586" />
+      </scope>
+      <unit id="5982026979499603186" at="17,0,32,0" name="jetbrains.mps.samples.fincalculator.support.runtime.SimulationFunctions$MortgagePaymentResult" />
+      <unit id="5982026979499920156" at="33,0,61,0" name="jetbrains.mps.samples.fincalculator.support.runtime.SimulationFunctions$MortgageRowWrapper" />
+      <unit id="5982026979499869538" at="62,0,95,0" name="jetbrains.mps.samples.fincalculator.support.runtime.SimulationFunctions$MortgageDataWrapper" />
+      <unit id="2369396721459591090" at="8,0,119,0" name="jetbrains.mps.samples.fincalculator.support.runtime.SimulationFunctions" />
+    </file>
+  </root>
+  <root nodeRef="r:346759f7-f6a3-4d42-a3a1-c8d7b36649d7(jetbrains.mps.samples.fincalculator.support.runtime)/4779620959592223121">
+    <file name="SelectorItem.java">
+      <node id="4779620959592223209" at="7,0,8,0" concept="3" trace="key" />
+      <node id="4779620959592223226" at="8,0,9,0" concept="3" trace="value" />
+      <node id="4779620959592223586" at="10,44,11,19" concept="2" />
+      <node id="4779620959592223598" at="11,19,12,23" concept="2" />
+      <node id="4779620959592223340" at="14,26,15,20" concept="7" />
+      <node id="4779620959592223348" at="17,23,18,22" concept="7" />
+      <node id="4779620959592464913" at="22,28,23,15" concept="7" />
+      <node id="4779620959592223336" at="14,0,17,0" concept="5" trace="getKey#()Ljava/lang/String;" />
+      <node id="4779620959592223344" at="17,0,20,0" concept="5" trace="getValue#()null" />
+      <node id="4779620959592223578" at="10,0,14,0" concept="1" trace="SelectorItem#(Ljava/lang/String;null)V" />
+      <node id="4779620959592463370" at="21,0,25,0" concept="5" trace="toString#()Ljava/lang/String;" />
+      <scope id="4779620959592223339" at="14,26,15,20" />
+      <scope id="4779620959592223347" at="17,23,18,22" />
+      <scope id="4779620959592463374" at="22,28,23,15" />
+      <scope id="4779620959592223582" at="10,44,12,23" />
+      <scope id="4779620959592223336" at="14,0,17,0" />
+      <scope id="4779620959592223344" at="17,0,20,0" />
+      <scope id="4779620959592223578" at="10,0,14,0">
+        <var name="key" id="4779620959592223585" />
+        <var name="value" id="4779620959592223597" />
+      </scope>
+      <scope id="4779620959592463370" at="21,0,25,0" />
+      <unit id="4779620959592223121" at="6,0,26,0" name="jetbrains.mps.samples.fincalculator.support.runtime.SelectorItem" />
+    </file>
+  </root>
+  <root nodeRef="r:346759f7-f6a3-4d42-a3a1-c8d7b36649d7(jetbrains.mps.samples.fincalculator.support.runtime)/5087448708487472598">
+    <file name="JRadioButtonWithItem.java">
+      <node id="5087448708487473676" at="9,0,10,0" concept="3" trace="myItem" />
+      <node id="5087448708487472926" at="11,66,12,16" concept="10" />
+      <node id="5087448708487473680" at="12,16,13,18" concept="2" />
+      <node id="5087448708487474210" at="16,38,17,23" concept="7" />
+      <node id="5087448708487474206" at="16,0,19,0" concept="5" trace="getMyItem#()Ljetbrains/mps/samples/fincalculator/support/runtime/SelectorItem;" />
+      <node id="5087448708487472920" at="11,0,15,0" concept="1" trace="JRadioButtonWithItem#(Ljava/lang/String;Ljetbrains/mps/samples/fincalculator/support/runtime/SelectorItem;)V" />
+      <scope id="5087448708487474209" at="16,38,17,23" />
+      <scope id="5087448708487472924" at="11,66,13,18" />
+      <scope id="5087448708487474206" at="16,0,19,0" />
+      <scope id="5087448708487472920" at="11,0,15,0">
+        <var name="item" id="5087448708487473027" />
+        <var name="text" id="5087448708487472927" />
+      </scope>
+      <unit id="5087448708487472598" at="7,0,20,0" name="jetbrains.mps.samples.fincalculator.support.runtime.JRadioButtonWithItem" />
+    </file>
+  </root>
+  <root nodeRef="r:346759f7-f6a3-4d42-a3a1-c8d7b36649d7(jetbrains.mps.samples.fincalculator.support.runtime)/5982026979499860811">
+    <file name="TabularData.java">
+      <node id="5982026979499861100" at="7,0,8,0" concept="5" trace="getSize#()I" />
+      <node id="5982026979499861912" at="8,0,9,0" concept="5" trace="getHeader#(I)Ljava/lang/String;" />
+      <node id="5982026979499862245" at="9,0,10,0" concept="5" trace="getRow#(I)Ljetbrains/mps/samples/fincalculator/support/runtime/TableRow;" />
+      <scope id="5982026979499861100" at="7,0,8,0" />
+      <scope id="5982026979499861912" at="8,0,9,0">
+        <var name="position" id="5982026979499862026" />
+      </scope>
+      <scope id="5982026979499862245" at="9,0,10,0">
+        <var name="position" id="5982026979499862374" />
+      </scope>
+      <unit id="5982026979499860811" at="6,0,11,0" name="jetbrains.mps.samples.fincalculator.support.runtime.TabularData" />
+    </file>
+  </root>
+  <root nodeRef="r:346759f7-f6a3-4d42-a3a1-c8d7b36649d7(jetbrains.mps.samples.fincalculator.support.runtime)/5982026979499861297">
+    <file name="TableRow.java">
+      <node id="5982026979499861428" at="7,0,8,0" concept="5" trace="getSize#()I" />
+      <node id="5982026979499861605" at="8,0,9,0" concept="5" trace="getElement#(I)Ljava/lang/String;" />
+      <scope id="5982026979499861428" at="7,0,8,0" />
+      <scope id="5982026979499861605" at="8,0,9,0">
+        <var name="position" id="5982026979499861721" />
+      </scope>
+      <unit id="5982026979499861297" at="6,0,10,0" name="jetbrains.mps.samples.fincalculator.support.runtime.TableRow" />
+    </file>
+  </root>
+  <root nodeRef="r:346759f7-f6a3-4d42-a3a1-c8d7b36649d7(jetbrains.mps.samples.fincalculator.support.runtime)/5982026979500238451">
+    <file name="CalculationTableModel.java">
+      <node id="5982026979500244027" at="9,0,10,0" concept="3" trace="data" />
+      <node id="5982026979500246269" at="11,50,12,21" concept="2" />
+      <node id="5982026979500250347" at="16,28,17,26" concept="7" />
+      <node id="5982026979500272989" at="21,29,22,38" concept="7" />
+      <node id="5982026979500275386" at="23,12,24,15" concept="7" />
+      <node id="5982026979500279059" at="28,38,29,29" concept="7" />
+      <node id="5982026979500286048" at="32,41,33,24" concept="7" />
+      <node id="5982026979500238757" at="36,48,37,17" concept="7" />
+      <node id="5982026979500289237" at="40,43,41,41" concept="7" />
+      <node id="5982026979500273876" at="23,10,25,5" concept="0" />
+      <node id="5982026979500246261" at="11,0,14,0" concept="1" trace="CalculationTableModel#(Ljetbrains/mps/samples/fincalculator/support/runtime/TabularData;)V" />
+      <node id="5982026979500238770" at="43,0,46,0" concept="5" trace="setValueAt#(Ljava/lang/Object;II)V" />
+      <node id="5982026979500238782" at="46,0,49,0" concept="5" trace="addTableModelListener#(Ljavax/swing/event/TableModelListener;)V" />
+      <node id="5982026979500238790" at="49,0,52,0" concept="5" trace="removeTableModelListener#(Ljavax/swing/event/TableModelListener;)V" />
+      <node id="5982026979500238709" at="15,0,19,0" concept="5" trace="getRowCount#()I" />
+      <node id="5982026979500238725" at="27,0,31,0" concept="5" trace="getColumnName#(I)Ljava/lang/String;" />
+      <node id="5982026979500238735" at="31,0,35,0" concept="5" trace="getColumnClass#(I)Ljava/lang/Class;" />
+      <node id="5982026979500238746" at="35,0,39,0" concept="5" trace="isCellEditable#(II)Z" />
+      <node id="5982026979500238758" at="39,0,43,0" concept="5" trace="getValueAt#(II)Ljava/lang/Object;" />
+      <node id="5982026979500262738" at="20,31,25,5" concept="4" />
+      <node id="5982026979500238717" at="19,0,27,0" concept="5" trace="getColumnCount#()I" />
+      <scope id="5982026979500238780" at="44,56,44,56" />
+      <scope id="5982026979500238788" at="47,66,47,66" />
+      <scope id="5982026979500238796" at="50,69,50,69" />
+      <scope id="5982026979500246265" at="11,50,12,21" />
+      <scope id="5982026979500238713" at="16,28,17,26" />
+      <scope id="5982026979500262740" at="21,29,22,38" />
+      <scope id="5982026979500273877" at="23,12,24,15" />
+      <scope id="5982026979500238731" at="28,38,29,29" />
+      <scope id="5982026979500238742" at="32,41,33,24" />
+      <scope id="5982026979500238754" at="36,48,37,17" />
+      <scope id="5982026979500238766" at="40,43,41,41" />
+      <scope id="5982026979500246261" at="11,0,14,0">
+        <var name="data" id="5982026979500246268" />
+      </scope>
+      <scope id="5982026979500238770" at="43,0,46,0">
+        <var name="i" id="5982026979500238776" />
+        <var name="i1" id="5982026979500238778" />
+        <var name="object" id="5982026979500238774" />
+      </scope>
+      <scope id="5982026979500238782" at="46,0,49,0">
+        <var name="listener" id="5982026979500238786" />
+      </scope>
+      <scope id="5982026979500238790" at="49,0,52,0">
+        <var name="listener" id="5982026979500238794" />
+      </scope>
+      <scope id="5982026979500238709" at="15,0,19,0" />
+      <scope id="5982026979500238725" at="27,0,31,0">
+        <var name="i" id="5982026979500238729" />
+      </scope>
+      <scope id="5982026979500238735" at="31,0,35,0">
+        <var name="i" id="5982026979500238740" />
+      </scope>
+      <scope id="5982026979500238746" at="35,0,39,0">
+        <var name="i" id="5982026979500238750" />
+        <var name="i1" id="5982026979500238752" />
+      </scope>
+      <scope id="5982026979500238758" at="39,0,43,0">
+        <var name="i" id="5982026979500238762" />
+        <var name="i1" id="5982026979500238764" />
+      </scope>
+      <scope id="5982026979500238721" at="20,31,25,5" />
+      <scope id="5982026979500238717" at="19,0,27,0" />
+      <unit id="5982026979500238451" at="8,0,53,0" name="jetbrains.mps.samples.fincalculator.support.runtime.CalculationTableModel" />
+    </file>
+  </root>
+  <root nodeRef="r:346759f7-f6a3-4d42-a3a1-c8d7b36649d7(jetbrains.mps.samples.fincalculator.support.runtime)/5982026979500793474">
+    <file name="CalculationFrame.java">
+      <node id="5982026979500798571" at="14,0,15,0" concept="3" trace="smallPanel" />
+      <node id="5982026979500802617" at="15,0,16,0" concept="3" trace="bigPanel" />
+      <node id="5982026979500816518" at="17,29,18,47" concept="2" />
+      <node id="5982026979500849331" at="18,47,19,45" concept="2" />
+      <node id="5982026979500875688" at="19,45,20,39" concept="2" />
+      <node id="5982026979500943723" at="20,39,21,40" concept="2" />
+      <node id="5982026979500960606" at="21,40,22,39" concept="2" />
+      <node id="5982026979500914497" at="25,87,26,39" concept="2" />
+      <node id="5982026979500929233" at="26,39,27,30" concept="2" />
+      <node id="5982026979501242342" at="27,30,28,40" concept="2" />
+      <node id="5982026979501043833" at="31,68,32,32" concept="6" />
+      <node id="5982026979502228503" at="32,32,33,65" concept="2" />
+      <node id="5982026979501126038" at="33,65,34,25" concept="2" />
+      <node id="5982026979500968507" at="34,25,35,24" concept="2" />
+      <node id="5982026979500902947" at="25,0,30,0" concept="5" trace="addToSmallPanel#(Ljava/lang/String;Ljavax/swing/JComponent;Ljava/lang/String;)V" />
+      <node id="5982026979500968505" at="31,0,37,0" concept="5" trace="addToBigPanel#(Ljava/lang/String;Ljavax/swing/JComponent;)V" />
+      <node id="5982026979500802881" at="17,0,24,0" concept="1" trace="CalculationFrame#()V" />
+      <scope id="5982026979500902950" at="25,87,28,40" />
+      <scope id="5982026979500968506" at="31,68,35,24">
+        <var name="panel" id="5982026979501043834" />
+      </scope>
+      <scope id="5982026979500802885" at="17,29,22,39" />
+      <scope id="5982026979500902947" at="25,0,30,0">
+        <var name="component" id="5982026979500908213" />
+        <var name="postFix" id="5982026979501198974" />
+        <var name="prefix" id="5982026979501188889" />
+      </scope>
+      <scope id="5982026979500968505" at="31,0,37,0">
+        <var name="component" id="5982026979500968524" />
+        <var name="title" id="5982026979501016077" />
+      </scope>
+      <scope id="5982026979500802881" at="17,0,24,0" />
+      <unit id="5982026979500793474" at="13,0,38,0" name="jetbrains.mps.samples.fincalculator.support.runtime.CalculationFrame" />
+    </file>
+  </root>
+</debug-info>
+

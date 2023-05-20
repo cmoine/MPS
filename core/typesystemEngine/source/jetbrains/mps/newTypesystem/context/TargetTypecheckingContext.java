@@ -15,8 +15,10 @@
  */
 package jetbrains.mps.newTypesystem.context;
 
+import jetbrains.mps.languageScope.LanguageScopeExecutor;
 import jetbrains.mps.newTypesystem.context.typechecking.TargetTypechecking;
 import jetbrains.mps.newTypesystem.state.TargetState;
+import jetbrains.mps.typesystem.inference.TypeCheckerHelper;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.typesystem.inference.TypeChecker;
 
@@ -26,8 +28,16 @@ import jetbrains.mps.typesystem.inference.TypeChecker;
  */
 public class TargetTypecheckingContext extends SimpleTypecheckingContext<TargetState, TargetTypechecking> {
 
+  /**
+   * Don't use.
+   */
+  @Deprecated(forRemoval = true)
   public TargetTypecheckingContext(SNode node, TypeChecker typeChecker) {
-    super(node, typeChecker);
+    super(node, typeChecker.getTypeCheckerHelper());
+  }
+
+  public TargetTypecheckingContext(SNode node, TypeCheckerHelper typeCheckerHelper) {
+    super(node, typeCheckerHelper);
   }
 
   @Override
@@ -38,5 +48,10 @@ public class TargetTypecheckingContext extends SimpleTypecheckingContext<TargetS
   @Override
   protected TargetTypechecking createTypechecking() {
     return new TargetTypechecking (getNode(), getState());
+  }
+
+  @Override
+  public SNode getTypeOf_resolveMode(SNode node, TypeChecker typeChecker) {
+    return LanguageScopeExecutor.execWithModelScope(node.getModel(), () -> getTypechecking().computeTypesForNodeDuringResolving(node));
   }
 }

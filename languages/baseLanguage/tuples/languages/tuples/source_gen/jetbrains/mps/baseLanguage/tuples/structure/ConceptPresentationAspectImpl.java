@@ -4,45 +4,97 @@ package jetbrains.mps.baseLanguage.tuples.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_IndexedTupleLiteral = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IndexedTupleMemberAccessExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IndexedTupleType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_NamedTupleComponentAccessOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_NamedTupleComponentDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_NamedTupleComponentReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_NamedTupleDeclaration = new ConceptPresentationBuilder().icon(IconContainer.RESOURCE_a0a0g).create();
-  private final ConceptPresentation props_NamedTupleLiteral = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_NamedTupleType = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_IndexedTupleLiteral;
+  private ConceptPresentation props_IndexedTupleMemberAccessExpression;
+  private ConceptPresentation props_IndexedTupleType;
+  private ConceptPresentation props_NamedTupleComponentAccessOperation;
+  private ConceptPresentation props_NamedTupleComponentDeclaration;
+  private ConceptPresentation props_NamedTupleComponentReference;
+  private ConceptPresentation props_NamedTupleDeclaration;
+  private ConceptPresentation props_NamedTupleLiteral;
+  private ConceptPresentation props_NamedTupleType;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.IndexedTupleLiteral:
+        if (props_IndexedTupleLiteral == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("indexed tuple");
+          cpb.rawPresentation("[");
+          props_IndexedTupleLiteral = cpb.create();
+        }
         return props_IndexedTupleLiteral;
-      case 1:
+      case LanguageConceptSwitch.IndexedTupleMemberAccessExpression:
+        if (props_IndexedTupleMemberAccessExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("access tuple member by index");
+          cpb.rawPresentation("[");
+          props_IndexedTupleMemberAccessExpression = cpb.create();
+        }
         return props_IndexedTupleMemberAccessExpression;
-      case 2:
+      case LanguageConceptSwitch.IndexedTupleType:
+        if (props_IndexedTupleType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("indexed tuple type");
+          cpb.rawPresentation("[");
+          props_IndexedTupleType = cpb.create();
+        }
         return props_IndexedTupleType;
-      case 3:
+      case LanguageConceptSwitch.NamedTupleComponentAccessOperation:
+        if (props_NamedTupleComponentAccessOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xa247e09e243545baL, 0xb8d207e93feba96aL, 0x1209c84a4eaL, 0x1209c84fd08L, "component", "", "");
+          props_NamedTupleComponentAccessOperation = cpb.create();
+        }
         return props_NamedTupleComponentAccessOperation;
-      case 4:
+      case LanguageConceptSwitch.NamedTupleComponentDeclaration:
+        if (props_NamedTupleComponentDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_NamedTupleComponentDeclaration = cpb.create();
+        }
         return props_NamedTupleComponentDeclaration;
-      case 5:
+      case LanguageConceptSwitch.NamedTupleComponentReference:
+        if (props_NamedTupleComponentReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xa247e09e243545baL, 0xb8d207e93feba96aL, 0x1209b917141L, 0x1209b91a766L, "componentDeclaration", "", "");
+          props_NamedTupleComponentReference = cpb.create();
+        }
         return props_NamedTupleComponentReference;
-      case 6:
+      case LanguageConceptSwitch.NamedTupleDeclaration:
+        if (props_NamedTupleDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("Named tuple declaration");
+          cpb.presentationByName();
+          cpb.icon(IconContainer.RESOURCE_a0a3a0a6b0k);
+          props_NamedTupleDeclaration = cpb.create();
+        }
         return props_NamedTupleDeclaration;
-      case 7:
+      case LanguageConceptSwitch.NamedTupleLiteral:
+        if (props_NamedTupleLiteral == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("tuple literal");
+          cpb.presentationByReference(0xa247e09e243545baL, 0xb8d207e93feba96aL, 0x1209b88731cL, 0x1209b88b156L, "tupleDeclaration", "", " literal");
+          props_NamedTupleLiteral = cpb.create();
+        }
         return props_NamedTupleLiteral;
-      case 8:
+      case LanguageConceptSwitch.NamedTupleType:
+        if (props_NamedTupleType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("reference to named tuple declaration");
+          cpb.presentationByReference(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x101de48bf9eL, 0x101de490babL, "classifier", "", " type");
+          props_NamedTupleType = cpb.create();
+        }
         return props_NamedTupleType;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

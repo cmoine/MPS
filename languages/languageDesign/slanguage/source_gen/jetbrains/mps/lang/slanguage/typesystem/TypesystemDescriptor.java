@@ -15,5 +15,9 @@ public class TypesystemDescriptor extends BaseHelginsDescriptor {
       InferenceRule_Runtime inferenceRule = new typeof_Model_IsAspectOperation_InferenceRule();
       this.myInferenceRules.add(inferenceRule);
     }
+    {
+      InferenceRule_Runtime inferenceRule = new typeof_OfAspectOperation_InferenceRule();
+      this.myInferenceRules.add(inferenceRule);
+    }
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,8 @@
 package jetbrains.mps.idea.core.module;
 
 import jetbrains.mps.extapi.persistence.FileBasedModelRoot;
-import jetbrains.mps.extapi.persistence.FolderModelRootBase;
+import jetbrains.mps.extapi.persistence.SourceRoot;
+import jetbrains.mps.extapi.persistence.SourceRootKind;
 
 /**
  * evgeny, 12/22/12
@@ -28,25 +29,21 @@ public class CachedRepositoryUtil {
     StringBuilder sb = new StringBuilder();
     sb.append(modelRoot.getType());
     sb.append(":");
-    sb.append(modelRoot.getContentRoot());
-    for (String kind : modelRoot.getSupportedFileKinds()) {
+    sb.append(modelRoot.getContentDirectory());
+    for (SourceRootKind kind : modelRoot.getSupportedFileKinds1()) {
       sb.append(":");
       sb.append(kind);
       sb.append("=");
       boolean addSC = false;
-      for (String path : modelRoot.getFiles(kind)) {
+      for (SourceRoot sr : modelRoot.getSourceRoots(kind)) {
         if (addSC) {
           sb.append(";");
         } else {
           addSC = true;
         }
-        sb.append(path);
+        sb.append(sr.getAbsolutePath());
       }
     }
     return sb.toString();
-  }
-
-  public static String getSignature(FolderModelRootBase modelRoot) {
-    return modelRoot.getType() + ":" + modelRoot.getPath();
   }
 }

@@ -41,12 +41,12 @@ public class CacheGenLayout {
 
   public CacheGenLayout(@NotNull IMessageHandler messageHandler) {
     myMessageHandler = messageHandler;
-    myGenerators = new ArrayList<Pair<StreamHandler, CacheGenerator>>();
+    myGenerators = new ArrayList<>();
   }
 
   public CacheGenLayout register(@NotNull StreamHandler locationHandler, @Nullable CacheGenerator cg) {
     if (cg != null) {
-      myGenerators.add(new Pair<StreamHandler, CacheGenerator>(locationHandler, cg));
+      myGenerators.add(new Pair<>(locationHandler, cg));
     }
     return this;
   }

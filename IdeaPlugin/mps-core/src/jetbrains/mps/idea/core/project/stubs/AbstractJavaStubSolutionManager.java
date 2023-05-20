@@ -28,6 +28,7 @@ import jetbrains.mps.project.ModuleId;
 import jetbrains.mps.project.Solution;
 import jetbrains.mps.smodel.MPSModuleOwner;
 import jetbrains.mps.smodel.ModuleRepositoryFacade;
+import jetbrains.mps.vfs.VFSManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SRepository;
@@ -72,16 +73,23 @@ public abstract class AbstractJavaStubSolutionManager implements MPSModuleOwner,
     }
   }
 
-  protected Solution addSolution(Library library, SRepositoryExt repository) {
-    return StubSolutionIdea.newInstance(library, this, repository);
+  protected Solution addSolution(Library library, SRepositoryExt repository, @NotNull VFSManager vfsManager) {
+    try {
+      return StubSolutionIdea.newInstance(library, this, repository, vfsManager);
+    } catch (StubModuleNameTakenException e) {
+      handleModuleNameTaken(e);
+      return null;
+    }
   }
 
-  protected Solution addSolution(Sdk sdk, SRepositoryExt repository) {
-    return StubSolutionIdea.newInstance(sdk, null, this, repository);
+  protected abstract void handleModuleNameTaken(StubModuleNameTakenException exception);
+
+  protected Solution addSolution(Sdk sdk, SRepositoryExt repository, @NotNull VFSManager vfsManager) {
+    return StubSolutionIdea.newInstance(sdk, null, this, repository, vfsManager);
   }
 
-  protected Solution replaceJdkSolution(Sdk sdk, SRepositoryExt repository) {
-    return StubSolutionIdea.newInstanceForJdk(sdk, this, repository);
+  protected Solution replaceJdkSolution(Sdk sdk, SRepositoryExt repository, @NotNull VFSManager vfsManager) {
+    return StubSolutionIdea.newInstanceForJdk(sdk, this, repository, vfsManager);
   }
 
   protected void removeSolution(String name, SRepositoryExt repository) {

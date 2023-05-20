@@ -1,24 +1,12 @@
+/*
+ * Copyright 2000-2022 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+ */
 package jetbrains.mps.idea.core.refactoring;
 
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.search.searches.ReferencesSearch;
-import jetbrains.mps.ide.findusages.model.SearchResult;
 import jetbrains.mps.ide.findusages.model.SearchResults;
-import jetbrains.mps.ide.project.ProjectHelper;
-import jetbrains.mps.idea.core.psi.impl.MPSPsiNode;
-import jetbrains.mps.idea.core.psi.impl.MPSPsiProvider;
 import jetbrains.mps.refactoring.framework.IRefactoring;
 import jetbrains.mps.refactoring.framework.IRefactoringTarget;
 import jetbrains.mps.refactoring.framework.RefactoringContext;
-import org.jetbrains.mps.openapi.model.SModel;
-import org.jetbrains.mps.openapi.model.SNode;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
 
 /**
  * danilla 6/14/13
@@ -57,11 +45,6 @@ public class RefactoringWrapper implements IRefactoring {
   @Override
   public void refactor(RefactoringContext refactoringContext) {
     baseRefactoring.refactor(refactoringContext);
-  }
-
-  @Override
-  public List<SModel> getModelsToGenerate(RefactoringContext refactoringContext) {
-    return baseRefactoring.getModelsToGenerate(refactoringContext);
   }
 
   @Override

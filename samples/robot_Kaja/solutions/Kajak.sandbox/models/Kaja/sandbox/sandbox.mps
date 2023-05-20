@@ -5,6 +5,7 @@
     <use id="049a08c5-1fe5-43cc-bd99-8b46d641d7f5" name="jetbrains.mps.samples.Kaja" version="0" />
     <use id="44306fd2-ef94-4b56-9806-d9ab509536db" name="jetbrains.mps.samples.KajaAndOr" version="0" />
     <use id="b56912a3-674f-4530-b0cf-55261b526a1f" name="jetbrains.mps.samples.KajaSceneConstruction" version="0" />
+    <use id="c7fb639f-be78-4307-89b0-b5959c3fa8c8" name="jetbrains.mps.lang.text" version="0" />
   </languages>
   <imports />
   <registry>
@@ -16,21 +17,43 @@
       </concept>
     </language>
     <language id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core">
+      <concept id="1133920641626" name="jetbrains.mps.lang.core.structure.BaseConcept" flags="ng" index="2VYdi">
+        <child id="5169995583184591170" name="smodelAttribute" index="lGtFl" />
+      </concept>
       <concept id="1169194658468" name="jetbrains.mps.lang.core.structure.INamedConcept" flags="ng" index="TrEIO">
         <property id="1169194664001" name="name" index="TrG5h" />
       </concept>
+      <concept id="3717301156197626279" name="jetbrains.mps.lang.core.structure.BasePlaceholder" flags="ng" index="3DQ70j">
+        <child id="3717301156197626301" name="content" index="3DQ709" />
+      </concept>
+      <concept id="709746936026466394" name="jetbrains.mps.lang.core.structure.ChildAttribute" flags="ng" index="3VBwX9">
+        <property id="709746936026609031" name="linkId" index="3V$3ak" />
+        <property id="709746936026609029" name="role_DebugInfo" index="3V$3am" />
+      </concept>
+    </language>
+    <language id="c7fb639f-be78-4307-89b0-b5959c3fa8c8" name="jetbrains.mps.lang.text">
+      <concept id="155656958578482948" name="jetbrains.mps.lang.text.structure.Word" flags="nn" index="3oM_SD">
+        <property id="155656958578482949" name="value" index="3oM_SC" />
+        <property id="6328114375520539777" name="italic" index="1X82VY" />
+      </concept>
+      <concept id="2535923850359206929" name="jetbrains.mps.lang.text.structure.Text" flags="nn" index="1Pa9Pv">
+        <child id="2535923850359210936" name="lines" index="1PaQFQ" />
+      </concept>
+      <concept id="2535923850359271782" name="jetbrains.mps.lang.text.structure.Line" flags="nn" index="1PaTwC">
+        <child id="2535923850359271783" name="elements" index="1PaTwD" />
+      </concept>
     </language>
     <language id="049a08c5-1fe5-43cc-bd99-8b46d641d7f5" name="jetbrains.mps.samples.Kaja">
-      <concept id="3210697320273763054" name="jetbrains.mps.samples.Kaja.structure.TraceMessage" flags="ng" index="24IuFt">
+      <concept id="3210697320273763054" name="jetbrains.mps.samples.Kaja.structure.TraceMessage" flags="nn" index="24IuFt">
         <property id="3210697320273763055" name="message" index="24IuFs" />
       </concept>
       <concept id="4394627182934741782" name="jetbrains.mps.samples.Kaja.structure.Library" flags="ng" index="2zTg$P">
         <child id="4394627182934741783" name="definitions" index="2zTg$O" />
       </concept>
-      <concept id="4394627182934757449" name="jetbrains.mps.samples.Kaja.structure.Require" flags="ng" index="2zTGDE">
+      <concept id="4394627182934757449" name="jetbrains.mps.samples.Kaja.structure.Require" flags="nn" index="2zTGDE">
         <reference id="4394627182934757450" name="library" index="2zTGDD" />
       </concept>
-      <concept id="3308300503039700882" name="jetbrains.mps.samples.Kaja.structure.RoutineCall" flags="ng" index="2C11Tl">
+      <concept id="3308300503039700882" name="jetbrains.mps.samples.Kaja.structure.RoutineCall" flags="nn" index="2C11Tl">
         <reference id="3308300503039730636" name="definition" index="2C198b" />
       </concept>
       <concept id="3308300503039700857" name="jetbrains.mps.samples.Kaja.structure.RoutineDefinition" flags="ng" index="2C11UY">
@@ -41,11 +64,11 @@
       </concept>
       <concept id="3308300503039683644" name="jetbrains.mps.samples.Kaja.structure.West" flags="ng" index="2C15RV" />
       <concept id="3308300503039675723" name="jetbrains.mps.samples.Kaja.structure.South" flags="ng" index="2C17Mc" />
-      <concept id="3308300503039667424" name="jetbrains.mps.samples.Kaja.structure.While" flags="ng" index="2C1pOB">
+      <concept id="3308300503039667424" name="jetbrains.mps.samples.Kaja.structure.While" flags="nn" index="2C1pOB">
         <child id="3308300503039667427" name="body" index="2C1pO$" />
         <child id="3308300503039667426" name="condition" index="2C1pO_" />
       </concept>
-      <concept id="3308300503039660364" name="jetbrains.mps.samples.Kaja.structure.Repeat" flags="ng" index="2C1q2b">
+      <concept id="3308300503039660364" name="jetbrains.mps.samples.Kaja.structure.Repeat" flags="nn" index="2C1q2b">
         <property id="3308300503039660366" name="count" index="2C1q29" />
         <child id="3308300503039660367" name="body" index="2C1q28" />
       </concept>
@@ -53,35 +76,35 @@
         <child id="3308300503039654067" name="original" index="2C1s_O" />
       </concept>
       <concept id="3308300503039647788" name="jetbrains.mps.samples.Kaja.structure.IsWall" flags="ng" index="2C1t7F" />
-      <concept id="3308300503039647627" name="jetbrains.mps.samples.Kaja.structure.LeftTurn" flags="ng" index="2C1uTc" />
-      <concept id="3308300503039647678" name="jetbrains.mps.samples.Kaja.structure.IfStatement" flags="ng" index="2C1uTT">
+      <concept id="3308300503039647627" name="jetbrains.mps.samples.Kaja.structure.LeftTurn" flags="nn" index="2C1uTc" />
+      <concept id="3308300503039647678" name="jetbrains.mps.samples.Kaja.structure.IfStatement" flags="nn" index="2C1uTT">
         <child id="3308300503039647685" name="falseBranch" index="2C1uS2" />
         <child id="3308300503039647684" name="trueBranch" index="2C1uS3" />
         <child id="3308300503039647680" name="condition" index="2C1uS7" />
       </concept>
-      <concept id="3308300503039740438" name="jetbrains.mps.samples.Kaja.structure.EmptyLine" flags="ng" index="2C1RJh" />
-      <concept id="3308300503039896127" name="jetbrains.mps.samples.Kaja.structure.CommandList" flags="ng" index="2C6hJS">
+      <concept id="3308300503039740438" name="jetbrains.mps.samples.Kaja.structure.EmptyLine" flags="nn" index="2C1RJh" />
+      <concept id="3308300503039896127" name="jetbrains.mps.samples.Kaja.structure.CommandList" flags="nn" index="2C6hJS">
         <child id="3308300503039896128" name="commands" index="2C6hI7" />
       </concept>
-      <concept id="6405700485436120871" name="jetbrains.mps.samples.Kaja.structure.Drop" flags="ng" index="1b4w60" />
+      <concept id="6405700485436120871" name="jetbrains.mps.samples.Kaja.structure.Drop" flags="nn" index="1b4w60" />
       <concept id="6405700485436186598" name="jetbrains.mps.samples.Kaja.structure.IsMark" flags="ng" index="1b7g51" />
-      <concept id="6405700485436170013" name="jetbrains.mps.samples.Kaja.structure.Pick" flags="ng" index="1b7s6U" />
-      <concept id="6405700485436287811" name="jetbrains.mps.samples.Kaja.structure.CommentLine" flags="ng" index="1b7Vn$">
+      <concept id="6405700485436170013" name="jetbrains.mps.samples.Kaja.structure.Pick" flags="nn" index="1b7s6U" />
+      <concept id="6405700485436287811" name="jetbrains.mps.samples.Kaja.structure.CommentLine" flags="nn" index="1b7Vn$">
         <property id="6405700485436287813" name="text" index="1b7Vny" />
       </concept>
       <concept id="3265739055509559110" name="jetbrains.mps.samples.Kaja.structure.Script" flags="ng" index="1x_AGo">
         <child id="3265739055509559116" name="body" index="1x_AGi" />
       </concept>
-      <concept id="3265739055509559138" name="jetbrains.mps.samples.Kaja.structure.Step" flags="ng" index="1x_AGW" />
+      <concept id="3265739055509559138" name="jetbrains.mps.samples.Kaja.structure.Step" flags="nn" index="1x_AGW" />
       <concept id="859008965969439768" name="jetbrains.mps.samples.Kaja.structure.IsFull" flags="ng" index="1S$3K2" />
     </language>
     <language id="b56912a3-674f-4530-b0cf-55261b526a1f" name="jetbrains.mps.samples.KajaSceneConstruction">
-      <concept id="3210697320273608255" name="jetbrains.mps.samples.KajaSceneConstruction.structure.AbstractBuilderCommand" flags="ng" index="24I$Sc">
+      <concept id="3210697320273608255" name="jetbrains.mps.samples.KajaSceneConstruction.structure.AbstractBuilderCommand" flags="nn" index="24I$Sc">
         <property id="3210697320273608257" name="col" index="24I$TM" />
         <property id="3210697320273608256" name="row" index="24I$TN" />
       </concept>
-      <concept id="3210697320273608254" name="jetbrains.mps.samples.KajaSceneConstruction.structure.DropMark" flags="ng" index="24I$Sd" />
-      <concept id="3210697320273550864" name="jetbrains.mps.samples.KajaSceneConstruction.structure.BuildWall" flags="ng" index="24IESz" />
+      <concept id="3210697320273608254" name="jetbrains.mps.samples.KajaSceneConstruction.structure.DropMark" flags="nn" index="24I$Sd" />
+      <concept id="3210697320273550864" name="jetbrains.mps.samples.KajaSceneConstruction.structure.BuildWall" flags="nn" index="24IESz" />
     </language>
   </registry>
   <node concept="1x_AGo" id="2RDssu5WraF">
@@ -154,6 +177,13 @@
   <node concept="1x_AGo" id="6tmz5v65CF9">
     <property role="TrG5h" value="Sample" />
     <node concept="2C6hJS" id="6tmz5v65CFa" role="1x_AGi">
+      <node concept="1b7Vn$" id="gcRXCLB2uc" role="2C6hI7">
+        <property role="1b7Vny" value="This is just a sample robot script" />
+      </node>
+      <node concept="1b7Vn$" id="gcRXCLAWWg" role="2C6hI7">
+        <property role="1b7Vny" value="TODO Run and then play with the code" />
+      </node>
+      <node concept="2C1RJh" id="12TOPj2z62I" role="2C6hI7" />
       <node concept="1x_AGW" id="2Kq7O$TVPnw" role="2C6hI7" />
       <node concept="2C1pOB" id="2Kq7O$TVPoT" role="2C6hI7">
         <node concept="2C1s_R" id="2Kq7O$TVPpd" role="2C1pO_">
@@ -174,6 +204,48 @@
         </node>
       </node>
       <node concept="2C1RJh" id="2Kq7O$TVPps" role="2C6hI7" />
+      <node concept="3DQ70j" id="7lljTnB06he" role="lGtFl">
+        <property role="3V$3am" value="commands" />
+        <property role="3V$3ak" value="049a08c5-1fe5-43cc-bd99-8b46d641d7f5/3308300503039896127/3308300503039896128" />
+        <node concept="1Pa9Pv" id="7lljTnB06kQ" role="3DQ709">
+          <node concept="1PaTwC" id="7lljTnB06kR" role="1PaQFQ">
+            <node concept="3oM_SD" id="7lljTnB06n4" role="1PaTwD">
+              <property role="3oM_SC" value="This" />
+            </node>
+            <node concept="3oM_SD" id="7lljTnB06n6" role="1PaTwD">
+              <property role="3oM_SC" value="is" />
+            </node>
+            <node concept="3oM_SD" id="7lljTnB06oe" role="1PaTwD">
+              <property role="3oM_SC" value="a" />
+            </node>
+            <node concept="3oM_SD" id="7lljTnB06pn" role="1PaTwD">
+              <property role="3oM_SC" value="base" />
+            </node>
+            <node concept="3oM_SD" id="7lljTnB06rA" role="1PaTwD">
+              <property role="3oM_SC" value="placeholder" />
+            </node>
+            <node concept="3oM_SD" id="7lljTnB06w0" role="1PaTwD">
+              <property role="3oM_SC" value="holding" />
+            </node>
+            <node concept="3oM_SD" id="7lljTnB06yy" role="1PaTwD">
+              <property role="3oM_SC" value="text" />
+            </node>
+            <node concept="3oM_SD" id="7lljTnB06zJ" role="1PaTwD">
+              <property role="3oM_SC" value="as" />
+            </node>
+            <node concept="3oM_SD" id="7lljTnB06A2" role="1PaTwD">
+              <property role="3oM_SC" value="defined" />
+            </node>
+            <node concept="3oM_SD" id="7lljTnB06Bh" role="1PaTwD">
+              <property role="3oM_SC" value="by" />
+            </node>
+            <node concept="3oM_SD" id="7lljTnB06Bs" role="1PaTwD">
+              <property role="3oM_SC" value="j.m.lang.text" />
+              <property role="1X82VY" value="true" />
+            </node>
+          </node>
+        </node>
+      </node>
       <node concept="2C11UY" id="2Kq7O$TVPnA" role="2C6hI7">
         <property role="TrG5h" value="turn right" />
         <node concept="2C6hJS" id="2Kq7O$TVPnC" role="2C11UV">
@@ -577,7 +649,6 @@
         <ref role="2C198b" node="7ud7TTkOa9T" resolve="sniffAround" />
       </node>
       <node concept="2C1RJh" id="67X5Igz$lO9" role="2C6hI7" />
-      <node concept="2C1RJh" id="67X5IgzKgzY" role="2C6hI7" />
       <node concept="1b7Vn$" id="7ud7TTkO6MN" role="2C6hI7">
         <property role="1b7Vny" value="Definitions" />
       </node>

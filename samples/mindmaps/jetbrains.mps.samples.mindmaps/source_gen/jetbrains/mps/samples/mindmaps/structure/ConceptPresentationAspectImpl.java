@@ -4,36 +4,65 @@ package jetbrains.mps.samples.mindmaps.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_CoreThrought = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MindMap = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Relationship = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Specializes = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Thought = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_VisualBox = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_CoreThrought;
+  private ConceptPresentation props_MindMap;
+  private ConceptPresentation props_Relationship;
+  private ConceptPresentation props_Specializes;
+  private ConceptPresentation props_Thought;
+  private ConceptPresentation props_VisualBox;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.CoreThrought:
+        if (props_CoreThrought == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_CoreThrought = cpb.create();
+        }
         return props_CoreThrought;
-      case 1:
+      case LanguageConceptSwitch.MindMap:
+        if (props_MindMap == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_MindMap = cpb.create();
+        }
         return props_MindMap;
-      case 2:
+      case LanguageConceptSwitch.Relationship:
+        if (props_Relationship == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("relationship");
+          props_Relationship = cpb.create();
+        }
         return props_Relationship;
-      case 3:
+      case LanguageConceptSwitch.Specializes:
+        if (props_Specializes == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("Specializes");
+          props_Specializes = cpb.create();
+        }
         return props_Specializes;
-      case 4:
+      case LanguageConceptSwitch.Thought:
+        if (props_Thought == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Thought = cpb.create();
+        }
         return props_Thought;
-      case 5:
+      case LanguageConceptSwitch.VisualBox:
+        if (props_VisualBox == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_VisualBox = cpb.create();
+        }
         return props_VisualBox;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Kotlin2JvmCompilerArguments">
+    <!--
+      Compilation target should ideally be the same as the one from build scripts (if we have a difference, things
+      may compile locally but not on the build server).
+
+      For inline functions compiled with an higher JDK version: a workaround is to inline it manually (get source
+      code of the function and paste it into your code)
+     -->
+    <option name="jvmTarget" value="11" />
+  </component>
+</project>

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="2x0j1er0n6qi16grno3h4pp87aaoyaq" />
+<product version="3" modelHash="-dip4l3sfe70ctz3gfy3x8c8035dd12u">
+  <files names="EditorResolver.java:EditorResolverComponent.java" />
+</product>
 

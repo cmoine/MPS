@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,17 +15,22 @@
  */
 package jetbrains.mps.text.impl;
 
-import jetbrains.mps.components.ComponentPluginBase;
+import jetbrains.mps.components.ComponentHost;
+import jetbrains.mps.components.ComponentPlugin;
+import jetbrains.mps.components.CoreComponent;
 import jetbrains.mps.smodel.language.LanguageRegistry;
+import jetbrains.mps.text.TextGenSettings;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Plug TextGen-related stuff into MPS platform
  * @author Artem Tikhomirov
  * @since 3.4
  */
-public class MPSTextGenerator extends ComponentPluginBase {
+public class MPSTextGenerator extends ComponentPlugin implements ComponentHost {
   private final LanguageRegistry myLanguageRegistry;
+  private TextGenSettings mySettings;
 
   public MPSTextGenerator(@NotNull LanguageRegistry languageRegistry) {
     myLanguageRegistry = languageRegistry;
@@ -35,5 +40,21 @@ public class MPSTextGenerator extends ComponentPluginBase {
   public void init() {
     super.init();
     init(new TextGenRegistry(myLanguageRegistry));
+    mySettings = init(new TextGenSettings());
   }
+
+  @Override
+  public void dispose() {
+    super.dispose();
+    mySettings = null;
+  }
+
+  @Nullable
+  @Override
+  public <T extends CoreComponent> T findComponent(@NotNull Class<T> componentClass) {
+    if (componentClass == TextGenSettings.class) {
+      return componentClass.cast(mySettings);
+    }
+    return null;
+  };
 }

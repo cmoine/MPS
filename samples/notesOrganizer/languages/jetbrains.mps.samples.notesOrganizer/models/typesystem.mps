@@ -2,8 +2,7 @@
 <model ref="r:06486389-aaa0-4ecf-844a-5856289c120b(jetbrains.mps.samples.notesOrganizer.typesystem)">
   <persistence version="9" />
   <languages>
-    <use id="7a5dda62-9140-4668-ab76-d5ed1746f2b2" name="jetbrains.mps.lang.typesystem" version="0" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="00000000-0000-4000-0000-1de82b3a4936(jetbrains.mps.devkit.aspect.typesystem)" />
   </languages>
   <imports>
     <import index="g4p9" ref="r:d80ddecc-25d5-4844-86af-49ea7b4962af(jetbrains.mps.samples.notesOrganizer.structure)" implicit="true" />
@@ -37,13 +36,13 @@
       <concept id="1175517767210" name="jetbrains.mps.lang.typesystem.structure.ReportErrorStatement" flags="nn" index="2MkqsV">
         <child id="1175517851849" name="errorString" index="2MkJ7o" />
       </concept>
-      <concept id="1227096774658" name="jetbrains.mps.lang.typesystem.structure.MessageStatement" flags="ng" index="2OEH$v">
-        <child id="1227096802790" name="nodeToReport" index="2OEOjV" />
-      </concept>
       <concept id="1195213580585" name="jetbrains.mps.lang.typesystem.structure.AbstractCheckingRule" flags="ig" index="18hYwZ">
         <child id="1195213635060" name="body" index="18ibNy" />
       </concept>
       <concept id="1195214364922" name="jetbrains.mps.lang.typesystem.structure.NonTypesystemRule" flags="ig" index="18kY7G" />
+      <concept id="3937244445246642777" name="jetbrains.mps.lang.typesystem.structure.AbstractReportStatement" flags="ng" index="1urrMJ">
+        <child id="3937244445246642781" name="nodeToReport" index="1urrMF" />
+      </concept>
       <concept id="1174642788531" name="jetbrains.mps.lang.typesystem.structure.ConceptReference" flags="ig" index="1YaCAy">
         <reference id="1174642800329" name="concept" index="1YaFvo" />
       </concept>
@@ -55,9 +54,12 @@
       </concept>
     </language>
     <language id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel">
+      <concept id="1177026924588" name="jetbrains.mps.lang.smodel.structure.RefConcept_Reference" flags="nn" index="chp4Y">
+        <reference id="1177026940964" name="conceptDeclaration" index="cht4Q" />
+      </concept>
       <concept id="1143234257716" name="jetbrains.mps.lang.smodel.structure.Node_GetModelOperation" flags="nn" index="I4A8Y" />
       <concept id="1171315804604" name="jetbrains.mps.lang.smodel.structure.Model_RootsOperation" flags="nn" index="2RRcyG">
-        <reference id="1171315804605" name="concept" index="2RRcyH" />
+        <child id="6750920497477046361" name="conceptArgument" index="3MHsoP" />
       </concept>
     </language>
     <language id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core">
@@ -75,11 +77,11 @@
       <node concept="3clFbJ" id="7IxbKGmfSvo" role="3cqZAp">
         <node concept="3clFbS" id="7IxbKGmfSvQ" role="3clFbx">
           <node concept="2MkqsV" id="7IxbKGmfSzp" role="3cqZAp">
-            <node concept="1YBJjd" id="7IxbKGmfS_w" role="2OEOjV">
-              <ref role="1YBMHb" node="7IxbKGmfPFO" resolve="notesConfiguration" />
-            </node>
             <node concept="Xl_RD" id="7IxbKGmfSz_" role="2MkJ7o">
               <property role="Xl_RC" value="Only one notes configuration is allowed in a model" />
+            </node>
+            <node concept="1YBJjd" id="7IxbKGmfS_w" role="1urrMF">
+              <ref role="1YBMHb" node="7IxbKGmfPFO" resolve="notesConfiguration" />
             </node>
           </node>
         </node>
@@ -96,7 +98,9 @@
                 <node concept="I4A8Y" id="7IxbKGmfVVM" role="2OqNvi" />
               </node>
               <node concept="2RRcyG" id="7IxbKGmfW7y" role="2OqNvi">
-                <ref role="2RRcyH" to="g4p9:7IxbKGmfht5" resolve="NotesConfiguration" />
+                <node concept="chp4Y" id="5QK5AMJp7z9" role="3MHsoP">
+                  <ref role="cht4Q" to="g4p9:7IxbKGmfht5" resolve="NotesConfiguration" />
+                </node>
               </node>
             </node>
             <node concept="34oBXx" id="7IxbKGmfYEl" role="2OqNvi" />

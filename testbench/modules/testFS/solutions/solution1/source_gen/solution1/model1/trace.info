@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<debug-info>
+<debug-info version="2">
   <root nodeRef="r:993734df-0ef7-4534-ae14-3c557c798d3e(solution1.model1)/6592725009664585594">
     <file name="Main.java">
       <unit id="6592725009664585594" at="6,0,8,0" name="solution1.model1.Main" />

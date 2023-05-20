@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,19 +15,18 @@
  */
 package jetbrains.mps.ide.navigation;
 
-import jetbrains.mps.openapi.navigation.NavigationSupport;
+import jetbrains.mps.openapi.navigation.EditorNavigator;
 import jetbrains.mps.project.Project;
-import org.apache.log4j.LogManager;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeReference;
+
+import java.util.Objects;
 
 /**
  * evgeny, 11/6/11
  */
 public class NodeNavigatable extends BaseNavigatable {
-
-  private SNodeReference myNodePointer;
+  private final SNodeReference myNodePointer;
 
   public NodeNavigatable(@NotNull Project project, @NotNull SNodeReference nodePointer) {
     super(project);
@@ -35,17 +34,30 @@ public class NodeNavigatable extends BaseNavigatable {
   }
 
   @Override
-  public void doNavigate(final boolean focus) {
-    SNode node = myNodePointer.resolve(myProject.getRepository());
-    if (node == null) {
-      LogManager.getLogger(NodeNavigatable.class).info("clicked node was deleted");
-      return;
-    }
-
-    NavigationSupport.getInstance().openNode(myProject, node, focus, !(node.getModel() != null && node.getParent() == null));
+  public void navigate(boolean focus) {
+    new EditorNavigator(myProject).shallFocus(focus).selectIfChild().open(myNodePointer);
   }
 
-  public SNodeReference getNodePointer() {
+  @Override
+  public int hashCode() {
+    return myNodePointer.hashCode();
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj instanceof NodeNavigatable) {
+      return Objects.equals(myNodePointer, ((NodeNavigatable) obj).myNodePointer);
+    }
+    return false;
+  }
+
+  @Override
+  public String toString() {
+    return "NodeNavigatable[" + myNodePointer + "]";
+  }
+
+  @NotNull
+  public final SNodeReference getNodePointer() {
     return myNodePointer;
   }
 }

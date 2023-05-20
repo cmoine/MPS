@@ -28,14 +28,16 @@ public class ExtendedNamedTuples {
       return super._1();
     }
   }
-  public static class Bar extends ExtendedNamedTuples.Foo implements Tuples._4<Integer, String, String, Double> {
-    private MultiTuple._2<String, Double> tuple;
+  public static class Bar extends Foo implements Tuples._4<Integer, String, String, Double> {
+    private final Tuples._2<String, Double> tuple;
+
     public Bar() {
       super();
+      this.tuple = MultiTuple.<String,Double>empty2();
     }
     public Bar(Integer num, String str, String id, Double size) {
       super(num, str);
-      this.tuple = new MultiTuple._2<String, Double>(id, size);
+      this.tuple = MultiTuple.<String,Double>from(id, size);
     }
     public String id(String value) {
       return this._2(value);
@@ -63,23 +65,26 @@ public class ExtendedNamedTuples {
     }
     public Tuples._3<Integer, String, String> assign(Tuples._3<? extends Integer, ? extends String, ? extends String> from) {
       super.assign(from);
-      tuple.assign(from._2());
+      tuple._0(from._2());
       return this;
     }
     public Tuples._4<Integer, String, String, Double> assign(Tuples._4<? extends Integer, ? extends String, ? extends String, ? extends Double> from) {
       super.assign(from);
-      tuple.assign(from._2(), from._3());
+      tuple._0(from._2());
+      tuple._1(from._3());
       return this;
     }
   }
-  public static class Qux extends ExtendedNamedTuples.Bar implements Tuples._5<Integer, String, String, Double, String> {
-    private MultiTuple._1<String> tuple;
+  public static class Qux extends Bar implements Tuples._5<Integer, String, String, Double, String> {
+    private final Tuples._1<String> tuple;
+
     public Qux() {
       super();
+      this.tuple = MultiTuple.<String>empty1();
     }
     public Qux(Integer num, String str, String id, Double size, String field) {
       super(num, str, id, size);
-      this.tuple = new MultiTuple._1<String>(field);
+      this.tuple = MultiTuple.<String>from(field);
     }
     public String field(String value) {
       return this._4(value);
@@ -95,7 +100,7 @@ public class ExtendedNamedTuples {
     }
     public Tuples._5<Integer, String, String, Double, String> assign(Tuples._5<? extends Integer, ? extends String, ? extends String, ? extends Double, ? extends String> from) {
       super.assign(from);
-      tuple.assign(from._4());
+      tuple._0(from._4());
       return this;
     }
   }

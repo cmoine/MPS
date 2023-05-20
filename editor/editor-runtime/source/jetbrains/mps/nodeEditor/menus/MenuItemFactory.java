@@ -18,7 +18,6 @@ package jetbrains.mps.nodeEditor.menus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface MenuItemFactory<ItemT, ContextT, MenuLookupT> {
   @NotNull

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="ant-mps">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/mps-core/lib/ant/lib" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../core/tool/common/source_gen" />
+      <root url="file://$PROJECT_DIR$/../core/tool/ant/source_gen" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/mps-core/lib/ant/lib" recursive="false" />
+  </library>
+</component>

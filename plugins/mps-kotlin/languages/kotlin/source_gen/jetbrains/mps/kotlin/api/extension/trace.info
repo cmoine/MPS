@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <root nodeRef="r:4d5ec8ef-7006-453c-a8cf-f9897337b08c(jetbrains.mps.kotlin.api.extension)/9149616139757575645">
+    <file name="KotlinTypesystem.java">
+      <node id="9149616139757588010" at="22,0,23,0" concept="0" trace="selectOverloadCandidate#(Ljetbrains/mps/kotlin/overloading/FunctionCall;Ljava/lang/Iterable;Lorg/jetbrains/mps/openapi/model/SNode;Ljava/lang/Iterable;)Ljetbrains/mps/baseLanguage/tuples/runtime/Tuples/_3;" />
+      <node id="3877099508397602254" at="35,0,36,0" concept="0" trace="filterReceiverTypes#(Lorg/jetbrains/mps/openapi/model/SNode;Ljava/lang/Iterable;Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/util/List;" />
+      <node id="2302063215241664775" at="43,72,44,16" concept="1" />
+      <node id="8952006656352070150" at="50,0,51,0" concept="0" trace="isAvailable#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="6053822427826023331" at="42,0,46,0" concept="0" trace="getIntermediateType#(Lorg/jetbrains/mps/openapi/model/SNode;Ljava/lang/Object;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <scope id="9149616139757588010" at="22,0,23,0">
+        <var name="call" id="9149616139757610858" />
+        <var name="candidates" id="9149616139757588852" />
+        <var name="computedReceiverType" id="6342719664762794722" />
+        <var name="contextNode" id="8492840566265279571" />
+      </scope>
+      <scope id="3877099508397602254" at="35,0,36,0">
+        <var name="contextNode" id="5146977860607004739" />
+        <var name="entries" id="3877099508397602593" />
+        <var name="receiverType" id="3002995847782492872" />
+      </scope>
+      <scope id="6053822427826023332" at="43,72,44,16" />
+      <scope id="8952006656352070150" at="50,0,51,0">
+        <var name="contextNode" id="8952006656352106313" />
+      </scope>
+      <scope id="6053822427826023331" at="42,0,46,0">
+        <var name="key" id="6053822427826024093" />
+        <var name="target" id="6053822427826024547" />
+      </scope>
+      <unit id="9149616139757575645" at="16,0,53,0" name="jetbrains.mps.kotlin.api.extension.KotlinTypesystem" />
+    </file>
+  </root>
+</debug-info>
+

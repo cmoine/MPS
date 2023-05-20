@@ -6,6 +6,7 @@ import jetbrains.mps.errors.QuickFix_Runtime;
 import jetbrains.mps.smodel.SNodePointer;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class SetConstructorDeclaration_QuickFix extends QuickFix_Runtime {
@@ -16,6 +17,10 @@ public class SetConstructorDeclaration_QuickFix extends QuickFix_Runtime {
     return "set constructor declaration";
   }
   public void execute(SNode node) {
-    SLinkOperations.setTarget(((SNode) SetConstructorDeclaration_QuickFix.this.getField("constructorInvocation")[0]), MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x11857355952L, 0xf8c78301adL, "baseMethodDeclaration"), ((SNode) SetConstructorDeclaration_QuickFix.this.getField("constructorDeclaration")[0]));
+    SLinkOperations.setTarget(((SNode) SetConstructorDeclaration_QuickFix.this.getField("constructorInvocation")[0]), LINKS.baseMethodDeclaration$pyYw, ((SNode) SetConstructorDeclaration_QuickFix.this.getField("constructorDeclaration")[0]));
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SReferenceLink baseMethodDeclaration$pyYw = MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x11857355952L, 0xf8c78301adL, "baseMethodDeclaration");
   }
 }

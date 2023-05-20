@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="8qnh39f1w4h31k64bliwtya47osit62">
+  <files names="ConstraintsAspectDescriptor.java:Container_Constraints.java:DelTestChildWithSmartReference_Constraints.java:DelTestChildWithUsualReference_Constraints.java:NotEditableVarableReference_Constraints.java:SmartCompletionParent_Constraints.java:SmartCompletionSimpleRef_Constraints.java:SmartCompletionSmartRef_Constraints.java:SubstTestAbstractChild_WithDefaultConcreteConcept_Constraints.java:VariableDeclarationReference_Constraints.java" />
+</product>
+

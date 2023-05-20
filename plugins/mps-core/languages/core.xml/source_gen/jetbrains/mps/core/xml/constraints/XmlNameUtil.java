@@ -32,19 +32,19 @@ public class XmlNameUtil {
    */
   public static boolean isNameStartChar(int c) {
     if (c < 0xC0) {
-      // ":" | [A-Z] | "_" | [a-z] 
+      // ":" | [A-Z] | "_" | [a-z]
       return c == ':' || c == '_' || c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z';
     } else if (c < 0x300) {
-      // [#xC0-#xD6] | [#xD8-#xF6] | [#xF8-#x2FF] 
+      // [#xC0-#xD6] | [#xD8-#xF6] | [#xF8-#x2FF]
       return c != 0xD7 && c != 0xF7;
     } else if (c < 0x2000) {
-      // [#x370-#x37D] | [#x37F-#x1FFF] 
+      // [#x370-#x37D] | [#x37F-#x1FFF]
       return c >= 0x370 && c != 0x37e;
     } else if (c < 0xE000) {
-      // [#x200C-#x200D] | [#x2070-#x218F] | [#x2C00-#x2FEF] | [#x3001-#xD7FF] 
+      // [#x200C-#x200D] | [#x2070-#x218F] | [#x2C00-#x2FEF] | [#x3001-#xD7FF]
       return c >= 0x200c && c <= 0x200d || c >= 0x2070 && c <= 0x218f || c >= 0x2c00 && c <= 0x2fef || c >= 0x3001 && c <= 0xd7ff;
     } else {
-      // [#xF900-#xFDCF] | [#xFDF0-#xFFFD] | [#x10000-#xEFFFF] 
+      // [#xF900-#xFDCF] | [#xFDF0-#xFFFD] | [#x10000-#xEFFFF]
       return c >= 0xf900 && c <= 0xfdcf || c >= 0xfdf0 && c <= 0xfffd || c >= 0x10000 && c <= 0xeffff;
     }
   }
@@ -56,12 +56,12 @@ public class XmlNameUtil {
    */
   public static boolean isNameChar(int c) {
     if (c < 0x100) {
-      // "-" | "." | [0-9] | #xB7 
+      // "-" | "." | [0-9] | #xB7
       if (c == '.' || c == '-' || c >= '0' && c <= '9' || c == 0xb7) {
         return true;
       }
     } else {
-      // [#x0300-#x036F] | [#x203F-#x2040] 
+      // [#x0300-#x036F] | [#x203F-#x2040]
       if (c >= 0x300 && c <= 0x36f || c >= 0x203f && c <= 0x2040) {
         return true;
       }
@@ -88,10 +88,10 @@ public class XmlNameUtil {
    */
   public static boolean isXmlChar(int c) {
     if (c < 0xe000) {
-      // #x9 | #xA | #xD | [#x20-#xD7FF] 
+      // #x9 | #xA | #xD | [#x20-#xD7FF]
       return c == 0x9 || c == 0xa || c == 0xd || c >= 0x20 && c <= 0xd7ff;
     } else {
-      // [#xE000-#xFFFD] | [#x10000-#x10FFFF] 
+      // [#xE000-#xFFFD] | [#x10000-#x10FFFF]
       return c <= 0xfffd || c >= 0x10000 && c <= 0x10FFFF;
     }
   }
@@ -111,7 +111,7 @@ public class XmlNameUtil {
    * Token "CharData"
    */
   public static boolean isCharData(String s) {
-    // CharData ::= [^<&]* - ([^<&]* ']]>' [^<&]*) 
+    // CharData ::= [^<&]* - ([^<&]* ']]>' [^<&]*)
     if (s.indexOf('<') >= 0 || s.indexOf('&') >= 0 || s.contains("]]>")) {
       return false;
     }
@@ -123,7 +123,7 @@ public class XmlNameUtil {
    * Empty string is allowed
    */
   public static boolean isWhitespace(String s) {
-    // S ::=   \t(#x20 | #x9 | #xD | #xA)+ 
+    // S ::=   \t(#x20 | #x9 | #xD | #xA)+
     for (int i = 0; i < s.length(); i++) {
       int c = s.codePointAt(i);
       if (c != 0x20 && c != 0x9 && c != 0xa && c != 0xd) {
@@ -207,15 +207,15 @@ public class XmlNameUtil {
     if (c <= 0x20) {
       return c == 0x20 || c == 0xD || c == 0xA;
     }
-    // [0-9] 
+    // [0-9]
     if (c >= 0x30 && c <= 0x39) {
       return true;
     }
-    // [A-Z] 
+    // [A-Z]
     if (c >= 0x41 && c <= 0x5A) {
       return true;
     }
-    // [a-z] 
+    // [a-z]
     if (c >= 0x61 && c <= 0x7A) {
       return true;
     }
@@ -246,7 +246,7 @@ public class XmlNameUtil {
   public static boolean isValidCharRef(String charRef) {
     int charCode = 0;
     if (charRef.startsWith("x")) {
-      // '&#x' [0-9a-fA-F]+ 
+      // '&#x' [0-9a-fA-F]+
       if (charRef.length() > 8 || charRef.length() < 2) {
         return false;
       }
@@ -264,7 +264,7 @@ public class XmlNameUtil {
         charCode = (charCode << 4) + c;
       }
     } else {
-      // '&#' [0-9]+ 
+      // '&#' [0-9]+
       if (charRef.length() > 9 || charRef.length() < 1) {
         return false;
       }

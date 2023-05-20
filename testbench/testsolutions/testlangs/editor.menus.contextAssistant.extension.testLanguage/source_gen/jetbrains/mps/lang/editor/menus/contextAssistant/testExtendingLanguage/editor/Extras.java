@@ -9,9 +9,11 @@ import java.util.HashSet;
 import jetbrains.mps.editor.contextActionsTool.lang.menus.runtime.MenuLocations;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
-import jetbrains.mps.lang.editor.menus.MenuPart;
 import jetbrains.mps.openapi.editor.menus.transformation.TransformationMenuItem;
 import jetbrains.mps.openapi.editor.menus.transformation.TransformationMenuContext;
+import jetbrains.mps.lang.editor.menus.EditorMenuDescriptorBase;
+import jetbrains.mps.smodel.SNodePointer;
+import jetbrains.mps.lang.editor.menus.MenuPart;
 import java.util.ArrayList;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.editor.menus.extras.runtime.RefactoringMenuPartBase;
@@ -22,8 +24,9 @@ import jetbrains.mps.smodel.runtime.IconResource;
 import jetbrains.mps.lang.editor.menus.extras.runtime.PluginActionMenuPartBase;
 import com.intellij.openapi.actionSystem.AnAction;
 import jetbrains.mps.lang.editor.menus.extras.runtime.PluginActionMenuItemBase;
-import jetbrains.mps.lang.editor.menus.extras.runtime.IntentionMenuPartBase;
-import jetbrains.mps.intentions.IntentionExecutable;
+import jetbrains.mps.lang.editor.menus.extras.runtime.AbstractIntentionMenuPart;
+import jetbrains.mps.openapi.intentions.IntentionExecutable;
+import jetbrains.mps.openapi.editor.menus.EditorMenuTraceInfo;
 
 public class Extras extends TransformationMenuBase {
   public Extras() {
@@ -35,26 +38,38 @@ public class Extras extends TransformationMenuBase {
     return SetSequence.fromSet(myLocations).contains(location);
   }
 
+  @NotNull
+  @Override
+  public List<TransformationMenuItem> createMenuItems(@NotNull TransformationMenuContext context) {
+    context.getEditorMenuTrace().pushTraceInfo();
+    context.getEditorMenuTrace().setDescriptor(new EditorMenuDescriptorBase("contribution to the " + "default transformation menu for " + "Child", new SNodePointer("r:1ed8add9-1a05-4a2d-a8ee-1a24e378c5f6(jetbrains.mps.lang.editor.menus.contextAssistant.testExtendingLanguage.editor)", "2468431357009903065")));
+    try {
+      return super.createMenuItems(context);
+    } finally {
+      context.getEditorMenuTrace().popTraceInfo();
+    }
+  }
+
   @Override
   @NotNull
   protected List<MenuPart<TransformationMenuItem, TransformationMenuContext>> getParts(TransformationMenuContext _context) {
     List<MenuPart<TransformationMenuItem, TransformationMenuContext>> result = new ArrayList<MenuPart<TransformationMenuItem, TransformationMenuContext>>();
     if (ListSequence.fromListAndArray(new ArrayList<String>(), MenuLocations.CONTEXT_ACTIONS_TOOL).contains(_context.getMenuLocation())) {
-      result.add(new Extras.TransformationMenuPart_Refactoring_ha3uwx_a0());
-      result.add(new Extras.TransformationMenuPart_PluginAction_ha3uwx_b0());
-      result.add(new Extras.TransformationMenuPart_Intention_ha3uwx_c0());
+      result.add(new TMP_Refactoring_ha3uwx_a0());
+      result.add(new TMP_PluginAction_ha3uwx_b0());
+      result.add(new TMP_Intention_ha3uwx_c0());
     }
     return result;
   }
 
-  public class TransformationMenuPart_Refactoring_ha3uwx_a0 extends RefactoringMenuPartBase {
-    public TransformationMenuPart_Refactoring_ha3uwx_a0() {
+  public class TMP_Refactoring_ha3uwx_a0 extends RefactoringMenuPartBase {
+    public TMP_Refactoring_ha3uwx_a0() {
       super("jetbrains.mps.lang.editor.menus.contextAssistant.testLanguage.refactorings.AppendOneToName");
     }
 
     @Override
     protected TransformationMenuItem createItem(@NotNull TransformationMenuContext context, @NotNull IRefactoring refactoring) {
-      return new Extras.TransformationMenuPart_Refactoring_ha3uwx_a0.Item(context, refactoring);
+      return new Item(context, refactoring);
     }
 
     private class Item extends RefactoringMenuItemBase implements SidebarActionItem {
@@ -64,7 +79,7 @@ public class Extras extends TransformationMenuBase {
 
       @Override
       public IconResource getIcon() {
-        return IconContainer.RESOURCE_a0a2e6;
+        return IconContainer.RESOURCE_a0a2e8;
       }
       @Override
       public String getTooltipText() {
@@ -72,14 +87,14 @@ public class Extras extends TransformationMenuBase {
       }
     }
   }
-  public class TransformationMenuPart_PluginAction_ha3uwx_b0 extends PluginActionMenuPartBase {
-    public TransformationMenuPart_PluginAction_ha3uwx_b0() {
+  public class TMP_PluginAction_ha3uwx_b0 extends PluginActionMenuPartBase {
+    public TMP_PluginAction_ha3uwx_b0() {
       super("jetbrains.mps.ide.actions.ShowBookmarksDialog_Action");
     }
 
     @Override
     protected TransformationMenuItem createItem(@NotNull TransformationMenuContext context, @NotNull AnAction action) {
-      return new Extras.TransformationMenuPart_PluginAction_ha3uwx_b0.Item(context, action);
+      return new Item(context, action);
     }
 
     private class Item extends PluginActionMenuItemBase implements SidebarActionItem {
@@ -89,7 +104,7 @@ public class Extras extends TransformationMenuBase {
 
       @Override
       public IconResource getIcon() {
-        return IconContainer.RESOURCE_a0a2e7;
+        return IconContainer.RESOURCE_a0a2e9;
       }
       @Override
       public String getTooltipText() {
@@ -97,21 +112,33 @@ public class Extras extends TransformationMenuBase {
       }
     }
   }
-  public class TransformationMenuPart_Intention_ha3uwx_c0 extends IntentionMenuPartBase {
-    public TransformationMenuPart_Intention_ha3uwx_c0() {
+  public class TMP_Intention_ha3uwx_c0 extends AbstractIntentionMenuPart {
+    public TMP_Intention_ha3uwx_c0() {
       super("jetbrains.mps.lang.editor.menus.contextAssistant.testLanguage.intentions.AddLetterToName_Intention");
     }
 
     @Override
     protected TransformationMenuItem createItem(@NotNull TransformationMenuContext context, @NotNull IntentionExecutable executable) {
-      return new Extras.TransformationMenuPart_Intention_ha3uwx_c0.Item(context, executable);
+      context.getEditorMenuTrace().pushTraceInfo();
+      context.getEditorMenuTrace().setDescriptor(new EditorMenuDescriptorBase("intention transformation menu part: " + "AddLetterToName", new SNodePointer("r:1ed8add9-1a05-4a2d-a8ee-1a24e378c5f6(jetbrains.mps.lang.editor.menus.contextAssistant.testExtendingLanguage.editor)", "2468431357009934542")));
+      try {
+        return new Item(context, executable);
+      } finally {
+        context.getEditorMenuTrace().popTraceInfo();
+      }
     }
 
-    private class Item extends IntentionMenuPartBase.ItemBase implements SidebarActionItem {
+    private class Item extends AbstractIntentionMenuPart.ItemBase implements SidebarActionItem {
+      private EditorMenuTraceInfo myTraceInfo;
       private Item(TransformationMenuContext context, IntentionExecutable executable) {
         super(context, executable);
+        this.myTraceInfo = context.getEditorMenuTrace().getTraceInfo();
       }
 
+      @Override
+      public EditorMenuTraceInfo getTraceInfo() {
+        return myTraceInfo;
+      }
       @Override
       public IconResource getIcon() {
         return null;

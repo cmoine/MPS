@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@ package jetbrains.mps.nodeEditor.leftHighlighter;
 
 import com.intellij.openapi.editor.colors.EditorColors;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
+import jetbrains.mps.nodeEditor.EditorSettings;
 import jetbrains.mps.openapi.editor.EditorComponent;
 import jetbrains.mps.openapi.editor.cells.CellInfo;
 import jetbrains.mps.openapi.editor.cells.CellTraversalUtil;
@@ -35,56 +36,75 @@ import java.awt.Graphics;
  * Date: 02.03.2010
  */
 class FoldingButton {
-  public static final int HALF_WIDTH = 4;
-  private static final int HEIGHT = HALF_WIDTH * 5 / 2;
+  static final int HALF_WIDTH = 4;
+  static final int HEIGHT = HALF_WIDTH * 5 / 2;
   private static final int CANT_HEIGHT = HALF_WIDTH * 3 / 2;
 
-  private CellInfo myCellInfo;
-  private EditorComponent myEditor;
+  private final CellInfo myCellInfo;
+  private final EditorComponent myEditor;
   private int myY1;
   private int myY2;
   private boolean myIsHidden = false;
   private boolean myIsFolded = false;
   private boolean myMouseOver = false;
-  private Color myBackgroundColor;
+  private boolean myTopCovered = false;
+  private boolean myBottomCovered = false;
 
-  FoldingButton(@NotNull EditorCell_Collection cell, @NotNull Color background) {
-    //TODO: Can we hold cell directly instad of CellInfo here?
+  FoldingButton(@NotNull EditorCell_Collection cell) {
+    //TODO: Can we hold cell directly instead of CellInfo here?
     myCellInfo = cell.getCellInfo();
-    assert myCellInfo != null : "CellInfo unavailable for: " + cell;
     myEditor = cell.getEditorComponent();
-    myBackgroundColor = background;
   }
 
+  /**
+   * @return true if the button should be removed from the navigation bar
+   */
   boolean relayout() {
     EditorCell cell = getCell();
     if (cell == null) {
       myIsHidden = true;
+      return false;
+    }
+    if (!(cell instanceof EditorCell_Collection)) {
       return true;
     }
-    if (cell instanceof EditorCell_Collection) {
-      EditorCell_Collection collectionCell = (EditorCell_Collection) cell;
-      myIsHidden = CellTraversalUtil.getFoldedParent(collectionCell) != null;
-      if (!myIsHidden) {
-        myIsFolded = collectionCell.isCollapsed();
-        EditorCell firstLeafCell = CellTraversalUtil.getFirstLeaf(collectionCell);
-        myY1 = firstLeafCell != null ? firstLeafCell.getBaseline() - HEIGHT : collectionCell.getBaseline() - HEIGHT;
-        EditorCell lastLeafCell = CellTraversalUtil.getLastLeaf(collectionCell);
-        myY2 = lastLeafCell != null ? CellTraversalUtil.getLastLeaf(collectionCell).getBaseline() : collectionCell.getBaseline();
-        if (!myIsFolded && myY2 - myY1 < 2 * HEIGHT) {
-          // to avoid overlapping folding buttons
-          myIsHidden = true;
-        }
+    EditorCell_Collection collectionCell = (EditorCell_Collection) cell;
+    myIsHidden = CellTraversalUtil.getFoldedParent(collectionCell) != null;
+    if (!myIsHidden) {
+      myTopCovered = myBottomCovered = false;
+      EditorCell firstLeafCell = CellTraversalUtil.getFirstLeaf(collectionCell);
+      EditorCell lastLeafCell = CellTraversalUtil.getLastLeaf(collectionCell);
+      myY1 = firstLeafCell.getBaseline() - HEIGHT;
+      myY2 = lastLeafCell.getBaseline();
+      myIsFolded = collectionCell.isCollapsed();
+      if (!myIsFolded && myY2 - myY1 < 2 * HEIGHT) {
+        // to avoid overlapping folding buttons
+        myIsHidden = true;
       }
-      return true;
     }
     return false;
+  }
+
+  boolean isHidden() {
+    return myIsHidden;
+  }
+
+  void setTopCovered() {
+    myTopCovered = true;
+  }
+
+  void setBottomCovered() {
+    myBottomCovered = true;
   }
 
   private Color getBorderColor() {
     return myMouseOver
         ? EditorColorsManager.getInstance().getGlobalScheme().getColor(EditorColors.SELECTED_TEARLINE_COLOR)
         : EditorColorsManager.getInstance().getGlobalScheme().getColor(EditorColors.TEARLINE_COLOR);
+  }
+
+  private Color getBackgroundColor() {
+    return EditorSettings.getInstance().getLeftHighlighterBackgroundColor();
   }
 
   void paintFeedback(Graphics g) {
@@ -94,35 +114,52 @@ class FoldingButton {
     }
   }
 
+  void paint(Graphics g, int excludeY1, int excludeY2) {
+    boolean myTopCoveredBackup = myTopCovered;
+    boolean myBottomCoveredBackup = myBottomCovered;
+    int base1 = myY1 + HEIGHT;
+    if (excludeY1 == base1 || excludeY2 == base1) {
+      myTopCovered = true;
+    }
+    if (excludeY1 == myY2 || excludeY2 == myY2) {
+      myBottomCovered = true;
+    }
+    paint(g);
+    myTopCovered = myTopCoveredBackup;
+    myBottomCovered = myBottomCoveredBackup;
+  }
+
   void paint(Graphics g) {
     if (myIsHidden) {
       return;
     }
     Color borderColor = getBorderColor();
+    Color backgroundColor = getBackgroundColor();
     if (!myIsFolded) {
-      int xs[] = {-HALF_WIDTH, -HALF_WIDTH, 0, HALF_WIDTH, HALF_WIDTH};
-      int ys[] = {myY1, myY1 + CANT_HEIGHT, myY1 + HEIGHT, myY1 + CANT_HEIGHT, myY1};
+      int [] xs = {-HALF_WIDTH, -HALF_WIDTH, 0, HALF_WIDTH, HALF_WIDTH};
+      int [] ys = {myY1, myY1 + CANT_HEIGHT, myY1 + HEIGHT, myY1 + CANT_HEIGHT, myY1};
 
-      g.setColor(myBackgroundColor);
-      g.fillPolygon(xs, ys, xs.length);
-      g.setColor(borderColor);
-      g.drawPolygon(xs, ys, xs.length);
-
-      for (int i = 0; i < xs.length; i++) {
-        ys[i] = myY2 - (ys[i] - myY1);
+      if (myMouseOver || !myTopCovered) {
+        g.setColor(backgroundColor);
+        g.fillPolygon(xs, ys, xs.length);
+        g.setColor(borderColor);
+        g.drawPolygon(xs, ys, xs.length);
+        g.drawLine(-HALF_WIDTH / 2, myY1 + HALF_WIDTH, HALF_WIDTH / 2, myY1 + HALF_WIDTH);
       }
 
-      g.setColor(myBackgroundColor);
-      g.fillPolygon(xs, ys, xs.length);
-      g.setColor(borderColor);
-      g.drawPolygon(xs, ys, xs.length);
+      if (myMouseOver || !myBottomCovered) {
+        for (int i = 0; i < xs.length; i++) {
+          ys[i] = myY2 - (ys[i] - myY1);
+        }
+        g.setColor(backgroundColor);
+        g.fillPolygon(xs, ys, xs.length);
+        g.setColor(borderColor);
+        g.drawPolygon(xs, ys, xs.length);
+        g.drawLine(-HALF_WIDTH / 2, myY2 - HALF_WIDTH, HALF_WIDTH / 2, myY2 - HALF_WIDTH);
+      }
 
-      g.setColor(borderColor);
-      g.drawLine(-HALF_WIDTH / 2, myY1 + HALF_WIDTH, HALF_WIDTH / 2, myY1 + HALF_WIDTH);
-      g.drawLine(-HALF_WIDTH / 2, myY2 - HALF_WIDTH, HALF_WIDTH / 2, myY2 - HALF_WIDTH);
-
-    } else {
-      g.setColor(myBackgroundColor);
+    } else if (myMouseOver || !myBottomCovered || !myTopCovered) {
+      g.setColor(backgroundColor);
       g.fillRect(-HALF_WIDTH, myY1, HALF_WIDTH * 2, HALF_WIDTH * 2);
 
       g.setColor(borderColor);
@@ -137,7 +174,7 @@ class FoldingButton {
     return myCellInfo.findCell(myEditor);
   }
 
-  void activate(int x, int y) {
+  void activate(int y) {
     EditorCell cell = getCell();
     if (cell instanceof EditorCell_Collection) {
       EditorCell_Collection collection = (EditorCell_Collection) cell;
@@ -148,7 +185,7 @@ class FoldingButton {
         collection.unfold();
       } else {
         if (isOnBottomButton(y)) {
-          JScrollBar verticalScrollBar = ((jetbrains.mps.nodeEditor.EditorComponent) myEditor).getVerticalScrollBar();
+          JScrollBar verticalScrollBar = ((jetbrains.mps.nodeEditor.EditorComponent) myEditor).getScrollPane().getVerticalScrollBar();
           verticalScrollBar.setValue(Math.max(verticalScrollBar.getValue() - (myY2 - myY1 - HEIGHT), 0));
         }
         collection.fold();
@@ -178,11 +215,11 @@ class FoldingButton {
   }
 
   private boolean isOnTopButton(int y) {
-    return myY1 <= y && y <= myY1 + HEIGHT;
+    return !myTopCovered && myY1 <= y && y <= myY1 + HEIGHT;
   }
 
   private boolean isOnBottomButton(int y) {
-    return myY2 - HEIGHT <= y && y <= myY2;
+    return !myBottomCovered && myY2 - HEIGHT <= y && y <= myY2;
   }
 
   int getY() {

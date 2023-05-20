@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,10 @@ package jetbrains.mps.smodel;
 
 import org.jetbrains.mps.openapi.repository.CommandListener;
 
+/**
+ * @deprecated with default methods in interface, there's no need in this class
+ */
+@Deprecated
 public class CommandListenerAdapter implements CommandListener {
   @Override
   public void commandStarted() {

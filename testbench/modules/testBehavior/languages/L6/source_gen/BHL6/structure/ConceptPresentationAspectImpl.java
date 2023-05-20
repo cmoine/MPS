@@ -4,54 +4,111 @@ package BHL6.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_A = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_B = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_C = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_D = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_E = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_F = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_G = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_H = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_I = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_I1 = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_I2 = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_J = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_A;
+  private ConceptPresentation props_B;
+  private ConceptPresentation props_C;
+  private ConceptPresentation props_D;
+  private ConceptPresentation props_E;
+  private ConceptPresentation props_F;
+  private ConceptPresentation props_G;
+  private ConceptPresentation props_H;
+  private ConceptPresentation props_I;
+  private ConceptPresentation props_I1;
+  private ConceptPresentation props_I2;
+  private ConceptPresentation props_J;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.A:
+        if (props_A == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("A");
+          props_A = cpb.create();
+        }
         return props_A;
-      case 1:
+      case LanguageConceptSwitch.B:
+        if (props_B == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("B");
+          props_B = cpb.create();
+        }
         return props_B;
-      case 2:
+      case LanguageConceptSwitch.C:
+        if (props_C == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("C");
+          props_C = cpb.create();
+        }
         return props_C;
-      case 3:
+      case LanguageConceptSwitch.D:
+        if (props_D == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("D");
+          props_D = cpb.create();
+        }
         return props_D;
-      case 4:
+      case LanguageConceptSwitch.E:
+        if (props_E == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("E");
+          props_E = cpb.create();
+        }
         return props_E;
-      case 5:
+      case LanguageConceptSwitch.F:
+        if (props_F == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("F");
+          props_F = cpb.create();
+        }
         return props_F;
-      case 6:
+      case LanguageConceptSwitch.G:
+        if (props_G == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("G");
+          props_G = cpb.create();
+        }
         return props_G;
-      case 7:
+      case LanguageConceptSwitch.H:
+        if (props_H == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("H");
+          props_H = cpb.create();
+        }
         return props_H;
-      case 8:
+      case LanguageConceptSwitch.I:
+        if (props_I == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_I = cpb.create();
+        }
         return props_I;
-      case 9:
+      case LanguageConceptSwitch.I1:
+        if (props_I1 == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_I1 = cpb.create();
+        }
         return props_I1;
-      case 10:
+      case LanguageConceptSwitch.I2:
+        if (props_I2 == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_I2 = cpb.create();
+        }
         return props_I2;
-      case 11:
+      case LanguageConceptSwitch.J:
+        if (props_J == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("J");
+          props_J = cpb.create();
+        }
         return props_J;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

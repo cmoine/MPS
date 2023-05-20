@@ -36,7 +36,7 @@ import java.util.List;
  * @author Artem Tikhomirov
  */
 public class NodeChangeCollector implements SNodeChangeListener {
-  private final List<AbstractModelChangeEvent> myEvents = new ArrayList<AbstractModelChangeEvent>();
+  private final List<AbstractModelChangeEvent> myEvents = new ArrayList<>();
   private boolean myEnabled;
 
   /**
@@ -61,7 +61,7 @@ public class NodeChangeCollector implements SNodeChangeListener {
    */
   @NotNull
   public List<AbstractModelChangeEvent> purge() {
-    ArrayList<AbstractModelChangeEvent> rv = new ArrayList<AbstractModelChangeEvent>(myEvents);
+    ArrayList<AbstractModelChangeEvent> rv = new ArrayList<>(myEvents);
     myEvents.clear();
     return rv;
   }

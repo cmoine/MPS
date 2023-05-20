@@ -3,7 +3,7 @@
   <persistence version="9" />
   <languages>
     <use id="0272d3b4-4cc8-481e-9e2f-07793fbfcb41" name="jetbrains.mps.lang.editor.table" version="0" />
-    <use id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor" version="4" />
+    <use id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor" version="14" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -54,9 +54,9 @@
       <concept id="1212685548494" name="jetbrains.mps.baseLanguage.structure.ClassCreator" flags="nn" index="1pGfFk" />
     </language>
     <language id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel">
-      <concept id="1226359078165" name="jetbrains.mps.lang.smodel.structure.LinkRefExpression" flags="nn" index="28GBK8">
-        <reference id="1226359078166" name="conceptDeclaration" index="28GBKb" />
-        <reference id="1226359192215" name="linkDeclaration" index="28H3Ia" />
+      <concept id="2644386474301421077" name="jetbrains.mps.lang.smodel.structure.LinkIdRefExpression" flags="nn" index="359W_D">
+        <reference id="2644386474301421078" name="conceptDeclaration" index="359W_E" />
+        <reference id="2644386474301421079" name="linkDeclaration" index="359W_F" />
       </concept>
     </language>
     <language id="0272d3b4-4cc8-481e-9e2f-07793fbfcb41" name="jetbrains.mps.lang.editor.table">
@@ -84,19 +84,19 @@
             <node concept="3cpWs6" id="1Ik8KAj6Nd4" role="3cqZAp">
               <node concept="2ShNRf" id="1Ik8KAj6Nd6" role="3cqZAk">
                 <node concept="1pGfFk" id="1Ik8KAj6Nd8" role="2ShVmc">
-                  <ref role="37wK5l" to="squ6:Oi8IO9sN2E" resolve="XYCTableModel" />
+                  <ref role="37wK5l" to="squ6:4jf2BbgpZDu" resolve="XYCTableModel" />
                   <node concept="pncrf" id="1Ik8KAj6Nd9" role="37wK5m" />
-                  <node concept="28GBK8" id="1Ik8KAj6Ndb" role="37wK5m">
-                    <ref role="28GBKb" to="278c:1Ik8KAj6Lm1" resolve="DecisionTable" />
-                    <ref role="28H3Ia" to="278c:1Ik8KAj6Lm4" resolve="colHeaders" />
+                  <node concept="359W_D" id="4jf2Bbgfm1O" role="37wK5m">
+                    <ref role="359W_E" to="278c:1Ik8KAj6Lm1" resolve="DecisionTable" />
+                    <ref role="359W_F" to="278c:1Ik8KAj6Lm4" resolve="colHeaders" />
                   </node>
-                  <node concept="28GBK8" id="1Ik8KAj6Ndd" role="37wK5m">
-                    <ref role="28GBKb" to="278c:1Ik8KAj6Lm1" resolve="DecisionTable" />
-                    <ref role="28H3Ia" to="278c:1Ik8KAj6Lm5" resolve="rowHeaders" />
+                  <node concept="359W_D" id="4jf2Bbgfm8v" role="37wK5m">
+                    <ref role="359W_E" to="278c:1Ik8KAj6Lm1" resolve="DecisionTable" />
+                    <ref role="359W_F" to="278c:1Ik8KAj6Lm5" resolve="rowHeaders" />
                   </node>
-                  <node concept="28GBK8" id="1Ik8KAj6Ndf" role="37wK5m">
-                    <ref role="28GBKb" to="278c:1Ik8KAj6Lm1" resolve="DecisionTable" />
-                    <ref role="28H3Ia" to="278c:1Ik8KAj6Lm6" resolve="resultValues" />
+                  <node concept="359W_D" id="4jf2Bbgfmfa" role="37wK5m">
+                    <ref role="359W_E" to="278c:1Ik8KAj6Lm1" resolve="DecisionTable" />
+                    <ref role="359W_F" to="278c:1Ik8KAj6Lm6" resolve="resultValues" />
                   </node>
                   <node concept="1Q80Hx" id="1Ik8KAj6Ndh" role="37wK5m" />
                 </node>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,25 +15,40 @@
  */
 package jetbrains.mps.lang.editor.menus.substitute;
 
+import jetbrains.mps.logging.Logger;
+import jetbrains.mps.openapi.editor.menus.EditorMenuDescriptor;
 import jetbrains.mps.openapi.editor.menus.substitute.SubstituteMenuContext;
 import jetbrains.mps.openapi.editor.menus.substitute.SubstituteMenuItem;
 import jetbrains.mps.openapi.editor.menus.substitute.SubstituteMenuLookup;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
  * @author simon
  */
-public class IncludeSubstituteMenuSubstituteMenuPart implements SubstituteMenuPart {
+public class IncludeSubstituteMenuSubstituteMenuPart extends SubstituteMenuTracePart implements SubstituteMenuPart {
 
-  @NotNull
-  @Override
-  public List<SubstituteMenuItem> createItems(SubstituteMenuContext context) {
-    return context.createItems(getMenuLookup(context));
+  protected IncludeSubstituteMenuSubstituteMenuPart() {
   }
 
+  protected IncludeSubstituteMenuSubstituteMenuPart(@NotNull EditorMenuDescriptor menuDescriptor) {
+    super(menuDescriptor);
+  }
+
+  @Override
+  protected List<SubstituteMenuItem> doCreateItems(SubstituteMenuContext context) {
+    SubstituteMenuLookup menuLookup;
+    try {
+      menuLookup = getMenuLookup(context);
+    } catch (Throwable t) {
+      Logger.getLogger(getClass()).error("Exception while executing code of the include substitute menu part " + this, t);
+      return Collections.emptyList();
+    }
+    return context.createItems(menuLookup);
+  }
 
   @Nullable
   protected SubstituteMenuLookup getMenuLookup(SubstituteMenuContext context) {

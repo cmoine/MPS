@@ -9,17 +9,6 @@ import java.util.Collections;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Property;
-import jetbrains.mps.nodeEditor.cells.ModelAccessor;
-import jetbrains.mps.lang.editor.behavior.EditorCellModel__BehaviorDescriptor;
-import jetbrains.mps.util.EqualUtil;
-import jetbrains.mps.openapi.editor.cells.CellActionType;
-import jetbrains.mps.editor.runtime.cells.EmptyCellAction;
-import jetbrains.mps.openapi.editor.style.Style;
-import jetbrains.mps.editor.runtime.style.StyleImpl;
-import jetbrains.mps.editor.runtime.style.StyleAttributes;
-import jetbrains.mps.openapi.editor.style.StyleRegistry;
-import java.awt.Color;
 
 public class _OpenTag implements ConceptEditorComponent {
   @NotNull
@@ -27,30 +16,6 @@ public class _OpenTag implements ConceptEditorComponent {
     return Collections.emptyList();
   }
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createReadOnlyModelAccessor_mtiojs_a(editorContext, node);
-  }
-  private EditorCell createReadOnlyModelAccessor_mtiojs_a(final EditorContext editorContext, final SNode node) {
-    EditorCell_Property editorCell = EditorCell_Property.create(editorContext, new ModelAccessor() {
-      public String getText() {
-        return EditorCellModel__BehaviorDescriptor.getOpeningTag_idhKxXtpm.invoke(node);
-      }
-      public void setText(String s) {
-      }
-      public boolean isValidText(String s) {
-        return EqualUtil.equals(s, getText());
-      }
-    }, node);
-    editorCell.setAction(CellActionType.DELETE, EmptyCellAction.getInstance());
-    editorCell.setAction(CellActionType.BACKSPACE, EmptyCellAction.getInstance());
-    editorCell.setCellId("ReadOnlyModelAccessor_mtiojs_a");
-    Style style = new StyleImpl();
-    Styles_StyleSheet.apply_bordered(style, editorCell);
-    style.set(StyleAttributes.BACKGROUND_COLOR, 0, StyleRegistry.getInstance().getSimpleColor(_OpenTag._StyleParameter_QueryFunction_mtiojs_a0a(editorContext, node)));
-    style.set(StyleAttributes.EDITABLE, 0, false);
-    editorCell.getStyle().putAll(style);
-    return editorCell;
-  }
-  private static Color _StyleParameter_QueryFunction_mtiojs_a0a(EditorContext editorContext, SNode node) {
-    return _EditorUtil.grayIfNotSelectable(node);
+    return new _OpenTag_ComponentBuilder_a(editorContext, node).createCell();
   }
 }

@@ -6,17 +6,12 @@ import jetbrains.mps.nodeEditor.DefaultNodeEditor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.EditorManager;
-import jetbrains.mps.openapi.editor.update.AttributeKind;
 
 public class SuppressErrorsAnnotation_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createAttributedNodeCell_tmyyum_a(editorContext, node);
+    return new SuppressErrorsAnnotation_EditorBuilder_a(editorContext, node).createCell();
   }
-  private EditorCell createAttributedNodeCell_tmyyum_a(EditorContext editorContext, SNode node) {
-    EditorManager manager = EditorManager.getInstanceFromContext(editorContext);
-    EditorCell editorCell = editorContext.getEditorComponent().getUpdater().getCurrentUpdateSession().getAttributedCell(AttributeKind.NODE, node);
-    editorCell.setBig(true);
-    return editorCell;
+  public EditorCell createInspectedCell(EditorContext editorContext, SNode node) {
+    return new SuppressErrorsAnnotation_InspectorBuilder_a(editorContext, node).createCell();
   }
 }

@@ -19,18 +19,20 @@ package jetbrains.mps.idea.core.usages.rules;
 import com.intellij.openapi.vcs.FileStatus;
 import com.intellij.usages.Usage;
 import com.intellij.usages.UsageGroup;
+import com.intellij.usages.UsageTarget;
 import com.intellij.usages.UsageView;
-import com.intellij.usages.rules.OrderableUsageGroupingRule;
+import com.intellij.usages.rules.SingleParentUsageGroupingRule;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.Icon;
 
-public class MPSUsageGroupingRule implements OrderableUsageGroupingRule {
+public class MPSUsageGroupingRule extends SingleParentUsageGroupingRule {
 
 
+  @Nullable
   @Override
-  public UsageGroup groupUsage(@NotNull Usage usage) {
+  protected UsageGroup getParentGroupFor(@NotNull Usage usage, @NotNull UsageTarget[] targets) {
     if (usage instanceof UsageInMPS) {
       return MPSUsageGroup.INSTANCE;
     }

@@ -176,7 +176,7 @@ public class NewRootAction extends AnAction {
         for (Map.Entry<String, SAbstractConcept> entry : concepts.entrySet()) {
           String conceptFqName = entry.getKey();
           SAbstractConcept concept = entry.getValue();
-          final GlobalIconManager globalIconManager = ApplicationManager.getApplication().getComponent(GlobalIconManager.class);
+          final GlobalIconManager globalIconManager = GlobalIconManager.getInstance();
           final Icon conceptIcon = globalIconManager == null ? Nodes.RootNode : globalIconManager.getIconFor(concept);
           dialog.getKindCombo().addItem(concept.getConceptAlias(), conceptIcon, conceptFqName);
           dialog.setTemplateKindComponentsVisible(true);

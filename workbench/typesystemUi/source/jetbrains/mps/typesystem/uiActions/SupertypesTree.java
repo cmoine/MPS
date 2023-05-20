@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,10 +39,17 @@ public class SupertypesTree extends AbstractHierarchyTree {
   public SupertypesTree(Project mpsProject) {
     super(mpsProject.getRepository());
     myProject = mpsProject;
+    setRootVisible(false);
   }
 
   protected String noNodeString() {
     return "(no type)";
+  }
+
+  @Override
+  protected String nodePresentation(SNode n) {
+    // nodes coming from within typesystem (like ClassifierType) rarely have names. Here, we resort to detailed presentation.
+    return PresentationManager.toString(n);
   }
 
   protected SNode getParent(SNode node) {
@@ -50,15 +57,19 @@ public class SupertypesTree extends AbstractHierarchyTree {
   }
 
   protected Set<SNode> getParents(SNode node, Set<SNode> visited) {
-    return new HashSet<SNode>();
+    return new HashSet<>();
   }
 
   protected Set<SNode> getDescendants(SNode node, Set<SNode> visited) {
     if (node == null) {
-      return new HashSet<SNode>();
+      return new HashSet<>();
     }
     return TypeChecker.getInstance().getSubtypingManager().
         collectImmediateSupertypes(node, !myShowOnlyStrong);
+  }
+
+  public boolean isShowOnlyStrong() {
+    return myShowOnlyStrong;
   }
 
   public void setShowOnlyStrong(boolean showOnlyStrong) {
@@ -70,23 +81,14 @@ public class SupertypesTree extends AbstractHierarchyTree {
   protected void doubleClick(@NotNull MPSTreeNode node) {
     if (node instanceof HierarchyTreeNode) {
       final HierarchyTreeNode hierarchyTreeNode = (HierarchyTreeNode) node;
-      if (new ModelAccessHelper(myProject.getModelAccess()).runReadAction(new Computable<Boolean>() {
-        @Override
-        public Boolean compute() {
-          return hierarchyTreeNode.getNodeReference().resolve(myProject.getRepository()) != null;
-        }
-      })) {
+      // XXX in fact, SNode with types coming from within typesystem would never resolve
+      //     Alternatively, one could resort to hierarchyTreeNode.getUserObject which at the moment is original SNode,
+      //     however, earlier code here did node.model != null check, and the model is null for these nodes anyway.
+      // As I don't understand the idea of the dialog, I leave it as it is until anybody complains.
+      if (new ModelAccessHelper(myProject.getModelAccess()).runReadAction(() -> hierarchyTreeNode.getNodeReference().resolve(myProject.getRepository()) != null)) {
         new MyBaseNodeDialog(myProject, hierarchyTreeNode.getNodeReference()).show();
       }
     }
-  }
-
-  public boolean overridesNodeIdentifierCalculation() {
-    return true;
-  }
-
-  public String calculateNodeIdentifier(HierarchyTreeNode treeNode) {
-    return PresentationManager.toString(treeNode.getNode());
   }
 
   private static class MyBaseNodeDialog extends BaseNodeDialog {
@@ -113,6 +115,7 @@ public class SupertypesTree extends AbstractHierarchyTree {
       return super.getMainComponent();
     }
 
+    @NotNull
     @Override
     protected Action[] createActions() {
       return new Action[]{getOKAction()};

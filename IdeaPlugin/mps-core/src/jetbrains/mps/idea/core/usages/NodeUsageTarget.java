@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2016 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.core.usages;
 
 import com.intellij.navigation.ItemPresentation;
@@ -28,9 +27,8 @@ import com.intellij.usages.UsageTarget;
 import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiProvider;
 import jetbrains.mps.smodel.ModelAccessHelper;
-import jetbrains.mps.smodel.SNodePointer;
 import jetbrains.mps.util.Computable;
-import jetbrains.mps.workbench.choose.nodes.NodePointerPresentation;
+import jetbrains.mps.workbench.choose.NodePointerNavigationItem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeReference;
@@ -90,13 +88,8 @@ public class NodeUsageTarget extends NodeNavigatable implements UsageTarget, Psi
 
   @Override
   public void update() {
-    ProjectHelper.getModelAccess(getProject()).runReadAction(new Runnable() {
-      @Override
-      public void run() {
-        myItemPresentation = new NodePointerPresentation(((SNodePointer) myNode));
-        myTextPresentation = myItemPresentation.getPresentableText();
-      }
-    });
+    final SRepository repository = ProjectHelper.getProjectRepository(myProject);
+    updateFields(repository);
   }
 
   @Override

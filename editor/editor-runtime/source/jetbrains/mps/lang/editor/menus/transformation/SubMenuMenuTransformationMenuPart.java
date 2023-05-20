@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@ package jetbrains.mps.lang.editor.menus.transformation;
 
 import jetbrains.mps.lang.editor.menus.MenuPart;
 import jetbrains.mps.lang.editor.menus.SingleItemMenuPart;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.openapi.editor.menus.transformation.SubMenu;
 import jetbrains.mps.openapi.editor.menus.transformation.TransformationMenuContext;
 import jetbrains.mps.openapi.editor.menus.transformation.TransformationMenuItem;
@@ -29,8 +30,14 @@ public abstract class SubMenuMenuTransformationMenuPart extends SingleItemMenuPa
   @Override
   protected TransformationMenuItem createItem(TransformationMenuContext context) {
     final List<TransformationMenuItem> items = new jetbrains.mps.lang.editor.menus.CompositeMenuPart<>(getParts()).createItems(context);
-    String text = getText(context);
-    return new SubMenu(text, items);
+    String text;
+    try {
+      text = getText(context);
+    } catch (Throwable t){
+      Logger.getLogger(getClass()).error("Exception while executing getText() " + this, t);
+      text = "Exception was thrown";
+    }
+    return new SubMenu(text, items, context.getEditorMenuTrace().getTraceInfo());
   }
 
   protected abstract String getText(TransformationMenuContext context);

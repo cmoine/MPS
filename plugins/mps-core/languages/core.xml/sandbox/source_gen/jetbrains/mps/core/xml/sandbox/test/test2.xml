@@ -18,22 +18,28 @@
     asdasd<!--sdfsdf-->asda
     asd
     <aa>
-      <aa as="kjjkjk">asdasd
-          sdfsf<!--ssdfs-->asd
-          kjkj
-          as<!----><!--jhj--></aa>
+      <aa as="kjjkjk">
+        asdasd
+        sdfsf<!--ssdfs-->asd
+        kjkj
+        as<!----><!--jhj-->
+      </aa>
       <asd>asdasdasd&addsf;&jh;<![CDATA[kj]]>&jk;asd</asd>
       <asd 
         	asd="ad
         		asdasd&asd;">
-        <asd>adsadsa
-            <!--ad--></asd>
+        <asd>
+          adsadsa
+          <!--ad-->
+        </asd>
       </asd>
     </aa>
   </head>
-  <body><!--temp-->
-      <!--lklk--><!--asd--><!--sasdasdasdadasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdadsdd--><!--asdsada-->&amp;sf&sdf;<![CDATA[sdf]]><!---->
-      sdasaadssa
-      kjkjk
-      asdasd</body>
+  <body>
+    <!--temp-->
+    <!--lklk--><!--asd--><!--sasdasdasdadasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdadsdd--><!--asdsada-->&amp;sf&sdf;<![CDATA[sdf]]><!---->
+    sdasaadssa
+    kjkjk
+    asdasd
+  </body>
 </html>

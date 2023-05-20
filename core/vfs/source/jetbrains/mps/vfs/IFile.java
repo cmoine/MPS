@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +15,19 @@
  */
 package jetbrains.mps.vfs;
 
-import jetbrains.mps.util.annotation.ToRemove;
+import jetbrains.mps.vfs.openapi.FileSystem;
 import jetbrains.mps.vfs.path.Path;
-import jetbrains.mps.vfs.path.UniPath;
+import jetbrains.mps.vfs.refresh.CachingContext;
+import jetbrains.mps.vfs.refresh.CachingFile;
+import jetbrains.mps.vfs.refresh.DefaultCachingContext;
+import jetbrains.mps.vfs.refresh.FileListener;
+import org.jetbrains.annotations.ApiStatus.Experimental;
+import org.jetbrains.annotations.ApiStatus.ScheduledForRemoval;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.mps.openapi.util.ProgressMonitor;
+import org.jetbrains.mps.annotations.Immutable;
+import org.jetbrains.mps.annotations.ImmutableReturn;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -31,50 +36,32 @@ import java.net.URL;
 import java.util.List;
 
 /**
- * AP:
- * An abstraction of path names similar to the {@link java.io.File}.
- * Represents an abstract path (or location) on disk (might be non-existent).
- * Moreover might represents a path to some archive + path within the archive (unlike the {@link java.io.File}).
+ * An abstraction of path names similar to the {@link java.nio.file.Path}.
+ * File may be obtained from a concrete file system or from VFSManager
+ * File.getPath() is os-independent.
+ * File.getPath() is absolute, do not store absolute paths in files. Instead, use MacroProcessor/QualifiedPath
+ * Path is not a global file identifier, see {@link jetbrains.mps.vfs.QualifiedPath}
  *
- * FIXME
-// * Another difference from the {@link java.io.File} is the one that this abstraction is supposed to be
-// * platform-independent (sic!) meaning that the path
- * @see #getPath() for an example
- * FIXME
- *
- * Also it is an MPS abstraction around the IDEA platform file system {@link com.intellij.openapi.vfs.VirtualFile}.
+ * Also it is an MPS abstraction around the IDEA platform file system {@code com.intellij.openapi.vfs.VirtualFile}.
  * IDEA provides an intelligent caching mechanism which might boost up the file system traversal (comparing to the {@link java.io.File}).
- * @see CachingFile
+ * See also {@link CachingFile}
  *
- * It has no fallback implementation base on {@link java.io.File},
- * however there is a special singleton class {@link jetbrains.mps.vfs.FileSystem} with
- * method #getFileByPath which creates a suitable instance of IFile.
- *
- * These mechanism nevertheless is deprecated and must not be used.
- *
- * From 3.4 you are supposed to use the direct implementing classes of IFile.
- *
- * //TODO continue
- *
- * AP: I suggest to continue using this interface because dropping it might cause too much pain.
- * As long as it is (technically speaking) our internal api, we are more or less free to change it.
- *
- * This class mixes two different issues (as well as the {@link java.io.File}): it works with paths (which are strings) and
- * also it accesses the physical fs from time to time. I'd rather split it up.
- *
- * FIXME IFile is mutable
- * (as well as the java.io.File) I think it is unacceptable.
+ * IFile must be immutable
  * we define it as a pathname abstraction. That means that we cannot rename the IFile, we can only rename something
  * that lies at this pathname on disk. The IFile itself must not be touched in any way. Otherwise it is cumbersome.
  * The alternative is to reconsider the IFile contract.
- *
- * AP
  */
+@Immutable
 public interface IFile {
   /**
-   * @return the file system which this file belongs to
+   * Use getFS() instead
+   * Note the IFileSystem is per-protocol, in which it differs from FileSystem.
    */
-  @NotNull jetbrains.mps.vfs.openapi.FileSystem getFileSystem();
+@Deprecated(since = "2019.1", forRemoval = true)
+  @NotNull
+  FileSystem getFileSystem();
+
+  @NotNull IFileSystem getFS();
 
   /**
    * @return simply the last name of the file (the furthest one)
@@ -82,31 +69,43 @@ public interface IFile {
   @NotNull String getName();
 
   /**
-   * @return the whole path to the abstract location.
-   * The current contract:
-   * the resulting path will be canonical,
-   * and the folders are separated with {@link Path#UNIX_SEPARATOR_CHAR} // todo explain more
-   *
-   * @see File#getCanonicalPath()
-   * @see Path
-   * @deprecated use {@link #toPath()} instead
-   */
-  @ToRemove(version = 3.5)
-  @Deprecated
-  @NotNull String getPath();
-
-  /**
-   * @return the comprised path corresponding to this file
+   * Returns a path of this file in a file system.
+   * The IFile is supposed to return always the same path as it is a pure location pointer
    */
   @NotNull
-  UniPath toPath();
+  @ImmutableReturn
+  String getPath();
 
   /**
-   * @deprecated TODO REMOVE ONLY ONE USAGE
+   * This method is going to replace the String counterpart.
+   * @return an os-aware path object
    */
-  @Deprecated
-  @ToRemove(version = 3.4)
+  @NotNull
+  @ImmutableReturn
+  @Experimental
+  Path toPath();
+
+  /**
+   * Like java.io.File.#getCanonicalPath
+   * Supposed to re-resolve the path physically on disk.
+   * The return value may vary if for example some directories are removed or symlinks changed
+   * All parts like ".." and "." are supposed to be inlined in this method, not sure about #getPath.
+   *
+   * @see java.nio.file.Path#toRealPath
+   */
+  @NotNull
+  String toRealPath();
+
+  /**
+   * returns RFC compliant url (can be converted to uri)
+   */
+  @Nullable
   URL getUrl() throws MalformedURLException;
+
+  /**
+   * MPS URL to work with different path formats (jrt in jdk for example)
+   */
+  QualifiedPath getQualifiedPath();
 
   /**
    * @return null iff the instance is root and has no parent, the parent folder otherwise
@@ -114,44 +113,81 @@ public interface IFile {
   @Nullable IFile getParent();
 
   /**
-   * shortcut to {@link #toPath()} {@link UniPath#isArchive()}
-   * @return whether the underlying pathname points exactly to an archive file
+   * @return whether the underlying pathname points exactly to a zip/jar archive file,
+   * meaning the contents is a zip archive
    */
-  boolean isArchive();
+  boolean isZipArchive() throws IOException;
 
   /**
-   * shortcut to {@link #toPath()} {@link UniPath#isInArchive()}
-   * @return whether the underlying pathname points to an archive file or some of its contents
+   * @return whether the underlying pathname points to the file inside a zip archive file
    */
-  boolean isInArchive();
+  boolean isInZipArchive();
 
-  /**
-   * @deprecated use {@link #isArchive()} or {@link #isInArchive()}
-   */
-  @ToRemove(version = 3.4)
   @Deprecated
-  default boolean isPackaged() {
-    return isInArchive();
+  @ScheduledForRemoval(inVersion = "2022.2")
+  default boolean isInArchive() {
+    return isInZipArchive();
   }
 
   /**
-   * @deprecated use {@link CachingFile#refresh(CachingContext)}
+   * Not sure if single use justifies existence of the method
+   * @return value of {@link IFileSystem#isFileIgnored(String)} for this file
+   * @since 2019.3
    */
-  @ToRemove(version = 3.4)
+  default boolean isIgnored() {
+    return getFS().isFileIgnored(getName());
+  }
+
+  /**
+   * @deprecated use {@link #isZipArchive()} or {@link #isInZipArchive()}
+   */
+@Deprecated(since = "3.4", forRemoval = true)
+  default boolean isPackaged() {
+    return isInZipArchive();
+  }
+
+  /**
+   * a shorthand for {@link CachingFile#refresh}
+   * by default sync and non-recursive
+   * @deprecated synchronous refresh is discouraged and potentially changes the MPS model
+   *             quite often synchronous refresh is not needed,
+   *             instead use
+   * @see #asyncRefresh()
+   */
+  @ScheduledForRemoval(inVersion="2021.2")
   @Deprecated
   default void refresh() {
+    refresh(new DefaultCachingContext(true, false));
+  }
+
+  /**
+   * the universal method,
+   * 99% its your choice
+   *
+   * by default it is recursive
+   * returns void because IJ does not give out any futures there
+   */
+  default void asyncRefresh() {
+    refresh(new DefaultCachingContext(false, true));
+  }
+
+  /**
+   * NOTICE: synchronous refresh is discouraged and potentially changes the MPS model.
+   * Quite often synchronous refresh is not needed, use it only when you understand what you are doing
+   * When sync is true, the MPS model can change, models/modules can be reloaded and the nodes can be disposed.
+   */
+  default void refresh(@NotNull CachingContext options) {
     if (this instanceof CachingFile) {
       CachingFile me = (CachingFile) this;
-      me.refresh(new DefaultCachingContext(true, false));
+      me.refresh(options);
     }
   }
 
   /**
    * @return the jar or folder which contains this file
-   * @deprecated use {@link #toPath()} and extract the path you need
+   * @deprecated use {@link #getPath()} and extract the path you need
    */
-  @Deprecated
-  @ToRemove(version = 3.4)
+@Deprecated(since = "3.4", forRemoval = true)
   IFile getBundleHome();
 
   // accessing physical fs
@@ -161,15 +197,17 @@ public interface IFile {
 
 
   /**
-   * TODO will be like this in some implementations of these two methods after 3.4:
-   //   * the files in the archive root in the case when {@link #isArchive()} is true.
-   //   *
-   //   * Thus the client of this method need not to bother to expand the archives on his own: the implementing class
-   //   * must do it automatically. Probably cosy recursive processing also will be provided.
-   * TODO
-   * @return the file which has this file's path + suffix
+   * @deprecated use findChild() instead.
+   * The problem of findDescendant is that it's unclear, can we pass an empty string, string with path separators, string with archive separators
    */
+@Deprecated(since = "2019.2", forRemoval = true)
   @NotNull IFile getDescendant(@NotNull String suffix);
+
+  /**
+   * Immediate child only. Empty name is forbidden. Neither path separators nor archive separators can't present in name
+   * 'find' in the name doesn't imply existence of the returned file, just an unfortunate name
+   */
+  @NotNull IFile findChild(@NotNull String name);
 
   /**
    * @return the children of this file in case when it is a folder,
@@ -177,18 +215,26 @@ public interface IFile {
    */
   @Nullable List<IFile> getChildren();
 
+  /**
+   * Same listener added twice to the same file is ignored
+   */
   default void addListener(@NotNull FileListener listener) {
-    getFileSystem().addListener(new FileListenerAdapter(this, listener));
+    // nop
   }
 
+  /**
+   * It's safe to remove a listener that has never been attached to a file
+   */
   default void removeListener(@NotNull FileListener listener) {
-    getFileSystem().removeListener(new FileListenerAdapter(this, listener));
+    // nop
   }
 
   /**
    * fixme if it is the same as in java.io.File then we need to enforce it
    */
   long lastModified();
+
+@Deprecated(since = "2019.1", forRemoval = true)
   long length();
   boolean exists();
   boolean setTimeStamp(long time);
@@ -198,12 +244,98 @@ public interface IFile {
    * @return whether it is a success
    */
   boolean createNewFile();
+
   boolean mkdirs();
+
+  /**
+   * FIXME document what happens if one deletes non-empty folder. IoFile seems to force deletion. Is it the contract?
+   * @return true if the deletion went with a success
+   */
   boolean delete();
 
-  boolean rename(String newName);
-  boolean move(IFile newParent);
+  /**
+   * the same as {@link #delete()} but fails silently (no log errors or exceptions) if the file does not exist
+   */
+  default boolean deleteIfExists() {
+    if (exists()) {
+      return delete();
+    }
+    return false;
+  }
+
+  /**
+   * renames the file at which the instance of this <code>IFile</code> points (if it exists)
+   * the file stays under the same directory and changes its name to the <code>newName</code>
+   * this method makes IFile mutable
+   *
+   * @return true iff success
+   * @deprecated clients do not see IFile as a pointer, but as a real location holder. use {@link #rename1(String)} instead
+   */
+@Deprecated(since = "193", forRemoval = true)
+  boolean rename(@NotNull String newName);
+
+  /**
+   * @return this if rename is unsuccessful, new IFile pointing to the new location otherwise
+   */
+  @NotNull
+  default IFile rename1(@NotNull String newName) {
+    if (!rename(newName)) {
+      return this;
+    }
+    return this.getParent().findChild(newName);
+  }
+
+  /**
+   * moves/renames the file at which the instance of this <code>IFile</code> points
+   * @return true iff success
+   * @deprecated see #rename
+   */
+@Deprecated(since = "193", forRemoval = true)
+  boolean move(@NotNull IFile newParent);
+
+  /**
+   * @return this if the operation is unsuccessful, new IFile pointing to the new location otherwise
+   */
+  @NotNull
+  default IFile move1(@NotNull IFile newParent) {
+    String simpleName = getName();
+    if (!move(newParent)) {
+      return this;
+    }
+    return newParent.findChild(simpleName);
+  }
+  /**
+   * @return this if the operation is unsuccessful, new IFile pointing to the new location otherwise
+   * return#getName equals to 'newName'
+   * return not null if success
+   */
+  @Nullable
+  IFile copy(@NotNull IFile newParent, @NotNull String newName);
+
+  /**
+   * for convenience by default preserves the old name
+   */
+  default IFile copy(@NotNull IFile newParent) {
+    return copy(newParent, getName());
+  }
 
   InputStream openInputStream() throws IOException;
+
   OutputStream openOutputStream() throws IOException;
+
+  //this is provisional API. We need to think how to compare files from different FSes
+  default boolean isDescendant(IFile file){
+    final String p1 = getPath();
+    final String p2 = file.getPath();
+    if (!p1.startsWith(p2)) {
+      return false;
+    }
+    // "/a/b/cba".isDescendant("/a/b/c") has to be false, just startsWith() is not enough
+    try {
+      return java.nio.file.Path.of(p1).startsWith(java.nio.file.Path.of(p2));
+    } catch (Exception ex) {
+      // ignore. no idea if any exception happens, just in case there's some, get ready
+      return true;
+    }
+  }
 }

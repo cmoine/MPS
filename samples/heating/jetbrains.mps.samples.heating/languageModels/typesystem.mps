@@ -2,8 +2,7 @@
 <model ref="r:6d78acb4-911e-4959-8535-0a1b3e5c1b7e(jetbrains.mps.samples.heating.typesystem)">
   <persistence version="9" />
   <languages>
-    <use id="7a5dda62-9140-4668-ab76-d5ed1746f2b2" name="jetbrains.mps.lang.typesystem" version="0" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="00000000-0000-4000-0000-1de82b3a4936(jetbrains.mps.devkit.aspect.typesystem)" />
   </languages>
   <imports>
     <import index="vw7d" ref="r:3b810168-3010-426e-9275-12b4e509a27b(jetbrains.mps.samples.heating.structure)" />
@@ -98,10 +97,6 @@
       <concept id="1175517767210" name="jetbrains.mps.lang.typesystem.structure.ReportErrorStatement" flags="nn" index="2MkqsV">
         <child id="1175517851849" name="errorString" index="2MkJ7o" />
       </concept>
-      <concept id="1227096774658" name="jetbrains.mps.lang.typesystem.structure.MessageStatement" flags="ng" index="2OEH$v">
-        <child id="1227096802791" name="helginsIntention" index="2OEOjU" />
-        <child id="1227096802790" name="nodeToReport" index="2OEOjV" />
-      </concept>
       <concept id="1216383170661" name="jetbrains.mps.lang.typesystem.structure.TypesystemQuickFix" flags="ng" index="Q5z_Y">
         <child id="1216383424566" name="executeBlock" index="Q6x$H" />
         <child id="1216391046856" name="descriptionBlock" index="QzAvj" />
@@ -113,6 +108,10 @@
         <child id="1195213635060" name="body" index="18ibNy" />
       </concept>
       <concept id="1195214364922" name="jetbrains.mps.lang.typesystem.structure.NonTypesystemRule" flags="ig" index="18kY7G" />
+      <concept id="3937244445246642777" name="jetbrains.mps.lang.typesystem.structure.AbstractReportStatement" flags="ng" index="1urrMJ">
+        <child id="3937244445246643221" name="helginsIntention" index="1urrFz" />
+        <child id="3937244445246642781" name="nodeToReport" index="1urrMF" />
+      </concept>
       <concept id="1210784285454" name="jetbrains.mps.lang.typesystem.structure.TypesystemIntention" flags="ng" index="3Cnw8n">
         <property id="1216127910019" name="applyImmediately" index="ARO6o" />
         <reference id="1216388525179" name="quickFix" index="QpYPw" />
@@ -128,10 +127,13 @@
       </concept>
     </language>
     <language id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel">
+      <concept id="1177026924588" name="jetbrains.mps.lang.smodel.structure.RefConcept_Reference" flags="nn" index="chp4Y">
+        <reference id="1177026940964" name="conceptDeclaration" index="cht4Q" />
+      </concept>
       <concept id="1179409122411" name="jetbrains.mps.lang.smodel.structure.Node_ConceptMethodCall" flags="nn" index="2qgKlT" />
       <concept id="2396822768958367367" name="jetbrains.mps.lang.smodel.structure.AbstractTypeCastExpression" flags="nn" index="$5XWr">
-        <reference id="6733348108486823428" name="concept" index="1m5ApE" />
         <child id="6733348108486823193" name="leftExpression" index="1m5AlR" />
+        <child id="3906496115198199033" name="conceptArgument" index="3oSUPX" />
       </concept>
       <concept id="1143224127713" name="jetbrains.mps.lang.smodel.structure.Node_InsertPrevSiblingOperation" flags="nn" index="HtX7F">
         <child id="1143224127716" name="insertedNode" index="HtX7I" />
@@ -187,10 +189,10 @@
             <node concept="Xl_RD" id="2_khaML2iDn" role="a7wSD">
               <property role="Xl_RC" value="Not a valid value" />
             </node>
-            <node concept="1YBJjd" id="2_khaML2iIz" role="2OEOjV">
+            <node concept="1YBJjd" id="2_khaML2iIz" role="1urrMF">
               <ref role="1YBMHb" node="4p4E$Nw$HTO" resolve="slot" />
             </node>
-            <node concept="3Cnw8n" id="2_khaML2xP5" role="2OEOjU">
+            <node concept="3Cnw8n" id="2_khaML2xP5" role="1urrFz">
               <property role="ARO6o" value="true" />
               <ref role="QpYPw" node="2_khaML2iJo" resolve="AssignCorrectValue" />
             </node>
@@ -218,12 +220,14 @@
             <ref role="ehGHo" to="vw7d:4XSronYa85Q" resolve="Slot" />
           </node>
           <node concept="1PxgMI" id="4p4E$Nw$IlP" role="33vP2m">
-            <ref role="1m5ApE" to="vw7d:4XSronYa85Q" resolve="Slot" />
             <node concept="2OqwBi" id="4p4E$Nw$Ic9" role="1m5AlR">
               <node concept="1YBJjd" id="4p4E$Nw$Ica" role="2Oq$k0">
                 <ref role="1YBMHb" node="4p4E$Nw$HTO" resolve="slot" />
               </node>
               <node concept="YBYNd" id="4p4E$Nw$Icb" role="2OqNvi" />
+            </node>
+            <node concept="chp4Y" id="714IaVdGZbk" role="3oSUPX">
+              <ref role="cht4Q" to="vw7d:4XSronYa85Q" resolve="Slot" />
             </node>
           </node>
         </node>
@@ -252,10 +256,10 @@
             <node concept="Xl_RD" id="4p4E$Nw$JW9" role="2MkJ7o">
               <property role="Xl_RC" value="The event should be scheduled after the one above it" />
             </node>
-            <node concept="1YBJjd" id="4p4E$Nw$Kap" role="2OEOjV">
+            <node concept="1YBJjd" id="4p4E$Nw$Kap" role="1urrMF">
               <ref role="1YBMHb" node="4p4E$Nw$HTO" resolve="slot" />
             </node>
-            <node concept="3Cnw8n" id="4xZSnh_yTC1" role="2OEOjU">
+            <node concept="3Cnw8n" id="4xZSnh_yTC1" role="1urrFz">
               <property role="ARO6o" value="true" />
               <ref role="QpYPw" node="4xZSnh_yKQ3" resolve="MoveItemToTheRightPositionWithinDailyPlan" />
             </node>
@@ -266,10 +270,10 @@
                 <node concept="Xl_RD" id="42WFAKerSpA" role="a7wSD">
                   <property role="Xl_RC" value="This event is not changing the temperature." />
                 </node>
-                <node concept="1YBJjd" id="42WFAKerSA6" role="2OEOjV">
+                <node concept="1YBJjd" id="42WFAKerSA6" role="1urrMF">
                   <ref role="1YBMHb" node="4p4E$Nw$HTO" resolve="slot" />
                 </node>
-                <node concept="3Cnw8n" id="42WFAKerUVK" role="2OEOjU">
+                <node concept="3Cnw8n" id="42WFAKerUVK" role="1urrFz">
                   <ref role="QpYPw" node="42WFAKerSAE" resolve="RemoveSlot" />
                 </node>
               </node>
@@ -281,7 +285,7 @@
                     <ref role="1YBMHb" node="4p4E$Nw$HTO" resolve="slot" />
                   </node>
                   <node concept="3TrEf2" id="4XSronYahIF" role="2OqNvi">
-                    <ref role="3Tt5mk" to="vw7d:4XSronYa9Rh" />
+                    <ref role="3Tt5mk" to="vw7d:4XSronYa9Rh" resolve="event" />
                   </node>
                 </node>
                 <node concept="3TrcHB" id="4XSronYahRv" role="2OqNvi">
@@ -294,7 +298,7 @@
                     <ref role="3cqZAo" node="4p4E$Nw$Ic8" resolve="prev" />
                   </node>
                   <node concept="3TrEf2" id="4XSronYahn1" role="2OqNvi">
-                    <ref role="3Tt5mk" to="vw7d:4XSronYa9Rh" />
+                    <ref role="3Tt5mk" to="vw7d:4XSronYa9Rh" resolve="event" />
                   </node>
                 </node>
                 <node concept="3TrcHB" id="4XSronYahvG" role="2OqNvi">
@@ -333,10 +337,10 @@
             <node concept="Xl_RD" id="NU25Mr1WLm" role="a7wSD">
               <property role="Xl_RC" value="The customizing event is setting the same temperature as the original one" />
             </node>
-            <node concept="1YBJjd" id="NU25Mr1X60" role="2OEOjV">
+            <node concept="1YBJjd" id="NU25Mr1X60" role="1urrMF">
               <ref role="1YBMHb" node="4p4E$Nw$HTO" resolve="slot" />
             </node>
-            <node concept="3Cnw8n" id="NU25Mr26Vx" role="2OEOjU">
+            <node concept="3Cnw8n" id="NU25Mr26Vx" role="1urrFz">
               <ref role="QpYPw" node="42WFAKerSAE" resolve="RemoveSlot" />
             </node>
           </node>
@@ -349,7 +353,7 @@
                   <ref role="1YBMHb" node="4p4E$Nw$HTO" resolve="slot" />
                 </node>
                 <node concept="3TrEf2" id="NU25Mr1W3y" role="2OqNvi">
-                  <ref role="3Tt5mk" to="vw7d:4XSronYa9Rh" />
+                  <ref role="3Tt5mk" to="vw7d:4XSronYa9Rh" resolve="event" />
                 </node>
               </node>
               <node concept="3TrcHB" id="NU25Mr1WFQ" role="2OqNvi">
@@ -362,7 +366,7 @@
                   <ref role="3cqZAo" node="NU25Mr1TBV" resolve="customizedSlot" />
                 </node>
                 <node concept="3TrEf2" id="NU25Mr1Urd" role="2OqNvi">
-                  <ref role="3Tt5mk" to="vw7d:4XSronYa9Rh" />
+                  <ref role="3Tt5mk" to="vw7d:4XSronYa9Rh" resolve="event" />
                 </node>
               </node>
               <node concept="3TrcHB" id="NU25Mr1UO_" role="2OqNvi">
@@ -417,8 +421,10 @@
               <ref role="ehGHo" to="vw7d:4XSronYa85Q" resolve="Slot" />
             </node>
             <node concept="1PxgMI" id="4xZSnh_yMZe" role="33vP2m">
-              <ref role="1m5ApE" to="vw7d:4XSronYa85Q" resolve="Slot" />
               <node concept="Q6c8r" id="4xZSnh_yMZf" role="1m5AlR" />
+              <node concept="chp4Y" id="714IaVdGZbf" role="3oSUPX">
+                <ref role="cht4Q" to="vw7d:4XSronYa85Q" resolve="Slot" />
+              </node>
             </node>
           </node>
         </node>
@@ -447,12 +453,14 @@
               <ref role="ehGHo" to="vw7d:4p4E$NwyILf" resolve="DailyPlan" />
             </node>
             <node concept="1PxgMI" id="4xZSnh_yNIW" role="33vP2m">
-              <ref role="1m5ApE" to="vw7d:4p4E$NwyILf" resolve="DailyPlan" />
               <node concept="2OqwBi" id="4xZSnh_yNay" role="1m5AlR">
                 <node concept="37vLTw" id="4xZSnh_yNaz" role="2Oq$k0">
                   <ref role="3cqZAo" node="4xZSnh_yMZd" resolve="item" />
                 </node>
                 <node concept="1mfA1w" id="4xZSnh_yNa$" role="2OqNvi" />
+              </node>
+              <node concept="chp4Y" id="714IaVdGZbh" role="3oSUPX">
+                <ref role="cht4Q" to="vw7d:4p4E$NwyILf" resolve="DailyPlan" />
               </node>
             </node>
           </node>
@@ -466,7 +474,7 @@
                   <ref role="3cqZAo" node="4xZSnh_yNax" resolve="dailyPlan" />
                 </node>
                 <node concept="3Tsc0h" id="4xZSnh_ySEi" role="2OqNvi">
-                  <ref role="3TtcxE" to="vw7d:4p4E$NwyILn" />
+                  <ref role="3TtcxE" to="vw7d:4p4E$NwyILn" resolve="items" />
                 </node>
               </node>
               <node concept="1z4cxt" id="4xZSnh_ySEj" role="2OqNvi">
@@ -547,10 +555,12 @@
           <node concept="3cpWsn" id="2_khaML2lwo" role="3cpWs9">
             <property role="TrG5h" value="prev" />
             <node concept="1PxgMI" id="2_khaML2lwp" role="33vP2m">
-              <ref role="1m5ApE" to="vw7d:4XSronYa85Q" resolve="Slot" />
               <node concept="2OqwBi" id="2_khaML2lwq" role="1m5AlR">
                 <node concept="Q6c8r" id="2_khaML2lwr" role="2Oq$k0" />
                 <node concept="YBYNd" id="2_khaML2lws" role="2OqNvi" />
+              </node>
+              <node concept="chp4Y" id="714IaVdGZbm" role="3oSUPX">
+                <ref role="cht4Q" to="vw7d:4XSronYa85Q" resolve="Slot" />
               </node>
             </node>
             <node concept="3Tqbb2" id="4XSronYbTE0" role="1tU5fm">
@@ -577,8 +587,10 @@
                 </node>
                 <node concept="2OqwBi" id="2_khaML2tgH" role="37vLTJ">
                   <node concept="1PxgMI" id="2_khaML2tel" role="2Oq$k0">
-                    <ref role="1m5ApE" to="vw7d:4XSronYa85Q" resolve="Slot" />
                     <node concept="Q6c8r" id="2_khaML2svv" role="1m5AlR" />
+                    <node concept="chp4Y" id="714IaVdGZbj" role="3oSUPX">
+                      <ref role="cht4Q" to="vw7d:4XSronYa85Q" resolve="Slot" />
+                    </node>
                   </node>
                   <node concept="3TrcHB" id="2_khaML2tpZ" role="2OqNvi">
                     <ref role="3TsBF5" to="vw7d:4XSronYa89W" resolve="start" />
@@ -602,8 +614,10 @@
                   </node>
                   <node concept="2OqwBi" id="2_khaML2w4I" role="37vLTJ">
                     <node concept="1PxgMI" id="2_khaML2w4J" role="2Oq$k0">
-                      <ref role="1m5ApE" to="vw7d:4XSronYa85Q" resolve="Slot" />
                       <node concept="Q6c8r" id="2_khaML2w4K" role="1m5AlR" />
+                      <node concept="chp4Y" id="714IaVdGZbe" role="3oSUPX">
+                        <ref role="cht4Q" to="vw7d:4XSronYa85Q" resolve="Slot" />
+                      </node>
                     </node>
                     <node concept="3TrcHB" id="2_khaML2w4L" role="2OqNvi">
                       <ref role="3TsBF5" to="vw7d:4XSronYa89W" resolve="start" />
@@ -665,11 +679,11 @@
                     <ref role="3cqZAo" node="1RZY6YZNpyO" resolve="plan" />
                   </node>
                   <node concept="3TrEf2" id="1RZY6YZNql4" role="2OqNvi">
-                    <ref role="3Tt5mk" to="vw7d:NU25MqY87S" />
+                    <ref role="3Tt5mk" to="vw7d:NU25MqY87S" resolve="customizes" />
                   </node>
                 </node>
                 <node concept="3TrEf2" id="1RZY6YZNqEH" role="2OqNvi">
-                  <ref role="3Tt5mk" to="vw7d:NU25MqXuwL" />
+                  <ref role="3Tt5mk" to="vw7d:NU25MqXuwL" resolve="target" />
                 </node>
               </node>
               <node concept="37vLTw" id="1RZY6YZNq71" role="37vLTJ">
@@ -683,7 +697,7 @@
                 <node concept="Xl_RD" id="1RZY6YZNxOV" role="2MkJ7o">
                   <property role="Xl_RC" value="There is a circular dependency in the plan customization scheme involving the current DailyPlan." />
                 </node>
-                <node concept="1YBJjd" id="1RZY6YZNy3F" role="2OEOjV">
+                <node concept="1YBJjd" id="1RZY6YZNy3F" role="1urrMF">
                   <ref role="1YBMHb" node="1RZY6YZNplU" resolve="dailyPlan" />
                 </node>
               </node>
@@ -732,7 +746,7 @@
               <ref role="3cqZAo" node="1RZY6YZNpyO" resolve="plan" />
             </node>
             <node concept="3TrEf2" id="1RZY6YZNpMa" role="2OqNvi">
-              <ref role="3Tt5mk" to="vw7d:NU25MqY87S" />
+              <ref role="3Tt5mk" to="vw7d:NU25MqY87S" resolve="customizes" />
             </node>
           </node>
           <node concept="3x8VRR" id="1RZY6YZNq5Q" role="2OqNvi" />

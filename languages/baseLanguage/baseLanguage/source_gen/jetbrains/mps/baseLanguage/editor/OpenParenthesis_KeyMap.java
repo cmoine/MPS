@@ -9,16 +9,17 @@ import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import java.util.List;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class OpenParenthesis_KeyMap extends KeyMapImpl {
   public OpenParenthesis_KeyMap() {
     this.setApplicableToEveryModel(false);
     KeyMapAction action;
-    action = new OpenParenthesis_KeyMap.OpenParenthesis_KeyMap_Action0();
+    action = new OpenParenthesis_KeyMap_Action0();
     this.putAction("ctrl+shift", "VK_LEFT", action);
-    action = new OpenParenthesis_KeyMap.OpenParenthesis_KeyMap_Action1();
+    action = new OpenParenthesis_KeyMap_Action1();
     this.putAction("ctrl+shift", "VK_RIGHT", action);
   }
   public static class OpenParenthesis_KeyMap_Action0 extends KeyMapActionImpl {
@@ -40,7 +41,7 @@ public class OpenParenthesis_KeyMap extends KeyMapImpl {
       if (contextNode == null) {
         return false;
       }
-      if (!(SNodeOperations.isInstanceOf(contextNode, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfb4ed32b7fL, "jetbrains.mps.baseLanguage.structure.ParenthesizedExpression")))) {
+      if (!(SNodeOperations.isInstanceOf(contextNode, CONCEPTS.ParenthesizedExpression$Ws))) {
         return false;
       }
       return true;
@@ -75,7 +76,7 @@ public class OpenParenthesis_KeyMap extends KeyMapImpl {
       if (contextNode == null) {
         return false;
       }
-      if (!(SNodeOperations.isInstanceOf(contextNode, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfb4ed32b7fL, "jetbrains.mps.baseLanguage.structure.ParenthesizedExpression")))) {
+      if (!(SNodeOperations.isInstanceOf(contextNode, CONCEPTS.ParenthesizedExpression$Ws))) {
         return false;
       }
       return true;
@@ -90,5 +91,9 @@ public class OpenParenthesis_KeyMap extends KeyMapImpl {
     public String getKeyStroke() {
       return "ctrl shift RIGHT";
     }
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept ParenthesizedExpression$Ws = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfb4ed32b7fL, "jetbrains.mps.baseLanguage.structure.ParenthesizedExpression");
   }
 }

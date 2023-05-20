@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +15,11 @@
  */
 package jetbrains.mps.messages;
 
-import org.apache.log4j.Logger;
+import jetbrains.mps.logging.Logger;
 import org.jetbrains.annotations.NotNull;
 
-import static jetbrains.mps.logging.Log4jUtil.createMessageObject;
-
 /**
- * Delegates all the IMessages to the given apache's logger
+ * Delegates all the IMessages to the given MPS or apache's (compatibility) logger
  */
 public class LogHandler implements IMessageHandler {
   private final Logger myLog;
@@ -30,16 +28,20 @@ public class LogHandler implements IMessageHandler {
     myLog = log;
   }
 
+  @Deprecated(since = "2022.2", forRemoval = true)
+  public LogHandler(@SuppressWarnings("UnstableApiUsage") @NotNull org.apache.log4j.Logger log) {
+    myLog = Logger.wrap(log);
+  }
+
   @Override
   public void handle(@NotNull IMessage msg) {
-    Object messageObject = createMessageObject(msg.getText(), msg.getHintObject());
     Throwable t = msg.getException();
     if (msg.getKind() == MessageKind.ERROR) {
-      myLog.error(messageObject, t);
+      myLog.error(msg.getText(), t, msg.getHintObject());
     } else if (msg.getKind() == MessageKind.WARNING) {
-      myLog.warn(messageObject, t);
+      myLog.warning(msg.getText(), t, msg.getHintObject());
     } else {
-      myLog.info(messageObject, t);
+      myLog.info(msg.getText(), t, msg.getHintObject());
     }
   }
 }

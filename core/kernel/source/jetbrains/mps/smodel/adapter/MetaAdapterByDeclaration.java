@@ -20,18 +20,15 @@ import jetbrains.mps.smodel.Language;
 import jetbrains.mps.smodel.SNodeUtil;
 import jetbrains.mps.smodel.adapter.ids.MetaIdByDeclaration;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactoryByName;
 import jetbrains.mps.smodel.adapter.structure.concept.SConceptAdapterById;
 import jetbrains.mps.smodel.adapter.structure.concept.SInterfaceConceptAdapterById;
-import jetbrains.mps.util.NameUtil;
-import org.apache.log4j.LogManager;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.language.SLanguage;
 import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
-import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeAccessUtil;
@@ -44,13 +41,13 @@ import org.jetbrains.mps.openapi.model.SNodeAccessUtil;
  * todo usage of this class is rather node-level information usage and should be rewritten
  */
 public class MetaAdapterByDeclaration {
-  private static final Logger LOG = Logger.wrap(LogManager.getLogger(MetaAdapterByDeclaration.class));
+  private static final Logger LOG = Logger.getLogger(MetaAdapterByDeclaration.class);
 
   public static SLanguage getLanguage(Language l) {
     return MetaAdapterFactory.getLanguage(MetaIdByDeclaration.getLanguageId(l), l.getModuleName());
   }
 
-  public static SAbstractConcept getConcept(SNode conceptNode) {
+  public static SAbstractConcept getConcept(@NotNull SNode conceptNode) {
     SModel model = conceptNode.getModel();
     if (model == null) return null;
     if (!(model.getModule() instanceof Language)) return null;
@@ -60,7 +57,7 @@ public class MetaAdapterByDeclaration {
     boolean icd = concept.equals(SNodeUtil.concept_InterfaceConceptDeclaration);
     if (!cd && !icd) return null;
 
-    String name = NameUtil.getModelLongName(model) + "." + getNormalizedName(conceptNode);
+    String name = model.getName().getLongName() + '.' + getNormalizedName(conceptNode);
     if (cd) {
       return MetaAdapterFactory.getConcept(MetaIdByDeclaration.getConceptId(conceptNode), name);
     } else {

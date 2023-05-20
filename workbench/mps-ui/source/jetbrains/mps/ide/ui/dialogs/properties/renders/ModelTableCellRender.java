@@ -15,7 +15,7 @@
  */
 package jetbrains.mps.ide.ui.dialogs.properties.renders;
 
-import jetbrains.mps.ide.icons.IconManager;
+import jetbrains.mps.ide.icons.GlobalIconManager;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.module.SRepository;
@@ -34,7 +34,7 @@ public class ModelTableCellRender extends StateTableCellRenderer<SModelReference
 
   @Override
   protected Icon getIcon(SModelReference cellValue, SModel model) {
-    return IconManager.getIconFor(model);
+    return GlobalIconManager.getInstance().getIconFor(model);
   }
 
   @Override

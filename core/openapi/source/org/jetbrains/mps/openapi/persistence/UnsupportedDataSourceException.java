@@ -22,8 +22,7 @@ import java.io.IOException;
 /**
  * evgeny, 6/3/13
  */
-public class UnsupportedDataSourceException extends IOException {
-
+public final class UnsupportedDataSourceException extends IOException {
   public UnsupportedDataSourceException(@NotNull DataSource dataSource) {
     super(toString(dataSource));
   }

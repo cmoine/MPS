@@ -4,27 +4,44 @@ package jetbrains.mps.lang.generator.generationParameters.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_DefaultGenerationParameterId = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DefaultGeneratorParameter = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DefaultGeneratorParameterContainer = new ConceptPresentationBuilder().icon(IconContainer.RESOURCE_a0a0c).create();
+  private ConceptPresentation props_DefaultGenerationParameterId;
+  private ConceptPresentation props_DefaultGeneratorParameter;
+  private ConceptPresentation props_DefaultGeneratorParameterContainer;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.DefaultGenerationParameterId:
+        if (props_DefaultGenerationParameterId == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("genParameter<..>");
+          props_DefaultGenerationParameterId = cpb.create();
+        }
         return props_DefaultGenerationParameterId;
-      case 1:
+      case LanguageConceptSwitch.DefaultGeneratorParameter:
+        if (props_DefaultGeneratorParameter == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("generation parameter");
+          cpb.presentationByName();
+          props_DefaultGeneratorParameter = cpb.create();
+        }
         return props_DefaultGeneratorParameter;
-      case 2:
+      case LanguageConceptSwitch.DefaultGeneratorParameterContainer:
+        if (props_DefaultGeneratorParameterContainer == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.icon(IconContainer.RESOURCE_a0a2a0a2b0e);
+          props_DefaultGeneratorParameterContainer = cpb.create();
+        }
         return props_DefaultGeneratorParameterContainer;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

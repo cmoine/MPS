@@ -5,70 +5,38 @@ package jetbrains.mps.ide.findusages.view.optionseditor;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.components.StoragePathMacros;
-import com.intellij.openapi.components.ProjectComponent;
+import jetbrains.mps.annotations.GeneratedClass;
 import com.intellij.openapi.components.PersistentStateComponent;
 import org.jdom.Element;
 import com.intellij.openapi.project.Project;
-import jetbrains.mps.ide.make.StartupModuleMaker;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 import jetbrains.mps.project.MPSProject;
-import com.intellij.openapi.startup.StartupManager;
+import jetbrains.mps.ide.project.ProjectHelper;
 
 @State(name = "DefaultSearchOptions3", storages = @Storage(value = StoragePathMacros.WORKSPACE_FILE)
 )
-public class DefaultSearchOptionsComponent implements ProjectComponent, PersistentStateComponent<Element> {
-  private DefaultOptionsContainer myDefaultOptions = null;
-  private Project myProject;
-  private Element myState;
-  public DefaultSearchOptionsComponent(Project project, StartupModuleMaker maker) {
+@GeneratedClass(node = "r:39c01cc7-82c8-4706-9a38-48a33acb0535(jetbrains.mps.ide.findusages.view.optionseditor)/28859145781927652", model = "r:39c01cc7-82c8-4706-9a38-48a33acb0535(jetbrains.mps.ide.findusages.view.optionseditor)")
+public class DefaultSearchOptionsComponent implements PersistentStateComponent<Element> {
+  private final DefaultOptionsContainer myDefaultOptions = new DefaultOptionsContainer();
+  private final Project myProject;
+
+  public DefaultSearchOptionsComponent(Project project) {
     myProject = project;
+    // XXX why don't we keep MPSProject right in DefaultOptionsContainer?
   }
+
   public DefaultOptionsContainer getDefaultOptions() {
     return myDefaultOptions;
   }
-  @NonNls
-  @NotNull
-  @Override
-  public String getComponentName() {
-    return DefaultSearchOptionsComponent.class.getSimpleName();
-  }
-  @Override
-  public void initComponent() {
-  }
-  @Override
-  public void disposeComponent() {
+
+  public static DefaultOptionsContainer getOptions(MPSProject mpsProject) {
+    return mpsProject.getProject().getService(DefaultSearchOptionsComponent.class).getDefaultOptions();
   }
   @Override
   public Element getState() {
-    if (myDefaultOptions == null) {
-      return myState;
-    }
-    myState = myDefaultOptions.writeOptions(myProject.getComponent(MPSProject.class));
-    return myState;
+    return myDefaultOptions.writeOptions(ProjectHelper.fromIdeaProject(myProject));
   }
   @Override
   public void loadState(Element state) {
-    myState = (Element) state.clone();
-    if (myDefaultOptions == null) {
-      return;
-    }
-    myDefaultOptions.readOptions(myState, myProject.getComponent(MPSProject.class));
-  }
-  @Override
-  public void projectOpened() {
-    StartupManager.getInstance(myProject).registerStartupActivity(new Runnable() {
-      @Override
-      public void run() {
-        myDefaultOptions = new DefaultOptionsContainer();
-        if (myState == null) {
-          return;
-        }
-        myDefaultOptions.readOptions(myState, myProject.getComponent(MPSProject.class));
-      }
-    });
-  }
-  @Override
-  public void projectClosed() {
+    myDefaultOptions.readOptions(state, ProjectHelper.fromIdeaProject(myProject));
   }
 }

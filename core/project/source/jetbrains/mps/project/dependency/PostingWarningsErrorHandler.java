@@ -19,6 +19,7 @@ import jetbrains.mps.project.dependency.GlobalModuleDependenciesManager.ErrorHan
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SLanguage;
 import org.jetbrains.mps.openapi.module.SDependency;
+import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SModuleReference;
 
 /**
@@ -27,7 +28,7 @@ import org.jetbrains.mps.openapi.module.SModuleReference;
  * Created by apyshkin on 9/1/16.
  */
 public class PostingWarningsErrorHandler implements ErrorHandler {
-  public final static String DEP_NOT_RESOLVED = "The dependency cannot be resolved %s";
+  public final static String DEP_NOT_RESOLVED = "The dependency in %s cannot be resolved %s";
   public final static String LANG_SOURCE_NOT_RESOLVED = "SLanguage's source module cannot be resolved %s";
   public final static String RUNTIME_OF_LANG_NOT_FOUND = "The runtime dependency could not be found in the repository: used language %s; runtime solution reference: %s";
   public final static String RUNTIME_NOT_FOUND = "The runtime dependency could not be found in the repository: %s";
@@ -35,8 +36,8 @@ public class PostingWarningsErrorHandler implements ErrorHandler {
   private boolean myHasErrors = false;
 
   @Override
-  public void depCannotBeResolved(@NotNull SDependency unresolvableDep) {
-    handleMsg(String.format(DEP_NOT_RESOLVED, unresolvableDep));
+  public void depCannotBeResolved(@NotNull SModule module, @NotNull SDependency unresolvableDep) {
+    handleMsg(String.format(DEP_NOT_RESOLVED, module, unresolvableDep));
   }
 
   @Override
@@ -56,7 +57,7 @@ public class PostingWarningsErrorHandler implements ErrorHandler {
 
   private void handleMsg(@NotNull String msg) {
     myHasErrors = true;
-    GlobalModuleDependenciesManager.LOG.warn(msg);
+    GlobalModuleDependenciesManager.LOG.debug(msg);
   }
 
   public boolean hasErrors() {

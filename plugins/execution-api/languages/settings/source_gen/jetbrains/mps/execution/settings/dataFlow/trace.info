@@ -2,21 +2,24 @@
 <debug-info version="2">
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <root>
     <file name="DataFlowAspectDescriptorImpl.java">
-      <unit at="15,0,46,0" name="jetbrains.mps.execution.settings.dataFlow.DataFlowAspectDescriptorImpl" />
+      <unit at="15,0,30,0" name="jetbrains.mps.execution.settings.dataFlow.DataFlowAspectDescriptorImpl" />
     </file>
   </root>
   <root nodeRef="r:470fa7be-e760-4359-9d80-fc3ff0249d52(jetbrains.mps.execution.settings.dataFlow)/946964771156067208">
     <file name="ReportConfigurationErrorStatement_DataFlow.java">
-      <node id="946964771156067211" at="12,60,13,222" concept="0" />
-      <node id="946964771156067215" at="13,222,14,138" concept="0" />
-      <node id="946964771156067208" at="12,0,16,0" concept="1" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
-      <scope id="946964771156067210" at="12,60,14,138" />
-      <scope id="946964771156067208" at="12,0,16,0">
+      <node id="946964771156067211" at="13,60,14,110" concept="0" />
+      <node id="946964771156067215" at="14,110,15,138" concept="0" />
+      <node id="946964771156067208" at="19,0,20,0" concept="2" trace="expression$Yq4Q" />
+      <node id="946964771156067208" at="13,0,17,0" concept="1" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="946964771156067210" at="13,60,15,138" />
+      <scope id="946964771156067208" at="13,0,17,0">
         <var name="_context" id="946964771156067208" />
       </scope>
-      <unit id="946964771156067208" at="11,0,17,0" name="jetbrains.mps.execution.settings.dataFlow.ReportConfigurationErrorStatement_DataFlow" />
+      <unit id="946964771156067208" at="18,0,21,0" name="jetbrains.mps.execution.settings.dataFlow.ReportConfigurationErrorStatement_DataFlow$LINKS" />
+      <unit id="946964771156067208" at="12,0,22,0" name="jetbrains.mps.execution.settings.dataFlow.ReportConfigurationErrorStatement_DataFlow" />
     </file>
   </root>
 </debug-info>

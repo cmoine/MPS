@@ -18,6 +18,7 @@ package jetbrains.mps.extapi.module;
 import org.jetbrains.mps.openapi.module.SModule;
 
 /**
+ * The modules which persists its contents on disk
  * evgeny, 3/7/13
  */
 public interface EditableSModule extends SModule {

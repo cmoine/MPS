@@ -6,16 +6,9 @@ import jetbrains.mps.nodeEditor.DefaultNodeEditor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Error;
 
 public class Regexp_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createError_rogptd_a(editorContext, node);
-  }
-  private EditorCell createError_rogptd_a(EditorContext editorContext, SNode node) {
-    EditorCell_Error editorCell = new EditorCell_Error(editorContext, node, "regexp");
-    editorCell.setCellId("Error_rogptd_a");
-    editorCell.setBig(true);
-    return editorCell;
+    return new Regexp_EditorBuilder_a(editorContext, node).createCell();
   }
 }

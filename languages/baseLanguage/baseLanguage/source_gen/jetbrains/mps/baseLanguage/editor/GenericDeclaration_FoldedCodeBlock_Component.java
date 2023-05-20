@@ -9,9 +9,6 @@ import java.util.Collections;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Constant;
-import jetbrains.mps.openapi.editor.style.Style;
-import jetbrains.mps.editor.runtime.style.StyleImpl;
 
 public class GenericDeclaration_FoldedCodeBlock_Component implements ConceptEditorComponent {
   @NotNull
@@ -19,15 +16,6 @@ public class GenericDeclaration_FoldedCodeBlock_Component implements ConceptEdit
     return Collections.emptyList();
   }
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createConstant_2ccpf5_a(editorContext, node);
-  }
-  private EditorCell createConstant_2ccpf5_a(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, "{...}");
-    editorCell.setCellId("Constant_2ccpf5_a");
-    Style style = new StyleImpl();
-    BaseLanguageStyle_StyleSheet.apply_FoldedCell(style, editorCell);
-    editorCell.getStyle().putAll(style);
-    editorCell.setDefaultText("");
-    return editorCell;
+    return new GenericDeclaration_FoldedCodeBlock_Component_ComponentBuilder_a(editorContext, node).createCell();
   }
 }

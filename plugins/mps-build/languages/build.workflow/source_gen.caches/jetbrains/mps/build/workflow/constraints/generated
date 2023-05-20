@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-41h0r696gm5pzfiab4xbrmawdvr6gpk" />
+<product version="3" modelHash="-5ys9oltiuxamx3uectvppqrnvjsm0zh">
+  <files names="BwfFileSet_Constraints.java:BwfJavaClassPath_Constraints.java:BwfSubTaskDependency_Constraints.java:BwfSubTask_Constraints.java:BwfTaskLibrary_Constraints.java:BwfTask_Constraints.java:ConstraintsAspectDescriptor.java:XmlForeignRefValue_Constraints.java" />
+</product>
 

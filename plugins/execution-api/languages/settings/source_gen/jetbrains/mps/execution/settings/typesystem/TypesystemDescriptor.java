@@ -29,6 +29,10 @@ public class TypesystemDescriptor extends BaseHelginsDescriptor {
       this.myInferenceRules.add(inferenceRule);
     }
     {
+      InferenceRule_Runtime inferenceRule = new typeof_PersistentConfigurationTemplate_InferenceRule();
+      this.myInferenceRules.add(inferenceRule);
+    }
+    {
       InferenceRule_Runtime inferenceRule = new typeof_PersistentConfigurationTemplateInitializer_InferenceRule();
       this.myInferenceRules.add(inferenceRule);
     }
@@ -38,6 +42,10 @@ public class TypesystemDescriptor extends BaseHelginsDescriptor {
     }
     {
       InferenceRule_Runtime inferenceRule = new typeof_PersistentPropertyReferenceOperation_InferenceRule();
+      this.myInferenceRules.add(inferenceRule);
+    }
+    {
+      InferenceRule_Runtime inferenceRule = new typeof_ProjectAccessExpression_InferenceRule();
       this.myInferenceRules.add(inferenceRule);
     }
     {
@@ -57,7 +65,7 @@ public class TypesystemDescriptor extends BaseHelginsDescriptor {
       this.mySubtypingRules.add(subtypingRule);
     }
     {
-      SubtypingRule_Runtime subtypingRule = new TemplatePersistentConfigurationIsITemplatePersistentConfigurationClassifier_SubtypingRule();
+      SubtypingRule_Runtime subtypingRule = new TemplatePersistentConfigurationTypeClassifier_SubtypingRule();
       this.mySubtypingRules.add(subtypingRule);
     }
     {

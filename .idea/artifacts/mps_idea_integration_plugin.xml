@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="mps-idea-integration-plugin">
+    <output-path>$PROJECT_DIR$/plugins/mps-idea-integration/IDEAPlugin/</output-path>
+    <root id="archive" name="mps-idea-integration-plugin.jar">
+      <element id="module-output" name="IDEAPlugin" />
+      <element id="module-output" name="ideaIntegrationCommon" />
+      <element id="directory" name="META-INF">
+        <element id="dir-copy" path="$PROJECT_DIR$/plugins/mps-idea-integration/IDEAPlugin/META-INF" />
+      </element>
+    </root>
+  </artifact>
+</component>

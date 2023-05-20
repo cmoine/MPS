@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="-dffsfry7l51h2f3uw3gdw2u8jvnzt7e">
+  <files names="ConstraintsAspectDescriptor.java:HttpRequestOperation_Constraints.java:ParameterInitializer_Constraints.java:PortProvider_Constraints.java:Port_Constraints.java:QueryParameterReference_Constraints.java:QueryParameter_Constraints.java:RequestHandler_Constraints.java:SerializeFunction_Constraints.java" />
+</product>
+

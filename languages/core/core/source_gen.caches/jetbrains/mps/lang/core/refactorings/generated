@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-enkmxtoz0iazwmn9ed2v94rjoaysqza" />
+<product version="3" modelHash="2qv6jiosm22adz2h6yb3t3c9ji1hhbg">
+  <files names="RefactoringAspectDescriptor.java:Rename.java:Rename_Target.java" />
+</product>
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,6 +32,12 @@ import java.util.List;
 
 /**
  * Translates IGeneratorLogger calls into IMessageHandler's
+ * Note, errors reported directly to supplied {@code IMessageHandler} instance not necessarily recognized
+ * by Generator as a transformation failure, see uses of {@link GenerationSessionLogger#getErrorCount()}.
+ *
+ * Not sure this is perfect approach, I'd rather stick to a single API to supply messages (e.g. {@code IMessageHandler}),'
+ * but {@code IGeneratorLogger} is a legacy one can hardly get rid off.
+ *
  * Evgeny Gryaznov, Feb 23, 2010
  */
 public class GeneratorLoggerAdapter implements IGeneratorLogger {
@@ -156,7 +162,7 @@ public class GeneratorLoggerAdapter implements IGeneratorLogger {
       report(kind, text, node);
       return;
     }
-    List<Message> messages = new ArrayList<Message>(descriptions.length + 1);
+    List<Message> messages = new ArrayList<>(descriptions.length + 1);
     messages.add(myFactory.prepare(kind, text, node));
     for (ProblemDescription d : descriptions) {
       if (d != null) {
@@ -192,7 +198,7 @@ public class GeneratorLoggerAdapter implements IGeneratorLogger {
     public RecordingFactory(@NotNull MessageFactory delegate) {
       myDelegate = delegate;
       for (MessageKind k : MessageKind.values()) {
-        a[k.ordinal()] = new ConcurrentHashSet<SModelReference>();
+        a[k.ordinal()] = new ConcurrentHashSet<>();
       }
     }
     public Collection<SModelReference> ofKind(MessageKind kind) {

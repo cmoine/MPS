@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -77,6 +77,9 @@ public class ViewOptions implements IExternalizeable {
   @Override
   public void read(Element element, Project project) {
     Element viewOptionsXML = element.getChild(OPTIONS);
+    if (viewOptionsXML == null) {
+      return;
+    }
 
     myCategory = Boolean.valueOf(viewOptionsXML.getAttributeValue(CATEGORY_OPTION));
     myModule = Boolean.valueOf(viewOptionsXML.getAttributeValue(MODULE_OPTION));

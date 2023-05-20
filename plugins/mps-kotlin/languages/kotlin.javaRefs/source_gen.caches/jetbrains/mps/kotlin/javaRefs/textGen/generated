@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="-9acjntzduf5c7ae0f7ddhrtv4stgfa8">
+  <files names="JavaAnnotation_TextGen.java:JavaClassSuperSpecifier_TextGen.java:JavaClassType_TextGen.java:JavaConstructorSuperSpecifier_TextGen.java:JavaDefaultConstructorCall_TextGen.java:JavaDefaultConstructorSuperSpecifier_TextGen.java:JavaEnumConstantReference_TextGen.java:JavaKotlinTextGen.java:JavaMemberTarget_TextGen.java:JavaMethodCall_TextGen.java:JavaMethodVariableReference_TextGen.java:JavaVariableReference_TextGen.java:TextGenAspectDescriptor.java" />
+</product>
+

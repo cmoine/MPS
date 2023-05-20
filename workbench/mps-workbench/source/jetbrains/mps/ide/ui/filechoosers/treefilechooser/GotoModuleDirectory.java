@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,11 +20,12 @@ import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileChooser.FileSystemTree;
 import com.intellij.openapi.fileChooser.actions.FileChooserAction;
+import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
-import jetbrains.mps.ide.vfs.VirtualFileUtils;
 import jetbrains.mps.project.AbstractModule;
-import org.jetbrains.mps.openapi.module.SModule;
+import jetbrains.mps.vfs.IFile;
 import jetbrains.mps.workbench.MPSDataKeys;
+import org.jetbrains.mps.openapi.module.SModule;
 
 public final class GotoModuleDirectory extends FileChooserAction {
   private static final Logger LOG = Logger.getInstance("#com.intellij.openapi.fileChooser.actions.GotoModuleDirectory");
@@ -33,12 +34,7 @@ public final class GotoModuleDirectory extends FileChooserAction {
   protected void actionPerformed(final FileSystemTree fileSystemTree, AnActionEvent e) {
     final VirtualFile path = getModulePath(e);
     LOG.assertTrue(path != null);
-    fileSystemTree.select(path, new Runnable() {
-      @Override
-      public void run() {
-        fileSystemTree.expand(path, null);
-      }
-    });
+    fileSystemTree.select(path, () -> fileSystemTree.expand(path, null));
   }
 
   @Override
@@ -50,8 +46,14 @@ public final class GotoModuleDirectory extends FileChooserAction {
 
   private static VirtualFile getModulePath(AnActionEvent e) {
     SModule module = e.getData(MPSDataKeys.CONTEXT_MODULE);
-    if (!(module instanceof AbstractModule)) return null;
-    final VirtualFile moduleDir = VirtualFileUtils.getProjectVirtualFile(((AbstractModule) module).getModuleSourceDir());
+    if (!(module instanceof AbstractModule)) {
+      return null;
+    }
+    final IFile moduleSourceDir = ((AbstractModule) module).getModuleSourceDir();
+    if (moduleSourceDir == null) {
+      return null;
+    }
+    final VirtualFile moduleDir = LocalFileSystem.getInstance().findFileByPath(moduleSourceDir.getPath());
     return (moduleDir != null) ? validated(moduleDir.getParent()) : null;
   }
 

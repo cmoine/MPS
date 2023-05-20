@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+  <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/jetbrains.mps.ide/classes" />
     <output-test url="file://$MODULE_DIR$/jetbrains.mps.ide/testclasses" />
     <exclude-output />
@@ -24,12 +24,10 @@
     <orderEntry type="module" module-name="editor-runtime" />
     <orderEntry type="module" module-name="collections-runtime" />
     <orderEntry type="module" module-name="closures-runtime" />
-    <orderEntry type="module" module-name="testbench" scope="TEST" />
     <orderEntry type="module" module-name="findUsages-runtime" />
     <orderEntry type="module" module-name="actions-runtime" />
     <orderEntry type="module" module-name="make-runtime" />
     <orderEntry type="module" module-name="refactoring-runtime" />
-    <orderEntry type="module" module-name="baseLanguage-util" />
     <orderEntry type="module" module-name="tuples-runtime" />
     <orderEntry type="module" module-name="typesystemEngine" />
     <orderEntry type="module" module-name="openapi" />
@@ -37,18 +35,16 @@
     <orderEntry type="module" module-name="resources" />
     <orderEntry type="module" module-name="mps-icons" />
     <orderEntry type="module" module-name="kernel-resources" />
-    <orderEntry type="module" module-name="dataflow-rt" />
-    <orderEntry type="module" module-name="migrations-runtime" />
     <orderEntry type="module" module-name="textgen" />
-    <orderEntry type="module" module-name="debuginfo-api" />
-    <orderEntry type="library" name="JDOM" level="project" />
-    <orderEntry type="library" name="Commons-httpclient" level="project" />
-    <orderEntry type="library" name="Trove" level="project" />
-    <orderEntry type="library" scope="TEST" name="JUnit4" level="project" />
-    <orderEntry type="library" name="ASM" level="project" />
-    <orderEntry type="library" name="Eclipse-compiler" level="project" />
-    <orderEntry type="module" module-name="make-facets" />
-    <orderEntry type="module" module-name="scripts-runtime" />
+    <orderEntry type="module" module-name="debuginfo-impl" />
     <orderEntry type="module" module-name="refactoring" />
+    <orderEntry type="module" module-name="model" />
+    <orderEntry type="module" module-name="module" />
+    <orderEntry type="module" module-name="project-check" />
+    <orderEntry type="library" scope="TEST" name="JUnit4" level="project" />
+    <orderEntry type="module" module-name="environment" scope="TEST" />
+    <orderEntry type="module" module-name="typechecking" />
+    <orderEntry type="module" module-name="resources_en" />
+    <orderEntry type="library" name="kotlin_builtins" level="project" />
   </component>
 </module>

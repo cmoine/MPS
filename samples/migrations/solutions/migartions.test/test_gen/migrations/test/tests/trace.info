@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <root nodeRef="r:fd0f5486-f8ee-4117-b081-77c304b23496(migrations.test.tests@tests)/8977123699282978604">
+    <file name="MigrateDeclarationsReferences_Test.java">
+      <node id="8977123699282978604" at="35,47,36,60" concept="6" />
+      <node id="8977123699282978604" at="40,74,41,36" concept="1" />
+      <node id="8977123699282978604" at="46,52,47,19" concept="6" />
+      <node id="8977123699282978604" at="51,46,52,337" concept="4" />
+      <node id="8977123699282978604" at="55,47,56,333" concept="4" />
+      <node id="8977123699282978604" at="59,51,60,87" concept="4" />
+      <node id="8977123699282978604" at="65,0,66,0" concept="5" trace="TestNode$zF" />
+      <node id="8977123699282978604" at="69,0,70,0" concept="5" trace="nodeToCheck$OBcW" />
+      <node id="8977123699282978604" at="29,0,31,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="8977123699282978604" at="32,0,34,0" concept="2" trace="myCommandExtension" />
+      <node id="8977123699282978604" at="35,0,38,0" concept="0" trace="MigrateDeclarationsReferences_Test#()V" />
+      <node id="8977123699282978604" at="46,0,49,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="8977123699282978604" at="39,0,43,0" concept="3" trace="test_MigrateDeclarationsReferences_Test#()V" />
+      <node id="8977123699282978604" at="50,0,54,0" concept="3" trace="getInputNodes#()Ljava/util/Collection;" />
+      <node id="8977123699282978604" at="54,0,58,0" concept="3" trace="getOutputNodes#()Ljava/util/Collection;" />
+      <node id="8977123699282978604" at="58,0,62,0" concept="3" trace="getMigrationScript#()[Ljetbrains/mps/lang/migration/runtime/base/MigrationScript;" />
+      <scope id="8977123699282978604" at="35,47,36,60" />
+      <scope id="8977123699282978604" at="40,74,41,36" />
+      <scope id="8977123699282978604" at="46,52,47,19" />
+      <scope id="8977123699282978604" at="51,46,52,337" />
+      <scope id="8977123699282978604" at="55,47,56,333" />
+      <scope id="8977123699282978604" at="59,51,60,87" />
+      <scope id="8977123699282978604" at="35,0,38,0" />
+      <scope id="8977123699282978604" at="46,0,49,0">
+        <var name="owner" id="8977123699282978604" />
+      </scope>
+      <scope id="8977123699282978604" at="39,0,43,0" />
+      <scope id="8977123699282978604" at="50,0,54,0" />
+      <scope id="8977123699282978604" at="54,0,58,0" />
+      <scope id="8977123699282978604" at="58,0,62,0" />
+      <unit id="8977123699282978604" at="64,0,67,0" name="migrations.test.tests.MigrateDeclarationsReferences_Test$CONCEPTS" />
+      <unit id="8977123699282978604" at="68,0,71,0" name="migrations.test.tests.MigrateDeclarationsReferences_Test$LINKS" />
+      <unit id="8977123699282978604" at="44,0,63,0" name="migrations.test.tests.MigrateDeclarationsReferences_Test$TestBody" />
+      <unit id="8977123699282978604" at="27,0,72,0" name="migrations.test.tests.MigrateDeclarationsReferences_Test" />
+    </file>
+  </root>
+</debug-info>
+

@@ -14,12 +14,18 @@ import jetbrains.mps.build.behavior.BuildProject__BehaviorDescriptor;
 import jetbrains.mps.internal.collections.runtime.ISelector;
 import jetbrains.mps.baseLanguage.tuples.runtime.MultiTuple;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import java.util.Set;
 import jetbrains.mps.internal.collections.runtime.Sequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.internal.collections.runtime.IWhereFilter;
+import org.jetbrains.mps.openapi.model.SModel;
+import org.jetbrains.mps.openapi.module.SModule;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SProperty;
+import org.jetbrains.mps.openapi.language.SConcept;
 
 public class ProjectDependency {
   private final TemplateQueryContext myGenContext;
@@ -45,7 +51,7 @@ public class ProjectDependency {
 
     ListSequence.fromList(myDependency).addSequence(ListSequence.fromList(dependencies).select(new ISelector<SNode, Tuples._2<SNode, String>>() {
       public Tuples._2<SNode, String> select(SNode it) {
-        return MultiTuple.<SNode,String>from(SLinkOperations.getTarget(it, MetaAdapterFactory.getReferenceLink(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd908c220L, 0x4df58c6f18f84a24L, "script")), calculatePath(it, helper));
+        return MultiTuple.<SNode,String>from(SLinkOperations.getTarget(it, LINKS.script$6Ehy), calculatePath(it, helper));
       }
     }));
 
@@ -55,10 +61,10 @@ public class ProjectDependency {
     return myDependency;
   }
   private String calculatePath(SNode node, RelativePathHelper helper) {
-    SNode script = SLinkOperations.getTarget(node, MetaAdapterFactory.getReferenceLink(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd908c220L, 0x4df58c6f18f84a24L, "script"));
+    SNode script = SLinkOperations.getTarget(node, LINKS.script$6Ehy);
     String filePath = BuildProject__BehaviorDescriptor.getScriptsPath_id4ahc858UcHk.invoke(script, myContext);
     if (filePath == null) {
-      myGenContext.showErrorMessage(script, "no script path for required script " + SPropertyOperations.getString(script, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name")));
+      myGenContext.showErrorMessage(script, "no script path for required script " + SPropertyOperations.getString(script, PROPS.name$MnvL));
       return ".";
     }
     try {
@@ -77,19 +83,66 @@ public class ProjectDependency {
   }
   private void dfs(SNode project, List<SNode> result, Set<SNode> visited) {
     SetSequence.fromSet(visited).addElement(project);
-    for (SNode dependency : Sequence.fromIterable(getImmediateDependencies(project))) {
-      if (SetSequence.fromSet(visited).contains(SLinkOperations.getTarget(dependency, MetaAdapterFactory.getReferenceLink(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd908c220L, 0x4df58c6f18f84a24L, "script")))) {
+    for (SNode dependency : Sequence.fromIterable(getLocalDependencies(project))) {
+      if (SetSequence.fromSet(visited).contains(SLinkOperations.getTarget(dependency, LINKS.script$6Ehy))) {
         continue;
       }
-      dfs(SLinkOperations.getTarget(dependency, MetaAdapterFactory.getReferenceLink(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd908c220L, 0x4df58c6f18f84a24L, "script")), result, visited);
+      dfs(SLinkOperations.getTarget(dependency, LINKS.script$6Ehy), result, visited);
       ListSequence.fromList(result).addElement(dependency);
     }
   }
-  private Iterable<SNode> getImmediateDependencies(SNode project) {
-    return Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(project, MetaAdapterFactory.getContainmentLink(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a13L, 0x4df58c6f18f84a25L, "dependencies")), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd908c220L, "jetbrains.mps.build.structure.BuildProjectDependency"))).where(new IWhereFilter<SNode>() {
+  private Iterable<SNode> getLocalDependencies(SNode project) {
+    return Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(project, LINKS.dependencies$redY), CONCEPTS.BuildProjectDependency$sN)).where(new IWhereFilter<SNode>() {
       public boolean accept(SNode it) {
-        return (SLinkOperations.getTarget(it, MetaAdapterFactory.getContainmentLink(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd908c220L, 0x395055ca96617d32L, "artifacts")) == null) && !((boolean) BuildProject__BehaviorDescriptor.isPackaged_id3_glsEmok8d.invoke(SLinkOperations.getTarget(it, MetaAdapterFactory.getReferenceLink(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd908c220L, 0x4df58c6f18f84a24L, "script")), myContext));
+        return (SLinkOperations.getTarget(it, LINKS.artifacts$MVTa) == null) && isProjectLocal(it);
       }
     });
+  }
+
+  /**
+   * Tell whether dependency points to a BP inside local MPS project, so that one
+   * could expect generated build scripts present here, and invoke them as part of myProject build.
+   * 
+   * XXX I got doubts why whole MPS project is treated as a scope. On one hand, we might have
+   * scope limited to the model/module of myProject (and take anything else as 'external' dependency),
+   * OTOH, with absence of project module deployment story, it's not clear whether scenario of
+   * two dependant build solutions inside single MPS project won't get broken. 
+   * According to BuildProject.isPackaged(), any BuildProject from non-packaged module is ok,
+   * as well as any BuildProject from transient module, provided we're inside generation (always true
+   * for this particular class). This assumption doesn't seem to work well with
+   * checkpoint models of deployed build solutions, as they might get copied into transients,
+   * depending on Generator runtime implementation, which is constantly changing.
+   */
+  private boolean isProjectLocal(SNode dep) {
+    SModel targetScriptModel = SNodeOperations.getModel(SLinkOperations.getTarget(dep, LINKS.script$6Ehy));
+    if (targetScriptModel == null || SNodeOperations.getModel(myProject) == null) {
+      // "local" doesn't make sense unless there's location (i.e. my BP's model) to check againts
+      return false;
+    }
+    if (targetScriptModel == SNodeOperations.getModel(myProject)) {
+      // XXX what if we introduce per-root transformation, when one root (BuildProject) comes from transient model, while
+      // target comes from source? Guess, would need to rely on module.isPackaged check below
+      return true;
+    }
+    SModule targetScriptModule = targetScriptModel.getModule();
+    if (targetScriptModule == SNodeOperations.getModel(myProject).getModule()) {
+      return true;
+    }
+    // FIXME add an option Module.isPackaged (to access it like node.model.module.isPackaged)
+    return !(targetScriptModule.isPackaged());
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SReferenceLink script$6Ehy = MetaAdapterFactory.getReferenceLink(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd908c220L, 0x4df58c6f18f84a24L, "script");
+    /*package*/ static final SContainmentLink dependencies$redY = MetaAdapterFactory.getContainmentLink(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a13L, 0x4df58c6f18f84a25L, "dependencies");
+    /*package*/ static final SContainmentLink artifacts$MVTa = MetaAdapterFactory.getContainmentLink(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd908c220L, 0x395055ca96617d32L, "artifacts");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept BuildProjectDependency$sN = MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd908c220L, "jetbrains.mps.build.structure.BuildProjectDependency");
   }
 }

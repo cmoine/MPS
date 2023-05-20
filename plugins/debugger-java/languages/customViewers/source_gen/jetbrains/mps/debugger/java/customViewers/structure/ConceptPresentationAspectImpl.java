@@ -4,54 +4,114 @@ package jetbrains.mps.debugger.java.customViewers.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_CanWrapHighLevelValue_ConceptFunction = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CustomWatchable = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CustomWatchablesContainer = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GetHighLevelValuePresentation_ConceptFunction = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GetHighLevelWatchablesBlock_ConceptFunction = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_HighLevelCustomViewer = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_HighLevelValue_ConceptFunctionParameter = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_HighLevelWatchableCreator = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ToProcessMethod = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_WatchableListType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_WatchableType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_WatchablesListCreator = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_CanWrapHighLevelValue_ConceptFunction;
+  private ConceptPresentation props_CustomWatchable;
+  private ConceptPresentation props_CustomWatchablesContainer;
+  private ConceptPresentation props_GetHighLevelValuePresentation_ConceptFunction;
+  private ConceptPresentation props_GetHighLevelWatchablesBlock_ConceptFunction;
+  private ConceptPresentation props_HighLevelCustomViewer;
+  private ConceptPresentation props_HighLevelValue_ConceptFunctionParameter;
+  private ConceptPresentation props_HighLevelWatchableCreator;
+  private ConceptPresentation props_ToProcessMethod;
+  private ConceptPresentation props_WatchableListType;
+  private ConceptPresentation props_WatchableType;
+  private ConceptPresentation props_WatchablesListCreator;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.CanWrapHighLevelValue_ConceptFunction:
+        if (props_CanWrapHighLevelValue_ConceptFunction == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("CanWrapHighLevelValue_ConceptFunction");
+          props_CanWrapHighLevelValue_ConceptFunction = cpb.create();
+        }
         return props_CanWrapHighLevelValue_ConceptFunction;
-      case 1:
+      case LanguageConceptSwitch.CustomWatchable:
+        if (props_CustomWatchable == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_CustomWatchable = cpb.create();
+        }
         return props_CustomWatchable;
-      case 2:
+      case LanguageConceptSwitch.CustomWatchablesContainer:
+        if (props_CustomWatchablesContainer == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_CustomWatchablesContainer = cpb.create();
+        }
         return props_CustomWatchablesContainer;
-      case 3:
+      case LanguageConceptSwitch.GetHighLevelValuePresentation_ConceptFunction:
+        if (props_GetHighLevelValuePresentation_ConceptFunction == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("GetHighLevelValuePresentation_ConceptFunction");
+          props_GetHighLevelValuePresentation_ConceptFunction = cpb.create();
+        }
         return props_GetHighLevelValuePresentation_ConceptFunction;
-      case 4:
+      case LanguageConceptSwitch.GetHighLevelWatchablesBlock_ConceptFunction:
+        if (props_GetHighLevelWatchablesBlock_ConceptFunction == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("GetHighLevelWatchablesBlock_ConceptFunction");
+          props_GetHighLevelWatchablesBlock_ConceptFunction = cpb.create();
+        }
         return props_GetHighLevelWatchablesBlock_ConceptFunction;
-      case 5:
+      case LanguageConceptSwitch.HighLevelCustomViewer:
+        if (props_HighLevelCustomViewer == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_HighLevelCustomViewer = cpb.create();
+        }
         return props_HighLevelCustomViewer;
-      case 6:
+      case LanguageConceptSwitch.HighLevelValue_ConceptFunctionParameter:
+        if (props_HighLevelValue_ConceptFunctionParameter == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("value");
+          props_HighLevelValue_ConceptFunctionParameter = cpb.create();
+        }
         return props_HighLevelValue_ConceptFunctionParameter;
-      case 7:
+      case LanguageConceptSwitch.HighLevelWatchableCreator:
+        if (props_HighLevelWatchableCreator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("watchable");
+          props_HighLevelWatchableCreator = cpb.create();
+        }
         return props_HighLevelWatchableCreator;
-      case 8:
+      case LanguageConceptSwitch.ToProcessMethod:
+        if (props_ToProcessMethod == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("to process method");
+          props_ToProcessMethod = cpb.create();
+        }
         return props_ToProcessMethod;
-      case 9:
+      case LanguageConceptSwitch.WatchableListType:
+        if (props_WatchableListType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("watchable list");
+          props_WatchableListType = cpb.create();
+        }
         return props_WatchableListType;
-      case 10:
+      case LanguageConceptSwitch.WatchableType:
+        if (props_WatchableType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("watchable");
+          props_WatchableType = cpb.create();
+        }
         return props_WatchableType;
-      case 11:
+      case LanguageConceptSwitch.WatchablesListCreator:
+        if (props_WatchablesListCreator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("watchables array list");
+          props_WatchablesListCreator = cpb.create();
+        }
         return props_WatchablesListCreator;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

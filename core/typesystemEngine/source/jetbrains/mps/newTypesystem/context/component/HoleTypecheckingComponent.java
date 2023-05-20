@@ -48,7 +48,7 @@ public class HoleTypecheckingComponent extends SimpleTypecheckingComponent<HoleS
   @Override
   protected void computeTypes(SNode initialNode, SNode node) {
     if (getState().getInequalitySystem() == null) {
-      computeTypes(node,true, true, Collections.<SNode>emptyList(), true, initialNode);
+      computeTypes(node, true, true, Collections.emptyList(), true, initialNode);
     }
   }
 

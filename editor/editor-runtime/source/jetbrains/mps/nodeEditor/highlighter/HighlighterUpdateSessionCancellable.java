@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,9 @@
  */
 package jetbrains.mps.nodeEditor.highlighter;
 
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.nodeEditor.EditorComponent;
-import jetbrains.mps.smodel.ModelAccess;
 import jetbrains.mps.util.Cancellable;
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNode;
@@ -30,16 +29,14 @@ import org.jetbrains.mps.openapi.model.SNode;
  * <li>the editor component is disposed</li>
  * <li>the editor component highlighting update is disabled</li>
  * <li>the edited node changes</li>
- * <li>the highlighter is paused</li>
- * <li>a write action is scheduled</li>
+ * <li>outer {@code Cancellable} request (platform/model access conditions, like platfom/model write action or command)</li>
  * </ul>
  */
 class HighlighterUpdateSessionCancellable implements Cancellable {
   private static final Logger LOG = Logger.getLogger(HighlighterUpdateSessionCancellable.class);
   private static final long MAX_CHECK_INTERVAL_MS = 200L;
 
-  @NotNull
-  private final IHighlighter myHighlighter;
+  private final Cancellable myDelegate;
   private final String myCheckerName;
   @NotNull
   private final EditorComponent myEditorComponent;
@@ -48,8 +45,8 @@ class HighlighterUpdateSessionCancellable implements Cancellable {
   private volatile boolean myCancelRequested = false;
   private long myLastCheckTime;
 
-  HighlighterUpdateSessionCancellable(@NotNull IHighlighter highlighter, String checkerName, @NotNull EditorComponent editorComponent) {
-    myHighlighter = highlighter;
+  HighlighterUpdateSessionCancellable(@NotNull Cancellable delegate, String checkerName, @NotNull EditorComponent editorComponent) {
+    myDelegate = delegate;
     myCheckerName = checkerName;
     myEditorComponent = editorComponent;
     myNode = myEditorComponent.getEditedNode();
@@ -59,7 +56,7 @@ class HighlighterUpdateSessionCancellable implements Cancellable {
   @Override
   public boolean isCancelled() {
     long timeSinceLastCheck = System.currentTimeMillis() - myLastCheckTime;
-    if (timeSinceLastCheck > MAX_CHECK_INTERVAL_MS && LOG.isDebugEnabled()) {
+    if (timeSinceLastCheck > MAX_CHECK_INTERVAL_MS && LOG.isDebugLevel()) {
       Throwable stackTrace = new Throwable();
       stackTrace.fillInStackTrace();
       LOG.debug(String.format("Checker %s: long time since last cancellation check (%d ms > threshold %d ms). Stack trace:",
@@ -81,13 +78,17 @@ class HighlighterUpdateSessionCancellable implements Cancellable {
   private boolean shouldCancel() {
     String reason = getCancellationReason();
     if (reason != null) {
-      if (LOG.isDebugEnabled()) {
-        LOG.debug("Cancelling highlighter update run: " + reason);
-      }
+      debugReason(reason);
       return true;
     }
 
     return false;
+  }
+
+  /*package*/ static void debugReason(String reason) {
+    if (LOG.isDebugLevel()) {
+      LOG.debug("Cancelling highlighter update run: " + reason);
+    }
   }
 
   @Nullable
@@ -98,13 +99,9 @@ class HighlighterUpdateSessionCancellable implements Cancellable {
     if (myEditorComponent.getEditedNode() != myNode) {
       return "edited node has changed";
     }
-    if (myHighlighter.isPausedOrStopping()) {
-      return "highlighter is paused";
+    if (myDelegate.isCancelled()) {
+      return "external request";
     }
-    if (ModelAccess.instance().hasScheduledWrites()) {
-      return "writes are scheduled";
-    }
-
     return null;
   }
 }

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-3h05usxc5r53a9ckm34krnaa4lkindw" />
+<product version="3" modelHash="-3zeq6sjv7q5xn8heti69vyg2a7mpgpy">
+  <files names="BigComplex.java:BigComplexScalarOperations.java:BigDecimalScalarOperations.java:Complex.java:Interval.java:MathRuntime.java:Matrix.java:MatrixOperation.java:MatrixScalarOperations.java:NormKind.java" />
+</product>
 

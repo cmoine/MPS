@@ -2,13 +2,12 @@
 <model ref="r:00000000-0000-4000-0000-011c89590423(jetbrains.mps.samples.complex.editor)">
   <persistence version="9" />
   <languages>
-    <use id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor" version="4" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
-    <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="4" />
+    <use id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor" version="14" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
+    <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="19" />
   </languages>
   <imports>
     <import index="tpo9" ref="r:00000000-0000-4000-0000-011c89590425(jetbrains.mps.samples.complex.structure)" />
-    <import index="tpck" ref="r:00000000-0000-4000-0000-011c89590288(jetbrains.mps.lang.core.structure)" />
     <import index="tpco" ref="r:00000000-0000-4000-0000-011c89590284(jetbrains.mps.lang.core.editor)" />
     <import index="tpee" ref="r:00000000-0000-4000-0000-011c895902ca(jetbrains.mps.baseLanguage.structure)" implicit="true" />
   </imports>
@@ -57,11 +56,7 @@
       <concept id="1139848536355" name="jetbrains.mps.lang.editor.structure.CellModel_WithRole" flags="ng" index="1$h60E">
         <reference id="1140103550593" name="relationDeclaration" index="1NtTu8" />
       </concept>
-      <concept id="1073389214265" name="jetbrains.mps.lang.editor.structure.EditorCellModel" flags="ng" index="3EYTF0">
-        <property id="1130859485024" name="attractsFocus" index="1cu_pB" />
-      </concept>
       <concept id="1073389446423" name="jetbrains.mps.lang.editor.structure.CellModel_Collection" flags="sn" stub="3013115976261988961" index="3EZMnI">
-        <property id="1073389446425" name="vertical" index="3EZMnw" />
         <child id="1106270802874" name="cellLayout" index="2iSdaV" />
         <child id="1073389446424" name="childCellModel" index="3EZMnx" />
       </concept>
@@ -158,9 +153,7 @@
   <node concept="24kQdi" id="hq6TiAZ">
     <ref role="1XX52x" to="tpo9:hq6GVit" resolve="SingleComplexExpression" />
     <node concept="3EZMnI" id="hqgeSBc" role="2wV5jI">
-      <property role="3EZMnw" value="false" />
       <node concept="PMmxH" id="2wdLO7KhY3C" role="3EZMnx">
-        <property role="1cu_pB" value="0" />
         <ref role="PMmxG" to="tpco:2wZex4PafBj" resolve="alias" />
         <node concept="3$7jql" id="2wdLO7KhY3D" role="3F10Kt">
           <property role="3$6WeP" value="0.0" />
@@ -187,7 +180,6 @@
   <node concept="24kQdi" id="hqgkfBz">
     <ref role="1XX52x" to="tpo9:hqgj$nO" resolve="DegreeComplexExpression" />
     <node concept="3EZMnI" id="hqgkgIS" role="2wV5jI">
-      <property role="3EZMnw" value="false" />
       <node concept="3F0ifn" id="hqgki_$" role="3EZMnx">
         <property role="3F0ifm" value="(" />
       </node>
@@ -220,7 +212,7 @@
     <node concept="1Qtc8_" id="1wEcoXjJ$YM" role="IW6Ez">
       <node concept="3cWJ9i" id="1wEcoXjJ$YK" role="1Qtc8$">
         <node concept="CtIbL" id="1wEcoXjJ$YL" role="CtIbM">
-          <property role="CtIbK" value="RIGHT" />
+          <property role="CtIbK" value="30NnNOohrQL/RIGHT" />
         </node>
       </node>
       <node concept="IWgqT" id="1wEcoXjJ$YO" role="1Qtc8A">
@@ -293,7 +285,7 @@
                 <node concept="1OKiuA" id="1wEcoXjJ$Zo" role="2OqNvi">
                   <node concept="1Q80Hx" id="1wEcoXjJ$Zp" role="lBI5i" />
                   <node concept="2B6iha" id="1wEcoXjJ$Zq" role="lGT1i">
-                    <property role="1lyBwo" value="mostRelevant" />
+                    <property role="1lyBwo" value="59pBc0SIIVt/mostRelevant" />
                   </node>
                   <node concept="3cmrfG" id="1wEcoXjJ$Zr" role="3dN3m$">
                     <property role="3cmrfH" value="-1" />
@@ -377,7 +369,7 @@
                 <node concept="1OKiuA" id="1wEcoXjJ_03" role="2OqNvi">
                   <node concept="1Q80Hx" id="1wEcoXjJ_04" role="lBI5i" />
                   <node concept="2B6iha" id="1wEcoXjJ_05" role="lGT1i">
-                    <property role="1lyBwo" value="mostRelevant" />
+                    <property role="1lyBwo" value="59pBc0SIIVt/mostRelevant" />
                   </node>
                   <node concept="3cmrfG" id="1wEcoXjJ_06" role="3dN3m$">
                     <property role="3cmrfH" value="-1" />
@@ -461,7 +453,7 @@
                 <node concept="1OKiuA" id="1wEcoXjJ_0I" role="2OqNvi">
                   <node concept="1Q80Hx" id="1wEcoXjJ_0J" role="lBI5i" />
                   <node concept="2B6iha" id="1wEcoXjJ_0K" role="lGT1i">
-                    <property role="1lyBwo" value="mostRelevant" />
+                    <property role="1lyBwo" value="59pBc0SIIVt/mostRelevant" />
                   </node>
                   <node concept="3cmrfG" id="1wEcoXjJ_0L" role="3dN3m$">
                     <property role="3cmrfH" value="-1" />
@@ -545,7 +537,7 @@
                 <node concept="1OKiuA" id="1wEcoXjJ_1p" role="2OqNvi">
                   <node concept="1Q80Hx" id="1wEcoXjJ_1q" role="lBI5i" />
                   <node concept="2B6iha" id="1wEcoXjJ_1r" role="lGT1i">
-                    <property role="1lyBwo" value="mostRelevant" />
+                    <property role="1lyBwo" value="59pBc0SIIVt/mostRelevant" />
                   </node>
                   <node concept="3cmrfG" id="1wEcoXjJ_1s" role="3dN3m$">
                     <property role="3cmrfH" value="-1" />
@@ -629,7 +621,7 @@
                 <node concept="1OKiuA" id="1wEcoXjJ_24" role="2OqNvi">
                   <node concept="1Q80Hx" id="1wEcoXjJ_25" role="lBI5i" />
                   <node concept="2B6iha" id="1wEcoXjJ_26" role="lGT1i">
-                    <property role="1lyBwo" value="mostRelevant" />
+                    <property role="1lyBwo" value="59pBc0SIIVt/mostRelevant" />
                   </node>
                   <node concept="3cmrfG" id="1wEcoXjJ_27" role="3dN3m$">
                     <property role="3cmrfH" value="-1" />
@@ -713,7 +705,7 @@
                 <node concept="1OKiuA" id="1wEcoXjJ_2J" role="2OqNvi">
                   <node concept="1Q80Hx" id="1wEcoXjJ_2K" role="lBI5i" />
                   <node concept="2B6iha" id="1wEcoXjJ_2L" role="lGT1i">
-                    <property role="1lyBwo" value="mostRelevant" />
+                    <property role="1lyBwo" value="59pBc0SIIVt/mostRelevant" />
                   </node>
                   <node concept="3cmrfG" id="1wEcoXjJ_2M" role="3dN3m$">
                     <property role="3cmrfH" value="-1" />

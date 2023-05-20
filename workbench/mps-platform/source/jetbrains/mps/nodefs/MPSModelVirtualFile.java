@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,19 +19,14 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileSystem;
 import jetbrains.mps.extapi.persistence.FileDataSource;
 import jetbrains.mps.extapi.persistence.FolderDataSource;
-import jetbrains.mps.ide.vfs.VirtualFileUtils;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.smodel.ModelAccessHelper;
-import jetbrains.mps.util.Computable;
-import jetbrains.mps.util.NameUtil;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.persistence.DataSource;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -40,7 +35,7 @@ import java.io.OutputStream;
  * Date: 3/6/13
  */
 public final class MPSModelVirtualFile extends VirtualFile {
-  private static final Logger LOG = LogManager.getLogger(MPSModelVirtualFile.class);
+  private static final Logger LOG = Logger.getLogger(MPSModelVirtualFile.class);
   private static final byte[] ZERO_BYTES = new byte[0];
   public static final String MODEL_PREFIX = "model://";
 
@@ -60,7 +55,7 @@ public final class MPSModelVirtualFile extends VirtualFile {
     myRepoFiles.getRepository().getModelAccess().runReadAction(() -> {
       SModel model = myModelReference.resolve(myRepoFiles.getRepository());
       if (model == null) {
-        LOG.error("Model resolve failed for SModelReference: " + myModelReference.toString(), new Throwable());
+        LOG.error("Model resolve failed for SModelReference: " + myModelReference, new Throwable());
         myName = "";
         myPath = "";
       } else {
@@ -110,21 +105,18 @@ public final class MPSModelVirtualFile extends VirtualFile {
   @Override
   public VirtualFile getParent() {
     // hack
-    return new ModelAccessHelper(myRepoFiles.getRepository()).runReadAction(new Computable<VirtualFile>() {
-      @Override
-      public VirtualFile compute() {
-        SModel model = myModelReference.resolve(myRepoFiles.getRepository());
-        if (model == null) {
-          return null;
-        }
-        DataSource ds = model.getSource();
-        if (ds instanceof FileDataSource) {
-          return VirtualFileUtils.getOrCreateVirtualFile(((FileDataSource) ds).getFile());
-        } else if (ds instanceof FolderDataSource) {
-          return VirtualFileUtils.getOrCreateVirtualFile(((FolderDataSource) ds).getFolder());
-        } else {
-          return null;
-        }
+    return new ModelAccessHelper(myRepoFiles.getRepository()).runReadAction(() -> {
+      SModel model = myModelReference.resolve(myRepoFiles.getRepository());
+      if (model == null) {
+        return null;
+      }
+      DataSource ds = model.getSource();
+      if (ds instanceof FileDataSource) {
+        return myRepoFiles.asVirtualFile(((FileDataSource) ds).getFile());
+      } else if (ds instanceof FolderDataSource) {
+        return myRepoFiles.asVirtualFile(((FolderDataSource) ds).getFolder());
+      } else {
+        return null;
       }
     });
   }
@@ -136,13 +128,13 @@ public final class MPSModelVirtualFile extends VirtualFile {
 
   @NotNull
   @Override
-  public OutputStream getOutputStream(Object requestor, long newModificationStamp, long newTimeStamp) throws IOException {
+  public OutputStream getOutputStream(Object requestor, long newModificationStamp, long newTimeStamp) {
     throw new UnsupportedOperationException();
   }
 
   @NotNull
   @Override
-  public byte[] contentsToByteArray() throws IOException {
+  public byte[] contentsToByteArray() {
     return ZERO_BYTES;
   }
 
@@ -160,8 +152,9 @@ public final class MPSModelVirtualFile extends VirtualFile {
   public void refresh(boolean asynchronous, boolean recursive, @Nullable Runnable postRunnable) {
   }
 
+  @NotNull
   @Override
-  public InputStream getInputStream() throws IOException {
+  public InputStream getInputStream() {
     throw new UnsupportedOperationException();
   }
 }

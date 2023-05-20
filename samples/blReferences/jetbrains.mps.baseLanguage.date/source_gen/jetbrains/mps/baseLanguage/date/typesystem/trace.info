@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <root>
+    <file name="TypesystemDescriptor.java">
+      <unit at="62,0,68,0" name="jetbrains.mps.baseLanguage.date.typesystem.TypesystemDescriptor$CONCEPTS" />
+      <unit at="16,0,69,0" name="jetbrains.mps.baseLanguage.date.typesystem.TypesystemDescriptor" />
+    </file>
+  </root>
+  <root nodeRef="r:68ed5d1f-b4f4-4838-8372-2ea983ca9337(jetbrains.mps.baseLanguage.date.typesystem)/3825148134790537984">
+    <file name="TypesystemDescriptor.java">
+      <node id="3825148134790537984" at="18,5,19,83" concept="4" />
+      <node id="3825148134790537984" at="19,83,20,47" concept="2" />
+      <node id="3825148134790537984" at="17,33,21,5" concept="0" />
+      <scope id="3825148134790537984" at="18,5,20,47">
+        <var name="inferenceRule" id="3825148134790537984" />
+      </scope>
+    </file>
+    <file name="typeof_DateLiteral_InferenceRule.java">
+      <node id="3825148134790538108" at="20,5,21,53" concept="4" />
+      <node id="3825148134790538108" at="21,53,22,208" concept="4" />
+      <node id="3825148134790538108" at="22,208,23,282" concept="2" />
+      <node id="3825148134790537984" at="26,50,27,35" concept="5" />
+      <node id="3825148134790537984" at="29,68,30,102" concept="5" />
+      <node id="3825148134790537984" at="32,30,33,17" concept="5" />
+      <node id="3825148134790538114" at="35,58,36,68" concept="4" />
+      <node id="3825148134790538114" at="36,68,37,26" concept="5" />
+      <node id="3825148134790537984" at="41,0,42,0" concept="6" trace="DateLiteral$Tm" />
+      <node id="3825148134790537984" at="42,0,43,0" concept="6" trace="DateType$qp" />
+      <node id="3825148134790537984" at="17,0,19,0" concept="1" trace="typeof_DateLiteral_InferenceRule#()V" />
+      <node id="3825148134790537984" at="26,0,29,0" concept="3" trace="getApplicableConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="3825148134790537984" at="29,0,32,0" concept="3" trace="isApplicableAndPattern#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljetbrains/mps/lang/typesystem/runtime/IsApplicableStatus;" />
+      <node id="3825148134790537984" at="32,0,35,0" concept="3" trace="overrides#()Z" />
+      <node id="3825148134790538114" at="35,0,39,0" concept="7" trace="createDateType_gobu8k_a1a0c0a0b#()Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="3825148134790538108" at="19,124,24,5" concept="0" />
+      <node id="3825148134790537984" at="19,0,26,0" concept="3" trace="applyRule#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/typesystem/inference/TypeCheckingContext;Ljetbrains/mps/lang/typesystem/runtime/IsApplicableStatus;)V" />
+      <scope id="3825148134790537984" at="17,45,17,45" />
+      <scope id="3825148134790537984" at="26,50,27,35" />
+      <scope id="3825148134790537984" at="29,68,30,102" />
+      <scope id="3825148134790537984" at="32,30,33,17" />
+      <scope id="3825148134790537984" at="17,0,19,0" />
+      <scope id="3825148134790538114" at="35,58,37,26">
+        <var name="n0" id="3825148134790538114" />
+      </scope>
+      <scope id="3825148134790538108" at="20,5,23,282">
+        <var name="_info_12389875345" id="3825148134790538108" />
+        <var name="_nodeToCheck_1029348928467" id="3825148134790538108" />
+      </scope>
+      <scope id="3825148134790537984" at="26,0,29,0" />
+      <scope id="3825148134790537984" at="29,0,32,0">
+        <var name="argument" id="3825148134790537984" />
+      </scope>
+      <scope id="3825148134790537984" at="32,0,35,0" />
+      <scope id="3825148134790538114" at="35,0,39,0" />
+      <scope id="3825148134790537985" at="19,124,24,5" />
+      <scope id="3825148134790537984" at="19,0,26,0">
+        <var name="dateLiteral" id="3825148134790537984" />
+        <var name="status" id="3825148134790537984" />
+        <var name="typeCheckingContext" id="3825148134790537984" />
+      </scope>
+      <unit id="3825148134790537984" at="40,0,44,0" name="jetbrains.mps.baseLanguage.date.typesystem.typeof_DateLiteral_InferenceRule$CONCEPTS" />
+      <unit id="3825148134790537984" at="16,0,45,0" name="jetbrains.mps.baseLanguage.date.typesystem.typeof_DateLiteral_InferenceRule" />
+    </file>
+  </root>
+  <root nodeRef="r:68ed5d1f-b4f4-4838-8372-2ea983ca9337(jetbrains.mps.baseLanguage.date.typesystem)/3825148134790538966">
+    <file name="TypesystemDescriptor.java">
+      <node id="3839101718930994378" at="25,5,26,135" concept="2" />
+      <node id="3825148134790539495" at="26,135,27,125" concept="2" />
+      <node id="3825148134790539181" at="30,80,31,62" concept="2" />
+      <node id="3825148134790539181" at="31,62,32,66" concept="2" />
+      <node id="3825148134790539181" at="32,66,33,40" concept="2" />
+      <node id="3825148134790539181" at="33,40,34,37" concept="2" />
+      <node id="3825148134790539181" at="34,37,35,38" concept="2" />
+      <node id="3825148134790539181" at="35,38,36,35" concept="2" />
+      <node id="3825148134790539181" at="36,35,37,34" concept="2" />
+      <node id="3825148134790539181" at="37,34,38,112" concept="2" />
+      <node id="3825148134790539181" at="38,112,39,48" concept="2" />
+      <node id="3825148134790541254" at="41,99,42,43" concept="5" />
+      <node id="3825148134790539181" at="45,71,46,59" concept="2" />
+      <node id="3825148134790541126" at="48,57,49,70" concept="4" />
+      <node id="3825148134790541126" at="49,70,50,28" concept="5" />
+      <node id="3825148134790541173" at="52,60,53,73" concept="4" />
+      <node id="3825148134790541173" at="53,73,54,28" concept="5" />
+      <node id="3825148134790541256" at="56,56,57,70" concept="4" />
+      <node id="3825148134790541256" at="57,70,58,28" concept="5" />
+      <node id="3825148134790539181" at="41,0,44,0" concept="3" trace="getOperationType#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="3825148134790539181" at="44,0,48,0" concept="3" trace="reportConflict#(Ljetbrains/mps/errors/IRuleConflictWarningProducer;)V" />
+      <node id="3825148134790541126" at="48,0,52,0" concept="7" trace="createDateType_3ist9o_a0a0a1#()Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="3825148134790541173" at="52,0,56,0" concept="7" trace="createIntegerType_3ist9o_a0b0a1#()Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="3825148134790541256" at="56,0,60,0" concept="7" trace="createDateType_3ist9o_a0a1b#()Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="3825148134790539181" at="30,0,41,0" concept="1" trace="CustomOverloadedOperationsTypesProvider_a#(Lorg/jetbrains/mps/openapi/language/SAbstractConcept;)V" />
+      <scope id="3825148134790539206" at="41,99,42,43" />
+      <scope id="3825148134790539181" at="45,71,46,59" />
+      <scope id="3825148134790541126" at="48,57,50,28">
+        <var name="n0" id="3825148134790541126" />
+      </scope>
+      <scope id="3825148134790541173" at="52,60,54,28">
+        <var name="n0" id="3825148134790541173" />
+      </scope>
+      <scope id="3825148134790541256" at="56,56,58,28">
+        <var name="n0" id="3825148134790541256" />
+      </scope>
+      <scope id="3825148134790539181" at="41,0,44,0">
+        <var name="leftOperandType" id="3825148134790539181" />
+        <var name="operation" id="3825148134790539181" />
+        <var name="rightOperandType" id="3825148134790539181" />
+      </scope>
+      <scope id="3825148134790539181" at="44,0,48,0">
+        <var name="producer" id="3825148134790539181" />
+      </scope>
+      <scope id="3825148134790541126" at="48,0,52,0" />
+      <scope id="3825148134790541173" at="52,0,56,0" />
+      <scope id="3825148134790541256" at="56,0,60,0" />
+      <scope id="3825148134790539181" at="30,80,39,48" />
+      <scope id="3825148134790539181" at="30,0,41,0">
+        <var name="concept" id="3825148134790539181" />
+      </scope>
+      <unit id="3825148134790539181" at="29,0,61,0" name="jetbrains.mps.baseLanguage.date.typesystem.TypesystemDescriptor$CustomOverloadedOperationsTypesProvider_a" />
+    </file>
+  </root>
+  <root nodeRef="r:68ed5d1f-b4f4-4838-8372-2ea983ca9337(jetbrains.mps.baseLanguage.date.typesystem)/8192696647778148033">
+    <file name="TypesystemDescriptor.java">
+      <node id="8192696647778148033" at="22,5,23,93" concept="4" />
+      <node id="8192696647778148033" at="23,93,24,47" concept="2" />
+      <node id="8192696647778148033" at="21,5,25,5" concept="0" />
+      <scope id="8192696647778148033" at="22,5,24,47">
+        <var name="subtypingRule" id="8192696647778148033" />
+      </scope>
+    </file>
+    <file name="supertypesOf_DateType_Object_SubtypingRule.java">
+      <node id="8192696647778148186" at="18,118,19,47" concept="5" />
+      <node id="8192696647778148033" at="21,50,22,32" concept="5" />
+      <node id="8192696647778148033" at="24,68,25,102" concept="5" />
+      <node id="8192696647778148033" at="27,27,28,16" concept="5" />
+      <node id="8192696647778148033" at="30,39,31,16" concept="5" />
+      <node id="8192696647778148184" at="33,60,34,30" concept="4" />
+      <node id="8192696647778148184" at="34,30,35,225" concept="4" />
+      <node id="8192696647778148184" at="35,225,36,34" concept="2" />
+      <node id="8192696647778148184" at="36,34,37,214" concept="2" />
+      <node id="8192696647778148184" at="37,214,38,24" concept="5" />
+      <node id="8192696647778148033" at="42,0,43,0" concept="6" trace="DateType$qp" />
+      <node id="8192696647778148033" at="16,0,18,0" concept="1" trace="supertypesOf_DateType_Object_SubtypingRule#()V" />
+      <node id="8192696647778148033" at="18,0,21,0" concept="3" trace="getSubOrSuperType#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/typesystem/inference/TypeCheckingContext;Ljetbrains/mps/lang/typesystem/runtime/IsApplicableStatus;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="8192696647778148033" at="21,0,24,0" concept="3" trace="getApplicableConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="8192696647778148033" at="24,0,27,0" concept="3" trace="isApplicableAndPattern#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljetbrains/mps/lang/typesystem/runtime/IsApplicableStatus;" />
+      <node id="8192696647778148033" at="27,0,30,0" concept="3" trace="isWeak#()Z" />
+      <node id="8192696647778148033" at="30,0,33,0" concept="3" trace="surelyKeepsConcept#()Z" />
+      <node id="8192696647778148184" at="33,0,40,0" concept="7" trace="_quotation_createNode_rjv840_a0a1#()Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <scope id="8192696647778148033" at="16,55,16,55" />
+      <scope id="8192696647778148034" at="18,118,19,47" />
+      <scope id="8192696647778148033" at="21,50,22,32" />
+      <scope id="8192696647778148033" at="24,68,25,102" />
+      <scope id="8192696647778148033" at="27,27,28,16" />
+      <scope id="8192696647778148033" at="30,39,31,16" />
+      <scope id="8192696647778148033" at="16,0,18,0" />
+      <scope id="8192696647778148033" at="18,0,21,0">
+        <var name="dateType" id="8192696647778148033" />
+        <var name="status" id="8192696647778148033" />
+        <var name="typeCheckingContext" id="8192696647778148033" />
+      </scope>
+      <scope id="8192696647778148033" at="21,0,24,0" />
+      <scope id="8192696647778148033" at="24,0,27,0">
+        <var name="argument" id="8192696647778148033" />
+      </scope>
+      <scope id="8192696647778148033" at="27,0,30,0" />
+      <scope id="8192696647778148033" at="30,0,33,0" />
+      <scope id="8192696647778148184" at="33,60,38,24">
+        <var name="nb" id="8192696647778148184" />
+        <var name="quotedNode_1" id="8192696647778148184" />
+      </scope>
+      <scope id="8192696647778148184" at="33,0,40,0" />
+      <unit id="8192696647778148033" at="41,0,44,0" name="jetbrains.mps.baseLanguage.date.typesystem.supertypesOf_DateType_Object_SubtypingRule$CONCEPTS" />
+      <unit id="8192696647778148033" at="15,0,45,0" name="jetbrains.mps.baseLanguage.date.typesystem.supertypesOf_DateType_Object_SubtypingRule" />
+    </file>
+  </root>
+</debug-info>
+

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,21 +15,20 @@
  */
 package jetbrains.mps.typesystem.inference.util;
 
-import jetbrains.mps.lang.pattern.util.IMatchModifier;
-import jetbrains.mps.lang.pattern.util.MatchingUtil;
-import jetbrains.mps.smodel.MPSModuleRepository;
+import jetbrains.mps.smodel.SNodeHashStrategy;
+import jetbrains.mps.smodel.SNodeMatcher;
 import org.jetbrains.mps.openapi.model.SNode;
-import org.jetbrains.mps.openapi.model.SNodeUtil;
 
 import java.lang.ref.WeakReference;
 
 public class CacheNodeHandler {
-  private WeakReference<SNode> myNodeRef;
-  private int myHash;
+  private final WeakReference<SNode> myNodeRef;
+  private final int myHash;
 
   public CacheNodeHandler(SNode node) {
-    myNodeRef = new WeakReference<SNode>(node);
-    myHash = MatchingUtil.hash(node);
+    // FIXME is it true we need WeakReference(SNode) and can't use SNodeReference?
+    myNodeRef = new WeakReference<>(node);
+    myHash = SNodeHashStrategy.WholeTreeAndIgnoreAttributes.hash(node);
   }
 
   public int hashCode() {
@@ -39,10 +38,13 @@ public class CacheNodeHandler {
   public boolean equals(Object obj) {
     if (obj instanceof CacheNodeHandler) {
       CacheNodeHandler anotherHandler = (CacheNodeHandler) obj;
+      if (myHash != anotherHandler.myHash) {
+        return false;
+      }
       if (getNode() == null || anotherHandler.getNode() == null) {
         return false;
       }
-      return MatchingUtil.matchNodes(this.getNode(), anotherHandler.getNode(), IMatchModifier.DEFAULT, false);
+      return new SNodeMatcher().withAttributes(false).match(this.getNode(), anotherHandler.getNode());
     } else {
       return false;
     }

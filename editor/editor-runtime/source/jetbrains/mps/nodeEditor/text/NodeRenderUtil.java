@@ -36,8 +36,9 @@ public class NodeRenderUtil {
   }
 
   private static TextBuilder renderNodeAsText(SNode node, SRepository repository) {
-    HeadlessEditorComponent comp = new HeadlessEditorComponent(node, repository);
+    HeadlessEditorComponent comp = new HeadlessEditorComponent(repository);
     try {
+      comp.editNode(node);
       return comp.getRootCell().renderText();
     } finally {
       comp.dispose();

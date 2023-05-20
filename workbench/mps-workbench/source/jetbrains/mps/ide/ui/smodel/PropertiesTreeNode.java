@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,27 +15,35 @@
  */
 package jetbrains.mps.ide.ui.smodel;
 
-import jetbrains.mps.ide.projectPane.Icons;
+import com.intellij.icons.AllIcons.Nodes;
+import com.intellij.util.IconUtil;
 import jetbrains.mps.ide.ui.tree.MPSTreeNodeEx;
 import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.model.SNode;
-
-import javax.swing.tree.DefaultTreeModel;
+import org.jetbrains.mps.openapi.model.SNodeReference;
 
 public class PropertiesTreeNode extends MPSTreeNodeEx {
-  private SNode myNode;
+  private final SNode myNode;
+  private final SNodeReference myNodePointer;
   private boolean myInitialized = false;
 
   public PropertiesTreeNode(SNode node) {
     myNode = node;
+    myNodePointer = node.getReference();
 
-    setIcon(Icons.PROPERTY_ICON);
+    // TODO: add special icon for node properties
+    setIcon(IconUtil.addText(Nodes.Folder, "P"));
     setNodeIdentifier("properties");
   }
 
   @Override
   public SNode getSNode() {
     return myNode;
+  }
+
+  @Override
+  public SNodeReference getNodePointer() {
+    return myNodePointer;
   }
 
   @Override

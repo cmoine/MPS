@@ -1,16 +1,13 @@
-MPS generated files:
-mps-make/makeTests/source_gen.caches/MainJava/dependencies
-mps-make/makeTests/source_gen.caches/MainJava/generated
-source_gen/MainJava/Main.java
-source_gen/MainJava/trace.info
-End of files
-Cleaning output files:
-source_gen/MainJava/Main.java
-source_gen/MainJava/trace.info
-End of files
-MPS generated files:
-mps-make/makeTests/source_gen.caches/NonEmptyMainJava/dependencies
-mps-make/makeTests/source_gen.caches/NonEmptyMainJava/generated
-source_gen/NonEmptyMainJava/Main.java
-source_gen/NonEmptyMainJava/trace.info
-End of files
+[COMPILED/MPS]
+  mps-make/makeTests/source_gen.caches/MainJava/dependencies
+  mps-make/makeTests/source_gen.caches/MainJava/generated
+  source_gen/MainJava/Main.java
+  source_gen/MainJava/trace.info
+[DELETED]
+  source_gen/MainJava/Main.java
+  source_gen/MainJava/trace.info
+[COMPILED/MPS]
+  mps-make/makeTests/source_gen.caches/NonEmptyMainJava/dependencies
+  mps-make/makeTests/source_gen.caches/NonEmptyMainJava/generated
+  source_gen/NonEmptyMainJava/Main.java
+  source_gen/NonEmptyMainJava/trace.info

@@ -69,10 +69,8 @@ public abstract class AbstractNodeInformationDialog extends JDialog {
   public AbstractNodeInformationDialog(Frame owner, Point location, String text) {
     super(owner);
 
-    prevFocusOwner = owner.getFocusOwner();
-    if (prevFocusOwner == null) {
-      prevFocusOwner = owner.getMostRecentFocusOwner();
-    }
+    prevFocusOwner = owner.getMostRecentFocusOwner();
+    setAutoRequestFocus(false);
 
     setUndecorated(true);
     setModal(false);
@@ -111,21 +109,11 @@ public abstract class AbstractNodeInformationDialog extends JDialog {
     myTextArea.addKeyListener(myInformationDialogKeyListener);
   }
 
-
   @Override
   public void dispose() {
     prevFocusOwner.removeFocusListener(myOwnerFocusListener);
     prevFocusOwner.removeKeyListener(myOwnerKeyListener);
     prevFocusOwner.removeMouseListener(myOwnerMouseListener);
     super.dispose();
-  }
-  
-  @Override
-  public void setVisible(boolean b) {
-    super.setVisible(b);
-    // focusing prevFocusOvner to redirect all keyboard events there by default
-    if (b) {
-      prevFocusOwner.requestFocus();
-    }
   }
 }

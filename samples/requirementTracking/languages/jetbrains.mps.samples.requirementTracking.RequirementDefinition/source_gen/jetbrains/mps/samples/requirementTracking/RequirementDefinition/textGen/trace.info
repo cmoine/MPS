@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082113931046:jetbrains.mps.baseLanguage.structure.ContinueStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144226303539:jetbrains.mps.baseLanguage.structure.ForeachStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <root>
+    <file name="TextGenAspectDescriptor.java">
+      <unit at="52,0,55,0" name="jetbrains.mps.samples.requirementTracking.RequirementDefinition.textGen.TextGenAspectDescriptor$CONCEPTS" />
+      <unit at="16,0,56,0" name="jetbrains.mps.samples.requirementTracking.RequirementDefinition.textGen.TextGenAspectDescriptor" />
+    </file>
+  </root>
+  <root nodeRef="r:693133de-361e-42b8-8c1a-31635bf5e4ff(jetbrains.mps.samples.requirementTracking.RequirementDefinition.textGen)/4174052498195937226">
+    <file name="Specification_TextGen.java">
+      <node id="4174052498195937226" at="17,54,18,55" concept="5" />
+      <node id="4174052498195940069" at="18,55,19,32" concept="1" />
+      <node id="4174052498195940204" at="19,32,20,86" concept="1" />
+      <node id="4174052498195942613" at="20,86,21,18" concept="1" />
+      <node id="4174052498195943144" at="21,18,22,18" concept="1" />
+      <node id="4174052498195943532" at="23,95,24,27" concept="1" />
+      <node id="4174052498195942270" at="25,5,26,0" concept="7" />
+      <node id="4174052498195937226" at="30,0,31,0" concept="8" trace="name$MnvL" />
+      <node id="4174052498195937226" at="34,0,35,0" concept="8" trace="entries$mbg3" />
+      <node id="4174052498195943532" at="22,18,25,5" concept="2" />
+      <node id="4174052498195937226" at="16,0,28,0" concept="4" trace="generateText#(Ljetbrains/mps/text/rt/TextGenContext;)V" />
+      <scope id="4174052498195943532" at="23,95,24,27" />
+      <scope id="4174052498195943532" at="22,18,25,5">
+        <var name="item" id="4174052498195943532" />
+      </scope>
+      <scope id="4174052498195937226" at="17,54,26,0">
+        <var name="tgs" id="4174052498195937226" />
+      </scope>
+      <scope id="4174052498195937226" at="16,0,28,0">
+        <var name="ctx" id="4174052498195937226" />
+      </scope>
+      <unit id="4174052498195937226" at="29,0,32,0" name="jetbrains.mps.samples.requirementTracking.RequirementDefinition.textGen.Specification_TextGen$PROPS" />
+      <unit id="4174052498195937226" at="33,0,36,0" name="jetbrains.mps.samples.requirementTracking.RequirementDefinition.textGen.Specification_TextGen$LINKS" />
+      <unit id="4174052498195937226" at="15,0,37,0" name="jetbrains.mps.samples.requirementTracking.RequirementDefinition.textGen.Specification_TextGen" />
+    </file>
+    <file name="TextGenAspectDescriptor.java">
+      <node id="4174052498195937226" at="28,47,29,43" concept="6" />
+      <node id="4174052498195937226" at="37,64,38,55" concept="5" />
+      <node id="4174052498195937226" at="38,55,39,58" concept="5" />
+      <node id="4174052498195937226" at="39,58,40,84" concept="1" />
+      <node id="4174052498195937226" at="40,84,41,17" concept="0" />
+      <node id="4174052498195937226" at="45,63,46,26" concept="6" />
+      <node id="4174052498195937784" at="48,68,49,18" concept="6" />
+      <node id="4174052498195937226" at="45,0,48,0" concept="9" trace="getFileName_Specification#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
+      <node id="4174052498195937226" at="48,0,51,0" concept="9" trace="getFileExtension_Specification#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
+      <node id="4174052498195937226" at="36,58,42,7" concept="3" />
+      <scope id="4174052498195937226" at="28,47,29,43" />
+      <scope id="4174052498195937226" at="45,63,46,26" />
+      <scope id="4174052498195937226" at="48,68,49,18" />
+      <scope id="4174052498195937226" at="45,0,48,0">
+        <var name="node" id="4174052498195937226" />
+      </scope>
+      <scope id="4174052498195937226" at="48,0,51,0">
+        <var name="node" id="4174052498195937226" />
+      </scope>
+      <scope id="4174052498195937226" at="37,64,41,17">
+        <var name="ext" id="4174052498195937226" />
+        <var name="fname" id="4174052498195937226" />
+      </scope>
+    </file>
+  </root>
+  <root nodeRef="r:693133de-361e-42b8-8c1a-31635bf5e4ff(jetbrains.mps.samples.requirementTracking.RequirementDefinition.textGen)/4174052498195944692">
+    <file name="Entry_TextGen.java">
+      <node id="4174052498195944692" at="22,54,23,55" concept="5" />
+      <node id="4174052498195944737" at="23,55,24,83" concept="1" />
+      <node id="4174052498195950567" at="24,83,25,21" concept="1" />
+      <node id="4174052498196001448" at="26,96,27,86" concept="1" />
+      <node id="4174052498196002957" at="27,86,28,23" concept="1" />
+      <node id="4174052498196006348" at="29,5,30,86" concept="1" />
+      <node id="4174052498196007857" at="30,86,31,18" concept="1" />
+      <node id="4174052498196143002" at="36,74,37,123" concept="1" />
+      <node id="4174052498196152482" at="37,123,38,30" concept="1" />
+      <node id="4174052498196175874" at="39,95,40,198" concept="1" />
+      <node id="4174052498196175880" at="40,198,41,30" concept="1" />
+      <node id="4174052498196054198" at="44,11,45,22" concept="1" />
+      <node id="4174052498196290970" at="47,7,48,18" concept="1" />
+      <node id="4174052498196054220" at="48,18,49,0" concept="7" />
+      <node id="4174052498196001267" at="51,55,52,43" concept="6" />
+      <node id="4174052498195944692" at="56,0,57,0" concept="8" trace="id$hYkt" />
+      <node id="4174052498195944692" at="57,0,58,0" concept="8" trace="name$MnvL" />
+      <node id="4174052498195944692" at="58,0,59,0" concept="8" trace="value$zQr_" />
+      <node id="4174052498195944692" at="62,0,63,0" concept="8" trace="description$ksG0" />
+      <node id="4174052498195944692" at="63,0,64,0" concept="8" trace="lines$U$m7" />
+      <node id="4174052498195944692" at="64,0,65,0" concept="8" trace="elements$_j45" />
+      <node id="4174052498195944692" at="65,0,66,0" concept="8" trace="node$KGJq" />
+      <node id="4174052498195944692" at="69,0,70,0" concept="8" trace="Word$Dn" />
+      <node id="4174052498195944692" at="70,0,71,0" concept="8" trace="NodeWrapperElement$c8" />
+      <node id="4174052498196001267" at="51,0,54,0" concept="9" trace="isNotEmptyString#(Ljava/lang/String;)Z" />
+      <node id="4174052498195990836" at="25,21,29,5" concept="3" />
+      <node id="4174052498196126049" at="35,44,42,13" concept="3" />
+      <node id="4174052498196125315" at="35,0,44,0" concept="4" trace="visit#(Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <node id="4174052498196058624" at="33,37,44,11" concept="1" />
+      <node id="4174052498196053618" at="33,0,47,0" concept="4" trace="visit#(Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <node id="4174052498196012920" at="31,18,47,7" concept="1" />
+      <node id="4174052498195944692" at="21,0,51,0" concept="4" trace="generateText#(Ljetbrains/mps/text/rt/TextGenContext;)V" />
+      <scope id="4174052498196001267" at="51,55,52,43" />
+      <scope id="4174052498195990838" at="26,96,28,23" />
+      <scope id="4174052498196126051" at="36,74,38,30" />
+      <scope id="4174052498196153553" at="39,95,41,30" />
+      <scope id="4174052498196001267" at="51,0,54,0">
+        <var name="str" id="4174052498196001267" />
+      </scope>
+      <scope id="4174052498196125316" at="35,44,42,13" />
+      <scope id="4174052498196125315" at="35,0,44,0">
+        <var name="element" id="4174052498196125315" />
+      </scope>
+      <scope id="4174052498196053619" at="33,37,45,22" />
+      <scope id="4174052498196053618" at="33,0,47,0">
+        <var name="line" id="4174052498196053618" />
+      </scope>
+      <scope id="4174052498195944692" at="22,54,49,0">
+        <var name="tgs" id="4174052498195944692" />
+      </scope>
+      <scope id="4174052498195944692" at="21,0,51,0">
+        <var name="ctx" id="4174052498195944692" />
+      </scope>
+      <unit id="4174052498195944692" at="68,0,72,0" name="jetbrains.mps.samples.requirementTracking.RequirementDefinition.textGen.Entry_TextGen$CONCEPTS" />
+      <unit id="4174052498195944692" at="55,0,60,0" name="jetbrains.mps.samples.requirementTracking.RequirementDefinition.textGen.Entry_TextGen$PROPS" />
+      <unit id="4174052498195944692" at="61,0,67,0" name="jetbrains.mps.samples.requirementTracking.RequirementDefinition.textGen.Entry_TextGen$LINKS" />
+      <unit id="4174052498196125315" at="34,99,44,9" name="jetbrains.mps.samples.requirementTracking.RequirementDefinition.textGen.Entry_TextGen$1$1" />
+      <unit id="4174052498196053618" at="32,160,47,5" name="jetbrains.mps.samples.requirementTracking.RequirementDefinition.textGen.Entry_TextGen$1" />
+      <unit id="4174052498195944692" at="20,0,73,0" name="jetbrains.mps.samples.requirementTracking.RequirementDefinition.textGen.Entry_TextGen" />
+    </file>
+    <file name="TextGenAspectDescriptor.java">
+      <node id="4174052498195944692" at="26,39,27,35" concept="6" />
+      <scope id="4174052498195944692" at="26,39,27,35" />
+    </file>
+  </root>
+</debug-info>
+

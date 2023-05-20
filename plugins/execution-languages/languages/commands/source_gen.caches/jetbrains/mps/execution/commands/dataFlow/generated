@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="1efw4a52iq7wrwkme18agpdbpaes2yu" />
+<product version="3" modelHash="-4fg0s27wbbl4sq0uii70hk4acrt1ptn">
+  <files names="CommandBuilderExpression_DataFlow.java:DataFlowAspectDescriptorImpl.java:NewProcessBuilderExpression_DataFlow.java:RedirectOutputExpression_DataFlow.java:ReportErrorStatement_DataFlow.java" />
+</product>
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,15 +19,10 @@ import com.intellij.ide.SelectInTarget;
 import com.intellij.ide.projectView.ProjectView;
 import com.intellij.ide.projectView.impl.ProjectViewPane;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataProvider;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.actionSystem.ToggleAction;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.components.State;
-import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.components.StoragePathMacros;
 import com.intellij.openapi.fileEditor.FileEditor;
-import com.intellij.openapi.fileEditor.FileEditorManagerAdapter;
 import com.intellij.openapi.fileEditor.FileEditorManagerEvent;
 import com.intellij.openapi.fileEditor.FileEditorManagerListener;
 import com.intellij.openapi.project.Project;
@@ -35,11 +30,17 @@ import com.intellij.openapi.util.ActionCallback;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.WriteExternalException;
+import com.intellij.openapi.util.registry.Registry;
+import com.intellij.openapi.util.registry.RegistryValue;
+import com.intellij.openapi.util.registry.RegistryValueListener;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowId;
 import com.intellij.openapi.wm.ToolWindowManager;
-import com.intellij.ui.components.JBScrollPane;
+import com.intellij.ui.ScrollPaneFactory;
+import com.intellij.ui.stripe.ErrorStripe;
+import com.intellij.ui.stripe.ErrorStripePainter;
+import com.intellij.ui.stripe.TreeUpdater;
 import com.intellij.util.messages.MessageBusConnection;
 import com.intellij.util.ui.update.MergingUpdateQueue;
 import com.intellij.util.ui.update.Update;
@@ -47,23 +48,26 @@ import jetbrains.mps.RuntimeFlags;
 import jetbrains.mps.icons.MPSIcons;
 import jetbrains.mps.ide.ThreadUtils;
 import jetbrains.mps.ide.editor.MPSFileNodeEditor;
+import jetbrains.mps.ide.editor.tabs.TabbedEditor;
 import jetbrains.mps.ide.platform.watching.ReloadListener;
 import jetbrains.mps.ide.platform.watching.ReloadManager;
-import jetbrains.mps.ide.projectPane.logicalview.ProjectPaneTree;
 import jetbrains.mps.ide.projectPane.logicalview.ProjectTree;
 import jetbrains.mps.ide.projectPane.logicalview.ProjectTreeFindHelper;
 import jetbrains.mps.ide.projectView.ProjectViewPaneOverride;
 import jetbrains.mps.ide.ui.tree.MPSTree;
 import jetbrains.mps.ide.ui.tree.MPSTreeNode;
+import jetbrains.mps.ide.ui.tree.TreeErrorMessage;
 import jetbrains.mps.ide.ui.tree.TreeHighlighterExtension;
+import jetbrains.mps.ide.ui.tree.smodel.SModelTreeNode;
+import jetbrains.mps.ide.ui.tree.smodel.SNodeGroupTreeNode;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.openapi.editor.EditorComponent;
 import jetbrains.mps.project.MPSProject;
 import jetbrains.mps.smodel.ModelReadRunnable;
+import jetbrains.mps.smodel.tempmodel.TempModule;
+import jetbrains.mps.smodel.tempmodel.TempModule2;
 import jetbrains.mps.util.annotation.Hack;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.jdom.Element;
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SModel;
@@ -72,42 +76,50 @@ import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SModuleReference;
-import org.jetbrains.mps.openapi.module.SRepositoryListenerBase;
+import org.jetbrains.mps.openapi.module.SRepositoryListener;
 
 import javax.swing.Icon;
 import javax.swing.JComponent;
-import java.awt.Component;
+import javax.swing.JScrollPane;
+import javax.swing.tree.TreeCellRenderer;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
-@State(
-    name = "MPSProjectPane",
-    storages = @Storage(StoragePathMacros.WORKSPACE_FILE)
-)
 public class ProjectPane extends BaseLogicalViewProjectPane implements ProjectViewPaneOverride {
-  private static final Logger LOG = LogManager.getLogger(ProjectPane.class);
-  private final SRepositoryListenerBase myRepositoryListener = new SRepositoryListenerBase() {
+  private static final Logger LOG = Logger.getLogger(ProjectPane.class);
+  private final SRepositoryListener myRepositoryListener = new SRepositoryListener() {
     @Override
     public void moduleAdded(@NotNull SModule module) {
+      if (module instanceof TempModule || module instanceof TempModule2) {
+        return;
+      }
+      // fixme why do not we add only module node here?
       ProjectPane.this.updateFromRoot(true);
     }
 
     @Override
-    public void moduleRemoved(@NotNull SModuleReference module) {
+    public void beforeModuleRemoved(@NotNull SModule module) {
+      if (module instanceof TempModule || module instanceof TempModule2) {
+        return;
+      }
       ProjectPane.this.updateFromRoot(true);
     }
   };
+  private final ReloadListener myReloadListener;
 
-  private MyScrollPane myScrollPane;
+  private JScrollPane myScrollPane;
   // FIXME there's update queue in MPSTree, do really we need both?
   private final MergingUpdateQueue myUpdateQueue = new MergingUpdateQueue("Project Pane Updates Queue", 500, true, myScrollPane, null, null, true);
 
   public static final String ID = ProjectViewPane.ID;
 
-  private final FileEditorManagerAdapter myEditorListener = new FileEditorManagerAdapter() {
+  private final FileEditorManagerListener myEditorListener = new FileEditorManagerListener() {
     @Override
-    public void selectionChanged(FileEditorManagerEvent event) {
+    public void selectionChanged(@NotNull FileEditorManagerEvent event) {
       FileEditor fileEditor = event.getNewEditor();
       if (fileEditor instanceof MPSFileNodeEditor) {
         final MPSFileNodeEditor editor = (MPSFileNodeEditor) fileEditor;
@@ -116,8 +128,10 @@ public class ProjectPane extends BaseLogicalViewProjectPane implements ProjectVi
           if (editorComponent == null) {
             return;
           }
-          final SNode sNode = editorComponent.getEditedNode();
-          selectNodeWithoutExpansion(sNode.getReference());
+          final SNodeReference sNode = editorComponent.getEditedNodePointer();
+          if (sNode != null) {
+            selectNodeWithoutExpansion(sNode);
+          }
         }
       }
     }
@@ -125,28 +139,41 @@ public class ProjectPane extends BaseLogicalViewProjectPane implements ProjectVi
   private List<List<String>> myExpandedPathsRaw = Collections.emptyList();
   private List<List<String>> mySelectedPathsRaw = Collections.emptyList();
   private MessageBusConnection myConnection;
-  private final ShowDescriptorModelsAction myShowDescriptorModelsAction;
+  private final ToggleAndRebuildAction myShowDescriptorModelsAction;
+  private final ToggleAndRebuildAction myShowErrorComponent;
+  private final ToggleAndRebuildAction myShowUnderline;
+  private final ToggleAndRebuildAction myShowErrorsOnly;
+  private final ToggleAndRebuildAction myShowErrorStripe;
 
-  public ProjectPane(final Project project, ProjectView projectView) {
-    super(project, projectView);
+  public ProjectPane(final Project project) {
+    super(project);
     myUpdateQueue.setRestartTimerOnAdd(true);
-    ReloadManager.getInstance().addReloadListener(new ReloadListener() {
+    myReloadListener = new ReloadListener() {
       @Override
       public void reloadStarted() {
-
       }
 
       @Override
       public void reloadFinished() {
         rebuild();
       }
-    });
-    myShowDescriptorModelsAction = new ShowDescriptorModelsAction(this);
+    };
+    // XXX provided we add a listener, perhaps, shall keep instance in a field or introduce a method to take Disposable with listener (IDEA style)
+    ReloadManager.getInstance().addReloadListener(myReloadListener);
+    // I'm using RegistryValues, not regular PersistentStateComponent properties to keep settings as I'd like to see statistics if anyone modifies
+    // these settings, and, if yes, how.
+    myShowDescriptorModelsAction = new ToggleAndRebuildAction(this, "@descriptor models in Generators", "mps.ProjectPane.show.descriptor.generator");
+    myShowErrorComponent = new ToggleAndRebuildAction(this, "Show Indicator", "mps.ProjectPane.messages.use.indicator");
+    myShowUnderline = new ToggleAndRebuildAction(this, "Underline Nodes", "mps.ProjectPane.messages.use.underline");
+    myShowErrorsOnly = new ToggleAndRebuildAction(this, "Errors Only", "mps.ProjectPane.messages.error.only");
+    // expose IDEA's registry setting in UI, to ease turn off for those not willing to see it
+    myShowErrorStripe = new ToggleAndRebuildAction(this, "Error Stripe", "error.stripe.enabled");
   }
 
   @Override
   public void dispose() {
     myUpdateQueue.dispose();
+    ReloadManager.getInstance().removeReloadListener(myReloadListener);
     super.dispose();
   }
 
@@ -163,6 +190,11 @@ public class ProjectPane extends BaseLogicalViewProjectPane implements ProjectVi
     super.addListeners();
     assert myConnection == null; // double initialization
     myConnection = getProject().getMessageBus().connect();
+    myConnection.subscribe(TabbedEditor.TAB_CHANGES, nodeRef -> {
+      if (getProjectView().isAutoscrollFromSource(ID)) {
+        selectNodeWithoutExpansion(nodeRef);
+      }
+    });
     myConnection.subscribe(FileEditorManagerListener.FILE_EDITOR_MANAGER, myEditorListener);
     getMPSProject().getRepository().addRepositoryListener(myRepositoryListener);
   }
@@ -216,7 +248,7 @@ public class ProjectPane extends BaseLogicalViewProjectPane implements ProjectVi
 
   @Override
   public SelectInTarget createSelectInTarget() {
-    return new ProjectPaneSelectInTarget(getMPSProject(), true);
+    return new ProjectPaneSelectInTarget(this, getTitle(), true);
   }
 
   @Override
@@ -228,17 +260,21 @@ public class ProjectPane extends BaseLogicalViewProjectPane implements ProjectVi
   @Override
   public ActionCallback updateFromRoot(boolean restoreExpandedPaths) {
     // XXX why not MPSTree.rebuildLater?
-    // FIXME what's the difference with #rebuildTree?
+    // FIXME is there need for #rebuildTree?
+    final ActionCallback cb = new ActionCallback();
     myUpdateQueue.queue(new AbstractUpdate(UpdateID.REBUILD) {
       @Override
       public void run() {
-        if (getTree() == null) {
+        ProjectTree tree = getTree();
+        if (tree == null || getProject().isDisposed()) {
+          cb.reject("already disposed");
           return;
         }
-        getTree().rebuildNow();
+        tree.rebuildNow();
+        cb.setDone();
       }
     });
-    return new ActionCallback(); // todo
+    return cb;
   }
 
   @Override
@@ -254,15 +290,37 @@ public class ProjectPane extends BaseLogicalViewProjectPane implements ProjectVi
 
     ProjectPaneTree tree = new ProjectPaneTree(this, myProject);
     Disposer.register(this, tree);
-    tree.setShowStructureCondition(this::showNodeStructure);
+    final Predicate<MPSTreeNode> treeNodeWithRootGrouping = t -> (t instanceof SModelTreeNode || t instanceof SNodeGroupTreeNode) && isSortByConcept();
+    tree.orderChildrenWith(new LogicalViewChildOrder(this, new ProjectTreeChildOrder(treeNodeWithRootGrouping)));
     myTree = tree;
 
-    myScrollPane = new MyScrollPane(getTree());
+    myScrollPane = ScrollPaneFactory.createScrollPane(tree);
     addListeners();
-    if (!RuntimeFlags.isTestMode()) {
+    if (!RuntimeFlags.isTestMode() && !ApplicationManager.getApplication().isHeadlessEnvironment()) {
       rebuild();
     }
     TreeHighlighterExtension.attachHighlighters(tree, myProject);
+    // copied from AbstractProjectViewPSIPane.createComponent(), with changes
+    if (myShowErrorStripe.isSelected()) {
+      ErrorStripePainter painter = new ErrorStripePainter(true);
+      Disposer.register(this, new TreeUpdater<>(painter, myScrollPane, myTree) {
+
+        @Override
+        protected void update(ErrorStripePainter painter) {
+          if (myShowErrorStripe.get()) {
+            super.update(painter);
+          } else {
+            // if user decided to switch error stripes off, don't bother updating
+            painter.clear();
+          }
+        }
+
+        @Override
+        protected ErrorStripe getErrorStripe(Object object) {
+          return ProjectPane.this.getErrorStripe(object);
+        }
+      });
+    }
     return myScrollPane;
   }
 
@@ -271,18 +329,13 @@ public class ProjectPane extends BaseLogicalViewProjectPane implements ProjectVi
     return myScrollPane != null;
   }
 
+  /**
+   * @deprecated use {@link #rebuild()} instead
+   */
+  @Deprecated(since = "2020.3", forRemoval = true)
   public void rebuildTree() {
     // @see #updateFromRoot
-    myUpdateQueue.queue(new AbstractUpdate(UpdateID.REBUILD) {
-      @Override
-      public void run() {
-        if (getTree() == null || getProject().isDisposed()) {
-          return;
-        }
-        getTree().rebuildNow();
-        getTree().expandProjectNode();
-      }
-    });
+    updateFromRoot(true);
   }
 
   public void activate() {
@@ -292,16 +345,23 @@ public class ProjectPane extends BaseLogicalViewProjectPane implements ProjectVi
 
   @Override
   public void rebuild() {
-    // This method can be called from different threads, however rebuildTree()
+    // This method can be called from different threads, however updateFromRoot()
     // merely adds an update to the update queue, and thus it's safe to invoke it
     // without runReadInEDT or runInUIThreadNoWait as it used to be.
-    rebuildTree();
+    updateFromRoot(true);
   }
 
   @Override
   public void addToolbarActions(DefaultActionGroup group) {
     super.addToolbarActions(group);
-    group.add(myShowDescriptorModelsAction);
+    group.addAction(myShowDescriptorModelsAction).setAsSecondary(true);
+    DefaultActionGroup g = new DefaultActionGroup("Errors && Warnings", true);
+    g.addAction(myShowErrorComponent).setAsSecondary(true);
+    g.addAction(myShowUnderline).setAsSecondary(true);
+    g.addAction(myShowErrorStripe).setAsSecondary(true);
+    g.addSeparator();
+    g.addAction(myShowErrorsOnly).setAsSecondary(true);
+    group.addAction(g).setAsSecondary(true);
   }
 
   @Override
@@ -345,11 +405,6 @@ public class ProjectPane extends BaseLogicalViewProjectPane implements ProjectVi
 
     writePaths(subPane, myExpandedPathsRaw, "PATH");
     writePaths(subPane, mySelectedPathsRaw, "SELECTED");
-    if (!myShowDescriptorModelsAction.isDefaultState()) {
-      Element option1 = new Element(ShowDescriptorModelsAction.KEY);
-      option1.setAttribute("value", Boolean.toString(myShowDescriptorModelsAction.isSelected()));
-      subPane.addContent(option1);
-    }
 
     element.addContent(subPane);
   }
@@ -382,21 +437,17 @@ public class ProjectPane extends BaseLogicalViewProjectPane implements ProjectVi
   }
 
   @Override
-  public void readExternal(Element element) throws InvalidDataException {
+  public void readExternal(@NotNull Element element) throws InvalidDataException {
     // emulate the superclass's readExternal using the same binary format
     List<Element> subPanes = element.getChildren("subPane");
     for (Element subPane : subPanes) {
       myExpandedPathsRaw = readPaths(subPane, "PATH");
       mySelectedPathsRaw = readPaths(subPane, "SELECTED");
-      Element option1 = subPane.getChild(ShowDescriptorModelsAction.KEY);
-      if (option1 != null) {
-        myShowDescriptorModelsAction.setState(Boolean.parseBoolean(option1.getAttributeValue("value")));
-      }
     }
   }
 
   private List<List<String>> readPaths(Element parentElement, String name) {
-    List<List<String>> result = new ArrayList<List<String>>();
+    List<List<String>> result = new ArrayList<>();
 
     for (Element pathElement : parentElement.getChildren(name)) {
       List<String> path = readPath(pathElement);
@@ -407,7 +458,7 @@ public class ProjectPane extends BaseLogicalViewProjectPane implements ProjectVi
 
   @NotNull
   private List<String> readPath(Element pathElement) {
-    List<String> path = new ArrayList<String>();
+    List<String> path = new ArrayList<>();
     for (Element elm : pathElement.getChildren("PATH_ELEMENT")) {
       String treeNodeId = readNodeId(elm);
       if (treeNodeId != null) {
@@ -449,39 +500,46 @@ public class ProjectPane extends BaseLogicalViewProjectPane implements ProjectVi
     if (isDisposed()) {
       return;
     }
+
     ToolWindowManager windowManager = ToolWindowManager.getInstance(getProject());
     ToolWindow projectViewToolWindow = windowManager.getToolWindow(ToolWindowId.PROJECT_VIEW);
+    final Runnable wrapper = () -> {
+      if (postActivate != null) {
+        postActivate.run();
+      }
+    };
+
     //In unit test mode projectViewToolWindow == null
     // besides, https://youtrack.jetbrains.com/issue/MPS-24516 suggests tool window may be missing even in non-test mode (in plugin?)
     if (!ApplicationManager.getApplication().isUnitTestMode() && projectViewToolWindow != null) {
-      projectViewToolWindow.activate(new Runnable() {
-        @Override
-        public void run() {
-          // I'm not quite sure next changeView is essential (what does toolWindow.activate() does then?),
+      if (autoFocusContents && !projectViewToolWindow.isActive()) {
+        projectViewToolWindow.activate(() -> {
+          if (isDisposed()) {
+            return;
+          }// I'm not quite sure next changeView is essential (what does toolWindow.activate() does then?),
           // but since there's no documentation what to expect, leave it the way it used to be in PaneActivator.
           getProjectView().changeView(getId());
-          if (postActivate != null) {
-            postActivate.run();
-          }
-        }
-      }, autoFocusContents);
+          wrapper.run();
+        }, true);
+      } else {
+        wrapper.run();
+      }
     }
   }
 
   public void selectNode(@NotNull final SNode node, boolean autofocus) {
+    selectNode(node.getReference(), autofocus);
+  }
+
+  public void selectNode(@NotNull SNodeReference node, boolean autofocus) {
     ThreadUtils.assertEDT();
-    final Runnable lookupAndSelect = new LookupAndSelect(node.getReference());
+    final Runnable lookupAndSelect = new LookupAndSelect(node);
     activatePane(new ScheduleUpdateRunnable(myUpdateQueue, createModelReadUpdate(UpdateID.SELECT, lookupAndSelect)), autofocus);
   }
 
   private void selectNodeWithoutExpansion(@NotNull SNodeReference nodeRef) {
     final Runnable lookupAndSelect = new LookupAndSelect(nodeRef);
-    myUpdateQueue.queue(createModelReadUpdate(UpdateID.SELECT, new Runnable() {
-      @Override
-      public void run() {
-        getTree().runWithoutExpansion(lookupAndSelect);
-      }
-    }));
+    myUpdateQueue.queue(createModelReadUpdate(UpdateID.SELECT, () -> getTree().runWithoutExpansion(lookupAndSelect)));
   }
 
   /**
@@ -493,29 +551,20 @@ public class ProjectPane extends BaseLogicalViewProjectPane implements ProjectVi
 
   //----select next queries----
 
-  @Override
   public void selectNextModel(SModel modelDescriptor) {
     final MPSTreeNode mpsTreeNode = createFindHelper().findNextTreeNode(modelDescriptor);
     // FIXME selectNextNode does the same, refactor. Check callers if need ThreadUtils at all
-    ThreadUtils.runInUIThreadNoWait(new Runnable() {
-      @Override
-      public void run() {
-        ProjectTree tree = getTree();
-        if (tree != null) {
-          tree.selectNode(mpsTreeNode);
-        }
+    ThreadUtils.runInUIThreadNoWait(() -> {
+      ProjectTree tree = getTree();
+      if (tree != null) {
+        tree.selectNode(mpsTreeNode);
       }
     });
   }
 
   public void selectNextNode(SNode node) {
     final MPSTreeNode mpsTreeNode = createFindHelper().findNextTreeNode(node);
-    ThreadUtils.runInUIThreadNoWait(new Runnable() {
-      @Override
-      public void run() {
-        getTree().selectNode(mpsTreeNode);
-      }
-    });
+    ThreadUtils.runInUIThreadNoWait(() -> getTree().selectNode(mpsTreeNode));
   }
 
   //----tree node selection queries---
@@ -524,27 +573,50 @@ public class ProjectPane extends BaseLogicalViewProjectPane implements ProjectVi
     return createFindHelper().findNextTreeNode(node);
   }
 
-  public boolean isDescriptorModelInGeneratorVisible() {
+  @Nullable
+    /*package*/ ErrorStripe getErrorStripe(Object object) {
+    if (object instanceof MPSTreeNode) {
+      final Collection<TreeErrorMessage> messages = ((MPSTreeNode) object).findMessages(TreeErrorMessage.class);
+      final TreeCellRenderer cellRenderer;
+      ProjectTree tree = getTree();
+      if (messages.isEmpty() || tree == null || !((cellRenderer = tree.getCellRenderer()) instanceof ProjectTreeCellRenderer)) {
+        return null;
+      }
+      assert cellRenderer != null : "project tree without cell renderer";
+      if (messages.stream().anyMatch(TreeErrorMessage::isOriginalError)) {
+        return ErrorStripe.create(((ProjectTreeCellRenderer) cellRenderer).getColors().getErrorStripeColor(), 1);
+      }
+      if (!showErrorsOnly().get() && messages.stream().anyMatch(TreeErrorMessage::isOriginalWarning)) {
+        return ErrorStripe.create(((ProjectTreeCellRenderer) cellRenderer).getColors().getWarningStripeColor(), 1);
+      }
+    }
+    return null;
+  }
+
+
+  /*package*/ boolean isDescriptorModelInGeneratorVisible() {
     return myShowDescriptorModelsAction.isSelected();
   }
 
-  @NotNull
-  /*package*/ ProjectTreeFindHelper createFindHelper() {
-    return new ProjectTreeFindHelper(getTree());
+  /*package*/ boolean isDescriptorModelInSolutionVisible() {
+    return Registry.is("mps.ProjectPane.show.descriptor.solution");
   }
 
-  //----UI----
+  /*package*/ Supplier<Boolean> errorIndicatorVisible() {
+    return myShowErrorComponent;
+  }
 
-  private class MyScrollPane extends JBScrollPane implements DataProvider {
-    private MyScrollPane(Component view) {
-      super(view);
-    }
+  /*package*/ Supplier<Boolean> underlineErrorNodes() {
+    return myShowUnderline;
+  }
 
-    @Override
-    @Nullable
-    public Object getData(@NonNls String dataId) {
-      return ProjectPane.this.getData(dataId);
-    }
+  /*package*/ Supplier<Boolean> showErrorsOnly() {
+    return myShowErrorsOnly;
+  }
+
+  @NotNull
+    /*package*/ ProjectTreeFindHelper createFindHelper() {
+    return new ProjectTreeFindHelper(getTree());
   }
 
   private enum UpdateID {
@@ -629,7 +701,7 @@ public class ProjectPane extends BaseLogicalViewProjectPane implements ProjectVi
         }
         toSelect = createFindHelper().findMostSuitableModuleTreeNode(module);
         if (toSelect == null) {
-          LOG.warn("Couldn't select module \"" + myModule.getModuleName() + "\" : tree node not found.");
+          LOG.warning("Couldn't select module \"" + myModule.getModuleName() + "\" : tree node not found.");
           return;
         }
       } else if (myModel != null) {
@@ -639,7 +711,7 @@ public class ProjectPane extends BaseLogicalViewProjectPane implements ProjectVi
         }
         toSelect = createFindHelper().findMostSuitableModelTreeNode(model);
         if (toSelect == null) {
-          LOG.warn("Couldn't select model \"" + myModel.getModelName() + "\" : tree node not found.");
+          LOG.warning("Couldn't select model \"" + myModel.getModelName() + "\" : tree node not found.");
           return;
         }
       } else if (myNode != null) {
@@ -649,7 +721,7 @@ public class ProjectPane extends BaseLogicalViewProjectPane implements ProjectVi
         }
         toSelect = createFindHelper().findMostSuitableSNodeTreeNode(node);
         if (toSelect == null) {
-          LOG.warn("Couldn't select node \"" + myNode.toString() + "\" : tree node not found.");
+          LOG.warning("Couldn't select node \"" + myNode.toString() + "\" : tree node not found.");
           return;
         }
       }
@@ -659,27 +731,23 @@ public class ProjectPane extends BaseLogicalViewProjectPane implements ProjectVi
     }
   }
 
-  private static class ShowDescriptorModelsAction extends ToggleAction {
+  // Action associated with a boolean Registry key; facilitates value modification through UI and tracks value state
+  // is anyone changes it through Registry (i.e. RVL is not only to trigger rebuild from UI change, but to
+  // trigger rebuild for any possible change cause)
+  private static class ToggleAndRebuildAction extends ToggleAction implements Supplier<Boolean>, RegistryValueListener {
     private final ProjectPane myProjectPane;
-    private boolean myState = false;
-    /*package*/ static final String KEY = "showGeneratorDescriptor";
+    private final RegistryValue myState;
 
-    ShowDescriptorModelsAction(ProjectPane projectPane) {
-      super("Show @descriptor models in Generators");
+    ToggleAndRebuildAction(ProjectPane projectPane, @NotNull String title, @NotNull String key) {
+      super(title);
+      myState = Registry.get(key);
       myProjectPane = projectPane;
+      myState.addListener(this, projectPane);
     }
 
     public boolean isSelected() {
-      return myState;
+      return myState.asBoolean();
     }
-
-    /*package*/ boolean isDefaultState() {
-      return !isSelected();
-    }
-    /*package*/ void setState(boolean selected) {
-      myState = selected;
-    }
-
 
     @Override
     public boolean isSelected(AnActionEvent e) {
@@ -687,8 +755,20 @@ public class ProjectPane extends BaseLogicalViewProjectPane implements ProjectVi
     }
 
     @Override
+    public Boolean get() {
+      return isSelected();
+    }
+
+    @Override
     public void setSelected(AnActionEvent e, boolean state) {
-      myState = state;
+      if (isSelected() != state) {
+        myState.setValue(state);
+        // expect afterValueChanged to come and trigger rebuild
+      }
+    }
+
+    @Override
+    public void afterValueChanged(@NotNull RegistryValue value) {
       myProjectPane.rebuild();
     }
   }

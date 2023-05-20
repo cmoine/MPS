@@ -5,14 +5,11 @@ package jetbrains.mps.samples.lambdaCalculus.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import java.util.List;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.Arrays;
 import org.jetbrains.annotations.NotNull;
@@ -23,12 +20,13 @@ import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 
 public final class LetRef__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x448ba254edc7216cL, "jetbrains.mps.samples.lambdaCalculus.structure.LetRef");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<List<SNode>> getAllReferences_idNsR6RVdgjq = new SMethodBuilder<List<SNode>>(new SJavaCompoundTypeImpl((Class<List<SNode>>) ((Class) Object.class))).name("getAllReferences").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("NsR6RVdgjq").registry(REGISTRY).build();
+  public static final SMethod<List<SNode>> getAllReferences_idNsR6RVdgjq = new SMethodBuilder<List<SNode>>(new SJavaCompoundTypeImpl((Class<List<SNode>>) ((Class) Object.class))).name("getAllReferences").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(926857988255581402L).languageId(0xadf0aaee45eb2895L, 0x7c9e280794ad4afcL).build2();
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getAllReferences_idNsR6RVdgjq);
 
@@ -38,11 +36,11 @@ public final class LetRef__BehaviorDescriptor extends BaseBHDescriptor {
   /*package*/ static List<SNode> getAllReferences_idNsR6RVdgjq(@NotNull SNode __thisNode__) {
     List<SNode> result = new ArrayList<SNode>();
     SNode node = __thisNode__;
-    while (SNodeOperations.getParent(node) != null && !(SNodeOperations.isInstanceOf(node, MetaAdapterFactory.getConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x15b75b54f176d1a3L, "jetbrains.mps.samples.lambdaCalculus.structure.MultipleExpression")))) {
+    while (SNodeOperations.getParent(node) != null && !(SNodeOperations.isInstanceOf(node, CONCEPTS.MultipleExpression$xc))) {
       node = SNodeOperations.getParent(node);
     }
-    for (SNode letRef : SNodeOperations.getNodeDescendants(node, MetaAdapterFactory.getConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x448ba254edc7216cL, "jetbrains.mps.samples.lambdaCalculus.structure.LetRef"), false, new SAbstractConcept[]{})) {
-      if (SLinkOperations.getTarget(letRef, MetaAdapterFactory.getReferenceLink(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x48db75d5dc496b08L, 0x48db75d5dc497af4L, "variable")) == SLinkOperations.getTarget(__thisNode__, MetaAdapterFactory.getReferenceLink(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x48db75d5dc496b08L, 0x48db75d5dc497af4L, "variable"))) {
+    for (SNode letRef : SNodeOperations.getNodeDescendants(node, CONCEPTS.LetRef$BN, false, new SAbstractConcept[]{})) {
+      if (SLinkOperations.getTarget(letRef, LINKS.variable$1fXu) == SLinkOperations.getTarget(__thisNode__, LINKS.variable$1fXu)) {
         ListSequence.fromList(result).addElement(letRef);
       }
     }
@@ -50,7 +48,6 @@ public final class LetRef__BehaviorDescriptor extends BaseBHDescriptor {
   }
 
   /*package*/ LetRef__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -94,5 +91,14 @@ public final class LetRef__BehaviorDescriptor extends BaseBHDescriptor {
   @Override
   public SAbstractConcept getConcept() {
     return CONCEPT;
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept MultipleExpression$xc = MetaAdapterFactory.getConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x15b75b54f176d1a3L, "jetbrains.mps.samples.lambdaCalculus.structure.MultipleExpression");
+    /*package*/ static final SConcept LetRef$BN = MetaAdapterFactory.getConcept(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x448ba254edc7216cL, "jetbrains.mps.samples.lambdaCalculus.structure.LetRef");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SReferenceLink variable$1fXu = MetaAdapterFactory.getReferenceLink(0x7c9e280794ad4afcL, 0xadf0aaee45eb2895L, 0x48db75d5dc496b08L, 0x48db75d5dc497af4L, "variable");
   }
 }

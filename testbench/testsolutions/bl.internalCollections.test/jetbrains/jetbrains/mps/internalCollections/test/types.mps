@@ -2,7 +2,7 @@
 <model ref="r:3b93a80b-8267-4154-a2f6-29cf728da0a5(jetbrains.mps.internalCollections.test.types)">
   <persistence version="9" />
   <languages>
-    <use id="8585453e-6bfb-4d80-98de-b16074f1d86c" name="jetbrains.mps.lang.test" version="1" />
+    <use id="8585453e-6bfb-4d80-98de-b16074f1d86c" name="jetbrains.mps.lang.test" version="6" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -18,6 +18,7 @@
         <property id="5097124989038916363" name="projectPath" index="2XOHcw" />
       </concept>
       <concept id="1216913645126" name="jetbrains.mps.lang.test.structure.NodesTestCase" flags="lg" index="1lH9Xt">
+        <property id="2616911529524314943" name="accessMode" index="3DII0k" />
         <child id="1217501822150" name="nodesToCheck" index="1SKRRt" />
       </concept>
       <concept id="1216989428737" name="jetbrains.mps.lang.test.structure.TestNode" flags="ng" index="1qefOq">
@@ -26,10 +27,7 @@
     </language>
     <language id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage">
       <concept id="1202948039474" name="jetbrains.mps.baseLanguage.structure.InstanceMethodCallOperation" flags="nn" index="liA8E" />
-      <concept id="1465982738277781862" name="jetbrains.mps.baseLanguage.structure.PlaceholderMember" flags="ng" index="2tJIrI" />
-      <concept id="1224848483129" name="jetbrains.mps.baseLanguage.structure.IBLDeprecatable" flags="ng" index="IEa8$">
-        <property id="1224848525476" name="isDeprecated" index="IEkAT" />
-      </concept>
+      <concept id="1465982738277781862" name="jetbrains.mps.baseLanguage.structure.PlaceholderMember" flags="nn" index="2tJIrI" />
       <concept id="1197027756228" name="jetbrains.mps.baseLanguage.structure.DotExpression" flags="nn" index="2OqwBi">
         <child id="1197027771414" name="operand" index="2Oq$k0" />
         <child id="1197027833540" name="operation" index="2OqNvi" />
@@ -134,10 +132,11 @@
     </language>
   </registry>
   <node concept="2XOHcx" id="3OoQx0EryB$">
-    <property role="2XOHcw" value="${mps_home}/languages/baseLanguage/collections/solutions/internalCollections.test/internalCollections.test.mpr" />
+    <property role="2XOHcw" value="${mps_home}" />
   </node>
   <node concept="1lH9Xt" id="5NS7ww3zaxl">
     <property role="TrG5h" value="GenericCollections" />
+    <property role="3DII0k" value="2hh8MJdVwqX/command" />
     <node concept="1qefOq" id="5NS7ww3zaxm" role="1SKRRt">
       <node concept="312cEu" id="5NS7ww3zaxo" role="1qenE9">
         <property role="2bfB8j" value="true" />
@@ -178,7 +177,6 @@
         </node>
         <node concept="2tJIrI" id="5NS7ww3zaxZ" role="jymVt" />
         <node concept="2YIFZL" id="5NS7ww3zaCj" role="jymVt">
-          <property role="IEkAT" value="false" />
           <property role="DiZV1" value="false" />
           <property role="od$2w" value="false" />
           <property role="TrG5h" value="qux" />
@@ -255,7 +253,6 @@
         <node concept="2tJIrI" id="5NS7ww3zwQj" role="jymVt" />
         <node concept="2YIFZL" id="5NS7ww3zwXc" role="jymVt">
           <property role="TrG5h" value="test" />
-          <property role="IEkAT" value="false" />
           <property role="DiZV1" value="false" />
           <property role="od$2w" value="false" />
           <node concept="3clFbS" id="5NS7ww3zwTh" role="3clF47">

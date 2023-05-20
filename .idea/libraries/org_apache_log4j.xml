@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="org.apache.log4j">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/3rd-party-rt.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <excluded>
+      <root url="jar://$PROJECT_DIR$/lib/3rd-party-rt.jar!/net/" />
+      <root url="jar://$PROJECT_DIR$/lib/3rd-party-rt.jar!/com/" />
+      <root url="jar://$PROJECT_DIR$/lib/3rd-party-rt.jar!/mozilla/" />
+      <root url="jar://$PROJECT_DIR$/lib/3rd-party-rt.jar!/io/" />
+      <root url="jar://$PROJECT_DIR$/lib/3rd-party-rt.jar!/org/apache/commons/" />
+    </excluded>
+  </library>
+</component>

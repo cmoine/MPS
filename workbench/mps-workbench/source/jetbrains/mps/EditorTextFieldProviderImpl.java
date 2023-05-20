@@ -47,33 +47,30 @@ public class EditorTextFieldProviderImpl implements EditorTextFieldProvider {
    * <code>'expand/reduce selection by word'</code> editor action and <code>'change dialog width'</code> non-editor action
    * and we want to use the first one.
    */
-  private static final Comparator<? super AnAction> ACTIONS_COMPARATOR = new Comparator<AnAction>() {
-    @Override
-    public int compare(AnAction o1, AnAction o2) {
-      if (o1 instanceof EditorAction && o2 instanceof EditorAction) {
-        return 0;
-      }
-      if (o1 instanceof TextComponentEditorAction) {
-        return -1;
-      }
-      if (o2 instanceof TextComponentEditorAction) {
-        return 1;
-      }
-      if (o1 instanceof EditorAction) {
-        return 1;
-      }
-      if (o2 instanceof EditorAction) {
-        return -1;
-      }
+  private static final Comparator<? super AnAction> ACTIONS_COMPARATOR = (Comparator<AnAction>) (o1, o2) -> {
+    if (o1 instanceof EditorAction && o2 instanceof EditorAction) {
       return 0;
     }
+    if (o1 instanceof TextComponentEditorAction) {
+      return -1;
+    }
+    if (o2 instanceof TextComponentEditorAction) {
+      return 1;
+    }
+    if (o1 instanceof EditorAction) {
+      return 1;
+    }
+    if (o2 instanceof EditorAction) {
+      return -1;
+    }
+    return 0;
   };
 
   @NotNull
   @Override
   public EditorTextField getEditorField(@NotNull Language language,
                                         @NotNull Project project,
-                                        @NotNull Iterable<EditorCustomization> features) {
+                                        @NotNull Iterable<? extends EditorCustomization> features) {
     return primGetEditorField(project);
   }
 
@@ -87,6 +84,9 @@ public class EditorTextFieldProviderImpl implements EditorTextFieldProvider {
         return editor;
       }
 
+      /*
+      TODO: 223FIX Check that this is still needed
+
       @Override
       public Object getData(String dataId) {
         if (PlatformDataKeys.ACTIONS_SORTER.is(dataId)) {
@@ -94,6 +94,7 @@ public class EditorTextFieldProviderImpl implements EditorTextFieldProvider {
         }
         return super.getData(dataId);
       }
+       */
     };
   }
 }

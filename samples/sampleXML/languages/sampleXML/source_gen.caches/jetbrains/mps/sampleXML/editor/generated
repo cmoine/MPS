@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="fvhfyhcgp7vaqqu8cinaqgqba37nem" />
+<product version="3" modelHash="3co12fbdxj48cosw5lqsf3ltjm0edto">
+  <files names="Attribute_Editor.java:Attribute_EditorBuilder_a.java:Attribute_SubstituteMenu.java:Document_Editor.java:Document_EditorBuilder_a.java:EditorAspectDescriptorImpl.java:ElementPart_Editor.java:ElementPart_EditorBuilder_a.java:Element_Editor.java:Element_EditorBuilder_a.java:Text_Editor.java:Text_EditorBuilder_a.java" />
+</product>
 

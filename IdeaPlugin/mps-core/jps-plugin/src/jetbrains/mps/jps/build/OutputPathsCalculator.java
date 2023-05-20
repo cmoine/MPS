@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,9 @@
 
 package jetbrains.mps.jps.build;
 
-import com.intellij.openapi.util.io.FileUtil;
-import gnu.trove.THashSet;
 import jetbrains.mps.jps.model.JpsMPSModuleExtension;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.jps.builders.storage.BuildDataPaths;
-import org.jetbrains.jps.incremental.ModuleBuildTarget;
-import org.jetbrains.jps.model.module.JpsModuleSourceRoot;
-import org.jetbrains.jps.util.JpsPathUtil;
 
 import java.io.File;
 
@@ -62,19 +57,6 @@ public class OutputPathsCalculator {
   public File getModuleDataRoot() {
     File dataRoot = new File(myDataPaths.getDataStorageRoot(), MPSMakePaths.MPS_MAKE);
     return new File(dataRoot, myMpsModule.getModule().getName());
-  }
-
-  public boolean isGenOutputUnderSourceRoot(ModuleBuildTarget target) {
-    THashSet<File> sourceRootFiles = new THashSet<File>(FileUtil.FILE_HASHING_STRATEGY);
-    for (JpsModuleSourceRoot sourceRoot : target.getModule().getSourceRoots()) {
-      sourceRootFiles.add(sourceRoot.getFile());
-    }
-    final File outputPath = getOutputPath();
-    return JpsPathUtil.isUnder(sourceRootFiles, outputPath);
-  }
-
-  public boolean needAdditionalSourceRoot(ModuleBuildTarget target) {
-    return !isGenOutputUnderSourceRoot(target);
   }
 
   public boolean isTransientOutputFolder() {

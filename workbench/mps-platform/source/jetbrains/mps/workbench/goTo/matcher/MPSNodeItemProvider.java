@@ -1,23 +1,17 @@
 /*
- * Copyright 2000-2009 JetBrains s.r.o.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Copyright 2000-2021 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
 package jetbrains.mps.workbench.goTo.matcher;
 
 import com.intellij.concurrency.JobLauncher;
-import com.intellij.ide.util.gotoByName.*;
+import com.intellij.ide.util.gotoByName.ChooseByNameBase;
+import com.intellij.ide.util.gotoByName.ChooseByNameItemProvider;
+import com.intellij.ide.util.gotoByName.ChooseByNameModel;
+import com.intellij.ide.util.gotoByName.ChooseByNameViewModel;
+import com.intellij.ide.util.gotoByName.ContributorsBasedGotoByModel;
+import com.intellij.ide.util.gotoByName.CustomMatcherModel;
+import com.intellij.ide.util.gotoByName.GotoClassModel2;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.progress.ProgressIndicator;
@@ -29,12 +23,10 @@ import com.intellij.psi.codeStyle.MinusculeMatcher;
 import com.intellij.psi.codeStyle.NameUtil;
 import com.intellij.psi.search.EverythingGlobalScope;
 import com.intellij.psi.util.proximity.PsiProximityComparator;
-import com.intellij.util.Function;
 import com.intellij.util.Processor;
 import com.intellij.util.SmartList;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.indexing.FindSymbolParameters;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -44,7 +36,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * This is copied from com.intellij.ide.util.gotoByName.DefaultChooseByNameItemProvider, the change is
@@ -55,11 +49,11 @@ public class MPSNodeItemProvider implements ChooseByNameItemProvider {
   private WeakReference<PsiElement> myContext;
 
   public MPSNodeItemProvider(PsiElement context) {
-    myContext = new WeakReference<PsiElement>(context);
+    myContext = new WeakReference<>(context);
   }
 
   @Override
-  public boolean filterElements(@NotNull ChooseByNameBase base,
+  public boolean filterElements(@NotNull ChooseByNameViewModel chooseByNameViewModel,
       @NotNull String pattern,
       boolean everywhere,
       @NotNull ProgressIndicator indicator,
@@ -69,37 +63,39 @@ public class MPSNodeItemProvider implements ChooseByNameItemProvider {
     String qualifierPattern = "";
     //change end
 
-    ChooseByNameModel model = base.getModel();
+    ChooseByNameModel model = chooseByNameViewModel.getModel();
     boolean empty = namePattern.isEmpty() ||
-        namePattern.equals("@") && model instanceof GotoClassModel2;    // TODO[yole]: remove implicit dependency
-    if (empty && !base.canShowListForEmptyPattern()) return true;
+                    "@".equals(namePattern) && model instanceof GotoClassModel2;    // TODO[yole]: remove implicit dependency
+    if (empty && !chooseByNameViewModel.canShowListForEmptyPattern()) return true;
 
-    Set<String> names = new THashSet<String>(Arrays.asList(base.getNames(everywhere)));
+    Set<String> names = Arrays.stream(chooseByNameViewModel.getModel().getNames(everywhere))
+                              .filter(Objects::nonNull)
+                              .collect(Collectors.toSet());
 
-    if (base.isSearchInAnyPlace() && !namePattern.trim().isEmpty()) {
+    if (chooseByNameViewModel.isSearchInAnyPlace() && !namePattern.trim().isEmpty()) {
       String middleMatchPattern = "*" + namePattern + (namePattern.endsWith(" ") ? "" : "*");
 
       // consume elements matching by prefix case-sensitively
-      Integer elementsConsumed = consumeElements(base, everywhere, indicator, consumer, namePattern, qualifierPattern, names,
-          NameUtil.MatchingCaseSensitivity.ALL, false);
+      Integer elementsConsumed = consumeElements(chooseByNameViewModel, everywhere, indicator, consumer, namePattern, qualifierPattern, names,
+          NameUtil.MatchingCaseSensitivity.ALL);
       if (elementsConsumed == null) return false;
 
       if (elementsConsumed == 0) {
         // search with original pattern without case sensitivity, don't add separator before found items
         // result: items matched by prefix will always be above middle-matched items
-        elementsConsumed = consumeElements(base, everywhere, indicator, consumer, namePattern,
-            qualifierPattern, names, NameUtil.MatchingCaseSensitivity.NONE, false);
+        elementsConsumed = consumeElements(chooseByNameViewModel, everywhere, indicator, consumer, namePattern,
+            qualifierPattern, names, NameUtil.MatchingCaseSensitivity.NONE);
         if (elementsConsumed == null) return false;
       }
 
       // search with broadest criteria - middle match pattern, without case sensitivity
-      elementsConsumed = consumeElements(base, everywhere, indicator, consumer, middleMatchPattern,
-          qualifierPattern, names, NameUtil.MatchingCaseSensitivity.NONE, elementsConsumed > 0);
+      elementsConsumed = consumeElements(chooseByNameViewModel, everywhere, indicator, consumer, middleMatchPattern,
+          qualifierPattern, names, NameUtil.MatchingCaseSensitivity.NONE);
       return elementsConsumed != null;
     }
     else {
-      Integer elementsConsumed = consumeElements(base, everywhere, indicator, consumer, namePattern, qualifierPattern, names,
-          NameUtil.MatchingCaseSensitivity.NONE, false);
+      Integer elementsConsumed = consumeElements(chooseByNameViewModel, everywhere, indicator, consumer, namePattern, qualifierPattern, names,
+          NameUtil.MatchingCaseSensitivity.NONE);
       return elementsConsumed != null;
     }
   }
@@ -107,25 +103,24 @@ public class MPSNodeItemProvider implements ChooseByNameItemProvider {
   /**
    * @return null if consumer returned false, number of consumed elements otherwise.
    */
-  private Integer consumeElements(ChooseByNameBase base,
+  private Integer consumeElements(ChooseByNameViewModel chooseByNameViewModel,
       boolean everywhere,
       ProgressIndicator indicator,
       Processor<Object> consumer,
       String namePattern,
       String qualifierPattern,
       Set<String> allNames,
-      NameUtil.MatchingCaseSensitivity sensitivity,
-      boolean needSeparator) {
-    ChooseByNameModel model = base.getModel();
-    List<String> namesList = new ArrayList<String>();
-    getNamesByPattern(base, new ArrayList<String>(allNames), indicator, namesList, namePattern, sensitivity);
+      NameUtil.MatchingCaseSensitivity sensitivity) {
+    ChooseByNameModel model = chooseByNameViewModel.getModel();
+    List<String> namesList = new ArrayList<>();
+    getNamesByPattern(chooseByNameViewModel, new ArrayList<>(allNames), indicator, namesList, namePattern, sensitivity);
     allNames.removeAll(namesList);
     sortNamesList(namePattern, namesList);
 
     indicator.checkCanceled();
 
-    List<Object> sameNameElements = new SmartList<Object>();
-    List<Pair<String, MinusculeMatcher>> patternsAndMatchers = getPatternsAndMatchers(qualifierPattern, base);
+    List<Object> sameNameElements = new SmartList<>();
+    List<Pair<String, MinusculeMatcher>> patternsAndMatchers = getPatternsAndMatchers(qualifierPattern, chooseByNameViewModel);
     int elementsConsumed = 0;
 
     for (String name : namesList) {
@@ -142,22 +137,18 @@ public class MPSNodeItemProvider implements ChooseByNameItemProvider {
         sameNameElements.clear();
         for (final Object element : elements) {
           indicator.checkCanceled();
-          if (matchesQualifier(element, base, patternsAndMatchers)) {
+          if (matchesQualifier(element, chooseByNameViewModel, patternsAndMatchers)) {
             sameNameElements.add(element);
           }
         }
-        sortByProximity(base, sameNameElements);
+        sortByProximity(chooseByNameViewModel, sameNameElements);
         for (Object element : sameNameElements) {
-          if (needSeparator && !consumer.process(ChooseByNameBase.NON_PREFIX_SEPARATOR)) return null;
           if (!consumer.process(element)) return null;
-          needSeparator = false;
           elementsConsumed++;
         }
       }
-      else if (elements.length == 1 && matchesQualifier(elements[0], base, patternsAndMatchers)) {
-        if (needSeparator && !consumer.process(ChooseByNameBase.NON_PREFIX_SEPARATOR)) return null;
+      else if (elements.length == 1 && matchesQualifier(elements[0], chooseByNameViewModel, patternsAndMatchers)) {
         if (!consumer.process(elements[0])) return null;
-        needSeparator = false;
         elementsConsumed++;
       }
     }
@@ -169,8 +160,8 @@ public class MPSNodeItemProvider implements ChooseByNameItemProvider {
     Collections.sort(namesList, new MatchesComparator(namePattern));
   }
 
-  private void sortByProximity(@NotNull ChooseByNameBase base, final List<Object> sameNameElements) {
-    final ChooseByNameModel model = base.getModel();
+  private void sortByProximity(@NotNull ChooseByNameViewModel chooseByNameViewModel, final List<Object> sameNameElements) {
+    final ChooseByNameModel model = chooseByNameViewModel.getModel();
     if (model instanceof Comparator) {
       //noinspection unchecked
       Collections.sort(sameNameElements, (Comparator)model);
@@ -188,10 +179,10 @@ public class MPSNodeItemProvider implements ChooseByNameItemProvider {
     return pattern.substring(0, lastSeparatorOccurrence);
   }
 
-  public static String getNamePattern(@NotNull ChooseByNameBase base, String pattern) {
-    pattern = base.transformPattern(pattern);
+  public static String getNamePattern(@NotNull ChooseByNameViewModel chooseByNameViewModel, String pattern) {
+    pattern = chooseByNameViewModel.transformPattern(pattern);
 
-    ChooseByNameModel model = base.getModel();
+    ChooseByNameModel model = chooseByNameViewModel.getModel();
     final String[] separators = model.getSeparators();
     int lastSeparatorOccurrence = 0;
     for (String separator : separators) {
@@ -203,9 +194,9 @@ public class MPSNodeItemProvider implements ChooseByNameItemProvider {
   }
 
   @NotNull
-  private static List<String> split(@NotNull String s, @NotNull ChooseByNameBase base) {
-    List<String> answer = new ArrayList<String>();
-    for (String token : StringUtil.tokenize(s, StringUtil.join(base.getModel().getSeparators(), ""))) {
+  private static List<String> split(@NotNull String s, @NotNull ChooseByNameViewModel chooseByNameViewModel) {
+    List<String> answer = new ArrayList<>();
+    for (String token : StringUtil.tokenize(s, StringUtil.join(chooseByNameViewModel.getModel().getSeparators(), ""))) {
       if (!token.isEmpty()) {
         answer.add(token);
       }
@@ -215,12 +206,12 @@ public class MPSNodeItemProvider implements ChooseByNameItemProvider {
   }
 
   private static boolean matchesQualifier(final Object element,
-      @NotNull final ChooseByNameBase base,
+      @NotNull final ChooseByNameViewModel chooseByNameViewModel,
       @NotNull List<Pair<String, MinusculeMatcher>> patternsAndMatchers) {
-    final String name = base.getModel().getFullName(element);
+    final String name = chooseByNameViewModel.getModel().getFullName(element);
     if (name == null) return false;
 
-    final List<String> suspects = split(name, base);
+    final List<String> suspects = split(name, chooseByNameViewModel);
 
     try {
       int matchPosition = 0;
@@ -231,7 +222,7 @@ public class MPSNodeItemProvider implements ChooseByNameItemProvider {
         if (!pattern.isEmpty()) {
           for (int j = matchPosition; j < suspects.size() - 1; j++) {
             String suspect = suspects.get(j);
-            if (matches(base, pattern, matcher, suspect)) {
+            if (matches(chooseByNameViewModel, pattern, matcher, suspect)) {
               matchPosition = j + 1;
               continue patterns;
             }
@@ -250,55 +241,46 @@ public class MPSNodeItemProvider implements ChooseByNameItemProvider {
   }
 
   @NotNull
-  private static List<Pair<String, MinusculeMatcher>> getPatternsAndMatchers(String qualifierPattern, final ChooseByNameBase base) {
-    return ContainerUtil.map2List(split(qualifierPattern, base), new Function<String, Pair<String, MinusculeMatcher>>() {
-      @NotNull
-      @Override
-      public Pair<String, MinusculeMatcher> fun(String s) {
-        return Pair.create(getNamePattern(base, s), buildPatternMatcher(getNamePattern(base, s), NameUtil.MatchingCaseSensitivity.NONE));
-      }
-    });
+  private static List<Pair<String, MinusculeMatcher>> getPatternsAndMatchers(String qualifierPattern, final ChooseByNameViewModel chooseByNameViewModel) {
+    return ContainerUtil.map2List(split(qualifierPattern, chooseByNameViewModel), s -> Pair.create(getNamePattern(chooseByNameViewModel, s), buildPatternMatcher(getNamePattern(chooseByNameViewModel, s), NameUtil.MatchingCaseSensitivity.NONE)));
   }
 
   @NotNull
   @Override
-  public List<String> filterNames(@NotNull ChooseByNameBase base, @NotNull String[] names, @NotNull String pattern) {
-    List<String> res = new ArrayList<String>();
-    getNamesByPattern(base, Arrays.asList(names), null, res, pattern, NameUtil.MatchingCaseSensitivity.NONE);
+  public List<String> filterNames(@NotNull ChooseByNameViewModel chooseByNameViewModel, @NotNull String[] names, @NotNull String pattern) {
+    List<String> res = new ArrayList<>();
+    getNamesByPattern(chooseByNameViewModel, Arrays.asList(names), null, res, pattern, NameUtil.MatchingCaseSensitivity.NONE);
     return res;
   }
 
-  private static void getNamesByPattern(@NotNull final ChooseByNameBase base,
+  private static void getNamesByPattern(@NotNull final ChooseByNameViewModel chooseByNameViewModel,
       @NotNull List<String> names,
       @Nullable ProgressIndicator indicator,
       @NotNull final List<String> list,
       @NotNull String pattern,
       @NotNull NameUtil.MatchingCaseSensitivity caseSensitivity) throws ProcessCanceledException {
-    if (!base.canShowListForEmptyPattern()) {
-      LOG.assertTrue(!pattern.isEmpty(), base);
+    if (!chooseByNameViewModel.canShowListForEmptyPattern()) {
+      LOG.assertTrue(!pattern.isEmpty(), chooseByNameViewModel);
     }
 
-    if (StringUtil.startsWithChar(pattern, '@') && base.getModel() instanceof GotoClassModel2) {
+    if (StringUtil.startsWithChar(pattern, '@') && chooseByNameViewModel.getModel() instanceof GotoClassModel2) {
       pattern = pattern.substring(1);
     }
 
     final MinusculeMatcher matcher = buildPatternMatcher(pattern, caseSensitivity);
 
     final String finalPattern = pattern;
-    JobLauncher.getInstance().invokeConcurrentlyUnderProgress(names, indicator, false, new Processor<String>() {
-      @Override
-      public boolean process(String name) {
-        if (matches(base, finalPattern, matcher, name)) {
-          synchronized (list) {
-            list.add(name);
-          }
+    JobLauncher.getInstance().invokeConcurrentlyUnderProgress(names, indicator, name -> {
+      if (matches(chooseByNameViewModel, finalPattern, matcher, name)) {
+        synchronized (list) {
+          list.add(name);
         }
-        return true;
       }
+      return true;
     });
   }
 
-  private static boolean matches(@NotNull ChooseByNameBase base,
+  private static boolean matches(@NotNull ChooseByNameViewModel chooseByNameViewModel,
       @NotNull String pattern,
       @NotNull MinusculeMatcher matcher,
       @Nullable String name) {
@@ -306,8 +288,8 @@ public class MPSNodeItemProvider implements ChooseByNameItemProvider {
       return false;
     }
     boolean matches = false;
-    if (base.getModel() instanceof CustomMatcherModel) {
-      if (((CustomMatcherModel)base.getModel()).matches(name, pattern)) {
+    if (chooseByNameViewModel.getModel() instanceof CustomMatcherModel) {
+      if (((CustomMatcherModel)chooseByNameViewModel.getModel()).matches(name, pattern)) {
         matches = true;
       }
     }
@@ -333,8 +315,8 @@ public class MPSNodeItemProvider implements ChooseByNameItemProvider {
       boolean aStarts = a.startsWith(myOriginalPattern);
       boolean bStarts = b.startsWith(myOriginalPattern);
       if (aStarts && bStarts) return a.compareToIgnoreCase(b);
-      if (aStarts && !bStarts) return -1;
-      if (bStarts && !aStarts) return 1;
+      if (aStarts) return -1;
+      if (bStarts) return 1;
       return a.compareToIgnoreCase(b);
     }
   }

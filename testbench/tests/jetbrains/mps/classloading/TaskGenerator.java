@@ -15,13 +15,8 @@
  */
 package jetbrains.mps.classloading;
 
-import jetbrains.mps.module.SDependencyImpl;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.mps.openapi.module.SDependencyScope;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -35,6 +30,9 @@ public abstract class TaskGenerator {
 
   @NotNull
   public abstract Collection<Callable<Object>> createTasks();
+
+  public void dispose() {
+  }
 
   public final void onError() {
     myErrorFlag.compareAndSet(false, true);

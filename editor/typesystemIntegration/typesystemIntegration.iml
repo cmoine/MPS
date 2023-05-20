@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+  <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/classes" />
     <output-test url="file://$MODULE_DIR$/classes" />
     <exclude-output />
@@ -20,5 +20,7 @@
     <orderEntry type="library" name="Idea-platform" level="project" />
     <orderEntry type="module" module-name="mps-platform" />
     <orderEntry type="library" name="Annotations" level="project" />
+    <orderEntry type="module" module-name="typechecking" />
+    <orderEntry type="module" module-name="project-check" />
   </component>
 </module>

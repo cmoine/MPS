@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="mps.jetbrains.mps.baseLanguage.javadoc_auto" type="mps.solution.library">
+    <CLASSES>
+      <root url="jar://$APPLICATION_PLUGINS_DIR$/mps-core/languages/baseLanguage/jetbrains.mps.baseLanguage.javadoc.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <MPS_MODULE_XML>
+      <root url="jar://$APPLICATION_PLUGINS_DIR$/mps-core/languages/baseLanguage/jetbrains.mps.baseLanguage.javadoc.jar!/META-INF/module.xml" />
+    </MPS_MODULE_XML>
+    <SOURCES />
+  </library>
+</component>

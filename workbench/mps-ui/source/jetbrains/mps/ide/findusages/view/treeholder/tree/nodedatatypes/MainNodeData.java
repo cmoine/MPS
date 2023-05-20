@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import javax.swing.Icon;
 
 public class MainNodeData extends BaseNodeData {
   public MainNodeData(PathItemRole role) {
-    super(role, "", "", true, false, false);
+    super(role, "", null, false, false);
   }
 
   public MainNodeData(Element element, Project project) throws CantLoadSomethingException {
@@ -32,7 +32,7 @@ public class MainNodeData extends BaseNodeData {
   }
 
   @Override
-  public Icon getIcon() {
+  public Icon getIcon(PresentationContext presentationContext) {
     return null;
   }
 

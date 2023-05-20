@@ -18,11 +18,11 @@ public class TypesystemDescriptor extends BaseHelginsDescriptor {
       this.myInferenceRules.add(inferenceRule);
     }
     {
-      InferenceRule_Runtime inferenceRule = new typeof_GenerationContextOp_CreateUniqueName_InferenceRule();
+      InferenceRule_Runtime inferenceRule = new typeof_GenerationContextOp_CreateIndexedName_InferenceRule();
       this.myInferenceRules.add(inferenceRule);
     }
     {
-      InferenceRule_Runtime inferenceRule = new typeof_GenerationContextOp_DirtyNode_InferenceRule();
+      InferenceRule_Runtime inferenceRule = new typeof_GenerationContextOp_CreateUniqueName_InferenceRule();
       this.myInferenceRules.add(inferenceRule);
     }
     {
@@ -34,15 +34,7 @@ public class TypesystemDescriptor extends BaseHelginsDescriptor {
       this.myInferenceRules.add(inferenceRule);
     }
     {
-      InferenceRule_Runtime inferenceRule = new typeof_GenerationContextOp_GetExport_InferenceRule();
-      this.myInferenceRules.add(inferenceRule);
-    }
-    {
       InferenceRule_Runtime inferenceRule = new typeof_GenerationContextOp_GetInputModel_InferenceRule();
-      this.myInferenceRules.add(inferenceRule);
-    }
-    {
-      InferenceRule_Runtime inferenceRule = new typeof_GenerationContextOp_GetInvocationContext_InferenceRule();
       this.myInferenceRules.add(inferenceRule);
     }
     {
@@ -78,10 +70,6 @@ public class TypesystemDescriptor extends BaseHelginsDescriptor {
       this.myInferenceRules.add(inferenceRule);
     }
     {
-      InferenceRule_Runtime inferenceRule = new typeof_GenerationContextOp_GetTemplateNode_InferenceRule();
-      this.myInferenceRules.add(inferenceRule);
-    }
-    {
       InferenceRule_Runtime inferenceRule = new typeof_GenerationContextOp_LinkPatternRef_InferenceRule();
       this.myInferenceRules.add(inferenceRule);
     }
@@ -106,15 +94,19 @@ public class TypesystemDescriptor extends BaseHelginsDescriptor {
       this.myInferenceRules.add(inferenceRule);
     }
     {
+      InferenceRule_Runtime inferenceRule = new typeof_GenerationContextOp_UniqueValidId_InferenceRule();
+      this.myInferenceRules.add(inferenceRule);
+    }
+    {
       InferenceRule_Runtime inferenceRule = new typeof_GenerationContextOp_UserObjectAccessBase_InferenceRule();
       this.myInferenceRules.add(inferenceRule);
     }
     {
-      InferenceRule_Runtime inferenceRule = new typeof_GenerationContextOp_VarRef_InferenceRule();
+      InferenceRule_Runtime inferenceRule = new typeof_GenerationContextOp_VarRef2_InferenceRule();
       this.myInferenceRules.add(inferenceRule);
     }
     {
-      InferenceRule_Runtime inferenceRule = new typeof_VarMacro_InferenceRule();
+      InferenceRule_Runtime inferenceRule = new typeof_TypeHintAttribute_InferenceRule();
       this.myInferenceRules.add(inferenceRule);
     }
     {
@@ -123,6 +115,10 @@ public class TypesystemDescriptor extends BaseHelginsDescriptor {
     }
     {
       NonTypesystemRule_Runtime nonTypesystemRule = new check_GenerationContextOp_GetOutputByLabel_NonTypesystemRule();
+      this.myNonTypesystemRules.add(nonTypesystemRule);
+    }
+    {
+      NonTypesystemRule_Runtime nonTypesystemRule = new check_GetOutputListByLabelAndInput_NonTypesystemRule();
       this.myNonTypesystemRules.add(nonTypesystemRule);
     }
     {

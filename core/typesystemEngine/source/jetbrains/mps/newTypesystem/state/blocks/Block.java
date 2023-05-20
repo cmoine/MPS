@@ -19,6 +19,7 @@ import jetbrains.mps.newTypesystem.state.NodeMaps;
 import jetbrains.mps.newTypesystem.state.State;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.util.Pair;
+import org.jetbrains.mps.openapi.model.SNodeReference;
 
 import java.util.List;
 import java.util.Set;
@@ -32,6 +33,12 @@ public abstract class Block {
     myState = state;
     myNodeModel = nodeModel;
     myNodeId = nodeId;
+  }
+
+  public Block(State state, SNodeReference node) {
+    myState = state;
+    myNodeModel = node == null ? null : node.getModelReference().toString();
+    myNodeId = node == null ? null : node.getNodeId().toString();
   }
 
   public SNode getResolvedInput(SNode input) {
@@ -57,7 +64,7 @@ public abstract class Block {
       sb.append(var);
       sb.append(" is a type of ");
       sb.append(nodeMaps.getNode(var));
-      sb.append("\n");
+      sb.append('\n');
     }
     return sb.toString();
   }

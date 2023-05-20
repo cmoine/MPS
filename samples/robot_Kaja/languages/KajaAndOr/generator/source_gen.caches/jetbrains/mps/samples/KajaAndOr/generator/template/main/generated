@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-cyokwj4cl7jkxmsj2c3eqzlkvqbydyq" />
+<product version="3" modelHash="-7i9nplim53ja9emf0yzlfanzvttktv2">
+  <files names="Mapping_main.java:QueriesGenerated.java:TemplateModelImpl.java:Template_reduce_And.java:Template_reduce_Or.java" />
+</product>
 

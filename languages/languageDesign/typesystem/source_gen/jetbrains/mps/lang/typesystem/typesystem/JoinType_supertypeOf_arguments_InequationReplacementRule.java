@@ -6,45 +6,48 @@ import jetbrains.mps.lang.typesystem.runtime.AbstractInequationReplacementRule_R
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.typesystem.runtime.IsApplicable2Status;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.lang.pattern.util.MatchingUtil;
+import jetbrains.mps.smodel.SNodeMatcher;
+import java.util.Objects;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.typesystem.inference.TypeChecker;
+import jetbrains.mps.typechecking.TypecheckingFacade;
 import jetbrains.mps.typesystemEngine.util.CoerceUtil;
 import jetbrains.mps.typesystem.inference.EquationInfo;
 import jetbrains.mps.typesystem.inference.TypeCheckingContext;
 import jetbrains.mps.lang.typesystem.runtime.IsApplicableStatus;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SConcept;
 
 public class JoinType_supertypeOf_arguments_InequationReplacementRule extends AbstractInequationReplacementRule_Runtime {
   public JoinType_supertypeOf_arguments_InequationReplacementRule() {
   }
   public boolean isApplicableCustom(SNode subtype, SNode supertype, IsApplicable2Status status) {
-    for (SNode arg : SLinkOperations.getChildren(supertype, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1129e737f02L, 0x1129e73a76aL, "argument"))) {
-      if (MatchingUtil.matchNodes(arg, subtype)) {
+    for (SNode arg : SLinkOperations.getChildren(supertype, LINKS.argument$Iuyp)) {
+      if (new SNodeMatcher().match(arg, subtype)) {
         return true;
       }
     }
-    for (SNode arg : SLinkOperations.getChildren(supertype, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1129e737f02L, 0x1129e73a76aL, "argument"))) {
-      if (SNodeOperations.getConceptDeclaration(arg) == SNodeOperations.getConceptDeclaration(subtype)) {
+    for (SNode arg : SLinkOperations.getChildren(supertype, LINKS.argument$Iuyp)) {
+      if (Objects.equals(SNodeOperations.getConcept(arg), SNodeOperations.getConcept(subtype))) {
         return true;
       }
     }
-    for (SNode arg : SLinkOperations.getChildren(supertype, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1129e737f02L, 0x1129e73a76aL, "argument"))) {
-      if (TypeChecker.getInstance().getSubtypingManager().isSubtype(subtype, arg)) {
+    for (SNode arg : SLinkOperations.getChildren(supertype, LINKS.argument$Iuyp)) {
+      if (TypecheckingFacade.getFromContext().isSubtype(subtype, arg)) {
         return true;
       }
     }
-    for (SNode arg : SLinkOperations.getChildren(supertype, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1129e737f02L, 0x1129e73a76aL, "argument"))) {
-      if (CoerceUtil.canBeCoerced(subtype, SNodeOperations.getConceptDeclaration(arg)) && CoerceUtil.canBeCoerced(arg, SNodeOperations.getConceptDeclaration(subtype))) {
+    for (SNode arg : SLinkOperations.getChildren(supertype, LINKS.argument$Iuyp)) {
+      if (CoerceUtil.canBeCoerced(subtype, SNodeOperations.getConcept(arg)) && CoerceUtil.canBeCoerced(arg, SNodeOperations.getConcept(subtype))) {
         return true;
       }
     }
     return false;
   }
   public void processInequation(final SNode subtype, final SNode supertype, final EquationInfo equationInfo, final TypeCheckingContext typeCheckingContext, IsApplicable2Status status, final boolean inequalityIsWeak, final boolean inequalityIsLessThan) {
-    for (SNode arg : SLinkOperations.getChildren(supertype, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1129e737f02L, 0x1129e73a76aL, "argument"))) {
-      if (MatchingUtil.matchNodes(arg, subtype)) {
+    for (SNode arg : SLinkOperations.getChildren(supertype, LINKS.argument$Iuyp)) {
+      if (new SNodeMatcher().match(arg, subtype)) {
         {
           SNode _nodeToCheck_1029348928467 = equationInfo.getNodeWithError();
           EquationInfo _info_12389875345 = new EquationInfo(_nodeToCheck_1029348928467, null, "r:00000000-0000-4000-0000-011c895902b1(jetbrains.mps.lang.typesystem.typesystem)", "176833115774977717", 0, null);
@@ -54,8 +57,8 @@ public class JoinType_supertypeOf_arguments_InequationReplacementRule extends Ab
         return;
       }
     }
-    for (SNode arg : SLinkOperations.getChildren(supertype, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1129e737f02L, 0x1129e73a76aL, "argument"))) {
-      if (TypeChecker.getInstance().getSubtypingManager().isSubtype(subtype, arg)) {
+    for (SNode arg : SLinkOperations.getChildren(supertype, LINKS.argument$Iuyp)) {
+      if (TypecheckingFacade.getFromContext().isSubtype(subtype, arg)) {
         {
           SNode _nodeToCheck_1029348928467 = equationInfo.getNodeWithError();
           EquationInfo _info_12389875345 = new EquationInfo(_nodeToCheck_1029348928467, null, "r:00000000-0000-4000-0000-011c895902b1(jetbrains.mps.lang.typesystem.typesystem)", "4903733294584216031", 0, null);
@@ -65,8 +68,8 @@ public class JoinType_supertypeOf_arguments_InequationReplacementRule extends Ab
         return;
       }
     }
-    for (SNode arg : SLinkOperations.getChildren(supertype, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1129e737f02L, 0x1129e73a76aL, "argument"))) {
-      if (SNodeOperations.getConceptDeclaration(arg) == SNodeOperations.getConceptDeclaration(subtype)) {
+    for (SNode arg : SLinkOperations.getChildren(supertype, LINKS.argument$Iuyp)) {
+      if (Objects.equals(SNodeOperations.getConcept(arg), SNodeOperations.getConcept(subtype))) {
         {
           SNode _nodeToCheck_1029348928467 = equationInfo.getNodeWithError();
           EquationInfo _info_12389875345 = new EquationInfo(_nodeToCheck_1029348928467, null, "r:00000000-0000-4000-0000-011c895902b1(jetbrains.mps.lang.typesystem.typesystem)", "1269166727599073781", 0, null);
@@ -76,8 +79,8 @@ public class JoinType_supertypeOf_arguments_InequationReplacementRule extends Ab
         return;
       }
     }
-    for (SNode arg : SLinkOperations.getChildren(supertype, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1129e737f02L, 0x1129e73a76aL, "argument"))) {
-      if (CoerceUtil.canBeCoerced(subtype, SNodeOperations.getConceptDeclaration(arg)) && CoerceUtil.canBeCoerced(arg, SNodeOperations.getConceptDeclaration(subtype))) {
+    for (SNode arg : SLinkOperations.getChildren(supertype, LINKS.argument$Iuyp)) {
+      if (CoerceUtil.canBeCoerced(subtype, SNodeOperations.getConcept(arg)) && CoerceUtil.canBeCoerced(arg, SNodeOperations.getConcept(subtype))) {
         {
           SNode _nodeToCheck_1029348928467 = equationInfo.getNodeWithError();
           EquationInfo _info_12389875345 = new EquationInfo(_nodeToCheck_1029348928467, null, "r:00000000-0000-4000-0000-011c895902b1(jetbrains.mps.lang.typesystem.typesystem)", "8991952304890041665", 0, null);
@@ -90,27 +93,27 @@ public class JoinType_supertypeOf_arguments_InequationReplacementRule extends Ab
   }
   public boolean checkInequation(final SNode subtype, final SNode supertype, final EquationInfo equationInfo, IsApplicable2Status status, final boolean inequalityIsWeak, final boolean inequalityIsLessThan) {
     boolean result_14532009 = true;
-    for (SNode arg : SLinkOperations.getChildren(supertype, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1129e737f02L, 0x1129e73a76aL, "argument"))) {
-      if (MatchingUtil.matchNodes(arg, subtype)) {
-        result_14532009 = result_14532009 && TypeChecker.getInstance().getSubtypingManager().isSubtype((SNode) subtype, (SNode) arg, true);
+    for (SNode arg : SLinkOperations.getChildren(supertype, LINKS.argument$Iuyp)) {
+      if (new SNodeMatcher().match(arg, subtype)) {
+        result_14532009 = result_14532009 && TypecheckingFacade.getFromContext().isSubtype((SNode) subtype, (SNode) arg);
         return result_14532009;
       }
     }
-    for (SNode arg : SLinkOperations.getChildren(supertype, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1129e737f02L, 0x1129e73a76aL, "argument"))) {
-      if (TypeChecker.getInstance().getSubtypingManager().isSubtype(subtype, arg)) {
-        result_14532009 = result_14532009 && TypeChecker.getInstance().getSubtypingManager().isSubtype((SNode) subtype, (SNode) arg, true);
+    for (SNode arg : SLinkOperations.getChildren(supertype, LINKS.argument$Iuyp)) {
+      if (TypecheckingFacade.getFromContext().isSubtype(subtype, arg)) {
+        result_14532009 = result_14532009 && TypecheckingFacade.getFromContext().isSubtype((SNode) subtype, (SNode) arg);
         return result_14532009;
       }
     }
-    for (SNode arg : SLinkOperations.getChildren(supertype, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1129e737f02L, 0x1129e73a76aL, "argument"))) {
-      if (SNodeOperations.getConceptDeclaration(arg) == SNodeOperations.getConceptDeclaration(subtype)) {
-        result_14532009 = result_14532009 && TypeChecker.getInstance().getSubtypingManager().isSubtype((SNode) subtype, (SNode) arg, true);
+    for (SNode arg : SLinkOperations.getChildren(supertype, LINKS.argument$Iuyp)) {
+      if (Objects.equals(SNodeOperations.getConcept(arg), SNodeOperations.getConcept(subtype))) {
+        result_14532009 = result_14532009 && TypecheckingFacade.getFromContext().isSubtype((SNode) subtype, (SNode) arg);
         return result_14532009;
       }
     }
-    for (SNode arg : SLinkOperations.getChildren(supertype, MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1129e737f02L, 0x1129e73a76aL, "argument"))) {
-      if (CoerceUtil.canBeCoerced(subtype, SNodeOperations.getConceptDeclaration(arg)) && CoerceUtil.canBeCoerced(arg, SNodeOperations.getConceptDeclaration(subtype))) {
-        result_14532009 = result_14532009 && TypeChecker.getInstance().getSubtypingManager().isSubtype((SNode) subtype, (SNode) arg, true);
+    for (SNode arg : SLinkOperations.getChildren(supertype, LINKS.argument$Iuyp)) {
+      if (CoerceUtil.canBeCoerced(subtype, SNodeOperations.getConcept(arg)) && CoerceUtil.canBeCoerced(arg, SNodeOperations.getConcept(subtype))) {
+        result_14532009 = result_14532009 && TypecheckingFacade.getFromContext().isSubtype((SNode) subtype, (SNode) arg);
         break;
       }
     }
@@ -127,9 +130,18 @@ public class JoinType_supertypeOf_arguments_InequationReplacementRule extends Ab
   }
 
   public SAbstractConcept getApplicableSubtypeConcept() {
-    return MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x10802efe25aL, "jetbrains.mps.lang.core.structure.BaseConcept");
+    return CONCEPTS.BaseConcept$gP;
   }
   public SAbstractConcept getApplicableSupertypeConcept() {
-    return MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1129e737f02L, "jetbrains.mps.lang.typesystem.structure.JoinType");
+    return CONCEPTS.JoinType$re;
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink argument$Iuyp = MetaAdapterFactory.getContainmentLink(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1129e737f02L, 0x1129e73a76aL, "argument");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept BaseConcept$gP = MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x10802efe25aL, "jetbrains.mps.lang.core.structure.BaseConcept");
+    /*package*/ static final SConcept JoinType$re = MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1129e737f02L, "jetbrains.mps.lang.typesystem.structure.JoinType");
   }
 }

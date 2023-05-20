@@ -3,13 +3,14 @@
   <persistence version="9" />
   <languages>
     <use id="fd392034-7849-419d-9071-12563d152375" name="jetbrains.mps.baseLanguage.closures" version="0" />
-    <use id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections" version="0" />
-    <use id="b401a680-8325-4110-8fd3-84331ff25bef" name="jetbrains.mps.lang.generator" version="0" />
-    <use id="d7706f63-9be2-479c-a3da-ae92af1e64d5" name="jetbrains.mps.lang.generator.generationContext" version="0" />
-    <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="4" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections" version="1" />
+    <use id="b401a680-8325-4110-8fd3-84331ff25bef" name="jetbrains.mps.lang.generator" version="4" />
+    <use id="d7706f63-9be2-479c-a3da-ae92af1e64d5" name="jetbrains.mps.lang.generator.generationContext" version="2" />
+    <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="19" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
     <devkit ref="2677cb18-f558-4e33-bc38-a5139cee06dc(jetbrains.mps.devkit.language-design)" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="a2eb3a43-fcc2-4200-80dc-c60110c4862d(jetbrains.mps.devkit.templates)" />
   </languages>
   <imports>
     <import index="dghb" ref="r:ec0ffc91-3a14-4002-ac57-dd36c5dcf10a(jetbrains.mps.sampleXML.structure)" />
@@ -101,6 +102,7 @@
       <concept id="1146644602865" name="jetbrains.mps.baseLanguage.structure.PublicVisibility" flags="nn" index="3Tm1VV" />
     </language>
     <language id="b401a680-8325-4110-8fd3-84331ff25bef" name="jetbrains.mps.lang.generator">
+      <concept id="1510949579266781519" name="jetbrains.mps.lang.generator.structure.TemplateCallMacro" flags="ln" index="5jKBG" />
       <concept id="1219952072943" name="jetbrains.mps.lang.generator.structure.DropRootRule" flags="lg" index="aNPBN">
         <reference id="1219952338328" name="applicableConcept" index="aOQi4" />
       </concept>
@@ -122,9 +124,6 @@
       </concept>
       <concept id="1722980698497626400" name="jetbrains.mps.lang.generator.structure.ITemplateCall" flags="ng" index="v9R3L">
         <reference id="1722980698497626483" name="template" index="v9R2y" />
-      </concept>
-      <concept id="1194565793557" name="jetbrains.mps.lang.generator.structure.IncludeMacro" flags="ln" index="xERo3">
-        <reference id="1194566366375" name="includeTemplate" index="xH3mL" />
       </concept>
       <concept id="1167087469898" name="jetbrains.mps.lang.generator.structure.CreateRootRule" flags="lg" index="2VPoh5">
         <reference id="1167087469901" name="templateNode" index="2VPoh2" />
@@ -202,11 +201,11 @@
         <child id="5169995583184591170" name="smodelAttribute" index="lGtFl" />
       </concept>
       <concept id="3364660638048049750" name="jetbrains.mps.lang.core.structure.PropertyAttribute" flags="ng" index="A9Btg">
-        <property id="1757699476691236117" name="propertyName" index="2qtEX9" />
+        <property id="1757699476691236117" name="name_DebugInfo" index="2qtEX9" />
         <property id="1341860900487648621" name="propertyId" index="P4ACc" />
       </concept>
       <concept id="3364660638048049745" name="jetbrains.mps.lang.core.structure.LinkAttribute" flags="ng" index="A9Btn">
-        <property id="1757699476691236116" name="linkRole" index="2qtEX8" />
+        <property id="1757699476691236116" name="role_DebugInfo" index="2qtEX8" />
         <property id="1341860900488019036" name="linkId" index="P3scX" />
       </concept>
       <concept id="1169194658468" name="jetbrains.mps.lang.core.structure.INamedConcept" flags="ng" index="TrEIO">
@@ -252,10 +251,10 @@
               <ref role="3cqZAo" node="hSa5kps" resolve="frame" />
             </node>
             <node concept="liA8E" id="hSa5kp$" role="2OqNvi">
-              <ref role="37wK5l" to="dxuu:~JFrame.setDefaultCloseOperation(int):void" resolve="setDefaultCloseOperation" />
-              <node concept="10M0yZ" id="hSa5kp_" role="37wK5m">
+              <ref role="37wK5l" to="dxuu:~JFrame.setDefaultCloseOperation(int)" resolve="setDefaultCloseOperation" />
+              <node concept="10M0yZ" id="41sr59Qd2yH" role="37wK5m">
+                <ref role="3cqZAo" to="dxuu:~WindowConstants.EXIT_ON_CLOSE" resolve="EXIT_ON_CLOSE" />
                 <ref role="1PxDUh" to="dxuu:~JFrame" resolve="JFrame" />
-                <ref role="3cqZAo" to="dxuu:~JFrame.EXIT_ON_CLOSE" resolve="EXIT_ON_CLOSE" />
               </node>
             </node>
           </node>
@@ -271,7 +270,7 @@
                 <ref role="3cqZAo" node="hSa5kps" resolve="frame" />
               </node>
               <node concept="liA8E" id="hSa5kpF" role="2OqNvi">
-                <ref role="37wK5l" to="dxuu:~JFrame.getContentPane():java.awt.Container" resolve="getContentPane" />
+                <ref role="37wK5l" to="dxuu:~JFrame.getContentPane()" resolve="getContentPane" />
               </node>
             </node>
           </node>
@@ -282,7 +281,7 @@
               <ref role="3cqZAo" node="hSa5kpB" resolve="container" />
             </node>
             <node concept="liA8E" id="hSa5kpJ" role="2OqNvi">
-              <ref role="37wK5l" to="z60i:~Container.setLayout(java.awt.LayoutManager):void" resolve="setLayout" />
+              <ref role="37wK5l" to="z60i:~Container.setLayout(java.awt.LayoutManager)" resolve="setLayout" />
               <node concept="2ShNRf" id="hSa5kpK" role="37wK5m">
                 <node concept="1pGfFk" id="hSa5kpL" role="2ShVmc">
                   <ref role="37wK5l" to="z60i:~FlowLayout.&lt;init&gt;()" resolve="FlowLayout" />
@@ -305,7 +304,7 @@
               <ref role="3cqZAo" node="hSa5kps" resolve="frame" />
             </node>
             <node concept="liA8E" id="hSa5kqa" role="2OqNvi">
-              <ref role="37wK5l" to="z60i:~Window.pack():void" resolve="pack" />
+              <ref role="37wK5l" to="z60i:~Window.pack()" resolve="pack" />
             </node>
           </node>
         </node>
@@ -315,7 +314,7 @@
               <ref role="3cqZAo" node="hSa5kps" resolve="frame" />
             </node>
             <node concept="liA8E" id="hSa5kqe" role="2OqNvi">
-              <ref role="37wK5l" to="z60i:~Window.setLocationRelativeTo(java.awt.Component):void" resolve="setLocationRelativeTo" />
+              <ref role="37wK5l" to="z60i:~Window.setLocationRelativeTo(java.awt.Component)" resolve="setLocationRelativeTo" />
               <node concept="10Nm6u" id="hSa5kqf" role="37wK5m" />
             </node>
           </node>
@@ -326,7 +325,7 @@
               <ref role="3cqZAo" node="hSa5kps" resolve="frame" />
             </node>
             <node concept="liA8E" id="hSa5kqj" role="2OqNvi">
-              <ref role="37wK5l" to="z60i:~Window.setVisible(boolean):void" resolve="setVisible" />
+              <ref role="37wK5l" to="z60i:~Window.setVisible(boolean)" resolve="setVisible" />
               <node concept="3clFbT" id="hSa5kqk" role="37wK5m">
                 <property role="3clFbU" value="true" />
               </node>
@@ -352,7 +351,7 @@
               <ref role="3cqZAo" node="hSa65q3" resolve="container" />
             </node>
             <node concept="liA8E" id="4$J9ZLeZ66h" role="2OqNvi">
-              <ref role="37wK5l" to="z60i:~Container.add(java.awt.Component):java.awt.Component" resolve="add" />
+              <ref role="37wK5l" to="z60i:~Container.add(java.awt.Component)" resolve="add" />
               <node concept="1rXfSq" id="4hiugqysiTm" role="37wK5m">
                 <ref role="37wK5l" node="4$J9ZLeZ5Xl" resolve="component" />
                 <node concept="1ZhdrF" id="4$J9ZLeZ6oO" role="lGtFl">
@@ -488,7 +487,7 @@
                 <ref role="3cqZAo" node="hSa8rua" resolve="component" />
               </node>
               <node concept="liA8E" id="hSa8$DC" role="2OqNvi">
-                <ref role="37wK5l" to="dxuu:~AbstractButton.setText(java.lang.String):void" resolve="setText" />
+                <ref role="37wK5l" to="dxuu:~AbstractButton.setText(java.lang.String)" resolve="setText" />
                 <node concept="Xl_RD" id="hSa8_3x" role="37wK5m">
                   <property role="Xl_RC" value="text" />
                   <node concept="17Uvod" id="hSa9h1H" role="lGtFl">
@@ -502,7 +501,7 @@
                               <node concept="2OqwBi" id="hSa9meP" role="2Oq$k0">
                                 <node concept="30H73N" id="hSa9meQ" role="2Oq$k0" />
                                 <node concept="3Tsc0h" id="hSa9meR" role="2OqNvi">
-                                  <ref role="3TtcxE" to="dghb:hP5YayU" />
+                                  <ref role="3TtcxE" to="dghb:hP5YayU" resolve="attribute" />
                                 </node>
                               </node>
                               <node concept="1z4cxt" id="hSa9meS" role="2OqNvi">
@@ -519,7 +518,7 @@
                                           </node>
                                         </node>
                                         <node concept="liA8E" id="hSa9mf0" role="2OqNvi">
-                                          <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object):boolean" resolve="equals" />
+                                          <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object)" resolve="equals" />
                                           <node concept="Xl_RD" id="hSa9mf1" role="37wK5m">
                                             <property role="Xl_RC" value="text" />
                                           </node>
@@ -554,7 +553,7 @@
                         <node concept="2OqwBi" id="hSa8Ooa" role="2Oq$k0">
                           <node concept="30H73N" id="hSa8O1G" role="2Oq$k0" />
                           <node concept="3Tsc0h" id="hSa8PvZ" role="2OqNvi">
-                            <ref role="3TtcxE" to="dghb:hP5YayU" />
+                            <ref role="3TtcxE" to="dghb:hP5YayU" resolve="attribute" />
                           </node>
                         </node>
                         <node concept="1z4cxt" id="hSa91_3" role="2OqNvi">
@@ -571,7 +570,7 @@
                                     </node>
                                   </node>
                                   <node concept="liA8E" id="hSa94FD" role="2OqNvi">
-                                    <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object):boolean" resolve="equals" />
+                                    <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object)" resolve="equals" />
                                     <node concept="Xl_RD" id="hSa94Yi" role="37wK5m">
                                       <property role="Xl_RC" value="text" />
                                     </node>
@@ -594,8 +593,8 @@
             </node>
           </node>
           <node concept="3clFbH" id="4$J9ZLeZ5WI" role="3cqZAp">
-            <node concept="xERo3" id="4$J9ZLeZ5WK" role="lGtFl">
-              <ref role="xH3mL" node="hSadXA1" resolve="include_ComponentProperties" />
+            <node concept="5jKBG" id="za$VMvkORJ" role="lGtFl">
+              <ref role="v9R2y" node="hSadXA1" resolve="include_ComponentProperties" />
             </node>
           </node>
           <node concept="3cpWs6" id="hSa8BnZ" role="3cqZAp">
@@ -663,7 +662,7 @@
                 <ref role="3cqZAo" node="hSa9z8P" resolve="component" />
               </node>
               <node concept="liA8E" id="hSa9z8W" role="2OqNvi">
-                <ref role="37wK5l" to="dxuu:~JLabel.setText(java.lang.String):void" resolve="setText" />
+                <ref role="37wK5l" to="dxuu:~JLabel.setText(java.lang.String)" resolve="setText" />
                 <node concept="Xl_RD" id="hSa9z8X" role="37wK5m">
                   <property role="Xl_RC" value="text" />
                   <node concept="17Uvod" id="hSa9z8Y" role="lGtFl">
@@ -677,7 +676,7 @@
                               <node concept="2OqwBi" id="hSa9z94" role="2Oq$k0">
                                 <node concept="30H73N" id="hSa9z95" role="2Oq$k0" />
                                 <node concept="3Tsc0h" id="hSa9z96" role="2OqNvi">
-                                  <ref role="3TtcxE" to="dghb:hP5YayU" />
+                                  <ref role="3TtcxE" to="dghb:hP5YayU" resolve="attribute" />
                                 </node>
                               </node>
                               <node concept="1z4cxt" id="hSa9z97" role="2OqNvi">
@@ -694,7 +693,7 @@
                                           </node>
                                         </node>
                                         <node concept="liA8E" id="hSa9z9f" role="2OqNvi">
-                                          <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object):boolean" resolve="equals" />
+                                          <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object)" resolve="equals" />
                                           <node concept="Xl_RD" id="hSa9z9g" role="37wK5m">
                                             <property role="Xl_RC" value="text" />
                                           </node>
@@ -729,7 +728,7 @@
                         <node concept="2OqwBi" id="hSa9z9q" role="2Oq$k0">
                           <node concept="30H73N" id="hSa9z9r" role="2Oq$k0" />
                           <node concept="3Tsc0h" id="hSa9z9s" role="2OqNvi">
-                            <ref role="3TtcxE" to="dghb:hP5YayU" />
+                            <ref role="3TtcxE" to="dghb:hP5YayU" resolve="attribute" />
                           </node>
                         </node>
                         <node concept="1z4cxt" id="hSa9z9t" role="2OqNvi">
@@ -746,7 +745,7 @@
                                     </node>
                                   </node>
                                   <node concept="liA8E" id="hSa9z9_" role="2OqNvi">
-                                    <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object):boolean" resolve="equals" />
+                                    <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object)" resolve="equals" />
                                     <node concept="Xl_RD" id="hSa9z9A" role="37wK5m">
                                       <property role="Xl_RC" value="text" />
                                     </node>
@@ -769,8 +768,8 @@
             </node>
           </node>
           <node concept="3clFbH" id="4$J9ZLeZ5WT" role="3cqZAp">
-            <node concept="xERo3" id="4$J9ZLeZ5WV" role="lGtFl">
-              <ref role="xH3mL" node="hSadXA1" resolve="include_ComponentProperties" />
+            <node concept="5jKBG" id="za$VMvkORK" role="lGtFl">
+              <ref role="v9R2y" node="hSadXA1" resolve="include_ComponentProperties" />
             </node>
           </node>
           <node concept="3cpWs6" id="hSa9z9E" role="3cqZAp">
@@ -822,7 +821,7 @@
                 <ref role="3cqZAo" node="hSaebvu" resolve="component" />
               </node>
               <node concept="liA8E" id="hSaelgn" role="2OqNvi">
-                <ref role="37wK5l" to="dxuu:~JComponent.setEnabled(boolean):void" resolve="setEnabled" />
+                <ref role="37wK5l" to="dxuu:~JComponent.setEnabled(boolean)" resolve="setEnabled" />
                 <node concept="3clFbT" id="hSaelSU" role="37wK5m">
                   <property role="3clFbU" value="false" />
                   <node concept="17Uvod" id="hSaeKUp" role="lGtFl">
@@ -839,7 +838,7 @@
                               </node>
                             </node>
                             <node concept="liA8E" id="hSaeTkJ" role="2OqNvi">
-                              <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object):boolean" resolve="equals" />
+                              <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object)" resolve="equals" />
                               <node concept="Xl_RD" id="hSaeTBN" role="37wK5m">
                                 <property role="Xl_RC" value="true" />
                               </node>
@@ -860,7 +859,7 @@
                       <node concept="2OqwBi" id="hSaexGp" role="2Oq$k0">
                         <node concept="30H73N" id="hSaexvd" role="2Oq$k0" />
                         <node concept="3Tsc0h" id="hSaexVl" role="2OqNvi">
-                          <ref role="3TtcxE" to="dghb:hP5YayU" />
+                          <ref role="3TtcxE" to="dghb:hP5YayU" resolve="attribute" />
                         </node>
                       </node>
                       <node concept="1z4cxt" id="hSaezrP" role="2OqNvi">
@@ -877,7 +876,7 @@
                                   </node>
                                 </node>
                                 <node concept="liA8E" id="hSaeBz_" role="2OqNvi">
-                                  <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object):boolean" resolve="equals" />
+                                  <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object)" resolve="equals" />
                                   <node concept="Xl_RD" id="hSaeCnU" role="37wK5m">
                                     <property role="Xl_RC" value="enabled" />
                                   </node>
@@ -905,7 +904,7 @@
                     <ref role="3cqZAo" node="hSaebvu" resolve="component" />
                   </node>
                   <node concept="liA8E" id="hSag5Z9" role="2OqNvi">
-                    <ref role="37wK5l" to="dxuu:~JComponent.setOpaque(boolean):void" resolve="setOpaque" />
+                    <ref role="37wK5l" to="dxuu:~JComponent.setOpaque(boolean)" resolve="setOpaque" />
                     <node concept="3clFbT" id="hSag6zM" role="37wK5m">
                       <property role="3clFbU" value="true" />
                     </node>
@@ -918,7 +917,7 @@
                     <ref role="3cqZAo" node="hSaebvu" resolve="component" />
                   </node>
                   <node concept="liA8E" id="hSag9$h" role="2OqNvi">
-                    <ref role="37wK5l" to="dxuu:~JComponent.setBackground(java.awt.Color):void" resolve="setBackground" />
+                    <ref role="37wK5l" to="dxuu:~JComponent.setBackground(java.awt.Color)" resolve="setBackground" />
                     <node concept="10M0yZ" id="hSagawA" role="37wK5m">
                       <ref role="1PxDUh" to="z60i:~Color" resolve="Color" />
                       <ref role="3cqZAo" to="z60i:~Color.black" resolve="black" />
@@ -951,7 +950,7 @@
                       <node concept="2OqwBi" id="hSago_0" role="2Oq$k0">
                         <node concept="30H73N" id="hSago_1" role="2Oq$k0" />
                         <node concept="3Tsc0h" id="hSago_2" role="2OqNvi">
-                          <ref role="3TtcxE" to="dghb:hP5YayU" />
+                          <ref role="3TtcxE" to="dghb:hP5YayU" resolve="attribute" />
                         </node>
                       </node>
                       <node concept="1z4cxt" id="hSago_3" role="2OqNvi">
@@ -968,7 +967,7 @@
                                   </node>
                                 </node>
                                 <node concept="liA8E" id="hSago_b" role="2OqNvi">
-                                  <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object):boolean" resolve="equals" />
+                                  <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object)" resolve="equals" />
                                   <node concept="Xl_RD" id="hSago_c" role="37wK5m">
                                     <property role="Xl_RC" value="background" />
                                   </node>
@@ -1011,7 +1010,7 @@
                 </node>
               </node>
               <node concept="liA8E" id="4$J9ZLeZ5Xa" role="2OqNvi">
-                <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object):boolean" resolve="equals" />
+                <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object)" resolve="equals" />
                 <node concept="Xl_RD" id="4$J9ZLeZ5Xb" role="37wK5m">
                   <property role="Xl_RC" value="button" />
                 </node>
@@ -1037,7 +1036,7 @@
                 </node>
               </node>
               <node concept="liA8E" id="4$J9ZLeZ5Xj" role="2OqNvi">
-                <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object):boolean" resolve="equals" />
+                <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object)" resolve="equals" />
                 <node concept="Xl_RD" id="4$J9ZLeZ5Xk" role="37wK5m">
                   <property role="Xl_RC" value="label" />
                 </node>

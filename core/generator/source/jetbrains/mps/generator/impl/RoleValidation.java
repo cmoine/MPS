@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * Check if a child could be added to specified link (either association or aggregation).
  * Role validation logic extracted out from AbstractTemplateGenerator
  * @author Artem Tikhomirov
  */
@@ -36,7 +37,9 @@ public class RoleValidation {
   private final boolean myShowBadChildWarning;
   private final RoleValidator mySuccessValidator = new RoleValidator();
   // the code might need refactoring to be more thread-friendly, e.g. validators per thread, not per single generator as it's now
-  private final ConcurrentHashMap<String, Map<String, RoleValidator>> validators = new ConcurrentHashMap<String, Map<String, RoleValidator>>();
+  // however, the map doesn't grow too much, e.g. for lang.generator/editor there are 87 concept entries total,
+  // with maximum of 7 link->validator map size.
+  private final ConcurrentHashMap<SConcept, Map<SAbstractLink, RoleValidator>> validators = new ConcurrentHashMap<>();
 
   public RoleValidation(boolean showBadChildWarning) {
     myShowBadChildWarning = showBadChildWarning;
@@ -44,20 +47,19 @@ public class RoleValidation {
 
   RoleValidator getValidator(SNode sourceNode, SReferenceLink role) {
     final SConcept srcConcept = sourceNode.getConcept();
-    Map<String, RoleValidator> vmap = getCached(srcConcept);
-    final String roleName = role.getRoleName();
-    RoleValidator validator = vmap.get(roleName);
+    Map<SAbstractLink, RoleValidator> vmap = getCached(srcConcept);
+    RoleValidator validator = vmap.get(role);
     if (validator != null) {
       return validator;
     }
     if (!srcConcept.isSubConceptOf(role.getOwner())) {
-      String msg = String.format("Source node of %s concept could not have reference %s (from %s)", srcConcept.getQualifiedName(), roleName, role.getOwner().getQualifiedName());
+      String msg = String.format("Source node of %s concept could not have reference %s (from %s)", srcConcept.getQualifiedName(), role.getName(), role.getOwner().getQualifiedName());
       Status s = new Status(msg);
       validator = new RoleValidator(s);
     } else {
       validator = new AcceptableTargetValidator(role);
     }
-    vmap.put(roleName, validator);
+    vmap.put(role, validator);
     return validator;
   }
 
@@ -66,14 +68,13 @@ public class RoleValidation {
       return mySuccessValidator;
     }
     final SConcept srcConcept = sourceNode.getConcept();
-    Map<String, RoleValidator> vmap = getCached(srcConcept);
-    final String roleName = role.getRoleName();
-    RoleValidator validator = vmap.get(roleName);
+    Map<SAbstractLink, RoleValidator> vmap = getCached(srcConcept);
+    RoleValidator validator = vmap.get(role);
     if (validator != null) {
       return validator;
     }
     if (!srcConcept.isSubConceptOf(role.getOwner())) {
-      String msg = String.format("No child role %s (%s) known for source node's %s concept", roleName, role.getOwner().getQualifiedName(), srcConcept.getQualifiedName());
+      String msg = String.format("No child role %s (%s) known for source node's %s concept", role.getName(), role.getOwner().getQualifiedName(), srcConcept.getQualifiedName());
       Status s = new Status(msg);
       validator = new RoleValidator(s);
     } else {
@@ -83,17 +84,16 @@ public class RoleValidation {
         validator = mySuccessValidator;
       }
     }
-    vmap.put(roleName, validator);
+    vmap.put(role, validator);
     return validator;
   }
 
 
   @NotNull
-  private Map<String, RoleValidator> getCached(SConcept concept) {
-    final String conceptFQName = concept.getQualifiedName();
-    Map<String, RoleValidator> vmap = validators.get(conceptFQName);
+  private Map<SAbstractLink, RoleValidator> getCached(SConcept concept) {
+    Map<SAbstractLink, RoleValidator> vmap = validators.get(concept);
     if (vmap == null) {
-      Map<String, RoleValidator> existing = validators.putIfAbsent(conceptFQName, vmap = new ConcurrentHashMap<String, RoleValidator>());
+      Map<SAbstractLink, RoleValidator> existing = validators.putIfAbsent(concept, vmap = new ConcurrentHashMap<>());
       if (existing != null) {
         vmap = existing;
       }
@@ -123,25 +123,34 @@ public class RoleValidation {
   private static class AcceptableTargetValidator extends RoleValidator {
     private final SAbstractLink myLink;
     private final SAbstractConcept myLinkTarget;
+    private final boolean myIsContainment;
 
-    AcceptableTargetValidator(@NotNull SAbstractLink link) {
+    AcceptableTargetValidator(@NotNull SReferenceLink link) {
       myLink = link;
       myLinkTarget = link.getTargetConcept();
+      myIsContainment = false;
+    }
+
+    AcceptableTargetValidator(@NotNull SContainmentLink link) {
+      myLink = link;
+      myLinkTarget = link.getTargetConcept();
+      myIsContainment = true;
     }
 
     @Override
     public Status validate(SNode targetNode) {
       if (targetNode.getConcept().isSubConceptOf(myLinkTarget)) {
+        // no reason to cache isSubConceptOf result, it's few ms in total (e.g. 11 ms for lang.generator/editor)
         return null;
       }
-      if (!myLink.isReference() && DelayedChanges.isTempNode(targetNode)) {
+      if (myIsContainment && DelayedChanges.isTempNode(targetNode)) {
         // temporary child node, ignore
         return null;
       }
       String expected = myLinkTarget.getQualifiedName();
       String was = targetNode.getConcept().getQualifiedName();
-      String relationKind = myLink.isReference() ? "referent" : "child";
-      String msg = String.format("%s '%s' is expected for role '%s' but was '%s'", relationKind, expected, myLink.getRole(), was);
+      String relationKind = myIsContainment ? "child" : "referent";
+      String msg = String.format("%s '%s' is expected for role '%s' but was '%s'", relationKind, expected, myLink.getName(), was);
       return new Status(msg, GeneratorUtil.describe(targetNode, relationKind));
     }
   }

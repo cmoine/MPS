@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,22 +18,18 @@ package jetbrains.mps.smodel;
 import jetbrains.mps.components.CoreComponent;
 import jetbrains.mps.extapi.module.SRepositoryExt;
 import jetbrains.mps.library.ModulesMiner.ModuleHandle;
-import jetbrains.mps.project.AbstractModule;
-import jetbrains.mps.project.DevKit;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.project.Project;
-import jetbrains.mps.project.Solution;
-import jetbrains.mps.project.structure.modules.DevkitDescriptor;
-import jetbrains.mps.project.structure.modules.LanguageDescriptor;
-import jetbrains.mps.project.structure.modules.SolutionDescriptor;
+import jetbrains.mps.project.structure.modules.GeneratorDescriptor;
+import jetbrains.mps.project.structure.modules.ModuleDescriptor;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.util.Computable;
 import jetbrains.mps.util.ComputeRunnable;
-import jetbrains.mps.util.IterableUtil;
-import jetbrains.mps.util.annotation.ToRemove;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import jetbrains.mps.vfs.IFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SModel;
+import org.jetbrains.mps.openapi.model.SModelName;
 import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SModuleReference;
 import org.jetbrains.mps.openapi.module.SRepository;
@@ -45,16 +41,33 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 /**
- * Mediator between API aspects of an SRepository and out implementation aspects, like SRepositoryExt.
+ * Mediator between API aspects of an SRepository and our implementation aspects, like SRepositoryExt.
  * Use this class to avoid casts to SRepositoryExt
+ * IMPORTANT: lifespan of a facade instance shall not last longer than single model read. Implementation
+ * may cache values (e.g. model name to model instance) to answer subsequent queries faster, and may not reflect
+ * changes made to a repository.
  */
-public final class ModuleRepositoryFacade implements CoreComponent {
-  private static final Logger LOG = LogManager.getLogger(ModuleRepositoryFacade.class);
+public final class ModuleRepositoryFacade implements CoreComponent, ModuleInstanceFactory {
+  private static final Logger LOG = Logger.getLogger(ModuleRepositoryFacade.class);
   private static ModuleRepositoryFacade INSTANCE;
 
-  private final MPSModuleRepository REPO;
+  // never null, use for all SRepository API methods.
+  private final SRepository myRepo;
+  // may be null. use only when extended method of SRepositoryExt are needed.
+  private final SRepositoryExt myRepoExt;
+  private final ModuleInstanceFactory myModuleFactory = new GeneralModuleFactory() {
+    @NotNull
+    @Override
+    protected Generator newGeneratorInstance(@NotNull GeneratorDescriptor descriptor, @Nullable IFile descriptorFile) {
+      // while Generator module needs its source Language module, we have to use newGeneratorInstance method that has access to a repo
+      return ModuleRepositoryFacade.this.newGeneratorInstance(descriptor, descriptorFile);
+    }
+  };
 
   /**
    * @deprecated  This class shall cease to be CoreComponent and singleton. Instead, shall be
@@ -63,20 +76,25 @@ public final class ModuleRepositoryFacade implements CoreComponent {
    */
   @Deprecated
   public ModuleRepositoryFacade(MPSModuleRepository repo) {
-    this((SRepositoryExt) repo);
+    myRepo = repo;
+    myRepoExt = repo;
   }
 
   public ModuleRepositoryFacade(@NotNull Project mpsProject) {
-    this((SRepositoryExt) mpsProject.getRepository());
+    this(mpsProject.getRepository());
   }
 
+  /**
+   * Some methods of this facade are bound to implementation-specific {@link SRepositoryExt} and {@link MPSModuleOwner} interfaces
+   * Unless you use them, you're safe to pass any {@link SRepository} instance here.
+   * If, however, you need to register/unregister modules, make sure repository you pass is instance of {@link SRepositoryExt}
+   * @param repository container for modules as described above
+   */
+  // FIXME need to distinguish between uses where regular SRepository is sufficient (like getAllModules(Class)) vs uses
+  //       where SRepositoryExt is needed (like register/unregister a module)
   public ModuleRepositoryFacade(@NotNull SRepository repository) {
-    this((SRepositoryExt) repository);
-  }
-
-  private ModuleRepositoryFacade(SRepositoryExt repo) {
-    // FIXME REPO shall become SRepositoryExt once we add methods like getByFQN() and getOwners() there
-    REPO = MPSModuleRepository.getInstance();
+    myRepo = repository;
+    myRepoExt = repository instanceof SRepositoryExt ? ((SRepositoryExt) repository) : null;
   }
 
   @Override
@@ -101,80 +119,122 @@ public final class ModuleRepositoryFacade implements CoreComponent {
     return INSTANCE;
   }
 
+  /**
+   * @return repository this facade has been initialized with, never {@code null}
+   * @since 2017.2
+   */
+  public SRepository getRepository() {
+    return myRepo;
+  }
+
   public SModule getModule(@NotNull final SModuleReference ref) {
-    Computable<SModule> c = new Computable<SModule>() {
-      @Override
-      public SModule compute() {
-        return ref.getModuleId() != null ? REPO.getModule(ref.getModuleId()) : REPO.getModuleByFqName(ref.getModuleName());
-      }
-    };
-    if (REPO.getModelAccess().canRead()) {
+    Computable<SModule> c = () -> myRepo.getModule(ref.getModuleId());
+    if (myRepo.getModelAccess().canRead()) {
       return c.compute();
     }
-    ComputeRunnable<SModule> r = new ComputeRunnable<SModule>(c);
-    REPO.getModelAccess().runReadAction(r);
+    ComputeRunnable<SModule> r = new ComputeRunnable<>(c);
+    myRepo.getModelAccess().runReadAction(r);
     return r.getResult();
   }
 
   public <T extends SModule> T getModule(SModuleReference ref, Class<T> cls) {
     SModule m = getModule(ref);
-    if (!cls.isInstance(m)) return null;
-    return (T) m;
-  }
-
-  /**
-   * @return the module with the given name (and with given class)
-   * @deprecated
-   * @see MPSModuleRepository#getModuleByFqName(String)
-   */
-  @ToRemove(version = 3.4)
-  @Deprecated
-  public <T extends SModule> T getModule(String fqName, Class<T> cls) {
-    SModule m = REPO.getModuleByFqName(fqName);
-    if (!cls.isInstance(m)) return null;
+    if (!cls.isInstance(m)) {
+      return null;
+    }
     return (T) m;
   }
 
   public <T extends SModule> Collection<T> getAllModules(Class<T> cls) {
-    List<T> result = new ArrayList<T>();
-    for (SModule module : REPO.getModules()) {
-      if (cls.isInstance(module)) result.add((T) module);
+    List<T> result = new ArrayList<>();
+    for (SModule module : myRepo.getModules()) {
+      if (cls.isInstance(module)) {
+        result.add((T) module);
+      }
     }
     return result;
   }
 
   public <T extends SModule> Collection<T> getModules(MPSModuleOwner moduleOwner, @Nullable Class<T> cls) {
-    Set<SModule> modules = REPO.getModules(moduleOwner);
-    if (modules == null) return Collections.emptyList();
-
-    List<T> list = new LinkedList<T>();
-    for (SModule m : modules) {
-      if (cls == null || cls.isInstance(m)) {
-        list.add((T) m);
-      }
+    Set<SModule> modules = myRepoExt.getModules(moduleOwner);
+    if (modules == null) {
+      return Collections.emptyList();
     }
-    return list;
+    if (cls == null || cls == SModule.class) {
+//      return new LinkedList<T>().getClass().cast(modules)
+      return ((Collection<T>) modules);
+    }
+
+    return modules.stream().filter(cls::isInstance).map(cls::cast).collect(Collectors.toList());
   }
 
   /**
+   * @deprecated there could be more than 1 model with the same name, use {@link #getModelsByName(SModelName)} and pick the one you need.
    * This is provisional API to keep all uses of SModelRepository.getModelDescriptor(String) in a single, controlled place.
    * I could had had created ModelRepositoryFacade, similar to this class, however, it seems just too much for a single method that we shall drop anyway.
+   * This method is in use from template of ModelReferenceExpression (see lang.smodel generator), which is in active use in mbeddr.
    * @param modelQualifiedName
    * @return named model
    */
   @Nullable
+@Deprecated(since = "2017.3", forRemoval = true)
   public SModel getModelByName(@Nullable String modelQualifiedName) {
-    return SModelRepository.getInstance().getModelDescriptor(modelQualifiedName);
+    if (modelQualifiedName == null) {
+      return null;
+    }
+    try {
+      Collection<SModel> models = getModelsByName(new SModelName(modelQualifiedName));
+      return models.isEmpty() ? null : models.iterator().next();
+    } catch (IllegalArgumentException ex) {
+      // bad model name, just pretend we didn't find anything
+      return null;
+    }
   }
 
   /**
-   * Provisional code to get rid of uses of direct static instance of MPSModuleRepository.
-   * IMPLEMENTATION NOTE: shall collect names of all modules and use them instead if global MPSModuleRepository
-   * @param fqName module namespace
-   * @return named module, if any
+   * Replacement for {@link #getModelByName(String)} that respects the case when models with the same name present (e.g. in different modules).
+   * Generally, accessing models by name is nad idea, you shall prefer {@link org.jetbrains.mps.openapi.model.SModelReference} to access specific model.
+   * There are certain scenarios, though, when we need to access by name, therefore we keep this utility method in a facade class.
+   *
+   * Note, implementation of this method is ineffective now, as it iterates over all modules and models of a repository.
+   *
+   * @param modelName exact name (qualified, with stereotype, if any) of the model to match
+   * @return all models with the same exact name, or empty collection if none found
    */
-  public SModule getModuleByName(@NotNull String fqName) {
-    return REPO.getModuleByFqName(fqName);
+  @NotNull
+  public Collection<SModel> getModelsByName(@Nullable SModelName modelName) {
+    if (modelName == null) {
+      return Collections.emptyList();
+    }
+    // With parallel streams, beware of model read lock necessary to perform most operations over module/model (but not #getName())
+    // module.models needs read lock, hence no parallel streams here
+    Stream<SModule> moduleStream = StreamSupport.stream(myRepo.getModules().spliterator(), false);
+    Stream<SModel> modelStream = moduleStream.flatMap(m -> StreamSupport.stream(m.getModels().spliterator(), false));
+    return modelStream.filter(m -> modelName.equals(m.getName())).collect(Collectors.toList());
+  }
+
+  /**
+   * <p>
+   * Use <b>only</b> if there is no way to use {@link ModuleRepositoryFacade#getModule(org.jetbrains.mps.openapi.module.SModuleReference)}
+   * or {@link SRepository#getModule(org.jetbrains.mps.openapi.module.SModuleId)}.<br/>
+   * For example:
+   * <ul>
+   * <li>check for existing modules with the same name on new module creation</li>
+   * <li>search module by name in user search dialog/popup</li>
+   * </ul>
+   * </p>
+   *
+   * @return collection of modules which names are equal to the given module name.
+   * A repository is able to have several modules for a given module name.
+   * Empty collection is returned iff there are no such modules in the repository.
+   * @since 2017.2
+   */
+  @NotNull
+  public Collection<SModule> getModulesByName(@NotNull String moduleName) {
+    // parallel == true as we are going to check module name, which doesn't require model read.
+    return StreamSupport.stream(myRepo.getModules().spliterator(), true)
+                        .filter(module -> moduleName.equals(module.getModuleName()))
+                        .collect(Collectors.toList());
   }
 
   /**
@@ -183,7 +243,13 @@ public final class ModuleRepositoryFacade implements CoreComponent {
    * @return snapshot state of the models available in the repository
    */
   public Collection<SModel> getAllModels() {
-    return SModelRepository.getInstance().getModelDescriptors();
+    if (myRepo instanceof MPSModuleRepository) {
+      return ((MPSModuleRepository) myRepo).getModelRepository().getModelDescriptors();
+    } else {
+      // slow way. If getAllModels method is important enough, perhaps, shall be part of SRepository so that
+      // repo implementation may decide whether to go slow way or use some faster cache (e.g. SModelRepository)
+      return StreamSupport.stream(myRepo.getModules().spliterator(), false).flatMap(m -> StreamSupport.stream(m.getModels().spliterator(), false)).collect(Collectors.toList());
+    }
   }
 
   /**
@@ -193,11 +259,10 @@ public final class ModuleRepositoryFacade implements CoreComponent {
    * @deprecated If there's need for extending language, shall add <code>Language.getDirectlyExtendingLanguage</code>.
    * There's single use in mbeddr.
    */
-  @Deprecated
-  @ToRemove(version = 3.4)
+@Deprecated(since = "3.4", forRemoval = true)
   public Collection<Language> getAllExtendingLanguages(Language l) {
     final SModuleReference lRef = l.getModuleReference();
-    List<Language> result = new LinkedList<Language>();
+    List<Language> result = new LinkedList<>();
     for (Language lang : getAllModules(Language.class)) {
       if (lang.getExtendedLanguageRefs().contains(lRef)) {
         result.add(lang);
@@ -207,7 +272,34 @@ public final class ModuleRepositoryFacade implements CoreComponent {
   }
 
   public void unregisterModules(MPSModuleOwner owner) {
-    REPO.unregisterModules(new HashSet<SModule>(REPO.getModules(owner)), owner);
+    // if unregistering modules one by one is not fast enough, we shall come up with appropriate SRepositoryExt API
+    final ArrayList<SModule> modules = new ArrayList<>(myRepoExt.getModules(owner));
+    // XXX Here comes code complimentary to ModuleRepositoryFacade.newGeneratorInstance.
+    //     I.e. we unregister not directly owned generators only (getOwnedGenerators()), but all generators associated with the language.
+    //     Once we have FCC generator modules, we would switch to getOwnedGenerators here
+    final ArrayList<Generator> associatedGenerators = new ArrayList<>();
+    for (SModule m : modules) {
+      if (m instanceof Language && myRepoExt.getOwners(m).size() == 1) {
+        // Language module with single owner that is about to be unregistered drags all available generators with it.
+        // As long as there's another owner for the language, generators may stay (Language object would persist, only owner association would get unlinked)
+        associatedGenerators.addAll(((Language) m).getGenerators());
+      }
+    }
+    // Besides, we have to be careful not to unregister same module twice (i.e. if both language and its generator are owned by same owner, they
+    // both are in 'modules' list and are disposed in the main loop.
+    associatedGenerators.removeAll(modules);
+    // Modules in associatedGenerators have owners different from the one supplied
+    // Given no mechanism to have generators w/o a language, we have to dispose all of them from any owner
+    for (Generator g : associatedGenerators) {
+      unregisterModule(g);
+    }
+
+    for (SModule m : modules) {
+      // XXX perhaps, shall check m is still registered just in case any module unregisters its related modules (e.g. Language may unregister its Generators)
+      //     though, not clear how to do it gracefully, m.getRepo == null? I wonder to see if we can obtain disposed modules through myRepoExt.getModules()
+      //     I assume earlier unregister have removed the module from the list and we don't need to care about unregistered modules here.
+      myRepoExt.unregisterModule(m, owner);
+    }
   }
 
   //intended to use only when module is removed physically
@@ -216,68 +308,70 @@ public final class ModuleRepositoryFacade implements CoreComponent {
    * unregisters module from all its owners
    */
   public void unregisterModule(@NotNull SModule module) {
-    Set<MPSModuleOwner> owners = new HashSet<MPSModuleOwner>(REPO.getOwners(module));
-    for (MPSModuleOwner owner : owners) {
-      REPO.unregisterModule(module, owner);
+    for (MPSModuleOwner owner : getModuleOwners(module)) {
+      myRepoExt.unregisterModule(module, owner);
     }
   }
 
   public Set<MPSModuleOwner> getModuleOwners(SModule module) {
-    return new HashSet<MPSModuleOwner>(REPO.getOwners(module));
+    return new HashSet<>(myRepoExt.getOwners(module));
   }
 
   /**
-   * @deprecated dubious implementation, not in use.
+   * Instantiate a new module according to description and register it with the facade's repository.
+   * If there's module already (expected scenario), just updates its relation to another {@linkplain MPSModuleOwner module owner}
+   *   (same module could get published with few owners)
+   *  XXX There's little reason to propagate ModuleHandle there (in fact, it's too much even here - why
+   *      do I care modules are instantiated with the help of ModulesMiner). Check TestLanguage for sample case.
+   *
+   * @deprecated method API is cumbersome, it does 2 things and demands MM knowledge. Prefer
+   *             {@link ModuleInstanceFactory#instantiate(ModuleDescriptor, IFile)} instead, and explicit repository registration.
+   *
+   * @return instance of a module, either new one or existing from the facade's repository.
+   * @throws IllegalArgumentException if handle describes unknown module kind.
    */
+  @NotNull
   @Deprecated
-  @ToRemove(version = 3.3)
-  public static SModuleReference createReference(String moduleName) {
-    SModule module = getInstance().REPO.getModuleByFqName(moduleName);
-    return module != null ? module.getModuleReference() : null;
-  }
-
-  public static SModule createModule(ModuleHandle handle, MPSModuleOwner owner) {
+  public SModule instantiateModule(@NotNull ModuleHandle handle, @NotNull MPSModuleOwner owner) {
     LOG.debug("Creating a module " + handle);
-    if (handle.getDescriptor() instanceof LanguageDescriptor) {
-      return INSTANCE.newLanguageInstance(handle, owner);
-    } else if (handle.getDescriptor() instanceof SolutionDescriptor) {
-      return INSTANCE.newSolutionInstance(handle, owner);
-    } else if (handle.getDescriptor() instanceof DevkitDescriptor) {
-      return INSTANCE.newDevKitInstance(handle, owner);
-    } else {
+    ModuleDescriptor moduleDescriptor = handle.getDescriptor();
+    if (moduleDescriptor == null) {
       throw new IllegalArgumentException("Unknown module " + handle.getFile().getName());
     }
+    SModule instance = instantiate(moduleDescriptor, handle.getFile());
+    SModule actualRepoModule = registerModule(instance, owner);
+    return actualRepoModule;
   }
 
-  private Language newLanguageInstance(ModuleHandle handle, MPSModuleOwner moduleOwner) {
-    LanguageDescriptor descriptor = ((LanguageDescriptor) handle.getDescriptor());
-    assert descriptor != null;
-    assert descriptor.getId() != null;
+  @NotNull
+  @Override
+  public SModule instantiate(@NotNull ModuleDescriptor moduleDescriptor, @Nullable IFile descriptorFile) {
+    return myModuleFactory.instantiate(moduleDescriptor, descriptorFile);
+  }
 
-    Language newLanguage = new Language(descriptor, handle.getFile());
-    Language language = registerModule(newLanguage, moduleOwner);
-    if (language == newLanguage) {
-      language.revalidateGenerators();
+  @NotNull
+  private Generator newGeneratorInstance(@NotNull GeneratorDescriptor descriptor, IFile descriptorFile) {
+    SModule module = myRepo.getModule(descriptor.getSourceLanguage().getModuleId());
+    if (module == null) {
+      // XXX for the time being, we register generator modules only *after* respective source language module, although
+      //     generally we shall not insist on the ordering (generator could obtain source language lazily, not at construction time,
+      //     or we can make up a proxy Language instance, and replace it with real once proper module comes to the repository).
+      // XXX FWIW, MPSModuleRepository.unregisterModule and unregisterModules keep symmetric knowledge what generator modules to remove along with the language
+      //     i.e. here we assume there could be no generator module w/o source language, there we remove all generators with the given source language (not
+      //     'directly owned' only).
+      if (LOG.isInfoLevel()) {
+        String msg =
+            String.format("Register generator %s for not yet known language module %s", descriptor.getNamespace(), descriptor.getSourceLanguage());
+        LOG.info(msg);
+      }
+    } else if (false == module instanceof Language) {
+      String msg = String.format("Module %s specified as source language of generator %s in not a Language module", descriptor.getSourceLanguage(), descriptor.getNamespace());
+      throw new IllegalStateException(msg);
     }
-    return language;
+    return new Generator(MetaAdapterFactory.getLanguage(descriptor.getSourceLanguage()), descriptor, descriptorFile, (Language) module);
   }
 
-  private Solution newSolutionInstance(ModuleHandle handle, MPSModuleOwner moduleOwner) {
-    SolutionDescriptor descriptor = ((SolutionDescriptor) handle.getDescriptor());
-    assert descriptor != null;
-    assert descriptor.getId() != null;
-
-    return registerModule(new Solution(descriptor, handle.getFile()), moduleOwner);
-  }
-
-  private DevKit newDevKitInstance(ModuleHandle handle, MPSModuleOwner moduleOwner) {
-    DevkitDescriptor descriptor = (DevkitDescriptor) handle.getDescriptor();
-    assert descriptor != null;
-    assert descriptor.getId() != null;
-    return registerModule(new DevKit(descriptor, handle.getFile()), moduleOwner);
-  }
-
-  private <T extends AbstractModule> T registerModule(T module, MPSModuleOwner moduleOwner) {
-    return REPO.registerModule(module, moduleOwner);
+  private <T extends SModule> T registerModule(T module, MPSModuleOwner moduleOwner) {
+    return myRepoExt.registerModule(module, moduleOwner);
   }
 }

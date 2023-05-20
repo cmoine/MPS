@@ -25,23 +25,34 @@ import java.util.*;
  */
 public class DefaultGenerationParametersProvider implements GenerationParametersProviderEx {
 
-  private Map<String, Object> defaultParams = new HashMap<String, Object>();
-  private Map<SModel, Map<String, Object>> paramMaps = new HashMap<SModel, Map<String, Object>>();
+  private Map<String, Object> defaultParams = new HashMap<>();
+  private Map<SModel, Map<String, Object>> paramMaps = new HashMap<>();
 
-  private List<String> defaultLanguages = new ArrayList<String>();
-  private Map<SModel, List<String>> additionalLanguages = new HashMap<SModel, List<String>>();
+  private List<String> defaultLanguages = new ArrayList<>();
+  private Map<SModel, List<String>> additionalLanguages = new HashMap<>();
 
   @Override
   public Map<String, Object> getParameters(SModel descriptor) {
     if (descriptor == null) { throw new NullPointerException();}
 
     Map<String, Object> params =
-      paramMaps.containsKey(descriptor) ? paramMaps.get(descriptor) : Collections.<String, Object>emptyMap();
-    return new DelegatingMapWithDefaults<String, Object> (params, defaultParams);
+      paramMaps.containsKey(descriptor) ? paramMaps.get(descriptor) : Collections.emptyMap();
+    return new DelegatingMapWithDefaults<>(params, defaultParams);
+  }
+
+  @Override
+  public Map<String, Object> getDefaultParameters() {
+    return Collections.unmodifiableMap(defaultParams);
   }
 
   public void addParameter (String key, Object value) {
     addParameter(null, key, value);
+  }
+
+  public void addAllParameters(Map<String, Object> paramsMap) {
+    for (Map.Entry<String, Object> e: paramsMap.entrySet()) {
+      addParameter(null, e.getKey(), e.getValue());
+    }
   }
 
   public void addParameter (SModel descriptor, String key, Object value) {
@@ -50,7 +61,7 @@ public class DefaultGenerationParametersProvider implements GenerationParameters
     }
     else{
       if (!paramMaps.containsKey(descriptor)) {
-        paramMaps.put(descriptor, new HashMap<String, Object>());
+        paramMaps.put(descriptor, new HashMap<>());
       }
       paramMaps.get(descriptor).put(key, value);
     }
@@ -60,9 +71,9 @@ public class DefaultGenerationParametersProvider implements GenerationParameters
   public Collection<String> getAdditionalLanguages(SModel descriptor) {
     if (descriptor == null) { throw new NullPointerException();}
 
-    List<String> modelLanguages = additionalLanguages.containsKey(descriptor) ? additionalLanguages.get(descriptor) : Collections.<String>emptyList();
+    List<String> modelLanguages = additionalLanguages.containsKey(descriptor) ? additionalLanguages.get(descriptor) : Collections.emptyList();
     if(!defaultLanguages.isEmpty()) {
-      List<String> result = new ArrayList<String>();
+      List<String> result = new ArrayList<>();
       result.addAll(defaultLanguages);
       result.addAll(modelLanguages);
       return result;
@@ -76,7 +87,7 @@ public class DefaultGenerationParametersProvider implements GenerationParameters
 
     List<String> modelLanguages = additionalLanguages.get(descriptor);
     if(modelLanguages == null) {
-      modelLanguages = new ArrayList<String>();
+      modelLanguages = new ArrayList<>();
       additionalLanguages.put(descriptor, modelLanguages);
     }
     modelLanguages.addAll(languages);
@@ -100,7 +111,7 @@ public class DefaultGenerationParametersProvider implements GenerationParameters
     @NotNull
     @Override
     public Set<Entry<K, V>> entrySet() {
-      HashSet<Entry<K, V>> set = new HashSet<Entry<K, V>>(myDelegate.entrySet());
+      HashSet<Entry<K, V>> set = new HashSet<>(myDelegate.entrySet());
       for (Entry<K,V> e: myDefaults.entrySet()) {
         if (!myDelegate.containsKey(e.getKey())) {
           set.add(e);

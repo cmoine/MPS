@@ -12,7 +12,7 @@ public class replaceNode_QuickFix extends QuickFix_Runtime {
     super(new SNodePointer("r:00000000-0000-4000-0000-011c895902c5(jetbrains.mps.baseLanguage.typesystem)", "2364881513287750938"));
   }
   public void execute(SNode node) {
-    // FIXME split into specific quick fixes 
+    // FIXME split into specific quick fixes
     SNodeOperations.replaceWithAnother(node, ((SNode) replaceNode_QuickFix.this.getField("newNode")[0]));
   }
 }

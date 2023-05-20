@@ -27,25 +27,25 @@ import org.jetbrains.mps.openapi.model.SNode;
  * Date: Nov 29, 2006
  */
 public class BasicCellContext implements CellContext {
-  private Map myValues = new HashMap();
+  private Map<Object, Object> myValues = new HashMap();
 
   public BasicCellContext(SNode node) {
     put(EDITED_NODE, node);
   }
 
   @Override
-  public void put(Object key, Object value) {
+  public final <T> void put(EditorContextKey<T> key, T value) {
     myValues.put(key, value);
   }
 
   @Override
   @NotNull
-  public Object get(Object key) {
-    return myValues.get(key);
+  public final <T> T get(EditorContextKey<T> key) {
+    return (T) myValues.get(key);
   }
 
   @Override
-  public Object getOpt(Object key) {
-    return myValues.get(key);
+  public final <T> T getOpt(EditorContextKey<T> key) {
+    return (T) myValues.get(key);
   }
 }

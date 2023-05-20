@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,11 +18,12 @@ package jetbrains.mps.textgen.trace;
 import jetbrains.mps.smodel.CopyUtil;
 import jetbrains.mps.smodel.SNodePointer;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeReference;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.module.SRepository;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -50,13 +51,14 @@ public final class TracingUtil {
   }
 
   public static List<SNode> copyWithTrace(List<SNode> nodes) {
-    HashMap<SNode, SNode> nodeMap = new HashMap<SNode, SNode>();
+    HashMap<SNode, SNode> nodeMap = new HashMap<>();
     List<SNode> result = CopyUtil.copy(nodes, nodeMap);
     for (Entry<SNode, SNode> entry : nodeMap.entrySet()) {
       SNodeReference input = getInput(entry.getKey());
       if (input != null) {
         putInput(entry.getValue(), input);
       } else {
+        // XXX a bit suspicious to me, why do we record unknown node as an 'original' input?
         putInputNode(entry.getValue(), entry.getKey());
       }
     }
@@ -90,12 +92,46 @@ public final class TracingUtil {
     output.putUserObject(ORIGINAL_INPUT_NODE, new SNodePointer(input));
   }
 
+  /**
+   * @deprecated code branching done with boolean flag.
+   */
+@Deprecated(since = "2018.2", forRemoval = true)
   public static void fillOriginalNode(@NotNull SNode inputNode, @NotNull SNode outputNode, boolean originalInput) {
     if (originalInput) {
       putInputNode(outputNode, inputNode);
     } else {
       SNodeReference originalInputNode = getInput(inputNode);
       if (originalInputNode != null) {
+        putInput(outputNode, originalInputNode);
+      }
+    }
+  }
+
+  /**
+   * Derive original input node from a transient input node, if any. Doesn't override origin trace if already set
+   * @param inputNode shall never be null, the one we take origin from
+   * @param outputNode node to receive same origin as the inputNode (unless already has one), not null.
+   */
+  public static void deriveOriginalNode(SNode inputNode, SNode outputNode) {
+    SNodeReference originalInputNode = getInput(inputNode);
+    if (originalInputNode == null || getInput(outputNode) != null) {
+      return;
+    }
+    putInput(outputNode, originalInputNode);
+  }
+
+    /**
+     * Derive original input node from a transient input node, if any. Optionally doesn't override origin trace if already set
+     * @param inputNode shall never be null, the one we take origin from
+     * @param outputNodes nodes to receive same origin as the inputNode (unless they already has one)
+     */
+  public static void deriveOriginalNode(SNode inputNode, Collection<SNode> outputNodes, boolean force) {
+    SNodeReference originalInputNode = getInput(inputNode);
+    if (originalInputNode == null) {
+      return;
+    }
+    for (SNode outputNode : outputNodes) {
+      if (force || getInput(outputNode) == null) {
         putInput(outputNode, originalInputNode);
       }
     }

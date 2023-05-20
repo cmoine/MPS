@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144226303539:jetbrains.mps.baseLanguage.structure.ForeachStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/5351203823916750322:jetbrains.mps.baseLanguage.structure.TryUniversalStatement" />
+  <root>
+    <file name="FindUsagesDescriptor.java">
+      <unit at="34,0,37,0" name="jetbrains.mps.lang.generator.findUsages.FindUsagesDescriptor$CONCEPTS" />
+      <unit at="13,0,38,0" name="jetbrains.mps.lang.generator.findUsages.FindUsagesDescriptor" />
+    </file>
+  </root>
+  <root nodeRef="r:dd8e9c05-e8f1-46e5-bf01-4a529e4398c7(jetbrains.mps.lang.generator.findUsages)/7868642031296064248">
+    <file name="FindInPriorityRules_Finder.java">
+      <node id="7868642031296083082" at="28,46,29,16" concept="6" />
+      <node id="7868642031296064248" at="32,34,33,39" concept="6" />
+      <node id="7868642031296064248" at="36,38,37,83" concept="6" />
+      <node id="7868642031296064248" at="40,41,41,44" concept="6" />
+      <node id="7868642031296064248" at="45,122,46,39" concept="1" />
+      <node id="7868642031296632680" at="47,9,48,64" concept="5" />
+      <node id="4862717881144906945" at="48,64,49,63" concept="5" />
+      <node id="4862717881144894795" at="49,63,50,100" concept="5" />
+      <node id="7868642031296350655" at="50,100,51,0" concept="7" />
+      <node id="7868642031296122041" at="53,37,54,68" concept="5" />
+      <node id="7868642031296104831" at="54,68,55,64" concept="1" />
+      <node id="4862717881144911896" at="56,58,57,78" concept="1" />
+      <node id="7868642031296064248" at="61,15,62,21" concept="1" />
+      <node id="7868642031296064248" at="69,46,70,89" concept="6" />
+      <node id="7868642031296064248" at="74,0,75,0" concept="8" trace="MappingConfiguration$7j" />
+      <node id="7868642031296064248" at="25,0,27,0" concept="0" trace="FindInPriorityRules_Finder#()V" />
+      <node id="4862717881144884449" at="55,64,58,11" concept="3" />
+      <node id="7868642031296064248" at="27,0,31,0" concept="4" trace="isUsedByDefault#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="7868642031296064248" at="31,0,35,0" concept="4" trace="getDescription#()Ljava/lang/String;" />
+      <node id="7868642031296064248" at="35,0,39,0" concept="4" trace="getLongDescription#()Ljava/lang/String;" />
+      <node id="7868642031296064248" at="39,0,43,0" concept="4" trace="getSConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="7868642031296064248" at="67,0,72,0" concept="4" trace="getDeclarationNode#()Lorg/jetbrains/mps/openapi/model/SNodeReference;" />
+      <node id="7868642031296089079" at="52,44,59,9" concept="3" />
+      <node id="7868642031296088898" at="51,0,60,7" concept="2" />
+      <node id="7868642031296064248" at="46,39,63,5" concept="9" />
+      <node id="7868642031296064248" at="44,0,65,0" concept="4" trace="doFind0#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/module/SearchScope;Ljetbrains/mps/ide/findusages/findalgorithm/finders/IFinder/FindCallback;Lorg/jetbrains/mps/openapi/util/ProgressMonitor;)V" />
+      <scope id="7868642031296064248" at="25,39,25,39" />
+      <scope id="7868642031296079490" at="28,46,29,16" />
+      <scope id="7868642031296064248" at="32,34,33,39" />
+      <scope id="7868642031296064248" at="36,38,37,83" />
+      <scope id="7868642031296064248" at="40,41,41,44" />
+      <scope id="4862717881144884451" at="56,58,57,78" />
+      <scope id="7868642031296064248" at="61,15,62,21" />
+      <scope id="7868642031296064248" at="69,46,70,89" />
+      <scope id="7868642031296064248" at="25,0,27,0" />
+      <scope id="7868642031296064248" at="27,0,31,0">
+        <var name="node" id="7868642031296064248" />
+      </scope>
+      <scope id="7868642031296064248" at="31,0,35,0" />
+      <scope id="7868642031296064248" at="35,0,39,0" />
+      <scope id="7868642031296064248" at="39,0,43,0" />
+      <scope id="7868642031296089081" at="53,37,58,11">
+        <var name="gms" id="7868642031296122042" />
+      </scope>
+      <scope id="7868642031296064248" at="67,0,72,0" />
+      <scope id="7868642031296088901" at="52,44,59,9" />
+      <scope id="7868642031296088898" at="51,0,60,7">
+        <var name="m" id="7868642031296088902" />
+      </scope>
+      <scope id="7868642031296064250" at="47,9,60,7">
+        <var name="mcNode" id="4862717881144906946" />
+        <var name="modelOfSelectedMC" id="7868642031296632681" />
+        <var name="selectedGenerator" id="4862717881144894796" />
+      </scope>
+      <scope id="7868642031296064248" at="45,122,63,5" />
+      <scope id="7868642031296064248" at="44,0,65,0">
+        <var name="callback" id="7868642031296064248" />
+        <var name="monitor" id="7868642031296064248" />
+        <var name="node" id="7868642031296064248" />
+        <var name="scope" id="7868642031296064248" />
+      </scope>
+      <unit id="7868642031296064248" at="73,0,76,0" name="jetbrains.mps.lang.generator.findUsages.FindInPriorityRules_Finder$CONCEPTS" />
+      <unit id="7868642031296064248" at="24,0,77,0" name="jetbrains.mps.lang.generator.findUsages.FindInPriorityRules_Finder" />
+    </file>
+    <file name="FindUsagesDescriptor.java">
+      <node id="7868642031296064248" at="22,13,23,48" concept="6" />
+      <node id="7868642031296064248" at="30,40,31,72" concept="1" />
+      <scope id="7868642031296064248" at="22,13,23,48" />
+    </file>
+  </root>
+</debug-info>
+

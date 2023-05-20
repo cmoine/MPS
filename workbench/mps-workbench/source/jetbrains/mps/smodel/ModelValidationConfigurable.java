@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 package jetbrains.mps.smodel;
 
 
-import com.intellij.openapi.options.ConfigurationException;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.options.SearchableConfigurable;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
@@ -29,17 +29,15 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 
 public class ModelValidationConfigurable implements SearchableConfigurable {
-
-  private ModelValidationSettings myModelValidationSettings = null;
+  @NotNull
+  private ModelValidationSettings myModelValidationSettings;
 
   private JPanel myJPanel = new JPanel(new BorderLayout());
-  private JCheckBox myCheckBoxOpenAPI = new JCheckBox("Disable nonpublic API usage check");
-  private JCheckBox myCheckBoxTypeWasNotCalculated = new JCheckBox("Disable 'type was not calculated' check");
+  private JCheckBox myCheckBoxTypeWasNotCalculated = new JCheckBox("Enable 'type was not calculated' check");
 
-  public ModelValidationConfigurable(@NotNull ModelValidationSettings modelValidationSettings) {
-    myModelValidationSettings = modelValidationSettings;
+  public ModelValidationConfigurable() {
+    myModelValidationSettings = ApplicationManager.getApplication().getComponent(ModelValidationSettings.class);
     Box box = Box.createVerticalBox();
-    box.add(myCheckBoxOpenAPI);
     box.add(myCheckBoxTypeWasNotCalculated);
     myJPanel.add(box, BorderLayout.WEST);
   }
@@ -59,28 +57,26 @@ public class ModelValidationConfigurable implements SearchableConfigurable {
   @Nullable
   @Override
   public String getHelpTopic() {
-    return null;
+    return getId();
   }
 
   @Override
-  public void apply() throws ConfigurationException {
-    myModelValidationSettings.setDisableCheckOpenAPI(myCheckBoxOpenAPI.isSelected());
-    myModelValidationSettings.setDisableTypeWasNotCalculated(myCheckBoxTypeWasNotCalculated.isSelected());
+  public void apply() {
+    myModelValidationSettings.setDisableTypeWasNotCalculated(!myCheckBoxTypeWasNotCalculated.isSelected());
   }
 
   @Override
   public void reset() {
-    myCheckBoxOpenAPI.setSelected(myModelValidationSettings.isDisableCheckOpenAPI());
-    myCheckBoxTypeWasNotCalculated.setSelected(myModelValidationSettings.isDisableTypeWasNotCalculated());
+    myCheckBoxTypeWasNotCalculated.setSelected(!myModelValidationSettings.isDisableTypeWasNotCalculated());
   }
 
   public boolean isModified() {
-    return myModelValidationSettings.isDisableCheckOpenAPI() != myCheckBoxOpenAPI.isSelected() || myModelValidationSettings.isDisableTypeWasNotCalculated() != myCheckBoxTypeWasNotCalculated.isSelected();
+    // Shown value is inverted, so check for equality to avoid double negation
+    return myModelValidationSettings.isDisableTypeWasNotCalculated() == myCheckBoxTypeWasNotCalculated.isSelected();
   }
 
   @Override
   public void disposeUIResources() {
-    myCheckBoxOpenAPI = null;
     myCheckBoxTypeWasNotCalculated = null;
     myJPanel = null;
   }

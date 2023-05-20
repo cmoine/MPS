@@ -2,9 +2,9 @@
 <model ref="r:cf54bb52-3dc2-4193-8c77-3acf5e21bf95(jetbrains.mps.baseLanguage.constructors.behavior)">
   <persistence version="9" />
   <languages>
-    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="0" />
-    <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="4" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="2" />
+    <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="19" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -69,7 +69,7 @@
           <node concept="2OqwBi" id="2CQKr1MVQfZ" role="3cqZAk">
             <node concept="13iPFW" id="2CQKr1MVQg0" role="2Oq$k0" />
             <node concept="3TrEf2" id="2SRf3TboitH" role="2OqNvi">
-              <ref role="3Tt5mk" to="fbxt:2SRf3Tboe0j" />
+              <ref role="3Tt5mk" to="fbxt:2SRf3Tboe0j" resolve="returnType" />
             </node>
           </node>
         </node>

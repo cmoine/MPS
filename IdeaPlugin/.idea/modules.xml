@@ -2,14 +2,19 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/gensources.iml" filepath="$PROJECT_DIR$/gensources.iml" />
       <module fileurl="file://$PROJECT_DIR$/mps-core/common/mps-common.iml" filepath="$PROJECT_DIR$/mps-core/common/mps-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/mps-core/mps-core.iml" filepath="$PROJECT_DIR$/mps-core/mps-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/mps-java/mps-java.iml" filepath="$PROJECT_DIR$/mps-java/mps-java.iml" />
-      <module fileurl="file://$PROJECT_DIR$/mps-java/common/mps-java-common.iml" filepath="$PROJECT_DIR$/mps-java/common/mps-java-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/mps-java/jps-plugin/mps-java-jps-plugin.iml" filepath="$PROJECT_DIR$/mps-java/jps-plugin/mps-java-jps-plugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mps-java/jps-plugin-j8/mps-java-jps-plugin-j8.iml" filepath="$PROJECT_DIR$/mps-java/jps-plugin-j8/mps-java-jps-plugin-j8.iml" />
       <module fileurl="file://$PROJECT_DIR$/mps-core/jps-plugin/mps-jps-plugin.iml" filepath="$PROJECT_DIR$/mps-core/jps-plugin/mps-jps-plugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mps-core/jps-plugin-j8/mps-jps-plugin-j8.iml" filepath="$PROJECT_DIR$/mps-core/jps-plugin-j8/mps-jps-plugin-j8.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mps-migration/mps-migration.iml" filepath="$PROJECT_DIR$/mps-migration/mps-migration.iml" />
       <module fileurl="file://$PROJECT_DIR$/mps-startup/mps-startup.iml" filepath="$PROJECT_DIR$/mps-startup/mps-startup.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mps-testing/mps-testing.iml" filepath="$PROJECT_DIR$/mps-testing/mps-testing.iml" />
       <module fileurl="file://$PROJECT_DIR$/mps-vcs/mps-vcs.iml" filepath="$PROJECT_DIR$/mps-vcs/mps-vcs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mps.editor.tests/mps.editor.tests.iml" filepath="$PROJECT_DIR$/mps.editor.tests/mps.editor.tests.iml" />
       <module fileurl="file://$PROJECT_DIR$/tests/tests.iml" filepath="$PROJECT_DIR$/tests/tests.iml" />
     </modules>
   </component>

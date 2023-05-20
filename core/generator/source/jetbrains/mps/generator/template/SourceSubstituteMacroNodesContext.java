@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,28 +26,12 @@ import org.jetbrains.mps.openapi.model.SNodeReference;
  * class and its usages as is (i.e. both from rules and macros), although have changed superclass to fulfil genContext.templateNode
  * contract.
  */
-public class SourceSubstituteMacroNodesContext extends TemplateQueryContextWithMacro {
-  private final SNodeReference myRulePointer;
+public class SourceSubstituteMacroNodesContext extends TemplateQueryContext {
 
   /**
    * @since 3.1
    */
   public SourceSubstituteMacroNodesContext(@NotNull TemplateContext context, @NotNull SNodeReference templateNode) {
-    super(context, templateNode);
-    myRulePointer = null;
-  }
-
-  @Override
-  protected SNodeReference getTemplateNodeRef() {
-    SNodeReference tn = super.getTemplateNodeRef();
-    if (tn != null) {
-      return tn;
-    }
-    return getRuleNode();
-  }
-
-  @Override
-  protected SNodeReference getRuleNode() {
-    return myRulePointer;
+    super(templateNode, context);
   }
 }

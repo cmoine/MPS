@@ -16,11 +16,11 @@
 package jetbrains.mps.ide.ui.tree;
 
 public interface MPSTreeNodeListener {
-  public void treeNodeAdded(MPSTreeNode treeNode, MPSTree tree);
+  void treeNodeAdded(MPSTreeNode treeNode, MPSTree tree);
 
-  public void treeNodeRemoved(MPSTreeNode treeNode, MPSTree tree);
+  void treeNodeRemoved(MPSTreeNode treeNode, MPSTree tree);
 
-  public void treeNodeUpdated(MPSTreeNode treeNode, MPSTree tree);
+  void treeNodeUpdated(MPSTreeNode treeNode, MPSTree tree);
 
-  public void beforeTreeDisposed(MPSTree tree);
+  void beforeTreeDisposed(MPSTree tree);
 }

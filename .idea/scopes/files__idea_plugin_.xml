@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="files (idea-plugin)" pattern="file[mps-idea-plugin]:*/" />
+</component>

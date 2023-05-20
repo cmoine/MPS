@@ -15,6 +15,7 @@
  */
 package jetbrains.mps.smodel.event;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.annotations.Immutable;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
@@ -28,7 +29,7 @@ public class SModelReferenceEvent extends SModelEvent {
   private final SReference myReference;
   private final boolean myAdded;
 
-  public SModelReferenceEvent(SModel model, SReference reference, boolean added) {
+  public SModelReferenceEvent(SModel model, @NotNull SReference reference, boolean added) {
     super(model);
     myReference = reference;
     myAdded = added;
@@ -39,6 +40,7 @@ public class SModelReferenceEvent extends SModelEvent {
     return myReference.getSourceNode().getContainingRoot();
   }
 
+  @NotNull
   public SReference getReference() {
     return myReference;
   }
@@ -59,9 +61,9 @@ public class SModelReferenceEvent extends SModelEvent {
   @Override
   public String toString() {
     return "SModelReferenceEvent{" +
-      "myModel=" + getModel() +
-      ", myReference=" + myReference +
-      ", myAdded=" + myAdded +
-      '}';
+           "myModel=" + getModel() +
+           ", myReference=" + myReference +
+           ", myAdded=" + myAdded +
+           '}';
   }
 }

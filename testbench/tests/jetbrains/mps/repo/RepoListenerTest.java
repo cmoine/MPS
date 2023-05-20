@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,24 +15,21 @@
  */
 package jetbrains.mps.repo;
 
-import jetbrains.mps.CoreMpsTest;
 import jetbrains.mps.extapi.model.SModelBase;
 import jetbrains.mps.extapi.module.SRepositoryExt;
 import jetbrains.mps.extapi.module.SRepositoryRegistry;
 import jetbrains.mps.project.ModuleId;
 import jetbrains.mps.project.Project;
 import jetbrains.mps.project.Solution;
-import jetbrains.mps.project.StubSolution;
-import jetbrains.mps.project.structure.ProjectStructureModule;
 import jetbrains.mps.project.structure.modules.SolutionDescriptor;
 import jetbrains.mps.smodel.BaseMPSModuleOwner;
+import jetbrains.mps.smodel.GeneralModuleFactory;
 import jetbrains.mps.smodel.MPSModuleOwner;
-import jetbrains.mps.smodel.MPSModuleRepository;
 import jetbrains.mps.smodel.SModel;
 import jetbrains.mps.smodel.SModelId;
 import jetbrains.mps.smodel.TrivialModelDescriptor;
-import jetbrains.mps.tool.environment.EnvironmentConfig;
-import jetbrains.mps.tool.environment.MpsEnvironment;
+import jetbrains.mps.tool.environment.Environment;
+import jetbrains.mps.tool.environment.EnvironmentAware;
 import jetbrains.mps.util.Computable;
 import jetbrains.mps.util.ComputeRunnable;
 import org.jetbrains.annotations.NotNull;
@@ -47,20 +44,24 @@ import org.jetbrains.mps.openapi.module.SRepositoryListenerBase;
 import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
  * Check contract of SRepositoryListener and SRepositoryContentAdapter.
- * Lives in [testbench], not [smodel], as it depends from CoreMpsTest (though perhaps might have add [testbench] as test-only dependency for [smodel]???)
+ * Lives in [testbench], not [smodel], as the move would require [environment] as a 'test' dependency, and I don't want to deal with it right now
  * @author Artem Tikhomirov
  */
-public class RepoListenerTest extends CoreMpsTest {
+public class RepoListenerTest implements EnvironmentAware {
+  private Environment myEnvironment;
   private Project myProject;
 
-  @BeforeClass
-  public static void prepare() {
-    MpsEnvironment.getOrCreate(EnvironmentConfig.defaultConfig());
+
+  /**
+   * @param env bare MPS environment suffice
+   */
+  @Override
+  public void setEnvironment(@NotNull Environment env) {
+    myEnvironment = env;
   }
 
   @After
@@ -70,12 +71,12 @@ public class RepoListenerTest extends CoreMpsTest {
 
   private Project createProject() {
     closeProject();
-    return myProject = getEnvironment().createEmptyProject();
+    return myProject = myEnvironment.createEmptyProject();
   }
 
   private void closeProject() {
     if (myProject != null) {
-      myProject.dispose();
+      myEnvironment.closeProject(myProject);
       myProject = null;
     }
   }
@@ -122,7 +123,9 @@ public class RepoListenerTest extends CoreMpsTest {
   @Test
   public void testGlobalAttach() {
     final AttachRepoListener l1 = new AttachRepoListener();
-    SRepositoryRegistry.getInstance().addGlobalListener(l1);
+    final SRepositoryRegistry repoRegistry = myEnvironment.getPlatform().findComponent(SRepositoryRegistry.class);
+    assert repoRegistry != null;
+    repoRegistry.addGlobalListener(l1);
     l1.checkStarted(1); // MPSModuleRepository.INSTANCE
     l1.checkStopped(0);
     createProject();
@@ -133,12 +136,12 @@ public class RepoListenerTest extends CoreMpsTest {
     l1.checkStopped(0);
     //
     final AttachRepoListener l2 = new AttachRepoListener();
-    SRepositoryRegistry.getInstance().addGlobalListener(l2);
+    repoRegistry.addGlobalListener(l2);
     l1.checkStarted(distinctRepositories);
     l1.checkStopped(0);
     l2.checkStarted(distinctRepositories); // == that of l1 starts to the date, == amount of our available repositories
     l2.checkStopped(0);
-    SRepositoryRegistry.getInstance().removeGlobalListener(l2);
+    repoRegistry.removeGlobalListener(l2);
     l1.checkStarted(distinctRepositories);
     l1.checkStopped(0); // l1 is not notified on l2 removal
     l2.checkStarted(distinctRepositories);
@@ -149,7 +152,7 @@ public class RepoListenerTest extends CoreMpsTest {
     l1.checkStopped(distinctRepositories-1); // project repo is gone, 1 notification
     l2.checkStarted(distinctRepositories); // l2 is detached, shall not get any further notifications
     l2.checkStopped(distinctRepositories); // --"--
-    SRepositoryRegistry.getInstance().removeGlobalListener(l1);
+    repoRegistry.removeGlobalListener(l1);
     l1.checkStarted(distinctRepositories);
     l1.checkStopped(distinctRepositories); // notified for global repo
     l2.checkStarted(distinctRepositories); // l2 is detached, shall not get any further notifications
@@ -208,7 +211,7 @@ public class RepoListenerTest extends CoreMpsTest {
     project.getModelAccess().runWriteAction(new Runnable() {
       @Override
       public void run() {
-        solution.unregisterModel((SModelBase) solution.getModels().get(0));
+        solution.unregisterModel((SModelBase) solution.getModels().iterator().next());
       }
     });
     l.checkModelEvents(2, 1, 1);
@@ -238,7 +241,8 @@ public class RepoListenerTest extends CoreMpsTest {
       SolutionDescriptor descriptor = new SolutionDescriptor();
       descriptor.setNamespace("Solution");
       descriptor.setId(ModuleId.regular());
-      return StubSolution.newInstance(myRepository, descriptor, myModuleOwner);
+      final Solution solution = (Solution) new GeneralModuleFactory().instantiate(descriptor, null);
+      return myRepository.registerModule(solution, myModuleOwner);
     }
 
     public Solution execute() {
@@ -318,13 +322,6 @@ public class RepoListenerTest extends CoreMpsTest {
 
   private static class ContentAdapter extends SRepositoryContentAdapter {
     private int myModelAdded = 0, myModelRemoved = 0, myModelBeforeRemoved = 0;
-
-    @Override
-    protected boolean isIncluded(SModule module) {
-      // when test module is added, ProjectStructureModule adds a model for it, and obscures results we intend to observe,
-      // thus we don't track it altogether
-      return !(module instanceof ProjectStructureModule);
-    }
 
     @Override
     public void modelAdded(SModule module, org.jetbrains.mps.openapi.model.SModel model) {

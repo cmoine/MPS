@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1163670490218:jetbrains.mps.baseLanguage.structure.SwitchStatement" />
+  <root nodeRef="r:22e3021b-828b-4409-beba-09e0bed5c0f2(jetbrains.mps.lang.refactoring.enumMigration)/4241665505353447178">
+    <file name="RefactoringTargetKind_Enum_MigrationUtils.java">
+      <node id="4241665505353447188" at="13,13,14,20" concept="1" />
+      <node id="4241665505353447191" at="15,13,16,23" concept="1" />
+      <node id="4241665505353447194" at="17,13,18,26" concept="1" />
+      <node id="4241665505353447197" at="19,13,20,26" concept="1" />
+      <node id="4241665505353447200" at="21,13,22,24" concept="1" />
+      <node id="4241665505353447207" at="23,14,24,20" concept="1" />
+      <node id="4241665505353447219" at="28,24,29,227" concept="1" />
+      <node id="4241665505353447228" at="32,19,33,230" concept="1" />
+      <node id="4241665505353447235" at="34,22,35,233" concept="1" />
+      <node id="4241665505353447242" at="36,22,37,233" concept="1" />
+      <node id="4241665505353447249" at="38,20,39,231" concept="1" />
+      <node id="4241665505353447258" at="40,14,41,20" concept="1" />
+      <node id="4241665505353447178" at="44,0,45,0" concept="2" trace="enumSwitchIndex" />
+      <node id="4241665505353447217" at="27,61,30,5" concept="0" />
+      <node id="4241665505353447255" at="30,5,42,5" concept="4" />
+      <node id="4241665505353447207" at="11,62,25,5" concept="4" />
+      <node id="4241665505353447201" at="11,0,27,0" concept="3" trace="value#(Lorg/jetbrains/mps/openapi/language/SEnumerationLiteral;)Ljava/lang/String;" />
+      <node id="4241665505353447210" at="27,0,44,0" concept="3" trace="fromValue#(Ljava/lang/String;)Lorg/jetbrains/mps/openapi/language/SEnumerationLiteral;" />
+      <scope id="4241665505353447188" at="13,13,14,20" />
+      <scope id="4241665505353447191" at="15,13,16,23" />
+      <scope id="4241665505353447194" at="17,13,18,26" />
+      <scope id="4241665505353447197" at="19,13,20,26" />
+      <scope id="4241665505353447200" at="21,13,22,24" />
+      <scope id="4241665505353447207" at="23,14,24,20" />
+      <scope id="4241665505353447218" at="28,24,29,227" />
+      <scope id="4241665505353447227" at="32,19,33,230" />
+      <scope id="4241665505353447234" at="34,22,35,233" />
+      <scope id="4241665505353447241" at="36,22,37,233" />
+      <scope id="4241665505353447248" at="38,20,39,231" />
+      <scope id="4241665505353447257" at="40,14,41,20" />
+      <scope id="4241665505353447205" at="11,62,25,5" />
+      <scope id="4241665505353447254" at="27,61,42,5" />
+      <scope id="4241665505353447201" at="11,0,27,0">
+        <var name="enummember" id="4241665505353447202" />
+      </scope>
+      <scope id="4241665505353447210" at="27,0,44,0">
+        <var name="value" id="4241665505353447211" />
+      </scope>
+      <unit id="4241665505353447178" at="10,0,46,0" name="jetbrains.mps.lang.refactoring.enumMigration.RefactoringTargetKind_Enum_MigrationUtils" />
+    </file>
+  </root>
+</debug-info>
+

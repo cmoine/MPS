@@ -1,13 +1,1 @@
--Dintellij.config.imported.in.current.session=true
--Didea.paths.selector=MPS34
--Dide.mac.message.dialogs.as.sheets=false
--Dapple.awt.graphics.UseQuartz=true
--Dfile.encoding=UTF-8
--client
--Xss1024k
--ea
--Xmx950m
--XX:MaxPermSize=256m
--XX:NewSize=256m
--XX:+HeapDumpOnOutOfMemoryError
--Xverify:none
+#MPS no longer uses 32-bit version of mps.vmoptions

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <root>
+    <file name="ActionAspectDescriptorImpl.java">
+      <unit at="12,0,32,0" name="jetbrains.mps.samples.ChemMastery.actions.ActionAspectDescriptorImpl" />
+    </file>
+  </root>
+  <root nodeRef="r:897191b9-8c62-4f30-b933-dc000df42d63(jetbrains.mps.samples.ChemMastery.actions)/6567999678834696496">
+    <file name="ElementFactories.java">
+      <node id="6567999678834696511" at="17,7,18,42" concept="4" />
+      <node id="6567999678834708210" at="19,77,20,134" concept="1" />
+      <node id="3123291046851857618" at="27,7,28,42" concept="4" />
+      <node id="3123291046851857621" at="29,99,30,136" concept="1" />
+      <node id="3123291046851857629" at="30,136,31,150" concept="1" />
+      <node id="6744317956898850878" at="38,7,39,42" concept="4" />
+      <node id="6744317956898850987" at="40,75,41,136" concept="1" />
+      <node id="6744317956898859787" at="41,136,42,150" concept="1" />
+      <node id="6567999678834696496" at="49,0,50,0" concept="5" trace="ElementRef$EZ" />
+      <node id="6567999678834696496" at="50,0,51,0" concept="5" trace="CompoundComponentWithCardinality$_V" />
+      <node id="6567999678834696496" at="51,0,52,0" concept="5" trace="Compound$vn" />
+      <node id="6567999678834696496" at="55,0,56,0" concept="5" trace="ionization$uiAv" />
+      <node id="6567999678834696496" at="56,0,57,0" concept="5" trace="cardinality$Vf8r" />
+      <node id="6567999678834696496" at="57,0,58,0" concept="5" trace="cardinalityVisible$Vfns" />
+      <node id="6567999678834696496" at="58,0,59,0" concept="5" trace="cardinality$ubQr" />
+      <node id="6567999678834696496" at="59,0,60,0" concept="5" trace="cardinalityVisible$7IlK" />
+      <node id="6567999678834696511" at="18,42,21,9" concept="2" />
+      <node id="3123291046851857618" at="28,42,32,9" concept="2" />
+      <node id="6744317956898850878" at="39,42,43,9" concept="2" />
+      <node id="6567999678834696511" at="16,102,22,7" concept="0" />
+      <node id="3123291046851857618" at="26,102,33,7" concept="0" />
+      <node id="6744317956898850878" at="37,102,44,7" concept="0" />
+      <node id="6567999678834696497" at="16,0,24,0" concept="3" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <node id="3123291046851857615" at="26,0,35,0" concept="3" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <node id="6744317956898850832" at="37,0,46,0" concept="3" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <scope id="6567999678834696513" at="19,77,20,134" />
+      <scope id="3123291046851857620" at="29,99,31,150" />
+      <scope id="6744317956898850880" at="40,75,42,150" />
+      <scope id="6567999678834696511" at="17,7,21,9">
+        <var name="original" id="6567999678834696511" />
+      </scope>
+      <scope id="3123291046851857618" at="27,7,32,9">
+        <var name="original" id="3123291046851857618" />
+      </scope>
+      <scope id="6744317956898850878" at="38,7,43,9">
+        <var name="original" id="6744317956898850878" />
+      </scope>
+      <scope id="6567999678834696497" at="16,102,22,7" />
+      <scope id="3123291046851857615" at="26,102,33,7" />
+      <scope id="6744317956898850832" at="37,102,44,7" />
+      <scope id="6567999678834696497" at="16,0,24,0">
+        <var name="enclosingNode" id="6567999678834696497" />
+        <var name="index" id="6567999678834696497" />
+        <var name="model" id="6567999678834696497" />
+        <var name="newNode" id="6567999678834696497" />
+        <var name="sampleNode" id="6567999678834696497" />
+      </scope>
+      <scope id="3123291046851857615" at="26,0,35,0">
+        <var name="enclosingNode" id="3123291046851857615" />
+        <var name="index" id="3123291046851857615" />
+        <var name="model" id="3123291046851857615" />
+        <var name="newNode" id="3123291046851857615" />
+        <var name="sampleNode" id="3123291046851857615" />
+      </scope>
+      <scope id="6744317956898850832" at="37,0,46,0">
+        <var name="enclosingNode" id="6744317956898850832" />
+        <var name="index" id="6744317956898850832" />
+        <var name="model" id="6744317956898850832" />
+        <var name="newNode" id="6744317956898850832" />
+        <var name="sampleNode" id="6744317956898850832" />
+      </scope>
+      <unit id="6567999678834696496" at="48,0,53,0" name="jetbrains.mps.samples.ChemMastery.actions.ElementFactories$CONCEPTS" />
+      <unit id="6567999678834696496" at="54,0,61,0" name="jetbrains.mps.samples.ChemMastery.actions.ElementFactories$PROPS" />
+      <unit id="6567999678834696497" at="15,0,25,0" name="jetbrains.mps.samples.ChemMastery.actions.ElementFactories$NodeFactory_6567999678834696497" />
+      <unit id="3123291046851857615" at="25,0,36,0" name="jetbrains.mps.samples.ChemMastery.actions.ElementFactories$NodeFactory_3123291046851857615" />
+      <unit id="6744317956898850832" at="36,0,47,0" name="jetbrains.mps.samples.ChemMastery.actions.ElementFactories$NodeFactory_6744317956898850832" />
+      <unit id="6567999678834696496" at="14,0,62,0" name="jetbrains.mps.samples.ChemMastery.actions.ElementFactories" />
+    </file>
+  </root>
+</debug-info>
+

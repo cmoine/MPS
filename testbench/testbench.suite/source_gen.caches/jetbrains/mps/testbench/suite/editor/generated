@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="et9o6vpcsnrn7ae4i5btoz1yha56idx">
+  <files names="EditorAspectDescriptorImpl.java:ITestRef_Editor.java:ITestRef_EditorBuilder_a.java:ITestRef_InspectorBuilder_a.java:JUnit3TestCaseRef_Editor.java:JUnit3TestCaseRef_EditorBuilder_a.java:JUnit3TestCaseRef_SubstituteMenu.java:JUnit4TestCaseRef_Editor.java:JUnit4TestCaseRef_EditorBuilder_a.java:JUnit4TestCaseRef_SubstituteMenu.java:ModuleSuite_Editor.java:ModuleSuite_EditorBuilder_a.java:SolutionRef_Editor.java:SolutionRef_EditorBuilder_a.java:SolutionRef_SubstituteMenu.java:TestCaseRef_Editor.java:TestCaseRef_EditorBuilder_a.java:TestCaseRef_SubstituteMenu.java" />
+</product>
+

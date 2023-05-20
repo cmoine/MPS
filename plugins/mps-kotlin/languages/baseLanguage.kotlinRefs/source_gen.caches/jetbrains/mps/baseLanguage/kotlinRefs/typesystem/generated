@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="4eeflwu475ohwuzyk0a08vpcupx7ccm">
+  <files names="SearchSuperTypeVisitor.java:TypesystemDescriptor.java:kotlinClassifierType_subtypeOf_genericType_InequationReplacementRule.java:supertypesOf_KotlinClassifierType_SubtypingRule.java:supertypesOf_KtTypeParameterReference_SubtypingRule.java:typeof_IKotlinFunctionLikeCall_InferenceRule.java:typeof_KotlinFileReference_InferenceRule.java:typeof_KotlinFunctionArgument_InferenceRule.java" />
+</product>
+

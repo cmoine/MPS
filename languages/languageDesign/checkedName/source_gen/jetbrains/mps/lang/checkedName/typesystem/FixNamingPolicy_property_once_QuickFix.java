@@ -5,6 +5,7 @@ package jetbrains.mps.lang.checkedName.typesystem;
 import jetbrains.mps.errors.QuickFix_Runtime;
 import jetbrains.mps.smodel.SNodePointer;
 import org.jetbrains.mps.openapi.model.SNode;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.checkedName.PropertyReference;
 import jetbrains.mps.util.NameUtil;
 
@@ -16,6 +17,6 @@ public class FixNamingPolicy_property_once_QuickFix extends QuickFix_Runtime {
     return ((String) FixNamingPolicy_property_once_QuickFix.this.getField("caption")[0]);
   }
   public void execute(SNode node) {
-    ((PropertyReference) FixNamingPolicy_property_once_QuickFix.this.getField("property")[0]).setValue(NameUtil.captionWithNamingPolicy(((PropertyReference) FixNamingPolicy_property_once_QuickFix.this.getField("property")[0]).getValue()));
+    SPropertyOperations.assign(((PropertyReference) FixNamingPolicy_property_once_QuickFix.this.getField("property")[0]).getNode(), ((PropertyReference) FixNamingPolicy_property_once_QuickFix.this.getField("property")[0]).getProperty(), NameUtil.captionWithNamingPolicy(SPropertyOperations.getString(((PropertyReference) FixNamingPolicy_property_once_QuickFix.this.getField("property")[0]).getNode(), ((PropertyReference) FixNamingPolicy_property_once_QuickFix.this.getField("property")[0]).getProperty())));
   }
 }

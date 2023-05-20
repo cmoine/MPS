@@ -2,14 +2,12 @@
 <model ref="r:9cef28f0-1d60-4407-a18b-c9fc83b30f67(jetbrains.mps.lang.smodel.query.actions)">
   <persistence version="9" />
   <languages>
-    <use id="aee9cad2-acd4-4608-aef2-0004f6a1cdbd" name="jetbrains.mps.lang.actions" version="3" />
+    <use id="aee9cad2-acd4-4608-aef2-0004f6a1cdbd" name="jetbrains.mps.lang.actions" version="4" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
     <import index="3xdn" ref="r:935ba0ee-7291-4caa-a807-d76e8fc69391(jetbrains.mps.lang.smodel.query.structure)" />
     <import index="tpee" ref="r:00000000-0000-4000-0000-011c895902ca(jetbrains.mps.baseLanguage.structure)" />
-    <import index="tp25" ref="r:00000000-0000-4000-0000-011c89590301(jetbrains.mps.lang.smodel.structure)" />
-    <import index="n8mm" ref="r:be520d7c-8791-490a-9d50-1adca7cd12c4(jetbrains.mps.lang.smodel.query.editor)" />
   </imports>
   <registry>
     <language id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage">
@@ -65,8 +63,8 @@
         <reference id="1139880128956" name="concept" index="1A9B2P" />
       </concept>
       <concept id="2396822768958367367" name="jetbrains.mps.lang.smodel.structure.AbstractTypeCastExpression" flags="nn" index="$5XWr">
-        <reference id="6733348108486823428" name="concept" index="1m5ApE" />
         <child id="6733348108486823193" name="leftExpression" index="1m5AlR" />
+        <child id="3906496115198199033" name="conceptArgument" index="3oSUPX" />
       </concept>
       <concept id="1139621453865" name="jetbrains.mps.lang.smodel.structure.Node_IsInstanceOfOperation" flags="nn" index="1mIQ4w">
         <child id="1177027386292" name="conceptArgument" index="cj9EA" />
@@ -105,8 +103,10 @@
                   <node concept="2oxUTD" id="3J6h25QCMin" role="2OqNvi">
                     <node concept="2OqwBi" id="3J6h25QCNJ5" role="2oxUTC">
                       <node concept="1PxgMI" id="3J6h25QCNuO" role="2Oq$k0">
-                        <ref role="1m5ApE" to="3xdn:3J6h25Q2UNX" resolve="QueryExpression" />
                         <node concept="1r4N5L" id="3J6h25QCMkZ" role="1m5AlR" />
+                        <node concept="chp4Y" id="714IaVdGZk2" role="3oSUPX">
+                          <ref role="cht4Q" to="3xdn:3J6h25Q2UNX" resolve="QueryExpression" />
+                        </node>
                       </node>
                       <node concept="3TrEf2" id="3J6h25QCPoo" role="2OqNvi">
                         <ref role="3Tt5mk" to="3xdn:3J6h25Q5Il8" resolve="parameter" />
@@ -144,22 +144,22 @@
       </node>
     </node>
   </node>
-  <node concept="37WguZ" id="31Tct3Tmt18">
+  <node concept="37WguZ" id="238_VGTIKz_">
     <property role="3GE5qa" value="query.parameter" />
     <property role="TrG5h" value="ScopeParameterLiteral_factories" />
-    <node concept="37WvkG" id="31Tct3TnY01" role="37WGs$">
-      <ref role="37XkoT" to="3xdn:31Tct3Txnn9" resolve="CustomScope" />
-      <node concept="37Y9Zx" id="31Tct3TnY02" role="37ZfLb">
-        <node concept="3clFbS" id="31Tct3TnY03" role="2VODD2">
-          <node concept="3clFbF" id="31Tct3TnY04" role="3cqZAp">
-            <node concept="2OqwBi" id="31Tct3TnY05" role="3clFbG">
-              <node concept="2OqwBi" id="31Tct3TnY06" role="2Oq$k0">
-                <node concept="1r4Lsj" id="31Tct3TnY07" role="2Oq$k0" />
-                <node concept="3TrEf2" id="31Tct3TxOzG" role="2OqNvi">
-                  <ref role="3Tt5mk" to="3xdn:31Tct3Txpke" resolve="scope" />
+    <node concept="37WvkG" id="238_VGTIKzA" role="37WGs$">
+      <ref role="37XkoT" to="3xdn:238_VGTIKuD" resolve="CustomScope" />
+      <node concept="37Y9Zx" id="238_VGTIKzB" role="37ZfLb">
+        <node concept="3clFbS" id="238_VGTIKzC" role="2VODD2">
+          <node concept="3clFbF" id="238_VGTIKzD" role="3cqZAp">
+            <node concept="2OqwBi" id="238_VGTIKzE" role="3clFbG">
+              <node concept="2OqwBi" id="238_VGTIKzF" role="2Oq$k0">
+                <node concept="1r4Lsj" id="238_VGTIKzG" role="2Oq$k0" />
+                <node concept="3TrEf2" id="238_VGTIKzH" role="2OqNvi">
+                  <ref role="3Tt5mk" to="3xdn:238_VGTIKuE" resolve="scope" />
                 </node>
               </node>
-              <node concept="2DeJnY" id="31Tct3TxPN2" role="2OqNvi">
+              <node concept="2DeJnY" id="238_VGTIKzI" role="2OqNvi">
                 <ref role="1A9B2P" to="tpee:gEShNN5" resolve="GenericNewExpression" />
               </node>
             </node>

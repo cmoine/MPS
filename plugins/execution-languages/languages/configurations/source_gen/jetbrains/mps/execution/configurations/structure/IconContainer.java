@@ -5,5 +5,5 @@ package jetbrains.mps.execution.configurations.structure;
 import jetbrains.mps.smodel.runtime.IconResource;
 
 public class IconContainer {
-  protected static IconResource RESOURCE_a0a0z = new IconResource("runConfigurationDeclaration.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a3a0a62b0nb = new IconResource("runConfigurationDeclaration.png", IconContainer.class);
 }

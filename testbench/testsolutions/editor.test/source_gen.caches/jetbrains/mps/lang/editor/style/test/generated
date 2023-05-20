@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="d5e0kmzqwo6ai5lodgv18wy5g0b6ae9" />
+<product version="3" modelHash="8tls6tfq657mspn8zgm7pas6cxz9t96">
+  <files names="FontFamilyDefaultIfUnknownTest_Test.java:FontFamilyDefaultTest_Test.java:FontFamilyFromQueryTest_Test.java:FontFamilyGenerationIfUnknown_Test.java:FontFamilyLiteralPreviewTest_Test.java:FontFamilyLiteralWarningTest_Test.java:FontFamilySimpleTest_Test.java:FontFamilyStyleClassItemPreviewTest_Test.java:FontFamilyStyleClassItemWarningTest_Test.java:FontStyleInheritanceTest_Test.java:StyleAttributeInheritanceTest_Test.java:StyleAttributeNonInheritanceTest_Test.java:StyleAttributePriorityTest_Test.java:StyleAttributeSetHiddenThenUnhideTest_Test.java:StyleAttributeThreeLayerTest_Test.java:StyleAttributeUnapplyTest_Test.java:StyleOfSingleRoleChild_Test.java:URLStyleFunctionTest_Test.java:URLStyleSimpleTest_Test.java" />
+</product>
 

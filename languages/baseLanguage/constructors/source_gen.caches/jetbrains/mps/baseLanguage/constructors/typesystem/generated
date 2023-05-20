@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="d7ck8vmrk41bk1apxtuq3m6hh413lem" />
+<product version="3" modelHash="-3ln2ehau1j9zugwufbops6qkrm11ppg">
+  <files names="TypesystemDescriptor.java:checkNumberOfArgs_NonTypesystemRule.java:typeof_CustomConstructorParameterReference_InferenceRule.java:typeof_CustomConstructorParameter_InferenceRule.java:typeof_CustomConstructorUsage_InferenceRule.java:typeof_CustomConstructor_InferenceRule.java:typeof_ListCustomParameter_InferenceRule.java" />
+</product>
 

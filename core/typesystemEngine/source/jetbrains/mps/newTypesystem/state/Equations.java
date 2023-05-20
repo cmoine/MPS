@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,29 +18,43 @@ package jetbrains.mps.newTypesystem.state;
 import gnu.trove.THashMap;
 import gnu.trove.THashSet;
 import jetbrains.mps.errors.SimpleErrorReporter;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.newTypesystem.TypesUtil;
+import jetbrains.mps.newTypesystem.context.ReportingTypecheckingContext;
 import jetbrains.mps.newTypesystem.operation.equation.AddEquationOperation;
 import jetbrains.mps.newTypesystem.operation.equation.SubstituteEquationOperation;
 import jetbrains.mps.smodel.CopyUtil;
-import jetbrains.mps.typesystemEngine.util.LatticeUtil;
-import jetbrains.mps.util.IterableUtil;
-import org.jetbrains.mps.openapi.model.SNode;
-import org.jetbrains.mps.openapi.model.SReference;
+import jetbrains.mps.smodel.DynamicReference;
 import jetbrains.mps.typesystem.inference.EquationInfo;
 import jetbrains.mps.typesystem.inference.IVariableConverter_Runtime;
 import jetbrains.mps.typesystem.inference.TypeChecker;
+import jetbrains.mps.typesystemEngine.util.LatticeUtil;
+import jetbrains.mps.util.IterableUtil;
 import jetbrains.mps.util.Pair;
+import jetbrains.mps.util.SNodeOperations;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
+import org.jetbrains.mps.openapi.model.SModelReference;
+import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeAccessUtil;
 import org.jetbrains.mps.openapi.model.SNodeUtil;
+import org.jetbrains.mps.openapi.model.SReference;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 public class Equations {
-  @StateObject
-  private final Map<SNode, SNode> myRepresentatives = new THashMap<SNode, SNode>();
 
-  private final Map<String, SNode> myNamesToNodes = new HashMap<String, SNode>();
+  private static Logger LOG = Logger.getLogger(Equations.class);
+
+  @StateObject
+  private final Map<SNode, SNode> myRepresentatives = new THashMap<>();
+
+  private final Map<String, SNode> myNamesToNodes = new HashMap<>();
   private final State myState;
 
   public Equations(State state) {
@@ -88,10 +102,9 @@ public class Equations {
     SNode currentKey = nameRepresentative;
     SNode current = nameRepresentative;
     if (myRepresentatives.containsKey(currentKey)) {
-      SNode parent = myRepresentatives.get(currentKey);
-      List<SNode> path = new LinkedList<SNode>();
+      List<SNode> path = new LinkedList<>();
       while (myRepresentatives.containsKey(currentKey)) {
-        parent = myRepresentatives.get(currentKey);
+        SNode parent = myRepresentatives.get(currentKey);
         if (current != nameRepresentative) {
           path.add(current);
         }
@@ -142,7 +155,7 @@ public class Equations {
     if (left == right) {
       return true;
     }
-    THashSet<Pair<SNode, SNode>> matchingPairs = new THashSet<Pair<SNode, SNode>>();
+    THashSet<Pair<SNode, SNode>> matchingPairs = new THashSet<>();
     boolean match = TypesUtil.matchExpandingJoinAndMeet(left, right, matchingPairs);
     if (match) {
       addEquations(matchingPairs, info);
@@ -164,7 +177,7 @@ public class Equations {
   }
 
   public SNode expandNode(final SNode node, boolean finalExpansion) {
-    return expandNode(node, new THashSet<SNode>(), finalExpansion, true);
+    return expandNode(node, new THashSet<>(), finalExpansion, true);
   }
 
   private SNode expandNode(final SNode node, Set<SNode> variablesMet, boolean finalExpansion, boolean copy) {
@@ -190,7 +203,7 @@ public class Equations {
   }
 
   private void replaceChildren(SNode node, Set<SNode> variablesMet, boolean finalExpansion, boolean copy) {
-    Map<SNode, SNode> childrenReplacement = new THashMap<SNode, SNode>();
+    Map<SNode, SNode> childrenReplacement = new THashMap<>();
     for (SNode child : node.getChildren()) {
       SNode newChild = expandNode(child, variablesMet, finalExpansion, copy);
       if (finalExpansion && TypesUtil.isVariable(newChild)) {
@@ -212,31 +225,44 @@ public class Equations {
   private void replaceReferences(SNode node, Set<SNode> variablesMet, boolean finalExpansion) {
     List<? extends SReference> references = IterableUtil.copyToList(node.getReferences());
     for (SReference reference : references) {
-      SNode oldNode = reference.getTargetNode();
-      if (TypesUtil.isVariable(oldNode)) {
-        SNode newNode = expandNode(oldNode, variablesMet, finalExpansion, false);
-        if (finalExpansion && TypesUtil.isVariable(newNode)) {
-          newNode = convertReferentVariable(node, reference.getRole(), newNode);
-        }
-        if (newNode != oldNode) {
-          String role = reference.getRole();
-          node.setReference(role, null);
-          SNodeAccessUtil.setReferenceTarget(node, role, newNode);
+      // type variables can't be referenced by a dynref
+      if (!(reference instanceof DynamicReference)) {
+        SNode oldNode = reference.getTargetNode();
+        if (TypesUtil.isVariable(oldNode)) {
+          SNode newNode = expandNode(oldNode, variablesMet, finalExpansion, false);
+          if (finalExpansion && TypesUtil.isVariable(newNode)) {
+            newNode = convertReferentVariable(node, reference.getRole(), newNode);
+          }
+          if (newNode != oldNode) {
+            SReferenceLink role = reference.getLink();
+            // no idea why set null/set newNode via constraints, not just set newNode.
+            node.dropReference(role);
+            SNodeAccessUtil.setReferenceTarget(node, role, newNode);
+          }
         }
       }
     }
   }
 
   private SNode convertReferentVariable(SNode sourceNode, String role, SNode variable) {
-    IVariableConverter_Runtime converter = TypeChecker.getInstance().getRulesManager().getVariableConverter(sourceNode, role, variable, false);
+    IVariableConverter_Runtime converter = myState.getTypeCheckingContext().getTypeCheckerHelper().getRulesManager().getVariableConverter(sourceNode, role, variable, false);
     if (converter == null) return variable;
     return converter.convert(sourceNode, role, variable, false);
   }
 
-  void reportRecursiveType(SNode node, EquationInfo info) {  //todo
-    SimpleErrorReporter errorReporter = new SimpleErrorReporter(node, "Recursive types not allowed",
-      info == null ? null : info.getRuleModel(), info == null ? null : info.getRuleId());
-    myState.getTypeCheckingContext().reportMessage(node, errorReporter);
+  void reportRecursiveType(SNode node, EquationInfo info) {
+    // TODO merge with ReportingTypecheckingContext
+    String ruleId = info.getRuleNode() != null ? info.getRuleNode().getNodeId().toString() : "<unknown>";
+    if (node == null) {
+      LOG.debug("Node used to report an error is null. Error will be ignored. Reported  by rule " + ruleId + ".", new Throwable());
+
+    } else if (node.getModel() == null) {
+      LOG.debug("Node used to report an error is not in a model. Error will be ignored. Node=" + SNodeOperations.getDebugText(node) + ". Reported from by rule " + ruleId + ".", new Throwable());
+    }
+    if(node != null) {
+      SimpleErrorReporter errorReporter = new SimpleErrorReporter(node, "Recursive types not allowed", info.getRuleNode());
+      myState.getTypeCheckingContext().reportMessage(errorReporter);
+    }
   }
 
   public void addEquations(Set<Pair<SNode, SNode>> childEqs, EquationInfo errorInfo) {
@@ -251,16 +277,16 @@ public class Equations {
   }
 
   public Set<Entry<SNode, Set<SNode>>> getEquationGroups() {
-    Set<SNode> all = new THashSet<SNode>();
-    List<String> result = new LinkedList<String>();
-    Map<SNode, Set<SNode>> map = new THashMap<SNode, Set<SNode>>();
+    Set<SNode> all = new THashSet<>();
+    List<String> result = new LinkedList<>();
+    Map<SNode, Set<SNode>> map = new THashMap<>();
     all.addAll(myRepresentatives.keySet());
     for (SNode node : all) {
       SNode representative = getRepresentativeNoShortenPaths(node);
       if (representative == null) continue;
       Set<SNode> value = map.get(representative);
       if (value == null) {
-        value = new THashSet<SNode>();
+        value = new THashSet<>();
         map.put(representative, value);
       }
       if (node != representative) {

@@ -7,6 +7,7 @@ import jetbrains.mps.generator.template.TemplateQueryContext;
 import java.util.List;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import org.jetbrains.mps.openapi.language.SConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class PatternGeneratorUtil {
@@ -17,13 +18,18 @@ public class PatternGeneratorUtil {
     if (ListSequence.fromList(nodes).count() == 1) {
       return ListSequence.fromList(nodes).first();
     }
-    SNode varPattern = SNodeOperations.getNodeAncestor(var, MetaAdapterFactory.getConcept(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x108a9cb4791L, "jetbrains.mps.lang.pattern.structure.PatternExpression"), false, false);
+    SNode varPattern = SNodeOperations.getNodeAncestor(var, CONCEPTS.PatternExpression$YJ, false, false);
     SNode patternClass = genContext.getOutputNodeByInputNodeAndMappingLabel(varPattern, "patternClass");
     for (SNode field : nodes) {
-      if (SNodeOperations.getNodeAncestor(field, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c108ca66L, "jetbrains.mps.baseLanguage.structure.ClassConcept"), false, false) == patternClass) {
+      if (SNodeOperations.getNodeAncestor(field, CONCEPTS.ClassConcept$bK, false, false) == patternClass) {
         return field;
       }
     }
     return null;
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept PatternExpression$YJ = MetaAdapterFactory.getConcept(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x108a9cb4791L, "jetbrains.mps.lang.pattern.structure.PatternExpression");
+    /*package*/ static final SConcept ClassConcept$bK = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c108ca66L, "jetbrains.mps.baseLanguage.structure.ClassConcept");
   }
 }

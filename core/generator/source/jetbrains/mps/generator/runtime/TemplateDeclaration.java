@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,19 +15,29 @@
  */
 package jetbrains.mps.generator.runtime;
 
-import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNodeReference;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Collection;
 
 /**
- * Evgeny Gryaznov, 10/22/10
+ * Describes a template that can be applied, with newly created nodes pushed down a sink (abstraction that helps to deal with 'regular' apply vs 'weave' scenarios)
  */
-public interface TemplateDeclaration extends TemplateDeclarationWeavingAware2 {
+public interface TemplateDeclaration {
 
   SNodeReference getTemplateNode();
 
-  Collection<SNode> apply(@NotNull TemplateExecutionEnvironment environment,
-                          @NotNull TemplateContext context) throws GenerationException;
+  /**
+   * New alternative to apply templates that make no distinction between templates applied in a regular way or in a weaving mode
+   * @param templateContext  describes template input, arguments and the rest of environment, not null
+   * @param sink             receives nodes/node sub-trees instantiated by a template, not null
+   * @since 2020.1
+   * @throws GenerationException
+   */
+  void apply(TemplateContext templateContext, ApplySink sink) throws GenerationException;
+
+  // FIXME though not in use, shall revisit TemplateCall class and CallMacro, to see if I could/should change the logic when compiled template is invoked
+  //       from an interpreted one (seems that's the case when we can/shall use TD.getParameterNames())
+  @Nullable
+  default String[] getParameterNames() {
+    return null;
+  }
 }

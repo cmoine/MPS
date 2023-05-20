@@ -7,7 +7,6 @@ import jetbrains.mps.openapi.actions.descriptor.ActionAspectDescriptor;
 import java.util.Collection;
 import jetbrains.mps.openapi.actions.descriptor.NodeFactory;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor implements ActionAspectDescriptor {
@@ -16,18 +15,20 @@ public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor imple
   @Override
   public Collection<NodeFactory> getFactories(SAbstractConcept concept) {
     if (LANGUAGE_FQ_NAME.equals(concept.getLanguage().getQualifiedName())) {
-      switch (Arrays.binarySearch(stringSwitchCases_tpto26_a0a0a0c, concept.getName())) {
-        case 0:
+      switch (concept.getName()) {
+        case "GenerationContextOp_GetOutputByLabel":
           return Collections.<NodeFactory>singletonList(new node_factories.NodeFactory_1216861604197());
-        case 1:
+        case "GenerationContextOp_GetOutputByLabelAndInput":
           return Collections.<NodeFactory>singletonList(new node_factories.NodeFactory_1216861604215());
-        case 2:
+        case "GenerationContextOp_GetOutputListByLabelAndInput":
           return Collections.<NodeFactory>singletonList(new node_factories.NodeFactory_1221157578225());
-        case 3:
+        case "GenerationContextOp_SessionObjectAccess":
           return Collections.<NodeFactory>singletonList(new node_factories.NodeFactory_1217895102248());
-        case 4:
+        case "GenerationContextOp_ShowMessageBase":
+          return Collections.<NodeFactory>singletonList(new node_factories.NodeFactory_6601781453102013447());
+        case "GenerationContextOp_StepObjectAccess":
           return Collections.<NodeFactory>singletonList(new node_factories.NodeFactory_1217895169604());
-        case 5:
+        case "GenerationContextOp_TransientObjectAccess":
           return Collections.<NodeFactory>singletonList(new node_factories.NodeFactory_1217895187934());
         default:
       }
@@ -35,9 +36,4 @@ public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor imple
     return Collections.<NodeFactory>emptyList();
   }
 
-  @Override
-  public boolean hasBuilders() {
-    return false;
-  }
-  private static String[] stringSwitchCases_tpto26_a0a0a0c = new String[]{"GenerationContextOp_GetOutputByLabel", "GenerationContextOp_GetOutputByLabelAndInput", "GenerationContextOp_GetOutputListByLabelAndInput", "GenerationContextOp_SessionObjectAccess", "GenerationContextOp_StepObjectAccess", "GenerationContextOp_TransientObjectAccess"};
 }

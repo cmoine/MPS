@@ -1,3 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependenciesRoot />
+<dependenciesRoot>
+  <uses language="l:ab0ae915-e3b5-4f35-b55a-c655d649a03c:jetbrains.mps.transformation.test.inputLang" />
+  <uses language="l:157a9668-bf58-417b-893e-53d86388dc56:jetbrains.mps.transformation.test.outputLang" />
+  <uses module="6354ebe7-c22a-4a0f-ac54-50b52ab9b065(JDK)" kind="rt" />
+  <uses module="52b81ac7-93fd-4e9e-b972-4995882da6d4(jetbrains.mps.baseLanguage.references.runtime)" kind="rt" />
+</dependenciesRoot>
 

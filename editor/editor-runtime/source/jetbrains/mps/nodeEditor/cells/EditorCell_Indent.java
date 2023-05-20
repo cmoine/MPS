@@ -35,10 +35,10 @@ public class EditorCell_Indent extends EditorCell_Label {
   }
 
   public static String getIndentText() {
-    String result = "";
+    StringBuilder result = new StringBuilder();
     for (int i = 0; i < EditorSettings.getInstance().getIndentSize(); i++) {
-      result += " ";
+      result.append(" ");
     }
-    return result;
+    return result.toString();
   }
 }

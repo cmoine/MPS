@@ -29,6 +29,7 @@ import jetbrains.mps.smodel.SNodePointer;
 import jetbrains.mps.util.Computable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.model.SNodeId;
 
@@ -37,25 +38,25 @@ import org.jetbrains.mps.openapi.model.SNodeId;
  */
 public class MPSPsiRef extends MPSPsiNodeBase {
 
-  private String role;
+  private final SReferenceLink role;
   private SModelReference model;
   private SNodeId nodeId;
   private String referenceText;
 
-  public MPSPsiRef(String role, SModelReference model, SNodeId nodeId, PsiManager manager) {
+  public MPSPsiRef(SReferenceLink role, SModelReference model, SNodeId nodeId, PsiManager manager) {
     super(manager);
     this.role = role;
     this.model = model;
     this.nodeId = nodeId;
   }
 
-  public MPSPsiRef(String role, String referenceText, PsiManager manager) {
+  public MPSPsiRef(SReferenceLink role, String referenceText, PsiManager manager) {
     super(manager);
     this.role = role;
     this.referenceText = referenceText;
   }
 
-  public String getRole() {
+  public SReferenceLink getRole() {
     return role;
   }
 
@@ -67,7 +68,7 @@ public class MPSPsiRef extends MPSPsiNodeBase {
       @Override
       public PsiElement compute() {
         if (model != null && nodeId != null) {
-          return MPSPsiProvider.getInstance(getProject()).getPsi(new SNodePointer((jetbrains.mps.smodel.SModelReference) model, nodeId));
+          return MPSPsiProvider.getInstance(getProject()).getPsi(new SNodePointer(model, nodeId));
         } else {
           // TODO dynamic ref
           return null;

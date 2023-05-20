@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.java.debugger.breakpoints;
 
 import com.intellij.debugger.DebuggerManagerEx;
@@ -38,25 +37,27 @@ import jetbrains.mps.debugger.core.breakpoints.BreakpointsUiComponentEx;
 import jetbrains.mps.ide.editor.util.EditorComponentUtil;
 import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.idea.java.trace.GeneratedSourcePosition;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.nodeEditor.AdditionalPainter;
 import jetbrains.mps.nodeEditor.EditorComponent;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import jetbrains.mps.smodel.ModelAccessHelper;
+import jetbrains.mps.util.Computable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.mps.openapi.module.SRepository;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class IdeaBreakpointsUiComponent extends BreakpointsUiComponentEx<Breakpoint, BreakpointWithHighlighter> implements ProjectComponent {
-  private static final Logger LOG = LogManager.getLogger(IdeaBreakpointsUiComponent.class);
   private DebuggerManagerEx myDebuggerManager;
   private final XBreakpointListener myBreakpointListener = new MyBreakpointListener();
 
-  public IdeaBreakpointsUiComponent(Project project, FileEditorManager manager) {
-    super(project, manager);
+  public IdeaBreakpointsUiComponent(Project project) {
+    super(project);
   }
 
   @Override
@@ -91,13 +92,14 @@ public class IdeaBreakpointsUiComponent extends BreakpointsUiComponentEx<Breakpo
   protected Set<BreakpointWithHighlighter> getBreakpointsForComponent(@NotNull final EditorComponent component) {
     final Set<BreakpointWithHighlighter> result = new HashSet<BreakpointWithHighlighter>();
     final List<Breakpoint> breakpoints = myDebuggerManager.getBreakpointManager().getBreakpoints(); //XDebuggerManager.getInstance(myProject).getBreakpointManager()
-    ProjectHelper.getModelAccess(myProject).runReadAction(new Runnable() {
+    SRepository repository = ProjectHelper.getProjectRepository(myProject);
+    repository.getModelAccess().runReadAction(new Runnable() {
       @Override
       public void run() {
         for (Breakpoint breakpoint : breakpoints) {
           if (breakpoint instanceof BreakpointWithHighlighter) {
             BreakpointWithHighlighter breakpointWithHighlighter = (BreakpointWithHighlighter) breakpoint;
-            SNode node = BreakpointPainter.getNodeForBreakpoint(breakpointWithHighlighter);
+            SNode node = BreakpointPainter.getNodeForBreakpoint(breakpointWithHighlighter, repository);
             if (node != null && EditorComponentUtil.isNodeShownInTheComponent(component, node)) {
               result.add(breakpointWithHighlighter);
             }
@@ -107,6 +109,22 @@ public class IdeaBreakpointsUiComponent extends BreakpointsUiComponentEx<Breakpo
     });
     return result;
   }
+
+  @Override
+  @NotNull
+  protected List<EditorComponent> getComponentsForBreakpoint(@NotNull final BreakpointWithHighlighter breakpoint) {
+    SRepository repository = ProjectHelper.getProjectRepository(myProject);
+    return new ModelAccessHelper(repository.getModelAccess()).runReadAction(new Computable<List<EditorComponent>>() {
+      public List<EditorComponent> compute() {
+        SNode node = BreakpointPainter.getNodeForBreakpoint(breakpoint, repository);
+        if (node != null) {
+          return EditorComponentUtil.findComponentForNode(node, FileEditorManager.getInstance(myProject));
+        }
+        return Collections.emptyList();
+      }
+    });
+  }
+
 
   @Override
   protected BreakpointPainter createPainter(BreakpointWithHighlighter breakpoint) {
@@ -134,7 +152,7 @@ public class IdeaBreakpointsUiComponent extends BreakpointsUiComponentEx<Breakpo
       }
     }
     if (!breakpointWasSet) {
-      LOG.debug("Failed to create a breakpoint at this location");
+      Logger.getLogger(IdeaBreakpointsUiComponent.class).debug("Failed to create a breakpoint at this location");
     }
   }
 
@@ -169,7 +187,7 @@ public class IdeaBreakpointsUiComponent extends BreakpointsUiComponentEx<Breakpo
   }
 
   private void clearAllEditors() {
-    List<EditorComponent> allEditorComponents = EditorComponentUtil.getAllEditorComponents(myFileEditorManager, true);
+    List<EditorComponent> allEditorComponents = EditorComponentUtil.getAllEditorComponents(FileEditorManager.getInstance(myProject), true);
     for (EditorComponent component : allEditorComponents) {
       component.getLeftEditorHighlighter().removeAllIconRenderers(BreakpointIconRenderrer.TYPE);
       List<AdditionalPainter> additionalPainters = component.getAdditionalPainters();
@@ -194,30 +212,23 @@ public class IdeaBreakpointsUiComponent extends BreakpointsUiComponentEx<Breakpo
     }
 
     @Override
-    public void breakpointChanged(@NotNull XBreakpoint breakpoint) {
+    public void breakpointChanged(@NotNull XBreakpoint breakpointNoUse) {
       clearAllEditors();
 
+      // XXX why do we remove/re-add all BPs here instead of managing them individually like BreakpointsUiComponent does?
       final List<Breakpoint> breakpoints = myDebuggerManager.getBreakpointManager().getBreakpoints();
-      ProjectHelper.getModelAccess(myProject).runReadAction(new Runnable() {
-        @Override
-        public void run() {
-          for (Breakpoint breakpoint : breakpoints) {
-            if (breakpoint instanceof BreakpointWithHighlighter) {
-              BreakpointWithHighlighter breakpointWithHighlighter = (BreakpointWithHighlighter) breakpoint;
-              SNode node = BreakpointPainter.getNodeForBreakpoint(breakpointWithHighlighter);
-              if (node != null) {
-                addLocationBreakpoint(breakpointWithHighlighter, node);
-              }
-            }
-          }
+      for (Breakpoint breakpoint : breakpoints) {
+        if (breakpoint instanceof BreakpointWithHighlighter) {
+          BreakpointWithHighlighter breakpointWithHighlighter = (BreakpointWithHighlighter) breakpoint;
+          addLocationBreakpoint(breakpointWithHighlighter);
         }
-      });
+      }
 
       repaintBreakpoints();
       ApplicationManager.getApplication().invokeLater(new Runnable() {
         @Override
         public void run() {
-          List<EditorComponent> allEditorComponents = EditorComponentUtil.getAllEditorComponents(myFileEditorManager, true);
+          List<EditorComponent> allEditorComponents = EditorComponentUtil.getAllEditorComponents(FileEditorManager.getInstance(myProject), true);
           for (EditorComponent component : allEditorComponents) {
             component.repaint();
           }

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<dependenciesRoot>
-  <dependency className="jetbrains.mps.baseLanguage.tuples.shared.GlobalSharedPair" file="GlobalSharedPair.java">
-    <classNode dependClassName="jetbrains.mps.baseLanguage.tuples.runtime.MultiTuple" />
-    <classNode extendsClassName="jetbrains.mps.baseLanguage.tuples.runtime._2" />
-  </dependency>
-</dependenciesRoot>
-

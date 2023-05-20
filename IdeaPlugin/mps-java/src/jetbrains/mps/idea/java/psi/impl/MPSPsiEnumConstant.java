@@ -23,6 +23,7 @@ import com.intellij.psi.PsiEnumConstantInitializer;
 import com.intellij.psi.PsiExpressionList;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.PsiMethod;
+import com.intellij.psi.PsiModifier;
 import com.intellij.psi.PsiType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -41,6 +42,11 @@ public class MPSPsiEnumConstant extends MPSPsiField implements PsiEnumConstant {
   @NotNull
   public PsiType getType() {
     return JavaPsiFacade.getInstance(getProject()).getElementFactory().createType(getContainingClass());
+  }
+
+  @Override
+  public boolean hasModifierProperty(@NotNull String name) {
+    return PsiModifier.PUBLIC.equals(name) || PsiModifier.STATIC.equals(name) || PsiModifier.FINAL.equals(name);
   }
 
   @Nullable

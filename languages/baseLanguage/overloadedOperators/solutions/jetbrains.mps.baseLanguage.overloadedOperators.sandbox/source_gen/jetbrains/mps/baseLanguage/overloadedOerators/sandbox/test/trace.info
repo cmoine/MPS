@@ -93,11 +93,11 @@
       <node id="2673276898228773433" at="30,32,31,56" concept="1" />
       <node id="2673276898228773424" at="31,56,32,15" concept="6" />
       <node id="4226637275972869620" at="7,0,9,0" concept="0" trace="ComplexOperators#()V" />
-      <node id="4226637275972869620" at="9,0,14,0" concept="8" trace="apply_PlusExpression_Complex_Complex#(Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex;Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex;)Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex;" />
-      <node id="4226637275972869620" at="14,0,19,0" concept="8" trace="apply_MulExpression_Complex_Complex#(Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex;Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex;)Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex;" />
-      <node id="4226637275972869620" at="19,0,24,0" concept="8" trace="apply_PlusExpression_Complex_Complex2#(Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex;Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex2;)Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex2;" />
-      <node id="4226637275972869620" at="24,0,29,0" concept="8" trace="apply_PlusExpression_Complex2_Complex2#(Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex2;Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex2;)Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex2;" />
-      <node id="4226637275972869620" at="29,0,34,0" concept="8" trace="apply_MulExpression_int_Complex#(ILjetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex;)Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex;" />
+      <node id="4226637275972873397" at="9,0,14,0" concept="8" trace="apply_PlusExpression_Complex_Complex#(Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex;Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex;)Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex;" />
+      <node id="162210779026732085" at="14,0,19,0" concept="8" trace="apply_MulExpression_Complex_Complex#(Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex;Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex;)Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex;" />
+      <node id="6517886960437940037" at="19,0,24,0" concept="8" trace="apply_PlusExpression_Complex_Complex2#(Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex;Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex2;)Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex2;" />
+      <node id="6517886960437940072" at="24,0,29,0" concept="8" trace="apply_PlusExpression_Complex2_Complex2#(Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex2;Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex2;)Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex2;" />
+      <node id="2673276898228773414" at="29,0,34,0" concept="8" trace="apply_MulExpression_int_Complex#(ILjetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex;)Ljetbrains/mps/baseLanguage/overloadedOerators/sandbox/test/Complex;" />
       <scope id="4226637275972869620" at="7,29,7,29" />
       <scope id="4226637275972869620" at="7,0,9,0" />
       <scope id="4226637275972873401" at="9,91,12,15">
@@ -115,25 +115,25 @@
       <scope id="2673276898228773419" at="29,82,32,15">
         <var name="res" id="2673276898228773428" />
       </scope>
-      <scope id="4226637275972869620" at="9,0,14,0">
-        <var name="left" id="4226637275972869620" />
-        <var name="right" id="4226637275972869620" />
+      <scope id="4226637275972873397" at="9,0,14,0">
+        <var name="left" id="4226637275972873397" />
+        <var name="right" id="4226637275972873397" />
       </scope>
-      <scope id="4226637275972869620" at="14,0,19,0">
-        <var name="left" id="4226637275972869620" />
-        <var name="right" id="4226637275972869620" />
+      <scope id="162210779026732085" at="14,0,19,0">
+        <var name="left" id="162210779026732085" />
+        <var name="right" id="162210779026732085" />
       </scope>
-      <scope id="4226637275972869620" at="19,0,24,0">
-        <var name="left" id="4226637275972869620" />
-        <var name="right" id="4226637275972869620" />
+      <scope id="6517886960437940037" at="19,0,24,0">
+        <var name="left" id="6517886960437940037" />
+        <var name="right" id="6517886960437940037" />
       </scope>
-      <scope id="4226637275972869620" at="24,0,29,0">
-        <var name="left" id="4226637275972869620" />
-        <var name="right" id="4226637275972869620" />
+      <scope id="6517886960437940072" at="24,0,29,0">
+        <var name="left" id="6517886960437940072" />
+        <var name="right" id="6517886960437940072" />
       </scope>
-      <scope id="4226637275972869620" at="29,0,34,0">
-        <var name="left" id="4226637275972869620" />
-        <var name="right" id="4226637275972869620" />
+      <scope id="2673276898228773414" at="29,0,34,0">
+        <var name="left" id="2673276898228773414" />
+        <var name="right" id="2673276898228773414" />
       </scope>
       <unit id="4226637275972869620" at="6,0,35,0" name="jetbrains.mps.baseLanguage.overloadedOerators.sandbox.test.ComplexOperators" />
     </file>
@@ -142,13 +142,13 @@
     <file name="StringOperators.java">
       <node id="4888428037514503278" at="9,107,10,32" concept="6" />
       <node id="4888428037514503250" at="7,0,9,0" concept="0" trace="StringOperators#()V" />
-      <node id="4888428037514503250" at="9,0,12,0" concept="8" trace="apply_customOperator_4888428037514503287_string_string#(Ljava/lang/String;Ljava/lang/String;)Z" />
+      <node id="4888428037514503269" at="9,0,12,0" concept="8" trace="apply_customOperator_4888428037514503287_string_string#(Ljava/lang/String;Ljava/lang/String;)Z" />
       <scope id="4888428037514503250" at="7,28,7,28" />
       <scope id="4888428037514503274" at="9,107,10,32" />
       <scope id="4888428037514503250" at="7,0,9,0" />
-      <scope id="4888428037514503250" at="9,0,12,0">
-        <var name="left" id="4888428037514503250" />
-        <var name="right" id="4888428037514503250" />
+      <scope id="4888428037514503269" at="9,0,12,0">
+        <var name="left" id="4888428037514503269" />
+        <var name="right" id="4888428037514503269" />
       </scope>
       <unit id="4888428037514503250" at="6,0,13,0" name="jetbrains.mps.baseLanguage.overloadedOerators.sandbox.test.StringOperators" />
     </file>

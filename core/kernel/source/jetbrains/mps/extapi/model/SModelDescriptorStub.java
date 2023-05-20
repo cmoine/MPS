@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,26 +15,18 @@
  */
 package jetbrains.mps.extapi.model;
 
-import jetbrains.mps.project.AbstractModule;
-import jetbrains.mps.project.dependency.ModelDependenciesManager;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.smodel.FastNodeFinder;
-import jetbrains.mps.smodel.Language;
 import jetbrains.mps.smodel.SModel.ImportElement;
 import jetbrains.mps.smodel.SModelInternal;
-import jetbrains.mps.smodel.SModelLegacy;
-import jetbrains.mps.smodel.SModelRepository;
-import jetbrains.mps.smodel.event.SModelFileChangedEvent;
 import jetbrains.mps.smodel.event.SModelListener;
 import jetbrains.mps.smodel.event.SModelListener.SModelListenerPriority;
 import jetbrains.mps.smodel.event.SModelRenamedEvent;
 import jetbrains.mps.smodel.loading.ModelLoadingState;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SLanguage;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SModelReference;
-import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SModuleReference;
 import org.jetbrains.mps.openapi.module.SRepository;
 
@@ -55,9 +47,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public abstract class SModelDescriptorStub implements SModelInternal, SModel, FastNodeFinder.Factory {
 
-  private static final Logger LOG = LogManager.getLogger(SModelDescriptorStub.class);
+  private static final Logger LOG = Logger.getLogger(SModelDescriptorStub.class);
 
-  private final List<SModelListener> myModelListeners = new CopyOnWriteArrayList<SModelListener>();
+  private final List<SModelListener> myModelListeners = new CopyOnWriteArrayList<>();
 
   /**
    * Migration to 3.0. Loads and returns model data.
@@ -67,11 +59,12 @@ public abstract class SModelDescriptorStub implements SModelInternal, SModel, Fa
    *       Though getSModel is not much better, at least in the context of SModelDescriptor it makes more sense.
    *
    * @deprecated use {@link SModelBase#getModelData()} or {@link #getSModel()}
-   * FIXME  there's implicit convention that smodel.SModel has this openapi.SModel (aka descriptor) assigned once
-   * this method returns
    */
-  @Deprecated
-  public abstract jetbrains.mps.smodel.SModel getSModelInternal();
+  @Deprecated(forRemoval = true)
+  public jetbrains.mps.smodel.SModel getSModelInternal() {
+    // no-op, method is scheduled for removal in 2023.x release
+    throw new UnsupportedOperationException();
+  }
 
   @Override
   public void addModelListener(@NotNull SModelListener listener) {
@@ -96,31 +89,7 @@ public abstract class SModelDescriptorStub implements SModelInternal, SModel, Fa
     myModelListeners.clear();
   }
 
-  protected void notifyModelReplaced(jetbrains.mps.smodel.SModel oldSModel) {
-    SModelRepository.getInstance().notifyModelReplaced(this, oldSModel);
-  }
-
   // Not SModel-specific listener notifications
-
-  protected void fireBeforeModelFileChanged(SModelFileChangedEvent event) {
-    for (SModelListener sModelListener : getModelListeners()) {
-      try {
-        sModelListener.beforeModelFileChanged(event);
-      } catch (Throwable t) {
-        LOG.error(null, t);
-      }
-    }
-  }
-
-  protected void fireModelFileChanged(SModelFileChangedEvent event) {
-    for (SModelListener sModelListener : getModelListeners()) {
-      try {
-        sModelListener.modelFileChanged(event);
-      } catch (Throwable t) {
-        LOG.error(null, t);
-      }
-    }
-  }
 
   @Deprecated
   protected void fireBeforeModelRenamed(SModelRenamedEvent event) {
@@ -128,7 +97,7 @@ public abstract class SModelDescriptorStub implements SModelInternal, SModel, Fa
       try {
         sModelListener.beforeModelRenamed(event);
       } catch (Throwable t) {
-        LOG.error(null, t);
+        LOG.error(t);
       }
     }
   }
@@ -139,7 +108,7 @@ public abstract class SModelDescriptorStub implements SModelInternal, SModel, Fa
       try {
         sModelListener.modelRenamed(event);
       } catch (Throwable t) {
-        LOG.error(null, t);
+        LOG.error(t);
       }
     }
   }
@@ -154,7 +123,7 @@ public abstract class SModelDescriptorStub implements SModelInternal, SModel, Fa
       try {
         sModelListener.modelLoadingStateChanged(this, newState);
       } catch (Throwable t) {
-        LOG.error(null, t);
+        LOG.error(t);
       }
     }
   }
@@ -164,7 +133,7 @@ public abstract class SModelDescriptorStub implements SModelInternal, SModel, Fa
       try {
         sModelListener.beforeModelDisposed(model);
       } catch (Throwable t) {
-        LOG.error(null, t);
+        LOG.error(t);
       }
     }
   }
@@ -174,23 +143,23 @@ public abstract class SModelDescriptorStub implements SModelInternal, SModel, Fa
       try {
         sModelListener.modelSaved(this);
       } catch (Throwable t) {
-        LOG.error(null, t);
+        LOG.error(t);
       }
     }
   }
 
   /**
+   * Gives access to model data implementation.
    * Use {@link SModelBase#getModelData()} wherever possible.
-   * Use this method when accessing implementation aspects of smodel.SModel that are not exposed
-   * through SModelInternal interface (for latter, use {@link #getSModelInternal()} until ceased).
+   * Use this method when accessing implementation aspects of j.m.smodel.SModel that are not exposed
+   * through SModelData interface.
    */
   public jetbrains.mps.smodel.SModel getSModel() {
+    // XXX there's implicit convention that smodel.SModel has this openapi.SModel (aka descriptor) assigned once
+    //     this method returns. I wonder if I need to make this explicit
+    LOG.errorWithTrace("Method SModelDescriptorStub.getSModelInternal() will be removed in the next release, override SModelDescriptorStub.getSModel(), instead");
+    // FIXME make this method abstract once getSModelInternal() gone
     return getSModelInternal();
-  }
-
-
-  public final ModelDependenciesManager getModelDepsManager() {
-    return getSModel().getModelDepsManager();
   }
 
   @Override
@@ -203,28 +172,18 @@ public abstract class SModelDescriptorStub implements SModelInternal, SModel, Fa
   public void deleteLanguageId(@NotNull SLanguage ref) {
     assertCanChange();
     getSModel().deleteLanguage(ref);
-    validateModuleLanguageVersions();
-  }
-
-  @Override
-  public void addLanguage(Language language) {
-    assertCanChange();
-    new SModelLegacy(getSModel()).addLanguage(language);
-    validateModuleLanguageVersions();
   }
 
   @Override
   public void addLanguage(@NotNull SLanguage language) {
     assertCanChange();
     getSModel().addLanguage(language);
-    validateModuleLanguageVersions();
   }
 
   @Override
   public void setLanguageImportVersion(@NotNull SLanguage language, int version) {
     assertCanChange();
     getSModel().setLanguageImportVersion(language, version);
-    validateModuleLanguageVersions();
   }
 
   @Override
@@ -243,40 +202,19 @@ public abstract class SModelDescriptorStub implements SModelInternal, SModel, Fa
   public final void addDevKit(SModuleReference ref) {
     assertCanChange();
     getSModel().addDevKit(ref);
-    validateModuleLanguageVersions();
   }
 
   @Override
   public final void deleteDevKit(@NotNull SModuleReference ref) {
     assertCanChange();
     getSModel().deleteDevKit(ref);
-    validateModuleLanguageVersions();
-  }
-
-  /**
-   * todo: this is a temporary method helping to keep set of imported languages stored in module in sync with models
-   */
-  @Deprecated
-  private void validateModuleLanguageVersions() {
-    SModule module = getModule();
-    if (module != null && module instanceof AbstractModule) {
-      // this check is a hack needed for generation process where we do not have write access and getRepository() returns null
-      // but getModelDescriptor().getModule().getRepository() is MPSModuleRepository
-      if (getRepository() != null) {
-        // this check is for not to call validateLanguageVersions() where we do not have write access
-        // this can happen if isLoaded() is false, e. g. in textgen
-        if (getRepository().getModelAccess().canWrite()) {
-          ((AbstractModule) module).validateLanguageVersions();
-        }
-      }
-    }
   }
 
   @NotNull
   @Override
   public Collection<SModelReference> getModelImports() {
     assertCanRead();
-    ArrayList<SModelReference> rv = new ArrayList<SModelReference>();
+    ArrayList<SModelReference> rv = new ArrayList<>();
     for (ImportElement ie : getSModel().importedModels()) {
       rv.add(ie.getModelReference());
     }
@@ -284,15 +222,12 @@ public abstract class SModelDescriptorStub implements SModelInternal, SModel, Fa
   }
 
   @Override
-  @Deprecated
-  public final void addModelImport(SModelReference modelReference, boolean firstVersion) {
-    assertCanChange();
-    new SModelLegacy(getSModel()).addModelImport(modelReference, firstVersion);
-  }
-
-  @Override
   public final void addModelImport(@NotNull SModelReference ref) {
     assertCanChange();
+    if (ref.equals(getReference())) {
+      // don't add references to self
+      return;
+    }
     getSModel().addModelImport(new ImportElement(ref));
   }
 
@@ -307,13 +242,6 @@ public abstract class SModelDescriptorStub implements SModelInternal, SModel, Fa
     }
   }
 
-  @Override
-  @Deprecated
-  public final List<SModuleReference> engagedOnGenerationLanguages() {
-    assertCanRead();
-    return new SModelLegacy(getSModel()).engagedOnGenerationLanguages();
-  }
-
   @NotNull
   @Override
   public Collection<SLanguage> getLanguagesEngagedOnGeneration() {
@@ -322,23 +250,9 @@ public abstract class SModelDescriptorStub implements SModelInternal, SModel, Fa
   }
 
   @Override
-  @Deprecated
-  public final void addEngagedOnGenerationLanguage(SModuleReference ref) {
-    assertCanChange();
-    new SModelLegacy(getSModel()).addEngagedOnGenerationLanguage(ref);
-  }
-
-  @Override
   public final void addEngagedOnGenerationLanguage(SLanguage lang) {
     assertCanChange();
     getSModel().addEngagedOnGenerationLanguage(lang);
-  }
-
-  @Override
-  @Deprecated
-  public final void removeEngagedOnGenerationLanguage(SModuleReference ref) {
-    assertCanChange();
-    new SModelLegacy(getSModel()).removeEngagedOnGenerationLanguage(ref);
   }
 
   @Override
@@ -361,16 +275,6 @@ public abstract class SModelDescriptorStub implements SModelInternal, SModel, Fa
    */
   protected void assertCanChange() {
     // intentionally no-op
-  }
-
-    @Override
-  public boolean isDisposed() {
-    return getDisposedStacktrace() != null;
-  }
-
-  @Override
-  public final StackTraceElement[] getDisposedStacktrace() {
-    return getSModel().getDisposedStacktrace();
   }
 
   @Override

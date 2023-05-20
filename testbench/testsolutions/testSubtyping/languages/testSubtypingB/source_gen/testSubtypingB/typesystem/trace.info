@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <root>
+    <file name="TypesystemDescriptor.java">
+      <unit at="8,0,20,0" name="testSubtypingB.typesystem.TypesystemDescriptor" />
+    </file>
+  </root>
+  <root nodeRef="r:d612c92b-af4c-4eb4-bc13-d283361ae3f9(testSubtypingB.typesystem)/2078093584693330100">
+    <file name="TypesystemDescriptor.java">
+      <node id="2078093584693330100" at="10,5,11,101" concept="4" />
+      <node id="2078093584693330100" at="11,101,12,61" concept="2" />
+      <node id="2078093584693330100" at="9,33,13,5" concept="0" />
+      <scope id="2078093584693330100" at="10,5,12,61">
+        <var name="eliminationRule" id="2078093584693330100" />
+      </scope>
+    </file>
+    <file name="customType_InequationReplacementRule.java">
+      <node id="2078093584693330843" at="20,97,21,169" concept="5" />
+      <node id="2078093584693351904" at="23,253,24,9" concept="6" />
+      <node id="2078093584693330100" at="26,207,27,35" concept="4" />
+      <node id="2078093584693351904" at="27,35,28,9" concept="6" />
+      <node id="2078093584693330100" at="28,9,29,27" concept="5" />
+      <node id="2078093584693330100" at="31,27,32,16" concept="5" />
+      <node id="2078093584693330100" at="34,71,35,105" concept="5" />
+      <node id="2078093584693330100" at="37,73,38,107" concept="5" />
+      <node id="2078093584693330100" at="41,57,42,34" concept="5" />
+      <node id="2078093584693330100" at="44,59,45,34" concept="5" />
+      <node id="2078093584693330100" at="49,0,50,0" concept="7" trace="name$MnvL" />
+      <node id="2078093584693330100" at="53,0,54,0" concept="7" trace="CustomType$nw" />
+      <node id="2078093584693330100" at="18,0,20,0" concept="1" trace="customType_InequationReplacementRule#()V" />
+      <node id="2078093584693330100" at="20,0,23,0" concept="3" trace="isApplicableCustom#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/lang/typesystem/runtime/IsApplicable2Status;)Z" />
+      <node id="2078093584693330100" at="23,0,26,0" concept="3" trace="processInequation#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/typesystem/inference/EquationInfo;Ljetbrains/mps/typesystem/inference/TypeCheckingContext;Ljetbrains/mps/lang/typesystem/runtime/IsApplicable2Status;ZZ)V" />
+      <node id="2078093584693330100" at="31,0,34,0" concept="3" trace="isWeak#()Z" />
+      <node id="2078093584693330100" at="34,0,37,0" concept="3" trace="isApplicableSubtypeAndPattern#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljetbrains/mps/lang/typesystem/runtime/IsApplicableStatus;" />
+      <node id="2078093584693330100" at="37,0,40,0" concept="3" trace="isApplicableSupertypeAndPattern#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljetbrains/mps/lang/typesystem/runtime/IsApplicableStatus;" />
+      <node id="2078093584693330100" at="41,0,44,0" concept="3" trace="getApplicableSubtypeConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="2078093584693330100" at="44,0,47,0" concept="3" trace="getApplicableSupertypeConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="2078093584693330100" at="26,0,31,0" concept="3" trace="checkInequation#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/typesystem/inference/EquationInfo;Ljetbrains/mps/lang/typesystem/runtime/IsApplicable2Status;ZZ)Z" />
+      <scope id="2078093584693330100" at="18,49,18,49" />
+      <scope id="2078093584693330177" at="20,97,21,169" />
+      <scope id="2078093584693330101" at="23,253,24,9" />
+      <scope id="2078093584693330100" at="31,27,32,16" />
+      <scope id="2078093584693330100" at="34,71,35,105" />
+      <scope id="2078093584693330100" at="37,73,38,107" />
+      <scope id="2078093584693330100" at="41,57,42,34" />
+      <scope id="2078093584693330100" at="44,59,45,34" />
+      <scope id="2078093584693330100" at="18,0,20,0" />
+      <scope id="2078093584693330100" at="20,0,23,0">
+        <var name="status" id="2078093584693330100" />
+        <var name="subtype" id="2078093584693330100" />
+        <var name="supertype" id="2078093584693330100" />
+      </scope>
+      <scope id="2078093584693330100" at="23,0,26,0">
+        <var name="equationInfo" id="2078093584693330100" />
+        <var name="inequalityIsLessThan" id="2078093584693330100" />
+        <var name="inequalityIsWeak" id="2078093584693330100" />
+        <var name="status" id="2078093584693330100" />
+        <var name="subtype" id="2078093584693330100" />
+        <var name="supertype" id="2078093584693330100" />
+        <var name="typeCheckingContext" id="2078093584693330100" />
+      </scope>
+      <scope id="2078093584693330100" at="26,207,29,27">
+        <var name="result_14532009" id="2078093584693330100" />
+      </scope>
+      <scope id="2078093584693330100" at="31,0,34,0" />
+      <scope id="2078093584693330100" at="34,0,37,0">
+        <var name="node" id="2078093584693330100" />
+      </scope>
+      <scope id="2078093584693330100" at="37,0,40,0">
+        <var name="node" id="2078093584693330100" />
+      </scope>
+      <scope id="2078093584693330100" at="41,0,44,0" />
+      <scope id="2078093584693330100" at="44,0,47,0" />
+      <scope id="2078093584693330100" at="26,0,31,0">
+        <var name="equationInfo" id="2078093584693330100" />
+        <var name="inequalityIsLessThan" id="2078093584693330100" />
+        <var name="inequalityIsWeak" id="2078093584693330100" />
+        <var name="status" id="2078093584693330100" />
+        <var name="subtype" id="2078093584693330100" />
+        <var name="supertype" id="2078093584693330100" />
+      </scope>
+      <unit id="2078093584693330100" at="48,0,51,0" name="testSubtypingB.typesystem.customType_InequationReplacementRule$PROPS" />
+      <unit id="2078093584693330100" at="52,0,55,0" name="testSubtypingB.typesystem.customType_InequationReplacementRule$CONCEPTS" />
+      <unit id="2078093584693330100" at="17,0,56,0" name="testSubtypingB.typesystem.customType_InequationReplacementRule" />
+    </file>
+  </root>
+  <root nodeRef="r:d612c92b-af4c-4eb4-bc13-d283361ae3f9(testSubtypingB.typesystem)/2078093584693360010">
+    <file name="TypesystemDescriptor.java">
+      <node id="2078093584693360010" at="14,5,15,109" concept="4" />
+      <node id="2078093584693360010" at="15,109,16,61" concept="2" />
+      <node id="2078093584693360010" at="13,5,17,5" concept="0" />
+      <scope id="2078093584693360010" at="14,5,16,61">
+        <var name="eliminationRule" id="2078093584693360010" />
+      </scope>
+    </file>
+    <file name="wrapped_customType_InequationReplacementRule.java">
+      <node id="2078093584693360778" at="22,97,23,234" concept="5" />
+      <node id="2078093584693398869" at="26,5,27,73" concept="4" />
+      <node id="2078093584693398869" at="27,73,28,191" concept="4" />
+      <node id="2078093584693398869" at="28,191,29,62" concept="2" />
+      <node id="2078093584693398869" at="29,62,30,307" concept="2" />
+      <node id="2078093584693360010" at="33,207,34,35" concept="4" />
+      <node id="2078093584693398869" at="34,35,35,311" concept="2" />
+      <node id="2078093584693360010" at="35,311,36,27" concept="5" />
+      <node id="2078093584693360010" at="38,27,39,16" concept="5" />
+      <node id="2078093584693360010" at="41,71,42,105" concept="5" />
+      <node id="2078093584693360010" at="44,73,45,107" concept="5" />
+      <node id="2078093584693360010" at="48,57,49,35" concept="5" />
+      <node id="2078093584693360010" at="51,59,52,35" concept="5" />
+      <node id="2078093584693360010" at="56,0,57,0" concept="7" trace="wrapped$fJCj" />
+      <node id="2078093584693360010" at="60,0,61,0" concept="7" trace="CustomType$nw" />
+      <node id="2078093584693360010" at="61,0,62,0" concept="7" trace="WrapperType$5B" />
+      <node id="2078093584693360010" at="20,0,22,0" concept="1" trace="wrapped_customType_InequationReplacementRule#()V" />
+      <node id="2078093584693360010" at="22,0,25,0" concept="3" trace="isApplicableCustom#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/lang/typesystem/runtime/IsApplicable2Status;)Z" />
+      <node id="2078093584693360010" at="38,0,41,0" concept="3" trace="isWeak#()Z" />
+      <node id="2078093584693360010" at="41,0,44,0" concept="3" trace="isApplicableSubtypeAndPattern#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljetbrains/mps/lang/typesystem/runtime/IsApplicableStatus;" />
+      <node id="2078093584693360010" at="44,0,47,0" concept="3" trace="isApplicableSupertypeAndPattern#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljetbrains/mps/lang/typesystem/runtime/IsApplicableStatus;" />
+      <node id="2078093584693360010" at="48,0,51,0" concept="3" trace="getApplicableSubtypeConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="2078093584693360010" at="51,0,54,0" concept="3" trace="getApplicableSupertypeConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="2078093584693360010" at="33,0,38,0" concept="3" trace="checkInequation#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/typesystem/inference/EquationInfo;Ljetbrains/mps/lang/typesystem/runtime/IsApplicable2Status;ZZ)Z" />
+      <node id="2078093584693398869" at="25,253,31,5" concept="0" />
+      <node id="2078093584693360010" at="25,0,33,0" concept="3" trace="processInequation#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/typesystem/inference/EquationInfo;Ljetbrains/mps/typesystem/inference/TypeCheckingContext;Ljetbrains/mps/lang/typesystem/runtime/IsApplicable2Status;ZZ)V" />
+      <scope id="2078093584693360010" at="20,57,20,57" />
+      <scope id="2078093584693360112" at="22,97,23,234" />
+      <scope id="2078093584693360010" at="38,27,39,16" />
+      <scope id="2078093584693360010" at="41,71,42,105" />
+      <scope id="2078093584693360010" at="44,73,45,107" />
+      <scope id="2078093584693360010" at="48,57,49,35" />
+      <scope id="2078093584693360010" at="51,59,52,35" />
+      <scope id="2078093584693360010" at="20,0,22,0" />
+      <scope id="2078093584693360010" at="22,0,25,0">
+        <var name="status" id="2078093584693360010" />
+        <var name="subtype" id="2078093584693360010" />
+        <var name="supertype" id="2078093584693360010" />
+      </scope>
+      <scope id="2078093584693360010" at="33,207,36,27">
+        <var name="result_14532009" id="2078093584693360010" />
+      </scope>
+      <scope id="2078093584693360010" at="38,0,41,0" />
+      <scope id="2078093584693360010" at="41,0,44,0">
+        <var name="node" id="2078093584693360010" />
+      </scope>
+      <scope id="2078093584693360010" at="44,0,47,0">
+        <var name="node" id="2078093584693360010" />
+      </scope>
+      <scope id="2078093584693360010" at="48,0,51,0" />
+      <scope id="2078093584693360010" at="51,0,54,0" />
+      <scope id="2078093584693398869" at="26,5,30,307">
+        <var name="_info_12389875345" id="2078093584693398869" />
+        <var name="_nodeToCheck_1029348928467" id="2078093584693398869" />
+      </scope>
+      <scope id="2078093584693360010" at="33,0,38,0">
+        <var name="equationInfo" id="2078093584693360010" />
+        <var name="inequalityIsLessThan" id="2078093584693360010" />
+        <var name="inequalityIsWeak" id="2078093584693360010" />
+        <var name="status" id="2078093584693360010" />
+        <var name="subtype" id="2078093584693360010" />
+        <var name="supertype" id="2078093584693360010" />
+      </scope>
+      <scope id="2078093584693360011" at="25,253,31,5" />
+      <scope id="2078093584693360010" at="25,0,33,0">
+        <var name="equationInfo" id="2078093584693360010" />
+        <var name="inequalityIsLessThan" id="2078093584693360010" />
+        <var name="inequalityIsWeak" id="2078093584693360010" />
+        <var name="status" id="2078093584693360010" />
+        <var name="subtype" id="2078093584693360010" />
+        <var name="supertype" id="2078093584693360010" />
+        <var name="typeCheckingContext" id="2078093584693360010" />
+      </scope>
+      <unit id="2078093584693360010" at="55,0,58,0" name="testSubtypingB.typesystem.wrapped_customType_InequationReplacementRule$LINKS" />
+      <unit id="2078093584693360010" at="59,0,63,0" name="testSubtypingB.typesystem.wrapped_customType_InequationReplacementRule$CONCEPTS" />
+      <unit id="2078093584693360010" at="19,0,64,0" name="testSubtypingB.typesystem.wrapped_customType_InequationReplacementRule" />
+    </file>
+  </root>
+</debug-info>
+

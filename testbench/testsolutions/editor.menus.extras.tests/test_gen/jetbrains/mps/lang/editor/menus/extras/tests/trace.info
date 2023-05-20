@@ -1,231 +1,269 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
   <root nodeRef="r:a1e8c439-e997-416b-a5dc-df7c3fd41b00(jetbrains.mps.lang.editor.menus.extras.tests@tests)/6820996345400829081">
     <file name="RefactoringMenuItemBase_InapplicableRefactoring_CannotExecute_Test.java">
-      <node id="6820996345400829081" at="20,101,21,122" concept="0" />
-      <node id="6820996345400829081" at="21,122,22,157" concept="0" />
-      <node id="6820996345400829081" at="28,51,29,53" concept="0" />
-      <node id="6820996345400948502" at="29,53,30,93" concept="2" />
-      <node id="6820996345400976638" at="30,93,31,0" concept="4" />
-      <node id="6820996345401222283" at="33,27,34,230" concept="2" />
-      <node id="6820996345401222289" at="34,230,35,0" concept="4" />
-      <node id="6820996345401222290" at="35,0,36,177" concept="2" />
-      <node id="6820996345401222298" at="36,177,37,0" concept="4" />
-      <node id="6820996345401222299" at="37,0,38,78" concept="2" />
-      <node id="6820996345401224559" at="38,78,39,68" concept="0" />
-      <node id="6820996345400829081" at="19,0,24,0" concept="1" trace="test_RefactoringMenuItemBase_InapplicableRefactoring_CannotExecute#()V" />
-      <node id="6820996345401222281" at="33,0,41,0" concept="1" trace="run#()V" />
-      <node id="6820996345401222280" at="31,0,41,9" concept="0" />
-      <node id="6820996345400829081" at="27,0,43,0" concept="1" trace="testMethodImpl#()V" />
-      <scope id="6820996345400829081" at="20,101,22,157" />
-      <scope id="6820996345400829081" at="19,0,24,0" />
-      <scope id="6820996345401222282" at="33,27,39,68">
+      <node id="6820996345400829081" at="26,79,27,60" concept="8" />
+      <node id="6820996345400829081" at="31,101,32,36" concept="1" />
+      <node id="6820996345400829081" at="37,52,38,19" concept="8" />
+      <node id="6820996345400829081" at="42,51,43,53" concept="1" />
+      <node id="6820996345400948502" at="43,53,44,87" concept="3" />
+      <node id="6820996345400976638" at="44,87,45,0" concept="5" />
+      <node id="6820996345401222283" at="46,55,47,227" concept="3" />
+      <node id="6820996345401222289" at="47,227,48,0" concept="5" />
+      <node id="6820996345401222290" at="48,0,49,175" concept="3" />
+      <node id="6820996345401222298" at="49,175,50,0" concept="5" />
+      <node id="6820996345401222299" at="50,0,51,76" concept="3" />
+      <node id="6820996345401224559" at="51,76,52,66" concept="1" />
+      <node id="6820996345400829081" at="23,0,25,0" concept="6" trace="ourParametersCacheExtension" />
+      <node id="6820996345400829081" at="26,0,29,0" concept="0" trace="RefactoringMenuItemBase_InapplicableRefactoring_CannotExecute_Test#()V" />
+      <node id="6820996345400829081" at="37,0,40,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="6820996345400829081" at="30,0,34,0" concept="2" trace="test_RefactoringMenuItemBase_InapplicableRefactoring_CannotExecute#()V" />
+      <node id="6820996345401222280" at="45,0,53,9" concept="1" />
+      <node id="6820996345400829081" at="41,0,55,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="6820996345400829081" at="26,79,27,60" />
+      <scope id="6820996345400829081" at="31,101,32,36" />
+      <scope id="6820996345400829081" at="37,52,38,19" />
+      <scope id="6820996345400829081" at="26,0,29,0" />
+      <scope id="6820996345400829081" at="37,0,40,0">
+        <var name="owner" id="6820996345400829081" />
+      </scope>
+      <scope id="6820996345400829081" at="30,0,34,0" />
+      <scope id="6820996345401222282" at="46,55,52,66">
         <var name="context" id="6820996345401222291" />
         <var name="item" id="6820996345401222300" />
         <var name="refactoring" id="6820996345401222284" />
       </scope>
-      <scope id="6820996345401222281" at="33,0,41,0" />
-      <scope id="6820996345400829081" at="28,51,41,9">
+      <scope id="6820996345400829081" at="42,51,53,9">
         <var name="repository" id="6820996345400948503" />
       </scope>
-      <scope id="6820996345400829081" at="27,0,43,0" />
-      <unit id="6820996345401222281" at="32,52,41,7" name="jetbrains.mps.lang.editor.menus.extras.tests.RefactoringMenuItemBase_InapplicableRefactoring_CannotExecute_Test$1" />
-      <unit id="6820996345400829081" at="25,0,44,0" name="jetbrains.mps.lang.editor.menus.extras.tests.RefactoringMenuItemBase_InapplicableRefactoring_CannotExecute_Test$TestBody" />
-      <unit id="6820996345400829081" at="17,0,45,0" name="jetbrains.mps.lang.editor.menus.extras.tests.RefactoringMenuItemBase_InapplicableRefactoring_CannotExecute_Test" />
+      <scope id="6820996345400829081" at="41,0,55,0" />
+      <unit id="6820996345400829081" at="35,0,56,0" name="jetbrains.mps.lang.editor.menus.extras.tests.RefactoringMenuItemBase_InapplicableRefactoring_CannotExecute_Test$TestBody" />
+      <unit id="6820996345400829081" at="21,0,57,0" name="jetbrains.mps.lang.editor.menus.extras.tests.RefactoringMenuItemBase_InapplicableRefactoring_CannotExecute_Test" />
     </file>
   </root>
   <root nodeRef="r:a1e8c439-e997-416b-a5dc-df7c3fd41b00(jetbrains.mps.lang.editor.menus.extras.tests@tests)/6820996345401023607">
     <file name="RefactoringMenuItemBase_ApplicableRefactoring_CanExecute_Test.java">
-      <node id="6820996345401023607" at="20,96,21,122" concept="0" />
-      <node id="6820996345401023607" at="21,122,22,152" concept="0" />
-      <node id="6820996345401023607" at="28,51,29,53" concept="0" />
-      <node id="6820996345401023615" at="29,53,30,93" concept="2" />
-      <node id="6820996345401023623" at="30,93,31,0" concept="4" />
-      <node id="6820996345401207282" at="33,27,34,231" concept="2" />
-      <node id="6820996345401215475" at="34,231,35,0" concept="4" />
-      <node id="6820996345401205066" at="35,0,36,177" concept="2" />
-      <node id="6820996345401208654" at="36,177,37,0" concept="4" />
-      <node id="6820996345401023636" at="37,0,38,78" concept="2" />
-      <node id="6820996345401031043" at="38,78,39,67" concept="0" />
-      <node id="6820996345401023607" at="19,0,24,0" concept="1" trace="test_RefactoringMenuItemBase_ApplicableRefactoring_CanExecute#()V" />
-      <node id="6820996345401023625" at="33,0,41,0" concept="1" trace="run#()V" />
-      <node id="6820996345401023624" at="31,0,41,9" concept="0" />
-      <node id="6820996345401023607" at="27,0,43,0" concept="1" trace="testMethodImpl#()V" />
-      <scope id="6820996345401023607" at="20,96,22,152" />
-      <scope id="6820996345401023607" at="19,0,24,0" />
-      <scope id="6820996345401023626" at="33,27,39,67">
+      <node id="6820996345401023607" at="26,74,27,60" concept="8" />
+      <node id="6820996345401023607" at="31,96,32,36" concept="1" />
+      <node id="6820996345401023607" at="37,52,38,19" concept="8" />
+      <node id="6820996345401023607" at="42,51,43,53" concept="1" />
+      <node id="6820996345401023615" at="43,53,44,87" concept="3" />
+      <node id="6820996345401023623" at="44,87,45,0" concept="5" />
+      <node id="6820996345401207282" at="46,55,47,228" concept="3" />
+      <node id="6820996345401215475" at="47,228,48,0" concept="5" />
+      <node id="6820996345401205066" at="48,0,49,175" concept="3" />
+      <node id="6820996345401208654" at="49,175,50,0" concept="5" />
+      <node id="6820996345401023636" at="50,0,51,76" concept="3" />
+      <node id="6820996345401031043" at="51,76,52,65" concept="1" />
+      <node id="6820996345401023607" at="23,0,25,0" concept="6" trace="ourParametersCacheExtension" />
+      <node id="6820996345401023607" at="26,0,29,0" concept="0" trace="RefactoringMenuItemBase_ApplicableRefactoring_CanExecute_Test#()V" />
+      <node id="6820996345401023607" at="37,0,40,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="6820996345401023607" at="30,0,34,0" concept="2" trace="test_RefactoringMenuItemBase_ApplicableRefactoring_CanExecute#()V" />
+      <node id="6820996345401023624" at="45,0,53,9" concept="1" />
+      <node id="6820996345401023607" at="41,0,55,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="6820996345401023607" at="26,74,27,60" />
+      <scope id="6820996345401023607" at="31,96,32,36" />
+      <scope id="6820996345401023607" at="37,52,38,19" />
+      <scope id="6820996345401023607" at="26,0,29,0" />
+      <scope id="6820996345401023607" at="37,0,40,0">
+        <var name="owner" id="6820996345401023607" />
+      </scope>
+      <scope id="6820996345401023607" at="30,0,34,0" />
+      <scope id="6820996345401023626" at="46,55,52,65">
         <var name="context" id="6820996345401205067" />
         <var name="item" id="6820996345401023637" />
         <var name="refactoring" id="6820996345401207283" />
       </scope>
-      <scope id="6820996345401023625" at="33,0,41,0" />
-      <scope id="6820996345401023607" at="28,51,41,9">
+      <scope id="6820996345401023607" at="42,51,53,9">
         <var name="repository" id="6820996345401023616" />
       </scope>
-      <scope id="6820996345401023607" at="27,0,43,0" />
-      <unit id="6820996345401023625" at="32,52,41,7" name="jetbrains.mps.lang.editor.menus.extras.tests.RefactoringMenuItemBase_ApplicableRefactoring_CanExecute_Test$1" />
-      <unit id="6820996345401023607" at="25,0,44,0" name="jetbrains.mps.lang.editor.menus.extras.tests.RefactoringMenuItemBase_ApplicableRefactoring_CanExecute_Test$TestBody" />
-      <unit id="6820996345401023607" at="17,0,45,0" name="jetbrains.mps.lang.editor.menus.extras.tests.RefactoringMenuItemBase_ApplicableRefactoring_CanExecute_Test" />
+      <scope id="6820996345401023607" at="41,0,55,0" />
+      <unit id="6820996345401023607" at="35,0,56,0" name="jetbrains.mps.lang.editor.menus.extras.tests.RefactoringMenuItemBase_ApplicableRefactoring_CanExecute_Test$TestBody" />
+      <unit id="6820996345401023607" at="21,0,57,0" name="jetbrains.mps.lang.editor.menus.extras.tests.RefactoringMenuItemBase_ApplicableRefactoring_CanExecute_Test" />
     </file>
   </root>
   <root nodeRef="r:a1e8c439-e997-416b-a5dc-df7c3fd41b00(jetbrains.mps.lang.editor.menus.extras.tests@tests)/6820996345401210353">
     <file name="ActionLookupUtils.java">
-      <node id="6820996345401211174" at="14,106,15,77" concept="2" />
-      <node id="6820996345401213056" at="15,77,16,132" concept="3" />
-      <node id="6820996345401634745" at="18,98,19,73" concept="2" />
-      <node id="6820996345401641066" at="19,73,20,116" concept="3" />
-      <node id="6820996345401210443" at="14,0,18,0" concept="5" trace="getRefactoring#(Lorg/jetbrains/mps/openapi/module/SRepository;Lorg/jetbrains/mps/openapi/model/SNodeReference;)Ljetbrains/mps/refactoring/framework/IRefactoring;" />
-      <node id="6820996345401630806" at="18,0,22,0" concept="5" trace="getIntentionId#(Lorg/jetbrains/mps/openapi/module/SRepository;Lorg/jetbrains/mps/openapi/model/SNodeReference;)Ljava/lang/String;" />
-      <scope id="6820996345401210446" at="14,106,16,132">
+      <node id="6820996345401211174" at="15,99,16,90" concept="3" />
+      <node id="1161316260002561818" at="16,90,17,155" concept="4" />
+      <node id="6820996345401634745" at="19,98,20,73" concept="3" />
+      <node id="6820996345401641066" at="20,73,21,116" concept="4" />
+      <node id="6820996345401210443" at="15,0,19,0" concept="7" trace="getRefactoring#(Ljetbrains/mps/project/Project;Lorg/jetbrains/mps/openapi/model/SNodeReference;)Ljetbrains/mps/refactoring/framework/IRefactoring;" />
+      <node id="6820996345401630806" at="19,0,23,0" concept="7" trace="getIntentionId#(Lorg/jetbrains/mps/openapi/module/SRepository;Lorg/jetbrains/mps/openapi/model/SNodeReference;)Ljava/lang/String;" />
+      <scope id="6820996345401210446" at="15,99,17,155">
         <var name="refactoringNode" id="6820996345401211175" />
       </scope>
-      <scope id="6820996345401630809" at="18,98,20,116">
+      <scope id="6820996345401630809" at="19,98,21,116">
         <var name="intentionNode" id="6820996345401634748" />
       </scope>
-      <scope id="6820996345401210443" at="14,0,18,0">
+      <scope id="6820996345401210443" at="15,0,19,0">
+        <var name="project" id="6820996345401210474" />
         <var name="refactoringReference" id="6820996345401210504" />
-        <var name="repository" id="6820996345401210474" />
       </scope>
-      <scope id="6820996345401630806" at="18,0,22,0">
+      <scope id="6820996345401630806" at="19,0,23,0">
         <var name="intentionReference" id="6820996345401630909" />
         <var name="repository" id="6820996345401630856" />
       </scope>
-      <unit id="6820996345401210353" at="13,0,23,0" name="jetbrains.mps.lang.editor.menus.extras.tests.ActionLookupUtils" />
+      <unit id="6820996345401210353" at="14,0,24,0" name="jetbrains.mps.lang.editor.menus.extras.tests.ActionLookupUtils" />
     </file>
   </root>
   <root nodeRef="r:a1e8c439-e997-416b-a5dc-df7c3fd41b00(jetbrains.mps.lang.editor.menus.extras.tests@tests)/6820996345401622063">
     <file name="InapplicableIntention_NotIncludedInMenu_Test.java">
-      <node id="6820996345401622063" at="27,79,28,122" concept="0" />
-      <node id="6820996345401622063" at="28,122,29,135" concept="0" />
-      <node id="6820996345401622063" at="35,51,36,53" concept="0" />
-      <node id="8874023590560473074" at="36,53,37,217" concept="0" />
-      <node id="8874023590560472662" at="37,217,38,0" concept="4" />
-      <node id="6820996345401652555" at="38,0,39,93" concept="2" />
-      <node id="6820996345401655024" at="45,142,46,42" concept="3" />
-      <node id="6820996345401672814" at="48,12,49,0" concept="4" />
-      <node id="6820996345401622575" at="49,0,50,177" concept="2" />
-      <node id="6820996345401656667" at="50,177,51,0" concept="4" />
-      <node id="6820996345401657594" at="51,0,52,67" concept="0" />
-      <node id="6820996345401622063" at="26,0,31,0" concept="1" trace="test_InapplicableIntention_NotIncludedInMenu#()V" />
-      <node id="6820996345401628503" at="43,0,48,0" concept="1" trace="createItem#(Ljetbrains/mps/openapi/editor/menus/transformation/TransformationMenuContext;Ljetbrains/mps/intentions/IntentionExecutable;)Ljetbrains/mps/openapi/editor/menus/transformation/TransformationMenuItem;" />
-      <node id="6820996345401622806" at="41,27,48,12" concept="2" />
-      <node id="6820996345401675449" at="41,0,54,0" concept="1" trace="run#()V" />
-      <node id="6820996345401675447" at="39,93,54,9" concept="0" />
-      <node id="6820996345401622063" at="34,0,56,0" concept="1" trace="testMethodImpl#()V" />
-      <scope id="6820996345401628517" at="45,142,46,42" />
-      <scope id="6820996345401622063" at="27,79,29,135" />
-      <scope id="6820996345401622063" at="26,0,31,0" />
-      <scope id="6820996345401628503" at="43,0,48,0">
+      <node id="6820996345401622063" at="32,57,33,60" concept="8" />
+      <node id="6820996345401622063" at="37,79,38,36" concept="1" />
+      <node id="6820996345401622063" at="43,52,44,19" concept="8" />
+      <node id="6820996345401622063" at="48,51,49,53" concept="1" />
+      <node id="8874023590560473074" at="49,53,50,195" concept="1" />
+      <node id="8874023590560472662" at="50,195,51,0" concept="5" />
+      <node id="6820996345401652555" at="51,0,52,93" concept="3" />
+      <node id="6820996345401655024" at="57,140,58,40" concept="4" />
+      <node id="6820996345401672814" at="60,10,61,0" concept="5" />
+      <node id="6820996345401622575" at="61,0,62,175" concept="3" />
+      <node id="6820996345401656667" at="62,175,63,0" concept="5" />
+      <node id="6820996345401657594" at="63,0,64,65" concept="1" />
+      <node id="6820996345401622063" at="29,0,31,0" concept="6" trace="ourParametersCacheExtension" />
+      <node id="6820996345401622063" at="32,0,35,0" concept="0" trace="InapplicableIntention_NotIncludedInMenu_Test#()V" />
+      <node id="6820996345401622063" at="43,0,46,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="6820996345401622063" at="36,0,40,0" concept="2" trace="test_InapplicableIntention_NotIncludedInMenu#()V" />
+      <node id="6820996345401628503" at="55,0,60,0" concept="2" trace="createItem#(Ljetbrains/mps/openapi/editor/menus/transformation/TransformationMenuContext;Ljetbrains/mps/openapi/intentions/IntentionExecutable;)Ljetbrains/mps/openapi/editor/menus/transformation/TransformationMenuItem;" />
+      <node id="6820996345401622806" at="53,55,60,10" concept="3" />
+      <node id="6820996345401675447" at="52,93,65,9" concept="1" />
+      <node id="6820996345401622063" at="47,0,67,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="6820996345401622063" at="32,57,33,60" />
+      <scope id="6820996345401622063" at="37,79,38,36" />
+      <scope id="6820996345401622063" at="43,52,44,19" />
+      <scope id="6820996345401628517" at="57,140,58,40" />
+      <scope id="6820996345401622063" at="32,0,35,0" />
+      <scope id="6820996345401622063" at="43,0,46,0">
+        <var name="owner" id="6820996345401622063" />
+      </scope>
+      <scope id="6820996345401622063" at="36,0,40,0" />
+      <scope id="6820996345401628503" at="55,0,60,0">
         <var name="context" id="6820996345401628506" />
         <var name="executable" id="6820996345401628509" />
       </scope>
-      <scope id="6820996345401675451" at="41,27,52,67">
+      <scope id="6820996345401675451" at="53,55,64,65">
         <var name="context" id="6820996345401622576" />
         <var name="part" id="6820996345401622807" />
       </scope>
-      <scope id="6820996345401675449" at="41,0,54,0" />
-      <scope id="6820996345401622063" at="35,51,54,9">
+      <scope id="6820996345401622063" at="48,51,65,9">
         <var name="repository" id="6820996345401652556" />
       </scope>
-      <scope id="6820996345401622063" at="34,0,56,0" />
-      <unit id="6820996345401628361" at="42,43,48,11" name="jetbrains.mps.lang.editor.menus.extras.tests.InapplicableIntention_NotIncludedInMenu_Test$2" />
-      <unit id="6820996345401675449" at="40,52,54,7" name="jetbrains.mps.lang.editor.menus.extras.tests.InapplicableIntention_NotIncludedInMenu_Test$1" />
-      <unit id="6820996345401622063" at="32,0,57,0" name="jetbrains.mps.lang.editor.menus.extras.tests.InapplicableIntention_NotIncludedInMenu_Test$TestBody" />
-      <unit id="6820996345401622063" at="24,0,58,0" name="jetbrains.mps.lang.editor.menus.extras.tests.InapplicableIntention_NotIncludedInMenu_Test" />
+      <scope id="6820996345401622063" at="47,0,67,0" />
+      <unit id="6820996345401628361" at="54,45,60,9" name="jetbrains.mps.lang.editor.menus.extras.tests.InapplicableIntention_NotIncludedInMenu_Test$TestBody$1" />
+      <unit id="6820996345401622063" at="41,0,68,0" name="jetbrains.mps.lang.editor.menus.extras.tests.InapplicableIntention_NotIncludedInMenu_Test$TestBody" />
+      <unit id="6820996345401622063" at="27,0,69,0" name="jetbrains.mps.lang.editor.menus.extras.tests.InapplicableIntention_NotIncludedInMenu_Test" />
     </file>
   </root>
   <root nodeRef="r:a1e8c439-e997-416b-a5dc-df7c3fd41b00(jetbrains.mps.lang.editor.menus.extras.tests@tests)/8874023590560440629">
     <file name="ApplicableIntention_IncludedInMenu_Test.java">
-      <node id="8874023590560440629" at="27,74,28,122" concept="0" />
-      <node id="8874023590560440629" at="28,122,29,130" concept="0" />
-      <node id="8874023590560440629" at="35,51,36,53" concept="0" />
-      <node id="8874023590560469169" at="36,53,37,217" concept="0" />
-      <node id="8874023590560471128" at="37,217,38,0" concept="4" />
-      <node id="8874023590560440633" at="38,0,39,93" concept="2" />
-      <node id="8874023590560440662" at="45,142,46,42" concept="3" />
-      <node id="8874023590560440669" at="48,12,49,0" concept="4" />
-      <node id="8874023590560440670" at="49,0,50,177" concept="2" />
-      <node id="8874023590560440678" at="50,177,51,0" concept="4" />
-      <node id="8874023590560440679" at="51,0,52,67" concept="0" />
-      <node id="8874023590560440629" at="26,0,31,0" concept="1" trace="test_ApplicableIntention_IncludedInMenu#()V" />
-      <node id="8874023590560440651" at="43,0,48,0" concept="1" trace="createItem#(Ljetbrains/mps/openapi/editor/menus/transformation/TransformationMenuContext;Ljetbrains/mps/intentions/IntentionExecutable;)Ljetbrains/mps/openapi/editor/menus/transformation/TransformationMenuItem;" />
-      <node id="8874023590560440644" at="41,27,48,12" concept="2" />
-      <node id="8874023590560440642" at="41,0,54,0" concept="1" trace="run#()V" />
-      <node id="8874023590560440641" at="39,93,54,9" concept="0" />
-      <node id="8874023590560440629" at="34,0,56,0" concept="1" trace="testMethodImpl#()V" />
-      <scope id="8874023590560440661" at="45,142,46,42" />
-      <scope id="8874023590560440629" at="27,74,29,130" />
-      <scope id="8874023590560440629" at="26,0,31,0" />
-      <scope id="8874023590560440651" at="43,0,48,0">
+      <node id="8874023590560440629" at="32,52,33,60" concept="8" />
+      <node id="8874023590560440629" at="37,74,38,36" concept="1" />
+      <node id="8874023590560440629" at="43,52,44,19" concept="8" />
+      <node id="8874023590560440629" at="48,51,49,53" concept="1" />
+      <node id="8874023590560469169" at="49,53,50,195" concept="1" />
+      <node id="8874023590560471128" at="50,195,51,0" concept="5" />
+      <node id="8874023590560440633" at="51,0,52,93" concept="3" />
+      <node id="8874023590560440662" at="57,140,58,40" concept="4" />
+      <node id="8874023590560440669" at="60,10,61,0" concept="5" />
+      <node id="8874023590560440670" at="61,0,62,175" concept="3" />
+      <node id="8874023590560440678" at="62,175,63,0" concept="5" />
+      <node id="8874023590560440679" at="63,0,64,65" concept="1" />
+      <node id="8874023590560440629" at="29,0,31,0" concept="6" trace="ourParametersCacheExtension" />
+      <node id="8874023590560440629" at="32,0,35,0" concept="0" trace="ApplicableIntention_IncludedInMenu_Test#()V" />
+      <node id="8874023590560440629" at="43,0,46,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="8874023590560440629" at="36,0,40,0" concept="2" trace="test_ApplicableIntention_IncludedInMenu#()V" />
+      <node id="8874023590560440651" at="55,0,60,0" concept="2" trace="createItem#(Ljetbrains/mps/openapi/editor/menus/transformation/TransformationMenuContext;Ljetbrains/mps/openapi/intentions/IntentionExecutable;)Ljetbrains/mps/openapi/editor/menus/transformation/TransformationMenuItem;" />
+      <node id="8874023590560440644" at="53,55,60,10" concept="3" />
+      <node id="8874023590560440641" at="52,93,65,9" concept="1" />
+      <node id="8874023590560440629" at="47,0,67,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="8874023590560440629" at="32,52,33,60" />
+      <scope id="8874023590560440629" at="37,74,38,36" />
+      <scope id="8874023590560440629" at="43,52,44,19" />
+      <scope id="8874023590560440661" at="57,140,58,40" />
+      <scope id="8874023590560440629" at="32,0,35,0" />
+      <scope id="8874023590560440629" at="43,0,46,0">
+        <var name="owner" id="8874023590560440629" />
+      </scope>
+      <scope id="8874023590560440629" at="36,0,40,0" />
+      <scope id="8874023590560440651" at="55,0,60,0">
         <var name="context" id="8874023590560440654" />
         <var name="executable" id="8874023590560440657" />
       </scope>
-      <scope id="8874023590560440643" at="41,27,52,67">
+      <scope id="8874023590560440643" at="53,55,64,65">
         <var name="context" id="8874023590560440671" />
         <var name="part" id="8874023590560440645" />
       </scope>
-      <scope id="8874023590560440642" at="41,0,54,0" />
-      <scope id="8874023590560440629" at="35,51,54,9">
+      <scope id="8874023590560440629" at="48,51,65,9">
         <var name="repository" id="8874023590560440634" />
       </scope>
-      <scope id="8874023590560440629" at="34,0,56,0" />
-      <unit id="8874023590560440649" at="42,43,48,11" name="jetbrains.mps.lang.editor.menus.extras.tests.ApplicableIntention_IncludedInMenu_Test$2" />
-      <unit id="8874023590560440642" at="40,52,54,7" name="jetbrains.mps.lang.editor.menus.extras.tests.ApplicableIntention_IncludedInMenu_Test$1" />
-      <unit id="8874023590560440629" at="32,0,57,0" name="jetbrains.mps.lang.editor.menus.extras.tests.ApplicableIntention_IncludedInMenu_Test$TestBody" />
-      <unit id="8874023590560440629" at="24,0,58,0" name="jetbrains.mps.lang.editor.menus.extras.tests.ApplicableIntention_IncludedInMenu_Test" />
+      <scope id="8874023590560440629" at="47,0,67,0" />
+      <unit id="8874023590560440649" at="54,45,60,9" name="jetbrains.mps.lang.editor.menus.extras.tests.ApplicableIntention_IncludedInMenu_Test$TestBody$1" />
+      <unit id="8874023590560440629" at="41,0,68,0" name="jetbrains.mps.lang.editor.menus.extras.tests.ApplicableIntention_IncludedInMenu_Test$TestBody" />
+      <unit id="8874023590560440629" at="27,0,69,0" name="jetbrains.mps.lang.editor.menus.extras.tests.ApplicableIntention_IncludedInMenu_Test" />
     </file>
   </root>
   <root nodeRef="r:a1e8c439-e997-416b-a5dc-df7c3fd41b00(jetbrains.mps.lang.editor.menus.extras.tests@tests)/8874023590561015429">
     <file name="PluginActionMenuItemBase_InapplicableAction_CannotExecute_Test.java">
-      <node id="8874023590561015429" at="20,97,21,122" concept="0" />
-      <node id="8874023590561015429" at="21,122,22,153" concept="0" />
-      <node id="8874023590561015429" at="28,51,29,53" concept="0" />
-      <node id="8874023590561015433" at="29,53,30,87" concept="2" />
-      <node id="8874023590561015441" at="30,87,31,0" concept="4" />
-      <node id="8874023590561192144" at="36,49,37,30" concept="0" />
-      <node id="8874023590561193368" at="37,30,38,52" concept="0" />
-      <node id="8874023590561015451" at="42,12,43,0" concept="4" />
-      <node id="8874023590561015452" at="43,0,44,177" concept="2" />
-      <node id="8874023590561015460" at="44,177,45,0" concept="4" />
-      <node id="8874023590561015461" at="45,0,46,74" concept="2" />
-      <node id="8874023590561148366" at="46,74,47,68" concept="0" />
-      <node id="8874023590561190791" at="40,0,42,0" concept="1" trace="actionPerformed#(Lcom/intellij/openapi/actionSystem/AnActionEvent;)V" />
-      <node id="8874023590561015429" at="19,0,24,0" concept="1" trace="test_PluginActionMenuItemBase_InapplicableAction_CannotExecute#()V" />
-      <node id="8874023590561192133" at="35,0,40,0" concept="1" trace="update#(Lcom/intellij/openapi/actionSystem/AnActionEvent;)V" />
-      <node id="8874023590561189218" at="33,27,42,12" concept="2" />
-      <node id="8874023590561015443" at="33,0,49,0" concept="1" trace="run#()V" />
-      <node id="8874023590561015442" at="31,0,49,9" concept="0" />
-      <node id="8874023590561015429" at="27,0,51,0" concept="1" trace="testMethodImpl#()V" />
-      <scope id="8874023590561190797" at="40,59,40,59" />
-      <scope id="8874023590561015429" at="20,97,22,153" />
-      <scope id="8874023590561192140" at="36,49,38,52" />
-      <scope id="8874023590561190791" at="40,0,42,0">
+      <node id="8874023590561015429" at="26,75,27,60" concept="8" />
+      <node id="8874023590561015429" at="31,97,32,36" concept="1" />
+      <node id="8874023590561015429" at="37,52,38,19" concept="8" />
+      <node id="8874023590561015429" at="42,51,43,53" concept="1" />
+      <node id="8874023590561015433" at="43,53,44,87" concept="3" />
+      <node id="8874023590561015441" at="44,87,45,0" concept="5" />
+      <node id="8874023590561192144" at="49,47,50,28" concept="1" />
+      <node id="8874023590561193368" at="50,28,51,50" concept="1" />
+      <node id="8874023590561015451" at="55,10,56,0" concept="5" />
+      <node id="8874023590561015452" at="56,0,57,175" concept="3" />
+      <node id="8874023590561015460" at="57,175,58,0" concept="5" />
+      <node id="8874023590561015461" at="58,0,59,72" concept="3" />
+      <node id="8874023590561148366" at="59,72,60,66" concept="1" />
+      <node id="8874023590561015429" at="23,0,25,0" concept="6" trace="ourParametersCacheExtension" />
+      <node id="8874023590561190791" at="53,0,55,0" concept="2" trace="actionPerformed#(Lcom/intellij/openapi/actionSystem/AnActionEvent;)V" />
+      <node id="8874023590561015429" at="26,0,29,0" concept="0" trace="PluginActionMenuItemBase_InapplicableAction_CannotExecute_Test#()V" />
+      <node id="8874023590561015429" at="37,0,40,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="8874023590561015429" at="30,0,34,0" concept="2" trace="test_PluginActionMenuItemBase_InapplicableAction_CannotExecute#()V" />
+      <node id="8874023590561192133" at="48,0,53,0" concept="2" trace="update#(Lcom/intellij/openapi/actionSystem/AnActionEvent;)V" />
+      <node id="8874023590561189218" at="46,55,55,10" concept="3" />
+      <node id="8874023590561015442" at="45,0,61,9" concept="1" />
+      <node id="8874023590561015429" at="41,0,63,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="8874023590561190797" at="53,57,53,57" />
+      <scope id="8874023590561015429" at="26,75,27,60" />
+      <scope id="8874023590561015429" at="31,97,32,36" />
+      <scope id="8874023590561015429" at="37,52,38,19" />
+      <scope id="8874023590561192140" at="49,47,51,50" />
+      <scope id="8874023590561190791" at="53,0,55,0">
         <var name="p0" id="8874023590561190795" />
       </scope>
-      <scope id="8874023590561015429" at="19,0,24,0" />
-      <scope id="8874023590561192133" at="35,0,40,0">
+      <scope id="8874023590561015429" at="26,0,29,0" />
+      <scope id="8874023590561015429" at="37,0,40,0">
+        <var name="owner" id="8874023590561015429" />
+      </scope>
+      <scope id="8874023590561015429" at="30,0,34,0" />
+      <scope id="8874023590561192133" at="48,0,53,0">
         <var name="e" id="8874023590561192137" />
       </scope>
-      <scope id="8874023590561015444" at="33,27,47,68">
+      <scope id="8874023590561015444" at="46,55,60,66">
         <var name="action" id="8874023590561189219" />
         <var name="context" id="8874023590561015453" />
         <var name="item" id="8874023590561015462" />
       </scope>
-      <scope id="8874023590561015443" at="33,0,49,0" />
-      <scope id="8874023590561015429" at="28,51,49,9">
+      <scope id="8874023590561015429" at="42,51,61,9">
         <var name="repository" id="8874023590561015434" />
       </scope>
-      <scope id="8874023590561015429" at="27,0,51,0" />
-      <unit id="8874023590561190788" at="34,32,42,11" name="jetbrains.mps.lang.editor.menus.extras.tests.PluginActionMenuItemBase_InapplicableAction_CannotExecute_Test$2" />
-      <unit id="8874023590561015443" at="32,52,49,7" name="jetbrains.mps.lang.editor.menus.extras.tests.PluginActionMenuItemBase_InapplicableAction_CannotExecute_Test$1" />
-      <unit id="8874023590561015429" at="25,0,52,0" name="jetbrains.mps.lang.editor.menus.extras.tests.PluginActionMenuItemBase_InapplicableAction_CannotExecute_Test$TestBody" />
-      <unit id="8874023590561015429" at="17,0,53,0" name="jetbrains.mps.lang.editor.menus.extras.tests.PluginActionMenuItemBase_InapplicableAction_CannotExecute_Test" />
+      <scope id="8874023590561015429" at="41,0,63,0" />
+      <unit id="8874023590561190788" at="47,30,55,9" name="jetbrains.mps.lang.editor.menus.extras.tests.PluginActionMenuItemBase_InapplicableAction_CannotExecute_Test$TestBody$1" />
+      <unit id="8874023590561015429" at="35,0,64,0" name="jetbrains.mps.lang.editor.menus.extras.tests.PluginActionMenuItemBase_InapplicableAction_CannotExecute_Test$TestBody" />
+      <unit id="8874023590561015429" at="21,0,65,0" name="jetbrains.mps.lang.editor.menus.extras.tests.PluginActionMenuItemBase_InapplicableAction_CannotExecute_Test" />
     </file>
   </root>
 </debug-info>

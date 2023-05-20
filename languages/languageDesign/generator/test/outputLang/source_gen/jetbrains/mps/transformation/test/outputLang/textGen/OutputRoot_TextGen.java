@@ -6,28 +6,40 @@ import jetbrains.mps.text.rt.TextGenDescriptorBase;
 import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.mps.openapi.language.SProperty;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 
 public class OutputRoot_TextGen extends TextGenDescriptorBase {
   @Override
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
-    tgs.append((SPropertyOperations.getString(ctx.getPrimaryInput(), MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name")) == null ? "<no name>" : SPropertyOperations.getString(ctx.getPrimaryInput(), MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name"))));
+    tgs.append((SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.name$MnvL) == null ? "<no name>" : SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.name$MnvL)));
     tgs.append(" : ");
-    tgs.append((SPropertyOperations.getString(ctx.getPrimaryInput(), MetaAdapterFactory.getProperty(0x157a9668bf58417bL, 0x893e53d86388dc56L, 0x116455d922fL, 0x116455e8bf1L, "text")) == null ? "<no text>" : SPropertyOperations.getString(ctx.getPrimaryInput(), MetaAdapterFactory.getProperty(0x157a9668bf58417bL, 0x893e53d86388dc56L, 0x116455d922fL, 0x116455e8bf1L, "text"))));
-    if ((SLinkOperations.getTarget(ctx.getPrimaryInput(), MetaAdapterFactory.getContainmentLink(0x157a9668bf58417bL, 0x893e53d86388dc56L, 0x116455d922fL, 0x11bc24e708cL, "specialChild")) != null)) {
+    tgs.append((SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.text$vXJJ) == null ? "<no text>" : SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.text$vXJJ)));
+    if ((SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.specialChild$XEy$) != null)) {
       tgs.newLine();
-      tgs.appendNode(SLinkOperations.getTarget(ctx.getPrimaryInput(), MetaAdapterFactory.getContainmentLink(0x157a9668bf58417bL, 0x893e53d86388dc56L, 0x116455d922fL, 0x11bc24e708cL, "specialChild")));
+      tgs.appendNode(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.specialChild$XEy$));
       tgs.newLine();
     }
-    for (SNode output : SLinkOperations.getChildren(ctx.getPrimaryInput(), MetaAdapterFactory.getContainmentLink(0x157a9668bf58417bL, 0x893e53d86388dc56L, 0x116455d922fL, 0x11645a94e4aL, "outputChild"))) {
+    for (SNode output : SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.outputChild$ueSw)) {
       tgs.newLine();
       tgs.newLine();
       ctx.getBuffer().area().increaseIndent();
       tgs.appendNode(output);
       ctx.getBuffer().area().decreaseIndent();
     }
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+    /*package*/ static final SProperty text$vXJJ = MetaAdapterFactory.getProperty(0x157a9668bf58417bL, 0x893e53d86388dc56L, 0x116455d922fL, 0x116455e8bf1L, "text");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink specialChild$XEy$ = MetaAdapterFactory.getContainmentLink(0x157a9668bf58417bL, 0x893e53d86388dc56L, 0x116455d922fL, 0x11bc24e708cL, "specialChild");
+    /*package*/ static final SContainmentLink outputChild$ueSw = MetaAdapterFactory.getContainmentLink(0x157a9668bf58417bL, 0x893e53d86388dc56L, 0x116455d922fL, 0x11645a94e4aL, "outputChild");
   }
 }

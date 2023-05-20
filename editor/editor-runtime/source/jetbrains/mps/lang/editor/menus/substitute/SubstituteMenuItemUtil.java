@@ -29,19 +29,17 @@ public class SubstituteMenuItemUtil {
   }
 
   public static SNode getReferentNode(SubstituteMenuItem item) {
-    final SmartReferenceSubstituteMenuItem smartItem = getSmartItem(item);
-    return smartItem == null ? null : smartItem.getReferentNode();
-  }
-
-  public static String getVisibleMatchingText(SubstituteMenuItem item) {
-    final SmartReferenceSubstituteMenuItem smartItem = getSmartItem(item);
-    return smartItem == null ? null : smartItem.getVisibleMatchingText();
-  }
-
-  private static SmartReferenceSubstituteMenuItem getSmartItem(SubstituteMenuItem item) {
     final SubstituteMenuItem wrappedItem = getWrappedItem(item);
-    if (wrappedItem instanceof SmartReferenceSubstituteMenuItem) {
-      return ((SmartReferenceSubstituteMenuItem) wrappedItem);
+    if (wrappedItem instanceof ReferenceScopeSubstituteMenuItem) {
+      return ((ReferenceScopeSubstituteMenuItem) wrappedItem).getReferent();
+    }
+    return null;
+  }
+
+  public static String getVisibleMatchingText(SubstituteMenuItem item, String pattern) {
+    final SubstituteMenuItem wrappedItem = getWrappedItem(item);
+    if (wrappedItem instanceof ReferenceScopeSubstituteMenuItem) {
+      return ((ReferenceScopeSubstituteMenuItem) wrappedItem).getVisibleMatchingText(pattern);
     }
     return null;
   }

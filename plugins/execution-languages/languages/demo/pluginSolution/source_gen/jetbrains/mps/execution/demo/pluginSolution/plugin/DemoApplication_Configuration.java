@@ -4,24 +4,22 @@ package jetbrains.mps.execution.demo.pluginSolution.plugin;
 
 import jetbrains.mps.execution.api.configurations.BaseMpsRunConfiguration;
 import jetbrains.mps.execution.api.settings.IPersistentConfiguration;
-import org.jetbrains.annotations.NotNull;
+import jetbrains.mps.project.structure.modules.Copyable;
 import jetbrains.mps.execution.lib.NodeByConcept_Configuration;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.baseLanguage.closures.runtime._FunctionTypes;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import jetbrains.mps.execution.api.settings.PersistentConfigurationContext;
 import com.intellij.execution.configurations.RuntimeConfigurationException;
 import org.jdom.Element;
 import com.intellij.openapi.util.WriteExternalException;
-import com.intellij.util.xmlb.XmlSerializer;
-import org.apache.log4j.Logger;
-import org.apache.log4j.LogManager;
 import com.intellij.openapi.util.InvalidDataException;
-import org.apache.log4j.Level;
 import com.intellij.openapi.project.Project;
+import com.intellij.execution.configurations.ConfigurationFactory;
 import org.jetbrains.annotations.Nullable;
 import com.intellij.execution.configurations.RunProfileState;
+import org.jetbrains.annotations.NotNull;
 import com.intellij.execution.Executor;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ExecutionException;
@@ -30,76 +28,71 @@ import com.intellij.execution.configurations.ConfigurationPerRunnerSettings;
 import com.intellij.execution.runners.ProgramRunner;
 import com.intellij.execution.configurations.ConfigurationInfoProvider;
 import jetbrains.mps.execution.api.settings.SettingsEditorEx;
+import jetbrains.mps.ide.project.ProjectHelper;
+import com.intellij.openapi.util.Key;
+import com.intellij.execution.BeforeRunTask;
+import jetbrains.mps.execution.configurations.pluginSolution.plugin.MakeNodePointers_BeforeTask;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import java.util.ArrayList;
 import org.jetbrains.mps.openapi.model.SNodeReference;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SProperty;
 
-public class DemoApplication_Configuration extends BaseMpsRunConfiguration implements IPersistentConfiguration {
-  @NotNull
-  private DemoApplication_Configuration.MyState myState = new DemoApplication_Configuration.MyState();
-  private NodeByConcept_Configuration myNode = new NodeByConcept_Configuration(MetaAdapterFactory.getConcept(0xe6081818930c4926L, 0xbdef3537bcc59087L, 0x446739e63be33684L, "jetbrains.mps.execution.demo.structure.SomeConcept"), new _FunctionTypes._return_P1_E0<Boolean, SNode>() {
+public final class DemoApplication_Configuration extends BaseMpsRunConfiguration implements IPersistentConfiguration, Copyable<DemoApplication_Configuration> {
+  private NodeByConcept_Configuration myNode = new NodeByConcept_Configuration(CONCEPTS.SomeConcept$LS, new _FunctionTypes._return_P1_E0<Boolean, SNode>() {
     public Boolean invoke(SNode node) {
-      return SPropertyOperations.getBoolean(SNodeOperations.cast(node, MetaAdapterFactory.getConcept(0xe6081818930c4926L, 0xbdef3537bcc59087L, 0x446739e63be33684L, "jetbrains.mps.execution.demo.structure.SomeConcept")), MetaAdapterFactory.getProperty(0xe6081818930c4926L, 0xbdef3537bcc59087L, 0x446739e63be33684L, 0x446739e63be7cbc4L, "valid"));
+      return SPropertyOperations.getBoolean(SNodeOperations.cast(node, CONCEPTS.SomeConcept$LS), PROPS.valid$x_$w);
     }
   });
-  public void checkConfiguration() throws RuntimeConfigurationException {
-    this.getNode().checkConfiguration();
+
+  @Override
+  public void checkConfiguration(final PersistentConfigurationContext context) throws RuntimeConfigurationException {
+    this.getNode().checkConfiguration(context);
   }
   @Override
   public void writeExternal(Element element) throws WriteExternalException {
-    element.addContent(XmlSerializer.serialize(myState));
     {
       Element fieldElement = new Element("node");
       myNode.writeExternal(fieldElement);
       element.addContent(fieldElement);
     }
   }
-  protected static Logger LOG = LogManager.getLogger(DemoApplication_Configuration.class);
+
   @Override
   public void readExternal(Element element) throws InvalidDataException {
     if (element == null) {
       throw new InvalidDataException("Cant read " + this + ": element is null.");
     }
-    XmlSerializer.deserializeInto(myState, (Element) element.getChildren().get(0));
-    {
-      Element fieldElement = element.getChild("node");
-      if (fieldElement != null) {
-        myNode.readExternal(fieldElement);
-      } else {
-        if (LOG.isDebugEnabled()) {
-          LOG.debug("Element " + "node" + " in " + this.getClass().getName() + " was null.");
-        }
-      }
+    if (element.getChild("node") != null) {
+      myNode.readExternal(element.getChild("node"));
     }
   }
+
+  @Override
+  @Deprecated
+  public DemoApplication_Configuration clone() {
+    return copy();
+  }
+
+  @Override
+  public DemoApplication_Configuration copy() {
+    DemoApplication_Configuration cloneTemplate = createCloneTemplate();
+    // beware, PersistenceConfiguration.this of newly created MyState instance would be the same as
+    // the value of myState, and != clone as regular Java passer-by would expect.
+    cloneTemplate.myNode = ((Copyable<NodeByConcept_Configuration>) myNode).copy();
+    return cloneTemplate;
+  }
+
   public NodeByConcept_Configuration getNode() {
     return myNode;
   }
-  @Override
-  public DemoApplication_Configuration clone() {
-    DemoApplication_Configuration clone = null;
-    try {
-      clone = createCloneTemplate();
-      clone.myState = (DemoApplication_Configuration.MyState) myState.clone();
-      clone.myNode = (NodeByConcept_Configuration) myNode.clone();
-      return clone;
-    } catch (CloneNotSupportedException ex) {
-      if (LOG.isEnabledFor(Level.ERROR)) {
-        LOG.error("", ex);
-      }
-    }
-    return clone;
+
+  public void setNode(NodeByConcept_Configuration value) {
+    myNode = value;
   }
-  public class MyState {
-    public MyState() {
-    }
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-      DemoApplication_Configuration.MyState state = new DemoApplication_Configuration.MyState();
-      return state;
-    }
-  }
-  public DemoApplication_Configuration(Project project, DemoApplication_Configuration_Factory factory, String name) {
+
+  public DemoApplication_Configuration(Project project, ConfigurationFactory factory, String name) {
     super(project, factory, name);
   }
   @Nullable
@@ -123,10 +116,32 @@ public class DemoApplication_Configuration extends BaseMpsRunConfiguration imple
     return new DemoApplication_Configuration_Editor(myNode.getEditor());
   }
   @Override
+  public void checkConfiguration() throws RuntimeConfigurationException {
+    final jetbrains.mps.project.Project mpsProject = ProjectHelper.fromIdeaProject(getProject());
+    checkConfiguration(new PersistentConfigurationContext() {
+      public jetbrains.mps.project.Project getProject() {
+        return mpsProject;
+      }
+    });
+  }
+  @Override
   public boolean canExecute(String executorId) {
     return DemoApplication_Configuration_RunProfileState.canExecute(executorId);
   }
+  public static void configureBeforeTaskDefaults(Key<? extends BeforeRunTask> providerID, BeforeRunTask task) {
+    if (providerID == MakeNodePointers_BeforeTask.KEY) {
+      task.setEnabled(true);
+    }
+  }
   public Object[] createMakeNodePointersTask() {
-    return new Object[]{ListSequence.fromListAndArray(new ArrayList<SNodeReference>(), this.getNode().getNodePointer())};
+    return new Object[]{ListSequence.fromListAndArray(new ArrayList<SNodeReference>(), this.getNode().getNodeRef())};
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept SomeConcept$LS = MetaAdapterFactory.getConcept(0xe6081818930c4926L, 0xbdef3537bcc59087L, 0x446739e63be33684L, "jetbrains.mps.execution.demo.structure.SomeConcept");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty valid$x_$w = MetaAdapterFactory.getProperty(0xe6081818930c4926L, 0xbdef3537bcc59087L, 0x446739e63be33684L, 0x446739e63be7cbc4L, "valid");
   }
 }

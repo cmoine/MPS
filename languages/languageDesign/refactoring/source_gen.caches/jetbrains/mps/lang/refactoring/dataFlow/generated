@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="bpopizyiji81hlwqu29kgc6v8ujmrjn" />
+<product version="3" modelHash="2hqfteduzpgz4d74t0iyh07qjvxmzsx">
+  <files names="AbstractMoveExpression_DataFlow.java:CreateRefactoringContext_DataFlow.java:DataFlowAspectDescriptorImpl.java:ExecuteRefactoringStatement_DataFlow.java:IsRefactoringApplicable_DataFlow.java:MoveNodeToNodeExpression_DataFlow.java" />
+</product>
 

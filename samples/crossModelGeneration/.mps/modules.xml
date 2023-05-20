@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MPSProject">
+    <projectModules>
+      <modulePath path="$PROJECT_DIR$/devkits/EntitiesKit/EntitiesKit.devkit" folder="" />
+      <modulePath path="$PROJECT_DIR$/languages/jetbrains.mps.samples.Entities/jetbrains.mps.samples.Entities.mpl" folder="" />
+      <modulePath path="$PROJECT_DIR$/languages/jetbrains.mps.samples.Entities/sandbox/jetbrains.mps.samples.Entities.sandbox.msd" folder="" />
+      <modulePath path="$PROJECT_DIR$/solutions/Plan/Plan.msd" folder="" />
+    </projectModules>
+  </component>
+</project>

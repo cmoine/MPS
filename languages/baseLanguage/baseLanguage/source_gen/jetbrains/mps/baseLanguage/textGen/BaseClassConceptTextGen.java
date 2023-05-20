@@ -7,10 +7,7 @@ import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
 import jetbrains.mps.internal.collections.runtime.Sequence;
 import jetbrains.mps.baseLanguage.behavior.Classifier__BehaviorDescriptor;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.baseLanguage.behavior.ClassifierMember__BehaviorDescriptor;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 
 public abstract class BaseClassConceptTextGen {
   public static void membersWithBrackets(SNode classifier, boolean newLineOnEmptyMembers, final TextGenContext ctx) {
@@ -29,53 +26,17 @@ public abstract class BaseClassConceptTextGen {
   }
   public static void members(SNode classifier, final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
-    // just for first element 
+    // just for first element
     boolean isWrappedElementBefore = true;
     SNode lastMember = Sequence.fromIterable(Classifier__BehaviorDescriptor.members_id1hodSy8nQmC.invoke(classifier)).last();
+    // FIXME can't use members child as there are still uses of deprecated containment roles (e.g. Classifier.method)
     for (SNode member : Classifier__BehaviorDescriptor.members_id1hodSy8nQmC.invoke(classifier)) {
-      if (SNodeOperations.isInstanceOf(member, MetaAdapterFactory.getInterfaceConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x112574373bdL, "jetbrains.mps.baseLanguage.structure.ClassifierMember"))) {
-        boolean needsLineBefore = (boolean) ClassifierMember__BehaviorDescriptor.needsEmptyLineBefore_idzB21h1tQit.invoke(SNodeOperations.cast(member, MetaAdapterFactory.getInterfaceConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x112574373bdL, "jetbrains.mps.baseLanguage.structure.ClassifierMember")));
-        boolean needsLineAfter = (boolean) ClassifierMember__BehaviorDescriptor.needsEmptyLineAfter_idzB21h1tQNm.invoke(SNodeOperations.cast(member, MetaAdapterFactory.getInterfaceConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x112574373bdL, "jetbrains.mps.baseLanguage.structure.ClassifierMember")));
-        BaseLanguageTextGen.newLine(needsLineBefore && !(isWrappedElementBefore), ctx);
-        tgs.appendNode(member);
-        BaseLanguageTextGen.newLine(needsLineAfter && !((lastMember == member)), ctx);
-        isWrappedElementBefore = needsLineAfter;
-      } else {
-        tgs.appendNode(member);
-        isWrappedElementBefore = false;
-      }
+      boolean needsLineBefore = (boolean) ClassifierMember__BehaviorDescriptor.needsEmptyLineBefore_idzB21h1tQit.invoke(member);
+      boolean needsLineAfter = (boolean) ClassifierMember__BehaviorDescriptor.needsEmptyLineAfter_idzB21h1tQNm.invoke(member);
+      BaseLanguageTextGen.newLine(needsLineBefore && !(isWrappedElementBefore), ctx);
+      tgs.appendNode(member);
+      BaseLanguageTextGen.newLine(needsLineAfter && !(lastMember == member), ctx);
+      isWrappedElementBefore = needsLineAfter;
     }
-    if ((SLinkOperations.getTarget(SNodeOperations.as(classifier, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c108ca66L, "jetbrains.mps.baseLanguage.structure.ClassConcept")), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c108ca66L, 0x110ca5f7c5aL, "staticInitializer")) != null)) {
-      tgs.indent();
-      tgs.append("static {");
-      ctx.getBuffer().area().increaseIndent();
-      tgs.appendNode(SLinkOperations.getTarget(SNodeOperations.cast(classifier, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c108ca66L, "jetbrains.mps.baseLanguage.structure.ClassConcept")), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c108ca66L, 0x110ca5f7c5aL, "staticInitializer")));
-      tgs.newLine();
-      ctx.getBuffer().area().decreaseIndent();
-      tgs.indent();
-      tgs.append("}");
-      tgs.newLine();
-    }
-  }
-  public static void body(SNode concept, final TextGenContext ctx) {
-    final TextGenSupport tgs = new TextGenSupport(ctx);
-    BaseClassConceptTextGen.members(concept, ctx);
-  }
-  public static void innerClassifiers(SNode concept, final TextGenContext ctx) {
-    final TextGenSupport tgs = new TextGenSupport(ctx);
-    SNode last = Sequence.fromIterable(Classifier__BehaviorDescriptor.nestedClassifiers_id4_LVZ3pBjGQ.invoke(concept)).last();
-    for (SNode classifier : Classifier__BehaviorDescriptor.nestedClassifiers_id4_LVZ3pBjGQ.invoke(concept)) {
-      tgs.appendNode(classifier);
-      if (!(classifier.equals(last))) {
-        tgs.newLine();
-      }
-    }
-  }
-  public static void collection(Iterable<SNode> nodes, final TextGenContext ctx) {
-    final TextGenSupport tgs = new TextGenSupport(ctx);
-    for (SNode item : nodes) {
-      tgs.appendNode(item);
-    }
-    tgs.newLine();
   }
 }

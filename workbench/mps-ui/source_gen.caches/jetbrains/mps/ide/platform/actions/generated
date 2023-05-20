@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="5e60xw135p5np6t1otspcc2psf2rfy4" />
+<product version="3" modelHash="df2quc3g0absds42fn0t64cbp9pgq0w">
+  <files names="AnalyzeDependenciesViewTool.java:AnalyzeDependencies_Action.java:DependenciesUtil.java:GoToNodeById_Action.java:MPSStackTraceFilter.java:PlatformActions.xml:_Adapters.java" />
+</product>
 

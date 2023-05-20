@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <root nodeRef="r:cbd0efad-7a02-426e-b88d-b62012733b67(jetbrains.mps.samples.ProjectCode.persistence)/4174052498198053419">
+    <file name="PersistenceConfiguration.xml">
+      <unit id="4174052498198053419" at="1,0,12,11" name="jetbrains.mps.samples.ProjectCode.persistence.PersistenceConfiguration" />
+    </file>
+  </root>
+  <root nodeRef="r:cbd0efad-7a02-426e-b88d-b62012733b67(jetbrains.mps.samples.ProjectCode.persistence)/4174052498198053618">
+    <file name="User.java">
+      <node id="4174052498198053666" at="7,0,8,0" concept="2" trace="name" />
+      <node id="4174052498198054661" at="8,0,9,0" concept="2" trace="age" />
+      <node id="4174052498198053736" at="10,37,11,21" concept="1" />
+      <node id="4174052498198055082" at="11,21,12,19" concept="1" />
+      <node id="4174052498198054113" at="15,27,16,16" concept="4" />
+      <node id="4174052498198059232" at="19,23,20,15" concept="4" />
+      <node id="4174052498198054109" at="15,0,18,0" concept="3" trace="getName#()Ljava/lang/String;" />
+      <node id="4174052498198059228" at="19,0,22,0" concept="3" trace="getAge#()I" />
+      <node id="4174052498198053728" at="10,0,14,0" concept="0" trace="User#(Ljava/lang/String;I)V" />
+      <scope id="4174052498198054112" at="15,27,16,16" />
+      <scope id="4174052498198059231" at="19,23,20,15" />
+      <scope id="4174052498198053732" at="10,37,12,19" />
+      <scope id="4174052498198054109" at="15,0,18,0" />
+      <scope id="4174052498198059228" at="19,0,22,0" />
+      <scope id="4174052498198053728" at="10,0,14,0">
+        <var name="age" id="4174052498198054879" />
+        <var name="name" id="4174052498198053735" />
+      </scope>
+      <unit id="4174052498198053618" at="6,0,23,0" name="jetbrains.mps.samples.ProjectCode.persistence.User" />
+    </file>
+  </root>
+</debug-info>
+

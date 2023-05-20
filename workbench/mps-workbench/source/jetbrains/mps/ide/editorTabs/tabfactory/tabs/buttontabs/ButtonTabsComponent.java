@@ -34,36 +34,28 @@ import org.jetbrains.mps.openapi.model.SNodeReference;
 
 import javax.swing.JComponent;
 import java.awt.Component;
-import java.awt.event.HierarchyEvent;
-import java.awt.event.HierarchyListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
-public class ButtonTabsComponent extends BaseTabsComponent {
-  private List<ButtonEditorTab> myRealTabs = new ArrayList<>();
+public class ButtonTabsComponent extends BaseTabsComponent<ButtonEditorTab> {
+  private final List<ButtonEditorTab> myRealTabs = new ArrayList<>();
   private ActionToolbar myToolbar = null;
 
   public ButtonTabsComponent(SNodeReference baseNode, Set<RelationDescriptor> possibleTabs, JComponent editor, NodeChangeCallback callback, boolean showGrayed,
       Project project) {
     super(baseNode, possibleTabs, editor, callback, showGrayed, null, project);
 
-    getComponent().addHierarchyListener(new HierarchyListener() {
-      @Override
-      public void hierarchyChanged(HierarchyEvent e) {
-        getProject().getModelAccess().runReadAction(new Runnable() {
-          @Override
-          public void run() {
-            if (isDisposed()) {
-              return;
-            }
-            updateTabs();
+    getComponent().addHierarchyListener(
+        hierarchyEvent -> getProject().getModelAccess().runReadAction(() -> {
+          if (isDisposed() || !getComponent().isDisplayable()) {
+            return;
           }
-        });
-      }
-    });
+          updateTabs();
+        }));
   }
 
   public Component getComponentForTabIndex(int index) {
@@ -84,7 +76,7 @@ public class ButtonTabsComponent extends BaseTabsComponent {
   @Override
   public RelationDescriptor getCurrentTabAspect() {
     SNodeReference currentAspect = getEditedNode();
-    assert currentAspect != null;
+    if (currentAspect == null) return null;
 
     for (ButtonEditorTab bet : myRealTabs) {
       if (bet.isEditingTabFor(getEditedNode())) {
@@ -97,22 +89,30 @@ public class ButtonTabsComponent extends BaseTabsComponent {
 
   @Override
   public void updateTabs() {
-    if (isDisposed()) {
+    // Emulate old behaviour - always update
+    final SNodeReference reference = getEditedNode() != null ? getEditedNode() : myBaseNodeRef;
+    updateTabs(Collections.singletonList(reference));
+  }
+
+  @Override
+  @NotNull
+  protected Stream<ButtonEditorTab> getRealTabs() {
+    return myRealTabs.stream();
+  }
+
+  @Override
+  public void updateTabs(Collection<SNodeReference> changedRoots) {
+    if (!needUpdateTabs(changedRoots)) {
       return;
     }
 
     if (getEditedNode() != null && getEditedNode().resolve(getProject().getRepository()) == null) {
-      editNode(myBaseNode);
+      editNode(myBaseNodeRef);
     }
 
     myRealTabs.clear();
 
-    final NodeChangeCallback callback = new NodeChangeCallback() {
-      @Override
-      public void changeNode(SNodeReference newNode) {
-        editNode(newNode);
-      }
-    };
+    final NodeChangeCallback callback = newNode -> executeNavigation(() -> editNode(newNode));
     TabEditorLayout newContent = updateDocumentsAndNodes();
     for (RelationDescriptor tabDescriptor : myPossibleTabs) {
       if (newContent.covers(tabDescriptor)) {
@@ -132,6 +132,7 @@ public class ButtonTabsComponent extends BaseTabsComponent {
       removeContent(myToolbar.getComponent());
     }
     ActionToolbar actionToolbar = ActionManager.getInstance().createActionToolbar(ActionPlaces.EDITOR_TOOLBAR, group, true);
+    actionToolbar.setTargetComponent(null);
     actionToolbar.setLayoutPolicy(ActionToolbar.WRAP_LAYOUT_POLICY);
     myToolbar = actionToolbar;
     setContent(myToolbar.getComponent());
@@ -145,7 +146,7 @@ public class ButtonTabsComponent extends BaseTabsComponent {
           break;
         }
       }
-      editNode(isTabExists ? getEditedNode() : myBaseNode);
+      editNode(isTabExists ? getEditedNode() : myBaseNodeRef);
     }
   }
 

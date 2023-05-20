@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,25 +16,30 @@
 package jetbrains.mps.library.contributor;
 
 import jetbrains.mps.util.PathManager;
-import jetbrains.mps.vfs.openapi.FileSystem;
+import jetbrains.mps.vfs.IFileSystem;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Contributes bootstrap modules -- MPS core
+ * FIXME it's a regular loading of an MPS distribution, has nothing to do with 'bootstrapping' of MPS itself.
+ *       Perhaps, the name is due to PathManager.getBootstrapPaths() which gives access to deployed modules under "lib/".
+ *       These jars are likely (need to check) loaded by IDEA platform and here we just need to expose them as MPS modules.
+ * FIXME we no longer host modules in jars under lib/, shall we change the logic here?
  */
 public final class BootstrapLibraryContributor implements LibraryContributor {
-  private final FileSystem myFileSystem;
+  private final IFileSystem myFileSystem;
 
-  public BootstrapLibraryContributor(FileSystem fileSystem) {
+  public BootstrapLibraryContributor(IFileSystem fileSystem) {
     myFileSystem = fileSystem;
   }
 
   @Override
   public Set<LibDescriptor> getPaths() {
-    Set<LibDescriptor> res = new HashSet<LibDescriptor>();
+    Set<LibDescriptor> res = new HashSet<>();
     for (String path : PathManager.getBootstrapPaths()) {
       res.add(createLibDescriptor(path));
     }
@@ -44,7 +49,8 @@ public final class BootstrapLibraryContributor implements LibraryContributor {
 
   @NotNull
   private LibDescriptor createLibDescriptor(String path) {
-    return new LibDescriptor(myFileSystem.getFile(path));
+    // with hiddenLanguages() === true, boolean in LibDescriptor is irrelevant, see LibraryInitializer code
+    return new LibDescriptor(myFileSystem.getFile(new File(path)), null, "MPS Core");
   }
 
 

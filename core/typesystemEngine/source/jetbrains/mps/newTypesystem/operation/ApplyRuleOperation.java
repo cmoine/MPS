@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package jetbrains.mps.newTypesystem.operation;
 import jetbrains.mps.lang.typesystem.runtime.ICheckingRule_Runtime;
 import jetbrains.mps.lang.typesystem.runtime.IsApplicableStatus;
 import jetbrains.mps.newTypesystem.state.State;
+import jetbrains.mps.smodel.SNodeUtil;
 import org.jetbrains.mps.openapi.model.SNode;
 
 public class ApplyRuleOperation extends AbstractOperation {
@@ -49,7 +50,8 @@ public class ApplyRuleOperation extends AbstractOperation {
 
   @Override
   public String getPresentation() {
-    return myRule.getClass().getSimpleName().replace("_InferenceRule", "") + " applied to node \"" + myNode+"\"";
+    final String ruleName = myRule.getClass().getSimpleName().replace("_InferenceRule", "");
+    return  String.format("%s applied to node \"%s\"", ruleName, SNodeUtil.getPresentation(myNode));
   }
 
   @Override

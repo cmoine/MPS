@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-d92jxehmmy6i38mfm1kj734q7xqfjvu" />
+<product version="3" modelHash="7uu5wx1a6n1zvov8taed8zqxymcych">
+  <files names="Cycles_Test.java:Execute_Test.java:FacetRegistry_Test.java:Graph.java:MockTestCase.java:Mockups.java:RunTests.java:ScriptBuilder_Test.java:Targets_Test.java:Utils.java" />
+</product>
 

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-dcefow9gdg0iifymbibco3lc1ps8wpu" />
+<product version="3" modelHash="caq30tl38r1c92x5ie8b6vz9wynu3f2">
+  <files names="ScriptsDescriptor.java:UpdateTuplesRuntime_MigrationScript.java" />
+</product>
 

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="8x9e2n0pimcvs9hb241knq4n3zezxmp" />
+<product version="3" modelHash="eravgin27vb26x3x8oq8x01burdrppg">
+  <files names="BaseRenderer.java:DefaultMethodRenderer.java:DefaultNodeRenderer.java" />
+</product>
 

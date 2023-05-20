@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="31hx0s1hnr01drvv1nulhk8w6oajfzc" />
+<product version="3" modelHash="-8i83ui0udtg0fxqqx0mbrgqf4pndqk">
+  <files names="DebuggerRunProfileState.java:IDebuggerConfiguration.java" />
+</product>
 

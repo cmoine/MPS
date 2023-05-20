@@ -67,6 +67,6 @@ public class ModelFileToRootDispatchingEditorProvider implements FileEditorProvi
   @NotNull
   @Override
   public FileEditorPolicy getPolicy() {
-    return FileEditorPolicy.HIDE_DEFAULT_EDITOR;
+    return FileEditorPolicy.NONE;
   }
 }

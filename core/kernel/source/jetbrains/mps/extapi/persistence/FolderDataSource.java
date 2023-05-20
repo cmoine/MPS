@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,57 +15,78 @@
  */
 package jetbrains.mps.extapi.persistence;
 
-import jetbrains.mps.vfs.FileSystemEvent;
-import org.jetbrains.mps.openapi.util.ProgressMonitor;
-import jetbrains.mps.vfs.FileSystem;
-import jetbrains.mps.vfs.FileSystemListener;
+import jetbrains.mps.extapi.persistence.datasource.PreinstalledDataSourceTypes;
 import jetbrains.mps.vfs.IFile;
+import jetbrains.mps.vfs.openapi.FileSystem;
+import jetbrains.mps.vfs.refresh.CachingFileSystem;
+import jetbrains.mps.vfs.refresh.FileListeningPreferences;
+import jetbrains.mps.vfs.refresh.FileSystemEvent;
+import jetbrains.mps.vfs.refresh.FileSystemListener;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.persistence.DataSourceListener;
-import org.jetbrains.mps.openapi.persistence.ModelRoot;
+import org.jetbrains.mps.openapi.persistence.ModelFactory;
 import org.jetbrains.mps.openapi.persistence.MultiStreamDataSource;
 import org.jetbrains.mps.openapi.persistence.MultiStreamDataSourceListener;
+import org.jetbrains.mps.openapi.persistence.StreamDataSource;
+import org.jetbrains.mps.openapi.persistence.datasource.DataSourceType;
+import org.jetbrains.mps.openapi.util.ProgressMonitor;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
+ * @author apyshkin
  * evgeny, 11/4/12
  */
 public class FolderDataSource extends DataSourceBase implements MultiStreamDataSource, FileSystemListener, FileSystemBasedDataSource {
   private final Object LOCK = new Object();
-  private List<DataSourceListener> myListeners = new ArrayList<DataSourceListener>();
+
+  private final List<DataSourceListener> myListeners = new ArrayList<>();
+  private final Predicate<IFile> myChildFilter;
 
   @NotNull
   private final IFile myFolder;
-  private final ModelRoot myModelRoot;
 
-  private long myLastAddRemove = -1;
+  private volatile long myLastAddRemove = -1L;
+
+  public FolderDataSource(@NotNull IFile folder) {
+    this(folder, xxx -> true);
+  }
+
+  public FolderDataSource(@NotNull IFile folder, @NotNull Predicate<IFile> filterOnChildren) {
+    checkFolderExistsAndItIsFolder(folder);
+    myFolder = folder;
+    myChildFilter = filterOnChildren;
+  }
+
+  private void checkFolderExistsAndItIsFolder(@NotNull IFile folder) {
+    if (folder.exists() && !folder.isDirectory()) {
+      throw new IllegalArgumentException("Could not create FolderDataSource with regular file: " + folder);
+    }
+  }
 
   /**
-   * @param modelRoot (optional) containing model root, which should be notified before the source during the update
+   * @return whether file is an actual source file
    */
-  public FolderDataSource(@NotNull IFile folder, ModelRoot modelRoot) {
-    this.myFolder = folder;
-    this.myModelRoot = modelRoot;
+  private boolean isIncluded(@NotNull IFile file) {
+    return myChildFilter.test(file);
   }
 
-  public boolean isIncluded(IFile file) {
-    return myFolder.equals(file.getParent());
+  private Stream<IFile> getChildrenFiles() {
+    return myFolder.getChildren().stream();
   }
 
-  protected Iterable<IFile> getStreams() {
-    return myFolder.getChildren();
-  }
-
-  protected String getStreamName(IFile file) {
-    return file.getName();
-  }
-
-  public IFile getFile(String streamName) {
-    return myFolder.getDescendant(streamName);
+  public IFile getFile(@NotNull String streamName) {
+    return myFolder.findChild(streamName);
   }
 
   @NotNull
@@ -86,74 +107,60 @@ public class FolderDataSource extends DataSourceBase implements MultiStreamDataS
 
   @NotNull
   @Override
-  public Iterable<String> getAvailableStreams() {
-    Set<String> names = new HashSet<String>();
-    for (IFile file : getStreams()) {
-      if (isIncluded(file)) {
-        names.add(getStreamName(file));
-      }
-    }
-    return names;
+  public Stream<StreamDataSource> getSubStreams() {
+    return getChildrenFiles().filter(this::isIncluded)
+                             .map(FileDataSource::new);
   }
 
   @NotNull
   @Override
-  public InputStream openInputStream(String name) throws IOException {
-    IFile file = getFile(name);
-    if (file == null) {
-      throw new IOException("stream is not available");
+  public StreamDataSource getStreamByNameOrCreate(@NotNull String name) {
+    if (getStreamByName(name) != null) {
+      return getStreamByName(name);
     }
-    return file.openInputStream();
-  }
-
-  @NotNull
-  @Override
-  public OutputStream openOutputStream(String name) throws IOException {
-    IFile file = getFile(name);
-    if (file == null) {
-      throw new IOException("stream is not available");
-    }
-    return file.openOutputStream();
-  }
-
-  @Override
-  public boolean delete(String name) {
-    IFile file = getFile(name);
-    return file != null && file.delete();
+    return new FileDataSource(myFolder.findChild(name));
   }
 
   @Override
   public long getTimestamp() {
     long max = myLastAddRemove;
-    for (IFile file : getStreams()) {
+    boolean any = false;
+    for (IFile file : getChildrenFiles().collect(Collectors.toList())) {
       if (!isIncluded(file)) {
         continue;
       }
+      any = true;
 
       long timestamp = file.lastModified();
       if (timestamp > max) {
         max = timestamp;
       }
     }
-    return max;
+    return any ? max : -1;
   }
 
   @Override
-  public void addListener(DataSourceListener listener) {
+  public void addListener(@NotNull DataSourceListener listener) {
     synchronized (LOCK) {
       if (myListeners.isEmpty()) {
-        myFolder.getFileSystem().addListener(this);
+        FileSystem fs = myFolder.getFileSystem();
+        if (fs instanceof CachingFileSystem) {
+          ((CachingFileSystem) fs).addListener(this);
+        }
       }
       myListeners.add(listener);
     }
   }
 
   @Override
-  public void removeListener(DataSourceListener listener) {
+  public void removeListener(@NotNull DataSourceListener listener) {
     synchronized (LOCK) {
       myListeners.remove(listener);
       if (myListeners.isEmpty()) {
-        myFolder.getFileSystem().removeListener(this);
+        FileSystem fs = myFolder.getFileSystem();
+        if (fs instanceof CachingFileSystem) {
+          ((CachingFileSystem) fs).removeListener(this);
+        }
       }
     }
   }
@@ -164,37 +171,39 @@ public class FolderDataSource extends DataSourceBase implements MultiStreamDataS
     return myFolder;
   }
 
+  @NotNull
   @Override
-  public void delete() {
+  public FileListeningPreferences listeningPreferences() {
+    return FileListeningPreferences.construct()
+                                   .notifyOnDescendantRemoval()
+                                   .notifyOnDescendantCreation()
+                                   .notifyOnDescendantChange()
+                                   .notifyOnAncestorChange() // this is when the path is under .jar
+                                   .build();
+  }
+
+  @Override
+  public boolean delete() {
     if (isReadOnly()) {
-      return;
+      return false;
     }
-    ArrayList<IFile> toDelete = new ArrayList<IFile>();
-    for (IFile file : getStreams()) {
-      if (isIncluded(file)) {
-        toDelete.add(file);
-      }
-    }
-    for (IFile file : toDelete) {
-      file.delete();
+    getChildrenFiles().filter(this::isIncluded)
+                      .forEach(IFile::deleteIfExists);
+    if (myFolder.getChildren().isEmpty()) {
+      myFolder.delete();
     }
     myLastAddRemove = -1;
+    return true;
+  }
+
+  @NotNull
+  private static String getStreamName(@NotNull IFile file) {
+    return file.getName();
   }
 
   @Override
-  public Iterable<FileSystemListener> getListenerDependencies() {
-    if (myModelRoot instanceof FileSystemListener) {
-      return Collections.singleton((FileSystemListener) myModelRoot);
-    }
-    if (myModelRoot != null && myModelRoot.getModule() instanceof FileSystemListener) {
-      return Collections.singleton((FileSystemListener) myModelRoot.getModule());
-    }
-    return null;
-  }
-
-  @Override
-  public void update(ProgressMonitor monitor, @NotNull FileSystemEvent event) {
-    Set<String> affectedStreams = new HashSet<String>();
+  public void update(@NotNull ProgressMonitor monitor, @NotNull FileSystemEvent event) {
+    Set<String> affectedStreams = new HashSet<>();
     for (IFile file : event.getChanged()) {
       if (isIncluded(file)) {
         affectedStreams.add(getStreamName(file));
@@ -221,7 +230,7 @@ public class FolderDataSource extends DataSourceBase implements MultiStreamDataS
   private void fireChanged(ProgressMonitor monitor, Iterable<String> streams) {
     List<DataSourceListener> listeners;
     synchronized (LOCK) {
-      listeners = new ArrayList<DataSourceListener>(myListeners);
+      listeners = new ArrayList<>(myListeners);
     }
     monitor.start("Reloading", listeners.size());
     try {
@@ -239,8 +248,29 @@ public class FolderDataSource extends DataSourceBase implements MultiStreamDataS
   }
 
   @Override
+  public boolean exists() {
+    return getSubStreams().filter(it -> it instanceof FileSystemBasedDataSource)
+                          .map(it -> (FileSystemBasedDataSource) it)
+                          .anyMatch(FileSystemBasedDataSource::exists);
+  }
+
+  @Nullable
+  @Override
+  public FileSystemBasedDataSource physicalCopy(@NotNull IFile parentFolder) {
+    IFile res = myFolder.copy(parentFolder);
+    if (res != null) return new FileDataSource(parentFolder.findChild(myFolder.getName()));
+    else return null;
+  }
+
+  @NotNull
+  @Override
   public Collection<IFile> getAffectedFiles() {
     return Collections.singleton(myFolder);
   }
 
+  @NotNull
+  @Override
+  public DataSourceType getType() {
+    return PreinstalledDataSourceTypes.FOLDER;
+  }
 }

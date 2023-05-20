@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="-adon6z8owsnqaoxsj31yveknotewubi">
+  <files names="DFAActions_ActionGroup.java:DataFlowInternal_ActionGroup.java:PluginSolution_ApplicationPlugin.java:PrintDFAResult_Action.java:PrintInitializationInformation_Action.java:PrintReachingDefinintionsInformation_Action.java:ShowDFA_Action.java" />
+</product>
+

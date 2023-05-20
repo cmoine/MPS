@@ -6,65 +6,9 @@ import jetbrains.mps.nodeEditor.DefaultNodeEditor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Collection;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Constant;
-import jetbrains.mps.openapi.editor.style.Style;
-import jetbrains.mps.editor.runtime.style.StyleImpl;
-import jetbrains.mps.editor.runtime.style.StyleAttributes;
-import jetbrains.mps.nodeEditor.MPSFonts;
 
 public class ArrayCloneOperation_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createCollection_l0mk2c_a(editorContext, node);
-  }
-  private EditorCell createCollection_l0mk2c_a(EditorContext editorContext, SNode node) {
-    EditorCell_Collection editorCell = EditorCell_Collection.createHorizontal(editorContext, node);
-    editorCell.setCellId("Collection_l0mk2c_a");
-    editorCell.setBig(true);
-    editorCell.addEditorCell(this.createConstant_l0mk2c_a0(editorContext, node));
-    editorCell.addEditorCell(this.createConstant_l0mk2c_b0(editorContext, node));
-    editorCell.addEditorCell(this.createConstant_l0mk2c_c0(editorContext, node));
-    editorCell.addEditorCell(this.createConstant_l0mk2c_d0(editorContext, node));
-    return editorCell;
-  }
-  private EditorCell createConstant_l0mk2c_a0(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, "clone");
-    editorCell.setCellId("Constant_l0mk2c_a0");
-    Style style = new StyleImpl();
-    BaseLanguageStyle_StyleSheet.apply_InstanceMethod(style, editorCell);
-    style.set(StyleAttributes.FONT_STYLE, 0, MPSFonts.PLAIN);
-    style.set(StyleAttributes.EDITABLE, 0, true);
-    editorCell.getStyle().putAll(style);
-    editorCell.setDefaultText("");
-    return editorCell;
-  }
-  private EditorCell createConstant_l0mk2c_b0(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, "(");
-    editorCell.setCellId("Constant_l0mk2c_b0");
-    Style style = new StyleImpl();
-    BaseLanguageStyle_StyleSheet.apply_LeftParenAfterName(style, editorCell);
-    editorCell.getStyle().putAll(style);
-    editorCell.setDefaultText("");
-    return editorCell;
-  }
-  private EditorCell createConstant_l0mk2c_c0(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, "");
-    editorCell.setCellId("Constant_l0mk2c_c0");
-    Style style = new StyleImpl();
-    style.set(StyleAttributes.SELECTABLE, 0, true);
-    style.set(StyleAttributes.EDITABLE, 0, false);
-    editorCell.getStyle().putAll(style);
-    editorCell.setDefaultText("");
-    return editorCell;
-  }
-  private EditorCell createConstant_l0mk2c_d0(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, ")");
-    editorCell.setCellId("Constant_l0mk2c_d0");
-    Style style = new StyleImpl();
-    BaseLanguageStyle_StyleSheet.apply_RightParen(style, editorCell);
-    style.set(StyleAttributes.SELECTABLE, 0, true);
-    editorCell.getStyle().putAll(style);
-    editorCell.setDefaultText("");
-    return editorCell;
+    return new ArrayCloneOperation_EditorBuilder_a(editorContext, node).createCell();
   }
 }

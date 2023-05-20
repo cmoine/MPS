@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,8 @@
  */
 package jetbrains.mps.logging;
 
+import org.jetbrains.annotations.TestOnly;
+
 /**
  * log4j logger augmented with hint object
  */
@@ -24,13 +26,24 @@ public abstract class Logger {
    * Adapts log4j logger to our extended facility
    * These two methods we need for a migration script
    */
+  @SuppressWarnings({"removal", "UnstableApiUsage"})
   public static Logger wrap(org.apache.log4j.Logger logger) {
     return new Log4jLogger(logger);
   }
 
-  //--------------------------
-  // Logger instance
-  //--------------------------
+  public static Logger wrap(java.util.logging.Logger juLogger) {
+    return new JULogger(juLogger);
+  }
+
+  public static Logger getLogger(Class<?> requestor) {
+    return new JULogger(java.util.logging.Logger.getLogger(requestor.getName()));
+  }
+
+  public abstract boolean isErrorLevel();
+  public abstract boolean isWarningLevel();
+  public abstract boolean isInfoLevel();
+  public abstract boolean isDebugLevel();
+  public abstract boolean isTraceLevel();
 
   public void info(String message) {
     info(message, null);
@@ -86,7 +99,7 @@ public abstract class Logger {
     if (t != null) {
       error(t.getClass().getName() + (t.getMessage() != null ? " : " + t.getMessage() : ""), t, hintObject);
     } else {
-      error(new Throwable("error with null throwable was called"));
+      error("error with null throwable was called", new Throwable(), hintObject);
     }
   }
 
@@ -118,10 +131,45 @@ public abstract class Logger {
 
   public abstract void fatal(String message, Throwable t, Object hintObject);
 
+
+  public void trace(String message) {
+    trace(message, null);
+  }
+  public void trace(String message, Throwable t) {
+    trace(message, t, null);
+  }
+  public void trace(String message, Object hintObject) {
+    trace(message, null, hintObject);
+  }
+
+  public abstract void trace(String message, Throwable t, Object hintObject);
+
   public void assertLog(boolean condition) {
     assertLog(condition, "Assertion failed");
   }
 
-  public abstract void assertLog(boolean condition, String message);
+  public void assertLog(boolean condition, String message) {
+    if (!condition) {
+      errorWithTrace(message);
+    }
+  }
+
+  /**
+   * Use it when it's high time to get rid of the deprecated code as it's going to be dead soon
+   */
+  public void warnDeprecatedUse(String message) {
+    if (isWarningLevel()) {
+      warning(message, new Throwable());
+    }
+  }
+
+  /**
+   * Provisionally allow verbose logging to testing purposes. Invocations of {@link #enableTrace()}
+   * and {@link #disableTrace()} shall go in pairs.
+   */
+  @TestOnly
+  public abstract void enableTrace();
+  @TestOnly
+  public abstract void disableTrace();
 }
 

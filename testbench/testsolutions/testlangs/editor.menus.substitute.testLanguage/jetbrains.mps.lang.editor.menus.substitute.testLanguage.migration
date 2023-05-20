@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model ref="r:8f0c1c90-198f-42b6-9d07-b87bf03969c4(migrationData)">
+  <persistence version="9" />
+  <languages />
+  <imports>
+    <import index="wdez" ref="r:c9a3f91a-729c-4ebe-a9f0-0bd3bc03e39c(jetbrains.mps.lang.editor.menus.substitute.testLanguage.structure)" implicit="true" />
+    <import index="e58s" ref="r:d793eea9-8b7b-4c58-a7a2-62336f54dcce(jetbrains.mps.lang.editor.menus.substitute.testLanguage.editor)" implicit="true" />
+  </imports>
+  <registry>
+    <language id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor">
+      <concept id="3017733173184487099" name="jetbrains.mps.lang.editor.structure.SmartRefMigrationDataEntity" flags="ng" index="ZsZFI">
+        <reference id="3017733173184487105" name="generatedMenu" index="ZsZEk" />
+        <reference id="3017733173184487102" name="conceptNode" index="ZsZFF" />
+      </concept>
+      <concept id="3017733173184487098" name="jetbrains.mps.lang.editor.structure.SmartRefMigrationData" flags="ng" index="ZsZFJ">
+        <child id="3017733173184487121" name="entities" index="ZsZE4" />
+      </concept>
+    </language>
+    <language id="9882f4ad-1955-46fe-8269-94189e5dbbf2" name="jetbrains.mps.lang.migration.util">
+      <concept id="7417095922908669705" name="jetbrains.mps.lang.migration.util.structure.StepData" flags="ng" index="2z5JpS">
+        <property id="1973338949477451252" name="script" index="3qqn2_" />
+        <child id="7417095922908725798" name="data" index="2z5Xdn" />
+      </concept>
+    </language>
+  </registry>
+  <node concept="2z5JpS" id="47y0FrqhJDm">
+    <property role="3qqn2_" value="18bc6592-03a6-4e29-a83a-7ff23bde13ba(jetbrains.mps.lang.editor)/8" />
+    <node concept="ZsZFJ" id="47y0FrqhJDh" role="2z5Xdn">
+      <node concept="ZsZFI" id="47y0FrqhJDl" role="ZsZE4">
+        <ref role="ZsZFF" to="wdez:7Nx4mSUrZaI" resolve="TestSubstituteSubChildSmartReference" />
+        <ref role="ZsZEk" to="e58s:47y0FrqhJDj" resolve="TestSubstituteSubChildSmartReference_SmartReference" />
+      </node>
+    </node>
+  </node>
+</model>
+

@@ -14,8 +14,8 @@ public class NamedTupleInFunctionType {
   public void foo(Map<String, TwoStrings> map, _FunctionTypes._void_P1_E0<? super IMapping<String, TwoStrings>> mpng) {
     MapSequence.fromMap(map).visitAll(mpng);
   }
-  public void m(_FunctionTypes._void_P1_E0<? super NamedTupleInFunctionType.G<TwoStrings>> fun) {
-    fun.invoke(new NamedTupleInFunctionType.G<TwoStrings>());
+  public void m(_FunctionTypes._void_P1_E0<? super G<TwoStrings>> fun) {
+    fun.invoke(new G<TwoStrings>());
   }
   public void _void_P1(_FunctionTypes._void_P1_E0<? super Pair<IntPair, TwoStrings>> fun) {
     fun.invoke(new Pair<IntPair, TwoStrings>(new IntPair(1, 2), new TwoStrings("one", "two")));

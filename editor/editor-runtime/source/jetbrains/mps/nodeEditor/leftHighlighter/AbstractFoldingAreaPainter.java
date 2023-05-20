@@ -15,7 +15,6 @@
  */
 package jetbrains.mps.nodeEditor.leftHighlighter;
 
-import jetbrains.mps.nodeEditor.EditorComponent;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.Graphics;
@@ -31,30 +30,16 @@ import java.awt.event.MouseEvent;
  * User: Alexander Shatalin
  * Date: 02.03.2010
  */
-public abstract class AbstractFoldingAreaPainter {
-  private LeftEditorHighlighter myLeftHighlighter;
+public abstract class AbstractFoldingAreaPainter extends AbstractHighlighterPainter {
 
   public AbstractFoldingAreaPainter(@NotNull LeftEditorHighlighter leftHighlighter) {
-    myLeftHighlighter = leftHighlighter;
+    super(leftHighlighter);
   }
 
-  /**
-   * This method will be called in the end of associated EditorComponent rebuild process
-   */
-  public void editorRebuilt() {
-  }
-
-  /**
-   * This method will be called to notify painter that it should be relayouted in accordance
-   * with latest changes in editor. This method will be called in the edit of associated
-   * EditorComponent rebuild process
-   */
-  public void relayout() {
-  }
 
   /**
    * @return number of pixels required by this AbstractFoldingAreaPainter to paint UI elements
-   *         on the left of folding line
+   * on the left of folding line
    */
   public int getLeftAreaWidth() {
     return 0;
@@ -62,7 +47,7 @@ public abstract class AbstractFoldingAreaPainter {
 
   /**
    * @return number of pixels required by this AbstractFoldingAreaPainter to paint UI elements
-   *         on the right of folding line
+   * on the right of folding line
    */
   public int getRightAreaWidth() {
     return 0;
@@ -74,51 +59,11 @@ public abstract class AbstractFoldingAreaPainter {
     g.translate(-getLeftHighlighter().getFoldingLineX(), 0);
   }
 
-  protected void paintInLocalCoordinates(Graphics g) {
-  }
-
-  public void mouseMoved(MouseEvent e) {
-  }
-
-  public void mouseExited(MouseEvent e) {
-  }
-
-  /**
-   * call e.consume() if this event should not be dispatched to other FoldingAreaPainters located "below"
-   * this one
-   */
-  public void mousePressed(MouseEvent e) {
-  }
-
-  /**
-   * @return weight of this AbstractFoldingAreaPainter. All registered AbstractFoldingAreaPainter will be
-   *         painted sequentialy in order determined by this value. If FoldingAreaPainter1 need to be
-   *         painted "above" FoldingAreaPainter2 then the value returned by FoldingAreaPainter1.getWeight()
-   *         should be greater then FoldingAreaPainter2.getWeight()
-   *         <p/>
-   */
-  public abstract int getWeight();
-
-  public String getToolTipText() {
-    return null;
-  }
-
-  public void dispose() {
-  }
-
-  @NotNull
-  protected LeftEditorHighlighter getLeftHighlighter() {
-    return myLeftHighlighter;
-  }
-
-  @NotNull
-  protected EditorComponent getEditorComponent() {
-    return getLeftHighlighter().getEditorComponent();
-  }
+  protected abstract void paintInLocalCoordinates(Graphics g);
 
   protected void repaint(int y, int height) {
     int foldingLineX = getLeftHighlighter().getFoldingLineX();
-    myLeftHighlighter.repaint(foldingLineX - getLeftAreaWidth(), y, foldingLineX + getRightAreaWidth() + 1, height + 1);
+    getLeftHighlighter().repaint(foldingLineX - getLeftAreaWidth(), y, getLeftAreaWidth() + getRightAreaWidth() + 1, height + 1);
   }
 
   protected int getLocalXCoordinate(MouseEvent e) {

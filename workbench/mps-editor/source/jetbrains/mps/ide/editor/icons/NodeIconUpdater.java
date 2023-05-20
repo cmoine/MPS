@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,71 +15,64 @@
  */
 package jetbrains.mps.ide.editor.icons;
 
-import com.intellij.openapi.components.AbstractProjectComponent;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.fileEditor.ex.FileEditorManagerEx;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileAdapter;
-import com.intellij.openapi.vfs.VirtualFileEvent;
-import com.intellij.openapi.vfs.VirtualFileListener;
-import com.intellij.openapi.vfs.VirtualFilePropertyEvent;
-import jetbrains.mps.nodefs.MPSNodeVirtualFile;
+import com.intellij.util.messages.MessageBusConnection;
+import jetbrains.mps.nodefs.NodeFileEventListener;
 import jetbrains.mps.nodefs.NodeVirtualFileSystem;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
+import java.util.Collection;
 
 /**
  * FIXME: MPSNodesVirtualFileSystem listens to node deletion and rename, why doesn't it send out file changed events as well, why do we
  *        need this distinct component? Does IDEA listen to file changes or it's indeed our responsibility to update editors on VF change?
  * XXX Why it's distinct from NodeFileIconProvider?
  */
-public class NodeIconUpdater extends AbstractProjectComponent {
+public class NodeIconUpdater implements ProjectComponent {
+  private final Project myProject;
   private final FileEditorManagerEx myFileEditorManagerEx;
-  private final NodeVirtualFileSystem myNodeVFS;
-  private final VirtualFileListener myFileListener;
+  private final NodeFileEventListener myFileListener;
 
-  public NodeIconUpdater(Project project, FileEditorManagerEx fileEditorManager, NodeVirtualFileSystem nodeVFS) {
-    super(project);
-    myFileEditorManagerEx = fileEditorManager;
-    myNodeVFS = nodeVFS;
+  public NodeIconUpdater(Project project) {
+    myProject = project;
+    myFileEditorManagerEx = FileEditorManagerEx.getInstanceEx(project);
     // TODO Would be more effective to be an ApplicationComponent and listen to bulk changes (BulkFileListener)
     // however, there's no way to find out MPSProject from MPSNodeVirtualFile at the moment, and without a project
     // can't access FileEditorManagerEx.
-    myFileListener = new VirtualFileAdapter() {
+    myFileListener = new NodeFileEventListener() {
       @Override
-      public void propertyChanged(@NotNull VirtualFilePropertyEvent event) {
-        refresh(event.getFile());
+      public void changed(Collection<VirtualFile> vf) {
+        vf.forEach(NodeIconUpdater.this::refresh);
       }
 
       @Override
-      public void contentsChanged(@NotNull VirtualFileEvent event) {
-        refresh(event.getFile());
-      }
-
-      @Override
-      public void fileDeleted(@NotNull VirtualFileEvent event) {
-        refresh(event.getFile());
+      public void beforeDelete(Collection<VirtualFile> vf) {
+        vf.forEach(myFileEditorManagerEx::closeFile);
       }
     };
   }
 
   @Override
   public void projectOpened() {
-    myNodeVFS.addVirtualFileListener(myFileListener);
+    if (ApplicationManager.getApplication().isHeadlessEnvironment() || ApplicationManager.getApplication().isUnitTestMode()) {
+      return;
+    }
+    final MessageBusConnection conn = myProject.getMessageBus().connect(myProject);
+    conn.subscribe(NodeVirtualFileSystem.NODE_FS_CHANGES, myFileListener);
   }
 
   @Override
   public void projectClosed() {
-    myNodeVFS.removeVirtualFileListener(myFileListener);
+//    NodeVirtualFileSystem.getInstance().removeVirtualFileListener(myFileListener);
   }
 
-  void refresh(VirtualFile vf) {
-    if (false == vf instanceof MPSNodeVirtualFile) {
-      return;
-    }
-    if (Arrays.<VirtualFile>asList(myFileEditorManagerEx.getOpenFiles()).contains(vf)) {
-      myFileEditorManagerEx.updateFilePresentation(vf);
-    }
+  private void refresh(VirtualFile vf) {
+//    if (false == vf instanceof MPSNodeVirtualFile) {
+//      return;
+//    }
+    myFileEditorManagerEx.updateFilePresentation(vf);
   }
 }

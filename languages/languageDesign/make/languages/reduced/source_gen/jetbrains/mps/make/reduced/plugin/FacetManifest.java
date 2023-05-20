@@ -12,7 +12,6 @@ import jetbrains.mps.internal.collections.runtime.IWhereFilter;
 public class FacetManifest implements IFacetManifest {
   private List<IFacet> facets = ListSequence.fromList(new ArrayList<IFacet>());
   public FacetManifest() {
-    ListSequence.fromList(facets).addElement(new CollectHashes_Facet());
     ListSequence.fromList(facets).addElement(new ReportFiles_Facet());
   }
   public Iterable<IFacet> facets() {

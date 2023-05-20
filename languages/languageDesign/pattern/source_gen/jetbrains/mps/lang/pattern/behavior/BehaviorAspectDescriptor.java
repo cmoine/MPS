@@ -7,9 +7,9 @@ import jetbrains.mps.core.aspects.behaviour.api.BHDescriptor;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor {
   private final BHDescriptor myAsPattern__BehaviorDescriptor = new AsPattern__BehaviorDescriptor();
@@ -18,66 +18,59 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
   private final BHDescriptor myPatternVariableDeclaration__BehaviorDescriptor = new PatternVariableDeclaration__BehaviorDescriptor();
   private final BHDescriptor myPropertyPatternVariableDeclaration__BehaviorDescriptor = new PropertyPatternVariableDeclaration__BehaviorDescriptor();
   private final BHDescriptor myLinkPatternVariableDeclaration__BehaviorDescriptor = new LinkPatternVariableDeclaration__BehaviorDescriptor();
+  private final BHDescriptor myPatternSwitchCase__BehaviorDescriptor = new PatternSwitchCase__BehaviorDescriptor();
+  private final BHDescriptor myAbstractPatternProvider__BehaviorDescriptor = new AbstractPatternProvider__BehaviorDescriptor();
+  private final BHDescriptor myLocalPatternReference__BehaviorDescriptor = new LocalPatternReference__BehaviorDescriptor();
+  private final BHDescriptor myPatternBuilder__BehaviorDescriptor = new PatternBuilder__BehaviorDescriptor();
   private final BHDescriptor myActionStatement__BehaviorDescriptor = new ActionStatement__BehaviorDescriptor();
+  private final BHDescriptor myPatternBuilderClassifierMember__BehaviorDescriptor = new PatternBuilderClassifierMember__BehaviorDescriptor();
+  private final BHDescriptor myPatternVariableProperty__BehaviorDescriptor = new PatternVariableProperty__BehaviorDescriptor();
+  private final BHDescriptor myExpressionPatternProvider__BehaviorDescriptor = new ExpressionPatternProvider__BehaviorDescriptor();
+  private final BHDescriptor myQualifiedPatternReference__BehaviorDescriptor = new QualifiedPatternReference__BehaviorDescriptor();
+  private final BHDescriptor myInlinePatternProvider__BehaviorDescriptor = new InlinePatternProvider__BehaviorDescriptor();
 
   public BehaviorAspectDescriptor() {
   }
 
   @Nullable
   public BHDescriptor getDescriptor(@NotNull SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_846f5o_a0k.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return myActionStatement__BehaviorDescriptor;
-          }
-          break;
-        case 1:
-          if (true) {
-            return myAsPattern__BehaviorDescriptor;
-          }
-          break;
-        case 2:
-          if (true) {
-            return myLinkPatternVariableDeclaration__BehaviorDescriptor;
-          }
-          break;
-        case 3:
-          if (true) {
-            return myPattern__BehaviorDescriptor;
-          }
-          break;
-        case 4:
-          if (true) {
-            return myPatternExpression__BehaviorDescriptor;
-          }
-          break;
-        case 5:
-          if (true) {
-            return myPatternVariableDeclaration__BehaviorDescriptor;
-          }
-          break;
-        case 6:
-          if (true) {
-            return myPropertyPatternVariableDeclaration__BehaviorDescriptor;
-          }
-          break;
-        default:
-          // default 
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return myAbstractPatternProvider__BehaviorDescriptor;
+      case 1:
+        return myActionStatement__BehaviorDescriptor;
+      case 2:
+        return myAsPattern__BehaviorDescriptor;
+      case 3:
+        return myExpressionPatternProvider__BehaviorDescriptor;
+      case 4:
+        return myInlinePatternProvider__BehaviorDescriptor;
+      case 5:
+        return myLinkPatternVariableDeclaration__BehaviorDescriptor;
+      case 6:
+        return myLocalPatternReference__BehaviorDescriptor;
+      case 7:
+        return myPattern__BehaviorDescriptor;
+      case 8:
+        return myPatternBuilder__BehaviorDescriptor;
+      case 9:
+        return myPatternBuilderClassifierMember__BehaviorDescriptor;
+      case 10:
+        return myPatternExpression__BehaviorDescriptor;
+      case 11:
+        return myPatternSwitchCase__BehaviorDescriptor;
+      case 12:
+        return myPatternVariableDeclaration__BehaviorDescriptor;
+      case 13:
+        return myPatternVariableProperty__BehaviorDescriptor;
+      case 14:
+        return myPropertyPatternVariableDeclaration__BehaviorDescriptor;
+      case 15:
+        return myQualifiedPatternReference__BehaviorDescriptor;
+      default:
     }
     return null;
   }
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
-  }
-  private static final Map<SAbstractConcept, Integer> indices_846f5o_a0k = buildConceptIndices(MetaAdapterFactory.getConcept(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x3d3ef1fc1815d960L, "jetbrains.mps.lang.pattern.structure.ActionStatement"), MetaAdapterFactory.getConcept(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x108a9cb478dL, "jetbrains.mps.lang.pattern.structure.AsPattern"), MetaAdapterFactory.getConcept(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x108d36d955aL, "jetbrains.mps.lang.pattern.structure.LinkPatternVariableDeclaration"), MetaAdapterFactory.getConcept(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x108a9cb478fL, "jetbrains.mps.lang.pattern.structure.Pattern"), MetaAdapterFactory.getConcept(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x108a9cb4791L, "jetbrains.mps.lang.pattern.structure.PatternExpression"), MetaAdapterFactory.getConcept(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x108a9cb4793L, "jetbrains.mps.lang.pattern.structure.PatternVariableDeclaration"), MetaAdapterFactory.getConcept(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x108a9cb4795L, "jetbrains.mps.lang.pattern.structure.PropertyPatternVariableDeclaration"));
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x174c7ed18b16ecfbL), MetaIdFactory.conceptId(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x3d3ef1fc1815d960L), MetaIdFactory.conceptId(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x108a9cb478dL), MetaIdFactory.conceptId(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x6e2e4373b51373f8L), MetaIdFactory.conceptId(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x7c36ae76ea76f63bL), MetaIdFactory.conceptId(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x108d36d955aL), MetaIdFactory.conceptId(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x174c7ed18b16ecfcL), MetaIdFactory.conceptId(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x108a9cb478fL), MetaIdFactory.conceptId(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x240625574192fa19L), MetaIdFactory.conceptId(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x50f8d1ebd50bbeb0L), MetaIdFactory.conceptId(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x108a9cb4791L), MetaIdFactory.conceptId(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x174c7ed18a9a3416L), MetaIdFactory.conceptId(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x108a9cb4793L), MetaIdFactory.conceptId(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x60f18f425c769962L), MetaIdFactory.conceptId(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x108a9cb4795L), MetaIdFactory.conceptId(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x6e2e4373b51396d8L)).seal();
 }

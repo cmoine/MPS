@@ -9,7 +9,7 @@ import jetbrains.mps.baseLanguage.closures.runtime.Wrappers;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.internal.collections.runtime.IVisitor;
 import java.util.ArrayList;
-import junit.framework.Assert;
+import org.junit.Assert;
 import jetbrains.mps.lang.test.matcher.NodesMatcher;
 import jetbrains.mps.textgen.trace.DebugInfo;
 import jetbrains.mps.textgen.trace.DefaultTraceInfoProvider;
@@ -17,6 +17,7 @@ import jetbrains.mps.lang.smodel.generator.smodelAdapter.SModelOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
+import org.jetbrains.mps.openapi.language.SProperty;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 /*package*/ class TestUtil {
@@ -34,7 +35,7 @@ import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
         {
           List<SNode> nodesBefore = ListSequence.fromListAndArray(new ArrayList<SNode>(), it);
           List<SNode> nodesAfter = ListSequence.fromListAndArray(new ArrayList<SNode>(), getTracedNode(root, line.value));
-          Assert.assertNull("The nodes '" + nodesBefore + "' and '" + nodesAfter + "' do not match!", new NodesMatcher().match(nodesBefore, nodesAfter));
+          Assert.assertTrue("The nodes '" + nodesBefore + "' and '" + nodesAfter + "' do not match!", new NodesMatcher(nodesBefore, nodesAfter).diff().isEmpty());
         }
         line.value += delta;
       }
@@ -51,7 +52,7 @@ import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
           {
             List<SNode> nodesBefore = ListSequence.fromListAndArray(new ArrayList<SNode>(), it);
             List<SNode> nodesAfter = ListSequence.fromListAndArray(new ArrayList<SNode>(), getTracedNode(root, line.value));
-            Assert.assertNull("The nodes '" + nodesBefore + "' and '" + nodesAfter + "' do not match!", new NodesMatcher().match(nodesBefore, nodesAfter));
+            Assert.assertTrue("The nodes '" + nodesBefore + "' and '" + nodesAfter + "' do not match!", new NodesMatcher(nodesBefore, nodesAfter).diff().isEmpty());
           }
           line.value += delta;
         }
@@ -64,7 +65,11 @@ import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
     if (di == null) {
       return null;
     }
-    List<SNodeReference> tracedNodes = di.getTracedNodesForPosition(SPropertyOperations.getString(root, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name")) + ".java", line);
+    List<SNodeReference> tracedNodes = di.getTracedNodesForPosition(SPropertyOperations.getString(root, PROPS.name$MnvL) + ".java", line);
     return (tracedNodes.isEmpty() ? null : tracedNodes.get(0).resolve(myProject.getRepository()));
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }

@@ -22,7 +22,6 @@ import jetbrains.mps.ide.ui.tree.TreeNodeVisitor;
 import jetbrains.mps.ide.ui.tree.module.NamespaceTreeBuilder.NamespaceNodeBuilder;
 import jetbrains.mps.ide.ui.tree.smodel.SModelTreeNode;
 import jetbrains.mps.project.AbstractModule;
-import jetbrains.mps.smodel.IOperationContext;
 import jetbrains.mps.util.InternUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SModel;
@@ -75,8 +74,8 @@ public class NamespaceTextNode extends TextTreeNode implements TreeElement {
   }
 
   public List<SModel> getModelsUnder() {
-    List<SModel> models = new ArrayList<SModel>();
-    for (MPSTreeNode child : this) {
+    List<SModel> models = new ArrayList<>();
+    for (MPSTreeNode child : getChildren()) {
       if (child instanceof SModelTreeNode) {
         models.add(((SModelTreeNode) child).getModel());
         for (SModelTreeNode childTreeNode : ((SModelTreeNode) child).getAllSubfolderSModelTreeNodes()) {
@@ -100,8 +99,8 @@ public class NamespaceTextNode extends TextTreeNode implements TreeElement {
   }
 
   public List<SModule> getModulesUnder() {
-    List<SModule> modules = new ArrayList<SModule>();
-    for (MPSTreeNode child : this) {
+    List<SModule> modules = new ArrayList<>();
+    for (MPSTreeNode child : getChildren()) {
       if (child instanceof ProjectModuleTreeNode) {
         modules.add(((ProjectModuleTreeNode) child).getModule());
       } else if (child instanceof NamespaceTextNode) {

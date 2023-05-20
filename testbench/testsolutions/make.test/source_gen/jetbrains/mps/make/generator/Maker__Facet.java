@@ -24,7 +24,7 @@ public class Maker__Facet extends IFacet.Stub {
   private List<ITarget> targets = ListSequence.fromList(new ArrayList<ITarget>());
   private IFacet.Name name = new IFacet.Name("jetbrains.mps.make.tests.Maker_");
   public Maker__Facet() {
-    ListSequence.fromList(targets).addElement(new Maker__Facet.Target_Make());
+    ListSequence.fromList(targets).addElement(new Target_Make());
   }
   public Iterable<ITarget> targets() {
     return targets;
@@ -42,7 +42,7 @@ public class Maker__Facet extends IFacet.Stub {
     return this.name;
   }
   public IPropertiesPersistence propertiesPersistence() {
-    return new Maker__Facet.TargetProperties();
+    return new TargetProperties();
   }
   public static class Target_Make implements ITargetEx {
     private static final ITarget.Name name = new ITarget.Name("jetbrains.mps.make.tests.Maker_.Make");
@@ -57,6 +57,7 @@ public class Maker__Facet extends IFacet.Stub {
           switch (0) {
             case 0:
             default:
+              progressMonitor.done();
               return new IResult.SUCCESS(_output_izvplp_a0a);
           }
         }

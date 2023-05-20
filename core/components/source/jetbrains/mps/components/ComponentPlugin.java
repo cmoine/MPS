@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,16 +22,15 @@ import java.util.LinkedList;
  * evgeny, 10/14/11
  */
 public class ComponentPlugin {
-  private Deque<CoreComponent> myComponents;
+  private final Deque<CoreComponent> myComponents = new LinkedList<>();
 
   public void init() {
-    myComponents = new LinkedList<CoreComponent>();
   }
 
   /**
    * this method is called from inheritors. Initialize a component and returns an initialized component instance
    */
-  protected <T extends CoreComponent> T init(final T component) {
+  protected final <T extends CoreComponent> T init(final T component) {
     try {
       component.init();
       myComponents.push(component);
@@ -42,9 +41,6 @@ public class ComponentPlugin {
   }
 
   public void dispose() {
-    if (myComponents == null) {
-      return;
-    }
     while (!myComponents.isEmpty()) {
       dispose(myComponents.pop());
     }

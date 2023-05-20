@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="4qzdywadm1odlrofcyosbv20etom1r4">
+  <files names="EndInstruction.java:EndTryInstruction.java:FinallyInstruction.java:IfJumpInstruction.java:Instruction.java:InstructionBuilder.java:JumpInstruction.java:LabelNopInstruction.java:NopInstruction.java:ReadInstruction.java:RetInstruction.java:TryInstruction.java:WriteInstruction.java" />
+</product>
+

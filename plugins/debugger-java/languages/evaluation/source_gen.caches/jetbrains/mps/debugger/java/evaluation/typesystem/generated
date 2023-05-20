@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-7nvx0m8w625bzf63y9fmkg6q8ayjpqp" />
+<product version="3" modelHash="-bsxmzo3pxfnnp7cfsubwhj16btf1q3r">
+  <files names="DebuggedtypeIsHighLevelType_SubtypingRule.java:TypesystemDescriptor.java:typeof_DownCastToLowLevel_InferenceRule.java:typeof_EvaluatorsThisExpression_InferenceRule.java:typeof_LowLevelVariableReference_InferenceRule.java:typeof_LowLevelVariable_InferenceRule.java:typeof_UnitNode_InferenceRule.java" />
+</product>
 

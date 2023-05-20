@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <root nodeRef="r:7fc220b5-3806-43f7-a6e6-6f3ea2d76c9c(util)/7082824793308696454">
+    <file name="NameHelper.java">
+      <node id="66188535716407265" at="13,0,14,0" concept="2" trace="myRuleDecl" />
+      <node id="2740527090601642797" at="14,0,15,0" concept="2" trace="myGenContext" />
+      <node id="66188535716408472" at="16,79,17,26" concept="1" />
+      <node id="2740527090601643679" at="17,26,18,30" concept="1" />
+      <node id="1540166288377306430" at="22,38,23,57" concept="5" />
+      <node id="2740527090601648540" at="28,77,29,106" concept="1" />
+      <node id="1540166288377365872" at="30,5,31,19" concept="5" />
+      <node id="2740527090601650932" at="36,79,37,81" concept="1" />
+      <node id="8452785328911042429" at="38,5,39,72" concept="5" />
+      <node id="7082824793308696454" at="43,0,44,0" concept="6" trace="name$MnvL" />
+      <node id="7082824793308696454" at="44,0,45,0" concept="6" trace="ruleId$WGdw" />
+      <node id="2740527090601645200" at="27,36,30,5" concept="3" />
+      <node id="2740527090601650930" at="35,34,38,5" concept="3" />
+      <node id="7082824793308708548" at="16,0,20,0" concept="0" trace="NameHelper#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/generator/template/TemplateQueryContext;)V" />
+      <node id="7082824793308696498" at="21,0,25,0" concept="4" trace="getGeneratedString#()Ljava/lang/String;" />
+      <node id="1540166288377365897" at="26,0,33,0" concept="4" trace="getGeneratedName#()Ljava/lang/String;" />
+      <node id="1540166288377303469" at="34,0,41,0" concept="4" trace="getGeneratedId#()Ljava/lang/String;" />
+      <scope id="7082824793308696506" at="22,38,23,57" />
+      <scope id="2740527090601645202" at="28,77,29,106" />
+      <scope id="2740527090601650931" at="36,79,37,81" />
+      <scope id="7082824793308708552" at="16,79,18,30" />
+      <scope id="7082824793308708548" at="16,0,20,0">
+        <var name="genContext" id="2740527090601641990" />
+        <var name="ruleDecl" id="1540166288377303867" />
+      </scope>
+      <scope id="7082824793308696498" at="21,0,25,0" />
+      <scope id="1540166288377365854" at="27,36,31,19" />
+      <scope id="1540166288377303472" at="35,34,39,72" />
+      <scope id="1540166288377365897" at="26,0,33,0" />
+      <scope id="1540166288377303469" at="34,0,41,0" />
+      <unit id="7082824793308696454" at="42,0,46,0" name="util.NameHelper$PROPS" />
+      <unit id="7082824793308696454" at="12,0,47,0" name="util.NameHelper" />
+    </file>
+  </root>
+</debug-info>
+

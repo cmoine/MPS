@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="44xyetdzl8h62ai7pq1vq0qjq03paht" />
+<product version="3" modelHash="58zw8wg4dzvb0kgmxdtlzuvd39x8qpn">
+  <files names="Account.java:AccountType.java:AccountingEvent.java:AccountingException.java:AccountingTransaction.java:Adjustment.java:AgreementRegistry.java:AmountFormulaPR.java:Customer.java:Entry.java:EventList.java:EventType.java:MissingPostingRuleException.java:MonetaryEvent.java:MultiplyByRatePR.java:PoorCapPR.java:PostingRule.java:ServiceAgreement.java:Subject.java:TaxEvent.java:Usage.java" />
+</product>
 

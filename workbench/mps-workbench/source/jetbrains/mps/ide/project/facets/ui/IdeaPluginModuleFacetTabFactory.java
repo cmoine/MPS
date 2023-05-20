@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +15,13 @@
  */
 package jetbrains.mps.ide.project.facets.ui;
 
-import jetbrains.mps.ide.project.facets.IdeaPluginModuleFacetImpl;
+import jetbrains.mps.classloading.IdeaPluginModuleFacet;
 import org.jetbrains.mps.openapi.ui.persistence.FacetTab;
 import org.jetbrains.mps.openapi.ui.persistence.TabFactory;
 
-public class IdeaPluginModuleFacetTabFactory implements TabFactory<IdeaPluginModuleFacetImpl> {
+public class IdeaPluginModuleFacetTabFactory implements TabFactory<IdeaPluginModuleFacet> {
   @Override
-  public FacetTab getTab(IdeaPluginModuleFacetImpl moduleFacet) {
+  public FacetTab getTab(IdeaPluginModuleFacet moduleFacet) {
     return new IdeaPluginModuleFacetTab(moduleFacet);
   }
 }

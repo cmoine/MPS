@@ -9,27 +9,32 @@ import jetbrains.mps.typesystem.inference.TypeCheckingContext;
 import jetbrains.mps.lang.typesystem.runtime.IsApplicableStatus;
 import java.util.List;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.baseLanguage.behavior.BaseMethodDeclaration__BehaviorDescriptor;
 import jetbrains.mps.baseLanguage.behavior.InstanceMethodDeclaration__BehaviorDescriptor;
 import jetbrains.mps.internal.collections.runtime.IVisitor;
 import jetbrains.mps.baseLanguage.behavior.Classifier__BehaviorDescriptor;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import jetbrains.mps.smodel.SNodePointer;
 import jetbrains.mps.internal.collections.runtime.Sequence;
 import jetbrains.mps.internal.collections.runtime.IWhereFilter;
+import java.util.Objects;
 import jetbrains.mps.internal.collections.runtime.SetSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.errors.messageTargets.MessageTarget;
 import jetbrains.mps.errors.messageTargets.NodeMessageTarget;
 import jetbrains.mps.errors.IErrorReporter;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SProperty;
+import org.jetbrains.mps.openapi.language.SConcept;
 
 public class check_InstanceMethodDeclarationThrownExceptionsSignature_NonTypesystemRule extends AbstractNonTypesystemRule_Runtime implements NonTypesystemRule_Runtime {
   public check_InstanceMethodDeclarationThrownExceptionsSignature_NonTypesystemRule() {
   }
   public void applyRule(final SNode instanceMethodDeclaration, final TypeCheckingContext typeCheckingContext, IsApplicableStatus status) {
-    List<SNode> myThrown = SLinkOperations.getChildren(instanceMethodDeclaration, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, 0x10f383d6949L, "throwsItem"));
+    List<SNode> myThrown = SLinkOperations.getChildren(instanceMethodDeclaration, LINKS.throwsItem$CdW$);
     if (ListSequence.fromList(myThrown).isEmpty()) {
       return;
     }
@@ -42,7 +47,7 @@ public class check_InstanceMethodDeclarationThrownExceptionsSignature_NonTypesys
       return;
     }
 
-    final List<SNode> superThrown = SLinkOperations.getChildren(nearestOverriddenMethod, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, 0x10f383d6949L, "throwsItem"));
+    final List<SNode> superThrown = SLinkOperations.getChildren(nearestOverriddenMethod, LINKS.throwsItem$CdW$);
     ListSequence.fromList(myThrown).visitAll(new IVisitor<SNode>() {
       public void visit(SNode my) {
         final SNode myClassifier = ThrownTypeVariableReferencesHelper.retrieveClassifier(my);
@@ -51,23 +56,23 @@ public class check_InstanceMethodDeclarationThrownExceptionsSignature_NonTypesys
         }
         Iterable<SNode> superTypes = Classifier__BehaviorDescriptor.getAllExtendedClassifiers_id2xreLMO8jma.invoke(myClassifier);
 
-        if (!((eq_l20hbd_a0a0a0e0a0a0a0i0b(myClassifier, SNodeOperations.getNode("6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)", "~RuntimeException")) || Sequence.fromIterable(superTypes).any(new IWhereFilter<SNode>() {
+        if (!(SNodeOperations.is(myClassifier, new SNodePointer("6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)", "~RuntimeException")) || Sequence.fromIterable(superTypes).any(new IWhereFilter<SNode>() {
           public boolean accept(SNode it) {
-            return eq_l20hbd_a0a0a0a0a0a0a0e0a0a0a0i0b(it, SNodeOperations.getNode("6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)", "~RuntimeException"));
+            return SNodeOperations.is(it, new SNodePointer("6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)", "~RuntimeException"));
           }
-        }))) && !(ListSequence.fromList(superThrown).any(new IWhereFilter<SNode>() {
+        })) && !(ListSequence.fromList(superThrown).any(new IWhereFilter<SNode>() {
           public boolean accept(SNode it) {
             final SNode superClassifier = ThrownTypeVariableReferencesHelper.retrieveClassifier(it);
-            return superClassifier != null && (eq_l20hbd_a0a0a1a0a0a0a0a4a0a0a0a8a1(myClassifier, superClassifier) || SetSequence.fromSet(Classifier__BehaviorDescriptor.getAllExtendedClassifiers_id2xreLMO8jma.invoke(myClassifier)).any(new IWhereFilter<SNode>() {
+            return superClassifier != null && (Objects.equals(myClassifier, superClassifier) || SetSequence.fromSet(Classifier__BehaviorDescriptor.getAllExtendedClassifiers_id2xreLMO8jma.invoke(myClassifier)).any(new IWhereFilter<SNode>() {
               public boolean accept(SNode it) {
-                return eq_l20hbd_a0a0a0a0a0a0a1a0a0a0a0a4a0a0a0a8a1(it, superClassifier);
+                return Objects.equals(it, superClassifier);
               }
             }));
           }
         }))) {
-          String thrownName = SPropertyOperations.getString(myClassifier, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name"));
+          String thrownName = SPropertyOperations.getString(myClassifier, PROPS.name$MnvL);
           {
-            MessageTarget errorTarget = new NodeMessageTarget();
+            final MessageTarget errorTarget = new NodeMessageTarget();
             IErrorReporter _reporter_2309309498 = typeCheckingContext.reportTypeError(my, "Overriden method does not throw " + thrownName, "r:00000000-0000-4000-0000-011c895902c5(jetbrains.mps.baseLanguage.typesystem)", "8302934035215147192", null, errorTarget);
           }
         }
@@ -75,7 +80,7 @@ public class check_InstanceMethodDeclarationThrownExceptionsSignature_NonTypesys
     });
   }
   public SAbstractConcept getApplicableConcept() {
-    return MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b21dL, "jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration");
+    return CONCEPTS.InstanceMethodDeclaration$39;
   }
   public IsApplicableStatus isApplicableAndPattern(SNode argument) {
     return new IsApplicableStatus(argument.getConcept().isSubConceptOf(getApplicableConcept()), null);
@@ -83,16 +88,16 @@ public class check_InstanceMethodDeclarationThrownExceptionsSignature_NonTypesys
   public boolean overrides() {
     return false;
   }
-  private static boolean eq_l20hbd_a0a0a1a0a0a0a0a4a0a0a0a8a1(Object a, Object b) {
-    return (a != null ? a.equals(b) : a == b);
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink throwsItem$CdW$ = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, 0x10f383d6949L, "throwsItem");
   }
-  private static boolean eq_l20hbd_a0a0a0a0a0a0a1a0a0a0a0a4a0a0a0a8a1(Object a, Object b) {
-    return (a != null ? a.equals(b) : a == b);
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
-  private static boolean eq_l20hbd_a0a0a0a0a0a0a0e0a0a0a0i0b(Object a, Object b) {
-    return (a != null ? a.equals(b) : a == b);
-  }
-  private static boolean eq_l20hbd_a0a0a0e0a0a0a0i0b(Object a, Object b) {
-    return (a != null ? a.equals(b) : a == b);
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept InstanceMethodDeclaration$39 = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b21dL, "jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration");
   }
 }

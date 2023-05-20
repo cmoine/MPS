@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="1oooljbn62l3jr7x8fadyjmdemnrmrr" />
+<product version="3" modelHash="7zfsmwkkyklqazxoka89slwgim381y0">
+  <files names="AttributedNodePart_Constraints.java:ConceptTextGenDeclaration_Constraints.java:ConstraintsAspectDescriptor.java:EncodingLiteral_Constraints.java:LanguageTextGenDeclaration_Constraints.java:OperationDeclaration_Constraints.java:TextUnitLayout_Constraints.java:UnitContextDeclaration_Constraints.java:UnitContextReference_Constraints.java:UtilityMethodDeclaration_Constraints.java" />
+</product>
 

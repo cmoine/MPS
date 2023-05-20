@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,9 @@
  */
 package jetbrains.mps.java.stub;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeId;
-import org.jetbrains.mps.openapi.model.SReference;
 
 /**
  * PROVISIONAL API
@@ -31,7 +29,7 @@ import org.jetbrains.mps.openapi.model.SReference;
 public interface ReferenceFactory {
   /**
    * For a given package name and id of target classifier(?), build a model reference (tailored for the given
-   * role in the source node)
+   * role in the source node) and adds it to the source node
    * @param source origin of the link
    * @param pack name of Java package
    * @param targetNodeId identifies classifier(?) we look up
@@ -41,8 +39,6 @@ public interface ReferenceFactory {
    *                            Hint value to pick best possible package and not to force complete model load.
    *                            Since we load stub models in two steps, with roots available first, check for top classifier
    *                            through SModel.getNode(SNodeId) doesn't trigger complete load.
-   * @return reference to add, never <code>null</code>
    */
-  @NotNull
-  SReference create(SNode source, String pack, SNodeId targetNodeId, SReferenceLink role, String resolveInfo, SNodeId targetTopClassifier);
+  void create(SNode source, String pack, SNodeId targetNodeId, SReferenceLink role, String resolveInfo, SNodeId targetTopClassifier);
 }

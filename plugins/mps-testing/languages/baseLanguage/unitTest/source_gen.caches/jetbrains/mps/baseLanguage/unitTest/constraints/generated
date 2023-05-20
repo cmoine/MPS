@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="c7qmn2va5peheyidaax41s1q685g31" />
+<product version="3" modelHash="51xkpqw9y8bhqrkur84ryf5dn2576fu">
+  <files names="BTestCase_Constraints.java:ConstraintsAspectDescriptor.java:TestMethod_Constraints.java" />
+</product>
 

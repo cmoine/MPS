@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,18 +17,13 @@ package jetbrains.mps.ide.findusages.view.treeholder.tree.nodedatatypes;
 
 import jetbrains.mps.ide.findusages.CantLoadSomethingException;
 import jetbrains.mps.ide.findusages.CantSaveSomethingException;
-import jetbrains.mps.ide.findusages.view.treeholder.tree.TextOptions;
 import jetbrains.mps.ide.findusages.view.treeholder.treeview.path.PathItemRole;
-import jetbrains.mps.ide.icons.IconManager;
+import jetbrains.mps.ide.icons.GlobalIconManager;
 import jetbrains.mps.logging.Logger;
 import jetbrains.mps.openapi.navigation.EditorNavigator;
 import jetbrains.mps.openapi.navigation.ProjectPaneNavigator;
 import jetbrains.mps.project.Project;
-import jetbrains.mps.smodel.MPSModuleRepository;
 import jetbrains.mps.smodel.SNodeUtil;
-import jetbrains.mps.util.StringUtil;
-import jetbrains.mps.util.annotation.ToRemove;
-import org.apache.log4j.LogManager;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -39,49 +34,46 @@ import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
 import javax.swing.Icon;
 
 public class NodeNodeData extends AbstractResultNodeData {
-  private static final Logger LOG = Logger.wrap(LogManager.getLogger(NodeNodeData.class));
+  private static final Logger LOG = Logger.getLogger(NodeNodeData.class);
 
   private static final String NODE = "nodePtr";
+  private static final String IS_ROOT = "isRoot";
 
   private SNodeReference myNodePointer;
+  private boolean myIsRootNode;
 
-  public NodeNodeData(PathItemRole role, @Nullable String caption, @NotNull SNode pathObject, boolean isPathTail, boolean resultsSection) {
-    super(role, caption != null ? caption : snodeRepresentation(pathObject), nodeAdditionalInfo(pathObject), false, isPathTail, resultsSection);
+  public NodeNodeData(PathItemRole role, @NotNull SNode pathObject, @Nullable Object presentationObject, boolean isPathTail, boolean resultsSection) {
+    super(role, snodeRepresentation(pathObject), nodeAdditionalInfo(pathObject), presentationObject, isPathTail, resultsSection);
     myNodePointer = pathObject.getReference();
+    myIsRootNode = pathObject.getModel() != null && pathObject.getParent() == null;
   }
 
   public NodeNodeData(Element element, Project project) throws CantLoadSomethingException {
-    read(element, project);
+    super(element, project);
   }
 
   public SNodeReference getNodePointer() {
     return myNodePointer;
   }
 
-  /**
-   * @deprecated use {@link #getNodePointer()} and resolve as appropriate
-   */
-  @Deprecated
-  @ToRemove(version = 3.3)
-  public SNode getNode() {
-    return myNodePointer.resolve(MPSModuleRepository.getInstance());
-  }
-
   @Override
-  public Icon getIcon() {
-    final SNode node = getNode();
-    return node == null ? null : IconManager.getIconFor(node);
+  public Icon getIcon(PresentationContext presentationContext) {
+    final SNode node = myNodePointer.resolve(presentationContext.getRepository());
+    return node == null ? null : GlobalIconManager.getInstance().getIconFor(node);
   }
 
   @Override
   public String createIdObject() {
-    return myNodePointer.toString() + "/" + getPlainText();
+    return myNodePointer.toString();
   }
 
   @Override
   public void write(Element element, Project project) throws CantSaveSomethingException {
     super.write(element, project);
     element.setAttribute(NODE, PersistenceFacade.getInstance().asString(myNodePointer));
+    if (myIsRootNode) {
+      element.setAttribute(IS_ROOT, Boolean.TRUE.toString());
+    }
   }
 
   @Override
@@ -89,6 +81,7 @@ public class NodeNodeData extends AbstractResultNodeData {
     super.read(element, project);
     try {
       myNodePointer = PersistenceFacade.getInstance().createNodeReference(element.getAttributeValue(NODE));
+      myIsRootNode = Boolean.parseBoolean(element.getAttributeValue(IS_ROOT)); // false for null if fine.
     } catch (Exception ex) {
       throw new CantLoadSomethingException(ex);
     }
@@ -99,7 +92,6 @@ public class NodeNodeData extends AbstractResultNodeData {
       String presentation = SNodeUtil.getPresentation(node);
       String result = (presentation != null) ? presentation : node.toString();
       LOG.assertLog(result != null, "Node presentation is null.");
-      result = StringUtil.escapeXml(result);
       return result;
     } catch (Throwable t) {
       LOG.error(t);
@@ -108,27 +100,14 @@ public class NodeNodeData extends AbstractResultNodeData {
   }
 
   private static String nodeAdditionalInfo(final SNode node) {
-    if (node.getParent() == null) return "";
-    return "role: " +
-      "<i>" +
-      StringUtil.escapeXml(node.getRoleInParent()) +
-      "</i>" +
-      "; " +
-      "in: " +
-      "<i>" +
-      snodeRepresentation(node.getParent()) +
-      "</i>";
+    if (node.getParent() == null) {
+      return "";
+    }
+    return String.format("(role: %s in: %s)", node.getContainmentLink().getName(), snodeRepresentation(node.getParent()));
   }
 
-  @Override
-  public String getText(TextOptions options) {
-    boolean showCounter = options.myCounters && isResultsSection();
-    String counter = showCounter ? " " + sizeRepresentation(options.mySubresultsCount) : "";
-    return super.getText(options) + counter;
-  }
-
-  private static String sizeRepresentation(int size) {
-    return "<font color='gray'>(" + Integer.toString(size) + ")</font>";
+  public boolean isRootNode() {
+    return myIsRootNode;
   }
 
   @Override

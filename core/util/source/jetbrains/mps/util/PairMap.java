@@ -23,14 +23,14 @@ import java.util.Set;
  * Bidirectional map from pair (K1, K2) <-> V
  */
 public class PairMap<K1, K2, V> {
-  private Map<K1, Map<K2, V>> myMap = new HashMap<K1, Map<K2, V>>();
-  private Map<V, K1> myValueToK1Map = new HashMap<V, K1>();
-  private Map<V, K2> myValueToK2Map = new HashMap<V, K2>();
+  private Map<K1, Map<K2, V>> myMap = new HashMap<>();
+  private Map<V, K1> myValueToK1Map = new HashMap<>();
+  private Map<V, K2> myValueToK2Map = new HashMap<>();
 
   public void put(K1 k1, K2 k2, V v) {
     Map<K2, V> map = myMap.get(k1);
     if (map == null) {
-      map = new HashMap<K2, V>();
+      map = new HashMap<>();
       myMap.put(k1, map);
     }
     V oldV = map.put(k2, v);

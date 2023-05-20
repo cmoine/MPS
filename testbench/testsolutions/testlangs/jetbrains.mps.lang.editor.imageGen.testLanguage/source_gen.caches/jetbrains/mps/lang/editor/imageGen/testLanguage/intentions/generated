@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-3sery2jq609v5ujnwicjjjgqwvye0b7" />
+<product version="3" modelHash="77l7surjm4q0ofx4aug5h2vsau2b4eo">
+  <files names="AddExportAsImageAttribute.java:IntentionsDescriptor.java" />
+</product>
 

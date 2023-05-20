@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-b8ibbw07u1xurfky2pou17b8qaqts36" />
+<product version="3" modelHash="aqfyzx4rmu5eaxtayyscu6uyrf4wf7d">
+  <files names="AddAuthorBlockDocTag_Intention.java:AddClassifierDocComment_Intention.java:AddDeprecatedBlockDocTag_Intention.java:AddFieldDocComment_Intention.java:AddMethodDocComment_Intention.java:AddParameterBlockDocTag_Intention.java:AddReturnBlockTag_Intention.java:AddSeeBlockTag_Intention.java:AddSinceBlockDocTag_Intention.java:AddStaticFieldDocComment_Intention.java:AddThrowBlockDocTag_Intention.java:AddVersionBlockTagDoc_Intention.java:BlockDocTagHelper.java:DocCommentHelper.java:FoldHTMLElement_Intention.java:IntentionsDescriptor.java:OrganizeTags_Intention.java" />
+</product>
 

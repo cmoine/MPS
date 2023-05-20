@@ -38,7 +38,7 @@ public class SubTypingRelation extends AbstractRelation {
     SNode result = null;
     EquationInfo info = null;
     if (!leftTypes.isEmpty()) {
-      final LinkedList<SNode> leftTypesList = new LinkedList<SNode>();
+      final LinkedList<SNode> leftTypesList = new LinkedList<>();
       for (SNode lt: leftTypes) {
         if (LatticeUtil.isMeet(lt)) {
           lt = TypesUtil.cleanupMeet(lt);
@@ -61,10 +61,10 @@ public class SubTypingRelation extends AbstractRelation {
   }
 
   private SNode createMeet(Set<SNode> rightTypes) {
-    List<SNode> types = new LinkedList<SNode>(rightTypes);
+    List<SNode> types = new LinkedList<>(rightTypes);
     if (types.size() > 1) {
       types = SubtypingUtil.eliminateSuperTypes(types);
     }
-    return LatticeUtil.meetNodes(new LinkedHashSet<SNode>(types));
+    return LatticeUtil.meetNodes(new LinkedHashSet<>(types));
   }
 }

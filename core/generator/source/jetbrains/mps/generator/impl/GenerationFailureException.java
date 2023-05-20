@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2016 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,17 +24,20 @@ import org.jetbrains.annotations.NotNull;
 public class GenerationFailureException extends GenerationException {
 
   /**
-   * There's intentionally no message as this cons is intended merely to propagate
-   * an error otherwise reported
+   * There's intentionally no message as this cons is intended merely to propagate an error otherwise reported.
+   * However, do not report an error with extra log statement, message of this exception gets logged.
    * @param cause error origin
    */
   public GenerationFailureException(@NotNull Throwable cause) {
-    // FIXME perhaps, shall reconsider and allow message along with the cause, to avoid explicit log in the DefaultQueryExecutionContext methods?
-    super(toBetterCause(cause));
+    super(null, toBetterCause(cause));
   }
 
   public GenerationFailureException(@NotNull String message) {
     super(message);
+  }
+
+  public GenerationFailureException(@NotNull String message, @NotNull Throwable cause) {
+    super(message, toBetterCause(cause));
   }
 
   private static Throwable toBetterCause(Throwable cause) {

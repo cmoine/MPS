@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,10 @@
  */
 package org.jetbrains.mps.openapi.ui.persistence;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.persistence.ModelRoot;
 
-public interface ModelRootEntryFactory {
-  ModelRootEntry getModelRootEntry(ModelRoot modelRoot);
+public interface ModelRootEntryFactory<T extends ModelRoot> {
+  // FIXME unfortunate API, type parameters for reflective/generic invocations bring more harm than good.
+  @NotNull ModelRootEntry<T> getModelRootEntry(@NotNull T modelRoot);
 }

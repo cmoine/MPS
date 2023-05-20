@@ -4,27 +4,34 @@ package jetbrains.mps.generator.test.crossmodel.entity.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_Entry = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_NodeA = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TrivialKeeper = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_Entry;
+  private ConceptPresentation props_NodeA;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.Entry:
+        if (props_Entry == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Entry = cpb.create();
+        }
         return props_Entry;
-      case 1:
+      case LanguageConceptSwitch.NodeA:
+        if (props_NodeA == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_NodeA = cpb.create();
+        }
         return props_NodeA;
-      case 2:
-        return props_TrivialKeeper;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,11 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.core.psi.impl;
 
 import com.intellij.lang.FileASTNode;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -28,7 +26,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiFileSystemItem;
 import com.intellij.psi.PsiManager;
-import com.intellij.psi.SingleRootFileViewProvider;
 import com.intellij.psi.search.PsiElementProcessor;
 import com.intellij.util.IncorrectOperationException;
 import jetbrains.mps.extapi.persistence.FileDataSource;
@@ -37,10 +34,11 @@ import jetbrains.mps.icons.MPSIcons.Nodes;
 import jetbrains.mps.ide.icons.GlobalIconManager;
 import jetbrains.mps.ide.icons.IdeIcons;
 import jetbrains.mps.ide.project.ProjectHelper;
-import jetbrains.mps.ide.vfs.VirtualFileUtils;
 import jetbrains.mps.idea.core.projectView.edit.SNodeDeleteProvider;
+import jetbrains.mps.idea.core.psi.MPSNodeFileViewProvider;
+import jetbrains.mps.nodefs.MPSNodeVirtualFile;
 import jetbrains.mps.nodefs.NodeVirtualFileSystem;
-import jetbrains.mps.openapi.navigation.NavigationSupport;
+import jetbrains.mps.openapi.navigation.EditorNavigator;
 import jetbrains.mps.smodel.ModelAccessHelper;
 import jetbrains.mps.smodel.SNodePointer;
 import org.jetbrains.annotations.NonNls;
@@ -61,23 +59,24 @@ import java.util.Collections;
  * Date: 3/5/13
  */
 public class MPSPsiRootNode extends MPSPsiNodeBase implements PsiFile, PsiBinaryFile, MPSPsiRealNode {
-
   private final FileViewProvider myViewProvider;
   private final SNodeId myNodeId;
   private final String myName;
+  @NotNull
   private final MPSPsiModel myModel;
   private VirtualFile mySeparateFile;
 
-  public MPSPsiRootNode(SNodeId nodeId, @NotNull String name, MPSPsiModel containingModel, PsiManager manager) {
+  public MPSPsiRootNode(SNodeReference nodeRef, @NotNull String name, @NotNull MPSPsiModel containingModel, PsiManager manager) {
     super(manager);
-    myNodeId = nodeId;
+    myNodeId = nodeRef.getNodeId();
     myModel = containingModel;
     myName = name;
-    myViewProvider = new SingleRootFileViewProvider(manager, NodeVirtualFileSystem.getInstance().getFileFor(getProjectRepository(), getSNodeReference()), false);
+    MPSNodeVirtualFile nodeFile = NodeVirtualFileSystem.getInstance().getFileFor(ProjectHelper.getProjectRepository(manager.getProject()), nodeRef);
+    myViewProvider = new MPSNodeFileViewProvider(manager, nodeFile);
   }
 
-  public MPSPsiRootNode(SNodeId nodeId, @NotNull String name, MPSPsiModel containingModel, PsiManager manager, @NotNull VirtualFile virtualFile) {
-    this(nodeId, name, containingModel, manager);
+  public MPSPsiRootNode(SNodeReference nodeRef, @NotNull String name, @NotNull MPSPsiModel containingModel, PsiManager manager, @NotNull VirtualFile virtualFile) {
+    this(nodeRef, name, containingModel, manager);
     mySeparateFile = virtualFile;
   }
 
@@ -87,7 +86,7 @@ public class MPSPsiRootNode extends MPSPsiNodeBase implements PsiFile, PsiBinary
     return new ModelAccessHelper(repository.getModelAccess()).runReadAction(() -> {
       final SNode node = getSNodeReference().resolve(repository);
       if (node == null) return IdeIcons.UNKNOWN_ICON;
-      final GlobalIconManager globalIconManager = ApplicationManager.getApplication().getComponent(GlobalIconManager.class);
+      final GlobalIconManager globalIconManager = GlobalIconManager.getInstance();
       return globalIconManager == null ? Nodes.Node : globalIconManager.getIconFor(node);
     });
   }
@@ -126,20 +125,20 @@ public class MPSPsiRootNode extends MPSPsiNodeBase implements PsiFile, PsiBinary
       SModel sModel = myModel.getSModelReference().resolve(repository);
       DataSource dataSource = sModel.getSource();
       if (dataSource instanceof FileDataSource) {
-        return VirtualFileUtils.getProjectVirtualFile(((FileDataSource) dataSource).getFile());
+        return MPSPsiModel.projectVirtualFile(((FileDataSource) dataSource).getFile());
       }
       return null;
     });
   }
 
   @Override
-  public boolean processChildren(PsiElementProcessor<PsiFileSystemItem> processor) {
+  public boolean processChildren(PsiElementProcessor<? super PsiFileSystemItem> processor) {
     return false;
   }
 
   @Override
   public MPSPsiModel getContainingModel() {
-    return myModel != null ? myModel : super.getContainingModel();
+    return myModel;
   }
 
   @Nullable
@@ -156,10 +155,7 @@ public class MPSPsiRootNode extends MPSPsiNodeBase implements PsiFile, PsiBinary
   @Nullable
   @Override
   public PsiDirectory getParent() {
-    if (myViewProvider.getVirtualFile().getFileType() == MPSFileTypeFactory.MPS_ROOT_FILE_TYPE && super.getParent() instanceof MPSPsiModel) {
-      return ((MPSPsiModel) super.getParent()).getParentDirectory();
-    }
-    return (PsiDirectory) super.getParent();
+    return getContainingModel();
   }
 
   @Override
@@ -217,22 +213,22 @@ public class MPSPsiRootNode extends MPSPsiNodeBase implements PsiFile, PsiBinary
 
   @Override
   public void navigate(final boolean requestFocus) {
-    final SRepository repository = getProjectRepository();
-    repository.getModelAccess().runWriteInEDT(() -> {
-      SModel model = myModel.getSModelReference().resolve(repository);
-      if (model == null) return;
-
-      SNode node = model.getNode(myNodeId);
-      if (node == null) return;
-
-      NavigationSupport.getInstance().openNode(ProjectHelper.fromIdeaProject(getProject()), node, requestFocus, false);
-    });
+    // XXX not clear why we keep node id and use myModel.getSModelReference when there's SNodeReference in cons
+    new EditorNavigator(ProjectHelper.fromIdeaProject(getProject())).shallFocus(requestFocus).open(new SNodePointer(myModel.getSModelReference(), myNodeId));
   }
 
   @Override
   public boolean isPhysical() {
-    // Honestly check that file is physical - per root RootNode will return true
-    return this.getVirtualFile() != null && !this.getVirtualFile().equals(myModel.getSourceVirtualFile());
+    // return this.getVirtualFile() != null && !this.getVirtualFile().equals(myModel.getSourceVirtualFile());
+    // XXX there's a long story for this method. Initially, unconditional 'true',
+    // then (7e10f696) true only for a root in per-root persistence,
+    // and now unconditionally false. FileViewProvider.isPhysical() javadoc suggests
+    // "...PsiFile.isPhysical() which (for historical reasons) returns getViewProvider().isEventSystemEnabled()"
+    // therefore we stick to MPSNodeFileViewProvider.EVENT_SYSTEM_ENABLED value.
+    // If there's a need to answer true in case if per-root nodes (no idea what's reasoning behind 7e10f696 change),
+    // likely, we'd need to modify MPSNodeFileViewProvider as well (e.g. FVP.isPhysical() to match this method or
+    // even to modify FVP.isEventSystemEnabled().
+    return false;
   }
 
   @Override
@@ -284,9 +280,7 @@ public class MPSPsiRootNode extends MPSPsiNodeBase implements PsiFile, PsiBinary
 
   @Override
   public String getText() {
-    // implemented to avoid assertion error in PsiDocumentManagerImpl.getDocument(PsiFile)
-    // document.getTextLength() != file.getTextLength() fails
-    return myViewProvider.getPsi(getLanguage()).getText();
+    return null;
   }
 
   @Override

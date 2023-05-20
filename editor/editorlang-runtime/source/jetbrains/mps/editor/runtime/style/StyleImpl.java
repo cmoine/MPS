@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,12 @@
 package jetbrains.mps.editor.runtime.style;
 
 import jetbrains.mps.editor.runtime.style.StyleAttributeMap.DiscardValue;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.openapi.editor.style.Style;
 import jetbrains.mps.openapi.editor.style.StyleAttribute;
 import jetbrains.mps.openapi.editor.style.StyleChangeEvent;
 import jetbrains.mps.openapi.editor.style.StyleListener;
-import jetbrains.mps.util.EqualUtil;
 import jetbrains.mps.util.containers.EmptyIterator;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,6 +31,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -40,7 +39,7 @@ import java.util.Set;
  * Date: 1/11/13
  */
 public class StyleImpl implements Style {
-  private static final Logger LOG = LogManager.getLogger(StyleImpl.class);
+  private static final Logger LOG = Logger.getLogger(StyleImpl.class);
 
   private Style myParent;
   private List<Style> myChildren = null;
@@ -171,7 +170,7 @@ public class StyleImpl implements Style {
   @Override
   public void addListener(StyleListener l) {
     if (myStyleListeners == null) {
-      myStyleListeners = new ArrayList<StyleListener>(1);
+      myStyleListeners = new ArrayList<>(1);
     }
     myStyleListeners.add(l);
   }
@@ -195,7 +194,7 @@ public class StyleImpl implements Style {
       try {
         l.styleChanged(e);
       } catch (Throwable t) {
-        LOG.error(null, t);
+        LOG.error(t);
       }
     }
   }
@@ -203,7 +202,7 @@ public class StyleImpl implements Style {
   @Override
   public void add(Style child) {
     if (myChildren == null) {
-      myChildren = new LinkedList<Style>();
+      myChildren = new LinkedList<>();
     }
     myChildren.add(child);
     child.setParent(this, getNonDefaultValuedAttributes());
@@ -252,8 +251,8 @@ public class StyleImpl implements Style {
       Collection<IntPair<Object>> currentValues = TopLevelStyleMap.isEmpty(attributePointer) ? null : myAttributes.getAll(attribute, attributePointer);
       Collection<IntPair<Object>> oldValues = TopLevelStyleMap.isEmpty(cachedAttributePointer) ? null : myCachedAttributes.getAll(attribute, cachedAttributePointer);
 
-      Iterator<IntPair<Object>> parentIterator = parentValues == null ? new EmptyIterator<IntPair<Object>>() : parentValues.iterator();
-      Iterator<IntPair<Object>> currentIterator = currentValues == null ? new EmptyIterator<IntPair<Object>>() : currentValues.iterator();
+      Iterator<IntPair<Object>> parentIterator = parentValues == null ? new EmptyIterator<>() : parentValues.iterator();
+      Iterator<IntPair<Object>> currentIterator = currentValues == null ? new EmptyIterator<>() : currentValues.iterator();
 
       IntPair<Object> parentValue;
       IntPair<Object> currentValue;
@@ -261,7 +260,7 @@ public class StyleImpl implements Style {
       parentValue = parentIterator.hasNext() ? parentIterator.next() : null;
       currentValue = currentIterator.hasNext() ? currentIterator.next() : null;
 
-      StyleAttributeMap<Object> newValues = new StyleAttributeMap<Object>();
+      StyleAttributeMap<Object> newValues = new StyleAttributeMap<>();
       while (parentValue != null || currentValue != null ) {
 
         if (currentValue != null && (parentValue == null || currentValue.index < parentValue.index)) {
@@ -281,7 +280,7 @@ public class StyleImpl implements Style {
         }
       }
 
-      Iterator<IntPair<Object>> oldIterator = oldValues == null ? new EmptyIterator<IntPair<Object>>() : oldValues.iterator();
+      Iterator<IntPair<Object>> oldIterator = oldValues == null ? new EmptyIterator<>() : oldValues.iterator();
 
       Iterator<IntPair<Object>> newIterator = newValues.getAll().iterator();
       while (oldIterator.hasNext() || newIterator.hasNext()) {
@@ -291,7 +290,7 @@ public class StyleImpl implements Style {
         }
         IntPair<Object> newValue = newIterator.next();
         IntPair<Object> oldValue = oldIterator.next();
-        if (newValue.index != oldValue.index || !EqualUtil.equals(newValue.value, oldValue.value)) {
+        if (newValue.index != oldValue.index || !Objects.equals(newValue.value, oldValue.value)) {
           changedAttributes.add(attribute);
           break;
         }

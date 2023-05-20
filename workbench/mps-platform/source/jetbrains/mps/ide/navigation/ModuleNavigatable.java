@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,9 @@
  */
 package jetbrains.mps.ide.navigation;
 
-import jetbrains.mps.openapi.navigation.NavigationSupport;
+import jetbrains.mps.openapi.navigation.ProjectPaneNavigator;
 import jetbrains.mps.project.Project;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SModuleReference;
 
 /**
@@ -33,11 +32,7 @@ public class ModuleNavigatable extends BaseNavigatable {
   }
 
   @Override
-  protected void doNavigate(boolean focus) {
-    SModule module = myModuleReference.resolve(myProject.getRepository());
-    if (module == null) {
-      return;
-    }
-    NavigationSupport.getInstance().selectInTree(myProject, module, focus);
+  public void navigate(boolean focus) {
+    new ProjectPaneNavigator(myProject).shallFocus(focus).select(myModuleReference);
   }
 }

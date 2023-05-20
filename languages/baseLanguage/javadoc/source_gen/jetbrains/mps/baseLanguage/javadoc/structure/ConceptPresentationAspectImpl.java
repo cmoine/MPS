@@ -4,120 +4,296 @@ package jetbrains.mps.baseLanguage.javadoc.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_AuthorBlockDocTag = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BaseBlockDocTag = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BaseDocComment = new ConceptPresentationBuilder().deprecated().create();
-  private final ConceptPresentation props_BaseDocReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BaseInlineDocTag = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BaseParameterReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BaseVariableDocReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ClassifierDocComment = new ConceptPresentationBuilder().deprecated().create();
-  private final ConceptPresentation props_ClassifierDocReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CodeInlineDocTag = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CodeSnippet = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CommentLine = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CommentLinePart = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DeprecatedBlockDocTag = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DocMethodParameterReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DocTypeParameterReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_EmptyBlockDocTag = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_FieldDocComment = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_FieldDocReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_HTMLElement = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InheritDocInlineDocTag = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InlineTagCommentLinePart = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_LinkInlineDocTag = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MethodDocComment = new ConceptPresentationBuilder().deprecated().create();
-  private final ConceptPresentation props_MethodDocReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ParameterBlockDocTag = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ReturnBlockDocTag = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SeeBlockDocTag = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SinceBlockDocTag = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_StaticFieldDocReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TextCommentLinePart = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ThrowsBlockDocTag = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ValueInlineDocTag = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_VersionBlockDocTag = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_AuthorBlockDocTag;
+  private ConceptPresentation props_BaseBlockDocTag;
+  private ConceptPresentation props_BaseDocComment;
+  private ConceptPresentation props_BaseDocReference;
+  private ConceptPresentation props_BaseInlineDocTag;
+  private ConceptPresentation props_BaseParameterReference;
+  private ConceptPresentation props_BaseVariableDocReference;
+  private ConceptPresentation props_ClassifierDocComment;
+  private ConceptPresentation props_ClassifierDocReference;
+  private ConceptPresentation props_CodeInlineDocTag;
+  private ConceptPresentation props_CodeSnippet;
+  private ConceptPresentation props_CommentLine;
+  private ConceptPresentation props_CommentLinePart;
+  private ConceptPresentation props_DeprecatedBlockDocTag;
+  private ConceptPresentation props_DocMethodParameterReference;
+  private ConceptPresentation props_DocTypeParameterReference;
+  private ConceptPresentation props_EmptyBlockDocTag;
+  private ConceptPresentation props_FieldDocComment;
+  private ConceptPresentation props_FieldDocReference;
+  private ConceptPresentation props_HTMLElement;
+  private ConceptPresentation props_InheritDocInlineDocTag;
+  private ConceptPresentation props_InlineTagCommentLinePart;
+  private ConceptPresentation props_LinkInlineDocTag;
+  private ConceptPresentation props_MethodDocComment;
+  private ConceptPresentation props_MethodDocReference;
+  private ConceptPresentation props_ParameterBlockDocTag;
+  private ConceptPresentation props_ReturnBlockDocTag;
+  private ConceptPresentation props_SeeBlockDocTag;
+  private ConceptPresentation props_SinceBlockDocTag;
+  private ConceptPresentation props_StaticFieldDocReference;
+  private ConceptPresentation props_TextCommentLinePart;
+  private ConceptPresentation props_ThrowsBlockDocTag;
+  private ConceptPresentation props_ValueInlineDocTag;
+  private ConceptPresentation props_VersionBlockDocTag;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.AuthorBlockDocTag:
+        if (props_AuthorBlockDocTag == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("@author");
+          props_AuthorBlockDocTag = cpb.create();
+        }
         return props_AuthorBlockDocTag;
-      case 1:
+      case LanguageConceptSwitch.BaseBlockDocTag:
+        if (props_BaseBlockDocTag == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_BaseBlockDocTag = cpb.create();
+        }
         return props_BaseBlockDocTag;
-      case 2:
+      case LanguageConceptSwitch.BaseDocComment:
+        if (props_BaseDocComment == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder(0xf280165065d5424eL, 0xbb1b463a8781b786L, 0x4a3c146b7fae70d3L);
+          cpb.deprecateAggregation(0x4a3c146b7faeeb32L, "author");
+          cpb.deprecateAggregation(0x757ba20a4c87f962L, "since");
+          cpb.deprecateAggregation(0x757ba20a4c87f963L, "version");
+          cpb.deprecateAggregation(0x757ba20a4c87f96bL, "deprecated");
+          cpb.deprecateAggregation(0x1ec532ec252df7ddL, "see");
+          props_BaseDocComment = cpb.create();
+        }
         return props_BaseDocComment;
-      case 3:
+      case LanguageConceptSwitch.BaseDocReference:
+        if (props_BaseDocReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_BaseDocReference = cpb.create();
+        }
         return props_BaseDocReference;
-      case 4:
+      case LanguageConceptSwitch.BaseInlineDocTag:
+        if (props_BaseInlineDocTag == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_BaseInlineDocTag = cpb.create();
+        }
         return props_BaseInlineDocTag;
-      case 5:
+      case LanguageConceptSwitch.BaseParameterReference:
+        if (props_BaseParameterReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_BaseParameterReference = cpb.create();
+        }
         return props_BaseParameterReference;
-      case 6:
+      case LanguageConceptSwitch.BaseVariableDocReference:
+        if (props_BaseVariableDocReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_BaseVariableDocReference = cpb.create();
+        }
         return props_BaseVariableDocReference;
-      case 7:
+      case LanguageConceptSwitch.ClassifierDocComment:
+        if (props_ClassifierDocComment == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder(0xf280165065d5424eL, 0xbb1b463a8781b786L, 0x1cb65d9fe66a764cL);
+          cpb.deprecateAggregation(0x1cb65d9fe66a764eL, "param");
+          cpb.rawPresentation("ClassifierDocComment");
+          props_ClassifierDocComment = cpb.create();
+        }
         return props_ClassifierDocComment;
-      case 8:
+      case LanguageConceptSwitch.ClassifierDocReference:
+        if (props_ClassifierDocReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xf280165065d5424eL, 0xbb1b463a8781b786L, 0x1ec532ec2531d2e4L, 0x1ec532ec2531d2e5L, "classifier", "", "");
+          props_ClassifierDocReference = cpb.create();
+        }
         return props_ClassifierDocReference;
-      case 9:
+      case LanguageConceptSwitch.CodeInlineDocTag:
+        if (props_CodeInlineDocTag == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("code piece");
+          cpb.rawPresentation("code");
+          props_CodeInlineDocTag = cpb.create();
+        }
         return props_CodeInlineDocTag;
-      case 10:
+      case LanguageConceptSwitch.CodeSnippet:
+        if (props_CodeSnippet == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("CodeSnippet");
+          props_CodeSnippet = cpb.create();
+        }
         return props_CodeSnippet;
-      case 11:
+      case LanguageConceptSwitch.CommentLine:
+        if (props_CommentLine == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("CommentLine");
+          props_CommentLine = cpb.create();
+        }
         return props_CommentLine;
-      case 12:
+      case LanguageConceptSwitch.CommentLinePart:
+        if (props_CommentLinePart == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_CommentLinePart = cpb.create();
+        }
         return props_CommentLinePart;
-      case 13:
+      case LanguageConceptSwitch.DeprecatedBlockDocTag:
+        if (props_DeprecatedBlockDocTag == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("@deprecated");
+          props_DeprecatedBlockDocTag = cpb.create();
+        }
         return props_DeprecatedBlockDocTag;
-      case 14:
+      case LanguageConceptSwitch.DocMethodParameterReference:
+        if (props_DocMethodParameterReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xf280165065d5424eL, 0xbb1b463a8781b786L, 0x5ed0d79d7dbe86d7L, 0x5ed0d79d7dbe86dcL, "param", "", "");
+          props_DocMethodParameterReference = cpb.create();
+        }
         return props_DocMethodParameterReference;
-      case 15:
+      case LanguageConceptSwitch.DocTypeParameterReference:
+        if (props_DocTypeParameterReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xf280165065d5424eL, 0xbb1b463a8781b786L, 0x5ed0d79d7dbe86d7L, 0x5ed0d79d7dbe86dcL, "param", "", "");
+          props_DocTypeParameterReference = cpb.create();
+        }
         return props_DocTypeParameterReference;
-      case 16:
+      case LanguageConceptSwitch.EmptyBlockDocTag:
+        if (props_EmptyBlockDocTag == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("EmptyBlockDocTag");
+          props_EmptyBlockDocTag = cpb.create();
+        }
         return props_EmptyBlockDocTag;
-      case 17:
+      case LanguageConceptSwitch.FieldDocComment:
+        if (props_FieldDocComment == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("FieldDocComment");
+          props_FieldDocComment = cpb.create();
+        }
         return props_FieldDocComment;
-      case 18:
+      case LanguageConceptSwitch.FieldDocReference:
+        if (props_FieldDocReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xf280165065d5424eL, 0xbb1b463a8781b786L, 0x4d316b5973d644c2L, 0x4d316b5973d644c4L, "declaration", "", "");
+          props_FieldDocReference = cpb.create();
+        }
         return props_FieldDocReference;
-      case 19:
+      case LanguageConceptSwitch.HTMLElement:
+        if (props_HTMLElement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("HTMLElement");
+          props_HTMLElement = cpb.create();
+        }
         return props_HTMLElement;
-      case 20:
+      case LanguageConceptSwitch.InheritDocInlineDocTag:
+        if (props_InheritDocInlineDocTag == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("inherit doc from parent");
+          cpb.rawPresentation("inheritDoc");
+          props_InheritDocInlineDocTag = cpb.create();
+        }
         return props_InheritDocInlineDocTag;
-      case 21:
+      case LanguageConceptSwitch.InlineTagCommentLinePart:
+        if (props_InlineTagCommentLinePart == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("InlineTagCommentLinePart");
+          props_InlineTagCommentLinePart = cpb.create();
+        }
         return props_InlineTagCommentLinePart;
-      case 22:
+      case LanguageConceptSwitch.LinkInlineDocTag:
+        if (props_LinkInlineDocTag == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("link to type or member");
+          cpb.rawPresentation("link");
+          props_LinkInlineDocTag = cpb.create();
+        }
         return props_LinkInlineDocTag;
-      case 23:
+      case LanguageConceptSwitch.MethodDocComment:
+        if (props_MethodDocComment == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder(0xf280165065d5424eL, 0xbb1b463a8781b786L, 0x4a3c146b7faeeb34L);
+          cpb.deprecateAggregation(0x757ba20a4c90eaf9L, "param");
+          cpb.deprecateAggregation(0x514c0f687050918cL, "throwsTag");
+          cpb.deprecateAggregation(0x514c0f6870509198L, "return");
+          cpb.rawPresentation("MethodDocComment");
+          props_MethodDocComment = cpb.create();
+        }
         return props_MethodDocComment;
-      case 24:
+      case LanguageConceptSwitch.MethodDocReference:
+        if (props_MethodDocReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xf280165065d5424eL, 0xbb1b463a8781b786L, 0x1ec532ec2531d2d3L, 0x1ec532ec2531d2d4L, "methodDeclaration", "", "");
+          props_MethodDocReference = cpb.create();
+        }
         return props_MethodDocReference;
-      case 25:
+      case LanguageConceptSwitch.ParameterBlockDocTag:
+        if (props_ParameterBlockDocTag == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("@param");
+          props_ParameterBlockDocTag = cpb.create();
+        }
         return props_ParameterBlockDocTag;
-      case 26:
+      case LanguageConceptSwitch.ReturnBlockDocTag:
+        if (props_ReturnBlockDocTag == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("@return");
+          props_ReturnBlockDocTag = cpb.create();
+        }
         return props_ReturnBlockDocTag;
-      case 27:
+      case LanguageConceptSwitch.SeeBlockDocTag:
+        if (props_SeeBlockDocTag == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("@see");
+          props_SeeBlockDocTag = cpb.create();
+        }
         return props_SeeBlockDocTag;
-      case 28:
+      case LanguageConceptSwitch.SinceBlockDocTag:
+        if (props_SinceBlockDocTag == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("@since");
+          props_SinceBlockDocTag = cpb.create();
+        }
         return props_SinceBlockDocTag;
-      case 29:
+      case LanguageConceptSwitch.StaticFieldDocReference:
+        if (props_StaticFieldDocReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xf280165065d5424eL, 0xbb1b463a8781b786L, 0x4d316b5973d644c2L, 0x4d316b5973d644c4L, "declaration", "", "");
+          props_StaticFieldDocReference = cpb.create();
+        }
         return props_StaticFieldDocReference;
-      case 30:
+      case LanguageConceptSwitch.TextCommentLinePart:
+        if (props_TextCommentLinePart == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("TextCommentLinePart");
+          props_TextCommentLinePart = cpb.create();
+        }
         return props_TextCommentLinePart;
-      case 31:
+      case LanguageConceptSwitch.ThrowsBlockDocTag:
+        if (props_ThrowsBlockDocTag == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("@throws");
+          props_ThrowsBlockDocTag = cpb.create();
+        }
         return props_ThrowsBlockDocTag;
-      case 32:
+      case LanguageConceptSwitch.ValueInlineDocTag:
+        if (props_ValueInlineDocTag == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("constant value");
+          cpb.rawPresentation("value");
+          props_ValueInlineDocTag = cpb.create();
+        }
         return props_ValueInlineDocTag;
-      case 33:
+      case LanguageConceptSwitch.VersionBlockDocTag:
+        if (props_VersionBlockDocTag == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("@version");
+          props_VersionBlockDocTag = cpb.create();
+        }
         return props_VersionBlockDocTag;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

@@ -8,17 +8,9 @@ public class Functions {
   public Functions() {
   }
   public static _FunctionTypes._return_P1_E0<? extends String, ? super Integer> value() {
-    return new _FunctionTypes._return_P1_E0<String, Integer>() {
-      public String invoke(Integer i) {
-        return String.valueOf(i);
-      }
-    };
+    return (Integer i) -> String.valueOf(i);
   }
   public static _FunctionTypes._return_P1_E0<? extends String, ? super Integer> underscore() {
-    return new _FunctionTypes._return_P1_E0<String, Integer>() {
-      public String invoke(Integer i) {
-        return "_" + i;
-      }
-    };
+    return (Integer i) -> "_" + i;
   }
 }

@@ -4,86 +4,41 @@ package jetbrains.mps.samples.customAspect.documentation.plugin;
 
 import jetbrains.mps.smodel.structure.Extension;
 import jetbrains.mps.smodel.language.LanguageAspectDescriptor;
+import jetbrains.mps.smodel.language.LanguageAspectDescriptorBase;
 import org.jetbrains.annotations.NotNull;
 import java.util.Collection;
-import org.jetbrains.mps.openapi.model.SModel;
-import org.jetbrains.mps.openapi.module.SModule;
-import jetbrains.mps.smodel.Language;
-import java.util.Collections;
-import jetbrains.mps.internal.collections.runtime.Sequence;
-import jetbrains.mps.internal.collections.runtime.IWhereFilter;
 import org.jetbrains.mps.openapi.language.SLanguage;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import java.util.ArrayList;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 import org.jetbrains.annotations.Nullable;
-import jetbrains.mps.smodel.language.LanguageAspectGenerator;
 import jetbrains.mps.smodel.runtime.IconResource;
-import jetbrains.mps.internal.collections.runtime.CollectionSequence;
-import org.jetbrains.mps.openapi.persistence.ModelRoot;
-import jetbrains.mps.project.SModuleOperations;
+import org.jetbrains.mps.openapi.module.SModule;
+import org.jetbrains.mps.openapi.model.SModel;
+import jetbrains.mps.smodel.ModelImports;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SModelOperations;
 
 public class LanguageAspectsEP_extension extends Extension.Default<LanguageAspectDescriptor> {
   public LanguageAspectsEP_extension() {
     super("jetbrains.mps.lang.aspect.LanguageAspectsEP");
   }
   public LanguageAspectDescriptor get() {
-    return new LanguageAspectDescriptor() {
-      public String getPresentableAspectName() {
-        return "documentation";
-      }
+    return new LanguageAspectDescriptorBase("documentation") {
+
       @NotNull
-      public Collection<SModel> getAspectModels(final SModule language) {
-        if (!((language instanceof Language))) {
-          return Collections.emptyList();
-        }
-        Iterable<SModel> allModels = language.getModels();
-        return Sequence.fromIterable(allModels).where(new IWhereFilter<SModel>() {
-          public boolean accept(SModel it) {
-            String fullName = it.getModelName();
-            return eq_ecu8yf_a0b0a0a0a0a0c0b0a0a0b(fullName, language.getModuleName() + "." + getPresentableAspectName());
-          }
-        }).ofType(SModel.class).toListSequence();
-      }
-      @NotNull
+      @Override
       public Collection<SLanguage> getMainLanguages() {
-        return ListSequence.fromListAndArray(new ArrayList<SLanguage>(), MetaAdapterFactory.getLanguage(MetaIdFactory.langId(0x22916f45e98f4433L, 0x9c1b1b382cf5bd8dL), "jetbrains.mps.samples.customAspect.documentation"));
-      }
-      @Nullable
-      public LanguageAspectGenerator getGenerator() {
-        return null;
+        return ListSequence.fromListAndArray(new ArrayList<SLanguage>(), MetaAdapterFactory.getLanguage(0x22916f45e98f4433L, 0x9c1b1b382cf5bd8dL, "jetbrains.mps.samples.customAspect.documentation"));
       }
       @Nullable
       public IconResource getIconResource() {
-        return IconContainer.RESOURCE_a0a4a0a0a1;
+        return IconContainer.RESOURCE_a0a2a0a0a1;
       }
-
-
-
-
-
-
-      public boolean canCreate(SModule language) {
-        return CollectionSequence.fromCollection(getAspectModels(language)).isEmpty();
+      @Override
+      public void configureDescriptorModel(@NotNull SModule module, @NotNull SModel descriptorModel) {
+        new ModelImports(descriptorModel).addUsedLanguage(MetaAdapterFactory.getLanguage(0x22916f45e98f4433L, 0x9c1b1b382cf5bd8dL, "jetbrains.mps.samples.customAspect.documentation"));
+        SModelOperations.createNewRootNode(descriptorModel, MetaAdapterFactory.getConcept(0x22916f45e98f4433L, 0x9c1b1b382cf5bd8dL, 0x5fb799688f5c99c4L, "jetbrains.mps.samples.customAspect.documentation.structure.ModuleDescriptorDeputy"));
       }
-
-      public void create(SModule language) {
-        Language l = ((Language) language);
-        SModel structureModel = l.getStructureModelDescriptor();
-        ModelRoot modelRoot;
-        if (structureModel == null) {
-          modelRoot = l.getModelRoots().iterator().next();
-        } else {
-          modelRoot = structureModel.getModelRoot();
-        }
-        SModuleOperations.createModelWithAdjustments(l.getModuleName() + '.' + getPresentableAspectName(), modelRoot);
-      }
-
-
     };
-  }
-  private static boolean eq_ecu8yf_a0b0a0a0a0a0c0b0a0a0b(Object a, Object b) {
-    return (a != null ? a.equals(b) : a == b);
   }
 }

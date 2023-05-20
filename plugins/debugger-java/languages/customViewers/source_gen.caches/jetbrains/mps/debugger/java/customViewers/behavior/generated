@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="7r8e9b4nrb01652idxv1bopswzr7o61" />
+<product version="3" modelHash="aasgbgsnuybtol8xlg33metl9tq5sg5">
+  <files names="BehaviorAspectDescriptor.java:CanWrapHighLevelValue_ConceptFunction__BehaviorDescriptor.java:GetHighLevelValuePresentation_ConceptFunction__BehaviorDescriptor.java:GetHighLevelWatchablesBlock_ConceptFunction__BehaviorDescriptor.java:HighLevelCustomViewer__BehaviorDescriptor.java:ToProcessMethod__BehaviorDescriptor.java:WatchableListType__BehaviorDescriptor.java" />
+</product>
 

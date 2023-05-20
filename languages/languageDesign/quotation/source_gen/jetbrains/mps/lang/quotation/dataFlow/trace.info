@@ -2,55 +2,95 @@
 <debug-info version="2">
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144226303539:jetbrains.mps.baseLanguage.structure.ForeachStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <root>
     <file name="DataFlowAspectDescriptorImpl.java">
-      <unit at="15,0,56,0" name="jetbrains.mps.lang.quotation.dataFlow.DataFlowAspectDescriptorImpl" />
+      <unit at="15,0,36,0" name="jetbrains.mps.lang.quotation.dataFlow.DataFlowAspectDescriptorImpl" />
     </file>
   </root>
   <root nodeRef="r:00000000-0000-4000-0000-011c89590348(jetbrains.mps.lang.quotation.dataFlow)/1006429225401308444">
     <file name="NodeBuilder_DataFlow.java">
-      <node id="1006429225401308456" at="14,287,15,48" concept="0" />
-      <node id="1006429225401308447" at="13,60,16,5" concept="1" />
-      <node id="1006429225401308444" at="13,0,18,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
-      <scope id="1006429225401308455" at="14,287,15,48" />
-      <scope id="1006429225401308446" at="13,60,16,5" />
-      <scope id="1006429225401308447" at="13,60,16,5">
+      <node id="7191184120224267426" at="15,90,16,115" concept="0" />
+      <node id="8559588736124456632" at="17,5,18,92" concept="4" />
+      <node id="1006429225401308456" at="20,117,21,50" concept="0" />
+      <node id="1006429225401308444" at="27,0,28,0" concept="6" trace="modelToCreate$AyVT" />
+      <node id="1006429225401308444" at="28,0,29,0" concept="6" trace="quotedNode$cF64" />
+      <node id="7133515628390397228" at="14,60,17,5" concept="2" />
+      <node id="1006429225401308447" at="19,29,22,7" concept="1" />
+      <node id="8559588736124459115" at="18,92,23,5" concept="2" />
+      <node id="1006429225401308444" at="14,0,25,0" concept="3" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="7133515628390397230" at="15,90,16,115" />
+      <scope id="1006429225401308455" at="20,117,21,50" />
+      <scope id="1006429225401308447" at="19,29,22,7">
         <var name="expr" id="1006429225401308453" />
       </scope>
-      <scope id="1006429225401308444" at="13,0,18,0">
+      <scope id="8559588736124459117" at="19,29,22,7" />
+      <scope id="1006429225401308446" at="14,60,23,5">
+        <var name="quotedNode" id="8559588736124456633" />
+      </scope>
+      <scope id="1006429225401308444" at="14,0,25,0">
         <var name="_context" id="1006429225401308444" />
       </scope>
-      <unit id="1006429225401308444" at="12,0,19,0" name="jetbrains.mps.lang.quotation.dataFlow.NodeBuilder_DataFlow" />
+      <unit id="1006429225401308444" at="26,0,30,0" name="jetbrains.mps.lang.quotation.dataFlow.NodeBuilder_DataFlow$LINKS" />
+      <unit id="1006429225401308444" at="13,0,31,0" name="jetbrains.mps.lang.quotation.dataFlow.NodeBuilder_DataFlow" />
     </file>
   </root>
   <root nodeRef="r:00000000-0000-4000-0000-011c89590348(jetbrains.mps.lang.quotation.dataFlow)/1207243664442">
     <file name="AbstractAntiquotation_DataFlow.java">
-      <node id="1207243732321" at="12,60,13,214" concept="0" />
-      <node id="1207243664442" at="12,0,15,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
-      <scope id="1207243664444" at="12,60,13,214" />
-      <scope id="1207243664442" at="12,0,15,0">
+      <node id="1207243732321" at="13,60,14,109" concept="0" />
+      <node id="1207243664442" at="18,0,19,0" concept="6" trace="expression$hE$" />
+      <node id="1207243664442" at="13,0,16,0" concept="3" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="1207243664444" at="13,60,14,109" />
+      <scope id="1207243664442" at="13,0,16,0">
         <var name="_context" id="1207243664442" />
       </scope>
-      <unit id="1207243664442" at="11,0,16,0" name="jetbrains.mps.lang.quotation.dataFlow.AbstractAntiquotation_DataFlow" />
+      <unit id="1207243664442" at="17,0,20,0" name="jetbrains.mps.lang.quotation.dataFlow.AbstractAntiquotation_DataFlow$LINKS" />
+      <unit id="1207243664442" at="12,0,21,0" name="jetbrains.mps.lang.quotation.dataFlow.AbstractAntiquotation_DataFlow" />
     </file>
   </root>
   <root nodeRef="r:00000000-0000-4000-0000-011c89590348(jetbrains.mps.lang.quotation.dataFlow)/1207243772639">
     <file name="Quotation_DataFlow.java">
-      <node id="1207243820006" at="15,283,16,57" concept="0" />
-      <node id="3180306201267192200" at="17,5,18,217" concept="0" />
-      <node id="3180306201267192259" at="18,217,19,215" concept="0" />
-      <node id="1207243785969" at="14,60,17,5" concept="1" />
-      <node id="1207243772639" at="14,0,21,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
-      <scope id="1207243785973" at="15,283,16,57" />
-      <scope id="1207243785969" at="14,60,17,5">
+      <node id="1207243820006" at="17,156,18,57" concept="0" />
+      <node id="7191184120221514023" at="19,5,20,113" concept="0" />
+      <node id="7191184120221568783" at="20,113,21,0" concept="5" />
+      <node id="3180306201267192200" at="21,0,22,116" concept="0" />
+      <node id="3180306201267192259" at="22,116,23,110" concept="0" />
+      <node id="1207243772639" at="27,0,28,0" concept="6" trace="AbstractAntiquotation$TS" />
+      <node id="1207243772639" at="31,0,32,0" concept="6" trace="modelToCreate$$LCB" />
+      <node id="1207243772639" at="32,0,33,0" concept="6" trace="modelToCreate_old$iC5" />
+      <node id="1207243772639" at="33,0,34,0" concept="6" trace="nodeId_old$s_sY" />
+      <node id="1207243785969" at="16,60,19,5" concept="1" />
+      <node id="1207243772639" at="16,0,25,0" concept="3" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="1207243785973" at="17,156,18,57" />
+      <scope id="1207243785969" at="16,60,19,5">
         <var name="antiquotation" id="1207243785971" />
       </scope>
-      <scope id="1207243772641" at="14,60,19,215" />
-      <scope id="1207243772639" at="14,0,21,0">
+      <scope id="1207243772641" at="16,60,23,110" />
+      <scope id="1207243772639" at="16,0,25,0">
         <var name="_context" id="1207243772639" />
       </scope>
-      <unit id="1207243772639" at="13,0,22,0" name="jetbrains.mps.lang.quotation.dataFlow.Quotation_DataFlow" />
+      <unit id="1207243772639" at="26,0,29,0" name="jetbrains.mps.lang.quotation.dataFlow.Quotation_DataFlow$CONCEPTS" />
+      <unit id="1207243772639" at="30,0,35,0" name="jetbrains.mps.lang.quotation.dataFlow.Quotation_DataFlow$LINKS" />
+      <unit id="1207243772639" at="15,0,36,0" name="jetbrains.mps.lang.quotation.dataFlow.Quotation_DataFlow" />
+    </file>
+  </root>
+  <root nodeRef="r:00000000-0000-4000-0000-011c89590348(jetbrains.mps.lang.quotation.dataFlow)/7191184120221573978">
+    <file name="ModelNodeInitializer_DataFlow.java">
+      <node id="7191184120221574040" at="13,60,14,113" concept="0" />
+      <node id="7191184120221575406" at="14,113,15,106" concept="0" />
+      <node id="7191184120221573978" at="19,0,20,0" concept="6" trace="modelToCreate$HXc4" />
+      <node id="7191184120221573978" at="20,0,21,0" concept="6" trace="nodeId$HXr5" />
+      <node id="7191184120221573978" at="13,0,17,0" concept="3" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="7191184120221573980" at="13,60,15,106" />
+      <scope id="7191184120221573978" at="13,0,17,0">
+        <var name="_context" id="7191184120221573978" />
+      </scope>
+      <unit id="7191184120221573978" at="18,0,22,0" name="jetbrains.mps.lang.quotation.dataFlow.ModelNodeInitializer_DataFlow$LINKS" />
+      <unit id="7191184120221573978" at="12,0,23,0" name="jetbrains.mps.lang.quotation.dataFlow.ModelNodeInitializer_DataFlow" />
     </file>
   </root>
 </debug-info>

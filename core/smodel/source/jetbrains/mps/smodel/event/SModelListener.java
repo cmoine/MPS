@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,13 +41,13 @@ public interface SModelListener {
   void devkitRemoved(SModelDevKitEvent event);
 
   /**
-   * @deprecated use {@link org.jetbrains.mps.openapi.model.SModelChangeListener#nodeAdded}
+   * @deprecated use {@link org.jetbrains.mps.openapi.model.SNodeChangeListener#nodeAdded}
    */
   @Deprecated
   void rootAdded(SModelRootEvent event);
 
   /**
-   * @deprecated use {@link org.jetbrains.mps.openapi.model.SModelChangeListener#nodeRemoved}
+   * @deprecated use {@link org.jetbrains.mps.openapi.model.SNodeChangeListener#nodeRemoved}
    */
   @Deprecated
   void rootRemoved(SModelRootEvent event);
@@ -57,10 +57,6 @@ public interface SModelListener {
   void beforeModelRenamed(SModelRenamedEvent event);
 
   void modelRenamed(SModelRenamedEvent event);
-
-  void beforeModelFileChanged(SModelFileChangedEvent event);
-
-  void modelFileChanged(SModelFileChangedEvent event);
 
   void propertyChanged(SModelPropertyEvent event);
 
@@ -83,7 +79,7 @@ public interface SModelListener {
   @NotNull
   SModelListenerPriority getPriority();
 
-  public enum SModelListenerPriority {
+  enum SModelListenerPriority {
     PLATFORM,
     CLIENT
   }

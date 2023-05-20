@@ -5,12 +5,9 @@ package BHL1.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.List;
 import java.util.Arrays;
@@ -22,11 +19,10 @@ import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
 
 public final class A1__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x43359135f67c4a3dL, 0x9fdda3d7dba50995L, 0x7e5c09dfa07d591eL, "BHL1.structure.A1");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<Void> bar_id6sCTYS3h6cj = new SMethodBuilder<Void>(new SJavaCompoundTypeImpl(Void.class)).name("bar").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("6sCTYS3h6cj").registry(REGISTRY).build();
-  public static final SMethod<Float> foo_id3ZhVC3HVRva = new SMethodBuilder<Float>(new SJavaCompoundTypeImpl(Float.TYPE)).name("foo").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("3ZhVC3HVRva").registry(REGISTRY).build();
-  public static final SMethod<Integer> bar2_id3ZhVC3HVRvp = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("bar2").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("3ZhVC3HVRvp").registry(REGISTRY).build();
+  public static final SMethod<Void> bar_id6sCTYS3h6cj = new SMethodBuilder<Void>(new SJavaCompoundTypeImpl(Void.class)).name("bar").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(7433446194418049811L).languageId(0x9fdda3d7dba50995L, 0x43359135f67c4a3dL).build2();
+  public static final SMethod<Float> foo_id3ZhVC3HVRva = new SMethodBuilder<Float>(new SJavaCompoundTypeImpl(Float.TYPE)).name("foo").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(4598718932037105610L).languageId(0x9fdda3d7dba50995L, 0x43359135f67c4a3dL).build2();
+  public static final SMethod<Integer> bar2_id3ZhVC3HVRvp = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("bar2").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(4598718932037105625L).languageId(0x9fdda3d7dba50995L, 0x43359135f67c4a3dL).build2();
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(bar_id6sCTYS3h6cj, foo_id3ZhVC3HVRva, bar2_id3ZhVC3HVRvp);
 
@@ -43,7 +39,6 @@ public final class A1__BehaviorDescriptor extends BaseBHDescriptor {
   }
 
   /*package*/ A1__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override

@@ -20,51 +20,51 @@ import jetbrains.mps.internal.collections.runtime.IMapping;
 
 public class DispatchGroup {
   private DispatchGroupDescriptor myDescriptor;
-  private List<DispatchGroup.ClassMethodGroup> myGroupsByClass = ListSequence.fromList(new ArrayList<DispatchGroup.ClassMethodGroup>());
+  private List<ClassMethodGroup> myGroupsByClass = ListSequence.fromList(new ArrayList<ClassMethodGroup>());
   public DispatchGroup(DispatchGroupDescriptor descriptor, SNode cls) {
     myDescriptor = descriptor;
     startNewClass(cls);
   }
   public void startNewClass(SNode cls) {
-    ListSequence.fromList(myGroupsByClass).addElement(new DispatchGroup.ClassMethodGroup(cls));
+    ListSequence.fromList(myGroupsByClass).addElement(new ClassMethodGroup(cls));
   }
   public void addMethod(SNode method) {
     ListSequence.fromList(myGroupsByClass).last().addMethod(method);
   }
   @Override
   public void finalize() {
-    List<DispatchGroup.ClassMethodGroup> filtered = ListSequence.fromList(myGroupsByClass).where(new IWhereFilter<DispatchGroup.ClassMethodGroup>() {
-      public boolean accept(DispatchGroup.ClassMethodGroup it) {
+    List<ClassMethodGroup> filtered = ListSequence.fromList(myGroupsByClass).where(new IWhereFilter<ClassMethodGroup>() {
+      public boolean accept(ClassMethodGroup it) {
         return MapSequence.fromMap(it.methods).isNotEmpty();
       }
     }).toListSequence();
     myGroupsByClass = filtered;
   }
-  public DispatchGroup.Error check() {
+  public Error check() {
 
-    DispatchGroup.ClassMethodGroup thisClassGroup = ListSequence.fromList(myGroupsByClass).first();
-    Iterable<DispatchGroup.ClassMethodGroup> superClassesGroups = ListSequence.fromList(myGroupsByClass).skip(1);
+    ClassMethodGroup thisClassGroup = ListSequence.fromList(myGroupsByClass).first();
+    Iterable<ClassMethodGroup> superClassesGroups = ListSequence.fromList(myGroupsByClass).skip(1);
     Set<SNode> roots = thisClassGroup.getRoots();
 
     if (ListSequence.fromList(myGroupsByClass).count() == 1) {
-      // this group is local to our class, doesn't span to superclasses 
+      // this group is local to our class, doesn't span to superclasses
 
       if (SetSequence.fromSet(roots).count() == 1) {
         return null;
       }
 
-      // more than one root 
+      // more than one root
       Iterable<SNode> methodsForRoots = thisClassGroup.methodsByDispatchTypes(roots);
-      return new DispatchGroup.Error("Dispatch parameter type hierarchy must have a single root", methodsForRoots);
+      return new Error("Dispatch parameter type hierarchy must have a single root", methodsForRoots);
     }
 
-    // The group spans to super-classes. 
+    // The group spans to super-classes.
 
-    // dispatch param classes that are not handled in superclasses 
+    // dispatch param classes that are not handled in superclasses
     Set<SNode> badRoots = SetSequence.fromSet(new HashSet<SNode>());
     for (final SNode root : SetSequence.fromSet(roots)) {
-      if (!(Sequence.fromIterable(superClassesGroups).any(new IWhereFilter<DispatchGroup.ClassMethodGroup>() {
-        public boolean accept(DispatchGroup.ClassMethodGroup it) {
+      if (!(Sequence.fromIterable(superClassesGroups).any(new IWhereFilter<ClassMethodGroup>() {
+        public boolean accept(ClassMethodGroup it) {
           return MapSequence.fromMap(it.methods).containsKey(root);
         }
       }))) {
@@ -79,11 +79,11 @@ public class DispatchGroup {
     Iterable<SNode> methodsForBadRoots = thisClassGroup.methodsByDispatchTypes(badRoots);
 
     if (SetSequence.fromSet(badRoots).count() == 1) {
-      // check if the class is the superclass for any other dispatch param classes in group 
+      // check if the class is the superclass for any other dispatch param classes in group
 
       final SNode cls = SetSequence.fromSet(badRoots).first();
-      boolean isGlobalRoot = Sequence.fromIterable(superClassesGroups).all(new IWhereFilter<DispatchGroup.ClassMethodGroup>() {
-        public boolean accept(DispatchGroup.ClassMethodGroup it) {
+      boolean isGlobalRoot = Sequence.fromIterable(superClassesGroups).all(new IWhereFilter<ClassMethodGroup>() {
+        public boolean accept(ClassMethodGroup it) {
           return SetSequence.fromSet(MapSequence.fromMap(it.methods).keySet()).all(new IWhereFilter<SNode>() {
             public boolean accept(SNode it) {
               return DispatchUtil.isParent(cls, it);
@@ -93,15 +93,15 @@ public class DispatchGroup {
       });
 
       if (!(isGlobalRoot)) {
-        return new DispatchGroup.Error("Dispatch type not present in super classes and is not a supertype for other param types", methodsForBadRoots);
+        return new Error("Dispatch type not present in super classes and is not a supertype for other param types", methodsForBadRoots);
       }
 
     } else {
-      // there are bad roots 
-      return new DispatchGroup.Error("Dispatch type not present in super classes", methodsForBadRoots);
+      // there are bad roots
+      return new Error("Dispatch type not present in super classes", methodsForBadRoots);
     }
 
-    // no errors 
+    // no errors
     return null;
   }
   public class ClassMethodGroup {

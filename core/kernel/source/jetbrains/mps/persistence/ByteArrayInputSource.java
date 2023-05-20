@@ -15,12 +15,15 @@
  */
 package jetbrains.mps.persistence;
 
-import jetbrains.mps.persistence.PersistenceUtil.StreamDataSourceBase;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.persistence.DataSourceListener;
+import org.jetbrains.mps.openapi.persistence.datasource.DataSourceType;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * Bare input source for models backed by plain byte array.
@@ -30,15 +33,51 @@ import java.io.InputStream;
  * @author Artem Tikhomirov
  * @since 3.4
  */
-public class ByteArrayInputSource extends StreamDataSourceBase {
+public final class ByteArrayInputSource extends StreamDataSourceBase {
   private final byte[] myInput;
 
   public ByteArrayInputSource(@NotNull byte[] input) {
+    super("byte array input source no-name", "in-memory");
+    myInput = input;
+  }
+
+  public ByteArrayInputSource(@NotNull String name,
+                              @NotNull String location,
+                              @NotNull byte[] input) {
+    super(name, location);
     myInput = input;
   }
 
   @Override
-  public InputStream openInputStream() throws IOException {
+  public String toString() {
+    return "ByteArray under me; my name is " + getStreamName() + "; location: " + getLocation();
+  }
+
+  @NotNull
+  @Override
+  public InputStream openInputStream() {
     return new ByteArrayInputStream(myInput);
+  }
+
+  @NotNull
+  @Override
+  public final OutputStream openOutputStream() throws IOException {
+    throw new UnsupportedOperationException("I am unable to write, only read " + this);
+  }
+
+  @Override
+  public final boolean exists() {
+    return true;
+  }
+
+  @Override
+  public final boolean isReadOnly() {
+    return true;
+  }
+
+  @Nullable
+  @Override
+  public DataSourceType getType() {
+    return null;
   }
 }

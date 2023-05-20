@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-9ck6xzzjyy9hn3ykzp70z49uo42ox5b" />
+<product version="3" modelHash="-59mj632t3lcm6mayl8wwetb4u7m0v6z">
+  <files names="TypesystemDescriptor.java:check_BwfTaskLibrary_NonTypesystemRule.java" />
+</product>
 

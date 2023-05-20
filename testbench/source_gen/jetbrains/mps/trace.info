@@ -1,39 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
   <root nodeRef="r:609ff00a-e99e-4fdb-a9f0-2fac708d77c0(jetbrains.mps)/5294483648489409013">
     <file name="MPSLaunch.java">
-      <unit id="5294483648489409013" at="10,0,14,0" name="jetbrains.mps.MPSLaunch" />
-    </file>
-  </root>
-  <root nodeRef="r:609ff00a-e99e-4fdb-a9f0-2fac708d77c0(jetbrains.mps)/694564436393184888">
-    <file name="CoreMpsTest.java">
-      <node id="8602519034655327242" at="13,0,14,0" concept="1" trace="ENV" />
-      <node id="8602519034655327248" at="16,34,17,72" concept="0" />
-      <node id="8602519034655327273" at="21,37,22,18" concept="0" />
-      <node id="8602519034655327246" at="15,0,19,0" concept="2" trace="setUpBase#()V" />
-      <node id="8602519034655327265" at="20,0,24,0" concept="2" trace="tearDownBase#()V" />
-      <scope id="8602519034655327247" at="16,34,17,72" />
-      <scope id="8602519034655327266" at="21,37,22,18" />
-      <scope id="8602519034655327246" at="15,0,19,0" />
-      <scope id="8602519034655327265" at="20,0,24,0" />
-      <unit id="694564436393184888" at="12,0,25,0" name="jetbrains.mps.CoreMpsTest" />
-    </file>
-  </root>
-  <root nodeRef="r:609ff00a-e99e-4fdb-a9f0-2fac708d77c0(jetbrains.mps)/694564436393193873">
-    <file name="PlatformMpsTest.java">
-      <node id="8602519034655325171" at="13,0,14,0" concept="1" trace="ENV" />
-      <node id="8602519034655325304" at="16,34,17,73" concept="0" />
-      <node id="3921194758207197660" at="21,37,22,18" concept="0" />
-      <node id="8602519034655324887" at="15,0,19,0" concept="2" trace="setUpBase#()V" />
-      <node id="6944172844332521578" at="20,0,24,0" concept="2" trace="tearDownBase#()V" />
-      <scope id="8602519034655324890" at="16,34,17,73" />
-      <scope id="6944172844332521581" at="21,37,22,18" />
-      <scope id="8602519034655324887" at="15,0,19,0" />
-      <scope id="6944172844332521578" at="20,0,24,0" />
-      <unit id="694564436393193873" at="12,0,25,0" name="jetbrains.mps.PlatformMpsTest" />
+      <unit id="5294483648489409013" at="15,0,20,0" name="jetbrains.mps.MPSLaunch" />
     </file>
   </root>
 </debug-info>

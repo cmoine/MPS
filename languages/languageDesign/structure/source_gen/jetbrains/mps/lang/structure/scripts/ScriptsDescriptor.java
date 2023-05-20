@@ -12,10 +12,11 @@ public final class ScriptsDescriptor extends ScriptAspectBase {
   private final RefactoringScript[] myRefactoringScripts;
 
   public ScriptsDescriptor() {
-    myRefactoringScripts = new RefactoringScript[3];
+    myRefactoringScripts = new RefactoringScript[4];
     myRefactoringScripts[0] = new DeleteUndeclaredLinksAndProperties_MigrationScript();
     myRefactoringScripts[1] = new RemoveBackslashesFromIconPath_MigrationScript();
     myRefactoringScripts[2] = new CheckRootNodesNamingInternalPolicy_MigrationScript();
+    myRefactoringScripts[3] = new EnumerationMigrationScipts_MigrationScript();
   }
 
   @Override

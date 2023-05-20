@@ -5,52 +5,57 @@ package jetbrains.mps.lang.core.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.List;
 import java.util.Arrays;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.smodel.legacy.ConceptMetaInfoConverter;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.smodel.adapter.ids.SReferenceLinkId;
 import jetbrains.mps.smodel.adapter.ids.MetaIdHelper;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public final class LinkAttribute__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2eb1ad060897da51L, "jetbrains.mps.lang.core.structure.LinkAttribute");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<SReferenceLink> getLink_id1avfQ4BEFo6 = new SMethodBuilder<SReferenceLink>(new SJavaCompoundTypeImpl(SReferenceLink.class)).name("getLink").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("1avfQ4BEFo6").registry(REGISTRY).build();
-  public static final SMethod<Void> setLink_id6Gg5KlvuxxF = new SMethodBuilder<Void>(new SJavaCompoundTypeImpl(Void.class)).name("setLink").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("6Gg5KlvuxxF").registry(REGISTRY).build(SMethodBuilder.createJavaParameter(SReferenceLink.class, ""));
+  public static final SMethod<SReferenceLink> getLink_id1avfQ4BEFo6 = new SMethodBuilder<SReferenceLink>(new SJavaCompoundTypeImpl(SReferenceLink.class)).name("getLink").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1341860900489573894L).languageId(0x9b92103b95ca8c0cL, 0xceab519525ea4f22L).build2();
+  public static final SMethod<Void> setLink_id6Gg5KlvuxxF = new SMethodBuilder<Void>(new SJavaCompoundTypeImpl(Void.class)).name("setLink").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(7714691473529772139L).languageId(0x9b92103b95ca8c0cL, 0xceab519525ea4f22L).build2(SMethodBuilder.createJavaParameter(SReferenceLink.class, ""));
+  public static final SMethod<String> getNameForReporting_id5gACAVBuLQd = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getNameForReporting").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(6063712545514659213L).languageId(0x9b92103b95ca8c0cL, 0xceab519525ea4f22L).build2();
 
-  private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getLink_id1avfQ4BEFo6, setLink_id6Gg5KlvuxxF);
+  private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getLink_id1avfQ4BEFo6, setLink_id6Gg5KlvuxxF, getNameForReporting_id5gACAVBuLQd);
 
   private static void ___init___(@NotNull SNode __thisNode__) {
   }
 
   /*package*/ static SReferenceLink getLink_id1avfQ4BEFo6(@NotNull SNode __thisNode__) {
-    if (isEmptyString(SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2eb1ad060897da51L, 0x129f3f612792fc5cL, "linkId")))) {
-      return ((ConceptMetaInfoConverter) SNodeOperations.getParent(__thisNode__).getConcept()).convertAssociation(SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2eb1ad060897da51L, 0x18649a5c82123514L, "linkRole")));
+    String nonEmptyLinkRole = (SPropertyOperations.getString(__thisNode__, PROPS.role_DebugInfo$DpOd) == null ? "" : SPropertyOperations.getString(__thisNode__, PROPS.role_DebugInfo$DpOd));
+    try {
+      SReferenceLinkId id = SReferenceLinkId.deserialize(SPropertyOperations.getString(__thisNode__, PROPS.linkId$P9Fc));
+      return MetaAdapterFactory.getReferenceLink(id, nonEmptyLinkRole);
+    } catch (RuntimeException e) {
+      return null;
     }
-    return MetaAdapterFactory.getReferenceLink(SReferenceLinkId.deserialize(SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2eb1ad060897da51L, 0x129f3f612792fc5cL, "linkId"))), (SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2eb1ad060897da51L, 0x18649a5c82123514L, "linkRole")) == null ? "" : SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2eb1ad060897da51L, 0x18649a5c82123514L, "linkRole"))));
   }
   /*package*/ static void setLink_id6Gg5KlvuxxF(@NotNull SNode __thisNode__, SReferenceLink metaLink) {
-    SPropertyOperations.set(__thisNode__, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2eb1ad060897da51L, 0x18649a5c82123514L, "linkRole"), metaLink.getName());
-    SPropertyOperations.set(__thisNode__, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2eb1ad060897da51L, 0x129f3f612792fc5cL, "linkId"), MetaIdHelper.getAssociation(metaLink).serialize());
+    SPropertyOperations.assign(__thisNode__, PROPS.role_DebugInfo$DpOd, metaLink.getName());
+    SPropertyOperations.assign(__thisNode__, PROPS.linkId$P9Fc, MetaIdHelper.getAssociation(metaLink).serialize());
+  }
+  /*package*/ static String getNameForReporting_id5gACAVBuLQd(@NotNull SNode __thisNode__) {
+    SReferenceLink l = LinkAttribute__BehaviorDescriptor.getLink_id1avfQ4BEFo6.invoke(__thisNode__);
+    if (l.isValid()) {
+      return l.getName();
+    }
+    return (SPropertyOperations.getString(__thisNode__, PROPS.role_DebugInfo$DpOd) == null ? "" : SPropertyOperations.getString(__thisNode__, PROPS.role_DebugInfo$DpOd));
   }
 
   /*package*/ LinkAttribute__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -70,6 +75,8 @@ public final class LinkAttribute__BehaviorDescriptor extends BaseBHDescriptor {
       case 1:
         setLink_id6Gg5KlvuxxF(node, (SReferenceLink) parameters[0]);
         return null;
+      case 2:
+        return (T) ((String) getNameForReporting_id5gACAVBuLQd(node));
       default:
         throw new BHMethodNotFoundException(this, method);
     }
@@ -98,7 +105,9 @@ public final class LinkAttribute__BehaviorDescriptor extends BaseBHDescriptor {
   public SAbstractConcept getConcept() {
     return CONCEPT;
   }
-  private static boolean isEmptyString(String str) {
-    return str == null || str.length() == 0;
+
+  private static final class PROPS {
+    /*package*/ static final SProperty role_DebugInfo$DpOd = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2eb1ad060897da51L, 0x18649a5c82123514L, "role_DebugInfo");
+    /*package*/ static final SProperty linkId$P9Fc = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2eb1ad060897da51L, 0x129f3f612792fc5cL, "linkId");
   }
 }

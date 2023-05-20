@@ -34,7 +34,7 @@ public class Quantity {
   }
   @Override
   public boolean equals(Object arg) {
-    if (!((arg instanceof Quantity))) {
+    if (!(arg instanceof Quantity)) {
       return false;
     }
     Quantity other = (Quantity) arg;

@@ -18,7 +18,7 @@ package jetbrains.mps.newTypesystem;
 import gnu.trove.THashSet;
 import jetbrains.mps.lang.pattern.IMatchingPattern;
 import jetbrains.mps.smodel.NodeReadAccessCasterInEditor;
-import jetbrains.mps.typesystem.inference.TypeChecker;
+import jetbrains.mps.typesystem.inference.TypeCheckerHelper;
 import jetbrains.mps.typesystem.inference.TypeCheckingContext;
 import jetbrains.mps.typesystem.inference.util.StructuralNodeSet;
 import jetbrains.mps.typesystem.inference.util.SubtypingCache;
@@ -36,12 +36,12 @@ import java.util.List;
 import java.util.Set;
 
 public class CoercionManager {
-  private final TypeChecker myTypeChecker;
+  private final TypeCheckerHelper myTypeCheckerHelper;
   // TODO: why this dependency?
   private final SubTypingManagerNew mySubTyping;
 
-  public CoercionManager(TypeChecker typeChecker, SubTypingManagerNew subTyping) {
-    myTypeChecker = typeChecker;
+  public CoercionManager(TypeCheckerHelper typeCheckerHelper, SubTypingManagerNew subTyping) {
+    myTypeCheckerHelper = typeCheckerHelper;
     mySubTyping = subTyping;
   }
 
@@ -57,7 +57,7 @@ public class CoercionManager {
       return null;
     }
     if (CoerceUtil.concept_MeetType.equals(subtype.getConcept())) {
-      List<SNode> children = new ArrayList<SNode>(IterableUtil.asCollection(subtype.getChildren(CoerceUtil.link_MeetType_argument)));
+      List<SNode> children = new ArrayList<>(IterableUtil.asCollection(subtype.getChildren(CoerceUtil.link_MeetType_argument)));
       for (SNode child : children) {
         SNode result = coerceSubTypingNew(child, pattern, isWeak, context);
         if (result != null) {
@@ -67,35 +67,32 @@ public class CoercionManager {
       return null;
     }
     if (CoerceUtil.concept_JoinType.equals(subtype.getConcept())) {
-      List<SNode> children = new ArrayList<SNode>(IterableUtil.asCollection(subtype.getChildren(CoerceUtil.link_JoinType_argument)));
+      List<SNode> children = new ArrayList<>(IterableUtil.asCollection(subtype.getChildren(CoerceUtil.link_JoinType_argument)));
 
       SNode lcs = SubtypingUtil.createLeastCommonSupertype(children, context);
       return coerceSubTypingNew(lcs, pattern, isWeak, context);
     }
 
     //asking the cache
-    return NodeReadAccessCasterInEditor.runReadTransparentAction(new Computable<SNode>() {
-      @Override
-      public SNode compute() {
-        Pair<Boolean, SNode> answer = getCoerceCacheAnswer(subtype, pattern, isWeak);
-        if (answer != null && answer.o1) {
-          return answer.o2;
-        }
-        CoercionMatcher coercionMatcher = new CoercionMatcher(pattern);
-        SNode result = searchInSuperTypes(subtype, coercionMatcher, isWeak);
-        //writing to the cache
-        SubtypingCache subtypingCache = myTypeChecker.getSubtypingCache();
-        if (subtypingCache != null) {
-          subtypingCache.cacheCoerce(subtype, pattern, result, isWeak);
-        }
-        return result;
+    return NodeReadAccessCasterInEditor.runReadTransparentAction(() -> {
+      Pair<Boolean, SNode> answer = getCoerceCacheAnswer(subtype, pattern, isWeak);
+      if (answer != null && answer.o1) {
+        return answer.o2;
       }
+      CoercionMatcher coercionMatcher = new CoercionMatcher(pattern);
+      SNode result = searchInSuperTypes(subtype, coercionMatcher, isWeak);
+      //writing to the cache
+      SubtypingCache subtypingCache = myTypeCheckerHelper.getSubtypingCache();
+      if (subtypingCache != null) {
+        subtypingCache.cacheCoerce(subtype, pattern, result, isWeak);
+      }
+      return result;
     });
   }
 
   @Nullable
   Pair<Boolean, SNode> getCoerceCacheAnswer(SNode subtype, IMatchingPattern pattern, boolean isWeak) {
-    SubtypingCache cache = myTypeChecker.getSubtypingCache();
+    SubtypingCache cache = myTypeCheckerHelper.getSubtypingCache();
     if (cache != null) {
       Pair<Boolean, SNode> coerced = cache.getCoerced(subtype, pattern, isWeak);
       if (coerced != null) {
@@ -111,7 +108,7 @@ public class CoercionManager {
     StructuralNodeSet<?> yetPassed = new StructuralNodeSet();
     frontier.add(subType);
     while (!frontier.isEmpty()) {
-      Set<SNode> yetPassedRaw = new THashSet<SNode>();
+      Set<SNode> yetPassedRaw = new THashSet<>();
       //collecting a set of frontier's ancestors
       StructuralNodeSet<?> ancestors = new StructuralNodeSet();
       for (SNode node : frontier) {
@@ -119,14 +116,9 @@ public class CoercionManager {
         yetPassedRaw.add(node);
       }
       ArrayList<SNode> ancestorsSorted;
-      ancestorsSorted = new ArrayList<SNode>(ancestors);
-      Collections.sort(ancestorsSorted, new Comparator<SNode>() {
-        @Override
-        public int compare(SNode o1, SNode o2) {
-          return TypesUtil.depth(o2) - TypesUtil.depth(o1);
-        }
-      });
-      List<SNode> results = new ArrayList<SNode>();
+      ancestorsSorted = new ArrayList<>(ancestors);
+      Collections.sort(ancestorsSorted, (o1, o2) -> TypesUtil.depth(o2) - TypesUtil.depth(o1));
+      List<SNode> results = new ArrayList<>();
       for (SNode ancestor : ancestorsSorted) {
         if (superType.matchesWith(ancestor)) {
           results.add(ancestor);
@@ -140,9 +132,7 @@ public class CoercionManager {
           return results.get(0);
         }
       }
-      for (SNode passedNodeRaw : yetPassedRaw) {
-        yetPassed.add(passedNodeRaw);
-      }
+      yetPassed.addAll(yetPassedRaw);
       for (SNode passedNode : yetPassed) {
         ancestors.removeStructurally(passedNode);
       }

@@ -21,7 +21,10 @@ import jetbrains.mps.nodeEditor.cellMenu.CellContext;
 import jetbrains.mps.nodeEditor.cellMenu.SubstituteInfoPartExt;
 import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.SubstituteAction;
+import jetbrains.mps.smodel.action.IReferentPresentationProvider;
 import jetbrains.mps.smodel.action.ModelActions;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 import org.jetbrains.mps.openapi.model.SNode;
 
 import java.util.List;
@@ -33,9 +36,30 @@ import java.util.List;
 public class PrimaryReferentMenuCellMenuPart implements SubstituteInfoPartExt {
   @Override
   public List<SubstituteAction> createActions(CellContext cellContext, EditorContext editorContext) {
-    SNode referenceNode = (SNode) cellContext.get(BasicCellContext.EDITED_NODE);
-    SNode linkDeclaration = ((SNode) cellContext.get(ReferenceCellContext.LINK_DECLARATION));
-    SNode currentReferent = (SNode) cellContext.getOpt(ReferenceCellContext.CURRENT_REFERENT_NODE);
-    return ModelActions.createReferentSubstituteActions(referenceNode, currentReferent, linkDeclaration, editorContext.getOperationContext());
+    SNode referenceNode = cellContext.get(BasicCellContext.EDITED_NODE);
+    SReferenceLink linkDeclaration = cellContext.get(ReferenceCellContext.LINK_DECLARATION);
+    IReferentPresentationProvider matchingTextProvider = getMatchingTextProvider();
+    IReferentPresentationProvider visibleMatchingTextProvider = getVisibleMatchingTextProvider();
+    if (matchingTextProvider == null) {
+      matchingTextProvider = IReferentPresentationProvider.getDefaultMatchingText(linkDeclaration);
+    }
+    if (visibleMatchingTextProvider == null) {
+      visibleMatchingTextProvider = IReferentPresentationProvider.getDefaultVisibleMatchingText(linkDeclaration);
+    }
+    return ModelActions.createReferentSubstituteActions(referenceNode,
+                                                        linkDeclaration,
+                                                        matchingTextProvider,
+                                                        visibleMatchingTextProvider,
+                                                        editorContext);
+  }
+
+  @Nullable
+  protected IReferentPresentationProvider getMatchingTextProvider() {
+    return null;
+  }
+
+  @Nullable
+  protected IReferentPresentationProvider getVisibleMatchingTextProvider() {
+    return getMatchingTextProvider();
   }
 }

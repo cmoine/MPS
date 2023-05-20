@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <root nodeRef="r:44f67fb3-9f2f-48cf-be4d-4c511452435b(jetbrains.mps.make.editorTest@tests)/3283080073440222366">
+    <file name="TypeSuccessInConfigDefinition_Test.java">
+      <node id="3283080073440222366" at="19,47,20,60" concept="4" />
+      <node id="3283080073440222366" at="24,69,25,36" concept="1" />
+      <node id="3283080073440222366" at="30,52,31,19" concept="4" />
+      <node id="3283080073440222366" at="35,51,36,72" concept="1" />
+      <node id="3283080073440235406" at="36,72,37,28" concept="1" />
+      <node id="3283080073440222366" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="3283080073440222366" at="19,0,22,0" concept="0" trace="TypeSuccessInConfigDefinition_Test#()V" />
+      <node id="3283080073440222366" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="3283080073440222366" at="23,0,27,0" concept="2" trace="test_TypeSuccessInConfigDefinition#()V" />
+      <node id="3283080073440222366" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="3283080073440222366" at="19,47,20,60" />
+      <scope id="3283080073440222366" at="24,69,25,36" />
+      <scope id="3283080073440222366" at="30,52,31,19" />
+      <scope id="3283080073440222366" at="35,51,37,28" />
+      <scope id="3283080073440222366" at="19,0,22,0" />
+      <scope id="3283080073440222366" at="30,0,33,0">
+        <var name="owner" id="3283080073440222366" />
+      </scope>
+      <scope id="3283080073440222366" at="23,0,27,0" />
+      <scope id="3283080073440222366" at="34,0,39,0" />
+      <unit id="3283080073440222366" at="28,0,40,0" name="jetbrains.mps.make.editorTest.TypeSuccessInConfigDefinition_Test$TestBody" />
+      <unit id="3283080073440222366" at="14,0,41,0" name="jetbrains.mps.make.editorTest.TypeSuccessInConfigDefinition_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:44f67fb3-9f2f-48cf-be4d-4c511452435b(jetbrains.mps.make.editorTest@tests)/3283080073440235410">
+    <file name="TypeFailureInJobDefinition_Test.java">
+      <node id="3283080073440235410" at="19,44,20,60" concept="4" />
+      <node id="3283080073440235410" at="24,66,25,36" concept="1" />
+      <node id="3283080073440235410" at="30,52,31,19" concept="4" />
+      <node id="3283080073440235410" at="35,51,36,72" concept="1" />
+      <node id="3283080073440235419" at="36,72,37,28" concept="1" />
+      <node id="3283080073440235410" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="3283080073440235410" at="19,0,22,0" concept="0" trace="TypeFailureInJobDefinition_Test#()V" />
+      <node id="3283080073440235410" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="3283080073440235410" at="23,0,27,0" concept="2" trace="test_TypeFailureInJobDefinition#()V" />
+      <node id="3283080073440235410" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="3283080073440235410" at="19,44,20,60" />
+      <scope id="3283080073440235410" at="24,66,25,36" />
+      <scope id="3283080073440235410" at="30,52,31,19" />
+      <scope id="3283080073440235410" at="35,51,37,28" />
+      <scope id="3283080073440235410" at="19,0,22,0" />
+      <scope id="3283080073440235410" at="30,0,33,0">
+        <var name="owner" id="3283080073440235410" />
+      </scope>
+      <scope id="3283080073440235410" at="23,0,27,0" />
+      <scope id="3283080073440235410" at="34,0,39,0" />
+      <unit id="3283080073440235410" at="28,0,40,0" name="jetbrains.mps.make.editorTest.TypeFailureInJobDefinition_Test$TestBody" />
+      <unit id="3283080073440235410" at="14,0,41,0" name="jetbrains.mps.make.editorTest.TypeFailureInJobDefinition_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:44f67fb3-9f2f-48cf-be4d-4c511452435b(jetbrains.mps.make.editorTest@tests)/3283080073440235422">
+    <file name="TypeFailureInConfigDefinition_Test.java">
+      <node id="3283080073440235422" at="19,47,20,60" concept="4" />
+      <node id="3283080073440235422" at="24,69,25,36" concept="1" />
+      <node id="3283080073440235422" at="30,52,31,19" concept="4" />
+      <node id="3283080073440235422" at="35,51,36,72" concept="1" />
+      <node id="3283080073440235431" at="36,72,37,28" concept="1" />
+      <node id="3283080073440235422" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="3283080073440235422" at="19,0,22,0" concept="0" trace="TypeFailureInConfigDefinition_Test#()V" />
+      <node id="3283080073440235422" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="3283080073440235422" at="23,0,27,0" concept="2" trace="test_TypeFailureInConfigDefinition#()V" />
+      <node id="3283080073440235422" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="3283080073440235422" at="19,47,20,60" />
+      <scope id="3283080073440235422" at="24,69,25,36" />
+      <scope id="3283080073440235422" at="30,52,31,19" />
+      <scope id="3283080073440235422" at="35,51,37,28" />
+      <scope id="3283080073440235422" at="19,0,22,0" />
+      <scope id="3283080073440235422" at="30,0,33,0">
+        <var name="owner" id="3283080073440235422" />
+      </scope>
+      <scope id="3283080073440235422" at="23,0,27,0" />
+      <scope id="3283080073440235422" at="34,0,39,0" />
+      <unit id="3283080073440235422" at="28,0,40,0" name="jetbrains.mps.make.editorTest.TypeFailureInConfigDefinition_Test$TestBody" />
+      <unit id="3283080073440235422" at="14,0,41,0" name="jetbrains.mps.make.editorTest.TypeFailureInConfigDefinition_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:44f67fb3-9f2f-48cf-be4d-4c511452435b(jetbrains.mps.make.editorTest@tests)/3283080073440235432">
+    <file name="TypeSuccessInJobDefinition_Test.java">
+      <node id="3283080073440235432" at="19,44,20,60" concept="4" />
+      <node id="3283080073440235432" at="24,66,25,36" concept="1" />
+      <node id="3283080073440235432" at="30,52,31,19" concept="4" />
+      <node id="3283080073440235432" at="35,51,36,72" concept="1" />
+      <node id="3283080073440235441" at="36,72,37,28" concept="1" />
+      <node id="3283080073440235432" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="3283080073440235432" at="19,0,22,0" concept="0" trace="TypeSuccessInJobDefinition_Test#()V" />
+      <node id="3283080073440235432" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="3283080073440235432" at="23,0,27,0" concept="2" trace="test_TypeSuccessInJobDefinition#()V" />
+      <node id="3283080073440235432" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="3283080073440235432" at="19,44,20,60" />
+      <scope id="3283080073440235432" at="24,66,25,36" />
+      <scope id="3283080073440235432" at="30,52,31,19" />
+      <scope id="3283080073440235432" at="35,51,37,28" />
+      <scope id="3283080073440235432" at="19,0,22,0" />
+      <scope id="3283080073440235432" at="30,0,33,0">
+        <var name="owner" id="3283080073440235432" />
+      </scope>
+      <scope id="3283080073440235432" at="23,0,27,0" />
+      <scope id="3283080073440235432" at="34,0,39,0" />
+      <unit id="3283080073440235432" at="28,0,40,0" name="jetbrains.mps.make.editorTest.TypeSuccessInJobDefinition_Test$TestBody" />
+      <unit id="3283080073440235432" at="14,0,41,0" name="jetbrains.mps.make.editorTest.TypeSuccessInJobDefinition_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:44f67fb3-9f2f-48cf-be4d-4c511452435b(jetbrains.mps.make.editorTest@tests)/3283080073440235490">
+    <file name="TypeReturnInJobDefinition_Test.java">
+      <node id="3283080073440235490" at="19,43,20,60" concept="4" />
+      <node id="3283080073440235490" at="24,65,25,36" concept="1" />
+      <node id="3283080073440235490" at="30,52,31,19" concept="4" />
+      <node id="3283080073440235490" at="35,51,36,72" concept="1" />
+      <node id="3283080073440235499" at="36,72,37,27" concept="1" />
+      <node id="3283080073440235510" at="37,27,38,71" concept="1" />
+      <node id="3283080073440235490" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="3283080073440235490" at="19,0,22,0" concept="0" trace="TypeReturnInJobDefinition_Test#()V" />
+      <node id="3283080073440235490" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="3283080073440235490" at="23,0,27,0" concept="2" trace="test_TypeReturnInJobDefinition#()V" />
+      <node id="3283080073440235490" at="34,0,40,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="3283080073440235490" at="19,43,20,60" />
+      <scope id="3283080073440235490" at="24,65,25,36" />
+      <scope id="3283080073440235490" at="30,52,31,19" />
+      <scope id="3283080073440235490" at="19,0,22,0" />
+      <scope id="3283080073440235490" at="30,0,33,0">
+        <var name="owner" id="3283080073440235490" />
+      </scope>
+      <scope id="3283080073440235490" at="35,51,38,71" />
+      <scope id="3283080073440235490" at="23,0,27,0" />
+      <scope id="3283080073440235490" at="34,0,40,0" />
+      <unit id="3283080073440235490" at="28,0,41,0" name="jetbrains.mps.make.editorTest.TypeReturnInJobDefinition_Test$TestBody" />
+      <unit id="3283080073440235490" at="14,0,42,0" name="jetbrains.mps.make.editorTest.TypeReturnInJobDefinition_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:44f67fb3-9f2f-48cf-be4d-4c511452435b(jetbrains.mps.make.editorTest@tests)/3283080073440238084">
+    <file name="TypeReturnInConfigDefinition_Test.java">
+      <node id="3283080073440238084" at="19,46,20,60" concept="4" />
+      <node id="3283080073440238084" at="24,68,25,36" concept="1" />
+      <node id="3283080073440238084" at="30,52,31,19" concept="4" />
+      <node id="3283080073440238084" at="35,51,36,72" concept="1" />
+      <node id="3283080073440238099" at="36,72,37,27" concept="1" />
+      <node id="3283080073440238100" at="37,27,38,71" concept="1" />
+      <node id="3283080073440238084" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="3283080073440238084" at="19,0,22,0" concept="0" trace="TypeReturnInConfigDefinition_Test#()V" />
+      <node id="3283080073440238084" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="3283080073440238084" at="23,0,27,0" concept="2" trace="test_TypeReturnInConfigDefinition#()V" />
+      <node id="3283080073440238084" at="34,0,40,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="3283080073440238084" at="19,46,20,60" />
+      <scope id="3283080073440238084" at="24,68,25,36" />
+      <scope id="3283080073440238084" at="30,52,31,19" />
+      <scope id="3283080073440238084" at="19,0,22,0" />
+      <scope id="3283080073440238084" at="30,0,33,0">
+        <var name="owner" id="3283080073440238084" />
+      </scope>
+      <scope id="3283080073440238084" at="35,51,38,71" />
+      <scope id="3283080073440238084" at="23,0,27,0" />
+      <scope id="3283080073440238084" at="34,0,40,0" />
+      <unit id="3283080073440238084" at="28,0,41,0" name="jetbrains.mps.make.editorTest.TypeReturnInConfigDefinition_Test$TestBody" />
+      <unit id="3283080073440238084" at="14,0,42,0" name="jetbrains.mps.make.editorTest.TypeReturnInConfigDefinition_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:44f67fb3-9f2f-48cf-be4d-4c511452435b(jetbrains.mps.make.editorTest@tests)/3283080073440238105">
+    <file name="TypeReturnInConfigDefinitionInQuotation_Test.java">
+      <node id="3283080073440238105" at="19,57,20,60" concept="4" />
+      <node id="3283080073440238105" at="24,79,25,36" concept="1" />
+      <node id="3283080073440238105" at="30,52,31,19" concept="4" />
+      <node id="3283080073440238105" at="35,51,36,72" concept="1" />
+      <node id="3283080073440238107" at="36,72,37,27" concept="1" />
+      <node id="3283080073440238105" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="3283080073440238105" at="19,0,22,0" concept="0" trace="TypeReturnInConfigDefinitionInQuotation_Test#()V" />
+      <node id="3283080073440238105" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="3283080073440238105" at="23,0,27,0" concept="2" trace="test_TypeReturnInConfigDefinitionInQuotation#()V" />
+      <node id="3283080073440238105" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="3283080073440238105" at="19,57,20,60" />
+      <scope id="3283080073440238105" at="24,79,25,36" />
+      <scope id="3283080073440238105" at="30,52,31,19" />
+      <scope id="3283080073440238105" at="35,51,37,27" />
+      <scope id="3283080073440238105" at="19,0,22,0" />
+      <scope id="3283080073440238105" at="30,0,33,0">
+        <var name="owner" id="3283080073440238105" />
+      </scope>
+      <scope id="3283080073440238105" at="23,0,27,0" />
+      <scope id="3283080073440238105" at="34,0,39,0" />
+      <unit id="3283080073440238105" at="28,0,40,0" name="jetbrains.mps.make.editorTest.TypeReturnInConfigDefinitionInQuotation_Test$TestBody" />
+      <unit id="3283080073440238105" at="14,0,41,0" name="jetbrains.mps.make.editorTest.TypeReturnInConfigDefinitionInQuotation_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:44f67fb3-9f2f-48cf-be4d-4c511452435b(jetbrains.mps.make.editorTest@tests)/3283080073440242843">
+    <file name="TypeReturnInJobDefinitionInQuotation_Test.java">
+      <node id="3283080073440242843" at="19,54,20,60" concept="4" />
+      <node id="3283080073440242843" at="24,76,25,36" concept="1" />
+      <node id="3283080073440242843" at="30,52,31,19" concept="4" />
+      <node id="3283080073440242843" at="35,51,36,72" concept="1" />
+      <node id="3283080073440242851" at="36,72,37,27" concept="1" />
+      <node id="3283080073440242843" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="3283080073440242843" at="19,0,22,0" concept="0" trace="TypeReturnInJobDefinitionInQuotation_Test#()V" />
+      <node id="3283080073440242843" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="3283080073440242843" at="23,0,27,0" concept="2" trace="test_TypeReturnInJobDefinitionInQuotation#()V" />
+      <node id="3283080073440242843" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="3283080073440242843" at="19,54,20,60" />
+      <scope id="3283080073440242843" at="24,76,25,36" />
+      <scope id="3283080073440242843" at="30,52,31,19" />
+      <scope id="3283080073440242843" at="35,51,37,27" />
+      <scope id="3283080073440242843" at="19,0,22,0" />
+      <scope id="3283080073440242843" at="30,0,33,0">
+        <var name="owner" id="3283080073440242843" />
+      </scope>
+      <scope id="3283080073440242843" at="23,0,27,0" />
+      <scope id="3283080073440242843" at="34,0,39,0" />
+      <unit id="3283080073440242843" at="28,0,40,0" name="jetbrains.mps.make.editorTest.TypeReturnInJobDefinitionInQuotation_Test$TestBody" />
+      <unit id="3283080073440242843" at="14,0,41,0" name="jetbrains.mps.make.editorTest.TypeReturnInJobDefinitionInQuotation_Test" />
+    </file>
+  </root>
+</debug-info>
+

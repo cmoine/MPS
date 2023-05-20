@@ -21,8 +21,10 @@ import org.jetbrains.mps.openapi.model.SModel;
  * Abstracts task for a generator, supplier of a model to generate.
  * {@link GenerationFacade} clients may implement this interface and thus benefit from
  * generation status notification bound to the tasks they've dispatched.
- *
+ * <p/>
  * It's advised to use provided {@link GeneratorTaskBase base class} as this interface is likely to grow.
+ * <p/>
+ * Instances of the interface are likely serve as a key in a hash map, account for this if overriding {@link #equals(Object)}/{@link #hashCode()}.
  *
  * @author Artem Tikhomirov
  * @since 3.4

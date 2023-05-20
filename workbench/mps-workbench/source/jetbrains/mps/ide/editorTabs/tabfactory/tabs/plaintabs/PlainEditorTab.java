@@ -16,11 +16,14 @@
 package jetbrains.mps.ide.editorTabs.tabfactory.tabs.plaintabs;
 
 import jetbrains.mps.ide.editorTabs.tabfactory.tabs.TabEditorLayout;
+import jetbrains.mps.ide.editorTabs.tabfactory.tabs.AbstractEditorTab;
 import jetbrains.mps.plugins.relations.RelationDescriptor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 
-class PlainEditorTab {
+import java.util.stream.Stream;
+
+/*package*/ class PlainEditorTab implements AbstractEditorTab {
   private final RelationDescriptor myTab;
   private final TabEditorLayout.Entry myTabEntry;
 
@@ -36,6 +39,11 @@ class PlainEditorTab {
 
   public SNodeReference getNode() {
     return myTabEntry == null ? null : myTabEntry.getEditNode();
+  }
+
+  @Override
+  public Stream<SNodeReference> getNodes() {
+    return Stream.of(getNode());
   }
 
   public RelationDescriptor getTab() {

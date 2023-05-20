@@ -6,16 +6,9 @@ import jetbrains.mps.nodeEditor.DefaultNodeEditor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Error;
 
 public class NodeBuilderInitPart_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createError_58elew_a(editorContext, node);
-  }
-  private EditorCell createError_58elew_a(EditorContext editorContext, SNode node) {
-    EditorCell_Error editorCell = new EditorCell_Error(editorContext, node, "no argument");
-    editorCell.setCellId("Error_58elew_a");
-    editorCell.setBig(true);
-    return editorCell;
+    return new NodeBuilderInitPart_EditorBuilder_a(editorContext, node).createCell();
   }
 }

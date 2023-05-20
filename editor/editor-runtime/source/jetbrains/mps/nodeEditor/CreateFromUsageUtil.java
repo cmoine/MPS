@@ -23,15 +23,13 @@ import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.ListPopup;
 import com.intellij.ui.awt.RelativePoint;
-import jetbrains.mps.ide.icons.IconManager;
+import jetbrains.mps.ide.icons.GlobalIconManager;
 import jetbrains.mps.nodeEditor.cells.EditorCell_Error;
 import jetbrains.mps.nodeEditor.cells.EditorCell_Label;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.smodel.SLanguageHierarchy;
 import jetbrains.mps.smodel.SModelOperations;
 import jetbrains.mps.smodel.action.NodeFactoryManager;
-import jetbrains.mps.smodel.language.ConceptRegistry;
-import jetbrains.mps.smodel.language.LanguageRegistry;
 import jetbrains.mps.util.Setter;
 import jetbrains.mps.util.ToStringComparator;
 import jetbrains.mps.workbench.action.BaseAction;
@@ -92,7 +90,7 @@ public final class CreateFromUsageUtil {
 
     BaseGroup group = new BaseGroup("");
     Set<SLanguage> modelLanguages = new SLanguageHierarchy(SModelOperations.getAllLanguageImports(model)).getExtended();
-    SLanguage[] languages = modelLanguages.toArray(new SLanguage[modelLanguages.size()]);
+    SLanguage[] languages = modelLanguages.toArray(new SLanguage[0]);
     Arrays.sort(languages, new ToStringComparator());
     for (SLanguage language : languages) {
       boolean hasChildren = false;
@@ -130,7 +128,7 @@ public final class CreateFromUsageUtil {
       setExecuteOutsideCommand(false);
       final Presentation tp = getTemplatePresentation();
       tp.setText(concept.getConceptAlias().isEmpty() ? concept.getName() : concept.getConceptAlias());
-      tp.setIcon(IconManager.getIcon(concept));
+      tp.setIcon(GlobalIconManager.getInstance().getIconFor(concept));
     }
 
     @Override

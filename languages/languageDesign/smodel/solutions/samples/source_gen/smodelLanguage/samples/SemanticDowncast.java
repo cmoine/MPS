@@ -4,9 +4,10 @@ package smodelLanguage.samples;
 
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import java.util.List;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class SemanticDowncast {
   public void invoke_getID_method_1(SNode ifStatement) {
@@ -14,13 +15,18 @@ public class SemanticDowncast {
     String id_briefly = ifStatement.getNodeId().toString();
   }
   public void invoke_getID_method_2(SNode ifStatement) {
-    String id_verbose = ((SNode) ((SNode) SLinkOperations.getTarget(ifStatement, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b217L, 0xf8cc56b218L, "condition")))).getNodeId().toString();
-    String id_better = SLinkOperations.getTarget(ifStatement, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b217L, 0xf8cc56b218L, "condition")).getNodeId().toString();
+    String id_verbose = ((SNode) ((SNode) SLinkOperations.getTarget(ifStatement, LINKS.condition$5R17))).getNodeId().toString();
+    String id_better = SLinkOperations.getTarget(ifStatement, LINKS.condition$5R17).getNodeId().toString();
   }
   public void countChildren(SNode methodCall) {
-    int count_verbose_not_efficient = ListSequence.fromList(((List<SNode>) SLinkOperations.getChildren(methodCall, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x11857355952L, 0xf8c78301aeL, "actualArgument")))).count();
-    int count_not_efficient = ListSequence.fromList(SLinkOperations.getChildren(methodCall, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x11857355952L, 0xf8c78301aeL, "actualArgument"))).count();
-    int count_not_efficient2 = SLinkOperations.getChildren(methodCall, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x11857355952L, 0xf8c78301aeL, "actualArgument")).size();
-    int count_best = ListSequence.fromList(SLinkOperations.getChildren(methodCall, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x11857355952L, 0xf8c78301aeL, "actualArgument"))).count();
+    int count_verbose_not_efficient = ListSequence.fromList(((List<SNode>) SLinkOperations.getChildren(methodCall, LINKS.actualArgument$pzdx))).count();
+    int count_not_efficient = ListSequence.fromList(SLinkOperations.getChildren(methodCall, LINKS.actualArgument$pzdx)).count();
+    int count_not_efficient2 = SLinkOperations.getChildren(methodCall, LINKS.actualArgument$pzdx).size();
+    int count_best = ListSequence.fromList(SLinkOperations.getChildren(methodCall, LINKS.actualArgument$pzdx)).count();
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink condition$5R17 = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b217L, 0xf8cc56b218L, "condition");
+    /*package*/ static final SContainmentLink actualArgument$pzdx = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x11857355952L, 0xf8c78301aeL, "actualArgument");
   }
 }

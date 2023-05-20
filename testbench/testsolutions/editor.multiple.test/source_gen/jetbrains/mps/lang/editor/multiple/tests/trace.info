@@ -1,507 +1,781 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1160998861373:jetbrains.mps.baseLanguage.structure.AssertStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/1947450138886989116">
     <file name="ConditionalPresentation_addQuery_RefNode_default_Test.java">
-      <node id="1947450138886989116" at="13,88,14,112" concept="1" />
-      <node id="1947450138886989116" at="14,112,15,140" concept="1" />
-      <node id="1947450138886989116" at="21,51,22,72" concept="1" />
-      <node id="1947450138886989118" at="22,72,23,37" concept="1" />
-      <node id="1947450138886989116" at="12,0,17,0" concept="2" trace="test_ConditionalPresentation_addQuery_RefNode_default#()V" />
-      <node id="1947450138886989116" at="20,0,25,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="1947450138886989116" at="13,88,15,140" />
-      <scope id="1947450138886989116" at="21,51,23,37" />
-      <scope id="1947450138886989116" at="12,0,17,0" />
-      <scope id="1947450138886989116" at="20,0,25,0" />
-      <unit id="1947450138886989116" at="18,0,26,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_RefNode_default_Test$TestBody" />
-      <unit id="1947450138886989116" at="10,0,27,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_RefNode_default_Test" />
+      <node id="1947450138886989116" at="19,66,20,60" concept="6" />
+      <node id="1947450138886989116" at="24,88,25,36" concept="1" />
+      <node id="1947450138886989116" at="30,52,31,19" concept="6" />
+      <node id="1947450138886989116" at="35,51,36,72" concept="1" />
+      <node id="1947450138886989118" at="36,72,37,37" concept="1" />
+      <node id="1947450138886989116" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="1947450138886989116" at="19,0,22,0" concept="0" trace="ConditionalPresentation_addQuery_RefNode_default_Test#()V" />
+      <node id="1947450138886989116" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="1947450138886989116" at="23,0,27,0" concept="2" trace="test_ConditionalPresentation_addQuery_RefNode_default#()V" />
+      <node id="1947450138886989116" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="1947450138886989116" at="19,66,20,60" />
+      <scope id="1947450138886989116" at="24,88,25,36" />
+      <scope id="1947450138886989116" at="30,52,31,19" />
+      <scope id="1947450138886989116" at="35,51,37,37" />
+      <scope id="1947450138886989116" at="19,0,22,0" />
+      <scope id="1947450138886989116" at="30,0,33,0">
+        <var name="owner" id="1947450138886989116" />
+      </scope>
+      <scope id="1947450138886989116" at="23,0,27,0" />
+      <scope id="1947450138886989116" at="34,0,39,0" />
+      <unit id="1947450138886989116" at="28,0,40,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_RefNode_default_Test$TestBody" />
+      <unit id="1947450138886989116" at="14,0,41,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_RefNode_default_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/1947450138886989214">
     <file name="ConditionalPresentation_addQuery_RefNode_rich_Test.java">
-      <node id="1947450138886989214" at="13,85,14,112" concept="1" />
-      <node id="1947450138886989214" at="14,112,15,137" concept="1" />
-      <node id="1947450138886989214" at="21,51,22,72" concept="1" />
-      <node id="1947450138886989216" at="22,72,23,29" concept="1" />
-      <node id="1947450138886989214" at="12,0,17,0" concept="2" trace="test_ConditionalPresentation_addQuery_RefNode_rich#()V" />
-      <node id="1947450138886989214" at="20,0,25,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="1947450138886989214" at="13,85,15,137" />
-      <scope id="1947450138886989214" at="21,51,23,29" />
-      <scope id="1947450138886989214" at="12,0,17,0" />
-      <scope id="1947450138886989214" at="20,0,25,0" />
-      <unit id="1947450138886989214" at="18,0,26,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_RefNode_rich_Test$TestBody" />
-      <unit id="1947450138886989214" at="10,0,27,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_RefNode_rich_Test" />
+      <node id="1947450138886989214" at="19,63,20,60" concept="6" />
+      <node id="1947450138886989214" at="24,85,25,36" concept="1" />
+      <node id="1947450138886989214" at="30,52,31,19" concept="6" />
+      <node id="1947450138886989214" at="35,51,36,72" concept="1" />
+      <node id="1947450138886989216" at="36,72,37,29" concept="1" />
+      <node id="1947450138886989214" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="1947450138886989214" at="19,0,22,0" concept="0" trace="ConditionalPresentation_addQuery_RefNode_rich_Test#()V" />
+      <node id="1947450138886989214" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="1947450138886989214" at="23,0,27,0" concept="2" trace="test_ConditionalPresentation_addQuery_RefNode_rich#()V" />
+      <node id="1947450138886989214" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="1947450138886989214" at="19,63,20,60" />
+      <scope id="1947450138886989214" at="24,85,25,36" />
+      <scope id="1947450138886989214" at="30,52,31,19" />
+      <scope id="1947450138886989214" at="35,51,37,29" />
+      <scope id="1947450138886989214" at="19,0,22,0" />
+      <scope id="1947450138886989214" at="30,0,33,0">
+        <var name="owner" id="1947450138886989214" />
+      </scope>
+      <scope id="1947450138886989214" at="23,0,27,0" />
+      <scope id="1947450138886989214" at="34,0,39,0" />
+      <unit id="1947450138886989214" at="28,0,40,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_RefNode_rich_Test$TestBody" />
+      <unit id="1947450138886989214" at="14,0,41,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_RefNode_rich_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/1947450138886989480">
     <file name="ConditionalPresentation_addQuery_RefNode_switch_Test.java">
-      <node id="1947450138886989480" at="13,87,14,112" concept="1" />
-      <node id="1947450138886989480" at="14,112,15,139" concept="1" />
-      <node id="1947450138886989480" at="21,51,22,72" concept="1" />
-      <node id="1947450138886989485" at="22,72,23,25" concept="1" />
-      <node id="1947450138886989486" at="23,25,24,71" concept="1" />
-      <node id="1947450138886989488" at="24,71,25,71" concept="1" />
-      <node id="1947450138886989490" at="25,71,26,38" concept="1" />
-      <node id="1947450138886989480" at="12,0,17,0" concept="2" trace="test_ConditionalPresentation_addQuery_RefNode_switch#()V" />
-      <node id="1947450138886989480" at="20,0,28,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="1947450138886989480" at="13,87,15,139" />
-      <scope id="1947450138886989480" at="12,0,17,0" />
-      <scope id="1947450138886989480" at="21,51,26,38" />
-      <scope id="1947450138886989480" at="20,0,28,0" />
-      <unit id="1947450138886989480" at="18,0,29,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_RefNode_switch_Test$TestBody" />
-      <unit id="1947450138886989480" at="10,0,30,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_RefNode_switch_Test" />
+      <node id="1947450138886989480" at="19,65,20,60" concept="6" />
+      <node id="1947450138886989480" at="24,87,25,36" concept="1" />
+      <node id="1947450138886989480" at="30,52,31,19" concept="6" />
+      <node id="1947450138886989480" at="35,51,36,72" concept="1" />
+      <node id="1947450138886989485" at="36,72,37,25" concept="1" />
+      <node id="1947450138886989486" at="37,25,38,71" concept="1" />
+      <node id="1947450138886989488" at="38,71,39,71" concept="1" />
+      <node id="1947450138886989490" at="39,71,40,38" concept="1" />
+      <node id="1947450138886989480" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="1947450138886989480" at="19,0,22,0" concept="0" trace="ConditionalPresentation_addQuery_RefNode_switch_Test#()V" />
+      <node id="1947450138886989480" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="1947450138886989480" at="23,0,27,0" concept="2" trace="test_ConditionalPresentation_addQuery_RefNode_switch#()V" />
+      <node id="1947450138886989480" at="34,0,42,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="1947450138886989480" at="19,65,20,60" />
+      <scope id="1947450138886989480" at="24,87,25,36" />
+      <scope id="1947450138886989480" at="30,52,31,19" />
+      <scope id="1947450138886989480" at="19,0,22,0" />
+      <scope id="1947450138886989480" at="30,0,33,0">
+        <var name="owner" id="1947450138886989480" />
+      </scope>
+      <scope id="1947450138886989480" at="23,0,27,0" />
+      <scope id="1947450138886989480" at="35,51,40,38" />
+      <scope id="1947450138886989480" at="34,0,42,0" />
+      <unit id="1947450138886989480" at="28,0,43,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_RefNode_switch_Test$TestBody" />
+      <unit id="1947450138886989480" at="14,0,44,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_RefNode_switch_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/1947450138886994476">
     <file name="ConditionalPresentation_removeQuery_RefNode_compact_Test.java">
-      <node id="1947450138886994476" at="13,91,14,112" concept="1" />
-      <node id="1947450138886994476" at="14,112,15,143" concept="1" />
-      <node id="1947450138886994476" at="21,51,22,72" concept="1" />
-      <node id="1947450138886994478" at="22,72,23,30" concept="1" />
-      <node id="1947450138886994476" at="12,0,17,0" concept="2" trace="test_ConditionalPresentation_removeQuery_RefNode_compact#()V" />
-      <node id="1947450138886994476" at="20,0,25,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="1947450138886994476" at="13,91,15,143" />
-      <scope id="1947450138886994476" at="21,51,23,30" />
-      <scope id="1947450138886994476" at="12,0,17,0" />
-      <scope id="1947450138886994476" at="20,0,25,0" />
-      <unit id="1947450138886994476" at="18,0,26,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_removeQuery_RefNode_compact_Test$TestBody" />
-      <unit id="1947450138886994476" at="10,0,27,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_removeQuery_RefNode_compact_Test" />
+      <node id="1947450138886994476" at="19,69,20,60" concept="6" />
+      <node id="1947450138886994476" at="24,91,25,36" concept="1" />
+      <node id="1947450138886994476" at="30,52,31,19" concept="6" />
+      <node id="1947450138886994476" at="35,51,36,72" concept="1" />
+      <node id="1947450138886994478" at="36,72,37,30" concept="1" />
+      <node id="1947450138886994476" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="1947450138886994476" at="19,0,22,0" concept="0" trace="ConditionalPresentation_removeQuery_RefNode_compact_Test#()V" />
+      <node id="1947450138886994476" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="1947450138886994476" at="23,0,27,0" concept="2" trace="test_ConditionalPresentation_removeQuery_RefNode_compact#()V" />
+      <node id="1947450138886994476" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="1947450138886994476" at="19,69,20,60" />
+      <scope id="1947450138886994476" at="24,91,25,36" />
+      <scope id="1947450138886994476" at="30,52,31,19" />
+      <scope id="1947450138886994476" at="35,51,37,30" />
+      <scope id="1947450138886994476" at="19,0,22,0" />
+      <scope id="1947450138886994476" at="30,0,33,0">
+        <var name="owner" id="1947450138886994476" />
+      </scope>
+      <scope id="1947450138886994476" at="23,0,27,0" />
+      <scope id="1947450138886994476" at="34,0,39,0" />
+      <unit id="1947450138886994476" at="28,0,40,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_removeQuery_RefNode_compact_Test$TestBody" />
+      <unit id="1947450138886994476" at="14,0,41,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_removeQuery_RefNode_compact_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/1947450138886994765">
     <file name="ConditionalPresentation_removeQuery_RefNode_switch_Test.java">
-      <node id="1947450138886994765" at="13,90,14,112" concept="1" />
-      <node id="1947450138886994765" at="14,112,15,142" concept="1" />
-      <node id="1947450138886994765" at="21,51,22,72" concept="1" />
-      <node id="1947450138886994767" at="22,72,23,26" concept="1" />
-      <node id="1947450138886994768" at="23,26,24,71" concept="1" />
-      <node id="1947450138886994770" at="24,71,25,71" concept="1" />
-      <node id="1947450138886994772" at="25,71,26,30" concept="1" />
-      <node id="1947450138886994765" at="12,0,17,0" concept="2" trace="test_ConditionalPresentation_removeQuery_RefNode_switch#()V" />
-      <node id="1947450138886994765" at="20,0,28,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="1947450138886994765" at="13,90,15,142" />
-      <scope id="1947450138886994765" at="12,0,17,0" />
-      <scope id="1947450138886994765" at="21,51,26,30" />
-      <scope id="1947450138886994765" at="20,0,28,0" />
-      <unit id="1947450138886994765" at="18,0,29,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_removeQuery_RefNode_switch_Test$TestBody" />
-      <unit id="1947450138886994765" at="10,0,30,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_removeQuery_RefNode_switch_Test" />
+      <node id="1947450138886994765" at="19,68,20,60" concept="6" />
+      <node id="1947450138886994765" at="24,90,25,36" concept="1" />
+      <node id="1947450138886994765" at="30,52,31,19" concept="6" />
+      <node id="1947450138886994765" at="35,51,36,72" concept="1" />
+      <node id="1947450138886994767" at="36,72,37,26" concept="1" />
+      <node id="1947450138886994768" at="37,26,38,71" concept="1" />
+      <node id="1947450138886994770" at="38,71,39,71" concept="1" />
+      <node id="1947450138886994772" at="39,71,40,30" concept="1" />
+      <node id="1947450138886994765" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="1947450138886994765" at="19,0,22,0" concept="0" trace="ConditionalPresentation_removeQuery_RefNode_switch_Test#()V" />
+      <node id="1947450138886994765" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="1947450138886994765" at="23,0,27,0" concept="2" trace="test_ConditionalPresentation_removeQuery_RefNode_switch#()V" />
+      <node id="1947450138886994765" at="34,0,42,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="1947450138886994765" at="19,68,20,60" />
+      <scope id="1947450138886994765" at="24,90,25,36" />
+      <scope id="1947450138886994765" at="30,52,31,19" />
+      <scope id="1947450138886994765" at="19,0,22,0" />
+      <scope id="1947450138886994765" at="30,0,33,0">
+        <var name="owner" id="1947450138886994765" />
+      </scope>
+      <scope id="1947450138886994765" at="23,0,27,0" />
+      <scope id="1947450138886994765" at="35,51,40,30" />
+      <scope id="1947450138886994765" at="34,0,42,0" />
+      <unit id="1947450138886994765" at="28,0,43,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_removeQuery_RefNode_switch_Test$TestBody" />
+      <unit id="1947450138886994765" at="14,0,44,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_removeQuery_RefNode_switch_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/2112659629360583083">
     <file name="InspectorOfCompactPresentation_Test.java">
-      <node id="2112659629360583083" at="16,70,17,112" concept="1" />
-      <node id="2112659629360583083" at="17,112,18,122" concept="1" />
-      <node id="2112659629360583083" at="24,51,25,72" concept="1" />
-      <node id="2112659629360597721" at="25,72,26,69" concept="1" />
-      <node id="2112659629360593709" at="26,69,27,102" concept="3" />
-      <node id="2112659629360588057" at="27,102,28,111" concept="0" />
-      <node id="2112659629360583083" at="15,0,20,0" concept="2" trace="test_InspectorOfCompactPresentation#()V" />
-      <node id="2112659629360583083" at="23,0,30,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="2112659629360583083" at="16,70,18,122" />
-      <scope id="2112659629360583083" at="24,51,28,111">
+      <node id="2112659629360583083" at="23,48,24,60" concept="6" />
+      <node id="2112659629360583083" at="28,70,29,36" concept="1" />
+      <node id="2112659629360583083" at="34,52,35,19" concept="6" />
+      <node id="2112659629360583083" at="39,51,40,72" concept="1" />
+      <node id="2112659629360597721" at="40,72,41,69" concept="1" />
+      <node id="2112659629360593709" at="41,69,42,102" concept="3" />
+      <node id="8315441706324361652" at="42,102,43,123" concept="1" />
+      <node id="2112659629360583083" at="20,0,22,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="2112659629360583083" at="23,0,26,0" concept="0" trace="InspectorOfCompactPresentation_Test#()V" />
+      <node id="2112659629360583083" at="34,0,37,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="2112659629360583083" at="27,0,31,0" concept="2" trace="test_InspectorOfCompactPresentation#()V" />
+      <node id="2112659629360583083" at="38,0,45,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="2112659629360583083" at="23,48,24,60" />
+      <scope id="2112659629360583083" at="28,70,29,36" />
+      <scope id="2112659629360583083" at="34,52,35,19" />
+      <scope id="2112659629360583083" at="23,0,26,0" />
+      <scope id="2112659629360583083" at="34,0,37,0">
+        <var name="owner" id="2112659629360583083" />
+      </scope>
+      <scope id="2112659629360583083" at="27,0,31,0" />
+      <scope id="2112659629360583083" at="39,51,43,123">
         <var name="rootCell" id="2112659629360593710" />
       </scope>
-      <scope id="2112659629360583083" at="15,0,20,0" />
-      <scope id="2112659629360583083" at="23,0,30,0" />
-      <unit id="2112659629360583083" at="21,0,31,0" name="jetbrains.mps.lang.editor.multiple.tests.InspectorOfCompactPresentation_Test$TestBody" />
-      <unit id="2112659629360583083" at="13,0,32,0" name="jetbrains.mps.lang.editor.multiple.tests.InspectorOfCompactPresentation_Test" />
+      <scope id="2112659629360583083" at="38,0,45,0" />
+      <unit id="2112659629360583083" at="32,0,46,0" name="jetbrains.mps.lang.editor.multiple.tests.InspectorOfCompactPresentation_Test$TestBody" />
+      <unit id="2112659629360583083" at="18,0,47,0" name="jetbrains.mps.lang.editor.multiple.tests.InspectorOfCompactPresentation_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/2112659629360602494">
     <file name="InspectorOfRichPresentation_Test.java">
-      <node id="2112659629360602494" at="16,67,17,112" concept="1" />
-      <node id="2112659629360602494" at="17,112,18,119" concept="1" />
-      <node id="2112659629360602494" at="24,51,25,72" concept="1" />
-      <node id="2112659629360602496" at="25,72,26,69" concept="1" />
-      <node id="2112659629360602498" at="26,69,27,102" concept="3" />
-      <node id="2112659629360602509" at="27,102,28,108" concept="0" />
-      <node id="2112659629360602494" at="15,0,20,0" concept="2" trace="test_InspectorOfRichPresentation#()V" />
-      <node id="2112659629360602494" at="23,0,30,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="2112659629360602494" at="16,67,18,119" />
-      <scope id="2112659629360602494" at="24,51,28,108">
+      <node id="2112659629360602494" at="23,45,24,60" concept="6" />
+      <node id="2112659629360602494" at="28,67,29,36" concept="1" />
+      <node id="2112659629360602494" at="34,52,35,19" concept="6" />
+      <node id="2112659629360602494" at="39,51,40,72" concept="1" />
+      <node id="2112659629360602496" at="40,72,41,69" concept="1" />
+      <node id="2112659629360602498" at="41,69,42,102" concept="3" />
+      <node id="8315441706324361637" at="42,102,43,120" concept="1" />
+      <node id="2112659629360602494" at="20,0,22,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="2112659629360602494" at="23,0,26,0" concept="0" trace="InspectorOfRichPresentation_Test#()V" />
+      <node id="2112659629360602494" at="34,0,37,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="2112659629360602494" at="27,0,31,0" concept="2" trace="test_InspectorOfRichPresentation#()V" />
+      <node id="2112659629360602494" at="38,0,45,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="2112659629360602494" at="23,45,24,60" />
+      <scope id="2112659629360602494" at="28,67,29,36" />
+      <scope id="2112659629360602494" at="34,52,35,19" />
+      <scope id="2112659629360602494" at="23,0,26,0" />
+      <scope id="2112659629360602494" at="34,0,37,0">
+        <var name="owner" id="2112659629360602494" />
+      </scope>
+      <scope id="2112659629360602494" at="27,0,31,0" />
+      <scope id="2112659629360602494" at="39,51,43,120">
         <var name="rootCell" id="2112659629360602499" />
       </scope>
-      <scope id="2112659629360602494" at="15,0,20,0" />
-      <scope id="2112659629360602494" at="23,0,30,0" />
-      <unit id="2112659629360602494" at="21,0,31,0" name="jetbrains.mps.lang.editor.multiple.tests.InspectorOfRichPresentation_Test$TestBody" />
-      <unit id="2112659629360602494" at="13,0,32,0" name="jetbrains.mps.lang.editor.multiple.tests.InspectorOfRichPresentation_Test" />
+      <scope id="2112659629360602494" at="38,0,45,0" />
+      <unit id="2112659629360602494" at="32,0,46,0" name="jetbrains.mps.lang.editor.multiple.tests.InspectorOfRichPresentation_Test$TestBody" />
+      <unit id="2112659629360602494" at="18,0,47,0" name="jetbrains.mps.lang.editor.multiple.tests.InspectorOfRichPresentation_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/2112659629360603418">
     <file name="InspectorOfDefaultPresentation_Test.java">
-      <node id="2112659629360603418" at="16,70,17,112" concept="1" />
-      <node id="2112659629360603418" at="17,112,18,122" concept="1" />
-      <node id="2112659629360603418" at="24,51,25,72" concept="1" />
-      <node id="2112659629360603420" at="25,72,26,69" concept="1" />
-      <node id="2112659629360603422" at="26,69,27,102" concept="3" />
-      <node id="2112659629360603433" at="27,102,28,111" concept="0" />
-      <node id="2112659629360603418" at="15,0,20,0" concept="2" trace="test_InspectorOfDefaultPresentation#()V" />
-      <node id="2112659629360603418" at="23,0,30,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="2112659629360603418" at="16,70,18,122" />
-      <scope id="2112659629360603418" at="24,51,28,111">
+      <node id="2112659629360603418" at="23,48,24,60" concept="6" />
+      <node id="2112659629360603418" at="28,70,29,36" concept="1" />
+      <node id="2112659629360603418" at="34,52,35,19" concept="6" />
+      <node id="2112659629360603418" at="39,51,40,72" concept="1" />
+      <node id="2112659629360603420" at="40,72,41,69" concept="1" />
+      <node id="2112659629360603422" at="41,69,42,102" concept="3" />
+      <node id="8315441706324361641" at="42,102,43,123" concept="1" />
+      <node id="2112659629360603418" at="20,0,22,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="2112659629360603418" at="23,0,26,0" concept="0" trace="InspectorOfDefaultPresentation_Test#()V" />
+      <node id="2112659629360603418" at="34,0,37,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="2112659629360603418" at="27,0,31,0" concept="2" trace="test_InspectorOfDefaultPresentation#()V" />
+      <node id="2112659629360603418" at="38,0,45,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="2112659629360603418" at="23,48,24,60" />
+      <scope id="2112659629360603418" at="28,70,29,36" />
+      <scope id="2112659629360603418" at="34,52,35,19" />
+      <scope id="2112659629360603418" at="23,0,26,0" />
+      <scope id="2112659629360603418" at="34,0,37,0">
+        <var name="owner" id="2112659629360603418" />
+      </scope>
+      <scope id="2112659629360603418" at="27,0,31,0" />
+      <scope id="2112659629360603418" at="39,51,43,123">
         <var name="rootCell" id="2112659629360603423" />
       </scope>
-      <scope id="2112659629360603418" at="15,0,20,0" />
-      <scope id="2112659629360603418" at="23,0,30,0" />
-      <unit id="2112659629360603418" at="21,0,31,0" name="jetbrains.mps.lang.editor.multiple.tests.InspectorOfDefaultPresentation_Test$TestBody" />
-      <unit id="2112659629360603418" at="13,0,32,0" name="jetbrains.mps.lang.editor.multiple.tests.InspectorOfDefaultPresentation_Test" />
+      <scope id="2112659629360603418" at="38,0,45,0" />
+      <unit id="2112659629360603418" at="32,0,46,0" name="jetbrains.mps.lang.editor.multiple.tests.InspectorOfDefaultPresentation_Test$TestBody" />
+      <unit id="2112659629360603418" at="18,0,47,0" name="jetbrains.mps.lang.editor.multiple.tests.InspectorOfDefaultPresentation_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/2112659629360604431">
     <file name="InspectorOfCompactPresentation_pushHints_Test.java">
-      <node id="2112659629360604431" at="17,80,18,112" concept="1" />
-      <node id="2112659629360604431" at="18,112,19,132" concept="1" />
-      <node id="2112659629360604431" at="25,51,26,53" concept="1" />
-      <node id="2112659629360607142" at="26,53,27,0" concept="4" />
-      <node id="2112659629360607301" at="27,0,28,89" concept="3" />
-      <node id="2112659629360604435" at="28,89,29,67" concept="3" />
-      <node id="8961638890955737122" at="29,67,30,111" concept="0" />
-      <node id="2112659629360607754" at="30,111,31,155" concept="1" />
-      <node id="2112659629360663174" at="35,31,36,47" concept="1" />
-      <node id="2112659629360668203" at="38,13,39,53" concept="1" />
-      <node id="8961638890955733428" at="41,9,42,56" concept="1" />
-      <node id="2112659629360604446" at="42,56,43,111" concept="0" />
-      <node id="2112659629360713217" at="35,0,38,0" concept="2" trace="run#()V" />
-      <node id="2112659629360604431" at="16,0,21,0" concept="2" trace="test_InspectorOfCompactPresentation_pushHints#()V" />
-      <node id="2112659629360707143" at="33,27,38,13" concept="1" />
-      <node id="8041297453111221043" at="33,0,41,0" concept="2" trace="run#()V" />
-      <node id="8041297453111219303" at="31,155,41,9" concept="1" />
-      <node id="2112659629360604431" at="24,0,45,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="2112659629360713218" at="35,31,36,47" />
-      <scope id="2112659629360604431" at="17,80,19,132" />
-      <scope id="2112659629360713217" at="35,0,38,0" />
-      <scope id="2112659629360604431" at="16,0,21,0" />
-      <scope id="8041297453111221044" at="33,27,39,53" />
-      <scope id="8041297453111221043" at="33,0,41,0" />
-      <scope id="2112659629360604431" at="25,51,43,111">
+      <node id="2112659629360604431" at="24,58,25,60" concept="6" />
+      <node id="2112659629360604431" at="29,80,30,36" concept="1" />
+      <node id="2112659629360604431" at="35,52,36,19" concept="6" />
+      <node id="2112659629360604431" at="40,51,41,53" concept="1" />
+      <node id="2112659629360607142" at="41,53,42,0" concept="4" />
+      <node id="2112659629360607301" at="42,0,43,89" concept="3" />
+      <node id="2112659629360604435" at="43,89,44,67" concept="3" />
+      <node id="8315441706324361651" at="44,67,45,123" concept="1" />
+      <node id="2112659629360607754" at="45,123,46,155" concept="1" />
+      <node id="2112659629360707143" at="47,42,48,124" concept="1" />
+      <node id="2112659629360668203" at="48,124,49,51" concept="1" />
+      <node id="8961638890955733428" at="50,9,51,56" concept="1" />
+      <node id="8315441706324361630" at="51,56,52,123" concept="1" />
+      <node id="2112659629360604431" at="21,0,23,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="2112659629360604431" at="24,0,27,0" concept="0" trace="InspectorOfCompactPresentation_pushHints_Test#()V" />
+      <node id="2112659629360604431" at="35,0,38,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="2112659629360604431" at="28,0,32,0" concept="2" trace="test_InspectorOfCompactPresentation_pushHints#()V" />
+      <node id="8041297453111219303" at="46,155,50,9" concept="1" />
+      <node id="2112659629360604431" at="39,0,54,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="2112659629360604431" at="24,58,25,60" />
+      <scope id="2112659629360604431" at="29,80,30,36" />
+      <scope id="2112659629360604431" at="35,52,36,19" />
+      <scope id="8041297453111221044" at="47,42,49,51" />
+      <scope id="2112659629360604431" at="24,0,27,0" />
+      <scope id="2112659629360604431" at="35,0,38,0">
+        <var name="owner" id="2112659629360604431" />
+      </scope>
+      <scope id="2112659629360604431" at="28,0,32,0" />
+      <scope id="2112659629360604431" at="40,51,52,123">
         <var name="component" id="2112659629360607302" />
         <var name="rootCell" id="2112659629360604436" />
       </scope>
-      <scope id="2112659629360604431" at="24,0,45,0" />
-      <unit id="2112659629360713217" at="34,90,38,11" name="jetbrains.mps.lang.editor.multiple.tests.InspectorOfCompactPresentation_pushHints_Test$2" />
-      <unit id="8041297453111221043" at="32,39,41,7" name="jetbrains.mps.lang.editor.multiple.tests.InspectorOfCompactPresentation_pushHints_Test$1" />
-      <unit id="2112659629360604431" at="22,0,46,0" name="jetbrains.mps.lang.editor.multiple.tests.InspectorOfCompactPresentation_pushHints_Test$TestBody" />
-      <unit id="2112659629360604431" at="14,0,47,0" name="jetbrains.mps.lang.editor.multiple.tests.InspectorOfCompactPresentation_pushHints_Test" />
+      <scope id="2112659629360604431" at="39,0,54,0" />
+      <unit id="2112659629360604431" at="33,0,55,0" name="jetbrains.mps.lang.editor.multiple.tests.InspectorOfCompactPresentation_pushHints_Test$TestBody" />
+      <unit id="2112659629360604431" at="19,0,56,0" name="jetbrains.mps.lang.editor.multiple.tests.InspectorOfCompactPresentation_pushHints_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/2601164129533059968">
     <file name="UnsupportedPresentation_Test.java">
-      <node id="2601164129533059968" at="13,63,14,112" concept="1" />
-      <node id="2601164129533059968" at="14,112,15,115" concept="1" />
-      <node id="2601164129533059968" at="21,51,22,72" concept="1" />
-      <node id="2601164129533059976" at="22,72,23,24" concept="1" />
-      <node id="2601164129533059968" at="12,0,17,0" concept="2" trace="test_UnsupportedPresentation#()V" />
-      <node id="2601164129533059968" at="20,0,25,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="2601164129533059968" at="13,63,15,115" />
-      <scope id="2601164129533059968" at="21,51,23,24" />
-      <scope id="2601164129533059968" at="12,0,17,0" />
-      <scope id="2601164129533059968" at="20,0,25,0" />
-      <unit id="2601164129533059968" at="18,0,26,0" name="jetbrains.mps.lang.editor.multiple.tests.UnsupportedPresentation_Test$TestBody" />
-      <unit id="2601164129533059968" at="10,0,27,0" name="jetbrains.mps.lang.editor.multiple.tests.UnsupportedPresentation_Test" />
+      <node id="2601164129533059968" at="19,41,20,60" concept="6" />
+      <node id="2601164129533059968" at="24,63,25,36" concept="1" />
+      <node id="2601164129533059968" at="30,52,31,19" concept="6" />
+      <node id="2601164129533059968" at="35,51,36,72" concept="1" />
+      <node id="2601164129533059976" at="36,72,37,24" concept="1" />
+      <node id="2601164129533059968" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="2601164129533059968" at="19,0,22,0" concept="0" trace="UnsupportedPresentation_Test#()V" />
+      <node id="2601164129533059968" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="2601164129533059968" at="23,0,27,0" concept="2" trace="test_UnsupportedPresentation#()V" />
+      <node id="2601164129533059968" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="2601164129533059968" at="19,41,20,60" />
+      <scope id="2601164129533059968" at="24,63,25,36" />
+      <scope id="2601164129533059968" at="30,52,31,19" />
+      <scope id="2601164129533059968" at="35,51,37,24" />
+      <scope id="2601164129533059968" at="19,0,22,0" />
+      <scope id="2601164129533059968" at="30,0,33,0">
+        <var name="owner" id="2601164129533059968" />
+      </scope>
+      <scope id="2601164129533059968" at="23,0,27,0" />
+      <scope id="2601164129533059968" at="34,0,39,0" />
+      <unit id="2601164129533059968" at="28,0,40,0" name="jetbrains.mps.lang.editor.multiple.tests.UnsupportedPresentation_Test$TestBody" />
+      <unit id="2601164129533059968" at="14,0,41,0" name="jetbrains.mps.lang.editor.multiple.tests.UnsupportedPresentation_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/554589055677209880">
     <file name="ConditionalPresentation_addQuery_RefNodeList_default_Test.java">
-      <node id="554589055677209880" at="13,92,14,112" concept="1" />
-      <node id="554589055677209880" at="14,112,15,144" concept="1" />
-      <node id="554589055677209880" at="21,51,22,70" concept="1" />
-      <node id="554589055677209888" at="22,70,23,37" concept="1" />
-      <node id="554589055677209880" at="12,0,17,0" concept="2" trace="test_ConditionalPresentation_addQuery_RefNodeList_default#()V" />
-      <node id="554589055677209880" at="20,0,25,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="554589055677209880" at="13,92,15,144" />
-      <scope id="554589055677209880" at="21,51,23,37" />
-      <scope id="554589055677209880" at="12,0,17,0" />
-      <scope id="554589055677209880" at="20,0,25,0" />
-      <unit id="554589055677209880" at="18,0,26,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_RefNodeList_default_Test$TestBody" />
-      <unit id="554589055677209880" at="10,0,27,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_RefNodeList_default_Test" />
+      <node id="554589055677209880" at="19,70,20,60" concept="6" />
+      <node id="554589055677209880" at="24,92,25,36" concept="1" />
+      <node id="554589055677209880" at="30,52,31,19" concept="6" />
+      <node id="554589055677209880" at="35,51,36,70" concept="1" />
+      <node id="554589055677209888" at="36,70,37,37" concept="1" />
+      <node id="554589055677209880" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="554589055677209880" at="19,0,22,0" concept="0" trace="ConditionalPresentation_addQuery_RefNodeList_default_Test#()V" />
+      <node id="554589055677209880" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="554589055677209880" at="23,0,27,0" concept="2" trace="test_ConditionalPresentation_addQuery_RefNodeList_default#()V" />
+      <node id="554589055677209880" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="554589055677209880" at="19,70,20,60" />
+      <scope id="554589055677209880" at="24,92,25,36" />
+      <scope id="554589055677209880" at="30,52,31,19" />
+      <scope id="554589055677209880" at="35,51,37,37" />
+      <scope id="554589055677209880" at="19,0,22,0" />
+      <scope id="554589055677209880" at="30,0,33,0">
+        <var name="owner" id="554589055677209880" />
+      </scope>
+      <scope id="554589055677209880" at="23,0,27,0" />
+      <scope id="554589055677209880" at="34,0,39,0" />
+      <unit id="554589055677209880" at="28,0,40,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_RefNodeList_default_Test$TestBody" />
+      <unit id="554589055677209880" at="14,0,41,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_RefNodeList_default_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/554589055677210829">
     <file name="ConditionalPresentation_addQuery_RefNodeList_switch_Test.java">
-      <node id="554589055677210829" at="13,91,14,112" concept="1" />
-      <node id="554589055677210829" at="14,112,15,143" concept="1" />
-      <node id="554589055677210829" at="21,51,22,70" concept="1" />
-      <node id="554589055677210834" at="22,70,23,25" concept="1" />
-      <node id="554589055677210835" at="23,25,24,71" concept="1" />
-      <node id="554589055677210837" at="24,71,25,71" concept="1" />
-      <node id="554589055677210839" at="25,71,26,38" concept="1" />
-      <node id="554589055677210829" at="12,0,17,0" concept="2" trace="test_ConditionalPresentation_addQuery_RefNodeList_switch#()V" />
-      <node id="554589055677210829" at="20,0,28,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="554589055677210829" at="13,91,15,143" />
-      <scope id="554589055677210829" at="12,0,17,0" />
-      <scope id="554589055677210829" at="21,51,26,38" />
-      <scope id="554589055677210829" at="20,0,28,0" />
-      <unit id="554589055677210829" at="18,0,29,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_RefNodeList_switch_Test$TestBody" />
-      <unit id="554589055677210829" at="10,0,30,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_RefNodeList_switch_Test" />
+      <node id="554589055677210829" at="19,69,20,60" concept="6" />
+      <node id="554589055677210829" at="24,91,25,36" concept="1" />
+      <node id="554589055677210829" at="30,52,31,19" concept="6" />
+      <node id="554589055677210829" at="35,51,36,70" concept="1" />
+      <node id="554589055677210834" at="36,70,37,25" concept="1" />
+      <node id="554589055677210835" at="37,25,38,71" concept="1" />
+      <node id="554589055677210837" at="38,71,39,71" concept="1" />
+      <node id="554589055677210839" at="39,71,40,38" concept="1" />
+      <node id="554589055677210829" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="554589055677210829" at="19,0,22,0" concept="0" trace="ConditionalPresentation_addQuery_RefNodeList_switch_Test#()V" />
+      <node id="554589055677210829" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="554589055677210829" at="23,0,27,0" concept="2" trace="test_ConditionalPresentation_addQuery_RefNodeList_switch#()V" />
+      <node id="554589055677210829" at="34,0,42,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="554589055677210829" at="19,69,20,60" />
+      <scope id="554589055677210829" at="24,91,25,36" />
+      <scope id="554589055677210829" at="30,52,31,19" />
+      <scope id="554589055677210829" at="19,0,22,0" />
+      <scope id="554589055677210829" at="30,0,33,0">
+        <var name="owner" id="554589055677210829" />
+      </scope>
+      <scope id="554589055677210829" at="23,0,27,0" />
+      <scope id="554589055677210829" at="35,51,40,38" />
+      <scope id="554589055677210829" at="34,0,42,0" />
+      <unit id="554589055677210829" at="28,0,43,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_RefNodeList_switch_Test$TestBody" />
+      <unit id="554589055677210829" at="14,0,44,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_RefNodeList_switch_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/554589055677397793">
     <file name="ConditionalPresentation_removeQuery_RefNodeList_compact_Test.java">
-      <node id="554589055677397793" at="13,95,14,112" concept="1" />
-      <node id="554589055677397793" at="14,112,15,147" concept="1" />
-      <node id="554589055677397793" at="21,51,22,70" concept="1" />
-      <node id="554589055677397795" at="22,70,23,30" concept="1" />
-      <node id="554589055677397793" at="12,0,17,0" concept="2" trace="test_ConditionalPresentation_removeQuery_RefNodeList_compact#()V" />
-      <node id="554589055677397793" at="20,0,25,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="554589055677397793" at="13,95,15,147" />
-      <scope id="554589055677397793" at="21,51,23,30" />
-      <scope id="554589055677397793" at="12,0,17,0" />
-      <scope id="554589055677397793" at="20,0,25,0" />
-      <unit id="554589055677397793" at="18,0,26,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_removeQuery_RefNodeList_compact_Test$TestBody" />
-      <unit id="554589055677397793" at="10,0,27,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_removeQuery_RefNodeList_compact_Test" />
+      <node id="554589055677397793" at="19,73,20,60" concept="6" />
+      <node id="554589055677397793" at="24,95,25,36" concept="1" />
+      <node id="554589055677397793" at="30,52,31,19" concept="6" />
+      <node id="554589055677397793" at="35,51,36,70" concept="1" />
+      <node id="554589055677397795" at="36,70,37,30" concept="1" />
+      <node id="554589055677397793" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="554589055677397793" at="19,0,22,0" concept="0" trace="ConditionalPresentation_removeQuery_RefNodeList_compact_Test#()V" />
+      <node id="554589055677397793" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="554589055677397793" at="23,0,27,0" concept="2" trace="test_ConditionalPresentation_removeQuery_RefNodeList_compact#()V" />
+      <node id="554589055677397793" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="554589055677397793" at="19,73,20,60" />
+      <scope id="554589055677397793" at="24,95,25,36" />
+      <scope id="554589055677397793" at="30,52,31,19" />
+      <scope id="554589055677397793" at="35,51,37,30" />
+      <scope id="554589055677397793" at="19,0,22,0" />
+      <scope id="554589055677397793" at="30,0,33,0">
+        <var name="owner" id="554589055677397793" />
+      </scope>
+      <scope id="554589055677397793" at="23,0,27,0" />
+      <scope id="554589055677397793" at="34,0,39,0" />
+      <unit id="554589055677397793" at="28,0,40,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_removeQuery_RefNodeList_compact_Test$TestBody" />
+      <unit id="554589055677397793" at="14,0,41,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_removeQuery_RefNodeList_compact_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/554589055677398009">
     <file name="ConditionalPresentation_removeQuery_RefNodeList_switch_Test.java">
-      <node id="554589055677398009" at="13,94,14,112" concept="1" />
-      <node id="554589055677398009" at="14,112,15,146" concept="1" />
-      <node id="554589055677398009" at="21,51,22,70" concept="1" />
-      <node id="554589055677398011" at="22,70,23,26" concept="1" />
-      <node id="554589055677398012" at="23,26,24,71" concept="1" />
-      <node id="554589055677398014" at="24,71,25,71" concept="1" />
-      <node id="554589055677398016" at="25,71,26,30" concept="1" />
-      <node id="554589055677398009" at="12,0,17,0" concept="2" trace="test_ConditionalPresentation_removeQuery_RefNodeList_switch#()V" />
-      <node id="554589055677398009" at="20,0,28,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="554589055677398009" at="13,94,15,146" />
-      <scope id="554589055677398009" at="12,0,17,0" />
-      <scope id="554589055677398009" at="21,51,26,30" />
-      <scope id="554589055677398009" at="20,0,28,0" />
-      <unit id="554589055677398009" at="18,0,29,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_removeQuery_RefNodeList_switch_Test$TestBody" />
-      <unit id="554589055677398009" at="10,0,30,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_removeQuery_RefNodeList_switch_Test" />
+      <node id="554589055677398009" at="19,72,20,60" concept="6" />
+      <node id="554589055677398009" at="24,94,25,36" concept="1" />
+      <node id="554589055677398009" at="30,52,31,19" concept="6" />
+      <node id="554589055677398009" at="35,51,36,70" concept="1" />
+      <node id="554589055677398011" at="36,70,37,26" concept="1" />
+      <node id="554589055677398012" at="37,26,38,71" concept="1" />
+      <node id="554589055677398014" at="38,71,39,71" concept="1" />
+      <node id="554589055677398016" at="39,71,40,30" concept="1" />
+      <node id="554589055677398009" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="554589055677398009" at="19,0,22,0" concept="0" trace="ConditionalPresentation_removeQuery_RefNodeList_switch_Test#()V" />
+      <node id="554589055677398009" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="554589055677398009" at="23,0,27,0" concept="2" trace="test_ConditionalPresentation_removeQuery_RefNodeList_switch#()V" />
+      <node id="554589055677398009" at="34,0,42,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="554589055677398009" at="19,72,20,60" />
+      <scope id="554589055677398009" at="24,94,25,36" />
+      <scope id="554589055677398009" at="30,52,31,19" />
+      <scope id="554589055677398009" at="19,0,22,0" />
+      <scope id="554589055677398009" at="30,0,33,0">
+        <var name="owner" id="554589055677398009" />
+      </scope>
+      <scope id="554589055677398009" at="23,0,27,0" />
+      <scope id="554589055677398009" at="35,51,40,30" />
+      <scope id="554589055677398009" at="34,0,42,0" />
+      <unit id="554589055677398009" at="28,0,43,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_removeQuery_RefNodeList_switch_Test$TestBody" />
+      <unit id="554589055677398009" at="14,0,44,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_removeQuery_RefNodeList_switch_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/5613016763942508875">
     <file name="ConditionalPresentation_addQuery_RefNodeList_rich_Test.java">
-      <node id="5613016763942508875" at="13,89,14,112" concept="1" />
-      <node id="5613016763942508875" at="14,112,15,141" concept="1" />
-      <node id="5613016763942508875" at="21,51,22,70" concept="1" />
-      <node id="5613016763942508880" at="22,70,23,29" concept="1" />
-      <node id="5613016763942508875" at="12,0,17,0" concept="2" trace="test_ConditionalPresentation_addQuery_RefNodeList_rich#()V" />
-      <node id="5613016763942508875" at="20,0,25,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="5613016763942508875" at="13,89,15,141" />
-      <scope id="5613016763942508875" at="21,51,23,29" />
-      <scope id="5613016763942508875" at="12,0,17,0" />
-      <scope id="5613016763942508875" at="20,0,25,0" />
-      <unit id="5613016763942508875" at="18,0,26,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_RefNodeList_rich_Test$TestBody" />
-      <unit id="5613016763942508875" at="10,0,27,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_RefNodeList_rich_Test" />
+      <node id="5613016763942508875" at="19,67,20,60" concept="6" />
+      <node id="5613016763942508875" at="24,89,25,36" concept="1" />
+      <node id="5613016763942508875" at="30,52,31,19" concept="6" />
+      <node id="5613016763942508875" at="35,51,36,70" concept="1" />
+      <node id="5613016763942508880" at="36,70,37,29" concept="1" />
+      <node id="5613016763942508875" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="5613016763942508875" at="19,0,22,0" concept="0" trace="ConditionalPresentation_addQuery_RefNodeList_rich_Test#()V" />
+      <node id="5613016763942508875" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5613016763942508875" at="23,0,27,0" concept="2" trace="test_ConditionalPresentation_addQuery_RefNodeList_rich#()V" />
+      <node id="5613016763942508875" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="5613016763942508875" at="19,67,20,60" />
+      <scope id="5613016763942508875" at="24,89,25,36" />
+      <scope id="5613016763942508875" at="30,52,31,19" />
+      <scope id="5613016763942508875" at="35,51,37,29" />
+      <scope id="5613016763942508875" at="19,0,22,0" />
+      <scope id="5613016763942508875" at="30,0,33,0">
+        <var name="owner" id="5613016763942508875" />
+      </scope>
+      <scope id="5613016763942508875" at="23,0,27,0" />
+      <scope id="5613016763942508875" at="34,0,39,0" />
+      <unit id="5613016763942508875" at="28,0,40,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_RefNodeList_rich_Test$TestBody" />
+      <unit id="5613016763942508875" at="14,0,41,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_RefNodeList_rich_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/5861024100074454462">
     <file name="EditorSpecifiedBy_add_context_hints_RefNode_Test.java">
-      <node id="5861024100074454462" at="13,83,14,112" concept="1" />
-      <node id="5861024100074454462" at="14,112,15,135" concept="1" />
-      <node id="5861024100074454462" at="21,51,22,72" concept="1" />
-      <node id="5861024100074454470" at="22,72,23,24" concept="1" />
-      <node id="5861024100074454462" at="12,0,17,0" concept="2" trace="test_EditorSpecifiedBy_add_context_hints_RefNode#()V" />
-      <node id="5861024100074454462" at="20,0,25,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="5861024100074454462" at="13,83,15,135" />
-      <scope id="5861024100074454462" at="21,51,23,24" />
-      <scope id="5861024100074454462" at="12,0,17,0" />
-      <scope id="5861024100074454462" at="20,0,25,0" />
-      <unit id="5861024100074454462" at="18,0,26,0" name="jetbrains.mps.lang.editor.multiple.tests.EditorSpecifiedBy_add_context_hints_RefNode_Test$TestBody" />
-      <unit id="5861024100074454462" at="10,0,27,0" name="jetbrains.mps.lang.editor.multiple.tests.EditorSpecifiedBy_add_context_hints_RefNode_Test" />
+      <node id="5861024100074454462" at="19,61,20,60" concept="6" />
+      <node id="5861024100074454462" at="24,83,25,36" concept="1" />
+      <node id="5861024100074454462" at="30,52,31,19" concept="6" />
+      <node id="5861024100074454462" at="35,51,36,72" concept="1" />
+      <node id="5861024100074454470" at="36,72,37,24" concept="1" />
+      <node id="5861024100074454462" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="5861024100074454462" at="19,0,22,0" concept="0" trace="EditorSpecifiedBy_add_context_hints_RefNode_Test#()V" />
+      <node id="5861024100074454462" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5861024100074454462" at="23,0,27,0" concept="2" trace="test_EditorSpecifiedBy_add_context_hints_RefNode#()V" />
+      <node id="5861024100074454462" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="5861024100074454462" at="19,61,20,60" />
+      <scope id="5861024100074454462" at="24,83,25,36" />
+      <scope id="5861024100074454462" at="30,52,31,19" />
+      <scope id="5861024100074454462" at="35,51,37,24" />
+      <scope id="5861024100074454462" at="19,0,22,0" />
+      <scope id="5861024100074454462" at="30,0,33,0">
+        <var name="owner" id="5861024100074454462" />
+      </scope>
+      <scope id="5861024100074454462" at="23,0,27,0" />
+      <scope id="5861024100074454462" at="34,0,39,0" />
+      <unit id="5861024100074454462" at="28,0,40,0" name="jetbrains.mps.lang.editor.multiple.tests.EditorSpecifiedBy_add_context_hints_RefNode_Test$TestBody" />
+      <unit id="5861024100074454462" at="14,0,41,0" name="jetbrains.mps.lang.editor.multiple.tests.EditorSpecifiedBy_add_context_hints_RefNode_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/5861024100074455062">
     <file name="EditorSpecifiedBy_add_remove_context_hints_RefNode_Test.java">
-      <node id="5861024100074455062" at="13,90,14,112" concept="1" />
-      <node id="5861024100074455062" at="14,112,15,142" concept="1" />
-      <node id="5861024100074455062" at="21,51,22,72" concept="1" />
-      <node id="5861024100074455070" at="22,72,23,24" concept="1" />
-      <node id="5861024100074455062" at="12,0,17,0" concept="2" trace="test_EditorSpecifiedBy_add_remove_context_hints_RefNode#()V" />
-      <node id="5861024100074455062" at="20,0,25,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="5861024100074455062" at="13,90,15,142" />
-      <scope id="5861024100074455062" at="21,51,23,24" />
-      <scope id="5861024100074455062" at="12,0,17,0" />
-      <scope id="5861024100074455062" at="20,0,25,0" />
-      <unit id="5861024100074455062" at="18,0,26,0" name="jetbrains.mps.lang.editor.multiple.tests.EditorSpecifiedBy_add_remove_context_hints_RefNode_Test$TestBody" />
-      <unit id="5861024100074455062" at="10,0,27,0" name="jetbrains.mps.lang.editor.multiple.tests.EditorSpecifiedBy_add_remove_context_hints_RefNode_Test" />
+      <node id="5861024100074455062" at="19,68,20,60" concept="6" />
+      <node id="5861024100074455062" at="24,90,25,36" concept="1" />
+      <node id="5861024100074455062" at="30,52,31,19" concept="6" />
+      <node id="5861024100074455062" at="35,51,36,72" concept="1" />
+      <node id="5861024100074455070" at="36,72,37,24" concept="1" />
+      <node id="5861024100074455062" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="5861024100074455062" at="19,0,22,0" concept="0" trace="EditorSpecifiedBy_add_remove_context_hints_RefNode_Test#()V" />
+      <node id="5861024100074455062" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5861024100074455062" at="23,0,27,0" concept="2" trace="test_EditorSpecifiedBy_add_remove_context_hints_RefNode#()V" />
+      <node id="5861024100074455062" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="5861024100074455062" at="19,68,20,60" />
+      <scope id="5861024100074455062" at="24,90,25,36" />
+      <scope id="5861024100074455062" at="30,52,31,19" />
+      <scope id="5861024100074455062" at="35,51,37,24" />
+      <scope id="5861024100074455062" at="19,0,22,0" />
+      <scope id="5861024100074455062" at="30,0,33,0">
+        <var name="owner" id="5861024100074455062" />
+      </scope>
+      <scope id="5861024100074455062" at="23,0,27,0" />
+      <scope id="5861024100074455062" at="34,0,39,0" />
+      <unit id="5861024100074455062" at="28,0,40,0" name="jetbrains.mps.lang.editor.multiple.tests.EditorSpecifiedBy_add_remove_context_hints_RefNode_Test$TestBody" />
+      <unit id="5861024100074455062" at="14,0,41,0" name="jetbrains.mps.lang.editor.multiple.tests.EditorSpecifiedBy_add_remove_context_hints_RefNode_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/5950344441601491241">
     <file name="EditorSpecifiedBy_add_context_hints_Test.java">
-      <node id="5950344441601491241" at="13,75,14,112" concept="1" />
-      <node id="5950344441601491241" at="14,112,15,127" concept="1" />
-      <node id="5950344441601491241" at="21,51,22,72" concept="1" />
-      <node id="5950344441601663779" at="22,72,23,24" concept="1" />
-      <node id="5950344441601491241" at="12,0,17,0" concept="2" trace="test_EditorSpecifiedBy_add_context_hints#()V" />
-      <node id="5950344441601491241" at="20,0,25,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="5950344441601491241" at="13,75,15,127" />
-      <scope id="5950344441601491241" at="21,51,23,24" />
-      <scope id="5950344441601491241" at="12,0,17,0" />
-      <scope id="5950344441601491241" at="20,0,25,0" />
-      <unit id="5950344441601491241" at="18,0,26,0" name="jetbrains.mps.lang.editor.multiple.tests.EditorSpecifiedBy_add_context_hints_Test$TestBody" />
-      <unit id="5950344441601491241" at="10,0,27,0" name="jetbrains.mps.lang.editor.multiple.tests.EditorSpecifiedBy_add_context_hints_Test" />
+      <node id="5950344441601491241" at="19,53,20,60" concept="6" />
+      <node id="5950344441601491241" at="24,75,25,36" concept="1" />
+      <node id="5950344441601491241" at="30,52,31,19" concept="6" />
+      <node id="5950344441601491241" at="35,51,36,72" concept="1" />
+      <node id="5950344441601663779" at="36,72,37,24" concept="1" />
+      <node id="5950344441601491241" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="5950344441601491241" at="19,0,22,0" concept="0" trace="EditorSpecifiedBy_add_context_hints_Test#()V" />
+      <node id="5950344441601491241" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5950344441601491241" at="23,0,27,0" concept="2" trace="test_EditorSpecifiedBy_add_context_hints#()V" />
+      <node id="5950344441601491241" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="5950344441601491241" at="19,53,20,60" />
+      <scope id="5950344441601491241" at="24,75,25,36" />
+      <scope id="5950344441601491241" at="30,52,31,19" />
+      <scope id="5950344441601491241" at="35,51,37,24" />
+      <scope id="5950344441601491241" at="19,0,22,0" />
+      <scope id="5950344441601491241" at="30,0,33,0">
+        <var name="owner" id="5950344441601491241" />
+      </scope>
+      <scope id="5950344441601491241" at="23,0,27,0" />
+      <scope id="5950344441601491241" at="34,0,39,0" />
+      <unit id="5950344441601491241" at="28,0,40,0" name="jetbrains.mps.lang.editor.multiple.tests.EditorSpecifiedBy_add_context_hints_Test$TestBody" />
+      <unit id="5950344441601491241" at="14,0,41,0" name="jetbrains.mps.lang.editor.multiple.tests.EditorSpecifiedBy_add_context_hints_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/5950344441601668447">
     <file name="DefaultEditor_Test.java">
-      <node id="5950344441601668447" at="13,53,14,112" concept="1" />
-      <node id="5950344441601668447" at="14,112,15,105" concept="1" />
-      <node id="5950344441601668447" at="21,51,22,72" concept="1" />
-      <node id="5950344441601668455" at="22,72,23,24" concept="1" />
-      <node id="5950344441601668447" at="12,0,17,0" concept="2" trace="test_DefaultEditor#()V" />
-      <node id="5950344441601668447" at="20,0,25,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="5950344441601668447" at="13,53,15,105" />
-      <scope id="5950344441601668447" at="21,51,23,24" />
-      <scope id="5950344441601668447" at="12,0,17,0" />
-      <scope id="5950344441601668447" at="20,0,25,0" />
-      <unit id="5950344441601668447" at="18,0,26,0" name="jetbrains.mps.lang.editor.multiple.tests.DefaultEditor_Test$TestBody" />
-      <unit id="5950344441601668447" at="10,0,27,0" name="jetbrains.mps.lang.editor.multiple.tests.DefaultEditor_Test" />
+      <node id="5950344441601668447" at="19,31,20,60" concept="6" />
+      <node id="5950344441601668447" at="24,53,25,36" concept="1" />
+      <node id="5950344441601668447" at="30,52,31,19" concept="6" />
+      <node id="5950344441601668447" at="35,51,36,72" concept="1" />
+      <node id="5950344441601668455" at="36,72,37,24" concept="1" />
+      <node id="5950344441601668447" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="5950344441601668447" at="19,0,22,0" concept="0" trace="DefaultEditor_Test#()V" />
+      <node id="5950344441601668447" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5950344441601668447" at="23,0,27,0" concept="2" trace="test_DefaultEditor#()V" />
+      <node id="5950344441601668447" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="5950344441601668447" at="19,31,20,60" />
+      <scope id="5950344441601668447" at="24,53,25,36" />
+      <scope id="5950344441601668447" at="30,52,31,19" />
+      <scope id="5950344441601668447" at="35,51,37,24" />
+      <scope id="5950344441601668447" at="19,0,22,0" />
+      <scope id="5950344441601668447" at="30,0,33,0">
+        <var name="owner" id="5950344441601668447" />
+      </scope>
+      <scope id="5950344441601668447" at="23,0,27,0" />
+      <scope id="5950344441601668447" at="34,0,39,0" />
+      <unit id="5950344441601668447" at="28,0,40,0" name="jetbrains.mps.lang.editor.multiple.tests.DefaultEditor_Test$TestBody" />
+      <unit id="5950344441601668447" at="14,0,41,0" name="jetbrains.mps.lang.editor.multiple.tests.DefaultEditor_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/5950344441601676487">
     <file name="EditorSpecifiedBy_add_remove_context_hints_Test.java">
-      <node id="5950344441601676487" at="13,82,14,112" concept="1" />
-      <node id="5950344441601676487" at="14,112,15,134" concept="1" />
-      <node id="5950344441601676487" at="21,51,22,72" concept="1" />
-      <node id="5950344441601676492" at="22,72,23,29" concept="1" />
-      <node id="5950344441601676487" at="12,0,17,0" concept="2" trace="test_EditorSpecifiedBy_add_remove_context_hints#()V" />
-      <node id="5950344441601676487" at="20,0,25,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="5950344441601676487" at="13,82,15,134" />
-      <scope id="5950344441601676487" at="21,51,23,29" />
-      <scope id="5950344441601676487" at="12,0,17,0" />
-      <scope id="5950344441601676487" at="20,0,25,0" />
-      <unit id="5950344441601676487" at="18,0,26,0" name="jetbrains.mps.lang.editor.multiple.tests.EditorSpecifiedBy_add_remove_context_hints_Test$TestBody" />
-      <unit id="5950344441601676487" at="10,0,27,0" name="jetbrains.mps.lang.editor.multiple.tests.EditorSpecifiedBy_add_remove_context_hints_Test" />
+      <node id="5950344441601676487" at="19,60,20,60" concept="6" />
+      <node id="5950344441601676487" at="24,82,25,36" concept="1" />
+      <node id="5950344441601676487" at="30,52,31,19" concept="6" />
+      <node id="5950344441601676487" at="35,51,36,72" concept="1" />
+      <node id="5950344441601676492" at="36,72,37,29" concept="1" />
+      <node id="5950344441601676487" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="5950344441601676487" at="19,0,22,0" concept="0" trace="EditorSpecifiedBy_add_remove_context_hints_Test#()V" />
+      <node id="5950344441601676487" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="5950344441601676487" at="23,0,27,0" concept="2" trace="test_EditorSpecifiedBy_add_remove_context_hints#()V" />
+      <node id="5950344441601676487" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="5950344441601676487" at="19,60,20,60" />
+      <scope id="5950344441601676487" at="24,82,25,36" />
+      <scope id="5950344441601676487" at="30,52,31,19" />
+      <scope id="5950344441601676487" at="35,51,37,29" />
+      <scope id="5950344441601676487" at="19,0,22,0" />
+      <scope id="5950344441601676487" at="30,0,33,0">
+        <var name="owner" id="5950344441601676487" />
+      </scope>
+      <scope id="5950344441601676487" at="23,0,27,0" />
+      <scope id="5950344441601676487" at="34,0,39,0" />
+      <unit id="5950344441601676487" at="28,0,40,0" name="jetbrains.mps.lang.editor.multiple.tests.EditorSpecifiedBy_add_remove_context_hints_Test$TestBody" />
+      <unit id="5950344441601676487" at="14,0,41,0" name="jetbrains.mps.lang.editor.multiple.tests.EditorSpecifiedBy_add_remove_context_hints_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/6355695904178436203">
     <file name="MostSpecificEditor_Test.java">
-      <node id="6355695904178436203" at="13,58,14,112" concept="1" />
-      <node id="6355695904178436203" at="14,112,15,110" concept="1" />
-      <node id="6355695904178436203" at="21,51,22,72" concept="1" />
-      <node id="6355695904178440220" at="22,72,23,37" concept="1" />
-      <node id="6355695904178436203" at="12,0,17,0" concept="2" trace="test_MostSpecificEditor#()V" />
-      <node id="6355695904178436203" at="20,0,25,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="6355695904178436203" at="13,58,15,110" />
-      <scope id="6355695904178436203" at="21,51,23,37" />
-      <scope id="6355695904178436203" at="12,0,17,0" />
-      <scope id="6355695904178436203" at="20,0,25,0" />
-      <unit id="6355695904178436203" at="18,0,26,0" name="jetbrains.mps.lang.editor.multiple.tests.MostSpecificEditor_Test$TestBody" />
-      <unit id="6355695904178436203" at="10,0,27,0" name="jetbrains.mps.lang.editor.multiple.tests.MostSpecificEditor_Test" />
+      <node id="6355695904178436203" at="19,36,20,60" concept="6" />
+      <node id="6355695904178436203" at="24,58,25,36" concept="1" />
+      <node id="6355695904178436203" at="30,52,31,19" concept="6" />
+      <node id="6355695904178436203" at="35,51,36,72" concept="1" />
+      <node id="6355695904178440220" at="36,72,37,37" concept="1" />
+      <node id="6355695904178436203" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="6355695904178436203" at="19,0,22,0" concept="0" trace="MostSpecificEditor_Test#()V" />
+      <node id="6355695904178436203" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="6355695904178436203" at="23,0,27,0" concept="2" trace="test_MostSpecificEditor#()V" />
+      <node id="6355695904178436203" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="6355695904178436203" at="19,36,20,60" />
+      <scope id="6355695904178436203" at="24,58,25,36" />
+      <scope id="6355695904178436203" at="30,52,31,19" />
+      <scope id="6355695904178436203" at="35,51,37,37" />
+      <scope id="6355695904178436203" at="19,0,22,0" />
+      <scope id="6355695904178436203" at="30,0,33,0">
+        <var name="owner" id="6355695904178436203" />
+      </scope>
+      <scope id="6355695904178436203" at="23,0,27,0" />
+      <scope id="6355695904178436203" at="34,0,39,0" />
+      <unit id="6355695904178436203" at="28,0,40,0" name="jetbrains.mps.lang.editor.multiple.tests.MostSpecificEditor_Test$TestBody" />
+      <unit id="6355695904178436203" at="14,0,41,0" name="jetbrains.mps.lang.editor.multiple.tests.MostSpecificEditor_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/7279578193769046188">
     <file name="EditorSpecifiedBy_add_context_hints_RefNodeList_Test.java">
-      <node id="7279578193769046188" at="13,87,14,112" concept="1" />
-      <node id="7279578193769046188" at="14,112,15,139" concept="1" />
-      <node id="7279578193769046188" at="21,51,22,72" concept="1" />
-      <node id="5613016763942494752" at="22,72,23,24" concept="1" />
-      <node id="7279578193769046188" at="12,0,17,0" concept="2" trace="test_EditorSpecifiedBy_add_context_hints_RefNodeList#()V" />
-      <node id="7279578193769046188" at="20,0,25,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="7279578193769046188" at="13,87,15,139" />
-      <scope id="7279578193769046188" at="21,51,23,24" />
-      <scope id="7279578193769046188" at="12,0,17,0" />
-      <scope id="7279578193769046188" at="20,0,25,0" />
-      <unit id="7279578193769046188" at="18,0,26,0" name="jetbrains.mps.lang.editor.multiple.tests.EditorSpecifiedBy_add_context_hints_RefNodeList_Test$TestBody" />
-      <unit id="7279578193769046188" at="10,0,27,0" name="jetbrains.mps.lang.editor.multiple.tests.EditorSpecifiedBy_add_context_hints_RefNodeList_Test" />
+      <node id="7279578193769046188" at="19,65,20,60" concept="6" />
+      <node id="7279578193769046188" at="24,87,25,36" concept="1" />
+      <node id="7279578193769046188" at="30,52,31,19" concept="6" />
+      <node id="7279578193769046188" at="35,51,36,72" concept="1" />
+      <node id="5613016763942494752" at="36,72,37,24" concept="1" />
+      <node id="7279578193769046188" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="7279578193769046188" at="19,0,22,0" concept="0" trace="EditorSpecifiedBy_add_context_hints_RefNodeList_Test#()V" />
+      <node id="7279578193769046188" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="7279578193769046188" at="23,0,27,0" concept="2" trace="test_EditorSpecifiedBy_add_context_hints_RefNodeList#()V" />
+      <node id="7279578193769046188" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="7279578193769046188" at="19,65,20,60" />
+      <scope id="7279578193769046188" at="24,87,25,36" />
+      <scope id="7279578193769046188" at="30,52,31,19" />
+      <scope id="7279578193769046188" at="35,51,37,24" />
+      <scope id="7279578193769046188" at="19,0,22,0" />
+      <scope id="7279578193769046188" at="30,0,33,0">
+        <var name="owner" id="7279578193769046188" />
+      </scope>
+      <scope id="7279578193769046188" at="23,0,27,0" />
+      <scope id="7279578193769046188" at="34,0,39,0" />
+      <unit id="7279578193769046188" at="28,0,40,0" name="jetbrains.mps.lang.editor.multiple.tests.EditorSpecifiedBy_add_context_hints_RefNodeList_Test$TestBody" />
+      <unit id="7279578193769046188" at="14,0,41,0" name="jetbrains.mps.lang.editor.multiple.tests.EditorSpecifiedBy_add_context_hints_RefNodeList_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/7279578193769147476">
     <file name="EditorSpecifiedBy_add_remove_context_hints_RefNodeList_Test.java">
-      <node id="7279578193769147476" at="13,94,14,112" concept="1" />
-      <node id="7279578193769147476" at="14,112,15,146" concept="1" />
-      <node id="7279578193769147476" at="21,51,22,72" concept="1" />
-      <node id="5613016763942494883" at="22,72,23,24" concept="1" />
-      <node id="7279578193769147476" at="12,0,17,0" concept="2" trace="test_EditorSpecifiedBy_add_remove_context_hints_RefNodeList#()V" />
-      <node id="7279578193769147476" at="20,0,25,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="7279578193769147476" at="13,94,15,146" />
-      <scope id="7279578193769147476" at="21,51,23,24" />
-      <scope id="7279578193769147476" at="12,0,17,0" />
-      <scope id="7279578193769147476" at="20,0,25,0" />
-      <unit id="7279578193769147476" at="18,0,26,0" name="jetbrains.mps.lang.editor.multiple.tests.EditorSpecifiedBy_add_remove_context_hints_RefNodeList_Test$TestBody" />
-      <unit id="7279578193769147476" at="10,0,27,0" name="jetbrains.mps.lang.editor.multiple.tests.EditorSpecifiedBy_add_remove_context_hints_RefNodeList_Test" />
+      <node id="7279578193769147476" at="19,72,20,60" concept="6" />
+      <node id="7279578193769147476" at="24,94,25,36" concept="1" />
+      <node id="7279578193769147476" at="30,52,31,19" concept="6" />
+      <node id="7279578193769147476" at="35,51,36,72" concept="1" />
+      <node id="5613016763942494883" at="36,72,37,24" concept="1" />
+      <node id="7279578193769147476" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="7279578193769147476" at="19,0,22,0" concept="0" trace="EditorSpecifiedBy_add_remove_context_hints_RefNodeList_Test#()V" />
+      <node id="7279578193769147476" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="7279578193769147476" at="23,0,27,0" concept="2" trace="test_EditorSpecifiedBy_add_remove_context_hints_RefNodeList#()V" />
+      <node id="7279578193769147476" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="7279578193769147476" at="19,72,20,60" />
+      <scope id="7279578193769147476" at="24,94,25,36" />
+      <scope id="7279578193769147476" at="30,52,31,19" />
+      <scope id="7279578193769147476" at="35,51,37,24" />
+      <scope id="7279578193769147476" at="19,0,22,0" />
+      <scope id="7279578193769147476" at="30,0,33,0">
+        <var name="owner" id="7279578193769147476" />
+      </scope>
+      <scope id="7279578193769147476" at="23,0,27,0" />
+      <scope id="7279578193769147476" at="34,0,39,0" />
+      <unit id="7279578193769147476" at="28,0,40,0" name="jetbrains.mps.lang.editor.multiple.tests.EditorSpecifiedBy_add_remove_context_hints_RefNodeList_Test$TestBody" />
+      <unit id="7279578193769147476" at="14,0,41,0" name="jetbrains.mps.lang.editor.multiple.tests.EditorSpecifiedBy_add_remove_context_hints_RefNodeList_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/7636045212390392321">
     <file name="ConditionalPresentation_addQuery_default_Test.java">
-      <node id="7636045212390392321" at="13,80,14,112" concept="1" />
-      <node id="7636045212390392321" at="14,112,15,132" concept="1" />
-      <node id="7636045212390392321" at="21,51,22,72" concept="1" />
-      <node id="7636045212390401434" at="22,72,23,37" concept="1" />
-      <node id="7636045212390392321" at="12,0,17,0" concept="2" trace="test_ConditionalPresentation_addQuery_default#()V" />
-      <node id="7636045212390392321" at="20,0,25,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="7636045212390392321" at="13,80,15,132" />
-      <scope id="7636045212390392321" at="21,51,23,37" />
-      <scope id="7636045212390392321" at="12,0,17,0" />
-      <scope id="7636045212390392321" at="20,0,25,0" />
-      <unit id="7636045212390392321" at="18,0,26,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_default_Test$TestBody" />
-      <unit id="7636045212390392321" at="10,0,27,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_default_Test" />
+      <node id="7636045212390392321" at="19,58,20,60" concept="6" />
+      <node id="7636045212390392321" at="24,80,25,36" concept="1" />
+      <node id="7636045212390392321" at="30,52,31,19" concept="6" />
+      <node id="7636045212390392321" at="35,51,36,72" concept="1" />
+      <node id="7636045212390401434" at="36,72,37,37" concept="1" />
+      <node id="7636045212390392321" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="7636045212390392321" at="19,0,22,0" concept="0" trace="ConditionalPresentation_addQuery_default_Test#()V" />
+      <node id="7636045212390392321" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="7636045212390392321" at="23,0,27,0" concept="2" trace="test_ConditionalPresentation_addQuery_default#()V" />
+      <node id="7636045212390392321" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="7636045212390392321" at="19,58,20,60" />
+      <scope id="7636045212390392321" at="24,80,25,36" />
+      <scope id="7636045212390392321" at="30,52,31,19" />
+      <scope id="7636045212390392321" at="35,51,37,37" />
+      <scope id="7636045212390392321" at="19,0,22,0" />
+      <scope id="7636045212390392321" at="30,0,33,0">
+        <var name="owner" id="7636045212390392321" />
+      </scope>
+      <scope id="7636045212390392321" at="23,0,27,0" />
+      <scope id="7636045212390392321" at="34,0,39,0" />
+      <unit id="7636045212390392321" at="28,0,40,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_default_Test$TestBody" />
+      <unit id="7636045212390392321" at="14,0,41,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_default_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/7636045212390401481">
     <file name="ConditionalPresentation_addQuery_rich_Test.java">
-      <node id="7636045212390401481" at="13,77,14,112" concept="1" />
-      <node id="7636045212390401481" at="14,112,15,129" concept="1" />
-      <node id="7636045212390401481" at="21,51,22,72" concept="1" />
-      <node id="7636045212390401766" at="22,72,23,29" concept="1" />
-      <node id="7636045212390401481" at="12,0,17,0" concept="2" trace="test_ConditionalPresentation_addQuery_rich#()V" />
-      <node id="7636045212390401481" at="20,0,25,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="7636045212390401481" at="13,77,15,129" />
-      <scope id="7636045212390401481" at="21,51,23,29" />
-      <scope id="7636045212390401481" at="12,0,17,0" />
-      <scope id="7636045212390401481" at="20,0,25,0" />
-      <unit id="7636045212390401481" at="18,0,26,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_rich_Test$TestBody" />
-      <unit id="7636045212390401481" at="10,0,27,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_rich_Test" />
+      <node id="7636045212390401481" at="19,55,20,60" concept="6" />
+      <node id="7636045212390401481" at="24,77,25,36" concept="1" />
+      <node id="7636045212390401481" at="30,52,31,19" concept="6" />
+      <node id="7636045212390401481" at="35,51,36,72" concept="1" />
+      <node id="7636045212390401766" at="36,72,37,29" concept="1" />
+      <node id="7636045212390401481" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="7636045212390401481" at="19,0,22,0" concept="0" trace="ConditionalPresentation_addQuery_rich_Test#()V" />
+      <node id="7636045212390401481" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="7636045212390401481" at="23,0,27,0" concept="2" trace="test_ConditionalPresentation_addQuery_rich#()V" />
+      <node id="7636045212390401481" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="7636045212390401481" at="19,55,20,60" />
+      <scope id="7636045212390401481" at="24,77,25,36" />
+      <scope id="7636045212390401481" at="30,52,31,19" />
+      <scope id="7636045212390401481" at="35,51,37,29" />
+      <scope id="7636045212390401481" at="19,0,22,0" />
+      <scope id="7636045212390401481" at="30,0,33,0">
+        <var name="owner" id="7636045212390401481" />
+      </scope>
+      <scope id="7636045212390401481" at="23,0,27,0" />
+      <scope id="7636045212390401481" at="34,0,39,0" />
+      <unit id="7636045212390401481" at="28,0,40,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_rich_Test$TestBody" />
+      <unit id="7636045212390401481" at="14,0,41,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_rich_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/7636045212390410965">
     <file name="ConditionalPresentation_removeQuery_compact_Test.java">
-      <node id="7636045212390410965" at="13,83,14,112" concept="1" />
-      <node id="7636045212390410965" at="14,112,15,135" concept="1" />
-      <node id="7636045212390410965" at="21,51,22,72" concept="1" />
-      <node id="7636045212390410973" at="22,72,23,30" concept="1" />
-      <node id="7636045212390410965" at="12,0,17,0" concept="2" trace="test_ConditionalPresentation_removeQuery_compact#()V" />
-      <node id="7636045212390410965" at="20,0,25,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="7636045212390410965" at="13,83,15,135" />
-      <scope id="7636045212390410965" at="21,51,23,30" />
-      <scope id="7636045212390410965" at="12,0,17,0" />
-      <scope id="7636045212390410965" at="20,0,25,0" />
-      <unit id="7636045212390410965" at="18,0,26,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_removeQuery_compact_Test$TestBody" />
-      <unit id="7636045212390410965" at="10,0,27,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_removeQuery_compact_Test" />
+      <node id="7636045212390410965" at="19,61,20,60" concept="6" />
+      <node id="7636045212390410965" at="24,83,25,36" concept="1" />
+      <node id="7636045212390410965" at="30,52,31,19" concept="6" />
+      <node id="7636045212390410965" at="35,51,36,72" concept="1" />
+      <node id="7636045212390410973" at="36,72,37,30" concept="1" />
+      <node id="7636045212390410965" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="7636045212390410965" at="19,0,22,0" concept="0" trace="ConditionalPresentation_removeQuery_compact_Test#()V" />
+      <node id="7636045212390410965" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="7636045212390410965" at="23,0,27,0" concept="2" trace="test_ConditionalPresentation_removeQuery_compact#()V" />
+      <node id="7636045212390410965" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="7636045212390410965" at="19,61,20,60" />
+      <scope id="7636045212390410965" at="24,83,25,36" />
+      <scope id="7636045212390410965" at="30,52,31,19" />
+      <scope id="7636045212390410965" at="35,51,37,30" />
+      <scope id="7636045212390410965" at="19,0,22,0" />
+      <scope id="7636045212390410965" at="30,0,33,0">
+        <var name="owner" id="7636045212390410965" />
+      </scope>
+      <scope id="7636045212390410965" at="23,0,27,0" />
+      <scope id="7636045212390410965" at="34,0,39,0" />
+      <unit id="7636045212390410965" at="28,0,40,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_removeQuery_compact_Test$TestBody" />
+      <unit id="7636045212390410965" at="14,0,41,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_removeQuery_compact_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/7636045212390416608">
     <file name="ConditionalPresentation_addQuery_switch_Test.java">
-      <node id="7636045212390416608" at="13,79,14,112" concept="1" />
-      <node id="7636045212390416608" at="14,112,15,131" concept="1" />
-      <node id="7636045212390416608" at="21,51,22,72" concept="1" />
-      <node id="7636045212390416999" at="22,72,23,25" concept="1" />
-      <node id="2601164129532540603" at="23,25,24,71" concept="1" />
-      <node id="2601164129532784640" at="24,71,25,71" concept="1" />
-      <node id="7636045212390417648" at="25,71,26,38" concept="1" />
-      <node id="7636045212390416608" at="12,0,17,0" concept="2" trace="test_ConditionalPresentation_addQuery_switch#()V" />
-      <node id="7636045212390416608" at="20,0,28,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="7636045212390416608" at="13,79,15,131" />
-      <scope id="7636045212390416608" at="12,0,17,0" />
-      <scope id="7636045212390416608" at="21,51,26,38" />
-      <scope id="7636045212390416608" at="20,0,28,0" />
-      <unit id="7636045212390416608" at="18,0,29,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_switch_Test$TestBody" />
-      <unit id="7636045212390416608" at="10,0,30,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_switch_Test" />
+      <node id="7636045212390416608" at="19,57,20,60" concept="6" />
+      <node id="7636045212390416608" at="24,79,25,36" concept="1" />
+      <node id="7636045212390416608" at="30,52,31,19" concept="6" />
+      <node id="7636045212390416608" at="35,51,36,72" concept="1" />
+      <node id="7636045212390416999" at="36,72,37,25" concept="1" />
+      <node id="2601164129532540603" at="37,25,38,71" concept="1" />
+      <node id="2601164129532784640" at="38,71,39,71" concept="1" />
+      <node id="7636045212390417648" at="39,71,40,38" concept="1" />
+      <node id="7636045212390416608" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="7636045212390416608" at="19,0,22,0" concept="0" trace="ConditionalPresentation_addQuery_switch_Test#()V" />
+      <node id="7636045212390416608" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="7636045212390416608" at="23,0,27,0" concept="2" trace="test_ConditionalPresentation_addQuery_switch#()V" />
+      <node id="7636045212390416608" at="34,0,42,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="7636045212390416608" at="19,57,20,60" />
+      <scope id="7636045212390416608" at="24,79,25,36" />
+      <scope id="7636045212390416608" at="30,52,31,19" />
+      <scope id="7636045212390416608" at="19,0,22,0" />
+      <scope id="7636045212390416608" at="30,0,33,0">
+        <var name="owner" id="7636045212390416608" />
+      </scope>
+      <scope id="7636045212390416608" at="23,0,27,0" />
+      <scope id="7636045212390416608" at="35,51,40,38" />
+      <scope id="7636045212390416608" at="34,0,42,0" />
+      <unit id="7636045212390416608" at="28,0,43,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_switch_Test$TestBody" />
+      <unit id="7636045212390416608" at="14,0,44,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_addQuery_switch_Test" />
     </file>
   </root>
   <root nodeRef="r:dbab6746-af91-4594-857e-d38a36667e17(jetbrains.mps.lang.editor.multiple.tests)/7636045212393364917">
     <file name="ConditionalPresentation_removeQuery_switch_Test.java">
-      <node id="7636045212393364917" at="13,82,14,112" concept="1" />
-      <node id="7636045212393364917" at="14,112,15,134" concept="1" />
-      <node id="7636045212393364917" at="21,51,22,72" concept="1" />
-      <node id="7636045212393365029" at="22,72,23,26" concept="1" />
-      <node id="2601164129532808938" at="23,26,24,71" concept="1" />
-      <node id="2601164129532808955" at="24,71,25,71" concept="1" />
-      <node id="7636045212393364919" at="25,71,26,30" concept="1" />
-      <node id="7636045212393364917" at="12,0,17,0" concept="2" trace="test_ConditionalPresentation_removeQuery_switch#()V" />
-      <node id="7636045212393364917" at="20,0,28,0" concept="2" trace="testMethodImpl#()V" />
-      <scope id="7636045212393364917" at="13,82,15,134" />
-      <scope id="7636045212393364917" at="12,0,17,0" />
-      <scope id="7636045212393364917" at="21,51,26,30" />
-      <scope id="7636045212393364917" at="20,0,28,0" />
-      <unit id="7636045212393364917" at="18,0,29,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_removeQuery_switch_Test$TestBody" />
-      <unit id="7636045212393364917" at="10,0,30,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_removeQuery_switch_Test" />
+      <node id="7636045212393364917" at="19,60,20,60" concept="6" />
+      <node id="7636045212393364917" at="24,82,25,36" concept="1" />
+      <node id="7636045212393364917" at="30,52,31,19" concept="6" />
+      <node id="7636045212393364917" at="35,51,36,72" concept="1" />
+      <node id="7636045212393365029" at="36,72,37,26" concept="1" />
+      <node id="2601164129532808938" at="37,26,38,71" concept="1" />
+      <node id="2601164129532808955" at="38,71,39,71" concept="1" />
+      <node id="7636045212393364919" at="39,71,40,30" concept="1" />
+      <node id="7636045212393364917" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="7636045212393364917" at="19,0,22,0" concept="0" trace="ConditionalPresentation_removeQuery_switch_Test#()V" />
+      <node id="7636045212393364917" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="7636045212393364917" at="23,0,27,0" concept="2" trace="test_ConditionalPresentation_removeQuery_switch#()V" />
+      <node id="7636045212393364917" at="34,0,42,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="7636045212393364917" at="19,60,20,60" />
+      <scope id="7636045212393364917" at="24,82,25,36" />
+      <scope id="7636045212393364917" at="30,52,31,19" />
+      <scope id="7636045212393364917" at="19,0,22,0" />
+      <scope id="7636045212393364917" at="30,0,33,0">
+        <var name="owner" id="7636045212393364917" />
+      </scope>
+      <scope id="7636045212393364917" at="23,0,27,0" />
+      <scope id="7636045212393364917" at="35,51,40,30" />
+      <scope id="7636045212393364917" at="34,0,42,0" />
+      <unit id="7636045212393364917" at="28,0,43,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_removeQuery_switch_Test$TestBody" />
+      <unit id="7636045212393364917" at="14,0,44,0" name="jetbrains.mps.lang.editor.multiple.tests.ConditionalPresentation_removeQuery_switch_Test" />
     </file>
   </root>
 </debug-info>

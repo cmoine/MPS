@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,9 @@
 package jetbrains.mps.errors;
 
 import jetbrains.mps.smodel.SNodePointer;
-import jetbrains.mps.util.Pair;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNodeReference;
-import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,29 +46,17 @@ public abstract class AbstractErrorReporter implements IErrorReporter {
   }
 
   @Override
-  public void setIntentionProvider(QuickFixProvider intentionProvider) {
-    addIntentionProvider(intentionProvider);
-  }
-
-  @Override
   public void addIntentionProvider(QuickFixProvider intentionProvider) {
     if (intentionProvider == null) return;
     if (myIntentionProviders == null) {
-      myIntentionProviders = new ArrayList<QuickFixProvider>(1);
+      myIntentionProviders = new ArrayList<>(1);
     }
     myIntentionProviders.add(intentionProvider);
   }
 
   @Override
-  public QuickFixProvider getIntentionProvider() {
-    if (myIntentionProviders == null) return null;
-    if (myIntentionProviders.isEmpty()) return null;
-    return myIntentionProviders.get(0);
-  }
-
-  @Override
   public List<QuickFixProvider> getIntentionProviders() {
-    ArrayList<QuickFixProvider> result = new ArrayList<QuickFixProvider>(1);
+    ArrayList<QuickFixProvider> result = new ArrayList<>(1);
     if (myIntentionProviders != null) {
       result.addAll(myIntentionProviders);
     }
@@ -77,13 +64,11 @@ public abstract class AbstractErrorReporter implements IErrorReporter {
   }
 
   @Override
-  public void addAdditionalRuleId(String ruleModel, String ruleId) {
-    Pair<String, String> pair = new Pair<String, String>(ruleModel, ruleId);
+  public void additionalRule(@NotNull SNodeReference rulePointer) {
     if (myAdditionalRuleIds == null) {
-      myAdditionalRuleIds = new ArrayList<SNodeReference>(2);
+      myAdditionalRuleIds = new ArrayList<>(2);
     }
-    final PersistenceFacade pf = PersistenceFacade.getInstance();
-    myAdditionalRuleIds.add(new SNodePointer(pf.createModelReference(ruleModel), pf.createNodeId(ruleId)));
+    myAdditionalRuleIds.add(rulePointer);
   }
 
   @Override

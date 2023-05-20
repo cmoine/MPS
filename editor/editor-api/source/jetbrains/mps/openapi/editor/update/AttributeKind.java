@@ -22,5 +22,5 @@ package jetbrains.mps.openapi.editor.update;
  * Date: 08/11/2016
  */
 public enum AttributeKind {
-  NODE, REFERENCE, CHILD, PROPERTY;
+  NODE, REFERENCE, CHILD, PROPERTY
 }

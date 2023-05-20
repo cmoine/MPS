@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-39cl5s3p1hl8osny9pafq7465b3qwq3" />
+<product version="3" modelHash="10jha56te0ziithaaxmue2qgdvd15xs">
+  <files names="ConvertToBinaryWorker.java" />
+</product>
 

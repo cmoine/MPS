@@ -13,11 +13,9 @@ public class MPS9119 {
   public static <T> void m1(_FunctionTypes._return_P1_E0<? extends Set<T>, ? super T> a) {
   }
   public static void m2() {
-    m1(new _FunctionTypes._return_P1_E0<Set<String>, String>() {
-      public Set<String> invoke(String s) {
-        Set<String> result = SetSequence.fromSet(new HashSet<String>());
-        return result;
-      }
+    m1((String s) -> {
+      Set<String> result = SetSequence.fromSet(new HashSet<String>());
+      return result;
     });
   }
 }

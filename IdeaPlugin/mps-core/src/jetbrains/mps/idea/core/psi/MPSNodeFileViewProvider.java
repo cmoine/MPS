@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.core.psi;
 
 import com.intellij.lang.Language;
@@ -29,6 +28,8 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.SingleRootFileViewProvider;
 import jetbrains.mps.fileTypes.MPSLanguage;
 import jetbrains.mps.ide.project.ProjectHelper;
+import jetbrains.mps.idea.core.psi.impl.MPSPsiModel;
+import jetbrains.mps.idea.core.psi.impl.MPSPsiNode;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiProvider;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiRootNode;
 import jetbrains.mps.nodefs.MPSNodeVirtualFile;
@@ -49,20 +50,8 @@ public class MPSNodeFileViewProvider extends SingleRootFileViewProvider {
   private final static boolean EVENT_SYSTEM_ENABLED = false;
   private final static Language LANGUAGE = MPSLanguage.INSTANCE;
 
-  private static final String emptyString = "";
-  private final PsiManager myManager;
-  private final MPSNodeVirtualFile myNodeFile;
-
   public MPSNodeFileViewProvider(@NotNull PsiManager manager, @NotNull MPSNodeVirtualFile nodeFile) {
     super(manager, nodeFile, EVENT_SYSTEM_ENABLED, LANGUAGE);
-    myManager = manager;
-    myNodeFile = nodeFile;
-  }
-
-  @NotNull
-  @Override
-  public PsiManager getManager() {
-    return myManager;
   }
 
   @Nullable
@@ -74,13 +63,9 @@ public class MPSNodeFileViewProvider extends SingleRootFileViewProvider {
   @NotNull
   @Override
   public CharSequence getContents() {
-    return emptyString;
-  }
-
-  @NotNull
-  @Override
-  public VirtualFile getVirtualFile() {
-    return myNodeFile;
+    MPSPsiRootNode psiFile = (MPSPsiRootNode) getPsiInner(getBaseLanguage());
+    MPSPsiModel psiModel = psiFile.getContainingModel();
+    return new FakeTextContents(psiModel.getMaxNodePosition());
   }
 
   @NotNull
@@ -106,12 +91,12 @@ public class MPSNodeFileViewProvider extends SingleRootFileViewProvider {
     Project p = ProjectHelper.fromIdeaProject(getManager().getProject());
     assert p != null;
     final SRepository repo = p.getRepository();
-    final Ref<PsiElement> result = new Ref<>(null);
+    final Ref<MPSPsiNode> result = new Ref<>(null);
     // todo use MPSNodeVirtualFile.getNode() (rewrite it to project repo)
     repo.getModelAccess().runReadAction(() -> {
-      SNode sNode = myNodeFile.getSNodePointer().resolve(repo);
+      SNode sNode = ((MPSNodeVirtualFile) getVirtualFile()).getSNodePointer().resolve(repo);
       if (sNode != null) {
-        result.set(MPSPsiProvider.getInstance(getManager().getProject()).getPsi(sNode));
+        result.set(MPSPsiProvider.getInstance(getManager().getProject()).getMPSPsi(sNode));
       }
     });
 
@@ -131,6 +116,7 @@ public class MPSNodeFileViewProvider extends SingleRootFileViewProvider {
 
   @Override
   public boolean isEventSystemEnabled() {
+    // XXX check MPSPsiRootNode.isPhysical if you intend to change this
     return EVENT_SYSTEM_ENABLED;
   }
 
@@ -141,7 +127,9 @@ public class MPSNodeFileViewProvider extends SingleRootFileViewProvider {
 
   @Override
   public long getModificationStamp() {
-    return myNodeFile.getModificationStamp();
+    // TODO: check if we need to override this method.
+    // We relay on file modification instead of content.
+    return getVirtualFile().getModificationStamp();
   }
 
   @Override
@@ -181,7 +169,9 @@ public class MPSNodeFileViewProvider extends SingleRootFileViewProvider {
   @Nullable
   @Override
   public PsiElement findElementAt(int offset, @NotNull Language language) {
-    return null;
+    MPSPsiRootNode psiFile = (MPSPsiRootNode) getPsiInner(getBaseLanguage());
+    MPSPsiModel psiModel = psiFile.getContainingModel();
+    return psiModel.findNodeByPosition(offset);
   }
 
   @Nullable

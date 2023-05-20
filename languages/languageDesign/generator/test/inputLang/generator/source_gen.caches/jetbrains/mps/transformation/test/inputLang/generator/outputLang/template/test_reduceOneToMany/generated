@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-7rt1bbycllyecusdow2znx0q3zdfbgd" />
+<product version="3" modelHash="21luww99nfeygslxom30uwmppf7d3b8">
+  <files names="Mapping_main.java:QueriesGenerated.java:Switch_betterSwitch.java:Switch_better_switch2.java:Switch_better_switch3.java:Switch_switch_InputNode_A.java:TemplateModelImpl.java:Template_OutputRoot.java:Template_reduce_InputNode_A.java:Template_reduce_InputNode_A_included.java:Template_reduce_InputNode_A_switch.java" />
+</product>
 

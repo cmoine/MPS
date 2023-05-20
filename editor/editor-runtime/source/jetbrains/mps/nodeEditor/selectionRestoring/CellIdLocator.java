@@ -15,12 +15,10 @@
  */
 package jetbrains.mps.nodeEditor.selectionRestoring;
 
-import jetbrains.mps.nodeEditor.cells.CellFinderUtil;
 import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SNode;
-import org.jetbrains.mps.util.Condition;
 
 /**
  * @author simon

@@ -1,9 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
   <root nodeRef="r:a56a2ec2-acbf-42ea-9fe6-7091c607ee89(jetbrains.mps.baseLanguageInternal.test@tests)/1293230950168428284">
     <file name="InternalClassifier_Test.java">
-      <unit id="1293230950168428284" at="12,0,17,0" name="jetbrains.mps.baseLanguageInternal.test.InternalClassifier_Test$TestBody" />
-      <unit id="1293230950168428284" at="9,0,18,0" name="jetbrains.mps.baseLanguageInternal.test.InternalClassifier_Test" />
+      <node id="1293230950168428284" at="25,36,26,60" concept="6" />
+      <node id="6293984074587251910" at="30,77,31,68" concept="1" />
+      <node id="1293230950168428284" at="36,52,37,19" concept="6" />
+      <node id="6293984074587251910" at="40,79,41,0" concept="4" />
+      <node id="6293984074587251910" at="42,30,43,67" concept="3" />
+      <node id="6293984074587251910" at="43,67,44,65" concept="3" />
+      <node id="6293984074587251910" at="44,65,45,209" concept="1" />
+      <node id="1293230950168428284" at="22,0,24,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="1293230950168428284" at="25,0,28,0" concept="0" trace="InternalClassifier_Test#()V" />
+      <node id="1293230950168428284" at="36,0,39,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="6293984074587251910" at="29,0,33,0" concept="2" trace="test_ErrorMessagesCheck6293984074587251910#()V" />
+      <node id="6293984074587251910" at="41,0,46,9" concept="1" />
+      <node id="6293984074587251910" at="40,0,48,0" concept="2" trace="test_ErrorMessagesCheck6293984074587251910#()V" />
+      <scope id="1293230950168428284" at="25,36,26,60" />
+      <scope id="6293984074587251910" at="30,77,31,68" />
+      <scope id="1293230950168428284" at="36,52,37,19" />
+      <scope id="1293230950168428284" at="25,0,28,0" />
+      <scope id="1293230950168428284" at="36,0,39,0">
+        <var name="owner" id="1293230950168428284" />
+      </scope>
+      <scope id="6293984074587251910" at="42,30,45,209">
+        <var name="nodeToCheck" id="6293984074587251910" />
+        <var name="operation" id="6293984074587251910" />
+      </scope>
+      <scope id="6293984074587251910" at="29,0,33,0" />
+      <scope id="6293984074587251910" at="40,79,46,9" />
+      <scope id="6293984074587251910" at="40,0,48,0" />
+      <unit id="1293230950168428284" at="34,0,50,0" name="jetbrains.mps.baseLanguageInternal.test.InternalClassifier_Test$TestBody" />
+      <unit id="1293230950168428284" at="20,0,51,0" name="jetbrains.mps.baseLanguageInternal.test.InternalClassifier_Test" />
     </file>
   </root>
 </debug-info>

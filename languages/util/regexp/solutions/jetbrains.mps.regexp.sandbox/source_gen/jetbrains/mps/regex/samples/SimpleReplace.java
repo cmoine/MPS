@@ -10,12 +10,12 @@ import java.util.regex.Pattern;
   }
   /*package*/ void simplestReplace() {
     String s = "";
-    s = RegexpOperations.replace(s, REGEXP_x5qji9_b0a1a1, new _Replacer_x5qji9_a0a0b0b(SimpleReplace.this));
+    s = RegexpOperations.replace(s, REGEXP, new _Replacer_x5qji9_a0a0b0b(SimpleReplace.this));
   }
   /*package*/ void replaceWithCapture() {
     String s = "";
-    s = RegexpOperations.replace(s, REGEXP_x5qji9_b0a1a2, new _Replacer_x5qji9_a0a0b0c(SimpleReplace.this));
+    s = RegexpOperations.replace(s, REGEXP1, new _Replacer_x5qji9_a0a0b0c(SimpleReplace.this));
   }
-  private static Pattern REGEXP_x5qji9_b0a1a1 = Pattern.compile("abc", 0);
-  private static Pattern REGEXP_x5qji9_b0a1a2 = Pattern.compile("\\((.*?)\\)", 0);
+  private static final Pattern REGEXP = Pattern.compile("abc", 0);
+  private static final Pattern REGEXP1 = Pattern.compile("\\((.*?)\\)", 0);
 }

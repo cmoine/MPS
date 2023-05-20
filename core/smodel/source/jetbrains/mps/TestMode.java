@@ -24,6 +24,6 @@ public enum TestMode {
   IN_PROCESS; // marker to show that there is a specific state which is almost good as USUAL but very few components care to change their behaviour during IN_PROCESS RUN
 
   public boolean isInsideTestEnvironment() {
-    return this.equals(USUAL) || this.equals(IN_PROCESS);
+    return this == USUAL || this == IN_PROCESS;
   }
 }

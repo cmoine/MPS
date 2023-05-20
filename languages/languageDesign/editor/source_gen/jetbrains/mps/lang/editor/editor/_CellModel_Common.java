@@ -9,8 +9,6 @@ import java.util.Collections;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Collection;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Constant;
 
 public class _CellModel_Common implements ConceptEditorComponent {
   @NotNull
@@ -18,28 +16,6 @@ public class _CellModel_Common implements ConceptEditorComponent {
     return Collections.emptyList();
   }
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createCollection_1stfn5_a(editorContext, node);
-  }
-  private EditorCell createCollection_1stfn5_a(EditorContext editorContext, SNode node) {
-    EditorCell_Collection editorCell = EditorCell_Collection.createVertical(editorContext, node);
-    editorCell.setCellId("Collection_1stfn5_a");
-    editorCell.addEditorCell(this.createComponent_1stfn5_a0(editorContext, node));
-    editorCell.addEditorCell(this.createConstant_1stfn5_b0(editorContext, node));
-    editorCell.addEditorCell(this.createComponent_1stfn5_c0(editorContext, node));
-    return editorCell;
-  }
-  private EditorCell createComponent_1stfn5_a0(EditorContext editorContext, SNode node) {
-    EditorCell editorCell = editorContext.getCellFactory().createEditorComponentCell(node, "jetbrains.mps.lang.editor.editor.Style_Component");
-    return editorCell;
-  }
-  private EditorCell createConstant_1stfn5_b0(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, "");
-    editorCell.setCellId("Constant_1stfn5_b0");
-    editorCell.setDefaultText("");
-    return editorCell;
-  }
-  private EditorCell createComponent_1stfn5_c0(EditorContext editorContext, SNode node) {
-    EditorCell editorCell = editorContext.getCellFactory().createEditorComponentCell(node, "jetbrains.mps.lang.editor.editor.Common_Component");
-    return editorCell;
+    return new _CellModel_Common_ComponentBuilder_a(editorContext, node).createCell();
   }
 }

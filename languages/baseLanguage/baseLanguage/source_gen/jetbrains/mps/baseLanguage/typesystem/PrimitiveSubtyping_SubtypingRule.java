@@ -10,27 +10,39 @@ import jetbrains.mps.typesystem.inference.TypeCheckingContext;
 import jetbrains.mps.lang.typesystem.runtime.IsApplicableStatus;
 import java.util.ArrayList;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
+import org.jetbrains.mps.openapi.language.SConcept;
 
 public class PrimitiveSubtyping_SubtypingRule extends SubtypingRule_Runtime implements ISubtypingRule_Runtime {
   public PrimitiveSubtyping_SubtypingRule() {
   }
   public List<SNode> getSubOrSuperTypes(SNode primitiveTypeDescriptor, TypeCheckingContext typeCheckingContext, IsApplicableStatus status) {
     List<SNode> result = new ArrayList<SNode>();
-    for (SNode ref : SLinkOperations.getChildren(primitiveTypeDescriptor, MetaAdapterFactory.getContainmentLink(0xed6d7656532c4bc2L, 0x81d1af945aeb8280L, 0x10de9cae1d1L, 0x10de9cae1d0L, "extends"))) {
-      ListSequence.fromList(result).addElement(SLinkOperations.getTarget(ref, MetaAdapterFactory.getReferenceLink(0xed6d7656532c4bc2L, 0x81d1af945aeb8280L, 0x10de9cbf8e8L, 0x10de9cbf8e7L, "descriptor")));
+    for (SNode ref : SLinkOperations.getChildren(primitiveTypeDescriptor, LINKS.extends$OHQI)) {
+      ListSequence.fromList(result).addElement(SLinkOperations.getTarget(ref, LINKS.descriptor$M2vT));
     }
     return result;
   }
   public SAbstractConcept getApplicableConcept() {
-    return MetaAdapterFactory.getConcept(0xed6d7656532c4bc2L, 0x81d1af945aeb8280L, 0x10de9cae1d1L, "jetbrains.mps.baseLanguage.blTypes.structure.PrimitiveTypeDescriptor");
+    return CONCEPTS.PrimitiveTypeDescriptor$At;
   }
   public IsApplicableStatus isApplicableAndPattern(SNode argument) {
     return new IsApplicableStatus(argument.getConcept().isSubConceptOf(getApplicableConcept()), null);
   }
   public boolean isWeak() {
     return false;
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink extends$OHQI = MetaAdapterFactory.getContainmentLink(0xed6d7656532c4bc2L, 0x81d1af945aeb8280L, 0x10de9cae1d1L, 0x10de9cae1d0L, "extends");
+    /*package*/ static final SReferenceLink descriptor$M2vT = MetaAdapterFactory.getReferenceLink(0xed6d7656532c4bc2L, 0x81d1af945aeb8280L, 0x10de9cbf8e8L, 0x10de9cbf8e7L, "descriptor");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept PrimitiveTypeDescriptor$At = MetaAdapterFactory.getConcept(0xed6d7656532c4bc2L, 0x81d1af945aeb8280L, 0x10de9cae1d1L, "jetbrains.mps.baseLanguage.blTypes.structure.PrimitiveTypeDescriptor");
   }
 }

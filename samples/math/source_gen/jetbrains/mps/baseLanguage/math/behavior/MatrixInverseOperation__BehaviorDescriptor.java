@@ -5,12 +5,9 @@ package jetbrains.mps.baseLanguage.math.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.List;
 import java.util.Arrays;
@@ -22,9 +19,8 @@ import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
 
 public final class MatrixInverseOperation__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x3304fc6e7c6b401eL, 0xa016b944934bb21fL, 0x13afebc2af505abcL, "jetbrains.mps.baseLanguage.math.structure.MatrixInverseOperation");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<String> getOperationSymbol_id1653mnvAgnB = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getOperationSymbol").modifiers(SModifiersImpl.create(9, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("1653mnvAgnB").registry(REGISTRY).build();
+  public static final SMethod<String> getOperationSymbol_id1653mnvAgnB = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getOperationSymbol").modifiers(9, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1262430001741497831L).languageId(0xa016b944934bb21fL, 0x3304fc6e7c6b401eL).build2();
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getOperationSymbol_id1653mnvAgnB);
 
@@ -36,7 +32,6 @@ public final class MatrixInverseOperation__BehaviorDescriptor extends BaseBHDesc
   }
 
   /*package*/ MatrixInverseOperation__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override

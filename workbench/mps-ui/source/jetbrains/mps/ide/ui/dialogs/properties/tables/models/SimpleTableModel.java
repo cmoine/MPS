@@ -24,7 +24,7 @@ import java.util.List;
 
 public abstract class SimpleTableModel<T> extends AbstractTableModel implements ItemRemovable,Modifiable {
 
-  protected final List<T> myTableItems = new ArrayList<T>();
+  protected final List<T> myTableItems = new ArrayList<>();
 
   // caller is responsible to send table model notifications, as appropriate
   public void addItem(T item) {

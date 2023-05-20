@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,12 @@
 package jetbrains.mps.ide.messages.navigation;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.pom.Navigatable;
 import com.intellij.pom.NonNavigatable;
 import jetbrains.mps.ide.messages.FileWithLogicalPosition;
 import jetbrains.mps.ide.navigation.NavigatableFactory;
-import jetbrains.mps.ide.vfs.VirtualFileUtils;
 import org.jetbrains.annotations.NotNull;
 
 class FileWithLogicalPositionNavigationHandler implements NavigatableFactory {
@@ -40,7 +40,7 @@ class FileWithLogicalPositionNavigationHandler implements NavigatableFactory {
   @Override
   public Navigatable create(@NotNull Object o) {
     final FileWithLogicalPosition pos = (FileWithLogicalPosition) o;
-    final VirtualFile vf = VirtualFileUtils.getProjectVirtualFile(pos.getFile());
+    final VirtualFile vf = LocalFileSystem.getInstance().findFileByPath(pos.getFile().getPath());
     if (vf == null) {
       return NonNavigatable.INSTANCE;
     }

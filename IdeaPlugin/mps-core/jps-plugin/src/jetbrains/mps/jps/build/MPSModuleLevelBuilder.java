@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,10 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.jps.build;
 
-import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.io.FileUtilRt;
 import jetbrains.mps.idea.core.make.MPSCustomMessages;
@@ -26,8 +24,8 @@ import jetbrains.mps.jps.model.JpsMPSModuleExtension;
 import jetbrains.mps.jps.model.JpsMPSRepositoryFacade;
 import jetbrains.mps.jps.project.JpsMPSProject;
 import jetbrains.mps.jps.project.JpsSolutionIdea;
-import org.apache.log4j.Logger;
-import org.jetbrains.annotations.NonNls;
+import jetbrains.mps.logging.Logger;
+import jetbrains.mps.smodel.ModelAccessHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.jps.ModuleChunk;
 import org.jetbrains.jps.builders.BuildRootDescriptor;
@@ -48,6 +46,7 @@ import org.jetbrains.jps.incremental.messages.BuildMessage.Kind;
 import org.jetbrains.jps.incremental.messages.CompilerMessage;
 import org.jetbrains.jps.incremental.messages.CustomBuilderMessage;
 import org.jetbrains.jps.incremental.messages.FileDeletedEvent;
+import org.jetbrains.jps.incremental.messages.FileGeneratedEvent;
 import org.jetbrains.jps.indices.ModuleExcludeIndex;
 import org.jetbrains.jps.model.java.JavaSourceRootProperties;
 import org.jetbrains.jps.model.java.JavaSourceRootType;
@@ -61,6 +60,7 @@ import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -69,18 +69,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static jetbrains.mps.project.MPSExtentions.MODEL;
 import static jetbrains.mps.project.MPSExtentions.MODEL_HEADER;
+import static jetbrains.mps.project.MPSExtentions.MODEL_ROOT;
 
 /**
  * evgeny, 11/30/12
  */
 public class MPSModuleLevelBuilder extends ModuleLevelBuilder {
-  @NonNls
-  private static final Logger LOG = org.apache.log4j.LogManager.getLogger(MPSModuleLevelBuilder.class);
+  private static final Logger LOG = Logger.getLogger(MPSModuleLevelBuilder.class);
 
   private MPSIdeaRefreshComponent refreshComponent = new MPSIdeaRefreshComponent();
   // keep track of what sources we cleared, in case of full rebuild
-  // the thing is: out source gen dir is per module, but our builder is called per module chunk. For isntance,
+  // the thing is: out source gen dir is per module, but our builder is called per module chunk. For instance,
   // a module can be compiled in two goes: 1st chunk - module's sources, 2nd - module tests. Without
   // keeping track we would erase the sources that were generated on the previous step.
   private Set<JpsModule> genSourcesNotToClean;
@@ -97,17 +98,20 @@ public class MPSModuleLevelBuilder extends ModuleLevelBuilder {
 
   @Override
   public void buildStarted(final CompileContext context) {
-    genSourcesNotToClean = new HashSet<JpsModule>();
+    genSourcesNotToClean = new HashSet<>();
     context.addBuildListener(new BuildListener() {
       @Override
-      public void filesGenerated(Collection<Pair<String, String>> paths) {
+      public void filesGenerated(FileGeneratedEvent fileGeneratedEvent) {
       }
 
       @Override
-      public void filesDeleted(Collection<String> paths) {
-        refreshComponent.removed(paths);
+      public void filesDeleted(FileDeletedEvent fileDeletedEvent) {
+        refreshComponent.removed(fileDeletedEvent.getFilePaths());
       }
     });
+    if (MPSCompilerUtil.isExtraTracingMode()) {
+      context.processMessage(new CompilerMessage(MPSMakeConstants.BUILDER_ID, Kind.INFO, String.format("build started %1$tM.%<tS.%<tL", System.currentTimeMillis())));
+    }
   }
 
   @Override
@@ -121,6 +125,9 @@ public class MPSModuleLevelBuilder extends ModuleLevelBuilder {
       context.processMessage(new CustomBuilderMessage(MPSMakeConstants.BUILDER_ID, MPSCustomMessages.MSG_REFRESH, ""));
     }
     JpsMPSRepositoryFacade.getInstance().dispose();
+    if (MPSCompilerUtil.isExtraTracingMode()) {
+      context.processMessage(new CompilerMessage(MPSMakeConstants.BUILDER_ID, Kind.INFO, String.format("build finished %1$tM.%<tS.%<tL", System.currentTimeMillis())));
+    }
   }
 
   @Override
@@ -170,7 +177,7 @@ public class MPSModuleLevelBuilder extends ModuleLevelBuilder {
       }
 
       if (!okToDelete) {
-        LOG.warn("Not cleaning generator output path "
+        LOG.warning("Not cleaning generator output path "
           + outputDir.getPath()
           + " because user files may be there. Either mark it as generated or exclude from module");
         synchronized (this) {
@@ -188,7 +195,7 @@ public class MPSModuleLevelBuilder extends ModuleLevelBuilder {
       if (!outputDir.exists()) {
         continue;
       }
-      List<String> deleted = new ArrayList<String>();
+      List<String> deleted = new ArrayList<>();
       BuildOperations.deleteRecursively(extension.getConfiguration().getGeneratorOutputPath(), deleted, null);
       compileContext.processMessage(new FileDeletedEvent(deleted));
       ProjectBuilderLogger logger = compileContext.getLoggingManager().getProjectBuilderLogger();
@@ -203,7 +210,7 @@ public class MPSModuleLevelBuilder extends ModuleLevelBuilder {
     // jps's IncProjectBuilder.clearOutpus() computes them in the same way. actually, the code is copied from there
     // note: we could check for extension.getConfiguration().isUseModuleSourceFolder() but we'd rather be more general
     // as our gen output path may be under a source root, or contrary, include a source root
-    Set<File> result = new HashSet<File>();
+    Set<File> result = new HashSet<>();
     BuildRootIndex buildRootIndex = compileContext.getProjectDescriptor().getBuildRootIndex();
     ModuleExcludeIndex moduleIndex = compileContext.getProjectDescriptor().getModuleExcludeIndex();
     for (ModuleBuildTarget target : targets) {
@@ -233,6 +240,9 @@ public class MPSModuleLevelBuilder extends ModuleLevelBuilder {
         }
       }
     }
+    for (JpsModuleSourceRoot sourceRoot : jpsModule.getSourceRoots()) {
+      result.add(sourceRoot.getFile());
+    }
     return result;
   }
 
@@ -241,9 +251,12 @@ public class MPSModuleLevelBuilder extends ModuleLevelBuilder {
                         ModuleChunk moduleChunk,
                         DirtyFilesHolder<JavaSourceRootDescriptor, ModuleBuildTarget> dirtyFilesHolder,
                         final OutputConsumer outputConsumer) throws ProjectBuildException, IOException {
+    if (MPSCompilerUtil.isExtraTracingMode()) {
+      compileContext.processMessage(new CompilerMessage(MPSMakeConstants.BUILDER_ID, Kind.INFO, String.format("  build chunk started %1$tM.%<tS.%<tL", System.currentTimeMillis())));
+    }
     ExitCode status = ExitCode.NOTHING_DONE;
     try {
-      final Set<ModuleBuildTarget> targets = new HashSet<ModuleBuildTarget>();
+      final Set<ModuleBuildTarget> targets = new HashSet<>();
       dirtyFilesHolder.processDirtyFiles(new FileProcessor<JavaSourceRootDescriptor, ModuleBuildTarget>() {
         @Override
         public boolean apply(ModuleBuildTarget target, File file, JavaSourceRootDescriptor javaSourceRootDescriptor) throws IOException {
@@ -287,6 +300,10 @@ public class MPSModuleLevelBuilder extends ModuleLevelBuilder {
         return ExitCode.ABORT;
       }
 
+      if (MPSCompilerUtil.isExtraTracingMode()) {
+        compileContext.processMessage(new CompilerMessage(MPSMakeConstants.BUILDER_ID, Kind.INFO, String.format("  MPS chunk started %1$tM.%<tS.%<tL", System.currentTimeMillis())));
+      }
+
       JpsMPSRepositoryFacade.getInstance().init(compileContext);
 
       final Map<SModel, ModuleBuildTarget> toMake = collectChangedModels(compileContext, dirtyFilesHolder);
@@ -309,11 +326,14 @@ public class MPSModuleLevelBuilder extends ModuleLevelBuilder {
       throw new ProjectBuildException(ex);
     }
 
+    if (MPSCompilerUtil.isExtraTracingMode()) {
+      compileContext.processMessage(new CompilerMessage(MPSMakeConstants.BUILDER_ID, Kind.INFO, String.format("  chunk finished %1$tM.%<tS.%<tL", System.currentTimeMillis())));
+    }
     return status;
   }
 
   private Map<SModel, ModuleBuildTarget> collectChangedModels(final CompileContext compileContext, DirtyFilesHolder<JavaSourceRootDescriptor, ModuleBuildTarget> dirtyFilesHolder) throws IOException {
-    final Map<SModel, ModuleBuildTarget> toCompile = new LinkedHashMap<SModel, ModuleBuildTarget>();
+    final Map<SModel, ModuleBuildTarget> toCompile = new LinkedHashMap<>();
     dirtyFilesHolder.processDirtyFiles(new FileProcessor<JavaSourceRootDescriptor, ModuleBuildTarget>() {
       @Override
       public boolean apply(ModuleBuildTarget target, File file, JavaSourceRootDescriptor sourceRoot) throws IOException {
@@ -327,7 +347,7 @@ public class MPSModuleLevelBuilder extends ModuleLevelBuilder {
         } // fixme obviously
 
         String path = FileUtil.toCanonicalPath(file.getPath());
-        SModel model = solution.getModelByPath(path);
+        SModel model = new ModelAccessHelper(JpsMPSRepositoryFacade.getInstance().getProject().getModelAccess()).runReadAction(() -> solution.getModelByPath(path));
         if (model == null) {
           compileContext.processMessage(new CompilerMessage(MPSMakeConstants.BUILDER_ID, Kind.WARNING, "cannot find MPS model for " + path));
           return true;
@@ -340,9 +360,9 @@ public class MPSModuleLevelBuilder extends ModuleLevelBuilder {
     return toCompile;
   }
 
+  @NotNull
   @Override
   public List<String> getCompilableFileExtensions() {
-//    return Arrays.asList(MODEL_ROOT, MODEL, MODEL_HEADER, TRACE_INFO_EXT);
-    return null;
+    return Arrays.asList(MODEL_ROOT, MODEL, MODEL_HEADER);
   }
 }

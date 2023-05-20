@@ -6,16 +6,9 @@ import jetbrains.mps.nodeEditor.DefaultNodeEditor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Error;
 
 public class BaseVariableDocReference_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createError_4nerly_a(editorContext, node);
-  }
-  private EditorCell createError_4nerly_a(EditorContext editorContext, SNode node) {
-    EditorCell_Error editorCell = new EditorCell_Error(editorContext, node, "<no variable reference>");
-    editorCell.setCellId("Error_4nerly_a");
-    editorCell.setBig(true);
-    return editorCell;
+    return new BaseVariableDocReference_EditorBuilder_a(editorContext, node).createCell();
   }
 }

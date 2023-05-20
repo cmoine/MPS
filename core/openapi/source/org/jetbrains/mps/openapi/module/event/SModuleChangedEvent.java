@@ -17,10 +17,6 @@ package org.jetbrains.mps.openapi.module.event;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.module.SModule;
-import org.jetbrains.mps.openapi.module.SRepository;
-import org.jetbrains.mps.openapi.module.event.SModuleEventVisitor;
-import org.jetbrains.mps.openapi.module.event.SRepositoryEvent;
-import org.jetbrains.mps.openapi.module.event.SRepositoryModuleEvent;
 
 public class SModuleChangedEvent extends SRepositoryModuleEvent {
   public SModuleChangedEvent(@NotNull SModule module) {

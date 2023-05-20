@@ -2,41 +2,137 @@
 <debug-info version="2">
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144226303539:jetbrains.mps.baseLanguage.structure.ForeachStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1732176556423009631:jetbrains.mps.baseLanguage.structure.MultiLineComment" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/5351203823916750322:jetbrains.mps.baseLanguage.structure.TryUniversalStatement" />
+  <root nodeRef="r:f39afe13-666a-48f2-9d7c-2f9366f78fe5(jetbrains.mps.typesystemEngine.checker)/408133443579429083">
+    <file name="NonTypesystemChecker.java">
+      <node id="435595702647210237" at="34,152,35,0" concept="9" />
+      <node id="408133443579429090" at="35,0,36,86" concept="5" />
+      <node id="435595702647187933" at="36,86,37,0" concept="9" />
+      <node id="774111817001329385" at="37,0,38,73" concept="5" />
+      <node id="408133443579512601" at="38,73,39,75" concept="8" />
+      <node id="408133443579512101" at="39,75,40,112" concept="5" />
+      <node id="774111817001508048" at="41,77,42,38" concept="7" />
+      <node id="408133443579514959" at="43,7,44,87" concept="5" />
+      <node id="408133443579519129" at="44,87,45,83" concept="5" />
+      <node id="408133443579519908" at="45,83,46,0" concept="9" />
+      <node id="408133443579522445" at="46,0,47,31" concept="8" />
+      <node id="408133443579523391" at="55,11,56,105" concept="1" />
+      <node id="408133443579524338" at="56,105,57,62" concept="1" />
+      <node id="5681627980187027886" at="58,17,59,102" concept="1" />
+      <node id="408133443579532532" at="60,7,61,0" concept="9" />
+      <node id="408133443579537889" at="61,0,62,97" concept="5" />
+      <node id="408133443579543274" at="64,41,65,87" concept="1" />
+      <node id="408133443579429123" at="67,7,68,0" concept="9" />
+      <node id="408133443579429124" at="68,0,69,20" concept="7" />
+      <node id="408133443579429155" at="75,44,76,35" concept="1" />
+      <node id="408133443579429167" at="81,60,82,42" concept="7" />
+      <node id="408133443579429084" at="31,0,33,0" concept="0" trace="NonTypesystemChecker#()V" />
+      <node id="774111817001460569" at="40,112,43,7" concept="3" />
+      <node id="408133443579551018" at="63,67,66,9" concept="2" />
+      <node id="408133443579429153" at="75,0,78,0" concept="4" trace="visit#(Ljetbrains/mps/errors/item/NodeReportItem;)V" />
+      <node id="408133443579429163" at="80,0,84,0" concept="4" trace="getCategory#()Ljetbrains/mps/errors/item/IssueKindReportItem/CheckerCategory;" />
+      <node id="774111817001408561" at="48,85,53,0" concept="6" />
+      <node id="408133443579539190" at="62,97,67,7" concept="2" />
+      <node id="408133443579429147" at="73,143,78,7" concept="1" />
+      <node id="408133443579522942" at="54,9,60,7" concept="10" />
+      <node id="774111817001354321" at="47,31,54,9" concept="1" />
+      <node id="408133443579429133" at="72,0,80,0" concept="4" trace="check#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/module/SRepository;Lorg/jetbrains/mps/openapi/util/Consumer;Lorg/jetbrains/mps/openapi/util/ProgressMonitor;)V" />
+      <node id="435595702647175241" at="33,82,70,7" concept="7" />
+      <node id="408133443579429088" at="33,0,72,0" concept="4" trace="getErrors#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/module/SRepository;)Ljava/util/Set;" />
+      <scope id="408133443579429087" at="31,33,31,33" />
+      <scope id="774111817001460571" at="41,77,42,38" />
+      <scope id="408133443579522945" at="58,17,59,102" />
+      <scope id="408133443579551021" at="64,41,65,87" />
+      <scope id="408133443579429154" at="75,44,76,35" />
+      <scope id="408133443579429166" at="81,60,82,42" />
+      <scope id="408133443579429084" at="31,0,33,0" />
+      <scope id="408133443579522944" at="55,11,57,62" />
+      <scope id="408133443579539193" at="63,67,66,9" />
+      <scope id="408133443579551018" at="63,67,66,9">
+        <var name="ier" id="408133443579551022" />
+      </scope>
+      <scope id="408133443579429153" at="75,0,78,0">
+        <var name="it" id="408133443579429153" />
+      </scope>
+      <scope id="408133443579429163" at="80,0,84,0" />
+      <scope id="774111817001384466" at="48,85,53,0" />
+      <scope id="408133443579539190" at="62,97,67,7">
+        <var name="p" id="408133443579539194" />
+      </scope>
+      <scope id="408133443579429146" at="73,143,78,7" />
+      <scope id="408133443579429133" at="72,0,80,0">
+        <var name="errorCollector" id="408133443579429139" />
+        <var name="monitor" id="408133443579429143" />
+        <var name="repository" id="408133443579429137" />
+        <var name="root" id="408133443579429135" />
+      </scope>
+      <scope id="435595702647185885" at="34,152,69,20">
+        <var name="context" id="408133443579514960" />
+        <var name="errors" id="408133443579429091" />
+        <var name="legacyTypecheckingQueries" id="408133443579512102" />
+        <var name="nodesWithErrors" id="408133443579537890" />
+        <var name="typecheckingQueries" id="774111817001329386" />
+        <var name="typesComponent" id="408133443579519130" />
+      </scope>
+      <scope id="408133443579429089" at="33,82,70,7" />
+      <scope id="408133443579429088" at="33,0,72,0">
+        <var name="repository" id="408133443579429128" />
+        <var name="root" id="408133443579429126" />
+      </scope>
+      <unit id="408133443579429153" at="74,66,78,5" name="jetbrains.mps.typesystemEngine.checker.NonTypesystemChecker$1" />
+      <unit id="408133443579429083" at="29,0,85,0" name="jetbrains.mps.typesystemEngine.checker.NonTypesystemChecker" />
+    </file>
+  </root>
   <root nodeRef="r:f39afe13-666a-48f2-9d7c-2f9366f78fe5(jetbrains.mps.typesystemEngine.checker)/5231630840089786268">
     <file name="TypesystemChecker.java">
-      <node id="6978373592756382071" at="21,0,22,0" concept="2" trace="myContextOwner" />
-      <node id="6978373592756354578" at="25,76,26,90" concept="5" />
-      <node id="6978373592756373238" at="29,96,30,82" concept="1" />
-      <node id="1436978233839335295" at="33,7,34,18" concept="6" />
+      <node id="6978373592756354578" at="24,82,25,90" concept="5" />
+      <node id="8294139113668582046" at="26,114,27,0" concept="9" />
+      <node id="1752023687300453031" at="27,0,28,132" concept="1" />
+      <node id="1752023687300450903" at="28,132,29,0" concept="9" />
+      <node id="8294139113668554381" at="30,7,31,0" concept="9" />
+      <node id="1436978233839335295" at="31,0,32,18" concept="7" />
+      <node id="842888854126507062" at="37,44,38,35" concept="1" />
+      <node id="250369351434804301" at="43,60,44,42" concept="7" />
       <node id="5231630840089786270" at="22,0,24,0" concept="0" trace="TypesystemChecker#()V" />
-      <node id="6978373592756373231" at="28,56,31,9" concept="3" />
-      <node id="6978373592756353014" at="28,0,33,0" concept="4" trace="run#(Ljetbrains/mps/typesystem/inference/TypeCheckingContext;)V" />
-      <node id="5376460755542186281" at="26,90,33,7" concept="1" />
-      <node id="5231630840089786279" at="24,0,36,0" concept="4" trace="getErrors#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/module/SRepository;)Ljava/util/Set;" />
+      <node id="842888854126507060" at="37,0,40,0" concept="4" trace="visit#(Ljetbrains/mps/errors/item/NodeReportItem;)V" />
+      <node id="250369351434796473" at="42,0,46,0" concept="4" trace="getCategory#()Ljetbrains/mps/errors/item/IssueKindReportItem/CheckerCategory;" />
+      <node id="8294139113668578981" at="25,90,30,7" concept="1" />
+      <node id="842888854126507054" at="35,143,40,7" concept="1" />
+      <node id="5633148658971954720" at="34,0,42,0" concept="4" trace="check#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/module/SRepository;Lorg/jetbrains/mps/openapi/util/Consumer;Lorg/jetbrains/mps/openapi/util/ProgressMonitor;)V" />
+      <node id="5231630840089786279" at="24,0,34,0" concept="4" trace="getErrors#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/module/SRepository;)Ljava/util/Set;" />
       <scope id="5231630840089786273" at="22,30,22,30" />
-      <scope id="6978373592756373237" at="29,96,30,82" />
+      <scope id="842888854126507061" at="37,44,38,35" />
+      <scope id="250369351434796480" at="43,60,44,42" />
       <scope id="5231630840089786270" at="22,0,24,0" />
-      <scope id="6978373592756353052" at="28,56,31,9" />
-      <scope id="6978373592756373231" at="28,56,31,9">
-        <var name="pair" id="6978373592756373232" />
+      <scope id="8294139113668581820" at="26,114,29,0" />
+      <scope id="842888854126507060" at="37,0,40,0">
+        <var name="it" id="842888854126507060" />
       </scope>
-      <scope id="6978373592756353014" at="28,0,33,0">
-        <var name="typeContext" id="6978373592756353014" />
-      </scope>
-      <scope id="5231630840089786287" at="25,76,34,18">
+      <scope id="250369351434796473" at="42,0,46,0" />
+      <scope id="5633148658971954735" at="35,143,40,7" />
+      <scope id="5231630840089786287" at="24,82,32,18">
         <var name="errors" id="6978373592756354579" />
       </scope>
-      <scope id="5231630840089786279" at="24,0,36,0">
-        <var name="node" id="5231630840089786283" />
-        <var name="repository" id="5231630840089786285" />
+      <scope id="5633148658971954720" at="34,0,42,0">
+        <var name="errorCollector" id="5633148658971954727" />
+        <var name="monitor" id="5633148658971954730" />
+        <var name="repository" id="5633148658971954725" />
+        <var name="root" id="5633148658971954723" />
       </scope>
-      <unit id="6978373592756353014" at="27,85,33,5" name="jetbrains.mps.typesystemEngine.checker.TypesystemChecker$1" />
-      <unit id="5231630840089786268" at="20,0,37,0" name="jetbrains.mps.typesystemEngine.checker.TypesystemChecker" />
+      <scope id="5231630840089786279" at="24,0,34,0">
+        <var name="repository" id="5231630840089786285" />
+        <var name="root" id="5231630840089786283" />
+      </scope>
+      <unit id="842888854126507060" at="36,66,40,5" name="jetbrains.mps.typesystemEngine.checker.TypesystemChecker$1" />
+      <unit id="5231630840089786268" at="20,0,47,0" name="jetbrains.mps.typesystemEngine.checker.TypesystemChecker" />
     </file>
   </root>
 </debug-info>

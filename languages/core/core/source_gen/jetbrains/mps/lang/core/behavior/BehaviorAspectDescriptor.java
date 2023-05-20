@@ -7,9 +7,9 @@ import jetbrains.mps.core.aspects.behaviour.api.BHDescriptor;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor {
   private final BHDescriptor myBaseConcept__BehaviorDescriptor = new BaseConcept__BehaviorDescriptor();
@@ -19,137 +19,73 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
   private final BHDescriptor myIMetaLevelChanger__BehaviorDescriptor = new IMetaLevelChanger__BehaviorDescriptor();
   private final BHDescriptor myChildAttribute__BehaviorDescriptor = new ChildAttribute__BehaviorDescriptor();
   private final BHDescriptor myImplementationContainer__BehaviorDescriptor = new ImplementationContainer__BehaviorDescriptor();
-  private final BHDescriptor myExportScopePublic__BehaviorDescriptor = new ExportScopePublic__BehaviorDescriptor();
-  private final BHDescriptor myExportScopeNamespace__BehaviorDescriptor = new ExportScopeNamespace__BehaviorDescriptor();
-  private final BHDescriptor myExportScopeModule__BehaviorDescriptor = new ExportScopeModule__BehaviorDescriptor();
+  private final BHDescriptor myReviewMigration_old__BehaviorDescriptor = new ReviewMigration_old__BehaviorDescriptor();
+  private final BHDescriptor myMigrationAnnotation_old__BehaviorDescriptor = new MigrationAnnotation_old__BehaviorDescriptor();
   private final BHDescriptor myLinkAttribute__BehaviorDescriptor = new LinkAttribute__BehaviorDescriptor();
   private final BHDescriptor myPropertyAttribute__BehaviorDescriptor = new PropertyAttribute__BehaviorDescriptor();
+  private final BHDescriptor myICanSuppressErrors__BehaviorDescriptor = new ICanSuppressErrors__BehaviorDescriptor();
   private final BHDescriptor myISuppressErrors__BehaviorDescriptor = new ISuppressErrors__BehaviorDescriptor();
   private final BHDescriptor myScopeProvider__BehaviorDescriptor = new ScopeProvider__BehaviorDescriptor();
   private final BHDescriptor myIOldCommentContainer__BehaviorDescriptor = new IOldCommentContainer__BehaviorDescriptor();
   private final BHDescriptor mySuppressErrorsAnnotation__BehaviorDescriptor = new SuppressErrorsAnnotation__BehaviorDescriptor();
   private final BHDescriptor myBaseCommentAttribute__BehaviorDescriptor = new BaseCommentAttribute__BehaviorDescriptor();
-  private final BHDescriptor myAttribute__BehaviorDescriptor = new Attribute__BehaviorDescriptor();
-  private final BHDescriptor myExportScope__BehaviorDescriptor = new ExportScope__BehaviorDescriptor();
+  private final BHDescriptor myIGenericComment__BehaviorDescriptor = new IGenericComment__BehaviorDescriptor();
+  private final BHDescriptor myISmartReferent__BehaviorDescriptor = new ISmartReferent__BehaviorDescriptor();
+  private final BHDescriptor myMigrationDataAnnotation__BehaviorDescriptor = new MigrationDataAnnotation__BehaviorDescriptor();
+  private final BHDescriptor myReviewMigration__BehaviorDescriptor = new ReviewMigration__BehaviorDescriptor();
 
   public BehaviorAspectDescriptor() {
   }
 
   @Nullable
   public BHDescriptor getDescriptor(@NotNull SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_846f5o_a0w.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return myAttribute__BehaviorDescriptor;
-          }
-          break;
-        case 1:
-          if (true) {
-            return myBaseCommentAttribute__BehaviorDescriptor;
-          }
-          break;
-        case 2:
-          if (true) {
-            return myBaseConcept__BehaviorDescriptor;
-          }
-          break;
-        case 3:
-          if (true) {
-            return myChildAttribute__BehaviorDescriptor;
-          }
-          break;
-        case 4:
-          if (true) {
-            return myExportScope__BehaviorDescriptor;
-          }
-          break;
-        case 5:
-          if (true) {
-            return myExportScopeModule__BehaviorDescriptor;
-          }
-          break;
-        case 6:
-          if (true) {
-            return myExportScopeNamespace__BehaviorDescriptor;
-          }
-          break;
-        case 7:
-          if (true) {
-            return myExportScopePublic__BehaviorDescriptor;
-          }
-          break;
-        case 8:
-          if (true) {
-            return myIDeprecatable__BehaviorDescriptor;
-          }
-          break;
-        case 9:
-          if (true) {
-            return myIMetaLevelChanger__BehaviorDescriptor;
-          }
-          break;
-        case 10:
-          if (true) {
-            return myINamedConcept__BehaviorDescriptor;
-          }
-          break;
-        case 11:
-          if (true) {
-            return myIOldCommentContainer__BehaviorDescriptor;
-          }
-          break;
-        case 12:
-          if (true) {
-            return myIResolveInfo__BehaviorDescriptor;
-          }
-          break;
-        case 13:
-          if (true) {
-            return myISuppressErrors__BehaviorDescriptor;
-          }
-          break;
-        case 14:
-          if (true) {
-            return myImplementationContainer__BehaviorDescriptor;
-          }
-          break;
-        case 15:
-          if (true) {
-            return myLinkAttribute__BehaviorDescriptor;
-          }
-          break;
-        case 16:
-          if (true) {
-            return myPropertyAttribute__BehaviorDescriptor;
-          }
-          break;
-        case 17:
-          if (true) {
-            return myScopeProvider__BehaviorDescriptor;
-          }
-          break;
-        case 18:
-          if (true) {
-            return mySuppressErrorsAnnotation__BehaviorDescriptor;
-          }
-          break;
-        default:
-          // default 
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return myBaseCommentAttribute__BehaviorDescriptor;
+      case 1:
+        return myBaseConcept__BehaviorDescriptor;
+      case 2:
+        return myChildAttribute__BehaviorDescriptor;
+      case 3:
+        return myICanSuppressErrors__BehaviorDescriptor;
+      case 4:
+        return myIDeprecatable__BehaviorDescriptor;
+      case 5:
+        return myIGenericComment__BehaviorDescriptor;
+      case 6:
+        return myIMetaLevelChanger__BehaviorDescriptor;
+      case 7:
+        return myINamedConcept__BehaviorDescriptor;
+      case 8:
+        return myIOldCommentContainer__BehaviorDescriptor;
+      case 9:
+        return myIResolveInfo__BehaviorDescriptor;
+      case 10:
+        return myISmartReferent__BehaviorDescriptor;
+      case 11:
+        return myISuppressErrors__BehaviorDescriptor;
+      case 12:
+        return myImplementationContainer__BehaviorDescriptor;
+      case 13:
+        return myLinkAttribute__BehaviorDescriptor;
+      case 14:
+        return myMigrationAnnotation_old__BehaviorDescriptor;
+      case 15:
+        return myMigrationDataAnnotation__BehaviorDescriptor;
+      case 16:
+        return myPropertyAttribute__BehaviorDescriptor;
+      case 17:
+        return myReviewMigration__BehaviorDescriptor;
+      case 18:
+        return myReviewMigration_old__BehaviorDescriptor;
+      case 19:
+        return myScopeProvider__BehaviorDescriptor;
+      case 20:
+        return mySuppressErrorsAnnotation__BehaviorDescriptor;
+      default:
     }
     return null;
   }
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
-  }
-  private static final Map<SAbstractConcept, Integer> indices_846f5o_a0w = buildConceptIndices(MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x47bf8397520e5939L, "jetbrains.mps.lang.core.structure.Attribute"), MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x3dcc194340c24debL, "jetbrains.mps.lang.core.structure.BaseCommentAttribute"), MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x10802efe25aL, "jetbrains.mps.lang.core.structure.BaseConcept"), MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x9d98713f247885aL, "jetbrains.mps.lang.core.structure.ChildAttribute"), MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x4b498c7787b32cebL, "jetbrains.mps.lang.core.structure.ExportScope"), MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x239b5385a7e2aebaL, "jetbrains.mps.lang.core.structure.ExportScopeModule"), MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x239b5385a7e2aeb7L, "jetbrains.mps.lang.core.structure.ExportScopeNamespace"), MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x239b5385a7e2aeb6L, "jetbrains.mps.lang.core.structure.ExportScopePublic"), MetaAdapterFactory.getInterfaceConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x11d205fe38dL, "jetbrains.mps.lang.core.structure.IDeprecatable"), MetaAdapterFactory.getInterfaceConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2cc012b1584bd3aL, "jetbrains.mps.lang.core.structure.IMetaLevelChanger"), MetaAdapterFactory.getInterfaceConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, "jetbrains.mps.lang.core.structure.INamedConcept"), MetaAdapterFactory.getInterfaceConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x39384475a5756fb0L, "jetbrains.mps.lang.core.structure.IOldCommentContainer"), MetaAdapterFactory.getInterfaceConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x116b17c6e46L, "jetbrains.mps.lang.core.structure.IResolveInfo"), MetaAdapterFactory.getInterfaceConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2f16f1b357e19f43L, "jetbrains.mps.lang.core.structure.ISuppressErrors"), MetaAdapterFactory.getInterfaceConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x12509ddfaa7d2577L, "jetbrains.mps.lang.core.structure.ImplementationContainer"), MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2eb1ad060897da51L, "jetbrains.mps.lang.core.structure.LinkAttribute"), MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2eb1ad060897da56L, "jetbrains.mps.lang.core.structure.PropertyAttribute"), MetaAdapterFactory.getInterfaceConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x33d23ee961a0cbf3L, "jetbrains.mps.lang.core.structure.ScopeProvider"), MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x3a98b0957fe8e5d2L, "jetbrains.mps.lang.core.structure.SuppressErrorsAnnotation"));
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x3dcc194340c24debL), MetaIdFactory.conceptId(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x10802efe25aL), MetaIdFactory.conceptId(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x9d98713f247885aL), MetaIdFactory.conceptId(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2f16f1b357e19f42L), MetaIdFactory.conceptId(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x11d205fe38dL), MetaIdFactory.conceptId(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x3f05685639c49599L), MetaIdFactory.conceptId(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2cc012b1584bd3aL), MetaIdFactory.conceptId(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L), MetaIdFactory.conceptId(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x39384475a5756fb0L), MetaIdFactory.conceptId(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x116b17c6e46L), MetaIdFactory.conceptId(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x62763dc803b97bd8L), MetaIdFactory.conceptId(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2f16f1b357e19f43L), MetaIdFactory.conceptId(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x12509ddfaa7d2577L), MetaIdFactory.conceptId(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2eb1ad060897da51L), MetaIdFactory.conceptId(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2274019e61f0c2c8L), MetaIdFactory.conceptId(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x78c7e79625990591L), MetaIdFactory.conceptId(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2eb1ad060897da56L), MetaIdFactory.conceptId(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x78c7e79625a38e06L), MetaIdFactory.conceptId(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2274019e61e234c9L), MetaIdFactory.conceptId(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x33d23ee961a0cbf3L), MetaIdFactory.conceptId(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x3a98b0957fe8e5d2L)).seal();
 }

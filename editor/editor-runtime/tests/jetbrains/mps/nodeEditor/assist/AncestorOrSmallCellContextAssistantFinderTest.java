@@ -20,13 +20,15 @@ import jetbrains.mps.nodeEditor.cells.EditorCell_ContextAssistantComponent;
 import jetbrains.mps.nodeEditor.selection.EditorCellSelection;
 import org.junit.Test;
 
+import java.util.Collections;
+
 import static org.junit.Assert.assertSame;
 
 public class AncestorOrSmallCellContextAssistantFinderTest extends BaseEditorTest {
   @Test
   public void canFindAssistantInContextAssistantCell() {
-    AncestorOrSmallCellContextAssistantFinder finder = new AncestorOrSmallCellContextAssistantFinder();
     EditorCell_ContextAssistantComponent cell = new EditorCell_ContextAssistantComponent(getEditorContext(), null);
+    AncestorOrSmallCellContextAssistantFinder finder = new AncestorOrSmallCellContextAssistantFinder(Collections.singletonList(cell.getContextAssistant()));
     assertSame(cell.getContextAssistant(), finder.findAssistant(new EditorCellSelection(cell)));
   }
 }

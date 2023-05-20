@@ -9,18 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.lang.editor.table.runtime.TableModelFactory;
-import jetbrains.mps.lang.editor.table.runtime.TableModel;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.internal.collections.runtime.ListSequence;
-import jetbrains.mps.internal.collections.runtime.IWhereFilter;
-import jetbrains.mps.openapi.editor.cells.SubstituteInfo;
-import java.util.List;
-import jetbrains.mps.openapi.editor.cells.SubstituteAction;
-import java.util.ArrayList;
-import jetbrains.mps.openapi.editor.cells.EditorCell_Collection;
-import jetbrains.mps.lang.editor.table.runtime.EditorCell_Table;
 
 public class ComponentSet_table_Editor extends DefaultNodeEditor {
   private Collection<String> myContextHints = Arrays.asList(new String[]{"jetbrains.mps.samples.componentDependencies.editor.views.table"});
@@ -30,77 +18,6 @@ public class ComponentSet_table_Editor extends DefaultNodeEditor {
     return myContextHints;
   }
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createTable_y763qk_a(editorContext, node);
-  }
-  private EditorCell createTable_y763qk_a(EditorContext editorContext, SNode node) {
-    TableModelFactory creator = new TableModelFactory() {
-      public TableModel createTableModel(final SNode node, final EditorContext editorContext) {
-        return new TableModel() {
-          public int getColumnCount() {
-            return SLinkOperations.getChildren(node, MetaAdapterFactory.getContainmentLink(0x3066bc0924384300L, 0xa9365bd59917ae9bL, 0x565e19763814242bL, 0x565e197638146fa8L, "component")).size() + 1;
-          }
-          public int getRowCount() {
-            return SLinkOperations.getChildren(node, MetaAdapterFactory.getContainmentLink(0x3066bc0924384300L, 0xa9365bd59917ae9bL, 0x565e19763814242bL, 0x565e197638146fa8L, "component")).size() + 1;
-          }
-          public void deleteRow(int rowNumber) {
-          }
-          public SNode getValueAt(int row, final int column) {
-            if (row == 0 && column == 0) {
-              return null;
-            }
-            if (row == 0) {
-              return ListSequence.fromList(SLinkOperations.getChildren(ListSequence.fromList(SLinkOperations.getChildren(node, MetaAdapterFactory.getContainmentLink(0x3066bc0924384300L, 0xa9365bd59917ae9bL, 0x565e19763814242bL, 0x565e197638146fa8L, "component"))).getElement(column - 1), MetaAdapterFactory.getContainmentLink(0x3066bc0924384300L, 0xa9365bd59917ae9bL, 0x565e19763814f144L, 0x565e1976381be142L, "in"))).first();
-            }
-            if (column == 0) {
-              SNode component = ListSequence.fromList(SLinkOperations.getChildren(node, MetaAdapterFactory.getContainmentLink(0x3066bc0924384300L, 0xa9365bd59917ae9bL, 0x565e19763814242bL, 0x565e197638146fa8L, "component"))).getElement(row - 1);
-              if (ListSequence.fromList(SLinkOperations.getChildren(component, MetaAdapterFactory.getContainmentLink(0x3066bc0924384300L, 0xa9365bd59917ae9bL, 0x565e19763814f144L, 0x565e1976381be146L, "out"))).isEmpty()) {
-                return component;
-              }
-              return ListSequence.fromList(SLinkOperations.getChildren(component, MetaAdapterFactory.getContainmentLink(0x3066bc0924384300L, 0xa9365bd59917ae9bL, 0x565e19763814f144L, 0x565e1976381be146L, "out"))).first();
-            }
-            return ListSequence.fromList(SLinkOperations.getChildren(ListSequence.fromList(SLinkOperations.getChildren(node, MetaAdapterFactory.getContainmentLink(0x3066bc0924384300L, 0xa9365bd59917ae9bL, 0x565e19763814242bL, 0x565e197638146fa8L, "component"))).getElement(row - 1), MetaAdapterFactory.getContainmentLink(0x3066bc0924384300L, 0xa9365bd59917ae9bL, 0x565e19763814f144L, 0x565e19763814f147L, "dep"))).findFirst(new IWhereFilter<SNode>() {
-              public boolean accept(SNode it) {
-                return SLinkOperations.getTarget(it, MetaAdapterFactory.getReferenceLink(0x3066bc0924384300L, 0xa9365bd59917ae9bL, 0x565e1976381b71a0L, 0x565e1976381b7654L, "to")) == ListSequence.fromList(SLinkOperations.getChildren(node, MetaAdapterFactory.getContainmentLink(0x3066bc0924384300L, 0xa9365bd59917ae9bL, 0x565e19763814242bL, 0x565e197638146fa8L, "component"))).getElement(column - 1);
-              }
-            });
-          }
-          public void createElement(int row, int column) {
-          }
-          public SubstituteInfo getSubstituteInfo(int row, int column) {
-            return new SubstituteInfo() {
-              public List<SubstituteAction> getMatchingActions(String p0, boolean p1) {
-                return new ArrayList<SubstituteAction>();
-              }
-              public List<SubstituteAction> getSmartMatchingActions(String p0, boolean p1, EditorCell p2) {
-                return new ArrayList<SubstituteAction>();
-              }
-              public void invalidateActions() {
-              }
-              public void setOriginalText(String p0) {
-              }
-              public String getOriginalText() {
-                return "";
-              }
-              public boolean hasExactlyNActions(String p0, boolean p1, int p2) {
-                return false;
-              }
-            };
-          }
-          public void insertRow(int rowNumber) {
-          }
-          public void deleteColumn(int columnNumber) {
-          }
-          public void insertColumn(int columnNumber) {
-          }
-          public int getMaxColumnWidth(int columnNumber) {
-            return (columnNumber == 0 ? 100 : 20);
-          }
-        };
-      }
-    };
-    EditorCell_Collection editorCell = EditorCell_Table.createTable(editorContext, node, creator.createTableModel(node, editorContext), "Table_y763qk_a");
-    editorCell.setCellId("Table_y763qk_a_0");
-    editorCell.setBig(true);
-    return editorCell;
+    return new ComponentSet_table_EditorBuilder_a(editorContext, node).createCell();
   }
 }

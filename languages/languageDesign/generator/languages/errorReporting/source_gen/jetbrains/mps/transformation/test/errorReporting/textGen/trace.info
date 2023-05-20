@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082113931046:jetbrains.mps.baseLanguage.structure.ContinueStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
   <root>
     <file name="TextGenAspectDescriptor.java">
-      <unit at="16,0,67,0" name="jetbrains.mps.transformation.test.errorReporting.textGen.TextGenAspectDescriptor" />
+      <unit at="50,0,53,0" name="jetbrains.mps.transformation.test.errorReporting.textGen.TextGenAspectDescriptor$CONCEPTS" />
+      <unit at="16,0,54,0" name="jetbrains.mps.transformation.test.errorReporting.textGen.TextGenAspectDescriptor" />
     </file>
   </root>
   <root nodeRef="r:e99b0478-397a-402b-a078-57c984a0eca3(jetbrains.mps.transformation.test.errorReporting.textGen)/7287346816896128678">
     <file name="ErrorReportingRoot_TextGen.java">
-      <node id="7287346816896128678" at="11,54,12,55" concept="2" />
-      <node id="7287346816896135357" at="12,55,13,41" concept="0" />
-      <node id="7287346816896135365" at="13,41,14,18" concept="0" />
-      <node id="7287346816896135370" at="14,18,15,20" concept="0" />
-      <node id="7287346816896128678" at="10,0,17,0" concept="1" trace="generateText#(Ljetbrains/mps/text/rt/TextGenContext;)V" />
+      <node id="7287346816896128678" at="11,54,12,55" concept="4" />
+      <node id="7287346816896135359" at="12,55,13,41" concept="1" />
+      <node id="7287346816896135367" at="13,41,14,18" concept="1" />
+      <node id="7287346816896135372" at="14,18,15,20" concept="1" />
+      <node id="7287346816896128678" at="10,0,17,0" concept="3" trace="generateText#(Ljetbrains/mps/text/rt/TextGenContext;)V" />
       <scope id="7287346816896128678" at="11,54,15,20">
         <var name="tgs" id="7287346816896128678" />
       </scope>
@@ -22,6 +27,31 @@
         <var name="ctx" id="7287346816896128678" />
       </scope>
       <unit id="7287346816896128678" at="9,0,18,0" name="jetbrains.mps.transformation.test.errorReporting.textGen.ErrorReportingRoot_TextGen" />
+    </file>
+    <file name="TextGenAspectDescriptor.java">
+      <node id="7287346816896128678" at="26,52,27,48" concept="5" />
+      <node id="7287346816896128678" at="35,69,36,60" concept="4" />
+      <node id="7287346816896128678" at="36,60,37,63" concept="4" />
+      <node id="7287346816896128678" at="37,63,38,84" concept="1" />
+      <node id="7287346816896128678" at="38,84,39,17" concept="0" />
+      <node id="7287346816896128678" at="43,68,44,26" concept="5" />
+      <node id="7287346816896128678" at="46,73,47,16" concept="5" />
+      <node id="7287346816896128678" at="43,0,46,0" concept="6" trace="getFileName_ErrorReportingRoot#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
+      <node id="7287346816896128678" at="46,0,49,0" concept="6" trace="getFileExtension_ErrorReportingRoot#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
+      <node id="7287346816896128678" at="34,58,40,7" concept="2" />
+      <scope id="7287346816896128678" at="26,52,27,48" />
+      <scope id="7287346816896128678" at="43,68,44,26" />
+      <scope id="7287346816896128678" at="46,73,47,16" />
+      <scope id="7287346816896128678" at="43,0,46,0">
+        <var name="node" id="7287346816896128678" />
+      </scope>
+      <scope id="7287346816896128678" at="46,0,49,0">
+        <var name="node" id="7287346816896128678" />
+      </scope>
+      <scope id="7287346816896128678" at="35,69,39,17">
+        <var name="ext" id="7287346816896128678" />
+        <var name="fname" id="7287346816896128678" />
+      </scope>
     </file>
   </root>
 </debug-info>

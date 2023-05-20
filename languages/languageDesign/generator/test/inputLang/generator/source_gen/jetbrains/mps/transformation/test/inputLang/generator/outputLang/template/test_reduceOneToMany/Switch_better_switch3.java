@@ -11,14 +11,16 @@ import jetbrains.mps.generator.runtime.TemplateReductionRule;
 import java.util.Collections;
 import java.util.Collection;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.generator.runtime.TemplateExecutionEnvironment;
 import jetbrains.mps.generator.runtime.TemplateContext;
 import jetbrains.mps.generator.runtime.GenerationException;
+import jetbrains.mps.generator.runtime.TemplateExecutionEnvironment;
 import jetbrains.mps.generator.impl.DismissTopMappingRuleException;
+import jetbrains.mps.generator.runtime.MetaObjectContainer;
 
 @Generated
 public class Switch_better_switch3 extends TemplateSwitchBase implements TemplateSwitchMapping {
   public Switch_better_switch3() {
+    super(new MO());
   }
   public SNodeReference getSwitchNode() {
     return new SNodePointer("r:eca8e1c7-93fd-4ddf-9db6-91f9c2320691(jetbrains.mps.transformation.test.inputLang.generator.outputLang.template.test_reduceOneToMany@generator)", "8371596541809075904");
@@ -29,9 +31,17 @@ public class Switch_better_switch3 extends TemplateSwitchBase implements Templat
   public Iterable<TemplateReductionRule> getReductionRules() {
     return Collections.emptySet();
   }
-  public Collection<SNode> applyDefault(final TemplateExecutionEnvironment environment, SNodeReference templateSwitch, String mappingLabel, final TemplateContext context) throws GenerationException {
-    throw new DismissTopMappingRuleException(DismissTopMappingRuleException.MessageType.info, "WARNING!");
+  public Collection<SNode> applyDefault(final TemplateContext context) throws GenerationException {
+    final TemplateExecutionEnvironment environment = context.getEnvironment();
+    DismissTopMappingRuleException ex_1tzoyg_a = new DismissTopMappingRuleException(DismissTopMappingRuleException.MessageType.info, "WARNING!");
+    ex_1tzoyg_a.setTemplateContext(context);
+    ex_1tzoyg_a.setTemplateModelLocation(new SNodePointer("r:eca8e1c7-93fd-4ddf-9db6-91f9c2320691(jetbrains.mps.transformation.test.inputLang.generator.outputLang.template.test_reduceOneToMany@generator)", "8371596541809075905"));
+    throw ex_1tzoyg_a;
   }
-  public void processNull(TemplateExecutionEnvironment environment, SNodeReference templateSwitch, TemplateContext context) {
+
+  /*package*/ static final class MO implements MetaObjectContainer {
+
+
+
   }
 }

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="1tdlocvwz4wjoob6op5nggu5zn5y92k" />
+<product version="3" modelHash="-5wa645tvlefrp59vpr53pou0x8tl6fl">
+  <files names="DispatchArgsHierarchy_NonTypesystemRule.java:DispatchGroup.java:DispatchGroupDescriptor.java:DispatchMethodCollector.java:DispatchUtil.java:DisptachParamIsClass_NonTypesystemRule.java:TypesystemDescriptor.java" />
+</product>
 

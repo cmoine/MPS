@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,11 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.testFramework;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import jetbrains.mps.logging.Logger;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -31,7 +29,6 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class MpsTestDataParser implements EntryDataParser {
-  private final static Logger LOG = LogManager.getLogger(MpsTestDataParser.class);
   @NonNls
   private final static ResourceBundle BUNDLE = ResourceBundle.getBundle("jetbrains.mps.idea.core.MPSCoreBundle");
   private final static String DELIMITERS = "\n\t\f\r;";
@@ -127,7 +124,8 @@ public class MpsTestDataParser implements EntryDataParser {
 
     public void close() {
       if (myScanner.hasNext()) {
-        LOG.warn(BUNDLE.getString("closing.stream.while.there.are.unread.tokens"));
+        // XXX l10n for log messages, ORLY?!
+        Logger.getLogger(MpsTestDataParser.class).warning(BUNDLE.getString("closing.stream.while.there.are.unread.tokens"));
       }
       myScanner.close();
     }

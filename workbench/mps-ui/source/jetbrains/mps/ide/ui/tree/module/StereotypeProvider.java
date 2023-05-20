@@ -15,8 +15,26 @@
  */
 package jetbrains.mps.ide.ui.tree.module;
 
+import jetbrains.mps.smodel.SModelStereotype;
+
 public interface StereotypeProvider {
   String getStereotype();
 
   boolean isStrict();
+
+  StereotypeProvider NONE = create(SModelStereotype.NONE, false);
+
+  static StereotypeProvider create(final String stereotype, final boolean isStrict) {
+    return new StereotypeProvider() {
+      @Override
+      public String getStereotype() {
+        return stereotype;
+      }
+
+      @Override
+      public boolean isStrict() {
+        return isStrict;
+      }
+    };
+  }
 }

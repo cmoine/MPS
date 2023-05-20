@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="expyreq3gb525hmhgbxs70y1dhratcc" />
+<product version="3" modelHash="dsj28vee9z24tg8v57lqu21451u4hhq">
+  <files names="AbstractAntiquotation__BehaviorDescriptor.java:Antiquotation__BehaviorDescriptor.java:BehaviorAspectDescriptor.java:INodeBuilderContainer__BehaviorDescriptor.java:InitializerPolicy.java:ListAntiquotation__BehaviorDescriptor.java:NodeBuilderInitLink__BehaviorDescriptor.java:NodeBuilderInitProperty__BehaviorDescriptor.java:NodeBuilderNode__BehaviorDescriptor.java:NodeBuilder__BehaviorDescriptor.java:Quotation__BehaviorDescriptor.java:ReferenceAntiquotation__BehaviorDescriptor.java:StringToTypedValueMigrationInfo__BehaviorDescriptor.java" />
+</product>
 

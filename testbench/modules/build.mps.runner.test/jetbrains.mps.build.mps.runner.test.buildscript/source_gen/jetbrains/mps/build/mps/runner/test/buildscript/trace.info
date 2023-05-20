@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
+  <root nodeRef="r:1df60b02-4b01-4931-9ed0-efa7ab133a2f(jetbrains.mps.build.mps.runner.test.buildscript)/1101389554473443113">
+    <file name="testDummyPlugin.xml">
+      <unit id="1101389554473443113" at="1,0,368,10" name="jetbrains.mps.build.mps.runner.test.buildscript.testDummyPlugin" />
+    </file>
+  </root>
   <root nodeRef="r:1df60b02-4b01-4931-9ed0-efa7ab133a2f(jetbrains.mps.build.mps.runner.test.buildscript)/138593292063253314">
     <file name="test3.xml">
-      <unit id="138593292063253314" at="1,0,270,10" name="jetbrains.mps.build.mps.runner.test.buildscript.test3" />
+      <unit id="138593292063253314" at="1,0,362,10" name="jetbrains.mps.build.mps.runner.test.buildscript.test3" />
     </file>
   </root>
   <root nodeRef="r:1df60b02-4b01-4931-9ed0-efa7ab133a2f(jetbrains.mps.build.mps.runner.test.buildscript)/2304492758936981542">
     <file name="test4.xml">
-      <unit id="2304492758936981542" at="1,0,342,10" name="jetbrains.mps.build.mps.runner.test.buildscript.test4" />
+      <unit id="2304492758936981542" at="1,0,435,10" name="jetbrains.mps.build.mps.runner.test.buildscript.test4" />
+    </file>
+  </root>
+  <root nodeRef="r:1df60b02-4b01-4931-9ed0-efa7ab133a2f(jetbrains.mps.build.mps.runner.test.buildscript)/3307120220351780865">
+    <file name="test5.xml">
+      <unit id="3307120220351780865" at="1,0,434,10" name="jetbrains.mps.build.mps.runner.test.buildscript.test5" />
     </file>
   </root>
   <root nodeRef="r:1df60b02-4b01-4931-9ed0-efa7ab133a2f(jetbrains.mps.build.mps.runner.test.buildscript)/5712055271175299542">
     <file name="test1.xml">
-      <unit id="5712055271175299542" at="1,0,243,10" name="jetbrains.mps.build.mps.runner.test.buildscript.test1" />
+      <unit id="5712055271175299542" at="1,0,325,10" name="jetbrains.mps.build.mps.runner.test.buildscript.test1" />
     </file>
   </root>
   <root nodeRef="r:1df60b02-4b01-4931-9ed0-efa7ab133a2f(jetbrains.mps.build.mps.runner.test.buildscript)/5712055271175358329">
     <file name="test2.xml">
-      <unit id="5712055271175358329" at="1,0,287,10" name="jetbrains.mps.build.mps.runner.test.buildscript.test2" />
+      <unit id="5712055271175358329" at="1,0,381,10" name="jetbrains.mps.build.mps.runner.test.buildscript.test2" />
     </file>
   </root>
 </debug-info>

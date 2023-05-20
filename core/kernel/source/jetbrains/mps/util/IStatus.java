@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,18 +15,30 @@
  */
 package jetbrains.mps.util;
 
+import org.jetbrains.annotations.Nullable;
+
 public interface IStatus {
-  public static enum Code {
+  enum Code {
     OK, ERROR
   }
 
-  boolean isOk();
+  default boolean isOk() {
+    return getCode() == Code.OK;
+  }
 
-  boolean isError();
+  default boolean isError() {
+    return getCode() == Code.ERROR;
+  }
 
   Code getCode();
 
-  String getMessage();
+  @Nullable
+  default String getMessage() {
+    return null;
+  }
 
-  Object getUserObject();
+  @Nullable
+  default Object getUserObject() {
+    return null;
+  }
 }

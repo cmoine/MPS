@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<dependenciesRoot>
-  <dependency className="jetbrains.mps.lang.intentions.methods.UniversalIntention_Queries" file="UniversalIntention_Queries.java">
-    <classNode dependClassName="jetbrains.mps.lang.intentions.util.TypeCalculator" />
-    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNode" />
-  </dependency>
-</dependenciesRoot>
-

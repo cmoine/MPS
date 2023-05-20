@@ -6,83 +6,12 @@ import jetbrains.mps.nodeEditor.DefaultNodeEditor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Collection;
-import jetbrains.mps.openapi.editor.style.Style;
-import jetbrains.mps.editor.runtime.style.StyleImpl;
-import jetbrains.mps.build.editor.buildStyles_StyleSheet;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Constant;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.nodeEditor.cellProviders.CellProviderWithRole;
-import jetbrains.mps.lang.editor.cellProviders.PropertyCellProvider;
-import jetbrains.mps.nodeEditor.EditorManager;
 
 public class BuildLayout_ToBinaryCopyProcessor_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createCollection_3hb8bt_a(editorContext, node);
+    return new BuildLayout_ToBinaryCopyProcessor_EditorBuilder_a(editorContext, node).createCell();
   }
   public EditorCell createInspectedCell(EditorContext editorContext, SNode node) {
-    return this.createCollection_3hb8bt_a_0(editorContext, node);
-  }
-  private EditorCell createCollection_3hb8bt_a(EditorContext editorContext, SNode node) {
-    EditorCell_Collection editorCell = EditorCell_Collection.createIndent2(editorContext, node);
-    editorCell.setCellId("Collection_3hb8bt_a");
-    editorCell.setBig(true);
-    editorCell.addEditorCell(this.createComponent_3hb8bt_a0(editorContext, node));
-    if (renderingCondition_3hb8bt_a1a(node, editorContext)) {
-      editorCell.addEditorCell(this.createConstant_3hb8bt_b0(editorContext, node));
-    }
-    return editorCell;
-  }
-  private EditorCell createComponent_3hb8bt_a0(EditorContext editorContext, SNode node) {
-    EditorCell editorCell = editorContext.getCellFactory().createEditorComponentCell(node, "jetbrains.mps.lang.core.editor.alias");
-    Style style = new StyleImpl();
-    buildStyles_StyleSheet.apply_keyword(style, editorCell);
-    editorCell.getStyle().putAll(style);
-    return editorCell;
-  }
-  private EditorCell createConstant_3hb8bt_b0(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, "(strip implementation)");
-    editorCell.setCellId("Constant_3hb8bt_b0");
-    Style style = new StyleImpl();
-    buildStyles_StyleSheet.apply_keyword(style, editorCell);
-    editorCell.getStyle().putAll(style);
-    editorCell.setDefaultText("");
-    return editorCell;
-  }
-  private static boolean renderingCondition_3hb8bt_a1a(SNode node, EditorContext editorContext) {
-    return SPropertyOperations.getBoolean(node, MetaAdapterFactory.getProperty(0xcf935df46994e9cL, 0xa132fa109541cba3L, 0x127671bd5d8bb460L, 0x6de50fcfc2febc8aL, "stripImplementation"));
-  }
-  private EditorCell createCollection_3hb8bt_a_0(EditorContext editorContext, SNode node) {
-    EditorCell_Collection editorCell = EditorCell_Collection.createIndent2(editorContext, node);
-    editorCell.setCellId("Collection_3hb8bt_a_0");
-    editorCell.setBig(true);
-    editorCell.addEditorCell(this.createConstant_3hb8bt_a0(editorContext, node));
-    editorCell.addEditorCell(this.createProperty_3hb8bt_b0(editorContext, node));
-    return editorCell;
-  }
-  private EditorCell createConstant_3hb8bt_a0(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, "strip implementation:");
-    editorCell.setCellId("Constant_3hb8bt_a0");
-    Style style = new StyleImpl();
-    buildStyles_StyleSheet.apply_keyword(style, editorCell);
-    editorCell.getStyle().putAll(style);
-    editorCell.setDefaultText("");
-    return editorCell;
-  }
-  private EditorCell createProperty_3hb8bt_b0(EditorContext editorContext, SNode node) {
-    CellProviderWithRole provider = new PropertyCellProvider(node, editorContext);
-    provider.setRole("stripImplementation");
-    provider.setNoTargetText("<no stripImplementation>");
-    EditorCell editorCell;
-    editorCell = provider.createEditorCell(editorContext);
-    editorCell.setCellId("property_stripImplementation");
-    editorCell.setSubstituteInfo(provider.createDefaultSubstituteInfo());
-    SNode attributeConcept = provider.getRoleAttribute();
-    if (attributeConcept != null) {
-      EditorManager manager = EditorManager.getInstanceFromContext(editorContext);
-      return manager.createNodeRoleAttributeCell(attributeConcept, provider.getRoleAttributeKind(), editorCell);
-    } else
-    return editorCell;
+    return new BuildLayout_ToBinaryCopyProcessor_InspectorBuilder_a(editorContext, node).createCell();
   }
 }

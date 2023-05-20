@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,44 +18,36 @@ package jetbrains.mps.excluded;
 import jetbrains.mps.util.FileUtil;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static jetbrains.mps.excluded.Utils.files;
 import static jetbrains.mps.excluded.Utils.root;
-import static jetbrains.mps.excluded.Utils.withExtension;
-import static jetbrains.mps.util.CollectionUtil.union;
 
 public class ModuleNameFixer {
   private static final boolean DO_RENAMING = false;
 
   public static void main(String[] args) throws IOException {
-    List<File> mprFiles = withExtension(".mpr", files(root()));
-//    System.out.println("mpr files count: " + mprFiles.size());
-//    for (File mprFile : mprFiles) {
-//      System.out.println(mprFile.getCanonicalPath());
-//    }
-//    System.out.println();
-
-    List<File> moduleFiles = union(withExtension(".mpl", files(root())), withExtension(".msd", files(root())));
-//    int count = 0;
-    for (File file : moduleFiles) {
+    FileFilter ff = f -> {
+      final String name = f.getName();
+      return name.endsWith(".msd") || name.endsWith(".mpl");
+    };
+    List<File> moduleFiles = Utils.files(root(), ff).filter(file -> {
       String fileName = file.getName();
       fileName = fileName.substring(0, fileName.length() - 4);
       String fqName = moduleFqName(file);
 
-      if (!fileName.equals(fqName)) {
-//        if (!fqName.endsWith(fileName)) {
-//          if (!fileName.equals("languageDescriptor")) {
-//            System.out.println(file.getName() + " " + moduleFqName(file));
-//            count++;
-//          }
-//        }
-        refactorModuleName(file, mprFiles);
-      }
+      return !fileName.equals(fqName);
+    }).collect(Collectors.toList());
+    if (moduleFiles.isEmpty()) {
+      return;
     }
 
-//    System.out.println("Count: " + count);
+    List<File> mprFiles = Utils.files(root(), f -> f.getName().endsWith(".mpr")).collect(Collectors.toList());
+    for (File file : moduleFiles) {
+      refactorModuleName(file, mprFiles);
+    }
   }
 
   private static void refactorModuleName(File moduleFile, List<File> mprFiles) throws IOException {
@@ -97,10 +89,6 @@ public class ModuleNameFixer {
     System.out.println();
   }
 
-  private static String getModuleFingerprint(File module) {
-    return module.getParentFile().getName() + "/" + module.getName();
-  }
-
   private static String moduleFqName(File file) {
     String content = FileUtil.read(file);
     String prefix = file.getName().endsWith(".mpl") ? "<language namespace=\"" : "<solution name=\"";
@@ -110,6 +98,6 @@ public class ModuleNameFixer {
     }
 
     content = content.substring(content.indexOf(prefix) + prefix.length());
-    return content.substring(0, content.indexOf("\""));
+    return content.substring(0, content.indexOf('\"'));
   }
 }

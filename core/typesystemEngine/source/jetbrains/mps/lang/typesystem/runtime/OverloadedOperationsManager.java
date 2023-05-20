@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,25 +16,22 @@
 package jetbrains.mps.lang.typesystem.runtime;
 
 import jetbrains.mps.errors.IRuleConflictWarningProducer;
-import jetbrains.mps.logging.Logger;
-import org.apache.log4j.LogManager;
-import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.typesystem.inference.SubtypingManager;
 import jetbrains.mps.typesystem.inference.TypeChecker;
+import jetbrains.mps.typesystem.inference.TypeCheckerHelper;
 import jetbrains.mps.util.CollectionUtil;
+import org.jetbrains.mps.openapi.model.SNode;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 public class OverloadedOperationsManager {
-  private static final Logger LOG = Logger.wrap(LogManager.getLogger(OverloadedOperationsManager.class));
-
   private RuleSet<IOverloadedOpsTypesProvider> myOperationsToTypeProviders =
-    new RuleSet<IOverloadedOpsTypesProvider>();
+      new RuleSet<>();
 
-  private TypeChecker myTypeChecker;
-
-  public OverloadedOperationsManager(TypeChecker typeChecker) {
-    myTypeChecker = typeChecker;
+  public OverloadedOperationsManager() {
   }
 
   public void addOverloadedOperationsTypeProvider(IOverloadedOpsTypesProvider provider) {
@@ -46,17 +43,18 @@ public class OverloadedOperationsManager {
     myOperationsToTypeProviders.addRuleSetItem(providers);
   }
 
+  @Deprecated(forRemoval = true)
   public SNode getOperationType(SNode operation, SNode leftOperandType, SNode rightOperandType) {
-    return getOperationType(operation, leftOperandType, rightOperandType, IRuleConflictWarningProducer.NULL);
+    return getOperationType(operation, leftOperandType, rightOperandType, IRuleConflictWarningProducer.NULL, TypeChecker.getInstance().getTypeCheckerHelper());
   }
 
-  public SNode getOperationType(SNode operation, SNode leftOperandType, SNode rightOperandType, IRuleConflictWarningProducer warningProducer) {
+  public SNode getOperationType(SNode operation, SNode leftOperandType, SNode rightOperandType, IRuleConflictWarningProducer warningProducer, TypeCheckerHelper typeCheckerHelper) {
     Set<IOverloadedOpsTypesProvider> operationsTypesProviderSet = myOperationsToTypeProviders.getRules(operation);
     if (operationsTypesProviderSet.isEmpty()) {
       return null;
     }
-    SubtypingManager subtypingManager = myTypeChecker.getSubtypingManager();
-    List<IOverloadedOpsTypesProvider> filteredProviders = new ArrayList<IOverloadedOpsTypesProvider>();
+    SubtypingManager subtypingManager = typeCheckerHelper.getSubtypingManager();
+    List<IOverloadedOpsTypesProvider> filteredProviders = new ArrayList<>();
     for (IOverloadedOpsTypesProvider provider : operationsTypesProviderSet) {
       //first applicable method is from base class, second is custom
       if (provider.isApplicable(subtypingManager, leftOperandType, rightOperandType) &&
@@ -66,17 +64,14 @@ public class OverloadedOperationsManager {
     }
     final boolean[] severalRules = new boolean[]{false};
     final IOverloadedOpsTypesProvider[] matchedProviders = new IOverloadedOpsTypesProvider[2];
-    Collections.sort(filteredProviders, new Comparator<IOverloadedOpsTypesProvider>() {
-      @Override
-      public int compare(IOverloadedOpsTypesProvider o1, IOverloadedOpsTypesProvider o2) {
-        int i = o1.compareTo(o2);
-        if (i == 0) {
-          severalRules[0] = true;
-          matchedProviders[0] = o1;
-          matchedProviders[1] = o2;
-        }
-        return i;
+    Collections.sort(filteredProviders, (o1, o2) -> {
+      int i = o1.compareTo(o2);
+      if (i == 0) {
+        severalRules[0] = true;
+        matchedProviders[0] = o1;
+        matchedProviders[1] = o2;
       }
+      return i;
     });
     if (severalRules[0]) {
       matchedProviders[0].reportConflict(warningProducer);
@@ -92,6 +87,6 @@ public class OverloadedOperationsManager {
   }
 
   public void clear() {
-    myOperationsToTypeProviders = new RuleSet<IOverloadedOpsTypesProvider>();
+    myOperationsToTypeProviders = new RuleSet<>();
   }
 }

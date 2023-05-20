@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-63le2o2ypjkgarq5675ryb4ce8l7g82" />
+<product version="3" modelHash="yllzsp2rjsygoekswshmv17m9r19wx">
+  <files names="EditorAspectDescriptorImpl.java:VarType_Delete.java:VarType_LocalVariableDeclaration.java:VarType_SubstituteMenu.java:VarType_TransformationMenu.java:VarVariable_Type.java:VarVariable_Type_ComponentBuilder_a.java:varType.java:varTypeSubstitutionForNullType.java" />
+</product>
 

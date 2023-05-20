@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-ayvadkeb4ax5v8y3ragp998glzf8tcu" />
+<product version="3" modelHash="-ayvadkeb4ax5v8y3ragp998glzf8tcu">
+  <files names="ApplicableRefactoring.java:ApplicableRefactoring_Target.java:InapplicableRefactoring.java:InapplicableRefactoring_Target.java:RefactoringAspectDescriptor.java" />
+</product>
 

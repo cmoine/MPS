@@ -19,6 +19,10 @@ import jetbrains.mps.nodeEditor.CellSide;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
 
+/**
+ * @deprecated use {@link jetbrains.mps.openapi.editor.menus.transformation.TransformationMenuContext}
+ */
+@Deprecated
 public class SideTransformActionsBuilderContext {
   private SNode mySourceNode;
   private SModel myModel;

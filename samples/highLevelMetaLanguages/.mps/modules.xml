@@ -2,6 +2,8 @@
 <project version="4">
   <component name="MPSProject">
     <projectModules>
+      <modulePath path="$PROJECT_DIR$/devkits/jetbrains.mps.samples.highlevel.devkit.editor.devkit/jetbrains.mps.samples.highlevel.devkit.editor.devkit" folder="" />
+      <modulePath path="$PROJECT_DIR$/devkits/jetbrains.mps.samples.highlevel.devkit.structure.devkit" folder="" />
       <modulePath path="$PROJECT_DIR$/languages/jetbrains.mps.samples.highlevel.sampleLanguage/jetbrains.mps.samples.highlevel.sampleLanguage.mpl" folder="sample" />
       <modulePath path="$PROJECT_DIR$/languages/jetbrains.mps.samples.highlevel.simpleEditor/jetbrains.mps.samples.highlevel.simpleEditor.mpl" folder="" />
       <modulePath path="$PROJECT_DIR$/languages/jetbrains.mps.samples.highlevel.simpleStructure/jetbrains.mps.samples.highlevel.simpleStructure.mpl" folder="" />

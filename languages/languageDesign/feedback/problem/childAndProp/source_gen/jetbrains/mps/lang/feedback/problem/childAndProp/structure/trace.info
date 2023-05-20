@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <root>
+    <file name="ConceptPresentationAspectImpl.java">
+      <unit at="11,0,30,0" name="jetbrains.mps.lang.feedback.problem.childAndProp.structure.ConceptPresentationAspectImpl" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <unit at="10,0,28,0" name="jetbrains.mps.lang.feedback.problem.childAndProp.structure.LanguageConceptSwitch" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <unit at="14,0,61,0" name="jetbrains.mps.lang.feedback.problem.childAndProp.structure.StructureAspectDescriptor" />
+    </file>
+  </root>
+  <root nodeRef="r:47656d18-dbba-45c4-80e3-b6a073fd7710(jetbrains.mps.lang.feedback.problem.childAndProp.structure)/24399255755597574">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="24399255755597574" at="12,0,13,0" concept="1" trace="props_FailingPropertyConstraintsProblem" />
+      <node id="24399255755597574" at="20,62,21,76" concept="3" />
+      <node id="24399255755597574" at="21,76,22,64" concept="0" />
+      <node id="24399255755597574" at="22,64,23,65" concept="0" />
+      <node id="24399255755597574" at="24,9,25,55" concept="4" />
+      <node id="24399255755597574" at="19,67,24,9" concept="2" />
+      <scope id="24399255755597574" at="20,62,23,65">
+        <var name="cpb" id="24399255755597574" />
+      </scope>
+      <scope id="24399255755597574" at="19,67,25,55" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="24399255755597574" at="12,0,13,0" concept="6" trace="FailingPropertyConstraintsProblem" />
+      <node id="24399255755597574" at="15,116,16,70" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="24399255755597574" at="15,0,16,0" concept="1" trace="myConceptFailingPropertyConstraintsProblem" />
+      <node id="24399255755597574" at="37,67,38,58" concept="4" />
+      <node id="24399255755597574" at="49,91,50,214" concept="3" />
+      <node id="24399255755597574" at="50,214,51,33" concept="0" />
+      <node id="24399255755597574" at="51,33,52,85" concept="5" />
+      <node id="24399255755597574" at="52,85,53,75" concept="0" />
+      <node id="24399255755597574" at="53,75,54,133" concept="0" />
+      <node id="24399255755597574" at="54,133,55,17" concept="0" />
+      <node id="24399255755615671" at="55,17,56,162" concept="0" />
+      <node id="24399255755597574" at="56,162,57,46" concept="0" />
+      <node id="24399255755597574" at="57,46,58,22" concept="4" />
+      <node id="24399255755597574" at="49,0,60,0" concept="7" trace="createDescriptorForFailingPropertyConstraintsProblem#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="24399255755597574" at="37,67,38,58" />
+      <scope id="24399255755597574" at="49,91,58,22">
+        <var name="b" id="24399255755597574" />
+      </scope>
+      <scope id="24399255755597574" at="49,0,60,0" />
+    </file>
+  </root>
+</debug-info>
+

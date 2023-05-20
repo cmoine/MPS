@@ -2,22 +2,25 @@
 <debug-info version="2">
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <root>
     <file name="DataFlowAspectDescriptorImpl.java">
-      <unit at="15,0,46,0" name="jetbrains.mps.baseLanguage.varVariable.dataFlow.DataFlowAspectDescriptorImpl" />
+      <unit at="15,0,30,0" name="jetbrains.mps.baseLanguage.varVariable.dataFlow.DataFlowAspectDescriptorImpl" />
     </file>
   </root>
   <root nodeRef="r:04eb0d47-e25d-4def-b754-199026c42388(jetbrains.mps.baseLanguage.varVariable.dataFlow)/8067700594454574148">
     <file name="VarVariableDeclaration_DataFlow.java">
-      <node id="1206990208534" at="12,60,13,139" concept="0" />
-      <node id="8067700594454574165" at="13,139,14,213" concept="0" />
-      <node id="8067700594454574178" at="14,213,15,340" concept="0" />
-      <node id="8067700594454574148" at="12,0,17,0" concept="1" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
-      <scope id="8067700594454574150" at="12,60,15,340" />
-      <scope id="8067700594454574148" at="12,0,17,0">
+      <node id="1206990208534" at="13,60,14,139" concept="0" />
+      <node id="8067700594454574165" at="14,139,15,111" concept="0" />
+      <node id="8067700594454574178" at="15,111,16,238" concept="0" />
+      <node id="8067700594454574148" at="20,0,21,0" concept="2" trace="initializer$2twD" />
+      <node id="8067700594454574148" at="13,0,18,0" concept="1" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="8067700594454574150" at="13,60,16,238" />
+      <scope id="8067700594454574148" at="13,0,18,0">
         <var name="_context" id="8067700594454574148" />
       </scope>
-      <unit id="8067700594454574148" at="11,0,18,0" name="jetbrains.mps.baseLanguage.varVariable.dataFlow.VarVariableDeclaration_DataFlow" />
+      <unit id="8067700594454574148" at="19,0,22,0" name="jetbrains.mps.baseLanguage.varVariable.dataFlow.VarVariableDeclaration_DataFlow$LINKS" />
+      <unit id="8067700594454574148" at="12,0,23,0" name="jetbrains.mps.baseLanguage.varVariable.dataFlow.VarVariableDeclaration_DataFlow" />
     </file>
   </root>
 </debug-info>

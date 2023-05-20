@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="61p4en32f9jhqvj1mzpeb9zxvi2mvks" />
+<product version="3" modelHash="8mt5kae39u0ftj1l30v1l8waogyujc7">
+  <files names="ConstraintsAspectDescriptor.java:RefTestMethodCall_Constraints.java:RefTestParamRef_Constraints.java" />
+</product>
 

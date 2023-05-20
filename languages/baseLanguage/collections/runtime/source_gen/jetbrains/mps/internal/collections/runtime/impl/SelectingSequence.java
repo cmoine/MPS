@@ -15,7 +15,7 @@ public class SelectingSequence<U, V> extends AbstractChainedSequence<U, V> imple
   }
   @Override
   public Iterator<V> iterator() {
-    return new SelectingSequence.SelectingIterator();
+    return new SelectingIterator();
   }
   private class SelectingIterator implements Iterator<V> {
     private Iterator<U> inputIterator = null;

@@ -21,4 +21,4 @@ if [ $# -eq 0 ]; then
 else
   targets="$@"
 fi
-ant -f $mps_home/build/build.xml $targets -Dmps_home=$mps_home -Dbuild.number=162.2500 -Dversion=3.4 -Dbuild.vcs.number=HEAD -Dteamcity.buildConfName=local
+ant -f $mps_home/build/build.xml $targets -Dmps_home=$mps_home -Dbuild.number=213.1 -Dversion=2021.3 -Dbuild.vcs.number=HEAD -Dteamcity.buildConfName=local

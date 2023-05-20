@@ -80,12 +80,9 @@ public abstract class CompletionTextField extends JTextField {
       }
     });
 
-    addCaretListener(new CaretListener() {
-      @Override
-      public void caretUpdate(CaretEvent e) {
-        if (isFocusOwner() && myHint.isVisible()) {
-          updateCompletion();
-        }
+    addCaretListener(e -> {
+      if (isFocusOwner() && myHint.isVisible()) {
+        updateCompletion();
       }
     });
 

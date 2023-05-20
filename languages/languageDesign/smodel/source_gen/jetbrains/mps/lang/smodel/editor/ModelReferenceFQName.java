@@ -9,23 +9,6 @@ import java.util.Collections;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cellMenu.CompositeSubstituteInfo;
-import jetbrains.mps.nodeEditor.cellMenu.BasicCellContext;
-import jetbrains.mps.nodeEditor.cellMenu.SubstituteInfoPartExt;
-import jetbrains.mps.nodeEditor.cellMenu.SChildSubstituteInfoPartEx;
-import jetbrains.mps.lang.smodel.behavior.ModelReferenceExpression__BehaviorDescriptor;
-import java.util.List;
-import jetbrains.mps.openapi.editor.cells.SubstituteAction;
-import jetbrains.mps.nodeEditor.cellMenu.CellContext;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Property;
-import jetbrains.mps.nodeEditor.cells.ModelAccessor;
-import jetbrains.mps.util.EqualUtil;
-import jetbrains.mps.openapi.editor.cells.CellActionType;
-import jetbrains.mps.editor.runtime.cells.EmptyCellAction;
-import jetbrains.mps.openapi.editor.style.Style;
-import jetbrains.mps.editor.runtime.style.StyleImpl;
-import jetbrains.mps.editor.runtime.style.StyleAttributes;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Error;
 
 public class ModelReferenceFQName implements ConceptEditorComponent {
   @NotNull
@@ -33,55 +16,6 @@ public class ModelReferenceFQName implements ConceptEditorComponent {
     return Collections.emptyList();
   }
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createAlternation_ho2vdo_a(editorContext, node);
-  }
-  private EditorCell createAlternation_ho2vdo_a(EditorContext editorContext, SNode node) {
-    boolean alternationCondition = true;
-    alternationCondition = ModelReferenceFQName.renderingCondition_ho2vdo_a0(node, editorContext);
-    EditorCell editorCell = null;
-    if (alternationCondition) {
-      editorCell = this.createReadOnlyModelAccessor_ho2vdo_a0(editorContext, node);
-    } else {
-      editorCell = this.createError_ho2vdo_a0(editorContext, node);
-    }
-    editorCell.setSubstituteInfo(new CompositeSubstituteInfo(editorContext, new BasicCellContext(node), new SubstituteInfoPartExt[]{new ModelReferenceFQName.ModelReferenceExpression_component_cellMenu_ho2vdo_a0a(), new SChildSubstituteInfoPartEx(editorCell)}));
-    return editorCell;
-  }
-  private static boolean renderingCondition_ho2vdo_a0(SNode node, EditorContext editorContext) {
-    return ModelReferenceExpression__BehaviorDescriptor.getFQName_id7K4mn_BeEzv.invoke(node) != null;
-  }
-  public static class ModelReferenceExpression_component_cellMenu_ho2vdo_a0a implements SubstituteInfoPartExt {
-    private ModelReferenceCompletion myComponent;
-    public ModelReferenceExpression_component_cellMenu_ho2vdo_a0a() {
-      this.myComponent = new ModelReferenceCompletion();
-    }
-    public List<SubstituteAction> createActions(CellContext cellContext, EditorContext editorContext) {
-      return this.myComponent.createSubstituteActions(cellContext, editorContext);
-    }
-  }
-  private EditorCell createReadOnlyModelAccessor_ho2vdo_a0(final EditorContext editorContext, final SNode node) {
-    EditorCell_Property editorCell = EditorCell_Property.create(editorContext, new ModelAccessor() {
-      public String getText() {
-        return (String) ModelReferenceExpression__BehaviorDescriptor.getFQName_id7K4mn_BeEzv.invoke(node);
-      }
-      public void setText(String s) {
-      }
-      public boolean isValidText(String s) {
-        return EqualUtil.equals(s, getText());
-      }
-    }, node);
-    editorCell.setAction(CellActionType.DELETE, EmptyCellAction.getInstance());
-    editorCell.setAction(CellActionType.BACKSPACE, EmptyCellAction.getInstance());
-    editorCell.setCellId("FQName");
-    Style style = new StyleImpl();
-    style.set(StyleAttributes.AUTO_DELETABLE, 0, true);
-    editorCell.getStyle().putAll(style);
-    ModelReferenceDelete.setCellActions(editorCell, node, editorContext);
-    return editorCell;
-  }
-  private EditorCell createError_ho2vdo_a0(EditorContext editorContext, SNode node) {
-    EditorCell_Error editorCell = new EditorCell_Error(editorContext, node, "<no fqName>");
-    editorCell.setCellId("NoFQName");
-    return editorCell;
+    return new ModelReferenceFQName_ComponentBuilder_a(editorContext, node).createCell();
   }
 }

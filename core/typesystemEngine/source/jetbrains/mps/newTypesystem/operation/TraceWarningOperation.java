@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 package jetbrains.mps.newTypesystem.operation;
 
 import jetbrains.mps.typesystem.inference.EquationInfo;
-import jetbrains.mps.util.Pair;
 
 public class TraceWarningOperation extends AddRemarkOperation {
   public TraceWarningOperation(String string) {
@@ -25,7 +24,7 @@ public class TraceWarningOperation extends AddRemarkOperation {
 
   public TraceWarningOperation(String string, EquationInfo info) {
     super(string);
-    myRule = new Pair<String, String>(info.getRuleModel(), info.getRuleId());
+    myRule = info.getRuleNode();
   }
 
   @Override

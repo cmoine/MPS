@@ -47,7 +47,7 @@ public class PresentationUtil {
         sb.append(var);
         sb.append(" is a type of ");
         sb.append(getNodePresentation(editorComponent, node));
-        sb.append("\n");
+        sb.append('\n');
       }
     }
     return sb.toString();
@@ -55,7 +55,7 @@ public class PresentationUtil {
 
   public static List<SNode> getNodes(@NotNull Collection<SNode> variables, State state) {
     NodeMaps maps = state.getNodeMaps();
-    List<SNode> result = new LinkedList<SNode>();
+    List<SNode> result = new LinkedList<>();
     if (maps == null) {
       return result;
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2016 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,31 +15,27 @@
  */
 package jetbrains.mps.workbench;
 
+// XXX there's also MPSActionPlaces with strings, which one needs update, both?
 public enum ActionPlace {
-  EDITOR("MPS_Editor"),
+  EDITOR(),
 
-  PROJECT_PANE_SNODE("MPS_ProjectPane_SNode"),
-  PROJECT_PANE_SMODEL("MPS_ProjectPane_SModel"),
-  PROJECT_PANE_MODULE("MPS_ProjectPane_Module"),
-  PROJECT_PANE_LANGUAGE("MPS_ProjectPane_Language"),
-  PROJECT_PANE_DEVKIT("MPS_ProjectPane_Devkit"),
-  PROJECT_PANE_SOLUTION("MPS_ProjectPane_Solution"),
-  PROJECT_PANE_PROJECT("MPS_ProjectPane_Project"),
-  PROJECT_PANE_GENERATOR("MPS_ProjectPane_Generator"),
-  PROJECT_PANE_TRANSIENT_MODULES("MPS_ProjectPane_TransientModels"),
-  PROJECT_PANE_PACKAGE("MPS_ProjectPane_Package"),
-  PROJECT_PANE_NAMESPACE("MPS_ProjectPane_Namespace"),
-  PROJECT_PANE_RUNTIME_FOLDER("MPS_ProjectPane_RuntimeFolder"),
-  PROJECT_PANE_ACCESSORIES("MPS_ProjectPane_Accessories"),
-  PROJECT_PANE_FILE("MPS_ProjectPane_File"),
-  PROJECT_PANE_FOLDER("MPS_ProjectPane_Folder"),
-  PROJECT_PANE("MPS_ProjectPane"),
+  PROJECT_PANE_SNODE(),
+  PROJECT_PANE_SMODEL(),
+  PROJECT_PANE_MODULE(),
+  PROJECT_PANE_LANGUAGE(),
+  PROJECT_PANE_DEVKIT(),
+  PROJECT_PANE_SOLUTION(),
+  PROJECT_PANE_PROJECT(),
+  PROJECT_PANE_GENERATOR(),
+  PROJECT_PANE_TRANSIENT_MODULES(),
+  PROJECT_PANE_PACKAGE(),
+  PROJECT_PANE_NAMESPACE(),
+  PROJECT_PANE_RUNTIME_FOLDER(),
+  PROJECT_PANE_ACCESSORIES(),
+  PROJECT_PANE_FILE(),
+  PROJECT_PANE_FOLDER(),
+  PROJECT_PANE(),
+  USAGES_VIEW(),
 
-  MODULE_DEPENDENCIES("MPS_Module_Dependencies");
-
-  private String myId = "";
-
-  private ActionPlace(String id) {
-    myId = id;
-  }
+  MODULE_DEPENDENCIES();
 }

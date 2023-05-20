@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@ import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.project.Project;
-import jetbrains.mps.baseLanguage.util.CodeStyleSettings;
-import jetbrains.mps.baseLanguage.util.CodeStyleSettingsRegistry;
+import jetbrains.mps.ide.code.CodeStyleSettings;
+import jetbrains.mps.ide.code.CodeStyleSettingsRegistry;
 import jetbrains.mps.ide.project.ProjectHelper;
 import org.jetbrains.annotations.NotNull;
 
@@ -43,7 +43,7 @@ public class CodeStyleSettingsComponent implements PersistentStateComponent<Code
   }
 
   @Override
-  public void loadState(CodeStyleSettings state) {
+  public void loadState(@NotNull CodeStyleSettings state) {
     myState = state;
   }
 

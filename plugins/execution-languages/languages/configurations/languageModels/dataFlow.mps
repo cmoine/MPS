@@ -2,8 +2,7 @@
 <model ref="r:a2b2ec6f-979b-40b3-95b7-73340d2d1923(jetbrains.mps.execution.configurations.dataFlow)">
   <persistence version="9" />
   <languages>
-    <use id="7fa12e9c-b949-4976-b4fa-19accbc320b4" name="jetbrains.mps.lang.dataFlow" version="0" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="00000000-0000-4000-0000-443879f56b80(jetbrains.mps.devkit.aspect.dataflow)" />
   </languages>
   <imports>
     <import index="uhxm" ref="r:f3383ae6-205a-4e7c-8dd9-c29966e29e49(jetbrains.mps.execution.configurations.structure)" />
@@ -57,7 +56,7 @@
           <node concept="2OqwBi" id="O$iR4JBkju" role="3Ah4Yx">
             <node concept="3__QtB" id="O$iR4JBkjv" role="2Oq$k0" />
             <node concept="3TrEf2" id="O$iR4JBkjw" role="2OqNvi">
-              <ref role="3Tt5mk" to="uhxm:O$iR4JBkji" />
+              <ref role="3Tt5mk" to="uhxm:O$iR4JBkji" resolve="process" />
             </node>
           </node>
         </node>
@@ -65,7 +64,7 @@
           <node concept="2OqwBi" id="1ovLDatOft9" role="3Ah4Yx">
             <node concept="3__QtB" id="1ovLDatOft8" role="2Oq$k0" />
             <node concept="3TrEf2" id="1ovLDatOftd" role="2OqNvi">
-              <ref role="3Tt5mk" to="uhxm:1ovLDatNZew" />
+              <ref role="3Tt5mk" to="uhxm:1ovLDatNZew" resolve="tool" />
             </node>
           </node>
         </node>
@@ -82,7 +81,7 @@
           <node concept="2OqwBi" id="3buonKH8MlS" role="3_H1SZ">
             <node concept="3__QtB" id="3buonKH8MlR" role="2Oq$k0" />
             <node concept="3TrEf2" id="3buonKH8MlW" role="2OqNvi">
-              <ref role="3Tt5mk" to="uhxm:3aewtBM3d7v" />
+              <ref role="3Tt5mk" to="uhxm:3aewtBM3d7v" resolve="configuration" />
             </node>
           </node>
         </node>
@@ -90,7 +89,7 @@
           <node concept="2OqwBi" id="3buonKH8MlG" role="3Ah4Yx">
             <node concept="3__QtB" id="3buonKH8MlF" role="2Oq$k0" />
             <node concept="3TrEf2" id="3buonKH8MlK" role="2OqNvi">
-              <ref role="3Tt5mk" to="uhxm:toP3SpHfQQ" />
+              <ref role="3Tt5mk" to="uhxm:toP3SpHfQQ" resolve="configurationName" />
             </node>
           </node>
         </node>

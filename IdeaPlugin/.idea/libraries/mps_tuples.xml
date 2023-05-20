@@ -4,6 +4,8 @@
       <root url="jar://$PROJECT_DIR$/mps-core/lib/mps-tuples.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../languages/baseLanguage/tuples/runtime/source_gen" />
+    </SOURCES>
   </library>
 </component>

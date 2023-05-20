@@ -2,8 +2,9 @@
 <model ref="r:c5491b56-9eb5-4130-90fd-7da3cef76a4e(jetbrains.mps.samples.languagePatterns.Basic.intentions)">
   <persistence version="9" />
   <languages>
-    <use id="d7a92d38-f7db-40d0-8431-763b0c3c9f20" name="jetbrains.mps.lang.intentions" version="0" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <use id="d7a92d38-f7db-40d0-8431-763b0c3c9f20" name="jetbrains.mps.lang.intentions" version="1" />
+    <use id="13744753-c81f-424a-9c1b-cf8943bf4e86" name="jetbrains.mps.lang.sharedConcepts" version="0" />
+    <devkit ref="2677cb18-f558-4e33-bc38-a5139cee06dc(jetbrains.mps.devkit.language-design)" />
   </languages>
   <imports>
     <import index="cj4x" ref="1ed103c3-3aa6-49b7-9c21-6765ee11f224/java:jetbrains.mps.openapi.editor(MPS.Editor/)" />
@@ -148,7 +149,7 @@
               <node concept="2OqwBi" id="603vF1qrjiM" role="10QFUP">
                 <node concept="1XNTG" id="603vF1qrjiN" role="2Oq$k0" />
                 <node concept="liA8E" id="603vF1qrjiO" role="2OqNvi">
-                  <ref role="37wK5l" to="cj4x:~EditorContext.getSelectedCell():jetbrains.mps.openapi.editor.cells.EditorCell" resolve="getSelectedCell" />
+                  <ref role="37wK5l" to="cj4x:~EditorContext.getSelectedCell()" resolve="getSelectedCell" />
                 </node>
               </node>
             </node>
@@ -163,7 +164,7 @@
                 <ref role="3cqZAo" node="603vF1qrjiL" resolve="selectedCell" />
               </node>
               <node concept="liA8E" id="603vF1qrQBF" role="2OqNvi">
-                <ref role="37wK5l" to="g51k:~EditorCell_Label.getText():java.lang.String" resolve="getText" />
+                <ref role="37wK5l" to="g51k:~EditorCell_Label.getText()" resolve="getText" />
               </node>
             </node>
           </node>
@@ -198,7 +199,7 @@
                   <ref role="3cqZAo" node="603vF1qrTi3" resolve="concert" />
                 </node>
                 <node concept="3Tsc0h" id="603vF1qrZ7T" role="2OqNvi">
-                  <ref role="3TtcxE" to="vseb:3j8xjFBylMb" />
+                  <ref role="3TtcxE" to="vseb:3j8xjFBylMb" resolve="performers" />
                 </node>
               </node>
               <node concept="2DeJg1" id="603vF1qrZ7U" role="2OqNvi" />
@@ -244,7 +245,7 @@
                 <ref role="3cqZAo" node="603vF1qs0V3" resolve="performance" />
               </node>
               <node concept="3TrEf2" id="603vF1qs1hi" role="2OqNvi">
-                <ref role="3Tt5mk" to="vseb:3j8xjFBylNy" />
+                <ref role="3Tt5mk" to="vseb:3j8xjFBylNy" resolve="singer" />
               </node>
             </node>
           </node>
@@ -271,7 +272,7 @@
               <node concept="2OqwBi" id="603vF1qrRmk" role="2ZW6bz">
                 <node concept="1XNTG" id="603vF1qrRml" role="2Oq$k0" />
                 <node concept="liA8E" id="603vF1qrRmm" role="2OqNvi">
-                  <ref role="37wK5l" to="cj4x:~EditorContext.getSelectedCell():jetbrains.mps.openapi.editor.cells.EditorCell" resolve="getSelectedCell" />
+                  <ref role="37wK5l" to="cj4x:~EditorContext.getSelectedCell()" resolve="getSelectedCell" />
                 </node>
               </node>
             </node>
@@ -285,13 +286,13 @@
                     <node concept="2OqwBi" id="603vF1qs2rn" role="10QFUP">
                       <node concept="1XNTG" id="603vF1qs2ro" role="2Oq$k0" />
                       <node concept="liA8E" id="603vF1qs2rp" role="2OqNvi">
-                        <ref role="37wK5l" to="cj4x:~EditorContext.getSelectedCell():jetbrains.mps.openapi.editor.cells.EditorCell" resolve="getSelectedCell" />
+                        <ref role="37wK5l" to="cj4x:~EditorContext.getSelectedCell()" resolve="getSelectedCell" />
                       </node>
                     </node>
                   </node>
                 </node>
                 <node concept="liA8E" id="603vF1qs3sT" role="2OqNvi">
-                  <ref role="37wK5l" to="g51k:~EditorCell_Label.getText():java.lang.String" resolve="getText" />
+                  <ref role="37wK5l" to="g51k:~EditorCell_Label.getText()" resolve="getText" />
                 </node>
               </node>
               <node concept="17RvpY" id="603vF1qs4gx" role="2OqNvi" />

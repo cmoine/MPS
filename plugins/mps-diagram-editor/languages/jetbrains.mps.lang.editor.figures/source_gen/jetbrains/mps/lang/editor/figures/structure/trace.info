@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <root>
+    <file name="ConceptPresentationAspectImpl.java">
+      <unit at="11,0,91,0" name="jetbrains.mps.lang.editor.figures.structure.ConceptPresentationAspectImpl" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <unit at="10,0,44,0" name="jetbrains.mps.lang.editor.figures.structure.LanguageConceptSwitch" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <unit at="14,0,156,0" name="jetbrains.mps.lang.editor.figures.structure.StructureAspectDescriptor" />
+    </file>
+  </root>
+  <root nodeRef="r:64327a98-9d9a-43f9-aa56-fe3b1ee87c60(jetbrains.mps.lang.editor.figures.structure)/2084788800270473556">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="2084788800270473556" at="19,0,20,0" concept="1" trace="props_FigureParameterAttributeMethod" />
+      <node id="2084788800270473556" at="74,59,75,76" concept="3" />
+      <node id="2084788800270473556" at="75,76,76,64" concept="0" />
+      <node id="2084788800270473556" at="76,64,77,62" concept="0" />
+      <node id="2084788800270473556" at="78,9,79,52" concept="4" />
+      <node id="2084788800270473556" at="73,64,78,9" concept="2" />
+      <scope id="2084788800270473556" at="74,59,77,62">
+        <var name="cpb" id="2084788800270473556" />
+      </scope>
+      <scope id="2084788800270473556" at="73,64,79,52" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="2084788800270473556" at="19,0,20,0" concept="6" trace="FigureParameterAttributeMethod" />
+      <node id="2084788800270473556" at="30,68,31,69" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="2084788800270473556" at="22,0,23,0" concept="1" trace="myConceptFigureParameterAttributeMethod" />
+      <node id="2084788800270473556" at="59,64,60,55" concept="4" />
+      <node id="2084788800270473556" at="137,88,138,198" concept="3" />
+      <node id="2084788800270473556" at="138,198,139,34" concept="0" />
+      <node id="2084788800270473556" at="139,34,140,84" concept="5" />
+      <node id="2084788800270473556" at="140,84,141,76" concept="0" />
+      <node id="2084788800270473556" at="141,76,142,120" concept="0" />
+      <node id="2084788800270473556" at="142,120,143,17" concept="0" />
+      <node id="2084788800270473556" at="143,17,144,22" concept="4" />
+      <node id="2084788800270473556" at="137,0,146,0" concept="7" trace="createDescriptorForFigureParameterAttributeMethod#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="2084788800270473556" at="59,64,60,55" />
+      <scope id="2084788800270473556" at="137,88,144,22">
+        <var name="b" id="2084788800270473556" />
+      </scope>
+      <scope id="2084788800270473556" at="137,0,146,0" />
+    </file>
+  </root>
+  <root nodeRef="r:64327a98-9d9a-43f9-aa56-fe3b1ee87c60(jetbrains.mps.lang.editor.figures.structure)/2084788800270473590">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="2084788800270473590" at="18,0,19,0" concept="1" trace="props_FigureParameterAttributeField" />
+      <node id="2084788800270473590" at="67,58,68,76" concept="3" />
+      <node id="2084788800270473590" at="68,76,69,63" concept="0" />
+      <node id="2084788800270473590" at="69,63,70,61" concept="0" />
+      <node id="2084788800270473590" at="71,9,72,51" concept="4" />
+      <node id="2084788800270473590" at="66,63,71,9" concept="2" />
+      <scope id="2084788800270473590" at="67,58,70,61">
+        <var name="cpb" id="2084788800270473590" />
+      </scope>
+      <scope id="2084788800270473590" at="66,63,72,51" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="2084788800270473590" at="18,0,19,0" concept="6" trace="FigureParameterAttributeField" />
+      <node id="2084788800270473590" at="29,63,30,68" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="2084788800270473590" at="21,0,22,0" concept="1" trace="myConceptFigureParameterAttributeField" />
+      <node id="2084788800270473590" at="57,63,58,54" concept="4" />
+      <node id="2084788800270473590" at="128,87,129,197" concept="3" />
+      <node id="2084788800270473590" at="129,197,130,34" concept="0" />
+      <node id="2084788800270473590" at="130,34,131,84" concept="5" />
+      <node id="2084788800270473590" at="131,84,132,76" concept="0" />
+      <node id="2084788800270473590" at="132,76,133,120" concept="0" />
+      <node id="2084788800270473590" at="133,120,134,17" concept="0" />
+      <node id="2084788800270473590" at="134,17,135,22" concept="4" />
+      <node id="2084788800270473590" at="128,0,137,0" concept="7" trace="createDescriptorForFigureParameterAttributeField#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="2084788800270473590" at="57,63,58,54" />
+      <scope id="2084788800270473590" at="128,87,135,22">
+        <var name="b" id="2084788800270473590" />
+      </scope>
+      <scope id="2084788800270473590" at="128,0,137,0" />
+    </file>
+  </root>
+  <root nodeRef="r:64327a98-9d9a-43f9-aa56-fe3b1ee87c60(jetbrains.mps.lang.editor.figures.structure)/2178507174411801538">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="2178507174411801538" at="12,0,13,0" concept="1" trace="props_ExternalViewFigure" />
+      <node id="2178507174411801538" at="28,47,29,76" concept="3" />
+      <node id="2178507174411801538" at="29,76,30,35" concept="0" />
+      <node id="2178507174411801538" at="30,35,31,50" concept="0" />
+      <node id="2178507174411801538" at="32,9,33,40" concept="4" />
+      <node id="2178507174411801538" at="27,52,32,9" concept="2" />
+      <scope id="2178507174411801538" at="28,47,31,50">
+        <var name="cpb" id="2178507174411801538" />
+      </scope>
+      <scope id="2178507174411801538" at="27,52,33,40" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="2178507174411801538" at="12,0,13,0" concept="6" trace="ExternalViewFigure" />
+      <node id="2178507174411801538" at="23,116,24,57" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="2178507174411801538" at="15,0,16,0" concept="1" trace="myConceptExternalViewFigure" />
+      <node id="2178507174411801538" at="45,52,46,43" concept="4" />
+      <node id="2178507174411801538" at="73,76,74,186" concept="3" />
+      <node id="2178507174411801538" at="74,186,75,33" concept="0" />
+      <node id="2178507174411801538" at="75,33,76,71" concept="0" />
+      <node id="2178507174411801538" at="76,71,77,76" concept="0" />
+      <node id="2178507174411801538" at="77,76,78,120" concept="0" />
+      <node id="2178507174411801538" at="78,120,79,17" concept="0" />
+      <node id="2178507174411801591" at="79,17,80,168" concept="0" />
+      <node id="2178507174411801664" at="80,168,81,198" concept="0" />
+      <node id="2178507174411801538" at="81,198,82,22" concept="4" />
+      <node id="2178507174411801538" at="73,0,84,0" concept="7" trace="createDescriptorForExternalViewFigure#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="2178507174411801538" at="45,52,46,43" />
+      <scope id="2178507174411801538" at="73,76,82,22">
+        <var name="b" id="2178507174411801538" />
+      </scope>
+      <scope id="2178507174411801538" at="73,0,84,0" />
+    </file>
+  </root>
+  <root nodeRef="r:64327a98-9d9a-43f9-aa56-fe3b1ee87c60(jetbrains.mps.lang.editor.figures.structure)/2178507174411801606">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="2178507174411801606" at="13,0,14,0" concept="1" trace="props_ExternalViewFigureParameter" />
+      <node id="2178507174411801606" at="35,56,36,76" concept="3" />
+      <node id="2178507174411801606" at="36,76,37,35" concept="0" />
+      <node id="2178507174411801606" at="37,35,38,59" concept="0" />
+      <node id="2178507174411801606" at="39,9,40,49" concept="4" />
+      <node id="2178507174411801606" at="34,61,39,9" concept="2" />
+      <scope id="2178507174411801606" at="35,56,38,59">
+        <var name="cpb" id="2178507174411801606" />
+      </scope>
+      <scope id="2178507174411801606" at="34,61,40,49" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="2178507174411801606" at="13,0,14,0" concept="6" trace="ExternalViewFigureParameter" />
+      <node id="2178507174411801606" at="24,57,25,66" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="2178507174411801606" at="16,0,17,0" concept="1" trace="myConceptExternalViewFigureParameter" />
+      <node id="2178507174411801606" at="47,61,48,52" concept="4" />
+      <node id="2178507174411801606" at="84,85,85,195" concept="3" />
+      <node id="2178507174411801606" at="85,195,86,34" concept="0" />
+      <node id="2178507174411801606" at="86,34,87,71" concept="0" />
+      <node id="2178507174411801606" at="88,75,89,120" concept="0" />
+      <node id="2178507174411801606" at="89,120,90,17" concept="0" />
+      <node id="2178507174411801649" at="90,17,91,174" concept="0" />
+      <node id="2178507174411801606" at="91,174,92,22" concept="4" />
+      <node id="2178507174411801606" at="84,0,94,0" concept="7" trace="createDescriptorForExternalViewFigureParameter#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="2178507174411801606" at="47,61,48,52" />
+      <scope id="2178507174411801606" at="84,85,92,22">
+        <var name="b" id="2178507174411801606" />
+      </scope>
+      <scope id="2178507174411801606" at="84,0,94,0" />
+    </file>
+  </root>
+  <root nodeRef="r:64327a98-9d9a-43f9-aa56-fe3b1ee87c60(jetbrains.mps.lang.editor.figures.structure)/342110547581235541">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="342110547581235541" at="16,0,17,0" concept="1" trace="props_FigureParameter" />
+      <node id="342110547581235541" at="55,44,56,76" concept="3" />
+      <node id="342110547581235541" at="56,76,57,47" concept="0" />
+      <node id="342110547581235541" at="58,9,59,37" concept="4" />
+      <node id="342110547581235541" at="54,49,58,9" concept="2" />
+      <scope id="342110547581235541" at="55,44,57,47">
+        <var name="cpb" id="342110547581235541" />
+      </scope>
+      <scope id="342110547581235541" at="54,49,59,37" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="342110547581235541" at="16,0,17,0" concept="6" trace="FigureParameter" />
+      <node id="342110547581235541" at="27,54,28,53" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="342110547581235541" at="19,0,20,0" concept="1" trace="myConceptFigureParameter" />
+      <node id="342110547581235541" at="53,49,54,40" concept="4" />
+      <node id="342110547581235541" at="87,71,88,75" concept="0" />
+      <node id="342110547581235541" at="111,73,112,182" concept="3" />
+      <node id="342110547581235541" at="112,182,113,19" concept="0" />
+      <node id="342110547581235541" at="113,19,114,119" concept="0" />
+      <node id="342110547581235541" at="114,119,115,17" concept="0" />
+      <node id="342110547581235541" at="115,17,116,22" concept="4" />
+      <node id="342110547581235541" at="122,76,123,75" concept="0" />
+      <node id="342110547581235541" at="111,0,118,0" concept="7" trace="createDescriptorForFigureParameter#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="342110547581235541" at="53,49,54,40" />
+      <scope id="342110547581235541" at="111,73,116,22">
+        <var name="b" id="342110547581235541" />
+      </scope>
+      <scope id="342110547581235541" at="111,0,118,0" />
+    </file>
+  </root>
+  <root nodeRef="r:64327a98-9d9a-43f9-aa56-fe3b1ee87c60(jetbrains.mps.lang.editor.figures.structure)/5422656561926747556">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="5422656561926747556" at="15,0,16,0" concept="1" trace="props_FigureAttribute" />
+      <node id="5422656561926747556" at="48,44,49,76" concept="3" />
+      <node id="5422656561926747556" at="49,76,50,41" concept="0" />
+      <node id="5422656561926747556" at="50,41,51,47" concept="0" />
+      <node id="5422656561926747556" at="52,9,53,37" concept="4" />
+      <node id="5422656561926747556" at="47,49,52,9" concept="2" />
+      <scope id="5422656561926747556" at="48,44,51,47">
+        <var name="cpb" id="5422656561926747556" />
+      </scope>
+      <scope id="5422656561926747556" at="47,49,53,37" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="5422656561926747556" at="15,0,16,0" concept="6" trace="FigureAttribute" />
+      <node id="5422656561926747556" at="26,44,27,54" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="5422656561926747556" at="18,0,19,0" concept="1" trace="myConceptFigureAttribute" />
+      <node id="5422656561926747556" at="51,49,52,40" concept="4" />
+      <node id="5422656561926747556" at="101,73,102,183" concept="3" />
+      <node id="5422656561926747556" at="102,183,103,34" concept="0" />
+      <node id="5422656561926747556" at="103,34,104,63" concept="5" />
+      <node id="5422656561926747556" at="104,63,105,76" concept="0" />
+      <node id="5422656561926747556" at="105,76,106,120" concept="0" />
+      <node id="5422656561926747556" at="106,120,107,17" concept="0" />
+      <node id="5422656561926747556" at="107,17,108,23" concept="0" />
+      <node id="5422656561926747556" at="108,23,109,22" concept="4" />
+      <node id="5422656561926747556" at="101,0,111,0" concept="7" trace="createDescriptorForFigureAttribute#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="5422656561926747556" at="51,49,52,40" />
+      <scope id="5422656561926747556" at="101,73,109,22">
+        <var name="b" id="5422656561926747556" />
+      </scope>
+      <scope id="5422656561926747556" at="101,0,111,0" />
+    </file>
+  </root>
+  <root nodeRef="r:64327a98-9d9a-43f9-aa56-fe3b1ee87c60(jetbrains.mps.lang.editor.figures.structure)/5422656561929884641">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="5422656561929884641" at="17,0,18,0" concept="1" trace="props_FigureParameterAttribute" />
+      <node id="5422656561929884641" at="61,53,62,76" concept="3" />
+      <node id="5422656561929884641" at="62,76,63,56" concept="0" />
+      <node id="5422656561929884641" at="64,9,65,46" concept="4" />
+      <node id="5422656561929884641" at="60,58,64,9" concept="2" />
+      <scope id="5422656561929884641" at="61,53,63,56">
+        <var name="cpb" id="5422656561929884641" />
+      </scope>
+      <scope id="5422656561929884641" at="60,58,65,46" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="5422656561929884641" at="17,0,18,0" concept="6" trace="FigureParameterAttribute" />
+      <node id="5422656561929884641" at="28,53,29,63" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="5422656561929884641" at="20,0,21,0" concept="1" trace="myConceptFigureParameterAttribute" />
+      <node id="5422656561929884641" at="55,58,56,49" concept="4" />
+      <node id="5422656561929884641" at="118,82,119,192" concept="3" />
+      <node id="5422656561929884641" at="119,192,120,33" concept="0" />
+      <node id="5422656561929884641" at="120,33,121,63" concept="5" />
+      <node id="5422656561929884641" at="121,63,122,76" concept="0" />
+      <node id="5422656561929884641" at="123,75,124,120" concept="0" />
+      <node id="5422656561929884641" at="124,120,125,17" concept="0" />
+      <node id="5422656561929884641" at="125,17,126,22" concept="4" />
+      <node id="5422656561929884641" at="118,0,128,0" concept="7" trace="createDescriptorForFigureParameterAttribute#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="5422656561929884641" at="55,58,56,49" />
+      <scope id="5422656561929884641" at="118,82,126,22">
+        <var name="b" id="5422656561929884641" />
+      </scope>
+      <scope id="5422656561929884641" at="118,0,128,0" />
+    </file>
+  </root>
+  <root nodeRef="r:64327a98-9d9a-43f9-aa56-fe3b1ee87c60(jetbrains.mps.lang.editor.figures.structure)/7319867929567295724">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="7319867929567295724" at="20,0,21,0" concept="1" trace="props_FigureParameterAttributeViewProperty" />
+      <node id="7319867929567295724" at="81,65,82,76" concept="3" />
+      <node id="7319867929567295724" at="82,76,83,70" concept="0" />
+      <node id="7319867929567295724" at="83,70,84,68" concept="0" />
+      <node id="7319867929567295724" at="85,9,86,58" concept="4" />
+      <node id="7319867929567295724" at="80,70,85,9" concept="2" />
+      <scope id="7319867929567295724" at="81,65,84,68">
+        <var name="cpb" id="7319867929567295724" />
+      </scope>
+      <scope id="7319867929567295724" at="80,70,86,58" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="7319867929567295724" at="20,0,21,0" concept="6" trace="FigureParameterAttributeViewProperty" />
+      <node id="7319867929567295724" at="31,69,32,75" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="7319867929567295724" at="23,0,24,0" concept="1" trace="myConceptFigureParameterAttributeViewProperty" />
+      <node id="7319867929567295724" at="61,70,62,61" concept="4" />
+      <node id="7319867929567295724" at="146,94,147,204" concept="3" />
+      <node id="7319867929567295724" at="147,204,148,34" concept="0" />
+      <node id="7319867929567295724" at="148,34,149,84" concept="5" />
+      <node id="7319867929567295724" at="149,84,150,76" concept="0" />
+      <node id="7319867929567295724" at="150,76,151,120" concept="0" />
+      <node id="7319867929567295724" at="151,120,152,17" concept="0" />
+      <node id="7319867929567295724" at="152,17,153,22" concept="4" />
+      <node id="7319867929567295724" at="146,0,155,0" concept="7" trace="createDescriptorForFigureParameterAttributeViewProperty#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="7319867929567295724" at="61,70,62,61" />
+      <scope id="7319867929567295724" at="146,94,153,22">
+        <var name="b" id="7319867929567295724" />
+      </scope>
+      <scope id="7319867929567295724" at="146,0,155,0" />
+    </file>
+  </root>
+  <root nodeRef="r:64327a98-9d9a-43f9-aa56-fe3b1ee87c60(jetbrains.mps.lang.editor.figures.structure)/785823818609017605">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="785823818609017605" at="14,0,15,0" concept="1" trace="props_Figure" />
+      <node id="785823818609017605" at="42,35,43,76" concept="3" />
+      <node id="785823818609017605" at="43,76,44,38" concept="0" />
+      <node id="785823818609017605" at="45,9,46,28" concept="4" />
+      <node id="785823818609017605" at="41,40,45,9" concept="2" />
+      <scope id="785823818609017605" at="42,35,44,38">
+        <var name="cpb" id="785823818609017605" />
+      </scope>
+      <scope id="785823818609017605" at="41,40,46,28" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="785823818609017605" at="14,0,15,0" concept="6" trace="Figure" />
+      <node id="785823818609017605" at="25,66,26,44" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="785823818609017605" at="17,0,18,0" concept="1" trace="myConceptFigure" />
+      <node id="785823818609017605" at="49,40,50,31" concept="4" />
+      <node id="785823818609017605" at="94,64,95,173" concept="3" />
+      <node id="785823818609017605" at="95,173,96,33" concept="0" />
+      <node id="785823818609017605" at="96,33,97,119" concept="0" />
+      <node id="785823818609017605" at="97,119,98,17" concept="0" />
+      <node id="785823818609017605" at="98,17,99,22" concept="4" />
+      <node id="785823818609017605" at="94,0,101,0" concept="7" trace="createDescriptorForFigure#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="785823818609017605" at="49,40,50,31" />
+      <scope id="785823818609017605" at="94,64,99,22">
+        <var name="b" id="785823818609017605" />
+      </scope>
+      <scope id="785823818609017605" at="94,0,101,0" />
+    </file>
+  </root>
+</debug-info>
+

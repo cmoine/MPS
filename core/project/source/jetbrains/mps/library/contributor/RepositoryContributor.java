@@ -20,6 +20,8 @@ import java.util.Set;
 /**
  * contributes modules to a repository.
  * e.g there are project or library modules in the repository
+ * fixme remove or finish
+ * @author apyshkin
  */
 public interface RepositoryContributor<P extends RepositoryPathDescriptor> {
   Set<P> getPaths();

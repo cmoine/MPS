@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,26 +15,37 @@
  */
 package jetbrains.mps.ide.ui.smodel;
 
-import jetbrains.mps.ide.projectPane.Icons;
+import com.intellij.icons.AllIcons.Nodes;
+import com.intellij.ui.LayeredIcon;
 import jetbrains.mps.ide.ui.tree.MPSTreeNodeEx;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.mps.openapi.model.SNodeReference;
 import org.jetbrains.mps.openapi.model.SReference;
 
 public class ReferencesTreeNode extends MPSTreeNodeEx {
-  private SNode myNode;
+  private final SNode myNode;
+  private final SNodeReference myNodePointer;
 
-  private boolean myInitialized;
+  protected boolean myInitialized;
 
   public ReferencesTreeNode(SNode node) {
     myNode = node;
+    myNodePointer = node.getReference();
 
-    setIcon(Icons.REFERENCE_ICON);
+    // TODO: add special icon for node references
+    setIcon(LayeredIcon.create(Nodes.Folder, Nodes.Symlink));
     setNodeIdentifier("references");
   }
 
   @Override
   public SNode getSNode() {
     return myNode;
+  }
+
+  @Override
+  public SNodeReference getNodePointer() {
+    return myNodePointer;
   }
 
   @Override

@@ -4,165 +4,406 @@ package jetbrains.mps.lang.refactoring.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
+import jetbrains.mps.lang.refactoring.plugin.URLFunction_HelpCenterDocUrl;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_AbstractMoveExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AbstractMoveNodeExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AbstractMoveNodesExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AffectedNodesClause = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptFunctionParameter_Model = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptFunctionParameter_Module = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptFunctionParameter_SModel = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptFunctionParameter_SNode = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ContextMemberOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ContextType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CreateRefactoringContext = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DoRefactorClause = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DoWhenDoneClause = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ExecuteRefactoringStatement = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GetModelsToUpdateClause = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InitClause = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IsApplicableToModelClause = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IsApplicableToModuleClause = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IsApplicableToNodeClause = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IsRefactoringApplicable = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MainProjectOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ModelDescriptorOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ModelTarget = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ModelsToGenerateByDefault = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ModelsToGenerateClause = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ModuleOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ModuleTarget = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MoveNodeToModelExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MoveNodeToNodeExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MoveNodesToModelExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MoveNodesToNodeExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_NodeOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_NodeTarget = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_NodesOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_OperationContextOperation = new ConceptPresentationBuilder().deprecated().create();
-  private final ConceptPresentation props_ProjectOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Refactoring = new ConceptPresentationBuilder().icon(IconContainer.RESOURCE_a0a0kb).create();
-  private final ConceptPresentation props_RefactoringAction = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RefactoringArgument = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RefactoringArgumentReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RefactoringContext_ConceptFunctionParameter = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RefactoringField = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RefactoringFieldReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RefactoringParameter = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RefactoringParameterReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RefactoringTarget = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RepositoryOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ScopeOperation = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_UpdateModelProcedure = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_AbstractMoveExpression;
+  private ConceptPresentation props_AbstractMoveNodeExpression;
+  private ConceptPresentation props_AbstractMoveNodesExpression;
+  private ConceptPresentation props_AffectedNodesClause;
+  private ConceptPresentation props_ConceptFunctionParameter_Model;
+  private ConceptPresentation props_ConceptFunctionParameter_Module;
+  private ConceptPresentation props_ConceptFunctionParameter_SModel;
+  private ConceptPresentation props_ConceptFunctionParameter_SNode;
+  private ConceptPresentation props_ContextMemberOperation;
+  private ConceptPresentation props_ContextType;
+  private ConceptPresentation props_CreateRefactoringContext;
+  private ConceptPresentation props_DoRefactorClause;
+  private ConceptPresentation props_DoWhenDoneClause;
+  private ConceptPresentation props_ExecuteRefactoringStatement;
+  private ConceptPresentation props_GetModelsToUpdateClause;
+  private ConceptPresentation props_InitClause;
+  private ConceptPresentation props_IsApplicableToModelClause;
+  private ConceptPresentation props_IsApplicableToModuleClause;
+  private ConceptPresentation props_IsApplicableToNodeClause;
+  private ConceptPresentation props_IsRefactoringApplicable;
+  private ConceptPresentation props_MainProjectOperation;
+  private ConceptPresentation props_ModelDescriptorOperation;
+  private ConceptPresentation props_ModelTarget;
+  private ConceptPresentation props_ModelsToGenerateByDefault;
+  private ConceptPresentation props_ModelsToGenerateClause;
+  private ConceptPresentation props_ModuleOperation;
+  private ConceptPresentation props_ModuleTarget;
+  private ConceptPresentation props_MoveNodeToModelExpression;
+  private ConceptPresentation props_MoveNodeToNodeExpression;
+  private ConceptPresentation props_MoveNodesToModelExpression;
+  private ConceptPresentation props_MoveNodesToNodeExpression;
+  private ConceptPresentation props_NodeOperation;
+  private ConceptPresentation props_NodeTarget;
+  private ConceptPresentation props_NodesOperation;
+  private ConceptPresentation props_ProjectOperation;
+  private ConceptPresentation props_Refactoring;
+  private ConceptPresentation props_RefactoringAction;
+  private ConceptPresentation props_RefactoringArgument;
+  private ConceptPresentation props_RefactoringArgumentReference;
+  private ConceptPresentation props_RefactoringContext_ConceptFunctionParameter;
+  private ConceptPresentation props_RefactoringField;
+  private ConceptPresentation props_RefactoringFieldReference;
+  private ConceptPresentation props_RefactoringParameter;
+  private ConceptPresentation props_RefactoringParameterReference;
+  private ConceptPresentation props_RefactoringTarget;
+  private ConceptPresentation props_RepositoryOperation;
+  private ConceptPresentation props_ScopeOperation;
+  private ConceptPresentation props_UpdateModelProcedure;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.AbstractMoveExpression:
+        if (props_AbstractMoveExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_AbstractMoveExpression = cpb.create();
+        }
         return props_AbstractMoveExpression;
-      case 1:
+      case LanguageConceptSwitch.AbstractMoveNodeExpression:
+        if (props_AbstractMoveNodeExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("AbstractMoveNodeExpression");
+          props_AbstractMoveNodeExpression = cpb.create();
+        }
         return props_AbstractMoveNodeExpression;
-      case 2:
+      case LanguageConceptSwitch.AbstractMoveNodesExpression:
+        if (props_AbstractMoveNodesExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_AbstractMoveNodesExpression = cpb.create();
+        }
         return props_AbstractMoveNodesExpression;
-      case 3:
+      case LanguageConceptSwitch.AffectedNodesClause:
+        if (props_AffectedNodesClause == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("affected nodes");
+          props_AffectedNodesClause = cpb.create();
+        }
         return props_AffectedNodesClause;
-      case 4:
+      case LanguageConceptSwitch.ConceptFunctionParameter_Model:
+        if (props_ConceptFunctionParameter_Model == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("model");
+          props_ConceptFunctionParameter_Model = cpb.create();
+        }
         return props_ConceptFunctionParameter_Model;
-      case 5:
+      case LanguageConceptSwitch.ConceptFunctionParameter_Module:
+        if (props_ConceptFunctionParameter_Module == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("module");
+          props_ConceptFunctionParameter_Module = cpb.create();
+        }
         return props_ConceptFunctionParameter_Module;
-      case 6:
+      case LanguageConceptSwitch.ConceptFunctionParameter_SModel:
+        if (props_ConceptFunctionParameter_SModel == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("model");
+          props_ConceptFunctionParameter_SModel = cpb.create();
+        }
         return props_ConceptFunctionParameter_SModel;
-      case 7:
+      case LanguageConceptSwitch.ConceptFunctionParameter_SNode:
+        if (props_ConceptFunctionParameter_SNode == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("node");
+          props_ConceptFunctionParameter_SNode = cpb.create();
+        }
         return props_ConceptFunctionParameter_SNode;
-      case 8:
+      case LanguageConceptSwitch.ContextMemberOperation:
+        if (props_ContextMemberOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_ContextMemberOperation = cpb.create();
+        }
         return props_ContextMemberOperation;
-      case 9:
+      case LanguageConceptSwitch.ContextType:
+        if (props_ContextType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("refcontext");
+          props_ContextType = cpb.create();
+        }
         return props_ContextType;
-      case 10:
+      case LanguageConceptSwitch.CreateRefactoringContext:
+        if (props_CreateRefactoringContext == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("create refcontext");
+          props_CreateRefactoringContext = cpb.create();
+        }
         return props_CreateRefactoringContext;
-      case 11:
+      case LanguageConceptSwitch.DoRefactorClause:
+        if (props_DoRefactorClause == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("refactor");
+          props_DoRefactorClause = cpb.create();
+        }
         return props_DoRefactorClause;
-      case 12:
+      case LanguageConceptSwitch.DoWhenDoneClause:
+        if (props_DoWhenDoneClause == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("doWhenDone");
+          props_DoWhenDoneClause = cpb.create();
+        }
         return props_DoWhenDoneClause;
-      case 13:
+      case LanguageConceptSwitch.ExecuteRefactoringStatement:
+        if (props_ExecuteRefactoringStatement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("execute refactoring");
+          props_ExecuteRefactoringStatement = cpb.create();
+        }
         return props_ExecuteRefactoringStatement;
-      case 14:
+      case LanguageConceptSwitch.GetModelsToUpdateClause:
+        if (props_GetModelsToUpdateClause == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("additional models to update");
+          props_GetModelsToUpdateClause = cpb.create();
+        }
         return props_GetModelsToUpdateClause;
-      case 15:
+      case LanguageConceptSwitch.InitClause:
+        if (props_InitClause == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("init");
+          props_InitClause = cpb.create();
+        }
         return props_InitClause;
-      case 16:
+      case LanguageConceptSwitch.IsApplicableToModelClause:
+        if (props_IsApplicableToModelClause == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("isApplicableToModel");
+          props_IsApplicableToModelClause = cpb.create();
+        }
         return props_IsApplicableToModelClause;
-      case 17:
+      case LanguageConceptSwitch.IsApplicableToModuleClause:
+        if (props_IsApplicableToModuleClause == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("isApplicableToModule");
+          props_IsApplicableToModuleClause = cpb.create();
+        }
         return props_IsApplicableToModuleClause;
-      case 18:
+      case LanguageConceptSwitch.IsApplicableToNodeClause:
+        if (props_IsApplicableToNodeClause == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("isApplicableToNode");
+          props_IsApplicableToNodeClause = cpb.create();
+        }
         return props_IsApplicableToNodeClause;
-      case 19:
+      case LanguageConceptSwitch.IsRefactoringApplicable:
+        if (props_IsRefactoringApplicable == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("is applicable refactoring");
+          props_IsRefactoringApplicable = cpb.create();
+        }
         return props_IsRefactoringApplicable;
-      case 20:
+      case LanguageConceptSwitch.MainProjectOperation:
+        if (props_MainProjectOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("project");
+          props_MainProjectOperation = cpb.create();
+        }
         return props_MainProjectOperation;
-      case 21:
+      case LanguageConceptSwitch.ModelDescriptorOperation:
+        if (props_ModelDescriptorOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("modelDescriptor");
+          props_ModelDescriptorOperation = cpb.create();
+        }
         return props_ModelDescriptorOperation;
-      case 22:
+      case LanguageConceptSwitch.ModelTarget:
+        if (props_ModelTarget == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("model");
+          props_ModelTarget = cpb.create();
+        }
         return props_ModelTarget;
-      case 23:
+      case LanguageConceptSwitch.ModelsToGenerateByDefault:
+        if (props_ModelsToGenerateByDefault == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.deprecated(true);
+          cpb.rawPresentation("models from usages");
+          props_ModelsToGenerateByDefault = cpb.create();
+        }
         return props_ModelsToGenerateByDefault;
-      case 24:
+      case LanguageConceptSwitch.ModelsToGenerateClause:
+        if (props_ModelsToGenerateClause == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.deprecated(true);
+          cpb.rawPresentation("models to generate");
+          props_ModelsToGenerateClause = cpb.create();
+        }
         return props_ModelsToGenerateClause;
-      case 25:
+      case LanguageConceptSwitch.ModuleOperation:
+        if (props_ModuleOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("module");
+          props_ModuleOperation = cpb.create();
+        }
         return props_ModuleOperation;
-      case 26:
+      case LanguageConceptSwitch.ModuleTarget:
+        if (props_ModuleTarget == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("module");
+          props_ModuleTarget = cpb.create();
+        }
         return props_ModuleTarget;
-      case 27:
+      case LanguageConceptSwitch.MoveNodeToModelExpression:
+        if (props_MoveNodeToModelExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("move node to model");
+          cpb.rawPresentation("moveNode");
+          props_MoveNodeToModelExpression = cpb.create();
+        }
         return props_MoveNodeToModelExpression;
-      case 28:
+      case LanguageConceptSwitch.MoveNodeToNodeExpression:
+        if (props_MoveNodeToNodeExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("move node to another node");
+          cpb.rawPresentation("moveNode");
+          props_MoveNodeToNodeExpression = cpb.create();
+        }
         return props_MoveNodeToNodeExpression;
-      case 29:
+      case LanguageConceptSwitch.MoveNodesToModelExpression:
+        if (props_MoveNodesToModelExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("move nodes to model");
+          cpb.rawPresentation("moveNodes");
+          props_MoveNodesToModelExpression = cpb.create();
+        }
         return props_MoveNodesToModelExpression;
-      case 30:
+      case LanguageConceptSwitch.MoveNodesToNodeExpression:
+        if (props_MoveNodesToNodeExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("move nodes to another node");
+          cpb.rawPresentation("moveNodes");
+          props_MoveNodesToNodeExpression = cpb.create();
+        }
         return props_MoveNodesToNodeExpression;
-      case 31:
+      case LanguageConceptSwitch.NodeOperation:
+        if (props_NodeOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("node");
+          props_NodeOperation = cpb.create();
+        }
         return props_NodeOperation;
-      case 32:
+      case LanguageConceptSwitch.NodeTarget:
+        if (props_NodeTarget == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("node");
+          props_NodeTarget = cpb.create();
+        }
         return props_NodeTarget;
-      case 33:
+      case LanguageConceptSwitch.NodesOperation:
+        if (props_NodesOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("nodes");
+          props_NodesOperation = cpb.create();
+        }
         return props_NodesOperation;
-      case 34:
-        return props_OperationContextOperation;
-      case 35:
+      case LanguageConceptSwitch.ProjectOperation:
+        if (props_ProjectOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("mpsProject");
+          props_ProjectOperation = cpb.create();
+        }
         return props_ProjectOperation;
-      case 36:
+      case LanguageConceptSwitch.Refactoring:
+        if (props_Refactoring == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder(0x3ecd7c84cde345deL, 0x886c135ecc69b742L, 0x5fb04b74a778e245L);
+          cpb.deprecateAggregation(0x88e6d7a0aad9adfL, "modelsToGenerateBlock");
+          cpb.presentationByName();
+          cpb.helpUrl(HELP_URL);
+          cpb.icon(IconContainer.RESOURCE_a0a4a0a53b0xb);
+          props_Refactoring = cpb.create();
+        }
         return props_Refactoring;
-      case 37:
+      case LanguageConceptSwitch.RefactoringAction:
+        if (props_RefactoringAction == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_RefactoringAction = cpb.create();
+        }
         return props_RefactoringAction;
-      case 38:
+      case LanguageConceptSwitch.RefactoringArgument:
+        if (props_RefactoringArgument == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_RefactoringArgument = cpb.create();
+        }
         return props_RefactoringArgument;
-      case 39:
+      case LanguageConceptSwitch.RefactoringArgumentReference:
+        if (props_RefactoringArgumentReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_RefactoringArgumentReference = cpb.create();
+        }
         return props_RefactoringArgumentReference;
-      case 40:
+      case LanguageConceptSwitch.RefactoringContext_ConceptFunctionParameter:
+        if (props_RefactoringContext_ConceptFunctionParameter == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("refactoringContext");
+          props_RefactoringContext_ConceptFunctionParameter = cpb.create();
+        }
         return props_RefactoringContext_ConceptFunctionParameter;
-      case 41:
+      case LanguageConceptSwitch.RefactoringField:
+        if (props_RefactoringField == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_RefactoringField = cpb.create();
+        }
         return props_RefactoringField;
-      case 42:
+      case LanguageConceptSwitch.RefactoringFieldReference:
+        if (props_RefactoringFieldReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x4c4b92003e49a704L, 0x4c4b92003e49a705L, "baseVariableDeclaration", "", "");
+          props_RefactoringFieldReference = cpb.create();
+        }
         return props_RefactoringFieldReference;
-      case 43:
+      case LanguageConceptSwitch.RefactoringParameter:
+        if (props_RefactoringParameter == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_RefactoringParameter = cpb.create();
+        }
         return props_RefactoringParameter;
-      case 44:
+      case LanguageConceptSwitch.RefactoringParameterReference:
+        if (props_RefactoringParameterReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x3ecd7c84cde345deL, 0x886c135ecc69b742L, 0x5fb04b74a77cda06L, 0x5fb04b74a77cda07L, "refactoringParameter", "", "");
+          props_RefactoringParameterReference = cpb.create();
+        }
         return props_RefactoringParameterReference;
-      case 45:
+      case LanguageConceptSwitch.RefactoringTarget:
+        if (props_RefactoringTarget == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_RefactoringTarget = cpb.create();
+        }
         return props_RefactoringTarget;
-      case 46:
+      case LanguageConceptSwitch.RepositoryOperation:
+        if (props_RepositoryOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("repository");
+          props_RepositoryOperation = cpb.create();
+        }
         return props_RepositoryOperation;
-      case 47:
+      case LanguageConceptSwitch.ScopeOperation:
+        if (props_ScopeOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("scope");
+          props_ScopeOperation = cpb.create();
+        }
         return props_ScopeOperation;
-      case 48:
+      case LanguageConceptSwitch.UpdateModelProcedure:
+        if (props_UpdateModelProcedure == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("updateModel(...)");
+          props_UpdateModelProcedure = cpb.create();
+        }
         return props_UpdateModelProcedure;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
+  private static final String HELP_URL = URLFunction_HelpCenterDocUrl.getUrl() + "mps-refactoring.html";
 }

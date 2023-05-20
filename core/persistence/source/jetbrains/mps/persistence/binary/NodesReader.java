@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ public final class NodesReader extends BareNodeReader {
   private Collection<SNodeId> myLocalRefs;
 
   public NodesReader(@NotNull SModelReference modelReference, @NotNull ModelInputStream is, ReadHelper readHelper) {
-    super(modelReference, is);
+    super(() -> modelReference, is);
     myReadHelper = readHelper;
   }
 

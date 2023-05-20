@@ -19,13 +19,13 @@ import jetbrains.mps.editor.runtime.style.Measure;
 import jetbrains.mps.editor.runtime.style.Padding;
 import jetbrains.mps.editor.runtime.style.StyleAttributes;
 import jetbrains.mps.nodeEditor.EditorSettings;
-import jetbrains.mps.nodeEditor.cells.FontRegistry;
+import jetbrains.mps.openapi.editor.EditorComponentSettings;
+import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.CellTraversalUtil;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.cells.EditorCell_Collection;
 
 import java.awt.Font;
-import java.awt.FontMetrics;
 
 public class PunctuationUtil {
 
@@ -52,12 +52,12 @@ public class PunctuationUtil {
 
   private static boolean hasRightGap(EditorCell currentCell) {
     return (!rightCellHasPunctuationLeft(currentCell) || currentCell.getStyle().get(StyleAttributes.DRAW_BORDER))
-        && !hasPunctuationRight(currentCell);
+           && !hasPunctuationRight(currentCell);
   }
 
   public static boolean hasLeftGap(EditorCell currentCell) {
     return (!leftCellHasPunctuationRight(currentCell) || currentCell.getStyle().get(StyleAttributes.DRAW_BORDER))
-        && !hasPunctuationLeft(currentCell);
+           && !hasPunctuationLeft(currentCell);
   }
 
   static boolean leftCellHasPunctuationRight(EditorCell currentCell) {
@@ -101,14 +101,14 @@ public class PunctuationUtil {
     return hasPunctuationLeft(rightCell);
   }
 
-  private static Boolean hasPunctuationRight(EditorCell cell) {
+  public static Boolean hasPunctuationRight(EditorCell cell) {
     if (cell == null) {
       return true;
     }
     return CellTraversalUtil.getLastLeaf(cell).getStyle().get(StyleAttributes.PUNCTUATION_RIGHT);
   }
 
-  static Boolean hasPunctuationLeft(EditorCell cell) {
+  public static Boolean hasPunctuationLeft(EditorCell cell) {
     if (cell == null) {
       return true;
     }
@@ -120,9 +120,11 @@ public class PunctuationUtil {
     if (padding.getType() == Measure.PIXELS) {
       return (int) padding.getValue();
     } else {
-      Font f = EditorSettings.getInstance().getDefaultEditorFont();
-      FontMetrics m = FontRegistry.getInstance().getFontMetrics(f);
-      return (int) (padding.getValue() * m.charWidth(' '));
+      EditorContext context = editorCells.getContext();
+      EditorSettings settings = EditorSettings.getInstance();
+      EditorComponentSettings editorComponentSettings = context.getEditorComponent().getEditorComponentSettings();
+      int fontSize = editorComponentSettings.getFontSizeScaled(settings.getFontSize());
+      return (int) (padding.getValue() * editorComponentSettings.getFontMetrics(settings.getFontFamily(), Font.PLAIN, fontSize).getWidth(" "));
     }
   }
 

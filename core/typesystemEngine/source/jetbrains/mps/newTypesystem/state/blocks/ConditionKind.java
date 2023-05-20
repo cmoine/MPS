@@ -46,7 +46,7 @@ public enum ConditionKind {
           return Arrays.asList(representative);
         }
         else if (LatticeUtil.isMeet(representative)) {
-          List<SNode> result = new ArrayList<SNode>();
+          List<SNode> result = new ArrayList<>();
           for (SNode arg : LatticeUtil.getMeetArguments(representative)) {
             final SNode argRpt = state.getRepresentative(arg);
             if (HUtil.isRuntimeTypeVariable(argRpt)) {
@@ -56,7 +56,7 @@ public enum ConditionKind {
           return result;
         }
         else if (LatticeUtil.isJoin(representative)) {
-          List<SNode> result = new ArrayList<SNode>();
+          List<SNode> result = new ArrayList<>();
           for (SNode arg : LatticeUtil.getJoinArguments(representative)) {
             final SNode argRpt = state.getRepresentative(arg);
             if (HUtil.isRuntimeTypeVariable(argRpt)) {
@@ -79,12 +79,12 @@ public enum ConditionKind {
     public List<SNode> getUnresolvedInputs(SNode node, State state) {
       SNode representative = state.getRepresentative(node);
       if (node == null || representative == null) {
-        return new LinkedList<SNode>();
+        return new LinkedList<>();
       }
       if (HUtil.isRuntimeTypeVariable(representative)) {
         return Arrays.asList(representative);
       }
-      List<SNode> result = new ArrayList<SNode>();
+      List<SNode> result = new ArrayList<>();
       for (SNode referent : TypesUtil.getNodeReferents(representative)) {
         if (referent != null) {
           SNode refRepresentative = state.getRepresentative(referent);

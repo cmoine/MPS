@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-bmzkoj925f07kybr69o7ahei7s210m1" />
+<product version="3" modelHash="-d1xvxp47px8vov5cyqngm4rt9k6ykni">
+  <files names="ArrayValueProxy.java:MirrorUtilImpl.java:NullValueProxy.java:ObjectValueProxy.java" />
+</product>
 

@@ -4,7 +4,7 @@ package jetbrains.mps.samples.secretCompartmentLanguage.runtime.test;
 
 import jetbrains.mps.samples.secretCompartmentLanguage.runtime.StateMachineTest;
 import jetbrains.mps.samples.secretCompartmentLanguage.runtime.StateMachineFactory;
-import junit.framework.Assert;
+import org.junit.Assert;
 
 public final class Test extends StateMachineTest {
   public Test() {

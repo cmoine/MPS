@@ -12,7 +12,7 @@ import jetbrains.mps.baseLanguage.regexp.runtime.RegexpOperations;
   /*package*/ void matchWithPredefined() {
     String s = "";
     {
-      Pattern _pattern_0 = REGEXP_90k4hu_a0a0b0b;
+      Pattern _pattern_0 = REGEXP;
       Matcher _matcher_0 = _pattern_0.matcher(s);
       if (_matcher_0.matches()) {
         System.out.println("user = " + _matcher_0.group(1));
@@ -22,8 +22,8 @@ import jetbrains.mps.baseLanguage.regexp.runtime.RegexpOperations;
   }
   /*package*/ void replaceWithPredefined() {
     String s = "";
-    s = RegexpOperations.replace(s, REGEXP_90k4hu_b0a1a2, new _Replacer_90k4hu_a0a0b0c(PredefinedRegexps.this));
+    s = RegexpOperations.replace(s, REGEXP1, new _Replacer_90k4hu_a0a0b0c(PredefinedRegexps.this));
   }
-  private static Pattern REGEXP_90k4hu_a0a0b0b = Pattern.compile("(?:(\\w+)@(\\w+))", 0);
-  private static Pattern REGEXP_90k4hu_b0a1a2 = Pattern.compile("(?:(\\w+)@(\\w+))", 0);
+  private static final Pattern REGEXP = Pattern.compile("(?:(\\w+)@(\\w+))", 0);
+  private static final Pattern REGEXP1 = Pattern.compile("(?:(\\w+)@(\\w+))", 0);
 }

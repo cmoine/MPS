@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +15,21 @@
  */
 package jetbrains.mps.typesystem.uiActions;
 
+import com.intellij.openapi.actionSystem.ActionGroup;
+import com.intellij.openapi.actionSystem.ActionManager;
+import com.intellij.openapi.actionSystem.ActionPlaces;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.DefaultActionGroup;
+import com.intellij.openapi.actionSystem.ToggleAction;
 import com.intellij.openapi.ui.LabeledComponent;
+import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.openapi.ui.Splitter;
+import com.intellij.ui.ScrollPaneFactory;
 import jetbrains.mps.errors.IErrorReporter;
+import jetbrains.mps.icons.MPSIcons.Actions;
 import jetbrains.mps.openapi.navigation.EditorNavigator;
 import jetbrains.mps.project.Project;
 import jetbrains.mps.smodel.ModelAccessHelper;
-import jetbrains.mps.util.Computable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
@@ -31,29 +39,40 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import java.awt.event.ActionEvent;
 
+// excellent naming, btw, and exemplary first commit
 public class MyBaseNodeDialog extends BaseNodeDialog {
   private final SNode myType;
   private SModel myModel;
   private final IErrorReporter myError;
   private boolean myWasRegistered = true;
   private Splitter myMainComponent;
-  private JComponent mySupertypesViewComponent;
 
   public MyBaseNodeDialog(Project mpsProject, String title, SNode type, IErrorReporter error) {
     super(mpsProject, title);
 
-    SupertypesViewTool supertypesView = mpsProject.getComponent(SupertypesViewTool.class);
+    final SupertypesTree supertypesTree = new SupertypesTree(mpsProject);
+    SimpleToolWindowPanel p = new SimpleToolWindowPanel(true, true);
+    p.setContent(ScrollPaneFactory.createScrollPane(supertypesTree, true));
+    ActionGroup g = new DefaultActionGroup(new ToggleAction("Strong", "Show only strong supertypes", Actions.ShowOnlyStrongSubtypes) {
+      public boolean isSelected(AnActionEvent e) {
+        return supertypesTree.isShowOnlyStrong();
+      }
 
-    mySupertypesViewComponent = supertypesView.getComponent();
+      public void setSelected(AnActionEvent e, boolean state) {
+        supertypesTree.setShowOnlyStrong(state);
+      }
+    });
+    p.setToolbar(ActionManager.getInstance().createActionToolbar(ActionPlaces.TYPE_HIERARCHY_VIEW_TOOLBAR, g, true).getComponent());
+
     myMainComponent = new Splitter(false);
     myMainComponent.setFirstComponent(super.getMainComponent());
-    myMainComponent.setSecondComponent(LabeledComponent.create(mySupertypesViewComponent, "Supertypes"));
-
+    myMainComponent.setSecondComponent(LabeledComponent.create(p, "Supertypes"));
     myType = type;
     myModel = myType.getModel();
 
     myError = error;
-    supertypesView.showItemInHierarchy(myType);
+    supertypesTree.setHierarchyNode(myType);
+    supertypesTree.rebuildNow(); // not rebuildLater, otherwise the tree would get populated once dialog is closed
 
     //setHorizontalStretch(1f);
     //setHorizontalStretch(1f);
@@ -70,11 +89,7 @@ public class MyBaseNodeDialog extends BaseNodeDialog {
   @Override
   protected Action[] createActions() {
     if(myError != null) {
-      String s = new ModelAccessHelper(getProject().getModelAccess()).runReadAction(new Computable<String>() {
-        public String compute() {
-          return myError.reportError();
-        }
-      });
+      String s = new ModelAccessHelper(getProject().getModelAccess()).runReadAction(myError::reportError);
       setErrorText(s);
       if (myError.getRuleNode() != null) {
         return new Action[]{getOKAction(), new AbstractAction("Go To Rule") {
@@ -94,17 +109,12 @@ public class MyBaseNodeDialog extends BaseNodeDialog {
 
   @Override
   protected void dispose() {
-    if (mySupertypesViewComponent != null && mySupertypesViewComponent.getParent() != null) {
-      mySupertypesViewComponent.getParent().remove(mySupertypesViewComponent);
-    }
-    getProject().getModelAccess().runWriteAction(new Runnable() {
-      public void run() {
-        if (!myWasRegistered) {
-          myModel.removeRootNode(myType.getContainingRoot());
-          myWasRegistered = true;
-        }
-        MyBaseNodeDialog.super.dispose();
+    getProject().getModelAccess().runWriteAction(() -> {
+      if (!myWasRegistered) {
+        myModel.removeRootNode(myType.getContainingRoot());
+        myWasRegistered = true;
       }
+      MyBaseNodeDialog.super.dispose();
     });
   }
 }

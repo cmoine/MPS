@@ -4,27 +4,41 @@ package jetbrains.mps.lang.editor.table.decTable.test;
 
 import jetbrains.mps.MPSLaunch;
 import jetbrains.mps.lang.test.runtime.BaseTransformationTest;
-import org.junit.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCacheExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCache;
+import org.junit.jupiter.api.Test;
 import jetbrains.mps.lang.test.runtime.BaseEditorTestBody;
+import jetbrains.mps.lang.test.runtime.TransformationTest;
 
 @MPSLaunch
 public class TableColumnsDefaultWrapping_Test extends BaseTransformationTest {
-  @Test
-  public void test_TableColumnsDefaultWrapping() throws Throwable {
-    initTest("${mps_home}", "r:c09cbf74-c0bb-4531-bd9d-ade611acf77c(jetbrains.mps.lang.editor.table.decTable.test@tests)");
-    runTest("jetbrains.mps.lang.editor.table.decTable.test.TableColumnsDefaultWrapping_Test$TestBody", "testMethod", false);
+  @RegisterExtension
+  private static final TestParametersCacheExtension ourParametersCacheExtension = new TestParametersCacheExtension(new TestParametersCache(TableColumnsDefaultWrapping_Test.class, "${mps_home}", "r:c09cbf74-c0bb-4531-bd9d-ade611acf77c(jetbrains.mps.lang.editor.table.decTable.test@tests)", false));
+
+  public TableColumnsDefaultWrapping_Test() {
+    super(ourParametersCacheExtension.getParametersCache());
   }
 
-  @MPSLaunch
-  public static class TestBody extends BaseEditorTestBody {
+  @Test
+  public void test_TableColumnsDefaultWrapping() throws Throwable {
+    new TestBody(this).testMethod();
+  }
+
+  /*package*/ static class TestBody extends BaseEditorTestBody {
+
+    /*package*/ TestBody(TransformationTest owner) {
+      super(owner);
+    }
+
     @Override
     public void testMethodImpl() throws Exception {
       initEditorComponent("7651593722933722506", "8377126844275870351");
-      // =================================================================== 
-      // FIXME 
-      // This test is a draft, it is not testing any actual functionality. 
-      // The editor annotations need to be equipped with height/width specification, after that such a test can be written 
-      // =================================================================== 
+      // ===================================================================
+      // FIXME
+      // This test is a draft, it is not testing any actual functionality.
+      // The editor annotations need to be equipped with height/width specification, after that such a test can be written
+      // ===================================================================
     }
   }
 }

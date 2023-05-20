@@ -14,7 +14,7 @@ public final class ScriptsDescriptor extends ScriptAspectBase {
   public ScriptsDescriptor() {
     myRefactoringScripts = new RefactoringScript[2];
     myRefactoringScripts[0] = new HorizontalGapMigration_MigrationScript();
-    myRefactoringScripts[1] = new MigrationToIndentLayout_MigrationScript();
+    myRefactoringScripts[1] = new SmartRefGeneratedMenuMigration_MigrationScript();
   }
 
   @Override

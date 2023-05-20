@@ -20,25 +20,24 @@ import org.jetbrains.mps.openapi.util.ProgressMonitor;
 import jetbrains.mps.smodel.resources.TResource;
 import jetbrains.mps.vfs.IFile;
 import jetbrains.mps.baseLanguage.tuples.runtime.Tuples;
+import jetbrains.mps.project.SModuleOperations;
 import jetbrains.mps.project.facets.JavaModuleFacet;
-import jetbrains.mps.util.SNodeOperations;
 import jetbrains.mps.internal.collections.runtime.IVisitor;
 import jetbrains.mps.make.delta.IDelta;
 import jetbrains.mps.internal.make.runtime.util.FilesDelta;
 import jetbrains.mps.textgen.trace.TraceInfoCache;
 import jetbrains.mps.baseLanguage.tuples.runtime.MultiTuple;
 import jetbrains.mps.vfs.FileSystem;
-import jetbrains.mps.vfs.IFileUtils;
+import jetbrains.mps.util.IFileUtil;
 import jetbrains.mps.make.script.IConfig;
-import jetbrains.mps.make.script.IPropertiesPool;
 import java.util.Map;
-import jetbrains.mps.internal.collections.runtime.MapSequence;
+import jetbrains.mps.make.script.IPropertiesPool;
 
 public class CopyTraceInfo_Facet extends IFacet.Stub {
   private List<ITarget> targets = ListSequence.fromList(new ArrayList<ITarget>());
   private IFacet.Name name = new IFacet.Name("jetbrains.mps.lang.traceable.CopyTraceInfo");
   public CopyTraceInfo_Facet() {
-    ListSequence.fromList(targets).addElement(new CopyTraceInfo_Facet.Target_copyTraceInfo());
+    ListSequence.fromList(targets).addElement(new Target_copyTraceInfo());
   }
   public Iterable<ITarget> targets() {
     return targets;
@@ -47,7 +46,7 @@ public class CopyTraceInfo_Facet extends IFacet.Stub {
     return null;
   }
   public Iterable<IFacet.Name> required() {
-    return Sequence.fromArray(new IFacet.Name[]{new IFacet.Name("jetbrains.mps.lang.core.Generate"), new IFacet.Name("jetbrains.mps.lang.core.TextGen")});
+    return Sequence.fromArray(new IFacet.Name[]{new IFacet.Name("jetbrains.mps.make.facets.Generate"), new IFacet.Name("jetbrains.mps.make.facets.TextGen")});
   }
   public Iterable<IFacet.Name> extended() {
     return null;
@@ -56,7 +55,7 @@ public class CopyTraceInfo_Facet extends IFacet.Stub {
     return this.name;
   }
   public IPropertiesPersistence propertiesPersistence() {
-    return new CopyTraceInfo_Facet.TargetProperties();
+    return new TargetProperties();
   }
   public static class Target_copyTraceInfo implements ITargetEx2 {
     private static final ITarget.Name name = new ITarget.Name("jetbrains.mps.lang.traceable.CopyTraceInfo.copyTraceInfo");
@@ -70,27 +69,23 @@ public class CopyTraceInfo_Facet extends IFacet.Stub {
           final Iterable<TResource> input = (Iterable<TResource>) (Iterable) rawInput;
           switch (0) {
             case 0:
-              if (Boolean.TRUE.equals(vars(pa.global()).skipCopying())) {
-                return new IResult.SUCCESS(_output_zgz0lb_a0a);
-              }
               progressMonitor.start("Copying resources", 2);
               progressMonitor.step("trace.info");
               try {
                 final List<IFile> toCreate = ListSequence.fromList(new ArrayList<IFile>());
                 final List<Tuples._2<IFile, IFile>> toCopy = ListSequence.fromList(new ArrayList<Tuples._2<IFile, IFile>>());
                 for (TResource tres : Sequence.fromIterable(input)) {
+                  if (!(SModuleOperations.isCompileInMps(tres.module()))) {
+                    // idea copies trace.info files
+                    continue;
+                  }
                   JavaModuleFacet facet = tres.module().getFacet(JavaModuleFacet.class);
-                  if (facet == null) {
-                    // not java module 
-                    // todo: do something?! 
+                  final IFile destination = facet.getClassesLocation(tres.modelDescriptor());
+                  if (destination == null) {
+                    // not sure if it's ok to face model w/o classes location here, but destination.exists and destination.findChild
+                    // don't tolerate null. Seems that this relates to JMF.getClassesGen() == null (removed legacy default in 5e979634)
                     continue;
                   }
-                  if (!(facet.isCompileInMps())) {
-                    // idea copies trace.info files 
-                    continue;
-                  }
-
-                  final IFile destination = facet.getClassesGen().getDescendant(SNodeOperations.getModelLongName(tres.modelDescriptor()).replace(".", "/"));
                   if (!(destination.exists())) {
                     ListSequence.fromList(toCreate).addElement(destination);
                   }
@@ -100,7 +95,7 @@ public class CopyTraceInfo_Facet extends IFacet.Stub {
                         @Override
                         public boolean acceptWritten(IFile file) {
                           if (file.getName().equals(TraceInfoCache.TRACE_FILE_NAME)) {
-                            IFile copy = destination.getDescendant(file.getName());
+                            IFile copy = destination.findChild(file.getName());
                             ListSequence.fromList(toCopy).addElement(MultiTuple.<IFile,IFile>from(file, copy));
                           }
                           return true;
@@ -111,24 +106,25 @@ public class CopyTraceInfo_Facet extends IFacet.Stub {
 
                   _output_zgz0lb_a0a = Sequence.fromIterable(_output_zgz0lb_a0a).concat(Sequence.fromIterable(Sequence.<IResource>singleton(tres)));
                 }
-                FileSystem.getInstance().runWriteTransaction(new Runnable() {
-                  public void run() {
-                    ListSequence.fromList(toCreate).visitAll(new IVisitor<IFile>() {
-                      public void visit(IFile it) {
-                        it.mkdirs();
-                      }
-                    });
-                    ListSequence.fromList(toCopy).visitAll(new IVisitor<Tuples._2<IFile, IFile>>() {
-                      public void visit(Tuples._2<IFile, IFile> ftc) {
-                        IFileUtils.copyFileContent(ftc._0(), ftc._1());
-                      }
-                    });
-                  }
+                // XXX likely, this facet has to report files, and leave it up to subsequent facets to 
+                // perform actual copy
+                FileSystem.getInstance().runWriteTransaction(() -> {
+                  ListSequence.fromList(toCreate).visitAll(new IVisitor<IFile>() {
+                    public void visit(IFile it) {
+                      it.mkdirs();
+                    }
+                  });
+                  ListSequence.fromList(toCopy).visitAll(new IVisitor<Tuples._2<IFile, IFile>>() {
+                    public void visit(Tuples._2<IFile, IFile> ftc) {
+                      IFileUtil.copyFileContent(ftc._0(), ftc._1());
+                    }
+                  });
                 });
               } finally {
                 progressMonitor.done();
               }
             default:
+              progressMonitor.done();
               return new IResult.SUCCESS(_output_zgz0lb_a0a);
           }
         }
@@ -141,7 +137,7 @@ public class CopyTraceInfo_Facet extends IFacet.Stub {
       return null;
     }
     public Iterable<ITarget.Name> after() {
-      return Sequence.fromArray(new ITarget.Name[]{new ITarget.Name("jetbrains.mps.lang.core.TextGen.textGen")});
+      return Sequence.fromArray(new ITarget.Name[]{new ITarget.Name("jetbrains.mps.make.facets.TextGen.textGen")});
     }
     public Iterable<ITarget.Name> notBefore() {
       return null;
@@ -170,57 +166,23 @@ public class CopyTraceInfo_Facet extends IFacet.Stub {
       return null;
     }
     public <T> T createParameters(Class<T> cls) {
-      return cls.cast(new Parameters());
+      return null;
     }
     public <T> T createParameters(Class<T> cls, T copyFrom) {
       T t = createParameters(cls);
-      if (t != null) {
-        ((Tuples._1) t).assign((Tuples._1) copyFrom);
-      }
       return t;
     }
     public int workEstimate() {
       return 30;
-    }
-    public static CopyTraceInfo_Facet.Target_copyTraceInfo.Parameters vars(IPropertiesPool ppool) {
-      return ppool.properties(name, CopyTraceInfo_Facet.Target_copyTraceInfo.Parameters.class);
-    }
-    public static class Parameters extends MultiTuple._1<Boolean> {
-      public Parameters() {
-        super();
-      }
-      public Parameters(Boolean skipCopying) {
-        super(skipCopying);
-      }
-      public Boolean skipCopying(Boolean value) {
-        return super._0(value);
-      }
-      public Boolean skipCopying() {
-        return super._0();
-      }
     }
   }
   public static class TargetProperties implements IPropertiesPersistence {
     public TargetProperties() {
     }
     public void storeValues(Map<String, String> store, IPropertiesPool properties) {
-      {
-        ITarget.Name name = new ITarget.Name("jetbrains.mps.lang.traceable.CopyTraceInfo.copyTraceInfo");
-        if (properties.hasProperties(name)) {
-          CopyTraceInfo_Facet.Target_copyTraceInfo.Parameters props = properties.properties(name, CopyTraceInfo_Facet.Target_copyTraceInfo.Parameters.class);
-          MapSequence.fromMap(store).put("jetbrains.mps.lang.traceable.CopyTraceInfo.copyTraceInfo.skipCopying", String.valueOf(props.skipCopying()));
-        }
-      }
     }
     public void loadValues(Map<String, String> store, IPropertiesPool properties) {
       try {
-        {
-          ITarget.Name name = new ITarget.Name("jetbrains.mps.lang.traceable.CopyTraceInfo.copyTraceInfo");
-          CopyTraceInfo_Facet.Target_copyTraceInfo.Parameters props = properties.properties(name, CopyTraceInfo_Facet.Target_copyTraceInfo.Parameters.class);
-          if (MapSequence.fromMap(store).containsKey("jetbrains.mps.lang.traceable.CopyTraceInfo.copyTraceInfo.skipCopying")) {
-            props.skipCopying(Boolean.valueOf(MapSequence.fromMap(store).get("jetbrains.mps.lang.traceable.CopyTraceInfo.copyTraceInfo.skipCopying")));
-          }
-        }
       } catch (RuntimeException re) {
       }
     }

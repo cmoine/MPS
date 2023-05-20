@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="autpzjzefg0kg6j9k7t68d4aehjff14" />
+<product version="3" modelHash="-di9vm1xyccfsc4aopoh6sb2wa48ug95">
+  <files names="AbstractChainedSequence.java:BasicSequence.java:CardinalityMap.java:ComparingSequence.java:ConcatingSequence.java:EnumeratorIterator.java:FilteringSequence.java:HasNextState.java:LimitedCardinalitySequence.java:NegateWhereFilter.java:NullCollectionSequence.java:NullDequeSequence.java:NullLinkedListSequence.java:NullListSequence.java:NullMapSequence.java:NullQueueSequence.java:NullSequence.java:NullSetSequence.java:NullSortedMapSequence.java:NullSortedSetSequence.java:OfTypeSequence.java:PagingSequence.java:ReversingSequence.java:SelectingSequence.java:SortingSequence.java:TranslatingSequence.java:TranslatorAdapter.java" />
+</product>
 

@@ -8,13 +8,13 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1164991038168:jetbrains.mps.baseLanguage.structure.ThrowStatement" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1164879751025:jetbrains.mps.baseLanguage.structure.TryCatchStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/5351203823916750322:jetbrains.mps.baseLanguage.structure.TryUniversalStatement" />
   <root nodeRef="r:0bf6e05c-8700-4289-b257-bea5fb8f354f(jetbrains.mps.baseLanguage.sandbox.internal)/3769619919556058555">
     <file name="InternalAnonymousClassUsage.java">
       <node id="3769619919556058603" at="13,9,14,17" concept="1" />
       <node id="3769619919556058585" at="15,27,16,57" concept="1" />
       <node id="3380580423598782941" at="17,5,18,0" concept="6" />
-      <node id="3769619919556060570" at="24,24,25,31" concept="5" />
+      <node id="3769619919556060570" at="24,24,25,30" concept="5" />
       <node id="3425520165286861637" at="34,25,35,35" concept="1" />
       <node id="3425520165286861664" at="42,25,43,34" concept="7" />
       <node id="3425520165286861670" at="44,9,45,17" concept="4" />
@@ -33,7 +33,7 @@
       <node id="3425520165286861685" at="49,24,53,12" concept="1" />
       <node id="3769619919556101293" at="68,0,72,0" concept="3" trace="read#(Ljava/nio/CharBuffer;)I" />
       <node id="3769619919556058578" at="12,38,17,5" concept="8" />
-      <node id="3769619919556058610" at="25,31,30,7" concept="1" />
+      <node id="3769619919556058610" at="25,30,30,7" concept="1" />
       <node id="3425520165286861622" at="32,24,37,7" concept="1" />
       <node id="3425520165286861658" at="41,0,47,0" concept="3" trace="read#(Ljava/nio/CharBuffer;)I" />
       <node id="3769619919556101303" at="49,0,55,0" concept="3" trace="check4#()V" />
@@ -50,9 +50,6 @@
       <scope id="3425520165286861702" at="51,25,51,25" />
       <scope id="3769619919556101281" at="66,39,66,39" />
       <scope id="3769619919556058579" at="13,9,14,17" />
-      <scope id="3769619919556058580" at="15,0,16,57">
-        <var name="x" id="3769619919556058581" />
-      </scope>
       <scope id="3769619919556058583" at="15,27,16,57" />
       <scope id="3425520165286861636" at="34,25,35,35" />
       <scope id="3425520165286861663" at="42,25,43,34" />
@@ -60,6 +57,9 @@
       <scope id="3425520165286861718" at="60,42,61,17" />
       <scope id="3769619919556101299" at="69,59,70,15" />
       <scope id="3769619919556058557" at="10,0,12,0" />
+      <scope id="3769619919556058580" at="15,5,17,5">
+        <var name="x" id="3769619919556058581" />
+      </scope>
       <scope id="3380580423598782950" at="20,0,22,0" />
       <scope id="3425520165286861699" at="51,0,53,0" />
       <scope id="3769619919556101278" at="66,0,68,0">

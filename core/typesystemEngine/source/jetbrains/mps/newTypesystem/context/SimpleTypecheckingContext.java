@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,21 +17,32 @@ package jetbrains.mps.newTypesystem.context;
 
 import gnu.trove.THashSet;
 import jetbrains.mps.errors.IErrorReporter;
-import jetbrains.mps.typesystem.inference.TypeSubstitution;
+import jetbrains.mps.languageScope.LanguageScopeExecutor;
+import jetbrains.mps.newTypesystem.context.component.SimpleTypecheckingComponent;
 import jetbrains.mps.newTypesystem.context.typechecking.BaseTypechecking;
 import jetbrains.mps.newTypesystem.context.typechecking.IncrementalTypechecking;
-import jetbrains.mps.newTypesystem.context.component.SimpleTypecheckingComponent;
-import jetbrains.mps.languageScope.LanguageScopeExecutor;
 import jetbrains.mps.newTypesystem.state.State;
-import org.jetbrains.mps.openapi.model.SNode;
+import jetbrains.mps.project.DevKit;
+import jetbrains.mps.smodel.MPSModuleRepository;
+import jetbrains.mps.smodel.ModelImports;
 import jetbrains.mps.typesystem.TypeSystemReporter;
 import jetbrains.mps.typesystem.inference.EquationInfo;
 import jetbrains.mps.typesystem.inference.TypeChecker;
+import jetbrains.mps.typesystem.inference.TypeCheckerHelper;
+import jetbrains.mps.typesystem.inference.TypeSubstitution;
 import jetbrains.mps.util.Computable;
+import jetbrains.mps.util.IterableUtil;
 import jetbrains.mps.util.Pair;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.openapi.language.SLanguage;
+import org.jetbrains.mps.openapi.model.SModel;
+import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.mps.openapi.module.SModule;
+import org.jetbrains.mps.openapi.module.SModuleReference;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -48,10 +59,9 @@ public abstract class SimpleTypecheckingContext<
   private STATE myState;
   private boolean myCurrentlyChecking;
 
-  public SimpleTypecheckingContext(SNode rootNode, TypeChecker typeChecker) {
-    super(rootNode, typeChecker);
+  public SimpleTypecheckingContext(SNode rootNode, TypeCheckerHelper typeCheckerHelper) {
+    super(rootNode, typeCheckerHelper);
     myState = createState();
-    setTypechecking(createTypechecking());
   }
 
   @SuppressWarnings("unchecked")
@@ -69,6 +79,9 @@ public abstract class SimpleTypecheckingContext<
   }
 
   public TCHECK getTypechecking() {
+    if (myTypechecking == null) {
+      setTypechecking(createTypechecking());
+    }
     return myTypechecking;
   }
 
@@ -83,7 +96,12 @@ public abstract class SimpleTypecheckingContext<
   }
 
   @Override
-  public void reportMessage(SNode nodeWithError, IErrorReporter errorReporter) {
+  public void reportMessage(IErrorReporter errorReporter) {
+    // do nothing
+  }
+
+  @Override
+  public void reportEquationError(@NotNull EquationInfo info, State state, String before, SNode left, String between, SNode right, String after) {
     // do nothing
   }
 
@@ -99,14 +117,27 @@ public abstract class SimpleTypecheckingContext<
 
   @Override
   public SNode getTypeOf_generationMode(final SNode node) {
+    // at generation time, transient models are not part of a repository,
+    // therefore we have to build their language scope here with a help of extra context knowledge
     long start = System.nanoTime();
-    SNode result = LanguageScopeExecutor.execWithModelScope(node.getModel(), new Computable<SNode>() {
-      @Override
-      public SNode compute() {
-        return getTypechecking().computeTypesForNodeDuringGeneration(node);
+    SModel sModel = node.getModel();
+    SNode result;
+    Computable<SNode> computable = () -> getTypechecking().computeTypesForNodeDuringGeneration(node);
+    if (sModel != null) {
+      ModelImports modelImports = new ModelImports(sModel);
+      HashSet<SLanguage> usedLanguages = new HashSet<>(modelImports.getUsedLanguages());
+      for (SModuleReference dkRef : modelImports.getUsedDevKits()) {
+        SModule module = dkRef.resolve(MPSModuleRepository.getInstance());
+        if (module instanceof DevKit) {
+          usedLanguages.addAll(IterableUtil.asCollection(((DevKit) module).getAllExportedLanguageIds()));
+        }
       }
-    });
-    TypeSystemReporter.getInstance().reportTypeOf(node, (System.nanoTime() - start));
+      result = LanguageScopeExecutor.execWithMultiLanguageScope(usedLanguages, computable);
+    } else {
+      // XXX this is the way it was; although may build set of languages in use from the node's hierarchy and restrict scope only to those
+      result = LanguageScopeExecutor.execWithGlobalScope(computable);
+    }
+    myTypeCheckerHelper.getTypeSystemReporter().reportTypeOf(node, (System.nanoTime() - start));
     return result;
   }
 
@@ -125,13 +156,14 @@ public abstract class SimpleTypecheckingContext<
   }
 
   @Override
-  public void setIsNonTypesystemComputation() {
-    assert false;
+  public boolean setNonTypesystemComputationMode(@NotNull NonTypesystemComputationMode mode) {
+    throw new UnsupportedOperationException(); // similarly to what was here
   }
 
+  @NotNull
   @Override
-  public void resetIsNonTypesystemComputation() {
-    assert false;
+  public NonTypesystemComputationMode getNonTypesystemComputationMode() {
+    return NonTypesystemComputationMode.OFF;
   }
 
   @Override
@@ -207,16 +239,21 @@ public abstract class SimpleTypecheckingContext<
       try {
         this.myCurrentlyChecking = true;
         if (!isCheckedRoot(useNonTypesystemRules)) {
-          checkRoot();
-          if (useNonTypesystemRules) {
-            applyNonTypesystemRules();
-          }
+          checkAll(false, useNonTypesystemRules);
         }
         return true;
       }
       finally {
         this.myCurrentlyChecking = false;
       }
+    }
+  }
+
+  @Override
+  public void checkAll(boolean refreshTypes, boolean useNonTypesystemRules) {
+    checkRoot(refreshTypes);
+    if (useNonTypesystemRules) {
+      applyNonTypesystemRules();
     }
   }
 
@@ -228,13 +265,10 @@ public abstract class SimpleTypecheckingContext<
   @Override
   public void checkRoot(final boolean refreshTypes) {
     synchronized (TYPECHECKING_LOCK) {
-      LanguageScopeExecutor.execWithModelScope(myNode.getModel(), new Computable<Object>() {
-        @Override
-        public Object compute() {
-          getTypechecking().computeTypes(refreshTypes);
-          getTypechecking().setCheckedTypesystem();
-          return null;
-        }
+      LanguageScopeExecutor.execWithModelScope(myNode.getModel(), () -> {
+        getTypechecking().computeTypes(refreshTypes);
+        getTypechecking().setCheckedTypesystem();
+        return null;
       });
     }
   }
@@ -252,7 +286,7 @@ public abstract class SimpleTypecheckingContext<
         //non-typesystem checks
         applyNonTypesystemRules();
         final Set<Pair<SNode, List<IErrorReporter>>> nodesWithErrors = getTypechecking().getNodesWithErrors(true);
-        final THashSet<Pair<SNode, List<IErrorReporter>>> result = new THashSet<Pair<SNode, List<IErrorReporter>>>(nodesWithErrors);
+        final THashSet<Pair<SNode, List<IErrorReporter>>> result = new THashSet<>(nodesWithErrors);
         result.addAll(getTypechecking().getNodesWithErrors(false));
         return result;
 
@@ -284,24 +318,15 @@ public abstract class SimpleTypecheckingContext<
     if (messages.isEmpty()) {
       return null;
     }
-    Collections.sort(messages, new Comparator<IErrorReporter>() {
-      @Override
-      public int compare(IErrorReporter o1, IErrorReporter o2) {
-        return o2.getMessageStatus().compareTo(o1.getMessageStatus());
-      }
-    });
+    Collections.sort(messages, (o1, o2) -> o2.getMessageStatus().compareTo(o1.getMessageStatus()));
     return messages.get(0);
   }
 
 
   @Override
   public TypeSubstitution getSubstitution(final SNode origNode) {
-    return LanguageScopeExecutor.execWithLanguageScope(null, new Computable<TypeSubstitution>() {
-      @Override
-      public TypeSubstitution compute() {
-        return myTypechecking.getTypecheckingComponent().lookupSubstitution(origNode, SimpleTypecheckingContext.this);
-      }
-    });
+    return LanguageScopeExecutor.execWithGlobalScope(
+        () -> getTypechecking().getTypecheckingComponent().lookupSubstitution(origNode, SimpleTypecheckingContext.this));
   }
 
   protected void processDependency(SNode node, String ruleModel, String ruleId, boolean addDependency) {

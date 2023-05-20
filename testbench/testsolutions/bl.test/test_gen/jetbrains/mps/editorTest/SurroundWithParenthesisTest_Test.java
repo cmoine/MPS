@@ -4,61 +4,79 @@ package jetbrains.mps.editorTest;
 
 import jetbrains.mps.MPSLaunch;
 import jetbrains.mps.lang.test.runtime.BaseTransformationTest;
-import org.junit.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCacheExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCache;
+import org.junit.jupiter.api.Test;
 import jetbrains.mps.lang.test.runtime.BaseTestBody;
+import jetbrains.mps.lang.test.runtime.TransformationTest;
 import jetbrains.mps.baseLanguage.behavior.ParenthesisUtil;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import java.util.List;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import java.util.ArrayList;
-import junit.framework.Assert;
+import org.junit.Assert;
 import jetbrains.mps.lang.test.matcher.NodesMatcher;
 
 @MPSLaunch
 public class SurroundWithParenthesisTest_Test extends BaseTransformationTest {
+  @RegisterExtension
+  private static final TestParametersCacheExtension ourParametersCacheExtension = new TestParametersCacheExtension(new TestParametersCache(SurroundWithParenthesisTest_Test.class, "${mps_home}", "r:914ee49a-537d-44b2-a5fb-bac87a54743d(jetbrains.mps.editorTest@tests)", false));
+
+  public SurroundWithParenthesisTest_Test() {
+    super(ourParametersCacheExtension.getParametersCache());
+  }
+
   @Test
   public void test_noBinaryOperation() throws Throwable {
-    initTest("${mps_home}", "r:914ee49a-537d-44b2-a5fb-bac87a54743d(jetbrains.mps.editorTest@tests)", false);
-    runTest("jetbrains.mps.editorTest.SurroundWithParenthesisTest_Test$TestBody", "test_noBinaryOperation", true);
+    new TestBody(this).test_noBinaryOperation();
   }
   @Test
   public void test_thereIsAlreadyParenthesis() throws Throwable {
-    initTest("${mps_home}", "r:914ee49a-537d-44b2-a5fb-bac87a54743d(jetbrains.mps.editorTest@tests)", false);
-    runTest("jetbrains.mps.editorTest.SurroundWithParenthesisTest_Test$TestBody", "test_thereIsAlreadyParenthesis", true);
+    new TestBody(this).test_thereIsAlreadyParenthesis();
   }
 
-  @MPSLaunch
-  public static class TestBody extends BaseTestBody {
-    public void test_noBinaryOperation() throws Exception {
-      addNodeById("3852894662483077200");
-      addNodeById("3852894662483077206");
-      addNodeById("3852894662483228699");
-      addNodeById("3852894662483230132");
-      ParenthesisUtil.createUnmatchedLeftParenthesis(SNodeOperations.cast(getNodeById("2329139814027568804"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc59b314L, "jetbrains.mps.baseLanguage.structure.IntegerConstant")));
-      ParenthesisUtil.createUnmatchedRightParenthesis(SNodeOperations.cast(getNodeById("2329139814027568804"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc59b314L, "jetbrains.mps.baseLanguage.structure.IntegerConstant")));
+  /*package*/ static class TestBody extends BaseTestBody {
 
-      {
-        List<SNode> nodesBefore = ListSequence.fromListAndArray(new ArrayList<SNode>(), SNodeOperations.cast(getNodeById("2329139814027569571"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc67c7efL, "jetbrains.mps.baseLanguage.structure.LocalVariableDeclaration")));
-        List<SNode> nodesAfter = ListSequence.fromListAndArray(new ArrayList<SNode>(), SNodeOperations.cast(getNodeById("2329139814027568774"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc67c7efL, "jetbrains.mps.baseLanguage.structure.LocalVariableDeclaration")));
-        Assert.assertNull("The nodes '" + nodesBefore + "' and '" + nodesAfter + "' do not match!", new NodesMatcher().match(nodesBefore, nodesAfter));
-      }
+    /*package*/ TestBody(TransformationTest owner) {
+      super(owner);
+    }
+
+    public void test_noBinaryOperation() throws Exception {
+      runWithinCommand(() -> {
+        addNodeById("3852894662483077200");
+        addNodeById("3852894662483077206");
+        addNodeById("3852894662483228699");
+        addNodeById("3852894662483230132");
+      });
+      runWithinCommand(() -> {
+        ParenthesisUtil.createUnmatchedLeftParenthesis(getNodeById("2329139814027568804"));
+        ParenthesisUtil.createUnmatchedRightParenthesis(getNodeById("2329139814027568804"));
+
+        {
+          List<SNode> nodesBefore = ListSequence.fromListAndArray(new ArrayList<SNode>(), getNodeById("2329139814027569571"));
+          List<SNode> nodesAfter = ListSequence.fromListAndArray(new ArrayList<SNode>(), getNodeById("2329139814027568774"));
+          Assert.assertTrue("The nodes '" + nodesBefore + "' and '" + nodesAfter + "' do not match!", new NodesMatcher(nodesBefore, nodesAfter).diff().isEmpty());
+        }
+      });
     }
     public void test_thereIsAlreadyParenthesis() throws Exception {
-      addNodeById("3852894662483077200");
-      addNodeById("3852894662483077206");
-      addNodeById("3852894662483228699");
-      addNodeById("3852894662483230132");
-      ParenthesisUtil.createUnmatchedLeftParenthesis(SNodeOperations.cast(getNodeById("3852894662483230127"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc59b314L, "jetbrains.mps.baseLanguage.structure.IntegerConstant")));
-      ParenthesisUtil.createUnmatchedRightParenthesis(SNodeOperations.cast(getNodeById("3852894662483230127"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc59b314L, "jetbrains.mps.baseLanguage.structure.IntegerConstant")));
-      {
-        List<SNode> nodesBefore = ListSequence.fromListAndArray(new ArrayList<SNode>(), SNodeOperations.cast(getNodeById("3852894662483230135"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b213L, "jetbrains.mps.baseLanguage.structure.ExpressionStatement")));
-        List<SNode> nodesAfter = ListSequence.fromListAndArray(new ArrayList<SNode>(), SNodeOperations.cast(getNodeById("3852894662483230126"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b213L, "jetbrains.mps.baseLanguage.structure.ExpressionStatement")));
-        Assert.assertNull("The nodes '" + nodesBefore + "' and '" + nodesAfter + "' do not match!", new NodesMatcher().match(nodesBefore, nodesAfter));
-      }
+      runWithinCommand(() -> {
+        addNodeById("3852894662483077200");
+        addNodeById("3852894662483077206");
+        addNodeById("3852894662483228699");
+        addNodeById("3852894662483230132");
+      });
+      runWithinCommand(() -> {
+        ParenthesisUtil.createUnmatchedLeftParenthesis(getNodeById("3852894662483230127"));
+        ParenthesisUtil.createUnmatchedRightParenthesis(getNodeById("3852894662483230127"));
+        {
+          List<SNode> nodesBefore = ListSequence.fromListAndArray(new ArrayList<SNode>(), getNodeById("3852894662483230135"));
+          List<SNode> nodesAfter = ListSequence.fromListAndArray(new ArrayList<SNode>(), getNodeById("3852894662483230126"));
+          Assert.assertTrue("The nodes '" + nodesBefore + "' and '" + nodesAfter + "' do not match!", new NodesMatcher(nodesBefore, nodesAfter).diff().isEmpty());
+        }
+      });
     }
-
 
   }
 }

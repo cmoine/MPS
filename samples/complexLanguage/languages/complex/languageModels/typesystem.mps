@@ -3,12 +3,8 @@
   <persistence version="9" />
   <languages>
     <use id="ed6d7656-532c-4bc2-81d1-af945aeb8280" name="jetbrains.mps.baseLanguage.blTypes" version="0" />
-    <use id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections" version="0" />
-    <use id="3a13115c-633c-4c5c-bbcc-75c4219e9555" name="jetbrains.mps.lang.quotation" version="0" />
-    <use id="7a5dda62-9140-4668-ab76-d5ed1746f2b2" name="jetbrains.mps.lang.typesystem" version="0" />
     <use id="ff24ab03-965e-4d15-9aed-52dc276658f4" name="jetbrains.mps.samples.complex" version="0" />
-    <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="4" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <devkit ref="00000000-0000-4000-0000-1de82b3a4936(jetbrains.mps.devkit.aspect.typesystem)" />
   </languages>
   <imports>
     <import index="tpo9" ref="r:00000000-0000-4000-0000-011c89590425(jetbrains.mps.samples.complex.structure)" />
@@ -106,7 +102,7 @@
                 <ref role="1YBMHb" node="hq76Mw1" resolve="nodeToCheck" />
               </node>
               <node concept="3TrEf2" id="hq7c2H7" role="2OqNvi">
-                <ref role="3Tt5mk" to="tpo9:hq6Ha21" />
+                <ref role="3Tt5mk" to="tpo9:hq6Ha21" resolve="complexExpression" />
               </node>
             </node>
           </node>
@@ -154,7 +150,7 @@
                 <ref role="1YBMHb" node="hqgkro0" resolve="nodeToCheck" />
               </node>
               <node concept="3TrEf2" id="hqgkvng" role="2OqNvi">
-                <ref role="3Tt5mk" to="tpo9:hqgjTti" />
+                <ref role="3Tt5mk" to="tpo9:hqgjTti" resolve="degree" />
               </node>
             </node>
           </node>
@@ -191,7 +187,7 @@
             </node>
           </node>
           <node concept="3TrEf2" id="hqh3zoJ" role="2OqNvi">
-            <ref role="3Tt5mk" to="tpdt:gRDMZzB" />
+            <ref role="3Tt5mk" to="tpdt:gRDMZzB" resolve="descriptor" />
           </node>
         </node>
       </node>

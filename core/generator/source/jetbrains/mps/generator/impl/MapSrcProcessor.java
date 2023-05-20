@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -103,7 +103,12 @@ public abstract class MapSrcProcessor implements NodePostProcessor {
       if (myMapNodeQuery != null) {
         TemplateContext tc = getTemplateContext();
         final QueryExecutionContext queryExecutor = tc.getEnvironment().getQueryExecutor();
-        return queryExecutor.evaluate(myMapNodeQuery, new MapSrcMacroContext(tc, getOutputAnchor().getParent(), getTemplateNode()));
+        SNode child = queryExecutor.evaluate(myMapNodeQuery, new MapSrcMacroContext(tc, getOutputAnchor().getParent(), getTemplateNode()));
+        if (child != null) {
+          return child;
+        }
+        tc.getEnvironment().getLogger().error(getTemplateNode(), "Unexpected null value. Transform function of MAP-SRC didn't produce any result. Please check the function and make sure it always supplies a node");
+        // fall-through
       }
       return super.substitute();
     }

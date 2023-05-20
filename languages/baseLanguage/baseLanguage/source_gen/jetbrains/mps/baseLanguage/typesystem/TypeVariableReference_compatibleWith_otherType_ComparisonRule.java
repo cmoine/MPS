@@ -6,16 +6,19 @@ import jetbrains.mps.lang.typesystem.runtime.ComparisonRule_Runtime;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.typesystem.runtime.IsApplicable2Status;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.typesystem.inference.TypeChecker;
+import jetbrains.mps.typechecking.TypecheckingFacade;
 import jetbrains.mps.lang.typesystem.runtime.IsApplicableStatus;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SConcept;
 
 public class TypeVariableReference_compatibleWith_otherType_ComparisonRule extends ComparisonRule_Runtime {
   public TypeVariableReference_compatibleWith_otherType_ComparisonRule() {
   }
   public boolean areComparable(SNode node1, SNode node2, IsApplicable2Status status) {
-    SNode bound = SLinkOperations.getTarget(SLinkOperations.getTarget(node1, MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x102467229d8L, 0x1024673a581L, "typeVariableDeclaration")), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x1024639ed74L, 0x11ae375bda0L, "bound"));
+    SNode bound = SLinkOperations.getTarget(SLinkOperations.getTarget(node1, LINKS.typeVariableDeclaration$Lz1I), LINKS.bound$aZCB);
     if ((bound == null)) {
       return true;
     }
@@ -26,19 +29,19 @@ public class TypeVariableReference_compatibleWith_otherType_ComparisonRule exten
         {
           SNode matchingNode_p68yon_a2a = node2;
           if (matchingNode_p68yon_a2a != null) {
-            matches_p68yon_a2a = matchingNode_p68yon_a2a.getConcept().isSubConceptOf(MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x102467229d8L, "jetbrains.mps.baseLanguage.structure.TypeVariableReference"));
+            matches_p68yon_a2a = matchingNode_p68yon_a2a.getConcept().isSubConceptOf(CONCEPTS.TypeVariableReference$WL);
           }
         }
         if (matches_p68yon_a2a) {
           {
-            SNode otherbound = SLinkOperations.getTarget(SLinkOperations.getTarget(matchedNode_p68yon_c0, MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x102467229d8L, 0x1024673a581L, "typeVariableDeclaration")), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x1024639ed74L, 0x11ae375bda0L, "bound"));
+            SNode otherbound = SLinkOperations.getTarget(SLinkOperations.getTarget(matchedNode_p68yon_c0, LINKS.typeVariableDeclaration$Lz1I), LINKS.bound$aZCB);
             if ((otherbound == null)) {
               return true;
             }
-            return TypeChecker.getInstance().getSubtypingManager().isSubtype(bound, otherbound) || TypeChecker.getInstance().getSubtypingManager().isSubtype(otherbound, bound);
+            return TypecheckingFacade.getFromContext().isSubtype(bound, otherbound) || TypecheckingFacade.getFromContext().isSubtype(otherbound, bound);
           }
         } else
-        return TypeChecker.getInstance().getSubtypingManager().isSubtype(bound, node2) || TypeChecker.getInstance().getSubtypingManager().isSubtype(node2, bound);
+        return TypecheckingFacade.getFromContext().isSubtype(bound, node2) || TypecheckingFacade.getFromContext().isSubtype(node2, bound);
       }
     }
   }
@@ -53,9 +56,19 @@ public class TypeVariableReference_compatibleWith_otherType_ComparisonRule exten
   }
 
   public SAbstractConcept getApplicableConcept1() {
-    return MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x102467229d8L, "jetbrains.mps.baseLanguage.structure.TypeVariableReference");
+    return CONCEPTS.TypeVariableReference$WL;
   }
   public SAbstractConcept getApplicableConcept2() {
-    return MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c37f506dL, "jetbrains.mps.baseLanguage.structure.Type");
+    return CONCEPTS.Type$bu;
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SReferenceLink typeVariableDeclaration$Lz1I = MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x102467229d8L, 0x1024673a581L, "typeVariableDeclaration");
+    /*package*/ static final SContainmentLink bound$aZCB = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x1024639ed74L, 0x11ae375bda0L, "bound");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept TypeVariableReference$WL = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x102467229d8L, "jetbrains.mps.baseLanguage.structure.TypeVariableReference");
+    /*package*/ static final SConcept Type$bu = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c37f506dL, "jetbrains.mps.baseLanguage.structure.Type");
   }
 }

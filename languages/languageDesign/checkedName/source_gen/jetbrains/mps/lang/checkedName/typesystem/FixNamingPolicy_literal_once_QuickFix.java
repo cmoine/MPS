@@ -6,8 +6,9 @@ import jetbrains.mps.errors.QuickFix_Runtime;
 import jetbrains.mps.smodel.SNodePointer;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.util.NameUtil;
+import org.jetbrains.mps.openapi.language.SProperty;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class FixNamingPolicy_literal_once_QuickFix extends QuickFix_Runtime {
   public FixNamingPolicy_literal_once_QuickFix() {
@@ -17,6 +18,10 @@ public class FixNamingPolicy_literal_once_QuickFix extends QuickFix_Runtime {
     return ((String) FixNamingPolicy_literal_once_QuickFix.this.getField("caption")[0]);
   }
   public void execute(SNode node) {
-    SPropertyOperations.set(((SNode) FixNamingPolicy_literal_once_QuickFix.this.getField("literal")[0]), MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf93d565d10L, 0xf93d565d11L, "value"), NameUtil.captionPartWithNamingPolicy(SPropertyOperations.getString(((SNode) FixNamingPolicy_literal_once_QuickFix.this.getField("literal")[0]), MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf93d565d10L, 0xf93d565d11L, "value"))));
+    SPropertyOperations.set(((SNode) FixNamingPolicy_literal_once_QuickFix.this.getField("literal")[0]), PROPS.value$w7MM, NameUtil.captionPartWithNamingPolicy(SPropertyOperations.getString(((SNode) FixNamingPolicy_literal_once_QuickFix.this.getField("literal")[0]), PROPS.value$w7MM)));
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty value$w7MM = MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf93d565d10L, 0xf93d565d11L, "value");
   }
 }

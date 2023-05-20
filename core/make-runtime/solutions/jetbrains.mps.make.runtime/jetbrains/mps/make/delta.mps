@@ -2,7 +2,7 @@
 <model ref="r:0bcaf439-5bc6-429b-a457-4e0d9746449f(jetbrains.mps.make.delta)">
   <persistence version="9" />
   <languages>
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports />
   <registry>
@@ -17,9 +17,7 @@
         <child id="1068580123134" name="parameter" index="3clF46" />
         <child id="1068580123135" name="body" index="3clF47" />
       </concept>
-      <concept id="1068580123165" name="jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" flags="ig" index="3clFb_">
-        <property id="1178608670077" name="isAbstract" index="1EzhhJ" />
-      </concept>
+      <concept id="1068580123165" name="jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" flags="ig" index="3clFb_" />
       <concept id="1068580123136" name="jetbrains.mps.baseLanguage.structure.StatementList" flags="sn" stub="5293379017992965193" index="3clFbS" />
       <concept id="1107461130800" name="jetbrains.mps.baseLanguage.structure.Classifier" flags="ng" index="3pOWGL">
         <child id="5375687026011219971" name="member" index="jymVt" unordered="true" />
@@ -45,7 +43,6 @@
     <property role="TrG5h" value="IDelta" />
     <node concept="3Tm1VV" id="16rzRJauwN4" role="1B3o_S" />
     <node concept="3clFb_" id="16rzRJauwMU" role="jymVt">
-      <property role="1EzhhJ" value="true" />
       <property role="TrG5h" value="merge" />
       <node concept="3uibUv" id="16rzRJauwMV" role="3clF45">
         <ref role="3uigEE" node="16rzRJauwMP" resolve="IDelta" />
@@ -60,7 +57,6 @@
       </node>
     </node>
     <node concept="3clFb_" id="4V1O046KmiZ" role="jymVt">
-      <property role="1EzhhJ" value="true" />
       <property role="TrG5h" value="contains" />
       <node concept="10P_77" id="4V1O046Kmj3" role="3clF45" />
       <node concept="3Tm1VV" id="4V1O046Kmj1" role="1B3o_S" />
@@ -73,14 +69,12 @@
       </node>
     </node>
     <node concept="3clFb_" id="16rzRJauwN0" role="jymVt">
-      <property role="1EzhhJ" value="true" />
       <property role="TrG5h" value="reconcile" />
       <node concept="10P_77" id="16rzRJauwN1" role="3clF45" />
       <node concept="3Tm1VV" id="16rzRJauwN2" role="1B3o_S" />
       <node concept="3clFbS" id="16rzRJauwN3" role="3clF47" />
     </node>
     <node concept="3clFb_" id="6uL$bP9UH41" role="jymVt">
-      <property role="1EzhhJ" value="true" />
       <property role="TrG5h" value="acceptVisitor" />
       <node concept="37vLTG" id="6uL$bP9UH46" role="3clF46">
         <property role="TrG5h" value="visitor" />

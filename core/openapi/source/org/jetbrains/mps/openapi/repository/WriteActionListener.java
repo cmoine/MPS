@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,6 @@ package org.jetbrains.mps.openapi.repository;
  * @see org.jetbrains.mps.openapi.module.ModelAccess#removeWriteActionListener(WriteActionListener)
  */
 public interface WriteActionListener {
-  public void actionStarted();
-  public void actionFinished();
+  default void actionStarted() {}
+  default void actionFinished() {}
 }

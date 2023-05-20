@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <root nodeRef="r:809bd876-c877-4bf5-8f9e-fbd73017df4f(jetbrains.mps.lang.pattern.editorTest@tests)/7233072556140472566">
+    <file name="Pattern_sgpsgd_a0a0a.java">
+      <node id="7233072556140479883" at="9,50,10,30" concept="5" />
+      <node id="7233072556140479883" at="10,30,11,0" concept="3" />
+      <node id="7233072556140479883" at="11,0,12,0" concept="3" />
+      <node id="7233072556140479883" at="9,0,14,0" concept="0" trace="Pattern_sgpsgd_a0a0a#(Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <scope id="7233072556140479883" at="9,50,12,0" />
+      <scope id="7233072556140479883" at="9,0,14,0">
+        <var name="patternNode" id="7233072556140479883" />
+      </scope>
+      <unit id="7233072556140479883" at="8,0,16,0" name="jetbrains.mps.lang.pattern.editorTest.Pattern_sgpsgd_a0a0a" />
+    </file>
+    <file name="Pattern_sgpsgd_a0a0a_0.java">
+      <node id="7233072556140486271" at="10,52,11,30" concept="5" />
+      <node id="7233072556140486271" at="11,30,12,0" concept="3" />
+      <node id="7233072556140486271" at="12,0,13,0" concept="3" />
+      <node id="7233072556140486320" at="13,0,14,149" concept="1" />
+      <node id="7233072556140486271" at="10,0,16,0" concept="0" trace="Pattern_sgpsgd_a0a0a_0#(Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <scope id="7233072556140486271" at="10,52,14,149" />
+      <scope id="7233072556140486271" at="10,0,16,0">
+        <var name="patternNode" id="7233072556140486271" />
+      </scope>
+      <unit id="7233072556140486271" at="9,0,18,0" name="jetbrains.mps.lang.pattern.editorTest.Pattern_sgpsgd_a0a0a_0" />
+    </file>
+    <file name="Test_CreatePropertyPatternIntention_Test.java">
+      <node id="7233072556140472566" at="20,53,21,60" concept="5" />
+      <node id="7233072556140472566" at="25,75,26,36" concept="1" />
+      <node id="7233072556140472566" at="31,52,32,19" concept="5" />
+      <node id="7233072556140472566" at="36,51,37,72" concept="1" />
+      <node id="7233072556140472692" at="37,72,38,147" concept="1" />
+      <node id="7233072556140479096" at="38,147,39,122" concept="1" />
+      <node id="7233072556140472566" at="17,0,19,0" concept="4" trace="ourParametersCacheExtension" />
+      <node id="7233072556140472566" at="20,0,23,0" concept="0" trace="Test_CreatePropertyPatternIntention_Test#()V" />
+      <node id="7233072556140472566" at="31,0,34,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="7233072556140472566" at="24,0,28,0" concept="2" trace="test_Test_CreatePropertyPatternIntention#()V" />
+      <node id="7233072556140472566" at="35,0,41,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="7233072556140472566" at="20,53,21,60" />
+      <scope id="7233072556140472566" at="25,75,26,36" />
+      <scope id="7233072556140472566" at="31,52,32,19" />
+      <scope id="7233072556140472566" at="20,0,23,0" />
+      <scope id="7233072556140472566" at="31,0,34,0">
+        <var name="owner" id="7233072556140472566" />
+      </scope>
+      <scope id="7233072556140472566" at="36,51,39,122" />
+      <scope id="7233072556140472566" at="24,0,28,0" />
+      <scope id="7233072556140472566" at="35,0,41,0" />
+      <unit id="7233072556140472566" at="29,0,42,0" name="jetbrains.mps.lang.pattern.editorTest.Test_CreatePropertyPatternIntention_Test$TestBody" />
+      <unit id="7233072556140472566" at="15,0,43,0" name="jetbrains.mps.lang.pattern.editorTest.Test_CreatePropertyPatternIntention_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:809bd876-c877-4bf5-8f9e-fbd73017df4f(jetbrains.mps.lang.pattern.editorTest@tests)/8950533135207763185">
+    <file name="Test_LightPattern_Test.java">
+      <node id="8950533135207763185" at="19,35,20,60" concept="5" />
+      <node id="8950533135207763185" at="24,57,25,36" concept="1" />
+      <node id="8950533135207763185" at="30,52,31,19" concept="5" />
+      <node id="8950533135207763185" at="35,51,36,72" concept="1" />
+      <node id="8950533135207773618" at="36,72,37,27" concept="1" />
+      <node id="8950533135207846128" at="37,27,38,71" concept="1" />
+      <node id="8950533135207763185" at="16,0,18,0" concept="4" trace="ourParametersCacheExtension" />
+      <node id="8950533135207763185" at="19,0,22,0" concept="0" trace="Test_LightPattern_Test#()V" />
+      <node id="8950533135207763185" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="8950533135207763185" at="23,0,27,0" concept="2" trace="test_Test_LightPattern#()V" />
+      <node id="8950533135207763185" at="34,0,40,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="8950533135207763185" at="19,35,20,60" />
+      <scope id="8950533135207763185" at="24,57,25,36" />
+      <scope id="8950533135207763185" at="30,52,31,19" />
+      <scope id="8950533135207763185" at="19,0,22,0" />
+      <scope id="8950533135207763185" at="30,0,33,0">
+        <var name="owner" id="8950533135207763185" />
+      </scope>
+      <scope id="8950533135207763185" at="35,51,38,71" />
+      <scope id="8950533135207763185" at="23,0,27,0" />
+      <scope id="8950533135207763185" at="34,0,40,0" />
+      <unit id="8950533135207763185" at="28,0,41,0" name="jetbrains.mps.lang.pattern.editorTest.Test_LightPattern_Test$TestBody" />
+      <unit id="8950533135207763185" at="14,0,42,0" name="jetbrains.mps.lang.pattern.editorTest.Test_LightPattern_Test" />
+    </file>
+  </root>
+</debug-info>
+

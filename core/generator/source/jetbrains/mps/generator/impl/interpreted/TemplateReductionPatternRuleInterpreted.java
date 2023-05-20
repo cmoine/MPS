@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import jetbrains.mps.generator.impl.RuleConsequenceProcessor;
 import jetbrains.mps.generator.impl.RuleUtil;
 import jetbrains.mps.generator.impl.TemplateProcessingFailureException;
 import jetbrains.mps.generator.impl.query.PatternRuleQuery;
+import jetbrains.mps.generator.impl.query.QueryKeyImpl;
 import jetbrains.mps.generator.runtime.GenerationException;
 import jetbrains.mps.generator.runtime.ReductionRuleBase;
 import jetbrains.mps.generator.runtime.TemplateContext;
@@ -28,7 +29,6 @@ import jetbrains.mps.generator.runtime.TemplateExecutionEnvironment;
 import jetbrains.mps.generator.runtime.TemplateReductionRule;
 import jetbrains.mps.generator.template.PatternRuleContext;
 import jetbrains.mps.lang.pattern.GeneratedMatchingPattern;
-import jetbrains.mps.smodel.SNodePointer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SNode;
 
@@ -45,7 +45,7 @@ public class TemplateReductionPatternRuleInterpreted extends ReductionRuleBase i
   private PatternRuleQuery myQuery;
 
   public TemplateReductionPatternRuleInterpreted(SNode ruleNode) {
-    super(new SNodePointer(ruleNode), RuleUtil.getPatternReductionRulePatternNodeConcept(ruleNode), false);
+    super(ruleNode.getReference(), RuleUtil.getPatternReductionRulePatternNodeConcept(ruleNode), false);
     myRuleNode = ruleNode;
     myRuleMappingName = RuleUtil.getPatternReductionRuleLabel(ruleNode);
     final SNode rc = RuleUtil.getPatternReductionRuleConsequence(ruleNode);
@@ -69,7 +69,10 @@ public class TemplateReductionPatternRuleInterpreted extends ReductionRuleBase i
 
   private GeneratedMatchingPattern checkIfApplicable(TemplateExecutionEnvironment env, TemplateContext context) throws GenerationFailureException {
     if (myQuery == null) {
-      myQuery = env.getQueryProvider(getRuleNode()).getPatternRuleCondition(myRuleNode);
+      // There are pattern : PatternExpression[1] and conditionFunction : BaseMappingRule_Condition[0..1] in PatternReduction_MappingRule,
+      // and unlike other rules, getPatternRuleCondition() here corresponds to mandatory QG.checkPattern method,
+      // which invokes conditionFunction if present.
+      myQuery = env.getQueryProvider(getRuleNode()).getPatternRuleCondition(new QueryKeyImpl(getRuleNode(), getRuleNode().getNodeId()));
     }
     return myQuery.pattern(new PatternRuleContext(context, getRuleNode()));
   }

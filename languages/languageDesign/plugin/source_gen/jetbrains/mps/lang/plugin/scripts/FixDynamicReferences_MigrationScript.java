@@ -5,19 +5,22 @@ package jetbrains.mps.lang.plugin.scripts;
 import jetbrains.mps.lang.script.runtime.BaseMigrationScript;
 import jetbrains.mps.lang.script.runtime.AbstractMigrationRefactoring;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.internal.collections.runtime.Sequence;
-import org.jetbrains.mps.openapi.model.SReference;
+import jetbrains.mps.internal.collections.runtime.ListSequence;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.internal.collections.runtime.IWhereFilter;
-import jetbrains.mps.smodel.DynamicReference;
+import org.jetbrains.mps.openapi.model.SReference;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import java.util.Map;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 import jetbrains.mps.internal.collections.runtime.MapSequence;
 import java.util.HashMap;
 import jetbrains.mps.internal.collections.runtime.SetSequence;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public final class FixDynamicReferences_MigrationScript extends BaseMigrationScript {
   public FixDynamicReferences_MigrationScript() {
@@ -33,26 +36,26 @@ public final class FixDynamicReferences_MigrationScript extends BaseMigrationScr
       }
       @Override
       public SAbstractConcept getApplicableConcept() {
-        return MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x10802efe25aL, "jetbrains.mps.lang.core.structure.BaseConcept");
+        return CONCEPTS.BaseConcept$gP;
       }
       @Override
       public boolean isApplicableInstanceNode(SNode node) {
-        return Sequence.fromIterable(((Iterable<SReference>) node.getReferences())).any(new IWhereFilter<SReference>() {
+        return ListSequence.fromList(SNodeOperations.getReferences(node)).any(new IWhereFilter<SReference>() {
           public boolean accept(SReference it) {
-            return it instanceof DynamicReference;
+            return SLinkOperations.isDynamic(it);
           }
         });
       }
       @Override
       public void doUpdateInstanceNode(SNode node) {
-        Map<String, SNode> roleToTarget = MapSequence.fromMap(new HashMap<String, SNode>());
-        for (SReference ref : Sequence.fromIterable(node.getReferences())) {
-          if (!(ref instanceof DynamicReference)) {
+        Map<SReferenceLink, SNode> roleToTarget = MapSequence.fromMap(new HashMap<SReferenceLink, SNode>());
+        for (SReference ref : SNodeOperations.getReferences(node)) {
+          if (!(SLinkOperations.isDynamic(ref))) {
             continue;
           }
-          MapSequence.fromMap(roleToTarget).put(ref.getRole(), ref.getTargetNode());
+          MapSequence.fromMap(roleToTarget).put(ref.getLink(), ref.getTargetNode());
         }
-        for (Map.Entry<String, SNode> m : SetSequence.fromSet(roleToTarget.entrySet())) {
+        for (Map.Entry<SReferenceLink, SNode> m : SetSequence.fromSet(roleToTarget.entrySet())) {
           node.setReferenceTarget(m.getKey(), m.getValue());
         }
       }
@@ -67,5 +70,9 @@ public final class FixDynamicReferences_MigrationScript extends BaseMigrationScr
   @Override
   public SNodeReference getScriptNode() {
     return PersistenceFacade.getInstance().createNodeReference("r:00000000-0000-4000-0000-011c89590367(jetbrains.mps.lang.plugin.scripts)/930311433812684751");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept BaseConcept$gP = MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x10802efe25aL, "jetbrains.mps.lang.core.structure.BaseConcept");
   }
 }

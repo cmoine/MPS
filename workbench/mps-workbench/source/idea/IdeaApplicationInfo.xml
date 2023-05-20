@@ -1,32 +1,42 @@
-<component>
-  <version codename="MPS" major="3" minor="4" eap="false" update-channel="MPS34"/>
-  <company name="JetBrains s.r.o." url="https://www.jetbrains.com/?fromIDE"/>
-  <build number="__BUILD_NUMBER__" date="__BUILD_DATE__"/>
+<component xmlns="http://jetbrains.org/intellij/schema/application-info"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://jetbrains.org/intellij/schema/application-info http://jetbrains.org/intellij/schema/ApplicationInfo.xsd">
+  <!-- Do not set minor version other than just one digit (minor="2" even for some 2018.2.# version) and eap other then eap="true":
+  it is used for AffectedVersionTest#testVersion, which expect only EAP minor version
+  TODO: this looks like hack and does not in any way reflects real version set in jetbrains.mps.ide.build.mps-->
+  <version major="2023" minor="1" eap="true"/>
+  <company name="JetBrains s.r.o." url="https://www.jetbrains.com/?fromIDE" copyrightStart="2009"/>
+  <build number="231.1" date="__BUILD_DATE__"/>
+  <!--  <build number="MPS-221.5080.SNAPSHOT" date="__BUILD_DATE__"/>-->
   <!--<install-over minbuild="" maxbuild="" version=""/>-->
-  <logo url="/splash.png" textcolor="002387" progressColor="00E184" progressY="393" progressHeight="3"/>
-  <about url="/mpsAbout.png"/><!-- foreground="7A858F" copyrightForeground="7A858F" linkColor="9b5121" logoX="300" logoY="265" logoW="75" logoH="30"-->
-  <icon size32="/MPS_32.png" size16="/MPS_16.png" size128="/MPS_128.png" ico="MPS.ico"/>
-  <dialogs-image url="/dialogImage.png"/><!--TODO: remove in 3.4-->
+  <logo url="/splash.png" textcolor="FFFFFF" progressColor="FFFFFF" progressY="396" progressHeight="4"/>
+  <about url="/about.png" foreground="FFFFFF" copyrightForeground="FFFFFF"/><!--linkColor="9b5121" logoX="300" logoY="265" logoW="75" logoH="30"-->
+  <icon ico="MPS.ico" svg="/mps.svg" svg-small="/mps_16.svg"/>
   <package code="__PACKAGE_CODE__"/>
   <names product="MPS" fullname="JetBrains MPS"/>
 
   <welcome-screen logo-url="/MPS_welcomeScreen.png"/>
-  <!--<editor background-url="/idea_logo_welcome.png"/>-->
+  <!--
+  <customize-ide-wizard provider="com.intellij.ide.customize.CustomizeIdeaWizardStepsProvider"/>
+  -->
 
-  <plugins url="http://plugins.jetbrains.com/"/>
-  <update-urls check="http://www.jetbrains.com/mps/update.xml"
-               download="http://www.jetbrains.com/mps/download/"/>
+  <!--
+  <editor background-url="/idea_logo_welcome.png"/>
+  -->
 
-  <help file="mpshelp.jar" root="mps" webhelp-url="http://www.jetbrains.com/mps/webhelp/"/>
-  <documentation url="https://www.jetbrains.com/mps/documentation"/>
+  <plugins url="https://plugins.jetbrains.com/"/>
+  <update-urls check="https://www.jetbrains.com/mps/update.xml"
+               patches="https://www.jetbrains.com/mps/download/"/>
+
+  <help webhelp-url="https://www.jetbrains.com/mps/webhelp/"/>
+  <documentation url="https://www.jetbrains.com/help/mps/fast-track-to-mps.html"/>
   <support url="https://www.jetbrains.com/support/mps/index.html"/>
-  <feedback eap-url="https://www.jetbrains.com/feedback/feedback.jsp?product=mps"
-            release-url="https://www.jetbrains.com/feedback/feedback.jsp?product=mps"/>
+  <youtrack url="https://youtrack.jetbrains.com/newissue?project=MPS&amp;clearDraft=true&amp;description=$DESCR" />
+  <feedback url="https://www.jetbrains.com/feedback/feedback.jsp?product=mps"/>
   <whatsnew url="https://www.jetbrains.com/mps/whatsnew/index.html"/>
-  <keymap win="https://confluence.jetbrains.com/display/MPSD34/Default+Keymap+Reference"
-          mac="https://confluence.jetbrains.com/display/MPSD34/Default+Keymap+Reference"/>
-  <third-party url="http://www.jetbrains.org/"/>
-  <jetbrains-tv url="http://www.youtube.com/user/JetBrainsTV/search?query=MPS"/>
+  <keymap win="https://www.jetbrains.com/help/mps/default-keymap-reference.html"
+          mac="https://www.jetbrains.com/help/mps/default-keymap-reference.html"/>
+  <jetbrains-tv url="https://www.youtube.com/user/JetBrainsTV/search?query=MPS"/>
 
   <!--<plugins-page category="VCS Integration" title="Select VCS Integration Plugins"/>-->
   <!--<plugins-page title="Select Other Plugins"/>-->

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BaseMigrationScript implements RefactoringScript {
-  private List<AbstractMigrationRefactoring> myRefactorings = new ArrayList<AbstractMigrationRefactoring>();
+  private List<AbstractMigrationRefactoring> myRefactorings = new ArrayList<>();
   private String myName;
 
   public BaseMigrationScript(String name) {

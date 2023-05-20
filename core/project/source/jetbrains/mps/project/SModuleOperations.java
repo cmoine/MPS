@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,213 +15,185 @@
  */
 package jetbrains.mps.project;
 
-import jetbrains.mps.generator.fileGenerator.FileGenerationUtil;
 import jetbrains.mps.kernel.model.MissingDependenciesFixer;
-import jetbrains.mps.persistence.DefaultModelRoot;
-import jetbrains.mps.persistence.PersistenceRegistry;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.project.facets.JavaModuleFacet;
+import jetbrains.mps.project.facets.JavaModuleFacet.Compile;
+import jetbrains.mps.project.facets.JavaModuleFacet.LoadClasses;
 import jetbrains.mps.project.facets.TestsFacet;
-import jetbrains.mps.project.persistence.ModuleReadException;
 import jetbrains.mps.project.structure.modules.ModuleDescriptor;
-import jetbrains.mps.smodel.Language;
 import jetbrains.mps.smodel.MPSModuleOwner;
 import jetbrains.mps.smodel.MPSModuleRepository;
-import jetbrains.mps.smodel.SModelStereotype;
 import jetbrains.mps.vfs.IFile;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.EditableSModel;
-import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SRepository;
-import org.jetbrains.mps.openapi.persistence.ModelFactory;
 import org.jetbrains.mps.openapi.persistence.ModelRoot;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class SModuleOperations {
-  private static final Logger LOG = LogManager.getLogger(SModuleOperations.class);
-
-  public static String getOutputPathFor(SModel model) {
-    // todo: move to SModelOperations?
-    IFile outputDir = getOutputRoot(model);
-    return outputDir != null ? outputDir.getPath() : null;
-  }
 
   /**
-   * Filesystem location for all output of the model's module.
-   * Unlike {@link #getOutputPathFor(org.jetbrains.mps.openapi.model.SModel)} doesn't
-   * translate IFile to String.
-   *
-   * @return module's output path, or null if unknown
+   * A dubious way to ask {@code module.getFacet(JMF.class)}.
+   * MPS used to force {@link JavaModuleFacet} for every module, but that's not true now, one can encounter a module
+   * unrelated to Java.
+   * @throws IllegalArgumentException in case module doesn't have {@link JavaModuleFacet}
    */
-  public static IFile getOutputRoot(@NotNull SModel model) {
-    SModule module = model.getModule();
-    if (SModelStereotype.isTestModel(model) && module.getFacet(TestsFacet.class) != null) {
-      return module.getFacet(TestsFacet.class).getTestsOutputPath();
-    } else {
-      return ((AbstractModule) module).getOutputPath();
-    }
-  }
-
-  /**
-   * @return all locations where generated files (including auxiliary model streams, files with hashes and dependencies) of the module could be found.
-   */
-  public static Collection<IFile> getOutputRoots(@NotNull SModule module) {
-    // XXX there's jetbrains.mps.tool.builder.paths.ModuleOutputPaths which looks quite similar, shall refactor. It's definitely not tooling-specific code.
-    ArrayList<IFile> rv = new ArrayList<IFile>();
-    if (module instanceof AbstractModule) {
-      IFile path = ((AbstractModule) module).getOutputPath();
-      if (path != null) {
-        rv.add(path);
-        rv.add(FileGenerationUtil.getCachesDir(path));
-      }
-    }
-    TestsFacet testFacet = module.getFacet(TestsFacet.class);
-    if (testFacet != null) {
-      IFile path = testFacet.getTestsOutputPath();
-      if (path != null) {
-        rv.add(path);
-      }
-    }
-    // XXX see DefaultStreamManager#getOverridenOutputDir(SModel)
-    // we shall iterate over all models of the module, check instanceof GeneratableSModel && isGenerateIntoModelFolder(), and
-    // then (md.getSource() as FileDataSource).getParent(), but GeneratedFilesExcludePolicy which I write the method for, used
-    // to be satisfied with #getOutputRoot(), which didn't check for overridden output root either.
-    return rv;
-  }
-
   @NotNull
-  public static JavaModuleFacet getJavaFacet(SModule module) {
+  public static JavaModuleFacet getJavaFacet(@NotNull SModule module) {
     JavaModuleFacet facet = module.getFacet(JavaModuleFacet.class);
     if (facet != null) {
       return facet;
     } else {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException(module + " does not have java facet");
     }
   }
 
+  /**
+   * There's {@code JavaModuleFacet} and it demands compiling of the module with MPS
+   * AKA {@code isJavaModuleCompiledWithMPS()}, as opposed to {@link #isJavaModuleCompiledExternally(SModule)}
+   * <p>
+   *   {@code !isJavaModuleCompiledWithMPS()} is equivalent to {@code facet == null || !facet.isCompileInMPS()}
+   * </p>
+   *
+   */
   public static boolean isCompileInMps(SModule module) {
     JavaModuleFacet facet = module.getFacet(JavaModuleFacet.class);
-    return facet != null && facet.isCompileInMps();
+    return facet != null && facet.getCompile() == Compile.MPS;
   }
 
+  /**
+   * There's {@code JavaModuleFacet} and it demands NOT TO compile the module with MPS
+   * {@code !isJavaModuleCompiledExternally()} is equivalent to {@code facet == null || facet.isCompileInMPS()}
+   */
+  public static boolean isJavaModuleCompiledExternally(SModule module) {
+    JavaModuleFacet facet = module.getFacet(JavaModuleFacet.class);
+    return facet != null && facet.getCompile() == Compile.External;
+  }
+
+  /**
+   * @param module non-null
+   * @return true iff module has java facet, doesn't require MPS compilation and _explicitly_ demands external compilation with IDEA
+   */
   public static boolean isCompileInIdea(SModule module) {
     JavaModuleFacet facet = module.getFacet(JavaModuleFacet.class);
-    return facet != null && !facet.isCompileInMps();
+    if (facet == null || facet.getCompile() != Compile.External || !(module instanceof AbstractModule)) {
+      return false;
+    }
+    final ModuleDescriptor md = ((AbstractModule) module).getModuleDescriptor();
+    return md != null && md.needsExternalIdeaCompile();
+  }
+
+  /**
+   * Captures knowledge how to identify a module that has a classloader and is meant to provide
+   * classes that extend some MPS functionality.
+   * Uses various aspects of {@link JavaModuleFacet} and internal assumptions to make a decision.
+   *
+   * Eventually likely to become part of ModuleRuntime (or a condition to generate (load?) one). Need this as a transition mechanism
+   * to refactor direct uses of {@code JavaModuleFacet}, {@code ReloadableModule#canLoadClasses()}, {@code instanceof ReloadableModule}
+   * and alike.
+   *
+   * @return true if a module is meant to be part of MPS world (MPS pluginSolutions, actions, extensions for ext.points, etc)
+   * @since 2022.3
+   */
+  public static boolean canSupplyExtensionsForMPS(@Nullable SModule module) {
+    if (module == null) {
+      return false;
+    }
+    final JavaModuleFacet jmf = module.getFacet(JavaModuleFacet.class);
+    if (jmf != null) {
+      return jmf.getLoadExtensions().contributesExtensions();
+    }
+    // need to account for TempModule + NaiveJavaModuleFacet scenario, although not clear if we need to allow
+    // extensions from these. Definitely classloading. Perhaps, that's the case when we need MPS module classloading but no
+    // extensions support (to my question whether MPS module CL implies "capable to contribute extensions")
+    // However, NaiveJavaModuleFacet has to get covered by jmf != null branch, above. Here we deal with a PluginLoaderRegistry hack scenario,
+    //     and I don't see any reason to bother with ReloadableModule
+    return false;
+  }
+
+  /**
+   * Transitional method to capture scenario when MPS cares about CL kind of module, e.g. to generate reflective/direct calls for
+   * behavior methods
+   *
+   * XXX what's the difference with ModuleClassLoaderSupport.canCreate() and why don't we check for specific compilation kind here?
+   *
+   * @return false when module doesn't have CL management or CL is managed by some external mechanism (not MPS module CL)
+   * @since 2022.3
+   */
+  public static boolean classloadingManagedByMPS(@Nullable SModule module) {
+    if (module == null) {
+      return false;
+    }
+    final JavaModuleFacet jmf = module.getFacet(JavaModuleFacet.class);
+    if (jmf == null) {
+      return false;
+    }
+    return jmf.getLoadClasses() == LoadClasses.ManagedByMPS;
+  }
+
+  /**
+   * Answers if MPS can expect classes for the module. Unlike {@link #canSupplyExtensionsForMPS(SModule)}, this doesn't mean
+   * MPS would like to load them directly for the purposes of contributing extensions. It's more like
+   * "participates in MPS module classloading story"
+   */
+  public static boolean classesAvailableToMPS(@Nullable SModule module) {
+    if (module == null) {
+      return false;
+    }
+    final JavaModuleFacet jmf = module.getFacet(JavaModuleFacet.class);
+    return jmf != null && jmf.getLoadClasses().classesAvailable();
   }
 
   public static Set<String> getAllSourcePaths(SModule module) {
     // todo: get rid from source paths?
-    Set<String> paths = new HashSet<String>();
-    if (module instanceof AbstractModule) {
-      IFile path = ((AbstractModule) module).getOutputPath();
+    ArrayList<String> paths = new ArrayList<>(4);
+    JavaModuleFacet jmf = module.getFacet(JavaModuleFacet.class);
+    if (jmf != null) {
+      IFile path = jmf.getOutputRoot();
+      if (path != null) {
+        paths.add(path.getPath());
+      }
+      paths.addAll(jmf.getAdditionalSourcePaths());
+    }
+
+    TestsFacet testsFacet = module.getFacet(TestsFacet.class);
+    if (testsFacet != null) {
+      IFile path = testsFacet.getTestsOutputPath();
       if (path != null) {
         paths.add(path.getPath());
       }
     }
-    if (module.getFacet(TestsFacet.class) != null) {
-      IFile path = module.getFacet(TestsFacet.class).getTestsOutputPath();
-      if (path != null) {
-        paths.add(path.getPath());
-      }
-    }
-    if (module.getFacet(JavaModuleFacet.class) != null) {
-      paths.addAll(module.getFacet(JavaModuleFacet.class).getAdditionalSourcePaths());
-    }
-    return paths;
-  }
-
-  public static EditableSModel createModelWithAdjustments(String name, @NotNull ModelRoot root) {
-    return createModelWithAdjustments(name, root, null);
-  }
-
-  public static EditableSModel createModelWithAdjustments(String name, @NotNull ModelRoot root, @Nullable ModelFactory modelFactory) {
-    // todo: review usages of this method: a) i think in most cases we don't need adjustments b) in most cases we got first modelroot from module,
-    // create method like createModel(SModule module, String name) ?
-
-    // move to platform
-    // need for model creation from ui (maybe even workbench)
-
-    // why ModelRoot register model in module? WTF
-    // should be public AbstractModule#addModel method!
-    // ourModelsCreationListeners should be called in addModel method
-
-    // so this goes to SModuleOperation method with createModel from ModelRoot, apply adj and register in module
-    // deprecated
-    if (!root.canCreateModel(name)) {
-      LOG.error("Can't create a model " + name + " under model root " + root.getPresentation());
-      return null;
-    }
-
-    EditableSModel model;
-    try {
-      model = (EditableSModel) (modelFactory != null && root instanceof DefaultModelRoot
-          ? ((DefaultModelRoot) root).createModel(name, null, null, modelFactory) : root.createModel(name));
-    } catch (IOException e) {
-      LOG.error("Can't create a model " + name + ": " + e.getMessage());
-      return null;
-    }
-    // FIXME something bad: see MPS-18545 SModel api: createModel(), setChanged(), isLoaded(), save()
-    // model.getSModel() ?
-    model.setChanged(true);
-    model.save();
-    // ((ModelRootBase) root).register(model);
-
-    ModelsAutoImportsManager.doAutoImport(root.getModule(), model);
-    new MissingDependenciesFixer(model).fixModuleDependencies();
-
-    return model;
-  }
-
-  public static boolean needReloading(AbstractModule module) {
-    // todo: ?
-    SRepository repo = module.getRepository();
-    if (repo != null) {
-      repo.getModelAccess().checkReadAccess();
-    }
-
-    IFile descriptorFile = module.getDescriptorFile();
-    if ((descriptorFile == null) || !descriptorFile.exists()) {
-      return false;
-    }
-
-    final ModuleDescriptor descriptor = module.getModuleDescriptor();
-    if (descriptor == null) return false;
-
-    String timestampString = descriptor.getTimestamp();
-
-    if (timestampString == null) return true;
-    long timestamp = Long.decode(timestampString);
-    return timestamp != descriptorFile.lastModified();
+    return new TreeSet<>(paths);
   }
 
   /**
-   * Reads module from file and eventually reloads it (when CLManager triggers refresh)
+   * @deprecated It's unclear what 'adjustments' refer to; no reason to prefer this method to regular {@code ModelRoot.createModel()}
+   * @see ModelsAutoImportsManager
+   * @see MissingDependenciesFixer#fixModuleDependencies()
    */
-  public static void reloadFromDisk(@NotNull AbstractModule module) {
-    if (module.getRepository() == null) {
-      throw new IllegalArgumentException("Module " + module + " is disposed");
-    }
-
-    module.getRepository().getModelAccess().checkWriteAccess();
-
-    try {
-      ModuleDescriptor descriptor = module.loadDescriptor();
-      module.setModuleDescriptor(descriptor);
-    } catch (ModuleReadException e) {
-      AbstractModule.handleReadProblem(module, e, false);
-    }
+  @Nullable
+  @Deprecated(since = "2021.3", forRemoval = true)
+  public static EditableSModel createModelWithAdjustments(@NotNull String name, @NotNull ModelRoot root) {
+    // As of 2022.3, there are no uses in MPS code; and I didn't find any uses in MPS-extensions and mbeddr, too. Remove once 22.3 is out
+    Logger.getLogger(SModuleOperations.class).warnDeprecatedUse("SModuleOperations.createModelWithAdjustments() will be removed in the next release");
+    EditableSModel model = (EditableSModel) root.createModel(name);
+    model.save();
+    return model;
   }
 
+  /**
+   * Tries to guess MPS Project from a module based on repository the module belongs to.
+   * No guarantee of success.
+   */
+  @Nullable
   public static Project getProjectForModule(SModule module) {
+    // 2 uses in mbeddr
     if (module == null) {
       return null;
     }
@@ -230,48 +202,15 @@ public class SModuleOperations {
     if (repository instanceof ProjectRepository) {
       project = ((ProjectRepository) repository).getProject();
     } else if (repository instanceof MPSModuleRepository) {
-      Language language = null;
+      // XXX perhaps, shall use ModuleRepositoryFacade here?
       Set<MPSModuleOwner> owners = ((MPSModuleRepository) repository).getOwners(module);
       for (MPSModuleOwner owner : owners) {
         if (owner instanceof Project) {
           project = ((Project) owner);
           break;
-        } else if (owner instanceof Language) {
-          language = (Language) owner;
         }
-      }
-      if (project == null && language != null) {
-        project = getProjectForModule(language);
       }
     }
     return project;
-  }
-
-  // helpers
-  private static void checkContentPath(String path, SModule module, ModelRoot modelRoot) {
-    if (PersistenceRegistry.JAVA_CLASSES_ROOT.equals(modelRoot.getType())) {
-      return;
-    }
-
-    String sig = (containsFilesWithSuffix(new File(path), ".java") ? "j" : "") + (containsFilesWithSuffix(new File(path), ".class") ? "c" : "");
-    if (sig.length() == 2) {
-      sig = "j&c";
-    }
-    if (!sig.isEmpty()) {
-      System.out.printf("!%s at %s type in %s%n", sig, modelRoot.getType(), module.getModuleName());
-    }
-  }
-
-  private static boolean containsFilesWithSuffix(File path, String suffix) {
-    if (path.isFile()) {
-      return path.getName().endsWith(suffix);
-    } else if (path.isDirectory()) {
-      for (File child : path.listFiles()) {
-        if (containsFilesWithSuffix(child, suffix)) {
-          return true;
-        }
-      }
-    }
-    return false;
   }
 }

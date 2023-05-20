@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,19 +15,25 @@
  */
 package jetbrains.mps.workbench.action;
 
-import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.ActionGroup;
+import com.intellij.openapi.actionSystem.ActionManager;
+import com.intellij.openapi.actionSystem.ActionStub;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.actionSystem.ex.ActionManagerEx;
 import com.intellij.openapi.extensions.PluginId;
-import org.apache.log4j.Logger;
-import org.apache.log4j.LogManager;
+import jetbrains.mps.logging.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
+// FIXME make a CoreComponent, so that BaseApplicationPlugin.dispose doesn't need to
+// FIXME doesn't have any state, just a set of utility methods no reason to be CoreComponent.
+// BaseApplicationPlugin could keep this code itself
 public class MPSActions {
-  private static final Logger LOG = LogManager.getLogger(MPSActions.class);
+  private static final Logger LOG = Logger.getLogger(MPSActions.class);
 
-  private static MPSActions ourInstance = new MPSActions();
+  private static final MPSActions ourInstance = new MPSActions();
 
   public static MPSActions getInstance() {
     return ourInstance;
@@ -59,7 +65,7 @@ public class MPSActions {
   public void unregisterGroups(List<BaseGroup> groups) {
     ActionManagerEx manager = ActionManagerEx.getInstanceEx();
 
-    List<BaseGroup> mpsGroups = new ArrayList<BaseGroup>();
+    List<BaseGroup> mpsGroups = new ArrayList<>();
     for (BaseGroup group : groups) {
       mpsGroups.add(group);
       manager.unregisterAction(group.getId());

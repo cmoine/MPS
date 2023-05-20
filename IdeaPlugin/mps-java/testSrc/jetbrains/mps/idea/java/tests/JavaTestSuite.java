@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,10 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.java.tests;
 
-import org.apache.log4j.LogManager;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -28,7 +26,6 @@ import jetbrains.mps.RuntimeFlags;
 public class JavaTestSuite {
   @BeforeClass
   public static void setTestMode() {
-    LogManager.getLogger(JavaTestSuite.class).info("The log4j has been initialized successfully");
     RuntimeFlags.setTestMode(TestMode.USUAL);
   }
 }

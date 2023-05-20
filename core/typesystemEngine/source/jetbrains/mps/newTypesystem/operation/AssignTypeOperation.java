@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,9 @@ package jetbrains.mps.newTypesystem.operation;
 
 import jetbrains.mps.newTypesystem.TypesUtil;
 import jetbrains.mps.newTypesystem.state.State;
-import org.jetbrains.mps.openapi.model.SNode;
+import jetbrains.mps.smodel.SNodeUtil;
 import jetbrains.mps.typesystem.inference.EquationInfo;
+import org.jetbrains.mps.openapi.model.SNode;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -46,7 +47,7 @@ public class AssignTypeOperation extends AbstractOperation {
 
   @Override
   public String getPresentation() {
-    return myNode + " : " + myType+ "   assigned";
+    return String.format("%s : %s   assigned", SNodeUtil.getPresentation(myNode), SNodeUtil.getPresentation(myType));
   }
 
   @Override
@@ -56,7 +57,7 @@ public class AssignTypeOperation extends AbstractOperation {
 
   @Override
   public List<SNode> getVariables() {
-    LinkedList<SNode> nodes = new LinkedList<SNode>();
+    LinkedList<SNode> nodes = new LinkedList<>();
     if (TypesUtil.isVariable(myType)) {
       nodes.add(myType);
     }

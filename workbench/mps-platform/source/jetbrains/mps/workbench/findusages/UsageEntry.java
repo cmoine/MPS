@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@ package jetbrains.mps.workbench.findusages;
 
 import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 import jetbrains.mps.smodel.adapter.ids.SConceptId;
-import jetbrains.mps.util.EqualUtil;
 import jetbrains.mps.util.io.ModelInputStream;
 import jetbrains.mps.util.io.ModelOutputStream;
 import org.jetbrains.annotations.NotNull;
@@ -29,6 +28,7 @@ import org.jetbrains.mps.openapi.model.SNodeId;
 import org.jetbrains.mps.openapi.module.SModuleId;
 
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Entry in the usage index. We keep distinct instances to tell concept uses from node or model uses.
@@ -94,7 +94,7 @@ abstract class UsageEntry {
   final static class NodeUse extends UsageEntry {
     private final SNodeId myNode;
 
-    public NodeUse(SNodeId node) {
+    public NodeUse(@NotNull SNodeId node) {
       myNode = node;
     }
 
@@ -142,7 +142,7 @@ abstract class UsageEntry {
     public boolean equals(Object obj) {
       if (obj instanceof ModelUse) {
         ModelUse o = (ModelUse) obj;
-        return myModel.equals(o.myModel) && EqualUtil.equals(myModule, o.myModule);
+        return myModel.equals(o.myModel) && Objects.equals(myModule, o.myModule);
       }
       return false;
     }

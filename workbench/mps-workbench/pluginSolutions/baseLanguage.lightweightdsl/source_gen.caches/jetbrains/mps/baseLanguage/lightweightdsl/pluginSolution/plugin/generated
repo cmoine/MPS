@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-9yo8hb0ka0hysngmlac5yug8lsagfuu" />
+<product version="3" modelHash="7m4n2fas3999kxtangzhax4g2w3qn27">
+  <files names="ClassLikeMenuAdjustment_AppPluginPart.java:ClassLikes_ActionGroup.java:DSLComponentChecker.java:DSLComponentMessage.java:Default_KeymapChanges.java:GoToMemberDeclaration_Action.java:IconContainer.java:LightweightDSLUneditableMemberGutter_ProjectPluginPart.java:NewClassLike_Action.java:PluginSolution_ApplicationPlugin.java:PluginSolution_ProjectPlugin.java" />
+</product>
 

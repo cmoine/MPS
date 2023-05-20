@@ -87,11 +87,11 @@ public abstract class AbstractMapSequence<U, V> extends AbstractSequence<IMappin
   }
   @Override
   public boolean isNotEmpty() {
-    return !((map.isEmpty()));
+    return !(map.isEmpty());
   }
   @Override
   public Iterator<IMapping<U, V>> iterator() {
-    return new AbstractMapSequence.MappingIterator();
+    return new MappingIterator();
   }
   @Override
   public IMapSequence<U, V> putAll(IMapSequence<? extends U, ? extends V> map) {
@@ -119,7 +119,7 @@ public abstract class AbstractMapSequence<U, V> extends AbstractSequence<IMappin
   @SuppressWarnings(value = "unchecked")
   @Override
   public ISetSequence<IMapping<U, V>> mappingsSet() {
-    return (ISetSequence<IMapping<U, V>>) new AbstractMapSequence.MappingsSetSequence();
+    return (ISetSequence<IMapping<U, V>>) new MappingsSetSequence();
   }
   protected Map<U, V> getMap() {
     return map;
@@ -138,7 +138,7 @@ public abstract class AbstractMapSequence<U, V> extends AbstractSequence<IMappin
     }
     @Override
     public IMapping<U, V> next() {
-      return new AbstractMapSequence.EntryMapping<U, V>(entriesIt.next());
+      return new EntryMapping<U, V>(entriesIt.next());
     }
     @Override
     public void remove() {
@@ -177,7 +177,7 @@ public abstract class AbstractMapSequence<U, V> extends AbstractSequence<IMappin
         return false;
       }
       if (getClass() == that.getClass()) {
-        return entry.equals(((AbstractMapSequence.EntryMapping<F, S>) that).entry);
+        return entry.equals(((EntryMapping<F, S>) that).entry);
       }
       if (that instanceof IMapping) {
         return eq(key(), ((IMapping) that).key()) && eq(value(), ((IMapping) that).value());

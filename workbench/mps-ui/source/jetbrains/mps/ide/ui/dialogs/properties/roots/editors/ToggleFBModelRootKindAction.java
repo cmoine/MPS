@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  */
 package jetbrains.mps.ide.ui.dialogs.properties.roots.editors;
 
-import com.intellij.openapi.actionSystem.ActionPlaces;
 import com.intellij.openapi.actionSystem.ActionToolbar;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.Presentation;
@@ -26,7 +25,13 @@ import com.intellij.openapi.fileChooser.FileElement;
 import com.intellij.openapi.fileChooser.ex.FileNodeDescriptor;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.vfs.VirtualFile;
-import jetbrains.mps.extapi.persistence.FileBasedModelRoot;
+import jetbrains.mps.extapi.persistence.DefaultSourceRoot;
+import jetbrains.mps.extapi.persistence.SourceRoot;
+import jetbrains.mps.extapi.persistence.SourceRootKind;
+import jetbrains.mps.ide.actions.MPSCommonDataKeys;
+import jetbrains.mps.ide.vfs.IdeaFileSystem;
+import jetbrains.mps.project.MPSProject;
+import jetbrains.mps.vfs.IFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,13 +40,12 @@ import javax.swing.JComponent;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
-import java.lang.Override;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class ToggleFBModelRootKindAction extends ToggleAction implements CustomComponentAction, DumbAware {
-
   protected final JTree myTree;
   protected FileBasedModelRootEditor myModelRootEditor;
 
@@ -49,23 +53,20 @@ public abstract class ToggleFBModelRootKindAction extends ToggleAction implement
     super(text, description, icon);
     myTree = tree;
     myModelRootEditor = modelRootEditor;
-    getTemplatePresentation().setEnabled(true);
   }
 
-  protected abstract String getKind();
+  @NotNull
+  protected abstract SourceRootKind getKind();
 
   @Override
   public boolean isSelected(AnActionEvent e) {
-    final VirtualFile[] selectedFiles = getSelectedFiles();
-    if (selectedFiles.length == 0) return false;
+    final List<IFile> selectedFiles = getSelectedFiles(e);
+    if (selectedFiles.isEmpty()) {
+      return false;
+    }
 
-    final FileBasedModelRoot modelRoot = (FileBasedModelRoot) myModelRootEditor.getFileBasedModelRootEntry().getModelRoot();
-
-    if(selectedFiles.length == 1)
-      return modelRoot.containsFile(getKind(), selectedFiles[0].getPath());
-
-    for (VirtualFile file : selectedFiles) {
-      if(!modelRoot.containsFile(getKind(), file.getPath())) {
+    for (IFile selectedFile : selectedFiles) {
+      if (getSourceRootByPath(selectedFile) == null) {
         return false;
       }
     }
@@ -73,74 +74,73 @@ public abstract class ToggleFBModelRootKindAction extends ToggleAction implement
     return true;
   }
 
+  @Nullable
+  private SourceRoot getSourceRootByPath(@NotNull IFile path) {
+    return myModelRootEditor.getFileBasedModelRootEntry().getSourceRootByPath(getKind(), path);
+  }
+
   @Override
-  public void setSelected(AnActionEvent e, boolean state) {
-    final VirtualFile[] selectedFiles = getSelectedFiles();
-    assert selectedFiles.length != 0;
+  public void setSelected(AnActionEvent e, final boolean enabled) { // if enabled == false, then the selection was disabled
+    final List<IFile> selectedFiles = getSelectedFiles(e);
+    assert !selectedFiles.isEmpty();
 
-    final FileBasedModelRoot modelRoot = (FileBasedModelRoot) myModelRootEditor.getFileBasedModelRootEntry().getModelRoot();
-
-    for (VirtualFile selectedFile : selectedFiles) {
-      String path = selectedFile.getPath();
-
-      if (state) {
-        if(!modelRoot.containsFile(getKind(), path)) {
-          modelRoot.addFile(getKind(), path);
-
-          Collection<String> kinds = modelRoot.getSupportedFileKinds();
-          for (String kind : kinds) {
-            if(kind.equals(getKind())) continue;
-            if(modelRoot.containsFile(kind, path)) {
-              modelRoot.deleteFile(kind, path);
-            }
-          }
-        }
-      }
-      else {
-        modelRoot.deleteFile(getKind(), path);
+    for (IFile selectedFile : selectedFiles) {
+      SourceRoot sourceRootByPath = getSourceRootByPath(selectedFile);
+      if (enabled) {
+        assert sourceRootByPath == null;
+        myModelRootEditor.getFileBasedModelRootEntry().addSourceRoot(getKind(), new DefaultSourceRoot(selectedFile));
+      } else {
+        assert sourceRootByPath != null;
+        myModelRootEditor.getFileBasedModelRootEntry().removeSourceRoot(getKind(), sourceRootByPath);
       }
     }
 
     myTree.updateUI();
+    // access editor's data to updateUI()?! Cool!
     myModelRootEditor.getFileBasedModelRootEntry().updateUI();
   }
 
   @Override
-  public void update(AnActionEvent e) {
+  public void update(@NotNull AnActionEvent e) {
     super.update(e);
     final Presentation presentation = e.getPresentation();
     presentation.setEnabled(true);
-    final VirtualFile[] files = getSelectedFiles();
-    if (files.length == 0) {
+    final List<IFile> files = getSelectedFiles(e);
+    if (files.isEmpty()) {
       presentation.setEnabled(false);
-      return;
     }
   }
 
   @NotNull
-  protected final VirtualFile[] getSelectedFiles() {
+  private final List<IFile> getSelectedFiles(AnActionEvent e) {
+    final MPSProject mpsProject = e.getData(MPSCommonDataKeys.MPS_PROJECT);
+    if (mpsProject == null) {
+      return Collections.emptyList();
+    }
     final TreePath[] selectionPaths = myTree.getSelectionPaths();
     if (selectionPaths == null) {
-      return VirtualFile.EMPTY_ARRAY;
+      return Collections.emptyList();
     }
-    final List<VirtualFile> selected = new ArrayList<VirtualFile>();
+    final List<VirtualFile> selected = new ArrayList<>();
     for (TreePath treePath : selectionPaths) {
-      final DefaultMutableTreeNode node = (DefaultMutableTreeNode)treePath.getLastPathComponent();
+      final DefaultMutableTreeNode node = (DefaultMutableTreeNode) treePath.getLastPathComponent();
       final Object nodeDescriptor = node.getUserObject();
       if (!(nodeDescriptor instanceof FileNodeDescriptor)) {
-        return VirtualFile.EMPTY_ARRAY;
+        return Collections.emptyList();
       }
-      final FileElement fileElement = ((FileNodeDescriptor)nodeDescriptor).getElement();
+      final FileElement fileElement = ((FileNodeDescriptor) nodeDescriptor).getElement();
       final VirtualFile file = fileElement.getFile();
       if (file != null) {
         selected.add(file);
       }
     }
-    return selected.toArray(new VirtualFile[selected.size()]);
+    final IdeaFileSystem fs = mpsProject.getFileSystem();
+    return selected.stream().map(fs::fromVirtualFile).collect(Collectors.toList());
   }
 
+  @NotNull
   @Override
-  public JComponent createCustomComponent(Presentation presentation) {
-    return new ActionButtonWithText(this, presentation, ActionPlaces.UNKNOWN, ActionToolbar.DEFAULT_MINIMUM_BUTTON_SIZE);
+  public JComponent createCustomComponent(@NotNull Presentation presentation, @NotNull String place) {
+    return new ActionButtonWithText(this, presentation, place, ActionToolbar.DEFAULT_MINIMUM_BUTTON_SIZE);
   }
 }

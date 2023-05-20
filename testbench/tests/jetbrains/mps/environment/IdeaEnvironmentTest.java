@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,23 @@
 package jetbrains.mps.environment;
 
 import jetbrains.mps.tool.environment.Environment;
-import jetbrains.mps.tool.environment.EnvironmentConfig;
+import jetbrains.mps.tool.environment.EnvironmentAware;
 import jetbrains.mps.tool.environment.IdeaEnvironment;
+import org.jetbrains.annotations.NotNull;
+import org.junit.Assert;
 
-public class IdeaEnvironmentTest extends EnvironmentTest {
+public class IdeaEnvironmentTest extends EnvironmentTest implements EnvironmentAware {
+  private Environment myEnvironment;
+
+  @Override
+  public void setEnvironment(@NotNull Environment env) {
+    Assert.assertTrue(env instanceof IdeaEnvironment);
+    myEnvironment = env;
+  }
+
   @Override
   protected Environment createEnvironment() {
-    return IdeaEnvironment.getOrCreate(EnvironmentConfig.defaultConfig());
+    // IMPORTANT! This environment is supplied from outside and is not supposed to be disposed
+    return myEnvironment;
   }
 }

@@ -5,12 +5,9 @@ package jetbrains.mps.lang.typesystem.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.List;
 import java.util.Arrays;
@@ -22,9 +19,8 @@ import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
 
 public final class DefaultGroupReference__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x12541e5f229acee2L, "jetbrains.mps.lang.typesystem.structure.DefaultGroupReference");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<String> createGeneratedNodeId_id6nAedb8XAuf = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("createGeneratedNodeId").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("6nAedb8XAuf").registry(REGISTRY).build();
+  public static final SMethod<String> createGeneratedNodeId_id6nAedb8XAuf = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("createGeneratedNodeId").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(7342618720440051599L).languageId(0xab76d5ed1746f2b2L, 0x7a5dda6291404668L).build2();
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(createGeneratedNodeId_id6nAedb8XAuf);
 
@@ -36,7 +32,6 @@ public final class DefaultGroupReference__BehaviorDescriptor extends BaseBHDescr
   }
 
   /*package*/ DefaultGroupReference__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override

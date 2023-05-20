@@ -15,31 +15,59 @@
  */
 package jetbrains.mps.typesystem.inference;
 
-import jetbrains.mps.errors.IRuleConflictWarningProducer;
 import jetbrains.mps.errors.IErrorReporter;
+import jetbrains.mps.errors.IRuleConflictWarningProducer;
 import jetbrains.mps.errors.QuickFixProvider;
 import jetbrains.mps.errors.messageTargets.MessageTarget;
 import jetbrains.mps.newTypesystem.context.typechecking.IncrementalTypechecking;
 import jetbrains.mps.newTypesystem.operation.AbstractOperation;
 import jetbrains.mps.newTypesystem.state.State;
-import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.util.Pair;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.model.SNode;
 
 import java.util.List;
 import java.util.Set;
 
 public abstract class TypeCheckingContext {
 
+  public abstract TypeCheckerHelper getTypeCheckerHelper();
+
   public abstract SNode getRepresentative(SNode node);
 
   public abstract boolean isIncrementalMode();
 
-  public abstract void setIsNonTypesystemComputation();
+  public enum NonTypesystemComputationMode {
+    OFF,
+    ON_THE_FLY,
+    NORMAL
+  }
 
-  public abstract void resetIsNonTypesystemComputation();
+  public abstract boolean setNonTypesystemComputationMode(@NotNull NonTypesystemComputationMode mode);
 
-  public abstract boolean isNonTypesystemComputation();
+  @NotNull
+  public abstract NonTypesystemComputationMode getNonTypesystemComputationMode();
+
+  /**
+   * @deprecated use {@link #setNonTypesystemComputationMode(NonTypesystemComputationMode)}
+   */
+@Deprecated(since = "2020.2", forRemoval = true)
+  public /*final*/ void setIsNonTypesystemComputation() {
+    setNonTypesystemComputationMode(NonTypesystemComputationMode.NORMAL);
+  }
+
+  /**
+   * @deprecated use {@link #setNonTypesystemComputationMode(NonTypesystemComputationMode)}
+   */
+@Deprecated(since = "2020.2", forRemoval = true)
+  public /*final*/ void resetIsNonTypesystemComputation() {
+    setNonTypesystemComputationMode(NonTypesystemComputationMode.OFF);
+  }
+
+  public /*final*/ boolean isNonTypesystemComputation() {
+    return getNonTypesystemComputationMode() != NonTypesystemComputationMode.OFF;
+  }
 
   //errors reporting
   public abstract IErrorReporter reportTypeError(SNode nodeWithError, String errorString, String ruleModel, String ruleId, QuickFixProvider intentionProvider, MessageTarget errorTarget);
@@ -48,9 +76,14 @@ public abstract class TypeCheckingContext {
 
   public abstract IErrorReporter reportInfo(SNode nodeWithInfo, String message, String ruleModel, String ruleId, QuickFixProvider intentionProvider, MessageTarget errorTarget);
 
-  public abstract void reportMessage(SNode nodeWithError, IErrorReporter errorReporter);
+  /**
+   * @param errorReporter valid errorReporter
+   */
+  public abstract void reportMessage(IErrorReporter errorReporter);
 
   public abstract SNode createNewRuntimeTypesVariable();
+
+  public abstract void printToTrace(String message);
 
   //for special cases
   public abstract SNode typeOf(SNode node);
@@ -59,65 +92,12 @@ public abstract class TypeCheckingContext {
 
   public abstract void addDependencyForCurrent(SNode node);
 
-  //deprecated eqs
-  @Deprecated
-  public abstract void createEquation(SNode node1,
-                                      SNode node2,
-                                      SNode nodeToCheck,
-                                      String errorString,
-                                      String ruleModel,
-                                      String ruleId,
-                                      QuickFixProvider intentionProvider);
-
-  @Deprecated
-  public abstract void createLessThanInequationStrong(SNode node1,
-                                                      SNode node2,
-                                                      SNode nodeToCheck,
-                                                      String errorString,
-                                                      String ruleModel,
-                                                      String ruleId,
-                                                      boolean checkOnly,
-                                                      int inequationPriority,
-                                                      QuickFixProvider intentionProvider);
-
-  @Deprecated
-  public abstract void createGreaterThanInequation(SNode node1,
-                                                   SNode node2,
-                                                   SNode nodeToCheck,
-                                                   String errorString,
-                                                   String ruleModel,
-                                                   String ruleId,
-                                                   boolean checkOnly,
-                                                   int inequationPriority,
-                                                   QuickFixProvider intentionProvider);
-
-  @Deprecated
-  public abstract void createComparableEquation(SNode node1,
-                                                SNode node2,
-                                                SNode nodeToCheck,
-                                                String errorString,
-                                                String ruleModel,
-                                                String ruleId,
-                                                QuickFixProvider intentionProvider);
-
   //new eqs
   public void createEquation(SNode node1, SNode node2, EquationInfo equationInfo) {
     createEquation(node1, node2, false, equationInfo);
   }
 
-  public abstract void printToTrace(String message);
-
   public abstract void createEquation(SNode node1, SNode node2, boolean checkOnly, EquationInfo equationInfo);
-
-  public abstract void createLessThanInequation(SNode node1, SNode node2, boolean checkOnly, EquationInfo equationInfo);
-
-  public abstract void createLessThanInequationStrong(SNode node1, SNode node2, boolean checkOnly, EquationInfo equationInfo);
-
-  public abstract void createGreaterThanInequation(SNode node1, SNode node2, boolean checkOnly, EquationInfo equationInfo);
-
-  public abstract void createGreaterThanInequationStrong(SNode node1, SNode node2, boolean checkOnly, EquationInfo equationInfo);
-
-  public abstract void createComparableEquation(SNode node1, SNode node2, EquationInfo equationInfo);
 
   public abstract void createComparableEquation(SNode node1, SNode node2, boolean inference, EquationInfo equationInfo);
 
@@ -144,6 +124,8 @@ public abstract class TypeCheckingContext {
   public abstract void whenConcrete(SNode argument, Runnable r, String nodeModel, String nodeId, boolean isShallow);
 
   public abstract void whenConcrete(SNode argument, Runnable r, String nodeModel, String nodeId, boolean isShallow, boolean skipError);
+
+  public abstract void whenConcrete(SNode argument, Runnable r, String nodeModel, String nodeId, boolean isShallow, boolean skipError, String warningMessage);
 
   public abstract void whenConcrete(List<SNode> argument, Runnable r, String nodeModel, String nodeId, boolean isShallow, boolean skipError);
 
@@ -174,10 +156,16 @@ public abstract class TypeCheckingContext {
 
   public abstract boolean checkIfNotChecked(SNode node, boolean useNonTypesystemRules);
 
+  /**
+   * Do both checkRoot and applyNonTypesystemRules.
+   */
+  public abstract void checkAll(boolean refreshTypes, boolean useNonTypesystemRules);
+
   public abstract void checkRoot();
 
   public abstract void checkRoot(boolean refreshTypes);
 
+  @Deprecated
   public abstract Set<Pair<SNode, List<IErrorReporter>>> checkRootAndGetErrors(boolean refreshTypes);
 
   public abstract Set<Pair<SNode, List<IErrorReporter>>> getNodesWithErrors(boolean typesystemErrors);
@@ -202,6 +190,8 @@ public abstract class TypeCheckingContext {
   public abstract void checkRootInTraceMode(boolean refreshTypes);
 
   public abstract TypeSubstitution getSubstitution(SNode origNode);
+
+  public abstract void reportEquationError(@NotNull EquationInfo info, jetbrains.mps.newTypesystem.state.State state, String before, SNode left, String between, SNode right, String after);
 
   public static class NodeInfo {
     SNode myNode;

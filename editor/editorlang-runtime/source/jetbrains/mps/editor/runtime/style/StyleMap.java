@@ -15,11 +15,7 @@
  */
 package jetbrains.mps.editor.runtime.style;
 
-import jetbrains.mps.util.IndexableObjectSet;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 public class StyleMap<T> {
 

@@ -15,11 +15,12 @@
  */
 package org.jetbrains.mps.openapi.persistence;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Receives notifications about external changes to the data source.
  * When more detailed notifications are needed consider implementing one of the subinterfaces as well.
  */
 public interface DataSourceListener {
-
-  void changed(DataSource source);
+  void changed(@NotNull DataSource source);
 }

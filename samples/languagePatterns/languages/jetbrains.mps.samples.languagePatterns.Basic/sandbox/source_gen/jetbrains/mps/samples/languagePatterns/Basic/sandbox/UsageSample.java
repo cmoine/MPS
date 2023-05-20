@@ -5,13 +5,13 @@ package jetbrains.mps.samples.languagePatterns.Basic.sandbox;
 
 public class UsageSample {
   public static void main(String[] args) {
-    // Declarations 
+    // Declarations
     String item_l5g1mt_b0a = "bar";
     String item_l5g1mt_c0a = "baz";
-    // Reading using the reference 
+    // Reading using the reference
     String s = "" + item_l5g1mt_b0a;
     System.out.println(s);
-    // Assignment into the declaration using the reference 
+    // Assignment into the declaration using the reference
     item_l5g1mt_b0a = "1";
     System.out.println(s);
   }

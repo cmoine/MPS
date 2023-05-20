@@ -3,12 +3,10 @@
   <id>jetbrains.mps.execution.api</id>
   <name>Execution Api and Utility Languages</name>
   <description>Execution api and utility languages for MPS</description>
-  <version>3.4.5</version>
-  <vendor url="http://www.jetbrains.com/mps/" logo="/MPS_16.png">JetBrains</vendor>
-  <idea-version since-build="145.1" until-build="163.1"/>
+  <vendor url="http://www.jetbrains.com/mps/">JetBrains</vendor>
 
   <extensions defaultExtensionNs="com.intellij">
-    <mps.LanguageLibrary dir="/"/>
+    <mps.LanguageLibrary dir="/" hide="true"/>
     <errorHandler implementation="jetbrains.mps.ide.blame.CharismaReporter"/>
   </extensions>
 </idea-plugin>

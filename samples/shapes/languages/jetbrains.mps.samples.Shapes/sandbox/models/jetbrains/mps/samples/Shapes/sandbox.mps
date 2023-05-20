@@ -3,7 +3,7 @@
   <persistence version="9" />
   <languages>
     <use id="16bafbb4-c6cd-4cc5-8332-7c6de8729b3f" name="jetbrains.mps.samples.Shapes" version="0" />
-    <use id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core" version="1" />
+    <use id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core" version="2" />
   </languages>
   <imports>
     <import index="r2wu" ref="r:bdfa3a84-8ee6-4fba-b3f2-b16b2216a12b(jetbrains.mps.samples.Shapes.colors)" implicit="true" />
@@ -27,7 +27,7 @@
         <property id="5898776707557474718" name="radius" index="36$QIR" />
       </concept>
       <concept id="4191445539799302575" name="jetbrains.mps.samples.Shapes.structure.ColorReference" flags="ng" index="3_2g0H">
-        <reference id="4191445539799302810" name="color" index="3_2gco" />
+        <reference id="4191445539799302810" name="target" index="3_2gco" />
       </concept>
     </language>
     <language id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core">

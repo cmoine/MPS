@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,10 +23,12 @@ import com.intellij.openapi.fileChooser.FileChooserFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
+import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileSystem;
 import com.intellij.ui.DocumentAdapter;
 import com.intellij.ui.IdeBorderFactory;
-import jetbrains.mps.ide.vfs.VirtualFileUtils;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -36,21 +38,34 @@ import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.io.File;
 
+// FIXME I wonder if there's a proper alternative in IDEA
+//       Perhaps, there's even an action we could reuse instead of writing our own MoveFileOrDirectory_Action
 public class MoveFileDialog extends DialogWrapper {
-  private JLabel myLabel;
-  private TextFieldWithBrowseButton myDirectoryField = new TextFieldWithBrowseButton();
+  private final JLabel myLabel;
+  private final TextFieldWithBrowseButton myDirectoryField = new TextFieldWithBrowseButton();
+  private final VirtualFileSystem myFileSystem;
 
-  public MoveFileDialog(final Project project, final String initialText, boolean isDirectory) {
+  /**
+   * @deprecated use cons that takes VirtualFile
+   */
+  @Deprecated(forRemoval = true, since = "2022.1")
+  public MoveFileDialog(Project project, String initialText, boolean isDirectory) {
+    this(project, LocalFileSystem.getInstance().findFileByIoFile(new File(initialText)));
+  }
+
+  public MoveFileDialog(@NotNull final Project project, @NotNull final VirtualFile file2move) {
     super(project);
+    myFileSystem = file2move.getFileSystem();
     setTitle("Move");
-    myDirectoryField.setText(initialText);
+    final VirtualFile sourceDir = file2move.getParent();
+    // myDirectoryField is a destination, use parent of the source VF as a default
+    myDirectoryField.setText(sourceDir.getPath());
     myDirectoryField.addActionListener(e -> ApplicationManager.getApplication().invokeLater(() -> {
       FileChooserDescriptor chooser = new FileChooserDescriptor(false, true, false, false, false, false);
       FileChooserDialog dialog = FileChooserFactory.getInstance().createFileChooser(chooser, project, getOwner());
-      VirtualFile[] selectedFiles = dialog.choose(project, VirtualFileUtils.getVirtualFile(initialText));
+      VirtualFile[] selectedFiles = dialog.choose(project, sourceDir);
       if (selectedFiles.length > 0 && selectedFiles[0] != null) {
         myDirectoryField.setText(selectedFiles[0].getPath());
       }
@@ -59,7 +74,7 @@ public class MoveFileDialog extends DialogWrapper {
       @Override
       protected void textChanged(DocumentEvent e) {
         // Check that destination path exist and block apply if not
-        final VirtualFile virtualFile = VirtualFileUtils.getVirtualFile(myDirectoryField.getText());
+        final VirtualFile virtualFile = vfFromTextField();
         if (virtualFile == null || !virtualFile.exists()) {
           MoveFileDialog.this.setErrorText("Destination does not exists");
           MoveFileDialog.this.setOKActionEnabled(false);
@@ -69,8 +84,8 @@ public class MoveFileDialog extends DialogWrapper {
         }
       }
     });
-    String type = (isDirectory) ? "directory" : "file";
-    myLabel = new JLabel("Move " + type + " " + initialText);
+    String type = file2move.isDirectory() ? "directory" : "file";
+    myLabel = new JLabel("Move " + type + " " + file2move.getPath());
     init();
   }
 
@@ -89,7 +104,19 @@ public class MoveFileDialog extends DialogWrapper {
     return centerComponent;
   }
 
+  /**
+   * @deprecated prefer {@link #getResultFile()}
+   */
+  @Deprecated(forRemoval = true, since = "2022.1")
   public String getResult() {
     return myDirectoryField.getText();
+  }
+
+  public VirtualFile getResultFile() {
+    return vfFromTextField();
+  }
+
+  private VirtualFile vfFromTextField() {
+    return myFileSystem.findFileByPath(myDirectoryField.getText());
   }
 }

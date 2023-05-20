@@ -22,21 +22,21 @@ import java.util.Collection;
  * Date: 2/4/13
  */
 public interface KeyMap {
-  public static final String KEY_MODIFIERS_NONE = "none";
-  public static final String KEY_MODIFIERS_ANY = "any";
-  public static final String KEY_MODIFIERS_CTRL = "ctrl";
-  public static final String KEY_MODIFIERS_ALT = "alt";
-  public static final String KEY_MODIFIERS_SHIFT = "shift";
-  public static final String KEY_MODIFIERS_CTRL_ALT = "ctrl+alt";
-  public static final String KEY_MODIFIERS_CTRL_SHIFT = "ctrl+shift";
-  public static final String KEY_MODIFIERS_CTRL_ALT_SHIFT = "ctrl+alt+shift";
-  public static final String KEY_MODIFIERS_ALT_SHIFT = "alt+shift";
+  String KEY_MODIFIERS_NONE = "none";
+  String KEY_MODIFIERS_ANY = "any";
+  String KEY_MODIFIERS_CTRL = "ctrl";
+  String KEY_MODIFIERS_ALT = "alt";
+  String KEY_MODIFIERS_SHIFT = "shift";
+  String KEY_MODIFIERS_CTRL_ALT = "ctrl+alt";
+  String KEY_MODIFIERS_CTRL_SHIFT = "ctrl+shift";
+  String KEY_MODIFIERS_CTRL_ALT_SHIFT = "ctrl+alt+shift";
+  String KEY_MODIFIERS_ALT_SHIFT = "alt+shift";
 
-  public static final String KEY_CODE_DIGIT = "digit";
-  public static final String KEY_CODE_LETTER = "letter";
-  public static final String KEY_CODE_LETTER_OR_DIGIT = "letter or digit";
-  public static final String KEY_CODE_SPACE = "space char";
-  public static final String KEY_CODE_CHAR = "non-space char";
+  String KEY_CODE_DIGIT = "digit";
+  String KEY_CODE_LETTER = "letter";
+  String KEY_CODE_LETTER_OR_DIGIT = "letter or digit";
+  String KEY_CODE_SPACE = "space char";
+  String KEY_CODE_CHAR = "non-space char";
 
   boolean isApplicableToEveryModel();
 
@@ -72,9 +72,7 @@ public interface KeyMap {
 
       if (myKeyTyped != actionKey.myKeyTyped) return false;
       if (!myKeyCode.equals(actionKey.myKeyCode)) return false;
-      if (!myModifiers.equals(actionKey.myModifiers)) return false;
-
-      return true;
+      return myModifiers.equals(actionKey.myModifiers);
     }
 
     @Override

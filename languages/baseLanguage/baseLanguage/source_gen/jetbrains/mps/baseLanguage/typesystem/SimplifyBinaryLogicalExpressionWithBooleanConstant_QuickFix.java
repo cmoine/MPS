@@ -6,6 +6,7 @@ import jetbrains.mps.errors.QuickFix_Runtime;
 import jetbrains.mps.smodel.SNodePointer;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import org.jetbrains.mps.openapi.language.SConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class SimplifyBinaryLogicalExpressionWithBooleanConstant_QuickFix extends QuickFix_Runtime {
@@ -13,9 +14,13 @@ public class SimplifyBinaryLogicalExpressionWithBooleanConstant_QuickFix extends
     super(new SNodePointer("r:00000000-0000-4000-0000-011c895902c5(jetbrains.mps.baseLanguage.typesystem)", "3832376534028401955"));
   }
   public String getDescription(SNode node) {
-    return ((SNodeOperations.isInstanceOf(((SNode) SimplifyBinaryLogicalExpressionWithBooleanConstant_QuickFix.this.getField("operation")[0]), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfbdeb6fecfL, "jetbrains.mps.baseLanguage.structure.BinaryOperation")) ? "Simplify Binary Logical Expression" : "Simplify Ternary Operator Expression")) + " " + ExpressionPresentationUtil.getExpressionPresentation(((SNode) SimplifyBinaryLogicalExpressionWithBooleanConstant_QuickFix.this.getField("operation")[0]));
+    return ((SNodeOperations.isInstanceOf(((SNode) SimplifyBinaryLogicalExpressionWithBooleanConstant_QuickFix.this.getField("operation")[0]), CONCEPTS.BinaryOperation$W1) ? "Simplify Binary Logical Expression" : "Simplify Ternary Operator Expression")) + " " + ExpressionPresentationUtil.getExpressionPresentation(((SNode) SimplifyBinaryLogicalExpressionWithBooleanConstant_QuickFix.this.getField("operation")[0]));
   }
   public void execute(SNode node) {
     SNodeOperations.replaceWithAnother(((SNode) SimplifyBinaryLogicalExpressionWithBooleanConstant_QuickFix.this.getField("operation")[0]), ((SNode) SimplifyBinaryLogicalExpressionWithBooleanConstant_QuickFix.this.getField("remainingNode")[0]));
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept BinaryOperation$W1 = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfbdeb6fecfL, "jetbrains.mps.baseLanguage.structure.BinaryOperation");
   }
 }

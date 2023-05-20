@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,15 +15,14 @@
  */
 package jetbrains.mps.classloading;
 
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.module.ReloadableModuleBase;
 import jetbrains.mps.module.ReloadableModuleBase.SModuleDependenciesListener;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.module.SModule;
+import org.jetbrains.mps.openapi.module.SModuleListener;
 import org.jetbrains.mps.openapi.module.SModuleReference;
 import org.jetbrains.mps.openapi.module.SRepository;
-import org.jetbrains.mps.openapi.module.SRepositoryContentAdapter;
 import org.jetbrains.mps.openapi.module.SRepositoryListener;
 import org.jetbrains.mps.openapi.module.event.SModuleAddedEvent;
 import org.jetbrains.mps.openapi.module.event.SModuleChangedEvent;
@@ -40,12 +39,12 @@ import java.util.List;
  * not thread-safe
  */
 public class BatchEventsProcessor {
-  private static Logger LOG = LogManager.getLogger(BatchEventsProcessor.class);
+  private static final Logger LOG = Logger.getLogger(BatchEventsProcessor.class);
   private volatile boolean myBatchStarted = false;
 
   private static final Object LOCK = new Object();
 
-  private final List<SRepositoryEvent> myEvents = new ArrayList<SRepositoryEvent>();
+  private final List<SRepositoryEvent> myEvents = new ArrayList<>();
 
   private final SRepositoryListener myRepositoryListener = new MySRepositoryListener();
 
@@ -58,11 +57,10 @@ public class BatchEventsProcessor {
   public void startBatching() {
     if (myBatchStarted) {
       myBatchStarted = false;
-      myEvents.clear();
-      throw new IllegalStateException("Batching has been already started; Clearing the queue...");
+      LOG.error("Batching has been already started; Ignoring...", new IllegalStateException());
     }
     if (!myEvents.isEmpty()) {
-      LOG.warn("Events have not been flushed");
+      LOG.warning("Events have not been flushed");
     }
     myBatchStarted = true;
   }
@@ -84,7 +82,9 @@ public class BatchEventsProcessor {
   }
 
   public void finishBatching() {
-    if (!myBatchStarted) throw new IllegalStateException("Batching has not been even started");
+    if (!myBatchStarted) {
+      LOG.error("Batching has not even been started; Ignoring...", new IllegalStateException());
+    }
     myBatchStarted = false;
   }
 
@@ -99,8 +99,10 @@ public class BatchEventsProcessor {
   /**
    *  This class listens for module's add/removal, for 'moduleChanged' event (triggered by AbstractModule)
    *  and for internal (so far) 'dependenciesChanged' event.
+   *  I don't use {@code SRepositoryContentAdapter} as I don't need {@code SRepositoryAttachListener} and imposed
+   *  model read on listener add/remove
    */
-  private class MySRepositoryListener extends SRepositoryContentAdapter implements SModuleDependenciesListener {
+  private class MySRepositoryListener implements SRepositoryListener, SModuleListener, SModuleDependenciesListener {
     private void addEventToList(@NotNull SRepositoryEvent event) {
       synchronized (LOCK) {
         myEvents.add(event);

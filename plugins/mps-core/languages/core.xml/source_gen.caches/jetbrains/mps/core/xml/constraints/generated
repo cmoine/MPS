@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-56tzptm47oh1fx6p6a929vjemp3yerv" />
+<product version="3" modelHash="-42jg2o0p1cnt375x24w9p910z3b3vmf">
+  <files names="ConstraintsAspectDescriptor.java:XmlAttribute_Constraints.java:XmlCDATA_Constraints.java:XmlCharRefValue_Constraints.java:XmlCharRef_Constraints.java:XmlCommentLine_Constraints.java:XmlContent_Constraints.java:XmlDeclaration_Constraints.java:XmlDoctypeDeclaration_Constraints.java:XmlElement_Constraints.java:XmlEntityRefValue_Constraints.java:XmlEntityRef_Constraints.java:XmlExternalId_Constraints.java:XmlNameUtil.java:XmlTextValue_Constraints.java:XmlText_Constraints.java:XmlValuePart_Constraints.java:XmlWhitespace_Constraints.java" />
+</product>
 

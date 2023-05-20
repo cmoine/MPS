@@ -5,58 +5,105 @@ package jetbrains.mps.build.pluginSolution.plugin;
 import java.util.List;
 import com.intellij.execution.junit.RuntimeConfigurationProducer;
 import com.intellij.execution.configurations.ConfigurationType;
+import com.intellij.execution.configurations.ConfigurationFactory;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import java.util.ArrayList;
 import jetbrains.mps.execution.api.configurations.BaseMpsProducer;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.plugins.runconfigs.MPSPsiElement;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import com.intellij.execution.impl.RunManagerImpl;
+import org.jetbrains.annotations.NotNull;
+import com.intellij.execution.configurations.RunConfiguration;
+import com.intellij.execution.actions.ConfigurationContext;
+import jetbrains.mps.smodel.ModelAccessHelper;
+import java.util.Objects;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SProperty;
 
-public class BuildScript_Producer {
-  private static final String CONFIGURATION_FACTORY_CLASS_NAME = "jetbrains.mps.build.pluginSolution.plugin.BuildScript_Configuration_Factory";
-
-  public BuildScript_Producer() {
-  }
+public final class BuildScript_Producer {
 
   public static List<RuntimeConfigurationProducer> getProducers(ConfigurationType configurationType) {
+    ConfigurationFactory configurationFactory = null;
+    // assume the one with id matching configuration kind is the primary one.
+    // In fact, though technically we support more that one factory per type (aka 'foreign' factories), all factories
+    // bear same id (due to overlook of template author, I believe), and we effectively take the fist registerd one, which I don't
+    // mind as 'foreign' factories do not work anyway.
+    for (ConfigurationFactory f : configurationType.getConfigurationFactories()) {
+      if (f.getId().equals(configurationType.getId())) {
+        configurationFactory = f;
+        break;
+      }
+    }
+    if (configurationFactory == null) {
+      configurationFactory = configurationType.getConfigurationFactories()[0];
+    }
     List<RuntimeConfigurationProducer> creators = ListSequence.fromList(new ArrayList<RuntimeConfigurationProducer>());
-    ListSequence.fromList(creators).addElement(new BuildScript_Producer.ProducerPart_Node_3e34ca_a(configurationType, CONFIGURATION_FACTORY_CLASS_NAME));
+    ListSequence.fromList(creators).addElement(new ProducerPart_Node_3e34ca_a(configurationFactory));
     return creators;
   }
 
   public static final class ProducerPart_Node_3e34ca_a extends BaseMpsProducer<SNode> {
-    public ProducerPart_Node_3e34ca_a(ConfigurationType configurationType, String factoryName) {
-      super(configurationType, factoryName);
+    public ProducerPart_Node_3e34ca_a(ConfigurationFactory configurationFactory) {
+      super(configurationFactory);
     }
 
     @Override
     protected boolean isApplicable(Object source) {
-      return source instanceof SNode && SNodeOperations.isInstanceOf(((SNode) source), MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x10802efe25aL, "jetbrains.mps.lang.core.structure.BaseConcept"));
+      return source instanceof SNode && SNodeOperations.isInstanceOf(((SNode) source), CONCEPTS.BaseConcept$gP);
     }
 
     @Override
     protected BuildScript_Configuration doCreateConfiguration(final SNode source) {
       setSourceElement(MPSPsiElement.createFor(source, getMpsProject()));
       SNode containingRoot = SNodeOperations.getContainingRoot(source);
-      if (SNodeOperations.isInstanceOf(containingRoot, MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a13L, "jetbrains.mps.build.structure.BuildProject")) && !(SNodeOperations.getModel(containingRoot).getModule().isPackaged())) {
-        String name = SPropertyOperations.getString(SNodeOperations.cast(containingRoot, MetaAdapterFactory.getInterfaceConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, "jetbrains.mps.lang.core.structure.INamedConcept")), MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name"));
+      if (SNodeOperations.isInstanceOf(containingRoot, CONCEPTS.BuildProject$ae) && !(SNodeOperations.getModel(containingRoot).getModule().isPackaged())) {
+        SNode buildProject = SNodeOperations.cast(containingRoot, CONCEPTS.BuildProject$ae);
+        String name = SPropertyOperations.getString(buildProject, PROPS.name$MnvL);
         if (name == null) {
           return null;
         }
-        BuildScript_Configuration configuration = ((BuildScript_Configuration) getConfigurationFactory().createConfiguration("" + name, (BuildScript_Configuration) RunManagerImpl.getInstanceImpl(getContext().getProject()).getConfigurationTemplate(getConfigurationFactory()).getConfiguration()));
-        configuration.getNode().setNode(containingRoot);
+        BuildScript_Configuration configuration = ((BuildScript_Configuration) getConfigurationFactory().createConfiguration("" + name, getContext().getRunManager().getConfigurationTemplate(getConfigurationFactory()).getConfiguration()));
+        configuration.getNodePointer().setNode(containingRoot);
         return configuration;
       }
       return null;
     }
 
+    @Override
+    protected boolean isConfigurationFromContext(@NotNull RunConfiguration configuration0, @NotNull ConfigurationContext context) {
+      if (!(configuration0 instanceof BuildScript_Configuration)) {
+        return false;
+      }
+      BuildScript_Configuration configuration = (BuildScript_Configuration) configuration0;
+      if (context.getPsiLocation() instanceof MPSPsiElement) {
+        final MPSPsiElement element = (MPSPsiElement) context.getPsiLocation();
+        ModelAccessHelper mah = new ModelAccessHelper(element.getMPSProject().getRepository());
+        Object mpsItem = mah.runReadAction(() -> element.getMPSItem());
+        if (!(mpsItem instanceof SNode)) {
+          return false;
+        }
+        final SNode sourceNode = (SNode) mpsItem;
+        SNode rootNode = mah.runReadAction(() -> SNodeOperations.getContainingRoot(sourceNode));
+
+        return Objects.equals(configuration.getNodePointer().getNodeRef(), rootNode.getReference());
+      }
+      return false;
+    }
 
     @Override
-    public BuildScript_Producer.ProducerPart_Node_3e34ca_a clone() {
-      return (BuildScript_Producer.ProducerPart_Node_3e34ca_a) super.clone();
+    public ProducerPart_Node_3e34ca_a clone() {
+      return (ProducerPart_Node_3e34ca_a) super.clone();
     }
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept BaseConcept$gP = MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x10802efe25aL, "jetbrains.mps.lang.core.structure.BaseConcept");
+    /*package*/ static final SConcept BuildProject$ae = MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a13L, "jetbrains.mps.build.structure.BuildProject");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }

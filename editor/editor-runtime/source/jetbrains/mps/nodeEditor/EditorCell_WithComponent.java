@@ -6,13 +6,6 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.JComponent;
 import java.awt.Dimension;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Simon
- * Date: 8/28/13
- * Time: 9:22 PM
- * To change this template use File | Settings | File Templates.
- */
 public interface EditorCell_WithComponent extends EditorCell {
   @NotNull
   JComponent getComponent();
@@ -34,6 +27,20 @@ public interface EditorCell_WithComponent extends EditorCell {
 
     component.setSize(preferredSize);
     requestRelayout();
+  }
+
+  /**
+   * Executed when one of the parent collection cells collapses
+   */
+  default void onCollapse() {
+    getComponent().setVisible(false);
+  }
+
+  /**
+   * Executed when one of the parent collection cells expands
+   */
+  default void onExpand() {
+    getComponent().setVisible(true);
   }
 
 }

@@ -65,7 +65,7 @@ public class SearchHistoryComponent implements ProjectComponent, PersistentState
   }
 
   @Override
-  public void loadState(MyState state) {
+  public void loadState(@NotNull MyState state) {
     myState = state;
   }
 
@@ -89,7 +89,7 @@ public class SearchHistoryComponent implements ProjectComponent, PersistentState
   }
 
   public static class MyState {
-    private List<String> mySearches = new ArrayList<String>();
+    private List<String> mySearches = new ArrayList<>();
 
     public List<String> getSearches() {
       return mySearches;

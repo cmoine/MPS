@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 package jetbrains.mps.classloading;
 
+import jetbrains.mps.classloading.ClassLoaderManager.DeploymentStatuses;
 import jetbrains.mps.module.ReloadableModule;
 import jetbrains.mps.project.ModuleId;
 import jetbrains.mps.project.structure.modules.ModuleReference;
@@ -30,7 +31,6 @@ import org.jetbrains.mps.openapi.module.SModuleListener;
 import org.jetbrains.mps.openapi.module.SModuleReference;
 import org.jetbrains.mps.openapi.module.SRepository;
 import org.jetbrains.mps.openapi.persistence.ModelRoot;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -55,36 +55,42 @@ public class FakeReloadableModule implements ReloadableModule {
 
   @NotNull
   @Override
-  public Class<?> getClass(String classFqName) throws ClassNotFoundException, ModuleClassNotFoundException, ModuleIsNotLoadableException {
-    throw new NotImplementedException();
+  public Class<?> getClass(@NotNull String classFqName) {
+    throw new UnsupportedOperationException("Not implemented");
   }
 
   @NotNull
   @Override
-  public Class<?> getOwnClass(String classFqName) throws ClassNotFoundException, ModuleClassNotFoundException, ModuleIsNotLoadableException {
-    throw new NotImplementedException();
+  public Class<?> getOwnClass(@NotNull String classFqName) {
+    throw new UnsupportedOperationException("Not implemented");
   }
 
-  @Nullable
+  @NotNull
   @Override
-  public ClassLoader getClassLoader() {
-    throw new NotImplementedException();
+  public ClassLoaderManager getCLM() {
+    // XXX test code, e.g. CrossDependentTaskGenerator1.firstCLTask, use external fields to keep ModuleClassLoader instances
+    //     I wonder why not ReloadableModule (or even SModule) would allow get/set CL operations, instead of odd direct and
+    //     indirect CLM access?
+    throw new UnsupportedOperationException("Not implemented");
   }
 
+  @NotNull
   @Override
-  public ClassLoader getRootClassLoader() {
-    return null;
+  public MPSModuleClassLoader getClassLoader() {
+    throw new UnsupportedOperationException("Not implemented");
   }
 
   @Override
   public void reload() {
   }
 
+  @NotNull
   @Override
-  public boolean willLoad() {
-    return true;
+  public DeploymentStatus getStatus() {
+    return DeploymentStatuses.DEPLOYED;
   }
 
+  @NotNull
   @Override
   public SModuleId getModuleId() {
     return myModuleReference.getModuleId();
@@ -133,29 +139,25 @@ public class FakeReloadableModule implements ReloadableModule {
 
   @Nullable
   @Override
-  public SModel resolveInDependencies(SModelId ref) {
-    return null;
-  }
-
-  @Nullable
-  @Override
   public SModel getModel(SModelId id) {
     return null;
   }
 
+  @NotNull
   @Override
   public Iterable<SModel> getModels() {
     return Collections.emptyList();
   }
 
+  @NotNull
   @Override
   public Iterable<SModuleFacet> getFacets() {
-    return null;
+    return Collections.emptyList();
   }
 
   @Nullable
   @Override
-  public <T extends SModuleFacet> T getFacet(Class<T> clazz) {
+  public <T extends SModuleFacet> T getFacet(@NotNull Class<T> clazz) {
     return null;
   }
 

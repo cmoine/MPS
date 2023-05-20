@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,12 +22,12 @@ import org.jetbrains.mps.openapi.model.SNodeReference;
 /**
  * Perhaps, shall replace usages right with TemplateQueryContextWithMacro
  */
-public class IfMacroContext extends TemplateQueryContextWithMacro {
+public class IfMacroContext extends TemplateQueryContext {
 
   /**
    * @since 3.1
    */
   public IfMacroContext(@NotNull TemplateContext context, @NotNull SNodeReference ifMacro) {
-    super(context, ifMacro);
+    super(ifMacro, context);
   }
 }

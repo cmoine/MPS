@@ -13,10 +13,41 @@
             </settings>
           </modelRoot>
         </modelRoots>
+        <languageVersions>
+          <map>
+            <entry key="l:9ded098b-ad6a-4657-bfd9-48636cfe8bc3:jetbrains.mps.lang.traceable" value="0" />
+            <entry key="l:ceab5195-25ea-4f22-9b92-103b95ca8c0c:jetbrains.mps.lang.core" value="2" />
+            <entry key="l:f2801650-65d5-424e-bb1b-463a8781b786:jetbrains.mps.baseLanguage.javadoc" value="2" />
+            <entry key="l:f3061a53-9226-4cc5-a443-f952ceaf5816:jetbrains.mps.baseLanguage" value="12" />
+          </map>
+        </languageVersions>
+        <option name="dependencyVersions">
+          <map>
+            <entry key="c1969cf6-0de2-4f84-9a6b-4019c52c438c(mps-core)" value="0" />
+            <entry key="~IDEA IC(IDEA IC)" value="0" />
+            <entry key="~ideaJavaPlugin(ideaJavaPlugin)" value="0" />
+            <entry key="~mps-annotations(mps-annotations)" value="0" />
+            <entry key="~mps-behavior-api(mps-behavior-api)" value="0" />
+            <entry key="~mps-behavior-runtime(mps-behavior-runtime)" value="0" />
+            <entry key="~mps-boot-util(mps-boot-util)" value="0" />
+            <entry key="~mps-closures(mps-closures)" value="0" />
+            <entry key="~mps-collections(mps-collections)" value="0" />
+            <entry key="~mps-editor(mps-editor)" value="0" />
+            <entry key="~mps-editor-api(mps-editor-api)" value="0" />
+            <entry key="~mps-editor-runtime(mps-editor-runtime)" value="0" />
+            <entry key="~mps-environment(mps-environment)" value="0" />
+            <entry key="~mps-icons(mps-icons)" value="0" />
+            <entry key="~mps-platform(mps-platform)" value="0" />
+            <entry key="~mps-stubs(mps-stubs)" value="0" />
+            <entry key="~mps-test(mps-test)" value="0" />
+            <entry key="~mps-tool(mps-tool)" value="0" />
+            <entry key="~mps-tuples(mps-tuples)" value="0" />
+          </map>
+        </option>
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+  <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/classes" />
     <output-test url="file://$MODULE_DIR$/testclasses" />
     <exclude-output />
@@ -34,14 +65,16 @@
     <orderEntry type="library" name="mps-icons" level="project" />
     <orderEntry type="library" exported="" name="mps-behavior-api" level="project" />
     <orderEntry type="library" exported="" name="mps-behavior-runtime" level="project" />
-    <orderEntry type="library" scope="TEST" name="lang.test.util" level="project" />
-    <orderEntry type="library" scope="TEST" name="lang.test.matcher" level="project" />
-    <orderEntry type="library" scope="TEST" name="lang.test.runtime" level="project" />
     <orderEntry type="library" name="mps-tool" level="project" />
     <orderEntry type="library" name="mps-closures" level="project" />
     <orderEntry type="library" name="mps-environment" level="project" />
     <orderEntry type="library" scope="TEST" name="mps-collections" level="project" />
     <orderEntry type="library" scope="TEST" name="mps-tuples" level="project" />
     <orderEntry type="library" name="mps-boot-util" level="project" />
+    <orderEntry type="library" name="mps-annotations" level="project" />
+    <orderEntry type="library" scope="TEST" name="mps-editor-runtime" level="project" />
+    <orderEntry type="library" scope="TEST" name="mps-test" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="mps-stubs" level="project" />
+    <orderEntry type="library" name="ideaJavaPlugin" level="project" />
   </component>
 </module>

@@ -4,40 +4,52 @@ package jetbrains.mps.lang.editor.menus.extras.tests;
 
 import jetbrains.mps.MPSLaunch;
 import jetbrains.mps.lang.test.runtime.BaseTransformationTest;
-import org.junit.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCacheExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCache;
+import org.junit.jupiter.api.Test;
 import jetbrains.mps.lang.test.runtime.BaseEditorTestBody;
+import jetbrains.mps.lang.test.runtime.TransformationTest;
 import org.jetbrains.mps.openapi.module.SRepository;
 import jetbrains.mps.refactoring.framework.IRefactoring;
 import jetbrains.mps.smodel.SNodePointer;
 import jetbrains.mps.nodeEditor.menus.transformation.DefaultTransformationMenuContext;
 import jetbrains.mps.openapi.editor.menus.transformation.ActionItem;
 import jetbrains.mps.lang.editor.menus.extras.runtime.RefactoringMenuItemBase;
-import junit.framework.Assert;
+import org.junit.Assert;
 
 @MPSLaunch
 public class RefactoringMenuItemBase_ApplicableRefactoring_CanExecute_Test extends BaseTransformationTest {
-  @Test
-  public void test_RefactoringMenuItemBase_ApplicableRefactoring_CanExecute() throws Throwable {
-    initTest("${mps_home}", "r:a1e8c439-e997-416b-a5dc-df7c3fd41b00(jetbrains.mps.lang.editor.menus.extras.tests@tests)");
-    runTest("jetbrains.mps.lang.editor.menus.extras.tests.RefactoringMenuItemBase_ApplicableRefactoring_CanExecute_Test$TestBody", "testMethod", false);
+  @RegisterExtension
+  private static final TestParametersCacheExtension ourParametersCacheExtension = new TestParametersCacheExtension(new TestParametersCache(RefactoringMenuItemBase_ApplicableRefactoring_CanExecute_Test.class, "${mps_home}", "r:a1e8c439-e997-416b-a5dc-df7c3fd41b00(jetbrains.mps.lang.editor.menus.extras.tests@tests)", false));
+
+  public RefactoringMenuItemBase_ApplicableRefactoring_CanExecute_Test() {
+    super(ourParametersCacheExtension.getParametersCache());
   }
 
-  @MPSLaunch
-  public static class TestBody extends BaseEditorTestBody {
+  @Test
+  public void test_RefactoringMenuItemBase_ApplicableRefactoring_CanExecute() throws Throwable {
+    new TestBody(this).testMethod();
+  }
+
+  /*package*/ static class TestBody extends BaseEditorTestBody {
+
+    /*package*/ TestBody(TransformationTest owner) {
+      super(owner);
+    }
+
     @Override
     public void testMethodImpl() throws Exception {
       initEditorComponent("6820996345401023608", "");
-      final SRepository repository = getEditorComponent().getEditorContext().getRepository();
+      SRepository repository = getEditorComponent().getEditorContext().getRepository();
 
-      repository.getModelAccess().runReadAction(new Runnable() {
-        public void run() {
-          IRefactoring refactoring = ActionLookupUtils.getRefactoring(repository, new SNodePointer("r:2f49f947-e2b6-4dd2-87ae-7938deb42899(jetbrains.mps.lang.editor.menus.extras.testLanguage.refactorings)", "6820996345401025745"));
+      repository.getModelAccess().runReadAction(() -> {
+        IRefactoring refactoring = ActionLookupUtils.getRefactoring(myProject, new SNodePointer("r:2f49f947-e2b6-4dd2-87ae-7938deb42899(jetbrains.mps.lang.editor.menus.extras.testLanguage.refactorings)", "6820996345401025745"));
 
-          DefaultTransformationMenuContext context = DefaultTransformationMenuContext.createInitialContextForCell(getEditorComponent().getSelectedCell(), "irrelevant location");
+        DefaultTransformationMenuContext context = DefaultTransformationMenuContext.createInitialContextForCell(getEditorComponent().getSelectedCell(), "irrelevant location");
 
-          ActionItem item = new RefactoringMenuItemBase(context, refactoring);
-          Assert.assertTrue(item.canExecute("irrelevant pattern"));
-        }
+        ActionItem item = new RefactoringMenuItemBase(context, refactoring);
+        Assert.assertTrue(item.canExecute("irrelevant pattern"));
       });
     }
   }

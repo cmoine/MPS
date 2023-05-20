@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,14 @@ package jetbrains.mps.components;
 
 /**
  * Contract : init and dispose methods are run with write lock
+ * Usually <code>CoreComponent</code> is registered via one of the {@link ComponentPlugin} implementors
+ * and is available via {@link ComponentHost#findComponent(Class)}
+ *
+ * @see ComponentHost
  */
 public interface CoreComponent {
-  void init();
-  void dispose();
+  default void init() {
+  }
+  default void dispose() {
+  }
 }

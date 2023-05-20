@@ -6,54 +6,9 @@ import jetbrains.mps.nodeEditor.DefaultNodeEditor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Collection;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Error;
-import jetbrains.mps.openapi.editor.style.Style;
-import jetbrains.mps.editor.runtime.style.StyleImpl;
-import jetbrains.mps.editor.runtime.style.StyleAttributes;
-import jetbrains.mps.editor.runtime.style.Padding;
-import jetbrains.mps.editor.runtime.style.Measure;
-import jetbrains.mps.core.xml.behavior.XmlPart__BehaviorDescriptor;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Constant;
 
 public class XmlContent_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createCollection_91idit_a(editorContext, node);
-  }
-  private EditorCell createCollection_91idit_a(EditorContext editorContext, SNode node) {
-    EditorCell_Collection editorCell = EditorCell_Collection.createIndent2(editorContext, node);
-    editorCell.setCellId("Collection_91idit_a");
-    editorCell.setBig(true);
-    editorCell.addEditorCell(this.createError_91idit_a0(editorContext, node));
-    if (renderingCondition_91idit_a1a(node, editorContext)) {
-      editorCell.addEditorCell(this.createConstant_91idit_b0(editorContext, node));
-    }
-    return editorCell;
-  }
-  private EditorCell createError_91idit_a0(EditorContext editorContext, SNode node) {
-    EditorCell_Error editorCell = new EditorCell_Error(editorContext, node, "<no content>");
-    editorCell.setCellId("Error_91idit_a0");
-    Style style = new StyleImpl();
-    style.set(StyleAttributes.INDENT_LAYOUT_ON_NEW_LINE, 0, XmlContent_Editor._StyleParameter_QueryFunction_91idit_a0a0(editorContext, node));
-    style.set(StyleAttributes.PADDING_LEFT, 0, new Padding(0, Measure.SPACES));
-    style.set(StyleAttributes.PADDING_RIGHT, 0, new Padding(0, Measure.SPACES));
-    editorCell.getStyle().putAll(style);
-    return editorCell;
-  }
-  private static boolean _StyleParameter_QueryFunction_91idit_a0a0(EditorContext editorContext, SNode node) {
-    return (boolean) XmlPart__BehaviorDescriptor.onNewLine_id1Qs9WekVZ9$.invoke(node);
-  }
-  private EditorCell createConstant_91idit_b0(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, "");
-    editorCell.setCellId("Constant_91idit_b0");
-    Style style = new StyleImpl();
-    style.set(StyleAttributes.INDENT_LAYOUT_NEW_LINE, 0, true);
-    style.set(StyleAttributes.SELECTABLE, 0, false);
-    editorCell.getStyle().putAll(style);
-    editorCell.setDefaultText("");
-    return editorCell;
-  }
-  private static boolean renderingCondition_91idit_a1a(SNode node, EditorContext editorContext) {
-    return (boolean) XmlPart__BehaviorDescriptor.hasNewLineAfter_id1Qs9WekVZ9E.invoke(node);
+    return new XmlContent_EditorBuilder_a(editorContext, node).createCell();
   }
 }

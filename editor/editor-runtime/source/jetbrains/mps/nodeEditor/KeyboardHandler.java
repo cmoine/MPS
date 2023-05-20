@@ -15,10 +15,16 @@
  */
 package jetbrains.mps.nodeEditor;
 
+import jetbrains.mps.nodeEditor.keyboard.TextChangeEvent;
+
 import java.awt.event.KeyEvent;
 
 public interface KeyboardHandler {
   boolean processKeyPressed(EditorContext editorContext, KeyEvent keyEvent);
+
   boolean processKeyTyped(EditorContext editorContext, KeyEvent keyEvent);
+
   boolean processKeyReleased(EditorContext editorContext, KeyEvent keyEvent);
+
+  boolean processTextChanged(EditorContext editorContext, TextChangeEvent textChangeEvent);
 }

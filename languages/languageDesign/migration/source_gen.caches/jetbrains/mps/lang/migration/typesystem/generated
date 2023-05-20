@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-9urzxcojzjq2iwwcxfjzz5ecmktz8xs" />
+<product version="3" modelHash="a4h5u082moq7afpzffhrnul8hdzqv5q">
+  <files names="FixLanguageVersion_QuickFix.java:MigrationScriptCycles_NonTypesystemRule.java:MigrationScriptVersions_NonTypesystemRule.java:TypesystemDescriptor.java:checkIncludeCycles_NonTypesystemRule.java:check_InstancesExpression_nonExact_NonTypesystemRule.java:check_NodeReference_NonTypesystemRule.java:check_ProducesData_NonTypesystemRule.java:check_RequiredAnnotationDataDeclaration_NonTypesystemRule.java:typeof_DataDependencyReference_InferenceRule.java:typeof_DataDependency_InferenceRule.java:typeof_GetDataExpression_InferenceRule.java:typeof_LinkPatternVariableReference_InferenceRule.java:typeof_ListPatternVariableReference_InferenceRule.java:typeof_NodePatternVariableReference_InferenceRule.java:typeof_PropertyPatternVariableReference_InferenceRule.java:typeof_PutDataExpression_InferenceRule.java:typeof_TransformStatement_InferenceRule.java" />
+</product>
 

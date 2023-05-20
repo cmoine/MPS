@@ -19,7 +19,7 @@ public class LimitedCardinalitySequence<U> extends Sequence<U> {
   }
   @Override
   public Iterator<U> iterator() {
-    return new LimitedCardinalitySequence.LimitedCardinalityIterator();
+    return new LimitedCardinalityIterator();
   }
   private class LimitedCardinalityIterator implements Iterator<U> {
     private Iterator<U> inputIt;
@@ -46,7 +46,7 @@ public class LimitedCardinalitySequence<U> extends Sequence<U> {
       if (hasNext.unknown()) {
         moveToNext();
       }
-      if (!((hasNext.hasNext()))) {
+      if (!(hasNext.hasNext())) {
         throw new NoSuchElementException();
       }
       return clearNext();

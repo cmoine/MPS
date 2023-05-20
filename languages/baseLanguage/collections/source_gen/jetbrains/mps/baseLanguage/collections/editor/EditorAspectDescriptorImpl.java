@@ -13,570 +13,300 @@ import jetbrains.mps.openapi.editor.descriptor.TransformationMenu;
 import jetbrains.mps.openapi.editor.descriptor.NamedMenuId;
 import java.util.Arrays;
 import jetbrains.mps.openapi.editor.descriptor.SubstituteMenu;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.openapi.editor.cells.KeyMap;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public class EditorAspectDescriptorImpl extends EditorAspectDescriptorBase {
   @NotNull
   public Collection<ConceptEditor> getDeclaredEditors(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = ((SAbstractConcept) concept);
-      Integer preIndex = indices_xbvbvu_a0a.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new AbstractContainerCreator_Editor());
-          }
-          break;
-        case 1:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new AbstractContainerType_Editor());
-          }
-          break;
-        case 2:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new AbstractEnumeratorOperation_Editor());
-          }
-          break;
-        case 3:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new AbstractIteratorOperation_Editor());
-          }
-          break;
-        case 4:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new AbstractMappingOperation_Editor());
-          }
-          break;
-        case 5:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new AddAllSetElementsOperation_Editor());
-          }
-          break;
-        case 6:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new AddSetElementOperation_Editor());
-          }
-          break;
-        case 7:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new AllConstant_Editor());
-          }
-          break;
-        case 8:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new AsSequenceOperation_Editor());
-          }
-          break;
-        case 9:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BinaryOperation_Editor());
-          }
-          break;
-        case 10:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ChunkOperation_Editor());
-          }
-          break;
-        case 11:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ClearSetOperation_Editor());
-          }
-          break;
-        case 12:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ComparatorSortOperation_Editor());
-          }
-          break;
-        case 13:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ContainsKeyOperation_Editor());
-          }
-          break;
-        case 14:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ContainsValueOperation_Editor());
-          }
-          break;
-        case 15:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CustomContainerCreator_Editor());
-          }
-          break;
-        case 16:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CustomContainerDeclaration_Editor());
-          }
-          break;
-        case 17:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CustomContainers_Editor());
-          }
-          break;
-        case 18:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CustomMapCreator_Editor());
-          }
-          break;
-        case 19:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new DowncastExpression_Editor());
-          }
-          break;
-        case 20:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new EnumeratorType_Editor());
-          }
-          break;
-        case 21:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new FoldLeftOperation_Editor());
-          }
-          break;
-        case 22:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new FoldRightOperation_Editor());
-          }
-          break;
-        case 23:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ForEachStatement_Editor());
-          }
-          break;
-        case 24:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ForEachVariable_Editor());
-          }
-          break;
-        case 25:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ForEachVariableReference_Editor());
-          }
-          break;
-        case 26:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new GetKeysOperation_Editor());
-          }
-          break;
-        case 27:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new GetValuesOperation_Editor());
-          }
-          break;
-        case 28:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new HashMapCreator_Editor());
-          }
-          break;
-        case 29:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new HeadListOperation_Editor());
-          }
-          break;
-        case 30:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new HeadMapOperation_Editor());
-          }
-          break;
-        case 31:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new HeadSetOperation_Editor());
-          }
-          break;
-        case 32:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new InsertElementOperation_Editor());
-          }
-          break;
-        case 33:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new InternalSequenceOperation_Editor());
-          }
-          break;
-        case 34:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new IteratorType_Editor());
-          }
-          break;
-        case 35:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new JoinOperation_Editor());
-          }
-          break;
-        case 36:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new LinkedHashMapCreator_Editor());
-          }
-          break;
-        case 37:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ListElementAccessExpression_Editor());
-          }
-          break;
-        case 38:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ListType_Editor());
-          }
-          break;
-        case 39:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MapAsSequenceVarRef_Editor());
-          }
-          break;
-        case 40:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MapClearOperation_Editor());
-          }
-          break;
-        case 41:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MapElement_Editor());
-          }
-          break;
-        case 42:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MapEntry_Editor());
-          }
-          break;
-        case 43:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MapInitializer_Editor());
-          }
-          break;
-        case 44:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MapOperationExpression_Editor());
-          }
-          break;
-        case 45:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MapRemoveOperation_Editor());
-          }
-          break;
-        case 46:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MapType_Editor());
-          }
-          break;
-        case 47:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MappingType_Editor());
-          }
-          break;
-        case 48:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MappingsSetOperation_Editor());
-          }
-          break;
-        case 49:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MultiForEachPair_Editor());
-          }
-          break;
-        case 50:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MultiForEachStatement_Editor());
-          }
-          break;
-        case 51:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MultiForEachVariable_Editor());
-          }
-          break;
-        case 52:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MultiForEachVariableReference_Editor());
-          }
-          break;
-        case 53:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new NoArgumentsSequenceOperation_Editor());
-          }
-          break;
-        case 54:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new OfTypeOperation_Editor());
-          }
-          break;
-        case 55:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new PageOperation_Editor());
-          }
-          break;
-        case 56:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new PutAllOperation_Editor());
-          }
-          break;
-        case 57:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new RemoveAllSetElementsOperation_Editor());
-          }
-          break;
-        case 58:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new RemoveAtElementOperation_Editor());
-          }
-          break;
-        case 59:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new RemoveSetElementOperation_Editor());
-          }
-          break;
-        case 60:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SequenceCreator_Editor());
-          }
-          break;
-        case 61:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SequenceOperation_Editor());
-          }
-          break;
-        case 62:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SequenceType_Editor());
-          }
-          break;
-        case 63:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SetElementOperation_Editor());
-          }
-          break;
-        case 64:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SetType_Editor());
-          }
-          break;
-        case 65:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SingleArgumentSequenceOperation_Editor());
-          }
-          break;
-        case 66:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SingletonSequenceCreator_Editor());
-          }
-          break;
-        case 67:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SkipOperation_Editor());
-          }
-          break;
-        case 68:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SkipStatement_Editor());
-          }
-          break;
-        case 69:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SmartClosureParameterDeclaration_Editor());
-          }
-          break;
-        case 70:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SortDirection_Editor());
-          }
-          break;
-        case 71:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SortOperation_Editor());
-          }
-          break;
-        case 72:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new StopStatement_Editor());
-          }
-          break;
-        case 73:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubListOperation_Editor());
-          }
-          break;
-        case 74:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubMapOperation_Editor());
-          }
-          break;
-        case 75:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubSetOperation_Editor());
-          }
-          break;
-        case 76:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TailListOperation_Editor());
-          }
-          break;
-        case 77:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TailMapOperation_Editor());
-          }
-          break;
-        case 78:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TailSetOperation_Editor());
-          }
-          break;
-        case 79:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TakeOperation_Editor());
-          }
-          break;
-        case 80:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ToIteratorOperation_Editor());
-          }
-          break;
-        case 81:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ToListOperation_Editor());
-          }
-          break;
-        case 82:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TreeSetCreator_Editor());
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = ((SAbstractConcept) concept);
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return Collections.<ConceptEditor>singletonList(new AbstractContainerCreator_Editor());
+      case 1:
+        return Collections.<ConceptEditor>singletonList(new AbstractContainerType_Editor());
+      case 2:
+        return Collections.<ConceptEditor>singletonList(new AbstractEnumeratorOperation_Editor());
+      case 3:
+        return Collections.<ConceptEditor>singletonList(new AbstractIteratorOperation_Editor());
+      case 4:
+        return Collections.<ConceptEditor>singletonList(new AbstractMappingOperation_Editor());
+      case 5:
+        return Collections.<ConceptEditor>singletonList(new AddAllSetElementsOperation_Editor());
+      case 6:
+        return Collections.<ConceptEditor>singletonList(new AddSetElementOperation_Editor());
+      case 7:
+        return Collections.<ConceptEditor>singletonList(new AllConstant_Editor());
+      case 8:
+        return Collections.<ConceptEditor>singletonList(new AsSequenceOperation_Editor());
+      case 9:
+        return Collections.<ConceptEditor>singletonList(new BinaryOperation_Editor());
+      case 10:
+        return Collections.<ConceptEditor>singletonList(new ChunkOperation_Editor());
+      case 11:
+        return Collections.<ConceptEditor>singletonList(new ClearSetOperation_Editor());
+      case 12:
+        return Collections.<ConceptEditor>singletonList(new ComparatorSortOperation_Editor());
+      case 13:
+        return Collections.<ConceptEditor>singletonList(new ContainsKeyOperation_Editor());
+      case 14:
+        return Collections.<ConceptEditor>singletonList(new ContainsValueOperation_Editor());
+      case 15:
+        return Collections.<ConceptEditor>singletonList(new CustomContainerCreator_Editor());
+      case 16:
+        return Collections.<ConceptEditor>singletonList(new CustomContainerDeclaration_Editor());
+      case 17:
+        return Collections.<ConceptEditor>singletonList(new CustomContainers_Editor());
+      case 18:
+        return Collections.<ConceptEditor>singletonList(new CustomMapCreator_Editor());
+      case 19:
+        return Collections.<ConceptEditor>singletonList(new DowncastExpression_Editor());
+      case 20:
+        return Collections.<ConceptEditor>singletonList(new EnumeratorType_Editor());
+      case 21:
+        return Collections.<ConceptEditor>singletonList(new FoldLeftOperation_Editor());
+      case 22:
+        return Collections.<ConceptEditor>singletonList(new FoldRightOperation_Editor());
+      case 23:
+        return Collections.<ConceptEditor>singletonList(new ForEachStatement_Editor());
+      case 24:
+        return Collections.<ConceptEditor>singletonList(new ForEachVariable_Editor());
+      case 25:
+        return Collections.<ConceptEditor>singletonList(new ForEachVariableReference_Editor());
+      case 26:
+        return Collections.<ConceptEditor>singletonList(new GetKeysOperation_Editor());
+      case 27:
+        return Collections.<ConceptEditor>singletonList(new GetValuesOperation_Editor());
+      case 28:
+        return Collections.<ConceptEditor>singletonList(new HashMapCreator_Editor());
+      case 29:
+        return Collections.<ConceptEditor>singletonList(new HeadListOperation_Editor());
+      case 30:
+        return Collections.<ConceptEditor>singletonList(new HeadMapOperation_Editor());
+      case 31:
+        return Collections.<ConceptEditor>singletonList(new HeadSetOperation_Editor());
+      case 32:
+        return Collections.<ConceptEditor>singletonList(new InsertElementOperation_Editor());
+      case 33:
+        return Collections.<ConceptEditor>singletonList(new InternalSequenceOperation_Editor());
+      case 34:
+        return Collections.<ConceptEditor>singletonList(new IteratorType_Editor());
+      case 35:
+        return Collections.<ConceptEditor>singletonList(new JoinOperation_Editor());
+      case 36:
+        return Collections.<ConceptEditor>singletonList(new LinkedHashMapCreator_Editor());
+      case 37:
+        return Collections.<ConceptEditor>singletonList(new ListElementAccessExpression_Editor());
+      case 38:
+        return Collections.<ConceptEditor>singletonList(new ListType_Editor());
+      case 39:
+        return Collections.<ConceptEditor>singletonList(new MapAsSequenceVarRef_Editor());
+      case 40:
+        return Collections.<ConceptEditor>singletonList(new MapClearOperation_Editor());
+      case 41:
+        return Collections.<ConceptEditor>singletonList(new MapElement_Editor());
+      case 42:
+        return Collections.<ConceptEditor>singletonList(new MapEntry_Editor());
+      case 43:
+        return Collections.<ConceptEditor>singletonList(new MapInitializer_Editor());
+      case 44:
+        return Collections.<ConceptEditor>singletonList(new MapOperationExpression_Editor());
+      case 45:
+        return Collections.<ConceptEditor>singletonList(new MapRemoveOperation_Editor());
+      case 46:
+        return Collections.<ConceptEditor>singletonList(new MapType_Editor());
+      case 47:
+        return Collections.<ConceptEditor>singletonList(new MappingType_Editor());
+      case 48:
+        return Collections.<ConceptEditor>singletonList(new MappingsSetOperation_Editor());
+      case 49:
+        return Collections.<ConceptEditor>singletonList(new MultiForEachPair_Editor());
+      case 50:
+        return Collections.<ConceptEditor>singletonList(new MultiForEachStatement_Editor());
+      case 51:
+        return Collections.<ConceptEditor>singletonList(new MultiForEachVariable_Editor());
+      case 52:
+        return Collections.<ConceptEditor>singletonList(new MultiForEachVariableReference_Editor());
+      case 53:
+        return Collections.<ConceptEditor>singletonList(new NoArgumentsSequenceOperation_Editor());
+      case 54:
+        return Collections.<ConceptEditor>singletonList(new OfTypeOperation_Editor());
+      case 55:
+        return Collections.<ConceptEditor>singletonList(new PageOperation_Editor());
+      case 56:
+        return Collections.<ConceptEditor>singletonList(new PutAllOperation_Editor());
+      case 57:
+        return Collections.<ConceptEditor>singletonList(new RemoveAllSetElementsOperation_Editor());
+      case 58:
+        return Collections.<ConceptEditor>singletonList(new RemoveAtElementOperation_Editor());
+      case 59:
+        return Collections.<ConceptEditor>singletonList(new RemoveSetElementOperation_Editor());
+      case 60:
+        return Collections.<ConceptEditor>singletonList(new SequenceCreator_Editor());
+      case 61:
+        return Collections.<ConceptEditor>singletonList(new SequenceOperation_Editor());
+      case 62:
+        return Collections.<ConceptEditor>singletonList(new SequenceType_Editor());
+      case 63:
+        return Collections.<ConceptEditor>singletonList(new SetElementOperation_Editor());
+      case 64:
+        return Collections.<ConceptEditor>singletonList(new SetType_Editor());
+      case 65:
+        return Collections.<ConceptEditor>singletonList(new SingleArgumentSequenceOperation_Editor());
+      case 66:
+        return Collections.<ConceptEditor>singletonList(new SingletonSequenceCreator_Editor());
+      case 67:
+        return Collections.<ConceptEditor>singletonList(new SkipOperation_Editor());
+      case 68:
+        return Collections.<ConceptEditor>singletonList(new SkipStatement_Editor());
+      case 69:
+        return Collections.<ConceptEditor>singletonList(new SmartClosureParameterDeclaration_Editor());
+      case 70:
+        return Collections.<ConceptEditor>singletonList(new SortDirection_Editor());
+      case 71:
+        return Collections.<ConceptEditor>singletonList(new SortOperation_Editor());
+      case 72:
+        return Collections.<ConceptEditor>singletonList(new StopStatement_Editor());
+      case 73:
+        return Collections.<ConceptEditor>singletonList(new SubListOperation_Editor());
+      case 74:
+        return Collections.<ConceptEditor>singletonList(new SubMapOperation_Editor());
+      case 75:
+        return Collections.<ConceptEditor>singletonList(new SubSetOperation_Editor());
+      case 76:
+        return Collections.<ConceptEditor>singletonList(new TailListOperation_Editor());
+      case 77:
+        return Collections.<ConceptEditor>singletonList(new TailMapOperation_Editor());
+      case 78:
+        return Collections.<ConceptEditor>singletonList(new TailSetOperation_Editor());
+      case 79:
+        return Collections.<ConceptEditor>singletonList(new TakeOperation_Editor());
+      case 80:
+        return Collections.<ConceptEditor>singletonList(new ToIteratorOperation_Editor());
+      case 81:
+        return Collections.<ConceptEditor>singletonList(new ToListOperation_Editor());
+      case 82:
+        return Collections.<ConceptEditor>singletonList(new TreeSetCreator_Editor());
+      default:
     }
     return Collections.<ConceptEditor>emptyList();
   }
-
+  private Collection<ConceptEditorComponent> getDeclaredEC_0(String editorComponentId) {
+    if ("jetbrains.mps.baseLanguage.collections.editor.AbstractContainerCreator_Component".equals(editorComponentId)) {
+      return Collections.singletonList(new AbstractContainerCreator_Component());
+    }
+    return Collections.emptyList();
+  }
+  private Collection<ConceptEditorComponent> getDeclaredEC_1(String editorComponentId) {
+    if ("jetbrains.mps.baseLanguage.collections.editor.CustomMapCreator_component".equals(editorComponentId)) {
+      return Collections.singletonList(new CustomMapCreator_component());
+    }
+    return Collections.emptyList();
+  }
+  private Collection<ConceptEditorComponent> getDeclaredEC_2(String editorComponentId) {
+    if ("jetbrains.mps.baseLanguage.collections.editor.HashMapCreator_editorComponent".equals(editorComponentId)) {
+      return Collections.singletonList(new HashMapCreator_editorComponent());
+    }
+    return Collections.emptyList();
+  }
   @NotNull
   public Collection<ConceptEditorComponent> getDeclaredEditorComponents(SAbstractConcept concept, String editorComponentId) {
-    {
-      SAbstractConcept cncpt = ((SAbstractConcept) concept);
-      Integer preIndex = indices_xbvbvu_a0c.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            if ("jetbrains.mps.baseLanguage.collections.editor.AbstractContainerCreator_Component".equals(editorComponentId)) {
-              return Collections.<ConceptEditorComponent>singletonList(new AbstractContainerCreator_Component());
-            }
-          }
-          break;
-        case 1:
-          if (true) {
-            if ("jetbrains.mps.baseLanguage.collections.editor.CustomMapCreator_component".equals(editorComponentId)) {
-              return Collections.<ConceptEditorComponent>singletonList(new CustomMapCreator_component());
-            }
-          }
-          break;
-        case 2:
-          if (true) {
-            if ("jetbrains.mps.baseLanguage.collections.editor.HashMapCreator_editorComponent".equals(editorComponentId)) {
-              return Collections.<ConceptEditorComponent>singletonList(new HashMapCreator_editorComponent());
-            }
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = ((SAbstractConcept) concept);
+    switch (conceptIndex1.index(cncpt)) {
+      case 0:
+        return getDeclaredEC_0(editorComponentId);
+      case 1:
+        return getDeclaredEC_1(editorComponentId);
+      case 2:
+        return getDeclaredEC_2(editorComponentId);
+      default:
     }
-    return Collections.<ConceptEditorComponent>emptyList();
+    return Collections.emptyList();
   }
+
 
   @NotNull
   @Override
   public Collection<TransformationMenu> getDeclaredDefaultTransformationMenus(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_xbvbvu_a0e.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new Expression_default_RTransform_Contribution());
-          }
-          break;
-        case 1:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new HashMapCreator_TransformationMenu());
-          }
-          break;
-        case 2:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new JoinOperation_TransformationMenu());
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex2.index(cncpt)) {
+      case 0:
+        return Collections.<TransformationMenu>singletonList(new Expression_default_RTransform_Contribution());
+      case 1:
+        return Collections.<TransformationMenu>singletonList(new HashMapCreator_TransformationMenu());
+      case 2:
+        return Collections.<TransformationMenu>singletonList(new JoinOperation_TransformationMenu());
+      default:
     }
     return Collections.<TransformationMenu>emptyList();
   }
   @NotNull
   @Override
   public Collection<TransformationMenu> getDeclaredNamedTransformationMenus(NamedMenuId menuId) {
-    {
-      SAbstractConcept cncpt = (SAbstractConcept) menuId.getConcept();
-      Integer preIndex = indices_xbvbvu_a0f.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            switch (Arrays.binarySearch(stringSwitchCases_xbvbvu_a0a0a0a3a0a5, menuId.getFqName())) {
-              case 0:
-                return Arrays.asList(new TransformationMenu[]{new AbstractContainerCreator_add_elementType()});
-              case 1:
-                return Arrays.asList(new TransformationMenu[]{new AbstractContainerCreator_ext_1_RTransform_Menu()});
-              case 2:
-                return Arrays.asList(new TransformationMenu[]{new add_initSize_to_container_creator()});
-              case 3:
-                return Arrays.asList(new TransformationMenu[]{new add_parameters_to_container_creator()});
-              default:
-            }
+    SAbstractConcept cncpt = (SAbstractConcept) menuId.getConcept();
+    switch (conceptIndex3.index(cncpt)) {
+      case 0:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.baseLanguage.collections.editor.AbstractContainerCreator_add_elementType":
+              return Arrays.asList(new TransformationMenu[]{new AbstractContainerCreator_add_elementType()});
+            case "jetbrains.mps.baseLanguage.collections.editor.AbstractContainerCreator_ext_1_RTransform_Menu":
+              return Arrays.asList(new TransformationMenu[]{new AbstractContainerCreator_ext_1_RTransform_Menu()});
+            case "jetbrains.mps.baseLanguage.collections.editor.add_initSize_to_container_creator":
+              return Arrays.asList(new TransformationMenu[]{new add_initSize_to_container_creator()});
+            case "jetbrains.mps.baseLanguage.collections.editor.add_parameters_to_container_creator":
+              return Arrays.asList(new TransformationMenu[]{new add_parameters_to_container_creator()});
+            default:
           }
-          break;
-        case 1:
-          if (true) {
-            switch (Arrays.binarySearch(stringSwitchCases_xbvbvu_a0a0a0b3a0a5, menuId.getFqName())) {
-              case 0:
-                return Arrays.asList(new TransformationMenu[]{new BLC_rtansform()});
-              case 1:
-                return Arrays.asList(new TransformationMenu[]{new downcast_expression()});
-              case 2:
-                return Arrays.asList(new TransformationMenu[]{new list_element_access_rtransform()});
-              default:
-            }
+        }
+        break;
+      case 1:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.baseLanguage.collections.editor.BLC_rtansform":
+              return Arrays.asList(new TransformationMenu[]{new BLC_rtansform()});
+            case "jetbrains.mps.baseLanguage.collections.editor.downcast_expression":
+              return Arrays.asList(new TransformationMenu[]{new downcast_expression()});
+            case "jetbrains.mps.baseLanguage.collections.editor.list_element_access_rtransform":
+              return Arrays.asList(new TransformationMenu[]{new list_element_access_rtransform()});
+            default:
           }
-          break;
-        case 2:
-          if (true) {
-            switch (Arrays.binarySearch(stringSwitchCases_xbvbvu_a0a0a0c3a0a5, menuId.getFqName())) {
-              case 0:
-                return Arrays.asList(new TransformationMenu[]{new HashMapCreator_add_keyType_valueType()});
-              case 1:
-                return Arrays.asList(new TransformationMenu[]{new add_initSize_to_hashmap_creator()});
-              case 2:
-                return Arrays.asList(new TransformationMenu[]{new map_creator_add_initializer()});
-              default:
-            }
+        }
+        break;
+      case 2:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.baseLanguage.collections.editor.HashMapCreator_add_keyType_valueType":
+              return Arrays.asList(new TransformationMenu[]{new HashMapCreator_add_keyType_valueType()});
+            case "jetbrains.mps.baseLanguage.collections.editor.add_initSize_to_hashmap_creator":
+              return Arrays.asList(new TransformationMenu[]{new add_initSize_to_hashmap_creator()});
+            case "jetbrains.mps.baseLanguage.collections.editor.map_creator_add_initializer":
+              return Arrays.asList(new TransformationMenu[]{new map_creator_add_initializer()});
+            default:
           }
-          break;
-        case 3:
-          if (true) {
-            switch (Arrays.binarySearch(stringSwitchCases_xbvbvu_a0a0a0d3a0a5, menuId.getFqName())) {
-              case 0:
-                return Arrays.asList(new TransformationMenu[]{new sequenceType_addElementType()});
-              default:
-            }
+        }
+        break;
+      case 3:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.baseLanguage.collections.editor.sequenceType_addElementType":
+              return Arrays.asList(new TransformationMenu[]{new sequenceType_addElementType()});
+            default:
           }
-          break;
-        case 4:
-          if (true) {
-            switch (Arrays.binarySearch(stringSwitchCases_xbvbvu_a0a0a0e3a0a5, menuId.getFqName())) {
-              case 0:
-                return Arrays.asList(new TransformationMenu[]{new add_comparator_to_treeset_creator()});
-              default:
-            }
+        }
+        break;
+      case 4:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.baseLanguage.collections.editor.add_comparator_to_treeset_creator":
+              return Arrays.asList(new TransformationMenu[]{new add_comparator_to_treeset_creator()});
+            default:
           }
-          break;
-        default:
-      }
+        }
+        break;
+      default:
     }
 
     return Collections.<TransformationMenu>emptyList();
@@ -584,206 +314,120 @@ public class EditorAspectDescriptorImpl extends EditorAspectDescriptorBase {
   @NotNull
   @Override
   public Collection<SubstituteMenu> getDeclaredDefaultSubstituteMenus(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_xbvbvu_a0g.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new AbstractEnumeratorOperation_SubstituteMenu());
-          }
-          break;
-        case 1:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new AbstractIteratorOperation_SubstituteMenu());
-          }
-          break;
-        case 2:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new AbstractMappingOperation_SubstituteMenu());
-          }
-          break;
-        case 3:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new AddAllSetElementsOperation_SubstituteMenu());
-          }
-          break;
-        case 4:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new AddSetElementOperation_SubstituteMenu());
-          }
-          break;
-        case 5:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new AsSequenceOperation_SubstituteMenu());
-          }
-          break;
-        case 6:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new DowncastExpression_SubstituteMenu());
-          }
-          break;
-        case 7:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new Expression_Contribution());
-          }
-          break;
-        case 8:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new IApplicableToDeque_SubstituteMenu());
-          }
-          break;
-        case 9:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new IApplicableToList_SubstituteMenu());
-          }
-          break;
-        case 10:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new IApplicableToNothing_SubstituteMenu());
-          }
-          break;
-        case 11:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new IContainerOperation_SubstituteMenu());
-          }
-          break;
-        case 12:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new IListOperation_SubstituteMenu());
-          }
-          break;
-        case 13:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new IOperation_Contribution());
-          }
-          break;
-        case 14:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new LinkedListCreator_SubstituteMenu());
-          }
-          break;
-        case 15:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new MapElement_SubstituteMenu());
-          }
-          break;
-        case 16:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new MapOperation_SubstituteMenu());
-          }
-          break;
-        case 17:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new MapOperationExpression_SubstituteMenu());
-          }
-          break;
-        case 18:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new RemoveAllSetElementsOperation_SubstituteMenu());
-          }
-          break;
-        case 19:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new RemoveOperation_SubstituteMenu());
-          }
-          break;
-        case 20:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new RemoveSetElementOperation_SubstituteMenu());
-          }
-          break;
-        case 21:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new SequenceOperation_SubstituteMenu());
-          }
-          break;
-        case 22:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new SkipStatement_SubstituteMenu());
-          }
-          break;
-        case 23:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new SortDirection_SubstituteMenu());
-          }
-          break;
-        case 24:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new StopStatement_SubstituteMenu());
-          }
-          break;
-        case 25:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new ToIteratorOperation_SubstituteMenu());
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex4.index(cncpt)) {
+      case 0:
+        return Collections.<SubstituteMenu>singletonList(new AbstractEnumeratorOperation_SubstituteMenu());
+      case 1:
+        return Collections.<SubstituteMenu>singletonList(new AbstractIteratorOperation_SubstituteMenu());
+      case 2:
+        return Collections.<SubstituteMenu>singletonList(new AbstractMappingOperation_SubstituteMenu());
+      case 3:
+        return Collections.<SubstituteMenu>singletonList(new AbstractSetOperation_SubstituteMenu());
+      case 4:
+        return Collections.<SubstituteMenu>singletonList(new AddAllSetElementsOperation_SubstituteMenu());
+      case 5:
+        return Collections.<SubstituteMenu>singletonList(new AddSetElementOperation_SubstituteMenu());
+      case 6:
+        return Collections.<SubstituteMenu>singletonList(new AsSequenceOperation_SubstituteMenu());
+      case 7:
+        return Collections.<SubstituteMenu>singletonList(new CustomContainerCreator_SubstituteMenu());
+      case 8:
+        return Collections.<SubstituteMenu>singletonList(new CustomMapCreator_SubstituteMenu());
+      case 9:
+        return Collections.<SubstituteMenu>singletonList(new DowncastExpression_SubstituteMenu());
+      case 10:
+        return Collections.<SubstituteMenu>singletonList(new Expression_Contribution());
+      case 11:
+        return Collections.<SubstituteMenu>singletonList(new ForEachVariableReference_SubstituteMenu());
+      case 12:
+        return Collections.<SubstituteMenu>singletonList(new IApplicableToDeque_SubstituteMenu());
+      case 13:
+        return Collections.<SubstituteMenu>singletonList(new IApplicableToList_SubstituteMenu());
+      case 14:
+        return Collections.<SubstituteMenu>singletonList(new IContainerOperation_SubstituteMenu());
+      case 15:
+        return Collections.<SubstituteMenu>singletonList(new IListOperation_SubstituteMenu());
+      case 16:
+        return Collections.<SubstituteMenu>singletonList(new IOperation_Contribution());
+      case 17:
+        return Collections.<SubstituteMenu>singletonList(new LinkedListCreator_SubstituteMenu());
+      case 18:
+        return Collections.<SubstituteMenu>singletonList(new MapElement_SubstituteMenu());
+      case 19:
+        return Collections.<SubstituteMenu>singletonList(new MapOperation_SubstituteMenu());
+      case 20:
+        return Collections.<SubstituteMenu>singletonList(new MapOperationExpression_SubstituteMenu());
+      case 21:
+        return Collections.<SubstituteMenu>singletonList(new MultiForEachVariableReference_SubstituteMenu());
+      case 22:
+        return Collections.<SubstituteMenu>singletonList(new RemoveAllSetElementsOperation_SubstituteMenu());
+      case 23:
+        return Collections.<SubstituteMenu>singletonList(new RemoveOperation_SubstituteMenu());
+      case 24:
+        return Collections.<SubstituteMenu>singletonList(new RemoveSetElementOperation_SubstituteMenu());
+      case 25:
+        return Collections.<SubstituteMenu>singletonList(new SequenceOperation_SubstituteMenu());
+      case 26:
+        return Collections.<SubstituteMenu>singletonList(new SkipStatement_SubstituteMenu());
+      case 27:
+        return Collections.<SubstituteMenu>singletonList(new SortDirection_SubstituteMenu());
+      case 28:
+        return Collections.<SubstituteMenu>singletonList(new SortedMapOperation_SubstituteMenu());
+      case 29:
+        return Collections.<SubstituteMenu>singletonList(new SortedSetOperation_SubstituteMenu());
+      case 30:
+        return Collections.<SubstituteMenu>singletonList(new StopStatement_SubstituteMenu());
+      case 31:
+        return Collections.<SubstituteMenu>singletonList(new ToIteratorOperation_SubstituteMenu());
+      default:
     }
     return Collections.<SubstituteMenu>emptyList();
   }
   @NotNull
   @Override
   public Collection<SubstituteMenu> getDeclaredNamedSubstituteMenus(NamedMenuId menuId) {
-    {
-      SAbstractConcept cncpt = (SAbstractConcept) menuId.getConcept();
-      Integer preIndex = indices_xbvbvu_a0h.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            switch (Arrays.binarySearch(stringSwitchCases_xbvbvu_a0a0a0a3a0a7, menuId.getFqName())) {
-              case 0:
-                return Arrays.asList(new SubstituteMenu[]{new BLC_substitute()});
-              case 1:
-                return Arrays.asList(new SubstituteMenu[]{new subs_AllConstant()});
-              default:
-            }
+    SAbstractConcept cncpt = (SAbstractConcept) menuId.getConcept();
+    switch (conceptIndex5.index(cncpt)) {
+      case 0:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.baseLanguage.collections.editor.BLC_substitute":
+              return Arrays.asList(new SubstituteMenu[]{new BLC_substitute()});
+            case "jetbrains.mps.baseLanguage.collections.editor.subs_AllConstant":
+              return Arrays.asList(new SubstituteMenu[]{new subs_AllConstant()});
+            default:
           }
-          break;
-        case 1:
-          if (true) {
-            switch (Arrays.binarySearch(stringSwitchCases_xbvbvu_a0a0a0b3a0a7, menuId.getFqName())) {
-              case 0:
-                return Arrays.asList(new SubstituteMenu[]{new substitute_IOperation_ArrayType()});
-              case 1:
-                return Arrays.asList(new SubstituteMenu[]{new substitute_IOperation_IteratorType()});
-              case 2:
-                return Arrays.asList(new SubstituteMenu[]{new substitute_IOperation_MappingType()});
-              case 3:
-                return Arrays.asList(new SubstituteMenu[]{new substitute_IOperation_SequenceType()});
-              default:
-            }
+        }
+        break;
+      case 1:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.baseLanguage.collections.editor.substitute_IOperation_ArrayType":
+              return Arrays.asList(new SubstituteMenu[]{new substitute_IOperation_ArrayType()});
+            case "jetbrains.mps.baseLanguage.collections.editor.substitute_IOperation_IteratorType":
+              return Arrays.asList(new SubstituteMenu[]{new substitute_IOperation_IteratorType()});
+            case "jetbrains.mps.baseLanguage.collections.editor.substitute_IOperation_MappingType":
+              return Arrays.asList(new SubstituteMenu[]{new substitute_IOperation_MappingType()});
+            default:
           }
-          break;
-        default:
-      }
+        }
+        break;
+      default:
     }
 
     return Collections.<SubstituteMenu>emptyList();
   }
-
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
+  @NotNull
+  @Override
+  public Collection<KeyMap> getDeclaredKeyMaps() {
+    return Arrays.<KeyMap>asList(new SequenceCreator_add_initializer());
   }
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0a = buildConceptIndices(MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1202df1ada0L, "jetbrains.mps.baseLanguage.collections.structure.AbstractContainerCreator"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x4eec26fcbaf8c39bL, "jetbrains.mps.baseLanguage.collections.structure.AbstractContainerType"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x12020925ee9L, "jetbrains.mps.baseLanguage.collections.structure.AbstractEnumeratorOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1201f00ef75L, "jetbrains.mps.baseLanguage.collections.structure.AbstractIteratorOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120e6ea9ddcL, "jetbrains.mps.baseLanguage.collections.structure.AbstractMappingOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d969dca87L, "jetbrains.mps.baseLanguage.collections.structure.AddAllSetElementsOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d9514ebd8L, "jetbrains.mps.baseLanguage.collections.structure.AddSetElementOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x12031a066ecL, "jetbrains.mps.baseLanguage.collections.structure.AllConstant"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c92e6703L, "jetbrains.mps.baseLanguage.collections.structure.AsSequenceOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11205199ac2L, "jetbrains.mps.baseLanguage.collections.structure.BinaryOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x118bc7e66e2L, "jetbrains.mps.baseLanguage.collections.structure.ChunkOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11daafd2413L, "jetbrains.mps.baseLanguage.collections.structure.ClearSetOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x119a966b94dL, "jetbrains.mps.baseLanguage.collections.structure.ComparatorSortOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x117b3740258L, "jetbrains.mps.baseLanguage.collections.structure.ContainsKeyOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1203903c318L, "jetbrains.mps.baseLanguage.collections.structure.ContainsValueOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x127be81db92655b3L, "jetbrains.mps.baseLanguage.collections.structure.CustomContainerCreator"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x54a5d587c1f3c7e0L, "jetbrains.mps.baseLanguage.collections.structure.CustomContainerDeclaration"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x54a5d587c1f3c84cL, "jetbrains.mps.baseLanguage.collections.structure.CustomContainers"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x15e2150d4bff8a67L, "jetbrains.mps.baseLanguage.collections.structure.CustomMapCreator"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11df825e596L, "jetbrains.mps.baseLanguage.collections.structure.DowncastExpression"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x12020864111L, "jetbrains.mps.baseLanguage.collections.structure.EnumeratorType"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1520010667848262L, "jetbrains.mps.baseLanguage.collections.structure.FoldLeftOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x152001066784e507L, "jetbrains.mps.baseLanguage.collections.structure.FoldRightOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10cac65f399L, "jetbrains.mps.baseLanguage.collections.structure.ForEachStatement"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10cac6f0962L, "jetbrains.mps.baseLanguage.collections.structure.ForEachVariable"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10cac6fa5c3L, "jetbrains.mps.baseLanguage.collections.structure.ForEachVariableReference"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x117d52db67cL, "jetbrains.mps.baseLanguage.collections.structure.GetKeysOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x12039220e97L, "jetbrains.mps.baseLanguage.collections.structure.GetValuesOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x116dbb34f2dL, "jetbrains.mps.baseLanguage.collections.structure.HashMapCreator"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x489c7f2006b05842L, "jetbrains.mps.baseLanguage.collections.structure.HeadListOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4071445L, "jetbrains.mps.baseLanguage.collections.structure.HeadMapOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4bdd40dL, "jetbrains.mps.baseLanguage.collections.structure.HeadSetOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d5cc25c8fL, "jetbrains.mps.baseLanguage.collections.structure.InsertElementOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1188372895aL, "jetbrains.mps.baseLanguage.collections.structure.InternalSequenceOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1201ed2b158L, "jetbrains.mps.baseLanguage.collections.structure.IteratorType"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120debe16c6L, "jetbrains.mps.baseLanguage.collections.structure.JoinOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c2ad6432L, "jetbrains.mps.baseLanguage.collections.structure.LinkedHashMapCreator"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d6213c318L, "jetbrains.mps.baseLanguage.collections.structure.ListElementAccessExpression"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10c25fb076aL, "jetbrains.mps.baseLanguage.collections.structure.ListType"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x59f2b8b299d62ef0L, "jetbrains.mps.baseLanguage.collections.structure.MapAsSequenceVarRef"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11962b7f964L, "jetbrains.mps.baseLanguage.collections.structure.MapClearOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x116ea555a25L, "jetbrains.mps.baseLanguage.collections.structure.MapElement"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x118f249550fL, "jetbrains.mps.baseLanguage.collections.structure.MapEntry"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x118f2481867L, "jetbrains.mps.baseLanguage.collections.structure.MapInitializer"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x117ae10e4d9L, "jetbrains.mps.baseLanguage.collections.structure.MapOperationExpression"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11914b836a4L, "jetbrains.mps.baseLanguage.collections.structure.MapRemoveOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x116db7e6bcbL, "jetbrains.mps.baseLanguage.collections.structure.MapType"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120cf0ddd15L, "jetbrains.mps.baseLanguage.collections.structure.MappingType"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120e8af3ac1L, "jetbrains.mps.baseLanguage.collections.structure.MappingsSetOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x7d7db8f4181fea15L, "jetbrains.mps.baseLanguage.collections.structure.MultiForEachPair"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x7d7db8f4181fe9f2L, "jetbrains.mps.baseLanguage.collections.structure.MultiForEachStatement"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x7d7db8f4181fea18L, "jetbrains.mps.baseLanguage.collections.structure.MultiForEachVariable"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x731a0dad81895f16L, "jetbrains.mps.baseLanguage.collections.structure.MultiForEachVariableReference"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x7818f71827269adL, "jetbrains.mps.baseLanguage.collections.structure.NoArgumentsSequenceOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x3fffa24b05a04797L, "jetbrains.mps.baseLanguage.collections.structure.OfTypeOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11108717200L, "jetbrains.mps.baseLanguage.collections.structure.PageOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120ebcea0f9L, "jetbrains.mps.baseLanguage.collections.structure.PutAllOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d96b14ae4L, "jetbrains.mps.baseLanguage.collections.structure.RemoveAllSetElementsOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11db038dd8cL, "jetbrains.mps.baseLanguage.collections.structure.RemoveAtElementOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d968cae32L, "jetbrains.mps.baseLanguage.collections.structure.RemoveSetElementOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d14c97b16L, "jetbrains.mps.baseLanguage.collections.structure.SequenceCreator"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10c26c9a2d9L, "jetbrains.mps.baseLanguage.collections.structure.SequenceOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10c260e9444L, "jetbrains.mps.baseLanguage.collections.structure.SequenceType"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d5e2fc7c1L, "jetbrains.mps.baseLanguage.collections.structure.SetElementOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d91cbbcd0L, "jetbrains.mps.baseLanguage.collections.structure.SetType"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x7818f71827244b5L, "jetbrains.mps.baseLanguage.collections.structure.SingleArgumentSequenceOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11fade5d82aL, "jetbrains.mps.baseLanguage.collections.structure.SingletonSequenceCreator"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x111076c0538L, "jetbrains.mps.baseLanguage.collections.structure.SkipOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d16b423daL, "jetbrains.mps.baseLanguage.collections.structure.SkipStatement"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x118374464e4L, "jetbrains.mps.baseLanguage.collections.structure.SmartClosureParameterDeclaration"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11257567b07L, "jetbrains.mps.baseLanguage.collections.structure.SortDirection"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x118b81cc8f6L, "jetbrains.mps.baseLanguage.collections.structure.SortOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d17046bf4L, "jetbrains.mps.baseLanguage.collections.structure.StopStatement"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x4e2f4f8785270237L, "jetbrains.mps.baseLanguage.collections.structure.SubListOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4139de2L, "jetbrains.mps.baseLanguage.collections.structure.SubMapOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4c28b15L, "jetbrains.mps.baseLanguage.collections.structure.SubSetOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x489c7f2006b0588eL, "jetbrains.mps.baseLanguage.collections.structure.TailListOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4127c90L, "jetbrains.mps.baseLanguage.collections.structure.TailMapOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4c1050eL, "jetbrains.mps.baseLanguage.collections.structure.TailSetOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x111083dd9b7L, "jetbrains.mps.baseLanguage.collections.structure.TakeOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11914e10330L, "jetbrains.mps.baseLanguage.collections.structure.ToIteratorOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10c26cea325L, "jetbrains.mps.baseLanguage.collections.structure.ToListOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4838d33L, "jetbrains.mps.baseLanguage.collections.structure.TreeSetCreator"));
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0c = buildConceptIndices(MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1202df1ada0L, "jetbrains.mps.baseLanguage.collections.structure.AbstractContainerCreator"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x15e2150d4bff8a67L, "jetbrains.mps.baseLanguage.collections.structure.CustomMapCreator"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x116dbb34f2dL, "jetbrains.mps.baseLanguage.collections.structure.HashMapCreator"));
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0e = buildConceptIndices(MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c37f506fL, "jetbrains.mps.baseLanguage.structure.Expression"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x116dbb34f2dL, "jetbrains.mps.baseLanguage.collections.structure.HashMapCreator"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120debe16c6L, "jetbrains.mps.baseLanguage.collections.structure.JoinOperation"));
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0f = buildConceptIndices(MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1202df1ada0L, "jetbrains.mps.baseLanguage.collections.structure.AbstractContainerCreator"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c37f506fL, "jetbrains.mps.baseLanguage.structure.Expression"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x116dbb34f2dL, "jetbrains.mps.baseLanguage.collections.structure.HashMapCreator"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10c260e9444L, "jetbrains.mps.baseLanguage.collections.structure.SequenceType"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4838d33L, "jetbrains.mps.baseLanguage.collections.structure.TreeSetCreator"));
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0g = buildConceptIndices(MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x12020925ee9L, "jetbrains.mps.baseLanguage.collections.structure.AbstractEnumeratorOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1201f00ef75L, "jetbrains.mps.baseLanguage.collections.structure.AbstractIteratorOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120e6ea9ddcL, "jetbrains.mps.baseLanguage.collections.structure.AbstractMappingOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d969dca87L, "jetbrains.mps.baseLanguage.collections.structure.AddAllSetElementsOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d9514ebd8L, "jetbrains.mps.baseLanguage.collections.structure.AddSetElementOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c92e6703L, "jetbrains.mps.baseLanguage.collections.structure.AsSequenceOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11df825e596L, "jetbrains.mps.baseLanguage.collections.structure.DowncastExpression"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c37f506fL, "jetbrains.mps.baseLanguage.structure.Expression"), MetaAdapterFactory.getInterfaceConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x53310200e8d9eefbL, "jetbrains.mps.baseLanguage.collections.structure.IApplicableToDeque"), MetaAdapterFactory.getInterfaceConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x53310200e8d9eef8L, "jetbrains.mps.baseLanguage.collections.structure.IApplicableToList"), MetaAdapterFactory.getInterfaceConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x53310200e8d9eaf6L, "jetbrains.mps.baseLanguage.collections.structure.IApplicableToNothing"), MetaAdapterFactory.getInterfaceConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1db93187ffc4d808L, "jetbrains.mps.baseLanguage.collections.structure.IContainerOperation"), MetaAdapterFactory.getInterfaceConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1db93187ffc7e7efL, "jetbrains.mps.baseLanguage.collections.structure.IListOperation"), MetaAdapterFactory.getInterfaceConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x116b46ac030L, "jetbrains.mps.baseLanguage.structure.IOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11daf69a138L, "jetbrains.mps.baseLanguage.collections.structure.LinkedListCreator"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x116ea555a25L, "jetbrains.mps.baseLanguage.collections.structure.MapElement"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x117aea47a16L, "jetbrains.mps.baseLanguage.collections.structure.MapOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x117ae10e4d9L, "jetbrains.mps.baseLanguage.collections.structure.MapOperationExpression"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d96b14ae4L, "jetbrains.mps.baseLanguage.collections.structure.RemoveAllSetElementsOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120becad360L, "jetbrains.mps.baseLanguage.collections.structure.RemoveOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d968cae32L, "jetbrains.mps.baseLanguage.collections.structure.RemoveSetElementOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10c26c9a2d9L, "jetbrains.mps.baseLanguage.collections.structure.SequenceOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d16b423daL, "jetbrains.mps.baseLanguage.collections.structure.SkipStatement"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11257567b07L, "jetbrains.mps.baseLanguage.collections.structure.SortDirection"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d17046bf4L, "jetbrains.mps.baseLanguage.collections.structure.StopStatement"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11914e10330L, "jetbrains.mps.baseLanguage.collections.structure.ToIteratorOperation"));
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0h = buildConceptIndices(MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c37f506fL, "jetbrains.mps.baseLanguage.structure.Expression"), MetaAdapterFactory.getInterfaceConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x116b46ac030L, "jetbrains.mps.baseLanguage.structure.IOperation"));
-  private static String[] stringSwitchCases_xbvbvu_a0a0a0a3a0a5 = new String[]{"jetbrains.mps.baseLanguage.collections.editor.AbstractContainerCreator_add_elementType", "jetbrains.mps.baseLanguage.collections.editor.AbstractContainerCreator_ext_1_RTransform_Menu", "jetbrains.mps.baseLanguage.collections.editor.add_initSize_to_container_creator", "jetbrains.mps.baseLanguage.collections.editor.add_parameters_to_container_creator"};
-  private static String[] stringSwitchCases_xbvbvu_a0a0a0b3a0a5 = new String[]{"jetbrains.mps.baseLanguage.collections.editor.BLC_rtansform", "jetbrains.mps.baseLanguage.collections.editor.downcast_expression", "jetbrains.mps.baseLanguage.collections.editor.list_element_access_rtransform"};
-  private static String[] stringSwitchCases_xbvbvu_a0a0a0c3a0a5 = new String[]{"jetbrains.mps.baseLanguage.collections.editor.HashMapCreator_add_keyType_valueType", "jetbrains.mps.baseLanguage.collections.editor.add_initSize_to_hashmap_creator", "jetbrains.mps.baseLanguage.collections.editor.map_creator_add_initializer"};
-  private static String[] stringSwitchCases_xbvbvu_a0a0a0d3a0a5 = new String[]{"jetbrains.mps.baseLanguage.collections.editor.sequenceType_addElementType"};
-  private static String[] stringSwitchCases_xbvbvu_a0a0a0e3a0a5 = new String[]{"jetbrains.mps.baseLanguage.collections.editor.add_comparator_to_treeset_creator"};
-  private static String[] stringSwitchCases_xbvbvu_a0a0a0a3a0a7 = new String[]{"jetbrains.mps.baseLanguage.collections.editor.BLC_substitute", "jetbrains.mps.baseLanguage.collections.editor.subs_AllConstant"};
-  private static String[] stringSwitchCases_xbvbvu_a0a0a0b3a0a7 = new String[]{"jetbrains.mps.baseLanguage.collections.editor.substitute_IOperation_ArrayType", "jetbrains.mps.baseLanguage.collections.editor.substitute_IOperation_IteratorType", "jetbrains.mps.baseLanguage.collections.editor.substitute_IOperation_MappingType", "jetbrains.mps.baseLanguage.collections.editor.substitute_IOperation_SequenceType"};
+
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1202df1ada0L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x4eec26fcbaf8c39bL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x12020925ee9L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1201f00ef75L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120e6ea9ddcL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d969dca87L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d9514ebd8L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x12031a066ecL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c92e6703L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11205199ac2L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x118bc7e66e2L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11daafd2413L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x119a966b94dL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x117b3740258L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1203903c318L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x127be81db92655b3L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x54a5d587c1f3c7e0L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x54a5d587c1f3c84cL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x15e2150d4bff8a67L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11df825e596L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x12020864111L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1520010667848262L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x152001066784e507L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10cac65f399L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10cac6f0962L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10cac6fa5c3L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x117d52db67cL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x12039220e97L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x116dbb34f2dL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x489c7f2006b05842L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4071445L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4bdd40dL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d5cc25c8fL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1188372895aL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1201ed2b158L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120debe16c6L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c2ad6432L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d6213c318L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10c25fb076aL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x59f2b8b299d62ef0L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11962b7f964L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x116ea555a25L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x118f249550fL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x118f2481867L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x117ae10e4d9L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11914b836a4L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x116db7e6bcbL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120cf0ddd15L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120e8af3ac1L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x7d7db8f4181fea15L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x7d7db8f4181fe9f2L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x7d7db8f4181fea18L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x731a0dad81895f16L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x7818f71827269adL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x3fffa24b05a04797L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11108717200L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120ebcea0f9L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d96b14ae4L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11db038dd8cL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d968cae32L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d14c97b16L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10c26c9a2d9L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10c260e9444L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d5e2fc7c1L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d91cbbcd0L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x7818f71827244b5L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11fade5d82aL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x111076c0538L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d16b423daL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x118374464e4L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11257567b07L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x118b81cc8f6L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d17046bf4L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x4e2f4f8785270237L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4139de2L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4c28b15L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x489c7f2006b0588eL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4127c90L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4c1050eL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x111083dd9b7L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11914e10330L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10c26cea325L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4838d33L)).seal();
+  private static final ConceptSwitchIndex conceptIndex1 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1202df1ada0L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x15e2150d4bff8a67L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x116dbb34f2dL)).seal();
+  private static final ConceptSwitchIndex conceptIndex2 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c37f506fL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x116dbb34f2dL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120debe16c6L)).seal();
+  private static final ConceptSwitchIndex conceptIndex3 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1202df1ada0L), MetaIdFactory.conceptId(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c37f506fL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x116dbb34f2dL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10c260e9444L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4838d33L)).seal();
+  private static final ConceptSwitchIndex conceptIndex4 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x12020925ee9L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1201f00ef75L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120e6ea9ddcL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d95148c3eL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d969dca87L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d9514ebd8L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c92e6703L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x127be81db92655b3L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x15e2150d4bff8a67L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11df825e596L), MetaIdFactory.conceptId(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c37f506fL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10cac6fa5c3L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x53310200e8d9eefbL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x53310200e8d9eef8L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1db93187ffc4d808L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1db93187ffc7e7efL), MetaIdFactory.conceptId(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x116b46ac030L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11daf69a138L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x116ea555a25L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x117aea47a16L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x117ae10e4d9L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x731a0dad81895f16L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d96b14ae4L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120becad360L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d968cae32L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10c26c9a2d9L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d16b423daL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11257567b07L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4060180L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4baf9d4L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d17046bf4L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11914e10330L)).seal();
+  private static final ConceptSwitchIndex conceptIndex5 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c37f506fL), MetaIdFactory.conceptId(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x116b46ac030L)).seal();
 }

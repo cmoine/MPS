@@ -15,17 +15,31 @@
  */
 package jetbrains.mps.project;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Set;
 
 /**
 * @author evgeny, 10/19/11
 */
 public interface PathMacrosProvider {
+  @NotNull
   Set<String> getNames();
 
+  @NotNull
   Set<String> getUserNames();
 
-  String getValue(String name);
+  @Nullable
+  String getValue(@NotNull String name);
 
-  void report(String message, String macro);
+  /**
+   * @deprecated message is to be defined by the provider as well
+   */
+@Deprecated(since = "201", forRemoval = true)
+  default void report(String message, String macro) {
+    reportUnknownMacro(macro);
+  }
+
+  void reportUnknownMacro(@NotNull String macro);
 }

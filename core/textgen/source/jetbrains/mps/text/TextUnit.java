@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 package jetbrains.mps.text;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNode;
 
 import java.nio.charset.Charset;
@@ -33,6 +34,18 @@ public interface TextUnit {
   @NotNull
   SNode getStartNode();
   void generate();
+
+  /**
+   * PROVISIONAL API
+   * Perhaps, shall stick to Path object rather than plain String
+   *
+   * Tell desired location of the text outcome
+   * @return {@code null} to use default value derived from qualified model name.
+   */
+  @Nullable
+  default String getFilePath() {
+    return null;
+  }
 
   /**
    * FIXME decide whether throws exception or return null/empty value if not yet generated.

@@ -19,7 +19,6 @@ import jetbrains.mps.lang.editor.menus.ConceptMenusPart;
 import jetbrains.mps.openapi.editor.menus.substitute.SubstituteMenuContext;
 import jetbrains.mps.openapi.editor.menus.substitute.SubstituteMenuItem;
 import jetbrains.mps.smodel.language.LanguageRegistry;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 
 import java.util.Collection;

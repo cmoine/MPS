@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,11 @@ package jetbrains.mps.generator.impl.plan;
 
 import jetbrains.mps.project.Project;
 import jetbrains.mps.tool.environment.Environment;
-import jetbrains.mps.tool.environment.EnvironmentConfig;
-import jetbrains.mps.tool.environment.MpsEnvironment;
+import jetbrains.mps.tool.environment.EnvironmentAware;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
@@ -35,20 +33,19 @@ import static org.hamcrest.CoreMatchers.equalTo;
 /**
  * @author Artem Tikhomirov
  */
-public class TemplateModelScanTest {
-  private static Environment ourEnvironment;
+public class TemplateModelScanTest implements EnvironmentAware {
+  private Environment ourEnvironment;
 
   @Rule
   public final ErrorCollector myErrors = new ErrorCollector();
 
-  @BeforeClass
-  public static void setup() {
-    ourEnvironment = MpsEnvironment.getOrCreate(EnvironmentConfig.defaultConfig());
-  }
 
-  @AfterClass
-  public static void tearDown() {
-    ourEnvironment.release();
+  /**
+   * @param env Bare MPS Environment suffice.
+   */
+  @Override
+  public void setEnvironment(@NotNull Environment env) {
+    ourEnvironment = env;
   }
 
   /**
@@ -91,7 +88,7 @@ public class TemplateModelScanTest {
     System.out.println("Total template models:" + templateModels2Test.length);
     */
     try {
-      final ModelScanner[] s2 = new ModelScanner[templateModels2Test.length];
+      final TemplateModelScanner[] s2 = new TemplateModelScanner[templateModels2Test.length];
       final long[] s2Dur = new long[s2.length];
       Runnable cmd = new Runnable() {
         @Override
@@ -100,7 +97,7 @@ public class TemplateModelScanTest {
             final SModelReference mr = PersistenceFacade.getInstance().createModelReference(templateModels2Test[i]);
             SModel m = mr.resolve(mpsProject.getRepository());
             final long start = System.nanoTime();
-            s2[i] = new ModelScanner();
+            s2[i] = new TemplateModelScanner();
             s2[i].scan(m);
 //            s2[i].scanInLegacyMode(m);
             final long end = System.nanoTime();
@@ -134,7 +131,7 @@ public class TemplateModelScanTest {
             7823		  3139
       */
     } finally {
-      mpsProject.dispose();
+      ourEnvironment.closeProject(mpsProject);
     }
   }
 }

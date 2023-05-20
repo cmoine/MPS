@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1164991038168:jetbrains.mps.baseLanguage.structure.ThrowStatement" />
+  <root nodeRef="r:201d6aa3-ac4f-49fc-83c0-b0fa64340c37(jetbrains.mps.editor.contextActionsTool.tests@tests)/6866332489278472802">
+    <file name="IconLoading_Test.java">
+      <node id="6866332489278808543" at="22,37,23,79" concept="5" />
+      <node id="6866332489278815150" at="25,6,26,102" concept="2" />
+      <node id="6866332489278585685" at="26,102,27,0" concept="4" />
+      <node id="6866332489278585667" at="27,0,28,80" concept="0" />
+      <node id="6866332489279202735" at="34,37,35,79" concept="5" />
+      <node id="6866332489279202739" at="37,6,38,102" concept="2" />
+      <node id="6866332489279202746" at="38,102,39,0" concept="4" />
+      <node id="6866332489279202747" at="39,0,40,80" concept="0" />
+      <node id="6866332489278781499" at="44,36,45,18" concept="3" />
+      <node id="6866332489278781508" at="48,35,49,18" concept="3" />
+      <node id="6866332489278807121" at="21,0,25,0" concept="1" trace="getIcon#()Ljetbrains/mps/smodel/runtime/IconResource;" />
+      <node id="6866332489279202730" at="33,0,37,0" concept="1" trace="getIcon#()Ljetbrains/mps/smodel/runtime/IconResource;" />
+      <node id="6866332489278781491" at="43,0,47,0" concept="1" trace="getTooltipText#()Ljava/lang/String;" />
+      <node id="6866332489278781500" at="47,0,51,0" concept="1" trace="getIcon#()Ljetbrains/mps/smodel/runtime/IconResource;" />
+      <node id="6866332489278785468" at="19,75,25,6" concept="2" />
+      <node id="6866332489279202723" at="31,71,37,6" concept="2" />
+      <node id="6866332489278474177" at="18,0,30,0" concept="1" trace="test_noClassDefFoundErrorWhenLoadingIcon#()V" />
+      <node id="6866332489279202719" at="30,0,42,0" concept="1" trace="test_runtimeExceptionWhenLoadingIcon#()V" />
+      <scope id="6866332489278807129" at="22,37,23,79" />
+      <scope id="6866332489279202734" at="34,37,35,79" />
+      <scope id="6866332489278781497" at="44,36,45,18" />
+      <scope id="6866332489278781506" at="48,35,49,18" />
+      <scope id="6866332489278807121" at="21,0,25,0" />
+      <scope id="6866332489279202730" at="33,0,37,0" />
+      <scope id="6866332489278781491" at="43,0,47,0" />
+      <scope id="6866332489278781500" at="47,0,51,0" />
+      <scope id="6866332489278474180" at="19,75,28,80">
+        <var name="converted" id="6866332489278815151" />
+        <var name="item" id="6866332489278785469" />
+      </scope>
+      <scope id="6866332489279202722" at="31,71,40,80">
+        <var name="converted" id="6866332489279202740" />
+        <var name="item" id="6866332489279202724" />
+      </scope>
+      <scope id="6866332489278474177" at="18,0,30,0" />
+      <scope id="6866332489279202719" at="30,0,42,0" />
+      <unit id="6866332489278806731" at="20,38,25,5" name="jetbrains.mps.editor.contextActionsTool.tests.IconLoading_Test$1" />
+      <unit id="6866332489279202728" at="32,38,37,5" name="jetbrains.mps.editor.contextActionsTool.tests.IconLoading_Test$2" />
+      <unit id="6866332489278779413" at="42,0,52,0" name="jetbrains.mps.editor.contextActionsTool.tests.IconLoading_Test$SidebarItemBase" />
+      <unit id="6866332489278472802" at="17,0,53,0" name="jetbrains.mps.editor.contextActionsTool.tests.IconLoading_Test" />
+    </file>
+  </root>
+</debug-info>
+

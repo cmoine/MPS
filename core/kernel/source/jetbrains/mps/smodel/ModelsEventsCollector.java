@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package jetbrains.mps.smodel;
 import jetbrains.mps.smodel.event.SModelChildEvent;
 import jetbrains.mps.smodel.event.SModelDevKitEvent;
 import jetbrains.mps.smodel.event.SModelEvent;
-import jetbrains.mps.smodel.event.SModelFileChangedEvent;
 import jetbrains.mps.smodel.event.SModelImportEvent;
 import jetbrains.mps.smodel.event.SModelLanguageEvent;
 import jetbrains.mps.smodel.event.SModelListener;
@@ -38,27 +37,44 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * NOTE: USE OF THIS CLASS IS DISCOURAGED AS IT DEALS WITH LEGACY MODEL CHANGE NOTIFICATIONS
+ *
  * This class serves as a composite listener to events which come from multiple models during Command
  *
  * @see org.jetbrains.mps.openapi.module.ModelAccess#executeCommand(Runnable)
  */
 public abstract class ModelsEventsCollector {
-  private List<SModelEvent> myEvents = new ArrayList<SModelEvent>();
+  /**
+   * This lock should be used for synchronizing access to myEvents field.
+   * This field may be accessed without a model lock from the flush() method,
+   * so we should take care of this synchronization.
+   */
+  private final Object myEventsLock = new Object();
+
+  private final org.jetbrains.mps.openapi.module.ModelAccess myModelAccess;
+
+  private List<SModelEvent> myEvents = new ArrayList<>();
   private SModelListener myModelListener = new SModelDelegateListener();
-  private Set<SModel> myModelsToListen = new LinkedHashSet<SModel>();
+  private Set<SModel> myModelsToListen = new LinkedHashSet<>();
   private CommandListener myCommandListener = new MyCommandAdapter();
   private volatile boolean myDisposed;
 
   private boolean myIsInCommand;
 
-  public ModelsEventsCollector() {
-    ModelAccess.instance().addCommandListener(myCommandListener);
-    myIsInCommand = ModelAccess.instance().isInsideCommand();
+  /**
+   * Support transition from legacy listeners to contemporary.
+   */
+  public ModelsEventsCollector(@NotNull org.jetbrains.mps.openapi.module.ModelAccess modelAccess) {
+    myModelAccess = modelAccess;
+    // XXX In fact, I don't see a reason to care about isInCommand state (and keep isCommandAction).
+    myIsInCommand = modelAccess.isCommandAction();
+    myModelAccess.addCommandListener(myCommandListener);
   }
 
   public void startListeningToModel(@NotNull SModel sm) {
     checkNotDisposed();
-    //assert !myModelsToListen.contains(sm) : "EventsCollector was already configured to listen for changes in this model descriptor: " + sm.getSModelReference().toString();
+    assert !myModelsToListen.contains(sm) :
+        "EventsCollector was already configured to listen for changes in this model descriptor: " + sm.getReference().toString();
     myModelsToListen.add(sm);
     ((SModelInternal) sm).addModelListener(myModelListener);
   }
@@ -73,15 +89,22 @@ public abstract class ModelsEventsCollector {
   public void flush() {
     checkNotDisposed();
 
-    if (myEvents.isEmpty()) return;
-    ModelAccess.instance().runWriteAction(new Runnable() {
-      @Override
-      public void run() {
-        List<SModelEvent> wrappedEvents = Collections.unmodifiableList(myEvents);
-        myEvents = new ArrayList<SModelEvent>();
-        eventsHappened(wrappedEvents);
+    final List<SModelEvent> wrappedEvents;
+    synchronized (myEventsLock) {
+      if (myEvents.isEmpty()) {
+        return;
       }
-    });
+      wrappedEvents = Collections.unmodifiableList(myEvents);
+      myEvents = new ArrayList<>();
+    }
+
+    if (myModelAccess.canWrite()) {
+      // in most cases, we are inside commandFinished() which is part of write action already
+      eventsHappened(wrappedEvents);
+    } else {
+      // there is code in editor that doesn flush() from unidentified state.
+      myModelAccess.runWriteAction(() -> eventsHappened(wrappedEvents));
+    }
   }
 
   /**
@@ -91,19 +114,18 @@ public abstract class ModelsEventsCollector {
 
   protected void clearCollectedEvents() {
     checkNotDisposed();
-
-    if (myEvents.isEmpty()) return;
-    ModelAccess.assertLegalWrite();
-    myEvents.clear();
+    synchronized (myEventsLock) {
+      myEvents.clear();
+    }
   }
 
   public void dispose() {
     checkNotDisposed();
 
-    for (SModel sm : new LinkedHashSet<SModel>(myModelsToListen)) {
+    for (SModel sm : new ArrayList<>(myModelsToListen)) {
       stopListeningToModel(sm);
     }
-    ModelAccess.instance().removeCommandListener(myCommandListener);
+    myModelAccess.removeCommandListener(myCommandListener);
     myDisposed = true;
   }
 
@@ -119,7 +141,9 @@ public abstract class ModelsEventsCollector {
       if (myDisposed) {
         return;
       }
-      myEvents.clear();
+      synchronized (myEventsLock) {
+        myEvents.clear();
+      }
       myIsInCommand = true;
     }
 
@@ -190,16 +214,6 @@ public abstract class ModelsEventsCollector {
     }
 
     @Override
-    public void beforeModelFileChanged(SModelFileChangedEvent event) {
-      listenerInvoked(event);
-    }
-
-    @Override
-    public void modelFileChanged(SModelFileChangedEvent event) {
-      listenerInvoked(event);
-    }
-
-    @Override
     public void propertyChanged(SModelPropertyEvent event) {
       listenerInvoked(event);
     }
@@ -250,10 +264,14 @@ public abstract class ModelsEventsCollector {
       checkNotDisposed();
 
       if (event != null) {
-        if (!myIsInCommand && !(event instanceof SModelFileChangedEvent)) {
-          throw new IllegalStateException("Event outside of a command");
+        if (!myIsInCommand) {
+          // just ignore, now we can get here inside a write (no longer requirement to modify model inside a command)
+          // and I assume intention of this ModelsEventsCollector was to figure out changes during command only
+          return;
         }
-        myEvents.add(event);
+        synchronized (myEventsLock) {
+          myEvents.add(event);
+        }
       }
     }
   }

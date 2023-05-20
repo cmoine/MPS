@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-2gyllzixsthrrazb3yyj7hyfv2qne06" />
+<product version="3" modelHash="-c59rjfxwtqknx3gv9bd2e59sjyz3t1g">
+  <files names="IRedirects.java:ModuleOutputPaths.java:OutputPathRedirects.java" />
+</product>
 

@@ -4,33 +4,55 @@ package jetbrains.mps.lang.editor.menus.contextAssistant.tests;
 
 import jetbrains.mps.MPSLaunch;
 import jetbrains.mps.lang.test.runtime.BaseTransformationTest;
-import org.junit.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCacheExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCache;
+import org.junit.jupiter.api.Test;
 import jetbrains.mps.lang.test.runtime.BaseEditorTestBody;
+import jetbrains.mps.lang.test.runtime.TransformationTest;
+import javax.swing.SwingUtilities;
 import jetbrains.mps.nodeEditor.EditorContext;
 import jetbrains.mps.openapi.editor.assist.ContextAssistantManager;
-import junit.framework.Assert;
+import org.junit.Assert;
+import jetbrains.mps.testbench.util.CachingAppender;
 
 @MPSLaunch
 public class ContextAssistant_HandlesExceptionsFromIsApplicable_Test extends BaseTransformationTest {
-  @Test
-  public void test_ContextAssistant_HandlesExceptionsFromIsApplicable() throws Throwable {
-    initTest("${mps_home}", "r:5a4d10fc-2567-46c5-982f-547e9102417b(jetbrains.mps.lang.editor.menus.contextAssistant.tests@tests)");
-    runTest("jetbrains.mps.lang.editor.menus.contextAssistant.tests.ContextAssistant_HandlesExceptionsFromIsApplicable_Test$TestBody", "testMethod", false);
+  @RegisterExtension
+  private static final TestParametersCacheExtension ourParametersCacheExtension = new TestParametersCacheExtension(new TestParametersCache(ContextAssistant_HandlesExceptionsFromIsApplicable_Test.class, "${mps_home}", "r:5a4d10fc-2567-46c5-982f-547e9102417b(jetbrains.mps.lang.editor.menus.contextAssistant.tests@tests)", false));
+
+  public ContextAssistant_HandlesExceptionsFromIsApplicable_Test() {
+    super(ourParametersCacheExtension.getParametersCache());
   }
 
-  @MPSLaunch
-  public static class TestBody extends BaseEditorTestBody {
+  @Test
+  public void test_ContextAssistant_HandlesExceptionsFromIsApplicable() throws Throwable {
+    new TestBody(this).testMethod();
+  }
+
+  /*package*/ static class TestBody extends BaseEditorTestBody {
+
+    /*package*/ TestBody(TransformationTest owner) {
+      super(owner);
+    }
+
     @Override
     public void testMethodImpl() throws Exception {
       initEditorComponent("7140355682307235746", "");
-      EditorContext editorContext = getEditorComponent().getEditorContext();
-      editorContext.getRepository().getModelAccess().runReadInEDT(new Runnable() {
-        public void run() {
-          ContextAssistantManager contextAssistantManager = getEditorComponent().getEditorContext().getContextAssistantManager();
+      SwingUtilities.invokeAndWait(() -> {
+        final EditorContext editorContext = getEditorComponent().getEditorContext();
+        editorContext.getRepository().getModelAccess().runReadAction(() -> {
+          ContextAssistantManager contextAssistantManager = editorContext.getContextAssistantManager();
           contextAssistantManager.updateImmediately();
           Assert.assertNotNull(contextAssistantManager.getActiveAssistant());
-        }
+          Assert.assertNotNull(contextAssistantManager.getActiveMenuItems());
+        });
       });
+    }
+
+    @Override
+    protected void populateExpectedEvents(CachingAppender appender) {
+      appender.expectEvent(CachingAppender.Level.ERROR, null);
     }
   }
 }

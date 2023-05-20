@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,28 @@
  */
 package jetbrains.mps.messages;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
+ * An extension to {@link IMessageHandler}, with extra semantics of collection of messages that could get cleared.
  * fyodor, 4/20/11
  */
-public interface IMessageList {
-  void add (IMessage message);
+public interface IMessageList extends IMessageHandler {
+  void add(@NotNull IMessage message);
 
-  void clear ();
+  void clear();
+
+  /**
+   * Request to bring this list to user's attention.
+   * Could show a balloon, bring a view to front, blink window header, or do nothing at all, solely at implementation discretion.
+   * There's no limit on which thread may initiate this {@code wake}-up, however, it is expected to reflect state of the list prior to the call,
+   * e.g. with a sequence {@code add(m1); add(m2); add(m3); wake();} it's reasonable to expect wake would bring all three messages visible.
+   * @since 2017.3
+   */
+  void wake();
+
+  @Override
+  default void handle(@NotNull IMessage msg) {
+    add(msg);
+  }
 }

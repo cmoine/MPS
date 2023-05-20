@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 package jetbrains.mps.generator.runtime;
+
+import jetbrains.mps.generator.impl.query.GeneratorQueryProvider;
 
 /**
  * Base implementation of {@link jetbrains.mps.generator.runtime.TemplateModel} to use as superclass in generated code
@@ -30,5 +32,12 @@ public abstract class TemplateModelBase implements TemplateModel {
   @Override
   public TemplateModule getModule() {
     return myModule;
+  }
+
+  @Override
+  public GeneratorQueryProvider getQueryProvider() {
+    // MPS shall never ask compiled generators for their GeneratorQueryProvider, hence null by default, so that generated
+    // TemplateModel subclasses of compiled templates don't need to bother.
+    return null;
   }
 }

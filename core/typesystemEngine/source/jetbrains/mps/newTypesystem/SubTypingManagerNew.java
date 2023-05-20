@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,10 +23,8 @@ import jetbrains.mps.lang.typesystem.runtime.IsApplicableStatus;
 import jetbrains.mps.lang.typesystem.runtime.SubtypingRule_Runtime;
 import jetbrains.mps.languageScope.LanguageScopeExecutor;
 import jetbrains.mps.smodel.ModelDependencyScanner;
-import jetbrains.mps.typesystem.TypeSystemReporter;
-import jetbrains.mps.typesystem.inference.EquationInfo;
 import jetbrains.mps.typesystem.inference.SubtypingManager;
-import jetbrains.mps.typesystem.inference.TypeChecker;
+import jetbrains.mps.typesystem.inference.TypeCheckerHelper;
 import jetbrains.mps.typesystem.inference.TypeCheckingContext;
 import jetbrains.mps.typesystem.inference.util.StructuralNodeSet;
 import jetbrains.mps.util.Computable;
@@ -43,18 +41,22 @@ import java.util.Set;
 public class SubTypingManagerNew extends SubtypingManager {
   private final CoercionManager myCoercionManager;
 
-  public SubTypingManagerNew(TypeChecker typeChecker) {
-    super(typeChecker);
-    myCoercionManager = new CoercionManager(typeChecker, this);
+  public SubTypingManagerNew(TypeCheckerHelper typeCheckerHelper) {
+    super(typeCheckerHelper);
+    myCoercionManager = new CoercionManager(typeCheckerHelper, this);
   }
 
   @Override
   public boolean isSubtype(SNode subType, SNode superType) {
-    return isSubtype(subType, superType, true);
+    return getTypeCheckerHelper().computeWithTrace(() -> calcIsSubtype(subType, superType, true), "is subtype");
   }
 
   @Override
   public boolean isSubtype(final SNode subType, final SNode superType, final boolean isWeak) {
+    return getTypeCheckerHelper().computeWithTrace(() -> calcIsSubtype(subType, superType, isWeak), "is subtype");
+  }
+
+  private boolean calcIsSubtype(SNode subType, SNode superType, boolean isWeak) {
     if (null == subType || null == superType) return false;
     if (subType == superType) return true;
     if (TypesUtil.isVariable(subType)) return false;
@@ -62,13 +64,10 @@ public class SubTypingManagerNew extends SubtypingManager {
 
     return LanguageScopeExecutor.execWithMultiLanguageScope(
         collectLanguagesRecursively(subType, superType),
-      new Computable<Boolean>() {
-        @Override
-        public Boolean compute() {
-          SubtypingResolver subtypingResolver = new SubtypingResolver(isWeak);
+        () -> {
+          SubtypingResolver subtypingResolver = new SubtypingResolver(isWeak, getTypeCheckerHelper());
           return subtypingResolver.calcIsSubType(subType, superType);
-        }
-      });
+        });
   }
 
   @Override
@@ -87,17 +86,14 @@ public class SubTypingManagerNew extends SubtypingManager {
     return LanguageScopeExecutor.execWithMultiLanguageScope(
         collectLanguagesRecursively(subType, superType),
         // two booleans:  affirmative, authoritative
-        new Computable<Pair<Boolean, Boolean>>() {
-          @Override
-          public Pair<Boolean, Boolean> compute() {
-            for (Pair<InequationReplacementRule_Runtime, IsApplicable2Status> pair : myTypeChecker.getRulesManager().getReplacementRules(subType, superType)) {
-              InequationReplacementRule_Runtime rule = pair.o1;
-              IsApplicable2Status status = pair.o2;
-              boolean affirmative = rule.checkInequation(subType, superType, new EquationInfo(null, null), status, isWeak);
-              return new Pair<Boolean, Boolean>(affirmative, true);
-            }
-            return new Pair<Boolean, Boolean>(false, false);
+        () -> {
+          for (Pair<InequationReplacementRule_Runtime, IsApplicable2Status> pair : getTypeCheckerHelper().getRulesManager().getReplacementRules(subType, superType)) {
+            InequationReplacementRule_Runtime rule = pair.o1;
+            IsApplicable2Status status = pair.o2;
+            boolean affirmative = rule.checkInequation(subType, superType, status, isWeak);
+            return new Pair<>(affirmative, true);
           }
+          return new Pair<>(false, false);
         });
   }
 
@@ -130,20 +126,17 @@ public class SubTypingManagerNew extends SubtypingManager {
     }
 
     // use global language scope as the context is unknown
-    LanguageScopeExecutor.execWithLanguageScope(null, new Computable<Object>() {
-      @Override
-      public Object compute() {
-        List<Pair<SubtypingRule_Runtime, IsApplicableStatus>> subtypingRule_runtimes = myTypeChecker.getRulesManager().getSubtypingRules(term, isWeak);
-        if (subtypingRule_runtimes != null) {
-          for (final Pair<SubtypingRule_Runtime, IsApplicableStatus> subtypingRule : subtypingRule_runtimes) {
-            List<SNode> superTypes = subtypingRule.o1.getSubOrSuperTypes(term, context, subtypingRule.o2);
-            if (superTypes != null) {
-              result.addAll(superTypes);
-            }
+    LanguageScopeExecutor.execWithGlobalScope((Computable<Object>) () -> {
+      List<Pair<SubtypingRule_Runtime, IsApplicableStatus>> subtypingRule_runtimes = getTypeCheckerHelper().getRulesManager().getSubtypingRules(term, isWeak);
+      if (subtypingRule_runtimes != null) {
+        for (final Pair<SubtypingRule_Runtime, IsApplicableStatus> subtypingRule : subtypingRule_runtimes) {
+          List<SNode> superTypes = subtypingRule.o1.getSubOrSuperTypes(term, context, subtypingRule.o2);
+          if (superTypes != null) {
+            result.addAll(superTypes);
           }
         }
-        return result;
       }
+      return result;
     });
   }
 
@@ -169,23 +162,20 @@ public class SubTypingManagerNew extends SubtypingManager {
 
     return LanguageScopeExecutor.execWithMultiLanguageScope(
         collectLanguagesRecursively(left, right),
-        new Computable<Boolean>() {
-          @Override
-          public Boolean compute() {
-            List<Pair<ComparisonRule_Runtime, IsApplicable2Status>> comparisonRule_runtimes = myTypeChecker.getRulesManager().getComparisonRules(left, right, isWeak);
-            if (comparisonRule_runtimes != null) {
-              for (Pair<ComparisonRule_Runtime, IsApplicable2Status> comparisonRule_runtime : comparisonRule_runtimes) {
-                if (comparisonRule_runtime.o1.areComparable(left, right, comparisonRule_runtime.o2)) return true;
-              }
+        () -> {
+          List<Pair<ComparisonRule_Runtime, IsApplicable2Status>> comparisonRule_runtimes = getTypeCheckerHelper().getRulesManager().getComparisonRules(left, right, isWeak);
+          if (comparisonRule_runtimes != null) {
+            for (Pair<ComparisonRule_Runtime, IsApplicable2Status> comparisonRule_runtime : comparisonRule_runtimes) {
+              if (comparisonRule_runtime.o1.areComparable(left, right, comparisonRule_runtime.o2)) return true;
             }
-            comparisonRule_runtimes = myTypeChecker.getRulesManager().getComparisonRules(right, left, isWeak);
-            if (comparisonRule_runtimes != null) {
-              for (Pair<ComparisonRule_Runtime, IsApplicable2Status> comparisonRule_runtime : comparisonRule_runtimes) {
-                if (comparisonRule_runtime.o1.areComparable(right, left, comparisonRule_runtime.o2)) return true;
-              }
-            }
-            return false;
           }
+          comparisonRule_runtimes = getTypeCheckerHelper().getRulesManager().getComparisonRules(right, left, isWeak);
+          if (comparisonRule_runtimes != null) {
+            for (Pair<ComparisonRule_Runtime, IsApplicable2Status> comparisonRule_runtime : comparisonRule_runtimes) {
+              if (comparisonRule_runtime.o1.areComparable(right, left, comparisonRule_runtime.o2)) return true;
+            }
+          }
+          return false;
         });
   }
 
@@ -195,7 +185,7 @@ public class SubTypingManagerNew extends SubtypingManager {
       return types;
     }
     List<SNode> typesList = SubtypingUtil.eliminateSubTypes(types);
-    return new HashSet<SNode>(SubtypingUtil.leastCommonSuperTypes(typesList, null));
+    return new HashSet<>(SubtypingUtil.leastCommonSuperTypes(typesList, null));
   }
 
   public static Collection<SLanguage> collectLanguagesRecursively(SNode... type) {
@@ -212,7 +202,7 @@ public class SubTypingManagerNew extends SubtypingManager {
     if (subtype == null) return null;
     long start = System.nanoTime();
     SNode sNode = myCoercionManager.coerceSubTypingNew(subtype, pattern, isWeak, context);
-    TypeSystemReporter.getInstance().reportCoerce(subtype, pattern.getConcept(), System.nanoTime()-start);
+    getTypeCheckerHelper().getTypeSystemReporter().reportCoerce(subtype, pattern.getConcept(), System.nanoTime()-start);
     return sNode;
   }
 }

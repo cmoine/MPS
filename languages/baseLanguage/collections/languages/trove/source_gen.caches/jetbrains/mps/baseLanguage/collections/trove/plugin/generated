@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="be66ufo2cc0x2001kxioelixq1e4scb" />
+<product version="3" modelHash="-1avzk7ms4c3s9jtr3tnqn9hruhnjgfa">
+  <files names="ExtensionDescriptor.java:customContainers_extension.java" />
+</product>
 

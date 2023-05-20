@@ -21,6 +21,7 @@ import jetbrains.mps.nodeEditor.EditorComponent;
 import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.TextBuilder;
 import jetbrains.mps.openapi.editor.cells.CellActionType;
+import jetbrains.mps.openapi.editor.cells.CellTraversalUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SNode;
 
@@ -87,7 +88,7 @@ public class EditorCell_Component extends EditorCell_ComponentBase {
    * Computes ascent (baseline) of the component for alignment purposes.
    *
    * @return "component font ascent + border top inset" (this is not generic but works well for buttons). If the component or its font is null, returns
-   *         the height of the cell.
+   * the height of the cell.
    */
   @Override
   public int getAscent() {
@@ -125,6 +126,7 @@ public class EditorCell_Component extends EditorCell_ComponentBase {
   public void onAdd() {
     super.onAdd();
     getComponent().addFocusListener(mySelectCellOnFocusGainedFocusListener);
+    getComponent().setVisible(!CellTraversalUtil.isCellUnderFoldedCollection(this));
   }
 
   @Override

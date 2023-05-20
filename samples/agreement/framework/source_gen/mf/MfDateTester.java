@@ -5,7 +5,7 @@ package mf;
 import junit.framework.TestCase;
 import java.util.GregorianCalendar;
 import java.util.Calendar;
-import junit.framework.Assert;
+import org.junit.Assert;
 import junit.textui.TestRunner;
 import junit.framework.TestSuite;
 

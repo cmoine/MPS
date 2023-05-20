@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 package jetbrains.mps.idea.build;
 
 import com.intellij.compiler.server.BuildProcessParametersProvider;
-import jetbrains.mps.util.PathManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.jps.builders.impl.java.EclipseCompilerTool;
 
@@ -40,9 +39,8 @@ public class MPSBuildProcessParametersProvider extends BuildProcessParametersPro
 
   @NotNull
   @Override
-  public List<String> getLauncherClassPath() {
-    List<String> launcherClassPath = new ArrayList<String>(1);
-    launcherClassPath.add(PathManager.getIdeaPath() + "/lib/asm4-all.jar");
-    return launcherClassPath;
+  public Iterable<String> getLauncherClassPath() {
+    // used to add /lib/asm4-all.jar, although not clear why not with compileServer.plugin extension?
+    return super.getLauncherClassPath();
   }
 }

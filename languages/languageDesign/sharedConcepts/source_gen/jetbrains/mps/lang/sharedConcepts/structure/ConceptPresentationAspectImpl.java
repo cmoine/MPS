@@ -4,36 +4,72 @@ package jetbrains.mps.lang.sharedConcepts.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_ConceptFunctionParameter_editorContext = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptFunctionParameter_model = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptFunctionParameter_node = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptFunctionParameter_operationContext = new ConceptPresentationBuilder().deprecated().create();
-  private final ConceptPresentation props_ConceptFunctionParameter_progressMonitor = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptFunctionParameter_scope = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_ConceptFunctionParameter_editorContext;
+  private ConceptPresentation props_ConceptFunctionParameter_model;
+  private ConceptPresentation props_ConceptFunctionParameter_node;
+  private ConceptPresentation props_ConceptFunctionParameter_operationContext;
+  private ConceptPresentation props_ConceptFunctionParameter_progressMonitor;
+  private ConceptPresentation props_ConceptFunctionParameter_scope;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.ConceptFunctionParameter_editorContext:
+        if (props_ConceptFunctionParameter_editorContext == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("current EditorContext instance");
+          cpb.rawPresentation("editorContext");
+          props_ConceptFunctionParameter_editorContext = cpb.create();
+        }
         return props_ConceptFunctionParameter_editorContext;
-      case 1:
+      case LanguageConceptSwitch.ConceptFunctionParameter_model:
+        if (props_ConceptFunctionParameter_model == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("model of the reference node");
+          cpb.rawPresentation("model");
+          props_ConceptFunctionParameter_model = cpb.create();
+        }
         return props_ConceptFunctionParameter_model;
-      case 2:
+      case LanguageConceptSwitch.ConceptFunctionParameter_node:
+        if (props_ConceptFunctionParameter_node == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("node");
+          props_ConceptFunctionParameter_node = cpb.create();
+        }
         return props_ConceptFunctionParameter_node;
-      case 3:
+      case LanguageConceptSwitch.ConceptFunctionParameter_operationContext:
+        if (props_ConceptFunctionParameter_operationContext == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.deprecated(true);
+          cpb.shortDesc("IOperationContext");
+          cpb.rawPresentation("operationContext");
+          props_ConceptFunctionParameter_operationContext = cpb.create();
+        }
         return props_ConceptFunctionParameter_operationContext;
-      case 4:
+      case LanguageConceptSwitch.ConceptFunctionParameter_progressMonitor:
+        if (props_ConceptFunctionParameter_progressMonitor == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("progress monitor");
+          cpb.rawPresentation("monitor");
+          props_ConceptFunctionParameter_progressMonitor = cpb.create();
+        }
         return props_ConceptFunctionParameter_progressMonitor;
-      case 5:
+      case LanguageConceptSwitch.ConceptFunctionParameter_scope:
+        if (props_ConceptFunctionParameter_scope == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("context (SearchScope)");
+          cpb.rawPresentation("scope");
+          props_ConceptFunctionParameter_scope = cpb.create();
+        }
         return props_ConceptFunctionParameter_scope;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

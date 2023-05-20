@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,12 +20,7 @@ import jetbrains.mps.make.java.RootDependencies;
 import jetbrains.mps.text.CompatibilityTextUnit;
 import jetbrains.mps.text.TextGenResult;
 import jetbrains.mps.text.TextUnit;
-import jetbrains.mps.util.NameUtil;
-import jetbrains.mps.util.Pair;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.mps.openapi.model.SNode;
-
-import java.util.List;
 
 /**
  * Produce collection of BaseLanguage dependencies (aka {@link ModelDependencies}) from information
@@ -34,11 +29,19 @@ import java.util.List;
  * generated files, hence ModelDependencies in [kernel] and this builder in [textgen]
  *
  * See {@link CompatibilityTextUnit} for ideas how to get rid of explicit BL dependency.
+ * Now, it seems better approach is to move this builder next to TextGen_Facet (which knows about [kernel] and [textgen]). It's still
+ * not best solution (we need a mechanism to contribute these builders, along with cache generators, based on actual languages involved).
+ * Shall get back to this question once RTU.findContextObject goes API/public (into TU) and I can use it without need to cast to RTU implementation
  *
  * @see jetbrains.mps.text.impl.DebugInfoBuilder
  * @author Artem Tikhomirov
  * @since 3.4
+ * @deprecated This class is no longer in use, as we abandon approach with per-root dependencies recorded.
+ *             Although I don't expect any uses of this class outside of MPS/TextGen Make facet, I'd like to keep it for a while just in case I'd like to
+ *             pay attention to the comments/considerations above.
+ *             FIXME before deleting this class, check if there are any java module dependencies that become obsolete and could be cleared as well.
  */
+@Deprecated(since = "2022.2", forRemoval = true)
 public class BLDependenciesBuilder {
 
   @NotNull
@@ -48,17 +51,14 @@ public class BLDependenciesBuilder {
       if (tu.getState() == TextUnit.Status.Empty) {
         continue;
       }
-      if (!(tu instanceof RegularTextUnit2)) {
-        continue;
-      }
-      final Pair<List<String>, List<String>> dependencies = ((RegularTextUnit2) tu).getDependencies();
-      if (dependencies != null) {
-        final SNode root = tu.getStartNode();
-        modelDependencies.addDependencies(new RootDependencies(
-            NameUtil.nodeFQName(root), // JavaTextUnit.getClassName()?
-            tu.getFileName(),
-            dependencies.o1,
-            dependencies.o2));
+      if (tu instanceof RegularTextUnit) {
+        RootDependencies.Source co = ((RegularTextUnit) tu).findContextObject(RootDependencies.Source.class);
+        if (co != null) {
+          RootDependencies deps = co.getDependencies();
+          if (deps != null) {
+            modelDependencies.addDependencies(deps);
+          }
+        }
       }
     }
     return modelDependencies;

@@ -9,7 +9,7 @@ import jetbrains.mps.baseLanguage.tuples.runtime.MultiTuple;
 
 public class ConceptIconHelper {
   public static Tuples._2<String, String> createColors() {
-    // make it not less than 80 in each color 
+    // make it not less than 80 in each color
     int mainColor = new Random().nextInt(0x1000000) | 0x808080;
     int borderColor = new Color(mainColor).darker().getRGB() & 0xFFFFFF;
 

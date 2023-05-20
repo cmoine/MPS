@@ -4,21 +4,26 @@ package jetbrains.mps.testCustomDataFlow.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_IntraProceduralSpecific_BuilderMode = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_IntraProceduralSpecific_BuilderMode;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.IntraProceduralSpecific_BuilderMode:
+        if (props_IntraProceduralSpecific_BuilderMode == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("intra-procedural-specific");
+          props_IntraProceduralSpecific_BuilderMode = cpb.create();
+        }
         return props_IntraProceduralSpecific_BuilderMode;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

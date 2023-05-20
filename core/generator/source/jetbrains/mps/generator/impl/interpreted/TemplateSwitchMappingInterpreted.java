@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,7 +44,7 @@ public class TemplateSwitchMappingInterpreted implements TemplateSwitchMapping {
 
   public TemplateSwitchMappingInterpreted(SNode aSwitch) {
     mySwitch = aSwitch;
-    rules = new ArrayList<TemplateReductionRule>();
+    rules = new ArrayList<>();
     for (SNode child : mySwitch.getChildren()) {
       if (RuleUtil.concept_Reduction_MappingRule.equals(child.getConcept())) {
         rules.add(new TemplateReductionRuleInterpreted(child));
@@ -74,23 +74,23 @@ public class TemplateSwitchMappingInterpreted implements TemplateSwitchMapping {
   }
 
   @Override
-  public Collection<SNode> applyDefault(TemplateExecutionEnvironment environment, SNodeReference templateSwitch, String mappingName, TemplateContext context) throws GenerationException {
+  public Collection<SNode> applyDefault(TemplateContext context) throws GenerationException {
     SNode defaultConsequence = RuleUtil.getSwitchDefaultConsequence(mySwitch);
     if (defaultConsequence == null) {
       SNodeReference modifies = getModifiesSwitch();
       if (modifies == null) {
         return null;
       }
-      TemplateSwitchMapping switchMapping = environment.getGenerator().getSwitch(modifies);
+      TemplateSwitchMapping switchMapping = context.getEnvironment().getGenerator().getSwitch(modifies);
       if (switchMapping == null) {
         return null;
       }
-      return switchMapping.applyDefault(environment, templateSwitch, mappingName, context);
+      return switchMapping.applyDefault(context);
     }
 
     try {
       RuleConsequenceProcessor rcp = RuleConsequenceProcessor.prepare(defaultConsequence);
-      return rcp.processRuleConsequence(context.subContext(mappingName));
+      return rcp.processRuleConsequence(context);
     } catch (AbandonRuleInputException ex) {
       // it's ok. just ignore
       return Collections.emptyList();
@@ -98,12 +98,12 @@ public class TemplateSwitchMappingInterpreted implements TemplateSwitchMapping {
   }
 
   @Override
-  public void processNull(TemplateExecutionEnvironment environment, SNodeReference templateSwitch, TemplateContext context) {
+  public void processNull(TemplateExecutionEnvironment environment) {
     SNode message = RuleUtil.getSwitch_NullInputMessage(mySwitch);
     if (message != null) {
       DismissTopMappingRuleException.MessageType messageType = GeneratorUtilEx.getGeneratorMessage_kind(message);
       String text = GeneratorUtilEx.getGeneratorMessage_text(message);
-      GeneratorUtil.log(environment.getLogger(), templateSwitch, messageType, text, GeneratorUtil.describeIfExists(context.getInput(), "input node"));
+      GeneratorUtil.log(environment.getLogger(), getSwitchNode(), messageType, text);
     }
   }
 }

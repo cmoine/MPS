@@ -16,7 +16,6 @@
 package jetbrains.mps.smodel.event;
 
 import jetbrains.mps.extapi.model.SNodeBatchChangeListener;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.event.AbstractModelChangeEvent;
 
@@ -29,7 +28,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @author Artem Tikhomirov
  */
 public class BatchChangeEventDispatch {
-  private final List<SNodeBatchChangeListener> myListeners = new CopyOnWriteArrayList<SNodeBatchChangeListener>();
+  private final List<SNodeBatchChangeListener> myListeners = new CopyOnWriteArrayList<>();
 
   public void add(@Nullable SNodeBatchChangeListener l) {
     if (l != null) {

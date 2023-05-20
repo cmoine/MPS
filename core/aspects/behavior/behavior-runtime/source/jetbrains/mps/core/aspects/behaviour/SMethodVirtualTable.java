@@ -17,57 +17,69 @@ package jetbrains.mps.core.aspects.behaviour;
 
 import jetbrains.mps.core.aspects.behaviour.api.BHDescriptor;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
+import jetbrains.mps.core.aspects.behaviour.api.SMethodId;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 /**
  * Primitive representation of the virtual behavior methods table.
- * Must contain a mapping from a descriptor's own (!) virtual method to the BHDescriptor with its implementation
+ * Contains a mapping from a SMethodId (which are the same for the overriding virtual methods)
+ * to the concrete SMethod<?> with implementation (SMethod identifies its location up to a concept so that two overriding virtual methods are different for two concepts)
  *
  * Created by apyshkin on 28/07/15.
  */
 public final class SMethodVirtualTable {
-  private final Map<SMethod<?>, BHDescriptor> myTable = new HashMap<SMethod<?>, BHDescriptor>();
+  // contains all virtual
+  // pointing to the concrete SMethod in a concrete BHDescriptor
+  private final Map<SMethodId, SMethod<?>> myIdToImplementationTable = new HashMap<>();
 
-  public SMethodVirtualTable(@NotNull BHDescriptor startingDescriptor, List<SMethod<?>> methods) {
+  SMethodVirtualTable() {
+  }
+
+  SMethodVirtualTable(@NotNull List<SMethod<?>> methods) {
     for (SMethod<?> method : methods) {
       if (method.isVirtual()) {
-        myTable.put(method, startingDescriptor);
+        myIdToImplementationTable.put(method.getId(), method);
       }
     }
   }
 
   /**
-   * @param method -- method must be virtual;
-   * @return corresponding BHDescriptor or null if the virtual table does not contain the method
+   * @param methodId -- the id of the virtual method;
+   * @return corresponding SMethod or null if the virtual table does not contain the id
    */
   @Nullable
-  public BHDescriptor get(@NotNull SMethod<?> method) {
-    return myTable.get(method);
+  public SMethod<?> get(@NotNull SMethodId methodId) {
+    return myIdToImplementationTable.get(methodId);
   }
 
   /**
-   * merges two vTables, stores the results in this.
+   * merges a descriptor into the vTable
+   * mainly a method from 'another' descriptor is merged into <code>myIdToImplementationTable</code> if only
+   * there is no any record in it yet
    */
-  public void merge(@NotNull final SMethodVirtualTable another) {
-    Map<SMethod<?>, BHDescriptor> anotherTable = another.myTable;
-    for (Entry<SMethod<?>, BHDescriptor> pair : anotherTable.entrySet()) {
-      SMethod method = pair.getKey();
-      BHDescriptor descriptor = pair.getValue();
-      if (!myTable.containsKey(method)) {
-        myTable.put(method, descriptor);
+  public void merge(@NotNull final BHDescriptor descriptor) {
+    for (SMethod<?> method : descriptor.getDeclaredMethods()) {
+      if (method.isVirtual()) {
+        SMethodId id = method.getId();
+        if (!myIdToImplementationTable.containsKey(id) || myIdToImplementationTable.get(id).isAbstract()) {
+          myIdToImplementationTable.put(id, method);
+        }
       }
     }
   }
 
+  /**
+   * @return all the virtual methods including the abstract ones
+   */
   @NotNull
   public Set<SMethod<?>> getMethods() {
-    return myTable.keySet();
+    return new HashSet<>(myIdToImplementationTable.values());
   }
 }

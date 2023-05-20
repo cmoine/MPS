@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="com.intellij.openapi">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/util.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/util_rt.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/util-8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/src/platform-sources.zip!/" />
+    </SOURCES>
+  </library>
+</component>

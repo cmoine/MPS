@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="537rlwjuyrd32j8vd2v62um33w2rf9i" />
+<product version="3" modelHash="3fry4kk3rnjhsdvloi7opjm12nzjgk8">
+  <files names="ActionAspectDescriptorImpl.java:unitTest_Factory.java" />
+</product>
 

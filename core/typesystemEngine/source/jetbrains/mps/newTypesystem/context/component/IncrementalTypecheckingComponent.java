@@ -17,91 +17,147 @@ package jetbrains.mps.newTypesystem.context.component;
 
 import gnu.trove.THashSet;
 import jetbrains.mps.newTypesystem.context.typechecking.BaseTypechecking;
+import jetbrains.mps.newTypesystem.context.typechecking.IncrementalTypechecking;
 import jetbrains.mps.newTypesystem.state.State;
 import jetbrains.mps.smodel.AbstractNodesReadListener;
+import jetbrains.mps.typechecking.CacheState;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.typesystem.inference.TypeChecker;
 import jetbrains.mps.util.Pair;
 
+import java.time.Instant;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 /*package*/ public abstract class IncrementalTypecheckingComponent<STATE extends State> extends SimpleTypecheckingComponent<STATE> {
 
-  private AtomicBoolean myInvalidationWasPerformed = new AtomicBoolean(false);
+  private AtomicReference<InvalidationResult> myInvalidation = new AtomicReference<>(InvalidationResult.never());
+  // TODO: drop this feature
   private AtomicBoolean myCacheWasRebuilt = new AtomicBoolean(false);
-  private AtomicBoolean myInvalidationResult = new AtomicBoolean(false);
+  private Set<SNode> myCurrentNodesToInvalidate = new THashSet<>();
+  private AccessTracking myAccessTracking = null;
+  private AtomicReference<Instant> myLastChecked = new AtomicReference<>(Instant.MIN); // never
 
-  private Set<SNode> myCurrentNodesToInvalidate = new THashSet<SNode>();
-
-  protected IncrementalTypecheckingComponent(TypeChecker typeChecker, STATE state, BaseTypechecking component) {
+  protected IncrementalTypecheckingComponent(STATE state, BaseTypechecking component) {
     super(state, component);
   }
 
   @Override
   protected abstract boolean doInvalidate();
 
+  @Override
+  public void setChecked() {
+    super.setChecked();
+    myLastChecked.set(Instant.now());
+  }
+
+  /**
+   * Returns true if either full check has occurred after {@param since}, or there were rules invalidated and
+   * a re-check is required.
+   */
+  public boolean hasUpdates(Instant since) {
+    boolean isCheckedSince = myLastChecked.get().isAfter(since);
+    InvalidationResult invalidationResult = myInvalidation.get();
+    boolean invalidated = invalidationResult.hasOccuredSince(since) && invalidationResult.hasInvalidated();
+    return isCheckedSince || invalidated;
+  }
+
+  public CacheState getCacheState() {
+    return new MyCacheState();
+  }
+
+  @Deprecated(forRemoval = true)
   public void setInvalidationWasPerformed(boolean invalidationWasPerformed) {
-    myInvalidationWasPerformed.set(invalidationWasPerformed);
+    // try to keep backward compatibility
+    if (!invalidationWasPerformed) {
+      clearInvalidation();
+    }
+  }
+
+  public InvalidationResult getInvalidationResult() {
+    return myInvalidation.get();
   }
 
   public void addNodeToInvalidate(SNode node) {
     myCurrentNodesToInvalidate.add(node);
-    setInvalidationWasPerformed(false);
+    clearInvalidation();
   }
 
   @Override
   public void clear() {
-    myIsChecked = false;
-    myInvalidationWasPerformed.set(false);
+    super.clear();
+    myLastChecked.set(Instant.MIN);
     myCacheWasRebuilt.set(false);
-    myInvalidationResult.set(false);
+    myInvalidation.set(InvalidationResult.never());
+  }
+
+  public void runWithAccessTracking(SNode contextNode, Runnable runnable) {
+    AccessTracking accessTracking = myAccessTracking != null ? myAccessTracking : new AccessTracking();
+    accessTracking.installReadListeners();
+    try {
+      runnable.run();
+    } finally {
+      accessTracking.removeReadListeners();
+    }
+    accessTracking.postProcess(contextNode);
+  }
+
+  @Override
+  protected void solveInequalities(AccessTracking accessTracking) {
+    this.myAccessTracking = accessTracking;
+    try {
+      super.solveInequalities(accessTracking);
+    } finally {
+      this.myAccessTracking = null;
+    }
+  }
+
+  @Override
+  protected IncrementalTypechecking getTypechecking() {
+    return (IncrementalTypechecking) super.getTypechecking();
   }
 
   public void clearNodeTypes() {
     myCurrentNodesToInvalidate.clear();
   }
 
-  protected boolean isInvalidationWasPerformed() {
-    return myInvalidationWasPerformed.get();
+  protected void clearInvalidation() {
+    myInvalidation.set(InvalidationResult.never());
   }
 
+  protected boolean isInvalidationWasPerformed() {
+    return myInvalidation.get().hasOccuredSince(Instant.MIN);
+  }
+
+  /**
+   * @deprecated never true
+   * @return
+   */
+  @Deprecated(forRemoval = true)
   protected boolean isCacheWasRebuilt() {
     return myCacheWasRebuilt.get();
   }
 
-  protected boolean isInvalidationResult() {
-    return myInvalidationResult.get();
+  protected boolean hasInvalidated() {
+    return myInvalidation.get().hasInvalidated();
   }
 
   protected Set<SNode> getCurrentNodesToInvalidate() {
-    return new THashSet<SNode>(myCurrentNodesToInvalidate);
+    return new THashSet<>(myCurrentNodesToInvalidate);
   }
 
   /*
    *  Single-threaded
    */
   protected class MyEventsReadListener extends AbstractNodesReadListener {
-    private Set<SNode> myAccessedNodes = new THashSet<SNode>(1);
-    private Set<Pair<SNode, String>> myAccessedProperties = new THashSet<Pair<SNode, String>>(1);
-    private boolean myIsSetAccessReport = false;
+    private Set<SNode> myAccessedNodes = new THashSet<>(1);
+    private Set<Pair<SNode, String>> myAccessedProperties = new THashSet<>(1);
 
     public MyEventsReadListener() {
     }
 
-    public void setAccessReport(boolean accessReport) {
-      myIsSetAccessReport = accessReport;
-    }
-
-    private void reportAccess() {
-      if (myIsSetAccessReport) {
-        new Throwable().printStackTrace();
-      }
-    }
-
     @Override
     public void nodeChildReadAccess(SNode node, String childRole, SNode child) {
-      reportAccess();
       myAccessedNodes.add(node);
       if (child != null) {
         myAccessedNodes.add(child);
@@ -110,13 +166,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
     @Override
     public void nodePropertyReadAccess(SNode node, String propertyName, String value) {
-      reportAccess();
-      myAccessedProperties.add(new Pair<SNode, String>(node, propertyName));
+      myAccessedProperties.add(new Pair<>(node, propertyName));
     }
 
     @Override
     public void nodeReferentReadAccess(SNode node, String referentRole, SNode referent) {
-      reportAccess();
       myAccessedNodes.add(node);
       if (referent != null) {
         myAccessedNodes.add(referent);
@@ -125,7 +179,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
     @Override
     public void nodeUnclassifiedReadAccess(SNode node) {
-      reportAccess();
       myAccessedNodes.add(node);
     }
 
@@ -134,9 +187,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
     }
 
     public void clear() {
-      reportAccess();
-      myAccessedNodes = new THashSet<SNode>();
-      myAccessedProperties = new THashSet<Pair<SNode, String>>();
+      myAccessedNodes = new THashSet<>();
+      myAccessedProperties = new THashSet<>();
     }
 
     public Set<Pair<SNode, String>> getAccessedProperties() {
@@ -144,9 +196,21 @@ import java.util.concurrent.atomic.AtomicBoolean;
     }
   }
 
-  protected void setInvalidationResult(boolean result) {
-    setInvalidationWasPerformed(true);
+  protected void setInvalidation(boolean result) {
     myCacheWasRebuilt.set(false);
-    myInvalidationResult.set(result);
+    myInvalidation.set(InvalidationResult.of(result));
   }
+
+  protected class MyCacheState implements CacheState {
+    @Override
+    public boolean isUpToDate() {
+      return isChecked();
+    }
+
+    @Override
+    public boolean hasChangedSince(Instant since) {
+      return hasUpdates(since);
+    }
+  }
+
 }

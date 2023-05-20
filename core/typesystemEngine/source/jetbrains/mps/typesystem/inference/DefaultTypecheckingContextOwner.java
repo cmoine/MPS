@@ -23,6 +23,7 @@ import jetbrains.mps.typesystem.inference.util.SubtypingCache;
  * User: fyodor
  * Date: 11/27/12
  */
+@Deprecated
 public class DefaultTypecheckingContextOwner implements ITypeContextOwner {
 
   @Override

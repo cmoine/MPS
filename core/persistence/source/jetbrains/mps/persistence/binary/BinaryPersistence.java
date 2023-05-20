@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +15,14 @@
  */
 package jetbrains.mps.persistence.binary;
 
-import jetbrains.mps.extapi.model.GeneratableSModel;
-import jetbrains.mps.generator.ModelDigestUtil;
-import jetbrains.mps.generator.ModelDigestUtil.DigestBuilderOutputStream;
+import jetbrains.mps.extapi.model.SModelBase;
+import jetbrains.mps.extapi.model.SModelData;
 import jetbrains.mps.persistence.IndexAwareModelFactory.Callback;
 import jetbrains.mps.persistence.MetaModelInfoProvider;
 import jetbrains.mps.persistence.MetaModelInfoProvider.BaseMetaModelInfo;
 import jetbrains.mps.persistence.MetaModelInfoProvider.RegularMetaModelInfo;
 import jetbrains.mps.persistence.MetaModelInfoProvider.StuffedMetaModelInfo;
+import jetbrains.mps.persistence.UserObjectsPersistence;
 import jetbrains.mps.persistence.registry.AggregationLinkInfo;
 import jetbrains.mps.persistence.registry.AssociationLinkInfo;
 import jetbrains.mps.persistence.registry.ConceptInfo;
@@ -42,6 +42,7 @@ import jetbrains.mps.smodel.adapter.ids.SReferenceLinkId;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.smodel.loading.ModelLoadResult;
 import jetbrains.mps.smodel.loading.ModelLoadingState;
+import jetbrains.mps.smodel.persistence.def.ModelPersistence;
 import jetbrains.mps.smodel.persistence.def.ModelReadException;
 import jetbrains.mps.smodel.persistence.def.v9.IdInfoCollector;
 import jetbrains.mps.smodel.runtime.ConceptKind;
@@ -58,6 +59,7 @@ import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeId;
 import org.jetbrains.mps.openapi.module.SModuleReference;
+import org.jetbrains.mps.openapi.persistence.ModelSaveOption;
 import org.jetbrains.mps.openapi.persistence.StreamDataSource;
 
 import java.io.IOException;
@@ -67,7 +69,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -125,48 +126,6 @@ public final class BinaryPersistence {
     }
   }
 
-  public static Map<String, String> getDigestMap(jetbrains.mps.smodel.SModel model, @Nullable MetaModelInfoProvider mmiProvider) {
-    Map<String, String> result = new LinkedHashMap<String, String>();
-    IdInfoRegistry meta = null;
-    DigestBuilderOutputStream os = ModelDigestUtil.createDigestBuilderOutputStream();
-    try {
-      BinaryPersistence bp = new BinaryPersistence(mmiProvider == null ? new RegularMetaModelInfo(model.getReference()) : mmiProvider, model);
-      ModelOutputStream mos = new ModelOutputStream(os);
-      meta = bp.saveModelProperties(mos);
-      mos.flush();
-    } catch (IOException ignored) {
-      assert false;
-      /* should never happen */
-    }
-    result.put(GeneratableSModel.HEADER, os.getResult());
-
-    assert meta != null;
-    // In fact, would be better to translate index attribute of any XXXInfo element into
-    // a value not related to meta-element position in the registry. Otherwise, almost any change
-    // in a model (e.g. addition of a new root or new property value) might affect all other root hashes
-    // as the index of meta-model elements might change. However, as long as our binary models are not exposed
-    // for user editing, we don't care.
-
-    for (SNode node : model.getRootNodes()) {
-      os = ModelDigestUtil.createDigestBuilderOutputStream();
-      try {
-        ModelOutputStream mos = new ModelOutputStream(os);
-        new NodesWriter(model.getReference(), mos, meta).writeNode(node);
-        mos.flush();
-      } catch (IOException ignored) {
-        assert false;
-        /* should never happen */
-      }
-      SNodeId nodeId = node.getNodeId();
-      if (nodeId != null) {
-        result.put(nodeId.toString(), os.getResult());
-      }
-    }
-
-    return result;
-  }
-
-
   private static final int HEADER_START   = 0x91ABABA9;
   private static final int STREAM_ID_V1   = 0x00000300;
   private static final int STREAM_ID_V2   = 0x00000400;
@@ -201,7 +160,7 @@ public final class BinaryPersistence {
     is.readInt(); //left for compatibility: old version was here
     is.mark(4);
     if (is.readByte() == HEADER_ATTRIBUTES) {
-      result.setDoNotGenerate(is.readBoolean());
+      is.readBoolean(); // just skip placeholder boolean value, see saveModelProperties(), below
       int propsCount = is.readShort();
       for (; propsCount > 0; propsCount--) {
         String key = is.readString();
@@ -222,25 +181,35 @@ public final class BinaryPersistence {
       SModelHeader modelHeader = loadHeader(mis);
 
       DefaultSModel model = new DefaultSModel(modelHeader.getModelReference(), modelHeader);
-      BinaryPersistence bp = new BinaryPersistence(mmiProvider == null ? new RegularMetaModelInfo(modelHeader.getModelReference()) : mmiProvider, model);
+      BinaryPersistence bp = new BinaryPersistence(mmiProvider == null ? new RegularMetaModelInfo() : mmiProvider, model);
       ReadHelper rh = bp.loadModelProperties(mis);
       rh.requestInterfaceOnly(interfaceOnly);
 
       NodesReader reader = new NodesReader(modelHeader.getModelReference(), mis, rh);
       reader.readNodesInto(model);
-      return new ModelLoadResult((SModel) model, reader.hasSkippedNodes() ? ModelLoadingState.INTERFACE_LOADED : ModelLoadingState.FULLY_LOADED);
+      return new ModelLoadResult(model, reader.hasSkippedNodes() ? ModelLoadingState.INTERFACE_LOADED : ModelLoadingState.FULLY_LOADED);
     } finally {
       FileUtil.closeFileSafe(mis);
     }
   }
 
+  /**
+   * writes binary presentation of the model to supplied output stream (both non-null) with respect to save options (nullable).
+   */
+  public static void writeModel(org.jetbrains.mps.openapi.model.SModel model, ModelOutputStream os, ModelSaveOption... options) throws IOException {
+    final MetaModelInfoProvider mmiProvider = ModelPersistence.mmiProviderFor(((SModelBase) model).getModelData());
+
+    BinaryPersistence bp = new BinaryPersistence(mmiProvider, ((SModelBase) model).getSModel());
+    IdInfoRegistry meta = bp.saveModelProperties(os);
+
+    Collection<SNode> roots = IterableUtil.asCollection(model.getRootNodes());
+    final NodesWriter nodeWriter = new NodesWriter(model.getReference(), os, meta);
+    nodeWriter.keepUserObjects(UserObjectsPersistence.DESIRED.present(options) || UserObjectsPersistence.REQUIRED.present(options));
+    nodeWriter.writeNodes(roots);
+  }
+
   private static void saveModel(SModel model, ModelOutputStream os) throws IOException {
-    final MetaModelInfoProvider mmiProvider;
-    if (model instanceof DefaultSModel && ((DefaultSModel) model).getSModelHeader().getMetaInfoProvider() != null) {
-      mmiProvider = ((DefaultSModel) model).getSModelHeader().getMetaInfoProvider();
-    } else {
-      mmiProvider = new RegularMetaModelInfo(model.getReference());
-    }
+    final MetaModelInfoProvider mmiProvider = ModelPersistence.mmiProviderFor(model);
     BinaryPersistence bp = new BinaryPersistence(mmiProvider, model);
     IdInfoRegistry meta = bp.saveModelProperties(os);
 
@@ -282,8 +251,11 @@ public final class BinaryPersistence {
     if (myModelData instanceof DefaultSModel) {
       os.writeByte(HEADER_ATTRIBUTES);
       SModelHeader mh = ((DefaultSModel) myModelData).getSModelHeader();
-      os.writeBoolean(mh.isDoNotGenerate());
-      Map<String, String> props = new HashMap<String, String>(mh.getOptionalProperties());
+      // FIXME just a placeholder value instead of SModelHeader.isDoNotGenerate() to avoid persistence version change.
+      //       Actual value is serialized as part of optionalProperties now. Once/if binary persistence version changes,
+      //       we shall throw this placeholder away
+      os.writeBoolean(false);
+      Map<String, String> props = new HashMap<>(mh.getOptionalProperties());
       os.writeShort(props.size());
       for (Entry<String, String> e : props.entrySet()) {
         os.writeString(e.getKey());
@@ -445,7 +417,7 @@ public final class BinaryPersistence {
 
   private static Collection<SModuleReference> loadModuleRefList(ModelInputStream is) throws IOException {
     int size = is.readShort();
-    List<SModuleReference> result = new ArrayList<SModuleReference>(size);
+    List<SModuleReference> result = new ArrayList<>(size);
     for (int i = 0; i < size; i++) {
       result.add(is.readModuleReference());
     }
@@ -462,7 +434,7 @@ public final class BinaryPersistence {
 
   private static List<ImportElement> loadImports(ModelInputStream is) throws IOException {
     int size = is.readInt();
-    List<ImportElement> result = new ArrayList<ImportElement>();
+    List<ImportElement> result = new ArrayList<>();
     for (int i = 0; i < size; i++) {
       SModelReference ref = is.readModelReference();
       result.add(new ImportElement(ref, -1, is.readInt()));
@@ -486,8 +458,8 @@ public final class BinaryPersistence {
       }
       readHelper.requestInterfaceOnly(false);
       final NodesReader reader = new NodesReader(modelHeader.getModelReference(), mis, readHelper);
-      HashSet<SNodeId> externalNodes = new HashSet<SNodeId>();
-      HashSet<SNodeId> localNodes = new HashSet<SNodeId>();
+      HashSet<SNodeId> externalNodes = new HashSet<>();
+      HashSet<SNodeId> localNodes = new HashSet<>();
       reader.collectExternalTargets(externalNodes);
       reader.collectLocalTargets(localNodes);
       reader.readChildren(null);
@@ -500,6 +472,11 @@ public final class BinaryPersistence {
     } finally {
       FileUtil.closeFileSafe(mis);
     }
+  }
+
+  public static SModelData getModelData(InputStream input) throws IOException {
+    ModelLoadResult result = loadModel(input, false, new StuffedMetaModelInfo(new BaseMetaModelInfo()));
+    return result.getModel();
   }
 
   private static void assertSyncToken(ModelInputStream is, int token) throws IOException {

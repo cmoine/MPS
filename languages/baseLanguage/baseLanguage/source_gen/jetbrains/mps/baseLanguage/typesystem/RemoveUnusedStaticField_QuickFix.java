@@ -15,6 +15,6 @@ public class RemoveUnusedStaticField_QuickFix extends QuickFix_Runtime {
     return "Remove static field";
   }
   public void execute(SNode node) {
-    SNodeOperations.detachNode(node);
+    SNodeOperations.deleteNode(node);
   }
 }

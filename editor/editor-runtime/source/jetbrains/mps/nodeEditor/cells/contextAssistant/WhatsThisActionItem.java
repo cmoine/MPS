@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ import com.intellij.openapi.ui.MessageType;
 import com.intellij.openapi.ui.popup.Balloon.Position;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.ui.awt.RelativePoint;
-import jetbrains.mps.ide.editor.actions.JumpToContextAssistant_Action;
 import jetbrains.mps.openapi.editor.menus.transformation.ActionItemBase;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -88,9 +87,17 @@ public class WhatsThisActionItem extends ActionItemBase {
   @Nullable
   private String getShortcutText() {
     final Keymap keymap = KeymapManager.getInstance().getActiveKeymap();
-    final Shortcut[] shortcuts = keymap.getShortcuts(JumpToContextAssistant_Action.class.getName());
+    // FIXME next one is ugly, but even JumpToContextAssistant_Action.class.getName() is no better, as it assumes
+    //       action id == fqn. The proper fix seems to be in facilitating external contributions to MenuLocations.CONTEXT_ASSISTANT,
+    //       see DefaultContextAssistantManager.newInstance() and SelectionMenuProviderByCellAndConcept.
+    //       Perhaps, has to be default for BaseConcept, although I don't like this help action being tied to any concept at all.
+    //       External mechanism would allow custom help actions or no help actions at all. Now, with this hard-coded action,
+    //       there's no easy way to turn it off (ContextAssistantSettings.HELP_SHOWN is not really an option).
+    final Shortcut[] shortcuts = keymap.getShortcuts("jetbrains.mps.ide.editor.actions.JumpToContextAssistant_Action");
 
-    if (shortcuts.length == 0) return null;
+    if (shortcuts.length == 0) {
+      return null;
+    }
 
     return KeymapUtil.getShortcutText(shortcuts[0]);
   }

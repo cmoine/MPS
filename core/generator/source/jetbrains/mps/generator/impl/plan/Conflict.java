@@ -28,7 +28,7 @@ import java.util.Set;
  * Conflict in the generation plan
  * @author Artem Tikhomirov
  */
-public class Conflict {
+public final class Conflict {
   private final SModuleReference myOrigin;
   private final String myText;
   private final Set<TemplateMappingPriorityRule> myRules;
@@ -36,8 +36,9 @@ public class Conflict {
   /*package*/ Conflict(@Nullable SModuleReference origin, @NotNull String text, Collection<? extends TemplateMappingPriorityRule> rules) {
     myOrigin = origin;
     myText = text;
-    myRules = new HashSet<TemplateMappingPriorityRule>(rules);
+    myRules = new HashSet<>(rules);
   }
+
   public SModuleReference getOrigin() {
     return myOrigin;
   }

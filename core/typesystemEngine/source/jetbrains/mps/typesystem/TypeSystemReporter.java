@@ -25,22 +25,10 @@ import java.util.Map.Entry;
 
 
 public class TypeSystemReporter {
-  private static TypeSystemReporter instance = null;
   private boolean isEnabled = false;
-  private Map<String, Pair<Long, Long>> myGetTypeOfTime = new HashMap<String, Pair<Long, Long>>();
-  private Map<String, Pair<Long, Long>> myIsSubTypeTime = new HashMap<String, Pair<Long, Long>>();
-  private Map<String, Pair<Long, Long>> myCoerceTime = new HashMap<String, Pair<Long, Long>>();
-
-  private TypeSystemReporter() {
-
-  }
-
-  public static TypeSystemReporter getInstance() {
-    if (instance == null) {
-      instance = new TypeSystemReporter();
-    }
-    return instance;
-  }
+  private Map<String, Pair<Long, Long>> myGetTypeOfTime = new HashMap<>();
+  private Map<String, Pair<Long, Long>> myIsSubTypeTime = new HashMap<>();
+  private Map<String, Pair<Long, Long>> myCoerceTime = new HashMap<>();
 
   public void reset() {
     isEnabled = true;
@@ -59,7 +47,7 @@ public class TypeSystemReporter {
     if (!isEnabled) return;
     Pair<Long, Long> value = map.get(conceptFqName);
     if (value == null) {
-      value = new Pair<Long, Long>(0L, 0L);
+      value = new Pair<>(0L, 0L);
       map.put(conceptFqName, value);
     }
     value.o1 += time;
@@ -92,15 +80,10 @@ public class TypeSystemReporter {
 
   public void printMapReport(Map<String, Pair<Long, Long>> map, int numTop, IPerformanceTracer tracer) {
     if (!isEnabled) return;
-    ArrayList<Entry<String, Pair<Long, Long>>> list = new ArrayList<Entry<String, Pair<Long, Long>>>();
+    ArrayList<Entry<String, Pair<Long, Long>>> list = new ArrayList<>();
     list.addAll(map.entrySet());
 
-    Collections.sort(list, new Comparator<Entry<String, Pair<Long, Long>>>() {
-      @Override
-      public int compare(Entry<String, Pair<Long, Long>> o1, Entry<String, Pair<Long, Long>> o2) {
-        return o2.getValue().o1 > o1.getValue().o1 ? 1 : -1;
-      }
-    });
+    Collections.sort(list, Comparator.comparing(o -> o.getValue().o1));
     long sum = 0;
     int i = 0;
     for (Entry<String, Pair<Long, Long>> entry : list) {
@@ -117,7 +100,7 @@ public class TypeSystemReporter {
         sb.append(name.substring(beginIndex));
        
       }
-      tracer.addText(String.format(sb.toString() + " %.3f s,  %d times", entry.getValue().o1 * 1.0e-9, entry.getValue().o2));
+      tracer.addText(String.format(sb + " %.3f s,  %d times", entry.getValue().o1 * 1.0e-9, entry.getValue().o2));
     }
     tracer.addText("Total: " + sum * 1.0e-9);
   }

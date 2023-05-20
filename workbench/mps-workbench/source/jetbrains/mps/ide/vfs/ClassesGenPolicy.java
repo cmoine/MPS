@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,12 @@ package jetbrains.mps.ide.vfs;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import jetbrains.mps.InternalFlag;
 import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.project.AbstractModule;
-import jetbrains.mps.project.MPSExtentions;
+import jetbrains.mps.project.MPSProject;
 import jetbrains.mps.project.facets.JavaModuleFacet;
+import jetbrains.mps.smodel.ModelAccessHelper;
 import jetbrains.mps.vfs.IFile;
-import org.apache.log4j.LogManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.module.SModule;
 
@@ -31,6 +30,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+// XXX Resembles GeneratedFilesExcludePolicy, which deals with generated sources, while this one with artifacts compiled from these sources.
+// XXX there's suspicious DirectoryIndexExcludeUpdater that is interested in BaseDirectoryIndexExcludePolicy subclasses!?
 public class ClassesGenPolicy extends BaseDirectoryIndexExcludePolicy {
   protected ClassesGenPolicy(@NotNull Project project) {
     super(project);
@@ -39,45 +40,40 @@ public class ClassesGenPolicy extends BaseDirectoryIndexExcludePolicy {
   @Override
   @NotNull
   protected Set<VirtualFile> getAllExcludeRoots() {
-    final Set<VirtualFile> roots = new HashSet<VirtualFile>();
+    final MPSProject mpsProject = ProjectHelper.fromIdeaProject(getProject());
+    if (mpsProject == null) {
+      return Collections.emptySet();
+    }
 
-    final jetbrains.mps.project.Project mpsProject = ProjectHelper.toMPSProject(getProject());
-    mpsProject.getModelAccess().runReadAction(new Runnable() {
-      @Override
-      public void run() {
-        for (SModule module : mpsProject.getModulesWithGenerators()) {
-          JavaModuleFacet facet = module.getFacet(JavaModuleFacet.class);
-          if (facet == null) {
-            continue;
-          }
+    return new ModelAccessHelper(mpsProject.getModelAccess()).runReadAction(() -> {
+      final Set<VirtualFile> roots = new HashSet<>();
+      for (SModule module : mpsProject.getProjectModulesWithGenerators()) {
+        JavaModuleFacet facet = module.getFacet(JavaModuleFacet.class);
+        if (facet == null) {
+          continue;
+        }
 
-          IFile classesGen = facet.getClassesGen();
-          if (classesGen == null) {
-            continue;
-          }
+        IFile classesGen = facet.getClassesGen();
+        if (classesGen == null) {
+          continue;
+        }
 
-          // todo: this trash should be removed after reconsidering language packaging. see MPS-11757 for details
-          if (classesGen.getName().endsWith("." + MPSExtentions.MPS_ARCH)) {
-            continue;
-          }
+        VirtualFile classesGenVF = mpsProject.getFileSystem().asVirtualFile(classesGen);
+        if (classesGenVF != null) {
+          roots.add(classesGenVF);
+        }
 
-          VirtualFile classesGenVF = VirtualFileUtils.getProjectVirtualFile(classesGen);
-          if (classesGenVF != null) {
-            roots.add(classesGenVF);
-          }
-
-          if (((AbstractModule) module).getModuleSourceDir() != null) {
-            IFile classesDir = ((AbstractModule) module).getModuleSourceDir().getDescendant(AbstractModule.CLASSES);
-            if (classesDir.exists()) {
-              VirtualFile classesVF = VirtualFileUtils.getProjectVirtualFile(classesDir);
-              if (classesVF != null) {
-                roots.add(classesVF);
-              }
-            }
+        if (classesGen.getParent() != null) {
+          // FIXME quite stupid code. Guess, the idea here is to exclide 'classes/' in case when there are
+          //       both classes_gen/ and classes/.
+          IFile classesDir = classesGen.getParent().findChild(AbstractModule.CLASSES);
+          VirtualFile classesVF = mpsProject.getFileSystem().asVirtualFile(classesDir);
+          if (classesVF != null) {
+            roots.add(classesVF);
           }
         }
       }
+      return roots;
     });
-    return roots;
   }
 }

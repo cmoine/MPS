@@ -120,7 +120,7 @@ public class TopLevelStyleMap extends StyleMap<Object> {
       if (index == 0) {
         return set(attribute.getIndex(), topPointer, value);
       } else {
-        StyleAttributeMap<T> result = new StyleAttributeMap<T>();
+        StyleAttributeMap<T> result = new StyleAttributeMap<>();
         result.setValue(index, value);
         if (!TopLevelStyleMap.isEmpty(topPointer)) {
           result.setValue(0, get(topPointer));
@@ -142,9 +142,9 @@ public class TopLevelStyleMap extends StyleMap<Object> {
   public <T> Collection<IntPair<Object>> getAll(StyleAttribute<T> attribute, int topPointer) {
     Object styleMapOrValue = get(topPointer);
     if (!(styleMapOrValue instanceof StyleAttributeMap)) {
-      ArrayList<IntPair<Object>> result = new ArrayList<IntPair<Object>>(1);
+      ArrayList<IntPair<Object>> result = new ArrayList<>(1);
       if (!TopLevelStyleMap.isEmpty(topPointer)) {
-        result.add(new IntPair<Object>(0, get(topPointer)));
+        result.add(new IntPair<>(0, get(topPointer)));
       }
       return result;
     } else {
@@ -161,9 +161,9 @@ public class TopLevelStyleMap extends StyleMap<Object> {
   public <T> Collection<IntPair<T>> getDiscardNullReplaced(StyleAttribute<T> attribute, int topPointer) {
     Object styleMapOrValue = get(topPointer);
     if (!(styleMapOrValue instanceof StyleAttributeMap)) {
-      ArrayList<IntPair<T>> result = new ArrayList<IntPair<T>>(1);
+      ArrayList<IntPair<T>> result = new ArrayList<>(1);
       if (!TopLevelStyleMap.isEmpty(topPointer)) {
-        result.add(new IntPair<T>(0, get(topPointer) instanceof DiscardValue ? null : (T) get(topPointer)));
+        result.add(new IntPair<>(0, get(topPointer) instanceof DiscardValue ? null : (T) get(topPointer)));
       }
       return result;
     } else {
@@ -183,13 +183,13 @@ public class TopLevelStyleMap extends StyleMap<Object> {
       if (TopLevelStyleMap.isEmpty(topPointer) || get(topPointer) instanceof DiscardValue) {
         return null;
       } else {
-        return new IntPair<T>(0, (T) get(topPointer));
+        return new IntPair<>(0, (T) get(topPointer));
       }
     } else {
       StyleAttributeMap styleMap = (StyleAttributeMap) styleMapOrValue;
       for (int i = styleMap.indexes.length - 1; i >= 0; i--) {
         if (!(styleMap.values[i] instanceof DiscardValue)) {
-          return new IntPair<T>(styleMap.indexes[i], (T) styleMap.values[i]);
+          return new IntPair<>(styleMap.indexes[i], (T) styleMap.values[i]);
         }
       }
       return null;

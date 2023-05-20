@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,12 @@
 package jetbrains.mps.typesystem;
 
 import jetbrains.mps.lang.typesystem.runtime.HUtil;
-import org.apache.log4j.Logger;
-import org.apache.log4j.LogManager;
-import org.jetbrains.mps.openapi.model.SNode;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.smodel.SNodeUtil;
 import jetbrains.mps.util.NameUtil;
+import org.jetbrains.mps.openapi.model.SNode;
 
 public class PresentationManager {
-  private static Logger LOG = LogManager.getLogger(PresentationManager.class);
 
   // param is SNode or IWrapper
   public static String toString(SNode type) {
@@ -43,7 +41,7 @@ public class PresentationManager {
     try {
       return SNodeUtil.getDetailedPresentation(type);
     } catch (RuntimeException t) {
-      LOG.error(null, t);
+      Logger.getLogger(PresentationManager.class).error(t);
       return "[can't calculate presentation : " + t.getMessage() + "]";
     }
   }

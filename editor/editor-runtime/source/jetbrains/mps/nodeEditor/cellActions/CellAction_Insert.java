@@ -25,18 +25,10 @@ import org.jetbrains.mps.openapi.model.SNode;
 public class CellAction_Insert extends AbstractCellAction {
   private final SNode myNode;
   private final SContainmentLink myRole;
-  private final String myLegacyRole;
-
-  public CellAction_Insert(SNode node, String role) {
-    myNode = node;
-    myLegacyRole = role;
-    myRole = null;
-  }
 
   public CellAction_Insert(SNode node, SContainmentLink role) {
     myNode = node;
     myRole = role;
-    myLegacyRole = null;
   }
 
   @Override
@@ -46,12 +38,7 @@ public class CellAction_Insert extends AbstractCellAction {
 
   @Override
   public void execute(EditorContext context) {
-    if (myRole == null) {
-      SNode nodeToInsert = NodeFactoryManager.createNode(myNode, context, myLegacyRole);
-      SNodeEditorUtil.setSingleChild(myNode, myLegacyRole, nodeToInsert);
-    } else {
-      SNode nodeToInsert = NodeFactoryManager.createNode(myRole.getTargetConcept(), null, myNode, myNode.getModel());
-      SNodeEditorUtil.setSingleChild(myNode, myRole, nodeToInsert);
-    }
+    SNode nodeToInsert = NodeFactoryManager.createNode(myRole.getTargetConcept(), null, myNode, myNode.getModel());
+    SNodeEditorUtil.setSingleChild(myNode, myRole, nodeToInsert);
   }
 }

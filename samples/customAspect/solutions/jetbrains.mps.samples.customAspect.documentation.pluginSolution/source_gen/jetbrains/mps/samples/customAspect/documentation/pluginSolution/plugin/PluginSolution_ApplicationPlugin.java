@@ -4,19 +4,24 @@ package jetbrains.mps.samples.customAspect.documentation.pluginSolution.plugin;
 
 import jetbrains.mps.plugins.applicationplugins.BaseApplicationPlugin;
 import com.intellij.openapi.extensions.PluginId;
+import org.jetbrains.annotations.NotNull;
 
 public class PluginSolution_ApplicationPlugin extends BaseApplicationPlugin {
-  private PluginId myId = PluginId.getId("jetbrains.mps.samples.customAspect.documentation.pluginSolution");
+  private final PluginId myId = PluginId.getId("jetbrains.mps.samples.customAspect.documentation.pluginSolution");
+
   public PluginSolution_ApplicationPlugin() {
   }
+
+  @NotNull
   public PluginId getId() {
     return myId;
   }
+
   public void createGroups() {
-    // actions w/o parameters 
+    // actions w/o parameters
     addAction(new ShowDoc_Action());
-    // groups 
-    addGroup(new CodeAddition_ActionGroup());
+    // groups
+    addGroup(new CodeAddition_ActionGroup(this));
   }
   public void adjustRegularGroups() {
     insertGroupIntoAnother(CodeAddition_ActionGroup.ID, "jetbrains.mps.ide.platform.actions.Code_ActionGroup", null);

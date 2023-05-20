@@ -30,7 +30,7 @@ import java.util.Map;
 
 public class TemplateSwitchGraph {
 
-  private final Map<SNodeReference, Node> mySwitchToNode = new HashMap<SNodeReference, Node>();
+  private final Map<SNodeReference, Node> mySwitchToNode = new HashMap<>();
 
   public TemplateSwitchGraph(Collection<TemplateModel> templateModels) throws GenerationFailureException {
     for (TemplateModel templateModel : templateModels) {
@@ -48,7 +48,7 @@ public class TemplateSwitchGraph {
         }
       }
       if (node.myModified == null) {
-        node.myRules = new LinkedList<TemplateSwitchMapping>();
+        node.myRules = new LinkedList<>();
       }
     }
     for (Node node : mySwitchToNode.values()) {
@@ -101,12 +101,12 @@ public class TemplateSwitchGraph {
       if (myFinder != null) {
         return;
       }
-      FlattenIterable<TemplateReductionRule> rules = new FlattenIterable<TemplateReductionRule>(new ArrayList<Iterable<TemplateReductionRule>>());
+      FlattenIterable<TemplateReductionRule> rules = new FlattenIterable<>(new ArrayList<>());
       for (TemplateSwitchMapping sw : myRules) {
         rules.add(sw.getReductionRules());
       }
       myRules = null;
-      myFinder = new FastRuleFinder<TemplateReductionRule>(rules);
+      myFinder = new FastRuleFinder<>(rules);
     }
   }
 }

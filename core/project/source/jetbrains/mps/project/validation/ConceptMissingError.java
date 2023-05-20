@@ -15,28 +15,29 @@
  */
 package jetbrains.mps.project.validation;
 
-import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.errors.MessageStatus;
+import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.model.SNode;
 
-public class ConceptMissingError extends NodeValidationProblem {
-  private SConcept myConcept;
+import java.text.MessageFormat;
+import java.util.ResourceBundle;
 
-  public ConceptMissingError(SNode node, SConcept concept) {
-    super(Severity.ERROR, node, "Missing concept " + concept.getName());
+public class ConceptMissingError extends LanguageFeatureMissingError {
+  private final SAbstractConcept myConcept;
+
+  public ConceptMissingError(SNode node, SAbstractConcept concept) {
+    super(MessageStatus.ERROR, node.getReference(),
+          MessageFormat.format(msgFromBundle(), concept.getName(), concept.getLanguage().getQualifiedName()));
     myConcept = concept;
   }
 
-  public SConcept getConcept() {
+  private static String msgFromBundle() {
+    ResourceBundle bundle = ResourceBundle.getBundle("jetbrains.mps.project.validation.CoreBundle");
+    return bundle.getString("concept.not.found");
+  }
+
+  public SAbstractConcept getLanguageFeature() {
     return myConcept;
   }
 
-  @Override
-  public boolean canFix() {
-    return false;
-  }
-
-  @Override
-  public void fix() {
-
-  }
 }

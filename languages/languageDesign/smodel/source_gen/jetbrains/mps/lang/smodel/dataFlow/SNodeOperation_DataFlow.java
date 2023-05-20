@@ -7,14 +7,11 @@ import jetbrains.mps.lang.dataFlow.DataFlowBuilderContext;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class SNodeOperation_DataFlow extends DataFlowBuilder {
   public void build(final DataFlowBuilderContext _context) {
-    for (SNode expr : ListSequence.fromList(SNodeOperations.getChildren(_context.getNode()))) {
-      if (SNodeOperations.isInstanceOf(expr, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c37f506fL, "jetbrains.mps.baseLanguage.structure.Expression"))) {
-        _context.getBuilder().build((SNode) expr);
-      }
+    for (SNode child : ListSequence.fromList(SNodeOperations.getChildren(_context.getNode()))) {
+      _context.getBuilder().build((SNode) child);
     }
   }
 }

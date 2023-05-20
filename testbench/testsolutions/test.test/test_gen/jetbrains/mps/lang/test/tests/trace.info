@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <root nodeRef="r:77241c59-7b48-4e57-9855-3e6233f0c2f2(jetbrains.mps.lang.test.tests@tests)/1076865108597740716">
+    <file name="ProjectExpressionIsThere_Test.java">
+      <node id="1076865108597740716" at="19,42,20,60" concept="6" />
+      <node id="1076865108597740716" at="24,64,25,36" concept="1" />
+      <node id="1076865108597740716" at="30,52,31,19" concept="6" />
+      <node id="1076865108597740716" at="35,51,36,72" concept="1" />
+      <node id="1076865108597807883" at="36,72,37,28" concept="1" />
+      <node id="1076865108597740716" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="1076865108597740716" at="19,0,22,0" concept="0" trace="ProjectExpressionIsThere_Test#()V" />
+      <node id="1076865108597740716" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="1076865108597740716" at="23,0,27,0" concept="3" trace="test_ProjectExpressionIsThere#()V" />
+      <node id="1076865108597740716" at="34,0,39,0" concept="3" trace="testMethodImpl#()V" />
+      <scope id="1076865108597740716" at="19,42,20,60" />
+      <scope id="1076865108597740716" at="24,64,25,36" />
+      <scope id="1076865108597740716" at="30,52,31,19" />
+      <scope id="1076865108597740716" at="35,51,37,28" />
+      <scope id="1076865108597740716" at="19,0,22,0" />
+      <scope id="1076865108597740716" at="30,0,33,0">
+        <var name="owner" id="1076865108597740716" />
+      </scope>
+      <scope id="1076865108597740716" at="23,0,27,0" />
+      <scope id="1076865108597740716" at="34,0,39,0" />
+      <unit id="1076865108597740716" at="28,0,40,0" name="jetbrains.mps.lang.test.tests.ProjectExpressionIsThere_Test$TestBody" />
+      <unit id="1076865108597740716" at="14,0,41,0" name="jetbrains.mps.lang.test.tests.ProjectExpressionIsThere_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:77241c59-7b48-4e57-9855-3e6233f0c2f2(jetbrains.mps.lang.test.tests@tests)/7763823021511009727">
+    <file name="CheckNodeForErrors_MigrationTest.java">
+      <node id="7763823021511009727" at="34,45,35,60" concept="6" />
+      <node id="7763823021511009727" at="39,72,40,36" concept="1" />
+      <node id="7763823021511009727" at="45,52,46,19" concept="6" />
+      <node id="7763823021511009727" at="50,46,51,202" concept="4" />
+      <node id="7763823021511009727" at="54,47,55,202" concept="4" />
+      <node id="7763823021511009727" at="58,51,59,61" concept="4" />
+      <node id="7763823021511009727" at="64,0,65,0" concept="5" trace="TestNode$zF" />
+      <node id="7763823021511009727" at="68,0,69,0" concept="5" trace="nodeToCheck$OBcW" />
+      <node id="7763823021511009727" at="28,0,30,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="7763823021511009727" at="31,0,33,0" concept="2" trace="myCommandExtension" />
+      <node id="7763823021511009727" at="34,0,37,0" concept="0" trace="CheckNodeForErrors_MigrationTest#()V" />
+      <node id="7763823021511009727" at="45,0,48,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="7763823021511009727" at="38,0,42,0" concept="3" trace="test_CheckNodeForErrors_MigrationTest#()V" />
+      <node id="7763823021511009727" at="49,0,53,0" concept="3" trace="getInputNodes#()Ljava/util/Collection;" />
+      <node id="7763823021511009727" at="53,0,57,0" concept="3" trace="getOutputNodes#()Ljava/util/Collection;" />
+      <node id="7763823021511009727" at="57,0,61,0" concept="3" trace="getMigrationScript#()[Ljetbrains/mps/lang/migration/runtime/base/MigrationScript;" />
+      <scope id="7763823021511009727" at="34,45,35,60" />
+      <scope id="7763823021511009727" at="39,72,40,36" />
+      <scope id="7763823021511009727" at="45,52,46,19" />
+      <scope id="7763823021511009727" at="50,46,51,202" />
+      <scope id="7763823021511009727" at="54,47,55,202" />
+      <scope id="7763823021511009727" at="58,51,59,61" />
+      <scope id="7763823021511009727" at="34,0,37,0" />
+      <scope id="7763823021511009727" at="45,0,48,0">
+        <var name="owner" id="7763823021511009727" />
+      </scope>
+      <scope id="7763823021511009727" at="38,0,42,0" />
+      <scope id="7763823021511009727" at="49,0,53,0" />
+      <scope id="7763823021511009727" at="53,0,57,0" />
+      <scope id="7763823021511009727" at="57,0,61,0" />
+      <unit id="7763823021511009727" at="63,0,66,0" name="jetbrains.mps.lang.test.tests.CheckNodeForErrors_MigrationTest$CONCEPTS" />
+      <unit id="7763823021511009727" at="67,0,70,0" name="jetbrains.mps.lang.test.tests.CheckNodeForErrors_MigrationTest$LINKS" />
+      <unit id="7763823021511009727" at="43,0,62,0" name="jetbrains.mps.lang.test.tests.CheckNodeForErrors_MigrationTest$TestBody" />
+      <unit id="7763823021511009727" at="26,0,71,0" name="jetbrains.mps.lang.test.tests.CheckNodeForErrors_MigrationTest" />
+    </file>
+  </root>
+</debug-info>
+

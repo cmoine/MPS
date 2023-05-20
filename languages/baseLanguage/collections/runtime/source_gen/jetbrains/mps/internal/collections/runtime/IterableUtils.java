@@ -49,7 +49,7 @@ public class IterableUtils {
     return count;
   }
   public static <E> boolean isEmpty(Iterable<E> seq) {
-    return !((seq.iterator().hasNext()));
+    return !(seq.iterator().hasNext());
   }
   public static <E> boolean isNotEmpty(Iterable<E> seq) {
     return seq.iterator().hasNext();

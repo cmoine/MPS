@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="3cvuv8y495r459v4o424llmjfk0r19z">
+  <files names="AnnotateFile_Intention.java:AnnotateNode_Intention.java:IntentionsDescriptor.java:LabelNode_Intention.java:SetClassModifier_Intention.java:ToggleArgumentVarArg_Intention.java:ToggleParameterVarArg_Intention.java:TurnToDeconstructed_Intention.java" />
+</product>
+

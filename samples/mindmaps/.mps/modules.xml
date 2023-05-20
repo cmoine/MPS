@@ -2,7 +2,6 @@
 <project version="4">
   <component name="MPSProject">
     <projectModules>
-      <modulePath path="$PROJECT_DIR$/jetbrains.mps.samples.mindmaps.figures/jetbrains.mps.samples.mindmaps.figures.msd" folder="" />
       <modulePath path="$PROJECT_DIR$/jetbrains.mps.samples.mindmaps.sandbox/jetbrains.mps.samples.mindmaps.sandbox.msd" folder="" />
       <modulePath path="$PROJECT_DIR$/jetbrains.mps.samples.mindmaps/jetbrains.mps.samples.mindmaps.mpl" folder="" />
     </projectModules>

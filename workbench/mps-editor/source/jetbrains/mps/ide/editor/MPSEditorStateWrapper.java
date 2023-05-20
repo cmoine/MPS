@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,8 @@ package jetbrains.mps.ide.editor;
 import com.intellij.openapi.fileEditor.FileEditorState;
 import com.intellij.openapi.fileEditor.FileEditorStateLevel;
 import jetbrains.mps.openapi.editor.EditorState;
-import jetbrains.mps.util.EqualUtil;
+
+import java.util.Objects;
 
 class MPSEditorStateWrapper implements FileEditorState {
   private EditorState myEditorState;
@@ -49,13 +50,15 @@ class MPSEditorStateWrapper implements FileEditorState {
   }
 
   public int hashCode() {
-    return EqualUtil.hashCode(myEditorState);
+    return Objects.hashCode(myEditorState);
   }
 
   public boolean equals(Object obj) {
-    if (!(obj instanceof MPSEditorStateWrapper)) return false;
+    if (!(obj instanceof MPSEditorStateWrapper)) {
+      return false;
+    }
 
     MPSEditorStateWrapper w = (MPSEditorStateWrapper) obj;
-    return EqualUtil.equals(myEditorState, w.myEditorState);
+    return Objects.equals(myEditorState, w.myEditorState);
   }
 }

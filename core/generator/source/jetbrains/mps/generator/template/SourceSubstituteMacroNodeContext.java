@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,12 +22,12 @@ import org.jetbrains.mps.openapi.model.SNodeReference;
 /**
  * Perhaps, shall replace usages right with TemplateQueryContextWithMacro
  */
-public class SourceSubstituteMacroNodeContext extends TemplateQueryContextWithMacro {
+public class SourceSubstituteMacroNodeContext extends TemplateQueryContext {
 
   /**
    * @since 3.1
    */
   public SourceSubstituteMacroNodeContext(@NotNull TemplateContext context, @NotNull SNodeReference macroNode) {
-    super(context, macroNode);
+    super(macroNode, context);
   }
 }

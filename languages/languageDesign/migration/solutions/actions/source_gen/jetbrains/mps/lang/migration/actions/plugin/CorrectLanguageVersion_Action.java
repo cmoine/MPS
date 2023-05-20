@@ -4,31 +4,24 @@ package jetbrains.mps.lang.migration.actions.plugin;
 
 import jetbrains.mps.workbench.action.BaseAction;
 import javax.swing.Icon;
+import jetbrains.mps.workbench.action.ActionAccess;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import java.util.Map;
 import org.jetbrains.mps.openapi.module.SModule;
 import jetbrains.mps.internal.collections.runtime.MapSequence;
 import jetbrains.mps.smodel.Language;
-import jetbrains.mps.smodel.adapter.ids.SLanguageId;
-import jetbrains.mps.smodel.adapter.ids.MetaIdByDeclaration;
-import org.jetbrains.mps.openapi.language.SLanguage;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.model.SModel;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SModuleOperations;
 import java.util.List;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SModelOperations;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
-import jetbrains.mps.lang.migration.behavior.IMigrationUnit__BehaviorDescriptor;
-import jetbrains.mps.internal.collections.runtime.ISelector;
 import org.jetbrains.annotations.NotNull;
 import jetbrains.mps.ide.actions.MPSCommonDataKeys;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
-import jetbrains.mps.project.MPSProject;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.ui.InputValidator;
-import com.intellij.openapi.ui.Messages;
+import jetbrains.mps.lang.migration.behavior.IMigrationUnit__BehaviorDescriptor;
+import jetbrains.mps.internal.collections.runtime.ISelector;
+import org.jetbrains.mps.openapi.language.SInterfaceConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class CorrectLanguageVersion_Action extends BaseAction {
   private static final Icon ICON = null;
@@ -36,7 +29,7 @@ public class CorrectLanguageVersion_Action extends BaseAction {
   public CorrectLanguageVersion_Action() {
     super("Correct Language Version", "", ICON);
     this.setIsAlwaysVisible(false);
-    this.setExecuteOutsideCommand(false);
+    this.setActionAccess(ActionAccess.UNDO_PROJECT);
   }
   @Override
   public boolean isDumbAware() {
@@ -47,36 +40,19 @@ public class CorrectLanguageVersion_Action extends BaseAction {
     if (!(((SModule) MapSequence.fromMap(_params).get("module")) instanceof Language)) {
       return false;
     }
-
-    Language lang = ((Language) ((SModule) MapSequence.fromMap(_params).get("module")));
-    SLanguageId langId = MetaIdByDeclaration.getLanguageId(lang);
-    SLanguage slang = MetaAdapterFactory.getLanguage(langId, lang.getModuleName());
+    Language lang = (Language) ((SModule) MapSequence.fromMap(_params).get("module"));
 
     SModel mig = SModuleOperations.getAspect(lang, "migration");
     if (mig == null) {
-      return slang.getLanguageVersion() != 0;
-    }
-
-    List<SNode> migrations = SModelOperations.roots(((SModel) mig), MetaAdapterFactory.getInterfaceConcept(0x9074634404fd4286L, 0x97d5b46ae6a81709L, 0x47bb811da2acc4d6L, "jetbrains.mps.lang.migration.structure.IMigrationUnit"));
-    if (lang.getLanguageVersion() == 0) {
       return false;
     }
-    if (ListSequence.fromList(migrations).isEmpty() && lang.getLanguageVersion() != 0) {
-      return true;
+
+    List<SNode> migrations = SModelOperations.roots(mig, CONCEPTS.IMigrationUnit$xq);
+    if (ListSequence.fromList(migrations).isEmpty()) {
+      return false;
     }
 
-    int maxFrom = (int) IMigrationUnit__BehaviorDescriptor.fromVersion_id4uVwhQyFcnl.invoke(ListSequence.fromList(migrations).sort(new ISelector<SNode, Integer>() {
-      public Integer select(SNode it) {
-        return (int) IMigrationUnit__BehaviorDescriptor.fromVersion_id4uVwhQyFcnl.invoke(it);
-      }
-    }, false).first());
-
-    if (lang.getModuleDescriptor().getLanguageVersions().containsKey(slang)) {
-      if (lang.getModuleDescriptor().getLanguageVersions().get(slang) != lang.getLanguageVersion()) {
-        return true;
-      }
-    }
-    return lang.getLanguageVersion() != maxFrom + 1;
+    return lang.getLanguageVersion() != CorrectLanguageVersion_Action.this.getLastScriptVersion(migrations, _params) + 1;
   }
   @Override
   public void doUpdate(@NotNull AnActionEvent event, final Map<String, Object> _params) {
@@ -94,68 +70,23 @@ public class CorrectLanguageVersion_Action extends BaseAction {
         return false;
       }
     }
-    {
-      Project p = event.getData(CommonDataKeys.PROJECT);
-      MapSequence.fromMap(_params).put("project", p);
-      if (p == null) {
-        return false;
-      }
-    }
-    {
-      MPSProject p = event.getData(MPSCommonDataKeys.MPS_PROJECT);
-      MapSequence.fromMap(_params).put("mpsProject", p);
-      if (p == null) {
-        return false;
-      }
-    }
     return true;
   }
   @Override
   public void doExecute(@NotNull final AnActionEvent event, final Map<String, Object> _params) {
-    final Language lang = ((Language) ((SModule) MapSequence.fromMap(_params).get("module")));
-    SModel mig = SModuleOperations.getAspect(lang, "migration");
-    List<SNode> scripts = check_wnyb8b_a0c0a(((SModel) mig));
-    if (ListSequence.fromList(scripts).isNotEmpty()) {
-      int maxFrom = (int) IMigrationUnit__BehaviorDescriptor.fromVersion_id4uVwhQyFcnl.invoke(ListSequence.fromList(scripts).sort(new ISelector<SNode, Integer>() {
-        public Integer select(SNode it) {
-          return (int) IMigrationUnit__BehaviorDescriptor.fromVersion_id4uVwhQyFcnl.invoke(it);
-        }
-      }, false).first());
-      lang.setLanguageVersion(maxFrom + 1);
-    } else {
-      final int v = lang.getLanguageVersion();
-      ApplicationManager.getApplication().invokeLater(new Runnable() {
-        public void run() {
-          InputValidator validator = new InputValidator() {
-            public boolean checkInput(String s) {
-              try {
-                return Integer.parseInt(s) >= 0;
-              } catch (NumberFormatException e) {
-                return false;
-              }
-            }
-            public boolean canClose(String s) {
-              return checkInput(s);
-            }
-          };
-          final String result = Messages.showInputDialog(((Project) MapSequence.fromMap(_params).get("project")), "No scripts found\n" + "Current language version is " + v + "\n" + "Please enter new version", "Set Language Version", null, "0", validator);
-          if (result == null) {
-            return;
-          }
-
-          ((MPSProject) MapSequence.fromMap(_params).get("mpsProject")).getRepository().getModelAccess().executeCommand(new Runnable() {
-            public void run() {
-              lang.setLanguageVersion(Integer.parseInt(result));
-            }
-          });
-        }
-      });
-    }
+    Language lang = (Language) ((SModule) MapSequence.fromMap(_params).get("module"));
+    List<SNode> migrarions = SModelOperations.roots(SModuleOperations.getAspect(lang, "migration"), CONCEPTS.IMigrationUnit$xq);
+    lang.setLanguageVersion(CorrectLanguageVersion_Action.this.getLastScriptVersion(migrarions, _params) + 1);
   }
-  private static List<SNode> check_wnyb8b_a0c0a(SModel checkedDotOperand) {
-    if (null != checkedDotOperand) {
-      return SModelOperations.roots(checkedDotOperand, MetaAdapterFactory.getInterfaceConcept(0x9074634404fd4286L, 0x97d5b46ae6a81709L, 0x47bb811da2acc4d6L, "jetbrains.mps.lang.migration.structure.IMigrationUnit"));
-    }
-    return null;
+  private int getLastScriptVersion(List<SNode> migrations, final Map<String, Object> _params) {
+    return (int) IMigrationUnit__BehaviorDescriptor.fromVersion_id4uVwhQyFcnl.invoke(ListSequence.fromList(migrations).sort(new ISelector<SNode, Integer>() {
+      public Integer select(SNode it) {
+        return (int) IMigrationUnit__BehaviorDescriptor.fromVersion_id4uVwhQyFcnl.invoke(it);
+      }
+    }, false).first());
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SInterfaceConcept IMigrationUnit$xq = MetaAdapterFactory.getInterfaceConcept(0x9074634404fd4286L, 0x97d5b46ae6a81709L, 0x47bb811da2acc4d6L, "jetbrains.mps.lang.migration.structure.IMigrationUnit");
   }
 }

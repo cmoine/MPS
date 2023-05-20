@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,21 @@
  */
 package org.jetbrains.mps.openapi.module;
 
+import org.jetbrains.annotations.ApiStatus.Experimental;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.repository.CommandListener;
+import org.jetbrains.mps.openapi.repository.ReadActionListener;
 import org.jetbrains.mps.openapi.repository.WriteActionListener;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Future;
+import java.util.concurrent.Semaphore;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+
 /**
- * Grants access to objects in the repository (e.g., models)
+ * Grants access to objects in the repository (for example to models)
  */
 public interface ModelAccess {
   /**
@@ -64,6 +73,23 @@ public interface ModelAccess {
    */
   void runWriteAction(Runnable r);
 
+  default <T> T computeReadAction(Supplier<T> s) {
+    return computeXXXAction(s, this::runReadAction);
+  }
+  default <T> T computeWriteAction(Supplier<T> s) {
+    return computeXXXAction(s, this::runWriteAction);
+  }
+
+  private static <T> T computeXXXAction(Supplier<T> s, Consumer<Runnable> runWithXXX) {
+    var aux = new Object() {
+      T result = null;
+    };
+    runWithXXX.accept(() -> {
+      aux.result = s.get();
+    });
+    return aux.result;
+  }
+
   /**
    * Modifications to models can only be performed from within managed actions, which hold the appropriate write lock.
    * The method obtains such a lock and executes the provided action <em>asynchronously</em> on the EDT UI thread.
@@ -82,15 +108,28 @@ public interface ModelAccess {
    * Represents a write action executed with respect to platform undo mechanism, runs asynchronously from EDT thread.
    * This method may be invoked from any thread.
    */
-  void executeCommandInEDT(Runnable r);
+  void executeCommandInEDT(@NotNull Runnable r);
+
+  @NotNull
+  @Experimental
+  default <T> Future<T> executeCommandInEDT(@NotNull Supplier<T> supplier) {
+    CompletableFuture<T> future = new CompletableFuture<>();
+    executeCommandInEDT(() -> {
+      future.complete(supplier.get());
+    });
+    return future;
+  }
 
   /**
-   * FIXME
+   * FIXME need thorough documentation
+   * Executed code has model write, is treated as a command, the only difference is that changes from the transparent action merged with the that of the
+   * previous undoable command
    */
   void executeUndoTransparentCommand(Runnable r);
 
   /**
-   * @return <code>true</code> if there's a command (either with {@link #executeCommand(Runnable)} or {@link #executeCommandInEDT(Runnable)}) being executed
+   * @return <code>true</code> if there's a command
+   * (either with {@link #executeCommand(Runnable)} or {@link #executeCommandInEDT(Runnable)}) being executed
    */
   boolean isCommandAction();
 
@@ -100,9 +139,9 @@ public interface ModelAccess {
    * @see #executeCommand(Runnable)
    * @param listener listens to command
    */
-  public void addCommandListener(CommandListener listener);
+  void addCommandListener(CommandListener listener);
 
-  public void removeCommandListener(CommandListener listener);
+  void removeCommandListener(CommandListener listener);
 
   /**
    * add/remove listeners to listen to the start/finish of write action events
@@ -110,8 +149,19 @@ public interface ModelAccess {
    * @see #runWriteAction(Runnable)
    * @param listener listens to write action
    */
-  public void addWriteActionListener(@NotNull WriteActionListener listener);
+  void addWriteActionListener(@NotNull WriteActionListener listener);
 
-  public void removeWriteActionListener(@NotNull WriteActionListener listener);
+  void removeWriteActionListener(@NotNull WriteActionListener listener);
 
+  /**
+   * Get notified about start/finish of a model read action
+   * @since 2018.3
+   */
+  void addReadActionListener(@NotNull ReadActionListener listener);
+
+  /**
+   * Cease notifications about start/finish of a model read action
+   * @since 2018.3
+   */
+  void removeReadActionListener(@NotNull ReadActionListener listener);
 }

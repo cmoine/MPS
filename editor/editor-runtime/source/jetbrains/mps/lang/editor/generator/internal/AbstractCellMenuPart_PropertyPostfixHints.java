@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,46 +15,45 @@
  */
 package jetbrains.mps.lang.editor.generator.internal;
 
+import jetbrains.mps.editor.runtime.menus.EditorMenuItemCompositeCustomizationContext;
+import jetbrains.mps.editor.runtime.menus.EditorMenuItemModifyingCustomizationContext;
 import jetbrains.mps.lang.editor.cellProviders.PropertyCellContext;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.nodeEditor.cellMenu.CellContext;
 import jetbrains.mps.nodeEditor.cellMenu.SubstituteInfoPartExt;
 import jetbrains.mps.nodeEditor.cells.EditorCell_Label;
 import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.cells.SubstituteAction;
-import jetbrains.mps.smodel.IOperationContext;
-import jetbrains.mps.smodel.PropertySupport;
 import jetbrains.mps.smodel.action.AbstractNodeSubstituteAction;
+import jetbrains.mps.smodel.constraints.ModelConstraints;
+import jetbrains.mps.smodel.presentation.IPropertyPresentationProvider;
 import jetbrains.mps.util.NameUtil;
 import jetbrains.mps.util.PatternUtil;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeAccessUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public abstract class AbstractCellMenuPart_PropertyPostfixHints implements SubstituteInfoPartExt {
-  private static final Logger LOG = LogManager.getLogger(AbstractCellMenuPart_PropertyPostfixHints.class);
+  private static final Logger LOG = Logger.getLogger(AbstractCellMenuPart_PropertyPostfixHints.class);
 
   @Override
   public List<SubstituteAction> createActions(CellContext cellContext, EditorContext editorContext) {
-    SNode node = (SNode) cellContext.get(PropertyCellContext.EDITED_NODE);
-    final SNode property = (SNode) cellContext.get(PropertyCellContext.PROPERTY_DECLARATION);
-    if (property == null) {
-      return Collections.emptyList();
-    }
-    final IOperationContext context = editorContext.getOperationContext();
-    List<String> postfixes = getPostfixes(node, context, editorContext);
+    SNode node = cellContext.get(PropertyCellContext.EDITED_NODE);
+    final SProperty property = cellContext.get(PropertyCellContext.PROPERTY_DECLARATION);
+    List<String> postfixes = getPostfixes(node, editorContext);
     if (postfixes == null) {
-      postfixes = new ArrayList<String>();
+      postfixes = new ArrayList<>();
     }
     for (int i = 0; i < postfixes.size(); ) {
       if (postfixes.get(i) == null) {
@@ -66,21 +65,20 @@ public abstract class AbstractCellMenuPart_PropertyPostfixHints implements Subst
     }
 
     final PostfixGroup postfixGroup = new PostfixGroup(postfixes);
-    final PropertySupport propertySupport = PropertySupport.getPropertySupport(property);
-    List<SubstituteAction> actions = new ArrayList<SubstituteAction>(postfixes.size());
+    List<SubstituteAction> actions = new ArrayList<>(postfixes.size());
     for (final String postfix : postfixes) {
-      actions.add(new PostfixSubstituteAction(postfix, node, postfixGroup,
-          propertySupport, property.getName()));
+      actions.add(new PostfixSubstituteAction(postfix, node, postfixGroup, property));
     }
     return actions;
   }
 
-  public abstract List<String> getPostfixes(SNode node, IOperationContext operationContext, EditorContext editorContext);
+  @Nullable
+  protected abstract List<String> getPostfixes(SNode node, EditorContext editorContext);
 
   public static class PostfixGroup {
     private List<String> myPostfixes;
     private String myCurrentPattern = null;
-    private Map<String, String> myModel = new HashMap<String, String>();
+    private Map<String, String> myModel = new HashMap<>();
     private boolean myShowUnpostfixed;
     private boolean myUnpostfixedFirst;
 
@@ -164,17 +162,17 @@ public abstract class AbstractCellMenuPart_PropertyPostfixHints implements Subst
   }
 
   private static class PostfixSubstituteAction extends AbstractNodeSubstituteAction {
-    private final String myPostfix;
-    private final PostfixGroup myPostfixGroup;
-    private final PropertySupport myPropertySupport;
-    private final String myPropertyName;
+    @NotNull private final String myPostfix;
+    @NotNull private final PostfixGroup myPostfixGroup;
+    @NotNull private final SProperty myProperty;
+    @NotNull private final IPropertyPresentationProvider myPresentationProvider;
 
-    public PostfixSubstituteAction(String postfix, SNode node, PostfixGroup postfixGroup, PropertySupport propertySupport, String propertyName) {
+    public PostfixSubstituteAction(@NotNull String postfix, @NotNull SNode node, @NotNull PostfixGroup postfixGroup, @NotNull SProperty property) {
       super(null, postfix, node);
       myPostfix = postfix;
       myPostfixGroup = postfixGroup;
-      myPropertySupport = propertySupport;
-      myPropertyName = propertyName;
+      myProperty = property;
+      myPresentationProvider = IPropertyPresentationProvider.getPresentationProviderFor(property);
     }
 
     @Override
@@ -186,7 +184,7 @@ public abstract class AbstractCellMenuPart_PropertyPostfixHints implements Subst
     public boolean canSubstitute(String pattern) {
       if (myPostfixGroup.canSubstitute(pattern, myPostfix)) {
         String text = myPostfixGroup.getMatchingText(pattern, myPostfix);
-        return myPropertySupport.canSetValue(getSourceNode(), myPropertyName, text);
+        return ModelConstraints.validatePropertyValue(getSourceNode(), myProperty, myPresentationProvider.fromPresentation(text));
       } else {
         return false;
       }
@@ -199,9 +197,7 @@ public abstract class AbstractCellMenuPart_PropertyPostfixHints implements Subst
 
     @Override
     public SNode doSubstitute(@Nullable final EditorContext editorContext, String pattern) {
-      String propertyName = myPropertyName;
-      assert propertyName != null;
-      SNodeAccessUtil.setProperty(getSourceNode(), propertyName, myPostfixGroup.getMatchingText(pattern, myPostfix));
+      SNodeAccessUtil.setProperty(getSourceNode(), myProperty, myPostfixGroup.getMatchingText(pattern, myPostfix));
 
       if (editorContext != null) {
         // put caret at the end of text, TODO use editorContext.select(getSourceNode(), myPropertyName, -1 /* end */);
@@ -213,6 +209,14 @@ public abstract class AbstractCellMenuPart_PropertyPostfixHints implements Subst
         }
       }
       return null;
+    }
+
+    protected Optional<EditorMenuItemCompositeCustomizationContext> createCustomizationContext(String pattern) {
+      SNode sourceNode = getSourceNode();
+      if (sourceNode != null ) {
+        return Optional.of(new EditorMenuItemCompositeCustomizationContext(new EditorMenuItemModifyingCustomizationContext(sourceNode, null, myProperty, null)));
+      }
+      return Optional.empty();
     }
   }
 }

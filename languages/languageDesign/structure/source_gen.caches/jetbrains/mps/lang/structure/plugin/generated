@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-enj2dy509wg1xuus0wiryn9b3yir1ma" />
+<product version="3" modelHash="aj5shlagnioqsla3g32htrkpmzygu4e">
+  <files names="ExtensionDescriptor.java:IconContainer.java:LanguageAspectsEP_extension.java:MPSAspects_Order.java:URLFunction_HelpCenterDocUrl.java" />
+</product>
 

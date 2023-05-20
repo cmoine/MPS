@@ -4,30 +4,43 @@ package jetbrains.mps.lang.editor.menus.tests;
 
 import jetbrains.mps.MPSLaunch;
 import jetbrains.mps.lang.test.runtime.BaseTransformationTest;
-import org.junit.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCacheExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCache;
+import org.junit.jupiter.api.Test;
 import jetbrains.mps.lang.test.runtime.BaseEditorTestBody;
+import jetbrains.mps.lang.test.runtime.TransformationTest;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 import java.util.List;
 import jetbrains.mps.openapi.editor.menus.transformation.TransformationMenuItem;
 import jetbrains.mps.smodel.SNodePointer;
-import junit.framework.Assert;
+import org.junit.Assert;
 import java.util.Collections;
 
 @MPSLaunch
 public class ContributionFromUnusedLanguage_Test extends BaseTransformationTest {
-  @Test
-  public void test_ContributionFromUnusedLanguage() throws Throwable {
-    initTest("${mps_home}", "r:4f8193a2-048e-4ddf-b505-dfca00e8c910(jetbrains.mps.lang.editor.menus.tests@tests)");
-    runTest("jetbrains.mps.lang.editor.menus.tests.ContributionFromUnusedLanguage_Test$TestBody", "testMethod", false);
+  @RegisterExtension
+  private static final TestParametersCacheExtension ourParametersCacheExtension = new TestParametersCacheExtension(new TestParametersCache(ContributionFromUnusedLanguage_Test.class, "${mps_home}", "r:4f8193a2-048e-4ddf-b505-dfca00e8c910(jetbrains.mps.lang.editor.menus.tests@tests)", false));
+
+  public ContributionFromUnusedLanguage_Test() {
+    super(ourParametersCacheExtension.getParametersCache());
   }
 
-  @MPSLaunch
-  public static class TestBody extends BaseEditorTestBody {
+  @Test
+  public void test_ContributionFromUnusedLanguage() throws Throwable {
+    new TestBody(this).testMethod();
+  }
+
+  /*package*/ static class TestBody extends BaseEditorTestBody {
+
+    /*package*/ TestBody(TransformationTest owner) {
+      super(owner);
+    }
+
     @Override
     public void testMethodImpl() throws Exception {
       initEditorComponent("3526874291840104599", "");
-      UsedLanguagesUtils.assertLanguageNotUsed(getEditorComponent(), MetaAdapterFactory.getLanguage(MetaIdFactory.langId(0xf909cea53e794399L, 0xb0a6980af6d53669L), "jetbrains.mps.lang.editor.transformationMenu.testUnusedExtendingLanguage"));
+      UsedLanguagesUtils.assertLanguageNotUsed(getEditorComponent(), MetaAdapterFactory.getLanguage(0xf909cea53e794399L, 0xb0a6980af6d53669L, "jetbrains.mps.lang.editor.transformationMenu.testUnusedExtendingLanguage"));
       List<TransformationMenuItem> items = MenuLoadingUtils.loadNamedMenu(getEditorComponent(), new SNodePointer("r:3b1c2f8c-f04f-4186-97fc-85ed47ba8aeb(jetbrains.mps.lang.editor.menus.testLanguage.editor)", "3526874291840093374"), "test location");
       Assert.assertEquals(Collections.emptyList(), items);
     }

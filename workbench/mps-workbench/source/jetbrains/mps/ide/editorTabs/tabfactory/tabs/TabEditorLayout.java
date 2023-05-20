@@ -29,7 +29,7 @@ import java.util.List;
  * tabs, edited and selection nodes for particular editor instance
  */
 public class TabEditorLayout {
-  private final List<Entry> myEntries = new ArrayList<Entry>();
+  private final List<Entry> myEntries = new ArrayList<>();
 
   /**
    * @return <code>true</code> if there's a node to edit for a given aspect
@@ -48,7 +48,7 @@ public class TabEditorLayout {
    */
   @NotNull
   public Collection<Entry> get(RelationDescriptor aspect) {
-    ArrayList<Entry> rv = new ArrayList<Entry>();
+    ArrayList<Entry> rv = new ArrayList<>();
     for (Entry e : myEntries) {
       if (e.getDescriptor().equals(aspect)) {
         rv.add(e);
@@ -72,7 +72,7 @@ public class TabEditorLayout {
     Entry(@NotNull RelationDescriptor tab, @NotNull SNodeReference editorNode, Collection<SNodeReference> selectionNodes) {
       myDescriptor = tab;
       myEditorNode = editorNode;
-      mySelection = selectionNodes == null ? Collections.<SNodeReference>emptyList() : selectionNodes;
+      mySelection = selectionNodes == null ? Collections.emptyList() : selectionNodes;
     }
 
     @NotNull

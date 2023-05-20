@@ -3,7 +3,7 @@
   <persistence version="9" />
   <languages>
     <use id="ff24ab03-965e-4d15-9aed-52dc276658f4" name="jetbrains.mps.samples.complex" version="0" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports>
     <import index="wyt6" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)" />
@@ -148,7 +148,7 @@
               <ref role="3cqZAo" to="wyt6:~System.out" resolve="out" />
             </node>
             <node concept="liA8E" id="hzK9Lsk" role="2OqNvi">
-              <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String):void" resolve="println" />
+              <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String)" resolve="println" />
               <node concept="3cpWs3" id="hzKbtw5" role="37wK5m">
                 <node concept="1eOMI4" id="hzKbtw6" role="3uHU7w">
                   <node concept="17qRlL" id="hzKbtw7" role="1eOMHV">
@@ -198,7 +198,7 @@
               <ref role="3cqZAo" to="wyt6:~System.out" resolve="out" />
             </node>
             <node concept="liA8E" id="hzKatnS" role="2OqNvi">
-              <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String):void" resolve="println" />
+              <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String)" resolve="println" />
               <node concept="3cpWs3" id="hzKaCOe" role="37wK5m">
                 <node concept="1eOMI4" id="hzKaFKZ" role="3uHU7w">
                   <node concept="2g7Pry" id="hzKaFL0" role="1eOMHV">
@@ -226,7 +226,7 @@
               <ref role="3cqZAo" to="wyt6:~System.out" resolve="out" />
             </node>
             <node concept="liA8E" id="hzKaMIW" role="2OqNvi">
-              <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String):void" resolve="println" />
+              <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String)" resolve="println" />
               <node concept="3cpWs3" id="hzKaTyA" role="37wK5m">
                 <node concept="37vLTw" id="3GM_nagTBNV" role="3uHU7w">
                   <ref role="3cqZAo" node="hqgMIzv" resolve="c2" />

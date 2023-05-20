@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="-enfeofkozuy3y6psqtlglr75awnumqz">
+  <files names="Actions_Order.java:Actions_TabDescriptor.java:Behavior_Order.java:Behavior_TabDescriptor.java:ConceptEditorHelper.java:ConceptEditorOpenHelper.java:Constraints_Order.java:Constraints_TabDescriptor.java:DataFlow_Order.java:Data_Flow_TabDescriptor.java:Editor_Order.java:Editor_ProjectPlugin.java:Editor_TabDescriptor.java:Feedback_Order.java:Feedback_TabDescriptor.java:FindUsages_Order.java:Find_Usages_TabDescriptor.java:Generator_Order.java:Generator_TabDescriptor.java:IconContainer.java:Intentions_Order.java:Intentions_TabDescriptor.java:Refactorings_Order.java:Refactorings_TabDescriptor.java:Structure_TabDescriptor.java:Textgen_Order.java:Textgen_TabDescriptor.java:Typesystem_Order.java:Typesystem_TabDescriptor.java:startup.properties" />
+</product>
+

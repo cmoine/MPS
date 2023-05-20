@@ -75,9 +75,7 @@ public abstract class MpsPopupFactory {
   }
 
   private static ChooseByNameItemProvider packageProvider() {
-    // TODO: try to use only DefaultChooseByNameItemProvider
-    // Provides must be in such order otherwise it can produce usability problem (see MPS-23576)
-    return new CompositeItemProvider(new DefaultChooseByNameItemProvider(null), new MPSPackageItemProvider(null));
+    return new MPSPackageItemProvider();
   }
 
   private static void setCheckboxShortcutFromAction(ChooseByNamePopup popup, @Nullable BaseAction parentAction) {

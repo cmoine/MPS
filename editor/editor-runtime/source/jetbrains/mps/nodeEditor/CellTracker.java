@@ -24,10 +24,10 @@ import java.util.HashSet;
 import java.util.Collections;
 
 public class CellTracker {
-  private Set<EditorCell> myCellsWithErrorState = new HashSet<EditorCell>();
-  private Set<EditorCell_Property> myTransactionalCells = new HashSet<EditorCell_Property>();
-  private Set<EditorCell_WithComponent> myComponentCells = new HashSet<EditorCell_WithComponent>();
-  private Set<EditorCell_Collection> myFoldableCells = new HashSet<EditorCell_Collection>();
+  private Set<EditorCell> myCellsWithErrorState = new HashSet<>();
+  private Set<EditorCell_Property> myTransactionalCells = new HashSet<>();
+  private Set<EditorCell_WithComponent> myComponentCells = new HashSet<>();
+  private Set<EditorCell_Collection> myFoldableCells = new HashSet<>();
 
   public Set<EditorCell> getErrorCells() {
     return Collections.unmodifiableSet(myCellsWithErrorState);

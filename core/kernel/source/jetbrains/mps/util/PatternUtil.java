@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class PatternUtil {
 
-  private static enum State {
+  private enum State {
     NO_QUOTING,
     QUOTING,
     SEQUENCE_LETTERS
@@ -39,7 +39,7 @@ public class PatternUtil {
       return false;
     }
     return matchingText.charAt(0) == pattern.charAt(0) &&
-        (matchingText.startsWith(pattern) || matchingText.matches(PatternUtil.getExactItemPatternBuilder(pattern, false, false).toString() + ".*"));
+        (matchingText.startsWith(pattern) || matchingText.matches(PatternUtil.getExactItemPatternBuilder(pattern, false, false) + ".*"));
   }
 
   public static StringBuilder getExactItemPatternBuilder(String text, boolean useDots, boolean useStarAndQuestionMark) {
@@ -80,7 +80,7 @@ public class PatternUtil {
       return State.NO_QUOTING;
     } else if (c == '?') {
       if (useStarAndQuestionMark) {
-        b.append(".");
+        b.append('.');
       } else {
         b.append("\\?");
       }
@@ -105,29 +105,29 @@ public class PatternUtil {
   }
 
   public static List<Integer> getIndexes(@NotNull String pattern, boolean useDots, @NotNull String matchingText) {
-    List<Integer> indexList = new ArrayList<Integer>();
+    List<Integer> indexList = new ArrayList<>();
     if (addIndexes(matchingText, indexList, pattern)) {
       return indexList;
     } else {
-      indexList = new ArrayList<Integer>();
+      indexList = new ArrayList<>();
     }
     StringBuilder nextSubstring = new StringBuilder();
     for (int i = 0; i < pattern.length(); i++) {
       char c = pattern.charAt(i);
       if (c == '*' || c == '?') {
-        if (!addIndexes(matchingText, indexList, nextSubstring.toString())) return new ArrayList<Integer>();
+        if (!addIndexes(matchingText, indexList, nextSubstring.toString())) return new ArrayList<>();
         nextSubstring = new StringBuilder();
       } else if (useDots && c == '.' || c == '@' || Character.isUpperCase(c)) {
-        if (!addIndexes(matchingText, indexList, nextSubstring.toString())) return new ArrayList<Integer>();
+        if (!addIndexes(matchingText, indexList, nextSubstring.toString())) return new ArrayList<>();
         String upperCase = new String(new char[]{c});
         String spaceAndLowerCase = " " + Character.toLowerCase(c);
-        if (!addIndexes(matchingText, indexList, upperCase) && !addIndexes(matchingText, indexList, spaceAndLowerCase)) return new ArrayList<Integer>();
+        if (!addIndexes(matchingText, indexList, upperCase) && !addIndexes(matchingText, indexList, spaceAndLowerCase)) return new ArrayList<>();
         nextSubstring = new StringBuilder();
       } else {
         nextSubstring.append(c);
       }
     }
-    if (!addIndexes(matchingText, indexList, nextSubstring.toString())) return new ArrayList<Integer>();
+    if (!addIndexes(matchingText, indexList, nextSubstring.toString())) return new ArrayList<>();
     return indexList;
   }
 

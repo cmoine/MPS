@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,85 +23,70 @@ import jetbrains.mps.lang.typesystem.runtime.IsApplicableStatus;
 import jetbrains.mps.logging.Logger;
 import jetbrains.mps.newTypesystem.context.typechecking.IncrementalTypechecking;
 import jetbrains.mps.newTypesystem.state.State;
-import org.apache.log4j.LogManager;
-import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.smodel.*;
-import jetbrains.mps.typesystem.inference.TypeChecker;
+import jetbrains.mps.smodel.NodeReadEventsCaster;
 import jetbrains.mps.util.Pair;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.openapi.model.SNode;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /*
  *   Non-reenterable.
  */
 /*package*/ public class TypeSystemComponent extends IncrementalTypecheckingComponent<State> implements ITypeErrorComponent {
-  protected static final Logger LOG = Logger.wrap(LogManager.getLogger(TypeSystemComponent.class));
+  protected static final Logger LOG = Logger.getLogger(TypeSystemComponent.class);
 
-  private Map<SNode, Set<SNode>> myNodesToDependentNodes_A;
-  private Map<SNode, Set<SNode>> myNodesToDependentNodes_B;
+  private Map<SNode, Set<SNode>> myNodesToDependentNodes;
 
   private Map<SNode, Set<Pair<String, String>>> myNodesToRules;
   private Set<SNode> myNodesDependentOnCaches;
 
-  public TypeSystemComponent(TypeChecker typeChecker, State state, IncrementalTypechecking component) {
-    super(typeChecker, state, component);
+  public TypeSystemComponent(State state, IncrementalTypechecking component) {
+    super(state, component);
 
-    myNodesToRules = new THashMap<SNode, Set<Pair<String, String>>>();
-    myNodesDependentOnCaches = new THashSet<SNode>();
-    myNodesToDependentNodes_A = new THashMap<SNode, Set<SNode>>();
-    myNodesToDependentNodes_B = new THashMap<SNode, Set<SNode>>();
+    myNodesToRules = new THashMap<>();
+    myNodesDependentOnCaches = new THashSet<>();
+    myNodesToDependentNodes = new THashMap<>();
   }
 
   //returns true if something was invalidated
   @Override
   protected boolean doInvalidate() {
     if (isInvalidationWasPerformed()) {
-      return isInvalidationResult();
+      return hasInvalidated();
     }
     boolean result;
-    Set<SNode> invalidatedNodes_A = new THashSet<SNode>();
-    Set<SNode> invalidatedNodes_B = new THashSet<SNode>();
-    Set<SNode> newNodesToInvalidate_A = new THashSet<SNode>();
-    Set<SNode> currentNodesToInvalidate_A = getCurrentNodesToInvalidate();
-    Set<SNode> nodesToInvalidate_B = new THashSet<SNode>();
+    Set<SNode> invalidatedNode = new THashSet<>();
+    Set<SNode> newNodesToInvalidate = new THashSet<>();
+    Set<SNode> currentNodesToInvalidate = getCurrentNodesToInvalidate();
 
     if (isCacheWasRebuilt()) {
-      currentNodesToInvalidate_A.addAll(myNodesDependentOnCaches);
+      currentNodesToInvalidate.addAll(myNodesDependentOnCaches);
     }
 
     //A means invalidated and type will be recalculated, B means invalidated but type not affected. A => B then.
-    boolean initial = true;
-    while (!currentNodesToInvalidate_A.isEmpty()) {
-      for (SNode nodeToInvalidate : currentNodesToInvalidate_A) {
-        if (invalidatedNodes_A.contains(nodeToInvalidate)) continue;
+    while (!currentNodesToInvalidate.isEmpty()) {
+      for (SNode nodeToInvalidate : currentNodesToInvalidate) {
+        if (invalidatedNode.contains(nodeToInvalidate)) continue;
         boolean recalc = nodeToInvalidate.getModel() != null;
         invalidateNodeTypeSystem(nodeToInvalidate, recalc);
-        invalidatedNodes_A.add(nodeToInvalidate);
-        Set<SNode> nodes = myNodesToDependentNodes_A.get(nodeToInvalidate);
+        invalidatedNode.add(nodeToInvalidate);
+        Set<SNode> nodes = myNodesToDependentNodes.get(nodeToInvalidate);
         if (nodes != null) {
-          newNodesToInvalidate_A.addAll(nodes);
-        }
-        // only actually changed nodes affect the to be invalidated "B"
-        nodes = myNodesToDependentNodes_B.get(nodeToInvalidate);
-        if (nodes != null) {
-          nodesToInvalidate_B.addAll(nodes);
+          newNodesToInvalidate.addAll(nodes);
         }
       }
-      currentNodesToInvalidate_A = newNodesToInvalidate_A;
-      newNodesToInvalidate_A = new THashSet<SNode>();
+      currentNodesToInvalidate = newNodesToInvalidate;
+      newNodesToInvalidate = new THashSet<>();
     }
 
-    for (SNode nodeToInvalidate : nodesToInvalidate_B) {
-      if (invalidatedNodes_A.contains(nodeToInvalidate)) continue;
-      if (invalidatedNodes_B.contains(nodeToInvalidate)) continue;
-      invalidateNodeTypeSystem(nodeToInvalidate, false);
-      invalidatedNodes_B.add(nodeToInvalidate);
-    }
-
-    result = !invalidatedNodes_A.isEmpty() || !invalidatedNodes_B.isEmpty();
+    result = !invalidatedNode.isEmpty();
     clearNodeTypes();
-    setInvalidationResult(result);
+    setInvalidation(result);
     return result;
   }
 
@@ -110,7 +95,7 @@ import java.util.*;
     try {
       super.computeTypes(nodeToCheck, refreshTypes, forceChildrenCheck, additionalNodes, finalExpansion, initialNode);
     } finally {
-      setInvalidationWasPerformed(false);
+      clearInvalidation();
     }
   }
 
@@ -118,7 +103,7 @@ import java.util.*;
   protected void invalidateNodeTypeSystem(SNode node, boolean typeWillBeRecalculated) {
     super.invalidateNodeTypeSystem(node, typeWillBeRecalculated);
     if (typeWillBeRecalculated) {
-      TypeChecker.getInstance().fireTypeWillBeRecalculatedForTerm(node);
+      getTypechecking().notifyTypeInvalidated(node);
     }
     myNodesToRules.remove(node);
   }
@@ -143,9 +128,8 @@ import java.util.*;
   }
 
   public void clearCaches() {
-    if (myNodesToDependentNodes_A!= null) {
-      myNodesToDependentNodes_A.clear();
-      myNodesToDependentNodes_B.clear();
+    if (myNodesToDependentNodes != null) {
+      myNodesToDependentNodes.clear();
       myNodesDependentOnCaches.clear();
       myNodesToRules.clear();
     }
@@ -161,16 +145,16 @@ import java.util.*;
   public void markNodeAsAffectedByRule(SNode node, String ruleModel, String ruleId) {
     Set<Pair<String, String>> rulesWhichAffectNodesType = myNodesToRules.get(node);
     if (rulesWhichAffectNodesType == null) {
-      rulesWhichAffectNodesType = new THashSet<Pair<String, String>>(1);
+      rulesWhichAffectNodesType = new THashSet<>(1);
       myNodesToRules.put(node, rulesWhichAffectNodesType);
     }
-    rulesWhichAffectNodesType.add(new Pair<String, String>(ruleModel, ruleId));
+    rulesWhichAffectNodesType.add(new Pair<>(ruleModel, ruleId));
   }
 
   public Set<Pair<String, String>> getRulesWhichAffectNodeType(SNode node) {
     Set<Pair<String, String>> set = myNodesToRules.get(node);
     if (set == null) return null;
-    return new THashSet<Pair<String, String>>(set);
+    return new THashSet<>(set);
   }
 
   @Override
@@ -183,16 +167,14 @@ import java.util.*;
     return (IncrementalTypechecking) super.getTypechecking();
   }
 
-  //"type affected" means that *type* of this node depends on this set
-  // used to decide whether call "type will be recalculated" if node from set invalidated
-  public void addDependentNodesTypeSystem(@NotNull SNode sNode, Set<SNode> nodesToDependOn, boolean typesAffected) {
-    Map<SNode, Set<SNode>> dependencies = typesAffected ? myNodesToDependentNodes_A : myNodesToDependentNodes_B;
+  public void addDependentNodesTypeSystem(@NotNull SNode sNode, Set<SNode> nodesToDependOn) {
+    Map<SNode, Set<SNode>> dependencies = myNodesToDependentNodes;
     for (SNode nodeToDependOn : nodesToDependOn) {
       if (nodeToDependOn == null) continue;
       if (sNode == nodeToDependOn) continue;
       Set<SNode> dependentNodes = dependencies.get(nodeToDependOn);
       if (dependentNodes == null) {
-        dependentNodes = new THashSet<SNode>(1);
+        dependentNodes = new THashSet<>(1);
         dependencies.put(nodeToDependOn, dependentNodes);
         getTypechecking().track(nodeToDependOn);
       }
@@ -201,28 +183,24 @@ import java.util.*;
   }
 
   @Override
-  public void addError(SNode node, IErrorReporter reporter) {
-    getState().addError(node, reporter, null);
+  public void addError(IErrorReporter reporter) {
+    getState().addError(reporter);
   }
 
   @Override
   protected void performActionsAfterChecking() {
     getTypechecking().updateGCedNodes();
-    TypeChecker.getInstance().addTypeRecalculatedListener(getTypechecking().getTypeRecalculatedListener());//method checks if already exists
   }
 
   @Override
-  protected boolean applyRulesToNode(final SNode node) {
-    final List<Pair<SNode, List<Pair<InferenceRule_Runtime, IsApplicableStatus>>>> nodesAndRules = new ArrayList<Pair<SNode, List<Pair<InferenceRule_Runtime, IsApplicableStatus>>>>();
+  protected void applyRulesToNode(final SNode node) {
+    final List<Pair<SNode, List<Pair<InferenceRule_Runtime, IsApplicableStatus>>>> nodesAndRules = new ArrayList<>();
 
-    if (!collectNodesAndRules(node, nodesAndRules)) return false;
+    if (!collectNodesAndRules(node, nodesAndRules)) return;
 
-    return getTypechecking().runApplyRulesTo(node, new Runnable() {
-      @Override
-      public void run() {
-        for (Pair<SNode, List<Pair<InferenceRule_Runtime, IsApplicableStatus>>> pair : nodesAndRules) {
-          applyRulesToNode(pair.o1, pair.o2);
-        }
+    getTypechecking().runApplyRulesTo(node, () -> {
+      for (Pair<SNode, List<Pair<InferenceRule_Runtime, IsApplicableStatus>>> pair : nodesAndRules) {
+        applyRulesToNode(pair.o1, pair.o2);
       }
     });
   }
@@ -233,6 +211,11 @@ import java.util.*;
     super.addNodeToFrontier(node);
   }
 
+  /**
+   * @deprecated never called
+   * @param node
+   */
+  @Deprecated(forRemoval = true)
   private void addCacheDependentNodesTypesystem(SNode node) {
     myNodesDependentOnCaches.add(node);
   }
@@ -265,12 +248,10 @@ import java.util.*;
     }
 
     @Override
-    protected void postProcess(SNode sNode, boolean typeAffected) {
+    protected void postProcess(SNode sNode) {
       if (isIncrementalMode()) {
-        nodesReadListener.setAccessReport(true);
         Set<SNode> accessedNodes = nodesReadListener.getAccessedNodes();
-        addDependentNodesTypeSystem(sNode, accessedNodes, typeAffected);
-        nodesReadListener.setAccessReport(false);
+        addDependentNodesTypeSystem(sNode, accessedNodes);
         nodesReadListener.clear();
       }
     }

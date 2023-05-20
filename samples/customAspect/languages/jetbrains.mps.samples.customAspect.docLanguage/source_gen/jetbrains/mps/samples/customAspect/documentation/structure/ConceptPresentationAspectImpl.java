@@ -4,21 +4,34 @@ package jetbrains.mps.samples.customAspect.documentation.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_ConceptDocumentation = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_ConceptDocumentation;
+  private ConceptPresentation props_ModuleDescriptorDeputy;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.ConceptDocumentation:
+        if (props_ConceptDocumentation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x22916f45e98f4433L, 0x9c1b1b382cf5bd8dL, 0x28360eb22c3ac732L, 0x28360eb22c3ad436L, "cncpt", "", "");
+          props_ConceptDocumentation = cpb.create();
+        }
         return props_ConceptDocumentation;
+      case LanguageConceptSwitch.ModuleDescriptorDeputy:
+        if (props_ModuleDescriptorDeputy == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ModuleDescriptorDeputy");
+          props_ModuleDescriptorDeputy = cpb.create();
+        }
+        return props_ModuleDescriptorDeputy;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

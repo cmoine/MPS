@@ -19,6 +19,7 @@ import jetbrains.mps.RuntimeFlags;
 import jetbrains.mps.smodel.SNodeId.Regular;
 import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 import jetbrains.mps.smodel.adapter.ids.SConceptId;
+import jetbrains.mps.smodel.adapter.ids.SLanguageId;
 import jetbrains.mps.smodel.adapter.structure.FormatException;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.smodel.language.ConceptRegistryUtil;
@@ -100,13 +101,18 @@ public final class SInterfaceConceptAdapterById extends SInterfaceConceptAdapter
   }
 
   @Override
+  protected boolean isBootstrap() {
+    return myIsBootstrap;
+  }
+
+  @Override
   protected SNode findInModel(SModel structureModel) {
     return structureModel.getNode(new Regular(myConceptId.getIdValue()));
   }
 
   @Override
   public String serialize() {
-    return INTERFACE_PREFIX + ID_DELIM + myConceptId.serialize() + ID_DELIM + myFqName;
+    return INTERFACE_PREFIX + ID_DELIM + myConceptId.serialize() + ID_DELIM + getQualifiedName();
   }
 
   public static SInterfaceConceptAdapterById deserialize(String s) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,13 @@
  */
 package jetbrains.mps.nodeEditor.cells;
 
+import com.intellij.notification.Notification;
+import com.intellij.notification.NotificationType;
+import com.intellij.notification.Notifications;
 import com.intellij.openapi.util.SystemInfo;
+import com.intellij.util.ui.UIUtil;
 import jetbrains.mps.logging.Logger;
 import jetbrains.mps.util.Pair;
-import org.apache.log4j.LogManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.Font;
@@ -26,16 +29,21 @@ import java.awt.FontMetrics;
 import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import static java.util.Locale.ENGLISH;
 
 /**
  * User: shatalin
  * Date: 06/08/14
  */
 public class FontRegistry {
-  private static final Logger LOG = Logger.wrap(LogManager.getLogger(FontRegistry.class));
+  private static final Logger LOG = Logger.getLogger(FontRegistry.class);
 
   private static FontRegistry ourInstance;
 
@@ -47,8 +55,10 @@ public class FontRegistry {
   }
 
   private Map<String, FontFamily> myAvailableFonts;
-  private Map<String, Font> myFontsCache = new HashMap<String, Font>();
-  private Map<Font, FontMetrics> myFontMetricsCache = new HashMap<Font, FontMetrics>();
+  private Map<String, Font> myFontsCache = new HashMap<>();
+  private Map<Font, FontMetrics> myFontMetricsCache = new HashMap<>();
+  private Set<String> myAvailableFontFamilyNames;
+  private Set<String> myReportedFontFamilyNames = new HashSet<>();
 
   private FontRegistry() {
     loadStyledFonts();
@@ -58,7 +68,7 @@ public class FontRegistry {
     if (!SystemInfo.isMac) {
       return;
     }
-    myAvailableFonts = new HashMap<String, FontFamily>();
+    myAvailableFonts = new HashMap<>();
     GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
     for (Font font : graphicsEnvironment.getAllFonts()) {
@@ -70,7 +80,7 @@ public class FontRegistry {
       }
       fontFamily.addFont(font.getName());
     }
-    for (String fontFamilyName : myAvailableFonts.keySet().toArray(new String[myAvailableFonts.size()])) {
+    for (String fontFamilyName : myAvailableFonts.keySet().toArray(new String[0])) {
       FontFamily fontFamily = myAvailableFonts.get(fontFamilyName);
       if (!fontFamily.isValid()) {
         myAvailableFonts.remove(fontFamilyName);
@@ -83,7 +93,7 @@ public class FontRegistry {
     Font result = myFontsCache.get(key);
     if (result == null) {
       Pair<String, Integer> realFontName = getRealFontNameAndStyle(fontName, style);
-      result = new Font(realFontName.o1, realFontName.o2, size);
+      result = UIUtil.getFontWithFallback(realFontName.o1, realFontName.o2, size);
       myFontsCache.put(key, result);
     }
     return result;
@@ -97,6 +107,11 @@ public class FontRegistry {
     return fontEntry == null || fontEntry.getFontName(style) == null;
   }
 
+
+  /**
+   * @deprecated since MPS 2019.2 use {@link jetbrains.mps.openapi.editor.cells.EditorFontMetrics} or {@link EditorFontMetricsImpl}
+   */
+  @Deprecated
   public FontMetrics getFontMetrics(Font font) {
     FontMetrics result = myFontMetricsCache.get(font);
     if (result == null) {
@@ -106,22 +121,45 @@ public class FontRegistry {
     return result;
   }
 
+  public Set<String> getAvailableFontFamilyNames() {
+    if (myAvailableFontFamilyNames == null) {
+      if (SystemInfo.isMac) {
+        myAvailableFontFamilyNames = Collections.unmodifiableSet(myAvailableFonts.keySet());
+      } else {
+        myAvailableFontFamilyNames = new HashSet<>();
+        Collections.addAll(myAvailableFontFamilyNames,
+                           GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames(ENGLISH));
+        myAvailableFontFamilyNames = Collections.unmodifiableSet(myAvailableFontFamilyNames);
+      }
+    }
+    return myAvailableFontFamilyNames;
+  }
+
+  public void reportUnknownFontFamily(@NotNull String fontFamily) {
+    if (!myReportedFontFamilyNames.contains(fontFamily)) {
+      myReportedFontFamilyNames.add(fontFamily);
+      String message = "Custom font family \"" + fontFamily + "\" is supposed to be used in the editor, " +
+                       "but it's not available in your system.";
+      Notifications.Bus.notify(new Notification("Editor", "Unknown font", message, NotificationType.WARNING));
+    }
+  }
+
   private Pair<String, Integer> getRealFontNameAndStyle(String fontName, int style) {
     if (SystemInfo.isMac && myAvailableFonts.containsKey(fontName)) {
       FontFamily fontEntry = myAvailableFonts.get(fontName);
       String styledFontName = fontEntry.getFontName(style);
       if (styledFontName != null) {
-        return new Pair<String, Integer>(styledFontName, 0);
+        return new Pair<>(styledFontName, 0);
       } else {
-        return new Pair<String, Integer>(fontEntry.getRegularFontName(), style);
+        return new Pair<>(fontEntry.getRegularFontName(), style);
       }
     }
-    return new Pair<String, Integer>(fontName, style);
+    return new Pair<>(fontName, style);
   }
 
   private class FontFamily {
     private String myFamilyName;
-    private List<String> myFontNames = new ArrayList<String>();
+    private List<String> myFontNames = new ArrayList<>();
 
     private String myRegularFontName;
     private String myBoldFontName;
@@ -177,7 +215,7 @@ public class FontRegistry {
         if (fontName.length() < prefixLength) {
           LOG.error(
               "Font name \"" + fontName + "\" registered in font family \"" + myFamilyName + "\" is shorter that the length of common prefix \"" + prefix +
-                  "\". Skipping it.");
+              "\". Skipping it.");
           continue;
         }
 

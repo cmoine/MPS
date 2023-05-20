@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import org.jetbrains.annotations.Nullable;
 import java.awt.Color;
 import org.jetbrains.annotations.NotNull;
+import jetbrains.mps.internal.make.runtime.util.DeltaKey;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.editor.runtime.HeadlessEditorComponent;
 import javax.imageio.ImageIO;
@@ -34,11 +35,17 @@ public class PrintNodeRunnable implements Runnable {
   private String myImageFormat = "png";
   @NotNull
   private String myShortFileName;
+  private final DeltaKey myDeltakey;
 
-  public PrintNodeRunnable(SNodeReference nodeReference, SRepository repository, @NotNull String shortFileName) {
+  public PrintNodeRunnable(SNodeReference nodeReference, SRepository repository, @NotNull String shortFileName, DeltaKey dkey) {
     myNodeReference = nodeReference;
     myRepository = repository;
     myShortFileName = shortFileName;
+    myDeltakey = dkey;
+  }
+
+  public DeltaKey getDeltaKey() {
+    return myDeltakey;
   }
 
   public void setImageFormat(@NotNull String format) {
@@ -95,8 +102,9 @@ public class PrintNodeRunnable implements Runnable {
       return;
     }
 
-    HeadlessEditorComponent editorComponent = new HeadlessEditorComponent(node, myRepository);
+    HeadlessEditorComponent editorComponent = new HeadlessEditorComponent(myRepository);
     try {
+      editorComponent.editNode(node);
       try {
         myResult = new ByteArrayOutputStream();
         boolean successful = ImageIO.write(printCellToImage(editorComponent.getRootCell()), myImageFormat, myResult);

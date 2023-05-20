@@ -5,42 +5,28 @@ package jetbrains.mps.debugger.api.ui.breakpoints;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.components.StoragePathMacros;
+import jetbrains.mps.annotations.GeneratedClass;
 import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.ProjectComponent;
-import org.jetbrains.annotations.NotNull;
 import jetbrains.mps.ide.ui.tree.MPSTree;
 import jetbrains.mps.project.Project;
+import jetbrains.mps.ide.project.ProjectHelper;
 
 @State(name = "BreakpointViewSettings", storages = @Storage(value = StoragePathMacros.WORKSPACE_FILE)
-)
-public class BreakpointViewSettingsComponent implements PersistentStateComponent<BreakpointViewSettingsComponent.MyState>, ProjectComponent {
-  private BreakpointViewSettingsComponent.MyState myState = new BreakpointViewSettingsComponent.MyState();
+, reportStatistic = true)
+@GeneratedClass(node = "r:e8d15a56-f89d-47fc-ac9f-8a35d3539ac3(jetbrains.mps.debugger.api.ui.breakpoints)/4474271214083118632", model = "r:e8d15a56-f89d-47fc-ac9f-8a35d3539ac3(jetbrains.mps.debugger.api.ui.breakpoints)")
+public class BreakpointViewSettingsComponent implements PersistentStateComponent<BreakpointViewSettingsComponent.MyState> {
+  private MyState myState = new MyState();
+
   public BreakpointViewSettingsComponent() {
   }
+
   @Override
-  public BreakpointViewSettingsComponent.MyState getState() {
+  public MyState getState() {
     return myState;
   }
   @Override
-  public void loadState(BreakpointViewSettingsComponent.MyState state) {
+  public void loadState(MyState state) {
     myState = state;
-  }
-  @Override
-  public void projectOpened() {
-  }
-  @Override
-  public void projectClosed() {
-  }
-  @NotNull
-  @Override
-  public String getComponentName() {
-    return "Breakpoints Settings";
-  }
-  @Override
-  public void initComponent() {
-  }
-  @Override
-  public void disposeComponent() {
   }
   public int getViewIndex() {
     return myState.myViewIndex;
@@ -72,9 +58,11 @@ public class BreakpointViewSettingsComponent implements PersistentStateComponent
   public void setTreeState(MPSTree.TreeState treeState) {
     myState.myTreeState = treeState;
   }
+
   public static BreakpointViewSettingsComponent getInstance(Project project) {
-    return project.getComponent(BreakpointViewSettingsComponent.class);
+    return ProjectHelper.toIdeaProject(project).getService(BreakpointViewSettingsComponent.class);
   }
+
   public static class MyState {
     public int myViewIndex = 0;
     public boolean myGroupByModule = true;

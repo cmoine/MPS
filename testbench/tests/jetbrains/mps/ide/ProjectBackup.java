@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +15,9 @@
  */
 package jetbrains.mps.ide;
 
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.project.MPSProject;
 import jetbrains.mps.util.FileUtil;
-import org.apache.log4j.LogManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.TestOnly;
 
@@ -51,7 +51,7 @@ class ProjectBackup {
     com.intellij.openapi.util.io.FileUtil.processFilesRecursively(projectFile, file -> {
       boolean success = file.setLastModified(file.lastModified() + ONE_SECOND);
       if (!success) {
-        LogManager.getLogger(ProjectBackup.class).error("not possible to provide correct timestamps", new IllegalArgumentException());
+        Logger.getLogger(ProjectBackup.class).error("not possible to provide correct timestamps", new IllegalArgumentException());
       }
       return success;
     });

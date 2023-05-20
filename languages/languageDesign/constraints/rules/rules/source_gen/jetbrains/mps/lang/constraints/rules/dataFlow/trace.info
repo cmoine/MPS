@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <root>
+    <file name="DataFlowAspectDescriptorImpl.java">
+      <unit at="15,0,32,0" name="jetbrains.mps.lang.constraints.rules.dataFlow.DataFlowAspectDescriptorImpl" />
+    </file>
+  </root>
+  <root nodeRef="r:2bb57867-19f2-4c5d-8d57-0a94471a68e8(jetbrains.mps.lang.constraints.rules.dataFlow)/7386008336021461988">
+    <file name="PropertyNameTarget_DataFlow.java">
+      <node id="1227267382294" at="13,60,14,112" concept="0" />
+      <node id="7386008336021461988" at="18,0,19,0" concept="2" trace="propertySpec$wjsm" />
+      <node id="7386008336021461988" at="13,0,16,0" concept="1" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="7386008336021461990" at="13,60,14,112" />
+      <scope id="7386008336021461988" at="13,0,16,0">
+        <var name="_context" id="7386008336021461988" />
+      </scope>
+      <unit id="7386008336021461988" at="17,0,20,0" name="jetbrains.mps.lang.constraints.rules.dataFlow.PropertyNameTarget_DataFlow$LINKS" />
+      <unit id="7386008336021461988" at="12,0,21,0" name="jetbrains.mps.lang.constraints.rules.dataFlow.PropertyNameTarget_DataFlow" />
+    </file>
+  </root>
+  <root nodeRef="r:2bb57867-19f2-4c5d-8d57-0a94471a68e8(jetbrains.mps.lang.constraints.rules.dataFlow)/7386008336021469468">
+    <file name="ReferenceRoleTarget_DataFlow.java">
+      <node id="7386008336021469480" at="13,60,14,113" concept="0" />
+      <node id="7386008336021469468" at="18,0,19,0" concept="2" trace="referenceRole$bN08" />
+      <node id="7386008336021469468" at="13,0,16,0" concept="1" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="7386008336021469470" at="13,60,14,113" />
+      <scope id="7386008336021469468" at="13,0,16,0">
+        <var name="_context" id="7386008336021469468" />
+      </scope>
+      <unit id="7386008336021469468" at="17,0,20,0" name="jetbrains.mps.lang.constraints.rules.dataFlow.ReferenceRoleTarget_DataFlow$LINKS" />
+      <unit id="7386008336021469468" at="12,0,21,0" name="jetbrains.mps.lang.constraints.rules.dataFlow.ReferenceRoleTarget_DataFlow" />
+    </file>
+  </root>
+</debug-info>
+

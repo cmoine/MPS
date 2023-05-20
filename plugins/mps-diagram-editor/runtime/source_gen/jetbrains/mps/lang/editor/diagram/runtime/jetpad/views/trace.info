@@ -1,0 +1,935 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1160998861373:jetbrains.mps.baseLanguage.structure.AssertStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082113931046:jetbrains.mps.baseLanguage.structure.ContinueStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144226303539:jetbrains.mps.baseLanguage.structure.ForeachStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1163670490218:jetbrains.mps.baseLanguage.structure.SwitchStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1178893518978:jetbrains.mps.baseLanguage.structure.ThisConstructorInvocation" />
+  <root nodeRef="r:05147575-afa1-4d0f-b2e0-f20b32ad3e33(jetbrains.mps.lang.editor.diagram.runtime.jetpad.views)/1585775323792653989">
+    <file name="DragHandler.java">
+      <node id="1585775323792656938" at="8,0,9,0" concept="8" trace="dragStarted#(Ljetbrains/jetpad/geometry/Vector;)V" />
+      <node id="1585775323792667806" at="9,0,10,0" concept="8" trace="updatePosition#(Ljetbrains/jetpad/geometry/Vector;)V" />
+      <node id="1585775323792667900" at="10,0,11,0" concept="8" trace="dragStopped#(Ljetbrains/jetpad/geometry/Vector;)V" />
+      <scope id="1585775323792656938" at="8,0,9,0">
+        <var name="position" id="1585775323792667716" />
+      </scope>
+      <scope id="1585775323792667806" at="9,0,10,0">
+        <var name="position" id="1585775323792667810" />
+      </scope>
+      <scope id="1585775323792667900" at="10,0,11,0">
+        <var name="position" id="1585775323792667904" />
+      </scope>
+      <unit id="1585775323792653989" at="7,0,12,0" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.DragHandler" />
+    </file>
+  </root>
+  <root nodeRef="r:05147575-afa1-4d0f-b2e0-f20b32ad3e33(jetbrains.mps.lang.editor.diagram.runtime.jetpad.views)/1897569136979705831">
+    <file name="AbstractExternalFrameView.java">
+      <node id="1897569136979718735" at="16,0,17,0" concept="5" trace="internalsBounds" />
+      <node id="1897569136979718727" at="17,0,18,0" concept="5" trace="frameWidth" />
+      <node id="1897569136979957188" at="19,0,20,0" concept="5" trace="frameRectangle" />
+      <node id="1897569136980678192" at="24,93,25,51" concept="4" />
+      <node id="1897569136980745610" at="25,51,26,134" concept="4" />
+      <node id="1897569136980735229" at="26,134,27,139" concept="4" />
+      <node id="1897569136979928508" at="31,71,32,172" concept="4" />
+      <node id="1897569136981301274" at="35,52,36,37" concept="10" />
+      <node id="1897569136987303411" at="40,52,41,26" concept="10" />
+      <node id="1897569136979928498" at="31,0,34,0" concept="8" trace="updateFrameRectangle#(Ljetbrains/jetpad/geometry/Rectangle;I)V" />
+      <node id="1897569136981218273" at="35,0,38,0" concept="14" trace="getHalfWidth#(I)I" />
+      <node id="1897569136987288053" at="40,0,43,0" concept="8" trace="getBaseList#()Ljetbrains/jetpad/model/collections/list/ObservableList;" />
+      <node id="1897569136987268482" at="38,49,43,6" concept="10" />
+      <node id="1897569136980678179" at="23,0,29,0" concept="8" trace="registerSynchronizers#(Ljetbrains/jetpad/mapper/Mapper/SynchronizersConfiguration;)V" />
+      <node id="1897569136987268480" at="38,0,45,0" concept="8" trace="childSubList#()Ljetbrains/jetpad/model/collections/list/ObservableList;" />
+      <node id="1897569136980662354" at="21,38,29,19" concept="4" />
+      <node id="1897569136979719538" at="21,0,31,0" concept="2" trace="AbstractExternalFrameView#()V" />
+      <scope id="1897569136979928499" at="31,71,32,172" />
+      <scope id="1897569136981218276" at="35,52,36,37" />
+      <scope id="1897569136987288058" at="40,52,41,26" />
+      <scope id="1897569136980678188" at="24,93,27,139" />
+      <scope id="1897569136979928498" at="31,0,34,0">
+        <var name="bounds" id="1897569136979928548" />
+        <var name="frameWidth" id="1897569136979928550" />
+      </scope>
+      <scope id="1897569136981218273" at="35,0,38,0">
+        <var name="lineWidth" id="1897569136981299190" />
+      </scope>
+      <scope id="1897569136987288053" at="40,0,43,0" />
+      <scope id="1897569136987268481" at="38,49,43,6" />
+      <scope id="1897569136980678179" at="23,0,29,0">
+        <var name="configuration" id="1897569136980678183" />
+      </scope>
+      <scope id="1897569136987268480" at="38,0,45,0" />
+      <scope id="1897569136979719542" at="21,38,29,19" />
+      <scope id="1897569136979719538" at="21,0,31,0" />
+      <unit id="1897569136987288051" at="39,15,43,5" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.AbstractExternalFrameView$2" />
+      <unit id="1897569136980667714" at="22,8,29,5" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.AbstractExternalFrameView$1" />
+      <unit id="1897569136979705831" at="15,0,46,0" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.AbstractExternalFrameView" />
+    </file>
+  </root>
+  <root nodeRef="r:05147575-afa1-4d0f-b2e0-f20b32ad3e33(jetbrains.mps.lang.editor.diagram.runtime.jetpad.views)/1897569136986818246">
+    <file name="ResizableSelectionFrameView.java">
+      <node id="1897569136988493370" at="19,0,20,0" concept="5" trace="resizable" />
+      <node id="1897569136990390074" at="20,0,21,0" concept="5" trace="showSideHandler" />
+      <node id="1897569136990052311" at="21,0,22,0" concept="5" trace="selectionLineWidth" />
+      <node id="1897569136994585292" at="22,0,23,0" concept="5" trace="color" />
+      <node id="1897569136994677485" at="23,0,24,0" concept="5" trace="backgroundColor" />
+      <node id="1585775323793836495" at="24,0,25,0" concept="5" trace="boundsDelta" />
+      <node id="1897569136988749785" at="26,0,27,0" concept="5" trace="myCornerResizeHandlePositions" />
+      <node id="1897569136990748031" at="27,0,28,0" concept="5" trace="mySideResizeHandlePositions" />
+      <node id="1897569136986861119" at="32,93,33,51" concept="4" />
+      <node id="4046741574151796389" at="33,51,34,41" concept="11" />
+      <node id="1897569136988651893" at="34,41,35,144" concept="4" />
+      <node id="1897569136988706229" at="35,144,36,149" concept="4" />
+      <node id="4046741574151871400" at="36,149,37,39" concept="11" />
+      <node id="1897569136991171576" at="37,39,38,165" concept="4" />
+      <node id="1897569136990824539" at="38,165,39,171" concept="4" />
+      <node id="1897569136991029396" at="39,171,40,170" concept="4" />
+      <node id="4046741574152553494" at="40,170,41,0" concept="12" />
+      <node id="1897569136987499314" at="46,101,47,59" concept="4" />
+      <node id="1897569136993846774" at="47,59,48,87" concept="4" />
+      <node id="1897569136988261653" at="48,87,49,97" concept="4" />
+      <node id="1897569136987503189" at="49,97,50,107" concept="4" />
+      <node id="1897569136990081572" at="50,107,51,104" concept="4" />
+      <node id="4046741574152680622" at="55,12,56,0" concept="12" />
+      <node id="4046741574152039677" at="56,0,57,32" concept="11" />
+      <node id="4046741574155743360" at="59,101,60,72" concept="9" />
+      <node id="4046741574155550187" at="62,21,63,125" concept="10" />
+      <node id="4046741574155947535" at="64,21,65,126" concept="10" />
+      <node id="4046741574155948452" at="66,21,67,127" concept="10" />
+      <node id="4046741574155949298" at="68,21,69,126" concept="10" />
+      <node id="4046741574155875572" at="70,22,71,60" concept="0" />
+      <node id="4046741574155964324" at="72,13,73,24" concept="10" />
+      <node id="4046741574152165998" at="75,12,76,30" concept="11" />
+      <node id="4046741574156064627" at="78,101,79,70" concept="9" />
+      <node id="4046741574156064637" at="81,21,82,91" concept="10" />
+      <node id="4046741574156064652" at="83,21,84,91" concept="10" />
+      <node id="4046741574156064668" at="85,21,86,92" concept="10" />
+      <node id="4046741574156064683" at="87,21,88,90" concept="10" />
+      <node id="4046741574156064697" at="89,22,90,60" concept="0" />
+      <node id="4046741574156064702" at="91,13,92,24" concept="10" />
+      <node id="1897569136988939270" at="99,23,100,44" concept="4" />
+      <node id="1897569136988952590" at="100,44,101,13" concept="10" />
+      <node id="1897569136988992227" at="102,5,103,81" concept="9" />
+      <node id="1897569136989014300" at="105,31,106,38" concept="9" />
+      <node id="1897569136989037673" at="107,37,108,19" concept="3" />
+      <node id="1897569136989018752" at="109,9,110,26" concept="4" />
+      <node id="1897569136989034298" at="111,7,112,30" concept="4" />
+      <node id="1897569136991216317" at="116,37,117,42" concept="4" />
+      <node id="1897569136991225355" at="117,42,118,13" concept="10" />
+      <node id="1897569136991374512" at="121,75,122,44" concept="4" />
+      <node id="1897569136991386727" at="122,44,123,15" concept="10" />
+      <node id="1897569136991262177" at="125,5,126,0" concept="12" />
+      <node id="1897569136991230919" at="126,0,127,79" concept="9" />
+      <node id="1897569136991746086" at="128,62,129,94" concept="9" />
+      <node id="1897569136991230930" at="130,31,131,38" concept="9" />
+      <node id="1897569136991230938" at="132,37,133,19" concept="3" />
+      <node id="1897569136991230943" at="134,9,135,26" concept="4" />
+      <node id="1897569136991230950" at="136,7,137,30" concept="4" />
+      <node id="4046741574155640016" at="141,0,142,0" concept="5" trace="myDragHandler" />
+      <node id="4046741574155381715" at="142,78,143,54" concept="15" />
+      <node id="4046741574155680536" at="143,54,144,54" concept="4" />
+      <node id="4046741574155382290" at="147,91,148,49" concept="4" />
+      <node id="4046741574155383511" at="148,49,149,77" concept="4" />
+      <node id="4046741574155383520" at="149,77,150,97" concept="4" />
+      <node id="4046741574155424914" at="150,97,151,91" concept="4" />
+      <node id="1585775323802209578" at="154,0,155,0" concept="5" trace="myOriginalBounds" />
+      <node id="3873095776498352128" at="155,0,156,0" concept="5" trace="myDragStartposition" />
+      <node id="4046741574154405660" at="156,0,157,0" concept="5" trace="myUpdaters" />
+      <node id="4046741574154441507" at="158,61,159,30" concept="4" />
+      <node id="1585775323802216477" at="161,48,162,49" concept="4" />
+      <node id="3873095776498362541" at="162,49,163,39" concept="4" />
+      <node id="1585775323793390716" at="163,39,164,33" concept="4" />
+      <node id="4046741574153279349" at="166,51,167,44" concept="9" />
+      <node id="3873095776498382074" at="167,44,168,61" concept="9" />
+      <node id="4046741574154566331" at="169,53,170,57" concept="4" />
+      <node id="4046741574154574879" at="171,9,172,36" concept="4" />
+      <node id="1585775323802242116" at="174,48,175,54" concept="9" />
+      <node id="1585775323802257950" at="175,54,176,77" concept="9" />
+      <node id="1585775323802264549" at="176,77,177,86" concept="9" />
+      <node id="1585775323794261262" at="177,86,178,68" concept="4" />
+      <node id="1585775323802228039" at="178,68,179,32" concept="4" />
+      <node id="3873095776498368594" at="179,32,180,35" concept="4" />
+      <node id="4046741574154091421" at="185,0,186,0" concept="5" trace="myOrigin" />
+      <node id="4046741574154091498" at="186,0,187,0" concept="5" trace="myX" />
+      <node id="4046741574154094507" at="188,57,189,24" concept="4" />
+      <node id="4046741574154095283" at="189,24,190,14" concept="4" />
+      <node id="4046741574154102184" at="192,72,193,39" concept="9" />
+      <node id="4046741574154103512" at="193,39,194,45" concept="9" />
+      <node id="3873095776498441446" at="194,45,195,67" concept="9" />
+      <node id="3873095776498405256" at="196,21,197,44" concept="4" />
+      <node id="3873095776498414827" at="197,44,198,59" concept="4" />
+      <node id="3873095776498426820" at="199,14,200,50" concept="4" />
+      <node id="4046741574154206089" at="201,7,202,46" concept="10" />
+      <node id="4046741574154140244" at="204,64,205,87" concept="10" />
+      <node id="4046741574154194640" at="199,12,201,7" concept="1" />
+      <node id="1897569136989014529" at="106,38,109,9" concept="7" />
+      <node id="1897569136991230936" at="131,38,134,9" concept="7" />
+      <node id="4046741574153252800" at="158,0,161,0" concept="2" trace="DragHandlerImpl#(null)V" />
+      <node id="4046741574154558324" at="168,61,171,9" concept="6" />
+      <node id="4046741574154108568" at="204,0,207,0" concept="8" trace="updateVector#(Ljetbrains/jetpad/geometry/Vector;Ljetbrains/jetpad/geometry/Vector;)Ljetbrains/jetpad/geometry/Vector;" />
+      <node id="1897569136988933806" at="98,90,102,5" concept="7" />
+      <node id="1897569136991072919" at="115,105,119,5" concept="7" />
+      <node id="1897569136991293622" at="120,62,124,7" concept="7" />
+      <node id="4046741574155377938" at="142,0,146,0" concept="2" trace="ResizeHandleMapper#(Ljetbrains/jetpad/geometry/Vector;null)V" />
+      <node id="4046741574154088137" at="188,0,192,0" concept="2" trace="RectangleUpdater#(ZZ)V" />
+      <node id="1585775323792995351" at="161,0,166,0" concept="8" trace="dragStarted#(Ljetbrains/jetpad/geometry/Vector;)V" />
+      <node id="1897569136991264897" at="119,5,125,5" concept="6" />
+      <node id="4046741574154194373" at="195,67,201,7" concept="7" />
+      <node id="1897569136989011363" at="104,57,111,7" concept="7" />
+      <node id="1897569136991230928" at="129,94,136,7" concept="7" />
+      <node id="4046741574155382280" at="146,0,153,0" concept="8" trace="registerSynchronizers#(Ljetbrains/jetpad/mapper/Mapper/SynchronizersConfiguration;)V" />
+      <node id="1897569136987499301" at="45,0,53,0" concept="8" trace="registerSynchronizers#(Ljetbrains/jetpad/mapper/Mapper/SynchronizersConfiguration;)V" />
+      <node id="1585775323792995358" at="166,0,174,0" concept="8" trace="updatePosition#(Ljetbrains/jetpad/geometry/Vector;)V" />
+      <node id="1585775323792995365" at="174,0,182,0" concept="8" trace="dragStopped#(Ljetbrains/jetpad/geometry/Vector;)V" />
+      <node id="1897569136987117364" at="43,150,53,14" concept="10" />
+      <node id="1897569136988999221" at="103,81,113,5" concept="6" />
+      <node id="1897569136991230926" at="127,79,138,5" concept="6" />
+      <node id="1897569136987093616" at="43,0,55,0" concept="8" trace="createMapper#(Ljetbrains/mps/lang/editor/diagram/runtime/jetpad/views/ResizableSelectionFrameView;)Ljetbrains/jetpad/mapper/Mapper;" />
+      <node id="4046741574155840293" at="60,72,72,13" concept="16" />
+      <node id="4046741574156064634" at="79,70,91,13" concept="16" />
+      <node id="4046741574154081370" at="192,0,204,0" concept="8" trace="updateRect#(Ljetbrains/jetpad/geometry/Rectangle;Ljetbrains/jetpad/geometry/Vector;)Ljetbrains/jetpad/geometry/Rectangle;" />
+      <node id="1897569136987080063" at="41,0,55,12" concept="4" />
+      <node id="1897569136989235707" at="59,0,75,0" concept="8" trace="createMapper#(Ljetbrains/jetpad/geometry/Vector;)Ljetbrains/jetpad/mapper/Mapper;" />
+      <node id="1897569136991625576" at="78,0,94,0" concept="8" trace="createMapper#(Ljetbrains/jetpad/geometry/Vector;)Ljetbrains/jetpad/mapper/Mapper;" />
+      <node id="1897569136988866659" at="98,0,115,0" concept="8" trace="updateCornerResizeHandlePositions#(ZLjetbrains/jetpad/geometry/Rectangle;)V" />
+      <node id="1897569136989191667" at="57,32,75,12" concept="4" />
+      <node id="1897569136991570850" at="76,30,94,12" concept="4" />
+      <node id="1897569136990921889" at="115,0,140,0" concept="8" trace="updateSideResizeHandlePositions#(ZZLjetbrains/jetpad/geometry/Rectangle;)V" />
+      <node id="1897569136986861106" at="31,0,96,0" concept="8" trace="registerSynchronizers#(Ljetbrains/jetpad/mapper/Mapper/SynchronizersConfiguration;)V" />
+      <node id="1897569136986852980" at="29,40,96,19" concept="4" />
+      <node id="1897569136986834770" at="29,0,98,0" concept="2" trace="ResizableSelectionFrameView#()V" />
+      <scope id="4046741574155851639" at="62,21,63,125" />
+      <scope id="4046741574155857828" at="64,21,65,126" />
+      <scope id="4046741574155863864" at="66,21,67,127" />
+      <scope id="4046741574155869677" at="68,21,69,126" />
+      <scope id="4046741574155840297" at="70,22,71,60" />
+      <scope id="4046741574156064636" at="81,21,82,91" />
+      <scope id="4046741574156064651" at="83,21,84,91" />
+      <scope id="4046741574156064667" at="85,21,86,92" />
+      <scope id="4046741574156064682" at="87,21,88,90" />
+      <scope id="4046741574156064696" at="89,22,90,60" />
+      <scope id="1897569136989014532" at="107,37,108,19" />
+      <scope id="1897569136991230937" at="132,37,133,19" />
+      <scope id="4046741574153252804" at="158,61,159,30" />
+      <scope id="4046741574154558327" at="169,53,170,57" />
+      <scope id="4046741574154194641" at="199,14,200,50" />
+      <scope id="4046741574154108571" at="204,64,205,87" />
+      <scope id="1897569136988933807" at="99,23,101,13" />
+      <scope id="1897569136991072920" at="116,37,118,13" />
+      <scope id="1897569136991293623" at="121,75,123,15" />
+      <scope id="4046741574155377942" at="142,78,144,54" />
+      <scope id="4046741574154088141" at="188,57,190,14" />
+      <scope id="4046741574154194376" at="196,21,198,59" />
+      <scope id="4046741574153252800" at="158,0,161,0">
+        <var name="updaters" id="4046741574154237414" />
+      </scope>
+      <scope id="1585775323792995357" at="161,48,164,33" />
+      <scope id="4046741574154558324" at="168,61,171,9">
+        <var name="updater" id="4046741574154558330" />
+      </scope>
+      <scope id="4046741574154108568" at="204,0,207,0">
+        <var name="newValue" id="4046741574154110729" />
+        <var name="value" id="4046741574154109792" />
+      </scope>
+      <scope id="1897569136991264900" at="120,62,124,7" />
+      <scope id="4046741574155377938" at="142,0,146,0">
+        <var name="position" id="4046741574155380994" />
+        <var name="updater" id="4046741574155449428" />
+      </scope>
+      <scope id="4046741574155382286" at="147,91,151,91" />
+      <scope id="4046741574154088137" at="188,0,192,0">
+        <var name="origin" id="4046741574154088166" />
+        <var name="x" id="4046741574154088274" />
+      </scope>
+      <scope id="1897569136987499310" at="46,101,51,104" />
+      <scope id="1897569136989011364" at="105,31,110,26">
+        <var name="next" id="1897569136989014301" />
+      </scope>
+      <scope id="1897569136991230929" at="130,31,135,26">
+        <var name="next" id="1897569136991230931" />
+      </scope>
+      <scope id="1585775323792995351" at="161,0,166,0">
+        <var name="position" id="1585775323792995355" />
+      </scope>
+      <scope id="1897569136991264897" at="119,5,125,5">
+        <var name="nextSegment" id="1897569136991264903" />
+      </scope>
+      <scope id="1585775323792995364" at="166,51,172,36">
+        <var name="bounds" id="4046741574153279350" />
+        <var name="dragDelta" id="3873095776498382075" />
+      </scope>
+      <scope id="1585775323792995371" at="174,48,180,35">
+        <var name="dimensionDelta" id="1585775323802264550" />
+        <var name="finalBounds" id="1585775323802242117" />
+        <var name="originDelta" id="1585775323802257951" />
+      </scope>
+      <scope id="4046741574155382280" at="146,0,153,0">
+        <var name="configuration" id="4046741574155382284" />
+      </scope>
+      <scope id="1897569136987499301" at="45,0,53,0">
+        <var name="configuration" id="1897569136987499305" />
+      </scope>
+      <scope id="1897569136988999224" at="104,57,112,30" />
+      <scope id="1585775323792995358" at="166,0,174,0">
+        <var name="position" id="1585775323792995362" />
+      </scope>
+      <scope id="1585775323792995365" at="174,0,182,0">
+        <var name="position" id="1585775323792995369" />
+      </scope>
+      <scope id="1897569136991230927" at="128,62,137,30">
+        <var name="nextPoint" id="1897569136991746087" />
+      </scope>
+      <scope id="1897569136987093626" at="43,150,53,14" />
+      <scope id="1897569136988999221" at="103,81,113,5">
+        <var name="nextPoint" id="1897569136988999227" />
+      </scope>
+      <scope id="4046741574154081374" at="192,72,202,46">
+        <var name="dimension" id="4046741574154103513" />
+        <var name="effectiveDelta" id="3873095776498441447" />
+        <var name="origin" id="4046741574154102185" />
+      </scope>
+      <scope id="1897569136991230926" at="127,79,138,5">
+        <var name="nextSegment" id="1897569136991230955" />
+      </scope>
+      <scope id="1897569136987093616" at="43,0,55,0">
+        <var name="decoratorView" id="1897569136987093624" />
+      </scope>
+      <scope id="4046741574154081370" at="192,0,204,0">
+        <var name="moveDelta" id="4046741574154087410" />
+        <var name="rectangle" id="4046741574154098809" />
+      </scope>
+      <scope id="1897569136989235717" at="59,101,73,24">
+        <var name="index" id="4046741574155743361" />
+      </scope>
+      <scope id="1897569136991625586" at="78,101,92,24">
+        <var name="index" id="4046741574156064628" />
+      </scope>
+      <scope id="1897569136988866662" at="98,90,113,5">
+        <var name="iterator" id="1897569136988992228" />
+      </scope>
+      <scope id="1897569136989235707" at="59,0,75,0">
+        <var name="position" id="1897569136989235715" />
+      </scope>
+      <scope id="1897569136991625576" at="78,0,94,0">
+        <var name="position" id="1897569136991625584" />
+      </scope>
+      <scope id="1897569136988866659" at="98,0,115,0">
+        <var name="rectangle" id="1897569136988890067" />
+        <var name="resizable" id="1897569136988879586" />
+      </scope>
+      <scope id="1897569136990921892" at="115,105,138,5">
+        <var name="iterator" id="1897569136991230920" />
+      </scope>
+      <scope id="1897569136990921889" at="115,0,140,0">
+        <var name="rectangle" id="1897569136990960948" />
+        <var name="resizable" id="1897569136991093239" />
+        <var name="visible" id="1897569136990942685" />
+      </scope>
+      <scope id="1897569136986861115" at="32,93,94,12" />
+      <scope id="1897569136986861106" at="31,0,96,0">
+        <var name="configuration" id="1897569136986861110" />
+      </scope>
+      <scope id="1897569136986834774" at="29,40,96,19" />
+      <scope id="1897569136986834770" at="29,0,98,0" />
+      <unit id="1897569136987122072" at="44,23,53,13" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.ResizableSelectionFrameView$1$1$1" />
+      <unit id="1897569136987093614" at="42,116,55,9" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.ResizableSelectionFrameView$1$1" />
+      <unit id="1897569136989235705" at="58,115,75,9" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.ResizableSelectionFrameView$1$2" />
+      <unit id="1897569136991625574" at="77,113,94,9" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.ResizableSelectionFrameView$1$3" />
+      <unit id="4046741574154039079" at="184,0,208,0" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.ResizableSelectionFrameView$RectangleUpdater" />
+      <unit id="4046741574153209148" at="153,0,183,0" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.ResizableSelectionFrameView$ResizeHandleMapper$DragHandlerImpl" />
+      <unit id="4046741574155336268" at="140,0,184,0" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.ResizableSelectionFrameView$ResizeHandleMapper" />
+      <unit id="1897569136986853762" at="30,8,96,5" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.ResizableSelectionFrameView$1" />
+      <unit id="1897569136986818246" at="18,0,209,0" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.ResizableSelectionFrameView" />
+    </file>
+  </root>
+  <root nodeRef="r:05147575-afa1-4d0f-b2e0-f20b32ad3e33(jetbrains.mps.lang.editor.diagram.runtime.jetpad.views)/3129755042157254705">
+    <file name="ResizeHandleView.java">
+      <node id="1897569136990671567" at="21,0,22,0" concept="13" trace="DEFAULT_HALF_WIDTH" />
+      <node id="3129755042157339350" at="23,0,24,0" concept="5" trace="color" />
+      <node id="3129755042157339458" at="24,0,25,0" concept="5" trace="backgroundColor" />
+      <node id="3129755042157641822" at="25,0,26,0" concept="5" trace="halfWidth" />
+      <node id="3129755042157677108" at="26,0,27,0" concept="5" trace="centerLocation" />
+      <node id="4046741574139764989" at="27,0,28,0" concept="5" trace="dragHandler" />
+      <node id="3129755042157914124" at="32,93,33,51" concept="4" />
+      <node id="3129755042157916374" at="33,51,34,69" concept="4" />
+      <node id="3129755042157952973" at="34,69,35,84" concept="4" />
+      <node id="3129755042157985256" at="35,84,36,125" concept="4" />
+      <node id="3129755042158034737" at="36,125,37,130" concept="4" />
+      <node id="4046741574139941195" at="39,0,40,0" concept="5" trace="myRegistration" />
+      <node id="4046741574139969900" at="41,41,42,38" concept="4" />
+      <node id="4046741574139991620" at="44,34,45,66" concept="4" />
+      <node id="4046741574133688769" at="52,44,53,11" concept="17" />
+      <node id="3129755042160882473" at="53,11,54,33" concept="4" />
+      <node id="4046741574133178003" at="57,45,58,37" concept="10" />
+      <node id="1585775323792772118" at="61,97,62,54" concept="4" />
+      <node id="4046741574135590394" at="62,54,63,22" concept="4" />
+      <node id="3129755042158228284" at="66,63,67,19" concept="4" />
+      <node id="3129755042158243900" at="67,19,68,75" concept="4" />
+      <node id="3129755042158281361" at="68,75,69,75" concept="4" />
+      <node id="3129755042158287671" at="69,75,70,75" concept="4" />
+      <node id="3129755042158294579" at="70,75,71,75" concept="4" />
+      <node id="3129755042158301781" at="71,75,72,75" concept="4" />
+      <node id="4046741574139969259" at="40,48,43,13" concept="7" />
+      <node id="4046741574139871969" at="43,13,46,13" concept="7" />
+      <node id="4046741574133670627" at="52,0,56,0" concept="2" trace="ResizeHandleView#(Ljetbrains/jetpad/geometry/Vector;)V" />
+      <node id="4046741574133156309" at="56,0,60,0" concept="8" trace="contains#(Ljetbrains/jetpad/geometry/Vector;)Z" />
+      <node id="4046741574137099967" at="60,46,64,241" concept="10" />
+      <node id="4046741574136869239" at="60,0,66,0" concept="8" trace="getResizeHandlingTrait#()Ljetbrains/jetpad/projectional/view/ViewTrait;" />
+      <node id="4046741574139863125" at="40,0,48,0" concept="8" trace="set#(Ljetbrains/mps/lang/editor/diagram/runtime/jetpad/views/DragHandler;)V" />
+      <node id="3129755042158017332" at="66,0,74,0" concept="8" trace="updateLocation#(Ljetbrains/jetpad/geometry/Vector;I)V" />
+      <node id="4046741574139795420" at="37,130,48,12" concept="4" />
+      <node id="3129755042157914111" at="31,0,50,0" concept="8" trace="registerSynchronizers#(Ljetbrains/jetpad/mapper/Mapper/SynchronizersConfiguration;)V" />
+      <node id="3129755042157902002" at="29,30,50,19" concept="4" />
+      <node id="3129755042157686807" at="29,0,52,0" concept="2" trace="ResizeHandleView#()V" />
+      <scope id="4046741574139969262" at="41,41,42,38" />
+      <scope id="4046741574139871970" at="44,34,45,66" />
+      <scope id="4046741574133156318" at="57,45,58,37" />
+      <scope id="4046741574133670631" at="52,44,54,33" />
+      <scope id="4046741574135373620" at="61,97,63,22" />
+      <scope id="4046741574133670627" at="52,0,56,0">
+        <var name="location" id="4046741574133788843" />
+      </scope>
+      <scope id="4046741574133156309" at="56,0,60,0">
+        <var name="vector" id="4046741574133156312" />
+      </scope>
+      <scope id="4046741574136869242" at="60,46,64,241" />
+      <scope id="4046741574139863131" at="40,48,46,13" />
+      <scope id="4046741574136869239" at="60,0,66,0" />
+      <scope id="3129755042158017335" at="66,63,72,75" />
+      <scope id="4046741574139863125" at="40,0,48,0">
+        <var name="handler" id="4046741574139863129" />
+      </scope>
+      <scope id="3129755042158017332" at="66,0,74,0">
+        <var name="halfWidth" id="3129755042158168282" />
+        <var name="location" id="3129755042158137826" />
+      </scope>
+      <scope id="3129755042157914120" at="32,93,48,12" />
+      <scope id="3129755042157914111" at="31,0,50,0">
+        <var name="configuration" id="3129755042157914115" />
+      </scope>
+      <scope id="3129755042157686811" at="29,30,50,19" />
+      <scope id="3129755042157686807" at="29,0,52,0" />
+      <unit id="4046741574139863123" at="38,69,48,9" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.ResizeHandleView$1$1" />
+      <unit id="3129755042157908640" at="30,8,50,5" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.ResizeHandleView$1" />
+      <unit id="3129755042157254705" at="20,0,75,0" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.ResizeHandleView" />
+    </file>
+  </root>
+  <root nodeRef="r:05147575-afa1-4d0f-b2e0-f20b32ad3e33(jetbrains.mps.lang.editor.diagram.runtime.jetpad.views)/3129755042161427386">
+    <file name="SelectionFrameView.java">
+      <node id="3129755042161593791" at="17,0,18,0" concept="5" trace="color" />
+      <node id="1897569136980244283" at="18,0,19,0" concept="5" trace="lineWidth" />
+      <node id="1897569136982575305" at="23,93,24,51" concept="4" />
+      <node id="1897569136981876407" at="29,101,30,59" concept="4" />
+      <node id="1897569136981984613" at="30,59,31,89" concept="4" />
+      <node id="3129755042162984906" at="31,89,32,95" concept="4" />
+      <node id="1897569136979324634" at="32,95,33,136" concept="4" />
+      <node id="1897569136988108372" at="41,39,42,25" concept="4" />
+      <node id="1897569136988114754" at="42,25,43,66" concept="4" />
+      <node id="3129755042161914571" at="45,79,46,40" concept="9" />
+      <node id="3129755042161915896" at="46,40,47,60" concept="9" />
+      <node id="3129755042162184797" at="47,60,48,0" concept="12" />
+      <node id="3129755042162188367" at="48,0,49,28" concept="4" />
+      <node id="3129755042162204167" at="49,28,50,58" concept="4" />
+      <node id="3129755042162238546" at="50,58,51,62" concept="4" />
+      <node id="3129755042162246453" at="51,62,52,66" concept="4" />
+      <node id="3129755042162251952" at="52,66,53,62" concept="4" />
+      <node id="3129755042162252238" at="53,62,54,58" concept="4" />
+      <node id="1897569136988030660" at="41,0,45,0" concept="8" trace="setLineWidth#(I)V" />
+      <node id="1897569136981876394" at="28,0,35,0" concept="8" trace="registerSynchronizers#(Ljetbrains/jetpad/mapper/Mapper/SynchronizersConfiguration;)V" />
+      <node id="1897569136981869530" at="26,118,35,14" concept="10" />
+      <node id="1897569136981852803" at="26,0,37,0" concept="8" trace="createMapper#(Ljetbrains/mps/lang/editor/diagram/runtime/jetpad/views/SelectionFrameView;)Ljetbrains/jetpad/mapper/Mapper;" />
+      <node id="3129755042161637419" at="45,0,56,0" concept="8" trace="updateBorderView#(Ljetbrains/jetpad/projectional/view/PolyLineView;Ljetbrains/jetpad/geometry/Rectangle;)V" />
+      <node id="1897569136981818387" at="24,51,37,12" concept="4" />
+      <node id="1897569136982575292" at="22,0,39,0" concept="8" trace="registerSynchronizers#(Ljetbrains/jetpad/mapper/Mapper/SynchronizersConfiguration;)V" />
+      <node id="1897569136982558328" at="20,31,39,19" concept="4" />
+      <node id="1897569136982543647" at="20,0,41,0" concept="2" trace="SelectionFrameView#()V" />
+      <scope id="1897569136988030663" at="41,39,43,66" />
+      <scope id="1897569136981876403" at="29,101,33,136" />
+      <scope id="1897569136988030660" at="41,0,45,0">
+        <var name="width" id="1897569136988041266" />
+      </scope>
+      <scope id="1897569136981876394" at="28,0,35,0">
+        <var name="configuration" id="1897569136981876398" />
+      </scope>
+      <scope id="1897569136981852813" at="26,118,35,14" />
+      <scope id="3129755042161637422" at="45,79,54,58">
+        <var name="bottomRight" id="3129755042161915897" />
+        <var name="topLeft" id="3129755042161914572" />
+      </scope>
+      <scope id="1897569136981852803" at="26,0,37,0">
+        <var name="selectionView" id="1897569136981852811" />
+      </scope>
+      <scope id="3129755042161637419" at="45,0,56,0">
+        <var name="frameBounds" id="3129755042161717785" />
+        <var name="polyLine" id="1897569136982130022" />
+      </scope>
+      <scope id="1897569136982575301" at="23,93,37,12" />
+      <scope id="1897569136982575292" at="22,0,39,0">
+        <var name="configuration" id="1897569136982575296" />
+      </scope>
+      <scope id="1897569136982543651" at="20,31,39,19" />
+      <scope id="1897569136982543647" at="20,0,41,0" />
+      <unit id="1897569136981873677" at="27,23,35,13" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.SelectionFrameView$1$1$1" />
+      <unit id="1897569136981852801" at="25,103,37,9" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.SelectionFrameView$1$1" />
+      <unit id="1897569136982559118" at="21,8,39,5" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.SelectionFrameView$1" />
+      <unit id="3129755042161427386" at="16,0,57,0" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.SelectionFrameView" />
+    </file>
+  </root>
+  <root nodeRef="r:05147575-afa1-4d0f-b2e0-f20b32ad3e33(jetbrains.mps.lang.editor.diagram.runtime.jetpad.views)/4287318874984049021">
+    <file name="AbstractDecoratorView.java">
+      <node id="4287318874984049022" at="16,0,17,0" concept="13" trace="SELECTION_SQUARE_HALF_WIDTH" />
+      <node id="4287318874984049032" at="17,0,18,0" concept="5" trace="hasError" />
+      <node id="4287318874984049040" at="18,0,19,0" concept="5" trace="isSelected" />
+      <node id="1897569136983425187" at="20,0,21,0" concept="5" trace="errorDecorator" />
+      <node id="1897569136983448964" at="21,0,22,0" concept="5" trace="selectionDecorator" />
+      <node id="1897569136995147478" at="22,0,23,0" concept="5" trace="myDecoratorsContainer" />
+      <node id="1897569136995169023" at="23,34,24,42" concept="4" />
+      <node id="1897569136983394234" at="27,93,28,51" concept="4" />
+      <node id="1897569136983597407" at="30,31,31,49" concept="4" />
+      <node id="1897569136983627585" at="32,18,33,41" concept="4" />
+      <node id="1897569136983657249" at="37,33,38,53" concept="4" />
+      <node id="1897569136983657259" at="39,18,40,45" concept="4" />
+      <node id="1897569136987346133" at="48,52,49,48" concept="10" />
+      <node id="1897569136983595510" at="32,16,34,11" concept="1" />
+      <node id="1897569136983657257" at="39,16,41,11" concept="1" />
+      <node id="1897569136987329551" at="48,0,51,0" concept="8" trace="getBaseList#()Ljetbrains/jetpad/model/collections/list/ObservableList;" />
+      <node id="1897569136983584818" at="29,69,34,11" concept="7" />
+      <node id="1897569136983657247" at="36,71,41,11" concept="7" />
+      <node id="1897569136985870749" at="46,49,51,6" concept="10" />
+      <node id="1897569136983577251" at="28,51,35,12" concept="4" />
+      <node id="1897569136983657239" at="35,12,42,12" concept="4" />
+      <node id="1897569136985861837" at="46,0,53,0" concept="8" trace="childSubList#()Ljetbrains/jetpad/model/collections/list/ObservableList;" />
+      <node id="1897569136983394221" at="26,0,44,0" concept="8" trace="registerSynchronizers#(Ljetbrains/jetpad/mapper/Mapper/SynchronizersConfiguration;)V" />
+      <node id="1897569136983383562" at="24,42,44,19" concept="4" />
+      <node id="4287318874984049049" at="23,0,46,0" concept="2" trace="AbstractDecoratorView#()V" />
+      <scope id="1897569136983584819" at="30,31,31,49" />
+      <scope id="1897569136983595511" at="32,18,33,41" />
+      <scope id="1897569136983657248" at="37,33,38,53" />
+      <scope id="1897569136983657258" at="39,18,40,45" />
+      <scope id="1897569136987329556" at="48,52,49,48" />
+      <scope id="1897569136987329551" at="48,0,51,0" />
+      <scope id="1897569136983580919" at="29,69,34,11" />
+      <scope id="1897569136983657246" at="36,71,41,11" />
+      <scope id="1897569136985861840" at="46,49,51,6" />
+      <scope id="1897569136985861837" at="46,0,53,0" />
+      <scope id="1897569136983394230" at="27,93,42,12" />
+      <scope id="1897569136983394221" at="26,0,44,0">
+        <var name="configuration" id="1897569136983394225" />
+      </scope>
+      <scope id="4287318874984049052" at="23,34,44,19" />
+      <scope id="4287318874984049049" at="23,0,46,0" />
+      <unit id="1897569136987329549" at="47,15,51,5" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.AbstractDecoratorView$2" />
+      <unit id="1897569136983385131" at="25,8,44,5" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.AbstractDecoratorView$1" />
+      <unit id="4287318874984049021" at="15,0,54,0" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.AbstractDecoratorView" />
+    </file>
+  </root>
+  <root nodeRef="r:05147575-afa1-4d0f-b2e0-f20b32ad3e33(jetbrains.mps.lang.editor.diagram.runtime.jetpad.views)/4287318874984209776">
+    <file name="ConnectorDecoratorView.java">
+      <node id="1897569136995749696" at="20,0,21,0" concept="5" trace="color" />
+      <node id="1897569136995749710" at="21,0,22,0" concept="5" trace="backgroundColor" />
+      <node id="4287318874984209784" at="23,0,24,0" concept="5" trace="mySegments" />
+      <node id="4287318874986818972" at="24,0,25,0" concept="5" trace="myValid" />
+      <node id="1897569136983744404" at="29,93,30,51" concept="4" />
+      <node id="1897569136984260940" at="30,51,31,142" concept="4" />
+      <node id="1897569136983745904" at="31,142,32,134" concept="4" />
+      <node id="1897569136984253342" at="32,134,33,0" concept="12" />
+      <node id="1897569136986169864" at="42,97,43,55" concept="4" />
+      <node id="1897569136986169867" at="43,55,44,106" concept="4" />
+      <node id="1897569136986085385" at="55,97,56,55" concept="4" />
+      <node id="1897569136986085388" at="56,55,57,121" concept="4" />
+      <node id="4287318874984209804" at="63,55,64,26" concept="4" />
+      <node id="4287318874986968743" at="66,38,67,19" concept="10" />
+      <node id="4287318874986054300" at="69,39,70,42" concept="9" />
+      <node id="4287318874984875408" at="70,42,71,35" concept="4" />
+      <node id="4287318874984319408" at="71,35,72,21" concept="10" />
+      <node id="4287318874984210019" at="74,45,75,27" concept="10" />
+      <node id="4287318874984209848" at="78,54,79,18" concept="10" />
+      <node id="4287318874984209853" at="80,5,81,25" concept="9" />
+      <node id="4287318874984209861" at="82,63,83,36" concept="4" />
+      <node id="4287318874984209869" at="85,25,86,61" concept="10" />
+      <node id="4287318874984209878" at="87,5,88,40" concept="9" />
+      <node id="4287318874984209884" at="88,40,89,18" concept="4" />
+      <node id="4287318874984209892" at="90,63,91,46" concept="9" />
+      <node id="4287318874984209900" at="92,52,93,51" concept="9" />
+      <node id="4287318874984209911" at="93,51,94,58" concept="9" />
+      <node id="4287318874984209922" at="94,58,95,33" concept="9" />
+      <node id="4287318874984209930" at="95,33,96,33" concept="9" />
+      <node id="4287318874984209938" at="96,33,97,86" concept="9" />
+      <node id="4287318874984209956" at="97,86,98,22" concept="10" />
+      <node id="4287318874984209963" at="99,7,100,33" concept="4" />
+      <node id="4287318874984209967" at="101,5,102,16" concept="10" />
+      <node id="4287318874984209969" at="102,16,103,0" concept="12" />
+      <node id="4287318874984210129" at="105,61,106,37" concept="4" />
+      <node id="3129755042158461084" at="108,81,109,72" concept="9" />
+      <node id="1897569136995812407" at="109,72,110,42" concept="4" />
+      <node id="1897569136995832036" at="110,42,111,62" concept="4" />
+      <node id="3129755042158428554" at="111,62,112,49" concept="4" />
+      <node id="3129755042158510989" at="114,64,115,149" concept="9" />
+      <node id="1897569136995898585" at="115,149,116,42" concept="4" />
+      <node id="1897569136995898594" at="116,42,117,62" concept="4" />
+      <node id="4287318874984210158" at="117,62,118,49" concept="4" />
+      <node id="4287318874986873086" at="123,0,124,0" concept="5" trace="myDefautlValue" />
+      <node id="4287318874986874670" at="124,48,125,36" concept="4" />
+      <node id="4287318874986861511" at="127,33,128,37" concept="10" />
+      <node id="4287318874986867034" at="130,20,131,28" concept="10" />
+      <node id="4287318874986887817" at="133,30,134,59" concept="4" />
+      <node id="4287318874984209799" at="63,0,66,0" concept="8" trace="setSegments#(Ljava/lang/Iterable;)V" />
+      <node id="4287318874984209810" at="66,0,69,0" concept="8" trace="isValid#()Ljetbrains/jetpad/model/property/Property;" />
+      <node id="4287318874984210015" at="74,0,77,0" concept="8" trace="createSelectionView#()Ljetbrains/jetpad/projectional/view/GroupView;" />
+      <node id="4287318874984209846" at="77,34,80,5" concept="7" />
+      <node id="4287318874984209857" at="81,25,84,5" concept="6" />
+      <node id="4287318874984209867" at="84,5,87,5" concept="7" />
+      <node id="4287318874986870222" at="124,0,127,0" concept="2" trace="EventSourceProperty#(null)V" />
+      <node id="4287318874986861499" at="127,0,130,0" concept="8" trace="getPropExpr#()Ljava/lang/String;" />
+      <node id="4287318874986861512" at="130,0,133,0" concept="8" trace="get#()null" />
+      <node id="4287318874986861524" at="133,0,136,0" concept="8" trace="set#(null)V" />
+      <node id="1897569136986169858" at="41,0,46,0" concept="8" trace="registerSynchronizers#(Ljetbrains/jetpad/mapper/Mapper/SynchronizersConfiguration;)V" />
+      <node id="1897569136986085379" at="54,0,59,0" concept="8" trace="registerSynchronizers#(Ljetbrains/jetpad/mapper/Mapper/SynchronizersConfiguration;)V" />
+      <node id="4287318874984209974" at="69,0,74,0" concept="8" trace="createErrorView#()Ljetbrains/mps/lang/editor/diagram/runtime/jetpad/views/CrossView;" />
+      <node id="4287318874984210139" at="107,63,113,7" concept="7" />
+      <node id="4287318874984210156" at="113,7,119,7" concept="7" />
+      <node id="1897569136983744391" at="28,0,35,0" concept="8" trace="registerSynchronizers#(Ljetbrains/jetpad/mapper/Mapper/SynchronizersConfiguration;)V" />
+      <node id="1897569136986169849" at="39,92,46,10" concept="10" />
+      <node id="1897569136986085370" at="52,89,59,10" concept="10" />
+      <node id="4287318874984209898" at="91,46,99,7" concept="7" />
+      <node id="1897569136983733277" at="26,35,35,19" concept="4" />
+      <node id="1897569136986169839" at="39,0,48,0" concept="8" trace="createMapper#(Ljava/lang/Boolean;)Ljetbrains/jetpad/mapper/Mapper;" />
+      <node id="1897569136986085360" at="52,0,61,0" concept="8" trace="createMapper#(Ljava/lang/Boolean;)Ljetbrains/jetpad/mapper/Mapper;" />
+      <node id="1897569136983720228" at="26,0,37,0" concept="2" trace="ConnectorDecoratorView#()V" />
+      <node id="1897569136986169834" at="37,85,48,6" concept="10" />
+      <node id="1897569136986085355" at="50,81,61,6" concept="10" />
+      <node id="4287318874984209888" at="89,18,101,5" concept="6" />
+      <node id="1897569136986170381" at="37,0,50,0" concept="8" trace="createSelectionDecoratorMapperFactory#()Ljetbrains/jetpad/mapper/MapperFactory;" />
+      <node id="1897569136986086021" at="50,0,63,0" concept="8" trace="createErrorDecoratorMapperFactory#()Ljetbrains/jetpad/mapper/MapperFactory;" />
+      <node id="4287318874984210135" at="106,37,120,5" concept="6" />
+      <node id="4287318874984210119" at="105,0,122,0" concept="8" trace="updateSelectionView#(Ljetbrains/jetpad/projectional/view/GroupView;)V" />
+      <node id="4287318874984209844" at="77,0,105,0" concept="8" trace="getErrorPoint#()Ljetbrains/jetpad/geometry/Vector;" />
+      <scope id="4287318874984209803" at="63,55,64,26" />
+      <scope id="4287318874984209811" at="66,38,67,19" />
+      <scope id="4287318874984210018" at="74,45,75,27" />
+      <scope id="4287318874984209847" at="78,54,79,18" />
+      <scope id="4287318874984209860" at="82,63,83,36" />
+      <scope id="4287318874984209868" at="85,25,86,61" />
+      <scope id="4287318874986870225" at="124,48,125,36" />
+      <scope id="4287318874986861509" at="127,33,128,37" />
+      <scope id="4287318874986861523" at="130,20,131,28" />
+      <scope id="4287318874986861541" at="133,30,134,59" />
+      <scope id="1897569136986169863" at="42,97,44,106" />
+      <scope id="1897569136986085384" at="55,97,57,121" />
+      <scope id="4287318874984209799" at="63,0,66,0">
+        <var name="segments" id="4287318874984209800" />
+      </scope>
+      <scope id="4287318874984209810" at="66,0,69,0" />
+      <scope id="4287318874984209975" at="69,39,72,21">
+        <var name="errorView" id="4287318874986054301" />
+      </scope>
+      <scope id="4287318874984210015" at="74,0,77,0" />
+      <scope id="4287318874984209857" at="81,25,84,5">
+        <var name="segment" id="4287318874984209858" />
+      </scope>
+      <scope id="4287318874986870222" at="124,0,127,0">
+        <var name="defaultValue" id="4287318874986870744" />
+      </scope>
+      <scope id="4287318874986861499" at="127,0,130,0" />
+      <scope id="4287318874986861512" at="130,0,133,0" />
+      <scope id="4287318874986861524" at="133,0,136,0">
+        <var name="value" id="4287318874986861528" />
+      </scope>
+      <scope id="1897569136983744400" at="29,93,33,0" />
+      <scope id="4287318874984210140" at="108,81,112,49">
+        <var name="handleView" id="3129755042158461085" />
+      </scope>
+      <scope id="4287318874984210157" at="114,64,118,49">
+        <var name="handleView" id="3129755042158510990" />
+      </scope>
+      <scope id="1897569136986169858" at="41,0,46,0">
+        <var name="configuration" id="1897569136986169861" />
+      </scope>
+      <scope id="1897569136986085379" at="54,0,59,0">
+        <var name="configuration" id="1897569136986085382" />
+      </scope>
+      <scope id="4287318874984209974" at="69,0,74,0" />
+      <scope id="4287318874984209899" at="92,52,98,22">
+        <var name="d" id="4287318874984209912" />
+        <var name="result" id="4287318874984209939" />
+        <var name="se" id="4287318874984209901" />
+        <var name="xToAdd" id="4287318874984209923" />
+        <var name="yToAdd" id="4287318874984209931" />
+      </scope>
+      <scope id="1897569136983744391" at="28,0,35,0">
+        <var name="configuration" id="1897569136983744395" />
+      </scope>
+      <scope id="1897569136986169848" at="39,92,46,10" />
+      <scope id="1897569136986085369" at="52,89,59,10" />
+      <scope id="1897569136983720232" at="26,35,35,19" />
+      <scope id="1897569136986169839" at="39,0,48,0">
+        <var name="selected" id="1897569136986169846" />
+      </scope>
+      <scope id="1897569136986085360" at="52,0,61,0">
+        <var name="error" id="1897569136986085367" />
+      </scope>
+      <scope id="4287318874984209891" at="90,63,100,33">
+        <var name="currentLength" id="4287318874984209893" />
+      </scope>
+      <scope id="1897569136983720228" at="26,0,37,0" />
+      <scope id="1897569136986169342" at="37,85,48,6" />
+      <scope id="1897569136986084748" at="50,81,61,6" />
+      <scope id="4287318874984209888" at="89,18,101,5">
+        <var name="segment" id="4287318874984209889" />
+      </scope>
+      <scope id="4287318874984210138" at="107,63,119,7" />
+      <scope id="1897569136986170381" at="37,0,50,0" />
+      <scope id="1897569136986086021" at="50,0,63,0" />
+      <scope id="4287318874984210135" at="106,37,120,5">
+        <var name="segment" id="4287318874984210136" />
+      </scope>
+      <scope id="4287318874984210122" at="105,61,120,5" />
+      <scope id="4287318874984210119" at="105,0,122,0">
+        <var name="selectionView" id="3129755042156988772" />
+      </scope>
+      <scope id="4287318874984209845" at="77,34,103,0">
+        <var name="halfLength" id="4287318874984209879" />
+        <var name="sumLength" id="4287318874984209854" />
+      </scope>
+      <scope id="4287318874984209844" at="77,0,105,0" />
+      <unit id="1897569136986169852" at="40,19,46,9" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.ConnectorDecoratorView$2$1" />
+      <unit id="1897569136986085373" at="53,19,59,9" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.ConnectorDecoratorView$3$1" />
+      <unit id="1897569136983734059" at="27,8,35,5" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.ConnectorDecoratorView$1" />
+      <unit id="1897569136986169837" at="38,15,48,5" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.ConnectorDecoratorView$2" />
+      <unit id="1897569136986085358" at="51,15,61,5" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.ConnectorDecoratorView$3" />
+      <unit id="4287318874986848090" at="122,0,137,0" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.ConnectorDecoratorView$EventSourceProperty" />
+      <unit id="4287318874984209776" at="19,0,138,0" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.ConnectorDecoratorView" />
+    </file>
+  </root>
+  <root nodeRef="r:05147575-afa1-4d0f-b2e0-f20b32ad3e33(jetbrains.mps.lang.editor.diagram.runtime.jetpad.views)/4287318874984254796">
+    <file name="NonFocusableLineView.java">
+      <node id="4287318874984265817" at="10,45,11,17" concept="10" />
+      <node id="4287318874984265811" at="9,0,13,0" concept="8" trace="contains#(Ljetbrains/jetpad/geometry/Vector;)Z" />
+      <scope id="4287318874984265816" at="10,45,11,17" />
+      <scope id="4287318874984265811" at="9,0,13,0">
+        <var name="vector" id="4287318874984265814" />
+      </scope>
+      <unit id="4287318874984254796" at="8,0,14,0" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.NonFocusableLineView" />
+    </file>
+  </root>
+  <root nodeRef="r:05147575-afa1-4d0f-b2e0-f20b32ad3e33(jetbrains.mps.lang.editor.diagram.runtime.jetpad.views)/4287318874984352379">
+    <file name="CrossView.java">
+      <node id="4287318874984399298" at="15,0,16,0" concept="5" trace="color" />
+      <node id="4287318874984961065" at="16,0,17,0" concept="5" trace="segmentLength" />
+      <node id="3129755042159133737" at="17,0,18,0" concept="5" trace="lineWidth" />
+      <node id="4287318874986702587" at="18,0,19,0" concept="5" trace="centerLocation" />
+      <node id="4287318874984377715" at="20,0,21,0" concept="5" trace="myFirstLine" />
+      <node id="4287318874984379227" at="21,0,22,0" concept="5" trace="mySecondLine" />
+      <node id="4287318874984382296" at="23,22,24,32" concept="4" />
+      <node id="4287318874984382308" at="24,32,25,33" concept="4" />
+      <node id="3129755042158781876" at="28,93,29,51" concept="4" />
+      <node id="3129755042158789780" at="29,51,30,81" concept="4" />
+      <node id="3129755042159172343" at="30,81,31,87" concept="4" />
+      <node id="3129755042158809801" at="31,87,32,82" concept="4" />
+      <node id="3129755042159204600" at="32,82,33,88" concept="4" />
+      <node id="3129755042158820486" at="33,88,34,131" concept="4" />
+      <node id="3129755042158855548" at="34,131,35,130" concept="4" />
+      <node id="2336278055260693027" at="40,27,41,24" concept="4" />
+      <node id="1560508619093339527" at="41,24,42,13" concept="10" />
+      <node id="2336278055260729520" at="43,12,44,23" concept="4" />
+      <node id="4287318874987247222" at="45,5,46,82" concept="4" />
+      <node id="4287318874987247235" at="46,82,47,80" concept="4" />
+      <node id="4287318874987247241" at="47,80,48,83" concept="4" />
+      <node id="4287318874987247247" at="48,83,49,81" concept="4" />
+      <node id="2336278055260693002" at="51,46,52,29" concept="4" />
+      <node id="2336278055260693007" at="52,29,53,41" concept="4" />
+      <node id="2336278055260693014" at="53,41,54,42" concept="4" />
+      <node id="2336278055260532592" at="43,10,45,5" concept="1" />
+      <node id="2336278055260693023" at="51,0,56,0" concept="8" trace="setVisible#(Z)V" />
+      <node id="1560508619093331272" at="39,57,45,5" concept="7" />
+      <node id="3129755042158781863" at="27,0,37,0" concept="8" trace="registerSynchronizers#(Ljetbrains/jetpad/mapper/Mapper/SynchronizersConfiguration;)V" />
+      <node id="3129755042158776749" at="25,33,37,19" concept="4" />
+      <node id="4287318874987144214" at="39,0,51,0" concept="8" trace="updateCross#(Ljetbrains/jetpad/geometry/Vector;I)V" />
+      <node id="4287318874984382286" at="23,0,39,0" concept="2" trace="CrossView#()V" />
+      <scope id="2336278055260532593" at="43,12,44,23" />
+      <scope id="1560508619093331275" at="40,27,42,13" />
+      <scope id="2336278055260693001" at="51,46,54,42" />
+      <scope id="2336278055260693023" at="51,0,56,0">
+        <var name="isVisible" id="2336278055260703336" />
+      </scope>
+      <scope id="3129755042158781872" at="28,93,35,130" />
+      <scope id="3129755042158781863" at="27,0,37,0">
+        <var name="configuration" id="3129755042158781867" />
+      </scope>
+      <scope id="4287318874987144217" at="39,57,49,81" />
+      <scope id="4287318874987144214" at="39,0,51,0">
+        <var name="length" id="3129755042158897815" />
+        <var name="position" id="3129755042158881339" />
+      </scope>
+      <scope id="4287318874984382288" at="23,22,37,19" />
+      <scope id="4287318874984382286" at="23,0,39,0" />
+      <unit id="3129755042158778425" at="26,8,37,5" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.CrossView$1" />
+      <unit id="4287318874984352379" at="14,0,57,0" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.CrossView" />
+    </file>
+  </root>
+  <root nodeRef="r:05147575-afa1-4d0f-b2e0-f20b32ad3e33(jetbrains.mps.lang.editor.diagram.runtime.jetpad.views)/4287318874988311587">
+    <file name="RectDecoratorView.java">
+      <node id="1897569136986956221" at="18,0,19,0" concept="13" trace="ERROR_FRAME_WIDTH" />
+      <node id="4287318874988748679" at="20,0,21,0" concept="5" trace="bounds" />
+      <node id="1585775323800955966" at="21,0,22,0" concept="5" trace="boundsDelta" />
+      <node id="1897569136992425096" at="22,0,23,0" concept="5" trace="resizable" />
+      <node id="1897569136978286488" at="24,0,25,0" concept="5" trace="myInternalsBounds" />
+      <node id="1897569136984571112" at="29,93,30,51" concept="4" />
+      <node id="1897569136986251461" at="30,51,31,218" concept="4" />
+      <node id="1897569136984581495" at="31,218,32,142" concept="4" />
+      <node id="1897569136984573870" at="32,142,33,134" concept="4" />
+      <node id="1897569136986418315" at="42,97,43,55" concept="4" />
+      <node id="1897569136987743104" at="43,55,44,152" concept="4" />
+      <node id="5540569706412368747" at="46,49,47,23" concept="10" />
+      <node id="5540569706411947164" at="48,15,49,49" concept="9" />
+      <node id="5540569706411976090" at="49,49,50,158" concept="9" />
+      <node id="5540569706411716547" at="50,158,51,32" concept="9" />
+      <node id="5540569706411728171" at="51,32,52,32" concept="9" />
+      <node id="5540569706411759088" at="53,67,54,69" concept="4" />
+      <node id="5540569706411798021" at="54,69,55,69" concept="4" />
+      <node id="5540569706411896345" at="56,15,57,59" concept="4" />
+      <node id="5540569706411424553" at="57,59,58,131" concept="4" />
+      <node id="1897569136992463987" at="59,16,60,91" concept="4" />
+      <node id="1897569136989912288" at="60,91,61,247" concept="4" />
+      <node id="1897569136986251458" at="72,97,73,55" concept="4" />
+      <node id="1897569136986251508" at="73,55,74,105" concept="4" />
+      <node id="3129755042162037494" at="80,48,81,57" concept="9" />
+      <node id="4287318874988311631" at="81,57,82,32" concept="4" />
+      <node id="1897569136986699085" at="82,32,83,43" concept="4" />
+      <node id="4287318874988311645" at="83,43,84,18" concept="10" />
+      <node id="5540569706412351944" at="45,118,48,15" concept="7" />
+      <node id="5540569706411742316" at="52,32,56,15" concept="6" />
+      <node id="1897569136986251452" at="71,0,76,0" concept="8" trace="registerSynchronizers#(Ljetbrains/jetpad/mapper/Mapper/SynchronizersConfiguration;)V" />
+      <node id="4287318874988311617" at="80,0,86,0" concept="8" trace="createErrorView#()Ljetbrains/mps/lang/editor/diagram/runtime/jetpad/views/SelectionFrameView;" />
+      <node id="1897569136984571099" at="28,0,35,0" concept="8" trace="registerSynchronizers#(Ljetbrains/jetpad/mapper/Mapper/SynchronizersConfiguration;)V" />
+      <node id="1897569136986251443" at="69,98,76,10" concept="10" />
+      <node id="1897569136984563448" at="26,30,35,19" concept="4" />
+      <node id="1897569136986251433" at="69,0,78,0" concept="8" trace="createMapper#(Ljava/lang/Boolean;)Ljetbrains/jetpad/mapper/Mapper;" />
+      <node id="1897569136984556584" at="26,0,37,0" concept="2" trace="RectDecoratorView#()V" />
+      <node id="1897569136986251428" at="67,90,78,6" concept="10" />
+      <node id="1897569136986252767" at="67,0,80,0" concept="8" trace="createErrorDecoratorMapperFactory#()Ljetbrains/jetpad/mapper/MapperFactory;" />
+      <node id="1585775323794378545" at="44,152,59,16" concept="4" />
+      <node id="1897569136986418309" at="41,0,63,0" concept="8" trace="registerSynchronizers#(Ljetbrains/jetpad/mapper/Mapper/SynchronizersConfiguration;)V" />
+      <node id="1897569136986418300" at="39,92,63,10" concept="10" />
+      <node id="1897569136986418290" at="39,0,65,0" concept="8" trace="createMapper#(Ljava/lang/Boolean;)Ljetbrains/jetpad/mapper/Mapper;" />
+      <node id="1897569136986418285" at="37,85,65,6" concept="10" />
+      <node id="1897569136986418888" at="37,0,67,0" concept="8" trace="createSelectionDecoratorMapperFactory#()Ljetbrains/jetpad/mapper/MapperFactory;" />
+      <scope id="5540569706412351947" at="46,49,47,23" />
+      <scope id="5540569706411742322" at="53,67,55,69" />
+      <scope id="1897569136986251457" at="72,97,74,105" />
+      <scope id="1897569136984571108" at="29,93,33,134" />
+      <scope id="5540569706411742316" at="52,32,56,15">
+        <var name="nextPoint" id="5540569706411742318" />
+      </scope>
+      <scope id="4287318874988311620" at="80,48,84,18">
+        <var name="result" id="3129755042162037495" />
+      </scope>
+      <scope id="1897569136986251452" at="71,0,76,0">
+        <var name="configuration" id="1897569136986251455" />
+      </scope>
+      <scope id="4287318874988311617" at="80,0,86,0" />
+      <scope id="1897569136984571099" at="28,0,35,0">
+        <var name="configuration" id="1897569136984571103" />
+      </scope>
+      <scope id="1897569136986251442" at="69,98,76,10" />
+      <scope id="1897569136984556588" at="26,30,35,19" />
+      <scope id="1897569136986251433" at="69,0,78,0">
+        <var name="error" id="1897569136986251440" />
+      </scope>
+      <scope id="1897569136984556584" at="26,0,37,0" />
+      <scope id="1897569136986250091" at="67,90,78,6" />
+      <scope id="5540569706411398514" at="45,118,58,131">
+        <var name="max" id="5540569706411728172" />
+        <var name="min" id="5540569706411716548" />
+        <var name="newBounds" id="5540569706411976091" />
+        <var name="oldBounds" id="5540569706411947165" />
+      </scope>
+      <scope id="1897569136986252767" at="67,0,80,0" />
+      <scope id="1897569136986418314" at="42,97,61,247" />
+      <scope id="1897569136986418309" at="41,0,63,0">
+        <var name="configuration" id="1897569136986418312" />
+      </scope>
+      <scope id="1897569136986418299" at="39,92,63,10" />
+      <scope id="1897569136986418290" at="39,0,65,0">
+        <var name="selected" id="1897569136986418297" />
+      </scope>
+      <scope id="1897569136986417742" at="37,85,65,6" />
+      <scope id="1897569136986418888" at="37,0,67,0" />
+      <unit id="1897569136986251446" at="70,19,76,9" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.RectDecoratorView$3$1" />
+      <unit id="1897569136984565727" at="27,8,35,5" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.RectDecoratorView$1" />
+      <unit id="1897569136986251431" at="68,15,78,5" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.RectDecoratorView$3" />
+      <unit id="1897569136986418303" at="40,19,63,9" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.RectDecoratorView$2$1" />
+      <unit id="1897569136986418288" at="38,15,65,5" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.RectDecoratorView$2" />
+      <unit id="4287318874988311587" at="17,0,87,0" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.RectDecoratorView" />
+    </file>
+  </root>
+  <root nodeRef="r:05147575-afa1-4d0f-b2e0-f20b32ad3e33(jetbrains.mps.lang.editor.diagram.runtime.jetpad.views)/4287318874988988889">
+    <file name="NodeDecoratorView.java">
+      <node id="4287318874988988890" at="8,0,9,0" concept="5" trace="inputPortDecotatorView" />
+      <node id="4287318874988988895" at="9,0,10,0" concept="5" trace="outputPortDecotatorView" />
+      <node id="4287318874988988903" at="11,30,12,43" concept="4" />
+      <node id="4287318874988988908" at="12,43,13,44" concept="4" />
+      <node id="4287318874988988900" at="11,0,15,0" concept="2" trace="NodeDecoratorView#()V" />
+      <scope id="4287318874988988902" at="11,30,13,44" />
+      <scope id="4287318874988988900" at="11,0,15,0" />
+      <unit id="4287318874988988889" at="7,0,16,0" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.NodeDecoratorView" />
+    </file>
+  </root>
+  <root nodeRef="r:05147575-afa1-4d0f-b2e0-f20b32ad3e33(jetbrains.mps.lang.editor.diagram.runtime.jetpad.views)/4287318874989177351">
+    <file name="PortDecoratorView.java">
+      <node id="4287318874989177352" at="7,0,9,0" concept="2" trace="PortDecoratorView#()V" />
+      <scope id="4287318874989177354" at="7,30,7,30" />
+      <scope id="4287318874989177352" at="7,0,9,0" />
+      <unit id="4287318874989177351" at="6,0,10,0" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.PortDecoratorView" />
+    </file>
+  </root>
+  <root nodeRef="r:05147575-afa1-4d0f-b2e0-f20b32ad3e33(jetbrains.mps.lang.editor.diagram.runtime.jetpad.views)/4287318874989282741">
+    <file name="DiagramDecoratorView.java">
+      <node id="4287318874989282742" at="8,0,9,0" concept="5" trace="itemsDecotatorView" />
+      <node id="4287318874989282747" at="9,0,10,0" concept="5" trace="connectorsDecotatorView" />
+      <node id="4287318874989282755" at="11,33,12,39" concept="4" />
+      <node id="4287318874989282760" at="12,39,13,44" concept="4" />
+      <node id="4287318874989282752" at="11,0,15,0" concept="2" trace="DiagramDecoratorView#()V" />
+      <scope id="4287318874989282754" at="11,33,13,44" />
+      <scope id="4287318874989282752" at="11,0,15,0" />
+      <unit id="4287318874989282741" at="7,0,16,0" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.DiagramDecoratorView" />
+    </file>
+  </root>
+  <root nodeRef="r:05147575-afa1-4d0f-b2e0-f20b32ad3e33(jetbrains.mps.lang.editor.diagram.runtime.jetpad.views)/7493754406620213986">
+    <file name="ResizableContentView.java">
+      <node id="978373763413720704" at="10,0,11,0" concept="13" trace="PREFERRED_SIZE" />
+      <unit id="7493754406620213986" at="9,0,12,0" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.ResizableContentView" />
+    </file>
+  </root>
+  <root nodeRef="r:05147575-afa1-4d0f-b2e0-f20b32ad3e33(jetbrains.mps.lang.editor.diagram.runtime.jetpad.views)/8082246476498952649">
+    <file name="MovableContentView.java">
+      <node id="7319867929567089306" at="8,0,9,0" concept="13" trace="POSITION_X" />
+      <node id="7319867929567089460" at="9,0,10,0" concept="13" trace="POSITION_Y" />
+      <unit id="8082246476498952649" at="7,0,11,0" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.MovableContentView" />
+    </file>
+  </root>
+  <root nodeRef="r:05147575-afa1-4d0f-b2e0-f20b32ad3e33(jetbrains.mps.lang.editor.diagram.runtime.jetpad.views)/8574284199674286561">
+    <file name="NonFocusablePolyLineView.java">
+      <node id="3804439703459768776" at="10,45,11,17" concept="10" />
+      <node id="3804439703459768770" at="9,0,13,0" concept="8" trace="contains#(Ljetbrains/jetpad/geometry/Vector;)Z" />
+      <scope id="3804439703459768775" at="10,45,11,17" />
+      <scope id="3804439703459768770" at="9,0,13,0">
+        <var name="vector" id="3804439703459768773" />
+      </scope>
+      <unit id="8574284199674286561" at="8,0,14,0" name="jetbrains.mps.lang.editor.diagram.runtime.jetpad.views.NonFocusablePolyLineView" />
+    </file>
+  </root>
+</debug-info>
+

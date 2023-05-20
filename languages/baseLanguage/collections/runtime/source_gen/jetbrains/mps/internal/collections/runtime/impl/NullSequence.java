@@ -41,7 +41,7 @@ public class NullSequence<T> extends Sequence<T> implements Iterable<T> {
   }
   @Override
   public Iterator<T> iterator() {
-    return new NullSequence.EmptyIterator<T>();
+    return new EmptyIterator<T>();
   }
   @SuppressWarnings(value = "unchecked")
   public static <U> NullSequence<U> instance() {

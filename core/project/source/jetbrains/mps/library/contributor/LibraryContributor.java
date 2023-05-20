@@ -16,5 +16,9 @@
 package jetbrains.mps.library.contributor;
 
 public interface LibraryContributor extends RepositoryContributor<LibDescriptor> {
+  /**
+   * a total equivalent for {@link MPSModuleOwner#hidden()}.
+   * pure ui property, legacy
+   */
   boolean hiddenLanguages();
 }

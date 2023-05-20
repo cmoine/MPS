@@ -2,10 +2,10 @@
 <model ref="r:edfeddd0-4d5d-4ba0-8508-4c23321fc724(jetbrains.mps.samples.attribute.textGen)">
   <persistence version="9" />
   <languages>
-    <use id="b83431fe-5c8f-40bc-8a36-65e25f4dd253" name="jetbrains.mps.lang.textGen" version="0" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="fa73d85a-ac7f-447b-846c-fcdc41caa600(jetbrains.mps.devkit.aspect.textgen)" />
   </languages>
   <imports>
+    <import index="dmyu" ref="r:c6eeedda-084d-4659-9c4d-80b7768f2bb2(jetbrains.mps.baseLanguage.textGen)" />
     <import index="t1gd" ref="r:e99786b4-cb81-48f5-ad96-d9e0d7c7aa3c(jetbrains.mps.samples.attribute.structure)" implicit="true" />
   </imports>
   <registry>
@@ -19,6 +19,9 @@
       </concept>
       <concept id="1068580123136" name="jetbrains.mps.baseLanguage.structure.StatementList" flags="sn" stub="5293379017992965193" index="3clFbS">
         <child id="1068581517665" name="statement" index="3cqZAp" />
+      </concept>
+      <concept id="1107535904670" name="jetbrains.mps.baseLanguage.structure.ClassifierType" flags="in" index="3uibUv">
+        <reference id="1107535924139" name="classifier" index="3uigEE" />
       </concept>
     </language>
     <language id="b83431fe-5c8f-40bc-8a36-65e25f4dd253" name="jetbrains.mps.lang.textGen">
@@ -37,15 +40,30 @@
         <reference id="1233670257997" name="conceptDeclaration" index="WuzLi" />
         <child id="1233749296504" name="textGenBlock" index="11c4hB" />
         <child id="3147320813467893228" name="layout" index="3znZDQ" />
+        <child id="2160817178329904672" name="contextObjects" index="1J5FnA" />
       </concept>
       <concept id="1233748055915" name="jetbrains.mps.lang.textGen.structure.NodeParameter" flags="nn" index="117lpO" />
       <concept id="1233749247888" name="jetbrains.mps.lang.textGen.structure.GenerateTextDeclaration" flags="in" index="11bSqf" />
+      <concept id="1233921373471" name="jetbrains.mps.lang.textGen.structure.LanguageTextGenDeclaration" flags="ig" index="1bsvg0">
+        <child id="3996543181682114090" name="contextObjects" index="1mRmNN" />
+      </concept>
+      <concept id="3996543181682151539" name="jetbrains.mps.lang.textGen.structure.ClassConceptUnitContext" flags="ng" index="1mQwaE">
+        <reference id="3996543181682151542" name="classifier" index="1mQwaJ" />
+      </concept>
+      <concept id="3996543181682044537" name="jetbrains.mps.lang.textGen.structure.UnitContextDeclaration" flags="ng" index="1mR7Mw">
+        <child id="3996543181682151544" name="instance" index="1mQwax" />
+        <child id="3996543181682044542" name="type" index="1mR7MB" />
+      </concept>
       <concept id="8937790975493363649" name="jetbrains.mps.lang.textGen.structure.AttributedNodePart" flags="ng" index="3mW3T8" />
       <concept id="3147320813467893194" name="jetbrains.mps.lang.textGen.structure.LayoutPart" flags="ng" index="3znZDg" />
       <concept id="3147320813467893193" name="jetbrains.mps.lang.textGen.structure.TextUnitLayout" flags="ng" index="3znZDj">
         <reference id="3147320813467893197" name="active" index="3znZDn" />
         <child id="3147320813467893195" name="parts" index="3znZDh" />
       </concept>
+      <concept id="2160817178329904684" name="jetbrains.mps.lang.textGen.structure.UnitContextObject" flags="ng" index="1J5FnE">
+        <reference id="2160817178329904685" name="context" index="1J5FnF" />
+      </concept>
+      <concept id="2160817178329904683" name="jetbrains.mps.lang.textGen.structure.InstancePerUnitContextObject" flags="ng" index="1J5FnH" />
     </language>
     <language id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel">
       <concept id="1138056022639" name="jetbrains.mps.lang.smodel.structure.SPropertyAccess" flags="nn" index="3TrcHB">
@@ -55,15 +73,9 @@
     <language id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core">
       <concept id="1133920641626" name="jetbrains.mps.lang.core.structure.BaseConcept" flags="ng" index="2VYdi">
         <property id="1193676396447" name="virtualPackage" index="3GE5qa" />
-        <child id="5169995583184591170" name="smodelAttribute" index="lGtFl" />
       </concept>
       <concept id="1169194658468" name="jetbrains.mps.lang.core.structure.INamedConcept" flags="ng" index="TrEIO">
         <property id="1169194664001" name="name" index="TrG5h" />
-      </concept>
-      <concept id="779128492853369165" name="jetbrains.mps.lang.core.structure.SideTransformInfo" flags="ng" index="1KehLL">
-        <property id="779128492853935960" name="anchorTag" index="1K8rD$" />
-        <property id="779128492853934523" name="cellId" index="1K8rM7" />
-        <property id="779128492853699361" name="side" index="1Kfyot" />
       </concept>
     </language>
   </registry>
@@ -90,11 +102,6 @@
           <node concept="l8MVK" id="6fYGsMY872T" role="lcghm" />
           <node concept="2BGw6n" id="70l5j7RGcww" role="lcghm" />
           <node concept="3mW3T8" id="70l5j7RGcyO" role="lcghm" />
-          <node concept="1KehLL" id="70l5j7RGcmY" role="lGtFl">
-            <property role="1K8rM7" value="Constant_yuehr3_c0" />
-            <property role="1K8rD$" value="default_RTransform" />
-            <property role="1Kfyot" value="left" />
-          </node>
         </node>
       </node>
     </node>
@@ -116,6 +123,9 @@
       <node concept="3znZDg" id="3DQwDJfhrGq" role="3znZDh">
         <property role="TrG5h" value="BODY" />
       </node>
+    </node>
+    <node concept="1J5FnH" id="2$ptf_hBcjI" role="1J5FnA">
+      <ref role="1J5FnF" node="2$ptf_hB9bi" resolve="ctx" />
     </node>
   </node>
   <node concept="WtQ9Q" id="70B0YGk0iEE">
@@ -139,6 +149,19 @@
           <node concept="2BGw6n" id="70B0YGk0iFE" role="lcghm" />
           <node concept="3mW3T8" id="70B0YGk0iG$" role="lcghm" />
         </node>
+      </node>
+    </node>
+  </node>
+  <node concept="1bsvg0" id="2$ptf_hB9bh">
+    <property role="3GE5qa" value="pure-textgen" />
+    <property role="TrG5h" value="Auxiliary" />
+    <node concept="1mR7Mw" id="2$ptf_hB9bi" role="1mRmNN">
+      <property role="TrG5h" value="ctx" />
+      <node concept="3uibUv" id="2$ptf_hB9bo" role="1mR7MB">
+        <ref role="3uigEE" to="dmyu:23Rh9MB7812" resolve="ClassifierUnitContext" />
+      </node>
+      <node concept="1mQwaE" id="2$ptf_hB9bt" role="1mQwax">
+        <ref role="1mQwaJ" to="dmyu:23Rh9MB7812" resolve="ClassifierUnitContext" />
       </node>
     </node>
   </node>

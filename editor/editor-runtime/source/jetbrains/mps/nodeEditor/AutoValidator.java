@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,12 +51,12 @@ class AutoValidator {
     if (cell == null) {
       return;
     }
-    EditorComponentState state = editorComponent.getEditorContext().getEditorComponentState();
+    EditorComponentState state = editorComponent.captureState();
     mySuppressSelectionChanges = true;
     try {
       APICellAdapter.validate(cell, true, false);
       editorComponent.getUpdater().flushModelEvents();
-      editorComponent.getEditorContext().restoreEditorComponentState(state);
+      editorComponent.restoreState(state);
     } finally {
       mySuppressSelectionChanges = false;
     }

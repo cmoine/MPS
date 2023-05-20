@@ -28,8 +28,8 @@
   </root>
   <root nodeRef="r:983279f4-89a9-45ad-aeeb-5621fd5cbb63(jetbrains.mps.baseLnaguage.extensionMethods.sandbox)/6791353716095480383">
     <file name="StringExtensionMethods.java">
-      <node id="6791353716095480383" at="8,0,9,0" concept="7" trace="str" />
-      <node id="6791353716095480383" at="9,0,10,0" concept="7" trace="a" />
+      <node id="6791353716095480388" at="8,0,9,0" concept="7" trace="str" />
+      <node id="6791353716095480393" at="9,0,10,0" concept="7" trace="a" />
       <node id="7685333756920163917" at="12,48,13,20" concept="1" />
       <node id="7685333756920172843" at="13,20,14,20" concept="1" />
       <node id="7685333756920232198" at="14,20,15,20" concept="1" />
@@ -45,55 +45,55 @@
       <node id="4525411394273871078" at="30,29,31,79" concept="4" />
       <node id="4525411394273992103" at="31,79,32,18" concept="1" />
       <node id="6791353716095480383" at="10,0,12,0" concept="0" trace="StringExtensionMethods#()V" />
-      <node id="6791353716095480383" at="23,0,26,0" concept="8" trace="foo2#(Ljava/lang/String;)Ljava/lang/String;" />
-      <node id="6791353716095480383" at="26,0,29,0" concept="8" trace="safeCast#(Ljava/lang/String;Ljava/lang/Iterable;)Ljava/lang/Iterable;" />
-      <node id="6791353716095480383" at="29,0,34,0" concept="8" trace="testFoo3#(Ljava/lang/String;)V" />
-      <node id="6791353716095480383" at="12,0,23,0" concept="8" trace="foo#(Ljava/lang/String;)Ljava/lang/String;" />
+      <node id="7685333756920172848" at="23,0,26,0" concept="8" trace="foo2#(Ljava/lang/String;)Ljava/lang/String;" />
+      <node id="4525411394273860979" at="26,0,29,0" concept="8" trace="safeCast#(Ljava/lang/String;Ljava/lang/Iterable;)Ljava/lang/Iterable;" />
+      <node id="4525411394273860992" at="29,0,34,0" concept="8" trace="testFoo3#(Ljava/lang/String;)V" />
+      <node id="6791353716095480390" at="12,0,23,0" concept="8" trace="foo#(Ljava/lang/String;)Ljava/lang/String;" />
       <scope id="6791353716095480383" at="10,35,10,35" />
       <scope id="7685333756920172851" at="23,53,24,45" />
       <scope id="4525411394273860982" at="26,94,27,16" />
       <scope id="6791353716095480383" at="10,0,12,0" />
-      <scope id="6791353716095480383" at="23,0,26,0">
-        <var name="_this" id="6791353716095480383" />
+      <scope id="7685333756920172848" at="23,0,26,0">
+        <var name="_this" id="7685333756920172848" />
       </scope>
-      <scope id="6791353716095480383" at="26,0,29,0">
-        <var name="_this" id="6791353716095480383" />
+      <scope id="4525411394273860979" at="26,0,29,0">
+        <var name="_this" id="4525411394273860979" />
         <var name="iterable" id="4525411394273860986" />
       </scope>
       <scope id="4525411394273860995" at="29,51,32,18">
         <var name="list" id="4525411394273861106" />
         <var name="my" id="4525411394273871079" />
       </scope>
-      <scope id="6791353716095480383" at="29,0,34,0">
-        <var name="_this" id="6791353716095480383" />
+      <scope id="4525411394273860992" at="29,0,34,0">
+        <var name="_this" id="4525411394273860992" />
       </scope>
       <scope id="6791353716095480392" at="12,48,21,23" />
-      <scope id="6791353716095480383" at="12,0,23,0">
-        <var name="_this" id="6791353716095480383" />
+      <scope id="6791353716095480390" at="12,0,23,0">
+        <var name="_this" id="6791353716095480390" />
       </scope>
       <unit id="6791353716095480383" at="7,0,35,0" name="jetbrains.mps.baseLnaguage.extensionMethods.sandbox.StringExtensionMethods" />
     </file>
   </root>
   <root nodeRef="r:983279f4-89a9-45ad-aeeb-5621fd5cbb63(jetbrains.mps.baseLnaguage.extensionMethods.sandbox)/6791353716095480385">
     <file name="Abc.java">
-      <node id="6791353716095480385" at="8,0,9,0" concept="7" trace="b" />
+      <node id="6791353716095485630" at="8,0,9,0" concept="7" trace="b" />
       <node id="3097384118512197977" at="11,48,12,18" concept="4" />
       <node id="7517860079983491575" at="14,58,15,16" concept="4" />
       <node id="7517860079983491588" at="16,25,17,15" concept="1" />
       <node id="7517860079983492017" at="18,5,19,0" concept="6" />
       <node id="7517860079983491595" at="19,0,20,15" concept="5" />
       <node id="6791353716095480385" at="9,0,11,0" concept="0" trace="Abc#()V" />
-      <node id="6791353716095480385" at="11,0,14,0" concept="8" trace="foo#(I)V" />
+      <node id="3097384118512197973" at="11,0,14,0" concept="8" trace="foo#(I)V" />
       <node id="7517860079983491581" at="15,16,18,5" concept="2" />
-      <node id="6791353716095480385" at="14,0,22,0" concept="8" trace="sum#(Ljava/util/LinkedList;)I" />
+      <node id="7517860079983491567" at="14,0,22,0" concept="8" trace="sum#(Ljava/util/LinkedList;)I" />
       <scope id="6791353716095480385" at="9,16,9,16" />
       <scope id="3097384118512197975" at="11,48,12,18">
         <var name="a" id="3097384118512197978" />
       </scope>
       <scope id="7517860079983491583" at="16,25,17,15" />
       <scope id="6791353716095480385" at="9,0,11,0" />
-      <scope id="6791353716095480385" at="11,0,14,0">
-        <var name="_this" id="6791353716095480385" />
+      <scope id="3097384118512197973" at="11,0,14,0">
+        <var name="_this" id="3097384118512197973" />
       </scope>
       <scope id="7517860079983491581" at="15,16,18,5">
         <var name="a" id="7517860079983491582" />
@@ -101,8 +101,8 @@
       <scope id="7517860079983491570" at="14,58,20,15">
         <var name="res" id="7517860079983491576" />
       </scope>
-      <scope id="6791353716095480385" at="14,0,22,0">
-        <var name="_this" id="6791353716095480385" />
+      <scope id="7517860079983491567" at="14,0,22,0">
+        <var name="_this" id="7517860079983491567" />
       </scope>
       <unit id="6791353716095480385" at="7,0,23,0" name="jetbrains.mps.baseLnaguage.extensionMethods.sandbox.Abc" />
     </file>

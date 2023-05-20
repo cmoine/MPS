@@ -16,7 +16,10 @@
 package jetbrains.mps.actions.descriptor;
 
 import jetbrains.mps.openapi.actions.descriptor.ActionAspectDescriptor;
+import jetbrains.mps.openapi.actions.descriptor.CopyPreProcessor;
 import jetbrains.mps.openapi.actions.descriptor.NodeFactory;
+import jetbrains.mps.openapi.actions.descriptor.PastePostProcessor;
+import jetbrains.mps.openapi.actions.descriptor.PasteWrapper;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 
 import java.util.Collection;
@@ -34,7 +37,21 @@ public class BaseActionAspectDescriptor implements ActionAspectDescriptor {
 
   @Override
   public boolean hasBuilders() {
-    // Treat all subclasses of this class as having builders by default.
-    return getClass() != BaseActionAspectDescriptor.class;
+    return false;
+  }
+
+  @Override
+  public Collection<CopyPreProcessor> getCopyPreProcessors() {
+    return Collections.emptySet();
+  }
+
+  @Override
+  public Collection<PastePostProcessor> getPastePostProcessors() {
+    return Collections.emptySet();
+  }
+
+  @Override
+  public Collection<PasteWrapper> getPasteWrappers() {
+    return Collections.emptySet();
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,16 +15,10 @@
  */
 package jetbrains.mps.extapi.model;
 
-import jetbrains.mps.messages.IMessage;
-import jetbrains.mps.messages.MessageKind;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SModel;
-import org.jetbrains.mps.openapi.model.SModel.Problem;
-import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeReference;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.jetbrains.mps.openapi.persistence.DataSource;
 
 /**
  * evgeny, 2/26/13
@@ -37,9 +31,9 @@ public class PersistenceProblem implements SModel.Problem {
   private final boolean isError;
   private final int line;
   private final int column;
-  private final SNode anchor;
+  private final SNodeReference anchor;
 
-  public PersistenceProblem(Kind kind, String text, String location, boolean error, int line, int column, SNode anchor) {
+  public PersistenceProblem(Kind kind, String text, String location, boolean error, int line, int column, @Nullable SNodeReference anchor) {
     this.myKind = kind;
     this.text = text;
     this.location = location;
@@ -83,31 +77,16 @@ public class PersistenceProblem implements SModel.Problem {
     return isError;
   }
 
+  @Nullable
   @Override
-  public SNode getNode() {
+  public SNodeReference getAnchorNode() {
     return anchor;
   }
 
-  public static Problem fromIMessage(SModelData model, Kind kind, IMessage message) {
-    if (message == null) {
-      return null;
-    }
-    SNode anchor = message.getHintObject() instanceof SNode ? (SNode) message.getHintObject() : null;
-    if (anchor == null && model != null && message.getHintObject() instanceof SNodeReference) {
-      SNodeReference ptr = (SNodeReference) message.getHintObject();
-      if (model.getReference().equals(ptr.getModelReference())) {
-        anchor = model.getNode(ptr.getNodeId());
-      }
-    }
-    return new PersistenceProblem(kind, message.getText(), null, message.getKind() == MessageKind.ERROR, -1, -1, anchor);
+  /**
+   * shorhand for {@code new PersistenceProblem(Save, ...., true)}
+   */
+  public static PersistenceProblem errorSave(String text, DataSource location) {
+    return new PersistenceProblem(Kind.Save, text, location.getLocation(), true);
   }
-
-  public static Iterable<Problem> fromIMessages(@Nullable SModelData model, Kind kind, Iterable<IMessage> seq) {
-    List<Problem> result = new ArrayList<Problem>();
-    for (IMessage m : seq) {
-      result.add(fromIMessage(model, kind, m));
-    }
-    return result;
-  }
-
 }

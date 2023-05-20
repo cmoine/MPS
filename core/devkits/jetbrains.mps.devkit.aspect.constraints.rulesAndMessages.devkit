@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dev-kit name="jetbrains.mps.devkit.aspect.constraints.rulesAndMessages" uuid="4843b9cf-86fe-47f2-87c9-f256294fd740">
+  <exported-language name="b3551702-269c-4f05-ba61-58060cef4292(jetbrains.mps.lang.rulesAndMessages)" />
+  <extendedDevKits>
+    <extendedDevKit>fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)</extendedDevKit>
+    <extendedDevKit>2843b9cf-86fe-47f2-87c9-f256294fd769(jetbrains.mps.devkit.aspect.constraints.rules)</extendedDevKit>
+  </extendedDevKits>
+  <exported-solutions>
+    <exported-solution>a9e4c532-c5f5-4bb7-99ef-42abb73bbb70(jetbrains.mps.lang.descriptor.aspects)</exported-solution>
+  </exported-solutions>
+  <generation-plan model="r:eb170f89-5bd6-47c2-9480-a0a681dee400(jetbrains.mps.lang.descriptor.constraintsAndMessages)" />
+</dev-kit>
+

@@ -41,12 +41,12 @@ public class SortedMapSequence<U, V> extends AbstractMapSequence<U, V> implement
   protected SortedMap<U, V> getMap() {
     return (SortedMap<U, V>) super.getMap();
   }
-  public static <P, Q> SortedMapSequence.SortedMapSequenceInitializer<P, Q> fromKeysArray(P... keys) {
+  public static <P, Q> SortedMapSequenceInitializer<P, Q> fromKeysArray(P... keys) {
     SortedMap<P, Q> map = new TreeMap<P, Q>();
-    return new SortedMapSequence.SortedMapSequenceInitializer<P, Q>(new SortedMapSequence<P, Q>(map), keys);
+    return new SortedMapSequenceInitializer<P, Q>(new SortedMapSequence<P, Q>(map), keys);
   }
-  public static <P, Q> SortedMapSequence.SortedMapSequenceInitializer<P, Q> fromMapAndKeysArray(SortedMap<P, Q> map, P... keys) {
-    return new SortedMapSequence.SortedMapSequenceInitializer<P, Q>(new SortedMapSequence<P, Q>(map), keys);
+  public static <P, Q> SortedMapSequenceInitializer<P, Q> fromMapAndKeysArray(SortedMap<P, Q> map, P... keys) {
+    return new SortedMapSequenceInitializer<P, Q>(new SortedMapSequence<P, Q>(map), keys);
   }
   public static <P, Q> ISortedMapSequence<P, Q> fromArray(IMapping<P, Q>... mappings) {
     SortedMap<P, Q> map = new TreeMap<P, Q>();

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,11 @@ package jetbrains.mps.lang.editor.generator.internal;
 import jetbrains.mps.nodeEditor.cellMenu.BasicCellContext;
 import jetbrains.mps.nodeEditor.cellMenu.CellContext;
 import jetbrains.mps.nodeEditor.cellMenu.SubstituteInfoPartExt;
+import jetbrains.mps.nodeEditor.menus.EditorMenuTraceInfoImpl;
 import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.SubstituteAction;
-import jetbrains.mps.smodel.IOperationContext;
+import jetbrains.mps.openapi.editor.menus.EditorMenuDescriptor;
+import jetbrains.mps.openapi.editor.menus.EditorMenuTraceInfo;
 import jetbrains.mps.smodel.action.AbstractNodeSubstituteAction;
 import jetbrains.mps.smodel.presentation.NodePresentationUtil;
 import org.jetbrains.annotations.Nullable;
@@ -38,14 +40,13 @@ import java.util.List;
 public abstract class AbstractCellMenuPart_Generic_Group implements SubstituteInfoPartExt {
   @Override
   public List<SubstituteAction> createActions(CellContext cellContext, final EditorContext editorContext) {
-    final SNode node = (SNode) cellContext.get(BasicCellContext.EDITED_NODE);
-    final IOperationContext context = editorContext.getOperationContext();
-    List parameterObjects = createParameterObjects(node, context, editorContext);
+    final SNode node = cellContext.get(BasicCellContext.EDITED_NODE);
+    List<?> parameterObjects = createParameterObjects(node, editorContext);
     if (parameterObjects == null) {
       return Collections.emptyList();
     }
 
-    List<SubstituteAction> actions = new LinkedList<SubstituteAction>();
+    List<SubstituteAction> actions = new LinkedList<>();
     for (final Object parameterObject : parameterObjects) {
       actions.add(new AbstractNodeSubstituteAction(null, parameterObject, node) {
 
@@ -65,9 +66,16 @@ public abstract class AbstractCellMenuPart_Generic_Group implements SubstituteIn
         }
 
         @Override
-        public SNode doSubstitute(@Nullable final EditorContext editorContext, String pattern) {
-          handleAction(parameterObject, node, node.getModel(), context, editorContext);
+        public SNode doSubstitute(@Nullable final EditorContext ec, String pattern) {
+          handleAction(parameterObject, node, node.getModel(), ec);
           return null;
+        }
+
+        @Override
+        public EditorMenuTraceInfo getEditorMenuTraceInfo() {
+          EditorMenuTraceInfoImpl info = new EditorMenuTraceInfoImpl();
+          info.setDescriptor(AbstractCellMenuPart_Generic_Group.this.getEditorMenuDescriptor(parameterObject));
+          return info;
         }
       });
     }
@@ -77,7 +85,7 @@ public abstract class AbstractCellMenuPart_Generic_Group implements SubstituteIn
 
   protected String getMatchingText(Object parameterObject) {
     if (parameterObject instanceof SNode) {
-      return NodePresentationUtil.matchingText((SNode) parameterObject, isReferentPresentation());
+      return NodePresentationUtil.visibleMatchingText((SNode) parameterObject, null);
     }
     return "" + parameterObject;
   }
@@ -85,17 +93,28 @@ public abstract class AbstractCellMenuPart_Generic_Group implements SubstituteIn
 
   protected String getDescriptionText(Object parameterObject) {
     if (parameterObject instanceof SNode) {
-      return NodePresentationUtil.descriptionText((SNode) parameterObject, isReferentPresentation());
+      return NodePresentationUtil.descriptionText((SNode) parameterObject);
     }
     return "";
   }
 
+  @Nullable
+  protected abstract List<?> createParameterObjects(SNode node, EditorContext editorContext);
+
+  protected abstract void handleAction(Object parameterObject, SNode node, SModel model, EditorContext editorContext);
+
   /**
-   * should become abstract after MPS 3.0
+   * @deprecated This method was used only to distinct concept declaration reference and concept that is given as node.
+   * Now we should use truly concepts in parameter objects, not concept nodes.
+   * [2020.2] can't remove as there are still uses in MPS
+   * [2022.2] still there. Seems that SubstituteAction.isReferentPresentation() is the culprit.
    */
-  protected abstract List createParameterObjects(SNode node, IOperationContext operationContext, EditorContext editorContext);
+@Deprecated(since = "3.5", forRemoval = true)
+  protected boolean isReferentPresentation() {
+    return true;
+  }
 
-  protected abstract void handleAction(Object parameterObject, SNode node, SModel model, IOperationContext operationContext, EditorContext editorContext);
-
-  protected abstract boolean isReferentPresentation();
+  protected EditorMenuDescriptor getEditorMenuDescriptor(Object parameterObject) {
+    return null;
+  }
 }

@@ -1,0 +1,19 @@
+<ivy-module version="2.0" xmlns:m="http://ant.apache.org/ivy/maven">
+  <info organisation="org.jetbrains.mps" module="idea-platform"/>
+  <dependencies>
+    <dependency org="org.jetbrains.kotlin" name="kotlin-stdlib-common" rev="${kotlin.version}">
+      <artifact name="kotlin-stdlib-common" ext="jar"/>
+      <artifact name="kotlin-stdlib-common" m:classifier="sources" ext="jar"/>
+      <artifact name="kotlin-stdlib-common" m:classifier="javadoc" ext="jar"/>
+    </dependency>
+    <dependency org="org.jetbrains.kotlin" name="kotlin-stdlib" rev="${kotlin.version}">
+      <artifact name="kotlin-stdlib" ext="jar"/>
+      <artifact name="kotlin-stdlib" m:classifier="sources" ext="jar"/>
+      <artifact name="kotlin-stdlib" m:classifier="javadoc" ext="jar"/>
+    </dependency>
+    <dependency org="org.jetbrains.kotlin" name="kotlin-compiler-embeddable" rev="${kotlin.version}">
+      <!-- We only need that to extract builtins -->
+      <artifact name="kotlin-compiler-embeddable" ext="jar"/>
+    </dependency>
+  </dependencies>
+</ivy-module>

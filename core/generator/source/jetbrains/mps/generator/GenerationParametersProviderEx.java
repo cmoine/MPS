@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,5 +24,12 @@ import java.util.Collection;
  */
 public interface GenerationParametersProviderEx extends GenerationParametersProvider {
 
-  Collection<String> getAdditionalLanguages(SModel descriptor);
+  /**
+   * @deprecated use generation plans to control which languages and generators are involved. String for a language is not a best possible API anyway.
+   */
+@Deprecated(since = "2018.2", forRemoval = true)
+  default Collection<String> getAdditionalLanguages(SModel descriptor) {
+    // in use by mbeddr
+    return null;
+  }
 }

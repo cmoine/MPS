@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,14 +21,12 @@ import jetbrains.mps.generator.IGeneratorLogger;
 import jetbrains.mps.generator.impl.GenerationFailureException;
 import jetbrains.mps.generator.impl.TemplateGenerator;
 import jetbrains.mps.generator.impl.query.GeneratorQueryProvider;
-import jetbrains.mps.generator.runtime.NodeWeaveFacility.WeaveContext;
 import jetbrains.mps.generator.template.ITemplateProcessor;
 import jetbrains.mps.generator.template.QueryExecutionContext;
-import jetbrains.mps.smodel.IOperationContext;
-import jetbrains.mps.util.annotation.ToRemove;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
@@ -55,8 +53,7 @@ import java.util.List;
  * Evgeny Gryaznov, 10/22/10
  */
 public interface TemplateExecutionEnvironment extends GeneratorQueryProvider.Source {
-
-  IOperationContext getOperationContext();
+  // FIXME with #getGenerator() being instance of GQP.Source, perhaps TEE shall not implement it?
 
   SModel getOutputModel();
 
@@ -68,6 +65,11 @@ public interface TemplateExecutionEnvironment extends GeneratorQueryProvider.Sou
   @NotNull
   SNode createOutputNode(@NotNull SConcept concept);
 
+  /**
+   * TemplateGenerator is implementation class and there's no apparent reason why TEE clients might need access to it.
+   * @return
+   */
+@Deprecated(since = "2020.1", forRemoval = true)
   @NotNull
   TemplateGenerator getGenerator();
 
@@ -100,32 +102,127 @@ public interface TemplateExecutionEnvironment extends GeneratorQueryProvider.Sou
 
   /**
    * Support for $INSERT$ macro, adopt a node, prepare it to get inserted into output model
+   * Doesn't tolerate {@code null} for node
+   * @return not {@code null} value, either the supplied {@code node}, or its copy.
    */
   SNode insertNode(SNode node, SNodeReference templateNode, TemplateContext templateContext) throws GenerationCanceledException, GenerationFailureException;
+
+  /**
+   * Support for $CALL-SITE$ macro, provides a node that has been produced by template processor earlier.
+   * XXX Not sure I need this, could get the value right from TC, but generally a level of indirection doesn't hurt
+   * FIXME why do I stick to SNodeReference to identify template location, just for the sake of navigation? Can I use smth like TemplateDeclarationKey instead?
+   * @return empty list if no call site node is available
+   *         Though we support single node as a call site at the moment, use Collection here for uniformity in generated templates.
+   *         XXX Perhaps, later I'd reconsider and provide list of call site nodes to consume by clients
+   * @since 2020.3
+   */
+  Collection<SNode> callSiteNode(SNodeReference templateNode, TemplateContext templateContext) throws GenerationCanceledException, GenerationFailureException;
+
+  /**
+   * Support for $CALL-SITE$ macro, installs a node from template call site into a {@link TemplateContext} for later use from
+   * within a {@code IParameterizedTemplate} with {@code needCallSite == true}.
+   * Invoke only when target template does need call site.
+   *
+   * @param templateNode identifies template invocation (CALL/SWITCH) location, not null
+   * @param templateContext context to argument, not null
+   * @param callSiteNode call site nodes, not null
+   * @return context that has call site node recorded (or cleared, if no call site node could be recovered from the argument)
+   */
+  TemplateContext withCallSiteNode(SNodeReference templateNode, TemplateContext templateContext, Collection<SNode> callSiteNode);
+
+  /**
+   * FIXME provisional API just to get rid of TemplateGenerator:getGenerator exposure. Would be great to use smth like TemplateDeclarationKey, just the name is unfortunate
+   *       Perhaps, shall go with SwitchCallSite right away?
+   *       Intentionally no TemplateContext argument as (a) it's null input case (b) message is a plain text
+   *
+   * XXX perhaps, Collection.emptyList() as return value?
+   * @param _switch identifies switch declaration
+   * @throws GenerationCanceledException provisionally, I expect null handling to get extended with option to fail generation, we'd need to account for this scenario right away
+   * @throws GenerationFailureException
+   * @since 2020.1
+   */
+  void nullInputSwitch(SNodeReference _switch) throws GenerationCanceledException, GenerationFailureException;
 
   @Nullable
   Collection<SNode> trySwitch(SNodeReference _switch, TemplateContext context) throws GenerationException;
 
-  Collection<SNode> applyTemplate(@NotNull SNodeReference templateDeclaration, @NotNull SNodeReference templateNode, @NotNull TemplateContext context, Object... arguments) throws GenerationException;
+  /**
+   * Intended for use from generated code when invoking compiled templates from the same model/module (those we can instantiate directly)
+   * @param templateDeclaration instance of template to invoke, generally compiled as part of the same template model
+   * @param callSite identifies location where invocation happens
+   * @return an instance that identifies invocation of a given template at particular template location
+   * @since 2019.3
+   */
+  @NotNull
+  TemplateCallSite callSite(@NotNull TemplateDeclaration templateDeclaration, @NotNull SNodeReference callSite);
+
+  /**
+   * To invoke templates from another generator. Though given compile-time dependencies between modules, we can instantiate their classes,
+   * not all generators are 'compiled' as of this writing, and it's just not possible, let alone  it's safe to use an identity key to refer to them.
+   * Perhaps, one day, with GPs for template models in place and all template models generated/compiled, we can reference classes directly in all cases.
+   * @param templateIdentityKey identity of a template declaration
+   * @param callSite identifies location where invocation happens
+   * @return an instance that identifies invocation of a given template at particular template location
+   * @since 2019.3
+   */
+  @NotNull
+  TemplateCallSite callSite(@NotNull TemplateDeclarationKey templateIdentityKey, @NotNull SNodeReference callSite);
+
+  /**
+   * Intended for use from generated templates to obtain key for {@link #callSite(TemplateDeclarationKey, SNodeReference)}
+   * FIXME PROVISIONAL CODE, PLEASE CONSIDER ANOTHER APPROACH
+   *  see method impl for details
+   * @since 2018.3
+   */
+  TemplateDeclarationKey createTemplateKey(String modelRef, String nodeId, String templateName);
 
   void nodeCopied(TemplateContext context, SNode outputNode, String templateNodeId);
 
   void registerLabel(SNode inputNode, SNode outputNode, String mappingLabel);
 
+  /**
+   * Map output nodes to a composite key.
+   * FIXME unclear if I shall allow for null key2, and, if yes, treat that as regular registerLabel then?
+   * @since 2020.3
+   */
+  void registerCompositeLabel(/*NotNull*/Object key1, /*???*/ Object key2, /*NotNull*/ Collection<SNode> outputNode, /*NotNull*/ String mappingLabel);
+
+  // XXX can I switch to collection instead of Iterable?
   void registerLabel(SNode inputNode, Iterable<SNode> outputNodes, String mappingLabel);
+
+  /**
+   * A handy replacement for direct sNode.setReference(MAF.getRefLink(), SReference.create(MAF.getRefLink), PF.getInstance().createModelRef, PF.getInstance.createNodeId) call
+   * @param outputNode not null
+   * @param role not null
+   * @param targetModelRef not null
+   * @param targetNodeId not null
+   */
+  void associate(SNode outputNode, SReferenceLink role, String targetModelRef, String targetNodeId);
+
+  /**
+   * Replacement for direct {@code node.addChild()} call to facilitate additional operations
+   * template processing environment may want to impose for added children
+   * @since 2021.1
+   * @param outputNode parent, not null
+   * @param role aggregation, not null
+   * @param child child to add to the role into the parent, not null
+   */
+  void aggregate(SNode outputNode, SContainmentLink role, SNode child);
+
+  /**
+   * Replacement for direct {@code node.addChild()} call, much like
+   * {@link #aggregate(SNode, SContainmentLink, SNode)}, just for a sequence of children from the same role
+   * @since 2021.1
+   * @param outputNode parent, not null
+   * @param role aggregation, not null
+   * @param children list of child nodes to add to the role into the parent, may be null
+   */
+  void aggregate(SNode outputNode, SContainmentLink role, @Nullable Iterable<SNode> children);
 
   /**
    * Support for references between template nodes
    */
   void resolveInTemplateLater(@NotNull SNode outputNode, @NotNull SReferenceLink role, SNodeReference templateSourceNode, String templateTargetNodeId, @Nullable String resolveInfo, TemplateContext context);
-
-  /**
-   * @deprecated replaced with {@link #resolveInTemplateLater(SNode, SReferenceLink, SNodeReference, String, String, TemplateContext)}
-   */
-  @Deprecated
-  @ToRemove(version = 3.4)
-  void resolveInTemplateLater(@NotNull SNode outputNode, @NotNull String role, SNodeReference templateSourceNode, String templateTargetNodeId, @Nullable String resolveInfo, TemplateContext context);
-
 
   /**
    * ReferenceMacro support
@@ -134,26 +231,9 @@ public interface TemplateExecutionEnvironment extends GeneratorQueryProvider.Sou
   void resolve(@NotNull ReferenceResolver resolver);
 
   /**
-   * ReferenceMacro support
-   * @deprecated switch to {@link #resolve(ReferenceResolver)}
-   *             WHEN REMOVING THE METHOD, update reduce_TemplateNode template not to cast to (ReferenceResolver) any more in resolve() call
-   * @since 3.3
-   */
-  @Deprecated
-  @ToRemove(version = 3.4)
-  void resolve(@NotNull ReferenceResolver2 resolver);
-
-  /**
    * Support for $MAP-SRC$ macro, to substitute and/or process nodes in output model once transformation step is over and output model is <em>almost</em> ready.
    * As MPS documentation put it, "MAP-SRC macro is executed in the end of generator micro-step - after all node- and property-macro but before reference-macro."
    * @since 3.3
    */
   void postProcess(@NotNull NodePostProcessor postProcessor);
-
-  /**
-   * @return utility capable of node weaving with respect to the given context
-   * @since 3.3
-   */
-  @NotNull
-  NodeWeaveFacility prepareWeave(@NotNull WeaveContext context, @NotNull SNodeReference templateNode);
 }

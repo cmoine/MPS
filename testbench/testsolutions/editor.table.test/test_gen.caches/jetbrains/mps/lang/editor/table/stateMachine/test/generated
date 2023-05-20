@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-3k6isiz7zd3lmuk0pshha1fnoap7u33" />
+<product version="3" modelHash="-56zv0iuknfj3ir77wpbj1y414lsdweq">
+  <files names="CompleteEmptyCell_Test.java:CreateEvent_Test.java:CreateState_Test.java:CreateTransition_Test.java:Create_Test.java:MoveTransitionToAnotherColumn_Test.java:MoveTransitionToAnotherRow_Test.java:RemoveEvent_Test.java:RemoveState_Test.java:RemoveTransition_Test.java:TabNavigationToEmptyCell_Test.java" />
+</product>
 

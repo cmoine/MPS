@@ -53,7 +53,7 @@ public abstract class AbstractMPSModelFileIndex extends FileBasedIndexExtension<
   }
 
   @Override
-  public boolean keyIsUniqueForIndexedFile() {
-    return true;
+  public int getVersion() {
+    return 2;
   }
 }

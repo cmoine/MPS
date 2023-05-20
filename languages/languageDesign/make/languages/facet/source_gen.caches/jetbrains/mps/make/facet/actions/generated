@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-13sws8jdlyv6z71mtimgp0000jkc41g" />
+<product version="3" modelHash="-3b3ay81tv9lx0ibratnp815m3m7s3wm">
+  <files names="ActionAspectDescriptorImpl.java:ParametersDeclaration_add_empty_var.java:Parameters_name.java" />
+</product>
 

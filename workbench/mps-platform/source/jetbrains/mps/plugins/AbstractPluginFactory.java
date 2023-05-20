@@ -15,6 +15,9 @@
  */
 package jetbrains.mps.plugins;
 
+/**
+ * XXX is there a need for this class? There's no use other than in PluginContributor, which doesn't use {@link #create(Class)} anyway
+ */
 public abstract class AbstractPluginFactory {
   public abstract <T> T create(Class<T> klass);
 }

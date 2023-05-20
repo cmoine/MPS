@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="7h8lr6z7gr4u6c57rhm9acmztqulu65" />
+<product version="3" modelHash="-4qw4tz8gx5frwohqsxlyqx29p4fud7v">
+  <files names="EvaluationContext.java:EvaluationWithContextContainer.java:StackFrameContext.java:VariableDescription.java" />
+</product>
 

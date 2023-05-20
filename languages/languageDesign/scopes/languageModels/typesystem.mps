@@ -2,9 +2,7 @@
 <model ref="r:c2d05fc3-fe25-4093-95ce-8e3356e61084(jetbrains.mps.lang.scopes.typesystem)">
   <persistence version="9" />
   <languages>
-    <use id="d8f591ec-4d86-4af2-9f92-a9e93c803ffa" name="jetbrains.mps.lang.scopes" version="0" />
-    <use id="7a5dda62-9140-4668-ab76-d5ed1746f2b2" name="jetbrains.mps.lang.typesystem" version="0" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="00000000-0000-4000-0000-1de82b3a4936(jetbrains.mps.devkit.aspect.typesystem)" />
   </languages>
   <imports>
     <import index="genb" ref="r:142fc2e9-fc09-4c4f-92d7-6ce0e3f66b61(jetbrains.mps.lang.scopes.structure)" />
@@ -31,6 +29,7 @@
       <concept id="1068498886296" name="jetbrains.mps.baseLanguage.structure.VariableReference" flags="nn" index="37vLTw">
         <reference id="1068581517664" name="variableDeclaration" index="3cqZAo" />
       </concept>
+      <concept id="1225271177708" name="jetbrains.mps.baseLanguage.structure.StringType" flags="in" index="17QB3L" />
       <concept id="4972933694980447171" name="jetbrains.mps.baseLanguage.structure.BaseVariableDeclaration" flags="ng" index="19Szcq">
         <child id="5680397130376446158" name="type" index="1tU5fm" />
       </concept>
@@ -62,11 +61,8 @@
         <child id="1081773367579" name="rightExpression" index="3uHU7w" />
         <child id="1081773367580" name="leftExpression" index="3uHU7B" />
       </concept>
-      <concept id="6329021646629104957" name="jetbrains.mps.baseLanguage.structure.TextCommentPart" flags="nn" index="3SKdUq">
-        <property id="6329021646629104958" name="text" index="3SKdUp" />
-      </concept>
       <concept id="6329021646629104954" name="jetbrains.mps.baseLanguage.structure.SingleLineComment" flags="nn" index="3SKdUt">
-        <child id="6329021646629175155" name="commentPart" index="3SKWNk" />
+        <child id="8356039341262087992" name="line" index="1aUNEU" />
       </concept>
     </language>
     <language id="3a13115c-633c-4c5c-bbcc-75c4219e9555" name="jetbrains.mps.lang.quotation">
@@ -81,13 +77,13 @@
       <concept id="1175517767210" name="jetbrains.mps.lang.typesystem.structure.ReportErrorStatement" flags="nn" index="2MkqsV">
         <child id="1175517851849" name="errorString" index="2MkJ7o" />
       </concept>
-      <concept id="1227096774658" name="jetbrains.mps.lang.typesystem.structure.MessageStatement" flags="ng" index="2OEH$v">
-        <child id="1227096802790" name="nodeToReport" index="2OEOjV" />
-      </concept>
       <concept id="1195213580585" name="jetbrains.mps.lang.typesystem.structure.AbstractCheckingRule" flags="ig" index="18hYwZ">
         <child id="1195213635060" name="body" index="18ibNy" />
       </concept>
       <concept id="1195214364922" name="jetbrains.mps.lang.typesystem.structure.NonTypesystemRule" flags="ig" index="18kY7G" />
+      <concept id="3937244445246642777" name="jetbrains.mps.lang.typesystem.structure.AbstractReportStatement" flags="ng" index="1urrMJ">
+        <child id="3937244445246642781" name="nodeToReport" index="1urrMF" />
+      </concept>
       <concept id="1176543928247" name="jetbrains.mps.lang.typesystem.structure.IsSubtypeExpression" flags="nn" index="3JuTUA">
         <child id="1176543945045" name="subtypeExpression" index="3JuY14" />
         <child id="1176543950311" name="supertypeExpression" index="3JuZjQ" />
@@ -133,6 +129,14 @@
         <property id="1169194664001" name="name" index="TrG5h" />
       </concept>
     </language>
+    <language id="c7fb639f-be78-4307-89b0-b5959c3fa8c8" name="jetbrains.mps.lang.text">
+      <concept id="155656958578482948" name="jetbrains.mps.lang.text.structure.Word" flags="nn" index="3oM_SD">
+        <property id="155656958578482949" name="value" index="3oM_SC" />
+      </concept>
+      <concept id="2535923850359271782" name="jetbrains.mps.lang.text.structure.Line" flags="nn" index="1PaTwC">
+        <child id="2535923850359271783" name="elements" index="1PaTwD" />
+      </concept>
+    </language>
     <language id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections">
       <concept id="1151689724996" name="jetbrains.mps.baseLanguage.collections.structure.SequenceType" flags="in" index="A3Dl8">
         <child id="1151689745422" name="elementType" index="A3Ik2" />
@@ -143,45 +147,68 @@
     <property role="TrG5h" value="check_ParentScope" />
     <node concept="3clFbS" id="70qA1hy$wwO" role="18ibNy">
       <node concept="3SKdUt" id="70qA1hy$wwQ" role="3cqZAp">
-        <node concept="3SKdUq" id="70qA1hy$wwR" role="3SKWNk">
-          <property role="3SKdUp" value="todo: do right stuff! =(" />
+        <node concept="1PaTwC" id="ATZLwXnY1J" role="1aUNEU">
+          <node concept="3oM_SD" id="ATZLwXnY1K" role="1PaTwD">
+            <property role="3oM_SC" value="todo:" />
+          </node>
+          <node concept="3oM_SD" id="ATZLwXnY1L" role="1PaTwD">
+            <property role="3oM_SC" value="do" />
+          </node>
+          <node concept="3oM_SD" id="ATZLwXnY1M" role="1PaTwD">
+            <property role="3oM_SC" value="right" />
+          </node>
+          <node concept="3oM_SD" id="ATZLwXnY1N" role="1PaTwD">
+            <property role="3oM_SC" value="stuff!" />
+          </node>
+          <node concept="3oM_SD" id="ATZLwXnY1O" role="1PaTwD">
+            <property role="3oM_SC" value="=(" />
+          </node>
+        </node>
+      </node>
+      <node concept="3cpWs8" id="7RJpKjYHtfW" role="3cqZAp">
+        <node concept="3cpWsn" id="7RJpKjYHtfX" role="3cpWs9">
+          <property role="TrG5h" value="name" />
+          <node concept="17QB3L" id="7RJpKjYHsyS" role="1tU5fm" />
+          <node concept="2OqwBi" id="7RJpKjYHtfY" role="33vP2m">
+            <node concept="2OqwBi" id="7RJpKjYHtfZ" role="2Oq$k0">
+              <node concept="1YBJjd" id="7RJpKjYHtg0" role="2Oq$k0">
+                <ref role="1YBMHb" node="70qA1hy$wwP" resolve="expr" />
+              </node>
+              <node concept="2Xjw5R" id="7RJpKjYHtg1" role="2OqNvi">
+                <node concept="1xMEDy" id="7RJpKjYHtg2" role="1xVPHs">
+                  <node concept="chp4Y" id="7RJpKjYHtg3" role="ri$Ld">
+                    <ref role="cht4Q" to="1i04:hP3i0lY" resolve="ConceptMethodDeclaration" />
+                  </node>
+                </node>
+              </node>
+            </node>
+            <node concept="3TrcHB" id="7RJpKjYHtg4" role="2OqNvi">
+              <ref role="3TsBF5" to="tpck:h0TrG11" resolve="name" />
+            </node>
+          </node>
         </node>
       </node>
       <node concept="3clFbJ" id="70qA1hy$wwS" role="3cqZAp">
         <node concept="3clFbS" id="70qA1hy$wwT" role="3clFbx">
           <node concept="2MkqsV" id="70qA1hy$wwU" role="3cqZAp">
-            <node concept="1YBJjd" id="70qA1hy$wxa" role="2OEOjV">
-              <ref role="1YBMHb" node="70qA1hy$wwP" resolve="expr" />
-            </node>
             <node concept="Xl_RD" id="70qA1hy$wwW" role="2MkJ7o">
               <property role="Xl_RC" value="Should be in getScope method" />
+            </node>
+            <node concept="1YBJjd" id="70qA1hy$wxa" role="1urrMF">
+              <ref role="1YBMHb" node="70qA1hy$wwP" resolve="expr" />
             </node>
           </node>
         </node>
         <node concept="3fqX7Q" id="70qA1hy$wwX" role="3clFbw">
           <node concept="2OqwBi" id="70qA1hy$wwY" role="3fr31v">
-            <node concept="2OqwBi" id="70qA1hy$wwZ" role="2Oq$k0">
-              <node concept="2OqwBi" id="70qA1hy$wx0" role="2Oq$k0">
-                <node concept="1YBJjd" id="70qA1hy$wx9" role="2Oq$k0">
-                  <ref role="1YBMHb" node="70qA1hy$wwP" resolve="expr" />
-                </node>
-                <node concept="2Xjw5R" id="70qA1hy$wx2" role="2OqNvi">
-                  <node concept="1xMEDy" id="70qA1hy$wx3" role="1xVPHs">
-                    <node concept="chp4Y" id="70qA1hy$wx4" role="ri$Ld">
-                      <ref role="cht4Q" to="1i04:hP3i0lY" resolve="ConceptMethodDeclaration" />
-                    </node>
-                  </node>
-                </node>
-              </node>
-              <node concept="3TrcHB" id="70qA1hy$wx5" role="2OqNvi">
-                <ref role="3TsBF5" to="tpck:h0TrG11" resolve="name" />
+            <node concept="liA8E" id="70qA1hy$wx6" role="2OqNvi">
+              <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object)" resolve="equals" />
+              <node concept="37vLTw" id="7RJpKjYHtg5" role="37wK5m">
+                <ref role="3cqZAo" node="7RJpKjYHtfX" resolve="name" />
               </node>
             </node>
-            <node concept="liA8E" id="70qA1hy$wx6" role="2OqNvi">
-              <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object):boolean" resolve="equals" />
-              <node concept="Xl_RD" id="70qA1hy$wx7" role="37wK5m">
-                <property role="Xl_RC" value="getScope" />
-              </node>
+            <node concept="Xl_RD" id="70qA1hy$wx7" role="2Oq$k0">
+              <property role="Xl_RC" value="getScope" />
             </node>
           </node>
         </node>
@@ -221,18 +248,32 @@
     <property role="TrG5h" value="check_ComeFromExpression" />
     <node concept="3clFbS" id="70qA1hy$CJy" role="18ibNy">
       <node concept="3SKdUt" id="70qA1hy$CJ$" role="3cqZAp">
-        <node concept="3SKdUq" id="70qA1hy$CJ_" role="3SKWNk">
-          <property role="3SKdUp" value="todo: do right stuff! =(" />
+        <node concept="1PaTwC" id="ATZLwXnY1P" role="1aUNEU">
+          <node concept="3oM_SD" id="ATZLwXnY1Q" role="1PaTwD">
+            <property role="3oM_SC" value="todo:" />
+          </node>
+          <node concept="3oM_SD" id="ATZLwXnY1R" role="1PaTwD">
+            <property role="3oM_SC" value="do" />
+          </node>
+          <node concept="3oM_SD" id="ATZLwXnY1S" role="1PaTwD">
+            <property role="3oM_SC" value="right" />
+          </node>
+          <node concept="3oM_SD" id="ATZLwXnY1T" role="1PaTwD">
+            <property role="3oM_SC" value="stuff!" />
+          </node>
+          <node concept="3oM_SD" id="ATZLwXnY1U" role="1PaTwD">
+            <property role="3oM_SC" value="=(" />
+          </node>
         </node>
       </node>
       <node concept="3clFbJ" id="70qA1hy$CJA" role="3cqZAp">
         <node concept="3clFbS" id="70qA1hy$CJB" role="3clFbx">
           <node concept="2MkqsV" id="70qA1hy$CJC" role="3cqZAp">
-            <node concept="1YBJjd" id="70qA1hy$CJR" role="2OEOjV">
-              <ref role="1YBMHb" node="70qA1hy$CJz" resolve="expr" />
-            </node>
             <node concept="Xl_RD" id="70qA1hy$CJE" role="2MkJ7o">
               <property role="Xl_RC" value="Should be in getScope method" />
+            </node>
+            <node concept="1YBJjd" id="70qA1hy$CJR" role="1urrMF">
+              <ref role="1YBMHb" node="70qA1hy$CJz" resolve="expr" />
             </node>
           </node>
         </node>
@@ -256,7 +297,7 @@
               </node>
             </node>
             <node concept="liA8E" id="70qA1hy$CJO" role="2OqNvi">
-              <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object):boolean" resolve="equals" />
+              <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object)" resolve="equals" />
               <node concept="Xl_RD" id="70qA1hy$CJP" role="37wK5m">
                 <property role="Xl_RC" value="getScope" />
               </node>
@@ -297,18 +338,32 @@
     <property role="TrG5h" value="check_CompositeWithParentScopeExpression" />
     <node concept="3clFbS" id="70qA1hy$IDS" role="18ibNy">
       <node concept="3SKdUt" id="70qA1hy$IDU" role="3cqZAp">
-        <node concept="3SKdUq" id="70qA1hy$IDV" role="3SKWNk">
-          <property role="3SKdUp" value="todo: do right stuff! =(" />
+        <node concept="1PaTwC" id="ATZLwXnY1V" role="1aUNEU">
+          <node concept="3oM_SD" id="ATZLwXnY1W" role="1PaTwD">
+            <property role="3oM_SC" value="todo:" />
+          </node>
+          <node concept="3oM_SD" id="ATZLwXnY1X" role="1PaTwD">
+            <property role="3oM_SC" value="do" />
+          </node>
+          <node concept="3oM_SD" id="ATZLwXnY1Y" role="1PaTwD">
+            <property role="3oM_SC" value="right" />
+          </node>
+          <node concept="3oM_SD" id="ATZLwXnY1Z" role="1PaTwD">
+            <property role="3oM_SC" value="stuff!" />
+          </node>
+          <node concept="3oM_SD" id="ATZLwXnY20" role="1PaTwD">
+            <property role="3oM_SC" value="=(" />
+          </node>
         </node>
       </node>
       <node concept="3clFbJ" id="70qA1hy$IDW" role="3cqZAp">
         <node concept="3clFbS" id="70qA1hy$IDX" role="3clFbx">
           <node concept="2MkqsV" id="70qA1hy$IDY" role="3cqZAp">
-            <node concept="1YBJjd" id="70qA1hy$IDZ" role="2OEOjV">
-              <ref role="1YBMHb" node="70qA1hy$IDT" resolve="expr" />
-            </node>
             <node concept="Xl_RD" id="70qA1hy$IE0" role="2MkJ7o">
               <property role="Xl_RC" value="Should be in getScope method" />
+            </node>
+            <node concept="1YBJjd" id="70qA1hy$IDZ" role="1urrMF">
+              <ref role="1YBMHb" node="70qA1hy$IDT" resolve="expr" />
             </node>
           </node>
         </node>
@@ -332,7 +387,7 @@
               </node>
             </node>
             <node concept="liA8E" id="70qA1hy$IEa" role="2OqNvi">
-              <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object):boolean" resolve="equals" />
+              <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object)" resolve="equals" />
               <node concept="Xl_RD" id="70qA1hy$IEb" role="37wK5m">
                 <property role="Xl_RC" value="getScope" />
               </node>
@@ -358,7 +413,7 @@
             <node concept="Xl_RD" id="70qA1hy$IHa" role="2MkJ7o">
               <property role="Xl_RC" value="Parameter should be subtype of Scope or node&lt;&gt; or sequence&lt;node&lt;&gt;&gt;" />
             </node>
-            <node concept="1YBJjd" id="70qA1hy$IHb" role="2OEOjV">
+            <node concept="1YBJjd" id="70qA1hy$IHb" role="1urrMF">
               <ref role="1YBMHb" node="70qA1hy$IDT" resolve="expr" />
             </node>
           </node>

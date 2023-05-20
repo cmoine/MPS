@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-6aium5alrwqe9vmf8l5imaysbynvu00" />
+<product version="3" modelHash="-b6vmasl4pv51v61kkh3lb8u4jawv4f2">
+  <files names="Diff_Facet.java:Differ.java:FacetAspectDescriptor.java:FacetManifest.java:Test_Facet.java" />
+</product>
 

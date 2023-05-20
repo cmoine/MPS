@@ -1,0 +1,74 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="bootstrap:mps-core">
+    <output-path>$PROJECT_DIR$/lib/</output-path>
+    <root id="root">
+      <element id="archive" name="mps-core.jar">
+        <element id="module-output" name="kernel" />
+        <element id="module-output" name="make-runtime" />
+        <element id="module-output" name="util-core" />
+        <element id="module-output" name="typesystemEngine" />
+        <element id="module-output" name="typechecking" />
+        <element id="module-output" name="scripts-runtime" />
+        <element id="module-output" name="refactoring" />
+        <element id="module-output" name="refactoring-runtime" />
+        <element id="module-output" name="project" />
+        <element id="module-output" name="components" />
+        <element id="module-output" name="findUsages-runtime" />
+        <element id="module-output" name="debuginfo-impl" />
+        <element id="module-output" name="debuginfo-api" />
+        <element id="module-output" name="dataflow-rt" />
+        <element id="module-output" name="kernel-resources" />
+        <element id="module-output" name="smodel" />
+        <element id="module-output" name="vfs" />
+        <element id="module-output" name="platform" />
+        <element id="module-output" name="pattern-runtime" />
+        <element id="module-output" name="model" />
+        <element id="module-output" name="module" />
+      </element>
+      <element id="archive" name="mps-boot-util.jar">
+        <element id="module-output" name="boot-util" />
+      </element>
+      <element id="archive" name="mps-closures.jar">
+        <element id="module-output" name="closures-runtime" />
+      </element>
+      <element id="archive" name="mps-collections.jar">
+        <element id="module-output" name="collections-runtime" />
+      </element>
+      <element id="archive" name="mps-constraints-runtime.jar">
+        <element id="module-output" name="constraints-runtime" />
+      </element>
+      <element id="archive" name="mps-tuples.jar">
+        <element id="module-output" name="tuples-runtime" />
+      </element>
+      <element id="archive" name="mps-project-check.jar">
+        <element id="module-output" name="project-check" />
+      </element>
+      <element id="archive" name="mps-persistence.jar">
+        <element id="module-output" name="persistence" />
+        <element id="module-output" name="java-stub" />
+        <element id="module-output" name="kotlin-stub" />
+      </element>
+      <element id="archive" name="mps-messaging.jar">
+        <element id="module-output" name="mps-messaging" />
+      </element>
+      <element id="archive" name="mps-generator.jar">
+        <element id="module-output" name="generator-engine" />
+      </element>
+      <element id="archive" name="mps-textgen.jar">
+        <element id="module-output" name="textgen" />
+      </element>
+      <element id="archive" name="mps-references.jar">
+        <element id="module-output" name="baseLanguage-runtime" />
+      </element>
+      <element id="archive" name="mps-logging.jar">
+        <element id="module-output" name="logging" />
+      </element>
+      <element id="archive" name="mps-behavior-api.jar">
+        <element id="module-output" name="behavior-api" />
+      </element>
+      <element id="archive" name="mps-behavior-runtime.jar">
+        <element id="module-output" name="behavior-runtime" />
+      </element>
+    </root>
+  </artifact>
+</component>

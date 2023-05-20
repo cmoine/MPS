@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-a41esmvqoxyoaowsyot3a6o7v9y8v1t" />
+<product version="3" modelHash="-et85zuvcbnnzs6r48wnqrznkrmpmeus">
+  <files names="CheckTestStateListener.java:JUnitBTestCaseTest_Test.java:JavaCommand_Test.java:SplitCommandInParts_Test.java" />
+</product>
 

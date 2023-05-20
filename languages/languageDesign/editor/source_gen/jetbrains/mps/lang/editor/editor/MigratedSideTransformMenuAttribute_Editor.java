@@ -6,17 +6,9 @@ import jetbrains.mps.nodeEditor.DefaultNodeEditor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.EditorManager;
-import jetbrains.mps.openapi.editor.update.AttributeKind;
 
 public class MigratedSideTransformMenuAttribute_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createAttributedNodeCell_7l7okl_a(editorContext, node);
-  }
-  private EditorCell createAttributedNodeCell_7l7okl_a(EditorContext editorContext, SNode node) {
-    EditorManager manager = EditorManager.getInstanceFromContext(editorContext);
-    EditorCell editorCell = editorContext.getEditorComponent().getUpdater().getCurrentUpdateSession().getAttributedCell(AttributeKind.NODE, node);
-    editorCell.setBig(true);
-    return editorCell;
+    return new MigratedSideTransformMenuAttribute_EditorBuilder_a(editorContext, node).createCell();
   }
 }

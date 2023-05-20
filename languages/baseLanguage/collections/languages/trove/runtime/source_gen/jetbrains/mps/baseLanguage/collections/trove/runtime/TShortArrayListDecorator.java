@@ -40,7 +40,7 @@ public class TShortArrayListDecorator extends AbstractList<Short> implements Lis
   }
   @Override
   public ListIterator<Short> listIterator() {
-    return new TShortArrayListDecorator.TShortListIterator(0);
+    return new TShortListIterator(0);
   }
   @Override
   public void clear() {
@@ -127,7 +127,7 @@ public class TShortArrayListDecorator extends AbstractList<Short> implements Lis
     return this.primList.size();
   }
   public ListIterator<Short> listIterator(int index) {
-    return new TShortArrayListDecorator.TShortListIterator(index);
+    return new TShortListIterator(index);
   }
   protected boolean removePrim(short primValue) {
     int idx = this.primList.indexOf(primValue);

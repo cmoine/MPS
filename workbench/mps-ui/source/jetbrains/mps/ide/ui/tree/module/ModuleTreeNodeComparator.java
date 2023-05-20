@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 package jetbrains.mps.ide.ui.tree.module;
 
 import jetbrains.mps.ide.ui.tree.MPSTreeNode;
-import jetbrains.mps.ide.ui.tree.SortUtil.SModelComparator;
+import jetbrains.mps.util.SModelNameComparator;
 import jetbrains.mps.ide.ui.tree.smodel.SModelTreeNode;
 import jetbrains.mps.project.Solution;
 import jetbrains.mps.smodel.Language;
@@ -52,11 +52,13 @@ public class ModuleTreeNodeComparator implements Comparator<MPSTreeNode> {
         return 1;
       } else if (module1 instanceof Language) {
         return -1;
-      } else {
+      } else if (module2 instanceof Language){
         return 1;
+      } else {
+        return module1.toString().compareTo(module2.toString());
       }
     } else if(o1 instanceof SModelTreeNode && o2 instanceof SModelTreeNode) {
-      return (new SModelComparator()).compare(((SModelTreeNode) o1).getModel(), ((SModelTreeNode) o2).getModel());
+      return new SModelNameComparator().compare(((SModelTreeNode) o1).getModel(), ((SModelTreeNode) o2).getModel());
     }
     if (o1.toString() == null || o2.toString() == null) return 0;
     return o1.toString().compareTo(o2.toString());

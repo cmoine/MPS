@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,13 +22,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.jps.model.module.JpsModule;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * evgeny, 11/28/12
  */
-public class JpsMPSExtensionServiceImpl extends JpsMPSExtensionService {
+public class JpsMPSExtensionServiceImpl implements JpsMPSExtensionService {
 
   @Nullable
   @Override

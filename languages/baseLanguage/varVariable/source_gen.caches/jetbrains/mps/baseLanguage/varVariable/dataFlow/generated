@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-b75v1m1g03hl80zg10i92btqb1veiiu" />
+<product version="3" modelHash="cotmt9bjvya2m0zzt45hjy2a0mt7q79">
+  <files names="DataFlowAspectDescriptorImpl.java:VarVariableDeclaration_DataFlow.java" />
+</product>
 

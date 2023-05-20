@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,10 +30,11 @@ import java.util.Map;
  * Keeps track of tabs instantiated, hence its lifecycle shall not span single UI action
  */
 final class FacetTabsPersistence {
-  private final Map<String, TabFactory> myFacetTabs = new HashMap<String, TabFactory>();
+  private final Map<String, TabFactory<SModuleFacet>> myTabFactories = new HashMap<>();
+  private final Map<String, Tab> myFacetTabs = new HashMap<>();
   private final MPSProject myProject;
 
-  public FacetTabsPersistence(@NotNull MPSProject project) {
+  FacetTabsPersistence(@NotNull MPSProject project) {
     myProject = project;
   }
 
@@ -41,30 +42,34 @@ final class FacetTabsPersistence {
    * Initialize {@link TabFactory tab factories} from {@link FacetTabEP extension point}
    * @return <code>this</code> for convenience
    */
-  public FacetTabsPersistence initFromEP() {
-    FacetTabEP[] extensions = FacetTabEP.EP_NAME.getExtensions(myProject.getProject());
-    for (FacetTabEP extension : extensions) {
-      addTabFactory(extension.facetType, extension.getFacetTabFactory());
+  FacetTabsPersistence initFromEP() {
+    FacetTabEP<SModuleFacet>[] extensions = FacetTabEP.EP_NAME.getExtensions(myProject.getProject());
+    for (FacetTabEP<SModuleFacet> extension : extensions) {
+      addTabFactory(extension.facetType, extension.createInstance());
     }
     return this;
   }
 
   // may become public if there's need to populate this registry not from EP
-  private void addTabFactory(String facetType, @NotNull TabFactory tab) {
-    myFacetTabs.put(facetType, tab);
+  private void addTabFactory(String facetType, @NotNull TabFactory<SModuleFacet> tab) {
+    myTabFactories.put(facetType, tab);
   }
 
   /**
-   * @return newly instantiated or existing tab instance for the given facet, <code>null</code> if facet doesn't need an UI.
+   * @return newly instantiated or existing tab instance for the given facet, <code>null</code> if facet doesn't need a UI.
    */
   @Nullable
-  public Tab getFacetTab(@NotNull SModuleFacet moduleFacet) {
-    if(!myFacetTabs.containsKey(moduleFacet.getFacetType())) {
+  Tab getFacetTab(@NotNull SModuleFacet moduleFacet) {
+    final String facetType = moduleFacet.getFacetType();
+    if (!myTabFactories.containsKey(facetType)) {
       return null;
     }
-
-    @SuppressWarnings("unchecked")
-    TabFactory<SModuleFacet> tabFactory = myFacetTabs.get(moduleFacet.getFacetType());
-    return tabFactory.getTab(moduleFacet);
+    Tab tab = myFacetTabs.get(facetType);
+    if (tab == null) {
+      TabFactory<SModuleFacet> tabFactory = myTabFactories.get(facetType);
+      tab = tabFactory.getTab(moduleFacet);
+      myFacetTabs.put(facetType, tab);
+    }
+    return tab;
   }
 }

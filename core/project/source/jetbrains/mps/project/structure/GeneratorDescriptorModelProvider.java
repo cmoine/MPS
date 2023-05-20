@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@ package jetbrains.mps.project.structure;
 
 import jetbrains.mps.extapi.model.GeneratableSModel;
 import jetbrains.mps.generator.ModelDigestUtil;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.project.persistence.GeneratorDescriptorPersistence;
 import jetbrains.mps.smodel.BootstrapLanguages;
 import jetbrains.mps.smodel.Generator;
@@ -26,7 +27,6 @@ import jetbrains.mps.smodel.SnapshotModelData;
 import jetbrains.mps.smodel.TrivialModelDescriptor;
 import jetbrains.mps.util.JDOMUtil;
 import jetbrains.mps.util.MacrosFactory;
-import org.apache.log4j.Logger;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jetbrains.mps.openapi.model.SModel;
@@ -56,7 +56,7 @@ import java.util.Map;
 public class GeneratorDescriptorModelProvider extends DescriptorModelProvider {
   private final SModelId myDescriptorModelId = new IntegerSModelId(0x0f020202);
 
-  private final Map<SModelReference, GeneratorDescriptorModel> myModels = Collections.synchronizedMap(new HashMap<SModelReference, GeneratorDescriptorModel>());
+  private final Map<SModelReference, GeneratorDescriptorModel> myModels = Collections.synchronizedMap(new HashMap<>());
 
 
   @Override
@@ -88,7 +88,7 @@ public class GeneratorDescriptorModelProvider extends DescriptorModelProvider {
     GeneratorDescriptorModel dm = myModels.get(modelReference);
     if (dm != null) {
       Generator generator = (Generator) module;
-      assert dm.getModule() == generator;
+      assert dm.getModule() == generator : String.format("Descriptor model owned by module %s while associated with %s", dm.getModule(), generator);
       generator.unregisterModel(dm);
       myModels.remove(modelReference);
     }
@@ -96,11 +96,11 @@ public class GeneratorDescriptorModelProvider extends DescriptorModelProvider {
 
   @Override
   public void dispose() {
-    ArrayList<GeneratorDescriptorModel> models = new ArrayList<GeneratorDescriptorModel>(myModels.values());
+    ArrayList<GeneratorDescriptorModel> models = new ArrayList<>(myModels.values());
     myModels.clear();
     for (GeneratorDescriptorModel m : models) {
       SModule module = m.getModule();
-      if (module != null && module instanceof Generator) {
+      if (module instanceof Generator) {
         ((Generator) module).unregisterModel(m);
       }
     }
@@ -116,6 +116,7 @@ public class GeneratorDescriptorModelProvider extends DescriptorModelProvider {
     if (sharpIndex != -1) {
       moduleName = moduleName.substring(0, sharpIndex);
     }
+    // XXX name of the model has to match package name in Generator#getQualifiedActivatorClassName so that we can load generated class later.
     return new jetbrains.mps.smodel.SModelReference(module.getModuleReference(), myDescriptorModelId, new SModelName(moduleName, SModelStereotype.DESCRIPTOR));
   }
 
@@ -135,8 +136,8 @@ public class GeneratorDescriptorModelProvider extends DescriptorModelProvider {
 
     @Override
     public boolean isGeneratable() {
-      return !myModule.isReadOnly() && myModule.generateTemplates(); // FIXME WORK IN PROGRESS, remove once templates are ready.
-//      return !myModule.isReadOnly();
+//      return !myModule.isReadOnly() && myModule.generateTemplates(); // FIXME WORK IN PROGRESS, remove once templates are ready.
+      return !myModule.isReadOnly();
     }
 
     @Override
@@ -155,31 +156,27 @@ public class GeneratorDescriptorModelProvider extends DescriptorModelProvider {
       if (hash != null) {
         return hash;
       }
-      Element element = new Element("gd");
-      // FIXME can't use myModule for MacrosFactory - there's no file in generator's descriptor, hence use one of the source language.
-      // Though once generator modules are standalone there's file, guess, the right way is to tolerate modules without file, and to supply
-      // e.g. MacrosFactory.getGlobal() instead of null.
-      GeneratorDescriptorPersistence.saveGeneratorDescriptor(element, myModule.getModuleDescriptor(), MacrosFactory.forModule(myModule.getSourceLanguage()));
+      Element element = new GeneratorDescriptorPersistence(MacrosFactory.forModule((SModule) myModule), true).save(myModule.getModuleDescriptor());
       StringWriter out = new StringWriter();
       try {
         JDOMUtil.writeDocument(new Document(element), out);
       } catch (IOException ex) {
-        Logger.getLogger(getClass()).warn(ex.getMessage(), ex);
+        Logger.getLogger(getClass()).warning(ex.getMessage(), ex);
       }
       hash = ModelDigestUtil.hashText(out.toString());
       BigInteger modelHash = new BigInteger(hash, Character.MAX_RADIX);
       for (SModel m : myModule.getModels()) {
         if (m instanceof GeneratableSModel && !SModelStereotype.isDescriptorModel(m)) {
-          modelHash = modelHash.xor(new BigInteger(((GeneratableSModel) m).getModelHash(), Character.MAX_RADIX));
+          String h = ((GeneratableSModel) m).getModelHash();
+          // XXX model hash may be null when we fail to read file (e.g. MPS-28315).
+          //     I've got no idea how to handle this reliably, don't feel any predefined value (like -1) is reasonable here, therefore just prevent NPE
+          if (h != null) {
+            modelHash = modelHash.xor(new BigInteger(h, Character.MAX_RADIX));
+          }
         }
       }
       myHash = hash = modelHash.toString(Character.MAX_RADIX);
       return hash;
-    }
-
-    @Override
-    public Map<String, String> getGenerationHashes() {
-      return Collections.singletonMap(GeneratableSModel.FILE, getModelHash());
     }
 
     @Override

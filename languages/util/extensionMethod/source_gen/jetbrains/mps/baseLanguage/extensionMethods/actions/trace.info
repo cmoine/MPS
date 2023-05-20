@@ -2,27 +2,30 @@
 <debug-info version="2">
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <root>
     <file name="ActionAspectDescriptorImpl.java">
-      <unit at="13,0,34,0" name="jetbrains.mps.baseLanguage.extensionMethods.actions.ActionAspectDescriptorImpl" />
-    </file>
-    <file name="QueriesGenerated.java">
-      <unit at="6,0,8,0" name="jetbrains.mps.baseLanguage.extensionMethods.actions.QueriesGenerated" />
+      <unit at="12,0,28,0" name="jetbrains.mps.baseLanguage.extensionMethods.actions.ActionAspectDescriptorImpl" />
     </file>
   </root>
   <root nodeRef="r:e0c5b5da-9545-4753-a462-f79d5ed8b466(jetbrains.mps.baseLanguage.extensionMethods.actions)/720975379598240371">
     <file name="EM_node_factories.java">
-      <node id="3097384118512214627" at="13,91,14,365" concept="0" />
-      <node id="720975379598240372" at="13,0,16,0" concept="1" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SModel;)V" />
-      <scope id="720975379598240372" at="13,91,14,365" />
-      <scope id="720975379598240372" at="13,0,16,0">
+      <node id="3097384118512214627" at="15,102,16,103" concept="0" />
+      <node id="720975379598240371" at="21,0,22,0" concept="2" trace="visibility$Yyua" />
+      <node id="720975379598240371" at="25,0,26,0" concept="2" trace="PublicVisibility$R0" />
+      <node id="720975379598240372" at="15,0,18,0" concept="1" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <scope id="720975379598240372" at="15,102,16,103" />
+      <scope id="720975379598240372" at="15,0,18,0">
         <var name="enclosingNode" id="720975379598240372" />
+        <var name="index" id="720975379598240372" />
         <var name="model" id="720975379598240372" />
         <var name="newNode" id="720975379598240372" />
         <var name="sampleNode" id="720975379598240372" />
       </scope>
-      <unit id="720975379598240372" at="12,0,17,0" name="jetbrains.mps.baseLanguage.extensionMethods.actions.EM_node_factories$NodeFactory_720975379598240372" />
-      <unit id="720975379598240371" at="11,0,18,0" name="jetbrains.mps.baseLanguage.extensionMethods.actions.EM_node_factories" />
+      <unit id="720975379598240371" at="20,0,23,0" name="jetbrains.mps.baseLanguage.extensionMethods.actions.EM_node_factories$LINKS" />
+      <unit id="720975379598240371" at="24,0,27,0" name="jetbrains.mps.baseLanguage.extensionMethods.actions.EM_node_factories$CONCEPTS" />
+      <unit id="720975379598240372" at="14,0,19,0" name="jetbrains.mps.baseLanguage.extensionMethods.actions.EM_node_factories$NodeFactory_720975379598240372" />
+      <unit id="720975379598240371" at="13,0,28,0" name="jetbrains.mps.baseLanguage.extensionMethods.actions.EM_node_factories" />
     </file>
   </root>
 </debug-info>

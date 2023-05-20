@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseProjectPrefsComponent implements PersistentStateComponent<Element> {
-  private List<BasePrefsPage> myPages = new ArrayList<BasePrefsPage>();
+  private List<BasePrefsPage> myPages = new ArrayList<>();
   private Project myProject;
 
   protected BaseProjectPrefsComponent(Project project) {

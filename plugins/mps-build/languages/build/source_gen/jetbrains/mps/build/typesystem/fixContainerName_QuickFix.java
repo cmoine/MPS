@@ -6,13 +6,14 @@ import jetbrains.mps.errors.QuickFix_Runtime;
 import jetbrains.mps.smodel.SNodePointer;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
-import jetbrains.mps.smodel.SModelUtil_new;
-import org.jetbrains.mps.openapi.model.SNodeAccessUtil;
+import jetbrains.mps.smodel.builder.SNodeBuilder;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public class fixContainerName_QuickFix extends QuickFix_Runtime {
   public fixContainerName_QuickFix() {
@@ -22,21 +23,32 @@ public class fixContainerName_QuickFix extends QuickFix_Runtime {
     return "Change extension to " + ((String) fixContainerName_QuickFix.this.getField("newExtension")[0]);
   }
   public void execute(SNode node) {
-    SNode containerName = SNodeOperations.cast(node, MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3cca41cd0fe51d4fL, "jetbrains.mps.build.structure.BuildString"));
-    SNode last = ListSequence.fromList(SLinkOperations.getChildren(containerName, MetaAdapterFactory.getContainmentLink(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3cca41cd0fe51d4fL, 0x440d7ea3b68cba4bL, "parts"))).last();
-    if (SNodeOperations.isInstanceOf(last, MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d03L, "jetbrains.mps.build.structure.BuildTextStringPart"))) {
-      SNode text = SNodeOperations.cast(last, MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d03L, "jetbrains.mps.build.structure.BuildTextStringPart"));
-      int dot = SPropertyOperations.getString(text, MetaAdapterFactory.getProperty(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d03L, 0x440d7ea3b68c4d56L, "text")).indexOf('.');
-      SPropertyOperations.set(text, MetaAdapterFactory.getProperty(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d03L, 0x440d7ea3b68c4d56L, "text"), ((dot >= 0 ? SPropertyOperations.getString(text, MetaAdapterFactory.getProperty(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d03L, 0x440d7ea3b68c4d56L, "text")).substring(0, dot) : SPropertyOperations.getString(text, MetaAdapterFactory.getProperty(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d03L, 0x440d7ea3b68c4d56L, "text")))) + ((String) fixContainerName_QuickFix.this.getField("newExtension")[0]));
+    SNode containerName = SNodeOperations.cast(node, CONCEPTS.BuildString$bl);
+    SNode last = ListSequence.fromList(SLinkOperations.getChildren(containerName, LINKS.parts$uJA0)).last();
+    if (SNodeOperations.isInstanceOf(last, CONCEPTS.BuildTextStringPart$3R)) {
+      SNode text = SNodeOperations.cast(last, CONCEPTS.BuildTextStringPart$3R);
+      int dot = SPropertyOperations.getString(text, PROPS.text$lRuU).indexOf('.');
+      SPropertyOperations.assign(text, PROPS.text$lRuU, ((dot >= 0 ? SPropertyOperations.getString(text, PROPS.text$lRuU).substring(0, dot) : SPropertyOperations.getString(text, PROPS.text$lRuU))) + ((String) fixContainerName_QuickFix.this.getField("newExtension")[0]));
     } else {
-      ListSequence.fromList(SLinkOperations.getChildren(containerName, MetaAdapterFactory.getContainmentLink(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3cca41cd0fe51d4fL, 0x440d7ea3b68cba4bL, "parts"))).addElement(_quotation_createNode_8v9hl7_a0a0a0c0a(((String) fixContainerName_QuickFix.this.getField("newExtension")[0])));
+      ListSequence.fromList(SLinkOperations.getChildren(containerName, LINKS.parts$uJA0)).addElement(createBuildTextStringPart_uzundk_a0a0a0c0c(((String) fixContainerName_QuickFix.this.getField("newExtension")[0])));
     }
   }
-  private static SNode _quotation_createNode_8v9hl7_a0a0a0c0a(Object parameter_1) {
-    PersistenceFacade facade = PersistenceFacade.getInstance();
-    SNode quotedNode_2 = null;
-    quotedNode_2 = SModelUtil_new.instantiateConceptDeclaration(MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d03L, "jetbrains.mps.build.structure.BuildTextStringPart"), null, null, false);
-    SNodeAccessUtil.setProperty(quotedNode_2, MetaAdapterFactory.getProperty(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d03L, 0x440d7ea3b68c4d56L, "text"), (String) parameter_1);
-    return quotedNode_2;
+  private static SNode createBuildTextStringPart_uzundk_a0a0a0c0c(String p0) {
+    SNodeBuilder n0 = new SNodeBuilder().init(CONCEPTS.BuildTextStringPart$3R);
+    n0.setProperty(PROPS.text$lRuU, p0);
+    return n0.getResult();
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept BuildString$bl = MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3cca41cd0fe51d4fL, "jetbrains.mps.build.structure.BuildString");
+    /*package*/ static final SConcept BuildTextStringPart$3R = MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d03L, "jetbrains.mps.build.structure.BuildTextStringPart");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink parts$uJA0 = MetaAdapterFactory.getContainmentLink(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3cca41cd0fe51d4fL, 0x440d7ea3b68cba4bL, "parts");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty text$lRuU = MetaAdapterFactory.getProperty(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d03L, 0x440d7ea3b68c4d56L, "text");
   }
 }

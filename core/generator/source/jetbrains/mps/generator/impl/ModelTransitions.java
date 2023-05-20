@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +15,17 @@
  */
 package jetbrains.mps.generator.impl;
 
-import jetbrains.mps.generator.ModelGenerationPlan.Checkpoint;
+import jetbrains.mps.generator.impl.plan.CheckpointVault;
+import jetbrains.mps.generator.plan.CheckpointIdentity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SModel;
-import org.jetbrains.mps.openapi.model.SModelReference;
+import org.jetbrains.mps.openapi.model.SNodeId;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 
 /**
  * Trace transformation of active model as it transitions from one CP to another.
@@ -35,9 +38,9 @@ import java.util.List;
  * @author Artem Tikhomirov
  * @since 3.4
  */
-public class ModelTransitions {
+public final class ModelTransitions {
   private TransitionTrace myActiveTransition;
-  private List<SModelReference> myCheckpointModels = new ArrayList<>(5);
+  private List<CheckpointIdentity> myCheckpoints = new ArrayList<>(5);
 
   public ModelTransitions() {
   }
@@ -45,13 +48,36 @@ public class ModelTransitions {
   /**
    * indicates we start at the given checkpoint, so that any future changes to the model treat this checkpoint as start/origin
    * @param checkpoint last recorded checkpoint, or null if it's transformation of initial (i.e. not necessarily the @0 one, just no CP yet) model
-   * @param checkpointModel reference to checkpoint model, structurally (and node ids) identical to {@code transformationModel}
    * @param transformationModel transient model with nodes deemed 'origin' of the checkpoint (we record their node identities as 'origins')
+   * @param changedNodes map to translate identities of nodes in transient model to that of checkpoint model (nodes in CP models are 're-numbered'
+   *                     to keep CP models stable between regenerations.
    */
-  public void newTransition(@Nullable Checkpoint checkpoint, @NotNull SModelReference checkpointModel, @NotNull SModel transformationModel) {
+  public void newTransition(@Nullable CheckpointIdentity checkpoint, @NotNull SModel transformationModel, @Nullable Map<SNodeId, SNodeId> changedNodes) {
     myActiveTransition = checkpoint == null ? new TransitionTrace(this) : new TransitionTrace(checkpoint, this);
-    myActiveTransition.reset(transformationModel);
-    myCheckpointModels.add(checkpointModel);
+    myActiveTransition.reset(transformationModel, changedNodes == null ? Function.identity() : nid -> changedNodes.getOrDefault(nid, nid));
+    if (checkpoint != null) {
+      myCheckpoints.add(checkpoint);
+    }
+  }
+
+  /**
+   * fill and activate new TransitionTrace for a checkpoint with the given CP identity based on information kept in the model.
+   * At the moment, transition trace values are kept as user objects, and TT consults the model directly,
+   * what we need to make sure here is that {@code checkpointModel} has proper UO values once we return from the method.
+   * We may decide to use other mechanism than user objects to keep origin->transformed mapping, e.g. as a distinct explicit map.
+   * In that case we'd need to read the mapping and fill TT appropriately.
+   */
+  public TransitionTrace loadTransition(@NotNull CheckpointIdentity checkpoint, @NotNull SModel checkpointModel) {
+    myActiveTransition = new TransitionTrace(checkpoint, this);
+    new TransitionTracePersistence(checkpointModel, CheckpointVault.CONVERT_USER_OBJECTS).load(myActiveTransition);
+    return myActiveTransition;
+  }
+
+  /**
+   * 'Write' counterpart for {@code #loadTransition()}, to feed values of active TT into model ready for persistence.
+   */
+  public void saveActiveTransition(@NotNull SModel checkpointModel) {
+    new TransitionTracePersistence(checkpointModel, CheckpointVault.CONVERT_USER_OBJECTS).save(myActiveTransition);
   }
 
   @NotNull
@@ -60,8 +86,25 @@ public class ModelTransitions {
     return myActiveTransition;
   }
 
-  @NotNull
-  public SModelReference getMostRecentCheckpointModel() {
-    return myCheckpointModels.get(myCheckpointModels.size()-1);
+  /**
+   * @return identity of a checkpoint active transition had started from, or {@code null} if it is the very first one, started from original model
+   */
+  @Nullable
+  public CheckpointIdentity getMostRecentCheckpoint() {
+    return myCheckpoints.isEmpty() ? null : myCheckpoints.get(myCheckpoints.size() - 1);
+  }
+
+  /**
+   * @return recorded snapshot of model transition states so that we can use new object for another plan branch
+   */
+  public ModelTransitions fork() {
+    if (myActiveTransition == null) {
+      throw new IllegalStateException("How come I need to fork when there's no ongoing transformation?");
+    }
+    ModelTransitions rv = new ModelTransitions();
+    rv.myCheckpoints.addAll(myCheckpoints);
+    CheckpointIdentity recentCheckpoint = getMostRecentCheckpoint();
+    rv.myActiveTransition = recentCheckpoint == null ? new TransitionTrace(rv) : new TransitionTrace(recentCheckpoint, rv);
+    return rv;
   }
 }

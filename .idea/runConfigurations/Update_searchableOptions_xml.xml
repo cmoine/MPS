@@ -1,0 +1,21 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Update searchableOptions.xml" type="Application" factoryName="Application" folderName="Util">
+    <option name="MAIN_CLASS_NAME" value="jetbrains.mps.Launcher" />
+    <module name="startup" />
+    <option name="PROGRAM_PARAMETERS" value="traverseUI $PROJECT_DIR$/workbench/mps-workbench/source/search" />
+    <option name="VM_PARAMETERS" value="-ea -Xmx1024m -Dmps.internal=true" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bin" />
+    <RunnerSettings RunnerId="Debug">
+      <option name="DEBUG_PORT" value="1062" />
+      <option name="TRANSPORT" value="0" />
+      <option name="LOCAL" value="true" />
+    </RunnerSettings>
+    <RunnerSettings RunnerId="Profile " />
+    <RunnerSettings RunnerId="Run" />
+    <ConfigurationWrapper RunnerId="Debug" />
+    <ConfigurationWrapper RunnerId="Run" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

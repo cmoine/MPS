@@ -7,46 +7,44 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <root nodeRef="r:0cf7389f-e174-4742-a3d2-15c79317838a(jetbrains.mps.debug.api.run)/4474271214082913232">
     <file name="IDebuggerConfiguration.java">
-      <node id="4474271214082913239" at="12,0,13,0" concept="4" trace="getDebugger#()Ljetbrains/mps/debug/api/IDebugger;" />
-      <node id="4474271214082913234" at="10,0,12,0" concept="4" trace="createDebuggerSettings#()Ljetbrains/mps/debug/api/IDebuggerSettings;" />
-      <scope id="4474271214082913239" at="12,0,13,0" />
-      <scope id="4474271214082913234" at="10,0,12,0" />
-      <unit id="4474271214082913232" at="9,0,14,0" name="jetbrains.mps.debug.api.run.IDebuggerConfiguration" />
+      <node id="4474271214082913239" at="14,0,15,0" concept="4" trace="getDebugger#()Ljetbrains/mps/debug/api/IDebugger;" />
+      <node id="4474271214082913234" at="12,0,14,0" concept="4" trace="createDebuggerSettings#()Ljetbrains/mps/debug/api/IDebuggerSettings;" />
+      <scope id="4474271214082913239" at="14,0,15,0" />
+      <scope id="4474271214082913234" at="12,0,14,0" />
+      <unit id="4474271214082913232" at="10,0,16,0" name="jetbrains.mps.debug.api.run.IDebuggerConfiguration" />
     </file>
   </root>
   <root nodeRef="r:0cf7389f-e174-4742-a3d2-15c79317838a(jetbrains.mps.debug.api.run)/4474271214082913266">
     <file name="DebuggerRunProfileState.java">
-      <node id="4474271214082913270" at="13,0,14,0" concept="7" trace="LOG" />
-      <node id="4474271214082913280" at="16,0,17,0" concept="2" trace="myUpdated" />
-      <node id="4474271214082913295" at="20,20,21,52" concept="1" />
-      <node id="4474271214082913300" at="21,52,22,13" concept="6" />
-      <node id="4474271214082913301" at="23,5,24,21" concept="1" />
-      <node id="4474271214082913305" at="24,21,25,93" concept="5" />
-      <node id="4474271214082913316" at="26,35,27,44" concept="1" />
-      <node id="4474271214082913324" at="31,50,32,29" concept="1" />
-      <node id="4474271214082913326" at="32,29,33,30" concept="6" />
-      <node id="4474271214082913275" at="14,0,16,0" concept="2" trace="myDebuggerSettings" />
-      <node id="4474271214082913284" at="17,0,19,0" concept="0" trace="DebuggerRunProfileState#()V" />
-      <node id="4474271214082913329" at="35,0,37,0" concept="4" trace="getDebuggerConfiguration#()Ljetbrains/mps/debug/api/run/IDebuggerConfiguration;" />
-      <node id="4474271214082913311" at="25,93,28,5" concept="3" />
-      <node id="4474271214082913292" at="19,43,23,5" concept="3" />
-      <node id="4474271214082913320" at="30,0,35,0" concept="4" trace="getDebuggerSettings#()Ljetbrains/mps/debug/api/IDebuggerSettings;" />
-      <node id="4474271214082913288" at="19,0,30,0" concept="4" trace="updateDebuggerSettings#()V" />
-      <scope id="4474271214082913287" at="17,36,17,36" />
-      <scope id="4474271214082913315" at="26,35,27,44" />
-      <scope id="4474271214082913284" at="17,0,19,0" />
-      <scope id="4474271214082913294" at="20,20,22,13" />
-      <scope id="4474271214082913323" at="31,50,33,30" />
-      <scope id="4474271214082913329" at="35,0,37,0" />
-      <scope id="4474271214082913320" at="30,0,35,0" />
-      <scope id="4474271214082913291" at="19,43,28,5">
+      <node id="4474271214082913280" at="17,0,18,0" concept="2" trace="myUpdated" />
+      <node id="4474271214082913295" at="21,20,22,99" concept="1" />
+      <node id="4474271214082913300" at="22,99,23,13" concept="6" />
+      <node id="4474271214082913301" at="24,5,25,21" concept="1" />
+      <node id="4474271214082913305" at="25,21,26,93" concept="5" />
+      <node id="4474271214082913316" at="27,35,28,44" concept="1" />
+      <node id="4474271214082913324" at="32,50,33,29" concept="1" />
+      <node id="4474271214082913326" at="33,29,34,30" concept="6" />
+      <node id="4474271214082913275" at="15,0,17,0" concept="2" trace="myDebuggerSettings" />
+      <node id="4474271214082913284" at="18,0,20,0" concept="0" trace="DebuggerRunProfileState#()V" />
+      <node id="4474271214082913329" at="36,0,38,0" concept="4" trace="getDebuggerConfiguration#()Ljetbrains/mps/debug/api/run/IDebuggerConfiguration;" />
+      <node id="4474271214082913311" at="26,93,29,5" concept="3" />
+      <node id="4474271214082913292" at="20,43,24,5" concept="3" />
+      <node id="4474271214082913320" at="31,0,36,0" concept="4" trace="getDebuggerSettings#()Ljetbrains/mps/debug/api/IDebuggerSettings;" />
+      <node id="4474271214082913288" at="20,0,31,0" concept="4" trace="updateDebuggerSettings#()V" />
+      <scope id="4474271214082913287" at="18,36,18,36" />
+      <scope id="4474271214082913315" at="27,35,28,44" />
+      <scope id="4474271214082913284" at="18,0,20,0" />
+      <scope id="4474271214082913294" at="21,20,23,13" />
+      <scope id="4474271214082913323" at="32,50,34,30" />
+      <scope id="4474271214082913329" at="36,0,38,0" />
+      <scope id="4474271214082913320" at="31,0,36,0" />
+      <scope id="4474271214082913291" at="20,43,29,5">
         <var name="debuggerSettings" id="4474271214082913306" />
       </scope>
-      <scope id="4474271214082913288" at="19,0,30,0" />
-      <unit id="4474271214082913266" at="12,0,38,0" name="jetbrains.mps.debug.api.run.DebuggerRunProfileState" />
+      <scope id="4474271214082913288" at="20,0,31,0" />
+      <unit id="4474271214082913266" at="12,0,39,0" name="jetbrains.mps.debug.api.run.DebuggerRunProfileState" />
     </file>
   </root>
 </debug-info>

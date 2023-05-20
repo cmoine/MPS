@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,12 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.core.tests;
 
 import jetbrains.mps.RuntimeFlags;
 import jetbrains.mps.TestMode;
-import org.apache.log4j.LogManager;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -26,13 +24,11 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ProjectViewTests.class,
                      FacetTests.class,
-                     EditorTests.class,
                      UseLanguageInPackageTest.class,
                      ProjectStructureTest.class})
 public class MiscTestSuite {
   @BeforeClass
   public static void setTestMode() {
     RuntimeFlags.setTestMode(TestMode.USUAL);
-    LogManager.getLogger(MiscTestSuite.class).info("The log4j has been initialized successfully");
   }
 }

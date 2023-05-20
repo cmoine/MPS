@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-8znlroe37zb0y48rsbcyj8avcrnocg1" />
+<product version="3" modelHash="-25hwj5l02tb2lhz76zqyklb9dv357ay">
+  <files names="ChildIntraModeRule.java:ChildRule.java:Child_IntraProceduralSpecific_BuilderMode_DataFlow.java:Child_IntraProcedural_BuilderMode_DataFlow.java:CounterAnalyzerWithConstructorAnalyzerRunner.java:CustomAnalyzerWithModeAnalyzerRunner.java:DataFlowAspectDescriptorImpl.java:OtherChild_IntraProcedural_BuilderMode_DataFlow.java:OtherRoot_DataFlow.java:OtherSubChild_IntraProceduralSpecific_BuilderMode_DataFlow.java:Root_DataFlow.java:counterInstructionAInstruction.java:counterInstructionBInstruction.java" />
+</product>
 

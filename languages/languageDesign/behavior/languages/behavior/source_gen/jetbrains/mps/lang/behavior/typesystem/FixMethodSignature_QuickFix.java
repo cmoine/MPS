@@ -6,9 +6,11 @@ import jetbrains.mps.errors.QuickFix_Runtime;
 import jetbrains.mps.smodel.SNodePointer;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 
 public class FixMethodSignature_QuickFix extends QuickFix_Runtime {
   public FixMethodSignature_QuickFix() {
@@ -18,22 +20,29 @@ public class FixMethodSignature_QuickFix extends QuickFix_Runtime {
     return "Fix Method Signature";
   }
   public void execute(SNode node) {
-    SLinkOperations.setTarget(((SNode) FixMethodSignature_QuickFix.this.getField("conceptMethod")[0]), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, 0xf8cc56b1fdL, "returnType"), SNodeOperations.copyNode(SLinkOperations.getTarget(SLinkOperations.getTarget(((SNode) FixMethodSignature_QuickFix.this.getField("conceptMethod")[0]), MetaAdapterFactory.getReferenceLink(0xaf65afd8f0dd4942L, 0x87d963a55f2a9db1L, 0x11d4348057eL, 0x11d4348057fL, "overriddenMethod")), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, 0xf8cc56b1fdL, "returnType"))));
-    int paramCount = ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(((SNode) FixMethodSignature_QuickFix.this.getField("conceptMethod")[0]), MetaAdapterFactory.getReferenceLink(0xaf65afd8f0dd4942L, 0x87d963a55f2a9db1L, 0x11d4348057eL, 0x11d4348057fL, "overriddenMethod")), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, 0xf8cc56b1feL, "parameter"))).count();
-    int currentParamCount = ListSequence.fromList(SLinkOperations.getChildren(((SNode) FixMethodSignature_QuickFix.this.getField("conceptMethod")[0]), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, 0xf8cc56b1feL, "parameter"))).count();
+    SLinkOperations.setTarget(((SNode) FixMethodSignature_QuickFix.this.getField("conceptMethod")[0]), LINKS.returnType$5xoi, SNodeOperations.copyNode(SLinkOperations.getTarget(SLinkOperations.getTarget(((SNode) FixMethodSignature_QuickFix.this.getField("conceptMethod")[0]), LINKS.overriddenMethod$quKH), LINKS.returnType$5xoi)));
+    int paramCount = ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(((SNode) FixMethodSignature_QuickFix.this.getField("conceptMethod")[0]), LINKS.overriddenMethod$quKH), LINKS.parameter$5xBj)).count();
+    int currentParamCount = ListSequence.fromList(SLinkOperations.getChildren(((SNode) FixMethodSignature_QuickFix.this.getField("conceptMethod")[0]), LINKS.parameter$5xBj)).count();
     for (int i = 0; i < Math.max(paramCount, currentParamCount); i++) {
       if (i < paramCount && i < currentParamCount) {
-        SLinkOperations.setTarget(ListSequence.fromList(SLinkOperations.getChildren(((SNode) FixMethodSignature_QuickFix.this.getField("conceptMethod")[0]), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, 0xf8cc56b1feL, "parameter"))).getElement(i), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x450368d90ce15bc3L, 0x4ed4d318133c80ceL, "type"), SNodeOperations.copyNode(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(((SNode) FixMethodSignature_QuickFix.this.getField("conceptMethod")[0]), MetaAdapterFactory.getReferenceLink(0xaf65afd8f0dd4942L, 0x87d963a55f2a9db1L, 0x11d4348057eL, 0x11d4348057fL, "overriddenMethod")), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, 0xf8cc56b1feL, "parameter"))).getElement(i), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x450368d90ce15bc3L, 0x4ed4d318133c80ceL, "type"))));
+        SLinkOperations.setTarget(ListSequence.fromList(SLinkOperations.getChildren(((SNode) FixMethodSignature_QuickFix.this.getField("conceptMethod")[0]), LINKS.parameter$5xBj)).getElement(i), LINKS.type$a1UY, SNodeOperations.copyNode(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(((SNode) FixMethodSignature_QuickFix.this.getField("conceptMethod")[0]), LINKS.overriddenMethod$quKH), LINKS.parameter$5xBj)).getElement(i), LINKS.type$a1UY)));
       }
       if (i >= currentParamCount) {
-        ListSequence.fromList(SLinkOperations.getChildren(((SNode) FixMethodSignature_QuickFix.this.getField("conceptMethod")[0]), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, 0xf8cc56b1feL, "parameter"))).addElement(SNodeOperations.copyNode(ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(((SNode) FixMethodSignature_QuickFix.this.getField("conceptMethod")[0]), MetaAdapterFactory.getReferenceLink(0xaf65afd8f0dd4942L, 0x87d963a55f2a9db1L, 0x11d4348057eL, 0x11d4348057fL, "overriddenMethod")), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, 0xf8cc56b1feL, "parameter"))).getElement(i)));
+        ListSequence.fromList(SLinkOperations.getChildren(((SNode) FixMethodSignature_QuickFix.this.getField("conceptMethod")[0]), LINKS.parameter$5xBj)).addElement(SNodeOperations.copyNode(ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(((SNode) FixMethodSignature_QuickFix.this.getField("conceptMethod")[0]), LINKS.overriddenMethod$quKH), LINKS.parameter$5xBj)).getElement(i)));
       }
       if (i >= paramCount) {
         for (int j = 0; j < currentParamCount - paramCount; j++) {
-          SNodeOperations.deleteNode(ListSequence.fromList(SLinkOperations.getChildren(((SNode) FixMethodSignature_QuickFix.this.getField("conceptMethod")[0]), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, 0xf8cc56b1feL, "parameter"))).getElement(i));
+          SNodeOperations.deleteNode(ListSequence.fromList(SLinkOperations.getChildren(((SNode) FixMethodSignature_QuickFix.this.getField("conceptMethod")[0]), LINKS.parameter$5xBj)).getElement(i));
         }
         break;
       }
     }
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink returnType$5xoi = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, 0xf8cc56b1fdL, "returnType");
+    /*package*/ static final SReferenceLink overriddenMethod$quKH = MetaAdapterFactory.getReferenceLink(0xaf65afd8f0dd4942L, 0x87d963a55f2a9db1L, 0x11d4348057eL, 0x11d4348057fL, "overriddenMethod");
+    /*package*/ static final SContainmentLink parameter$5xBj = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, 0xf8cc56b1feL, "parameter");
+    /*package*/ static final SContainmentLink type$a1UY = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x450368d90ce15bc3L, 0x4ed4d318133c80ceL, "type");
   }
 }

@@ -5,5 +5,5 @@ package jetbrains.mps.samples.customAspect.documentation.plugin;
 import jetbrains.mps.smodel.runtime.IconResource;
 
 public class IconContainer {
-  protected static IconResource RESOURCE_a0a4a0a0a1 = new IconResource("documentation.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a2a0a0a1 = new IconResource("documentation.png", IconContainer.class);
 }

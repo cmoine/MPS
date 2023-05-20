@@ -19,20 +19,20 @@ import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
 
 public interface INodesReadListener {
-  public void nodeChildReadAccess(SNode node, String childRole, SNode child);
+  void nodeChildReadAccess(SNode node, String childRole, SNode child);
 
   //todo remove value as it's not used
-  public void nodePropertyReadAccess(SNode node, String propertyName, String value);
+  void nodePropertyReadAccess(SNode node, String propertyName, String value);
 
-  public void propertyExistenceAccess(SNode node, String propertyName);
+  void propertyExistenceAccess(SNode node, String propertyName);
 
-  public void propertyDirtyReadAccess(SNode node, String propertyName);
+  void propertyDirtyReadAccess(SNode node, String propertyName);
 
-  public void propertyCleanReadAccess(SNode node, String propertyName);
+  void propertyCleanReadAccess(SNode node, String propertyName);
 
-  public void nodeReferentReadAccess(SNode node, String referentRole, SNode referent);
+  void nodeReferentReadAccess(SNode node, String referentRole, SNode referent);
 
-  public void nodeUnclassifiedReadAccess(SNode node);
+  void nodeUnclassifiedReadAccess(SNode node);
 
-  public void modelNodesReadAccess(SModel model);
+  void modelNodesReadAccess(SModel model);
 }

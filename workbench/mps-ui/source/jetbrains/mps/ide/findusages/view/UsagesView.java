@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,20 +17,30 @@ package jetbrains.mps.ide.findusages.view;
 
 import com.intellij.icons.AllIcons.Actions;
 import com.intellij.icons.AllIcons.Toolwindows;
+import com.intellij.ide.CommonActionsManager;
+import com.intellij.ide.DefaultTreeExpander;
 import com.intellij.ide.OccurenceNavigator;
+import com.intellij.ide.OccurenceNavigatorSupport;
+import com.intellij.ide.TreeExpander;
 import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.ActionManager;
-import com.intellij.openapi.actionSystem.ActionPlaces;
 import com.intellij.openapi.actionSystem.ActionToolbar;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.DataKey;
 import com.intellij.openapi.actionSystem.DataProvider;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
+import com.intellij.openapi.actionSystem.ToggleAction;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.progress.Task.Modal;
+import com.intellij.pom.Navigatable;
+import com.intellij.usageView.UsageViewBundle;
+import com.intellij.util.ui.tree.TreeUtil;
 import jetbrains.mps.generator.GenerationFacade;
+import jetbrains.mps.ide.actions.MPSActionPlaces;
+import jetbrains.mps.ide.actions.MPSCommonDataKeys;
 import jetbrains.mps.ide.findusages.CantLoadSomethingException;
 import jetbrains.mps.ide.findusages.CantSaveSomethingException;
 import jetbrains.mps.ide.findusages.IExternalizeable;
@@ -40,14 +50,14 @@ import jetbrains.mps.ide.findusages.model.SearchResults;
 import jetbrains.mps.ide.findusages.model.SearchTask;
 import jetbrains.mps.ide.findusages.model.holders.IHolder;
 import jetbrains.mps.ide.findusages.model.holders.VoidHolder;
-import jetbrains.mps.ide.findusages.view.icons.IconManager;
+import jetbrains.mps.ide.findusages.view.icons.Icons;
 import jetbrains.mps.ide.findusages.view.treeholder.tree.DataTreeChangesNotifier;
 import jetbrains.mps.ide.findusages.view.treeholder.treeview.INodeRepresentator;
-import jetbrains.mps.ide.findusages.view.treeholder.treeview.UsagesTreeComponent;
 import jetbrains.mps.ide.findusages.view.treeholder.treeview.ViewOptions;
 import jetbrains.mps.ide.make.DefaultMakeMessageHandler;
 import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.make.IMakeService;
+import jetbrains.mps.make.MakeServiceComponent;
 import jetbrains.mps.make.MakeSession;
 import jetbrains.mps.make.resources.IResource;
 import jetbrains.mps.progress.ProgressMonitorAdapter;
@@ -55,21 +65,20 @@ import jetbrains.mps.project.Project;
 import jetbrains.mps.smodel.ModelAccessHelper;
 import jetbrains.mps.smodel.RepoListenerRegistrar;
 import jetbrains.mps.smodel.resources.ModelsToResources;
-import jetbrains.mps.util.Computable;
+import jetbrains.mps.workbench.ActionPlace;
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNodeReference;
-import org.jetbrains.mps.openapi.module.ModelAccess;
 import org.jetbrains.mps.openapi.util.ProgressMonitor;
 
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -79,17 +88,20 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class UsagesView implements IExternalizeable {
+  /*package*/ static DataKey<UsagesView> USAGE_VIEW = DataKey.create("MPS_UsagesView");
   //read/write constants
   private static final String QUERY = "query";
   private static final String RESULT_PROVIDER = "result_provider";
   private static final String CLASS_NAME = "class_name";
   private static final String TREE_WRAPPER = "tree_wrapper";
 
-  private Project myProject;
+  private final Project myProject;
+  // instance of ViewOptions that is updated along with user changes in UI
+  private final ViewOptions myOptions2Update;
 
   //my components
-  private JPanel myPanel;
-  private UsagesTreeComponent myTreeComponent;
+  private final JPanel myPanel;
+  private final UsagesTreeComponent myTreeComponent;
   private String myCaption = "Usages";
   private Icon myIcon = Toolwindows.ToolWindowFind;
 
@@ -99,9 +111,10 @@ public class UsagesView implements IExternalizeable {
   // note: this field is not restored from XML
   @Nullable
   private SearchResults myLastResults;
+  private final OccurenceNavigatorSupport myOccurrenceNavigator;
 
   public UsagesView(com.intellij.openapi.project.Project project, ViewOptions defaultOptions) {
-    this(ProjectHelper.toMPSProject(project), defaultOptions);
+    this(ProjectHelper.fromIdeaProject(project), defaultOptions);
   }
 
   public UsagesView(Project mpsProject, ViewOptions defaultOptions) {
@@ -112,19 +125,35 @@ public class UsagesView implements IExternalizeable {
 
   public UsagesView(Project mpsProject, ViewOptions defaultOptions, DataTreeChangesNotifier changeTracker) {
     myProject = mpsProject;
+    myOptions2Update = defaultOptions;
 
     myTreeComponent = new UsagesTreeComponent(defaultOptions, myProject, changeTracker);
-    myPanel = new RootPanel(myTreeComponent.getOccurenceNavigator());
+    myPanel = new RootPanel();
 
-    JPanel treeWrapperPanel = new JPanel(new BorderLayout());
-    JPanel treeToolbarPanel = new JPanel(new BorderLayout());
-    treeToolbarPanel.add(myTreeComponent.getViewToolbar(), BorderLayout.NORTH);
-    treeWrapperPanel.add(treeToolbarPanel, BorderLayout.WEST);
-    treeWrapperPanel.add(myTreeComponent, BorderLayout.CENTER);
-    myPanel.add(treeWrapperPanel, BorderLayout.CENTER);
+    myPanel.add(myTreeComponent, BorderLayout.CENTER);
 
     myPanel.setMinimumSize(new Dimension());
     myChangeTracker = changeTracker;
+
+    myOccurrenceNavigator = new OccurenceNavigatorSupport(myTreeComponent.getTree()) {
+      @Override
+      protected Navigatable createDescriptorForNode(@NotNull DefaultMutableTreeNode node) {
+        Navigatable n = myTreeComponent.getTree().toNavigatable(node);
+        return n != null && n.canNavigate() ? n : null;
+      }
+
+      @NotNull
+      @Override
+      public String getNextOccurenceActionName() {
+        return UsageViewBundle.message("action.next.occurrence");
+      }
+
+      @NotNull
+      @Override
+      public String getPreviousOccurenceActionName() {
+        return UsageViewBundle.message("action.previous.occurrence");
+      }
+    };
   }
 
   public void dispose() {
@@ -168,15 +197,24 @@ public class UsagesView implements IExternalizeable {
     myIcon = icon;
   }
 
+  // XXX we assume setActions is invoked for any UsageView instance. Otherwise, not only generic tree actions would be missing,
+  // but also actions coming from myTreeComponent.getViewToolbar() (which is not bad per se, they just used to be there always before the refactoring)
   public void setActions(AnAction... actions) {
+    // view has composite toolbar that consists of two independent toolbars:
+    // first is populated with externally supplied actions plus generic actions (like expand/collapse, occurrence navigation) coming from UsageTreeComponent
+    // second holds grouping actions (categories and whether to show/group nodes we've searched for).
+    // Indeed, this distinction looks superficial.
     DefaultActionGroup ag = new DefaultActionGroup();
     ag.addAll(actions);
-    ag.addAll(myTreeComponent.getActionsToolbar());
-    myPanel.add(createActionsToolbar(ag, myTreeComponent), BorderLayout.WEST);
+    ag.addAll(createGenericTreeActions());
+    JPanel toolbarPanel = new JPanel(new BorderLayout(), false);
+    toolbarPanel.add(createActionsToolbar(ag, myTreeComponent), BorderLayout.WEST);
+    toolbarPanel.add(createActionsToolbar(myTreeComponent.getViewToolbar(), myTreeComponent.getTree()), BorderLayout.EAST);
+    myPanel.add(toolbarPanel, BorderLayout.WEST);
   }
 
   public void setActions(Collection<? extends AnAction> actions) {
-    setActions(actions.toArray(new AnAction[actions.size()]));
+    setActions(actions.toArray(new AnAction[0]));
   }
 
   public void close() {
@@ -188,20 +226,14 @@ public class UsagesView implements IExternalizeable {
     return myTreeComponent.getIncludedModels();
   }
 
-  public Set<SModel> getAllModels() {
-    return myTreeComponent.getAllModels();
-  }
-
   public List<SNodeReference> getIncludedResultNodes() {
     return myTreeComponent.getIncludedResultNodes();
   }
 
-  public List<SNodeReference> getAllResultNodes() {
-    return myTreeComponent.getAllResultNodes();
-  }
-
   @Nullable
   public SearchResults getSearchResults() {
+    // FIXME the only use is in ModelCheckerViewer, which is likely plain wrong. Clients of MCV shall use
+    //       ModelCheckerIssueFinder directly, not through viewer
     return myLastResults;
   }
 
@@ -224,66 +256,110 @@ public class UsagesView implements IExternalizeable {
     element.addContent(treeWrapperXML);
   }
 
-  private static class RootPanel extends JPanel implements OccurenceNavigator, DataProvider {
-    private final OccurenceNavigator myOccurrenceNavigator;
+  public OccurenceNavigator getOccurrenceNavigator() {
+    return myOccurrenceNavigator;
+  }
 
-    public RootPanel(@Nullable OccurenceNavigator occurrenceNavigator) {
+  /**
+   * the need to implement OccurenceNavigator is unfortunate consequence of IDEA approach to discover one
+   * using awt.Component hierarchy, see {@code OccurenceNavigatorActionBase#getNavigator()} implementation.
+   * @see com.intellij.usages.impl.UsageViewImpl, we are doing the same
+   */
+  private class RootPanel extends JPanel implements DataProvider, OccurenceNavigator {
+    public RootPanel() {
       super(new BorderLayout());
-      myOccurrenceNavigator = occurrenceNavigator;
-    }
-
-    @Override
-    public boolean hasNextOccurence() {
-      return myOccurrenceNavigator != null && myOccurrenceNavigator.hasNextOccurence();
-    }
-
-    @Override
-    public boolean hasPreviousOccurence() {
-      return myOccurrenceNavigator != null && myOccurrenceNavigator.hasPreviousOccurence();
-    }
-
-    @Override
-    public OccurenceInfo goNextOccurence() {
-      return myOccurrenceNavigator != null ? myOccurrenceNavigator.goNextOccurence() : null;
-    }
-
-    @Override
-    public OccurenceInfo goPreviousOccurence() {
-      return myOccurrenceNavigator != null ? myOccurrenceNavigator.goPreviousOccurence() : null;
-    }
-
-    @Override
-    public String getNextOccurenceActionName() {
-      return myOccurrenceNavigator != null ? myOccurrenceNavigator.getNextOccurenceActionName() : "";
-    }
-
-    @Override
-    public String getPreviousOccurenceActionName() {
-      return myOccurrenceNavigator != null ? myOccurrenceNavigator.getPreviousOccurenceActionName() : "";
     }
 
     @Nullable
     @Override
-    public Object getData(@NonNls String dataId) {
+    public Object getData(@NotNull @NonNls String dataId) {
       if (PlatformDataKeys.HELP_ID.is(dataId)) {
         return "ideaInterface.usagesView";
       }
+      if (MPSCommonDataKeys.PLACE.is(dataId)) {
+        return ActionPlace.USAGES_VIEW;
+      }
+      if (USAGE_VIEW.is(dataId)) {
+        return UsagesView.this;
+      }
       return null;
+    }
+
+    @Override
+    public boolean hasNextOccurence() {
+      return getOccurrenceNavigator().hasNextOccurence();
+    }
+
+    @Override
+    public boolean hasPreviousOccurence() {
+      return getOccurrenceNavigator().hasPreviousOccurence();
+    }
+
+    @Override
+    public OccurenceInfo goNextOccurence() {
+      return getOccurrenceNavigator().goNextOccurence();
+    }
+
+    @Override
+    public OccurenceInfo goPreviousOccurence() {
+      return getOccurrenceNavigator().goPreviousOccurence();
+    }
+
+    @NotNull
+    @Override
+    public String getNextOccurenceActionName() {
+      return getOccurrenceNavigator().getNextOccurenceActionName();
+    }
+
+    @NotNull
+    @Override
+    public String getPreviousOccurenceActionName() {
+      return getOccurrenceNavigator().getPreviousOccurenceActionName();
     }
   }
 
-  private JPanel createActionsToolbar(ActionGroup ag, JComponent targetComponent) {
-    JPanel rv = new JPanel();
-    rv.setBorder(BorderFactory.createEmptyBorder(2, 1, 2, 1));
-    ActionToolbar actionToolbar = ActionManager.getInstance().createActionToolbar(ActionPlaces.USAGE_VIEW_TOOLBAR, ag, false);
+  private JComponent createActionsToolbar(ActionGroup ag, JComponent targetComponent) {
+    ActionToolbar actionToolbar = ActionManager.getInstance().createActionToolbar(MPSActionPlaces.USAGES_VIEW, ag, false);
     actionToolbar.setTargetComponent(targetComponent);
-    actionToolbar.setOrientation(SwingConstants.VERTICAL);
-    rv.add(actionToolbar.getComponent());
+    JComponent rv = actionToolbar.getComponent();
+    rv.setBorder(BorderFactory.createEmptyBorder(2, 1, 2, 1));
     return rv;
   }
 
   protected final Project getProject() {
     return myProject;
+  }
+
+  private ActionGroup createGenericTreeActions() {
+    DefaultActionGroup actionGroup = new DefaultActionGroup();
+
+    final CommonActionsManager actionsManager = CommonActionsManager.getInstance();
+    final UsagesTree myTree = getTreeComponent().getTree();
+    final TreeExpander treeExpander = new DefaultTreeExpander(myTree) {
+      @Override
+      public void collapseAll() {
+        super.collapseAll();
+        TreeUtil.expand(myTree, 2);
+      }
+    };
+    actionGroup.add(actionsManager.createExpandAllAction(treeExpander, myTree));
+    actionGroup.add(actionsManager.createCollapseAllAction(treeExpander, myTree));
+    actionGroup.add(actionsManager.createPrevOccurenceAction(getOccurrenceNavigator()));
+    actionGroup.add(actionsManager.createNextOccurenceAction(getOccurrenceNavigator()));
+    actionGroup.add(new ToggleAction("Autoscroll to source", "", Icons.AUTOSCROLL_ICON) {
+
+      @Override
+      public void setSelected(@NotNull AnActionEvent e, boolean state) {
+        myTree.setAutoscroll(state);
+        myOptions2Update.setValues(myTreeComponent.getComponentsViewOptions());
+      }
+
+      @Override
+      public boolean isSelected(@NotNull AnActionEvent e) {
+        return myTree.isAutoscroll();
+      }
+    });
+    return actionGroup;
   }
 
   public static class RerunAction extends AnAction {
@@ -305,7 +381,7 @@ public class UsagesView implements IExternalizeable {
     }
 
     public void setRunOptions(IResultProvider resultProvider, SearchQuery searchQuery) {
-      setRunOptions(new SearchTaskImpl(resultProvider, searchQuery));
+      setRunOptions(new SearchTaskImpl(myView.getProject(), resultProvider, searchQuery));
     }
 
     public void setRunOptions(SearchTask searchTask) {
@@ -329,37 +405,38 @@ public class UsagesView implements IExternalizeable {
 
         @Override
         public void run(@NotNull final ProgressIndicator indicator) {
-          mySearchResults = mySearchTask.execute(myView.myProject.getModelAccess(), new ProgressMonitorAdapter(indicator));
+          mySearchResults = mySearchTask.execute(new ProgressMonitorAdapter(indicator));
+        }
+
+        @Override
+        public void onCancel() {
+          // XXX I feel would be better to set view to some 'cancelled' message
         }
 
         @Override
         public void onSuccess() {
           if (mySearchResults != null) {
-            mySearchResults.removeDuplicates();
-            myView.setContents(mySearchResults);
+            myView.setContents(mySearchResults.removeDuplicates());
           }
         }
       });
     }
   }
 
-  public static final class SearchTaskImpl implements SearchTask, Runnable {
+  /**
+   * This SearchTask executes SearchQuery with a read lock for a project repository.
+   */
+  public static final class SearchTaskImpl implements SearchTask {
+    private final Project myProject;
     private final IResultProvider myResultProvider;
     private final SearchQuery mySearchQuery;
     private SearchResults myLastResults;
     private ProgressMonitor myProgress;
 
-    public SearchTaskImpl(@NotNull IResultProvider resultProvider, @NotNull SearchQuery searchQuery) {
+    public SearchTaskImpl(Project mpsProject, @NotNull IResultProvider resultProvider, @NotNull SearchQuery searchQuery) {
+      myProject = mpsProject;
       myResultProvider = resultProvider;
       mySearchQuery = searchQuery;
-    }
-
-    public String getCaption() {
-      return mySearchQuery.getCaption();
-    }
-
-    public Icon getIcon() {
-      return IconManager.getIconForIHolder(mySearchQuery.getObjectHolder());
     }
 
     public boolean canExecute() {
@@ -378,19 +455,23 @@ public class UsagesView implements IExternalizeable {
       return objectHolder.getObject();
     }
 
-    public SearchResults execute(ModelAccess modelAccess, ProgressMonitor progressMonitor) {
+    public SearchResults execute(ProgressMonitor progressMonitor) {
       myProgress = progressMonitor;
-      modelAccess.runReadAction(this);
+      myProject.getModelAccess().runReadAction(() -> {
+        SearchResults results = myResultProvider.getResults(mySearchQuery, myProgress);
+        SearchResultsSorter sorter = new SearchResultsSorter(results);
+        myLastResults = sorter.sortNodeResultsByLocationInTheEditor();
+      });
       return getSearchResults();
     }
 
-    @Override
-    public void run() {
-      myLastResults = myResultProvider.getResults(mySearchQuery, myProgress);
+    public SearchResults<?> getSearchResults() {
+      return myLastResults;
     }
 
-    public SearchResults getSearchResults() {
-      return myLastResults;
+    @Nullable
+    public String getCaption() {
+      return mySearchQuery.getCaption();
     }
 
     @Nullable
@@ -403,7 +484,7 @@ public class UsagesView implements IExternalizeable {
           resultProvider.read(resultProviderXML, mpsProject);
           Element queryXML = element.getChild(QUERY);
           SearchQuery searchQuery = new SearchQuery(queryXML, mpsProject);
-          return new SearchTaskImpl(resultProvider, searchQuery);
+          return new SearchTaskImpl(mpsProject, resultProvider, searchQuery);
         } catch (Throwable t) {
           throw new CantLoadSomethingException("Can't instantiate result provider: " + className, t);
         }
@@ -424,8 +505,9 @@ public class UsagesView implements IExternalizeable {
   }
 
   public static class RebuildAction extends AnAction {
-    private final AtomicReference<MakeSession> myMakeSession = new AtomicReference<MakeSession>();
+    private final AtomicReference<MakeSession> myMakeSession = new AtomicReference<>();
     private final UsagesView myView;
+    private final MakeServiceComponent myMakeComponent;
 
     public RebuildAction(UsagesView view) {
       this(view, "Rebuild models", "", Actions.Compile);
@@ -434,33 +516,33 @@ public class UsagesView implements IExternalizeable {
     public RebuildAction(UsagesView view, String text, String description, Icon icon) {
       super(text, description, icon);
       myView = view;
+      final Project mpsProject = view.myProject;
+      myMakeComponent = mpsProject.getComponent(MakeServiceComponent.class);
     }
 
     @Override
     public void update(@NotNull AnActionEvent e) {
-      e.getPresentation().setEnabled(myMakeSession.get() == null && !IMakeService.INSTANCE.isSessionActive());
+      e.getPresentation().setEnabled(myMakeSession.get() == null && !myMakeComponent.isSessionActive());
     }
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
       final Project mpsProject = myView.myProject;
-      Iterable<IResource> makeRes = new ModelAccessHelper(mpsProject.getModelAccess()).runReadAction(new Computable<Iterable<IResource>>() {
-        @Override
-        public Iterable<IResource> compute() {
-          List<SModel> models = new ArrayList<SModel>();
-          for (SModel modelDescriptor : myView.getIncludedModels()) {
-            if (GenerationFacade.canGenerate(modelDescriptor)) {
-              models.add(modelDescriptor);
-            }
+      Iterable<IResource> makeRes = new ModelAccessHelper(mpsProject.getModelAccess()).runReadAction(() -> {
+        List<SModel> models = new ArrayList<>();
+        for (SModel modelDescriptor : myView.getIncludedModels()) {
+          if (GenerationFacade.canGenerate(modelDescriptor)) {
+            models.add(modelDescriptor);
           }
-          return new ModelsToResources(models).resources(false);
         }
+        return new ModelsToResources(models).resources();
       });
 
       if (myMakeSession.compareAndSet(null, new MakeSession(mpsProject, new DefaultMakeMessageHandler(mpsProject), false))) {
         try {
-          if (IMakeService.INSTANCE.get().openNewSession(myMakeSession.get())) {
-            IMakeService.INSTANCE.get().make(myMakeSession.get(), makeRes);
+          IMakeService makeService = mpsProject.getComponent(MakeServiceComponent.class).get();
+          if (makeService.openNewSession(myMakeSession.get())) {
+            makeService.make(myMakeSession.get(), makeRes);
           }
         } finally {
           myMakeSession.set(null);
@@ -468,4 +550,5 @@ public class UsagesView implements IExternalizeable {
       }
     }
   }
+
 }

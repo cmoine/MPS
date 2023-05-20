@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="1g7v0w7j60nq4rh4g1n3uksxjsx815r" />
+<product version="3" modelHash="9ksy03lba05vv0rtkgvoiftj8co1yl8">
+  <files names="DelegatingRunNotifier.java:ExpectLogEvent.java:IgnoreLogEvents.java:IgnoringPatternErrorStream.java:Order.java:OrderComparator.java:UncleanTestExecutionException.java:WatchingRunNotifier.java" />
+</product>
 

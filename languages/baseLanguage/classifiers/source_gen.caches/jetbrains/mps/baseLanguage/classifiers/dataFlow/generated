@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-cumubgdyt2b38stnrm3ggtk80ki8bmm" />
+<product version="3" modelHash="-d4qx64loqsgdmsa0908jhna5ldb2c8u">
+  <files names="DataFlowAspectDescriptorImpl.java:DefaultClassifierMethodCallOperation_DataFlow.java" />
+</product>
 

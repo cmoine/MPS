@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,11 @@
  */
 package jetbrains.mps.ide.bookmark;
 
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.util.messages.MessageBusConnection;
 import jetbrains.mps.ide.ThreadUtils;
 import jetbrains.mps.ide.bookmark.BookmarkManager.BookmarkListener;
 import jetbrains.mps.ide.editor.util.EditorComponentUtil;
@@ -30,11 +29,10 @@ import jetbrains.mps.nodeEditor.cells.EditorCell;
 import jetbrains.mps.nodeEditor.highlighter.EditorComponentCreateListener;
 import jetbrains.mps.openapi.editor.update.UpdaterListener;
 import jetbrains.mps.openapi.editor.update.UpdaterListenerAdapter;
-import jetbrains.mps.smodel.ModelAccess;
-import jetbrains.mps.util.Computable;
 import jetbrains.mps.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.mps.openapi.model.SNodeReference;
 
 import javax.swing.Icon;
 import javax.swing.JPopupMenu;
@@ -43,16 +41,15 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * evgeny, 11/14/11
+ * This is an IDEA service, activated through EditorComponentCreateListener responding to a message
+ * (i.e. needs both service registration + topic subscription)
+ * As long as the ECCL is the only client, there's no accessor getInstance() method
  */
-public class BookmarksUIComponent implements ProjectComponent {
+public class BookmarksUIComponent implements Disposable {
 
   private final Project myProject;
-  private final FileEditorManager myFileEditorManager;
-  private final BookmarkManager myBookmarkManager;
-  private MessageBusConnection myMessageBusConnection;
+  private BookmarkManager myBookmarkManager;
 
-  private final EditorComponentCreateListener editorListener = new MyEditorComponentCreateListener();
   private final BookmarkListener bookmarkListener = new MyBookmarkListener();
   private final UpdaterListener myUpdaterListener = new UpdaterListenerAdapter() {
     @Override
@@ -61,29 +58,18 @@ public class BookmarksUIComponent implements ProjectComponent {
     }
   };
 
-  public BookmarksUIComponent(Project project, FileEditorManager fileEditorManager, BookmarkManager bookmarkManager) {
+  public BookmarksUIComponent(Project project) {
     myProject = project;
-    myFileEditorManager = fileEditorManager;
-    myBookmarkManager = bookmarkManager;
-  }
-
-  @Override
-  public void initComponent() {
+    myBookmarkManager = BookmarkManager.getInstance(project);
     myBookmarkManager.addBookmarkListener(bookmarkListener);
-    myMessageBusConnection = myProject.getMessageBus().connect();
-    myMessageBusConnection.subscribe(EditorComponentCreateListener.EDITOR_COMPONENT_CREATION, editorListener);
-    for (jetbrains.mps.openapi.editor.EditorComponent editor : EditorComponentUtil.getAllEditorComponents(myFileEditorManager, true)) {
-      if (editor instanceof EditorComponent) {
-        editorComponentCreated((EditorComponent) editor);
-      }
-    }
-
   }
 
   @Override
-  public void disposeComponent() {
-    myMessageBusConnection.disconnect();
-    myBookmarkManager.removeBookmarkListener(bookmarkListener);
+  public void dispose() {
+    if (myBookmarkManager != null) {
+      myBookmarkManager.removeBookmarkListener(bookmarkListener);
+      myBookmarkManager = null;
+    }
   }
 
   private void onEditorRebuilt(EditorComponent editorComponent) {
@@ -103,7 +89,7 @@ public class BookmarksUIComponent implements ProjectComponent {
   private void editorComponentCreated(@NotNull EditorComponent editorComponent) {
     editorComponent.getUpdater().addListener(myUpdaterListener);
     SNode editedNode = editorComponent.getEditedNode();
-    if (editedNode != null) {
+    if (myBookmarkManager != null && editedNode != null) {
       boolean modified = false;
       for (Pair<SNode, Integer> bookmark : myBookmarkManager.getBookmarks(editedNode.getContainingRoot())) {
         modified |= addRenderer(editorComponent, bookmark.o1, bookmark.o2);
@@ -119,24 +105,11 @@ public class BookmarksUIComponent implements ProjectComponent {
     editorComponent.getLeftEditorHighlighter().removeAllIconRenderers(BookmarkIconRenderer.TYPE);
   }
 
-  @Override
-  public void projectOpened() {
-  }
-
-  @Override
-  public void projectClosed() {
-  }
-
-  @NotNull
-  @Override
-  public String getComponentName() {
-    return "Bookmarks UI";
-  }
-
   @NotNull
   private List<EditorComponent> findComponentsForNode(SNode node) {
-    if (node != null) {
-      return EditorComponentUtil.findComponentForNode(node, myFileEditorManager);
+    final FileEditorManager fem = FileEditorManager.getInstance(myProject);
+    if (node != null && fem != null) {
+      return EditorComponentUtil.findComponentForNode(node, fem);
     }
     return Collections.emptyList();
   }
@@ -178,18 +151,21 @@ public class BookmarksUIComponent implements ProjectComponent {
     }
   }
 
-  private class MyEditorComponentCreateListener implements EditorComponentCreateListener {
-    private MyEditorComponentCreateListener() {
+  public static class EditorComponentListener implements EditorComponentCreateListener {
+    private final Project myProject;
+
+    public EditorComponentListener(Project ideaProject) {
+      myProject = ideaProject;
     }
 
     @Override
     public void editorComponentCreated(@NotNull EditorComponent editorComponent) {
-      BookmarksUIComponent.this.editorComponentCreated(editorComponent);
+      myProject.getService(BookmarksUIComponent.class).editorComponentCreated(editorComponent);
     }
 
     @Override
     public void editorComponentDisposed(@NotNull EditorComponent editorComponent) {
-      BookmarksUIComponent.this.editorComponentDisposed(editorComponent);
+      myProject.getService(BookmarksUIComponent.class).editorComponentDisposed(editorComponent);
     }
   }
 
@@ -207,12 +183,14 @@ public class BookmarksUIComponent implements ProjectComponent {
 
   private static class BookmarkIconRenderer implements EditorMessageIconRenderer {
     private static final IconRendererType TYPE = new IconRendererType(3);
-    private SNode myNode;
-    private int myNumber;
+    private final SNodeReference myNode;
+    private final int myNumber;
+    private final String myTooltip;
 
     private BookmarkIconRenderer(SNode node, int number) {
-      myNode = node;
+      myNode = node.getReference();
       myNumber = number;
+      myTooltip = String.format("Bookmark %s(%s)", number != -1 ? number : "", node.getPresentation());
     }
 
     @Override
@@ -222,17 +200,11 @@ public class BookmarksUIComponent implements ProjectComponent {
 
     @Override
     public String getTooltipText() {
-      String nodePresentation = ModelAccess.instance().runReadAction(new Computable<String>() {
-        @Override
-        public String compute() {
-          return myNode.getPresentation();
-        }
-      });
-      return (myNumber != -1 ? "Bookmark " + myNumber + " (" : "Bookmark (") + nodePresentation + ")";
+      return myTooltip;
     }
 
     @Override
-    public SNode getNode() {
+    public SNodeReference getNodeReference() {
       return myNode;
     }
 
@@ -243,11 +215,6 @@ public class BookmarksUIComponent implements ProjectComponent {
     @Override
     public IconRendererType getType() {
       return TYPE;
-    }
-
-    @Override
-    public jetbrains.mps.openapi.editor.cells.EditorCell getAnchorCell(jetbrains.mps.openapi.editor.cells.EditorCell bigCell) {
-      return bigCell;
     }
 
     @Override

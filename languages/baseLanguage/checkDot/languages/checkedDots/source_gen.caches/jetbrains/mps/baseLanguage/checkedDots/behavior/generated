@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="6u72dixuw58uck5zn9isejwwk3jcv0w" />
+<product version="3" modelHash="3ftc9zorzaded2q6t079iq9ixyxgnad">
+  <files names="BehaviorAspectDescriptor.java:CheckedDotExpression__BehaviorDescriptor.java" />
+</product>
 

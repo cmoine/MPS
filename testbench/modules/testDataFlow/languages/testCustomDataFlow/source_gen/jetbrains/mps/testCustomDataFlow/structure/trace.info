@@ -1,11 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
   <root>
     <file name="ConceptPresentationAspectImpl.java">
-      <unit at="11,0,25,0" name="jetbrains.mps.testCustomDataFlow.structure.ConceptPresentationAspectImpl" />
+      <unit at="11,0,30,0" name="jetbrains.mps.testCustomDataFlow.structure.ConceptPresentationAspectImpl" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <unit at="10,0,28,0" name="jetbrains.mps.testCustomDataFlow.structure.LanguageConceptSwitch" />
     </file>
     <file name="StructureAspectDescriptor.java">
-      <unit at="20,0,62,0" name="jetbrains.mps.testCustomDataFlow.structure.StructureAspectDescriptor" />
+      <unit at="14,0,60,0" name="jetbrains.mps.testCustomDataFlow.structure.StructureAspectDescriptor" />
+    </file>
+  </root>
+  <root nodeRef="r:1663047b-d6b3-4d14-9e65-e64dc6f64cac(jetbrains.mps.testCustomDataFlow.structure)/7078910619969045598">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="7078910619969045598" at="12,0,13,0" concept="1" trace="props_IntraProceduralSpecific_BuilderMode" />
+      <node id="7078910619969045598" at="20,64,21,76" concept="3" />
+      <node id="7078910619969045598" at="21,76,22,59" concept="0" />
+      <node id="7078910619969045598" at="22,59,23,67" concept="0" />
+      <node id="7078910619969045598" at="24,9,25,57" concept="4" />
+      <node id="7078910619969045598" at="19,69,24,9" concept="2" />
+      <scope id="7078910619969045598" at="20,64,23,67">
+        <var name="cpb" id="7078910619969045598" />
+      </scope>
+      <scope id="7078910619969045598" at="19,69,25,57" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="7078910619969045598" at="12,0,13,0" concept="6" trace="IntraProceduralSpecific_BuilderMode" />
+      <node id="7078910619969045598" at="15,116,16,74" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="7078910619969045598" at="15,0,16,0" concept="1" trace="myConceptIntraProceduralSpecific_BuilderMode" />
+      <node id="7078910619969045598" at="37,69,38,60" concept="4" />
+      <node id="7078910619969045598" at="49,93,50,202" concept="3" />
+      <node id="7078910619969045598" at="50,202,51,34" concept="0" />
+      <node id="7078910619969045598" at="51,34,52,81" concept="5" />
+      <node id="7078910619969045598" at="52,81,53,76" concept="0" />
+      <node id="7078910619969045598" at="53,76,54,119" concept="0" />
+      <node id="7078910619969045598" at="54,119,55,17" concept="0" />
+      <node id="7078910619969045598" at="55,17,56,41" concept="0" />
+      <node id="7078910619969045598" at="56,41,57,22" concept="4" />
+      <node id="7078910619969045598" at="49,0,59,0" concept="7" trace="createDescriptorForIntraProceduralSpecific_BuilderMode#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="7078910619969045598" at="37,69,38,60" />
+      <scope id="7078910619969045598" at="49,93,57,22">
+        <var name="b" id="7078910619969045598" />
+      </scope>
+      <scope id="7078910619969045598" at="49,0,59,0" />
     </file>
   </root>
 </debug-info>

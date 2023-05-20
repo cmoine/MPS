@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081855346303:jetbrains.mps.baseLanguage.structure.BreakStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144226303539:jetbrains.mps.baseLanguage.structure.ForeachStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <root nodeRef="r:59f5b892-a6eb-4a9b-9c81-ecffc10026ee(jetbrains.mps.ide.highlighters.behavior)/1401464578585771758">
+    <file name="ConceptInheritanceHighlighter.java">
+      <node id="1401464578585812426" at="16,0,17,0" concept="4" trace="myProject" />
+      <node id="1401464578586801092" at="18,0,19,0" concept="4" trace="myBehaviorChecker" />
+      <node id="2707675432438002327" at="19,0,20,0" concept="4" trace="myStructureChecker" />
+      <node id="1401464578585812970" at="21,69,22,24" concept="3" />
+      <node id="1401464578586802629" at="22,24,23,67" concept="3" />
+      <node id="2707675432438017034" at="23,67,24,62" concept="3" />
+      <node id="4433956668054493661" at="27,40,28,46" concept="9" />
+      <node id="1401464578585824288" at="31,22,32,52" concept="3" />
+      <node id="2707675432438020617" at="32,52,33,51" concept="3" />
+      <node id="1401464578586811166" at="36,25,37,54" concept="3" />
+      <node id="2707675432438021245" at="37,54,38,55" concept="3" />
+      <node id="1401464578585824284" at="27,0,30,0" concept="7" trace="getHighlighter#()Ljetbrains/mps/nodeEditor/Highlighter;" />
+      <node id="1401464578585807361" at="31,0,35,0" concept="7" trace="init#()V" />
+      <node id="1401464578585807368" at="36,0,40,0" concept="7" trace="dispose#()V" />
+      <node id="1401464578585810677" at="21,0,26,0" concept="2" trace="ConceptInheritanceHighlighter#(Ljetbrains/mps/project/MPSProject;)V" />
+      <scope id="1401464578585824276" at="27,40,28,46" />
+      <scope id="1401464578585807366" at="31,22,33,51" />
+      <scope id="1401464578585807373" at="36,25,38,55" />
+      <scope id="1401464578585810680" at="21,69,24,62" />
+      <scope id="1401464578585824284" at="27,0,30,0" />
+      <scope id="1401464578585807361" at="31,0,35,0" />
+      <scope id="1401464578585807368" at="36,0,40,0" />
+      <scope id="1401464578585810677" at="21,0,26,0">
+        <var name="project" id="1401464578585811183" />
+      </scope>
+      <unit id="1401464578585771758" at="14,0,41,0" name="jetbrains.mps.ide.highlighters.behavior.ConceptInheritanceHighlighter" />
+    </file>
+  </root>
+  <root nodeRef="r:59f5b892-a6eb-4a9b-9c81-ecffc10026ee(jetbrains.mps.ide.highlighters.behavior)/1401464578585832882">
+    <file name="OverrideConceptMethodsChecker.java">
+      <node id="7515092869552482510" at="28,0,29,0" concept="12" trace="MAX_ITEMS_TO_SHOW" />
+      <node id="22393163173384449" at="30,0,31,0" concept="4" trace="myProject" />
+      <node id="22393163173385618" at="32,69,33,24" concept="3" />
+      <node id="1401464578586818408" at="38,128,39,47" concept="8" />
+      <node id="1401464578586840067" at="40,80,41,73" concept="9" />
+      <node id="1401464578586902465" at="42,5,43,0" concept="11" />
+      <node id="1401464578586910976" at="43,0,44,146" concept="8" />
+      <node id="1401464578587004717" at="45,55,46,73" concept="9" />
+      <node id="1401464578586908323" at="47,5,48,130" concept="8" />
+      <node id="1401464578587054722" at="49,36,50,42" concept="9" />
+      <node id="1401464578587031207" at="51,5,52,52" concept="9" />
+      <node id="1401464578588074792" at="55,63,56,50" concept="9" />
+      <node id="7515092869552924413" at="60,96,61,154" concept="8" />
+      <node id="7515092869552916230" at="62,36,63,23" concept="9" />
+      <node id="7515092869552930139" at="64,5,65,158" concept="8" />
+      <node id="1401464578587067808" at="65,158,66,103" concept="9" />
+      <node id="1401464578585832882" at="70,0,71,0" concept="12" trace="ConceptBehavior$2" />
+      <node id="1401464578585832882" at="71,0,72,0" concept="12" trace="ConceptMethodDeclaration$N0" />
+      <node id="22393163173382077" at="32,0,35,0" concept="2" trace="OverrideConceptMethodsChecker#(Ljetbrains/mps/project/MPSProject;)V" />
+      <node id="1401464578586834914" at="39,47,42,5" concept="6" />
+      <node id="1401464578586921769" at="44,146,47,5" concept="6" />
+      <node id="1401464578587048094" at="48,130,51,5" concept="6" />
+      <node id="1401464578588087437" at="55,0,58,0" concept="13" trace="emptyListEditorMessage#()Ljava/util/List;" />
+      <node id="7515092869552916228" at="61,154,64,5" concept="6" />
+      <node id="1401464578587027869" at="59,0,68,0" concept="7" trace="calculateEditorMessages#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/util/Cancellable;)Ljava/util/List;" />
+      <node id="1401464578585920251" at="36,0,54,0" concept="7" trace="update#(Ljetbrains/mps/nodeEditor/EditorComponent;ZZLjetbrains/mps/util/Cancellable;)Ljetbrains/mps/nodeEditor/checking/UpdateResult;" />
+      <scope id="22393163173382082" at="32,69,33,24" />
+      <scope id="1401464578586834916" at="40,80,41,73" />
+      <scope id="1401464578586921771" at="45,55,46,73" />
+      <scope id="1401464578587048096" at="49,36,50,42" />
+      <scope id="1401464578588074767" at="55,63,56,50" />
+      <scope id="7515092869552916229" at="62,36,63,23" />
+      <scope id="22393163173382077" at="32,0,35,0">
+        <var name="project" id="22393163173382916" />
+      </scope>
+      <scope id="1401464578588087437" at="55,0,58,0" />
+      <scope id="1401464578587027872" at="60,96,66,103">
+        <var name="ancestors" id="7515092869552924416" />
+        <var name="descendants" id="7515092869552930140" />
+      </scope>
+      <scope id="1401464578587027869" at="59,0,68,0">
+        <var name="behavior" id="1401464578587028543" />
+        <var name="cancellable" id="1401464578587034035" />
+      </scope>
+      <scope id="1401464578585920265" at="38,128,52,52">
+        <var name="descendants" id="1401464578586910977" />
+        <var name="result" id="1401464578586908326" />
+        <var name="rootNode" id="1401464578586818411" />
+      </scope>
+      <scope id="1401464578585920251" at="36,0,54,0">
+        <var name="applyQuickFixes" id="1401464578585920260" />
+        <var name="cancellable" id="1401464578585920262" />
+        <var name="component" id="1401464578585920256" />
+        <var name="incremental" id="1401464578585920258" />
+      </scope>
+      <unit id="1401464578585832882" at="69,0,73,0" name="jetbrains.mps.ide.highlighters.behavior.OverrideConceptMethodsChecker$CONCEPTS" />
+      <unit id="1401464578585832882" at="23,0,74,0" name="jetbrains.mps.ide.highlighters.behavior.OverrideConceptMethodsChecker" />
+    </file>
+  </root>
+  <root nodeRef="r:59f5b892-a6eb-4a9b-9c81-ecffc10026ee(jetbrains.mps.ide.highlighters.behavior)/7515092869553021871">
+    <file name="DescendantsMethodsLookup.java">
+      <node id="7515092869553021872" at="35,0,36,0" concept="4" trace="myCancellable" />
+      <node id="7515092869553021875" at="36,0,37,0" concept="4" trace="myBehavior" />
+      <node id="7515092869553096883" at="37,0,38,0" concept="4" trace="myMaxResultsToCollect" />
+      <node id="7515092869553154975" at="38,0,39,0" concept="4" trace="myScope" />
+      <node id="3492903445849727259" at="39,0,40,0" concept="4" trace="myOwner" />
+      <node id="7515092869553021883" at="41,173,42,32" concept="3" />
+      <node id="7515092869553156011" at="42,32,43,20" concept="3" />
+      <node id="7515092869553021887" at="43,20,44,26" concept="3" />
+      <node id="3492903445849735255" at="44,26,45,20" concept="3" />
+      <node id="7515092869553097942" at="45,20,46,48" concept="3" />
+      <node id="7515092869553736096" at="50,50,51,87" concept="8" />
+      <node id="9117911255445804563" at="53,351,54,57" concept="8" />
+      <node id="7515092869553742021" at="55,35,56,65" concept="3" />
+      <node id="7515092869553114051" at="58,42,59,16" concept="1" />
+      <node id="7515092869553370097" at="62,5,63,18" concept="9" />
+      <node id="7515092869553734282" at="67,51,68,75" concept="8" />
+      <node id="7515092869553734296" at="69,73,70,72" concept="9" />
+      <node id="9117911255445798465" at="72,53,73,20" concept="9" />
+      <node id="7515092869553734309" at="74,7,75,115" concept="9" />
+      <node id="2707675432437117163" at="79,92,80,57" concept="8" />
+      <node id="7515092869554019379" at="83,35,84,34" concept="9" />
+      <node id="1589598445336508880" at="88,71,89,59" concept="8" />
+      <node id="7515092869554019408" at="92,90,93,118" concept="3" />
+      <node id="2707675432437168874" at="94,80,95,33" concept="3" />
+      <node id="2707675432437204104" at="101,129,102,18" concept="9" />
+      <node id="7515092869553021871" at="106,0,107,0" concept="12" trace="BaseMethodDeclaration$kD" />
+      <node id="7515092869553021871" at="107,0,108,0" concept="12" trace="ConceptMethodDeclaration$N0" />
+      <node id="7515092869553021871" at="111,0,112,0" concept="12" trace="method$w_in" />
+      <node id="9117911255445808332" at="54,57,57,9" concept="6" />
+      <node id="7515092869552796969" at="57,9,60,9" concept="6" />
+      <node id="9117911255445607625" at="71,12,74,7" concept="6" />
+      <node id="2707675432437148546" at="93,118,96,15" concept="6" />
+      <node id="7515092869554019374" at="82,0,86,0" concept="7" trace="isCanceled#()Z" />
+      <node id="7515092869553734307" at="71,10,76,5" concept="0" />
+      <node id="7515092869554019366" at="80,57,86,6" concept="8" />
+      <node id="7515092869554019406" at="91,41,97,13" concept="6" />
+      <node id="7515092869553021879" at="41,0,48,0" concept="2" trace="DescendantsMethodsLookup#(Ljetbrains/mps/util/Cancellable;Lorg/jetbrains/mps/openapi/module/SearchScope;Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/openapi/editor/message/EditorMessageOwner;I)V" />
+      <node id="7515092869553734294" at="68,75,76,5" concept="6" />
+      <node id="1589598445336508880" at="91,0,99,0" concept="7" trace="invoke#(Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <node id="7515092869552743765" at="52,108,61,7" concept="6" />
+      <node id="1589598445336508880" at="89,59,99,28" concept="3" />
+      <node id="7515092869552743759" at="51,87,62,5" concept="5" />
+      <node id="7515092869553734264" at="66,0,78,0" concept="7" trace="calcMessage#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljetbrains/mps/nodeEditor/EditorMessage;" />
+      <node id="1589598445336508880" at="88,0,101,0" concept="7" trace="onUsageFound#(Ljetbrains/mps/ide/findusages/model/SearchResult;)V" />
+      <node id="1589598445336508880" at="86,6,101,129" concept="3" />
+      <node id="7515092869552743794" at="49,0,65,0" concept="7" trace="calcMessages#()Ljava/util/List;" />
+      <node id="7515092869552413245" at="79,0,104,0" concept="7" trace="findDescendantsOverrides#(Ljetbrains/mps/util/Cancellable;Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/util/Set;" />
+      <scope id="9117911255445808334" at="55,35,56,65" />
+      <scope id="7515092869552796971" at="58,42,59,16" />
+      <scope id="7515092869553734295" at="69,73,70,72" />
+      <scope id="9117911255445607627" at="72,53,73,20" />
+      <scope id="7515092869554019378" at="83,35,84,34" />
+      <scope id="2707675432437148548" at="94,80,95,33" />
+      <scope id="7515092869553734308" at="71,12,75,115" />
+      <scope id="7515092869554019374" at="82,0,86,0" />
+      <scope id="7515092869554019407" at="92,90,96,15" />
+      <scope id="7515092869553021882" at="41,173,46,48" />
+      <scope id="1589598445336508886" at="91,41,97,13" />
+      <scope id="7515092869553021879" at="41,0,48,0">
+        <var name="behavior" id="7515092869553021893" />
+        <var name="cancellable" id="7515092869553021891" />
+        <var name="maxResultsToCollect" id="7515092869553024070" />
+        <var name="owner" id="3492903445849733526" />
+        <var name="scope" id="7515092869553155151" />
+      </scope>
+      <scope id="7515092869552743773" at="53,351,60,9">
+        <var name="msgForMethod" id="9117911255445804564" />
+      </scope>
+      <scope id="1589598445336508880" at="91,0,99,0">
+        <var name="res" id="1589598445336508880" />
+      </scope>
+      <scope id="7515092869552743764" at="52,108,61,7" />
+      <scope id="7515092869553734266" at="67,51,76,5">
+        <var name="overrides" id="7515092869553734283" />
+      </scope>
+      <scope id="7515092869552743759" at="51,87,62,5">
+        <var name="method" id="7515092869552743760" />
+      </scope>
+      <scope id="1589598445336508880" at="88,71,99,28">
+        <var name="nodeParam" id="1589598445336508880" />
+      </scope>
+      <scope id="7515092869553734264" at="66,0,78,0">
+        <var name="method" id="7515092869553758991" />
+      </scope>
+      <scope id="7515092869552743758" at="50,50,63,18">
+        <var name="result" id="7515092869553736099" />
+      </scope>
+      <scope id="1589598445336508880" at="88,0,101,0">
+        <var name="searchResult" id="1589598445336508880" />
+      </scope>
+      <scope id="7515092869552743794" at="49,0,65,0" />
+      <scope id="7515092869552413248" at="79,92,102,18">
+        <var name="monitor" id="7515092869554019367" />
+        <var name="result" id="2707675432437117164" />
+      </scope>
+      <scope id="7515092869552413245" at="79,0,104,0">
+        <var name="cancellable" id="7515092869552431810" />
+        <var name="method" id="7515092869552413922" />
+      </scope>
+      <unit id="7515092869553021871" at="110,0,113,0" name="jetbrains.mps.ide.highlighters.behavior.DescendantsMethodsLookup$LINKS" />
+      <unit id="7515092869553021871" at="105,0,109,0" name="jetbrains.mps.ide.highlighters.behavior.DescendantsMethodsLookup$CONCEPTS" />
+      <unit id="7515092869554019371" at="81,40,86,5" name="jetbrains.mps.ide.highlighters.behavior.DescendantsMethodsLookup$1" />
+      <unit id="1589598445336508880" at="90,12,99,9" name="jetbrains.mps.ide.highlighters.behavior.DescendantsMethodsLookup$2$1" />
+      <unit id="1589598445336508880" at="87,44,101,5" name="jetbrains.mps.ide.highlighters.behavior.DescendantsMethodsLookup$2" />
+      <unit id="7515092869553021871" at="33,0,114,0" name="jetbrains.mps.ide.highlighters.behavior.DescendantsMethodsLookup" />
+    </file>
+  </root>
+  <root nodeRef="r:59f5b892-a6eb-4a9b-9c81-ecffc10026ee(jetbrains.mps.ide.highlighters.behavior)/7515092869553787026">
+    <file name="AncestorsMethodsLookup.java">
+      <node id="7515092869553787027" at="37,0,38,0" concept="4" trace="myCancellable" />
+      <node id="7515092869553787030" at="38,0,39,0" concept="4" trace="myBehavior" />
+      <node id="7515092869553787033" at="39,0,40,0" concept="4" trace="myMaxResultsToCollect" />
+      <node id="7515092869553787036" at="40,0,41,0" concept="4" trace="myScope" />
+      <node id="3492903445849695586" at="41,0,42,0" concept="4" trace="myOwner" />
+      <node id="7515092869553787044" at="43,171,44,32" concept="3" />
+      <node id="7515092869553787048" at="44,32,45,20" concept="3" />
+      <node id="7515092869553787052" at="45,20,46,26" concept="3" />
+      <node id="3492903445849700893" at="46,26,47,20" concept="3" />
+      <node id="7515092869553787056" at="47,20,48,48" concept="3" />
+      <node id="7515092869553787076" at="52,50,53,87" concept="8" />
+      <node id="9117911255445588489" at="55,251,56,57" concept="8" />
+      <node id="7515092869553787098" at="57,35,58,65" concept="3" />
+      <node id="7515092869553787106" at="60,42,61,16" concept="1" />
+      <node id="7515092869553787110" at="64,5,65,18" concept="9" />
+      <node id="7515092869553787117" at="69,55,70,54" concept="8" />
+      <node id="7515092869553787124" at="70,54,71,58" concept="3" />
+      <node id="7515092869553787131" at="72,73,73,69" concept="9" />
+      <node id="9117911255445575580" at="75,53,76,20" concept="9" />
+      <node id="7515092869553787144" at="77,7,78,112" concept="9" />
+      <node id="7515092869553883064" at="85,35,86,34" concept="9" />
+      <node id="5939288775838429718" at="90,71,91,59" concept="8" />
+      <node id="7515092869553787188" at="94,96,95,124" concept="3" />
+      <node id="5939288775838475492" at="96,80,97,33" concept="3" />
+      <node id="7515092869553787026" at="107,0,108,0" concept="12" trace="overriddenMethod$quKH" />
+      <node id="7515092869553787026" at="108,0,109,0" concept="12" trace="method$w_in" />
+      <node id="7515092869553787026" at="112,0,113,0" concept="12" trace="ConceptMethodDeclaration$N0" />
+      <node id="9117911255445593570" at="56,57,59,9" concept="6" />
+      <node id="7515092869553787104" at="59,9,62,9" concept="6" />
+      <node id="9117911255445564556" at="74,12,77,7" concept="6" />
+      <node id="7515092869553787195" at="95,124,98,15" concept="6" />
+      <node id="7515092869553883052" at="84,0,88,0" concept="7" trace="isCanceled#()Z" />
+      <node id="7515092869553787142" at="74,10,79,5" concept="0" />
+      <node id="7515092869553885140" at="82,122,88,6" concept="8" />
+      <node id="7515092869553787186" at="93,47,99,13" concept="6" />
+      <node id="7515092869553787040" at="43,0,50,0" concept="2" trace="AncestorsMethodsLookup#(Ljetbrains/mps/util/Cancellable;Lorg/jetbrains/mps/openapi/module/SearchScope;Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/openapi/editor/message/EditorMessageOwner;I)V" />
+      <node id="7515092869553787129" at="71,58,79,5" concept="6" />
+      <node id="5939288775838429718" at="93,0,101,0" concept="7" trace="invoke#(Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <node id="7515092869553787089" at="54,108,63,7" concept="6" />
+      <node id="5939288775838429718" at="91,59,101,28" concept="3" />
+      <node id="7515092869553787083" at="53,87,64,5" concept="5" />
+      <node id="7515092869553787114" at="68,0,81,0" concept="7" trace="calcMessage#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljetbrains/mps/nodeEditor/EditorMessage;" />
+      <node id="5939288775838429718" at="90,0,103,0" concept="7" trace="onUsageFound#(Ljetbrains/mps/ide/findusages/model/SearchResult;)V" />
+      <node id="5939288775838429718" at="88,6,103,136" concept="3" />
+      <node id="7515092869553787072" at="51,0,67,0" concept="7" trace="calcMessages#()Ljava/util/List;" />
+      <node id="7515092869553787156" at="82,0,105,0" concept="7" trace="addAncestorsMethods#(Ljetbrains/mps/util/Cancellable;Lorg/jetbrains/mps/openapi/model/SNode;Ljava/util/Set;)V" />
+      <scope id="9117911255445593572" at="57,35,58,65" />
+      <scope id="7515092869553787105" at="60,42,61,16" />
+      <scope id="7515092869553787130" at="72,73,73,69" />
+      <scope id="9117911255445564558" at="75,53,76,20" />
+      <scope id="7515092869553883062" at="85,35,86,34" />
+      <scope id="7515092869553787196" at="96,80,97,33" />
+      <scope id="7515092869553787143" at="74,12,78,112" />
+      <scope id="7515092869553883052" at="84,0,88,0" />
+      <scope id="7515092869553787187" at="94,96,98,15" />
+      <scope id="7515092869553787043" at="43,171,48,48" />
+      <scope id="5939288775838429724" at="93,47,99,13" />
+      <scope id="7515092869553787040" at="43,0,50,0">
+        <var name="behavior" id="7515092869553787066" />
+        <var name="cancellable" id="7515092869553787060" />
+        <var name="maxResultsToCollect" id="7515092869553787069" />
+        <var name="owner" id="3492903445849682849" />
+        <var name="scope" id="7515092869553787063" />
+      </scope>
+      <scope id="7515092869553787097" at="55,251,62,9">
+        <var name="msgForMethod" id="9117911255445588490" />
+      </scope>
+      <scope id="5939288775838429718" at="93,0,101,0">
+        <var name="foundNode" id="5939288775838429718" />
+      </scope>
+      <scope id="7515092869553787088" at="54,108,63,7" />
+      <scope id="7515092869553787116" at="69,55,79,5">
+        <var name="ancestors" id="7515092869553787118" />
+      </scope>
+      <scope id="7515092869553787083" at="53,87,64,5">
+        <var name="method" id="7515092869553787084" />
+      </scope>
+      <scope id="5939288775838429718" at="90,71,101,28">
+        <var name="nodeParam" id="5939288775838429718" />
+      </scope>
+      <scope id="7515092869553787075" at="52,50,65,18">
+        <var name="result" id="7515092869553787077" />
+      </scope>
+      <scope id="7515092869553787114" at="68,0,81,0">
+        <var name="method" id="7515092869553787153" />
+      </scope>
+      <scope id="5939288775838429718" at="90,0,103,0">
+        <var name="searchResult" id="5939288775838429718" />
+      </scope>
+      <scope id="7515092869553787072" at="51,0,67,0" />
+      <scope id="7515092869553787157" at="82,122,103,136">
+        <var name="monitor" id="7515092869553885141" />
+      </scope>
+      <scope id="7515092869553787156" at="82,0,105,0">
+        <var name="cancellable" id="7515092869553787229" />
+        <var name="currentMethod" id="7515092869553787231" />
+        <var name="result" id="7515092869553787233" />
+      </scope>
+      <unit id="7515092869553787026" at="111,0,114,0" name="jetbrains.mps.ide.highlighters.behavior.AncestorsMethodsLookup$CONCEPTS" />
+      <unit id="7515092869553787026" at="106,0,110,0" name="jetbrains.mps.ide.highlighters.behavior.AncestorsMethodsLookup$LINKS" />
+      <unit id="7515092869553883000" at="83,40,88,5" name="jetbrains.mps.ide.highlighters.behavior.AncestorsMethodsLookup$1" />
+      <unit id="5939288775838429718" at="92,12,101,9" name="jetbrains.mps.ide.highlighters.behavior.AncestorsMethodsLookup$2$1" />
+      <unit id="5939288775838429718" at="89,44,103,5" name="jetbrains.mps.ide.highlighters.behavior.AncestorsMethodsLookup$2" />
+      <unit id="7515092869553787026" at="35,0,115,0" name="jetbrains.mps.ide.highlighters.behavior.AncestorsMethodsLookup" />
+    </file>
+  </root>
+  <root nodeRef="r:59f5b892-a6eb-4a9b-9c81-ecffc10026ee(jetbrains.mps.ide.highlighters.behavior)/7515092869553799095">
+    <file name="MethodIsOverriddenEditorMessage.java">
+      <node id="7515092869553799096" at="33,0,34,0" concept="12" trace="TYPE" />
+      <node id="6089862795372235935" at="34,0,35,0" concept="12" trace="INDENT" />
+      <node id="7515092869553799108" at="36,53,37,72" concept="9" />
+      <node id="7515092869553799115" at="40,0,41,0" concept="4" trace="myOverridden" />
+      <node id="7515092869553799127" at="42,115,43,57" concept="14" />
+      <node id="7515092869553799133" at="43,57,44,45" concept="3" />
+      <node id="9117911255445293004" at="47,84,48,42" concept="10" />
+      <node id="7515092869553799148" at="49,28,50,165" concept="9" />
+      <node id="7515092869553799159" at="51,5,52,91" concept="8" />
+      <node id="7515092869553799170" at="52,91,53,0" concept="11" />
+      <node id="7515092869553799171" at="53,0,54,28" concept="8" />
+      <node id="7515092869553799177" at="55,56,56,131" concept="3" />
+      <node id="7515092869553799197" at="58,63,59,97" concept="3" />
+      <node id="7515092869553799204" at="61,5,62,19" concept="9" />
+      <node id="7515092869553799220" at="65,61,66,301" concept="9" />
+      <node id="7515092869553799232" at="70,25,71,106" concept="9" />
+      <node id="7515092869553799244" at="75,63,76,16" concept="9" />
+      <node id="7515092869553799253" at="80,36,81,121" concept="10" />
+      <node id="7515092869553799255" at="81,121,82,133" concept="9" />
+      <node id="7515092869553799095" at="86,0,87,0" concept="12" trace="body$5xQk" />
+      <node id="7515092869553799095" at="90,0,91,0" concept="12" trace="ConceptMethodDeclaration$N0" />
+      <node id="7515092869553799095" at="91,0,92,0" concept="12" trace="INamedConcept$Kd" />
+      <node id="7515092869554152531" at="36,0,39,0" concept="13" trace="isOverridden#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="7515092869553799146" at="48,42,51,5" concept="6" />
+      <node id="7515092869553799193" at="57,12,60,7" concept="5" />
+      <node id="7515092869553799214" at="65,0,68,0" concept="13" trace="getTextFromOverride#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
+      <node id="7515092869553799119" at="42,0,46,0" concept="2" trace="MethodIsOverriddenEditorMessage#(Lorg/jetbrains/mps/openapi/model/SNode;Ljava/util/List;Ljetbrains/mps/openapi/editor/message/EditorMessageOwner;)V" />
+      <node id="7515092869553799191" at="57,10,61,5" concept="0" />
+      <node id="7515092869553799227" at="69,0,73,0" concept="7" trace="getIcon#()Ljavax/swing/Icon;" />
+      <node id="7515092869553799240" at="74,0,78,0" concept="7" trace="getType#()Ljetbrains/mps/nodeEditor/EditorMessageIconRenderer/IconRendererType;" />
+      <node id="7515092869553799248" at="79,0,84,0" concept="7" trace="getClickAction#()Lcom/intellij/openapi/actionSystem/AnAction;" />
+      <node id="7515092869553799175" at="54,28,61,5" concept="6" />
+      <node id="7515092869553799144" at="47,0,64,0" concept="13" trace="tooltipText#(Lorg/jetbrains/mps/openapi/model/SNode;Ljava/util/List;)Ljava/lang/String;" />
+      <scope id="7515092869553799107" at="36,53,37,72" />
+      <scope id="7515092869553799147" at="49,28,50,165" />
+      <scope id="7515092869553799176" at="55,56,56,131" />
+      <scope id="7515092869553799196" at="58,63,59,97" />
+      <scope id="7515092869553799219" at="65,61,66,301" />
+      <scope id="7515092869553799231" at="70,25,71,106" />
+      <scope id="7515092869553799243" at="75,63,76,16" />
+      <scope id="7515092869553799126" at="42,115,44,45" />
+      <scope id="7515092869553799252" at="80,36,82,133" />
+      <scope id="7515092869554152531" at="36,0,39,0">
+        <var name="method" id="7515092869553799105" />
+      </scope>
+      <scope id="7515092869553799192" at="57,12,60,7" />
+      <scope id="7515092869553799193" at="57,12,60,7">
+        <var name="override" id="7515092869553799194" />
+      </scope>
+      <scope id="7515092869553799214" at="65,0,68,0">
+        <var name="override" id="7515092869553799217" />
+      </scope>
+      <scope id="7515092869553799119" at="42,0,46,0">
+        <var name="method" id="7515092869553799120" />
+        <var name="overrides" id="7515092869553799122" />
+        <var name="owner" id="7515092869553799141" />
+      </scope>
+      <scope id="7515092869553799227" at="69,0,73,0" />
+      <scope id="7515092869553799240" at="74,0,78,0" />
+      <scope id="7515092869553799248" at="79,0,84,0" />
+      <scope id="7515092869553799145" at="47,84,62,19">
+        <var name="prefix" id="7515092869553799160" />
+        <var name="tooltip" id="7515092869553799172" />
+      </scope>
+      <scope id="7515092869553799144" at="47,0,64,0">
+        <var name="method" id="7515092869553799208" />
+        <var name="overrides" id="7515092869553799210" />
+      </scope>
+      <unit id="7515092869553799095" at="85,0,88,0" name="jetbrains.mps.ide.highlighters.behavior.MethodIsOverriddenEditorMessage$LINKS" />
+      <unit id="7515092869553799095" at="89,0,93,0" name="jetbrains.mps.ide.highlighters.behavior.MethodIsOverriddenEditorMessage$CONCEPTS" />
+      <unit id="7515092869553799095" at="31,0,94,0" name="jetbrains.mps.ide.highlighters.behavior.MethodIsOverriddenEditorMessage" />
+    </file>
+  </root>
+  <root nodeRef="r:59f5b892-a6eb-4a9b-9c81-ecffc10026ee(jetbrains.mps.ide.highlighters.behavior)/7515092869553865946">
+    <file name="EmptyProgressMonitorWithCancellable.java">
+      <node id="7515092869553870186" at="12,0,13,0" concept="4" trace="myCancellable" />
+      <node id="7515092869553870881" at="14,80,15,32" concept="3" />
+      <node id="7515092869553867836" at="19,31,20,61" concept="9" />
+      <node id="7515092869553866777" at="14,0,17,0" concept="2" trace="EmptyProgressMonitorWithCancellable#(Ljetbrains/mps/util/Cancellable;)V" />
+      <node id="7515092869553866276" at="18,0,22,0" concept="7" trace="isCanceled#()Z" />
+      <scope id="7515092869553866781" at="14,80,15,32" />
+      <scope id="7515092869553866282" at="19,31,20,61" />
+      <scope id="7515092869553866777" at="14,0,17,0">
+        <var name="cancellable" id="7515092869553867173" />
+      </scope>
+      <scope id="7515092869553866276" at="18,0,22,0" />
+      <unit id="7515092869553865946" at="10,0,23,0" name="jetbrains.mps.ide.highlighters.behavior.EmptyProgressMonitorWithCancellable" />
+    </file>
+  </root>
+  <root nodeRef="r:59f5b892-a6eb-4a9b-9c81-ecffc10026ee(jetbrains.mps.ide.highlighters.behavior)/8432634623182579907">
+    <file name="MethodOverridesEditorMessage.java">
+      <node id="8432634623182579908" at="32,0,33,0" concept="12" trace="TYPE" />
+      <node id="6089862795372227515" at="33,0,34,0" concept="12" trace="INDENT" />
+      <node id="7515092869553647998" at="35,53,36,72" concept="9" />
+      <node id="8432634623182579926" at="39,0,40,0" concept="4" trace="myOverriding" />
+      <node id="8432634623182579942" at="41,112,42,57" concept="14" />
+      <node id="8432634623182579946" at="42,57,43,45" concept="3" />
+      <node id="7515092869553649028" at="47,28,48,71" concept="9" />
+      <node id="7515092869553308837" at="49,5,50,90" concept="8" />
+      <node id="7515092869553363514" at="50,90,51,0" concept="11" />
+      <node id="7515092869553364295" at="51,0,52,28" concept="8" />
+      <node id="7515092869553615628" at="53,56,54,126" concept="3" />
+      <node id="7515092869553591087" at="56,63,57,92" concept="3" />
+      <node id="22393163173034440" at="59,5,60,19" concept="9" />
+      <node id="7515092869553607323" at="63,57,64,299" concept="9" />
+      <node id="8432634623182690115" at="68,25,69,107" concept="9" />
+      <node id="8432634623182579970" at="73,63,74,16" concept="9" />
+      <node id="1401464578586296551" at="78,36,79,119" concept="10" />
+      <node id="8432634623182579976" at="79,119,80,124" concept="9" />
+      <node id="8432634623182579907" at="84,0,85,0" concept="12" trace="body$5xQk" />
+      <node id="8432634623182579907" at="88,0,89,0" concept="12" trace="ConceptMethodDeclaration$N0" />
+      <node id="8432634623182579907" at="89,0,90,0" concept="12" trace="INamedConcept$Kd" />
+      <node id="7515092869553835903" at="35,0,38,0" concept="13" trace="isOverriding#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="7515092869553623224" at="46,84,49,5" concept="6" />
+      <node id="7515092869553366469" at="55,12,58,7" concept="5" />
+      <node id="7515092869553608320" at="63,0,66,0" concept="13" trace="getTextFromMethod#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
+      <node id="8432634623182579930" at="41,0,45,0" concept="2" trace="MethodOverridesEditorMessage#(Lorg/jetbrains/mps/openapi/model/SNode;Ljava/util/List;Ljetbrains/mps/openapi/editor/message/EditorMessageOwner;)V" />
+      <node id="7515092869553614853" at="55,10,59,5" concept="0" />
+      <node id="8432634623182579953" at="67,0,71,0" concept="7" trace="getIcon#()Ljavax/swing/Icon;" />
+      <node id="8432634623182579966" at="72,0,76,0" concept="7" trace="getType#()Ljetbrains/mps/nodeEditor/EditorMessageIconRenderer/IconRendererType;" />
+      <node id="8432634623182579972" at="77,0,82,0" concept="7" trace="getClickAction#()Lcom/intellij/openapi/actionSystem/AnAction;" />
+      <node id="7515092869553372125" at="52,28,59,5" concept="6" />
+      <node id="22393163173032701" at="46,0,62,0" concept="13" trace="tooltipText#(Lorg/jetbrains/mps/openapi/model/SNode;Ljava/util/List;)Ljava/lang/String;" />
+      <scope id="7515092869553647983" at="35,53,36,72" />
+      <scope id="7515092869553623226" at="47,28,48,71" />
+      <scope id="7515092869553372127" at="53,56,54,126" />
+      <scope id="7515092869553366475" at="56,63,57,92" />
+      <scope id="7515092869553606902" at="63,57,64,299" />
+      <scope id="8432634623182579956" at="68,25,69,107" />
+      <scope id="8432634623182579969" at="73,63,74,16" />
+      <scope id="8432634623182579941" at="41,112,43,45" />
+      <scope id="8432634623182579975" at="78,36,80,124" />
+      <scope id="7515092869553835903" at="35,0,38,0">
+        <var name="method" id="7515092869553648004" />
+      </scope>
+      <scope id="7515092869553366469" at="55,12,58,7">
+        <var name="ancestor" id="7515092869553366471" />
+      </scope>
+      <scope id="7515092869553614854" at="55,12,58,7" />
+      <scope id="7515092869553608320" at="63,0,66,0">
+        <var name="method" id="7515092869553607329" />
+      </scope>
+      <scope id="8432634623182579930" at="41,0,45,0">
+        <var name="ancestors" id="7515092869553306936" />
+        <var name="method" id="8432634623182579931" />
+        <var name="owner" id="8432634623182579933" />
+      </scope>
+      <scope id="8432634623182579953" at="67,0,71,0" />
+      <scope id="8432634623182579966" at="72,0,76,0" />
+      <scope id="8432634623182579972" at="77,0,82,0" />
+      <scope id="22393163173032704" at="46,84,60,19">
+        <var name="prefix" id="7515092869553308838" />
+        <var name="tooltip" id="7515092869553364298" />
+      </scope>
+      <scope id="22393163173032701" at="46,0,62,0">
+        <var name="ancestors" id="7515092869553307627" />
+        <var name="method" id="22393163174054392" />
+      </scope>
+      <unit id="8432634623182579907" at="83,0,86,0" name="jetbrains.mps.ide.highlighters.behavior.MethodOverridesEditorMessage$LINKS" />
+      <unit id="8432634623182579907" at="87,0,91,0" name="jetbrains.mps.ide.highlighters.behavior.MethodOverridesEditorMessage$CONCEPTS" />
+      <unit id="8432634623182579907" at="30,0,92,0" name="jetbrains.mps.ide.highlighters.behavior.MethodOverridesEditorMessage" />
+    </file>
+  </root>
+</debug-info>
+

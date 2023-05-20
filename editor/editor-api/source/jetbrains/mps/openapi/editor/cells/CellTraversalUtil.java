@@ -267,4 +267,28 @@ public class CellTraversalUtil {
     }
     return cell;
   }
+
+  public static boolean isCellUnderFoldedCollection(@NotNull EditorCell cell) {
+    // traversing all foldable cells up to the root and checking if this component cell is included
+    // into visible cells sub-tree
+    jetbrains.mps.openapi.editor.cells.EditorCell child = cell;
+    EditorCell_Collection parent = cell.getParent();
+    while (parent != null) {
+      if (parent.isFoldable()) {
+        boolean isUnderFolded = true;
+        for (jetbrains.mps.openapi.editor.cells.EditorCell editorCell : parent) {
+          if (editorCell == child) {
+            isUnderFolded = false;
+            break;
+          }
+        }
+        if (isUnderFolded) {
+          return true;
+        }
+      }
+      child = parent;
+      parent = parent.getParent();
+    }
+    return false;
+  }
 }

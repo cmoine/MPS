@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1163670490218:jetbrains.mps.baseLanguage.structure.SwitchStatement" />
+  <root nodeRef="r:071e29e9-37d8-494d-9d33-2b3d161c3727(jetbrains.mps.build.mps.enumMigration)/4241665505353447980">
+    <file name="BuildMps_GeneratorOptions_SkipUnmodifiedModels_MigrationUtils.java">
+      <node id="4241665505353447987" at="13,13,14,20" concept="1" />
+      <node id="4241665505353447990" at="15,13,16,23" concept="1" />
+      <node id="4241665505353447997" at="17,14,18,20" concept="1" />
+      <node id="4241665505353448009" at="22,24,23,287" concept="1" />
+      <node id="4241665505353448018" at="26,19,27,250" concept="1" />
+      <node id="4241665505353448027" at="28,14,29,20" concept="1" />
+      <node id="4241665505353447980" at="32,0,33,0" concept="2" trace="enumSwitchIndex" />
+      <node id="4241665505353448007" at="21,61,24,5" concept="0" />
+      <node id="4241665505353448024" at="24,5,30,5" concept="4" />
+      <node id="4241665505353447997" at="11,62,19,5" concept="4" />
+      <node id="4241665505353447991" at="11,0,21,0" concept="3" trace="value#(Lorg/jetbrains/mps/openapi/language/SEnumerationLiteral;)Ljava/lang/String;" />
+      <node id="4241665505353448000" at="21,0,32,0" concept="3" trace="fromValue#(Ljava/lang/String;)Lorg/jetbrains/mps/openapi/language/SEnumerationLiteral;" />
+      <scope id="4241665505353447987" at="13,13,14,20" />
+      <scope id="4241665505353447990" at="15,13,16,23" />
+      <scope id="4241665505353447997" at="17,14,18,20" />
+      <scope id="4241665505353448008" at="22,24,23,287" />
+      <scope id="4241665505353448017" at="26,19,27,250" />
+      <scope id="4241665505353448026" at="28,14,29,20" />
+      <scope id="4241665505353447995" at="11,62,19,5" />
+      <scope id="4241665505353448023" at="21,61,30,5" />
+      <scope id="4241665505353447991" at="11,0,21,0">
+        <var name="enummember" id="4241665505353447992" />
+      </scope>
+      <scope id="4241665505353448000" at="21,0,32,0">
+        <var name="value" id="4241665505353448001" />
+      </scope>
+      <unit id="4241665505353447980" at="10,0,34,0" name="jetbrains.mps.build.mps.enumMigration.BuildMps_GeneratorOptions_SkipUnmodifiedModels_MigrationUtils" />
+    </file>
+  </root>
+</debug-info>
+

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,8 +25,8 @@ import org.jetbrains.annotations.NotNull;
  * @author Artem Tikhomirov
  */
 public interface TreeNodeVisitor {
-  void visitModelNode(@NotNull SModelTreeNode node);
-  void visitModuleNode(@NotNull ProjectModuleTreeNode node);
-  void visitProjectNode(@NotNull ProjectTreeNode node);
-  void visitNamespaceNode(@NotNull NamespaceTextNode node);
+  default void visitModelNode(@NotNull SModelTreeNode node) {}
+  default void visitModuleNode(@NotNull ProjectModuleTreeNode node) {}
+  default void visitProjectNode(@NotNull ProjectTreeNode node) {}
+  default void visitNamespaceNode(@NotNull NamespaceTextNode node) {}
 }

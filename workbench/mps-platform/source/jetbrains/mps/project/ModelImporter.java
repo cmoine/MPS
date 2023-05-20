@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 package jetbrains.mps.project;
 
 import com.intellij.openapi.ui.Messages;
-import jetbrains.mps.module.ReloadableModule;
 import jetbrains.mps.project.dependency.VisibilityUtil;
 import jetbrains.mps.smodel.Language;
 import jetbrains.mps.smodel.SModelInternal;
@@ -101,15 +100,10 @@ public class ModelImporter {
   }
 
   public void execute() {
-    boolean shallReload = affectsModuleDependencies();
-    // affectsModuleDependencies() == true implies myModel got a module, otherwise there'd be nothing to affect.
+    affectsModuleDependencies();
+    // affectsModuleDependencies() == true implies myModel got a module, otherwise there is nothing to affect.
     for (Entry e : myImports) {
       e.addImport(myModel);
-    }
-
-    // Reload has meaning only for reloadable modules. Import itself does not depend on module type of model.
-    if (shallReload && myModel.getModule() instanceof ReloadableModule) {
-      ((ReloadableModule) myModel.getModule()).reload();
     }
   }
 

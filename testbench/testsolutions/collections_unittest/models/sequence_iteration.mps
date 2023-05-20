@@ -3,11 +3,11 @@
   <persistence version="9" />
   <languages>
     <use id="fd392034-7849-419d-9071-12563d152375" name="jetbrains.mps.baseLanguage.closures" version="0" />
-    <use id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections" version="0" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections" version="1" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports>
-    <import index="u132" ref="83f155ff-422c-4b5a-a2f2-b459302dd215/java:junit.framework(jetbrains.mps.baseLanguage.unitTest.libs/)" />
+    <import index="u132" ref="49808fad-9d41-4b96-83fa-9231640f6b2b/java:junit.framework(JUnit/)" />
   </imports>
   <registry>
     <language id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage">
@@ -92,11 +92,8 @@
         <child id="1144231399730" name="condition" index="1Dwp0S" />
         <child id="1144231408325" name="iteration" index="1Dwrff" />
       </concept>
-      <concept id="6329021646629104957" name="jetbrains.mps.baseLanguage.structure.TextCommentPart" flags="nn" index="3SKdUq">
-        <property id="6329021646629104958" name="text" index="3SKdUp" />
-      </concept>
       <concept id="6329021646629104954" name="jetbrains.mps.baseLanguage.structure.SingleLineComment" flags="nn" index="3SKdUt">
-        <child id="6329021646629175155" name="commentPart" index="3SKWNk" />
+        <child id="8356039341262087992" name="line" index="1aUNEU" />
       </concept>
       <concept id="1146644602865" name="jetbrains.mps.baseLanguage.structure.PublicVisibility" flags="nn" index="3Tm1VV" />
     </language>
@@ -111,6 +108,14 @@
     <language id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core">
       <concept id="1169194658468" name="jetbrains.mps.lang.core.structure.INamedConcept" flags="ng" index="TrEIO">
         <property id="1169194664001" name="name" index="TrG5h" />
+      </concept>
+    </language>
+    <language id="c7fb639f-be78-4307-89b0-b5959c3fa8c8" name="jetbrains.mps.lang.text">
+      <concept id="155656958578482948" name="jetbrains.mps.lang.text.structure.Word" flags="nn" index="3oM_SD">
+        <property id="155656958578482949" name="value" index="3oM_SC" />
+      </concept>
+      <concept id="2535923850359271782" name="jetbrains.mps.lang.text.structure.Line" flags="nn" index="1PaTwC">
+        <child id="2535923850359271783" name="elements" index="1PaTwD" />
       </concept>
     </language>
     <language id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections">
@@ -146,8 +151,19 @@
       <property role="TrG5h" value="test_shortSequence1" />
       <node concept="3clFbS" id="gXqcPcd" role="3clF47">
         <node concept="3SKdUt" id="6pumIWoCG6P" role="3cqZAp">
-          <node concept="3SKdUq" id="6pumIWoCG6Q" role="3SKWNk">
-            <property role="3SKdUp" value="sequence with no memory" />
+          <node concept="1PaTwC" id="ATZLwXopZB" role="1aUNEU">
+            <node concept="3oM_SD" id="ATZLwXopZC" role="1PaTwD">
+              <property role="3oM_SC" value="sequence" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXopZD" role="1PaTwD">
+              <property role="3oM_SC" value="with" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXopZE" role="1PaTwD">
+              <property role="3oM_SC" value="no" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXopZF" role="1PaTwD">
+              <property role="3oM_SC" value="memory" />
+            </node>
           </node>
         </node>
         <node concept="3cpWs8" id="gXqcT7d" role="3cqZAp">
@@ -212,7 +228,7 @@
             <node concept="3clFbF" id="gXqdqi_" role="3cqZAp">
               <node concept="2YIFZM" id="gXqdPC8" role="3clFbG">
                 <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-                <ref role="37wK5l" to="u132:~Assert.assertEquals(java.lang.String,java.lang.String):void" resolve="assertEquals" />
+                <ref role="37wK5l" to="u132:~Assert.assertEquals(java.lang.String,java.lang.String)" resolve="assertEquals" />
                 <node concept="3cpWs3" id="gXqe49N" role="37wK5m">
                   <node concept="37vLTw" id="3GM_nagTynO" role="3uHU7w">
                     <ref role="3cqZAo" node="gXqdXWg" resolve="count" />
@@ -236,7 +252,7 @@
         <node concept="3clFbF" id="gXqjjsR" role="3cqZAp">
           <node concept="2YIFZM" id="UtZ9hSL7jf" role="3clFbG">
             <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int):void" resolve="assertEquals" />
+            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int)" resolve="assertEquals" />
             <node concept="37vLTw" id="3GM_nagTy9F" role="37wK5m">
               <ref role="3cqZAo" node="gXqdXWg" resolve="count" />
             </node>
@@ -256,7 +272,7 @@
             <node concept="3clFbF" id="gXqsPtP" role="3cqZAp">
               <node concept="2YIFZM" id="UtZ9hSL7ji" role="3clFbG">
                 <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-                <ref role="37wK5l" to="u132:~Assert.assertEquals(java.lang.String,java.lang.String):void" resolve="assertEquals" />
+                <ref role="37wK5l" to="u132:~Assert.assertEquals(java.lang.String,java.lang.String)" resolve="assertEquals" />
                 <node concept="3cpWs3" id="UtZ9hSL7jj" role="37wK5m">
                   <node concept="1eOMI4" id="UtZ9hSL7jk" role="3uHU7w">
                     <node concept="3cpWsd" id="UtZ9hSL7jl" role="1eOMHV">
@@ -287,7 +303,7 @@
         <node concept="3clFbF" id="gXqsPu1" role="3cqZAp">
           <node concept="2YIFZM" id="UtZ9hSL7jq" role="3clFbG">
             <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int):void" resolve="assertEquals" />
+            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int)" resolve="assertEquals" />
             <node concept="37vLTw" id="3GM_nagTt06" role="37wK5m">
               <ref role="3cqZAo" node="gXqdXWg" resolve="count" />
             </node>
@@ -304,8 +320,16 @@
       <property role="TrG5h" value="test_shortSequence2" />
       <node concept="3clFbS" id="gXqiTaH" role="3clF47">
         <node concept="3SKdUt" id="6pumIWoCFOR" role="3cqZAp">
-          <node concept="3SKdUq" id="6pumIWoCFOS" role="3SKWNk">
-            <property role="3SKdUp" value="sequence with memory" />
+          <node concept="1PaTwC" id="ATZLwXopZG" role="1aUNEU">
+            <node concept="3oM_SD" id="ATZLwXopZH" role="1PaTwD">
+              <property role="3oM_SC" value="sequence" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXopZI" role="1PaTwD">
+              <property role="3oM_SC" value="with" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXopZJ" role="1PaTwD">
+              <property role="3oM_SC" value="memory" />
+            </node>
           </node>
         </node>
         <node concept="3cpWs8" id="gXqtVV3" role="3cqZAp">
@@ -393,7 +417,7 @@
             <node concept="3clFbF" id="gXqvjf0" role="3cqZAp">
               <node concept="2YIFZM" id="gXqvjf1" role="3clFbG">
                 <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-                <ref role="37wK5l" to="u132:~Assert.assertEquals(java.lang.String,java.lang.String):void" resolve="assertEquals" />
+                <ref role="37wK5l" to="u132:~Assert.assertEquals(java.lang.String,java.lang.String)" resolve="assertEquals" />
                 <node concept="3cpWs3" id="gXqvjf2" role="37wK5m">
                   <node concept="37vLTw" id="3GM_nagTwfV" role="3uHU7w">
                     <ref role="3cqZAo" node="gXqvjeT" resolve="count" />
@@ -417,7 +441,7 @@
         <node concept="3clFbF" id="gXqvjfc" role="3cqZAp">
           <node concept="2YIFZM" id="gXqvjfd" role="3clFbG">
             <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int):void" resolve="assertEquals" />
+            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int)" resolve="assertEquals" />
             <node concept="37vLTw" id="3GM_nagTBCv" role="37wK5m">
               <ref role="3cqZAo" node="gXqvjeT" resolve="count" />
             </node>
@@ -429,7 +453,7 @@
         <node concept="3clFbF" id="gXqvpDc" role="3cqZAp">
           <node concept="2YIFZM" id="gXqvpDd" role="3clFbG">
             <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int):void" resolve="assertEquals" />
+            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int)" resolve="assertEquals" />
             <node concept="37vLTw" id="3GM_nagTzyj" role="37wK5m">
               <ref role="3cqZAo" node="gXqtVV4" resolve="yield_count" />
             </node>
@@ -449,7 +473,7 @@
             <node concept="3clFbF" id="gXqvjfk" role="3cqZAp">
               <node concept="2YIFZM" id="gXqvjfl" role="3clFbG">
                 <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-                <ref role="37wK5l" to="u132:~Assert.assertEquals(java.lang.String,java.lang.String):void" resolve="assertEquals" />
+                <ref role="37wK5l" to="u132:~Assert.assertEquals(java.lang.String,java.lang.String)" resolve="assertEquals" />
                 <node concept="3cpWs3" id="gXqvjfm" role="37wK5m">
                   <node concept="37vLTw" id="3GM_nagT_gj" role="3uHU7w">
                     <ref role="3cqZAo" node="gXqvjeT" resolve="count" />
@@ -473,7 +497,7 @@
         <node concept="3clFbF" id="gXqvjfz" role="3cqZAp">
           <node concept="2YIFZM" id="gXqvjf$" role="3clFbG">
             <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int):void" resolve="assertEquals" />
+            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int)" resolve="assertEquals" />
             <node concept="37vLTw" id="3GM_nagTw$m" role="37wK5m">
               <ref role="3cqZAo" node="gXqvjeT" resolve="count" />
             </node>
@@ -485,7 +509,7 @@
         <node concept="3clFbF" id="gXqvDjC" role="3cqZAp">
           <node concept="2YIFZM" id="gXqvDjD" role="3clFbG">
             <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int):void" resolve="assertEquals" />
+            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int)" resolve="assertEquals" />
             <node concept="37vLTw" id="3GM_nagTwyw" role="37wK5m">
               <ref role="3cqZAo" node="gXqtVV4" resolve="yield_count" />
             </node>
@@ -502,8 +526,19 @@
       <property role="TrG5h" value="test_longSequence1" />
       <node concept="3clFbS" id="gXyZJHH" role="3clF47">
         <node concept="3SKdUt" id="6pumIWoCG51" role="3cqZAp">
-          <node concept="3SKdUq" id="6pumIWoCG52" role="3SKWNk">
-            <property role="3SKdUp" value="sequence with no memory" />
+          <node concept="1PaTwC" id="ATZLwXopZK" role="1aUNEU">
+            <node concept="3oM_SD" id="ATZLwXopZL" role="1PaTwD">
+              <property role="3oM_SC" value="sequence" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXopZM" role="1PaTwD">
+              <property role="3oM_SC" value="with" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXopZN" role="1PaTwD">
+              <property role="3oM_SC" value="no" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXopZO" role="1PaTwD">
+              <property role="3oM_SC" value="memory" />
+            </node>
           </node>
         </node>
         <node concept="3cpWs8" id="gXz0trG" role="3cqZAp">
@@ -584,7 +619,7 @@
             <node concept="3clFbF" id="gXyZJIc" role="3cqZAp">
               <node concept="2YIFZM" id="gXyZJId" role="3clFbG">
                 <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-                <ref role="37wK5l" to="u132:~Assert.assertEquals(java.lang.String,java.lang.String):void" resolve="assertEquals" />
+                <ref role="37wK5l" to="u132:~Assert.assertEquals(java.lang.String,java.lang.String)" resolve="assertEquals" />
                 <node concept="3cpWs3" id="gXyZJIe" role="37wK5m">
                   <node concept="37vLTw" id="3GM_nagTAzW" role="3uHU7w">
                     <ref role="3cqZAo" node="gXyZJI5" resolve="count" />
@@ -608,7 +643,7 @@
         <node concept="3clFbF" id="gXyZJIo" role="3cqZAp">
           <node concept="2YIFZM" id="gXyZJIp" role="3clFbG">
             <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int):void" resolve="assertEquals" />
+            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int)" resolve="assertEquals" />
             <node concept="37vLTw" id="3GM_nagTw0E" role="37wK5m">
               <ref role="3cqZAo" node="gXyZJI5" resolve="count" />
             </node>
@@ -628,7 +663,7 @@
             <node concept="3clFbF" id="gXyZJIw" role="3cqZAp">
               <node concept="2YIFZM" id="gXyZJIx" role="3clFbG">
                 <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-                <ref role="37wK5l" to="u132:~Assert.assertEquals(java.lang.String,java.lang.String):void" resolve="assertEquals" />
+                <ref role="37wK5l" to="u132:~Assert.assertEquals(java.lang.String,java.lang.String)" resolve="assertEquals" />
                 <node concept="3cpWs3" id="gXyZJIy" role="37wK5m">
                   <node concept="1eOMI4" id="gXyZJIz" role="3uHU7w">
                     <node concept="3cpWsd" id="gXyZJI$" role="1eOMHV">
@@ -659,7 +694,7 @@
         <node concept="3clFbF" id="gXyZJIJ" role="3cqZAp">
           <node concept="2YIFZM" id="gXyZJIK" role="3clFbG">
             <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int):void" resolve="assertEquals" />
+            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int)" resolve="assertEquals" />
             <node concept="37vLTw" id="3GM_nagTrBe" role="37wK5m">
               <ref role="3cqZAo" node="gXyZJI5" resolve="count" />
             </node>
@@ -681,8 +716,16 @@
       <property role="TrG5h" value="test_longSequence2" />
       <node concept="3clFbS" id="gXyZJIP" role="3clF47">
         <node concept="3SKdUt" id="6pumIWoCFTB" role="3cqZAp">
-          <node concept="3SKdUq" id="6pumIWoCFTC" role="3SKWNk">
-            <property role="3SKdUp" value="sequence with memory" />
+          <node concept="1PaTwC" id="ATZLwXopZP" role="1aUNEU">
+            <node concept="3oM_SD" id="ATZLwXopZQ" role="1PaTwD">
+              <property role="3oM_SC" value="sequence" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXopZR" role="1PaTwD">
+              <property role="3oM_SC" value="with" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXopZS" role="1PaTwD">
+              <property role="3oM_SC" value="memory" />
+            </node>
           </node>
         </node>
         <node concept="3cpWs8" id="gXz13tD" role="3cqZAp">
@@ -779,7 +822,7 @@
             <node concept="3clFbF" id="gXyZJJ_" role="3cqZAp">
               <node concept="2YIFZM" id="gXyZJJA" role="3clFbG">
                 <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-                <ref role="37wK5l" to="u132:~Assert.assertEquals(java.lang.String,java.lang.String):void" resolve="assertEquals" />
+                <ref role="37wK5l" to="u132:~Assert.assertEquals(java.lang.String,java.lang.String)" resolve="assertEquals" />
                 <node concept="3cpWs3" id="gXyZJJB" role="37wK5m">
                   <node concept="37vLTw" id="3GM_nagTwI4" role="3uHU7w">
                     <ref role="3cqZAo" node="gXyZJJu" resolve="count" />
@@ -803,7 +846,7 @@
         <node concept="3clFbF" id="gXyZJJL" role="3cqZAp">
           <node concept="2YIFZM" id="gXyZJJM" role="3clFbG">
             <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int):void" resolve="assertEquals" />
+            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int)" resolve="assertEquals" />
             <node concept="37vLTw" id="3GM_nagTAro" role="37wK5m">
               <ref role="3cqZAo" node="gXyZJJu" resolve="count" />
             </node>
@@ -815,7 +858,7 @@
         <node concept="3clFbF" id="gXyZJJP" role="3cqZAp">
           <node concept="2YIFZM" id="gXyZJJQ" role="3clFbG">
             <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int):void" resolve="assertEquals" />
+            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int)" resolve="assertEquals" />
             <node concept="37vLTw" id="3GM_nagTAB6" role="37wK5m">
               <ref role="3cqZAo" node="gXyZJIV" resolve="yield_count" />
             </node>
@@ -835,7 +878,7 @@
             <node concept="3clFbF" id="gXyZJJX" role="3cqZAp">
               <node concept="2YIFZM" id="gXyZJJY" role="3clFbG">
                 <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-                <ref role="37wK5l" to="u132:~Assert.assertEquals(java.lang.String,java.lang.String):void" resolve="assertEquals" />
+                <ref role="37wK5l" to="u132:~Assert.assertEquals(java.lang.String,java.lang.String)" resolve="assertEquals" />
                 <node concept="3cpWs3" id="gXyZJJZ" role="37wK5m">
                   <node concept="37vLTw" id="3GM_nagTx_f" role="3uHU7w">
                     <ref role="3cqZAo" node="gXyZJJu" resolve="count" />
@@ -859,7 +902,7 @@
         <node concept="3clFbF" id="gXyZJK9" role="3cqZAp">
           <node concept="2YIFZM" id="gXyZJKa" role="3clFbG">
             <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int):void" resolve="assertEquals" />
+            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int)" resolve="assertEquals" />
             <node concept="37vLTw" id="3GM_nagTwCe" role="37wK5m">
               <ref role="3cqZAo" node="gXyZJJu" resolve="count" />
             </node>
@@ -876,7 +919,7 @@
         <node concept="3clFbF" id="gXyZJKd" role="3cqZAp">
           <node concept="2YIFZM" id="gXyZJKe" role="3clFbG">
             <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int):void" resolve="assertEquals" />
+            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int)" resolve="assertEquals" />
             <node concept="37vLTw" id="3GM_nagTxgL" role="37wK5m">
               <ref role="3cqZAo" node="gXyZJIV" resolve="yield_count" />
             </node>
@@ -910,8 +953,13 @@
       <property role="TrG5h" value="test_1" />
       <node concept="3clFbS" id="gXzdckP" role="3clF47">
         <node concept="3SKdUt" id="6pumIWoCFY9" role="3cqZAp">
-          <node concept="3SKdUq" id="6pumIWoCFYa" role="3SKWNk">
-            <property role="3SKdUp" value="inner iteration" />
+          <node concept="1PaTwC" id="ATZLwXopZT" role="1aUNEU">
+            <node concept="3oM_SD" id="ATZLwXopZU" role="1PaTwD">
+              <property role="3oM_SC" value="inner" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXopZV" role="1PaTwD">
+              <property role="3oM_SC" value="iteration" />
+            </node>
           </node>
         </node>
         <node concept="3cpWs8" id="gXzdckU" role="3cqZAp">
@@ -976,7 +1024,7 @@
             <node concept="3clFbF" id="gXzdclk" role="3cqZAp">
               <node concept="2YIFZM" id="gXzdcll" role="3clFbG">
                 <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-                <ref role="37wK5l" to="u132:~Assert.assertEquals(java.lang.String,java.lang.String):void" resolve="assertEquals" />
+                <ref role="37wK5l" to="u132:~Assert.assertEquals(java.lang.String,java.lang.String)" resolve="assertEquals" />
                 <node concept="3cpWs3" id="gXzdclm" role="37wK5m">
                   <node concept="37vLTw" id="3GM_nagTAFd" role="3uHU7w">
                     <ref role="3cqZAo" node="gXzdcld" resolve="count" />
@@ -1015,7 +1063,7 @@
                 <node concept="3clFbF" id="gXzgL4M" role="3cqZAp">
                   <node concept="2YIFZM" id="gXzgL4N" role="3clFbG">
                     <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-                    <ref role="37wK5l" to="u132:~Assert.assertEquals(java.lang.String,java.lang.String):void" resolve="assertEquals" />
+                    <ref role="37wK5l" to="u132:~Assert.assertEquals(java.lang.String,java.lang.String)" resolve="assertEquals" />
                     <node concept="3cpWs3" id="gXzgL4O" role="37wK5m">
                       <node concept="37vLTw" id="3GM_nagT$yd" role="3uHU7w">
                         <ref role="3cqZAo" node="gXzdvK0" resolve="count_inner" />
@@ -1039,7 +1087,7 @@
             <node concept="3clFbF" id="gXzgQz9" role="3cqZAp">
               <node concept="2YIFZM" id="gXzgQza" role="3clFbG">
                 <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-                <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int):void" resolve="assertEquals" />
+                <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int)" resolve="assertEquals" />
                 <node concept="37vLTw" id="3GM_nagTvyL" role="37wK5m">
                   <ref role="3cqZAo" node="gXzdvK0" resolve="count_inner" />
                 </node>
@@ -1053,7 +1101,7 @@
         <node concept="3clFbF" id="gXzdclw" role="3cqZAp">
           <node concept="2YIFZM" id="gXzdclx" role="3clFbG">
             <ref role="1Pybhc" to="u132:~Assert" resolve="Assert" />
-            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int):void" resolve="assertEquals" />
+            <ref role="37wK5l" to="u132:~Assert.assertEquals(int,int)" resolve="assertEquals" />
             <node concept="37vLTw" id="3GM_nagTAm0" role="37wK5m">
               <ref role="3cqZAo" node="gXzdcld" resolve="count" />
             </node>

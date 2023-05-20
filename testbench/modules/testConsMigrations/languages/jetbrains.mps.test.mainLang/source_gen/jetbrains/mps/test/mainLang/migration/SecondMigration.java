@@ -19,13 +19,16 @@ public class SecondMigration extends MigrationScriptBase {
     return false;
   }
   public SNode execute(final SModule m) {
+    doExecute(m);
+    return null;
+  }
+  public void doExecute(final SModule m) {
     try {
-      if (FirstMigration.firstFile().exists()) {
-        new File(FirstMigration.projectHomePath(), "result.txt").createNewFile();
+      if (FirstMigration.firstFile(m).exists()) {
+        new File(FirstMigration.projectHomePath(m), "result.txt").createNewFile();
       }
     } catch (IOException e) {
     }
-    return null;
   }
   public MigrationScriptReference getDescriptor() {
     return new MigrationScriptReference(MetaAdapterFactory.getLanguage(0xca03d2f0cb014ae7L, 0xb688d32e45bbfcc1L, "jetbrains.mps.test.mainLang"), 1);

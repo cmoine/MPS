@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="b6rkrg0dw2yxdpk8cy6o6r0lwdq7ik8" />
+<product version="3" modelHash="-1xhb2ncnstghzb6lzuz4iut34dq59bk">
+  <files names="IntentionsDescriptor.java:Switch_HasAttributes_Intention.java:addHandler_Intention.java" />
+</product>
 

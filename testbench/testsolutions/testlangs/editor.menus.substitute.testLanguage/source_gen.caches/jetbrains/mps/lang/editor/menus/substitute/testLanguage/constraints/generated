@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="dximyess2z2srfrzwvdla6rcrf0qhde" />
+<product version="3" modelHash="bb9qux1iktw5gq2d0hqt81rxkmlav84">
+  <files names="ConstraintsAspectDescriptor.java:TestSubstituteChildWithConstraints1_Constraints.java:TestSubstituteChildWithConstraintsWrapper1_Constraints.java:TestSubstituteParentPropertyAndReference_Constraints.java:TestSubstituteParentWithConstraints_Constraints.java:TestSubstituteSmartRef_WithoutExplicitMenu_Constraints.java:TestSubstituteSmartRef_WithoutExplicitMenu_Subconcept_Constraints.java" />
+</product>
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,12 +17,14 @@ package jetbrains.mps.smodel.persistence.lines;
 
 import org.jetbrains.mps.openapi.model.SNodeId;
 
+import java.util.Objects;
+
 /**
  * @author Evgeny Gerashchenko
  * @since 22 November 2010
  */
 public abstract class LineContent {
-  private SNodeId myNodeId;
+  private final SNodeId myNodeId;
 
   public LineContent(SNodeId nodeId) {
     myNodeId = nodeId;
@@ -30,5 +32,12 @@ public abstract class LineContent {
 
   public SNodeId getNodeId() {
     return myNodeId;
+  }
+
+  public boolean matches(LineContent other) {
+    if (other == null || getClass() != other.getClass()) {
+      return false;
+    }
+    return Objects.equals(myNodeId, other.myNodeId);
   }
 }

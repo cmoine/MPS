@@ -7,6 +7,7 @@ import jetbrains.mps.smodel.SNodePointer;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.core.behavior.LinkAttribute__BehaviorDescriptor;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import org.jetbrains.mps.openapi.language.SConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class RemoveUndeclaredLinkAttribute_QuickFix extends QuickFix_Runtime {
@@ -14,9 +15,13 @@ public class RemoveUndeclaredLinkAttribute_QuickFix extends QuickFix_Runtime {
     super(new SNodePointer("r:cec599e3-51d2-48a7-af31-989e3cbd593c(jetbrains.mps.lang.core.typesystem)", "5394253938404455484"));
   }
   public String getDescription(SNode node) {
-    return "Remove invalid reference attribute \"" + LinkAttribute__BehaviorDescriptor.getLink_id1avfQ4BEFo6.invoke(SNodeOperations.as(node, MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2eb1ad060897da51L, "jetbrains.mps.lang.core.structure.LinkAttribute"))) + "\"";
+    return "Remove invalid reference attribute \"" + LinkAttribute__BehaviorDescriptor.getLink_id1avfQ4BEFo6.invoke(SNodeOperations.as(node, CONCEPTS.LinkAttribute$v_)) + "\"";
   }
   public void execute(SNode node) {
     SNodeOperations.deleteNode(node);
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept LinkAttribute$v_ = MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2eb1ad060897da51L, "jetbrains.mps.lang.core.structure.LinkAttribute");
   }
 }

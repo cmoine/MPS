@@ -17,16 +17,16 @@ package jetbrains.mps.newTypesystem.context;
 
 import jetbrains.mps.newTypesystem.context.typechecking.HoleTypechecking;
 import jetbrains.mps.newTypesystem.state.HoleState;
+import jetbrains.mps.typesystem.inference.TypeCheckerHelper;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.typesystem.inference.TypeChecker;
 
 /**
  * User: fyodor
  * Date: 12/3/12
  */
 public class HoleTypecheckingContext extends SimpleTypecheckingContext<HoleState, HoleTypechecking> {
-  public HoleTypecheckingContext(SNode node, TypeChecker typeChecker) {
-    super(node, typeChecker);
+  public HoleTypecheckingContext(SNode node, TypeCheckerHelper typeCheckerHelper) {
+    super(node, typeCheckerHelper);
   }
 
   @Override

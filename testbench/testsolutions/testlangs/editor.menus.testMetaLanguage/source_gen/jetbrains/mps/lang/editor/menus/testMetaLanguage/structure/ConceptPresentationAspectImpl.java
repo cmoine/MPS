@@ -4,39 +4,78 @@ package jetbrains.mps.lang.editor.menus.testMetaLanguage.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_TransformationFeature_Optional = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TransformationFeature_Required = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TransformationFeature_Unavailable = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TransformationLocation_Test = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TransformationLocation_WithFeatures = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TransformationLocation_WithoutFeatures = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TransformationMenu_Test = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_TransformationFeature_Optional;
+  private ConceptPresentation props_TransformationFeature_Required;
+  private ConceptPresentation props_TransformationFeature_Unavailable;
+  private ConceptPresentation props_TransformationLocation_Test;
+  private ConceptPresentation props_TransformationLocation_WithFeatures;
+  private ConceptPresentation props_TransformationLocation_WithoutFeatures;
+  private ConceptPresentation props_TransformationMenu_Test;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.TransformationFeature_Optional:
+        if (props_TransformationFeature_Optional == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("optional feature");
+          cpb.rawPresentation("optional");
+          props_TransformationFeature_Optional = cpb.create();
+        }
         return props_TransformationFeature_Optional;
-      case 1:
+      case LanguageConceptSwitch.TransformationFeature_Required:
+        if (props_TransformationFeature_Required == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("required feature");
+          cpb.rawPresentation("required");
+          props_TransformationFeature_Required = cpb.create();
+        }
         return props_TransformationFeature_Required;
-      case 2:
+      case LanguageConceptSwitch.TransformationFeature_Unavailable:
+        if (props_TransformationFeature_Unavailable == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("unavailable feature");
+          cpb.rawPresentation("unavailable");
+          props_TransformationFeature_Unavailable = cpb.create();
+        }
         return props_TransformationFeature_Unavailable;
-      case 3:
+      case LanguageConceptSwitch.TransformationLocation_Test:
+        if (props_TransformationLocation_Test == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("location for use in tests");
+          cpb.rawPresentation("test location");
+          props_TransformationLocation_Test = cpb.create();
+        }
         return props_TransformationLocation_Test;
-      case 4:
+      case LanguageConceptSwitch.TransformationLocation_WithFeatures:
+        if (props_TransformationLocation_WithFeatures == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("location with a required and an optional feature");
+          props_TransformationLocation_WithFeatures = cpb.create();
+        }
         return props_TransformationLocation_WithFeatures;
-      case 5:
+      case LanguageConceptSwitch.TransformationLocation_WithoutFeatures:
+        if (props_TransformationLocation_WithoutFeatures == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("location with no available features");
+          props_TransformationLocation_WithoutFeatures = cpb.create();
+        }
         return props_TransformationLocation_WithoutFeatures;
-      case 6:
+      case LanguageConceptSwitch.TransformationMenu_Test:
+        if (props_TransformationMenu_Test == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_TransformationMenu_Test = cpb.create();
+        }
         return props_TransformationMenu_Test;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

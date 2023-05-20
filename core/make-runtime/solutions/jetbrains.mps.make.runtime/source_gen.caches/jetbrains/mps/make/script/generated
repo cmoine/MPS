@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-bym7h2l0pj8dkydto4qsiktjk8tlfz5" />
+<product version="3" modelHash="-1aqe8dbut03yhm9j6vi5cb05ioxkxnf">
+  <files names="IConfig.java:IConfigMonitor.java:IFeedback.java:IJob.java:IJobMonitor.java:IOption.java:IPropertiesPool.java:IQuery.java:IResult.java:IScript.java:IScriptController.java:PropertyPoolInitializer.java:ScriptBuilder.java" />
+</product>
 

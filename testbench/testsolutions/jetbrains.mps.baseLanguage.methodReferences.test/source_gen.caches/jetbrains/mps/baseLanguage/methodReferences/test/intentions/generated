@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="dbx4wzimw4kfw6y1vudadvlse5z8vw8">
+  <files names="FromClosure_Constructor_Test.java:FromClosure_Generics_Test.java:FromClosure_InstanceMethod_Test.java:FromClosure_StaticInstanceMethod_Test.java:FromClosure_StaticMethod_Test.java:ToClosure_Constructor_Test.java:ToClosure_Generics_Test.java:ToClosure_InstanceMethod_Test.java:ToClosure_StaticInstanceMethod_Test.java:ToClosure_StaticMethod_Test.java:WrapIntoCompatibleClosureMappingArgument_Test.java:WrapIntoCompatibleClosure_Test.java" />
+</product>
+

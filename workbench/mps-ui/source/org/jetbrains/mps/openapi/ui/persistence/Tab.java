@@ -25,23 +25,23 @@ public interface Tab extends Modifiable {
   /**
    * Title for tab
    */
-  public String getTitle();
+  String getTitle();
 
   /**
    * Tab Icon
    * If null - no icon will be shown
    */
-  public Icon getIcon();
+  Icon getIcon();
 
   /**
    * Tooltip for tab
    * If null - getTitle is used for it
    */
-  public String getToolTip();
+  String getToolTip();
 
   /**
    * Custom UI component that will be shown in tab.
    * This method is invoked after {@link #init()}
    */
-  public JComponent getTabComponent();
+  JComponent getTabComponent();
 }

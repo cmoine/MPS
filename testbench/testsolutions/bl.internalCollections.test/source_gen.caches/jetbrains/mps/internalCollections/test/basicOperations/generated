@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-7897a81ncu8ru84inkvswhlnbqgsb39" />
+<product version="3" modelHash="1tvrxxnu5nw64at167f2srg0wth31bb">
+  <files names="Array_Test.java:Bar.java:Chunks_Test.java:Collection_Test.java:Distinct_Test.java:Foo.java:Iterator_Test.java:LinkedMap_Test.java:List_Test.java:MPS_17338.java:Map_Test.java:MultiForeachTest_Test.java:QueueDequeStack_Test.java:Sequence_Test.java:Set_Test.java:SortedMap_Test.java:SortedSet_Test.java" />
+</product>
 

@@ -7,14 +7,15 @@ import org.jetbrains.mps.openapi.model.SNode;
 
 public class notNullInstruction extends GeneratedInstruction {
   private SNode myexpression;
-  private String myPresentation;
+  private final String myPresentation;
+
   public notNullInstruction(SNode expression) {
     StringBuilder sb = new StringBuilder();
     sb.append("notNull");
     myexpression = expression;
     putUserObject("expression", expression);
     addParameter(expression);
-    sb.append(" " + expression);
+    sb.append(" ").append(presentationOf(expression));
     myPresentation = sb.toString();
   }
   @Override

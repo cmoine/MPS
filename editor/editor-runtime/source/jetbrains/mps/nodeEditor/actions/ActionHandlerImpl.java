@@ -15,17 +15,13 @@
  */
 package jetbrains.mps.nodeEditor.actions;
 
-import jetbrains.mps.editor.runtime.commands.EditorCommand;
 import jetbrains.mps.openapi.editor.ActionHandler;
 import jetbrains.mps.openapi.editor.EditorComponent;
 import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.CellAction;
 import jetbrains.mps.openapi.editor.cells.CellActionType;
-import jetbrains.mps.openapi.editor.cells.CellTraversalUtil;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
-import jetbrains.mps.openapi.editor.cells.EditorCell_Collection;
-import jetbrains.mps.smodel.ModelAccess;
-import jetbrains.mps.util.Computable;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * User: shatalin
@@ -40,7 +36,12 @@ public class ActionHandlerImpl implements ActionHandler {
 
   @Override
   public boolean executeAction(EditorCell editorCell, CellActionType type) {
-    return executeAction(editorCell, getApplicableCellAction(editorCell, type));
+    CellActionExecuter cellActionExecuter = findCellActionExecuter(editorCell, type);
+    if (cellActionExecuter != null) {
+      cellActionExecuter.execute();
+      return true;
+    }
+    return false;
   }
 
   @Override
@@ -48,64 +49,36 @@ public class ActionHandlerImpl implements ActionHandler {
     if (editorCell == null || action == null) {
       return false;
     }
-
-    if (action.executeInCommand()) {
-      getEditorContext().getRepository().getModelAccess().executeCommand(new EditorCommand(getEditorContext()) {
-        @Override
-        public void doExecute() {
-          action.execute(getEditorContext());
-        }
-      });
+    CellActionExecuter cellActionExecuter = CellActionExecuter.getExecutableExecuter(editorCell, action, getEditorContext());
+    if (cellActionExecuter != null) {
+      cellActionExecuter.execute();
+      return true;
     } else {
-      action.execute(getEditorContext());
+      return false;
     }
-    return true;
   }
 
   @Override
   public CellAction getApplicableCellAction(final EditorCell editorCell, final CellActionType type) {
-    if (editorCell == null) {
+    CellActionExecuter cellActionExecuter = findCellActionExecuter(editorCell, type);
+    if (cellActionExecuter != null) {
+      return cellActionExecuter.getAction();
+    } else {
       return null;
     }
-    return ModelAccess.instance().runReadAction(new Computable<CellAction>() {
-      @Override
-      public CellAction compute() {
-        for (EditorCell current = editorCell; current != null; current = current.getParent()) {
-          CellAction currentAction = current.getAction(type);
-          if (currentAction != null && currentAction.canExecute(getEditorContext())) {
-            if (type == CellActionType.INSERT) {
-              return getOverridingRightBoundaryAction(currentAction, editorCell, type);
-            } else {
-              return currentAction;
-            }
-          }
-        }
-
-        CellAction action = getEditorComponent().getComponentAction(type);
-        if (action != null && action.canExecute(getEditorContext())) {
-          return action;
-        }
-        return null;
-      }
-    });
   }
 
-  private CellAction getOverridingRightBoundaryAction(CellAction action, EditorCell editorCell, CellActionType type) {
-    for (EditorCell_Collection currentCell = editorCell.getParent(); currentCell != null && CellTraversalUtil.getLastLeaf(currentCell) == editorCell;
-         currentCell = currentCell.getParent()) {
-      CellAction currentCellAction = currentCell.getAction(type);
-      if (currentCellAction != null) {
-        action = currentCellAction;
-      }
+  @Nullable
+  private CellActionExecuter findCellActionExecuter(EditorCell editorCell, CellActionType type) {
+    if (editorCell == null || type == null) {
+      return null;
     }
-    return action;
+    return new CellActionExecutorFinder(editorCell, type, myEditorComponent).findCellActionExecuter();
   }
 
-  private EditorComponent getEditorComponent() {
-    return myEditorComponent;
-  }
 
   private EditorContext getEditorContext() {
     return myEditorComponent.getEditorContext();
   }
+
 }

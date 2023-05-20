@@ -19,13 +19,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class InterfaceSNode extends SNode {
 
-  private Set<String> skippedRoles;
-  private Set<SContainmentLink> skippedRolesIds;
+  private boolean skippedRolesOrIds = false;
 
   public InterfaceSNode(@NotNull SConcept concept) {
     super(concept);
@@ -36,7 +32,7 @@ public class InterfaceSNode extends SNode {
 
   @Override
   protected SNode firstChild() {
-    if (skippedRoles != null || skippedRolesIds != null) {
+    if (skippedRolesOrIds) {
       enforceModelLoad();
     }
     return super.firstChild();
@@ -47,10 +43,8 @@ public class InterfaceSNode extends SNode {
     if (model != null) {
       throw new IllegalStateException();
     }
-    if (skippedRolesIds == null) {
-      skippedRolesIds = new HashSet<SContainmentLink>();
-    }
-    skippedRolesIds.add(role);
+
+    skippedRolesOrIds = true;
   }
 
   @Deprecated
@@ -59,14 +53,12 @@ public class InterfaceSNode extends SNode {
     if (model != null) {
       throw new IllegalStateException();
     }
-    if (skippedRoles == null) {
-      skippedRoles = new HashSet<String>();
-    }
-    skippedRoles.add(role);
+
+    skippedRolesOrIds = true;
   }
 
   public boolean hasSkippedChildren() {
-    return skippedRoles != null || skippedRolesIds != null;
+    return skippedRolesOrIds;
   }
 
   public void cleanSkippedRoles() {
@@ -74,8 +66,7 @@ public class InterfaceSNode extends SNode {
     if (model == null || !model.isUpdateMode()) {
       throw new IllegalStateException();
     }
-    skippedRoles = null;
-    skippedRolesIds = null;
+    skippedRolesOrIds = false;
   }
 
   private void enforceModelLoad() {

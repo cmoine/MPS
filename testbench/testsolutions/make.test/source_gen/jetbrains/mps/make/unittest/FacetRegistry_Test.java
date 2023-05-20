@@ -4,7 +4,7 @@ package jetbrains.mps.make.unittest;
 
 import org.junit.Test;
 import jetbrains.mps.make.facet.IFacet;
-import junit.framework.Assert;
+import org.junit.Assert;
 import jetbrains.mps.make.facet.FacetRegistry;
 import jetbrains.mps.internal.collections.runtime.MapSequence;
 
@@ -13,15 +13,12 @@ public class FacetRegistry_Test extends MockTestCase {
   public void test_registerUnregister() throws Exception {
     final IFacet fct = Mockups.facet(context, "foobar");
     Assert.assertNotNull(fct);
-    FacetRegistry reg = FacetRegistry.getInstance();
-    Assert.assertNotNull(reg);
+    FacetRegistry reg = new FacetRegistry(null);
     reg.register(fct);
     Assert.assertSame(fct, MapSequence.fromMap(reg.allFacets()).get(new IFacet.Name("foobar")));
     Assert.assertSame(fct, reg.lookup(new IFacet.Name("foobar")));
     reg.unregister(fct);
     Assert.assertNull(MapSequence.fromMap(reg.allFacets()).get(new IFacet.Name("foobar")));
     Assert.assertNull(reg.lookup(new IFacet.Name("foobar")));
-  }
-  public FacetRegistry_Test() {
   }
 }

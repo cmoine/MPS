@@ -9,15 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Collection;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Constant;
-import jetbrains.mps.openapi.editor.style.Style;
-import jetbrains.mps.editor.runtime.style.StyleImpl;
-import jetbrains.mps.baseLanguage.editor.BaseLanguageStyle_StyleSheet;
-import jetbrains.mps.samples.heating.behavior.Slot__BehaviorDescriptor;
-import jetbrains.mps.nodeEditor.cellProviders.CellProviderWithRole;
-import jetbrains.mps.lang.editor.cellProviders.PropertyCellProvider;
-import jetbrains.mps.nodeEditor.EditorManager;
 
 public class Slot_tabular_Editor extends DefaultNodeEditor {
   private Collection<String> myContextHints = Arrays.asList(new String[]{"jetbrains.mps.samples.heating.tabular.editor.HeatingViews.tabular"});
@@ -27,50 +18,6 @@ public class Slot_tabular_Editor extends DefaultNodeEditor {
     return myContextHints;
   }
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createCollection_ggt0rc_a(editorContext, node);
-  }
-  private EditorCell createCollection_ggt0rc_a(EditorContext editorContext, SNode node) {
-    EditorCell_Collection editorCell = EditorCell_Collection.createIndent2(editorContext, node);
-    editorCell.setCellId("Collection_ggt0rc_a");
-    editorCell.setBig(true);
-    if (renderingCondition_ggt0rc_a0a(node, editorContext)) {
-      editorCell.addEditorCell(this.createConstant_ggt0rc_a0(editorContext, node));
-    }
-    editorCell.addEditorCell(this.createProperty_ggt0rc_b0(editorContext, node));
-    editorCell.addEditorCell(this.createConstant_ggt0rc_c0(editorContext, node));
-    return editorCell;
-  }
-  private EditorCell createConstant_ggt0rc_a0(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, "customizing");
-    editorCell.setCellId("Constant_ggt0rc_a0");
-    Style style = new StyleImpl();
-    BaseLanguageStyle_StyleSheet.apply_Comment(style, editorCell);
-    editorCell.getStyle().putAll(style);
-    editorCell.setDefaultText("");
-    return editorCell;
-  }
-  private static boolean renderingCondition_ggt0rc_a0a(SNode node, EditorContext editorContext) {
-    return (boolean) Slot__BehaviorDescriptor.isCustomizing_idNU25Mr1t4q.invoke(node);
-  }
-  private EditorCell createProperty_ggt0rc_b0(EditorContext editorContext, SNode node) {
-    CellProviderWithRole provider = new PropertyCellProvider(node, editorContext);
-    provider.setRole("start");
-    provider.setNoTargetText("<no start>");
-    EditorCell editorCell;
-    editorCell = provider.createEditorCell(editorContext);
-    editorCell.setCellId("property_start");
-    editorCell.setSubstituteInfo(provider.createDefaultSubstituteInfo());
-    SNode attributeConcept = provider.getRoleAttribute();
-    if (attributeConcept != null) {
-      EditorManager manager = EditorManager.getInstanceFromContext(editorContext);
-      return manager.createNodeRoleAttributeCell(attributeConcept, provider.getRoleAttributeKind(), editorCell);
-    } else
-    return editorCell;
-  }
-  private EditorCell createConstant_ggt0rc_c0(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, "o'clock");
-    editorCell.setCellId("Constant_ggt0rc_c0");
-    editorCell.setDefaultText("");
-    return editorCell;
+    return new Slot_tabular_EditorBuilder_a(editorContext, node).createCell();
   }
 }

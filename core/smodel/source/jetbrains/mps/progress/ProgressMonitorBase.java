@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,7 @@
  */
 package jetbrains.mps.progress;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import jetbrains.mps.logging.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.util.ProgressMonitor;
 import org.jetbrains.mps.openapi.util.SubProgressKind;
@@ -25,7 +24,7 @@ import org.jetbrains.mps.openapi.util.SubProgressKind;
  * Evgeny Gryaznov, 10/3/11
  */
 public abstract class ProgressMonitorBase implements ProgressMonitor {
-  private static final Logger LOG = LogManager.getLogger(ProgressMonitorBase.class);
+  private static final Logger LOG = Logger.getLogger(ProgressMonitorBase.class);
 
   // -1 means "not started", 0 is possible not to check collection.size()>0 when calling start()
   // if totalWork==0, step() can be called, advance(>0) can't
@@ -81,7 +80,7 @@ public abstract class ProgressMonitorBase implements ProgressMonitor {
 
     //todo replace with exception and remove overflow check when MPS-24455 is fixed
     if (myTotal < myDone + work || myDone + work < 0) {
-      LOG.warn("advance(work): work is too big: total=" + myTotal + "; done=" + myDone + "; work=" + work);
+      LOG.warning("advance(work): work is too big: total=" + myTotal + "; done=" + myDone + "; work=" + work);
       myDone = myTotal;
     } else {
       myDone += work;
@@ -140,7 +139,7 @@ public abstract class ProgressMonitorBase implements ProgressMonitor {
     }
     //todo replace with exception and remove overflow check when MPS-24455 is fixed
     if (myTotal < myDone + work || myDone + work < 0) {
-      LOG.warn("subTask(work): work is too big: total=" + myTotal + "; done=" + myDone + "; work=" + work);
+      LOG.warning("subTask(work): work is too big: total=" + myTotal + "; done=" + myDone + "; work=" + work);
       myAfterActiveChild = myTotal;
     } else {
       myAfterActiveChild = myDone + work;

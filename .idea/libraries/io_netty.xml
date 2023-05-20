@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="io.netty">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/3rd-party-rt.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

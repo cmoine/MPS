@@ -15,20 +15,21 @@
  */
 package jetbrains.mps.newTypesystem.context;
 
-import jetbrains.mps.errors.IRuleConflictWarningProducer;
 import jetbrains.mps.errors.IErrorReporter;
+import jetbrains.mps.errors.IRuleConflictWarningProducer;
+import jetbrains.mps.errors.MessageStatus;
 import jetbrains.mps.errors.NullErrorReporter;
 import jetbrains.mps.errors.QuickFixProvider;
 import jetbrains.mps.errors.messageTargets.MessageTarget;
 import jetbrains.mps.newTypesystem.operation.AbstractOperation;
 import jetbrains.mps.newTypesystem.operation.TraceMessageOperation;
-import jetbrains.mps.newTypesystem.state.State;
 import jetbrains.mps.newTypesystem.state.blocks.MultipleWhenConcreteBlock;
 import jetbrains.mps.newTypesystem.state.blocks.WhenConcreteBlock;
-import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.typesystem.inference.EquationInfo;
-import jetbrains.mps.typesystem.inference.TypeChecker;
+import jetbrains.mps.typesystem.inference.TypeCheckerHelper;
 import jetbrains.mps.typesystem.inference.TypeCheckingContext;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.model.SNode;
 
 import java.util.List;
 
@@ -36,17 +37,22 @@ import java.util.List;
  * User: fyodor
  * Date: 11/7/12
  */
-public abstract class BaseTypecheckingContext<STATE extends State> extends TypeCheckingContext {
+public abstract class BaseTypecheckingContext extends TypeCheckingContext {
 
   protected final Object TYPECHECKING_LOCK = new Object();
 
   protected SNode myNode;
 
-  protected TypeChecker myTypeChecker;
+  protected TypeCheckerHelper myTypeCheckerHelper;
 
-  public BaseTypecheckingContext(SNode node, TypeChecker typeChecker) {
+  public BaseTypecheckingContext(SNode node, TypeCheckerHelper typeCheckerHelper) {
     myNode = node;
-    myTypeChecker = typeChecker;
+    myTypeCheckerHelper = typeCheckerHelper;
+  }
+
+  @Override
+  public TypeCheckerHelper getTypeCheckerHelper() {
+    return myTypeCheckerHelper;
   }
 
   @Override
@@ -56,45 +62,47 @@ public abstract class BaseTypecheckingContext<STATE extends State> extends TypeC
 
   @Override
   public IErrorReporter reportTypeError(SNode nodeWithError, String errorString, String ruleModel, String ruleId, QuickFixProvider intentionProvider, MessageTarget errorTarget) {
-    return new NullErrorReporter();
+    IErrorReporter reporter = createErrorReporter(nodeWithError, errorString, ruleModel, ruleId, intentionProvider, errorTarget, MessageStatus.ERROR);
+    if (reporter != null) {
+      reportMessage(reporter);
+      return reporter;
+    } else {
+      return new NullErrorReporter();
+    }
   }
 
   @Override
   public IErrorReporter reportWarning(SNode nodeWithError, String errorString, String ruleModel, String ruleId, QuickFixProvider intentionProvider, MessageTarget errorTarget) {
-    return new NullErrorReporter();
+    IErrorReporter reporter = createErrorReporter(nodeWithError, errorString, ruleModel, ruleId, intentionProvider, errorTarget, MessageStatus.WARNING);
+    if (reporter != null) {
+      reportMessage(reporter);
+      return reporter;
+    } else {
+      return new NullErrorReporter();
+    }
   }
 
   @Override
   public IErrorReporter reportInfo(SNode nodeWithInfo, String message, String ruleModel, String ruleId, QuickFixProvider intentionProvider, MessageTarget errorTarget) {
-    return new NullErrorReporter();
+    IErrorReporter reporter = createErrorReporter(nodeWithInfo, message, ruleModel, ruleId, intentionProvider, errorTarget, MessageStatus.OK);
+    if (reporter != null) {
+      reportMessage(reporter);
+      return reporter;
+    } else {
+      return new NullErrorReporter();
+    }
+  }
+
+  // This method is here just for compatibility with generated code.
+  // It should be moved to implementor (also what about TracingTypecheckingContext?) right after NullErrorReporter removal.
+  @Nullable
+  public IErrorReporter createErrorReporter(SNode nodeWithError, String errorString, String ruleModel, String ruleId, QuickFixProvider intentionProvider, MessageTarget errorTarget, MessageStatus severity) {
+    return null;
   }
 
   @Override
   public SNode createNewRuntimeTypesVariable() {
     return getState().createNewRuntimeTypesVariable();
-  }
-
-  @Override
-  public void createEquation(SNode node1, SNode node2, SNode nodeToCheck, String errorString, String ruleModel, String ruleId, QuickFixProvider intentionProvider) {
-    getState().addEquation(node1, node2, new EquationInfo(nodeToCheck, errorString, ruleModel, ruleId, 0, intentionProvider));
-  }
-
-  @Override
-  public void createLessThanInequationStrong(SNode node1, SNode node2, SNode nodeToCheck, String errorString, String ruleModel, String ruleId, boolean checkOnly,
-                                             int inequationPriority, QuickFixProvider intentionProvider) {
-    getState().addInequality(node1, node2, false, checkOnly, new EquationInfo(nodeToCheck, errorString, ruleModel,
-      ruleId, inequationPriority, intentionProvider), true);
-  }
-
-  @Override
-  public void createGreaterThanInequation(SNode node1, SNode node2, SNode nodeToCheck, String errorString, String ruleModel, String ruleId, boolean checkOnly, int inequationPriority, QuickFixProvider intentionProvider) {
-    getState().addInequality(node2, node1, false, checkOnly, new EquationInfo(nodeToCheck, errorString, ruleModel,
-      ruleId, inequationPriority, intentionProvider), false);
-  }
-
-  @Override
-  public void createComparableEquation(SNode node1, SNode node2, SNode nodeToCheck, String errorString, String ruleModel, String ruleId, QuickFixProvider intentionProvider) {
-    createComparableEquation(node1, node2, new EquationInfo(nodeToCheck, errorString, ruleModel, ruleId, 0, intentionProvider));
   }
 
   @Override
@@ -105,31 +113,6 @@ public abstract class BaseTypecheckingContext<STATE extends State> extends TypeC
   @Override
   public void createEquation(SNode node1, SNode node2, boolean checkOnly, EquationInfo equationInfo) {
     getState().addEquation(node1, node2, equationInfo, checkOnly);
-  }
-
-  @Override
-  public void createLessThanInequation(SNode node1, SNode node2, boolean checkOnly, EquationInfo equationInfo) {
-    getState().addInequality(node1, node2, true, checkOnly, equationInfo, true);
-  }
-
-  @Override
-  public void createLessThanInequationStrong(SNode node1, SNode node2, boolean checkOnly, EquationInfo equationInfo) {
-    getState().addInequality(node1, node2, false, checkOnly, equationInfo, true);
-  }
-
-  @Override
-  public void createGreaterThanInequation(SNode node1, SNode node2, boolean checkOnly, EquationInfo equationInfo) {
-    getState().addInequality(node2, node1, true, checkOnly, equationInfo, false);
-  }
-
-  @Override
-  public void createGreaterThanInequationStrong(SNode node1, SNode node2, boolean checkOnly, EquationInfo equationInfo) {
-    getState().addInequality(node2, node1, false, checkOnly, equationInfo, false);
-  }
-
-  @Override
-  public void createComparableEquation(SNode node1, SNode node2, EquationInfo equationInfo) {
-    getState().addComparable(node1, node2, true, false, equationInfo);
   }
 
   @Override
@@ -162,7 +145,7 @@ public abstract class BaseTypecheckingContext<STATE extends State> extends TypeC
       IRuleConflictWarningProducer warningProducer) {
     SNode left = getState().expand(leftOperandType);
     SNode right = getState().expand(rightOperandType);
-    return myTypeChecker.getRulesManager().getOperationType(operation, left, right, warningProducer);
+    return myTypeCheckerHelper.getOperationType(operation, left, right, warningProducer);
   }
 
   @Override
@@ -171,7 +154,8 @@ public abstract class BaseTypecheckingContext<STATE extends State> extends TypeC
   }
 
   @Override
-  public void whenConcrete(SNode argument, Runnable r, String nodeModel, String nodeId, boolean isShallow) {
+  @Deprecated(forRemoval = true)
+  public final void whenConcrete(SNode argument, Runnable r, String nodeModel, String nodeId, boolean isShallow) {
     //todo
   }
 
@@ -181,12 +165,19 @@ public abstract class BaseTypecheckingContext<STATE extends State> extends TypeC
   }
 
   @Override
+  public void whenConcrete(SNode argument, Runnable r, String nodeModel, String nodeId, boolean isShallow, boolean skipError, String warningMessage) {
+    getState().addBlock(new WhenConcreteBlock(getState(), r, nodeModel, nodeId, argument, isShallow, skipError, warningMessage));
+  }
+
+  @Override
+  @Deprecated(forRemoval = true)
   public void whenConcrete(List<SNode> argument, Runnable r, String nodeModel, String nodeId, boolean isShallow, boolean skipError) {
     getState().addBlock(new MultipleWhenConcreteBlock(getState(), r, nodeModel, nodeId, argument, isShallow, skipError));
   }
 
   @Override
-  public void whenConcrete(List<NodeInfo> arguments, Runnable r) {
+  @Deprecated(forRemoval = true)
+  public final void whenConcrete(List<NodeInfo> arguments, Runnable r) {
     //todo
   }
 
@@ -228,4 +219,5 @@ public abstract class BaseTypecheckingContext<STATE extends State> extends TypeC
   public void checkRootInTraceMode(final boolean refreshTypes) {
     assert false;
   }
+
 }

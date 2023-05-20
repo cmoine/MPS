@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,6 @@ import jetbrains.mps.smodel.adapter.ids.SConceptId;
 import jetbrains.mps.smodel.adapter.ids.SContainmentLinkId;
 import jetbrains.mps.smodel.adapter.structure.FormatException;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.smodel.adapter.structure.language.InvalidLanguage;
-import jetbrains.mps.smodel.adapter.structure.language.SLanguageAdapter;
-import jetbrains.mps.smodel.adapter.structure.language.SLanguageAdapterById;
 import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.smodel.runtime.ConceptDescriptor;
 import jetbrains.mps.smodel.runtime.LinkDescriptor;
@@ -30,19 +27,26 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
-import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.mps.openapi.model.SNodeReference;
 
 public abstract class SContainmentLinkAdapter implements SContainmentLink {
   public static final String ID_DELIM = ":";
 
-  protected String myName;
+  protected final SContainmentLinkId myRoleId;
+  protected final String myName;
 
-  protected SContainmentLinkAdapter(@NotNull String name) {
+  protected SContainmentLinkAdapter(@NotNull SContainmentLinkId roleId, @NotNull String name) {
+    myRoleId = roleId;
     myName = name;
   }
 
   @Nullable
-  public abstract LinkDescriptor getLinkDescriptor();
+  protected abstract LinkDescriptor getLinkDescriptor();
+
+  @Override
+  public boolean isValid() {
+    return getLinkDescriptor() != null;
+  }
 
   @NotNull
   @Override
@@ -78,9 +82,7 @@ public abstract class SContainmentLinkAdapter implements SContainmentLink {
 
     SConceptId id = ld.getTargetConcept();
     ConceptDescriptor concept = ConceptRegistry.getInstance().getConceptDescriptor(id);
-    return concept.isInterfaceConcept() ?
-        MetaAdapterFactory.getInterfaceConcept(id, concept.getConceptFqName()) :
-        MetaAdapterFactory.getConcept(id, concept.getConceptFqName());
+    return MetaAdapterFactory.getAbstractConcept(concept);
   }
 
   @Override
@@ -107,9 +109,21 @@ public abstract class SContainmentLinkAdapter implements SContainmentLink {
     return ld.isUnordered();
   }
 
+  @Nullable
+  @Override
+  public SNodeReference getSourceNode() {
+    LinkDescriptor ld = getLinkDescriptor();
+    return ld == null ? null : ld.getSourceNode();
+  }
+
+  @NotNull
+  public SContainmentLinkId getId() {
+    return myRoleId;
+  }
+
   @Override
   public String toString() {
-    return myName;
+    return getName();
   }
 
   public abstract String serialize();

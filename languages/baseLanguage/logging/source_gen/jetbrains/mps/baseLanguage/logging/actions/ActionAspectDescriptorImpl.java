@@ -10,14 +10,20 @@ import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import java.util.Collections;
 
 public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor implements ActionAspectDescriptor {
+  private static final String LANGUAGE_FQ_NAME = "jetbrains.mps.baseLanguage.logging";
 
   @Override
   public Collection<NodeFactory> getFactories(SAbstractConcept concept) {
+    if (LANGUAGE_FQ_NAME.equals(concept.getLanguage().getQualifiedName())) {
+      switch (concept.getName()) {
+        case "LogLowLevelStatement":
+          return Collections.<NodeFactory>singletonList(new LogStatementConversions.NodeFactory_6057591418743042050());
+        case "MsgStatement":
+          return Collections.<NodeFactory>singletonList(new LogStatementConversions.NodeFactory_6057591418743066490());
+        default:
+      }
+    }
     return Collections.<NodeFactory>emptyList();
   }
 
-  @Override
-  public boolean hasBuilders() {
-    return false;
-  }
 }

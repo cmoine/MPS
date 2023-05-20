@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-dp5e20brootrt46nawggt0wuvify84w" />
+<product version="3" modelHash="-eukd3kvio8ukm4tco6bwvv363o2svub">
+  <files names="BehaviorAspectDescriptor.java:MoneyCreator__BehaviorDescriptor.java:MoneyGetCurrencyMethodCall__BehaviorDescriptor.java:MoneyLiteral__BehaviorDescriptor.java:MoneyType__BehaviorDescriptor.java" />
+</product>
 

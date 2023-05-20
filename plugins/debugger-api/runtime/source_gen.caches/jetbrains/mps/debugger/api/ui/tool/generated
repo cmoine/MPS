@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="cn51usbblp4rtzxjywo5g6egr7i5izc" />
+<product version="3" modelHash="-4tnffekgep5xxmq0akwti65kv4w90dl">
+  <files names="DebuggerToolContent.java:DebuggerToolContentBuilder.java:DebuggerToolPanel.java" />
+</product>
 

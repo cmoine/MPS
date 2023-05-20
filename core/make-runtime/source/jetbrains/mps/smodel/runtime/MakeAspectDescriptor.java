@@ -25,6 +25,6 @@ import jetbrains.mps.make.facet.IFacetManifest;
  * to avoid package name change
  * @author Artem Tikhomirov
  */
-public interface MakeAspectDescriptor extends LanguageAspectDescriptor {
+public interface MakeAspectDescriptor extends ILanguageAspect {
   IFacetManifest getManifest();
 }

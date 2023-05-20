@@ -16,18 +16,19 @@
 package jetbrains.mps.nodeEditor.cellMenu;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.openapi.model.SNode;
 
-/**
- * Igor Alshannikov
- * Date: Nov 29, 2006
- */
 public interface CellContext {
-  final Object EDITED_NODE = new Object();
+  EditorContextKey<SNode> EDITED_NODE = new EditorContextKey();
 
-  void put(Object key, Object value);
+  <T> void put(EditorContextKey<T> key, T value);
 
   @NotNull
-  Object get(Object key);
+  <T> T get(EditorContextKey<T> key);
 
-  Object getOpt(Object key);
+  <T> T getOpt(EditorContextKey<T> key);
+
+  class EditorContextKey<T> {
+
+  }
 }

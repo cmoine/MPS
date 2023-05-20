@@ -2,8 +2,7 @@
 <model ref="r:13c5fcf5-111d-4ae9-b9c9-6a7deeb8dce9(jetbrains.mps.lang.actions.testLanguage.typesystem)">
   <persistence version="9" />
   <languages>
-    <use id="7a5dda62-9140-4668-ab76-d5ed1746f2b2" name="jetbrains.mps.lang.typesystem" version="0" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="00000000-0000-4000-0000-1de82b3a4936(jetbrains.mps.devkit.aspect.typesystem)" />
   </languages>
   <imports>
     <import index="kxd5" ref="r:4d38763d-a252-449a-a228-c5edf22068a3(jetbrains.mps.lang.actions.testLanguage.structure)" implicit="true" />
@@ -83,7 +82,7 @@
       <node concept="2Gpval" id="4ZdCZRWpKBb" role="3cqZAp">
         <node concept="2OqwBi" id="4ZdCZRWpKHx" role="2GsD0m">
           <node concept="3Tsc0h" id="4ZdCZRWpLSq" role="2OqNvi">
-            <ref role="3TtcxE" to="kxd5:2Qso1voqJz9" />
+            <ref role="3TtcxE" to="kxd5:2Qso1voqJz9" resolve="addMenu_parameterizedSubstitute" />
           </node>
           <node concept="1YBJjd" id="4ZdCZRWpKBI" role="2Oq$k0">
             <ref role="1YBMHb" node="4ZdCZRWpCeS" resolve="node" />
@@ -114,7 +113,7 @@
       <node concept="2Gpval" id="4uH7WCIHP9T" role="3cqZAp">
         <node concept="2OqwBi" id="4uH7WCIHP9U" role="2GsD0m">
           <node concept="3Tsc0h" id="4uH7WCIHZX2" role="2OqNvi">
-            <ref role="3TtcxE" to="kxd5:2cHV7yHyo$E" />
+            <ref role="3TtcxE" to="kxd5:2cHV7yHyo$E" resolve="addMenu_simpleItemSubstitute" />
           </node>
           <node concept="1YBJjd" id="4uH7WCIHP9W" role="2Oq$k0">
             <ref role="1YBMHb" node="4ZdCZRWpCeS" resolve="node" />

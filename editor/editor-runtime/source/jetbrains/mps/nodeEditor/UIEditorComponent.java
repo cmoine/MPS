@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,16 @@
 package jetbrains.mps.nodeEditor;
 
 import jetbrains.mps.nodeEditor.inspector.InspectorEditorComponent;
-import jetbrains.mps.nodeEditor.selection.SingularSelectionListenerAdapter;
-import jetbrains.mps.openapi.editor.selection.SingularSelection;
-import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.module.SRepository;
 
 import javax.swing.KeyStroke;
 
+/**
+ * FIXME please document intended use of the class. Seems that it's intended for embedded node editors, however there are
+ *       uses of a NodeEditorComponent, configured in a custom way, in PopupWithNodeEditorUI.
+ *       Besides, the code suggests we can accomplish the same (unregister action and access selection manager)
+ *       without the need for dedicated class
+ */
 public class UIEditorComponent extends EditorComponent {
   private InspectorEditorComponent myInspector;
 
@@ -31,19 +34,10 @@ public class UIEditorComponent extends EditorComponent {
     unregisterKeyboardAction(KeyStroke.getKeyStroke("ESCAPE"));
     myInspector = inspector;
 
-    if (myInspector == null) return;
-
-    getSelectionManager().addSelectionListener(new SingularSelectionListenerAdapter() {
-      @Override
-      protected void selectionChangedTo(jetbrains.mps.openapi.editor.EditorComponent editorComponent, SingularSelection newSelection) {
-        SNode node = newSelection.getEditorCell().getSNode();
-        final String[] enabledHints = getEditorHintsForNode(node);
-        boolean needToEdit = myInspector.getUpdater().setInitialEditorHints(enabledHints);
-        if (needToEdit || myInspector.getEditedNode() != node) {
-          myInspector.editNode(node);
-        }
-      }
-    });
+    if (myInspector == null) {
+      return;
+    }
+    myInspector.installRevealNodeListener(this);
   }
 
   @Override

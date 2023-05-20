@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,40 +16,45 @@
 package jetbrains.mps.errors;
 
 import jetbrains.mps.errors.messageTargets.MessageTarget;
-import jetbrains.mps.util.annotation.ToRemove;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 
 import java.util.List;
 
+/**
+ * This interface is poorly designed and its use is discouraged.
+ */
 // FIXME Bloody mess this interface is. Documented nicely for others to waste their time not. List<Pair<String,String>>, ORLY?!
+// todo: move this interface into typesystem and remove other usages
 public interface IErrorReporter {
-  public String reportError();
+  String reportError();
 
   @Nullable
   SNodeReference getRuleNode();
 
   /**
-   * replace with alternative that takes SNodeReference to the rule
+   * @param rulePointer pointer to a rule that adds extra meaning to reported error
+   * @since 2017.2
    */
-  @Deprecated
-  @ToRemove(version = 3.4)
-  public void addAdditionalRuleId(String ruleModel, String ruleId);
+  void additionalRule(@NotNull SNodeReference rulePointer);
 
-  public List<SNodeReference> getAdditionalRulesIds();
+  List<SNodeReference> getAdditionalRulesIds();
 
-  public MessageStatus getMessageStatus();
+  MessageStatus getMessageStatus();
 
-  public QuickFixProvider getIntentionProvider();
+  List<QuickFixProvider> getIntentionProviders();
 
-  public List<QuickFixProvider> getIntentionProviders();
+  void addIntentionProvider(QuickFixProvider intentionProvider);
 
-  public void addIntentionProvider(QuickFixProvider intentionProvider);
+  MessageTarget getErrorTarget();
 
-  public void setIntentionProvider(QuickFixProvider intentionProvider);
-
-  public MessageTarget getErrorTarget();
-
-  public SNode getSNode();
+  /**
+   * There's no guarantee this method returns a valid node if used in a model read different from the one this reporter originates from.
+   * IOW, you are safe to access this node provided you're in the same read. If you need to pass node value to another read, please
+   * use {@link SNodeReference} instead.
+   */
+  @NotNull
+  SNode getSNode();
 }

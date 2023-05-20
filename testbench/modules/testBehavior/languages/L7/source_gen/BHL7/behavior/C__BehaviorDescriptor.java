@@ -5,12 +5,9 @@ package BHL7.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.List;
 import java.util.Arrays;
@@ -23,10 +20,9 @@ import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
 
 public final class C__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x4dcf589c68321a72L, "BHL7.structure.C");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<Integer> argTypeResolve_id1hQsMcvxKQo = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("argTypeResolve").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("1hQsMcvxKQo").registry(REGISTRY).build(SMethodBuilder.createJavaParameter(Integer.class, ""));
-  public static final SMethod<Integer> argTypeResolve_id1hQsMcvxKXP = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("argTypeResolve").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("1hQsMcvxKXP").registry(REGISTRY).build(SMethodBuilder.createJavaParameter(Object.class, ""));
+  public static final SMethod<Integer> argTypeResolve_id1hQsMcvxKQo = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("argTypeResolve").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1474492522700410264L).languageId(0xb1e014d3f948db39L, 0x4239359f64574d2aL).build2(SMethodBuilder.createJavaParameter(Integer.class, ""));
+  public static final SMethod<Integer> argTypeResolve_id1hQsMcvxKXP = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("argTypeResolve").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1474492522700410741L).languageId(0xb1e014d3f948db39L, 0x4239359f64574d2aL).build2(SMethodBuilder.createJavaParameter(Object.class, ""));
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(argTypeResolve_id1hQsMcvxKQo, argTypeResolve_id1hQsMcvxKXP);
 
@@ -41,7 +37,6 @@ public final class C__BehaviorDescriptor extends BaseBHDescriptor {
   }
 
   /*package*/ C__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override

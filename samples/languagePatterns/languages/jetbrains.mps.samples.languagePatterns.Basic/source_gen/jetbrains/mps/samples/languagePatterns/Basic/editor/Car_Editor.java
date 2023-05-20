@@ -6,29 +6,9 @@ import jetbrains.mps.nodeEditor.DefaultNodeEditor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Collection;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Constant;
 
 public class Car_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createCollection_h8te0s_a(editorContext, node);
-  }
-  private EditorCell createCollection_h8te0s_a(EditorContext editorContext, SNode node) {
-    EditorCell_Collection editorCell = EditorCell_Collection.createIndent2(editorContext, node);
-    editorCell.setCellId("Collection_h8te0s_a");
-    editorCell.setBig(true);
-    editorCell.addEditorCell(this.createConstant_h8te0s_a0(editorContext, node));
-    editorCell.addEditorCell(this.createComponent_h8te0s_b0(editorContext, node));
-    return editorCell;
-  }
-  private EditorCell createConstant_h8te0s_a0(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, "Car details");
-    editorCell.setCellId("Constant_h8te0s_a0");
-    editorCell.setDefaultText("");
-    return editorCell;
-  }
-  private EditorCell createComponent_h8te0s_b0(EditorContext editorContext, SNode node) {
-    EditorCell editorCell = editorContext.getCellFactory().createEditorComponentCell(node, "jetbrains.mps.samples.languagePatterns.Basic.editor.CarProperties");
-    return editorCell;
+    return new Car_EditorBuilder_a(editorContext, node).createCell();
   }
 }

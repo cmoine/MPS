@@ -3,10 +3,10 @@
   <persistence version="9" />
   <languages>
     <use id="f43135f9-b833-4685-8d26-ffb6c8215f72" name="jetbrains.mps.baseLanguage.money" version="0" />
-    <use id="3a13115c-633c-4c5c-bbcc-75c4219e9555" name="jetbrains.mps.lang.quotation" version="0" />
-    <use id="7a5dda62-9140-4668-ab76-d5ed1746f2b2" name="jetbrains.mps.lang.typesystem" version="0" />
-    <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="4" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="3a13115c-633c-4c5c-bbcc-75c4219e9555" name="jetbrains.mps.lang.quotation" version="5" />
+    <use id="7a5dda62-9140-4668-ab76-d5ed1746f2b2" name="jetbrains.mps.lang.typesystem" version="5" />
+    <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="19" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports>
     <import index="tpee" ref="r:00000000-0000-4000-0000-011c895902ca(jetbrains.mps.baseLanguage.structure)" />
@@ -120,7 +120,7 @@
                   <ref role="3cqZAo" node="hhNiv8T" resolve="expr" />
                 </node>
                 <node concept="3TrEf2" id="hhNGtH4" role="2OqNvi">
-                  <ref role="3Tt5mk" to="tpee:fJuHU4r" />
+                  <ref role="3Tt5mk" to="tpee:fJuHU4r" resolve="rightExpression" />
                 </node>
               </node>
               <node concept="3JvlWi" id="hhNGtH2" role="2OqNvi" />
@@ -137,7 +137,7 @@
                   <ref role="3cqZAo" node="hhNiv8T" resolve="expr" />
                 </node>
                 <node concept="3TrEf2" id="hhNGw4k" role="2OqNvi">
-                  <ref role="3Tt5mk" to="tpee:fJuHU4s" />
+                  <ref role="3Tt5mk" to="tpee:fJuHU4s" resolve="leftExpression" />
                 </node>
               </node>
               <node concept="3JvlWi" id="hhNGvbB" role="2OqNvi" />
@@ -199,7 +199,7 @@
                   <ref role="3cqZAo" node="hhNwj2f" resolve="expr" />
                 </node>
                 <node concept="3TrEf2" id="hhNGzgj" role="2OqNvi">
-                  <ref role="3Tt5mk" to="tpee:fJuHU4r" />
+                  <ref role="3Tt5mk" to="tpee:fJuHU4r" resolve="rightExpression" />
                 </node>
               </node>
               <node concept="3JvlWi" id="hhNGzgh" role="2OqNvi" />
@@ -216,7 +216,7 @@
                   <ref role="3cqZAo" node="hhNwj2f" resolve="expr" />
                 </node>
                 <node concept="3TrEf2" id="hhNGzgr" role="2OqNvi">
-                  <ref role="3Tt5mk" to="tpee:fJuHU4s" />
+                  <ref role="3Tt5mk" to="tpee:fJuHU4s" resolve="leftExpression" />
                 </node>
               </node>
               <node concept="3JvlWi" id="hhNGzgp" role="2OqNvi" />

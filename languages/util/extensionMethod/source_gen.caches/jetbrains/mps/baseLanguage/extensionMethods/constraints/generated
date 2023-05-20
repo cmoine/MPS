@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="bck9ko2qc7sknnkou1f5ts0mgbmqkjv" />
+<product version="3" modelHash="py8zem9p4xzgobtaq1mmefp00t0dyk">
+  <files names="ConstraintsAspectDescriptor.java:ExtensionMethodCall_Constraints.java:ExtensionMethodDeclaration_Constraints.java:ExtensionStaticFieldReference_Constraints.java:LocalExtendedMethodCall_Constraints.java:ThisExtensionExpression_Constraints.java:TypeExtension_Constraints.java" />
+</product>
 

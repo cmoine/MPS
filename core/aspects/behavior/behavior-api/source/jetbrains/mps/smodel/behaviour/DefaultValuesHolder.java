@@ -26,7 +26,7 @@ import java.util.Map;
  * Created by apyshkin on 7/15/15.
  */
 public final class DefaultValuesHolder {
-  private static final Map<Class, Object> DEFAULT_VALUE = new HashMap<Class, Object>();
+  private static final Map<Class, Object> DEFAULT_VALUE = new HashMap<>();
 
   static {
     DEFAULT_VALUE.put(Character.class, (char) 0);

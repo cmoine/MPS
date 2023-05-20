@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +40,9 @@ public class MessagesListCellRenderer extends DefaultListCellRenderer {
   private final TextAttributes myWarningAttributes =
       EditorColorsManager.getInstance().getGlobalScheme().getAttributes(ConsoleViewContentType.LOG_WARNING_OUTPUT_KEY);
   private final Color myConsoleBackground =
-      EditorColorsManager.getInstance().getGlobalScheme().getColor(ConsoleViewContentType.CONSOLE_BACKGROUND_KEY);
+      EditorColorsManager.getInstance().getGlobalScheme().getColor(ConsoleViewContentType.CONSOLE_BACKGROUND_KEY) != null ?
+      EditorColorsManager.getInstance().getGlobalScheme().getColor(ConsoleViewContentType.CONSOLE_BACKGROUND_KEY) :
+      EditorColorsManager.getInstance().getGlobalScheme().getDefaultBackground();
   private final Color myConsoleBackgroundBrighter = JBColor.GRAY; // some neutral color, with works for both light and dark themes
   private final Color myConsoleBackgroundDarker = myConsoleBackground.darker();
   private final LineBorder myLineBorder = new LineBorder(myConsoleBackgroundBrighter, 1, true);

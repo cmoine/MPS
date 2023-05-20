@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081855346303:jetbrains.mps.baseLanguage.structure.BreakStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082113931046:jetbrains.mps.baseLanguage.structure.ContinueStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144231330558:jetbrains.mps.baseLanguage.structure.ForStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1163670490218:jetbrains.mps.baseLanguage.structure.SwitchStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1178893518978:jetbrains.mps.baseLanguage.structure.ThisConstructorInvocation" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1164991038168:jetbrains.mps.baseLanguage.structure.ThrowStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1076505808687:jetbrains.mps.baseLanguage.structure.WhileStatement" />
+  <root nodeRef="r:40e27d97-dea1-422b-91e0-3b9f3271a7f1(org.eclipse.jdt.internal.core.util)/1218034168005181764">
+    <file name="CommentRecorderParser.java">
+      <node id="1218034168005181768" at="33,0,34,0" concept="5" trace="commentStops" />
+      <node id="1218034168005181777" at="34,0,35,0" concept="5" trace="commentStarts" />
+      <node id="1218034168005181786" at="35,0,36,0" concept="5" trace="commentPtr" />
+      <node id="1218034168005181791" at="36,0,37,0" concept="12" trace="CommentIncrement" />
+      <node id="1218034168005191212" at="37,97,38,51" concept="13" />
+      <node id="1218034168005182957" at="40,30,41,91" concept="11" />
+      <node id="1218034168005181831" at="42,76,43,61" concept="4" />
+      <node id="1218034168005181837" at="44,5,45,31" concept="9" />
+      <node id="1218034168005181841" at="45,31,46,36" concept="9" />
+      <node id="1218034168005181845" at="46,36,47,30" concept="9" />
+      <node id="1218034168005182959" at="47,30,48,61" concept="11" />
+      <node id="1218034168005181860" at="48,61,49,69" concept="11" />
+      <node id="1218034168005181850" at="49,69,50,47" concept="4" />
+      <node id="1218034168005182961" at="52,55,53,87" concept="11" />
+      <node id="1218034168005181871" at="53,87,54,76" concept="9" />
+      <node id="1218034168005182963" at="54,76,55,85" concept="11" />
+      <node id="1218034168005181912" at="56,177,57,29" concept="3" />
+      <node id="1218034168005181913" at="58,7,59,29" concept="4" />
+      <node id="1218034168005181918" at="59,29,60,77" concept="9" />
+      <node id="1218034168005182965" at="60,77,61,25" concept="11" />
+      <node id="1218034168005182967" at="61,25,62,82" concept="11" />
+      <node id="1218034168005181937" at="63,52,64,114" concept="4" />
+      <node id="1218034168005181957" at="65,14,66,50" concept="4" />
+      <node id="1218034168005181965" at="67,7,68,73" concept="4" />
+      <node id="1218034168005181974" at="68,73,69,51" concept="4" />
+      <node id="1218034168005181990" at="70,40,71,47" concept="4" />
+      <node id="1218034168005181997" at="72,7,73,24" concept="1" />
+      <node id="1218034168005182002" at="75,21,76,61" concept="4" />
+      <node id="1218034168005182969" at="77,5,78,69" concept="11" />
+      <node id="1218034168005182015" at="79,51,80,79" concept="4" />
+      <node id="1218034168005182035" at="81,42,82,63" concept="4" />
+      <node id="1218034168005182048" at="89,39,90,52" concept="4" />
+      <node id="1218034168005182056" at="90,52,91,31" concept="4" />
+      <node id="1218034168005182062" at="96,48,97,52" concept="4" />
+      <node id="1218034168005182070" at="97,52,98,40" concept="4" />
+      <node id="1218034168005182076" at="103,43,104,52" concept="4" />
+      <node id="1218034168005182084" at="104,52,105,35" concept="4" />
+      <node id="1218034168005182093" at="110,58,111,58" concept="9" />
+      <node id="1218034168005182105" at="112,32,113,54" concept="4" />
+      <node id="1218034168005182113" at="113,54,114,45" concept="4" />
+      <node id="1218034168005182119" at="115,5,116,16" concept="10" />
+      <node id="1218034168005182128" at="122,56,123,51" concept="9" />
+      <node id="1218034168005182139" at="124,31,125,22" concept="10" />
+      <node id="1218034168005182971" at="126,5,127,17" concept="11" />
+      <node id="1218034168005182973" at="127,17,128,54" concept="11" />
+      <node id="1218034168005182143" at="128,54,129,33" concept="9" />
+      <node id="1218034168005182147" at="129,33,130,23" concept="9" />
+      <node id="1218034168005182156" at="131,24,132,56" concept="9" />
+      <node id="1218034168005182169" at="133,27,134,33" concept="4" />
+      <node id="1218034168005182975" at="135,7,136,55" concept="11" />
+      <node id="1218034168005182181" at="137,35,138,14" concept="1" />
+      <node id="1218034168005182182" at="139,7,140,14" concept="4" />
+      <node id="1218034168005182185" at="140,14,141,19" concept="4" />
+      <node id="1218034168005182977" at="142,5,143,82" concept="11" />
+      <node id="1218034168005182979" at="143,82,144,66" concept="11" />
+      <node id="1218034168005182196" at="145,25,146,34" concept="9" />
+      <node id="1218034168005182981" at="147,109,148,96" concept="11" />
+      <node id="1218034168005182983" at="148,96,149,111" concept="11" />
+      <node id="1218034168005182220" at="149,111,150,30" concept="4" />
+      <node id="1218034168005182985" at="150,30,151,42" concept="11" />
+      <node id="1218034168005182265" at="152,182,153,16" concept="1" />
+      <node id="1218034168005182267" at="154,9,155,39" concept="4" />
+      <node id="1218034168005182271" at="155,39,156,21" concept="4" />
+      <node id="1218034168005182987" at="156,21,157,29" concept="11" />
+      <node id="1218034168005182274" at="157,29,158,16" concept="4" />
+      <node id="1218034168005182282" at="161,20,162,22" concept="10" />
+      <node id="1218034168005182989" at="163,5,164,26" concept="11" />
+      <node id="1218034168005182285" at="164,26,165,34" concept="4" />
+      <node id="1218034168005182991" at="165,34,166,41" concept="11" />
+      <node id="1218034168005182993" at="168,13,169,21" concept="11" />
+      <node id="1218034168005182295" at="169,21,170,14" concept="1" />
+      <node id="1218034168005182995" at="170,14,171,70" concept="11" />
+      <node id="1218034168005182299" at="172,13,173,78" concept="4" />
+      <node id="1218034168005182317" at="173,78,174,76" concept="4" />
+      <node id="1218034168005182335" at="174,76,175,84" concept="4" />
+      <node id="1218034168005182353" at="175,84,176,78" concept="4" />
+      <node id="1218034168005182371" at="176,78,177,76" concept="4" />
+      <node id="1218034168005182389" at="177,76,178,84" concept="4" />
+      <node id="1218034168005182407" at="178,84,179,14" concept="1" />
+      <node id="1218034168005182411" at="180,13,181,78" concept="4" />
+      <node id="1218034168005182429" at="181,78,182,76" concept="4" />
+      <node id="1218034168005182447" at="182,76,183,84" concept="4" />
+      <node id="1218034168005182465" at="183,84,184,14" concept="1" />
+      <node id="1218034168005182466" at="185,14,186,107" concept="4" />
+      <node id="1218034168005182484" at="186,107,187,105" concept="4" />
+      <node id="1218034168005182502" at="187,105,188,113" concept="4" />
+      <node id="1218034168005182520" at="189,5,190,45" concept="4" />
+      <node id="1218034168005182530" at="190,45,191,20" concept="10" />
+      <node id="1218034168005182537" at="197,41,198,56" concept="9" />
+      <node id="1218034168005182572" at="199,48,200,46" concept="4" />
+      <node id="1218034168005182584" at="200,46,201,45" concept="4" />
+      <node id="1218034168005182596" at="202,5,203,21" concept="10" />
+      <node id="1218034168005182606" at="208,49,209,36" concept="4" />
+      <node id="1218034168005182609" at="209,36,210,25" concept="4" />
+      <node id="1218034168005182620" at="215,28,216,23" concept="4" />
+      <node id="1218034168005182622" at="216,23,217,25" concept="4" />
+      <node id="1218034168005182997" at="223,35,224,14" concept="11" />
+      <node id="1218034168005182999" at="224,14,225,17" concept="11" />
+      <node id="1218034168005183001" at="225,17,226,10" concept="11" />
+      <node id="1218034168005183003" at="226,10,227,18" concept="11" />
+      <node id="1218034168005183005" at="227,18,228,15" concept="11" />
+      <node id="1218034168005183007" at="228,15,229,21" concept="11" />
+      <node id="1218034168005183009" at="229,21,230,24" concept="11" />
+      <node id="1218034168005182633" at="230,24,231,250" concept="4" />
+      <node id="1218034168005183011" at="237,40,238,56" concept="11" />
+      <node id="1218034168005182695" at="238,56,239,126" concept="9" />
+      <node id="1218034168005182723" at="239,126,240,177" concept="9" />
+      <node id="1218034168005182772" at="241,62,242,52" concept="9" />
+      <node id="1218034168005182788" at="243,47,244,128" concept="4" />
+      <node id="1218034168005182808" at="244,128,245,126" concept="4" />
+      <node id="1218034168005182828" at="246,9,247,76" concept="4" />
+      <node id="1218034168005182844" at="247,76,248,74" concept="4" />
+      <node id="1218034168005182864" at="257,35,258,52" concept="4" />
+      <node id="1218034168005182872" at="258,52,259,27" concept="4" />
+      <node id="1218034168005181955" at="65,12,67,7" concept="0" />
+      <node id="1218034168005181795" at="37,0,40,0" concept="2" trace="CommentRecorderParser#(Lorg/eclipse/jdt/internal/compiler/problem/ProblemReporter;Z)V" />
+      <node id="1218034168005181809" at="41,91,44,5" concept="7" />
+      <node id="1218034168005181880" at="55,85,58,7" concept="7" />
+      <node id="1218034168005181984" at="69,51,72,7" concept="7" />
+      <node id="1218034168005181998" at="74,5,77,5" concept="7" />
+      <node id="1218034168005182027" at="80,79,83,7" concept="7" />
+      <node id="1218034168005182135" at="123,51,126,5" concept="7" />
+      <node id="1218034168005182165" at="132,56,135,7" concept="7" />
+      <node id="1218034168005182175" at="136,55,139,7" concept="7" />
+      <node id="1218034168005182223" at="151,42,154,9" concept="7" />
+      <node id="1218034168005182278" at="160,5,163,5" concept="7" />
+      <node id="1218034168005182046" at="89,0,93,0" concept="8" trace="consumeClassHeader#()V" />
+      <node id="1218034168005182060" at="96,0,100,0" concept="8" trace="consumeEmptyTypeDeclaration#()V" />
+      <node id="1218034168005182074" at="103,0,107,0" concept="8" trace="consumeInterfaceHeader#()V" />
+      <node id="1218034168005182097" at="111,58,115,5" concept="7" />
+      <node id="1218034168005182552" at="198,56,202,5" concept="6" />
+      <node id="1218034168005182602" at="208,0,212,0" concept="8" trace="initialize#(Z)V" />
+      <node id="1218034168005182618" at="215,0,219,0" concept="8" trace="initialize#()V" />
+      <node id="1218034168005182779" at="242,52,246,9" concept="7" />
+      <node id="1218034168005182862" at="257,0,261,0" concept="8" trace="resetModifiers#()V" />
+      <node id="1218034168005181929" at="62,82,67,7" concept="7" />
+      <node id="1218034168005182007" at="78,69,84,5" concept="7" />
+      <node id="1218034168005182088" at="110,0,118,0" concept="8" trace="endParse#(I)Lorg/eclipse/jdt/internal/compiler/ast/CompilationUnitDeclaration;" />
+      <node id="1218034168005182534" at="197,0,205,0" concept="8" trace="getCommentsPositions#()[[I" />
+      <node id="1218034168005182760" at="240,177,249,7" concept="7" />
+      <node id="1218034168005182631" at="223,0,233,0" concept="8" trace="initializeScanner#()V" />
+      <node id="1218034168005182188" at="130,23,142,5" concept="17" />
+      <node id="1218034168005182277" at="146,34,159,7" concept="17" />
+      <node id="1218034168005182681" at="236,56,250,5" concept="6" />
+      <node id="1218034168005182189" at="144,66,160,5" concept="7" />
+      <node id="1218034168005182675" at="236,0,252,0" concept="8" trace="pushOnCommentsStack#(II)V" />
+      <node id="1218034168005182290" at="166,41,189,5" concept="14" />
+      <node id="1218034168005181849" at="50,47,74,5" concept="6" />
+      <node id="1218034168005181807" at="40,0,86,0" concept="8" trace="checkComment#()V" />
+      <node id="1218034168005182123" at="122,0,193,0" concept="8" trace="flushCommentsDefinedPriorTo#(I)I" />
+      <scope id="1218034168005181801" at="37,97,38,51" />
+      <scope id="1218034168005181830" at="42,76,43,61" />
+      <scope id="1218034168005181911" at="56,177,57,29" />
+      <scope id="1218034168005181936" at="63,52,64,114" />
+      <scope id="1218034168005181956" at="65,14,66,50" />
+      <scope id="1218034168005181996" at="70,40,71,47" />
+      <scope id="1218034168005182001" at="75,21,76,61" />
+      <scope id="1218034168005182034" at="81,42,82,63" />
+      <scope id="1218034168005182141" at="124,31,125,22" />
+      <scope id="1218034168005182174" at="133,27,134,33" />
+      <scope id="1218034168005182180" at="137,35,138,14" />
+      <scope id="1218034168005182266" at="152,182,153,16" />
+      <scope id="1218034168005182284" at="161,20,162,22" />
+      <scope id="1218034168005182047" at="89,39,91,31" />
+      <scope id="1218034168005182061" at="96,48,98,40" />
+      <scope id="1218034168005182075" at="103,43,105,35" />
+      <scope id="1218034168005182104" at="112,32,114,45" />
+      <scope id="1218034168005182571" at="199,48,201,45" />
+      <scope id="1218034168005182605" at="208,49,210,25" />
+      <scope id="1218034168005182619" at="215,28,217,25" />
+      <scope id="1218034168005182787" at="243,47,245,126" />
+      <scope id="1218034168005182863" at="257,35,259,27" />
+      <scope id="1218034168005181795" at="37,0,40,0">
+        <var name="optimizeStringLiterals" id="1218034168005181799" />
+        <var name="problemReporter" id="1218034168005181797" />
+      </scope>
+      <scope id="1218034168005182294" at="168,13,171,70" />
+      <scope id="1218034168005182291" at="185,14,188,113" />
+      <scope id="1218034168005182014" at="79,51,83,7" />
+      <scope id="1218034168005182046" at="89,0,93,0" />
+      <scope id="1218034168005182060" at="96,0,100,0" />
+      <scope id="1218034168005182074" at="103,0,107,0" />
+      <scope id="1218034168005182410" at="180,13,184,14" />
+      <scope id="1218034168005182552" at="198,56,202,5">
+        <var name="i" id="1218034168005182553" />
+      </scope>
+      <scope id="1218034168005182602" at="208,0,212,0">
+        <var name="initializeNLS" id="1218034168005182603" />
+      </scope>
+      <scope id="1218034168005182618" at="215,0,219,0" />
+      <scope id="1218034168005182862" at="257,0,261,0" />
+      <scope id="1218034168005182091" at="110,58,116,16">
+        <var name="unit" id="1218034168005182092" />
+      </scope>
+      <scope id="1218034168005182535" at="197,41,203,21">
+        <var name="positions" id="1218034168005182536" />
+      </scope>
+      <scope id="1218034168005182298" at="172,13,179,14" />
+      <scope id="1218034168005182770" at="241,62,248,74">
+        <var name="stackLength" id="1218034168005182771" />
+      </scope>
+      <scope id="1218034168005182088" at="110,0,118,0">
+        <var name="act" id="1218034168005182089" />
+      </scope>
+      <scope id="1218034168005182534" at="197,0,205,0" />
+      <scope id="1218034168005182632" at="223,35,231,250" />
+      <scope id="1218034168005182154" at="131,24,141,19">
+        <var name="commentEnd" id="1218034168005182155" />
+      </scope>
+      <scope id="1218034168005182631" at="223,0,233,0" />
+      <scope id="1218034168005182219" at="147,109,158,16" />
+      <scope id="1218034168005182693" at="237,40,249,7">
+        <var name="commentStart" id="1218034168005182722" />
+        <var name="scannerStart" id="1218034168005182694" />
+      </scope>
+      <scope id="1218034168005182194" at="145,25,159,7">
+        <var name="immediateCommentEnd" id="1218034168005182195" />
+      </scope>
+      <scope id="1218034168005182680" at="236,56,250,5" />
+      <scope id="1218034168005182681" at="236,56,250,5">
+        <var name="i" id="1218034168005182682" />
+      </scope>
+      <scope id="1218034168005182675" at="236,0,252,0">
+        <var name="end" id="1218034168005182678" />
+        <var name="start" id="1218034168005182676" />
+      </scope>
+      <scope id="1218034168005181869" at="52,55,73,24">
+        <var name="commentSourceEnd" id="1218034168005181917" />
+        <var name="commentSourceStart" id="1218034168005181870" />
+      </scope>
+      <scope id="1218034168005181849" at="50,47,74,5" />
+      <scope id="1218034168005181808" at="40,30,84,5">
+        <var name="checkDeprecated" id="1218034168005181840" />
+        <var name="deprecated" id="1218034168005181836" />
+        <var name="lastCommentIndex" id="1218034168005181844" />
+      </scope>
+      <scope id="1218034168005181807" at="40,0,86,0" />
+      <scope id="1218034168005182126" at="122,56,191,20">
+        <var name="index" id="1218034168005182142" />
+        <var name="lastCommentIndex" id="1218034168005182127" />
+        <var name="validCount" id="1218034168005182146" />
+      </scope>
+      <scope id="1218034168005182123" at="122,0,193,0">
+        <var name="position" id="1218034168005182124" />
+      </scope>
+      <unit id="1218034168005181764" at="31,0,262,0" name="org.eclipse.jdt.internal.core.util.CommentRecorderParser" />
+    </file>
+  </root>
+  <root nodeRef="r:40e27d97-dea1-422b-91e0-3b9f3271a7f1(org.eclipse.jdt.internal.core.util)/1218034168005183012">
+    <file name="RecordedParsingInformation.java">
+      <node id="1218034168005183015" at="26,0,27,0" concept="5" trace="problems" />
+      <node id="1218034168005183020" at="27,0,28,0" concept="5" trace="problemsCount" />
+      <node id="1218034168005183024" at="28,0,29,0" concept="5" trace="lineEnds" />
+      <node id="1218034168005183029" at="29,0,30,0" concept="5" trace="commentPositions" />
+      <node id="1218034168005183048" at="30,110,31,29" concept="4" />
+      <node id="1218034168005183054" at="31,29,32,29" concept="4" />
+      <node id="1218034168005183060" at="32,29,33,45" concept="4" />
+      <node id="1218034168005183066" at="33,45,34,66" concept="4" />
+      <node id="1218034168005183092" at="37,45,38,49" concept="4" />
+      <node id="1218034168005183100" at="38,49,39,48" concept="4" />
+      <node id="1218034168005183084" at="36,90,40,5" concept="7" />
+      <node id="1218034168005183035" at="30,0,36,0" concept="2" trace="RecordedParsingInformation#([Lorg/eclipse/jdt/core/compiler/CategorizedProblem;[I[[I)V" />
+      <node id="1218034168005183080" at="36,0,42,0" concept="8" trace="updateRecordedParsingInformation#(Lorg/eclipse/jdt/internal/compiler/CompilationResult;)V" />
+      <scope id="1218034168005183091" at="37,45,39,48" />
+      <scope id="1218034168005183047" at="30,110,34,66" />
+      <scope id="1218034168005183083" at="36,90,40,5" />
+      <scope id="1218034168005183035" at="30,0,36,0">
+        <var name="commentPositions" id="1218034168005183043" />
+        <var name="lineEnds" id="1218034168005183040" />
+        <var name="problems" id="1218034168005183037" />
+      </scope>
+      <scope id="1218034168005183080" at="36,0,42,0">
+        <var name="compilationResult" id="1218034168005183081" />
+      </scope>
+      <unit id="1218034168005183012" at="24,0,43,0" name="org.eclipse.jdt.internal.core.util.RecordedParsingInformation" />
+    </file>
+  </root>
+  <root nodeRef="r:40e27d97-dea1-422b-91e0-3b9f3271a7f1(org.eclipse.jdt.internal.core.util)/1218034168005183146">
+    <file name="CodeSnippetParsingUtil.java">
+      <node id="1218034168005183149" at="38,0,39,0" concept="5" trace="recordedParsingInformation" />
+      <node id="1218034168005183153" at="39,0,40,0" concept="5" trace="ignoreMethodBodies" />
+      <node id="1218034168005183162" at="40,61,41,49" concept="4" />
+      <node id="1218034168005213216" at="43,35,44,16" concept="15" />
+      <node id="1218034168005183184" at="46,131,47,55" concept="9" />
+      <node id="1218034168005183190" at="47,55,48,41" concept="9" />
+      <node id="1218034168005183201" at="49,29,50,88" concept="9" />
+      <node id="1218034168005183215" at="51,62,52,45" concept="4" />
+      <node id="1218034168005183221" at="53,14,54,125" concept="4" />
+      <node id="1218034168005183236" at="56,5,57,117" concept="10" />
+      <node id="1218034168005183253" at="59,110,60,107" concept="10" />
+      <node id="1218034168005183288" at="63,25,64,43" concept="16" />
+      <node id="1218034168005183290" at="65,5,66,68" concept="9" />
+      <node id="1218034168005183294" at="66,68,67,65" concept="4" />
+      <node id="1218034168005183303" at="67,65,68,184" concept="9" />
+      <node id="1218034168005183313" at="68,184,69,85" concept="9" />
+      <node id="1218034168005183318" at="69,85,70,41" concept="4" />
+      <node id="1218034168005183322" at="70,41,71,59" concept="4" />
+      <node id="1218034168005183327" at="71,59,72,99" concept="9" />
+      <node id="1218034168005183955" at="72,99,73,18" concept="11" />
+      <node id="1218034168005183336" at="73,18,74,118" concept="9" />
+      <node id="1218034168005183346" at="74,118,75,148" concept="9" />
+      <node id="1218034168005183355" at="75,148,76,109" concept="9" />
+      <node id="1218034168005183368" at="77,35,78,126" concept="4" />
+      <node id="1218034168005183378" at="79,5,80,18" concept="10" />
+      <node id="1218034168005183399" at="83,25,84,43" concept="16" />
+      <node id="1218034168005183401" at="85,5,86,68" concept="9" />
+      <node id="1218034168005183405" at="86,68,87,65" concept="4" />
+      <node id="1218034168005183414" at="87,65,88,209" concept="9" />
+      <node id="1218034168005183426" at="88,209,89,99" concept="9" />
+      <node id="1218034168005183957" at="89,99,90,18" concept="11" />
+      <node id="1218034168005183435" at="90,18,91,124" concept="9" />
+      <node id="1218034168005183445" at="91,124,92,108" concept="9" />
+      <node id="1218034168005183455" at="93,35,94,126" concept="4" />
+      <node id="1218034168005183471" at="96,56,97,67" concept="4" />
+      <node id="1218034168005183959" at="97,67,98,79" concept="11" />
+      <node id="1218034168005183477" at="98,79,99,40" concept="10" />
+      <node id="1218034168005183961" at="100,5,101,68" concept="11" />
+      <node id="1218034168005183963" at="101,68,102,35" concept="11" />
+      <node id="1218034168005183479" at="102,35,103,48" concept="4" />
+      <node id="1218034168005183485" at="103,48,104,63" concept="9" />
+      <node id="1218034168005183517" at="106,46,107,66" concept="4" />
+      <node id="1218034168005183529" at="110,35,111,90" concept="4" />
+      <node id="1218034168005183536" at="112,5,113,38" concept="10" />
+      <node id="1218034168005183549" at="115,100,116,89" concept="10" />
+      <node id="1218034168005183580" at="119,25,120,43" concept="16" />
+      <node id="1218034168005183582" at="121,5,122,68" concept="9" />
+      <node id="1218034168005183965" at="122,68,123,97" concept="11" />
+      <node id="1218034168005183587" at="123,97,124,184" concept="9" />
+      <node id="1218034168005183597" at="124,184,125,85" concept="9" />
+      <node id="1218034168005183603" at="125,85,126,99" concept="9" />
+      <node id="1218034168005183967" at="126,99,127,18" concept="11" />
+      <node id="1218034168005183612" at="127,18,128,118" concept="9" />
+      <node id="1218034168005183622" at="128,118,129,120" concept="9" />
+      <node id="1218034168005183631" at="129,120,130,84" concept="9" />
+      <node id="1218034168005183643" at="131,35,132,104" concept="4" />
+      <node id="1218034168005183653" at="133,5,134,18" concept="10" />
+      <node id="1218034168005183668" at="136,146,137,115" concept="10" />
+      <node id="1218034168005183702" at="140,25,141,43" concept="16" />
+      <node id="1218034168005183704" at="142,5,143,68" concept="9" />
+      <node id="1218034168005183969" at="143,68,144,94" concept="11" />
+      <node id="1218034168005183709" at="144,94,145,184" concept="9" />
+      <node id="1218034168005183719" at="145,184,146,85" concept="9" />
+      <node id="1218034168005183724" at="146,85,147,41" concept="4" />
+      <node id="1218034168005183728" at="147,41,148,59" concept="4" />
+      <node id="1218034168005183733" at="148,59,149,99" concept="9" />
+      <node id="1218034168005183971" at="149,99,150,18" concept="11" />
+      <node id="1218034168005183742" at="150,18,151,124" concept="9" />
+      <node id="1218034168005183752" at="151,124,152,135" concept="9" />
+      <node id="1218034168005183759" at="152,135,153,98" concept="9" />
+      <node id="1218034168005183763" at="153,98,154,42" concept="4" />
+      <node id="1218034168005183770" at="154,42,155,70" concept="4" />
+      <node id="1218034168005183780" at="155,70,156,46" concept="4" />
+      <node id="1218034168005183786" at="156,46,157,57" concept="4" />
+      <node id="1218034168005183796" at="157,57,158,48" concept="4" />
+      <node id="1218034168005183801" at="158,48,159,52" concept="4" />
+      <node id="1218034168005183809" at="159,52,160,75" concept="4" />
+      <node id="1218034168005183819" at="161,35,162,126" concept="4" />
+      <node id="1218034168005183829" at="163,5,164,34" concept="10" />
+      <node id="1218034168005183219" at="53,12,55,7" concept="0" />
+      <node id="1218034168005183157" at="40,0,43,0" concept="2" trace="CodeSnippetParsingUtil#(Z)V" />
+      <node id="1218034168005183169" at="43,0,46,0" concept="2" trace="CodeSnippetParsingUtil#()V" />
+      <node id="1218034168005183244" at="59,0,62,0" concept="8" trace="parseClassBodyDeclarations#([CLjava/util/Map;Z)[Lorg/eclipse/jdt/internal/compiler/ast/ASTNode;" />
+      <node id="1218034168005183281" at="62,168,65,5" concept="7" />
+      <node id="1218034168005183364" at="76,109,79,5" concept="7" />
+      <node id="1218034168005183392" at="82,121,85,5" concept="7" />
+      <node id="1218034168005183451" at="92,108,95,5" concept="7" />
+      <node id="1218034168005183497" at="105,24,108,7" concept="6" />
+      <node id="1218034168005183525" at="109,5,112,5" concept="7" />
+      <node id="1218034168005183540" at="115,0,118,0" concept="8" trace="parseExpression#([CLjava/util/Map;Z)Lorg/eclipse/jdt/internal/compiler/ast/Expression;" />
+      <node id="1218034168005183573" at="118,124,121,5" concept="7" />
+      <node id="1218034168005183639" at="130,84,133,5" concept="7" />
+      <node id="1218034168005183657" at="136,0,139,0" concept="8" trace="parseStatements#([CLjava/util/Map;ZZ)Lorg/eclipse/jdt/internal/compiler/ast/ConstructorDeclaration;" />
+      <node id="1218034168005183695" at="139,170,142,5" concept="7" />
+      <node id="1218034168005183815" at="160,75,163,5" concept="7" />
+      <node id="1218034168005183207" at="50,88,55,7" concept="7" />
+      <node id="1218034168005183465" at="95,5,100,5" concept="7" />
+      <node id="1218034168005183491" at="104,63,109,5" concept="7" />
+      <node id="1218034168005183194" at="48,41,56,5" concept="7" />
+      <node id="1218034168005183175" at="46,0,59,0" concept="8" trace="getRecordedParsingInformation#(Lorg/eclipse/jdt/internal/compiler/CompilationResult;[[I)Lorg/eclipse/jdt/internal/core/util/RecordedParsingInformation;" />
+      <node id="1218034168005183560" at="118,0,136,0" concept="8" trace="parseExpression#([CIILjava/util/Map;Z)Lorg/eclipse/jdt/internal/compiler/ast/Expression;" />
+      <node id="1218034168005183266" at="62,0,82,0" concept="8" trace="parseClassBodyDeclarations#([CIILjava/util/Map;ZZ)[Lorg/eclipse/jdt/internal/compiler/ast/ASTNode;" />
+      <node id="1218034168005183680" at="139,0,166,0" concept="8" trace="parseStatements#([CIILjava/util/Map;ZZ)Lorg/eclipse/jdt/internal/compiler/ast/ConstructorDeclaration;" />
+      <node id="1218034168005183383" at="82,0,115,0" concept="8" trace="parseCompilationUnit#([CLjava/util/Map;Z)Lorg/eclipse/jdt/internal/compiler/ast/CompilationUnitDeclaration;" />
+      <scope id="1218034168005183161" at="40,61,41,49" />
+      <scope id="1218034168005183171" at="43,35,44,16" />
+      <scope id="1218034168005183214" at="51,62,52,45" />
+      <scope id="1218034168005183220" at="53,14,54,125" />
+      <scope id="1218034168005183252" at="59,110,60,107" />
+      <scope id="1218034168005183286" at="63,25,64,43" />
+      <scope id="1218034168005183367" at="77,35,78,126" />
+      <scope id="1218034168005183397" at="83,25,84,43" />
+      <scope id="1218034168005183454" at="93,35,94,126" />
+      <scope id="1218034168005183516" at="106,46,107,66" />
+      <scope id="1218034168005183528" at="110,35,111,90" />
+      <scope id="1218034168005183548" at="115,100,116,89" />
+      <scope id="1218034168005183578" at="119,25,120,43" />
+      <scope id="1218034168005183642" at="131,35,132,104" />
+      <scope id="1218034168005183667" at="136,146,137,115" />
+      <scope id="1218034168005183700" at="140,25,141,43" />
+      <scope id="1218034168005183818" at="161,35,162,126" />
+      <scope id="1218034168005183157" at="40,0,43,0">
+        <var name="ignoreMethodBodies" id="1218034168005183159" />
+      </scope>
+      <scope id="1218034168005183169" at="43,0,46,0" />
+      <scope id="1218034168005183244" at="59,0,62,0">
+        <var name="recordParsingInformation" id="1218034168005183250" />
+        <var name="settings" id="1218034168005183248" />
+        <var name="source" id="1218034168005183245" />
+      </scope>
+      <scope id="1218034168005183470" at="96,56,99,40" />
+      <scope id="1218034168005183496" at="105,24,108,7" />
+      <scope id="1218034168005183497" at="105,24,108,7">
+        <var name="i" id="1218034168005183498" />
+      </scope>
+      <scope id="1218034168005183540" at="115,0,118,0">
+        <var name="recordParsingInformation" id="1218034168005183546" />
+        <var name="settings" id="1218034168005183544" />
+        <var name="source" id="1218034168005183541" />
+      </scope>
+      <scope id="1218034168005183657" at="136,0,139,0">
+        <var name="enabledStatementRecovery" id="1218034168005183665" />
+        <var name="recordParsingInformation" id="1218034168005183663" />
+        <var name="settings" id="1218034168005183661" />
+        <var name="source" id="1218034168005183658" />
+      </scope>
+      <scope id="1218034168005183199" at="49,29,55,7">
+        <var name="compilationResultProblems" id="1218034168005183200" />
+      </scope>
+      <scope id="1218034168005183182" at="46,131,57,117">
+        <var name="problems" id="1218034168005183189" />
+        <var name="problemsCount" id="1218034168005183183" />
+      </scope>
+      <scope id="1218034168005183175" at="46,0,59,0">
+        <var name="commentPositions" id="1218034168005183178" />
+        <var name="compilationResult" id="1218034168005183176" />
+      </scope>
+      <scope id="1218034168005183572" at="118,124,134,18">
+        <var name="compilationResult" id="1218034168005183611" />
+        <var name="compilerOptions" id="1218034168005183581" />
+        <var name="parser" id="1218034168005183596" />
+        <var name="problemReporter" id="1218034168005183586" />
+        <var name="result" id="1218034168005183630" />
+        <var name="sourceUnit" id="1218034168005183602" />
+        <var name="unit" id="1218034168005183621" />
+      </scope>
+      <scope id="1218034168005183280" at="62,168,80,18">
+        <var name="compilationResult" id="1218034168005183335" />
+        <var name="compilationUnitDeclaration" id="1218034168005183345" />
+        <var name="compilerOptions" id="1218034168005183289" />
+        <var name="parser" id="1218034168005183312" />
+        <var name="problemReporter" id="1218034168005183302" />
+        <var name="result" id="1218034168005183354" />
+        <var name="sourceUnit" id="1218034168005183326" />
+      </scope>
+      <scope id="1218034168005183560" at="118,0,136,0">
+        <var name="length" id="1218034168005183566" />
+        <var name="offset" id="1218034168005183564" />
+        <var name="recordParsingInformation" id="1218034168005183570" />
+        <var name="settings" id="1218034168005183568" />
+        <var name="source" id="1218034168005183561" />
+      </scope>
+      <scope id="1218034168005183266" at="62,0,82,0">
+        <var name="enabledStatementRecovery" id="1218034168005183278" />
+        <var name="length" id="1218034168005183272" />
+        <var name="offset" id="1218034168005183270" />
+        <var name="recordParsingInformation" id="1218034168005183276" />
+        <var name="settings" id="1218034168005183274" />
+        <var name="source" id="1218034168005183267" />
+      </scope>
+      <scope id="1218034168005183694" at="139,170,164,34">
+        <var name="compilationResult" id="1218034168005183741" />
+        <var name="compilationUnitDeclaration" id="1218034168005183751" />
+        <var name="compilerOptions" id="1218034168005183703" />
+        <var name="constructorDeclaration" id="1218034168005183758" />
+        <var name="parser" id="1218034168005183718" />
+        <var name="problemReporter" id="1218034168005183708" />
+        <var name="sourceUnit" id="1218034168005183732" />
+      </scope>
+      <scope id="1218034168005183680" at="139,0,166,0">
+        <var name="enabledStatementRecovery" id="1218034168005183692" />
+        <var name="length" id="1218034168005183686" />
+        <var name="offset" id="1218034168005183684" />
+        <var name="recordParsingInformation" id="1218034168005183690" />
+        <var name="settings" id="1218034168005183688" />
+        <var name="source" id="1218034168005183681" />
+      </scope>
+      <scope id="1218034168005183391" at="82,121,113,38">
+        <var name="compilationResult" id="1218034168005183434" />
+        <var name="compilationUnitDeclaration" id="1218034168005183444" />
+        <var name="compilerOptions" id="1218034168005183400" />
+        <var name="parser" id="1218034168005183413" />
+        <var name="sourceUnit" id="1218034168005183425" />
+        <var name="types" id="1218034168005183484" />
+      </scope>
+      <scope id="1218034168005183383" at="82,0,115,0">
+        <var name="recordParsingInformation" id="1218034168005183389" />
+        <var name="settings" id="1218034168005183387" />
+        <var name="source" id="1218034168005183384" />
+      </scope>
+      <unit id="1218034168005183146" at="36,0,167,0" name="org.eclipse.jdt.internal.core.util.CodeSnippetParsingUtil" />
+    </file>
+  </root>
+</debug-info>
+

@@ -17,11 +17,9 @@ package jetbrains.mps.openapi.editor.cells;
 
 import jetbrains.mps.openapi.editor.descriptor.ConceptEditor;
 import jetbrains.mps.openapi.editor.menus.transformation.SNodeLocation;
+import jetbrains.mps.openapi.editor.menus.transformation.SPropertyInfo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SNode;
-
-import java.util.Collection;
-import java.util.Set;
 
 /**
  * User: shatalin
@@ -95,4 +93,12 @@ public interface EditorCellFactory {
   default void setNodeLocation(SNodeLocation location) {
 
   }
+
+  /**
+   * Set the information about the specific property edited by the cell
+   *
+   * @param propertyInfo info to set
+   * @throws IllegalStateException if pushCellContext() was not called before.
+   */
+  void setPropertyInfo(SPropertyInfo propertyInfo);
 }

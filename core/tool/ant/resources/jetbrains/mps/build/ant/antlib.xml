@@ -1,8 +1,9 @@
 <antlib>
-  <typedef name="library" classname="jetbrains.mps.build.ant.LibraryDataType" />
+  <typedef name="library" classname="jetbrains.mps.build.ant.ModuleJarDataType" />
   <typedef name="jvmarg" classname="jetbrains.mps.build.ant.Arg" />
   <typedef name="jvmargs" classname="jetbrains.mps.build.ant.JvmArgs" />
   <typedef name="macro" classname="jetbrains.mps.build.ant.Macro" />
+  <typedef name="project" classname="jetbrains.mps.build.ant.ProjectPath" />
 
   <taskdef name="migrate" classname="jetbrains.mps.build.ant.MigrationTask" />
 
@@ -12,7 +13,21 @@
   <taskdef name="copyModels" classname="jetbrains.mps.build.ant.converter.ConvertToBinaryTask" />
   <taskdef name="runMPS" classname="jetbrains.mps.build.ant.generation.MpsRunnerTask" />
 
+  <typedef name="repository" classname="jetbrains.mps.build.ant.RepositoryDataType" />
+  <typedef name="modules" classname="jetbrains.mps.build.ant.ModulesDataType" />
+  <typedef name="module" classname="jetbrains.mps.build.ant.ModuleDataType" />
+  <typedef name="allmpsmodules" classname="jetbrains.mps.build.ant.AllModulesDataType" />
+
   <typedef name="chunk" classname="jetbrains.mps.build.ant.generation.Chunk" />
   <typedef name="module" classname="jetbrains.mps.build.ant.generation.ModuleChunkPart" />
-  <typedef name="plugin" classname="jetbrains.mps.build.ant.generation.Plugin" />
+  <typedef name="plugin" classname="jetbrains.mps.build.ant.Plugin" />
+
+  <!-- since 2021.3 -->
+  <typedef name="generator-settings" classname="jetbrains.mps.build.ant.GeneratorSettings" />
+  <taskdef name="mps.make" classname="jetbrains.mps.build.ant.MakeTask" />
+
+  <!-- since 2022.3 -->
+  <taskdef name="launchtests" classname="jetbrains.mps.build.ant.junit.LaunchTestTask" />
+  <typedef name="testmodules" classname="jetbrains.mps.build.ant.junit.TestModules" />
+
 </antlib>

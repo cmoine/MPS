@@ -1,0 +1,145 @@
+<project name="migrateSampleAndTestProjects" default="migrateAll" basedir="../">
+  <property name="env.JAVA_HOME" value="${java.home}/.."/>
+  <property name="jdk.home" value="${env.JAVA_HOME}"/>
+  <!-- this has to be specified by caller -->
+  <property name="mps_home" location="build/artifacts/mps"/>
+
+  <!-- see mpsSmartRefAttrMigration.xml for additional details about migrate/@mpsHome -->
+
+  <path id="path.mps.ant.path">
+    <pathelement location="${mps_home}/lib/ant/lib/ant-mps.jar" />
+    <fileset dir="${mps_home}/lib">
+      <include name="util-8.jar" />
+      <include name="3rd-party-rt.jar" />
+    </fileset>
+  </path>
+
+  <taskdef resource="jetbrains/mps/build/ant/antlib.xml" classpathref="path.mps.ant.path"/>
+
+  <target name="migrateAll" depends="migrateSampleProjects, migrateTestProjects">
+    <echo message="Some projects were explicitly excluded, and need to be migrated manually (see sources of this script) "/>
+  </target>
+
+  <dirset id="samples" dir="${basedir}/samples">
+    <present targetdir="${basedir}/samples">
+      <globmapper from="*" to="*/.mps"/>
+    </present>
+    <!-- these projects require IDE and MPS project due to dependencies not available for migrate task -->
+    <!-- Perhaps, can extend dependencies of migrate task with nested plugin or library? -->
+    <!--
+         FIXME figure out what's exactly prevents automatic migration, it's very tedious activity
+            to update these once there's new migration. I didn't notice anything suspicious when did this recently.
+     -->
+    <exclude name="generator_demo" />
+    <exclude name="messagesCustomization" />
+    <exclude name="customizedDebugger" />
+  </dirset>
+
+  <dirset id="testbench-modules" dir="${basedir}/testbench/modules">
+    <present targetdir="${basedir}/testbench/modules">
+      <globmapper from="*" to="*/.mps"/>
+    </present>
+    <!--
+    alternatively:
+    includes="testFS,testBehavior,simpleProject,testCloneModule,testCompilation,testRefactoring,build.mps.runner.test,build.mps.runner.test/project,testRefactoringWithMigration/MoveConcept_MPS_27372,testCompilationJavaXmlConflict"
+    -->
+    <exclude name="testCompilation" />
+  </dirset>
+
+  <target name="migrateSampleProjects">
+    <migrate mpsHome="${mps_home}" makeDistribModules="false" autoPluginDiscovery="true">
+      <dirset refid="samples"/>
+      <jvmargs>
+        <arg value="-Xmx1200m" />
+        <arg value="-ea" />
+        <arg value="--add-opens=java.base/java.io=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.lang=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.lang.reflect=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.net=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.nio=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.nio.charset=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.text=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.time=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.util=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.util.concurrent=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/jdk.internal.vm=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/sun.nio.ch=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/sun.security.ssl=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/sun.security.util=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/java.awt=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/java.awt.dnd.peer=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/java.awt.event=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/java.awt.image=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/java.awt.peer=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/javax.swing=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/javax.swing.plaf.basic=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/javax.swing.text.html=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/sun.awt.datatransfer=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/sun.awt.image=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/sun.awt=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/sun.font=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/sun.java2d=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/sun.swing=ALL-UNNAMED" />
+        <arg value="--add-opens=jdk.attach/sun.tools.attach=ALL-UNNAMED" />
+        <arg value="--add-opens=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED" />
+        <arg value="--add-opens=jdk.internal.jvmstat/sun.jvmstat.monitor=ALL-UNNAMED" />
+        <arg value="--add-opens=jdk.jdi/com.sun.tools.jdi=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/com.apple.laf=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/com.apple.eawt=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/com.apple.eawt.event=ALL-UNNAMED" />
+      </jvmargs>
+    </migrate>
+  </target>
+
+  <target name="migrateTestProjects">
+    <migrate mpsHome="${mps_home}" makeDistribModules="false" autoPluginDiscovery="true">
+      <project path="${basedir}/languages/languageDesign/generator/project.xmodel.test1"/>
+      <project path="${basedir}/testbench/testsolutions/closures.test"/>
+      <project path="${basedir}/testbench/modules/build.mps.runner.test/project"/>
+      <project path="${basedir}/testbench/modules/testRefactoringWithMigration/MoveConcept_MPS_27372"/>
+      <dirset refid="testbench-modules"/>
+      <jvmargs>
+        <arg value="-Xmx1200m" />
+        <arg value="-ea" />
+        <arg value="--add-opens=java.base/java.io=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.lang=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.lang.reflect=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.net=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.nio=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.nio.charset=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.text=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.time=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.util=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.util.concurrent=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/jdk.internal.vm=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/sun.nio.ch=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/sun.security.ssl=ALL-UNNAMED" />
+        <arg value="--add-opens=java.base/sun.security.util=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/java.awt=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/java.awt.dnd.peer=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/java.awt.event=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/java.awt.image=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/java.awt.peer=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/javax.swing=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/javax.swing.plaf.basic=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/javax.swing.text.html=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/sun.awt.datatransfer=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/sun.awt.image=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/sun.awt=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/sun.font=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/sun.java2d=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/sun.swing=ALL-UNNAMED" />
+        <arg value="--add-opens=jdk.attach/sun.tools.attach=ALL-UNNAMED" />
+        <arg value="--add-opens=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED" />
+        <arg value="--add-opens=jdk.internal.jvmstat/sun.jvmstat.monitor=ALL-UNNAMED" />
+        <arg value="--add-opens=jdk.jdi/com.sun.tools.jdi=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/com.apple.laf=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/com.apple.eawt=ALL-UNNAMED" />
+        <arg value="--add-opens=java.desktop/com.apple.eawt.event=ALL-UNNAMED" />
+      </jvmargs>
+    </migrate>
+  </target>
+
+</project>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="bws228tr5d5kq3yyey1kx1ytwgxeoxe">
+  <files names="BaseRefactoringScript.java:BaseScript.java:BaseScriptReference.java:DataCollector.java:DeprecatedConceptMemberNotMigratedProblem.java:DeprecatedConceptNotMigratedProblem.java:DeprecatedLanguageNotMigratedProblem.java:EmptyRefactoringUI.java:MigrateManually.java:MigrationAspectDescriptor.java:MigrationModuleUtil.java:MigrationScript.java:MigrationScriptBase.java:MigrationScriptReference.java:NotMigratedNode.java:Problem.java:RefactoringPartImpl.java:RefactoringRuntime.java:RefactoringScript.java:RefactoringScriptReference.java:UsageOfMigrateNodeNotMigratedProblem.java" />
+</product>
+

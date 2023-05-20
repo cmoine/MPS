@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="mps-test">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/mps-core/lib/mps-test.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../testbench/source_gen" />
+    </SOURCES>
+  </library>
+</component>

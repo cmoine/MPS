@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<model ref="r:158a0fcf-bdbc-4dde-85d2-af0cae5e3720(closures.sandbox.adapters)" doNotGenerate="true">
+<model ref="r:158a0fcf-bdbc-4dde-85d2-af0cae5e3720(closures.sandbox.adapters)">
   <persistence version="9" />
+  <attribute name="doNotGenerate" value="true" />
   <languages>
     <use id="fd392034-7849-419d-9071-12563d152375" name="jetbrains.mps.baseLanguage.closures" version="0" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports>
     <import index="qbve" ref="r:35e808a0-0758-4b03-9053-4675a7ced44c(jetbrains.mps.baseLanguage.closures.runtime)" />
@@ -93,7 +94,6 @@
       <concept id="1146644602865" name="jetbrains.mps.baseLanguage.structure.PublicVisibility" flags="nn" index="3Tm1VV" />
     </language>
     <language id="fd392034-7849-419d-9071-12563d152375" name="jetbrains.mps.baseLanguage.closures">
-      <concept id="1046929382682558545" name="jetbrains.mps.baseLanguage.closures.structure.ClosureLiteralType" flags="ig" index="9cv3F" />
       <concept id="1199542442495" name="jetbrains.mps.baseLanguage.closures.structure.FunctionType" flags="in" index="1ajhzC">
         <child id="1199542457201" name="resultType" index="1ajl9A" />
         <child id="1199542501692" name="parameterType" index="1ajw0F" />
@@ -175,9 +175,9 @@
       <property role="TrG5h" value="acceptsFun" />
       <node concept="37vLTG" id="2uAWGxT7Z7L" role="3clF46">
         <property role="TrG5h" value="bar" />
-        <node concept="9cv3F" id="6mhkh6yDktF" role="1tU5fm">
-          <node concept="17QB3L" id="6mhkh6yDktG" role="1ajw0F" />
-          <node concept="10Oyi0" id="6mhkh6yDktH" role="1ajl9A" />
+        <node concept="1ajhzC" id="5j9sOBs3buB" role="1tU5fm">
+          <node concept="17QB3L" id="5j9sOBs3buC" role="1ajw0F" />
+          <node concept="10Oyi0" id="5j9sOBs3buD" role="1ajl9A" />
         </node>
         <node concept="2AHcQZ" id="2uAWGxT7Z7T" role="2AJF6D">
           <ref role="2AI5Lk" to="qbve:7w8CYsT5wfS" resolve="AdapterClass" />
@@ -197,11 +197,11 @@
       <property role="TrG5h" value="acceptGenFun" />
       <node concept="37vLTG" id="25RNw_CdbjO" role="3clF46">
         <property role="TrG5h" value="bar" />
-        <node concept="9cv3F" id="6mhkh6yDkt$" role="1tU5fm">
-          <node concept="16syzq" id="6mhkh6yDkt_" role="1ajw0F">
+        <node concept="1ajhzC" id="5j9sOBs3bvg" role="1tU5fm">
+          <node concept="16syzq" id="5j9sOBs3bvh" role="1ajw0F">
             <ref role="16sUi3" node="25RNw_CdbjQ" resolve="S" />
           </node>
-          <node concept="16syzq" id="6mhkh6yDktA" role="1ajl9A">
+          <node concept="16syzq" id="5j9sOBs3bvi" role="1ajl9A">
             <ref role="16sUi3" node="25RNw_CdbjR" resolve="T" />
           </node>
         </node>
@@ -260,7 +260,7 @@
                         <ref role="3cqZAo" node="75IEcLE0Uei" resolve="s" />
                       </node>
                       <node concept="liA8E" id="75IEcLE0Uer" role="2OqNvi">
-                        <ref role="37wK5l" to="wyt6:~String.length():int" resolve="length" />
+                        <ref role="37wK5l" to="wyt6:~String.length()" resolve="length" />
                       </node>
                     </node>
                   </node>
@@ -288,7 +288,7 @@
                       <ref role="3cqZAo" node="25RNw_CdazF" resolve="s" />
                     </node>
                     <node concept="liA8E" id="25RNw_CdazL" role="2OqNvi">
-                      <ref role="37wK5l" to="wyt6:~String.length():int" resolve="length" />
+                      <ref role="37wK5l" to="wyt6:~String.length()" resolve="length" />
                     </node>
                   </node>
                 </node>

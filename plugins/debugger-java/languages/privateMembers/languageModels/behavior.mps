@@ -2,7 +2,7 @@
 <model ref="r:d56331d6-5f8f-417d-8ab3-d7bc220d7936(jetbrains.mps.debugger.java.privateMembers.behavior)">
   <persistence version="9" />
   <languages>
-    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="0" />
+    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="2" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -22,7 +22,6 @@
       <concept id="1225194413805" name="jetbrains.mps.lang.behavior.structure.ConceptConstructorDeclaration" flags="in" index="13hLZK" />
       <concept id="1225194472830" name="jetbrains.mps.lang.behavior.structure.ConceptMethodDeclaration" flags="ng" index="13i0hz">
         <property id="5864038008284099149" name="isStatic" index="2Ki8OM" />
-        <property id="1225194472833" name="isPrivate" index="13i0is" />
         <property id="1225194472832" name="isVirtual" index="13i0it" />
         <property id="1225194472834" name="isAbstract" index="13i0iv" />
         <reference id="1225194472831" name="overriddenMethod" index="13i0hy" />
@@ -116,7 +115,6 @@
     </node>
     <node concept="13i0hz" id="6vG$pauOZmG" role="13h7CS">
       <property role="13i0iv" value="false" />
-      <property role="13i0is" value="false" />
       <property role="TrG5h" value="getPresentation" />
       <property role="13i0it" value="false" />
       <ref role="13i0hy" to="tpcu:hEwIMiw" resolve="getPresentation" />
@@ -137,7 +135,7 @@
             <node concept="2OqwBi" id="6vG$pauOZna" role="2Oq$k0">
               <node concept="13iPFW" id="6vG$pauOZmP" role="2Oq$k0" />
               <node concept="3TrEf2" id="6vG$pauOZng" role="2OqNvi">
-                <ref role="3Tt5mk" to="tpee:hqOxapj" />
+                <ref role="3Tt5mk" to="tpee:hqOxapj" resolve="fieldDeclaration" />
               </node>
             </node>
             <node concept="3w_OXm" id="6vG$pauOZnJ" role="2OqNvi" />
@@ -148,7 +146,7 @@
             <node concept="2OqwBi" id="6vG$pauOZoA" role="2Oq$k0">
               <node concept="13iPFW" id="6vG$pauOZoh" role="2Oq$k0" />
               <node concept="3TrEf2" id="6vG$pauOZoF" role="2OqNvi">
-                <ref role="3Tt5mk" to="tpee:hqOxapj" />
+                <ref role="3Tt5mk" to="tpee:hqOxapj" resolve="fieldDeclaration" />
               </node>
             </node>
             <node concept="3TrcHB" id="6vG$pauOZp7" role="2OqNvi">
@@ -161,7 +159,6 @@
     </node>
     <node concept="13i0hz" id="1653mnvAlMK" role="13h7CS">
       <property role="2Ki8OM" value="true" />
-      <property role="13i0is" value="false" />
       <property role="TrG5h" value="lvalue" />
       <property role="13i0it" value="false" />
       <ref role="13i0hy" to="tpek:1653mnvAgvW" resolve="lvalue" />
@@ -181,7 +178,6 @@
     </node>
     <node concept="13i0hz" id="6vG$pauP04Z" role="13h7CS">
       <property role="13i0iv" value="false" />
-      <property role="13i0is" value="false" />
       <property role="TrG5h" value="getPresentation" />
       <property role="13i0it" value="false" />
       <ref role="13i0hy" to="tpcu:hEwIMiw" resolve="getPresentation" />
@@ -202,7 +198,7 @@
             <node concept="2OqwBi" id="6vG$pauP05q" role="2Oq$k0">
               <node concept="13iPFW" id="6vG$pauP05r" role="2Oq$k0" />
               <node concept="3TrEf2" id="6vG$pauP05B" role="2OqNvi">
-                <ref role="3Tt5mk" to="tpee:f_2Pw7K" />
+                <ref role="3Tt5mk" to="tpee:f_2Pw7K" resolve="staticFieldDeclaration" />
               </node>
             </node>
             <node concept="3w_OXm" id="6vG$pauP05t" role="2OqNvi" />
@@ -226,7 +222,7 @@
                     <node concept="2OqwBi" id="6vG$pauP0ce" role="2Oq$k0">
                       <node concept="13iPFW" id="6vG$pauP0cf" role="2Oq$k0" />
                       <node concept="3TrEf2" id="6vG$pauP0cg" role="2OqNvi">
-                        <ref role="3Tt5mk" to="tpee:gDPxDYr" />
+                        <ref role="3Tt5mk" to="tpee:gDPxDYr" resolve="classifier" />
                       </node>
                     </node>
                     <node concept="2qgKlT" id="6vG$pauP0ch" role="2OqNvi">
@@ -247,7 +243,7 @@
             <node concept="2OqwBi" id="6vG$pauP0d8" role="2Oq$k0">
               <node concept="13iPFW" id="6vG$pauP0cN" role="2Oq$k0" />
               <node concept="3TrEf2" id="6vG$pauP0dh" role="2OqNvi">
-                <ref role="3Tt5mk" to="tpee:gDPxDYr" />
+                <ref role="3Tt5mk" to="tpee:gDPxDYr" resolve="classifier" />
               </node>
             </node>
             <node concept="3x8VRR" id="6vG$pauP0dK" role="2OqNvi" />
@@ -262,7 +258,7 @@
               <node concept="2OqwBi" id="6vG$pauP05w" role="2Oq$k0">
                 <node concept="13iPFW" id="6vG$pauP05x" role="2Oq$k0" />
                 <node concept="3TrEf2" id="6vG$pauP05E" role="2OqNvi">
-                  <ref role="3Tt5mk" to="tpee:f_2Pw7K" />
+                  <ref role="3Tt5mk" to="tpee:f_2Pw7K" resolve="staticFieldDeclaration" />
                 </node>
               </node>
               <node concept="3TrcHB" id="6vG$pauP05z" role="2OqNvi">
@@ -276,7 +272,6 @@
     </node>
     <node concept="13i0hz" id="1653mnvAlO9" role="13h7CS">
       <property role="2Ki8OM" value="true" />
-      <property role="13i0is" value="false" />
       <property role="TrG5h" value="lvalue" />
       <property role="13i0it" value="false" />
       <ref role="13i0hy" to="tpek:1653mnvAgpj" resolve="lvalue" />
@@ -296,7 +291,6 @@
     </node>
     <node concept="13i0hz" id="1653mnvB6mo" role="13h7CS">
       <property role="2Ki8OM" value="true" />
-      <property role="13i0is" value="false" />
       <property role="TrG5h" value="substituteInAmbigousPosition" />
       <property role="13i0it" value="false" />
       <ref role="13i0hy" to="tpcu:1653mnvAgq$" resolve="substituteInAmbigousPosition" />

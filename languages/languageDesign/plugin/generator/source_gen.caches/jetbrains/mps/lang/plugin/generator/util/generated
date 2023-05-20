@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-g04fqtn8z4q42kzkwuk1cjpo76cm59" />
+<product version="3" modelHash="-5ltwuempky3zedyhmle6b1cjpv7n9eu">
+  <files names="KeymapUtil.java:PluginNameUtils.java" />
+</product>
 

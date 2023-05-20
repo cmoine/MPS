@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-dlvbyn1skr4g3kjbtar3d6v16qfoocq" />
+<product version="3" modelHash="57psvt7qggu1i0rm8d8gwjuj6l9hbdd">
+  <files names="ConceptPresentationAspectImpl.java:EnumerationDescriptor_DayDataType.java:LanguageConceptSwitch.java:StructureAspectDescriptor.java" />
+</product>
 

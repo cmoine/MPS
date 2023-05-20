@@ -8,82 +8,93 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
   <root>
     <file name="IntentionsDescriptor.java">
-      <unit at="16,0,67,0" name="jetbrains.mps.baseLanguage.checkedDots.intentions.IntentionsDescriptor" />
+      <unit at="18,0,56,0" name="jetbrains.mps.baseLanguage.checkedDots.intentions.IntentionsDescriptor" />
     </file>
   </root>
   <root nodeRef="r:e7b16359-4f7b-4995-8330-19c6bbadce25(jetbrains.mps.baseLanguage.checkedDots.intentions)/1038097819968653124">
+    <file name="IntentionsDescriptor.java">
+      <node id="1038097819968653124" at="37,47,38,67" concept="2" />
+      <node id="1038097819968653124" at="50,52,51,53" concept="2" />
+    </file>
     <file name="MakeDotExpressionChecked_Intention.java">
-      <node id="1038097819968653124" at="22,0,23,0" concept="3" trace="myCachedExecutable" />
-      <node id="1038097819968653124" at="23,47,24,316" concept="8" />
-      <node id="1038097819968653124" at="27,35,28,38" concept="7" />
-      <node id="1038097819968653124" at="31,84,32,16" concept="7" />
-      <node id="1038097819968653124" at="35,35,36,17" concept="7" />
-      <node id="1038097819968653124" at="39,37,40,140" concept="2" />
-      <node id="1038097819968653124" at="41,5,42,30" concept="7" />
-      <node id="7654328074273773999" at="48,87,49,285" concept="7" />
-      <node id="7654328074273773966" at="53,214,54,258" concept="6" />
-      <node id="7654328074273773972" at="54,258,55,330" concept="2" />
-      <node id="7654328074273773981" at="55,330,56,334" concept="2" />
-      <node id="7654328074273773990" at="56,334,57,64" concept="2" />
-      <node id="7654328074273773934" at="58,14,59,279" concept="6" />
-      <node id="7654328074273773940" at="59,279,60,327" concept="2" />
-      <node id="7654328074273773949" at="60,327,61,331" concept="2" />
-      <node id="7654328074273773958" at="61,331,62,61" concept="2" />
-      <node id="1038097819968653124" at="66,48,67,53" concept="7" />
-      <node id="1038097819968653124" at="45,0,47,0" concept="1" trace="IntentionImplementation#()V" />
-      <node id="1038097819968653124" at="23,0,26,0" concept="1" trace="MakeDotExpressionChecked_Intention#()V" />
-      <node id="1038097819968653124" at="38,99,41,5" concept="4" />
-      <node id="1038097819968653124" at="26,0,30,0" concept="5" trace="getPresentation#()Ljava/lang/String;" />
-      <node id="1038097819968653124" at="30,0,34,0" concept="5" trace="isApplicable#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/openapi/editor/EditorContext;)Z" />
-      <node id="1038097819968653124" at="34,0,38,0" concept="5" trace="isSurroundWith#()Z" />
-      <node id="1038097819968653124" at="47,0,51,0" concept="5" trace="getDescription#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/openapi/editor/EditorContext;)Ljava/lang/String;" />
-      <node id="1038097819968653124" at="65,0,69,0" concept="5" trace="getDescriptor#()Ljetbrains/mps/intentions/IntentionDescriptor;" />
-      <node id="7654328074273773931" at="58,12,63,7" concept="0" />
-      <node id="1038097819968653124" at="38,0,44,0" concept="5" trace="instances#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/openapi/editor/EditorContext;)Ljava/util/Collection;" />
-      <node id="7654328074273773923" at="52,78,63,7" concept="4" />
-      <node id="1038097819968653124" at="51,0,65,0" concept="5" trace="execute#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/openapi/editor/EditorContext;)V" />
-      <scope id="1038097819968653124" at="45,38,45,38" />
-      <scope id="1038097819968653124" at="23,47,24,316" />
-      <scope id="1038097819968653124" at="27,35,28,38" />
-      <scope id="1038097819968653124" at="31,84,32,16" />
-      <scope id="1038097819968653124" at="35,35,36,17" />
-      <scope id="1038097819968653124" at="39,37,40,140" />
-      <scope id="1038097819968653126" at="48,87,49,285" />
-      <scope id="1038097819968653124" at="66,48,67,53" />
-      <scope id="1038097819968653124" at="45,0,47,0" />
-      <scope id="1038097819968653124" at="23,0,26,0" />
-      <scope id="1038097819968653124" at="26,0,30,0" />
-      <scope id="1038097819968653124" at="30,0,34,0">
+      <node id="1038097819968653124" at="24,0,25,0" concept="3" trace="myCachedExecutable" />
+      <node id="1038097819968653124" at="26,47,27,164" concept="9" />
+      <node id="1038097819968653124" at="31,35,32,38" concept="7" />
+      <node id="1038097819968653124" at="36,35,37,17" concept="7" />
+      <node id="1038097819968653124" at="41,37,42,105" concept="2" />
+      <node id="1038097819968653124" at="43,5,44,30" concept="7" />
+      <node id="7654328074273773999" at="51,87,52,152" concept="7" />
+      <node id="7654328074273773966" at="57,81,58,100" concept="6" />
+      <node id="7654328074273773972" at="58,100,59,122" concept="2" />
+      <node id="7654328074273773981" at="59,122,60,126" concept="2" />
+      <node id="7654328074273773990" at="60,126,61,64" concept="2" />
+      <node id="7654328074273773934" at="62,14,63,104" concept="6" />
+      <node id="7654328074273773940" at="63,104,64,119" concept="2" />
+      <node id="7654328074273773949" at="64,119,65,123" concept="2" />
+      <node id="7654328074273773958" at="65,123,66,61" concept="2" />
+      <node id="1038097819968653124" at="71,86,72,18" concept="7" />
+      <node id="1038097819968653124" at="78,48,79,53" concept="7" />
+      <node id="1038097819968653124" at="85,0,86,0" concept="8" trace="CheckedDotExpression$Du" />
+      <node id="1038097819968653124" at="86,0,87,0" concept="8" trace="DotExpression$yW" />
+      <node id="1038097819968653124" at="90,0,91,0" concept="8" trace="operand$w6IR" />
+      <node id="1038097819968653124" at="91,0,92,0" concept="8" trace="operation$gs9E" />
+      <node id="1038097819968653124" at="47,0,49,0" concept="1" trace="IntentionImplementation#()V" />
+      <node id="1038097819968653124" at="26,0,29,0" concept="1" trace="MakeDotExpressionChecked_Intention#()V" />
+      <node id="1038097819968653124" at="40,99,43,5" concept="4" />
+      <node id="1038097819968653124" at="30,0,34,0" concept="5" trace="getPresentation#()Ljava/lang/String;" />
+      <node id="1038097819968653124" at="35,0,39,0" concept="5" trace="isSurroundWith#()Z" />
+      <node id="1038097819968653124" at="50,0,54,0" concept="5" trace="getDescription#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/openapi/editor/EditorContext;)Ljava/lang/String;" />
+      <node id="1038097819968653124" at="70,0,74,0" concept="5" trace="isApplicable#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/openapi/editor/EditorContext;)Z" />
+      <node id="1038097819968653124" at="77,0,81,0" concept="5" trace="getDescriptor#()Ljetbrains/mps/openapi/intentions/IntentionDescriptor;" />
+      <node id="7654328074273773931" at="62,12,67,7" concept="0" />
+      <node id="1038097819968653124" at="40,0,46,0" concept="5" trace="instances#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/openapi/editor/EditorContext;)Ljava/util/Collection;" />
+      <node id="7654328074273773923" at="56,78,67,7" concept="4" />
+      <node id="1038097819968653124" at="55,0,69,0" concept="5" trace="execute#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/openapi/editor/EditorContext;)V" />
+      <scope id="1038097819968653124" at="47,38,47,38" />
+      <scope id="1038097819968653124" at="26,47,27,164" />
+      <scope id="1038097819968653124" at="31,35,32,38" />
+      <scope id="1038097819968653124" at="36,35,37,17" />
+      <scope id="1038097819968653124" at="41,37,42,105" />
+      <scope id="1038097819968653126" at="51,87,52,152" />
+      <scope id="1038097819968653124" at="71,86,72,18" />
+      <scope id="1038097819968653124" at="78,48,79,53" />
+      <scope id="1038097819968653124" at="47,0,49,0" />
+      <scope id="1038097819968653124" at="26,0,29,0" />
+      <scope id="1038097819968653124" at="30,0,34,0" />
+      <scope id="1038097819968653124" at="35,0,39,0" />
+      <scope id="1038097819968653124" at="40,99,44,30" />
+      <scope id="1038097819968653124" at="50,0,54,0">
         <var name="editorContext" id="1038097819968653124" />
         <var name="node" id="1038097819968653124" />
       </scope>
-      <scope id="1038097819968653124" at="34,0,38,0" />
-      <scope id="1038097819968653124" at="38,99,42,30" />
-      <scope id="1038097819968653124" at="47,0,51,0">
-        <var name="editorContext" id="1038097819968653124" />
-        <var name="node" id="1038097819968653124" />
-      </scope>
-      <scope id="7654328074273773924" at="53,214,57,64">
+      <scope id="7654328074273773924" at="57,81,61,64">
         <var name="dotExpression" id="7654328074273773967" />
       </scope>
-      <scope id="7654328074273773932" at="58,14,62,61">
+      <scope id="7654328074273773932" at="62,14,66,61">
         <var name="checkedDot" id="7654328074273773935" />
       </scope>
-      <scope id="1038097819968653124" at="65,0,69,0" />
-      <scope id="1038097819968653124" at="38,0,44,0">
+      <scope id="1038097819968653124" at="70,0,74,0">
+        <var name="editorContext" id="1038097819968653124" />
+        <var name="node" id="1038097819968653124" />
+      </scope>
+      <scope id="1038097819968653124" at="77,0,81,0" />
+      <scope id="1038097819968653124" at="40,0,46,0">
         <var name="context" id="1038097819968653124" />
         <var name="node" id="1038097819968653124" />
       </scope>
-      <scope id="1038097819968653128" at="52,78,63,7" />
-      <scope id="1038097819968653124" at="51,0,65,0">
+      <scope id="1038097819968653128" at="56,78,67,7" />
+      <scope id="1038097819968653124" at="55,0,69,0">
         <var name="editorContext" id="1038097819968653124" />
         <var name="node" id="1038097819968653124" />
       </scope>
-      <unit id="1038097819968653124" at="44,0,70,0" name="jetbrains.mps.baseLanguage.checkedDots.intentions.MakeDotExpressionChecked_Intention$IntentionImplementation" />
-      <unit id="1038097819968653124" at="21,0,71,0" name="jetbrains.mps.baseLanguage.checkedDots.intentions.MakeDotExpressionChecked_Intention" />
+      <unit id="1038097819968653124" at="84,0,88,0" name="jetbrains.mps.baseLanguage.checkedDots.intentions.MakeDotExpressionChecked_Intention$CONCEPTS" />
+      <unit id="1038097819968653124" at="89,0,93,0" name="jetbrains.mps.baseLanguage.checkedDots.intentions.MakeDotExpressionChecked_Intention$LINKS" />
+      <unit id="1038097819968653124" at="46,0,83,0" name="jetbrains.mps.baseLanguage.checkedDots.intentions.MakeDotExpressionChecked_Intention$IntentionImplementation" />
+      <unit id="1038097819968653124" at="23,0,94,0" name="jetbrains.mps.baseLanguage.checkedDots.intentions.MakeDotExpressionChecked_Intention" />
     </file>
   </root>
 </debug-info>

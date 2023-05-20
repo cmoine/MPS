@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082113931046:jetbrains.mps.baseLanguage.structure.ContinueStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144226303539:jetbrains.mps.baseLanguage.structure.ForeachStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/5351203823916750322:jetbrains.mps.baseLanguage.structure.TryUniversalStatement" />
+  <root nodeRef="r:6c6710f1-72ef-4241-9ac5-bafd05beea2c(jetbrains.mps.kotlin.stubs.commonStubs)/2728382324535685903">
+    <file name="KotlinCommonStubModelRoot.java">
+      <node id="2728382324535685907" at="26,0,27,0" concept="3" trace="packageScope" />
+      <node id="2728382324535685963" at="29,27,30,52" concept="8" />
+      <node id="8317865157550016683" at="35,40,36,67" concept="8" />
+      <node id="5777502864270531013" at="40,45,41,61" concept="8" />
+      <node id="5713552291127630448" at="44,74,45,128" concept="8" />
+      <node id="5777502864270602212" at="48,97,49,70" concept="8" />
+      <node id="2728382324535685984" at="53,46,54,24" concept="2" />
+      <node id="1396585305527554897" at="54,24,55,57" concept="7" />
+      <node id="1396585305527556733" at="56,28,57,47" concept="2" />
+      <node id="1396585305527589087" at="57,47,58,35" concept="2" />
+      <node id="3383172759878957573" at="62,36,63,17" concept="8" />
+      <node id="3383172759878913986" at="66,64,67,17" concept="8" />
+      <node id="2728382324535685990" at="71,48,72,40" concept="9" />
+      <node id="2728382324535685991" at="72,40,73,16" concept="8" />
+      <node id="2728382324535685994" at="77,53,78,16" concept="8" />
+      <node id="2728382324535685911" at="28,0,32,0" concept="6" trace="getType#()Ljava/lang/String;" />
+      <node id="5777502864270498778" at="39,0,43,0" concept="6" trace="isFileIncluded#(Ljetbrains/mps/vfs/IFile;)Z" />
+      <node id="5777502864270498790" at="43,0,47,0" concept="6" trace="createPackageModelReference#(Ljava/lang/String;)Lorg/jetbrains/mps/openapi/model/SModelReference;" />
+      <node id="5777502864270498802" at="47,0,51,0" concept="6" trace="createDescriptor#(Lorg/jetbrains/mps/openapi/model/SModelReference;Ljetbrains/mps/extapi/persistence/FolderSetDataSource;)Ljetbrains/mps/extapi/model/SModelBase;" />
+      <node id="1396585305527555754" at="55,57,59,5" concept="5" />
+      <node id="3383172759878947424" at="61,0,65,0" concept="6" trace="canCreateModels#()Z" />
+      <node id="3383172759878901891" at="65,0,69,0" concept="6" trace="canCreateModel#(Lorg/jetbrains/mps/openapi/model/SModelName;)Z" />
+      <node id="2728382324535685913" at="33,0,38,0" concept="6" trace="loadModels#()Ljava/lang/Iterable;" />
+      <node id="2728382324535685917" at="75,0,80,0" concept="6" trace="createModel#(Ljava/lang/String;)Lorg/jetbrains/mps/openapi/model/SModel;" />
+      <node id="2728382324535685916" at="69,0,75,0" concept="6" trace="getModel#(Lorg/jetbrains/mps/openapi/model/SModelId;)Lorg/jetbrains/mps/openapi/model/SModel;" />
+      <node id="2728382324535685914" at="52,0,61,0" concept="6" trace="load#(Lorg/jetbrains/mps/openapi/persistence/Memento;)V" />
+      <scope id="2728382324535685929" at="29,27,30,52" />
+      <scope id="2728382324535685934" at="35,40,36,67" />
+      <scope id="5777502864270498786" at="40,45,41,61" />
+      <scope id="5777502864270498798" at="44,74,45,128" />
+      <scope id="5777502864270498812" at="48,97,49,70" />
+      <scope id="3383172759878947430" at="62,36,63,17" />
+      <scope id="3383172759878901903" at="66,64,67,17" />
+      <scope id="2728382324535685957" at="77,53,78,16" />
+      <scope id="1396585305527555756" at="56,28,58,35" />
+      <scope id="2728382324535685951" at="71,48,73,16" />
+      <scope id="2728382324535685911" at="28,0,32,0" />
+      <scope id="5777502864270498778" at="39,0,43,0">
+        <var name="file" id="5777502864270498779" />
+      </scope>
+      <scope id="5777502864270498790" at="43,0,47,0">
+        <var name="packageName" id="5777502864270498794" />
+      </scope>
+      <scope id="5777502864270498802" at="47,0,51,0">
+        <var name="dataSource" id="5777502864270498808" />
+        <var name="reference" id="5777502864270498806" />
+      </scope>
+      <scope id="3383172759878947424" at="61,0,65,0" />
+      <scope id="3383172759878901891" at="65,0,69,0">
+        <var name="modelName" id="3383172759878901896" />
+      </scope>
+      <scope id="2728382324535685913" at="33,0,38,0" />
+      <scope id="2728382324535685917" at="75,0,80,0">
+        <var name="string" id="2728382324535685956" />
+      </scope>
+      <scope id="2728382324535685939" at="53,46,59,5">
+        <var name="packScope" id="1396585305527554898" />
+      </scope>
+      <scope id="2728382324535685916" at="69,0,75,0">
+        <var name="id" id="2728382324535685950" />
+      </scope>
+      <scope id="2728382324535685914" at="52,0,61,0">
+        <var name="memento" id="2728382324535685938" />
+      </scope>
+      <unit id="2728382324535685903" at="21,0,82,0" name="jetbrains.mps.kotlin.stubs.commonStubs.KotlinCommonStubModelRoot" />
+    </file>
+  </root>
+  <root nodeRef="r:6c6710f1-72ef-4241-9ac5-bafd05beea2c(jetbrains.mps.kotlin.stubs.commonStubs)/2728382324535686216">
+    <file name="KotlinCommonStubModelDescriptor.java">
+      <node id="6581343381391540145" at="43,0,44,0" concept="11" trace="LOG" />
+      <node id="2728382324535686299" at="45,102,46,34" concept="13" />
+      <node id="2728382324535686324" at="50,54,51,163" concept="8" />
+      <node id="8317865157552562690" at="54,44,55,61" concept="8" />
+      <node id="7974320546220442559" at="59,46,60,46" concept="7" />
+      <node id="7974320546220442564" at="60,46,61,82" concept="7" />
+      <node id="7974320546220442572" at="61,82,62,0" concept="10" />
+      <node id="7974320546220442573" at="62,0,63,66" concept="7" />
+      <node id="7974320546220442579" at="63,66,64,64" concept="2" />
+      <node id="7974320546220442585" at="64,64,65,16" concept="8" />
+      <node id="2504906858938308010" at="70,9,71,92" concept="7" />
+      <node id="8055674930055479227" at="71,92,72,47" concept="7" />
+      <node id="7507186091284958250" at="73,58,74,57" concept="7" />
+      <node id="2993321679758091342" at="74,57,75,0" concept="10" />
+      <node id="2993321679758098649" at="75,0,76,45" concept="9" />
+      <node id="7507186091285028305" at="77,94,78,92" concept="7" />
+      <node id="994881788504124733" at="79,46,80,127" concept="2" />
+      <node id="994881788504727692" at="80,127,81,21" concept="1" />
+      <node id="2993321679758102500" at="83,9,84,0" concept="10" />
+      <node id="2993321679758026722" at="84,0,85,69" concept="9" />
+      <node id="2046200886302643611" at="85,69,86,77" concept="7" />
+      <node id="2046200886302682953" at="86,77,87,57" concept="2" />
+      <node id="2993321679757713216" at="87,57,88,97" concept="7" />
+      <node id="2993321679758041687" at="88,97,89,0" concept="10" />
+      <node id="2993321679758037832" at="89,0,90,16" concept="9" />
+      <node id="9095929092629255103" at="90,16,91,42" concept="7" />
+      <node id="2993321679757610236" at="91,42,92,97" concept="7" />
+      <node id="1636441641301520950" at="92,97,93,102" concept="7" />
+      <node id="2993321679757741025" at="93,102,94,113" concept="2" />
+      <node id="2993321679757690112" at="94,113,95,0" concept="10" />
+      <node id="2504906858938308039" at="95,0,96,32" concept="2" />
+      <node id="201646934710292576" at="97,7,98,0" concept="10" />
+      <node id="2504906858938308048" at="98,0,99,37" concept="8" />
+      <node id="994881788504347071" at="100,29,101,65" concept="2" />
+      <node id="2504906858941148045" at="102,5,103,0" concept="10" />
+      <node id="2504906858938308067" at="103,0,104,16" concept="8" />
+      <node id="2728382324535686216" at="108,0,109,0" concept="11" trace="KotlinFile$4h" />
+      <node id="2728382324535686216" at="112,0,113,0" concept="11" trace="name$MnvL" />
+      <node id="2728382324535686226" at="45,0,48,0" concept="0" trace="KotlinCommonStubModelDescriptor#(Lorg/jetbrains/mps/openapi/model/SModelReference;Ljetbrains/mps/extapi/persistence/FolderSetDataSource;)V" />
+      <node id="2728382324535686235" at="49,0,53,0" concept="6" trace="importedLanguageIds#()Ljava/util/Collection;" />
+      <node id="8317865157552458773" at="53,0,57,0" concept="6" trace="isIncluded#(Ljetbrains/mps/vfs/IFile;)Z" />
+      <node id="7974320546221913214" at="78,92,82,11" concept="5" />
+      <node id="7701598947863267978" at="76,45,83,9" concept="5" />
+      <node id="8317865157552285578" at="58,0,67,0" concept="6" trace="createRootNode#(Ljetbrains/mps/vfs/IFile;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="69793204460733200" at="72,47,97,7" concept="4" />
+      <node id="2504906858938308008" at="69,64,102,5" concept="14" />
+      <node id="2504906858937828946" at="68,0,106,0" concept="6" trace="loadDeep#(Ljetbrains/mps/smodel/SModel;)Ljava/util/Collection;" />
+      <scope id="2728382324535686261" at="45,102,46,34" />
+      <scope id="2728382324535686278" at="50,54,51,163" />
+      <scope id="8317865157552458779" at="54,44,55,61" />
+      <scope id="2504906858938308056" at="100,29,101,65" />
+      <scope id="7974320546221913216" at="79,46,81,21" />
+      <scope id="2504906858938308052" at="100,5,102,5">
+        <var name="e" id="2504906858938308053" />
+      </scope>
+      <scope id="2728382324535686226" at="45,0,48,0">
+        <var name="modelReference" id="2728382324535686259" />
+        <var name="source" id="2728382324535686260" />
+      </scope>
+      <scope id="2728382324535686235" at="49,0,53,0" />
+      <scope id="8317865157552458773" at="53,0,57,0">
+        <var name="file" id="8317865157552458777" />
+      </scope>
+      <scope id="7701598947863267980" at="77,94,82,11">
+        <var name="fileVersion" id="7507186091285028306" />
+      </scope>
+      <scope id="8317865157552285585" at="59,46,65,16">
+        <var name="fileName" id="7974320546220442560" />
+        <var name="lazy" id="7974320546220442565" />
+        <var name="node" id="7974320546220442574" />
+      </scope>
+      <scope id="8317865157552285578" at="58,0,67,0">
+        <var name="file" id="8317865157552285581" />
+      </scope>
+      <scope id="69793204460733206" at="73,58,96,32">
+        <var name="inputStream" id="7507186091284958251" />
+        <var name="nameSolver" id="1636441641301520951" />
+        <var name="pkg" id="2993321679757713217" />
+        <var name="registry" id="2046200886302643612" />
+        <var name="root" id="9095929092629255104" />
+        <var name="visitor" id="2993321679757610237" />
+      </scope>
+      <scope id="69793204460733200" at="72,47,97,7">
+        <var name="file" id="69793204460733202" />
+      </scope>
+      <scope id="2504906858938308009" at="70,9,99,37">
+        <var name="refFactory" id="2504906858938308011" />
+        <var name="topFiles" id="8055674930055479228" />
+      </scope>
+      <scope id="2504906858937828953" at="69,64,104,16" />
+      <scope id="2504906858937828946" at="68,0,106,0">
+        <var name="model" id="2504906858937828949" />
+      </scope>
+      <unit id="2728382324535686216" at="107,0,110,0" name="jetbrains.mps.kotlin.stubs.commonStubs.KotlinCommonStubModelDescriptor$CONCEPTS" />
+      <unit id="2728382324535686216" at="111,0,114,0" name="jetbrains.mps.kotlin.stubs.commonStubs.KotlinCommonStubModelDescriptor$PROPS" />
+      <unit id="2728382324535686216" at="41,0,115,0" name="jetbrains.mps.kotlin.stubs.commonStubs.KotlinCommonStubModelDescriptor" />
+    </file>
+  </root>
+  <root nodeRef="r:6c6710f1-72ef-4241-9ac5-bafd05beea2c(jetbrains.mps.kotlin.stubs.commonStubs)/2728382324535686886">
+    <file name="KotlinCommonStubModelRootFactory.java">
+      <node id="6505065053926065431" at="14,29,15,43" concept="8" />
+      <node id="2728382324535686889" at="12,0,17,0" concept="6" trace="create#()Lorg/jetbrains/mps/openapi/persistence/ModelRoot;" />
+      <scope id="2728382324535686893" at="14,29,15,43" />
+      <scope id="2728382324535686889" at="12,0,17,0" />
+      <unit id="2728382324535686886" at="10,0,18,0" name="jetbrains.mps.kotlin.stubs.commonStubs.KotlinCommonStubModelRootFactory" />
+    </file>
+  </root>
+  <root nodeRef="r:6c6710f1-72ef-4241-9ac5-bafd05beea2c(jetbrains.mps.kotlin.stubs.commonStubs)/2728382324536352273">
+    <file name="KotlinCommonConstants.java">
+      <node id="3412418837087968082" at="9,0,10,0" concept="11" trace="KOTLIN_METADATA_EXTENSION" />
+      <node id="7701598947862972412" at="10,0,11,0" concept="11" trace="KOTLIN_METADATA_LIB_EXTENSION" />
+      <node id="2728382324536310027" at="11,0,12,0" concept="11" trace="KOTLIN_BUILTINS_EXTENSION" />
+      <node id="7701598947863030345" at="13,47,14,135" concept="8" />
+      <node id="7701598947863029723" at="13,0,16,0" concept="12" trace="isKotlinLib#(Ljava/lang/String;)Z" />
+      <scope id="7701598947863029726" at="13,47,14,135" />
+      <scope id="7701598947863029723" at="13,0,16,0">
+        <var name="s" id="7701598947863029995" />
+      </scope>
+      <unit id="2728382324536352273" at="7,0,17,0" name="jetbrains.mps.kotlin.stubs.commonStubs.KotlinCommonConstants" />
+    </file>
+  </root>
+</debug-info>
+

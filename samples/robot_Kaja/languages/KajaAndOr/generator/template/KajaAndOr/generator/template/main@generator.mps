@@ -2,14 +2,13 @@
 <model ref="r:68ff4d81-c742-4f6c-8cc1-cdf3e94f2c2e(jetbrains.mps.samples.KajaAndOr.generator.template.main@generator)">
   <persistence version="9" />
   <languages>
-    <use id="b401a680-8325-4110-8fd3-84331ff25bef" name="jetbrains.mps.lang.generator" version="0" />
-    <use id="d7706f63-9be2-479c-a3da-ae92af1e64d5" name="jetbrains.mps.lang.generator.generationContext" version="0" />
+    <use id="b401a680-8325-4110-8fd3-84331ff25bef" name="jetbrains.mps.lang.generator" version="4" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="a2eb3a43-fcc2-4200-80dc-c60110c4862d(jetbrains.mps.devkit.templates)" />
   </languages>
   <imports>
     <import index="6ms5" ref="r:d3eab93d-0231-40c7-b095-39bdf7a89e92(jetbrains.mps.samples.KajaAndOr.structure)" />
     <import index="guwi" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.io(JDK/)" />
-    <import index="hyzk" ref="r:3ab3501c-2f4b-48e6-9b6c-e31ff8ef3185(jetbrains.mps.samples.Kaja.generator.template.main@generator)" />
     <import index="wyt6" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)" implicit="true" />
   </imports>
   <registry>
@@ -129,7 +128,7 @@
                   <ref role="3cqZAo" to="wyt6:~System.out" resolve="out" />
                 </node>
                 <node concept="liA8E" id="1DJg4Tz2Qtn" role="2OqNvi">
-                  <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String):void" resolve="println" />
+                  <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String)" resolve="println" />
                   <node concept="Xl_RD" id="1DJg4Tz2Qto" role="37wK5m">
                     <property role="Xl_RC" value="" />
                   </node>
@@ -147,7 +146,7 @@
                       <node concept="3clFbF" id="1DJg4Tz2Uv_" role="3cqZAp">
                         <node concept="2OqwBi" id="1DJg4Tz2UvA" role="3clFbG">
                           <node concept="3TrEf2" id="1DJg4Tz2UvB" role="2OqNvi">
-                            <ref role="3Tt5mk" to="6ms5:1DJg4Tz2$od" />
+                            <ref role="3Tt5mk" to="6ms5:1DJg4Tz2$od" resolve="right" />
                           </node>
                           <node concept="30H73N" id="1DJg4Tz2UvC" role="2Oq$k0" />
                         </node>
@@ -164,7 +163,7 @@
                       <node concept="3clFbF" id="1DJg4Tz2Uvr" role="3cqZAp">
                         <node concept="2OqwBi" id="1DJg4Tz2Uvs" role="3clFbG">
                           <node concept="3TrEf2" id="1DJg4Tz2Uvt" role="2OqNvi">
-                            <ref role="3Tt5mk" to="6ms5:1DJg4Tz2$oc" />
+                            <ref role="3Tt5mk" to="6ms5:1DJg4Tz2$oc" resolve="left" />
                           </node>
                           <node concept="30H73N" id="1DJg4Tz2Uvu" role="2Oq$k0" />
                         </node>
@@ -194,7 +193,7 @@
                   <ref role="1PxDUh" to="wyt6:~System" resolve="System" />
                 </node>
                 <node concept="liA8E" id="1DJg4Tz2Quf" role="2OqNvi">
-                  <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String):void" resolve="println" />
+                  <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String)" resolve="println" />
                   <node concept="Xl_RD" id="1DJg4Tz2Qug" role="37wK5m">
                     <property role="Xl_RC" value="" />
                   </node>
@@ -212,7 +211,7 @@
                       <node concept="3clFbF" id="1DJg4Tz2Uwm" role="3cqZAp">
                         <node concept="2OqwBi" id="1DJg4Tz2Uwn" role="3clFbG">
                           <node concept="3TrEf2" id="1DJg4Tz2Uwo" role="2OqNvi">
-                            <ref role="3Tt5mk" to="6ms5:1DJg4Tz2$od" />
+                            <ref role="3Tt5mk" to="6ms5:1DJg4Tz2$od" resolve="right" />
                           </node>
                           <node concept="30H73N" id="1DJg4Tz2Uwp" role="2Oq$k0" />
                         </node>
@@ -229,7 +228,7 @@
                       <node concept="3clFbF" id="1DJg4Tz2Uwc" role="3cqZAp">
                         <node concept="2OqwBi" id="1DJg4Tz2Uwd" role="3clFbG">
                           <node concept="3TrEf2" id="1DJg4Tz2Uwe" role="2OqNvi">
-                            <ref role="3Tt5mk" to="6ms5:1DJg4Tz2$oc" />
+                            <ref role="3Tt5mk" to="6ms5:1DJg4Tz2$oc" resolve="left" />
                           </node>
                           <node concept="30H73N" id="1DJg4Tz2Uwf" role="2Oq$k0" />
                         </node>

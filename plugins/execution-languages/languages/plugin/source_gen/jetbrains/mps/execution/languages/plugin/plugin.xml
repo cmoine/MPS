@@ -4,21 +4,17 @@
   <id>jetbrains.mps.execution.languages</id>
   <name>Execution Languages</name>
   <description>Languages and libraries for implementing execution configurations for MPS</description>
-  <version>3.4.5</version>
-  <vendor url="http://www.jetbrains.com/mps/" logo="/MPS_16.png">JetBrains</vendor>
-  <idea-version since-build="143.1" />
+  <version>2023.1</version>
+  <vendor url="http://www.jetbrains.com/mps/">JetBrains</vendor>
+  <idea-version since-build="222.1" />
   
   <depends>jetbrains.mps.debugger.java</depends>
   <depends>jetbrains.mps.debugger.api</depends>
   <depends>jetbrains.mps.execution-api</depends>
-  <application-components>
-    <component>
-      <implementation-class>jetbrains.mps.execution.languages.plugin.Languages_PluginInitializer</implementation-class>
-    </component>
-  </application-components>
   
   <extensions defaultExtensionNs="com.intellij">
     <mps.LanguageLibrary dir="/" />
     <errorHandler implementation="jetbrains.mps.ide.blame.CharismaReporter" />
   </extensions>
+  
 </idea-plugin>

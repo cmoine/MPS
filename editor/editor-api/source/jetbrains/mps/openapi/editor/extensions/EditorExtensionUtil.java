@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,18 +15,23 @@
  */
 package jetbrains.mps.openapi.editor.extensions;
 
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.openapi.editor.EditorComponent;
-import jetbrains.mps.project.IProject;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.openapi.project.Project;
 
 public class EditorExtensionUtil {
   private EditorExtensionUtil() { }
 
-  public static void extendUsingProject(@NotNull EditorComponent editorComponent, @NotNull IProject project) {
-    EditorExtensionRegistry registry = project.getComponent(EditorExtensionRegistry.class);
+  public static void extendUsingProject(@NotNull EditorComponent editorComponent, @NotNull Project project) {
+    EditorExtensionRegistry registry = ((jetbrains.mps.project.Project) project).getComponent(EditorExtensionRegistry.class);
     if (registry == null) {
       return;
     }
-    registry.extend(editorComponent);
+    try {
+      registry.extend(editorComponent);
+    } catch (LinkageError le) {
+      Logger.getLogger(EditorExtensionUtil.class).error("Caught while trying to apply extensions to the editor component " + editorComponent, le);
+    }
   }
 }

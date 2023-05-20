@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,36 +19,37 @@ import com.intellij.icons.AllIcons.Nodes;
 import com.intellij.ui.LayeredIcon;
 import jetbrains.mps.ide.icons.IdeIcons;
 import jetbrains.mps.ide.ui.tree.MPSTreeNode;
-import jetbrains.mps.openapi.navigation.NavigationSupport;
+import jetbrains.mps.openapi.navigation.ProjectPaneNavigator;
 import jetbrains.mps.project.Project;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SModel;
+import org.jetbrains.mps.openapi.model.SModelReference;
 
 import javax.swing.Icon;
 
 public class SModelReferenceTreeNode extends MPSTreeNode {
-  private SModel myModelDescriptor;
   private Project myProject;
 
-  public SModelReferenceTreeNode(SModel modelDescriptor, Project mpsProject) {
+  public SModelReferenceTreeNode(@NotNull SModel modelDescriptor, @NotNull Project mpsProject) {
+    super(modelDescriptor.getReference());
     myProject = mpsProject;
-    myModelDescriptor = modelDescriptor;
     String name = modelDescriptor.getName().getValue();
-    setUserObject(name);
     setNodeIdentifier(name);
     setAutoExpandable(true);
+    setAllowsChildren(false);
     Icon icon = IdeIcons.MODEL_ICON;
     icon = new LayeredIcon(icon, Nodes.Symlink);
     setIcon(icon);
   }
 
+  private SModelReference getModelReference() {
+    return (SModelReference) getUserObject();
+  }
+
   @Override
   public void doubleClick() {
-    myProject.getModelAccess().runReadAction(new Runnable() {
-      @Override
-      public void run() {
-        NavigationSupport.getInstance().selectInTree(myProject, myModelDescriptor, false);
-      }
-    });
+    // XXX why not focus? It dates back to 1dbb830bc313cdbc389dea5b52107f49b0347720, but I don't understand, why.
+    new ProjectPaneNavigator(myProject).select(getModelReference());
   }
 
   @Override

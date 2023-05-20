@@ -12,12 +12,12 @@ public class MapSequence<U, V> extends AbstractMapSequence<U, V> implements IMap
   protected MapSequence(Map<U, V> map) {
     super(map);
   }
-  public static <P, Q> MapSequence.MapSequenceInitializer<P, Q> fromKeysArray(P... keys) {
+  public static <P, Q> MapSequenceInitializer<P, Q> fromKeysArray(P... keys) {
     Map<P, Q> map = new HashMap<P, Q>();
-    return new MapSequence.MapSequenceInitializer<P, Q>(new MapSequence<P, Q>(map), keys);
+    return new MapSequenceInitializer<P, Q>(new MapSequence<P, Q>(map), keys);
   }
-  public static <P, Q> MapSequence.MapSequenceInitializer<P, Q> fromMapAndKeysArray(Map<P, Q> map, P... keys) {
-    return new MapSequence.MapSequenceInitializer<P, Q>(new MapSequence<P, Q>(map), keys);
+  public static <P, Q> MapSequenceInitializer<P, Q> fromMapAndKeysArray(Map<P, Q> map, P... keys) {
+    return new MapSequenceInitializer<P, Q>(new MapSequence<P, Q>(map), keys);
   }
   public static <P, Q> IMapSequence<P, Q> fromArray(IMapping<P, Q>... mappings) {
     Map<P, Q> map = new HashMap<P, Q>();

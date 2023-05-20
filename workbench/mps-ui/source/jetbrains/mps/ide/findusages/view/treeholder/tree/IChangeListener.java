@@ -16,5 +16,5 @@
 package jetbrains.mps.ide.findusages.view.treeholder.tree;
 
 public interface IChangeListener {
-  public void changed();
+  void changed();
 }

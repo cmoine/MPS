@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<debug-info version="2">
-  <root nodeRef="r:54928e3f-958a-4bc2-abbc-5dd015b1b824(jetbrains.mps.build.sandbox.anttask)/5738701198683704599">
-    <file name="genxmltest.xml">
-      <unit id="5738701198683704599" at="1,0,69,10" name="jetbrains.mps.build.sandbox.anttask.genxmltest" />
-    </file>
-  </root>
-</debug-info>
-

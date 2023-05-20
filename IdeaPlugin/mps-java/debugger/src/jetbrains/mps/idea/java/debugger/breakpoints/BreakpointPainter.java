@@ -23,11 +23,11 @@ import com.intellij.psi.PsiClass;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtil;
 import jetbrains.mps.debugger.core.breakpoints.BreakpointPainterEx;
-import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.idea.java.trace.GeneratedSourcePosition;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeReference;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.module.SRepository;
 
 /*package private*/ class BreakpointPainter extends BreakpointPainterEx<BreakpointWithHighlighter> {
   public BreakpointPainter(BreakpointWithHighlighter breakpoint) {
@@ -39,19 +39,17 @@ import org.jetbrains.annotations.Nullable;
     return getPosition(myBreakpoint).getNode();
   }
 
-  /**
-   * @deprecated though it's technically feasible to resolve SNodeReference from GeneratedSourcePosition.getNode()
-   *             to SNode here using repository of breakpoint.getProject(), it doesn't look right as there's no guarantee I'm inside read
-   *             action here (from 3 uses of the method, BreakpointIconRenderrer is suspicious, others are inside read).
-   *             It's not smart to take read action here (using breakpoint.getProject()) as well, as SNode return value outside of read action
-   *             makes little sense.
-   *             Please revisit uses of the method and fix them to use SNodeReference instead (expose getPosition() then).
-   */
   @Nullable
-  @Deprecated
-  public static SNode getNodeForBreakpoint(BreakpointWithHighlighter breakpoint) {
+  public static SNode getNodeForBreakpoint(BreakpointWithHighlighter breakpoint, SRepository repository) {
+    assert repository.getModelAccess().canRead();
+    SNodeReference nodeRef = getNodeReferenceForBreakpoint(breakpoint);
+    return nodeRef == null ? null : nodeRef.resolve(repository);
+  }
+
+  @Nullable
+  public static SNodeReference getNodeReferenceForBreakpoint(BreakpointWithHighlighter breakpoint) {
     GeneratedSourcePosition gsp = getPosition(breakpoint);
-    return gsp == null || gsp.getNode() == null ? null : gsp.getNode().resolve(ProjectHelper.getProjectRepository(breakpoint.getProject()));
+    return gsp == null ? null : gsp.getNode();
   }
 
   private static GeneratedSourcePosition getPosition(BreakpointWithHighlighter breakpoint) {

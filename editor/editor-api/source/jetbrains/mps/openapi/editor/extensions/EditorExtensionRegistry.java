@@ -17,7 +17,6 @@ package jetbrains.mps.openapi.editor.extensions;
 
 import jetbrains.mps.openapi.editor.EditorComponent;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Maintains a set of {@linkplain EditorExtension editor extensions} that are used to extend editor components. All extensions will be given the opportunity

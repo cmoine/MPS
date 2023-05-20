@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ package jetbrains.mps.editor.runtime.style;
  * Date: 1/14/13
  */
 public final class InheritableStyleAttribute<T> extends AbstractStyleAttribute<T> {
-  private T myDefaultValue;
+  private final T myDefaultValue;
 
   /*package*/ InheritableStyleAttribute(String name, T defaultValue, boolean register) {
     super(name, register);

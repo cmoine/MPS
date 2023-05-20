@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <root nodeRef="r:5e7f4bbc-a70e-4ed1-a92d-22eea98a2a8c(jetbrains.mps.lang.editor.intentions.test)/3148679935644987401">
+    <file name="InvokeParameterizedIntentionWithNode_Test.java">
+      <node id="3148679935644987401" at="19,54,20,60" concept="4" />
+      <node id="3148679935644987401" at="24,76,25,36" concept="1" />
+      <node id="3148679935644987401" at="30,52,31,19" concept="4" />
+      <node id="3148679935644987401" at="35,51,36,72" concept="1" />
+      <node id="3148679935644987422" at="36,72,37,176" concept="1" />
+      <node id="3148679935644987401" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="3148679935644987401" at="19,0,22,0" concept="0" trace="InvokeParameterizedIntentionWithNode_Test#()V" />
+      <node id="3148679935644987401" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="3148679935644987401" at="23,0,27,0" concept="2" trace="test_InvokeParameterizedIntentionWithNode#()V" />
+      <node id="3148679935644987401" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="3148679935644987401" at="19,54,20,60" />
+      <scope id="3148679935644987401" at="24,76,25,36" />
+      <scope id="3148679935644987401" at="30,52,31,19" />
+      <scope id="3148679935644987401" at="35,51,37,176" />
+      <scope id="3148679935644987401" at="19,0,22,0" />
+      <scope id="3148679935644987401" at="30,0,33,0">
+        <var name="owner" id="3148679935644987401" />
+      </scope>
+      <scope id="3148679935644987401" at="23,0,27,0" />
+      <scope id="3148679935644987401" at="34,0,39,0" />
+      <unit id="3148679935644987401" at="28,0,40,0" name="jetbrains.mps.lang.editor.intentions.test.InvokeParameterizedIntentionWithNode_Test$TestBody" />
+      <unit id="3148679935644987401" at="14,0,41,0" name="jetbrains.mps.lang.editor.intentions.test.InvokeParameterizedIntentionWithNode_Test" />
+    </file>
+  </root>
+</debug-info>
+

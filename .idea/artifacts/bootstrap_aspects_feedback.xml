@@ -1,0 +1,28 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="bootstrap:aspects-feedback">
+    <output-path>$PROJECT_DIR$/lib</output-path>
+    <root id="root">
+      <element id="archive" name="mps-context.jar">
+        <element id="module-output" name="context" />
+      </element>
+      <element id="archive" name="mps-feedback-api.jar">
+        <element id="module-output" name="feedback-api" />
+      </element>
+      <element id="archive" name="mps-messages-api.jar">
+        <element id="module-output" name="messages-api" />
+      </element>
+      <element id="archive" name="mps-messages-for-legacy-constraints.jar">
+        <element id="module-output" name="messages-for-legacy-constraints" />
+      </element>
+      <element id="archive" name="mps-messages-for-rules.jar">
+        <element id="module-output" name="messages-for-rules" />
+      </element>
+      <element id="archive" name="mps-messages-for-structure.jar">
+        <element id="module-output" name="messages-for-structure" />
+      </element>
+      <element id="archive" name="mps-problem.jar">
+        <element id="module-output" name="problem" />
+      </element>
+    </root>
+  </artifact>
+</component>

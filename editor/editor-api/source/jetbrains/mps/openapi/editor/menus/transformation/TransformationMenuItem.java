@@ -15,6 +15,14 @@
  */
 package jetbrains.mps.openapi.editor.menus.transformation;
 
+import jetbrains.mps.openapi.editor.menus.EditorMenuTraceInfo;
+import org.jetbrains.annotations.Nullable;
+
 public interface TransformationMenuItem {
   <ResultT> ResultT accept(TransformationMenuItemVisitor<ResultT> visitor);
+
+  @Nullable
+  default EditorMenuTraceInfo getTraceInfo() {
+    return null;
+  }
 }

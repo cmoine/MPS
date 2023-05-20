@@ -17,15 +17,18 @@ package jetbrains.mps.plugins;
 
 import jetbrains.mps.plugins.applicationplugins.BaseApplicationPlugin;
 import jetbrains.mps.plugins.projectplugins.BaseProjectPlugin;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * hashCode() and equals() must be overridden for PluginContributor!
  */
 public class PluginContributor extends AbstractPluginFactory {
+  @Nullable
   public BaseProjectPlugin createProjectPlugin() {
     return null;
   }
 
+  @Nullable
   public BaseApplicationPlugin createApplicationPlugin() {
     return null;
   }
@@ -39,50 +42,5 @@ public class PluginContributor extends AbstractPluginFactory {
       return (T) createApplicationPlugin();
     }
     throw new IllegalArgumentException("Can't create instance: " + aClass);
-  }
-
-  public static PluginContributor adapt(AbstractPluginFactory factory) {
-    if (factory instanceof PluginContributor) {
-      return (PluginContributor) factory;
-    }
-    return new AbstractPluginFactoryAdapter(factory);
-  }
-
-  private static class AbstractPluginFactoryAdapter extends PluginContributor {
-    private final AbstractPluginFactory myFactory;
-
-    public AbstractPluginFactoryAdapter(AbstractPluginFactory factory) {
-      myFactory = factory;
-    }
-
-    @Override
-    public BaseProjectPlugin createProjectPlugin() {
-      return create(BaseProjectPlugin.class);
-    }
-
-    @Override
-    public BaseApplicationPlugin createApplicationPlugin() {
-      return create(BaseApplicationPlugin.class);
-    }
-
-    @Override
-    public <T> T create(Class<T> aClass) {
-      return myFactory.create(aClass);
-    }
-
-    @Override
-    public int hashCode() {
-      return myFactory.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-      return o instanceof AbstractPluginFactoryAdapter && (((AbstractPluginFactoryAdapter) o).myFactory == myFactory);
-    }
-
-    @Override
-    public String toString() {
-      return myFactory + " adapter";
-    }
   }
 }

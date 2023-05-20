@@ -2,8 +2,7 @@
 <model ref="r:470fa7be-e760-4359-9d80-fc3ff0249d52(jetbrains.mps.execution.settings.dataFlow)">
   <persistence version="9" />
   <languages>
-    <use id="7fa12e9c-b949-4976-b4fa-19accbc320b4" name="jetbrains.mps.lang.dataFlow" version="0" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="00000000-0000-4000-0000-443879f56b80(jetbrains.mps.devkit.aspect.dataflow)" />
   </languages>
   <imports>
     <import index="fb9u" ref="r:0194e190-08ef-44f6-ab95-d9cffdb7e27b(jetbrains.mps.execution.settings.structure)" />
@@ -47,7 +46,7 @@
           <node concept="2OqwBi" id="O$iR4J$gec" role="3Ah4Yx">
             <node concept="3__QtB" id="O$iR4J$ged" role="2Oq$k0" />
             <node concept="3TrEf2" id="O$iR4J$gee" role="2OqNvi">
-              <ref role="3Tt5mk" to="fb9u:O$iR4J$g45" />
+              <ref role="3Tt5mk" to="fb9u:O$iR4J$g45" resolve="expression" />
             </node>
           </node>
         </node>

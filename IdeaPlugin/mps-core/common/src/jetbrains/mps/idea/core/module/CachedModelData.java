@@ -26,7 +26,7 @@ import java.io.IOException;
  * evgeny, 12/12/12
  */
 public class CachedModelData {
-    public enum Kind { Unknown, Regular, Binary, JavaStub };
+    public enum Kind { Unknown, Regular, RegularFilePerRoot, Binary, JavaStub };
 
     private final String file;
     private final Object header;
@@ -59,6 +59,9 @@ public class CachedModelData {
         } else if (myCacheKind == Kind.Regular && header instanceof SModelHeader) {
             stream.writeByte(55);
             ((SModelHeader) header).save(stream);
+        } else if (myCacheKind == Kind.RegularFilePerRoot && header instanceof SModelHeader) {
+            stream.writeByte(58);
+            ((SModelHeader) header).save(stream);
         } else if (myCacheKind == Kind.JavaStub && header instanceof JavaStubModelHeader) {
             stream.writeByte(57);
             ((JavaStubModelHeader) header).save(stream);
@@ -75,6 +78,9 @@ public class CachedModelData {
         Object header = null;
         if (headerKind == 55) {
             cacheKind = Kind.Regular;
+            header = SModelHeader.load(stream);
+        } else if (headerKind == 58) {
+            cacheKind = Kind.RegularFilePerRoot;
             header = SModelHeader.load(stream);
         } else if (headerKind == 56) {
             cacheKind = Kind.Binary;

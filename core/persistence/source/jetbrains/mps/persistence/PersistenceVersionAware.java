@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +15,7 @@
  */
 package jetbrains.mps.persistence;
 
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SModel;
-import org.jetbrains.mps.openapi.persistence.ModelFactory;
 
 /**
  * PROVISIONAL API
@@ -37,7 +35,7 @@ import org.jetbrains.mps.openapi.persistence.ModelFactory;
  * free-floating models) or default (for regular SModel with associated DataSource) persistence mechanism.
  * @author Artem Tikhomirov
  */
-public interface PersistenceVersionAware extends SModel {
+public interface PersistenceVersionAware extends SModel, LoadedStrategyAware {
   /**
    * Indicated persistence version for model serialization
    * @param version persistence version number, or <code>-1</code> for undefined/unknown
@@ -49,12 +47,4 @@ public interface PersistenceVersionAware extends SModel {
    * @return persistence version number, or <code>-1</code> when undefined
    */
   int getPersistenceVersion();
-
-  /**
-   * Actual {@link org.jetbrains.mps.openapi.persistence.ModelFactory} which is currently responsible for model load/save,
-   * or <code>null</code> if model knowns nothing about persistence at the moment.
-   * @return model load/save facility or <code>null</code> if undefined
-   */
-  @Nullable
-  ModelFactory getModelFactory();
 }

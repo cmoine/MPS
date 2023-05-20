@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,12 @@
  */
 package jetbrains.mps.ide.make;
 
-import com.intellij.openapi.components.AbstractProjectComponent;
 import com.intellij.openapi.project.Project;
 
-public abstract class StartupModuleMaker extends AbstractProjectComponent {
+public abstract class StartupModuleMaker {
+  protected StartupModuleMaker() {
+
+  }
   protected StartupModuleMaker(Project project) {
-    super(project);
   }
 }

@@ -4,27 +4,42 @@ package jetbrains.mps.lang.editor.table.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_CellModel_HierarchycalTable = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CellModel_Table = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_QueryFunction_TableModel = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_CellModel_HierarchycalTable;
+  private ConceptPresentation props_CellModel_Table;
+  private ConceptPresentation props_QueryFunction_TableModel;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.CellModel_HierarchycalTable:
+        if (props_CellModel_HierarchycalTable == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("hierarchycal table");
+          props_CellModel_HierarchycalTable = cpb.create();
+        }
         return props_CellModel_HierarchycalTable;
-      case 1:
+      case LanguageConceptSwitch.CellModel_Table:
+        if (props_CellModel_Table == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("table");
+          props_CellModel_Table = cpb.create();
+        }
         return props_CellModel_Table;
-      case 2:
+      case LanguageConceptSwitch.QueryFunction_TableModel:
+        if (props_QueryFunction_TableModel == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("getTableModel");
+          props_QueryFunction_TableModel = cpb.create();
+        }
         return props_QueryFunction_TableModel;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

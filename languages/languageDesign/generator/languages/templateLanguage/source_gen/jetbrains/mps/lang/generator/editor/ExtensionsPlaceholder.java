@@ -9,7 +9,6 @@ import java.util.Collections;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Constant;
 
 public class ExtensionsPlaceholder implements ConceptEditorComponent {
   @NotNull
@@ -17,12 +16,6 @@ public class ExtensionsPlaceholder implements ConceptEditorComponent {
     return Collections.emptyList();
   }
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createConstant_yd37m7_a(editorContext, node);
-  }
-  private EditorCell createConstant_yd37m7_a(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, "");
-    editorCell.setCellId("Constant_yd37m7_a");
-    editorCell.setDefaultText("");
-    return editorCell;
+    return new ExtensionsPlaceholder_ComponentBuilder_a(editorContext, node).createCell();
   }
 }

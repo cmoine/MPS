@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <root nodeRef="r:670792d0-128c-40fc-8930-b689fe55838f(jetbrains.mps.generator.tests.fork@tests)/5681589587221880058">
+    <file name="GenPlanForkTest.java">
+      <node id="5681589587221880059" at="17,0,18,0" concept="1" trace="myArg_EM1" />
+      <node id="6346338635721490689" at="18,0,19,0" concept="1" trace="myArg_RM1" />
+      <node id="6346338635721490721" at="19,0,20,0" concept="1" trace="myArg_RM2" />
+      <node id="5681589587221880074" at="20,0,21,0" concept="1" trace="myArg_ForkPlan" />
+      <node id="5681589587221880059" at="24,34,25,131" concept="0" />
+      <node id="6346338635721490689" at="25,131,26,112" concept="0" />
+      <node id="6346338635721490721" at="26,112,27,112" concept="0" />
+      <node id="5681589587221880074" at="27,112,28,131" concept="0" />
+      <node id="6346338635721487604" at="33,40,34,41" concept="3" />
+      <node id="6346338635721487604" at="34,41,35,25" concept="3" />
+      <node id="6346338635721487604" at="35,25,36,18" concept="0" />
+      <node id="6346338635721487604" at="36,18,37,61" concept="0" />
+      <node id="6346338635721487604" at="37,61,38,18" concept="0" />
+      <node id="6346338635721487604" at="38,18,39,58" concept="3" />
+      <node id="6346338635721487604" at="39,58,40,75" concept="0" />
+      <node id="6346338635721487604" at="40,75,41,52" concept="0" />
+      <node id="5681589587221880058" at="23,0,30,0" concept="2" trace="prepareArguments#()V" />
+      <node id="6346338635721487604" at="32,0,43,0" concept="2" trace="testTransformAndMatch0#()V" />
+      <scope id="5681589587221880058" at="24,34,28,131" />
+      <scope id="5681589587221880058" at="23,0,30,0" />
+      <scope id="6346338635721487604" at="33,40,41,52">
+        <var name="i" id="6346338635721487604" />
+        <var name="outputModels" id="6346338635721487604" />
+        <var name="t" id="6346338635721487604" />
+      </scope>
+      <scope id="6346338635721487604" at="32,0,43,0" />
+      <unit id="5681589587221880058" at="13,0,44,0" name="jetbrains.mps.generator.tests.fork.GenPlanForkTest" />
+    </file>
+  </root>
+</debug-info>
+

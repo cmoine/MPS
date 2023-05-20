@@ -21,14 +21,15 @@ import javax.swing.JComponent;
 import java.awt.Color;
 
 public interface ModelRootEntryExt {
-
   /**
    * Implement this method if details component need to be more complicated than simple text
-   * Other wise just return null
+   * Otherwise just return null
    * @return presentation of special component or null for default implementation
    */
   @Nullable
-  public JComponent getDetailsComponent();
+  JComponent getDetailsComponent();
+
   void setForegroundColor(Color foregroundColor);
+
   void resetForegroundColor();
 }

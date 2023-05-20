@@ -18,5 +18,5 @@ package jetbrains.mps.generator.info;
 import jetbrains.mps.vfs.IFile;
 
 public interface ForeignPathsProvider {
-  public String belongsToForeignPath(IFile path);
+  String belongsToForeignPath(IFile path);
 }

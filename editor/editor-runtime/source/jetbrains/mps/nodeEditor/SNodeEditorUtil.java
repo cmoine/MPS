@@ -15,24 +15,11 @@
  */
 package jetbrains.mps.nodeEditor;
 
-import jetbrains.mps.util.annotation.ToRemove;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.model.SNode;
 
 public class SNodeEditorUtil {
   public static void setSingleChild(SNode node, SContainmentLink role, org.jetbrains.mps.openapi.model.SNode childNode) {
-    SNode oldChild = jetbrains.mps.util.SNodeOperations.getChild(node, role);
-    if (oldChild != null) {
-      node.removeChild(oldChild);
-    }
-    if (childNode != null) {
-      node.addChild(role, childNode);
-    }
-  }
-
-  @Deprecated
-  @ToRemove(version = 3.2)
-  public static void setSingleChild(SNode node, String role, org.jetbrains.mps.openapi.model.SNode childNode) {
     SNode oldChild = jetbrains.mps.util.SNodeOperations.getChild(node, role);
     if (oldChild != null) {
       node.removeChild(oldChild);

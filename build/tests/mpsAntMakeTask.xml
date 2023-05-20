@@ -1,0 +1,34 @@
+<project name="mpsAntMakeTask" default="check" basedir="../../" xmlns:mps="antmps:jetbrains.mps.build.ant">
+  <!-- description="Demonstrates how to write MakeTask" -->
+
+  <!--this will be specified from outside, shall point to unzip of MPS-xxx.yyy.zip produced by Binaries or a regular MPS distribution -->
+  <property name="mps_home" location="build/artifacts/mps"/>
+  <property name="mps.ant.log" value="warn" />
+
+  <path id="path.mps.ant.path">
+    <pathelement location="${mps_home}/lib/ant/lib/ant-mps.jar" />
+    <pathelement location="${mps_home}/lib/util.jar" />
+    <pathelement location="${mps_home}/lib/3rd-party-rt.jar" />
+  </path>
+
+  <taskdef resource="jetbrains/mps/build/ant/antlib.xml" classpathref="path.mps.ant.path" uri="antmps:jetbrains.mps.build.ant"/>
+
+  <mps:generator-settings id="m2m-defaults" strictMode="true" parallelThreads="4" inplaceTransform="true" warnWrongChild="true" createStaticRefs="true" messageLevel="info" />
+
+  <target name="check">
+    <echo message="mps.make START"/>
+    <mps:make mpsHome="${mps_home}" logLevel="${mps.ant.log}">
+      <mps:settings refid="m2m-defaults" />
+
+      <mps:module file="${basedir}/samples/math/solutions/pluginSolution/jetbrains.mps.baseLanguage.math.pluginSolution.msd" />
+      <mps:module file="${basedir}/samples/math/runtimeSolution/jetbrains.mps.baseLanguage.math.runtime.msd" />
+      <mps:module file="${basedir}/samples/math/jetbrains.mps.baseLanguage.math.mpl" />
+
+      <mps:jvmargs>
+        <arg value="-ea" />
+        <arg value="-Xmx512m" />
+      </mps:jvmargs>
+    </mps:make>
+    <echo message="mps.make END"/>
+  </target>
+</project>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,14 +21,14 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 
-public class MapSrcMacroContext extends TemplateQueryContextWithMacro {
+public class MapSrcMacroContext extends TemplateQueryContext {
   private SNode myParentOutputNode;
 
   /**
    * @since 3.1
    */
   public MapSrcMacroContext(@NotNull TemplateContext context, SNode parentOutputNode, @NotNull SNodeReference macroNode) {
-    super(context, macroNode);
+    super(macroNode, context);
     myParentOutputNode = parentOutputNode;
   }
 
@@ -37,7 +37,7 @@ public class MapSrcMacroContext extends TemplateQueryContextWithMacro {
    * @since 3.3
    */
   public MapSrcMacroContext(@NotNull NodePostProcessor postProcessor) {
-    super(postProcessor.getTemplateContext(), postProcessor.getTemplateNode());
+    super(postProcessor.getTemplateNode(), postProcessor.getTemplateContext());
     myParentOutputNode = postProcessor.getOutputAnchor().getParent();
   }
 

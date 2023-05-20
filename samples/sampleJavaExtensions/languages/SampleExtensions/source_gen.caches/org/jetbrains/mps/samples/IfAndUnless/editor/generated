@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="8dxe64b6fuwvrh89wi6evg90dcg606i" />
+<product version="3" modelHash="-eevc9tdwfgqsqtpd0296tdbyg60dcb3">
+  <files names="EditorAspectDescriptorImpl.java:Flow_Editor.java:Flow_EditorBuilder_a.java:MyIfStatement_Editor.java:MyIfStatement_EditorBuilder_a.java:UnlessStatement_Editor.java:UnlessStatement_EditorBuilder_a.java" />
+</product>
 

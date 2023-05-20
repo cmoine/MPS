@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="eszdfjok37h3ef8xejkxggq4n3rc8w9" />
+<product version="3" modelHash="dtxe5n57nsg9ozs9nkayveadqli52t1">
+  <files names="Complex_is_Numeric_SubtypingRule.java:Complex_is_Object_weak_SubtypingRule.java:TypesystemDescriptor.java:subtype_ComplexType_SubtypingRule.java:typeof_AbsExpression_InferenceRule.java:typeof_ArgExpression_InferenceRule.java:typeof_ComplexExpression_InferenceRule.java:typeof_ConjugateComplexExpression_InferenceRule.java:typeof_DegreeComplexExpression_InferenceRule.java:typeof_ImExpression_InferenceRule.java:typeof_ImaginaryUnit_InferenceRule.java:typeof_ReExpression_InferenceRule.java" />
+</product>
 

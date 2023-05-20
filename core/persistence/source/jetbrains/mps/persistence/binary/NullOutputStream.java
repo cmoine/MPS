@@ -15,23 +15,25 @@
  */
 package jetbrains.mps.persistence.binary;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 import java.io.OutputStream;
 
 class NullOutputStream extends OutputStream {
 
   @Override
-  public void write(int b) throws IOException {
+  public void write(int b) {
     // > /dev/null
   }
 
   @Override
-  public void write(byte[] b) throws IOException {
+  public void write(@NotNull byte[] b) {
     // > /dev/null
   }
 
   @Override
-  public void write(byte[] b, int off, int len) throws IOException {
+  public void write(@NotNull byte[] b, int off, int len) {
     // > /dev/null
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,24 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.java.psi.impl;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.PsiReference;
-import com.intellij.util.IncorrectOperationException;
-import jetbrains.mps.idea.core.psi.impl.MPSPsiNode;
-import jetbrains.mps.idea.core.psi.impl.MPSPsiRef;
-import jetbrains.mps.idea.java.refactoring.MoveRenameBatch;
 import jetbrains.mps.smodel.DynamicReference;
 import jetbrains.mps.smodel.SNodeId.Foreign;
+import jetbrains.mps.smodel.SNodePointer;
 import jetbrains.mps.smodel.StaticReference;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeId;
-import org.jetbrains.mps.openapi.model.SNodeReference;
 import org.jetbrains.mps.openapi.model.SReference;
 
 /**
@@ -42,11 +37,11 @@ import org.jetbrains.mps.openapi.model.SReference;
  */
 public class MPSDotBasedPsiRef extends MPSPsiJavaRef {
 
-  public MPSDotBasedPsiRef(String role, SModelReference model, SNodeId nodeId, PsiManager manager) {
+  public MPSDotBasedPsiRef(SReferenceLink role, SModelReference model, SNodeId nodeId, PsiManager manager) {
     super(role, model, nodeId, manager);
   }
 
-  public MPSDotBasedPsiRef(String role, String referenceText, PsiManager manager) {
+  public MPSDotBasedPsiRef(SReferenceLink role, String referenceText, PsiManager manager) {
     super(role, referenceText, manager);
   }
 
@@ -62,11 +57,11 @@ public class MPSDotBasedPsiRef extends MPSPsiJavaRef {
         @Override
         public void run() {
           SReference sref = getSReference();
-          String role = sref.getRole();
+          SReferenceLink role = sref.getLink();
           SNode source = sref.getSourceNode();
 
           if (sref instanceof StaticReference) {
-            String oldTargetIdString = ((StaticReference) sref).getTargetNodeId().toString();
+            String oldTargetIdString = sref.getTargetNodeId().toString();
             int lastDot = oldTargetIdString.lastIndexOf(".");
             String newTargetIdString;
             if (lastDot < 0) {
@@ -76,8 +71,7 @@ public class MPSDotBasedPsiRef extends MPSPsiJavaRef {
             }
             SNodeId newTargetId = new Foreign(newTargetIdString);
 
-            SReference newRef = StaticReference.create(role, source, sref.getTargetSModelReference(), newTargetId);
-            source.setReference(role, newRef);
+            source.setReference(role, new SNodePointer(sref.getTargetSModelReference(), newTargetId));
 
           } else if (sref instanceof DynamicReference) {
             ((DynamicReference) sref).setResolveInfo(newName);

@@ -3,207 +3,256 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144226303539:jetbrains.mps.baseLanguage.structure.ForeachStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <root>
     <file name="DataFlowAspectDescriptorImpl.java">
-      <unit at="15,0,121,0" name="jetbrains.mps.baseLanguage.math.dataFlow.DataFlowAspectDescriptorImpl" />
+      <unit at="15,0,60,0" name="jetbrains.mps.baseLanguage.math.dataFlow.DataFlowAspectDescriptorImpl" />
     </file>
   </root>
   <root nodeRef="r:48b4a246-e052-4ee3-ba92-1505c2e94044(jetbrains.mps.baseLanguage.math.dataFlow)/1236428213402">
     <file name="MathSymbolIndexReference_DataFlow.java">
-      <node id="1236428216296" at="11,60,12,303" concept="0" />
-      <node id="1236428213402" at="11,0,14,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
-      <scope id="1236428213404" at="11,60,12,303" />
-      <scope id="1236428213402" at="11,0,14,0">
+      <node id="1236428216296" at="12,60,13,201" concept="0" />
+      <node id="1236428213402" at="17,0,18,0" concept="3" trace="indexRef$Qa4L" />
+      <node id="1236428213402" at="12,0,15,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="1236428213404" at="12,60,13,201" />
+      <scope id="1236428213402" at="12,0,15,0">
         <var name="_context" id="1236428213402" />
       </scope>
-      <unit id="1236428213402" at="10,0,15,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MathSymbolIndexReference_DataFlow" />
+      <unit id="1236428213402" at="16,0,19,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MathSymbolIndexReference_DataFlow$LINKS" />
+      <unit id="1236428213402" at="11,0,20,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MathSymbolIndexReference_DataFlow" />
     </file>
   </root>
   <root nodeRef="r:48b4a246-e052-4ee3-ba92-1505c2e94044(jetbrains.mps.baseLanguage.math.dataFlow)/1236428241304">
     <file name="MathSymbolIndex_DataFlow.java">
-      <node id="1236595047854" at="12,60,13,212" concept="0" />
-      <node id="1236428243667" at="13,212,14,154" concept="0" />
-      <node id="1236428241304" at="12,0,16,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
-      <scope id="1236428241306" at="12,60,14,154" />
-      <scope id="1236428241304" at="12,0,16,0">
+      <node id="1236595047854" at="13,60,14,108" concept="0" />
+      <node id="1236428243667" at="14,108,15,154" concept="0" />
+      <node id="1236428241304" at="19,0,20,0" concept="3" trace="iterable$obD7" />
+      <node id="1236428241304" at="13,0,17,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="1236428241306" at="13,60,15,154" />
+      <scope id="1236428241304" at="13,0,17,0">
         <var name="_context" id="1236428241304" />
       </scope>
-      <unit id="1236428241304" at="11,0,17,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MathSymbolIndex_DataFlow" />
+      <unit id="1236428241304" at="18,0,21,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MathSymbolIndex_DataFlow$LINKS" />
+      <unit id="1236428241304" at="12,0,22,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MathSymbolIndex_DataFlow" />
     </file>
   </root>
   <root nodeRef="r:48b4a246-e052-4ee3-ba92-1505c2e94044(jetbrains.mps.baseLanguage.math.dataFlow)/1236428269346">
     <file name="MathSymbol_DataFlow.java">
-      <node id="1236428335500" at="12,60,13,207" concept="0" />
-      <node id="1236428397970" at="13,207,14,216" concept="0" />
-      <node id="1236428409745" at="14,216,15,214" concept="0" />
-      <node id="1236428269346" at="12,0,17,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
-      <scope id="1236428269348" at="12,60,15,214" />
-      <scope id="1236428269346" at="12,0,17,0">
+      <node id="1236428335500" at="13,60,14,103" concept="0" />
+      <node id="1236428397970" at="14,103,15,112" concept="0" />
+      <node id="1236428409745" at="15,112,16,110" concept="0" />
+      <node id="1236428269346" at="20,0,21,0" concept="3" trace="var$HIsb" />
+      <node id="1236428269346" at="21,0,22,0" concept="3" trace="precondition$WNRO" />
+      <node id="1236428269346" at="22,0,23,0" concept="3" trace="expression$XRsK" />
+      <node id="1236428269346" at="13,0,18,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="1236428269348" at="13,60,16,110" />
+      <scope id="1236428269346" at="13,0,18,0">
         <var name="_context" id="1236428269346" />
       </scope>
-      <unit id="1236428269346" at="11,0,18,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MathSymbol_DataFlow" />
+      <unit id="1236428269346" at="19,0,24,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MathSymbol_DataFlow$LINKS" />
+      <unit id="1236428269346" at="12,0,25,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MathSymbol_DataFlow" />
     </file>
   </root>
   <root nodeRef="r:48b4a246-e052-4ee3-ba92-1505c2e94044(jetbrains.mps.baseLanguage.math.dataFlow)/1236595058300">
     <file name="MathSymbolFromToIndex_DataFlow.java">
-      <node id="1236595061381" at="13,60,14,154" concept="0" />
-      <node id="1236595367597" at="14,154,15,208" concept="0" />
-      <node id="1236595372169" at="15,208,16,408" concept="0" />
-      <node id="1236595058300" at="13,0,18,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
-      <scope id="1236595058302" at="13,60,16,408" />
-      <scope id="1236595058300" at="13,0,18,0">
+      <node id="1236595061381" at="15,60,16,154" concept="0" />
+      <node id="1236595367597" at="16,154,17,104" concept="0" />
+      <node id="1236595372169" at="17,104,18,183" concept="0" />
+      <node id="1236595058300" at="22,0,23,0" concept="3" trace="from$fvPa" />
+      <node id="1236595058300" at="23,0,24,0" concept="3" trace="upperBound$uhZY" />
+      <node id="1236595058300" at="27,0,28,0" concept="3" trace="MathSymbol$tZ" />
+      <node id="1236595058300" at="15,0,20,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="1236595058302" at="15,60,18,183" />
+      <scope id="1236595058300" at="15,0,20,0">
         <var name="_context" id="1236595058300" />
       </scope>
-      <unit id="1236595058300" at="12,0,19,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MathSymbolFromToIndex_DataFlow" />
+      <unit id="1236595058300" at="26,0,29,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MathSymbolFromToIndex_DataFlow$CONCEPTS" />
+      <unit id="1236595058300" at="21,0,25,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MathSymbolFromToIndex_DataFlow$LINKS" />
+      <unit id="1236595058300" at="14,0,30,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MathSymbolFromToIndex_DataFlow" />
     </file>
   </root>
   <root nodeRef="r:48b4a246-e052-4ee3-ba92-1505c2e94044(jetbrains.mps.baseLanguage.math.dataFlow)/1237104084169">
     <file name="DivExpressionFraction_DataFlow.java">
-      <node id="1237104089312" at="12,60,13,213" concept="0" />
-      <node id="1237104097196" at="13,213,14,215" concept="0" />
-      <node id="1237104084169" at="12,0,16,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
-      <scope id="1237104084171" at="12,60,14,215" />
-      <scope id="1237104084169" at="12,0,16,0">
+      <node id="1237104089312" at="13,60,14,109" concept="0" />
+      <node id="1237104097196" at="14,109,15,111" concept="0" />
+      <node id="1237104084169" at="19,0,20,0" concept="3" trace="numerator$Pd8p" />
+      <node id="1237104084169" at="20,0,21,0" concept="3" trace="denominator$xxc3" />
+      <node id="1237104084169" at="13,0,17,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="1237104084171" at="13,60,15,111" />
+      <scope id="1237104084169" at="13,0,17,0">
         <var name="_context" id="1237104084169" />
       </scope>
-      <unit id="1237104084169" at="11,0,17,0" name="jetbrains.mps.baseLanguage.math.dataFlow.DivExpressionFraction_DataFlow" />
+      <unit id="1237104084169" at="18,0,22,0" name="jetbrains.mps.baseLanguage.math.dataFlow.DivExpressionFraction_DataFlow$LINKS" />
+      <unit id="1237104084169" at="12,0,23,0" name="jetbrains.mps.baseLanguage.math.dataFlow.DivExpressionFraction_DataFlow" />
     </file>
   </root>
   <root nodeRef="r:48b4a246-e052-4ee3-ba92-1505c2e94044(jetbrains.mps.baseLanguage.math.dataFlow)/1418611629042596876">
     <file name="MatrixZero_DataFlow.java">
-      <node id="1418611629042596879" at="12,60,13,218" concept="0" />
-      <node id="1418611629042596882" at="13,218,14,221" concept="0" />
-      <node id="1418611629042596876" at="12,0,16,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
-      <scope id="1418611629042596878" at="12,60,14,221" />
-      <scope id="1418611629042596876" at="12,0,16,0">
+      <node id="1418611629042596879" at="13,60,14,104" concept="0" />
+      <node id="1418611629042596882" at="14,104,15,107" concept="0" />
+      <node id="1418611629042596876" at="19,0,20,0" concept="3" trace="rows$YFA7" />
+      <node id="1418611629042596876" at="20,0,21,0" concept="3" trace="columns$YFP8" />
+      <node id="1418611629042596876" at="13,0,17,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="1418611629042596878" at="13,60,15,107" />
+      <scope id="1418611629042596876" at="13,0,17,0">
         <var name="_context" id="1418611629042596876" />
       </scope>
-      <unit id="1418611629042596876" at="11,0,17,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MatrixZero_DataFlow" />
+      <unit id="1418611629042596876" at="18,0,22,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MatrixZero_DataFlow$LINKS" />
+      <unit id="1418611629042596876" at="12,0,23,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MatrixZero_DataFlow" />
     </file>
   </root>
   <root nodeRef="r:48b4a246-e052-4ee3-ba92-1505c2e94044(jetbrains.mps.baseLanguage.math.dataFlow)/1418611629042596902">
     <file name="LinearSolveOperation_DataFlow.java">
-      <node id="1418611629042596923" at="12,60,13,220" concept="0" />
-      <node id="1418611629042596936" at="13,220,14,220" concept="0" />
-      <node id="1418611629042596927" at="14,220,15,340" concept="0" />
-      <node id="1418611629042596902" at="12,0,17,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
-      <scope id="1418611629042596904" at="12,60,15,340" />
-      <scope id="1418611629042596902" at="12,0,17,0">
+      <node id="1418611629042596923" at="13,60,14,106" concept="0" />
+      <node id="1418611629042596936" at="14,106,15,106" concept="0" />
+      <node id="1418611629042596927" at="15,106,16,226" concept="0" />
+      <node id="1418611629042596902" at="20,0,21,0" concept="3" trace="matrix$CgUG" />
+      <node id="1418611629042596902" at="21,0,22,0" concept="3" trace="vector$Ch9H" />
+      <node id="1418611629042596902" at="13,0,18,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="1418611629042596904" at="13,60,16,226" />
+      <scope id="1418611629042596902" at="13,0,18,0">
         <var name="_context" id="1418611629042596902" />
       </scope>
-      <unit id="1418611629042596902" at="11,0,18,0" name="jetbrains.mps.baseLanguage.math.dataFlow.LinearSolveOperation_DataFlow" />
+      <unit id="1418611629042596902" at="19,0,23,0" name="jetbrains.mps.baseLanguage.math.dataFlow.LinearSolveOperation_DataFlow$LINKS" />
+      <unit id="1418611629042596902" at="12,0,24,0" name="jetbrains.mps.baseLanguage.math.dataFlow.LinearSolveOperation_DataFlow" />
     </file>
   </root>
   <root nodeRef="r:48b4a246-e052-4ee3-ba92-1505c2e94044(jetbrains.mps.baseLanguage.math.dataFlow)/263012178968580059">
     <file name="Determinant_DataFlow.java">
-      <node id="263012178968580066" at="12,60,13,209" concept="0" />
-      <node id="263012178968580059" at="12,0,15,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
-      <scope id="263012178968580061" at="12,60,13,209" />
-      <scope id="263012178968580059" at="12,0,15,0">
+      <node id="263012178968580066" at="13,60,14,105" concept="0" />
+      <node id="263012178968580059" at="18,0,19,0" concept="3" trace="param$CBMQ" />
+      <node id="263012178968580059" at="13,0,16,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="263012178968580061" at="13,60,14,105" />
+      <scope id="263012178968580059" at="13,0,16,0">
         <var name="_context" id="263012178968580059" />
       </scope>
-      <unit id="263012178968580059" at="11,0,16,0" name="jetbrains.mps.baseLanguage.math.dataFlow.Determinant_DataFlow" />
+      <unit id="263012178968580059" at="17,0,20,0" name="jetbrains.mps.baseLanguage.math.dataFlow.Determinant_DataFlow$LINKS" />
+      <unit id="263012178968580059" at="12,0,21,0" name="jetbrains.mps.baseLanguage.math.dataFlow.Determinant_DataFlow" />
     </file>
   </root>
   <root nodeRef="r:48b4a246-e052-4ee3-ba92-1505c2e94044(jetbrains.mps.baseLanguage.math.dataFlow)/3417571330832093636">
     <file name="MatrixConstructor_DataFlow.java">
-      <node id="3417571330832094777" at="14,232,15,48" concept="0" />
-      <node id="3417571330832093640" at="13,60,16,5" concept="1" />
-      <node id="3417571330832093636" at="13,0,18,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
-      <scope id="3417571330832093643" at="14,232,15,48" />
-      <scope id="3417571330832093638" at="13,60,16,5" />
-      <scope id="3417571330832093640" at="13,60,16,5">
+      <node id="3417571330832094777" at="15,118,16,48" concept="0" />
+      <node id="3417571330832093636" at="21,0,22,0" concept="3" trace="components$bfJk" />
+      <node id="3417571330832093640" at="14,60,17,5" concept="1" />
+      <node id="3417571330832093636" at="14,0,19,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="3417571330832093643" at="15,118,16,48" />
+      <scope id="3417571330832093638" at="14,60,17,5" />
+      <scope id="3417571330832093640" at="14,60,17,5">
         <var name="item" id="3417571330832093641" />
       </scope>
-      <scope id="3417571330832093636" at="13,0,18,0">
+      <scope id="3417571330832093636" at="14,0,19,0">
         <var name="_context" id="3417571330832093636" />
       </scope>
-      <unit id="3417571330832093636" at="12,0,19,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MatrixConstructor_DataFlow" />
+      <unit id="3417571330832093636" at="20,0,23,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MatrixConstructor_DataFlow$LINKS" />
+      <unit id="3417571330832093636" at="13,0,24,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MatrixConstructor_DataFlow" />
     </file>
   </root>
   <root nodeRef="r:48b4a246-e052-4ee3-ba92-1505c2e94044(jetbrains.mps.baseLanguage.math.dataFlow)/4253775830167790686">
     <file name="MathFuncExpression_DataFlow.java">
-      <node id="4253775830167790689" at="12,60,13,209" concept="0" />
-      <node id="4253775830167790686" at="12,0,15,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
-      <scope id="4253775830167790688" at="12,60,13,209" />
-      <scope id="4253775830167790686" at="12,0,15,0">
+      <node id="4253775830167790689" at="13,60,14,105" concept="0" />
+      <node id="4253775830167790686" at="18,0,19,0" concept="3" trace="param$CBMQ" />
+      <node id="4253775830167790686" at="13,0,16,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="4253775830167790688" at="13,60,14,105" />
+      <scope id="4253775830167790686" at="13,0,16,0">
         <var name="_context" id="4253775830167790686" />
       </scope>
-      <unit id="4253775830167790686" at="11,0,16,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MathFuncExpression_DataFlow" />
+      <unit id="4253775830167790686" at="17,0,20,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MathFuncExpression_DataFlow$LINKS" />
+      <unit id="4253775830167790686" at="12,0,21,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MathFuncExpression_DataFlow" />
     </file>
   </root>
   <root nodeRef="r:48b4a246-e052-4ee3-ba92-1505c2e94044(jetbrains.mps.baseLanguage.math.dataFlow)/5359814223490144978">
     <file name="VectorInitializer_DataFlow.java">
-      <node id="5359814223490144981" at="12,60,13,224" concept="0" />
-      <node id="5359814223490144984" at="13,224,14,223" concept="0" />
-      <node id="5359814223490146698" at="14,223,15,322" concept="0" />
-      <node id="5359814223490144978" at="12,0,17,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
-      <scope id="5359814223490144980" at="12,60,15,322" />
-      <scope id="5359814223490144978" at="12,0,17,0">
+      <node id="5359814223490144981" at="13,60,14,110" concept="0" />
+      <node id="5359814223490144984" at="14,110,15,109" concept="0" />
+      <node id="5359814223490146698" at="15,109,16,208" concept="0" />
+      <node id="5359814223490144978" at="20,0,21,0" concept="3" trace="expression$edSq" />
+      <node id="5359814223490144978" at="21,0,22,0" concept="3" trace="rowsCount$ee7r" />
+      <node id="5359814223490144978" at="22,0,23,0" concept="3" trace="rowIndex$edDp" />
+      <node id="5359814223490144978" at="13,0,18,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="5359814223490144980" at="13,60,16,208" />
+      <scope id="5359814223490144978" at="13,0,18,0">
         <var name="_context" id="5359814223490144978" />
       </scope>
-      <unit id="5359814223490144978" at="11,0,18,0" name="jetbrains.mps.baseLanguage.math.dataFlow.VectorInitializer_DataFlow" />
+      <unit id="5359814223490144978" at="19,0,24,0" name="jetbrains.mps.baseLanguage.math.dataFlow.VectorInitializer_DataFlow$LINKS" />
+      <unit id="5359814223490144978" at="12,0,25,0" name="jetbrains.mps.baseLanguage.math.dataFlow.VectorInitializer_DataFlow" />
     </file>
   </root>
   <root nodeRef="r:48b4a246-e052-4ee3-ba92-1505c2e94044(jetbrains.mps.baseLanguage.math.dataFlow)/5359814223490146121">
     <file name="MatrixInitializer_DataFlow.java">
-      <node id="5359814223490146124" at="12,60,13,224" concept="0" />
-      <node id="5359814223490146136" at="13,224,14,223" concept="0" />
-      <node id="5359814223490146145" at="14,223,15,223" concept="0" />
-      <node id="5359814223490146680" at="15,223,16,322" concept="0" />
-      <node id="5359814223490146689" at="16,322,17,322" concept="0" />
-      <node id="5359814223490146121" at="12,0,19,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
-      <scope id="5359814223490146123" at="12,60,17,322" />
-      <scope id="5359814223490146121" at="12,0,19,0">
+      <node id="5359814223490146124" at="13,60,14,110" concept="0" />
+      <node id="5359814223490146136" at="14,110,15,109" concept="0" />
+      <node id="5359814223490146145" at="15,109,16,109" concept="0" />
+      <node id="5359814223490146680" at="16,109,17,208" concept="0" />
+      <node id="5359814223490146689" at="17,208,18,208" concept="0" />
+      <node id="5359814223490146121" at="22,0,23,0" concept="3" trace="expression$auxY" />
+      <node id="5359814223490146121" at="23,0,24,0" concept="3" trace="rowsCount$Ah1R" />
+      <node id="5359814223490146121" at="24,0,25,0" concept="3" trace="colsCount$AhgS" />
+      <node id="5359814223490146121" at="25,0,26,0" concept="3" trace="colIndex$M27p" />
+      <node id="5359814223490146121" at="26,0,27,0" concept="3" trace="rowIndex$J$dS" />
+      <node id="5359814223490146121" at="13,0,20,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="5359814223490146123" at="13,60,18,208" />
+      <scope id="5359814223490146121" at="13,0,20,0">
         <var name="_context" id="5359814223490146121" />
       </scope>
-      <unit id="5359814223490146121" at="11,0,20,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MatrixInitializer_DataFlow" />
+      <unit id="5359814223490146121" at="21,0,28,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MatrixInitializer_DataFlow$LINKS" />
+      <unit id="5359814223490146121" at="12,0,29,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MatrixInitializer_DataFlow" />
     </file>
   </root>
   <root nodeRef="r:48b4a246-e052-4ee3-ba92-1505c2e94044(jetbrains.mps.baseLanguage.math.dataFlow)/5359814223490146668">
     <file name="MatrixInitializerIndexReference_DataFlow.java">
-      <node id="5359814223490146671" at="11,60,12,316" concept="0" />
-      <node id="5359814223490146668" at="11,0,14,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
-      <scope id="5359814223490146670" at="11,60,12,316" />
-      <scope id="5359814223490146668" at="11,0,14,0">
+      <node id="5359814223490146671" at="12,60,13,204" concept="0" />
+      <node id="5359814223490146668" at="17,0,18,0" concept="3" trace="index$gez$" />
+      <node id="5359814223490146668" at="12,0,15,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="5359814223490146670" at="12,60,13,204" />
+      <scope id="5359814223490146668" at="12,0,15,0">
         <var name="_context" id="5359814223490146668" />
       </scope>
-      <unit id="5359814223490146668" at="10,0,15,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MatrixInitializerIndexReference_DataFlow" />
+      <unit id="5359814223490146668" at="16,0,19,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MatrixInitializerIndexReference_DataFlow$LINKS" />
+      <unit id="5359814223490146668" at="11,0,20,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MatrixInitializerIndexReference_DataFlow" />
     </file>
   </root>
   <root nodeRef="r:48b4a246-e052-4ee3-ba92-1505c2e94044(jetbrains.mps.baseLanguage.math.dataFlow)/7255837154369354655">
     <file name="ExponentialOperation_DataFlow.java">
-      <node id="7255837154369354658" at="12,60,13,218" concept="0" />
-      <node id="7255837154369354655" at="12,0,15,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
-      <scope id="7255837154369354657" at="12,60,13,218" />
-      <scope id="7255837154369354655" at="12,0,15,0">
+      <node id="7255837154369354658" at="13,60,14,104" concept="0" />
+      <node id="7255837154369354655" at="18,0,19,0" concept="3" trace="expr$yZgT" />
+      <node id="7255837154369354655" at="13,0,16,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="7255837154369354657" at="13,60,14,104" />
+      <scope id="7255837154369354655" at="13,0,16,0">
         <var name="_context" id="7255837154369354655" />
       </scope>
-      <unit id="7255837154369354655" at="11,0,16,0" name="jetbrains.mps.baseLanguage.math.dataFlow.ExponentialOperation_DataFlow" />
+      <unit id="7255837154369354655" at="17,0,20,0" name="jetbrains.mps.baseLanguage.math.dataFlow.ExponentialOperation_DataFlow$LINKS" />
+      <unit id="7255837154369354655" at="12,0,21,0" name="jetbrains.mps.baseLanguage.math.dataFlow.ExponentialOperation_DataFlow" />
     </file>
   </root>
   <root nodeRef="r:48b4a246-e052-4ee3-ba92-1505c2e94044(jetbrains.mps.baseLanguage.math.dataFlow)/758819215871427723">
     <file name="MatrixNorm_DataFlow.java">
-      <node id="758819215871427726" at="12,60,13,215" concept="0" />
-      <node id="758819215871427723" at="12,0,15,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
-      <scope id="758819215871427725" at="12,60,13,215" />
-      <scope id="758819215871427723" at="12,0,15,0">
+      <node id="758819215871427726" at="13,60,14,103" concept="0" />
+      <node id="758819215871427723" at="18,0,19,0" concept="3" trace="mat$LO5N" />
+      <node id="758819215871427723" at="13,0,16,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="758819215871427725" at="13,60,14,103" />
+      <scope id="758819215871427723" at="13,0,16,0">
         <var name="_context" id="758819215871427723" />
       </scope>
-      <unit id="758819215871427723" at="11,0,16,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MatrixNorm_DataFlow" />
+      <unit id="758819215871427723" at="17,0,20,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MatrixNorm_DataFlow$LINKS" />
+      <unit id="758819215871427723" at="12,0,21,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MatrixNorm_DataFlow" />
     </file>
   </root>
   <root nodeRef="r:48b4a246-e052-4ee3-ba92-1505c2e94044(jetbrains.mps.baseLanguage.math.dataFlow)/964810815943255970">
     <file name="MatrixElementAccessExpression_DataFlow.java">
-      <node id="964810815943255973" at="12,60,13,224" concept="0" />
-      <node id="964810815943257102" at="13,224,14,222" concept="0" />
-      <node id="964810815943257112" at="14,222,15,222" concept="0" />
-      <node id="964810815943255970" at="12,0,17,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
-      <scope id="964810815943255972" at="12,60,15,222" />
-      <scope id="964810815943255970" at="12,0,17,0">
+      <node id="964810815943255973" at="13,60,14,110" concept="0" />
+      <node id="964810815943257102" at="14,110,15,108" concept="0" />
+      <node id="964810815943257112" at="15,108,16,108" concept="0" />
+      <node id="964810815943255970" at="20,0,21,0" concept="3" trace="expression$nw1u" />
+      <node id="964810815943255970" at="21,0,22,0" concept="3" trace="colIndex$nwvw" />
+      <node id="964810815943255970" at="22,0,23,0" concept="3" trace="rowIndex$nwgv" />
+      <node id="964810815943255970" at="13,0,18,0" concept="2" trace="build#(Ljetbrains/mps/lang/dataFlow/DataFlowBuilderContext;)V" />
+      <scope id="964810815943255972" at="13,60,16,108" />
+      <scope id="964810815943255970" at="13,0,18,0">
         <var name="_context" id="964810815943255970" />
       </scope>
-      <unit id="964810815943255970" at="11,0,18,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MatrixElementAccessExpression_DataFlow" />
+      <unit id="964810815943255970" at="19,0,24,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MatrixElementAccessExpression_DataFlow$LINKS" />
+      <unit id="964810815943255970" at="12,0,25,0" name="jetbrains.mps.baseLanguage.math.dataFlow.MatrixElementAccessExpression_DataFlow" />
     </file>
   </root>
 </debug-info>

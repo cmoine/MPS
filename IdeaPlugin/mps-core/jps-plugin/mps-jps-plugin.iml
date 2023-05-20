@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+  <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/classes" />
     <output-test url="file://$MODULE_DIR$/testclasses" />
     <exclude-output />
@@ -16,25 +16,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$APPLICATION_HOME_DIR$/lib/jps-model.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$APPLICATION_HOME_DIR$/plugins/devkit/lib/devkit-jps-plugin.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$APPLICATION_HOME_DIR$/lib/jps-builders.jar!/" />
+          <root url="jar://$APPLICATION_HOME_DIR$/plugins/devkit/lib/devkit-jps.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -49,5 +31,8 @@
     <orderEntry type="library" scope="TEST" name="mps-behavior-api" level="project" />
     <orderEntry type="library" scope="TEST" name="mps-behavior-runtime" level="project" />
     <orderEntry type="library" scope="TEST" name="mps-boot-util" level="project" />
+    <orderEntry type="library" scope="TEST" name="mps-project-check" level="project" />
+    <orderEntry type="library" scope="TEST" name="mps-editor-api" level="project" />
+    <orderEntry type="library" name="ideaJavaPlugin" level="project" />
   </component>
 </module>

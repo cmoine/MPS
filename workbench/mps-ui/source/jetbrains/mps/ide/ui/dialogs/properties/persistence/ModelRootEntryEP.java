@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,29 +15,48 @@
  */
 package jetbrains.mps.ide.ui.dialogs.properties.persistence;
 
-import com.intellij.openapi.extensions.AbstractExtensionPointBean;
 import com.intellij.openapi.extensions.ExtensionPointName;
-import com.intellij.openapi.util.LazyInstance;
+import com.intellij.openapi.extensions.PluginAware;
+import com.intellij.openapi.extensions.PluginDescriptor;
 import com.intellij.util.xmlb.annotations.Attribute;
+import jetbrains.mps.project.MPSProject;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.persistence.ModelRoot;
 import org.jetbrains.mps.openapi.ui.persistence.ModelRootEntryFactory;
 
-public class ModelRootEntryEP extends AbstractExtensionPointBean {
+public class ModelRootEntryEP implements PluginAware {
   public static final ExtensionPointName<ModelRootEntryEP> EP_NAME = ExtensionPointName.create("com.intellij.mps.modelRootEntry");
+
+  private PluginDescriptor myPluginDescriptor;
 
   @Attribute("rootType")
   public String rootType;
   @Attribute("className")
   public String className;
+  @Attribute("title")
+  public String title;
 
+  @Override
+  public void setPluginDescriptor(@NotNull PluginDescriptor pluginDescriptor) {
+    myPluginDescriptor = pluginDescriptor;
+  }
 
-  private final LazyInstance<ModelRootEntryFactory> myFactory = new LazyInstance<ModelRootEntryFactory>() {
-    @Override
-    protected Class<ModelRootEntryFactory> getInstanceClass() throws ClassNotFoundException {
-      return findClass(className);
-    }
-  };
+  @Nullable
+  public ModelRootEntryFactory<ModelRoot> getModelRootEntryFactory(MPSProject mpsProject) {
+    // Can't use LazyExtensionInstance as AbstractExtensionPointBean suggests, we may end up with different instanced
+    // of the factory class for different projects. As long as the factory is very straightforward and simple, I don't
+    // bother with multiple instantiations. Next code was inspired by AEPB.instantiate(String, PicoContainer) and
+    // LazyExtensionInstance.createInstance(ComponentManager, PluginDescriptor).
+    // Here, we rely on ComponentManagerImpl.instantiateClass() that supplies CM.this if it finds matching constructor.
+    //
+    // OTOH, seems stupid to go from MPSProject to IDEA Project and then back to MPSProject (root entry editors need the latter),
+    //   worth a refactoring (class from PD and constructor lookup code)
+    return mpsProject.getProject().instantiateClass(className, myPluginDescriptor);
+  }
 
-  public ModelRootEntryFactory getModelRootEntryFactory() {
-    return myFactory.getValue();
+  public String getTitle() {
+    // title is optional, default to root kind
+    return title != null ? title : rootType;
   }
 }

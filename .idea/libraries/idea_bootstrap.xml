@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="idea-bootstrap">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/app.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/util.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/app.jar!/" />
+    </SOURCES>
+  </library>
+</component>

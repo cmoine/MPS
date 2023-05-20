@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="at04yn6lrmisogof7bq5jzkogo07z98" />
+<product version="3" modelHash="-10eovaiwju3r3frucdfk3ia43k3xsju">
+  <files names="BehaviorAspectDescriptor.java:Generator__BehaviorDescriptor.java:MappingConfigExternalRef__BehaviorDescriptor.java:MappingConfigNormalRef__BehaviorDescriptor.java:MappingConfigRefBase__BehaviorDescriptor.java:MappingConfigRefSet__BehaviorDescriptor.java:ModelReference__BehaviorDescriptor.java:ModuleReference__BehaviorDescriptor.java:Module__BehaviorDescriptor.java" />
+</product>
 

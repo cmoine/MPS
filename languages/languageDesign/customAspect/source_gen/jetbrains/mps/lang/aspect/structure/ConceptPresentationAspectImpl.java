@@ -4,46 +4,75 @@ package jetbrains.mps.lang.aspect.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_AspectMethodDescriptor = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GenerationDescriptor = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GenerationDescriptor_ByInterface = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_GenerationDescriptor_Class = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_HelpURL = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IAspectConcept = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_LanguageAspectDescriptor = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_LanguageReference = new ConceptPresentationBuilder().deprecated().create();
-  private final ConceptPresentation props_SimpleLanguageAspectDescriptor = new ConceptPresentationBuilder().deprecated(MetaAdapterFactory.getProperty(0xf159adf43c9340f9L, 0x9c5a1f245a8697afL, 0x2fa4a8cdf0c9b076L, 0x2fa4a8cdf0c9b099L, "helpUrl")).icon(IconContainer.RESOURCE_a0a0i).create();
+  private ConceptPresentation props_AspectRootConfiguration;
+  private ConceptPresentation props_EmptyAspectRootConfig;
+  private ConceptPresentation props_IAspectConcept;
+  private ConceptPresentation props_LanguageAspectDescriptor;
+  private ConceptPresentation props_SimpleAspectOrderRef;
+  private ConceptPresentation props_SimpleLanguageAspectDescriptor;
+  private ConceptPresentation props_SpecificAspectRootConfig;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
-        return props_AspectMethodDescriptor;
-      case 1:
-        return props_GenerationDescriptor;
-      case 2:
-        return props_GenerationDescriptor_ByInterface;
-      case 3:
-        return props_GenerationDescriptor_Class;
-      case 4:
-        return props_HelpURL;
-      case 5:
+      case LanguageConceptSwitch.AspectRootConfiguration:
+        if (props_AspectRootConfiguration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("Tell roots to get started with an aspect model");
+          props_AspectRootConfiguration = cpb.create();
+        }
+        return props_AspectRootConfiguration;
+      case LanguageConceptSwitch.EmptyAspectRootConfig:
+        if (props_EmptyAspectRootConfig == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("EmptyAspectRootConfig");
+          props_EmptyAspectRootConfig = cpb.create();
+        }
+        return props_EmptyAspectRootConfig;
+      case LanguageConceptSwitch.IAspectConcept:
+        if (props_IAspectConcept == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IAspectConcept = cpb.create();
+        }
         return props_IAspectConcept;
-      case 6:
+      case LanguageConceptSwitch.LanguageAspectDescriptor:
+        if (props_LanguageAspectDescriptor == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_LanguageAspectDescriptor = cpb.create();
+        }
         return props_LanguageAspectDescriptor;
-      case 7:
-        return props_LanguageReference;
-      case 8:
+      case LanguageConceptSwitch.SimpleAspectOrderRef:
+        if (props_SimpleAspectOrderRef == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xc9d137c4325944f8L, 0x80ff33ab2b506ee4L, 0x22035699bdd7814bL, 0x22035699bdd7814cL, "target", "", "");
+          props_SimpleAspectOrderRef = cpb.create();
+        }
+        return props_SimpleAspectOrderRef;
+      case LanguageConceptSwitch.SimpleLanguageAspectDescriptor:
+        if (props_SimpleLanguageAspectDescriptor == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder(0xf159adf43c9340f9L, 0x9c5a1f245a8697afL, 0x2fa4a8cdf0c9b076L);
+          cpb.deprecateAggregation(0x54be5be5620c1b77L, "mainLanguages");
+          cpb.presentationByName();
+          cpb.icon(IconContainer.RESOURCE_a0a3a0a5b0i);
+          props_SimpleLanguageAspectDescriptor = cpb.create();
+        }
         return props_SimpleLanguageAspectDescriptor;
+      case LanguageConceptSwitch.SpecificAspectRootConfig:
+        if (props_SpecificAspectRootConfig == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("SpecificAspectRootConfig");
+          props_SpecificAspectRootConfig = cpb.create();
+        }
+        return props_SpecificAspectRootConfig;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

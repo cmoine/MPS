@@ -3,37 +3,27 @@
 
   <property name="ivy.jar.dir" value="${basedir}/ivy" />
   <property name="get.dir" location="${resources}"/>
+  <loadproperties srcfile="version.properties" description="Load versions of dependencies"/>
 
-  <target name="getall" depends="getHelp, getMachelp, getJdk, getOpenjdk"/>
+  <target name="getall" depends="getOpenjdkMac, getOpenjdkWin"/>
 
   <target name="install-ivy">
-    <property name="mps.ivy.home" value="${user.home}"/>
+    <property name="mps.ivy.home" value="${user.home}" description="Property used to set custom path on TeamCity"/>
     <path id="ivy.lib.path">
       <fileset dir="${ivy.jar.dir}" includes="*.jar"/>
     </path>
     <typedef resource="org/apache/ivy/ant/antlib.xml"
              uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
-    <ivy:settings id="teamcity-rep" file="ivyconfRes.xml"/>
   </target>
 
-  <target name="getHelp" depends="install-ivy" description="--> Retreive recent help/mpshelp.jar">
-    <ivy:resolve file="ivyHelp.xml" settingsRef="teamcity-rep"/>
-    <ivy:retrieve file="ivyHelp.xml" settingsRef="teamcity-rep" pattern="${get.dir}/[artifact].[ext]"/>
+  <target name="getOpenjdkWin" depends="install-ivy" description="--> Retreive openJDK/jbr_windows_x64.tar.gz">
+    <ivy:resolve file="ivyOpenjdkWin.xml"/>
+    <ivy:retrieve file="ivyOpenjdkWin.xml" pattern="${get.dir}/[artifact].[ext]"/>
   </target>
 
-  <target name="getMachelp" depends="install-ivy" description="--> Retreive recent help/mac/mpshelp.jar">
-    <ivy:resolve file="ivyMachelp.xml" settingsRef="teamcity-rep"/>
-    <ivy:retrieve file="ivyMachelp.xml" settingsRef="teamcity-rep" pattern="${get.dir}/[artifact].[ext]"/>
-  </target>
-
-  <target name="getJdk" depends="install-ivy" description="--> Retreive recent JDK/jdk.zip">
-    <ivy:resolve file="ivyJdk.xml" settingsRef="teamcity-rep"/>
-    <ivy:retrieve file="ivyJdk.xml" settingsRef="teamcity-rep" pattern="${get.dir}/[artifact].[ext]"/>
-  </target>
-
-  <target name="getOpenjdk" depends="install-ivy" description="--> Retreive recent openJDK/jdk.tar.gz">
-    <ivy:resolve file="ivyOpenjdk.xml" settingsRef="teamcity-rep"/>
-    <ivy:retrieve file="ivyOpenjdk.xml" settingsRef="teamcity-rep" pattern="${get.dir}/[artifact].[ext]"/>
+  <target name="getOpenjdkMac" depends="install-ivy" description="--> Retreive openJDK/jbr_ocx_x64.tar.gz">
+    <ivy:resolve file="ivyOpenjdkMac.xml"/>
+    <ivy:retrieve file="ivyOpenjdkMac.xml" pattern="${get.dir}/[artifact].[ext]"/>
   </target>
 
 </project>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,15 +15,10 @@
  */
 package jetbrains.mps.workbench.goTo.index;
 
-import com.intellij.openapi.components.ApplicationComponent;
-import jetbrains.mps.ide.MPSCoreComponents;
 import jetbrains.mps.persistence.java.library.JavaClassStubModelDescriptor;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.persistence.NavigationParticipant;
-import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
 import org.jetbrains.mps.openapi.util.Consumer;
 
 import java.util.Collection;
@@ -31,12 +26,15 @@ import java.util.Collection;
 /**
  * Contributes root java classes from stub models.
  * The primary difference with {@link MPSModelNavigationContributor} is that we don't use index here
+ * FIXME There's little value in this class as its logic is identical with default behavior from
+ *       {@code jetbrains.mps.workbench.NavigationService}. Yet I decided to keep this class as a reminder
+ *       to implement indexing for java stubs. Then, there is a reason to use dedicated NP to access stub index.
+ *       Besides, may want to implement generic model indexing, in which case would not need dedicated stub handling.
  */
-public class JavaStubNavigationContributor implements NavigationParticipant, ApplicationComponent {
-  private final PersistenceFacade myPersistenceFacade;
+public class JavaStubNavigationContributor implements NavigationParticipant {
 
-  public JavaStubNavigationContributor(MPSCoreComponents coreComponents) {
-    myPersistenceFacade = coreComponents.getPersistenceFacade();
+  public JavaStubNavigationContributor() {
+    // though the extpoint is for Project area, I don't care about the project in this contributor
   }
 
   @Override
@@ -50,20 +48,5 @@ public class JavaStubNavigationContributor implements NavigationParticipant, App
       }
       processedConsumer.consume(model);
     }
-  }
-
-  @Override
-  public void initComponent() {
-    myPersistenceFacade.addNavigationParticipant(this);
-  }
-  @Override
-  public void disposeComponent() {
-    myPersistenceFacade.removeNavigationParticipant(this);
-  }
-  @NonNls
-  @NotNull
-  @Override
-  public String getComponentName() {
-    return JavaStubNavigationContributor.class.getSimpleName();
   }
 }

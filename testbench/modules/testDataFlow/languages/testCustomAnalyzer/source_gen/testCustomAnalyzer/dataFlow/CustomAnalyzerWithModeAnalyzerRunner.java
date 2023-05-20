@@ -25,7 +25,7 @@ public class CustomAnalyzerWithModeAnalyzerRunner extends CustomAnalyzerRunner<I
   public CustomAnalyzerWithModeAnalyzerRunner(SNode node, ProgramFactory<NamedAnalyzerId> factory) {
     super(null, null);
     myNode = node;
-    myAnalyzer = new CustomAnalyzerWithModeAnalyzerRunner.CustomAnalyzerWithModeAnalyzer();
+    myAnalyzer = new CustomAnalyzerWithModeAnalyzer();
     myProgram = factory.createProgram(myNode);
     factory.prepareProgram(myProgram, myNode, new NamedAnalyzerId("testCustomAnalyzer.dataFlow.CustomAnalyzerWithMode"));
   }
@@ -50,15 +50,6 @@ public class CustomAnalyzerWithModeAnalyzerRunner extends CustomAnalyzerRunner<I
     }
     public AnalysisDirection getDirection() {
       return AnalysisDirection.FORWARD;
-    }
-
-    /**
-     * 
-     * @deprecated 
-     */
-    @Deprecated
-    public static String getId() {
-      return "testCustomAnalyzer.dataFlow.CustomAnalyzerWithMode";
     }
   }
 }

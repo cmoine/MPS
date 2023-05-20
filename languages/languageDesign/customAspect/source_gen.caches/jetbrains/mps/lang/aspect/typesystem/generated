@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="2ij6dtzu04hmvhu6ogls84newbfie17" />
+<product version="3" modelHash="-e9ju55xxj2ng4kcw0vebvm2or9opfzb">
+  <files names="TypesystemDescriptor.java:check_SpecificAspectRootConfig_NonTypesystemRule.java" />
+</product>
 

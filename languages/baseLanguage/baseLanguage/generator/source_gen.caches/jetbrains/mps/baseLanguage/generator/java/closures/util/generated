@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="7ize3hffspci5o65v8839ag80ke0v30" />
+<product version="3" modelHash="-3ntusmt8zl89xx1styv9btkgpffftzn">
+  <files names="ClosuresUtil.java:QueriesUtil.java:_QueriesUtil.java" />
+</product>
 

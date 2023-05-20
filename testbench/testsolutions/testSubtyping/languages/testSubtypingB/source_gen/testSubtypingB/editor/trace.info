@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/5351203823916750322:jetbrains.mps.baseLanguage.structure.TryUniversalStatement" />
+  <root>
+    <file name="EditorAspectDescriptorImpl.java">
+      <unit at="15,0,31,0" name="testSubtypingB.editor.EditorAspectDescriptorImpl" />
+    </file>
+  </root>
+  <root nodeRef="r:6f4099d0-c4e4-47a0-be8b-6c6afcc7d666(testSubtypingB.editor)/2078093584693310132">
+    <file name="CustomType_Editor.java">
+      <node id="2078093584693310132" at="11,79,12,76" concept="6" />
+      <node id="2078093584693310132" at="11,0,14,0" concept="4" trace="createEditorCell#(Ljetbrains/mps/openapi/editor/EditorContext;Lorg/jetbrains/mps/openapi/model/SNode;)Ljetbrains/mps/openapi/editor/cells/EditorCell;" />
+      <scope id="2078093584693310132" at="11,79,12,76" />
+      <scope id="2078093584693310132" at="11,0,14,0">
+        <var name="editorContext" id="2078093584693310132" />
+        <var name="node" id="2078093584693310132" />
+      </scope>
+      <unit id="2078093584693310132" at="10,0,15,0" name="testSubtypingB.editor.CustomType_Editor" />
+    </file>
+    <file name="CustomType_EditorBuilder_a.java">
+      <node id="2078093584693310132" at="36,90,37,19" concept="8" />
+      <node id="2078093584693310132" at="37,19,38,18" concept="1" />
+      <node id="2078093584693310132" at="43,26,44,18" concept="6" />
+      <node id="2078093584693310132" at="47,39,48,32" concept="6" />
+      <node id="2078093584693310132" at="51,43,52,118" concept="5" />
+      <node id="2078093584693310132" at="52,118,53,48" concept="1" />
+      <node id="2078093584693310132" at="53,48,54,28" concept="1" />
+      <node id="2078093584693310132" at="54,28,55,31" concept="1" />
+      <node id="2078093584693310156" at="55,31,56,50" concept="1" />
+      <node id="2078093584693310147" at="56,50,57,49" concept="1" />
+      <node id="2078093584693310132" at="57,49,58,22" concept="6" />
+      <node id="2078093584693310156" at="60,42,61,119" concept="5" />
+      <node id="2078093584693310156" at="61,119,62,34" concept="5" />
+      <node id="2078093584693310279" at="62,34,63,56" concept="1" />
+      <node id="2078093584693310156" at="63,56,64,40" concept="1" />
+      <node id="2078093584693310156" at="64,40,65,22" concept="6" />
+      <node id="2078093584693310147" at="67,41,68,39" concept="1" />
+      <node id="2078093584693310147" at="69,9,70,49" concept="5" />
+      <node id="2078093584693310147" at="70,49,71,76" concept="1" />
+      <node id="2078093584693310147" at="71,76,72,149" concept="5" />
+      <node id="2078093584693310147" at="72,149,73,45" concept="1" />
+      <node id="2078093584693310147" at="73,45,74,44" concept="1" />
+      <node id="2078093584693310147" at="74,44,75,36" concept="5" />
+      <node id="2078093584693310147" at="75,36,76,59" concept="1" />
+      <node id="2078093584693316795" at="76,59,77,57" concept="1" />
+      <node id="2078093584693310147" at="77,57,78,42" concept="1" />
+      <node id="2078093584693310147" at="78,42,79,86" concept="1" />
+      <node id="2078093584693310147" at="79,86,80,33" concept="1" />
+      <node id="2078093584693310147" at="80,33,81,155" concept="5" />
+      <node id="2078093584693310147" at="83,41,84,118" concept="6" />
+      <node id="2078093584693310147" at="87,74,88,89" concept="5" />
+      <node id="2078093584693310147" at="88,89,89,145" concept="6" />
+      <node id="2078093584693310147" at="90,12,91,24" concept="6" />
+      <node id="2078093584693310147" at="92,15,93,40" concept="1" />
+      <node id="2078093584693310132" at="98,0,99,0" concept="7" trace="name$MnvL" />
+      <node id="2078093584693310132" at="102,0,103,0" concept="7" trace="PropertyAttribute$Gb" />
+      <node id="2078093584693310132" at="33,0,35,0" concept="2" trace="myNode" />
+      <node id="2078093584693310132" at="47,0,50,0" concept="4" trace="createCell#()Ljetbrains/mps/openapi/editor/cells/EditorCell;" />
+      <node id="2078093584693310147" at="83,0,86,0" concept="4" trace="accept#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="2078093584693310132" at="36,0,40,0" concept="0" trace="CustomType_EditorBuilder_a#(Ljetbrains/mps/openapi/editor/EditorContext;Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <node id="2078093584693310132" at="41,0,46,0" concept="4" trace="getNode#()Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="2078093584693310147" at="81,155,86,9" concept="5" />
+      <node id="2078093584693310147" at="86,9,91,24" concept="3" />
+      <node id="2078093584693310156" at="60,0,67,0" concept="4" trace="createComponent_0#()Ljetbrains/mps/openapi/editor/cells/EditorCell;" />
+      <node id="2078093584693310132" at="51,0,60,0" concept="4" trace="createCollection_0#()Ljetbrains/mps/openapi/editor/cells/EditorCell;" />
+      <node id="2078093584693310147" at="68,39,94,5" concept="9" />
+      <node id="2078093584693310147" at="67,0,96,0" concept="4" trace="createProperty_0#()Ljetbrains/mps/openapi/editor/cells/EditorCell;" />
+      <scope id="2078093584693310132" at="43,26,44,18" />
+      <scope id="2078093584693310132" at="47,39,48,32" />
+      <scope id="2078093584693310147" at="83,41,84,118" />
+      <scope id="2078093584693310147" at="92,15,93,40" />
+      <scope id="2078093584693310132" at="36,90,38,18" />
+      <scope id="2078093584693310147" at="87,74,89,145">
+        <var name="manager" id="2078093584693310147" />
+      </scope>
+      <scope id="2078093584693310132" at="47,0,50,0" />
+      <scope id="2078093584693310147" at="83,0,86,0">
+        <var name="it" id="2078093584693310147" />
+      </scope>
+      <scope id="2078093584693310132" at="36,0,40,0">
+        <var name="context" id="2078093584693310132" />
+        <var name="node" id="2078093584693310132" />
+      </scope>
+      <scope id="2078093584693310132" at="41,0,46,0" />
+      <scope id="2078093584693310156" at="60,42,65,22">
+        <var name="editorCell" id="2078093584693310156" />
+        <var name="style" id="2078093584693310156" />
+      </scope>
+      <scope id="2078093584693310132" at="51,43,58,22">
+        <var name="editorCell" id="2078093584693310132" />
+      </scope>
+      <scope id="2078093584693310156" at="60,0,67,0" />
+      <scope id="2078093584693310132" at="51,0,60,0" />
+      <scope id="2078093584693310147" at="69,9,91,24">
+        <var name="currentPropertyAttributes" id="2078093584693310147" />
+        <var name="editorCell" id="2078093584693310147" />
+        <var name="property" id="2078093584693310147" />
+        <var name="propertyAttributes" id="2078093584693310147" />
+        <var name="style" id="2078093584693310147" />
+      </scope>
+      <scope id="2078093584693310147" at="67,41,94,5" />
+      <scope id="2078093584693310147" at="67,0,96,0" />
+      <unit id="2078093584693310132" at="97,0,100,0" name="testSubtypingB.editor.CustomType_EditorBuilder_a$PROPS" />
+      <unit id="2078093584693310132" at="101,0,104,0" name="testSubtypingB.editor.CustomType_EditorBuilder_a$CONCEPTS" />
+      <unit id="2078093584693310147" at="82,102,86,7" name="testSubtypingB.editor.CustomType_EditorBuilder_a$1" />
+      <unit id="2078093584693310132" at="32,0,105,0" name="testSubtypingB.editor.CustomType_EditorBuilder_a" />
+    </file>
+  </root>
+</debug-info>
+

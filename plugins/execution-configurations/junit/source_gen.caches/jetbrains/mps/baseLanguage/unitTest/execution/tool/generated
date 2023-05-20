@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="epdxnibge568wz4z5fb7wkomyk8yuxs">
+  <files names="BaseMPSTestProxy.java:BaseTestOccurenceNavigator.java:FailedTestOccurrenceNavigator.java:LeafTestMessage.java:MPSClassTestProxy.java:MPSMethodTestProxy.java:MPSRootTestProxy.java:MessageContainerBase.java:MessageFilter.java:MessagesContainer.java:MethodMessageContainer.java:NonRootTestTreeNode.java:Printable.java:Printer.java:RootMessageContainer.java:RootTestTreeNode.java:StatisticsRowRenderer.java:StatisticsTableModel.java:TestCaseMessageContainer.java:TestCaseRow.java:TestCaseTreeNode.java:TestContainerRow.java:TestMessage.java:TestMethodRow.java:TestMethodTreeNode.java:TestOutputContainer.java:TestProgressLine.java:TestState.java:TestStateInfoAdapter.java:TestStatisticsRow.java:TestToolbarPanel.java:TestTree.java:TestTreeIconRepainter.java:TestTreeNode.java:TestTreeRootMouseListener.java:TestTreeSelectionListener.java:TotalRow.java:UnitTestOptions.java:UnitTestViewComponent.java" />
+</product>
+

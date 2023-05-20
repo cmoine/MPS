@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,49 +15,43 @@
  */
 package jetbrains.mps.ide.projectPane.fileSystem.nodes;
 
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vcs.impl.VcsFileStatusProvider;
 import com.intellij.openapi.vfs.VirtualFile;
 import jetbrains.mps.ide.ui.tree.MPSTreeNode;
-
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import jetbrains.mps.project.MPSProject;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractFileTreeNode extends MPSTreeNode {
   protected final VirtualFile myFile;
-  protected VcsFileStatusProvider myProvider;
-  protected Project myProject;
-  private boolean myShowFullPath;
+  protected final MPSProject myProject;
 
-  public AbstractFileTreeNode(Project project, VirtualFile file) {
+  public AbstractFileTreeNode(MPSProject project, @NotNull VirtualFile file) {
     this(project, file, false);
   }
 
-  public AbstractFileTreeNode(Project project, VirtualFile file, boolean showFullPath) {
+  public AbstractFileTreeNode(MPSProject project, @NotNull VirtualFile file, boolean showFullPath) {
     myFile = file;
-    myProvider = project.getComponent(VcsFileStatusProvider.class);
     myProject = project;
-    myShowFullPath = showFullPath;
+    if (showFullPath) {
+      setAdditionalText(myFile.getPresentableUrl());
+    }
+    setNodeIdentifier(myFile.getPath());
+    setText(myFile.getName());
     updatePresentationInternal();
   }
 
   @Override
   protected void doUpdatePresentation() {
-    updatePresentationInternal();
-  }
-
-  private void updatePresentationInternal() {
+    // XXX odd to deal with tree structure when asked to update presentation
     if (!myFile.exists()) {
       removeFromParent();
       return;
     }
-    setText(myFile.getName());
-    if (myShowFullPath) {
-      setAdditionalText(myFile.getPresentableUrl());
-    }
-    setNodeIdentifier(myFile.getPath() != null ? myFile.getPath() : "");
-    setColor(myProvider.getFileStatus(myFile).getColor());
+    updatePresentationInternal();
+  }
+
+  private void updatePresentationInternal() {
+    setColor(VcsFileStatusProvider.getInstance(myProject.getProject()).getFileStatus(myFile).getColor());
   }
 
   public VirtualFile getFile() {
@@ -67,13 +61,4 @@ public abstract class AbstractFileTreeNode extends MPSTreeNode {
   public String toString() {
     return myFile.getUrl();
   }
-
-  public Collection<? extends AbstractFileTreeNode> getChildren() {
-    List<AbstractFileTreeNode> children = new LinkedList<AbstractFileTreeNode>();
-    for (int i = 0; i < getChildCount(); i++) {
-      children.add((AbstractFileTreeNode) getChildAt(i));
-    }
-    return children;
-  }
-
 }

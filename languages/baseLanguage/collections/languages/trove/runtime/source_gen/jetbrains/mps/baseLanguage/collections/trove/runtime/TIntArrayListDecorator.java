@@ -40,7 +40,7 @@ public class TIntArrayListDecorator extends AbstractList<Integer> implements Lis
   }
   @Override
   public ListIterator<Integer> listIterator() {
-    return new TIntArrayListDecorator.TIntegerListIterator(0);
+    return new TIntegerListIterator(0);
   }
   @Override
   public void clear() {
@@ -127,7 +127,7 @@ public class TIntArrayListDecorator extends AbstractList<Integer> implements Lis
     return this.primList.size();
   }
   public ListIterator<Integer> listIterator(int index) {
-    return new TIntArrayListDecorator.TIntegerListIterator(index);
+    return new TIntegerListIterator(index);
   }
   protected boolean removePrim(int primValue) {
     int idx = this.primList.indexOf(primValue);

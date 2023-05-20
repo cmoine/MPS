@@ -89,7 +89,7 @@ public final class SNodeEntryExternalizer implements DataExternalizer<SNodeEntry
 
   public List<SNodeEntry> readMany(@NotNull DataInput in) throws IOException {
     readToken(in);
-    ArrayList<SNodeEntry> rv = new ArrayList<SNodeEntry>();
+    ArrayList<SNodeEntry> rv = new ArrayList<>();
     ModelInputStream mis = openStream(in);
     while (mis.available() > 0) {
       rv.add(readEntry(mis));

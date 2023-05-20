@@ -4,57 +4,137 @@ package jetbrains.mps.transformation.test.inputLang.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_ExpressionToReduceToStatement = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InputNode = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InputNode_A = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InputNode_B = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InputNode_C = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InputRoot = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InputRootWithStatementList = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RefTestClass = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RefTestExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RefTestMethod = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RefTestMethodCall = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RefTestParam = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RefTestParamRef = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_ClassExport;
+  private ConceptPresentation props_ExpressionToReduceToStatement;
+  private ConceptPresentation props_InputNamedList;
+  private ConceptPresentation props_InputNode;
+  private ConceptPresentation props_InputNode_A;
+  private ConceptPresentation props_InputNode_B;
+  private ConceptPresentation props_InputNode_C;
+  private ConceptPresentation props_InputRoot;
+  private ConceptPresentation props_InputRootWithStatementList;
+  private ConceptPresentation props_RefTestClass;
+  private ConceptPresentation props_RefTestExpression;
+  private ConceptPresentation props_RefTestMethod;
+  private ConceptPresentation props_RefTestMethodCall;
+  private ConceptPresentation props_RefTestParam;
+  private ConceptPresentation props_RefTestParamRef;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.ClassExport:
+        if (props_ClassExport == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("cExport");
+          props_ClassExport = cpb.create();
+        }
+        return props_ClassExport;
+      case LanguageConceptSwitch.ExpressionToReduceToStatement:
+        if (props_ExpressionToReduceToStatement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("generator should produce clear warning");
+          cpb.rawPresentation("expression to reduce to statement");
+          props_ExpressionToReduceToStatement = cpb.create();
+        }
         return props_ExpressionToReduceToStatement;
-      case 1:
+      case LanguageConceptSwitch.InputNamedList:
+        if (props_InputNamedList == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("InputNamedList");
+          props_InputNamedList = cpb.create();
+        }
+        return props_InputNamedList;
+      case LanguageConceptSwitch.InputNode:
+        if (props_InputNode == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_InputNode = cpb.create();
+        }
         return props_InputNode;
-      case 2:
+      case LanguageConceptSwitch.InputNode_A:
+        if (props_InputNode_A == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_InputNode_A = cpb.create();
+        }
         return props_InputNode_A;
-      case 3:
+      case LanguageConceptSwitch.InputNode_B:
+        if (props_InputNode_B == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_InputNode_B = cpb.create();
+        }
         return props_InputNode_B;
-      case 4:
+      case LanguageConceptSwitch.InputNode_C:
+        if (props_InputNode_C == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_InputNode_C = cpb.create();
+        }
         return props_InputNode_C;
-      case 5:
+      case LanguageConceptSwitch.InputRoot:
+        if (props_InputRoot == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_InputRoot = cpb.create();
+        }
         return props_InputRoot;
-      case 6:
+      case LanguageConceptSwitch.InputRootWithStatementList:
+        if (props_InputRootWithStatementList == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_InputRootWithStatementList = cpb.create();
+        }
         return props_InputRootWithStatementList;
-      case 7:
+      case LanguageConceptSwitch.RefTestClass:
+        if (props_RefTestClass == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_RefTestClass = cpb.create();
+        }
         return props_RefTestClass;
-      case 8:
+      case LanguageConceptSwitch.RefTestExpression:
+        if (props_RefTestExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_RefTestExpression = cpb.create();
+        }
         return props_RefTestExpression;
-      case 9:
+      case LanguageConceptSwitch.RefTestMethod:
+        if (props_RefTestMethod == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_RefTestMethod = cpb.create();
+        }
         return props_RefTestMethod;
-      case 10:
+      case LanguageConceptSwitch.RefTestMethodCall:
+        if (props_RefTestMethodCall == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xab0ae915e3b54f35L, 0xb55ac655d649a03cL, 0x2e0420fbd0995e09L, 0x2e0420fbd0995e0aL, "method", "", "");
+          props_RefTestMethodCall = cpb.create();
+        }
         return props_RefTestMethodCall;
-      case 11:
+      case LanguageConceptSwitch.RefTestParam:
+        if (props_RefTestParam == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_RefTestParam = cpb.create();
+        }
         return props_RefTestParam;
-      case 12:
+      case LanguageConceptSwitch.RefTestParamRef:
+        if (props_RefTestParamRef == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xab0ae915e3b54f35L, 0xb55ac655d649a03cL, 0x2e0420fbd0995e07L, 0x2e0420fbd0995e08L, "declaration", "", "");
+          props_RefTestParamRef = cpb.create();
+        }
         return props_RefTestParamRef;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

@@ -17,6 +17,9 @@ package jetbrains.mps.intentions;
 
 import jetbrains.mps.lang.script.runtime.AbstractMigrationRefactoring;
 import jetbrains.mps.openapi.editor.EditorContext;
+import jetbrains.mps.openapi.intentions.IntentionDescriptor;
+import jetbrains.mps.openapi.intentions.IntentionExecutable;
+import jetbrains.mps.openapi.intentions.Kind;
 import jetbrains.mps.util.NameUtil;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNode;
@@ -29,10 +32,8 @@ public class MigrationRefactoringAdapter extends OldBaseIntentionFactory {
   private final AbstractMigrationRefactoring myRefactoring;
   private final SNodeReference myIntentionNodeReference;
   private final String myPresentation;
-  private final String myLanguageName;
 
-  /*package*/ MigrationRefactoringAdapter(String  languageName, AbstractMigrationRefactoring refactoring, @Nullable SNodeReference migrationReference) {
-    myLanguageName = languageName;
+  /*package*/ MigrationRefactoringAdapter(AbstractMigrationRefactoring refactoring, @Nullable SNodeReference migrationReference) {
     myRefactoring = refactoring;
     myIntentionNodeReference = migrationReference;
     myPresentation = refactoring.getName();
@@ -40,11 +41,6 @@ public class MigrationRefactoringAdapter extends OldBaseIntentionFactory {
 
   /*package*/ AbstractMigrationRefactoring getRefactoring() {
     return myRefactoring;
-  }
-
-  @Override
-  public String getLanguageFqName() {
-    return myLanguageName;
   }
 
   @Override
@@ -58,8 +54,8 @@ public class MigrationRefactoringAdapter extends OldBaseIntentionFactory {
   }
 
   @Override
-  public IntentionType getType() {
-    return IntentionType.MIGRATION;
+  public Kind getKind() {
+    return Kind.MIGRATION;
   }
 
   @Override
@@ -84,14 +80,14 @@ public class MigrationRefactoringAdapter extends OldBaseIntentionFactory {
 
   @Override
   public Collection<IntentionExecutable> instances(SNode node, EditorContext editorContext) {
-    return Collections.<IntentionExecutable>singleton(new Executable());
+    return Collections.singleton(new Executable());
   }
 
   private class Executable implements IntentionExecutable {
 
     @Override
     public String getDescription(SNode node, EditorContext editorContext) {
-      return "Migration: " + NameUtil.multiWordCapitalize(myRefactoring.getName());
+      return "Enhancement: " + NameUtil.multiWordCapitalize(myRefactoring.getName());
     }
 
     @Override

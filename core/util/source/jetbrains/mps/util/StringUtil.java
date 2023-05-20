@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * @author evgeny, 10/1/12
  */
-public class StringUtil {
+public final class StringUtil {
 
   private final static char[] HEX_DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
@@ -51,8 +51,19 @@ public class StringUtil {
     return left.compareTo(right);
   }
 
+  // null-safe String.isEmpty()
   public static boolean isEmpty(String s) {
-    return s == null || s.length() == 0;
+    return s == null || s.isEmpty();
+  }
+
+  @NotNull
+  public static String emptyIfNull(@Nullable String s) {
+    return s == null ? "" : s;
+  }
+
+  @Nullable
+  public static String nullIfEmpty(@Nullable String s) {
+    return s != null && s.isEmpty() ? null : s;
   }
 
   @NonNls
@@ -174,4 +185,75 @@ public class StringUtil {
     return -1;
   }
 
+  public static String unescapeJavaString(String st) {
+    // Copy-pasted from https://gist.github.com/uklimaschewski/6741769
+
+    StringBuilder sb = new StringBuilder(st.length());
+
+    for (int i = 0; i < st.length(); i++) {
+      char ch = st.charAt(i);
+      if (ch == '\\') {
+        char nextChar = (i == st.length() - 1) ? '\\' : st
+                                                            .charAt(i + 1);
+        // Octal escape?
+        if (nextChar >= '0' && nextChar <= '7') {
+          String code = "" + nextChar;
+          i++;
+          if ((i < st.length() - 1) && st.charAt(i + 1) >= '0'
+              && st.charAt(i + 1) <= '7') {
+            code += st.charAt(i + 1);
+            i++;
+            if ((i < st.length() - 1) && st.charAt(i + 1) >= '0'
+                && st.charAt(i + 1) <= '7') {
+              code += st.charAt(i + 1);
+              i++;
+            }
+          }
+          sb.append((char) Integer.parseInt(code, 8));
+          continue;
+        }
+        switch (nextChar) {
+          case '\\':
+            ch = '\\';
+            break;
+          case 'b':
+            ch = '\b';
+            break;
+          case 'f':
+            ch = '\f';
+            break;
+          case 'n':
+            ch = '\n';
+            break;
+          case 'r':
+            ch = '\r';
+            break;
+          case 't':
+            ch = '\t';
+            break;
+          case '\"':
+            ch = '\"';
+            break;
+          case '\'':
+            ch = '\'';
+            break;
+          // Hex Unicode: u????
+          case 'u':
+            if (i >= st.length() - 5) {
+              ch = 'u';
+              break;
+            }
+            int code = Integer.parseInt(
+                "" + st.charAt(i + 2) + st.charAt(i + 3)
+                + st.charAt(i + 4) + st.charAt(i + 5), 16);
+            sb.append(Character.toChars(code));
+            i += 5;
+            continue;
+        }
+        i++;
+      }
+      sb.append(ch);
+    }
+    return sb.toString();
+  }
 }

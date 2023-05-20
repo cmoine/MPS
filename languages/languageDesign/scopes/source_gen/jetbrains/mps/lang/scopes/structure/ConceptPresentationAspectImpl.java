@@ -4,30 +4,49 @@ package jetbrains.mps.lang.scopes.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_ComeFromExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CompositeWithParentScopeExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ParentScope = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_UniformScopeProvider = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_ComeFromExpression;
+  private ConceptPresentation props_CompositeWithParentScopeExpression;
+  private ConceptPresentation props_ParentScope;
+  private ConceptPresentation props_UniformScopeProvider;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.ComeFromExpression:
+        if (props_ComeFromExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("come from");
+          props_ComeFromExpression = cpb.create();
+        }
         return props_ComeFromExpression;
-      case 1:
+      case LanguageConceptSwitch.CompositeWithParentScopeExpression:
+        if (props_CompositeWithParentScopeExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("composite with");
+          props_CompositeWithParentScopeExpression = cpb.create();
+        }
         return props_CompositeWithParentScopeExpression;
-      case 2:
+      case LanguageConceptSwitch.ParentScope:
+        if (props_ParentScope == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("parent scope");
+          props_ParentScope = cpb.create();
+        }
         return props_ParentScope;
-      case 3:
+      case LanguageConceptSwitch.UniformScopeProvider:
+        if (props_UniformScopeProvider == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_UniformScopeProvider = cpb.create();
+        }
         return props_UniformScopeProvider;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

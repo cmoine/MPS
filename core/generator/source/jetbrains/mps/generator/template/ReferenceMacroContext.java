@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@ package jetbrains.mps.generator.template;
 
 import jetbrains.mps.generator.runtime.TemplateContext;
 import jetbrains.mps.scope.Scope;
-import jetbrains.mps.smodel.IOperationContext;
 import jetbrains.mps.smodel.constraints.ModelConstraints;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,7 +29,7 @@ import java.util.List;
 /**
  * What Reference Macro resolution code could expect to know about outer world.
  */
-public final class ReferenceMacroContext extends TemplateQueryContextWithMacro {
+public final class ReferenceMacroContext extends TemplateQueryContext {
   private final SNode myOutputNode;
   private final SReferenceLink myRole;
 
@@ -38,7 +37,7 @@ public final class ReferenceMacroContext extends TemplateQueryContextWithMacro {
    * @since 3.3
    */
   public ReferenceMacroContext(@NotNull TemplateContext context, @NotNull SNode outputNode, @NotNull SNodeReference macroNode, @NotNull SReferenceLink role) {
-    super(context, macroNode);
+    super(macroNode, context);
     myOutputNode = outputNode;
     myRole = role;
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,51 +16,46 @@
 package jetbrains.mps.errors;
 
 import jetbrains.mps.errors.messageTargets.MessageTarget;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 
-import java.util.Collections;
 import java.util.List;
 
-/**
- * User: fyodor
- * Date: 11/13/12
- */
+// this class is only for compatibility with generated code which can call reportError() with some invalid data passed
+// and then call setSomething() on returned IErrorReporter without any checks
+@Deprecated
 public class NullErrorReporter implements IErrorReporter {
   @Override
   public String reportError() {
-    return null;
+    throw new UnsupportedOperationException();
   }
 
   @Nullable
   @Override
   public SNodeReference getRuleNode() {
-    return null;
+    throw new UnsupportedOperationException();
   }
 
   @Override
-  public void addAdditionalRuleId(String ruleModel, String ruleId) {
+  public void additionalRule(@NotNull SNodeReference rulePointer) {
+
   }
 
   @Override
   public List<SNodeReference> getAdditionalRulesIds() {
-    return Collections.emptyList();
+    throw new UnsupportedOperationException();
   }
 
   @Override
   public MessageStatus getMessageStatus() {
-    return null;
-  }
-
-  @Override
-  public QuickFixProvider getIntentionProvider() {
-    return null;
+    throw new UnsupportedOperationException();
   }
 
   @Override
   public List<QuickFixProvider> getIntentionProviders() {
-    return null;
+    throw new UnsupportedOperationException();
   }
 
   @Override
@@ -69,17 +64,13 @@ public class NullErrorReporter implements IErrorReporter {
   }
 
   @Override
-  public void setIntentionProvider(QuickFixProvider intentionProvider) {
-
-  }
-
-  @Override
   public MessageTarget getErrorTarget() {
-    return null;
+    throw new UnsupportedOperationException();
   }
 
+  @NotNull
   @Override
   public SNode getSNode() {
-    return null;
+    throw new UnsupportedOperationException();
   }
 }

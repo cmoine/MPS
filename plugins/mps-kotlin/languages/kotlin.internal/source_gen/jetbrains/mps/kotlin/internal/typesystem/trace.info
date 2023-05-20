@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <root>
+    <file name="TypesystemDescriptor.java">
+      <unit at="8,0,16,0" name="jetbrains.mps.kotlin.internal.typesystem.TypesystemDescriptor" />
+    </file>
+  </root>
+  <root nodeRef="r:ae67c303-944f-474a-8c7a-c79f2f467439(jetbrains.mps.kotlin.internal.typesystem)/6573432175634207311">
+    <file name="TypesystemDescriptor.java">
+      <node id="6573432175634207311" at="10,5,11,85" concept="4" />
+      <node id="6573432175634207311" at="11,85,12,47" concept="2" />
+      <node id="6573432175634207311" at="9,33,13,5" concept="0" />
+      <scope id="6573432175634207311" at="10,5,12,47">
+        <var name="inferenceRule" id="6573432175634207311" />
+      </scope>
+    </file>
+    <file name="typeof_TextReference_InferenceRule.java">
+      <node id="6573432175634209341" at="20,5,21,55" concept="4" />
+      <node id="6573432175634209341" at="21,55,22,206" concept="4" />
+      <node id="6573432175634209341" at="22,206,23,322" concept="2" />
+      <node id="6573432175634207311" at="26,50,27,37" concept="5" />
+      <node id="6573432175634207311" at="29,68,30,102" concept="5" />
+      <node id="6573432175634207311" at="32,30,33,17" concept="5" />
+      <node id="6573432175634207311" at="37,0,38,0" concept="6" trace="TextReference$zA" />
+      <node id="6573432175634207311" at="17,0,19,0" concept="1" trace="typeof_TextReference_InferenceRule#()V" />
+      <node id="6573432175634207311" at="26,0,29,0" concept="3" trace="getApplicableConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="6573432175634207311" at="29,0,32,0" concept="3" trace="isApplicableAndPattern#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljetbrains/mps/lang/typesystem/runtime/IsApplicableStatus;" />
+      <node id="6573432175634207311" at="32,0,35,0" concept="3" trace="overrides#()Z" />
+      <node id="6573432175634209341" at="19,126,24,5" concept="0" />
+      <node id="6573432175634207311" at="19,0,26,0" concept="3" trace="applyRule#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/typesystem/inference/TypeCheckingContext;Ljetbrains/mps/lang/typesystem/runtime/IsApplicableStatus;)V" />
+      <scope id="6573432175634207311" at="17,47,17,47" />
+      <scope id="6573432175634207311" at="26,50,27,37" />
+      <scope id="6573432175634207311" at="29,68,30,102" />
+      <scope id="6573432175634207311" at="32,30,33,17" />
+      <scope id="6573432175634207311" at="17,0,19,0" />
+      <scope id="6573432175634209341" at="20,5,23,322">
+        <var name="_info_12389875345" id="6573432175634209341" />
+        <var name="_nodeToCheck_1029348928467" id="6573432175634209341" />
+      </scope>
+      <scope id="6573432175634207311" at="26,0,29,0" />
+      <scope id="6573432175634207311" at="29,0,32,0">
+        <var name="argument" id="6573432175634207311" />
+      </scope>
+      <scope id="6573432175634207311" at="32,0,35,0" />
+      <scope id="6573432175634207312" at="19,126,24,5" />
+      <scope id="6573432175634207311" at="19,0,26,0">
+        <var name="status" id="6573432175634207311" />
+        <var name="textReference" id="6573432175634207311" />
+        <var name="typeCheckingContext" id="6573432175634207311" />
+      </scope>
+      <unit id="6573432175634207311" at="36,0,39,0" name="jetbrains.mps.kotlin.internal.typesystem.typeof_TextReference_InferenceRule$CONCEPTS" />
+      <unit id="6573432175634207311" at="16,0,40,0" name="jetbrains.mps.kotlin.internal.typesystem.typeof_TextReference_InferenceRule" />
+    </file>
+  </root>
+</debug-info>
+

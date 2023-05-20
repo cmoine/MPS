@@ -16,10 +16,8 @@
 package jetbrains.mps.generator.impl.plan;
 
 import jetbrains.mps.generator.impl.plan.PriorityGraph.Cycle;
-import jetbrains.mps.generator.runtime.TemplateMappingConfiguration;
 import jetbrains.mps.generator.runtime.TemplateModule;
 import jetbrains.mps.project.structure.modules.mappingpriorities.MappingPriorityRule;
-import jetbrains.mps.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.module.SModuleReference;
 
@@ -43,53 +41,47 @@ final class PriorityConflicts {
 
   PriorityConflicts(Collection<TemplateModule> generators) {
     myGenerators = generators;
-    myConflictingRules = new HashMap<Kind, List<Conflict>>();
+    myConflictingRules = new HashMap<>();
     for (Kind k : Kind.values()) {
-      myConflictingRules.put(k, new ArrayList<Conflict>());
+      myConflictingRules.put(k, new ArrayList<>());
     }
   }
 
   void registerSelfLock(Group g1, Group g2, Collection<MappingPriorityRule> rules) {
     SModuleReference origin = getOrigin(rules);
-    String msg = String.format("Self-locking rule: %s", describeCollection(rules));
+    String msg = String.format("Same mapping configurations on the both sides of strict rule: %s and %s", g1.toString(), g2.toString());
     register(Kind.SelfLock, new Conflict(origin, msg, rules));
   }
 
   void registerCoherentPriorityMix(Group g1, Group g2, MappingPriorityRule rule) {
     final Set<MappingPriorityRule> rules = Collections.singleton(rule);
     SModuleReference origin = getOrigin(rules);
-    String msg = String.format("Coherent configurations with different 'top priority' setting: %s", String.valueOf(rule));
+    String msg = String.format("Coherent configurations with different 'top priority' setting: %s and %s", g1.toString(), g2.toString());
     register(Kind.CoherentPrioMix, new Conflict(origin, msg, rules));
   }
 
   void registerCoherentWithStrict(Group coherent, Group g, Collection<MappingPriorityRule> rules) {
     SModuleReference origin = getOrigin(rules);
-    String msg = String.format("Coherent configurations on both sides of strict rule: %s", describeCollection(rules));
+    String msg = String.format("Coherent configurations on both sides of strict rule: %s and %s", coherent.toString(), g.toString());
     register(Kind.CoherentWithStrict, new Conflict(origin, msg, rules));
   }
 
-  void registerLoPriLocksHiPri(Group g1, Group g2, Collection<MappingPriorityRule> rules) {
+  void registerLoPriLocksHiPri(Group hiPri, Group lowPri, Collection<MappingPriorityRule> rules) {
     SModuleReference origin = getOrigin(rules);
-    String msg = String.format("Configuration with lower priority blocks high-priority configuration: %s", describeCollection(rules));
+    String msg = String.format("Configuration with lower priority %s blocks high-priority configuration %s", lowPri.toString(), hiPri.toString());
     register(Kind.LoPriLocksHiPri, new Conflict(origin, msg, rules));
   }
 
   void registerLeftovers(Collection<MappingPriorityRule> rules) {
     SModuleReference origin = getOrigin(rules);
-    String msg = String.format("Rules left after all top-priority rules were consumed: %s", describeCollection(rules));
+    String msg = "Rules left after all top-priority rules were consumed";
     register(Kind.PastTopPri, new Conflict(origin, msg, rules));
   }
 
   void registerCycle(Cycle c) {
-    ArrayList<String> cycleElements = new ArrayList<String>();
+    ArrayList<String> cycleElements = new ArrayList<>();
     for (Group g : c.elements) {
-      StringBuilder sb = new StringBuilder();
-      for (Pair<String, TemplateMappingConfiguration> p : GenerationPartitioningUtil.toStrings(g.getElements())) {
-        sb.append(p.o1);
-        sb.append(',');
-      }
-      sb.setLength(sb.length() - 1); // we're safe - there should be at least 3 elements to constitute a cycle.
-      cycleElements.add(sb.toString());
+      cycleElements.add(g.toString());
     }
     String msg = String.format("Cycle detected: %s", describeCollection(cycleElements));
     final Collection<MappingPriorityRule> rules = c.getRules();
@@ -122,7 +114,7 @@ final class PriorityConflicts {
   }
 
   public List<Conflict> getConflicts(Collection<Kind> kinds) {
-    ArrayList<Conflict> rv = new ArrayList<Conflict>();
+    ArrayList<Conflict> rv = new ArrayList<>();
     for (Kind k : kinds) {
       rv.addAll(myConflictingRules.get(k));
     }
@@ -133,12 +125,12 @@ final class PriorityConflicts {
     return myConflictingRules.get(kind);
   }
 
-  private static String describeCollection(Collection<?> coll) {
+  private static String describeCollection(Collection<String> coll) {
     if (coll.isEmpty()) {
       return "";
     }
     if (coll.size() == 1) {
-      return coll.iterator().next().toString();
+      return coll.iterator().next();
     }
     StringBuilder sb = new StringBuilder();
     sb.append('\n');
@@ -153,7 +145,7 @@ final class PriorityConflicts {
   private SModuleReference getOrigin(Collection<MappingPriorityRule> rules) {
     for (MappingPriorityRule r : rules) {
       for (TemplateModule tm : myGenerators) {
-        if (tm.getPriorities() != null && tm.getPriorities().contains(r)) {
+        if (tm.getPriorities().contains(r)) {
           return tm.getModuleReference();
         }
       }

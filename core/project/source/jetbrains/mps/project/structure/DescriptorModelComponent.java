@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,17 +16,21 @@
 package jetbrains.mps.project.structure;
 
 import jetbrains.mps.components.CoreComponent;
+import jetbrains.mps.logging.Logger;
+import jetbrains.mps.project.AbstractModule;
 import jetbrains.mps.smodel.SModelStereotype;
+import jetbrains.mps.util.containers.MultiMap;
+import jetbrains.mps.vfs.IFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SModelListener;
 import org.jetbrains.mps.openapi.model.SModelListenerBase;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.module.SModule;
-import org.jetbrains.mps.openapi.module.SModuleListenerBase;
+import org.jetbrains.mps.openapi.module.SModuleListener;
 import org.jetbrains.mps.openapi.module.SRepository;
 import org.jetbrains.mps.openapi.module.SRepositoryAttachListener;
-import org.jetbrains.mps.openapi.module.SRepositoryListenerBase;
+import org.jetbrains.mps.openapi.module.SRepositoryListener;
 
 /**
  * Contribute descriptor models to modules of a given repository.
@@ -35,6 +39,7 @@ import org.jetbrains.mps.openapi.module.SRepositoryListenerBase;
  * don't have project always (e.g. when building/generating modules from Ant), but we still need these models in that scenario as well.
  * Either shall introduce Project everywhere, and dedicated layer of ProjectCoreComponents, or need a better solution to address lifecycle of
  * repository-specific components (there are others, e.g. FastNodeFinderManager)
+ *
  * @author Artem Tikhomirov
  * @since 3.4
  */
@@ -49,19 +54,22 @@ public class DescriptorModelComponent implements CoreComponent {
 
   @Override
   public void init() {
-    myRepository.addRepositoryListener(myListener);
+    myRepository.getModelAccess().runWriteAction(() -> myRepository.addRepositoryListener(myListener));
   }
 
   @Override
   public void dispose() {
-    myRepository.removeRepositoryListener(myListener);
+    // it's vital to have exclusive access to a repository as we contribute/revoke models
+    myRepository.getModelAccess().runWriteAction(() -> myRepository.removeRepositoryListener(myListener));
     myListener.disposeProviders();
   }
 
-  private static class ModuleTracker extends SRepositoryListenerBase implements SRepositoryAttachListener {
+  private static class ModuleTracker implements SRepositoryListener, SRepositoryAttachListener {
     private final DescriptorModelProvider[] myProviders;
+    private final MultiMap<SModule, DescriptorModelProvider> myModule2DescriptorProviders = new MultiMap<>();
+
     // listener is attached to modules of interest only
-    private final SModuleListenerBase myModuleListener = new SModuleListenerBase() {
+    private final SModuleListener myModuleListener = new SModuleListener() {
       @Override
       public void modelAdded(SModule module, SModel model) {
         if (SModelStereotype.isDescriptorModel(model)) {
@@ -122,12 +130,24 @@ public class DescriptorModelComponent implements CoreComponent {
      * @return <code>true</code> if there's a provider interested in the module
      */
     boolean refresh(SModule module) {
+      if (module.getModuleName() == null) {
+        // At the moment, DescriptorModelProvider implementations we've got don't tolerate modules without name,
+        // as they construct a model with name based on that of module, and it's not possible to have model without a name nor it is
+        // reasonable to keep some bogus name like '<none>' or '<undefined>', therefore we don't process such modules here. See MPS-31525
+        return false;
+      }
       boolean rv = false;
       for (DescriptorModelProvider mp : myProviders) {
         if (mp.isApplicable(module)) {
+          myModule2DescriptorProviders.putValue(module, mp);
           mp.refreshModule(module);
           rv = true;
         }
+      }
+      if (!rv && myModule2DescriptorProviders.get(module) != null) {
+        // no applicable providers but the mapping module -> provider is there, likely a change
+        // that affected 'applicable' status; rather forget about the module
+        myModule2DescriptorProviders.get(module).forEach(mp -> mp.forgetModule(module));
       }
       return rv;
     }
@@ -138,12 +158,11 @@ public class DescriptorModelComponent implements CoreComponent {
      */
     boolean forget(SModule module) {
       boolean rv = false;
-      for (DescriptorModelProvider mp : myProviders) {
-        if (mp.isApplicable(module)) {
-          mp.forgetModule(module);
-          rv = true;
-        }
+      for (DescriptorModelProvider mp : myModule2DescriptorProviders.get(module)) {
+        mp.forgetModule(module);
+        rv = true;
       }
+      myModule2DescriptorProviders.remove(module);
       return rv;
     }
 
@@ -170,6 +189,17 @@ public class DescriptorModelComponent implements CoreComponent {
     public void moduleAdded(@NotNull SModule module) {
       if (refresh(module)) {
         attachListeners(module);
+      } else {
+        // Try to figure out what's the cause for MPS-31525
+        if (module.getModuleName() == null) {
+          IFile descriptorFile = null;
+          if (module instanceof AbstractModule) {
+            descriptorFile = ((AbstractModule) module).getDescriptorFile();
+          }
+          final String f = "Module [%s] (id:%s), loaded from %s, has no name. No descriptor model created";
+          String m = String.format(f, module.getClass().getSimpleName(), module.getModuleReference().getModuleId(), descriptorFile);
+          Logger.getLogger(DescriptorModelComponent.class).warning(m);
+        }
       }
     }
 
@@ -185,17 +215,18 @@ public class DescriptorModelComponent implements CoreComponent {
     // module is of interest to one of providers
     private void attachListeners(SModule module) {
       // FIXME would benefit from SModuleAttachListener, like SRepositoryAttachListener, to get the code to attach to each model in a single place
-      for (SModel m : module.getModels()) {
-        attachListeners(m);
-      }
+      // FIXME need a MODULE LISTENER mechanism to find out about MODEL changes to avoid adding listeners to model instances
+      module.forEachRegisteredModel(this::attachListeners);
       module.addModuleListener(myModuleListener);
     }
 
     private void detachListeners(SModule module) {
-      for (SModel m : module.getModels()) {
-        detachListeners(m);
-      }
       module.removeModuleListener(myModuleListener);
+      // XXX it's important not to do getModels() here as it might trigger model loading,
+      //     event dispatching and resurrection of descriptor model (or some internal state of this component)
+      //     that may eventually lead to cryptic failures (beforeModuleRemoved facing disposed/detached
+      //     descriptor model, dm.getModule()==null)
+      module.forEachRegisteredModel(this::detachListeners);
     }
 
     // model comes from a module of interest to one of providers

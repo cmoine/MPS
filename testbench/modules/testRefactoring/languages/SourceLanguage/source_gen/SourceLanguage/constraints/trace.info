@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <root>
+    <file name="ConstraintsAspectDescriptor.java">
+      <unit at="10,0,20,0" name="SourceLanguage.constraints.ConstraintsAspectDescriptor" />
+    </file>
+  </root>
+  <root nodeRef="r:bd146201-753a-4f62-9de3-080d0101373f(SourceLanguage.constraints)/3794080752246611243">
+    <file name="ClassToMove_UpdateRefs.java">
+      <node id="3794080752246611248" at="7,22,8,68" concept="2" />
+      <node id="3794080752246611253" at="8,68,9,21" concept="0" />
+      <node id="3794080752246611244" at="7,0,11,0" concept="1" trace="main#()V" />
+      <scope id="3794080752246611247" at="7,22,9,21">
+        <var name="sameClass" id="3794080752246611249" />
+      </scope>
+      <scope id="3794080752246611244" at="7,0,11,0" />
+      <unit id="3794080752246611243" at="6,0,12,0" name="SourceLanguage.constraints.ClassToMove_UpdateRefs" />
+    </file>
+  </root>
+  <root nodeRef="r:bd146201-753a-4f62-9de3-080d0101373f(SourceLanguage.constraints)/6426415869175194521">
+    <file name="ClassWithUsage.java">
+      <node id="3794080752246627978" at="7,10,8,80" concept="2" />
+      <node id="3794080752246627974" at="8,80,9,33" concept="0" />
+      <scope id="3794080752246641283" at="7,10,9,33">
+        <var name="classToMoveUpdateRefs" id="3794080752246627979" />
+      </scope>
+      <unit id="6426415869175194521" at="6,0,12,0" name="SourceLanguage.constraints.ClassWithUsage" />
+    </file>
+  </root>
+</debug-info>
+

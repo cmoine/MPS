@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 package jetbrains.mps.smodel;
 
+import jetbrains.mps.extapi.model.GeneratableSModel;
 import jetbrains.mps.persistence.MetaModelInfoProvider;
 import jetbrains.mps.smodel.persistence.def.ModelPersistence;
 import jetbrains.mps.util.io.ModelInputStream;
@@ -36,7 +37,11 @@ import java.util.Map;
  * for partial model loading and is in use by most persistence implementations supplied by MPS.
  */
 public class SModelHeader {
-  public static final String DO_NOT_GENERATE = "doNotGenerate";
+  /**
+   * @deprecated Use {@link GeneratableSModel#DO_NOT_GENERATE} instead, header doesn't care about specific attributes
+   */
+  @Deprecated(since = "2021.3", forRemoval = true)
+  public static final String DO_NOT_GENERATE = GeneratableSModel.DO_NOT_GENERATE;
 
   /*
    * Model is identified with SModelId, optional module id and has a name, these are elements we'd like to keep in header
@@ -47,8 +52,7 @@ public class SModelHeader {
    */
   private SModelReference myModelRef = null;
   private int myPersistenceVersion = -1;
-  private boolean doNotGenerate = false;
-  private Map<String, String> myOptionalProperties = new HashMap<String, String>();
+  private final Map<String, String> myOptionalProperties = new HashMap<>(4);
   private MetaModelInfoProvider myMetaInfoProvider;
 
   public SModelHeader() {
@@ -60,14 +64,6 @@ public class SModelHeader {
 
   public void setPersistenceVersion(int persistenceVersion) {
     myPersistenceVersion = persistenceVersion;
-  }
-
-  public boolean isDoNotGenerate() {
-    return doNotGenerate;
-  }
-
-  public void setDoNotGenerate(boolean doNotGenerate) {
-    this.doNotGenerate = doNotGenerate;
   }
 
   /**
@@ -94,7 +90,6 @@ public class SModelHeader {
   }
 
   public void setOptionalProperty(String key, String value) {
-    assert !DO_NOT_GENERATE.equals(key);
     assert !ModelPersistence.REF.equals(key);
     // roughly following http://www.w3.org/TR/2008/PER-xml-20080205/#NT-Name
     assert key.matches("^[:A-Z_a-z][-:A-Z_a-z.0-9]*") : "bad key [" + key + "]";
@@ -115,7 +110,7 @@ public class SModelHeader {
    * However, certain scenarios (command-line merge and ant task to convert models to binary) can't yet afford starting whole
    * MPS and thus shall rely on meta-information read from model files (which is generally sufficient to write the files back).
    *
-   * For these scenarios, we used to have global {@link jetbrains.mps.persistence.ModelEnvironmentInfo}, which is global and a bit
+   * For these scenarios, we used to have global {@code jetbrains.mps.persistence.ModelEnvironmentInfo}, which is global and a bit
    * outdated for modern persistence, hence it has been replaced with MetaModelInfoProvider, although this solution is provisional
    * and likely to get changed in future (perhaps, class known now as IdInfoCollector would replace it).
    */
@@ -139,7 +134,6 @@ public class SModelHeader {
     stream.writeString(myModelRef == null ? null : PersistenceFacade.getInstance().asString(myModelRef));
     stream.writeInt(myPersistenceVersion);
     stream.writeInt(0); //version was here
-    stream.writeBoolean(doNotGenerate);
     stream.writeInt(myOptionalProperties.size());
     for (Map.Entry<String, String> ss : myOptionalProperties.entrySet()) {
       stream.writeString(ss.getKey());
@@ -154,7 +148,6 @@ public class SModelHeader {
     result.setModelReference(s == null ? null : PersistenceFacade.getInstance().createModelReference(s));
     result.setPersistenceVersion(stream.readInt());
     stream.readInt(); //old model version was here
-    result.setDoNotGenerate(stream.readBoolean());
     for (int size = stream.readInt(); size > 0; size--) {
       result.setOptionalProperty(stream.readString(), stream.readString());
     }
@@ -165,7 +158,6 @@ public class SModelHeader {
     SModelHeader copy = new SModelHeader();
     copy.myModelRef = myModelRef;
     copy.myPersistenceVersion = myPersistenceVersion;
-    copy.doNotGenerate = doNotGenerate;
     copy.myOptionalProperties.putAll(myOptionalProperties);
     return copy;
   }

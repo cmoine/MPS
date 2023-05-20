@@ -31,7 +31,7 @@ public class RefNodeListHandlerElementKeyMap extends KeyMapImpl {
       KeyMapActionImpl insertAction = new KeyMapActionImpl() {
         @Override
         public String getDescriptionText() {
-          return "insert " + myListHandler.getElementRole();
+          return "insert " + myListHandler.getElementSRole().getName();
         }
 
         @Override
@@ -44,7 +44,7 @@ public class RefNodeListHandlerElementKeyMap extends KeyMapImpl {
       KeyMapActionImpl addAction = new KeyMapActionImpl() {
         @Override
         public String getDescriptionText() {
-          return "add " + myListHandler.getElementRole();
+          return "add " + myListHandler.getElementSRole().getName();
         }
 
         @Override

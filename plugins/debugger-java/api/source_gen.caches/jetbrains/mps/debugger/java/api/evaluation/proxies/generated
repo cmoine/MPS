@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="1jv02nls1ijtzvq07jiciofe8d0upd7" />
+<product version="3" modelHash="-4y7d6q0xfzq0o9qjstjb03n5gukokae">
+  <files names="IArrayValueProxy.java:INullValueProxy.java:IObjectValueProxy.java:IValueProxy.java:IterableArrayProxy.java:IterableProxy.java:MirrorUtil.java:PrimitiveValueProxy.java:ProxyEqualsUtil.java:ValueProxy.java:VoidValueProxy.java" />
+</product>
 

@@ -5,13 +5,10 @@ package jetbrains.mps.lang.pattern.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.List;
 import java.util.Arrays;
@@ -20,13 +17,13 @@ import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SConcept;
 
 public final class ActionStatement__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x3d3ef1fc1815d960L, "jetbrains.mps.lang.pattern.structure.ActionStatement");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<SNode> getActionPattern_id6cKyl1HJ1T = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getActionPattern").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("6cKyl1HJ1T").registry(REGISTRY).build();
-  public static final SMethod<SNode> getNode_id6cKyl1HJ2s = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getNode").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("6cKyl1HJ2s").registry(REGISTRY).build();
+  public static final SMethod<SNode> getActionPattern_id6cKyl1HJ1T = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getActionPattern").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(111677556049506425L).languageId(0xaf012b78369b0ba7L, 0xd4615e3bd6714ba9L).build2();
+  public static final SMethod<SNode> getNode_id6cKyl1HJ2s = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getNode").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(111677556049506460L).languageId(0xaf012b78369b0ba7L, 0xd4615e3bd6714ba9L).build2();
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getActionPattern_id6cKyl1HJ1T, getNode_id6cKyl1HJ2s);
 
@@ -34,8 +31,8 @@ public final class ActionStatement__BehaviorDescriptor extends BaseBHDescriptor 
   }
 
   /*package*/ static SNode getActionPattern_id6cKyl1HJ1T(@NotNull SNode __thisNode__) {
-    if (SNodeOperations.isInstanceOf(SNodeOperations.getParent(__thisNode__), MetaAdapterFactory.getConcept(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x3d3ef1fc1814cb54L, "jetbrains.mps.lang.pattern.structure.ActionAsPattern"))) {
-      return SNodeOperations.cast(SNodeOperations.getParent(__thisNode__), MetaAdapterFactory.getConcept(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x3d3ef1fc1814cb54L, "jetbrains.mps.lang.pattern.structure.ActionAsPattern"));
+    if (SNodeOperations.isInstanceOf(SNodeOperations.getParent(__thisNode__), CONCEPTS.ActionAsPattern$7o)) {
+      return SNodeOperations.cast(SNodeOperations.getParent(__thisNode__), CONCEPTS.ActionAsPattern$7o);
     }
     return null;
   }
@@ -48,7 +45,6 @@ public final class ActionStatement__BehaviorDescriptor extends BaseBHDescriptor 
   }
 
   /*package*/ ActionStatement__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -94,5 +90,9 @@ public final class ActionStatement__BehaviorDescriptor extends BaseBHDescriptor 
   @Override
   public SAbstractConcept getConcept() {
     return CONCEPT;
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept ActionAsPattern$7o = MetaAdapterFactory.getConcept(0xd4615e3bd6714ba9L, 0xaf012b78369b0ba7L, 0x3d3ef1fc1814cb54L, "jetbrains.mps.lang.pattern.structure.ActionAsPattern");
   }
 }

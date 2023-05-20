@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="sources openapi (non-generated)" pattern="([openapi]:*..*||file:*openapi//*)&amp;&amp;file:*.java&amp;&amp;src[*]:*..*&amp;&amp;![gensources]:*..*&amp;&amp;!file:*source_gen//*&amp;&amp;!file[mps-idea-plugin]:*/" />
+</component>

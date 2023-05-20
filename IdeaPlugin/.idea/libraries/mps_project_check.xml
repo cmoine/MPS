@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="mps-project-check">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/mps-core/lib/mps-project-check.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../core/project-check/source" />
+    </SOURCES>
+  </library>
+</component>

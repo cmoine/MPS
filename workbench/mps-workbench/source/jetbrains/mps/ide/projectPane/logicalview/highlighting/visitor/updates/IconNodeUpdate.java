@@ -28,7 +28,7 @@ public class IconNodeUpdate extends NodeUpdate {
 
   @Override
   public boolean needed(MPSTreeNode node) {
-    return node.getIcon(false) != myIcon;
+    return node.getIcon() != myIcon;
   }
 
   @Override

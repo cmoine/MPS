@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import jetbrains.mps.compiler.JavaCompilerOptions;
 import jetbrains.mps.compiler.JavaCompilerOptionsComponent;
 import jetbrains.mps.compiler.JavaCompilerOptionsComponent.JavaVersion;
 import jetbrains.mps.ide.compiler.CompilerSettingsComponent.CompilerState;
+import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.project.MPSProject;
 import org.jetbrains.annotations.NotNull;
 
@@ -35,10 +36,13 @@ public class CompilerSettingsComponent implements PersistentStateComponent<Compi
   private CompilerState myState = new CompilerState();
   private final MPSProject myProject;
 
-  public CompilerSettingsComponent(@NotNull MPSProject project) {
-    myProject = project;
+  public CompilerSettingsComponent(@NotNull Project project) {
+    myProject = ProjectHelper.fromIdeaProject(project);
+    assert myProject != null;
   }
 
+  // XXX would be great to have this as a service, but no idea how to registerOptions() on project open.
+  // Could use ProjectManager.TOPIC, but what about settings storage in that case?
   public static CompilerSettingsComponent getInstance(@NotNull Project project) {
     return project.getComponent(CompilerSettingsComponent.class);
   }
@@ -52,7 +56,7 @@ public class CompilerSettingsComponent implements PersistentStateComponent<Compi
   }
 
   @Override
-  public void loadState(CompilerState state) {
+  public void loadState(@NotNull CompilerState state) {
     CompilerState newState = new CompilerState();
     newState.setTargetVersion(state.getTargetVersion());
     myState = newState;
@@ -104,6 +108,7 @@ public class CompilerSettingsComponent implements PersistentStateComponent<Compi
   private JavaCompilerOptions createOptions() {
     String targetVersion = myState.getTargetVersion();
     JavaVersion parsedTargetVersion = JavaVersion.parse(targetVersion);
-    return new JavaCompilerOptions(parsedTargetVersion == null ? JavaCompilerOptionsComponent.DEFAULT_JAVA_VERSION : parsedTargetVersion);
+    return new JavaCompilerOptions(parsedTargetVersion == null ? JavaCompilerOptionsComponent.DEFAULT_JAVA_VERSION
+                                                               : parsedTargetVersion);
   }
 }

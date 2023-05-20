@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import java.util.Set;
  * Walks a model and gathers information about nodes according to configuration.
  * By default, collects languages in use and references to external models.
  *
+ * JFI, there's {@code ModelDependencyUpdate} in [project] that deals with import changes
  * @author Artem Tikhomirov
  */
 public final class ModelDependencyScanner {
@@ -43,9 +44,9 @@ public final class ModelDependencyScanner {
   private boolean myNeedConcepts = false;
 
   public ModelDependencyScanner() {
-    myUsedLanguages = new HashSet<SLanguage>();
-    myCrossModelReferences = new HashSet<org.jetbrains.mps.openapi.model.SModelReference>();
-    myConcepts = new HashSet<SConcept>();
+    myUsedLanguages = new HashSet<>();
+    myCrossModelReferences = new HashSet<>();
+    myConcepts = new HashSet<>();
   }
 
   /**
@@ -103,10 +104,10 @@ public final class ModelDependencyScanner {
    * @return <code>this</code> for convenience
    */
   public ModelDependencyScanner walk(@NotNull Iterable<org.jetbrains.mps.openapi.model.SNode> nodes) {
-    HashSet<org.jetbrains.mps.openapi.model.SModelReference> allRefTargets = new HashSet<org.jetbrains.mps.openapi.model.SModelReference>();
+    HashSet<org.jetbrains.mps.openapi.model.SModelReference> allRefTargets = new HashSet<>();
     // collection of input nodes is not restricted to come from a single model,
     // hence we track models of nodes we iterate through to exclude them later from the set of cross-model.
-    HashSet<org.jetbrains.mps.openapi.model.SModelReference> sourceModels = new HashSet<org.jetbrains.mps.openapi.model.SModelReference>();
+    HashSet<org.jetbrains.mps.openapi.model.SModelReference> sourceModels = new HashSet<>();
     for (SNode n : nodes) {
       if (myNeedConcepts) {
         myConcepts.add(n.getConcept());

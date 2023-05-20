@@ -6,10 +6,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.annotation.ElementType;
+import jetbrains.mps.annotations.GeneratedClass;
 import org.apache.log4j.Priority;
 
 @Retention(value = RetentionPolicy.RUNTIME)
 @Target(value = {ElementType.METHOD})
+@GeneratedClass(node = "r:7eb6d2ae-f266-42d4-885f-016951b158e4(jetbrains.mps.testbench.junit)/5294483648489411978", model = "r:7eb6d2ae-f266-42d4-885f-016951b158e4(jetbrains.mps.testbench.junit)")
 public @interface ExpectLogEvent {
   int level() default Priority.FATAL_INT;
   String[] text() default "jetbrains.mps.testbench.junit.DEFAULT";

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@ package jetbrains.mps.testsuites;
 
 import jetbrains.mps.testbench.junit.WatchingRunNotifier;
 import jetbrains.mps.testbench.junit.suites.BaseMpsSuite;
-import org.apache.log4j.Level;
+import jetbrains.mps.testbench.util.CachingAppender;
 import org.junit.runner.Runner;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.model.InitializationError;
@@ -40,7 +40,7 @@ public class OutputWatchingTestSuite extends BaseMpsSuite {
   }
 
   protected void runChild(Runner runner, RunNotifier notifier) {
-    WatchingRunNotifier runNotifier = new WatchingRunNotifier(notifier, Level.ERROR, true); // fixme AP: may be customized via annotations
+    WatchingRunNotifier runNotifier = new WatchingRunNotifier(notifier, CachingAppender.Level.ERROR, true); // fixme AP: may be customized via annotations
     try {
       runner.run(runNotifier);
     } finally {

@@ -8,13 +8,13 @@ import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.openapi.editor.message.EditorMessageOwner;
 import javax.swing.Icon;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
+import jetbrains.mps.openapi.editor.EditorComponent;
 import jetbrains.mps.openapi.editor.cells.EditorCell_Collection;
 import jetbrains.mps.nodeEditor.cells.CellFinderUtil;
 import jetbrains.mps.openapi.editor.cells.EditorCell_Label;
 import com.intellij.openapi.actionSystem.AnAction;
 import jetbrains.mps.workbench.action.BaseAction;
 import com.intellij.openapi.actionSystem.ActionManager;
-import javax.swing.JPopupMenu;
 
 public class DSLComponentMessage extends AbstractLeftEditorHighlighterMessage {
   private static final EditorMessageIconRenderer.IconRendererType TYPE = new EditorMessageIconRenderer.IconRendererType(0);
@@ -29,7 +29,10 @@ public class DSLComponentMessage extends AbstractLeftEditorHighlighterMessage {
   public EditorMessageIconRenderer.IconRendererType getType() {
     return DSLComponentMessage.TYPE;
   }
-  public EditorCell getAnchorCell(EditorCell cell) {
+
+  @Override
+  public EditorCell getAnchorCell(EditorComponent editorComponent) {
+    EditorCell cell = getNodeCell(editorComponent);
     if (cell instanceof EditorCell_Collection) {
       EditorCell_Collection collection = (EditorCell_Collection) cell;
       return CellFinderUtil.findChildByClass(collection, EditorCell_Label.class, true);
@@ -38,8 +41,5 @@ public class DSLComponentMessage extends AbstractLeftEditorHighlighterMessage {
   }
   public AnAction getClickAction() {
     return ((BaseAction) ActionManager.getInstance().getAction("jetbrains.mps.baseLanguage.lightweightdsl.pluginSolution.plugin.GoToMemberDeclaration_Action"));
-  }
-  public JPopupMenu getPopupMenu() {
-    return null;
   }
 }

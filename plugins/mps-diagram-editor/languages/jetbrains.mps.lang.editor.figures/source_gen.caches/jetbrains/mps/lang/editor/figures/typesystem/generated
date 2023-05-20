@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="bmu16ef3g1y21rjf8lq453hiih8qnug">
+  <files names="TypesystemDescriptor.java:Utils.java:check_ExternalViewFigureParameter_NonTypesystemRule.java:check_FigureParameterAttributeField_NonTypesystemRule.java:check_FigureParameterAttributeMethod_NonTypesystemRule.java:check_FigureParameterAttributeViewProperty_NonTypesystemRule.java:check_FigureParameterAttribute_NonTypesystemRule.java:typeof_FigureParameter_InferenceRule.java" />
+</product>
+

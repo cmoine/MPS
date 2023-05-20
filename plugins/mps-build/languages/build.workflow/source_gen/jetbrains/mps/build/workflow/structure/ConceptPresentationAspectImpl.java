@@ -4,102 +4,285 @@ package jetbrains.mps.build.workflow.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_BwfAntStatement = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfAntTaskBundleDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfAntTaskDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfCustomMacro = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfDependency = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfFileSet = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfJavaClassPath = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfJavaDependency = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfJavaDescriptor = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfJavaLibrary = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfJavaLibraryReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfJavaModule = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfJavaModuleReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfMacro = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfMacroListImport = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfPathDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfPathReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfProject = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfProjectPart = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfProjectPartStatement = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfStatement = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfSubTask = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfSubTaskDependency = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfTask = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfTaskDependency = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfTaskLibrary = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfTaskLibraryDependency = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BwfTaskPart = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_BwfAntProjectPart;
+  private ConceptPresentation props_BwfAntStatement;
+  private ConceptPresentation props_BwfAntTaskBundleDeclaration;
+  private ConceptPresentation props_BwfAntTaskDeclaration;
+  private ConceptPresentation props_BwfCustomMacro;
+  private ConceptPresentation props_BwfDependency;
+  private ConceptPresentation props_BwfFileSet;
+  private ConceptPresentation props_BwfJavaClassPath;
+  private ConceptPresentation props_BwfJavaDependency;
+  private ConceptPresentation props_BwfJavaDescriptor;
+  private ConceptPresentation props_BwfJavaLibrary;
+  private ConceptPresentation props_BwfJavaLibraryReference;
+  private ConceptPresentation props_BwfJavaModule;
+  private ConceptPresentation props_BwfJavaModuleReference;
+  private ConceptPresentation props_BwfMacro;
+  private ConceptPresentation props_BwfMacroListImport;
+  private ConceptPresentation props_BwfPathDeclaration;
+  private ConceptPresentation props_BwfPathReference;
+  private ConceptPresentation props_BwfProject;
+  private ConceptPresentation props_BwfProjectPart;
+  private ConceptPresentation props_BwfProjectPartStatement;
+  private ConceptPresentation props_BwfStatement;
+  private ConceptPresentation props_BwfSubTask;
+  private ConceptPresentation props_BwfSubTaskDependency;
+  private ConceptPresentation props_BwfTask;
+  private ConceptPresentation props_BwfTaskDependency;
+  private ConceptPresentation props_BwfTaskLibrary;
+  private ConceptPresentation props_BwfTaskLibraryDependency;
+  private ConceptPresentation props_BwfTaskMacroCondition;
+  private ConceptPresentation props_BwfTaskPart;
+  private ConceptPresentation props_BwfValueReference;
+  private ConceptPresentation props_BwfValueStatement;
+  private ConceptPresentation props_XmlForeignRefValue;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.BwfAntProjectPart:
+        if (props_BwfAntProjectPart == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ant");
+          props_BwfAntProjectPart = cpb.create();
+        }
+        return props_BwfAntProjectPart;
+      case LanguageConceptSwitch.BwfAntStatement:
+        if (props_BwfAntStatement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ant");
+          props_BwfAntStatement = cpb.create();
+        }
         return props_BwfAntStatement;
-      case 1:
+      case LanguageConceptSwitch.BwfAntTaskBundleDeclaration:
+        if (props_BwfAntTaskBundleDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ant task bundle");
+          props_BwfAntTaskBundleDeclaration = cpb.create();
+        }
         return props_BwfAntTaskBundleDeclaration;
-      case 2:
+      case LanguageConceptSwitch.BwfAntTaskDeclaration:
+        if (props_BwfAntTaskDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_BwfAntTaskDeclaration = cpb.create();
+        }
         return props_BwfAntTaskDeclaration;
-      case 3:
+      case LanguageConceptSwitch.BwfCustomMacro:
+        if (props_BwfCustomMacro == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("custom macro");
+          props_BwfCustomMacro = cpb.create();
+        }
         return props_BwfCustomMacro;
-      case 4:
+      case LanguageConceptSwitch.BwfDependency:
+        if (props_BwfDependency == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("BwfDependency");
+          props_BwfDependency = cpb.create();
+        }
         return props_BwfDependency;
-      case 5:
+      case LanguageConceptSwitch.BwfFileSet:
+        if (props_BwfFileSet == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("BwfFileSet");
+          props_BwfFileSet = cpb.create();
+        }
         return props_BwfFileSet;
-      case 6:
+      case LanguageConceptSwitch.BwfJavaClassPath:
+        if (props_BwfJavaClassPath == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("classpath value");
+          cpb.rawPresentation("cp");
+          props_BwfJavaClassPath = cpb.create();
+        }
         return props_BwfJavaClassPath;
-      case 7:
+      case LanguageConceptSwitch.BwfJavaDependency:
+        if (props_BwfJavaDependency == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_BwfJavaDependency = cpb.create();
+        }
         return props_BwfJavaDependency;
-      case 8:
+      case LanguageConceptSwitch.BwfJavaDescriptor:
+        if (props_BwfJavaDescriptor == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("java descriptor");
+          props_BwfJavaDescriptor = cpb.create();
+        }
         return props_BwfJavaDescriptor;
-      case 9:
+      case LanguageConceptSwitch.BwfJavaLibrary:
+        if (props_BwfJavaLibrary == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_BwfJavaLibrary = cpb.create();
+        }
         return props_BwfJavaLibrary;
-      case 10:
+      case LanguageConceptSwitch.BwfJavaLibraryReference:
+        if (props_BwfJavaLibraryReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("library");
+          props_BwfJavaLibraryReference = cpb.create();
+        }
         return props_BwfJavaLibraryReference;
-      case 11:
+      case LanguageConceptSwitch.BwfJavaModule:
+        if (props_BwfJavaModule == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_BwfJavaModule = cpb.create();
+        }
         return props_BwfJavaModule;
-      case 12:
+      case LanguageConceptSwitch.BwfJavaModuleReference:
+        if (props_BwfJavaModuleReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x698a8d22a10447a0L, 0xba8d10e3ec237f13L, 0x41fde5e4adce38c4L, 0x41fde5e4adce38c5L, "target", "", "");
+          props_BwfJavaModuleReference = cpb.create();
+        }
         return props_BwfJavaModuleReference;
-      case 13:
+      case LanguageConceptSwitch.BwfMacro:
+        if (props_BwfMacro == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_BwfMacro = cpb.create();
+        }
         return props_BwfMacro;
-      case 14:
+      case LanguageConceptSwitch.BwfMacroListImport:
+        if (props_BwfMacroListImport == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("import macros");
+          props_BwfMacroListImport = cpb.create();
+        }
         return props_BwfMacroListImport;
-      case 15:
+      case LanguageConceptSwitch.BwfPathDeclaration:
+        if (props_BwfPathDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_BwfPathDeclaration = cpb.create();
+        }
         return props_BwfPathDeclaration;
-      case 16:
+      case LanguageConceptSwitch.BwfPathReference:
+        if (props_BwfPathReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x698a8d22a10447a0L, 0xba8d10e3ec237f13L, 0x5c3f3e2c1cef4c1fL, 0x5c3f3e2c1cef4c20L, "target", "<pathref ", ">");
+          props_BwfPathReference = cpb.create();
+        }
         return props_BwfPathReference;
-      case 17:
+      case LanguageConceptSwitch.BwfProject:
+        if (props_BwfProject == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_BwfProject = cpb.create();
+        }
         return props_BwfProject;
-      case 18:
+      case LanguageConceptSwitch.BwfProjectPart:
+        if (props_BwfProjectPart == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_BwfProjectPart = cpb.create();
+        }
         return props_BwfProjectPart;
-      case 19:
+      case LanguageConceptSwitch.BwfProjectPartStatement:
+        if (props_BwfProjectPartStatement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("project part");
+          props_BwfProjectPartStatement = cpb.create();
+        }
         return props_BwfProjectPartStatement;
-      case 20:
+      case LanguageConceptSwitch.BwfStatement:
+        if (props_BwfStatement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("<empty>");
+          props_BwfStatement = cpb.create();
+        }
         return props_BwfStatement;
-      case 21:
+      case LanguageConceptSwitch.BwfSubTask:
+        if (props_BwfSubTask == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_BwfSubTask = cpb.create();
+        }
         return props_BwfSubTask;
-      case 22:
+      case LanguageConceptSwitch.BwfSubTaskDependency:
+        if (props_BwfSubTaskDependency == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x698a8d22a10447a0L, 0xba8d10e3ec237f13L, 0x2670d5989d5b49b8L, 0x2670d5989d5b49b9L, "target", "", "");
+          props_BwfSubTaskDependency = cpb.create();
+        }
         return props_BwfSubTaskDependency;
-      case 23:
+      case LanguageConceptSwitch.BwfTask:
+        if (props_BwfTask == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_BwfTask = cpb.create();
+        }
         return props_BwfTask;
-      case 24:
+      case LanguageConceptSwitch.BwfTaskDependency:
+        if (props_BwfTaskDependency == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x698a8d22a10447a0L, 0xba8d10e3ec237f13L, 0x2670d5989d5ace56L, 0x2670d5989d5ace57L, "target", "", "");
+          props_BwfTaskDependency = cpb.create();
+        }
         return props_BwfTaskDependency;
-      case 25:
+      case LanguageConceptSwitch.BwfTaskLibrary:
+        if (props_BwfTaskLibrary == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_BwfTaskLibrary = cpb.create();
+        }
         return props_BwfTaskLibrary;
-      case 26:
+      case LanguageConceptSwitch.BwfTaskLibraryDependency:
+        if (props_BwfTaskLibraryDependency == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x698a8d22a10447a0L, 0xba8d10e3ec237f13L, 0x6565da1147260537L, 0x6565da1147260538L, "target", "", "");
+          props_BwfTaskLibraryDependency = cpb.create();
+        }
         return props_BwfTaskLibraryDependency;
-      case 27:
+      case LanguageConceptSwitch.BwfTaskMacroCondition:
+        if (props_BwfTaskMacroCondition == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("if/unless macro value condition for a task");
+          cpb.rawPresentation("condition");
+          props_BwfTaskMacroCondition = cpb.create();
+        }
+        return props_BwfTaskMacroCondition;
+      case LanguageConceptSwitch.BwfTaskPart:
+        if (props_BwfTaskPart == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("task part");
+          props_BwfTaskPart = cpb.create();
+        }
         return props_BwfTaskPart;
+      case LanguageConceptSwitch.BwfValueReference:
+        if (props_BwfValueReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x698a8d22a10447a0L, 0xba8d10e3ec237f13L, 0x7a5e92d76995138eL, 0x7a5e92d7699513c3L, "path", "", "");
+          props_BwfValueReference = cpb.create();
+        }
+        return props_BwfValueReference;
+      case LanguageConceptSwitch.BwfValueStatement:
+        if (props_BwfValueStatement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.experimental(true);
+          cpb.presentationByName();
+          props_BwfValueStatement = cpb.create();
+        }
+        return props_BwfValueStatement;
+      case LanguageConceptSwitch.XmlForeignRefValue:
+        if (props_XmlForeignRefValue == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.experimental(true);
+          cpb.shortDesc("referenced value");
+          cpb.rawPresentation("*[");
+          props_XmlForeignRefValue = cpb.create();
+        }
+        return props_XmlForeignRefValue;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

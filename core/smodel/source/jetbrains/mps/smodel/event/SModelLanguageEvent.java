@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,29 +20,15 @@ import org.jetbrains.mps.annotations.Immutable;
 import org.jetbrains.mps.openapi.language.SLanguage;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
-import org.jetbrains.mps.openapi.module.SModuleReference;
 
 @Immutable
 public class SModelLanguageEvent extends SModelEvent {
-  private final SLanguage myLanguage2;
-  private final SModuleReference myLanguage;
+  private final SLanguage myLanguage;
   private final boolean myAdded;
 
   public SModelLanguageEvent(@NotNull SModel model, @NotNull SLanguage ref, boolean added) {
     super(model);
-    myLanguage = null;
-    myLanguage2 = ref;
-    myAdded = added;
-  }
-
-  /**
-   * @deprecated until it's clear whether language has a module to reference, use counterpart with SLanguage
-   */
-  @Deprecated
-  public SModelLanguageEvent(SModel model, SModuleReference ref, boolean added) {
-    super(model);
     myLanguage = ref;
-    myLanguage2 = null;
     myAdded = added;
   }
 
@@ -51,11 +37,11 @@ public class SModelLanguageEvent extends SModelEvent {
     return null;
   }
 
-  public SModuleReference getLanguageNamespace() {
-    if (myLanguage != null) {
-      return myLanguage;
-    }
-    return myLanguage2.getSourceModule() == null ? null : myLanguage2.getSourceModule().getModuleReference();
+  /**
+   * @return language added/removed to a {@link #getModel() model}
+   */
+  public SLanguage getEventLanguage() {
+    return myLanguage;
   }
 
   public boolean isAdded() {

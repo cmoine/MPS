@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module relativePaths="true" type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+  <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/classes" />
     <output-test url="file://$MODULE_DIR$/testclasses" />
     <exclude-output />
-    <content url="file://$MODULE_DIR$/patternRuntime">
-      <sourceFolder url="file://$MODULE_DIR$/patternRuntime/source" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/patternRuntime/source_gen" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/patternRuntime/test" isTestSource="true" />
-    </content>
-    <content url="file://$MODULE_DIR$/smodelRuntime">
+    <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/smodelRuntime/source_gen" isTestSource="false" />
-    </content>
-    <content url="file://$MODULE_DIR$/source">
+      <sourceFolder url="file://$MODULE_DIR$/kernelSolution/source_gen" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source" isTestSource="false" />
-    </content>
-    <content url="file://$MODULE_DIR$/source_gen">
-      <sourceFolder url="file://$MODULE_DIR$/source_gen" isTestSource="false" />
-    </content>
-    <content url="file://$MODULE_DIR$/tests">
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -28,20 +17,22 @@
     <orderEntry type="module" module-name="tuples-runtime" exported="" />
     <orderEntry type="module" module-name="closures-runtime" exported="" />
     <orderEntry type="module" module-name="collections-runtime" exported="" />
-    <orderEntry type="library" exported="" name="JDOM" level="project" />
-    <orderEntry type="library" name="Trove" level="project" />
-    <orderEntry type="library" name="Diff-utils" level="project" />
-    <orderEntry type="module" module-name="java-stub" scope="TEST" />
-    <orderEntry type="module" module-name="testbench" scope="TEST" />
-    <orderEntry type="library" scope="TEST" name="JMock" level="project" />
-    <orderEntry type="library" scope="TEST" name="JUnit4" level="project" />
     <orderEntry type="module" module-name="project" exported="" />
     <orderEntry type="module" module-name="components" exported="" />
     <orderEntry type="module" module-name="behavior-api" exported="" />
     <orderEntry type="module" module-name="behavior-runtime" exported="" />
     <orderEntry type="module" module-name="mps-messaging" exported="" />
-    <orderEntry type="module" module-name="startup-util" exported="" />
-    <orderEntry type="module" module-name="platform" scope="TEST" />
+    <orderEntry type="module" module-name="boot-util" />
+    <orderEntry type="library" name="org.jdom" level="project" />
+    <orderEntry type="library" name="gnu.trove" level="project" />
+    <orderEntry type="module" module-name="baseLanguage-runtime" exported="" />
+    <orderEntry type="module" module-name="constraints-runtime" exported="" />
+    <orderEntry type="module" module-name="context" exported="" />
+    <orderEntry type="module" module-name="messages-for-legacy-constraints" />
+    <orderEntry type="module" module-name="vfs" exported="" />
+    <orderEntry type="module" module-name="testbench" scope="TEST" />
+    <orderEntry type="library" scope="TEST" name="JMock" level="project" />
+    <orderEntry type="library" scope="TEST" name="JUnit4" level="project" />
     <orderEntry type="module" module-name="environment" scope="TEST" />
   </component>
 </module>

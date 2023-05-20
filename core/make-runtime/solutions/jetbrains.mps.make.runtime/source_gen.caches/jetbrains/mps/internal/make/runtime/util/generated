@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="3vkiv7w1j9a66u88ukeexdovwylcih9" />
+<product version="3" modelHash="-6uupnpzsv92d7988yq2tqljevbh9r7y">
+  <files names="DefaultHName.java:DeltaKey.java:DeltaReconciler.java:DirUtil.java:FilesDelta.java:FqName.java:FutureValue.java:GraphAnalyzer.java:SmartWrapper.java:StaleFilesCollector.java" />
+</product>
 

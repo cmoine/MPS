@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-aqjunok9hb8iz71v4wetuf9w6skjf6v" />
+<product version="3" modelHash="7v0lqwvjxpmdpmunrbtrmz8mpsrsft1">
+  <files names="LightPatternReferenceTest_Test.java:LightPattern_Child_Test.java:LightPattern_Inline_Test.java:LightPattern_List_Test.java:LightPattern_Property_Test.java:LightPattern_Reference_Test.java:PatternListPattern_Test.java:PatternMultipleOr_Test.java:PatternOrPattern2_Test.java:PatternOrPattern_Test.java:PatternProperty_Test.java:Pattern_49ctdq_a0b0a0a0a0a0e.java:Pattern_References_Test.java:Pattern_ay21uv_a0b0a0a0a0a0e.java:Pattern_i79cpz_a0b0a0a0a0a0e.java:Pattern_kxljzf_a0b0b0b0b.java:Pattern_kxljzf_a0b0b0b0c.java:Pattern_kxljzf_a0b0b0c0a.java:Pattern_o71ow3_a0b0a0a0a0a0e.java:Pattern_ofki36_a0b0a0a0a0a0e.java:Pattern_oo3baa_a0b0a0a0a0a0e.java:Pattern_qttyfe_a0b0a0a0a0a0e.java:Pattern_xihehy_a0b0a0a0a0a0e.java:Patternv1_Test.java:Patternv2_Test.java:Patternv3_Test.java" />
+</product>
 

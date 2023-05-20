@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model ref="r:3bcde24c-2aaa-4a7a-842b-6f9a60740263(migrationData)">
+  <persistence version="9" />
+  <languages />
+  <imports>
+    <import index="eynw" ref="r:359b1d2b-77c4-46df-9bf2-b25cbea32254(jetbrains.mps.console.base.structure)" implicit="true" />
+    <import index="4l22" ref="r:f09c85c2-fb88-4283-852e-78d5fc87420e(jetbrains.mps.console.base.editor)" implicit="true" />
+  </imports>
+  <registry>
+    <language id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor">
+      <concept id="3017733173184487099" name="jetbrains.mps.lang.editor.structure.SmartRefMigrationDataEntity" flags="ng" index="ZsZFI">
+        <reference id="3017733173184487105" name="generatedMenu" index="ZsZEk" />
+        <reference id="3017733173184487102" name="conceptNode" index="ZsZFF" />
+      </concept>
+      <concept id="3017733173184487098" name="jetbrains.mps.lang.editor.structure.SmartRefMigrationData" flags="ng" index="ZsZFJ">
+        <child id="3017733173184487121" name="entities" index="ZsZE4" />
+      </concept>
+    </language>
+    <language id="9882f4ad-1955-46fe-8269-94189e5dbbf2" name="jetbrains.mps.lang.migration.util">
+      <concept id="7417095922908669705" name="jetbrains.mps.lang.migration.util.structure.StepData" flags="ng" index="2z5JpS">
+        <property id="1973338949477451252" name="script" index="3qqn2_" />
+        <child id="7417095922908725798" name="data" index="2z5Xdn" />
+      </concept>
+    </language>
+  </registry>
+  <node concept="2z5JpS" id="47y0FrqhJxa">
+    <property role="3qqn2_" value="18bc6592-03a6-4e29-a83a-7ff23bde13ba(jetbrains.mps.lang.editor)/8" />
+    <node concept="ZsZFJ" id="47y0FrqhJwA" role="2z5Xdn">
+      <node concept="ZsZFI" id="47y0FrqhJwU" role="ZsZE4">
+        <ref role="ZsZFF" to="eynw:60B$832WV89" resolve="HelpConceptReference" />
+        <ref role="ZsZEk" to="4l22:47y0FrqhJwO" resolve="HelpConceptReference_SmartReference" />
+      </node>
+      <node concept="ZsZFI" id="47y0FrqhJx9" role="ZsZE4">
+        <ref role="ZsZFF" to="eynw:22lVekVE19_" resolve="NodeReferenceString" />
+        <ref role="ZsZEk" to="4l22:47y0FrqhJx3" resolve="NodeReferenceString_SmartReference" />
+      </node>
+    </node>
+  </node>
+</model>
+

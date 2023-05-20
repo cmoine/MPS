@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-bg059q7fpwvvhfy1fgoq6u4z12iofo6" />
+<product version="3" modelHash="9qovp6gyan7qc35gaktdzws6gfzfkw5">
+  <files names="ActionAspectDescriptorImpl.java:IconHelper.java:InitTextIcon.java" />
+</product>
 

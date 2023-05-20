@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,7 @@ package jetbrains.mps.typesystem.newTypesystem.structure;
 
 import gnu.trove.THashMap;
 import gnu.trove.THashSet;
-import org.apache.log4j.Logger;
-import org.apache.log4j.LogManager;
+import jetbrains.mps.logging.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,19 +25,19 @@ import java.util.Map;
 import java.util.Set;
 
 public class Type<Meta, Target> {
-  private static Logger LOG = LogManager.getLogger(Type.class);
+  private static Logger LOG = Logger.getLogger(Type.class);
 
   protected String myRole;
   protected IReference<Meta> myMeta;
-  protected List<Type<Meta, Target>> myChildren = new ArrayList<Type<Meta, Target>>(2);
-  protected Map<String, IReference<Target>> myReferences = new THashMap<String, IReference<Target>>(0);
+  protected List<Type<Meta, Target>> myChildren = new ArrayList<>(2);
+  protected Map<String, IReference<Target>> myReferences = new THashMap<>(0);
 
   public List<Type<Meta, Target>> getChildren() {
-    return new ArrayList<Type<Meta, Target>>(myChildren);
+    return new ArrayList<>(myChildren);
   }
 
   public List<Type<Meta, Target>> getChildren(String role) {
-    List<Type<Meta, Target>> result = new ArrayList<Type<Meta, Target>>();
+    List<Type<Meta, Target>> result = new ArrayList<>();
     if (role == null) return result;
     for (Type<Meta, Target> t : myChildren) {
       if (role.equals(t.myRole)) {
@@ -68,7 +67,7 @@ public class Type<Meta, Target> {
   }
 
   public Set<String> getReferenceRoles() {
-    return new THashSet<String>(myReferences.keySet());
+    return new THashSet<>(myReferences.keySet());
   }
 
   public void addChild(Type<Meta, Target> child, String role) {
@@ -89,7 +88,7 @@ public class Type<Meta, Target> {
   }
 
   public Set<String> getChildRoles() {
-    Set<String> result = new THashSet<String>();
+    Set<String> result = new THashSet<>();
     for (Type t : myChildren) {
       result.add(t.myRole);
     }

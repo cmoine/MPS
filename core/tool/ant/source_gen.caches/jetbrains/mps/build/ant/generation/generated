@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-dxchxiy33utmye2cd5liuidmzv0u71f" />
+<product version="3" modelHash="-bxjqoj505q8s5qhtadpo5oc0nglnu7y">
+  <files names="Chunk.java:GenTestTask.java:GenerateTask.java:ModuleChunkPart.java:MpsRunnerTask.java" />
+</product>
 

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<debug-info version="2">
-  <root nodeRef="r:10b498c7-d1bd-4b96-8a49-bb59f0e63af3(jetbrains.mps.lang.aspect.methods)/293220601665589234">
-    <file name="LanguageAspect_Queries.java">
-      <unit id="293220601665589234" at="6,0,8,0" name="jetbrains.mps.lang.aspect.methods.LanguageAspect_Queries" />
-    </file>
-  </root>
-</debug-info>
-

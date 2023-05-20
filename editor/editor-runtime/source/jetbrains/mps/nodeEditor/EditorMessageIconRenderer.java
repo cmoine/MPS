@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,13 @@
 package jetbrains.mps.nodeEditor;
 
 import com.intellij.openapi.actionSystem.AnAction;
+import jetbrains.mps.openapi.editor.EditorComponent;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
+import jetbrains.mps.smodel.ModelAccessHelper;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.mps.openapi.model.SNodeReference;
+import org.jetbrains.mps.openapi.module.SRepository;
 
 import javax.swing.Icon;
 import javax.swing.JPopupMenu;
@@ -29,19 +34,46 @@ public interface EditorMessageIconRenderer {
 
   String getTooltipText();
 
-  SNode getNode();
+  /**
+   * @return node, if any, this message icon is rendered for
+   */
+  @Nullable
+  SNodeReference getNodeReference();
 
   IconRendererType getType();
 
-  EditorCell getAnchorCell(EditorCell bigCell);
+  /**
+   * @return semantic cell this icon renderer is associated with
+   */
+  @Nullable
+  default EditorCell getNodeCell(EditorComponent editorComponent) {
+    SNodeReference nodeRef = getNodeReference();
+    if (nodeRef == null) {
+      return null;
+    }
+    final SRepository repo = editorComponent.getEditorContext().getRepository();
+    return new ModelAccessHelper(repo).runReadAction(() -> {
+      SNode n = nodeRef.resolve(repo);
+      // intentionally look up under folded cells, client can check if cell is folded.
+      return n == null ? null : editorComponent.findNodeCell(n, true);
+    });
+  }
 
-   Cursor getMouseOverCursor();
+  /**
+   * @return cell this icon is painted relative to, defaults to {@link #getNodeCell(EditorComponent)}
+   */
+  @Nullable
+  default EditorCell getAnchorCell(EditorComponent editorComponent) {
+    return getNodeCell(editorComponent);
+  }
+
+  Cursor getMouseOverCursor();
 
   AnAction getClickAction();
 
   JPopupMenu getPopupMenu();
 
-  public class IconRendererType {
+  class IconRendererType {
 
     private final int myWeight;
 

@@ -5,12 +5,9 @@ package jetbrains.mps.execution.commands.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import org.jetbrains.mps.openapi.model.SNode;
 import java.util.List;
@@ -23,36 +20,38 @@ import jetbrains.mps.internal.collections.runtime.Sequence;
 import jetbrains.mps.internal.collections.runtime.ISelector;
 import jetbrains.mps.internal.collections.runtime.ITranslator2;
 import jetbrains.mps.internal.collections.runtime.IWhereFilter;
+import java.util.Objects;
 import java.util.ArrayList;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
-import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
-import jetbrains.mps.smodel.SModelUtil_new;
+import jetbrains.mps.smodel.builder.SNodeBuilder;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
+import org.jetbrains.mps.openapi.language.SConcept;
 
 public final class CommandDeclaration__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0xf3347d8a0e794f35L, 0x8ac91574f25c986fL, 0xbe3a0d5ba1a2be8L, "jetbrains.mps.execution.commands.structure.CommandDeclaration");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<Boolean> isDebuggable_idJzCdmU6yOQ = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isDebuggable").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("JzCdmU6yOQ").registry(REGISTRY).build();
-  public static final SMethod<String> getSuffix_idO$iR4JBsSb = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getSuffix").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("O$iR4JBsSb").registry(REGISTRY).build();
-  public static final SMethod<SNode> createType_idhEwJimy = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("createType").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("hEwJimy").registry(REGISTRY).build();
-  public static final SMethod<List<SNode>> getDistinctFieldParameters_id5keEkmeCrcX = new SMethodBuilder<List<SNode>>(new SJavaCompoundTypeImpl((Class<List<SNode>>) ((Class) Object.class))).name("getDistinctFieldParameters").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("5keEkmeCrcX").registry(REGISTRY).build();
-  public static final SMethod<List<SNode>> getDistinctByNameAndTypeFieldParameters_id3gpm$NHlR4n = new SMethodBuilder<List<SNode>>(new SJavaCompoundTypeImpl((Class<List<SNode>>) ((Class) Object.class))).name("getDistinctByNameAndTypeFieldParameters").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("3gpm$NHlR4n").registry(REGISTRY).build();
-  /*package*/ static final SMethod<Iterable<SNode>> getFieldParameters_id3gpm$NHlR5N = new SMethodBuilder<Iterable<SNode>>(new SJavaCompoundTypeImpl((Class<Iterable<SNode>>) ((Class) Object.class))).name("getFieldParameters").modifiers(SModifiersImpl.create(0, AccessPrivileges.PRIVATE)).concept(CONCEPT).id("3gpm$NHlR5N").registry(REGISTRY).build();
-  public static final SMethod<String> getCreateProcessMethodName_idJzCdmU6yOE = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getCreateProcessMethodName").modifiers(SModifiersImpl.create(1, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("JzCdmU6yOE").registry(REGISTRY).build();
-  public static final SMethod<String> getGetDebuggerMethodName_idJzCdmU6yOK = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getGetDebuggerMethodName").modifiers(SModifiersImpl.create(1, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("JzCdmU6yOK").registry(REGISTRY).build();
-  public static final SMethod<String> getGetDebuggerConfidurationMethodName_id5pE1_aqZc7s = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getGetDebuggerConfidurationMethodName").modifiers(SModifiersImpl.create(1, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("5pE1_aqZc7s").registry(REGISTRY).build();
+  public static final SMethod<Boolean> isDebuggable_idJzCdmU6yOQ = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isDebuggable").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(856705193941282102L).languageId(0x8ac91574f25c986fL, 0xf3347d8a0e794f35L).build2();
+  public static final SMethod<String> getSuffix_idO$iR4JBsSb = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getSuffix").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(946964771156905483L).languageId(0x8292b8985697c74bL, 0x73c1a49099fa4d0dL).build2();
+  public static final SMethod<SNode> createType_idhEwJimy = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("createType").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1213877527970L).languageId(0x95008d06ed259e3eL, 0x443f4c36fcf54eb6L).build2();
+  public static final SMethod<List<SNode>> getDistinctFieldParameters_id5keEkmeCrcX = new SMethodBuilder<List<SNode>>(new SJavaCompoundTypeImpl((Class<List<SNode>>) ((Class) Object.class))).name("getDistinctFieldParameters").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(6129022259108623165L).languageId(0x8ac91574f25c986fL, 0xf3347d8a0e794f35L).build2();
+  public static final SMethod<List<SNode>> getDistinctByNameAndTypeFieldParameters_id3gpm$NHlR4n = new SMethodBuilder<List<SNode>>(new SJavaCompoundTypeImpl((Class<List<SNode>>) ((Class) Object.class))).name("getDistinctByNameAndTypeFieldParameters").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(3754131050835964183L).languageId(0x8ac91574f25c986fL, 0xf3347d8a0e794f35L).build2();
+  /*package*/ static final SMethod<Iterable<SNode>> getFieldParameters_id3gpm$NHlR5N = new SMethodBuilder<Iterable<SNode>>(new SJavaCompoundTypeImpl((Class<Iterable<SNode>>) ((Class) Object.class))).name("getFieldParameters").modifiers(0, AccessPrivileges.PRIVATE).concept(CONCEPT).baseMethodId(3754131050835964275L).languageId(0x8ac91574f25c986fL, 0xf3347d8a0e794f35L).build2();
+  public static final SMethod<String> getCreateProcessMethodName_idJzCdmU6yOE = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getCreateProcessMethodName").modifiers(1, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(856705193941282090L).languageId(0x8ac91574f25c986fL, 0xf3347d8a0e794f35L).build2();
+  public static final SMethod<String> getGetDebuggerMethodName_idJzCdmU6yOK = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getGetDebuggerMethodName").modifiers(1, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(856705193941282096L).languageId(0x8ac91574f25c986fL, 0xf3347d8a0e794f35L).build2();
+  public static final SMethod<String> getGetDebuggerConfidurationMethodName_id5pE1_aqZc7s = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getGetDebuggerConfidurationMethodName").modifiers(1, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(6226796386650472924L).languageId(0x8ac91574f25c986fL, 0xf3347d8a0e794f35L).build2();
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(isDebuggable_idJzCdmU6yOQ, getSuffix_idO$iR4JBsSb, createType_idhEwJimy, getDistinctFieldParameters_id5keEkmeCrcX, getDistinctByNameAndTypeFieldParameters_id3gpm$NHlR4n, getFieldParameters_id3gpm$NHlR5N, getCreateProcessMethodName_idJzCdmU6yOE, getGetDebuggerMethodName_idJzCdmU6yOK, getGetDebuggerConfidurationMethodName_id5pE1_aqZc7s);
 
   private static void ___init___(@NotNull SNode __thisNode__) {
-    SLinkOperations.setTarget(__thisNode__, MetaAdapterFactory.getContainmentLink(0xf3347d8a0e794f35L, 0x8ac91574f25c986fL, 0xbe3a0d5ba1a2be8L, 0x75aadb0d4e6223baL, "debuggerParameter"), SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0xf3347d8a0e794f35L, 0x8ac91574f25c986fL, 0x75aadb0d4e61a576L, "jetbrains.mps.execution.commands.structure.DebuggerSettingsCommandParameterDeclaration")));
+    SLinkOperations.setTarget(__thisNode__, LINKS.debuggerParameter$d8Sj, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0xf3347d8a0e794f35L, 0x8ac91574f25c986fL, 0x75aadb0d4e61a576L, "jetbrains.mps.execution.commands.structure.DebuggerSettingsCommandParameterDeclaration")));
   }
 
   /*package*/ static boolean isDebuggable_idJzCdmU6yOQ(@NotNull SNode __thisNode__) {
-    return (SLinkOperations.getTarget(__thisNode__, MetaAdapterFactory.getContainmentLink(0xf3347d8a0e794f35L, 0x8ac91574f25c986fL, 0xbe3a0d5ba1a2be8L, 0x5b66ff7a6627d632L, "debuggerConfiguration")) != null);
+    return (SLinkOperations.getTarget(__thisNode__, LINKS.debuggerConfiguration$G31D) != null);
   }
   @NonNls
   /*package*/ static String getSuffix_idO$iR4JBsSb(@NotNull SNode __thisNode__) {
@@ -62,8 +61,8 @@ public final class CommandDeclaration__BehaviorDescriptor extends BaseBHDescript
     return createCommandType_5aznw1_a0a2(__thisNode__);
   }
   /*package*/ static List<SNode> getDistinctFieldParameters_id5keEkmeCrcX(@NotNull SNode __thisNode__) {
-    // we get all parameters generated into fields and select a list with uniquie names 
-    final Iterable<SNode> parameterDeclarations = CommandDeclaration__BehaviorDescriptor.getFieldParameters_id3gpm$NHlR5N.invoke(__thisNode__);
+    // we get all parameters generated into fields and select a list with uniquie names
+    final Iterable<SNode> parameterDeclarations = CommandDeclaration__BehaviorDescriptor.getFieldParameters_id3gpm$NHlR5N.invokeSpecial(__thisNode__);
     Iterable<String> fieldNames = Sequence.fromIterable(parameterDeclarations).select(new ISelector<SNode, String>() {
       public String select(SNode it) {
         return (String) CommandParameterDeclaration__BehaviorDescriptor.getFieldName_id6mJVBGGspQq.invoke(it);
@@ -73,7 +72,7 @@ public final class CommandDeclaration__BehaviorDescriptor extends BaseBHDescript
       public Iterable<SNode> translate(final String it) {
         SNode first = Sequence.fromIterable(parameterDeclarations).findFirst(new IWhereFilter<SNode>() {
           public boolean accept(SNode decl) {
-            return eq_f5121k_a0a0a0a0a0a0a0a0a0a0d0u(CommandParameterDeclaration__BehaviorDescriptor.getFieldName_id6mJVBGGspQq.invoke(decl), it);
+            return Objects.equals(CommandParameterDeclaration__BehaviorDescriptor.getFieldName_id6mJVBGGspQq.invoke(decl), it);
           }
         });
         if (first == null) {
@@ -94,7 +93,7 @@ public final class CommandDeclaration__BehaviorDescriptor extends BaseBHDescript
       public Iterable<SNode> translate(final String it) {
         SNode first = Sequence.fromIterable(parameterDeclarations).findFirst(new IWhereFilter<SNode>() {
           public boolean accept(SNode decl) {
-            return eq_f5121k_a0a0a0a0a0a0a0a0a0a0c0v(CommandParameterDeclaration__BehaviorDescriptor.getSetterLongName_id3gpm$NHlR8F.invoke(decl), it);
+            return Objects.equals(CommandParameterDeclaration__BehaviorDescriptor.getSetterLongName_id3gpm$NHlR8F.invoke(decl), it);
           }
         });
         if (first == null) {
@@ -105,7 +104,7 @@ public final class CommandDeclaration__BehaviorDescriptor extends BaseBHDescript
     }).toListSequence();
   }
   /*package*/ static Iterable<SNode> getFieldParameters_id3gpm$NHlR5N(@NotNull SNode __thisNode__) {
-    return ListSequence.fromList(SLinkOperations.getChildren(__thisNode__, MetaAdapterFactory.getContainmentLink(0xf3347d8a0e794f35L, 0x8ac91574f25c986fL, 0xbe3a0d5ba1a2be8L, 0x550ea9458ea107beL, "executePart"))).translate(new ITranslator2<SNode, SNode>() {
+    return ListSequence.fromList(SLinkOperations.getChildren(__thisNode__, LINKS.executePart$8WBn)).translate(new ITranslator2<SNode, SNode>() {
       public Iterable<SNode> translate(SNode it) {
         return ListSequence.fromList(ExecuteCommandPart__BehaviorDescriptor.getParameters_id5keEkmeCqHW.invoke(it)).where(new IWhereFilter<SNode>() {
           public boolean accept(SNode it) {
@@ -126,7 +125,6 @@ public final class CommandDeclaration__BehaviorDescriptor extends BaseBHDescript
   }
 
   /*package*/ CommandDeclaration__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -187,16 +185,20 @@ public final class CommandDeclaration__BehaviorDescriptor extends BaseBHDescript
   public SAbstractConcept getConcept() {
     return CONCEPT;
   }
-  private static SNode createCommandType_5aznw1_a0a2(Object p0) {
-    PersistenceFacade facade = PersistenceFacade.getInstance();
-    SNode n1 = SModelUtil_new.instantiateConceptDeclaration(MetaAdapterFactory.getConcept(0xf3347d8a0e794f35L, 0x8ac91574f25c986fL, 0xbe3a0d5ba1a2bd6L, "jetbrains.mps.execution.commands.structure.CommandType"), null, null, false);
-    n1.setReferenceTarget(MetaAdapterFactory.getReferenceLink(0x443f4c36fcf54eb6L, 0x95008d06ed259e3eL, 0x118bc7942feL, 0x118bc796c90L, "classifier"), (SNode) p0);
-    return n1;
+  private static SNode createCommandType_5aznw1_a0a2(SNode p0) {
+    SNodeBuilder n0 = new SNodeBuilder().init(CONCEPTS.CommandType$IS);
+    n0.setReferenceTarget(LINKS.classifier$1EGS, p0);
+    return n0.getResult();
   }
-  private static boolean eq_f5121k_a0a0a0a0a0a0a0a0a0a0d0u(Object a, Object b) {
-    return (a != null ? a.equals(b) : a == b);
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink debuggerParameter$d8Sj = MetaAdapterFactory.getContainmentLink(0xf3347d8a0e794f35L, 0x8ac91574f25c986fL, 0xbe3a0d5ba1a2be8L, 0x75aadb0d4e6223baL, "debuggerParameter");
+    /*package*/ static final SContainmentLink debuggerConfiguration$G31D = MetaAdapterFactory.getContainmentLink(0xf3347d8a0e794f35L, 0x8ac91574f25c986fL, 0xbe3a0d5ba1a2be8L, 0x5b66ff7a6627d632L, "debuggerConfiguration");
+    /*package*/ static final SContainmentLink executePart$8WBn = MetaAdapterFactory.getContainmentLink(0xf3347d8a0e794f35L, 0x8ac91574f25c986fL, 0xbe3a0d5ba1a2be8L, 0x550ea9458ea107beL, "executePart");
+    /*package*/ static final SReferenceLink classifier$1EGS = MetaAdapterFactory.getReferenceLink(0x443f4c36fcf54eb6L, 0x95008d06ed259e3eL, 0x118bc7942feL, 0x118bc796c90L, "classifier");
   }
-  private static boolean eq_f5121k_a0a0a0a0a0a0a0a0a0a0c0v(Object a, Object b) {
-    return (a != null ? a.equals(b) : a == b);
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept CommandType$IS = MetaAdapterFactory.getConcept(0xf3347d8a0e794f35L, 0x8ac91574f25c986fL, 0xbe3a0d5ba1a2bd6L, "jetbrains.mps.execution.commands.structure.CommandType");
   }
 }

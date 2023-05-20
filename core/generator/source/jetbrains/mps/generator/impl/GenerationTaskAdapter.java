@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,9 @@ package jetbrains.mps.generator.impl;
 
 import jetbrains.mps.generator.GenerationCanceledException;
 import jetbrains.mps.generator.impl.IGenerationTaskPool.GenerationTask;
-import jetbrains.mps.smodel.ModelAccess;
-import jetbrains.mps.typesystem.inference.TypeChecker;
+import jetbrains.mps.typechecking.TypecheckingFacade;
+import jetbrains.mps.typechecking.TypecheckingSession;
+import jetbrains.mps.typechecking.TypecheckingSession.Handle;
 import jetbrains.mps.util.Callback;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,28 +39,13 @@ class GenerationTaskAdapter implements Runnable {
 
   @Override
   public void run() {
-    /*
-     * readEnabledFlag is a workaround to deal with implementation peculiarities of non-fair ReentrantReadWriteLock.
-     * IDEA uses non-fair RRWL for its read/write actions, which we use for our model read-write actions.
-     * Generator starts with a read action, and grabs platform read lock. GenerationTaskPool#waitForCompletion
-     * blocks read, and spawns few other threads which try to grab read lock. Unless there's a platform write action,
-     * everything is fine. If, however, there's a write action (e.g. focus lost event and document save action), platform
-     * tries to lock write lock of RRWL, which, in its non-fair state, put write requestee to the top of waiting queue,
-     * effectively preventing any further read attempts. Threads of GenerationTaskPool has no chance to complete,
-     * and read lock of primary generator thread is never released. Deadlock.
-     *
-     * Note, readEnabledFlag (or any other 'lightweight' model read alternative) doesn't look as a decent solution,
-     * as the read lock of primary thread still blocks platform write actions.
-     */
-    final boolean flag = ModelAccess.instance().setReadEnabledFlag(true);
+    Handle typecheckingSessionToken = TypecheckingFacade.getFromContext().requestNewSession(TypecheckingSession.Flags.generatorWorker());
     try {
-      TypeChecker.getInstance().generationWorkerStarted();
       myTask.run();
     } catch (Throwable th) {
       myExceptionReporter.call(th);
     } finally {
-      TypeChecker.getInstance().generationWorkerFinished();
-      ModelAccess.instance().setReadEnabledFlag(flag);
+      typecheckingSessionToken.release();
     }
   }
 

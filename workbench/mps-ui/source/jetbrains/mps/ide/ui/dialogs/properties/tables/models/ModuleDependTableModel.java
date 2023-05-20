@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SModuleReference;
 import org.jetbrains.mps.openapi.module.SRepository;
 
+import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -45,20 +46,17 @@ public class ModuleDependTableModel extends DependTableModel<ModuleDescriptor> {
   @Override
   public void init() {
     if(!(myItem instanceof DevkitDescriptor)) {
-      myRepository.getModelAccess().runReadAction(new Runnable() {
-        @Override
-        public void run() {
-          for(Dependency dependency : myItem.getDependencies()) {
-            SModuleReference moduleReference = dependency.getModuleRef();
-            final SModule module = moduleReference.resolve(myRepository);
-            if(module instanceof Language) {
-              addLanguageItem(dependency);
-            } else if(module instanceof Generator) {
-              addGeneratorItem(dependency);
-            } else {
-              // XXX why not checked for Solution?
-              addUnspecifiedItem(dependency);
-            }
+      myRepository.getModelAccess().runReadAction(() -> {
+        for(Dependency dependency : myItem.getDependencies()) {
+          SModuleReference moduleReference = dependency.getModuleRef();
+          final SModule module = moduleReference.resolve(myRepository);
+          if(module instanceof Language) {
+            addLanguageItem(dependency);
+          } else if(module instanceof Generator) {
+            addGeneratorItem(dependency);
+          } else {
+            // XXX why not checked for Solution?
+            addUnspecifiedItem(dependency);
           }
         }
       });
@@ -99,8 +97,10 @@ public class ModuleDependTableModel extends DependTableModel<ModuleDescriptor> {
   public boolean isModified() {
     boolean equals = true;
 
-    if(!(myItem instanceof DevkitDescriptor))
-      equals = myItem.getDependencies().containsAll(getDependencies()) && getDependencies().containsAll(myItem.getDependencies());
+    if(!(myItem instanceof DevkitDescriptor)) {
+      final Set<Dependency> newDeps = getDependencies();
+      equals = myItem.getDependencies().containsAll(newDeps) && newDeps.containsAll(myItem.getDependencies());
+    }
 
     if(myItem instanceof LanguageDescriptor) {
       LanguageDescriptor languageDescriptor = (LanguageDescriptor) myItem;
@@ -132,8 +132,13 @@ public class ModuleDependTableModel extends DependTableModel<ModuleDescriptor> {
   public void apply() {
 
     if(!(myItem instanceof DevkitDescriptor)) {
-      myItem.getDependencies().clear();
-      myItem.getDependencies().addAll(getDependencies());
+      final Collection<Dependency> deps = myItem.getDependencies();
+      deps.clear();
+      // getDependencies() gives access to internal table state (which we keep using same
+      // Dependency class), copy() prevents scenario when one hits apply, receives changes
+      // in myItem.getDependencies, then modifies scope or re-export and hits cancel - for
+      // the second change not to get into result.
+      getDependencies().stream().map(Dependency::copy).forEach(deps::add);
     }
 
     if(myItem instanceof LanguageDescriptor) {
@@ -165,7 +170,7 @@ public class ModuleDependTableModel extends DependTableModel<ModuleDescriptor> {
   }
 
   private Set<Dependency> getDependencies() {
-    Set<Dependency> dependencies = new LinkedHashSet<Dependency>();
+    Set<Dependency> dependencies = new LinkedHashSet<>();
     for(DependenciesTableItem tableItem : myTableItems) {
       // FIXME here's comes a hack. We used to save only 'DEFAULT' SDependency with Dependency,
       // FIXME        and 'EXTENDS' as SModuleReference (@see getExtendedModules, below).
@@ -173,14 +178,19 @@ public class ModuleDependTableModel extends DependTableModel<ModuleDescriptor> {
       // FIXME        to single Dependency presentation. Meanwhile (as there no scopes but EXTENDS and DEFAULT in legacy descriptors)
       // FIXME        this code simply leaves EXTENDS processing as it was, but saves all other dependencies with Dependency object
       if (tableItem.getItem().getScope() != SDependencyScope.EXTENDS) {
-        dependencies.add(tableItem.getItem().getCopy()); // XXX not sure copy is needed here
+        dependencies.add(tableItem.getItem());
       }
     }
     return dependencies;
   }
 
-  private Set<SModuleReference> getExtendedModules() {
-    Set<SModuleReference> set = new LinkedHashSet<SModuleReference>();
+  /**
+   * Public solely for use from condition of ModulePropertiesConfigurable.ModuleDependenciesTab that needs
+   * to tell actual state of modules picked as 'extends'
+   * @return
+   */
+  public Set<SModuleReference> getExtendedModules() {
+    Set<SModuleReference> set = new LinkedHashSet<>();
     for(DependenciesTableItem tableItem : myTableItems)
       if(tableItem.getItem().getScope() == SDependencyScope.EXTENDS) // XXX see getDependencies() above
         set.add(tableItem.getItem().getModuleRef());
@@ -189,7 +199,7 @@ public class ModuleDependTableModel extends DependTableModel<ModuleDescriptor> {
   }
 
   private Set<SModuleReference> getModulesByType(ModuleType type) {
-    Set<SModuleReference> set = new LinkedHashSet<SModuleReference>();
+    Set<SModuleReference> set = new LinkedHashSet<>();
     for(DependenciesTableItem tableItem : myTableItems)
       if(tableItem.getModuleType().equals(type))
         set.add(tableItem.getItem().getModuleRef());

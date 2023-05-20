@@ -19,6 +19,15 @@ import org.jetbrains.mps.openapi.model.SNode;
 
 public interface InferenceRule_Runtime extends ICheckingRule_Runtime {
 
-  boolean supercedesAttributed(SNode argument, IsApplicableStatus status);
+  /**
+   * @return whether the rule overrides every other rule defined in superconcepts
+   * Unlike {@link ICheckingRule_Runtime#overrides()}, if there are several applicable rules (derived from difference superconcepts)
+   * with this method returning true, only one is chosen.
+   *
+   * This method is called for secondary filtration after rules with {@link ICheckingRule_Runtime#overrides()} returning true are already thrown away
+   */
+  boolean overrides(SNode argument, IsApplicableStatus status);
+
+  boolean supersedesAttributed(SNode argument, IsApplicableStatus status);
 
 }

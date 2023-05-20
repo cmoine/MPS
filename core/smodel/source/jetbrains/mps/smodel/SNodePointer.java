@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +15,8 @@
  */
 package jetbrains.mps.smodel;
 
-import jetbrains.mps.smodel.references.UnregisteredNodes;
-import jetbrains.mps.util.EqualUtil;
 import jetbrains.mps.util.StringUtil;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.annotations.Immutable;
 import org.jetbrains.mps.openapi.model.SModel;
@@ -27,6 +26,9 @@ import org.jetbrains.mps.openapi.model.SNodeId;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 import org.jetbrains.mps.openapi.module.SRepository;
 import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
+import org.jetbrains.mps.openapi.persistence.PersistenceFacade.IncorrectNodeIdFormatException;
+
+import java.util.Objects;
 
 @Immutable
 public class SNodePointer implements SNodeReference {
@@ -63,17 +65,14 @@ public class SNodePointer implements SNodeReference {
 
       SModel model = myModelReference.resolve(repo);
       if (model != null) {
-        SNode node = model.getNode(myNodeId);
-        if (node != null) {
-          return node;
-        }
+        return model.getNode(myNodeId);
       }
     }
 
-    UnregisteredNodes unregisteredNodes = UnregisteredNodes.instance();
-    if (unregisteredNodes != null) {
-      return unregisteredNodes.get(myModelReference, myNodeId);
-    }
+//    UnregisteredNodes unregisteredNodes = UnregisteredNodes.instance();
+//    if (unregisteredNodes != null) {
+//      return unregisteredNodes.get(myModelReference, myNodeId);
+//    }
     return null;
   }
 
@@ -84,15 +83,15 @@ public class SNodePointer implements SNodeReference {
   }
 
   public String toString() {
-    return myModelReference + "/" + StringUtil.escapeRefChars("" + myNodeId);
+    return SNodePointer.serialize(this);
   }
 
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (o == null || !(o instanceof SNodePointer)) return false;
+    if (!(o instanceof SNodePointer)) return false;
 
     SNodePointer np = (SNodePointer) o;
-    return EqualUtil.equals(myModelReference, np.myModelReference) && EqualUtil.equals(myNodeId, np.myNodeId);
+    return Objects.equals(myModelReference, np.myModelReference) && Objects.equals(myNodeId, np.myNodeId);
   }
 
   public int hashCode() {
@@ -108,20 +107,33 @@ public class SNodePointer implements SNodeReference {
 
   public static String serialize(SNodeReference p) {
     SNodePointer np = (SNodePointer) p;
-    SModelReference ref = np.myModelReference;
-    SNodeId id = np.myNodeId;
-
-    assert ref != null && id != null;
-
-    return ref.toString() + "/" + StringUtil.escapeRefChars(id.toString());
+    return np.myModelReference + "/" + StringUtil.escapeRefChars(String.valueOf(np.myNodeId));
   }
 
-  public static SNodeReference deserialize(String from) {
-    int delimiterIndex = from.lastIndexOf("/");
+  public static SNodeReference deserialize(@NotNull String from) {
+    int delimiterIndex = from.lastIndexOf('/');
+    if (delimiterIndex < 0) {
+      throw new IncorrectNodeIdFormatException("No delimiter discovered in the passed argument " + from);
+    }
     String nodeId = StringUtil.unescapeRefChars(from.substring(delimiterIndex + 1));
-    String modelReference = from.substring(0, delimiterIndex);
+    SNodeId sNodeId;
+    if (String.valueOf((Object) null).equals(nodeId)) {
+      // supporting myNodeId == null serialized to string
+      sNodeId = null;
+    } else {
+      sNodeId = PersistenceFacade.getInstance().createNodeId(nodeId);
+    }
 
-    return new jetbrains.mps.smodel.SNodePointer(modelReference, nodeId);
+    String modelReference = from.substring(0, delimiterIndex);
+    SModelReference sModelReference;
+    if (String.valueOf((Object) null).equals(modelReference)) {
+      // supporting myModelReference == null serialized to string
+      sModelReference = null;
+    } else {
+      sModelReference = PersistenceFacade.getInstance().createModelReference(modelReference);
+    }
+
+    return new jetbrains.mps.smodel.SNodePointer(sModelReference, sNodeId);
   }
 
   @Nullable

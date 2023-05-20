@@ -3,8 +3,8 @@
   <persistence version="9" />
   <languages>
     <use id="7a6f7ef7-3988-464b-8cc5-1182671c136e" name="jetbrains.mps.samples.languagePatterns.Basic" version="0" />
-    <use id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core" version="1" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core" version="2" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports>
     <import index="wyt6" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)" implicit="true" />
@@ -79,11 +79,8 @@
       <concept id="1178549954367" name="jetbrains.mps.baseLanguage.structure.IVisible" flags="ng" index="1B3ioH">
         <child id="1178549979242" name="visibility" index="1B3o_S" />
       </concept>
-      <concept id="6329021646629104957" name="jetbrains.mps.baseLanguage.structure.TextCommentPart" flags="nn" index="3SKdUq">
-        <property id="6329021646629104958" name="text" index="3SKdUp" />
-      </concept>
       <concept id="6329021646629104954" name="jetbrains.mps.baseLanguage.structure.SingleLineComment" flags="nn" index="3SKdUt">
-        <child id="6329021646629175155" name="commentPart" index="3SKWNk" />
+        <child id="8356039341262087992" name="line" index="1aUNEU" />
       </concept>
       <concept id="1146644602865" name="jetbrains.mps.baseLanguage.structure.PublicVisibility" flags="nn" index="3Tm1VV" />
       <concept id="1080120340718" name="jetbrains.mps.baseLanguage.structure.AndExpression" flags="nn" index="1Wc70l" />
@@ -180,6 +177,14 @@
       </concept>
       <concept id="1169194658468" name="jetbrains.mps.lang.core.structure.INamedConcept" flags="ng" index="TrEIO">
         <property id="1169194664001" name="name" index="TrG5h" />
+      </concept>
+    </language>
+    <language id="c7fb639f-be78-4307-89b0-b5959c3fa8c8" name="jetbrains.mps.lang.text">
+      <concept id="155656958578482948" name="jetbrains.mps.lang.text.structure.Word" flags="nn" index="3oM_SD">
+        <property id="155656958578482949" name="value" index="3oM_SC" />
+      </concept>
+      <concept id="2535923850359271782" name="jetbrains.mps.lang.text.structure.Line" flags="nn" index="1PaTwC">
+        <child id="2535923850359271783" name="elements" index="1PaTwD" />
       </concept>
     </language>
   </registry>
@@ -418,11 +423,11 @@
             <node concept="1I7xeh" id="4yAESKAJhwT" role="2OqNvi" />
           </node>
           <node concept="liA8E" id="4yAESKAKGnK" role="2OqNvi">
-            <ref role="37wK5l" to="wyt6:~String.toUpperCase():java.lang.String" resolve="toUpperCase" />
+            <ref role="37wK5l" to="wyt6:~String.toUpperCase()" resolve="toUpperCase" />
           </node>
         </node>
         <node concept="liA8E" id="4yAESKAKGwr" role="2OqNvi">
-          <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object):boolean" resolve="equals" />
+          <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object)" resolve="equals" />
           <node concept="2OqwBi" id="4yAESKAKGDQ" role="37wK5m">
             <node concept="2OqwBi" id="4yAESKAKG$z" role="2Oq$k0">
               <node concept="1I4TUT" id="4yAESKAKGyi" role="2Oq$k0">
@@ -431,7 +436,7 @@
               <node concept="1I7xeh" id="4yAESKAKGAM" role="2OqNvi" />
             </node>
             <node concept="liA8E" id="4yAESKAKGHA" role="2OqNvi">
-              <ref role="37wK5l" to="wyt6:~String.toUpperCase():java.lang.String" resolve="toUpperCase" />
+              <ref role="37wK5l" to="wyt6:~String.toUpperCase()" resolve="toUpperCase" />
             </node>
           </node>
         </node>
@@ -445,7 +450,7 @@
             <node concept="1I7L_F" id="4yAESKAJhE4" role="2OqNvi" />
           </node>
           <node concept="liA8E" id="4yAESKAJuGK" role="2OqNvi">
-            <ref role="37wK5l" to="wyt6:~String.length():int" resolve="length" />
+            <ref role="37wK5l" to="wyt6:~String.length()" resolve="length" />
           </node>
         </node>
         <node concept="3cmrfG" id="4yAESKAJv6M" role="3uHU7w">
@@ -469,8 +474,10 @@
       <node concept="3Tm1VV" id="7UfLy9aLYJD" role="1B3o_S" />
       <node concept="3clFbS" id="7UfLy9aLYJE" role="3clF47">
         <node concept="3SKdUt" id="7UfLy9aMdWN" role="3cqZAp">
-          <node concept="3SKdUq" id="7UfLy9aMdYm" role="3SKWNk">
-            <property role="3SKdUp" value="Declarations" />
+          <node concept="1PaTwC" id="ATZLwXonzn" role="1aUNEU">
+            <node concept="3oM_SD" id="ATZLwXonzo" role="1PaTwD">
+              <property role="3oM_SC" value="Declarations" />
+            </node>
           </node>
         </node>
         <node concept="Oi2o3" id="7UfLy9aMcu7" role="3cqZAp">
@@ -480,8 +487,19 @@
           <property role="TrG5h" value="baz" />
         </node>
         <node concept="3SKdUt" id="7UfLy9aMe1H" role="3cqZAp">
-          <node concept="3SKdUq" id="7UfLy9aMe3i" role="3SKWNk">
-            <property role="3SKdUp" value="Reading using the reference" />
+          <node concept="1PaTwC" id="ATZLwXonzp" role="1aUNEU">
+            <node concept="3oM_SD" id="ATZLwXonzq" role="1PaTwD">
+              <property role="3oM_SC" value="Reading" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXonzr" role="1PaTwD">
+              <property role="3oM_SC" value="using" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXonzs" role="1PaTwD">
+              <property role="3oM_SC" value="the" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXonzt" role="1PaTwD">
+              <property role="3oM_SC" value="reference" />
+            </node>
           </node>
         </node>
         <node concept="3cpWs8" id="7UfLy9aMcy9" role="3cqZAp">
@@ -505,7 +523,7 @@
               <ref role="3cqZAo" to="wyt6:~System.out" resolve="out" />
             </node>
             <node concept="liA8E" id="7UfLy9aMcLT" role="2OqNvi">
-              <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String):void" resolve="println" />
+              <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String)" resolve="println" />
               <node concept="37vLTw" id="7UfLy9aMcNg" role="37wK5m">
                 <ref role="3cqZAo" node="7UfLy9aMcyc" resolve="s" />
               </node>
@@ -513,8 +531,28 @@
           </node>
         </node>
         <node concept="3SKdUt" id="7UfLy9aMe6d" role="3cqZAp">
-          <node concept="3SKdUq" id="7UfLy9aMe7O" role="3SKWNk">
-            <property role="3SKdUp" value="Assignment into the declaration using the reference" />
+          <node concept="1PaTwC" id="ATZLwXonzu" role="1aUNEU">
+            <node concept="3oM_SD" id="ATZLwXonzv" role="1PaTwD">
+              <property role="3oM_SC" value="Assignment" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXonzw" role="1PaTwD">
+              <property role="3oM_SC" value="into" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXonzx" role="1PaTwD">
+              <property role="3oM_SC" value="the" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXonzy" role="1PaTwD">
+              <property role="3oM_SC" value="declaration" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXonzz" role="1PaTwD">
+              <property role="3oM_SC" value="using" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXonz$" role="1PaTwD">
+              <property role="3oM_SC" value="the" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXonz_" role="1PaTwD">
+              <property role="3oM_SC" value="reference" />
+            </node>
           </node>
         </node>
         <node concept="3clFbF" id="7UfLy9aMcSb" role="3cqZAp">
@@ -534,7 +572,7 @@
               <ref role="3cqZAo" to="wyt6:~System.out" resolve="out" />
             </node>
             <node concept="liA8E" id="7UfLy9aMdcB" role="2OqNvi">
-              <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String):void" resolve="println" />
+              <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String)" resolve="println" />
               <node concept="37vLTw" id="7UfLy9aMdcC" role="37wK5m">
                 <ref role="3cqZAo" node="7UfLy9aMcyc" resolve="s" />
               </node>

@@ -6,50 +6,53 @@ import java.util.List;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import java.util.LinkedList;
 import org.jetbrains.mps.openapi.module.SModule;
-import java.util.Comparator;
 import javax.swing.Icon;
 
 public class ModulesListData implements NodeData {
   private final List<NodeData> myData = ListSequence.fromList(new LinkedList<NodeData>());
   private final List<ModuleData> myModules = ListSequence.fromList(new LinkedList<ModuleData>());
-  public ModulesListData(Iterable<? extends SModule> modules) {
+  public ModulesListData(List<SModule> modules) {
     for (SModule m : modules) {
       ModuleData moduleData = new ModuleData(m);
       ListSequence.fromList(this.myModules).addElement(moduleData);
     }
-    ListSequence.fromList(this.myModules).sort(new Comparator<ModuleData>() {
-      public int compare(ModuleData p0, ModuleData p1) {
-        return p0.getText().compareToIgnoreCase(p1.getText());
-      }
-    }, true);
+    ListSequence.fromList(this.myModules).sort((ModuleData p0, ModuleData p1) -> p0.getText().compareToIgnoreCase(p1.getText()), true);
   }
+
   @Override
   public String getText() {
     return "All Modules In Project";
   }
+
   @Override
   public List<NodeData> getChildren() {
     return this.myData;
   }
+
   public List<ModuleData> getModules() {
     return this.myModules;
   }
+
   @Override
   public Icon getIcon(boolean expanded) {
     return null;
   }
+
   @Override
   public boolean canHaveChildren() {
     return true;
   }
+
   @Override
   public void addChildren(NodeData nodeData) {
     ListSequence.fromList(this.myData).addElement(nodeData);
   }
+
   @Override
   public NodeData getParent() {
     return null;
   }
+
   @Override
   public void setParent(NodeData parent) {
   }

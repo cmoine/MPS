@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,57 +15,44 @@
  */
 package jetbrains.mps.generator.impl.interpreted;
 
-import jetbrains.mps.generator.impl.DefaultTemplateContext;
 import jetbrains.mps.generator.impl.RuleUtil;
 import jetbrains.mps.generator.impl.TemplateContainer;
+import jetbrains.mps.generator.runtime.ApplySink;
 import jetbrains.mps.generator.runtime.GenerationException;
 import jetbrains.mps.generator.runtime.TemplateContext;
-import jetbrains.mps.generator.runtime.TemplateDeclaration;
 import jetbrains.mps.generator.runtime.TemplateDeclarationBase;
-import jetbrains.mps.generator.runtime.TemplateExecutionEnvironment;
 import jetbrains.mps.smodel.SNodePointer;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeReference;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Evgeny Gryaznov, 12/13/10
  */
-public class TemplateDeclarationInterpreted extends TemplateDeclarationBase {
-
-  private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
-
+public final class TemplateDeclarationInterpreted extends TemplateDeclarationBase {
   private final SNode myTemplateNode;
-  private final Object[] myArguments;
-  private final String[] myParameterNames;
   private final SNodePointer myNodeRef;
-  private final boolean myIsTemplateDeclNode;
+  private final String[] myParameterNames;
   private volatile TemplateContainer myTemplates;
 
-  private TemplateDeclarationInterpreted(@NotNull SNode templateNode, @NotNull String[] parameterNames, @NotNull Object[] arguments) {
-    assert arguments.length == parameterNames.length;
+  /*package*/ TemplateDeclarationInterpreted(@NotNull SNode templateNode) {
+    // there used to be some odd legacy code that allowed for !node<TD>, hence assert
+    assert templateNode.isInstanceOfConcept(RuleUtil.concept_TemplateDeclaration);
     myTemplateNode = templateNode;
-    myArguments = arguments;
-    myParameterNames = parameterNames;
+    myParameterNames = RuleUtil.getTemplateDeclarationParameterNames(templateNode);
     myNodeRef = new SNodePointer(templateNode);
-    myIsTemplateDeclNode = templateNode.getConcept().isSubConceptOf(RuleUtil.concept_TemplateDeclaration);
+  }
+
+  @Nullable
+  @Override
+  public String[] getParameterNames() {
+    return myParameterNames;
   }
 
   @Override
   public SNodeReference getTemplateNode() {
     return myNodeRef;
-  }
-
-  private Map<String, Object> getArgumentsAsMap() {
-    Map<String, Object> result = new HashMap<String, Object>();
-    for (int i = 0; i < myParameterNames.length; i++) {
-      result.put(myParameterNames[i], myArguments[i]);
-    }
-    return result;
   }
 
   private TemplateContainer getTemplates() {
@@ -82,30 +69,12 @@ public class TemplateDeclarationInterpreted extends TemplateDeclarationBase {
   }
 
   @Override
-  public Collection<SNode> apply(@NotNull TemplateExecutionEnvironment environment, @NotNull TemplateContext context) throws GenerationException {
-    TemplateContext applyContext = new DefaultTemplateContext(context.getEnvironment(), context.getInput(), null);
-    if (myArguments.length > 0) {
-      applyContext = applyContext.subContext(getArgumentsAsMap());
-    }
-
-    if (myIsTemplateDeclNode) {
-      final TemplateContainer tc = getTemplates();
-      return tc.processRuleConsequence(applyContext);
-    } else {
-      return environment.getTemplateProcessor().apply(myTemplateNode, applyContext);
-    }
-  }
-
-  public static TemplateDeclaration create(SNode templateNode, Object[] arguments) {
-    if (arguments == null) {
-      arguments = EMPTY_OBJECT_ARRAY;
-    }
-
-    String[] parameterNames = RuleUtil.getTemplateDeclarationParameterNames(templateNode);
-    if (parameterNames == null || parameterNames.length != arguments.length) {
-      return null;
-    }
-
-    return new TemplateDeclarationInterpreted(templateNode, parameterNames, arguments);
+  public void apply(TemplateContext context, ApplySink sink) throws GenerationException {
+    final TemplateContainer tc = getTemplates();
+    // FIXME weave() in generated templates is not recorded into trace
+    //       There's GenerationTrace.trace updated inside TemplateContainer.apply(), but it happens for interpreted templates only.
+    //       Besides, I believe it's also true for regular TD.apply(), at least I see no access to GenerationTrace in generated code.
+    //       Well, CALL/LOOP macro do record trace in interpreted mode, and trace for compiled reduction rules is handled in TEEI.tryToReduce
+    tc.apply(sink, context);
   }
 }

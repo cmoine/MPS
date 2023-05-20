@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,6 +39,8 @@ public class SnapshotModelData extends SModel {
 
   @Override
   public boolean canFireEvent() {
+    // canFireEvent() is actually #canFireWriteEvent() for smodel.event.SModelListener.
+    // Doesn't affect SNodeChangeListener notification
     return false;
   }
 
@@ -46,4 +48,6 @@ public class SnapshotModelData extends SModel {
   public FastNodeFinder createFastNodeFinder() {
     return new BaseFastNodeFinder(getModelDescriptor());
   }
+
+  // XXX do I care to override createCopy, provided there's 1 use and it's not essential?
 }

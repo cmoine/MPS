@@ -1,0 +1,2 @@
+// the aim of this file is to mark projects as one where unplayed migrations are allowed
+// this file is checked by NoPendingMigrationsTest

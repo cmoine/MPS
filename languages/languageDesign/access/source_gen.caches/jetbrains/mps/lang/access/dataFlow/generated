@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="8rlxk1w5fun186ird7nd6o6ubxyoq72" />
+<product version="3" modelHash="hy0rp8pz2arbkorc1d7iu97yp2151n">
+  <files names="BaseExecuteCommandStatement_DataFlow.java:CommandClosureLiteral_DataFlow.java:DataFlowAspectDescriptorImpl.java" />
+</product>
 

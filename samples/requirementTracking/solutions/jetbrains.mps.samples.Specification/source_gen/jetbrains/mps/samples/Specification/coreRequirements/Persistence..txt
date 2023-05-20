@@ -1,0 +1,12 @@
+Requirements Persistence
+
+1. 00001: Read/write of objects must work quickly
+As fast as possible. 
+Never longer than two seconds per request. 
+
+2. 00041: The system must withstand outages
+Any, including a total blackout in the region. 
+
+3. 00007: Encrypt the storage
+RSA or stronger alg. 
+

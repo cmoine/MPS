@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-12l78wdz7tsw15j57cjfzfcc39kg33o" />
+<product version="3" modelHash="e1g4eshus0cbe3tj7qklooj95h4k1wv">
+  <files names="ConstraintsAspectDescriptor.java:CopyPasteHandlers_Constraints.java:NodeFactories_Constraints.java:NodeFactory_Constraints.java:PasteWrappers_Constraints.java" />
+</product>
 

@@ -7,43 +7,56 @@ import jetbrains.mps.nodeEditor.cellMenu.SubstituteInfoPartExt;
 import jetbrains.mps.lang.editor.generator.internal.AbstractCellMenuPart_Generic_Group;
 import java.util.List;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.smodel.IOperationContext;
 import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.util.IterableUtil;
 import jetbrains.mps.smodel.ModuleRepositoryFacade;
 import org.jetbrains.mps.openapi.model.SModel;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.util.NameUtil;
 import jetbrains.mps.smodel.SModelStereotype;
 import jetbrains.mps.editor.runtime.selection.SelectionUtil;
+import jetbrains.mps.openapi.editor.menus.EditorMenuDescriptor;
+import jetbrains.mps.lang.editor.menus.EditorMenuDescriptorBase;
+import jetbrains.mps.smodel.SNodePointer;
+import org.jetbrains.mps.openapi.language.SProperty;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class ModelReferenceCompletion extends AbstractCellMenuComponent {
   public ModelReferenceCompletion() {
-    super(new SubstituteInfoPartExt[]{new ModelReferenceCompletion.ModelReferenceExpression_generic_cellMenu_fkcdzz_a0()});
+    super(new SubstituteInfoPartExt[]{new ModelReferenceExpression_generic_cellMenu_fkcdzz_a0()});
   }
   public static class ModelReferenceExpression_generic_cellMenu_fkcdzz_a0 extends AbstractCellMenuPart_Generic_Group {
     public ModelReferenceExpression_generic_cellMenu_fkcdzz_a0() {
     }
-    public List<?> createParameterObjects(SNode node, IOperationContext operationContext, EditorContext editorContext) {
+
+    protected List<?> createParameterObjects(SNode node, EditorContext editorContext) {
       return IterableUtil.asList(new ModuleRepositoryFacade(editorContext.getRepository()).getAllModels());
+
     }
-    protected void handleAction(Object parameterObject, SNode node, SModel model, IOperationContext operationContext, EditorContext editorContext) {
-      this.handleAction_impl((SModel) parameterObject, node, model, operationContext, editorContext);
+    protected void handleAction(Object parameterObject, SNode node, SModel model, EditorContext editorContext) {
+      this.handleAction_impl((SModel) parameterObject, node, model, editorContext);
     }
-    public void handleAction_impl(SModel parameterObject, SNode node, SModel model, IOperationContext operationContext, EditorContext editorContext) {
-      SPropertyOperations.set(node, MetaAdapterFactory.getProperty(0x7866978ea0f04cc7L, 0x81bc4d213d9375e1L, 0x7c3f2da20e92b62L, 0x7c3f2da20e92b66L, "name"), NameUtil.getModelLongName(parameterObject));
-      SPropertyOperations.set(node, MetaAdapterFactory.getProperty(0x7866978ea0f04cc7L, 0x81bc4d213d9375e1L, 0x7c3f2da20e92b62L, 0x7c3f2da20e93b6fL, "stereotype"), SModelStereotype.getStereotype(parameterObject));
+    private void handleAction_impl(SModel parameterObject, SNode node, SModel model, EditorContext editorContext) {
+      SPropertyOperations.set(node, PROPS.name$bAf3, NameUtil.getModelLongName(parameterObject));
+      SPropertyOperations.set(node, PROPS.stereotype$Trmg, SModelStereotype.getStereotype(parameterObject));
       SelectionUtil.selectLabelCellAnSetCaret(editorContext, node, "FQName", -1);
     }
-    public boolean isReferentPresentation() {
+    protected boolean isReferentPresentation() {
       return false;
     }
-    public String getMatchingText(Object parameterObject) {
-      return this.getMatchingText_internal((SModel) parameterObject);
-    }
-    public String getMatchingText_internal(SModel parameterObject) {
+    protected String getMatchingText(Object _parameterObject) {
+      final SModel parameterObject = (SModel) _parameterObject;
       return parameterObject.getModelName();
     }
+
+    @Override
+    protected EditorMenuDescriptor getEditorMenuDescriptor(Object parameterObject) {
+      return new EditorMenuDescriptorBase("generic group with parameter: " + ((parameterObject == null ? "null" : parameterObject.toString())), new SNodePointer("r:00000000-0000-4000-0000-011c895902fd(jetbrains.mps.lang.smodel.editor)", "559557797393041621"));
+    }
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$bAf3 = MetaAdapterFactory.getProperty(0x7866978ea0f04cc7L, 0x81bc4d213d9375e1L, 0x7c3f2da20e92b62L, 0x7c3f2da20e92b66L, "name");
+    /*package*/ static final SProperty stereotype$Trmg = MetaAdapterFactory.getProperty(0x7866978ea0f04cc7L, 0x81bc4d213d9375e1L, 0x7c3f2da20e92b62L, 0x7c3f2da20e93b6fL, "stereotype");
   }
 }

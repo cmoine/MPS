@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,17 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.java.index;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.util.indexing.DataIndexer;
 import com.intellij.util.indexing.FileContent;
+import jetbrains.mps.core.platform.Platform;
+import jetbrains.mps.extapi.model.SModelData;
+import jetbrains.mps.ide.MPSCoreComponents;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.smodel.SNodeUtil;
 import jetbrains.mps.util.CollectConsumer;
 import jetbrains.mps.workbench.index.RootNodeNameIndex;
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.util.Consumer;
@@ -31,6 +33,7 @@ import org.jetbrains.mps.openapi.util.Consumer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,8 +43,6 @@ import java.util.Map;
  * Date: 3/28/13
  */
 /*package*/ abstract class AbstractSModelIndexer<S, E> implements DataIndexer<String, Collection<E>, FileContent> {
-
-  private static final Logger LOG = Logger.getLogger(AbstractSModelIndexer.class);
 
   private static final String[] JAVA_CLASS_CONCEPTS = {
     "jetbrains.mps.baseLanguage.structure.Annotation",
@@ -65,13 +66,13 @@ import java.util.Map;
     "jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration",
   };
 
-  protected void getJavaClasses(SModel sModel, Consumer<SNode> consumer) {
+  protected void getJavaClasses(SModelData sModel, Consumer<SNode> consumer) {
     for (SNode root : sModel.getRootNodes()) {
       collectJavaClasses(root, consumer);
     }
   }
 
-  protected void getJavaMethods(SModel sModel, Consumer<SNode> consumer) {
+  protected void getJavaMethods(SModelData sModel, Consumer<SNode> consumer) {
     CollectConsumer<SNode> classes = new CollectConsumer<>(new ArrayList<>());
     for (SNode root : sModel.getRootNodes()) {
       collectJavaClasses(root, classes);
@@ -81,7 +82,7 @@ import java.util.Map;
     }
   }
 
-  protected void getJavaFields(SModel sModel, Consumer<SNode> consumer) {
+  protected void getJavaFields(SModelData sModel, Consumer<SNode> consumer) {
     CollectConsumer<SNode> classes = new CollectConsumer<>(new ArrayList<>());
     for (SNode root : sModel.getRootNodes()) {
       collectJavaClasses(root, classes);
@@ -118,7 +119,7 @@ import java.util.Map;
         continue;
       }
       collectJavaFields(cand, consumer);
-    }
+     }
   }
 
   private boolean isClassOrInterface(SNode sNode) {
@@ -139,13 +140,21 @@ import java.util.Map;
     return idx >= 0;
   }
 
+  private final Platform myPlatform;
+  {
+    myPlatform = ApplicationManager.getApplication().getComponent(MPSCoreComponents.class).getPlatform();
+  }
+
   @NotNull
   @Override
   public Map<String, Collection<E>> map(@NotNull final FileContent inputData) {
     final HashMap<String, Collection<E>> map = new HashMap<>();
 
     try {
-      final SModel model = RootNodeNameIndex.doModelParsing(inputData);
+      final SModelData model = RootNodeNameIndex.doModelParsing(myPlatform, inputData);
+      if (model == null) {
+        return Collections.emptyMap();
+      }
       final SModelReference modelRef = model.getReference();
       getObjectsToIndex(model, object -> {
         String[] keys = getKeys(model, object);
@@ -161,15 +170,15 @@ import java.util.Map;
         }
       });
     } catch (Exception e) {
-      LOG.error("Error indexing model file " + inputData.getFileName() + "; " + e.getMessage());
+      Logger.getLogger(AbstractSModelIndexer.class).error("Error indexing model file " + inputData.getFileName(), e);
     }
 
     return map;
   }
 
-  protected abstract void getObjectsToIndex(SModel sModel, Consumer<S> consumer);
+  protected abstract void getObjectsToIndex(SModelData sModel, Consumer<S> consumer);
 
-  protected abstract String[] getKeys(SModel model, S object);
+  protected abstract String[] getKeys(SModelData model, S object);
 
   protected abstract void updateCollection(SModelReference modelRef, S object, Collection<E> collection);
 

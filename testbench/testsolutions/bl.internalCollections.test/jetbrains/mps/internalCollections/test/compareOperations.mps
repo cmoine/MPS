@@ -2,9 +2,9 @@
 <model ref="r:00000000-0000-4000-0000-011c895903ef(jetbrains.mps.internalCollections.test.compareOperations)">
   <persistence version="9" />
   <languages>
-    <use id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections" version="0" />
-    <use id="f61473f9-130f-42f6-b98d-6c438812c2f6" name="jetbrains.mps.baseLanguage.unitTest" version="0" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections" version="1" />
+    <use id="f61473f9-130f-42f6-b98d-6c438812c2f6" name="jetbrains.mps.baseLanguage.unitTest" version="1" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports>
     <import index="tp82" ref="r:00000000-0000-4000-0000-011c895903ee(jetbrains.mps.internalCollections.test.closures)" />
@@ -219,7 +219,7 @@
                 <ref role="37wK5l" to="tp82:hyI2mS7" resolve="assertIterableEqualsIgnoreOrder" />
                 <node concept="2YIFZM" id="hyI4ssb" role="37wK5m">
                   <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-                  <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+                  <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
                   <node concept="3cmrfG" id="hyI4tkY" role="37wK5m">
                     <property role="3cmrfH" value="1" />
                   </node>
@@ -262,7 +262,7 @@
               </node>
               <node concept="2YIFZM" id="hyIa7N9" role="33vP2m">
                 <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-                <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+                <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
                 <node concept="3cmrfG" id="hyIa8li" role="37wK5m">
                   <property role="3cmrfH" value="1" />
                 </node>
@@ -293,7 +293,7 @@
                 <node concept="4Tj9Z" id="hyIabfw" role="2OqNvi">
                   <node concept="2YIFZM" id="hyIacFV" role="576Qk">
                     <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-                    <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+                    <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
                     <node concept="3cmrfG" id="hyIad19" role="37wK5m">
                       <property role="3cmrfH" value="2" />
                     </node>
@@ -317,7 +317,7 @@
                 <ref role="37wK5l" to="tp82:hyI2mS7" resolve="assertIterableEqualsIgnoreOrder" />
                 <node concept="2YIFZM" id="hyIahr$" role="37wK5m">
                   <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-                  <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+                  <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
                   <node concept="3cmrfG" id="hyIahr_" role="37wK5m">
                     <property role="3cmrfH" value="1" />
                   </node>
@@ -631,7 +631,7 @@
       </node>
     </node>
     <node concept="3uibUv" id="hyI4nl7" role="1zkMxy">
-      <ref role="3uigEE" to="tp82:hxrGC2h" resolve="Util_Test" />
+      <ref role="3uigEE" to="tp82:7CAVoZg0ZwV" resolve="Util_Test" />
     </node>
   </node>
   <node concept="3s_ewN" id="hyIidXL">
@@ -723,7 +723,7 @@
                 <ref role="37wK5l" to="tp82:hyI2mS7" resolve="assertIterableEqualsIgnoreOrder" />
                 <node concept="2YIFZM" id="hyIkjQj" role="37wK5m">
                   <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-                  <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+                  <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
                   <node concept="3cmrfG" id="hyIkjQk" role="37wK5m">
                     <property role="3cmrfH" value="1" />
                   </node>
@@ -757,7 +757,7 @@
               </node>
               <node concept="2YIFZM" id="hyIk1pd" role="33vP2m">
                 <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-                <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+                <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
                 <node concept="3cmrfG" id="hyIk1Es" role="37wK5m">
                   <property role="3cmrfH" value="1" />
                 </node>
@@ -800,7 +800,7 @@
                 <node concept="66VNe" id="hyIk65r" role="2OqNvi">
                   <node concept="2YIFZM" id="hyIk9Di" role="576Qk">
                     <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-                    <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+                    <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
                     <node concept="3cmrfG" id="hyIkbi6" role="37wK5m">
                       <property role="3cmrfH" value="2" />
                     </node>
@@ -827,7 +827,7 @@
                 <ref role="37wK5l" to="tp82:hyI2mS7" resolve="assertIterableEqualsIgnoreOrder" />
                 <node concept="2YIFZM" id="hyIknWs" role="37wK5m">
                   <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-                  <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+                  <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
                   <node concept="3cmrfG" id="hyIkoG2" role="37wK5m">
                     <property role="3cmrfH" value="1" />
                   </node>
@@ -1135,7 +1135,7 @@
       </node>
     </node>
     <node concept="3uibUv" id="hyIigK1" role="1zkMxy">
-      <ref role="3uigEE" to="tp82:hxrGC2h" resolve="Util_Test" />
+      <ref role="3uigEE" to="tp82:7CAVoZg0ZwV" resolve="Util_Test" />
     </node>
   </node>
   <node concept="3s_ewN" id="hyIl6xb">
@@ -1214,7 +1214,7 @@
                 <ref role="37wK5l" to="tp82:hyI2mS7" resolve="assertIterableEqualsIgnoreOrder" />
                 <node concept="2YIFZM" id="hyIlcW4" role="37wK5m">
                   <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-                  <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+                  <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
                   <node concept="3cmrfG" id="hyIlcW6" role="37wK5m">
                     <property role="3cmrfH" value="2" />
                   </node>
@@ -1245,7 +1245,7 @@
               </node>
               <node concept="2YIFZM" id="hyIlEtw" role="33vP2m">
                 <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-                <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+                <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
                 <node concept="3cmrfG" id="hyIlEtx" role="37wK5m">
                   <property role="3cmrfH" value="1" />
                 </node>
@@ -1282,7 +1282,7 @@
                 <node concept="60FfQ" id="hyImTMx" role="2OqNvi">
                   <node concept="2YIFZM" id="hyImU7x" role="576Qk">
                     <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-                    <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+                    <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
                     <node concept="3cmrfG" id="hyImU7y" role="37wK5m">
                       <property role="3cmrfH" value="2" />
                     </node>
@@ -1312,7 +1312,7 @@
                 <ref role="37wK5l" to="tp82:hyI2mS7" resolve="assertIterableEqualsIgnoreOrder" />
                 <node concept="2YIFZM" id="hyIlEtR" role="37wK5m">
                   <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-                  <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+                  <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
                   <node concept="3cmrfG" id="hyIlEtT" role="37wK5m">
                     <property role="3cmrfH" value="2" />
                   </node>
@@ -1592,7 +1592,7 @@
       </node>
     </node>
     <node concept="3uibUv" id="hyIlr8D" role="1zkMxy">
-      <ref role="3uigEE" to="tp82:hxrGC2h" resolve="Util_Test" />
+      <ref role="3uigEE" to="tp82:7CAVoZg0ZwV" resolve="Util_Test" />
     </node>
   </node>
   <node concept="3s_ewN" id="hyJ4Hjj">
@@ -1680,7 +1680,7 @@
                 <ref role="37wK5l" to="tp82:hyI2mS7" resolve="assertIterableEqualsIgnoreOrder" />
                 <node concept="2YIFZM" id="hyJ4QUe" role="37wK5m">
                   <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-                  <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+                  <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
                   <node concept="3cmrfG" id="hyJ5yC6" role="37wK5m">
                     <property role="3cmrfH" value="2" />
                   </node>
@@ -1714,7 +1714,7 @@
               </node>
               <node concept="2YIFZM" id="hyNhoQJ" role="33vP2m">
                 <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-                <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+                <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
                 <node concept="3cmrfG" id="hyNhoQK" role="37wK5m">
                   <property role="3cmrfH" value="1" />
                 </node>
@@ -1751,7 +1751,7 @@
                 <node concept="2NgGto" id="hLUtcHs" role="2OqNvi">
                   <node concept="2YIFZM" id="hyNhLP1" role="576Qk">
                     <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-                    <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+                    <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
                     <node concept="3cmrfG" id="hyNhMw4" role="37wK5m">
                       <property role="3cmrfH" value="1" />
                     </node>
@@ -1778,7 +1778,7 @@
                 <ref role="37wK5l" to="tp82:hyI2mS7" resolve="assertIterableEqualsIgnoreOrder" />
                 <node concept="2YIFZM" id="hyNhoR7" role="37wK5m">
                   <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-                  <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+                  <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
                   <node concept="3cmrfG" id="hyNhoR8" role="37wK5m">
                     <property role="3cmrfH" value="2" />
                   </node>
@@ -1979,7 +1979,7 @@
               </node>
               <node concept="2YIFZM" id="hyWI02o" role="33vP2m">
                 <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-                <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+                <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
                 <node concept="Xl_RD" id="hyWIPDH" role="37wK5m">
                   <property role="Xl_RC" value="X" />
                 </node>
@@ -2018,7 +2018,7 @@
               </node>
               <node concept="2YIFZM" id="hyWI9K6" role="33vP2m">
                 <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-                <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+                <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
                 <node concept="Xl_RD" id="hyWIX7H" role="37wK5m">
                   <property role="Xl_RC" value="V" />
                 </node>
@@ -2251,7 +2251,7 @@
       </node>
     </node>
     <node concept="3uibUv" id="hyJ4Pi1" role="1zkMxy">
-      <ref role="3uigEE" to="tp82:hxrGC2h" resolve="Util_Test" />
+      <ref role="3uigEE" to="tp82:7CAVoZg0ZwV" resolve="Util_Test" />
     </node>
   </node>
   <node concept="3s_ewN" id="hyLP6L4">
@@ -2324,7 +2324,7 @@
                 <ref role="37wK5l" to="tp82:hxrGHlF" resolve="assertIterableEquals" />
                 <node concept="2YIFZM" id="hyLQ8Px" role="37wK5m">
                   <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-                  <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+                  <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
                   <node concept="3cmrfG" id="hyLQ996" role="37wK5m">
                     <property role="3cmrfH" value="1" />
                   </node>
@@ -2388,7 +2388,7 @@
                 <node concept="3QWeyG" id="hzQJjh4" role="2OqNvi">
                   <node concept="2YIFZM" id="hzQJkMW" role="576Qk">
                     <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-                    <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+                    <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
                     <node concept="3cmrfG" id="hzQJlR4" role="37wK5m">
                       <property role="3cmrfH" value="6" />
                     </node>
@@ -2688,7 +2688,7 @@
       </node>
     </node>
     <node concept="3uibUv" id="hyLQ5DE" role="1zkMxy">
-      <ref role="3uigEE" to="tp82:hxrGC2h" resolve="Util_Test" />
+      <ref role="3uigEE" to="tp82:7CAVoZg0ZwV" resolve="Util_Test" />
     </node>
   </node>
   <node concept="312cEu" id="2refGnRCpBM">

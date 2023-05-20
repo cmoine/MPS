@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 package jetbrains.mps.workbench.index;
 
 import jetbrains.mps.smodel.SNodePointer;
-import jetbrains.mps.util.EqualUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.annotations.Immutable;
@@ -27,6 +26,8 @@ import org.jetbrains.mps.openapi.model.SNodeReference;
 import org.jetbrains.mps.openapi.module.SModuleId;
 import org.jetbrains.mps.openapi.module.SModuleReference;
 import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
+
+import java.util.Objects;
 
 /**
  * Storage-friendly but human-hostile representation of a node identity, to keep where node might need to get resolved, but
@@ -49,14 +50,20 @@ public final class SNodeEntry {
 
   public SNodeEntry(@NotNull SNodeReference node) {
     SModelReference modelReference = node.getModelReference();
-    if (modelReference == null) {
+    SNodeId nodeId = node.getNodeId();
+    if (modelReference == null || nodeId == null) {
       throw new IllegalArgumentException(String.format("Pointer to unknown node: %s", node));
     }
     myModule = modelReference.getModelId().isGloballyUnique() ? null : modelReference.getModuleReference().getModuleId();
     myModel = modelReference.getModelId();
-    myNode = node.getNodeId();
+    myNode = nodeId;
   }
 
+  public SNodeEntry(@NotNull SModelReference model, @NotNull SNodeId node) {
+    this(model.getModelId().isGloballyUnique() ? null : model.getModuleReference().getModuleId(), model.getModelId(), node);
+  }
+
+  // XXX Do I need non-null node id? It complicates construction code for SNodeEntry (from SNodeReference, as the latter has nullable nodeId).
   public SNodeEntry(@Nullable SModuleId module, @NotNull SModelId model, @NotNull SNodeId node) {
     assert module != null || model.isGloballyUnique();
     myModule = module;
@@ -95,7 +102,7 @@ public final class SNodeEntry {
   public boolean equals(Object obj) {
     if (obj instanceof SNodeEntry) {
       SNodeEntry o = (SNodeEntry) obj;
-      return myNode.equals(o.myNode) && myModel.equals(o.myModel) && EqualUtil.equals(myModule, o.myModule);
+      return myNode.equals(o.myNode) && myModel.equals(o.myModel) && Objects.equals(myModule, o.myModule);
     }
     return false;
   }

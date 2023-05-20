@@ -5,12 +5,9 @@ package BHL6.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.List;
 import java.util.Arrays;
@@ -19,13 +16,13 @@ import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SInterfaceConcept;
 
 public final class J__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x424c173aee734dc9L, 0xbc43d0051c9b1e8fL, 0x13b01619ddde16fdL, "BHL6.structure.J");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<String> foo_idyOqIWcnDrn = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("foo").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("yOqIWcnDrn").registry(REGISTRY).build();
-  public static final SMethod<String> bar_id43RsG_ymtGN = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("bar").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("43RsG_ymtGN").registry(REGISTRY).build();
+  public static final SMethod<String> foo_idyOqIWcnDrn = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("foo").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(627243823048595159L).languageId(0xbc43d0051c9b1e8fL, 0x424c173aee734dc9L).build2();
+  public static final SMethod<String> bar_id43RsG_ymtGN = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("bar").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(4681336546938968883L).languageId(0xbc43d0051c9b1e8fL, 0x424c173aee734dc9L).build2();
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(foo_idyOqIWcnDrn, bar_id43RsG_ymtGN);
 
@@ -33,14 +30,13 @@ public final class J__BehaviorDescriptor extends BaseBHDescriptor {
   }
 
   /*package*/ static String foo_idyOqIWcnDrn(@NotNull SNode __thisNode__) {
-    return ((String) I2__BehaviorDescriptor.foo_idyOqIWcnDrn.invokeSpecial(__thisNode__));
+    return ((String) I__BehaviorDescriptor.foo_idyOqIWcnDrn.invoke0(__thisNode__, CONCEPTS.I2$V$));
   }
   /*package*/ static String bar_id43RsG_ymtGN(@NotNull SNode __thisNode__) {
-    return ((String) I__BehaviorDescriptor.bar_id43RsG_ymtGN.invokeSpecial(__thisNode__));
+    return ((String) I__BehaviorDescriptor.bar_id43RsG_ymtGN.invoke0(__thisNode__, CONCEPTS.I1$G4));
   }
 
   /*package*/ J__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -86,5 +82,10 @@ public final class J__BehaviorDescriptor extends BaseBHDescriptor {
   @Override
   public SAbstractConcept getConcept() {
     return CONCEPT;
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SInterfaceConcept I2$V$ = MetaAdapterFactory.getInterfaceConcept(0x424c173aee734dc9L, 0xbc43d0051c9b1e8fL, 0x13b01619ddde1769L, "BHL6.structure.I2");
+    /*package*/ static final SInterfaceConcept I1$G4 = MetaAdapterFactory.getInterfaceConcept(0x424c173aee734dc9L, 0xbc43d0051c9b1e8fL, 0x13b01619ddde175eL, "BHL6.structure.I1");
   }
 }

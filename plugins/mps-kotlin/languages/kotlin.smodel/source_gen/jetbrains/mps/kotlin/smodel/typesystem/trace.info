@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1732176556423009631:jetbrains.mps.baseLanguage.structure.MultiLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <root>
+    <file name="TypesystemDescriptor.java">
+      <unit at="8,0,20,0" name="jetbrains.mps.kotlin.smodel.typesystem.TypesystemDescriptor" />
+    </file>
+  </root>
+  <root nodeRef="r:158a3abc-d812-4285-9e5a-df3dd3878098(jetbrains.mps.kotlin.smodel.typesystem)/2852204284038007464">
+    <file name="TypesystemDescriptor.java">
+      <node id="2852204284038007464" at="14,5,15,116" concept="5" />
+      <node id="2852204284038007464" at="15,116,16,55" concept="2" />
+      <node id="2852204284038007464" at="13,5,17,5" concept="0" />
+      <scope id="2852204284038007464" at="14,5,16,55">
+        <var name="nonTypesystemRule" id="2852204284038007464" />
+      </scope>
+    </file>
+    <file name="check_invalid_ShortNodeType_as_argument_NonTypesystemRule.java">
+      <node id="2852204284040914786" at="37,0,38,216" concept="5" />
+      <node id="2852204284038023848" at="40,7,41,66" concept="5" />
+      <node id="2852204284038023848" at="41,66,42,393" concept="5" />
+      <node id="2852204284038071211" at="43,9,44,187" concept="5" />
+      <node id="2852204284041104333" at="44,187,45,64" concept="2" />
+      <node id="2852204284038071211" at="45,64,46,71" concept="2" />
+      <node id="2852204284038007464" at="51,50,52,57" concept="7" />
+      <node id="2852204284038007464" at="54,68,55,102" concept="7" />
+      <node id="2852204284038007464" at="57,30,58,17" concept="7" />
+      <node id="2852204284038007464" at="62,0,63,0" concept="9" trace="projection$IJnO" />
+      <node id="2852204284038007464" at="63,0,64,0" concept="9" trace="type$x3no" />
+      <node id="2852204284038007464" at="64,0,65,0" concept="9" trace="concept$qJcX" />
+      <node id="2852204284038007464" at="68,0,69,0" concept="9" trace="TypeProjection$5e" />
+      <node id="2852204284038007464" at="69,0,70,0" concept="9" trace="ShortNodeType$$S" />
+      <node id="2852204284038007464" at="70,0,71,0" concept="9" trace="ProjectedConceptParameterizedType$ZZ" />
+      <node id="2852204284038007464" at="74,0,75,0" concept="9" trace="name$MnvL" />
+      <node id="2852204284038007464" at="26,0,28,0" concept="1" trace="check_invalid_ShortNodeType_as_argument_NonTypesystemRule#()V" />
+      <node id="2852204284038007464" at="51,0,54,0" concept="4" trace="getApplicableConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="2852204284038007464" at="54,0,57,0" concept="4" trace="isApplicableAndPattern#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljetbrains/mps/lang/typesystem/runtime/IsApplicableStatus;" />
+      <node id="2852204284038007464" at="57,0,60,0" concept="4" trace="overrides#()Z" />
+      <node id="2852204284038071211" at="42,393,47,9" concept="0" />
+      <node id="2852204284040878467" at="28,117,37,0" concept="6" />
+      <node id="2852204284038023848" at="39,30,48,7" concept="0" />
+      <node id="2852204284040846587" at="38,216,49,5" concept="3" />
+      <node id="2852204284038007464" at="28,0,51,0" concept="4" trace="applyRule#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/typesystem/inference/TypeCheckingContext;Ljetbrains/mps/lang/typesystem/runtime/IsApplicableStatus;)V" />
+      <scope id="2852204284038007464" at="26,70,26,70" />
+      <scope id="2852204284038007464" at="51,50,52,57" />
+      <scope id="2852204284038007464" at="54,68,55,102" />
+      <scope id="2852204284038007464" at="57,30,58,17" />
+      <scope id="2852204284038007464" at="26,0,28,0" />
+      <scope id="2852204284038071211" at="43,9,46,71">
+        <var name="intentionProvider" id="2852204284038071211" />
+      </scope>
+      <scope id="2852204284038007464" at="51,0,54,0" />
+      <scope id="2852204284038007464" at="54,0,57,0">
+        <var name="argument" id="2852204284038007464" />
+      </scope>
+      <scope id="2852204284038007464" at="57,0,60,0" />
+      <scope id="2852204284038023848" at="40,7,47,9">
+        <var name="_reporter_2309309498" id="2852204284038023848" />
+        <var name="errorTarget" id="2852204284038023848" />
+      </scope>
+      <scope id="2852204284040846589" at="39,30,48,7" />
+      <scope id="2852204284038007465" at="28,117,49,5">
+        <var name="shortType" id="2852204284040914787" />
+      </scope>
+      <scope id="2852204284038007464" at="28,0,51,0">
+        <var name="status" id="2852204284038007464" />
+        <var name="type" id="2852204284038007464" />
+        <var name="typeCheckingContext" id="2852204284038007464" />
+      </scope>
+      <unit id="2852204284038007464" at="73,0,76,0" name="jetbrains.mps.kotlin.smodel.typesystem.check_invalid_ShortNodeType_as_argument_NonTypesystemRule$PROPS" />
+      <unit id="2852204284038007464" at="61,0,66,0" name="jetbrains.mps.kotlin.smodel.typesystem.check_invalid_ShortNodeType_as_argument_NonTypesystemRule$LINKS" />
+      <unit id="2852204284038007464" at="67,0,72,0" name="jetbrains.mps.kotlin.smodel.typesystem.check_invalid_ShortNodeType_as_argument_NonTypesystemRule$CONCEPTS" />
+      <unit id="2852204284038007464" at="25,0,77,0" name="jetbrains.mps.kotlin.smodel.typesystem.check_invalid_ShortNodeType_as_argument_NonTypesystemRule" />
+    </file>
+  </root>
+  <root nodeRef="r:158a3abc-d812-4285-9e5a-df3dd3878098(jetbrains.mps.kotlin.smodel.typesystem)/2852204284038044344">
+    <file name="fix_shortNodeTypeAsProjection_QuickFix.java">
+      <node id="2852204284038044344" at="12,51,13,133" concept="10" />
+      <node id="2852204284038066785" at="15,44,16,34" concept="7" />
+      <node id="2852204284040996874" at="18,35,19,278" concept="2" />
+      <node id="2852204284038044344" at="12,0,15,0" concept="1" trace="fix_shortNodeTypeAsProjection_QuickFix#()V" />
+      <node id="2852204284038044344" at="15,0,18,0" concept="4" trace="getDescription#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
+      <node id="2852204284038044344" at="18,0,21,0" concept="4" trace="execute#(Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <scope id="2852204284038044344" at="12,51,13,133" />
+      <scope id="2852204284038066474" at="15,44,16,34" />
+      <scope id="2852204284038044346" at="18,35,19,278" />
+      <scope id="2852204284038044344" at="12,0,15,0" />
+      <scope id="2852204284038044344" at="15,0,18,0">
+        <var name="node" id="2852204284038044344" />
+      </scope>
+      <scope id="2852204284038044344" at="18,0,21,0">
+        <var name="node" id="2852204284038044344" />
+      </scope>
+      <unit id="2852204284038044344" at="11,0,22,0" name="jetbrains.mps.kotlin.smodel.typesystem.fix_shortNodeTypeAsProjection_QuickFix" />
+    </file>
+  </root>
+  <root nodeRef="r:158a3abc-d812-4285-9e5a-df3dd3878098(jetbrains.mps.kotlin.smodel.typesystem)/7030867043393667196">
+    <file name="TypesystemDescriptor.java">
+      <node id="7030867043393667196" at="10,5,11,103" concept="5" />
+      <node id="7030867043393667196" at="11,103,12,55" concept="2" />
+      <node id="7030867043393667196" at="9,33,13,5" concept="0" />
+      <scope id="7030867043393667196" at="10,5,12,55">
+        <var name="nonTypesystemRule" id="7030867043393667196" />
+      </scope>
+    </file>
+    <file name="check_NodeType_CanSimplify_NonTypesystemRule.java">
+      <node id="9182535150784541216" at="28,121,29,124" concept="5" />
+      <node id="7030867043393669131" at="31,7,32,66" concept="5" />
+      <node id="7030867043393669131" at="32,66,33,242" concept="5" />
+      <node id="7030867043394003233" at="34,9,35,174" concept="5" />
+      <node id="7030867043394003233" at="35,174,36,71" concept="2" />
+      <node id="7030867043393667196" at="41,50,42,32" concept="7" />
+      <node id="7030867043393667196" at="44,68,45,102" concept="7" />
+      <node id="7030867043393667196" at="47,30,48,17" concept="7" />
+      <node id="7030867043393667196" at="52,0,53,0" concept="9" trace="projection$IJnO" />
+      <node id="7030867043393667196" at="53,0,54,0" concept="9" trace="type$x3no" />
+      <node id="7030867043393667196" at="54,0,55,0" concept="9" trace="concept$PItp" />
+      <node id="7030867043393667196" at="58,0,59,0" concept="9" trace="TypeProjection$5e" />
+      <node id="7030867043393667196" at="59,0,60,0" concept="9" trace="ConceptType$Jb" />
+      <node id="7030867043393667196" at="60,0,61,0" concept="9" trace="NodeType$FR" />
+      <node id="7030867043393667196" at="64,0,65,0" concept="9" trace="variance$9nw2" />
+      <node id="7030867043393667196" at="26,0,28,0" concept="1" trace="check_NodeType_CanSimplify_NonTypesystemRule#()V" />
+      <node id="7030867043393667196" at="41,0,44,0" concept="4" trace="getApplicableConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="7030867043393667196" at="44,0,47,0" concept="4" trace="isApplicableAndPattern#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljetbrains/mps/lang/typesystem/runtime/IsApplicableStatus;" />
+      <node id="7030867043393667196" at="47,0,50,0" concept="4" trace="overrides#()Z" />
+      <node id="7030867043394003233" at="33,242,37,9" concept="0" />
+      <node id="7030867043393669131" at="30,269,38,7" concept="0" />
+      <node id="7030867043393993441" at="29,124,39,5" concept="3" />
+      <node id="7030867043393667196" at="28,0,41,0" concept="4" trace="applyRule#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/typesystem/inference/TypeCheckingContext;Ljetbrains/mps/lang/typesystem/runtime/IsApplicableStatus;)V" />
+      <scope id="7030867043393667196" at="26,57,26,57" />
+      <scope id="7030867043393667196" at="41,50,42,32" />
+      <scope id="7030867043393667196" at="44,68,45,102" />
+      <scope id="7030867043393667196" at="47,30,48,17" />
+      <scope id="7030867043393667196" at="26,0,28,0" />
+      <scope id="7030867043394003233" at="34,9,36,71">
+        <var name="intentionProvider" id="7030867043394003233" />
+      </scope>
+      <scope id="7030867043393667196" at="41,0,44,0" />
+      <scope id="7030867043393667196" at="44,0,47,0">
+        <var name="argument" id="7030867043393667196" />
+      </scope>
+      <scope id="7030867043393667196" at="47,0,50,0" />
+      <scope id="7030867043393669131" at="31,7,37,9">
+        <var name="_reporter_2309309498" id="7030867043393669131" />
+        <var name="errorTarget" id="7030867043393669131" />
+      </scope>
+      <scope id="7030867043393993443" at="30,269,38,7" />
+      <scope id="7030867043393667197" at="28,121,39,5">
+        <var name="proj" id="9182535150784541217" />
+      </scope>
+      <scope id="7030867043393667196" at="28,0,41,0">
+        <var name="nodeType" id="7030867043393667196" />
+        <var name="status" id="7030867043393667196" />
+        <var name="typeCheckingContext" id="7030867043393667196" />
+      </scope>
+      <unit id="7030867043393667196" at="63,0,66,0" name="jetbrains.mps.kotlin.smodel.typesystem.check_NodeType_CanSimplify_NonTypesystemRule$PROPS" />
+      <unit id="7030867043393667196" at="51,0,56,0" name="jetbrains.mps.kotlin.smodel.typesystem.check_NodeType_CanSimplify_NonTypesystemRule$LINKS" />
+      <unit id="7030867043393667196" at="57,0,62,0" name="jetbrains.mps.kotlin.smodel.typesystem.check_NodeType_CanSimplify_NonTypesystemRule$CONCEPTS" />
+      <unit id="7030867043393667196" at="25,0,67,0" name="jetbrains.mps.kotlin.smodel.typesystem.check_NodeType_CanSimplify_NonTypesystemRule" />
+    </file>
+  </root>
+  <root nodeRef="r:158a3abc-d812-4285-9e5a-df3dd3878098(jetbrains.mps.kotlin.smodel.typesystem)/7030867043393980154">
+    <file name="SimplifyNodeType_QuickFix.java">
+      <node id="7030867043393980154" at="17,38,18,133" concept="10" />
+      <node id="7030867043393980922" at="20,44,21,40" concept="7" />
+      <node id="7030867043393620833" at="23,35,24,208" concept="5" />
+      <node id="7030867043393622374" at="24,208,25,347" concept="2" />
+      <node id="7030867043393627339" at="25,347,26,60" concept="2" />
+      <node id="7030867043393982083" at="26,60,27,0" concept="8" />
+      <node id="7030867043393980154" at="31,0,32,0" concept="9" trace="concept$qJcX" />
+      <node id="7030867043393980154" at="32,0,33,0" concept="9" trace="projection$IJnO" />
+      <node id="7030867043393980154" at="33,0,34,0" concept="9" trace="type$x3no" />
+      <node id="7030867043393980154" at="34,0,35,0" concept="9" trace="concept$PItp" />
+      <node id="7030867043393980154" at="38,0,39,0" concept="9" trace="NodeType$FR" />
+      <node id="7030867043393980154" at="39,0,40,0" concept="9" trace="TypeProjection$5e" />
+      <node id="7030867043393980154" at="40,0,41,0" concept="9" trace="ConceptType$Jb" />
+      <node id="7030867043393980154" at="17,0,20,0" concept="1" trace="SimplifyNodeType_QuickFix#()V" />
+      <node id="7030867043393980154" at="20,0,23,0" concept="4" trace="getDescription#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
+      <node id="7030867043393980154" at="23,0,29,0" concept="4" trace="execute#(Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <scope id="7030867043393980154" at="17,38,18,133" />
+      <scope id="7030867043393980554" at="20,44,21,40" />
+      <scope id="7030867043393980154" at="17,0,20,0" />
+      <scope id="7030867043393980154" at="20,0,23,0">
+        <var name="node" id="7030867043393980154" />
+      </scope>
+      <scope id="7030867043393980156" at="23,35,27,0">
+        <var name="shortNodeType" id="7030867043393620834" />
+      </scope>
+      <scope id="7030867043393980154" at="23,0,29,0">
+        <var name="node" id="7030867043393980154" />
+      </scope>
+      <unit id="7030867043393980154" at="37,0,42,0" name="jetbrains.mps.kotlin.smodel.typesystem.SimplifyNodeType_QuickFix$CONCEPTS" />
+      <unit id="7030867043393980154" at="30,0,36,0" name="jetbrains.mps.kotlin.smodel.typesystem.SimplifyNodeType_QuickFix$LINKS" />
+      <unit id="7030867043393980154" at="16,0,43,0" name="jetbrains.mps.kotlin.smodel.typesystem.SimplifyNodeType_QuickFix" />
+    </file>
+  </root>
+</debug-info>
+

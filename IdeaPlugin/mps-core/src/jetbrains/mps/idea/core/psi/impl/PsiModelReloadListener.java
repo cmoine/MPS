@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,152 +13,79 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.core.psi.impl;
 
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.components.AbstractProjectComponent;
 import com.intellij.openapi.project.Project;
 import jetbrains.mps.ide.project.ProjectHelper;
-import org.jetbrains.mps.openapi.language.SLanguage;
 import org.jetbrains.mps.openapi.model.SModel;
-import org.jetbrains.mps.openapi.model.SModel.Problem;
 import org.jetbrains.mps.openapi.model.SModelListener;
+import org.jetbrains.mps.openapi.model.SModelListenerBase;
 import org.jetbrains.mps.openapi.model.SModelReference;
-import org.jetbrains.mps.openapi.module.SDependency;
 import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SModuleListener;
-import org.jetbrains.mps.openapi.module.SRepository;
 
 /**
  * Created by danilla on 12/23/14.
  */
-public class PsiModelReloadListener extends AbstractProjectComponent implements SModelListener, SModuleListener {
-  private MPSPsiProvider myPsiProvider;
+public final class PsiModelReloadListener {
+  private final MPSPsiProvider myPsiProvider;
+  private final Project myProject;
 
-  protected PsiModelReloadListener(Project project) {
-    super(project);
-    myPsiProvider = MPSPsiProvider.getInstance(myProject);
+  public static PsiModelReloadListener getInstance(Project project) {
+    return project.getService(PsiModelReloadListener.class);
   }
 
-  @Override
-  public void modelLoaded(SModel sModel, boolean b) {
-  }
+  private final SModuleListener myModuleListener = new SModuleListener() {
+    @Override
+    public void modelAdded(SModule sModule, final SModel sModel) {
+      packRunnable(() -> {
+        MPSPsiModel psiModel = myPsiProvider.getPsi(sModel);
+        if (psiModel == null) {
+          return;
+        }
+        myPsiProvider.notifyPsiChanged(psiModel, null);
+      });
+    }
 
-  @Override
-  public void modelReplaced(final SModel sModel) {
-    packRunnable(new Runnable() {
-      @Override
-      public void run() {
+    @Override
+    public void modelRemoved(SModule module, SModelReference modelRef) {
+      packRunnable(() -> myPsiProvider.notifyModelRemoved(modelRef));
+    }
+
+    @Override
+    public void modelRenamed(SModule sModule, final SModel sModel, final SModelReference sModelReference) {
+      packRunnable(() -> myPsiProvider.notifyModelRenamed(sModelReference, sModel));
+    }
+  };
+
+  private final SModelListener myModelListener = new SModelListenerBase() {
+    @Override
+    public void modelReplaced(final SModel sModel) {
+      packRunnable(() -> {
         MPSPsiModel psiModel = myPsiProvider.getPsi(sModel);
         if (psiModel == null) {
           return;
         }
         psiModel.reloadAll();
         myPsiProvider.notifyPsiChanged(psiModel, null);
-      }
-    });
+      });
+    }
+  };
+
+  public PsiModelReloadListener(Project project) {
+    myProject = project;
+    // XXX perhaps, can postpone access until needed, but might change init sequence, don't want it for 22.2 now
+    myPsiProvider = MPSPsiProvider.getInstance(myProject);
   }
 
-  @Override
-  public void modelUnloaded(SModel sModel) {
-
+  public SModelListener getModelListener() {
+    return myModelListener;
   }
 
-  @Override
-  public void modelSaved(SModel sModel) {
-
-  }
-
-  @Override
-  public void conflictDetected(SModel sModel) {
-
-  }
-
-  @Override
-  public void problemsDetected(SModel sModel, Iterable<Problem> iterable) {
-  }
-
-  @Override
-  public void modelAttached(SModel model, SRepository repository) {
-  }
-
-  public void modelDetached(SModel model, SRepository repository) {
-  }
-
-
-  // module listener
-
-
-  @Override
-  public void modelAdded(SModule sModule, final SModel sModel) {
-    packRunnable(new Runnable() {
-      @Override
-      public void run() {
-        MPSPsiModel psiModel = myPsiProvider.getPsi(sModel);
-        if (psiModel == null) {
-          return;
-        }
-        myPsiProvider.notifyPsiChanged(psiModel, null);
-      }
-    });
-  }
-
-  @Override
-  public void beforeModelRemoved(SModule sModule, SModel sModel) {
-
-  }
-
-  @Override
-  public void modelRemoved(SModule sModule, SModelReference sModelReference) {
-
-  }
-
-  @Override
-  public void beforeModelRenamed(SModule sModule, SModel sModel, SModelReference sModelReference) {
-
-  }
-
-  @Override
-  public void modelRenamed(SModule sModule, final SModel sModel, final SModelReference sModelReference) {
-    packRunnable(new Runnable() {
-      @Override
-      public void run() {
-        MPSPsiModel psiModel = myPsiProvider.getPsi(sModel);
-        if (psiModel == null) {
-          return;
-        }
-        String oldName = sModelReference.getModelName();
-        String newName = sModel.getModelName();
-        myPsiProvider.notifyModelRenamed(psiModel, oldName, newName);
-      }
-    });
-  }
-
-  @Override
-  public void dependencyAdded(SModule sModule, SDependency sDependency) {
-
-  }
-
-  @Override
-  public void dependencyRemoved(SModule sModule, SDependency sDependency) {
-
-  }
-
-  @Override
-  public void languageAdded(SModule sModule, SLanguage sLanguage) {
-
-  }
-
-  @Override
-  public void languageRemoved(SModule sModule, SLanguage sLanguage) {
-
-  }
-
-  @Override
-  public void moduleChanged(SModule sModule) {
-
+  public SModuleListener getModuleListener() {
+    return myModuleListener;
   }
 
   private void packRunnable(final Runnable runnable) {
@@ -169,16 +96,11 @@ public class PsiModelReloadListener extends AbstractProjectComponent implements 
     // 4. we also need mps read action because we read models (you might think about 1. but that mps write action was in another thread)
 
     final Application app = ApplicationManager.getApplication();
-    app.invokeLater(new Runnable() {
-      @Override
-      public void run() {
-        app.runWriteAction(new Runnable() {
-          @Override
-          public void run() {
-            ProjectHelper.getModelAccess(myProject).runReadAction(runnable);
-          }
-        });
+    app.invokeLater(() -> app.runWriteAction(() -> {
+      // doesn't hurt to check once more time
+      if (!myProject.isDisposed()) {
+        ProjectHelper.getModelAccess(myProject).runReadAction(runnable);
       }
-    });
+    }), myProject.getDisposed());
   }
 }

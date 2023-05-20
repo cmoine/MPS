@@ -18,8 +18,7 @@ package jetbrains.mps.smodel;
 /**
  * fyodor, 6/8/11
  */
-public class TimeOutRuntimeException extends RuntimeException{
-
+public class TimeOutRuntimeException extends RuntimeException {
   public TimeOutRuntimeException() {
     super();
   }
@@ -35,5 +34,4 @@ public class TimeOutRuntimeException extends RuntimeException{
   public TimeOutRuntimeException(Throwable cause) {
     super(cause);
   }
-
 }

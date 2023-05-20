@@ -15,10 +15,10 @@
  */
 package jetbrains.mps.newTypesystem.context.typechecking;
 
-import jetbrains.mps.checkers.ErrorReportUtil;
 import jetbrains.mps.errors.IErrorReporter;
 import jetbrains.mps.newTypesystem.context.component.TargetTypeheckingComponent;
 import jetbrains.mps.newTypesystem.state.TargetState;
+import jetbrains.mps.typechecking.TypecheckingObservable;
 import jetbrains.mps.typesystem.inference.TypeCheckingContext;
 import jetbrains.mps.util.Cancellable;
 import org.jetbrains.mps.openapi.model.SNode;
@@ -27,7 +27,7 @@ import org.jetbrains.mps.openapi.model.SNode;
  * User: fyodor
  * Date: 4/29/14
  */
-public class TracingTypechecking extends BaseTypechecking<TargetState, TargetTypeheckingComponent> {
+public class TracingTypechecking extends ReportingTypechecking<TargetState, TargetTypeheckingComponent> {
 
   public TracingTypechecking(SNode node, TargetState state) {
     super(node, state);
@@ -39,20 +39,13 @@ public class TracingTypechecking extends BaseTypechecking<TargetState, TargetTyp
   }
 
   @Override
-  public boolean applyNonTypesystemRulesToRoot(TypeCheckingContext typeCheckingContext, Cancellable c) {
+  public boolean applyNonTypesystemRulesToRoot(TypeCheckingContext typeCheckingContext, Cancellable c, TypecheckingObservable observable) {
     // do nothing
     return false;
   }
 
-  public void reportTypeError(SNode nodeWithError, IErrorReporter errorReporter) {
-    if (nodeWithError != null) {
-      putError(nodeWithError, errorReporter);
-    }
-  }
-
-  private void putError(SNode node, IErrorReporter reporter) {
-    if (!ErrorReportUtil.shouldReportError(node)) return;
-    getState().addError(node, reporter, null);
+  public void reportTypeError(IErrorReporter errorReporter) {
+    getState().addError(errorReporter);
   }
 
 }

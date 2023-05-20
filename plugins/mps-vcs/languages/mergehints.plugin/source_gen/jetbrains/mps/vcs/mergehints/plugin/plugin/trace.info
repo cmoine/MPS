@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1160998861373:jetbrains.mps.baseLanguage.structure.AssertStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <root>
+    <file name="IconContainer.java">
+      <unit at="8,0,11,0" name="jetbrains.mps.vcs.mergehints.plugin.plugin.IconContainer" />
+    </file>
+  </root>
+  <root nodeRef="r:496da72a-6b1e-4ce7-a21a-624eeeb2f8ec(jetbrains.mps.vcs.mergehints.plugin.plugin)/2565896126719631163">
+    <file name="Plugin_ProjectPlugin.java">
+      <node id="2565896126719631163" at="15,54,16,52" concept="2" />
+    </file>
+    <file name="VersionControl_Order.java">
+      <node id="9040118078822014241" at="9,33,10,215" concept="10" />
+      <node id="9040118078822014241" at="9,0,12,0" concept="1" trace="VersionControl_Order#()V" />
+      <scope id="9040118078822014241" at="9,33,10,215" />
+      <scope id="9040118078822014241" at="9,0,12,0" />
+      <unit id="9040118078822014241" at="8,0,13,0" name="jetbrains.mps.vcs.mergehints.plugin.plugin.VersionControl_Order" />
+    </file>
+    <file name="Version_Control_TabDescriptor.java">
+      <node id="2565896126719631163" at="31,0,32,0" concept="9" trace="ICON" />
+      <node id="2565896126719631163" at="35,28,36,29" concept="6" />
+      <node id="2565896126719631163" at="38,55,39,64" concept="6" />
+      <node id="5090936610550543361" at="43,40,44,16" concept="6" />
+      <node id="2565896126719631171" at="46,43,47,86" concept="6" />
+      <node id="2565896126719631163" at="50,25,51,16" concept="6" />
+      <node id="2565896126719631180" at="53,43,54,47" concept="5" />
+      <node id="8147861864219967338" at="54,47,55,64" concept="5" />
+      <node id="8147861864219967349" at="56,40,57,19" concept="6" />
+      <node id="8147861864219967358" at="58,5,59,0" concept="8" />
+      <node id="8147861864219967359" at="59,0,60,65" concept="5" />
+      <node id="8147861864219967371" at="61,27,62,19" concept="6" />
+      <node id="8147861864219967378" at="63,5,64,0" concept="8" />
+      <node id="5090936610549002129" at="68,43,69,75" concept="6" />
+      <node id="2565896126719631194" at="73,8,74,17" concept="6" />
+      <node id="2565896126719631163" at="76,29,77,17" concept="6" />
+      <node id="5090936610549059112" at="79,65,80,90" concept="6" />
+      <node id="5090936610549071302" at="82,70,83,82" concept="5" />
+      <node id="5090936610549071321" at="83,82,84,68" concept="5" />
+      <node id="8096723825810569475" at="85,30,86,112" concept="7" />
+      <node id="8096723825810582870" at="86,112,87,92" concept="5" />
+      <node id="2714044795369273361" at="87,92,88,170" concept="5" />
+      <node id="8096723825810599164" at="89,53,90,20" concept="6" />
+      <node id="8096723825810622858" at="91,7,92,24" concept="2" />
+      <node id="2714044795369286561" at="92,24,93,84" concept="7" />
+      <node id="5090936610549441252" at="93,84,94,82" concept="2" />
+      <node id="5090936610549472984" at="95,5,96,0" concept="8" />
+      <node id="5090936610549468818" at="96,0,97,31" concept="0" />
+      <node id="5090936610549483014" at="97,31,98,211" concept="5" />
+      <node id="5090936610549487840" at="98,211,99,138" concept="2" />
+      <node id="5090936610549576876" at="99,138,100,86" concept="5" />
+      <node id="2714044795369301596" at="100,86,101,107" concept="7" />
+      <node id="5090936610549550394" at="101,107,102,85" concept="2" />
+      <node id="5090936610549512361" at="102,85,103,0" concept="8" />
+      <node id="5090936610549609350" at="103,0,104,17" concept="6" />
+      <node id="2565896126719631163" at="108,0,109,0" concept="9" trace="AbstractConceptDeclaration$KA" />
+      <node id="2565896126719631163" at="109,0,110,0" concept="9" trace="VCSHints$kA" />
+      <node id="2565896126719631163" at="113,0,114,0" concept="9" trace="concepts$nb$7" />
+      <node id="2565896126719631163" at="114,0,115,0" concept="9" trace="cncpt$ubC$" />
+      <node id="2565896126719631163" at="118,0,119,0" concept="9" trace="name$MnvL" />
+      <node id="2565896126719631163" at="33,0,35,0" concept="1" trace="Version_Control_TabDescriptor#()V" />
+      <node id="2565896126719631163" at="41,0,43,0" concept="4" trace="startListening#()V" />
+      <node id="2565896126719631163" at="35,0,38,0" concept="4" trace="getTitle#()Ljava/lang/String;" />
+      <node id="2565896126719631163" at="38,0,41,0" concept="4" trace="compareTo#(Ljetbrains/mps/plugins/relations/RelationDescriptor;)I" />
+      <node id="2565896126719631163" at="43,0,46,0" concept="4" trace="getBaseNode#(Lorg/jetbrains/mps/openapi/model/SNode;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="2565896126719631163" at="46,0,49,0" concept="4" trace="isApplicable#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="8147861864219967347" at="55,64,58,5" concept="3" />
+      <node id="8147861864219967369" at="60,65,63,5" concept="3" />
+      <node id="5090936610548995706" at="68,0,71,0" concept="4" trace="accept#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="2565896126719631163" at="76,0,79,0" concept="4" trace="isSingle#()Z" />
+      <node id="2565896126719631163" at="79,0,82,0" concept="4" trace="getAspectConcepts#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/Iterable;" />
+      <node id="8096723825810591906" at="88,170,91,7" concept="3" />
+      <node id="2565896126719631163" at="49,0,53,0" concept="4" trace="getIcon#()Ljavax/swing/Icon;" />
+      <node id="5090936610548956463" at="66,39,71,11" concept="6" />
+      <node id="5090936610548948385" at="66,0,73,0" concept="4" trace="accept#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="2565896126719631186" at="64,0,73,8" concept="2" />
+      <node id="2970389781193035811" at="84,68,95,5" concept="3" />
+      <node id="2565896126719631163" at="53,0,76,0" concept="4" trace="getNodes#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/util/List;" />
+      <node id="2565896126719631163" at="82,0,106,0" concept="4" trace="doCreateAspect#(Ljetbrains/mps/plugins/relations/CreateAspectContext;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <scope id="2565896126719631163" at="33,42,33,42" />
+      <scope id="2565896126719631177" at="41,32,41,32" />
+      <scope id="2565896126719631163" at="35,28,36,29" />
+      <scope id="2565896126719631163" at="38,55,39,64" />
+      <scope id="2565896126719631163" at="43,40,44,16" />
+      <scope id="2565896126719631163" at="46,43,47,86" />
+      <scope id="2565896126719631163" at="50,25,51,16" />
+      <scope id="8147861864219967348" at="56,40,57,19" />
+      <scope id="8147861864219967370" at="61,27,62,19" />
+      <scope id="5090936610548995707" at="68,43,69,75" />
+      <scope id="2565896126719631163" at="76,29,77,17" />
+      <scope id="7459370737648200873" at="79,65,80,90" />
+      <scope id="8096723825810591908" at="89,53,90,20" />
+      <scope id="2565896126719631163" at="33,0,35,0" />
+      <scope id="2565896126719631163" at="41,0,43,0" />
+      <scope id="2565896126719631163" at="35,0,38,0" />
+      <scope id="2565896126719631163" at="38,0,41,0">
+        <var name="descriptor" id="2565896126719631163" />
+      </scope>
+      <scope id="2565896126719631163" at="43,0,46,0">
+        <var name="node" id="2565896126719631163" />
+      </scope>
+      <scope id="2565896126719631163" at="46,0,49,0">
+        <var name="node" id="2565896126719631163" />
+      </scope>
+      <scope id="5090936610548995706" at="68,0,71,0">
+        <var name="it" id="5090936610548995706" />
+      </scope>
+      <scope id="2565896126719631163" at="76,0,79,0" />
+      <scope id="2565896126719631163" at="79,0,82,0">
+        <var name="node" id="2565896126719631163" />
+      </scope>
+      <scope id="2565896126719631163" at="49,0,53,0" />
+      <scope id="5090936610548948386" at="66,39,71,11" />
+      <scope id="5090936610548948385" at="66,0,73,0">
+        <var name="it" id="5090936610548948385" />
+      </scope>
+      <scope id="2970389781193035812" at="85,30,94,82">
+        <var name="cac" id="2714044795369273362" />
+        <var name="vcsAD" id="8096723825810582871" />
+      </scope>
+      <scope id="2565896126719631179" at="53,43,74,17">
+        <var name="module" id="8147861864219967339" />
+        <var name="nodes" id="2565896126719631181" />
+        <var name="vcsModel" id="8147861864219967360" />
+      </scope>
+      <scope id="7459370737648221575" at="82,70,104,17">
+        <var name="aspectModel" id="5090936610549071322" />
+        <var name="conceptHint" id="5090936610549576877" />
+        <var name="hints" id="5090936610549483015" />
+        <var name="module" id="5090936610549071303" />
+      </scope>
+      <scope id="2565896126719631163" at="53,0,76,0">
+        <var name="node" id="2565896126719631163" />
+      </scope>
+      <scope id="2565896126719631163" at="82,0,106,0">
+        <var name="_context" id="2565896126719631163" />
+      </scope>
+      <unit id="2565896126719631163" at="117,0,120,0" name="jetbrains.mps.vcs.mergehints.plugin.plugin.Version_Control_TabDescriptor$PROPS" />
+      <unit id="5090936610548995706" at="67,99,71,9" name="jetbrains.mps.vcs.mergehints.plugin.plugin.Version_Control_TabDescriptor$1$1" />
+      <unit id="2565896126719631163" at="107,0,111,0" name="jetbrains.mps.vcs.mergehints.plugin.plugin.Version_Control_TabDescriptor$CONCEPTS" />
+      <unit id="2565896126719631163" at="112,0,116,0" name="jetbrains.mps.vcs.mergehints.plugin.plugin.Version_Control_TabDescriptor$LINKS" />
+      <unit id="5090936610548948385" at="65,133,73,5" name="jetbrains.mps.vcs.mergehints.plugin.plugin.Version_Control_TabDescriptor$1" />
+      <unit id="2565896126719631163" at="30,0,121,0" name="jetbrains.mps.vcs.mergehints.plugin.plugin.Version_Control_TabDescriptor" />
+    </file>
+  </root>
+  <root nodeRef="r:496da72a-6b1e-4ce7-a21a-624eeeb2f8ec(jetbrains.mps.vcs.mergehints.plugin.plugin)/5090936610551600361">
+    <file name="Plugin_ProjectPlugin.java">
+      <node id="5090936610551600361" at="14,70,15,54" concept="5" />
+      <node id="5090936610551600361" at="16,52,17,18" concept="6" />
+      <node id="5090936610551600361" at="12,0,14,0" concept="1" trace="Plugin_ProjectPlugin#()V" />
+      <node id="5090936610551600361" at="14,0,19,0" concept="4" trace="initTabbedEditors#(Lcom/intellij/openapi/project/Project;)Ljava/util/List;" />
+      <scope id="5090936610551600361" at="12,33,12,33" />
+      <scope id="5090936610551600361" at="12,0,14,0" />
+      <scope id="5090936610551600361" at="14,70,17,18">
+        <var name="result" id="5090936610551600361" />
+      </scope>
+      <scope id="5090936610551600361" at="14,0,19,0">
+        <var name="project" id="5090936610551600361" />
+      </scope>
+      <unit id="5090936610551600361" at="11,0,20,0" name="jetbrains.mps.vcs.mergehints.plugin.plugin.Plugin_ProjectPlugin" />
+    </file>
+  </root>
+</debug-info>
+

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-5zzx7r7wxx2h9zptvuudubsxw5y0r6s" />
+<product version="3" modelHash="-98566e84xgubp6vewn4og9ufdrvomob">
+  <files names="IdGenerationUtil.java" />
+</product>
 

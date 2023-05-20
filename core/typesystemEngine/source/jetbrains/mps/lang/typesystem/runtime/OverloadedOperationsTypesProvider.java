@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,12 @@
 package jetbrains.mps.lang.typesystem.runtime;
 
 import jetbrains.mps.errors.IRuleConflictWarningProducer;
-import jetbrains.mps.lang.pattern.util.MatchingUtil;
 import jetbrains.mps.logging.Logger;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactoryByName;
-import jetbrains.mps.util.annotation.ToRemove;
-import org.apache.log4j.LogManager;
+import jetbrains.mps.smodel.SNodeMatcher;
+import jetbrains.mps.typesystem.inference.SubtypingManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.typesystem.inference.SubtypingManager;
-import org.jetbrains.mps.openapi.model.SNodeReference;
 
 public abstract class OverloadedOperationsTypesProvider implements IOverloadedOpsTypesProvider {
   protected SNode myLeftOperandType;
@@ -49,7 +45,7 @@ public abstract class OverloadedOperationsTypesProvider implements IOverloadedOp
   @Override
   public boolean isApplicable(SubtypingManager subtypingManager, SNode leftOperandType, SNode rightOperandType) {
     if (myLeftTypeIsExact) {
-      if (!MatchingUtil.matchNodes(leftOperandType, myLeftOperandType)) {
+      if (!new SNodeMatcher().match(leftOperandType, myLeftOperandType)) {
         return false;
       }
     } else {
@@ -58,15 +54,10 @@ public abstract class OverloadedOperationsTypesProvider implements IOverloadedOp
       }
     }
     if (myRightTypeIsExact) {
-      if (!MatchingUtil.matchNodes(rightOperandType, myRightOperandType)) {
-        return false;
-      }
+      return new SNodeMatcher().match(rightOperandType, myRightOperandType);
     } else {
-      if (!subtypingManager.isSubtype(rightOperandType, myRightOperandType, !myRightIsStrong)) {
-        return false;
-      }
+      return subtypingManager.isSubtype(rightOperandType, myRightOperandType, !myRightIsStrong);
     }
-    return true;
   }
 
   @Override
@@ -75,7 +66,7 @@ public abstract class OverloadedOperationsTypesProvider implements IOverloadedOp
   }
 
   @Override
-  public int compareTo(IOverloadedOpsTypesProvider o) {
+  public int compareTo(@NotNull IOverloadedOpsTypesProvider o) {
     if (o instanceof OverloadedOperationsTypesProvider) {
       OverloadedOperationsTypesProvider o2 = (OverloadedOperationsTypesProvider) o;
       int i1 = (this.myLeftTypeIsExact ? 1 : 0) + (this.myRightTypeIsExact ? 1 : 0);
@@ -90,7 +81,7 @@ public abstract class OverloadedOperationsTypesProvider implements IOverloadedOp
 
   @Override
   public void reportConflict(IRuleConflictWarningProducer warningProducer) {
-    Logger.wrap(LogManager.getLogger(getApplicableConcept().getQualifiedName())).warning(
-        "conflicting rules for overloaded operation type detected " + String.valueOf(myLeftOperandType) + " and " + String.valueOf(myRightOperandType));
+    Logger.getLogger(warningProducer.getClass()).warning(
+        "conflicting rules for overloaded operation type detected " + myLeftOperandType + " and " + myRightOperandType);
   }
 }

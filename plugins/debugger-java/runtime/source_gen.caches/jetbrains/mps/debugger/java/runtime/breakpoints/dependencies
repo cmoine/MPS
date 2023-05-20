@@ -1,237 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dependenciesRoot>
-  <dependency className="jetbrains.mps.debugger.java.runtime.breakpoints.BreakpointLocationUpdate" file="BreakpointLocationUpdate.java">
-    <classNode dependClassName="jetbrains.mps.debug.api.breakpoints.BreakpointLocation" />
-    <classNode dependClassName="jetbrains.mps.smodel.ModelAccessHelper" />
-    <classNode dependClassName="org.jetbrains.annotations.NotNull" />
-    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNode" />
-    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNodeReference" />
-    <classNode dependClassName="org.jetbrains.mps.openapi.module.SRepository" />
-    <classNode extendsClassName="jetbrains.mps.util.Computable" />
-  </dependency>
-  <dependency className="jetbrains.mps.debugger.java.runtime.breakpoints.BreakpointPresentation" file="BreakpointPresentation.java">
-    <classNode dependClassName="java.lang.String" />
-    <classNode dependClassName="jetbrains.mps.debug.api.breakpoints.BreakpointLocation" />
-    <classNode dependClassName="jetbrains.mps.smodel.ModelAccessHelper" />
-    <classNode dependClassName="org.jetbrains.annotations.NotNull" />
-    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNode" />
-    <classNode dependClassName="org.jetbrains.mps.openapi.module.SRepository" />
-    <classNode extendsClassName="jetbrains.mps.util.Computable" />
-  </dependency>
-  <dependency className="jetbrains.mps.debugger.java.runtime.breakpoints.BreakpointsIconCache" file="BreakpointsIconCache.java">
-    <classNode dependClassName="com.intellij.openapi.project.Project" />
-    <classNode dependClassName="java.lang.Override" />
-    <classNode dependClassName="java.lang.String" />
-    <classNode dependClassName="java.util.HashMap" />
-    <classNode dependClassName="java.util.Map" />
-    <classNode dependClassName="javax.swing.Icon" />
-    <classNode dependClassName="jetbrains.mps.baseLanguage.closures.runtime._FunctionTypes" />
-    <classNode dependClassName="jetbrains.mps.cleanup.CleanupListener" />
-    <classNode dependClassName="jetbrains.mps.cleanup.CleanupManager" />
-    <classNode dependClassName="jetbrains.mps.debug.api.AbstractDebugSession" />
-    <classNode dependClassName="jetbrains.mps.debug.api.BreakpointManagerComponent" />
-    <classNode dependClassName="jetbrains.mps.debug.api.DebugSessionManagerComponent" />
-    <classNode dependClassName="jetbrains.mps.debug.api.breakpoints.IBreakpoint" />
-    <classNode dependClassName="jetbrains.mps.debug.api.breakpoints.IBreakpointListener" />
-    <classNode dependClassName="jetbrains.mps.debugger.api.ui.breakpoints.BreakpointsUiComponent" />
-    <classNode dependClassName="jetbrains.mps.debugger.api.ui.icons.Icons" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.breakpoints.JavaBreakpoint" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.state.DebugSession" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.ui.Icons" />
-    <classNode dependClassName="jetbrains.mps.internal.collections.runtime.MapSequence" />
-    <classNode dependClassName="jetbrains.mps.internal.collections.runtime.SetSequence" />
-    <classNode dependClassName="org.jetbrains.annotations.NonNls" />
-    <classNode dependClassName="org.jetbrains.annotations.NotNull" />
-    <classNode dependClassName="org.jetbrains.annotations.Nullable" />
-    <classNode extendsClassName="com.intellij.openapi.components.ProjectComponent" />
-  </dependency>
-  <dependency className="jetbrains.mps.debugger.java.runtime.breakpoints.ExceptionBreakpoint" file="ExceptionBreakpoint.java">
-    <classNode dependClassName="com.intellij.openapi.project.Project" />
-    <classNode dependClassName="com.sun.jdi.ClassNotPreparedException" />
-    <classNode dependClassName="com.sun.jdi.InternalException" />
-    <classNode dependClassName="com.sun.jdi.ObjectCollectedException" />
-    <classNode dependClassName="com.sun.jdi.ReferenceType" />
-    <classNode dependClassName="com.sun.jdi.event.LocatableEvent" />
-    <classNode dependClassName="com.sun.jdi.request.ExceptionRequest" />
-    <classNode dependClassName="java.lang.Exception" />
-    <classNode dependClassName="java.lang.Object" />
-    <classNode dependClassName="java.lang.Override" />
-    <classNode dependClassName="java.lang.String" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.breakpoints.JavaBreakpointKind" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.engine.RequestManager" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.engine.events.EventContext" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.engine.events.EventsProcessor" />
-    <classNode dependClassName="org.apache.log4j.LogManager" />
-    <classNode dependClassName="org.apache.log4j.Logger" />
-    <classNode dependClassName="org.jetbrains.annotations.NotNull" />
-    <classNode extendsClassName="jetbrains.mps.debugger.java.runtime.breakpoints.JavaBreakpoint" />
-  </dependency>
-  <dependency className="jetbrains.mps.debugger.java.runtime.breakpoints.FieldBreakpoint" file="FieldBreakpoint.java">
-    <classNode dependClassName="com.intellij.openapi.project.Project" />
-    <classNode dependClassName="com.sun.jdi.ClassNotPreparedException" />
-    <classNode dependClassName="com.sun.jdi.ClassType" />
-    <classNode dependClassName="com.sun.jdi.Field" />
-    <classNode dependClassName="com.sun.jdi.InternalException" />
-    <classNode dependClassName="com.sun.jdi.ObjectCollectedException" />
-    <classNode dependClassName="com.sun.jdi.ReferenceType" />
-    <classNode dependClassName="com.sun.jdi.request.AccessWatchpointRequest" />
-    <classNode dependClassName="com.sun.jdi.request.ModificationWatchpointRequest" />
-    <classNode dependClassName="java.lang.Exception" />
-    <classNode dependClassName="java.lang.Object" />
-    <classNode dependClassName="java.lang.Override" />
-    <classNode dependClassName="java.lang.String" />
-    <classNode dependClassName="jetbrains.mps.debug.api.breakpoints.BreakpointLocation" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.api.evaluation.EvaluationUtils" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.breakpoints.BreakpointLocationUpdate" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.breakpoints.BreakpointPresentation" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.breakpoints.JavaBreakpointKind" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.engine.RequestManager" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.engine.events.EventsProcessor" />
-    <classNode dependClassName="jetbrains.mps.textgen.trace.TraceablePositionInfo" />
-    <classNode dependClassName="org.apache.log4j.LogManager" />
-    <classNode dependClassName="org.apache.log4j.Logger" />
-    <classNode dependClassName="org.jetbrains.annotations.NotNull" />
-    <classNode dependClassName="org.jetbrains.annotations.Nullable" />
-    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNode" />
-    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNodeReference" />
-    <classNode extendsClassName="jetbrains.mps.debug.api.breakpoints.ILocationBreakpoint" />
-    <classNode extendsClassName="jetbrains.mps.debugger.java.runtime.breakpoints.JavaBreakpoint" />
-  </dependency>
-  <dependency className="jetbrains.mps.debugger.java.runtime.breakpoints.JavaBreakpoint" file="JavaBreakpoint.java">
-    <classNode dependClassName="com.intellij.openapi.project.Project" />
-    <classNode dependClassName="com.sun.jdi.IncompatibleThreadStateException" />
-    <classNode dependClassName="com.sun.jdi.ReferenceType" />
-    <classNode dependClassName="com.sun.jdi.StackFrame" />
-    <classNode dependClassName="com.sun.jdi.ThreadReference" />
-    <classNode dependClassName="com.sun.jdi.event.LocatableEvent" />
-    <classNode dependClassName="com.sun.jdi.request.EventRequest" />
-    <classNode dependClassName="java.lang.Override" />
-    <classNode dependClassName="java.lang.String" />
-    <classNode dependClassName="java.util.List" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.breakpoints.JavaBreakpointKind" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.engine.RequestManager" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.engine.concurrent.ManagerThread" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.engine.events.EventContext" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.engine.events.EventsProcessor" />
-    <classNode dependClassName="jetbrains.mps.ide.project.ProjectHelper" />
-    <classNode dependClassName="jetbrains.mps.logging.Logger" />
-    <classNode dependClassName="org.apache.log4j.LogManager" />
-    <classNode dependClassName="org.jetbrains.annotations.NotNull" />
-    <classNode dependClassName="org.jetbrains.mps.openapi.module.SRepository" />
-    <classNode extendsClassName="jetbrains.mps.debug.api.breakpoints.AbstractBreakpoint" />
-    <classNode extendsClassName="jetbrains.mps.debugger.java.runtime.engine.requests.ClassPrepareRequestor" />
-    <classNode extendsClassName="jetbrains.mps.debugger.java.runtime.engine.requests.LocatableEventRequestor" />
-  </dependency>
-  <dependency className="jetbrains.mps.debugger.java.runtime.breakpoints.JavaBreakpointInfo" file="JavaBreakpointInfo.java">
-    <classNode dependClassName="jetbrains.mps.debug.api.breakpoints.BreakpointLocation" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.breakpoints.JavaBreakpoint" />
-    <classNode extendsClassName="jetbrains.mps.debug.api.BreakpointInfo" />
-  </dependency>
-  <dependency className="jetbrains.mps.debugger.java.runtime.breakpoints.JavaBreakpointKind" file="JavaBreakpointKind.java">
-    <classNode dependClassName="java.lang.Override" />
-    <classNode dependClassName="java.lang.String" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.breakpoints.JavaBreakpoint" />
-    <classNode dependClassName="org.jetbrains.annotations.NonNls" />
-    <classNode extendsClassName="jetbrains.mps.debug.api.breakpoints.IBreakpointKind" />
-  </dependency>
-  <dependency className="jetbrains.mps.debugger.java.runtime.breakpoints.JavaBreakpointsProvider" file="JavaBreakpointsProvider.java">
-    <classNode dependClassName="com.intellij.openapi.project.Project" />
-    <classNode dependClassName="com.intellij.util.xmlb.XmlSerializer" />
-    <classNode dependClassName="com.sun.jdi.request.EventRequest" />
-    <classNode dependClassName="java.awt.FlowLayout" />
-    <classNode dependClassName="java.awt.event.ActionEvent" />
-    <classNode dependClassName="java.awt.event.ActionListener" />
-    <classNode dependClassName="java.lang.IllegalArgumentException" />
-    <classNode dependClassName="java.lang.Override" />
-    <classNode dependClassName="java.lang.String" />
-    <classNode dependClassName="java.util.Arrays" />
-    <classNode dependClassName="java.util.List" />
-    <classNode dependClassName="javax.swing.ButtonGroup" />
-    <classNode dependClassName="javax.swing.Icon" />
-    <classNode dependClassName="javax.swing.JCheckBox" />
-    <classNode dependClassName="javax.swing.JComponent" />
-    <classNode dependClassName="javax.swing.JPanel" />
-    <classNode dependClassName="javax.swing.JRadioButton" />
-    <classNode dependClassName="javax.swing.border.TitledBorder" />
-    <classNode dependClassName="jetbrains.mps.debug.api.AbstractDebugSession" />
-    <classNode dependClassName="jetbrains.mps.debug.api.breakpoints.BreakpointLocation" />
-    <classNode dependClassName="jetbrains.mps.debug.api.breakpoints.IBreakpointPropertiesUi" />
-    <classNode dependClassName="jetbrains.mps.debug.api.breakpoints.ILocationBreakpoint" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.breakpoints.BreakpointsIconCache" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.breakpoints.ExceptionBreakpoint" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.breakpoints.FieldBreakpoint" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.breakpoints.JavaBreakpoint" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.breakpoints.JavaBreakpointInfo" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.breakpoints.JavaBreakpointKind" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.breakpoints.LineBreakpoint" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.ui.breakpoints.ExceptionChooserDialog" />
-    <classNode dependClassName="org.jdom.Element" />
-    <classNode dependClassName="org.jetbrains.annotations.NotNull" />
-    <classNode dependClassName="org.jetbrains.annotations.Nullable" />
-    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNode" />
-    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNodeReference" />
-    <classNode extendsClassName="jetbrains.mps.debug.api.breakpoints.IBreakpointsProvider" />
-  </dependency>
-  <dependency className="jetbrains.mps.debugger.java.runtime.breakpoints.LineBreakpoint" file="LineBreakpoint.java">
-    <classNode dependClassName="com.intellij.openapi.project.Project" />
-    <classNode dependClassName="com.sun.jdi.ClassNotPreparedException" />
-    <classNode dependClassName="com.sun.jdi.InternalException" />
-    <classNode dependClassName="com.sun.jdi.InvalidLineNumberException" />
-    <classNode dependClassName="com.sun.jdi.Location" />
-    <classNode dependClassName="com.sun.jdi.ObjectCollectedException" />
-    <classNode dependClassName="com.sun.jdi.ReferenceType" />
-    <classNode dependClassName="com.sun.jdi.request.BreakpointRequest" />
-    <classNode dependClassName="java.lang.Exception" />
-    <classNode dependClassName="java.lang.Object" />
-    <classNode dependClassName="java.lang.Override" />
-    <classNode dependClassName="java.lang.String" />
-    <classNode dependClassName="java.util.List" />
-    <classNode dependClassName="jetbrains.mps.debug.api.breakpoints.BreakpointLocation" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.breakpoints.BreakpointLocationUpdate" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.breakpoints.BreakpointPresentation" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.breakpoints.JavaBreakpointKind" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.engine.RequestManager" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.engine.events.EventsProcessor" />
-    <classNode dependClassName="org.apache.log4j.LogManager" />
-    <classNode dependClassName="org.apache.log4j.Logger" />
-    <classNode dependClassName="org.jetbrains.annotations.NotNull" />
-    <classNode dependClassName="org.jetbrains.annotations.Nullable" />
-    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNode" />
-    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNodeReference" />
-    <classNode extendsClassName="jetbrains.mps.debug.api.breakpoints.ILocationBreakpoint" />
-    <classNode extendsClassName="jetbrains.mps.debugger.java.runtime.breakpoints.JavaBreakpoint" />
-  </dependency>
-  <dependency className="jetbrains.mps.debugger.java.runtime.breakpoints.MethodBreakpoint" file="MethodBreakpoint.java">
-    <classNode dependClassName="com.intellij.openapi.project.Project" />
-    <classNode dependClassName="com.sun.jdi.ClassNotPreparedException" />
-    <classNode dependClassName="com.sun.jdi.InternalException" />
-    <classNode dependClassName="com.sun.jdi.Method" />
-    <classNode dependClassName="com.sun.jdi.ObjectCollectedException" />
-    <classNode dependClassName="com.sun.jdi.ReferenceType" />
-    <classNode dependClassName="com.sun.jdi.event.LocatableEvent" />
-    <classNode dependClassName="com.sun.jdi.event.MethodEntryEvent" />
-    <classNode dependClassName="com.sun.jdi.event.MethodExitEvent" />
-    <classNode dependClassName="com.sun.jdi.request.MethodEntryRequest" />
-    <classNode dependClassName="com.sun.jdi.request.MethodExitRequest" />
-    <classNode dependClassName="java.lang.Exception" />
-    <classNode dependClassName="java.lang.Object" />
-    <classNode dependClassName="java.lang.Override" />
-    <classNode dependClassName="java.lang.String" />
-    <classNode dependClassName="jetbrains.mps.debug.api.breakpoints.BreakpointLocation" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.breakpoints.BreakpointLocationUpdate" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.breakpoints.BreakpointPresentation" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.breakpoints.JavaBreakpointKind" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.engine.RequestManager" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.engine.events.EventContext" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.engine.events.EventsProcessor" />
-    <classNode dependClassName="jetbrains.mps.textgen.trace.TraceablePositionInfo" />
-    <classNode dependClassName="org.apache.log4j.LogManager" />
-    <classNode dependClassName="org.apache.log4j.Logger" />
-    <classNode dependClassName="org.jetbrains.annotations.NotNull" />
-    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNode" />
-    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNodeReference" />
-    <classNode extendsClassName="jetbrains.mps.debug.api.breakpoints.ILocationBreakpoint" />
-    <classNode extendsClassName="jetbrains.mps.debugger.java.runtime.breakpoints.JavaBreakpoint" />
-  </dependency>
+  <uses language="l:f3061a53-9226-4cc5-a443-f952ceaf5816:jetbrains.mps.baseLanguage" />
+  <uses language="l:774bf8a0-62e5-41e1-af63-f4812e60e48b:jetbrains.mps.baseLanguage.checkedDots" />
+  <uses language="l:fd392034-7849-419d-9071-12563d152375:jetbrains.mps.baseLanguage.closures" />
+  <uses language="l:83888646-71ce-4f1c-9c53-c54016f6ad4f:jetbrains.mps.baseLanguage.collections" />
+  <uses language="l:f2801650-65d5-424e-bb1b-463a8781b786:jetbrains.mps.baseLanguage.javadoc" />
+  <uses language="l:df345b11-b8c7-4213-ac66-48d2a9b75d88:jetbrains.mps.baseLanguageInternal" />
+  <uses language="l:c7fb639f-be78-4307-89b0-b5959c3fa8c8:jetbrains.mps.lang.text" />
+  <uses module="3f233e7f-b8a6-46d2-a57f-795d56775243(Annotations)" kind="dp" />
+  <uses module="6354ebe7-c22a-4a0f-ac54-50b52ab9b065(JDK)" kind="rt+dp" />
+  <uses module="b387285c-3448-452c-b3bb-a3f8de8eaf08(JDK-tools)" kind="dp" />
+  <uses module="6ed54515-acc8-4d1e-a16c-9fd6cfe951ea(MPS.Core)" kind="dp" />
+  <uses module="1ed103c3-3aa6-49b7-9c21-6765ee11f224(MPS.Editor)" kind="dp" />
+  <uses module="498d89d2-c2e9-11e2-ad49-6cf049e62fe5(MPS.IDEA)" kind="dp" />
+  <uses module="8865b7a8-5271-43d3-884c-6fd1d9cfdd34(MPS.OpenAPI)" kind="dp" />
+  <uses module="742f6602-5a2f-4313-aa6e-ae1cd4ffdc61(MPS.Platform)" kind="dp" />
+  <uses module="4c6a28d1-2c60-478d-b36e-db9b3cbb21fb(closures.runtime)" kind="rt+dp" />
+  <uses module="9b80526e-f0bf-4992-bdf5-cee39c1833f3(collections.runtime)" kind="rt+dp" />
+  <uses module="52b81ac7-93fd-4e9e-b972-4995882da6d4(jetbrains.mps.baseLanguage.references.runtime)" kind="rt" />
+  <uses module="cc7da2f6-419f-4133-a811-31fcd3295a85(jetbrains.mps.debugger.api.api)" kind="dp" />
+  <uses module="25891414-2b70-48c7-b1cc-8dc0c127d669(jetbrains.mps.debugger.api.runtime)" kind="dp" />
+  <uses module="cf8c9de5-1b4a-4dc8-8e6d-847159af31dd(jetbrains.mps.debugger.java.api)" kind="dp" />
+  <uses module="fcffe3cf-3ebc-4d3d-989b-2f30533bc904(jetbrains.mps.debugger.java.runtime)" kind="dp" />
+  <uses module="a1250a4d-c090-42c3-ad7c-d298a3357dd4(jetbrains.mps.make.runtime)" kind="dp" />
+  <uses module="f647e48e-4568-4f4c-b48a-1546492c6a2e(org.jdom)" kind="dp" />
 </dependenciesRoot>
 

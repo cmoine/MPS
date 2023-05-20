@@ -37,10 +37,7 @@ public class CellAction_CutNode extends CellAction_CopyNode {
       return false;
     }
     SNode node = selectedNodes.get(0);
-    if (SNodeOperations.getParent(node) == null || context.getEditorComponent().getEditedNode() == node) {
-      return false;
-    }
-    return true;
+    return SNodeOperations.getParent(node) != null && context.getEditorComponent().getEditedNode() != node;
     // todo: what about read-only models?
   }
 

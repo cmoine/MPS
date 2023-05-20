@@ -18,15 +18,14 @@ import jetbrains.mps.make.resources.IPropertiesAccessor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.util.ProgressMonitor;
 import jetbrains.mps.smodel.resources.TResource;
+import java.util.stream.IntStream;
+import jetbrains.mps.project.facets.GenerationTargetFacet;
+import jetbrains.mps.vfs.IFile;
 import jetbrains.mps.internal.make.runtime.util.DeltaReconciler;
 import java.util.Set;
 import jetbrains.mps.internal.collections.runtime.SetSequence;
 import java.util.HashSet;
 import jetbrains.mps.internal.make.runtime.util.FilesDelta;
-import jetbrains.mps.vfs.IFile;
-import jetbrains.mps.project.SModuleOperations;
-import jetbrains.mps.generator.fileGenerator.FileGenerationUtil;
-import jetbrains.mps.vfs.FileSystem;
 import jetbrains.mps.make.facets.Make_Facet.Target_make;
 import jetbrains.mps.make.script.IFeedback;
 import jetbrains.mps.make.script.IConfig;
@@ -42,7 +41,7 @@ public class Diff_Facet extends IFacet.Stub {
   private List<ITarget> targets = ListSequence.fromList(new ArrayList<ITarget>());
   private IFacet.Name name = new IFacet.Name("jetbrains.mps.tool.gentest.Diff");
   public Diff_Facet() {
-    ListSequence.fromList(targets).addElement(new Diff_Facet.Target_diff());
+    ListSequence.fromList(targets).addElement(new Target_diff());
   }
   public Iterable<ITarget> targets() {
     return targets;
@@ -51,7 +50,7 @@ public class Diff_Facet extends IFacet.Stub {
     return null;
   }
   public Iterable<IFacet.Name> required() {
-    return Sequence.fromArray(new IFacet.Name[]{new IFacet.Name("jetbrains.mps.lang.core.TextGen"), new IFacet.Name("jetbrains.mps.make.facets.Make")});
+    return Sequence.fromArray(new IFacet.Name[]{new IFacet.Name("jetbrains.mps.make.facets.TextGen"), new IFacet.Name("jetbrains.mps.make.facets.Make")});
   }
   public Iterable<IFacet.Name> extended() {
     return null;
@@ -60,7 +59,7 @@ public class Diff_Facet extends IFacet.Stub {
     return this.name;
   }
   public IPropertiesPersistence propertiesPersistence() {
-    return new Diff_Facet.TargetProperties();
+    return new TargetProperties();
   }
   public static class Target_diff implements ITargetEx2 {
     private static final ITarget.Name name = new ITarget.Name("jetbrains.mps.tool.gentest.Diff.diff");
@@ -72,13 +71,24 @@ public class Diff_Facet extends IFacet.Stub {
         public IResult execute(final Iterable<IResource> rawInput, final IJobMonitor monitor, final IPropertiesAccessor pa, @NotNull final ProgressMonitor progressMonitor) {
           Iterable<IResource> _output_mtqq_a0a = null;
           final Iterable<TResource> input = (Iterable<TResource>) (Iterable) rawInput;
+          progressMonitor.start("", IntStream.of(1000).sum());
           switch (0) {
             case 0:
               if (vars(pa.global()).fileToPath() != null) {
-                monitor.currentProgress().beginWork("Diffing", 100 * Sequence.fromIterable(input).count(), monitor.currentProgress().workLeft());
+                final ProgressMonitor subProgress_a0a0a0a = progressMonitor.subTask(1000);
+                subProgress_a0a0a0a.start("Diffing", 100 * Sequence.fromIterable(input).count());
                 for (TResource tgres : Sequence.fromIterable(input)) {
                   String fqn = tgres.modelDescriptor().getName().getLongName();
-                  monitor.currentProgress().advanceWork("Diffing", 1, fqn);
+                  subProgress_a0a0a0a.advance(1);
+                  subProgress_a0a0a0a.step(fqn);
+                  // XXX I wonder if tgres.modelDescriptor is an original model or a transformed one. If latter, how come we
+                  //    access facets and output path that's available for original module only (not for a transient)?
+                  // As long as this code is dead, I don't care about thorough GTF scenario support
+                  GenerationTargetFacet gtf = GenerationTargetFacet.find(tgres.modelDescriptor());
+                  final IFile outDirPath = (gtf == null ? null : gtf.getOutputLocation(tgres.modelDescriptor()));
+                  if (outDirPath == null) {
+                    continue;
+                  }
                   DeltaReconciler dr = new DeltaReconciler(tgres.delta());
                   final Set<String> retainedPaths = SetSequence.fromSet(new HashSet<String>());
                   dr.visitAll(new FilesDelta.Visitor() {
@@ -90,20 +100,20 @@ public class Diff_Facet extends IFacet.Stub {
                   });
                   final Differ differ = new Differ(retainedPaths, vars(pa.global()).excludedFiles());
                   final StringBuilder errors = new StringBuilder();
-                  final String origOutRootPath = SModuleOperations.getOutputPathFor(tgres.modelDescriptor());
-                  final String outDirPath = FileGenerationUtil.getDefaultOutputDir(tgres.modelDescriptor(), FileSystem.getInstance().getFileByPath(origOutRootPath)).getPath();
 
-                  for (String diff : differ.diff(outDirPath, Target_make.vars(pa.global()).pathToFile().invoke(outDirPath).getPath())) {
+                  for (String diff : differ.diff(outDirPath.getPath(), Target_make.vars(pa.global()).alternateOutput().invoke(outDirPath).getPath())) {
                     errors.append("\n").append(diff);
                   }
                   if (errors.length() > 0) {
                     monitor.reportFeedback(new IFeedback.ERROR(String.valueOf("Differences\n" + errors.toString())));
                   }
-                  monitor.currentProgress().advanceWork("Diffing", 99, fqn);
+                  subProgress_a0a0a0a.advance(99);
+                  subProgress_a0a0a0a.step(fqn);
                 }
-                monitor.currentProgress().finishWork("Diffing");
+                subProgress_a0a0a0a.done();
               }
             default:
+              progressMonitor.done();
               return new IResult.SUCCESS(_output_mtqq_a0a);
           }
         }
@@ -157,8 +167,8 @@ public class Diff_Facet extends IFacet.Stub {
     public int workEstimate() {
       return 500;
     }
-    public static Diff_Facet.Target_diff.Parameters vars(IPropertiesPool ppool) {
-      return ppool.properties(name, Diff_Facet.Target_diff.Parameters.class);
+    public static Parameters vars(IPropertiesPool ppool) {
+      return ppool.properties(name, Parameters.class);
     }
     public static class Parameters extends MultiTuple._2<_FunctionTypes._return_P1_E0<? extends String, ? super IFile>, Set<File>> {
       public Parameters() {
@@ -188,7 +198,7 @@ public class Diff_Facet extends IFacet.Stub {
       {
         ITarget.Name name = new ITarget.Name("jetbrains.mps.tool.gentest.Diff.diff");
         if (properties.hasProperties(name)) {
-          Diff_Facet.Target_diff.Parameters props = properties.properties(name, Diff_Facet.Target_diff.Parameters.class);
+          Target_diff.Parameters props = properties.properties(name, Target_diff.Parameters.class);
           MapSequence.fromMap(store).put("jetbrains.mps.tool.gentest.Diff.diff.fileToPath", null);
           MapSequence.fromMap(store).put("jetbrains.mps.tool.gentest.Diff.diff.excludedFiles", null);
         }
@@ -198,7 +208,7 @@ public class Diff_Facet extends IFacet.Stub {
       try {
         {
           ITarget.Name name = new ITarget.Name("jetbrains.mps.tool.gentest.Diff.diff");
-          Diff_Facet.Target_diff.Parameters props = properties.properties(name, Diff_Facet.Target_diff.Parameters.class);
+          Target_diff.Parameters props = properties.properties(name, Target_diff.Parameters.class);
           if (MapSequence.fromMap(store).containsKey("jetbrains.mps.tool.gentest.Diff.diff.fileToPath")) {
             props.fileToPath(null);
           }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,28 +16,22 @@
 
 package jetbrains.mps.idea.core.actions;
 
-import com.intellij.facet.FacetManager;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
+import jetbrains.mps.extapi.persistence.SourceRoot;
+import jetbrains.mps.ide.actions.MPSCommonDataKeys;
 import jetbrains.mps.idea.core.MPSBundle;
-import jetbrains.mps.idea.core.facet.MPSConfigurationBean;
 import jetbrains.mps.idea.core.facet.MPSFacet;
-import jetbrains.mps.idea.core.facet.MPSFacetType;
+import jetbrains.mps.idea.core.ui.ModelOrNodeChooser;
 import jetbrains.mps.persistence.DefaultModelRoot;
-import org.jetbrains.mps.openapi.persistence.ModelRoot;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import jetbrains.mps.project.MPSProject;
+import jetbrains.mps.project.structure.modules.SolutionDescriptor;
+import jetbrains.mps.smodel.ModelAccessHelper;
+import jetbrains.mps.util.Pair;
 
 public class UnmarkModelRootAction extends AnAction {
   public UnmarkModelRootAction() {
@@ -50,27 +44,25 @@ public class UnmarkModelRootAction extends AnAction {
     assert module != null;
     VirtualFile[] vFiles = e.getData(PlatformDataKeys.VIRTUAL_FILE_ARRAY);
     assert vFiles != null;
-    MPSFacet mpsFacet = FacetManager.getInstance(module).getFacetByType(MPSFacetType.ID);
+    final MPSProject mpsProject = MPSCommonDataKeys.MPS_PROJECT.getData(e.getDataContext());
+    assert mpsProject != null;
+    final MPSFacet mpsFacet = ModelOrNodeChooser.getFacetIfInitialized(module);
     assert mpsFacet != null;
 
-    MPSConfigurationBean configurationBean = mpsFacet.getConfiguration().getBean();
-    List<ModelRoot> modelRoots = new ArrayList<ModelRoot>(configurationBean.getModelRoots());
-    Map<String, DefaultModelRoot> rootsMap = new HashMap<String, DefaultModelRoot>();
-    for (ModelRoot modelRoot : modelRoots) {
-      for (String sourceRoot : ((DefaultModelRoot) modelRoot).getFiles(DefaultModelRoot.SOURCE_ROOTS)) {
-        rootsMap.put(sourceRoot, (DefaultModelRoot) modelRoot);
+    mpsProject.getModelAccess().runWriteAction(() -> {
+      boolean changed = false;
+      final SolutionDescriptor solutionDescriptor = mpsFacet.getSolution().getModuleDescriptor();
+      for (VirtualFile vFile : vFiles) {
+        final Pair<DefaultModelRoot, SourceRoot> mr = ModelOrNodeChooser.getModelRoot(mpsFacet, vFile);
+        mr.o1.removeSourceRoot(mr.o2);
+        changed = true;
       }
-    }
-    for (VirtualFile vFile : vFiles) {
-      String path = VirtualFileManager.extractPath(vFile.getUrl());
-      DefaultModelRoot modelRoot = rootsMap.get(path);
-      modelRoot.deleteFile(DefaultModelRoot.SOURCE_ROOTS, path);
-      if (modelRoot.getFiles(DefaultModelRoot.SOURCE_ROOTS).isEmpty()) {
-        modelRoots.remove(modelRoot);
+      if (changed) {
+        // just tell MPS module has changed.
+        // see MarkModelRootAction for reasons why we don't need to bother to notify mpsFacet, MPSFacetConfiguration or MPSConfigurationBean here.
+        mpsFacet.getSolution().setModuleDescriptor(solutionDescriptor);
       }
-    }
-    configurationBean.setModelRoots(modelRoots);
-    mpsFacet.setConfiguration(configurationBean);
+    });
   }
 
   @Override
@@ -83,30 +75,19 @@ public class UnmarkModelRootAction extends AnAction {
   private boolean isEnabled(AnActionEvent e) {
     Module module = e.getData(LangDataKeys.MODULE);
     VirtualFile[] vFiles = e.getData(PlatformDataKeys.VIRTUAL_FILE_ARRAY);
-    if (module == null || vFiles == null) return false;
+    final MPSProject mpsProject = MPSCommonDataKeys.MPS_PROJECT.getData(e.getDataContext());
+    final MPSFacet mpsFacet = ModelOrNodeChooser.getFacetIfInitialized(module);
+    if (mpsFacet == null || mpsProject == null || module == null || vFiles == null) {
+      return false;
+    }
 
-    MPSFacet mpsFacet = FacetManager.getInstance(module).getFacetByType(MPSFacetType.ID);
-    if (mpsFacet == null || !mpsFacet.wasInitialized()) return false;
-
-    Set<ModelRoot> modelRoots = new HashSet<ModelRoot>();
-    modelRoots.addAll(mpsFacet.getConfiguration().getBean().getModelRoots());
-    Map<String, DefaultModelRoot> rootsMap = new HashMap<String, DefaultModelRoot>();
-    for (ModelRoot modelRoot : modelRoots) {
-      if (modelRoot instanceof DefaultModelRoot) {
-        for (String sourceRoot : ((DefaultModelRoot) modelRoot).getFiles(DefaultModelRoot.SOURCE_ROOTS)) {
-          rootsMap.put(sourceRoot, (DefaultModelRoot) modelRoot);
+    return new ModelAccessHelper(mpsProject.getModelAccess()).runReadAction(() -> {
+      for (VirtualFile vFile : vFiles) {
+        if (ModelOrNodeChooser.getModelRoot(mpsFacet, vFile) == null) {
+          return false;
         }
       }
-    }
-    for (VirtualFile vFile : vFiles) {
-      if (!vFile.isDirectory()) return false;
-
-      String url = vFile.getUrl();
-      if (!LocalFileSystem.PROTOCOL.equals(VirtualFileManager.extractProtocol(url))) return false;
-
-      String path = VirtualFileManager.extractPath(url);
-      if (!rootsMap.containsKey(path)) return false;
-    }
-    return true;
+      return true;
+    });
   }
 }

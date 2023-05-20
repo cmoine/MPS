@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="mps-migration">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/mps-migration/lib/migration-platform.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

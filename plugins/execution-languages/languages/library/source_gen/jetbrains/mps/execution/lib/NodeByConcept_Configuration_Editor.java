@@ -6,7 +6,6 @@ import jetbrains.mps.execution.api.settings.SettingsEditorEx;
 import jetbrains.mps.execution.lib.ui.NodeByConceptChooser;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.options.ConfigurationException;
-import jetbrains.mps.smodel.ModelAccess;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.baseLanguage.closures.runtime._FunctionTypes;
 import org.jetbrains.mps.openapi.model.SNode;
@@ -16,6 +15,7 @@ public class NodeByConcept_Configuration_Editor extends SettingsEditorEx<NodeByC
   private NodeByConceptChooser myChooser;
   public void disposeEditor() {
   }
+
   @NotNull
   public NodeByConceptChooser createEditor() {
     myChooser = new NodeByConceptChooser();
@@ -23,19 +23,15 @@ public class NodeByConcept_Configuration_Editor extends SettingsEditorEx<NodeByC
     myChooser.setAcceptor(myIsValid);
     return myChooser;
   }
+
   public void applyEditorTo(final NodeByConcept_Configuration configuration) throws ConfigurationException {
-    ModelAccess.instance().runReadAction(new Runnable() {
-      public void run() {
-        configuration.setNode(myChooser.getNode());
-      }
-    });
+    configuration.setNode(myChooser.getNode());
+    configuration.setNodeText(myChooser.getText());
   }
+
   public void resetEditorFrom(final NodeByConcept_Configuration configuration) {
-    ModelAccess.instance().runReadAction(new Runnable() {
-      public void run() {
-        myChooser.setNode(configuration.getNode());
-      }
-    });
+    myChooser.setNode(configuration.getNodeRef());
+    myChooser.setText(configuration.getNodeText());
   }
   private SAbstractConcept myConcept;
   private _FunctionTypes._return_P1_E0<? extends Boolean, ? super SNode> myIsValid;

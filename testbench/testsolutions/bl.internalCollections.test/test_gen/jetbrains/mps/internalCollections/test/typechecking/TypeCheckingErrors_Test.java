@@ -4,81 +4,102 @@ package jetbrains.mps.internalCollections.test.typechecking;
 
 import jetbrains.mps.MPSLaunch;
 import jetbrains.mps.lang.test.runtime.BaseTransformationTest;
-import org.junit.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCacheExtension;
+import jetbrains.mps.lang.test.runtime.TestParametersCache;
+import org.junit.jupiter.api.Test;
 import jetbrains.mps.lang.test.runtime.BaseTestBody;
+import jetbrains.mps.lang.test.runtime.TransformationTest;
+import jetbrains.mps.internal.collections.runtime.CollectionSequence;
 import jetbrains.mps.lang.test.runtime.NodeCheckerUtil;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.lang.test.behavior.INodesTestMethod__BehaviorDescriptor;
+import jetbrains.mps.internal.collections.runtime.IWhereFilter;
+import jetbrains.mps.errors.item.NodeReportItem;
+import jetbrains.mps.checkers.SuppressErrorsChecker;
 
 @MPSLaunch
 public class TypeCheckingErrors_Test extends BaseTransformationTest {
+  @RegisterExtension
+  private static final TestParametersCacheExtension ourParametersCacheExtension = new TestParametersCacheExtension(new TestParametersCache(TypeCheckingErrors_Test.class, "${mps_home}", "r:ea0833ca-e474-4ae3-b6d3-3f8d18af5a89(jetbrains.mps.internalCollections.test.typechecking@tests)", false));
+
+  public TypeCheckingErrors_Test() {
+    super(ourParametersCacheExtension.getParametersCache());
+  }
+
   @Test
   public void test_mps18720() throws Throwable {
-    initTest("${mps_home}", "r:ea0833ca-e474-4ae3-b6d3-3f8d18af5a89(jetbrains.mps.internalCollections.test.typechecking@tests)", false);
-    runTest("jetbrains.mps.internalCollections.test.typechecking.TypeCheckingErrors_Test$TestBody", "test_mps18720", true);
+    new TestBody(this).test_mps18720();
   }
   @Test
   public void test_varar_raw() throws Throwable {
-    initTest("${mps_home}", "r:ea0833ca-e474-4ae3-b6d3-3f8d18af5a89(jetbrains.mps.internalCollections.test.typechecking@tests)", false);
-    runTest("jetbrains.mps.internalCollections.test.typechecking.TypeCheckingErrors_Test$TestBody", "test_varar_raw", true);
+    new TestBody(this).test_varar_raw();
   }
   @Test
   public void test_lbt_subtypeof_param() throws Throwable {
-    initTest("${mps_home}", "r:ea0833ca-e474-4ae3-b6d3-3f8d18af5a89(jetbrains.mps.internalCollections.test.typechecking@tests)", false);
-    runTest("jetbrains.mps.internalCollections.test.typechecking.TypeCheckingErrors_Test$TestBody", "test_lbt_subtypeof_param", true);
+    new TestBody(this).test_lbt_subtypeof_param();
   }
   @Test
   public void test_meet_with_variable_excluded_from_lcs() throws Throwable {
-    initTest("${mps_home}", "r:ea0833ca-e474-4ae3-b6d3-3f8d18af5a89(jetbrains.mps.internalCollections.test.typechecking@tests)", false);
-    runTest("jetbrains.mps.internalCollections.test.typechecking.TypeCheckingErrors_Test$TestBody", "test_meet_with_variable_excluded_from_lcs", true);
-  }
-  @Test
-  public void test_NodeErrorCheck1089557578630058014() throws Throwable {
-    initTest("${mps_home}", "r:ea0833ca-e474-4ae3-b6d3-3f8d18af5a89(jetbrains.mps.internalCollections.test.typechecking@tests)", false);
-    runTest("jetbrains.mps.internalCollections.test.typechecking.TypeCheckingErrors_Test$TestBody", "test_NodeErrorCheck1089557578630058014", true);
+    new TestBody(this).test_meet_with_variable_excluded_from_lcs();
   }
 
-  @MPSLaunch
-  public static class TestBody extends BaseTestBody {
+  /*package*/ static class TestBody extends BaseTestBody {
+
+    /*package*/ TestBody(TransformationTest owner) {
+      super(owner);
+    }
+
     public void test_mps18720() throws Exception {
-      addNodeById("1301553664999174765");
-      addNodeById("3441689827373214227");
-      addNodeById("1089557578627272135");
-      addNodeById("360223900466871399");
-      addNodeById("5532302989585163343");
-      NodeCheckerUtil.checkNodeForErrorMessages(SNodeOperations.cast(getNodeById("1301553664997476018"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b213L, "jetbrains.mps.baseLanguage.structure.ExpressionStatement")), false, false, false);
-      NodeCheckerUtil.checkNodeForErrorMessages(SNodeOperations.cast(getNodeById("3441689827373215907"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b213L, "jetbrains.mps.baseLanguage.structure.ExpressionStatement")), false, false, false);
+      runWithinCommand(() -> {
+        addNodeById("1301553664999174765");
+        addNodeById("3441689827373214227");
+        addNodeById("1089557578627272135");
+        addNodeById("360223900466871399");
+        addNodeById("5532302989585163343");
+      });
+      runWithinCommand(() -> {
+        assert CollectionSequence.fromCollection(NodeCheckerUtil.checkForNodeMessages(getNodeById("1301553664997476018"), null)).isEmpty();
+        assert CollectionSequence.fromCollection(NodeCheckerUtil.checkForNodeMessages(getNodeById("3441689827373215907"), null)).isEmpty();
+      });
     }
     public void test_varar_raw() throws Exception {
-      addNodeById("1301553664999174765");
-      addNodeById("3441689827373214227");
-      addNodeById("1089557578627272135");
-      addNodeById("360223900466871399");
-      addNodeById("5532302989585163343");
-      NodeCheckerUtil.checkNodeForErrorMessages(SNodeOperations.cast(getNodeById("1089557578627275112"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b21dL, "jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration")), false, false, false);
+      runWithinCommand(() -> {
+        addNodeById("1301553664999174765");
+        addNodeById("3441689827373214227");
+        addNodeById("1089557578627272135");
+        addNodeById("360223900466871399");
+        addNodeById("5532302989585163343");
+      });
+      runWithinCommand(() -> {
+        assert CollectionSequence.fromCollection(NodeCheckerUtil.checkForNodeMessages(getNodeById("1089557578627275112"), null)).all(new IWhereFilter<NodeReportItem>() {
+          public boolean accept(NodeReportItem it) {
+            return SuppressErrorsChecker.FLAVOUR_ACTIVE_SUPPRESSOR.canGet(it);
+          }
+        });
+      });
     }
     public void test_lbt_subtypeof_param() throws Exception {
-      addNodeById("1301553664999174765");
-      addNodeById("3441689827373214227");
-      addNodeById("1089557578627272135");
-      addNodeById("360223900466871399");
-      addNodeById("5532302989585163343");
-      NodeCheckerUtil.checkNodeForErrorMessages(SNodeOperations.cast(getNodeById("360223900466887047"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b21dL, "jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration")), false, false, false);
+      runWithinCommand(() -> {
+        addNodeById("1301553664999174765");
+        addNodeById("3441689827373214227");
+        addNodeById("1089557578627272135");
+        addNodeById("360223900466871399");
+        addNodeById("5532302989585163343");
+      });
+      runWithinCommand(() -> {
+        assert CollectionSequence.fromCollection(NodeCheckerUtil.checkForNodeMessages(getNodeById("360223900466887047"), null)).isEmpty();
+      });
     }
     public void test_meet_with_variable_excluded_from_lcs() throws Exception {
-      addNodeById("1301553664999174765");
-      addNodeById("3441689827373214227");
-      addNodeById("1089557578627272135");
-      addNodeById("360223900466871399");
-      addNodeById("5532302989585163343");
-      NodeCheckerUtil.checkNodeForErrorMessages(SNodeOperations.cast(getNodeById("6368058149914761648"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b21dL, "jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration")), false, false, false);
-    }
-
-    public void test_NodeErrorCheck1089557578630058014() throws Exception {
-      SNode operation = SNodeOperations.cast(getRealNodeById("1089557578630058014"), MetaAdapterFactory.getInterfaceConcept(0x8585453e6bfb4d80L, 0x98deb16074f1d86cL, 0x1510445f8a2c272dL, "jetbrains.mps.lang.test.structure.INodesTestMethod"));
-      INodesTestMethod__BehaviorDescriptor.perform_id1kgh5YabdhC.invoke(operation, getRealNodeById("3951985765451230191"));
+      runWithinCommand(() -> {
+        addNodeById("1301553664999174765");
+        addNodeById("3441689827373214227");
+        addNodeById("1089557578627272135");
+        addNodeById("360223900466871399");
+        addNodeById("5532302989585163343");
+      });
+      runWithinCommand(() -> {
+        assert CollectionSequence.fromCollection(NodeCheckerUtil.checkForNodeMessages(getNodeById("6368058149914761648"), null)).isEmpty();
+      });
     }
 
   }

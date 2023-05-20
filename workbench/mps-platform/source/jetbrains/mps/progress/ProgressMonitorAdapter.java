@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,11 @@
 package jetbrains.mps.progress;
 
 import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.MessageType;
-import com.intellij.openapi.wm.IdeFrame;
-import com.intellij.openapi.wm.WindowManager;
-import com.intellij.openapi.wm.ex.StatusBarEx;
-import com.intellij.util.ui.UIUtil;
-import jetbrains.mps.util.EqualUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.util.ProgressMonitor;
+
+import java.util.Objects;
 
 /**
  * Evgeny Gryaznov, 9/30/11
@@ -31,8 +28,17 @@ import org.jetbrains.annotations.NotNull;
 public class ProgressMonitorAdapter extends ProgressMonitorBase {
   private final ProgressIndicator myIndicator;
 
+  @NotNull
+  public static ProgressMonitor wrap(@Nullable ProgressIndicator progressIndicator) {
+    return progressIndicator == null ? new EmptyProgressMonitor() : new ProgressMonitorAdapter(progressIndicator);
+  }
+
   public ProgressMonitorAdapter(@NotNull ProgressIndicator indicator) {
     myIndicator = indicator;
+    /* As ProgressMonitorAdapter#update uses ProgressIndicator#setFraction,
+    * we have to take into account AbstractProgressIndicatorBase#setFraction check for indicator indeterminate state
+    * */
+    myIndicator.setIndeterminate(false);
   }
 
   @Override
@@ -43,10 +49,14 @@ public class ProgressMonitorAdapter extends ProgressMonitorBase {
   @Override
   protected void setTitleInternal(String name) {
     if (name != null && name.startsWith("__")) {
-      name = null;
+      name = "";
+    }
+    if (name == null) {
+      // see #setStepInternal(String), below, for the reason.
+      name = "";
     }
     final String oldText = myIndicator.getText();
-    if (!EqualUtil.equals(name, oldText)) {
+    if (!Objects.equals(name, oldText)) {
       myIndicator.setText(name);
     }
   }
@@ -54,10 +64,17 @@ public class ProgressMonitorAdapter extends ProgressMonitorBase {
   @Override
   protected void setStepInternal(String description) {
     if (description != null && description.startsWith("__")) {
-      description = null;
+      description = "";
+    }
+    if (description == null) {
+      // there's no clear contract on ProgressIndicator.setText2(); I assume it could get invoked from any thread.
+      // However, there's code in IDEA's InlineProgressIndicator.updateProgressNow() that calls getText2() twice, and
+      // expects its value not to change between the calls. To prevent NPE due to this assumption (see MPS-33332),
+      // use empty string, not null here.
+      description = "";
     }
     final String oldText = myIndicator.getText2();
-    if (!EqualUtil.equals(description, oldText)) {
+    if (!Objects.equals(description, oldText)) {
       myIndicator.setText2(description);
     }
   }

@@ -2,12 +2,11 @@
 <model ref="r:2bfc79e0-0d9b-47c9-b525-e58fbef017f6(org.jetbrains.mps.samples.Constants.editor)">
   <persistence version="9" />
   <languages>
-    <use id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor" version="4" />
+    <use id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor" version="14" />
   </languages>
   <imports>
     <import index="nd9w" ref="r:ef9fd842-b350-4ad1-83c7-4b57a2c65330(org.jetbrains.mps.samples.Constants.structure)" />
     <import index="tpck" ref="r:00000000-0000-4000-0000-011c89590288(jetbrains.mps.lang.core.structure)" implicit="true" />
-    <import index="tpen" ref="r:00000000-0000-4000-0000-011c895902c3(jetbrains.mps.baseLanguage.editor)" implicit="true" />
   </imports>
   <registry>
     <language id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor">
@@ -26,13 +25,8 @@
         <property id="1186414551515" name="flag" index="VOm3f" />
       </concept>
       <concept id="1186414928363" name="jetbrains.mps.lang.editor.structure.SelectableStyleSheetItem" flags="ln" index="VPM3Z" />
-      <concept id="1233758997495" name="jetbrains.mps.lang.editor.structure.PunctuationLeftStyleClassItem" flags="ln" index="11L4FC" />
-      <concept id="1233759184865" name="jetbrains.mps.lang.editor.structure.PunctuationRightStyleClassItem" flags="ln" index="11LMrY" />
       <concept id="1088013125922" name="jetbrains.mps.lang.editor.structure.CellModel_RefCell" flags="sg" stub="730538219795941030" index="1iCGBv">
         <child id="1088186146602" name="editorComponent" index="1sWHZn" />
-      </concept>
-      <concept id="1381004262292414836" name="jetbrains.mps.lang.editor.structure.ICellStyle" flags="ng" index="1k5N5V">
-        <reference id="1381004262292426837" name="parentStyleClass" index="1k5W1q" />
       </concept>
       <concept id="1088185857835" name="jetbrains.mps.lang.editor.structure.InlineEditorComponent" flags="ig" index="1sVBvm" />
       <concept id="1139848536355" name="jetbrains.mps.lang.editor.structure.CellModel_WithRole" flags="ng" index="1$h60E">
@@ -67,7 +61,7 @@
         <property role="3F0ifm" value="My Constant:" />
       </node>
       <node concept="3F0A7n" id="1iYrdV1xxgz" role="3EZMnx">
-        <property role="1cu_pB" value="1" />
+        <property role="1cu_pB" value="gtgu$YJ/1" />
         <ref role="1NtTu8" to="tpck:h0TrG11" resolve="name" />
       </node>
       <node concept="3F0ifn" id="1iYrdV1xxg_" role="3EZMnx">
@@ -114,40 +108,6 @@
           <ref role="1NtTu8" to="tpck:h0TrG11" resolve="name" />
         </node>
       </node>
-    </node>
-  </node>
-  <node concept="24kQdi" id="2lb0lXX1H8K">
-    <ref role="1XX52x" to="nd9w:2lb0lXX1H4v" resolve="DistantConstantReference" />
-    <node concept="3EZMnI" id="2lb0lXX1HJY" role="2wV5jI">
-      <node concept="1iCGBv" id="2lb0lXX1HKq" role="3EZMnx">
-        <ref role="1NtTu8" to="nd9w:2lb0lXX1H8n" resolve="targetSetOfConstants" />
-        <node concept="1sVBvm" id="2lb0lXX1HKs" role="1sWHZn">
-          <node concept="3F0A7n" id="2lb0lXX1HKA" role="2wV5jI">
-            <property role="1Intyy" value="true" />
-            <ref role="1NtTu8" to="tpck:h0TrG11" resolve="name" />
-            <ref role="1k5W1q" to="tpen:hgVS8CF" resolve="KeyWord" />
-          </node>
-        </node>
-      </node>
-      <node concept="3F0ifn" id="2lb0lXX1HKI" role="3EZMnx">
-        <property role="3F0ifm" value="-&gt;" />
-        <node concept="11L4FC" id="2lb0lXX4jku" role="3F10Kt">
-          <property role="VOm3f" value="true" />
-        </node>
-        <node concept="11LMrY" id="2lb0lXX4jme" role="3F10Kt">
-          <property role="VOm3f" value="true" />
-        </node>
-      </node>
-      <node concept="1iCGBv" id="2lb0lXX1HKU" role="3EZMnx">
-        <ref role="1NtTu8" to="nd9w:3tw0l3PakpA" resolve="original" />
-        <node concept="1sVBvm" id="2lb0lXX1HKW" role="1sWHZn">
-          <node concept="3F0A7n" id="2lb0lXX1HL7" role="2wV5jI">
-            <property role="1Intyy" value="true" />
-            <ref role="1NtTu8" to="tpck:h0TrG11" resolve="name" />
-          </node>
-        </node>
-      </node>
-      <node concept="l2Vlx" id="2lb0lXX1HK1" role="2iSdaV" />
     </node>
   </node>
 </model>

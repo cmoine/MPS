@@ -15,9 +15,12 @@
  */
 package jetbrains.mps.intentions;
 
+import jetbrains.mps.openapi.intentions.IntentionFactory;
+
 /**
  * Superclass for all IntentionFactory subclasses to facilitate future API changes.
  * FIXME update generated code to use this class
+ *
  * @author Artem Tikhomirov
  */
 public abstract class OldBaseIntentionFactory implements IntentionFactory {

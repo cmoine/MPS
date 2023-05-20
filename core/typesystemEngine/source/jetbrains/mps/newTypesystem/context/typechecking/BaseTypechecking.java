@@ -18,17 +18,14 @@ package jetbrains.mps.newTypesystem.context.typechecking;
 import gnu.trove.THashSet;
 import jetbrains.mps.errors.IErrorReporter;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.AttributeOperations;
-import jetbrains.mps.lang.typesystem.runtime.IsApplicableStatus;
-import jetbrains.mps.lang.typesystem.runtime.SubstituteType_Runtime;
 import jetbrains.mps.newTypesystem.context.component.SimpleTypecheckingComponent;
 import jetbrains.mps.newTypesystem.state.State;
-import jetbrains.mps.smodel.IOperationContext;
-import jetbrains.mps.typesystem.inference.TypeSubstitution;
-import jetbrains.mps.util.Cancellable;
-import org.jetbrains.mps.openapi.model.SNode;
+import jetbrains.mps.typechecking.TypecheckingObservable;
 import jetbrains.mps.typesystem.inference.TypeCheckingContext;
+import jetbrains.mps.util.Cancellable;
 import jetbrains.mps.util.Pair;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.openapi.model.SNode;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -59,7 +56,7 @@ public abstract class BaseTypechecking<STATE extends State, COMP extends SimpleT
 
   @SuppressWarnings("unchecked")
   protected COMP createTypecheckingComponent() {
-    return (COMP) new SimpleTypecheckingComponent<STATE>(getState(), this);
+    return (COMP) new SimpleTypecheckingComponent<>(getState(), this);
   }
 
   public SNode getNode() {
@@ -76,22 +73,22 @@ public abstract class BaseTypechecking<STATE extends State, COMP extends SimpleT
   }
 
   public SNode computeTypesForNodeDuringGeneration(SNode initialNode) {
-    return computeTypesForNode_special(initialNode, Collections.<SNode>emptyList());
+    return computeTypesForNode_special(initialNode, Collections.emptyList());
   }
 
   public SNode computeTypesForNodeDuringResolving(SNode initialNode) {
-    return computeTypesForNode_special(initialNode, Collections.<SNode>emptyList());
+    return computeTypesForNode_special(initialNode, Collections.emptyList());
   }
 
   public SNode computeTypesForNodeInferenceMode(SNode initialNode) {
-    return computeTypesForNode_special(initialNode, Collections.<SNode>emptyList());
+    return computeTypesForNode_special(initialNode, Collections.emptyList());
   }
 
   @NotNull
   public List<IErrorReporter> getErrors(SNode node) {
     Map<SNode, List<IErrorReporter>> nodesToErrorsMap = getTypecheckingComponent().getNodesToErrorsMap();
 
-    List<IErrorReporter> result = new ArrayList<IErrorReporter>(4);
+    List<IErrorReporter> result = new ArrayList<>(4);
     List<IErrorReporter> iErrorReporters = nodesToErrorsMap.get(node);
     if (iErrorReporters != null) {
       result.addAll(iErrorReporters);
@@ -117,20 +114,14 @@ public abstract class BaseTypechecking<STATE extends State, COMP extends SimpleT
 
   public Set<Pair<SNode, List<IErrorReporter>>> getNodesWithErrors(boolean typesystemErrors) {
     Map<SNode, List<IErrorReporter>> nodesToErrorsMap = getTypecheckingComponent().getNodesToErrorsMap();
-    Set<SNode> keySet = new THashSet<SNode>(nodesToErrorsMap.keySet());
+    Set<SNode> keySet = new THashSet<>(nodesToErrorsMap.keySet());
 
-    Set<Pair<SNode, List<IErrorReporter>>> result = new THashSet<Pair<SNode, List<IErrorReporter>>>(1);
+    Set<Pair<SNode, List<IErrorReporter>>> result = new THashSet<>(1);
     for (SNode key : keySet) {
       List<IErrorReporter> reporters = nodesToErrorsMap.get(key);
       if (!reporters.isEmpty()) {
-        if (key.getContainingRoot() == null) {
-          /*  LOG.warn("Type system reports error for node without containing root. Node: " + key);
-                    for (IErrorReporter reporter : reporters) {
-                      LOG.warn("This error was reported from: model: " + reporter.getRuleModel() + " id: " + reporter.getRuleId());
-                    }     */
-          continue;
-        }
-        result.add(new Pair<SNode, List<IErrorReporter>>(key, reporters));
+        key.getContainingRoot();
+        result.add(new Pair<>(key, reporters));
       }
     }
     return result;
@@ -147,7 +138,11 @@ public abstract class BaseTypechecking<STATE extends State, COMP extends SimpleT
   /**
    * Should return true iff the operation has succeeded and was not cancelled.
    */
-  public abstract boolean applyNonTypesystemRulesToRoot(TypeCheckingContext typeCheckingContext, Cancellable c);
+  public boolean applyNonTypesystemRulesToRoot(TypeCheckingContext typeCheckingContext, Cancellable c) {
+    return applyNonTypesystemRulesToRoot(typeCheckingContext, c, null);
+  }
+
+  public abstract boolean applyNonTypesystemRulesToRoot(TypeCheckingContext typeCheckingContext, Cancellable c, TypecheckingObservable observable);
 
   /**
    * Returns the list of all node attributes with the attributedNode added as the last.
@@ -159,7 +154,7 @@ public abstract class BaseTypechecking<STATE extends State, COMP extends SimpleT
   public List<SNode> nodesToApplyRulesTo(SNode attributedNode) {
     if (attributedNode == null) return Collections.emptyList();
 
-    ArrayList<SNode> nodesToTest = new ArrayList<SNode>(AttributeOperations.getAllAttributes(attributedNode));
+    ArrayList<SNode> nodesToTest = new ArrayList<>(AttributeOperations.getAllAttributes(attributedNode));
     nodesToTest.add(attributedNode);
 
     return nodesToTest;

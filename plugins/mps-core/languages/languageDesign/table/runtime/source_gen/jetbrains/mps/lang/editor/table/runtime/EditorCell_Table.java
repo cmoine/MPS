@@ -26,7 +26,6 @@ import jetbrains.mps.util.IterableUtil;
 import jetbrains.mps.nodeEditor.cellLayout.CellLayout_Horizontal;
 import jetbrains.mps.editor.runtime.EditorCell_Empty;
 import jetbrains.mps.nodeEditor.cellActions.CellAction_DeleteNode;
-import jetbrains.mps.nodeEditor.EditorSettings;
 import jetbrains.mps.nodeEditor.cellLayout.CellLayout_Table;
 
 public class EditorCell_Table extends EditorCell_Collection {
@@ -122,8 +121,8 @@ public class EditorCell_Table extends EditorCell_Collection {
               }
             });
           }
-          editorCell.setAction(CellActionType.SELECT_PREVIOUS, new EditorCell_Table.SelectColumnAction(finalColumn, editorCell.getAction(CellActionType.SELECT_PREVIOUS)));
-          editorCell.setAction(CellActionType.SELECT_NEXT, new EditorCell_Table.SelectColumnAction(finalColumn, editorCell.getAction(CellActionType.SELECT_NEXT)));
+          editorCell.setAction(CellActionType.SELECT_PREVIOUS, new SelectColumnAction(finalColumn, editorCell.getAction(CellActionType.SELECT_PREVIOUS)));
+          editorCell.setAction(CellActionType.SELECT_NEXT, new SelectColumnAction(finalColumn, editorCell.getAction(CellActionType.SELECT_NEXT)));
           editorCell.setSubstituteInfo(myModel.getSubstituteInfo(row, column));
           if (editorCell.getCellId() == null) {
             editorCell.setCellId(rowId + "_column_" + column);
@@ -144,7 +143,7 @@ public class EditorCell_Table extends EditorCell_Collection {
   }
   @Override
   public int getBottomInset() {
-    // Necesary for properly painting bottom table line 
+    // Necesary for properly painting bottom table line
     return 1;
   }
 
@@ -163,14 +162,14 @@ public class EditorCell_Table extends EditorCell_Collection {
       assert nextRow instanceof jetbrains.mps.openapi.editor.cells.EditorCell_Collection;
       ListSequence.fromList(positionsY).addElement(nextRow.getY());
       if (!(rowsIterator.hasNext())) {
-        // adding last row bottom coordinates 
+        // adding last row bottom coordinates
         ListSequence.fromList(positionsY).addElement(nextRow.getY() + nextRow.getHeight());
       }
       int index = -1;
       for (Iterator<EditorCell> cellIterator = ((jetbrains.mps.openapi.editor.cells.EditorCell_Collection) nextRow).iterator(); cellIterator.hasNext(); index++) {
         EditorCell nextCell = cellIterator.next();
         if (index < 0) {
-          //  skipping first cell 
+          //  skipping first cell
           continue;
         }
         int x = nextCell.getX();
@@ -236,22 +235,24 @@ public class EditorCell_Table extends EditorCell_Collection {
     EditorCell emptyCell = new EditorCell_Empty(getContext(), getSNode());
     emptyCell.setAction(CellActionType.DELETE, new CellAction_DeleteNode(getSNode(), CellAction_DeleteNode.DeleteDirection.FORWARD));
     emptyCell.setAction(CellActionType.BACKSPACE, new CellAction_DeleteNode(getSNode(), CellAction_DeleteNode.DeleteDirection.BACKWARD));
-    if (beggining) {
-      emptyCell.getStyle().set(StyleAttributes.LAST_POSITION_ALLOWED, false);
-    } else {
-      emptyCell.setAction(CellActionType.INSERT, new AbstractCellAction() {
-        @Override
-        public void execute(EditorContext editorContext) {
-          myModel.insertRow(rowNumber + 1);
-        }
-      });
-    }
-    emptyCell.setAction(CellActionType.INSERT_BEFORE, new AbstractCellAction() {
+    AbstractCellAction insertRowBeforeAction = new AbstractCellAction() {
       @Override
       public void execute(EditorContext editorContext) {
         myModel.insertRow(rowNumber);
       }
-    });
+    };
+    AbstractCellAction insertRowAfterAction = new AbstractCellAction() {
+      @Override
+      public void execute(EditorContext editorContext) {
+        myModel.insertRow(rowNumber + 1);
+      }
+    };
+    if (beggining) {
+      emptyCell.setAction(CellActionType.INSERT, insertRowBeforeAction);
+    } else {
+      emptyCell.setAction(CellActionType.INSERT, insertRowAfterAction);
+    }
+    emptyCell.setAction(CellActionType.INSERT_BEFORE, insertRowBeforeAction);
     emptyCell.setCellId(cellId + ((beggining ? "_firstCell" : "_lastCell")));
     return emptyCell;
   }
@@ -288,11 +289,11 @@ public class EditorCell_Table extends EditorCell_Collection {
     emptyCell.setAction(CellActionType.INSERT_BEFORE, createFirstRowAction);
   }
   private int getAverageColumnWidth(int columnCount) {
-    return EditorSettings.getInstance().getVerticalBoundWidth() / columnCount;
+    return getEditorComponent().getEditorComponentSettings().getRightMargin() / columnCount;
   }
   public static EditorCell_Collection createTable(EditorContext editorContext, SNode node, final TableModel model, String uniquePrefix) {
-    // using EditorCell_Collection class as a return value just for compatibility reasons. 
-    //  it should be replaced with interface after MPS 3.0 
+    // using EditorCell_Collection class as a return value just for compatibility reasons.
+    //  it should be replaced with interface after MPS 3.0
     return new EditorCell_Table(editorContext, node, new CellLayout_Table(), model, uniquePrefix);
   }
   public class SelectColumnAction extends AbstractCellAction {

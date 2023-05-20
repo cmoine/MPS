@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,22 +15,21 @@
  */
 package jetbrains.mps.nodeEditor;
 
-import jetbrains.mps.errors.QuickFixProvider;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
+import jetbrains.mps.openapi.editor.message.FormattingOptions;
 import jetbrains.mps.openapi.editor.message.SimpleEditorMessage;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.Graphics;
-import java.util.List;
 
 public interface EditorMessage extends SimpleEditorMessage {
-
   void doNavigate(EditorComponent editorComponent);
 
   boolean isValid(EditorComponent editorComponent);
 
   EditorCell getCell(EditorComponent editorComponent);
-
-  EditorCell getCellForParentNodeInMainEditor(EditorComponent editor);
 
   boolean acceptCell(EditorCell cell, EditorComponent editor);
 
@@ -40,12 +39,27 @@ public interface EditorMessage extends SimpleEditorMessage {
 
   boolean isBackground();
 
-  QuickFixProvider getIntentionProvider();
+  void putUserObject(Object key, Object value);
 
-  List<QuickFixProvider> getIntentionProviders();
+  Object getUserObject(Object key);
 
-  public void putUserObject(Object key, Object value);
+  @Override
+  @Nullable
+  default String getFormattedMessage() {
+    String rawText = getMessage();
+    if (rawText == null) {
+      return null;
+    }
+    return formatMessage(rawText, getFormattingOptions());
+  }
 
-  public Object getUserObject(Object key);
-
+  @NotNull
+  static String formatMessage(String rawText, FormattingOptions formattingOptions) {
+    if (formattingOptions == FormattingOptions.BODY_OF_HTML) {
+      return rawText;
+    } else if (formattingOptions == FormattingOptions.PLAIN_TEXT) {
+      return StringEscapeUtils.escapeHtml4(rawText).replace("\n", "<br>");
+    }
+    return rawText;
+  }
 }

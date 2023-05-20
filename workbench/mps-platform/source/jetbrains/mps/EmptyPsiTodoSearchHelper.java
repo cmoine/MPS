@@ -19,6 +19,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.PsiTodoSearchHelper;
 import com.intellij.psi.search.TodoItem;
 import com.intellij.psi.search.TodoPattern;
+import com.intellij.util.Processor;
 import org.jetbrains.annotations.NotNull;
 
 public class EmptyPsiTodoSearchHelper implements PsiTodoSearchHelper {
@@ -60,5 +61,10 @@ public class EmptyPsiTodoSearchHelper implements PsiTodoSearchHelper {
   @Override
   public int getTodoItemsCount(@NotNull PsiFile file, @NotNull TodoPattern pattern) {
     return 0;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  @Override
+  public boolean processFilesWithTodoItems(@NotNull Processor<? super PsiFile> processor) {
+    return false;
   }
 }

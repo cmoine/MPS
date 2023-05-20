@@ -8,88 +8,42 @@ import java.util.Collection;
 import jetbrains.mps.lang.dataFlow.framework.IDataFlowBuilder;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import java.util.Collections;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public class DataFlowAspectDescriptorImpl extends DataFlowAspectDescriptorBase {
 
   @NotNull
   @Override
   public Collection<IDataFlowBuilder> getDataFlowBuilders(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = ((SAbstractConcept) concept);
-      Integer preIndex = indices_vhxjlb_a0b.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new AbstractCommand_DataFlow());
-          }
-          break;
-        case 1:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new CommandList_DataFlow());
-          }
-          break;
-        case 2:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new IfStatement_DataFlow());
-          }
-          break;
-        case 3:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new LogicalExpression_DataFlow());
-          }
-          break;
-        case 4:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new Not_DataFlow());
-          }
-          break;
-        case 5:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new Repeat_DataFlow());
-          }
-          break;
-        case 6:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new RoutineCall_DataFlow());
-          }
-          break;
-        case 7:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new RoutineDefinition_DataFlow());
-          }
-          break;
-        case 8:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new Script_DataFlow());
-          }
-          break;
-        case 9:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new Step_DataFlow());
-          }
-          break;
-        case 10:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new While_DataFlow());
-          }
-          break;
-        default:
-          // default 
-      }
+    SAbstractConcept cncpt = ((SAbstractConcept) concept);
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return Collections.<IDataFlowBuilder>singletonList(new AbstractCommand_DataFlow());
+      case 1:
+        return Collections.<IDataFlowBuilder>singletonList(new CommandList_DataFlow());
+      case 2:
+        return Collections.<IDataFlowBuilder>singletonList(new IfStatement_DataFlow());
+      case 3:
+        return Collections.<IDataFlowBuilder>singletonList(new LogicalExpression_DataFlow());
+      case 4:
+        return Collections.<IDataFlowBuilder>singletonList(new Not_DataFlow());
+      case 5:
+        return Collections.<IDataFlowBuilder>singletonList(new Repeat_DataFlow());
+      case 6:
+        return Collections.<IDataFlowBuilder>singletonList(new RoutineCall_DataFlow());
+      case 7:
+        return Collections.<IDataFlowBuilder>singletonList(new RoutineDefinition_DataFlow());
+      case 8:
+        return Collections.<IDataFlowBuilder>singletonList(new Script_DataFlow());
+      case 9:
+        return Collections.<IDataFlowBuilder>singletonList(new Step_DataFlow());
+      case 10:
+        return Collections.<IDataFlowBuilder>singletonList(new While_DataFlow());
+      default:
     }
     return Collections.<IDataFlowBuilder>emptyList();
   }
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
-  }
-  private static final Map<SAbstractConcept, Integer> indices_vhxjlb_a0b = buildConceptIndices(MetaAdapterFactory.getConcept(0x49a08c51fe543ccL, 0xbd998b46d641d7f5L, 0x2d523c5e4cc4574aL, "jetbrains.mps.samples.Kaja.structure.AbstractCommand"), MetaAdapterFactory.getConcept(0x49a08c51fe543ccL, 0xbd998b46d641d7f5L, 0x2de971c785f06a3fL, "jetbrains.mps.samples.Kaja.structure.CommandList"), MetaAdapterFactory.getConcept(0x49a08c51fe543ccL, 0xbd998b46d641d7f5L, 0x2de971c785ec9fbeL, "jetbrains.mps.samples.Kaja.structure.IfStatement"), MetaAdapterFactory.getConcept(0x49a08c51fe543ccL, 0xbd998b46d641d7f5L, 0x2de971c785ec9fc1L, "jetbrains.mps.samples.Kaja.structure.LogicalExpression"), MetaAdapterFactory.getConcept(0x49a08c51fe543ccL, 0xbd998b46d641d7f5L, 0x2de971c785ecb8b0L, "jetbrains.mps.samples.Kaja.structure.Not"), MetaAdapterFactory.getConcept(0x49a08c51fe543ccL, 0xbd998b46d641d7f5L, 0x2de971c785ecd14cL, "jetbrains.mps.samples.Kaja.structure.Repeat"), MetaAdapterFactory.getConcept(0x49a08c51fe543ccL, 0xbd998b46d641d7f5L, 0x2de971c785ed6f92L, "jetbrains.mps.samples.Kaja.structure.RoutineCall"), MetaAdapterFactory.getConcept(0x49a08c51fe543ccL, 0xbd998b46d641d7f5L, 0x2de971c785ed6f79L, "jetbrains.mps.samples.Kaja.structure.RoutineDefinition"), MetaAdapterFactory.getConcept(0x49a08c51fe543ccL, 0xbd998b46d641d7f5L, 0x2d523c5e4cc45746L, "jetbrains.mps.samples.Kaja.structure.Script"), MetaAdapterFactory.getConcept(0x49a08c51fe543ccL, 0xbd998b46d641d7f5L, 0x2d523c5e4cc45762L, "jetbrains.mps.samples.Kaja.structure.Step"), MetaAdapterFactory.getConcept(0x49a08c51fe543ccL, 0xbd998b46d641d7f5L, 0x2de971c785ecece0L, "jetbrains.mps.samples.Kaja.structure.While"));
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x49a08c51fe543ccL, 0xbd998b46d641d7f5L, 0x2d523c5e4cc4574aL), MetaIdFactory.conceptId(0x49a08c51fe543ccL, 0xbd998b46d641d7f5L, 0x2de971c785f06a3fL), MetaIdFactory.conceptId(0x49a08c51fe543ccL, 0xbd998b46d641d7f5L, 0x2de971c785ec9fbeL), MetaIdFactory.conceptId(0x49a08c51fe543ccL, 0xbd998b46d641d7f5L, 0x2de971c785ec9fc1L), MetaIdFactory.conceptId(0x49a08c51fe543ccL, 0xbd998b46d641d7f5L, 0x2de971c785ecb8b0L), MetaIdFactory.conceptId(0x49a08c51fe543ccL, 0xbd998b46d641d7f5L, 0x2de971c785ecd14cL), MetaIdFactory.conceptId(0x49a08c51fe543ccL, 0xbd998b46d641d7f5L, 0x2de971c785ed6f92L), MetaIdFactory.conceptId(0x49a08c51fe543ccL, 0xbd998b46d641d7f5L, 0x2de971c785ed6f79L), MetaIdFactory.conceptId(0x49a08c51fe543ccL, 0xbd998b46d641d7f5L, 0x2d523c5e4cc45746L), MetaIdFactory.conceptId(0x49a08c51fe543ccL, 0xbd998b46d641d7f5L, 0x2d523c5e4cc45762L), MetaIdFactory.conceptId(0x49a08c51fe543ccL, 0xbd998b46d641d7f5L, 0x2de971c785ecece0L)).seal();
 }

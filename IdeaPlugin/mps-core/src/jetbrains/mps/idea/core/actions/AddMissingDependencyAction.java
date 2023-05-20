@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,12 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.core.actions;
 
 import com.intellij.codeInsight.daemon.QuickFixBundle;
-import com.intellij.compiler.ModuleCompilerUtil;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
@@ -26,14 +25,13 @@ import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.Pair;
+import com.intellij.util.modules.CircularModuleDependenciesDetector;
 import jetbrains.mps.ide.actions.MPSCommonDataKeys;
 import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.idea.core.project.SolutionIdea;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.project.dependency.VisibilityUtil;
-import jetbrains.mps.smodel.IOperationContext;
 import jetbrains.mps.workbench.action.BaseAction;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.model.SNode;
@@ -49,8 +47,6 @@ import java.util.Set;
 
 public class AddMissingDependencyAction extends BaseAction {
 
-  protected static Logger log = LogManager.getLogger(AddMissingDependencyAction.class);
-
   public AddMissingDependencyAction() {
     super("Add Missing Dependency", "", null);
     this.setIsAlwaysVisible(false);
@@ -65,13 +61,17 @@ public class AddMissingDependencyAction extends BaseAction {
       if (project == null) {
         return;
       }
-      SNode curNode = e.getData(MPSCommonDataKeys.NODE);
-      if (curNode == null) return;
-      IOperationContext context = e.getData(MPSCommonDataKeys.OPERATION_CONTEXT);
-      if (context == null) return;
+      DataContext dataContext = e.getDataContext();
+      // there's model read as the action is executed inside command
+      SNode curNode = MPSCommonDataKeys.NODE.getData(dataContext);
+      if (curNode == null) {
+        return;
+      }
+      SModule dependentModule = MPSCommonDataKeys.CONTEXT_MODULE.getData(dataContext);
 
-      SModule dependentModule = context.getModule();
-      if (!(dependentModule instanceof SolutionIdea)) return;
+      if (!(dependentModule instanceof SolutionIdea)) {
+        return;
+      }
       final Module ideaDependentModule = ((SolutionIdea) dependentModule).getIdeaModule();
 
       final List<Module> ideaModulesToDependOn = new ArrayList<Module>();
@@ -92,7 +92,8 @@ public class AddMissingDependencyAction extends BaseAction {
 
           ideaModulesToDependOn.add(ideaModuleToDependOn);
 
-          Pair<Module, Module> circularModules = ModuleCompilerUtil.addingDependencyFormsCircularity(ideaDependentModule, ideaModuleToDependOn);
+          Pair<Module, Module> circularModules = CircularModuleDependenciesDetector.addingDependencyFormsCircularity(
+              ideaDependentModule, ideaModuleToDependOn);
           if (circularModules != null) {
             circularDependentModulesSet.add(circularModules.getFirst());
             circularDependentModulesSet.add(circularModules.getSecond());
@@ -150,7 +151,7 @@ public class AddMissingDependencyAction extends BaseAction {
       }
 
     } catch (Throwable t) {
-      log.error("User's action execute method failed. Action:" + "AddMissingDependency", t);
+      Logger.getLogger(AddMissingDependencyAction.class).error("User's action execute method failed. Action:" + "AddMissingDependency", t);
     }
 
   }
@@ -174,27 +175,27 @@ public class AddMissingDependencyAction extends BaseAction {
       boolean enabled = isApplicable(e);
       this.setEnabledState(e.getPresentation(), enabled);
     } catch (Throwable t) {
-      log.error("User's action doUpdate method failed. Action:" + "RenameMethod", t);
+      Logger.getLogger(AddMissingDependencyAction.class).error("User's action doUpdate method failed. Action:" + "RenameMethod", t);
       this.disable(e.getPresentation());
     }
   }
 
 
-  public boolean isApplicable(AnActionEvent e) {
+  private boolean isApplicable(AnActionEvent e) {
     Project project = e.getProject();
     if (project == null) {
       return false;
     }
-    SNode curNode = e.getData(MPSCommonDataKeys.NODE);
+    DataContext dataContext = e.getDataContext();
+    SNode curNode = MPSCommonDataKeys.NODE.getData(dataContext);
     if (curNode == null) {
       return false;
     }
 
-    IOperationContext context = e.getData(MPSCommonDataKeys.OPERATION_CONTEXT);
-    if (context == null) return false;
-
-    SModule dependentModule = context.getModule();
-    if (!(dependentModule instanceof SolutionIdea)) return false;
+    SModule dependentModule = MPSCommonDataKeys.CONTEXT_MODULE.getData(dataContext);
+    if (!(dependentModule instanceof SolutionIdea)) {
+      return false;
+    }
 
     SRepository repository = ProjectHelper.getProjectRepository(project);
     for (SReference ref : curNode.getReferences()) {

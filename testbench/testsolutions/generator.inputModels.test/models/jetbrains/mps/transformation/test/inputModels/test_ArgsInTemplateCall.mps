@@ -25,7 +25,7 @@
   </registry>
   <node concept="15_jI_" id="bxo68MyhKP">
     <property role="TrG5h" value="MyInputRoot1" />
-    <property role="3FifNy" value="argsInTemplateCall" />
+    <property role="3FifNy" value="bxo68MyhqV/argsInTemplateCall" />
     <node concept="15J_HG" id="bxo68MyhKQ" role="15EZgy">
       <property role="TrG5h" value="NodeA" />
     </node>

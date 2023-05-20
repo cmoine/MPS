@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-8etvleke1l1qtlsa5ut25mrx6w3zdsc" />
+<product version="3" modelHash="mb1mmlo9o5g1235skawswadgyp98tz">
+  <files names="AbstractEvent.java:Command.java:CommandChannel.java:Controller.java:Event.java:Notification.java:State.java:StateMachine.java:StateMachineFactory.java:StateMachineTest.java" />
+</product>
 

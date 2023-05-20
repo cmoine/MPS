@@ -4,7 +4,6 @@ package jetbrains.mps.transformation.test.inputLang.generator.outputLang.templat
 
 import jetbrains.mps.generator.runtime.Generated;
 import jetbrains.mps.generator.runtime.TemplateModelBase;
-import jetbrains.mps.generator.runtime.TemplateModel;
 import java.util.Collection;
 import jetbrains.mps.generator.runtime.TemplateMappingConfiguration;
 import jetbrains.mps.generator.runtime.TemplateSwitchMapping;
@@ -12,12 +11,14 @@ import org.jetbrains.mps.openapi.model.SModelReference;
 import jetbrains.mps.generator.runtime.TemplateModule;
 import jetbrains.mps.generator.runtime.TemplateUtil;
 import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
+import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.generator.runtime.TemplateDeclaration;
+import jetbrains.mps.generator.runtime.TemplateDeclarationKey;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 import jetbrains.mps.smodel.SNodePointer;
 
 @Generated
-public class TemplateModelImpl extends TemplateModelBase implements TemplateModel {
+public class TemplateModelImpl extends TemplateModelBase {
   private final Collection<TemplateMappingConfiguration> mappings;
   private final Collection<TemplateSwitchMapping> switches;
   private final SModelReference model;
@@ -39,16 +40,18 @@ public class TemplateModelImpl extends TemplateModelBase implements TemplateMode
   public Collection<TemplateSwitchMapping> getSwitches() {
     return switches;
   }
-  public TemplateDeclaration loadTemplate(SNodeReference template, Object... arguments) {
-    if (!(model.equals(template.getModelReference()))) {
+
+  @Nullable
+  @Override
+  public TemplateDeclaration loadTemplate(TemplateDeclarationKey key) {
+    if (!(model.equals(key.getSourceModel()))) {
       return null;
     }
+    final SNodeReference template = key.getSourceNode();
     if (template.equals(new SNodePointer("r:00000000-0000-4000-0000-011c895905f9(jetbrains.mps.transformation.test.inputLang.generator.outputLang.template.test_ReduceInheritors@generator)", "8417539822878724212"))) {
-      TemplateUtil.assertTemplateParametersCount(template, 0, arguments.length);
       return new Template_weave_InputRoot();
     }
     if (template.equals(new SNodePointer("r:00000000-0000-4000-0000-011c895905f9(jetbrains.mps.transformation.test.inputLang.generator.outputLang.template.test_ReduceInheritors@generator)", "1206460153890"))) {
-      TemplateUtil.assertTemplateParametersCount(template, 0, arguments.length);
       return new Template_OutputRoot();
     }
     return null;

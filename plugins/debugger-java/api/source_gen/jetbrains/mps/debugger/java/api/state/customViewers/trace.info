@@ -6,31 +6,31 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
   <root nodeRef="r:42278aae-7cc0-4e00-9041-018f7301c362(jetbrains.mps.debugger.java.api.state.customViewers)/3432969378036015275">
     <file name="CustomViewersManager.java">
-      <node id="3432969378036017151" at="21,36,22,36" concept="2" />
-      <node id="3432969378036017168" at="24,0,25,0" concept="1" trace="addFactory#(Ljetbrains/mps/debugger/java/api/state/proxy/ValueWrapperFactory;)V" />
-      <node id="3432969378036017179" at="25,0,26,0" concept="1" trace="removeFactory#(Ljetbrains/mps/debugger/java/api/state/proxy/ValueWrapperFactory;)V" />
-      <node id="7129857096177639286" at="26,0,27,0" concept="1" trace="fromJdi#(Lcom/sun/jdi/Value;Lcom/sun/jdi/ThreadReference;)Ljetbrains/mps/debugger/java/api/state/proxy/JavaValue;" />
-      <node id="3432969378036017163" at="27,52,28,88" concept="2" />
-      <node id="3432969378036017139" at="16,0,18,0" concept="0" trace="CustomViewersManager#()V" />
-      <node id="3432969378036017159" at="27,0,30,0" concept="3" trace="getInstance#()Ljetbrains/mps/debugger/java/api/state/customViewers/CustomViewersManager;" />
-      <node id="3432969378036017147" at="18,0,24,0" concept="1" trace="getComponentName#()Ljava/lang/String;" />
-      <scope id="3432969378036017142" at="16,33,16,33" />
-      <scope id="3432969378036017150" at="21,36,22,36" />
-      <scope id="3432969378036017168" at="24,0,25,0">
+      <node id="3432969378036017151" at="23,36,24,36" concept="2" />
+      <node id="3432969378036017168" at="26,0,27,0" concept="1" trace="addFactory#(Ljetbrains/mps/debugger/java/api/state/proxy/ValueWrapperFactory;)V" />
+      <node id="3432969378036017179" at="27,0,28,0" concept="1" trace="removeFactory#(Ljetbrains/mps/debugger/java/api/state/proxy/ValueWrapperFactory;)V" />
+      <node id="7129857096177639286" at="28,0,29,0" concept="1" trace="fromJdi#(Lcom/sun/jdi/Value;Lcom/sun/jdi/ThreadReference;)Ljetbrains/mps/debugger/java/api/state/proxy/JavaValue;" />
+      <node id="3432969378036017163" at="29,52,30,88" concept="2" />
+      <node id="3432969378036017139" at="18,0,20,0" concept="0" trace="CustomViewersManager#()V" />
+      <node id="3432969378036017159" at="29,0,32,0" concept="3" trace="getInstance#()Ljetbrains/mps/debugger/java/api/state/customViewers/CustomViewersManager;" />
+      <node id="3432969378036017147" at="20,0,26,0" concept="1" trace="getComponentName#()Ljava/lang/String;" />
+      <scope id="3432969378036017142" at="18,33,18,33" />
+      <scope id="3432969378036017150" at="23,36,24,36" />
+      <scope id="3432969378036017168" at="26,0,27,0">
         <var name="factory" id="3432969378036017171" />
       </scope>
-      <scope id="3432969378036017179" at="25,0,26,0">
+      <scope id="3432969378036017179" at="27,0,28,0">
         <var name="factory" id="3432969378036017182" />
       </scope>
-      <scope id="7129857096177639286" at="26,0,27,0">
+      <scope id="7129857096177639286" at="28,0,29,0">
         <var name="threadReference" id="7129857096177639347" />
         <var name="value" id="7129857096177639341" />
       </scope>
-      <scope id="3432969378036017162" at="27,52,28,88" />
-      <scope id="3432969378036017139" at="16,0,18,0" />
-      <scope id="3432969378036017159" at="27,0,30,0" />
-      <scope id="3432969378036017147" at="18,0,24,0" />
-      <unit id="3432969378036015275" at="15,0,31,0" name="jetbrains.mps.debugger.java.api.state.customViewers.CustomViewersManager" />
+      <scope id="3432969378036017162" at="29,52,30,88" />
+      <scope id="3432969378036017139" at="18,0,20,0" />
+      <scope id="3432969378036017159" at="29,0,32,0" />
+      <scope id="3432969378036017147" at="20,0,26,0" />
+      <unit id="3432969378036015275" at="16,0,33,0" name="jetbrains.mps.debugger.java.api.state.customViewers.CustomViewersManager" />
     </file>
   </root>
 </debug-info>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,14 +20,14 @@ import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.components.StoragePathMacros;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @State(
     name = "ContextAssistantSettings",
-    storages = @Storage("mpsContextAssistant.xml")
+    storages = @Storage("mpsContextAssistant.xml"),
+    reportStatistic = true
 )
 public class ContextAssistantSettings implements ApplicationComponent, PersistentStateComponent<ContextAssistantSettings> {
 
@@ -40,7 +40,7 @@ public class ContextAssistantSettings implements ApplicationComponent, Persisten
   }
 
   @Override
-  public void loadState(ContextAssistantSettings state) {
+  public void loadState(@NotNull ContextAssistantSettings state) {
     XmlSerializerUtil.copyBean(state, this);
   }
 

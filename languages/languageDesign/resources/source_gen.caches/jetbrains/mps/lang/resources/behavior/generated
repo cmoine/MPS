@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-50116mhvztn9gjgv92gwqb8gitd12i7" />
+<product version="3" modelHash="7szy87zcsk71ai8twpdprij72fevf04">
+  <files names="BaseURLFunction__BehaviorDescriptor.java:BaseURLLiteral__BehaviorDescriptor.java:BaseURL__BehaviorDescriptor.java:BehaviorAspectDescriptor.java:Circle__BehaviorDescriptor.java:ColorLiteral__BehaviorDescriptor.java:Color__BehaviorDescriptor.java:FileIcon__BehaviorDescriptor.java:IconLayerDescription__BehaviorDescriptor.java:Icon__BehaviorDescriptor.java:Image__BehaviorDescriptor.java:Rect__BehaviorDescriptor.java:ResourceGenerationException.java:Resource__BehaviorDescriptor.java:TextIcon__BehaviorDescriptor.java:Text__BehaviorDescriptor.java" />
+</product>
 

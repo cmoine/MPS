@@ -4,51 +4,105 @@ package jetbrains.mps.samples.heating.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_Applicability = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ChangeEvent = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DailyPlan = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DailyPlanReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DayRange = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_HeatingPlan = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_NotSpecified = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Slot = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SpecificDay = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_WeekDays = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_WeekendDay = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_Applicability;
+  private ConceptPresentation props_ChangeEvent;
+  private ConceptPresentation props_DailyPlan;
+  private ConceptPresentation props_DailyPlanReference;
+  private ConceptPresentation props_DayRange;
+  private ConceptPresentation props_HeatingPlan;
+  private ConceptPresentation props_NotSpecified;
+  private ConceptPresentation props_Slot;
+  private ConceptPresentation props_SpecificDay;
+  private ConceptPresentation props_WeekDays;
+  private ConceptPresentation props_WeekendDay;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.Applicability:
+        if (props_Applicability == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_Applicability = cpb.create();
+        }
         return props_Applicability;
-      case 1:
+      case LanguageConceptSwitch.ChangeEvent:
+        if (props_ChangeEvent == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ChangeEvent");
+          props_ChangeEvent = cpb.create();
+        }
         return props_ChangeEvent;
-      case 2:
+      case LanguageConceptSwitch.DailyPlan:
+        if (props_DailyPlan == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_DailyPlan = cpb.create();
+        }
         return props_DailyPlan;
-      case 3:
+      case LanguageConceptSwitch.DailyPlanReference:
+        if (props_DailyPlanReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xa7d67633e8d9473bL, 0x98ce995a7aa66941L, 0xcfa085c9af5e830L, 0xcfa085c9af5e831L, "target", "", "");
+          props_DailyPlanReference = cpb.create();
+        }
         return props_DailyPlanReference;
-      case 4:
+      case LanguageConceptSwitch.DayRange:
+        if (props_DayRange == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("range");
+          props_DayRange = cpb.create();
+        }
         return props_DayRange;
-      case 5:
+      case LanguageConceptSwitch.HeatingPlan:
+        if (props_HeatingPlan == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_HeatingPlan = cpb.create();
+        }
         return props_HeatingPlan;
-      case 6:
+      case LanguageConceptSwitch.NotSpecified:
+        if (props_NotSpecified == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("not specified");
+          props_NotSpecified = cpb.create();
+        }
         return props_NotSpecified;
-      case 7:
+      case LanguageConceptSwitch.Slot:
+        if (props_Slot == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("Slot");
+          props_Slot = cpb.create();
+        }
         return props_Slot;
-      case 8:
+      case LanguageConceptSwitch.SpecificDay:
+        if (props_SpecificDay == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("specific day");
+          props_SpecificDay = cpb.create();
+        }
         return props_SpecificDay;
-      case 9:
+      case LanguageConceptSwitch.WeekDays:
+        if (props_WeekDays == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("week days");
+          props_WeekDays = cpb.create();
+        }
         return props_WeekDays;
-      case 10:
+      case LanguageConceptSwitch.WeekendDay:
+        if (props_WeekendDay == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("weekend day");
+          props_WeekendDay = cpb.create();
+        }
         return props_WeekendDay;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

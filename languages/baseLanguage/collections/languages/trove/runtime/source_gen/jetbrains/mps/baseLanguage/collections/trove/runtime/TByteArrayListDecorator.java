@@ -40,7 +40,7 @@ public class TByteArrayListDecorator extends AbstractList<Byte> implements List<
   }
   @Override
   public ListIterator<Byte> listIterator() {
-    return new TByteArrayListDecorator.TByteListIterator(0);
+    return new TByteListIterator(0);
   }
   @Override
   public void clear() {
@@ -127,7 +127,7 @@ public class TByteArrayListDecorator extends AbstractList<Byte> implements List<
     return this.primList.size();
   }
   public ListIterator<Byte> listIterator(int index) {
-    return new TByteArrayListDecorator.TByteListIterator(index);
+    return new TByteListIterator(index);
   }
   protected boolean removePrim(byte primValue) {
     int idx = this.primList.indexOf(primValue);

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="7o9i44pufho8c1xj0mb2iz8hdud1q8e" />
+<product version="3" modelHash="cpu94f6e5du1advyv5cpimb6zdxomdb">
+  <files names="DecisionTable_Editor.java:DecisionTable_EditorBuilder_a.java:EditorAspectDescriptorImpl.java" />
+</product>
 

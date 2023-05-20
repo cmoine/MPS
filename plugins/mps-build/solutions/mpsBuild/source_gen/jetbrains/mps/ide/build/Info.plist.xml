@@ -46,7 +46,7 @@
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleIdentifier</key>
-    <string>com.jetbrains.intellij</string>
+    <string>com.jetbrains.mps</string>
     <key>CFBundleSignature</key>
     <string>????</string>
     <key>CFBundleGetInfoString</key>
@@ -60,15 +60,19 @@
     
     <key>NSHighResolutionCapable</key>
     <true />
+    
+    <key>NSSupportsAutomaticGraphicsSwitching</key>
+    <true />
+    
     <key>LSArchitecturePriority</key>
     <array>
+      <string>arm64</string>
       <string>x86_64</string>
-      <string>i386</string>
     </array>
     <key>LSRequiresNativeExecution</key>
     <string>YES</string>
     <key>LSMinimumSystemVersion</key>
-    <string>10.6</string>
+    <string>10.8</string>
     <key>CFBundleURLTypes</key>
     <array>
       <dict>
@@ -84,11 +88,53 @@
     <key>JVMOptions</key>
     <dict>
       <key>ClassPath</key>
-      <string>$APP_PACKAGE/Contents/lib/branding.jar:$APP_PACKAGE/Contents/lib/mps-boot.jar:$APP_PACKAGE/Contents/lib/mps-boot-util.jar:$APP_PACKAGE/Contents/lib/boot.jar:$APP_PACKAGE/Contents/lib/bootstrap.jar:$APP_PACKAGE/Contents/lib/util.jar:$APP_PACKAGE/Contents/lib/jdom.jar:$APP_PACKAGE/Contents/lib/log4j.jar:$APP_PACKAGE/Contents/lib/extensions.jar:$APP_PACKAGE/Contents/lib/trove4j.jar</string>
+      <string>$APP_PACKAGE/Contents/lib/3rd-party-native.jar:$APP_PACKAGE/Contents/lib/3rd-party-rt.jar:$APP_PACKAGE/Contents/lib/annotations.jar:$APP_PACKAGE/Contents/lib/app.jar:$APP_PACKAGE/Contents/lib/branding.jar:$APP_PACKAGE/Contents/lib/byte-buddy-agent.jar:$APP_PACKAGE/Contents/lib/eclipse.jar:$APP_PACKAGE/Contents/lib/error-prone-annotations.jar:$APP_PACKAGE/Contents/lib/external-system-rt.jar:$APP_PACKAGE/Contents/lib/externalProcess-rt.jar:$APP_PACKAGE/Contents/lib/forms_rt.jar:$APP_PACKAGE/Contents/lib/groovy.jar:$APP_PACKAGE/Contents/lib/idea_rt.jar:$APP_PACKAGE/Contents/lib/intellij-coverage-agent-1.0.682.jar:$APP_PACKAGE/Contents/lib/intellij-test-discovery.jar:$APP_PACKAGE/Contents/lib/java-impl.jar:$APP_PACKAGE/Contents/lib/javac2.jar:$APP_PACKAGE/Contents/lib/jetbrains-annotations.jar:$APP_PACKAGE/Contents/lib/jps-model.jar:$APP_PACKAGE/Contents/lib/junit4.jar:$APP_PACKAGE/Contents/lib/kotlin-compiler-client-embeddable-1.7.0.jar:$APP_PACKAGE/Contents/lib/kotlinx-metadata-jvm-0.4.2.jar:$APP_PACKAGE/Contents/lib/mps-annotations.jar:$APP_PACKAGE/Contents/lib/mps-behavior-api.jar:$APP_PACKAGE/Contents/lib/mps-behavior-runtime.jar:$APP_PACKAGE/Contents/lib/mps-boot-util.jar:$APP_PACKAGE/Contents/lib/mps-boot.jar:$APP_PACKAGE/Contents/lib/mps-closures.jar:$APP_PACKAGE/Contents/lib/mps-collections.jar:$APP_PACKAGE/Contents/lib/mps-constraints-runtime.jar:$APP_PACKAGE/Contents/lib/mps-context.jar:$APP_PACKAGE/Contents/lib/mps-core.jar:$APP_PACKAGE/Contents/lib/mps-editor-api.jar:$APP_PACKAGE/Contents/lib/mps-editor-runtime.jar:$APP_PACKAGE/Contents/lib/mps-editor.jar:$APP_PACKAGE/Contents/lib/mps-environment.jar:$APP_PACKAGE/Contents/lib/mps-feedback-api.jar:$APP_PACKAGE/Contents/lib/mps-generator.jar:$APP_PACKAGE/Contents/lib/mps-icons.jar:$APP_PACKAGE/Contents/lib/mps-logging.jar:$APP_PACKAGE/Contents/lib/mps-messages-api.jar:$APP_PACKAGE/Contents/lib/mps-messages-for-legacy-constraints.jar:$APP_PACKAGE/Contents/lib/mps-messages-for-rules.jar:$APP_PACKAGE/Contents/lib/mps-messages-for-structure.jar:$APP_PACKAGE/Contents/lib/mps-messaging.jar:$APP_PACKAGE/Contents/lib/mps-openapi.jar:$APP_PACKAGE/Contents/lib/mps-persistence.jar:$APP_PACKAGE/Contents/lib/mps-platform.jar:$APP_PACKAGE/Contents/lib/mps-problem.jar:$APP_PACKAGE/Contents/lib/mps-project-check.jar:$APP_PACKAGE/Contents/lib/mps-references.jar:$APP_PACKAGE/Contents/lib/mps-resources.jar:$APP_PACKAGE/Contents/lib/mps-resources_en.jar:$APP_PACKAGE/Contents/lib/mps-test.jar:$APP_PACKAGE/Contents/lib/mps-textgen.jar:$APP_PACKAGE/Contents/lib/mps-tips.jar:$APP_PACKAGE/Contents/lib/mps-tuples.jar:$APP_PACKAGE/Contents/lib/mps-workbench.jar:$APP_PACKAGE/Contents/lib/platform-objectSerializer-annotations.jar:$APP_PACKAGE/Contents/lib/platform-statistics-devkit.jar:$APP_PACKAGE/Contents/lib/protobuf.jar:$APP_PACKAGE/Contents/lib/pty4j.jar:$APP_PACKAGE/Contents/lib/rd.jar:$APP_PACKAGE/Contents/lib/stats.jar:$APP_PACKAGE/Contents/lib/testFramework.jar:$APP_PACKAGE/Contents/lib/tools-testsBootstrap.jar:$APP_PACKAGE/Contents/lib/util.jar:$APP_PACKAGE/Contents/lib/util_rt.jar:$APP_PACKAGE/Contents/lib/xml-dom-impl.jar:$APP_PACKAGE/Contents/lib/ant/lib/ant.jar</string>
       <key>JVMVersion</key>
       <string>1.8+</string>
       <key>MainClass</key>
-      <string>jetbrains.mps.Launcher</string>
+      <string>jetbrains/mps/Launcher</string>
+      <key>Options</key>
+      <array>
+        <string>--add-opens=java.base/java.io=ALL-UNNAMED</string>
+        <string>--add-opens=java.base/java.lang=ALL-UNNAMED</string>
+        <string>--add-opens=java.base/java.lang.reflect=ALL-UNNAMED</string>
+        <string>--add-opens=java.base/java.net=ALL-UNNAMED</string>
+        <string>--add-opens=java.base/java.nio=ALL-UNNAMED</string>
+        <string>--add-opens=java.base/java.nio.charset=ALL-UNNAMED</string>
+        <string>--add-opens=java.base/java.text=ALL-UNNAMED</string>
+        <string>--add-opens=java.base/java.time=ALL-UNNAMED</string>
+        <string>--add-opens=java.base/java.util=ALL-UNNAMED</string>
+        <string>--add-opens=java.base/java.util.concurrent=ALL-UNNAMED</string>
+        <string>--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED</string>
+        <string>--add-opens=java.base/jdk.internal.vm=ALL-UNNAMED</string>
+        <string>--add-opens=java.base/sun.nio.ch=ALL-UNNAMED</string>
+        <string>--add-opens=java.base/sun.nio.fs=ALL-UNNAMED</string>
+        <string>--add-opens=java.base/sun.security.ssl=ALL-UNNAMED</string>
+        <string>--add-opens=java.base/sun.security.util=ALL-UNNAMED</string>
+        <string>--add-opens=java.desktop/java.awt=ALL-UNNAMED</string>
+        <string>--add-opens=java.desktop/java.awt.dnd.peer=ALL-UNNAMED</string>
+        <string>--add-opens=java.desktop/java.awt.event=ALL-UNNAMED</string>
+        <string>--add-opens=java.desktop/java.awt.image=ALL-UNNAMED</string>
+        <string>--add-opens=java.desktop/java.awt.peer=ALL-UNNAMED</string>
+        <string>--add-opens=java.desktop/javax.swing=ALL-UNNAMED</string>
+        <string>--add-opens=java.desktop/javax.swing.plaf.basic=ALL-UNNAMED</string>
+        <string>--add-opens=java.desktop/javax.swing.text.html=ALL-UNNAMED</string>
+        <string>--add-opens=java.desktop/sun.awt.datatransfer=ALL-UNNAMED</string>
+        <string>--add-opens=java.desktop/sun.awt.image=ALL-UNNAMED</string>
+        <string>--add-opens=java.desktop/sun.awt=ALL-UNNAMED</string>
+        <string>--add-opens=java.desktop/sun.font=ALL-UNNAMED</string>
+        <string>--add-opens=java.desktop/sun.java2d=ALL-UNNAMED</string>
+        <string>--add-opens=java.desktop/sun.swing=ALL-UNNAMED</string>
+        <string>--add-opens=jdk.attach/sun.tools.attach=ALL-UNNAMED</string>
+        <string>--add-opens=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED</string>
+        <string>--add-opens=jdk.internal.jvmstat/sun.jvmstat.monitor=ALL-UNNAMED</string>
+        <string>--add-opens=jdk.jdi/com.sun.tools.jdi=ALL-UNNAMED</string>
+        <string>--add-opens=java.desktop/sun.lwawt=ALL-UNNAMED</string>
+        <string>--add-opens=java.desktop/sun.lwawt.macosx=ALL-UNNAMED</string>
+        <string>--add-opens=java.desktop/com.apple.laf=ALL-UNNAMED</string>
+        <string>--add-opens=java.desktop/com.apple.eawt=ALL-UNNAMED</string>
+        <string>--add-opens=java.desktop/com.apple.eawt.event=ALL-UNNAMED</string>
+      </array>
       <key>Properties</key>
       <dict>
         <key>apple.laf.useScreenMenuBar</key>
@@ -96,16 +142,27 @@
         <key>com.apple.mrj.application.live-resize</key>
         <string>false</string>
         
-        <key>idea.path.selector</key>
-        <string>MPS34</string>
+        <key>idea.paths.selector</key>
+        <string>MPS$version.major$.$version.minor$</string>
         
-        <key>idea.java.redist</key>
-        <string>NoJavaDistribution</string>
+        <key>jna.boot.library.path</key>
+        <string>$APP_PACKAGE/Contents/lib/jna</string>
+        
+        <key>java.system.class.loader</key>
+        <string>com.intellij.util.lang.PathClassLoader</string>
+        
+        <key>idea.vendor.name</key>
+        <string>JetBrains</string>
+        
+        <key>idea.executable</key>
+        <string>mps</string>
+        
         <key>idea.home.path</key>
         <string>$APP_PACKAGE/Contents</string>
       </dict>
+      <!--Use Contents/bin/mps.vmoptions or ~/Library/Preferences/MPS$version.major$.$version.minor$/mps.vmoptions file to modify VMOptions-->
       <key>VMOptions</key>
-      <string>-Dintellij.config.imported.in.current.session=true -Didea.paths.selector=MPS34 -Dide.mac.message.dialogs.as.sheets=false -Dapple.awt.graphics.UseQuartz=true -Dfile.encoding=UTF-8 -client -Xss1024k -ea -Xmx2048m -XX:MaxPermSize=350m -XX:NewSize=256m -XX:+HeapDumpOnOutOfMemoryError -Xverify:none</string>
+      <string>-XX:+UseCompressedOops</string>
       <key>WorkingDirectory</key>
       <string>$APP_PACKAGE/Contents/bin</string>
     </dict>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <root nodeRef="r:0454b9a6-3097-4b9d-8d62-441f146822c5(jetbrains.mps.kotlin.tests.editor.expressions@tests)/1889888958298334805">
+    <file name="BinaryExpressionInsertion_Test.java">
+      <node id="1889888958298334805" at="19,43,20,60" concept="6" />
+      <node id="1889888958298334805" at="24,65,25,36" concept="1" />
+      <node id="1889888958298334805" at="30,52,31,19" concept="6" />
+      <node id="1889888958298334805" at="35,51,36,72" concept="1" />
+      <node id="1889888958298341539" at="36,72,37,46" concept="1" />
+      <node id="1889888958298334805" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="1889888958298334805" at="19,0,22,0" concept="0" trace="BinaryExpressionInsertion_Test#()V" />
+      <node id="1889888958298334805" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="1889888958298334805" at="23,0,27,0" concept="2" trace="test_BinaryExpressionInsertion#()V" />
+      <node id="1889888958298334805" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="1889888958298334805" at="19,43,20,60" />
+      <scope id="1889888958298334805" at="24,65,25,36" />
+      <scope id="1889888958298334805" at="30,52,31,19" />
+      <scope id="1889888958298334805" at="35,51,37,46" />
+      <scope id="1889888958298334805" at="19,0,22,0" />
+      <scope id="1889888958298334805" at="30,0,33,0">
+        <var name="owner" id="1889888958298334805" />
+      </scope>
+      <scope id="1889888958298334805" at="23,0,27,0" />
+      <scope id="1889888958298334805" at="34,0,39,0" />
+      <unit id="1889888958298334805" at="28,0,40,0" name="jetbrains.mps.kotlin.tests.editor.expressions.BinaryExpressionInsertion_Test$TestBody" />
+      <unit id="1889888958298334805" at="14,0,41,0" name="jetbrains.mps.kotlin.tests.editor.expressions.BinaryExpressionInsertion_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:0454b9a6-3097-4b9d-8d62-441f146822c5(jetbrains.mps.kotlin.tests.editor.expressions@tests)/1889888958303633172">
+    <file name="StringEdition_Test.java">
+      <node id="1889888958303633172" at="19,31,20,60" concept="6" />
+      <node id="1889888958303633172" at="24,53,25,36" concept="1" />
+      <node id="1889888958303633172" at="30,52,31,19" concept="6" />
+      <node id="1889888958303633172" at="35,51,36,72" concept="1" />
+      <node id="1889888958303633194" at="36,72,37,53" concept="1" />
+      <node id="1889888958306621375" at="37,53,38,0" concept="4" />
+      <node id="1889888958306621392" at="38,0,39,51" concept="3" />
+      <node id="7035802921536558317" at="39,51,40,69" concept="1" />
+      <node id="1889888958306639094" at="40,69,41,69" concept="1" />
+      <node id="1889888958306639140" at="41,69,42,69" concept="1" />
+      <node id="1889888958303633172" at="16,0,18,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="1889888958303633172" at="19,0,22,0" concept="0" trace="StringEdition_Test#()V" />
+      <node id="1889888958303633172" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="1889888958303633172" at="23,0,27,0" concept="2" trace="test_StringEdition#()V" />
+      <node id="1889888958303633172" at="34,0,44,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="1889888958303633172" at="19,31,20,60" />
+      <scope id="1889888958303633172" at="24,53,25,36" />
+      <scope id="1889888958303633172" at="30,52,31,19" />
+      <scope id="1889888958303633172" at="19,0,22,0" />
+      <scope id="1889888958303633172" at="30,0,33,0">
+        <var name="owner" id="1889888958303633172" />
+      </scope>
+      <scope id="1889888958303633172" at="23,0,27,0" />
+      <scope id="1889888958303633172" at="35,51,42,69" />
+      <scope id="1889888958303633172" at="34,0,44,0" />
+      <unit id="1889888958303633172" at="28,0,45,0" name="jetbrains.mps.kotlin.tests.editor.expressions.StringEdition_Test$TestBody" />
+      <unit id="1889888958303633172" at="14,0,46,0" name="jetbrains.mps.kotlin.tests.editor.expressions.StringEdition_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:0454b9a6-3097-4b9d-8d62-441f146822c5(jetbrains.mps.kotlin.tests.editor.expressions@tests)/4730004261680102905">
+    <file name="LambdaInCallInsertion_Test.java">
+      <node id="4730004261680102905" at="21,39,22,60" concept="6" />
+      <node id="4730004261680102905" at="26,61,27,36" concept="1" />
+      <node id="4730004261680102905" at="32,52,33,19" concept="6" />
+      <node id="4730004261680102905" at="37,51,38,72" concept="1" />
+      <node id="4730004261680192954" at="38,72,39,25" concept="1" />
+      <node id="8199816903240221473" at="39,25,40,71" concept="1" />
+      <node id="8199816903240221487" at="40,71,41,82" concept="1" />
+      <node id="4730004261680210621" at="41,82,42,0" concept="4" />
+      <node id="6080342878134191715" at="42,0,43,72" concept="1" />
+      <node id="4730004261680106055" at="43,72,44,22" concept="1" />
+      <node id="4730004261680210805" at="44,22,45,71" concept="1" />
+      <node id="4730004261680210757" at="45,71,46,71" concept="1" />
+      <node id="4730004261680136644" at="46,71,47,23" concept="1" />
+      <node id="4730004261680102905" at="18,0,20,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="4730004261680102905" at="21,0,24,0" concept="0" trace="LambdaInCallInsertion_Test#()V" />
+      <node id="4730004261680102905" at="32,0,35,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="4730004261680102905" at="25,0,29,0" concept="2" trace="test_LambdaInCallInsertion#()V" />
+      <node id="4730004261680102905" at="36,0,49,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="4730004261680102905" at="21,39,22,60" />
+      <scope id="4730004261680102905" at="26,61,27,36" />
+      <scope id="4730004261680102905" at="32,52,33,19" />
+      <scope id="4730004261680102905" at="21,0,24,0" />
+      <scope id="4730004261680102905" at="32,0,35,0">
+        <var name="owner" id="4730004261680102905" />
+      </scope>
+      <scope id="4730004261680102905" at="25,0,29,0" />
+      <scope id="4730004261680102905" at="37,51,47,23" />
+      <scope id="4730004261680102905" at="36,0,49,0" />
+      <unit id="4730004261680102905" at="30,0,50,0" name="jetbrains.mps.kotlin.tests.editor.expressions.LambdaInCallInsertion_Test$TestBody" />
+      <unit id="4730004261680102905" at="16,0,51,0" name="jetbrains.mps.kotlin.tests.editor.expressions.LambdaInCallInsertion_Test" />
+    </file>
+  </root>
+</debug-info>
+

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,56 +20,111 @@ import jetbrains.mps.text.BufferSnapshot;
 import jetbrains.mps.text.CompatibilityTextUnit;
 import jetbrains.mps.text.TextBuffer;
 import jetbrains.mps.text.TextUnit;
-import jetbrains.mps.textGen.TextGen;
-import jetbrains.mps.textGen.TextGenBuffer;
 import jetbrains.mps.textgen.trace.ScopePositionInfo;
 import jetbrains.mps.textgen.trace.TraceablePositionInfo;
 import jetbrains.mps.textgen.trace.UnitPositionInfo;
-import jetbrains.mps.util.EncodingUtil;
 import jetbrains.mps.util.FileUtil;
-import jetbrains.mps.util.annotation.ToRemove;
+import jetbrains.mps.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNode;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 /**
- * General {@link TextUnit} implementation, intended for direct replacement of legacy TextGen.
- * At the moment, addresses compatibility with generated TextGen classes, except for pure BL
- * functionality like dependencies, which are handled in {@link RegularTextUnit2}.
+ * General {@link TextUnit} implementation for use both Java and non-Java source code, as well as binary (Base64-encoded) units.
  *
  * @author Artem Tikhomirov
  */
 public class RegularTextUnit implements TextUnit, CompatibilityTextUnit {
   private final SNode myStartNode;
   private final String myFilename;
+  private final String myPath;
   private final Charset myEncoding;
   private Status myState = Status.Undefined;
   private String myOutcome;
   private BufferLayoutConfiguration myLayoutBuilder;
-  // legacy support for user objects, until we come up with a better approach
-  private TextGenBuffer myLegacyBuffer;
   // CompatibilityTextUnit stuff
   private TraceInfoCollector myTraceCollector;
+  private ErrorCollector myErrorCollector;
+  private List<Pair<String,Object>> myContextObjects;
 
   public RegularTextUnit(@NotNull SNode root, @NotNull String filename) {
-    this(root, filename, null);
+    this(root, filename, null, null);
   }
 
   public RegularTextUnit(@NotNull SNode root, @NotNull String filename, @Nullable Charset encoding) {
+    this(root, filename, null, encoding);
+  }
+
+  public RegularTextUnit(@NotNull SNode root, @NotNull String filename, @Nullable String unitPath, @Nullable Charset encoding) {
     myStartNode = root;
     myFilename = filename;
+    myPath = unitPath;
     myEncoding = encoding;
     myLayoutBuilder = new BufferLayoutConfiguration();
   }
 
   public void setBufferLayout(@NotNull BufferLayoutConfiguration cfg) {
+    checkNotYetGenerated();
     myLayoutBuilder = cfg;
   }
+
+  public void addContextObject(@NotNull String identity, @NotNull Object contextObject) {
+    checkNotYetGenerated();
+    if (myContextObjects == null) {
+      // it's a single thread we configure TU from
+      myContextObjects = new ArrayList<>(2);
+    }
+    myContextObjects.add(new Pair<>(identity, contextObject));
+  }
+
+  /**
+   * XXX Perhaps, getAssociatedData(Class) would be better name?
+   *
+   * Access context object compatible with the supplied class.
+   * Return the instance supplied through {@link #addContextObject(String, Object)}, if any.
+   *
+   * At the moment, compatible means {@link Class#isInstance(Object)}, we might introduce a mechanism
+   * similar to IAdaptable in the future (i.e. each context object that is IAdaptable would get consulted IAdaptable.adapt()
+   * in addition to isInstance()).
+   */
+  @Nullable
+  public <T> T findContextObject(Class<T> kind) {
+    if (myContextObjects == null) {
+      return null;
+    }
+    for (Pair<String, Object> p : myContextObjects) {
+      if (kind.isInstance(p.o2)) {
+        return kind.cast(p.o2);
+      }
+    }
+    return null;
+  }
+
+  /**
+   * @param identity key an object has been registered with in {@link #addContextObject(String, Object)}
+   * @param kind object instance has to be instance of supplied class for the call to succeed
+   * @param <T> context object type
+   * @return registered context object or {@code null} if no record matching both identity key and Java class found.
+   */
+  public <T> T getContextObject(@NotNull String identity, @NotNull Class<T> kind) {
+    if (myContextObjects == null) {
+      return null;
+    }
+    for (Pair<String, Object> p : myContextObjects) {
+      if (identity.equals(p.o1) && kind.isInstance(p.o2)) {
+        // XXX perhaps, can gracefully tell LD about incompatible types?
+        return kind.cast(p.o2);
+      }
+    }
+    return null;
+  }
+
 
   @NotNull
   @Override
@@ -83,6 +138,12 @@ public class RegularTextUnit implements TextUnit, CompatibilityTextUnit {
     return myFilename;
   }
 
+  @Nullable
+  @Override
+  public String getFilePath() {
+    return myPath;
+  }
+
   @Override
   public void generate() {
     if (!TextGenRegistry.getInstance().hasTextGen(myStartNode)) {
@@ -91,38 +152,30 @@ public class RegularTextUnit implements TextUnit, CompatibilityTextUnit {
     }
 
     myTraceCollector = new TraceInfoCollector();
+    addContextObject(TraceInfoCollector.class.getName(), myTraceCollector);
     TextBuffer trueBuffer = new TextBufferImpl();
     myLayoutBuilder.prepareBuffer(trueBuffer);
-    myLegacyBuffer = TextGen.newUserObjectHolder(getStartNode());
+
 
     // if we got that far (tried to generate(), at least), do not consider state == undefined.
     // It's easy way to deal with uncaught exceptions from text generation and not to fail with assert state != Undefined in TextGen_Facet.
     // Proper way is likely to try/catch/re-throw here.
     myState = Status.Failed;
-    doGenerate(myLegacyBuffer, trueBuffer);
+    myErrorCollector = new ErrorCollector();
+    TextGenTransitionContext tgContext = new TextGenTransitionContext(myStartNode, this, myErrorCollector, trueBuffer);
+
+    TextGenSupport tgs = new TextGenSupport(tgContext);
+    tgs.appendNode(myStartNode);
 
     final BufferSnapshot textSnapshot = myLayoutBuilder.prepareSnapshot(trueBuffer);
     myTraceCollector.populatePositions(textSnapshot);
 
     myOutcome = textSnapshot.getText().toString();
-    if (myLegacyBuffer.hasErrors()) {
+    if (myErrorCollector.hasErrors()) {
       myState = Status.Failed;
     } else {
       myState = Status.Generated;
     }
-  }
-
-  /**
-   * the only purpose of this protected method is to give {@link RegularTextUnit2} a chance to inject
-   * legacy dependency set into buffer. Once BLDependencies mechanism doesn't rely on legacy buffer, there'd be no need in
-   * {@link RegularTextUnit2} nor this method
-   */
-  protected void doGenerate(TextGenBuffer legacyBuffer, TextBuffer trueBuffer) {
-    TextGenTransitionContext tgContext = new TextGenTransitionContext(myStartNode, legacyBuffer, trueBuffer);
-    tgContext.setTraceInfoCollector(myTraceCollector);
-
-    TextGenSupport tgs = new TextGenSupport(tgContext);
-    tgs.appendNode(myStartNode);
   }
 
   @Override
@@ -130,24 +183,24 @@ public class RegularTextUnit implements TextUnit, CompatibilityTextUnit {
     if (myState == Status.Undefined) {
       throw new IllegalStateException("Shall generate first");
     }
-    // compatibility code, when encoding was specified with TextGenSupport.setEncoding (earlier TextGenBuffer.setEncoding)
-    // There's no need in EncodingUti.encode(myOutcome, legacyEncoding) as it's basically identical to String.getBytes()
-    if (myEncoding == null && "binary".equals(getLegacyEncoding())) {
-      return EncodingUtil.decodeBase64(myOutcome);
+    if (myState == Status.Empty) {
+      // generally, client are expected to ask #getState() first, and handle Empty case as appropriate.
+      // However, if they do not, there's no reason to fail with NPE.
+      return new byte[0];
     }
+    if (myOutcome == null) {
+      return String.format("Errors while generating text outcome (%s), please check log file for exceptions", myState).getBytes(getEncoding());
+    }
+    // FIXME Handling of binary/base64 encoded strings missing?!
+//    if (myEncoding == null && "binary".equals(getLegacyEncoding())) {
+//      return EncodingUtil.decodeBase64(myOutcome);
+//    }
     return myOutcome.getBytes(getEncoding());
   }
 
   @Override
   public Charset getEncoding() {
-    Charset rv = myEncoding;
-    if (rv == null) {
-      final String encodingString = getLegacyEncoding();
-      if (encodingString != null && Charset.isSupported(encodingString)) {
-        rv = Charset.forName(encodingString);
-      } // else fall through
-    }
-    return rv == null ? FileUtil.DEFAULT_CHARSET : rv;
+    return myEncoding == null ? FileUtil.DEFAULT_CHARSET : myEncoding;
   }
 
   @Override
@@ -162,7 +215,7 @@ public class RegularTextUnit implements TextUnit, CompatibilityTextUnit {
    */
   @NotNull
   public List<IMessage> getMessages() {
-    return myLegacyBuffer == null ? Collections.<IMessage>emptyList() : myLegacyBuffer.problems();
+    return myErrorCollector == null ? Collections.emptyList() : myErrorCollector.problems();
   }
 
   @Nullable
@@ -180,14 +233,7 @@ public class RegularTextUnit implements TextUnit, CompatibilityTextUnit {
     return myTraceCollector == null ? null : myTraceCollector.getUnitPositions();
   }
 
-  // obtain encoding specified through TextGenBuffer. New TextGen shall specify encoding at TextUnit's construction time
-  // drop once we release templates that do specify encoding at construction
-  @ToRemove(version = 3.4)
-  private String getLegacyEncoding() {
-    Object rv;
-    if (myLegacyBuffer != null && (rv = myLegacyBuffer.getUserObject(TextGen.OUTPUT_ENCODING)) instanceof String) {
-      return (String) rv;
-    }
-    return null;
+  private void checkNotYetGenerated() {
+    assert myState == Status.Undefined : "Shall configure TU prior to generation";
   }
 }

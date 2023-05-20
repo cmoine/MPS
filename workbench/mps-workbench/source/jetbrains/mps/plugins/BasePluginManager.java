@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,9 @@
  */
 package jetbrains.mps.plugins;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import jetbrains.mps.logging.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.mps.openapi.module.SRepository;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -39,18 +37,14 @@ import java.util.stream.Collectors;
  *           @see jetbrains.mps.plugins.projectplugins.BaseProjectPlugin
  */
 public abstract class BasePluginManager<T> implements PluginLoader {
-  private static final Logger LOG = LogManager.getLogger(BasePluginManager.class);
+  private static final Logger LOG = Logger.getLogger(BasePluginManager.class);
 
   protected final Object myPluginsLock = new Object(); //guarding my fields
-  protected final SRepository myRepository;
-  private final PluginLoaderRegistry myPluginLoaderRegistry;
 
-  private List<T> mySortedPlugins = new ArrayList<T>(); // does not contain nulls
+  private final List<T> mySortedPlugins = new ArrayList<>(); // does not contain nulls
   private final Map<PluginContributor, T> myContributorToPlugin = new LinkedHashMap<>(); // NOTE ALLOWED NULL VALUES
 
-  public BasePluginManager(@NotNull SRepository repository, PluginLoaderRegistry pluginLoaderRegistry) {
-    myRepository = repository;
-    myPluginLoaderRegistry = pluginLoaderRegistry;
+  protected BasePluginManager() {
   }
 
   protected abstract T createPlugin(PluginContributor contributor);
@@ -62,49 +56,69 @@ public abstract class BasePluginManager<T> implements PluginLoader {
   protected abstract void disposePlugin(T plugin);
 
   protected final void register() {
-    myPluginLoaderRegistry.register(this);
+    PluginLoaderRegistry.getInstance().register(this);
   }
 
   protected final void unregister() {
-    myPluginLoaderRegistry.unregister(this);
+    PluginLoaderRegistry.getInstance().unregister(this);
   }
 
   @Override
-  public void loadPlugins(final List<PluginContributor> contributors) {
+  public final boolean loadPlugins(@NotNull List<PluginContributor> contributors) {
+    if (isDisposed()) {
+      return false;
+    }
     int size = contributors.size();
-    LOG.debug("Loading plugins from " + size + " contributors [" + toString() + "]");
+    LOG.debug(String.format("[%s] to instantiate plugins from %d contributors", this, size));
     final Map<PluginContributor, T> plugins = createPlugins(contributors);
     synchronized (myPluginsLock) {
-      plugins.entrySet().forEach(entry -> {
-        PluginContributor contributor = entry.getKey();
-        @Nullable T plugin = entry.getValue();
+      plugins.forEach((contributor, plugin) -> {
         if (myContributorToPlugin.containsKey(contributor)) { // not in one step because nulls are allowed
           LOG.error("", new IllegalArgumentException(this + ": contributor " + contributor + " is already registered"));
         }
+
+        LOG.trace("loading plugin from the contributor " + contributor);
         myContributorToPlugin.put(contributor, plugin);
       });
       List<T> notNullPlugins = plugins.values().stream().filter(Objects::nonNull).collect(Collectors.toList());
       mySortedPlugins.addAll(notNullPlugins);
       afterPluginsCreated(new ArrayList<>(notNullPlugins));
+      return !notNullPlugins.isEmpty();
     }
   }
 
   @Override
-  public void unloadPlugins(final List<PluginContributor> contributors) {
+  public final boolean hasPluginsFor(@NotNull List<PluginContributor> contributors) {
+    for (PluginContributor contributor : contributors) {
+      if (myContributorToPlugin.containsKey(contributor)) {
+        if (myContributorToPlugin.get(contributor) != null) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  @Override
+  public final boolean unloadPlugins(@NotNull List<PluginContributor> contributors) {
+    if (isDisposed()) {
+      return false;
+    }
     int size = contributors.size();
     LOG.debug("Unloading MPS plugins from " + size + " contributors [" + toString() + "]");
     final List<T> plugins;
     synchronized (myPluginsLock) {
-      plugins = calcPluginsToUnload(contributors);
+      plugins = unloadPlugins0(contributors);
       mySortedPlugins.removeAll(plugins);
     }
 
     beforePluginsDisposed(plugins);
     disposePlugins(plugins);
+    return !plugins.isEmpty();
   }
 
   @NotNull
-  private List<T> calcPluginsToUnload(List<PluginContributor> contributors) {
+  private List<T> unloadPlugins0(List<PluginContributor> contributors) {
     final List<T> plugins = new ArrayList<>();
 
     for (PluginContributor contributor : contributors) {
@@ -136,8 +150,13 @@ public abstract class BasePluginManager<T> implements PluginLoader {
   private T createPluginChecked(PluginContributor contributor) {
     T plugin = null;
     try {
+      // FIXME I'm not certain keeping null for PC is a good idea. Indeed, we ensure consistent
+      //       modules/PC come and go, but is it necessary? Moreover, hasPluginsFor() is not in use,
+      //       the only place we check this consistency is unloadPlugins
       plugin = createPlugin(contributor);
-      LOG.trace(this + ": creating plugin " + plugin + " from the contributor " + contributor);
+      if (plugin != null && LOG.isTraceLevel()) {
+        LOG.trace(String.format("[%s] instantiated plugin %s from the contributor %s", this, plugin, contributor));
+      }
     } catch (LinkageError le) {
       LOG.error(this + ": contributor " + contributor + " threw a linkage error during plugin creation ", le);
     } catch (VirtualMachineError virtualMachineError) {
@@ -162,9 +181,11 @@ public abstract class BasePluginManager<T> implements PluginLoader {
     }
   }
 
+  public abstract boolean isDisposed();
+
   public List<T> getPlugins() {
     synchronized (myPluginsLock) {
-      return new ArrayList<T>(mySortedPlugins);
+      return new ArrayList<>(mySortedPlugins);
     }
   }
 }

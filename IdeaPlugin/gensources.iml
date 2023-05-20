@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/mps.editor.tests/languages" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/mps.editor.tests/languages" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/mps.editor.tests/languages" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/mps.editor.tests/languages" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/mps-testing/languages/baseLanguage" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/mps-testing/languages/baseLanguage" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/mps-testing/languages/baseLanguage" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/mps-testing/languages/baseLanguage" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/mps-testing/languages/languageDesign" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/mps-testing/languages/languageDesign" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/mps-testing/languages/languageDesign" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/mps-testing/languages/languageDesign" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/mps-core/languages/xml" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/mps-core/languages/xml" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/mps-core/languages/xml" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/mps-core/languages/xml" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/mps-core/languages/util" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/mps-core/languages/util" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/mps-core/languages/util" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/mps-core/languages/util" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/mps-core/languages/make" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/mps-core/languages/make" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/mps-core/languages/make" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/mps-core/languages/make" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/mps-core/languages/languageDesign" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/mps-core/languages/languageDesign" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/mps-core/languages/languageDesign" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/mps-core/languages/languageDesign" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/mps-core/languages/baseLanguage" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/mps-core/languages/baseLanguage" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/mps-core/languages/baseLanguage" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/mps-core/languages/baseLanguage" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/mps-core/languages/baseLanguage/jetbrains.mps.baseLanguage.unitTest.libs" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/mps-core/languages/baseLanguage/jetbrains.mps.baseLanguage.unitTest.libs" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/mps-core/languages/baseLanguage/jetbrains.mps.baseLanguage.unitTest.libs" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/mps-core/languages/baseLanguage/jetbrains.mps.baseLanguage.unitTest.libs" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
+  </component>
+</module>

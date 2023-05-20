@@ -2,8 +2,7 @@
 <model ref="r:6c7cc4eb-60e9-407a-94da-5f4d6ac9650c(jetbrains.mps.samples.componentDependencies.typesystem)">
   <persistence version="9" />
   <languages>
-    <use id="7a5dda62-9140-4668-ab76-d5ed1746f2b2" name="jetbrains.mps.lang.typesystem" version="0" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="00000000-0000-4000-0000-1de82b3a4936(jetbrains.mps.devkit.aspect.typesystem)" />
   </languages>
   <imports>
     <import index="ktbj" ref="r:afaf73eb-94a1-4aae-902b-ed4d28124667(jetbrains.mps.samples.componentDependencies.structure)" />
@@ -70,13 +69,13 @@
       <concept id="1175517767210" name="jetbrains.mps.lang.typesystem.structure.ReportErrorStatement" flags="nn" index="2MkqsV">
         <child id="1175517851849" name="errorString" index="2MkJ7o" />
       </concept>
-      <concept id="1227096774658" name="jetbrains.mps.lang.typesystem.structure.MessageStatement" flags="ng" index="2OEH$v">
-        <child id="1227096802790" name="nodeToReport" index="2OEOjV" />
-      </concept>
       <concept id="1195213580585" name="jetbrains.mps.lang.typesystem.structure.AbstractCheckingRule" flags="ig" index="18hYwZ">
         <child id="1195213635060" name="body" index="18ibNy" />
       </concept>
       <concept id="1195214364922" name="jetbrains.mps.lang.typesystem.structure.NonTypesystemRule" flags="ig" index="18kY7G" />
+      <concept id="3937244445246642777" name="jetbrains.mps.lang.typesystem.structure.AbstractReportStatement" flags="ng" index="1urrMJ">
+        <child id="3937244445246642781" name="nodeToReport" index="1urrMF" />
+      </concept>
       <concept id="1174642788531" name="jetbrains.mps.lang.typesystem.structure.ConceptReference" flags="ig" index="1YaCAy">
         <reference id="1174642800329" name="concept" index="1YaFvo" />
       </concept>
@@ -156,11 +155,11 @@
               <ref role="1YBMHb" node="74C6il$lIN7" resolve="component" />
             </node>
             <node concept="3Tsc0h" id="74C6il$m8YH" role="2OqNvi">
-              <ref role="3TtcxE" to="ktbj:5pu6noS5f57" />
+              <ref role="3TtcxE" to="ktbj:5pu6noS5f57" resolve="dep" />
             </node>
           </node>
           <node concept="13MTOL" id="74C6il$mbUI" role="2OqNvi">
-            <ref role="13MTZf" to="ktbj:5pu6noS6Rpk" />
+            <ref role="13MTZf" to="ktbj:5pu6noS6Rpk" resolve="to" />
           </node>
         </node>
         <node concept="3clFbS" id="74C6il$m8Bn" role="2LFqv$">
@@ -244,7 +243,7 @@
                     <node concept="Xl_RD" id="74C6il$mml7" role="2MkJ7o">
                       <property role="Xl_RC" value="Cyclic Dependnecy" />
                     </node>
-                    <node concept="1YBJjd" id="74C6il$mmmX" role="2OEOjV">
+                    <node concept="1YBJjd" id="74C6il$mmmX" role="1urrMF">
                       <ref role="1YBMHb" node="74C6il$lIN7" resolve="component" />
                     </node>
                   </node>
@@ -272,11 +271,11 @@
                             <ref role="3cqZAo" node="74C6il$mjuI" resolve="nextComponent" />
                           </node>
                           <node concept="3Tsc0h" id="74C6il$mpsw" role="2OqNvi">
-                            <ref role="3TtcxE" to="ktbj:5pu6noS5f57" />
+                            <ref role="3TtcxE" to="ktbj:5pu6noS5f57" resolve="dep" />
                           </node>
                         </node>
                         <node concept="13MTOL" id="74C6il$mrFz" role="2OqNvi">
-                          <ref role="13MTZf" to="ktbj:5pu6noS6Rpk" />
+                          <ref role="13MTZf" to="ktbj:5pu6noS6Rpk" resolve="to" />
                         </node>
                       </node>
                       <node concept="3zZkjj" id="74C6il$mttR" role="2OqNvi">
@@ -337,15 +336,15 @@
                 <ref role="1YBMHb" node="74C6il$mGeV" resolve="dependency" />
               </node>
               <node concept="3TrEf2" id="74C6il$mKW2" role="2OqNvi">
-                <ref role="3Tt5mk" to="ktbj:5pu6noS6Rpk" />
+                <ref role="3Tt5mk" to="ktbj:5pu6noS6Rpk" resolve="to" />
               </node>
             </node>
             <node concept="3Tsc0h" id="74C6il$mGiy" role="2OqNvi">
-              <ref role="3TtcxE" to="ktbj:5pu6noS5f57" />
+              <ref role="3TtcxE" to="ktbj:5pu6noS5f57" resolve="dep" />
             </node>
           </node>
           <node concept="13MTOL" id="74C6il$mGiz" role="2OqNvi">
-            <ref role="13MTZf" to="ktbj:5pu6noS6Rpk" />
+            <ref role="13MTZf" to="ktbj:5pu6noS6Rpk" resolve="to" />
           </node>
         </node>
         <node concept="3clFbS" id="74C6il$mGi$" role="2LFqv$">
@@ -429,7 +428,7 @@
                     <node concept="Xl_RD" id="74C6il$mGj8" role="2MkJ7o">
                       <property role="Xl_RC" value="Cyclic Dependnecy" />
                     </node>
-                    <node concept="1YBJjd" id="74C6il$mLLK" role="2OEOjV">
+                    <node concept="1YBJjd" id="74C6il$mLLK" role="1urrMF">
                       <ref role="1YBMHb" node="74C6il$mGeV" resolve="dependency" />
                     </node>
                   </node>
@@ -441,7 +440,7 @@
                       <ref role="1YBMHb" node="74C6il$mGeV" resolve="dependency" />
                     </node>
                     <node concept="3TrEf2" id="74C6il$mLFz" role="2OqNvi">
-                      <ref role="3Tt5mk" to="ktbj:5pu6noS6Rpk" />
+                      <ref role="3Tt5mk" to="ktbj:5pu6noS6Rpk" resolve="to" />
                     </node>
                   </node>
                   <node concept="37vLTw" id="74C6il$mGjd" role="3uHU7B">
@@ -462,11 +461,11 @@
                             <ref role="3cqZAo" node="74C6il$mGiV" resolve="nextComponent" />
                           </node>
                           <node concept="3Tsc0h" id="74C6il$mGjm" role="2OqNvi">
-                            <ref role="3TtcxE" to="ktbj:5pu6noS5f57" />
+                            <ref role="3TtcxE" to="ktbj:5pu6noS5f57" resolve="dep" />
                           </node>
                         </node>
                         <node concept="13MTOL" id="74C6il$mGjn" role="2OqNvi">
-                          <ref role="13MTZf" to="ktbj:5pu6noS6Rpk" />
+                          <ref role="13MTZf" to="ktbj:5pu6noS6Rpk" resolve="to" />
                         </node>
                       </node>
                       <node concept="3zZkjj" id="74C6il$mGjo" role="2OqNvi">

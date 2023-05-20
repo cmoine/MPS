@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,10 @@
  */
 package jetbrains.mps.nodeEditor;
 
+import jetbrains.mps.editor.runtime.descriptor.EditorBuilderEnvironment;
 import jetbrains.mps.editor.runtime.style.StyleAttributes;
 import jetbrains.mps.editor.runtime.style.StyleImpl;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.AttributeOperations;
-import jetbrains.mps.nodeEditor.cells.EditorCellFactoryImpl;
 import jetbrains.mps.nodeEditor.cells.EditorCell_Basic;
 import jetbrains.mps.nodeEditor.cells.EditorCell_Collection;
 import jetbrains.mps.nodeEditor.cells.EditorCell_Constant;
@@ -26,18 +26,17 @@ import jetbrains.mps.nodeEditor.cells.EditorCell_Property;
 import jetbrains.mps.nodeEditor.cells.ModelAccessor;
 import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
+import jetbrains.mps.openapi.editor.cells.EditorCellFactory;
 import jetbrains.mps.openapi.editor.style.Style;
 import jetbrains.mps.openapi.editor.style.StyleAttribute;
+import jetbrains.mps.openapi.editor.style.StyleRegistry;
 import jetbrains.mps.openapi.editor.update.AttributeKind;
+import jetbrains.mps.openapi.editor.update.UpdateSession;
 import jetbrains.mps.smodel.SNodeUtil;
-import jetbrains.mps.smodel.runtime.ConceptDescriptor;
-import jetbrains.mps.smodel.runtime.illegal.IllegalConceptDescriptor;
-import jetbrains.mps.util.EqualUtil;
+import jetbrains.mps.smodel.adapter.structure.types.SPrimitiveTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
-import org.jetbrains.mps.openapi.language.SDataType;
-import org.jetbrains.mps.openapi.language.SPrimitiveDataType;
 import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
 import org.jetbrains.mps.openapi.model.SNode;
@@ -49,7 +48,7 @@ import java.util.Deque;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 
-public abstract class AbstractDefaultEditor extends DefaultNodeEditor {
+public abstract class AbstractDefaultEditor extends DefaultNodeEditor implements EditorBuilderEnvironment {
   private static final String NAME_NAME = "name";
   private static final int NAME_PRIORITY = 10000;
   private static final String IDENTIFIER_NAME = "identifier";
@@ -63,17 +62,20 @@ public abstract class AbstractDefaultEditor extends DefaultNodeEditor {
   private SConcept myConcept;
   private EditorContext myEditorContext;
 
-  private Deque<EditorCell_Collection> collectionStack = new LinkedList<EditorCell_Collection>();
+  private final boolean myReflectiveRoot;
+
+  private Deque<EditorCell_Collection> collectionStack = new LinkedList<>();
   private int currentCollectionIdNumber = 0;
   private int currentConstantIdNumber = 0;
 
-  private Collection<SProperty> myProperties = new LinkedHashSet<SProperty>();
-  private Collection<SReferenceLink> myReferenceLinks = new LinkedHashSet<SReferenceLink>();
-  private Collection<SContainmentLink> myContainmentLinks = new LinkedHashSet<SContainmentLink>();
+  private Collection<SProperty> myProperties = new LinkedHashSet<>();
+  private Collection<SReferenceLink> myReferenceLinks = new LinkedHashSet<>();
+  private Collection<SContainmentLink> myContainmentLinks = new LinkedHashSet<>();
 
 
-  public AbstractDefaultEditor(@NotNull SConcept concept) {
+  public AbstractDefaultEditor(@NotNull SConcept concept, boolean reflectiveRoot) {
     myConcept = concept;
+    myReflectiveRoot = reflectiveRoot;
   }
 
   @Override
@@ -85,6 +87,7 @@ public abstract class AbstractDefaultEditor extends DefaultNodeEditor {
     SProperty nameProperty = getNameProperty();
     EditorCell_Collection mainCellCollection = pushCollection();
     mainCellCollection.setBig(true);
+    mainCellCollection.setCellContext(getCellFactory().getCellContext());
     addLabel(camelToLabel(myConcept.getName()));
     addStyle(StyleAttributes.TEXT_BACKGROUND_COLOR, FIRST_LABEL_BACKGROUND_COLOR);
     if (nameProperty != null) {
@@ -109,7 +112,6 @@ public abstract class AbstractDefaultEditor extends DefaultNodeEditor {
 
     for (SReference sReference : mySNode.getReferences()) {
       SReferenceLink link = sReference.getLink();
-      assert link != null : "Null meta-link from node: " + this.mySNode + ", role: " + sReference.getRole();
       if (!link.getOwner().equals(SNodeUtil.concept_BaseConcept)) {
         myReferenceLinks.add(link);
       }
@@ -140,8 +142,7 @@ public abstract class AbstractDefaultEditor extends DefaultNodeEditor {
     SProperty nameProperty = null;
     int maxPriority = 0;
     for (SProperty property : getProperties()) {
-      SDataType dataType = property.getType();
-      if (!(dataType instanceof SPrimitiveDataType && ((SPrimitiveDataType) dataType).getType() == SPrimitiveDataType.STRING)) {
+      if (property.getType() != SPrimitiveTypes.STRING) {
         continue;
       }
       String propertyName = property.getName();
@@ -180,14 +181,10 @@ public abstract class AbstractDefaultEditor extends DefaultNodeEditor {
     addProperties();
     addLabel("");
     addNewLine();
-    myEditorContext.getCellFactory().pushCellContext();
-    myEditorContext.getCellFactory().removeCellContextHints(EditorCellFactoryImpl.BASE_REFLECTIVE_EDITOR_HINT);
-    try {
-      addChildren();
-    } finally {
-      myEditorContext.getCellFactory().popCellContext();
+    addChildren();
+    if (myReflectiveRoot) {
+      addAttributedEntity();
     }
-    addAttributedEntity();
     popCollection();
     addLabel("}");
     addStyle(StyleAttributes.MATCHING_LABEL, "body-brace");
@@ -250,6 +247,7 @@ public abstract class AbstractDefaultEditor extends DefaultNodeEditor {
     addNewLine();
     EditorCell editorCell = myEditorContext.getEditorComponent().getUpdater().getCurrentUpdateSession().getAttributedCell(attributeKind, mySNode);
     addCell(editorCell);
+    setIndent(editorCell);
     addNewLine();
   }
 
@@ -271,7 +269,7 @@ public abstract class AbstractDefaultEditor extends DefaultNodeEditor {
 
   protected void addLabel(String label, boolean editable) {
     EditorCell_Collection cellCollection = collectionStack.peek();
-    EditorCell_Constant childLabel = new EditorCell_Constant(myEditorContext, mySNode, label, editable);
+    EditorCell_Constant childLabel = new EditorCell_Constant(getEditorContext(), mySNode, label, editable);
     childLabel.setCellId("constant_" + currentConstantIdNumber);
     cellCollection.addEditorCell(childLabel);
     currentConstantIdNumber++;
@@ -308,7 +306,7 @@ public abstract class AbstractDefaultEditor extends DefaultNodeEditor {
   }
 
   protected EditorCell createReferentEditorCell(EditorContext editorContext, SReferenceLink link, final SNode targetNode) {
-    EditorCell_Property result = new EditorCell_Property(editorContext, new ModelAccessor() {
+    EditorCell_Property result = new EditorCell_Property(editorContext, new ModelAccessor.ReadOnly() {
       public String getText() {
         String name = targetNode.getName();
         if (name != null) {
@@ -316,15 +314,8 @@ public abstract class AbstractDefaultEditor extends DefaultNodeEditor {
         }
         return targetNode.getPresentation();
       }
-
-      public void setText(String s) {
-      }
-
-      public boolean isValidText(String s) {
-        return EqualUtil.equals(s, getText());
-      }
     }, targetNode);
-    result.setRole(link.getName());
+    result.setSRole(link);
     result.setReferenceCell(true);
     return result;
   }
@@ -343,7 +334,7 @@ public abstract class AbstractDefaultEditor extends DefaultNodeEditor {
 
 
   private EditorCell_Collection pushCollection() {
-    EditorCell_Collection newCollection = EditorCell_Collection.createIndent2(myEditorContext, mySNode);
+    EditorCell_Collection newCollection = EditorCell_Collection.createIndent2(getEditorContext(), mySNode);
     collectionStack.push(newCollection);
     return newCollection;
   }
@@ -392,20 +383,37 @@ public abstract class AbstractDefaultEditor extends DefaultNodeEditor {
     addStyle(cell, attribute, true);
   }
 
-  public static AbstractDefaultEditor createEditor(SNode node, ConceptDescriptor descriptor) {
-    //todo: remove getDeclarationNode() check when editor doesn't need concept node
-    return descriptor instanceof IllegalConceptDescriptor ? new ReadOnlyDefaultEditor(node.getConcept()) : new DefaultEditor(node.getConcept());
-  }
-
-  protected SNode getSNode() {
-    return mySNode;
+  public static AbstractDefaultEditor createEditor(SNode node, boolean reflectiveRoot) {
+    SConcept concept = node.getConcept();
+    boolean reflectiveEditorReadonly = EditorSettings.getInstance().isReflectiveEditorReadonly();
+    return concept.isValid() && !reflectiveEditorReadonly ? new DefaultEditor(concept, reflectiveRoot) : new ReadOnlyDefaultEditor(concept, reflectiveRoot);
   }
 
   protected SConcept getConcept() {
     return myConcept;
   }
 
-  protected EditorContext getEditorContext() {
+  public EditorContext getEditorContext() {
     return myEditorContext;
+  }
+
+  @Override
+  public SNode getNode() {
+    return mySNode;
+  }
+
+  @Override
+  public EditorCellFactory getCellFactory() {
+    return getUpdateSession().getCellFactory();
+  }
+
+  @Override
+  public UpdateSession getUpdateSession() {
+    return getEditorContext().getEditorComponent().getUpdater().getCurrentUpdateSession();
+  }
+
+  @Override
+  public StyleRegistry getStyleRegistry() {
+    return StyleRegistry.getInstance();
   }
 }

@@ -2,7 +2,7 @@
 <model ref="r:74325108-7c6d-42c1-8e54-4f0d750bf90f(jetbrains.mps.lang.editor.menus.substitute.testLanguage.behavior)">
   <persistence version="9" />
   <languages>
-    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="0" />
+    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="2" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -19,7 +19,6 @@
       <concept id="1225194413805" name="jetbrains.mps.lang.behavior.structure.ConceptConstructorDeclaration" flags="in" index="13hLZK" />
       <concept id="1225194472830" name="jetbrains.mps.lang.behavior.structure.ConceptMethodDeclaration" flags="ng" index="13i0hz">
         <property id="5864038008284099149" name="isStatic" index="2Ki8OM" />
-        <property id="1225194472833" name="isPrivate" index="13i0is" />
         <property id="1225194472832" name="isVirtual" index="13i0it" />
         <property id="1225194472834" name="isAbstract" index="13i0iv" />
         <reference id="1225194472831" name="overriddenMethod" index="13i0hy" />
@@ -55,13 +54,12 @@
     </language>
   </registry>
   <node concept="13h7C7" id="7XjOxAidALA">
-    <ref role="13h7C2" to="wdez:7XjOxAidyWy" resolve="TestSubstitituteSubChildAmbigousPosition" />
+    <ref role="13h7C2" to="wdez:7XjOxAidyWy" resolve="TestSubstituteAbstractSubChildAmbigousPosition" />
     <node concept="13hLZK" id="7XjOxAidALB" role="13h7CW">
       <node concept="3clFbS" id="7XjOxAidALC" role="2VODD2" />
     </node>
     <node concept="13i0hz" id="7XjOxAidALL" role="13h7CS">
       <property role="2Ki8OM" value="true" />
-      <property role="13i0is" value="false" />
       <property role="TrG5h" value="substituteInAmbigousPosition" />
       <property role="13i0it" value="false" />
       <property role="13i0iv" value="false" />
@@ -78,13 +76,12 @@
     </node>
   </node>
   <node concept="13h7C7" id="7XjOxAie5A8">
-    <ref role="13h7C2" to="wdez:7XjOxAidktF" resolve="TestSubstitituteAbstractChildAmbigousPosition" />
+    <ref role="13h7C2" to="wdez:7XjOxAidktF" resolve="TestSubstituteAbstractChildAmbigousPosition" />
     <node concept="13hLZK" id="7XjOxAie5A9" role="13h7CW">
       <node concept="3clFbS" id="7XjOxAie5Aa" role="2VODD2" />
     </node>
     <node concept="13i0hz" id="7XjOxAie5Aj" role="13h7CS">
       <property role="2Ki8OM" value="true" />
-      <property role="13i0is" value="false" />
       <property role="TrG5h" value="substituteInAmbigousPosition" />
       <property role="13i0it" value="false" />
       <property role="13i0iv" value="false" />

@@ -5,12 +5,9 @@ package jetbrains.mps.build.workflow.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.List;
 import java.util.Arrays;
@@ -20,13 +17,13 @@ import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public final class BwfPathDeclaration__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x698a8d22a10447a0L, 0xba8d10e3ec237f13L, 0x5c3f3e2c1cef4c10L, "jetbrains.mps.build.workflow.structure.BwfPathDeclaration");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<String> getPathId_id5KZfyKsWnkn = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getPathId").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("5KZfyKsWnkn").registry(REGISTRY).build();
-  public static final SMethod<Integer> getPriority_id1Mjrj7j4T5I = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("getPriority").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("1Mjrj7j4T5I").registry(REGISTRY).build();
+  public static final SMethod<String> getPathId_id5KZfyKsWnkn = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getPathId").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(6647099934207210775L).languageId(0xba8d10e3ec237f13L, 0x698a8d22a10447a0L).build2();
+  public static final SMethod<Integer> getPriority_id1Mjrj7j4T5I = new SMethodBuilder<Integer>(new SJavaCompoundTypeImpl(Integer.TYPE)).name("getPriority").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(2059109515400548718L).languageId(0xba8d10e3ec237f13L, 0x698a8d22a10447a0L).build2();
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getPathId_id5KZfyKsWnkn, getPriority_id1Mjrj7j4T5I);
 
@@ -34,14 +31,13 @@ public final class BwfPathDeclaration__BehaviorDescriptor extends BaseBHDescript
   }
 
   /*package*/ static String getPathId_id5KZfyKsWnkn(@NotNull SNode __thisNode__) {
-    return "path." + SPropertyOperations.getString(__thisNode__, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name"));
+    return "path." + SPropertyOperations.getString(__thisNode__, PROPS.name$MnvL);
   }
   /*package*/ static int getPriority_id1Mjrj7j4T5I(@NotNull SNode __thisNode__) {
     return 40;
   }
 
   /*package*/ BwfPathDeclaration__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -87,5 +83,9 @@ public final class BwfPathDeclaration__BehaviorDescriptor extends BaseBHDescript
   @Override
   public SAbstractConcept getConcept() {
     return CONCEPT;
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }

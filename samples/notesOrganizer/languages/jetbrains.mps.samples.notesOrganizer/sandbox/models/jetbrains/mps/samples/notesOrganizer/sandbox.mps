@@ -3,7 +3,6 @@
   <persistence version="9" />
   <languages>
     <use id="4b0f115a-8868-4d72-8d61-97071eaaa5f1" name="jetbrains.mps.samples.notesOrganizer" version="-1" />
-    <use id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core" version="1" />
   </languages>
   <imports>
     <import index="z60i" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.awt(JDK/)" implicit="true" />
@@ -16,9 +15,7 @@
       <concept id="8908453262579799883" name="jetbrains.mps.samples.notesOrganizer.structure.Priority" flags="ng" index="1HB3x0" />
       <concept id="8908453262579799880" name="jetbrains.mps.samples.notesOrganizer.structure.Category" flags="ng" index="1HB3x3" />
       <concept id="8908453262579799874" name="jetbrains.mps.samples.notesOrganizer.structure.Notes" flags="ng" index="1HB3x9">
-        <property id="3892287256989065823" name="showActive" index="1yAcNW" />
         <property id="3892287256989816165" name="selectedCategory" index="1yF7J6" />
-        <property id="8908453262580051923" name="presentation" index="1HSs3o" />
         <child id="8908453262579867207" name="notes" index="1HBN5c" />
       </concept>
       <concept id="8908453262579799877" name="jetbrains.mps.samples.notesOrganizer.structure.NotesConfiguration" flags="ng" index="1HB3xe">
@@ -99,8 +96,6 @@
   </node>
   <node concept="1HB3x9" id="7IxbKGmfxT6">
     <property role="TrG5h" value="My notes" />
-    <property role="1HSs3o" value="default" />
-    <property role="1yAcNW" value="false" />
     <property role="1yF7J6" value="" />
     <node concept="1HBdKA" id="7IxbKGmfz9r" role="1HBN5c">
       <ref role="1HBdK_" node="7IxbKGmfvcv" resolve="Critical" />

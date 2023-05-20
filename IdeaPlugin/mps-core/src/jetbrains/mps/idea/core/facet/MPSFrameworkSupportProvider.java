@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 package jetbrains.mps.idea.core.facet;
 
-import com.intellij.facet.Facet;
 import com.intellij.facet.FacetTypeRegistry;
 import com.intellij.facet.ui.FacetBasedFrameworkSupportProvider;
 import com.intellij.ide.util.frameworkSupport.FrameworkSupportConfigurableBase;
@@ -29,9 +28,12 @@ import com.intellij.openapi.roots.SourceFolder;
 import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
+import jetbrains.mps.ide.vfs.IdeaFileSystem;
+import jetbrains.mps.ide.vfs.VirtualFileUtils;
 import jetbrains.mps.persistence.DefaultModelRoot;
+import jetbrains.mps.project.structure.model.ModelRootDescriptor;
+import jetbrains.mps.vfs.IFile;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.mps.openapi.persistence.ModelRoot;
 
 import java.io.File;
 import java.util.Collection;
@@ -39,7 +41,7 @@ import java.util.Collection;
 /**
  * evgeny, 10/26/11
  */
-public class MPSFrameworkSupportProvider extends FacetBasedFrameworkSupportProvider {
+public class MPSFrameworkSupportProvider extends FacetBasedFrameworkSupportProvider<MPSFacet> {
   private MPSFrameworkSupportConfigurable myConfigurable;
 
   public MPSFrameworkSupportProvider() {
@@ -47,12 +49,16 @@ public class MPSFrameworkSupportProvider extends FacetBasedFrameworkSupportProvi
   }
 
   @Override
-  protected void setupConfiguration(Facet facet, ModifiableRootModel modifiableRootModel, FrameworkVersion frameworkVersion) {
+  protected void setupConfiguration(MPSFacet mpsFacet, ModifiableRootModel modifiableRootModel, FrameworkVersion frameworkVersion) {
     assert myConfigurable != null;
 
     // TODO: find better way to detect how to get proper content entry/sourceFolder from modifiableRootModel
     ContentEntry contentEntry = getContentEntry(modifiableRootModel);
     SourceFolder sourceFolder = getSourceFolder(contentEntry);
+    if (contentEntry == null) {
+      // XXX no idea what to do in this case, still it's better than to fail with NPE down the road
+      return;
+    }
 
     final String modelDirectoryPath = myConfigurable.getModelDirectoryPath();
     new File(modelDirectoryPath.replace('/', File.separatorChar)).mkdirs();
@@ -61,15 +67,21 @@ public class MPSFrameworkSupportProvider extends FacetBasedFrameworkSupportProvi
         return LocalFileSystem.getInstance().refreshAndFindFileByPath(modelDirectoryPath);
       }
     });
-
-    MPSFacet mpsFacet = (MPSFacet) facet;
     MPSConfigurationBean configurationBean = mpsFacet.getConfiguration().getBean();
-    DefaultModelRoot mr = new DefaultModelRoot();
-    mr.setContentRoot(contentEntry.getFile().getPath());
-    mr.addFile(DefaultModelRoot.SOURCE_ROOTS, modelDirectoryPath);
-    Collection<ModelRoot> oldRoots = configurationBean.getModelRoots();
-    oldRoots.add(mr);
-    configurationBean.setModelRoots(oldRoots);
+
+    if (contentEntry.getFile() != null && modelDirectory != null) {
+      final IdeaFileSystem projectFS = mpsFacet.getProject().getFileSystem();
+      IFile contentRoot = projectFS.fromVirtualFile(contentEntry.getFile());
+      // XXX DefaultModelRoot.createDescriptor can deal with File/Path, and modelDirectory is File initially (see above)
+      //     does it make any sense to go back and forth with File <-> VirtualFile <-> IFile?
+      IFile modelDir = projectFS.fromVirtualFile(modelDirectory);
+      if (contentRoot != null && modelDir != null) {
+        Collection<ModelRootDescriptor> oldRoots = configurationBean.getModelRootDescriptors();
+        oldRoots.add(DefaultModelRoot.createDescriptor(contentRoot, modelDir));
+        configurationBean.setModelRootDescriptors(oldRoots);
+      }
+      contentEntry.addSourceFolder(modelDirectory, false);
+    }
 
     if (configurationBean.getGeneratorOutputPath() == null && sourceFolder != null) {
       configurationBean.setGeneratorOutputPath(sourceFolder.getFile().getPath());
@@ -77,10 +89,6 @@ public class MPSFrameworkSupportProvider extends FacetBasedFrameworkSupportProvi
       configurationBean.setUseTransientOutputFolder(false);
     }
     mpsFacet.setConfiguration(configurationBean);
-
-    if (contentEntry != null) {
-      contentEntry.addSourceFolder(modelDirectory, false);
-    }
   }
 
   private ContentEntry getContentEntry(ModifiableRootModel rootModel) {

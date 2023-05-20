@@ -6,11 +6,11 @@ import com.intellij.psi.PsiElement;
 import com.intellij.refactoring.move.MoveCallback;
 import com.intellij.refactoring.move.MoveHandlerDelegate;
 import jetbrains.mps.ide.actions.MPSCommonDataKeys;
-import jetbrains.mps.ide.platform.actions.core.MoveNodesAction;
-import jetbrains.mps.ide.platform.actions.core.MoveNodesUtil;
-import jetbrains.mps.ide.platform.actions.core.MoveNodesActionHelper;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiRealNode;
 import jetbrains.mps.project.MPSProject;
+import jetbrains.mps.refactoring.participant.plugin.MoveNodesAction;
+import jetbrains.mps.refactoring.participant.plugin.MoveNodesActionHelper;
+import jetbrains.mps.refactoring.participant.plugin.MoveNodesUtil;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNode;
 

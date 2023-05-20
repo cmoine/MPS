@@ -4,7 +4,7 @@
   <imports>
     <import index="mhbf" ref="8865b7a8-5271-43d3-884c-6fd1d9cfdd34/java:org.jetbrains.mps.openapi.model(MPS.OpenAPI/)" implicit="true" />
     <import index="wyt6" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)" implicit="true" />
-    <import index="dj18" ref="~IDEA IC/java:com.intellij.psi(IDEA IC/)" implicit="true" />
+    <import index="dj19" ref="498d89d2-c2e9-11e2-ad49-6cf049e62fe5/java:com.intellij.psi(MPS.IDEA/)" implicit="true" />
     <import index="fo0m" ref="c1969cf6-0de2-4f84-9a6b-4019c52c438c/java:jetbrains.mps.idea.core.psi.impl(mps-core/)" implicit="true" />
   </imports>
   <registry>
@@ -138,8 +138,8 @@
       </node>
       <node concept="37vLTG" id="jvNGldhJ2_" role="3clF46">
         <property role="TrG5h" value="manager" />
-        <node concept="3uibUv" id="jvNGldhJ2A" role="1tU5fm">
-          <ref role="3uigEE" to="dj18:~PsiManager" resolve="PsiManager" />
+        <node concept="3uibUv" id="yGqCH4lnfx" role="1tU5fm">
+          <ref role="3uigEE" to="dj19:~PsiManager" resolve="PsiManager" />
         </node>
       </node>
       <node concept="3clFbS" id="7dfaalTbzjF" role="3clF47">

@@ -7,7 +7,9 @@ import jetbrains.mps.smodel.SNodePointer;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public class MakeVariableFinal_QuickFix extends QuickFix_Runtime {
   public MakeVariableFinal_QuickFix() {
@@ -17,6 +19,14 @@ public class MakeVariableFinal_QuickFix extends QuickFix_Runtime {
     return "Make Variable Final";
   }
   public void execute(SNode node) {
-    SPropertyOperations.set(SLinkOperations.getTarget(((SNode) MakeVariableFinal_QuickFix.this.getField("varRef")[0]), MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c77f1e98L, 0xf8cc6bf960L, "variableDeclaration")), MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c37a7f6eL, 0x111f9e9f00cL, "isFinal"), "" + (true));
+    SPropertyOperations.set(SLinkOperations.getTarget(((SNode) MakeVariableFinal_QuickFix.this.getField("varRef")[0]), LINKS.variableDeclaration$N1XG), PROPS.isFinal$gvTP, true);
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SReferenceLink variableDeclaration$N1XG = MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c77f1e98L, 0xf8cc6bf960L, "variableDeclaration");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty isFinal$gvTP = MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c37a7f6eL, 0x111f9e9f00cL, "isFinal");
   }
 }

@@ -2,7 +2,7 @@
 <model ref="r:9e44d7c5-70f5-4986-acea-57d3ad3ce28f(jetbrains.mps.build.intentions)">
   <persistence version="9" />
   <languages>
-    <use id="d7a92d38-f7db-40d0-8431-763b0c3c9f20" name="jetbrains.mps.lang.intentions" version="0" />
+    <use id="d7a92d38-f7db-40d0-8431-763b0c3c9f20" name="jetbrains.mps.lang.intentions" version="1" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -78,7 +78,7 @@
             <node concept="2OqwBi" id="2rlufiQSZ5k" role="2Oq$k0">
               <node concept="2Sf5sV" id="2rlufiQSZ53" role="2Oq$k0" />
               <node concept="3TrEf2" id="7zkpphtJnLz" role="2OqNvi">
-                <ref role="3Tt5mk" to="3ior:7zkpphtJnL6" />
+                <ref role="3Tt5mk" to="3ior:7zkpphtJnL6" resolve="customLocation" />
               </node>
             </node>
             <node concept="zfrQC" id="2rlufiQSZ5N" role="2OqNvi" />
@@ -93,7 +93,7 @@
             <node concept="2OqwBi" id="2rlufiQSZ4z" role="2Oq$k0">
               <node concept="2Sf5sV" id="2rlufiQSZ4i" role="2Oq$k0" />
               <node concept="3TrEf2" id="7zkpphtJnLv" role="2OqNvi">
-                <ref role="3Tt5mk" to="3ior:7zkpphtJnL6" />
+                <ref role="3Tt5mk" to="3ior:7zkpphtJnL6" resolve="customLocation" />
               </node>
             </node>
             <node concept="3w_OXm" id="2rlufiQSZ51" role="2OqNvi" />

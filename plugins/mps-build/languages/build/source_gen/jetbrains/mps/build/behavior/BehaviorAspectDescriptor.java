@@ -7,9 +7,9 @@ import jetbrains.mps.core.aspects.behaviour.api.BHDescriptor;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor {
   private final BHDescriptor myBuildLayout_EchoProperties__BehaviorDescriptor = new BuildLayout_EchoProperties__BehaviorDescriptor();
@@ -24,6 +24,7 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
   private final BHDescriptor myBuildInputSingleFolder__BehaviorDescriptor = new BuildInputSingleFolder__BehaviorDescriptor();
   private final BHDescriptor myBuildSourceArchiveRelativePath__BehaviorDescriptor = new BuildSourceArchiveRelativePath__BehaviorDescriptor();
   private final BHDescriptor myBuildLayout_CompileOutputOf__BehaviorDescriptor = new BuildLayout_CompileOutputOf__BehaviorDescriptor();
+  private final BHDescriptor myBuildSource_CompilablePart__BehaviorDescriptor = new BuildSource_CompilablePart__BehaviorDescriptor();
   private final BHDescriptor myBuildLayout_Files__BehaviorDescriptor = new BuildLayout_Files__BehaviorDescriptor();
   private final BHDescriptor myBuildSource_JavaContentFolder__BehaviorDescriptor = new BuildSource_JavaContentFolder__BehaviorDescriptor();
   private final BHDescriptor myBuildSource_JavaDependencyModule__BehaviorDescriptor = new BuildSource_JavaDependencyModule__BehaviorDescriptor();
@@ -79,8 +80,10 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
   private final BHDescriptor myBuildSourceMacroRelativePath__BehaviorDescriptor = new BuildSourceMacroRelativePath__BehaviorDescriptor();
   private final BHDescriptor myBuildLayout_EchoXml__BehaviorDescriptor = new BuildLayout_EchoXml__BehaviorDescriptor();
   private final BHDescriptor myBuildLayout_Filemode__BehaviorDescriptor = new BuildLayout_Filemode__BehaviorDescriptor();
+  private final BHDescriptor myBuildInputSingleFileAbsolutePath__BehaviorDescriptor = new BuildInputSingleFileAbsolutePath__BehaviorDescriptor();
   private final BHDescriptor myBuildLayout_Tar__BehaviorDescriptor = new BuildLayout_Tar__BehaviorDescriptor();
   private final BHDescriptor myBuildCompositePath__BehaviorDescriptor = new BuildCompositePath__BehaviorDescriptor();
+  private final BHDescriptor myBuildLayout_Comment__BehaviorDescriptor = new BuildLayout_Comment__BehaviorDescriptor();
   private final BHDescriptor myBuildLayout_File__BehaviorDescriptor = new BuildLayout_File__BehaviorDescriptor();
   private final BHDescriptor myBuildLayout_CustomCopy__BehaviorDescriptor = new BuildLayout_CustomCopy__BehaviorDescriptor();
   private final BHDescriptor myBuildLayout_AbstractCopy__BehaviorDescriptor = new BuildLayout_AbstractCopy__BehaviorDescriptor();
@@ -91,389 +94,163 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
 
   @Nullable
   public BHDescriptor getDescriptor(@NotNull SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_846f5o_a0yc.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return myBuildCompositePath__BehaviorDescriptor;
-          }
-          break;
-        case 1:
-          if (true) {
-            return myBuildExternalDependency__BehaviorDescriptor;
-          }
-          break;
-        case 2:
-          if (true) {
-            return myBuildExternalLayout__BehaviorDescriptor;
-          }
-          break;
-        case 3:
-          if (true) {
-            return myBuildExternalLayoutDependency__BehaviorDescriptor;
-          }
-          break;
-        case 4:
-          if (true) {
-            return myBuildFolderMacro__BehaviorDescriptor;
-          }
-          break;
-        case 5:
-          if (true) {
-            return myBuildInputFiles__BehaviorDescriptor;
-          }
-          break;
-        case 6:
-          if (true) {
-            return myBuildInputSingleFile__BehaviorDescriptor;
-          }
-          break;
-        case 7:
-          if (true) {
-            return myBuildInputSingleFolder__BehaviorDescriptor;
-          }
-          break;
-        case 8:
-          if (true) {
-            return myBuildJavaPlugin__BehaviorDescriptor;
-          }
-          break;
-        case 9:
-          if (true) {
-            return myBuildLayout__BehaviorDescriptor;
-          }
-          break;
-        case 10:
-          if (true) {
-            return myBuildLayout_AbstractContainer__BehaviorDescriptor;
-          }
-          break;
-        case 11:
-          if (true) {
-            return myBuildLayout_AbstractCopy__BehaviorDescriptor;
-          }
-          break;
-        case 12:
-          if (true) {
-            return myBuildLayout_CompileOutputOf__BehaviorDescriptor;
-          }
-          break;
-        case 13:
-          if (true) {
-            return myBuildLayout_Container__BehaviorDescriptor;
-          }
-          break;
-        case 14:
-          if (true) {
-            return myBuildLayout_ContainerAcceptingFileSet__BehaviorDescriptor;
-          }
-          break;
-        case 15:
-          if (true) {
-            return myBuildLayout_Copy__BehaviorDescriptor;
-          }
-          break;
-        case 16:
-          if (true) {
-            return myBuildLayout_CopyProcessor__BehaviorDescriptor;
-          }
-          break;
-        case 17:
-          if (true) {
-            return myBuildLayout_CustomCopy__BehaviorDescriptor;
-          }
-          break;
-        case 18:
-          if (true) {
-            return myBuildLayout_EchoProperties__BehaviorDescriptor;
-          }
-          break;
-        case 19:
-          if (true) {
-            return myBuildLayout_EchoXml__BehaviorDescriptor;
-          }
-          break;
-        case 20:
-          if (true) {
-            return myBuildLayout_ExportAsJavaLibrary__BehaviorDescriptor;
-          }
-          break;
-        case 21:
-          if (true) {
-            return myBuildLayout_File__BehaviorDescriptor;
-          }
-          break;
-        case 22:
-          if (true) {
-            return myBuildLayout_FileSet__BehaviorDescriptor;
-          }
-          break;
-        case 23:
-          if (true) {
-            return myBuildLayout_FileStub__BehaviorDescriptor;
-          }
-          break;
-        case 24:
-          if (true) {
-            return myBuildLayout_Filemode__BehaviorDescriptor;
-          }
-          break;
-        case 25:
-          if (true) {
-            return myBuildLayout_Files__BehaviorDescriptor;
-          }
-          break;
-        case 26:
-          if (true) {
-            return myBuildLayout_Folder__BehaviorDescriptor;
-          }
-          break;
-        case 27:
-          if (true) {
-            return myBuildLayout_Import__BehaviorDescriptor;
-          }
-          break;
-        case 28:
-          if (true) {
-            return myBuildLayout_ImportContent__BehaviorDescriptor;
-          }
-          break;
-        case 29:
-          if (true) {
-            return myBuildLayout_InJarNode__BehaviorDescriptor;
-          }
-          break;
-        case 30:
-          if (true) {
-            return myBuildLayout_Jar__BehaviorDescriptor;
-          }
-          break;
-        case 31:
-          if (true) {
-            return myBuildLayout_JarManifest__BehaviorDescriptor;
-          }
-          break;
-        case 32:
-          if (true) {
-            return myBuildLayout_JarManifest_Attribute__BehaviorDescriptor;
-          }
-          break;
-        case 33:
-          if (true) {
-            return myBuildLayout_NamedContainer__BehaviorDescriptor;
-          }
-          break;
-        case 34:
-          if (true) {
-            return myBuildLayout_Node__BehaviorDescriptor;
-          }
-          break;
-        case 35:
-          if (true) {
-            return myBuildLayout_PathElement__BehaviorDescriptor;
-          }
-          break;
-        case 36:
-          if (true) {
-            return myBuildLayout_Tar__BehaviorDescriptor;
-          }
-          break;
-        case 37:
-          if (true) {
-            return myBuildLayout_TransparentContainer__BehaviorDescriptor;
-          }
-          break;
-        case 38:
-          if (true) {
-            return myBuildLayout_War__BehaviorDescriptor;
-          }
-          break;
-        case 39:
-          if (true) {
-            return myBuildLayout_Zip__BehaviorDescriptor;
-          }
-          break;
-        case 40:
-          if (true) {
-            return myBuildMacro__BehaviorDescriptor;
-          }
-          break;
-        case 41:
-          if (true) {
-            return myBuildNamedLayout__BehaviorDescriptor;
-          }
-          break;
-        case 42:
-          if (true) {
-            return myBuildPlugin__BehaviorDescriptor;
-          }
-          break;
-        case 43:
-          if (true) {
-            return myBuildProject__BehaviorDescriptor;
-          }
-          break;
-        case 44:
-          if (true) {
-            return myBuildProjectDependency__BehaviorDescriptor;
-          }
-          break;
-        case 45:
-          if (true) {
-            return myBuildRelativePath__BehaviorDescriptor;
-          }
-          break;
-        case 46:
-          if (true) {
-            return myBuildSourceArchiveRelativePath__BehaviorDescriptor;
-          }
-          break;
-        case 47:
-          if (true) {
-            return myBuildSourceMacroRelativePath__BehaviorDescriptor;
-          }
-          break;
-        case 48:
-          if (true) {
-            return myBuildSourcePath__BehaviorDescriptor;
-          }
-          break;
-        case 49:
-          if (true) {
-            return myBuildSourceProjectRelativePath__BehaviorDescriptor;
-          }
-          break;
-        case 50:
-          if (true) {
-            return myBuildSource_JavaCP__BehaviorDescriptor;
-          }
-          break;
-        case 51:
-          if (true) {
-            return myBuildSource_JavaContentFolder__BehaviorDescriptor;
-          }
-          break;
-        case 52:
-          if (true) {
-            return myBuildSource_JavaDependencyExternalJar__BehaviorDescriptor;
-          }
-          break;
-        case 53:
-          if (true) {
-            return myBuildSource_JavaDependencyExternalJarInFolder__BehaviorDescriptor;
-          }
-          break;
-        case 54:
-          if (true) {
-            return myBuildSource_JavaDependencyLibrary__BehaviorDescriptor;
-          }
-          break;
-        case 55:
-          if (true) {
-            return myBuildSource_JavaDependencyModule__BehaviorDescriptor;
-          }
-          break;
-        case 56:
-          if (true) {
-            return myBuildSource_JavaExternalJarFolderRef__BehaviorDescriptor;
-          }
-          break;
-        case 57:
-          if (true) {
-            return myBuildSource_JavaExternalJarRef__BehaviorDescriptor;
-          }
-          break;
-        case 58:
-          if (true) {
-            return myBuildSource_JavaLibrary__BehaviorDescriptor;
-          }
-          break;
-        case 59:
-          if (true) {
-            return myBuildSource_JavaLibraryExternalJar__BehaviorDescriptor;
-          }
-          break;
-        case 60:
-          if (true) {
-            return myBuildSource_JavaLibraryExternalJarFolder__BehaviorDescriptor;
-          }
-          break;
-        case 61:
-          if (true) {
-            return myBuildSource_JavaModule__BehaviorDescriptor;
-          }
-          break;
-        case 62:
-          if (true) {
-            return myBuildSource_JavaOptions__BehaviorDescriptor;
-          }
-          break;
-        case 63:
-          if (true) {
-            return myBuildSource_SingleFile__BehaviorDescriptor;
-          }
-          break;
-        case 64:
-          if (true) {
-            return myBuildSource_SingleFolder__BehaviorDescriptor;
-          }
-          break;
-        case 65:
-          if (true) {
-            return myBuildString__BehaviorDescriptor;
-          }
-          break;
-        case 66:
-          if (true) {
-            return myBuildStringContainer__BehaviorDescriptor;
-          }
-          break;
-        case 67:
-          if (true) {
-            return myBuildStringPart__BehaviorDescriptor;
-          }
-          break;
-        case 68:
-          if (true) {
-            return myBuildTextStringPart__BehaviorDescriptor;
-          }
-          break;
-        case 69:
-          if (true) {
-            return myBuildVarRefStringPart__BehaviorDescriptor;
-          }
-          break;
-        case 70:
-          if (true) {
-            return myBuildVariableMacro__BehaviorDescriptor;
-          }
-          break;
-        case 71:
-          if (true) {
-            return myBuildVariableMacroInitValue__BehaviorDescriptor;
-          }
-          break;
-        case 72:
-          if (true) {
-            return myIWorkflowParticipant__BehaviorDescriptor;
-          }
-          break;
-        default:
-          // default 
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return myBuildCompositePath__BehaviorDescriptor;
+      case 1:
+        return myBuildExternalDependency__BehaviorDescriptor;
+      case 2:
+        return myBuildExternalLayout__BehaviorDescriptor;
+      case 3:
+        return myBuildExternalLayoutDependency__BehaviorDescriptor;
+      case 4:
+        return myBuildFolderMacro__BehaviorDescriptor;
+      case 5:
+        return myBuildInputFiles__BehaviorDescriptor;
+      case 6:
+        return myBuildInputSingleFile__BehaviorDescriptor;
+      case 7:
+        return myBuildInputSingleFileAbsolutePath__BehaviorDescriptor;
+      case 8:
+        return myBuildInputSingleFolder__BehaviorDescriptor;
+      case 9:
+        return myBuildJavaPlugin__BehaviorDescriptor;
+      case 10:
+        return myBuildLayout__BehaviorDescriptor;
+      case 11:
+        return myBuildLayout_AbstractContainer__BehaviorDescriptor;
+      case 12:
+        return myBuildLayout_AbstractCopy__BehaviorDescriptor;
+      case 13:
+        return myBuildLayout_Comment__BehaviorDescriptor;
+      case 14:
+        return myBuildLayout_CompileOutputOf__BehaviorDescriptor;
+      case 15:
+        return myBuildLayout_Container__BehaviorDescriptor;
+      case 16:
+        return myBuildLayout_ContainerAcceptingFileSet__BehaviorDescriptor;
+      case 17:
+        return myBuildLayout_Copy__BehaviorDescriptor;
+      case 18:
+        return myBuildLayout_CopyProcessor__BehaviorDescriptor;
+      case 19:
+        return myBuildLayout_CustomCopy__BehaviorDescriptor;
+      case 20:
+        return myBuildLayout_EchoProperties__BehaviorDescriptor;
+      case 21:
+        return myBuildLayout_EchoXml__BehaviorDescriptor;
+      case 22:
+        return myBuildLayout_ExportAsJavaLibrary__BehaviorDescriptor;
+      case 23:
+        return myBuildLayout_File__BehaviorDescriptor;
+      case 24:
+        return myBuildLayout_FileSet__BehaviorDescriptor;
+      case 25:
+        return myBuildLayout_FileStub__BehaviorDescriptor;
+      case 26:
+        return myBuildLayout_Filemode__BehaviorDescriptor;
+      case 27:
+        return myBuildLayout_Files__BehaviorDescriptor;
+      case 28:
+        return myBuildLayout_Folder__BehaviorDescriptor;
+      case 29:
+        return myBuildLayout_Import__BehaviorDescriptor;
+      case 30:
+        return myBuildLayout_ImportContent__BehaviorDescriptor;
+      case 31:
+        return myBuildLayout_InJarNode__BehaviorDescriptor;
+      case 32:
+        return myBuildLayout_Jar__BehaviorDescriptor;
+      case 33:
+        return myBuildLayout_JarManifest__BehaviorDescriptor;
+      case 34:
+        return myBuildLayout_JarManifest_Attribute__BehaviorDescriptor;
+      case 35:
+        return myBuildLayout_NamedContainer__BehaviorDescriptor;
+      case 36:
+        return myBuildLayout_Node__BehaviorDescriptor;
+      case 37:
+        return myBuildLayout_PathElement__BehaviorDescriptor;
+      case 38:
+        return myBuildLayout_Tar__BehaviorDescriptor;
+      case 39:
+        return myBuildLayout_TransparentContainer__BehaviorDescriptor;
+      case 40:
+        return myBuildLayout_War__BehaviorDescriptor;
+      case 41:
+        return myBuildLayout_Zip__BehaviorDescriptor;
+      case 42:
+        return myBuildMacro__BehaviorDescriptor;
+      case 43:
+        return myBuildNamedLayout__BehaviorDescriptor;
+      case 44:
+        return myBuildPlugin__BehaviorDescriptor;
+      case 45:
+        return myBuildProject__BehaviorDescriptor;
+      case 46:
+        return myBuildProjectDependency__BehaviorDescriptor;
+      case 47:
+        return myBuildRelativePath__BehaviorDescriptor;
+      case 48:
+        return myBuildSourceArchiveRelativePath__BehaviorDescriptor;
+      case 49:
+        return myBuildSourceMacroRelativePath__BehaviorDescriptor;
+      case 50:
+        return myBuildSourcePath__BehaviorDescriptor;
+      case 51:
+        return myBuildSourceProjectRelativePath__BehaviorDescriptor;
+      case 52:
+        return myBuildSource_CompilablePart__BehaviorDescriptor;
+      case 53:
+        return myBuildSource_JavaCP__BehaviorDescriptor;
+      case 54:
+        return myBuildSource_JavaContentFolder__BehaviorDescriptor;
+      case 55:
+        return myBuildSource_JavaDependencyExternalJar__BehaviorDescriptor;
+      case 56:
+        return myBuildSource_JavaDependencyExternalJarInFolder__BehaviorDescriptor;
+      case 57:
+        return myBuildSource_JavaDependencyLibrary__BehaviorDescriptor;
+      case 58:
+        return myBuildSource_JavaDependencyModule__BehaviorDescriptor;
+      case 59:
+        return myBuildSource_JavaExternalJarFolderRef__BehaviorDescriptor;
+      case 60:
+        return myBuildSource_JavaExternalJarRef__BehaviorDescriptor;
+      case 61:
+        return myBuildSource_JavaLibrary__BehaviorDescriptor;
+      case 62:
+        return myBuildSource_JavaLibraryExternalJar__BehaviorDescriptor;
+      case 63:
+        return myBuildSource_JavaLibraryExternalJarFolder__BehaviorDescriptor;
+      case 64:
+        return myBuildSource_JavaModule__BehaviorDescriptor;
+      case 65:
+        return myBuildSource_JavaOptions__BehaviorDescriptor;
+      case 66:
+        return myBuildSource_SingleFile__BehaviorDescriptor;
+      case 67:
+        return myBuildSource_SingleFolder__BehaviorDescriptor;
+      case 68:
+        return myBuildString__BehaviorDescriptor;
+      case 69:
+        return myBuildStringContainer__BehaviorDescriptor;
+      case 70:
+        return myBuildStringPart__BehaviorDescriptor;
+      case 71:
+        return myBuildTextStringPart__BehaviorDescriptor;
+      case 72:
+        return myBuildVarRefStringPart__BehaviorDescriptor;
+      case 73:
+        return myBuildVariableMacro__BehaviorDescriptor;
+      case 74:
+        return myBuildVariableMacroInitValue__BehaviorDescriptor;
+      case 75:
+        return myIWorkflowParticipant__BehaviorDescriptor;
+      default:
     }
     return null;
   }
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
-  }
-  private static final Map<SAbstractConcept, Integer> indices_846f5o_a0yc = buildConceptIndices(MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x779c6e65c01467f1L, "jetbrains.mps.build.structure.BuildCompositePath"), MetaAdapterFactory.getInterfaceConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0xbabdfbeee1a36a3L, "jetbrains.mps.build.structure.BuildExternalDependency"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x63a87b9320d0bfc9L, "jetbrains.mps.build.structure.BuildExternalLayout"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x63a87b9320d3d0a4L, "jetbrains.mps.build.structure.BuildExternalLayoutDependency"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafadd002L, "jetbrains.mps.build.structure.BuildFolderMacro"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db92245a4L, "jetbrains.mps.build.structure.BuildInputFiles"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db9224596L, "jetbrains.mps.build.structure.BuildInputSingleFile"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x1ff930b22643b0ffL, "jetbrains.mps.build.structure.BuildInputSingleFolder"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x5c3f3e2c1ce9ac67L, "jetbrains.mps.build.structure.BuildJavaPlugin"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a14L, "jetbrains.mps.build.structure.BuildLayout"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafabcf0cL, "jetbrains.mps.build.structure.BuildLayout_AbstractContainer"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7f76698a394d9b91L, "jetbrains.mps.build.structure.BuildLayout_AbstractCopy"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x23f6fd361bdcfd24L, "jetbrains.mps.build.structure.BuildLayout_CompileOutputOf"), MetaAdapterFactory.getInterfaceConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4140393b234482c3L, "jetbrains.mps.build.structure.BuildLayout_Container"), MetaAdapterFactory.getInterfaceConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db927f229L, "jetbrains.mps.build.structure.BuildLayout_ContainerAcceptingFileSet"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db92339b9L, "jetbrains.mps.build.structure.BuildLayout_Copy"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x127671bd5d12a2c2L, "jetbrains.mps.build.structure.BuildLayout_CopyProcessor"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7f76698a394d9ab2L, "jetbrains.mps.build.structure.BuildLayout_CustomCopy"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x2d0f82f7bfda46aL, "jetbrains.mps.build.structure.BuildLayout_EchoProperties"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x6a3e160a3eff6a94L, "jetbrains.mps.build.structure.BuildLayout_EchoXml"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x286d67dde534f69bL, "jetbrains.mps.build.structure.BuildLayout_ExportAsJavaLibrary"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7ea63ceef6e8c0edL, "jetbrains.mps.build.structure.BuildLayout_File"), MetaAdapterFactory.getInterfaceConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0xf82aae5acb92269L, "jetbrains.mps.build.structure.BuildLayout_FileSet"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x63a87b9320d31b36L, "jetbrains.mps.build.structure.BuildLayout_FileStub"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x6c4335df4e838e40L, "jetbrains.mps.build.structure.BuildLayout_Filemode"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x262a04c08b56faffL, "jetbrains.mps.build.structure.BuildLayout_Files"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafac4c78L, "jetbrains.mps.build.structure.BuildLayout_Folder"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0xbabdfbeee1350f2L, "jetbrains.mps.build.structure.BuildLayout_Import"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86af9fdb53L, "jetbrains.mps.build.structure.BuildLayout_ImportContent"), MetaAdapterFactory.getInterfaceConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x52da585100c24b07L, "jetbrains.mps.build.structure.BuildLayout_InJarNode"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafac7f9aL, "jetbrains.mps.build.structure.BuildLayout_Jar"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x115d3b22faf20f2eL, "jetbrains.mps.build.structure.BuildLayout_JarManifest"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x115d3b22faf20f30L, "jetbrains.mps.build.structure.BuildLayout_JarManifest_Attribute"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafac7f8cL, "jetbrains.mps.build.structure.BuildLayout_NamedContainer"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafac4c85L, "jetbrains.mps.build.structure.BuildLayout_Node"), MetaAdapterFactory.getInterfaceConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x62ec2ed0f87da183L, "jetbrains.mps.build.structure.BuildLayout_PathElement"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7709f0532a526203L, "jetbrains.mps.build.structure.BuildLayout_Tar"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x286d67dde532a284L, "jetbrains.mps.build.structure.BuildLayout_TransparentContainer"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x60b09627fedeb73cL, "jetbrains.mps.build.structure.BuildLayout_War"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafac7f97L, "jetbrains.mps.build.structure.BuildLayout_Zip"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a1fL, "jetbrains.mps.build.structure.BuildMacro"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x31292e1a60d9f330L, "jetbrains.mps.build.structure.BuildNamedLayout"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x5c3f3e2c1ce9819eL, "jetbrains.mps.build.structure.BuildPlugin"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a13L, "jetbrains.mps.build.structure.BuildProject"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd908c220L, "jetbrains.mps.build.structure.BuildProjectDependency"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x65997a657729f6fbL, "jetbrains.mps.build.structure.BuildRelativePath"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x233d92f9e348d768L, "jetbrains.mps.build.structure.BuildSourceArchiveRelativePath"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafae121dL, "jetbrains.mps.build.structure.BuildSourceMacroRelativePath"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafacdc3eL, "jetbrains.mps.build.structure.BuildSourcePath"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4c12642949048fb2L, "jetbrains.mps.build.structure.BuildSourceProjectRelativePath"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3395e884b61c2404L, "jetbrains.mps.build.structure.BuildSource_JavaCP"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263ae7d4319546c6L, "jetbrains.mps.build.structure.BuildSource_JavaContentFolder"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x5f32ae3ef3770dd4L, "jetbrains.mps.build.structure.BuildSource_JavaDependencyExternalJar"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4c1fa58d992addeL, "jetbrains.mps.build.structure.BuildSource_JavaDependencyExternalJarInFolder"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd9079dceL, "jetbrains.mps.build.structure.BuildSource_JavaDependencyLibrary"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263ae7d4319896a7L, "jetbrains.mps.build.structure.BuildSource_JavaDependencyModule"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb65a3fL, "jetbrains.mps.build.structure.BuildSource_JavaExternalJarFolderRef"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb2f64cL, "jetbrains.mps.build.structure.BuildSource_JavaExternalJarRef"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x540febaa6144b873L, "jetbrains.mps.build.structure.BuildSource_JavaLibrary"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb50da7L, "jetbrains.mps.build.structure.BuildSource_JavaLibraryExternalJar"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb65af8L, "jetbrains.mps.build.structure.BuildSource_JavaLibraryExternalJarFolder"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafacdc38L, "jetbrains.mps.build.structure.BuildSource_JavaModule"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0xcdff0e1a96739c2L, "jetbrains.mps.build.structure.BuildSource_JavaOptions"), MetaAdapterFactory.getInterfaceConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afa57ad2L, "jetbrains.mps.build.structure.BuildSource_SingleFile"), MetaAdapterFactory.getInterfaceConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb659d7L, "jetbrains.mps.build.structure.BuildSource_SingleFolder"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3cca41cd0fe51d4fL, "jetbrains.mps.build.structure.BuildString"), MetaAdapterFactory.getInterfaceConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7f76698a3953bbb4L, "jetbrains.mps.build.structure.BuildStringContainer"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7cffL, "jetbrains.mps.build.structure.BuildStringPart"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d03L, "jetbrains.mps.build.structure.BuildTextStringPart"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d01L, "jetbrains.mps.build.structure.BuildVarRefStringPart"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3449288aa0d560e2L, "jetbrains.mps.build.structure.BuildVariableMacro"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263c91972cd1e1aaL, "jetbrains.mps.build.structure.BuildVariableMacroInitValue"), MetaAdapterFactory.getInterfaceConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x546bf9ab92fe0b3fL, "jetbrains.mps.build.structure.IWorkflowParticipant"));
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x779c6e65c01467f1L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0xbabdfbeee1a36a3L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x63a87b9320d0bfc9L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x63a87b9320d3d0a4L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafadd002L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db92245a4L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db9224596L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x72b7d8e699d63212L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x1ff930b22643b0ffL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x5c3f3e2c1ce9ac67L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a14L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafabcf0cL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7f76698a394d9b91L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7ea63ceef6dea0cbL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x23f6fd361bdcfd24L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4140393b234482c3L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db927f229L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db92339b9L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x127671bd5d12a2c2L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7f76698a394d9ab2L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x2d0f82f7bfda46aL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x6a3e160a3eff6a94L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x286d67dde534f69bL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7ea63ceef6e8c0edL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0xf82aae5acb92269L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x63a87b9320d31b36L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x6c4335df4e838e40L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x262a04c08b56faffL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafac4c78L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0xbabdfbeee1350f2L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86af9fdb53L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x52da585100c24b07L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafac7f9aL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x115d3b22faf20f2eL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x115d3b22faf20f30L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafac7f8cL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafac4c85L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x62ec2ed0f87da183L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7709f0532a526203L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x286d67dde532a284L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x60b09627fedeb73cL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafac7f97L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a1fL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x31292e1a60d9f330L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x5c3f3e2c1ce9819eL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a13L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd908c220L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x65997a657729f6fbL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x233d92f9e348d768L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafae121dL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafacdc3eL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4c12642949048fb2L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x23f6fd361bdcfd27L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3395e884b61c2404L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263ae7d4319546c6L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x5f32ae3ef3770dd4L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4c1fa58d992addeL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd9079dceL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263ae7d4319896a7L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb65a3fL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb2f64cL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x540febaa6144b873L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb50da7L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb65af8L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafacdc38L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0xcdff0e1a96739c2L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afa57ad2L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb659d7L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3cca41cd0fe51d4fL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7f76698a3953bbb4L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7cffL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d03L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d01L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3449288aa0d560e2L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263c91972cd1e1aaL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x546bf9ab92fe0b3fL)).seal();
 }

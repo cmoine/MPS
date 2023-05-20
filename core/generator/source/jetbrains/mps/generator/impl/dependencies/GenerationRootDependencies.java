@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,12 +17,8 @@ package jetbrains.mps.generator.impl.dependencies;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
-import org.jetbrains.mps.openapi.model.SModel;
-import org.jetbrains.mps.openapi.model.SModelReference;
-import org.jetbrains.mps.openapi.model.SNode;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -93,7 +89,7 @@ public class GenerationRootDependencies {
   }
 
   public List<String> getFiles() {
-    return myGeneratedFiles == null ? Collections.<String>emptyList() : Collections.unmodifiableList(myGeneratedFiles);
+    return myGeneratedFiles == null ? Collections.emptyList() : Collections.unmodifiableList(myGeneratedFiles);
   }
 
   public void addGeneratedFile(String name) {
@@ -101,7 +97,7 @@ public class GenerationRootDependencies {
       throw new IllegalArgumentException("name is null");
     }
     if (myGeneratedFiles == null) {
-      myGeneratedFiles = new ArrayList<String>(2);
+      myGeneratedFiles = new ArrayList<>(2);
     }
     if (!myGeneratedFiles.contains(name)) {
       myGeneratedFiles.add(name);
@@ -155,9 +151,9 @@ public class GenerationRootDependencies {
     String rootHash = getValue(element, ATTR_HASH);
     boolean dependsOnConditionals = "true".equals(getValue(element, ATTR_DEPENDS_ON_CONDITIONALS));
     boolean dependsOnNodes = "true".equals(getValue(element, ATTR_DEPENDS_ON_NODES));
-    ArrayList<String> local = new ArrayList<String>();
-    ArrayList<String> external = new ArrayList<String>();
-    ArrayList<String> files = new ArrayList<String>();
+    ArrayList<String> local = new ArrayList<>();
+    ArrayList<String> external = new ArrayList<>();
+    ArrayList<String> files = new ArrayList<>();
     for (Element e : element.getChildren(NODE_DEPENDS_ON)) {
       Attribute attr = e.getAttribute(ATTR_ROOT_ID);
       if (attr != null) {
@@ -176,30 +172,5 @@ public class GenerationRootDependencies {
     external.trimToSize();
     files.trimToSize();
     return new GenerationRootDependencies(rootId, rootName, rootHash, dependsOnConditionals, dependsOnNodes, local, external, files);
-  }
-
-  public static GenerationRootDependencies fromData(RootDependenciesBuilder l) {
-    final Collection<SNode> localNodes = l.getDependsOn();
-    final Collection<SModel> externalModels = l.getDependsOnModels();
-
-    List<String> local = new ArrayList<String>(localNodes.size());
-    for (SNode n : localNodes) {
-      local.add(n.getNodeId().toString());
-    }
-    Collections.sort(local);
-
-    List<String> external = new ArrayList<String>(externalModels.size());
-    for (SModel m : externalModels) {
-      final SModelReference modelRef = m.getReference();
-      external.add(modelRef.toString());
-    }
-    Collections.sort(external);
-
-    final SNode originalRoot = l.getOriginalRoot();
-    return new GenerationRootDependencies(
-      originalRoot != null ? originalRoot.getNodeId().toString() : null,
-      originalRoot != null ? originalRoot.getName() : null,
-      l.getHash(), l.isDependsOnConditionals(), l.isDependsOnModelNodes(),
-      local, external, null);
   }
 }

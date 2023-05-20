@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.jps.make.fileUtil;
 
 import org.jetbrains.annotations.NotNull;
@@ -25,16 +24,16 @@ import java.util.Arrays;
 import static com.intellij.openapi.util.io.FileUtil.toSystemDependentName;
 
 public class FileFinder {
-  private final String[] myDirsToScan;
+  private final File[] myDirsToScan;
 
-  public FileFinder(String... dirsToScan) {
+  public FileFinder(File... dirsToScan) {
     myDirsToScan = dirsToScan;
   }
 
   @Nullable
   public File find(String filePath) {
     File locFile = null;
-    for (String dir : myDirsToScan) {
+    for (File dir : myDirsToScan) {
       locFile = findFileUnder(dir, filePath);
       if (locFile != null) break;
     }
@@ -51,7 +50,7 @@ public class FileFinder {
   }
 
   @Nullable
-  private static File findFileUnder(String baseDir, String relativePath) {
+  private static File findFileUnder(File baseDir, String relativePath) {
     File file = new File(baseDir, toSystemDependentName(relativePath));
     if (file.exists()) {
       return file;

@@ -5,7 +5,6 @@ package jetbrains.mps.lang.editor.table.runtime;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import jetbrains.mps.openapi.editor.EditorContext;
-import jetbrains.mps.smodel.adapter.MetaAdapterByDeclaration;
 import java.util.List;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
@@ -23,11 +22,11 @@ public class XYCTableModel implements TableModel {
   private SContainmentLink ylink;
   private SContainmentLink clink;
   private EditorContext editorCtx;
-  public XYCTableModel(SNode node, SNode xlink, SNode ylink, SNode clink, EditorContext editorContext) {
+  public XYCTableModel(SNode node, SContainmentLink xlink, SContainmentLink ylink, SContainmentLink clink, EditorContext editorContext) {
     this.node = node;
-    this.xlink = MetaAdapterByDeclaration.getContainmentLink(xlink);
-    this.ylink = MetaAdapterByDeclaration.getContainmentLink(ylink);
-    this.clink = MetaAdapterByDeclaration.getContainmentLink(clink);
+    this.xlink = xlink;
+    this.ylink = ylink;
+    this.clink = clink;
     this.editorCtx = editorContext;
   }
   public List<SNode> x() {
@@ -57,11 +56,11 @@ public class XYCTableModel implements TableModel {
   @Override
   public void insertColumn(int columnNumber) {
     SAbstractConcept c1 = xlink.getTargetConcept();
-    Utils.insertElementAt(x(), SNodeFactoryOperations.createNewNode(SNodeFactoryOperations.asInstanceConcept(c1), null), columnNumber - 1);
+    Utils.insertElementAt(x(), SNodeFactoryOperations.createNewNode(c1, null), columnNumber - 1);
     for (int i = 0; i < getRowCount() - 1; i++) {
       int idx = dataidx(i + 1, columnNumber);
       SAbstractConcept c2 = clink.getTargetConcept();
-      Utils.insertElementAt(c(), SNodeFactoryOperations.createNewNode(SNodeFactoryOperations.asInstanceConcept(c2), null), idx);
+      Utils.insertElementAt(c(), SNodeFactoryOperations.createNewNode(c2, null), idx);
     }
   }
   @Override
@@ -73,11 +72,11 @@ public class XYCTableModel implements TableModel {
       rowNumber = 1;
     }
     SAbstractConcept c1 = ylink.getTargetConcept();
-    Utils.insertElementAt(y(), SNodeFactoryOperations.createNewNode(SNodeFactoryOperations.asInstanceConcept(c1), null), rowNumber - 1);
+    Utils.insertElementAt(y(), SNodeFactoryOperations.createNewNode(c1, null), rowNumber - 1);
     for (int i = 0; i < getColumnCount() - 1; i++) {
       int idx = dataidx(rowNumber, i + 1);
       SAbstractConcept c2 = clink.getTargetConcept();
-      Utils.insertElementAt(c(), SNodeFactoryOperations.createNewNode(SNodeFactoryOperations.asInstanceConcept(c2), null), idx);
+      Utils.insertElementAt(c(), SNodeFactoryOperations.createNewNode(c2, null), idx);
     }
   }
   @Override
@@ -106,16 +105,16 @@ public class XYCTableModel implements TableModel {
     }
     if (row == 0) {
       SAbstractConcept concept = xlink.getTargetConcept();
-      x().set(column - 1, SNodeFactoryOperations.createNewNode(SNodeFactoryOperations.asInstanceConcept(concept), null));
+      x().set(column - 1, SNodeFactoryOperations.createNewNode(concept, null));
     }
     if (column == 0) {
       SAbstractConcept concept = ylink.getTargetConcept();
-      y().set(row - 1, SNodeFactoryOperations.createNewNode(SNodeFactoryOperations.asInstanceConcept(concept), null));
+      y().set(row - 1, SNodeFactoryOperations.createNewNode(concept, null));
     }
     int idx = dataidx(row, column);
     if (idx < ListSequence.fromList(c()).count()) {
       SAbstractConcept concept = clink.getTargetConcept();
-      ListSequence.fromList(c()).setElement(idx, SNodeFactoryOperations.createNewNode(SNodeFactoryOperations.asInstanceConcept(concept), null));
+      ListSequence.fromList(c()).setElement(idx, SNodeFactoryOperations.createNewNode(concept, null));
     }
   }
   @Override

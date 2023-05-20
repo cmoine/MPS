@@ -7,9 +7,9 @@ import jetbrains.mps.core.aspects.behaviour.api.BHDescriptor;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor {
   private final BHDescriptor myImage__BehaviorDescriptor = new Image__BehaviorDescriptor();
@@ -21,9 +21,10 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
   private final BHDescriptor myRect__BehaviorDescriptor = new Rect__BehaviorDescriptor();
   private final BHDescriptor myIconLayerDescription__BehaviorDescriptor = new IconLayerDescription__BehaviorDescriptor();
   private final BHDescriptor myText__BehaviorDescriptor = new Text__BehaviorDescriptor();
+  private final BHDescriptor myBaseURLFunction__BehaviorDescriptor = new BaseURLFunction__BehaviorDescriptor();
+  private final BHDescriptor myBaseURL__BehaviorDescriptor = new BaseURL__BehaviorDescriptor();
+  private final BHDescriptor myBaseURLLiteral__BehaviorDescriptor = new BaseURLLiteral__BehaviorDescriptor();
   private final BHDescriptor myFileIcon__BehaviorDescriptor = new FileIcon__BehaviorDescriptor();
-  private final BHDescriptor myOldIconBundle__BehaviorDescriptor = new OldIconBundle__BehaviorDescriptor();
-  private final BHDescriptor myOldIconReference__BehaviorDescriptor = new OldIconReference__BehaviorDescriptor();
   private final BHDescriptor myResource__BehaviorDescriptor = new Resource__BehaviorDescriptor();
 
   public BehaviorAspectDescriptor() {
@@ -31,89 +32,39 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
 
   @Nullable
   public BHDescriptor getDescriptor(@NotNull SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_846f5o_a0q.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return myCircle__BehaviorDescriptor;
-          }
-          break;
-        case 1:
-          if (true) {
-            return myColor__BehaviorDescriptor;
-          }
-          break;
-        case 2:
-          if (true) {
-            return myColorLiteral__BehaviorDescriptor;
-          }
-          break;
-        case 3:
-          if (true) {
-            return myFileIcon__BehaviorDescriptor;
-          }
-          break;
-        case 4:
-          if (true) {
-            return myIcon__BehaviorDescriptor;
-          }
-          break;
-        case 5:
-          if (true) {
-            return myIconLayerDescription__BehaviorDescriptor;
-          }
-          break;
-        case 6:
-          if (true) {
-            return myImage__BehaviorDescriptor;
-          }
-          break;
-        case 7:
-          if (true) {
-            return myOldIconBundle__BehaviorDescriptor;
-          }
-          break;
-        case 8:
-          if (true) {
-            return myOldIconReference__BehaviorDescriptor;
-          }
-          break;
-        case 9:
-          if (true) {
-            return myRect__BehaviorDescriptor;
-          }
-          break;
-        case 10:
-          if (true) {
-            return myResource__BehaviorDescriptor;
-          }
-          break;
-        case 11:
-          if (true) {
-            return myText__BehaviorDescriptor;
-          }
-          break;
-        case 12:
-          if (true) {
-            return myTextIcon__BehaviorDescriptor;
-          }
-          break;
-        default:
-          // default 
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return myBaseURL__BehaviorDescriptor;
+      case 1:
+        return myBaseURLFunction__BehaviorDescriptor;
+      case 2:
+        return myBaseURLLiteral__BehaviorDescriptor;
+      case 3:
+        return myCircle__BehaviorDescriptor;
+      case 4:
+        return myColor__BehaviorDescriptor;
+      case 5:
+        return myColorLiteral__BehaviorDescriptor;
+      case 6:
+        return myFileIcon__BehaviorDescriptor;
+      case 7:
+        return myIcon__BehaviorDescriptor;
+      case 8:
+        return myIconLayerDescription__BehaviorDescriptor;
+      case 9:
+        return myImage__BehaviorDescriptor;
+      case 10:
+        return myRect__BehaviorDescriptor;
+      case 11:
+        return myResource__BehaviorDescriptor;
+      case 12:
+        return myText__BehaviorDescriptor;
+      case 13:
+        return myTextIcon__BehaviorDescriptor;
+      default:
     }
     return null;
   }
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
-  }
-  private static final Map<SAbstractConcept, Integer> indices_846f5o_a0q = buildConceptIndices(MetaAdapterFactory.getConcept(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x26417c37742e0e60L, "jetbrains.mps.lang.resources.structure.Circle"), MetaAdapterFactory.getInterfaceConcept(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x19d079f4ec114bdeL, "jetbrains.mps.lang.resources.structure.Color"), MetaAdapterFactory.getConcept(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x19d079f4ec114bddL, "jetbrains.mps.lang.resources.structure.ColorLiteral"), MetaAdapterFactory.getConcept(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x7c8b08a50a39c6bbL, "jetbrains.mps.lang.resources.structure.FileIcon"), MetaAdapterFactory.getInterfaceConcept(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x26417c3774289eeeL, "jetbrains.mps.lang.resources.structure.Icon"), MetaAdapterFactory.getInterfaceConcept(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x26417c37742e0e65L, "jetbrains.mps.lang.resources.structure.IconLayerDescription"), MetaAdapterFactory.getConcept(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0xb8b96b5078f3367L, "jetbrains.mps.lang.resources.structure.Image"), MetaAdapterFactory.getConcept(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x7c8b08a50a39c6bdL, "jetbrains.mps.lang.resources.structure.OldIconBundle"), MetaAdapterFactory.getConcept(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x7c8b08a50a39c6c7L, "jetbrains.mps.lang.resources.structure.OldIconReference"), MetaAdapterFactory.getConcept(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x26417c37742e0e61L, "jetbrains.mps.lang.resources.structure.Rect"), MetaAdapterFactory.getInterfaceConcept(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x7c8b08a50a39c6caL, "jetbrains.mps.lang.resources.structure.Resource"), MetaAdapterFactory.getConcept(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x26417c37742e28b9L, "jetbrains.mps.lang.resources.structure.Text"), MetaAdapterFactory.getConcept(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x26417c37742e0d45L, "jetbrains.mps.lang.resources.structure.TextIcon"));
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x4197d5560e6a38b7L), MetaIdFactory.conceptId(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x4197d5560e696656L), MetaIdFactory.conceptId(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x4197d5560e6a38b8L), MetaIdFactory.conceptId(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x26417c37742e0e60L), MetaIdFactory.conceptId(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x19d079f4ec114bdeL), MetaIdFactory.conceptId(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x19d079f4ec114bddL), MetaIdFactory.conceptId(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x7c8b08a50a39c6bbL), MetaIdFactory.conceptId(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x26417c3774289eeeL), MetaIdFactory.conceptId(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x26417c37742e0e65L), MetaIdFactory.conceptId(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0xb8b96b5078f3367L), MetaIdFactory.conceptId(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x26417c37742e0e61L), MetaIdFactory.conceptId(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x7c8b08a50a39c6caL), MetaIdFactory.conceptId(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x26417c37742e28b9L), MetaIdFactory.conceptId(0x982eb8df2c964bd7L, 0x996311712ea622e5L, 0x26417c37742e0d45L)).seal();
 }

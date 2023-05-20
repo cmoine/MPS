@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,21 +15,46 @@
  */
 package jetbrains.mps.nodeEditor;
 
-import java.awt.*;
+import com.intellij.ui.JBColor;
+import org.jetbrains.mps.annotations.Immutable;
 
-public class MPSColors extends Color {
+import java.awt.Color;
+
+@Immutable
+public final class MPSColors extends JBColor {
   private MPSColors() {
-    super(0);
+    super(JBColor.background(), JBColor.background());
   }
 
   // COLORS: Remove hardcoded colors
+  public static final Color red = new JBColor(JBColor.RED.darker(), JBColor.RED);
+  public static final Color RED = red;
 
-  public static final Color LIGHT_BLUE = new Color(162, 184, 208);
+  public static final Color lightBlue = new JBColor(new Color(162, 184, 208), new Color(104, 151, 186));
+  public static final Color LIGHT_BLUE = lightBlue;
 
-  public static final Color DARK_BLUE = new Color(0, 0, 128);
+  public static final Color darkBlue = new JBColor(new Color(0x80), JBColor.ORANGE);
+  public static final Color DARK_BLUE = darkBlue;
 
-  public static final Color DARK_GREEN = new Color(0, 128, 0);
+  public static final Color darkGreen = new JBColor(JBColor.GREEN.darker().darker(), JBColor.GREEN);
+  public static final Color DARK_GREEN = darkGreen;
 
-  public static final Color DARK_MAGENTA = new Color(102, 14, 122);
+  public static final Color darkMagenta = new JBColor(JBColor.MAGENTA.darker().darker(), JBColor.MAGENTA);
+  public static final Color DARK_MAGENTA = darkMagenta;
+
+  public static final Color pink = new JBColor(JBColor.PINK, JBColor.PINK.darker().darker());
+  public static final Color PINK = pink;
+
+  public static final Color orange = JBColor.orange;
+  public static final Color ORANGE = orange;
+
+  public static final Color green = JBColor.green;
+  public static final Color GREEN = green;
+
+  public static final Color cyan = JBColor.cyan;
+  public static final Color CYAN = cyan;
+
+  public static final Color violet = new JBColor(new Color(0x8000FF), new Color(0x9C57FF));
+  public static final Color VIOLET = violet;
 }
 

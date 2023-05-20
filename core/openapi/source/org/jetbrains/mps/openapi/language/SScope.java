@@ -31,7 +31,7 @@ public interface SScope {
    * @param prefix (if not null) filters out elements whose reference text doesn't start with prefix
    * @return list of nodes in the scope
    */
-  public abstract Iterable<SNode> getAvailableElements(@Nullable String prefix);
+  Iterable<SNode> getAvailableElements(@Nullable String prefix);
 
   /**
    * Returns <tt>true</tt> if this scope contains the specified element.
@@ -41,7 +41,7 @@ public interface SScope {
    * @param node element to check presence for
    * @return <tt>true</tt> if this scope contains the specified element
    */
-  public boolean contains(SNode node);
+  boolean contains(SNode node);
 
   /**
    * Resolves element by reference text.
@@ -52,7 +52,7 @@ public interface SScope {
    * @return resolved element when reference text unambiguously identifies element, null otherwise
    */
   @Nullable
-  public abstract SNode resolve(@NotNull String refText);
+  SNode resolve(@NotNull String refText);
 
   /**
    * Creates textual reference for scope element. If element has no textual representation
@@ -64,5 +64,5 @@ public interface SScope {
    * @return reference text for the node element in the current scope
    */
   @Nullable
-  public abstract String getReferenceText(@NotNull SNode node);
+  String getReferenceText(@NotNull SNode node);
 }

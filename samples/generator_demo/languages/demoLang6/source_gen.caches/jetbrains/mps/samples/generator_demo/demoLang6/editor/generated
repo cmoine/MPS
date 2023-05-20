@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-cv8n2sbn2qs2a88futah1m1whil5doy" />
+<product version="3" modelHash="1x39rkfbrzse8os9t9jgs3uiowa69uy">
+  <files names="Button_Editor.java:Button_EditorBuilder_a.java:EditorAspectDescriptorImpl.java:Label_Editor.java:Label_EditorBuilder_a.java" />
+</product>
 

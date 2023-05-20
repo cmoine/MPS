@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,22 +15,27 @@
  */
 package jetbrains.mps.make.dependencies.graph;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.LogManager;
+import jetbrains.mps.util.GraphUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
- * Likely this class represents a graph of V
+ * Graph of V
  * @param <V> -- vertex class
  */
-public class Graph<V extends IVertex> {
-  private static final Logger LOG = LogManager.getLogger(Graph.class);
+public final class Graph<V extends IVertex> {
 
-  private final Set<V> myVertices = new LinkedHashSet<V>();
+  private final Set<V> myVertices = new LinkedHashSet<>();
 
   /**
    * adds the vertex and its neighbours to the graph
@@ -39,7 +44,7 @@ public class Graph<V extends IVertex> {
     myVertices.add(vertex);
     for (IVertex next : vertex.getNexts()) {
       if (next == null) {
-        LOG.error("Next of vertex " + vertex + " is null.");
+        throw new IllegalArgumentException("Next of vertex " + vertex + " is null.");
       } else if (!myVertices.contains(next)) {
         add((V) next);
       }
@@ -55,6 +60,66 @@ public class Graph<V extends IVertex> {
 
   public Set<V> getData() {
     return Collections.unmodifiableSet(myVertices);
+  }
+
+  /**
+   * @return strongly connected components in the graph, topologically ordered
+   * Topological order means that first come components, where IVertex has no 'next' edges to vertexes from other components
+   */
+  public List<List<V>> scc() {
+    return _scc(false);
+  }
+
+  // I don't see any value in impl that reverses return value
+  public List<List<V>> sccReverse() {
+    return _scc(true);
+  }
+
+  private List<List<V>> _scc(boolean reverse) {
+    IVertex[] vertices = myVertices.toArray(new IVertex[myVertices.size()]);
+    int[][] graph = Graphs.graphToIntInt(vertices, false, false);
+    int[][] partitions = GraphUtil.tarjan(graph);
+
+    List<V>[] result = new List[partitions.length];
+    for (int i = 0, x = partitions.length; i < x; i++) {
+      List<V> proots = new ArrayList<>(partitions[i].length);
+      for (int e = 0; e < partitions[i].length; e++) {
+        proots.add((V) vertices[partitions[i][e]]);
+      }
+      if (reverse) {
+        result[x-1-i] = proots;
+      } else {
+        result[i] = proots;
+      }
+    }
+    return Arrays.asList(result);
+  }
+
+  public void dfs(Stream<V> from, Predicate<V> visitor) {
+    // assert myVertices.containsAll(from);
+    HashSet<V> seen = new HashSet<>();
+    Predicate<V> notSeen = seen::add;
+    final DFS<V> a = new DFS<V>(notSeen.and(visitor), (x) -> {
+    });
+    from.forEach(a::go);
+
+  }
+
+  private static class DFS<X extends IVertex> {
+    private final Predicate<X> myVisitCondition;
+    private final Consumer<X> myPostVisitor;
+
+    DFS(Predicate<X> visitCondition, Consumer<X> postVisitor) {
+      myVisitCondition = visitCondition;
+      myPostVisitor = postVisitor;
+    }
+
+    void go(X vertex) {
+      if (myVisitCondition.test(vertex)) {
+        vertex.getNexts().forEach(v -> go((X) v));
+        myPostVisitor.accept(vertex);
+      }
+    }
   }
 
   @Override
@@ -73,7 +138,7 @@ public class Graph<V extends IVertex> {
         }
         j++;
       }
-      sb.append("\n");
+      sb.append('\n');
     }
 
     return sb.toString();

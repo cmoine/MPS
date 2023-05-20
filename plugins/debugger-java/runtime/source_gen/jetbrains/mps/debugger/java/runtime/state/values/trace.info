@@ -10,48 +10,48 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
   <root nodeRef="r:6dff38c0-3c4e-455b-9e65-d46014c8a7f5(jetbrains.mps.debugger.java.runtime.state.values)/3187167456722650426">
     <file name="FieldWatchpointValue.java">
-      <node id="3187167456722650427" at="17,0,18,0" concept="2" trace="myField" />
-      <node id="3187167456722650430" at="18,0,19,0" concept="2" trace="myCurrentValue" />
-      <node id="3187167456722650433" at="19,0,20,0" concept="2" trace="myNewValue" />
-      <node id="3187167456722650436" at="20,0,21,0" concept="2" trace="myAccess" />
-      <node id="3187167456722650457" at="21,137,22,52" concept="7" />
-      <node id="3187167456722650463" at="22,52,23,20" concept="1" />
-      <node id="3187167456722650467" at="23,20,24,34" concept="1" />
-      <node id="3187167456722650471" at="24,34,25,26" concept="1" />
-      <node id="3187167456722650475" at="25,26,26,22" concept="1" />
-      <node id="3187167456722650483" at="29,40,30,26" concept="6" />
-      <node id="3187167456722650492" at="33,37,34,34" concept="6" />
-      <node id="3187167456722650499" at="37,32,38,16" concept="6" />
-      <node id="3187167456722650507" at="41,48,42,58" concept="5" />
-      <node id="3187167456722650514" at="42,58,43,90" concept="1" />
-      <node id="3187167456722650528" at="44,22,45,89" concept="1" />
-      <node id="3187167456722650538" at="46,5,47,18" concept="6" />
-      <node id="3187167456722650524" at="43,90,46,5" concept="3" />
-      <node id="3187167456722650479" at="28,0,32,0" concept="4" trace="getValuePresentation#()Ljava/lang/String;" />
-      <node id="3187167456722650488" at="32,0,36,0" concept="4" trace="getPresentationIcon#()Ljavax/swing/Icon;" />
-      <node id="3187167456722650495" at="36,0,40,0" concept="4" trace="isStructure#()Z" />
-      <node id="3187167456722650441" at="21,0,28,0" concept="0" trace="FieldWatchpointValue#(Lcom/sun/jdi/Field;ZLjetbrains/mps/debugger/java/api/state/proxy/JavaValue;Ljetbrains/mps/debugger/java/api/state/proxy/JavaValue;Lcom/sun/jdi/ThreadReference;)V" />
-      <node id="948222233230271679" at="40,0,49,0" concept="4" trace="calculateSubvalues#()Ljava/util/List;" />
-      <scope id="3187167456722650482" at="29,40,30,26" />
-      <scope id="3187167456722650491" at="33,37,34,34" />
-      <scope id="3187167456722650498" at="37,32,38,16" />
-      <scope id="3187167456722650527" at="44,22,45,89" />
-      <scope id="3187167456722650479" at="28,0,32,0" />
-      <scope id="3187167456722650488" at="32,0,36,0" />
-      <scope id="3187167456722650495" at="36,0,40,0" />
-      <scope id="3187167456722650456" at="21,137,26,22" />
-      <scope id="948222233230271684" at="41,48,47,18">
+      <node id="3187167456722650427" at="19,0,20,0" concept="2" trace="myField" />
+      <node id="3187167456722650430" at="20,0,21,0" concept="2" trace="myCurrentValue" />
+      <node id="3187167456722650433" at="21,0,22,0" concept="2" trace="myNewValue" />
+      <node id="3187167456722650436" at="22,0,23,0" concept="2" trace="myAccess" />
+      <node id="3187167456722650457" at="23,137,24,52" concept="7" />
+      <node id="3187167456722650463" at="24,52,25,20" concept="1" />
+      <node id="3187167456722650467" at="25,20,26,34" concept="1" />
+      <node id="3187167456722650471" at="26,34,27,26" concept="1" />
+      <node id="3187167456722650475" at="27,26,28,22" concept="1" />
+      <node id="3187167456722650483" at="31,40,32,26" concept="6" />
+      <node id="3187167456722650492" at="35,37,36,34" concept="6" />
+      <node id="3187167456722650499" at="39,32,40,16" concept="6" />
+      <node id="3187167456722650507" at="43,48,44,58" concept="5" />
+      <node id="3187167456722650514" at="44,58,45,90" concept="1" />
+      <node id="3187167456722650528" at="46,22,47,89" concept="1" />
+      <node id="3187167456722650538" at="48,5,49,18" concept="6" />
+      <node id="3187167456722650524" at="45,90,48,5" concept="3" />
+      <node id="3187167456722650479" at="30,0,34,0" concept="4" trace="getValuePresentation#()Ljava/lang/String;" />
+      <node id="3187167456722650488" at="34,0,38,0" concept="4" trace="getPresentationIcon#()Ljavax/swing/Icon;" />
+      <node id="3187167456722650495" at="38,0,42,0" concept="4" trace="isStructure#()Z" />
+      <node id="3187167456722650441" at="23,0,30,0" concept="0" trace="FieldWatchpointValue#(Lcom/sun/jdi/Field;ZLjetbrains/mps/debugger/java/api/state/proxy/JavaValue;Ljetbrains/mps/debugger/java/api/state/proxy/JavaValue;Lcom/sun/jdi/ThreadReference;)V" />
+      <node id="948222233230271679" at="42,0,51,0" concept="4" trace="calculateSubvalues#()Ljava/util/List;" />
+      <scope id="3187167456722650482" at="31,40,32,26" />
+      <scope id="3187167456722650491" at="35,37,36,34" />
+      <scope id="3187167456722650498" at="39,32,40,16" />
+      <scope id="3187167456722650527" at="46,22,47,89" />
+      <scope id="3187167456722650479" at="30,0,34,0" />
+      <scope id="3187167456722650488" at="34,0,38,0" />
+      <scope id="3187167456722650495" at="38,0,42,0" />
+      <scope id="3187167456722650456" at="23,137,28,22" />
+      <scope id="948222233230271684" at="43,48,49,18">
         <var name="result" id="3187167456722650508" />
       </scope>
-      <scope id="3187167456722650441" at="21,0,28,0">
+      <scope id="3187167456722650441" at="23,0,30,0">
         <var name="access" id="3187167456722650444" />
         <var name="currentValue" id="3187167456722650446" />
         <var name="field" id="3187167456722650442" />
         <var name="newValue" id="3187167456722650448" />
         <var name="threadReference" id="3187167456722650452" />
       </scope>
-      <scope id="948222233230271679" at="40,0,49,0" />
-      <unit id="3187167456722650426" at="16,0,50,0" name="jetbrains.mps.debugger.java.runtime.state.values.FieldWatchpointValue" />
+      <scope id="948222233230271679" at="42,0,51,0" />
+      <unit id="3187167456722650426" at="17,0,52,0" name="jetbrains.mps.debugger.java.runtime.state.values.FieldWatchpointValue" />
     </file>
   </root>
 </debug-info>

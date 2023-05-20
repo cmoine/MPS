@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+  <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/classes" />
     <output-test url="file://$MODULE_DIR$/classes" />
     <exclude-output />
@@ -17,7 +17,6 @@
     <orderEntry type="module" module-name="closures-runtime" />
     <orderEntry type="module" module-name="mps-platform" />
     <orderEntry type="module" module-name="mps-workbench" />
-    <orderEntry type="library" name="JDOM" level="project" />
     <orderEntry type="module" module-name="mps-editor" />
     <orderEntry type="module" module-name="tuples-runtime" />
     <orderEntry type="module" module-name="mps-debugger" />
@@ -26,7 +25,6 @@
     <orderEntry type="module" module-name="debugger-api-api" />
     <orderEntry type="module" module-name="execution-api" />
     <orderEntry type="module" module-name="mps-icons" />
-    <orderEntry type="library" name="Log4j" level="project" />
     <orderEntry type="module" module-name="mps-ui" />
   </component>
 </module>

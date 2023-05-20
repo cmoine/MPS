@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,10 @@
 package jetbrains.mps.ide.ui.dialogs.properties.tables.items;
 
 import jetbrains.mps.project.structure.modules.Dependency;
-import jetbrains.mps.util.EqualUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.module.SDependencyScope;
+
+import java.util.Objects;
 
 /**
  * @see jetbrains.mps.ide.ui.dialogs.properties.tables.models.DependTableModel
@@ -28,7 +29,9 @@ public class DependenciesTableItem {
   protected ModuleType myModuleType = ModuleType.UNSPECIFIED;
 
   public DependenciesTableItem(@NotNull Dependency dependency) {
-    myItem = dependency;
+    // need a copy, we are going to keep changes in the instance, have to keep original
+    // dependency object intact to tell 'isModified' state
+    myItem = dependency.copy();
   }
 
   public DependenciesTableItem setModuleType(ModuleType type) {
@@ -45,10 +48,17 @@ public class DependenciesTableItem {
   }
 
   @Override
+  public int hashCode() {
+    return Objects.hash(myItem, myModuleType);
+  }
+
+  @Override
   public boolean equals(Object obj) {
-    if(!(obj instanceof DependenciesTableItem)) return false;
-    DependenciesTableItem item = (DependenciesTableItem)obj;
-    return myItem.equals(item.myItem)&& EqualUtil.equals(myModuleType, item.myModuleType);
+    if(obj instanceof DependenciesTableItem) {
+      DependenciesTableItem item = (DependenciesTableItem)obj;
+      return myItem.equals(item.myItem) && Objects.equals(myModuleType, item.myModuleType);
+    }
+    return false;
   }
 
   public boolean isReExportable() {
@@ -71,6 +81,6 @@ public class DependenciesTableItem {
     LANGUAGE,
     GENERATOR,
     SOLUTION,
-    DEVKIT;
+    DEVKIT
   }
 }

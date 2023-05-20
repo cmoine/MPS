@@ -26,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
  * evgeny, 11/17/11
  */
 public interface NodeStructureViewProvider {
-  public static final ExtensionPointName<NodeStructureViewProvider> EP_NODE_STRUCTURE_VIEW_PROVIDER =
+  ExtensionPointName<NodeStructureViewProvider> EP_NODE_STRUCTURE_VIEW_PROVIDER =
     ExtensionPointName.create("jetbrains.mps.nodeStructureViewProvider");
 
   /*

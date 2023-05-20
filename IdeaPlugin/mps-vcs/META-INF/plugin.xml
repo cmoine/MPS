@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2003-2012 JetBrains s.r.o.
+  ~ Copyright 2003-2021 JetBrains s.r.o.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,63 +14,53 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin version="2" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <id>jetbrains.mps.vcs</id>
-  <name>MPS Version Control support</name>
+<idea-plugin xmlns:xi="http://www.w3.org/2001/XInclude">
+  <id>jetbrains.mps.idea.vcs</id>
+  <name>MPS Version Control Support</name>
   <category>Custom Languages</category>
   <description>MPS Version Control support</description>
-  <version>3.4.5</version>
-  <vendor url="http://www.jetbrains.com/mps/">JetBrains MPS</vendor>
-  <idea-version since-build="145.1" until-build="164.1"/>
+  <version>2023.1</version>
+  <vendor url="http://www.jetbrains.com/mps/">JetBrains</vendor>
+  <idea-version since-build="231.1" until-build="232.1"/>
   <depends>jetbrains.mps.core</depends>
 
   <depends optional="true">Subversion</depends>
-  <depends optional="true">Git4Idea</depends>
+  <depends optional="true" config-file="MPSVcsGit.xml">Git4Idea</depends>
 
-  <xi:include href="../../../plugins/vcs/common/source_gen/jetbrains/mps/vcs/platform/actions/MPSVcs.xml" xpointer="xpointer(/components/*)"/>
-
-  <project-components>
-    <component>
-      <implementation-class>jetbrains.mps.vcs.changesmanager.CurrentDifferenceRegistry</implementation-class>
-      <skipForDefaultProject/>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.vcs.changesmanager.editor.EditorHighlighterFactory</implementation-class>
-      <skipForDefaultProject/>
-    </component>
-  </project-components>
+  <xi:include href="MPSVcs.xml"/>
 
   <extensions defaultExtensionNs="com.intellij">
     <diff.DiffTool implementation="jetbrains.mps.vcs.platform.integration.ModelDiffTool"/>
     <diff.merge.MergeTool implementation="jetbrains.mps.vcs.platform.integration.ModelMergeTool"/>
   </extensions>
 
-  <application-components>
-    <component>
-      <implementation-class>jetbrains.mps.ide.platform.watching.FSChangesWatcher</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.ide.platform.watching.ModelCacheReloader</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.vcs.platform.integration.PluginVCSManager</implementation-class>
-    </component>
-    <component>
-      <implementation-class>jetbrains.mps.vcs.MergeDriverPackerImpl</implementation-class>
-    </component>
-  </application-components>
   <extensions defaultExtensionNs="com.intellij">
     <mps.LanguageLibrary dir="/"/>
     <errorHandler implementation="jetbrains.mps.ide.blame.CharismaReporter"/>
     <vcs.fileStatusProvider implementation="jetbrains.mps.vcs.changesmanager.NodeFileStatusProvider"/>
     <checkinHandlerFactory implementation="jetbrains.mps.vcs.platform.integration.OptimizeImportsCheckinHandler$OptimizeImportsCheckinHandlerFactory"/>
     <mps.editorWarningsProvider implementation="jetbrains.mps.vcs.platform.integration.ConflictingModelsWarnings" />
-  </extensions>
-  <project-components>
-    <component>
-      <implementation-class>jetbrains.mps.vcs.changesmanager.NodeFileStatusMapping</implementation-class>
-    </component>
-  </project-components>
 
+    <applicationService serviceInterface="jetbrains.mps.vcs.platform.mergedriver.MergeDriverPacker"
+                        serviceImplementation="jetbrains.mps.vcs.MergeDriverPackerImpl" />
+    <applicationService serviceImplementation="jetbrains.mps.vcs.diff.ui.common.ChangeColors"/>
+    <applicationService serviceImplementation="jetbrains.mps.vcs.annotate.AnnotationOptions"/>
+
+    <projectService serviceImplementation="jetbrains.mps.vcs.changesmanager.CurrentDifferenceRegistry" />
+    <projectService serviceImplementation="jetbrains.mps.vcs.changesmanager.editor.EditorHighlighterFactory"/>
+
+    <projectService serviceImplementation="jetbrains.mps.vcs.changesmanager.NodeFileStatusMapping"/>
+  </extensions>
+
+  <applicationListeners>
+    <listener class="jetbrains.mps.vcs.changesmanager.CurrentDifferenceRegistry$MyProjectListener"
+              topic="com.intellij.openapi.project.ProjectManagerListener"/>
+  </applicationListeners>
+
+  <projectListeners>
+    <listener class="jetbrains.mps.vcs.changesmanager.editor.EditorHighlighterFactory$MyEditorComponentCreateListener"
+              topic="jetbrains.mps.nodeEditor.highlighter.EditorComponentCreateListener"
+              activeInHeadlessMode="false"/>
+  </projectListeners>
 
 </idea-plugin>

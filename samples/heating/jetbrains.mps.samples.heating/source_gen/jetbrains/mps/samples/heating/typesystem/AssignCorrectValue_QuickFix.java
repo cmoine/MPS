@@ -6,8 +6,10 @@ import jetbrains.mps.errors.QuickFix_Runtime;
 import jetbrains.mps.smodel.SNodePointer;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public class AssignCorrectValue_QuickFix extends QuickFix_Runtime {
   public AssignCorrectValue_QuickFix() {
@@ -17,11 +19,19 @@ public class AssignCorrectValue_QuickFix extends QuickFix_Runtime {
     return "Assign correct value";
   }
   public void execute(SNode node) {
-    SNode prev = SNodeOperations.cast(SNodeOperations.getPrevSibling(node), MetaAdapterFactory.getConcept(0xa7d67633e8d9473bL, 0x98ce995a7aa66941L, 0x4f786d85fe288176L, "jetbrains.mps.samples.heating.structure.Slot"));
+    SNode prev = SNodeOperations.cast(SNodeOperations.getPrevSibling(node), CONCEPTS.Slot$rU);
     if ((prev != null)) {
-      SPropertyOperations.set(SNodeOperations.cast(node, MetaAdapterFactory.getConcept(0xa7d67633e8d9473bL, 0x98ce995a7aa66941L, 0x4f786d85fe288176L, "jetbrains.mps.samples.heating.structure.Slot")), MetaAdapterFactory.getProperty(0xa7d67633e8d9473bL, 0x98ce995a7aa66941L, 0x4f786d85fe288176L, 0x4f786d85fe28827cL, "start"), "" + (SPropertyOperations.getInteger(prev, MetaAdapterFactory.getProperty(0xa7d67633e8d9473bL, 0x98ce995a7aa66941L, 0x4f786d85fe288176L, 0x4f786d85fe28827cL, "start")) + 1));
+      SPropertyOperations.assign(SNodeOperations.cast(node, CONCEPTS.Slot$rU), PROPS.start$f2z3, SPropertyOperations.getInteger(prev, PROPS.start$f2z3) + 1);
     } else {
-      SPropertyOperations.set(SNodeOperations.cast(node, MetaAdapterFactory.getConcept(0xa7d67633e8d9473bL, 0x98ce995a7aa66941L, 0x4f786d85fe288176L, "jetbrains.mps.samples.heating.structure.Slot")), MetaAdapterFactory.getProperty(0xa7d67633e8d9473bL, 0x98ce995a7aa66941L, 0x4f786d85fe288176L, 0x4f786d85fe28827cL, "start"), "" + (0));
+      SPropertyOperations.assign(SNodeOperations.cast(node, CONCEPTS.Slot$rU), PROPS.start$f2z3, 0);
     }
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept Slot$rU = MetaAdapterFactory.getConcept(0xa7d67633e8d9473bL, 0x98ce995a7aa66941L, 0x4f786d85fe288176L, "jetbrains.mps.samples.heating.structure.Slot");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty start$f2z3 = MetaAdapterFactory.getProperty(0xa7d67633e8d9473bL, 0x98ce995a7aa66941L, 0x4f786d85fe288176L, 0x4f786d85fe28827cL, "start");
   }
 }

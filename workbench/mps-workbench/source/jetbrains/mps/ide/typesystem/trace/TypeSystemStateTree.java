@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -90,16 +90,16 @@ public class TypeSystemStateTree extends MPSTree implements DataProvider {
   public void updateState(State state) {
     HashSet<String> existing = null;
     if (myState == state) {
-      existing = new HashSet<String>();
+      existing = new HashSet<>();
       collectExisting(getRootNode(), existing);
     }
     myState = state;
     rebuildNow();
     expandAll();
     if (existing != null) {
-      List<TreePath> newNodes = new ArrayList<TreePath>();
+      List<TreePath> newNodes = new ArrayList<>();
       collectNew(new TreePath(getRootNode()), existing, newNodes);
-      setSelectionPaths(newNodes.toArray(new TreePath[newNodes.size()]));
+      setSelectionPaths(newNodes.toArray(new TreePath[0]));
     }
   }
 
@@ -181,7 +181,7 @@ public class TypeSystemStateTree extends MPSTree implements DataProvider {
 
   private TypeSystemStateTreeNode createInequalitiesNode() {
     TypeSystemStateTreeNode result = new TypeSystemStateTreeNode("Inequalities by groups");
-    Set<String> nodePresentations = new HashSet<String>();
+    Set<String> nodePresentations = new HashSet<>();
     for (Map.Entry<Set<SNode>, Set<InequalityBlock>> entry : myState.getInequalities().getInequalityGroups(
         myState.getBlocks(BlockKind.INEQUALITY)).entrySet()) {
       Set<SNode> key = entry.getKey();
@@ -221,29 +221,26 @@ public class TypeSystemStateTree extends MPSTree implements DataProvider {
 
   private void highlightNodesWithTypes(final Collection<? extends MPSTreeNode> treeNodes) {
     clearHighlighting();
-    myProject.getModelAccess().runReadAction(new Runnable() {
-      @Override
-      public void run() {
-        NodeMaps maps = myState.getNodeMaps();
-        List<EditorMessage> messages = new ArrayList<EditorMessage>();
-        for (MPSTreeNode treeNode : treeNodes) {
-          TypeSystemStateTreeNode stateNode = (TypeSystemStateTreeNode) treeNode;
-          List<SNode> vars = stateNode.getVariables();
-          if (null == vars) {
-            continue;
-          }
-          for (SNode var : vars) {
-            SNode node = check_x8yvv7_a0a0d0c0a0a0a0b0t(maps, var);
-            if (node != null && node.getModel() != null) {
-              EditorCell nodeCell = myEditorComponent.findNodeCell(node);
-              if (nodeCell != null) {
-                messages.add(new TypeSystemStateTree.TypeEditorMessage(nodeCell, String.valueOf(var)));
-              }
+    myProject.getModelAccess().runReadAction(() -> {
+      NodeMaps maps = myState.getNodeMaps();
+      List<EditorMessage> messages = new ArrayList<>();
+      for (MPSTreeNode treeNode : treeNodes) {
+        TypeSystemStateTreeNode stateNode = (TypeSystemStateTreeNode) treeNode;
+        List<SNode> vars = stateNode.getVariables();
+        if (null == vars) {
+          continue;
+        }
+        for (SNode var : vars) {
+          SNode node = check_x8yvv7_a0a0d0c0a0a0a0b0t(maps, var);
+          if (node != null && node.getModel() != null) {
+            EditorCell nodeCell = myEditorComponent.findNodeCell(node);
+            if (nodeCell != null) {
+              messages.add(new TypeEditorMessage(nodeCell, String.valueOf(var)));
             }
           }
-          if (messages.size() > 0) {
-            myHighlightManager.mark(messages);
-          }
+        }
+        if (messages.size() > 0) {
+          myHighlightManager.mark(messages);
         }
       }
     });
@@ -253,25 +250,22 @@ public class TypeSystemStateTree extends MPSTree implements DataProvider {
   protected ActionGroup createPopupActionGroup(final MPSTreeNode treeNode) {
     final TypeSystemStateTreeNode stateNode = (TypeSystemStateTreeNode) treeNode;
     final DefaultActionGroup group = ActionUtils.groupFromActions();
-    myProject.getModelAccess().runReadAction(new Runnable() {
-      @Override
-      public void run() {
-        NodeMaps maps = myState.getNodeMaps();
-        List<SNode> vars = stateNode.getVariables();
-        if (null == vars) {
-          return;
-        }
-        for (SNode var : vars) {
-          SNode node = check_x8yvv7_a0a0d0a0a0a0d0u(maps, var);
-          if (node != null && node.getModel() != null) {
-            final SNodeReference pointer = new jetbrains.mps.smodel.SNodePointer(node);
-            group.add(new BaseAction("Go to node with type " + var) {
-              @Override
-              public void doExecute(AnActionEvent e, Map<String, Object> _params) {
-                new EditorNavigator(myProject).shallFocus(true).shallSelect(true).open(pointer);
-              }
-            });
-          }
+    myProject.getModelAccess().runReadAction(() -> {
+      NodeMaps maps = myState.getNodeMaps();
+      List<SNode> vars = stateNode.getVariables();
+      if (null == vars) {
+        return;
+      }
+      for (SNode var : vars) {
+        SNode node = check_x8yvv7_a0a0d0a0a0a0d0u(maps, var);
+        if (node != null && node.getModel() != null) {
+          final SNodeReference pointer = new jetbrains.mps.smodel.SNodePointer(node);
+          group.add(new BaseAction("Go to node with type " + var) {
+            @Override
+            public void doExecute(AnActionEvent e, Map<String, Object> _params) {
+              new EditorNavigator(myProject).shallFocus(true).shallSelect(true).open(pointer);
+            }
+          });
         }
       }
     });
@@ -288,16 +282,16 @@ public class TypeSystemStateTree extends MPSTree implements DataProvider {
       if (ruleModel == null || ruleId == null) {
         return null;
       }
-      return new Pair<String, String>(ruleModel, ruleId);
+      return new Pair<>(ruleModel, ruleId);
     }
     return null;
   }
 
   private class TypeEditorMessage extends DefaultEditorMessage {
-    private EditorCell myCell;
+    private final EditorCell myCell;
 
     public TypeEditorMessage(EditorCell cell, String message) {
-      super(cell.getSNode(), StyleRegistry.getInstance().getSimpleColor(Color.blue), message, myMessageOwner);
+      super(cell.getSNode(), cell.getEditorComponent().getStyleRegistry().getSimpleColor(Color.blue), message, myMessageOwner);
       this.myCell = cell;
     }
 
@@ -358,7 +352,7 @@ public class TypeSystemStateTree extends MPSTree implements DataProvider {
 
     @Override
     public void valueChanged(TreeSelectionEvent event) {
-      List<MPSTreeNode> selection = new ArrayList<MPSTreeNode>();
+      List<MPSTreeNode> selection = new ArrayList<>();
       TreePath[] selectionPaths = getSelectionPaths();
       if (selectionPaths == null) {
         clearHighlighting();

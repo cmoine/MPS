@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="8f6klk1s5s1wqhsfpix8t2hxs4txntv" />
+<product version="3" modelHash="7u56yepcs8wrt7o9zqf2y3ildxqq4bm">
+  <files names="BehaviorAspectDescriptor.java:TestSubstituteAbstractChildAmbigousPosition__BehaviorDescriptor.java:TestSubstituteAbstractSubChildAmbigousPosition__BehaviorDescriptor.java" />
+</product>
 

@@ -20,18 +20,20 @@ package jetbrains.mps.idea.core.usages.rules;
 import com.intellij.openapi.vcs.FileStatus;
 import com.intellij.usages.Usage;
 import com.intellij.usages.UsageGroup;
+import com.intellij.usages.UsageTarget;
 import com.intellij.usages.UsageView;
-import com.intellij.usages.rules.OrderableUsageGroupingRule;
+import com.intellij.usages.rules.SingleParentUsageGroupingRule;
 import com.intellij.util.PlatformIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.Icon;
 
-public class CategoryUsageGroupingRule implements OrderableUsageGroupingRule {
+public class CategoryUsageGroupingRule extends SingleParentUsageGroupingRule {
 
+  @Nullable
   @Override
-  public UsageGroup groupUsage(@NotNull Usage usage) {
+  protected UsageGroup getParentGroupFor(@NotNull Usage usage, @NotNull UsageTarget[] targets) {
     if (usage instanceof UsageByCategory) {
       final String category = ((UsageByCategory) usage).getCategory();
       return new CategoryUsageGroup(category);
@@ -53,7 +55,7 @@ public class CategoryUsageGroupingRule implements OrderableUsageGroupingRule {
 
     @Override
     public Icon getIcon(boolean b) {
-      return PlatformIcons.DIRECTORY_CLOSED_ICON;
+      return PlatformIcons.FOLDER_ICON;
     }
 
     @NotNull

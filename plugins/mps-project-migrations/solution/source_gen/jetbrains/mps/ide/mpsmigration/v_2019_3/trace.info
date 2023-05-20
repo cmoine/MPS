@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081855346303:jetbrains.mps.baseLanguage.structure.BreakStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082113931046:jetbrains.mps.baseLanguage.structure.ContinueStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144226303539:jetbrains.mps.baseLanguage.structure.ForeachStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <root nodeRef="r:558fab87-39e0-4c7a-8cc2-5ede083c891b(jetbrains.mps.ide.mpsmigration.v_2019_3)/6770918888866666766">
+    <file name="Migrations_2019_3.java">
+      <node id="3472837269634577646" at="9,61,10,60" concept="3" />
+      <node id="7831187068298098623" at="9,0,12,0" concept="6" trace="offerInto#(Ljava/util/Deque;)V" />
+      <scope id="7831187068298098628" at="9,61,10,60" />
+      <scope id="7831187068298098623" at="9,0,12,0">
+        <var name="migrations" id="3472837269634577502" />
+      </scope>
+      <unit id="6770918888866666766" at="8,0,13,0" name="jetbrains.mps.ide.mpsmigration.v_2019_3.Migrations_2019_3" />
+    </file>
+  </root>
+  <root nodeRef="r:558fab87-39e0-4c7a-8cc2-5ede083c891b(jetbrains.mps.ide.mpsmigration.v_2019_3)/6770918888866697558">
+    <file name="DefaultFacetExplicitPersistence.java">
+      <node id="6770918888866700745" at="24,49,25,64" concept="10" />
+      <node id="6770918888866703103" at="29,34,30,53" concept="8" />
+      <node id="6770918888866757297" at="36,27,37,17" concept="2" />
+      <node id="6770918888866746872" at="39,49,40,17" concept="2" />
+      <node id="6770918888866753151" at="41,7,42,71" concept="7" />
+      <node id="6770918888866754580" at="43,23,44,17" concept="2" />
+      <node id="6770918888866761369" at="45,7,46,120" concept="9" />
+      <node id="6770918888866760664" at="46,120,47,53" concept="7" />
+      <node id="6770918888866762372" at="47,53,48,150" concept="9" />
+      <node id="6770918888866764380" at="48,150,49,36" concept="7" />
+      <node id="6770918888866770473" at="52,49,53,33" concept="3" />
+      <node id="6770918888866771323" at="53,33,54,18" concept="0" />
+      <node id="6770918888866775632" at="58,49,59,17" concept="2" />
+      <node id="6770918888866783018" at="60,7,61,49" concept="7" />
+      <node id="6770918888866784217" at="61,49,62,50" concept="7" />
+      <node id="6770918888866785485" at="64,62,65,44" concept="3" />
+      <node id="6770918888866788821" at="66,64,67,45" concept="3" />
+      <node id="6770918888866798151" at="69,7,70,78" concept="7" />
+      <node id="6770918888866814063" at="70,78,71,30" concept="7" />
+      <node id="3625954151123399560" at="72,59,73,94" concept="7" />
+      <node id="3625954151123424760" at="73,94,74,127" concept="9" />
+      <node id="3625954151123403023" at="74,127,75,35" concept="3" />
+      <node id="6770918888866792849" at="75,35,76,34" concept="3" />
+      <node id="6770918888866815746" at="76,34,77,23" concept="3" />
+      <node id="6770918888866807044" at="79,60,80,94" concept="3" />
+      <node id="6770918888866817071" at="80,94,81,23" concept="3" />
+      <node id="6770918888866810079" at="83,20,84,42" concept="3" />
+      <node id="6770918888866823967" at="84,42,85,36" concept="3" />
+      <node id="6770918888866833727" at="87,5,88,16" concept="8" />
+      <node id="6770918888866705594" at="93,33,94,16" concept="8" />
+      <node id="6770918888866700676" at="24,0,27,0" concept="1" trace="DefaultFacetExplicitPersistence#()V" />
+      <node id="6770918888866754687" at="35,65,38,7" concept="5" />
+      <node id="6770918888866742461" at="38,7,41,7" concept="5" />
+      <node id="6770918888866753538" at="42,71,45,7" concept="5" />
+      <node id="6770918888866774300" at="57,7,60,7" concept="5" />
+      <node id="6770918888866703094" at="28,0,32,0" concept="6" trace="getDescription#()Ljava/lang/String;" />
+      <node id="6770918888866770332" at="51,41,55,11" concept="5" />
+      <node id="6770918888866804801" at="78,7,82,7" concept="5" />
+      <node id="6770918888866818799" at="82,7,86,7" concept="5" />
+      <node id="6770918888866704894" at="92,0,96,0" concept="6" trace="isRerunnable#()Z" />
+      <node id="6770918888866777806" at="63,71,68,9" concept="5" />
+      <node id="6770918888866769920" at="50,59,56,9" concept="4" />
+      <node id="6770918888866776000" at="62,50,69,7" concept="4" />
+      <node id="6770918888866790825" at="71,30,78,7" concept="5" />
+      <node id="6770918888866765510" at="49,36,57,7" concept="5" />
+      <node id="6770918888866738934" at="34,45,87,5" concept="4" />
+      <node id="6770918888866703889" at="33,0,90,0" concept="6" trace="doExecute#(Ljetbrains/mps/project/Project;)Z" />
+      <scope id="6770918888866700680" at="24,49,25,64" />
+      <scope id="6770918888866703100" at="29,34,30,53" />
+      <scope id="6770918888866754689" at="36,27,37,17" />
+      <scope id="6770918888866742463" at="39,49,40,17" />
+      <scope id="6770918888866753540" at="43,23,44,17" />
+      <scope id="6770918888866774302" at="58,49,59,17" />
+      <scope id="6770918888866777808" at="64,62,65,44" />
+      <scope id="6770918888866786270" at="66,64,67,45" />
+      <scope id="6770918888866704898" at="93,33,94,16" />
+      <scope id="6770918888866770334" at="52,49,54,18" />
+      <scope id="6770918888866804803" at="79,60,81,23" />
+      <scope id="6770918888866818801" at="83,20,85,36" />
+      <scope id="6770918888866700676" at="24,0,27,0" />
+      <scope id="6770918888866703094" at="28,0,32,0" />
+      <scope id="6770918888866769923" at="51,41,55,11" />
+      <scope id="6770918888866704894" at="92,0,96,0" />
+      <scope id="6770918888866776003" at="63,71,68,9" />
+      <scope id="6770918888866790827" at="72,59,77,23">
+        <var name="mf" id="3625954151123399561" />
+      </scope>
+      <scope id="6770918888866765512" at="50,59,56,9" />
+      <scope id="6770918888866769920" at="50,59,56,9">
+        <var name="mm" id="6770918888866769924" />
+      </scope>
+      <scope id="6770918888866776000" at="62,50,69,7">
+        <var name="fd" id="6770918888866776004" />
+      </scope>
+      <scope id="6770918888866738937" at="35,65,86,7">
+        <var name="changed" id="6770918888866814066" />
+        <var name="facetRegistry" id="6770918888866798152" />
+        <var name="javaFacetDescriptorPresent" id="6770918888866783021" />
+        <var name="md" id="6770918888866753152" />
+        <var name="needJavaFacet" id="6770918888866760667" />
+        <var name="needTestFacet" id="6770918888866764383" />
+        <var name="testsFacetDescriptorPresent" id="6770918888866784218" />
+      </scope>
+      <scope id="6770918888866738934" at="34,45,87,5">
+        <var name="m" id="6770918888866738938" />
+      </scope>
+      <scope id="6770918888866703895" at="34,45,88,16" />
+      <scope id="6770918888866703889" at="33,0,90,0">
+        <var name="project" id="6770918888866703893" />
+      </scope>
+      <unit id="6770918888866697558" at="23,0,97,0" name="jetbrains.mps.ide.mpsmigration.v_2019_3.DefaultFacetExplicitPersistence" />
+    </file>
+  </root>
+</debug-info>
+

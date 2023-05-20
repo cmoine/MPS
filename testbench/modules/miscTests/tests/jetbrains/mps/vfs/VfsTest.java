@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,107 +17,77 @@ package jetbrains.mps.vfs;
 
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ModalityState;
-import jetbrains.mps.PlatformMpsTest;
 import jetbrains.mps.ide.vfs.IdeaFileSystem;
+import jetbrains.mps.tool.environment.Environment;
+import jetbrains.mps.tool.environment.EnvironmentAware;
+import jetbrains.mps.util.IFileUtil;
 import jetbrains.mps.util.ReadUtil;
 import jetbrains.mps.vfs.impl.IoFileSystem;
-import static org.junit.Assert.*;
-
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Collections;
+import java.util.function.Consumer;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 /**
- * Added on Oct 12, 2010
- *
  * @author Evgeny Gerashchenko
  */
-public class VfsTest extends PlatformMpsTest {
-  private static final String SUBSUBDIR = "subdir" + File.separator + "subsubdir";
+public class VfsTest implements EnvironmentAware {
   private static final int FILE_SIZE = 20000;
 
   private static final String JAR_NAME = "testjar.zip";
   private static final String JAR_SUFFIX = "!/testjar";
 
-  private static final TestInvoker IO_TEST_INVOKER = new TestInvoker() {
-    @Override
-    public void invokeTest(Runnable testRunnable) {
-      FileSystem oldFS = FileSystemExtPoint.getFS();
+  private static void IO_FS_TEST(final Consumer<FileSystem> testRunnable) {
+    testRunnable.accept(IoFileSystem.INSTANCE);
+  }
+
+  private static void IDEA_FS_TEST(final Consumer<FileSystem> testRunnable) {
+    final Throwable[] ex = new Throwable[1];
+    ApplicationManager.getApplication().invokeAndWait(() -> ApplicationManager.getApplication().runWriteAction(() -> {
       try {
-        FileSystemExtPoint.setFS(new IoFileSystem());
-        testRunnable.run();
-      } finally {
-        FileSystemExtPoint.setFS(oldFS);
+        testRunnable.accept(ApplicationManager.getApplication().getComponent(IdeaFileSystem.class));
+      } catch (Throwable e) {
+        ex[0] = e;
       }
+    }), ModalityState.defaultModalityState());
+    if (ex[0] != null) {
+      ex[0].printStackTrace();
+      fail();
     }
-  };
+  }
 
-  private static final TestInvoker IDEA_TEST_INVOKER = new TestInvoker() {
-    @Override
-    public void invokeTest(final Runnable testRunnable) {
-      FileSystem oldFS = FileSystemExtPoint.getFS();
-      try {
-        FileSystemExtPoint.setFS(new IdeaFileSystem());
-        final Throwable[] ex = new Throwable[1];
-        ApplicationManager.getApplication().invokeAndWait(new Runnable() {
-          @Override
-          public void run() {
-            ApplicationManager.getApplication().runWriteAction(new Runnable() {
-              @Override
-              public void run() {
-                try {
-                  testRunnable.run();
-                } catch (Throwable e) {
-                  ex[0] = e;
-                }
-              }
-            });
-          }
-        }, ModalityState.defaultModalityState());
-        if (ex[0] != null) {
-          ex[0].printStackTrace();
-          fail();
-        }
-      } finally {
-        FileSystemExtPoint.setFS(oldFS);
-      }
-    }
-  };
+  @Override
+  public void setEnvironment(@NotNull Environment ignored) {
+    // Needs IdeaEnvironment, but doesn't utilize it
+  }
 
-  private static final Runnable BASE_TEST_RUNNABLE = new Runnable() {
-    @Override
-    public void run() {
-      doBaseVfsTest();
-    }
-  };
-
-  private static final Runnable JAR_TEST_RUNNABLE = new Runnable() {
-    @Override
-    public void run() {
-      doJarVfsTest();
-    }
-  };
-
-  private static void doBaseVfsTest() {
-    IFile tmpDir = IFileUtils.createTmpDir();
+  private static void doBaseVfsTest(@NotNull FileSystem fs) {
+    IFile tmpDir = IFileUtil.createTmpDir(fs);
     assertTrue("Temp dir does not exist", tmpDir.exists());
     assertTrue("Created temp directory is not directory", tmpDir.isDirectory());
     assertFalse("Could create file with the same name as the directory", tmpDir.createNewFile());
     assertTrue("Created temp directory is not empty", tmpDir.getChildren().isEmpty());
 
-    IFile subSubDir = tmpDir.getDescendant(SUBSUBDIR);
+    IFile subSubDir = tmpDir.findChild("subdir").findChild("subsubdir");
     assertTrue(subSubDir.mkdirs());
 
     assertTrue(subSubDir.isDirectory());
     assertTrue(subSubDir.exists());
 
-    IFile file1 = tmpDir.getDescendant(SUBSUBDIR + File.separator + "file1");
+    IFile file1 = subSubDir.findChild("file1");
     assertFalse(file1.exists());
-    assertTrue(file1.getParent().equals(subSubDir));
+    assertEquals(file1.getParent(), subSubDir);
     try {
       OutputStream os = file1.openOutputStream();
       for (int i = 0; i < FILE_SIZE; i++) {
@@ -144,29 +114,30 @@ public class VfsTest extends PlatformMpsTest {
     }
 
     assertTrue(file1.rename("file111"));
-    assertTrue(file1.getName().equals("file111"));
-    assertTrue(file1.getParent().getDescendant("file111").equals(file1));
-    assertFalse(file1.getParent().getDescendant("file1").exists());
+    assertTrue(file1.getName().equals("file1"));
+    assertTrue(!file1.getParent().findChild("file111").equals(file1));
+    assertTrue(file1.getParent().findChild("file1").equals(file1));
+    assertFalse(file1.exists());
 
+    file1 =  file1.getParent().findChild("file111");
     assertTrue(file1.rename("file1"));
     String path1Original = file1.getPath();
+    file1 = file1.getParent().findChild("file1");
     assertTrue(file1.move(tmpDir));
     assertFalse(file1.getPath().equals(path1Original));
-    assertTrue(file1.getParent().equals(tmpDir));
-    assertFalse(FileSystem.getInstance().getFileByPath(path1Original).exists());
+    assertFalse(fs.getFile(path1Original).exists());
 
     assertTrue(tmpDir.delete());
     assertFalse(tmpDir.exists());
   }
 
-  private static void doJarVfsTest() {
-    FileSystem fileSystem = FileSystem.getInstance();
-    IFile jarRoot = fileSystem.getFileByPath(VfsTest.class.getResource(JAR_NAME).getFile() + JAR_SUFFIX);
+  private static void doJarVfsTest(@NotNull FileSystem fileSystem) {
+    IFile jarRoot = fileSystem.getFile(VfsTest.class.getResource(JAR_NAME).getFile() + JAR_SUFFIX);
     assertEquals(jarRoot.getChildren().size(), 3);
     assertTrue(jarRoot.isDirectory());
     assertTrue(jarRoot.isReadOnly());
-    assertTrue(fileSystem.isPackaged(jarRoot));
-    IFile readmeFile = jarRoot.getDescendant("README");
+    assertTrue(jarRoot.isPackaged());
+    IFile readmeFile = jarRoot.findChild("README");
     assertFalse(readmeFile.isDirectory());
     try {
       assertEquals("this is a test file\n", new String(ReadUtil.read(readmeFile.openInputStream())));
@@ -179,13 +150,11 @@ public class VfsTest extends PlatformMpsTest {
       readmeFile.openOutputStream();
       // if file was opened for output, it is an error
       fail();
-    } catch (UnsupportedOperationException e) {
-      // ok
-    } catch (IOException e) {
+    } catch (UnsupportedOperationException | IOException e) {
       // ok
     }
 
-    IFile file1 = jarRoot.getDescendant("dir1").getDescendant("subdir").getDescendant("file1");
+    IFile file1 = jarRoot.findChild("dir1").findChild("subdir").findChild("file1");
 
     try {
       assertEquals("file1\n", new String(ReadUtil.read(file1.openInputStream())));
@@ -194,32 +163,28 @@ public class VfsTest extends PlatformMpsTest {
       fail();
     }
 
-    assertEquals(jarRoot, file1.getParent().getParent().getParent());
-    assertTrue(jarRoot.getParent() != null);
-    assertTrue(jarRoot.getParent().getParent() == null);
+    assertEquals(jarRoot.getPath(), file1.getParent().getParent().getParent().getPath());
+    assertNotNull(jarRoot.getParent());
+    assertNull(jarRoot.getParent().getParent());
   }
 
   @Test
   public void baseIdeaVfsTest() {
-    IDEA_TEST_INVOKER.invokeTest(BASE_TEST_RUNNABLE);
+    IDEA_FS_TEST(VfsTest::doBaseVfsTest);
   }
 
   @Test
   public void baseIoVfsTest() {
-    IO_TEST_INVOKER.invokeTest(BASE_TEST_RUNNABLE);
+    IO_FS_TEST(VfsTest::doBaseVfsTest);
   }
 
   @Test
   public void jarIdeaVfsTest() {
-    IDEA_TEST_INVOKER.invokeTest(JAR_TEST_RUNNABLE);
+    IDEA_FS_TEST(VfsTest::doJarVfsTest);
   }
 
   @Test
   public void jarIoVfsTest() {
-    IO_TEST_INVOKER.invokeTest(JAR_TEST_RUNNABLE);
-  }
-
-  private interface TestInvoker {
-    void invokeTest(Runnable testRunnable);
+    IO_FS_TEST(VfsTest::doJarVfsTest);
   }
 }

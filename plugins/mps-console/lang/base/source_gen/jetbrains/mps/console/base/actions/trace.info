@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <root>
+    <file name="ActionAspectDescriptorImpl.java">
+      <unit at="14,0,34,0" name="jetbrains.mps.console.base.actions.ActionAspectDescriptorImpl" />
+    </file>
+  </root>
+  <root nodeRef="r:e2e0d663-5267-4842-83ca-f12fcca33264(jetbrains.mps.console.base.actions)/4615018937607083682">
+    <file name="blExpression_PasteWrapper_0.java">
+      <node id="4615018937607083683" at="15,46,16,34" concept="4" />
+      <node id="4615018937607083683" at="19,46,20,31" concept="4" />
+      <node id="4615018937607084454" at="23,39,24,55" concept="4" />
+      <node id="4615018937607084452" at="26,66,27,72" concept="3" />
+      <node id="4615018937607084452" at="27,72,28,82" concept="0" />
+      <node id="4615018937607084452" at="28,82,29,26" concept="4" />
+      <node id="4615018937607083683" at="33,0,34,0" concept="5" trace="Expression$mB" />
+      <node id="4615018937607083683" at="34,0,35,0" concept="5" trace="Command$6M" />
+      <node id="4615018937607083683" at="35,0,36,0" concept="5" trace="BLExpression$WS" />
+      <node id="4615018937607083683" at="39,0,40,0" concept="5" trace="expression$A9uN" />
+      <node id="4615018937607083683" at="14,0,18,0" concept="2" trace="getSourceConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="4615018937607083683" at="18,0,22,0" concept="2" trace="getTargetConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="4615018937607083683" at="22,0,26,0" concept="2" trace="wrap#(Lorg/jetbrains/mps/openapi/model/SNode;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="4615018937607084452" at="26,0,31,0" concept="6" trace="createBLExpression_sma98h_a0a0a#(Lorg/jetbrains/mps/openapi/model/SNode;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <scope id="4615018937607083683" at="15,46,16,34" />
+      <scope id="4615018937607083683" at="19,46,20,31" />
+      <scope id="4615018937607083685" at="23,39,24,55" />
+      <scope id="4615018937607084452" at="26,66,29,26">
+        <var name="n0" id="4615018937607084452" />
+      </scope>
+      <scope id="4615018937607083683" at="14,0,18,0" />
+      <scope id="4615018937607083683" at="18,0,22,0" />
+      <scope id="4615018937607083683" at="22,0,26,0">
+        <var name="sourceNode" id="4615018937607083683" />
+      </scope>
+      <scope id="4615018937607084452" at="26,0,31,0">
+        <var name="p0" id="4615018937607084452" />
+      </scope>
+      <unit id="4615018937607083683" at="38,0,41,0" name="jetbrains.mps.console.base.actions.blExpression_PasteWrapper_0$LINKS" />
+      <unit id="4615018937607083683" at="32,0,37,0" name="jetbrains.mps.console.base.actions.blExpression_PasteWrapper_0$CONCEPTS" />
+      <unit id="4615018937607083683" at="13,0,42,0" name="jetbrains.mps.console.base.actions.blExpression_PasteWrapper_0" />
+    </file>
+    <file name="blExpression_PasteWrapper_1.java">
+      <node id="1433263869220695694" at="15,46,16,36" concept="4" />
+      <node id="1433263869220695694" at="19,46,20,34" concept="4" />
+      <node id="1433263869220695697" at="23,39,24,72" concept="4" />
+      <node id="1433263869220695694" at="28,0,29,0" concept="5" trace="BLExpression$WS" />
+      <node id="1433263869220695694" at="29,0,30,0" concept="5" trace="Expression$mB" />
+      <node id="1433263869220695694" at="33,0,34,0" concept="5" trace="expression$A9uN" />
+      <node id="1433263869220695694" at="14,0,18,0" concept="2" trace="getSourceConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="1433263869220695694" at="18,0,22,0" concept="2" trace="getTargetConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="1433263869220695694" at="22,0,26,0" concept="2" trace="wrap#(Lorg/jetbrains/mps/openapi/model/SNode;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <scope id="1433263869220695694" at="15,46,16,36" />
+      <scope id="1433263869220695694" at="19,46,20,34" />
+      <scope id="1433263869220695696" at="23,39,24,72" />
+      <scope id="1433263869220695694" at="14,0,18,0" />
+      <scope id="1433263869220695694" at="18,0,22,0" />
+      <scope id="1433263869220695694" at="22,0,26,0">
+        <var name="sourceNode" id="1433263869220695694" />
+      </scope>
+      <unit id="1433263869220695694" at="32,0,35,0" name="jetbrains.mps.console.base.actions.blExpression_PasteWrapper_1$LINKS" />
+      <unit id="1433263869220695694" at="27,0,31,0" name="jetbrains.mps.console.base.actions.blExpression_PasteWrapper_1$CONCEPTS" />
+      <unit id="1433263869220695694" at="13,0,36,0" name="jetbrains.mps.console.base.actions.blExpression_PasteWrapper_1" />
+    </file>
+    <file name="blExpression_PasteWrapper_2.java">
+      <node id="6081287228602305633" at="16,46,17,36" concept="4" />
+      <node id="6081287228602305633" at="20,46,21,33" concept="4" />
+      <node id="1433263869220697094" at="24,39,25,112" concept="4" />
+      <node id="1433263869220697092" at="27,73,28,79" concept="3" />
+      <node id="1433263869220697092" at="28,79,29,82" concept="0" />
+      <node id="1433263869220697092" at="29,82,30,26" concept="4" />
+      <node id="6081287228602305633" at="34,0,35,0" concept="5" trace="BLExpression$WS" />
+      <node id="6081287228602305633" at="35,0,36,0" concept="5" trace="Statement$P6" />
+      <node id="6081287228602305633" at="36,0,37,0" concept="5" trace="ExpressionStatement$O8" />
+      <node id="6081287228602305633" at="37,0,38,0" concept="5" trace="Expression$mB" />
+      <node id="6081287228602305633" at="41,0,42,0" concept="5" trace="expression$A9uN" />
+      <node id="6081287228602305633" at="42,0,43,0" concept="5" trace="expression$5L7M" />
+      <node id="6081287228602305633" at="15,0,19,0" concept="2" trace="getSourceConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="6081287228602305633" at="19,0,23,0" concept="2" trace="getTargetConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="6081287228602305633" at="23,0,27,0" concept="2" trace="wrap#(Lorg/jetbrains/mps/openapi/model/SNode;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="1433263869220697092" at="27,0,32,0" concept="6" trace="createExpressionStatement_sma98h_a0a0c#(Lorg/jetbrains/mps/openapi/model/SNode;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <scope id="6081287228602305633" at="16,46,17,36" />
+      <scope id="6081287228602305633" at="20,46,21,33" />
+      <scope id="6081287228602317649" at="24,39,25,112" />
+      <scope id="1433263869220697092" at="27,73,30,26">
+        <var name="n0" id="1433263869220697092" />
+      </scope>
+      <scope id="6081287228602305633" at="15,0,19,0" />
+      <scope id="6081287228602305633" at="19,0,23,0" />
+      <scope id="6081287228602305633" at="23,0,27,0">
+        <var name="sourceNode" id="6081287228602305633" />
+      </scope>
+      <scope id="1433263869220697092" at="27,0,32,0">
+        <var name="p0" id="1433263869220697092" />
+      </scope>
+      <unit id="6081287228602305633" at="40,0,44,0" name="jetbrains.mps.console.base.actions.blExpression_PasteWrapper_2$LINKS" />
+      <unit id="6081287228602305633" at="33,0,39,0" name="jetbrains.mps.console.base.actions.blExpression_PasteWrapper_2$CONCEPTS" />
+      <unit id="6081287228602305633" at="14,0,45,0" name="jetbrains.mps.console.base.actions.blExpression_PasteWrapper_2" />
+    </file>
+    <file name="blExpression_PasteWrapper_3.java">
+      <node id="2510515516718299526" at="16,46,17,43" concept="4" />
+      <node id="2510515516718299526" at="20,46,21,31" concept="4" />
+      <node id="2510515516718302663" at="24,39,25,105" concept="4" />
+      <node id="2510515516718302661" at="27,66,28,72" concept="3" />
+      <node id="2510515516718302661" at="28,72,29,82" concept="0" />
+      <node id="2510515516718302661" at="29,82,30,26" concept="4" />
+      <node id="2510515516718299526" at="34,0,35,0" concept="5" trace="ExpressionStatement$O8" />
+      <node id="2510515516718299526" at="35,0,36,0" concept="5" trace="Command$6M" />
+      <node id="2510515516718299526" at="36,0,37,0" concept="5" trace="BLExpression$WS" />
+      <node id="2510515516718299526" at="37,0,38,0" concept="5" trace="Expression$mB" />
+      <node id="2510515516718299526" at="41,0,42,0" concept="5" trace="expression$5L7M" />
+      <node id="2510515516718299526" at="42,0,43,0" concept="5" trace="expression$A9uN" />
+      <node id="2510515516718299526" at="15,0,19,0" concept="2" trace="getSourceConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="2510515516718299526" at="19,0,23,0" concept="2" trace="getTargetConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="2510515516718299526" at="23,0,27,0" concept="2" trace="wrap#(Lorg/jetbrains/mps/openapi/model/SNode;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="2510515516718302661" at="27,0,32,0" concept="6" trace="createBLExpression_sma98h_a0a0d#(Lorg/jetbrains/mps/openapi/model/SNode;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <scope id="2510515516718299526" at="16,46,17,43" />
+      <scope id="2510515516718299526" at="20,46,21,31" />
+      <scope id="2510515516718299528" at="24,39,25,105" />
+      <scope id="2510515516718302661" at="27,66,30,26">
+        <var name="n0" id="2510515516718302661" />
+      </scope>
+      <scope id="2510515516718299526" at="15,0,19,0" />
+      <scope id="2510515516718299526" at="19,0,23,0" />
+      <scope id="2510515516718299526" at="23,0,27,0">
+        <var name="sourceNode" id="2510515516718299526" />
+      </scope>
+      <scope id="2510515516718302661" at="27,0,32,0">
+        <var name="p0" id="2510515516718302661" />
+      </scope>
+      <unit id="2510515516718299526" at="40,0,44,0" name="jetbrains.mps.console.base.actions.blExpression_PasteWrapper_3$LINKS" />
+      <unit id="2510515516718299526" at="33,0,39,0" name="jetbrains.mps.console.base.actions.blExpression_PasteWrapper_3$CONCEPTS" />
+      <unit id="2510515516718299526" at="14,0,45,0" name="jetbrains.mps.console.base.actions.blExpression_PasteWrapper_3" />
+    </file>
+    <file name="blExpression_PasteWrapper_4.java">
+      <node id="2510515516718308473" at="16,46,17,33" concept="4" />
+      <node id="2510515516718308473" at="20,46,21,33" concept="4" />
+      <node id="2510515516718309261" at="24,39,25,101" concept="4" />
+      <node id="2510515516718309259" at="27,68,28,74" concept="3" />
+      <node id="2510515516718309259" at="28,74,29,85" concept="0" />
+      <node id="2510515516718309259" at="29,85,30,26" concept="4" />
+      <node id="2510515516718308473" at="34,0,35,0" concept="5" trace="BLCommand$W4" />
+      <node id="2510515516718308473" at="35,0,36,0" concept="5" trace="Statement$P6" />
+      <node id="2510515516718308473" at="36,0,37,0" concept="5" trace="BlockStatement$u4" />
+      <node id="2510515516718308473" at="37,0,38,0" concept="5" trace="StatementList$m_" />
+      <node id="2510515516718308473" at="41,0,42,0" concept="5" trace="body$Q1Y9" />
+      <node id="2510515516718308473" at="42,0,43,0" concept="5" trace="statements$q65M" />
+      <node id="2510515516718308473" at="15,0,19,0" concept="2" trace="getSourceConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="2510515516718308473" at="19,0,23,0" concept="2" trace="getTargetConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="2510515516718308473" at="23,0,27,0" concept="2" trace="wrap#(Lorg/jetbrains/mps/openapi/model/SNode;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="2510515516718309259" at="27,0,32,0" concept="6" trace="createBlockStatement_sma98h_a0a0e#(Lorg/jetbrains/mps/openapi/model/SNode;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <scope id="2510515516718308473" at="16,46,17,33" />
+      <scope id="2510515516718308473" at="20,46,21,33" />
+      <scope id="2510515516718308475" at="24,39,25,101" />
+      <scope id="2510515516718309259" at="27,68,30,26">
+        <var name="n0" id="2510515516718309259" />
+      </scope>
+      <scope id="2510515516718308473" at="15,0,19,0" />
+      <scope id="2510515516718308473" at="19,0,23,0" />
+      <scope id="2510515516718308473" at="23,0,27,0">
+        <var name="sourceNode" id="2510515516718308473" />
+      </scope>
+      <scope id="2510515516718309259" at="27,0,32,0">
+        <var name="p0" id="2510515516718309259" />
+      </scope>
+      <unit id="2510515516718308473" at="40,0,44,0" name="jetbrains.mps.console.base.actions.blExpression_PasteWrapper_4$LINKS" />
+      <unit id="2510515516718308473" at="33,0,39,0" name="jetbrains.mps.console.base.actions.blExpression_PasteWrapper_4$CONCEPTS" />
+      <unit id="2510515516718308473" at="14,0,45,0" name="jetbrains.mps.console.base.actions.blExpression_PasteWrapper_4" />
+    </file>
+    <file name="blExpression_PasteWrapper_5.java">
+      <node id="2510515516718313202" at="16,46,17,38" concept="4" />
+      <node id="2510515516718313202" at="20,46,21,31" concept="4" />
+      <node id="2510515516718313205" at="24,39,25,102" concept="4" />
+      <node id="2510515516718313206" at="27,63,28,69" concept="3" />
+      <node id="2510515516718313206" at="28,69,29,79" concept="0" />
+      <node id="2510515516718313206" at="29,79,30,26" concept="4" />
+      <node id="2510515516718313202" at="34,0,35,0" concept="5" trace="BlockStatement$u4" />
+      <node id="2510515516718313202" at="35,0,36,0" concept="5" trace="Command$6M" />
+      <node id="2510515516718313202" at="36,0,37,0" concept="5" trace="BLCommand$W4" />
+      <node id="2510515516718313202" at="37,0,38,0" concept="5" trace="StatementList$m_" />
+      <node id="2510515516718313202" at="41,0,42,0" concept="5" trace="statements$q65M" />
+      <node id="2510515516718313202" at="42,0,43,0" concept="5" trace="body$Q1Y9" />
+      <node id="2510515516718313202" at="15,0,19,0" concept="2" trace="getSourceConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="2510515516718313202" at="19,0,23,0" concept="2" trace="getTargetConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="2510515516718313202" at="23,0,27,0" concept="2" trace="wrap#(Lorg/jetbrains/mps/openapi/model/SNode;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="2510515516718313206" at="27,0,32,0" concept="6" trace="createBLCommand_sma98h_a0a0f#(Lorg/jetbrains/mps/openapi/model/SNode;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <scope id="2510515516718313202" at="16,46,17,38" />
+      <scope id="2510515516718313202" at="20,46,21,31" />
+      <scope id="2510515516718313204" at="24,39,25,102" />
+      <scope id="2510515516718313206" at="27,63,30,26">
+        <var name="n0" id="2510515516718313206" />
+      </scope>
+      <scope id="2510515516718313202" at="15,0,19,0" />
+      <scope id="2510515516718313202" at="19,0,23,0" />
+      <scope id="2510515516718313202" at="23,0,27,0">
+        <var name="sourceNode" id="2510515516718313202" />
+      </scope>
+      <scope id="2510515516718313206" at="27,0,32,0">
+        <var name="p0" id="2510515516718313206" />
+      </scope>
+      <unit id="2510515516718313202" at="40,0,44,0" name="jetbrains.mps.console.base.actions.blExpression_PasteWrapper_5$LINKS" />
+      <unit id="2510515516718313202" at="33,0,39,0" name="jetbrains.mps.console.base.actions.blExpression_PasteWrapper_5$CONCEPTS" />
+      <unit id="2510515516718313202" at="14,0,45,0" name="jetbrains.mps.console.base.actions.blExpression_PasteWrapper_5" />
+    </file>
+  </root>
+  <root nodeRef="r:e2e0d663-5267-4842-83ca-f12fcca33264(jetbrains.mps.console.base.actions)/7284872370241013666">
+    <file name="printStatement_NodeFactories.java">
+      <node id="7284872370241018755" at="17,90,18,179" concept="0" />
+      <node id="7284872370241013666" at="24,0,25,0" concept="5" trace="object$jGCj" />
+      <node id="7284872370241013666" at="28,0,29,0" concept="5" trace="AbstractPrintExpression$Qx" />
+      <node id="7284872370241013751" at="16,102,19,7" concept="1" />
+      <node id="7284872370241013667" at="16,0,21,0" concept="2" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <scope id="7284872370241013752" at="17,90,18,179" />
+      <scope id="7284872370241013667" at="16,102,19,7" />
+      <scope id="7284872370241013667" at="16,0,21,0">
+        <var name="enclosingNode" id="7284872370241013667" />
+        <var name="index" id="7284872370241013667" />
+        <var name="model" id="7284872370241013667" />
+        <var name="newNode" id="7284872370241013667" />
+        <var name="sampleNode" id="7284872370241013667" />
+      </scope>
+      <unit id="7284872370241013666" at="23,0,26,0" name="jetbrains.mps.console.base.actions.printStatement_NodeFactories$LINKS" />
+      <unit id="7284872370241013666" at="27,0,30,0" name="jetbrains.mps.console.base.actions.printStatement_NodeFactories$CONCEPTS" />
+      <unit id="7284872370241013667" at="15,0,22,0" name="jetbrains.mps.console.base.actions.printStatement_NodeFactories$NodeFactory_7284872370241013667" />
+      <unit id="7284872370241013666" at="14,0,31,0" name="jetbrains.mps.console.base.actions.printStatement_NodeFactories" />
+    </file>
+  </root>
+</debug-info>
+

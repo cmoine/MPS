@@ -2,9 +2,9 @@
 <model ref="r:619da97d-f387-4d46-8414-92a0443bdc0b(org.jetbrains.mps.samples.IfAndUnless.editor)">
   <persistence version="9" />
   <languages>
-    <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="4" />
-    <use id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor" version="4" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="19" />
+    <use id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor" version="14" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports>
     <import index="3v68" ref="r:47174b35-df1c-485d-9362-8e3256f44aca(org.jetbrains.mps.samples.IfAndUnless.structure)" />
@@ -46,9 +46,6 @@
       </concept>
       <concept id="1139848536355" name="jetbrains.mps.lang.editor.structure.CellModel_WithRole" flags="ng" index="1$h60E">
         <reference id="1140103550593" name="relationDeclaration" index="1NtTu8" />
-      </concept>
-      <concept id="1073389214265" name="jetbrains.mps.lang.editor.structure.EditorCellModel" flags="ng" index="3EYTF0">
-        <property id="1130859485024" name="attractsFocus" index="1cu_pB" />
       </concept>
       <concept id="1073389446423" name="jetbrains.mps.lang.editor.structure.CellModel_Collection" flags="sn" stub="3013115976261988961" index="3EZMnI">
         <child id="1106270802874" name="cellLayout" index="2iSdaV" />
@@ -141,13 +138,13 @@
       <node concept="3F0ifn" id="P0flyHhnKQ" role="3EZMnx">
         <property role="3F0ifm" value="on condition that" />
         <node concept="Vb9p2" id="24Hvk6GxyrR" role="3F10Kt">
-          <property role="Vbekb" value="BOLD_ITALIC" />
+          <property role="Vbekb" value="g1_tSyq/BOLD_ITALIC" />
         </node>
       </node>
       <node concept="3F1sOY" id="P0flyHhnKS" role="3EZMnx">
         <ref role="1NtTu8" to="3v68:P0flyHh8Nd" resolve="condition" />
         <node concept="Veino" id="24Hvk6Gxyda" role="3F10Kt">
-          <property role="Vb096" value="yellow" />
+          <property role="Vb096" value="fLwANPq/yellow" />
           <node concept="1iSF2X" id="24Hvk6GxyKA" role="VblUZ">
             <property role="1iTho6" value="F5F5DC" />
           </node>
@@ -179,7 +176,6 @@
     <ref role="1XX52x" to="3v68:P0flyHh8Nf" resolve="Flow" />
     <node concept="3EZMnI" id="P0flyHhnTx" role="2wV5jI">
       <node concept="1HlG4h" id="1653mnvCjaw" role="3EZMnx">
-        <property role="1cu_pB" value="0" />
         <node concept="1HfYo3" id="1653mnvCjax" role="1HlULh">
           <node concept="3TQlhw" id="1653mnvCjay" role="1Hhtcw">
             <node concept="3clFbS" id="1653mnvCjaz" role="2VODD2">
@@ -198,13 +194,13 @@
           </node>
         </node>
         <node concept="Veino" id="1653mnvCjaD" role="3F10Kt">
-          <property role="Vb096" value="orange" />
+          <property role="Vb096" value="fLwANPp/orange" />
           <node concept="1iSF2X" id="1653mnvCjaE" role="VblUZ">
             <property role="1iTho6" value="F5F5DC" />
           </node>
         </node>
         <node concept="Vb9p2" id="1653mnvCjaF" role="3F10Kt">
-          <property role="Vbekb" value="BOLD_ITALIC" />
+          <property role="Vbekb" value="g1_tSyq/BOLD_ITALIC" />
         </node>
       </node>
       <node concept="3F2HdR" id="P0flyHhnT$" role="3EZMnx">

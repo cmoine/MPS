@@ -4,20 +4,25 @@ package jetbrains.mps.build.mps.testManifest.pluginSolution.plugin;
 
 import jetbrains.mps.plugins.applicationplugins.BaseApplicationPlugin;
 import com.intellij.openapi.extensions.PluginId;
+import org.jetbrains.annotations.NotNull;
 import jetbrains.mps.ide.actions.NodeActions_ActionGroup;
 
 public class PluginSolution_ApplicationPlugin extends BaseApplicationPlugin {
-  private PluginId myId = PluginId.getId("jetbrains.mps.build.mps.testManifest.pluginSolution");
+  private final PluginId myId = PluginId.getId("jetbrains.mps.build.mps.testManifest.pluginSolution");
+
   public PluginSolution_ApplicationPlugin() {
   }
+
+  @NotNull
   public PluginId getId() {
     return myId;
   }
+
   public void createGroups() {
-    // actions w/o parameters 
+    // actions w/o parameters
     addAction(new RefreshTestProject_Action());
-    // groups 
-    addGroup(new TestBuildProject_ActionGroup());
+    // groups
+    addGroup(new TestBuildProject_ActionGroup(this));
   }
   public void adjustRegularGroups() {
     insertGroupIntoAnother(TestBuildProject_ActionGroup.ID, NodeActions_ActionGroup.ID, NodeActions_ActionGroup.LABEL_ID_showGeneratedText);

@@ -4,7 +4,6 @@ package jetbrains.mps.lang.descriptor.generator.template.main;
 
 import jetbrains.mps.generator.runtime.Generated;
 import jetbrains.mps.generator.runtime.TemplateModelBase;
-import jetbrains.mps.generator.runtime.TemplateModel;
 import java.util.Collection;
 import jetbrains.mps.generator.runtime.TemplateMappingConfiguration;
 import jetbrains.mps.generator.runtime.TemplateSwitchMapping;
@@ -12,19 +11,21 @@ import org.jetbrains.mps.openapi.model.SModelReference;
 import jetbrains.mps.generator.runtime.TemplateModule;
 import jetbrains.mps.generator.runtime.TemplateUtil;
 import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
+import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.generator.runtime.TemplateDeclaration;
+import jetbrains.mps.generator.runtime.TemplateDeclarationKey;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 import jetbrains.mps.smodel.SNodePointer;
 
 @Generated
-public class TemplateModelImpl extends TemplateModelBase implements TemplateModel {
+public class TemplateModelImpl extends TemplateModelBase {
   private final Collection<TemplateMappingConfiguration> mappings;
   private final Collection<TemplateSwitchMapping> switches;
   private final SModelReference model;
   public TemplateModelImpl(TemplateModule module) {
     super(module);
     mappings = TemplateUtil.<TemplateMappingConfiguration>asCollection(new Mapping_GeneratorModule(this), new Mapping_LanguageModule(this));
-    switches = TemplateUtil.<TemplateSwitchMapping>asCollection(new Switch_InstantiateAspectDescriptor());
+    switches = TemplateUtil.<TemplateSwitchMapping>asCollection(new Switch_InstantiateAspectDescriptor(), new Switch_ContrubuteLanguageExtensions(), new Switch_AspectDescriptor_Instantiate());
     model = PersistenceFacade.getInstance().createModelReference("r:1dfaf07d-c77a-451e-91d3-b6f80f0f8508(jetbrains.mps.lang.descriptor.generator.template.main@generator)");
   }
   public String getLongName() {
@@ -39,29 +40,31 @@ public class TemplateModelImpl extends TemplateModelBase implements TemplateMode
   public Collection<TemplateSwitchMapping> getSwitches() {
     return switches;
   }
-  public TemplateDeclaration loadTemplate(SNodeReference template, Object... arguments) {
-    if (!(model.equals(template.getModelReference()))) {
+
+  @Nullable
+  @Override
+  public TemplateDeclaration loadTemplate(TemplateDeclarationKey key) {
+    if (!(model.equals(key.getSourceModel()))) {
       return null;
     }
+    final SNodeReference template = key.getSourceNode();
     if (template.equals(new SNodePointer("r:1dfaf07d-c77a-451e-91d3-b6f80f0f8508(jetbrains.mps.lang.descriptor.generator.template.main@generator)", "263208052639697475"))) {
-      TemplateUtil.assertTemplateParametersCount(template, 0, arguments.length);
       return new Template_GeneratorRuntime();
     }
     if (template.equals(new SNodePointer("r:1dfaf07d-c77a-451e-91d3-b6f80f0f8508(jetbrains.mps.lang.descriptor.generator.template.main@generator)", "9020561928507177266"))) {
-      TemplateUtil.assertTemplateParametersCount(template, 0, arguments.length);
       return new Template_Language();
     }
     if (template.equals(new SNodePointer("r:1dfaf07d-c77a-451e-91d3-b6f80f0f8508(jetbrains.mps.lang.descriptor.generator.template.main@generator)", "1698302279987411125"))) {
-      TemplateUtil.assertTemplateParametersCount(template, 0, arguments.length);
       return new Template_language_descriptor();
     }
-    if (template.equals(new SNodePointer("r:1dfaf07d-c77a-451e-91d3-b6f80f0f8508(jetbrains.mps.lang.descriptor.generator.template.main@generator)", "263208052639617419"))) {
-      TemplateUtil.assertTemplateParametersCount(template, 0, arguments.length);
-      return new Template_generator_descriptor();
-    }
     if (template.equals(new SNodePointer("r:1dfaf07d-c77a-451e-91d3-b6f80f0f8508(jetbrains.mps.lang.descriptor.generator.template.main@generator)", "263208052639692929"))) {
-      TemplateUtil.assertTemplateParametersCount(template, 0, arguments.length);
       return new Template_GDClass();
+    }
+    if (template.equals(new SNodePointer("r:1dfaf07d-c77a-451e-91d3-b6f80f0f8508(jetbrains.mps.lang.descriptor.generator.template.main@generator)", "1066600152715734036"))) {
+      return new Template_InterpretedGeneratorRuntimeDescriptor();
+    }
+    if (template.equals(new SNodePointer("r:1dfaf07d-c77a-451e-91d3-b6f80f0f8508(jetbrains.mps.lang.descriptor.generator.template.main@generator)", "7568285956000709565"))) {
+      return new Template_generator_descriptor();
     }
     return null;
   }

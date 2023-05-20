@@ -18,7 +18,6 @@ package jetbrains.mps.ide.typesystem.trace;
 import java.util.List;
 import org.jetbrains.mps.openapi.model.SNode;
 import java.util.LinkedList;
-import jetbrains.mps.smodel.IOperationContext;
 import java.util.Set;
 import jetbrains.mps.newTypesystem.state.State;
 import jetbrains.mps.nodeEditor.EditorComponent;

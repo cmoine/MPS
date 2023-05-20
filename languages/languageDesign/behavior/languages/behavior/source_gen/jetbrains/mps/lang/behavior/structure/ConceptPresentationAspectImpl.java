@@ -4,43 +4,98 @@ package jetbrains.mps.lang.behavior.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
+import jetbrains.mps.lang.behavior.plugin.URLFunction_HelpCenterDocUrl;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_ConceptBehavior = new ConceptPresentationBuilder().icon(IconContainer.RESOURCE_a0a0a).create();
-  private final ConceptPresentation props_ConceptConstructorDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptMethodDeclaration = new ConceptPresentationBuilder().deprecated(MetaAdapterFactory.getProperty(0xaf65afd8f0dd4942L, 0x87d963a55f2a9db1L, 0x11d4348057eL, 0x11d43480580L, "isVirtual"), MetaAdapterFactory.getProperty(0xaf65afd8f0dd4942L, 0x87d963a55f2a9db1L, 0x11d4348057eL, 0x11d43480581L, "isPrivate"), MetaAdapterFactory.getProperty(0xaf65afd8f0dd4942L, 0x87d963a55f2a9db1L, 0x11d4348057eL, 0x11d43480582L, "isAbstract"), MetaAdapterFactory.getProperty(0xaf65afd8f0dd4942L, 0x87d963a55f2a9db1L, 0x11d4348057eL, 0x51613f7fe129b24dL, "isStatic"), MetaAdapterFactory.getReferenceLink(0xaf65afd8f0dd4942L, 0x87d963a55f2a9db1L, 0x11d4348057eL, 0x11d4348057fL, "overriddenMethod")).create();
-  private final ConceptPresentation props_InternalConceptDeclarationReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InternalConceptDeclarationsHolder = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_LocalBehaviorMethodCall = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SuperNodeExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ThisNodeExpression = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_ConceptBehavior;
+  private ConceptPresentation props_ConceptConstructorDeclaration;
+  private ConceptPresentation props_ConceptMethodDeclaration;
+  private ConceptPresentation props_LocalBehaviorMethodCall;
+  private ConceptPresentation props_SuperConceptExpression;
+  private ConceptPresentation props_SuperExpression;
+  private ConceptPresentation props_SuperNodeExpression;
+  private ConceptPresentation props_ThisConceptExpression;
+  private ConceptPresentation props_ThisNodeExpression;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.ConceptBehavior:
+        if (props_ConceptBehavior == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.helpUrl(HELP_URL);
+          cpb.icon(IconContainer.RESOURCE_a0a3a0a0b0k);
+          props_ConceptBehavior = cpb.create();
+        }
         return props_ConceptBehavior;
-      case 1:
+      case LanguageConceptSwitch.ConceptConstructorDeclaration:
+        if (props_ConceptConstructorDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ConceptConstructorDeclaration");
+          props_ConceptConstructorDeclaration = cpb.create();
+        }
         return props_ConceptConstructorDeclaration;
-      case 2:
+      case LanguageConceptSwitch.ConceptMethodDeclaration:
+        if (props_ConceptMethodDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder(0xaf65afd8f0dd4942L, 0x87d963a55f2a9db1L, 0x11d4348057eL);
+          cpb.deprecateProperty(0x11d43480581L, "isPrivate");
+          cpb.presentationByName();
+          props_ConceptMethodDeclaration = cpb.create();
+        }
         return props_ConceptMethodDeclaration;
-      case 3:
-        return props_InternalConceptDeclarationReference;
-      case 4:
-        return props_InternalConceptDeclarationsHolder;
-      case 5:
+      case LanguageConceptSwitch.LocalBehaviorMethodCall:
+        if (props_LocalBehaviorMethodCall == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x11857355952L, 0xf8c78301adL, "baseMethodDeclaration", "", "");
+          props_LocalBehaviorMethodCall = cpb.create();
+        }
         return props_LocalBehaviorMethodCall;
-      case 6:
+      case LanguageConceptSwitch.SuperConceptExpression:
+        if (props_SuperConceptExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("super concept");
+          cpb.rawPresentation("super");
+          props_SuperConceptExpression = cpb.create();
+        }
+        return props_SuperConceptExpression;
+      case LanguageConceptSwitch.SuperExpression:
+        if (props_SuperExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_SuperExpression = cpb.create();
+        }
+        return props_SuperExpression;
+      case LanguageConceptSwitch.SuperNodeExpression:
+        if (props_SuperNodeExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("super node");
+          cpb.rawPresentation("super");
+          props_SuperNodeExpression = cpb.create();
+        }
         return props_SuperNodeExpression;
-      case 7:
+      case LanguageConceptSwitch.ThisConceptExpression:
+        if (props_ThisConceptExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("this concept");
+          cpb.rawPresentation("this");
+          props_ThisConceptExpression = cpb.create();
+        }
+        return props_ThisConceptExpression;
+      case LanguageConceptSwitch.ThisNodeExpression:
+        if (props_ThisNodeExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("this node");
+          cpb.rawPresentation("this");
+          props_ThisNodeExpression = cpb.create();
+        }
         return props_ThisNodeExpression;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
+  private static final String HELP_URL = URLFunction_HelpCenterDocUrl.getUrl() + "behavior.html#conceptinstancemethods";
 }

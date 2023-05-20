@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@ package jetbrains.mps.smodel.tempmodel;
 
 import jetbrains.mps.extapi.module.SRepositoryExt;
 import jetbrains.mps.project.structure.model.ModelRootDescriptor;
+import jetbrains.mps.smodel.MPSModuleOwner;
 import jetbrains.mps.smodel.MPSModuleRepository;
 import org.jetbrains.mps.openapi.module.SModule;
 
@@ -41,12 +42,22 @@ public abstract class TempModuleOptions {
   }
 
   public static TempModuleOptions forDefaultModule() {
-    return forNewModule(Collections.<ModelRootDescriptor>emptySet());
+    return forNewModule(Collections.emptySet());
   }
 
-  public static TempModuleOptions forDefaultModuleWithSourceAndClassesGen() {
+  /**
+   * PROVISIONAL CODE, DO NOT USE OUTSIDE OF MPS
+   * @return options to instantiate {@link jetbrains.mps.module.ReloadableModule non-reloadable} temp module.
+   * Module has no Java Module facet nor model roots.
+   */
+  public static TempModuleOptions nonReloadableModule() {
+    return new NonReloadableNewModuleOptions(MPSModuleRepository.getInstance());
+  }
+
+
+    public static TempModuleOptions forDefaultModuleWithSourceAndClassesGen() {
     // todo: builder here
-    return new NewModuleOptions(Collections.<ModelRootDescriptor>emptySet(), true, true);
+    return new NewModuleOptions(Collections.emptySet(), true, true);
   }
 
   private static class NewModuleOptions extends TempModuleOptions {
@@ -93,6 +104,31 @@ public abstract class TempModuleOptions {
     @Override
     public void disposeModule() {
 
+    }
+  }
+
+  private static class NonReloadableNewModuleOptions extends TempModuleOptions implements MPSModuleOwner {
+    private final SRepositoryExt myRepo;
+    private TempModule2 myCreatedModule;
+
+    /*package*/ NonReloadableNewModuleOptions(SRepositoryExt repo) {
+      myRepo = repo;
+    }
+
+    @Override
+    public SModule createModule() {
+      myCreatedModule = myRepo.registerModule(new TempModule2(), this);
+      return myCreatedModule;
+    }
+
+    @Override
+    public void disposeModule() {
+      myRepo.unregisterModule(myCreatedModule, this);
+    }
+
+    @Override
+    public boolean isHidden() {
+      return true;
     }
   }
 }

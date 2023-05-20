@@ -44,7 +44,7 @@ public final class DescendantsTreeIterator implements TreeIterator<SNode> {
    * Stack of non-leaf nodes we've visited so far. Grows as much as depth of the tree.
    * We use stack despite presence of SNode#getParent() to minimize number of notifications sent out on node access.
    */
-  private final Deque<SNode> myVisitedNodes = new ArrayDeque<SNode>(20);
+  private final Deque<SNode> myVisitedNodes = new ArrayDeque<>(20);
   /*
    * myNext == null when there are no more children to visit
    */

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,20 +16,27 @@
 package org.jetbrains.mps.openapi.persistence;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import org.jetbrains.mps.openapi.language.SLanguage;
 import org.jetbrains.mps.openapi.model.SModelId;
+import org.jetbrains.mps.openapi.model.SModelName;
 import org.jetbrains.mps.openapi.model.SModelReference;
+import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeId;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 import org.jetbrains.mps.openapi.module.SModuleId;
 import org.jetbrains.mps.openapi.module.SModuleReference;
+import org.jetbrains.mps.openapi.persistence.datasource.DataSourceType;
 
 import java.util.Set;
 
 /**
- * Represents a singleton registry of model and model root factories.
+ * Represents a singleton registry of model, model root factories, find usages and navigation participants.
+ * Also provides a bunch of methods to transform String to model refs/module refs/ node ids and vice versa.
+ *
  */
 public abstract class PersistenceFacade {
-
   protected PersistenceFacade() {
   }
 
@@ -50,37 +57,41 @@ public abstract class PersistenceFacade {
   /**
    * Retrieves the factory associated with the given type
    */
-  public abstract ModelRootFactory getModelRootFactory(String type);
+  public abstract ModelRootFactory getModelRootFactory(@NotNull String type);
 
   /**
    * Registers the factory with the given type, overwriting potential earlier registration.
    *
-   * @param factory The factory to register, null to clear the registration for the given type.
+   * @param factory The factory to register, <code>null</code> to clear the registration for the given type.
    */
-  public abstract void setModelRootFactory(String type, ModelRootFactory factory);
+  public abstract void setModelRootFactory(@NotNull String type, @Nullable ModelRootFactory factory);
 
   /**
    * Retrieves the factory associated with the given file extension.
+   * @deprecated use {@link PersistenceFacade#getModelFactory(ModelFactoryType)} instead
    */
-  public abstract ModelFactory getModelFactory(String extension);
+@Deprecated(since = "181", forRemoval = true)
+  public abstract ModelFactory getModelFactory(@Nullable String extension);
 
+  /**
+   * @return the ModelFactory which was registered <b>last</b>.
+   * Use <code>ModelFactoryRegister</code> extension point in order to register a custom ModelFactory.
+   */
+  @Nullable
+  public abstract ModelFactory getModelFactory(@NotNull ModelFactoryType type);
+
+  /**
+   * @return the ModelFactory which was registered last and has in its {@link ModelFactory#getPreferredDataSourceTypes()} the dataSourceType.
+   */
+  @Nullable
+  public abstract ModelFactory getModelFactory(@NotNull DataSourceType dataSourceType);
 
   /**
    * Retrieves the factory for default MPS storage format (xml-based).
+   * @deprecated unclear contract, use {@code ModelFactoryRegistry#getDefault(DataSourceType)} + <code>PreinstalledModelFactoryTypes.PLAIN_XML</code>
    */
+@Deprecated(since = "181", forRemoval = true)
   public abstract ModelFactory getDefaultModelFactory();
-
-  /**
-   * Registers the factory with the file extension, overwriting potential earlier registration.
-   *
-   * @param factory The factory to register, null to clear the registration for the given type.
-   */
-  public abstract void setModelFactory(String extension, ModelFactory factory);
-
-  /**
-   * Retrieves registered storage formats extensions.
-   * */
-  public abstract Set<String> getModelFactoryExtensions();
 
   /**
    * @return module identity object created from persistence text
@@ -123,7 +134,7 @@ public abstract class PersistenceFacade {
    *             The actual type of the model id is followed by implementation-specific text.
    * @throws IllegalArgumentException if the text does not contain a parsable <code>SModelId</code>.
    */
-  public abstract SModelId createModelId(String text);
+  public abstract SModelId createModelId(@NotNull String text);
 
   /**
    * Serialize counterpart for {@link #createModelId(String)}, persistence-ready presentation of a model identifier.
@@ -136,9 +147,13 @@ public abstract class PersistenceFacade {
   /**
    * Creates an SModelReference from a given text identifier.
    *
-   * @throws IllegalArgumentException if the text does not contain a parsable <code>SModelReference</code>.
+   * @throws IllegalArgumentException if the text does not contain a parsable <code>SModelReference</code>
+   * @throws IncorrectModelReferenceFormatException if the text does not contain a parsable <code>SModelReference</code> [since 2017.3]
+   *
+   * [it is a runtime exception in order to preserve compatibility]
    */
-  public abstract SModelReference createModelReference(String text);
+  @NotNull
+  public abstract SModelReference createModelReference(@NotNull String text);
 
   /**
    * Serialize counterpart for {@link #createModelReference(String)}, persistence-ready presentation of a model reference
@@ -149,9 +164,19 @@ public abstract class PersistenceFacade {
 
   /**
    * Creates an SModelReference in a module with a given model id and model name.
+   * Prefer {@link #createModelReference(SModuleReference, SModelId, SModelName)} alternative that takes {@link SModelName}.
    * @param module can be null only if modelId is globally unique (i.e. can be resolved without a module)
    */
   public abstract SModelReference createModelReference(SModuleReference module, @NotNull SModelId modelId, @NotNull String modelName);
+
+  /**
+   * Creates an SModelReference in a module with a given model id and model name.
+   * @param module can be null only if modelId is globally unique (i.e. can be resolved without a module)
+   * @param modelId identity of a model either globally or within a module
+   * @param modelName user-friendly name of a model
+   * @throws IllegalArgumentException when modelId is module-relative and no module has been specified
+   */
+  public abstract SModelReference createModelReference(SModuleReference module, @NotNull SModelId modelId, @NotNull SModelName modelName);
 
   /**
    * Registers the factory with the model id type, overwriting potential earlier registration.
@@ -161,6 +186,18 @@ public abstract class PersistenceFacade {
   public abstract void setModelIdFactory(String type, SModelIdFactory factory);
 
   /**
+   * Serialize counterpart for {@link #createNodeId(String)}, persistence-ready presentation of a node identity.
+   * @param nodeId identity of a node, see {@link SNode#getNodeId()}
+   * @return textual representation of a node identity value
+   * @since 2018.3
+   */
+  public String asString(@NotNull SNodeId nodeId) {
+    // there's a lot of code that does SNodeId.toString(), and unless we get rid of it, there's no reason to bother with implementation of the method
+    // in PersistenceRegistry class as there's no chances for any extensibility.
+    return nodeId.toString();
+  }
+
+  /**
    * Creates an SNodeId from a given text identifier.
    * Allows implementations to provide their own version of SNodeId.
    *
@@ -168,8 +205,12 @@ public abstract class PersistenceFacade {
    *             The text comes in the following format: "type:restInterpretedByTheConcreteTypeProvider"
    *             The actual type of the node id is followed by implementation-specific text.
    * @throws IllegalArgumentException if the text does not contain a parsable <code>SNodeId</code>.
+   * @throws IncorrectNodeIdFormatException if the text does not contain a parsable SNodeId.
+   *
+   * fixme when it returns null and when throws IAE?
    */
-  public abstract SNodeId createNodeId(String text);
+  @Nullable
+  public abstract SNodeId createNodeId(@NotNull String text);
 
   /**
    * Serialize counterpart for {@link #createNodeReference(String)}, persistence-ready presentation of a node reference.
@@ -179,7 +220,12 @@ public abstract class PersistenceFacade {
   @NotNull
   public abstract String asString(@NotNull SNodeReference nodeRef);
 
-  public abstract SNodeReference createNodeReference(String text);
+  /**
+   * @throws IllegalArgumentException if the model reference or node reference could not be parsed
+   * @throws IncorrectModelReferenceFormatException if the model reference could not be parsed [since 2017.3]
+   * @throws IncorrectNodeIdFormatException if the node id could not be parsed [since 2017.3]
+   */
+  public abstract SNodeReference createNodeReference(@NotNull String text);
 
   /**
    * Registers the factory with the node id type, overwriting potential earlier registration.
@@ -187,6 +233,33 @@ public abstract class PersistenceFacade {
    * @param factory The factory to register, null to clear the registration for the given type.
    */
   public abstract void setNodeIdFactory(String type, SNodeIdFactory factory);
+
+  /**
+   * Serialize/deserialize support for {@linkplain SAbstractConcept concept meta-object}
+   * @since 2019.2
+   */
+  public abstract String asString(@NotNull SAbstractConcept concept);
+
+  /**
+   * Serialize/deserialize support for {@linkplain SAbstractConcept concept meta-object}
+   * @throws IllegalArgumentException if text doesn't represent valid serialized identity of a concept
+   * @since 2019.2
+   */
+  public abstract SAbstractConcept createConcept(@NotNull String text);
+
+
+  /**
+   * Serialize/deserialize support for {@linkplain SAbstractConcept deployed language meta-object}
+   * @since 2019.2
+   */
+  public abstract String asString(@NotNull SLanguage language);
+
+  /**
+   * Serialize/deserialize support for {@linkplain SAbstractConcept deployed language meta-object}
+   * @throws IllegalArgumentException if text doesn't represent valid serialized identity of a deployed language
+   * @since 2019.2
+   */
+  public abstract SLanguage createLanguage(@NotNull String text);
 
   /**
    * Find usages participants speed-up usages search by indexing the content.
@@ -211,19 +284,40 @@ public abstract class PersistenceFacade {
   /**
    * Navigation participants speed-up building Go to lists by indexing the available targets.
    * see {@link NavigationParticipant}
+   * @deprecated No reason to keep this in PersistenceComponent, NavigationParticipant API is cumbersome. Need a replacement API.
    */
+  @Deprecated(since = "2020.3", forRemoval = true)
   public abstract Set<NavigationParticipant> getNavigationParticipants();
 
   /**
-   * @deprecated see {@link #addFindUsagesParticipant(FindUsagesParticipant)} for reasons
+   * @deprecated see {@link #getNavigationParticipants()}
    */
-  @Deprecated
+  @Deprecated(since = "2020.3", forRemoval = true)
   public abstract void addNavigationParticipant(NavigationParticipant participant);
 
   /**
-   * @deprecated see {@link #addFindUsagesParticipant(FindUsagesParticipant)} for reasons
+   * @deprecated see {@link #getNavigationParticipants()}
    */
-  @Deprecated
+  @Deprecated(since = "2020.3", forRemoval = true)
   public abstract void removeNavigationParticipant(NavigationParticipant participant);
 
+  public static final class IncorrectModelReferenceFormatException extends IllegalArgumentException {
+    public IncorrectModelReferenceFormatException(@Nullable String message, @Nullable Throwable cause) {
+      super(message, cause);
+    }
+
+    public IncorrectModelReferenceFormatException(@Nullable String message) {
+      this(message, null);
+    }
+  }
+
+  public static final class IncorrectNodeIdFormatException extends IllegalArgumentException {
+    public IncorrectNodeIdFormatException(@Nullable String message, @Nullable Throwable cause) {
+      super(message, cause);
+    }
+
+    public IncorrectNodeIdFormatException(@Nullable String message) {
+      this(message, null);
+    }
+  }
 }

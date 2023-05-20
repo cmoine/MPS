@@ -5,14 +5,14 @@ package jetbrains.mps.lang.structure.editor;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.module.SModule;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.generator.TransientModelsModule;
+import jetbrains.mps.extapi.module.TransientSModule;
 import jetbrains.mps.smodel.Generator;
 
 public class IdEditorHelper {
   public static boolean shownInEditor(SNode node) {
-    // IDs to be shown in editor in generator and transient models 
+    // IDs to be shown in editor in generator and transient models
     SModule module = SNodeOperations.getModel(node).getModule();
-    if (module instanceof TransientModelsModule || module instanceof Generator) {
+    if (module instanceof TransientSModule || module instanceof Generator) {
       return true;
     }
     return false;

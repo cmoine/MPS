@@ -5,8 +5,8 @@ package jetbrains.mps.openapi.editor.descriptor;
  * 05 16, 2013
  */
 public interface ConceptEditorHint {
-  public String getId();
-  public String getPresentation();
-  public boolean showInUI();
-  public String getFQName();
+  String getId();
+  String getPresentation();
+  boolean showInUI();
+  String getFQName();
 }

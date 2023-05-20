@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package jetbrains.mps.smodel;
 import jetbrains.mps.components.CoreComponent;
 import jetbrains.mps.smodel.adapter.ids.SConceptId;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactoryByName;
 import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.smodel.language.LanguageRegistry;
 import jetbrains.mps.smodel.language.LanguageRegistryListener;
@@ -26,7 +25,6 @@ import jetbrains.mps.smodel.language.LanguageRuntime;
 import jetbrains.mps.smodel.runtime.ConceptDescriptor;
 import jetbrains.mps.smodel.runtime.StructureAspectDescriptor;
 import jetbrains.mps.util.IterableUtil;
-import jetbrains.mps.util.annotation.ToRemove;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
@@ -45,15 +43,17 @@ import java.util.concurrent.ConcurrentMap;
 
 /**
  * Based on generated structure descriptors
+ * XXX why don't we keep this cache as part of StructureAspectDescriptor? Perhaps, won't be as straightforward as it's here with
+ * concept.getParent() call?
  */
 public class ConceptDescendantsCache implements CoreComponent {
   private static ConceptDescendantsCache INSTANCE;
 
-  private final MPSModuleRepository myModuleRepository;
+  private final ConceptRegistry myConceptRegistry;
   private final LanguageRegistry myLanguageRegistry;
 
-  private final Map<LanguageRuntime, Set<ConceptDescriptor>> myLoadedLanguageToConceptsMap = new HashMap<LanguageRuntime, Set<ConceptDescriptor>>();
-  private final Set<LanguageRuntime> myNotProcessedRuntimes = new LinkedHashSet<LanguageRuntime>();
+  private final Map<LanguageRuntime, Set<ConceptDescriptor>> myLoadedLanguageToConceptsMap = new HashMap<>();
+  private final Set<LanguageRuntime> myNotProcessedRuntimes = new LinkedHashSet<>();
   private final LanguageRegistryListener myLanguageRegistryListener = new LanguageRegistryListener() {
     @Override
     public void afterLanguagesLoaded(Iterable<LanguageRuntime> languages) {
@@ -64,9 +64,9 @@ public class ConceptDescendantsCache implements CoreComponent {
 
     @Override
     public void beforeLanguagesUnloaded(Iterable<LanguageRuntime> languages) {
-      HashSet<LanguageRuntime> c = new HashSet<LanguageRuntime>(IterableUtil.asCollection(languages));
+      HashSet<LanguageRuntime> c = new HashSet<>(IterableUtil.asCollection(languages));
       synchronized (myNotProcessedRuntimes) {
-        LinkedList<LanguageRuntime> notYetLoaded = new LinkedList<LanguageRuntime>(myNotProcessedRuntimes);
+        LinkedList<LanguageRuntime> notYetLoaded = new LinkedList<>(myNotProcessedRuntimes);
         notYetLoaded.retainAll(c);
         myNotProcessedRuntimes.removeAll(notYetLoaded);
         c.removeAll(notYetLoaded);
@@ -75,10 +75,7 @@ public class ConceptDescendantsCache implements CoreComponent {
     }
   };
 
-  // SConceptId used as key here (instead of SConcept) because of hashCode() method implementation for sub-classes of SConcept.
-  // Currently all implementors return 0 from the hashCode() method.
   // Values are unmodifiable linked hash sets to guarantee iteration order.
-  // TODO: use SConcept as a key after reimplementing SConcept.hasCode() method properly.
   private final ConcurrentMap<SAbstractConcept, Set<SAbstractConcept>> myDescendantsCache = new ConcurrentHashMap<>();
 
   private void loadConcepts(Collection<LanguageRuntime> languages) {
@@ -107,7 +104,7 @@ public class ConceptDescendantsCache implements CoreComponent {
     List<SConceptId> pids = concept.getParentsIds();
     SAbstractConcept abstractConcept = MetaAdapterFactory.getAbstractConcept(concept);
     for (SConceptId id : pids) {
-      SAbstractConcept parentConcept = MetaAdapterFactory.getAbstractConcept(ConceptRegistry.getInstance().getConceptDescriptor(id));
+      SAbstractConcept parentConcept = MetaAdapterFactory.getAbstractConcept(myConceptRegistry.getConceptDescriptor(id));
       myDescendantsCache.compute(parentConcept, (key, values) -> add(values, abstractConcept));
     }
   }
@@ -117,7 +114,7 @@ public class ConceptDescendantsCache implements CoreComponent {
 
     SAbstractConcept abstractConcept = MetaAdapterFactory.getAbstractConcept(concept);
     for (SConceptId id : pids) {
-      SAbstractConcept parentConcept = MetaAdapterFactory.getAbstractConcept(ConceptRegistry.getInstance().getConceptDescriptor(id));
+      SAbstractConcept parentConcept = MetaAdapterFactory.getAbstractConcept(myConceptRegistry.getConceptDescriptor(id));
       myDescendantsCache.compute(parentConcept, (key, values) -> remove(values, abstractConcept));
     }
   }
@@ -148,8 +145,8 @@ public class ConceptDescendantsCache implements CoreComponent {
     return Collections.unmodifiableSet(descendants);
   }
 
-  public ConceptDescendantsCache(MPSModuleRepository moduleRepository, LanguageRegistry languageRegistry) {
-    myModuleRepository = moduleRepository;
+  public ConceptDescendantsCache(ConceptRegistry conceptRegistry, LanguageRegistry languageRegistry) {
+    myConceptRegistry = conceptRegistry;
     myLanguageRegistry = languageRegistry;
   }
 
@@ -184,7 +181,7 @@ public class ConceptDescendantsCache implements CoreComponent {
   public Set<SAbstractConcept> getDescendants(SAbstractConcept concept) {
     loadConceptsFromNotProcessedRuntimes();
     //note that linked here guarantees the iteration order
-    Set<SAbstractConcept> result = new LinkedHashSet<SAbstractConcept>();
+    Set<SAbstractConcept> result = new LinkedHashSet<>();
     collectDescendants(concept, result);
     return result;
   }
@@ -214,29 +211,8 @@ public class ConceptDescendantsCache implements CoreComponent {
 
   @NotNull
   private Set<SAbstractConcept> getDirectDescendantsInternal(SAbstractConcept concept) {
-    myModuleRepository.getModelAccess().checkReadAccess();
     Set<SAbstractConcept> result = myDescendantsCache.get(concept);
-    return result != null ? result : Collections.<SAbstractConcept>emptySet();
-  }
-
-  //-------------to remove-----------
-
-  @Deprecated
-  @ToRemove(version = 3.3)
-  public Set<String> getDescendants(String conceptFqName) {
-    SAbstractConcept c = MetaAdapterFactoryByName.getInterfaceConcept(conceptFqName);
-    if (c==null){
-      c = MetaAdapterFactoryByName.getConcept(conceptFqName);
-    }
-    if (c==null){
-      return Collections.emptySet();
-    }
-
-    LinkedHashSet<String> res = new LinkedHashSet<String>();
-    for (SAbstractConcept ac:getDescendants(c)){
-      res.add(ac.getQualifiedName());
-    }
-    return res;
+    return result != null ? result : Collections.emptySet();
   }
 
   private Set<ConceptDescriptor> getConcepts(LanguageRuntime languageRuntime) {
@@ -244,6 +220,6 @@ public class ConceptDescendantsCache implements CoreComponent {
     if (structureDescriptor == null) {
       return Collections.emptySet();
     }
-    return new LinkedHashSet<ConceptDescriptor>(structureDescriptor.getDescriptors());
+    return new LinkedHashSet<>(structureDescriptor.getDescriptors());
   }
 }

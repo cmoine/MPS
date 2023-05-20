@@ -5,12 +5,9 @@ package jetbrains.mps.baseLanguage.math.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import org.jetbrains.mps.openapi.model.SNode;
 import java.util.List;
@@ -23,14 +20,15 @@ import java.util.ArrayList;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 
 public final class MathSymbol__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x3304fc6e7c6b401eL, 0xa016b944934bb21fL, 0x11fe0ca1899L, "jetbrains.mps.baseLanguage.math.structure.MathSymbol");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<Void> getVisibleIndices_idhZx_LLY = new SMethodBuilder<Void>(new SJavaCompoundTypeImpl(Void.class)).name("getVisibleIndices").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("hZx_LLY").registry(REGISTRY).build(SMethodBuilder.createJavaParameter((Class<SNode>) ((Class) Object.class), ""), SMethodBuilder.createJavaParameter((Class<List<SNode>>) ((Class) Object.class), ""));
-  public static final SMethod<List<SNode>> getEmptyIndexList_idi0Okz4g = new SMethodBuilder<List<SNode>>(new SJavaCompoundTypeImpl((Class<List<SNode>>) ((Class) Object.class))).name("getEmptyIndexList").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("i0Okz4g").registry(REGISTRY).build();
-  public static final SMethod<String> getOpName_id1653mnvAgoA = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getOpName").modifiers(SModifiersImpl.create(9, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("1653mnvAgoA").registry(REGISTRY).build();
+  public static final SMethod<Void> getVisibleIndices_idhZx_LLY = new SMethodBuilder<Void>(new SJavaCompoundTypeImpl(Void.class)).name("getVisibleIndices").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1236440390782L).languageId(0xa016b944934bb21fL, 0x3304fc6e7c6b401eL).build2(SMethodBuilder.createJavaParameter((Class<SNode>) ((Class) Object.class), ""), SMethodBuilder.createJavaParameter((Class<List<SNode>>) ((Class) Object.class), ""));
+  public static final SMethod<List<SNode>> getEmptyIndexList_idi0Okz4g = new SMethodBuilder<List<SNode>>(new SJavaCompoundTypeImpl((Class<List<SNode>>) ((Class) Object.class))).name("getEmptyIndexList").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1237828382992L).languageId(0xa016b944934bb21fL, 0x3304fc6e7c6b401eL).build2();
+  public static final SMethod<String> getOpName_id1653mnvAgoA = new SMethodBuilder<String>(new SJavaCompoundTypeImpl(String.class)).name("getOpName").modifiers(9, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1262430001741497894L).languageId(0xa016b944934bb21fL, 0x3304fc6e7c6b401eL).build2();
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getVisibleIndices_idhZx_LLY, getEmptyIndexList_idi0Okz4g, getOpName_id1653mnvAgoA);
 
@@ -38,11 +36,11 @@ public final class MathSymbol__BehaviorDescriptor extends BaseBHDescriptor {
   }
 
   /*package*/ static void getVisibleIndices_idhZx_LLY(@NotNull SNode __thisNode__, SNode sender, List<SNode> indices) {
-    SNode sI = SNodeOperations.getNodeAncestor(sender, MetaAdapterFactory.getConcept(0x3304fc6e7c6b401eL, 0xa016b944934bb21fL, 0x11fea76c7e0L, "jetbrains.mps.baseLanguage.math.structure.AbstractIndex"), true, false);
-    if (sI != SLinkOperations.getTarget(__thisNode__, MetaAdapterFactory.getContainmentLink(0x3304fc6e7c6b401eL, 0xa016b944934bb21fL, 0x11fe0ca1899L, 0x11fe0cae7f6L, "var"))) {
-      ListSequence.fromList(indices).addElement(SLinkOperations.getTarget(__thisNode__, MetaAdapterFactory.getContainmentLink(0x3304fc6e7c6b401eL, 0xa016b944934bb21fL, 0x11fe0ca1899L, 0x11fe0cae7f6L, "var")));
+    SNode sI = SNodeOperations.getNodeAncestor(sender, CONCEPTS.AbstractIndex$lZ, true, false);
+    if (sI != SLinkOperations.getTarget(__thisNode__, LINKS.var$HIsb)) {
+      ListSequence.fromList(indices).addElement(SLinkOperations.getTarget(__thisNode__, LINKS.var$HIsb));
     }
-    SNode ms = SNodeOperations.getNodeAncestor(__thisNode__, MetaAdapterFactory.getConcept(0x3304fc6e7c6b401eL, 0xa016b944934bb21fL, 0x11fe0ca1899L, "jetbrains.mps.baseLanguage.math.structure.MathSymbol"), false, false);
+    SNode ms = SNodeOperations.getNodeAncestor(__thisNode__, CONCEPTS.MathSymbol$tZ, false, false);
     if (ms != null) {
       MathSymbol__BehaviorDescriptor.getVisibleIndices_idhZx_LLY.invoke(ms, __thisNode__, indices);
     }
@@ -55,7 +53,6 @@ public final class MathSymbol__BehaviorDescriptor extends BaseBHDescriptor {
   }
 
   /*package*/ MathSymbol__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -104,5 +101,14 @@ public final class MathSymbol__BehaviorDescriptor extends BaseBHDescriptor {
   @Override
   public SAbstractConcept getConcept() {
     return CONCEPT;
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept AbstractIndex$lZ = MetaAdapterFactory.getConcept(0x3304fc6e7c6b401eL, 0xa016b944934bb21fL, 0x11fea76c7e0L, "jetbrains.mps.baseLanguage.math.structure.AbstractIndex");
+    /*package*/ static final SConcept MathSymbol$tZ = MetaAdapterFactory.getConcept(0x3304fc6e7c6b401eL, 0xa016b944934bb21fL, 0x11fe0ca1899L, "jetbrains.mps.baseLanguage.math.structure.MathSymbol");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink var$HIsb = MetaAdapterFactory.getContainmentLink(0x3304fc6e7c6b401eL, 0xa016b944934bb21fL, 0x11fe0ca1899L, 0x11fe0cae7f6L, "var");
   }
 }

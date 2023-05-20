@@ -3,9 +3,9 @@
   <persistence version="9" />
   <languages>
     <use id="fd392034-7849-419d-9071-12563d152375" name="jetbrains.mps.baseLanguage.closures" version="0" />
-    <use id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections" version="0" />
-    <use id="f61473f9-130f-42f6-b98d-6c438812c2f6" name="jetbrains.mps.baseLanguage.unitTest" version="0" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections" version="1" />
+    <use id="f61473f9-130f-42f6-b98d-6c438812c2f6" name="jetbrains.mps.baseLanguage.unitTest" version="1" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports>
     <import index="tp82" ref="r:00000000-0000-4000-0000-011c895903ee(jetbrains.mps.internalCollections.test.closures)" />
@@ -128,11 +128,8 @@
         <child id="1178549979242" name="visibility" index="1B3o_S" />
       </concept>
       <concept id="1208890769693" name="jetbrains.mps.baseLanguage.structure.ArrayLengthOperation" flags="nn" index="1Rwk04" />
-      <concept id="6329021646629104957" name="jetbrains.mps.baseLanguage.structure.TextCommentPart" flags="nn" index="3SKdUq">
-        <property id="6329021646629104958" name="text" index="3SKdUp" />
-      </concept>
       <concept id="6329021646629104954" name="jetbrains.mps.baseLanguage.structure.SingleLineComment" flags="nn" index="3SKdUt">
-        <child id="6329021646629175155" name="commentPart" index="3SKWNk" />
+        <child id="8356039341262087992" name="line" index="1aUNEU" />
       </concept>
       <concept id="1146644602865" name="jetbrains.mps.baseLanguage.structure.PublicVisibility" flags="nn" index="3Tm1VV" />
       <concept id="1146644623116" name="jetbrains.mps.baseLanguage.structure.PrivateVisibility" flags="nn" index="3Tm6S6" />
@@ -176,6 +173,14 @@
     <language id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core">
       <concept id="1169194658468" name="jetbrains.mps.lang.core.structure.INamedConcept" flags="ng" index="TrEIO">
         <property id="1169194664001" name="name" index="TrG5h" />
+      </concept>
+    </language>
+    <language id="c7fb639f-be78-4307-89b0-b5959c3fa8c8" name="jetbrains.mps.lang.text">
+      <concept id="155656958578482948" name="jetbrains.mps.lang.text.structure.Word" flags="nn" index="3oM_SD">
+        <property id="155656958578482949" name="value" index="3oM_SC" />
+      </concept>
+      <concept id="2535923850359271782" name="jetbrains.mps.lang.text.structure.Line" flags="nn" index="1PaTwC">
+        <child id="2535923850359271783" name="elements" index="1PaTwD" />
       </concept>
     </language>
     <language id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections">
@@ -729,8 +734,22 @@
                 <node concept="10Nm6u" id="hPzhmxH" role="2GsD0m" />
                 <node concept="3clFbS" id="hPzhl_W" role="2LFqv$">
                   <node concept="3SKdUt" id="6pumIWoCFWn" role="3cqZAp">
-                    <node concept="3SKdUq" id="6pumIWoCFWo" role="3SKWNk">
-                      <property role="3SKdUp" value=" must not throw exception" />
+                    <node concept="1PaTwC" id="ATZLwXopNI" role="1aUNEU">
+                      <node concept="3oM_SD" id="ATZLwXopNJ" role="1PaTwD">
+                        <property role="3oM_SC" value="" />
+                      </node>
+                      <node concept="3oM_SD" id="ATZLwXopNK" role="1PaTwD">
+                        <property role="3oM_SC" value="must" />
+                      </node>
+                      <node concept="3oM_SD" id="ATZLwXopNL" role="1PaTwD">
+                        <property role="3oM_SC" value="not" />
+                      </node>
+                      <node concept="3oM_SD" id="ATZLwXopNM" role="1PaTwD">
+                        <property role="3oM_SC" value="throw" />
+                      </node>
+                      <node concept="3oM_SD" id="ATZLwXopNN" role="1PaTwD">
+                        <property role="3oM_SC" value="exception" />
+                      </node>
                     </node>
                   </node>
                   <node concept="YS8fn" id="hPzhrTw" role="3cqZAp">
@@ -846,7 +865,7 @@
       </node>
     </node>
     <node concept="3uibUv" id="h$MQfhz" role="1zkMxy">
-      <ref role="3uigEE" to="tp82:hxrGC2h" resolve="Util_Test" />
+      <ref role="3uigEE" to="tp82:7CAVoZg0ZwV" resolve="Util_Test" />
     </node>
   </node>
   <node concept="3s_ewN" id="h$N2tW3">
@@ -1738,7 +1757,7 @@
                     <node concept="17QB3L" id="i3Rir4n" role="_ZDj9" />
                   </node>
                   <node concept="2YIFZM" id="i3Rir4o" role="33vP2m">
-                    <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+                    <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
                     <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
                     <node concept="Xl_RD" id="i3Rir4p" role="37wK5m">
                       <property role="Xl_RC" value="foo" />
@@ -1846,7 +1865,7 @@
                     <ref role="37wK5l" to="tp82:hxrGHlF" resolve="assertIterableEquals" />
                     <node concept="2YIFZM" id="i465tvp" role="37wK5m">
                       <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-                      <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+                      <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
                       <node concept="Xl_RD" id="i465tvq" role="37wK5m">
                         <property role="Xl_RC" value="foo" />
                       </node>
@@ -1875,7 +1894,7 @@
                     </node>
                     <node concept="2YIFZM" id="1ngiNkT$1yw" role="33vP2m">
                       <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-                      <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+                      <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
                       <node concept="Xl_RD" id="1ngiNkT$1yx" role="37wK5m">
                         <property role="Xl_RC" value="foo" />
                       </node>
@@ -1982,7 +2001,7 @@
                       <ref role="37wK5l" to="tp82:hxrGHlF" resolve="assertIterableEquals" />
                       <node concept="2YIFZM" id="1ngiNkT$1zg" role="37wK5m">
                         <ref role="1Pybhc" to="33ny:~Arrays" resolve="Arrays" />
-                        <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...):java.util.List" resolve="asList" />
+                        <ref role="37wK5l" to="33ny:~Arrays.asList(java.lang.Object...)" resolve="asList" />
                         <node concept="Xl_RD" id="1ngiNkT$1zh" role="37wK5m">
                           <property role="Xl_RC" value="foo" />
                         </node>
@@ -2004,7 +2023,7 @@
       </node>
     </node>
     <node concept="3uibUv" id="h$N2v98" role="1zkMxy">
-      <ref role="3uigEE" to="tp82:hxrGC2h" resolve="Util_Test" />
+      <ref role="3uigEE" to="tp82:7CAVoZg0ZwV" resolve="Util_Test" />
     </node>
   </node>
   <node concept="3s_ewN" id="h$Ngequ">
@@ -2251,7 +2270,7 @@
       </node>
     </node>
     <node concept="3uibUv" id="h$Ngg1U" role="1zkMxy">
-      <ref role="3uigEE" to="tp82:hxrGC2h" resolve="Util_Test" />
+      <ref role="3uigEE" to="tp82:7CAVoZg0ZwV" resolve="Util_Test" />
     </node>
   </node>
 </model>

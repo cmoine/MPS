@@ -52,7 +52,7 @@ public class Money implements Comparable {
   }
   @Override
   public boolean equals(Object arg) {
-    if (!((arg instanceof Money))) {
+    if (!(arg instanceof Money)) {
       return false;
     }
     Money other = (Money) arg;

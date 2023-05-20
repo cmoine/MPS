@@ -5,16 +5,13 @@ package jetbrains.mps.build.mps.typesystem;
 import jetbrains.mps.errors.QuickFix_Runtime;
 import jetbrains.mps.smodel.SNodePointer;
 import org.jetbrains.mps.openapi.model.SNode;
-import org.apache.log4j.Logger;
-import org.apache.log4j.LogManager;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.build.mps.util.PathConverter;
-import jetbrains.mps.build.mps.util.VisibleModules;
 import jetbrains.mps.build.mps.util.ModuleLoader;
+import jetbrains.mps.messages.LogHandler;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.build.mps.util.ModuleChecker;
-import jetbrains.mps.build.mps.util.ModuleLoaderException;
-import org.apache.log4j.Level;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class ReloadRequired_QuickFix extends QuickFix_Runtime {
   public ReloadRequired_QuickFix() {
@@ -23,36 +20,23 @@ public class ReloadRequired_QuickFix extends QuickFix_Runtime {
   public String getDescription(SNode node) {
     return "Load required information from file";
   }
-  protected static Logger LOG = LogManager.getLogger(ReloadRequired_QuickFix.class);
   public void execute(SNode node) {
-    SNode module = SNodeOperations.as(node, MetaAdapterFactory.getConcept(0xcf935df46994e9cL, 0xa132fa109541cba3L, 0x4780308f5d333ebL, "jetbrains.mps.build.mps.structure.BuildMps_AbstractModule"));
+    SNode module = SNodeOperations.as(node, CONCEPTS.BuildMps_AbstractModule$FZ);
     if (module == null) {
       return;
     }
 
-    SNode project = SNodeOperations.as(SNodeOperations.getContainingRoot(node), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a13L, "jetbrains.mps.build.structure.BuildProject"));
+    SNode project = SNodeOperations.as(SNodeOperations.getContainingRoot(node), CONCEPTS.BuildProject$ae);
     if ((project == null)) {
       return;
     }
 
-    if (SNodeOperations.isInstanceOf(module, MetaAdapterFactory.getConcept(0xcf935df46994e9cL, 0xa132fa109541cba3L, 0x4c6db07d2e56a8b4L, "jetbrains.mps.build.mps.structure.BuildMps_Generator"))) {
-      return;
-    }
+    ModuleLoader ml = new ModuleLoader(project, null, new LogHandler(Logger.getLogger(ModuleLoader.class)));
+    ml.createModuleChecker(module).check(ModuleChecker.CheckType.LOAD_IMPORTANT_PART);
+  }
 
-    PathConverter pathConverter = new PathConverter(project);
-
-    try {
-      VisibleModules visible = new VisibleModules(project);
-      visible.collect();
-      ModuleLoader.createModuleChecker(module, visible, pathConverter).check(ModuleChecker.CheckType.LOAD_IMPORTANT_PART);
-    } catch (ModuleLoaderException ex) {
-      if (LOG.isEnabledFor(Level.ERROR)) {
-        LOG.error(ex.getMessage());
-      }
-      if (LOG.isDebugEnabled()) {
-        LOG.debug(ex.getMessage(), ex);
-      }
-      // TODO report? 
-    }
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept BuildMps_AbstractModule$FZ = MetaAdapterFactory.getConcept(0xcf935df46994e9cL, 0xa132fa109541cba3L, 0x4780308f5d333ebL, "jetbrains.mps.build.mps.structure.BuildMps_AbstractModule");
+    /*package*/ static final SConcept BuildProject$ae = MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a13L, "jetbrains.mps.build.structure.BuildProject");
   }
 }

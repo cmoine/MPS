@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-b4s3rwf0665k6ts1cpw2dzfj91zfdau" />
+<product version="3" modelHash="-883fcmmmfk4liwurlyd43c72ut7qhy3">
+  <files names="Main_forEach_loop.java:Main_forEach_operation.java:Main_map_operation.java:Main_where_select_operations.java" />
+</product>
 

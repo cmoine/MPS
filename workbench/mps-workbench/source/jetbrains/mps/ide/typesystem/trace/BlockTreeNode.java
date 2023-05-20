@@ -21,7 +21,6 @@ import com.intellij.ui.JBColor;
 import jetbrains.mps.newTypesystem.state.blocks.RelationKind;
 import java.awt.Color;
 import jetbrains.mps.newTypesystem.state.blocks.Block;
-import jetbrains.mps.smodel.IOperationContext;
 import jetbrains.mps.newTypesystem.state.State;
 import jetbrains.mps.nodeEditor.EditorComponent;
 import jetbrains.mps.newTypesystem.state.blocks.BlockKind;
@@ -58,7 +57,7 @@ public class BlockTreeNode extends TypeSystemStateTreeNode {
   }
 
   private static Map<RelationKind, Color> initColors() {
-    Map<RelationKind, Color> result = new HashMap<RelationKind, Color>();
+    Map<RelationKind, Color> result = new HashMap<>();
     result.put(RelationKind.WEAK, JBColor.CYAN);
     result.put(RelationKind.STRONG, JBColor.BLUE);
     return result;

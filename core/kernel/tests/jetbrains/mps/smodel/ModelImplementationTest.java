@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  */
 package jetbrains.mps.smodel;
 
-import jetbrains.mps.smodel.ModelUndoTest.TestUndoHandler;
 import jetbrains.mps.smodel.TestModelFactory.TestModelAccess;
 import jetbrains.mps.smodel.TestModelFactory.TestRepository;
 import jetbrains.mps.util.IterableUtil;
@@ -23,7 +22,6 @@ import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeId;
 import org.jetbrains.mps.openapi.module.SRepository;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import static jetbrains.mps.smodel.TestModelFactory.ourRole;
@@ -36,13 +34,6 @@ public class ModelImplementationTest {
   private final TestModelAccess myTestModelAccess = new TestModelAccess();
   private final SRepository myTestRepo = new TestRepository(myTestModelAccess);
 
-  @Before
-  public void setUp() {
-    TestUndoHandler uh = new TestUndoHandler();
-    uh.needsUndo(false); // undo is not our focus here, we merely need to avoid NPE from ModelAccess.instance().isInsideCommand()
-    UndoHelper.getInstance().setUndoHandler(uh);
-  }
-
   /**
    * There's a defect in insertChildBefore, node to insert has been checked for getParent() == null
    * which holds true both for detached/free-floating nodes AND for normal roots
@@ -52,7 +43,7 @@ public class ModelImplementationTest {
   public void testRootInsertedAsChild_sameModel() {
     final TestModelFactory m1f = new TestModelFactory();
     org.jetbrains.mps.openapi.model.SModel m1 = m1f.createModel(2, 2);
-    myTestModelAccess.enableWrite();
+    myTestModelAccess.enterCommand();
     m1f.attachTo(myTestRepo);
     final org.jetbrains.mps.openapi.model.SNode r1 = m1f.getRoot(1);
     final org.jetbrains.mps.openapi.model.SNode r2 = m1f.getRoot(2);
@@ -85,7 +76,7 @@ public class ModelImplementationTest {
   public void testRootInsertedAsChild_otherModel() {
     final TestModelFactory m1f = new TestModelFactory();
     org.jetbrains.mps.openapi.model.SModel m1 = m1f.createModel(2, 2);
-    myTestModelAccess.enableWrite();
+    myTestModelAccess.enterCommand();
     m1f.attachTo(myTestRepo);
     final org.jetbrains.mps.openapi.model.SNode r1 = m1f.getRoot(1);
     final SNode ffn = m1f.createNode();

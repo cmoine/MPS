@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="dvoofb17uje45vllgfk5kpp12s0ssxt" />
+<product version="3" modelHash="-a3n4sl9jitpz37b23wxuux6mwbk4xuh">
+  <files names="LineContentAccumulator.java:ReadHelper.java" />
+</product>
 

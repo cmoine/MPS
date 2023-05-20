@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,10 @@ package jetbrains.mps.ide.codeStyle;
 
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.Configurable.Composite;
-import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SearchableConfigurable;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.Nls;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.Icon;
 import javax.swing.JComponent;
@@ -54,7 +54,7 @@ public class CodeStyleSettingsConfigurable implements SearchableConfigurable, Co
   }
 
   @Override
-  public void apply() throws ConfigurationException {
+  public void apply() {
     getPage().commit();
   }
 
@@ -83,6 +83,7 @@ public class CodeStyleSettingsConfigurable implements SearchableConfigurable, Co
     return "reference.settingsdialog.IDE.globalcodestyle";
   }
 
+  @NotNull
   @Override
   public String getId() {
     return "code.style";
@@ -93,6 +94,7 @@ public class CodeStyleSettingsConfigurable implements SearchableConfigurable, Co
     return null;
   }
 
+  @NotNull
   @Override
   public Configurable[] getConfigurables() {
     return new Configurable[0];

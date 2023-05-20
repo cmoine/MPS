@@ -1,11 +1,9 @@
 <!DOCTYPE idea-plugin PUBLIC 'Plugin/DTD' 'http://plugins.intellij.net/plugin.dtd'>
-<idea-plugin xmlns:xi="http://www.w3.org/2001/XInclude">
+<idea-plugin>
   <id>jetbrains.mps.execution.configurations</id>
   <name>Execution Configurations</name>
   <description>Execution configurations for MPS</description>
-  <version>3.4.5</version>
-  <vendor url="http://www.jetbrains.com/mps/" logo="/MPS_16.png">JetBrains</vendor>
-  <idea-version since-build="145.1" until-build="163.1"/>
+  <vendor url="http://www.jetbrains.com/mps/">JetBrains</vendor>
 
   <depends>jetbrains.mps.execution.languages</depends>
   <depends>jetbrains.mps.debugger.java</depends>
@@ -14,14 +12,8 @@
   <depends>com.intellij.modules.mps</depends>
   <depends>jetbrains.mps.testing</depends>
 
-  <application-components>
-    <component>
-      <implementation-class>jetbrains.mps.execution.configurations.implementation.plugin.plugin.Plugin_PluginInitializer</implementation-class>
-    </component>
-  </application-components>
-
   <extensions defaultExtensionNs="com.intellij">
-    <mps.LanguageLibrary dir="/" />
+    <mps.LanguageLibrary dir="/" hide="true"/>
     <errorHandler implementation="jetbrains.mps.ide.blame.CharismaReporter" />
   </extensions>
 </idea-plugin>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,17 +15,23 @@
  */
 package org.jetbrains.mps.openapi.util;
 
-public interface Consumer<T> {
-  Consumer EMPTY_CONSUMER = new Consumer() {
-    @Override
-    public void consume(final Object t) {
-    }
+import org.jetbrains.annotations.NotNull;
+
+// MPS team, please don't use this interface for new API, resort to standard {@code java.util.function.Consumer<T>} instead.
+// Shall migrate all uses to Java native Consumer and then deprecate and remove
+@FunctionalInterface
+public interface Consumer<T> extends java.util.function.Consumer<T> {
+  Consumer EMPTY_CONSUMER = t -> {
   };
 
   /**
    * @param t consequently takes value of each element of the set this processor is passed to for processing.
    *          t is supposed to be a not-null value.
    */
-  void consume(T t);
+  void consume(@NotNull T t);
 
+  @Override
+  default void accept(T t) {
+    consume(t);
+  }
 }

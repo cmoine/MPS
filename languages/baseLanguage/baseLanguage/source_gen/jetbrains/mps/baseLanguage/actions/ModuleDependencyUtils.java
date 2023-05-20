@@ -9,7 +9,6 @@ import org.jetbrains.mps.openapi.model.SModel;
 import jetbrains.mps.smodel.SModelInternal;
 import org.jetbrains.mps.openapi.language.SLanguage;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public class ModuleDependencyUtils {
   public static void addDependencyOnJDKIfMissing(SModule currentModule) {
@@ -19,7 +18,7 @@ public class ModuleDependencyUtils {
   }
   public static void addDependencyOnJavaDocIfMissing(SModel currentModel) {
     SModelInternal model = (SModelInternal) currentModel;
-    SLanguage javadocLang = MetaAdapterFactory.getLanguage(MetaIdFactory.langId(0xf280165065d5424eL, 0xbb1b463a8781b786L), "jetbrains.mps.baseLanguage.javadoc");
+    SLanguage javadocLang = MetaAdapterFactory.getLanguage(0xf280165065d5424eL, 0xbb1b463a8781b786L, "jetbrains.mps.baseLanguage.javadoc");
     if (!(model.importedLanguageIds().contains(javadocLang))) {
       model.addLanguage(javadocLang);
     }
@@ -29,7 +28,7 @@ public class ModuleDependencyUtils {
       return;
     }
     SModelInternal model = (SModelInternal) currentModel;
-    SLanguage langCoreLang = MetaAdapterFactory.getLanguage(MetaIdFactory.langId(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL), "jetbrains.mps.lang.core");
+    SLanguage langCoreLang = MetaAdapterFactory.getLanguage(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, "jetbrains.mps.lang.core");
     if (!(model.importedLanguageIds().contains(langCoreLang))) {
       model.addLanguage(langCoreLang);
     }

@@ -1,45 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1160998861373:jetbrains.mps.baseLanguage.structure.AssertStatement" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1163670490218:jetbrains.mps.baseLanguage.structure.SwitchStatement" />
   <root nodeRef="r:c38b095a-620d-449b-83bf-eebdb57fa62c(jetbrains.mps.lang.plugin.generator.util)/5755638771828834259">
     <file name="PluginNameUtils.java">
-      <node id="5755638771828834290" at="11,54,12,72" concept="4" />
-      <node id="5755638771828834301" at="14,65,15,76" concept="4" />
-      <node id="5755638771828834312" at="17,65,18,76" concept="4" />
-      <node id="5062476545251734891" at="20,73,21,73" concept="3" />
-      <node id="5755638771828834338" at="21,73,22,34" concept="0" />
-      <node id="5755638771828834344" at="23,46,24,72" concept="1" />
-      <node id="5755638771828834356" at="25,5,26,26" concept="4" />
-      <node id="5755638771828834286" at="11,0,14,0" concept="5" trace="getPluginName#(Lorg/jetbrains/mps/openapi/module/SModule;)Ljava/lang/String;" />
-      <node id="5755638771828834297" at="14,0,17,0" concept="5" trace="getApplicationPluginName#(Lorg/jetbrains/mps/openapi/module/SModule;)Ljava/lang/String;" />
-      <node id="5755638771828834308" at="17,0,20,0" concept="5" trace="getPluginInitializerName#(Lorg/jetbrains/mps/openapi/module/SModule;)Ljava/lang/String;" />
-      <node id="5755638771828834342" at="22,34,25,5" concept="2" />
-      <node id="5755638771828834319" at="20,0,28,0" concept="5" trace="getOriginalModule#(Ljetbrains/mps/generator/template/TemplateQueryContext;)Lorg/jetbrains/mps/openapi/module/SModule;" />
-      <scope id="5755638771828834289" at="11,54,12,72" />
-      <scope id="5755638771828834300" at="14,65,15,76" />
-      <scope id="5755638771828834311" at="17,65,18,76" />
-      <scope id="5755638771828834343" at="23,46,24,72" />
-      <scope id="5755638771828834286" at="11,0,14,0">
+      <node id="5755638771828834290" at="10,54,11,72" concept="2" />
+      <node id="5755638771828834301" at="13,65,14,76" concept="2" />
+      <node id="5755638771828834312" at="16,65,17,76" concept="2" />
+      <node id="5062476545251734891" at="19,73,20,73" concept="1" />
+      <node id="5755638771828834338" at="20,73,21,34" concept="0" />
+      <node id="5755638771828834356" at="21,34,22,26" concept="2" />
+      <node id="5755638771828834286" at="10,0,13,0" concept="4" trace="getPluginName#(Lorg/jetbrains/mps/openapi/module/SModule;)Ljava/lang/String;" />
+      <node id="5755638771828834297" at="13,0,16,0" concept="4" trace="getApplicationPluginName#(Lorg/jetbrains/mps/openapi/module/SModule;)Ljava/lang/String;" />
+      <node id="5755638771828834308" at="16,0,19,0" concept="4" trace="getPluginInitializerName#(Lorg/jetbrains/mps/openapi/module/SModule;)Ljava/lang/String;" />
+      <node id="5755638771828834319" at="19,0,24,0" concept="4" trace="getOriginalModule#(Ljetbrains/mps/generator/template/TemplateQueryContext;)Lorg/jetbrains/mps/openapi/module/SModule;" />
+      <scope id="5755638771828834289" at="10,54,11,72" />
+      <scope id="5755638771828834300" at="13,65,14,76" />
+      <scope id="5755638771828834311" at="16,65,17,76" />
+      <scope id="5755638771828834286" at="10,0,13,0">
         <var name="module" id="5755638771828834295" />
       </scope>
-      <scope id="5755638771828834297" at="14,0,17,0">
+      <scope id="5755638771828834297" at="13,0,16,0">
         <var name="module" id="5755638771828834306" />
       </scope>
-      <scope id="5755638771828834308" at="17,0,20,0">
+      <scope id="5755638771828834308" at="16,0,19,0">
         <var name="module" id="5755638771828834317" />
       </scope>
-      <scope id="5755638771828834322" at="20,73,26,26">
+      <scope id="5755638771828834322" at="19,73,22,26">
         <var name="originalModule" id="5062476545251734892" />
       </scope>
-      <scope id="5755638771828834319" at="20,0,28,0">
+      <scope id="5755638771828834319" at="19,0,24,0">
         <var name="context" id="5755638771828834358" />
       </scope>
-      <unit id="5755638771828834259" at="10,0,29,0" name="jetbrains.mps.lang.plugin.generator.util.PluginNameUtils" />
+      <unit id="5755638771828834259" at="9,0,25,0" name="jetbrains.mps.lang.plugin.generator.util.PluginNameUtils" />
+    </file>
+  </root>
+  <root nodeRef="r:c38b095a-620d-449b-83bf-eebdb57fa62c(jetbrains.mps.lang.plugin.generator.util)/651058060500338897">
+    <file name="KeymapUtil.java">
+      <node id="4241665505353447011" at="12,13,13,26" concept="2" />
+      <node id="4241665505353447014" at="14,13,15,32" concept="2" />
+      <node id="4241665505353447017" at="16,13,17,34" concept="2" />
+      <node id="4241665505353447020" at="18,13,19,35" concept="2" />
+      <node id="4241665505353447023" at="20,13,21,33" concept="2" />
+      <node id="4241665505353447026" at="22,13,23,26" concept="2" />
+      <node id="651058060500339148" at="24,14,25,20" concept="2" />
+      <node id="651058060500338897" at="28,0,29,0" concept="3" trace="enumSwitchIndex" />
+      <node id="651058060500339148" at="10,68,26,5" concept="5" />
+      <node id="651058060500339011" at="10,0,28,0" concept="4" trace="serializeKeymap#(Lorg/jetbrains/mps/openapi/language/SEnumerationLiteral;)Ljava/lang/String;" />
+      <scope id="4241665505353447011" at="12,13,13,26" />
+      <scope id="4241665505353447014" at="14,13,15,32" />
+      <scope id="4241665505353447017" at="16,13,17,34" />
+      <scope id="4241665505353447020" at="18,13,19,35" />
+      <scope id="4241665505353447023" at="20,13,21,33" />
+      <scope id="4241665505353447026" at="22,13,23,26" />
+      <scope id="651058060500339148" at="24,14,25,20" />
+      <scope id="651058060500339014" at="10,68,26,5" />
+      <scope id="651058060500339011" at="10,0,28,0">
+        <var name="keymap" id="651058060500339047" />
+      </scope>
+      <unit id="651058060500338897" at="8,0,30,0" name="jetbrains.mps.lang.plugin.generator.util.KeymapUtil" />
     </file>
   </root>
 </debug-info>

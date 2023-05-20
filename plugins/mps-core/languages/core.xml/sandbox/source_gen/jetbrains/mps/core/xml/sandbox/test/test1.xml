@@ -11,26 +11,31 @@
   <asa asd="value&sda;" a="&#009;dfs">
     sdfsdf
     <asdas>
-        adsad<![CDATA[asd]]><!--sdf-->asd<![CDATA[asda]]><![CDATA[asd]]>asdsd<!--sfsdf-->asd
-        asd
-        asd&asd;</asdas>
+      adsad<![CDATA[asd]]><!--sdf-->asd<![CDATA[asda]]><![CDATA[asd]]>asdsd<!--sfsdf-->asd
+      asd
+      asd&asd;
+    </asdas>
   </asa>
   <sdf:ssdf sdf="asd&quot;">
     asd sdlk sdfl
-    <adadsd>asd
-        asd
-        asd
-        weqeqeqe</adadsd>
+    <adadsd>
+      asd
+      asd
+      asd
+      weqeqeqe
+    </adadsd>
     <asd>
       asdasds<![CDATA[s  df]]>&sdf;<![CDATA[sdfsdf]]><![CDATA[dsfsdf]]>asdsadad
       asdada sdfsdf';
       asdasdsa
       sadsad
       asd<!--jslkfjdslkfj-->
-      <asd><!--many liner-->
-          asd&asd;asd
-          asd
-          <!--asd--></asd>
+      <asd>
+        <!--many liner-->
+        asd&asd;asd
+        asd
+        <!--asd-->
+      </asd>
       asd
       asdasd<!--dfsdf-->dsf<![CDATA[dsf]]>
       <s asdas="asd"></s>

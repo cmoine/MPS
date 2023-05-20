@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,12 +17,11 @@ package jetbrains.mps.make;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.annotations.Immutable;
-import org.jetbrains.mps.openapi.module.SModule;
+import org.jetbrains.mps.openapi.module.SModuleReference;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -36,19 +35,19 @@ public final class MPSCompilationResult implements Serializable, CompilationResu
 
   private final static String COMPILATION_FINISHED = "Compilation finished: %d errors, %d warnings.";
   private final static String COMPILATION_ABORTED = "Compilation aborted.";
-  public final static MPSCompilationResult ZERO_COMPILATION_RESULT = new MPSCompilationResult(0, 0, false, Collections.<SModule>emptySet());
+  public final static MPSCompilationResult ZERO_COMPILATION_RESULT = new MPSCompilationResult(0, 0, false, Collections.emptySet());
 
-  private int myErrorsCount;
-  private int myWarningsCount;
-  private boolean myAborted;
+  private final int myErrorsCount;
+  private final int myWarningsCount;
+  private final boolean myAborted;
 
-  private Set<SModule> myChangedModules;
+  private final Set<SModuleReference> myChangedModules;
 
-  public MPSCompilationResult(int errorsCount, int warningsCount, boolean aborted, Collection<? extends SModule> changedModules) {
+  public MPSCompilationResult(int errorsCount, int warningsCount, boolean aborted, Collection<SModuleReference> changedModules) {
     myErrorsCount = errorsCount;
     myWarningsCount = warningsCount;
     myAborted = aborted;
-    myChangedModules = new HashSet<SModule>(changedModules);
+    myChangedModules = Set.copyOf(changedModules);
   }
 
   @NotNull
@@ -92,9 +91,8 @@ public final class MPSCompilationResult implements Serializable, CompilationResu
   }
 
   @Override
-  @NotNull
-  public Set<SModule> getChangedModules() {
-    return Collections.unmodifiableSet(myChangedModules);
+  public Set<SModuleReference> getAffectedModules() {
+    return myChangedModules;
   }
 
   @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.java.index;
 
 import com.intellij.util.indexing.DataIndexer;
 import com.intellij.util.indexing.FileContent;
 import com.intellij.util.indexing.ID;
+import jetbrains.mps.extapi.model.SModelData;
 import jetbrains.mps.util.JavaNameUtil;
 import jetbrains.mps.workbench.goTo.index.SNodeDescriptor;
 import org.jetbrains.annotations.NotNull;
@@ -58,13 +58,13 @@ public class MPSJavaPackageIndex extends AbstractMPSModelFileIndex {
   private static class MyIndexer extends SNodeDescriptorIndexer {
 
     @Override
-    protected void getObjectsToIndex(SModel sModel, Consumer<SNode> consumer) {
+    protected void getObjectsToIndex(SModelData sModel, Consumer<SNode> consumer) {
       getJavaClasses(sModel, consumer);
     }
 
     @Override
-    protected String[] getKeys(SModel model, SNode object) {
-      return new String[] {JavaNameUtil.packageName(model)};
+    protected String[] getKeys(SModelData model, SNode object) {
+      return new String[] {model.getModelName().getValue()};
     }
   }
 }

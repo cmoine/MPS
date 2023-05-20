@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-9kywc9al1ruagd4yngsz3cq9tv9hggy" />
+<product version="3" modelHash="-lpm5u4r27dzi23dn81lq3y5w16ij6s">
+  <files names="ConvertInferenceRuleToCheckingRule_Action.java:Default_KeymapChanges.java:MacOSX105_KeymapChanges.java:MacOSX_KeymapChanges.java:PluginSolution_ApplicationPlugin.java:ShowAsIntentions_TypeSystem_ActionGroup.java:ShowNodeType_Action.java:TypesystemActions_Plugin_ActionGroup.java" />
+</product>
 

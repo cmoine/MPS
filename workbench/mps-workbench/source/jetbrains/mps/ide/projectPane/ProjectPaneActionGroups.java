@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,6 @@ import jetbrains.mps.ide.actions.ProjectActions_ActionGroup;
 import jetbrains.mps.ide.actions.ProjectNewActions_ActionGroup;
 import jetbrains.mps.ide.actions.PropertyNodeActions_ActionGroup;
 import jetbrains.mps.ide.actions.ReferenceNodeActions_ActionGroup;
-import jetbrains.mps.ide.actions.RuntimeFolderActions_ActionGroup;
 import jetbrains.mps.ide.actions.SolutionActions_ActionGroup;
 import jetbrains.mps.ide.actions.SolutionNewActions_ActionGroup;
 import jetbrains.mps.ide.actions.TransientModulesActions_ActionGroup;
@@ -71,7 +70,6 @@ public class ProjectPaneActionGroups {
   public static final String PROJECT_PANE_SOLUTION_ACTIONS = SolutionActions_ActionGroup.ID;
   public static final String PROJECT_PANE_GENERATOR_ACTIONS = GeneratorActions_ActionGroup.ID;
   public static final String PROJECT_PANE_TRANSIENT_MODULES_ACTIONS = TransientModulesActions_ActionGroup.ID;
-  public static final String PROJECT_PANE_RUNTIME_FOLDER_ACTIONS = RuntimeFolderActions_ActionGroup.ID;
 
   public static final String NODE_ACTIONS = NodeActions_ActionGroup.ID;
   public static final String MODEL_ACTIONS = ModelActions_ActionGroup.ID;
@@ -79,6 +77,9 @@ public class ProjectPaneActionGroups {
   public static final String NAMESPACE_ACTIONS = NamespaceActions_ActionGroup.ID;
 
   // FIXME hardcoded action ID
+  // [artem] guess, the reason to hardcode ids is that these actions reside in j.m.ide.devkit solution which is not visible
+  // from j.m.ide solution (part of mps-workbench). Is there's any other way to accomplish the task at hand?
+  public static final String PROJECT_PANE_RUNTIME_FOLDER_ACTIONS = "jetbrains.mps.ide.devkit.actions.RuntimeFolderActions_ActionGroup";
   public static final String PROJECT_PANE_ACCESSORIES_ACTIONS = "jetbrains.mps.ide.devkit.actions.AccessoriesGroupActions_ActionGroup";
 
   public static final String PROJECT_PANE_FILE_ACTIONS = FileActions_ActionGroup.ID;
@@ -152,7 +153,7 @@ public class ProjectPaneActionGroups {
         return ActionUtils.getGroup(CREATE_ROOT_ACTIONS);
       }
     }
-    if (treeNode instanceof SModelTreeNode) {
+    if (treeNode instanceof SModelTreeNode || treeNode instanceof SNodeTreeNode) {
       return ActionUtils.getGroup(CREATE_ROOT_ACTIONS);
     }
     if (treeNode instanceof ProjectModuleTreeNode) {

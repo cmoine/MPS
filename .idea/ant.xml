@@ -2,19 +2,34 @@
 <project version="4">
   <component name="AntConfiguration">
     <buildFile url="file://$PROJECT_DIR$/build/build.xml">
-      <maximumHeapSize value="256" />
+      <maximumHeapSize value="1024" />
+      <maximumStackSize value="8" />
     </buildFile>
     <buildFile url="file://$PROJECT_DIR$/build/cleanGit.xml" />
-    <buildFile url="file://$PROJECT_DIR$/build/getIdeaPlatform.xml" />
-    <buildFile url="file://$PROJECT_DIR$/build/test.xml" />
-    <buildFile url="file://$PROJECT_DIR$/build/jetpad/build.xml" />
-    <buildFile url="file://$PROJECT_DIR$/build/ideaPlatform.xml">
-      <executeOn event="beforeCompilation" target="default" />
+    <buildFile url="file://$PROJECT_DIR$/build/getDependencies.xml">
+      <maximumHeapSize value="1024" />
+      <maximumStackSize value="8" />
+      <executeOn event="beforeCompilation" target="install" />
+    </buildFile>
+    <buildFile url="file://$PROJECT_DIR$/build/test.xml">
+      <maximumHeapSize value="1024" />
+      <maximumStackSize value="8" />
     </buildFile>
     <buildFile url="file://$PROJECT_DIR$/build/mpsMigration.xml" />
     <buildFile url="file://$PROJECT_DIR$/editor/instrumentation/build.xml" />
     <buildFile url="file://$PROJECT_DIR$/testbench/cleanup.xml" />
-    <buildFile url="file://$PROJECT_DIR$/testbench/make_all_modules.xml" />
-    <buildFile url="file://$PROJECT_DIR$/testbench/run_all_tests.xml" />
+    <buildFile url="file://$PROJECT_DIR$/build/getResources.xml" />
+    <buildFile url="file://$PROJECT_DIR$/IdeaPlugin/getPlatform.xml">
+      <properties>
+        <property name="home.idea_ce" value="$ProjectFileDir$/build/IDEA" />
+      </properties>
+    </buildFile>
+    <buildFile url="file://$PROJECT_DIR$/IdeaPlugin/build.xml">
+      <maximumHeapSize value="1024" />
+      <properties>
+        <property name="home.jdk" value="/Library/Java/JavaVirtualMachines/jbrsdk11/Contents/Home/" />
+        <property name="home.idea_ce" value="$ProjectFileDir$/build/IDEA" />
+      </properties>
+    </buildFile>
   </component>
 </project>

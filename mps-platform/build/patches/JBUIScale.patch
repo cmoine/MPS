@@ -1,0 +1,19 @@
+Index: platform/util/ui/src/com/intellij/ui/scale/JBUIScale.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/platform/util/ui/src/com/intellij/ui/scale/JBUIScale.kt b/platform/util/ui/src/com/intellij/ui/scale/JBUIScale.kt
+--- a/platform/util/ui/src/com/intellij/ui/scale/JBUIScale.kt	(revision 1d27236ae89e91e502e388d0c11c912f51e152a3)
++++ b/platform/util/ui/src/com/intellij/ui/scale/JBUIScale.kt	(date 1665571944542)
+@@ -98,6 +98,10 @@
+     }
+ 
+     val log = thisLogger()
++    if (font == null && SystemInfoRt.isLinux) {
++      font = Font(Font.SANS_SERIF, Font.PLAIN, 15);
++      log.warn("Font was not loaded by Label.font key, fall back to SansSerif");
++    }
+     val isScaleVerbose = SCALE_VERBOSE
+     if (isScaleVerbose) {
+       log.info(String.format("Label font: %s, %d", font.fontName, font.size))

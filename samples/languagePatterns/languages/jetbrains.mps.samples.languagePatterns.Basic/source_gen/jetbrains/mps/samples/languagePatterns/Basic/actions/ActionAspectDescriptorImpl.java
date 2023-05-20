@@ -7,7 +7,6 @@ import jetbrains.mps.openapi.actions.descriptor.ActionAspectDescriptor;
 import java.util.Collection;
 import jetbrains.mps.openapi.actions.descriptor.NodeFactory;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor implements ActionAspectDescriptor {
@@ -16,16 +15,16 @@ public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor imple
   @Override
   public Collection<NodeFactory> getFactories(SAbstractConcept concept) {
     if (LANGUAGE_FQ_NAME.equals(concept.getLanguage().getQualifiedName())) {
-      switch (Arrays.binarySearch(stringSwitchCases_tpto26_a0a0a0c, concept.getName())) {
-        case 0:
+      switch (concept.getName()) {
+        case "DrawLine":
           return Collections.<NodeFactory>singletonList(new ConvertLinesToRectAndBack.NodeFactory_3548406301613038524());
-        case 1:
+        case "DrawRect":
           return Collections.<NodeFactory>singletonList(new ConvertLinesToRectAndBack.NodeFactory_3548406301613072220());
-        case 2:
+        case "FormDescription":
           return Collections.<NodeFactory>singletonList(new Converters.NodeFactory_6918512748467409696());
-        case 3:
+        case "SimplifiedFormDescription":
           return Collections.<NodeFactory>singletonList(new Converters.NodeFactory_6918512748467367934());
-        case 4:
+        case "StringDescription":
           return Collections.<NodeFactory>singletonList(new Converters.NodeFactory_6918512748467539647());
         default:
       }
@@ -33,9 +32,4 @@ public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor imple
     return Collections.<NodeFactory>emptyList();
   }
 
-  @Override
-  public boolean hasBuilders() {
-    return false;
-  }
-  private static String[] stringSwitchCases_tpto26_a0a0a0c = new String[]{"DrawLine", "DrawRect", "FormDescription", "SimplifiedFormDescription", "StringDescription"};
 }

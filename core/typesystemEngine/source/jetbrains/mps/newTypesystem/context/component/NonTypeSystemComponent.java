@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,57 +17,69 @@ package jetbrains.mps.newTypesystem.context.component;
 
 import gnu.trove.THashMap;
 import gnu.trove.THashSet;
+import jetbrains.mps.RuntimeFlags;
 import jetbrains.mps.errors.IErrorReporter;
 import jetbrains.mps.lang.typesystem.runtime.IsApplicableStatus;
 import jetbrains.mps.lang.typesystem.runtime.NonTypesystemRule_Runtime;
-import jetbrains.mps.newTypesystem.context.typechecking.IncrementalTypechecking;
 import jetbrains.mps.languageScope.LanguageScopeExecutor;
+import jetbrains.mps.logging.Logger;
+import jetbrains.mps.newTypesystem.context.typechecking.IncrementalTypechecking;
 import jetbrains.mps.newTypesystem.state.State;
 import jetbrains.mps.smodel.NodeReadEventsCaster;
+import jetbrains.mps.typechecking.TypeAccessListener;
+import jetbrains.mps.typechecking.TypecheckingObservable;
+import jetbrains.mps.typesystem.inference.TypeCheckingContext;
+import jetbrains.mps.typesystem.inference.TypeCheckingContext.NonTypesystemComputationMode;
 import jetbrains.mps.typesystemEngine.util.TypeSystemUtil;
 import jetbrains.mps.util.Cancellable;
-import jetbrains.mps.util.Computable;
 import jetbrains.mps.util.IterableUtil;
-import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.typesystem.inference.TypeChecker;
-import jetbrains.mps.typesystem.inference.TypeCheckingContext;
-import jetbrains.mps.typesystem.inference.TypesReadListener;
 import jetbrains.mps.util.Pair;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.openapi.model.SNode;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class NonTypeSystemComponent extends IncrementalTypecheckingComponent<State> implements ITypeErrorComponent {
+  private static final Logger LOG = Logger.getLogger(NonTypeSystemComponent.class);
 
   private ConcurrentLinkedQueue<Pair<SNode, String>> myCurrentPropertiesToInvalidate = new ConcurrentLinkedQueue<>();
   private ConcurrentLinkedQueue<SNode> myCurrentTypedTermsToInvalidate = new ConcurrentLinkedQueue<>();
   private Set<Pair<SNode, NonTypesystemRule_Runtime>> myCheckedNodes
-    = new HashSet<Pair<SNode, NonTypesystemRule_Runtime>>(); // nodes which are checked themselves but not children
-  private Map<SNode, List<IErrorReporter>> myNodesToErrorsMap = new HashMap<SNode, List<IErrorReporter>>();
+    = new HashSet<>(); // nodes which are checked themselves but not children
+  private Map<SNode, List<IErrorReporter>> myNodesToErrorsMap = new HashMap<>();
 
   // nodes to rules which depend on this nodes
   private Map<SNode, Map<NonTypesystemRule_Runtime, Set<SNode>>> myNodesToDependentNodesWithNTRules =
-    new THashMap<SNode, Map<NonTypesystemRule_Runtime, Set<SNode>>>();
+      new THashMap<>();
 
   // properties to rules which depend on this nodes' properties
   private Map<Pair<SNode, String>, Map<NonTypesystemRule_Runtime, Set<SNode>>> myPropertiesToDependentNodesWithNTRules =
-    new THashMap<Pair<SNode, String>, Map<NonTypesystemRule_Runtime, Set<SNode>>>();
+      new THashMap<>();
 
   // typed terms to rules which depend on this nodes
   private Map<SNode, Map<NonTypesystemRule_Runtime, Set<SNode>>> myTypedTermsToDependentNodesWithNTRules =
-    new THashMap<SNode, Map<NonTypesystemRule_Runtime, Set<SNode>>>();
+      new THashMap<>();
 
   private Map<SNode, Set<NonTypesystemRule_Runtime>> myNodesDependentOnCachesWithNTRules =
-    new THashMap<SNode, Set<NonTypesystemRule_Runtime>>();
+      new THashMap<>();
 
   //checked node & NT rule -> set of errors
   private Map<SNode, Map<NonTypesystemRule_Runtime, Set<IErrorReporter>>> myNodesAndNTRulesToErrors =
-    new THashMap<SNode, Map<NonTypesystemRule_Runtime, Set<IErrorReporter>>>();
+      new THashMap<>();
 
   private Pair<SNode, NonTypesystemRule_Runtime> myRuleAndNodeBeingChecked = null;
 
-  public NonTypeSystemComponent(TypeChecker typeChecker, State state, IncrementalTypechecking nodeTypesComponent) {
-    super(typeChecker, state, nodeTypesComponent);
+  public NonTypeSystemComponent(State state, IncrementalTypechecking nodeTypesComponent) {
+    super(state, nodeTypesComponent);
   }
 
   @Override
@@ -104,18 +116,13 @@ public class NonTypeSystemComponent extends IncrementalTypecheckingComponent<Sta
     return Collections.unmodifiableMap(myNodesToErrorsMap);
   }
 
-  @Override
-  protected IncrementalTypechecking getTypechecking() {
-    return (IncrementalTypechecking) super.getTypechecking();
-  }
-
   private void doInvalidate(Map<NonTypesystemRule_Runtime, Set<SNode>> nodesAndRules, Set<Pair<SNode, NonTypesystemRule_Runtime>> invalidatedNodesAndRules) {
     if (nodesAndRules != null) {
       for (NonTypesystemRule_Runtime ruleOfNode : nodesAndRules.keySet()) {
         Set<SNode> nodes = nodesAndRules.get(ruleOfNode);
         if (nodes != null) {
           for (SNode depNode : nodes) {
-            invalidatedNodesAndRules.add(new Pair<SNode, NonTypesystemRule_Runtime>(depNode, ruleOfNode));
+            invalidatedNodesAndRules.add(new Pair<>(depNode, ruleOfNode));
           }
         }
       }
@@ -126,9 +133,9 @@ public class NonTypeSystemComponent extends IncrementalTypecheckingComponent<Sta
   @Override
   protected boolean doInvalidate() {
     if (isInvalidationWasPerformed()) {
-      return isInvalidationResult();
+      return hasInvalidated();
     }
-    Set<Pair<SNode, NonTypesystemRule_Runtime>> invalidatedNodesAndRules = new THashSet<Pair<SNode, NonTypesystemRule_Runtime>>(1);
+    Set<Pair<SNode, NonTypesystemRule_Runtime>> invalidatedNodesAndRules = new THashSet<>(1);
     //nodes
     for (SNode node : getCurrentNodesToInvalidate()) {
       doInvalidate(myNodesToDependentNodesWithNTRules.get(node), invalidatedNodesAndRules);
@@ -153,7 +160,7 @@ public class NonTypeSystemComponent extends IncrementalTypecheckingComponent<Sta
         Set<NonTypesystemRule_Runtime> rules = myNodesDependentOnCachesWithNTRules.get(nodeOfRule);
         if (rules != null) {
           for (NonTypesystemRule_Runtime rule : rules) {
-            invalidatedNodesAndRules.add(new Pair<SNode, NonTypesystemRule_Runtime>(nodeOfRule, rule));
+            invalidatedNodesAndRules.add(new Pair<>(nodeOfRule, rule));
           }
         }
       }
@@ -166,7 +173,7 @@ public class NonTypeSystemComponent extends IncrementalTypecheckingComponent<Sta
       if (rulesAndErrors != null) {
         Set<IErrorReporter> errors = rulesAndErrors.get(nodeAndRule.o2);
         if (errors != null) {
-          for (IErrorReporter errorReporter : new HashSet<IErrorReporter>(errors)) {
+          for (IErrorReporter errorReporter : new HashSet<>(errors)) {
             List<IErrorReporter> iErrorReporters = myNodesToErrorsMap.get(errorReporter.getSNode());
             if (iErrorReporters != null) {
               iErrorReporters.remove(errorReporter);
@@ -177,37 +184,32 @@ public class NonTypeSystemComponent extends IncrementalTypecheckingComponent<Sta
       }
     }
     clearAllExceptErrors();
-    setInvalidationResult(result);
+    setInvalidation(result);
     return result;
   }
 
   public void addPropertyToInvalidate(SNode eventNode, String propertyName) {
-    myCurrentPropertiesToInvalidate.add(new Pair<SNode, String>(eventNode, propertyName));
-    setInvalidationWasPerformed(false);
+    myCurrentPropertiesToInvalidate.add(new Pair<>(eventNode, propertyName));
+    clearInvalidation();
   }
 
   public void typeWillBeRecalculatedForTerm(SNode term) {
     myCurrentTypedTermsToInvalidate.add(term);
-    setInvalidationWasPerformed(false);
+    clearInvalidation();
   }
 
   @Override
-  public void addError(SNode node, IErrorReporter errorReporter) {
+  public void addError(IErrorReporter errorReporter) {
     Map<SNode, List<IErrorReporter>> errorMap = myNodesToErrorsMap;
 
-    List<IErrorReporter> iErrorReporters = errorMap.get(node);
+    List<IErrorReporter> iErrorReporters = errorMap.get(errorReporter.getSNode());
     if (iErrorReporters == null) {
-      iErrorReporters = new ArrayList<IErrorReporter>(1);
-      errorMap.put(node, iErrorReporters);
+      iErrorReporters = new ArrayList<>(1);
+      errorMap.put(errorReporter.getSNode(), iErrorReporters);
     }
     iErrorReporters.add(errorReporter);
 
-    Collections.sort(iErrorReporters, new Comparator<IErrorReporter>() {
-      @Override
-      public int compare(IErrorReporter o1, IErrorReporter o2) {
-        return o1.getMessageStatus().compareTo(o2.getMessageStatus());
-      }
-    });
+    Collections.sort(iErrorReporters, (o1, o2) -> o1.getMessageStatus().compareTo(o2.getMessageStatus()));
 
     //dependencies
     if (myRuleAndNodeBeingChecked != null) {
@@ -215,17 +217,17 @@ public class NonTypeSystemComponent extends IncrementalTypecheckingComponent<Sta
       NonTypesystemRule_Runtime currentRule = myRuleAndNodeBeingChecked.o2;
       Map<NonTypesystemRule_Runtime, Set<IErrorReporter>> rulesToErrorsMap = myNodesAndNTRulesToErrors.get(currentNode);
       if (rulesToErrorsMap == null) {
-        rulesToErrorsMap = new THashMap<NonTypesystemRule_Runtime, Set<IErrorReporter>>(1);
+        rulesToErrorsMap = new THashMap<>(1);
         myNodesAndNTRulesToErrors.put(currentNode, rulesToErrorsMap);
       }
       Set<IErrorReporter> errorsSet = rulesToErrorsMap.get(currentRule);
       if (errorsSet == null) {
-        errorsSet = new THashSet<IErrorReporter>(1);
+        errorsSet = new THashSet<>(1);
         rulesToErrorsMap.put(currentRule, errorsSet);
       }
       errorsSet.add(errorReporter);
       // make sure the error is cleaned on the node deletion
-      addDependentNodes(currentNode, currentRule, Collections.singleton(node));
+      addDependentNodes(currentNode, currentRule, Collections.singleton(errorReporter.getSNode()));
     }
   }
 
@@ -240,12 +242,12 @@ public class NonTypeSystemComponent extends IncrementalTypecheckingComponent<Sta
       if (propertyToDependOn == null) continue;
       Map<NonTypesystemRule_Runtime, Set<SNode>> dependentNodes = mapToNodesWithNTRules.get(propertyToDependOn);
       if (dependentNodes == null) {
-        dependentNodes = new THashMap<NonTypesystemRule_Runtime, Set<SNode>>(1);
+        dependentNodes = new THashMap<>(1);
         mapToNodesWithNTRules.put(propertyToDependOn, dependentNodes);
       }
       Set<SNode> nodes = dependentNodes.get(rule);
       if (nodes == null) {
-        nodes = new THashSet<SNode>(1);
+        nodes = new THashSet<>(1);
         dependentNodes.put(rule, nodes);
       }
       nodes.add(sNode);
@@ -259,23 +261,27 @@ public class NonTypeSystemComponent extends IncrementalTypecheckingComponent<Sta
       if (nodeToDependOn == null) continue;
       Map<NonTypesystemRule_Runtime, Set<SNode>> dependentNodes = mapToNodesWithNTRules.get(nodeToDependOn);
       if (dependentNodes == null) {
-        dependentNodes = new THashMap<NonTypesystemRule_Runtime, Set<SNode>>(1);
+        dependentNodes = new THashMap<>(1);
         mapToNodesWithNTRules.put(nodeToDependOn, dependentNodes);
       }
       Set<SNode> nodes = dependentNodes.get(rule);
       if (nodes == null) {
-        nodes = new THashSet<SNode>(1);
+        nodes = new THashSet<>(1);
         dependentNodes.put(rule, nodes);
       }
       nodes.add(sNode);
     }
   }
 
+  /**
+   * @deprecated never called
+   */
+  @Deprecated(forRemoval = true)
   private void addCacheDependentNodesNonTypesystem(SNode node, NonTypesystemRule_Runtime rule) {
     Map<SNode, Set<NonTypesystemRule_Runtime>> dependentNodes = myNodesDependentOnCachesWithNTRules;
     Set<NonTypesystemRule_Runtime> rules = dependentNodes.get(node);
     if (rules == null) {
-      rules = new THashSet<NonTypesystemRule_Runtime>(1);
+      rules = new THashSet<>(1);
       dependentNodes.put(node, rules);
     }
     rules.add(rule);
@@ -286,21 +292,16 @@ public class NonTypeSystemComponent extends IncrementalTypecheckingComponent<Sta
   }
 
   // true iff was fully executed (not cancelled)
-  public boolean applyNonTypeSystemRulesToRoot(final TypeCheckingContext typeCheckingContext, final SNode rootNode, final Cancellable c) {
+  public boolean applyNonTypeSystemRulesToRoot(final TypeCheckingContext typeCheckingContext, final SNode rootNode, final Cancellable c, TypecheckingObservable observable) {
     if (rootNode == null) return false;
-    return LanguageScopeExecutor.execWithModelScope(rootNode.getModel(), new Computable<Boolean>() {
-      @Override
-      public Boolean compute() {
-        return applyRulesToRoot(typeCheckingContext, rootNode, c);
-      }
-    });
+    return LanguageScopeExecutor.execWithModelScope(rootNode.getModel(), () -> applyRulesToRoot(typeCheckingContext, rootNode, c, observable));
   }
 
   // true iff fully executed
-  private boolean applyRulesToRoot(TypeCheckingContext typeCheckingContext, SNode rootNode, Cancellable c) {
+  private boolean applyRulesToRoot(TypeCheckingContext typeCheckingContext, SNode rootNode, Cancellable c, TypecheckingObservable observable) {
     doInvalidate();
     try {
-      Queue<SNode> frontier = new LinkedList<SNode>();
+      Queue<SNode> frontier = new LinkedList<>();
       frontier.add(rootNode);
       while (!(frontier.isEmpty())) {
         if (c.isCancelled()) return false;
@@ -308,59 +309,62 @@ public class NonTypeSystemComponent extends IncrementalTypecheckingComponent<Sta
         if (!TypeSystemUtil.shouldApplyTypeSystemRules(sNode)) {
           continue;
         }
-        applyNonTypesystemRulesToNode(sNode, typeCheckingContext);
+        applyNonTypesystemRulesToNode(sNode, typeCheckingContext, observable);
         frontier.addAll(IterableUtil.asCollection(sNode.getChildren()));
       }
       //all error reporters must be simple reporters, no error expansion needed
     } finally {
-      setInvalidationWasPerformed(false);
+      clearInvalidation();
     }
     return true;
   }
 
-  private void applyNonTypesystemRulesToNode(final SNode node, final TypeCheckingContext typeCheckingContext) {
-    getTypechecking().runApplyRulesTo(node, new Runnable() {
-      @Override
-      public void run() {
+  private void applyNonTypesystemRulesToNode(@NotNull final SNode node, final TypeCheckingContext typeCheckingContext, TypecheckingObservable observable) {
+    assert typeCheckingContext.isNonTypesystemComputation() || RuntimeFlags.getTestMode().isInsideTestEnvironment();
+    getTypechecking().runApplyRulesTo(node, () -> {
 
-        List<Pair<NonTypesystemRule_Runtime, IsApplicableStatus>> nonTypesystemRules = TypeChecker.getInstance().getRulesManager().getNonTypesystemRules(node);
-        MyEventsReadListener nodesReadListener = new MyEventsReadListener();
-        if (nonTypesystemRules == null) return;
+      List<Pair<NonTypesystemRule_Runtime, IsApplicableStatus>> nonTypesystemRules = getState().getTypeCheckingContext().getTypeCheckerHelper().getRulesManager().getNonTypesystemRules(node);
+      MyEventsReadListener nodesReadListener = new MyEventsReadListener();
+      if (nonTypesystemRules == null) return;
 
-        boolean incrementalMode = isIncrementalMode();
-        for (Pair<NonTypesystemRule_Runtime, IsApplicableStatus> rule : nonTypesystemRules) {
-          Pair<SNode, NonTypesystemRule_Runtime> nodeAndRule = new Pair<SNode, NonTypesystemRule_Runtime>(node, rule.o1);
-          MyTypesReadListener typesReadListener = new MyTypesReadListener();
-          if (incrementalMode) {
-            if (myCheckedNodes.contains(nodeAndRule)) continue;
-            nodesReadListener.clear();
-            NodeReadEventsCaster.setNodesReadListener(nodesReadListener);
-            TypeChecker.getInstance().addTypesReadListener(typesReadListener);
-            myRuleAndNodeBeingChecked = new Pair<SNode, NonTypesystemRule_Runtime>(node, rule.o1);
-          }
-          try {
-            getTypechecking().applyRuleToNode(node, rule.o1, rule.o2, typeCheckingContext);
-          } finally {
-            myRuleAndNodeBeingChecked = null;
-            if (incrementalMode) {
-              TypeChecker.getInstance().removeTypesReadListener(typesReadListener);
-              NodeReadEventsCaster.removeNodesReadListener();
-            }
-          }
-          if (incrementalMode) {
-            nodesReadListener.setAccessReport(true);
-            addDependentNodes(node, rule.o1, new THashSet<SNode>(nodesReadListener.getAccessedNodes()));
-            addDependentNodes(node, rule.o1, Collections.singleton(node));
-            addDependentProperties(node, rule.o1, new THashSet<Pair<SNode, String>>(nodesReadListener.getAccessedProperties()));
-            nodesReadListener.setAccessReport(false);
-
-            typesReadListener.setAccessReport(true);
-            addDependentTypeTerms(node, rule.o1, typesReadListener.getAccessedNodes());
-            typesReadListener.setAccessReport(false);
-            nodesReadListener.clear();
-          }
-          myCheckedNodes.add(nodeAndRule);
+      boolean incrementalMode = isIncrementalMode();
+      boolean onTheFlyMode = typeCheckingContext.getNonTypesystemComputationMode() == NonTypesystemComputationMode.ON_THE_FLY;
+      for (Pair<NonTypesystemRule_Runtime, IsApplicableStatus> rule : nonTypesystemRules) {
+        if (onTheFlyMode && !rule.o1.applyOnTheFly()) {
+          LOG.debug("Skipping the heavy rule " + rule.o1);
+          continue;
         }
+        Pair<SNode, NonTypesystemRule_Runtime> nodeAndRule = new Pair<>(node, rule.o1);
+        MyTypesReadListener typesReadListener = new MyTypesReadListener();
+        if (incrementalMode) {
+          if (myCheckedNodes.contains(nodeAndRule)) continue;
+          nodesReadListener.clear();
+          NodeReadEventsCaster.setNodesReadListener(nodesReadListener);
+          if (observable != null) {
+            observable.addTypeAccessListener(typesReadListener);
+          }
+          myRuleAndNodeBeingChecked = new Pair<>(node, rule.o1);
+        }
+        try {
+          getTypechecking().applyRuleToNode(node, rule.o1, rule.o2, typeCheckingContext);
+        } finally {
+          myRuleAndNodeBeingChecked = null;
+          if (incrementalMode) {
+            if (observable != null) {
+              observable.removeTypeAccessListener(typesReadListener);
+            }
+            NodeReadEventsCaster.removeNodesReadListener();
+          }
+        }
+        if (incrementalMode) {
+          addDependentNodes(node, rule.o1, new THashSet<>(nodesReadListener.getAccessedNodes()));
+          addDependentNodes(node, rule.o1, Collections.singleton(node));
+          addDependentProperties(node, rule.o1, new THashSet<>(nodesReadListener.getAccessedProperties()));
+
+          addDependentTypeTerms(node, rule.o1, typesReadListener.getAccessedNodes());
+          nodesReadListener.clear();
+        }
+        myCheckedNodes.add(nodeAndRule);
       }
     });
   }
@@ -371,20 +375,12 @@ public class NonTypeSystemComponent extends IncrementalTypecheckingComponent<Sta
     return incrementalMode; // alright, alright
   }
 
-  private static class MyTypesReadListener implements TypesReadListener {
-    private Set<SNode> myAccessedNodes = new THashSet<SNode>(1);
-    private boolean myIsSetAccessReport = false;
-
-    public void setAccessReport(boolean accessReport) {
-      myIsSetAccessReport = accessReport;
-    }
+  private static class MyTypesReadListener implements TypeAccessListener {
+    private Set<SNode> myAccessedNodes = new THashSet<>(1);
 
     @Override
-    public void nodeTypeAccessed(SNode term) {
-      if (myIsSetAccessReport) {
-        new Throwable().printStackTrace();
-      }
-      myAccessedNodes.add(term);
+    public void typeAccessed(SNode expression) {
+      myAccessedNodes.add(expression);
     }
 
     public Set<SNode> getAccessedNodes() {

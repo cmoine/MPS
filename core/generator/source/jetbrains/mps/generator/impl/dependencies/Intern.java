@@ -18,9 +18,7 @@ package jetbrains.mps.generator.impl.dependencies;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Don't want to use <code>jetbrains.mps.util.Interner</code> as it's an overkill for our single-threaded case, I don't like its name, and perhaps
@@ -28,7 +26,7 @@ import java.util.Set;
  * @author Artem Tikhomirov
  */
 final class Intern {
-  private final Map<String, String> myStrings = new HashMap<String, String>(256);
+  private final Map<String, String> myStrings = new HashMap<>(256);
 
   @Nullable
   public String value(@Nullable String origin) {

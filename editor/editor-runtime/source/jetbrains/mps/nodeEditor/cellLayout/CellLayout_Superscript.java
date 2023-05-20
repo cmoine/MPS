@@ -115,20 +115,20 @@ public class CellLayout_Superscript extends AbstractCellLayout {
       switch (skind) {
         case NORMAL:
           floor2x = Math.max(floor2x, Math.max(floor1x, floor3x));
-          cell.setY(y + floor3);
-          cell.setX(floor2x);
+          cell.moveTo(floor2x,y + floor3);
+          cell.relayout();
           floor2x += cell.getWidth();
           floor3x = floor2x;
           floor1x = floor2x;
           break;
         case SUBSCRIPT:
-          cell.setX(floor1x);
-          cell.setY(y + floor2 + floor3);
+          cell.moveTo(floor1x, y + floor2 + floor3);
+          cell.relayout();
           floor1x += cell.getWidth();
           break;
         case SUPERSCRIPT:
-          cell.setX(floor3x);
-          cell.setY(y);
+          cell.moveTo(floor3x, y);
+          cell.relayout();
           floor3x += cell.getWidth();
           break;
       }

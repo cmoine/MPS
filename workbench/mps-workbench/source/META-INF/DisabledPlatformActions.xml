@@ -1,0 +1,125 @@
+<!--
+  ~ Copyright 2000-2020 JetBrains s.r.o.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<idea-plugin>
+  <actions>
+    <!-- Enable? -->
+    <action id="QuickDocCopy" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="RunAnything" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <!-- Enable? -->
+    <action id="SmartSelect" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="SmartUnSelect" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <!-- Enable? -->
+    <!--    <group id="EditorActions">-->
+    <action id="EditorAddOrRemoveCaret" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="EditorCreateRectangularSelection" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="EditorAddRectangularSelectionOnMouseDrag" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="EditorCreateRectangularSelectionOnMouseDrag" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="EditorCloneCaretBelow" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="EditorCloneCaretAbove" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="EditorDeleteToLineStart" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="EditorForwardParagraph" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="EditorBackwardParagraph" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="EditorForwardParagraphWithSelection" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="EditorBackwardParagraphWithSelection" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--    </group>-->
+
+
+    <!--    <group id="MainMenu">-->
+    <!--      <group id="FileMenu" popup="true">-->
+    <!--        <group id="FilePropertiesGroup" popup="true">-->
+    <action id="ChangeFileEncodingAction" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--          <group id="ChangeLineSeparators" popup="true" class="com.intellij.ide.actions.NonTrivialActionGroup">-->
+    <action id="ConvertToWindowsLineSeparators" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ConvertToUnixLineSeparators" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ConvertToMacLineSeparators" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--          </group>-->
+    <!--        </group>-->
+    <!--        <group id="PrintExportGroup">-->
+    <!--          <group id="FileExportGroup" popup="true">-->
+    <!-- See MPS-26514 -->
+    <action id="ExportToHTML" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--          </group>-->
+    <action id="Print" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--        </group>-->
+    <!--      </group>-->
+
+    <!-- Edit -->
+    <!--    <group id="EditMenu" popup="true">-->
+    <group id="FindMenuGroup" class="jetbrains.mps.ide.editor.actions.FindMenuGroupMPSWrapper" popup="true" keep-content="true" overrides="true"/>
+    <!--      <group id="EditSelectGroup">-->
+    <action id="EditorAddCaretPerSelectedLine" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--      </group>-->
+    <group id="EditSmartGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--      <group id="EditSmartGroup">-->
+    <group id="ConvertIndentsGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--        <group id="ConvertIndentsGroup" popup="true">-->
+    <action id="ConvertIndentsToSpaces" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="ConvertIndentsToTabs" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--        </group>-->
+    <!--      </group>-->
+    <group id="Macros" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--      <group id="Macros" popup="true">-->
+    <group id="StandardMacroActions" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--        <group id="StandardMacroActions">-->
+    <action id="PlaybackLastMacro" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="StartStopMacroRecording" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="EditMacros" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="PlaySavedMacrosAction" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--        </group>-->
+    <group id="MacrosGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--        <group id="MacrosGroup" class="com.intellij.ide.actionMacro.actions.MacrosGroup"/>-->
+    <!--      </group>-->
+    <action id="EmojiAndSymbols" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--    </group>-->
+
+    <!-- View -->
+    <!--    <group id="ViewMenu" popup="true" compact="true">-->
+    <group id="EditorBidiTextDirection" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+    <!--      <group id="EditorBidiTextDirection" popup="true">-->
+    <action id="EditorSetContentBasedBidiTextDirection" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="EditorSetLtrBidiTextDirection" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="EditorSetRtlBidiTextDirection" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--      </group>-->
+    <!--    </group>-->
+
+    <!-- Go to -->
+    <!--    <group id="GoToMenu" popup="true">-->
+    <action id="GotoLine" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+
+    <group id="GoToErrorGroup" class="com.intellij.openapi.actionSystem.EmptyActionGroup" overrides="true"/>
+
+    <!--      <group id="NavigateInFileGroup" popup="true">-->
+    <action id="MethodDown" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="MethodUp" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--        <group id="TemplateParametersNavigation">-->
+    <action id="NextTemplateParameter" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <action id="PrevTemplateParameter" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--        </group>-->
+    <action id="GotoCustomRegion" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+    <!--      </group>-->
+    <!--    </group>-->
+
+    <!-- Tools -->
+    <!--    <group id="ToolsMenu" popup="true" compact="true" class="com.intellij.ide.IdeDependentActionGroup">-->
+<!--    <action id="PsiViewer" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>-->
+<!--    <action id="PsiViewerForContext" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>-->
+    <!--    </group>-->
+
+    <action id="ActivateFindToolWindow" class="com.intellij.openapi.actionSystem.EmptyAction" overrides="true"/>
+  </actions>
+</idea-plugin>

@@ -16,6 +16,8 @@
 
 package jetbrains.mps.idea.java.index;
 
+import jetbrains.mps.extapi.model.SModelData;
+import jetbrains.mps.smodel.SNodePointer;
 import jetbrains.mps.workbench.goTo.index.SNodeDescriptor;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.model.SModel;
@@ -29,12 +31,12 @@ import java.util.Collection;
  */
 /*package*/ abstract class SNodeDescriptorIndexer extends AbstractSModelIndexer<SNode, SNodeDescriptor> {
   @Override
-  protected String[] getKeys(SModel model, SNode node) {
+  protected String[] getKeys(SModelData model, SNode node) {
     return new String[] {getSNodeName(node)};
   }
 
   @Override
   protected void updateCollection(SModelReference modelRef, SNode node, Collection<SNodeDescriptor> descriptors) {
-    descriptors.add(new SNodeDescriptor(node));
+    descriptors.add(new SNodeDescriptor(node.getName(), node.getConcept(), new SNodePointer(modelRef, node.getNodeId())));
   }
 }

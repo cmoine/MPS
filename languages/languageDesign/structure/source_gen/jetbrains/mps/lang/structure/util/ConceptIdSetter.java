@@ -5,37 +5,73 @@ package jetbrains.mps.lang.structure.util;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SModel;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import org.jetbrains.mps.openapi.language.SProperty;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SConcept;
 
 public class ConceptIdSetter {
   public static void processConcept(SNode root, SModel m, boolean force) {
-    if (force || isEmptyString(SPropertyOperations.getString(root, MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x1103553c5ffL, 0x5d2e6079771f8cc0L, "conceptId")))) {
-      SPropertyOperations.set(root, MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x1103553c5ffL, 0x5d2e6079771f8cc0L, "conceptId"), ConceptIdHelper.generateConceptId(m, root) + "");
+    if (force || isEmptyString(SPropertyOperations.getString(root, PROPS.conceptId$rrGe))) {
+      SPropertyOperations.assign(root, PROPS.conceptId$rrGe, ConceptIdHelper.generateConceptId(m, root) + "");
     }
 
-    for (SNode p : ListSequence.fromList(SLinkOperations.getChildren(root, MetaAdapterFactory.getContainmentLink(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x1103553c5ffL, 0xf979c3ba6cL, "propertyDeclaration")))) {
-      ConceptIdSetter.processProperty(p, root, force);
+    for (SNode p : ListSequence.fromList(SLinkOperations.getChildren(root, LINKS.propertyDeclaration$YUgg))) {
+      processProperty(p, root, force);
     }
 
-    for (SNode l : ListSequence.fromList(SLinkOperations.getChildren(root, MetaAdapterFactory.getContainmentLink(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x1103553c5ffL, 0xf979c3ba6bL, "linkDeclaration")))) {
-      ConceptIdSetter.processLink(l, root, force);
+    for (SNode l : ListSequence.fromList(SLinkOperations.getChildren(root, LINKS.linkDeclaration$YU1f))) {
+      processLink(l, root, force);
     }
   }
 
   public static void processProperty(SNode prop, SNode root, boolean force) {
-    if (force || isEmptyString(SPropertyOperations.getString(prop, MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979bd086bL, 0x35a81382d82a4d9L, "propertyId")))) {
-      SPropertyOperations.set(prop, MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979bd086bL, 0x35a81382d82a4d9L, "propertyId"), ConceptIdHelper.generatePropertyId(root, prop) + "");
+    if (force || isEmptyString(SPropertyOperations.getString(prop, PROPS.propertyId$m5HU))) {
+      SPropertyOperations.assign(prop, PROPS.propertyId$m5HU, ConceptIdHelper.generatePropertyId(root, prop) + "");
     }
   }
 
   public static void processLink(SNode link, SNode root, boolean force) {
-    if (force || isEmptyString(SPropertyOperations.getString(link, MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979bd086aL, 0x35a81382d82a4e4L, "linkId")))) {
-      SPropertyOperations.set(link, MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979bd086aL, 0x35a81382d82a4e4L, "linkId"), ConceptIdHelper.generateLinkId(root, link) + "");
+    if (force || isEmptyString(SPropertyOperations.getString(link, PROPS.linkId$mi9g))) {
+      SPropertyOperations.assign(link, PROPS.linkId$mi9g, ConceptIdHelper.generateLinkId(root, link) + "");
     }
   }
+
+  public static void processDatatype(SNode root, SModel m) {
+    SPropertyOperations.assign(root, PROPS.datatypeId$$gBg, ConceptIdHelper.generateDatatypeId(m, root) + "");
+
+    SNode enumm = SNodeOperations.as(root, CONCEPTS.EnumerationDeclaration$hv);
+    for (SNode member : ListSequence.fromList(SLinkOperations.getChildren(enumm, LINKS.members$wmsL))) {
+      processEnumMember(member, enumm);
+    }
+  }
+
+
+  public static void processEnumMember(SNode member, SNode root) {
+    SPropertyOperations.assign(member, PROPS.memberId$LVXV, ConceptIdHelper.generateEnumMemberId(root, member) + "");
+  }
   private static boolean isEmptyString(String str) {
-    return str == null || str.length() == 0;
+    return str == null || str.isEmpty();
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty conceptId$rrGe = MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x1103553c5ffL, 0x5d2e6079771f8cc0L, "conceptId");
+    /*package*/ static final SProperty propertyId$m5HU = MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979bd086bL, 0x35a81382d82a4d9L, "propertyId");
+    /*package*/ static final SProperty linkId$mi9g = MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xf979bd086aL, 0x35a81382d82a4e4L, "linkId");
+    /*package*/ static final SProperty datatypeId$$gBg = MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0xfc26875dfaL, 0x6c1f946a87044403L, "datatypeId");
+    /*package*/ static final SProperty memberId$LVXV = MetaAdapterFactory.getProperty(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x2e770ca32c607c60L, 0x13b8f6fdce540e38L, "memberId");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink propertyDeclaration$YUgg = MetaAdapterFactory.getContainmentLink(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x1103553c5ffL, 0xf979c3ba6cL, "propertyDeclaration");
+    /*package*/ static final SContainmentLink linkDeclaration$YU1f = MetaAdapterFactory.getContainmentLink(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x1103553c5ffL, 0xf979c3ba6bL, "linkDeclaration");
+    /*package*/ static final SContainmentLink members$wmsL = MetaAdapterFactory.getContainmentLink(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x2e770ca32c607c5fL, 0x2e770ca32c607cc1L, "members");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept EnumerationDeclaration$hv = MetaAdapterFactory.getConcept(0xc72da2b97cce4447L, 0x8389f407dc1158b7L, 0x2e770ca32c607c5fL, "jetbrains.mps.lang.structure.structure.EnumerationDeclaration");
   }
 }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <root>
+    <file name="TextGenAspectDescriptor.java">
+      <unit at="12,0,31,0" name="jetbrains.mps.baseLanguage.closures.textGen.TextGenAspectDescriptor" />
+    </file>
+  </root>
+  <root nodeRef="r:d0f47205-cd80-4cfe-94fd-7fb01031a06b(jetbrains.mps.baseLanguage.closures.textGen)/983101097695941009">
+    <file name="InferredClosureParameterDeclaration_TextGen.java">
+      <node id="983101097695941009" at="14,54,15,55" concept="2" />
+      <node id="1237463992209" at="15,55,16,86" concept="0" />
+      <node id="983101097695941009" at="20,0,21,0" concept="4" trace="name$MnvL" />
+      <node id="983101097695941009" at="13,0,18,0" concept="1" trace="generateText#(Ljetbrains/mps/text/rt/TextGenContext;)V" />
+      <scope id="983101097695941009" at="14,54,16,86">
+        <var name="tgs" id="983101097695941009" />
+      </scope>
+      <scope id="983101097695941009" at="13,0,18,0">
+        <var name="ctx" id="983101097695941009" />
+      </scope>
+      <unit id="983101097695941009" at="19,0,22,0" name="jetbrains.mps.baseLanguage.closures.textGen.InferredClosureParameterDeclaration_TextGen$PROPS" />
+      <unit id="983101097695941009" at="12,0,23,0" name="jetbrains.mps.baseLanguage.closures.textGen.InferredClosureParameterDeclaration_TextGen" />
+    </file>
+    <file name="TextGenAspectDescriptor.java">
+      <node id="983101097695941009" at="24,69,25,65" concept="3" />
+      <scope id="983101097695941009" at="24,69,25,65" />
+    </file>
+  </root>
+  <root nodeRef="r:d0f47205-cd80-4cfe-94fd-7fb01031a06b(jetbrains.mps.baseLanguage.closures.textGen)/983101097696293851">
+    <file name="ClosureVarType_TextGen.java">
+      <node id="983101097696293851" at="11,54,12,55" concept="2" />
+      <node id="983101097696294012" at="12,55,13,22" concept="0" />
+      <node id="983101097696293851" at="10,0,15,0" concept="1" trace="generateText#(Ljetbrains/mps/text/rt/TextGenContext;)V" />
+      <scope id="983101097696293851" at="11,54,13,22">
+        <var name="tgs" id="983101097696293851" />
+      </scope>
+      <scope id="983101097696293851" at="10,0,15,0">
+        <var name="ctx" id="983101097696293851" />
+      </scope>
+      <unit id="983101097696293851" at="9,0,16,0" name="jetbrains.mps.baseLanguage.closures.textGen.ClosureVarType_TextGen" />
+    </file>
+    <file name="TextGenAspectDescriptor.java">
+      <node id="983101097696293851" at="22,48,23,44" concept="3" />
+      <scope id="983101097696293851" at="22,48,23,44" />
+    </file>
+  </root>
+</debug-info>
+

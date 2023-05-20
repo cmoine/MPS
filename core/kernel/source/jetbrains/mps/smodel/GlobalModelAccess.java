@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,7 +54,7 @@ public class GlobalModelAccess extends ModelAccessBase {
      * Only when the {@link jetbrains.mps.smodel.ModelAccess} is gone we can change it to
      * {@code return false;}.
      */
-    return ModelAccess.instance().isInsideCommand();
+    return getDelegate().isCommandAction();
   }
 
   private void throwCommandIsNotSupported() throws UnsupportedOperationException{

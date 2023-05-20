@@ -2,7 +2,7 @@
 <model ref="r:afdbc9d4-5f41-49d5-9022-ed168658fbf0(jetbrains.mps.lang.behavior.test.behavior)">
   <persistence version="9" />
   <languages>
-    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="0" />
+    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="2" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -72,11 +72,8 @@
       <concept id="1178549954367" name="jetbrains.mps.baseLanguage.structure.IVisible" flags="ng" index="1B3ioH">
         <child id="1178549979242" name="visibility" index="1B3o_S" />
       </concept>
-      <concept id="6329021646629104957" name="jetbrains.mps.baseLanguage.structure.TextCommentPart" flags="nn" index="3SKdUq">
-        <property id="6329021646629104958" name="text" index="3SKdUp" />
-      </concept>
       <concept id="6329021646629104954" name="jetbrains.mps.baseLanguage.structure.SingleLineComment" flags="nn" index="3SKdUt">
-        <child id="6329021646629175155" name="commentPart" index="3SKWNk" />
+        <child id="8356039341262087992" name="line" index="1aUNEU" />
       </concept>
       <concept id="1146644602865" name="jetbrains.mps.baseLanguage.structure.PublicVisibility" flags="nn" index="3Tm1VV" />
     </language>
@@ -86,6 +83,14 @@
     <language id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core">
       <concept id="1169194658468" name="jetbrains.mps.lang.core.structure.INamedConcept" flags="ng" index="TrEIO">
         <property id="1169194664001" name="name" index="TrG5h" />
+      </concept>
+    </language>
+    <language id="c7fb639f-be78-4307-89b0-b5959c3fa8c8" name="jetbrains.mps.lang.text">
+      <concept id="155656958578482948" name="jetbrains.mps.lang.text.structure.Word" flags="nn" index="3oM_SD">
+        <property id="155656958578482949" name="value" index="3oM_SC" />
+      </concept>
+      <concept id="2535923850359271782" name="jetbrains.mps.lang.text.structure.Line" flags="nn" index="1PaTwC">
+        <child id="2535923850359271783" name="elements" index="1PaTwD" />
       </concept>
     </language>
   </registry>
@@ -370,7 +375,7 @@
       <property role="TrG5h" value="abstractVirtualMethod" />
       <property role="13i0it" value="true" />
       <property role="13i0iv" value="true" />
-      <property role="DiZV1" value="true" />
+      <property role="DiZV1" value="false" />
       <node concept="3Tm1VV" id="46FlynTbIB1" role="1B3o_S" />
       <node concept="17QB3L" id="46FlynTbIB8" role="3clF45" />
       <node concept="3clFbS" id="46FlynTbIB3" role="3clF47" />
@@ -607,13 +612,56 @@
         </node>
         <node concept="3SKdUt" id="46FlynTbUY5" role="3cqZAp" />
         <node concept="3SKdUt" id="46FlynTjrrS" role="3cqZAp">
-          <node concept="3SKdUq" id="46FlynTjrRO" role="3SKWNk">
-            <property role="3SKdUp" value="FIXME it's possible to declare static virtual abstract method, but impossible to call it" />
+          <node concept="1PaTwC" id="ATZLwXnU8D" role="1aUNEU">
+            <node concept="3oM_SD" id="ATZLwXnU8E" role="1PaTwD">
+              <property role="3oM_SC" value="FIXME" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU8F" role="1PaTwD">
+              <property role="3oM_SC" value="it's" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU8G" role="1PaTwD">
+              <property role="3oM_SC" value="possible" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU8H" role="1PaTwD">
+              <property role="3oM_SC" value="to" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU8I" role="1PaTwD">
+              <property role="3oM_SC" value="declare" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU8J" role="1PaTwD">
+              <property role="3oM_SC" value="static" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU8K" role="1PaTwD">
+              <property role="3oM_SC" value="virtual" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU8L" role="1PaTwD">
+              <property role="3oM_SC" value="abstract" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU8M" role="1PaTwD">
+              <property role="3oM_SC" value="method," />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU8N" role="1PaTwD">
+              <property role="3oM_SC" value="but" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU8O" role="1PaTwD">
+              <property role="3oM_SC" value="impossible" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU8P" role="1PaTwD">
+              <property role="3oM_SC" value="to" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU8Q" role="1PaTwD">
+              <property role="3oM_SC" value="call" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU8R" role="1PaTwD">
+              <property role="3oM_SC" value="it" />
+            </node>
           </node>
         </node>
         <node concept="3SKdUt" id="46FlynTjrXM" role="3cqZAp">
-          <node concept="3SKdUq" id="46FlynTjx5O" role="3SKWNk">
-            <property role="3SKdUp" value="staticAbstractVirtualMethod()" />
+          <node concept="1PaTwC" id="ATZLwXnU8S" role="1aUNEU">
+            <node concept="3oM_SD" id="ATZLwXnU8T" role="1PaTwD">
+              <property role="3oM_SC" value="staticAbstractVirtualMethod()" />
+            </node>
           </node>
         </node>
       </node>
@@ -871,18 +919,75 @@
           </node>
         </node>
         <node concept="3SKdUt" id="46FlynTjtgL" role="3cqZAp">
-          <node concept="3SKdUq" id="46FlynTjybo" role="3SKWNk">
-            <property role="3SKdUp" value="staticAbstractVirtualMethod()" />
+          <node concept="1PaTwC" id="ATZLwXnU8U" role="1aUNEU">
+            <node concept="3oM_SD" id="ATZLwXnU8V" role="1PaTwD">
+              <property role="3oM_SC" value="staticAbstractVirtualMethod()" />
+            </node>
           </node>
         </node>
         <node concept="3SKdUt" id="46FlynTj_gi" role="3cqZAp">
-          <node concept="3SKdUq" id="46FlynTj_GQ" role="3SKWNk">
-            <property role="3SKdUp" value="staticVirtualAbstractFromInterfaceConcept() FIXME possible to declare static abstract virtual method in iface," />
+          <node concept="1PaTwC" id="ATZLwXnU8W" role="1aUNEU">
+            <node concept="3oM_SD" id="ATZLwXnU8X" role="1PaTwD">
+              <property role="3oM_SC" value="staticVirtualAbstractFromInterfaceConcept()" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU8Y" role="1PaTwD">
+              <property role="3oM_SC" value="FIXME" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU8Z" role="1PaTwD">
+              <property role="3oM_SC" value="possible" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU90" role="1PaTwD">
+              <property role="3oM_SC" value="to" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU91" role="1PaTwD">
+              <property role="3oM_SC" value="declare" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU92" role="1PaTwD">
+              <property role="3oM_SC" value="static" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU93" role="1PaTwD">
+              <property role="3oM_SC" value="abstract" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU94" role="1PaTwD">
+              <property role="3oM_SC" value="virtual" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU95" role="1PaTwD">
+              <property role="3oM_SC" value="method" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU96" role="1PaTwD">
+              <property role="3oM_SC" value="in" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU97" role="1PaTwD">
+              <property role="3oM_SC" value="iface," />
+            </node>
           </node>
         </node>
         <node concept="3SKdUt" id="46FlynTjAYw" role="3cqZAp">
-          <node concept="3SKdUq" id="46FlynTjBqJ" role="3SKWNk">
-            <property role="3SKdUp" value="implement it here (override), but impossible to invoke" />
+          <node concept="1PaTwC" id="ATZLwXnU98" role="1aUNEU">
+            <node concept="3oM_SD" id="ATZLwXnU99" role="1PaTwD">
+              <property role="3oM_SC" value="implement" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU9a" role="1PaTwD">
+              <property role="3oM_SC" value="it" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU9b" role="1PaTwD">
+              <property role="3oM_SC" value="here" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU9c" role="1PaTwD">
+              <property role="3oM_SC" value="(override)," />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU9d" role="1PaTwD">
+              <property role="3oM_SC" value="but" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU9e" role="1PaTwD">
+              <property role="3oM_SC" value="impossible" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU9f" role="1PaTwD">
+              <property role="3oM_SC" value="to" />
+            </node>
+            <node concept="3oM_SD" id="ATZLwXnU9g" role="1PaTwD">
+              <property role="3oM_SC" value="invoke" />
+            </node>
           </node>
         </node>
         <node concept="3SKdUt" id="46FlynTc5So" role="3cqZAp" />

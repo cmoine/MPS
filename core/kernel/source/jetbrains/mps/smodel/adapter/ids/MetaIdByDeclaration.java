@@ -17,8 +17,9 @@ package jetbrains.mps.smodel.adapter.ids;
 
 import jetbrains.mps.project.ModuleId;
 import jetbrains.mps.smodel.Language;
-import jetbrains.mps.smodel.SNodeId;
+import jetbrains.mps.smodel.SNodeId.Regular;
 import jetbrains.mps.smodel.SNodeUtil;
+import jetbrains.mps.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.module.SModuleId;
@@ -37,96 +38,73 @@ public class MetaIdByDeclaration {
     return new SLanguageId(((ModuleId.Regular) moduleId).getUUID());
   }
 
-  public static SConceptId getConceptId(@NotNull SNode c) {
+  public static SConceptId getConceptId(@NotNull SNode conceptDeclaration) {
+    return new SConceptId(
+        getLangId(conceptDeclaration.getProperty(SNodeUtil.property_AbstractConcept_LangId), conceptDeclaration),
+        getID(conceptDeclaration.getProperty(SNodeUtil.property_AbstractConcept_Id), conceptDeclaration)
+    );
+  }
+
+  public static SDataTypeId getDatatypeId(@NotNull SNode datatypeDeclaration) {
+    return new SDataTypeId(
+        getLangId(datatypeDeclaration.getProperty(SNodeUtil.property_DataType_LangId), datatypeDeclaration),
+        getID(datatypeDeclaration.getProperty(SNodeUtil.property_DataType_Id), datatypeDeclaration)
+    );
+  }
+
+  public static SContainmentLinkId getLinkId(@NotNull SNode contLinkDeclaration) {
+    return new SContainmentLinkId(
+        getConceptId(contLinkDeclaration.getContainingRoot()),
+        getID(contLinkDeclaration.getProperty(SNodeUtil.property_Link_Id), contLinkDeclaration)
+    );
+  }
+
+  public static SReferenceLinkId getRefRoleId(@NotNull SNode refLinkDeclaration) {
+    return new SReferenceLinkId(
+        getConceptId(refLinkDeclaration.getContainingRoot()),
+        getID(refLinkDeclaration.getProperty(SNodeUtil.property_Link_Id), refLinkDeclaration)
+    );
+  }
+
+  public static SPropertyId getPropId(@NotNull SNode propertyDeclaration) {
+    return new SPropertyId(
+        getConceptId(propertyDeclaration.getContainingRoot()),
+        getID(propertyDeclaration.getProperty(SNodeUtil.property_Property_Id), propertyDeclaration)
+    );
+  }
+
+  public static SEnumerationLiteralId getEnumLiteralId(@NotNull SNode enumLiteral) {
+    return new SEnumerationLiteralId(
+        getDatatypeId(enumLiteral.getContainingRoot()),
+        getID(enumLiteral.getProperty(SNodeUtil.property_EnumerationMemberDeclaration_memberId), enumLiteral)
+    );
+  }
+
+  private static Long getID(String explicitlySerializedId, SNode declaration) {
     Long id = null;
 
-    String prop = c.getProperty(SNodeUtil.property_AbstractConcept_Id);
-    if (prop != null) {
+    if (explicitlySerializedId != null) {
       try {
-        id = Long.parseLong(prop);
+        id = Long.parseLong(explicitlySerializedId);
       } catch (NumberFormatException e) {
         //id is still null
       }
     }
 
     if (id == null) {
-      org.jetbrains.mps.openapi.model.SNodeId nodeId = c.getNodeId();
-      assert nodeId instanceof SNodeId.Regular;
-      id = ((SNodeId.Regular) nodeId).getId();
+      org.jetbrains.mps.openapi.model.SNodeId nodeId = declaration.getNodeId();
+      assert nodeId instanceof Regular;
+      id = ((Regular) nodeId).getId();
     }
+    return id;
+  }
 
-    SLanguageId langId;
-    String propLangId = c.getProperty(SNodeUtil.property_AbstractConcept_LangId);
-    if (propLangId == null || propLangId.isEmpty()) {
-      langId = getLanguageId(((Language) c.getModel().getModule()));
+  private static SLanguageId getLangId(String explicitlySerializedLangId, SNode declaration) {
+    if (StringUtil.isEmpty(explicitlySerializedLangId)) {
+      return ref2LangId(declaration.getModel().getModule().getModuleReference());
     } else {
-      langId = MetaIdFactory.langId(UUID.fromString(propLangId));
+      return MetaIdFactory.langId(UUID.fromString(explicitlySerializedLangId));
     }
-
-    return new SConceptId(langId, id);
-  }
-
-  public static SContainmentLinkId getLinkId(@NotNull SNode c) {
-    Long id = null;
-
-    String prop = c.getProperty(SNodeUtil.property_Link_Id);
-    if (prop != null) {
-      try {
-        id = Long.parseLong(prop);
-      } catch (NumberFormatException e) {
-        //id is still null
-      }
-    }
-
-    if (id == null) {
-      org.jetbrains.mps.openapi.model.SNodeId nodeId = c.getNodeId();
-      assert nodeId instanceof SNodeId.Regular;
-      id = ((SNodeId.Regular) nodeId).getId();
-    }
-
-    return new SContainmentLinkId(getConceptId(c.getContainingRoot()), id);
-  }
-
-  public static SReferenceLinkId getRefRoleId(@NotNull SNode c) {
-    Long id = null;
-
-    String prop = c.getProperty(SNodeUtil.property_Link_Id);
-    if (prop != null) {
-      try {
-        id = Long.parseLong(prop);
-      } catch (NumberFormatException e) {
-        //id is still null
-      }
-    }
-
-    if (id == null) {
-      org.jetbrains.mps.openapi.model.SNodeId nodeId = c.getNodeId();
-      assert nodeId instanceof SNodeId.Regular;
-      id = ((SNodeId.Regular) nodeId).getId();
-    }
-
-    return new SReferenceLinkId(getConceptId(c.getContainingRoot()), id);
-  }
-
-  public static SPropertyId getPropId(@NotNull SNode c) {
-    Long id = null;
-
-    String prop = c.getProperty(SNodeUtil.property_Property_Id);
-    if (prop != null) {
-      try {
-        id = Long.parseLong(prop);
-      } catch (NumberFormatException e) {
-        //id is still null
-      }
-    }
-
-    if (id == null) {
-      org.jetbrains.mps.openapi.model.SNodeId nodeId = c.getNodeId();
-      assert nodeId instanceof SNodeId.Regular;
-      id = ((SNodeId.Regular) nodeId).getId();
-    }
-
-    return new SPropertyId(getConceptId(c.getContainingRoot()), id);
   }
 
   public static SLanguageId ref2LangId(@NotNull SModuleReference ref) {

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="4sxzlg2thpipzzlsjdm4kr120xr7g5m" />
+<product version="3" modelHash="11lkxl0jil3xnyvk9k5osgzxcvjfxkl">
+  <files names="ExtensionDescriptor.java:LazyTestObject.java:TestObject.java:lazyTestExtensionPoint_extension.java:multiExtensionPoint_extension1.java:multiExtensionPoint_extension2.java:testExtensionPoint_extension.java" />
+</product>
 

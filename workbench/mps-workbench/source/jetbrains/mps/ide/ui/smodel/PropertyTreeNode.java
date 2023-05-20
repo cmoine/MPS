@@ -15,9 +15,8 @@
  */
 package jetbrains.mps.ide.ui.smodel;
 
-import jetbrains.mps.ide.projectPane.Icons;
+import com.intellij.icons.AllIcons.Nodes;
 import jetbrains.mps.ide.ui.tree.TextTreeNode;
-import jetbrains.mps.smodel.IOperationContext;
 import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeAccessUtil;
@@ -26,14 +25,14 @@ public class PropertyTreeNode extends TextTreeNode {
   private final SProperty myProperty;
 
   public PropertyTreeNode(SNode mainNode, SProperty p) {
-    super(p + " = " + SNodeAccessUtil.getProperty(mainNode, p));
+    super(p + " = " + SNodeAccessUtil.getPropertyValue(mainNode, p));
     myProperty = p;
-    setIcon(Icons.DEFAULT_ICON);
+    setIcon(Nodes.Parameter);
     setNodeIdentifier(myProperty.getName());
   }
 
-  public String getProperty() {
-    return myProperty.getName();
+  public SProperty getProperty() {
+    return myProperty;
   }
 
   @Override

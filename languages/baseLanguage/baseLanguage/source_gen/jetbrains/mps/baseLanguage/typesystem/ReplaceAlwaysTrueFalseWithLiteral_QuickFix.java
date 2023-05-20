@@ -6,8 +6,7 @@ import jetbrains.mps.errors.QuickFix_Runtime;
 import jetbrains.mps.smodel.SNodePointer;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
-import jetbrains.mps.smodel.SModelUtil_new;
+import jetbrains.mps.smodel.builder.SNodeBuilder;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.model.SNodeAccessUtil;
 
@@ -19,13 +18,13 @@ public class ReplaceAlwaysTrueFalseWithLiteral_QuickFix extends QuickFix_Runtime
     return "Simplify expression to " + ((Boolean) ReplaceAlwaysTrueFalseWithLiteral_QuickFix.this.getField("value")[0]);
   }
   public void execute(SNode node) {
-    SNodeOperations.replaceWithAnother(node, _quotation_createNode_ndr37f_a0a0a0(((Boolean) ReplaceAlwaysTrueFalseWithLiteral_QuickFix.this.getField("value")[0]).toString()));
+    SNodeOperations.replaceWithAnother(node, _quotation_createNode_7hp7vs_a0a0a2(((Boolean) ReplaceAlwaysTrueFalseWithLiteral_QuickFix.this.getField("value")[0])));
   }
-  private static SNode _quotation_createNode_ndr37f_a0a0a0(Object parameter_1) {
-    PersistenceFacade facade = PersistenceFacade.getInstance();
+  private static SNode _quotation_createNode_7hp7vs_a0a0a2(Object parameter_1) {
     SNode quotedNode_2 = null;
-    quotedNode_2 = SModelUtil_new.instantiateConceptDeclaration(MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b201L, "jetbrains.mps.baseLanguage.structure.BooleanConstant"), null, null, false);
-    SNodeAccessUtil.setProperty(quotedNode_2, MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b201L, 0xf8cc56b202L, "value"), (String) parameter_1);
+    SNodeBuilder nb = new SNodeBuilder(null, null).init(MetaAdapterFactory.getConcept(MetaAdapterFactory.getLanguage(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, "jetbrains.mps.baseLanguage"), 0xf8cc56b201L, "BooleanConstant"));
+    quotedNode_2 = nb.getResult();
+    SNodeAccessUtil.setPropertyValue(quotedNode_2, MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b201L, 0xf8cc56b202L, "value"), (boolean) parameter_1);
     return quotedNode_2;
   }
 }

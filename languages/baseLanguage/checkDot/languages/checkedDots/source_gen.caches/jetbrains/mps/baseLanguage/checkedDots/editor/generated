@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="329bubvcfy7zw1h6s4g31knw9mijmhc" />
+<product version="3" modelHash="3otdk9ptlzgou2z9i39ssrlu1cjkrrz">
+  <files names="CheckedDotExpression_Actions_DeleteOperation.java:CheckedDotExpression_Editor.java:CheckedDotExpression_EditorBuilder_a.java:CheckedDot_Actions_MakeUnchecked.java:EditorAspectDescriptorImpl.java:IOperation_CheckedDot_Contribution.java:checkedDotExpression_Contribution.java" />
+</product>
 

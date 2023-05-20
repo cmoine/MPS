@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.core.projectView;
 
 import com.intellij.ide.projectView.PresentationData;
@@ -28,9 +27,10 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vcs.FileStatusManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.pom.NavigatableWithText;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.ide.ui.dialogs.properties.MPSPropertiesConfigurable;
-import jetbrains.mps.ide.ui.dialogs.properties.ModelPropertiesConfigurable;
 import jetbrains.mps.idea.core.MPSBundle;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiModel;
 import org.jetbrains.annotations.Nullable;
@@ -53,16 +53,40 @@ public class MPSPsiModelTreeNode extends BasePsiNode<MPSPsiModel> implements Nav
   @Nullable
   @Override
   protected MPSPsiModel extractPsiFromValue() {
-    return (MPSPsiModel) getValue();
+    return getModelSafe();
   }
 
   public MPSPsiModel getModel() {
-    return (MPSPsiModel) getValue();
+    return getModelSafe();
+  }
+
+  /**
+   * Hack for MPS-25740 com.intellij.psi.impl.file.PsiJavaDirectoryImpl cannot be cast to jetbrains.mps.idea.core.psi.impl.MPSPsiModel
+   *
+   * To work around how {@link com.intellij.ide.projectView.impl.nodes.PsiTreeAnchorizer} creates a memory efficient
+   * representation of our model psi element. The fact that {@link MPSPsiModel} implements {@link com.intellij.psi.PsiDirectory}
+   * leads to unconditionally creating {@link com.intellij.psi.impl.smartPointers.DirElementInfo} for it. Later,
+   * when idea restores {@link PsiElement} from element info it creates a {@link com.intellij.psi.impl.file.PsiJavaDirectoryImpl}
+   *
+   * In order for us to get another {@link com.intellij.psi.impl.smartPointers.SmartPointerElementInfo} (unless idea code
+   * is changed) we have to stop implementing {@link com.intellij.psi.PsiDirectory} which doesn't seem a good thing and
+   * definitely not a good fit for a bugfix release.
+   *
+   * @return null if MPSPsiModel has been incorrectly restored from DirectoryInfo, or proper model
+   *
+   * @see com.intellij.psi.impl.smartPointers.SmartPsiElementPointerImpl#doCreateElementInfo(Project, PsiElement, PsiFile, boolean)
+   */
+  private MPSPsiModel getModelSafe() {
+    Object val = getValue();
+    if (val instanceof MPSPsiModel) {
+      return (MPSPsiModel) val;
+    }
+    return null;
   }
 
   @Nullable
   @Override
-  public Collection<AbstractTreeNode> getChildrenImpl() {
+  public Collection<AbstractTreeNode<?>> getChildrenImpl() {
     return null;
   }
 
@@ -88,9 +112,8 @@ public class MPSPsiModelTreeNode extends BasePsiNode<MPSPsiModel> implements Nav
     SModelReference modelReference = psiModel.getSModelReference();
     SModel sModel = modelReference.resolve(ProjectHelper.getProjectRepository(getProject()));
 
-    MPSPropertiesConfigurable configurable = new ModelPropertiesConfigurable(sModel,
-      ProjectHelper.fromIdeaProject(MPSPsiModelTreeNode.this.getProject()),
-      true
+    MPSPropertiesConfigurable configurable = new ModelPropertiesConfigurableFix(sModel,
+      ProjectHelper.fromIdeaProject(MPSPsiModelTreeNode.this.getProject())
     );
 
     final SingleConfigurableEditor dialog = new SingleConfigurableEditor(myProject, configurable);
@@ -101,7 +124,8 @@ public class MPSPsiModelTreeNode extends BasePsiNode<MPSPsiModel> implements Nav
 
   @Override
   public boolean canRepresent(Object element) {
-    return super.canRepresent(element) || element.equals(getVirtualFile());
+    // can't say when element can be null, but PsiFileNode checks for null, too
+    return super.canRepresent(element) || element != null && element.equals(getVirtualFile());
   }
 
   @Nullable

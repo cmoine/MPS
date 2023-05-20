@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,10 @@ package jetbrains.mps.ide.editorTabs.tabfactory.tabs.buttontabs;
 
 import com.intellij.openapi.actionSystem.ToggleAction;
 import jetbrains.mps.ide.editorTabs.TabColorProvider;
+import jetbrains.mps.ide.editorTabs.tabfactory.tabs.AbstractEditorTab;
 import jetbrains.mps.ide.editorTabs.tabfactory.tabs.TabEditorLayout;
+import jetbrains.mps.ide.editorTabs.tabfactory.tabs.TabEditorLayout.Entry;
 import jetbrains.mps.plugins.relations.RelationDescriptor;
-import jetbrains.mps.smodel.ModelAccess;
-import jetbrains.mps.util.Computable;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 
 import java.awt.Component;
@@ -28,12 +28,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Describes tab location in tabs component, keeps actions/values associated with the tab.
  * Communicates with outer world using SNodeReference, doesn't resolve anything.
  */
-class ButtonEditorTab {
+/*package*/ class ButtonEditorTab implements AbstractEditorTab {
   private final ButtonTabsComponent myTabComponent;
   private final int myIndex;
   private final RelationDescriptor myDescriptor;
@@ -54,9 +55,13 @@ class ButtonEditorTab {
     return myDescriptor;
   }
 
+  @Override
+  public Stream<SNodeReference> getNodes() {
+    return myEntries.stream().map(Entry::getEditNode);
+  }
 
   public List<SNodeReference> getEditorNodes() {
-    ArrayList<SNodeReference> rv = new ArrayList<SNodeReference>(5);
+    ArrayList<SNodeReference> rv = new ArrayList<>(5);
     for (TabEditorLayout.Entry e : myEntries) {
       rv.add(e.getEditNode());
     }
@@ -88,12 +93,7 @@ class ButtonEditorTab {
   }
 
   /*package*/ boolean isSelected() {
-    return ModelAccess.instance().runReadAction(new Computable<Boolean>() {
-      @Override
-      public Boolean compute() {
-        return getTabComponent().isCurrent(ButtonEditorTab.this);
-      }
-    });
+    return getTabComponent().isCurrent(ButtonEditorTab.this);
   }
 
   /*package*/ Component getComponentForPopup() {

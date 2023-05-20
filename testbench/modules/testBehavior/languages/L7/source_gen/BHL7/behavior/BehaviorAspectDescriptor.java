@@ -7,9 +7,9 @@ import jetbrains.mps.core.aspects.behaviour.api.BHDescriptor;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor {
   private final BHDescriptor myI3__BehaviorDescriptor = new I3__BehaviorDescriptor();
@@ -21,6 +21,7 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
   private final BHDescriptor myD__BehaviorDescriptor = new D__BehaviorDescriptor();
   private final BHDescriptor myA__BehaviorDescriptor = new A__BehaviorDescriptor();
   private final BHDescriptor myB__BehaviorDescriptor = new B__BehaviorDescriptor();
+  private final BHDescriptor myL__BehaviorDescriptor = new L__BehaviorDescriptor();
   private final BHDescriptor myK__BehaviorDescriptor = new K__BehaviorDescriptor();
   private final BHDescriptor myF__BehaviorDescriptor = new F__BehaviorDescriptor();
   private final BHDescriptor myG__BehaviorDescriptor = new G__BehaviorDescriptor();
@@ -30,84 +31,37 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
 
   @Nullable
   public BHDescriptor getDescriptor(@NotNull SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_846f5o_a0p.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return myA__BehaviorDescriptor;
-          }
-          break;
-        case 1:
-          if (true) {
-            return myB__BehaviorDescriptor;
-          }
-          break;
-        case 2:
-          if (true) {
-            return myC__BehaviorDescriptor;
-          }
-          break;
-        case 3:
-          if (true) {
-            return myD__BehaviorDescriptor;
-          }
-          break;
-        case 4:
-          if (true) {
-            return myE__BehaviorDescriptor;
-          }
-          break;
-        case 5:
-          if (true) {
-            return myF__BehaviorDescriptor;
-          }
-          break;
-        case 6:
-          if (true) {
-            return myG__BehaviorDescriptor;
-          }
-          break;
-        case 7:
-          if (true) {
-            return myH__BehaviorDescriptor;
-          }
-          break;
-        case 8:
-          if (true) {
-            return myI1__BehaviorDescriptor;
-          }
-          break;
-        case 9:
-          if (true) {
-            return myI2__BehaviorDescriptor;
-          }
-          break;
-        case 10:
-          if (true) {
-            return myI3__BehaviorDescriptor;
-          }
-          break;
-        case 11:
-          if (true) {
-            return myK__BehaviorDescriptor;
-          }
-          break;
-        default:
-          // default 
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return myA__BehaviorDescriptor;
+      case 1:
+        return myB__BehaviorDescriptor;
+      case 2:
+        return myC__BehaviorDescriptor;
+      case 3:
+        return myD__BehaviorDescriptor;
+      case 4:
+        return myE__BehaviorDescriptor;
+      case 5:
+        return myF__BehaviorDescriptor;
+      case 6:
+        return myG__BehaviorDescriptor;
+      case 7:
+        return myH__BehaviorDescriptor;
+      case 8:
+        return myI1__BehaviorDescriptor;
+      case 9:
+        return myI2__BehaviorDescriptor;
+      case 10:
+        return myI3__BehaviorDescriptor;
+      case 11:
+        return myK__BehaviorDescriptor;
+      case 12:
+        return myL__BehaviorDescriptor;
+      default:
     }
     return null;
   }
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
-  }
-  private static final Map<SAbstractConcept, Integer> indices_846f5o_a0p = buildConceptIndices(MetaAdapterFactory.getConcept(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x559729dec0466d3cL, "BHL7.structure.A"), MetaAdapterFactory.getConcept(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x559729dec0466d3dL, "BHL7.structure.B"), MetaAdapterFactory.getConcept(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x4dcf589c68321a72L, "BHL7.structure.C"), MetaAdapterFactory.getConcept(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x549fa4aa12af52b3L, "BHL7.structure.D"), MetaAdapterFactory.getConcept(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x10b2a2acd7137351L, "BHL7.structure.E"), MetaAdapterFactory.getConcept(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x75783c3114f90130L, "BHL7.structure.F"), MetaAdapterFactory.getConcept(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x75783c3114f90190L, "BHL7.structure.G"), MetaAdapterFactory.getConcept(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x3a674fdfabfcc7faL, "BHL7.structure.H"), MetaAdapterFactory.getInterfaceConcept(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x549fa4aa12af5261L, "BHL7.structure.I1"), MetaAdapterFactory.getInterfaceConcept(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x549fa4aa12af528cL, "BHL7.structure.I2"), MetaAdapterFactory.getInterfaceConcept(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x10b2a2acd713731eL, "BHL7.structure.I3"), MetaAdapterFactory.getConcept(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x66c9579bde227bd6L, "BHL7.structure.K"));
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x559729dec0466d3cL), MetaIdFactory.conceptId(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x559729dec0466d3dL), MetaIdFactory.conceptId(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x4dcf589c68321a72L), MetaIdFactory.conceptId(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x549fa4aa12af52b3L), MetaIdFactory.conceptId(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x10b2a2acd7137351L), MetaIdFactory.conceptId(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x75783c3114f90130L), MetaIdFactory.conceptId(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x75783c3114f90190L), MetaIdFactory.conceptId(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x3a674fdfabfcc7faL), MetaIdFactory.conceptId(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x549fa4aa12af5261L), MetaIdFactory.conceptId(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x549fa4aa12af528cL), MetaIdFactory.conceptId(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x10b2a2acd713731eL), MetaIdFactory.conceptId(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x66c9579bde227bd6L), MetaIdFactory.conceptId(0x4239359f64574d2aL, 0xb1e014d3f948db39L, 0x65e1cc96389f813cL)).seal();
 }

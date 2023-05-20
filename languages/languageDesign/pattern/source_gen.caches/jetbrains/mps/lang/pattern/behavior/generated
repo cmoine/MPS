@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-8i8v15xjwhl4sp143ko0jg7n1mnkd30" />
+<product version="3" modelHash="-7jasdgjm5a5y5lt7c5g9o3x04yubl2w">
+  <files names="AbstractPatternProvider__BehaviorDescriptor.java:ActionStatement__BehaviorDescriptor.java:AsPattern__BehaviorDescriptor.java:BehaviorAspectDescriptor.java:ExpressionPatternProvider__BehaviorDescriptor.java:InlinePatternProvider__BehaviorDescriptor.java:LinkPatternVariableDeclaration__BehaviorDescriptor.java:LocalPatternReference__BehaviorDescriptor.java:PatternBuilderClassifierMember__BehaviorDescriptor.java:PatternBuilder__BehaviorDescriptor.java:PatternExpression__BehaviorDescriptor.java:PatternSwitchCase__BehaviorDescriptor.java:PatternVariableDeclaration__BehaviorDescriptor.java:PatternVariableProperty__BehaviorDescriptor.java:PatternVarsUtil.java:Pattern__BehaviorDescriptor.java:PropertyPatternVariableDeclaration__BehaviorDescriptor.java:QualifiedPatternReference__BehaviorDescriptor.java" />
+</product>
 

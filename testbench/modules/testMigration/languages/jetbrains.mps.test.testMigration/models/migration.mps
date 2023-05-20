@@ -41,6 +41,9 @@
         <child id="1070534934091" name="type" index="10QFUM" />
         <child id="1070534934092" name="expression" index="10QFUP" />
       </concept>
+      <concept id="1068498886296" name="jetbrains.mps.baseLanguage.structure.VariableReference" flags="nn" index="37vLTw">
+        <reference id="1068581517664" name="variableDeclaration" index="3cqZAo" />
+      </concept>
       <concept id="4972933694980447171" name="jetbrains.mps.baseLanguage.structure.BaseVariableDeclaration" flags="ng" index="19Szcq">
         <child id="5680397130376446158" name="type" index="1tU5fm" />
       </concept>
@@ -89,11 +92,6 @@
       <concept id="6478870542308703666" name="jetbrains.mps.baseLanguage.lightweightdsl.structure.MemberPlaceholder" flags="ng" index="3tTeZs">
         <property id="6478870542308703667" name="caption" index="3tTeZt" />
         <reference id="6478870542308703669" name="decl" index="3tTeZr" />
-      </concept>
-    </language>
-    <language id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel">
-      <concept id="4040588429969021681" name="jetbrains.mps.lang.smodel.structure.ModuleReferenceExpression" flags="nn" index="3rM5sP">
-        <property id="4040588429969021683" name="moduleId" index="3rM5sR" />
       </concept>
     </language>
     <language id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core">
@@ -147,19 +145,24 @@
                     <node concept="2OqwBi" id="1JaIS$2i2WS" role="37wK5m">
                       <node concept="2OqwBi" id="oyzlXu2T8f" role="2Oq$k0">
                         <node concept="2OqwBi" id="oyzlXu2SEp" role="2Oq$k0">
-                          <node concept="2OqwBi" id="1JaIS$2i03h" role="2Oq$k0">
-                            <node concept="1eOMI4" id="1JaIS$2i0w3" role="2Oq$k0">
-                              <node concept="10QFUN" id="1JaIS$2i0w4" role="1eOMHV">
-                                <node concept="3uibUv" id="1JaIS$2i0D_" role="10QFUM">
-                                  <ref role="3uigEE" to="z1c3:~AbstractModule" resolve="AbstractModule" />
-                                </node>
-                                <node concept="3rM5sP" id="oyzlXu2SAm" role="10QFUP">
-                                  <property role="3rM5sR" value="76984b71-9d72-4667-ac35-ed5f78c7f6e3" />
+                          <node concept="2OqwBi" id="59sLnAoPL86" role="2Oq$k0">
+                            <node concept="2OqwBi" id="1JaIS$2i03h" role="2Oq$k0">
+                              <node concept="1eOMI4" id="1JaIS$2i0w3" role="2Oq$k0">
+                                <node concept="10QFUN" id="1JaIS$2i0w4" role="1eOMHV">
+                                  <node concept="3uibUv" id="1JaIS$2i0D_" role="10QFUM">
+                                    <ref role="3uigEE" to="z1c3:~AbstractModule" resolve="AbstractModule" />
+                                  </node>
+                                  <node concept="37vLTw" id="59sLnAoPL0r" role="10QFUP">
+                                    <ref role="3cqZAo" node="1JaIS$2hYLT" resolve="m" />
+                                  </node>
                                 </node>
                               </node>
+                              <node concept="liA8E" id="1JaIS$2i0Q1" role="2OqNvi">
+                                <ref role="37wK5l" to="z1c3:~AbstractModule.getModuleSourceDir():jetbrains.mps.vfs.IFile" resolve="getModuleSourceDir" />
+                              </node>
                             </node>
-                            <node concept="liA8E" id="1JaIS$2i0Q1" role="2OqNvi">
-                              <ref role="37wK5l" to="z1c3:~AbstractModule.getModuleSourceDir():jetbrains.mps.vfs.IFile" resolve="getModuleSourceDir" />
+                            <node concept="liA8E" id="59sLnAoPLuf" role="2OqNvi">
+                              <ref role="37wK5l" to="3ju5:~IFile.getParent():jetbrains.mps.vfs.IFile" resolve="getParent" />
                             </node>
                           </node>
                           <node concept="liA8E" id="oyzlXu2T6d" role="2OqNvi">

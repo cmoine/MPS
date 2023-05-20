@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="-6q1ieez4sw6zszv9znoabld33c3bnqr">
+  <files names="AbstractInProcessTestMixin.java:AbstractJUnit5TestContributor.java:AbstractJUnitTestMixin.java:AssumptionFailedRunner.java:CommandLineTestsContributor.java:CommandOutputStream.java:DefaultRunListener.java:DefaultTestExecutionListener.java:InProcessEnvironment.java:InProcessExecutionFilter.java:JUnit5CmdlineTestContributor.java:JUnit5InprocessTestsContributor.java:JUnit5ScriptTestContributor.java:JUnit5TestContributor.java:NodeWrappersTestsContributor.java:ScriptTestContributor.java:StoppableRunner.java" />
+</product>
+

@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="ideaJavaPlugin">
+    <CLASSES>
+      <root url="jar://$APPLICATION_HOME_DIR$/plugins/java/lib/jps-builders.jar!/" />
+      <root url="jar://$APPLICATION_HOME_DIR$/plugins/java/lib/java-impl.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

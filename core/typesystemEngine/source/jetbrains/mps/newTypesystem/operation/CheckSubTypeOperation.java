@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,12 @@
  */
 package jetbrains.mps.newTypesystem.operation;
 
+import jetbrains.mps.smodel.SNodeUtil;
 import org.jetbrains.mps.openapi.model.SNode;
 
 public class CheckSubTypeOperation extends AddRemarkOperation {
-  private SNode mySubType;
-  private SNode mySuperType;
+  private final SNode mySubType;
+  private final SNode mySuperType;
 
   public CheckSubTypeOperation(SNode subType, SNode superType, Runnable runnable) {
     super(runnable);
@@ -29,6 +30,6 @@ public class CheckSubTypeOperation extends AddRemarkOperation {
 
   @Override
   public String getPresentation() {
-    return "checking whether " + mySubType + " is subtype of " + mySuperType;
+    return String.format("checking whether %s is subtype of %s", SNodeUtil.getPresentation(mySubType), SNodeUtil.getPresentation(mySuperType));
   }
 }

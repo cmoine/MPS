@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="d4nqdt5gskc4d4hlyzmlrpo1qrs1lfo" />
+<product version="3" modelHash="d4nqdt5gskc4d4hlyzmlrpo1qrs1lfo">
+  <files names="TByteArrayListDecorator.java:TDoubleArrayListDecorator.java:TFloatArrayListDecorator.java:TIntArrayListDecorator.java:TLongArrayListDecorator.java:TShortArrayListDecorator.java" />
+</product>
 

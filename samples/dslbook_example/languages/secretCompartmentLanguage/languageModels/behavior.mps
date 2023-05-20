@@ -2,7 +2,7 @@
 <model ref="r:bf569071-47c0-4c8e-8820-c63d5ff55ed1(jetbrains.mps.samples.secretCompartmentLanguage.behavior)">
   <persistence version="9" />
   <languages>
-    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="0" />
+    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="2" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -16,9 +16,7 @@
         <child id="1225194240801" name="constructor" index="13h7CW" />
       </concept>
       <concept id="1225194413805" name="jetbrains.mps.lang.behavior.structure.ConceptConstructorDeclaration" flags="in" index="13hLZK" />
-      <concept id="1225194472830" name="jetbrains.mps.lang.behavior.structure.ConceptMethodDeclaration" flags="ng" index="13i0hz">
-        <property id="1225194472833" name="isPrivate" index="13i0is" />
-      </concept>
+      <concept id="1225194472830" name="jetbrains.mps.lang.behavior.structure.ConceptMethodDeclaration" flags="ng" index="13i0hz" />
       <concept id="1225194691553" name="jetbrains.mps.lang.behavior.structure.ThisNodeExpression" flags="nn" index="13iPFW" />
     </language>
     <language id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage">
@@ -63,7 +61,6 @@
     <ref role="13h7C2" to="tpo2:hr1uxx_" resolve="StateMachineTest" />
     <node concept="13i0hz" id="hr1J3q0" role="13h7CS">
       <property role="TrG5h" value="getStateMachineName" />
-      <property role="13i0is" value="false" />
       <node concept="17QB3L" id="78HeHA5DRHA" role="3clF45" />
       <node concept="3clFbS" id="hr1J3q2" role="3clF47">
         <node concept="3clFbF" id="hr1JeHH" role="3cqZAp">
@@ -71,7 +68,7 @@
             <node concept="2OqwBi" id="hI08bGI" role="2Oq$k0">
               <node concept="13iPFW" id="hr1JeHI" role="2Oq$k0" />
               <node concept="3TrEf2" id="hr1Jfpv" role="2OqNvi">
-                <ref role="3Tt5mk" to="tpo2:hr1xS$3" />
+                <ref role="3Tt5mk" to="tpo2:hr1xS$3" resolve="stateMachine" />
               </node>
             </node>
             <node concept="3TrcHB" id="hr1Jghd" role="2OqNvi">

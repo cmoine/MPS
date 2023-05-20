@@ -4,45 +4,90 @@ package jetbrains.mps.lang.editor.multiple.testLanguage.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_MultipleEditorsTestChild = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MultipleEditorsTestEditorComponentChild = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MultipleEditorsTestEditorComponentChildSubconcept = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MultipleEditorsTestEditorComponentRoot = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MultipleEditorsTestMostSpecificChild = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MultipleEditorsTestMostSpecificRoot = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MultipleEditorsTestRefNodeListRoot = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MultipleEditorsTestRefNodeRoot = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_MultipleEditorsTestRoot = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_MultipleEditorsTestChild;
+  private ConceptPresentation props_MultipleEditorsTestEditorComponentChild;
+  private ConceptPresentation props_MultipleEditorsTestEditorComponentChildSubconcept;
+  private ConceptPresentation props_MultipleEditorsTestEditorComponentRoot;
+  private ConceptPresentation props_MultipleEditorsTestMostSpecificChild;
+  private ConceptPresentation props_MultipleEditorsTestMostSpecificRoot;
+  private ConceptPresentation props_MultipleEditorsTestRefNodeListRoot;
+  private ConceptPresentation props_MultipleEditorsTestRefNodeRoot;
+  private ConceptPresentation props_MultipleEditorsTestRoot;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.MultipleEditorsTestChild:
+        if (props_MultipleEditorsTestChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_MultipleEditorsTestChild = cpb.create();
+        }
         return props_MultipleEditorsTestChild;
-      case 1:
+      case LanguageConceptSwitch.MultipleEditorsTestEditorComponentChild:
+        if (props_MultipleEditorsTestEditorComponentChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_MultipleEditorsTestEditorComponentChild = cpb.create();
+        }
         return props_MultipleEditorsTestEditorComponentChild;
-      case 2:
+      case LanguageConceptSwitch.MultipleEditorsTestEditorComponentChildSubconcept:
+        if (props_MultipleEditorsTestEditorComponentChildSubconcept == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_MultipleEditorsTestEditorComponentChildSubconcept = cpb.create();
+        }
         return props_MultipleEditorsTestEditorComponentChildSubconcept;
-      case 3:
+      case LanguageConceptSwitch.MultipleEditorsTestEditorComponentRoot:
+        if (props_MultipleEditorsTestEditorComponentRoot == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("MultipleEditorsTestEditorComponentRoot");
+          props_MultipleEditorsTestEditorComponentRoot = cpb.create();
+        }
         return props_MultipleEditorsTestEditorComponentRoot;
-      case 4:
+      case LanguageConceptSwitch.MultipleEditorsTestMostSpecificChild:
+        if (props_MultipleEditorsTestMostSpecificChild == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_MultipleEditorsTestMostSpecificChild = cpb.create();
+        }
         return props_MultipleEditorsTestMostSpecificChild;
-      case 5:
+      case LanguageConceptSwitch.MultipleEditorsTestMostSpecificRoot:
+        if (props_MultipleEditorsTestMostSpecificRoot == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("MultipleEditorsTestMostSpecificRoot");
+          props_MultipleEditorsTestMostSpecificRoot = cpb.create();
+        }
         return props_MultipleEditorsTestMostSpecificRoot;
-      case 6:
+      case LanguageConceptSwitch.MultipleEditorsTestRefNodeListRoot:
+        if (props_MultipleEditorsTestRefNodeListRoot == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("MultipleEditorsTestRefNodeListRoot");
+          props_MultipleEditorsTestRefNodeListRoot = cpb.create();
+        }
         return props_MultipleEditorsTestRefNodeListRoot;
-      case 7:
+      case LanguageConceptSwitch.MultipleEditorsTestRefNodeRoot:
+        if (props_MultipleEditorsTestRefNodeRoot == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("MultipleEditorsTestRefNodeRoot");
+          props_MultipleEditorsTestRefNodeRoot = cpb.create();
+        }
         return props_MultipleEditorsTestRefNodeRoot;
-      case 8:
+      case LanguageConceptSwitch.MultipleEditorsTestRoot:
+        if (props_MultipleEditorsTestRoot == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("MultipleEditorsTestRoot");
+          props_MultipleEditorsTestRoot = cpb.create();
+        }
         return props_MultipleEditorsTestRoot;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

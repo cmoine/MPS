@@ -2,7 +2,7 @@
 <debug-info version="2">
   <root nodeRef="r:aba386f3-6ca6-4852-a4a2-5331bf9a5448(jetbrains.mps.samples.xmlPersistence.ideaPlugin)/9212378209272341619">
     <file name="plugin.xml">
-      <unit id="9212378209272341619" at="1,0,17,14" name="jetbrains.mps.samples.xmlPersistence.ideaPlugin.plugin" />
+      <unit id="9212378209272341619" at="1,0,18,14" name="jetbrains.mps.samples.xmlPersistence.ideaPlugin.plugin" />
     </file>
   </root>
 </debug-info>

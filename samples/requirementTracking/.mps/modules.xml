@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MPSProject">
+    <projectModules>
+      <modulePath path="$PROJECT_DIR$/languages/jetbrains.mps.samples.requirementTracking.RequirementDefinition/jetbrains.mps.samples.requirementTracking.RequirementDefinition.mpl" folder="" />
+      <modulePath path="$PROJECT_DIR$/languages/jetbrains.mps.samples.requirementTracking.Traces/jetbrains.mps.samples.requirementTracking.Traces.mpl" folder="" />
+      <modulePath path="$PROJECT_DIR$/solutions/jetbrains.mps.samples.ProjectCode/jetbrains.mps.samples.ProjectCode.msd" folder="" />
+      <modulePath path="$PROJECT_DIR$/solutions/jetbrains.mps.samples.Specification/jetbrains.mps.samples.Specification.msd" folder="" />
+    </projectModules>
+  </component>
+</project>

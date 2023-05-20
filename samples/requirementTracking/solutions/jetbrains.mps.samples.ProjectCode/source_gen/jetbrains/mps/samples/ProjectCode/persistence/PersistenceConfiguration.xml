@@ -1,0 +1,12 @@
+<database>  
+  <table name="ENCRYPTION">    
+    <providers>
+      <provider>RSA</provider>
+      <provider>JB_ENC</provider>
+    </providers>
+  </table>
+  
+  <table name="USERS">
+    <protocol>write-through</protocol>
+  </table>
+</database>

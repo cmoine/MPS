@@ -10,111 +10,111 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1164879751025:jetbrains.mps.baseLanguage.structure.TryCatchStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/5351203823916750322:jetbrains.mps.baseLanguage.structure.TryUniversalStatement" />
   <root nodeRef="r:4032b78d-911f-4395-b88c-ccb50cb24300(jetbrains.mps.debugger.java.api.settings)/3432969378036013783">
     <file name="DebugConnectionSettings.java">
-      <node id="3432969378036016385" at="9,0,10,0" concept="3" trace="myUseSockets" />
-      <node id="3432969378036016389" at="10,0,11,0" concept="3" trace="myHostName" />
-      <node id="3432969378036016392" at="11,0,12,0" concept="3" trace="myPort" />
-      <node id="3432969378036016395" at="12,0,13,0" concept="3" trace="mySharedMemoryAddress" />
-      <node id="3432969378036016411" at="15,64,16,24" concept="2" />
-      <node id="3432969378036016415" at="16,24,17,31" concept="2" />
-      <node id="3432969378036016419" at="17,31,18,26" concept="2" />
-      <node id="3432969378036016423" at="18,26,19,18" concept="2" />
-      <node id="3432969378036016439" at="21,112,22,30" concept="2" />
-      <node id="3432969378036016443" at="22,30,23,26" concept="2" />
-      <node id="3432969378036016447" at="23,26,24,18" concept="2" />
-      <node id="3432969378036016451" at="24,18,25,48" concept="2" />
-      <node id="3432969378036016548" at="27,0,28,0" concept="5" trace="isServerMode#()Z" />
-      <node id="3432969378036016552" at="28,0,29,0" concept="5" trace="isSuspend#()Z" />
-      <node id="3432969378036016560" at="29,33,30,24" concept="7" />
-      <node id="3432969378036016568" at="32,49,33,30" concept="2" />
-      <node id="3432969378036016576" at="35,31,36,22" concept="7" />
-      <node id="3432969378036016584" at="38,44,39,26" concept="2" />
-      <node id="3432969378036016592" at="41,24,42,18" concept="7" />
-      <node id="3432969378036016600" at="44,33,45,18" concept="2" />
-      <node id="3432969378036016608" at="47,42,48,33" concept="7" />
-      <node id="3432969378036016616" at="50,66,51,48" concept="2" />
-      <node id="3432969378036016624" at="53,45,54,32" concept="7" />
-      <node id="3432969378036016633" at="58,53,59,40" concept="6" />
-      <node id="3432969378036016640" at="60,22,61,33" concept="2" />
-      <node id="3432969378036016645" at="62,5,63,132" concept="7" />
-      <node id="3432969378036016658" at="66,28,67,17" concept="7" />
-      <node id="3432969378036016665" at="69,30,70,103" concept="7" />
-      <node id="3432969378036016675" at="72,35,73,108" concept="7" />
-      <node id="3432969378036016467" at="75,115,76,188" concept="7" />
-      <node id="3432969378036016513" at="78,150,79,164" concept="7" />
-      <node id="3432969378036016542" at="82,21,83,31" concept="7" />
-      <node id="3432969378036016539" at="84,12,85,21" concept="7" />
-      <node id="3432969378036016399" at="13,0,15,0" concept="1" trace="DebugConnectionSettings#()V" />
-      <node id="3432969378036016537" at="84,10,86,5" concept="0" />
-      <node id="3432969378036016556" at="29,0,32,0" concept="5" trace="isUseSockets#()Z" />
-      <node id="3432969378036016562" at="32,0,35,0" concept="5" trace="setUseSockets#(Z)V" />
-      <node id="3432969378036016572" at="35,0,38,0" concept="5" trace="getHostName#()Ljava/lang/String;" />
-      <node id="3432969378036016578" at="38,0,41,0" concept="5" trace="setHostName#(Ljava/lang/String;)V" />
-      <node id="3432969378036016588" at="41,0,44,0" concept="5" trace="getPort#()I" />
-      <node id="3432969378036016594" at="44,0,47,0" concept="5" trace="setPort#(I)V" />
-      <node id="3432969378036016604" at="47,0,50,0" concept="5" trace="getSharedMemoryAddress#()Ljava/lang/String;" />
-      <node id="3432969378036016610" at="50,0,53,0" concept="5" trace="setSharedMemoryAddress#(Ljava/lang/String;)V" />
-      <node id="3432969378036016620" at="53,0,56,0" concept="5" trace="getApplicationCommandLine#()Ljava/lang/String;" />
-      <node id="3432969378036016637" at="59,40,62,5" concept="4" />
-      <node id="3432969378036016661" at="69,0,72,0" concept="5" trace="getAddress#()Ljava/lang/String;" />
-      <node id="3432969378036016671" at="72,0,75,0" concept="5" trace="getPresentation#()Ljava/lang/String;" />
-      <node id="3432969378036016455" at="75,0,78,0" concept="8" trace="getCommandLine#(ZZZLjava/lang/String;)Ljava/lang/String;" />
-      <node id="3432969378036016497" at="78,0,81,0" concept="8" trace="getCommandLine#(ZZZLjava/lang/String;ILjava/lang/String;)Ljava/lang/String;" />
-      <node id="3432969378036016654" at="65,0,69,0" concept="5" trace="isEmpty#()Z" />
-      <node id="3432969378036016535" at="81,95,86,5" concept="4" />
-      <node id="3432969378036016403" at="15,0,21,0" concept="1" trace="DebugConnectionSettings#(Ljava/lang/String;I)V" />
-      <node id="3432969378036016427" at="21,0,27,0" concept="1" trace="DebugConnectionSettings#(ZLjava/lang/String;ILjava/lang/String;)V" />
-      <node id="3432969378036016523" at="81,0,88,0" concept="8" trace="getAddress#(ZLjava/lang/String;ILjava/lang/String;)Ljava/lang/String;" />
-      <node id="3432969378036016627" at="56,0,65,0" concept="5" trace="getCommandLine#(Z)Ljava/lang/String;" />
-      <scope id="3432969378036016402" at="13,39,13,39" />
-      <scope id="3432969378036016548" at="27,0,28,0" />
-      <scope id="3432969378036016552" at="28,0,29,0" />
-      <scope id="3432969378036016559" at="29,33,30,24" />
-      <scope id="3432969378036016567" at="32,49,33,30" />
-      <scope id="3432969378036016575" at="35,31,36,22" />
-      <scope id="3432969378036016583" at="38,44,39,26" />
-      <scope id="3432969378036016591" at="41,24,42,18" />
-      <scope id="3432969378036016599" at="44,33,45,18" />
-      <scope id="3432969378036016607" at="47,42,48,33" />
-      <scope id="3432969378036016615" at="50,66,51,48" />
-      <scope id="3432969378036016623" at="53,45,54,32" />
-      <scope id="3432969378036016639" at="60,22,61,33" />
-      <scope id="3432969378036016657" at="66,28,67,17" />
-      <scope id="3432969378036016664" at="69,30,70,103" />
-      <scope id="3432969378036016674" at="72,35,73,108" />
-      <scope id="3432969378036016466" at="75,115,76,188" />
-      <scope id="3432969378036016512" at="78,150,79,164" />
-      <scope id="3432969378036016541" at="82,21,83,31" />
-      <scope id="3432969378036016538" at="84,12,85,21" />
-      <scope id="3432969378036016399" at="13,0,15,0" />
-      <scope id="3432969378036016556" at="29,0,32,0" />
-      <scope id="3432969378036016562" at="32,0,35,0">
+      <node id="3432969378036016385" at="11,0,12,0" concept="3" trace="myUseSockets" />
+      <node id="3432969378036016389" at="12,0,13,0" concept="3" trace="myHostName" />
+      <node id="3432969378036016392" at="13,0,14,0" concept="3" trace="myPort" />
+      <node id="3432969378036016395" at="14,0,15,0" concept="3" trace="mySharedMemoryAddress" />
+      <node id="3432969378036016411" at="17,64,18,24" concept="2" />
+      <node id="3432969378036016415" at="18,24,19,31" concept="2" />
+      <node id="3432969378036016419" at="19,31,20,26" concept="2" />
+      <node id="3432969378036016423" at="20,26,21,18" concept="2" />
+      <node id="3432969378036016439" at="23,112,24,30" concept="2" />
+      <node id="3432969378036016443" at="24,30,25,26" concept="2" />
+      <node id="3432969378036016447" at="25,26,26,18" concept="2" />
+      <node id="3432969378036016451" at="26,18,27,48" concept="2" />
+      <node id="3432969378036016548" at="29,0,30,0" concept="5" trace="isServerMode#()Z" />
+      <node id="3432969378036016552" at="30,0,31,0" concept="5" trace="isSuspend#()Z" />
+      <node id="3432969378036016560" at="31,33,32,24" concept="7" />
+      <node id="3432969378036016568" at="34,49,35,30" concept="2" />
+      <node id="3432969378036016576" at="37,31,38,22" concept="7" />
+      <node id="3432969378036016584" at="40,44,41,26" concept="2" />
+      <node id="3432969378036016592" at="43,24,44,18" concept="7" />
+      <node id="3432969378036016600" at="46,33,47,18" concept="2" />
+      <node id="3432969378036016608" at="49,42,50,33" concept="7" />
+      <node id="3432969378036016616" at="52,66,53,48" concept="2" />
+      <node id="3432969378036016624" at="55,45,56,32" concept="7" />
+      <node id="3432969378036016633" at="60,53,61,40" concept="6" />
+      <node id="3432969378036016640" at="62,22,63,33" concept="2" />
+      <node id="3432969378036016645" at="64,5,65,132" concept="7" />
+      <node id="3432969378036016658" at="68,28,69,17" concept="7" />
+      <node id="3432969378036016665" at="71,30,72,103" concept="7" />
+      <node id="3432969378036016675" at="74,35,75,108" concept="7" />
+      <node id="3432969378036016467" at="77,115,78,188" concept="7" />
+      <node id="3432969378036016513" at="80,150,81,164" concept="7" />
+      <node id="3432969378036016542" at="84,21,85,31" concept="7" />
+      <node id="3432969378036016539" at="86,12,87,21" concept="7" />
+      <node id="3432969378036016399" at="15,0,17,0" concept="1" trace="DebugConnectionSettings#()V" />
+      <node id="3432969378036016537" at="86,10,88,5" concept="0" />
+      <node id="3432969378036016556" at="31,0,34,0" concept="5" trace="isUseSockets#()Z" />
+      <node id="3432969378036016562" at="34,0,37,0" concept="5" trace="setUseSockets#(Z)V" />
+      <node id="3432969378036016572" at="37,0,40,0" concept="5" trace="getHostName#()Ljava/lang/String;" />
+      <node id="3432969378036016578" at="40,0,43,0" concept="5" trace="setHostName#(Ljava/lang/String;)V" />
+      <node id="3432969378036016588" at="43,0,46,0" concept="5" trace="getPort#()I" />
+      <node id="3432969378036016594" at="46,0,49,0" concept="5" trace="setPort#(I)V" />
+      <node id="3432969378036016604" at="49,0,52,0" concept="5" trace="getSharedMemoryAddress#()Ljava/lang/String;" />
+      <node id="3432969378036016610" at="52,0,55,0" concept="5" trace="setSharedMemoryAddress#(Ljava/lang/String;)V" />
+      <node id="3432969378036016620" at="55,0,58,0" concept="5" trace="getApplicationCommandLine#()Ljava/lang/String;" />
+      <node id="3432969378036016637" at="61,40,64,5" concept="4" />
+      <node id="3432969378036016661" at="71,0,74,0" concept="5" trace="getAddress#()Ljava/lang/String;" />
+      <node id="3432969378036016671" at="74,0,77,0" concept="5" trace="getPresentation#()Ljava/lang/String;" />
+      <node id="3432969378036016455" at="77,0,80,0" concept="8" trace="getCommandLine#(ZZZLjava/lang/String;)Ljava/lang/String;" />
+      <node id="3432969378036016497" at="80,0,83,0" concept="8" trace="getCommandLine#(ZZZLjava/lang/String;ILjava/lang/String;)Ljava/lang/String;" />
+      <node id="3432969378036016654" at="67,0,71,0" concept="5" trace="isEmpty#()Z" />
+      <node id="3432969378036016535" at="83,95,88,5" concept="4" />
+      <node id="3432969378036016403" at="17,0,23,0" concept="1" trace="DebugConnectionSettings#(Ljava/lang/String;I)V" />
+      <node id="3432969378036016427" at="23,0,29,0" concept="1" trace="DebugConnectionSettings#(ZLjava/lang/String;ILjava/lang/String;)V" />
+      <node id="3432969378036016523" at="83,0,90,0" concept="8" trace="getAddress#(ZLjava/lang/String;ILjava/lang/String;)Ljava/lang/String;" />
+      <node id="3432969378036016627" at="58,0,67,0" concept="5" trace="getCommandLine#(Z)Ljava/lang/String;" />
+      <scope id="3432969378036016402" at="15,39,15,39" />
+      <scope id="3432969378036016548" at="29,0,30,0" />
+      <scope id="3432969378036016552" at="30,0,31,0" />
+      <scope id="3432969378036016559" at="31,33,32,24" />
+      <scope id="3432969378036016567" at="34,49,35,30" />
+      <scope id="3432969378036016575" at="37,31,38,22" />
+      <scope id="3432969378036016583" at="40,44,41,26" />
+      <scope id="3432969378036016591" at="43,24,44,18" />
+      <scope id="3432969378036016599" at="46,33,47,18" />
+      <scope id="3432969378036016607" at="49,42,50,33" />
+      <scope id="3432969378036016615" at="52,66,53,48" />
+      <scope id="3432969378036016623" at="55,45,56,32" />
+      <scope id="3432969378036016639" at="62,22,63,33" />
+      <scope id="3432969378036016657" at="68,28,69,17" />
+      <scope id="3432969378036016664" at="71,30,72,103" />
+      <scope id="3432969378036016674" at="74,35,75,108" />
+      <scope id="3432969378036016466" at="77,115,78,188" />
+      <scope id="3432969378036016512" at="80,150,81,164" />
+      <scope id="3432969378036016541" at="84,21,85,31" />
+      <scope id="3432969378036016538" at="86,12,87,21" />
+      <scope id="3432969378036016399" at="15,0,17,0" />
+      <scope id="3432969378036016556" at="31,0,34,0" />
+      <scope id="3432969378036016562" at="34,0,37,0">
         <var name="useSockets" id="3432969378036016565" />
       </scope>
-      <scope id="3432969378036016572" at="35,0,38,0" />
-      <scope id="3432969378036016578" at="38,0,41,0">
+      <scope id="3432969378036016572" at="37,0,40,0" />
+      <scope id="3432969378036016578" at="40,0,43,0">
         <var name="hostName" id="3432969378036016581" />
       </scope>
-      <scope id="3432969378036016588" at="41,0,44,0" />
-      <scope id="3432969378036016594" at="44,0,47,0">
+      <scope id="3432969378036016588" at="43,0,46,0" />
+      <scope id="3432969378036016594" at="46,0,49,0">
         <var name="port" id="3432969378036016597" />
       </scope>
-      <scope id="3432969378036016604" at="47,0,50,0" />
-      <scope id="3432969378036016610" at="50,0,53,0">
+      <scope id="3432969378036016604" at="49,0,52,0" />
+      <scope id="3432969378036016610" at="52,0,55,0">
         <var name="sharedMemoryAddress" id="3432969378036016613" />
       </scope>
-      <scope id="3432969378036016620" at="53,0,56,0" />
-      <scope id="3432969378036016661" at="69,0,72,0" />
-      <scope id="3432969378036016671" at="72,0,75,0" />
-      <scope id="3432969378036016455" at="75,0,78,0">
+      <scope id="3432969378036016620" at="55,0,58,0" />
+      <scope id="3432969378036016661" at="71,0,74,0" />
+      <scope id="3432969378036016671" at="74,0,77,0" />
+      <scope id="3432969378036016455" at="77,0,80,0">
         <var name="address" id="3432969378036016464" />
         <var name="serverMode" id="3432969378036016458" />
         <var name="suspend" id="3432969378036016462" />
         <var name="useSockets" id="3432969378036016460" />
       </scope>
-      <scope id="3432969378036016497" at="78,0,81,0">
+      <scope id="3432969378036016497" at="80,0,83,0">
         <var name="host" id="3432969378036016506" />
         <var name="port" id="3432969378036016508" />
         <var name="serverMode" id="3432969378036016500" />
@@ -122,111 +122,111 @@
         <var name="suspend" id="3432969378036016504" />
         <var name="useSockets" id="3432969378036016502" />
       </scope>
-      <scope id="3432969378036016410" at="15,64,19,18" />
-      <scope id="3432969378036016438" at="21,112,25,48" />
-      <scope id="3432969378036016654" at="65,0,69,0" />
-      <scope id="3432969378036016632" at="58,53,63,132">
+      <scope id="3432969378036016410" at="17,64,21,18" />
+      <scope id="3432969378036016438" at="23,112,27,48" />
+      <scope id="3432969378036016654" at="67,0,71,0" />
+      <scope id="3432969378036016632" at="60,53,65,132">
         <var name="serverMode" id="3432969378036016634" />
       </scope>
-      <scope id="3432969378036016534" at="81,95,86,5" />
-      <scope id="3432969378036016403" at="15,0,21,0">
+      <scope id="3432969378036016534" at="83,95,88,5" />
+      <scope id="3432969378036016403" at="17,0,23,0">
         <var name="hostName" id="3432969378036016406" />
         <var name="port" id="3432969378036016408" />
       </scope>
-      <scope id="3432969378036016427" at="21,0,27,0">
+      <scope id="3432969378036016427" at="23,0,29,0">
         <var name="hostName" id="3432969378036016432" />
         <var name="port" id="3432969378036016434" />
         <var name="sharedMemoryAddress" id="3432969378036016436" />
         <var name="useSockets" id="3432969378036016430" />
       </scope>
-      <scope id="3432969378036016523" at="81,0,88,0">
+      <scope id="3432969378036016523" at="83,0,90,0">
         <var name="address" id="3432969378036016532" />
         <var name="host" id="3432969378036016528" />
         <var name="port" id="3432969378036016530" />
         <var name="useSockets" id="3432969378036016526" />
       </scope>
-      <scope id="3432969378036016627" at="56,0,65,0">
+      <scope id="3432969378036016627" at="58,0,67,0">
         <var name="application" id="3432969378036016630" />
       </scope>
-      <unit id="3432969378036013783" at="8,0,89,0" name="jetbrains.mps.debugger.java.api.settings.DebugConnectionSettings" />
+      <unit id="3432969378036013783" at="9,0,91,0" name="jetbrains.mps.debugger.java.api.settings.DebugConnectionSettings" />
     </file>
   </root>
   <root nodeRef="r:4032b78d-911f-4395-b88c-ccb50cb24300(jetbrains.mps.debugger.java.api.settings)/3432969378036013784">
     <file name="RemoteConnectionSettings.java">
-      <node id="3432969378036013787" at="7,0,8,0" concept="3" trace="mySuspend" />
-      <node id="3432969378036013799" at="8,62,9,26" concept="9" />
-      <node id="3432969378036013806" at="11,37,12,12" concept="9" />
-      <node id="3432969378036013828" at="15,33,16,17" concept="7" />
-      <node id="3432969378036013835" at="19,30,20,21" concept="7" />
-      <node id="3432969378036013844" at="22,43,23,24" concept="2" />
-      <node id="2596130676084594146" at="26,77,27,105" concept="6" />
-      <node id="2596130676084594155" at="27,105,28,47" concept="2" />
-      <node id="2596130676084594138" at="28,47,29,30" concept="7" />
-      <node id="3432969378036013815" at="31,75,32,112" concept="7" />
-      <node id="3432969378036013791" at="8,0,11,0" concept="1" trace="RemoteConnectionSettings#(Ljava/lang/String;I)V" />
-      <node id="3432969378036013802" at="11,0,14,0" concept="1" trace="RemoteConnectionSettings#()V" />
-      <node id="3432969378036013838" at="22,0,25,0" concept="5" trace="setSuspend#(Z)V" />
-      <node id="3432969378036013807" at="31,0,34,0" concept="8" trace="getClientCommandLine#(ZI)Ljava/lang/String;" />
-      <node id="3432969378036013824" at="14,0,18,0" concept="5" trace="isServerMode#()Z" />
-      <node id="3432969378036013831" at="18,0,22,0" concept="5" trace="isSuspend#()Z" />
-      <node id="2596130676084594130" at="25,0,31,0" concept="5" trace="clone#()Ljetbrains/mps/debugger/java/api/settings/RemoteConnectionSettings;" />
-      <scope id="3432969378036013798" at="8,62,9,26" />
-      <scope id="3432969378036013805" at="11,37,12,12" />
-      <scope id="3432969378036013827" at="15,33,16,17" />
-      <scope id="3432969378036013834" at="19,30,20,21" />
-      <scope id="3432969378036013843" at="22,43,23,24" />
-      <scope id="3432969378036013814" at="31,75,32,112" />
-      <scope id="3432969378036013791" at="8,0,11,0">
+      <node id="3432969378036013787" at="9,0,10,0" concept="3" trace="mySuspend" />
+      <node id="3432969378036013799" at="10,62,11,26" concept="9" />
+      <node id="3432969378036013806" at="13,37,14,12" concept="9" />
+      <node id="3432969378036013828" at="17,33,18,17" concept="7" />
+      <node id="3432969378036013835" at="21,30,22,21" concept="7" />
+      <node id="3432969378036013844" at="24,43,25,24" concept="2" />
+      <node id="2596130676084594146" at="28,77,29,105" concept="6" />
+      <node id="2596130676084594155" at="29,105,30,47" concept="2" />
+      <node id="2596130676084594138" at="30,47,31,30" concept="7" />
+      <node id="3432969378036013815" at="33,75,34,112" concept="7" />
+      <node id="3432969378036013791" at="10,0,13,0" concept="1" trace="RemoteConnectionSettings#(Ljava/lang/String;I)V" />
+      <node id="3432969378036013802" at="13,0,16,0" concept="1" trace="RemoteConnectionSettings#()V" />
+      <node id="3432969378036013838" at="24,0,27,0" concept="5" trace="setSuspend#(Z)V" />
+      <node id="3432969378036013807" at="33,0,36,0" concept="8" trace="getClientCommandLine#(ZI)Ljava/lang/String;" />
+      <node id="3432969378036013824" at="16,0,20,0" concept="5" trace="isServerMode#()Z" />
+      <node id="3432969378036013831" at="20,0,24,0" concept="5" trace="isSuspend#()Z" />
+      <node id="2596130676084594130" at="27,0,33,0" concept="5" trace="clone#()Ljetbrains/mps/debugger/java/api/settings/RemoteConnectionSettings;" />
+      <scope id="3432969378036013798" at="10,62,11,26" />
+      <scope id="3432969378036013805" at="13,37,14,12" />
+      <scope id="3432969378036013827" at="17,33,18,17" />
+      <scope id="3432969378036013834" at="21,30,22,21" />
+      <scope id="3432969378036013843" at="24,43,25,24" />
+      <scope id="3432969378036013814" at="33,75,34,112" />
+      <scope id="3432969378036013791" at="10,0,13,0">
         <var name="hostName" id="3432969378036013794" />
         <var name="port" id="3432969378036013796" />
       </scope>
-      <scope id="3432969378036013802" at="11,0,14,0" />
-      <scope id="3432969378036013838" at="22,0,25,0">
+      <scope id="3432969378036013802" at="13,0,16,0" />
+      <scope id="3432969378036013838" at="24,0,27,0">
         <var name="suspend" id="3432969378036013841" />
       </scope>
-      <scope id="2596130676084594134" at="26,77,29,30">
+      <scope id="2596130676084594134" at="28,77,31,30">
         <var name="connectionSettings" id="2596130676084594147" />
       </scope>
-      <scope id="3432969378036013807" at="31,0,34,0">
+      <scope id="3432969378036013807" at="33,0,36,0">
         <var name="port" id="3432969378036013812" />
         <var name="useSockets" id="3432969378036013810" />
       </scope>
-      <scope id="3432969378036013824" at="14,0,18,0" />
-      <scope id="3432969378036013831" at="18,0,22,0" />
-      <scope id="2596130676084594130" at="25,0,31,0" />
-      <unit id="3432969378036013784" at="6,0,35,0" name="jetbrains.mps.debugger.java.api.settings.RemoteConnectionSettings" />
+      <scope id="3432969378036013824" at="16,0,20,0" />
+      <scope id="3432969378036013831" at="20,0,24,0" />
+      <scope id="2596130676084594130" at="27,0,33,0" />
+      <unit id="3432969378036013784" at="7,0,37,0" name="jetbrains.mps.debugger.java.api.settings.RemoteConnectionSettings" />
     </file>
   </root>
   <root nodeRef="r:4032b78d-911f-4395-b88c-ccb50cb24300(jetbrains.mps.debugger.java.api.settings)/3432969378036017435">
     <file name="LocalConnectionSettings.java">
-      <node id="3432969378036017444" at="9,54,10,45" concept="9" />
-      <node id="3432969378036017452" at="11,21,12,31" concept="6" />
-      <node id="3432969378036017462" at="13,11,14,54" concept="2" />
-      <node id="3432969378036017466" at="16,7,17,24" concept="2" />
-      <node id="3432969378036017473" at="21,33,22,16" concept="7" />
-      <node id="3432969378036017480" at="25,30,26,16" concept="7" />
-      <node id="3432969378036017456" at="12,31,16,7" concept="10" />
-      <node id="3432969378036017469" at="20,0,24,0" concept="5" trace="isServerMode#()Z" />
-      <node id="3432969378036017476" at="24,0,28,0" concept="5" trace="isSuspend#()Z" />
-      <node id="3432969378036017449" at="10,45,18,5" concept="4" />
-      <node id="3432969378036017438" at="9,0,20,0" concept="1" trace="LocalConnectionSettings#(Z)V" />
-      <scope id="3432969378036017457" at="15,0,15,37">
+      <node id="3432969378036017444" at="11,54,12,45" concept="9" />
+      <node id="3432969378036017452" at="13,21,14,31" concept="6" />
+      <node id="3432969378036017462" at="15,11,16,54" concept="2" />
+      <node id="3432969378036017466" at="18,7,19,24" concept="2" />
+      <node id="3432969378036017473" at="23,33,24,16" concept="7" />
+      <node id="3432969378036017480" at="27,30,28,16" concept="7" />
+      <node id="3432969378036017456" at="14,31,18,7" concept="10" />
+      <node id="3432969378036017469" at="22,0,26,0" concept="5" trace="isServerMode#()Z" />
+      <node id="3432969378036017476" at="26,0,30,0" concept="5" trace="isSuspend#()Z" />
+      <node id="3432969378036017449" at="12,45,20,5" concept="4" />
+      <node id="3432969378036017438" at="11,0,22,0" concept="1" trace="LocalConnectionSettings#(Z)V" />
+      <scope id="3432969378036017458" at="17,37,17,37" />
+      <scope id="3432969378036017461" at="15,11,16,54" />
+      <scope id="3432969378036017457" at="17,7,18,7">
         <var name="ignored" id="3432969378036017459" />
       </scope>
-      <scope id="3432969378036017458" at="15,37,15,37" />
-      <scope id="3432969378036017461" at="13,11,14,54" />
-      <scope id="3432969378036017472" at="21,33,22,16" />
-      <scope id="3432969378036017479" at="25,30,26,16" />
-      <scope id="3432969378036017469" at="20,0,24,0" />
-      <scope id="3432969378036017476" at="24,0,28,0" />
-      <scope id="3432969378036017451" at="11,21,17,24">
+      <scope id="3432969378036017472" at="23,33,24,16" />
+      <scope id="3432969378036017479" at="27,30,28,16" />
+      <scope id="3432969378036017469" at="22,0,26,0" />
+      <scope id="3432969378036017476" at="26,0,30,0" />
+      <scope id="3432969378036017451" at="13,21,19,24">
         <var name="freePort" id="3432969378036017453" />
       </scope>
-      <scope id="3432969378036017443" at="9,54,18,5" />
-      <scope id="3432969378036017438" at="9,0,20,0">
+      <scope id="3432969378036017443" at="11,54,20,5" />
+      <scope id="3432969378036017438" at="11,0,22,0">
         <var name="useSockets" id="3432969378036017441" />
       </scope>
-      <unit id="3432969378036017435" at="8,0,29,0" name="jetbrains.mps.debugger.java.api.settings.LocalConnectionSettings" />
+      <unit id="3432969378036017435" at="9,0,31,0" name="jetbrains.mps.debugger.java.api.settings.LocalConnectionSettings" />
     </file>
   </root>
 </debug-info>

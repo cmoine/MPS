@@ -8,16 +8,16 @@ public class MoneySample {
   public MoneySample() {
   }
   public static void main(String[] args) {
-    // To create a money literal, just type the number immediately followed by the desired currency symbol 
-    // E.g. type "10EUR" to get 10 EUR money literal 
-    // The allowed currencies are specified in the co-located instance of CurrencyDefTable 
+    // To create a money literal, just type the number immediately followed by the desired currency symbol
+    // E.g. type "10EUR" to get 10 EUR money literal
+    // The allowed currencies are specified in the co-located instance of CurrencyDefTable
     Money cash = new Money(10, "EUR");
 
-    // Money literal can be manipulated just like any other type of literals in MPS 
+    // Money literal can be manipulated just like any other type of literals in MPS
     Money total = cash.plus(MoneySample.getDonation().to("EUR"));
     System.out.println("total amount: " + total);
-    // Code with the classes from org.jetbrains.mps.samples.MoneyRuntime will be generated and then used at run-time 
-    // Try "Preview Generated Text (Control|Cmd + Alt + Shift + F9)" 
+    // Code with the classes from org.jetbrains.mps.samples.MoneyRuntime will be generated and then used at run-time
+    // Try "Preview Generated Text (Control|Cmd + Alt + Shift + F9)"
   }
   private static Money getDonation() {
     return new Money(30, "EUR");

@@ -2,7 +2,7 @@
 <model ref="r:40062e7d-2d40-4964-a55f-255e1fee23d7(jetbrains.mps.debugger.java.runtime.configurations.remote)">
   <persistence version="9" />
   <languages>
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports>
     <import index="wyt6" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)" />
@@ -28,10 +28,6 @@
       </concept>
       <concept id="1188208481402" name="jetbrains.mps.baseLanguage.structure.HasAnnotation" flags="ng" index="2AJDlI">
         <child id="1188208488637" name="annotation" index="2AJF6D" />
-      </concept>
-      <concept id="1153952380246" name="jetbrains.mps.baseLanguage.structure.TryStatement" flags="nn" index="2GUZhq">
-        <child id="1153952416686" name="body" index="2GV8ay" />
-        <child id="1153952429843" name="finallyBody" index="2GVbov" />
       </concept>
       <concept id="1197027756228" name="jetbrains.mps.baseLanguage.structure.DotExpression" flags="nn" index="2OqwBi">
         <child id="1197027771414" name="operand" index="2Oq$k0" />
@@ -118,15 +114,19 @@
         <child id="1081773367579" name="rightExpression" index="3uHU7w" />
         <child id="1081773367580" name="leftExpression" index="3uHU7B" />
       </concept>
+      <concept id="8276990574909231788" name="jetbrains.mps.baseLanguage.structure.FinallyClause" flags="ng" index="1wplmZ">
+        <child id="8276990574909234106" name="finallyBody" index="1wplMD" />
+      </concept>
       <concept id="1073239437375" name="jetbrains.mps.baseLanguage.structure.NotEqualsExpression" flags="nn" index="3y3z36" />
       <concept id="1178549954367" name="jetbrains.mps.baseLanguage.structure.IVisible" flags="ng" index="1B3ioH">
         <child id="1178549979242" name="visibility" index="1B3o_S" />
       </concept>
-      <concept id="6329021646629104957" name="jetbrains.mps.baseLanguage.structure.TextCommentPart" flags="nn" index="3SKdUq">
-        <property id="6329021646629104958" name="text" index="3SKdUp" />
+      <concept id="5351203823916750322" name="jetbrains.mps.baseLanguage.structure.TryUniversalStatement" flags="nn" index="3J1_TO">
+        <child id="8276990574886367509" name="finallyClause" index="1zxBo6" />
+        <child id="8276990574886367508" name="body" index="1zxBo7" />
       </concept>
       <concept id="6329021646629104954" name="jetbrains.mps.baseLanguage.structure.SingleLineComment" flags="nn" index="3SKdUt">
-        <child id="6329021646629175155" name="commentPart" index="3SKWNk" />
+        <child id="8356039341262087992" name="line" index="1aUNEU" />
       </concept>
       <concept id="1146644602865" name="jetbrains.mps.baseLanguage.structure.PublicVisibility" flags="nn" index="3Tm1VV" />
       <concept id="1146644623116" name="jetbrains.mps.baseLanguage.structure.PrivateVisibility" flags="nn" index="3Tm6S6" />
@@ -138,6 +138,14 @@
     <language id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core">
       <concept id="1169194658468" name="jetbrains.mps.lang.core.structure.INamedConcept" flags="ng" index="TrEIO">
         <property id="1169194664001" name="name" index="TrG5h" />
+      </concept>
+    </language>
+    <language id="c7fb639f-be78-4307-89b0-b5959c3fa8c8" name="jetbrains.mps.lang.text">
+      <concept id="155656958578482948" name="jetbrains.mps.lang.text.structure.Word" flags="nn" index="3oM_SD">
+        <property id="155656958578482949" name="value" index="3oM_SC" />
+      </concept>
+      <concept id="2535923850359271782" name="jetbrains.mps.lang.text.structure.Line" flags="nn" index="1PaTwC">
+        <child id="2535923850359271783" name="elements" index="1PaTwD" />
       </concept>
     </language>
   </registry>
@@ -321,7 +329,7 @@
                               </node>
                               <node concept="3clFbF" id="5yNeVI8LPMZ" role="3cqZAp">
                                 <node concept="1rXfSq" id="4hiugqyz8Ow" role="3clFbG">
-                                  <ref role="37wK5l" to="uu3z:~ProcessHandler.notifyProcessDetached():void" resolve="notifyProcessDetached" />
+                                  <ref role="37wK5l" to="uu3z:~ProcessHandler.notifyProcessDetached()" resolve="notifyProcessDetached" />
                                 </node>
                               </node>
                             </node>
@@ -349,53 +357,116 @@
                 </node>
               </node>
             </node>
-            <node concept="2GUZhq" id="5yNeVI8LPN7" role="3cqZAp">
-              <node concept="3clFbS" id="5yNeVI8LPN8" role="2GVbov">
-                <node concept="3SKdUt" id="5yNeVI8LPN9" role="3cqZAp">
-                  <node concept="3SKdUq" id="5yNeVI8LPNa" role="3SKWNk">
-                    <property role="3SKdUp" value="in case we added our listener too late, we may have lost processDetached notification," />
-                  </node>
-                </node>
-                <node concept="3SKdUt" id="5yNeVI8LPNb" role="3cqZAp">
-                  <node concept="3SKdUq" id="5yNeVI8LPNc" role="3SKWNk">
-                    <property role="3SKdUp" value="so check here if process is detached" />
-                  </node>
-                </node>
-                <node concept="3clFbJ" id="5yNeVI8LPNd" role="3cqZAp">
-                  <node concept="2OqwBi" id="5yNeVI8LPNe" role="3clFbw">
-                    <node concept="37vLTw" id="3GM_nagTwGu" role="2Oq$k0">
-                      <ref role="3cqZAo" node="5yNeVI8LPMu" resolve="session" />
-                    </node>
-                    <node concept="liA8E" id="5yNeVI8LPNg" role="2OqNvi">
-                      <ref role="37wK5l" to="1l1h:3SnNvqCaK9B" resolve="isStopped" />
-                    </node>
-                  </node>
-                  <node concept="3clFbS" id="5yNeVI8LPNh" role="3clFbx">
-                    <node concept="3clFbF" id="5yNeVI8LPNi" role="3cqZAp">
-                      <node concept="2OqwBi" id="5yNeVI8LPNj" role="3clFbG">
-                        <node concept="37vLTw" id="3GM_nagT$Oi" role="2Oq$k0">
-                          <ref role="3cqZAo" node="5yNeVI8LPMd" resolve="vmManager" />
-                        </node>
-                        <node concept="liA8E" id="5yNeVI8LPNl" role="2OqNvi">
-                          <ref role="37wK5l" to="1nsa:7Lv9a5UcAob" resolve="removeAllProcessListener" />
-                          <node concept="37vLTw" id="3GM_nagTuOE" role="37wK5m">
-                            <ref role="3cqZAo" node="5yNeVI8LPM$" resolve="listener" />
-                          </node>
-                        </node>
-                      </node>
-                    </node>
-                    <node concept="3clFbF" id="5yNeVI8LPNn" role="3cqZAp">
-                      <node concept="1rXfSq" id="4hiugqyzafo" role="3clFbG">
-                        <ref role="37wK5l" to="uu3z:~ProcessHandler.notifyProcessDetached():void" resolve="notifyProcessDetached" />
-                      </node>
-                    </node>
+            <node concept="3J1_TO" id="5yNeVI8LPN7" role="3cqZAp">
+              <node concept="3clFbS" id="5yNeVI8LPNp" role="1zxBo7">
+                <node concept="3clFbF" id="5yNeVI8LPNq" role="3cqZAp">
+                  <node concept="3nyPlj" id="5yNeVI8LPNr" role="3clFbG">
+                    <ref role="37wK5l" to="uu3z:~ProcessHandler.startNotify()" resolve="startNotify" />
                   </node>
                 </node>
               </node>
-              <node concept="3clFbS" id="5yNeVI8LPNp" role="2GV8ay">
-                <node concept="3clFbF" id="5yNeVI8LPNq" role="3cqZAp">
-                  <node concept="3nyPlj" id="5yNeVI8LPNr" role="3clFbG">
-                    <ref role="37wK5l" to="uu3z:~ProcessHandler.startNotify():void" resolve="startNotify" />
+              <node concept="1wplmZ" id="xvs04dH7fh" role="1zxBo6">
+                <node concept="3clFbS" id="5yNeVI8LPN8" role="1wplMD">
+                  <node concept="3SKdUt" id="5yNeVI8LPN9" role="3cqZAp">
+                    <node concept="1PaTwC" id="ATZLwXocmt" role="1aUNEU">
+                      <node concept="3oM_SD" id="ATZLwXocmu" role="1PaTwD">
+                        <property role="3oM_SC" value="in" />
+                      </node>
+                      <node concept="3oM_SD" id="ATZLwXocmv" role="1PaTwD">
+                        <property role="3oM_SC" value="case" />
+                      </node>
+                      <node concept="3oM_SD" id="ATZLwXocmw" role="1PaTwD">
+                        <property role="3oM_SC" value="we" />
+                      </node>
+                      <node concept="3oM_SD" id="ATZLwXocmx" role="1PaTwD">
+                        <property role="3oM_SC" value="added" />
+                      </node>
+                      <node concept="3oM_SD" id="ATZLwXocmy" role="1PaTwD">
+                        <property role="3oM_SC" value="our" />
+                      </node>
+                      <node concept="3oM_SD" id="ATZLwXocmz" role="1PaTwD">
+                        <property role="3oM_SC" value="listener" />
+                      </node>
+                      <node concept="3oM_SD" id="ATZLwXocm$" role="1PaTwD">
+                        <property role="3oM_SC" value="too" />
+                      </node>
+                      <node concept="3oM_SD" id="ATZLwXocm_" role="1PaTwD">
+                        <property role="3oM_SC" value="late," />
+                      </node>
+                      <node concept="3oM_SD" id="ATZLwXocmA" role="1PaTwD">
+                        <property role="3oM_SC" value="we" />
+                      </node>
+                      <node concept="3oM_SD" id="ATZLwXocmB" role="1PaTwD">
+                        <property role="3oM_SC" value="may" />
+                      </node>
+                      <node concept="3oM_SD" id="ATZLwXocmC" role="1PaTwD">
+                        <property role="3oM_SC" value="have" />
+                      </node>
+                      <node concept="3oM_SD" id="ATZLwXocmD" role="1PaTwD">
+                        <property role="3oM_SC" value="lost" />
+                      </node>
+                      <node concept="3oM_SD" id="ATZLwXocmE" role="1PaTwD">
+                        <property role="3oM_SC" value="processDetached" />
+                      </node>
+                      <node concept="3oM_SD" id="ATZLwXocmF" role="1PaTwD">
+                        <property role="3oM_SC" value="notification," />
+                      </node>
+                    </node>
+                  </node>
+                  <node concept="3SKdUt" id="5yNeVI8LPNb" role="3cqZAp">
+                    <node concept="1PaTwC" id="ATZLwXocmG" role="1aUNEU">
+                      <node concept="3oM_SD" id="ATZLwXocmH" role="1PaTwD">
+                        <property role="3oM_SC" value="so" />
+                      </node>
+                      <node concept="3oM_SD" id="ATZLwXocmI" role="1PaTwD">
+                        <property role="3oM_SC" value="check" />
+                      </node>
+                      <node concept="3oM_SD" id="ATZLwXocmJ" role="1PaTwD">
+                        <property role="3oM_SC" value="here" />
+                      </node>
+                      <node concept="3oM_SD" id="ATZLwXocmK" role="1PaTwD">
+                        <property role="3oM_SC" value="if" />
+                      </node>
+                      <node concept="3oM_SD" id="ATZLwXocmL" role="1PaTwD">
+                        <property role="3oM_SC" value="process" />
+                      </node>
+                      <node concept="3oM_SD" id="ATZLwXocmM" role="1PaTwD">
+                        <property role="3oM_SC" value="is" />
+                      </node>
+                      <node concept="3oM_SD" id="ATZLwXocmN" role="1PaTwD">
+                        <property role="3oM_SC" value="detached" />
+                      </node>
+                    </node>
+                  </node>
+                  <node concept="3clFbJ" id="5yNeVI8LPNd" role="3cqZAp">
+                    <node concept="2OqwBi" id="5yNeVI8LPNe" role="3clFbw">
+                      <node concept="37vLTw" id="3GM_nagTwGu" role="2Oq$k0">
+                        <ref role="3cqZAo" node="5yNeVI8LPMu" resolve="session" />
+                      </node>
+                      <node concept="liA8E" id="5yNeVI8LPNg" role="2OqNvi">
+                        <ref role="37wK5l" to="1l1h:3SnNvqCaK9B" resolve="isStopped" />
+                      </node>
+                    </node>
+                    <node concept="3clFbS" id="5yNeVI8LPNh" role="3clFbx">
+                      <node concept="3clFbF" id="5yNeVI8LPNi" role="3cqZAp">
+                        <node concept="2OqwBi" id="5yNeVI8LPNj" role="3clFbG">
+                          <node concept="37vLTw" id="3GM_nagT$Oi" role="2Oq$k0">
+                            <ref role="3cqZAo" node="5yNeVI8LPMd" resolve="vmManager" />
+                          </node>
+                          <node concept="liA8E" id="5yNeVI8LPNl" role="2OqNvi">
+                            <ref role="37wK5l" to="1nsa:7Lv9a5UcAob" resolve="removeAllProcessListener" />
+                            <node concept="37vLTw" id="3GM_nagTuOE" role="37wK5m">
+                              <ref role="3cqZAo" node="5yNeVI8LPM$" resolve="listener" />
+                            </node>
+                          </node>
+                        </node>
+                      </node>
+                      <node concept="3clFbF" id="5yNeVI8LPNn" role="3cqZAp">
+                        <node concept="1rXfSq" id="4hiugqyzafo" role="3clFbG">
+                          <ref role="37wK5l" to="uu3z:~ProcessHandler.notifyProcessDetached()" resolve="notifyProcessDetached" />
+                        </node>
+                      </node>
+                    </node>
                   </node>
                 </node>
               </node>

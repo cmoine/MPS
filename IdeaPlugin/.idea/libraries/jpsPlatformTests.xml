@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="jpsPlatformTests">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/mps-core/lib/jps/jps-build-test-139.1117.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../lib/jps/jps-build-test.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

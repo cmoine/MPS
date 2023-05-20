@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082113931046:jetbrains.mps.baseLanguage.structure.ContinueStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144226303539:jetbrains.mps.baseLanguage.structure.ForeachStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1178893518978:jetbrains.mps.baseLanguage.structure.ThisConstructorInvocation" />
+  <root nodeRef="r:257a7f19-40a4-4037-a93b-ce1b638af281(jetbrains.mps.lang.editor.figures.library)/2303280755023212324">
+    <file name="AbstractVerticalLayoutFigure.java">
+      <node id="2303280755023243165" at="18,0,19,0" concept="10" trace="DEFAULT_WIDTH" />
+      <node id="2303280755023243169" at="19,0,20,0" concept="10" trace="DEFAULT_HEIGHT" />
+      <node id="2303280755023273635" at="21,0,22,0" concept="3" trace="figureWidth" />
+      <node id="2303280755023273645" at="22,0,23,0" concept="3" trace="figureHeight" />
+      <node id="2303280755023293370" at="24,44,25,34" concept="2" />
+      <node id="2303280755023412922" at="28,61,29,30" concept="2" />
+      <node id="2303280755023450023" at="29,30,30,49" concept="7" />
+      <node id="2303280755023844376" at="30,49,31,32" concept="7" />
+      <node id="2303280755024083541" at="31,32,32,0" concept="9" />
+      <node id="2303280755023887189" at="32,0,33,18" concept="7" />
+      <node id="2303280755023450039" at="33,18,34,44" concept="7" />
+      <node id="2303280755023450051" at="36,44,37,17" concept="1" />
+      <node id="2303280755023450052" at="38,7,39,55" concept="7" />
+      <node id="2303280755023450060" at="39,55,40,55" concept="2" />
+      <node id="2303280755023450070" at="40,55,41,40" concept="2" />
+      <node id="2303280755023983246" at="42,5,43,40" concept="2" />
+      <node id="2303280755024045049" at="44,29,45,25" concept="2" />
+      <node id="2303280755023450085" at="47,30,48,26" concept="2" />
+      <node id="2303280755023450091" at="49,5,50,55" concept="7" />
+      <node id="2303280755023450101" at="50,55,51,42" concept="7" />
+      <node id="2303280755023450119" at="53,44,54,17" concept="1" />
+      <node id="2303280755023450120" at="55,7,56,55" concept="7" />
+      <node id="2303280755023450128" at="56,55,57,93" concept="2" />
+      <node id="2303280755023450147" at="57,93,58,41" concept="2" />
+      <node id="2303280755023450155" at="59,5,60,27" concept="2" />
+      <node id="2303280755023450160" at="60,27,61,29" concept="2" />
+      <node id="2303280755023450168" at="61,29,62,52" concept="7" />
+      <node id="2303280755023450177" at="63,52,64,36" concept="2" />
+      <node id="2303280755023450182" at="64,36,65,23" concept="2" />
+      <node id="2303280755023499902" at="68,58,69,40" concept="8" />
+      <node id="2303280755023769669" at="71,32,72,31" concept="8" />
+      <node id="2303280755023763800" at="75,0,76,0" concept="10" trace="EMPTY_INSETS" />
+      <node id="2303280755023588524" at="77,0,78,0" concept="3" trace="top" />
+      <node id="2303280755023588582" at="78,0,79,0" concept="3" trace="bottom" />
+      <node id="2303280755023588605" at="79,0,80,0" concept="3" trace="left" />
+      <node id="2303280755023588631" at="80,0,81,0" concept="3" trace="right" />
+      <node id="2303280755023602190" at="81,61,82,21" concept="2" />
+      <node id="2303280755023605813" at="82,21,83,27" concept="2" />
+      <node id="2303280755023606724" at="83,27,84,23" concept="2" />
+      <node id="2303280755023607329" at="84,23,85,25" concept="2" />
+      <node id="2303280755023638844" at="87,39,88,108" concept="8" />
+      <node id="2303280755023313172" at="92,60,93,28" concept="11" />
+      <node id="2303280755023313181" at="96,91,97,49" concept="2" />
+      <node id="2303280755023313194" at="97,49,98,195" concept="2" />
+      <node id="2303280755023313224" at="98,195,99,196" concept="2" />
+      <node id="2303280755023258358" at="24,0,27,0" concept="0" trace="AbstractVerticalLayoutFigure#()V" />
+      <node id="2303280755023450047" at="35,62,38,7" concept="5" />
+      <node id="2303280755024021246" at="43,40,46,5" concept="5" />
+      <node id="2303280755023450078" at="46,5,49,5" concept="5" />
+      <node id="2303280755023450115" at="52,62,55,7" concept="5" />
+      <node id="2303280755023499898" at="68,0,71,0" concept="6" trace="isExcludedFromLayout#(Ljetbrains/jetpad/projectional/view/View;)Z" />
+      <node id="2303280755023731860" at="71,0,74,0" concept="6" trace="getInsets#()Ljetbrains/mps/lang/editor/figures/library/AbstractVerticalLayoutFigure/Insets;" />
+      <node id="2303280755023622296" at="87,0,90,0" concept="6" trace="join#(Ljetbrains/mps/lang/editor/figures/library/AbstractVerticalLayoutFigure/Insets;)Ljetbrains/mps/lang/editor/figures/library/AbstractVerticalLayoutFigure/Insets;" />
+      <node id="2303280755023313166" at="92,0,95,0" concept="0" trace="AbstractVerticalLayoutFigureMapper#(null)V" />
+      <node id="2303280755023450175" at="62,52,66,5" concept="5" />
+      <node id="2303280755023600302" at="81,0,87,0" concept="0" trace="Insets#(IIII)V" />
+      <node id="2303280755023313175" at="95,0,101,0" concept="6" trace="registerSynchronizers#(Ljetbrains/jetpad/mapper/Mapper/SynchronizersConfiguration;)V" />
+      <node id="2303280755023450043" at="34,44,42,5" concept="4" />
+      <node id="2303280755023450111" at="51,42,59,5" concept="4" />
+      <node id="2303280755023412912" at="27,0,68,0" concept="6" trace="doValidate#(Ljetbrains/jetpad/projectional/view/View/ValidationContext;)V" />
+      <scope id="2303280755023258362" at="24,44,25,34" />
+      <scope id="2303280755023450050" at="36,44,37,17" />
+      <scope id="2303280755024021249" at="44,29,45,25" />
+      <scope id="2303280755023450084" at="47,30,48,26" />
+      <scope id="2303280755023450118" at="53,44,54,17" />
+      <scope id="2303280755023499901" at="68,58,69,40" />
+      <scope id="2303280755023731863" at="71,32,72,31" />
+      <scope id="2303280755023622300" at="87,39,88,108" />
+      <scope id="2303280755023313171" at="92,60,93,28" />
+      <scope id="2303280755023450176" at="63,52,65,23" />
+      <scope id="2303280755023258358" at="24,0,27,0" />
+      <scope id="2303280755023499898" at="68,0,71,0">
+        <var name="childView" id="2303280755023499899" />
+      </scope>
+      <scope id="2303280755023731860" at="71,0,74,0" />
+      <scope id="2303280755023622296" at="87,0,90,0">
+        <var name="insets" id="2303280755023624138" />
+      </scope>
+      <scope id="2303280755023313166" at="92,0,95,0">
+        <var name="figure" id="2303280755025399621" />
+      </scope>
+      <scope id="2303280755023313180" at="96,91,99,196" />
+      <scope id="2303280755023600306" at="81,61,85,25" />
+      <scope id="2303280755023450046" at="35,62,41,40">
+        <var name="childBounds" id="2303280755023450053" />
+      </scope>
+      <scope id="2303280755023450114" at="52,62,58,41">
+        <var name="childBounds" id="2303280755023450121" />
+      </scope>
+      <scope id="2303280755023600302" at="81,0,87,0">
+        <var name="bottom" id="2303280755023601192" />
+        <var name="left" id="2303280755023601237" />
+        <var name="right" id="2303280755023601296" />
+        <var name="top" id="2303280755023601168" />
+      </scope>
+      <scope id="2303280755023313175" at="95,0,101,0">
+        <var name="configuration" id="2303280755023313178" />
+      </scope>
+      <scope id="2303280755023450043" at="34,44,42,5">
+        <var name="nextChild" id="2303280755023450044" />
+      </scope>
+      <scope id="2303280755023450111" at="51,42,59,5">
+        <var name="nextChild" id="2303280755023450112" />
+      </scope>
+      <scope id="2303280755023412918" at="28,61,66,5">
+        <var name="height" id="2303280755023450040" />
+        <var name="insets" id="2303280755023844377" />
+        <var name="newDimension" id="2303280755023450169" />
+        <var name="prefSize" id="2303280755023450024" />
+        <var name="width" id="2303280755023887190" />
+        <var name="xOrigin" id="2303280755023450102" />
+        <var name="yOffset" id="2303280755023450092" />
+      </scope>
+      <scope id="2303280755023412912" at="27,0,68,0">
+        <var name="context" id="2303280755023412916" />
+      </scope>
+      <unit id="2303280755023313165" at="91,0,102,0" name="jetbrains.mps.lang.editor.figures.library.AbstractVerticalLayoutFigure$AbstractVerticalLayoutFigureMapper" />
+      <unit id="2303280755023576543" at="74,0,91,0" name="jetbrains.mps.lang.editor.figures.library.AbstractVerticalLayoutFigure$Insets" />
+      <unit id="2303280755023212324" at="17,0,103,0" name="jetbrains.mps.lang.editor.figures.library.AbstractVerticalLayoutFigure" />
+    </file>
+  </root>
+  <root nodeRef="r:257a7f19-40a4-4037-a93b-ce1b638af281(jetbrains.mps.lang.editor.figures.library)/822550549815197670">
+    <file name="NamedBoxFigure.java">
+      <node id="2303280755027016708" at="18,0,19,0" concept="3" trace="editable" />
+      <node id="5667822611620059534" at="20,0,21,0" concept="3" trace="myCell" />
+      <node id="2303280755026697561" at="22,27,23,44" concept="12" />
+      <node id="5667822611620059558" at="25,62,26,39" concept="7" />
+      <node id="5667822611620059564" at="26,39,27,39" concept="2" />
+      <node id="2303280755026813162" at="27,39,28,37" concept="2" />
+      <node id="5667822611620059569" at="28,37,29,30" concept="2" />
+      <node id="2303280755026629999" at="29,30,30,29" concept="2" />
+      <node id="2303280755026708603" at="31,26,32,46" concept="2" />
+      <node id="5667822611623762424" at="35,38,36,25" concept="8" />
+      <node id="2303280755026383306" at="40,107,41,62" concept="8" />
+      <node id="2303280755026420492" at="45,46,46,20" concept="11" />
+      <node id="2303280755026421601" at="49,91,50,49" concept="2" />
+      <node id="2303280755027161491" at="52,0,53,0" concept="3" trace="myRegistration" />
+      <node id="457655548170174929" at="54,25,55,48" concept="7" />
+      <node id="2303280755027176399" at="55,48,56,79" concept="2" />
+      <node id="2303280755027215678" at="57,46,58,36" concept="2" />
+      <node id="2303280755027216896" at="58,36,59,34" concept="2" />
+      <node id="2303280755026694582" at="22,0,25,0" concept="0" trace="NamedBoxFigure#()V" />
+      <node id="2303280755026702430" at="30,29,33,5" concept="5" />
+      <node id="5667822611623762422" at="35,0,38,0" concept="6" trace="nameText#()Ljetbrains/jetpad/model/property/Property;" />
+      <node id="2303280755026383296" at="40,0,43,0" concept="6" trace="createMapper#(Ljetbrains/mps/lang/editor/figures/library/NamedBoxFigure;)Ljetbrains/jetpad/mapper/Mapper;" />
+      <node id="2303280755026420365" at="45,0,48,0" concept="0" trace="NamedBoxFigureMapper#(null)V" />
+      <node id="2303280755027166570" at="53,43,60,11" concept="5" />
+      <node id="2303280755027149139" at="53,0,62,0" concept="6" trace="set#(Ljava/lang/Boolean;)V" />
+      <node id="822550549815511823" at="25,0,35,0" concept="0" trace="NamedBoxFigure#(Ljetbrains/mps/lang/editor/figures/library/NamedBoxFigure/NamedBoxFigureMapperFactory;)V" />
+      <node id="2303280755027024823" at="50,49,62,10" concept="2" />
+      <node id="2303280755026421533" at="48,0,64,0" concept="6" trace="registerSynchronizers#(Ljetbrains/jetpad/mapper/Mapper/SynchronizersConfiguration;)V" />
+      <scope id="2303280755026694586" at="22,27,23,44" />
+      <scope id="2303280755026702433" at="31,26,32,46" />
+      <scope id="5667822611623762423" at="35,38,36,25" />
+      <scope id="2303280755026383305" at="40,107,41,62" />
+      <scope id="2303280755026420369" at="45,46,46,20" />
+      <scope id="2303280755027166571" at="54,25,56,79">
+        <var name="source" id="457655548170174930" />
+      </scope>
+      <scope id="2303280755027214588" at="57,46,59,34" />
+      <scope id="2303280755026694582" at="22,0,25,0" />
+      <scope id="5667822611623762422" at="35,0,38,0" />
+      <scope id="2303280755026383296" at="40,0,43,0">
+        <var name="figure" id="2303280755026383303" />
+      </scope>
+      <scope id="2303280755026420365" at="45,0,48,0">
+        <var name="figure" id="2303280755026420419" />
+      </scope>
+      <scope id="2303280755027149145" at="53,43,60,11" />
+      <scope id="2303280755026374754" at="25,62,33,5">
+        <var name="cellView" id="5667822611620059557" />
+      </scope>
+      <scope id="2303280755027149139" at="53,0,62,0">
+        <var name="editable" id="2303280755027149143" />
+      </scope>
+      <scope id="822550549815511823" at="25,0,35,0">
+        <var name="factory" id="2303280755026697579" />
+      </scope>
+      <scope id="2303280755026421598" at="49,91,62,10" />
+      <scope id="2303280755026421533" at="48,0,64,0">
+        <var name="configuration" id="2303280755026421536" />
+      </scope>
+      <unit id="2303280755026383295" at="39,0,44,0" name="jetbrains.mps.lang.editor.figures.library.NamedBoxFigure$NamedBoxFigureMapperFactory" />
+      <unit id="2303280755027149137" at="51,76,62,7" name="jetbrains.mps.lang.editor.figures.library.NamedBoxFigure$NamedBoxFigureMapper$1" />
+      <unit id="2303280755026389985" at="44,0,65,0" name="jetbrains.mps.lang.editor.figures.library.NamedBoxFigure$NamedBoxFigureMapper" />
+      <unit id="822550549815197670" at="17,0,66,0" name="jetbrains.mps.lang.editor.figures.library.NamedBoxFigure" />
+    </file>
+  </root>
+  <root nodeRef="r:257a7f19-40a4-4037-a93b-ce1b638af281(jetbrains.mps.lang.editor.figures.library)/8794120090375424916">
+    <file name="BoxFigure.java">
+      <node id="8794120090376799410" at="16,0,17,0" concept="3" trace="myPolyLine" />
+      <node id="8794120090379343244" at="18,0,19,0" concept="3" trace="lineWidth" />
+      <node id="2303280755025062932" at="20,22,21,39" concept="12" />
+      <node id="2303280755025051171" at="23,61,24,39" concept="2" />
+      <node id="2303280755025051180" at="24,39,25,31" concept="2" />
+      <node id="2303280755025059253" at="26,32,27,52" concept="2" />
+      <node id="2303280755022554521" at="30,58,31,76" concept="8" />
+      <node id="8794120090380787796" at="33,39,34,34" concept="7" />
+      <node id="8794120090380795842" at="34,34,35,36" concept="7" />
+      <node id="8794120090380822013" at="35,36,36,29" concept="7" />
+      <node id="2303280755026246141" at="36,29,37,27" concept="7" />
+      <node id="2303280755026257533" at="37,27,38,36" concept="7" />
+      <node id="8794120090380848379" at="38,36,39,42" concept="7" />
+      <node id="8794120090382380820" at="39,42,40,0" concept="9" />
+      <node id="8794120090380869334" at="40,0,41,30" concept="2" />
+      <node id="8794120090380892182" at="41,30,42,72" concept="2" />
+      <node id="8794120090380910484" at="42,72,43,81" concept="2" />
+      <node id="8794120090380915313" at="43,81,44,91" concept="2" />
+      <node id="8794120090380920700" at="44,91,45,82" concept="2" />
+      <node id="8794120090380926639" at="45,82,46,72" concept="2" />
+      <node id="2303280755025366193" at="49,92,50,52" concept="8" />
+      <node id="2303280755025410354" at="54,41,55,20" concept="11" />
+      <node id="2303280755021464642" at="58,91,59,49" concept="2" />
+      <node id="457655548170166761" at="59,49,60,43" concept="7" />
+      <node id="2303280755021464645" at="60,43,61,108" concept="2" />
+      <node id="2303280755021464685" at="61,108,62,109" concept="2" />
+      <node id="2303280755021464719" at="62,109,63,106" concept="2" />
+      <node id="2303280755021464729" at="63,106,64,96" concept="2" />
+      <node id="8794120090375426024" at="20,0,23,0" concept="0" trace="BoxFigure#()V" />
+      <node id="2303280755025056369" at="25,31,28,5" concept="5" />
+      <node id="2303280755022254249" at="30,0,33,0" concept="6" trace="isExcludedFromLayout#(Ljetbrains/jetpad/projectional/view/View;)Z" />
+      <node id="2303280755025363176" at="49,0,52,0" concept="6" trace="createMapper#(Ljetbrains/mps/lang/editor/figures/library/BoxFigure;)Ljetbrains/jetpad/mapper/Mapper;" />
+      <node id="2303280755025378820" at="54,0,57,0" concept="0" trace="BoxFigureMapper#(null)V" />
+      <node id="2303280755025027649" at="23,0,30,0" concept="0" trace="BoxFigure#(Ljetbrains/mps/lang/editor/figures/library/BoxFigure/BoxFigureMapperFactory;)V" />
+      <node id="2303280755021452114" at="57,0,66,0" concept="6" trace="registerSynchronizers#(Ljetbrains/jetpad/mapper/Mapper/SynchronizersConfiguration;)V" />
+      <node id="5667822611620059834" at="33,0,48,0" concept="6" trace="adjustPolyLinePoints#()V" />
+      <scope id="8794120090375426028" at="20,22,21,39" />
+      <scope id="2303280755025056372" at="26,32,27,52" />
+      <scope id="2303280755022254252" at="30,58,31,76" />
+      <scope id="2303280755025363189" at="49,92,50,52" />
+      <scope id="2303280755025378824" at="54,41,55,20" />
+      <scope id="8794120090375426024" at="20,0,23,0" />
+      <scope id="2303280755022254249" at="30,0,33,0">
+        <var name="childView" id="2303280755022534764" />
+      </scope>
+      <scope id="2303280755025363176" at="49,0,52,0">
+        <var name="figure" id="2303280755025363184" />
+      </scope>
+      <scope id="2303280755025378820" at="54,0,57,0">
+        <var name="figure" id="2303280755025408623" />
+      </scope>
+      <scope id="2303280755025027653" at="23,61,28,5" />
+      <scope id="2303280755021452120" at="58,91,64,96">
+        <var name="source" id="457655548170166762" />
+      </scope>
+      <scope id="2303280755025027649" at="23,0,30,0">
+        <var name="mapperFactory" id="2303280755025046476" />
+      </scope>
+      <scope id="2303280755021452114" at="57,0,66,0">
+        <var name="configuration" id="2303280755021452118" />
+      </scope>
+      <scope id="5667822611620059839" at="33,39,46,72">
+        <var name="height" id="8794120090380795843" />
+        <var name="leftInset" id="2303280755026246144" />
+        <var name="lw" id="8794120090380822014" />
+        <var name="origin" id="8794120090380848380" />
+        <var name="rightInset" id="2303280755026257536" />
+        <var name="width" id="8794120090380787797" />
+      </scope>
+      <scope id="5667822611620059834" at="33,0,48,0" />
+      <unit id="2303280755025348865" at="48,0,53,0" name="jetbrains.mps.lang.editor.figures.library.BoxFigure$BoxFigureMapperFactory" />
+      <unit id="2303280755021427314" at="53,0,67,0" name="jetbrains.mps.lang.editor.figures.library.BoxFigure$BoxFigureMapper" />
+      <unit id="8794120090375424916" at="15,0,68,0" name="jetbrains.mps.lang.editor.figures.library.BoxFigure" />
+    </file>
+  </root>
+</debug-info>
+

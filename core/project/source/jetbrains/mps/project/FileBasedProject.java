@@ -21,10 +21,12 @@ import java.io.File;
 
 /**
  * A project which stores its state in the file on the disk
+ * XXX review usages, seems that
  */
 public interface FileBasedProject {
   /**
    * @deprecated must return {@link jetbrains.mps.vfs.IFile}
+   * todo not so sure now AP
    */
   @Deprecated
   @NotNull File getProjectFile();

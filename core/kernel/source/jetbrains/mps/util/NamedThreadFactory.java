@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,43 +15,43 @@
  */
 package jetbrains.mps.util;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import jetbrains.mps.logging.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.annotations.Immutable;
 
-import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * This is merely a copy of Executors#DefaultThreadFactory, without security manager and a configurable prefix.
+ * This is merely a copy of Executors#DefaultThreadFactory, without security manager and with a configurable prefix and a daemon flag
  */
-public class NamedThreadFactory implements ThreadFactory {
-  private final static Logger LOG = LogManager.getLogger(NamedThreadFactory.class);
-  private final ThreadGroup group;
-  private final AtomicInteger threadNumber = new AtomicInteger(1);
-  private final String namePrefix;
+@Immutable
+public final class NamedThreadFactory implements ThreadFactory {
+  private final static Logger LOG = Logger.getLogger(NamedThreadFactory.class);
+
+  private final ThreadGroup myGroup;
+  private final AtomicInteger myThreadNumber = new AtomicInteger(1);
+  private final String myNamePrefix;
+  private final boolean myDaemon;
 
   public NamedThreadFactory(@NotNull String prefix) {
-    group = Thread.currentThread().getThreadGroup();
-    namePrefix = prefix;
+    this(prefix, false);
+  }
+
+  public NamedThreadFactory(@NotNull String prefix, boolean daemon) {
+    myDaemon = daemon;
+    myGroup = Thread.currentThread().getThreadGroup();
+    myNamePrefix = prefix;
   }
 
   @Override
   public Thread newThread(@NotNull final Runnable original) {
-    Thread t = new Thread(group, original, namePrefix + threadNumber.getAndIncrement());
-    if (t.isDaemon()) {
-      t.setDaemon(false);
-    }
+    Thread t = new Thread(myGroup, original, myNamePrefix + myThreadNumber.getAndIncrement());
+    t.setDaemon(myDaemon);
     if (t.getPriority() != Thread.NORM_PRIORITY) {
       t.setPriority(Thread.NORM_PRIORITY);
     }
-    t.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
-      @Override
-      public void uncaughtException(@NotNull Thread t, @NotNull Throwable e) {
-        LOG.error("Thread " + t + " threw the exception ", e);
-      }
-    });
+    t.setUncaughtExceptionHandler((t1, e) -> LOG.error("Thread " + t1 + " threw the exception ", e));
     return t;
   }
 }

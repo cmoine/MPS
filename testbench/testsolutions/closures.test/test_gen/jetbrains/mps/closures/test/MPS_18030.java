@@ -11,7 +11,7 @@ public class MPS_18030 {
   }
 
   public void test() {
-    new MPS_18030.Subclass(0);
+    new Subclass(0);
   }
 
   private static class Subclass extends MPS_18030 {

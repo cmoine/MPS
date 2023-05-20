@@ -20,8 +20,6 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.jetbrains.mps.openapi.persistence.Memento;
 
-import java.util.List;
-
 /**
  * evgeny, 11/19/12
  */

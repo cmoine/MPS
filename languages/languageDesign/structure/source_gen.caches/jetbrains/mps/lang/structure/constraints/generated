@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="96cyw80n8fq9v4mt401ni2fqv5y4a05" />
+<product version="3" modelHash="b5wpc9j1f29unugmeabtvcvxbr2mqob">
+  <files names="AbstractConceptDeclaration_Constraints.java:ConceptDeclaration_Constraints.java:ConstrainedDataTypeDeclaration_Constraints.java:ConstraintsAspectDescriptor.java:ConstraintsUtilConcepts.java:DataTypeDeclaration_Constraints.java:EnumerationDataTypeDeclaration_Old_Constraints.java:EnumerationDeclaration_Constraints.java:EnumerationMemberDeclaration_Constraints.java:ExperimentalAPINodeAttribute_Constraints.java:FullyQualifiedNamedElementsScope.java:INamedAspect_Constraints.java:INamedStructureElement_Constraints.java:IconContainer.java:InterfaceConceptDeclaration_Constraints.java:LinkDeclaration_Constraints.java:PropertyDeclaration_Constraints.java:Scopes.java:SmartReferenceAttribute_Constraints.java:StructureAspectDeputy_Constraints.java" />
+</product>
 

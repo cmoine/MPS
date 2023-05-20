@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="3yn7cduf4akt1zf89twcyjk5q1boses" />
+<product version="3" modelHash="-a3h156qcghcsilmjnx2r0wjhz0yxfyu">
+  <files names="AbstractAntiquotation_Constraints.java:ConstraintsAspectDescriptor.java:NodeBuilderExpression_Constraints.java:NodeBuilderInitLink_Constraints.java:NodeBuilderInitProperty_Constraints.java:NodeBuilderList_Constraints.java:NodeBuilderNode_Constraints.java:NodeBuilderPropertyExpression_Constraints.java:NodeBuilderRef_Constraints.java:Quotation_Constraints.java" />
+</product>
 

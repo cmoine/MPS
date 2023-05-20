@@ -23,8 +23,7 @@ import com.intellij.pom.Navigatable;
 import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.nodefs.NodeVirtualFileSystem;
 import jetbrains.mps.openapi.navigation.EditorNavigator;
-import jetbrains.mps.smodel.ModelAccessHelper;
-import jetbrains.mps.smodel.presentation.NodePresentationUtil;
+import jetbrains.mps.workbench.choose.NodePointerNavigationItem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeReference;
@@ -41,20 +40,24 @@ public abstract class NodeNavigatable implements Navigatable {
   public NodeNavigatable(@NotNull SNodeReference node, @NotNull Project project) {
     myNode = node;
     myProject = project;
-
-    final SRepository repository = ProjectHelper.fromIdeaProject(project).getRepository();
-    final ModelAccessHelper modelAccessHelper = new ModelAccessHelper(repository);
-
-    myTextPresentation = modelAccessHelper.runReadAction(() -> {
-      final SNode resolve = node.resolve(repository);
-      return resolve == null ? node.toString() : NodePresentationUtil.matchingText(resolve);
-    });
-
-    myRootNode = modelAccessHelper.runReadAction(() -> {
-      SNode targetNode = myNode.resolve(repository);
-      return targetNode == null ? null : targetNode.getContainingRoot().getReference();
-    });
+    SRepository repository = ProjectHelper.fromIdeaProject(myProject).getRepository();
+    updateFields(repository);
     myFile = myRootNode == null ? null : NodeVirtualFileSystem.getInstance().getFileFor(repository, myRootNode);
+  }
+
+  void updateFields(SRepository repository) {
+    repository.getModelAccess().runReadAction(() -> {
+      final SNode resolve = myNode.resolve(repository);
+      if (resolve != null) {
+        myRootNode = resolve.getContainingRoot().getReference();
+        myItemPresentation = new NodePointerNavigationItem(resolve);
+        myTextPresentation = myItemPresentation.getPresentableText();
+      } else {
+        myRootNode = null;
+        myItemPresentation = new NodePointerNavigationItem(myNode, "yet unresolved node", null);
+        myTextPresentation = myNode.toString();
+      }
+    });
   }
 
   @Override

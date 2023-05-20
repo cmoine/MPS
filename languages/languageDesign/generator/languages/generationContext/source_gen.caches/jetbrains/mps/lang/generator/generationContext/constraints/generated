@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-4glmi28rmcj17xm9kb10xqphkx3pasr" />
+<product version="3" modelHash="cifli61tf7t0a7azkpltd2pxjedqk6q">
+  <files names="ConstraintsAspectDescriptor.java:GenerationContextOp_ContextVarRef_Constraints.java:GenerationContextOp_GenParameterRef_Constraints.java:GenerationContextOp_LinkPatternRef_Constraints.java:GenerationContextOp_NodePatternRef_Constraints.java:GenerationContextOp_ParameterRef_Constraints.java:GenerationContextOp_PropertyPatternRef_Constraints.java:GenerationContextOp_VarRef2_Constraints.java" />
+</product>
 

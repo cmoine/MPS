@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="cgun6bkzni29nri4meklbki31e5z0fe">
+  <files names="JvmVisitorContext.java:KotlinAwareClassifierLoader.java:KotlinAwareClassifierUpdater.java:KotlinJvmStubModelDescriptor.java:KotlinJvmStubModelRoot.java:KotlinJvmStubModelRootFactory.java:KotlinMetadataAnnotationReader.java:KotlinMetadataLazyExtractor.java" />
+</product>
+

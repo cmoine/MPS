@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,20 +21,18 @@ import jetbrains.mps.nodeEditor.cells.EditorCell_Property;
 import jetbrains.mps.nodeEditor.cells.TransactionalPropertyAccessor;
 import jetbrains.mps.nodeEditor.selection.SelectionInfoImpl;
 import jetbrains.mps.openapi.editor.EditorComponentState;
-import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.CellInfo;
-import jetbrains.mps.openapi.editor.cells.CellTraversalUtil;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.cells.EditorCell_Collection;
 import jetbrains.mps.openapi.editor.cells.optional.WithCaret;
 import jetbrains.mps.openapi.editor.selection.Selection;
 import jetbrains.mps.openapi.editor.selection.SelectionInfo;
 import jetbrains.mps.smodel.SNodePointer;
-import jetbrains.mps.util.EqualUtil;
 import jetbrains.mps.util.Pair;
 import org.jdom.Attribute;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.openapi.language.SDataType;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 import org.jetbrains.mps.openapi.model.SNodeUtil;
@@ -42,43 +40,25 @@ import org.jetbrains.mps.openapi.model.SNodeUtil;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 class Memento implements EditorComponentState {
-  private static final Comparator<Pair<EditorCell_Collection, Boolean>> COLLAPSED_STATES_COMPARATOR = new Comparator<Pair<EditorCell_Collection, Boolean>>() {
-    @Override
-    public int compare(Pair<EditorCell_Collection, Boolean> p1,
-        Pair<EditorCell_Collection, Boolean> p2) {
-      int depthDelta = getDepth(p2.o1) - getDepth(p1.o1);
-      return depthDelta != 0 ? depthDelta : CELL_COMPARATOR.compare(p2.o1, p1.o1);
-    }
+  private final List<SelectionInfo> mySelectionStack = new ArrayList<>();
 
-    private int getDepth(EditorCell cell) {
-      int depth = 0;
-      while (cell.getParent() != null) {
-        cell = cell.getParent();
-        depth++;
-      }
-      return depth;
-    }
-  };
+  private final Set<CellInfo> myCollectionsWithEnabledBraces = new HashSet<>();
+  private final Set<Pair<CellInfo, Boolean>> myFoldableStates = new HashSet <>();
+  private final Set<Pair<CellInfo, Boolean>> myInitiallyCollapsedStates = new HashSet<>();
+  private final Set<Pair<CellInfo, Boolean>> myRestoreAlwaysStates = new HashSet<>();
 
-  private static final Comparator<EditorCell> CELL_COMPARATOR =
-      (cell1, cell2) -> CellTraversalUtil.getCommonParent(cell1, cell2) == null ? 0 : CellTraversalUtil.compare(cell1, cell2);
+  private final Set<ErrorMarker> myErrors = new HashSet<>();
+  private final Set<TransactionalPropertyState> myTransactionalProperties = new HashSet<>();
 
-  private List<SelectionInfo> mySelectionStack = new ArrayList<>();
-  private List<CellInfo> myCollectionsWithEnabledBraces = new ArrayList<>();
-
-  private List<Pair<CellInfo, Boolean>> myFoldableStates = new ArrayList<>();
-  private List<Pair<CellInfo, Boolean>> myInitiallyCollapsedStates = new ArrayList<>();
-  private List<Pair<CellInfo, Boolean>> myRestoreAlwaysStates = new ArrayList<>();
-
-  private List<ErrorMarker> myErrors = new ArrayList<>();
-  private List<TransactionalPropertyState> myTransactionalProperties = new ArrayList<>();
   private Point myViewPosition;
   private String[] myEnabledHints = null;
   private SNodeReference myEditedNodeReference;
@@ -87,39 +67,61 @@ class Memento implements EditorComponentState {
   private Memento() {
   }
 
+  public boolean hasErrors() {
+    return !myErrors.isEmpty();
+  }
+
   @Override
   public void clearSessionState() {
     mySaveSessionState = false;
   }
 
-  Memento(EditorContext context, boolean saveEditedNode) {
-    EditorComponent nodeEditor = (EditorComponent) context.getEditorComponent();
+  public Memento( EditorComponent nodeEditor, boolean saveEditedNode) {
+    // FIXME why not nodeEditor. getEditedNodePointer()?
+    // XXX why we save state (foldable, errors, braces) when editedNode == null and saveEditedNode == false?
+    // XXX the only thing saveEditedNode affects is myEditedNodeReference. Not big deal to save it anyway, and
+    // restore only when necessary!
     SNode editedNode = nodeEditor.getEditedNode();
-    if (editedNode == null || SNodeUtil.isAccessible(editedNode, context.getRepository())) {
+    if (editedNode == null || SNodeUtil.isAccessible(editedNode, nodeEditor.getRepository())) {
       if (saveEditedNode && editedNode != null) {
         myEditedNodeReference = editedNode.getReference();
       }
-      mySelectionStack = nodeEditor.getSelectionManager().getSelectionInfoStack();
+      mySelectionStack.addAll(nodeEditor.getSelectionManager().getSelectionInfoStack());
 
-      getFoldableStates(collectRestoreAlways(nodeEditor, mySelectionStack)).forEach(myRestoreAlwaysStates::add);
-      getFoldableStates(collectFoldable(nodeEditor, false)).forEach(myFoldableStates::add);
-      getFoldableStates(collectFoldable(nodeEditor, true)).forEach(myInitiallyCollapsedStates::add);
-
-      nodeEditor.getBracesEnabledCells().stream().sorted(CELL_COMPARATOR).map(EditorCell::getCellInfo).forEach(myCollectionsWithEnabledBraces::add);
-
-      // collect errors
-      nodeEditor.getCellTracker().getErrorCells().stream().sorted(CELL_COMPARATOR).filter(
-          cell -> cell instanceof EditorCell_Label && ((EditorCell_Label) cell).isEditable()).map(cell -> new ErrorMarker((EditorCell_Label) cell)).forEach(
-          myErrors::add);
-
-      // collect transactionals
-      nodeEditor.getCellTracker().getTransactionalCells().stream().sorted(CELL_COMPARATOR).filter(
-          cell -> ((TransactionalPropertyAccessor) cell.getModelAccessor()).hasValueToCommit()).map(TransactionalPropertyState::new).forEach(
-          myTransactionalProperties::add);
+      collectFoldableStates(nodeEditor);
+      collectBracesCells(nodeEditor);
+      collectErrors(nodeEditor);
+      collectTransactionals(nodeEditor);
     }
 
     myViewPosition = nodeEditor.getViewPosition();
     myEnabledHints = nodeEditor.getUpdater().getInitialEditorHints();
+  }
+
+  private void collectBracesCells(EditorComponent nodeEditor) {
+    nodeEditor.getBracesEnabledCells().stream()
+              .map(EditorCell::getCellInfo)
+              .forEach(myCollectionsWithEnabledBraces::add);
+  }
+
+  private void collectFoldableStates(EditorComponent nodeEditor) {
+    getFoldableStates(collectRestoreAlways(nodeEditor, mySelectionStack)).forEach(myRestoreAlwaysStates::add);
+    getFoldableStates(collectFoldable(nodeEditor, false)).forEach(myFoldableStates::add);
+    getFoldableStates(collectFoldable(nodeEditor, true)).forEach(myInitiallyCollapsedStates::add);
+  }
+
+  private void collectTransactionals(EditorComponent nodeEditor) {
+    nodeEditor.getCellTracker().getTransactionalCells().stream()
+              .filter(cell -> ((TransactionalPropertyAccessor) cell.getModelAccessor()).hasValueToCommit())
+              .map(TransactionalPropertyState::new)
+              .forEach(myTransactionalProperties::add);
+  }
+
+  private void collectErrors(EditorComponent nodeEditor) {
+    nodeEditor.getCellTracker().getErrorCells().stream()
+              .filter(cell -> cell instanceof EditorCell_Label && ((EditorCell_Label) cell).isEditable())
+              .map(cell -> new ErrorMarker((EditorCell_Label) cell))
+              .forEach(myErrors::add);
   }
 
   @NotNull
@@ -143,13 +145,13 @@ class Memento implements EditorComponentState {
   }
 
   private Stream<EditorCell_Collection> collectFoldable(EditorComponent nodeEditor, boolean initiallyCollapsed) {
-    return nodeEditor.getCellTracker().getFoldableCells().stream().map(EditorCell_Collection.class::cast).filter(
-        cell -> initiallyCollapsed == cell.isInitiallyCollapsed());
+    return nodeEditor.getCellTracker().getFoldableCells().stream()
+                     .map(EditorCell_Collection.class::cast)
+                     .filter(cell -> initiallyCollapsed == cell.isInitiallyCollapsed());
   }
 
   private Stream<Pair<CellInfo, Boolean>> getFoldableStates(Stream<EditorCell_Collection> cells) {
-    return cells.map(cell -> new Pair<>(cell, cell.isCollapsed())).sorted(COLLAPSED_STATES_COMPARATOR).map(
-        collapsedState -> new Pair<>(collapsedState.o1.getCellInfo(), collapsedState.o2));
+    return cells.map(cell -> new Pair<>(cell.getCellInfo(), cell.isCollapsed()));
   }
 
   void restore(EditorComponent editor) {
@@ -157,7 +159,9 @@ class Memento implements EditorComponentState {
 
     if (myEditedNodeReference != null) {
       SNode newEditedNode = myEditedNodeReference.resolve(editor.getEditorContext().getRepository());
-      if (newEditedNode != null && editor.getEditedNode() != newEditedNode) {
+      // The newEditedNode may be still available as "unregistered node".
+      // Such nodes are not attached to any models, so ignoring...
+      if (newEditedNode != null && newEditedNode.getModel() != null && editor.getEditedNode() != newEditedNode) {
         editor.editNode(newEditedNode);
         editor.getUpdater().flushModelEvents();
         editorRebuildRequired = false;
@@ -171,12 +175,14 @@ class Memento implements EditorComponentState {
     editor.clearBracesEnabledCells();
     editor.getUpdater().flushModelEvents();
 
-    // TODO: remove this variable and simply mark editor as "needsRelayout" from the top editor cell + relayout it on .. next paint?
-    boolean needsRelayout = restoreErrors(editor) | restoreTransactionals(editor);
+      // TODO: remove this variable and simply mark editor as "needsRelayout" from the top editor cell + relayout it on .. next paint?
+      boolean needsRelayout = restoreErrors(editor);
+      needsRelayout |= restoreTransactionals(editor);
 
-    // Restore collapse states before restoring selection, otherwise selection inside initially collapsed cells disappears
-    needsRelayout = restoreFoldingStates(myFoldableStates, editor) | needsRelayout;
-    needsRelayout = restoreFoldingStates(mySaveSessionState ? myInitiallyCollapsedStates : myRestoreAlwaysStates, editor) | needsRelayout;
+      // Restore collapse states before restoring selection, otherwise selection inside initially collapsed cells disappears
+      needsRelayout |= restoreFoldingStates(myFoldableStates.stream(), editor);
+      needsRelayout |= restoreFoldingStates(mySaveSessionState ? myInitiallyCollapsedStates.stream()
+                                                               : myRestoreAlwaysStates.stream(), editor);
 
     editor.getSelectionManager().setSelectionInfoStack(mySelectionStack);
     EditorCell selectedCell = editor.getDeepestSelectedCell();
@@ -201,21 +207,28 @@ class Memento implements EditorComponentState {
     }
   }
 
-  private boolean restoreFoldingStates(Iterable<Pair<CellInfo, Boolean>> foldingStates, EditorComponent editor) {
-    boolean needsRelayout = false;
-    for (Pair<CellInfo, Boolean> collapseState : foldingStates) {
-      EditorCell cell = collapseState.o1.findCell(editor);
-      if (!(cell instanceof EditorCell_Collection)) {
-        continue;
+
+  private boolean restoreFoldingStates(Stream<Pair<CellInfo, Boolean>> cellInfoStates, EditorComponent editor) {
+    List<Pair<EditorCell_Collection, Boolean>> cellStates = cellInfoStates.map(statePair -> {
+      var cellInfo = statePair.o1;
+      boolean collapsed = statePair.o2;
+      EditorCell cell = cellInfo.findCell(editor);
+      if (cell instanceof EditorCell_Collection) {
+        return new Pair<>((EditorCell_Collection) cell, collapsed);
       }
-      EditorCell_Collection collection = (EditorCell_Collection) cell;
-      needsRelayout = true;
-      if (collapseState.o2) {
-        collection.fold();
+      return null;
+    }).filter(Objects::nonNull).collect(Collectors.toList());
+
+    for (var statePair : cellStates) {
+      var cell = statePair.o1;
+      boolean collapsed = statePair.o2;
+      if (collapsed) {
+        cell.fold();
       } else {
-        collection.unfold();
+        cell.unfold();
       }
     }
+    boolean needsRelayout = !cellStates.isEmpty();
     return needsRelayout;
   }
 
@@ -259,13 +272,16 @@ class Memento implements EditorComponentState {
     }
     if (object instanceof Memento) {
       Memento m = (Memento) object;
-      if (EqualUtil.equals(mySelectionStack, m.mySelectionStack) && EqualUtil.equals(myCollectionsWithEnabledBraces, m.myCollectionsWithEnabledBraces) &&
-          EqualUtil.equals(myFoldableStates, m.myFoldableStates) && EqualUtil.equals(myInitiallyCollapsedStates, m.myInitiallyCollapsedStates) &&
-          EqualUtil.equals(myRestoreAlwaysStates, m.myRestoreAlwaysStates) && EqualUtil.equals(myErrors, m.myErrors) &&
-          EqualUtil.equals(myTransactionalProperties, m.myTransactionalProperties) && EqualUtil.equals(myViewPosition, m.myViewPosition) &&
-          Arrays.equals(myEnabledHints, m.myEnabledHints) && EqualUtil.equals(myEditedNodeReference, m.myEditedNodeReference)) {
-        return true;
-      }
+      return Objects.equals(mySelectionStack, m.mySelectionStack) &&
+             Objects.equals(myCollectionsWithEnabledBraces, m.myCollectionsWithEnabledBraces) &&
+             Objects.equals(myFoldableStates, m.myFoldableStates) &&
+             Objects.equals(myInitiallyCollapsedStates, m.myInitiallyCollapsedStates) &&
+             Objects.equals(myRestoreAlwaysStates, m.myRestoreAlwaysStates) &&
+             Objects.equals(myErrors, m.myErrors) &&
+             Objects.equals(myTransactionalProperties, m.myTransactionalProperties) &&
+             Objects.equals(myViewPosition, m.myViewPosition) &&
+             Arrays.equals(myEnabledHints, m.myEnabledHints) &&
+             Objects.equals(myEditedNodeReference, m.myEditedNodeReference);
     }
     return false;
   }
@@ -276,14 +292,14 @@ class Memento implements EditorComponentState {
 
   public String toString() {
     return "Editor Memento[\n" +
-        "  selectedStack = " + mySelectionStack + "\n" +
-        "  collectionsWithBraces = " + myCollectionsWithEnabledBraces + "\n" +
-        "  foldableCells = " + myFoldableStates + "\n" +
-        "  collapsedCells = " + myInitiallyCollapsedStates + "\n" +
-        "  expandAlwaysCells = " + myRestoreAlwaysStates + "\n" +
-        "  enabledHints = " + Arrays.toString(myEnabledHints) + "\n" +
-        "  editedNodeReference = " + myEditedNodeReference + "\n" +
-        "]\n";
+           "  selectedStack = " + mySelectionStack + "\n" +
+           "  collectionsWithBraces = " + myCollectionsWithEnabledBraces + "\n" +
+           "  foldableCells = " + myFoldableStates + "\n" +
+           "  collapsedCells = " + myInitiallyCollapsedStates + "\n" +
+           "  expandAlwaysCells = " + myRestoreAlwaysStates + "\n" +
+           "  enabledHints = " + Arrays.toString(myEnabledHints) + "\n" +
+           "  editedNodeReference = " + myEditedNodeReference + "\n" +
+           "]\n";
   }
 
   private static final String SELECTION_STACK = "selectionStack";
@@ -394,8 +410,8 @@ class Memento implements EditorComponentState {
     loadFoldingStates(e.getChild(RESTORE_ALWAYS), memento.myRestoreAlwaysStates);
 
     try {
-      int viewPositionX = Integer.valueOf(e.getAttributeValue(VIEW_POSITION_X));
-      int viewPositionY = Integer.valueOf(e.getAttributeValue(VIEW_POSITION_Y));
+      int viewPositionX = Integer.parseInt(e.getAttributeValue(VIEW_POSITION_X));
+      int viewPositionY = Integer.parseInt(e.getAttributeValue(VIEW_POSITION_Y));
       memento.myViewPosition = new Point(viewPositionX, viewPositionY);
     } catch (NumberFormatException nfe) {
     }
@@ -403,22 +419,25 @@ class Memento implements EditorComponentState {
     Element hintsElement = e.getChild(ENABLED_HINTS);
     if (hintsElement != null) {
       List<String> enabledHints = new ArrayList<>();
-      List children = hintsElement.getChildren(ENABLED_HINTS_ELEMENT);
-      for (Object o : children) {
-        enabledHints.add(((Element) o).getAttributeValue(ENABLED_HINTS_ATTRIBUTE));
+      List<Element> children = hintsElement.getChildren(ENABLED_HINTS_ELEMENT);
+      for (Element o : children) {
+        enabledHints.add(o.getAttributeValue(ENABLED_HINTS_ATTRIBUTE));
       }
-      memento.myEnabledHints = enabledHints.toArray(new String[enabledHints.size()]);
+      memento.myEnabledHints = enabledHints.toArray(new String[0]);
     }
 
     return memento;
   }
 
-  private static void loadFoldingStates(Element element, List<Pair<CellInfo, Boolean>> result) {
+  private static void loadFoldingStates(Element element, Collection<Pair<CellInfo, Boolean>> result) {
     if (element == null) {
       return;
     }
-    element.getChildren(COLLAPSED_ELEMENT).stream().map(el -> new Pair<CellInfo, Boolean>(DefaultCellInfo.loadFrom(el.getChild(CELL_ID_ELEMENT)),
-        Boolean.valueOf(el.getAttributeValue(COLLAPSED_VALUE)))).forEach(result::add);
+    element.getChildren(COLLAPSED_ELEMENT)
+           .stream()
+           .map(el -> new Pair<CellInfo, Boolean>(DefaultCellInfo.loadFrom(el.getChild(CELL_ID_ELEMENT)),
+                                                  Boolean.valueOf(el.getAttributeValue(COLLAPSED_VALUE))))
+           .forEach(result::add);
   }
 
   private static class ErrorMarker {
@@ -427,8 +446,9 @@ class Memento implements EditorComponentState {
     private static final String MODEL_TEXT = "modelText";
     private static final String PROPERTY_CELL = "propertyCell";
 
-    private CellInfo myCellInfo;
-    private String myText;
+    @NotNull
+    private final CellInfo myCellInfo;
+    private final String myText;
     private String myModelText = null;
     private boolean myPropertyCell = false;
 
@@ -478,7 +498,7 @@ class Memento implements EditorComponentState {
         return false;
       }
       EditorCell_Property cellProperty = (EditorCell_Property) cell;
-      if (EqualUtil.equals(myModelText, cellProperty.getLastModelText()) && canRestoreText(cellProperty)) {
+      if (Objects.equals(myModelText, cellProperty.getLastModelText()) && canRestoreText(cellProperty)) {
         cellProperty.changeText(myText);
         return true;
       }
@@ -486,7 +506,7 @@ class Memento implements EditorComponentState {
     }
 
     private boolean canRestoreText(EditorCell_Label cellLabel) {
-      return !EqualUtil.equals(cellLabel.getText(), myText) && !cellLabel.isValidText(myText);
+      return !Objects.equals(cellLabel.getText(), myText) && !cellLabel.isValidText(myText);
     }
 
     public void save(Element errorMarkers) {
@@ -543,7 +563,8 @@ class Memento implements EditorComponentState {
     TransactionalPropertyState(EditorCell_Property propertyCell) {
       TransactionalPropertyAccessor accessor = (TransactionalPropertyAccessor) propertyCell.getModelAccessor();
       assert accessor.hasValueToCommit();
-      myUncommittedValue = accessor.doGetValue();
+      SDataType valueType = accessor.getProperty().getType();
+      myUncommittedValue = valueType.toString(accessor.doGetValue());
       myCellInfo = propertyCell.getCellInfo();
     }
 
@@ -560,7 +581,8 @@ class Memento implements EditorComponentState {
       EditorCell_Property propertyCell = (EditorCell_Property) cell;
       if (propertyCell.getModelAccessor() instanceof TransactionalPropertyAccessor) {
         TransactionalPropertyAccessor modelAccessor = (TransactionalPropertyAccessor) propertyCell.getModelAccessor();
-        modelAccessor.doSetValue(myUncommittedValue);
+        SDataType valueType = modelAccessor.getProperty().getType();
+        modelAccessor.doSetValue(valueType.fromString(myUncommittedValue));
         propertyCell.synchronize();
         return true;
       }
@@ -590,7 +612,7 @@ class Memento implements EditorComponentState {
       TransactionalPropertyState that = (TransactionalPropertyState) o;
 
       return myCellInfo.equals(that.myCellInfo) &&
-          (myUncommittedValue == null ? that.myUncommittedValue == null : myUncommittedValue.equals(that.myUncommittedValue));
+             (myUncommittedValue == null ? that.myUncommittedValue == null : myUncommittedValue.equals(that.myUncommittedValue));
     }
 
     @Override

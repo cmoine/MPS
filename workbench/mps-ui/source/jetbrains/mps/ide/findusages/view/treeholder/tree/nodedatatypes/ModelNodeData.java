@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,14 +17,11 @@ package jetbrains.mps.ide.findusages.view.treeholder.tree.nodedatatypes;
 
 import jetbrains.mps.ide.findusages.CantLoadSomethingException;
 import jetbrains.mps.ide.findusages.CantSaveSomethingException;
-import jetbrains.mps.ide.findusages.view.treeholder.tree.TextOptions;
 import jetbrains.mps.ide.findusages.view.treeholder.treeview.path.PathItemRole;
-import jetbrains.mps.ide.icons.IconManager;
+import jetbrains.mps.ide.icons.GlobalIconManager;
 import jetbrains.mps.ide.icons.IdeIcons;
 import jetbrains.mps.openapi.navigation.ProjectPaneNavigator;
 import jetbrains.mps.project.Project;
-import jetbrains.mps.smodel.SModelRepository;
-import jetbrains.mps.util.annotation.ToRemove;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -38,38 +35,31 @@ public class ModelNodeData extends AbstractResultNodeData {
   private static final String MODEL = "model";
   private static final String UID = "uid";
 
-  public SModelReference myModelReference;
+  private SModelReference myModelReference;
 
-  public ModelNodeData(PathItemRole role, @Nullable String caption, @NotNull SModelReference modelReference, boolean isResult, boolean resultsSection) {
-    super(role, caption != null ? caption : modelReference.getModelName(), "", false, isResult, resultsSection);
+  public ModelNodeData(PathItemRole role, @NotNull SModelReference modelReference, @Nullable Object presentationObject, boolean isResult, boolean resultsSection) {
+    super(role, modelReference.getModelName(), null, presentationObject, isResult, resultsSection);
     myModelReference = modelReference;
   }
 
   public ModelNodeData(Element element, Project project) throws CantLoadSomethingException {
-    read(element, project);
+    super(element, project);
   }
 
   @Override
-  public Icon getIcon() {
-    SModel modelDescriptor = getModel();
-    if (modelDescriptor != null) {
-      return IconManager.getIconFor(modelDescriptor);
+  public Icon getIcon(PresentationContext presentationContext) {
+    SModel model = myModelReference.resolve(presentationContext.getRepository());
+    if (model != null) {
+      return GlobalIconManager.getInstance().getIconFor(model);
     }
     return IdeIcons.MODEL_ICON;
   }
 
   @Override
   protected String createIdObject() {
-    return getModelReference().toString() + "/" + getPlainText();
-  }
-
-  /**
-   * @deprecated use {@link #getModelReference()} ()} and resolve as appropriate
-   */
-  @Deprecated
-  @ToRemove(version = 3.3)
-  public SModel getModel() {
-    return SModelRepository.getInstance().getModelDescriptor(myModelReference);
+    // JFTR, getPlainText() was part of id here, see 59c49957 and https://youtrack.jetbrains.net/issue/MPS-15200 (MPS-10988)
+    // however, I don't feel it make any sense now (getIdObject() is not in use for anything but MPSTreeNode identifier)
+    return getModelReference().toString();
   }
 
   public SModelReference getModelReference() {
@@ -93,17 +83,6 @@ public class ModelNodeData extends AbstractResultNodeData {
     } catch (IllegalArgumentException ex) {
       throw new CantLoadSomethingException("cannot parse model reference", ex);
     }
-  }
-
-  @Override
-  public String getText(TextOptions options) {
-    boolean showCounter = options.myCounters && isResultsSection();
-    String counter = showCounter ? " " + sizeRepresentation(options.mySubresultsCount) : "";
-    return super.getText(options) + counter;
-  }
-
-  private static String sizeRepresentation(int size) {
-    return "<font color='gray'>(" + Integer.toString(size) + ")</font>";
   }
 
   @Override

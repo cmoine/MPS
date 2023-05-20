@@ -1,8 +1,0 @@
-<ivy-module version="2.0">
-  <info organisation="org.jetbrains.mps" module="help/mac/mpshelp.jar"/>
-  <dependencies>
-    <dependency org="org" name="MPS_34_Distribution_GetResources" rev="latest.lastSuccessful">
-      <include name="help/mac/mpshelp" ext="jar"/>
-    </dependency>
-  </dependencies>
-</ivy-module>

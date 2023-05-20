@@ -63,13 +63,13 @@ class UnmodifiableContainer<T> implements Container<T> {
   @NotNull
   @Override
   public Iterator<T> iterator() {
-    return new UnmodifiableIterator<T>(myContainer.iterator());
+    return new UnmodifiableIterator<>(myContainer.iterator());
   }
 
   @NotNull
   @Override
   public Iterator<T> iterator(T anchor, boolean forward) {
-    return new UnmodifiableIterator<T>(myContainer.iterator(anchor, forward));
+    return new UnmodifiableIterator<>(myContainer.iterator(anchor, forward));
   }
 
   @Override

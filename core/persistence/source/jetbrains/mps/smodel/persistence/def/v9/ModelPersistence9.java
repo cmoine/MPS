@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,11 +20,11 @@ import jetbrains.mps.persistence.MetaModelInfoProvider;
 import jetbrains.mps.persistence.MetaModelInfoProvider.BaseMetaModelInfo;
 import jetbrains.mps.persistence.MetaModelInfoProvider.RegularMetaModelInfo;
 import jetbrains.mps.persistence.MetaModelInfoProvider.StuffedMetaModelInfo;
+import jetbrains.mps.persistence.UserObjectsPersistence;
 import jetbrains.mps.persistence.xml.XMLPersistence;
 import jetbrains.mps.smodel.SModelHeader;
 import jetbrains.mps.smodel.loading.ModelLoadResult;
 import jetbrains.mps.smodel.loading.ModelLoadingState;
-import jetbrains.mps.smodel.persistence.def.IHashProvider;
 import jetbrains.mps.smodel.persistence.def.IModelPersistence;
 import jetbrains.mps.smodel.persistence.def.IModelWriter;
 import jetbrains.mps.smodel.persistence.def.ModelPersistence;
@@ -32,12 +32,13 @@ import jetbrains.mps.smodel.persistence.lines.LineContent;
 import jetbrains.mps.util.xml.XMLSAXHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.persistence.ModelSaveOption;
 
 import java.util.List;
 
 public class ModelPersistence9 implements IModelPersistence, XMLPersistence {
   // per-root
-  public static final String FILE_CONTENT = "content";
+  public static final String FILE_CONTENT = ModelPersistence.PER_ROOT_CONTENT;
 
   // elements
   public static final String MODEL = ModelPersistence.MODEL;
@@ -86,19 +87,9 @@ public class ModelPersistence9 implements IModelPersistence, XMLPersistence {
   }
 
   @Override
-  public IModelWriter getModelWriter(@Nullable SModelHeader header) {
-    final MetaModelInfoProvider mmiProvider;
-    if (header != null && header.getMetaInfoProvider() != null) {
-      mmiProvider = header.getMetaInfoProvider();
-    } else {
-      mmiProvider = new RegularMetaModelInfo(header == null ? null : header.getModelReference());
-    }
-    return new ModelWriter9(mmiProvider);
-  }
-
-  @Override
-  public IHashProvider getHashProvider() {
-    return new HashProvider9();
+  public IModelWriter getModelWriter(@NotNull MetaModelInfoProvider mmi, @Nullable ModelSaveOption... options) {
+    final boolean keepUserObjects = UserObjectsPersistence.DESIRED.present(options) || UserObjectsPersistence.REQUIRED.present(options);
+    return new ModelWriter9(mmi, keepUserObjects);
   }
 
   @Override
@@ -107,7 +98,7 @@ public class ModelPersistence9 implements IModelPersistence, XMLPersistence {
     final boolean stripImplementation = state == ModelLoadingState.NO_IMPLEMENTATION;
     MetaModelInfoProvider mmiProvider = header.getMetaInfoProvider();
     if (mmiProvider == null) {
-      mmiProvider = new RegularMetaModelInfo(header.getModelReference());
+      mmiProvider = new RegularMetaModelInfo();
     }
     IdInfoReadHelper readHelper = new IdInfoReadHelper(mmiProvider, interfaceOnly, stripImplementation);
     return new ModelReader9Handler(header, readHelper);
@@ -115,10 +106,15 @@ public class ModelPersistence9 implements IModelPersistence, XMLPersistence {
 
   @Override
   public XMLSAXHandler<List<LineContent>> getLineToContentMapReaderHandler() {
+    return getAnnotateHandler(false, false);
+  }
+
+  @Override
+  public XMLSAXHandler<List<LineContent>> getAnnotateHandler(boolean withPropertyValues, boolean withAssociationTarget) {
     // for annotation purposes, we don't need to publish meta-model or to query outer world, information from model file should be sufficient
     MetaModelInfoProvider mmiProvider = new StuffedMetaModelInfo(new BaseMetaModelInfo());
     IdInfoReadHelper readHelper = new IdInfoReadHelper(mmiProvider, true, true);
-    return new AnnotationInfoReader9Handler(readHelper);
+    return new AnnotationInfoReader9Handler(readHelper, withPropertyValues, withAssociationTarget);
   }
 
   @Override

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <root nodeRef="r:73dfd2f7-e60a-4ec7-8128-91cb6013a975(jetbrains.mps.samples.propertyPersistence.ideaPlugin.ideaPlugin)/9212378209272341619">
+    <file name="plugin.xml">
+      <unit id="9212378209272341619" at="1,0,20,14" name="jetbrains.mps.samples.propertyPersistence.ideaPlugin.ideaPlugin.plugin" />
+    </file>
+  </root>
+</debug-info>
+

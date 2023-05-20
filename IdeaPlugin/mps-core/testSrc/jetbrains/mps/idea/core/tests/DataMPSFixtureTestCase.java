@@ -17,10 +17,9 @@
 package jetbrains.mps.idea.core.tests;
 
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.ModalityState;
 import com.intellij.openapi.application.PathManager;
-import com.intellij.testFramework.PlatformTestUtil;
-import jetbrains.mps.ide.vfs.IdeaFile;
-import jetbrains.mps.idea.core.facet.MPSFacetConfiguration;
+import jetbrains.mps.util.Reference;
 import jetbrains.mps.vfs.FileSystem;
 import jetbrains.mps.vfs.IFile;
 import org.jetbrains.annotations.NotNull;
@@ -33,26 +32,22 @@ import java.io.OutputStream;
 
 public abstract class DataMPSFixtureTestCase extends AbstractMPSFixtureTestCase {
   @Override
-  protected void preConfigureFacet(final MPSFacetConfiguration configuration) {
-    super.preConfigureFacet(configuration);
-    try {
-      PlatformTestUtil.dispatchAllInvocationEventsInIdeEventQueue();
-    } catch (InterruptedException e) {
-    }
-
-    final Exception[] thrown = new Exception[1];
-
-    ApplicationManager.getApplication().runWriteAction(new Runnable() {
-      @Override
-      public void run() {
-        try {
-          prepareTestData(configuration);
-        } catch (Exception e) {
-          thrown[0] = e;
-        }
+  protected void setUp() throws Exception {
+    super.setUp();
+    Reference<Exception> exception = new Reference<>();
+    ApplicationManager.getApplication().invokeAndWait(() -> ApplicationManager.getApplication().runWriteAction(() -> {
+      try {
+        IFile ideaSourceRoot = getMpsFixture().getTheSourceRoot(getMpsFixture().getMpsFacet());
+        preConfigureSourceRoot(ideaSourceRoot);
+        getMpsFixture().addDefaultModelRoot(getMpsFixture().getMpsFacet());
+        postConfigureSourceRoot(ideaSourceRoot);
+      } catch (IOException e) {
+        exception.set(e);
       }
-    });
-    if (thrown[0] != null) throw new RuntimeException(thrown[0]);
+    }), ModalityState.defaultModalityState());
+    if (!exception.isNull()) {
+      throw exception.get();
+    }
   }
 
   @Override
@@ -60,41 +55,23 @@ public abstract class DataMPSFixtureTestCase extends AbstractMPSFixtureTestCase 
     return false;
   }
 
-  @Override
-  protected void invokeTestRunnable(@NotNull Runnable runnable) throws Exception {
-    // superclass's method always starts this in the EDT
-    runnable.run();
+  protected void preConfigureSourceRoot(IFile sourceRoot) throws IOException {
   }
 
-  protected abstract void prepareTestData(MPSFacetConfiguration configuration) throws Exception;
-
-  protected IFile copyResource(String toPath, String resName, String fromPath) throws IOException {
-    IFile targetFile = FileSystem.getInstance().getFile(toPath);
-
-    return copyResource(resName, fromPath, targetFile);
+  protected void postConfigureSourceRoot(IFile sourceRoot) throws IOException {
   }
 
-  protected IFile copyResource(String toDir, String toName, String resName, String fromPath) throws IOException {
-    IFile targetDir = FileSystem.getInstance().getFileByPath(myModule.getModuleFilePath()).getParent();
-    if (toDir != null) {
-      targetDir = targetDir.getDescendant(toDir);
-      if (!targetDir.exists()) {
-        targetDir.mkdirs();
-      }
-    }
-    IFile targetFile = targetDir.getDescendant(toName);
-
-    return copyResource(resName, fromPath, targetFile);
+  protected void copyResource(IFile targetFile, String resName, String fromPath) throws IOException {
+    copyResource(resName, fromPath, targetFile);
   }
 
-  private IFile copyResource(String resName, String fromPath, IFile targetFile) throws IOException {
-    IFile sourceFile = FileSystem.getInstance().getFileByPath(PathManager.getPluginsPath() + fromPath);
+  private void copyResource(String resName, String fromPath, IFile targetFile) throws IOException {
+    IFile sourceFile = targetFile.getFS().getFile(PathManager.getPluginsPath() + fromPath);
     if (sourceFile.exists()) {
       copyContent(sourceFile.openInputStream(), targetFile.openOutputStream());
     } else {
       copyContent(DataMPSFixtureTestCase.this.getClass().getResourceAsStream(resName), targetFile.openOutputStream());
     }
-    return FileSystem.getInstance().getFileByPath(targetFile.getPath());
   }
 
   private void copyContent(InputStream is, OutputStream os) throws IOException {

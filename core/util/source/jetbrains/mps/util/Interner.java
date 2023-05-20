@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,13 +20,8 @@ public class Interner {
   private final SimpleLRUCache<String> myCache;
 
   public Interner(int size) {
-    myCache = new SimpleLRUCache<String>(size) {
-      @Override
-      public String canonic(String s) {
-        // Ensure we cache only what's necessary!
-        return s;
-      }
-    };
+    // since Java 1.7, String.substring doesn't share char[], therefore no need to ensure 'canonical' string copy with `new String(String)`
+    myCache = new SimpleLRUCache<>(size);
   }
 
   public String intern(String s) {

@@ -2,7 +2,7 @@
 <model ref="r:00000000-0000-4000-0000-011c89590428(jetbrains.mps.samples.complex.runtime)">
   <persistence version="9" />
   <languages>
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports>
     <import index="wyt6" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)" />
@@ -249,7 +249,7 @@
       <node concept="3clFbS" id="hq6NkwS" role="3clF47">
         <node concept="3cpWs6" id="hq6Nr$e" role="3cqZAp">
           <node concept="2YIFZM" id="hq6SjSD" role="3cqZAk">
-            <ref role="37wK5l" to="wyt6:~Math.sqrt(double):double" resolve="sqrt" />
+            <ref role="37wK5l" to="wyt6:~Math.sqrt(double)" resolve="sqrt" />
             <ref role="1Pybhc" to="wyt6:~Math" resolve="Math" />
             <node concept="3cpWs3" id="hq6SkbW" role="37wK5m">
               <node concept="17qRlL" id="hq6SkbX" role="3uHU7B">
@@ -309,7 +309,7 @@
                 <property role="TrG5h" value="result" />
                 <node concept="10P55v" id="hqgiRjt" role="1tU5fm" />
                 <node concept="2YIFZM" id="hqgiTP8" role="33vP2m">
-                  <ref role="37wK5l" to="wyt6:~Math.acos(double):double" resolve="acos" />
+                  <ref role="37wK5l" to="wyt6:~Math.acos(double)" resolve="acos" />
                   <ref role="1Pybhc" to="wyt6:~Math" resolve="Math" />
                   <node concept="FJ1c_" id="hqgiVmA" role="37wK5m">
                     <node concept="37vLTw" id="3GM_nagTrse" role="3uHU7w">
@@ -443,7 +443,7 @@
                     </node>
                   </node>
                   <node concept="2YIFZM" id="hzKgK9y" role="3uHU7w">
-                    <ref role="37wK5l" to="wyt6:~Math.abs(double):double" resolve="abs" />
+                    <ref role="37wK5l" to="wyt6:~Math.abs(double)" resolve="abs" />
                     <ref role="1Pybhc" to="wyt6:~Math" resolve="Math" />
                     <node concept="2OqwBi" id="hzKgKPZ" role="37wK5m">
                       <node concept="2OwXpG" id="hzKgKQ0" role="2OqNvi">
@@ -505,7 +505,7 @@
               </node>
               <node concept="2YIFZM" id="hzKh63B" role="3uHU7w">
                 <ref role="1Pybhc" to="wyt6:~Math" resolve="Math" />
-                <ref role="37wK5l" to="wyt6:~Math.abs(double):double" resolve="abs" />
+                <ref role="37wK5l" to="wyt6:~Math.abs(double)" resolve="abs" />
                 <node concept="2OqwBi" id="hzKh63C" role="37wK5m">
                   <node concept="2OwXpG" id="hzKh63D" role="2OqNvi">
                     <ref role="2Oxat5" node="hq6CAoV" resolve="myImaginary" />
@@ -565,7 +565,7 @@
           <node concept="1rXfSq" id="4hiugqysnRe" role="3cqZAk">
             <ref role="37wK5l" node="hqghsQP" resolve="getComplexPolar" />
             <node concept="2YIFZM" id="hqg$22y" role="37wK5m">
-              <ref role="37wK5l" to="wyt6:~Math.pow(double,double):double" resolve="pow" />
+              <ref role="37wK5l" to="wyt6:~Math.pow(double,double)" resolve="pow" />
               <ref role="1Pybhc" to="wyt6:~Math" resolve="Math" />
               <node concept="2OqwBi" id="hzKgTqk" role="37wK5m">
                 <node concept="Xjq3P" id="hqg$2$Z" role="2Oq$k0" />
@@ -987,7 +987,7 @@
               <ref role="37wK5l" node="hq6CKWU" resolve="Complex" />
               <node concept="17qRlL" id="hqghJpa" role="37wK5m">
                 <node concept="2YIFZM" id="hqghMDv" role="3uHU7w">
-                  <ref role="37wK5l" to="wyt6:~Math.cos(double):double" resolve="cos" />
+                  <ref role="37wK5l" to="wyt6:~Math.cos(double)" resolve="cos" />
                   <ref role="1Pybhc" to="wyt6:~Math" resolve="Math" />
                   <node concept="37vLTw" id="2BHiRxgmaYH" role="37wK5m">
                     <ref role="3cqZAo" node="hqgh_Ti" resolve="arg" />
@@ -999,7 +999,7 @@
               </node>
               <node concept="17qRlL" id="hqghSvO" role="37wK5m">
                 <node concept="2YIFZM" id="hqghU_r" role="3uHU7w">
-                  <ref role="37wK5l" to="wyt6:~Math.sin(double):double" resolve="sin" />
+                  <ref role="37wK5l" to="wyt6:~Math.sin(double)" resolve="sin" />
                   <ref role="1Pybhc" to="wyt6:~Math" resolve="Math" />
                   <node concept="37vLTw" id="2BHiRxgmF$a" role="37wK5m">
                     <ref role="3cqZAo" node="hqgh_Ti" resolve="arg" />

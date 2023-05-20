@@ -2,8 +2,7 @@
 <model ref="r:b7bbbd3b-af8b-4b1e-9ab8-def9512d9413(org.jetbrains.mps.samples.Constants.typesystem)">
   <persistence version="9" />
   <languages>
-    <use id="7a5dda62-9140-4668-ab76-d5ed1746f2b2" name="jetbrains.mps.lang.typesystem" version="0" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="00000000-0000-4000-0000-1de82b3a4936(jetbrains.mps.devkit.aspect.typesystem)" />
   </languages>
   <imports>
     <import index="nd9w" ref="r:ef9fd842-b350-4ad1-83c7-4b57a2c65330(org.jetbrains.mps.samples.Constants.structure)" />
@@ -66,7 +65,7 @@
                 <ref role="1YBMHb" node="3tw0l3Pal48" resolve="constantReference" />
               </node>
               <node concept="3TrEf2" id="3tw0l3Pal4p" role="2OqNvi">
-                <ref role="3Tt5mk" to="nd9w:3tw0l3PakpA" />
+                <ref role="3Tt5mk" to="nd9w:3tw0l3PakpA" resolve="original" />
               </node>
             </node>
           </node>
@@ -96,7 +95,7 @@
                 <ref role="1YBMHb" node="3tw0l3Pal4s" resolve="constant" />
               </node>
               <node concept="3TrEf2" id="3tw0l3Pal4H" role="2OqNvi">
-                <ref role="3Tt5mk" to="nd9w:1J7HMiRRGnx" />
+                <ref role="3Tt5mk" to="nd9w:1J7HMiRRGnx" resolve="initializer" />
               </node>
             </node>
           </node>

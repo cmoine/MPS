@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="a8r337vpv62avphplfexw614vufx7wb">
+  <files names="BehaviorAspectDescriptor.java:JavaAnnotationParameterDeclaration.java:JavaAnnotation__BehaviorDescriptor.java:JavaClassSuperSpecifier__BehaviorDescriptor.java:JavaClassType__BehaviorDescriptor.java:JavaConstructorSuperSpecifier__BehaviorDescriptor.java:JavaDefaultConstructorCall__BehaviorDescriptor.java:JavaDefaultConstructorSuperSpecifier__BehaviorDescriptor.java:JavaEnumConstantReference__BehaviorDescriptor.java:JavaMemberTarget__BehaviorDescriptor.java:JavaMethodCall__BehaviorDescriptor.java:JavaMethodVariableReference__BehaviorDescriptor.java:JavaSignatures.java:JavaSupertypesVisitor.java:JavaTypeVariableReferenceType__BehaviorDescriptor.java:JavaVariableReference__BehaviorDescriptor.java:MembersPopulatingContextWrapper.java" />
+</product>
+

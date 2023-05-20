@@ -6,17 +6,6 @@
       <configuration>
         <option name="UUID" value="9cff0c7f-34fe-4409-aace-1680a0beef14" />
         <option name="generatorOutputPath" value="$MODULE_DIR$/source_gen" />
-        <option name="usedLanguages">
-          <array>
-            <option value="f3061a53-9226-4cc5-a443-f952ceaf5816(jetbrains.mps.baseLanguage)" />
-            <option value="fd392034-7849-419d-9071-12563d152375(jetbrains.mps.baseLanguage.closures)" />
-            <option value="83888646-71ce-4f1c-9c53-c54016f6ad4f(jetbrains.mps.baseLanguage.collections)" />
-            <option value="7db4447f-913e-4b81-bd75-c9a473319ac6(jetbrains.mps.baseLanguage.doubleDispatch)" />
-            <option value="f2801650-65d5-424e-bb1b-463a8781b786(jetbrains.mps.baseLanguage.javadoc)" />
-            <option value="3a13115c-633c-4c5c-bbcc-75c4219e9555(jetbrains.mps.lang.quotation)" />
-            <option value="7866978e-a0f0-4cc7-81bc-4d213d9375e1(jetbrains.mps.lang.smodel)" />
-          </array>
-        </option>
         <modelRoots>
           <modelRoot type="default">
             <settings contentPath="$MODULE_DIR$" type="default">
@@ -25,10 +14,158 @@
             </settings>
           </modelRoot>
         </modelRoots>
+        <languageVersions>
+          <map>
+            <entry key="l:3a13115c-633c-4c5c-bbcc-75c4219e9555:jetbrains.mps.lang.quotation" value="5" />
+            <entry key="l:446c26eb-2b7b-4bf0-9b35-f83fa582753e:jetbrains.mps.lang.modelapi" value="0" />
+            <entry key="l:7866978e-a0f0-4cc7-81bc-4d213d9375e1:jetbrains.mps.lang.smodel" value="19" />
+            <entry key="l:83888646-71ce-4f1c-9c53-c54016f6ad4f:jetbrains.mps.baseLanguage.collections" value="1" />
+            <entry key="l:9ded098b-ad6a-4657-bfd9-48636cfe8bc3:jetbrains.mps.lang.traceable" value="0" />
+            <entry key="l:ceab5195-25ea-4f22-9b92-103b95ca8c0c:jetbrains.mps.lang.core" value="2" />
+            <entry key="l:f2801650-65d5-424e-bb1b-463a8781b786:jetbrains.mps.baseLanguage.javadoc" value="2" />
+            <entry key="l:f3061a53-9226-4cc5-a443-f952ceaf5816:jetbrains.mps.baseLanguage" value="12" />
+            <entry key="l:fd392034-7849-419d-9071-12563d152375:jetbrains.mps.baseLanguage.closures" value="0" />
+          </map>
+        </languageVersions>
+        <option name="dependencyVersions">
+          <map>
+            <entry key="0eddeefa-c2d6-4437-bc2c-de50fd4ce470(jetbrains.mps.lang.script)" value="0" />
+            <entry key="13744753-c81f-424a-9c1b-cf8943bf4e86(jetbrains.mps.lang.sharedConcepts)" value="0" />
+            <entry key="18bc6592-03a6-4e29-a83a-7ff23bde13ba(jetbrains.mps.lang.editor)" value="0" />
+            <entry key="1a8554c4-eb84-43ba-8c34-6f0d90c6e75a(jetbrains.mps.lang.smodel.query)" value="0" />
+            <entry key="1ed103c3-3aa6-49b7-9c21-6765ee11f224(MPS.Editor)" value="0" />
+            <entry key="20c6e580-bdc5-4067-8049-d7e3265a86de(jetbrains.mps.typesystemEngine)" value="0" />
+            <entry key="23949432-aaff-4c03-b7da-26e4e956ccea(jetbrains.mps.baseLanguage.regexp.runtime)" value="0" />
+            <entry key="28f9e497-3b42-4291-aeba-0a1039153ab1(jetbrains.mps.lang.plugin)" value="0" />
+            <entry key="2af156ab-65c1-4a62-bd0d-ea734f71eab6(jetbrains.mps.dataFlow.runtime)" value="0" />
+            <entry key="2d3c70e9-aab2-4870-8d8d-6036800e4103(jetbrains.mps.kernel)" value="0" />
+            <entry key="2e24a298-44d1-4697-baec-5c424fed3a3b(jetbrains.mps.editorlang.runtime)" value="0" />
+            <entry key="31f56055-9d30-42b3-a2b1-fb3f554d7075(jetbrains.mps.lang.smodel.query.runtime)" value="0" />
+            <entry key="34e84b8f-afa8-4364-abcd-a279fddddbe7(jetbrains.mps.editor.runtime)" value="0" />
+            <entry key="3a13115c-633c-4c5c-bbcc-75c4219e9555(jetbrains.mps.lang.quotation)" value="0" />
+            <entry key="3ecd7c84-cde3-45de-886c-135ecc69b742(jetbrains.mps.lang.refactoring)" value="0" />
+            <entry key="3f233e7f-b8a6-46d2-a57f-795d56775243(Annotations)" value="0" />
+            <entry key="3f4bc5f5-c6c1-4a28-8b10-c83066ffa4a1(jetbrains.mps.lang.constraints)" value="0" />
+            <entry key="443f4c36-fcf5-4eb6-9500-8d06ed259e3e(jetbrains.mps.baseLanguage.classifiers)" value="0" />
+            <entry key="446c26eb-2b7b-4bf0-9b35-f83fa582753e(jetbrains.mps.lang.modelapi)" value="0" />
+            <entry key="498d89d2-c2e9-11e2-ad49-6cf049e62fe5(MPS.IDEA)" value="0" />
+            <entry key="4c6a28d1-2c60-478d-b36e-db9b3cbb21fb(closures.runtime)" value="0" />
+            <entry key="5187f5c9-b8a8-4309-90b3-14f9919bd2d8(jetbrains.mps.refactoring)" value="0" />
+            <entry key="528ff3b9-5fc4-40dd-931f-c6ce3650640e(jetbrains.mps.lang.migration.runtime)" value="0" />
+            <entry key="52b81ac7-93fd-4e9e-b972-4995882da6d4(jetbrains.mps.baseLanguage.references.runtime)" value="0" />
+            <entry key="5593bf7e-4f21-422d-947c-e60d33010362(jetbrains.mps.project)" value="0" />
+            <entry key="6354ebe7-c22a-4a0f-ac54-50b52ab9b065(JDK)" value="0" />
+            <entry key="64d34fcd-ad02-4e73-aff8-a581124c2e30(jetbrains.mps.lang.findUsages)" value="0" />
+            <entry key="6ed54515-acc8-4d1e-a16c-9fd6cfe951ea(MPS.Core)" value="0" />
+            <entry key="742f6602-5a2f-4313-aa6e-ae1cd4ffdc61(MPS.Platform)" value="0" />
+            <entry key="7866978e-a0f0-4cc7-81bc-4d213d9375e1(jetbrains.mps.lang.smodel)" value="1" />
+            <entry key="7a5dda62-9140-4668-ab76-d5ed1746f2b2(jetbrains.mps.lang.typesystem)" value="0" />
+            <entry key="7fa12e9c-b949-4976-b4fa-19accbc320b4(jetbrains.mps.lang.dataFlow)" value="0" />
+            <entry key="83888646-71ce-4f1c-9c53-c54016f6ad4f(jetbrains.mps.baseLanguage.collections)" value="0" />
+            <entry key="86ef8290-12bb-4ca7-947f-093788f263a9(jetbrains.mps.lang.project)" value="0" />
+            <entry key="8865b7a8-5271-43d3-884c-6fd1d9cfdd34(MPS.OpenAPI)" value="0" />
+            <entry key="8fe4c62a-2020-4ff4-8eda-f322a55bdc9f(jetbrains.mps.refactoring.runtime)" value="0" />
+            <entry key="90746344-04fd-4286-97d5-b46ae6a81709(jetbrains.mps.lang.migration)" value="0" />
+            <entry key="96ee7a94-411d-4cf8-9b94-96cad7e52411(jetbrains.mps.baseLanguage.jdk7)" value="0" />
+            <entry key="982eb8df-2c96-4bd7-9963-11712ea622e5(jetbrains.mps.lang.resources)" value="0" />
+            <entry key="98b3b6eb-9d60-4e29-9afb-762ac8948292(jetbrains.mps.ide.refactoring.platform)" value="0" />
+            <entry key="9a4afe51-f114-4595-b5df-048ce3c596be(jetbrains.mps.runtime)" value="0" />
+            <entry key="9b80526e-f0bf-4992-bdf5-cee39c1833f3(collections.runtime)" value="0" />
+            <entry key="9cff0c7f-34fe-4409-aace-1680a0beef14(mps-java)" value="0" />
+            <entry key="9ded098b-ad6a-4657-bfd9-48636cfe8bc3(jetbrains.mps.lang.traceable)" value="0" />
+            <entry key="9e98f4e2-decf-4e97-bf80-9109e8b759aa(jetbrains.mps.lang.feedback.context)" value="0" />
+            <entry key="a0c108f0-1637-416e-a249-3effbaa4c998(jetbrains.mps.baseLanguage.search)" value="0" />
+            <entry key="a1250a4d-c090-42c3-ad7c-d298a3357dd4(jetbrains.mps.make.runtime)" value="0" />
+            <entry key="a247e09e-2435-45ba-b8d2-07e93feba96a(jetbrains.mps.baseLanguage.tuples)" value="0" />
+            <entry key="a3e4657f-a76c-45bb-bbda-c764596ecc65(jetbrains.mps.baseLanguage.logging.runtime)" value="0" />
+            <entry key="a9e4c532-c5f5-4bb7-99ef-42abb73bbb70(jetbrains.mps.lang.descriptor.aspects)" value="0" />
+            <entry key="aee9cad2-acd4-4608-aef2-0004f6a1cdbd(jetbrains.mps.lang.actions)" value="0" />
+            <entry key="af19274f-5f89-42dd-8f3c-c9932448f7f2(jetbrains.mps.analyzers.runtime)" value="0" />
+            <entry key="af65afd8-f0dd-4942-87d9-63a55f2a9db1(jetbrains.mps.lang.behavior)" value="0" />
+            <entry key="b401a680-8325-4110-8fd3-84331ff25bef(jetbrains.mps.lang.generator)" value="0" />
+            <entry key="b83431fe-5c8f-40bc-8a36-65e25f4dd253(jetbrains.mps.lang.textGen)" value="0" />
+            <entry key="bfbdd672-7ff5-403f-af4f-16da5226f34c(jetbrains.mps.findUsages.runtime)" value="0" />
+            <entry key="c1969cf6-0de2-4f84-9a6b-4019c52c438c(mps-core)" value="0" />
+            <entry key="c72da2b9-7cce-4447-8389-f407dc1158b7(jetbrains.mps.lang.structure)" value="0" />
+            <entry key="c7d5b9dd-a05f-4be2-bc73-f2e16994cc67(jetbrains.mps.baseLanguage.lightweightdsl)" value="0" />
+            <entry key="c7fb639f-be78-4307-89b0-b5959c3fa8c8(jetbrains.mps.lang.text)" value="0" />
+            <entry key="ceab5195-25ea-4f22-9b92-103b95ca8c0c(jetbrains.mps.lang.core)" value="0" />
+            <entry key="d44dab97-aaac-44cb-9745-8a14db674c03(jetbrains.mps.baseLanguage.tuples.runtime)" value="0" />
+            <entry key="d4615e3b-d671-4ba9-af01-2b78369b0ba7(jetbrains.mps.lang.pattern)" value="0" />
+            <entry key="d7706f63-9be2-479c-a3da-ae92af1e64d5(jetbrains.mps.lang.generator.generationContext)" value="0" />
+            <entry key="d7a92d38-f7db-40d0-8431-763b0c3c9f20(jetbrains.mps.lang.intentions)" value="0" />
+            <entry key="d7eb0a2a-bd50-4576-beae-e4a89db35f20(jetbrains.mps.lang.scopes.runtime)" value="0" />
+            <entry key="d81a5f75-df55-4511-9df4-4dbac0cdcf06(jetbrains.mps.refactoring.participant)" value="0" />
+            <entry key="d936855b-48da-4812-a8a0-2bfddd633ac4(jetbrains.mps.lang.behavior.runtime)" value="0" />
+            <entry key="d936855b-48da-4812-a8a0-2bfddd633ac5(jetbrains.mps.lang.behavior.api)" value="0" />
+            <entry key="daafa647-f1f7-4b0b-b096-69cd7c8408c0(jetbrains.mps.baseLanguage.regexp)" value="0" />
+            <entry key="df345b11-b8c7-4213-ac66-48d2a9b75d88(jetbrains.mps.baseLanguageInternal)" value="0" />
+            <entry key="df9d410f-2ebb-43f7-893a-483a4f085250(jetbrains.mps.smodel.resources)" value="0" />
+            <entry key="e39e4a59-8cb6-498e-860e-8fa8361c0d90(jetbrains.mps.baseLanguage.scopes)" value="0" />
+            <entry key="ed6d7656-532c-4bc2-81d1-af945aeb8280(jetbrains.mps.baseLanguage.blTypes)" value="0" />
+            <entry key="f2801650-65d5-424e-bb1b-463a8781b786(jetbrains.mps.baseLanguage.javadoc)" value="0" />
+            <entry key="f3061a53-9226-4cc5-a443-f952ceaf5816(jetbrains.mps.baseLanguage)" value="0" />
+            <entry key="f8e20673-3f65-44e9-84c0-c4a4b6ede37e(jetbrains.mps.make.facets)" value="0" />
+            <entry key="fd392034-7849-419d-9071-12563d152375(jetbrains.mps.baseLanguage.closures)" value="0" />
+            <entry key="fe9d76d7-5809-45c9-ae28-a40915b4d6ff(jetbrains.mps.lang.checkedName)" value="0" />
+            <entry key="~Gradle: junit:junit:4.12(Gradle: junit:junit:4.12)" value="0" />
+            <entry key="~Gradle: net.bytebuddy:byte-buddy-agent:1.9.10(Gradle: net.bytebuddy:byte-buddy-agent:1.9.10)" value="0" />
+            <entry key="~Gradle: net.bytebuddy:byte-buddy:1.9.10(Gradle: net.bytebuddy:byte-buddy:1.9.10)" value="0" />
+            <entry key="~Gradle: org.assertj:assertj-core:3.12.2(Gradle: org.assertj:assertj-core:3.12.2)" value="0" />
+            <entry key="~Gradle: org.hamcrest:hamcrest-core:1.3(Gradle: org.hamcrest:hamcrest-core:1.3)" value="0" />
+            <entry key="~Gradle: org.jetbrains.kotlin:kotlin-reflect:1.3.41(Gradle: org.jetbrains.kotlin:kotlin-reflect:1.3.41)" value="0" />
+            <entry key="~Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.3.41(Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.3.41)" value="0" />
+            <entry key="~Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.41(Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.41)" value="0" />
+            <entry key="~Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.41(Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.41)" value="0" />
+            <entry key="~Gradle: org.jetbrains.kotlin:kotlin-stdlib-js:1.3.41(Gradle: org.jetbrains.kotlin:kotlin-stdlib-js:1.3.41)" value="0" />
+            <entry key="~Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.3.41(Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.3.41)" value="0" />
+            <entry key="~Gradle: org.jetbrains.kotlin:kotlin-test-annotations-common:1.3.41(Gradle: org.jetbrains.kotlin:kotlin-test-annotations-common:1.3.41)" value="0" />
+            <entry key="~Gradle: org.jetbrains.kotlin:kotlin-test-common:1.3.41(Gradle: org.jetbrains.kotlin:kotlin-test-common:1.3.41)" value="0" />
+            <entry key="~Gradle: org.jetbrains.kotlin:kotlin-test-junit:1.3.41(Gradle: org.jetbrains.kotlin:kotlin-test-junit:1.3.41)" value="0" />
+            <entry key="~Gradle: org.jetbrains.kotlin:kotlin-test:1.3.41(Gradle: org.jetbrains.kotlin:kotlin-test:1.3.41)" value="0" />
+            <entry key="~Gradle: org.jetbrains.kotlinx:kotlinx-html-common:0.6.12(Gradle: org.jetbrains.kotlinx:kotlinx-html-common:0.6.12)" value="0" />
+            <entry key="~Gradle: org.jetbrains.kotlinx:kotlinx-html-js:0.6.12(Gradle: org.jetbrains.kotlinx:kotlinx-html-js:0.6.12)" value="0" />
+            <entry key="~Gradle: org.jetbrains:annotations:13.0(Gradle: org.jetbrains:annotations:13.0)" value="0" />
+            <entry key="~Gradle: org.mockito:mockito-core:3.0.0(Gradle: org.mockito:mockito-core:3.0.0)" value="0" />
+            <entry key="~Gradle: org.objenesis:objenesis:2.6(Gradle: org.objenesis:objenesis:2.6)" value="0" />
+            <entry key="~IDEA IC(IDEA IC)" value="0" />
+            <entry key="~ant-mps(ant-mps)" value="0" />
+            <entry key="~diffutils(diffutils)" value="0" />
+            <entry key="~ideaJavaPlugin(ideaJavaPlugin)" value="0" />
+            <entry key="~ideaVcs(ideaVcs)" value="0" />
+            <entry key="~jpsPlatformTests(jpsPlatformTests)" value="0" />
+            <entry key="~mps-annotations(mps-annotations)" value="0" />
+            <entry key="~mps-behavior-api(mps-behavior-api)" value="0" />
+            <entry key="~mps-behavior-runtime(mps-behavior-runtime)" value="0" />
+            <entry key="~mps-boot-util(mps-boot-util)" value="0" />
+            <entry key="~mps-closures(mps-closures)" value="0" />
+            <entry key="~mps-collections(mps-collections)" value="0" />
+            <entry key="~mps-core(mps-core)" value="0" />
+            <entry key="~mps-editor(mps-editor)" value="0" />
+            <entry key="~mps-editor-api(mps-editor-api)" value="0" />
+            <entry key="~mps-editor-runtime(mps-editor-runtime)" value="0" />
+            <entry key="~mps-environment(mps-environment)" value="0" />
+            <entry key="~mps-icons(mps-icons)" value="0" />
+            <entry key="~mps-java-platform(mps-java-platform)" value="0" />
+            <entry key="~mps-logging(mps-logging)" value="0" />
+            <entry key="~mps-messaging(mps-messaging)" value="0" />
+            <entry key="~mps-migration(mps-migration)" value="0" />
+            <entry key="~mps-openapi(mps-openapi)" value="0" />
+            <entry key="~mps-platform(mps-platform)" value="0" />
+            <entry key="~mps-project-check(mps-project-check)" value="0" />
+            <entry key="~mps-stubs(mps-stubs)" value="0" />
+            <entry key="~mps-test(mps-test)" value="0" />
+            <entry key="~mps-tool(mps-tool)" value="0" />
+            <entry key="~mps-tuples(mps-tuples)" value="0" />
+            <entry key="~mps-vcs-core(mps-vcs-core)" value="0" />
+            <entry key="~mps.jetbrains.mps.baseLanguage(mps.jetbrains.mps.baseLanguage)" value="0" />
+            <entry key="~mps.jetbrains.mps.baseLanguage.collections(mps.jetbrains.mps.baseLanguage.collections)" value="0" />
+          </map>
+        </option>
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+  <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/classes" />
     <output-test url="file://$MODULE_DIR$/testclasses" />
     <exclude-output />
@@ -41,17 +178,9 @@
       <sourceFolder url="file://$MODULE_DIR$/models" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/resources" type="java-resource" />
     </content>
-    <content url="file://$MODULE_DIR$/../../plugins/mpsjava/basePlatform">
-      <sourceFolder url="file://$MODULE_DIR$/../../plugins/mpsjava/basePlatform/source_gen" isTestSource="false" />
-    </content>
-    <content url="file://$MODULE_DIR$/../../plugins/mpsjava/platform">
-      <sourceFolder url="file://$MODULE_DIR$/../../plugins/mpsjava/platform/source_gen" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../plugins/mpsjava/platform/source" isTestSource="false" />
-    </content>
     <orderEntry type="jdk" jdkName="IDEA IC" jdkType="IDEA JDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="mps-core" />
-    <orderEntry type="module" module-name="mps-java-common" />
     <orderEntry type="library" name="mps.jetbrains.mps.baseLanguage" level="project" />
     <orderEntry type="library" name="mps.jetbrains.mps.baseLanguage.collections" level="project" />
     <orderEntry type="library" name="mps-collections" level="project" />
@@ -60,5 +189,121 @@
     <orderEntry type="library" name="mps-tuples" level="project" />
     <orderEntry type="library" name="mps-icons" level="project" />
     <orderEntry type="library" name="mps-openapi" level="project" />
+    <orderEntry type="library" name="mps-java-platform" level="project" />
+    <orderEntry type="library" name="mps-core" level="project" />
+    <orderEntry type="library" name="mps-logging" level="project" />
+    <orderEntry type="library" name="mps-messaging" level="project" />
+    <orderEntry type="library" name="ant-mps" level="project" />
+    <orderEntry type="library" name="mps-annotations" level="project" />
+    <orderEntry type="library" name="diffutils" level="project" />
+    <orderEntry type="library" name="mps-test" level="project" />
+    <orderEntry type="library" name="mps.MPS.OpenAPI_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.baseLanguage.references.runtime_auto" level="project" />
+    <orderEntry type="library" name="mps.Annotations_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.feedback.context_auto" level="project" />
+    <orderEntry type="library" name="mps.MPS.Core_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.baseLanguage.references.runtime_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.analyzers.runtime_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.migration.runtime_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.dataFlow.runtime_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.baseLanguage.scopes_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.smodel_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.baseLanguage.util_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.text_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.actions_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.baseLanguage.lightweightdsl_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.project_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.resources_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.smodel.resources_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.feedback.context_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.baseLanguage.closures_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.structure_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.typesystemEngine_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.pattern_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.traceable_auto" level="project" />
+    <orderEntry type="library" name="mps.MPS.OpenAPI_auto" level="project" />
+    <orderEntry type="library" name="mps.collections.runtime_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.kernel_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.refactoring.participant_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.baseLanguage.tuples.runtime_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.baseLanguage.classifiers_auto" level="project" />
+    <orderEntry type="library" name="mps.MPS.IDEA_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.migration_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.findUsages.runtime_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.baseLanguage.javadoc_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.make.facets_auto" level="project" />
+    <orderEntry type="library" name="mps.closures.runtime_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.sharedConcepts_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.baseLanguage.regexp.runtime_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.editor.runtime_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.generator_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.baseLanguage.logging.runtime_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.baseLanguage.regexp_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.baseLanguage.search_auto" level="project" />
+    <orderEntry type="library" name="mps.MPS.Core_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.generator.generationContext_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.script_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.baseLanguage.jdk7_auto" level="project" />
+    <orderEntry type="library" name="mps.MPS.Platform_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.baseLanguage.blTypes_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.editorlang.runtime_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.behavior.runtime_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.findUsages_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.intentions_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.modelapi_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.project_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.descriptor.aspects_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.dataFlow_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.smodel.query.runtime_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.make.runtime_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.scopes.runtime_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.refactoring_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.smodel.query_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.behavior_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.quotation_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.baseLanguage.tuples_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.baseLanguageInternal_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.checkedName_auto" level="project" />
+    <orderEntry type="library" name="mps.MPS.Editor_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.editor_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.constraints_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.textGen_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.refactoring_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.runtime_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.core_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.behavior.api_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.plugin_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.refactoring.runtime_auto" level="project" />
+    <orderEntry type="library" name="mps.jetbrains.mps.lang.typesystem_auto" level="project" />
+    <orderEntry type="library" name="mps.Annotations_auto" level="project" />
+    <orderEntry type="library" name="mps-closures" level="project" />
+    <orderEntry type="library" name="mps-stubs" level="project" />
+    <orderEntry type="library" name="mps-editor-runtime" level="project" />
+    <orderEntry type="library" name="mps-core" level="project" />
+    <orderEntry type="library" name="mps-icons" level="project" />
+    <orderEntry type="library" name="mps-vcs-core" level="project" />
+    <orderEntry type="library" name="mps-platform" level="project" />
+    <orderEntry type="library" name="mps-annotations" level="project" />
+    <orderEntry type="library" name="jpsPlatformTests" level="project" />
+    <orderEntry type="library" name="mps-migration" level="project" />
+    <orderEntry type="library" name="mps-environment" level="project" />
+    <orderEntry type="library" name="ideaJavaPlugin" level="project" />
+    <orderEntry type="library" name="mps-project-check" level="project" />
+    <orderEntry type="library" name="mps-editor-api" level="project" />
+    <orderEntry type="library" name="mps-behavior-runtime" level="project" />
+    <orderEntry type="library" name="ant-mps" level="project" />
+    <orderEntry type="library" name="mps-boot-util" level="project" />
+    <orderEntry type="library" name="mps-test" level="project" />
+    <orderEntry type="library" name="mps-java-platform" level="project" />
+    <orderEntry type="library" name="mps-tool" level="project" />
+    <orderEntry type="library" name="diffutils" level="project" />
+    <orderEntry type="library" name="mps-messaging" level="project" />
+    <orderEntry type="library" name="mps-collections" level="project" />
+    <orderEntry type="library" name="mps-openapi" level="project" />
+    <orderEntry type="library" name="mps-logging" level="project" />
+    <orderEntry type="library" name="mps-editor" level="project" />
+    <orderEntry type="library" name="mps-tuples" level="project" />
+    <orderEntry type="library" name="ideaVcs" level="project" />
+    <orderEntry type="library" name="mps-behavior-api" level="project" />
   </component>
 </module>

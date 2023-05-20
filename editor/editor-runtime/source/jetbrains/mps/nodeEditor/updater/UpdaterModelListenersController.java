@@ -48,7 +48,7 @@ class UpdaterModelListenersController {
 
     final SRepository repository = myUpdater.getEditorContext().getRepository();
 
-    Set<SModel> modelsToListen = new HashSet<SModel>();
+    Set<SModel> modelsToListen = new HashSet<>();
     if (relatedNodes != null) {
       for (SNode node : relatedNodes) {
         SModel model = node.getModel();
@@ -97,13 +97,13 @@ class UpdaterModelListenersController {
     // Adding this assertion to ensure the reason is not in incorrectly removed listener (dependencies collection logic)
     if (editedNode != null && SNodeUtil.isAccessible(editedNode, myUpdater.getEditorContext().getRepository()) &&
         !isListeningModel(editedNode.getModel())) {
-      String message = "Listener was not added to a containing model of current node. Editor: " + myUpdater.getEditorComponent();
-      message += "\n modelId: " + editedNode.getModel().getModelId().toString();
-      message += "\n" + "models with listeners:";
+      StringBuilder message = new StringBuilder("Listener was not added to a containing model of current node. Editor: " + myUpdater.getEditorComponent());
+      message.append("\n modelId: ").append(editedNode.getModel().getModelId().toString());
+      message.append("\n" + "models with listeners:");
       for (SModel model : myListeningModels) {
-        message += "\n\t" + model.getModelId().toString();
+        message.append("\n\t").append(model.getModelId().toString());
       }
-      assert false : message;
+      assert false : message.toString();
     }
   }
 
@@ -122,6 +122,7 @@ class UpdaterModelListenersController {
       new RepoListenerRegistrar(myUpdater.getEditorContext().getRepository(), myRepositoryListener).detach();
     }
     if (myModelListener != null) {
+      myModelListener.clearCollectedEvents();
       myModelListener.dispose();
     }
   }

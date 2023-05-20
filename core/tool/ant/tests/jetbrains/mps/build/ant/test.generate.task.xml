@@ -28,7 +28,6 @@
         <mps.test.generation mpshome="${module.home}/../../.." loglevel="info" fork="true" showdiff="true" invoketests="true">
             <jvmarg value="-Xss1024k"/>
             <jvmarg value="-Xmx512m"/>
-            <jvmarg value="-XX:MaxPermSize=92m"/>
             <jvmarg value="-Xdebug"/>
             <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005"/>
             <project file="${module.home}/../../../samples/complexLanguage"/>

@@ -40,7 +40,7 @@ public class TLongArrayListDecorator extends AbstractList<Long> implements List<
   }
   @Override
   public ListIterator<Long> listIterator() {
-    return new TLongArrayListDecorator.TLongListIterator(0);
+    return new TLongListIterator(0);
   }
   @Override
   public void clear() {
@@ -127,7 +127,7 @@ public class TLongArrayListDecorator extends AbstractList<Long> implements List<
     return this.primList.size();
   }
   public ListIterator<Long> listIterator(int index) {
-    return new TLongArrayListDecorator.TLongListIterator(index);
+    return new TLongListIterator(index);
   }
   protected boolean removePrim(long primValue) {
     int idx = this.primList.indexOf(primValue);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,70 +15,86 @@
  */
 package jetbrains.mps.logging;
 
-
 import org.apache.log4j.AppenderSkeleton;
+import org.apache.log4j.Logger;
 import org.apache.log4j.Priority;
 import org.apache.log4j.spi.LoggingEvent;
-import org.apache.log4j.spi.ThrowableInformation;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.project.Project;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Implement this to have your own appender.
+ * Note, methods from Skeleton we used to override here stay just in case they are referenced from outside, but don't
+ * bear {@code Override} as present IDEA's AppenderSkeleton implementation no longer implements {@code Skeleton}
+ * @deprecated With switch to JUL, use {@link java.util.logging.Handler}
  */
+@SuppressWarnings("UnstableApiUsage")
+@Deprecated(since = "2022.1", forRemoval = true)
 public abstract class MPSAppenderBase extends AppenderSkeleton {
-  private static volatile int ourCount = 0;
+  private final static AtomicInteger ourCount = new AtomicInteger(0);
 
   public MPSAppenderBase() {
-    this("MPS_APPENDER_" + ourCount++);
+    this("MPS_APPENDER_" + ourCount.getAndIncrement());
   }
 
+  @SuppressWarnings("ParameterHidesMemberVariable")
   protected MPSAppenderBase(String name) {
     setName(name);
   }
 
   public void register() {
-    org.apache.log4j.Logger.getRootLogger().addAppender(this);
+    register(Logger.getRootLogger());
   }
 
   public void unregister() {
-    org.apache.log4j.Logger.getRootLogger().removeAppender(this);
+    unregister(Logger.getRootLogger());
   }
 
-  protected abstract void append(@NotNull Priority level, @NotNull String categoryName, @NotNull String message, @Nullable Throwable t,
-      @Nullable Object hintObject);
+  protected void register(Logger logger) {
+    warnDeprecatedUse();
+  }
 
-  @Override
+  protected void unregister(Logger logger) {
+    warnDeprecatedUse();
+  }
+
+  /**
+   * @deprecated use with a specified project method instead
+   */
+  @Deprecated(since = "2017.2", forRemoval = true)
+  protected abstract void append(@NotNull Priority level,
+                                 @NotNull String categoryName,
+                                 @NotNull String message,
+                                 @Nullable Throwable t,
+                                 @Nullable Object hintObject);
+
+  protected /*abstract*/ void append(@Nullable Project project,
+                                 @NotNull Priority level,
+                                 @NotNull String categoryName,
+                                 @NotNull String message,
+                                 @Nullable Throwable t,
+                                 @Nullable Object hintObject) {
+    append(level, categoryName, message, t, hintObject);
+  }
+
+//  @Override
   protected void append(LoggingEvent event) {
-    ThrowableInformation throwableInformation = event.getThrowableInformation();
-    String renderedMessage = event.getRenderedMessage();
-    Object message = event.getMessage();
-    if (renderedMessage != null && renderedMessage.equals(message)) {
-      message = null;
-    } else if (message instanceof MessageObject) {
-      renderedMessage = ((MessageObject) message).getMessage();
-      message = ((MessageObject) message).getHintObject();
-    }
-    if (renderedMessage == null) {
-      // hate null strings
-      renderedMessage = "";
-    }
-    Throwable throwable = null;
-    if (throwableInformation != null) {
-      throwable = throwableInformation.getThrowable();
-    } else if (message instanceof Throwable) {
-      throwable = (Throwable) message;
-    }
-
-    append(event.getLevel(), event.getLoggerName(), renderedMessage, throwable, message);
+    warnDeprecatedUse();
   }
 
-  @Override
+  private void warnDeprecatedUse() {
+    System.err.println("MPSAppenderBase is deprecated, stop using this class. MPS uses JUL now, switch to j.u.l.Handler");
+  }
+
+//  @Override
   public boolean requiresLayout() {
     return true;
   }
 
-  @Override
+//  @Override
   public void close() {
   }
 }

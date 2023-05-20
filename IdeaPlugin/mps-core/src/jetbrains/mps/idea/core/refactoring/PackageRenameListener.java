@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,13 +21,15 @@ import com.intellij.psi.PsiPackage;
 import com.intellij.refactoring.listeners.RefactoringElementListener;
 import com.intellij.refactoring.listeners.RefactoringElementListenerProvider;
 import jetbrains.mps.ide.project.ProjectHelper;
-import jetbrains.mps.ide.vfs.VirtualFileUtils;
+import jetbrains.mps.project.MPSProject;
 import jetbrains.mps.smodel.SModelFileTracker;
 import jetbrains.mps.vfs.IFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.EditableSModel;
 import org.jetbrains.mps.openapi.model.SModel;
+import org.jetbrains.mps.openapi.model.SModelReference;
+import org.jetbrains.mps.openapi.module.SRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,11 +53,16 @@ public class PackageRenameListener implements RefactoringElementListenerProvider
     }
     final PsiPackage pkg = (PsiPackage) element;
 
+    final MPSProject mpsProject = ProjectHelper.fromIdeaProject(pkg.getProject());
+    if (mpsProject == null) {
+      return null;
+    }
+
     // collecting models whose source is one of the package dirs
-    final List<SModel> models = new ArrayList<SModel>();
+    final List<SModelReference> models = new ArrayList<>();
     for (PsiDirectory psiDir : pkg.getDirectories()) {
-      IFile iFile = VirtualFileUtils.toIFile(psiDir.getVirtualFile());
-      SModel model = SModelFileTracker.getInstance(ProjectHelper.getProjectRepository(element.getProject())).findModel(iFile);
+      IFile iFile = mpsProject.getFileSystem().fromVirtualFile(psiDir.getVirtualFile());
+      SModelReference model = SModelFileTracker.getInstance(mpsProject.getRepository()).modelFor(iFile);
       if (model != null) {
         models.add(model);
       }
@@ -74,14 +81,17 @@ public class PackageRenameListener implements RefactoringElementListenerProvider
         if (!handled) {
           // we already hold idea write action
           // let's take mps write action to be able to do rename
-          ProjectHelper.getModelAccess(newElement.getProject()).executeCommand(new Runnable() {
+          final SRepository repo = ProjectHelper.getProjectRepository(newElement.getProject());
+          repo.getModelAccess().executeCommand(new Runnable() {
             public void run() {
               String newName = ((PsiPackage) newElement).getQualifiedName();
               // renaming
-              for (SModel model : models) {
+              for (SModelReference mr : models) {
+                SModel model = mr.resolve(repo);
                 if (!(model instanceof EditableSModel)) {
                   return;
                 }
+
                 ((EditableSModel) model).rename(newName, false);
                 // todo update refs to this model (may not be strictly necessary)
               }

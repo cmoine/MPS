@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-df05c8ojlkp9b73nzcr2x7xnj3435x8" />
+<product version="3" modelHash="4e5h6nqwh3wrnoqgthp4if9yoqsmk70">
+  <files names="BehaviorAspectDescriptor.java:MpsStartupScript__BehaviorDescriptor.java" />
+</product>
 

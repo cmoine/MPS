@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,6 +36,7 @@ import javax.swing.event.DocumentEvent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class MPSFacetPathsTab implements SModuleConfigurationTab {
     private JPanel myRootPanel;
@@ -106,7 +107,7 @@ public class MPSFacetPathsTab implements SModuleConfigurationTab {
         if (data.isUseModuleSourceFolder() != isUseModuleSourceFolder()) {
             return true;
         }
-        if (!data.getGeneratorOutputPath().equals(getGeneratorOutputPath())) {
+        if (!Objects.equals(data.getGeneratorOutputPath(), getGeneratorOutputPath())) {
             return true;
         }
         return false;

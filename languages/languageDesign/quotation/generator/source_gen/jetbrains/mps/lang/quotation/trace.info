@@ -2,7 +2,7 @@
 <debug-info version="2">
   <root>
     <file name="Generator.java">
-      <unit at="20,0,72,0" name="jetbrains.mps.lang.quotation.Generator" />
+      <unit at="18,0,59,0" name="jetbrains.mps.lang.quotation.Generator" />
     </file>
   </root>
 </debug-info>

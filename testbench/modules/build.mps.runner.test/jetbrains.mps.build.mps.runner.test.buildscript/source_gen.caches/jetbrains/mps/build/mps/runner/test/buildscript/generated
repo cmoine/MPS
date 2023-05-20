@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="22rm8dv1zt5bw8t2dh1lj03vxj89t86" />
+<product version="3" modelHash="-744axb1lyw2sjw6ofb8d6g616mevlsp">
+  <files names="test1.xml:test2.xml:test3.xml:test4.xml:test5.xml:testDummyPlugin.xml" />
+</product>
 

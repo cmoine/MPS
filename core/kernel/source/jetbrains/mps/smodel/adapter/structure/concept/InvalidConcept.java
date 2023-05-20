@@ -27,11 +27,8 @@ import org.jetbrains.mps.openapi.language.SInterfaceConcept;
 import org.jetbrains.mps.openapi.language.SLanguage;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
-import org.jetbrains.mps.openapi.module.SRepository;
 
 import java.util.Collections;
-import java.util.List;
-import java.util.Set;
 
 /**
  * This adapter means that MPS needed to load some concept but was unable to find it.

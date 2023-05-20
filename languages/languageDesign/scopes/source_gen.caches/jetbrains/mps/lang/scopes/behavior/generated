@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="dx3ovyfmnl001t9rrhrhv5dw8xhj084" />
+<product version="3" modelHash="-e2d45lgs1tfrlzrs6reenvdxztj42b7">
+  <files names="BehaviorAspectDescriptor.java:UniformScopeProvider__BehaviorDescriptor.java" />
+</product>
 

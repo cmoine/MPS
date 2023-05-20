@@ -30,10 +30,10 @@ import java.util.List;
 
 public class CompilerSettingsPreferencePage {
 
-  private final List<JavaVersionPresentationItem> myTargetVersionItems = new ArrayList<JavaVersionPresentationItem>();
+  private final List<JavaVersionPresentationItem> myTargetVersionItems = new ArrayList<>();
   private static final JavaVersionPresentationItem DEFAULT_VERSION_ITEM = new JavaVersionPresentationItem(null, "JDK Default");
   private JPanel myMainPanel;
-  private JComboBox myTargetJavaVersionComboBox;
+  private JComboBox<JavaVersionPresentationItem> myTargetJavaVersionComboBox;
   private JavaVersionPresentationItem myInitialTargetJavaVersion;
 
   {
@@ -42,6 +42,7 @@ public class CompilerSettingsPreferencePage {
     }
     myTargetVersionItems.add(DEFAULT_VERSION_ITEM);
   }
+
   public CompilerSettingsPreferencePage(CompilerState options) {
     JavaVersion targetJavaVersion = JavaVersion.parse(options.getTargetVersion());
     if (targetJavaVersion == null) {
@@ -77,7 +78,7 @@ public class CompilerSettingsPreferencePage {
     c.weightx = 1;
     c.insets.top = 4;
     c.insets.left = 5;
-    myTargetJavaVersionComboBox = new JComboBox(new DefaultComboBoxModel(myTargetVersionItems.toArray()));
+    myTargetJavaVersionComboBox = new JComboBox<>(new DefaultComboBoxModel<>(myTargetVersionItems.toArray(new JavaVersionPresentationItem[0])));
     myTargetJavaVersionComboBox.setSelectedItem(myInitialTargetJavaVersion);
 
     panel.add(new JLabel("Project bytecode version"), c);
@@ -107,7 +108,7 @@ public class CompilerSettingsPreferencePage {
   }
 
   private static class JavaVersionPresentationItem {
-    private JavaVersion myJavaVersion;
+    private final JavaVersion myJavaVersion;
     private final String myDescription;
 
     JavaVersionPresentationItem(JavaVersion javaVersion, String description) {
@@ -139,7 +140,7 @@ public class CompilerSettingsPreferencePage {
       if (myJavaVersion == null) {
         return ((JavaVersionPresentationItem) obj).myJavaVersion == null;
       }
-      return myJavaVersion.equals(((JavaVersionPresentationItem) obj).myJavaVersion);
+      return myJavaVersion == ((JavaVersionPresentationItem) obj).myJavaVersion;
     }
 
     @Override

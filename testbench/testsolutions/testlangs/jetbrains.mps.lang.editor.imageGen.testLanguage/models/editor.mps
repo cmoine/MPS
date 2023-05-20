@@ -2,7 +2,7 @@
 <model ref="r:86a7d44e-9a70-4684-a879-515e86917544(jetbrains.mps.lang.editor.imageGen.testLanguage.editor)">
   <persistence version="9" />
   <languages>
-    <use id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor" version="4" />
+    <use id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor" version="14" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -45,7 +45,7 @@
       <node concept="3F0ifn" id="27Aw0E1zwjD" role="3EZMnx">
         <property role="3F0ifm" value="@exportAsImage" />
         <node concept="VechU" id="27Aw0E1z$wU" role="3F10Kt">
-          <property role="Vb096" value="DARK_GREEN" />
+          <property role="Vb096" value="g1_qRwE/DARK_GREEN" />
         </node>
         <node concept="ljvvj" id="27Aw0E1zwll" role="3F10Kt">
           <property role="VOm3f" value="true" />

@@ -6,50 +6,9 @@ import jetbrains.mps.nodeEditor.DefaultNodeEditor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.editor.runtime.cells.BigCellUtil;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SConceptOperations;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.openapi.editor.style.Style;
-import jetbrains.mps.editor.runtime.style.StyleImpl;
-import jetbrains.mps.editor.runtime.style.StyleAttributes;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Error;
 
 public class QueryParameter_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createAlternation_pp9zo5_a(editorContext, node);
-  }
-  private EditorCell createAlternation_pp9zo5_a(EditorContext editorContext, SNode node) {
-    boolean alternationCondition = true;
-    alternationCondition = QueryParameter_Editor.renderingCondition_pp9zo5_a0(node, editorContext);
-    EditorCell editorCell = null;
-    if (alternationCondition) {
-      editorCell = this.createComponent_pp9zo5_a0(editorContext, node);
-    } else {
-      editorCell = this.createError_pp9zo5_a0(editorContext, node);
-    }
-    EditorCell bigCell = BigCellUtil.findBigCell(editorCell, node);
-    if (bigCell != null) {
-      bigCell.setBig(true);
-    }
-    return editorCell;
-  }
-  private static boolean renderingCondition_pp9zo5_a0(SNode node, EditorContext editorContext) {
-    return !(SConceptOperations.isExactly(SNodeOperations.asSConcept(SNodeOperations.getConcept(node)), MetaAdapterFactory.getConcept(0x1a8554c4eb8443baL, 0x8c346f0d90c6e75aL, 0x3bc64421760badf5L, "jetbrains.mps.lang.smodel.query.structure.QueryParameter")));
-  }
-  private EditorCell createComponent_pp9zo5_a0(EditorContext editorContext, SNode node) {
-    EditorCell editorCell = editorContext.getCellFactory().createEditorComponentCell(node, "jetbrains.mps.lang.core.editor.alias");
-    Style style = new StyleImpl();
-    style.set(StyleAttributes.AUTO_DELETABLE, 0, QueryParameter_Editor._StyleParameter_QueryFunction_pp9zo5_a0a0(editorContext, node));
-    editorCell.getStyle().putAll(style);
-    return editorCell;
-  }
-  private static boolean _StyleParameter_QueryFunction_pp9zo5_a0a0(EditorContext editorContext, SNode node) {
-    return SNodeOperations.getNextSibling(node) == null && SNodeOperations.getPrevSibling(node) == null;
-  }
-  private EditorCell createError_pp9zo5_a0(EditorContext editorContext, SNode node) {
-    EditorCell_Error editorCell = new EditorCell_Error(editorContext, node, "<parameter>");
-    editorCell.setCellId("Error_pp9zo5_a0");
-    return editorCell;
+    return new QueryParameter_EditorBuilder_a(editorContext, node).createCell();
   }
 }

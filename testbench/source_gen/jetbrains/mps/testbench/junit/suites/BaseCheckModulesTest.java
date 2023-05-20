@@ -4,18 +4,19 @@ package jetbrains.mps.testbench.junit.suites;
 
 import org.junit.runner.RunWith;
 import jetbrains.mps.testbench.junit.runners.TeamCityParameterizedRunner;
+import jetbrains.mps.annotations.GeneratedClass;
+import jetbrains.mps.tool.environment.MpsEnvironment;
 import jetbrains.mps.project.Project;
 import org.jetbrains.mps.openapi.module.SModule;
 import org.junit.runners.Parameterized;
 import java.util.List;
 import java.lang.reflect.InvocationTargetException;
 import jetbrains.mps.smodel.ModelAccessHelper;
-import jetbrains.mps.util.Computable;
-import jetbrains.mps.tool.environment.Environment;
-import jetbrains.mps.tool.environment.MpsEnvironment;
 import jetbrains.mps.tool.environment.EnvironmentConfig;
 import jetbrains.mps.tool.environment.ProjectStrategy;
 import jetbrains.mps.testbench.junit.runners.MPSCompositeProjectStrategy;
+import org.junit.AfterClass;
+import jetbrains.mps.tool.environment.Environment;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -23,7 +24,9 @@ import java.util.Set;
 import java.util.HashSet;
 
 @RunWith(value = TeamCityParameterizedRunner.class)
+@GeneratedClass(node = "r:984811b0-078d-45d7-bf58-fa501204c2fc(jetbrains.mps.testbench.junit.suites)/9170334376386357053", model = "r:984811b0-078d-45d7-bf58-fa501204c2fc(jetbrains.mps.testbench.junit.suites)")
 public class BaseCheckModulesTest {
+  private static MpsEnvironment ourEnvironment;
   private static Project ourContextProject;
   protected final SModule myModule;
 
@@ -33,23 +36,29 @@ public class BaseCheckModulesTest {
 
   @Parameterized.Parameters
   public static List<Object[]> testParameters() throws InvocationTargetException, InterruptedException {
-    // load excluded modules from system property, can be specified by MpsTestConfiguration annotation? 
+    // load excluded modules from system property, can be specified by MpsTestConfiguration annotation?
     initEnvironment();
-    Iterable<SModule> modules = new ModelAccessHelper(ourContextProject.getModelAccess()).runReadAction(new Computable<Iterable<SModule>>() {
-      public Iterable<SModule> compute() {
-        return ourContextProject.getRepository().getModules();
-      }
-    });
+    Iterable<SModule> modules = new ModelAccessHelper(ourContextProject.getModelAccess()).runReadAction(() -> ourContextProject.getProjectModulesWithGenerators());
     return createTestParametersFromModules(modules);
   }
 
   protected static void initEnvironment() throws InvocationTargetException, InterruptedException {
-    Environment env = MpsEnvironment.getOrCreate(EnvironmentConfig.defaultConfig());
-
+    ourEnvironment = new MpsEnvironment(EnvironmentConfig.defaultConfig().withTestModeOn());
+    ourEnvironment.init();
     ProjectStrategy strategy = new MPSCompositeProjectStrategy();
-    ourContextProject = env.createProject(strategy);
+    ourContextProject = ourEnvironment.createProject(strategy);
   }
 
+  @AfterClass
+  public static void disposeEnvironment() {
+    ourEnvironment.closeProject(ourContextProject);
+    ourEnvironment.dispose();
+    ourEnvironment = null;
+  }
+
+  public Environment getEnvironment() {
+    return ourEnvironment;
+  }
 
   protected static List<Object[]> createTestParametersFromModules(Iterable<? extends SModule> modules) {
     ArrayList<Object[]> res = new ArrayList<Object[]>();

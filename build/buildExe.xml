@@ -23,8 +23,12 @@
       <arg file="${build.tmp}/uninstall.nsh"/>
       <arg file="${build.tmp}/MPS ${mpsBootstrapCore.version}"/>
       <classpath>
+        <pathelement path="${build.tmp}/MPS ${mpsBootstrapCore.version}/lib/annotations.jar"/>
         <pathelement path="${build.tmp}/MPS ${mpsBootstrapCore.version}/lib/mps-workbench.jar"/>
         <pathelement path="${build.tmp}/MPS ${mpsBootstrapCore.version}/lib/mps-core.jar"/>
+        <pathelement path="${build.tmp}/MPS ${mpsBootstrapCore.version}/lib/mps-logging.jar"/>
+        <pathelement path="${build.tmp}/MPS ${mpsBootstrapCore.version}/lib/util.jar"/>
+        <pathelement path="${build.tmp}/MPS ${mpsBootstrapCore.version}/lib/3rd-party-rt.jar"/>
       </classpath>
     </java>
 

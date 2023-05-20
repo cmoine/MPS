@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,40 +17,24 @@ package jetbrains.mps.smodel.adapter.structure.ref;
 
 import jetbrains.mps.RuntimeFlags;
 import jetbrains.mps.smodel.MPSModuleRepository;
-import jetbrains.mps.smodel.SNodeId;
 import jetbrains.mps.smodel.adapter.ids.SReferenceLinkId;
 import jetbrains.mps.smodel.adapter.structure.ConceptFeatureHelper;
 import jetbrains.mps.smodel.adapter.structure.FormatException;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.smodel.language.ConceptRegistryUtil;
 import jetbrains.mps.smodel.runtime.ConceptDescriptor;
-import jetbrains.mps.smodel.runtime.LinkDescriptor;
-import jetbrains.mps.smodel.runtime.PropertyDescriptor;
 import jetbrains.mps.smodel.runtime.ReferenceDescriptor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
-import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 
-public final class SReferenceLinkAdapterById extends SReferenceLinkAdapter {
+public class SReferenceLinkAdapterById extends SReferenceLinkAdapter {
   public static final java.lang.String REF_PREFIX = "r";
-  private final SReferenceLinkId myRoleId;
-  private final boolean myIsBootstrap;
 
   public SReferenceLinkAdapterById(@NotNull SReferenceLinkId roleId, @NotNull String refName) {
-    this(roleId, refName, false);
-  }
-
-  /**
-   * @param bootstrap see BOOTSTRAP META OBJECTS javadoc for {@link jetbrains.mps.smodel.adapter.BootstrapAdapterFactory}
-   */
-  public SReferenceLinkAdapterById(@NotNull SReferenceLinkId roleId, @NotNull String refName, boolean bootstrap) {
-    super(refName);
-    myRoleId = roleId;
-    myIsBootstrap = bootstrap;
+    super(roleId, refName);
   }
 
   @Override
@@ -68,11 +52,6 @@ public final class SReferenceLinkAdapterById extends SReferenceLinkAdapter {
   }
 
   @NotNull
-  public SReferenceLinkId getId() {
-    return myRoleId;
-  }
-
-  @NotNull
   @Override
   public SAbstractConcept getOwner() {
     return ConceptFeatureHelper.getOwner(getId());
@@ -80,7 +59,7 @@ public final class SReferenceLinkAdapterById extends SReferenceLinkAdapter {
 
   @Override
   public String getRoleName() {
-    if (RuntimeFlags.isMergeDriverMode() || myIsBootstrap) {
+    if (RuntimeFlags.isMergeDriverMode()) {
       return myName;
     }
     ReferenceDescriptor d = getReferenceDescriptor();
@@ -93,33 +72,25 @@ public final class SReferenceLinkAdapterById extends SReferenceLinkAdapter {
 
   @Override
   @Nullable
-  public ReferenceDescriptor getReferenceDescriptor() {
+  protected ReferenceDescriptor getReferenceDescriptor() {
     ConceptDescriptor cd = ConceptFeatureHelper.getOwnerDescriptor(getId());
-    if (cd == null) {
-      return null;
-    }
     return cd.getRefDescriptor(myRoleId);
   }
 
+  @Nullable
   @Override
   public SNode getDeclarationNode() {
     ReferenceDescriptor d = getReferenceDescriptor();
     if (d != null) {
       SNodeReference sn = d.getSourceNode();
-      if(sn!=null) return sn.resolve(MPSModuleRepository.getInstance());
+      return sn == null ? null : sn.resolve(MPSModuleRepository.getInstance());
     }
-
-    SNode cnode = getOwner().getDeclarationNode();
-    if (cnode == null) {
-      return null;
-    }
-    SModel model = cnode.getModel();
-    return model.getNode(new SNodeId.Regular(myRoleId.getIdValue()));
+    return null;
   }
 
   @Override
   public String serialize() {
-    return REF_PREFIX + ID_DELIM + myRoleId.serialize() + ID_DELIM + myName;
+    return REF_PREFIX + ID_DELIM + myRoleId.serialize() + ID_DELIM + getRoleName();
   }
 
   public static SReferenceLinkAdapterById deserialize(String s) {

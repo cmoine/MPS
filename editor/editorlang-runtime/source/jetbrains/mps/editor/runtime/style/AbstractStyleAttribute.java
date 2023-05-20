@@ -29,7 +29,7 @@ public abstract class AbstractStyleAttribute<T> implements StyleAttribute<T> {
     myName = name;
     myIndex = -1;
     if (register) {
-      this.register();
+      register();
     }
   }
 
@@ -46,21 +46,27 @@ public abstract class AbstractStyleAttribute<T> implements StyleAttribute<T> {
     return myName;
   }
 
+  /**
+   * @return current index; value less than zero means that the attribute is not registered
+   */
   @Override
   public int getIndex() {
-    assert myIndex != -1;
     return myIndex;
   }
 
   @Override
-  public void register() {
-    assert myIndex == -1;
+  public final void register() {
+    if (myIndex >= 0) {
+      throw new IllegalStateException("The attribute is already registered");
+    }
     myIndex = StyleAttributes.getInstance().register(this);
   }
 
   @Override
-  public void unregister() {
-    assert myIndex != -1;
+  public final void unregister() {
+    if (myIndex < 0) {
+      throw new IllegalStateException("The attribute is not registered");
+    }
     StyleAttributes.getInstance().unregister(this);
     myIndex = -1;
   }

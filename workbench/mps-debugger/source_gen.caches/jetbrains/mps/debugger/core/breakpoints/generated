@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-ayieqmwptazzfqtmed0zs5xhdahcoq0" />
+<product version="3" modelHash="bejx9dytwvyo34i1zm4103f223t70hb">
+  <files names="BreakpointIconRenderrerEx.java:BreakpointPainterEx.java:BreakpointsUiComponentEx.java" />
+</product>
 

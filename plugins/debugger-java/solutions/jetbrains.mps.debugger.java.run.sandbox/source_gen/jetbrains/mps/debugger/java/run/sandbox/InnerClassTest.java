@@ -5,7 +5,7 @@ package jetbrains.mps.debugger.java.run.sandbox;
 
 public class InnerClassTest {
   public InnerClassTest() {
-    new InnerClassTest.MyInnerClass().doSmth();
+    new MyInnerClass().doSmth();
   }
   public static void main(String[] args) {
     new InnerClassTest();

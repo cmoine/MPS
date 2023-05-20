@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,10 +21,11 @@ import com.intellij.ide.SelectInTarget;
 import com.intellij.ide.projectView.ProjectView;
 import com.intellij.ide.projectView.impl.AbstractProjectViewPane;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.vfs.VirtualFile;
 import jetbrains.mps.ide.actions.MPSCommonDataKeys;
-import jetbrains.mps.ide.icons.IconManager;
+import jetbrains.mps.ide.icons.GlobalIconManager;
 import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.nodefs.NodeVirtualFileSystem;
 import jetbrains.mps.openapi.navigation.NavigationSupport;
@@ -34,6 +35,8 @@ import jetbrains.mps.smodel.SModelInternal;
 import jetbrains.mps.smodel.SModelOperations;
 import jetbrains.mps.smodel.SNodeUtil;
 import jetbrains.mps.smodel.action.NodeFactoryManager;
+import jetbrains.mps.smodel.language.ConceptRegistry;
+import jetbrains.mps.smodel.runtime.ConceptPresentation;
 import jetbrains.mps.workbench.action.BaseAction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -44,12 +47,12 @@ import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeAccessUtil;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 import org.jetbrains.mps.openapi.module.ModelAccess;
-import org.jetbrains.mps.openapi.module.SModuleReference;
 import org.jetbrains.mps.openapi.module.SRepository;
 
 import javax.swing.Icon;
 import java.util.Map;
 
+// FIXME is there true need to extend BaseAction here?
 public class NewRootNodeAction extends BaseAction implements DumbAware {
   private final String myVirtualPackage;
   private final SAbstractConcept myNodeConcept;
@@ -61,19 +64,32 @@ public class NewRootNodeAction extends BaseAction implements DumbAware {
     myNodeConcept = nodeConcept;
     myModel = model;
     myVirtualPackage = virtualPackage;
+
+    ConceptPresentation conceptPresentation = ConceptRegistry.getInstance().getConceptProperties(nodeConcept);
+    Presentation templatePresentation = getTemplatePresentation();
+
     String name = nodeConcept.getConceptAlias();
-    if (name == null || name.isEmpty()) {
+    if (name.isEmpty()) {
       name = nodeConcept.getName();
     }
-    getTemplatePresentation().setText(name);
-    Icon icon = IconManager.getIcon(nodeConcept);
-    getTemplatePresentation().setIcon(icon);
+    if (conceptPresentation.isDeprecated()) {
+      name = "(deprecated) " + name;
+    } else if (conceptPresentation.isExperimental()) {
+      name = "[experimental] " + name;
+    }
+    templatePresentation.setText(name);
+
+    Icon icon = GlobalIconManager.getInstance().getIconFor(nodeConcept);
+    templatePresentation.setIcon(icon);
+
     setExecuteOutsideCommand(true);
   }
 
   @Override
   protected boolean collectActionData(AnActionEvent e, Map<String, Object> _params) {
-    if (!super.collectActionData(e, _params)) return false;
+    if (!super.collectActionData(e, _params)) {
+      return false;
+    }
     myProject = MPSCommonDataKeys.MPS_PROJECT.getData(e.getDataContext());
     return true;
   }
@@ -82,33 +98,27 @@ public class NewRootNodeAction extends BaseAction implements DumbAware {
   protected void doExecute(AnActionEvent e, Map<String, Object> _params) {
     final SRepository projectRepo = myProject.getRepository();
     final ModelAccess modelAccess = projectRepo.getModelAccess();
-    modelAccess.executeCommandInEDT(new Runnable() {
-      @Override
-      public void run() {
-        SLanguage l = myNodeConcept.getLanguage();
-        if (!SModelOperations.getAllLanguageImports(myModel).contains(l)){
-          ((SModelInternal)myModel).addLanguage(l);
-        }
-        final SNode node = NodeFactoryManager.createNode(myNodeConcept, null, null, myModel);
-        SNodeAccessUtil.setProperty(node, SNodeUtil.property_BaseConcept_virtualPackage, myVirtualPackage);
-        myModel.addRootNode(node);
-        for (CreateNodeExtension ext : CreateRootFilterEP.getInstance().getCreateNodeExtensions()) {
-          if (ext.isApplicable(myModel)) {
-            ext.setupRoot(node);
-          }
-        }
-
-        modelAccess.runWriteInEDT(new Runnable() {
-          @Override
-          public void run() {
-            if (!trySelectInCurrentPane(myProject, node)) {
-              NavigationSupport.getInstance().selectInTree(myProject, node, false);
-            }
-
-            NavigationSupport.getInstance().openNode(myProject, node, true, false);
-          }
-        });
+    modelAccess.executeCommandInEDT(() -> {
+      SLanguage l = myNodeConcept.getLanguage();
+      if (!SModelOperations.getAllLanguageImports(myModel).contains(l)) {
+        ((SModelInternal) myModel).addLanguage(l);
       }
+      final SNode node = NodeFactoryManager.createNode(myNodeConcept, null, null, myModel);
+      SNodeAccessUtil.setProperty(node, SNodeUtil.property_BaseConcept_virtualPackage, myVirtualPackage);
+      myModel.addRootNode(node);
+      for (CreateNodeExtension ext : CreateRootFilterEP.getInstance().getCreateNodeExtensions()) {
+        if (ext.isApplicable(myModel)) {
+          ext.setupRoot(node);
+        }
+      }
+
+      modelAccess.runWriteInEDT(() -> {
+        if (!trySelectInCurrentPane(myProject, node)) {
+          NavigationSupport.getInstance().selectInTree(myProject, node, false);
+        }
+
+        NavigationSupport.getInstance().openNode(myProject, node, true, false);
+      });
     });
   }
 

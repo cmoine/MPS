@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 package jetbrains.mps.smodel.runtime.illegal;
 
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 import jetbrains.mps.smodel.adapter.ids.SConceptId;
 import jetbrains.mps.smodel.adapter.ids.SContainmentLinkId;
@@ -26,27 +27,51 @@ import jetbrains.mps.smodel.runtime.LinkDescriptor;
 import jetbrains.mps.smodel.runtime.PropertyDescriptor;
 import jetbrains.mps.smodel.runtime.ReferenceDescriptor;
 import jetbrains.mps.smodel.runtime.StaticScope;
+import jetbrains.mps.util.NameUtil;
 import jetbrains.mps.util.containers.ConcurrentHashSet;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
 public class IllegalConceptDescriptor implements ConceptDescriptor {
-  private static final Logger LOG = LogManager.getLogger(IllegalConceptDescriptor.class);
-  private static final Set<SAbstractConcept> ourReportedConcepts = new ConcurrentHashSet<SAbstractConcept>();
+  private static final Logger LOG = Logger.getLogger(IllegalConceptDescriptor.class);
+  private static final Set<String> ourReportedConcepts = new ConcurrentHashSet<>();
+  private static final Set<SConceptId> ourReportedConceptIds = new ConcurrentHashSet<>();
   private boolean myReported = false;
 
-  private SAbstractConcept myConcept;
+  @NotNull
+  private final SConceptId myConceptId;
+  @NotNull
+  private final String myConceptName;
+  @Nullable
+  private final String myLanguageName; // null indicates we don't know concept name nor language name
 
-  public IllegalConceptDescriptor(@NotNull SAbstractConcept concept) {
-    myConcept = concept;
+  /**
+   * Covers the case when attempt to find a concept by its known id failed.
+   * Generally shall not face {@link MetaIdFactory#INVALID_CONCEPT_ID}, although
+   * tolerates the value ({@link #getConceptFqName} gives different name in this case).
+   *
+   * @param concept
+   */
+  public IllegalConceptDescriptor(@NotNull SConceptId concept) {
+    myConceptId = concept;
+    myConceptName = concept == MetaIdFactory.INVALID_CONCEPT_ID ? MetaIdFactory.INVALID_CONCEPT_NAME : "<unknown>";
+    myLanguageName = null;
+  }
+
+  /**
+   * General case when we know name of the concept being looked up
+   */
+  public IllegalConceptDescriptor(@NotNull SConceptId concept, @NotNull String conceptQualifiedName) {
+    myConceptId = concept;
+    myConceptName = conceptQualifiedName;
+    // language name won't be null even if conceptQualifiedName doesn't match expected pattern.
+    myLanguageName = NameUtil.namespaceFromConceptFQName(conceptQualifiedName);
   }
 
   private void reportWarn() {
@@ -54,11 +79,16 @@ public class IllegalConceptDescriptor implements ConceptDescriptor {
       return;
     }
     myReported = true;
-    String msg = "IllegalConceptDescriptor created for concept " + myConcept +
-        ". Please check the language " + myConcept.getLanguage() + " is built and compiled.";
-    if (!ourReportedConcepts.contains(myConcept)) {
-      ourReportedConcepts.add(myConcept);
-      LOG.warn(msg);
+    if (myLanguageName != null) {
+      if (ourReportedConcepts.add(myConceptName)) {
+        String msg = "IllegalConceptDescriptor created for concept %s. Please check the language %s is built and compiled.";
+        LOG.warning(String.format(msg, myConceptName, myLanguageName));
+      }
+    } else {
+      if (ourReportedConceptIds.add(myConceptId)) {
+        String msg = "IllegalConceptDescriptor created for concept %s.";
+        LOG.warning(String.format(msg, myConceptId));
+      }
     }
   }
 
@@ -66,19 +96,13 @@ public class IllegalConceptDescriptor implements ConceptDescriptor {
   @Override
   public SConceptId getId() {
     reportWarn();
-    return MetaIdFactory.INVALID_CONCEPT_ID;
+    return myConceptId;
   }
 
   @Override
   public String getConceptFqName() {
     reportWarn();
-    return myConcept.getQualifiedName();
-  }
-
-  @Override
-  public String getSuperConcept() {
-    reportWarn();
-    return null;
+    return myConceptName;
   }
 
   @Override
@@ -88,7 +112,7 @@ public class IllegalConceptDescriptor implements ConceptDescriptor {
   }
 
   @Override
-  public Set<SReferenceLinkId> getReferenceIds() {
+  public Collection<ReferenceDescriptor> getReferenceDescriptors() {
     reportWarn();
     return Collections.emptySet();
   }
@@ -100,25 +124,7 @@ public class IllegalConceptDescriptor implements ConceptDescriptor {
   }
 
   @Override
-  public PropertyDescriptor getPropertyDescriptor(String name) {
-    reportWarn();
-    return null;
-  }
-
-  @Override
-  public ReferenceDescriptor getRefDescriptor(String name) {
-    reportWarn();
-    return null;
-  }
-
-  @Override
-  public LinkDescriptor getLinkDescriptor(String name) {
-    reportWarn();
-    return null;
-  }
-
-  @Override
-  public Set<SContainmentLinkId> getLinkIds() {
+  public Collection<LinkDescriptor> getLinkDescriptors() {
     reportWarn();
     return Collections.emptySet();
   }
@@ -136,7 +142,7 @@ public class IllegalConceptDescriptor implements ConceptDescriptor {
   }
 
   @Override
-  public Set<SPropertyId> getPropertyIds() {
+  public Collection<PropertyDescriptor> getPropertyDescriptors() {
     reportWarn();
     return Collections.emptySet();
   }
@@ -177,18 +183,6 @@ public class IllegalConceptDescriptor implements ConceptDescriptor {
     return "";
   }
 
-  @Override
-  public String getConceptShortDescription() {
-    reportWarn();
-    return "";
-  }
-
-  @Override
-  public String getHelpUrl() {
-    reportWarn();
-    return "";
-  }
-
   @Nullable
   @Override
   public SNodeReference getSourceNode() {
@@ -218,5 +212,23 @@ public class IllegalConceptDescriptor implements ConceptDescriptor {
   public Set<SConceptId> getAncestorsIds() {
     reportWarn();
     return Collections.emptySet();
+  }
+
+  @Override
+  public SConceptId getStubConceptId() {
+    return null;
+  }
+
+  @NotNull
+  @Override
+  public String getName() {
+    reportWarn();
+    return NameUtil.shortNameFromLongName(myConceptName);
+  }
+
+  @Override
+  public int getVersion() {
+    // we are capable to tell getStubConceptId()
+    return 2;
   }
 }

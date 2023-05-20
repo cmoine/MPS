@@ -9,14 +9,6 @@ import java.util.Collections;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Collection;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Constant;
-import jetbrains.mps.openapi.editor.style.Style;
-import jetbrains.mps.editor.runtime.style.StyleImpl;
-import jetbrains.mps.editor.runtime.style.StyleAttributes;
-import jetbrains.mps.internal.collections.runtime.ListSequence;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class _GenericDeclaration_TypeVariables_WithAnchor_Component implements ConceptEditorComponent {
   @NotNull
@@ -24,37 +16,6 @@ public class _GenericDeclaration_TypeVariables_WithAnchor_Component implements C
     return Collections.emptyList();
   }
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createCollection_525l3g_a(editorContext, node);
-  }
-  private EditorCell createCollection_525l3g_a(EditorContext editorContext, SNode node) {
-    EditorCell_Collection editorCell = EditorCell_Collection.createIndent2(editorContext, node);
-    editorCell.setCellId("Collection_525l3g_a");
-    editorCell.addEditorCell(this.createConstant_525l3g_a0(editorContext, node));
-    if (renderingCondition_525l3g_a1a(node, editorContext)) {
-      editorCell.addEditorCell(this.createComponent_525l3g_b0(editorContext, node));
-    }
-    return editorCell;
-  }
-  private EditorCell createConstant_525l3g_a0(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, "");
-    editorCell.setCellId("TYPE_VARIABLES_ANCHOR");
-    Style style = new StyleImpl();
-    style.set(StyleAttributes.PUNCTUATION_LEFT, 0, true);
-    style.set(StyleAttributes.PUNCTUATION_RIGHT, 0, _GenericDeclaration_TypeVariables_WithAnchor_Component._StyleParameter_QueryFunction_525l3g_a1a0(editorContext, node));
-    style.set(StyleAttributes.FIRST_POSITION_ALLOWED, 0, false);
-    style.set(StyleAttributes.LAST_POSITION_ALLOWED, 0, false);
-    editorCell.getStyle().putAll(style);
-    editorCell.setDefaultText("");
-    return editorCell;
-  }
-  private static boolean _StyleParameter_QueryFunction_525l3g_a1a0(EditorContext editorContext, SNode node) {
-    return ListSequence.fromList(SLinkOperations.getChildren(node, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x102463b447aL, 0x102463bb98eL, "typeVariableDeclaration"))).isNotEmpty();
-  }
-  private EditorCell createComponent_525l3g_b0(EditorContext editorContext, SNode node) {
-    EditorCell editorCell = editorContext.getCellFactory().createEditorComponentCell(node, "jetbrains.mps.baseLanguage.editor._GenericDeclaration_TypeVariables_Component");
-    return editorCell;
-  }
-  private static boolean renderingCondition_525l3g_a1a(SNode node, EditorContext editorContext) {
-    return ListSequence.fromList(SLinkOperations.getChildren(node, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x102463b447aL, 0x102463bb98eL, "typeVariableDeclaration"))).isNotEmpty();
+    return new _GenericDeclaration_TypeVariables_WithAnchor_Component_ComponentBuilder_a(editorContext, node).createCell();
   }
 }

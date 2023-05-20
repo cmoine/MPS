@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,11 @@
  */
 package jetbrains.mps.ide.ui.tree.module;
 
+import com.intellij.icons.AllIcons.Nodes;
 import jetbrains.mps.extapi.model.TransientSModel;
-import jetbrains.mps.ide.icons.IdeIcons;
+import jetbrains.mps.icons.MPSIcons.Nodes.Models;
 import jetbrains.mps.ide.ui.tree.MPSTreeNode;
-import jetbrains.mps.ide.ui.tree.SortUtil.SModelComparator;
+import jetbrains.mps.util.SModelNameComparator;
 import jetbrains.mps.ide.ui.tree.TextTreeNode;
 import jetbrains.mps.ide.ui.tree.TreeNodeTextSource;
 import jetbrains.mps.ide.ui.tree.smodel.SModelTreeNode;
@@ -30,11 +31,13 @@ import jetbrains.mps.util.IterableUtil;
 import jetbrains.mps.util.NameUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SModel;
+import org.jetbrains.mps.openapi.model.SModelName;
 import org.jetbrains.mps.openapi.module.SModule;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -54,8 +57,8 @@ public class SModelsSubtree {
   }
 
   /**
-   * @param rootTreeNode tree node to populate with children
-   * @param withNamespaceNodes <code>true</code> to group models according to their namespace under dedicated text (aka namespace) nodes
+   * @param rootTreeNode          tree node to populate with children
+   * @param withNamespaceNodes    <code>true</code> to group models according to their namespace under dedicated text (aka namespace) nodes
    * @param withModelsAsNamespace <code>true</code> group models according to their namespace under model with shorter namespace
    */
   public SModelsSubtree(@NotNull MPSTreeNode rootTreeNode, boolean withNamespaceNodes, boolean withModelsAsNamespace) {
@@ -91,48 +94,78 @@ public class SModelsSubtree {
   }
 
   private List<SModelTreeNode> getRootModelTreeNodes(Collection<SModel> models) {
-    List<SModelTreeNode> result = new ArrayList<SModelTreeNode>();
-    ArrayList<SModel> sortedModels = new ArrayList<SModel>(models);
-    Collections.sort(sortedModels, new SModelComparator());
-    if (!sortedModels.isEmpty()) {
-      int rootIndex = 0;
-      while (rootIndex < sortedModels.size()) {
-        SModel rootModelDescriptor = sortedModels.get(rootIndex);
-        SModelTreeNode treeNode = new SModelTreeNode(rootModelDescriptor, myRootModelsText);
+    List<SModelTreeNode> result = new ArrayList<>();
+    ArrayList<SModel> sortedModels = new ArrayList<>(models);
+    sortedModels.sort(new SModelNameComparator());
+    if (myWithModelsAsNamespace) {
+      // note, despite next code looks very similar to #buildTreeNodes(), can't combine as there's different TreeNodeTextSource in new SModelTreeNode
+      ArrayList<SModel> subfolderModels = new ArrayList<>();
+      while (!sortedModels.isEmpty()) {
+        final SModel root = filterSubmodels(sortedModels, subfolderModels);
+        final SModelTreeNode treeNode = new SModelTreeNode(root, myRootModelsText);
         result.add(treeNode);
-        rootIndex = myWithModelsAsNamespace ? buildChildModels(treeNode, sortedModels, rootIndex) : rootIndex + 1;
+        buildTreeNodes(subfolderModels, treeNode);
+        subfolderModels.clear();
+      }
+    } else {
+      for (SModel m : sortedModels) {
+        result.add(new SModelTreeNode(m, myRootModelsText));
       }
     }
     return result;
   }
 
-  private int buildChildModels(SModelTreeNode treeNode, List<SModel> candidates, int rootIndex) {
-    int index = rootIndex + 1;
-    while (index < candidates.size()) {
-      SModel candidate = candidates.get(index);
-      if (treeNode.isSubfolderModel(candidate)) {
-        SModelTreeNode newChildModel = new SModelTreeNode(candidate, myChildModelsText);
-        treeNode.addChildModel(newChildModel);
-        index = buildChildModels(newChildModel, candidates, index);
-      } else {
-        return index;
-      }
+  private void buildTreeNodes(List<SModel> sortedCandidates, SModelTreeNode parent) {
+    LinkedList<SModel> subfolderModels = new LinkedList<>();
+    while (!sortedCandidates.isEmpty()) {
+      final SModel root = filterSubmodels(sortedCandidates, subfolderModels);
+      final SModelTreeNode treeNode = new SModelTreeNode(root, myChildModelsText);
+      parent.addChildModel(treeNode);
+
+      buildTreeNodes(subfolderModels, treeNode);
+      subfolderModels.clear();
     }
-    return index;
   }
 
-  public static int getCountNamePart(SModel md, String baseName) {
-    String modelLongName = NameUtil.getModelLongName(md);
-    String shortName = md instanceof TransientSModel ? modelLongName : modelLongName.replace(baseName + '.', "");
-    return shortName.split("\\.").length - 1;
+  // assumes input list to be sorted by name, so that first element of the list has the shortest name, and is the one we compare others to
+  //    indeed, could have passes the 'root' model from outside and don't assume input list being sorted.
+  // preserves the order of input list in the output
+  private static SModel filterSubmodels(List<SModel> sortedCandidates, List<SModel> subfolderModels) {
+    // sortedCandidates is a finite set we need to care about, i.e. in case we've got a.b and a.b.c.d models, we don't need to look elsewhere for a.b.c,
+    // we can safely assume c.d to be direct child of a.b
+    final SModel root = sortedCandidates.remove(0);
+    for (Iterator<SModel> it = sortedCandidates.iterator(); it.hasNext();) {
+      final SModel candidate = it.next();
+      if (isSubfolderModel(root.getName(), candidate)) {
+        it.remove();
+        subfolderModels.add(candidate);
+      }
+    }
+    return root;
+  }
+
+  private static boolean isSubfolderModel(SModelName rootModel, SModel candidate) {
+    final String modelName = rootModel.getLongName();
+    String candidateName = candidate.getName().getLongName();
+    if (!candidateName.startsWith(modelName) || modelName.equals(candidateName)) {
+      return false;
+    }
+    if (candidateName.charAt(modelName.length()) == '.') {
+      String modelStereotype = rootModel.getStereotype();
+      String candidateStereotype = candidate.getName().getStereotype();
+      if (!modelStereotype.equals(candidateStereotype)) {
+        return false;
+      }
+      return true;
+    }
+    return false;
   }
 
   public static class StubsTreeNode extends TextTreeNode implements StereotypeProvider {
     public StubsTreeNode() {
       super("stubs");
 
-      setIcon(IdeIcons.PROJECT_MODELS_ICON, false);
-      setIcon(IdeIcons.PROJECT_MODELS_EXPANDED_ICON, true);
+      setIcon(Nodes.PpLibFolder);
     }
 
     @Override
@@ -150,8 +183,7 @@ public class SModelsSubtree {
     public TestsTreeNode() {
       super("tests");
 
-      setIcon(IdeIcons.PROJECT_MODELS_ICON, false);
-      setIcon(IdeIcons.PROJECT_MODELS_EXPANDED_ICON, true);
+      setIcon(Models.TestsModel);
     }
 
     @Override

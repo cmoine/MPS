@@ -4,25 +4,30 @@ package jetbrains.mps.baseLanguage.lightweightdsl.pluginSolution.plugin;
 
 import jetbrains.mps.plugins.applicationplugins.BaseApplicationPlugin;
 import com.intellij.openapi.extensions.PluginId;
+import org.jetbrains.annotations.NotNull;
 import jetbrains.mps.ide.actions.CreateRootNode_ActionGroup;
 import java.util.List;
 import jetbrains.mps.plugins.actions.BaseKeymapChanges;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import java.util.ArrayList;
-import jetbrains.mps.plugins.custom.BaseCustomApplicationPlugin;
+import jetbrains.mps.plugins.part.ApplicationPluginPart;
 
 public class PluginSolution_ApplicationPlugin extends BaseApplicationPlugin {
-  private PluginId myId = PluginId.getId("jetbrains.mps.baseLanguage.lightweightdsl.pluginSolution");
+  private final PluginId myId = PluginId.getId("jetbrains.mps.baseLanguage.lightweightdsl.pluginSolution");
+
   public PluginSolution_ApplicationPlugin() {
   }
+
+  @NotNull
   public PluginId getId() {
     return myId;
   }
+
   public void createGroups() {
-    // actions w/o parameters 
+    // actions w/o parameters
     addAction(new GoToMemberDeclaration_Action());
-    // groups 
-    addGroup(new ClassLikes_ActionGroup());
+    // groups
+    addGroup(new ClassLikes_ActionGroup(this));
   }
   public void adjustRegularGroups() {
     insertGroupIntoAnother(ClassLikes_ActionGroup.ID, CreateRootNode_ActionGroup.ID, CreateRootNode_ActionGroup.LABEL_ID_mainRoot);
@@ -32,13 +37,8 @@ public class PluginSolution_ApplicationPlugin extends BaseApplicationPlugin {
     ListSequence.fromList(res).addElement(new Default_KeymapChanges());
     return res;
   }
-  public List<BaseCustomApplicationPlugin> initCustomParts() {
-    List<BaseCustomApplicationPlugin> res = ListSequence.fromList(new ArrayList<BaseCustomApplicationPlugin>());
-    {
-      BaseCustomApplicationPlugin plugin = new ClassLikeMenuAdjustment_CustomApplicationPlugin();
-      ListSequence.fromList(res).addElement(plugin);
-      plugin.init();
-    }
-    return res;
+  @Override
+  public void fillCustomParts(List<ApplicationPluginPart> parts) {
+    parts.add(new ClassLikeMenuAdjustment_AppPluginPart());
   }
 }

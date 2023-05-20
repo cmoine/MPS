@@ -77,10 +77,16 @@ public class Dog extends KajaFrame {
     }
   }
   public void turnAround_routine() {
-    turnLeft();
-    pause();
-    turnLeft();
-    pause();
+    try {
+      turnLeft();
+      pause();
+    } finally {
+    }
+    try {
+      turnLeft();
+      pause();
+    } finally {
+    }
   }
   public void run_routine() {
     while (!(isWall())) {
@@ -100,8 +106,11 @@ public class Dog extends KajaFrame {
   }
   public void turnRight_routine() {
     for (int indexVariable_qku_a0f = 0; indexVariable_qku_a0f < 3; indexVariable_qku_a0f++) {
-      turnLeft();
-      pause();
+      try {
+        turnLeft();
+        pause();
+      } finally {
+      }
     }
   }
   public static void main(String[] args) {

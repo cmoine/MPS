@@ -1,8 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
   <root>
     <file name="DemoApp.java">
       <unit at="14,0,71,0" name="jetbrains.mps.samples.generator_demo.test_models.test5.DemoApp" />
+    </file>
+  </root>
+  <root nodeRef="r:94230555-db6d-44d0-aacd-499f3b0c9d4f(jetbrains.mps.samples.generator_demo.test_models.test5)/1228679850889">
+    <file name="DemoApp.java">
+      <node id="1228679850889" at="27,54,28,39" concept="0" />
+      <node id="1228679850890" at="32,47,33,38" concept="1" />
+      <node id="1228679850890" at="33,38,34,31" concept="0" />
+      <node id="1228679850890" at="34,31,35,32" concept="0" />
+      <node id="1228679850890" at="35,32,36,21" concept="2" />
+      <node id="1228679850890" at="32,0,38,0" concept="4" trace="createComponent_a#()Ljava/awt/Component;" />
+      <scope id="1228679850890" at="32,47,36,21">
+        <var name="component" id="1228679850890" />
+      </scope>
+      <scope id="1228679850890" at="32,0,38,0" />
+    </file>
+  </root>
+  <root nodeRef="r:94230555-db6d-44d0-aacd-499f3b0c9d4f(jetbrains.mps.samples.generator_demo.test_models.test5)/1228679850893">
+    <file name="DemoApp.java">
+      <node id="1228679850893" at="28,39,29,41" concept="0" />
+      <node id="1228679850894" at="38,49,39,36" concept="1" />
+      <node id="1228679850894" at="39,36,40,32" concept="0" />
+      <node id="1228679850894" at="40,32,41,30" concept="0" />
+      <node id="1228679850894" at="41,30,42,42" concept="0" />
+      <node id="1228679850894" at="42,42,43,21" concept="2" />
+      <node id="1228679850894" at="38,0,45,0" concept="4" trace="createComponent_a_0#()Ljava/awt/Component;" />
+      <scope id="1228679850894" at="38,49,43,21">
+        <var name="component" id="1228679850894" />
+      </scope>
+      <scope id="1228679850894" at="38,0,45,0" />
+    </file>
+  </root>
+  <root nodeRef="r:94230555-db6d-44d0-aacd-499f3b0c9d4f(jetbrains.mps.samples.generator_demo.test_models.test5)/1228679864085">
+    <file name="DemoApp.java">
+      <node id="1228679864085" at="29,41,30,41" concept="0" />
+      <node id="1228679864086" at="45,49,46,36" concept="1" />
+      <node id="1228679864086" at="46,36,47,30" concept="0" />
+      <node id="1228679864086" at="47,30,48,41" concept="0" />
+      <node id="1228679864086" at="48,41,49,20" concept="3" />
+      <node id="1228679901041" at="49,20,50,40" concept="0" />
+      <node id="1228679923856" at="50,40,51,40" concept="0" />
+      <node id="1228679864086" at="51,40,52,40" concept="0" />
+      <node id="1228679864086" at="52,40,53,21" concept="2" />
+      <node id="1228679901041" at="55,48,56,36" concept="1" />
+      <node id="1228679901041" at="56,36,57,31" concept="0" />
+      <node id="1228679901041" at="57,31,58,21" concept="2" />
+      <node id="1228679923856" at="60,48,61,36" concept="1" />
+      <node id="1228679923856" at="61,36,62,40" concept="0" />
+      <node id="1228679923856" at="62,40,63,21" concept="2" />
+      <node id="1228679901041" at="55,0,60,0" concept="4" trace="createComponent_a0#()Ljava/awt/Component;" />
+      <node id="1228679923856" at="60,0,65,0" concept="4" trace="createComponent_b0#()Ljava/awt/Component;" />
+      <node id="1228679864086" at="45,0,55,0" concept="4" trace="createComponent_a_1#()Ljava/awt/Component;" />
+      <scope id="1228679901041" at="55,48,58,21">
+        <var name="component" id="1228679901041" />
+      </scope>
+      <scope id="1228679923856" at="60,48,63,21">
+        <var name="component" id="1228679923856" />
+      </scope>
+      <scope id="1228679901041" at="55,0,60,0" />
+      <scope id="1228679923856" at="60,0,65,0" />
+      <scope id="1228679864086" at="45,49,53,21">
+        <var name="component" id="1228679864086" />
+      </scope>
+      <scope id="1228679864086" at="45,0,55,0" />
     </file>
   </root>
 </debug-info>

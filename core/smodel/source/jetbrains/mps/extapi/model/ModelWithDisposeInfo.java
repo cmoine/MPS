@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,23 @@
  */
 package jetbrains.mps.extapi.model;
 
+import org.jetbrains.annotations.Nullable;
+
 /**
  * Internal interface, not to be queried or implemented outside of MPS's SModel implementation.
- * FIXME update and regenerate SNodeOperations.isModelDisposed to use this interface
  * @author Artem Tikhomirov
  */
 public interface ModelWithDisposeInfo {
+
+  /**
+   * Node {@code true} doesn't imply {@code getDisposedStacktrace() != null}
+   */
   boolean isDisposed();
+
+  /**
+   * Provide stacktrace of dispose call, if any
+   * @return null if model is not disposed or dispose information not available
+   */
+  @Nullable
   StackTraceElement[] getDisposedStacktrace();
 }

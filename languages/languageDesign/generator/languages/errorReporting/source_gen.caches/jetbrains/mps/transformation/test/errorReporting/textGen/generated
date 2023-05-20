@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="627js1a8afzhvfbq6ewwnjdixysq3u5" />
+<product version="3" modelHash="b49ekmhcdwd6bx4401ngegzllppnwfv">
+  <files names="ErrorReportingRoot_TextGen.java:TextGenAspectDescriptor.java" />
+</product>
 

@@ -2,11 +2,11 @@
 <model ref="r:422dd8ac-e62c-401d-a6e9-1ea317c4d069(jetbrains.mps.make.outlook.generator.template.main@generator)">
   <persistence version="9" />
   <languages>
-    <use id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections" version="0" />
-    <use id="b401a680-8325-4110-8fd3-84331ff25bef" name="jetbrains.mps.lang.generator" version="0" />
-    <use id="d7706f63-9be2-479c-a3da-ae92af1e64d5" name="jetbrains.mps.lang.generator.generationContext" version="0" />
-    <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="4" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections" version="1" />
+    <use id="b401a680-8325-4110-8fd3-84331ff25bef" name="jetbrains.mps.lang.generator" version="4" />
+    <use id="d7706f63-9be2-479c-a3da-ae92af1e64d5" name="jetbrains.mps.lang.generator.generationContext" version="2" />
+    <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="19" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -122,7 +122,7 @@
         <child id="5169995583184591170" name="smodelAttribute" index="lGtFl" />
       </concept>
       <concept id="3364660638048049750" name="jetbrains.mps.lang.core.structure.PropertyAttribute" flags="ng" index="A9Btg">
-        <property id="1757699476691236117" name="propertyName" index="2qtEX9" />
+        <property id="1757699476691236117" name="name_DebugInfo" index="2qtEX9" />
         <property id="1341860900487648621" name="propertyId" index="P4ACc" />
       </concept>
       <concept id="1169194658468" name="jetbrains.mps.lang.core.structure.INamedConcept" flags="ng" index="TrEIO">
@@ -208,7 +208,7 @@
                           <node concept="2OqwBi" id="4RkbWW0J13d" role="2Oq$k0">
                             <node concept="30H73N" id="4RkbWW0J13a" role="2Oq$k0" />
                             <node concept="3TrEf2" id="4RkbWW0J13m" role="2OqNvi">
-                              <ref role="3Tt5mk" to="vvvw:5_TVmOF8rbN" />
+                              <ref role="3Tt5mk" to="vvvw:5_TVmOF8rbN" resolve="facet" />
                             </node>
                           </node>
                           <node concept="3TrcHB" id="4RkbWW0J13t" role="2OqNvi">
@@ -227,7 +227,7 @@
                   <node concept="3clFbF" id="4RkbWW0J132" role="3cqZAp">
                     <node concept="2OqwBi" id="4RkbWW0J133" role="3clFbG">
                       <node concept="3Tsc0h" id="4RkbWW0J134" role="2OqNvi">
-                        <ref role="3TtcxE" to="z5g5:4RkbWW0I_Ax" />
+                        <ref role="3TtcxE" to="z5g5:4RkbWW0I_Ax" resolve="facet" />
                       </node>
                       <node concept="30H73N" id="4RkbWW0J135" role="2Oq$k0" />
                     </node>
@@ -255,7 +255,7 @@
       <node concept="3clFbS" id="4RkbWW0IVAy" role="3clF47">
         <node concept="3clFbF" id="4RkbWW0J2iu" role="3cqZAp">
           <node concept="2YIFZM" id="4RkbWW0J2iw" role="3clFbG">
-            <ref role="37wK5l" to="33ny:~Collections.unmodifiableCollection(java.util.Collection):java.util.Collection" resolve="unmodifiableCollection" />
+            <ref role="37wK5l" to="33ny:~Collections.unmodifiableCollection(java.util.Collection)" resolve="unmodifiableCollection" />
             <ref role="1Pybhc" to="33ny:~Collections" resolve="Collections" />
             <node concept="37vLTw" id="2BHiRxeuqO$" role="37wK5m">
               <ref role="3cqZAo" node="4RkbWW0IVAz" resolve="facetNames" />

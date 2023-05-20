@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="7srfp8sf1nxtu84v5nonrm1mii2u248" />
+<product version="3" modelHash="bgxybuq6qulbav6x39rls91i4aibv18">
+  <files names="CustomRoot_Editor.java:CustomRoot_EditorBuilder_a.java:CustomStatementRef_Editor.java:CustomStatementRef_EditorBuilder_a.java:CustomStatementRef_SubstituteMenu.java:CustomStatement_Editor.java:CustomStatement_EditorBuilder_a.java:EditorAspectDescriptorImpl.java:OutputNode_Editor.java:OutputNode_EditorBuilder_a.java:OutputRoot_Editor.java:OutputRoot_EditorBuilder_a.java:TwoVarStatement_Editor.java:TwoVarStatement_EditorBuilder_a.java" />
+</product>
 

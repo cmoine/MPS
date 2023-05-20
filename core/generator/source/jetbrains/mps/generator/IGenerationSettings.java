@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,19 +37,20 @@ public interface IGenerationSettings {
 
   boolean isKeepModelsWithWarnings();
 
-  boolean isIncremental();
-
-  boolean isIncrementalUseCache();
-
-  // FIXME this is TextGen option, has nothing to do with generation
-  boolean isFailOnMissingTextGen();
-
-  // FIXME this is TextGen option, has nothing to do with generation
+  /**
+   * @deprecated this is TextGen option, has nothing to do with generation, moved to {@code TextGenSettings}.
+   *             Keep for a year and then remove
+   */
+  @Deprecated(forRemoval = true, since = "2022.2")
   boolean isGenerateDebugInfo();
 
   boolean isShowBadChildWarning();
 
-  boolean isDebugIncrementalDependencies();
+  /**
+   * @return {@code true} if you'd like to see warning when replacement of dynamic reference with static failed, {@link #createStaticReferences()}
+   * @since 2019.3
+   */
+  boolean warnDynamicToStaticReference();
 
   boolean isSaveTransientModels();
 
@@ -62,6 +63,8 @@ public interface IGenerationSettings {
    * It looks that use of dynamic references by default wasn't sensible decision at the first place, as resolution of dynamic reference
    * requires scope each time reference is accessed. It didn't induce any issue unless we got thousands of DynamicReferences, and their resolution
    * became nightmare. However, it's not obvious we do need dynamic references in the first place, for any node we refer to by name.
+   * As there are still quite a lot of references like these, there's a dedicated setting {@link #warnDynamicToStaticReference()} to control whether you'd like
+   * to see this warnings at all.
    */
   boolean createStaticReferences();
 
@@ -78,7 +81,7 @@ public interface IGenerationSettings {
    * <tt>compact templates</tt> - whether to show only template node closest to the output node.
    * <tt>group by change</tt> - individual changes grouped by either pair (input, output) or just input (forward trace) or output (for backward trace) node.
    */
-  public static class GenTraceSettings {
+  class GenTraceSettings {
     private boolean myGroupSteps = true;
     private boolean myCompactTemplates = false;
     private boolean myShowEmptySteps = false;

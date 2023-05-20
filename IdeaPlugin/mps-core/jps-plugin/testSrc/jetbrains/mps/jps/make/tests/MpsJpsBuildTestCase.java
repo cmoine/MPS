@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,18 +17,20 @@
 package jetbrains.mps.jps.make.tests;
 
 import com.intellij.openapi.application.PathManager;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.io.FileUtil;
-import jetbrains.mps.idea.logging.DelegatingLoggerFactory;
 import jetbrains.mps.idea.core.make.MPSMakeConstants;
 import jetbrains.mps.jps.make.fileUtil.FileRecursiveTraverser;
 import jetbrains.mps.jps.make.fileUtil.ProjectDirFinder;
 import jetbrains.mps.jps.make.fileUtil.SimpleFileReader;
-import org.apache.log4j.LogManager;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.jps.builders.JpsBuildTestCase;
+import org.jetbrains.jps.cmdline.ClasspathBootstrap;
+import org.jetbrains.jps.model.JpsDummyElement;
+import org.jetbrains.jps.model.JpsElement;
 import org.jetbrains.jps.model.java.JpsJavaExtensionService;
+import org.jetbrains.jps.model.library.sdk.JpsSdk;
 import org.jetbrains.jps.model.module.JpsModule;
 import org.jetbrains.jps.model.serialization.JpsProjectLoader;
 import org.jetbrains.jps.model.serialization.PathMacroUtil;
@@ -37,19 +39,12 @@ import org.jetbrains.jps.util.JpsPathUtil;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 public abstract class MpsJpsBuildTestCase extends JpsBuildTestCase {
-  static {
-    initLogging();
-  }
-
-  private static void initLogging() {
-    Logger.setFactory(DelegatingLoggerFactory.class);
-    LogManager.getLogger(MpsJpsBuildTestCase.class).info("The log4 has been initialized successfully");
-  }
 
   @NotNull
   @NonNls
@@ -125,6 +120,11 @@ public abstract class MpsJpsBuildTestCase extends JpsBuildTestCase {
   }
 
   @Override
+  protected JpsSdk<JpsDummyElement> addJdk(String name) {
+    return super.addJdk(name,null);
+  }
+
+  @Override
   protected void tearDown() throws Exception {
     File projectDir = getOrCreateProjectDir();
     try {
@@ -145,9 +145,8 @@ public abstract class MpsJpsBuildTestCase extends JpsBuildTestCase {
       allPathVariables.putAll(pathVariables);
       allPathVariables.put(PathMacroUtil.APPLICATION_HOME_DIR, PathManager.getHomePathFor(PathManager.class));
       allPathVariables.putAll(getAdditionalPathVariables());
-      JpsProjectLoader.loadProject(myProject, allPathVariables, fullProjectPath);
-    }
-    catch (IOException e) {
+      JpsProjectLoader.loadProject(myProject, allPathVariables, Path.of(fullProjectPath));
+    } catch (IOException e) {
       throw new RuntimeException(e);
     }
   }

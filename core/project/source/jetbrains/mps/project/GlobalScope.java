@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  */
 package jetbrains.mps.project;
 
-import jetbrains.mps.components.CoreComponent;
 import jetbrains.mps.smodel.BaseScope;
 import jetbrains.mps.util.iterable.CollectManyIterator;
 import org.jetbrains.annotations.NotNull;
@@ -31,31 +30,12 @@ import java.util.Iterator;
 /**
  * Global in a sense 'global for a given repository'. Since we used to have single repository, deemed 'global'.
  */
-public class GlobalScope extends BaseScope implements CoreComponent {
-  private static GlobalScope INSTANCE;
-
-  public static GlobalScope getInstance() {
-    return INSTANCE;
-  }
+public class GlobalScope extends BaseScope {
 
   protected final SRepository myRepository;
 
   public GlobalScope(SRepository moduleRepository) {
     myRepository = moduleRepository;
-  }
-
-  @Override
-  public void init() {
-    if (INSTANCE != null) {
-      throw new IllegalStateException("double initialization");
-    }
-
-    INSTANCE = this;
-  }
-
-  @Override
-  public void dispose() {
-    INSTANCE = null;
   }
 
   public String toString() {
@@ -71,27 +51,22 @@ public class GlobalScope extends BaseScope implements CoreComponent {
   @NotNull
   @Override
   public Iterable<SModel> getModels() {
-    return new Iterable<SModel>() {
+    return () -> new CollectManyIterator<>(getModules()) {
+      @Nullable
       @Override
-      public Iterator<SModel> iterator() {
-        return new CollectManyIterator<SModule, SModel>(getModules()) {
-          @Nullable
-          @Override
-          protected Iterator<SModel> translate(SModule module) {
-            return module.getModels().iterator();
-          }
-        };
+      protected Iterator<SModel> translate(SModule module) {
+        return module.getModels().iterator();
       }
     };
   }
 
   @Override
-  public SModule resolve(SModuleReference reference) {
+  public SModule resolve(@NotNull SModuleReference reference) {
     return myRepository.getModule(reference.getModuleId());
   }
 
   @Override
-  public SModel resolve(SModelReference reference) {
+  public SModel resolve(@NotNull SModelReference reference) {
     return reference.resolve(myRepository);
   }
 }

@@ -5,13 +5,10 @@ package jetbrains.mps.samples.Shapes.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import java.awt.Color;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.List;
 import java.util.Arrays;
@@ -22,12 +19,13 @@ import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public final class ColorReference__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x16bafbb4c6cd4cc5L, 0x83327c6de8729b3fL, 0x3a2b0182df2201afL, "jetbrains.mps.samples.Shapes.structure.ColorReference");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<Color> findColor_id1Os2kBLuoy8 = new SMethodBuilder<Color>(new SJavaCompoundTypeImpl(Color.class)).name("findColor").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("1Os2kBLuoy8").registry(REGISTRY).build();
+  public static final SMethod<Color> findColor_id1Os2kBLuoy8 = new SMethodBuilder<Color>(new SJavaCompoundTypeImpl(Color.class)).name("findColor").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(2097561739636344968L).languageId(0x83327c6de8729b3fL, 0x16bafbb4c6cd4cc5L).build2();
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(findColor_id1Os2kBLuoy8);
 
@@ -35,13 +33,13 @@ public final class ColorReference__BehaviorDescriptor extends BaseBHDescriptor {
   }
 
   /*package*/ static Color findColor_id1Os2kBLuoy8(@NotNull SNode __thisNode__) {
-    SNode color = SLinkOperations.getTarget(__thisNode__, MetaAdapterFactory.getReferenceLink(0x16bafbb4c6cd4cc5L, 0x83327c6de8729b3fL, 0x3a2b0182df2201afL, 0x3a2b0182df22029aL, "target"));
+    SNode color = SLinkOperations.getTarget(__thisNode__, LINKS.target$hpcG);
     if (color == null) {
       return Color.BLUE;
     }
     Class<Color> clazz = Color.class;
     try {
-      return (Color) clazz.getField(SPropertyOperations.getString(color, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name"))).get(clazz);
+      return (Color) clazz.getField(SPropertyOperations.getString(color, PROPS.name$MnvL)).get(clazz);
     } catch (SecurityException e) {
       return Color.BLUE;
     } catch (IllegalAccessException e) {
@@ -53,7 +51,6 @@ public final class ColorReference__BehaviorDescriptor extends BaseBHDescriptor {
   }
 
   /*package*/ ColorReference__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -97,5 +94,13 @@ public final class ColorReference__BehaviorDescriptor extends BaseBHDescriptor {
   @Override
   public SAbstractConcept getConcept() {
     return CONCEPT;
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SReferenceLink target$hpcG = MetaAdapterFactory.getReferenceLink(0x16bafbb4c6cd4cc5L, 0x83327c6de8729b3fL, 0x3a2b0182df2201afL, 0x3a2b0182df22029aL, "target");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }

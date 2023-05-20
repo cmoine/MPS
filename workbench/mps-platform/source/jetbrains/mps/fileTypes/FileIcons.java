@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,4 +29,5 @@ public class FileIcons {
   public static final Icon SOLUTION_ICON = Nodes.Solution;
   public static final Icon PROJECT_LANGUAGE_ICON = Nodes.Language;
   public static final Icon DEVKIT_ICON = Nodes.DevKit;
+  public static final Icon GENERATOR_ICON = Nodes.Generator;
 }

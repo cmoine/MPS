@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,149 +15,230 @@
  */
 package jetbrains.mps.smodel.presentation;
 
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.smodel.Generator;
-import jetbrains.mps.smodel.Language;
 import jetbrains.mps.smodel.SModelStereotype;
 import jetbrains.mps.smodel.SNodeUtil;
+import jetbrains.mps.smodel.SmartReferentUtil;
 import jetbrains.mps.util.NameUtil;
+import jetbrains.mps.util.StringUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SLanguage;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.module.SModule;
 
 import java.awt.Font;
+import java.util.Objects;
 
+/**
+ * This class provides utility methods for default presentation logic for referenced nodes.
+ *
+ * Here is some implementation notes how presentation text is calculated:
+ *
+ * 1) default presentation:
+ *     - custom text by overriding BC#getPresentation() or ISmartReferent#getPresentation(context)
+ *     - name from INamedConcept
+ *     - special presentation for smart. refs. TODO should be removed
+ *     - concept alias
+ * 2) matching text:
+ *     - custom text by overriding ISmartReferent#getMatchingText(context)
+ *     - resolveInfo from IResolveInfo
+ *       TODO IResolveInfo now uses mostly to separate matchingText and visibleMatchingText
+ *     - default presentation
+ * 3) visible matching text:
+ *     - custom text by overriding ISmartReferent#getVisibleMatchingText(context)
+ *     - default presentation
+ * 4) description text:
+ *     - custom text by overriding ISmartReferent#getDescriptionText(context)
+ *     - {conceptName} ( {where} )
+ *
+ * These facilities should be used only in editor-runtime for specifying the textual presentation of referenced node in completion, etc.
+ * Other subsystems should not rely on it and use {@link SNode#getPresentation()} or {@link SNode#getName()} instead.
+ * TODO Should be moved to editor-runtime?
+ */
 public class NodePresentationUtil {
 
   public static boolean isLocalTo(SNode referenceNode, SNode referentNode) {
     SModel toModel = referenceNode.getModel();
-    if (toModel == null) return false;
+    if (toModel == null) {
+      return false;
+    }
     SModel fromModel = referentNode.getModel();
-    if (fromModel == null) return false;
-
-    SModule referenceModule = toLanguage(toModel.getModule());
-    if (referenceModule instanceof Language) {
-      SModule referentModule = toLanguage(fromModel.getModule());
-      return referentModule == referenceModule;
+    if (fromModel == null) {
+      return false;
+    }
+    if (toModel == fromModel) {
+      return true;
     }
 
-    return toModel == fromModel;
+    SModule referenceModule = toModel.getModule();
+    SModule referentModule = fromModel.getModule();
+    if (referentModule == referenceModule) {
+      return true;
+    }
+    if (referenceModule instanceof Generator || referentModule instanceof Generator) {
+      // at least one of modules is generator, so toLanguage != null and no null == null case here.
+      return Objects.equals(toLanguage(referenceModule), toLanguage(referentModule));
+    }
+    return false;
   }
 
   public static int getFontStyle(SNode referenceNode, SNode referentNode) {
     SModel model = referentNode.getModel();
-    if (model == null) return Font.PLAIN;
-    if (!SModelStereotype.isUserModel(model)) return Font.PLAIN;
+    if (model == null) {
+      return Font.PLAIN;
+    }
+    if (SModelStereotype.isStubModel(model)) {
+      return Font.PLAIN;
+    }
     return isLocalTo(referenceNode, referentNode) ? Font.BOLD : Font.PLAIN;
   }
 
   public static int getSortPriority(SNode referenceNode, SNode referentNode) {
-    if (isLocalTo(referenceNode, referentNode)) return -2;
+    if (isLocalTo(referenceNode, referentNode)) {
+      return -2;
+    }
     SModel model = referentNode.getModel();
-    if (model == null) return 0;
-    if (SModelStereotype.isUserModel(model)) return -1;
+    if (model == null) {
+      return 0;
+    }
+    if (!SModelStereotype.isStubModel(model)) {
+      return -1;
+    }
     return 0;
   }
 
-  private static SModule toLanguage(SModule m) {
+  private static SLanguage toLanguage(SModule m) {
     if (m instanceof Generator) {
-      return ((Generator) m).getSourceLanguage();
+      return ((Generator) m).sourceLanguage();
     }
-    return m;
-  }
-  public static String matchingText(SAbstractConcept concept) {
-    return matchingText(concept, false);
+    return null;
   }
 
-  public static String matchingText(SAbstractConcept concept, boolean referentPresentation) {
-    if (!referentPresentation && !concept.getConceptAlias().isEmpty()) {
+  /**
+   * Provides a text that should be shown in editor to present a referenced node.
+   */
+  public static String presentation(@NotNull SNode node, @Nullable SNode context) {
+    return getPresentation(node, SmartReferentUtil.getPresentation(context, node));
+  }
+
+  public static String matchingText(SAbstractConcept concept) {
+    if (!concept.getConceptAlias().isEmpty()) {
       return concept.getConceptAlias();
     }
     return concept.getName();
   }
 
+  /**
+   *
+   * @deprecated use {@link #matchingText(SAbstractConcept)}  instead.
+   */
+@Deprecated(since = "3.5", forRemoval = true)
+  public static String matchingText(SAbstractConcept concept, boolean referentPresentation) {
+    return matchingText(concept);
+  }
+
+  /**
+   *
+   * @deprecated This method provides a visible matching text instead of real matching text, that might be confusing.
+   *             Should be replaced with {@link #visibleMatchingText(SNode, SNode)}.
+   */
+@Deprecated(since = "3.5", forRemoval = true)
   public static String matchingText(SNode node) {
-    return matchingText(node, false);
+    return visibleMatchingText(node, null);
   }
 
+  /**
+   *
+   * @deprecated This method provides a visible matching text instead of real matching text, that might be confusing.
+   *             Should be replaced with {@link #visibleMatchingText(SNode, SNode)}.
+   */
+@Deprecated(since = "3.5", forRemoval = true)
   public static String matchingText(SNode node, boolean referent_presentation) {
-    return matchingText(node, referent_presentation, true);
+    return visibleMatchingText(node, null);
   }
 
+  /**
+   *
+   * @deprecated use {@link #matchingText(SNode, SNode)}, {@link #matchingText(SNode, SNode, boolean)} or {@link #visibleMatchingText(SNode, SNode)}
+   */
+@Deprecated(since = "3.5", forRemoval = true)
   public static String matchingText(SNode node, boolean referent_presentation, boolean visible) {
-    // handle concept declarations is a special way.
-    if (SNodeUtil.isInstanceOfConceptDeclaration(node)) {
-      if (!referent_presentation) {
-        String alias = SNodeUtil.getConceptAlias(node);
-        if (alias != null) {
-          return alias;
-        }
-      }
-      return node.getName();
-    }
+    return matchingText(node, null, visible);
+  }
 
-    if (!visible) {
-      if (node.getConcept().isSubConceptOf(SNodeUtil.concept_IResolveInfo)) {
-        return SNodeUtil.getResolveInfo(node);
-      }
+  /**
+   * Provides a text that will be matched with user-typed pattern in completion menu.
+   */
+  public static String matchingText(@NotNull SNode node, @Nullable SNode context) {
+    return getPresentation(node, SmartReferentUtil.getMatchingText(context, node));
+  }
+
+  /**
+   * It's preferred to use {@link #matchingText(SNode, SNode)} or {@link #visibleMatchingText(SNode, SNode)} instead.
+   */
+  public static String matchingText(@NotNull SNode node, @Nullable SNode context, boolean visible) {
+    return getPresentation(node, SmartReferentUtil.getMatchingText(context, node, visible));
+  }
+
+  /**
+   * Provides a text that presents given node in completion menu.
+   * This text also can be used for matching with user-typed pattern,
+   * if there is no necessity to facilitate the separation between real matching text and visible matching text.
+   */
+  public static String visibleMatchingText(@NotNull SNode node, @Nullable SNode context) {
+    return getPresentation(node, SmartReferentUtil.getVisibleMatchingText(context, node));
+  }
+
+  private static String getPresentation(SNode node, String custom) {
+    if (!StringUtil.isEmpty(custom)) {
+      return custom;
     }
     return node.getPresentation();
   }
 
   public static String descriptionText(SAbstractConcept concept) {
-    return descriptionText(concept, false);
+    if (!concept.getShortDescription().isEmpty()) {
+      return concept.getShortDescription();
+    }
+    return "(" + NameUtil.compactNamespace(concept.getLanguage().getQualifiedName()) + ")";
   }
 
+  /**
+   * @deprecated use {@link #descriptionText(SAbstractConcept)} instead
+   */
+@Deprecated(since = "3.5", forRemoval = true)
   public static String descriptionText(SAbstractConcept concept, boolean referentPresentation) {
-    if (concept instanceof SConcept) {
-      if (!referentPresentation) {
-        if (!concept.getShortDescription().isEmpty()) {
-          return concept.getShortDescription();
-        }
-        SConcept superConcept = ((SConcept) concept).getSuperConcept();
-        if (superConcept != null) {
-          return "(" + superConcept.getName() + " in " + superConcept.getLanguage().getQualifiedName() + ")";
-        }
-      }
-      return SNodeUtil.concept_ConceptDeclaration.getName() + " (" + SNodeUtil.concept_ConceptDeclaration.getLanguage().getQualifiedName() + ")";
-    }
-    return "";
+    return descriptionText(concept);
   }
 
   public static String descriptionText(SNode node) {
-    return descriptionText(node, false);
+    return descriptionText(node, null);
   }
 
+  /**
+   * @deprecated use {@link #descriptionText(SNode)} instead.
+   */
+@Deprecated(since = "3.5", forRemoval = true)
   public static String descriptionText(SNode node, boolean referent_presentation) {
-    if (SNodeUtil.isInstanceOfConceptDeclaration(node) && !referent_presentation) {
-      String description = SNodeUtil.getConceptShortDescription(node);
-      if (description != null) {
-        return description;
-      }
+    return descriptionText(node, null);
+  }
 
-      SNode anExtends = SNodeUtil.getConceptDeclaration_Extends(node);
-      if (anExtends != null) {
-        String namespace = NameUtil.namespaceFromConceptFQName(NameUtil.nodeFQName(node));
-        namespace = NameUtil.compactNamespace(namespace);
-        return "(" + anExtends.getName() + " in " + namespace + ")";
-      }
-      return "";
+  public static String descriptionText(SNode node, SNode context) {
+    String description = SmartReferentUtil.getDescriptionText(context, node);
+    if (!StringUtil.isEmpty(description)) {
+      return description;
     }
-
     return descriptionText_internal(node);
   }
 
   private static String descriptionText_internal(SNode node) {
     if (node == null) {
       return "";
-    }
-
-    String shortDescription = SNodeUtil.getNodeShortDescription(node);
-    if (shortDescription != null) {
-      return shortDescription;
     }
 
     if (node.getParent() == null) {
@@ -169,22 +250,30 @@ public class NodePresentationUtil {
     }
     SContainmentLink containmentLink = node.getContainmentLink();
     assert containmentLink != null;
-    return containmentLink.getRoleName() + " (" + NameUtil.compactNodeFQName(node.getContainingRoot()) + ")";
+    return containmentLink.getName() + " (" + NameUtil.compactNodeFQName(node.getContainingRoot()) + ")";
   }
 
+  /**
+   * @deprecated single use for deprecated property override doesn't justify existence of this odd logic
+   */
+  @Deprecated(since = "2023.1", forRemoval = true)
   public static String getAliasOrConceptName(SNode node) {
-    String alias = SNodeUtil.getConceptAlias(jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations.getConceptDeclaration(node));
-    if (alias != null) {
+    final SConcept c = node.getConcept();
+    String alias = c.getConceptAlias();
+    if (alias != null && !alias.isBlank()) {
       return alias;
     }
-
-    return node.getConcept().getName();
+    return c.getName();
   }
 
+  /**
+   * @deprecated single use doesn't justify existence of this odd logic
+   */
+  @Deprecated(since = "2023.1", forRemoval = true)
   public static String getRoleInParentOrConceptName(SNode node) {
-    String role = node.getRoleInParent();
+    SContainmentLink role = node.getContainmentLink();
     if (role != null) {
-      return role;
+      return role.getName();
     }
     if (SNodeUtil.isInstanceOfConceptDeclaration(node) && node.getName() != null) {
       return node.getName();

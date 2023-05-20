@@ -8,25 +8,25 @@ public class RootCustom {
   public RootCustom() {
     int i = 42;
     q = i;
-    // in ctor 2681305894288275125 
-    // in ctor 4146564171992399882 
-    // in ctor 4146564171992399888 
-    // in ctor 2681305894288275132 
-    // in ctor 2681305894288275179 
-    // in ctor 2681305894288379455 
-    // in ctor 2681305894288379457 
-    // in ctor 3571912445010045823 
-    // in ctor 6266395626233624824 
-    // in ctor 5857536350883158504 
-    // in ctor 6266395626233719470 
-    // in ctor 6509983489804965801 
-    // in ctor 2163819695913718896 
-    // in ctor 2163819695913721858 
-    // in ctor 5857536350883158508 
-    // in ctor 7870321878390043349 
-    // in ctor 6509983489804965645 
-    // in ctor 6010543442198725792 
-    // in ctor 3571912445010045826 
+    // to ctor
+    // to ctor
+    // to ctor
+    // to ctor
+    // to ctor
+    // to ctor
+    // to ctor
+    // to ctor
+    // to ctor
+    // to ctor
+    // to ctor
+    // to ctor
+    // to ctor
+    // to ctor
+    // to ctor
+    // to ctor
+    // to ctor
+    // to ctor
+    // to ctor
   }
   public void main() {
     {
@@ -36,16 +36,16 @@ public class RootCustom {
       e2 *= (i + 5);
       i = e2 * i;
 
-      if (!((!(e2 == 10) || !(i == 43)))) {
+      if (!(!(e2 == 10) || !(i == 43))) {
         boolean res = true;
         for (int qq = 0; qq < 10; qq++) {
-          res = !((!(res) || !((i - e2 > qq))));
+          res = !(!(res) || !(i - e2 > qq));
         }
       }
-      // Block 
+      // Block
 
       {
-        // extraWorktrue extraWork 
+        // ss
         int var12 = 55;
       }
       {
@@ -53,7 +53,7 @@ public class RootCustom {
         e = 5;
       }
       {
-        // myWork1true myWork1 
+        // ss
         int var12 = 175 * (1 + e2);
       }
       {
@@ -61,7 +61,7 @@ public class RootCustom {
         e = 5;
       }
       {
-        // myWork2true myWork2 
+        // ss
         int var12 = 175 * (1 + e2);
       }
       {
@@ -78,60 +78,60 @@ public class RootCustom {
     }
   }
   public static void statement2681305894288275125() {
-    // jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement 
+    // a
   }
   public static void statement4146564171992399882() {
-    // jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement 
+    // a
   }
   public static void statement4146564171992399888() {
-    // jetbrains.mps.baseLanguage.structure.ExpressionStatement 
+    // a
   }
   public static void statement2681305894288275132() {
-    // jetbrains.mps.baseLanguage.structure.ExpressionStatement 
+    // a
   }
   public static void statement2681305894288275179() {
-    // jetbrains.mps.baseLanguage.structure.ExpressionStatement 
+    // a
   }
   public static void statement2681305894288379455() {
-    // jetbrains.mps.baseLanguage.structure.Statement 
+    // a
   }
   public static void statement2681305894288379457() {
-    // jetbrains.mps.baseLanguage.structure.IfStatement 
+    // a
   }
   public static void statement3571912445010045823() {
-    // jetbrains.mps.baseLanguage.structure.BlockStatement 
+    // a
   }
   public static void statement6266395626233624824() {
-    // jetbrains.mps.baseLanguage.structure.Statement 
+    // a
   }
   public static void statement5857536350883158504() {
-    // jetbrains.mps.transformation.test.outputLang.structure.CustomStatement 
+    // a
   }
   public static void statement6266395626233719470() {
-    // jetbrains.mps.transformation.test.outputLang.structure.CustomStatement 
+    // a
   }
   public static void statement6509983489804965801() {
-    // jetbrains.mps.transformation.test.outputLang.structure.CustomStatement 
+    // a
   }
   public static void statement2163819695913718896() {
-    // jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement 
+    // a
   }
   public static void statement2163819695913721858() {
-    // jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement 
+    // a
   }
   public static void statement5857536350883158508() {
-    // jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement 
+    // a
   }
   public static void statement7870321878390043349() {
-    // jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement 
+    // a
   }
   public static void statement6509983489804965645() {
-    // jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement 
+    // a
   }
   public static void statement6010543442198725792() {
-    // jetbrains.mps.transformation.test.outputLang.structure.TwoVarStatement 
+    // a
   }
   public static void statement3571912445010045826() {
-    // jetbrains.mps.baseLanguage.structure.SingleLineComment 
+    // a
   }
 }

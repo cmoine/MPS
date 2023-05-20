@@ -50,11 +50,6 @@ public class CallAction_ToggleCellFolding extends AbstractCellAction {
     if (editorCell == null) {
       return null;
     }
-    return CellFinderUtil.findParent(editorCell, new Condition<EditorCell_Collection>() {
-      @Override
-      public boolean met(EditorCell_Collection object) {
-        return object.isCollapsed() || object.isFoldable();
-      }
-    });
+    return CellFinderUtil.findParent(editorCell, object -> object.isCollapsed() || object.isFoldable());
   }
 }

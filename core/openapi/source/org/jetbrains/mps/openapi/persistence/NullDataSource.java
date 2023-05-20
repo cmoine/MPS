@@ -16,6 +16,7 @@
 package org.jetbrains.mps.openapi.persistence;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.openapi.persistence.datasource.DataSourceType;
 
 /**
  * An empty implementation of the DataSource interface.
@@ -29,11 +30,11 @@ public final class NullDataSource implements DataSource {
   }
 
   @Override
-  public void addListener(DataSourceListener listener) {
+  public void addListener(@NotNull DataSourceListener listener) {
   }
 
   @Override
-  public void removeListener(DataSourceListener listener) {
+  public void removeListener(@NotNull DataSourceListener listener) {
   }
 
   @Override
@@ -44,5 +45,21 @@ public final class NullDataSource implements DataSource {
   @Override
   public boolean isReadOnly() {
     return true;
+  }
+
+  @NotNull
+  @Override
+  public DataSourceType getType() {
+    return NullDataSourceType.INSTANCE;
+  }
+
+  public enum NullDataSourceType implements DataSourceType {
+    INSTANCE;
+
+    @NotNull
+    @Override
+    public String getName() {
+      return "[NULL]";
+    }
   }
 }

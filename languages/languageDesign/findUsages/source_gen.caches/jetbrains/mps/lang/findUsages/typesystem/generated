@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-9412w5zybhmaikwjv5rupncy866kap0" />
+<product version="3" modelHash="a2ksksxnbc79ozd4qeb4kat9pnb4bna">
+  <files names="TypesystemDescriptor.java:typeof_ConceptFunctionParameter_node_InferenceRule.java:typeof_ExecuteFindersGetSearchResults_InferenceRule.java:typeof_FinderReferenceExpression_InferenceRule.java:typeof_ForEachFoundNodeExpression_InferenceRule.java:typeof_ForEachNodeFoundClosureParameterDeclaration_InferenceRule.java:typeof_MakeFindersProvider_InferenceRule.java:typeof_NewExecuteFinderExpression_InferenceRule.java:typeof_NodeStatement_InferenceRule.java:typeof_ResultStatement2_InferenceRule.java:typeof_ResultStatement_InferenceRule.java" />
+</product>
 

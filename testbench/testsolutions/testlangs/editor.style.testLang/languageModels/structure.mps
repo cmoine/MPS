@@ -2,9 +2,7 @@
 <model ref="r:710d1207-58b1-4fe3-ba47-f417dc16c10c(jetbrains.mps.lang.editor.styleTests.structure)">
   <persistence version="9" />
   <languages>
-    <use id="c72da2b9-7cce-4447-8389-f407dc1158b7" name="jetbrains.mps.lang.structure" version="3" />
-    <use id="982eb8df-2c96-4bd7-9963-11712ea622e5" name="jetbrains.mps.lang.resources" version="2" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="78434eb8-b0e5-444b-850d-e7c4ad2da9ab(jetbrains.mps.devkit.aspect.structure)" />
   </languages>
   <imports>
     <import index="tpck" ref="r:00000000-0000-4000-0000-011c89590288(jetbrains.mps.lang.core.structure)" implicit="true" />
@@ -53,9 +51,9 @@
     <property role="EcuMT" value="8422442021223268684" />
     <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="7jyxAjKlwmI" role="1TKVEi">
-      <property role="20lmBu" value="aggregation" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="node" />
-      <property role="20lbJX" value="0..n" />
+      <property role="20lbJX" value="fLJekj5/0..n" />
       <property role="IQ2ns" value="8422442021223269806" />
       <ref role="20lvS9" node="7jyxAjKlw5c" resolve="NodeContainer" />
     </node>
@@ -111,6 +109,44 @@
     <property role="34LRSv" value="leaf" />
     <property role="EcuMT" value="4078300376848435002" />
     <ref role="1TJDcQ" node="7jyxAjKlw5c" resolve="NodeContainer" />
+  </node>
+  <node concept="1TIwiD" id="7qnskOdiu8K">
+    <property role="EcuMT" value="8545423393708171824" />
+    <property role="TrG5h" value="CustomFontContainer" />
+    <property role="34LRSv" value="customFontContainer" />
+    <ref role="1TJDcQ" node="7jyxAjKlw5c" resolve="NodeContainer" />
+    <node concept="1TJgyi" id="7qnskOdizep" role="1TKVEl">
+      <property role="IQ2nx" value="8545423393708192665" />
+      <property role="TrG5h" value="fontFamily" />
+      <ref role="AX2Wp" to="tpck:fKAOsGN" resolve="string" />
+    </node>
+    <node concept="1TJgyi" id="7qnskOdjDdr" role="1TKVEl">
+      <property role="IQ2nx" value="8545423393708479323" />
+      <property role="TrG5h" value="fontSize" />
+      <ref role="AX2Wp" to="tpck:fKAQMTA" resolve="integer" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="rhJBLcRTlf">
+    <property role="EcuMT" value="491383275435038031" />
+    <property role="TrG5h" value="SerifNode" />
+    <property role="34LRSv" value="serifNode" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
+  </node>
+  <node concept="1TIwiD" id="rhJBLcRTlJ">
+    <property role="EcuMT" value="491383275435038063" />
+    <property role="TrG5h" value="SerifFromQueryNode" />
+    <property role="34LRSv" value="serifFromQueryNode" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
+  </node>
+  <node concept="1TIwiD" id="6$E6NNCnd_R">
+    <property role="EcuMT" value="7577899271414667639" />
+    <property role="TrG5h" value="URLCellContainer" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
+    <node concept="1TJgyi" id="2d9V7JtVffr" role="1TKVEl">
+      <property role="IQ2nx" value="2542823481375781851" />
+      <property role="TrG5h" value="customUrl" />
+      <ref role="AX2Wp" to="tpck:fKAOsGN" resolve="string" />
+    </node>
   </node>
 </model>
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,9 @@
  */
 package jetbrains.mps.nodeEditor.cellMenu;
 
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.SubstituteAction;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ import java.util.List;
  * Date: Nov 29, 2006
  */
 public class CompositeSubstituteInfo extends AbstractNodeSubstituteInfo {
-  private static final Logger LOG = LogManager.getLogger(CompositeSubstituteInfo.class);
+  private static final Logger LOG = Logger.getLogger(CompositeSubstituteInfo.class);
 
   private CellContext myCellContext;
   private SubstituteInfoPartExt[] myExtParts;
@@ -43,12 +42,12 @@ public class CompositeSubstituteInfo extends AbstractNodeSubstituteInfo {
 
   @Override
   protected List<SubstituteAction> createActions() {
-    List<List<? extends SubstituteAction>> actionLists = new LinkedList<List<? extends SubstituteAction>>();
+    List<List<? extends SubstituteAction>> actionLists = new LinkedList<>();
     for (SubstituteInfoPartExt menuPart : myExtParts) {
       try {
         actionLists.add(menuPart.createActions(myCellContext, getEditorContext()));
       } catch (Throwable e) {
-        LOG.error(null, e);
+        LOG.error(e);
       }
     }
     return flatten(actionLists);
@@ -59,7 +58,7 @@ public class CompositeSubstituteInfo extends AbstractNodeSubstituteInfo {
     for (List<? extends SubstituteAction> actionList : actionLists) {
       size += actionList.size();
     }
-    List<SubstituteAction> result = new ArrayList<SubstituteAction>(size);
+    List<SubstituteAction> result = new ArrayList<>(size);
     for (List<? extends SubstituteAction> actionList : actionLists) {
       result.addAll(actionList);
     }

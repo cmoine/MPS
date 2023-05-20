@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,14 @@ package jetbrains.mps.generator;
 
 import jetbrains.mps.generator.impl.RuleManager;
 import jetbrains.mps.generator.impl.TemplateSwitchGraph;
+import jetbrains.mps.generator.plan.CheckpointIdentity;
 import jetbrains.mps.generator.runtime.TemplateMappingConfiguration;
 import jetbrains.mps.generator.runtime.TemplateModel;
 import jetbrains.mps.generator.runtime.TemplateModule;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SLanguage;
+import org.jetbrains.mps.openapi.model.SModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,7 +47,22 @@ public interface ModelGenerationPlan {
   // Besides, even if language is 'covered', nothing tells it is 'yet to get processed' one, not the one 'already processed'
   // (so/ output nodes in that language still make no sense). Perhaps, could be part of Step, and each Step knows
   // what languages are to come down the road?
+  // Shall drop, but first need to replace with a mechanism that collects all languages that emerge during generation
   boolean coversLanguage(SLanguage language);
+
+  /*
+   * Give a chance for a plan implementation to accommodate to actual input being transformed. Plans are inherently read-only,
+   * so to give an input-specific plan, one need to make a copy of a template and augment it.
+   * <p/>
+   * Invoked once per each processed {@linkplain GeneratorTask generation task} prior to any step.
+   *
+   * @return An instance of the plan modified according to languages present in the task, or {@code this} if this
+   * plan doesn't depend on transformed input.
+   */
+//  @NotNull
+//  default ModelGenerationPlan prepare(@NotNull GeneratorTask task) {
+//    return this;
+//  }
 
   interface Step {
     // e.g. to print MCs that take part, if Transform step populates objects rather than return list of MC
@@ -52,35 +70,50 @@ public interface ModelGenerationPlan {
   }
 
   final class Checkpoint implements Step {
-    private final String myName;
+    private final boolean mySynchOnly;
+    private final CheckpointIdentity myIdentity;
 
-    public Checkpoint(@NotNull String name) {
-      myName = name;
+    public Checkpoint(@NotNull CheckpointIdentity cpIdentity) {
+      this(cpIdentity, false);
+    }
+
+    public Checkpoint(@NotNull CheckpointIdentity cpIdentity, boolean synchOnly) {
+      mySynchOnly = synchOnly;
+      myIdentity = cpIdentity;
     }
 
     public String getName() {
-      return myName;
+      // FIXME I'm not sure I shall keep this method at all. Is it describe(), merely to present GP to user?
+      return myIdentity.getName();
     }
 
-    // FIXME do I still need hashCode/equals when I can use CheckpointIdentity?
-
-    @Override
-    public int hashCode() {
-      return myName.hashCode();
+    public CheckpointIdentity getIdentity() {
+      return myIdentity;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-      return (obj instanceof Checkpoint) ? myName.equals(((Checkpoint) obj).myName) : false;
+    /**
+     * @return {@code true} if model state at this checkpoint is to be saved into a storage, {@code false} means this checkpoint is for
+     * synchronization with other models only.
+     */
+    public boolean isPersisted() {
+      return !mySynchOnly;
     }
   }
 
   final class Transform implements Step {
     private final TemplateMappingConfiguration[] myMapCfg;
+    private final boolean myKeepLabeledTransformations;
 
     public Transform(@NotNull Collection<TemplateMappingConfiguration> tmc) {
-      myMapCfg = tmc.toArray(new TemplateMappingConfiguration[tmc.size()]);
+      myMapCfg = tmc.toArray(new TemplateMappingConfiguration[0]);
+      myKeepLabeledTransformations = false;
     }
+
+    public Transform(@NotNull Collection<TemplateMappingConfiguration> tmc, boolean keepLabeledTransforms) {
+      myMapCfg = tmc.toArray(new TemplateMappingConfiguration[0]);
+      myKeepLabeledTransformations = keepLabeledTransforms;
+    }
+
 
     @NotNull
     public List<TemplateMappingConfiguration> getTransformations() {
@@ -89,7 +122,7 @@ public interface ModelGenerationPlan {
 
     // Do I need this?
     public List<TemplateModel> getTemplateModels() {
-      ArrayList<TemplateModel> rv = new ArrayList<TemplateModel>(myMapCfg.length);
+      ArrayList<TemplateModel> rv = new ArrayList<>(myMapCfg.length);
       // generally, there are very few distinct template models per step, don't care about performance here
       for (TemplateMappingConfiguration mc : myMapCfg) {
         if (!rv.contains(mc.getModel())) {
@@ -97,6 +130,10 @@ public interface ModelGenerationPlan {
         }
       }
       return rv;
+    }
+
+    public boolean isLabeledTransformationsKept() {
+      return myKeepLabeledTransformations;
     }
 
     // alternatively, why not to give control over rule/switch manager to the step?
@@ -113,5 +150,30 @@ public interface ModelGenerationPlan {
     TemplateSwitchGraph getSwitchGraph() {
       return null;
     }
+  }
+
+  final class Fork implements Step {
+    private final List<Step> myBranch;
+
+    public Fork(List<Step> branch) {
+      myBranch = branch;
+    }
+
+    public List<Step> getBranch() {
+      return myBranch;
+    }
+
+  }
+
+  /**
+   * Marker to indicate source capable to supply ModelGenerationPlan for a model
+   */
+  interface Provider {
+    /**
+     * @param model what we need plan for.
+     * @return {@code null} if this provider could not give a plan for the model
+     */
+    @Nullable
+    ModelGenerationPlan getPlan(@NotNull SModel model);
   }
 }

@@ -15,6 +15,6 @@ public class RemoveSlot_QuickFix extends QuickFix_Runtime {
     return "Remove the event";
   }
   public void execute(SNode node) {
-    SNodeOperations.detachNode(node);
+    SNodeOperations.deleteNode(node);
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,9 @@
  */
 package jetbrains.mps.make;
 
+import jetbrains.mps.make.ModulesContainer.JavaModule;
 import jetbrains.mps.project.MPSExtentions;
-import jetbrains.mps.project.SModuleOperations;
 import jetbrains.mps.vfs.FileSystem;
-import jetbrains.mps.vfs.IFile;
 import org.jetbrains.mps.openapi.module.SModule;
 
 import java.io.File;
@@ -31,34 +30,34 @@ import java.util.List;
 import java.util.Map;
 
 // FIXME AP refactor
-public class ModuleSources {
-  private final Map<SModule, ModuleSources> myAvailableSources;
+// FIXME [artem] just remove it along with the legacy make branch in ModuleMaker
+//       but have to deal with TestMakeOnRealProject first
+public final class ModuleSources {
+  private Map<SModule, ModuleSources> myAvailableSources;
   private Dependencies myDependencies;
-  private SModule myModule;
-  private Map<String, JavaFile> myJavaFiles = new HashMap<String, JavaFile>();
-  private Map<String, ResourceFile> myResourceFiles = new HashMap<String, ResourceFile>();
+  private final JavaModule myModule;
+  private final Map<String, JavaFile> myJavaFiles = new HashMap<>();
+  private final Map<String, ResourceFile> myResourceFiles = new HashMap<>();
 
-  private List<File> myFilesToDelete = new ArrayList<File>();
-  private List<JavaFile> myFilesToCompile = new LinkedList<JavaFile>();
-  private List<ResourceFile> myResourcesToCopy = new LinkedList<ResourceFile>();
+  private final List<File> myFilesToDelete = new ArrayList<>();
+  private final List<JavaFile> myFilesToCompile = new LinkedList<>();
+  private final List<ResourceFile> myResourcesToCopy = new LinkedList<>();
 
   /**
    * @param module Module with JavaModuleFacet
    */
   ModuleSources(SModule module, Dependencies deps) {
-    this(module, Collections.<SModule, ModuleSources>emptyMap(), deps);
+    this(new JavaModule(module));
+    collectOutputFilesInfo(Collections.emptyMap(), deps);
   }
 
   /**
    * @param module Module with JavaModuleFacet
    */
-  ModuleSources(SModule module, Map<SModule, ModuleSources> availableSources, Dependencies deps) {
+  ModuleSources(JavaModule module) {
     myModule = module;
-    myAvailableSources = availableSources;
-    myDependencies = deps;
 
     collectInputFilesInfo();
-    collectOutputFilesInfo();
   }
 
   public Collection<File> getFilesToDelete() {
@@ -91,7 +90,7 @@ public class ModuleSources {
   }
 
   private void collectInputFilesInfo() {
-    for (String source : SModuleOperations.getAllSourcePaths(myModule)) {
+    for (String source : myModule.getAllSourcePaths()) {
       File dir = new File(source);
       collectInput(dir, dir.list(), new StringBuilder(), new StringBuilder());
     }
@@ -145,14 +144,17 @@ public class ModuleSources {
     }
   }
 
-  private void collectOutputFilesInfo() {
+  /*package*/ void collectOutputFilesInfo(Map<SModule, ModuleSources> availableSources, Dependencies deps) {
+    myAvailableSources = availableSources;
+    myDependencies = deps;
     myFilesToCompile.addAll(myJavaFiles.values());
     myResourcesToCopy.addAll(myResourceFiles.values());
 
-    IFile classesGen = SModuleOperations.getJavaFacet(myModule).getClassesGen();
-    if (classesGen == null) return;
-    File outputDir = new File(classesGen.getPath());
-    collectOutput(outputDir, outputDir.list(), new StringBuilder(), new StringBuilder());
+    File classesGen = myModule.getClassesOut();
+    if (classesGen == null) return; // generally, shall not happen, revisit getClassesOut()
+    collectOutput(classesGen, classesGen.list(), new StringBuilder(), new StringBuilder());
+    myAvailableSources = null;
+    myDependencies = null;
   }
 
   private boolean isFileUpToDate(JavaFile javaFile, long classFileLastModified) {
@@ -161,19 +163,24 @@ public class ModuleSources {
     }
 
     for (String fqName : myDependencies.getAllDependencies(javaFile.getClassName())) {
-      final SModule module = myDependencies.getModule(fqName);
-      if (module != null) {
-        JavaFile file = myJavaFiles.get(fqName);
-        if (file == null) {
+      JavaFile file = myJavaFiles.get(fqName);
+      if (file == null) {
+        final SModule module = myDependencies.getModule(fqName);
+        if (module != null) {
           final ModuleSources targetModule = myAvailableSources.get(module);
           if (targetModule != null) {
             file = targetModule.getJavaFile(fqName);
           }
         }
-        long javaFileLastModified = file != null ? file.getLastModified() : myDependencies.getJavaFileLastModified(fqName);
-        if (javaFileLastModified == 0 || javaFileLastModified > classFileLastModified) {
-          return false;
-        }
+      }
+      // assume all the module sources we care to check present in myAvailableSources, don't look anywhere else
+      //     here used to be code that tried some brutal lookup with Dependencies.getJavaFileLastModified()
+      //     but now I assume if there are sources we care to check, they are part of myAvailableSources.
+      //     After all, we built Dependencies based on same modules that serve as input for myAvailableSources,
+      //     see ModuleContainer.
+      if (file != null && file.getLastModified() > classFileLastModified) {
+        // source file of one of our dependencies is older than our class file
+         return false;
       }
     }
     return true;
@@ -190,7 +197,7 @@ public class ModuleSources {
       if (childName.endsWith(MPSExtentions.DOT_CLASSFILE)) {
         boolean isInnerClass = false;
         String containerName = childName.substring(0, childName.length() - MPSExtentions.DOT_CLASSFILE.length());
-        int indexOfDollar = containerName.indexOf("$");
+        int indexOfDollar = containerName.indexOf('$');
         if (indexOfDollar > 0) {
           containerName = containerName.substring(0, indexOfDollar);
           isInnerClass = true;

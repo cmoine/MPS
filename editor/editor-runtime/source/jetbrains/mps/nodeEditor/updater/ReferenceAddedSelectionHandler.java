@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,12 +42,11 @@ class ReferenceAddedSelectionHandler extends ModelEventsSelectionHandler {
     }
   }
 
-  private EditorCell getCellToSelect(EditorComponent editorComponent) {
+  private EditorCell getCellToSelect(jetbrains.mps.openapi.editor.EditorComponent editorComponent) {
     SNode sourceNode = myReference.getSourceNode();
-    String role = myReference.getRole();
-    if (sourceNode == null || role == null) {
+    if (sourceNode == null) {
       return null;
     }
-    return editorComponent.findNodeCellWithRole(sourceNode, role);
+    return editorComponent.findNodeCellWithRole(sourceNode, myReference.getLink());
   }
 }

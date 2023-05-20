@@ -159,11 +159,11 @@
       <scope id="1153940807217" at="16,0,148,0">
         <var name="args" id="1153940807312" />
       </scope>
-      <unit id="1224754223475" at="21,23,60,13" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_map_operation$3" />
-      <unit id="1224754223475" at="19,19,62,9" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_map_operation$2" />
+      <unit id="1224754223475" at="21,23,60,13" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_map_operation$1$1$1" />
+      <unit id="1224754223475" at="19,19,62,9" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_map_operation$1$1" />
       <unit id="1224754223475" at="17,54,64,5" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_map_operation$1" />
-      <unit id="1224754223621" at="73,23,137,13" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_map_operation$4" />
-      <unit id="1224754223621" at="71,19,139,9" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_map_operation$3" />
+      <unit id="1224754223621" at="73,23,137,13" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_map_operation$2$1$1" />
+      <unit id="1224754223621" at="71,19,139,9" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_map_operation$2$1" />
       <unit id="1224754223621" at="69,73,141,5" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_map_operation$2" />
       <unit id="1153940807216" at="13,0,149,0" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_map_operation" />
     </file>
@@ -244,8 +244,8 @@
         <var name="args" id="1153941117455" />
       </scope>
       <unit id="1224754223573" at="67,45,80,5" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_forEach_operation$2" />
-      <unit id="1224754223329" at="20,23,59,13" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_forEach_operation$3" />
-      <unit id="1224754223329" at="18,19,61,9" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_forEach_operation$2" />
+      <unit id="1224754223329" at="20,23,59,13" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_forEach_operation$1$1$1" />
+      <unit id="1224754223329" at="18,19,61,9" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_forEach_operation$1$1" />
       <unit id="1224754223329" at="16,54,63,5" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_forEach_operation$1" />
       <unit id="1153941117383" at="12,0,83,0" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_forEach_operation" />
     </file>
@@ -338,8 +338,8 @@
       </scope>
       <unit id="1224754223774" at="70,69,74,5" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_where_select_operations$2" />
       <unit id="1224754223676" at="74,18,79,5" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_where_select_operations$3" />
-      <unit id="1224754223364" at="21,23,61,13" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_where_select_operations$3" />
-      <unit id="1224754223364" at="19,19,63,9" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_where_select_operations$2" />
+      <unit id="1224754223364" at="21,23,61,13" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_where_select_operations$1$1$1" />
+      <unit id="1224754223364" at="19,19,63,9" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_where_select_operations$1$1" />
       <unit id="1224754223364" at="17,54,65,5" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_where_select_operations$1" />
       <unit id="1153941284364" at="13,0,87,0" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_where_select_operations" />
     </file>
@@ -418,8 +418,8 @@
       <scope id="1154036214582" at="13,0,77,0">
         <var name="args" id="1154036214665" />
       </scope>
-      <unit id="1224754223436" at="18,23,57,13" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_forEach_loop$3" />
-      <unit id="1224754223436" at="16,19,59,9" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_forEach_loop$2" />
+      <unit id="1224754223436" at="18,23,57,13" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_forEach_loop$1$1$1" />
+      <unit id="1224754223436" at="16,19,59,9" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_forEach_loop$1$1" />
       <unit id="1224754223436" at="14,54,61,5" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_forEach_loop$1" />
       <unit id="1154036214581" at="10,0,78,0" name="jetbrains.mps.baseLanguage.collections.samples.sequence_queries.Main_forEach_loop" />
     </file>

@@ -25,7 +25,9 @@ public abstract class RuntimeSupport {
 
   public abstract SNode coerce_(SNode subtype, IMatchingPattern pattern);
 
+  @Deprecated(forRemoval = true)
   public abstract SNode coerce_(SNode subtype, IMatchingPattern pattern, boolean isWeak, TypeCheckingContext typeCheckingContext);
 
+  @Deprecated(forRemoval = true)
   public abstract SNode coerce_(SNode subtype, IMatchingPattern pattern, TypeCheckingContext typeCheckingContext);
 }

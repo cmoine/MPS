@@ -2,8 +2,8 @@
 <model ref="r:8fd8fae7-66c6-40bf-9e0f-dc410b5e2e9c(jetbrains.mps.core.properties.editor)">
   <persistence version="9" />
   <languages>
-    <use id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor" version="4" />
-    <use id="aee9cad2-acd4-4608-aef2-0004f6a1cdbd" name="jetbrains.mps.lang.actions" version="3" />
+    <use id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor" version="14" />
+    <use id="aee9cad2-acd4-4608-aef2-0004f6a1cdbd" name="jetbrains.mps.lang.actions" version="4" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -14,9 +14,11 @@
   </imports>
   <registry>
     <language id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor">
+      <concept id="5991739802479784073" name="jetbrains.mps.lang.editor.structure.MenuTypeDefault" flags="ng" index="22hDWj" />
       <concept id="2000375450116454183" name="jetbrains.mps.lang.editor.structure.ISubstituteMenu" flags="ng" index="22mbnS">
         <child id="414384289274416996" name="parts" index="3ft7WO" />
       </concept>
+      <concept id="2000375450116423800" name="jetbrains.mps.lang.editor.structure.SubstituteMenu" flags="ng" index="22mcaB" />
       <concept id="1071666914219" name="jetbrains.mps.lang.editor.structure.ConceptEditorDeclaration" flags="ig" index="24kQdi">
         <child id="1078153129734" name="inspectedCellModel" index="6VMZX" />
       </concept>
@@ -38,7 +40,7 @@
         <child id="1080736633877" name="cellModel" index="2wV5jI" />
       </concept>
       <concept id="1186402211651" name="jetbrains.mps.lang.editor.structure.StyleSheet" flags="ng" index="V5hpn">
-        <child id="1186402402630" name="styleClass" index="V601i" />
+        <child id="1186402402630" name="styles" index="V601i" />
       </concept>
       <concept id="1186403694788" name="jetbrains.mps.lang.editor.structure.ColorStyleClassItem" flags="ln" index="VaVBg">
         <property id="1186403713874" name="color" index="Vb096" />
@@ -55,6 +57,7 @@
       <concept id="1186414860679" name="jetbrains.mps.lang.editor.structure.EditableStyleClassItem" flags="ln" index="VPxyj" />
       <concept id="1630016958697344083" name="jetbrains.mps.lang.editor.structure.IMenu_Concept" flags="ng" index="2ZABuq">
         <reference id="6591946374543067572" name="conceptDeclaration" index="aqKnT" />
+        <child id="5991739802479788259" name="type" index="22hAXT" />
       </concept>
       <concept id="1233758997495" name="jetbrains.mps.lang.editor.structure.PunctuationLeftStyleClassItem" flags="ln" index="11L4FC" />
       <concept id="1233759184865" name="jetbrains.mps.lang.editor.structure.PunctuationRightStyleClassItem" flags="ln" index="11LMrY" />
@@ -74,7 +77,6 @@
       <concept id="1381004262292414836" name="jetbrains.mps.lang.editor.structure.ICellStyle" flags="ng" index="1k5N5V">
         <reference id="1381004262292426837" name="parentStyleClass" index="1k5W1q" />
       </concept>
-      <concept id="3308396621974580100" name="jetbrains.mps.lang.editor.structure.SubstituteMenu_Default" flags="ng" index="3p36aQ" />
       <concept id="7580468736840446506" name="jetbrains.mps.lang.editor.structure.ConceptFunctionParameter_model" flags="nn" index="1rpKSd" />
       <concept id="1139848536355" name="jetbrains.mps.lang.editor.structure.CellModel_WithRole" flags="ng" index="1$h60E">
         <property id="1214560368769" name="emptyNoTargetText" index="39s7Ar" />
@@ -204,7 +206,7 @@
       <node concept="3F0ifn" id="3rV3sBXezFi" role="3EZMnx">
         <property role="3F0ifm" value=".properties" />
         <node concept="VechU" id="3rV3sBXezFj" role="3F10Kt">
-          <property role="Vb096" value="darkGray" />
+          <property role="Vb096" value="fLJRk5B/darkGray" />
         </node>
         <node concept="ljvvj" id="3rV3sBXezFk" role="3F10Kt">
           <property role="VOm3f" value="true" />
@@ -277,11 +279,9 @@
       <node concept="l2Vlx" id="5YNybgUCzsY" role="2iSdaV" />
       <node concept="3F0ifn" id="5YNybgUCzsZ" role="3EZMnx">
         <property role="3F0ifm" value="key:" />
-        <node concept="Vb9p2" id="5YNybgUCzt0" role="3F10Kt">
-          <property role="Vbekb" value="PLAIN" />
-        </node>
+        <node concept="Vb9p2" id="5YNybgUCzt0" role="3F10Kt" />
         <node concept="VechU" id="5YNybgUCzt4" role="3F10Kt">
-          <property role="Vb096" value="darkGray" />
+          <property role="Vb096" value="fLJRk5B/darkGray" />
         </node>
       </node>
       <node concept="1HlG4h" id="5YNybgUCzt6" role="3EZMnx">
@@ -309,11 +309,9 @@
       </node>
       <node concept="3F0ifn" id="5YNybgUCzts" role="3EZMnx">
         <property role="3F0ifm" value="value:" />
-        <node concept="Vb9p2" id="5YNybgUCztI" role="3F10Kt">
-          <property role="Vbekb" value="PLAIN" />
-        </node>
+        <node concept="Vb9p2" id="5YNybgUCztI" role="3F10Kt" />
         <node concept="VechU" id="5YNybgUCztJ" role="3F10Kt">
-          <property role="Vb096" value="darkGray" />
+          <property role="Vb096" value="fLJRk5B/darkGray" />
         </node>
       </node>
       <node concept="1HlG4h" id="5YNybgUCztu" role="3EZMnx">
@@ -357,7 +355,7 @@
         </node>
       </node>
       <node concept="Vb9p2" id="5YNybgUCvki" role="3F10Kt">
-        <property role="Vbekb" value="BOLD" />
+        <property role="Vbekb" value="g1_k_vY/BOLD" />
       </node>
     </node>
     <node concept="14StLt" id="5YNybgUCvkd" role="V601i">
@@ -368,7 +366,7 @@
         </node>
       </node>
       <node concept="Vb9p2" id="5YNybgUCvkq" role="3F10Kt">
-        <property role="Vbekb" value="ITALIC" />
+        <property role="Vbekb" value="g1_kEg4/ITALIC" />
       </node>
     </node>
     <node concept="14StLt" id="5YNybgUCvke" role="V601i">
@@ -383,12 +381,13 @@
         </node>
       </node>
       <node concept="Vb9p2" id="5YNybgUCvkm" role="3F10Kt">
-        <property role="Vbekb" value="BOLD" />
+        <property role="Vbekb" value="g1_k_vY/BOLD" />
       </node>
     </node>
   </node>
-  <node concept="3p36aQ" id="1wEcoXjJlcc">
+  <node concept="22mcaB" id="1wEcoXjJlcc">
     <ref role="aqKnT" to="911s:3rV3sBXezF2" resolve="PropertiesLine" />
+    <node concept="22hDWj" id="xzgvwPPq2d" role="22hAXT" />
     <node concept="3eGOop" id="1wEcoXjJlce" role="3ft7WO">
       <ref role="3EoQqy" to="911s:3rV3sBXezF1" resolve="PropertiesDeclaration" />
       <node concept="16NfWO" id="1wEcoXjJlcf" role="upBLP">
@@ -412,7 +411,7 @@
                             <ref role="3cqZAo" node="1wEcoXjJlcl" resolve="name" />
                           </node>
                           <node concept="liA8E" id="1wEcoXjJlcu" role="2OqNvi">
-                            <ref role="37wK5l" to="wyt6:~String.substring(int,int):java.lang.String" resolve="substring" />
+                            <ref role="37wK5l" to="wyt6:~String.substring(int,int)" resolve="substring" />
                             <node concept="3cmrfG" id="1wEcoXjJlcv" role="37wK5m">
                               <property role="3cmrfH" value="0" />
                             </node>
@@ -425,7 +424,7 @@
                                   <ref role="3cqZAo" node="1wEcoXjJlcl" resolve="name" />
                                 </node>
                                 <node concept="liA8E" id="1wEcoXjJlc$" role="2OqNvi">
-                                  <ref role="37wK5l" to="wyt6:~String.length():int" resolve="length" />
+                                  <ref role="37wK5l" to="wyt6:~String.length()" resolve="length" />
                                 </node>
                               </node>
                             </node>
@@ -440,7 +439,7 @@
                   <node concept="2OqwBi" id="1wEcoXjJlcA" role="3clFbw">
                     <node concept="ub8z3" id="1wEcoXjJlcV" role="2Oq$k0" />
                     <node concept="liA8E" id="1wEcoXjJlcC" role="2OqNvi">
-                      <ref role="37wK5l" to="wyt6:~String.endsWith(java.lang.String):boolean" resolve="endsWith" />
+                      <ref role="37wK5l" to="wyt6:~String.endsWith(java.lang.String)" resolve="endsWith" />
                       <node concept="Xl_RD" id="1wEcoXjJlcD" role="37wK5m">
                         <property role="Xl_RC" value="=" />
                       </node>
@@ -463,7 +462,7 @@
                   <node concept="2OqwBi" id="1wEcoXjJlcK" role="3fr31v">
                     <node concept="ub8z3" id="1wEcoXjJlcW" role="2Oq$k0" />
                     <node concept="liA8E" id="1wEcoXjJlcM" role="2OqNvi">
-                      <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object):boolean" resolve="equals" />
+                      <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object)" resolve="equals" />
                       <node concept="Xl_RD" id="1wEcoXjJlcN" role="37wK5m">
                         <property role="Xl_RC" value="#" />
                       </node>
@@ -520,7 +519,7 @@
                           <ref role="3cqZAo" node="1wEcoXjJldz" resolve="name" />
                         </node>
                         <node concept="liA8E" id="1wEcoXjJldG" role="2OqNvi">
-                          <ref role="37wK5l" to="wyt6:~String.substring(int,int):java.lang.String" resolve="substring" />
+                          <ref role="37wK5l" to="wyt6:~String.substring(int,int)" resolve="substring" />
                           <node concept="3cmrfG" id="1wEcoXjJldH" role="37wK5m">
                             <property role="3cmrfH" value="0" />
                           </node>
@@ -533,7 +532,7 @@
                                 <ref role="3cqZAo" node="1wEcoXjJldz" resolve="name" />
                               </node>
                               <node concept="liA8E" id="1wEcoXjJldM" role="2OqNvi">
-                                <ref role="37wK5l" to="wyt6:~String.length():int" resolve="length" />
+                                <ref role="37wK5l" to="wyt6:~String.length()" resolve="length" />
                               </node>
                             </node>
                           </node>
@@ -548,7 +547,7 @@
                 <node concept="2OqwBi" id="1wEcoXjJldO" role="3clFbw">
                   <node concept="ub8z3" id="1wEcoXjJle5" role="2Oq$k0" />
                   <node concept="liA8E" id="1wEcoXjJldQ" role="2OqNvi">
-                    <ref role="37wK5l" to="wyt6:~String.endsWith(java.lang.String):boolean" resolve="endsWith" />
+                    <ref role="37wK5l" to="wyt6:~String.endsWith(java.lang.String)" resolve="endsWith" />
                     <node concept="Xl_RD" id="1wEcoXjJldR" role="37wK5m">
                       <property role="Xl_RC" value="=" />
                     </node>

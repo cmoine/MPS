@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<model ref="r:65fc685c-7150-448a-852d-28be5daa3af8(errors1_test)" doNotGenerate="true">
+<model ref="r:65fc685c-7150-448a-852d-28be5daa3af8(errors1_test)">
   <persistence version="9" />
+  <attribute name="doNotGenerate" value="true" />
   <languages>
     <use id="99a58581-8518-40c8-81f1-e364306f5ffc" name="jetbrains.mps.transformation.test.errorReporting" version="0" />
   </languages>

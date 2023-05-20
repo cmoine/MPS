@@ -2,20 +2,12 @@
 <model ref="r:c493b9a9-0f39-4efb-93f7-8ac7c0a1036c(jetbrains.mps.baseLanguage.overloadedOperators.typesystem)">
   <persistence version="9" />
   <languages>
-    <use id="ed6d7656-532c-4bc2-81d1-af945aeb8280" name="jetbrains.mps.baseLanguage.blTypes" version="0" />
-    <use id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections" version="0" />
-    <use id="3a13115c-633c-4c5c-bbcc-75c4219e9555" name="jetbrains.mps.lang.quotation" version="0" />
-    <use id="7a5dda62-9140-4668-ab76-d5ed1746f2b2" name="jetbrains.mps.lang.typesystem" version="0" />
-    <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="4" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="00000000-0000-4000-0000-1de82b3a4936(jetbrains.mps.devkit.aspect.typesystem)" />
   </languages>
   <imports>
     <import index="vgj4" ref="r:a258f9a5-18d3-4bea-a833-20735290774c(jetbrains.mps.baseLanguage.overloadedOperators.structure)" />
-    <import index="tpdt" ref="r:00000000-0000-4000-0000-011c895902dd(jetbrains.mps.baseLanguage.blTypes.structure)" />
     <import index="tpee" ref="r:00000000-0000-4000-0000-011c895902ca(jetbrains.mps.baseLanguage.structure)" />
     <import index="5q41" ref="r:9657ec16-7dab-4be4-9ea2-13982a8c441b(jetbrains.mps.baseLanguage.overloadedOperators.util)" />
-    <import index="z1c3" ref="6ed54515-acc8-4d1e-a16c-9fd6cfe951ea/java:jetbrains.mps.project(MPS.Core/)" />
     <import index="wyt6" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)" />
   </imports>
   <registry>
@@ -140,7 +132,7 @@
               </node>
             </node>
             <node concept="3TrEf2" id="2G6PgZGJT81" role="2OqNvi">
-              <ref role="3Tt5mk" to="vgj4:5MF4VwFWPAL" />
+              <ref role="3Tt5mk" to="vgj4:5MF4VwFWPAL" resolve="leftType" />
             </node>
           </node>
         </node>
@@ -178,7 +170,7 @@
               </node>
             </node>
             <node concept="3TrEf2" id="2G6PgZGJT8h" role="2OqNvi">
-              <ref role="3Tt5mk" to="vgj4:5MF4VwFWPAM" />
+              <ref role="3Tt5mk" to="vgj4:5MF4VwFWPAM" resolve="rightType" />
             </node>
           </node>
         </node>
@@ -224,7 +216,7 @@
                 </node>
               </node>
               <node concept="3TrEf2" id="7E6eTS97YTo" role="2OqNvi">
-                <ref role="3Tt5mk" to="vgj4:5MF4VwFS3Cd" />
+                <ref role="3Tt5mk" to="vgj4:5MF4VwFS3Cd" resolve="returnType" />
               </node>
             </node>
           </node>

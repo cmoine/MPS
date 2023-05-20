@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,277 +15,231 @@
  */
 package jetbrains.mps.smodel.runtime.base;
 
-import jetbrains.mps.project.AbstractModule;
-import jetbrains.mps.smodel.IOperationContext;
-import jetbrains.mps.smodel.adapter.ids.MetaIdHelper;
-import jetbrains.mps.smodel.adapter.ids.SConceptId;
-import jetbrains.mps.smodel.adapter.ids.SPropertyId;
-import jetbrains.mps.smodel.adapter.ids.SReferenceLinkId;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.kernel.model.SModelUtil;
 import jetbrains.mps.smodel.adapter.structure.concept.SAbstractConceptAdapter;
 import jetbrains.mps.smodel.language.ConceptRegistry;
-import jetbrains.mps.smodel.legacy.ConceptMetaInfoConverter;
+import jetbrains.mps.smodel.language.ConstraintsRegistry;
 import jetbrains.mps.smodel.runtime.CheckingNodeContext;
-import jetbrains.mps.smodel.runtime.ConceptDescriptor;
+import jetbrains.mps.smodel.runtime.ConstraintContext_CanBeAncestor;
+import jetbrains.mps.smodel.runtime.ConstraintContext_CanBeChild;
+import jetbrains.mps.smodel.runtime.ConstraintContext_CanBeParent;
+import jetbrains.mps.smodel.runtime.ConstraintContext_CanBeRoot;
+import jetbrains.mps.smodel.runtime.ConstraintContext_DefaultScopeProvider;
+import jetbrains.mps.smodel.runtime.ConstraintFunction;
+import jetbrains.mps.smodel.runtime.ConstraintFunctions;
 import jetbrains.mps.smodel.runtime.ConstraintsDescriptor;
-import jetbrains.mps.smodel.runtime.ConstraintsDispatchable;
 import jetbrains.mps.smodel.runtime.IconResource;
-import jetbrains.mps.smodel.runtime.InheritanceIterable;
 import jetbrains.mps.smodel.runtime.PropertyConstraintsDescriptor;
-import jetbrains.mps.smodel.runtime.PropertyDescriptor;
 import jetbrains.mps.smodel.runtime.ReferenceConstraintsDescriptor;
-import jetbrains.mps.smodel.runtime.ReferenceDescriptor;
 import jetbrains.mps.smodel.runtime.ReferenceScopeProvider;
-import jetbrains.mps.util.MacrosFactory;
-import jetbrains.mps.util.annotation.ToRemove;
-import jetbrains.mps.vfs.FileSystem;
-import jetbrains.mps.vfs.IFile;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
-import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class BaseConstraintsDescriptor implements ConstraintsDispatchable {
+public class BaseConstraintsDescriptor implements ConstraintsDescriptor {
   private final SAbstractConcept myConcept;
 
-  private ConstraintsDescriptor canBeChildDescriptor;
-  private ConstraintsDescriptor canBeRootDescriptor;
-  private ConstraintsDescriptor canBeParentDescriptor;
-  private ConstraintsDescriptor canBeAncestorDescriptor;
-
-  private ConstraintsDescriptor defaultScopeProviderDescriptor;
+  private final ConstraintFunction<ConstraintContext_CanBeChild, Boolean> myCanBeChildConstraint;
+  private final ConstraintFunction<ConstraintContext_CanBeRoot, Boolean> myCanBeRootConstraint;
+  private final ConstraintFunction<ConstraintContext_CanBeParent, Boolean> myCanBeParentConstraint;
+  private final ConstraintFunction<ConstraintContext_CanBeAncestor, Boolean> myCanBeAncestorConstraint;
+  private final ConstraintFunction<ConstraintContext_DefaultScopeProvider, ReferenceScopeProvider> myDefaultScopeConstraint;
 
   private final ConcurrentHashMap<SProperty, PropertyConstraintsDescriptor> propertiesConstraints = new ConcurrentHashMap<>();
   private final ConcurrentHashMap<SReferenceLink, ReferenceConstraintsDescriptor> referencesConstraints = new ConcurrentHashMap<>();
+  // these may become final if we inline  calculateXXX(Stream<>) methods, yet I hope to find better replacement for the methods altogether
+  private boolean myCanBeChildIsDefined = true;
+  private boolean myCanBeRootIsDefined = true;
+  private boolean myCanBeAncestorIsDefined = true;
+  private boolean myCanBeParentIsDefined = true;
 
-  @Deprecated
-  @ToRemove(version = 3.4)
-  public BaseConstraintsDescriptor(SConceptId conceptId) {
-    myConcept = MetaAdapterFactory.getAbstractConcept(ConceptRegistry.getInstance().getConceptDescriptor(conceptId));
-    calcInheritance();
+  public BaseConstraintsDescriptor(@NotNull final SAbstractConcept concept) {
+    myConcept = concept;
+
+    propertiesConstraints.putAll(getSpecifiedProperties());
+    referencesConstraints.putAll(getSpecifiedReferences());
+
+    // lazy parent calculation, just in case there are subclasses that define all possible constraints
+    // XXX I see no reason to restrict parents to BCD, this is just the way collectParents() had it the moment I took over.
+    Supplier<Stream<BaseConstraintsDescriptor>> parents = new Supplier<>() {
+      private List<BaseConstraintsDescriptor> parentDescriptors;
+
+      @Override
+      public Stream<BaseConstraintsDescriptor> get() {
+        // XXX on collectParents, there's a comment to 'rewrite without recursion', but I don't quite see where recursion is?
+        if (parentDescriptors == null) {
+          // stick to ConstraintsRegistry as it's the context for ConstraintDescriptors after all;
+          // no reason to go through ConceptRegistry (well, unless utterly necessary, until we get registry instance supplied here)
+          final ConstraintsRegistry reg = ConceptRegistry.getInstance().getConstraintsRegistry();
+          List<SAbstractConcept> directSuperConcepts = SModelUtil.getDirectSuperConcepts(concept);
+          parentDescriptors = directSuperConcepts.stream()
+                                                 .map(reg::getConstraintsDescriptor)
+                                                 .filter(BaseConstraintsDescriptor.class::isInstance)
+                                                 .map(BaseConstraintsDescriptor.class::cast)
+                                                 .collect(Collectors.toUnmodifiableList());
+        }
+        return parentDescriptors.stream();
+      }
+    };
+    // XXX although there's no warning (IDEA doesn't see through private mediator), the pattern to invoke
+    //     overrode protected methods from constructor is awful practice.
+    myCanBeChildConstraint = calculateCanBeChildConstraint(parents);
+    myCanBeRootConstraint = calculateCanBeRootConstraint(parents);
+    myCanBeParentConstraint = calculateCanBeParentConstraint(parents);
+    myCanBeAncestorConstraint = calculateCanBeAncestorConstraint(parents);
+    myDefaultScopeConstraint = calculateDefaultScopeConstraint(parents);
   }
 
-  public BaseConstraintsDescriptor(SAbstractConcept concept) {
-    this.myConcept = concept;
-    calcInheritance();
+  @Override
+  public boolean canBeChildIsDefined() {
+    return myCanBeChildIsDefined;
+  }
+
+  @Override
+  public boolean canBeParentIsDefined() {
+    return myCanBeParentIsDefined;
+  }
+
+  @Override
+  public boolean canBeRootIsDefined() {
+    return myCanBeRootIsDefined;
+  }
+
+  @Override
+  public boolean canBeAncestorIsDefined() {
+    return myCanBeAncestorIsDefined;
   }
 
   protected Map<SProperty, PropertyConstraintsDescriptor> getSpecifiedProperties() {
-    //body should be removed after 3.4
-    Map<SPropertyId, PropertyConstraintsDescriptor> notDefaultProperties = getNotDefaultSProperties();
-    Map<SProperty, PropertyConstraintsDescriptor> result = new HashMap<>();
-    for (Entry<SPropertyId, PropertyConstraintsDescriptor> entry : notDefaultProperties.entrySet()) {
-      ConceptDescriptor concept = ConceptRegistry.getInstance().getConceptDescriptor(myConcept);
-      PropertyDescriptor pd = concept.getPropertyDescriptor(entry.getKey());
-      result.put(pd.getProperty(), entry.getValue());
-    }
-    return result;
-  }
-
-  @Deprecated
-  @ToRemove(version = 3.4)
-  protected Map<SPropertyId, PropertyConstraintsDescriptor> getNotDefaultSProperties() {
+    // XXX not sure whether shall make the method abstract or return an empty map.
     return Collections.emptyMap();
   }
 
   protected Map<SReferenceLink, ReferenceConstraintsDescriptor> getSpecifiedReferences() {
-    //body should be removed after 3.4
-    Map<SReferenceLinkId, ReferenceConstraintsDescriptor> notDefaultProperties = getNotDefaultSReferenceLinks();
-    Map<SReferenceLink, ReferenceConstraintsDescriptor> result = new HashMap<>();
-    for (Entry<SReferenceLinkId, ReferenceConstraintsDescriptor> entry : notDefaultProperties.entrySet()) {
-      ConceptDescriptor concept = ConceptRegistry.getInstance().getConceptDescriptor(myConcept);
-      ReferenceDescriptor rd = concept.getRefDescriptor(entry.getKey());
-      result.put(rd.getLink(), entry.getValue());
-    }
-    return result;
-  }
-
-  @Deprecated
-  @ToRemove(version = 3.4)
-  protected Map<SReferenceLinkId, ReferenceConstraintsDescriptor> getNotDefaultSReferenceLinks() {
+    // XXX not sure whether shall make the method abstract or return an empty map.
     return Collections.emptyMap();
   }
 
-  protected void calcInheritance() {
-    propertiesConstraints.putAll(getSpecifiedProperties());
-    referencesConstraints.putAll(getSpecifiedReferences());
-
-    if (hasOwnCanBeChildMethod()) {
-      canBeChildDescriptor = this;
-    } else {
-      canBeChildDescriptor = getMethodUsingInheritance(getConcept(), CAN_BE_CHILD_INHERITANCE_PARAMETERS);
+  private ConstraintFunction<ConstraintContext_CanBeChild, Boolean> calculateCanBeChildConstraint(Supplier<Stream<BaseConstraintsDescriptor>> parents) {
+    final ConstraintFunction<ConstraintContext_CanBeChild, Boolean> rv = calculateCanBeChildConstraint();
+    if (rv != null) {
+      return rv;
     }
-
-    if (hasOwnCanBeRootMethod()) {
-      canBeRootDescriptor = this;
-    } else {
-      canBeRootDescriptor = getMethodUsingInheritance(getConcept(), CAN_BE_ROOT_INHERITANCE_PARAMETERS);
-    }
-
-    if (hasOwnCanBeParentMethod()) {
-      canBeParentDescriptor = this;
-    } else {
-      canBeParentDescriptor = getMethodUsingInheritance(getConcept(), CAN_BE_PARENT_INHERITANCE_PARAMETERS);
-    }
-
-    if (hasOwnCanBeAncestorMethod()) {
-      canBeAncestorDescriptor = this;
-    } else {
-      canBeAncestorDescriptor = getMethodUsingInheritance(getConcept(), CAN_BE_ANCESTOR_INHERITANCE_PARAMETERS);
-    }
-
-    if (hasOwnDefaultScopeProvider()) {
-      defaultScopeProviderDescriptor = this;
-    } else {
-      defaultScopeProviderDescriptor = getMethodUsingInheritance(getConcept(), DEFAULT_SCOPE_PROVIDER_INHERITANCE_PARAMETERS);
-    }
+    return ConstraintFunctions.createBooleanComposition(parents.get().map(ConstraintFunctions::getCanBeChildConstraintFunction));
   }
 
-  private ConstraintsDescriptor getMethodUsingInheritance(SAbstractConcept concept, InheritanceCalculateParameters parameters) {
-    for (SAbstractConcept parent : new InheritanceIterable(concept)) {
-      ConstraintsDescriptor parentDescriptor = ConceptRegistry.getInstance().getConstraintsDescriptor(parent);
-
-      ConstraintsDescriptor parentCalculated;
-
-      if (parentDescriptor instanceof BaseConstraintsDescriptor) {
-        parentCalculated = parameters.getParentCalculatedDescriptor((BaseConstraintsDescriptor) parentDescriptor);
-      } else if (parentDescriptor instanceof ConstraintsDispatchable) {
-        if (parameters.hasOwn((ConstraintsDispatchable) parentDescriptor)) {
-          parentCalculated = parentDescriptor;
-        } else {
-          parentCalculated = getMethodUsingInheritance(parent, parameters);
-        }
-      } else {
-        parentCalculated = parentDescriptor;
-      }
-
-      if (parentCalculated != null) {
-        return parentCalculated;
-      }
-    }
-
+  protected ConstraintFunction<ConstraintContext_CanBeChild, Boolean> calculateCanBeChildConstraint() {
+    myCanBeChildIsDefined = false;
     return null;
   }
 
-  @Override
-  public boolean hasOwnCanBeChildMethod() {
-    return false;
+  private ConstraintFunction<ConstraintContext_CanBeRoot, Boolean> calculateCanBeRootConstraint(Supplier<Stream<BaseConstraintsDescriptor>> parents) {
+    final ConstraintFunction<ConstraintContext_CanBeRoot, Boolean> rv = calculateCanBeRootConstraint();
+    if (rv != null) {
+      return rv;
+    }
+    return ConstraintFunctions.createBooleanComposition(parents.get().map(ConstraintFunctions::getCanBeRootConstraintFunction));
   }
 
-  @Override
-  public boolean hasOwnCanBeRootMethod() {
-    return false;
+  protected ConstraintFunction<ConstraintContext_CanBeRoot, Boolean> calculateCanBeRootConstraint() {
+    myCanBeRootIsDefined = false;
+    return null;
   }
 
-  @Override
-  public boolean hasOwnCanBeParentMethod() {
-    return false;
+  private ConstraintFunction<ConstraintContext_CanBeParent, Boolean> calculateCanBeParentConstraint(Supplier<Stream<BaseConstraintsDescriptor>> parents) {
+    final ConstraintFunction<ConstraintContext_CanBeParent, Boolean> rv = calculateCanBeParentConstraint();
+    if (rv != null) {
+      return rv;
+    }
+    return ConstraintFunctions.createBooleanComposition(parents.get().map(ConstraintFunctions::getCanBeParentConstraintFunction));
   }
 
-  @Override
-  public boolean hasOwnCanBeAncestorMethod() {
-    return false;
+  protected ConstraintFunction<ConstraintContext_CanBeParent, Boolean> calculateCanBeParentConstraint() {
+    myCanBeParentIsDefined = false;
+    return null;
   }
 
-  @Override
-  public boolean hasOwnDefaultScopeProvider() {
-    return false;
+  private ConstraintFunction<ConstraintContext_CanBeAncestor, Boolean> calculateCanBeAncestorConstraint(Supplier<Stream<BaseConstraintsDescriptor>> parents) {
+    final ConstraintFunction<ConstraintContext_CanBeAncestor, Boolean> rv = calculateCanBeAncestorConstraint();
+    if (rv != null) {
+      return rv;
+    }
+    return ConstraintFunctions.createBooleanComposition(parents.get().map(ConstraintFunctions::getCanBeAncestorConstraintFunction));
   }
 
-  @Override
-  public String getConceptFqName() {
-    return ConceptRegistry.getInstance().getConceptDescriptor(myConcept).getConceptFqName();
+  protected ConstraintFunction<ConstraintContext_CanBeAncestor, Boolean> calculateCanBeAncestorConstraint() {
+    myCanBeAncestorIsDefined = false;
+    return null;
   }
 
-  @Deprecated
-  @ToRemove(version = 3.4)
-  @Override
-  public SConceptId getConceptId() {
-    return MetaIdHelper.getConcept(myConcept);
+  private ConstraintFunction<ConstraintContext_DefaultScopeProvider, ReferenceScopeProvider> calculateDefaultScopeConstraint(Supplier<Stream<BaseConstraintsDescriptor>> parents) {
+    final ConstraintFunction<ConstraintContext_DefaultScopeProvider, ReferenceScopeProvider> rv = calculateDefaultScopeConstraint();
+    if (rv != null) {
+      return rv;
+    }
+    return ConstraintFunctions.createScopeProviderComposition(parents.get().map(ConstraintFunctions::getDefaultScopeConstraintFunction));
   }
 
+  protected ConstraintFunction<ConstraintContext_DefaultScopeProvider, ReferenceScopeProvider> calculateDefaultScopeConstraint() {
+    return null;
+  }
+
+  public ConstraintFunction<ConstraintContext_CanBeChild, Boolean> getCanBeChildConstraint() {
+    return myCanBeChildConstraint;
+  }
+
+  public ConstraintFunction<ConstraintContext_CanBeRoot, Boolean> getCanBeRootConstraint() {
+    return myCanBeRootConstraint;
+  }
+
+  public ConstraintFunction<ConstraintContext_CanBeParent, Boolean> getCanBeParentConstraint() {
+    return myCanBeParentConstraint;
+  }
+
+  public ConstraintFunction<ConstraintContext_CanBeAncestor, Boolean> getCanBeAncestorConstraint() {
+    return myCanBeAncestorConstraint;
+  }
+
+  public ConstraintFunction<ConstraintContext_DefaultScopeProvider, ReferenceScopeProvider> getDefaultScopeConstraint() {
+    return myDefaultScopeConstraint;
+  }
+
+  @NotNull
   @Override
-  public SAbstractConcept getConcept() {
+  public final SAbstractConcept getConcept() {
     return myConcept;
   }
 
   @Override
-  public boolean canBeChild(@Nullable SNode node, SNode parentNode, SNode link, SNode childConcept, IOperationContext operationContext,
-      @Nullable CheckingNodeContext checkingNodeContext) {
-    if (canBeChildDescriptor == null) {
-      return true;
-    }
-    assert canBeChildDescriptor != this : "canBeChild in this case overridden";
-    return canBeChildDescriptor.canBeChild(node, parentNode, link, childConcept, operationContext, checkingNodeContext);
+  public boolean canBeChild(@NotNull ConstraintContext_CanBeChild context, @Nullable CheckingNodeContext checkingNodeContext) {
+    return myCanBeChildConstraint.invoke(context, checkingNodeContext);
   }
 
   @Override
-  public boolean canBeRoot(SModel model, IOperationContext operationContext, @Nullable CheckingNodeContext checkingNodeContext) {
-    if (canBeRootDescriptor == null) {
-      return true;
-    }
-    if (canBeRootDescriptor == this) {
-      // in new version it's impossible! - canBeChild in this case overriden!
-      return canBeRoot(operationContext, model, checkingNodeContext);
-    }
-    return canBeRootDescriptor.canBeRoot(model, operationContext, checkingNodeContext);
-  }
-
-  public boolean canBeRoot(IOperationContext operationContext, SModel model, @Nullable CheckingNodeContext checkingNodeContext) {
-    // compatibility method, should be overriden
-    throw new UnsupportedOperationException();
+  public boolean canBeRoot(@NotNull ConstraintContext_CanBeRoot context, @Nullable CheckingNodeContext checkingNodeContext) {
+    return myCanBeRootConstraint.invoke(context, checkingNodeContext);
   }
 
   @Override
-  public boolean canBeParent(SNode node, @Nullable SNode childNode, SNode childConcept, SNode link, IOperationContext operationContext,
-      @Nullable CheckingNodeContext checkingNodeContext) {
-    if (canBeParentDescriptor == null) {
-      return true;
-    }
-    assert canBeParentDescriptor != this : "canBeParent in this case overridden";
-    return canBeParentDescriptor.canBeParent(node, childNode, childConcept, link, operationContext, checkingNodeContext);
+  public boolean canBeParent(@NotNull ConstraintContext_CanBeParent context, @Nullable CheckingNodeContext checkingNodeContext) {
+    return myCanBeParentConstraint.invoke(context, checkingNodeContext);
   }
 
   @Override
-  public boolean canBeAncestor(SNode node, @Nullable SNode childNode, SNode childConcept, SNode parentNode, SNode link, IOperationContext operationContext,
-      @Nullable CheckingNodeContext checkingNodeContext) {
-    // TODO: start(remove this if after MPS 3.4)
-    if (hasOwnCanBeAncestorMethod()) {
-      return canBeAncestor(node, childNode, childConcept, operationContext, checkingNodeContext);
-    }// TODO: end(remove this if after MPS 3.4)
-
-    if (canBeAncestorDescriptor == null) {
-      return true;
-    }
-    assert canBeAncestorDescriptor != this : "canBeAncestor in this case overridden";
-    return canBeAncestorDescriptor.canBeAncestor(node, childNode, childConcept, parentNode, link, operationContext, checkingNodeContext);
-  }
-
-  /**
-   * @deprecated since MPS 3.4 use {@link #canBeAncestor(SNode, SNode, SNode, SNode, SNode, IOperationContext, CheckingNodeContext)}
-   */
-  @Deprecated
-  @ToRemove(version = 3.4)
-  public boolean canBeAncestor(SNode node, @Nullable SNode childNode, SNode childConcept, IOperationContext operationContext,
-      @Nullable CheckingNodeContext checkingNodeContext) {
-    throw new UnsupportedOperationException();
-  }
-
-  @Deprecated
-  @ToRemove(version = 3.4)
-  @Override
-  public PropertyConstraintsDescriptor getProperty(String propertyName) {
-    return getProperty(((ConceptMetaInfoConverter) getConcept()).convertProperty(propertyName));
+  public boolean canBeAncestor(@NotNull ConstraintContext_CanBeAncestor context, @Nullable CheckingNodeContext checkingNodeContext) {
+    return myCanBeAncestorConstraint.invoke(context, checkingNodeContext);
   }
 
   public PropertyConstraintsDescriptor getProperty(SProperty property) {
@@ -297,19 +251,12 @@ public class BaseConstraintsDescriptor implements ConstraintsDispatchable {
       return null;
     }
 
-    propertiesConstraints.put(property, new BasePropertyConstraintsDescriptor(property, this));
+    propertiesConstraints.put(property, new BasePropertyConstraintsDescriptor(property, this, false, false, false));
 
     return propertiesConstraints.get(property);
   }
 
-  @Deprecated
-  @ToRemove(version = 3.4)
-  @Override
-  public PropertyConstraintsDescriptor getProperty(SPropertyId property) {
-    SProperty p = MetaAdapterFactory.getProperty(property, "<BaseConstraintsDescriptor: this name must not be used>");
-    return getProperty(p);
-  }
-
+  @Nullable
   public ReferenceConstraintsDescriptor getReference(SReferenceLink ref) {
     if (referencesConstraints.containsKey(ref)) {
       return referencesConstraints.get(ref);
@@ -319,174 +266,25 @@ public class BaseConstraintsDescriptor implements ConstraintsDispatchable {
       return null;
     }
 
-    referencesConstraints.put(ref, new BaseReferenceConstraintsDescriptor(ref, this));
+    referencesConstraints.put(ref, new BaseReferenceConstraintsDescriptor(ref, this, false, false));
 
     return referencesConstraints.get(ref);
   }
 
-  @Deprecated
-  @ToRemove(version = 3.4)
-  @Override
-  public ReferenceConstraintsDescriptor getReference(SReferenceLinkId referenceLink) {
-    SReferenceLink ref = MetaAdapterFactory.getReferenceLink(referenceLink, "<BaseConstraintsDescriptor: this name must not be used>");
-    return getReference(ref);
-  }
-
-  @Deprecated
-  @ToRemove(version = 3.4)
-  @Override
-  public ReferenceConstraintsDescriptor getReference(String role) {
-    ReferenceDescriptor refDescriptor = ConceptRegistry.getInstance().getConceptDescriptor(myConcept).getRefDescriptor(role);
-    if (refDescriptor == null) {
-      return null;
-    }
-    return getReference(MetaAdapterFactory.getReferenceLink(refDescriptor.getId(), role));
-  }
-
   @Override
   public ReferenceScopeProvider getDefaultScopeProvider() {
-    return defaultScopeProviderDescriptor != null ? defaultScopeProviderDescriptor.getDefaultScopeProvider() : null;
-  }
-
-  @Override
-  public String getAlternativeIcon(SNode node) {
-    return null;
+    return myDefaultScopeConstraint.invoke(ConstraintContext_DefaultScopeProvider.getInstance(), null);
   }
 
   @Nullable
   @Override
   public IconResource getInstanceIcon(SNode node) {
-    //compatibility code introduced before 3.4
-    //we can remove this code when users migrate to new method in constraints
-    return new MyIconResource(node);
+    return null;
   }
 
-  @Deprecated
-  @ToRemove(version = 3.4)
+  @Nullable
   @Override
-  public SConceptId getDefaultConcreteConceptId() {
-    return getConceptId();
-  }
-
-  public SAbstractConcept getDefaultConcreteConcept() {
-    //this is for 3.3-compatibility, should be replaced with getConcept() after 3.4
-
-    SConceptId defaultConcreteConceptId = getDefaultConcreteConceptId();
-    SAbstractConcept result = MetaAdapterFactory.getConceptById(defaultConcreteConceptId);
-    if (result.equals(myConcept)) {
-      return myConcept;
-    } else {
-      return result;
-    }
-  }
-
-  private interface InheritanceCalculateParameters {
-    ConstraintsDescriptor getParentCalculatedDescriptor(BaseConstraintsDescriptor parentDescriptor);
-
-    boolean hasOwn(ConstraintsDispatchable parentDescriptor);
-  }
-
-  private static final InheritanceCalculateParameters CAN_BE_PARENT_INHERITANCE_PARAMETERS = new InheritanceCalculateParameters() {
-    @Override
-    public ConstraintsDescriptor getParentCalculatedDescriptor(BaseConstraintsDescriptor parentDescriptor) {
-      return parentDescriptor.canBeParentDescriptor;
-    }
-
-    @Override
-    public boolean hasOwn(ConstraintsDispatchable parentDescriptor) {
-      return parentDescriptor.hasOwnCanBeParentMethod();
-    }
-  };
-  private static final InheritanceCalculateParameters CAN_BE_CHILD_INHERITANCE_PARAMETERS = new InheritanceCalculateParameters() {
-    @Override
-    public ConstraintsDescriptor getParentCalculatedDescriptor(BaseConstraintsDescriptor parentDescriptor) {
-      return parentDescriptor.canBeChildDescriptor;
-    }
-
-    @Override
-    public boolean hasOwn(ConstraintsDispatchable parentDescriptor) {
-      return parentDescriptor.hasOwnCanBeChildMethod();
-    }
-  };
-  private static final InheritanceCalculateParameters CAN_BE_ROOT_INHERITANCE_PARAMETERS = new InheritanceCalculateParameters() {
-    @Override
-    public ConstraintsDescriptor getParentCalculatedDescriptor(BaseConstraintsDescriptor parentDescriptor) {
-      return parentDescriptor.canBeRootDescriptor;
-    }
-
-    @Override
-    public boolean hasOwn(ConstraintsDispatchable parentDescriptor) {
-      return parentDescriptor.hasOwnCanBeRootMethod();
-    }
-  };
-  private static final InheritanceCalculateParameters CAN_BE_ANCESTOR_INHERITANCE_PARAMETERS = new InheritanceCalculateParameters() {
-    @Override
-    public ConstraintsDescriptor getParentCalculatedDescriptor(BaseConstraintsDescriptor parentDescriptor) {
-      return parentDescriptor.canBeAncestorDescriptor;
-    }
-
-    @Override
-    public boolean hasOwn(ConstraintsDispatchable parentDescriptor) {
-      return parentDescriptor.hasOwnCanBeAncestorMethod();
-    }
-  };
-  private static final InheritanceCalculateParameters DEFAULT_SCOPE_PROVIDER_INHERITANCE_PARAMETERS = new InheritanceCalculateParameters() {
-    @Override
-    public ConstraintsDescriptor getParentCalculatedDescriptor(BaseConstraintsDescriptor parentDescriptor) {
-      return parentDescriptor.defaultScopeProviderDescriptor;
-    }
-
-    @Override
-    public boolean hasOwn(ConstraintsDispatchable parentDescriptor) {
-      return parentDescriptor.hasOwnDefaultScopeProvider();
-    }
-  };
-
-  private class MyIconResource extends IconResource {
-    private final SNode myNode;
-
-    public MyIconResource(SNode node) {
-      super("", null);
-      myNode = node;
-    }
-
-    @Override
-    public InputStream getResource() {
-      String iconPath = MacrosFactory.forModule((AbstractModule) myNode.getConcept().getDeclarationNode().getModel().getModule()).expandPath(
-          getAlternativeIcon(myNode));
-      if (iconPath == null) {
-        return null;
-      }
-
-      IFile file = FileSystem.getInstance().getFileByPath(iconPath);
-      if (!file.exists()) {
-        return null;
-      }
-      try {
-        return file.openInputStream();
-      } catch (IOException e) {
-        return null;
-      }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-      if (this == o) {
-        return true;
-      }
-      if (o == null || getClass() != o.getClass()) {
-        return false;
-      }
-
-      MyIconResource that = (MyIconResource) o;
-      return myNode == that.myNode;
-    }
-
-    @Override
-    public int hashCode() {
-      int result = super.hashCode();
-      result = 31 * result + (myNode != null ? myNode.hashCode() : 0);
-      return result;
-    }
+  public SConcept getDefaultConcreteConcept() {
+    return null; // unspecified
   }
 }

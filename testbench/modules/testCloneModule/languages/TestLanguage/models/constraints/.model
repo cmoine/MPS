@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model ref="r:458e004e-8ebd-4662-bdad-23d1dac3913c(TestLanguage.constraints)" content="header">
+  <persistence version="9" />
+  <attribute name="content" value="header" />
+  <languages>
+    <devkit ref="00000000-0000-4000-0000-5604ebd4f22c(jetbrains.mps.devkit.aspect.constraints)" />
+  </languages>
+  <imports>
+    <import index="8f0y" ref="r:98395163-4b79-4816-934b-611fd70a3d78(TestLanguage.structure)" implicit="true" />
+  </imports>
+</model>
+

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="2s2vilf94b5h51aobg2swlb7y79mr6c" />
+<product version="3" modelHash="71qdz23nsc8ps9nb93b93no2i91ohim">
+  <files names="ActionAspectDescriptorImpl.java:tupleLiteral_init.java" />
+</product>
 

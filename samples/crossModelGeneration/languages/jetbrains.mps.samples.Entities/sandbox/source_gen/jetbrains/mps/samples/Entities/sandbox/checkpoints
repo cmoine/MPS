@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkpoints>
+  <plan id="the plan">
+    <checkpoint id="after_entities" file="the_plan-after_entities.mps" />
+  </plan>
+</checkpoints>
+

@@ -7,9 +7,9 @@ import jetbrains.mps.core.aspects.behaviour.api.BHDescriptor;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor {
   private final BHDescriptor myApplicableNodeCondition__BehaviorDescriptor = new ApplicableNodeCondition__BehaviorDescriptor();
@@ -19,17 +19,18 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
   private final BHDescriptor myAbstractRule__BehaviorDescriptor = new AbstractRule__BehaviorDescriptor();
   private final BHDescriptor myApplicableNodeReference__BehaviorDescriptor = new ApplicableNodeReference__BehaviorDescriptor();
   private final BHDescriptor myTypeOfExpression__BehaviorDescriptor = new TypeOfExpression__BehaviorDescriptor();
+  private final BHDescriptor myAbstractEquationStatement__BehaviorDescriptor = new AbstractEquationStatement__BehaviorDescriptor();
   private final BHDescriptor myTypeVarReference__BehaviorDescriptor = new TypeVarReference__BehaviorDescriptor();
   private final BHDescriptor myAbstractSubtypingRule__BehaviorDescriptor = new AbstractSubtypingRule__BehaviorDescriptor();
   private final BHDescriptor mySubtypingRule__BehaviorDescriptor = new SubtypingRule__BehaviorDescriptor();
   private final BHDescriptor myReportErrorStatement__BehaviorDescriptor = new ReportErrorStatement__BehaviorDescriptor();
   private final BHDescriptor myNode_TypeOperation__BehaviorDescriptor = new Node_TypeOperation__BehaviorDescriptor();
-  private final BHDescriptor myMultipleForeachLoop__BehaviorDescriptor = new MultipleForeachLoop__BehaviorDescriptor();
   private final BHDescriptor myJoinType__BehaviorDescriptor = new JoinType__BehaviorDescriptor();
   private final BHDescriptor myRuntimeErrorType__BehaviorDescriptor = new RuntimeErrorType__BehaviorDescriptor();
   private final BHDescriptor myRuntimeTypeVariable__BehaviorDescriptor = new RuntimeTypeVariable__BehaviorDescriptor();
   private final BHDescriptor myMeetType__BehaviorDescriptor = new MeetType__BehaviorDescriptor();
   private final BHDescriptor myComparisonRule__BehaviorDescriptor = new ComparisonRule__BehaviorDescriptor();
+  private final BHDescriptor myAbstractCheckingRule__BehaviorDescriptor = new AbstractCheckingRule__BehaviorDescriptor();
   private final BHDescriptor myNonTypesystemRule__BehaviorDescriptor = new NonTypesystemRule__BehaviorDescriptor();
   private final BHDescriptor myInequationReplacementRule__BehaviorDescriptor = new InequationReplacementRule__BehaviorDescriptor();
   private final BHDescriptor myWhenConcreteVariableDeclaration__BehaviorDescriptor = new WhenConcreteVariableDeclaration__BehaviorDescriptor();
@@ -37,6 +38,7 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
   private final BHDescriptor myWarningStatement__BehaviorDescriptor = new WarningStatement__BehaviorDescriptor();
   private final BHDescriptor myTypesystemIntentionArgument__BehaviorDescriptor = new TypesystemIntentionArgument__BehaviorDescriptor();
   private final BHDescriptor myAbstractInequationStatement__BehaviorDescriptor = new AbstractInequationStatement__BehaviorDescriptor();
+  private final BHDescriptor myTypesystemQuickFix__BehaviorDescriptor = new TypesystemQuickFix__BehaviorDescriptor();
   private final BHDescriptor myQuickFixExecuteBlock__BehaviorDescriptor = new QuickFixExecuteBlock__BehaviorDescriptor();
   private final BHDescriptor myConceptFunctionParameter_node__BehaviorDescriptor = new ConceptFunctionParameter_node__BehaviorDescriptor();
   private final BHDescriptor myQuickFixDescriptionBlock__BehaviorDescriptor = new QuickFixDescriptionBlock__BehaviorDescriptor();
@@ -75,309 +77,129 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
 
   @Nullable
   public BHDescriptor getDescriptor(@NotNull SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_846f5o_a0ic.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return myAbstractInequationStatement__BehaviorDescriptor;
-          }
-          break;
-        case 1:
-          if (true) {
-            return myAbstractRule__BehaviorDescriptor;
-          }
-          break;
-        case 2:
-          if (true) {
-            return myAbstractSubtypingRule__BehaviorDescriptor;
-          }
-          break;
-        case 3:
-          if (true) {
-            return myApplicableNodeCondition__BehaviorDescriptor;
-          }
-          break;
-        case 4:
-          if (true) {
-            return myApplicableNodeReference__BehaviorDescriptor;
-          }
-          break;
-        case 5:
-          if (true) {
-            return myComparisonRule__BehaviorDescriptor;
-          }
-          break;
-        case 6:
-          if (true) {
-            return myConceptFunctionParameter_ContextNode__BehaviorDescriptor;
-          }
-          break;
-        case 7:
-          if (true) {
-            return myConceptFunctionParameter_EditorContext__BehaviorDescriptor;
-          }
-          break;
-        case 8:
-          if (true) {
-            return myConceptFunctionParameter_Role__BehaviorDescriptor;
-          }
-          break;
-        case 9:
-          if (true) {
-            return myConceptFunctionParameter_Selection__BehaviorDescriptor;
-          }
-          break;
-        case 10:
-          if (true) {
-            return myConceptFunctionParameter_isAggregation__BehaviorDescriptor;
-          }
-          break;
-        case 11:
-          if (true) {
-            return myConceptFunctionParameter_node__BehaviorDescriptor;
-          }
-          break;
-        case 12:
-          if (true) {
-            return myConceptFunctionParameter_var__BehaviorDescriptor;
-          }
-          break;
-        case 13:
-          if (true) {
-            return myConceptReference__BehaviorDescriptor;
-          }
-          break;
-        case 14:
-          if (true) {
-            return myDefaultGroupReference__BehaviorDescriptor;
-          }
-          break;
-        case 15:
-          if (true) {
-            return myIRuleWithTwoNodes__BehaviorDescriptor;
-          }
-          break;
-        case 16:
-          if (true) {
-            return myInequationReplacementRule__BehaviorDescriptor;
-          }
-          break;
-        case 17:
-          if (true) {
-            return myInferenceRule__BehaviorDescriptor;
-          }
-          break;
-        case 18:
-          if (true) {
-            return myInfoStatement__BehaviorDescriptor;
-          }
-          break;
-        case 19:
-          if (true) {
-            return myIsApplicableConceptFunction__BehaviorDescriptor;
-          }
-          break;
-        case 20:
-          if (true) {
-            return myIsReplacementRuleApplicable_ConceptFunction__BehaviorDescriptor;
-          }
-          break;
-        case 21:
-          if (true) {
-            return myJoinContainer__BehaviorDescriptor;
-          }
-          break;
-        case 22:
-          if (true) {
-            return myJoinType__BehaviorDescriptor;
-          }
-          break;
-        case 23:
-          if (true) {
-            return myLeftOperandType_parameter__BehaviorDescriptor;
-          }
-          break;
-        case 24:
-          if (true) {
-            return myMeetContainer__BehaviorDescriptor;
-          }
-          break;
-        case 25:
-          if (true) {
-            return myMeetType__BehaviorDescriptor;
-          }
-          break;
-        case 26:
-          if (true) {
-            return myMessageStatement__BehaviorDescriptor;
-          }
-          break;
-        case 27:
-          if (true) {
-            return myMultipleForeachLoop__BehaviorDescriptor;
-          }
-          break;
-        case 28:
-          if (true) {
-            return myNode_InferTypeOperation__BehaviorDescriptor;
-          }
-          break;
-        case 29:
-          if (true) {
-            return myNode_TypeOperation__BehaviorDescriptor;
-          }
-          break;
-        case 30:
-          if (true) {
-            return myNonTypesystemRule__BehaviorDescriptor;
-          }
-          break;
-        case 31:
-          if (true) {
-            return myOperation_parameter__BehaviorDescriptor;
-          }
-          break;
-        case 32:
-          if (true) {
-            return myOriginalNodeId__BehaviorDescriptor;
-          }
-          break;
-        case 33:
-          if (true) {
-            return myOverloadedOpIsApplicableFunction__BehaviorDescriptor;
-          }
-          break;
-        case 34:
-          if (true) {
-            return myOverloadedOperatorTypeFunction__BehaviorDescriptor;
-          }
-          break;
-        case 35:
-          if (true) {
-            return myOverridesConceptFunction__BehaviorDescriptor;
-          }
-          break;
-        case 36:
-          if (true) {
-            return myPatternCondition__BehaviorDescriptor;
-          }
-          break;
-        case 37:
-          if (true) {
-            return myProcessed__BehaviorDescriptor;
-          }
-          break;
-        case 38:
-          if (true) {
-            return myQuickFixDescriptionBlock__BehaviorDescriptor;
-          }
-          break;
-        case 39:
-          if (true) {
-            return myQuickFixExecuteBlock__BehaviorDescriptor;
-          }
-          break;
-        case 40:
-          if (true) {
-            return myQuickFixFieldReference__BehaviorDescriptor;
-          }
-          break;
-        case 41:
-          if (true) {
-            return myQuickFixSetSelectionBlock__BehaviorDescriptor;
-          }
-          break;
-        case 42:
-          if (true) {
-            return myReportErrorStatement__BehaviorDescriptor;
-          }
-          break;
-        case 43:
-          if (true) {
-            return myRightOperandType_parameter__BehaviorDescriptor;
-          }
-          break;
-        case 44:
-          if (true) {
-            return myRuntimeErrorType__BehaviorDescriptor;
-          }
-          break;
-        case 45:
-          if (true) {
-            return myRuntimeTypeVariable__BehaviorDescriptor;
-          }
-          break;
-        case 46:
-          if (true) {
-            return mySubstituteTypeRule__BehaviorDescriptor;
-          }
-          break;
-        case 47:
-          if (true) {
-            return mySubtypingRule__BehaviorDescriptor;
-          }
-          break;
-        case 48:
-          if (true) {
-            return mySupersedeConceptFunction__BehaviorDescriptor;
-          }
-          break;
-        case 49:
-          if (true) {
-            return myTypeOfExpression__BehaviorDescriptor;
-          }
-          break;
-        case 50:
-          if (true) {
-            return myTypeVarReference__BehaviorDescriptor;
-          }
-          break;
-        case 51:
-          if (true) {
-            return myTypesystemIntentionArgument__BehaviorDescriptor;
-          }
-          break;
-        case 52:
-          if (true) {
-            return myVariableConverterItem_ApplicableBlock__BehaviorDescriptor;
-          }
-          break;
-        case 53:
-          if (true) {
-            return myVariableConverterItem_ConvertBlock__BehaviorDescriptor;
-          }
-          break;
-        case 54:
-          if (true) {
-            return myWarningStatement__BehaviorDescriptor;
-          }
-          break;
-        case 55:
-          if (true) {
-            return myWhenConcreteVariableDeclaration__BehaviorDescriptor;
-          }
-          break;
-        case 56:
-          if (true) {
-            return myWhenConcreteVariableReference__BehaviorDescriptor;
-          }
-          break;
-        default:
-          // default 
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return myAbstractCheckingRule__BehaviorDescriptor;
+      case 1:
+        return myAbstractEquationStatement__BehaviorDescriptor;
+      case 2:
+        return myAbstractInequationStatement__BehaviorDescriptor;
+      case 3:
+        return myAbstractRule__BehaviorDescriptor;
+      case 4:
+        return myAbstractSubtypingRule__BehaviorDescriptor;
+      case 5:
+        return myApplicableNodeCondition__BehaviorDescriptor;
+      case 6:
+        return myApplicableNodeReference__BehaviorDescriptor;
+      case 7:
+        return myComparisonRule__BehaviorDescriptor;
+      case 8:
+        return myConceptFunctionParameter_ContextNode__BehaviorDescriptor;
+      case 9:
+        return myConceptFunctionParameter_EditorContext__BehaviorDescriptor;
+      case 10:
+        return myConceptFunctionParameter_Role__BehaviorDescriptor;
+      case 11:
+        return myConceptFunctionParameter_Selection__BehaviorDescriptor;
+      case 12:
+        return myConceptFunctionParameter_isAggregation__BehaviorDescriptor;
+      case 13:
+        return myConceptFunctionParameter_node__BehaviorDescriptor;
+      case 14:
+        return myConceptFunctionParameter_var__BehaviorDescriptor;
+      case 15:
+        return myConceptReference__BehaviorDescriptor;
+      case 16:
+        return myDefaultGroupReference__BehaviorDescriptor;
+      case 17:
+        return myIRuleWithTwoNodes__BehaviorDescriptor;
+      case 18:
+        return myInequationReplacementRule__BehaviorDescriptor;
+      case 19:
+        return myInferenceRule__BehaviorDescriptor;
+      case 20:
+        return myInfoStatement__BehaviorDescriptor;
+      case 21:
+        return myIsApplicableConceptFunction__BehaviorDescriptor;
+      case 22:
+        return myIsReplacementRuleApplicable_ConceptFunction__BehaviorDescriptor;
+      case 23:
+        return myJoinContainer__BehaviorDescriptor;
+      case 24:
+        return myJoinType__BehaviorDescriptor;
+      case 25:
+        return myLeftOperandType_parameter__BehaviorDescriptor;
+      case 26:
+        return myMeetContainer__BehaviorDescriptor;
+      case 27:
+        return myMeetType__BehaviorDescriptor;
+      case 28:
+        return myMessageStatement__BehaviorDescriptor;
+      case 29:
+        return myNode_InferTypeOperation__BehaviorDescriptor;
+      case 30:
+        return myNode_TypeOperation__BehaviorDescriptor;
+      case 31:
+        return myNonTypesystemRule__BehaviorDescriptor;
+      case 32:
+        return myOperation_parameter__BehaviorDescriptor;
+      case 33:
+        return myOriginalNodeId__BehaviorDescriptor;
+      case 34:
+        return myOverloadedOpIsApplicableFunction__BehaviorDescriptor;
+      case 35:
+        return myOverloadedOperatorTypeFunction__BehaviorDescriptor;
+      case 36:
+        return myOverridesConceptFunction__BehaviorDescriptor;
+      case 37:
+        return myPatternCondition__BehaviorDescriptor;
+      case 38:
+        return myProcessed__BehaviorDescriptor;
+      case 39:
+        return myQuickFixDescriptionBlock__BehaviorDescriptor;
+      case 40:
+        return myQuickFixExecuteBlock__BehaviorDescriptor;
+      case 41:
+        return myQuickFixFieldReference__BehaviorDescriptor;
+      case 42:
+        return myQuickFixSetSelectionBlock__BehaviorDescriptor;
+      case 43:
+        return myReportErrorStatement__BehaviorDescriptor;
+      case 44:
+        return myRightOperandType_parameter__BehaviorDescriptor;
+      case 45:
+        return myRuntimeErrorType__BehaviorDescriptor;
+      case 46:
+        return myRuntimeTypeVariable__BehaviorDescriptor;
+      case 47:
+        return mySubstituteTypeRule__BehaviorDescriptor;
+      case 48:
+        return mySubtypingRule__BehaviorDescriptor;
+      case 49:
+        return mySupersedeConceptFunction__BehaviorDescriptor;
+      case 50:
+        return myTypeOfExpression__BehaviorDescriptor;
+      case 51:
+        return myTypeVarReference__BehaviorDescriptor;
+      case 52:
+        return myTypesystemIntentionArgument__BehaviorDescriptor;
+      case 53:
+        return myTypesystemQuickFix__BehaviorDescriptor;
+      case 54:
+        return myVariableConverterItem_ApplicableBlock__BehaviorDescriptor;
+      case 55:
+        return myVariableConverterItem_ConvertBlock__BehaviorDescriptor;
+      case 56:
+        return myWarningStatement__BehaviorDescriptor;
+      case 57:
+        return myWhenConcreteVariableDeclaration__BehaviorDescriptor;
+      case 58:
+        return myWhenConcreteVariableReference__BehaviorDescriptor;
+      default:
     }
     return null;
   }
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
-  }
-  private static final Map<SAbstractConcept, Integer> indices_846f5o_a0ic = buildConceptIndices(MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11a342c1412L, "jetbrains.mps.lang.typesystem.structure.AbstractInequationStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e7b5c73L, "jetbrains.mps.lang.typesystem.structure.AbstractRule"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1119c40dfb0L, "jetbrains.mps.lang.typesystem.structure.AbstractSubtypingRule"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e29d976L, "jetbrains.mps.lang.typesystem.structure.ApplicableNodeCondition"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e9ef5dcL, "jetbrains.mps.lang.typesystem.structure.ApplicableNodeReference"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x114caade477L, "jetbrains.mps.lang.typesystem.structure.ComparisonRule"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11e078ffb82L, "jetbrains.mps.lang.typesystem.structure.ConceptFunctionParameter_ContextNode"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x335fe1d0b7494cfcL, "jetbrains.mps.lang.typesystem.structure.ConceptFunctionParameter_EditorContext"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11e078e410eL, "jetbrains.mps.lang.typesystem.structure.ConceptFunctionParameter_Role"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x611e7dc14a69a014L, "jetbrains.mps.lang.typesystem.structure.ConceptFunctionParameter_Selection"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11e078ecdbdL, "jetbrains.mps.lang.typesystem.structure.ConceptFunctionParameter_isAggregation"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11b3618c300L, "jetbrains.mps.lang.typesystem.structure.ConceptFunctionParameter_node"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11e07431ba7L, "jetbrains.mps.lang.typesystem.structure.ConceptFunctionParameter_var"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e2a88b3L, "jetbrains.mps.lang.typesystem.structure.ConceptReference"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x12541e5f229acee2L, "jetbrains.mps.lang.typesystem.structure.DefaultGroupReference"), MetaAdapterFactory.getInterfaceConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x3e3c1137fe6cb779L, "jetbrains.mps.lang.typesystem.structure.IRuleWithTwoNodes"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x117c5668bf2L, "jetbrains.mps.lang.typesystem.structure.InequationReplacementRule"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e2f5efaL, "jetbrains.mps.lang.typesystem.structure.InferenceRule"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11d2965916bL, "jetbrains.mps.lang.typesystem.structure.InfoStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x669222c8f1941d7fL, "jetbrains.mps.lang.typesystem.structure.IsApplicableConceptFunction"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x31d99a115038e5e8L, "jetbrains.mps.lang.typesystem.structure.IsReplacementRuleApplicable_ConceptFunction"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1206cda22fcL, "jetbrains.mps.lang.typesystem.structure.JoinContainer"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1129e737f02L, "jetbrains.mps.lang.typesystem.structure.JoinType"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11fcc4cf5b0L, "jetbrains.mps.lang.typesystem.structure.LeftOperandType_parameter"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1206cd802f8L, "jetbrains.mps.lang.typesystem.structure.MeetContainer"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x114b68ad132L, "jetbrains.mps.lang.typesystem.structure.MeetType"), MetaAdapterFactory.getInterfaceConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11db4aad802L, "jetbrains.mps.lang.typesystem.structure.MessageStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111efb6d46fL, "jetbrains.mps.lang.typesystem.structure.MultipleForeachLoop"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x584039bf75272c67L, "jetbrains.mps.lang.typesystem.structure.Node_InferTypeOperation"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111ef7d5e03L, "jetbrains.mps.lang.typesystem.structure.Node_TypeOperation"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1164853e0faL, "jetbrains.mps.lang.typesystem.structure.NonTypesystemRule"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11fcc4d8298L, "jetbrains.mps.lang.typesystem.structure.Operation_parameter"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x2980b78b2f03a40bL, "jetbrains.mps.lang.typesystem.structure.OriginalNodeId"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x5529dae3231347deL, "jetbrains.mps.lang.typesystem.structure.OverloadedOpIsApplicableFunction"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11fcc4bffaeL, "jetbrains.mps.lang.typesystem.structure.OverloadedOperatorTypeFunction"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1885777d1370d97bL, "jetbrains.mps.lang.typesystem.structure.OverridesConceptFunction"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e2c3e68L, "jetbrains.mps.lang.typesystem.structure.PatternCondition"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11cd732687dL, "jetbrains.mps.lang.typesystem.structure.Processed"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11b368d7f20L, "jetbrains.mps.lang.typesystem.structure.QuickFixDescriptionBlock"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11b3617feddL, "jetbrains.mps.lang.typesystem.structure.QuickFixExecuteBlock"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x70489eee8479b55dL, "jetbrains.mps.lang.typesystem.structure.QuickFixFieldReference"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x335fe1d0b7494a6dL, "jetbrains.mps.lang.typesystem.structure.QuickFixSetSelectionBlock"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111b251a62aL, "jetbrains.mps.lang.typesystem.structure.ReportErrorStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11fcc4d8edaL, "jetbrains.mps.lang.typesystem.structure.RightOperandType_parameter"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x113f84956f9L, "jetbrains.mps.lang.typesystem.structure.RuntimeErrorType"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x113f84956fbL, "jetbrains.mps.lang.typesystem.structure.RuntimeTypeVariable"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x58e32a0782bca52aL, "jetbrains.mps.lang.typesystem.structure.SubstituteTypeRule"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1119c426ccaL, "jetbrains.mps.lang.typesystem.structure.SubtypingRule"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x65684a1aee252403L, "jetbrains.mps.lang.typesystem.structure.SupersedeConceptFunction"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f0ad10aL, "jetbrains.mps.lang.typesystem.structure.TypeOfExpression"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f90b04cL, "jetbrains.mps.lang.typesystem.structure.TypeVarReference"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x119e85f8628L, "jetbrains.mps.lang.typesystem.structure.TypesystemIntentionArgument"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11e0740f5fbL, "jetbrains.mps.lang.typesystem.structure.VariableConverterItem_ApplicableBlock"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11e074487bbL, "jetbrains.mps.lang.typesystem.structure.VariableConverterItem_ConvertBlock"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1190a1db131L, "jetbrains.mps.lang.typesystem.structure.WarningStatement"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x118bd05a27aL, "jetbrains.mps.lang.typesystem.structure.WhenConcreteVariableDeclaration"), MetaAdapterFactory.getConcept(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x118bd0e07f1L, "jetbrains.mps.lang.typesystem.structure.WhenConcreteVariableReference"));
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1164847e929L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f3c1ffaL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11a342c1412L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e7b5c73L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1119c40dfb0L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e29d976L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e9ef5dcL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x114caade477L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11e078ffb82L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x335fe1d0b7494cfcL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11e078e410eL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x611e7dc14a69a014L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11e078ecdbdL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11b3618c300L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11e07431ba7L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e2a88b3L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x12541e5f229acee2L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x3e3c1137fe6cb779L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x117c5668bf2L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e2f5efaL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11d2965916bL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x669222c8f1941d7fL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x31d99a115038e5e8L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1206cda22fcL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1129e737f02L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11fcc4cf5b0L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1206cd802f8L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x114b68ad132L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11db4aad802L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x584039bf75272c67L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111ef7d5e03L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1164853e0faL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11fcc4d8298L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x2980b78b2f03a40bL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x5529dae3231347deL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11fcc4bffaeL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1885777d1370d97bL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117e2c3e68L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11cd732687dL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11b368d7f20L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11b3617feddL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x70489eee8479b55dL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x335fe1d0b7494a6dL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x111b251a62aL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11fcc4d8edaL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x113f84956f9L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x113f84956fbL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x58e32a0782bca52aL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1119c426ccaL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x65684a1aee252403L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f0ad10aL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1117f90b04cL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x119e85f8628L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11b36163865L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11e0740f5fbL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x11e074487bbL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x1190a1db131L), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x118bd05a27aL), MetaIdFactory.conceptId(0x7a5dda6291404668L, 0xab76d5ed1746f2b2L, 0x118bd0e07f1L)).seal();
 }

@@ -24,4 +24,9 @@ public interface EditorComponentState {
    * See {@link EditorState#clearSessionState()}
    */
   void clearSessionState();
+
+  /**
+   * @return true if the editor state contains errors (error cells)
+   */
+  boolean hasErrors();
 }

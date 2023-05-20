@@ -1,0 +1,512 @@
+<project name="Get MPS dependencies" default="install" basedir="."
+         xmlns:ivy="antlib:org.apache.ivy.ant">
+
+  <!-- ===================================================== -->
+  <!-- Initialize and load properties                        -->
+  <!-- ===================================================== -->
+
+  <property name="mps.ivy.home" value="${user.home}" description="Property used to set custom path on TeamCity"/>
+  <property name="idea.platform.local.build" value="false" description="Set to true if use local platform build"/>
+  <property name="ivy.jar.dir" value="${basedir}/ivy"/>
+  <property name="ivy.cache.ttl.default" value="eternal"/>
+
+  <loadproperties srcfile="version.properties" description="Load versions of dependencies to download"/>
+  <loadproperties srcfile="lib.properties" description="Load destination paths to 3rd party libraries"/>
+
+  <!-- ===================================================== -->
+  <!-- Help and ivy load                        -->
+  <!-- ===================================================== -->
+
+  <target name="usage" description="Shows help">
+    <echo message="  Execute 'ant -projecthelp' for build file help."/>
+    <echo message="  Execute 'ant -help' for Ant help."/>
+    <echo message="${line.separator}"/>
+    <echo message="  Use default target 'install' to get all required dependencies for build MPS"/>
+    <echo message="${line.separator}"/>
+    <echo message="  If you need to build platform for MPS (based on IDEA Community), than set 'idea.platform.local.build' property to true"/>
+    <echo message="  You can set required platform branch/commit/tag with property 'idea.commit'. By default it set to 'mps.idea.platform.number' from version.properties"/>
+  </target>
+
+  <target name="install-ivy">
+    <path id="ivy.lib.path">
+      <fileset dir="${ivy.jar.dir}" includes="*.jar"/>
+    </path>
+    <typedef resource="org/apache/ivy/ant/antlib.xml"
+             uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
+  </target>
+
+  <!-- ===================================================== -->
+  <!-- Check 3rd party libraries download requirement        -->
+  <!-- ===================================================== -->
+
+  <target name="check-diffutils" description="Check diffutils libraries availability">
+    <condition property="difutill.missing" value="true" else="false">
+      <not>
+        <and>
+          <available file="${diffutils.lib}"/>
+          <available file="${diffutils.sources}"/>
+          <available file="${diffutils.javadoc}"/>
+        </and>
+      </not>
+    </condition>
+  </target>
+
+  <target name="check-testlib" description="Check testlib libraries availability">
+    <condition property="testlib.missing" value="true" else="false">
+      <not>
+        <and>
+          <available file="${testlib.lib}"/>
+        </and>
+      </not>
+    </condition>
+  </target>
+
+  <target name="check-jetpad" description="Check testlib libraries availability">
+    <condition property="jetpad.missing" value="true" else="false">
+      <not>
+        <and>
+          <available file="${jetpad.lib}"/>
+        </and>
+      </not>
+    </condition>
+  </target>
+
+  <target name="check-kotlin-core-libs" description="Check kotlin core library availability">
+    <condition property="kotlincorelibs.missing" value="true" else="false">
+      <not>
+        <and>
+          <!-- Assumes the presence of javadoc and such if the version is correct -->
+          <available file="${kotlin.core.libs}/kotlinx-metadata-jvm-0.4.2.jar"/>
+          <available file="${kotlin.core.libs}/kotlin-compiler-client-embeddable-${kotlin.version}.jar"/>
+        </and>
+      </not>
+    </condition>
+  </target>
+
+  <target name="check-kotlin-compiler" description="Check kotlin compiler availability">
+    <condition property="kotlincompiler.missing" value="true" else="false">
+      <not>
+        <available file="${kotlin.compiler}/lib"/>
+      </not>
+    </condition>
+  </target>
+
+  <target name="check-kotlin-plugin-libs" description="Check kotlin plugin libraries availability">
+    <condition property="kotlinpluginlibs.missing" value="true" else="false">
+      <not>
+        <and>
+          <available file="${kotlin.lib}/kotlin-stdlib-common-${kotlin.version}.jar"/>
+          <available file="${kotlin.lib}/kotlin-stdlib-${kotlin.version}.jar"/>
+          <available file="${kotlin.lib}/kotlin-builtins.jar"/>
+        </and>
+      </not>
+    </condition>
+  </target>
+
+  <target name="check-junit-libs" description="Check JUnit libraries availability">
+    <condition property="junit.libs.missing" value="true" else="false">
+      <not>
+        <and>
+          <available file="${junit5.lib}/apiguardian-api-${apiguardian.version}.jar"/>
+          <available file="${junit5.lib}/opentest4j-${opentest4j.version}.jar"/>
+          <available file="${junit5.lib}/junit-jupiter-api-${junit.jupiter.version}.jar"/>
+          <available file="${junit5.lib}/junit-jupiter-engine-${junit.jupiter.version}.jar"/>
+          <available file="${junit5.lib}/junit-jupiter-params-${junit.jupiter.version}.jar"/>
+          <available file="${junit5.lib}/junit-jupiter-migrationsupport-${junit.jupiter.version}.jar"/>
+          <available file="${junit5.lib}/junit-platform-commons-${junit.platform.version}.jar"/>
+          <available file="${junit5.lib}/junit-platform-engine-${junit.platform.version}.jar"/>
+          <available file="${junit5.lib}/junit-platform-launcher-${junit.platform.version}.jar"/>
+          <available file="${junit5.lib}/junit-platform-reporting-${junit.platform.version}.jar"/>
+          <available file="${junit5.lib}/junit-vintage-engine-${junit.vintage.version}.jar"/>
+        </and>
+      </not>
+    </condition>
+  </target>
+
+  <!-- ===================================================== -->
+  <!-- Check platform libraries download requirement         -->
+  <!-- ===================================================== -->
+
+  <target name="version-file" description="Util task to check if build.txt exists">
+    <condition property="build.txt.exists" value="true" else="false">
+      <available file="${basedir}/../lib/build.txt"/>
+    </condition>
+  </target>
+
+  <target name="version" depends="version-file" description="Load platform version from build.txt to property" if="${build.txt.exists}">
+    <loadfile property="current.version" srcfile="${basedir}/../lib/build.txt">
+      <filterchain>
+        <replacestring from="MPS-" to=""/>
+        <!-- TODO: fix prefix in platform build -->
+        <!-- Quick fix: wrong prefix in build.txt -->
+        <replacestring from="IC-" to=""/>
+        <striplinebreaks/>
+      </filterchain>
+    </loadfile>
+    <echo message="File build.txt contains build number: ${current.version}"/>
+  </target>
+
+  <target name="check-platform" depends="version" description="Check version of currently downloaded platform">
+    <!-- If property does not match version in build.txt - assume platform is outdated -->
+    <condition property="platform.outdated" value="true" else="false">
+      <not>
+        <equals arg1="${mps.platform.build}" arg2="${current.version}"/>
+      </not>
+    </condition>
+
+    <!-- If platform is not need to be build locally and is outdated - platform with mps.platform.build will be downloaded -->
+    <condition property="do.platform.download" value="true" else="false">
+      <and>
+        <isfalse value="${idea.platform.local.build}"/>
+        <istrue value="${platform.outdated}"/>
+      </and>
+    </condition>
+
+    <!-- Check that locally build platform has already been build by checking availability of output folders -->
+    <condition property="platform.out.missing" value="true" else="false">
+      <not>
+        <and>
+          <available file="${basedir}/../mps-platform/out/intellij idea/dist.all"/>
+          <available file="${basedir}/../mps-platform/out/intellij idea/artifacts"/>
+        </and>
+      </not>
+    </condition>
+
+    <!-- Check if we need copy local platform build -->
+    <condition property="do.platform.local.build.install" value="true" else="false">
+      <and>
+        <istrue value="${idea.platform.local.build}"/>
+        <or>
+          <not>
+            <!-- If build.txt contains snapshot version, we can assume that local platform has already been build and copied, so need to do nothing -->
+            <equals arg1="${current.version}" arg2="${idea.platform.snapshot}"/>
+          </not>
+          <isfalse value="${build.txt.exists}"/>
+          <!-- If there is no platform build artifacts, we force to update platform libs -->
+          <istrue value="${platform.out.missing}"/>
+        </or>
+      </and>
+    </condition>
+  </target>
+
+  <!-- ===================================================== -->
+  <!-- Check and call scripts for local platform build       -->
+  <!-- ===================================================== -->
+
+  <target name="build-platform" depends="check-platform" if="${platform.out.missing}" description="Start script to build local MPS platform">
+    <ant antfile="${basedir}/../mps-platform/build/gant.xml" target="build" usenativebasedir="true" inheritall="true"/>
+  </target>
+
+  <target name="copy-platform" depends="check-platform" if="${do.platform.local.build.install}"
+          description="Start script to copy libraries from local MPS platform build">
+    <ant antfile="${basedir}/../mps-platform/build/gant.xml" target="install" usenativebasedir="true"/>
+  </target>
+
+  <target name="install-platform" if="${idea.platform.local.build}"
+          description="Run scripts from inner project to build and copy local MPS platform build">
+    <antcall target="build-platform" inheritall="true"/>
+    <antcall target="copy-platform" inheritall="true"/>
+  </target>
+
+  <!-- ===================================================== -->
+  <!-- Default target                                        -->
+  <!-- Download platform or build local platform if          -->
+  <!-- idea.platform.local.build property set to true.       -->
+  <!-- Download 3rd party libraries                          -->
+  <!-- ===================================================== -->
+
+  <target name="install" depends="download-platform,install-platform,download-3rd-party" description="Download all platform libs and sources"/>
+
+  <!-- ===================================================== -->
+  <!-- Download libraries with ivy                           -->
+  <!-- ===================================================== -->
+
+  <target name="download-platform" depends="check-platform,install-ivy" if="${do.platform.download}"
+          description="Download platform based on IDEA Community from TeamCity">
+    <ivy:resolve file="ivy.xml" showprogress="true"/>
+    <ivy:retrieve pattern="${basedir}/../[artifact].[ext]" overwritemode="different"/>
+
+    <!-- Delete current platform only after successful download of new one -->
+    <antcall target="clean-platform"/>
+
+    <unzip src="${basedir}/../mps-platform.zip" dest="${basedir}/../" overwrite="true">
+      <patternset>
+        <exclude name="plugins/java-ide-customization/**"/>
+        <!-- TODO: Exclude log.xml & mps.svg from platform-->
+        <!-- XXX there's no more at least log.xml in the platform, is this exclude still valid? -->
+        <exclude name="bin/log.xml"/>
+        <exclude name="bin/mps.svg"/>
+      </patternset>
+    </unzip>
+
+    <antcall target="update-licence-info"/>
+    <antcall target="repackage-java-plugin"/>
+    <antcall target="repackage-app-jar"/>
+
+    <!-- Set executable flag to binaries -->
+    <chmod file="${basedir}/../bin/mac/fsnotifier" perm="755"/>
+    <chmod file="${basedir}/../bin/mac/restarter" perm="755"/>
+    <chmod file="${basedir}/../bin/mac/printenv" perm="755"/>
+    <chmod file="${basedir}/../build/resources/mps" perm="755"/>
+
+    <chmod file="${basedir}/../bin/linux/fsnotifier" perm="755"/>
+    <chmod file="${basedir}/../bin/linux/printenv.py" perm="755"/>
+    <chmod file="${basedir}/../bin/linux/restart.py" perm="755"/>
+
+    <chmod file="${basedir}/../bin/win/fsnotifier.exe" perm="755"/>
+    <chmod file="${basedir}/../bin/win/restarter.exe" perm="755"/>
+    <chmod file="${basedir}/../bin/win/runnerw.exe" perm="755"/>
+    <chmod file="${basedir}/../bin/win/vistalauncher.exe" perm="755"/>
+    <chmod file="${basedir}/../bin/win/WinProcessListHelper.exe" perm="755"/>
+  </target>
+
+  <target name="update-licence-info">
+    <replace dir="${basedir}/../license"  token="IntelliJ IDEA" value="MPS" includes="**/*.txt"/>
+
+    <replace file="${basedir}/../license/third-party-libraries.html">
+      <replacetoken><![CDATA[</table>]]></replacetoken>
+      <replacevalue><![CDATA[<tr valign="top">
+    <td class="firstColumn">
+      <span class="name">Diff Utils</span>
+      <span class="version">1.2.1</span>
+    </td>
+    <td class="secondColumn">
+      <a id="Diff_Utils_1.2.1_license_url" class="licence" href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a>
+    </td>
+  </tr>
+<tr valign="top">
+    <td class="firstColumn">
+      <span class="name">JetPad</span>
+      <span class="version">1.0.0</span>
+    </td>
+    <td class="secondColumn">
+      <a id="JetPad_1.0.0_license_url" class="licence" href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a>
+    </td>
+  </tr>
+<tr valign="top">
+    <td class="firstColumn">
+      <span class="name">Hamcrest</span>
+      <span class="version">1.3</span>
+    </td>
+    <td class="secondColumn">
+      <a id="Hamcrest_1.3_license_url" class="licence" href="https://opensource.org/licenses/BSD-3-Clause">New BSD</a>
+    </td>
+  </tr>
+<tr valign="top">
+    <td class="firstColumn">
+      <span class="name">JMock</span>
+      <span class="version">2.8.2</span>
+    </td>
+    <td class="secondColumn">
+      <a id="JMock_2.8.2_license_url" class="licence" href="https://opensource.org/licenses/BSD-3-Clause">New BSD</a>
+    </td>
+  </tr>
+<tr valign="top">
+    <td class="firstColumn">
+      <span class="name">JMock JUnit</span>
+      <span class="version">2.8.2</span>
+    </td>
+    <td class="secondColumn">
+      <a id="JMock_JUnit_2.8.2_license_url" class="licence" href="https://opensource.org/licenses/BSD-3-Clause">New BSD</a>
+    </td>
+  </tr>
+<tr valign="top">
+    <td class="firstColumn">
+      <span class="name">Kotlinx Metadata</span>
+      <span class="version">0.4.0</span>
+    </td>
+    <td class="secondColumn">
+      <a id="Kotlinx_metadata_0.4.0_license_url" class="licence" href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a>
+    </td>
+  </tr>
+<tr valign="top">
+    <td class="firstColumn">
+      <span class="name">Kotlin embeddable compiler</span>
+      <span class="version">1.6.0</span>
+    </td>
+    <td class="secondColumn">
+      <a id="Kotlin_stdlib_+_embeddable_compiler_1.6.0_license_url" class="licence" href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a>
+    </td>
+  </tr>
+</table>]]></replacevalue>
+    </replace>
+  </target>
+
+  <target name="repackage-java-plugin">
+    <!-- We need this to initialize JRT FS before repository to read JDK solution later.
+    It's quite impossible to change loading of modules/models to lazy variant.
+    Also a possible solution is to load JRT roots with IO FS -->
+    <!--In java-impl.jar, we remove META-INF contents for Idea not to try loading plugins from it (see MPS-30538) -->
+    <unzip src="${basedir}/../plugins/java/lib/java-impl.jar" dest="${basedir}/../plugins/java/lib/java-impl/"/>
+    <delete dir="${basedir}/../plugins/java/lib/java-impl/META-INF"/>
+    <jar basedir="${basedir}/../plugins/java/lib/java-impl/" destfile="${basedir}/../lib/java-impl.jar"/>
+    <copy file="${basedir}/../lib/java-impl.jar" todir="${basedir}/../plugins/java/lib/"/>
+    <delete dir="${basedir}/../plugins/java/lib/java-impl/"/>
+  </target>
+
+  <target name="repackage-app-jar">
+    <!-- We need this to remove IdeaApplicationInfo.xml and IdeaPlugin.xml from platform-impl.jar.
+    MPS declare its own files -->
+    <unzip src="${basedir}/../lib/app.jar" dest="${basedir}/../lib/platform-impl/"/>
+    <delete file="${basedir}/../lib/platform-impl/idea/IdeaApplicationInfo.xml"/>
+    <delete file="${basedir}/../lib/platform-impl/META-INF/IdeaPlugin.xml"/>
+    <jar basedir="${basedir}/../lib/platform-impl/" destfile="${basedir}/../lib/platform-impl.patched.jar" zip64Mode="always"/>
+    <copy file="${basedir}/../lib/platform-impl.patched.jar" tofile="${basedir}/../lib/app.jar" overwrite="true"/>
+    <delete file="${basedir}/../lib/platform-impl.patched.jar"/>
+    <delete dir="${basedir}/../lib/platform-impl/"/>
+  </target>
+
+  <target name="download-diffutils" depends="check-diffutils,install-ivy" if="${difutill.missing}"
+          description="Download com.googlecode.java-diff-utils-diffutils library">
+    <echo message="DiffUtil library is missing. Downloading..."/>
+    <ivy:resolve file="ivyDiffUtils.xml" showprogress="true"/>
+    <ivy:retrieve pattern="${basedir}/../lib/ext/[artifact]-[revision](-[classifier]).[ext]" overwritemode="different"/>
+  </target>
+
+  <target name="download-testlib" depends="check-testlib,install-ivy" if="${testlib.missing}"
+          description="Download jmock and hamcrest libraries">
+    <echo message="Test libraries (hamcrest, jmock and jmock-junit) are missing. Downloading..."/>
+    <ivy:resolve file="ivyUnitTestLibs.xml" transitive="false" type="source,jar" showprogress="true"/>
+    <ivy:retrieve pattern="${basedir}/../languages/baseLanguage/unitTest/lib/[artifact]-[revision](-[classifier]).[ext]" overwritemode="different"/>
+  </target>
+
+  <target name="download-jetpad" depends="check-jetpad,install-ivy" if="${jetpad.missing}"
+          description="Download JetPad framework libraries">
+    <echo message="JetPad libraries are missing. Downloading..."/>
+    <ivy:resolve file="./ivyJetPad.xml" validate="false" showprogress="true"/>
+    <ivy:retrieve pattern="${basedir}/../plugins/jetpad/lib/[artifact]-[revision](-[classifier]).[ext]" overwritemode="different"/>
+  </target>
+
+  <target name="download-kotlin-plugin-libs" depends="download-kotlin-core-libs,check-kotlin-plugin-libs,install-ivy" if="${kotlinpluginlibs.missing}"
+          description="Download MPS Kotlin plugins libraries">
+    <echo message="Kotlin libraries are missing. Downloading..."/>
+    <ivy:resolve file="./ivyKotlinLibs.xml" validate="false" showprogress="true"/>
+    <ivy:retrieve pattern="${basedir}/../plugins/mps-kotlin/lib/[artifact]-[revision](-[classifier]).[ext]" overwritemode="different"/>
+
+    <!-- Full Kotlin builtins are not packaged in a single place (either jvm stdlib, common stdlib, compiler...). If the situation changes
+     in the future, update this script. -->
+    <echo message="Extracting kotlin builtins..."/>
+    <unzip src="${basedir}/../plugins/mps-kotlin/lib/kotlin-compiler-embeddable-${kotlin.version}.jar" dest="${basedir}/../plugins/mps-kotlin/lib/kotlin-builtins/">
+      <patternset>
+        <include name="**/*.kotlin_builtins"/>
+
+        <!-- TODO for some reason data in kotlin reflect is duplicated in kotlin-common-stdlib, until some adequate merging is performed it is better to keep it
+        this way -->
+        <exclude name="kotlin/reflect/reflect.kotlin_builtins"/>
+      </patternset>
+    </unzip>
+    <jar basedir="${basedir}/../plugins/mps-kotlin/lib/kotlin-builtins/" destfile="${basedir}/../plugins/mps-kotlin/lib/kotlin-builtins.jar"/>
+    <delete dir="${basedir}/../plugins/mps-kotlin/lib/kotlin-builtins"/>
+    <delete file="${basedir}/../plugins/mps-kotlin/lib/kotlin-compiler-embeddable-${kotlin.version}.jar" />
+  </target>
+
+  <target name="download-kotlin-compiler" depends="check-kotlin-compiler,install-ivy" if="${kotlincompiler.missing}"
+          description="Download Kotlin metadata and compiler libraries">
+    <echo message="Kotlin compiler is missing. Downloading..."/>
+    <ivy:resolve file="./ivyKotlinCompiler.xml" validate="false" showprogress="true"/>
+    <ivy:retrieve pattern="${kotlin.compiler}/compiler.zip" overwritemode="different" />
+    <unzip src="${kotlin.compiler}/compiler.zip" dest="${kotlin.compiler}/.."/>
+    <delete file="${kotlin.compiler}/compiler.zip" />
+  </target>
+
+  <target name="download-kotlin-core-libs" depends="check-kotlin-core-libs,install-ivy" if="${kotlincorelibs.missing}"
+          description="Download Kotlin metadata and compiler libraries">
+    <echo message="Kotlin core libraries are missing. Downloading..."/>
+    <ivy:resolve file="./ivyKotlinCoreLibs.xml" validate="false" showprogress="true"/>
+    <ivy:retrieve pattern="${kotlin.core.libs}/[artifact]-[revision](-[classifier]).[ext]" overwritemode="different"/>
+  </target>
+
+  <target name="download-junit-libs" depends="check-junit-libs,install-ivy" if="${junit.libs.missing}"
+          description="Download JUnit5 libraries">
+    <echo message="JUnit5 libraries are missing. Downloading..."/>
+    <ivy:resolve file="./ivyJUnit.xml" validate="false" showprogress="true"/>
+    <ivy:retrieve pattern="${junit5.lib}/[artifact]-[revision](-[classifier]).[ext]" overwritemode="different"/>
+  </target>
+
+  <target name="download-3rd-party" depends="download-diffutils,download-testlib,download-jetpad,download-kotlin-plugin-libs,download-kotlin-core-libs,download-kotlin-compiler, download-junit-libs"
+          description="Download all non platform related libs"/>
+
+  <!-- ===================================================== -->
+  <!-- Clean libraries tasks                                 -->
+  <!-- ===================================================== -->
+
+  <target name="clean-platform" description="Delete platform libraries">
+    <delete includeemptydirs="true" failonerror="false">
+      <fileset dir="${basedir}/../lib">
+        <include name="**/*"/>
+        <exclude name="**/ext/**"/>
+      </fileset>
+    </delete>
+
+    <delete dir="${basedir}/../bin/linux"/>
+    <delete dir="${basedir}/../bin/mac"/>
+    <delete dir="${basedir}/../bin/win"/>
+
+    <delete dir="${basedir}/../plugins/java" failonerror="false"/>
+    <delete dir="${basedir}/../plugins/java-ide-customization" failonerror="false"/>
+    <delete dir="${basedir}/../plugins/copyright" failonerror="false"/>
+    <delete dir="${basedir}/../plugins/properties" failonerror="false"/>
+    <delete dir="${basedir}/../plugins/properties-resource-bundle-editor" failonerror="false"/>
+    <delete dir="${basedir}/../plugins/terminal" failonerror="false"/>
+    <delete dir="${basedir}/../plugins/emojipicker" failonerror="false"/>
+    <delete dir="${basedir}/../plugins/settings-repository" failonerror="false"/>
+    <delete dir="${basedir}/../plugins/tasks" failonerror="false"/>
+    <delete dir="${basedir}/../plugins/git4idea" failonerror="false"/>
+    <delete dir="${basedir}/../plugins/svn4idea" failonerror="false"/>
+    <delete dir="${basedir}/../plugins/github" failonerror="false"/>
+    <delete dir="${basedir}/../plugins/ant" failonerror="false"/>
+    <delete dir="${basedir}/../plugins/sh" failonerror="false"/>
+    <delete dir="${basedir}/../plugins/vcs-changeReminder" failonerror="false"/>
+    <delete dir="${basedir}/../plugins/markdown" failonerror="false"/>
+    <delete dir="${basedir}/../plugins/grazie" failonerror="false"/>
+    <delete dir="${basedir}/../plugins/space" failonerror="false"/>
+    <delete dir="${basedir}/../plugins/platform-images" failonerror="false"/>
+    <delete dir="${basedir}/../plugins/laf-macos" failonerror="false"/>
+    <delete dir="${basedir}/../plugins/laf-win10" failonerror="false"/>
+
+    <delete dir="${basedir}/../build/tools/mac" failonerror="false"/>
+
+    <antcall target="clean-licence"/>
+  </target>
+
+  <target name="clean-licence">
+    <delete dir="${basedir}/../license" failonerror="false">
+      <exclude name="diffutils_license.txt"/>
+      <exclude name="hamcrest-core_license.txt"/>
+      <exclude name="jetpad_license.txt"/>
+      <exclude name="mps_license.txt"/>
+    </delete>
+  </target>
+
+
+  <target name="clean-diffutils">
+    <delete file="${diffutils.lib}" failonerror="false"/>
+    <delete file="${diffutils.sources}" failonerror="false"/>
+    <delete file="${diffutils.javadoc}" failonerror="false"/>
+  </target>
+
+  <target name="clean-testlib">
+    <delete dir="${testlib.lib}" includeemptydirs="true" failonerror="false"/>
+  </target>
+
+  <target name="clean-jetpad">
+    <delete dir="${jetpad.lib}" includeemptydirs="true" failonerror="false"/>
+  </target>
+
+  <target name="clean-kotlin">
+    <delete failonerror="false">
+      <fileset dir="${kotlin.core.libs}">
+        <!-- Versions not included so it can clear up previous version -->
+        <include name="kotlinx-metadata-jvm-*.jar" />
+        <include name="kotlin-compiler-client-embeddable-*.jar" />
+      </fileset>
+    </delete>
+    <delete dir="${kotlin.lib}" includeemptydirs="true" failonerror="false"/>
+    <delete dir="${kotlin.compiler}" includeemptydirs="true" failonerror="false"/>
+  </target>
+
+  <target name="clean-3rd-party" depends="clean-diffutils,clean-testlib,clean-jetpad,clean-kotlin" description="Delete 3rd party libraries"/>
+
+  <target name="clean" depends="clean-3rd-party,clean-platform" description="Delete platform files and 3rd party libraries"/>
+
+</project>

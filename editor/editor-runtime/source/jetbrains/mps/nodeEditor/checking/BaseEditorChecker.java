@@ -43,7 +43,9 @@ public abstract class BaseEditorChecker implements EditorChecker, EditorMessageO
 
   @NotNull
   @Override
-  public abstract UpdateResult update(EditorComponent editorComponent, boolean incremental, boolean applyQuickFixes, Cancellable cancellable);
+  public UpdateResult update(EditorComponent editorComponent, boolean incremental, boolean applyQuickFixes, Cancellable cancellable) {
+    throw new UnsupportedOperationException("not implemented");
+  }
 
   @Override
   public void doneUpdating() {

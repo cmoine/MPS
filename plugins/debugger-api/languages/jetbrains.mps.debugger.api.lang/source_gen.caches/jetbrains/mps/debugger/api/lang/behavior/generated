@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-17qbg22u6uflt92fz0epfpybotr20ff" />
+<product version="3" modelHash="-cp6v8f6i2itlyzbpdjoyeq0ue8w0mn0">
+  <files names="BehaviorAspectDescriptor.java:ConceptFunctionParameter_Concept__BehaviorDescriptor.java:ConceptFunctionParameter_Debug_Project__BehaviorDescriptor.java:ConceptFunctionParameter_DebuggableNode__BehaviorDescriptor.java:ConceptFunction_CreateBreakpoint__BehaviorDescriptor.java:ConceptFunction_IsApplicableBreakpoint__BehaviorDescriptor.java:DebuggerReference__BehaviorDescriptor.java:GetDebuggerSettings_Function__BehaviorDescriptor.java" />
+</product>
 

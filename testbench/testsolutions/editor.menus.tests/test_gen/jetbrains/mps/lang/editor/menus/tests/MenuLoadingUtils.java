@@ -17,6 +17,7 @@ import jetbrains.mps.nodeEditor.menus.MenuUtil;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 import jetbrains.mps.lang.editor.menus.transformation.NamedTransformationMenuLookup;
 import jetbrains.mps.lang.core.behavior.INamedConcept__BehaviorDescriptor;
+import org.jetbrains.mps.openapi.language.SInterfaceConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class MenuLoadingUtils {
@@ -27,11 +28,7 @@ public class MenuLoadingUtils {
     final TransformationMenuLookup lookup = new DefaultTransformationMenuLookup(LanguageRegistry.getInstance(repository), SNodeOperations.getConcept(node));
 
     final Wrappers._T<List<TransformationMenuItem>> items = new Wrappers._T<List<TransformationMenuItem>>();
-    repository.getModelAccess().runReadAction(new Runnable() {
-      public void run() {
-        items.value = MenuUtil.createMenu(lookup, location, editorContext.getSelectedCell());
-      }
-    });
+    repository.getModelAccess().runReadAction(() -> items.value = MenuUtil.createMenu(lookup, location, editorContext.getSelectedCell()));
     return items.value;
   }
 
@@ -48,11 +45,7 @@ public class MenuLoadingUtils {
 
     final Wrappers._T<List<TransformationMenuItem>> items = new Wrappers._T<List<TransformationMenuItem>>();
 
-    repository.getModelAccess().runReadAction(new Runnable() {
-      public void run() {
-        items.value = MenuUtil.createMenu(lookup, location, editorContext.getSelectedCell());
-      }
-    });
+    repository.getModelAccess().runReadAction(() -> items.value = MenuUtil.createMenu(lookup, location, editorContext.getSelectedCell()));
 
     return items.value;
   }
@@ -60,11 +53,11 @@ public class MenuLoadingUtils {
   private static String getMenuFqName(final SNodeReference menuNode, EditorComponent editorComponent) {
     final SRepository repository = editorComponent.getEditorContext().getRepository();
     final Wrappers._T<String> fqName = new Wrappers._T<String>();
-    repository.getModelAccess().runReadAction(new Runnable() {
-      public void run() {
-        fqName.value = INamedConcept__BehaviorDescriptor.getFqName_idhEwIO9y.invoke(SNodeOperations.cast(menuNode.resolve(repository), MetaAdapterFactory.getInterfaceConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, "jetbrains.mps.lang.core.structure.INamedConcept")));
-      }
-    });
+    repository.getModelAccess().runReadAction(() -> fqName.value = INamedConcept__BehaviorDescriptor.getFqName_idhEwIO9y.invoke(SNodeOperations.cast(menuNode.resolve(repository), CONCEPTS.INamedConcept$Kd)));
     return fqName.value;
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SInterfaceConcept INamedConcept$Kd = MetaAdapterFactory.getInterfaceConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, "jetbrains.mps.lang.core.structure.INamedConcept");
   }
 }

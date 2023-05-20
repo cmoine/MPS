@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="dh8mywybap8cir2mu0ccb4czquqbkdx" />
+<product version="3" modelHash="-42qqeqnfqzcw1jzn5vrxz5v0vemt8al">
+  <files names="TypesystemDescriptor.java:typeof_AspectModelRefExpression_InferenceRule.java:typeof_Model_IsAspectOperation_InferenceRule.java:typeof_OfAspectOperation_InferenceRule.java" />
+</product>
 

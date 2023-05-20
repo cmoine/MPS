@@ -5,12 +5,9 @@ package jetbrains.mps.baseLanguage.builders.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import org.jetbrains.mps.openapi.model.SNode;
 import java.util.List;
@@ -24,14 +21,15 @@ import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
+import org.jetbrains.mps.openapi.language.SConcept;
 
 public final class SimpleBuilders__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x132aa4d8a3f7441cL, 0xa7eb3fce23492c6aL, 0x6524536b2e1a1e3bL, "jetbrains.mps.baseLanguage.builders.structure.SimpleBuilders");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<Boolean> isDescendant_id4wDZIZrG$7u = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isDescendant").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("4wDZIZrG$7u").registry(REGISTRY).build(SMethodBuilder.createJavaParameter((Class<SNode>) ((Class) Object.class), ""));
-  public static final SMethod<List<SNode>> getDescendands_id4wDZIZrG$7X = new SMethodBuilder<List<SNode>>(new SJavaCompoundTypeImpl((Class<List<SNode>>) ((Class) Object.class))).name("getDescendands").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("4wDZIZrG$7X").registry(REGISTRY).build(SMethodBuilder.createJavaParameter((Class<SModel>) ((Class) Object.class), ""));
-  public static final SMethod<List<SNode>> getAncestors_id5oOCLRAZ01U = new SMethodBuilder<List<SNode>>(new SJavaCompoundTypeImpl((Class<List<SNode>>) ((Class) Object.class))).name("getAncestors").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("5oOCLRAZ01U").registry(REGISTRY).build();
+  public static final SMethod<Boolean> isDescendant_id4wDZIZrG$7u = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isDescendant").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(5199967550912479710L).languageId(0xa7eb3fce23492c6aL, 0x132aa4d8a3f7441cL).build2(SMethodBuilder.createJavaParameter((Class<SNode>) ((Class) Object.class), ""));
+  public static final SMethod<List<SNode>> getDescendands_id4wDZIZrG$7X = new SMethodBuilder<List<SNode>>(new SJavaCompoundTypeImpl((Class<List<SNode>>) ((Class) Object.class))).name("getDescendands").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(5199967550912479741L).languageId(0xa7eb3fce23492c6aL, 0x132aa4d8a3f7441cL).build2(SMethodBuilder.createJavaParameter((Class<SModel>) ((Class) Object.class), ""));
+  public static final SMethod<List<SNode>> getAncestors_id5oOCLRAZ01U = new SMethodBuilder<List<SNode>>(new SJavaCompoundTypeImpl((Class<List<SNode>>) ((Class) Object.class))).name("getAncestors").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(6211769134875410554L).languageId(0xa7eb3fce23492c6aL, 0x132aa4d8a3f7441cL).build2();
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(isDescendant_id4wDZIZrG$7u, getDescendands_id4wDZIZrG$7X, getAncestors_id5oOCLRAZ01U);
 
@@ -42,14 +40,14 @@ public final class SimpleBuilders__BehaviorDescriptor extends BaseBHDescriptor {
     if (__thisNode__ == b) {
       return true;
     }
-    if ((SLinkOperations.getTarget(__thisNode__, MetaAdapterFactory.getReferenceLink(0x132aa4d8a3f7441cL, 0xa7eb3fce23492c6aL, 0x6524536b2e1a1e3bL, 0x4829feefdbb0cd12L, "extendsBuilder")) == null)) {
+    if ((SLinkOperations.getTarget(__thisNode__, LINKS.extendsBuilder$Ou$A) == null)) {
       return false;
     }
-    return (boolean) SimpleBuilders__BehaviorDescriptor.isDescendant_id4wDZIZrG$7u.invoke(SLinkOperations.getTarget(__thisNode__, MetaAdapterFactory.getReferenceLink(0x132aa4d8a3f7441cL, 0xa7eb3fce23492c6aL, 0x6524536b2e1a1e3bL, 0x4829feefdbb0cd12L, "extendsBuilder")), b);
+    return (boolean) SimpleBuilders__BehaviorDescriptor.isDescendant_id4wDZIZrG$7u.invoke(SLinkOperations.getTarget(__thisNode__, LINKS.extendsBuilder$Ou$A), b);
   }
   /*package*/ static List<SNode> getDescendands_id4wDZIZrG$7X(@NotNull SNode __thisNode__, SModel context) {
     List<SNode> result = new ArrayList<SNode>();
-    for (SNode sb : SModelOperations.rootsIncludingImported(context, MetaAdapterFactory.getConcept(0x132aa4d8a3f7441cL, 0xa7eb3fce23492c6aL, 0x6524536b2e1a1e3bL, "jetbrains.mps.baseLanguage.builders.structure.SimpleBuilders"))) {
+    for (SNode sb : SModelOperations.rootsIncludingImported(context, CONCEPTS.SimpleBuilders$h0)) {
       if ((boolean) SimpleBuilders__BehaviorDescriptor.isDescendant_id4wDZIZrG$7u.invoke(sb, __thisNode__)) {
         ListSequence.fromList(result).addElement(sb);
       }
@@ -61,13 +59,12 @@ public final class SimpleBuilders__BehaviorDescriptor extends BaseBHDescriptor {
     SNode current = __thisNode__;
     while (current != null) {
       ListSequence.fromList(result).addElement(current);
-      current = SLinkOperations.getTarget(current, MetaAdapterFactory.getReferenceLink(0x132aa4d8a3f7441cL, 0xa7eb3fce23492c6aL, 0x6524536b2e1a1e3bL, 0x4829feefdbb0cd12L, "extendsBuilder"));
+      current = SLinkOperations.getTarget(current, LINKS.extendsBuilder$Ou$A);
     }
     return result;
   }
 
   /*package*/ SimpleBuilders__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -115,5 +112,13 @@ public final class SimpleBuilders__BehaviorDescriptor extends BaseBHDescriptor {
   @Override
   public SAbstractConcept getConcept() {
     return CONCEPT;
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SReferenceLink extendsBuilder$Ou$A = MetaAdapterFactory.getReferenceLink(0x132aa4d8a3f7441cL, 0xa7eb3fce23492c6aL, 0x6524536b2e1a1e3bL, 0x4829feefdbb0cd12L, "extendsBuilder");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept SimpleBuilders$h0 = MetaAdapterFactory.getConcept(0x132aa4d8a3f7441cL, 0xa7eb3fce23492c6aL, 0x6524536b2e1a1e3bL, "jetbrains.mps.baseLanguage.builders.structure.SimpleBuilders");
   }
 }

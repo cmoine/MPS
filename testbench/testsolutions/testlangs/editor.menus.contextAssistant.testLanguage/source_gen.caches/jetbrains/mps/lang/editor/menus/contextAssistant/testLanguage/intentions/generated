@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-du52rkojggdv7h7ywjjobzd76w1x6w7" />
+<product version="3" modelHash="-2eykop97u67ha91j6konn9c1i2m36uz">
+  <files names="AddLetterToName_Intention.java:IntentionsDescriptor.java" />
+</product>
 

@@ -4,21 +4,35 @@ package jetbrains.mps.baseLanguage.varVariable.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_VarVariableDeclaration = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_VarType;
+  private ConceptPresentation props_VarVariableDeclaration;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.VarType:
+        if (props_VarType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("var");
+          props_VarType = cpb.create();
+        }
+        return props_VarType;
+      case LanguageConceptSwitch.VarVariableDeclaration:
+        if (props_VarVariableDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("var definition");
+          cpb.presentationByName();
+          props_VarVariableDeclaration = cpb.create();
+        }
         return props_VarVariableDeclaration;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

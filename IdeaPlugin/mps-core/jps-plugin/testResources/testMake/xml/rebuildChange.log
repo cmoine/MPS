@@ -1,16 +1,13 @@
-MPS generated files:
-mps-make/makeTests/source_gen.caches/ManifestXml/dependencies
-mps-make/makeTests/source_gen.caches/ManifestXml/generated
-source_gen/ManifestXml/manifest.xml
-source_gen/ManifestXml/trace.info
-End of files
-Cleaning output files:
-source_gen/ManifestXml/manifest.xml
-source_gen/ManifestXml/trace.info
-End of files
-MPS generated files:
-mps-make/makeTests/source_gen.caches/NonEmptyManifestXml/dependencies
-mps-make/makeTests/source_gen.caches/NonEmptyManifestXml/generated
-source_gen/NonEmptyManifestXml/manifest.xml
-source_gen/NonEmptyManifestXml/trace.info
-End of files
+[COMPILED/MPS]
+  mps-make/makeTests/source_gen.caches/ManifestXml/dependencies
+  mps-make/makeTests/source_gen.caches/ManifestXml/generated
+  source_gen/ManifestXml/manifest.xml
+  source_gen/ManifestXml/trace.info
+[DELETED]
+  source_gen/ManifestXml/manifest.xml
+  source_gen/ManifestXml/trace.info
+[COMPILED/MPS]
+  mps-make/makeTests/source_gen.caches/NonEmptyManifestXml/dependencies
+  mps-make/makeTests/source_gen.caches/NonEmptyManifestXml/generated
+  source_gen/NonEmptyManifestXml/manifest.xml
+  source_gen/NonEmptyManifestXml/trace.info

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <root>
+    <file name="MigrationDescriptor.java">
+      <unit at="11,0,17,0" name="jetbrains.mps.lang.dataFlow.migration.MigrationDescriptor" />
+    </file>
+  </root>
+  <root nodeRef="r:ad216852-7035-45f6-b7c2-4db964557103(jetbrains.mps.lang.dataFlow.migration)/5783438710061998422">
+    <file name="UseDevkit.java">
+      <node id="5783438710061998422" at="18,0,19,0" concept="1" trace="description" />
+      <node id="5783438710061998422" at="19,30,20,23" concept="5" />
+      <node id="5783438710061998422" at="23,33,24,16" concept="5" />
+      <node id="5783438710061998422" at="26,41,27,17" concept="0" />
+      <node id="5783438710061998422" at="27,17,28,16" concept="5" />
+      <node id="5783438710062015029" at="30,42,31,76" concept="4" />
+      <node id="5783438710062061184" at="32,65,33,13" concept="5" />
+      <node id="5783438710062061939" at="34,5,35,61" concept="4" />
+      <node id="5783438710062068545" at="35,61,36,170" concept="4" />
+      <node id="5783438710062084176" at="37,50,38,13" concept="5" />
+      <node id="2410259565191203926" at="40,124,41,94" concept="6" />
+      <node id="2410259565191201186" at="41,94,42,13" concept="5" />
+      <node id="5783438710062088689" at="43,5,44,129" concept="0" />
+      <node id="5783438710062092276" at="44,129,45,139" concept="0" />
+      <node id="5783438710062084604" at="45,139,46,128" concept="0" />
+      <node id="5783438710062062651" at="46,128,47,128" concept="0" />
+      <node id="5783438710062093712" at="47,128,48,140" concept="0" />
+      <node id="5783438710062098450" at="48,140,49,127" concept="0" />
+      <node id="6565560734624555207" at="49,127,50,153" concept="0" />
+      <node id="5783438710062111692" at="50,153,51,27" concept="0" />
+      <node id="5783438710061998422" at="53,50,54,148" concept="5" />
+      <node id="5783438710061998422" at="19,0,22,0" concept="3" trace="getCaption#()Ljava/lang/String;" />
+      <node id="5783438710062015672" at="31,76,34,5" concept="2" />
+      <node id="5783438710062069229" at="36,170,39,5" concept="2" />
+      <node id="5783438710061998422" at="53,0,56,0" concept="3" trace="getReference#()Ljetbrains/mps/lang/migration/runtime/base/MigrationScriptReference;" />
+      <node id="5783438710061998422" at="22,0,26,0" concept="3" trace="isRerunnable#()Z" />
+      <node id="5783438710061998422" at="26,0,30,0" concept="3" trace="execute#(Lorg/jetbrains/mps/openapi/module/SModule;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="2410259565191200452" at="39,5,43,5" concept="2" />
+      <node id="5783438710061998422" at="30,0,53,0" concept="3" trace="doExecute#(Lorg/jetbrains/mps/openapi/module/SModule;)V" />
+      <scope id="5783438710061998422" at="19,30,20,23" />
+      <scope id="5783438710061998422" at="23,33,24,16" />
+      <scope id="5783438710062015674" at="32,65,33,13" />
+      <scope id="5783438710062069231" at="37,50,38,13" />
+      <scope id="5783438710061998422" at="53,50,54,148" />
+      <scope id="5783438710061998422" at="26,41,28,16" />
+      <scope id="2410259565191200454" at="40,124,42,13" />
+      <scope id="5783438710061998422" at="19,0,22,0" />
+      <scope id="5783438710061998422" at="53,0,56,0" />
+      <scope id="5783438710061998422" at="22,0,26,0" />
+      <scope id="5783438710061998422" at="26,0,30,0">
+        <var name="m" id="5783438710061998422" />
+      </scope>
+      <scope id="5783438710061998422" at="30,42,51,27">
+        <var name="dataflowAspectModel" id="5783438710062015030" />
+        <var name="dfDevkit" id="5783438710062068546" />
+        <var name="mi" id="5783438710062061940" />
+      </scope>
+      <scope id="5783438710061998422" at="30,0,53,0">
+        <var name="m" id="5783438710061998422" />
+      </scope>
+      <unit id="5783438710061998422" at="17,0,58,0" name="jetbrains.mps.lang.dataFlow.migration.UseDevkit" />
+    </file>
+  </root>
+</debug-info>
+

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 package org.jetbrains.mps.openapi.model;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.annotations.Immutable;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
@@ -25,8 +26,14 @@ import org.jetbrains.mps.openapi.language.SReferenceLink;
  */
 @Immutable
 public interface SReference {
+  /**
+   * @deprecated use {@link #getLink()} to identify reference role, or to access its name
+   * @return {@code getLink().getName()}
+   */
   @Deprecated
-  String getRole();
+  default String getRole() {
+    return getLink().getName();
+  }
 
   /**
    * Gets the associated Link - an abstract meta-definition for the reference
@@ -63,4 +70,24 @@ public interface SReference {
 
   @Nullable
   SNodeId getTargetNodeId();
+
+  /**
+   * Captures information about reference target necessary to resolve it, unrelated to the source node and association link
+   * this reference is bound to. Some reference implementations may choose to use simple string to describe target and rely on
+   * scopes to resolve actual node, others may keep target node identity as well as auxiliary information (aka 'resolveInfo')
+   * that helps to identify reference target.
+   * <br/>
+   * To make a copy of a reference into another node with no extra hassle,
+   *   {@code newSource.setReference(newOrSameAssociation, oldSource.getReference(someAssociation).describeTarget()}
+   * is viable approach.
+   *
+   * @return  immutable object one can use to carry reference target information around
+   * @since 2021.2
+   */
+  @NotNull
+  default ResolveInfo describeTarget() {
+    // the only reason to have this implementation here is to deal with SReference subclass in mps-extensions/shadowmodels I don't want to
+    // modify right now. Perhaps, worth keeping couple of releases in case there are other cases out there?
+    throw new UnsupportedOperationException();
+  }
 }

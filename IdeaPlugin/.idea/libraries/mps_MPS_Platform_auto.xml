@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="mps.MPS.Platform_auto" type="mps.solution.library">
+    <CLASSES>
+      <root url="jar://$APPLICATION_PLUGINS_DIR$/mps-core/lib/mps-platform.jar!/" />
+      <root url="jar://$APPLICATION_PLUGINS_DIR$/mps-core/languages/mps-stubs.jar!/" />
+      <root url="jar://$APPLICATION_PLUGINS_DIR$/mps-core/lib/mps-icons.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <MPS_MODULE_XML>
+      <root url="jar://$APPLICATION_PLUGINS_DIR$/mps-core/languages/mps-stubs.jar!/modules/MPS.Platform/MPS.Platform.msd" />
+    </MPS_MODULE_XML>
+    <SOURCES />
+  </library>
+</component>

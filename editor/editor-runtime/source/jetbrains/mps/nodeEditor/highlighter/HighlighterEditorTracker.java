@@ -20,15 +20,18 @@ import jetbrains.mps.nodeEditor.inspector.InspectorEditorComponent;
 import jetbrains.mps.util.WeakSet;
 import org.jetbrains.mps.openapi.model.SModelReference;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.WeakHashMap;
 
 /**
  * Tracks the checked/unchecked state of editors and inspector. NOT thread-safe.
  */
 public class HighlighterEditorTracker {
-  private final Set<EditorComponent> myCheckedOnceEditors = new WeakSet<EditorComponent>();
+  private final Map<EditorComponent, Instant> myCheckedOnceEditors = new WeakHashMap<>();
   private volatile boolean myInspectorMessagesCreated = false;
 
   public boolean isInspector(EditorComponent editorComponent) {
@@ -36,7 +39,15 @@ public class HighlighterEditorTracker {
   }
 
   public boolean wasCheckedOnce(EditorComponent editorComponent) {
-    return isInspector(editorComponent) || myCheckedOnceEditors.contains(editorComponent);
+    return isInspector(editorComponent) || myCheckedOnceEditors.containsKey(editorComponent);
+  }
+
+  public Instant wasCheckedWhen(EditorComponent editorComponent) {
+    if (isInspector(editorComponent)) {
+      return Instant.EPOCH; // not never, some time in the past
+    }
+    Instant instant = myCheckedOnceEditors.get(editorComponent);
+    return instant != null ? instant : Instant.MIN; // never
   }
 
   public boolean wereInspectorMessagesCreated() {
@@ -47,7 +58,7 @@ public class HighlighterEditorTracker {
     if (isInspector(component)) {
       myInspectorMessagesCreated = true;
     } else {
-      myCheckedOnceEditors.add(component);
+      myCheckedOnceEditors.put(component, Instant.now());
     }
   }
 
@@ -72,7 +83,7 @@ public class HighlighterEditorTracker {
    * Inspector checked state is not affected.
    */
   public void markOnlyEditorsChecked(List<EditorComponent> activeEditors) {
-    myCheckedOnceEditors.retainAll(activeEditors);
+    myCheckedOnceEditors.keySet().retainAll(activeEditors);
   }
 
   public void markInspectorUnchecked() {
@@ -80,7 +91,7 @@ public class HighlighterEditorTracker {
   }
 
   public void markEditorsOfModelUnchecked(SModelReference reference) {
-    for (EditorComponent editorComponent : new ArrayList<EditorComponent>(myCheckedOnceEditors)) {
+    for (EditorComponent editorComponent : new ArrayList<>(myCheckedOnceEditors.keySet())) {
       if (editorComponent.getEditorContext().getModel() != null &&
           editorComponent.getEditorContext().getModel().getReference().equals(reference)) {
         myCheckedOnceEditors.remove(editorComponent);

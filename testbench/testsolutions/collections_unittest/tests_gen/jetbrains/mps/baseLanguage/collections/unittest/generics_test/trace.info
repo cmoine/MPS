@@ -85,8 +85,8 @@
       <scope id="1224596674955" at="15,0,77,0" />
       <scope id="1170878984790" at="13,33,77,7" />
       <scope id="1170878984788" at="13,0,79,0" />
-      <unit id="1224596674955" at="18,23,73,13" name="jetbrains.mps.baseLanguage.collections.unittest.generics_test.MySequence$3" />
-      <unit id="1224596674955" at="16,19,75,9" name="jetbrains.mps.baseLanguage.collections.unittest.generics_test.MySequence$2" />
+      <unit id="1224596674955" at="18,23,73,13" name="jetbrains.mps.baseLanguage.collections.unittest.generics_test.MySequence$1$1$1" />
+      <unit id="1224596674955" at="16,19,75,9" name="jetbrains.mps.baseLanguage.collections.unittest.generics_test.MySequence$1$1" />
       <unit id="1224596674955" at="14,36,77,5" name="jetbrains.mps.baseLanguage.collections.unittest.generics_test.MySequence$1" />
       <unit id="1170878927223" at="10,0,83,0" name="jetbrains.mps.baseLanguage.collections.unittest.generics_test.MySequence" />
     </file>
@@ -127,34 +127,34 @@
   </root>
   <root nodeRef="r:00000000-0000-4000-0000-011c895903bf(jetbrains.mps.baseLanguage.collections.unittest.generics_test)/1172029167443">
     <file name="Generics1_Test.java">
-      <node id="1172029188738" at="10,45,11,50" concept="9" />
-      <node id="1172029260167" at="12,61,13,45" concept="4" />
-      <node id="1172029203862" at="16,45,17,49" concept="9" />
-      <node id="1172029203866" at="17,49,18,18" concept="9" />
-      <node id="1172029277744" at="19,57,20,47" concept="4" />
-      <node id="1172029203880" at="20,47,21,14" concept="4" />
-      <node id="1172029188742" at="11,50,14,5" concept="6" />
-      <node id="1172029203870" at="18,18,22,5" concept="6" />
-      <node id="1172029180836" at="10,0,16,0" concept="8" trace="test_test1#()V" />
-      <node id="1172029195858" at="16,0,24,0" concept="8" trace="test_test2#()V" />
-      <scope id="1172029188746" at="12,61,13,45" />
-      <scope id="1172029203874" at="19,57,21,14" />
-      <scope id="1172029188742" at="11,50,14,5">
+      <node id="1172029188738" at="11,45,12,50" concept="9" />
+      <node id="1172029260167" at="13,61,14,45" concept="4" />
+      <node id="1172029203862" at="18,45,19,49" concept="9" />
+      <node id="1172029203866" at="19,49,20,18" concept="9" />
+      <node id="1172029277744" at="21,57,22,47" concept="4" />
+      <node id="1172029203880" at="22,47,23,14" concept="4" />
+      <node id="1172029188742" at="12,50,15,5" concept="6" />
+      <node id="1172029203870" at="20,18,24,5" concept="6" />
+      <node id="1172029180836" at="10,0,17,0" concept="8" trace="test_test1#()V" />
+      <node id="1172029195858" at="17,0,26,0" concept="8" trace="test_test2#()V" />
+      <scope id="1172029188746" at="13,61,14,45" />
+      <scope id="1172029203874" at="21,57,23,14" />
+      <scope id="1172029188742" at="12,50,15,5">
         <var name="bool" id="1172029188743" />
       </scope>
-      <scope id="1172029180837" at="10,45,14,5">
+      <scope id="1172029180837" at="11,45,15,5">
         <var name="bools" id="1172029188739" />
       </scope>
-      <scope id="1172029203870" at="18,18,22,5">
+      <scope id="1172029203870" at="20,18,24,5">
         <var name="i" id="1172029203871" />
       </scope>
-      <scope id="1172029180836" at="10,0,16,0" />
-      <scope id="1172029195859" at="16,45,22,5">
+      <scope id="1172029195859" at="18,45,24,5">
         <var name="count" id="1172029203867" />
         <var name="ints" id="1172029203863" />
       </scope>
-      <scope id="1172029195858" at="16,0,24,0" />
-      <unit id="1172029167443" at="9,0,25,0" name="jetbrains.mps.baseLanguage.collections.unittest.generics_test.Generics1_Test" />
+      <scope id="1172029180836" at="10,0,17,0" />
+      <scope id="1172029195858" at="17,0,26,0" />
+      <unit id="1172029167443" at="9,0,27,0" name="jetbrains.mps.baseLanguage.collections.unittest.generics_test.Generics1_Test" />
     </file>
   </root>
 </debug-info>

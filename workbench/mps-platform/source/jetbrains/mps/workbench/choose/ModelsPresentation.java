@@ -15,7 +15,7 @@
  */
 package jetbrains.mps.workbench.choose;
 
-import jetbrains.mps.ide.icons.IconManager;
+import jetbrains.mps.ide.icons.GlobalIconManager;
 import jetbrains.mps.ide.icons.IdeIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -24,7 +24,6 @@ import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.module.SRepository;
 
 import java.util.function.BiConsumer;
-import java.util.stream.StreamSupport;
 
 /**
  * Knows how to represent models for {@link ChooseByNameData}
@@ -44,7 +43,7 @@ public class ModelsPresentation implements ElementPresentation<SModelReference> 
 
   @Override
   public void names(@NotNull Iterable<SModelReference> elements, @NotNull BiConsumer<SModelReference, String> nameConsumer) {
-    StreamSupport.stream(elements.spliterator(), false).forEach(mr -> nameConsumer.accept(mr, mr.getName().getValue()));
+    elements.forEach(mr -> nameConsumer.accept(mr, mr.getName().getValue()));
   }
 
   @Override
@@ -59,7 +58,7 @@ public class ModelsPresentation implements ElementPresentation<SModelReference> 
       if (model != null) {
         presentation.name = model.getName().getValue();
         presentation.location = model.getModule().getModuleName();
-        presentation.icon = IconManager.getIconFor(model);
+        presentation.icon = GlobalIconManager.getInstance().getIconFor(model);
       } else {
         presentation.name = element.getName().getValue();
         presentation.location = "unknown";

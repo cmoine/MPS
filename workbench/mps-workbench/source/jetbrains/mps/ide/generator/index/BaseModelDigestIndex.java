@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,25 +23,19 @@ import com.intellij.util.io.DataExternalizer;
 import com.intellij.util.io.EnumeratorStringDescriptor;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.DataInput;
-import java.io.DataOutput;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+public abstract class BaseModelDigestIndex extends SingleEntryFileBasedIndexExtension<String> {
 
-public abstract class BaseModelDigestIndex extends SingleEntryFileBasedIndexExtension<Map<String, String>> {
-
-  private final ID<Integer, Map<String, String>> myName;
+  private final ID<Integer, String> myName;
   private final int myVersion;
 
-  protected BaseModelDigestIndex(@NotNull ID<Integer, Map<String, String>> name, int version) {
+  protected BaseModelDigestIndex(@NotNull ID<Integer, String> name, int version) {
     myName = name;
     myVersion = version;
   }
 
   @NotNull
   @Override
-  public final ID<Integer, Map<String, String>> getName() {
+  public final ID<Integer, String> getName() {
     return myName;
   }
 
@@ -52,47 +46,25 @@ public abstract class BaseModelDigestIndex extends SingleEntryFileBasedIndexExte
 
   @NotNull
   @Override
-  public DataExternalizer<Map<String, String>> getValueExternalizer() {
-    return new MapStringStringExternalizer();
+  public DataExternalizer<String> getValueExternalizer() {
+    return EnumeratorStringDescriptor.INSTANCE;
   }
 
   @NotNull
   @Override
-  public SingleEntryIndexer<Map<String, String>> getIndexer() {
-    return new SingleEntryIndexer<Map<String, String>>(false) {
+  public SingleEntryIndexer<String> getIndexer() {
+    return new SingleEntryIndexer<>(false) {
       @Override
-      protected Map<String, String> computeValue(@NotNull FileContent inputData) {
-        return calculateDigest(inputData.getContent());
+      protected String computeValue(@NotNull FileContent inputData) {
+        return calculateDigest(inputData);
       }
     };
   }
 
-  protected abstract Map<String, String> calculateDigest(byte[] content);
+  protected abstract String calculateDigest(@NotNull FileContent inputData);
 
   @Override
   public boolean dependsOnFileContent() {
     return true;
-  }
-
-  public class MapStringStringExternalizer implements DataExternalizer<Map<String, String>> {
-    private DataExternalizer<String> myInnerExternalizer = new EnumeratorStringDescriptor();
-
-    @Override
-    public void save(@NotNull DataOutput output, Map<String, String> map) throws IOException {
-      output.writeInt(map.size());
-      for (Map.Entry<String, String> entry : map.entrySet()) {
-        myInnerExternalizer.save(output, entry.getKey());
-        myInnerExternalizer.save(output, entry.getValue());
-      }
-    }
-
-    @Override
-    public Map<String, String> read(@NotNull DataInput input) throws IOException {
-      Map<String, String> result = new HashMap<String, String>();
-      for (int i = input.readInt(); i > 0; i--) {
-        result.put(myInnerExternalizer.read(input), myInnerExternalizer.read(input));
-      }
-      return result;
-    }
   }
 }

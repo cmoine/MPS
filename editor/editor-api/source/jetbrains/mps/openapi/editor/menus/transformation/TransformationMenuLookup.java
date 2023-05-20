@@ -16,7 +16,6 @@
 package jetbrains.mps.openapi.editor.menus.transformation;
 
 
-import jetbrains.mps.openapi.editor.descriptor.Menu;
 import jetbrains.mps.openapi.editor.descriptor.TransformationMenu;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SLanguage;

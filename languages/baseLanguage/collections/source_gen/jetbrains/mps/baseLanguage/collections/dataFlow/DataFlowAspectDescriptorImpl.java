@@ -8,333 +8,140 @@ import java.util.Collection;
 import jetbrains.mps.lang.dataFlow.framework.IDataFlowBuilder;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import java.util.Collections;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public class DataFlowAspectDescriptorImpl extends DataFlowAspectDescriptorBase {
 
   @NotNull
   @Override
   public Collection<IDataFlowBuilder> getDataFlowBuilders(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = ((SAbstractConcept) concept);
-      Integer preIndex = indices_vhxjlb_a0b.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new AbstractContainerCreator_DataFlow());
-          }
-          break;
-        case 1:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new AddAllElementsOperation_DataFlow());
-          }
-          break;
-        case 2:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new AddAllSetElementsOperation_DataFlow());
-          }
-          break;
-        case 3:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new AddElementOperation_DataFlow());
-          }
-          break;
-        case 4:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new AddFirstElementOperation_DataFlow());
-          }
-          break;
-        case 5:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new AddLastElementOperation_DataFlow());
-          }
-          break;
-        case 6:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new AddSetElementOperation_DataFlow());
-          }
-          break;
-        case 7:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new BinaryOperation_DataFlow());
-          }
-          break;
-        case 8:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new ChunkOperation_DataFlow());
-          }
-          break;
-        case 9:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new ComparatorSortOperation_DataFlow());
-          }
-          break;
-        case 10:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new ContainsAllOperation_DataFlow());
-          }
-          break;
-        case 11:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new ContainsKeyOperation_DataFlow());
-          }
-          break;
-        case 12:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new ContainsOperation_DataFlow());
-          }
-          break;
-        case 13:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new ContainsValueOperation_DataFlow());
-          }
-          break;
-        case 14:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new DowncastExpression_DataFlow());
-          }
-          break;
-        case 15:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new FoldLeftOperation_DataFlow());
-          }
-          break;
-        case 16:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new FoldRightOperation_DataFlow());
-          }
-          break;
-        case 17:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new ForEachStatement_DataFlow());
-          }
-          break;
-        case 18:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new ForEachVariable_DataFlow());
-          }
-          break;
-        case 19:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new ForEachVariableReference_DataFlow());
-          }
-          break;
-        case 20:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new GetElementOperation_DataFlow());
-          }
-          break;
-        case 21:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new GetIndexOfOperation_DataFlow());
-          }
-          break;
-        case 22:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new GetLastIndexOfOperation_DataFlow());
-          }
-          break;
-        case 23:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new HashMapCreator_DataFlow());
-          }
-          break;
-        case 24:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new HeadListOperation_DataFlow());
-          }
-          break;
-        case 25:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new HeadMapOperation_DataFlow());
-          }
-          break;
-        case 26:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new HeadSetOperation_DataFlow());
-          }
-          break;
-        case 27:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new InsertElementOperation_DataFlow());
-          }
-          break;
-        case 28:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new InternalSequenceOperation_DataFlow());
-          }
-          break;
-        case 29:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new JoinOperation_DataFlow());
-          }
-          break;
-        case 30:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new ListElementAccessExpression_DataFlow());
-          }
-          break;
-        case 31:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new MapElement_DataFlow());
-          }
-          break;
-        case 32:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new MapEntry_DataFlow());
-          }
-          break;
-        case 33:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new MapInitializer_DataFlow());
-          }
-          break;
-        case 34:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new MapOperationExpression_DataFlow());
-          }
-          break;
-        case 35:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new MapRemoveOperation_DataFlow());
-          }
-          break;
-        case 36:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new MultiForEachStatement_DataFlow());
-          }
-          break;
-        case 37:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new MultiForEachVariable_DataFlow());
-          }
-          break;
-        case 38:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new MultiForEachVariableReference_DataFlow());
-          }
-          break;
-        case 39:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new PageOperation_DataFlow());
-          }
-          break;
-        case 40:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new PushOperation_DataFlow());
-          }
-          break;
-        case 41:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new PutAllOperation_DataFlow());
-          }
-          break;
-        case 42:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new RemoveAllElementsOperation_DataFlow());
-          }
-          break;
-        case 43:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new RemoveAllSetElementsOperation_DataFlow());
-          }
-          break;
-        case 44:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new RemoveAtElementOperation_DataFlow());
-          }
-          break;
-        case 45:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new RemoveElementOperation_DataFlow());
-          }
-          break;
-        case 46:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new RemoveSetElementOperation_DataFlow());
-          }
-          break;
-        case 47:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new SequenceCreator_DataFlow());
-          }
-          break;
-        case 48:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new SetElementOperation_DataFlow());
-          }
-          break;
-        case 49:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new SingleArgumentSequenceOperation_DataFlow());
-          }
-          break;
-        case 50:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new SingletonSequenceCreator_DataFlow());
-          }
-          break;
-        case 51:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new SkipOperation_DataFlow());
-          }
-          break;
-        case 52:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new SortOperation_DataFlow());
-          }
-          break;
-        case 53:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new SubListOperation_DataFlow());
-          }
-          break;
-        case 54:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new SubMapOperation_DataFlow());
-          }
-          break;
-        case 55:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new SubSetOperation_DataFlow());
-          }
-          break;
-        case 56:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new TailListOperation_DataFlow());
-          }
-          break;
-        case 57:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new TailMapOperation_DataFlow());
-          }
-          break;
-        case 58:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new TailSetOperation_DataFlow());
-          }
-          break;
-        case 59:
-          if (true) {
-            return Collections.<IDataFlowBuilder>singletonList(new TakeOperation_DataFlow());
-          }
-          break;
-        default:
-          // default 
-      }
+    SAbstractConcept cncpt = ((SAbstractConcept) concept);
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return Collections.<IDataFlowBuilder>singletonList(new AbstractContainerCreator_DataFlow());
+      case 1:
+        return Collections.<IDataFlowBuilder>singletonList(new AddAllElementsOperation_DataFlow());
+      case 2:
+        return Collections.<IDataFlowBuilder>singletonList(new AddAllSetElementsOperation_DataFlow());
+      case 3:
+        return Collections.<IDataFlowBuilder>singletonList(new AddElementOperation_DataFlow());
+      case 4:
+        return Collections.<IDataFlowBuilder>singletonList(new AddFirstElementOperation_DataFlow());
+      case 5:
+        return Collections.<IDataFlowBuilder>singletonList(new AddLastElementOperation_DataFlow());
+      case 6:
+        return Collections.<IDataFlowBuilder>singletonList(new AddSetElementOperation_DataFlow());
+      case 7:
+        return Collections.<IDataFlowBuilder>singletonList(new BinaryOperation_DataFlow());
+      case 8:
+        return Collections.<IDataFlowBuilder>singletonList(new ChunkOperation_DataFlow());
+      case 9:
+        return Collections.<IDataFlowBuilder>singletonList(new ComparatorSortOperation_DataFlow());
+      case 10:
+        return Collections.<IDataFlowBuilder>singletonList(new ContainsAllOperation_DataFlow());
+      case 11:
+        return Collections.<IDataFlowBuilder>singletonList(new ContainsKeyOperation_DataFlow());
+      case 12:
+        return Collections.<IDataFlowBuilder>singletonList(new ContainsOperation_DataFlow());
+      case 13:
+        return Collections.<IDataFlowBuilder>singletonList(new ContainsValueOperation_DataFlow());
+      case 14:
+        return Collections.<IDataFlowBuilder>singletonList(new DowncastExpression_DataFlow());
+      case 15:
+        return Collections.<IDataFlowBuilder>singletonList(new FoldLeftOperation_DataFlow());
+      case 16:
+        return Collections.<IDataFlowBuilder>singletonList(new FoldRightOperation_DataFlow());
+      case 17:
+        return Collections.<IDataFlowBuilder>singletonList(new ForEachStatement_DataFlow());
+      case 18:
+        return Collections.<IDataFlowBuilder>singletonList(new ForEachVariable_DataFlow());
+      case 19:
+        return Collections.<IDataFlowBuilder>singletonList(new ForEachVariableReference_DataFlow());
+      case 20:
+        return Collections.<IDataFlowBuilder>singletonList(new GetElementOperation_DataFlow());
+      case 21:
+        return Collections.<IDataFlowBuilder>singletonList(new GetIndexOfOperation_DataFlow());
+      case 22:
+        return Collections.<IDataFlowBuilder>singletonList(new GetLastIndexOfOperation_DataFlow());
+      case 23:
+        return Collections.<IDataFlowBuilder>singletonList(new HashMapCreator_DataFlow());
+      case 24:
+        return Collections.<IDataFlowBuilder>singletonList(new HeadListOperation_DataFlow());
+      case 25:
+        return Collections.<IDataFlowBuilder>singletonList(new HeadMapOperation_DataFlow());
+      case 26:
+        return Collections.<IDataFlowBuilder>singletonList(new HeadSetOperation_DataFlow());
+      case 27:
+        return Collections.<IDataFlowBuilder>singletonList(new InsertElementOperation_DataFlow());
+      case 28:
+        return Collections.<IDataFlowBuilder>singletonList(new InternalSequenceOperation_DataFlow());
+      case 29:
+        return Collections.<IDataFlowBuilder>singletonList(new JoinOperation_DataFlow());
+      case 30:
+        return Collections.<IDataFlowBuilder>singletonList(new ListElementAccessExpression_DataFlow());
+      case 31:
+        return Collections.<IDataFlowBuilder>singletonList(new MapElement_DataFlow());
+      case 32:
+        return Collections.<IDataFlowBuilder>singletonList(new MapEntry_DataFlow());
+      case 33:
+        return Collections.<IDataFlowBuilder>singletonList(new MapInitializer_DataFlow());
+      case 34:
+        return Collections.<IDataFlowBuilder>singletonList(new MapOperationExpression_DataFlow());
+      case 35:
+        return Collections.<IDataFlowBuilder>singletonList(new MapRemoveOperation_DataFlow());
+      case 36:
+        return Collections.<IDataFlowBuilder>singletonList(new MultiForEachStatement_DataFlow());
+      case 37:
+        return Collections.<IDataFlowBuilder>singletonList(new MultiForEachVariable_DataFlow());
+      case 38:
+        return Collections.<IDataFlowBuilder>singletonList(new MultiForEachVariableReference_DataFlow());
+      case 39:
+        return Collections.<IDataFlowBuilder>singletonList(new PageOperation_DataFlow());
+      case 40:
+        return Collections.<IDataFlowBuilder>singletonList(new PushOperation_DataFlow());
+      case 41:
+        return Collections.<IDataFlowBuilder>singletonList(new PutAllOperation_DataFlow());
+      case 42:
+        return Collections.<IDataFlowBuilder>singletonList(new RemoveAllElementsOperation_DataFlow());
+      case 43:
+        return Collections.<IDataFlowBuilder>singletonList(new RemoveAllSetElementsOperation_DataFlow());
+      case 44:
+        return Collections.<IDataFlowBuilder>singletonList(new RemoveAtElementOperation_DataFlow());
+      case 45:
+        return Collections.<IDataFlowBuilder>singletonList(new RemoveElementOperation_DataFlow());
+      case 46:
+        return Collections.<IDataFlowBuilder>singletonList(new RemoveSetElementOperation_DataFlow());
+      case 47:
+        return Collections.<IDataFlowBuilder>singletonList(new SequenceCreator_DataFlow());
+      case 48:
+        return Collections.<IDataFlowBuilder>singletonList(new SetElementOperation_DataFlow());
+      case 49:
+        return Collections.<IDataFlowBuilder>singletonList(new SingleArgumentSequenceOperation_DataFlow());
+      case 50:
+        return Collections.<IDataFlowBuilder>singletonList(new SingletonSequenceCreator_DataFlow());
+      case 51:
+        return Collections.<IDataFlowBuilder>singletonList(new SkipOperation_DataFlow());
+      case 52:
+        return Collections.<IDataFlowBuilder>singletonList(new SortOperation_DataFlow());
+      case 53:
+        return Collections.<IDataFlowBuilder>singletonList(new SubListOperation_DataFlow());
+      case 54:
+        return Collections.<IDataFlowBuilder>singletonList(new SubMapOperation_DataFlow());
+      case 55:
+        return Collections.<IDataFlowBuilder>singletonList(new SubSetOperation_DataFlow());
+      case 56:
+        return Collections.<IDataFlowBuilder>singletonList(new TailListOperation_DataFlow());
+      case 57:
+        return Collections.<IDataFlowBuilder>singletonList(new TailMapOperation_DataFlow());
+      case 58:
+        return Collections.<IDataFlowBuilder>singletonList(new TailSetOperation_DataFlow());
+      case 59:
+        return Collections.<IDataFlowBuilder>singletonList(new TakeOperation_DataFlow());
+      default:
     }
     return Collections.<IDataFlowBuilder>emptyList();
   }
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
-    }
-    return res;
-  }
-  private static final Map<SAbstractConcept, Integer> indices_vhxjlb_a0b = buildConceptIndices(MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1202df1ada0L, "jetbrains.mps.baseLanguage.collections.structure.AbstractContainerCreator"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10e3d20dbefL, "jetbrains.mps.baseLanguage.collections.structure.AddAllElementsOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d969dca87L, "jetbrains.mps.baseLanguage.collections.structure.AddAllSetElementsOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10e39e3ff80L, "jetbrains.mps.baseLanguage.collections.structure.AddElementOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11db0384e32L, "jetbrains.mps.baseLanguage.collections.structure.AddFirstElementOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11db0389d32L, "jetbrains.mps.baseLanguage.collections.structure.AddLastElementOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d9514ebd8L, "jetbrains.mps.baseLanguage.collections.structure.AddSetElementOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11205199ac2L, "jetbrains.mps.baseLanguage.collections.structure.BinaryOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x118bc7e66e2L, "jetbrains.mps.baseLanguage.collections.structure.ChunkOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x119a966b94dL, "jetbrains.mps.baseLanguage.collections.structure.ComparatorSortOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x5507720272481451L, "jetbrains.mps.baseLanguage.collections.structure.ContainsAllOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x117b3740258L, "jetbrains.mps.baseLanguage.collections.structure.ContainsKeyOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x110efd61311L, "jetbrains.mps.baseLanguage.collections.structure.ContainsOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1203903c318L, "jetbrains.mps.baseLanguage.collections.structure.ContainsValueOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11df825e596L, "jetbrains.mps.baseLanguage.collections.structure.DowncastExpression"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1520010667848262L, "jetbrains.mps.baseLanguage.collections.structure.FoldLeftOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x152001066784e507L, "jetbrains.mps.baseLanguage.collections.structure.FoldRightOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10cac65f399L, "jetbrains.mps.baseLanguage.collections.structure.ForEachStatement"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10cac6f0962L, "jetbrains.mps.baseLanguage.collections.structure.ForEachVariable"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10cac6fa5c3L, "jetbrains.mps.baseLanguage.collections.structure.ForEachVariableReference"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10ec44fd67eL, "jetbrains.mps.baseLanguage.collections.structure.GetElementOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x110bc593e18L, "jetbrains.mps.baseLanguage.collections.structure.GetIndexOfOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x37cbb2bef55da8aeL, "jetbrains.mps.baseLanguage.collections.structure.GetLastIndexOfOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x116dbb34f2dL, "jetbrains.mps.baseLanguage.collections.structure.HashMapCreator"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x489c7f2006b05842L, "jetbrains.mps.baseLanguage.collections.structure.HeadListOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4071445L, "jetbrains.mps.baseLanguage.collections.structure.HeadMapOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4bdd40dL, "jetbrains.mps.baseLanguage.collections.structure.HeadSetOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d5cc25c8fL, "jetbrains.mps.baseLanguage.collections.structure.InsertElementOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1188372895aL, "jetbrains.mps.baseLanguage.collections.structure.InternalSequenceOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120debe16c6L, "jetbrains.mps.baseLanguage.collections.structure.JoinOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d6213c318L, "jetbrains.mps.baseLanguage.collections.structure.ListElementAccessExpression"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x116ea555a25L, "jetbrains.mps.baseLanguage.collections.structure.MapElement"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x118f249550fL, "jetbrains.mps.baseLanguage.collections.structure.MapEntry"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x118f2481867L, "jetbrains.mps.baseLanguage.collections.structure.MapInitializer"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x117ae10e4d9L, "jetbrains.mps.baseLanguage.collections.structure.MapOperationExpression"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11914b836a4L, "jetbrains.mps.baseLanguage.collections.structure.MapRemoveOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x7d7db8f4181fe9f2L, "jetbrains.mps.baseLanguage.collections.structure.MultiForEachStatement"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x7d7db8f4181fea18L, "jetbrains.mps.baseLanguage.collections.structure.MultiForEachVariable"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x731a0dad81895f16L, "jetbrains.mps.baseLanguage.collections.structure.MultiForEachVariableReference"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11108717200L, "jetbrains.mps.baseLanguage.collections.structure.PageOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x2e9a0b9a88f4311cL, "jetbrains.mps.baseLanguage.collections.structure.PushOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120ebcea0f9L, "jetbrains.mps.baseLanguage.collections.structure.PutAllOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11154a8aed3L, "jetbrains.mps.baseLanguage.collections.structure.RemoveAllElementsOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d96b14ae4L, "jetbrains.mps.baseLanguage.collections.structure.RemoveAllSetElementsOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11db038dd8cL, "jetbrains.mps.baseLanguage.collections.structure.RemoveAtElementOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10fcd477695L, "jetbrains.mps.baseLanguage.collections.structure.RemoveElementOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d968cae32L, "jetbrains.mps.baseLanguage.collections.structure.RemoveSetElementOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d14c97b16L, "jetbrains.mps.baseLanguage.collections.structure.SequenceCreator"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d5e2fc7c1L, "jetbrains.mps.baseLanguage.collections.structure.SetElementOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x7818f71827244b5L, "jetbrains.mps.baseLanguage.collections.structure.SingleArgumentSequenceOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11fade5d82aL, "jetbrains.mps.baseLanguage.collections.structure.SingletonSequenceCreator"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x111076c0538L, "jetbrains.mps.baseLanguage.collections.structure.SkipOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x118b81cc8f6L, "jetbrains.mps.baseLanguage.collections.structure.SortOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x4e2f4f8785270237L, "jetbrains.mps.baseLanguage.collections.structure.SubListOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4139de2L, "jetbrains.mps.baseLanguage.collections.structure.SubMapOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4c28b15L, "jetbrains.mps.baseLanguage.collections.structure.SubSetOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x489c7f2006b0588eL, "jetbrains.mps.baseLanguage.collections.structure.TailListOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4127c90L, "jetbrains.mps.baseLanguage.collections.structure.TailMapOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4c1050eL, "jetbrains.mps.baseLanguage.collections.structure.TailSetOperation"), MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x111083dd9b7L, "jetbrains.mps.baseLanguage.collections.structure.TakeOperation"));
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1202df1ada0L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10e3d20dbefL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d969dca87L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10e39e3ff80L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11db0384e32L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11db0389d32L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d9514ebd8L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11205199ac2L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x118bc7e66e2L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x119a966b94dL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x5507720272481451L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x117b3740258L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x110efd61311L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1203903c318L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11df825e596L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1520010667848262L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x152001066784e507L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10cac65f399L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10cac6f0962L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10cac6fa5c3L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10ec44fd67eL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x110bc593e18L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x37cbb2bef55da8aeL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x116dbb34f2dL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x489c7f2006b05842L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4071445L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4bdd40dL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d5cc25c8fL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x1188372895aL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120debe16c6L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d6213c318L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x116ea555a25L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x118f249550fL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x118f2481867L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x117ae10e4d9L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11914b836a4L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x7d7db8f4181fe9f2L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x7d7db8f4181fea18L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x731a0dad81895f16L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11108717200L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x2e9a0b9a88f4311cL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120ebcea0f9L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11154a8aed3L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d96b14ae4L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11db038dd8cL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x10fcd477695L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d968cae32L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d14c97b16L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11d5e2fc7c1L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x7818f71827244b5L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x11fade5d82aL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x111076c0538L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x118b81cc8f6L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x4e2f4f8785270237L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4139de2L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4c28b15L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x489c7f2006b0588eL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4127c90L), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x120c4c1050eL), MetaIdFactory.conceptId(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x111083dd9b7L)).seal();
 }

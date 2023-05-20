@@ -23,7 +23,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class DependencyRecorder<T> {
-  private ManyToManyMap<T, SNode> myObjectsToNodes = new ManyToManyMap<T, SNode>();
+  private ManyToManyMap<T, SNode> myObjectsToNodes = new ManyToManyMap<>();
 
   public void rebuild(T t, Runnable r) {
     MyNodeReadListener listener = new MyNodeReadListener();
@@ -52,7 +52,7 @@ public class DependencyRecorder<T> {
   }
 
   private class MyNodeReadListener extends AbstractNodesReadListener {
-    private Set<SNode> myDependencies = new HashSet<SNode>();
+    private Set<SNode> myDependencies = new HashSet<>();
 
     private Set<SNode> getDependencies() {
       return Collections.unmodifiableSet(myDependencies);

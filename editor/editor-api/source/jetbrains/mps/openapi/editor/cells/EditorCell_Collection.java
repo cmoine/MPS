@@ -52,29 +52,6 @@ public interface EditorCell_Collection extends EditorCell, Iterable<EditorCell> 
    */
   EditorCell lastCell();
 
-  /**
-   * Not used anymore.
-   * <p>
-   * Use {@link jetbrains.mps.util.IterableUtil#indexOf(Iterable, Object)} instead in rare cases to get
-   * actual index of the cell. Use new {@link #iterator(EditorCell, boolean)} method for more optimal
-   * iterations.
-   *
-   * @deprecated since MPS 3.4
-   */
-  @Deprecated
-  int indexOf(EditorCell cell);
-
-  /**
-   * Not used anymore.
-   * <p>
-   * Use {@link jetbrains.mps.util.IterableUtil#get(Iterable, int)} instead in rare cases to get actual
-   * cell by index. Use new {@link #iterator(EditorCell, boolean)} method for more optimal iterations.
-   *
-   * @deprecated since MPS 3.4
-   */
-  @Deprecated
-  EditorCell getCellAt(int index);
-
   void addEditorCell(EditorCell editorCell);
 
   void addEditorCellBefore(EditorCell editorCell, EditorCell anchor);
@@ -82,25 +59,6 @@ public interface EditorCell_Collection extends EditorCell, Iterable<EditorCell> 
   void addEditorCellAfter(EditorCell editorCell, EditorCell anchor);
 
   void removeCell(EditorCell editorCell);
-
-  /**
-   * @deprecated since MPS 3.4 is deprecated. Use addEditorCellAt(EditorCell cellToAdd, int index).
-   */
-  @Deprecated
-  void addEditorCellAt(int index, EditorCell cellToAdd, boolean ignoreBraces);
-
-  /**
-   * Insert specified EditorCell into specified position. Index parameter should fulfill following requirements:
-   * - index >=0
-   * - index <= size of this EditorCell_Collection
-   * the size of this collection is the number of cells returned from iterator() method of this EditorCell_Collection
-   *
-   * @param cellToAdd cell to add
-   * @param index     position to add cell
-   * @deprecated since MPS 3.4 use addEditorCellBefore()/addEditorCellAfter() methods
-   */
-  @Deprecated
-  void addEditorCellAt(EditorCell cellToAdd, int index);
 
   int getCellsCount();
 
@@ -111,12 +69,6 @@ public interface EditorCell_Collection extends EditorCell, Iterable<EditorCell> 
   EditorCell firstContentCell();
 
   EditorCell lastContentCell();
-
-  /**
-   * @deprecated since MPS 3.4 not used anymore. Use {@link #getCellsCount()} instead.
-   */
-  @Deprecated
-  int getContentCellsCount();
 
   @NotNull
   CellLayout getCellLayout();

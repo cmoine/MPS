@@ -20,6 +20,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.ui.components.JBLabel;
 import com.intellij.ui.components.JBPanel;
+import org.jetbrains.annotations.ApiStatus.ScheduledForRemoval;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,6 +34,8 @@ public abstract class ViewUsagesDeleteDialog extends DialogWrapper {
   private JBPanel myPanel;
   private ViewAction myViewAction;
 
+  @Deprecated
+  @ScheduledForRemoval(inVersion = "2020.1")
   public ViewUsagesDeleteDialog(@Nullable Project project, String title, String text) {
     this(project, title, text, null);
   }
@@ -40,8 +43,7 @@ public abstract class ViewUsagesDeleteDialog extends DialogWrapper {
   public ViewUsagesDeleteDialog(@Nullable Project project, String title, String text, @Nullable String warningText) {
     super(project);
     setTitle(title);
-    setOKButtonText("&Delete anyway");
-    setCancelButtonText("Ca&ncel");
+    setOKButtonText("Delete anyway");
     setErrorText(warningText);
 
     myPanel = new JBPanel(new GridBagLayout());
@@ -73,8 +75,9 @@ public abstract class ViewUsagesDeleteDialog extends DialogWrapper {
 
   private class ViewAction extends AbstractAction {
 
-    public ViewAction() {
-      super("&View usages", Actions.Find);
+    ViewAction() {
+      super("View usages", Actions.Find);
+      this.putValue(Action.MNEMONIC_KEY, (int)'v');
     }
 
     @Override

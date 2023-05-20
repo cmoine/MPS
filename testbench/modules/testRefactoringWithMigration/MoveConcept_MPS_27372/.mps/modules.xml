@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MPSProject">
+    <projectModules>
+      <modulePath path="$PROJECT_DIR$/modules/testmaterial.moveConcept.InstanceSolution/testmaterial.moveConcept.InstanceSolution.msd" folder="" />
+      <modulePath path="$PROJECT_DIR$/modules/testmaterial.moveConcept.SourceLanguage/testmaterial.moveConcept.SourceLanguage.mpl" folder="" />
+      <modulePath path="$PROJECT_DIR$/modules/testmaterial.moveConcept.TargetLanguage/testmaterial.moveConcept.TargetLanguage.mpl" folder="" />
+    </projectModules>
+  </component>
+</project>

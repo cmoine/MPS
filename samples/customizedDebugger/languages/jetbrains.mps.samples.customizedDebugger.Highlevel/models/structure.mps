@@ -2,8 +2,7 @@
 <model ref="r:952c085e-2c92-4359-824c-db4b9ee3e68e(jetbrains.mps.samples.customizedDebugger.Highlevel.structure)">
   <persistence version="9" />
   <languages>
-    <use id="c72da2b9-7cce-4447-8389-f407dc1158b7" name="jetbrains.mps.lang.structure" version="3" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="78434eb8-b0e5-444b-850d-e7c4ad2da9ab(jetbrains.mps.devkit.aspect.structure)" />
   </languages>
   <imports>
     <import index="4fqr" ref="r:fa713d69-08ea-4732-b1f2-cb07f9e103ef(jetbrains.mps.execution.util.structure)" />
@@ -51,16 +50,16 @@
     <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="77mX7nW$Zsx" role="1TKVEi">
       <property role="IQ2ns" value="8203012558887843617" />
-      <property role="20lmBu" value="aggregation" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="participants" />
-      <property role="20lbJX" value="1..n" />
+      <property role="20lbJX" value="fLJekj6/1..n" />
       <ref role="20lvS9" node="77mX7nW$Zs7" resolve="Participant" />
     </node>
     <node concept="1TJgyj" id="77mX7nW$Zsz" role="1TKVEi">
       <property role="IQ2ns" value="8203012558887843619" />
-      <property role="20lmBu" value="aggregation" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="smallTalk" />
-      <property role="20lbJX" value="0..n" />
+      <property role="20lbJX" value="fLJekj5/0..n" />
       <ref role="20lvS9" node="77mX7nW$Zsj" resolve="Message" />
     </node>
     <node concept="PrWs8" id="77mX7nW$Zs5" role="PzmwI">
@@ -84,9 +83,8 @@
     <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="77mX7nW$Zsv" role="1TKVEi">
       <property role="IQ2ns" value="8203012558887843615" />
-      <property role="20lmBu" value="reference" />
       <property role="20kJfa" value="author" />
-      <property role="20lbJX" value="1" />
+      <property role="20lbJX" value="fLJekj4/1" />
       <ref role="20lvS9" node="77mX7nW$Zs7" resolve="Participant" />
     </node>
     <node concept="1TJgyi" id="77mX7nW$Zst" role="1TKVEl">

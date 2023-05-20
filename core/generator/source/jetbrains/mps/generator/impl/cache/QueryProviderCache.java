@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,77 +16,73 @@
 package jetbrains.mps.generator.impl.cache;
 
 import jetbrains.mps.generator.IGeneratorLogger;
-import jetbrains.mps.generator.impl.interpreted.ReflectiveQueryProvider;
+import jetbrains.mps.generator.ModelGenerationPlan;
 import jetbrains.mps.generator.impl.query.GeneratorQueryProvider;
 import jetbrains.mps.generator.impl.query.QueryProviderBase;
-import jetbrains.mps.util.QueryMethodGenerated;
+import jetbrains.mps.generator.runtime.TemplateModel;
+import jetbrains.mps.generator.runtime.TemplateModule;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 
+import java.util.ArrayDeque;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 
 /**
  * Keep track of GeneratorQueryProvider instances during generation session
  *
- * XXX shall pass TemplateModules/TemplateModels of generation plan here, and ask TemplateModel for
- * GQP class (use honest module.getOwnClass() then). Though, don't need one for generated generators, how to tell?
- *
  * @author Artem Tikhomirov
  */
 public class QueryProviderCache implements GeneratorQueryProvider.Source {
-  private final Map<SModelReference, ReflectiveQueryProvider> myReflectionQueries = new HashMap<>();
-  private final Map<SModelReference, GeneratorQueryProvider> myDirectQueries = new HashMap<SModelReference, GeneratorQueryProvider>();
+  private final Map<SModelReference, GeneratorQueryProvider> myQueries = new HashMap<>();
+  private final HashMap<SModelReference, TemplateModel> myTemplateModels = new HashMap<>();
   private final IGeneratorLogger myLog;
 
-  public QueryProviderCache(@NotNull IGeneratorLogger log) {
+  public QueryProviderCache(@NotNull ModelGenerationPlan plan, @NotNull IGeneratorLogger log) {
+    LinkedHashSet<TemplateModule> modules = new LinkedHashSet<>();
+    ArrayDeque<TemplateModule> q = new ArrayDeque<>(plan.getGenerators());
+    while (!q.isEmpty()) {
+      TemplateModule templateModule = q.removeFirst();
+      if (modules.add(templateModule)) {
+        q.addAll(templateModule.getEmployedGenerators());
+        q.addAll(templateModule.getExtendedGenerators());
+      }
+    }
+    for (TemplateModule templateModule : modules) {
+      for (TemplateModel templateModel : templateModule.getModels()) {
+        myTemplateModels.put(templateModel.getSModelReference(), templateModel);
+      }
+    }
     myLog = log;
   }
 
+  @NotNull
   @Override
   public synchronized GeneratorQueryProvider getQueryProvider(@NotNull SNodeReference templateNode) {
     final SModelReference mr = templateNode.getModelReference();
-    ReflectiveQueryProvider rqp = myReflectionQueries.get(mr);
-    if (rqp != null) {
-      return rqp;
+    GeneratorQueryProvider queryProvider = myQueries.get(mr);
+
+    if (queryProvider != null) {
+      return queryProvider;
     }
-    GeneratorQueryProvider gqp = myDirectQueries.get(mr);
-    if (gqp != null) {
-      return gqp;
+    TemplateModel templateModel = myTemplateModels.get(mr);
+    if (templateModel == null) {
+      myLog.error(templateNode, "Attempt to generate with generator not included into the plan");
+    } else {
+      queryProvider = templateModel.getQueryProvider();
     }
-    try {
-      Class<?> qg = QueryMethodGenerated.getQueriesGeneratedClassFor(mr, true);
-      if (GeneratorQueryProvider.class.isAssignableFrom(qg)) {
-        @SuppressWarnings("unchecked")
-        Class<GeneratorQueryProvider> providerClass = (Class<GeneratorQueryProvider>) qg;
-        gqp = providerClass.newInstance();
-        if (((QueryProviderBase) gqp).needsReflectiveFallback()) {
-          ((QueryProviderBase) gqp).useReflectiveFallback(new ReflectiveQueryProvider(qg));
-        }
-        myDirectQueries.put(mr, gqp);
-        return gqp;
-      } else {
-        rqp = new ReflectiveQueryProvider(qg);
-        myReflectionQueries.put(mr,rqp);
-        return rqp;
-      }
-    } catch (ClassNotFoundException e) {
-      myLog.error(templateNode, e.getMessage());
-    } catch (InstantiationException e) {
-      myLog.handleException(e);
-      myLog.error(templateNode, e.toString());
-    } catch (IllegalAccessException e) {
-      myLog.handleException(e);
-      myLog.error(templateNode, e.toString());
+    if (queryProvider == null) {
+      // fall-back to default
+      queryProvider = new QueryProviderBase(1) {
+      };
     }
-    // fall-back to default
-    return new QueryProviderBase(1) {
-    };
+    myQueries.put(mr, queryProvider);
+    return queryProvider;
   }
 
   public synchronized void dispose() {
-    myReflectionQueries.clear();
-    myDirectQueries.clear();
+    myQueries.clear();
   }
 }

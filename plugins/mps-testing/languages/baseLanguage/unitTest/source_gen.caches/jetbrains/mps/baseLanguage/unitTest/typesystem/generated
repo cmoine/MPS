@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-57e5h00wxeseskqxlihx95ap15wssyd" />
+<product version="3" modelHash="-9u8x4s9pf33bccnw575nj1kqzpt8gaw">
+  <files names="TypesystemDescriptor.java:check_AssertStatementInsideTestMethod_NonTypesystemRule.java:check_AssertThrows_NonTypesystemRule.java:check_TestIsCompiledAndLoadedByMPS_NonTypesystemRule.java:typeof_Message_InferenceRule.java" />
+</product>
 

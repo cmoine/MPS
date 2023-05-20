@@ -37,20 +37,19 @@ public class DefaultContextAssistantManager implements ContextAssistantManager {
   private final EditorSettings myEditorSettings;
 
   public static DefaultContextAssistantManager newInstance(EditorComponent component, SRepository repository) {
-    SelectionMenuProvider executableContextAssistantItemsMenuProvider = new FilteringSelectionMenuProvider(
-        new SelectionMenuProviderByCellAndConcept(MenuLocations.CONTEXT_ASSISTANT),
-        new CanExecuteFilter());
+    SelectionMenuProvider executableContextAssistantItemsMenuProvider =
+        new FilteringSelectionMenuProvider(new SelectionMenuProviderByCellAndConcept(MenuLocations.CONTEXT_ASSISTANT),
+                                           new CanExecuteFilter());
 
-    EditorContextAssistants assistants = new EditorContextAssistants(
-        new AncestorOrSmallCellContextAssistantFinder(), executableContextAssistantItemsMenuProvider, component.getSelectionManager(),
-        repository.getModelAccess());
-    EditorContextAssistantsController controller = new EditorContextAssistantsController(
-        assistants, component.getSelectionManager(), component.getUpdater());
+    EditorContextAssistants assistants = new EditorContextAssistants(executableContextAssistantItemsMenuProvider, component.getSelectionManager(),
+                                                                     repository.getModelAccess());
+
+    EditorContextAssistantsController controller = new EditorContextAssistantsController(assistants, component.getSelectionManager(), component.getUpdater());
     return new DefaultContextAssistantManager(component, assistants, controller, EditorSettings.getInstance());
   }
 
   private DefaultContextAssistantManager(EditorComponent editorComponent, EditorContextAssistants assistants, EditorContextAssistantsController controller,
-      EditorSettings editorSettings) {
+                                         EditorSettings editorSettings) {
     myEditorComponent = editorComponent;
     myAssistants = assistants;
     myController = controller;
@@ -61,32 +60,23 @@ public class DefaultContextAssistantManager implements ContextAssistantManager {
     return myAssistants.hasRegisteredAssistants() && myEditorSettings.isShowContextAssistant() && !myEditorComponent.isReadOnly();
   }
 
-  private void startStopUpdating() {
-    boolean is = myController.isUpdating();
-    boolean shouldBe = shouldBeUpdating();
-
-    if (is == shouldBe) {
-      return;
-    }
-
-    if (shouldBe) {
-      myController.startUpdating();
-    } else {
-      myController.stopUpdating();
-      myAssistants.hideMenu();
-    }
-  }
-
   @Override
   public void register(ContextAssistant assistant) {
     myAssistants.register(assistant);
-    startStopUpdating();
+    if (shouldBeUpdating() && !myController.isUpdating()) {
+      myController.startUpdating();
+    }
+    if (myController.isUpdating()) {
+      myController.scheduleUpdate();
+    }
   }
 
   @Override
   public void unregister(ContextAssistant assistant) {
     myAssistants.unregister(assistant);
-    startStopUpdating();
+    if (!myAssistants.hasRegisteredAssistants() && myController.isUpdating()) {
+      myController.stopUpdating();
+    }
   }
 
   @Override

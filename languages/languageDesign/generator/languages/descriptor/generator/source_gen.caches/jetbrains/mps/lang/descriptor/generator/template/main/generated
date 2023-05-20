@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-97a4e2s7nd8f3hgwxyr8ysaznu8ttll" />
+<product version="3" modelHash="-a91raw819xtolw69ntrocvo60hu22xh">
+  <files names="Mapping_GeneratorModule.java:Mapping_LanguageModule.java:QueriesGenerated.java:Switch_AspectDescriptor_Instantiate.java:Switch_ContrubuteLanguageExtensions.java:Switch_InstantiateAspectDescriptor.java:TemplateModelImpl.java:Template_GDClass.java:Template_GeneratorRuntime.java:Template_InterpretedGeneratorRuntimeDescriptor.java:Template_Language.java:Template_generator_descriptor.java:Template_language_descriptor.java" />
+</product>
 

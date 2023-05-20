@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1163670490218:jetbrains.mps.baseLanguage.structure.SwitchStatement" />
+  <root nodeRef="r:fa147b87-5d8f-4f59-9661-20ce28b825e1(jetbrains.mps.lang.actions.enumMigration)/4241665505353445588">
+    <file name="Side_MigrationUtils.java">
+      <node id="4241665505353445596" at="13,13,14,20" concept="1" />
+      <node id="4241665505353445599" at="15,13,16,22" concept="1" />
+      <node id="4241665505353445602" at="17,13,18,22" concept="1" />
+      <node id="4241665505353445609" at="19,14,20,20" concept="1" />
+      <node id="4241665505353445621" at="24,24,25,202" concept="1" />
+      <node id="4241665505353445630" at="28,18,29,203" concept="1" />
+      <node id="4241665505353445637" at="30,18,31,214" concept="1" />
+      <node id="4241665505353445646" at="32,14,33,20" concept="1" />
+      <node id="4241665505353445588" at="36,0,37,0" concept="2" trace="enumSwitchIndex" />
+      <node id="4241665505353445619" at="23,61,26,5" concept="0" />
+      <node id="4241665505353445643" at="26,5,34,5" concept="4" />
+      <node id="4241665505353445609" at="11,62,21,5" concept="4" />
+      <node id="4241665505353445603" at="11,0,23,0" concept="3" trace="value#(Lorg/jetbrains/mps/openapi/language/SEnumerationLiteral;)Ljava/lang/String;" />
+      <node id="4241665505353445612" at="23,0,36,0" concept="3" trace="fromValue#(Ljava/lang/String;)Lorg/jetbrains/mps/openapi/language/SEnumerationLiteral;" />
+      <scope id="4241665505353445596" at="13,13,14,20" />
+      <scope id="4241665505353445599" at="15,13,16,22" />
+      <scope id="4241665505353445602" at="17,13,18,22" />
+      <scope id="4241665505353445609" at="19,14,20,20" />
+      <scope id="4241665505353445620" at="24,24,25,202" />
+      <scope id="4241665505353445629" at="28,18,29,203" />
+      <scope id="4241665505353445636" at="30,18,31,214" />
+      <scope id="4241665505353445645" at="32,14,33,20" />
+      <scope id="4241665505353445607" at="11,62,21,5" />
+      <scope id="4241665505353445642" at="23,61,34,5" />
+      <scope id="4241665505353445603" at="11,0,23,0">
+        <var name="enummember" id="4241665505353445604" />
+      </scope>
+      <scope id="4241665505353445612" at="23,0,36,0">
+        <var name="value" id="4241665505353445613" />
+      </scope>
+      <unit id="4241665505353445588" at="10,0,38,0" name="jetbrains.mps.lang.actions.enumMigration.Side_MigrationUtils" />
+    </file>
+  </root>
+</debug-info>
+

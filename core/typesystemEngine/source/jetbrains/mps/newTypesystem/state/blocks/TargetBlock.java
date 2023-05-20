@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,11 +18,12 @@ package jetbrains.mps.newTypesystem.state.blocks;
 import jetbrains.mps.newTypesystem.TypesUtil;
 import jetbrains.mps.newTypesystem.state.State;
 import jetbrains.mps.newTypesystem.state.TargetState;
+import jetbrains.mps.smodel.SNodeUtil;
+import jetbrains.mps.util.CollectionUtil;
+import jetbrains.mps.util.Pair;
 import org.jetbrains.mps.openapi.model.SModel;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeId;
-import jetbrains.mps.util.CollectionUtil;
-import jetbrains.mps.util.Pair;
 
 import java.util.List;
 import java.util.Set;
@@ -47,7 +48,7 @@ public class TargetBlock extends Block {
 
   private static String getModelName(SNode originalNode) {
     SModel model = originalNode.getModel();
-    return model == null ? "<unknown model>" : jetbrains.mps.util.SNodeOperations.getModelLongName(model);
+    return model == null ? "<unknown_model>" : jetbrains.mps.util.SNodeOperations.getModelLongName(model);
   }
 
   @Override
@@ -62,12 +63,12 @@ public class TargetBlock extends Block {
 
   @Override
   public String getPresentation() {
-    return "Target node " + myNode;
+    return getShortPresentation();
   }
 
   @Override
   public String getShortPresentation() {
-    return "Target node" + myNode;
+    return String.format("Target node %s", SNodeUtil.getPresentation(myNode));
   }
 
   @Override
@@ -84,6 +85,6 @@ public class TargetBlock extends Block {
 
   @Override
   public Set<Pair<SNode, ConditionKind>> getInitialInputs() {
-    return CollectionUtil.set(new Pair<SNode, ConditionKind>(myNode, ConditionKind.CONCRETE));
+    return CollectionUtil.set(new Pair<>(myNode, ConditionKind.CONCRETE));
   }
 }

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/5351203823916750322:jetbrains.mps.baseLanguage.structure.TryUniversalStatement" />
+  <root nodeRef="r:1cb9f3bb-9050-412e-95bb-906faebc74ca(jetbrains.mps.lang.test.launcher)/8987195388768214308">
+    <file name="LaunchTestWorker.java">
+      <node id="8987195388770050942" at="21,0,22,0" concept="9" trace="LAUNCHER_CLASS" />
+      <node id="8987195388770072070" at="22,0,23,0" concept="9" trace="LAUNCHER_SOLUTION" />
+      <node id="8987195388770146431" at="23,0,24,0" concept="9" trace="LAUNCHER_METHOD" />
+      <node id="8987195388768386366" at="25,44,26,20" concept="11" />
+      <node id="6060921217232395320" at="30,45,31,67" concept="5" />
+      <node id="2466222985987530767" at="31,67,32,37" concept="2" />
+      <node id="3307120220353975269" at="32,37,33,62" concept="5" />
+      <node id="3307120220353975273" at="33,62,34,23" concept="2" />
+      <node id="3307120220353975275" at="34,23,35,23" concept="6" />
+      <node id="6932091290372747337" at="39,22,40,73" concept="5" />
+      <node id="6932091290372577488" at="40,73,41,73" concept="5" />
+      <node id="6932091290372778757" at="41,73,42,0" concept="8" />
+      <node id="6932091290373125225" at="42,0,43,51" concept="7" />
+      <node id="6932091290373142744" at="43,51,44,103" concept="7" />
+      <node id="8987195388769302161" at="45,49,46,68" concept="5" />
+      <node id="8987195388769291989" at="47,11,48,63" concept="2" />
+      <node id="8987195388770726979" at="48,63,49,105" concept="5" />
+      <node id="8987195388770863584" at="49,105,50,69" concept="5" />
+      <node id="6932091290372590752" at="50,69,51,31" concept="2" />
+      <node id="8987195388770852594" at="51,31,52,0" concept="8" />
+      <node id="6932091290372798399" at="53,51,54,95" concept="2" />
+      <node id="8987195388770979496" at="54,95,55,0" concept="8" />
+      <node id="8987195388770985378" at="57,36,58,64" concept="2" />
+      <node id="8987195388775926537" at="59,18,60,83" concept="2" />
+      <node id="8987195388770124565" at="62,9,63,0" concept="8" />
+      <node id="8987195388770035139" at="64,42,65,97" concept="2" />
+      <node id="8987195388770626803" at="65,97,66,0" concept="8" />
+      <node id="8987195388770630696" at="67,95,68,38" concept="2" />
+      <node id="6932091290372700465" at="70,7,71,0" concept="8" />
+      <node id="8987195388770922194" at="73,11,74,42" concept="2" />
+      <node id="6932091290372979468" at="74,42,75,0" concept="8" />
+      <node id="6932091290373058702" at="76,70,77,38" concept="2" />
+      <node id="6932091290373058706" at="77,38,78,20" concept="2" />
+      <node id="6932091290373080470" at="80,12,81,18" concept="2" />
+      <node id="8987195388770545951" at="86,27,87,29" concept="2" />
+      <node id="8987195388768410595" at="90,42,91,82" concept="2" />
+      <node id="8987195388775920337" at="59,16,61,11" concept="0" />
+      <node id="6932091290373075017" at="80,10,82,5" concept="0" />
+      <node id="8987195388768293497" at="25,0,28,0" concept="1" trace="LaunchTestWorker#(Ljetbrains/mps/tool/common/Script;)V" />
+      <node id="8987195388768408865" at="90,0,93,0" concept="10" trace="main#([Ljava/lang/String;)V" />
+      <node id="8987195388770534754" at="85,0,89,0" concept="4" trace="failBuild#()V" />
+      <node id="8987195388775893672" at="56,16,61,11" concept="3" />
+      <node id="8987195388770973302" at="56,14,62,9" concept="0" />
+      <node id="6932091290372979467" at="72,55,79,7" concept="12" />
+      <node id="5529288089450204625" at="29,0,37,0" concept="4" trace="createEnvironment#()Ljetbrains/mps/tool/environment/Environment;" />
+      <node id="8987195388770747087" at="52,0,62,9" concept="3" />
+      <node id="6932091290372830030" at="71,0,82,5" concept="3" />
+      <node id="8987195388769330056" at="46,68,69,7" concept="12" />
+      <node id="6932091290372528313" at="44,103,70,7" concept="2" />
+      <node id="8987195388768435610" at="38,0,84,0" concept="4" trace="work#()V" />
+      <scope id="8987195388768293501" at="25,44,26,20" />
+      <scope id="8987195388775893674" at="57,36,58,64" />
+      <scope id="8987195388775920338" at="59,18,60,83" />
+      <scope id="8987195388770589825" at="67,95,68,38" />
+      <scope id="6932091290373075018" at="80,12,81,18" />
+      <scope id="8987195388770534758" at="86,27,87,29" />
+      <scope id="8987195388768408869" at="90,42,91,82" />
+      <scope id="8987195388770747089" at="53,51,55,0" />
+      <scope id="8987195388769330060" at="64,42,66,0" />
+      <scope id="8987195388770589822" at="67,7,69,7">
+        <var name="e" id="8987195388770589823" />
+      </scope>
+      <scope id="6932091290372979469" at="73,11,75,0" />
+      <scope id="6932091290372984586" at="76,70,78,20" />
+      <scope id="8987195388768293497" at="25,0,28,0">
+        <var name="whatToDo" id="8987195388768293690" />
+      </scope>
+      <scope id="8987195388769330059" at="64,7,67,7">
+        <var name="e" id="8987195388769330061" />
+      </scope>
+      <scope id="6932091290372984583" at="76,7,79,7">
+        <var name="e" id="6932091290372984584" />
+      </scope>
+      <scope id="8987195388768408865" at="90,0,93,0">
+        <var name="args" id="8987195388768409408" />
+      </scope>
+      <scope id="8987195388770534754" at="85,0,89,0" />
+      <scope id="5529288089450204629" at="30,45,35,23">
+        <var name="config" id="6060921217232395321" />
+        <var name="environment" id="3307120220353975268" />
+      </scope>
+      <scope id="8987195388770973303" at="56,16,61,11" />
+      <scope id="6932091290372830032" at="72,55,79,7" />
+      <scope id="5529288089450204625" at="29,0,37,0" />
+      <scope id="8987195388769330057" at="47,11,63,0">
+        <var name="ctor" id="8987195388770726980" />
+        <var name="meth" id="8987195388770863585" />
+      </scope>
+      <scope id="6932091290372562670" at="45,49,69,7">
+        <var name="code" id="8987195388769302162" />
+      </scope>
+      <scope id="8987195388768435614" at="39,22,82,5">
+        <var name="method" id="6932091290372577489" />
+        <var name="object" id="6932091290372747338" />
+      </scope>
+      <scope id="8987195388768435610" at="38,0,84,0" />
+      <unit id="8987195388768214308" at="19,0,94,0" name="jetbrains.mps.lang.test.launcher.LaunchTestWorker" />
+    </file>
+  </root>
+  <root nodeRef="r:1cb9f3bb-9050-412e-95bb-906faebc74ca(jetbrains.mps.lang.test.launcher)/8987195388768869158">
+    <file name="WorkerCallback.java">
+      <node id="8987195388768870328" at="8,0,9,0" concept="4" trace="info#(Ljava/lang/String;)V" />
+      <node id="8987195388768871923" at="10,0,11,0" concept="4" trace="warning#(Ljava/lang/String;)V" />
+      <node id="8987195388768882421" at="12,0,13,0" concept="4" trace="debug#(Ljava/lang/String;)V" />
+      <node id="8987195388768885162" at="14,0,15,0" concept="4" trace="error#(Ljava/lang/String;)V" />
+      <node id="8987195388768966558" at="16,0,17,0" concept="4" trace="error#(Ljava/lang/String;Ljava/lang/Throwable;)V" />
+      <node id="8987195388769096320" at="18,0,19,0" concept="4" trace="failBuild#()V" />
+      <scope id="8987195388768870328" at="8,0,9,0">
+        <var name="text" id="8987195388768880252" />
+      </scope>
+      <scope id="8987195388768871923" at="10,0,11,0">
+        <var name="text" id="8987195388768881379" />
+      </scope>
+      <scope id="8987195388768882421" at="12,0,13,0">
+        <var name="text" id="8987195388768883872" />
+      </scope>
+      <scope id="8987195388768885162" at="14,0,15,0">
+        <var name="texgt" id="8987195388768885820" />
+      </scope>
+      <scope id="8987195388768966558" at="16,0,17,0">
+        <var name="ex" id="8987195388768968081" />
+        <var name="text" id="8987195388768967331" />
+      </scope>
+      <scope id="8987195388769096320" at="18,0,19,0" />
+      <unit id="8987195388768869158" at="6,0,20,0" name="jetbrains.mps.lang.test.launcher.WorkerCallback" />
+    </file>
+  </root>
+</debug-info>
+

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="brei15m9hjyp1k8jfwjequbi6usp6qo" />
+<product version="3" modelHash="-azstnkgna3w0hyn7p3oq7rfo5ymz4hg">
+  <files names="BaseConcept_Constraints.java:ConstraintsAspectDescriptor.java:IResolveInfo_Constraints.java:MigrationAnnotation_Constraints.java" />
+</product>
 

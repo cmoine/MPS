@@ -1,0 +1,11 @@
+Requirements Integration
+
+1. The plugin must integrate with IntelliJ
+This is key. When a project is open, this functionality must be triggered. 
+
+2. 00034: The system must be runnable on Tomcat
+For sure 
+
+3. User management support
+Names and ages must be recordered. 
+

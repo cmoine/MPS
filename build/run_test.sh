@@ -14,6 +14,6 @@ else
     echo "Unknown OS: ${UNAME}"
     exit;
 fi
-
+echo $mps_home
 #mkdir $mps_home/help
-ant -f $mps_home/build/test.xml -Dbuild.number=MPS-141.2500
+ant -f $mps_home/build/test.xml -Dbuild.number=MPS-213.1

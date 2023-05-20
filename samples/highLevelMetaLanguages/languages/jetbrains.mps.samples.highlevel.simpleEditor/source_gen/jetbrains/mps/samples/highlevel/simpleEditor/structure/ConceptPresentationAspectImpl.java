@@ -4,27 +4,42 @@ package jetbrains.mps.samples.highlevel.simpleEditor.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_EditorAspectDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SimpleEditorDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SimplePropertyReference = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_EditorAspectDeclaration;
+  private ConceptPresentation props_SimpleEditorDeclaration;
+  private ConceptPresentation props_SimplePropertyReference;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.EditorAspectDeclaration:
+        if (props_EditorAspectDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("EditorAspectDeclaration");
+          props_EditorAspectDeclaration = cpb.create();
+        }
         return props_EditorAspectDeclaration;
-      case 1:
+      case LanguageConceptSwitch.SimpleEditorDeclaration:
+        if (props_SimpleEditorDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xc457c5de60274104L, 0xab9ca31c5404ae8bL, 0x346ead2c08ccf6ffL, 0x346ead2c08ccf9f3L, "cncpt", "", "");
+          props_SimpleEditorDeclaration = cpb.create();
+        }
         return props_SimpleEditorDeclaration;
-      case 2:
+      case LanguageConceptSwitch.SimplePropertyReference:
+        if (props_SimplePropertyReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xc457c5de60274104L, 0xab9ca31c5404ae8bL, 0x346ead2c08ccfa10L, 0x346ead2c08ccfa1fL, "prop", "", "");
+          props_SimplePropertyReference = cpb.create();
+        }
         return props_SimplePropertyReference;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

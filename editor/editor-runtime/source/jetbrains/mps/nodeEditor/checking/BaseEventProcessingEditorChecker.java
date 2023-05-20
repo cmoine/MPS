@@ -65,9 +65,7 @@ public abstract class BaseEventProcessingEditorChecker extends BaseEditorChecker
       return true;
     }
     if (event instanceof SModelPropertyEvent) {
-      if (needsUpdateAfterPropertyEvent((SModelPropertyEvent) event)) {
-        return true;
-      }
+      return needsUpdateAfterPropertyEvent((SModelPropertyEvent) event);
     }
     return false;
   }

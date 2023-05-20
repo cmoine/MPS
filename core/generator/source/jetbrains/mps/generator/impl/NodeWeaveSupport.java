@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,9 @@ package jetbrains.mps.generator.impl;
 
 import jetbrains.mps.generator.impl.RoleValidation.RoleValidator;
 import jetbrains.mps.generator.impl.RoleValidation.Status;
-import jetbrains.mps.generator.runtime.GenerationException;
-import jetbrains.mps.generator.runtime.NodeWeaveFacility;
+import jetbrains.mps.generator.runtime.ApplySink;
 import jetbrains.mps.generator.runtime.TemplateContext;
-import jetbrains.mps.generator.runtime.TemplateDeclaration;
-import jetbrains.mps.generator.runtime.TemplateDeclarationWeavingAware;
+import jetbrains.mps.generator.runtime.WeavingWithAnchor;
 import jetbrains.mps.textgen.trace.TracingUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -29,51 +27,67 @@ import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Weave support implementation
+ *
  * @author Artem Tikhomirov
  * @since 3.3
  */
-public final class NodeWeaveSupport implements NodeWeaveFacility {
+/*package*/ final class NodeWeaveSupport implements ApplySink {
   private final TemplateContext myTemplateContext;
+  private final SNode myContextParentNode;
+  private final WeavingWithAnchor myAnchorQuery;
   private final SNodeReference myTemplateNode;
-  private final TemplateExecutionEnvironmentImpl myEnv;
   private final TemplateGenerator myGenerator;
-  @NotNull
-  private final WeaveContext myWeaveContext;
+  private final ArrayList<SNode> myWeaved = new ArrayList<>();
 
-  public NodeWeaveSupport(@NotNull WeaveContext weaveContext, @NotNull SNodeReference templateNodeReference, @NotNull TemplateExecutionEnvironmentImpl env) {
-    myWeaveContext = weaveContext;
-    myTemplateContext = weaveContext.getTemplateContext();
+  /*package*/ NodeWeaveSupport(@NotNull TemplateContext templateContext, @NotNull SNode outputContextNode,
+                               @Nullable WeavingWithAnchor anchorQuery, @NotNull SNodeReference templateNodeReference,
+                               @NotNull TemplateGenerator generator) {
+    myTemplateContext = templateContext;
+    myContextParentNode = outputContextNode;
+    myAnchorQuery = anchorQuery;
     myTemplateNode = templateNodeReference;
-    myEnv = env;
-    myGenerator = env.getGenerator();
-  }
-
-  @NotNull
-  @Override
-  public TemplateContext getTemplateContext() {
-    return myTemplateContext;
+    myGenerator = generator;
   }
 
   @Override
-  public void weaveNode(@NotNull SContainmentLink childRole, @NotNull SNode outputNodeToWeave) throws GenerationFailureException {
-    weaveNode(myWeaveContext.getContextNode(), childRole, outputNodeToWeave);
+  public void add(SNode node) throws GenerationFailureException {
+    throw new TemplateProcessingFailureException(myTemplateNode, "Templates with fragments (TF) at the top are not supported for weaving");
   }
 
   @Override
-  public void weaveNode(@NotNull SNode contextParentNode, @NotNull SContainmentLink childRole, @NotNull SNode outputNodeToWeave) throws
-      GenerationFailureException {
-    weave(contextParentNode, childRole, outputNodeToWeave, myWeaveContext.getAnchorNode(contextParentNode, outputNodeToWeave));
+  public void add(SContainmentLink aggregation, SNode outputNodeToWeave) throws GenerationFailureException {
+    myWeaved.add(outputNodeToWeave);
+    weaveNode(aggregation, outputNodeToWeave);
   }
 
-  private void weave(@NotNull SNode contextParentNode, @NotNull SContainmentLink childRole, @NotNull SNode outputNodeToWeave, @Nullable SNode anchor) {
-    assert anchor == null || anchor.getParent() == contextParentNode; // perhaps, this check shall be up the stack?
-    TracingUtil.fillOriginalNode(myTemplateContext.getInput(), outputNodeToWeave, false);
+  @Override
+  public void add(SContainmentLink aggregation, Collection<SNode> outputNodesToWeave) throws GenerationFailureException {
+    myWeaved.addAll(outputNodesToWeave);
+    for (SNode outputNodeToWeave : outputNodesToWeave) {
+      weaveNode(aggregation, outputNodeToWeave);
+    }
+  }
+
+  List<SNode> weavedNodes() {
+    return myWeaved;
+  }
+
+  private void weaveNode(@NotNull SContainmentLink childRole, @NotNull SNode outputNodeToWeave) throws GenerationFailureException {
+    SNode contextParentNode = myContextParentNode;
+    SNode anchor = myAnchorQuery == null ? null : myAnchorQuery.getAnchorNode(myTemplateContext, contextParentNode, outputNodeToWeave);
+    if (anchor != null && anchor.getParent() != contextParentNode) {
+      throw new TemplateProcessingFailureException(myTemplateNode, "Anchor query shall give a child of weave context parent",
+          GeneratorUtil.describe(contextParentNode, "context parent node"),
+          GeneratorUtil.describe(anchor.getParent(), "anchor parent node"));
+    }
+    TracingUtil.deriveOriginalNode(myTemplateContext.getInput(), outputNodeToWeave);
 
     // check child
     RoleValidator v = myGenerator.getChildRoleValidator(contextParentNode, childRole);
@@ -100,23 +114,5 @@ public final class NodeWeaveSupport implements NodeWeaveFacility {
       }
     }
     contextParentNode.insertChildBefore(childRole, outputNodeToWeave, anchor);
-  }
-
-  @Override
-  public Collection<SNode> weaveTemplate(@NotNull SNodeReference templateDeclaration, Object... args) throws GenerationException {
-    TemplateDeclaration templateDeclarationInstance = myEnv.loadTemplateDeclaration(templateDeclaration, myTemplateNode, myTemplateContext, args);
-    if (templateDeclarationInstance instanceof TemplateDeclarationWeavingAware) {
-      // compatibility
-      return ((TemplateDeclarationWeavingAware) templateDeclarationInstance).weave(myEnv, myTemplateContext, myWeaveContext.getContextNode());
-    }
-    if (templateDeclarationInstance != null /*templateDeclarationInstance instanceof TemplateDeclarationWeavingAware2*/) {
-      return templateDeclarationInstance.weave(myWeaveContext, this);
-    }
-    return Collections.emptyList();
-  }
-
-  @Override
-  public Collection<SNode> weaveTemplate(@NotNull TemplateDeclaration templateDeclaration) throws GenerationException {
-    return templateDeclaration.weave(myWeaveContext, this);
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,11 @@
 package jetbrains.mps.workbench.index;
 
 import com.intellij.util.io.DataExternalizer;
-import jetbrains.mps.smodel.SModelReference;
 import jetbrains.mps.util.io.ModelInputStream;
 import jetbrains.mps.util.io.ModelOutputStream;
 import jetbrains.mps.workbench.index.ModelRootsData.Entry;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.openapi.model.SModelReference;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -67,7 +67,7 @@ import java.util.Collection;
     ModelInputStream mis = new ModelInputStream(new ByteArrayInputStream(data));
     SModelReference modelRef = mis.readModelReference();
     int count = mis.readInt();
-    ArrayList<Entry> entries = new ArrayList<Entry>(count);
+    ArrayList<Entry> entries = new ArrayList<>(count);
     for (; count > 0; count--) {
       entries.add(new Entry(mis.readString(), mis.readNodeId(), mis.readConcept()));
     }

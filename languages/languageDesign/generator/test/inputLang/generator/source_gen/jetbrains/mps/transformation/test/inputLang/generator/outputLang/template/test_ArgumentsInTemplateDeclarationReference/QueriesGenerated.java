@@ -5,7 +5,6 @@ package jetbrains.mps.transformation.test.inputLang.generator.outputLang.templat
 import jetbrains.mps.generator.runtime.Generated;
 import jetbrains.mps.generator.template.BaseMappingRuleContext;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.generator.template.PropertyMacroContext;
 import jetbrains.mps.generator.template.IfMacroContext;
 import jetbrains.mps.generator.template.TemplateArgumentContext;
@@ -16,50 +15,68 @@ import jetbrains.mps.generator.template.TemplateQueryContext;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SModelOperations;
 import jetbrains.mps.internal.collections.runtime.IWhereFilter;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SEnumOperations;
+import org.jetbrains.mps.openapi.language.SProperty;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SConcept;
 
 @Generated
 public class QueriesGenerated {
-  public static boolean baseMappingRule_Condition_7496726876599935510(final BaseMappingRuleContext _context) {
+  public static boolean rule_Condition_0_0(final BaseMappingRuleContext _context) {
     return true;
   }
-  public static boolean baseMappingRule_Condition_4929591503636513204(final BaseMappingRuleContext _context) {
-    return SPropertyOperations.getInteger(_context.getNode(), MetaAdapterFactory.getProperty(0xab0ae915e3b54f35L, 0xb55ac655d649a03cL, 0x118e6cad46aL, 0x44696d5abe089ec8L, "key")) == 1;
+  public static boolean rule_Condition_0_1(final BaseMappingRuleContext _context) {
+    return SPropertyOperations.getInteger(_context.getNode(), PROPS.key$31TA) == 1;
   }
-  public static boolean baseMappingRule_Condition_4929591503636589503(final BaseMappingRuleContext _context) {
-    return SPropertyOperations.getInteger(_context.getNode(), MetaAdapterFactory.getProperty(0xab0ae915e3b54f35L, 0xb55ac655d649a03cL, 0x118e6cad46aL, 0x44696d5abe089ec8L, "key")) == 2;
+  public static boolean rule_Condition_0_2(final BaseMappingRuleContext _context) {
+    return SPropertyOperations.getInteger(_context.getNode(), PROPS.key$31TA) == 2;
   }
-  public static boolean baseMappingRule_Condition_4929591503636676782(final BaseMappingRuleContext _context) {
+  public static boolean rule_Condition_0_3(final BaseMappingRuleContext _context) {
     return false;
   }
-  public static boolean baseMappingRule_Condition_4929591503636614138(final BaseMappingRuleContext _context) {
-    return SPropertyOperations.getInteger(_context.getNode(), MetaAdapterFactory.getProperty(0xab0ae915e3b54f35L, 0xb55ac655d649a03cL, 0x118e6cad46aL, 0x44696d5abe089ec8L, "key")) == 3;
+  public static boolean rule_Condition_0_4(final BaseMappingRuleContext _context) {
+    return SPropertyOperations.getInteger(_context.getNode(), PROPS.key$31TA) == 3;
   }
-  public static Object propertyMacro_GetPropertyValue_7496726876599876334(final PropertyMacroContext _context) {
+  public static Object propertyMacro_GetValue_1_0(final PropertyMacroContext _context) {
     return "text from argument:" + ((String) _context.getVariable("p1"));
   }
-  public static boolean ifMacro_Condition_4929591503636643306(final IfMacroContext _context) {
+  public static boolean ifMacro_Condition_0_0(final IfMacroContext _context) {
     return false;
   }
-  public static Object templateArgumentQuery_7496726876599916822(final TemplateArgumentContext _context) {
+  public static Object templateArgumentQuery_0_0(final TemplateArgumentContext _context) {
     return "from expression";
   }
-  public static Object templateArgumentQuery_7496726876599937591(final TemplateArgumentContext _context) {
+  public static Object templateArgumentQuery_0_1(final TemplateArgumentContext _context) {
     return "from within case of inline switch";
   }
-  public static Object templateArgumentQuery_4929591503636646079(final TemplateArgumentContext _context) {
+  public static Object templateArgumentQuery_0_2(final TemplateArgumentContext _context) {
     return "from IF/ELSE alternative concequence";
   }
-  public static Object templateArgumentQuery_4929591503636680081(final TemplateArgumentContext _context) {
+  public static Object templateArgumentQuery_0_3(final TemplateArgumentContext _context) {
     return "from within default case of in-line switch";
   }
-  public static Iterable<SNode> sourceNodesQuery_7496726876599914779(final SourceSubstituteMacroNodesContext _context) {
-    return SLinkOperations.getChildren(_context.getNode(), MetaAdapterFactory.getContainmentLink(0xab0ae915e3b54f35L, 0xb55ac655d649a03cL, 0x11645953ab3L, 0x11645abf534L, "inputChild"));
+  public static Iterable<SNode> sourceNodesQuery_2_0(final SourceSubstituteMacroNodesContext _context) {
+    return SLinkOperations.getChildren(_context.getNode(), LINKS.inputChild$4qxF);
   }
-  public static boolean mappingConfiguration_Condition_7496726876599722461(final TemplateQueryContext _context) {
-    return ListSequence.fromList(SModelOperations.roots(_context.getInputModel(), MetaAdapterFactory.getConcept(0xab0ae915e3b54f35L, 0xb55ac655d649a03cL, 0x11645953ab3L, "jetbrains.mps.transformation.test.inputLang.structure.InputRoot"))).where(new IWhereFilter<SNode>() {
+  public static boolean mc_Condition_0(final TemplateQueryContext _context) {
+    return ListSequence.fromList(SModelOperations.roots(_context.getInputModel(), CONCEPTS.InputRoot$nY)).where(new IWhereFilter<SNode>() {
       public boolean accept(SNode it) {
-        return SPropertyOperations.hasValue(it, MetaAdapterFactory.getProperty(0xab0ae915e3b54f35L, 0xb55ac655d649a03cL, 0x11645953ab3L, 0x117eb48fdf5L, "useInTest"), "argsInTemplDeclRef", "none");
+        return SEnumOperations.isMember(SPropertyOperations.getEnum(it, PROPS.useInTest$1LnL), 0x6809b95ff9d9a17eL);
       }
     }).isNotEmpty();
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty key$31TA = MetaAdapterFactory.getProperty(0xab0ae915e3b54f35L, 0xb55ac655d649a03cL, 0x118e6cad46aL, 0x44696d5abe089ec8L, "key");
+    /*package*/ static final SProperty useInTest$1LnL = MetaAdapterFactory.getProperty(0xab0ae915e3b54f35L, 0xb55ac655d649a03cL, 0x11645953ab3L, 0x117eb48fdf5L, "useInTest");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink inputChild$4qxF = MetaAdapterFactory.getContainmentLink(0xab0ae915e3b54f35L, 0xb55ac655d649a03cL, 0x11645953ab3L, 0x11645abf534L, "inputChild");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept InputRoot$nY = MetaAdapterFactory.getConcept(0xab0ae915e3b54f35L, 0xb55ac655d649a03cL, 0x11645953ab3L, "jetbrains.mps.transformation.test.inputLang.structure.InputRoot");
   }
 }

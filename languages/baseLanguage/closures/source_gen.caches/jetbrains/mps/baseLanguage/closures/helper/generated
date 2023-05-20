@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="1oj91lw6fjzvwc6tmrmyyg4jm68qmj4" />
+<product version="3" modelHash="b9isq1obfgth6qxbduenchg9ai68kyd">
+  <files names="AdaptableClassifierTarget.java:ClosureLiteralAdapterBuilder.java:ClosureLiteralTarget.java:ClosureLiteralUtil.java:Flags.java:FunctionTypeUtil.java:Keys.java:PrepStatementUtil.java:StatementListUtil.java:TypeMatcher.java:Values.java:WrappersUtils.java" />
+</product>
 

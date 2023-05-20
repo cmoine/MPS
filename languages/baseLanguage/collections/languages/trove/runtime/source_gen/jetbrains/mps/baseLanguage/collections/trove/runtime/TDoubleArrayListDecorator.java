@@ -40,7 +40,7 @@ public class TDoubleArrayListDecorator extends AbstractList<Double> implements L
   }
   @Override
   public ListIterator<Double> listIterator() {
-    return new TDoubleArrayListDecorator.TDoubleListIterator(0);
+    return new TDoubleListIterator(0);
   }
   @Override
   public void clear() {
@@ -127,7 +127,7 @@ public class TDoubleArrayListDecorator extends AbstractList<Double> implements L
     return this.primList.size();
   }
   public ListIterator<Double> listIterator(int index) {
-    return new TDoubleArrayListDecorator.TDoubleListIterator(index);
+    return new TDoubleListIterator(index);
   }
   protected boolean removePrim(double primValue) {
     int idx = this.primList.indexOf(primValue);

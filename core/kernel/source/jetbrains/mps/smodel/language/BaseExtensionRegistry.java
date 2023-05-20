@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2012 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,9 @@
  */
 package jetbrains.mps.smodel.language;
 
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.smodel.structure.Extension;
+import jetbrains.mps.smodel.structure.ExtensionDescriptor;
 import jetbrains.mps.smodel.structure.ExtensionPoint;
 
 import java.util.ArrayList;
@@ -26,9 +28,9 @@ import java.util.List;
 import java.util.Map;
 
 public class BaseExtensionRegistry {
-  private Map<String, Collection<Extension>> myActiveExtensions = new HashMap<String, Collection<Extension>>();
-  private Map<String, Collection<Extension>> myInactiveExtensions = new HashMap<String, Collection<Extension>>();
-  private Map<String, ExtensionPoint> myExtensionPoints = new HashMap<String, ExtensionPoint>();
+  private Map<String, Collection<Extension>> myActiveExtensions = new HashMap<>();
+  private Map<String, Collection<Extension>> myInactiveExtensions = new HashMap<>();
+  private Map<String, ExtensionPoint> myExtensionPoints = new HashMap<>();
 
   @SuppressWarnings("unchecked")
   public <T> ExtensionPoint<T> getExtensionPoint(String id) {
@@ -40,13 +42,13 @@ public class BaseExtensionRegistry {
   }
 
   public <T> Iterable<Extension<T>> getExtensions(ExtensionPoint<T> extensionPoint) {
-    return optExtensionsBucket(extensionPoint.getId(), this.<T>activeExtensions());
+    return optExtensionsBucket(extensionPoint.getId(), this.activeExtensions());
   }
 
   public <T> Iterable<T> getObjects(ExtensionPoint<T> extensionPoint) {
-    Collection<Extension<T>> extensions = optExtensionsBucket(extensionPoint.getId(), this.<T>activeExtensions());
+    Collection<Extension<T>> extensions = optExtensionsBucket(extensionPoint.getId(), this.activeExtensions());
     if (extensions.isEmpty()) return Collections.emptyList();
-    List<T> res = new ArrayList<T>(extensions.size());
+    List<T> res = new ArrayList<>(extensions.size());
     for (Extension<T> extension : extensions) {
       res.add(extension.get());
     }
@@ -58,6 +60,16 @@ public class BaseExtensionRegistry {
     myActiveExtensions.clear();
     myInactiveExtensions.clear();
     myExtensionPoints.clear();
+  }
+
+  public void registerExtensionDescriptor(ExtensionDescriptor extensionDescriptor) {
+    registerExtensions(extensionDescriptor.getExtensions());
+    registerExtensionPoints(extensionDescriptor.getExtensionPoints());
+  }
+
+  public void unregisterExtensionDescriptor(ExtensionDescriptor extensionDescriptor) {
+    unregisterExtensionPoints(extensionDescriptor.getExtensionPoints());
+    unregisterExtensions(extensionDescriptor.getExtensions());
   }
 
   @SuppressWarnings("unchecked")
@@ -151,17 +163,12 @@ public class BaseExtensionRegistry {
   }
 
   private <T> Collection<Extension<T>> extensionsBucket(String id, Map<String, Collection<Extension<T>>> store) {
-    Collection<Extension<T>> extensions = store.get(id);
-    if (extensions == null) {
-      extensions = new ArrayList<Extension<T>>();
-      store.put(id, extensions);
-    }
-    return extensions;
+    return store.computeIfAbsent(id, k -> new ArrayList<>());
   }
 
   private <E> Collection<E> optExtensionsBucket(String id, Map<String, Collection<E>> store) {
     Collection<E> extensions = store.get(id);
-    return extensions != null ? extensions : Collections.<E>emptyList();
+    return extensions != null ? extensions : Collections.emptyList();
   }
 
   private <E> void clearExtensionsBucket(String id, Map<String, Collection<E>> store) {
@@ -173,13 +180,25 @@ public class BaseExtensionRegistry {
   }
 
   private boolean activateExtension(Extension extension) {
-    extension.activate();
-    return true;
+    try {
+      extension.activate();
+      return true;
+    } catch (Exception ex) {
+      String m = String.format("Activation failed for extension %s of point %s", extension.getClass().getName(), extension.getExtensionPointId());
+      Logger.getLogger(getClass()).error(m, ex);
+    }
+    return false;
   }
 
   private boolean deactivateExtension(Extension extension) {
-    extension.deactivate();
-    return true;
+    try {
+      extension.deactivate();
+      return true;
+    } catch (Exception ex) {
+      String m = String.format("Deactivation failed for extension %s of point %s", extension.getClass().getName(), extension.getExtensionPointId());
+      Logger.getLogger(getClass()).error(m, ex);
+    }
+    return false;
   }
 
   @SuppressWarnings("unchecked")

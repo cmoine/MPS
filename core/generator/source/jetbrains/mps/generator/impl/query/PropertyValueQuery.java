@@ -27,14 +27,14 @@ import org.jetbrains.mps.openapi.model.SNodeReference;
  */
 public interface PropertyValueQuery extends Query {
   @NotNull
-  public SProperty getProperty();
-  public Object getTemplateValue();
+  SProperty getProperty();
+  Object getTemplateValue();
   @NotNull
-  public SNodeReference getMacro();
+  SNodeReference getMacro();
   @Nullable
   Object evaluate(@NotNull PropertyMacroContext context) throws GenerationFailureException;
 
-  public abstract class Base implements PropertyValueQuery {
+  abstract class Base implements PropertyValueQuery {
     private final SNodeReference myMacro;
     private final SProperty myProperty;
     private final Object myTemplateValue;

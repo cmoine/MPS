@@ -36,7 +36,7 @@ public class ModuleCollector implements Computable<List<SModuleReference>> {
 
   @Override
   public List<SModuleReference> compute() {
-    ArrayList<SModuleReference> rv = new ArrayList<SModuleReference>(50);
+    ArrayList<SModuleReference> rv = new ArrayList<>(50);
     for (SModule m : myModules) {
       rv.add(m.getModuleReference());
     }

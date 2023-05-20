@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ import com.intellij.psi.PsiElementFinder;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.PsiPackage;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.jgoodies.common.collect.ArrayListModel;
 import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.idea.core.project.SolutionIdea;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiModel;
@@ -32,10 +31,9 @@ import jetbrains.mps.util.Computable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SModel;
+import org.jetbrains.mps.openapi.model.SModelName;
 import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.module.SRepository;
-
-import java.util.List;
 
 /**
  * Finds psi packages that correspond to models
@@ -52,30 +50,42 @@ public class MPSPackageFinder extends PsiElementFinder {
   @Nullable
   @Override
   public PsiPackage findPackage(@NotNull final String qualifiedName) {
+    final SModelName modelName;
+    try {
+      modelName = new SModelName(qualifiedName);
+    } catch (IllegalArgumentException ex) {
+      // It's ok, IDEA passes whatever text it likes here (see JavaClassReference#advancedResolveInner),
+      // and as long as there's no facility to check model name for validity, handling exception is the only way to get along with IDEA's perception of
+      // 'qualified name'.
+      // FWIW, I've checked PackagePrefixElementFinder implementation, and it doesn't recognize
+      // "package.qualified.name." (note trailing dot) as a valid package name, too.
+      return null;
+    }
     SRepository repository = ProjectHelper.getProjectRepository(myProject);
+    if (repository == null) {
+      // e.g. default project
+      return null;
+    }
     return new ModelAccessHelper(repository.getModelAccess()).runReadAction(new Computable<PsiPackage>() {
       @Override
       public PsiPackage compute() {
-        List<PsiPackage> packages = new ArrayListModel<PsiPackage>();
+        for (SModel model : new ModuleRepositoryFacade(repository).getModelsByName(modelName)) {
+          SModule module = model.getModule();
+          if (!(module instanceof SolutionIdea)) {
+            continue;
+          }
+          if (!((SolutionIdea) module).getIdeaModule().getProject().equals(myProject)) {
+            continue;
+          }
 
-        SModel model = new ModuleRepositoryFacade(repository).getModelByName(qualifiedName);
-        if (model == null) {
-          return null;
+          MPSPsiProvider psiProvider = MPSPsiProvider.getInstance(myProject);
+          MPSPsiModel psiModel = psiProvider.getPsi(model);
+          if (psiModel == null) {
+            continue;
+          }
+          return new MPSPackage(psiModel, PsiManager.getInstance(myProject));
         }
-
-        SModule module = model.getModule();
-        if (!(module instanceof SolutionIdea)) {
-          return null;
-        }
-        if (!((SolutionIdea) module).getIdeaModule().getProject().equals(myProject)) {
-          return null;
-        }
-
-        MPSPsiModel psiModel = MPSPsiProvider.getInstance(myProject).getPsi(model);
-        if (psiModel == null) {
-          return null;
-        }
-        return new MPSPackage(psiModel, PsiManager.getInstance(myProject));
+        return null;
       }
     });
   }

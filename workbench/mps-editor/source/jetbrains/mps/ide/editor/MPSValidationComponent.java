@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,15 @@
 package jetbrains.mps.ide.editor;
 
 import com.intellij.openapi.components.ProjectComponent;
+import com.intellij.openapi.project.Project;
+import jetbrains.mps.checkers.IChecker;
+import jetbrains.mps.checkers.ICheckingPostprocessor;
+import jetbrains.mps.editor.runtime.LanguageEditorChecker;
+import jetbrains.mps.errors.CheckerRegistry;
+import jetbrains.mps.errors.item.NodeReportItem;
 import jetbrains.mps.ide.editor.checkers.ModelProblemsChecker;
 import jetbrains.mps.ide.editor.suppresserrors.SuppressErrorsChecker;
+import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.nodeEditor.Highlighter;
 import jetbrains.mps.nodeEditor.checking.DisposableEditorChecker;
 import jetbrains.mps.nodeEditor.checking.EditorChecker;
@@ -25,11 +32,12 @@ import jetbrains.mps.project.MPSProject;
 import jetbrains.mps.typesystem.checking.NonTypesystemEditorChecker;
 import jetbrains.mps.typesystem.checking.TypesEditorChecker;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.mps.openapi.module.SRepository;
 import typesystemIntegration.languageChecker.AutoResolver;
-import typesystemIntegration.languageChecker.LanguageEditorChecker;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 /**
  * evgeny, 12/27/11
@@ -37,24 +45,15 @@ import java.util.Stack;
 public class MPSValidationComponent implements ProjectComponent {
 
   private final MPSProject myProject;
-  private final Highlighter myHighlighter;
-  private Stack<EditorChecker> myCheckers = new Stack<EditorChecker>();
+  private Highlighter myHighlighter;
+  private final Stack<EditorChecker> myCheckers = new Stack<>();
 
-  public MPSValidationComponent(MPSProject mpsProject, Highlighter highlighter) {
-    myProject = mpsProject;
-    myHighlighter = highlighter;
-  }
-
-  @Override
-  public void initComponent() {
+  public MPSValidationComponent(Project ideaProject) {
+    myProject = ProjectHelper.fromIdeaProjectOrFail(ideaProject);
   }
 
   private void addChecker(EditorChecker checker) {
     myHighlighter.addChecker(myCheckers.push(checker));
-  }
-
-  @Override
-  public void disposeComponent() {
   }
 
   @NotNull
@@ -65,34 +64,33 @@ public class MPSValidationComponent implements ProjectComponent {
 
   @Override
   public void projectOpened() {
+    myHighlighter = Highlighter.getInstance(myProject);
     // TODO: create editor-specific "core" component in editor-runtime module and register all common checkers from there
-    myProject.getModelAccess().runReadAction(new Runnable() {
-      @Override
-      public void run() {
-        addChecker(new TypesEditorChecker());
-        addChecker(new NonTypesystemEditorChecker());
-        addChecker(new AutoResolver(myProject));
-        final SRepository repositoryToTrack4Changes = myProject.getRepository();
-        addChecker(new LanguageEditorChecker(repositoryToTrack4Changes));
-        addChecker(new SuppressErrorsChecker());
-        addChecker(new ModelProblemsChecker(repositoryToTrack4Changes));
-      }
+    myProject.getModelAccess().runReadAction(() -> {
+      final CheckerRegistry checkerRegistry = myProject.getComponent(CheckerRegistry.class);
+      List<ICheckingPostprocessor<NodeReportItem>> postprocessors =
+          checkerRegistry.getEditorCheckers().stream().map(IChecker::getPostprocessor).filter(Objects::nonNull).collect(Collectors.toList());
+
+      addChecker(new TypesEditorChecker(myProject.getRepository(), postprocessors));
+      addChecker(new NonTypesystemEditorChecker(myProject.getRepository(), postprocessors));
+      addChecker(new AutoResolver(myProject, postprocessors));
+      addChecker(new LanguageEditorChecker(myProject.getRepository(), checkerRegistry.getEditorCheckers()));
+      addChecker(new SuppressErrorsChecker());
+      addChecker(new ModelProblemsChecker(myProject.getRepository()));
     });
   }
 
   @Override
   public void projectClosed() {
-    myProject.getModelAccess().runReadAction(new Runnable() {
-      @Override
-      public void run() {
-        while (!myCheckers.isEmpty()) {
-          EditorChecker checker = myCheckers.pop();
-          myHighlighter.removeChecker(checker);
-          if (checker instanceof DisposableEditorChecker) {
-            ((DisposableEditorChecker) checker).dispose();
-          }
+    myProject.getModelAccess().runReadAction(() -> {
+      while (!myCheckers.isEmpty()) {
+        EditorChecker checker = myCheckers.pop();
+        myHighlighter.removeChecker(checker);
+        if (checker instanceof DisposableEditorChecker) {
+          ((DisposableEditorChecker) checker).dispose();
         }
       }
     });
+    myHighlighter = null;
   }
 }

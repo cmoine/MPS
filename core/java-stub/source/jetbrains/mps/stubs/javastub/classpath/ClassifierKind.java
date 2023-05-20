@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,12 +33,6 @@ public enum ClassifierKind {
 
   public static ClassifierKind getClassifierKind(ClassReader reader) {
     return getClassifierKind(reader.getAccess());
-  }
-
-  @Deprecated //slow
-  public static ClassifierKind getClassifierKind(InputStream inp) throws IOException {
-    ClassReader reader = new ClassReader(inp);
-    return ClassifierKind.getClassifierKind(reader);
   }
 
   public static ClassifierKind getClassifierKind(int flag) {

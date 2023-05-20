@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,11 +27,15 @@ public interface UndoRunnable extends Runnable {
   @Nullable
   String getName();
   @Nullable
-  String getGroupId();
+  default String getGroupId() {
+    return null;
+  }
 
-  boolean shallConfirmUndo();
+  default boolean shallConfirmUndo() {
+    return false;
+  }
 
-  public static abstract class Base implements UndoRunnable {
+  abstract class Base implements UndoRunnable {
     private final String myName;
     private final String myGroupId;
     private final boolean myConfirmUndo;

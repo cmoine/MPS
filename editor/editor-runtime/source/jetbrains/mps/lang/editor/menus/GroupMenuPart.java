@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 package jetbrains.mps.lang.editor.menus;
 
-import org.apache.log4j.Logger;
+import jetbrains.mps.logging.Logger;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -30,11 +30,11 @@ public abstract class GroupMenuPart<ItemT, ContextT> implements MenuPart<ItemT, 
       if (!isApplicable(context)) {
         return Collections.emptyList();
       }
-      return new CompositeMenuPart<>(getParts()).createItems(context);
-    } catch (RuntimeException e) {
-      Logger.getLogger(getClass()).warn("Exception creating items of group " + this, e);
+    } catch (Throwable t) {
+      Logger.getLogger(getClass()).error("Exception while executing code of the group " + this, t);
       return Collections.emptyList();
     }
+    return new CompositeMenuPart<>(getParts()).createItems(context);
   }
 
   protected void initialize(ContextT context) {

@@ -15,42 +15,44 @@
  */
 package jetbrains.mps.workbench.goTo.navigation;
 
-import jetbrains.mps.ide.icons.IconManager;
-import jetbrains.mps.workbench.choose.base.BasePresentation;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.navigation.ItemPresentation;
+import jetbrains.mps.ide.icons.GlobalIconManager;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.persistence.NavigationParticipant.NavigationTarget;
 
 import javax.swing.Icon;
 
-/*package*/ class SNodeDescriptorPresentation extends BasePresentation {
-  private NavigationTarget myNodeResult;
+/*package*/ class SNodeDescriptorPresentation implements ItemPresentation {
+  private final NavigationTarget myNodeResult;
 
   public SNodeDescriptorPresentation(NavigationTarget nodeResult) {
     myNodeResult = nodeResult;
   }
 
-  public String getModelName() {
+  /*package*/ String getModelName() {
     SModelReference modelReference = myNodeResult.getNodeReference().getModelReference();
     return modelReference.getModuleReference() == null
         ? modelReference.getModelName()
         : modelReference.getModuleReference().getModuleName() + "/" + modelReference.getModelName();
   }
 
+  @Nullable
   @Override
-  @NotNull
-  public String doGetPresentableText() {
+  public String getPresentableText() {
     return myNodeResult.getPresentation();
   }
 
+  @Nullable
   @Override
-  public String doGetLocationString() {
+  public String getLocationString() {
     return "(" + getModelName() + ")";
   }
 
+  @Nullable
   @Override
-  public Icon doGetIcon() {
+  public Icon getIcon(boolean b) {
     //we don't use alternative icon here since it's very expensive and slows down Ctrl+N popup considerably
-    return IconManager.getIcon(myNodeResult.getConcept());
+    return GlobalIconManager.getInstance().getIconFor(myNodeResult.getConcept());
   }
 }

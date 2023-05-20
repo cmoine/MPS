@@ -5,13 +5,10 @@ package jetbrains.mps.execution.configurations.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.List;
 import java.util.Arrays;
@@ -24,15 +21,18 @@ import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
+import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public final class StartProcessHandlerStatement__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0xd244b712f9d44d1L, "jetbrains.mps.execution.configurations.structure.StartProcessHandlerStatement");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<SNode> getComponent_id1ovLDatOk_Z = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getComponent").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("1ovLDatOk_Z").registry(REGISTRY).build();
-  public static final SMethod<SNode> getDispose_id1ovLDatOkDx = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getDispose").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("1ovLDatOkDx").registry(REGISTRY).build();
-  public static final SMethod<SNode> getListener_id1ovLDatOkE5 = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getListener").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("1ovLDatOkE5").registry(REGISTRY).build();
-  /*package*/ static final SMethod<SNode> getComponentByName_id1ovLDatOkEK = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getComponentByName").modifiers(SModifiersImpl.create(0, AccessPrivileges.PRIVATE)).concept(CONCEPT).id("1ovLDatOkEK").registry(REGISTRY).build(SMethodBuilder.createJavaParameter(String.class, ""));
+  public static final SMethod<SNode> getComponent_id1ovLDatOk_Z = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getComponent").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1594211126127708543L).languageId(0x84036750153aa615L, 0x22e72e4c0f6946ceL).build2();
+  public static final SMethod<SNode> getDispose_id1ovLDatOkDx = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getDispose").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1594211126127708769L).languageId(0x84036750153aa615L, 0x22e72e4c0f6946ceL).build2();
+  public static final SMethod<SNode> getListener_id1ovLDatOkE5 = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getListener").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1594211126127708805L).languageId(0x84036750153aa615L, 0x22e72e4c0f6946ceL).build2();
+  /*package*/ static final SMethod<SNode> getComponentByName_id1ovLDatOkEK = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getComponentByName").modifiers(0, AccessPrivileges.PRIVATE).concept(CONCEPT).baseMethodId(1594211126127708848L).languageId(0x84036750153aa615L, 0x22e72e4c0f6946ceL).build2(SMethodBuilder.createJavaParameter(String.class, ""));
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getComponent_id1ovLDatOk_Z, getDispose_id1ovLDatOkDx, getListener_id1ovLDatOkE5, getComponentByName_id1ovLDatOkEK);
 
@@ -40,31 +40,30 @@ public final class StartProcessHandlerStatement__BehaviorDescriptor extends Base
   }
 
   /*package*/ static SNode getComponent_id1ovLDatOk_Z(@NotNull SNode __thisNode__) {
-    return StartProcessHandlerStatement__BehaviorDescriptor.getComponentByName_id1ovLDatOkEK.invoke(__thisNode__, "component");
+    return StartProcessHandlerStatement__BehaviorDescriptor.getComponentByName_id1ovLDatOkEK.invokeSpecial(__thisNode__, "component");
   }
   /*package*/ static SNode getDispose_id1ovLDatOkDx(@NotNull SNode __thisNode__) {
-    return ((SNode) StartProcessHandlerStatement__BehaviorDescriptor.getComponentByName_id1ovLDatOkEK.invoke(__thisNode__, "dispose"));
+    return ((SNode) StartProcessHandlerStatement__BehaviorDescriptor.getComponentByName_id1ovLDatOkEK.invokeSpecial(__thisNode__, "dispose"));
   }
   /*package*/ static SNode getListener_id1ovLDatOkE5(@NotNull SNode __thisNode__) {
-    return ((SNode) StartProcessHandlerStatement__BehaviorDescriptor.getComponentByName_id1ovLDatOkEK.invoke(__thisNode__, "listener"));
+    return ((SNode) StartProcessHandlerStatement__BehaviorDescriptor.getComponentByName_id1ovLDatOkEK.invokeSpecial(__thisNode__, "listener"));
   }
   /*package*/ static SNode getComponentByName_id1ovLDatOkEK(@NotNull SNode __thisNode__, final String name) {
-    if ((SLinkOperations.getTarget(__thisNode__, MetaAdapterFactory.getContainmentLink(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0xd244b712f9d44d1L, 0x161fc6929dcff3a0L, "tool")) == null)) {
+    if ((SLinkOperations.getTarget(__thisNode__, LINKS.tool$8wlU) == null)) {
       return null;
     }
-    if (SNodeOperations.isInstanceOf(SLinkOperations.getTarget(__thisNode__, MetaAdapterFactory.getContainmentLink(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0xd244b712f9d44d1L, 0x161fc6929dcff3a0L, "tool")), MetaAdapterFactory.getConcept(0xa247e09e243545baL, 0xb8d207e93feba96aL, 0x1209b88731cL, "jetbrains.mps.baseLanguage.tuples.structure.NamedTupleLiteral"))) {
-      SNode first = ListSequence.fromList(SLinkOperations.getChildren(SNodeOperations.cast(SLinkOperations.getTarget(__thisNode__, MetaAdapterFactory.getContainmentLink(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0xd244b712f9d44d1L, 0x161fc6929dcff3a0L, "tool")), MetaAdapterFactory.getConcept(0xa247e09e243545baL, 0xb8d207e93feba96aL, 0x1209b88731cL, "jetbrains.mps.baseLanguage.tuples.structure.NamedTupleLiteral")), MetaAdapterFactory.getContainmentLink(0xa247e09e243545baL, 0xb8d207e93feba96aL, 0x1209b88731cL, 0x1209b9676f1L, "componentRef"))).findFirst(new IWhereFilter<SNode>() {
+    if (SNodeOperations.isInstanceOf(SLinkOperations.getTarget(__thisNode__, LINKS.tool$8wlU), CONCEPTS.NamedTupleLiteral$rD)) {
+      SNode first = ListSequence.fromList(SLinkOperations.getChildren(SNodeOperations.cast(SLinkOperations.getTarget(__thisNode__, LINKS.tool$8wlU), CONCEPTS.NamedTupleLiteral$rD), LINKS.componentRef$hTGc)).findFirst(new IWhereFilter<SNode>() {
         public boolean accept(SNode it) {
-          return SPropertyOperations.getString(SLinkOperations.getTarget(it, MetaAdapterFactory.getReferenceLink(0xa247e09e243545baL, 0xb8d207e93feba96aL, 0x1209b917141L, 0x1209b91a766L, "componentDeclaration")), MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name")).equals(name);
+          return SPropertyOperations.getString(SLinkOperations.getTarget(it, LINKS.componentDeclaration$nkzL), PROPS.name$MnvL).equals(name);
         }
       });
-      return SLinkOperations.getTarget(first, MetaAdapterFactory.getContainmentLink(0xa247e09e243545baL, 0xb8d207e93feba96aL, 0x1209b917141L, 0x1209b955a61L, "value"));
+      return SLinkOperations.getTarget(first, LINKS.value$fBTf);
     }
     return null;
   }
 
   /*package*/ StartProcessHandlerStatement__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -114,5 +113,20 @@ public final class StartProcessHandlerStatement__BehaviorDescriptor extends Base
   @Override
   public SAbstractConcept getConcept() {
     return CONCEPT;
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink tool$8wlU = MetaAdapterFactory.getContainmentLink(0x22e72e4c0f6946ceL, 0x84036750153aa615L, 0xd244b712f9d44d1L, 0x161fc6929dcff3a0L, "tool");
+    /*package*/ static final SContainmentLink componentRef$hTGc = MetaAdapterFactory.getContainmentLink(0xa247e09e243545baL, 0xb8d207e93feba96aL, 0x1209b88731cL, 0x1209b9676f1L, "componentRef");
+    /*package*/ static final SReferenceLink componentDeclaration$nkzL = MetaAdapterFactory.getReferenceLink(0xa247e09e243545baL, 0xb8d207e93feba96aL, 0x1209b917141L, 0x1209b91a766L, "componentDeclaration");
+    /*package*/ static final SContainmentLink value$fBTf = MetaAdapterFactory.getContainmentLink(0xa247e09e243545baL, 0xb8d207e93feba96aL, 0x1209b917141L, 0x1209b955a61L, "value");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept NamedTupleLiteral$rD = MetaAdapterFactory.getConcept(0xa247e09e243545baL, 0xb8d207e93feba96aL, 0x1209b88731cL, "jetbrains.mps.baseLanguage.tuples.structure.NamedTupleLiteral");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }

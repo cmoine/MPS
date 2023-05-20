@@ -5,13 +5,10 @@ package org.jetbrains.mps.samples.Money.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import org.jetbrains.mps.samples.money.runtime.Money;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.List;
 import java.util.Arrays;
@@ -24,12 +21,13 @@ import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public final class CurrentStockPrice__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x662a9f2b58024d16L, 0x955872c65c7a681eL, 0x3786e3f4808999c3L, "org.jetbrains.mps.samples.Money.structure.CurrentStockPrice");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<Money> getCurrentPrice_id3u6SZi0yq4L = new SMethodBuilder<Money>(new SJavaCompoundTypeImpl(Money.class)).name("getCurrentPrice").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("3u6SZi0yq4L").registry(REGISTRY).build();
+  public static final SMethod<Money> getCurrentPrice_id3u6SZi0yq4L = new SMethodBuilder<Money>(new SJavaCompoundTypeImpl(Money.class)).name("getCurrentPrice").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(4001135958233293105L).languageId(0x955872c65c7a681eL, 0x662a9f2b58024d16L).build2();
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getCurrentPrice_id3u6SZi0yq4L);
 
@@ -37,10 +35,10 @@ public final class CurrentStockPrice__BehaviorDescriptor extends BaseBHDescripto
   }
 
   /*package*/ static Money getCurrentPrice_id3u6SZi0yq4L(@NotNull SNode __thisNode__) {
-    if ((SLinkOperations.getTarget(__thisNode__, MetaAdapterFactory.getContainmentLink(0x662a9f2b58024d16L, 0x955872c65c7a681eL, 0x3786e3f4808999c3L, 0x3786e3f480b0926aL, "symbol")) == null)) {
+    if ((SLinkOperations.getTarget(__thisNode__, LINKS.symbol$ye9c) == null)) {
       return new Money(BigDecimal.ZERO, "USD");
     }
-    Money currentPrice = StockPriceDownloader.getInstance().getCurrentPrice(SPropertyOperations.getString(SLinkOperations.getTarget(__thisNode__, MetaAdapterFactory.getContainmentLink(0x662a9f2b58024d16L, 0x955872c65c7a681eL, 0x3786e3f4808999c3L, 0x3786e3f480b0926aL, "symbol")), MetaAdapterFactory.getProperty(0x662a9f2b58024d16L, 0x955872c65c7a681eL, 0x3786e3f480a9b18aL, 0x3786e3f480afac5bL, "symbol")));
+    Money currentPrice = StockPriceDownloader.getInstance().getCurrentPrice(SPropertyOperations.getString(SLinkOperations.getTarget(__thisNode__, LINKS.symbol$ye9c), PROPS.symbol$PWtg));
     if (currentPrice == null) {
       return new Money(BigDecimal.ZERO, "USD");
     }
@@ -48,7 +46,6 @@ public final class CurrentStockPrice__BehaviorDescriptor extends BaseBHDescripto
   }
 
   /*package*/ CurrentStockPrice__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override
@@ -92,5 +89,13 @@ public final class CurrentStockPrice__BehaviorDescriptor extends BaseBHDescripto
   @Override
   public SAbstractConcept getConcept() {
     return CONCEPT;
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink symbol$ye9c = MetaAdapterFactory.getContainmentLink(0x662a9f2b58024d16L, 0x955872c65c7a681eL, 0x3786e3f4808999c3L, 0x3786e3f480b0926aL, "symbol");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty symbol$PWtg = MetaAdapterFactory.getProperty(0x662a9f2b58024d16L, 0x955872c65c7a681eL, 0x3786e3f480a9b18aL, 0x3786e3f480afac5bL, "symbol");
   }
 }

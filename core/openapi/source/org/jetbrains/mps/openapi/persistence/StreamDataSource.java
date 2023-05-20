@@ -15,17 +15,46 @@
  */
 package org.jetbrains.mps.openapi.persistence;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
  * A data source with a single input stream.
- * For implementation consider extending FileDataSource or DataSourceBase
+ * Here it is cosy for us to distance ourselves from file-system
+ * and to work with streams of data rather than files.
  */
 public interface StreamDataSource extends DataSource {
+  /**
+   * @return a string identifier
+   */
+  @NotNull String getStreamName();
 
-  InputStream openInputStream() throws IOException;
+  /**
+   * Access named stream for reading.
+   * Caller is responsible to close the stream once done.
+   * @return stream to read from, never <code>null</code>
+   * @throws IOException if failed to open given named stream
+   */
+  @NotNull InputStream openInputStream() throws IOException;
 
-  OutputStream openOutputStream() throws IOException;
+  /**
+   * Access named stream for writing. Caller is responsible to close the stream once done.
+   * @return stream to write to, never <code>null</code>
+   * @throws IOException if failed to open given named stream
+   */
+  @NotNull OutputStream openOutputStream() throws IOException;
+
+  /**
+   * @return true if success
+   */
+  boolean delete();
+
+  /**
+   * if rv == false, then {@link #openInputStream()} will throw IOException
+   * so check it before reading
+   */
+  boolean exists();
 }

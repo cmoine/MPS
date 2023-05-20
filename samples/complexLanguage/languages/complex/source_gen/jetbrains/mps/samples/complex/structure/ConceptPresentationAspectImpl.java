@@ -4,45 +4,90 @@ package jetbrains.mps.samples.complex.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_AbsExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ArgExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ComplexType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConjugateComplexExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DegreeComplexExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ImExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ImaginaryUnit = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ReExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SingleComplexExpression = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_AbsExpression;
+  private ConceptPresentation props_ArgExpression;
+  private ConceptPresentation props_ComplexType;
+  private ConceptPresentation props_ConjugateComplexExpression;
+  private ConceptPresentation props_DegreeComplexExpression;
+  private ConceptPresentation props_ImExpression;
+  private ConceptPresentation props_ImaginaryUnit;
+  private ConceptPresentation props_ReExpression;
+  private ConceptPresentation props_SingleComplexExpression;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.AbsExpression:
+        if (props_AbsExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("abs");
+          props_AbsExpression = cpb.create();
+        }
         return props_AbsExpression;
-      case 1:
+      case LanguageConceptSwitch.ArgExpression:
+        if (props_ArgExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("arg");
+          props_ArgExpression = cpb.create();
+        }
         return props_ArgExpression;
-      case 2:
+      case LanguageConceptSwitch.ComplexType:
+        if (props_ComplexType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("complex");
+          props_ComplexType = cpb.create();
+        }
         return props_ComplexType;
-      case 3:
+      case LanguageConceptSwitch.ConjugateComplexExpression:
+        if (props_ConjugateComplexExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("conj");
+          props_ConjugateComplexExpression = cpb.create();
+        }
         return props_ConjugateComplexExpression;
-      case 4:
+      case LanguageConceptSwitch.DegreeComplexExpression:
+        if (props_DegreeComplexExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("deg");
+          props_DegreeComplexExpression = cpb.create();
+        }
         return props_DegreeComplexExpression;
-      case 5:
+      case LanguageConceptSwitch.ImExpression:
+        if (props_ImExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("im");
+          props_ImExpression = cpb.create();
+        }
         return props_ImExpression;
-      case 6:
+      case LanguageConceptSwitch.ImaginaryUnit:
+        if (props_ImaginaryUnit == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("complex imaginary unit");
+          cpb.rawPresentation("i");
+          props_ImaginaryUnit = cpb.create();
+        }
         return props_ImaginaryUnit;
-      case 7:
+      case LanguageConceptSwitch.ReExpression:
+        if (props_ReExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("re");
+          props_ReExpression = cpb.create();
+        }
         return props_ReExpression;
-      case 8:
+      case LanguageConceptSwitch.SingleComplexExpression:
+        if (props_SingleComplexExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_SingleComplexExpression = cpb.create();
+        }
         return props_SingleComplexExpression;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

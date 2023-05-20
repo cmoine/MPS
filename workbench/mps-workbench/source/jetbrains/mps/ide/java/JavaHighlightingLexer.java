@@ -36,7 +36,7 @@ public class JavaHighlightingLexer extends LayeredLexer {
     HtmlHighlightingLexer lexer = new HtmlHighlightingLexer(FileTypeManager.getInstance().getStdFileType("CSS"));
     lexer.setHasNoEmbeddments(true);
     docLexer.registerLayer(lexer,
-      new IElementType[]{JavaDocTokenType.DOC_COMMENT_DATA});
+                           JavaDocTokenType.DOC_COMMENT_DATA);
 
     registerSelfStoppingLayer(docLexer,
       new IElementType[]{JavaTokenType.DOC_COMMENT},

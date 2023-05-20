@@ -5,5 +5,5 @@ package jetbrains.mps.baseLanguage.tuples.structure;
 import jetbrains.mps.smodel.runtime.IconResource;
 
 public class IconContainer {
-  protected static IconResource RESOURCE_a0a0g = new IconResource("namedTuple.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a3a0a6b0k = new IconResource("namedTuple.png", IconContainer.class);
 }

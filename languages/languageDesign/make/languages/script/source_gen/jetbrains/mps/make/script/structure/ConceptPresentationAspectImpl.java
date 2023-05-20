@@ -4,93 +4,224 @@ package jetbrains.mps.make.script.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_AdvanceWorkStatement = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AllWorkLeftExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_BeginWorkStatement = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptFunctionParameter_progressMonitor = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConfigDefinition = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Expected = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ExpectedInput = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ExpectedOption = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_FinishWorkStatement = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IExpected = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_InputResourcesParameter = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_JobDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_JobDefinition = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Option = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_OptionExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_OptionType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_OutputResources = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PropertiesAccessorParameter = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_QueryDefinition = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_QueryParameterDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RelayQueryExpression = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ReportFeedbackStatement = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ResourceType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ResultStatement = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Text = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_AdvanceWorkStatement;
+  private ConceptPresentation props_AllWorkLeftExpression;
+  private ConceptPresentation props_BeginWorkStatement;
+  private ConceptPresentation props_ConceptFunctionParameter_progressMonitor;
+  private ConceptPresentation props_ConfigDefinition;
+  private ConceptPresentation props_Expected;
+  private ConceptPresentation props_ExpectedInput;
+  private ConceptPresentation props_ExpectedOption;
+  private ConceptPresentation props_FinishWorkStatement;
+  private ConceptPresentation props_GetMakeSessionExpression;
+  private ConceptPresentation props_IExpected;
+  private ConceptPresentation props_InputResourcesParameter;
+  private ConceptPresentation props_JobDeclaration;
+  private ConceptPresentation props_JobDefinition;
+  private ConceptPresentation props_Option;
+  private ConceptPresentation props_OptionExpression;
+  private ConceptPresentation props_OptionType;
+  private ConceptPresentation props_OutputResources;
+  private ConceptPresentation props_PropertiesAccessorParameter;
+  private ConceptPresentation props_QueryDefinition;
+  private ConceptPresentation props_QueryParameterDeclaration;
+  private ConceptPresentation props_RelayQueryExpression;
+  private ConceptPresentation props_ReportFeedbackStatement;
+  private ConceptPresentation props_ResourceType;
+  private ConceptPresentation props_ResultStatement;
+  private ConceptPresentation props_Text;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.AdvanceWorkStatement:
+        if (props_AdvanceWorkStatement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("advance");
+          props_AdvanceWorkStatement = cpb.create();
+        }
         return props_AdvanceWorkStatement;
-      case 1:
+      case LanguageConceptSwitch.AllWorkLeftExpression:
+        if (props_AllWorkLeftExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ALL");
+          props_AllWorkLeftExpression = cpb.create();
+        }
         return props_AllWorkLeftExpression;
-      case 2:
+      case LanguageConceptSwitch.BeginWorkStatement:
+        if (props_BeginWorkStatement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("begin work");
+          props_BeginWorkStatement = cpb.create();
+        }
         return props_BeginWorkStatement;
-      case 3:
+      case LanguageConceptSwitch.ConceptFunctionParameter_progressMonitor:
+        if (props_ConceptFunctionParameter_progressMonitor == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("progressMonitor");
+          props_ConceptFunctionParameter_progressMonitor = cpb.create();
+        }
         return props_ConceptFunctionParameter_progressMonitor;
-      case 4:
+      case LanguageConceptSwitch.ConfigDefinition:
+        if (props_ConfigDefinition == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ConfigDefinition");
+          props_ConfigDefinition = cpb.create();
+        }
         return props_ConfigDefinition;
-      case 5:
+      case LanguageConceptSwitch.Expected:
+        if (props_Expected == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_Expected = cpb.create();
+        }
         return props_Expected;
-      case 6:
+      case LanguageConceptSwitch.ExpectedInput:
+        if (props_ExpectedInput == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ExpectedInput");
+          props_ExpectedInput = cpb.create();
+        }
         return props_ExpectedInput;
-      case 7:
+      case LanguageConceptSwitch.ExpectedOption:
+        if (props_ExpectedOption == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_ExpectedOption = cpb.create();
+        }
         return props_ExpectedOption;
-      case 8:
+      case LanguageConceptSwitch.FinishWorkStatement:
+        if (props_FinishWorkStatement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("finish");
+          props_FinishWorkStatement = cpb.create();
+        }
         return props_FinishWorkStatement;
-      case 9:
+      case LanguageConceptSwitch.GetMakeSessionExpression:
+        if (props_GetMakeSessionExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("makeSession");
+          props_GetMakeSessionExpression = cpb.create();
+        }
+        return props_GetMakeSessionExpression;
+      case LanguageConceptSwitch.IExpected:
+        if (props_IExpected == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IExpected = cpb.create();
+        }
         return props_IExpected;
-      case 10:
+      case LanguageConceptSwitch.InputResourcesParameter:
+        if (props_InputResourcesParameter == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("input");
+          props_InputResourcesParameter = cpb.create();
+        }
         return props_InputResourcesParameter;
-      case 11:
+      case LanguageConceptSwitch.JobDeclaration:
+        if (props_JobDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("JobDeclaration");
+          props_JobDeclaration = cpb.create();
+        }
         return props_JobDeclaration;
-      case 12:
+      case LanguageConceptSwitch.JobDefinition:
+        if (props_JobDefinition == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("JobDefinition");
+          props_JobDefinition = cpb.create();
+        }
         return props_JobDefinition;
-      case 13:
+      case LanguageConceptSwitch.Option:
+        if (props_Option == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Option = cpb.create();
+        }
         return props_Option;
-      case 14:
+      case LanguageConceptSwitch.OptionExpression:
+        if (props_OptionExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x95f8a3e6f9944ca0L, 0xa65e763c9bae2d3bL, 0x70276038dc4d7b2L, 0x70276038dc4d7b3L, "option", "", "");
+          props_OptionExpression = cpb.create();
+        }
         return props_OptionExpression;
-      case 15:
+      case LanguageConceptSwitch.OptionType:
+        if (props_OptionType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("option");
+          props_OptionType = cpb.create();
+        }
         return props_OptionType;
-      case 16:
+      case LanguageConceptSwitch.OutputResources:
+        if (props_OutputResources == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("output");
+          props_OutputResources = cpb.create();
+        }
         return props_OutputResources;
-      case 17:
+      case LanguageConceptSwitch.PropertiesAccessorParameter:
+        if (props_PropertiesAccessorParameter == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("__pa__");
+          props_PropertiesAccessorParameter = cpb.create();
+        }
         return props_PropertiesAccessorParameter;
-      case 18:
+      case LanguageConceptSwitch.QueryDefinition:
+        if (props_QueryDefinition == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_QueryDefinition = cpb.create();
+        }
         return props_QueryDefinition;
-      case 19:
+      case LanguageConceptSwitch.QueryParameterDeclaration:
+        if (props_QueryParameterDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_QueryParameterDeclaration = cpb.create();
+        }
         return props_QueryParameterDeclaration;
-      case 20:
+      case LanguageConceptSwitch.RelayQueryExpression:
+        if (props_RelayQueryExpression == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("relay query");
+          props_RelayQueryExpression = cpb.create();
+        }
         return props_RelayQueryExpression;
-      case 21:
+      case LanguageConceptSwitch.ReportFeedbackStatement:
+        if (props_ReportFeedbackStatement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("report");
+          props_ReportFeedbackStatement = cpb.create();
+        }
         return props_ReportFeedbackStatement;
-      case 22:
+      case LanguageConceptSwitch.ResourceType:
+        if (props_ResourceType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("resource");
+          props_ResourceType = cpb.create();
+        }
         return props_ResourceType;
-      case 23:
+      case LanguageConceptSwitch.ResultStatement:
+        if (props_ResultStatement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ResultStatement");
+          props_ResultStatement = cpb.create();
+        }
         return props_ResultStatement;
-      case 24:
+      case LanguageConceptSwitch.Text:
+        if (props_Text == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("Text");
+          props_Text = cpb.create();
+        }
         return props_Text;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

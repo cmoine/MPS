@@ -13,672 +13,309 @@ import jetbrains.mps.openapi.editor.descriptor.TransformationMenu;
 import jetbrains.mps.openapi.editor.descriptor.NamedMenuId;
 import java.util.Arrays;
 import jetbrains.mps.openapi.editor.descriptor.SubstituteMenu;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.openapi.editor.cells.KeyMap;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public class EditorAspectDescriptorImpl extends EditorAspectDescriptorBase {
   @NotNull
   public Collection<ConceptEditor> getDeclaredEditors(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = ((SAbstractConcept) concept);
-      Integer preIndex = indices_xbvbvu_a0a.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildAspect_Editor());
-          }
-          break;
-        case 1:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildCompositePath_Editor());
-          }
-          break;
-        case 2:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildCustomWorkflow_Editor());
-          }
-          break;
-        case 3:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildDependency_Editor());
-          }
-          break;
-        case 4:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildExternalLayout_Editor());
-          }
-          break;
-        case 5:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildExternalLayoutDependency_Editor());
-          }
-          break;
-        case 6:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildFileExcludeSelector_Editor());
-          }
-          break;
-        case 7:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildFileIncludeSelector_Editor());
-          }
-          break;
-        case 8:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildFileIncludesSelector_Editor());
-          }
-          break;
-        case 9:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildFileSelector_Editor());
-          }
-          break;
-        case 10:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildFolderMacro_Editor());
-          }
-          break;
-        case 11:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildInputFiles_Editor());
-          }
-          break;
-        case 12:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildInputFolders_Editor());
-          }
-          break;
-        case 13:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildInputResourceSet_Editor());
-          }
-          break;
-        case 14:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildInputSingleFile_Editor());
-          }
-          break;
-        case 15:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildInputSingleFolder_Editor());
-          }
-          break;
-        case 16:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildJavaPlugin_Editor());
-          }
-          break;
-        case 17:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_Editor());
-          }
-          break;
-        case 18:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_AbstractCopy_Editor());
-          }
-          break;
-        case 19:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_Comment_Editor());
-          }
-          break;
-        case 20:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_CompileOutputOf_Editor());
-          }
-          break;
-        case 21:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_CopyFilterFixCRLF_Editor());
-          }
-          break;
-        case 22:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_CopyFilterReplaceRegex_Editor());
-          }
-          break;
-        case 23:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_CopyFilterReplaceTokens_Editor());
-          }
-          break;
-        case 24:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_CopyFlattenMapper_Editor());
-          }
-          break;
-        case 25:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_CopyGlobMapper_Editor());
-          }
-          break;
-        case 26:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_CopyHandler_Editor());
-          }
-          break;
-        case 27:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_CopyRegexMapper_Editor());
-          }
-          break;
-        case 28:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_CustomCopy_Editor());
-          }
-          break;
-        case 29:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_EchoProperties_Editor());
-          }
-          break;
-        case 30:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_EchoPropertyEntry_Editor());
-          }
-          break;
-        case 31:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_EchoXml_Editor());
-          }
-          break;
-        case 32:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_ExportAsJavaLibrary_Editor());
-          }
-          break;
-        case 33:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_File_Editor());
-          }
-          break;
-        case 34:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_FileStub_Editor());
-          }
-          break;
-        case 35:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_Filemode_Editor());
-          }
-          break;
-        case 36:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_Files_Editor());
-          }
-          break;
-        case 37:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_FilesOf_Editor());
-          }
-          break;
-        case 38:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_Import_Editor());
-          }
-          break;
-        case 39:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_ImportContent_Editor());
-          }
-          break;
-        case 40:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_JarManifest_Editor());
-          }
-          break;
-        case 41:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_JarManifest_Attribute_Editor());
-          }
-          break;
-        case 42:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_JarManifest_Section_Editor());
-          }
-          break;
-        case 43:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_NamedContainer_Editor());
-          }
-          break;
-        case 44:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_Node_Editor());
-          }
-          break;
-        case 45:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_Tar_Editor());
-          }
-          break;
-        case 46:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildLayout_TransparentContainer_Editor());
-          }
-          break;
-        case 47:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildMacro_Editor());
-          }
-          break;
-        case 48:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildNamedLayout_Editor());
-          }
-          break;
-        case 49:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildPlugin_Editor());
-          }
-          break;
-        case 50:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildProject_Editor());
-          }
-          break;
-        case 51:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildProjectDependency_Editor());
-          }
-          break;
-        case 52:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildProjectPart_Editor());
-          }
-          break;
-        case 53:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSourceArchiveRelativePath_Editor());
-          }
-          break;
-        case 54:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSourceMacroRelativePath_Editor());
-          }
-          break;
-        case 55:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSourcePath_Editor());
-          }
-          break;
-        case 56:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSourceProjectRelativePath_Editor());
-          }
-          break;
-        case 57:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaCP_Editor());
-          }
-          break;
-        case 58:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaClassFolder_Editor());
-          }
-          break;
-        case 59:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaContentFolder_Editor());
-          }
-          break;
-        case 60:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaContentRoot_Editor());
-          }
-          break;
-        case 61:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaDependency_Editor());
-          }
-          break;
-        case 62:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaDependencyExternalJar_Editor());
-          }
-          break;
-        case 63:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaDependencyExternalJarInFolder_Editor());
-          }
-          break;
-        case 64:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaDependencyFileset_Editor());
-          }
-          break;
-        case 65:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaDependencyJar_Editor());
-          }
-          break;
-        case 66:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaDependencyLibrary_Editor());
-          }
-          break;
-        case 67:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaDependencyModule_Editor());
-          }
-          break;
-        case 68:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaExternalJarFolderRef_Editor());
-          }
-          break;
-        case 69:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaExternalJarRef_Editor());
-          }
-          break;
-        case 70:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaFiles_Editor());
-          }
-          break;
-        case 71:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaJar_Editor());
-          }
-          break;
-        case 72:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaJars_Editor());
-          }
-          break;
-        case 73:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaLibrary_Editor());
-          }
-          break;
-        case 74:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaLibraryCP_Editor());
-          }
-          break;
-        case 75:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaLibraryElement_Editor());
-          }
-          break;
-        case 76:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaLibraryExternalJar_Editor());
-          }
-          break;
-        case 77:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaLibraryExternalJarFolder_Editor());
-          }
-          break;
-        case 78:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaModule_Editor());
-          }
-          break;
-        case 79:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaModuleOptions_Editor());
-          }
-          break;
-        case 80:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaOptions_Editor());
-          }
-          break;
-        case 81:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaResources_Editor());
-          }
-          break;
-        case 82:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildSource_JavaSources_Editor());
-          }
-          break;
-        case 83:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildString_Editor());
-          }
-          break;
-        case 84:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildStringNotEmpty_Editor());
-          }
-          break;
-        case 85:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildStringPart_Editor());
-          }
-          break;
-        case 86:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildTextStringPart_Editor());
-          }
-          break;
-        case 87:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildVarRefStringPart_Editor());
-          }
-          break;
-        case 88:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildVariableMacro_Editor());
-          }
-          break;
-        case 89:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildVariableMacroInitValue_Editor());
-          }
-          break;
-        case 90:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildVariableMacroInitWithDate_Editor());
-          }
-          break;
-        case 91:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildVariableMacroInitWithFileContent_Editor());
-          }
-          break;
-        case 92:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildVariableMacroInitWithString_Editor());
-          }
-          break;
-        case 93:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BuildVariableMacroInitWithValueFromFile_Editor());
-          }
-          break;
-        case 94:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new GeneratorInternal_BuildSource_Folder_Editor());
-          }
-          break;
-        case 95:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new GeneratorInternal_BuildSource_JarFolder_Editor());
-          }
-          break;
-        case 96:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new GeneratorInternal_BuildSource_JavaJar_Editor());
-          }
-          break;
-        case 97:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new GeneratorInternal_BuildSource_JavaLibrary_Editor());
-          }
-          break;
-        case 98:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new GeneratorInternal_BuildSource_JavaModule_Editor());
-          }
-          break;
-        case 99:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new GeneratorInternal_BuildSource_SingleFile_Editor());
-          }
-          break;
-        case 100:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new GeneratorInternal_IWorkflowParticipantReference_Editor());
-          }
-          break;
-        case 101:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new GeneratorInternal_IWorkfowParticipants_Editor());
-          }
-          break;
-        case 102:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new GeneratorInternal_LibraryArtifacts_Editor());
-          }
-          break;
-        case 103:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new GeneratorInternal_ProjectDependency_Editor());
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = ((SAbstractConcept) concept);
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return Collections.<ConceptEditor>singletonList(new BuildAspect_Editor());
+      case 1:
+        return Collections.<ConceptEditor>singletonList(new BuildCompositePath_Editor());
+      case 2:
+        return Collections.<ConceptEditor>singletonList(new BuildCustomWorkflow_Editor());
+      case 3:
+        return Collections.<ConceptEditor>singletonList(new BuildDependency_Editor());
+      case 4:
+        return Collections.<ConceptEditor>singletonList(new BuildExternalLayout_Editor());
+      case 5:
+        return Collections.<ConceptEditor>singletonList(new BuildExternalLayoutDependency_Editor());
+      case 6:
+        return Collections.<ConceptEditor>singletonList(new BuildFileExcludeSelector_Editor());
+      case 7:
+        return Collections.<ConceptEditor>singletonList(new BuildFileIncludeSelector_Editor());
+      case 8:
+        return Collections.<ConceptEditor>singletonList(new BuildFileIncludesSelector_Editor());
+      case 9:
+        return Collections.<ConceptEditor>singletonList(new BuildFileSelector_Editor());
+      case 10:
+        return Collections.<ConceptEditor>singletonList(new BuildFolderMacro_Editor());
+      case 11:
+        return Collections.<ConceptEditor>singletonList(new BuildInputFiles_Editor());
+      case 12:
+        return Collections.<ConceptEditor>singletonList(new BuildInputFolders_Editor());
+      case 13:
+        return Collections.<ConceptEditor>singletonList(new BuildInputResourceSet_Editor());
+      case 14:
+        return Collections.<ConceptEditor>singletonList(new BuildInputSingleFile_Editor());
+      case 15:
+        return Collections.<ConceptEditor>singletonList(new BuildInputSingleFileAbsolutePath_Editor());
+      case 16:
+        return Collections.<ConceptEditor>singletonList(new BuildInputSingleFolder_Editor());
+      case 17:
+        return Collections.<ConceptEditor>singletonList(new BuildJavaPlugin_Editor());
+      case 18:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_Editor());
+      case 19:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_AbstractCopy_Editor());
+      case 20:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_Comment_Editor());
+      case 21:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_CompileOutputOf_Editor());
+      case 22:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_CopyFilterFixCRLF_Editor());
+      case 23:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_CopyFilterReplaceRegex_Editor());
+      case 24:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_CopyFilterReplaceTokens_Editor());
+      case 25:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_CopyFlattenMapper_Editor());
+      case 26:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_CopyGlobMapper_Editor());
+      case 27:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_CopyHandler_Editor());
+      case 28:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_CopyRegexMapper_Editor());
+      case 29:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_CustomCopy_Editor());
+      case 30:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_EchoProperties_Editor());
+      case 31:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_EchoPropertyEntry_Editor());
+      case 32:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_EchoXml_Editor());
+      case 33:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_ExportAsJavaLibrary_Editor());
+      case 34:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_File_Editor());
+      case 35:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_FileStub_Editor());
+      case 36:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_Filemode_Editor());
+      case 37:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_Files_Editor());
+      case 38:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_FilesOf_Editor());
+      case 39:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_Import_Editor());
+      case 40:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_ImportContent_Editor());
+      case 41:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_JarManifest_Editor());
+      case 42:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_JarManifest_Attribute_Editor());
+      case 43:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_JarManifest_Section_Editor());
+      case 44:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_NamedContainer_Editor());
+      case 45:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_Node_Editor());
+      case 46:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_Tar_Editor());
+      case 47:
+        return Collections.<ConceptEditor>singletonList(new BuildLayout_TransparentContainer_Editor());
+      case 48:
+        return Collections.<ConceptEditor>singletonList(new BuildMacro_Editor());
+      case 49:
+        return Collections.<ConceptEditor>singletonList(new BuildNamedLayout_Editor());
+      case 50:
+        return Collections.<ConceptEditor>singletonList(new BuildPlugin_Editor());
+      case 51:
+        return Collections.<ConceptEditor>singletonList(new BuildProject_Editor());
+      case 52:
+        return Collections.<ConceptEditor>singletonList(new BuildProjectDependency_Editor());
+      case 53:
+        return Collections.<ConceptEditor>singletonList(new BuildProjectPart_Editor());
+      case 54:
+        return Collections.<ConceptEditor>singletonList(new BuildSourceArchiveRelativePath_Editor());
+      case 55:
+        return Collections.<ConceptEditor>singletonList(new BuildSourceMacroRelativePath_Editor());
+      case 56:
+        return Collections.<ConceptEditor>singletonList(new BuildSourcePath_Editor());
+      case 57:
+        return Collections.<ConceptEditor>singletonList(new BuildSourceProjectRelativePath_Editor());
+      case 58:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaCP_Editor());
+      case 59:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaClassFolder_Editor());
+      case 60:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaContentFolder_Editor());
+      case 61:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaContentRoot_Editor());
+      case 62:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaDependency_Editor());
+      case 63:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaDependencyExternalJar_Editor());
+      case 64:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaDependencyExternalJarInFolder_Editor());
+      case 65:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaDependencyFileset_Editor());
+      case 66:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaDependencyJar_Editor());
+      case 67:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaDependencyLibrary_Editor());
+      case 68:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaDependencyModule_Editor());
+      case 69:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaExternalJarFolderRef_Editor());
+      case 70:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaExternalJarRef_Editor());
+      case 71:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaFiles_Editor());
+      case 72:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaJar_Editor());
+      case 73:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaJars_Editor());
+      case 74:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaLibrary_Editor());
+      case 75:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaLibraryCP_Editor());
+      case 76:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaLibraryElement_Editor());
+      case 77:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaLibraryExternalJar_Editor());
+      case 78:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaLibraryExternalJarFolder_Editor());
+      case 79:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaModule_Editor());
+      case 80:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaModuleOptions_Editor());
+      case 81:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaOptions_Editor());
+      case 82:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaResources_Editor());
+      case 83:
+        return Collections.<ConceptEditor>singletonList(new BuildSource_JavaSources_Editor());
+      case 84:
+        return Collections.<ConceptEditor>singletonList(new BuildString_Editor());
+      case 85:
+        return Collections.<ConceptEditor>singletonList(new BuildStringNotEmpty_Editor());
+      case 86:
+        return Collections.<ConceptEditor>singletonList(new BuildStringPart_Editor());
+      case 87:
+        return Collections.<ConceptEditor>singletonList(new BuildTextStringPart_Editor());
+      case 88:
+        return Collections.<ConceptEditor>singletonList(new BuildVarRefStringPart_Editor());
+      case 89:
+        return Collections.<ConceptEditor>singletonList(new BuildVariableMacro_Editor());
+      case 90:
+        return Collections.<ConceptEditor>singletonList(new BuildVariableMacroInitValue_Editor());
+      case 91:
+        return Collections.<ConceptEditor>singletonList(new BuildVariableMacroInitWithDate_Editor());
+      case 92:
+        return Collections.<ConceptEditor>singletonList(new BuildVariableMacroInitWithFileContent_Editor());
+      case 93:
+        return Collections.<ConceptEditor>singletonList(new BuildVariableMacroInitWithString_Editor());
+      case 94:
+        return Collections.<ConceptEditor>singletonList(new BuildVariableMacroInitWithValueFromFile_Editor());
+      case 95:
+        return Collections.<ConceptEditor>singletonList(new GeneratorInternal_BuildSource_Folder_Editor());
+      case 96:
+        return Collections.<ConceptEditor>singletonList(new GeneratorInternal_BuildSource_JarFolder_Editor());
+      case 97:
+        return Collections.<ConceptEditor>singletonList(new GeneratorInternal_BuildSource_JavaJar_Editor());
+      case 98:
+        return Collections.<ConceptEditor>singletonList(new GeneratorInternal_BuildSource_JavaLibrary_Editor());
+      case 99:
+        return Collections.<ConceptEditor>singletonList(new GeneratorInternal_BuildSource_JavaModule_Editor());
+      case 100:
+        return Collections.<ConceptEditor>singletonList(new GeneratorInternal_BuildSource_SingleFile_Editor());
+      case 101:
+        return Collections.<ConceptEditor>singletonList(new GeneratorInternal_IWorkflowParticipantReference_Editor());
+      case 102:
+        return Collections.<ConceptEditor>singletonList(new GeneratorInternal_IWorkfowParticipants_Editor());
+      case 103:
+        return Collections.<ConceptEditor>singletonList(new GeneratorInternal_LibraryArtifacts_Editor());
+      case 104:
+        return Collections.<ConceptEditor>singletonList(new GeneratorInternal_ProjectDependency_Editor());
+      default:
     }
     return Collections.<ConceptEditor>emptyList();
   }
-
+  private Collection<ConceptEditorComponent> getDeclaredEC_0(String editorComponentId) {
+    if ("jetbrains.mps.build.editor.BuildLayout_containerElements".equals(editorComponentId)) {
+      return Collections.singletonList(new BuildLayout_containerElements());
+    }
+    return Collections.emptyList();
+  }
   @NotNull
   public Collection<ConceptEditorComponent> getDeclaredEditorComponents(SAbstractConcept concept, String editorComponentId) {
-    {
-      SAbstractConcept cncpt = ((SAbstractConcept) concept);
-      Integer preIndex = indices_xbvbvu_a0c.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            if ("jetbrains.mps.build.editor.BuildLayout_containerElements".equals(editorComponentId)) {
-              return Collections.<ConceptEditorComponent>singletonList(new BuildLayout_containerElements());
-            }
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = ((SAbstractConcept) concept);
+    switch (conceptIndex1.index(cncpt)) {
+      case 0:
+        return getDeclaredEC_0(editorComponentId);
+      default:
     }
-    return Collections.<ConceptEditorComponent>emptyList();
+    return Collections.emptyList();
   }
+
 
   @NotNull
   @Override
   public Collection<TransformationMenu> getDeclaredDefaultTransformationMenus(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_xbvbvu_a0e.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new BuildCompositePath_TransformationMenu());
-          }
-          break;
-        case 1:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new BuildInputFiles_TransformationMenu());
-          }
-          break;
-        case 2:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new BuildSourceMacroRelativePath_TransformationMenu());
-          }
-          break;
-        case 3:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new BuildSourcePath_TransformationMenu());
-          }
-          break;
-        case 4:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new BuildSourceProjectRelativePath_TransformationMenu());
-          }
-          break;
-        case 5:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new BuildSource_JavaDependencyExternalJar_TransformationMenu());
-          }
-          break;
-        case 6:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new BuildSource_JavaDependencyExternalJarInFolder_TransformationMenu());
-          }
-          break;
-        case 7:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new BuildSource_JavaDependencyJar_TransformationMenu());
-          }
-          break;
-        case 8:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new BuildSource_JavaDependencyLibrary_TransformationMenu());
-          }
-          break;
-        case 9:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new BuildSource_JavaDependencyModule_TransformationMenu());
-          }
-          break;
-        case 10:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new BuildSource_JavaExternalJarFolderRef_TransformationMenu());
-          }
-          break;
-        case 11:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new BuildSource_JavaExternalJarRef_TransformationMenu());
-          }
-          break;
-        case 12:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new BuildStringPart_TransformationMenu());
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex2.index(cncpt)) {
+      case 0:
+        return Collections.<TransformationMenu>singletonList(new BuildCompositePath_TransformationMenu());
+      case 1:
+        return Collections.<TransformationMenu>singletonList(new BuildInputFiles_TransformationMenu());
+      case 2:
+        return Collections.<TransformationMenu>singletonList(new BuildSourceMacroRelativePath_TransformationMenu());
+      case 3:
+        return Collections.<TransformationMenu>singletonList(new BuildSourcePath_TransformationMenu());
+      case 4:
+        return Collections.<TransformationMenu>singletonList(new BuildSourceProjectRelativePath_TransformationMenu());
+      case 5:
+        return Collections.<TransformationMenu>singletonList(new BuildSource_JavaDependencyExternalJar_TransformationMenu());
+      case 6:
+        return Collections.<TransformationMenu>singletonList(new BuildSource_JavaDependencyExternalJarInFolder_TransformationMenu());
+      case 7:
+        return Collections.<TransformationMenu>singletonList(new BuildSource_JavaDependencyJar_TransformationMenu());
+      case 8:
+        return Collections.<TransformationMenu>singletonList(new BuildSource_JavaDependencyLibrary_TransformationMenu());
+      case 9:
+        return Collections.<TransformationMenu>singletonList(new BuildSource_JavaDependencyModule_TransformationMenu());
+      case 10:
+        return Collections.<TransformationMenu>singletonList(new BuildSource_JavaExternalJarFolderRef_TransformationMenu());
+      case 11:
+        return Collections.<TransformationMenu>singletonList(new BuildSource_JavaExternalJarRef_TransformationMenu());
+      case 12:
+        return Collections.<TransformationMenu>singletonList(new BuildStringPart_TransformationMenu());
+      default:
     }
     return Collections.<TransformationMenu>emptyList();
   }
   @NotNull
   @Override
   public Collection<TransformationMenu> getDeclaredNamedTransformationMenus(NamedMenuId menuId) {
-    {
-      SAbstractConcept cncpt = (SAbstractConcept) menuId.getConcept();
-      Integer preIndex = indices_xbvbvu_a0f.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            switch (Arrays.binarySearch(stringSwitchCases_xbvbvu_a0a0a0a3a0a5, menuId.getFqName())) {
-              case 0:
-                return Arrays.asList(new TransformationMenu[]{new add_DependencyLocation()});
-              default:
-            }
+    SAbstractConcept cncpt = (SAbstractConcept) menuId.getConcept();
+    switch (conceptIndex3.index(cncpt)) {
+      case 0:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.build.editor.add_DependencyLocation":
+              return Arrays.asList(new TransformationMenu[]{new add_DependencyLocation()});
+            default:
           }
-          break;
-        case 1:
-          if (true) {
-            switch (Arrays.binarySearch(stringSwitchCases_xbvbvu_a0a0a0b3a0a5, menuId.getFqName())) {
-              case 0:
-                return Arrays.asList(new TransformationMenu[]{new add_reexport_BuildSourcePath()});
-              case 1:
-                return Arrays.asList(new TransformationMenu[]{new transform_CompositePath_BuildSourcePath()});
-              default:
-            }
+        }
+        break;
+      case 1:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.build.editor.add_reexport_BuildSourcePath":
+              return Arrays.asList(new TransformationMenu[]{new add_reexport_BuildSourcePath()});
+            case "jetbrains.mps.build.editor.transform_CompositePath_BuildSourcePath":
+              return Arrays.asList(new TransformationMenu[]{new transform_CompositePath_BuildSourcePath()});
+            default:
           }
-          break;
-        default:
-      }
+        }
+        break;
+      default:
     }
 
     return Collections.<TransformationMenu>emptyList();
@@ -686,105 +323,108 @@ public class EditorAspectDescriptorImpl extends EditorAspectDescriptorBase {
   @NotNull
   @Override
   public Collection<SubstituteMenu> getDeclaredDefaultSubstituteMenus(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_xbvbvu_a0g.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new BuildCompositePath_SubstituteMenu());
-          }
-          break;
-        case 1:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new BuildLayout_Copy_SubstituteMenu());
-          }
-          break;
-        case 2:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new BuildLayout_CustomCopy_SubstituteMenu());
-          }
-          break;
-        case 3:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new BuildLayout_JarManifest_Part_SubstituteMenu());
-          }
-          break;
-        case 4:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new BuildSourceArchiveRelativePath_SubstituteMenu());
-          }
-          break;
-        case 5:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new BuildSource_JavaContentFolder_SubstituteMenu());
-          }
-          break;
-        case 6:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new BuildSource_JavaDependencyJar_SubstituteMenu());
-          }
-          break;
-        case 7:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new BuildSource_JavaFiles_SubstituteMenu());
-          }
-          break;
-        case 8:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new BuildSource_JavaLibraryCP_SubstituteMenu());
-          }
-          break;
-        case 9:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new BuildString_SubstituteMenu());
-          }
-          break;
-        case 10:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new BuildStringPart_SubstituteMenu());
-          }
-          break;
-        case 11:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new BuildTextStringPart_SubstituteMenu());
-          }
-          break;
-        case 12:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new BuildVarRefStringPart_SubstituteMenu());
-          }
-          break;
-        case 13:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new BuildVariableMacroInitValue_SubstituteMenu());
-          }
-          break;
-        case 14:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new BuildVariableMacroInitWithString_SubstituteMenu());
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex4.index(cncpt)) {
+      case 0:
+        return Collections.<SubstituteMenu>singletonList(new BuildCompositePath_SubstituteMenu());
+      case 1:
+        return Collections.<SubstituteMenu>singletonList(new BuildExternalLayoutDependency_SubstituteMenu());
+      case 2:
+        return Collections.<SubstituteMenu>singletonList(new BuildInputSingleFileAbsolutePath_SubstituteMenu());
+      case 3:
+        return Collections.<SubstituteMenu>singletonList(new BuildLayout_Copy_SubstituteMenu());
+      case 4:
+        return Collections.<SubstituteMenu>singletonList(new BuildLayout_CustomCopy_SubstituteMenu());
+      case 5:
+        return Collections.<SubstituteMenu>singletonList(new BuildLayout_JarManifest_Part_SubstituteMenu());
+      case 6:
+        return Collections.<SubstituteMenu>singletonList(new BuildProjectDependency_SubstituteMenu());
+      case 7:
+        return Collections.<SubstituteMenu>singletonList(new BuildSourceArchiveRelativePath_SubstituteMenu());
+      case 8:
+        return Collections.<SubstituteMenu>singletonList(new BuildSourceMacroRelativePath_SubstituteMenu());
+      case 9:
+        return Collections.<SubstituteMenu>singletonList(new BuildSource_JavaContentFolder_SubstituteMenu());
+      case 10:
+        return Collections.<SubstituteMenu>singletonList(new BuildSource_JavaDependencyJar_SubstituteMenu());
+      case 11:
+        return Collections.<SubstituteMenu>singletonList(new BuildSource_JavaExternalJarFolderRef_SubstituteMenu());
+      case 12:
+        return Collections.<SubstituteMenu>singletonList(new BuildSource_JavaExternalJarRef_SubstituteMenu());
+      case 13:
+        return Collections.<SubstituteMenu>singletonList(new BuildSource_JavaFiles_SubstituteMenu());
+      case 14:
+        return Collections.<SubstituteMenu>singletonList(new BuildSource_JavaLibraryCP_SubstituteMenu());
+      case 15:
+        return Collections.<SubstituteMenu>singletonList(new BuildString_SubstituteMenu());
+      case 16:
+        return Collections.<SubstituteMenu>singletonList(new BuildStringPart_SubstituteMenu());
+      case 17:
+        return Collections.<SubstituteMenu>singletonList(new BuildTextStringPart_SubstituteMenu());
+      case 18:
+        return Collections.<SubstituteMenu>singletonList(new BuildVarRefStringPart_SubstituteMenu());
+      case 19:
+        return Collections.<SubstituteMenu>singletonList(new BuildVariableMacroInitValue_SubstituteMenu());
+      case 20:
+        return Collections.<SubstituteMenu>singletonList(new BuildVariableMacroInitWithString_SubstituteMenu());
+      case 21:
+        return Collections.<SubstituteMenu>singletonList(new GeneratorInternal_BuildSource_JarFolder_SubstituteMenu());
+      case 22:
+        return Collections.<SubstituteMenu>singletonList(new GeneratorInternal_BuildSource_JavaJar_SubstituteMenu());
+      case 23:
+        return Collections.<SubstituteMenu>singletonList(new GeneratorInternal_BuildSource_JavaLibrary_SubstituteMenu());
+      case 24:
+        return Collections.<SubstituteMenu>singletonList(new GeneratorInternal_BuildSource_JavaModule_SubstituteMenu());
+      case 25:
+        return Collections.<SubstituteMenu>singletonList(new GeneratorInternal_BuildSource_SingleFile_SubstituteMenu());
+      case 26:
+        return Collections.<SubstituteMenu>singletonList(new GeneratorInternal_IWorkflowParticipantReference_SubstituteMenu());
+      case 27:
+        return Collections.<SubstituteMenu>singletonList(new GeneratorInternal_IWorkfowParticipants_SubstituteMenu());
+      case 28:
+        return Collections.<SubstituteMenu>singletonList(new GeneratorInternal_ProjectDependency_SubstituteMenu());
+      default:
     }
     return Collections.<SubstituteMenu>emptyList();
   }
-
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
+  @NotNull
+  @Override
+  public Collection<SubstituteMenu> getDeclaredNamedSubstituteMenus(NamedMenuId menuId) {
+    SAbstractConcept cncpt = (SAbstractConcept) menuId.getConcept();
+    switch (conceptIndex5.index(cncpt)) {
+      case 0:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.build.editor.BuildSource_JavaExternalJarFolderRef_SmartReference":
+              return Arrays.asList(new SubstituteMenu[]{new BuildSource_JavaExternalJarFolderRef_SmartReference()});
+            default:
+          }
+        }
+        break;
+      case 1:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.build.editor.BuildSource_JavaExternalJarRef_SmartReference":
+              return Arrays.asList(new SubstituteMenu[]{new BuildSource_JavaExternalJarRef_SmartReference()});
+            default:
+          }
+        }
+        break;
+      default:
     }
-    return res;
+
+    return Collections.<SubstituteMenu>emptyList();
   }
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0a = buildConceptIndices(MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x31292e1a60dd541dL, "jetbrains.mps.build.structure.BuildAspect"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x779c6e65c01467f1L, "jetbrains.mps.build.structure.BuildCompositePath"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4140393b23438dabL, "jetbrains.mps.build.structure.BuildCustomWorkflow"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a23L, "jetbrains.mps.build.structure.BuildDependency"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x63a87b9320d0bfc9L, "jetbrains.mps.build.structure.BuildExternalLayout"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x63a87b9320d3d0a4L, "jetbrains.mps.build.structure.BuildExternalLayoutDependency"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db9262fa7L, "jetbrains.mps.build.structure.BuildFileExcludeSelector"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db9262f9cL, "jetbrains.mps.build.structure.BuildFileIncludeSelector"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7819f90ca2eb7bf6L, "jetbrains.mps.build.structure.BuildFileIncludesSelector"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db92245a7L, "jetbrains.mps.build.structure.BuildFileSelector"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafadd002L, "jetbrains.mps.build.structure.BuildFolderMacro"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db92245a4L, "jetbrains.mps.build.structure.BuildInputFiles"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x6d2aa38ffdbd053fL, "jetbrains.mps.build.structure.BuildInputFolders"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db9216ceaL, "jetbrains.mps.build.structure.BuildInputResourceSet"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db9224596L, "jetbrains.mps.build.structure.BuildInputSingleFile"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x1ff930b22643b0ffL, "jetbrains.mps.build.structure.BuildInputSingleFolder"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x5c3f3e2c1ce9ac67L, "jetbrains.mps.build.structure.BuildJavaPlugin"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a14L, "jetbrains.mps.build.structure.BuildLayout"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7f76698a394d9b91L, "jetbrains.mps.build.structure.BuildLayout_AbstractCopy"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7ea63ceef6dea0cbL, "jetbrains.mps.build.structure.BuildLayout_Comment"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x23f6fd361bdcfd24L, "jetbrains.mps.build.structure.BuildLayout_CompileOutputOf"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3a43b020f623c9acL, "jetbrains.mps.build.structure.BuildLayout_CopyFilterFixCRLF"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7f76698a3956ec48L, "jetbrains.mps.build.structure.BuildLayout_CopyFilterReplaceRegex"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7f76698a39527645L, "jetbrains.mps.build.structure.BuildLayout_CopyFilterReplaceTokens"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x60d5783406a77553L, "jetbrains.mps.build.structure.BuildLayout_CopyFlattenMapper"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3718a2df935ad4caL, "jetbrains.mps.build.structure.BuildLayout_CopyGlobMapper"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7f76698a394dcc33L, "jetbrains.mps.build.structure.BuildLayout_CopyHandler"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3718a2df935d7c9fL, "jetbrains.mps.build.structure.BuildLayout_CopyRegexMapper"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7f76698a394d9ab2L, "jetbrains.mps.build.structure.BuildLayout_CustomCopy"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x2d0f82f7bfda46aL, "jetbrains.mps.build.structure.BuildLayout_EchoProperties"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x2d0f82f7bfda477L, "jetbrains.mps.build.structure.BuildLayout_EchoPropertyEntry"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x6a3e160a3eff6a94L, "jetbrains.mps.build.structure.BuildLayout_EchoXml"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x286d67dde534f69bL, "jetbrains.mps.build.structure.BuildLayout_ExportAsJavaLibrary"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7ea63ceef6e8c0edL, "jetbrains.mps.build.structure.BuildLayout_File"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x63a87b9320d31b36L, "jetbrains.mps.build.structure.BuildLayout_FileStub"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x6c4335df4e838e40L, "jetbrains.mps.build.structure.BuildLayout_Filemode"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x262a04c08b56faffL, "jetbrains.mps.build.structure.BuildLayout_Files"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x6b9a2011083f9404L, "jetbrains.mps.build.structure.BuildLayout_FilesOf"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0xbabdfbeee1350f2L, "jetbrains.mps.build.structure.BuildLayout_Import"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86af9fdb53L, "jetbrains.mps.build.structure.BuildLayout_ImportContent"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x115d3b22faf20f2eL, "jetbrains.mps.build.structure.BuildLayout_JarManifest"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x115d3b22faf20f30L, "jetbrains.mps.build.structure.BuildLayout_JarManifest_Attribute"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x115d3b22faf47d7bL, "jetbrains.mps.build.structure.BuildLayout_JarManifest_Section"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafac7f8cL, "jetbrains.mps.build.structure.BuildLayout_NamedContainer"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafac4c85L, "jetbrains.mps.build.structure.BuildLayout_Node"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7709f0532a526203L, "jetbrains.mps.build.structure.BuildLayout_Tar"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x286d67dde532a284L, "jetbrains.mps.build.structure.BuildLayout_TransparentContainer"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a1fL, "jetbrains.mps.build.structure.BuildMacro"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x31292e1a60d9f330L, "jetbrains.mps.build.structure.BuildNamedLayout"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x5c3f3e2c1ce9819eL, "jetbrains.mps.build.structure.BuildPlugin"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a13L, "jetbrains.mps.build.structure.BuildProject"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd908c220L, "jetbrains.mps.build.structure.BuildProjectDependency"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafacdc08L, "jetbrains.mps.build.structure.BuildProjectPart"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x233d92f9e348d768L, "jetbrains.mps.build.structure.BuildSourceArchiveRelativePath"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafae121dL, "jetbrains.mps.build.structure.BuildSourceMacroRelativePath"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafacdc3eL, "jetbrains.mps.build.structure.BuildSourcePath"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4c12642949048fb2L, "jetbrains.mps.build.structure.BuildSourceProjectRelativePath"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3395e884b61c2404L, "jetbrains.mps.build.structure.BuildSource_JavaCP"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x11779a1dbd021959L, "jetbrains.mps.build.structure.BuildSource_JavaClassFolder"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263ae7d4319546c6L, "jetbrains.mps.build.structure.BuildSource_JavaContentFolder"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafacdc52L, "jetbrains.mps.build.structure.BuildSource_JavaContentRoot"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263ae7d431989677L, "jetbrains.mps.build.structure.BuildSource_JavaDependency"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x5f32ae3ef3770dd4L, "jetbrains.mps.build.structure.BuildSource_JavaDependencyExternalJar"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4c1fa58d992addeL, "jetbrains.mps.build.structure.BuildSource_JavaDependencyExternalJarInFolder"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x6fcf41976cfa6175L, "jetbrains.mps.build.structure.BuildSource_JavaDependencyFileset"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3395e884b6185c40L, "jetbrains.mps.build.structure.BuildSource_JavaDependencyJar"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd9079dceL, "jetbrains.mps.build.structure.BuildSource_JavaDependencyLibrary"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263ae7d4319896a7L, "jetbrains.mps.build.structure.BuildSource_JavaDependencyModule"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb65a3fL, "jetbrains.mps.build.structure.BuildSource_JavaExternalJarFolderRef"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb2f64cL, "jetbrains.mps.build.structure.BuildSource_JavaExternalJarRef"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x14d3fb6fb8480882L, "jetbrains.mps.build.structure.BuildSource_JavaFiles"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x11779a1dbcff551aL, "jetbrains.mps.build.structure.BuildSource_JavaJar"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3395e884b61fe867L, "jetbrains.mps.build.structure.BuildSource_JavaJars"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x540febaa6144b873L, "jetbrains.mps.build.structure.BuildSource_JavaLibrary"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3395e884b61d4cbbL, "jetbrains.mps.build.structure.BuildSource_JavaLibraryCP"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x540febaa6144e320L, "jetbrains.mps.build.structure.BuildSource_JavaLibraryElement"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb50da7L, "jetbrains.mps.build.structure.BuildSource_JavaLibraryExternalJar"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb65af8L, "jetbrains.mps.build.structure.BuildSource_JavaLibraryExternalJarFolder"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafacdc38L, "jetbrains.mps.build.structure.BuildSource_JavaModule"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x1708d207f2178b52L, "jetbrains.mps.build.structure.BuildSource_JavaModuleOptions"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0xcdff0e1a96739c2L, "jetbrains.mps.build.structure.BuildSource_JavaOptions"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x1708d207f21e006dL, "jetbrains.mps.build.structure.BuildSource_JavaResources"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db92974fcL, "jetbrains.mps.build.structure.BuildSource_JavaSources"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3cca41cd0fe51d4fL, "jetbrains.mps.build.structure.BuildString"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0xbabdfbeee17fe57L, "jetbrains.mps.build.structure.BuildStringNotEmpty"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7cffL, "jetbrains.mps.build.structure.BuildStringPart"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d03L, "jetbrains.mps.build.structure.BuildTextStringPart"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d01L, "jetbrains.mps.build.structure.BuildVarRefStringPart"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3449288aa0d560e2L, "jetbrains.mps.build.structure.BuildVariableMacro"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263c91972cd1e1aaL, "jetbrains.mps.build.structure.BuildVariableMacroInitValue"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x365f30e12d2c3e4L, "jetbrains.mps.build.structure.BuildVariableMacroInitWithDate"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x74a438668c1b9d5aL, "jetbrains.mps.build.structure.BuildVariableMacroInitWithFileContent"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263c91972cd26287L, "jetbrains.mps.build.structure.BuildVariableMacroInitWithString"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x365f30e12d43ad7L, "jetbrains.mps.build.structure.BuildVariableMacroInitWithValueFromFile"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x508044c9892875c0L, "jetbrains.mps.build.structure.GeneratorInternal_BuildSource_Folder"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x508044c9892402f6L, "jetbrains.mps.build.structure.GeneratorInternal_BuildSource_JarFolder"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x44e5dd192e7c0de4L, "jetbrains.mps.build.structure.GeneratorInternal_BuildSource_JavaJar"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x44e5dd192e7c0e6fL, "jetbrains.mps.build.structure.GeneratorInternal_BuildSource_JavaLibrary"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x44e5dd192e7c0c18L, "jetbrains.mps.build.structure.GeneratorInternal_BuildSource_JavaModule"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x44e5dd192e7c0d4aL, "jetbrains.mps.build.structure.GeneratorInternal_BuildSource_SingleFile"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x5c860be1bc5cc1c8L, "jetbrains.mps.build.structure.GeneratorInternal_IWorkflowParticipantReference"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x5f1f0652f6049405L, "jetbrains.mps.build.structure.GeneratorInternal_IWorkfowParticipants"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x35951dfcf9e0ba02L, "jetbrains.mps.build.structure.GeneratorInternal_LibraryArtifacts"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x5830b38e16a0164cL, "jetbrains.mps.build.structure.GeneratorInternal_ProjectDependency"));
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0c = buildConceptIndices(MetaAdapterFactory.getInterfaceConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4140393b234482c3L, "jetbrains.mps.build.structure.BuildLayout_Container"));
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0e = buildConceptIndices(MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x779c6e65c01467f1L, "jetbrains.mps.build.structure.BuildCompositePath"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db92245a4L, "jetbrains.mps.build.structure.BuildInputFiles"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafae121dL, "jetbrains.mps.build.structure.BuildSourceMacroRelativePath"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafacdc3eL, "jetbrains.mps.build.structure.BuildSourcePath"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4c12642949048fb2L, "jetbrains.mps.build.structure.BuildSourceProjectRelativePath"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x5f32ae3ef3770dd4L, "jetbrains.mps.build.structure.BuildSource_JavaDependencyExternalJar"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4c1fa58d992addeL, "jetbrains.mps.build.structure.BuildSource_JavaDependencyExternalJarInFolder"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3395e884b6185c40L, "jetbrains.mps.build.structure.BuildSource_JavaDependencyJar"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd9079dceL, "jetbrains.mps.build.structure.BuildSource_JavaDependencyLibrary"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263ae7d4319896a7L, "jetbrains.mps.build.structure.BuildSource_JavaDependencyModule"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb65a3fL, "jetbrains.mps.build.structure.BuildSource_JavaExternalJarFolderRef"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb2f64cL, "jetbrains.mps.build.structure.BuildSource_JavaExternalJarRef"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7cffL, "jetbrains.mps.build.structure.BuildStringPart"));
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0f = buildConceptIndices(MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd908c220L, "jetbrains.mps.build.structure.BuildProjectDependency"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafacdc3eL, "jetbrains.mps.build.structure.BuildSourcePath"));
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0g = buildConceptIndices(MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x779c6e65c01467f1L, "jetbrains.mps.build.structure.BuildCompositePath"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db92339b9L, "jetbrains.mps.build.structure.BuildLayout_Copy"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7f76698a394d9ab2L, "jetbrains.mps.build.structure.BuildLayout_CustomCopy"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x76d807f8dd95718eL, "jetbrains.mps.build.structure.BuildLayout_JarManifest_Part"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x233d92f9e348d768L, "jetbrains.mps.build.structure.BuildSourceArchiveRelativePath"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263ae7d4319546c6L, "jetbrains.mps.build.structure.BuildSource_JavaContentFolder"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3395e884b6185c40L, "jetbrains.mps.build.structure.BuildSource_JavaDependencyJar"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x14d3fb6fb8480882L, "jetbrains.mps.build.structure.BuildSource_JavaFiles"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3395e884b61d4cbbL, "jetbrains.mps.build.structure.BuildSource_JavaLibraryCP"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3cca41cd0fe51d4fL, "jetbrains.mps.build.structure.BuildString"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7cffL, "jetbrains.mps.build.structure.BuildStringPart"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d03L, "jetbrains.mps.build.structure.BuildTextStringPart"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d01L, "jetbrains.mps.build.structure.BuildVarRefStringPart"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263c91972cd1e1aaL, "jetbrains.mps.build.structure.BuildVariableMacroInitValue"), MetaAdapterFactory.getConcept(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263c91972cd26287L, "jetbrains.mps.build.structure.BuildVariableMacroInitWithString"));
-  private static String[] stringSwitchCases_xbvbvu_a0a0a0a3a0a5 = new String[]{"jetbrains.mps.build.editor.add_DependencyLocation"};
-  private static String[] stringSwitchCases_xbvbvu_a0a0a0b3a0a5 = new String[]{"jetbrains.mps.build.editor.add_reexport_BuildSourcePath", "jetbrains.mps.build.editor.transform_CompositePath_BuildSourcePath"};
+  @NotNull
+  @Override
+  public Collection<KeyMap> getDeclaredKeyMaps() {
+    return Arrays.<KeyMap>asList(new BuildSimpleName_text(), new create_JarManifestName());
+  }
+
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x31292e1a60dd541dL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x779c6e65c01467f1L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4140393b23438dabL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a23L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x63a87b9320d0bfc9L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x63a87b9320d3d0a4L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db9262fa7L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db9262f9cL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7819f90ca2eb7bf6L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db92245a7L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafadd002L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db92245a4L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x6d2aa38ffdbd053fL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db9216ceaL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db9224596L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x72b7d8e699d63212L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x1ff930b22643b0ffL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x5c3f3e2c1ce9ac67L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a14L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7f76698a394d9b91L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7ea63ceef6dea0cbL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x23f6fd361bdcfd24L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3a43b020f623c9acL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7f76698a3956ec48L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7f76698a39527645L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x60d5783406a77553L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3718a2df935ad4caL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7f76698a394dcc33L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3718a2df935d7c9fL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7f76698a394d9ab2L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x2d0f82f7bfda46aL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x2d0f82f7bfda477L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x6a3e160a3eff6a94L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x286d67dde534f69bL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7ea63ceef6e8c0edL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x63a87b9320d31b36L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x6c4335df4e838e40L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x262a04c08b56faffL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x6b9a2011083f9404L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0xbabdfbeee1350f2L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86af9fdb53L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x115d3b22faf20f2eL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x115d3b22faf20f30L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x115d3b22faf47d7bL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafac7f8cL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafac4c85L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7709f0532a526203L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x286d67dde532a284L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a1fL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x31292e1a60d9f330L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x5c3f3e2c1ce9819eL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4df58c6f18f84a13L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd908c220L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafacdc08L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x233d92f9e348d768L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafae121dL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafacdc3eL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4c12642949048fb2L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3395e884b61c2404L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x11779a1dbd021959L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263ae7d4319546c6L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafacdc52L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263ae7d431989677L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x5f32ae3ef3770dd4L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4c1fa58d992addeL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x6fcf41976cfa6175L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3395e884b6185c40L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd9079dceL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263ae7d4319896a7L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb65a3fL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb2f64cL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x14d3fb6fb8480882L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x11779a1dbcff551aL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3395e884b61fe867L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x540febaa6144b873L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3395e884b61d4cbbL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x540febaa6144e320L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb50da7L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb65af8L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafacdc38L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x1708d207f2178b52L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0xcdff0e1a96739c2L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x1708d207f21e006dL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db92974fcL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3cca41cd0fe51d4fL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0xbabdfbeee17fe57L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7cffL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d03L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d01L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3449288aa0d560e2L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263c91972cd1e1aaL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x365f30e12d2c3e4L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x74a438668c1b9d5aL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263c91972cd26287L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x365f30e12d43ad7L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x508044c9892875c0L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x508044c9892402f6L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x44e5dd192e7c0de4L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x44e5dd192e7c0e6fL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x44e5dd192e7c0c18L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x44e5dd192e7c0d4aL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x5c860be1bc5cc1c8L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x5f1f0652f6049405L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x35951dfcf9e0ba02L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x5830b38e16a0164cL)).seal();
+  private static final ConceptSwitchIndex conceptIndex1 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4140393b234482c3L)).seal();
+  private static final ConceptSwitchIndex conceptIndex2 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x779c6e65c01467f1L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db92245a4L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafae121dL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafacdc3eL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4c12642949048fb2L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x5f32ae3ef3770dd4L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4c1fa58d992addeL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3395e884b6185c40L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd9079dceL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263ae7d4319896a7L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb65a3fL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb2f64cL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7cffL)).seal();
+  private static final ConceptSwitchIndex conceptIndex3 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd908c220L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafacdc3eL)).seal();
+  private static final ConceptSwitchIndex conceptIndex4 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x779c6e65c01467f1L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x63a87b9320d3d0a4L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x72b7d8e699d63212L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x48d5d03db92339b9L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x7f76698a394d9ab2L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x76d807f8dd95718eL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x454b730dd908c220L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x233d92f9e348d768L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x668c6cfbafae121dL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263ae7d4319546c6L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3395e884b6185c40L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb65a3fL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb2f64cL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x14d3fb6fb8480882L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3395e884b61d4cbbL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x3cca41cd0fe51d4fL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7cffL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d03L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x440d7ea3b68b7d01L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263c91972cd1e1aaL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x263c91972cd26287L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x508044c9892402f6L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x44e5dd192e7c0de4L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x44e5dd192e7c0e6fL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x44e5dd192e7c0c18L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x44e5dd192e7c0d4aL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x5c860be1bc5cc1c8L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x5f1f0652f6049405L), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x5830b38e16a0164cL)).seal();
+  private static final ConceptSwitchIndex conceptIndex5 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb65a3fL), MetaIdFactory.conceptId(0x798100da4f0a421aL, 0xb99171f8c50ce5d2L, 0x4ddcec86afb2f64cL)).seal();
 }

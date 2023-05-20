@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 package jetbrains.mps.ide.ui.tree;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.extensions.ExtensionPointName;
 import com.intellij.openapi.extensions.Extensions;
 import com.intellij.openapi.project.Project;
@@ -25,11 +26,19 @@ import org.jetbrains.annotations.NotNull;
  * @since 11/23/11
  */
 public abstract class TreeHighlighterExtension {
-  protected static ExtensionPointName<TreeHighlighterExtension> EP_NAME = new ExtensionPointName<TreeHighlighterExtension>("com.intellij.mps.treeCreationHandler");
+  protected static ExtensionPointName<TreeHighlighterExtension> EP_NAME = new ExtensionPointName<>("com.intellij.mps.treeCreationHandler");
 
   public static void attachHighlighters(MPSTree tree, @NotNull Project project) {
-    if (project.isDefault()) return;
-    for (TreeHighlighterExtension handler : Extensions.getExtensions(EP_NAME, project)) {
+    if (project.isDefault()) {
+      return;
+    }
+    if (ApplicationManager.getApplication().isHeadlessEnvironment()) {
+      // no reason to attach any highlight extension in a headless environment.
+      // Better yet, avoid use of any MPSTree in a headless environment, alas no idea how to accomplish that now (given all the views and tools registered
+      // at startup)
+      return;
+    }
+    for (TreeHighlighterExtension handler : EP_NAME.getExtensions(project)) {
       handler.attach(tree);
     }
   }

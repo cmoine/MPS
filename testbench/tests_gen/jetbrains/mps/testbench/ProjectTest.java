@@ -4,45 +4,55 @@ package jetbrains.mps.testbench;
 
 import org.junit.runner.RunWith;
 import jetbrains.mps.testbench.junit.runners.TeamCityParameterizedRunner;
+import jetbrains.mps.annotations.GeneratedClass;
 import jetbrains.mps.project.Project;
+import jetbrains.mps.tool.environment.MpsEnvironment;
 import org.jetbrains.mps.openapi.module.SModule;
 import org.junit.runners.Parameterized;
 import java.util.List;
 import java.lang.reflect.InvocationTargetException;
-import jetbrains.mps.tool.environment.Environment;
-import jetbrains.mps.tool.environment.MpsEnvironment;
 import jetbrains.mps.tool.environment.EnvironmentConfig;
 import jetbrains.mps.testbench.junit.runners.FromProjectPathProjectStrategy;
+import org.junit.AfterClass;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import org.junit.Test;
 import jetbrains.mps.testbench.junit.Order;
 import org.junit.Assert;
-import jetbrains.mps.internal.collections.runtime.IterableUtils;
 
 /**
  * todo: extract common part from ProjectTest and BaseCheckModulesTest
  */
 @RunWith(TeamCityParameterizedRunner.class)
+@GeneratedClass(node = "r:d1867d68-bb03-4cb4-adc6-3d5ffa40e888(jetbrains.mps.testbench)/9170334376388144449", model = "r:d1867d68-bb03-4cb4-adc6-3d5ffa40e888(jetbrains.mps.testbench)")
 public class ProjectTest {
   private static Project ourContextProject;
+  private static MpsEnvironment ourEnvironment;
   private final ModuleGenerationHolder generationHolder;
 
   public ProjectTest(SModule module, ModuleGenerationHolder generationHolder) {
-    // module argument only for test name 
+    // module argument only for test name
     this.generationHolder = generationHolder;
   }
 
   @Parameterized.Parameters
   public static List<Object[]> testParameters() throws InvocationTargetException, InterruptedException {
     initTestEnvironment();
-    return createTestParametersFromModules(ourContextProject.getModules());
+    return createTestParametersFromModules(ourContextProject.getProjectModules());
   }
 
   public static void initTestEnvironment() throws InvocationTargetException, InterruptedException {
-    Environment env = MpsEnvironment.getOrCreate(EnvironmentConfig.defaultConfig());
-    ourContextProject = env.createProject(new FromProjectPathProjectStrategy());
+    ourEnvironment = new MpsEnvironment(EnvironmentConfig.defaultConfig().withKotlinPlugin().withTestModeOn());
+    ourEnvironment.init();
+    ourContextProject = ourEnvironment.createProject(new FromProjectPathProjectStrategy());
+  }
+
+  @AfterClass
+  public static void disposeEnvironment() {
+    ourEnvironment.closeProject(ourContextProject);
+    ourEnvironment.dispose();
+    ourEnvironment = null;
   }
 
   public static List<Object[]> createTestParametersFromModules(Iterable<? extends SModule> modules) {
@@ -64,12 +74,12 @@ public class ProjectTest {
   public void buildModule() throws Exception {
     generationHolder.build();
 
-    if (!(generationHolder.isBuildSucessful())) {
+    if (!(generationHolder.isBuildSuccessful())) {
       List<String> errors = generationHolder.buildErrors();
-      Assert.assertTrue("Build errors:\n" + IterableUtils.join(errors, "\n"), errors.isEmpty());
+      Assert.assertTrue("Build errors:\n" + String.join("\n", errors), errors.isEmpty());
       List<String> warns = generationHolder.buildWarns();
-      Assert.assertTrue("Build warnings:\n" + IterableUtils.join(warns, "\n"), warns.isEmpty());
-      //  sanity, if build fails without messages 
+      Assert.assertTrue("Build warnings:\n" + String.join("\n", warns), warns.isEmpty());
+      //  sanity, if build fails without messages
       Assert.fail(String.format("Make failed with %d errors and %d warnings", errors.size(), warns.size()));
     }
   }
@@ -81,7 +91,7 @@ public class ProjectTest {
       Assert.assertTrue("Can't diff a module that needs generation but didn't get any file generated", generationHolder.hasFilesGenerated());
     }
     List<String> diffReport = generationHolder.diff();
-    Assert.assertTrue("Difference:\n" + IterableUtils.join(diffReport, "\n"), diffReport.isEmpty());
+    Assert.assertTrue("Difference:\n" + String.join("\n", diffReport), diffReport.isEmpty());
 
     generationHolder.cleanUp();
   }

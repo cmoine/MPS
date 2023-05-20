@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="7t8vk1rd957mhhmpe6r4qbe8gkkl4ut" />
+<product version="3" modelHash="-cr4n5kmd6a1sxwlwzdjw4xh003vid48">
+  <files names="AbstractWatchable.java:GenericSourceCodeLocation.java:ILocation.java:IStackFrame.java:IThread.java:IValue.java:IWatchable.java:NullLocation.java:Watchable2.java:WatchablesCategory.java" />
+</product>
 

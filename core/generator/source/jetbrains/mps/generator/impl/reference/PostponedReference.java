@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,29 +15,36 @@
  */
 package jetbrains.mps.generator.impl.reference;
 
-import jetbrains.mps.InternalFlag;
 import jetbrains.mps.generator.impl.TemplateGenerator;
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
-import org.jetbrains.mps.openapi.model.SModelReference;
+import org.jetbrains.mps.openapi.model.ResolveInfo;
 import org.jetbrains.mps.openapi.model.SNode;
-import org.jetbrains.mps.openapi.model.SReference;
 
 /**
  * These references are created in transient models.
  * They are always internal.
  */
-public class PostponedReference extends jetbrains.mps.smodel.SReference {
+public final class PostponedReference {
 
+  private final SNode mySourceNode;
+  private final SReferenceLink myLink;
   private ReferenceInfo myReferenceInfo;
-  private SReference myReplacementReference;
+  private ResolveInfo myReplacementTarget;
   private TemplateGenerator myGenerator;
 
   public PostponedReference(@NotNull SReferenceLink role, @NotNull SNode sourceNode, @NotNull ReferenceInfo referenceInfo) {
-    super(role, sourceNode);
+    mySourceNode = sourceNode;
+    myLink = role;
     myReferenceInfo = referenceInfo;
+  }
+
+  /*package*/ SNode getSourceNode() {
+    return mySourceNode;
+  }
+
+  /*package*/ SReferenceLink getLink() {
+    return myLink;
   }
 
   /*
@@ -69,66 +76,31 @@ public class PostponedReference extends jetbrains.mps.smodel.SReference {
     return myGenerator;
   }
 
-  @Override
-  @Nullable
-  public synchronized SModelReference getTargetSModelReference() {
-    if (myReplacementReference != null) {
-      return myReplacementReference.getTargetSModelReference();
+  public void initReplacementReference() {
+    if (myReplacementTarget != null) {
+      return;
     }
-    // ok, reference is unresolved and not required
-    return null;
-  }
 
-  @Override
-  @Deprecated
-  /**
-   * Use method in SReferenceBase class, as when you change ref, you know what ref it is
-   * @Deprecated in 3.0
-   */
-  public void setTargetSModelReference(@NotNull SModelReference modelReference) {
-    if (InternalFlag.isInternalMode()) {
-      throw new UnsupportedOperationException();
+    if (myReferenceInfo == null) {
+      return; // already processed
     }
-    // I don't throw exception here as it might obscure any other error that lead
-    // to model reference change, e.g. if a reference of incomplete transient model
-    // is changed from finally{} block of GenerationSession (see MPS-21983)
-    // Generator code doesn't change reference's target model directly.
-    Logger.getLogger(PostponedReference.class).error("ATTEMPT TO CHANGE TARGET MODEL of PostponedReference", new UnsupportedOperationException());
-  }
 
-  @Override
-  protected SNode getTargetNode_internal() {
-    if (myReplacementReference == null) {
-      return null;
-    }
-    return myReplacementReference.getTargetNode();
+    myReplacementTarget = myReferenceInfo.create(this);
+    // release resources
+    myReferenceInfo = null;
   }
 
   /**
-   * @return null is not resolved and not required.
-   */
-  public SReference initReplacementReference() {
-    if (myReplacementReference != null) {
-      return myReplacementReference;
-    }
-
-    synchronized (this) {
-      if (myReferenceInfo == null) {
-        return myReplacementReference; // already processed
-      }
-
-      myReplacementReference = myReferenceInfo.create(this);
-      // release resources
-      myReferenceInfo = null;
-    }
-    return myReplacementReference;
-  }
-
-  /**
-   * replaces this instance with ether StaticReference or with DynamicReference. (only static so far)
+   * Place replacement reference (ether StaticReference or with DynamicReference) into model
    * removes reference in case of error.
    */
   public void replace() {
-    getSourceNode().setReference(getLink(), myReplacementReference);
+    if (myReplacementTarget != null) {
+      mySourceNode.setReference(myLink, myReplacementTarget);
+    } else {
+      // XXX seems that implementation triggers 'ref changed' event regardless of link presence. Is that what I want here?
+      //     Perhaps, shall check for link presence and clean it only when there's one.
+      mySourceNode.dropReference(myLink);
+    }
   }
 }

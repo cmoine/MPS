@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-a1cke8kdcugyvabksit3biwn0845424" />
+<product version="3" modelHash="-dwjtdmz7jnioisikwkdo8imnqbgp9mf">
+  <files names="EditorAspectDescriptorImpl.java:Outlook_Editor.java:Outlook_EditorBuilder_a.java" />
+</product>
 

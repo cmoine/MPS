@@ -1,4 +1,0 @@
-<antlib>
-  <taskdef name="mps.gen.module.xml" classname="jetbrains.mps.build.mps.runtime.anttask.GenModuleXmlTask" />
-  <typedef name="GenModule" classname="jetbrains.mps.build.mps.runtime.anttask.ModuleXml" />
-</antlib>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,40 +18,36 @@ package jetbrains.mps.ide.tools;
 import com.intellij.ide.actions.ActivateToolWindowAction;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.KeyboardShortcut;
-import com.intellij.openapi.actionSystem.Shortcut;
 import com.intellij.openapi.keymap.Keymap;
 import com.intellij.openapi.keymap.KeymapManager;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
+import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowAnchor;
 import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.ui.content.Content;
-import com.intellij.ui.content.ContentFactoryImpl;
 import com.intellij.ui.content.ContentManager;
+import com.intellij.util.ui.update.UiNotifyConnector;
 import jetbrains.mps.ide.ThreadUtils;
-import jetbrains.mps.util.annotation.ToRemove;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import kotlin.Unit;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
-import java.awt.event.InputEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 public abstract class BaseTool {
-  private final static Logger LOG = LogManager.getLogger(BaseTool.class);
 
   private final Project myProject;
   private final String myId;
@@ -65,29 +61,19 @@ public abstract class BaseTool {
 
   private JComponent myComponent = null;
 
-  @Deprecated
-  @ToRemove(version = 3.5)
-  public BaseTool(Project project, String id, int number, Icon icon, ToolWindowAnchor anchor, boolean canCloseContent) {
-    this(project, id, number, icon, anchor, false, canCloseContent);
-  }
-
-  @Deprecated
-  @ToRemove(version = 3.5)
-  public BaseTool(Project project, String id, int number, Icon icon, ToolWindowAnchor anchor, boolean sideTool, boolean canCloseContent) {
-    this(project, id, shortcutsFromNumber(number), icon, anchor, sideTool, canCloseContent);
-  }
-
   protected static Map<String, KeyStroke> shortcutsFromNumber(int number) {
-    Map<String, KeyStroke> result = new HashMap<>();
-    if (number != -1) {
-      result.put(KeymapManager.DEFAULT_IDEA_KEYMAP, KeyStroke.getKeyStroke("alt " + number));
-      result.put(KeymapManager.MAC_OS_X_KEYMAP, KeyStroke.getKeyStroke("meta " + number));
+    if (number == -1) {
+      return Collections.emptyMap();
     }
+    Map<String, KeyStroke> result = new HashMap<>(6); // avoiding rehash & decrease default capacity
+    result.put(KeymapManager.DEFAULT_IDEA_KEYMAP, KeyStroke.getKeyStroke("alt " + number));
+    result.put(KeymapManager.MAC_OS_X_KEYMAP, KeyStroke.getKeyStroke("meta " + number));
+    result.put(KeymapManager.MAC_OS_X_10_5_PLUS_KEYMAP, KeyStroke.getKeyStroke("meta " + number));
     return result;
   }
 
   public BaseTool(Project project, String id, Map<String, KeyStroke> shortcutsByKeymap, Icon icon, ToolWindowAnchor anchor, boolean sideTool,
-      boolean canCloseContent) {
+                  boolean canCloseContent) {
     myAnchor = anchor;
     mySideTool = sideTool;
     myShortcutsByKeymap = shortcutsByKeymap;
@@ -102,33 +88,12 @@ public abstract class BaseTool {
     return myId;
   }
 
-  @Deprecated
-  @ToRemove(version = 3.5)
-  public int getNumber() {
-    if (myShortcutsByKeymap != null) {
-      KeyStroke defaultKeystroke = myShortcutsByKeymap.get(KeymapManager.DEFAULT_IDEA_KEYMAP);
-      if (defaultKeystroke != null) {
-        if (defaultKeystroke.getModifiers() == (InputEvent.ALT_MASK | InputEvent.ALT_DOWN_MASK)) {
-          char keyChar = defaultKeystroke.getKeyChar();
-          if (Character.isDigit(keyChar)) {
-            return Character.digit(keyChar, 10);
-          }
-        }
-      }
-    }
-    return -1;
-  }
-
   public Icon getIcon() {
     return myIcon;
   }
 
-  synchronized private boolean isRegistered() {
+  private boolean isRegistered() {
     return myIsRegistered;
-  }
-
-  synchronized private void setIsRegistered(boolean isRegistered) {
-    myIsRegistered = isRegistered;
   }
 
   public boolean toolIsOpened() {
@@ -166,16 +131,7 @@ public abstract class BaseTool {
   }
 
   /**
-   * Runs {@link jetbrains.mps.ide.tools.BaseTool#close} later in EDT event pool.
-   */
-  // TODO: remove unused?
-  public void closeLater() {
-    ThreadUtils.runInUIThreadNoWait(this::close);
-  }
-
-  /**
    * Minimizes the window, doesn't remove tool from panel
-   * Need to be called in EDT.
    */
   public void close() {
     ThreadUtils.assertEDT();
@@ -252,7 +208,13 @@ public abstract class BaseTool {
   }
 
   public void registerLater() {
-    ThreadUtils.runInUIThreadNoWait(() -> DumbService.getInstance(getProject()).runWhenSmart(this::register));
+    ThreadUtils.runInUIThreadNoWait(() -> {
+      final Project project = getProject();
+      if (project.isDisposed()) {
+        return;
+      }
+      DumbService.getInstance(project).runWhenSmart(this::register);
+    });
   }
 
   public final void register() {
@@ -263,7 +225,7 @@ public abstract class BaseTool {
       return;
     }
     ThreadUtils.assertEDT();
-    setIsRegistered(true);
+    myIsRegistered = true;
 
     myWindowManager = ToolWindowManager.getInstance(myProject);
 
@@ -273,28 +235,23 @@ public abstract class BaseTool {
       List<Keymap> keymaps = new ArrayList<>(myShortcutsByKeymap.size());
       for (Entry<String, KeyStroke> keymapItem : myShortcutsByKeymap.entrySet()) {
         Keymap keymap = KeymapManager.getInstance().getKeymap(keymapItem.getKey());
-        if (keymap == null) {
-          LOG.warn("Keymap " + keymapItem.getKey() + " cannot be found");
-          return;
+        if (keymap != null) {
+          keymaps.add(keymap);
         }
-        keymaps.add(keymap);
       }
       // keymaps topsort here is needed because we need to remove inherited shortcuts if they are overwritten
-      Collections.sort(keymaps, new Comparator<Keymap>() {
-        @Override
-        public int compare(Keymap o1, Keymap o2) {
-          for (Keymap parent = o1.getParent(); parent != null; parent = parent.getParent()) {
-            if (parent.equals(o2)) {
-              return 1;
-            }
+      Collections.sort(keymaps, (o1, o2) -> {
+        for (Keymap parent = o1.getParent(); parent != null; parent = parent.getParent()) {
+          if (parent.equals(o2)) {
+            return 1;
           }
-          for (Keymap parent = o2.getParent(); parent != null; parent = parent.getParent()) {
-            if (parent.equals(o1)) {
-              return -1;
-            }
-          }
-          return 0;
         }
+        for (Keymap parent = o2.getParent(); parent != null; parent = parent.getParent()) {
+          if (parent.equals(o1)) {
+            return -1;
+          }
+        }
+        return 0;
       });
 
       for (Keymap keymap : keymaps) {
@@ -304,29 +261,31 @@ public abstract class BaseTool {
       }
     }
 
+
     //if we create a new project, tool windows are created for it automatically
     ToolWindow toolWindow = myWindowManager.getToolWindow(myId);
     if (toolWindow == null) {
-      toolWindow = myWindowManager.registerToolWindow(myId, myCanCloseContent, myAnchor, getProject(), true, mySideTool);
+      toolWindow = myWindowManager.registerToolWindow(myId, builder -> {
+        builder.icon = myIcon;
+        builder.canCloseContent = myCanCloseContent;
+        builder.anchor = myAnchor;
+        builder.sideTool = mySideTool;
+        return Unit.INSTANCE;
+      });
     }
-    toolWindow.setIcon(myIcon);
-
-    toolWindow.setToHideOnEmptyContent(true);
     toolWindow.installWatcher(toolWindow.getContentManager());
     setAvailable(isInitiallyAvailable());
 
     doRegister();
 
-    if (myComponent == null) {
-      myComponent = getComponent();
-    }
-    if (myComponent != null) {
-      addContent(myComponent, "", null, false);
-    }
-
-    toolWindow.setToHideOnEmptyContent(true);
-    toolWindow.installWatcher(toolWindow.getContentManager());
-    setAvailable(isInitiallyAvailable());
+    UiNotifyConnector.doWhenFirstShown(toolWindow.getComponent(), () -> {
+      if (myComponent == null) {
+        myComponent = getComponent();
+      }
+      if (myComponent != null) {
+        addContent(myComponent, "", null, false);
+      }
+    });
   }
 
   /**
@@ -338,8 +297,9 @@ public abstract class BaseTool {
   }
 
   public int getCurrentTabIndex() {
-    ContentManager contentManager = getContentManager();
-    return contentManager.getIndexOfContent(contentManager.getSelectedContent());
+    final ContentManager contentManager = getContentManager();
+    final Content selectedContent = contentManager.getSelectedContent();
+    return selectedContent == null ? -1 : contentManager.getIndexOfContent(selectedContent);
   }
 
   protected AnAction createCloseAction() {
@@ -389,16 +349,16 @@ public abstract class BaseTool {
         }
       }
     }
-
+    
+    if (myProject.isDisposed()) {
+      return;
+    }
     ToolWindow toolWindow = getToolWindow();
     if (toolWindow != null) {
+      myWindowManager.unregisterToolWindow(myId);
       ContentManager contentManager = toolWindow.getContentManager();
-      if (contentManager != null && !contentManager.isDisposed()) {
-        contentManager.removeAllContents(true);
-      }
+      Disposer.dispose(contentManager);
     }
-
-    myWindowManager.unregisterToolWindow(myId);
     myIsRegistered = false;
   }
 
@@ -416,14 +376,14 @@ public abstract class BaseTool {
   }
 
   protected Content addContent(JComponent component, @NotNull String name, Icon icon, boolean isLockable) {
-    Content content = new ContentFactoryImpl().createContent(component, name, isLockable);
+    ContentManager contentManager = getContentManager();
+    Content content = contentManager.getFactory().createContent(component, name, isLockable);
     if (icon != null) {
       content.putUserData(ToolWindow.SHOW_CONTENT_ICON, Boolean.TRUE);
       content.setIcon(icon);
     } else {
       content.setIcon(myIcon);
     }
-    ContentManager contentManager = getContentManager();
     contentManager.addContent(content);
     return content;
   }
@@ -434,6 +394,7 @@ public abstract class BaseTool {
     manager.setSelectedContent(content);
   }
 
+  @Nullable
   protected ContentManager getContentManager() {
     if (!isRegistered()) {
       register();
@@ -457,6 +418,10 @@ public abstract class BaseTool {
   }
 
   public void dispose() {
-
+    // FIXME what's the contract for this method? Seems that it's only BaseProjectPlugin that cares to invoke it.
+    //       There's BaseProjectTool subclass, with disposeComponent() that doesn't invoke dispose(), is it right?
+    //       No idea where to put general dispose code in subclasses like UsagesViewTool - shall I use disposeComponent() or dispose()?
+    //       E.g. UsagesViewTool restores some UI stuff but doesn't add tabs until made visible. If IDE is closed w/o view being displayed
+    //       there's no dispose for UI stuff, allocated during state restore. dispose() would be very helpful at this point.
   }
 }

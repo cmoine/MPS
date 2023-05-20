@@ -4,7 +4,7 @@ package jetbrains.mps.baseLanguage.unitTest.sandbox;
 
 import org.junit.runner.RunWith;
 import org.junit.Test;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Ignore;
 
 @RunWith(SimpleRunner.class)

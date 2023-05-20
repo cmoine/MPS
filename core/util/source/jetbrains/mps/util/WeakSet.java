@@ -31,18 +31,16 @@ public class WeakSet<T> extends AbstractSet<T> {
   private WeakHashMap<T, Object> myWeakHashMap;
 
   public WeakSet(int size) {
-    myWeakHashMap = new WeakHashMap<T, Object>(size);
+    myWeakHashMap = new WeakHashMap<>(size);
   }
 
   public WeakSet() {
-    myWeakHashMap = new WeakHashMap<T, Object>();
+    myWeakHashMap = new WeakHashMap<>();
   }
 
   public WeakSet(@NotNull Collection<? extends T> collection) {
     this(collection.size());
-    for (T t : collection) {
-      add(t);
-    }
+    this.addAll(collection);
   }
 
   @Override

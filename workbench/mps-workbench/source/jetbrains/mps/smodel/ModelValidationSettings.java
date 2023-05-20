@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,39 +15,28 @@
  */
 package jetbrains.mps.smodel;
 
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.components.ApplicationComponent;
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-import jetbrains.mps.ide.MPSCoreComponents;
 import jetbrains.mps.smodel.ModelValidationSettings.MyState;
 import jetbrains.mps.validation.IModelValidationSettings;
 import jetbrains.mps.validation.ValidationSettings;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import javax.swing.Icon;
 
+// App component to initialize and to keep state of a CoreComponent
+// XXX I wonder if it's ok to replace it with Registry value?
 @State(
-  name = "ModelValidationSettings",
-  storages = @Storage("mpsModelValidationSettings.xml")
+    name = "ModelValidationSettings",
+    storages = @Storage("mpsModelValidationSettings.xml"),
+    reportStatistic = true
 )
-public class ModelValidationSettings implements PersistentStateComponent<MyState>, ApplicationComponent, IModelValidationSettings {
-
-  private boolean myDisableCheckOpenAPI = true;
+public class ModelValidationSettings implements PersistentStateComponent<MyState>, IModelValidationSettings, Disposable {
   private boolean myDisableTypeWasNotCalculated = true;
 
-  public ModelValidationSettings(MPSCoreComponents coreComponents) {
-  }
-
-  void setDisableCheckOpenAPI(boolean disableCheckOpenAPI) {
-    myDisableCheckOpenAPI = disableCheckOpenAPI;
-  }
-
-  @Override
-  public boolean isDisableCheckOpenAPI() {
-    return myDisableCheckOpenAPI;
+  public ModelValidationSettings() {
+    ValidationSettings.getInstance().setModelValidationSettings(this);
   }
 
   void setDisableTypeWasNotCalculated(boolean disableTypeWasNotCalculated) {
@@ -59,47 +48,24 @@ public class ModelValidationSettings implements PersistentStateComponent<MyState
     return myDisableTypeWasNotCalculated;
   }
 
-  public static ModelValidationSettings getInstance() {
-    return ApplicationManager.getApplication().getComponent(ModelValidationSettings.class);
-  }
-
-  @Nullable
-  public Icon getIcon() {
-    return null;
-  }
-
   @Override
-  public void initComponent() {
-    ValidationSettings.getInstance().setModelValidationSettings(this);
-  }
-
-  @Override
-  public void disposeComponent() {
+  public void dispose() {
     ValidationSettings.getInstance().setModelValidationSettings(null);
-  }
-
-  @NotNull
-  @Override
-  public String getComponentName() {
-    return "Model Validation Settings";
   }
 
   @Override
   public MyState getState() {
     MyState result = new MyState();
-    result.myDisableCheckOpenAPI = myDisableCheckOpenAPI;
     result.myDisableTypeWasNotCalculated = myDisableTypeWasNotCalculated;
     return result;
   }
 
   @Override
-  public void loadState(MyState state) {
-    myDisableCheckOpenAPI = state.myDisableCheckOpenAPI;
+  public void loadState(@NotNull MyState state) {
     myDisableTypeWasNotCalculated = state.myDisableTypeWasNotCalculated;
   }
 
   public static class MyState {
-    public boolean myDisableCheckOpenAPI = true;
     public boolean myDisableTypeWasNotCalculated = true;
   }
 }

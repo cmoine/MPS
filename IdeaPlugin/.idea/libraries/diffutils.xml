@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="diffutils">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/mps-core/lib/ext/diffutils-1.2.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../lib/ext/src/diffutils-1.2.1-src.jar!/" />
+    </SOURCES>
+  </library>
+</component>

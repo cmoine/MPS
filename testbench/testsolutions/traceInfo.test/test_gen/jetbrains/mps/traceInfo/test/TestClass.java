@@ -45,11 +45,7 @@ public class TestClass {
     System.err.println("sum = " + sum);
   }
   public void internalClassTest() {
-    new Thread(new Runnable() {
-      public void run() {
-        System.err.println("Hi there!");
-      }
-    });
+    new Thread(() -> System.err.println("Hi there!"));
   }
   public static void main(String[] args) {
   }

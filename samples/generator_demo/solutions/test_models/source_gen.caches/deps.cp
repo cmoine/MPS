@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dependenciesRoot>
+  <uses language="l:f3061a53-9226-4cc5-a443-f952ceaf5816:jetbrains.mps.baseLanguage" />
+  <uses language="l:c7fb639f-be78-4307-89b0-b5959c3fa8c8:jetbrains.mps.lang.text" />
+  <uses language="l:772f6dcd-8c0d-48f7-869c-908e036f7c8e:jetbrains.mps.sampleXML" />
+  <uses language="l:fae29102-8774-4e55-af5d-93fa67387f38:jetbrains.mps.samples.generator_demo.demoLang1" />
+  <uses language="l:ef47f5be-76c4-4166-8925-2b415ec6b840:jetbrains.mps.samples.generator_demo.demoLang2" />
+  <uses language="l:7a4dedfe-9c99-4610-b299-d4a37832823b:jetbrains.mps.samples.generator_demo.demoLang3" />
+  <uses language="l:1409a436-ea24-4d03-a196-53795139ce8d:jetbrains.mps.samples.generator_demo.demoLang4" />
+  <uses language="l:594bd850-39e3-46a5-9ef2-40c70d782c8c:jetbrains.mps.samples.generator_demo.demoLang5" />
+  <uses language="l:82fb751d-f7fb-4b58-a16e-303356f8e0af:jetbrains.mps.samples.generator_demo.demoLang6" />
+  <uses language="l:b1ccc903-f5a9-42d1-add9-80ac0e69d662:jetbrains.mps.samples.generator_demo.demoLang7" />
+  <uses module="6354ebe7-c22a-4a0f-ac54-50b52ab9b065(JDK)" kind="rt+dp" />
+  <uses module="52b81ac7-93fd-4e9e-b972-4995882da6d4(jetbrains.mps.baseLanguage.references.runtime)" kind="rt" />
+</dependenciesRoot>
+

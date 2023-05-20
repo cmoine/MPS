@@ -6,21 +6,9 @@ import jetbrains.mps.nodeEditor.DefaultNodeEditor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Collection;
 
 public class WatchablesListCreator_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createCollection_7frh84_a(editorContext, node);
-  }
-  private EditorCell createCollection_7frh84_a(EditorContext editorContext, SNode node) {
-    EditorCell_Collection editorCell = EditorCell_Collection.createHorizontal(editorContext, node);
-    editorCell.setCellId("Collection_7frh84_a");
-    editorCell.setBig(true);
-    editorCell.addEditorCell(this.createComponent_7frh84_a0(editorContext, node));
-    return editorCell;
-  }
-  private EditorCell createComponent_7frh84_a0(EditorContext editorContext, SNode node) {
-    EditorCell editorCell = editorContext.getCellFactory().createEditorComponentCell(node, "jetbrains.mps.lang.core.editor.alias");
-    return editorCell;
+    return new WatchablesListCreator_EditorBuilder_a(editorContext, node).createCell();
   }
 }

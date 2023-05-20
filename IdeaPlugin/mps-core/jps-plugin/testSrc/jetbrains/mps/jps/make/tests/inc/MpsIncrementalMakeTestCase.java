@@ -19,6 +19,7 @@ package jetbrains.mps.jps.make.tests.inc;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.testFramework.TestDataFile;
+import com.intellij.util.containers.CollectionFactory;
 import jetbrains.mps.jps.make.tests.MpsJpsModelsEnvironmentTestCase;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -32,8 +33,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Intended to check the incremental make in idea+mps build procedure.
@@ -66,7 +72,7 @@ public abstract class MpsIncrementalMakeTestCase extends MpsJpsModelsEnvironment
       BuildResult result = doTestIncrementalBuild(myProjectDescriptor);
 
       final String expectedLog = loadExpectedFileContent(testDataFilePath);
-      assertLogAsExpected(projectLogger.getLog(), expectedLog);
+      assertLogAsExpected(projectLogger.toString(), expectedLog);
 
       if (result.isSuccessful()) {
         assertMakeDumpIsValid();
@@ -89,8 +95,8 @@ public abstract class MpsIncrementalMakeTestCase extends MpsJpsModelsEnvironment
   }
 
   private StringProjectBuilderLogger createProjectLogger() {
-    final File outputDir = getProjectDir();
-    return new StringProjectBuilderLogger(Arrays.asList(outputDir, myDataStorageRoot));
+    final File projectDir = getProjectDir();
+    return new StringProjectBuilderLogger(projectDir, myDataStorageRoot);
   }
 
   private void assertMakeDumpIsValid() throws IOException {
@@ -117,8 +123,7 @@ public abstract class MpsIncrementalMakeTestCase extends MpsJpsModelsEnvironment
     final PrintStream stream = new PrintStream(makeDump);
     try {
       myProjectDescriptor.dataManager.getMappings().toStream(stream);
-    }
-    finally {
+    } finally {
       stream.close();
     }
 
@@ -132,11 +137,13 @@ public abstract class MpsIncrementalMakeTestCase extends MpsJpsModelsEnvironment
   }
 
   private static class StringProjectBuilderLogger extends ProjectBuilderLoggerBase {
-    private final List<File> myRoots;
-    private final StringBuilder myLog = new StringBuilder();
+    private final List<String> myRootPaths = new ArrayList<>();
+    private Deque<LogEvent> myEvents = new LinkedList<>();
 
-    public StringProjectBuilderLogger(List<File> roots) {
-      myRoots = roots;
+    public StringProjectBuilderLogger(File... rootFiles) {
+      for (File rootFile : rootFiles) {
+        myRootPaths.add(convertPartToPrefix(rootFile.getAbsolutePath()));
+      }
     }
 
     @Override
@@ -145,19 +152,46 @@ public abstract class MpsIncrementalMakeTestCase extends MpsJpsModelsEnvironment
     }
 
     @Override
-    protected void logLine(String line) {
-      myLog.append(tryToTrim(line)).append('\n');
+    public void logDeletedFiles(Collection<String> paths) {
+      ArrayList<String> pathsToLog = new ArrayList<>();
+      for (String path : paths) {
+        pathsToLog.add(trim(path));
+      }
+      logEvent(new LogEvent(pathsToLog, EventKind.DELETED));
+    }
+
+    @Override
+    public void logCompiledFiles(Collection<File> files, String builderName, String description) throws IOException {
+      ArrayList<String> pathsToLog = new ArrayList<>();
+      for (File file : files) {
+        pathsToLog.add(trim(FileUtil.toSystemIndependentName(file.getCanonicalPath())));
+      }
+      logEvent(new LogEvent(pathsToLog, EventKind.COMPILED, builderName));
+    }
+
+    private void logEvent(LogEvent event) {
+      if (event.myPaths.isEmpty()) {
+        return;
+      }
+      if (!myEvents.isEmpty() && myEvents.getLast().canMerge(event)) {
+        myEvents.addLast(myEvents.removeLast().merge(event));
+      } else {
+        myEvents.addLast(event);
+      }
+    }
+
+    @Override
+    protected void logLine(String s) {
     }
 
     /**
-     * @return trimmed path if it is a path indeed
+     * @return trimmed path if specified path points into one of root directories
      */
     @NotNull
-    private String tryToTrim(String path) {
-      for (File root : myRoots) {
-        String rootPrefix = convertPartToPrefix(root.getAbsolutePath());
-        if (FileUtil.startsWith(path, rootPrefix)) {
-          return StringUtil.trimStart(path, rootPrefix);
+    private String trim(String path) {
+      for (String rootPath : myRootPaths) {
+        if (FileUtil.startsWith(path, rootPath)) {
+          return StringUtil.trimStart(path, rootPath);
         }
       }
       return path;
@@ -167,8 +201,66 @@ public abstract class MpsIncrementalMakeTestCase extends MpsJpsModelsEnvironment
       return FileUtil.toSystemIndependentName(absolutePath) + "/";
     }
 
-    public String getLog() {
-      return myLog.toString();
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder();
+      for (LogEvent event : myEvents) {
+        if (sb.length() > 0) {
+          sb.append("\n");
+        }
+        sb.append(event.toString());
+      }
+      return sb.toString();
+    }
+
+    enum EventKind {
+      DELETED,
+      COMPILED
+    }
+
+    private class LogEvent {
+      private Set<String> myPaths = CollectionFactory.createFilePathSet();
+      private String myBuilderName;
+      private EventKind myKind;
+
+      private LogEvent(Collection<String> paths, EventKind kind) {
+        this(paths, kind, null);
+      }
+
+      private LogEvent(Collection<String> paths, EventKind kind, String builderName) {
+        myPaths.addAll(paths);
+        myKind = kind;
+        myBuilderName = builderName;
+      }
+
+      @Override
+      public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        sb.append(myKind.name());
+        if (myBuilderName != null) {
+          sb.append("/");
+          sb.append(myBuilderName);
+        }
+        sb.append("]");
+        ArrayList<String> paths = new ArrayList<>(myPaths);
+        Collections.sort(paths);
+        for (String path : paths) {
+          sb.append("\n  ");
+          sb.append(path);
+        }
+        return sb.toString();
+      }
+
+      public boolean canMerge(LogEvent another) {
+        return myKind == another.myKind && myKind == EventKind.DELETED && (myBuilderName == null ? another.myBuilderName == null : myBuilderName.equals(another.myBuilderName));
+      }
+
+      public LogEvent merge(LogEvent another) {
+        List<String> allPaths = new ArrayList<>(myPaths);
+        allPaths.addAll(another.myPaths);
+        return new LogEvent(allPaths, myKind, myBuilderName);
+      }
     }
   }
 }

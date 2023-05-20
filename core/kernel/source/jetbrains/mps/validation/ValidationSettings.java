@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,12 +19,15 @@ import jetbrains.mps.components.CoreComponent;
 import org.jetbrains.annotations.Nullable;
 
 /**
+ * FIXME  I suspect there's no need in settings of IModelValidationSettings these days, therefore CheckerRegistry is kept separate so that
+ * we can remove this class once settings are gone. OTOH, CheckerRegistry itself is kind of odd (especially as an MPSCore component), perhaps,
+ * is less odd if part of generic 'validation' infrastructure.
  * evgeny, 12/27/11
  */
 public class ValidationSettings implements CoreComponent {
-
   private static ValidationSettings INSTANCE;
 
+  @Nullable
   public static ValidationSettings getInstance() {
     return INSTANCE;
   }

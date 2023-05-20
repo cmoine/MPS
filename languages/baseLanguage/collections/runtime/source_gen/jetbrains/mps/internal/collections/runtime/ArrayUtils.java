@@ -83,7 +83,7 @@ public class ArrayUtils {
     return new Iterable<T>() {
       @Override
       public Iterator<T> iterator() {
-        return new ArrayUtils.ArrayIterator<T>(array);
+        return new ArrayIterator<T>(array);
       }
     };
   }

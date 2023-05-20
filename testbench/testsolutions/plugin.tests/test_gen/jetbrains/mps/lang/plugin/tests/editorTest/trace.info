@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <root nodeRef="r:a5382851-1d9f-41aa-80d5-23778a1655eb(jetbrains.mps.lang.plugin.tests.editorTest@tests)/2787214354594070649">
+    <file name="Test_CompleteActionParameterDeclaration_Test.java">
+      <node id="2787214354594070649" at="19,57,20,60" concept="4" />
+      <node id="2787214354594070649" at="24,79,25,36" concept="1" />
+      <node id="2787214354594070649" at="30,52,31,19" concept="4" />
+      <node id="2787214354594070649" at="35,51,36,72" concept="1" />
+      <node id="2787214354594073109" at="36,72,37,28" concept="1" />
+      <node id="2787214354594070649" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="2787214354594070649" at="19,0,22,0" concept="0" trace="Test_CompleteActionParameterDeclaration_Test#()V" />
+      <node id="2787214354594070649" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="2787214354594070649" at="23,0,27,0" concept="2" trace="test_Test_CompleteActionParameterDeclaration#()V" />
+      <node id="2787214354594070649" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="2787214354594070649" at="19,57,20,60" />
+      <scope id="2787214354594070649" at="24,79,25,36" />
+      <scope id="2787214354594070649" at="30,52,31,19" />
+      <scope id="2787214354594070649" at="35,51,37,28" />
+      <scope id="2787214354594070649" at="19,0,22,0" />
+      <scope id="2787214354594070649" at="30,0,33,0">
+        <var name="owner" id="2787214354594070649" />
+      </scope>
+      <scope id="2787214354594070649" at="23,0,27,0" />
+      <scope id="2787214354594070649" at="34,0,39,0" />
+      <unit id="2787214354594070649" at="28,0,40,0" name="jetbrains.mps.lang.plugin.tests.editorTest.Test_CompleteActionParameterDeclaration_Test$TestBody" />
+      <unit id="2787214354594070649" at="14,0,41,0" name="jetbrains.mps.lang.plugin.tests.editorTest.Test_CompleteActionParameterDeclaration_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:a5382851-1d9f-41aa-80d5-23778a1655eb(jetbrains.mps.lang.plugin.tests.editorTest@tests)/2787214354594073117">
+    <file name="Test_CompleteActionConstructorParameterDeclaration_Test.java">
+      <node id="2787214354594073117" at="19,68,20,60" concept="4" />
+      <node id="2787214354594073117" at="24,90,25,36" concept="1" />
+      <node id="2787214354594073117" at="30,52,31,19" concept="4" />
+      <node id="2787214354594073117" at="35,51,36,72" concept="1" />
+      <node id="2787214354594073139" at="36,72,37,29" concept="1" />
+      <node id="2787214354594073117" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="2787214354594073117" at="19,0,22,0" concept="0" trace="Test_CompleteActionConstructorParameterDeclaration_Test#()V" />
+      <node id="2787214354594073117" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="2787214354594073117" at="23,0,27,0" concept="2" trace="test_Test_CompleteActionConstructorParameterDeclaration#()V" />
+      <node id="2787214354594073117" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="2787214354594073117" at="19,68,20,60" />
+      <scope id="2787214354594073117" at="24,90,25,36" />
+      <scope id="2787214354594073117" at="30,52,31,19" />
+      <scope id="2787214354594073117" at="35,51,37,29" />
+      <scope id="2787214354594073117" at="19,0,22,0" />
+      <scope id="2787214354594073117" at="30,0,33,0">
+        <var name="owner" id="2787214354594073117" />
+      </scope>
+      <scope id="2787214354594073117" at="23,0,27,0" />
+      <scope id="2787214354594073117" at="34,0,39,0" />
+      <unit id="2787214354594073117" at="28,0,40,0" name="jetbrains.mps.lang.plugin.tests.editorTest.Test_CompleteActionConstructorParameterDeclaration_Test$TestBody" />
+      <unit id="2787214354594073117" at="14,0,41,0" name="jetbrains.mps.lang.plugin.tests.editorTest.Test_CompleteActionConstructorParameterDeclaration_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:a5382851-1d9f-41aa-80d5-23778a1655eb(jetbrains.mps.lang.plugin.tests.editorTest@tests)/2787214354594289215">
+    <file name="Test_CompleteActionDataParameterDeclaration_Test.java">
+      <node id="2787214354594289215" at="19,61,20,60" concept="4" />
+      <node id="2787214354594289215" at="24,83,25,36" concept="1" />
+      <node id="2787214354594289215" at="30,52,31,19" concept="4" />
+      <node id="2787214354594289215" at="35,51,36,72" concept="1" />
+      <node id="2787214354594289237" at="36,72,37,29" concept="1" />
+      <node id="2787214354594289215" at="16,0,18,0" concept="3" trace="ourParametersCacheExtension" />
+      <node id="2787214354594289215" at="19,0,22,0" concept="0" trace="Test_CompleteActionDataParameterDeclaration_Test#()V" />
+      <node id="2787214354594289215" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="2787214354594289215" at="23,0,27,0" concept="2" trace="test_Test_CompleteActionDataParameterDeclaration#()V" />
+      <node id="2787214354594289215" at="34,0,39,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="2787214354594289215" at="19,61,20,60" />
+      <scope id="2787214354594289215" at="24,83,25,36" />
+      <scope id="2787214354594289215" at="30,52,31,19" />
+      <scope id="2787214354594289215" at="35,51,37,29" />
+      <scope id="2787214354594289215" at="19,0,22,0" />
+      <scope id="2787214354594289215" at="30,0,33,0">
+        <var name="owner" id="2787214354594289215" />
+      </scope>
+      <scope id="2787214354594289215" at="23,0,27,0" />
+      <scope id="2787214354594289215" at="34,0,39,0" />
+      <unit id="2787214354594289215" at="28,0,40,0" name="jetbrains.mps.lang.plugin.tests.editorTest.Test_CompleteActionDataParameterDeclaration_Test$TestBody" />
+      <unit id="2787214354594289215" at="14,0,41,0" name="jetbrains.mps.lang.plugin.tests.editorTest.Test_CompleteActionDataParameterDeclaration_Test" />
+    </file>
+  </root>
+</debug-info>
+

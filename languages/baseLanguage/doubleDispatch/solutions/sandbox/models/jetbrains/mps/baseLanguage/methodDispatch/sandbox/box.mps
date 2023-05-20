@@ -3,7 +3,7 @@
   <persistence version="9" />
   <languages>
     <use id="7db4447f-913e-4b81-bd75-c9a473319ac6" name="jetbrains.mps.baseLanguage.doubleDispatch" version="0" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports>
     <import index="wyt6" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)" />
@@ -178,7 +178,7 @@
         <node concept="3clFbF" id="244oDY5f5DB" role="3cqZAp">
           <node concept="2OqwBi" id="244oDY5f5O3" role="3clFbG">
             <node concept="liA8E" id="244oDY5f5UK" role="2OqNvi">
-              <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String):void" resolve="println" />
+              <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String)" resolve="println" />
               <node concept="Xl_RD" id="244oDY5f74N" role="37wK5m">
                 <property role="Xl_RC" value="double" />
               </node>
@@ -209,7 +209,7 @@
         <node concept="3clFbF" id="244oDY5f7kH" role="3cqZAp">
           <node concept="2OqwBi" id="244oDY5f7kJ" role="3clFbG">
             <node concept="liA8E" id="244oDY5f7kK" role="2OqNvi">
-              <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String):void" resolve="println" />
+              <ref role="37wK5l" to="guwi:~PrintStream.println(java.lang.String)" resolve="println" />
               <node concept="Xl_RD" id="244oDY5f7kL" role="37wK5m">
                 <property role="Xl_RC" value="integer" />
               </node>

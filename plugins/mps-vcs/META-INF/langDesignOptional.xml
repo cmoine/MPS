@@ -1,0 +1,7 @@
+<idea-plugin>
+  <extensions defaultExtensionNs="com.intellij">
+    <mps.LanguageLibrary dir="/languages-devkit"/>
+    <!-- JFTR, plugin.xml declares / for LanguageLibrary to help 'MPS from sources' scenario, need to get this inconsistency fixed -->
+    <!--      Would be great to have .plugin solutions active with ide.devkit presence to avoid their loading in Ant scenarios -->
+  </extensions>
+</idea-plugin>

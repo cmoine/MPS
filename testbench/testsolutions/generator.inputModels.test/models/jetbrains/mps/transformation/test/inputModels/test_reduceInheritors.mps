@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<model ref="r:00000000-0000-4000-0000-011c89590601(jetbrains.mps.transformation.test.inputModels.test_reduceInheritors)" doNotGenerate="true">
+<model ref="r:00000000-0000-4000-0000-011c89590601(jetbrains.mps.transformation.test.inputModels.test_reduceInheritors)">
   <persistence version="9" />
+  <attribute name="doNotGenerate" value="true" />
   <languages>
     <use id="ab0ae915-e3b5-4f35-b55a-c655d649a03c" name="jetbrains.mps.transformation.test.inputLang" version="0" />
   </languages>
@@ -22,7 +23,7 @@
     </language>
   </registry>
   <node concept="15_jI_" id="hzAE4vz">
-    <property role="3FifNy" value="reduceInheritors" />
+    <property role="3FifNy" value="hzAAZUd/reduceInheritors" />
     <property role="TrG5h" value="Input_root_1" />
     <node concept="15J_HG" id="hzAEcB7" role="15EZgy">
       <property role="TrG5h" value="input A" />

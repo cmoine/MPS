@@ -15,10 +15,13 @@
  */
 package jetbrains.mps.smodel.action;
 
+import jetbrains.mps.lang.editor.menus.EditorMenuDescriptorBase;
 import jetbrains.mps.nodeEditor.cells.EditorCell_Label;
+import jetbrains.mps.nodeEditor.menus.EditorMenuTraceInfoImpl;
 import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
-import jetbrains.mps.smodel.PropertySupport;
+import jetbrains.mps.openapi.editor.menus.EditorMenuTraceInfo;
+import jetbrains.mps.smodel.presentation.IPropertyPresentationProvider;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.model.SNode;
@@ -26,14 +29,25 @@ import org.jetbrains.mps.openapi.model.SNodeAccessUtil;
 
 public class SPropertySubstituteAction extends AbstractSubstituteAction {
   private SProperty myProperty;
-  private String myPropertyValue;
-  private PropertySupport myPropertySupport;
+  private Object myPropertyValue;
+  private IPropertyPresentationProvider myPresentationProvider;
+  private final EditorMenuTraceInfoImpl myMenuTraceInfo;
 
+  /**
+   * @deprecated Use another constructor that consumes property values as is
+   */
+@Deprecated(since = "2018.3", forRemoval = true)
   public SPropertySubstituteAction(SNode sourceNode, SProperty property, String propertyValue) {
+    this(sourceNode, property, property.getType().fromString(propertyValue));
+  }
+
+  public SPropertySubstituteAction(SNode sourceNode, SProperty property, Object propertyValue) {
     super(sourceNode);
-    myPropertySupport = PropertySupport.getPropertySupport(property);
+    myPresentationProvider = IPropertyPresentationProvider.getPresentationProviderFor(property);
     myProperty = property;
     myPropertyValue = propertyValue;
+    myMenuTraceInfo = new EditorMenuTraceInfoImpl();
+    myMenuTraceInfo.setDescriptor(new EditorMenuDescriptorBase("default property action", null));
   }
 
   @Override
@@ -43,7 +57,7 @@ public class SPropertySubstituteAction extends AbstractSubstituteAction {
 
   @Override
   public String getMatchingText(String pattern) {
-    return myPropertySupport.fromInternalValue(myPropertyValue);
+    return myPresentationProvider.getPresentation(myPropertyValue);
   }
 
   @Override
@@ -53,7 +67,7 @@ public class SPropertySubstituteAction extends AbstractSubstituteAction {
 
   @Override
   protected SNode doSubstitute(@Nullable final EditorContext editorContext, String pattern) {
-    SNodeAccessUtil.setProperty(getSourceNode(), myProperty, myPropertyValue);
+    SNodeAccessUtil.setPropertyValue(getSourceNode(), myProperty, myPropertyValue);
 
     if (editorContext != null) {
       // put caret at the end of text, TODO use editorContext.select(getSourceNode(), myPropertyName, -1 /* end */);
@@ -65,5 +79,10 @@ public class SPropertySubstituteAction extends AbstractSubstituteAction {
       }
     }
     return null;
+  }
+
+  @Override
+  public EditorMenuTraceInfo getEditorMenuTraceInfo() {
+    return myMenuTraceInfo;
   }
 }

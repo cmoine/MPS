@@ -4,78 +4,184 @@ package jetbrains.mps.lang.intentions.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
+import jetbrains.mps.lang.intentions.plugin.URLFunction_HelpCenterDocUrl;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_BaseIntentionDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ChildFilterBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ChildFilterFunction = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptFunctionParameter_childNode = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ConceptFunctionParameter_node = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_DescriptionBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ErrorIntentionPriority = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ExecuteBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ForConceptMethodParameter = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Intention = new ConceptPresentationBuilder().icon(IconContainer.RESOURCE_a0a0j).create();
-  private final ConceptPresentation props_IntentionDeclaration = new ConceptPresentationBuilder().icon(IconContainer.RESOURCE_a0a0k).create();
-  private final ConceptPresentation props_IntentionParameter = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IntentionPriority = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_IsApplicableBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Parameter = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ParameterizedDescriptionBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ParameterizedExecuteBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ParameterizedIntentionDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_QueryBlock = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_SurroundWithIntentionDeclaration = new ConceptPresentationBuilder().icon(IconContainer.RESOURCE_a0a0t).create();
+  private ConceptPresentation props_BaseIntentionDeclaration;
+  private ConceptPresentation props_ChildFilterFunction;
+  private ConceptPresentation props_ConceptFunctionParameter_childNode;
+  private ConceptPresentation props_ConceptFunctionParameter_node;
+  private ConceptPresentation props_DescriptionBlock;
+  private ConceptPresentation props_ErrorIntentionPriority;
+  private ConceptPresentation props_ExecuteBlock;
+  private ConceptPresentation props_ForConceptMethodParameter;
+  private ConceptPresentation props_Intention;
+  private ConceptPresentation props_IntentionDeclaration;
+  private ConceptPresentation props_IntentionParameter;
+  private ConceptPresentation props_IntentionPriority;
+  private ConceptPresentation props_IsApplicableBlock;
+  private ConceptPresentation props_Parameter;
+  private ConceptPresentation props_ParameterizedDescriptionBlock;
+  private ConceptPresentation props_ParameterizedExecuteBlock;
+  private ConceptPresentation props_ParameterizedIntentionDeclaration;
+  private ConceptPresentation props_QueryBlock;
+  private ConceptPresentation props_SurroundWithIntentionDeclaration;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.BaseIntentionDeclaration:
+        if (props_BaseIntentionDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_BaseIntentionDeclaration = cpb.create();
+        }
         return props_BaseIntentionDeclaration;
-      case 1:
-        return props_ChildFilterBlock;
-      case 2:
+      case LanguageConceptSwitch.ChildFilterFunction:
+        if (props_ChildFilterFunction == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("child filter function");
+          props_ChildFilterFunction = cpb.create();
+        }
         return props_ChildFilterFunction;
-      case 3:
+      case LanguageConceptSwitch.ConceptFunctionParameter_childNode:
+        if (props_ConceptFunctionParameter_childNode == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("function parameter");
+          cpb.rawPresentation("childNode");
+          props_ConceptFunctionParameter_childNode = cpb.create();
+        }
         return props_ConceptFunctionParameter_childNode;
-      case 4:
+      case LanguageConceptSwitch.ConceptFunctionParameter_node:
+        if (props_ConceptFunctionParameter_node == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("function parameter");
+          cpb.rawPresentation("node");
+          props_ConceptFunctionParameter_node = cpb.create();
+        }
         return props_ConceptFunctionParameter_node;
-      case 5:
+      case LanguageConceptSwitch.DescriptionBlock:
+        if (props_DescriptionBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("description");
+          props_DescriptionBlock = cpb.create();
+        }
         return props_DescriptionBlock;
-      case 6:
+      case LanguageConceptSwitch.ErrorIntentionPriority:
+        if (props_ErrorIntentionPriority == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("error");
+          props_ErrorIntentionPriority = cpb.create();
+        }
         return props_ErrorIntentionPriority;
-      case 7:
+      case LanguageConceptSwitch.ExecuteBlock:
+        if (props_ExecuteBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("execute");
+          props_ExecuteBlock = cpb.create();
+        }
         return props_ExecuteBlock;
-      case 8:
+      case LanguageConceptSwitch.ForConceptMethodParameter:
+        if (props_ForConceptMethodParameter == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_ForConceptMethodParameter = cpb.create();
+        }
         return props_ForConceptMethodParameter;
-      case 9:
+      case LanguageConceptSwitch.Intention:
+        if (props_Intention == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.helpUrl(HELP_URL);
+          cpb.icon(IconContainer.RESOURCE_a0a3a0a8b0u);
+          props_Intention = cpb.create();
+        }
         return props_Intention;
-      case 10:
+      case LanguageConceptSwitch.IntentionDeclaration:
+        if (props_IntentionDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.helpUrl(HELP_URL1);
+          cpb.icon(IconContainer.RESOURCE_a0a3a0a9b0u);
+          props_IntentionDeclaration = cpb.create();
+        }
         return props_IntentionDeclaration;
-      case 11:
+      case LanguageConceptSwitch.IntentionParameter:
+        if (props_IntentionParameter == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("intention parameter");
+          cpb.rawPresentation("parameter");
+          props_IntentionParameter = cpb.create();
+        }
         return props_IntentionParameter;
-      case 12:
+      case LanguageConceptSwitch.IntentionPriority:
+        if (props_IntentionPriority == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IntentionPriority = cpb.create();
+        }
         return props_IntentionPriority;
-      case 13:
+      case LanguageConceptSwitch.IsApplicableBlock:
+        if (props_IsApplicableBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("isApplicable");
+          props_IsApplicableBlock = cpb.create();
+        }
         return props_IsApplicableBlock;
-      case 14:
+      case LanguageConceptSwitch.Parameter:
+        if (props_Parameter == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Parameter = cpb.create();
+        }
         return props_Parameter;
-      case 15:
+      case LanguageConceptSwitch.ParameterizedDescriptionBlock:
+        if (props_ParameterizedDescriptionBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.deprecated(true);
+          cpb.rawPresentation("description");
+          props_ParameterizedDescriptionBlock = cpb.create();
+        }
         return props_ParameterizedDescriptionBlock;
-      case 16:
+      case LanguageConceptSwitch.ParameterizedExecuteBlock:
+        if (props_ParameterizedExecuteBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.deprecated(true);
+          cpb.rawPresentation("execute");
+          props_ParameterizedExecuteBlock = cpb.create();
+        }
         return props_ParameterizedExecuteBlock;
-      case 17:
+      case LanguageConceptSwitch.ParameterizedIntentionDeclaration:
+        if (props_ParameterizedIntentionDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_ParameterizedIntentionDeclaration = cpb.create();
+        }
         return props_ParameterizedIntentionDeclaration;
-      case 18:
+      case LanguageConceptSwitch.QueryBlock:
+        if (props_QueryBlock == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("parameter");
+          props_QueryBlock = cpb.create();
+        }
         return props_QueryBlock;
-      case 19:
+      case LanguageConceptSwitch.SurroundWithIntentionDeclaration:
+        if (props_SurroundWithIntentionDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          cpb.helpUrl(HELP_URL2);
+          cpb.icon(IconContainer.RESOURCE_a0a3a0a81b0u);
+          props_SurroundWithIntentionDeclaration = cpb.create();
+        }
         return props_SurroundWithIntentionDeclaration;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
+  private static final String HELP_URL = URLFunction_HelpCenterDocUrl.getUrl() + "mps-intentions.html#intentiontypes";
+  private static final String HELP_URL1 = URLFunction_HelpCenterDocUrl.getUrl() + "mps-intentions.html#intentiontypes";
+  private static final String HELP_URL2 = URLFunction_HelpCenterDocUrl.getUrl() + "mps-intentions.html#intentiontypes";
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,29 +15,17 @@
  */
 package jetbrains.mps.ide.projectPane.fileSystem.nodes;
 
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-
-import javax.swing.Icon;
+import jetbrains.mps.project.MPSProject;
 
 public class FileTreeNode extends AbstractFileTreeNode {
-  public FileTreeNode(Project project, VirtualFile file) {
+  public FileTreeNode(MPSProject project, VirtualFile file) {
     super(project, file);
+    setIcon(file.getFileType().getIcon());
   }
 
   @Override
   public boolean isLeaf() {
     return true;
-  }
-
-  @Override
-  protected void doUpdatePresentation() {
-    super.doUpdatePresentation();
-    Icon icon = getIcon();
-    if (icon != null) setIcon(icon);
-  }
-
-  private Icon getIcon() {
-    return myFile.getFileType().getIcon();
   }
 }

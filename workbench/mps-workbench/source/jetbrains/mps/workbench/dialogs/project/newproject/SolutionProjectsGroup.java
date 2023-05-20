@@ -21,7 +21,7 @@ class SolutionProjectsGroup implements ProjectTemplatesGroup {
   @NotNull
   @Override
   public Collection<MPSProjectTemplate> getTemplates() {
-    List<MPSProjectTemplate> mpsProjectTemplates = new LinkedList<MPSProjectTemplate>();
+    List<MPSProjectTemplate> mpsProjectTemplates = new LinkedList<>();
     Collections.addAll(mpsProjectTemplates, SolutionProjectTemplate.EP_NAME.getExtensions());
     return mpsProjectTemplates;
   }

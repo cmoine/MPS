@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-be1773oedjdbue08qnsj44t1ht5ii43" />
+<product version="3" modelHash="e3bs1ol76yr2ef9krtlevmz6mv7jgut">
+  <files names="CategoryReference_TextGen.java:Category_TextGen.java:Note_TextGen.java:Notes_TextGen.java:TextGenAspectDescriptor.java:TextNotePart_TextGen.java" />
+</product>
 

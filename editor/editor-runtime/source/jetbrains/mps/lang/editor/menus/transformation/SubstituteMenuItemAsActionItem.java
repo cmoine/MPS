@@ -15,7 +15,10 @@
  */
 package jetbrains.mps.lang.editor.menus.transformation;
 
+import jetbrains.mps.openapi.editor.menus.EditorMenuTraceInfo;
+import jetbrains.mps.openapi.editor.menus.style.EditorMenuItemStyle;
 import jetbrains.mps.openapi.editor.menus.substitute.SubstituteMenuItem;
+import jetbrains.mps.openapi.editor.menus.substitute.SubstitutionAcceptable;
 import jetbrains.mps.openapi.editor.menus.transformation.ActionItemBase;
 import jetbrains.mps.openapi.editor.menus.transformation.CompletionActionItem;
 import jetbrains.mps.smodel.runtime.IconResource;
@@ -37,6 +40,11 @@ public abstract class SubstituteMenuItemAsActionItem extends ActionItemBase impl
   @Override
   public String getLabelText(@NotNull String pattern) {
     return mySubstituteItem.getMatchingText(pattern);
+  }
+
+  @Override
+  public boolean isAcceptable(String pattern, SubstitutionAcceptable acceptable) {
+    return mySubstituteItem.isAcceptable(pattern, acceptable);
   }
 
   @Nullable
@@ -69,5 +77,15 @@ public abstract class SubstituteMenuItemAsActionItem extends ActionItemBase impl
 
   protected SubstituteMenuItem getSubstituteItem() {
     return mySubstituteItem;
+  }
+
+  @Override
+  public EditorMenuTraceInfo getTraceInfo() {
+    return mySubstituteItem.getTraceInfo();
+  }
+
+  @Override
+  public void customize(String pattern, EditorMenuItemStyle style) {
+    mySubstituteItem.customize(pattern, style);
   }
 }

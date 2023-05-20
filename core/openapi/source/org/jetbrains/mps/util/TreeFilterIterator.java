@@ -75,9 +75,8 @@ public final class TreeFilterIterator<T> implements Iterator<T> {
   }
 
   private T nextInternal() {
-    T next;
     while (myIterator.hasNext()) {
-      next = myIterator.next();
+      T next = myIterator.next();
       if (!myCondition.met(next)) {
         return next;
       }

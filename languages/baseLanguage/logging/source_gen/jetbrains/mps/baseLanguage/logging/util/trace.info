@@ -8,83 +8,89 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
   <root nodeRef="r:00000000-0000-4000-0000-011c89590581(jetbrains.mps.baseLanguage.logging.util)/1210176650661">
     <file name="LoggingGenerationUtil.java">
-      <node id="1210176706163" at="24,59,25,24" concept="5" />
-      <node id="1210176706177" at="26,62,27,88" concept="1" />
-      <node id="1210176706192" at="28,83,29,106" concept="1" />
-      <node id="1210176706209" at="31,5,32,18" concept="6" />
-      <node id="4075687536653264595" at="35,286,36,226" concept="5" />
-      <node id="2698960852100989887" at="36,226,37,0" concept="7" />
-      <node id="2698960852100988713" at="39,41,40,539" concept="6" />
-      <node id="2698960852100989854" at="42,24,43,145" concept="6" />
-      <node id="2698960852100989881" at="45,5,46,0" concept="7" />
-      <node id="6675136286173592423" at="46,0,47,20" concept="6" />
-      <node id="1210176706194" at="49,103,50,63" concept="5" />
-      <node id="1210176706194" at="50,63,51,30" concept="5" />
-      <node id="1210176706194" at="51,30,52,30" concept="5" />
-      <node id="1210176706194" at="52,30,53,30" concept="5" />
-      <node id="1210176706194" at="53,30,54,226" concept="1" />
-      <node id="1210176706194" at="54,226,55,39" concept="1" />
-      <node id="1210176706194" at="56,31,57,195" concept="1" />
-      <node id="1210176706194" at="58,5,59,39" concept="1" />
-      <node id="1210176706194" at="60,31,61,194" concept="1" />
-      <node id="1210176706194" at="62,5,63,24" concept="6" />
-      <node id="2423165640493149430" at="22,0,24,0" concept="0" trace="LoggingGenerationUtil#()V" />
-      <node id="1210176706185" at="27,88,30,7" concept="2" />
-      <node id="2698960852100988709" at="39,0,42,0" concept="4" trace="accept#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
-      <node id="1210176706194" at="55,39,58,5" concept="3" />
-      <node id="1210176706194" at="59,39,62,5" concept="3" />
-      <node id="1210176706175" at="25,24,31,5" concept="3" />
-      <node id="2698960852100988903" at="37,0,44,7" concept="3" />
-      <node id="1210176660531" at="24,0,34,0" concept="8" trace="toPlus#(Ljava/util/List;)Lorg/jetbrains/mps/openapi/model/SNode;" />
-      <node id="6675136286173592152" at="34,90,45,5" concept="2" />
-      <node id="4075687536653401249" at="34,0,49,0" concept="8" trace="generateUniqueFieldName#(Lorg/jetbrains/mps/openapi/model/SNode;Ljava/lang/String;)Ljava/lang/String;" />
-      <node id="1210176706194" at="49,0,65,0" concept="8" trace="_quotation_createNode_gd2srw_a0a0b0b0b#(Ljava/lang/Object;Ljava/lang/Object;)Lorg/jetbrains/mps/openapi/model/SNode;" />
-      <scope id="2423165640493149432" at="22,34,22,34" />
-      <scope id="1210176706191" at="28,83,29,106" />
-      <scope id="2698960852100988710" at="39,41,40,539" />
-      <scope id="2698960852100988904" at="42,24,43,145" />
-      <scope id="1210176706194" at="56,31,57,195" />
-      <scope id="1210176706194" at="60,31,61,194" />
-      <scope id="2423165640493149430" at="22,0,24,0" />
-      <scope id="1210176706185" at="27,88,30,7">
+      <node id="1210176706163" at="26,59,27,24" concept="5" />
+      <node id="1210176706177" at="28,62,29,88" concept="1" />
+      <node id="1210176706192" at="30,83,31,106" concept="1" />
+      <node id="1210176706209" at="33,5,34,18" concept="6" />
+      <node id="4075687536653264595" at="38,158,39,90" concept="5" />
+      <node id="2698960852100989887" at="39,90,40,0" concept="7" />
+      <node id="2698960852100988713" at="42,41,43,212" concept="6" />
+      <node id="2698960852100989854" at="45,24,46,145" concept="6" />
+      <node id="2698960852100989881" at="48,5,49,0" concept="7" />
+      <node id="6675136286173592423" at="49,0,50,20" concept="6" />
+      <node id="1210176706194" at="52,103,53,30" concept="5" />
+      <node id="1210176706194" at="53,30,54,30" concept="5" />
+      <node id="1210176706194" at="54,30,55,30" concept="5" />
+      <node id="1210176706194" at="55,30,56,224" concept="5" />
+      <node id="1210176706194" at="56,224,57,34" concept="1" />
+      <node id="1210176706194" at="57,34,58,39" concept="1" />
+      <node id="1210176706194" at="59,31,60,205" concept="1" />
+      <node id="1210176706194" at="61,5,62,39" concept="1" />
+      <node id="1210176706194" at="63,31,64,204" concept="1" />
+      <node id="1210176706194" at="65,5,66,24" concept="6" />
+      <node id="1210176650661" at="70,0,71,0" concept="8" trace="VariableDeclaration$Y0" />
+      <node id="1210176650661" at="71,0,72,0" concept="8" trace="IMessage$D6" />
+      <node id="1210176650661" at="75,0,76,0" concept="8" trace="name$MnvL" />
+      <node id="2423165640493149430" at="23,0,25,0" concept="0" trace="LoggingGenerationUtil#()V" />
+      <node id="1210176706185" at="29,88,32,7" concept="2" />
+      <node id="2698960852100988709" at="42,0,45,0" concept="4" trace="accept#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="1210176706194" at="58,39,61,5" concept="3" />
+      <node id="1210176706194" at="62,39,65,5" concept="3" />
+      <node id="1210176706175" at="27,24,33,5" concept="3" />
+      <node id="2698960852100988903" at="40,0,47,7" concept="3" />
+      <node id="1210176660531" at="26,0,36,0" concept="9" trace="toPlus#(Ljava/util/List;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="6675136286173592152" at="37,90,48,5" concept="2" />
+      <node id="4075687536653401249" at="37,0,52,0" concept="9" trace="generateUniqueFieldName#(Lorg/jetbrains/mps/openapi/model/SNode;Ljava/lang/String;)Ljava/lang/String;" />
+      <node id="1210176706194" at="52,0,68,0" concept="9" trace="_quotation_createNode_gd2srw_a0a0b0b0c#(Ljava/lang/Object;Ljava/lang/Object;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <scope id="2423165640493149432" at="23,35,23,35" />
+      <scope id="1210176706191" at="30,83,31,106" />
+      <scope id="2698960852100988710" at="42,41,43,212" />
+      <scope id="2698960852100988904" at="45,24,46,145" />
+      <scope id="1210176706194" at="59,31,60,205" />
+      <scope id="1210176706194" at="63,31,64,204" />
+      <scope id="2423165640493149430" at="23,0,25,0" />
+      <scope id="1210176706185" at="29,88,32,7">
         <var name="textExpression" id="1210176706186" />
       </scope>
-      <scope id="2698960852100988709" at="39,0,42,0">
+      <scope id="2698960852100988709" at="42,0,45,0">
         <var name="it" id="2698960852100988709" />
       </scope>
-      <scope id="1210176706176" at="26,62,30,7" />
-      <scope id="1210176660534" at="24,59,32,18">
+      <scope id="1210176706176" at="28,62,32,7" />
+      <scope id="1210176660534" at="26,59,34,18">
         <var name="result" id="1210176706164" />
       </scope>
-      <scope id="6675136286173592155" at="35,286,44,7">
+      <scope id="6675136286173592155" at="38,158,47,7">
         <var name="scope" id="4075687536653264596" />
       </scope>
-      <scope id="1210176660531" at="24,0,34,0">
+      <scope id="1210176660531" at="26,0,36,0">
         <var name="textExpressions" id="1210176685775" />
       </scope>
-      <scope id="6675136286173592152" at="34,90,45,5">
+      <scope id="6675136286173592152" at="37,90,48,5">
         <var name="logStatement" id="6675136286173592153" />
       </scope>
-      <scope id="4075687536653401252" at="34,90,47,20" />
-      <scope id="1210176706194" at="49,103,63,24">
-        <var name="facade" id="1210176706194" />
+      <scope id="4075687536653401252" at="37,90,50,20" />
+      <scope id="1210176706194" at="52,103,66,24">
+        <var name="nb" id="1210176706194" />
         <var name="quotedNode_3" id="1210176706194" />
         <var name="quotedNode_4" id="1210176706194" />
         <var name="quotedNode_5" id="1210176706194" />
       </scope>
-      <scope id="4075687536653401249" at="34,0,49,0">
+      <scope id="4075687536653401249" at="37,0,52,0">
         <var name="baseName" id="4075687536653401256" />
         <var name="contextNode" id="4075687536653401254" />
       </scope>
-      <scope id="1210176706194" at="49,0,65,0">
+      <scope id="1210176706194" at="52,0,68,0">
         <var name="parameter_1" id="1210176706194" />
         <var name="parameter_2" id="1210176706194" />
       </scope>
-      <unit id="2698960852100988709" at="38,80,42,7" name="jetbrains.mps.baseLanguage.logging.util.LoggingGenerationUtil$1" />
-      <unit id="1210176650661" at="21,0,66,0" name="jetbrains.mps.baseLanguage.logging.util.LoggingGenerationUtil" />
+      <unit id="1210176650661" at="74,0,77,0" name="jetbrains.mps.baseLanguage.logging.util.LoggingGenerationUtil$PROPS" />
+      <unit id="2698960852100988709" at="41,80,45,7" name="jetbrains.mps.baseLanguage.logging.util.LoggingGenerationUtil$1" />
+      <unit id="1210176650661" at="69,0,73,0" name="jetbrains.mps.baseLanguage.logging.util.LoggingGenerationUtil$CONCEPTS" />
+      <unit id="1210176650661" at="22,0,78,0" name="jetbrains.mps.baseLanguage.logging.util.LoggingGenerationUtil" />
     </file>
   </root>
 </debug-info>

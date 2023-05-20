@@ -1,4 +1,4 @@
-<components>
+<idea-plugin>
   <actions>
     <action id="jetbrains.mps.ide.editor.actions.AddLanguageImport_Action" class="jetbrains.mps.ide.editor.actions.AddLanguageImport_Action">
       <keyboard-shortcut first-keystroke="ctrl L" keymap="$default" />
@@ -8,7 +8,7 @@
     <action id="jetbrains.mps.ide.editor.actions.AddModelImportByRoot_Action" class="jetbrains.mps.ide.editor.actions.AddModelImportByRoot_Action">
       <keyboard-shortcut first-keystroke="ctrl R" keymap="$default" />
       <keyboard-shortcut first-keystroke="ctrl R" keymap="Mac OS X" />
-      <keyboard-shortcut first-keystroke="ctrl R" keymap="Mac OS X 10.5+" />
+      <keyboard-shortcut first-keystroke="ctrl R" keymap="Mac OS X 10.5+" replace-all="true" />
     </action>
     <action id="jetbrains.mps.ide.editor.actions.AddModelImport_Action" class="jetbrains.mps.ide.editor.actions.AddModelImport_Action">
       <keyboard-shortcut first-keystroke="ctrl M" keymap="$default" />
@@ -47,6 +47,8 @@
     </action>
     <action id="jetbrains.mps.ide.editor.actions.DeleteLine_Action" class="jetbrains.mps.ide.editor.actions.DeleteLine_Action">
       <keyboard-shortcut first-keystroke="ctrl Y" keymap="$default" />
+      <keyboard-shortcut first-keystroke="meta BACK_SPACE" keymap="Mac OS X 10.5+" replace-all="true" />
+      <keyboard-shortcut first-keystroke="ctrl BACK_SPACE" keymap="Mac OS X 10.5+" />
     </action>
     <action id="jetbrains.mps.ide.editor.actions.DeleteToWordEnd_Action" class="jetbrains.mps.ide.editor.actions.DeleteToWordEnd_Action">
       <keyboard-shortcut first-keystroke="ctrl DELETE" keymap="$default" />
@@ -93,7 +95,10 @@
     <action id="jetbrains.mps.ide.editor.actions.FoldSelection_Action" class="jetbrains.mps.ide.editor.actions.FoldSelection_Action">
       <keyboard-shortcut first-keystroke="ctrl PERIOD" keymap="$default" />
     </action>
-    <action id="jetbrains.mps.ide.editor.actions.GoByCurrentReference_Action" class="jetbrains.mps.ide.editor.actions.GoByCurrentReference_Action">
+    <action id="jetbrains.mps.ide.editor.actions.GoToDeclarationInMenu_Action" class="jetbrains.mps.ide.editor.actions.GoToDeclarationInMenu_Action">
+      <keyboard-shortcut first-keystroke="ctrl B" keymap="$default" />
+    </action>
+    <action id="jetbrains.mps.ide.editor.actions.GoToDeclaration_Action" class="jetbrains.mps.ide.editor.actions.GoToDeclaration_Action">
       <keyboard-shortcut first-keystroke="ctrl B" keymap="$default" />
     </action>
     <action id="jetbrains.mps.ide.editor.actions.Home_Action" class="jetbrains.mps.ide.editor.actions.Home_Action">
@@ -108,6 +113,9 @@
       <keyboard-shortcut first-keystroke="shift ENTER" keymap="$default" />
       <keyboard-shortcut first-keystroke="shift ENTER" keymap="Mac OS X" />
       <keyboard-shortcut first-keystroke="shift ENTER" keymap="Mac OS X 10.5+" />
+    </action>
+    <action id="jetbrains.mps.ide.editor.actions.InsertPlaceholder_Action" class="jetbrains.mps.ide.editor.actions.InsertPlaceholder_Action">
+      <keyboard-shortcut first-keystroke="ctrl shift ENTER" keymap="$default" />
     </action>
     <action id="jetbrains.mps.ide.editor.actions.Insert_Action" class="jetbrains.mps.ide.editor.actions.Insert_Action">
       <keyboard-shortcut first-keystroke=" ENTER" keymap="$default" />
@@ -150,6 +158,9 @@
     <action id="jetbrains.mps.ide.editor.actions.RootHome_Action" class="jetbrains.mps.ide.editor.actions.RootHome_Action">
       <keyboard-shortcut first-keystroke="ctrl HOME" keymap="$default" />
     </action>
+    <action id="jetbrains.mps.ide.editor.actions.SelectAll_Action" class="jetbrains.mps.ide.editor.actions.SelectAll_Action">
+      <keyboard-shortcut first-keystroke="ctrl A" keymap="$default" />
+    </action>
     <action id="jetbrains.mps.ide.editor.actions.SelectDown_Action" class="jetbrains.mps.ide.editor.actions.SelectDown_Action">
       <keyboard-shortcut first-keystroke="ctrl DOWN" keymap="$default" />
       <keyboard-shortcut first-keystroke="ctrl shift W" keymap="$default" />
@@ -157,6 +168,7 @@
       <keyboard-shortcut first-keystroke="ctrl shift W" keymap="Mac OS X" />
       <keyboard-shortcut first-keystroke="ctrl DOWN" keymap="Mac OS X 10.5+" />
       <keyboard-shortcut first-keystroke="ctrl shift W" keymap="Mac OS X 10.5+" />
+      <keyboard-shortcut first-keystroke="alt DOWN" keymap="Mac OS X 10.5+" replace-all="true" />
     </action>
     <action id="jetbrains.mps.ide.editor.actions.SelectLeft_Action" class="jetbrains.mps.ide.editor.actions.SelectLeft_Action">
       <keyboard-shortcut first-keystroke="shift LEFT" keymap="$default" />
@@ -189,8 +201,7 @@
       <keyboard-shortcut first-keystroke="ctrl W" keymap="$default" />
       <keyboard-shortcut first-keystroke="ctrl UP" keymap="Mac OS X" />
       <keyboard-shortcut first-keystroke="ctrl W" keymap="Mac OS X" />
-      <keyboard-shortcut first-keystroke="ctrl UP" keymap="Mac OS X 10.5+" />
-      <keyboard-shortcut first-keystroke="ctrl W" keymap="Mac OS X 10.5+" />
+      <keyboard-shortcut first-keystroke="alt UP" keymap="Mac OS X 10.5+" replace-all="true" />
     </action>
     <action id="jetbrains.mps.ide.editor.actions.ShowGenerationActions_Action" class="jetbrains.mps.ide.editor.actions.ShowGenerationActions_Action">
       <keyboard-shortcut first-keystroke="alt INSERT" keymap="$default" />
@@ -200,14 +211,27 @@
     <action id="jetbrains.mps.ide.editor.actions.core.ShowNodeMessages_Action" class="jetbrains.mps.ide.editor.actions.core.ShowNodeMessages_Action">
       <keyboard-shortcut first-keystroke="alt shift M" keymap="$default" />
     </action>
-    <action id="jetbrains.mps.ide.editor.actions.ShowReflectiveEditor_Action" class="jetbrains.mps.ide.editor.actions.ShowReflectiveEditor_Action"></action>
-    <action id="jetbrains.mps.ide.editor.actions.ShowRegularEditor_Action" class="jetbrains.mps.ide.editor.actions.ShowRegularEditor_Action"></action>
+    <action id="jetbrains.mps.ide.editor.actions.ShowReflectiveEditor_Action" class="jetbrains.mps.ide.editor.actions.ShowReflectiveEditor_Action">
+      <keyboard-shortcut first-keystroke="ctrl OPEN_BRACKET" keymap="$default" />
+    </action>
+    <action id="jetbrains.mps.ide.editor.actions.ShowReflectiveEditorsForSubtree_Action" class="jetbrains.mps.ide.editor.actions.ShowReflectiveEditorsForSubtree_Action">
+      <keyboard-shortcut first-keystroke="ctrl shift OPEN_BRACKET" keymap="$default" />
+    </action>
+    <action id="jetbrains.mps.ide.editor.actions.ShowRegularEditor_Action" class="jetbrains.mps.ide.editor.actions.ShowRegularEditor_Action">
+      <keyboard-shortcut first-keystroke="ctrl CLOSE_BRACKET" keymap="$default" />
+      <keyboard-shortcut first-keystroke="ctrl shift CLOSE_BRACKET" keymap="$default" />
+    </action>
+    <action id="jetbrains.mps.ide.editor.actions.ShowSuppressedErrors_Action" class="jetbrains.mps.ide.editor.actions.ShowSuppressedErrors_Action"></action>
     <action id="jetbrains.mps.ide.editor.actions.ShowSurroundWithIntentions_Action" class="jetbrains.mps.ide.editor.actions.ShowSurroundWithIntentions_Action">
       <keyboard-shortcut first-keystroke="ctrl alt T" keymap="$default" />
     </action>
+    <action id="jetbrains.mps.ide.editor.actions.WordAddLink_Action" class="jetbrains.mps.ide.editor.actions.WordAddLink_Action"></action>
+    <action id="jetbrains.mps.ide.editor.actions.WordRemoveLink_Action" class="jetbrains.mps.ide.editor.actions.WordRemoveLink_Action"></action>
     <group id="EditorPopup_ActionGroupnew" />
     <group id="EditorPopup_ActionGroupshowIn" />
     <group id="EditorPopup_ActionGroupstructure" />
+    <group id="EditorPopup_ActionGroupannotatedCell" />
+    <group id="EditorPopup_ActionGroupcopy" />
     <group id="EditorPopup_ActionGrouppaste" />
     <group id="EditorPopup_ActionGroupfolding" />
     <group id="EditorPopup_ActionGroupgoto" />
@@ -217,6 +241,7 @@
     <group id="EditorPopup_ActionGroupdebug" />
     <group id="EditorPopup_ActionGroupfind" />
     <group id="EditorPopup_ActionGrouprefactoring" />
+    <group id="EditorPopup_ActionGrouptool" />
     <group id="EditorPopup_ActionGroupvcs" />
     <group id="EditorPopup_ActionGrouphints" />
     <group id="EditorPopup_ActionGroupreflective" />
@@ -242,6 +267,7 @@
       <reference ref="jetbrains.mps.ide.editor.actions.Home_Action" />
       <reference ref="jetbrains.mps.ide.editor.actions.Insert_Action" />
       <reference ref="jetbrains.mps.ide.editor.actions.InsertBefore_Action" />
+      <reference ref="jetbrains.mps.ide.editor.actions.InsertPlaceholder_Action" />
       <reference ref="jetbrains.mps.ide.editor.actions.LocalEnd_Action" />
       <reference ref="jetbrains.mps.ide.editor.actions.LocalHome_Action" />
       <reference ref="jetbrains.mps.ide.editor.actions.MoveDown_Action" />
@@ -252,6 +278,7 @@
       <reference ref="jetbrains.mps.ide.editor.actions.MoveUp_Action" />
       <reference ref="jetbrains.mps.ide.editor.actions.RootEnd_Action" />
       <reference ref="jetbrains.mps.ide.editor.actions.RootHome_Action" />
+      <reference ref="jetbrains.mps.ide.editor.actions.SelectAll_Action" />
       <reference ref="jetbrains.mps.ide.editor.actions.SelectDown_Action" />
       <reference ref="jetbrains.mps.ide.editor.actions.SelectLeft_Action" />
       <reference ref="jetbrains.mps.ide.editor.actions.SelectLocalEnd_Action" />
@@ -264,6 +291,9 @@
       <reference ref="jetbrains.mps.ide.editor.actions.FindNext_Action" />
       <reference ref="jetbrains.mps.ide.editor.actions.FindPrevious_Action" />
       <reference ref="jetbrains.mps.ide.editor.actions.JumpToContextAssistant_Action" />
+      <reference ref="jetbrains.mps.ide.editor.actions.ShowReflectiveEditor_Action" />
+      <reference ref="jetbrains.mps.ide.editor.actions.ShowReflectiveEditorsForSubtree_Action" />
+      <reference ref="jetbrains.mps.ide.editor.actions.ShowRegularEditor_Action" />
       <add-to-group group-id="EditorActions" anchor="last" />
     </group>
     <group id="jetbrains.mps.ide.editor.actions.IDE_Edit_ActionGroup">
@@ -285,6 +315,9 @@
       <reference ref="EditorPopup_ActionGroupshowIn" />
       <reference ref="EditorPopup_ActionGroupstructure" />
       <separator />
+      <reference ref="EditorPopup_ActionGroupannotatedCell" />
+      <separator />
+      <reference ref="EditorPopup_ActionGroupcopy" />
       <reference ref="EditorPopup_ActionGrouppaste" />
       <separator />
       <reference ref="EditorPopup_ActionGroupfolding" />
@@ -298,6 +331,7 @@
       <separator />
       <reference ref="EditorPopup_ActionGroupfind" />
       <reference ref="EditorPopup_ActionGrouprefactoring" />
+      <reference ref="EditorPopup_ActionGrouptool" />
       <separator />
       <reference ref="EditorPopup_ActionGroupvcs" />
       <separator />
@@ -324,7 +358,8 @@
       <add-to-group group-id="EditorPopup_ActionGroupfolding" anchor="last" />
     </group>
     <group id="jetbrains.mps.ide.editor.actions.GoToEditorPopupAddition_ActionGroup" text="Go To" popup="true">
-      <reference ref="jetbrains.mps.ide.editor.actions.GoByCurrentReference_Action" />
+      <reference ref="jetbrains.mps.ide.editor.actions.GoToDeclaration_Action" />
+      <reference ref="jetbrains.mps.ide.editor.actions.GoToDeclarationInMenu_Action" />
       <reference ref="GoToEditorPopupAddition_ActionGroupother" />
       <reference ref="GoToEditorPopupAddition_ActionGrouprefs" />
       <add-to-group group-id="EditorPopup_ActionGroupgoto" anchor="last" />
@@ -335,6 +370,7 @@
     </group>
     <group id="jetbrains.mps.ide.editor.actions.SuppressErrorsGroup_ActionGroup">
       <reference ref="jetbrains.mps.ide.editor.actions.DoNotSuppressErrors_Action" />
+      <reference ref="jetbrains.mps.ide.editor.actions.ShowSuppressedErrors_Action" />
     </group>
     <group id="jetbrains.mps.ide.editor.actions.ActionsAsIntentions_ActionGroup" popup="true"></group>
     <group id="jetbrains.mps.ide.editor.actions.SpecificIntentions_ActionGroup">
@@ -348,12 +384,15 @@
       <add-to-group group-id="EditorPopup_ActionGrouphints" anchor="last" />
     </group>
     <group id="jetbrains.mps.ide.editor.actions.ReflectiveEditorGroup_ActionGroup">
-      <reference ref="jetbrains.mps.ide.editor.actions.ShowReflectiveEditor_Action" />
       <reference ref="jetbrains.mps.ide.editor.actions.ShowRegularEditor_Action" />
+      <reference ref="jetbrains.mps.ide.editor.actions.ShowReflectiveEditor_Action" />
+      <reference ref="jetbrains.mps.ide.editor.actions.ShowReflectiveEditorsForSubtree_Action" />
       <add-to-group group-id="EditorPopup_ActionGroupreflective" anchor="last" />
     </group>
     <group id="jetbrains.mps.ide.editor.actions.ShowAsIntentions_ActionGroup">
       <reference ref="jetbrains.mps.ide.editor.actions.ExtractComponent_Action" />
+      <reference ref="jetbrains.mps.ide.editor.actions.WordAddLink_Action" />
+      <reference ref="jetbrains.mps.ide.editor.actions.WordRemoveLink_Action" />
       <add-to-group group-id="jetbrains.mps.ide.editor.actions.ActionsAsIntentions_ActionGroup" anchor="last" />
     </group>
     <group id="jetbrains.mps.ide.editor.actions.RefactoringActions_ActionGroup">
@@ -361,4 +400,4 @@
       <add-to-group group-id="EditorPopup_ActionGrouprefactoring" anchor="last" />
     </group>
   </actions>
-</components>
+</idea-plugin>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MPSProject">
+    <projectModules>
+      <modulePath path="$PROJECT_DIR$/xmodel.dk/jetbrains.mps.generator.xmodel-sample.devkit" folder="devkit" />
+      <modulePath path="$PROJECT_DIR$/xmodel.lang1/jetbrains.mps.generator.test.xmodel.lang1.mpl" folder="language" />
+      <modulePath path="$PROJECT_DIR$/xmodel.test/jetbrains.mps.generator.xmodel.test.msd" folder="solution" />
+      <modulePath path="$PROJECT_DIR$/xmodel.test2/jetbrains.mps.generator.xmodel.test2.msd" folder="solution" />
+    </projectModules>
+  </component>
+</project>

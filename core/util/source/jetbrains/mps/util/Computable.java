@@ -16,9 +16,10 @@
 package jetbrains.mps.util;
 
 /**
+ * @see java.util.function.Supplier
  * Evgeny Gryaznov, 9/27/11
  */
+@FunctionalInterface
 public interface Computable<T> {
-
   T compute();
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,6 +48,7 @@ public enum CellActionType {
   LOCAL_HOME,
   LOCAL_END,
 
+  SELECT_ALL,
   SELECT_LEFT,
   SELECT_RIGHT,
   SELECT_UP,
@@ -78,5 +79,13 @@ public enum CellActionType {
 
   COMMENT,
 
-  CLICK
+  INSERT_PLACEHOLDER,
+  INSERT_PLACEHOLDER_BEFORE,
+
+  CLICK,
+
+  FIND,
+  FIND_NEXT,
+  FIND_PREV,
+  FIND_STOP,
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,24 +15,40 @@
  */
 package jetbrains.mps.ide.codeStyle;
 
-import jetbrains.mps.baseLanguage.util.CodeStyleSettings;
-import jetbrains.mps.util.EqualUtil;
+import com.intellij.openapi.ui.ComboBox;
+import com.intellij.ui.components.JBLabel;
+import com.intellij.ui.components.JBTextField;
+import com.intellij.util.ui.JBUI;
+import com.intellij.util.ui.JBUI.Borders;
+import jetbrains.mps.ide.code.CodeStyleSettings;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.util.Objects;
 
 public class CodeStylePreferencesPage {
   private enum LineSeparatorOption {
     SYSTEM_DEPENDENT(null, "System Dependent"),
     UNIX("\n", "Unix"),
     WINDOWS("\r\n", "Windows"),
-    MACINTOSH("\r", "Mac"),;
-    private String mySetting;
-    private String myName;
+    MACINTOSH("\r", "Mac");
+    private final String mySetting;
+    private final String myName;
 
-    private LineSeparatorOption(String setting, String name) {
+    LineSeparatorOption(String setting, String name) {
       mySetting = setting;
       myName = name;
     }
@@ -46,16 +62,15 @@ public class CodeStylePreferencesPage {
     }
   }
 
-  private JPanel myPage;
-  private JCheckBox myPreferLongerName;
-  private CodeStyleItem myFieldItem;
-  private CodeStyleItem myStaticField;
-  private CodeStyleItem myParameter;
-  private CodeStyleItem myLocalVariable;
-  private JComboBox myLineSeparatorComboBox;
-  private CodeStyleSettings mySettings;
+  private final JPanel myPage;
+  private final CodeStyleItem myFieldItem;
+  private final CodeStyleItem myStaticField;
+  private final CodeStyleItem myParameter;
+  private final CodeStyleItem myLocalVariable;
+  private final JComboBox<LineSeparatorOption> myLineSeparatorComboBox;
+  private final CodeStyleSettings mySettings;
 
-  public CodeStylePreferencesPage(CodeStyleSettings settings) {
+  CodeStylePreferencesPage(CodeStyleSettings settings) {
     mySettings = settings;
 
     myPage = new JPanel();
@@ -63,33 +78,30 @@ public class CodeStylePreferencesPage {
 
     JPanel namingPanel = new JPanel(new GridBagLayout());
     namingPanel.setBorder(BorderFactory.createTitledBorder("Naming"));
-    myPreferLongerName = new JCheckBox("Prefer longer names", true);
     GridBagConstraints c = new GridBagConstraints();
     c.anchor = GridBagConstraints.NORTHWEST;
     c.insets = getInsets();
-    c.gridwidth = 2;
-    namingPanel.add(myPreferLongerName, c);
     c.gridwidth = 1;
-    c.gridy = 1;
+    c.gridy = 0;
     c.gridx = 1;
-    namingPanel.add(new JLabel("Name prefix:"), c);
+    namingPanel.add(new JBLabel("Name prefix:"), c);
     c.gridx = 2;
-    namingPanel.add(new JLabel("Name suffix:"), c);
-    myFieldItem = new CodeStyleItem(namingPanel, "Field", 2);
-    myStaticField = new CodeStyleItem(namingPanel, "Static field", 3);
-    myParameter = new CodeStyleItem(namingPanel, "Parameter", 4);
-    myLocalVariable = new CodeStyleItem(namingPanel, "Local variable", 5);
+    namingPanel.add(new JBLabel("Name suffix:"), c);
+    myFieldItem = new CodeStyleItem(namingPanel, "Field", 1);
+    myStaticField = new CodeStyleItem(namingPanel, "Static field", 2);
+    myParameter = new CodeStyleItem(namingPanel, "Parameter", 3);
+    myLocalVariable = new CodeStyleItem(namingPanel, "Local variable", 4);
 
     namingPanel.setMaximumSize(namingPanel.getPreferredSize());
     namingPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
     JPanel lineSeparatorPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     lineSeparatorPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-    lineSeparatorPanel.add(new JLabel("Line separator: "));
-    myLineSeparatorComboBox = new JComboBox(LineSeparatorOption.values());
+    lineSeparatorPanel.add(new JBLabel("Line separator: "));
+    myLineSeparatorComboBox = new ComboBox<>(LineSeparatorOption.values());
     lineSeparatorPanel.add(myLineSeparatorComboBox);
 
-    myPage.setBorder(new EmptyBorder(10, 10, 10, 10));
+    myPage.setBorder(Borders.empty(10));
     myPage.add(namingPanel);
     myPage.add(lineSeparatorPanel);
     myPage.add(Box.createVerticalGlue());
@@ -101,7 +113,7 @@ public class CodeStylePreferencesPage {
   private String getSelectedLineSeparator() {
     Object selectedItem = myLineSeparatorComboBox.getSelectedItem();
     for (LineSeparatorOption option : LineSeparatorOption.values()) {
-      if (option.equals(selectedItem)) {
+      if (option == selectedItem) {
         return option.getSetting();
       }
     }
@@ -109,7 +121,7 @@ public class CodeStylePreferencesPage {
   }
 
   private Insets getInsets() {
-    return new Insets(4, 4, 4, 4);
+    return JBUI.insets(4);
   }
 
   public JComponent getComponent() {
@@ -130,18 +142,14 @@ public class CodeStylePreferencesPage {
 
   public boolean isModified() {
     return !(equals(mySettings.getFieldPrefix(), mySettings.getFieldSuffix(), myFieldItem) &&
-      equals(mySettings.getStaticFieldPrefix(), mySettings.getStaticFieldSuffix(), myStaticField) &&
-      equals(mySettings.getParameterPrefix(), mySettings.getParameterSuffix(), myParameter) &&
-      equals(mySettings.getLocalVariablePrefix(), mySettings.getLocalVariableSuffix(), myLocalVariable) &&
-      equals(mySettings.getLineSeparator(), getSelectedLineSeparator()));
+             equals(mySettings.getStaticFieldPrefix(), mySettings.getStaticFieldSuffix(), myStaticField) &&
+             equals(mySettings.getParameterPrefix(), mySettings.getParameterSuffix(), myParameter) &&
+             equals(mySettings.getLocalVariablePrefix(), mySettings.getLocalVariableSuffix(), myLocalVariable) &&
+             Objects.equals(mySettings.getLineSeparator(), getSelectedLineSeparator()));
   }
 
   private boolean equals(String prefix, String suffix, CodeStyleItem item) {
-    return equals(prefix, item.getPrefix()) && equals(suffix, item.getSuffix());
-  }
-
-  private boolean equals(String s1, String s2) {
-    return s1 == null ? s2 == null : s1.equals(s2);
+    return Objects.equals(prefix, item.getPrefix()) && Objects.equals(suffix, item.getSuffix());
   }
 
   public void update() {
@@ -150,16 +158,16 @@ public class CodeStylePreferencesPage {
     myParameter.setSettings(mySettings.getParameterPrefix(), mySettings.getParameterSuffix());
     myLocalVariable.setSettings(mySettings.getLocalVariablePrefix(), mySettings.getLocalVariableSuffix());
     for (LineSeparatorOption option : LineSeparatorOption.values()) {
-      if (EqualUtil.equals(option.getSetting(), mySettings.getLineSeparator())) {
+      if (Objects.equals(option.getSetting(), mySettings.getLineSeparator())) {
         myLineSeparatorComboBox.setSelectedItem(option);
       }
     }
   }
 
   private class CodeStyleItem {
-    private JLabel myName = new JLabel();
-    private JTextField myPrefix = new JTextField(15);
-    private JTextField mySuffix = new JTextField(15);
+    private final JLabel myName = new JLabel();
+    private final JTextField myPrefix = new JBTextField(15);
+    private final JTextField mySuffix = new JBTextField(15);
 
     CodeStyleItem(JComponent owner, String name, int index) {
       myName.setText(name + ":");

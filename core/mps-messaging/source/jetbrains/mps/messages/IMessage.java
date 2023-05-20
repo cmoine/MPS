@@ -16,6 +16,9 @@
 package jetbrains.mps.messages;
 
 /**
+ * Piece of information intended for consumption by an end-user.
+ * Please do not use to report debug information unless expected/requested by a user (e.g. with an UI option).
+ * Debug/trace stuff shall go directly to log, to facilitate control with general log4j mechanism (i.e. log.xml).
  * fyodor, 3/22/11
  */
 public interface IMessage {

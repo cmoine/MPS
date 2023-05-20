@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="5ktka90fr96fexyupwxjdo5dmyq7u39" />
+<product version="3" modelHash="25xjv9sp7fd3gh8ffh520ra2qam3750">
+  <files names="CustomScope_DataFlow.java:DataFlowAspectDescriptorImpl.java:InstancesExpression_DataFlow.java:ModelsScope_DataFlow.java:ModulesScope_DataFlow.java:QueryExpression_DataFlow.java:QueryParameterScope_DataFlow.java:WithStatement_DataFlow.java" />
+</product>
 

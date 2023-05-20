@@ -1,113 +1,146 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082113931046:jetbrains.mps.baseLanguage.structure.ContinueStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144226303539:jetbrains.mps.baseLanguage.structure.ForeachStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
-  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1164879751025:jetbrains.mps.baseLanguage.structure.TryCatchStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/5351203823916750322:jetbrains.mps.baseLanguage.structure.TryUniversalStatement" />
   <root>
     <file name="TextGenAspectDescriptor.java">
-      <unit at="16,0,67,0" name="jetbrains.mps.sampleXML.textGen.TextGenAspectDescriptor" />
+      <unit at="50,0,53,0" name="jetbrains.mps.sampleXML.textGen.TextGenAspectDescriptor$CONCEPTS" />
+      <unit at="16,0,54,0" name="jetbrains.mps.sampleXML.textGen.TextGenAspectDescriptor" />
     </file>
   </root>
   <root nodeRef="r:f6ac4dc8-7952-47a8-af10-2331849a8476(jetbrains.mps.sampleXML.textGen)/1236699935298">
     <file name="Document_TextGen.java">
-      <node id="1236699935298" at="12,54,13,55" concept="4" />
-      <node id="1237981101372" at="13,55,14,57" concept="0" />
-      <node id="2341412953773657688" at="16,42,17,17" concept="5" />
-      <node id="1236699935298" at="16,0,19,0" concept="3" trace="getExtension#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
-      <node id="1236699935298" at="11,0,16,0" concept="3" trace="generateText#(Ljetbrains/mps/text/rt/TextGenContext;)V" />
-      <scope id="1236699935298" at="16,42,17,17" />
-      <scope id="1236699935298" at="12,54,14,57">
+      <node id="1236699935298" at="11,54,12,55" concept="5" />
+      <node id="1237981109281" at="12,55,13,57" concept="1" />
+      <node id="1236699935298" at="10,0,15,0" concept="4" trace="generateText#(Ljetbrains/mps/text/rt/TextGenContext;)V" />
+      <scope id="1236699935298" at="11,54,13,57">
         <var name="tgs" id="1236699935298" />
       </scope>
-      <scope id="1236699935298" at="16,0,19,0">
-        <var name="node" id="1236699935298" />
-      </scope>
-      <scope id="1236699935298" at="11,0,16,0">
+      <scope id="1236699935298" at="10,0,15,0">
         <var name="ctx" id="1236699935298" />
       </scope>
-      <unit id="1236699935298" at="10,0,20,0" name="jetbrains.mps.sampleXML.textGen.Document_TextGen" />
+      <unit id="1236699935298" at="9,0,16,0" name="jetbrains.mps.sampleXML.textGen.Document_TextGen" />
     </file>
     <file name="TextGenAspectDescriptor.java">
-      <node id="2341412953773657688" at="54,63,55,17" concept="5" />
+      <node id="1236699935298" at="26,42,27,38" concept="6" />
+      <node id="1236699935298" at="35,59,36,50" concept="5" />
+      <node id="1236699935298" at="36,50,37,53" concept="5" />
+      <node id="1236699935298" at="37,53,38,84" concept="1" />
+      <node id="1236699935298" at="38,84,39,17" concept="0" />
+      <node id="1236699935298" at="43,58,44,26" concept="6" />
+      <node id="2341412953773657688" at="46,63,47,17" concept="6" />
+      <node id="1236699935298" at="43,0,46,0" concept="8" trace="getFileName_Document#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
+      <node id="1236699935298" at="46,0,49,0" concept="8" trace="getFileExtension_Document#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
+      <node id="1236699935298" at="34,58,40,7" concept="3" />
+      <scope id="1236699935298" at="26,42,27,38" />
+      <scope id="1236699935298" at="43,58,44,26" />
+      <scope id="1236699935298" at="46,63,47,17" />
+      <scope id="1236699935298" at="43,0,46,0">
+        <var name="node" id="1236699935298" />
+      </scope>
+      <scope id="1236699935298" at="46,0,49,0">
+        <var name="node" id="1236699935298" />
+      </scope>
+      <scope id="1236699935298" at="35,59,39,17">
+        <var name="ext" id="1236699935298" />
+        <var name="fname" id="1236699935298" />
+      </scope>
     </file>
   </root>
   <root nodeRef="r:f6ac4dc8-7952-47a8-af10-2331849a8476(jetbrains.mps.sampleXML.textGen)/1236700479964">
     <file name="ElementCreator.java">
-      <node id="1236700479964" at="19,70,20,55" concept="4" />
-      <node id="1236700571834" at="20,55,21,180" concept="4" />
-      <node id="1236700571840" at="21,180,22,64" concept="4" />
-      <node id="1236700791060" at="22,64,23,39" concept="4" />
-      <node id="1236700818617" at="23,39,24,36" concept="0" />
-      <node id="1236700869045" at="25,9,26,53" concept="4" />
-      <node id="1236700887615" at="26,53,27,57" concept="0" />
-      <node id="1236700954189" at="27,57,28,65" concept="4" />
-      <node id="1236700987314" at="28,65,29,58" concept="4" />
-      <node id="1237463992006" at="29,58,30,25" concept="0" />
-      <node id="1236701106380" at="31,27,32,58" concept="0" />
-      <node id="1236700479964" at="35,83,36,55" concept="4" />
-      <node id="1236700642827" at="36,55,37,187" concept="4" />
-      <node id="1236700642839" at="39,176,40,341" concept="0" />
-      <node id="1236700642859" at="42,5,43,25" concept="4" />
-      <node id="1236700642869" at="46,23,47,34" concept="0" />
-      <node id="1236700642876" at="48,9,49,330" concept="0" />
-      <node id="1236700642890" at="51,181,52,223" concept="0" />
-      <node id="1236700764875" at="53,7,54,20" concept="0" />
-      <node id="1236700775431" at="55,5,56,18" concept="5" />
-      <node id="1236700642837" at="38,192,41,7" concept="2" />
-      <node id="1236700642867" at="45,178,48,9" concept="2" />
-      <node id="1236700642888" at="50,7,53,7" concept="2" />
-      <node id="1236700642835" at="37,187,42,5" concept="1" />
-      <node id="1236700642865" at="44,185,50,7" concept="2" />
-      <node id="1236700827376" at="24,36,33,5" concept="7" />
-      <node id="1236700642863" at="43,25,55,5" concept="1" />
-      <node id="1236700479964" at="19,0,35,0" concept="6" trace="byElement#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/text/rt/TextGenContext;)V" />
-      <node id="1236700479964" at="35,0,58,0" concept="6" trace="createElement#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/text/rt/TextGenContext;)Lorg/jdom/Element;" />
-      <scope id="1236700827379" at="31,0,32,58">
+      <node id="1236700479964" at="22,0,23,0" concept="7" trace="LOG" />
+      <node id="1236700487434" at="23,70,24,55" concept="5" />
+      <node id="1236700571834" at="24,55,25,76" concept="5" />
+      <node id="1236700571840" at="25,76,26,64" concept="5" />
+      <node id="1236700791060" at="26,64,27,39" concept="5" />
+      <node id="1236700818617" at="27,39,28,36" concept="1" />
+      <node id="1236700869045" at="29,9,30,53" concept="5" />
+      <node id="1236700887615" at="30,53,31,57" concept="1" />
+      <node id="1236700954189" at="31,57,32,65" concept="5" />
+      <node id="1236700987314" at="32,65,33,58" concept="5" />
+      <node id="1237463992008" at="33,58,34,25" concept="1" />
+      <node id="5016045809626450762" at="36,31,37,45" concept="1" />
+      <node id="1236700609238" at="41,83,42,55" concept="5" />
+      <node id="1236700642827" at="42,55,43,90" concept="5" />
+      <node id="1236700642839" at="45,79,46,147" concept="1" />
+      <node id="1236700642859" at="48,5,49,25" concept="5" />
+      <node id="1236700642869" at="52,23,53,34" concept="1" />
+      <node id="1236700642876" at="54,9,55,120" concept="1" />
+      <node id="1236700642890" at="57,68,58,110" concept="1" />
+      <node id="1236700764875" at="59,7,60,20" concept="1" />
+      <node id="1236700775431" at="61,5,62,18" concept="6" />
+      <node id="1236700479964" at="66,0,67,0" concept="7" trace="rootElement$65B2" />
+      <node id="1236700479964" at="67,0,68,0" concept="7" trace="attribute$666x" />
+      <node id="1236700479964" at="68,0,69,0" concept="7" trace="content$66ly" />
+      <node id="1236700479964" at="72,0,73,0" concept="7" trace="name$MnvL" />
+      <node id="1236700479964" at="73,0,74,0" concept="7" trace="value$5Qmy" />
+      <node id="1236700479964" at="74,0,75,0" concept="7" trace="text$6d81" />
+      <node id="1236700479964" at="78,0,79,0" concept="7" trace="Text$vU" />
+      <node id="1236700479964" at="79,0,80,0" concept="7" trace="Element$hR" />
+      <node id="5016045809626450762" at="35,27,38,7" concept="3" />
+      <node id="1236700642837" at="44,88,47,7" concept="3" />
+      <node id="1236700642867" at="51,65,54,9" concept="3" />
+      <node id="1236700642888" at="56,7,59,7" concept="3" />
+      <node id="1236700642835" at="43,90,48,5" concept="2" />
+      <node id="1236700642865" at="50,81,56,7" concept="3" />
+      <node id="1236700827376" at="28,36,39,5" concept="9" />
+      <node id="1236700642863" at="49,25,61,5" concept="2" />
+      <node id="1236700487434" at="23,0,41,0" concept="8" trace="byElement#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/text/rt/TextGenContext;)V" />
+      <node id="1236700609238" at="41,0,64,0" concept="8" trace="createElement#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/text/rt/TextGenContext;)Lorg/jdom/Element;" />
+      <scope id="5016045809626450762" at="36,31,37,45" />
+      <scope id="1236700642838" at="45,79,46,147" />
+      <scope id="1236700642868" at="52,23,53,34" />
+      <scope id="1236700642889" at="57,68,58,110" />
+      <scope id="1236700827382" at="35,27,38,7" />
+      <scope id="1236700642836" at="44,88,47,7" />
+      <scope id="1236700827379" at="35,5,39,5">
         <var name="e" id="1236700827380" />
       </scope>
-      <scope id="1236700827382" at="31,27,32,58" />
-      <scope id="1236700642838" at="39,176,40,341" />
-      <scope id="1236700642868" at="46,23,47,34" />
-      <scope id="1236700642889" at="51,181,52,223" />
-      <scope id="1236700642836" at="38,192,41,7" />
-      <scope id="1236700642866" at="45,178,49,330" />
-      <scope id="1236700827377" at="25,9,30,25">
+      <scope id="1236700642866" at="51,65,55,120" />
+      <scope id="1236700827377" at="29,9,34,25">
         <var name="output" id="1236700987315" />
         <var name="prettyFormat" id="1236700869046" />
         <var name="xmlOutputter" id="1236700954190" />
       </scope>
-      <scope id="1236700642835" at="37,187,42,5">
+      <scope id="1236700642835" at="43,90,48,5">
         <var name="attribute" id="1236700642857" />
       </scope>
-      <scope id="1236700642864" at="44,185,54,20" />
-      <scope id="1236700642863" at="43,25,55,5">
+      <scope id="1236700642864" at="50,81,60,20" />
+      <scope id="1236700642863" at="49,25,61,5">
         <var name="part" id="1236700642901" />
       </scope>
-      <scope id="1236700479964" at="19,70,33,5">
+      <scope id="1236700487434" at="23,70,39,5">
         <var name="document" id="1236700791061" />
         <var name="element" id="1236700571835" />
         <var name="result" id="1236700571841" />
-        <var name="tgs" id="1236700479964" />
+        <var name="tgs" id="1236700487434" />
       </scope>
-      <scope id="1236700479964" at="19,0,35,0">
-        <var name="ctx" id="1236700479964" />
+      <scope id="1236700487434" at="23,0,41,0">
+        <var name="ctx" id="1236700487434" />
         <var name="node" id="1236700593595" />
       </scope>
-      <scope id="1236700479964" at="35,83,56,18">
+      <scope id="1236700609238" at="41,83,62,18">
         <var name="first" id="1236700642860" />
         <var name="result" id="1236700642828" />
-        <var name="tgs" id="1236700479964" />
+        <var name="tgs" id="1236700609238" />
       </scope>
-      <scope id="1236700479964" at="35,0,58,0">
-        <var name="ctx" id="1236700479964" />
+      <scope id="1236700609238" at="41,0,64,0">
+        <var name="ctx" id="1236700609238" />
         <var name="element" id="1236700623868" />
       </scope>
-      <unit id="1236700479964" at="18,0,59,0" name="jetbrains.mps.sampleXML.textGen.ElementCreator" />
+      <unit id="1236700479964" at="77,0,81,0" name="jetbrains.mps.sampleXML.textGen.ElementCreator$CONCEPTS" />
+      <unit id="1236700479964" at="65,0,70,0" name="jetbrains.mps.sampleXML.textGen.ElementCreator$LINKS" />
+      <unit id="1236700479964" at="71,0,76,0" name="jetbrains.mps.sampleXML.textGen.ElementCreator$PROPS" />
+      <unit id="1236700479964" at="21,0,82,0" name="jetbrains.mps.sampleXML.textGen.ElementCreator" />
     </file>
   </root>
 </debug-info>

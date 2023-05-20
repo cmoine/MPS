@@ -2,14 +2,10 @@
 <model ref="r:11be8b48-b45e-48e5-98ad-b77dc1b202b1(testCustomAnalyzer.dataFlow)">
   <persistence version="9" />
   <languages>
-    <use id="7fa12e9c-b949-4976-b4fa-19accbc320b4" name="jetbrains.mps.lang.dataFlow" version="0" />
-    <use id="97a52717-898f-4598-8150-573d9fd03868" name="jetbrains.mps.lang.dataFlow.analyzers" version="0" />
     <use id="f1af2340-2212-47dd-a65b-2d6ee9427e3e" name="jetbrains.mps.testCustomDataFlow" version="0" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="00000000-0000-4000-0000-443879f56b80(jetbrains.mps.devkit.aspect.dataflow)" />
   </languages>
   <imports>
-    <import index="33ny" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.util(JDK/)" />
-    <import index="tl72" ref="r:1663047b-d6b3-4d14-9e65-e64dc6f64cac(jetbrains.mps.testCustomDataFlow.structure)" />
     <import index="wyt6" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)" implicit="true" />
     <import index="9cnx" ref="r:c1c38648-eb71-424b-8ade-f463a1eb273d(testCustomAnalyzer.structure)" implicit="true" />
   </imports>
@@ -166,7 +162,7 @@
   <node concept="38boeP" id="5JXsuoWG1vz">
     <property role="TrG5h" value="CounterAnalyzerWithConstructor" />
     <node concept="38boeQ" id="5JXsuoWG1PJ" role="2ZJRuf">
-      <property role="TrG5h" value="counterInstruction" />
+      <property role="TrG5h" value="counterInstructionA" />
     </node>
     <node concept="3fFARy" id="5JXsuoWG1DT" role="3fEaTh">
       <property role="TrG5h" value="initialCounter" />
@@ -267,7 +263,7 @@
           <node concept="2OqwBi" id="7ez5JvPhGyh" role="2GsD0m">
             <node concept="3__QtB" id="7ez5JvPhGwq" role="2Oq$k0" />
             <node concept="3Tsc0h" id="7ez5JvPhG_H" role="2OqNvi">
-              <ref role="3TtcxE" to="9cnx:7ez5JvPhCVm" />
+              <ref role="3TtcxE" to="9cnx:7ez5JvPhCVm" resolve="child" />
             </node>
           </node>
         </node>
@@ -285,7 +281,7 @@
       <node concept="2qeTo9" id="7ez5JvPhGBE" role="3cqZAp">
         <node concept="3s5BLS" id="7ez5JvPhGDN" role="IgiVj" />
         <node concept="2qfb11" id="7ez5JvPhGBN" role="2qf8f6">
-          <ref role="2qfb1S" node="5JXsuoWG1PJ" resolve="counterInstruction" />
+          <ref role="2qfb1S" node="5JXsuoWG1PJ" resolve="counterInstructionA" />
         </node>
         <node concept="3cqzBR" id="7ez5JvPhGDQ" role="aPEfM">
           <ref role="3cqzBQ" node="7ez5JvPhGBu" resolve="node" />
@@ -379,7 +375,7 @@
     <node concept="1ZAo8i" id="2$3McZ0UUdB" role="1ZAo82" />
     <node concept="10Oyi0" id="2$3McZ0UUes" role="1ZBA8x" />
     <node concept="38boeQ" id="2$3McZ0WBIb" role="2ZJRuf">
-      <property role="TrG5h" value="counterInstruction" />
+      <property role="TrG5h" value="counterInstructionB" />
     </node>
   </node>
   <node concept="2SFhMz" id="2$3McZ0WD1N">
@@ -394,7 +390,7 @@
       <node concept="2qeTo9" id="2$3McZ0WD2g" role="3cqZAp">
         <node concept="3s5BLS" id="2$3McZ0WD2h" role="IgiVj" />
         <node concept="2qfb11" id="2$3McZ0WD2i" role="2qf8f6">
-          <ref role="2qfb1S" node="2$3McZ0WBIb" resolve="counterInstruction" />
+          <ref role="2qfb1S" node="2$3McZ0WBIb" resolve="counterInstructionB" />
         </node>
         <node concept="3cqzBR" id="2$3McZ0WD2j" role="aPEfM">
           <ref role="3cqzBQ" node="2$3McZ0WD1W" resolve="node" />
@@ -413,7 +409,7 @@
           <node concept="2OqwBi" id="68XlVg40g43" role="2GsD0m">
             <node concept="3__QtB" id="68XlVg40fWO" role="2Oq$k0" />
             <node concept="3Tsc0h" id="68XlVg40gmp" role="2OqNvi">
-              <ref role="3TtcxE" to="9cnx:68XlVg40dqX" />
+              <ref role="3TtcxE" to="9cnx:68XlVg40dqX" resolve="child" />
             </node>
           </node>
           <node concept="3clFbS" id="68XlVg40fW8" role="2LFqv$">
@@ -435,7 +431,7 @@
           <node concept="2OqwBi" id="68XlVg40gzG" role="3Ah4Yx">
             <node concept="3__QtB" id="68XlVg40gu6" role="2Oq$k0" />
             <node concept="3TrEf2" id="68XlVg40gQ2" role="2OqNvi">
-              <ref role="3Tt5mk" to="9cnx:68XlVg40drU" />
+              <ref role="3Tt5mk" to="9cnx:68XlVg40drU" resolve="child" />
             </node>
           </node>
         </node>

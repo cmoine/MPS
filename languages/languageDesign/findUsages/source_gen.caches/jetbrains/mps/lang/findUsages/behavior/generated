@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="apjqb70tx81lx95524ssrf1cjmr981u" />
+<product version="3" modelHash="9k7pii2yq30elmrwfgtrook0mqlf4wn">
+  <files names="BehaviorAspectDescriptor.java:CategorizeBlock__BehaviorDescriptor.java:CheckCancelledStatusStatement__BehaviorDescriptor.java:FindBlock__BehaviorDescriptor.java:FinderDeclaration__BehaviorDescriptor.java:ForEachNodeFoundClosureParameterDeclaration__BehaviorDescriptor.java:IsApplicableBlock__BehaviorDescriptor.java:IsUsedByDefault__BehaviorDescriptor.java:IsVisibleBlock__BehaviorDescriptor.java:NodeStatement__BehaviorDescriptor.java:OnEachFoundNodeCallback__BehaviorDescriptor.java:OnEachNodeFoundByExpression__BehaviorDescriptor.java:ResultStatement__BehaviorDescriptor.java:SearchedNodesBlock__BehaviorDescriptor.java" />
+</product>
 

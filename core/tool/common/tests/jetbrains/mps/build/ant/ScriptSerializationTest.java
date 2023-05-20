@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,18 +17,18 @@ package jetbrains.mps.build.ant;
 
 import jetbrains.mps.tool.common.Script;
 import junit.framework.TestCase;
-import org.apache.log4j.Level;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.LinkedHashMap;
+import java.util.logging.Level;
 
 public class ScriptSerializationTest extends TestCase {
 
-//  public void testCloningConcistencyWithProjects() {
+//  public void testCloningConsistencyWithProjects() {
 //    Script toDo = new Script();
 //
 //    toDo.addProjectFile(new File("languages/util/builders/builders.mpr").getAbsoluteFile(), "blahblahblah1", "blahblahblah2");
@@ -38,7 +38,7 @@ public class ScriptSerializationTest extends TestCase {
 //    testToDoConsistency(toDo);
 //  }
 
-  public void testCloningConcistencyWithModels() {
+  public void testCloningConsistencyWithModels() {
     Script toDo = new Script();
 
     toDo.addModelFile(new File("languages/util/regexp/languageModels/editor.mps").getAbsoluteFile());
@@ -48,7 +48,7 @@ public class ScriptSerializationTest extends TestCase {
     testToDoConsistency(toDo);
   }
 
-  public void testCloningConcistencyWithModules() {
+  public void testCloningConsistencyWithModules() {
     Script toDo = new Script();
 
     toDo.addModuleFile(new File("languages/util/regexp/solutions/jetbrains.mps.regexp.examples/jetbrains.mps.baseLanguage.regexp.examples.msd").getAbsoluteFile());
@@ -58,17 +58,17 @@ public class ScriptSerializationTest extends TestCase {
     testToDoConsistency(toDo);
   }
 
-  public void testCloningConcistencyWithLibraries() {
+  public void testCloningConsistencyWithLibraries() {
     Script toDo = new Script();
 
-    toDo.addLibrary("name1", new File("dir1").getAbsoluteFile(), false);
-    toDo.addLibrary("name2", new File("dir3").getAbsoluteFile(), false /*true*/);
-    toDo.addLibrary("name3", new File("dir4").getAbsoluteFile(), false);
+    toDo.addLibrary("name1", new File("dir1").getAbsoluteFile());
+    toDo.addLibrary("name2", new File("dir3").getAbsoluteFile());
+    toDo.addLibrary("name3", new File("dir4").getAbsoluteFile());
 
     testToDoConsistency(toDo);
   }
 
-  public void testCloningConcistencyWithMacro() {
+  public void testCloningConsistencyWithMacro() {
     Script toDo = new Script();
 
     toDo.addMacro("name1", "value1");
@@ -78,7 +78,7 @@ public class ScriptSerializationTest extends TestCase {
     testToDoConsistency(toDo);
   }
 
-  public void testCloningConcistencyWithOtherParameters() {
+  public void testCloningConsistencyWithOtherParameters() {
     Script toDo = new Script();
 
     toDo.updateFailOnError(true);
@@ -96,17 +96,9 @@ public class ScriptSerializationTest extends TestCase {
   private void testToDoConsistency(Script toDo) {
     try {
       Script toDoFromString = Script.fromDumpInFile(toDo.dumpToTmpFile());
-      Script toDoCloned = new Script();
-      toDo.cloneTo(toDoCloned);
 
-      assertDeepObjectEquals(toDoCloned, toDoFromString);
       assertDeepObjectEquals(toDo, toDoFromString);
-      assertDeepObjectEquals(toDoCloned, toDo);
-    } catch (IllegalAccessException e) {
-      fail(e.getMessage());
-    } catch (InvocationTargetException e) {
-      fail(e.getMessage());
-    } catch (FileNotFoundException e) {
+    } catch (IllegalAccessException | InvocationTargetException | FileNotFoundException e) {
       fail(e.getMessage());
     }
   }

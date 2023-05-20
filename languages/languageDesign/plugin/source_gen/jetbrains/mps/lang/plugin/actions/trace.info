@@ -4,50 +4,62 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <root>
     <file name="ActionAspectDescriptorImpl.java">
-      <unit at="13,0,36,0" name="jetbrains.mps.lang.plugin.actions.ActionAspectDescriptorImpl" />
-    </file>
-    <file name="QueriesGenerated.java">
-      <unit at="6,0,8,0" name="jetbrains.mps.lang.plugin.actions.QueriesGenerated" />
+      <unit at="12,0,30,0" name="jetbrains.mps.lang.plugin.actions.ActionAspectDescriptorImpl" />
     </file>
   </root>
   <root nodeRef="r:00000000-0000-4000-0000-011c8959035f(jetbrains.mps.lang.plugin.actions)/315309404903965692">
     <file name="AddRequiredParameter.java">
-      <node id="315309404903965696" at="13,91,14,325" concept="0" />
-      <node id="315309404903965693" at="13,0,16,0" concept="2" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SModel;)V" />
-      <scope id="315309404903965693" at="13,91,14,325" />
-      <scope id="315309404903965693" at="13,0,16,0">
+      <node id="315309404903965696" at="15,102,16,96" concept="0" />
+      <node id="315309404903965692" at="21,0,22,0" concept="4" trace="condition$wuLH" />
+      <node id="315309404903965692" at="25,0,26,0" concept="4" trace="RequiredCondition$Nh" />
+      <node id="315309404903965693" at="15,0,18,0" concept="2" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <scope id="315309404903965693" at="15,102,16,96" />
+      <scope id="315309404903965693" at="15,0,18,0">
         <var name="enclosingNode" id="315309404903965693" />
+        <var name="index" id="315309404903965693" />
         <var name="model" id="315309404903965693" />
         <var name="newNode" id="315309404903965693" />
         <var name="sampleNode" id="315309404903965693" />
       </scope>
-      <unit id="315309404903965693" at="12,0,17,0" name="jetbrains.mps.lang.plugin.actions.AddRequiredParameter$NodeFactory_315309404903965693" />
-      <unit id="315309404903965692" at="11,0,18,0" name="jetbrains.mps.lang.plugin.actions.AddRequiredParameter" />
+      <unit id="315309404903965692" at="20,0,23,0" name="jetbrains.mps.lang.plugin.actions.AddRequiredParameter$LINKS" />
+      <unit id="315309404903965692" at="24,0,27,0" name="jetbrains.mps.lang.plugin.actions.AddRequiredParameter$CONCEPTS" />
+      <unit id="315309404903965693" at="14,0,19,0" name="jetbrains.mps.lang.plugin.actions.AddRequiredParameter$NodeFactory_315309404903965693" />
+      <unit id="315309404903965692" at="13,0,28,0" name="jetbrains.mps.lang.plugin.actions.AddRequiredParameter" />
     </file>
   </root>
   <root nodeRef="r:00000000-0000-4000-0000-011c8959035f(jetbrains.mps.lang.plugin.actions)/485694842828664420">
     <file name="add_parameter_to_closure.java">
-      <node id="485694842828666241" at="16,91,17,211" concept="3" />
-      <node id="485694842828666302" at="18,40,19,411" concept="0" />
-      <node id="485694842828666260" at="20,7,21,586" concept="3" />
-      <node id="485694842828666269" at="21,586,22,161" concept="0" />
-      <node id="485694842828666247" at="17,211,20,7" concept="1" />
-      <node id="485694842828664421" at="16,0,24,0" concept="2" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SModel;)V" />
-      <scope id="485694842828666248" at="18,40,19,411" />
-      <scope id="485694842828664421" at="16,91,22,161">
+      <node id="485694842828666241" at="19,102,20,97" concept="3" />
+      <node id="485694842828666302" at="21,40,22,130" concept="0" />
+      <node id="485694842828666260" at="23,7,24,196" concept="3" />
+      <node id="485694842828666269" at="24,196,25,64" concept="0" />
+      <node id="485694842828664420" at="30,0,31,0" concept="4" trace="disposeTabClosure$MxY4" />
+      <node id="485694842828664420" at="31,0,32,0" concept="4" trace="parameter$b4Y3" />
+      <node id="485694842828664420" at="35,0,36,0" concept="4" trace="ClosureLiteral$rp" />
+      <node id="485694842828664420" at="36,0,37,0" concept="4" trace="SmartDisposeClosureParameterDeclaration$MU" />
+      <node id="485694842828664420" at="40,0,41,0" concept="4" trace="name$MnvL" />
+      <node id="485694842828666247" at="20,97,23,7" concept="1" />
+      <node id="485694842828664421" at="19,0,27,0" concept="2" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <scope id="485694842828666248" at="21,40,22,130" />
+      <scope id="485694842828664421" at="19,102,25,64">
         <var name="disposeTabClosure" id="485694842828666242" />
         <var name="pd" id="485694842828666261" />
       </scope>
-      <scope id="485694842828664421" at="16,0,24,0">
+      <scope id="485694842828664421" at="19,0,27,0">
         <var name="enclosingNode" id="485694842828664421" />
+        <var name="index" id="485694842828664421" />
         <var name="model" id="485694842828664421" />
         <var name="newNode" id="485694842828664421" />
         <var name="sampleNode" id="485694842828664421" />
       </scope>
-      <unit id="485694842828664421" at="15,0,25,0" name="jetbrains.mps.lang.plugin.actions.add_parameter_to_closure$NodeFactory_485694842828664421" />
-      <unit id="485694842828664420" at="14,0,26,0" name="jetbrains.mps.lang.plugin.actions.add_parameter_to_closure" />
+      <unit id="485694842828664420" at="39,0,42,0" name="jetbrains.mps.lang.plugin.actions.add_parameter_to_closure$PROPS" />
+      <unit id="485694842828664420" at="29,0,33,0" name="jetbrains.mps.lang.plugin.actions.add_parameter_to_closure$LINKS" />
+      <unit id="485694842828664420" at="34,0,38,0" name="jetbrains.mps.lang.plugin.actions.add_parameter_to_closure$CONCEPTS" />
+      <unit id="485694842828664421" at="18,0,28,0" name="jetbrains.mps.lang.plugin.actions.add_parameter_to_closure$NodeFactory_485694842828664421" />
+      <unit id="485694842828664420" at="17,0,43,0" name="jetbrains.mps.lang.plugin.actions.add_parameter_to_closure" />
     </file>
   </root>
 </debug-info>

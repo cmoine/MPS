@@ -12,14 +12,13 @@ import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.smodel.DefaultSModelDescriptor;
 import org.jetbrains.mps.openapi.model.SReference;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
-import jetbrains.mps.smodel.DynamicReference;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.errors.messageTargets.MessageTarget;
-import jetbrains.mps.errors.messageTargets.NodeMessageTarget;
 import jetbrains.mps.errors.messageTargets.ReferenceMessageTarget;
 import jetbrains.mps.errors.IErrorReporter;
 import jetbrains.mps.errors.BaseQuickFixProvider;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import org.jetbrains.mps.openapi.language.SConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class check_DynamicReference_NonTypesystemRule extends AbstractNonTypesystemRule_Runtime implements NonTypesystemRule_Runtime {
@@ -32,34 +31,35 @@ public class check_DynamicReference_NonTypesystemRule extends AbstractNonTypesys
     }
 
     for (SReference ref : ListSequence.fromList(SNodeOperations.getReferences(node))) {
-      if (!((SReference) ref instanceof DynamicReference)) {
+      if (!(SLinkOperations.isDynamic(ref))) {
         continue;
       }
       if (ref.getTargetNode() == null) {
         continue;
       }
 
-      String badRole = SLinkOperations.getRole(ref);
       {
-        MessageTarget errorTarget = new NodeMessageTarget();
-        errorTarget = new ReferenceMessageTarget(badRole);
+        final MessageTarget errorTarget = new ReferenceMessageTarget(SLinkOperations.getRefLink(ref));
         IErrorReporter _reporter_2309309498 = typeCheckingContext.reportTypeError(node, "Dynamic reference", "r:00000000-0000-4000-0000-011c895902c5(jetbrains.mps.baseLanguage.typesystem)", "6287546302289294798", null, errorTarget);
         {
-          BaseQuickFixProvider intentionProvider = new BaseQuickFixProvider("jetbrains.mps.baseLanguage.typesystem.makeReferenceStatic_QuickFix", true);
-          intentionProvider.putArgument("role", badRole);
+          BaseQuickFixProvider intentionProvider = new BaseQuickFixProvider("jetbrains.mps.baseLanguage.typesystem.makeReferenceStatic_QuickFix", "6287546302289331523", true);
+          intentionProvider.putArgument("role", SLinkOperations.getRefLink(ref));
           _reporter_2309309498.addIntentionProvider(intentionProvider);
         }
       }
-
     }
   }
   public SAbstractConcept getApplicableConcept() {
-    return MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x10802efe25aL, "jetbrains.mps.lang.core.structure.BaseConcept");
+    return CONCEPTS.BaseConcept$gP;
   }
   public IsApplicableStatus isApplicableAndPattern(SNode argument) {
     return new IsApplicableStatus(argument.getConcept().isSubConceptOf(getApplicableConcept()), null);
   }
   public boolean overrides() {
     return false;
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept BaseConcept$gP = MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x10802efe25aL, "jetbrains.mps.lang.core.structure.BaseConcept");
   }
 }

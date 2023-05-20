@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <root>
+    <file name="ConceptPresentationAspectImpl.java">
+      <unit at="11,0,108,0" name="jetbrains.mps.baseLanguage.kotlinRefs.structure.ConceptPresentationAspectImpl" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <unit at="10,0,48,0" name="jetbrains.mps.baseLanguage.kotlinRefs.structure.LanguageConceptSwitch" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <unit at="17,0,203,0" name="jetbrains.mps.baseLanguage.kotlinRefs.structure.StructureAspectDescriptor" />
+    </file>
+  </root>
+  <root nodeRef="r:c0bc7504-314a-4a6f-850a-c38847b9f916(jetbrains.mps.baseLanguage.kotlinRefs.structure)/1057254320149555666">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="1057254320149555666" at="14,0,15,0" concept="1" trace="props_KotlinClassCreator" />
+      <node id="1057254320149555666" at="42,47,43,76" concept="3" />
+      <node id="1057254320149555666" at="43,76,44,133" concept="0" />
+      <node id="1057254320149555666" at="44,133,45,50" concept="0" />
+      <node id="1057254320149555666" at="46,9,47,40" concept="4" />
+      <node id="1057254320149555666" at="41,52,46,9" concept="2" />
+      <scope id="1057254320149555666" at="42,47,45,50">
+        <var name="cpb" id="1057254320149555666" />
+      </scope>
+      <scope id="1057254320149555666" at="41,52,47,40" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="1057254320149555666" at="14,0,15,0" concept="6" trace="KotlinClassCreator" />
+      <node id="1057254320149555666" at="27,61,28,56" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="1057254320149555666" at="20,0,21,0" concept="1" trace="myConceptKotlinClassCreator" />
+      <node id="1057254320149555666" at="56,52,57,43" concept="4" />
+      <node id="1057254320149555666" at="105,76,106,189" concept="3" />
+      <node id="1057254320149555666" at="106,189,107,34" concept="0" />
+      <node id="1057254320149555666" at="107,34,108,68" concept="5" />
+      <node id="1057254320149555666" at="108,68,109,71" concept="0" />
+      <node id="1057254320149555666" at="110,76,111,124" concept="0" />
+      <node id="1057254320149555666" at="111,124,112,17" concept="0" />
+      <node id="1675356390019228812" at="112,17,113,228" concept="0" />
+      <node id="1057254320149555666" at="113,228,114,22" concept="4" />
+      <node id="1057254320149555666" at="105,0,116,0" concept="7" trace="createDescriptorForKotlinClassCreator#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="1057254320149555666" at="56,52,57,43" />
+      <scope id="1057254320149555666" at="105,76,114,22">
+        <var name="b" id="1057254320149555666" />
+      </scope>
+      <scope id="1057254320149555666" at="105,0,116,0" />
+    </file>
+  </root>
+  <root nodeRef="r:c0bc7504-314a-4a6f-850a-c38847b9f916(jetbrains.mps.baseLanguage.kotlinRefs.structure)/1057254320149594355">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="1057254320149594355" at="13,0,14,0" concept="1" trace="props_IKotlinFunctionLikeCall" />
+      <node id="1057254320149594355" at="36,52,37,76" concept="3" />
+      <node id="1057254320149594355" at="37,76,38,55" concept="0" />
+      <node id="1057254320149594355" at="39,9,40,45" concept="4" />
+      <node id="1057254320149594355" at="35,57,39,9" concept="2" />
+      <scope id="1057254320149594355" at="36,52,38,55">
+        <var name="cpb" id="1057254320149594355" />
+      </scope>
+      <scope id="1057254320149594355" at="35,57,40,45" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="1057254320149594355" at="13,0,14,0" concept="6" trace="IKotlinFunctionLikeCall" />
+      <node id="1057254320149594355" at="26,58,27,61" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="1057254320149594355" at="19,0,20,0" concept="1" trace="myConceptIKotlinFunctionLikeCall" />
+      <node id="1057254320149594355" at="54,57,55,48" concept="4" />
+      <node id="1057254320149594355" at="86,19,87,75" concept="0" />
+      <node id="1057254320149594355" at="93,81,94,194" concept="3" />
+      <node id="1057254320149594355" at="94,194,95,19" concept="0" />
+      <node id="1057254320149594355" at="95,19,96,75" concept="0" />
+      <node id="1057254320149594355" at="96,75,97,124" concept="0" />
+      <node id="1057254320149594355" at="97,124,98,17" concept="0" />
+      <node id="1675356390020153855" at="98,17,99,118" concept="0" />
+      <node id="1068499141037" at="99,118,100,153" concept="0" />
+      <node id="1057254320149606623" at="100,153,101,204" concept="0" />
+      <node id="1057254320149606624" at="101,204,102,197" concept="0" />
+      <node id="1057254320149594355" at="102,197,103,22" concept="4" />
+      <node id="1057254320149594355" at="173,71,174,75" concept="0" />
+      <node id="1057254320149594355" at="183,71,184,75" concept="0" />
+      <node id="1057254320149594355" at="93,0,105,0" concept="7" trace="createDescriptorForIKotlinFunctionLikeCall#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="1057254320149594355" at="54,57,55,48" />
+      <scope id="1057254320149594355" at="93,81,103,22">
+        <var name="b" id="1057254320149594355" />
+      </scope>
+      <scope id="1057254320149594355" at="93,0,105,0" />
+    </file>
+  </root>
+  <root nodeRef="r:c0bc7504-314a-4a6f-850a-c38847b9f916(jetbrains.mps.baseLanguage.kotlinRefs.structure)/1057254320150665293">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="1057254320150665293" at="18,0,19,0" concept="1" trace="props_KotlinFunctionArgument" />
+      <node id="1057254320150665293" at="70,51,71,76" concept="3" />
+      <node id="1057254320150665293" at="71,76,72,56" concept="0" />
+      <node id="1057254320150665293" at="72,56,73,54" concept="0" />
+      <node id="1057254320150665293" at="74,9,75,44" concept="4" />
+      <node id="1057254320150665293" at="69,56,74,9" concept="2" />
+      <scope id="1057254320150665293" at="70,51,73,54">
+        <var name="cpb" id="1057254320150665293" />
+      </scope>
+      <scope id="1057254320150665293" at="69,56,75,44" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="1057254320150665293" at="18,0,19,0" concept="6" trace="KotlinFunctionArgument" />
+      <node id="1057254320150665293" at="31,58,32,60" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="1057254320150665293" at="24,0,25,0" concept="1" trace="myConceptKotlinFunctionArgument" />
+      <node id="1057254320150665293" at="64,56,65,47" concept="4" />
+      <node id="1057254320150665293" at="151,80,152,193" concept="3" />
+      <node id="1057254320150665293" at="152,193,153,34" concept="0" />
+      <node id="1057254320150665293" at="153,34,154,76" concept="0" />
+      <node id="1057254320150665293" at="154,76,155,124" concept="0" />
+      <node id="1057254320150665293" at="155,124,156,17" concept="0" />
+      <node id="1675356390019153108" at="156,17,157,172" concept="0" />
+      <node id="1057254320150672467" at="157,172,158,197" concept="0" />
+      <node id="1057254320150665293" at="158,197,159,22" concept="4" />
+      <node id="1057254320150665293" at="151,0,161,0" concept="7" trace="createDescriptorForKotlinFunctionArgument#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="1057254320150665293" at="64,56,65,47" />
+      <scope id="1057254320150665293" at="151,80,159,22">
+        <var name="b" id="1057254320150665293" />
+      </scope>
+      <scope id="1057254320150665293" at="151,0,161,0" />
+    </file>
+  </root>
+  <root nodeRef="r:c0bc7504-314a-4a6f-850a-c38847b9f916(jetbrains.mps.baseLanguage.kotlinRefs.structure)/1387846870919537413">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="1387846870919537413" at="16,0,17,0" concept="1" trace="props_KotlinFileClassifierType" />
+      <node id="1387846870919537413" at="56,53,57,76" concept="3" />
+      <node id="1387846870919537413" at="57,76,58,138" concept="0" />
+      <node id="1387846870919537413" at="58,138,59,56" concept="0" />
+      <node id="1387846870919537413" at="60,9,61,46" concept="4" />
+      <node id="1387846870919537413" at="55,58,60,9" concept="2" />
+      <scope id="1387846870919537413" at="56,53,59,56">
+        <var name="cpb" id="1387846870919537413" />
+      </scope>
+      <scope id="1387846870919537413" at="55,58,61,46" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="1387846870919537413" at="16,0,17,0" concept="6" trace="KotlinFileClassifierType" />
+      <node id="1387846870919537413" at="29,59,30,63" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="1387846870919537413" at="22,0,23,0" concept="1" trace="myConceptKotlinFileClassifierType" />
+      <node id="1387846870919537413" at="60,58,61,49" concept="4" />
+      <node id="1387846870919537413" at="129,82,130,196" concept="3" />
+      <node id="1387846870919537413" at="130,196,131,34" concept="0" />
+      <node id="1387846870919537413" at="131,34,132,57" concept="5" />
+      <node id="1387846870919537413" at="132,57,133,70" concept="0" />
+      <node id="1387846870919537413" at="133,70,134,76" concept="0" />
+      <node id="1387846870919537413" at="134,76,135,124" concept="0" />
+      <node id="1387846870919537413" at="135,124,136,17" concept="0" />
+      <node id="1387846870919543631" at="136,17,137,168" concept="0" />
+      <node id="1387846870919537413" at="137,168,138,54" concept="0" />
+      <node id="1387846870919537413" at="138,54,139,22" concept="4" />
+      <node id="1387846870919537413" at="129,0,141,0" concept="7" trace="createDescriptorForKotlinFileClassifierType#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="1387846870919537413" at="60,58,61,49" />
+      <scope id="1387846870919537413" at="129,82,139,22">
+        <var name="b" id="1387846870919537413" />
+      </scope>
+      <scope id="1387846870919537413" at="129,0,141,0" />
+    </file>
+  </root>
+  <root nodeRef="r:c0bc7504-314a-4a6f-850a-c38847b9f916(jetbrains.mps.baseLanguage.kotlinRefs.structure)/1387846870919579610">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="1387846870919579610" at="17,0,18,0" concept="1" trace="props_KotlinFileReference" />
+      <node id="1387846870919579610" at="63,48,64,76" concept="3" />
+      <node id="1387846870919579610" at="64,76,65,138" concept="0" />
+      <node id="1387846870919579610" at="65,138,66,51" concept="0" />
+      <node id="1387846870919579610" at="67,9,68,41" concept="4" />
+      <node id="1387846870919579610" at="62,53,67,9" concept="2" />
+      <scope id="1387846870919579610" at="63,48,66,51">
+        <var name="cpb" id="1387846870919579610" />
+      </scope>
+      <scope id="1387846870919579610" at="62,53,68,41" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="1387846870919579610" at="17,0,18,0" concept="6" trace="KotlinFileReference" />
+      <node id="1387846870919579610" at="30,63,31,58" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="1387846870919579610" at="23,0,24,0" concept="1" trace="myConceptKotlinFileReference" />
+      <node id="1387846870919579610" at="62,53,63,44" concept="4" />
+      <node id="1387846870919579610" at="141,77,142,191" concept="3" />
+      <node id="1387846870919579610" at="142,191,143,34" concept="0" />
+      <node id="1387846870919579610" at="143,34,144,63" concept="5" />
+      <node id="1387846870919579610" at="144,63,145,70" concept="0" />
+      <node id="1387846870919579610" at="145,70,146,124" concept="0" />
+      <node id="1387846870919579610" at="146,124,147,17" concept="0" />
+      <node id="1387846870919582575" at="147,17,148,168" concept="0" />
+      <node id="1387846870919579610" at="148,168,149,22" concept="4" />
+      <node id="1387846870919579610" at="141,0,151,0" concept="7" trace="createDescriptorForKotlinFileReference#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="1387846870919579610" at="62,53,63,44" />
+      <scope id="1387846870919579610" at="141,77,149,22">
+        <var name="b" id="1387846870919579610" />
+      </scope>
+      <scope id="1387846870919579610" at="141,0,151,0" />
+    </file>
+  </root>
+  <root nodeRef="r:c0bc7504-314a-4a6f-850a-c38847b9f916(jetbrains.mps.baseLanguage.kotlinRefs.structure)/1675356390019311662">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="1675356390019311662" at="12,0,13,0" concept="1" trace="props_IKotlinFunctionCall" />
+      <node id="1675356390019311662" at="30,48,31,76" concept="3" />
+      <node id="1675356390019311662" at="31,76,32,51" concept="0" />
+      <node id="1675356390019311662" at="33,9,34,41" concept="4" />
+      <node id="1675356390019311662" at="29,53,33,9" concept="2" />
+      <scope id="1675356390019311662" at="30,48,32,51">
+        <var name="cpb" id="1675356390019311662" />
+      </scope>
+      <scope id="1675356390019311662" at="29,53,34,41" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="1675356390019311662" at="12,0,13,0" concept="6" trace="IKotlinFunctionCall" />
+      <node id="1675356390019311662" at="25,116,26,58" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="1675356390019311662" at="18,0,19,0" concept="1" trace="myConceptIKotlinFunctionCall" />
+      <node id="1675356390019311662" at="52,53,53,44" concept="4" />
+      <node id="1675356390019311662" at="84,77,85,191" concept="3" />
+      <node id="1675356390019311662" at="85,191,86,19" concept="0" />
+      <node id="1675356390019311662" at="87,75,88,124" concept="0" />
+      <node id="1675356390019311662" at="88,124,89,17" concept="0" />
+      <node id="1675356390019315033" at="89,17,90,217" concept="0" />
+      <node id="1675356390019311662" at="90,217,91,22" concept="4" />
+      <node id="1675356390019311662" at="109,71,110,76" concept="0" />
+      <node id="1675356390019311662" at="164,71,165,76" concept="0" />
+      <node id="1675356390019311662" at="84,0,93,0" concept="7" trace="createDescriptorForIKotlinFunctionCall#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="1675356390019311662" at="52,53,53,44" />
+      <scope id="1675356390019311662" at="84,77,91,22">
+        <var name="b" id="1675356390019311662" />
+      </scope>
+      <scope id="1675356390019311662" at="84,0,93,0" />
+    </file>
+  </root>
+  <root nodeRef="r:c0bc7504-314a-4a6f-850a-c38847b9f916(jetbrains.mps.baseLanguage.kotlinRefs.structure)/2420378304458348492">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="2420378304458348492" at="19,0,20,0" concept="1" trace="props_KotlinFunctionCall" />
+      <node id="2420378304458348492" at="77,47,78,76" concept="3" />
+      <node id="2420378304458348492" at="78,76,79,133" concept="0" />
+      <node id="2420378304458348492" at="79,133,80,50" concept="0" />
+      <node id="2420378304458348492" at="81,9,82,40" concept="4" />
+      <node id="2420378304458348492" at="76,52,81,9" concept="2" />
+      <scope id="2420378304458348492" at="77,47,80,50">
+        <var name="cpb" id="2420378304458348492" />
+      </scope>
+      <scope id="2420378304458348492" at="76,52,82,40" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="2420378304458348492" at="19,0,20,0" concept="6" trace="KotlinFunctionCall" />
+      <node id="2420378304458348492" at="32,60,33,57" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="2420378304458348492" at="25,0,26,0" concept="1" trace="myConceptKotlinFunctionCall" />
+      <node id="2420378304458348492" at="66,52,67,43" concept="4" />
+      <node id="2420378304458348492" at="161,76,162,190" concept="3" />
+      <node id="2420378304458348492" at="162,190,163,34" concept="0" />
+      <node id="2420378304458348492" at="163,34,164,71" concept="0" />
+      <node id="2420378304458348492" at="165,76,166,124" concept="0" />
+      <node id="2420378304458348492" at="166,124,167,17" concept="0" />
+      <node id="2420378304458348492" at="167,17,168,22" concept="4" />
+      <node id="2420378304458348492" at="161,0,170,0" concept="7" trace="createDescriptorForKotlinFunctionCall#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="2420378304458348492" at="66,52,67,43" />
+      <scope id="2420378304458348492" at="161,76,168,22">
+        <var name="b" id="2420378304458348492" />
+      </scope>
+      <scope id="2420378304458348492" at="161,0,170,0" />
+    </file>
+  </root>
+  <root nodeRef="r:c0bc7504-314a-4a6f-850a-c38847b9f916(jetbrains.mps.baseLanguage.kotlinRefs.structure)/3848791341541232635">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="3848791341541232635" at="21,0,22,0" concept="1" trace="props_KotlinPropertySetterCall" />
+      <node id="3848791341541232635" at="91,53,92,76" concept="3" />
+      <node id="3848791341541232635" at="92,76,93,133" concept="0" />
+      <node id="3848791341541232635" at="93,133,94,56" concept="0" />
+      <node id="3848791341541232635" at="95,9,96,46" concept="4" />
+      <node id="3848791341541232635" at="90,58,95,9" concept="2" />
+      <scope id="3848791341541232635" at="91,53,94,56">
+        <var name="cpb" id="3848791341541232635" />
+      </scope>
+      <scope id="3848791341541232635" at="90,58,96,46" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="3848791341541232635" at="21,0,22,0" concept="6" trace="KotlinPropertySetterCall" />
+      <node id="3848791341541232635" at="34,63,35,63" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="3848791341541232635" at="27,0,28,0" concept="1" trace="myConceptKotlinPropertySetterCall" />
+      <node id="3848791341541232635" at="70,58,71,49" concept="4" />
+      <node id="3848791341541232635" at="180,82,181,196" concept="3" />
+      <node id="3848791341541232635" at="181,196,182,34" concept="0" />
+      <node id="3848791341541232635" at="182,34,183,71" concept="0" />
+      <node id="3848791341541232635" at="184,75,185,124" concept="0" />
+      <node id="3848791341541232635" at="185,124,186,17" concept="0" />
+      <node id="1675356390019430238" at="186,17,187,217" concept="0" />
+      <node id="3848791341541232635" at="187,217,188,22" concept="4" />
+      <node id="3848791341541232635" at="180,0,190,0" concept="7" trace="createDescriptorForKotlinPropertySetterCall#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="3848791341541232635" at="70,58,71,49" />
+      <scope id="3848791341541232635" at="180,82,188,22">
+        <var name="b" id="3848791341541232635" />
+      </scope>
+      <scope id="3848791341541232635" at="180,0,190,0" />
+    </file>
+  </root>
+  <root nodeRef="r:c0bc7504-314a-4a6f-850a-c38847b9f916(jetbrains.mps.baseLanguage.kotlinRefs.structure)/5016903245542350786">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="5016903245542350786" at="20,0,21,0" concept="1" trace="props_KotlinPropertyGetterCall" />
+      <node id="5016903245542350786" at="84,53,85,76" concept="3" />
+      <node id="5016903245542350786" at="85,76,86,133" concept="0" />
+      <node id="5016903245542350786" at="86,133,87,56" concept="0" />
+      <node id="5016903245542350786" at="88,9,89,46" concept="4" />
+      <node id="5016903245542350786" at="83,58,88,9" concept="2" />
+      <scope id="5016903245542350786" at="84,53,87,56">
+        <var name="cpb" id="5016903245542350786" />
+      </scope>
+      <scope id="5016903245542350786" at="83,58,89,46" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="5016903245542350786" at="20,0,21,0" concept="6" trace="KotlinPropertyGetterCall" />
+      <node id="5016903245542350786" at="33,57,34,63" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="5016903245542350786" at="26,0,27,0" concept="1" trace="myConceptKotlinPropertyGetterCall" />
+      <node id="5016903245542350786" at="68,58,69,49" concept="4" />
+      <node id="5016903245542350786" at="170,82,171,196" concept="3" />
+      <node id="5016903245542350786" at="171,196,172,34" concept="0" />
+      <node id="5016903245542350786" at="172,34,173,71" concept="0" />
+      <node id="5016903245542350786" at="174,75,175,124" concept="0" />
+      <node id="5016903245542350786" at="175,124,176,17" concept="0" />
+      <node id="5016903245542384507" at="176,17,177,218" concept="0" />
+      <node id="5016903245542350786" at="177,218,178,22" concept="4" />
+      <node id="5016903245542350786" at="170,0,180,0" concept="7" trace="createDescriptorForKotlinPropertyGetterCall#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="5016903245542350786" at="68,58,69,49" />
+      <scope id="5016903245542350786" at="170,82,178,22">
+        <var name="b" id="5016903245542350786" />
+      </scope>
+      <scope id="5016903245542350786" at="170,0,180,0" />
+    </file>
+  </root>
+  <root nodeRef="r:c0bc7504-314a-4a6f-850a-c38847b9f916(jetbrains.mps.baseLanguage.kotlinRefs.structure)/5494632093663706537">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="5494632093663706537" at="22,0,23,0" concept="1" trace="props_KotlinTypeParameterReference" />
+      <node id="5494632093663706537" at="98,57,99,76" concept="3" />
+      <node id="5494632093663706537" at="99,76,100,147" concept="0" />
+      <node id="5494632093663706537" at="100,147,101,60" concept="0" />
+      <node id="5494632093663706537" at="102,9,103,50" concept="4" />
+      <node id="5494632093663706537" at="97,62,102,9" concept="2" />
+      <scope id="5494632093663706537" at="98,57,101,60">
+        <var name="cpb" id="5494632093663706537" />
+      </scope>
+      <scope id="5494632093663706537" at="97,62,103,50" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="5494632093663706537" at="22,0,23,0" concept="6" trace="KotlinTypeParameterReference" />
+      <node id="5494632093663706537" at="35,63,36,67" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="5494632093663706537" at="28,0,29,0" concept="1" trace="myConceptKotlinTypeParameterReference" />
+      <node id="5494632093663706537" at="72,62,73,53" concept="4" />
+      <node id="5494632093663706537" at="190,86,191,200" concept="3" />
+      <node id="5494632093663706537" at="191,200,192,34" concept="0" />
+      <node id="5494632093663706537" at="192,34,193,57" concept="5" />
+      <node id="5494632093663706537" at="193,57,194,70" concept="0" />
+      <node id="5494632093663706537" at="194,70,195,76" concept="0" />
+      <node id="5494632093663706537" at="195,76,196,124" concept="0" />
+      <node id="5494632093663706537" at="196,124,197,17" concept="0" />
+      <node id="5494632093663710266" at="197,17,198,177" concept="0" />
+      <node id="5494632093663706537" at="198,177,199,54" concept="0" />
+      <node id="5494632093663706537" at="199,54,200,22" concept="4" />
+      <node id="5494632093663706537" at="190,0,202,0" concept="7" trace="createDescriptorForKotlinTypeParameterReference#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="5494632093663706537" at="72,62,73,53" />
+      <scope id="5494632093663706537" at="190,86,200,22">
+        <var name="b" id="5494632093663706537" />
+      </scope>
+      <scope id="5494632093663706537" at="190,0,202,0" />
+    </file>
+  </root>
+  <root nodeRef="r:c0bc7504-314a-4a6f-850a-c38847b9f916(jetbrains.mps.baseLanguage.kotlinRefs.structure)/7565185111013678188">
+    <file name="ConceptPresentationAspectImpl.java">
+      <node id="7565185111013678188" at="15,0,16,0" concept="1" trace="props_KotlinClassifierType" />
+      <node id="7565185111013678188" at="49,49,50,76" concept="3" />
+      <node id="7565185111013678188" at="50,76,51,144" concept="0" />
+      <node id="7565185111013678188" at="51,144,52,52" concept="0" />
+      <node id="7565185111013678188" at="53,9,54,42" concept="4" />
+      <node id="7565185111013678188" at="48,54,53,9" concept="2" />
+      <scope id="7565185111013678188" at="49,49,52,52">
+        <var name="cpb" id="7565185111013678188" />
+      </scope>
+      <scope id="7565185111013678188" at="48,54,54,42" />
+    </file>
+    <file name="LanguageConceptSwitch.java">
+      <node id="7565185111013678188" at="15,0,16,0" concept="6" trace="KotlinClassifierType" />
+      <node id="7565185111013678188" at="28,56,29,59" concept="0" />
+    </file>
+    <file name="StructureAspectDescriptor.java">
+      <node id="7565185111013678188" at="21,0,22,0" concept="1" trace="myConceptKotlinClassifierType" />
+      <node id="7565185111013678188" at="58,54,59,45" concept="4" />
+      <node id="7565185111013678188" at="116,78,117,192" concept="3" />
+      <node id="7565185111013678188" at="117,192,118,34" concept="0" />
+      <node id="7565185111013678188" at="118,34,119,57" concept="5" />
+      <node id="7565185111013678188" at="119,57,120,70" concept="0" />
+      <node id="7565185111013678188" at="120,70,121,76" concept="0" />
+      <node id="7565185111013678188" at="121,76,122,124" concept="0" />
+      <node id="7565185111013678188" at="122,124,123,17" concept="0" />
+      <node id="7565185111013865248" at="123,17,124,174" concept="0" />
+      <node id="1109201940907" at="124,174,125,184" concept="0" />
+      <node id="7565185111013678188" at="125,184,126,54" concept="0" />
+      <node id="7565185111013678188" at="126,54,127,22" concept="4" />
+      <node id="7565185111013678188" at="116,0,129,0" concept="7" trace="createDescriptorForKotlinClassifierType#()Ljetbrains/mps/smodel/runtime/ConceptDescriptor;" />
+      <scope id="7565185111013678188" at="58,54,59,45" />
+      <scope id="7565185111013678188" at="116,78,127,22">
+        <var name="b" id="7565185111013678188" />
+      </scope>
+      <scope id="7565185111013678188" at="116,0,129,0" />
+    </file>
+  </root>
+</debug-info>
+

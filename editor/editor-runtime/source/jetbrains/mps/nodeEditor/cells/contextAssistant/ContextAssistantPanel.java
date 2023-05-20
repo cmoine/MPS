@@ -46,7 +46,7 @@ public class ContextAssistantPanel implements ContextAssistantView {
 
   public ContextAssistantPanel() {
     // Compute preferred height and baseline (for layout purposes)
-    JButton flatButton = ButtonCustomizations.setupMenuButton(new JButton("some text"));
+    JButton flatButton = new ContextAssistantButton("some text");
     Dimension preferredSize = flatButton.getPreferredSize();
     myPreferredHeight = preferredSize.height;
     myBaseline = flatButton.getBaseline(preferredSize.width, preferredSize.height);
@@ -57,12 +57,12 @@ public class ContextAssistantPanel implements ContextAssistantView {
   }
 
   private JButton createOverflowButton() {
-    return ButtonCustomizations.setupMenuButton(new AbstractStepComboBoxButton("More") {
+    return new AbstractStepComboBoxButton("More") {
       @Override
       protected ListPopupStep<?> getStep() {
         return SubListStep.subList(myStep, myLayout.getFitCount());
       }
-    });
+    };
   }
 
   @NotNull
@@ -138,11 +138,7 @@ public class ContextAssistantPanel implements ContextAssistantView {
     myComponent.add(myOverflowButton, OverflowLayout.SHOW_ON_OVERFLOW);
   }
 
-  private JButton createButton(TransformationMenuItem item) {
-    return ButtonCustomizations.setupMenuButton(createBaseButton(item));
-  }
-
-  private JButton createBaseButton(final TransformationMenuItem item) {
+  private JButton createButton(final TransformationMenuItem item) {
     return item.accept(new TopLevelButtonCreatingVisitor(myStep));
   }
 }

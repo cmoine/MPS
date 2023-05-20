@@ -16,7 +16,6 @@
 package jetbrains.mps.workbench.dialogs.project.newproject;
 
 import com.intellij.icons.AllIcons.Nodes;
-import jetbrains.mps.project.MPSProject;
 import jetbrains.mps.workbench.DocumentationHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -40,7 +39,7 @@ public class EmptyProjectTemplate implements OtherProjectTemplate {
   @Nullable
   @Override
   public String getDescription() {
-    return "Empty <a href=\""+ DocumentationHelper.getConfluenceBase() + "MPS+project+structure#MPSprojectstructure-projects\">MPS project</a> without languages and solutions.";
+    return "Empty <a href=\"" + DocumentationHelper.getHelpCenterBase() + "MPS+project+structure#MPSprojectstructure-projects\">MPS project</a> without languages and solutions.";
   }
 
   @Nullable
@@ -49,10 +48,7 @@ public class EmptyProjectTemplate implements OtherProjectTemplate {
 
   @NotNull
   @Override
-  public TemplateFiller getTemplateFiller() { return new TemplateFiller() {
-    @Override
-    public void fillProjectWithModules(MPSProject project) {}
-  }; }
+  public TemplateFiller getTemplateFiller() { return project -> {}; }
 
   @Override
   public void setProjectPath(String projectPath) {

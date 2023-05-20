@@ -2,8 +2,7 @@
 <model ref="r:2ba2e307-a81d-4a21-9e0b-de3624e2fb83(jetbrains.mps.lang.access.structure)">
   <persistence version="9" />
   <languages>
-    <use id="c72da2b9-7cce-4447-8389-f407dc1158b7" name="jetbrains.mps.lang.structure" version="3" />
-    <use id="982eb8df-2c96-4bd7-9963-11712ea622e5" name="jetbrains.mps.lang.resources" version="2" />
+    <devkit ref="78434eb8-b0e5-444b-850d-e7c4ad2da9ab(jetbrains.mps.devkit.aspect.structure)" />
   </languages>
   <imports>
     <import index="tpee" ref="r:00000000-0000-4000-0000-011c895902ca(jetbrains.mps.baseLanguage.structure)" />
@@ -11,10 +10,6 @@
   </imports>
   <registry>
     <language id="c72da2b9-7cce-4447-8389-f407dc1158b7" name="jetbrains.mps.lang.structure">
-      <concept id="1224240836180" name="jetbrains.mps.lang.structure.structure.DeprecatedNodeAnnotation" flags="ig" index="asaX9">
-        <property id="1225118929411" name="build" index="YLPcu" />
-        <property id="1225118933224" name="comment" index="YLQ7P" />
-      </concept>
       <concept id="1169125787135" name="jetbrains.mps.lang.structure.structure.AbstractConceptDeclaration" flags="ig" index="PkWjJ">
         <property id="6714410169261853888" name="conceptId" index="EcuMT" />
         <property id="4628067390765907488" name="conceptShortDescription" index="R4oN_" />
@@ -39,7 +34,6 @@
     <language id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core">
       <concept id="1133920641626" name="jetbrains.mps.lang.core.structure.BaseConcept" flags="ng" index="2VYdi">
         <property id="1193676396447" name="virtualPackage" index="3GE5qa" />
-        <child id="5169995583184591170" name="smodelAttribute" index="lGtFl" />
       </concept>
       <concept id="1169194658468" name="jetbrains.mps.lang.core.structure.INamedConcept" flags="ng" index="TrEIO">
         <property id="1169194664001" name="name" index="TrG5h" />
@@ -48,19 +42,19 @@
   </registry>
   <node concept="1TIwiD" id="7Mb2akafE8a">
     <property role="TrG5h" value="BaseExecuteCommandStatement" />
-    <property role="2_RsDV" value="none" />
+    <property role="2_RsDV" value="4G1g3fIR8JG/none" />
     <property role="3GE5qa" value="Command" />
     <property role="EcuMT" value="8974276187400348170" />
     <ref role="1TJDcQ" to="tpee:fzclF8l" resolve="Statement" />
     <node concept="1TJgyj" id="7Mb2akafE8b" role="1TKVEi">
-      <property role="20lmBu" value="aggregation" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="commandClosureLiteral" />
-      <property role="20lbJX" value="1" />
+      <property role="20lbJX" value="fLJekj4/1" />
       <property role="IQ2ns" value="8974276187400348171" />
       <ref role="20lvS9" node="7Mb2akafE8d" resolve="CommandClosureLiteral" />
     </node>
     <node concept="1TJgyj" id="1eZSuKdVoku" role="1TKVEi">
-      <property role="20lmBu" value="aggregation" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="repo" />
       <property role="IQ2ns" value="1423104411234567454" />
       <ref role="20lvS9" to="tpee:fz3vP1J" resolve="Expression" />
@@ -68,14 +62,14 @@
   </node>
   <node concept="1TIwiD" id="7Mb2akafE8c">
     <property role="TrG5h" value="BaseExecuteCommandStatementSync" />
-    <property role="2_RsDV" value="none" />
+    <property role="2_RsDV" value="4G1g3fIR8JG/none" />
     <property role="3GE5qa" value="Command" />
     <property role="EcuMT" value="8974276187400348172" />
     <ref role="1TJDcQ" node="7Mb2akafE8a" resolve="BaseExecuteCommandStatement" />
   </node>
   <node concept="1TIwiD" id="7Mb2akafE8d">
     <property role="TrG5h" value="CommandClosureLiteral" />
-    <property role="2_RsDV" value="none" />
+    <property role="2_RsDV" value="4G1g3fIR8JG/none" />
     <property role="3GE5qa" value="Command" />
     <property role="EcuMT" value="8974276187400348173" />
     <ref role="1TJDcQ" to="tp2c:htbVj4_" resolve="ClosureLiteral" />
@@ -84,28 +78,18 @@
     <property role="R5$K7" value="false" />
     <property role="R5$K2" value="false" />
     <property role="TrG5h" value="ExecuteCommandInEDTStatement" />
-    <property role="2_RsDV" value="none" />
+    <property role="2_RsDV" value="4G1g3fIR8JG/none" />
     <property role="3GE5qa" value="Command" />
     <property role="34LRSv" value="execute command in EDT" />
     <property role="R4oN_" value="Schedule command to run from EDT asynchronously" />
     <property role="EcuMT" value="8974276187400348174" />
     <ref role="1TJDcQ" node="7Mb2akafE8a" resolve="BaseExecuteCommandStatement" />
-    <node concept="1TJgyj" id="7Mb2akafE8f" role="1TKVEi">
-      <property role="20lmBu" value="aggregation" />
-      <property role="20kJfa" value="project" />
-      <property role="IQ2ns" value="8974276187400348175" />
-      <ref role="20lvS9" to="tpee:fz3vP1J" resolve="Expression" />
-      <node concept="asaX9" id="1eZSuKdVCdG" role="lGtFl">
-        <property role="YLPcu" value="MPS 3.3" />
-        <property role="YLQ7P" value="Shall specify repository, BaseExecuteCommandStatement.repo, instead" />
-      </node>
-    </node>
   </node>
   <node concept="1TIwiD" id="7Mb2akafE8h">
     <property role="R5$K7" value="false" />
     <property role="R5$K2" value="false" />
     <property role="TrG5h" value="ExecuteCommandStatement" />
-    <property role="2_RsDV" value="none" />
+    <property role="2_RsDV" value="4G1g3fIR8JG/none" />
     <property role="3GE5qa" value="Command" />
     <property role="34LRSv" value="command" />
     <property role="R4oN_" value="Synchronous model command" />
@@ -116,7 +100,7 @@
     <property role="R5$K7" value="false" />
     <property role="R5$K2" value="false" />
     <property role="TrG5h" value="ExecuteEDTCommandStatement" />
-    <property role="2_RsDV" value="none" />
+    <property role="2_RsDV" value="4G1g3fIR8JG/none" />
     <property role="3GE5qa" value="Command" />
     <property role="34LRSv" value="execute in EDT" />
     <property role="R4oN_" value="Schedule asynchronous model read from EDT" />
@@ -127,7 +111,7 @@
     <property role="R5$K7" value="false" />
     <property role="R5$K2" value="false" />
     <property role="TrG5h" value="ExecuteLightweightCommandStatement" />
-    <property role="2_RsDV" value="none" />
+    <property role="2_RsDV" value="4G1g3fIR8JG/none" />
     <property role="3GE5qa" value="Command" />
     <property role="34LRSv" value="read action" />
     <property role="R4oN_" value="Synchronous model read" />
@@ -138,7 +122,7 @@
     <property role="R5$K7" value="false" />
     <property role="R5$K2" value="false" />
     <property role="TrG5h" value="ExecuteWriteActionStatement" />
-    <property role="2_RsDV" value="none" />
+    <property role="2_RsDV" value="4G1g3fIR8JG/none" />
     <property role="3GE5qa" value="Command" />
     <property role="34LRSv" value="write action" />
     <property role="R4oN_" value="Synchronous model write" />
@@ -154,7 +138,7 @@
     <property role="R5$K7" value="false" />
     <property role="R5$K2" value="false" />
     <property role="TrG5h" value="ExecuteTransparentCommandStatement" />
-    <property role="2_RsDV" value="none" />
+    <property role="2_RsDV" value="4G1g3fIR8JG/none" />
     <property role="3GE5qa" value="Command" />
     <property role="34LRSv" value="undo-transparent command" />
     <property role="EcuMT" value="5332677359380589431" />

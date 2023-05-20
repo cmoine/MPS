@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,20 +16,11 @@
 
 package jetbrains.mps.jps.build;
 
-import jetbrains.mps.generator.impl.dependencies.GenerationDependenciesCache;
-import jetbrains.mps.generator.info.ForeignPathsProvider;
-import jetbrains.mps.generator.info.GeneratorPathsComponent;
-// hm... using collections runtime in a non-mps-generated, hand-written java file...?
-import jetbrains.mps.internal.collections.runtime.ISelector;
-import jetbrains.mps.internal.collections.runtime.ISequence;
-import jetbrains.mps.internal.collections.runtime.Sequence;
-import jetbrains.mps.internal.make.runtime.util.DirUtil;
 import jetbrains.mps.jps.model.JpsMPSExtensionService;
 import jetbrains.mps.jps.model.JpsMPSModuleExtension;
 import jetbrains.mps.jps.project.JpsMPSProject;
 import jetbrains.mps.smodel.resources.MResource;
 import jetbrains.mps.tool.builder.paths.ModuleOutputPaths;
-import jetbrains.mps.vfs.IFile;
 import org.jetbrains.jps.incremental.CompileContext;
 import org.jetbrains.jps.incremental.ModuleBuildTarget;
 import org.jetbrains.jps.incremental.storage.BuildDataManager;
@@ -41,21 +32,18 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 public class GenerationPathsController {
-  private final JpsMPSProject myProject;
   private final CompileContext myContext;
-  private final Iterable<MResource> myModelResources;
   private final JpsRedirects myRedirects = new JpsRedirects();
   private final Map<ModuleBuildTarget, File> myOutputRootsPerTarget = new HashMap<ModuleBuildTarget, File>();
 
   private ModuleOutputPaths myOutputPaths;
-  private MyForeignRootPaths myForeignRootPaths;
 
-  public GenerationPathsController(JpsMPSProject project, CompileContext context, Iterable<MResource> modelResources) {
-    myProject = project;
+  public GenerationPathsController(CompileContext context) {
     myContext = context;
-    myModelResources = modelResources;
   }
 
   public JpsRedirects getRedirects() {
@@ -66,34 +54,11 @@ public class GenerationPathsController {
     return myOutputRootsPerTarget.get(target);
   }
 
-  private ISequence<SModule> getModulesInvolved(Iterable<MResource> resources) {
-    return Sequence.fromIterable(resources).select(new ISelector<MResource, SModule>() {
-      @Override
-      public SModule select(MResource r) {
-        return r.module();
-      }
-    });
+  private static Collection<SModule> getModulesInvolved(Iterable<MResource> resources) {
+    return StreamSupport.stream(resources.spliterator(), false).map(MResource::module).collect(Collectors.toList());
   }
 
-  public void registerRedirects() {
-    GenerationDependenciesCache.getInstance().registerCachePathRedirect(new GenerationDependenciesCache.CachePathRedirect() {
-      @Override
-      public IFile redirectTo(IFile outputFile) {
-        return myRedirects.getRedirect(outputFile.getPath());
-      }
-    });
-  }
-
-  public void registerForeignPathsProvider() {
-    GeneratorPathsComponent.getInstance().registerForeignPathsProvider(new ForeignPathsProvider() {
-      @Override
-      public String belongsToForeignPath(IFile path) {
-        return myForeignRootPaths != null ? myForeignRootPaths.findForeignPrefix(path.getPath()) : null;
-      }
-    });
-  }
-
-  public void initWithTargets(Collection<ModuleBuildTarget> targets) {
+  private void initWithTargets(Collection<ModuleBuildTarget> targets) {
     Set<ModuleBuildTarget> processed = new HashSet<ModuleBuildTarget>();
     for (ModuleBuildTarget target : targets) {
       if (processed.contains(target)) continue;
@@ -106,46 +71,14 @@ public class GenerationPathsController {
         final File tmpOutputRoot = pathsCalculator.getTmpOutputRoot();
         final File cachesOutputRoot = pathsCalculator.getCachesOutputRoot();
         final boolean transientOutputFolder = pathsCalculator.isTransientOutputFolder();
-        myRedirects.addRedirects(myOutputPaths, tmpOutputRoot.getPath(), cachesOutputRoot.getPath(), transientOutputFolder);
+        myRedirects.addRedirects(myOutputPaths, tmpOutputRoot, cachesOutputRoot, transientOutputFolder);
         myOutputRootsPerTarget.put(target, pathsCalculator.getOutputPath());
       }
     }
   }
 
-  public void init(Collection<ModuleBuildTarget> targets) {
-    final ISequence<SModule> modulesInvolvedInMake = getModulesInvolved(myModelResources);
-    myProject.getModelAccess().runReadAction(new Runnable() {
-      @Override
-      public void run() {
-        myOutputPaths = new ModuleOutputPaths(modulesInvolvedInMake);
-      }
-    });
-    myForeignRootPaths = new MyForeignRootPaths(myOutputPaths.getOutputPaths());
+  public void init(JpsMPSProject project, Iterable<MResource> modelResources, Collection<ModuleBuildTarget> targets) {
+    project.getModelAccess().runReadAction(() -> myOutputPaths = new ModuleOutputPaths(getModulesInvolved(modelResources)));
     initWithTargets(targets);
-    registerForeignPathsProvider();
-    registerRedirects();
-  }
-
-  private static class MyForeignRootPaths {
-    private final String[] myRootPaths;
-
-    public MyForeignRootPaths(Iterable<String> foreignRoots) {
-      myRootPaths = Sequence.fromIterable(foreignRoots).select(new ISelector<String, String>() {
-        @Override
-        public String select(String dir) {
-          return DirUtil.normalizeAsDir(dir);
-        }
-      }).sort(new ISelector<String, String>() {
-        @Override
-        public String select(String dir) {
-          return dir;
-        }
-      }, true).toGenericArray(String.class);
-    }
-
-    public String findForeignPrefix(String path) {
-      int idx = DirUtil.findPrefixAsDir(path, myRootPaths);
-      return idx >= 0 ? myRootPaths[idx] : null;
-    }
   }
 }

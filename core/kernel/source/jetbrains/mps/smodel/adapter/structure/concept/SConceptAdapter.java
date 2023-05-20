@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,26 +15,17 @@
  */
 package jetbrains.mps.smodel.adapter.structure.concept;
 
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.smodel.PropertySupport;
 import jetbrains.mps.smodel.SNodeUtil;
 import jetbrains.mps.smodel.adapter.ids.SConceptId;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.smodel.runtime.ConceptDescriptor;
-import jetbrains.mps.smodel.runtime.impl.CompiledConceptDescriptor;
-import jetbrains.mps.util.IterableUtil;
-import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.language.SInterfaceConcept;
-import org.jetbrains.mps.openapi.model.SNode;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @see SAbstractConceptAdapter
@@ -61,7 +52,8 @@ public abstract class SConceptAdapter extends SAbstractConceptAdapter implements
       return equals(SNodeUtil.concept_BaseConcept) ? null : SNodeUtil.concept_BaseConcept;
     }
 
-    return MetaAdapterFactory.getConcept(superConcept, conceptDescriptor.getSuperConcept());
+    String name = ConceptRegistry.getInstance().getConceptDescriptor(superConcept).getConceptFqName();
+    return MetaAdapterFactory.getConcept(superConcept, name);
   }
 
   @Override
@@ -71,19 +63,7 @@ public abstract class SConceptAdapter extends SAbstractConceptAdapter implements
     if (cd == null) {
       return false;
     }
-
-    if (cd instanceof CompiledConceptDescriptor && ((CompiledConceptDescriptor) cd).getVersion() <= 0) {
-      SNode conceptDecl = getDeclarationNode();
-      if (conceptDecl == null) {
-        return false;
-      }
-      if (!conceptDecl.isInstanceOfConcept(SNodeUtil.concept_ConceptDeclaration)) {
-        return false;
-      }
-      return SPropertyOperations.getBoolean(conceptDecl,SNodeUtil.property_Concept_Rootable);
-    } else {
-      return cd.isRootable();
-    }
+    return cd.isRootable();
   }
 
   @Override
@@ -94,12 +74,14 @@ public abstract class SConceptAdapter extends SAbstractConceptAdapter implements
     }
 
     if (d.isInterfaceConcept()) {
-      return Collections.singleton(MetaAdapterFactory.getInterfaceConcept(getConceptDescriptor().getId(), getConceptDescriptor().getConceptFqName()));
+      // handle the case when we've instantiated an interface and got instance's SConcept, aka 'instance concept'
+      // see MetaAdapterByDeclaration.asInstanceConcept
+      return Collections.singleton(MetaAdapterFactory.getInterfaceConcept(d.getId(), d.getConceptFqName()));
     }
 
-    List<SInterfaceConcept> res = new ArrayList<SInterfaceConcept>();
+    List<SInterfaceConcept> res = new ArrayList<>();
     for (SConceptId id : d.getParentsIds()) {
-      if (id.equals(d.getSuperConceptId())) {
+      if (id.equals(d.getSuperConceptId()) || SNodeUtil.conceptId_BaseConcept.equals(id)) {
         continue;
       }
       String name = ConceptRegistry.getInstance().getConceptDescriptor(id).getConceptFqName();

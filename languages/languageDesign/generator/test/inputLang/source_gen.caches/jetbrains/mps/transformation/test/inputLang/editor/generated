@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="emb3vf8ngzzsjqf4vhfrbx5414ae61b" />
+<product version="3" modelHash="9pjm6mgm9fb6drzvbby5dygsgvqk7id">
+  <files names="ClassExport_Editor.java:ClassExport_EditorBuilder_a.java:EditorAspectDescriptorImpl.java:InputNode_A_Editor.java:InputNode_A_EditorBuilder_a.java:InputNode_B_Editor.java:InputNode_B_EditorBuilder_a.java:InputNode_C_Editor.java:InputNode_C_EditorBuilder_a.java:InputRootWithStatementList_Editor.java:InputRootWithStatementList_EditorBuilder_a.java:InputRoot_Editor.java:InputRoot_EditorBuilder_a.java:RefTestClass_Editor.java:RefTestClass_EditorBuilder_a.java:RefTestExpression_Editor.java:RefTestExpression_EditorBuilder_a.java:RefTestMethodCall_Editor.java:RefTestMethodCall_EditorBuilder_a.java:RefTestMethodCall_SubstituteMenu.java:RefTestMethod_Editor.java:RefTestMethod_EditorBuilder_a.java:RefTestParamRef_Editor.java:RefTestParamRef_EditorBuilder_a.java:RefTestParamRef_SubstituteMenu.java:RefTestParam_Editor.java:RefTestParam_EditorBuilder_a.java" />
+</product>
 

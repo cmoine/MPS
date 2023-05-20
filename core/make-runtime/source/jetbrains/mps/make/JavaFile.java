@@ -40,7 +40,7 @@ public class JavaFile {
     return myFile;
   }
 
-  String getClassName() {
+  public String getClassName() {
     return myClassName;
   }
 
@@ -48,7 +48,7 @@ public class JavaFile {
     return myLastModified;
   }
 
-  String getContents() {
+  public String getContents() {
     return FileUtil.read(myFile, FileUtil.DEFAULT_CHARSET_NAME);
   }
 
@@ -64,9 +64,7 @@ public class JavaFile {
     JavaFile javaFile = (JavaFile) o;
 
     if (!myClassName.equals(javaFile.myClassName)) return false;
-    if (!myFile.equals(javaFile.myFile)) return false;
-
-    return true;
+    return myFile.equals(javaFile.myFile);
   }
 
   @Override

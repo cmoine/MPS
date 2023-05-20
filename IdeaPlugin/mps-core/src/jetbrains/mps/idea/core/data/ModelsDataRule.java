@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,18 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.core.data;
 
 import com.intellij.ide.impl.dataRules.GetDataRule;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataProvider;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import jetbrains.mps.ide.project.ProjectHelper;
-import jetbrains.mps.smodel.SModelFileTracker;
-import jetbrains.mps.vfs.FileSystem;
+import jetbrains.mps.project.MPSProject;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SModel;
 
@@ -35,22 +33,24 @@ import java.util.List;
  * evgeny, 6/28/13
  */
 public class ModelsDataRule implements GetDataRule {
+  private final ModelFromVirtualFileExtractor myExtractor;
+
+  public ModelsDataRule() {
+    myExtractor = new ModelFromVirtualFileExtractor();
+  }
+
   @Nullable
   @Override
-  public Object getData(DataProvider dataProvider) {
+  public Object getData(@NotNull DataProvider dataProvider) {
     VirtualFile[] virtualFiles = PlatformDataKeys.VIRTUAL_FILE_ARRAY.getData(dataProvider);
     if (virtualFiles == null) {
       return null;
     }
+    MPSProject project = ProjectHelper.fromIdeaProject(CommonDataKeys.PROJECT.getData(dataProvider));
 
-    final Project project = CommonDataKeys.PROJECT.getData(dataProvider);
-    if (project == null) {
-      return null;
-    }
-
-    List<SModel> result = new ArrayList<SModel>();
-    for (VirtualFile f : virtualFiles) {
-      final SModel model = SModelFileTracker.getInstance(ProjectHelper.getProjectRepository(project)).findModel(FileSystem.getInstance().getFileByPath(f.getPath()));
+    List<SModel> result = new ArrayList<>();
+    for (VirtualFile file : virtualFiles) {
+      var model = myExtractor.extract(file, project);
       if (model != null) {
         result.add(model);
       }

@@ -38,7 +38,7 @@ public class DefaultRenameContributor implements RenameRefactoringContributor {
 
     RefactoringAccessEx.getInstance().getRefactoringFacade().execute(
       RefactoringContext.createRefactoringContext(
-        new PsiRenameRefactoringWrapper(),
+        new PsiRenameRefactoringWrapper(RefactoringAccessEx.getInstance()),
         Arrays.asList("newName"),
         Arrays.asList(newName),
         node,

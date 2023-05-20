@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-x2y9ry7y2qweu65r7yljr1rp0717o9" />
+<product version="3" modelHash="-2ye0cfg8bmidr4hyoe6fbcgdz0u0bpe">
+  <files names="BehaviorAspectDescriptor.java:BehaviorMethodNames.java:ConceptBehavior__BehaviorDescriptor.java:ConceptMethodDeclaration__BehaviorDescriptor.java:LocalBehaviorMethodCall__BehaviorDescriptor.java:SuperConceptExpression__BehaviorDescriptor.java:SuperExpression__BehaviorDescriptor.java:SuperNodeExpression__BehaviorDescriptor.java" />
+</product>
 

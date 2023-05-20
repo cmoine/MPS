@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +15,12 @@
  */
 package jetbrains.mps.workbench.choose;
 
-import jetbrains.mps.ide.icons.IdeIcons;
+import jetbrains.mps.icons.MPSIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SLanguage;
 
 import java.util.function.BiConsumer;
-import java.util.stream.StreamSupport;
 
 /**
  * Knows how to represent deployed languages for {@link ChooseByNameData}
@@ -35,7 +34,7 @@ public class LanguagesPresentation implements ElementPresentation<SLanguage> {
 
   @Override
   public void names(@NotNull Iterable<SLanguage> elements, @NotNull BiConsumer<SLanguage, String> nameConsumer) {
-    StreamSupport.stream(elements.spliterator(), false).forEach(lang -> nameConsumer.accept(lang, lang.getQualifiedName()));
+    elements.forEach(lang -> nameConsumer.accept(lang, lang.getQualifiedName()));
   }
 
   @Override
@@ -46,6 +45,6 @@ public class LanguagesPresentation implements ElementPresentation<SLanguage> {
   @Override
   public void render(@NotNull SLanguage element, @NotNull ElementDescriptor presentation) {
     presentation.name = element.getQualifiedName();
-    presentation.icon = IdeIcons.LANGUAGE_ICON;
+    presentation.icon = MPSIcons.Nodes.LanguageRuntime;
   }
 }

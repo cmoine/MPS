@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,23 +15,28 @@
  */
 package jetbrains.mps.ide.ui.tree.smodel;
 
-import com.intellij.openapi.editor.colors.ColorKey;
-import com.intellij.openapi.editor.colors.EditorColorsManager;
-import jetbrains.mps.ide.ui.tree.MPSTreeNode;
 import jetbrains.mps.ide.ui.tree.TextTreeNode;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SModelReference;
 
-import java.awt.Color;
-
+/**
+ * Groups nodes coming from {@linkplain #getModelReference the same model} under a text label.
+ */
 public class SNodeGroupTreeNode extends TextTreeNode {
+  private final boolean myAutoDelete;
+  private final SModelReference myModelReference;
 
-  private boolean myAutoDelete;
-
-  private SModelReference myModelReference;
-
+  /**
+   * @deprecated use {@link #SNodeGroupTreeNode(SModelReference, String, boolean)} counterpart
+   */
+  @Deprecated
   public SNodeGroupTreeNode(SModelTreeNode model, String text, boolean autoDelete) {
+    this(model.getModel().getReference(), text, autoDelete);
+  }
+
+  public SNodeGroupTreeNode(@NotNull SModelReference model, String text, boolean autoDelete) {
     super(text);
-    myModelReference = model.getModel().getReference();
+    myModelReference = model;
     myAutoDelete = autoDelete;
   }
 
@@ -39,36 +44,7 @@ public class SNodeGroupTreeNode extends TextTreeNode {
     return myModelReference;
   }
 
-  public void registerInModelNode(SModelTreeNode model, SNodeGroupTreeNode parentGroup) {
-    model.register(parentGroup, this);
-  }
-
-  @Override
-  protected void doUpdatePresentation() {
-    if (hasErrors()) {
-      setColor(Color.RED);
-    }
-    setColor(EditorColorsManager.getInstance().getGlobalScheme().getColor(ColorKey.createColorKey("FILESTATUS_NOT_CHANGED")));
-  }
-
-  public boolean hasErrors() {
-    for (int i = 0; i < getChildCount(); i++) {
-      MPSTreeNode node = (MPSTreeNode) getChildAt(i);
-      if (node instanceof SNodeTreeNode) {
-        if (((SNodeTreeNode) node).hasErrors()) return true;
-      }
-
-      if (node instanceof SNodeGroupTreeNode) {
-        if (((SNodeGroupTreeNode) node).hasErrors()) return true;
-      }
-    }
-
-    return false;
-  }
-
   public boolean isAutoDelete() {
     return myAutoDelete;
   }
-
-
 }

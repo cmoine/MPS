@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="chkqg843mepseaaqcvy6g2n6xfoom0x" />
+<product version="3" modelHash="-a74eqjozmf4hsrh6mwg4lrtowkom30m">
+  <files names="ConceptPresentationAspectImpl.java:EnumerationDescriptor_Cardinality.java:EnumerationDescriptor_ChildrenIncomingReferencesPolicy.java:EnumerationDescriptor_EnumCustomMethodReplacementKind.java:EnumerationDescriptor_EnumerationMemberIdentifierPolicy.java:EnumerationDescriptor_InstanceIncomingReferencesPolicy.java:EnumerationDescriptor_LinkMetaclass.java:EnumerationDescriptor_NameOperationMigrationStrategy.java:EnumerationDescriptor_StaticScope.java:EnumerationDescriptor_ValueOperationMigrationStrategy.java:IconContainer.java:LanguageConceptSwitch.java:StructureAspectDescriptor.java" />
+</product>
 

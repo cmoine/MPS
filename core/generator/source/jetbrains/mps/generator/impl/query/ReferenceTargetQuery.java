@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,9 +26,9 @@ import org.jetbrains.annotations.Nullable;
  * figure out query is missing. Second, it's little value in the association link at all (much like PVQ.getProperty(), too) - for interpreted templates, I need
  * to find appropriate meta object anyway (in TemplateNode; to figure out which property/link to copy or to process with a macro), for generated, code
  * to set property/reference would be generated right in the template code.
- * There's indeed use for detault value (both for reference and property), and this shall be added here. However, I don't want to do it right away
- * (Until {@link jetbrains.mps.generator.impl.interpreted.ReflectiveQueryProvider} knows its template model and can find nodes by QueryKey, I'd need to pass
- * this default value through QK, which I don't think is nice). Although even in that case there might be too much magic - if QK identifies a macro node, I'd
+ * There's indeed use for default value (both for reference and property), and this shall be added here. I did't do it right away due to existence of
+ * {@code ReflectiveQueryProvider} where I'd need to pass this default value through QK, which I don't think is nice).
+ * Although even in that case there might be too much magic - if QK identifies a macro node, I'd
  * need to go to parent to find out defaultReferenceInfo value, while in TemplateNode everything is already there.
  *
  * @author Artem Tikhomirov
@@ -39,7 +39,7 @@ public interface ReferenceTargetQuery extends Query {
   Object evaluate(@NotNull ReferenceMacroContext ctx) throws GenerationFailureException;
 
   abstract class Base implements ReferenceTargetQuery {
-    // TODO expose in API and utlize in TemplateNode
+    // TODO expose in API and utilize in TemplateNode
     private String myDefaultResolveInfo;
 
     protected Base() {

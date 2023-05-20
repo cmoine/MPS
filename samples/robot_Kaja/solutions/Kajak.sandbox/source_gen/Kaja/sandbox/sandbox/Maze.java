@@ -11,8 +11,11 @@ public class Maze extends KajaFrame {
   protected void perform() {
     buildMaze_from_library_PlaygroundDefinition_routine();
     while (!(heading(Direction.south))) {
-      turnLeft();
-      pause();
+      try {
+        turnLeft();
+        pause();
+      } finally {
+      }
     }
     while (!(isWall())) {
       if (canMove()) {
@@ -30,12 +33,15 @@ public class Maze extends KajaFrame {
       reportError("Oops, There's a wall in front of me. I can't make a step forward.");
     }
     sniffAround_routine();
-    // Definitions 
+    // Definitions
   }
   public void findDoor_routine() {
     while (isWall()) {
-      turnLeft();
-      pause();
+      try {
+        turnLeft();
+        pause();
+      } finally {
+      }
       if (canMove()) {
         moveKaja();
         pause();
@@ -193,15 +199,24 @@ public class Maze extends KajaFrame {
   }
   public void turnRight_from_library_Common_routine() {
     for (int indexVariable_pmgf_a0e = 0; indexVariable_pmgf_a0e < 3; indexVariable_pmgf_a0e++) {
-      turnLeft();
-      pause();
+      try {
+        turnLeft();
+        pause();
+      } finally {
+      }
     }
   }
   public void turnAround_from_library_Common_routine() {
-    turnLeft();
-    pause();
-    turnLeft();
-    pause();
+    try {
+      turnLeft();
+      pause();
+    } finally {
+    }
+    try {
+      turnLeft();
+      pause();
+    } finally {
+    }
   }
   public void fetch_from_library_Common_routine() {
     if (isMark()) {

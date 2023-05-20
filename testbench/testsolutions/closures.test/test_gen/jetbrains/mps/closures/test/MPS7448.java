@@ -8,17 +8,15 @@ public class MPS7448 {
   public MPS7448() {
   }
   public void test() {
-    MPS7448.xyzAbc(new _FunctionTypes._return_P1_E0<Integer, MPS7448.Aaa>() {
-      public Integer invoke(MPS7448.Aaa aa) {
-        if (0 == 1) {
-          throw new RuntimeException();
-        }
-
-        return 123;
+    MPS7448.xyzAbc((Aaa aa) -> {
+      if (0 == 1) {
+        throw new RuntimeException();
       }
+
+      return 123;
     });
   }
-  public static void xyzAbc(_FunctionTypes._return_P1_E0<? extends Integer, ? super MPS7448.Aaa> code) {
+  public static void xyzAbc(_FunctionTypes._return_P1_E0<? extends Integer, ? super Aaa> code) {
   }
   public static class Aaa {
     public Aaa() {

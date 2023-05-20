@@ -1,0 +1,92 @@
+<project name="mpsMigration" default="checkAll" basedir="../..">
+  <property name="env.JAVA_HOME" value="${java.home}/.."/>
+  <property name="jdk.home" value="${env.JAVA_HOME}"/>
+
+  <property name="project.simpleMigration" location="${basedir}/testbench/modules/testMigration"/>
+  <property name="project.consMigrations" location="${basedir}/testbench/modules/testConsMigrations"/>
+  <property name="project.migrationTaskPlugin" location="${basedir}/testbench/modules/testMigrationTaskAdditionalPlugin"/>
+  <property name="test_classes" location="${basedir}/testbench/testclasses"/>
+
+  <!--this will be specified by test.xml-->
+  <property name="mps_home" location="build/artifacts/mps"/>
+
+  <!-- see mpsSmartRefAttrMigration.xml for explanation. In this script,
+       I test different approaches, with and without mpsHome attr, therefore define it-->
+  <property name="artifacts.mps" location="${mps_home}"/>
+
+  <path id="path.mps.ant.path">
+    <pathelement location="${mps_home}/lib/ant/lib/ant-mps.jar" />
+    <fileset dir="${mps_home}/lib">
+      <include name="util-8.jar" />
+      <include name="3rd-party-rt.jar" />
+    </fileset>
+  </path>
+
+  <path id="test_classpath">
+    <fileset dir="${mps_home}/lib">
+      <include name="**/*.jar" />
+    </fileset>
+    <pathelement path="${jdk.home}/lib/tools.jar" />
+    <pathelement path="${test_classes}"/>
+  </path>
+
+  <taskdef resource="jetbrains/mps/build/ant/antlib.xml" classpathref="path.mps.ant.path"/>
+
+  <target name="compileTestClasses">
+    <mkdir dir="${test_classes}"/>
+    <javac destdir="${test_classes}" fork="false" includeantruntime="false" source="1.7" target="1.7">
+      <compilerarg value="-Xlint:none"/>
+      <classpath refid="test_classpath"/>
+      <src>
+        <path location="${basedir}/testbench/tests/jetbrains/mps/ant"/>
+      </src>
+    </javac>
+  </target>
+
+  <jvmargs id="just-assert">
+    <arg value="-ea" />
+  </jvmargs>
+
+  <target name="checkAll" depends="compileTestClasses">
+    <echo message="${line.separator}${line.separator}Migrating ${project.simpleMigration}..." />
+    <migrate project="${project.simpleMigration}" mpsHome="${mps_home}" makeDistribModules="false" force="true">
+      <!--jvmargs>
+        <arg value="-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5071" />
+      </jvmargs-->
+    </migrate>
+    <echo message="Migrating ${project.simpleMigration} done${line.separator}${line.separator}" />
+
+    <junit fork="true" dir="${mps_home}" showoutput="true">
+      <classpath refid="test_classpath"/>
+      <jvmarg value="-Dtest.output.dir=${project.simpleMigration}"/>
+      <test name="jetbrains.mps.ant.TestAntTaskResult" methods="testSimpleMigration"/>
+      <formatter type="xml" extension=".testSimpleMigration.xml"/>
+    </junit>
+
+    <echo message="Migrating ${project.consMigrations}..." />
+    <migrate makeDistribModules="false" force="true"> <!-- implicit mpsHome through artifacts.mps value-->
+      <project path="${project.consMigrations}"/>
+    </migrate>
+    <echo message="Migrating ${project.consMigrations} done" />
+
+    <junit fork="true" dir="${mps_home}" showoutput="true">
+      <classpath refid="test_classpath"/>
+      <jvmarg value="-Dtest.output.dir=${project.consMigrations}"/>
+      <test name="jetbrains.mps.ant.TestAntTaskResult" methods="testConsequentMigrations"/>
+      <formatter type="xml" extension=".testConsequentMigrations.xml"/>
+    </junit>
+
+    <echo message="Migrating ${project.migrationTaskPlugin}..." />
+    <migrate project="${project.migrationTaskPlugin}" makeDistribModules="false" force="true"> <!-- implicit mpsHome through artifacts.mps value-->
+      <plugin path="${mps_home}/plugins/mps-httpsupport/" id="jetbrains.mps.ide.httpsupport"/>
+    </migrate>
+    <echo message="Migrating ${project.migrationTaskPlugin} done" />
+
+    <junit fork="true" dir="${mps_home}" showoutput="true">
+      <classpath refid="test_classpath"/>
+      <jvmarg value="-Dtest.output.dir=${project.migrationTaskPlugin}"/>
+      <test name="jetbrains.mps.ant.TestAntTaskResult" methods="testMigrationTaskAdditionalPlugin"/>
+      <formatter type="xml" extension=".testMigrationTaskAdditionalPlugin.xml"/>
+    </junit>
+  </target>
+</project>

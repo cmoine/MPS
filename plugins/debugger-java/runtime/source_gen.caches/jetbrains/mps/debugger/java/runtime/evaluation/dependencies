@@ -1,101 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dependenciesRoot>
-  <dependency className="jetbrains.mps.debugger.java.runtime.evaluation.EvaluationProvider" file="EvaluationProvider.java">
-    <classNode dependClassName="com.intellij.openapi.application.ApplicationManager" />
-    <classNode dependClassName="com.intellij.openapi.project.Project" />
-    <classNode dependClassName="java.awt.event.WindowAdapter" />
-    <classNode dependClassName="java.awt.event.WindowEvent" />
-    <classNode dependClassName="java.lang.Override" />
-    <classNode dependClassName="java.lang.Runnable" />
-    <classNode dependClassName="java.util.ArrayList" />
-    <classNode dependClassName="java.util.List" />
-    <classNode dependClassName="javax.swing.JComponent" />
-    <classNode dependClassName="jetbrains.mps.baseLanguage.closures.runtime._FunctionTypes" />
-    <classNode dependClassName="jetbrains.mps.debug.api.AbstractDebugSession" />
-    <classNode dependClassName="jetbrains.mps.debug.api.DebugSessionManagerComponent" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.api.state.JavaUiState" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.evaluation.IWatchListener" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.evaluation.container.EvaluationModule" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.evaluation.container.IEvaluationContainer" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.evaluation.container.Properties" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.evaluation.model.EvaluationWithContextContainer" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.state.DebugSession" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.ui.evaluation.EditWatchDialog" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.ui.evaluation.EvaluationDialog" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.runtime.ui.evaluation.WatchesPanel" />
-    <classNode dependClassName="jetbrains.mps.extapi.module.SRepositoryExt" />
-    <classNode dependClassName="jetbrains.mps.ide.project.ProjectHelper" />
-    <classNode dependClassName="jetbrains.mps.internal.collections.runtime.ListSequence" />
-    <classNode dependClassName="jetbrains.mps.project.Project" />
-    <classNode dependClassName="org.jetbrains.annotations.NotNull" />
-    <classNode dependClassName="org.jetbrains.annotations.Nullable" />
-    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNodeReference" />
-    <classNode dependClassName="org.jetbrains.mps.openapi.module.SModule" />
-    <classNode dependClassName="org.jetbrains.mps.openapi.module.SModuleReference" />
-    <classNode dependClassName="org.jetbrains.mps.openapi.module.SRepository" />
-    <classNode extendsClassName="jetbrains.mps.debug.api.evaluation.IEvaluationProvider" />
-  </dependency>
-  <dependency className="jetbrains.mps.debugger.java.runtime.evaluation.EvaluationUtilsImpl" file="EvaluationUtilsImpl.java">
-    <classNode dependClassName="com.intellij.openapi.application.ApplicationManager" />
-    <classNode dependClassName="com.sun.jdi.AbsentInformationException" />
-    <classNode dependClassName="com.sun.jdi.ArrayReference" />
-    <classNode dependClassName="com.sun.jdi.ArrayType" />
-    <classNode dependClassName="com.sun.jdi.BooleanValue" />
-    <classNode dependClassName="com.sun.jdi.ByteValue" />
-    <classNode dependClassName="com.sun.jdi.CharValue" />
-    <classNode dependClassName="com.sun.jdi.ClassNotLoadedException" />
-    <classNode dependClassName="com.sun.jdi.ClassObjectReference" />
-    <classNode dependClassName="com.sun.jdi.ClassType" />
-    <classNode dependClassName="com.sun.jdi.DoubleValue" />
-    <classNode dependClassName="com.sun.jdi.Field" />
-    <classNode dependClassName="com.sun.jdi.FloatValue" />
-    <classNode dependClassName="com.sun.jdi.IncompatibleThreadStateException" />
-    <classNode dependClassName="com.sun.jdi.IntegerValue" />
-    <classNode dependClassName="com.sun.jdi.InterfaceType" />
-    <classNode dependClassName="com.sun.jdi.InvalidTypeException" />
-    <classNode dependClassName="com.sun.jdi.InvocationException" />
-    <classNode dependClassName="com.sun.jdi.LocalVariable" />
-    <classNode dependClassName="com.sun.jdi.LongValue" />
-    <classNode dependClassName="com.sun.jdi.Method" />
-    <classNode dependClassName="com.sun.jdi.ObjectReference" />
-    <classNode dependClassName="com.sun.jdi.PrimitiveValue" />
-    <classNode dependClassName="com.sun.jdi.ReferenceType" />
-    <classNode dependClassName="com.sun.jdi.ShortValue" />
-    <classNode dependClassName="com.sun.jdi.StackFrame" />
-    <classNode dependClassName="com.sun.jdi.ThreadReference" />
-    <classNode dependClassName="com.sun.jdi.Type" />
-    <classNode dependClassName="com.sun.jdi.Value" />
-    <classNode dependClassName="com.sun.jdi.VirtualMachine" />
-    <classNode dependClassName="java.lang.Boolean" />
-    <classNode dependClassName="java.lang.Byte" />
-    <classNode dependClassName="java.lang.Character" />
-    <classNode dependClassName="java.lang.Double" />
-    <classNode dependClassName="java.lang.Float" />
-    <classNode dependClassName="java.lang.Integer" />
-    <classNode dependClassName="java.lang.Iterable" />
-    <classNode dependClassName="java.lang.Long" />
-    <classNode dependClassName="java.lang.Object" />
-    <classNode dependClassName="java.lang.Override" />
-    <classNode dependClassName="java.lang.Short" />
-    <classNode dependClassName="java.lang.String" />
-    <classNode dependClassName="java.lang.StringBuffer" />
-    <classNode dependClassName="java.lang.UnsupportedOperationException" />
-    <classNode dependClassName="java.util.List" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.api.evaluation.EvaluationException" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.api.evaluation.InvalidEvaluatedExpressionException" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.api.evaluation.proxies.IArrayValueProxy" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.api.evaluation.proxies.IObjectValueProxy" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.api.evaluation.proxies.IValueProxy" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.api.evaluation.proxies.IterableArrayProxy" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.api.evaluation.proxies.IterableProxy" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.api.evaluation.proxies.MirrorUtil" />
-    <classNode dependClassName="jetbrains.mps.debugger.java.api.evaluation.proxies.PrimitiveValueProxy" />
-    <classNode dependClassName="jetbrains.mps.internal.collections.runtime.ListSequence" />
-    <classNode dependClassName="org.apache.log4j.LogManager" />
-    <classNode dependClassName="org.apache.log4j.Logger" />
-    <classNode dependClassName="org.jetbrains.annotations.NotNull" />
-    <classNode dependClassName="org.jetbrains.annotations.Nullable" />
-    <classNode extendsClassName="jetbrains.mps.debugger.java.api.evaluation.EvaluationUtils" />
-  </dependency>
+  <uses language="l:f3061a53-9226-4cc5-a443-f952ceaf5816:jetbrains.mps.baseLanguage" />
+  <uses language="l:fd392034-7849-419d-9071-12563d152375:jetbrains.mps.baseLanguage.closures" />
+  <uses language="l:83888646-71ce-4f1c-9c53-c54016f6ad4f:jetbrains.mps.baseLanguage.collections" />
+  <uses language="l:df345b11-b8c7-4213-ac66-48d2a9b75d88:jetbrains.mps.baseLanguageInternal" />
+  <uses language="l:c7fb639f-be78-4307-89b0-b5959c3fa8c8:jetbrains.mps.lang.text" />
+  <uses module="3f233e7f-b8a6-46d2-a57f-795d56775243(Annotations)" kind="dp" />
+  <uses module="6354ebe7-c22a-4a0f-ac54-50b52ab9b065(JDK)" kind="rt+dp" />
+  <uses module="b387285c-3448-452c-b3bb-a3f8de8eaf08(JDK-tools)" kind="dp" />
+  <uses module="6ed54515-acc8-4d1e-a16c-9fd6cfe951ea(MPS.Core)" kind="dp" />
+  <uses module="1ed103c3-3aa6-49b7-9c21-6765ee11f224(MPS.Editor)" kind="dp" />
+  <uses module="498d89d2-c2e9-11e2-ad49-6cf049e62fe5(MPS.IDEA)" kind="dp" />
+  <uses module="8865b7a8-5271-43d3-884c-6fd1d9cfdd34(MPS.OpenAPI)" kind="dp" />
+  <uses module="742f6602-5a2f-4313-aa6e-ae1cd4ffdc61(MPS.Platform)" kind="dp" />
+  <uses module="4c6a28d1-2c60-478d-b36e-db9b3cbb21fb(closures.runtime)" kind="rt+dp" />
+  <uses module="9b80526e-f0bf-4992-bdf5-cee39c1833f3(collections.runtime)" kind="rt+dp" />
+  <uses module="52b81ac7-93fd-4e9e-b972-4995882da6d4(jetbrains.mps.baseLanguage.references.runtime)" kind="rt" />
+  <uses module="cc7da2f6-419f-4133-a811-31fcd3295a85(jetbrains.mps.debugger.api.api)" kind="dp" />
+  <uses module="cf8c9de5-1b4a-4dc8-8e6d-847159af31dd(jetbrains.mps.debugger.java.api)" kind="dp" />
+  <uses module="fcffe3cf-3ebc-4d3d-989b-2f30533bc904(jetbrains.mps.debugger.java.runtime)" kind="dp" />
 </dependenciesRoot>
 

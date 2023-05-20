@@ -23,6 +23,6 @@ package jetbrains.mps.plugins.tool;
 import javax.swing.JComponent;
 
 public interface IComponentDisposer<T extends JComponent> {
-  public void disposeComponent(T component);
+  void disposeComponent(T component);
 }
 

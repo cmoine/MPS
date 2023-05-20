@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1160998861373:jetbrains.mps.baseLanguage.structure.AssertStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082113931046:jetbrains.mps.baseLanguage.structure.ContinueStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144226303539:jetbrains.mps.baseLanguage.structure.ForeachStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <root nodeRef="r:1ad1263e-00de-4cc8-9c19-9f634ef22b07(jetbrains.mps.lang.editor.figures.sandbox)/2084788800269979458">
+    <file name="BlockContentView.java">
+      <node id="2084788800270123500" at="24,0,25,0" concept="5" trace="myCell" />
+      <node id="6111547859873264701" at="25,0,26,0" concept="5" trace="myRectView" />
+      <node id="6111547859871819499" at="26,0,27,0" concept="5" trace="isClicked" />
+      <node id="8794120090375089274" at="27,29,28,17" concept="14" />
+      <node id="6365639112246684682" at="28,17,29,33" concept="4" />
+      <node id="6981942132920454367" at="29,33,30,0" concept="12" />
+      <node id="2682505046536240535" at="30,0,31,39" concept="9" />
+      <node id="8848989721972207475" at="31,39,32,48" concept="4" />
+      <node id="2084788800270139322" at="32,48,33,47" concept="4" />
+      <node id="2084788800270154948" at="33,47,34,30" concept="4" />
+      <node id="6365639112241852854" at="34,30,35,29" concept="4" />
+      <node id="6981942132920460191" at="35,29,36,0" concept="12" />
+      <node id="6365639112245891810" at="36,0,37,31" concept="4" />
+      <node id="6365639112245947741" at="37,31,38,44" concept="4" />
+      <node id="6365639112246020665" at="38,44,39,52" concept="4" />
+      <node id="6111547859872846585" at="42,51,43,42" concept="4" />
+      <node id="615329258661268530" at="45,16,46,0" concept="12" />
+      <node id="615329258661285996" at="46,0,47,41" concept="9" />
+      <node id="615329258661310675" at="47,41,48,44" concept="4" />
+      <node id="615329258661383649" at="48,44,49,52" concept="4" />
+      <node id="615329258661467683" at="49,52,50,31" concept="4" />
+      <node id="6111547859873209188" at="50,31,51,24" concept="4" />
+      <node id="6111547859873209143" at="56,93,57,51" concept="4" />
+      <node id="6111547859873209156" at="59,32,60,58" concept="4" />
+      <node id="6111547859873209168" at="61,18,62,52" concept="4" />
+      <node id="2084788800270216816" at="68,34,69,25" concept="10" />
+      <node id="6111547859873209166" at="61,16,63,11" concept="1" />
+      <node id="2084788800270022743" at="68,0,71,0" concept="8" trace="text#()Ljetbrains/jetpad/model/property/Property;" />
+      <node id="6111547859871838554" at="41,0,45,0" concept="8" trace="handle#(Ljetbrains/jetpad/projectional/view/View;Ljetbrains/jetpad/event/MouseEvent;)V" />
+      <node id="6111547859873209154" at="58,70,63,11" concept="7" />
+      <node id="6111547859871838541" at="39,52,45,16" concept="4" />
+      <node id="6111547859873209146" at="57,51,64,12" concept="4" />
+      <node id="6111547859873209137" at="55,0,66,0" concept="8" trace="registerSynchronizers#(Ljetbrains/jetpad/mapper/Mapper/SynchronizersConfiguration;)V" />
+      <node id="6111547859873209127" at="53,36,66,19" concept="4" />
+      <node id="6111547859873209179" at="53,0,68,0" concept="8" trace="initSynchronizers#()V" />
+      <node id="6365639112241851334" at="27,0,53,0" concept="2" trace="BlockContentView#()V" />
+      <scope id="6111547859871838560" at="42,51,43,42" />
+      <scope id="6111547859873209155" at="59,32,60,58" />
+      <scope id="6111547859873209167" at="61,18,62,52" />
+      <scope id="2084788800270022746" at="68,34,69,25" />
+      <scope id="2084788800270022743" at="68,0,71,0" />
+      <scope id="6111547859871838554" at="41,0,45,0">
+        <var name="e" id="6111547859871838558" />
+        <var name="view" id="6111547859871838556" />
+      </scope>
+      <scope id="6111547859873209153" at="58,70,63,11" />
+      <scope id="6111547859873209142" at="56,93,64,12" />
+      <scope id="6111547859873209137" at="55,0,66,0">
+        <var name="configuration" id="6111547859873209140" />
+      </scope>
+      <scope id="6111547859873209126" at="53,36,66,19" />
+      <scope id="6111547859873209179" at="53,0,68,0" />
+      <scope id="6365639112241851338" at="27,29,51,24">
+        <var name="bottomRect" id="615329258661285997" />
+        <var name="cellView" id="2682505046536240536" />
+      </scope>
+      <scope id="6365639112241851334" at="27,0,53,0" />
+      <unit id="6111547859871838552" at="40,80,45,5" name="jetbrains.mps.lang.editor.figures.sandbox.BlockContentView$1" />
+      <unit id="6111547859873209131" at="54,8,66,5" name="jetbrains.mps.lang.editor.figures.sandbox.BlockContentView$2" />
+      <unit id="2084788800269979458" at="23,0,72,0" name="jetbrains.mps.lang.editor.figures.sandbox.BlockContentView" />
+    </file>
+  </root>
+  <root nodeRef="r:1ad1263e-00de-4cc8-9c19-9f634ef22b07(jetbrains.mps.lang.editor.figures.sandbox)/5667822611619791699">
+    <file name="PolygonContentView.java">
+      <node id="5667822611620059517" at="24,0,25,0" concept="13" trace="FOLDING_SIZE" />
+      <node id="5667822611620059521" at="25,0,26,0" concept="13" trace="WIDTH" />
+      <node id="5667822611620059525" at="26,0,27,0" concept="13" trace="HEIGHT" />
+      <node id="5667822611620059529" at="27,0,28,0" concept="5" trace="myPolyLine" />
+      <node id="5667822611620059534" at="28,0,29,0" concept="5" trace="myCell" />
+      <node id="5745978280768023078" at="29,0,30,0" concept="5" trace="myMetaText" />
+      <node id="3175567003992663251" at="30,0,31,0" concept="5" trace="contentWidth" />
+      <node id="3175567003992753906" at="31,0,32,0" concept="5" trace="contentHeight" />
+      <node id="5667822611620059547" at="32,31,33,34" concept="4" />
+      <node id="5667822611620059552" at="33,34,34,31" concept="4" />
+      <node id="5667822611620059558" at="34,31,35,41" concept="9" />
+      <node id="5667822611620059561" at="35,41,36,47" concept="4" />
+      <node id="5667822611620059564" at="36,47,37,39" concept="4" />
+      <node id="5667822611620059569" at="37,39,38,32" concept="4" />
+      <node id="5667822611620059572" at="38,32,39,31" concept="4" />
+      <node id="5667822611620059578" at="39,31,40,36" concept="9" />
+      <node id="5667822611620059581" at="40,36,41,45" concept="4" />
+      <node id="5667822611620059586" at="41,45,42,44" concept="4" />
+      <node id="5667822611620059593" at="42,44,43,26" concept="4" />
+      <node id="5745978280768261517" at="43,26,44,32" concept="4" />
+      <node id="5745978280768219427" at="44,32,45,31" concept="4" />
+      <node id="7319867929572815161" at="45,31,46,17" concept="4" />
+      <node id="7493754406617982754" at="49,93,50,51" concept="4" />
+      <node id="4115105161243717528" at="50,51,51,128" concept="4" />
+      <node id="978373763415180846" at="51,128,52,117" concept="4" />
+      <node id="4115105161243745062" at="52,117,53,129" concept="4" />
+      <node id="978373763415404452" at="53,129,54,118" concept="4" />
+      <node id="5667822611620059681" at="59,61,60,30" concept="4" />
+      <node id="978373763414913157" at="60,30,61,49" concept="9" />
+      <node id="5667822611620059685" at="61,49,62,27" concept="9" />
+      <node id="5667822611620059689" at="62,27,63,30" concept="9" />
+      <node id="5667822611620059711" at="65,68,66,17" concept="3" />
+      <node id="5667822611620059713" at="67,7,68,55" concept="9" />
+      <node id="5667822611620059718" at="68,55,69,70" concept="4" />
+      <node id="5667822611620059726" at="69,70,70,40" concept="4" />
+      <node id="5667822611620059736" at="72,30,73,26" concept="4" />
+      <node id="5667822611620059741" at="74,5,75,61" concept="9" />
+      <node id="5667822611620059755" at="75,61,76,42" concept="9" />
+      <node id="5667822611620059783" at="78,68,79,17" concept="3" />
+      <node id="5667822611620059785" at="80,7,81,55" concept="9" />
+      <node id="5667822611620059790" at="81,55,82,93" concept="4" />
+      <node id="5667822611620059802" at="82,93,83,41" concept="4" />
+      <node id="4115105161243563078" at="84,5,85,28" concept="4" />
+      <node id="4115105161243518949" at="85,28,86,30" concept="4" />
+      <node id="8574284199673455468" at="87,38,88,107" concept="11" />
+      <node id="8574284199673685662" at="88,107,89,33" concept="11" />
+      <node id="8574284199673616353" at="89,33,90,23" concept="4" />
+      <node id="7319867929572822791" at="93,29,94,44" concept="4" />
+      <node id="7319867929572822802" at="94,44,95,37" concept="4" />
+      <node id="7319867929572822810" at="95,37,96,42" concept="4" />
+      <node id="7319867929572822818" at="96,42,97,38" concept="4" />
+      <node id="7319867929572822826" at="97,38,98,44" concept="4" />
+      <node id="7319867929572822836" at="98,44,99,44" concept="4" />
+      <node id="7319867929572835306" at="99,44,100,0" concept="12" />
+      <node id="7319867929572822852" at="100,0,101,55" concept="4" />
+      <node id="7319867929572822864" at="101,55,102,48" concept="4" />
+      <node id="7319867929572822874" at="102,48,103,53" concept="4" />
+      <node id="7319867929572822884" at="103,53,104,49" concept="4" />
+      <node id="7319867929572822894" at="104,49,105,55" concept="4" />
+      <node id="7319867929572822906" at="105,55,106,55" concept="4" />
+      <node id="5667822611622774839" at="108,52,109,64" concept="4" />
+      <node id="5667822611622774831" at="109,64,110,69" concept="4" />
+      <node id="5667822611622774823" at="110,69,111,65" concept="4" />
+      <node id="7319867929572910780" at="111,65,112,0" concept="12" />
+      <node id="5667822611620059847" at="112,0,113,86" concept="4" />
+      <node id="5667822611620059852" at="113,86,114,91" concept="4" />
+      <node id="5667822611620059857" at="114,91,115,87" concept="4" />
+      <node id="5667822611623762424" at="117,34,118,25" concept="10" />
+      <node id="5667822611623875771" at="120,38,121,29" concept="10" />
+      <node id="978373763415791190" at="123,64,124,43" concept="0" />
+      <node id="978373763415584073" at="124,43,125,70" concept="9" />
+      <node id="978373763415588305" at="125,70,126,74" concept="9" />
+      <node id="978373763415643488" at="126,74,127,76" concept="9" />
+      <node id="978373763415655627" at="127,76,128,68" concept="4" />
+      <node id="5667822611620059699" at="64,62,67,7" concept="7" />
+      <node id="5667822611620059730" at="71,5,74,5" concept="7" />
+      <node id="5667822611620059771" at="77,62,80,7" concept="7" />
+      <node id="5667822611623762422" at="117,0,120,0" concept="8" trace="text#()Ljetbrains/jetpad/model/property/Property;" />
+      <node id="5667822611623875769" at="120,0,123,0" concept="8" trace="metaText#()Ljetbrains/jetpad/model/property/Property;" />
+      <node id="8574284199673711800" at="86,30,91,5" concept="7" />
+      <node id="978373763415254190" at="123,0,130,0" concept="8" trace="setPreferredSize#(Ljava/lang/Integer;Ljava/lang/Integer;)V" />
+      <node id="7493754406617982741" at="48,0,56,0" concept="8" trace="registerSynchronizers#(Ljetbrains/jetpad/mapper/Mapper/SynchronizersConfiguration;)V" />
+      <node id="5667822611620554332" at="63,30,71,5" concept="6" />
+      <node id="5667822611620885189" at="76,42,84,5" concept="6" />
+      <node id="5667822611620059834" at="108,0,117,0" concept="8" trace="adjustPoints#(II)V" />
+      <node id="7493754406617857162" at="46,17,56,19" concept="4" />
+      <node id="7319867929572782938" at="93,0,108,0" concept="8" trace="initPoints#()V" />
+      <node id="5667822611620059544" at="32,0,58,0" concept="2" trace="PolygonContentView#()V" />
+      <node id="5667822611620059676" at="58,0,93,0" concept="8" trace="doValidate#(Ljetbrains/jetpad/projectional/view/View/ValidationContext;)V" />
+      <scope id="5667822611620059710" at="65,68,66,17" />
+      <scope id="5667822611620059735" at="72,30,73,26" />
+      <scope id="5667822611620059782" at="78,68,79,17" />
+      <scope id="5667822611623762423" at="117,34,118,25" />
+      <scope id="5667822611623875770" at="120,38,121,29" />
+      <scope id="8574284199673711803" at="87,38,90,23" />
+      <scope id="5667822611623762422" at="117,0,120,0" />
+      <scope id="5667822611623875769" at="120,0,123,0" />
+      <scope id="7493754406617982750" at="49,93,54,118" />
+      <scope id="978373763415254193" at="123,64,128,68">
+        <var name="prefSize" id="978373763415584074" />
+        <var name="x" id="978373763415588308" />
+        <var name="y" id="978373763415643489" />
+      </scope>
+      <scope id="5667822611620554338" at="64,62,70,40">
+        <var name="childBounds" id="5667822611620059712" />
+      </scope>
+      <scope id="5667822611620885192" at="77,62,83,41">
+        <var name="childBounds" id="5667822611620059784" />
+      </scope>
+      <scope id="5667822611620059839" at="108,52,115,87" />
+      <scope id="978373763415254190" at="123,0,130,0">
+        <var name="height" id="978373763415370254" />
+        <var name="width" id="978373763415340264" />
+      </scope>
+      <scope id="7493754406617982741" at="48,0,56,0">
+        <var name="configuration" id="7493754406617982745" />
+      </scope>
+      <scope id="5667822611620554332" at="63,30,71,5">
+        <var name="nextChild" id="5667822611620554334" />
+      </scope>
+      <scope id="5667822611620885189" at="76,42,84,5">
+        <var name="nextChild" id="5667822611620885190" />
+      </scope>
+      <scope id="5667822611620059834" at="108,0,117,0">
+        <var name="height" id="5667822611620059837" />
+        <var name="width" id="5667822611620059835" />
+      </scope>
+      <scope id="7319867929572782941" at="93,29,106,55" />
+      <scope id="7319867929572782938" at="93,0,108,0" />
+      <scope id="5667822611620059546" at="32,31,56,19">
+        <var name="myCellView" id="5667822611620059557" />
+        <var name="space" id="5667822611620059577" />
+      </scope>
+      <scope id="5667822611620059544" at="32,0,58,0" />
+      <scope id="5667822611620059680" at="59,61,91,5">
+        <var name="height" id="5667822611620059688" />
+        <var name="prefSize" id="978373763414913158" />
+        <var name="width" id="5667822611620059684" />
+        <var name="xOrigin" id="5667822611620059754" />
+        <var name="yOffset" id="5667822611620059740" />
+      </scope>
+      <scope id="5667822611620059676" at="58,0,93,0">
+        <var name="context" id="5667822611620059678" />
+      </scope>
+      <unit id="7493754406617981004" at="47,8,56,5" name="jetbrains.mps.lang.editor.figures.sandbox.PolygonContentView$1" />
+      <unit id="5667822611619791699" at="23,0,131,0" name="jetbrains.mps.lang.editor.figures.sandbox.PolygonContentView" />
+    </file>
+  </root>
+  <root nodeRef="r:1ad1263e-00de-4cc8-9c19-9f634ef22b07(jetbrains.mps.lang.editor.figures.sandbox)/604142159147854337">
+    <file name="MPSRectView.java">
+      <node id="604142159147908191" at="10,24,11,35" concept="4" />
+      <node id="604142159147950419" at="11,35,12,40" concept="4" />
+      <node id="604142159147854385" at="10,0,14,0" concept="2" trace="MPSRectView#()V" />
+      <scope id="604142159147854389" at="10,24,12,40" />
+      <scope id="604142159147854385" at="10,0,14,0" />
+      <unit id="604142159147854337" at="9,0,15,0" name="jetbrains.mps.lang.editor.figures.sandbox.MPSRectView" />
+    </file>
+  </root>
+  <root nodeRef="r:1ad1263e-00de-4cc8-9c19-9f634ef22b07(jetbrains.mps.lang.editor.figures.sandbox)/822550549815772625">
+    <file name="BoxFigureExt.java">
+      <unit id="822550549815772625" at="7,0,9,0" name="jetbrains.mps.lang.editor.figures.sandbox.BoxFigureExt" />
+    </file>
+  </root>
+</debug-info>
+

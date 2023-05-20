@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-hr3auduuo609gjunvrv56xandnc5ob" />
+<product version="3" modelHash="dav3ry2a7b0g6oq0li9nb8i9l4bml1d">
+  <files names="ActionAspectDescriptorImpl.java:EDTL_node_factories.java:IExtensibleMenuPart_factory.java:StyleClassItem.java:TransformationMenuActionsUtil.java" />
+</product>
 

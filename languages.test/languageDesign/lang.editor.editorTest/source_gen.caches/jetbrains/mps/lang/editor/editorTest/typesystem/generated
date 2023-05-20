@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="4cry7wulqx8xltcudavb63a37vfcodq">
+  <files names="QuickFixApplied_QuickFix.java:TypesystemDescriptor.java:check_QuickFixErrorTrigger_NonTypesystemRule.java:typeof_SmartCompletionChildToRef_InferenceRule.java:typeof_SmartCompletionParent_InferenceRule.java:typeof_SmartCompletionSimpleRef_InferenceRule.java:typeof_SmartCompletionSmartRef_InferenceRule.java:typeof_SmartCompletionTypedChild_Boolean_InferenceRule.java:typeof_SmartCompletionTypedChild_Integer_InferenceRule.java" />
+</product>
+

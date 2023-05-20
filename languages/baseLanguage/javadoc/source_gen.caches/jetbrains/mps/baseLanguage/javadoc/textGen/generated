@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="c7menpefk33f98hz6noij9519mcbrlu" />
+<product version="3" modelHash="4lh10qcjwka5zcwswloxbu7ib3ibub7">
+  <files names="AuthorBlockDocTag_TextGen.java:BaseParameterReference_TextGen.java:ClassifierDocComment_TextGen.java:ClassifierDocReference_TextGen.java:CodeInlineDocTag_TextGen.java:CodeSnippet_TextGen.java:CommentLine_TextGen.java:DeprecatedBlockDocTag_TextGen.java:DocCommentTextGen.java:DocTypeParameterReference_TextGen.java:FieldDocComment_TextGen.java:FieldDocReference_TextGen.java:HTMLElement_TextGen.java:InheritDocInlineDocTag_TextGen.java:InlineTagCommentLinePart_TextGen.java:LinkInlineDocTag_TextGen.java:MethodDocComment_TextGen.java:MethodDocReference_TextGen.java:ParameterBlockDocTag_TextGen.java:ReturnBlockDocTag_TextGen.java:SeeBlockDocTag_TextGen.java:SinceBlockDocTag_TextGen.java:StaticFieldDocReference_TextGen.java:TextCommentLinePart_TextGen.java:TextGenAspectDescriptor.java:ThrowsBlockDocTag_TextGen.java:ValueInlineDocTag_TextGen.java:VersionBlockDocTag_TextGen.java" />
+</product>
 

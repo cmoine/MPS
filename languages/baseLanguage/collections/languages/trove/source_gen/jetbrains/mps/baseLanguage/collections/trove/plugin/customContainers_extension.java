@@ -8,8 +8,9 @@ import java.util.List;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.module.SRepository;
 import org.jetbrains.mps.openapi.model.SModel;
-import jetbrains.mps.smodel.ModuleRepositoryFacade;
+import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SModelOperations;
+import org.jetbrains.mps.openapi.language.SConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class customContainers_extension extends Extension.Default<_FunctionTypes._return_P1_E0<? extends List<SNode>, ? super SRepository>> {
@@ -20,12 +21,14 @@ public class customContainers_extension extends Extension.Default<_FunctionTypes
 
 
   public _FunctionTypes._return_P1_E0<? extends List<SNode>, ? super SRepository> get() {
-    return new _FunctionTypes._return_P1_E0<List<SNode>, SRepository>() {
-      public List<SNode> invoke(SRepository repo) {
-        // Find the model(s) with custom container declarations 
-        SModel mdl = new ModuleRepositoryFacade(repo).getModelByName("jetbrains.mps.baseLanguage.collections.trove.containers");
-        return SModelOperations.nodes(mdl, MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x54a5d587c1f3c84cL, "jetbrains.mps.baseLanguage.collections.structure.CustomContainers"));
-      }
+    return (SRepository repo) -> {
+      // Find the model(s) with custom container declarations
+      SModel mdl = PersistenceFacade.getInstance().createModelReference("r:9e8bdb89-2777-4a48-887c-0edd1d0b1863(jetbrains.mps.baseLanguage.collections.trove.containers)").resolve(repo);
+      return SModelOperations.nodes(mdl, CONCEPTS.CustomContainers$Mn);
     };
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept CustomContainers$Mn = MetaAdapterFactory.getConcept(0x8388864671ce4f1cL, 0x9c53c54016f6ad4fL, 0x54a5d587c1f3c84cL, "jetbrains.mps.baseLanguage.collections.structure.CustomContainers");
   }
 }

@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="mps.jetbrains.mps.editorlang.runtime_auto" type="mps.solution.library">
+    <CLASSES />
+    <JAVADOC />
+    <MPS_MODULE_XML>
+      <root url="jar://$APPLICATION_PLUGINS_DIR$/mps-core/languages/editor/jetbrains.mps.editorlang.runtime.jar!/META-INF/module.xml" />
+    </MPS_MODULE_XML>
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,29 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="EditorTests" type="JUnit" factoryName="JUnit">
+    <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+    <module name="mps-testing" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <option name="PACKAGE_NAME" value="jetbrains.mps.idea.core.tests" />
+    <option name="MAIN_CLASS_NAME" value="jetbrains.mps.idea.core.tests.PluginsTestSuite" />
+    <option name="METHOD_NAME" value="" />
+    <option name="TEST_OBJECT" value="class" />
+    <option name="VM_PARAMETERS" value="-ea -Dmps.make.debug=false -Didea.platform.prefix=Idea -Didea.config.path=$PROJECT_DIR$/sandbox/tests.editor/config -Didea.system.path=$PROJECT_DIR$/sandbox/tests.editor/system -Didea.log.path=$PROJECT_DIR$/sandbox/tests.editor/log -Didea.home.path=$PROJECT_DIR$/idea_home -Didea.plugins.path=$PROJECT_DIR$ -Didea.load.plugins.id=jetbrains.mps.core,jetbrains.mps.testing,jetbrains.mps.lang.editor.tests -Didea.log.leaked.projects.in.tests=false -Dmps.test.module.names=jetbrains.mps.lang.editor.tests,jetbrains.mps.lang.editor.multiple.tests,jetbrains.mps.console.test,jetbrains.mps.lang.actions.test,jetbrains.mps.lang.editor.table.tests,jetbrains.mps.baseLanguage.test" />
+    <option name="PARAMETERS" value="" />
+    <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+    <option name="ENV_VARIABLES" />
+    <option name="PASS_PARENT_ENVS" value="true" />
+    <option name="TEST_SEARCH_SCOPE">
+      <value defaultName="moduleWithDependencies" />
+    </option>
+    <envs />
+    <patterns />
+    <method>
+      <option name="BuildArtifacts" enabled="true">
+        <artifact name="mps-common:jar" />
+        <artifact name="mps-core-jps-plugin:jar" />
+        <artifact name="mps-java-jps-plugin:jar" />
+      </option>
+    </method>
+  </configuration>
+</component>

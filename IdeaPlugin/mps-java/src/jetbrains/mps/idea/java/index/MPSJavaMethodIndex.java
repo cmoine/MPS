@@ -19,6 +19,7 @@ package jetbrains.mps.idea.java.index;
 import com.intellij.util.indexing.DataIndexer;
 import com.intellij.util.indexing.FileContent;
 import com.intellij.util.indexing.ID;
+import jetbrains.mps.extapi.model.SModelData;
 import jetbrains.mps.workbench.goTo.index.SNodeDescriptor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SModel;
@@ -56,7 +57,7 @@ public class MPSJavaMethodIndex extends AbstractMPSModelFileIndex {
   private static class MyIndexer extends SNodeDescriptorIndexer {
 
     @Override
-    protected void getObjectsToIndex(SModel sModel, Consumer<SNode> consumer) {
+    protected void getObjectsToIndex(SModelData sModel, Consumer<SNode> consumer) {
       getJavaMethods(sModel, consumer);
     }
   }

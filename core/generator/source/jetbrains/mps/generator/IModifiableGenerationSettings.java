@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,14 +45,10 @@ public interface IModifiableGenerationSettings extends IGenerationSettings {
 
   void setKeepModelsWithWarnings(boolean keepModelsWithWarnings);
 
-  void setIncremental(boolean isIncremental);
-
-  void setIncrementalUseCache(boolean incrementalUseCache);
-
-  void setDebugIncrementalDependencies(boolean value);
-
-  void setFailOnMissingTextGen(boolean fail);
-
+  /**
+   * @deprecated see {@link IGenerationSettings#isGenerateDebugInfo()}
+   */
+  @Deprecated(forRemoval = true, since = "2022.2")
   void setGenerateDebugInfo(boolean generateDebugInfo);
 
   void setShowBadChildWarning(boolean showBadChildWarning);
@@ -60,4 +56,19 @@ public interface IModifiableGenerationSettings extends IGenerationSettings {
   void enableInplaceTransformations(boolean enabled);
 
   void setCreateStaticReferences(boolean createStaticRefs);
+
+  void warnDynamicToStaticReference(boolean enabled);
+
+  void addListener(Listener l);
+
+  void removeListener(Listener l);
+
+  interface Listener {
+    /**
+     * Event is dispatched after a change.
+     * Dispatching code does it best to ensure there's was an actual change in the settings, however
+     * it doesn't guarantee there's a change, treat this like 'most probably something has changed'.
+     */
+    void settingsChanged();
+  }
 }

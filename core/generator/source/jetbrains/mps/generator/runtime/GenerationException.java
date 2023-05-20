@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,8 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 
 /**
+ * Propagates exceptional state of the transformation process. Not necessarily indicates a failure and doesn't manifest stop of generation process.
+ * Use {@link jetbrains.mps.generator.impl.GenerationFailureException} with subclasses to report failures.
  * Evgeny Gryaznov, 10/22/10
  */
 public abstract class GenerationException extends Exception {
@@ -63,7 +65,7 @@ public abstract class GenerationException extends Exception {
    * @param location identifies origin of the exception in template model
    * @since 3.3
    */
-  public void setTemplateModelLocation(@Nullable SNodeReference location) {
+  public final void setTemplateModelLocation(@Nullable SNodeReference location) {
     myLocation = location;
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,8 @@ package jetbrains.mps.openapi.editor.message;
 
 import jetbrains.mps.errors.MessageStatus;
 import jetbrains.mps.openapi.editor.EditorComponent;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SNode;
 
 import java.awt.Color;
@@ -26,7 +28,29 @@ public interface SimpleEditorMessage {
 
   int getHeight(EditorComponent editorComponent);
 
+  @Nullable
   String getMessage();
+
+  /**
+   * EditorMessage can contain html-formatted string (with tags and staff) can be just pure string.
+   * In the former case we presume that all the necessary characters are escaped by the client.
+   * In the latter case we escape them in {@code EditorMessage#getFormattedMessage}
+   */
+  @NotNull
+  default FormattingOptions getFormattingOptions() {
+    // default
+    return FormattingOptions.PLAIN_TEXT;
+  }
+
+  /**
+   * AFAIU, "formatted" here means "ready for html rendering"
+   * @return formatted message in accordance with #getFormattingOptions
+   *          null if #getMessage is null
+   */
+  @Nullable
+  default String getFormattedMessage() {
+    return getMessage();
+  }
 
   Color getColor();
 

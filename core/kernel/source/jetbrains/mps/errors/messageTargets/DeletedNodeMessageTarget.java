@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,21 +15,24 @@
  */
 package jetbrains.mps.errors.messageTargets;
 
-import jetbrains.mps.util.EqualUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.annotations.Immutable;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 
+import java.util.Objects;
 
-public class DeletedNodeMessageTarget implements MessageTarget {
-  private String myRole;
+@Immutable
+public final class DeletedNodeMessageTarget implements MessageTarget {
+  private final SContainmentLink myLink;
   private int myNextChildIndex = -1; // -1 for deleted in single role
 
-  public DeletedNodeMessageTarget(String role, int nextChildIndex) {
-    myRole = role;
+  public DeletedNodeMessageTarget(@NotNull SContainmentLink link, int nextChildIndex) {
+    myLink = link;
     myNextChildIndex = nextChildIndex;
   }
 
-  public DeletedNodeMessageTarget(String role) {
-    myRole = role;
+  public SContainmentLink getLink() {
+    return myLink;
   }
 
   @Override
@@ -39,7 +42,7 @@ public class DeletedNodeMessageTarget implements MessageTarget {
 
   @Override
   public String getRole() {
-    return myRole;
+    return myLink.getName();
   }
 
   public int getNextChildIndex() {
@@ -48,7 +51,7 @@ public class DeletedNodeMessageTarget implements MessageTarget {
 
   @Override
   public boolean sameAs(@NotNull MessageTarget errorTarget) {
-    return errorTarget instanceof DeletedNodeMessageTarget && EqualUtil.equals(errorTarget.getRole(), getRole())
-      && myNextChildIndex == ((DeletedNodeMessageTarget) errorTarget).myNextChildIndex;
+    return errorTarget instanceof DeletedNodeMessageTarget && Objects.equals(((DeletedNodeMessageTarget) errorTarget).myLink, myLink)
+           && myNextChildIndex == ((DeletedNodeMessageTarget) errorTarget).myNextChildIndex;
   }
 }

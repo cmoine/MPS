@@ -15,9 +15,6 @@
  */
 package jetbrains.mps.errors;
 
-import jetbrains.mps.smodel.SModelId;
-import jetbrains.mps.smodel.SNodeId;
-
 /**
  * User: fyodor
  * Date: 5/21/14
@@ -26,9 +23,6 @@ public interface IRuleConflictWarningProducer {
 
   void produceWarning(String ruleModelId, String ruleNodeId);
 
-  IRuleConflictWarningProducer NULL = new IRuleConflictWarningProducer() {
-    @Override
-    public void produceWarning(String ruleModelId, String ruleNodeId) {
-    }
+  IRuleConflictWarningProducer NULL = (ruleModelId, ruleNodeId) -> {
   };
 }

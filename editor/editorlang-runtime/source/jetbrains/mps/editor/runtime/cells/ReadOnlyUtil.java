@@ -60,7 +60,7 @@ public class ReadOnlyUtil {
   }
 
   public static boolean canDeleteNodes(jetbrains.mps.openapi.editor.EditorComponent editorComponent, Iterable<SNode> nodes) {
-    ArrayList<EditorCell> cells = new ArrayList<EditorCell>();
+    ArrayList<EditorCell> cells = new ArrayList<>();
     for (SNode node : nodes) {
       cells.add(editorComponent.findNodeCell(node));
     }

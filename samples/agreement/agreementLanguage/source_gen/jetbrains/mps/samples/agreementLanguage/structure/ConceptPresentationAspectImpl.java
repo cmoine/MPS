@@ -4,69 +4,156 @@ package jetbrains.mps.samples.agreementLanguage.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_AccountType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_AgreementDeclarations = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Date = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Date_Future = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Date_Past = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Event = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_EventType = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_EventVariable = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_EventVariableReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Plan = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PostingRule = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_PostingRuleTemporalProperty = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Quantity = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_QuantityTemporalProperty = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_TemporalProperty = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Value = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ValueReference = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_AccountType;
+  private ConceptPresentation props_AgreementDeclarations;
+  private ConceptPresentation props_Date;
+  private ConceptPresentation props_Date_Future;
+  private ConceptPresentation props_Date_Past;
+  private ConceptPresentation props_Event;
+  private ConceptPresentation props_EventType;
+  private ConceptPresentation props_EventVariable;
+  private ConceptPresentation props_EventVariableReference;
+  private ConceptPresentation props_Plan;
+  private ConceptPresentation props_PostingRule;
+  private ConceptPresentation props_PostingRuleTemporalProperty;
+  private ConceptPresentation props_Quantity;
+  private ConceptPresentation props_QuantityTemporalProperty;
+  private ConceptPresentation props_TemporalProperty;
+  private ConceptPresentation props_Value;
+  private ConceptPresentation props_ValueReference;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.AccountType:
+        if (props_AccountType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_AccountType = cpb.create();
+        }
         return props_AccountType;
-      case 1:
+      case LanguageConceptSwitch.AgreementDeclarations:
+        if (props_AgreementDeclarations == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_AgreementDeclarations = cpb.create();
+        }
         return props_AgreementDeclarations;
-      case 2:
+      case LanguageConceptSwitch.Date:
+        if (props_Date == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("exect date");
+          cpb.rawPresentation("date");
+          props_Date = cpb.create();
+        }
         return props_Date;
-      case 3:
+      case LanguageConceptSwitch.Date_Future:
+        if (props_Date_Future == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("future time");
+          cpb.rawPresentation("FUTURE");
+          props_Date_Future = cpb.create();
+        }
         return props_Date_Future;
-      case 4:
+      case LanguageConceptSwitch.Date_Past:
+        if (props_Date_Past == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("past time");
+          cpb.rawPresentation("PAST");
+          props_Date_Past = cpb.create();
+        }
         return props_Date_Past;
-      case 5:
+      case LanguageConceptSwitch.Event:
+        if (props_Event == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dbe8f094L, 0x102dc111024L, "type", "", "");
+          props_Event = cpb.create();
+        }
         return props_Event;
-      case 6:
+      case LanguageConceptSwitch.EventType:
+        if (props_EventType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_EventType = cpb.create();
+        }
         return props_EventType;
-      case 7:
+      case LanguageConceptSwitch.EventVariable:
+        if (props_EventVariable == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_EventVariable = cpb.create();
+        }
         return props_EventVariable;
-      case 8:
+      case LanguageConceptSwitch.EventVariableReference:
+        if (props_EventVariableReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102ea8a3c37L, 0x102ea8aa283L, "eventVariable", "", "");
+          props_EventVariableReference = cpb.create();
+        }
         return props_EventVariableReference;
-      case 9:
+      case LanguageConceptSwitch.Plan:
+        if (props_Plan == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Plan = cpb.create();
+        }
         return props_Plan;
-      case 10:
+      case LanguageConceptSwitch.PostingRule:
+        if (props_PostingRule == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dc23b0daL, 0x102dc289db8L, "account", "", "");
+          props_PostingRule = cpb.create();
+        }
         return props_PostingRule;
-      case 11:
+      case LanguageConceptSwitch.PostingRuleTemporalProperty:
+        if (props_PostingRuleTemporalProperty == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("PostingRuleTemporalProperty");
+          props_PostingRuleTemporalProperty = cpb.create();
+        }
         return props_PostingRuleTemporalProperty;
-      case 12:
+      case LanguageConceptSwitch.Quantity:
+        if (props_Quantity == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("Quantity");
+          props_Quantity = cpb.create();
+        }
         return props_Quantity;
-      case 13:
+      case LanguageConceptSwitch.QuantityTemporalProperty:
+        if (props_QuantityTemporalProperty == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("QuantityTemporalProperty");
+          props_QuantityTemporalProperty = cpb.create();
+        }
         return props_QuantityTemporalProperty;
-      case 14:
+      case LanguageConceptSwitch.TemporalProperty:
+        if (props_TemporalProperty == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_TemporalProperty = cpb.create();
+        }
         return props_TemporalProperty;
-      case 15:
+      case LanguageConceptSwitch.Value:
+        if (props_Value == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Value = cpb.create();
+        }
         return props_Value;
-      case 16:
+      case LanguageConceptSwitch.ValueReference:
+        if (props_ValueReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102eaa8102cL, 0x102eaa8542bL, "value", "", "");
+          props_ValueReference = cpb.create();
+        }
         return props_ValueReference;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

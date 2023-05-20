@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,16 @@
  */
 package jetbrains.mps.nodeEditor;
 
+import com.intellij.ide.IdeTooltip;
+import com.intellij.ide.IdeTooltipManager;
+import com.intellij.ui.HintHint;
 import jetbrains.mps.editor.runtime.cells.AbstractCellAction;
 import jetbrains.mps.nodeEditor.actions.CursorPositionTracker;
 import jetbrains.mps.nodeEditor.cells.CellFinderUtil;
 import jetbrains.mps.nodeEditor.cells.EditorCell_Label;
 import jetbrains.mps.nodeEditor.cells.GeometryUtil;
 import jetbrains.mps.nodeEditor.selection.NodeRangeSelection;
+import jetbrains.mps.nodeEditor.selection.SelectUpUtil;
 import jetbrains.mps.openapi.editor.EditorComponent;
 import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.CellConditions;
@@ -28,14 +32,17 @@ import jetbrains.mps.openapi.editor.cells.CellTraversalUtil;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.cells.EditorCell_Collection;
 import jetbrains.mps.openapi.editor.selection.Selection;
+import jetbrains.mps.openapi.editor.selection.Selection.SelectionDirection;
 import jetbrains.mps.openapi.editor.selection.SelectionManager;
 import jetbrains.mps.openapi.editor.selection.SingularSelection;
-import jetbrains.mps.openapi.editor.selection.SingularSelection.SideSelectDirection;
-import jetbrains.mps.smodel.SNodeLegacy;
-import jetbrains.mps.smodel.SNodeUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.util.Condition;
 
+import javax.swing.JEditorPane;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.List;
 
@@ -47,7 +54,7 @@ public class NodeEditorActions {
     }
   }
 
-  abstract static class HorizontalNavigationAction extends NavigationAction {
+  public abstract static class HorizontalNavigationAction extends NavigationAction {
     public EditorCell getNextAlignedLeaf(EditorCell cell) {
       return CellTraversalUtil.getNextLeaf(cell,
           c -> c.isSelectable() && !GeometryUtil.isAbove(cell, c) && !GeometryUtil.isAbove(c, cell) && GeometryUtil.isLeftToRight(cell, c));
@@ -60,7 +67,7 @@ public class NodeEditorActions {
   }
 
   public static class MoveLocal extends HorizontalNavigationAction {
-    private boolean myHome;
+    private final boolean myHome;
 
     public MoveLocal(boolean home) {
       myHome = home;
@@ -139,7 +146,7 @@ public class NodeEditorActions {
   }
 
   public static class MoveToRoot extends NavigationAction {
-    private boolean myHome;
+    private final boolean myHome;
 
     public MoveToRoot(boolean home) {
       myHome = home;
@@ -471,51 +478,27 @@ public class NodeEditorActions {
     }
   }
 
-  public static class SelectUp extends NavigationAction {
+  public static class SelectAll extends NavigationAction {
     @Override
     public boolean canExecute(EditorContext context) {
-      return findTarget(context.getEditorComponent().getSelectionManager()) != null;
+      return SelectUpUtil.canExecute(context);
     }
 
     @Override
     public void execute(EditorContext context) {
-      SelectionManager selectionManager = context.getEditorComponent().getSelectionManager();
-      EditorCell cell = findTarget(selectionManager);
-      selectionManager.pushSelection(selectionManager.createSelection(cell));
-      if (cell instanceof EditorCell_Label) {
-        ((EditorCell_Label) cell).selectWordOrAll();
-      }
+      SelectUpUtil.executeWhile(context, () -> true);
+    }
+  }
+
+  public static class SelectUp extends NavigationAction {
+    @Override
+    public boolean canExecute(EditorContext context) {
+      return SelectUpUtil.canExecute(context);
     }
 
-    private EditorCell findTarget(SelectionManager selectionManager) {
-      Selection selection = selectionManager.getSelection();
-      if (selection == null) {
-        return null;
-      }
-
-      EditorCell cell = selection.getSelectedCells().get(0);
-      if (cell instanceof EditorCell_Label && !((EditorCell_Label) cell).isEverythingSelected()) {
-        return cell;
-      }
-
-      if (cell.getParent() == null) {
-        return null;
-      }
-
-      while (cell.getParent() != null && cell.getParent().isTransparentCollection()) {
-        cell = cell.getParent();
-      }
-      EditorCell_Collection parent = cell.getParent();
-      while (parent != null) {
-        if (parent.isSelectable()) {
-          while (parent.getParent() != null && parent.getParent().isTransparentCollection() && parent.getParent().isSelectable()) {
-            parent = parent.getParent();
-          }
-          return parent;
-        }
-        parent = parent.getParent();
-      }
-      return null;
+    @Override
+    public void execute(EditorContext context) {
+      SelectUpUtil.execute(context);
     }
   }
 
@@ -532,65 +515,113 @@ public class NodeEditorActions {
   }
 
   public static class SideSelect extends NavigationAction {
-    private CellSide mySide;
+    private final SelectionDirection mySide;
 
-    protected SideSelect(CellSide side) {
+    protected SideSelect(@NotNull SelectionDirection side) {
       mySide = side;
+      assert mySide == SelectionDirection.LEFT || mySide == SelectionDirection.RIGHT;
     }
 
-    private EditorCell getNextLeaf(EditorCell current) {
-      if (mySide == CellSide.LEFT) {
-        return CellTraversalUtil.getPrevLeaf(current, jetbrains.mps.openapi.editor.cells.CellConditions.SELECTABLE);
+    @Nullable
+    private EditorCell getNextLeaf(@NotNull EditorCell current) {
+      if (mySide == SelectionDirection.LEFT) {
+        return CellTraversalUtil.getPrevLeaf(current, CellConditions.SELECTABLE);
       } else {
-        return CellTraversalUtil.getNextLeaf(current, jetbrains.mps.openapi.editor.cells.CellConditions.SELECTABLE);
+        return CellTraversalUtil.getNextLeaf(current, CellConditions.SELECTABLE);
       }
     }
 
     @Override
     public boolean canExecute(EditorContext context) {
       SelectionManager selectionManager = context.getEditorComponent().getSelectionManager();
-      Selection selection = selectionManager.getSelection();
-      if (selection instanceof SingularSelection) {
-        SingularSelection singularSelection = (SingularSelection) selection;
-        if (!expandSelection(singularSelection) && selectionManager.getSelectionStackSize() > 1) {
-          return true;
-        }
-        EditorCell selected = singularSelection.getEditorCell();
-        EditorCell nextLeaf = getNextLeaf(selected);
-        return nextLeaf != null && getCommonSelectableAncestor(selected, nextLeaf) != null;
+      Selection current = selectionManager.getSelection();
+      if (shrinkingSelection(current) && selectionManager.getSelectionStackSize() > 1) {
+        return true;
       }
-      return false;
+
+      List<SNode> selectedNodes = current.getSelectedNodes();
+      if (selectedNodes.size() > 1 && current.getDirection() == SelectionDirection.NONE) {
+        return false;
+      }
+      SContainmentLink currentRole = selectedNodes.get(0).getContainmentLink();
+      SNode nextSibling = getNextSibling(selectedNodes, currentRole);
+
+      if (nextSibling != null) {
+        return true;
+      } else {
+        List<EditorCell> selectedCells = current.getSelectedCells();
+        EditorCell nextLeaf = getNextLeaf(selectedCells.get(selectedCells.size() - 1));
+        return nextLeaf != null && getCommonSelectableAncestor(nextLeaf, selectedCells) != null;
+      }
     }
 
     @Override
     public void execute(EditorContext context) {
       SelectionManager selectionManager = context.getEditorComponent().getSelectionManager();
-      SingularSelection selection = (SingularSelection) selectionManager.getSelection();
-      if (!expandSelection(selection) && selectionManager.getSelectionStackSize() > 1) {
+      Selection current = selectionManager.getSelection();
+      if (shrinkingSelection(current) && selectionManager.getSelectionStackSize() > 1) {
         selectionManager.popSelection();
         return;
       }
-      EditorCell selected = selection.getEditorCell();
-      EditorCell nextLeaf = getNextLeaf(selected);
-      EditorCell cellToSelect = getCommonSelectableAncestor(selected, nextLeaf);
-      Selection newSelection = selectionManager.createSelection(cellToSelect);
-      if (newSelection instanceof SingularSelection) {
-        ((SingularSelection) newSelection).setSideSelectDirection(mySide == CellSide.LEFT ? SideSelectDirection.LEFT : SideSelectDirection.RIGHT);
+
+      List<SNode> selectedNodes = current.getSelectedNodes();
+      if (selectedNodes.size() > 1 && current.getDirection() == SelectionDirection.NONE) {
+        return;
       }
+
+      SContainmentLink currentRole = selectedNodes.get(0).getContainmentLink();
+      SNode nextSibling = getNextSibling(selectedNodes, currentRole);
+
+      EditorCell cell = context.getEditorComponent().findNodeCell(selectedNodes.get(0));
+      boolean wholeLabelSelected = cell instanceof EditorCell_Label && ((EditorCell_Label) cell).isEverythingSelected();
+      boolean selectUp = current.getDirection() == SelectionDirection.NONE && !wholeLabelSelected;
+
+      Selection newSelection;
+      if (selectUp) {
+        newSelection = selectionManager.createSelection(cell);
+      } else if (nextSibling != null) {
+        if (mySide == SelectionDirection.RIGHT) {
+          newSelection = selectionManager.createRangeSelection(selectedNodes.get(0), nextSibling);
+        } else {
+          newSelection = selectionManager.createRangeSelection(nextSibling, selectedNodes.get(selectedNodes.size() - 1));
+        }
+      } else {
+        List<EditorCell> selectedCells = current.getSelectedCells();
+        EditorCell nextLeaf = getNextLeaf(selectedCells.get(selectedCells.size() - 1));
+        if (nextLeaf == null) {
+          return;
+        }
+        EditorCell commonSelectableAncestor = getCommonSelectableAncestor(nextLeaf, selectedCells);
+        if (commonSelectableAncestor == null) {
+          return;
+        }
+        newSelection = selectionManager.createSelection(commonSelectableAncestor);
+      }
+
+      newSelection.setDirection(mySide == SelectionDirection.LEFT ? SelectionDirection.LEFT : SelectionDirection.RIGHT);
       selectionManager.pushSelection(newSelection);
-    }
-
-    private boolean expandSelection(SingularSelection selection) {
-      switch (selection.getSideSelectDirection()) {
-        case LEFT:
-          return mySide == CellSide.LEFT;
-        case RIGHT:
-          return mySide == CellSide.RIGHT;
+      if (selectUp && cell instanceof EditorCell_Label) {
+        ((EditorCell_Label) cell).selectAll();
       }
-      return true;
     }
 
-    private EditorCell getCommonSelectableAncestor(EditorCell first, EditorCell... cells) {
+    @Nullable
+    private SNode getNextSibling(@NotNull List<SNode> nodes, @Nullable SContainmentLink role) {
+      SNode sibling;
+      if (mySide == SelectionDirection.RIGHT) {
+        sibling = nodes.get(nodes.size() - 1).getNextSibling();
+      } else {
+        sibling = nodes.get(0).getPrevSibling();
+      }
+      return sibling != null && sibling.getContainmentLink().equals(role) ? sibling : null;
+    }
+
+    private boolean shrinkingSelection(Selection selection) {
+      SelectionDirection direction = selection.getDirection();
+      return direction != SelectionDirection.NONE && mySide != direction;
+    }
+
+    private EditorCell getCommonSelectableAncestor(EditorCell first, Iterable<EditorCell> cells) {
       EditorCell_Collection result = first instanceof EditorCell_Collection ? (EditorCell_Collection) first : first.getParent();
       while (result != null) {
         if (result.isSelectable()) {
@@ -614,7 +645,7 @@ public class NodeEditorActions {
 
   public static class EnlargeSelection extends NavigationAction {
 
-    private boolean myUp;
+    private final boolean myUp;
 
     public EnlargeSelection(boolean up) {
       myUp = up;
@@ -629,7 +660,8 @@ public class NodeEditorActions {
       }
       if (selection instanceof SingularSelection) {
         EditorCell editorCell = ((SingularSelection) selection).getEditorCell();
-        return editorCell.getSNode().getParent() != null;
+        // we cannot enlarge selection for root nodes or top-level nodes in editor
+        return editorCell.getSNode().getParent() != null && editorCell.getSNode() != context.getEditorComponent().getEditedNode();
       }
       return false;
     }
@@ -651,7 +683,7 @@ public class NodeEditorActions {
           }
         } else {
           Selection newSelection = selectionManager.createRangeSelection(selectedNode, selectedNode);
-          if (newSelection instanceof NodeRangeSelection && selectedCell.isBig()) {
+          if (newSelection instanceof NodeRangeSelection && (selectedCell.isBig() || !((NodeRangeSelection) newSelection).getFirstCell().isSelectable())) {
             newSelection = ((NodeRangeSelection) newSelection).enlargeSelection(myUp);
           }
           if (newSelection != null) {
@@ -669,7 +701,7 @@ public class NodeEditorActions {
     }
 
     private SNode findTopMostNodeWithSingularContainment(SNode childNode) {
-      while (childNode.getParent() != null && SNodeUtil.getLinkDeclaration_IsSingular(new SNodeLegacy(childNode).getRoleLink())) {
+      while (childNode.getParent() != null && !childNode.getContainmentLink().isMultiple()) {
         childNode = childNode.getParent();
       }
       return childNode;
@@ -677,40 +709,105 @@ public class NodeEditorActions {
   }
 
   public static class Complete extends AbstractCellAction {
+
+    private final boolean mySmart;
+
+    public Complete(boolean smart) {
+      super(smart);
+      mySmart = smart;
+    }
+
     @Override
-    public boolean canExecute(EditorContext context) {
+    public final boolean canExecute(EditorContext context) {
       EditorCell selection = context.getSelectedCell();
       return selection != null && selection.getSubstituteInfo() != null;
     }
 
     @Override
-    public void execute(EditorContext context) {
+    public final void execute(EditorContext context) {
       EditorCell selection = context.getSelectedCell();
       ((jetbrains.mps.nodeEditor.EditorComponent) context.getEditorComponent()).activateNodeSubstituteChooser(selection,
-          ((selection instanceof EditorCell_Label) && ((EditorCell_Label) selection).isEverythingSelected()), false);
-    }
-  }
-
-  public static class CompleteSmart extends AbstractCellAction {
-    @Override
-    public boolean canExecute(EditorContext context) {
-      EditorCell selection = context.getSelectedCell();
-      return selection != null && selection.getSubstituteInfo() != null;
-    }
-
-    @Override
-    public void execute(EditorContext context) {
-      EditorCell selection = context.getSelectedCell();
-      ((jetbrains.mps.nodeEditor.EditorComponent) context.getEditorComponent()).activateNodeSubstituteChooser(selection,
-          ((selection instanceof EditorCell_Label) && ((EditorCell_Label) selection).isEverythingSelected()), true);
+        ((selection instanceof EditorCell_Label) && ((EditorCell_Label) selection).isEverythingSelected()), mySmart);
     }
   }
 
   public static class ShowMessage extends AbstractCellAction {
     @Override
     public void execute(EditorContext context) {
-      ((jetbrains.mps.nodeEditor.EditorComponent) context.getEditorComponent()).showMessageTooltip();
+      final jetbrains.mps.nodeEditor.EditorComponent editorComponent = (jetbrains.mps.nodeEditor.EditorComponent) context.getEditorComponent();
+      jetbrains.mps.openapi.editor.cells.EditorCell cell = editorComponent.getSelectedCell();
+      if (cell == null) {
+        return;
+      }
+
+      String text = editorComponent.getMessagesTextFor(cell);
+      if (text == null) {
+        return;
+      }
+
+      // Try to show tooltip over caret or in case of active selection - over the middle of the cell
+      final int caretRelativePosition = cell.getCaretX() - cell.getX();
+      final boolean isCaretInsideCell = caretRelativePosition >= 0 && caretRelativePosition <= cell.getWidth();
+      Point point = new Point(
+          isCaretInsideCell ? cell.getCaretX() : cell.getX() + cell.getWidth() / 2, cell.getY());
+      // Inspired by com.intellij.ide.IdeTooltipManager#showTooltipForEvent
+      final JEditorPane pane = IdeTooltipManager.initPane(text, new HintHint().setAwtTooltip(true), null);
+      final IdeTooltip tooltip = new IdeTooltip(editorComponent, point, pane);
+      IdeTooltipManager.getInstance().show(tooltip, true);
     }
   }
 
+  private static abstract class SearchPanelAction extends AbstractCellAction {
+    protected SearchPanelAction() {
+      super(false);
+    }
+
+    protected final SearchPanel getSearchPanel(EditorContext context) {
+      //noinspection deprecation
+      return ((jetbrains.mps.nodeEditor.EditorComponent) context.getEditorComponent()).getSearchPanel();
+    }
+  }
+
+  public static class FindTextInEditor extends SearchPanelAction {
+    @Override
+    public void execute(EditorContext context) {
+      getSearchPanel(context).activate();
+    }
+  }
+
+  public static class FindNextTextInEditor extends SearchPanelAction {
+    @Override
+    public boolean canExecute(EditorContext context) {
+      return getSearchPanel(context).isVisible();
+    }
+
+    @Override
+    public void execute(EditorContext context) {
+      getSearchPanel(context).goToNext();
+    }
+  }
+
+  public static final class FindPrevTextInEditor extends SearchPanelAction {
+    @Override
+    public boolean canExecute(EditorContext context) {
+      return getSearchPanel(context).isVisible();
+    }
+
+    @Override
+    public void execute(EditorContext context) {
+      getSearchPanel(context).goToPrevious();
+    }
+  }
+
+  public static class CancelFindTextInEditor extends SearchPanelAction {
+    @Override
+    public boolean canExecute(EditorContext context) {
+      return getSearchPanel(context).isVisible();
+    }
+
+    @Override
+    public void execute(EditorContext context) {
+      getSearchPanel(context).deactivate();
+    }
+  }
 }

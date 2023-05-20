@@ -1,0 +1,21 @@
+<scxml version="1.0" datamodel="ecmascript" initial="Off">  
+  <final id="Off">
+    <transition event="Turn On" target="On">
+      <log expr="Starting"></log>
+    </transition>
+  </final>
+  <state id="On" initial="Ready">
+    <transition event="Turn Off" target="Off"></transition>
+    <transition event="Malfunction Detected" target="Failure"></transition>
+    <state id="Ready">
+      <transition event="Print Job Arrived" target="Printing"></transition>
+    </state>
+    <state id="Printing">
+      <transition event="Print Job Arrived" target="Printing"></transition>
+      <transition event="Print Job Finished" target="Ready"></transition>
+    </state>
+  </state>
+  <final id="Failure">
+    <transition event="Turn Off" target="Off"></transition>
+  </final>
+</scxml>

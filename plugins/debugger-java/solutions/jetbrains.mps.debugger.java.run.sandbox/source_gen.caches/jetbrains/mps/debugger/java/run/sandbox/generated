@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-8ov48da7eps8kokye7n1qyfx2gd11l" />
+<product version="3" modelHash="-dsxks4kj1zw1nu9r0d1uhce5otxgxn9">
+  <files names="BaseClass.java:Data.java:DebugCollections.java:DebugObjects.java:DerivedClass.java:InnerClassTest.java:SeveralThreads.java:TestTextSource.java:UncaughtException.java" />
+</product>
 

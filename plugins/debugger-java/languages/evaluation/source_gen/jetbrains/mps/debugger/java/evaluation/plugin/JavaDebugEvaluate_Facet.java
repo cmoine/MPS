@@ -21,31 +21,27 @@ import jetbrains.mps.smodel.resources.GResource;
 import org.jetbrains.mps.openapi.model.SModel;
 import jetbrains.mps.baseLanguage.closures.runtime.Wrappers;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.generator.TransientModelsModule;
 import jetbrains.mps.lang.core.plugin.Generate_Facet.Target_configure;
-import org.jetbrains.mps.openapi.persistence.PersistenceFacade;
-import jetbrains.mps.smodel.SModelId;
-import jetbrains.mps.lang.core.plugin.Generate_Facet.Target_checkParameters;
-import jetbrains.mps.smodel.CopyUtil;
 import jetbrains.mps.smodel.SModelOperations;
 import jetbrains.mps.debugger.java.runtime.evaluation.container.Properties;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.internal.collections.runtime.IWhereFilter;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.debugger.java.api.evaluation.transform.TransformatorBuilder;
 import jetbrains.mps.make.script.IFeedback;
-import jetbrains.mps.generator.GenerationStatus;
 import jetbrains.mps.make.script.IConfig;
 import java.util.Map;
 import jetbrains.mps.make.script.IPropertiesPool;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public class JavaDebugEvaluate_Facet extends IFacet.Stub {
   private List<ITarget> targets = ListSequence.fromList(new ArrayList<ITarget>());
   private IFacet.Name name = new IFacet.Name("jetbrains.mps.debugger.java.evaluation.JavaDebugEvaluate");
   public JavaDebugEvaluate_Facet() {
-    ListSequence.fromList(targets).addElement(new JavaDebugEvaluate_Facet.Target_transformEvaluator());
+    ListSequence.fromList(targets).addElement(new Target_transformEvaluator());
   }
   public Iterable<ITarget> targets() {
     return targets;
@@ -54,7 +50,7 @@ public class JavaDebugEvaluate_Facet extends IFacet.Stub {
     return null;
   }
   public Iterable<IFacet.Name> required() {
-    return Sequence.fromArray(new IFacet.Name[]{new IFacet.Name("jetbrains.mps.lang.core.Generate"), new IFacet.Name("jetbrains.mps.lang.core.TextGen")});
+    return Sequence.fromArray(new IFacet.Name[]{new IFacet.Name("jetbrains.mps.make.facets.Generate"), new IFacet.Name("jetbrains.mps.make.facets.TextGen")});
   }
   public Iterable<IFacet.Name> extended() {
     return null;
@@ -63,7 +59,7 @@ public class JavaDebugEvaluate_Facet extends IFacet.Stub {
     return this.name;
   }
   public IPropertiesPersistence propertiesPersistence() {
-    return new JavaDebugEvaluate_Facet.TargetProperties();
+    return new TargetProperties();
   }
   public static class Target_transformEvaluator implements ITargetEx {
     private static final ITarget.Name name = new ITarget.Name("jetbrains.mps.debugger.java.evaluation.JavaDebugEvaluate.transformEvaluator");
@@ -79,44 +75,33 @@ public class JavaDebugEvaluate_Facet extends IFacet.Stub {
             case 0:
 
               for (GResource res : Sequence.fromIterable(input)) {
-                final SModel originalModel = res.status().getOutputModel();
-                // The code below was copied from TransformingGenerationHandler 
+                final SModel outcomeModel = res.status().getOutputModel();
+                // The code below was copied from TransformingGenerationHandler
                 final Wrappers._T<SNode> evaluator = new Wrappers._T<SNode>();
-                if (originalModel != null) {
-                  final TransientModelsModule module = Target_configure.vars(pa.global()).transientModelsProvider().getModule(res.module());
-                  final SModel newModel = module.createTransientModel(PersistenceFacade.getInstance().createModelReference(module.getModuleReference(), SModelId.generate(), res.model().getModelName() + "@evaluate"));
-                  Target_checkParameters.vars(pa.global()).makeSession().getProject().getRepository().getModelAccess().runReadAction(new Runnable() {
-                    public void run() {
-                      CopyUtil.copyModelContent(originalModel, newModel);
-                      SModelOperations.validateLanguagesAndImports(newModel, false, false);
-                      evaluator.value = SModelOperations.getRootByName(newModel, Properties.EVALUATOR_NAME);
-                      if (evaluator.value != null) {
-                        try {
-                          assert SNodeOperations.getModel(evaluator.value) != null;
-                          SNode evaluateMethod = ListSequence.fromList(SNodeOperations.getNodeDescendants(evaluator.value, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b21dL, "jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration"), false, new SAbstractConcept[]{})).findFirst(new IWhereFilter<SNode>() {
-                            public boolean accept(SNode it) {
-                              return "evaluate".equals(SPropertyOperations.getString(it, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name")));
-                            }
-                          });
-                          TransformatorBuilder.getInstance().build(evaluateMethod, true).transformEvaluator();
-                          // TextGen would use model's repository to obtain read lock, and if model is not registered, there'd be no lock 
-                          // which is fine for the transient model itself, but once there's reference outside of the model, e.g. to a java stub elsewhere, 
-                          // there would be a lock violation exception 
-                          module.addModelToKeep(newModel.getReference(), true);
-                        } catch (Throwable ex) {
-                          monitor.reportFeedback(new IFeedback.ERROR(String.valueOf(ex)));
-                        }
+                if (outcomeModel != null) {
+                  Target_configure.vars(pa.global()).transientModelsProvider().getRepository().getModelAccess().runWriteAction(() -> {
+                    // evaluator node belongs to a model already in the repository. 
+                    // Now, AttachedNodeOwner doesn't object if we modify a model inside write (used to demand isInsideCommand())
+                    evaluator.value = SModelOperations.getRootByName(outcomeModel, Properties.EVALUATOR_NAME);
+                    if (evaluator.value != null) {
+                      try {
+                        assert SNodeOperations.getModel(evaluator.value) != null;
+                        SNode evaluateMethod = ListSequence.fromList(SNodeOperations.getNodeDescendants(evaluator.value, CONCEPTS.InstanceMethodDeclaration$39, false, new SAbstractConcept[]{})).findFirst(new IWhereFilter<SNode>() {
+                          public boolean accept(SNode it) {
+                            return "evaluate".equals(SPropertyOperations.getString(it, PROPS.name$MnvL));
+                          }
+                        });
+                        TransformatorBuilder.getInstance().build(evaluateMethod, true).transformEvaluator();
+                      } catch (Throwable ex) {
+                        monitor.reportFeedback(new IFeedback.ERROR(String.valueOf(ex)));
                       }
                     }
                   });
-                  if (evaluator.value != null) {
-                    Target_configure.vars(pa.global()).transientModelsProvider().publishAll();
-                    res.status(new GenerationStatus(res.status().getInputModel(), newModel, res.status().getDependencies(), res.status().isError(), res.status().hasWarnings(), res.status().isCanceled()));
-                  }
                 }
               }
               _output_it4uid_a0a = Sequence.fromIterable(_output_it4uid_a0a).concat(Sequence.fromIterable(input));
             default:
+              progressMonitor.done();
               return new IResult.SUCCESS(_output_it4uid_a0a);
           }
         }
@@ -129,13 +114,13 @@ public class JavaDebugEvaluate_Facet extends IFacet.Stub {
       return null;
     }
     public Iterable<ITarget.Name> after() {
-      return Sequence.fromArray(new ITarget.Name[]{new ITarget.Name("jetbrains.mps.lang.core.Generate.generate"), new ITarget.Name("jetbrains.mps.lang.core.Generate.configure")});
+      return Sequence.fromArray(new ITarget.Name[]{new ITarget.Name("jetbrains.mps.make.facets.Generate.generate"), new ITarget.Name("jetbrains.mps.make.facets.Generate.configure")});
     }
     public Iterable<ITarget.Name> notBefore() {
       return null;
     }
     public Iterable<ITarget.Name> before() {
-      return Sequence.fromArray(new ITarget.Name[]{new ITarget.Name("jetbrains.mps.lang.core.TextGen.textGenToMemory"), new ITarget.Name("jetbrains.mps.lang.core.TextGen.textGen")});
+      return Sequence.fromArray(new ITarget.Name[]{new ITarget.Name("jetbrains.mps.make.facets.TextGen.textGenToMemory"), new ITarget.Name("jetbrains.mps.make.facets.TextGen.textGen")});
     }
     public ITarget.Name getName() {
       return name;
@@ -175,5 +160,13 @@ public class JavaDebugEvaluate_Facet extends IFacet.Stub {
       } catch (RuntimeException re) {
       }
     }
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept InstanceMethodDeclaration$39 = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b21dL, "jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }

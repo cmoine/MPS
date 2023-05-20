@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="1dyi9u7g61wd795kbnjwy96lf5mqmg" />
+<product version="3" modelHash="-6of0hdzeakfb2jk986t8715pnaeggrs">
+  <files names="TypesystemDescriptor.java:check_Counter_NonTypesystemRule.java:check_ParentCounter_NonTypesystemRule.java" />
+</product>
 

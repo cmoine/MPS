@@ -17,7 +17,9 @@ package jetbrains.mps.nodeEditor.commands;
 
 import jetbrains.mps.nodeEditor.EditorComponent;
 import jetbrains.mps.openapi.editor.commands.CommandContext;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.mps.openapi.module.SRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,7 @@ public class CommandContextImpl implements CommandContext {
   private int myCommandLevel = 0;
   private List<CommandContextListener> myListeners = new ArrayList<>();
   private SNode myContextNode;
+  private boolean myFireEvents;
 
   public CommandContextImpl(EditorComponent editorComponent) {
     myEditorComponent = editorComponent;
@@ -39,7 +42,9 @@ public class CommandContextImpl implements CommandContext {
   @Override
   public void commandStarted() {
     if (myCommandLevel == 0) {
-      fireTopLevelCommandStarted();
+      if (myFireEvents = !myEditorComponent.isDisposed()) {
+        fireTopLevelCommandStarted();
+      }
     }
     myCommandLevel++;
   }
@@ -47,7 +52,7 @@ public class CommandContextImpl implements CommandContext {
   @Override
   public void commandFinished() {
     try {
-      if (myCommandLevel == 1) {
+      if (myCommandLevel == 1 && myFireEvents) {
         fireTopLevelCommandFinished();
       }
     } finally {
@@ -74,6 +79,12 @@ public class CommandContextImpl implements CommandContext {
   @Override
   public SNode getContextNode() {
     return myContextNode;
+  }
+
+  @NotNull
+  @Override
+  public SRepository getRepository() {
+    return myEditorComponent.getEditorContext().getRepository();
   }
 
   public void updateContextNode() {

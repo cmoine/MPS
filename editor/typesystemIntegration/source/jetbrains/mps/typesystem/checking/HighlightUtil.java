@@ -15,63 +15,26 @@
  */
 package jetbrains.mps.typesystem.checking;
 
-import jetbrains.mps.errors.IErrorReporter;
 import jetbrains.mps.errors.MessageStatus;
-import jetbrains.mps.errors.QuickFixProvider;
-import jetbrains.mps.errors.SimpleErrorReporter;
-import jetbrains.mps.errors.messageTargets.NodeMessageTarget;
+import jetbrains.mps.errors.item.NodeReportItem;
 import jetbrains.mps.nodeEditor.HighlighterMessage;
-import jetbrains.mps.openapi.editor.ColorConstants;
-import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.message.EditorMessageOwner;
-import jetbrains.mps.openapi.editor.style.StyleRegistry;
-import org.jetbrains.mps.openapi.model.SNode;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.openapi.module.SRepository;
 
 import java.awt.Color;
 
 public class HighlightUtil {
-  public static HighlighterMessage createHighlighterMessage(SNode node, String message, IErrorReporter errorReporter, EditorMessageOwner checker) {
-    return createHighlighterMessage(node, message, errorReporter != null ? errorReporter.getMessageStatus() : MessageStatus.ERROR, errorReporter, checker);
+  /**
+   * @param repository repository we have read lock in (we assume read lock to be the save when reportItem was created)
+   */
+  public static HighlighterMessage createHighlighterMessage(@NotNull NodeReportItem reportItem, EditorMessageOwner checker, SRepository repository) {
+    return new HighlighterMessage(checker, reportItem, reportItem.getNode().resolve(repository));
   }
 
-  private static HighlighterMessage createHighlighterMessage(SNode node, String message, MessageStatus status, IErrorReporter errorReporter,
-      EditorMessageOwner owner) {
-    if (errorReporter == null) {
-      errorReporter = new SimpleErrorReporter(node, message, null, status, new NodeMessageTarget());
-    }
-    HighlighterMessage error = new HighlighterMessage(
-        node,
-        status,
-        errorReporter.getErrorTarget(),
-        getMessageColor(status),
-        message,
-        owner);
-    error.setErrorReporter(errorReporter);
-    for (QuickFixProvider quickFixProvider : errorReporter.getIntentionProviders()) {
-      quickFixProvider.setIsError(error.getStatus() == MessageStatus.ERROR);
-      error.addIntentionProvider(quickFixProvider);
-    }
-    return error;
-  }
-
-  public static HighlighterMessage createHighlighterMessage(SNode node, String message, EditorMessageOwner owner) {
-    return createHighlighterMessage(node, message, null, owner);
-  }
-
-  public static HighlighterMessage createWarningMessage(SNode node, String message, EditorMessageOwner owner) {
-    return createHighlighterMessage(node, message, MessageStatus.WARNING, null, owner);
-  }
-
+  // used in mbeddr
+  @SuppressWarnings("unused")
   public static Color getMessageColor(MessageStatus messageStatus) {
-    if (messageStatus == MessageStatus.ERROR) {
-      return new Color(ColorConstants.ERROR);
-    }
-    if (messageStatus == MessageStatus.WARNING) {
-      return new Color(StyleRegistry.getInstance().isDarkTheme() ? ColorConstants.WARNING_DARK : ColorConstants.WARNING);
-    }
-    if (messageStatus == MessageStatus.OK) {
-      return new Color(ColorConstants.OK);
-    }
-    return Color.BLACK;
+    return HighlighterMessage.getMessageColor(messageStatus);
   }
 }

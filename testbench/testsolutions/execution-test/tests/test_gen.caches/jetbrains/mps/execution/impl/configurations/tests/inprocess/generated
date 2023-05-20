@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-1iig9lv1w8yh362yiawyzvud0mp7hou" />
+<product version="3" modelHash="-cgt7wczjf1li3p4x0r7yeehh5ooht8s">
+  <files names="JUnitInProcessTermination_Test.java:JUnitInProcessUndo_Test.java:JUnitInProcess_Test.java" />
+</product>
 

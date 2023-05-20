@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package jetbrains.mps.idea.java.psi.impl;
 
 import com.intellij.psi.PsiManager;
@@ -28,6 +27,7 @@ import jetbrains.mps.idea.java.psi.impl.blTypes.MPSPsiSetType;
 import jetbrains.mps.idea.java.psi.impl.blTypes.MPSPsiStringType;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.model.SNodeId;
 
@@ -180,24 +180,24 @@ public class JavaMPSPsiNodeFactory implements MPSPsiNodeFactory {
 
     RefCreator dotBasedRefCreator = new RefCreator() {
       @Override
-      public MPSPsiRef createReferenceNode(String role, SModelReference targetModel, SNodeId targetId, PsiManager manager) {
+      public MPSPsiRef createReferenceNode(SReferenceLink role, SModelReference targetModel, SNodeId targetId, PsiManager manager) {
         return new MPSDotBasedPsiRef(role, targetModel, targetId, manager);
       }
 
       @Override
-      public MPSPsiRef createReferenceNode(String role, String referenceText, PsiManager manager) {
+      public MPSPsiRef createReferenceNode(SReferenceLink role, String referenceText, PsiManager manager) {
         return new MPSDotBasedPsiRef(role, referenceText, manager);
       }
     };
 
     RefCreator methodRefCreator = new RefCreator() {
       @Override
-      public MPSPsiRef createReferenceNode(String role, SModelReference targetModel, SNodeId targetId, PsiManager manager) {
+      public MPSPsiRef createReferenceNode(SReferenceLink role, SModelReference targetModel, SNodeId targetId, PsiManager manager) {
         return new MPSPsiMethodRef(role, targetModel, targetId, manager);
       }
 
       @Override
-      public MPSPsiRef createReferenceNode(String role, String referenceText, PsiManager manager) {
+      public MPSPsiRef createReferenceNode(SReferenceLink role, String referenceText, PsiManager manager) {
         return new MPSPsiMethodRef(role, referenceText, manager);
       }
     };
@@ -245,7 +245,7 @@ public class JavaMPSPsiNodeFactory implements MPSPsiNodeFactory {
   }
 
   @Override
-  public MPSPsiRef createReferenceNode(String role, SAbstractConcept linkTargetConcept, SModelReference targetModel, SNodeId targetId, PsiManager manager) {
+  public MPSPsiRef createReferenceNode(SReferenceLink role, SAbstractConcept linkTargetConcept, SModelReference targetModel, SNodeId targetId, PsiManager manager) {
     RefCreator factory = getRefCreator(linkTargetConcept);
 
     if (factory != null) {
@@ -256,7 +256,7 @@ public class JavaMPSPsiNodeFactory implements MPSPsiNodeFactory {
   }
 
   @Override
-  public MPSPsiRef createReferenceNode(String role, SAbstractConcept linkTargetConcept, String referenceText, PsiManager manager) {
+  public MPSPsiRef createReferenceNode(SReferenceLink role, SAbstractConcept linkTargetConcept, String referenceText, PsiManager manager) {
     RefCreator factory = getRefCreator(linkTargetConcept);
 
     if (factory != null) {
@@ -271,8 +271,8 @@ public class JavaMPSPsiNodeFactory implements MPSPsiNodeFactory {
   }
 
   private interface RefCreator {
-    MPSPsiRef createReferenceNode(String role, SModelReference targetModel, SNodeId targetId, PsiManager manager);
+    MPSPsiRef createReferenceNode(SReferenceLink role, SModelReference targetModel, SNodeId targetId, PsiManager manager);
 
-    MPSPsiRef createReferenceNode(String role, String referenceText, PsiManager manager);
+    MPSPsiRef createReferenceNode(SReferenceLink role, String referenceText, PsiManager manager);
   }
 }

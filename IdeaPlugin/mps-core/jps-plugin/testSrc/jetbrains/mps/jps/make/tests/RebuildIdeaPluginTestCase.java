@@ -19,6 +19,7 @@ package jetbrains.mps.jps.make.tests;
 import com.intellij.openapi.application.PathManager;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.TestDataPath;
+import com.intellij.util.SystemProperties;
 import jetbrains.mps.jps.make.testEnvironment.SimpleJpsEnvironment;
 import jetbrains.mps.jps.make.testEnvironment.SimpleJpsTestBean;
 import org.jetbrains.annotations.NonNls;
@@ -74,6 +75,8 @@ public class RebuildIdeaPluginTestCase extends MpsJpsBuildTestCaseWithEnvironmen
     setUpParameters();
     setUpEnvironment("test.in");
 
+    // Copying content of the /IdeaPlugin project folder. This test relay on the fact that all external libraries
+    // should be pre-built and copied into the project structure. See build.xml/buildLibs taget
     String projectDir = copyToProject("../IdeaPlugin", "IdeaPlugin");
 
     // The dependency on outer sources (parts of mps project) are back for now
@@ -83,20 +86,8 @@ public class RebuildIdeaPluginTestCase extends MpsJpsBuildTestCaseWithEnvironmen
     // 1) pre-compile them into jars in the same way as core
     // 2) make IdeaPlugin and mps one same project, and then don't do pre-building at all
     // (to be precise, pre-built only what's in gensources, but not what's compiled in idea)
-    copyToProject("../plugins/vcs-core/core/source_gen", "plugins/vcs-core/core/source_gen");
-    copyToProject("../plugins/vcs/common/source_gen", "plugins/vcs/common/source_gen");
-    copyToProject("../plugins/vcs/common/source", "plugins/vcs/common/source");
-    copyToProject("../plugins/mpsjava/basePlatform/source_gen", "plugins/mpsjava/basePlatform/source_gen");
-    copyToProject("../plugins/mpsjava/platform/source_gen", "plugins/mpsjava/platform/source_gen");
-    copyToProject("../plugins/mpsjava/platform/source", "plugins/mpsjava/platform/source");
-
-    // this is the counter-part of pre-building and copying core jars before compiling IdeaPlugin sources
-    copyToProject(APPLLICATION_PLUGINS_DIR + "/mps-core/lib", "IdeaPlugin/mps-core/lib");
-    copyToProject(APPLLICATION_PLUGINS_DIR + "/mps-core/languages", "IdeaPlugin/mps-core/languages");
-
-    copyToProject(APPLLICATION_PLUGINS_DIR + "/mps-testing/lib/jetbrains.mps.lang.test.util.jar", "IdeaPlugin/mps-core/lib/jetbrains.mps.lang.test.util.jar");
-    copyToProject(APPLLICATION_PLUGINS_DIR + "/mps-testing/languages/languageDesign/jetbrains.mps.lang.test.matcher.jar", "IdeaPlugin/mps-core/lib/jetbrains.mps.lang.test.matcher.jar");
-    copyToProject(APPLLICATION_PLUGINS_DIR + "/mps-testing/languages/languageDesign/jetbrains.mps.lang.test.runtime.jar", "IdeaPlugin/mps-core/lib/jetbrains.mps.lang.test.runtime.jar");
+//    copyToProject("../plugins/mps-vcs/common/source_gen", "plugins/mps-vcs/common/source_gen");
+//    copyToProject("../plugins/mps-vcs/common/source", "plugins/mps-vcs/common/source");
 
     loadProject(projectDir);
     setUpJdk();
@@ -113,7 +104,7 @@ public class RebuildIdeaPluginTestCase extends MpsJpsBuildTestCaseWithEnvironmen
 
   private void setUpJdk() {
     JpsTypedLibrary<JpsSdk<JpsDummyElement>> jdk = myModel.getGlobal().addSdk(JDK_NAME, JAVA_HOME, "1.8", JpsJavaSdkType.INSTANCE);
-    jdk.addRoot(JpsPathUtil.pathToUrl(PlatformTestUtil.getRtJarPath()), JpsOrderRootType.COMPILED);
+    jdk.addRoot(JpsPathUtil.pathToUrl(SystemProperties.getJavaHome() + "/lib/rt.jar"), JpsOrderRootType.COMPILED);
     if (getToolsJarPath().exists()) {
       jdk.addRoot(JpsPathUtil.pathToUrl(getToolsJarPath().getAbsolutePath()), JpsOrderRootType.COMPILED);
     }

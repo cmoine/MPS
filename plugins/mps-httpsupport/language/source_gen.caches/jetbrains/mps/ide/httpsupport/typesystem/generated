@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="4sq1f503sc4esmnhhxv52q74y5o646q">
+  <files names="TypesystemDescriptor.java:check_ParameterInitializer_NonTypesystemRule.java:check_QueryParameter_NonTypesystemRule.java:check_QuerySegment_NonTypesystemRule.java:check_RequestHandler_inPluginModel_NonTypesystemRule.java:check_RequestURIBuilderExpression_NonTypesystemRule.java:supertypesOf_RequestType_SubtypingRule.java:typeof_DefaultParameterConverter_InferenceRule.java:typeof_HttpRequestParameter_InferenceRule.java:typeof_Node_getURLOperation_InferenceRule.java:typeof_ParameterInitializer_InferenceRule.java:typeof_QueryParameterReference_InferenceRule.java:typeof_QueryParameter_InferenceRule.java:typeof_RequestURLBuilderExpression_InferenceRule.java:typeof_ResponseSendOperation_InferenceRule.java" />
+</product>
+

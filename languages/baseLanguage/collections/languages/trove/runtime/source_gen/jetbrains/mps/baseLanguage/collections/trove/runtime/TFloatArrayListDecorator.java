@@ -40,7 +40,7 @@ public class TFloatArrayListDecorator extends AbstractList<Float> implements Lis
   }
   @Override
   public ListIterator<Float> listIterator() {
-    return new TFloatArrayListDecorator.TFloatListIterator(0);
+    return new TFloatListIterator(0);
   }
   @Override
   public void clear() {
@@ -127,7 +127,7 @@ public class TFloatArrayListDecorator extends AbstractList<Float> implements Lis
     return this.primList.size();
   }
   public ListIterator<Float> listIterator(int index) {
-    return new TFloatArrayListDecorator.TFloatListIterator(index);
+    return new TFloatListIterator(index);
   }
   protected boolean removePrim(float primValue) {
     int idx = this.primList.indexOf(primValue);

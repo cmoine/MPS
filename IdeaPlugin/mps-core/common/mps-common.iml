@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+  <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/classes" />
     <output-test url="file://$MODULE_DIR$/testclasses" />
     <exclude-output />
@@ -10,7 +10,10 @@
     </content>
     <orderEntry type="jdk" jdkName="IDEA IC" jdkType="IDEA JDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="mps-core-jar" level="project" />
     <orderEntry type="library" exported="" name="mps-openapi" level="project" />
+    <orderEntry type="library" exported="" name="mps-core" level="project" />
+    <orderEntry type="library" exported="" name="mps-logging" level="project" />
+    <orderEntry type="library" exported="" name="mps-messaging" level="project" />
+    <orderEntry type="library" name="mps-annotations" level="project" />
   </component>
 </module>

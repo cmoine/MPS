@@ -1,17 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Copyright 2000-2022 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 package jetbrains.mps.ide.actions;
 
@@ -23,4 +11,14 @@ import com.intellij.openapi.actionSystem.ActionPlaces;
 public abstract class MPSActionPlaces extends ActionPlaces {
 
   public static final String MPS_MESSAGES_POPUP = "MPSMessagesPopup";
+  /**
+   * Action place for Usages view (both for toolbar and popup actions).
+   */
+  public static final String USAGES_VIEW = "mps.UsagesView";
+
+  public static final String MODEL_ROOT_SETTINGS = "ModelRootSettings";
+
+  // XXX I wonder if ActionPlaces.INTENTION_MENU is the best choice, or I'd rather go with a custom value
+  //     getPopupPlace("MPS.Editor.Intentions.Popup");
+  public static final String MPS_EDITOR_INTENTIONS_POPUP = ActionPlaces.INTENTION_MENU;
 }

@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082113931046:jetbrains.mps.baseLanguage.structure.ContinueStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144226303539:jetbrains.mps.baseLanguage.structure.ForeachStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1178893518978:jetbrains.mps.baseLanguage.structure.ThisConstructorInvocation" />
+  <root nodeRef="r:bf32fdbc-530f-4631-ba64-3e7b620ac47f(jetbrains.mps.baseLanguage.util)/8432634623182691821">
+    <file name="OverridingMethodsCalculator.java">
+      <node id="8432634623182692263" at="37,0,38,0" concept="4" trace="myOverriding2BaseMethodsMap" />
+      <node id="8432634623182692283" at="39,55,40,51" concept="14" />
+      <node id="6941917182340215619" at="43,75,44,90" concept="8" />
+      <node id="6941917182340212915" at="44,90,45,0" concept="11" />
+      <node id="6941917182340209892" at="45,0,46,102" concept="8" />
+      <node id="6941917182340209920" at="48,39,49,31" concept="9" />
+      <node id="6941917182340209905" at="51,9,52,142" concept="3" />
+      <node id="6941917182340328340" at="54,61,55,197" concept="8" />
+      <node id="6941917182340239704" at="55,197,56,73" concept="3" />
+      <node id="6941917182340209927" at="56,73,57,120" concept="3" />
+      <node id="8432634623182692298" at="61,80,62,102" concept="8" />
+      <node id="8432634623182692316" at="64,39,65,31" concept="9" />
+      <node id="8432634623182692322" at="67,9,68,142" concept="3" />
+      <node id="8432634623182692333" at="70,61,71,124" concept="3" />
+      <node id="8432634623182691825" at="75,44,76,107" concept="9" />
+      <node id="8432634623182691838" at="79,60,80,120" concept="9" />
+      <node id="8432634623182691868" at="84,77,85,79" concept="8" />
+      <node id="8432634623182691873" at="85,79,86,23" concept="8" />
+      <node id="2613773951689797360" at="87,76,88,127" concept="3" />
+      <node id="2613773951689784546" at="89,14,90,345" concept="3" />
+      <node id="8432634623182691890" at="92,61,93,95" concept="3" />
+      <node id="8432634623182691917" at="96,59,97,108" concept="9" />
+      <node id="8432634623182691926" at="100,40,101,92" concept="3" />
+      <node id="8432634623182691978" at="106,56,107,102" concept="9" />
+      <node id="8432634623182691987" at="110,40,111,92" concept="3" />
+      <node id="8432634623182692012" at="117,167,118,82" concept="8" />
+      <node id="1150550330735063327" at="120,39,121,96" concept="10" />
+      <node id="1150550330735050658" at="121,96,122,148" concept="8" />
+      <node id="8432634623182692117" at="122,148,123,170" concept="9" />
+      <node id="8432634623182692041" at="125,9,126,170" concept="8" />
+      <node id="8432634623182692052" at="127,49,128,17" concept="2" />
+      <node id="8432634623182692086" at="131,41,132,199" concept="9" />
+      <node id="8432634623182692065" at="135,79,136,118" concept="3" />
+      <node id="8432634623182692093" at="137,7,138,113" concept="3" />
+      <node id="8432634623182692100" at="139,72,140,136" concept="3" />
+      <node id="8432634623182692124" at="143,70,144,116" concept="3" />
+      <node id="1150550330731078351" at="148,92,149,111" concept="8" />
+      <node id="1150550330731078364" at="150,78,151,162" concept="3" />
+      <node id="1150550330731078377" at="152,5,153,37" concept="9" />
+      <node id="7471623575883550814" at="156,79,157,102" concept="9" />
+      <node id="8432634623182692138" at="160,80,161,190" concept="8" />
+      <node id="8432634623182692160" at="163,177,164,139" concept="3" />
+      <node id="8432634623182692173" at="166,5,167,18" concept="9" />
+      <node id="8432634623182692183" at="170,51,171,208" concept="9" />
+      <node id="8432634623182692197" at="174,55,175,208" concept="9" />
+      <node id="8432634623182692219" at="179,55,180,85" concept="3" />
+      <node id="8432634623182692232" at="181,5,182,45" concept="9" />
+      <node id="8432634623182692249" at="186,69,187,64" concept="3" />
+      <node id="8432634623182692254" at="187,64,188,18" concept="9" />
+      <node id="8432634623182692256" at="189,5,190,17" concept="9" />
+      <node id="3685988995356018859" at="192,55,193,43" concept="9" />
+      <node id="8432634623182691821" at="197,0,198,0" concept="12" trace="method$pGvv" />
+      <node id="8432634623182691821" at="198,0,199,0" concept="12" trace="classifier$q_Y$" />
+      <node id="8432634623182691821" at="199,0,200,0" concept="12" trace="superclass$Mp9$" />
+      <node id="8432634623182691821" at="200,0,201,0" concept="12" trace="classifier$cxMr" />
+      <node id="8432634623182691821" at="201,0,202,0" concept="12" trace="implementedInterface$rujG" />
+      <node id="8432634623182691821" at="202,0,203,0" concept="12" trace="extendedInterface$PDVO" />
+      <node id="8432634623182691821" at="203,0,204,0" concept="12" trace="visibility$Yyua" />
+      <node id="8432634623182691821" at="204,0,205,0" concept="12" trace="enumConstant$qtgW" />
+      <node id="8432634623182691821" at="208,0,209,0" concept="12" trace="name$MnvL" />
+      <node id="8432634623182691821" at="212,0,213,0" concept="12" trace="ClassConcept$bK" />
+      <node id="8432634623182691821" at="213,0,214,0" concept="12" trace="AnonymousClass$Bt" />
+      <node id="8432634623182691821" at="214,0,215,0" concept="12" trace="Interface$db" />
+      <node id="8432634623182691821" at="215,0,216,0" concept="12" trace="BaseMethodDeclaration$kD" />
+      <node id="8432634623182691821" at="216,0,217,0" concept="12" trace="Classifier$Ix" />
+      <node id="8432634623182691821" at="217,0,218,0" concept="12" trace="EnumClass$Vk" />
+      <node id="8432634623182691821" at="218,0,219,0" concept="12" trace="PrivateVisibility$l0" />
+      <node id="2613773951689861818" at="89,12,91,7" concept="0" />
+      <node id="8432634623182692279" at="39,0,42,0" concept="1" trace="OverridingMethodsCalculator#(Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <node id="6941917182340209918" at="48,0,51,0" concept="7" trace="accept#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="8432634623182692314" at="64,0,67,0" concept="7" trace="accept#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="8432634623182692331" at="69,5,72,5" concept="6" />
+      <node id="8432634623182691822" at="75,0,78,0" concept="7" trace="getOverridingMethods#()Ljava/util/Set;" />
+      <node id="8432634623182691833" at="79,0,82,0" concept="7" trace="getBaseMethods#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/util/Set;" />
+      <node id="8432634623182691888" at="91,7,94,7" concept="6" />
+      <node id="8432634623182691915" at="96,0,99,0" concept="7" trace="accept#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="8432634623182691924" at="100,0,103,0" concept="7" trace="visit#(Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <node id="8432634623182691976" at="106,0,109,0" concept="7" trace="accept#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="8432634623182691985" at="110,0,113,0" concept="7" trace="visit#(Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <node id="8432634623182692050" at="126,170,129,7" concept="6" />
+      <node id="8432634623182692084" at="131,0,134,0" concept="7" trace="accept#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="8432634623182692062" at="134,26,137,7" concept="5" />
+      <node id="8432634623182692098" at="138,113,141,7" concept="6" />
+      <node id="8432634623182692122" at="142,5,145,5" concept="6" />
+      <node id="1150550330731078362" at="149,111,152,5" concept="5" />
+      <node id="7471623575883550878" at="156,0,159,0" concept="7" trace="packagesAreTheSame#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="8432634623182692153" at="162,84,165,7" concept="5" />
+      <node id="8432634623182692177" at="170,0,173,0" concept="13" trace="canOverride#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="8432634623182692191" at="174,0,177,0" concept="13" trace="canBeOverridden#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="8432634623182692217" at="178,66,181,5" concept="6" />
+      <node id="3685988995356018859" at="192,0,195,0" concept="13" trace="isNotEmptyString#(Ljava/lang/String;)Z" />
+      <node id="8432634623182692242" at="185,87,189,5" concept="6" />
+      <node id="6941917182340209925" at="53,5,58,5" concept="6" />
+      <node id="2613773951689787845" at="86,23,91,7" concept="6" />
+      <node id="8432634623182692115" at="120,0,125,0" concept="7" trace="accept#(Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="8432634623182692056" at="129,7,134,26" concept="8" />
+      <node id="8432634623182692151" at="161,190,166,5" concept="6" />
+      <node id="8432634623182692205" at="178,0,184,0" concept="13" trace="safeGet#(Ljava/util/Map;null)Ljava/util/Set;" />
+      <node id="6941917182340209903" at="46,102,53,5" concept="5" />
+      <node id="8432634623182692309" at="62,102,69,5" concept="5" />
+      <node id="1150550330731132880" at="148,0,155,0" concept="13" trace="copyMap#(Ljava/util/Map;)Ljava/util/Map;" />
+      <node id="8432634623182692238" at="185,0,192,0" concept="13" trace="addIfNotContains#(Ljava/util/Set;Lorg/jetbrains/mps/openapi/model/SNode;)Z" />
+      <node id="8432634623182691898" at="94,7,103,9" concept="3" />
+      <node id="8432634623182691958" at="104,81,113,9" concept="3" />
+      <node id="8432634623182692133" at="160,0,169,0" concept="13" trace="getInstanceMethods#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/Iterable;" />
+      <node id="8432634623182692289" at="61,0,74,0" concept="1" trace="OverridingMethodsCalculator#(Lorg/jetbrains/mps/openapi/model/SNode;Ljava/lang/Iterable;)V" />
+      <node id="6941917182340060244" at="43,0,60,0" concept="1" trace="OverridingMethodsCalculator#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <node id="8432634623182692038" at="118,82,142,5" concept="5" />
+      <node id="8432634623182691998" at="117,0,147,0" concept="7" trace="collectOverridingMethods#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Ljava/util/Map;Ljava/util/Set;)V" />
+      <node id="8432634623182691862" at="83,171,114,5" concept="6" />
+      <node id="8432634623182691848" at="83,0,116,0" concept="7" trace="collectOverridingMethodsInClassifierHierarchy#(Lorg/jetbrains/mps/openapi/model/SNode;Ljava/util/Map;Ljava/util/Set;)V" />
+      <scope id="8432634623182692282" at="39,55,40,51" />
+      <scope id="6941917182340209919" at="48,39,49,31" />
+      <scope id="6941917182340209904" at="51,9,52,142" />
+      <scope id="8432634623182692315" at="64,39,65,31" />
+      <scope id="8432634623182692321" at="67,9,68,142" />
+      <scope id="8432634623182692332" at="70,61,71,124" />
+      <scope id="8432634623182691824" at="75,44,76,107" />
+      <scope id="8432634623182691837" at="79,60,80,120" />
+      <scope id="2613773951689787847" at="87,76,88,127" />
+      <scope id="2613773951689861819" at="89,14,90,345" />
+      <scope id="8432634623182691889" at="92,61,93,95" />
+      <scope id="8432634623182691916" at="96,59,97,108" />
+      <scope id="8432634623182691925" at="100,40,101,92" />
+      <scope id="8432634623182691977" at="106,56,107,102" />
+      <scope id="8432634623182691986" at="110,40,111,92" />
+      <scope id="8432634623182692051" at="127,49,128,17" />
+      <scope id="8432634623182692085" at="131,41,132,199" />
+      <scope id="8432634623182692064" at="135,79,136,118" />
+      <scope id="8432634623182692099" at="139,72,140,136" />
+      <scope id="8432634623182692123" at="143,70,144,116" />
+      <scope id="1150550330731078363" at="150,78,151,162" />
+      <scope id="7471623575883550738" at="156,79,157,102" />
+      <scope id="8432634623182692159" at="163,177,164,139" />
+      <scope id="8432634623182692182" at="170,51,171,208" />
+      <scope id="8432634623182692196" at="174,55,175,208" />
+      <scope id="8432634623182692218" at="179,55,180,85" />
+      <scope id="3685988995356018859" at="192,55,193,43" />
+      <scope id="8432634623182692248" at="186,69,188,18" />
+      <scope id="8432634623182692279" at="39,0,42,0">
+        <var name="container" id="8432634623182692287" />
+      </scope>
+      <scope id="6941917182340209918" at="48,0,51,0">
+        <var name="it" id="6941917182340209918" />
+      </scope>
+      <scope id="6941917182340209926" at="54,61,57,120">
+        <var name="dummy" id="6941917182340328341" />
+      </scope>
+      <scope id="8432634623182692314" at="64,0,67,0">
+        <var name="it" id="8432634623182692314" />
+      </scope>
+      <scope id="8432634623182691822" at="75,0,78,0" />
+      <scope id="8432634623182691833" at="79,0,82,0">
+        <var name="overridingMethod" id="8432634623182691834" />
+      </scope>
+      <scope id="8432634623182691915" at="96,0,99,0">
+        <var name="implementedInterface" id="8432634623182691915" />
+      </scope>
+      <scope id="8432634623182691924" at="100,0,103,0">
+        <var name="intfc" id="8432634623182691924" />
+      </scope>
+      <scope id="8432634623182691976" at="106,0,109,0">
+        <var name="extendedInterface" id="8432634623182691976" />
+      </scope>
+      <scope id="8432634623182691985" at="110,0,113,0">
+        <var name="intfc" id="8432634623182691985" />
+      </scope>
+      <scope id="8432634623182692116" at="120,39,123,170">
+        <var name="enumConstant" id="1150550330735050659" />
+      </scope>
+      <scope id="8432634623182692084" at="131,0,134,0">
+        <var name="it" id="8432634623182692084" />
+      </scope>
+      <scope id="8432634623182692062" at="134,26,137,7">
+        <var name="overridingMethod" id="8432634623182692063" />
+      </scope>
+      <scope id="1150550330731078362" at="149,111,152,5">
+        <var name="methodName" id="1150550330731078373" />
+      </scope>
+      <scope id="7471623575883550878" at="156,0,159,0">
+        <var name="classifier" id="7471623575883550823" />
+        <var name="superClassifier" id="7471623575883550821" />
+      </scope>
+      <scope id="8432634623182692152" at="162,84,165,7" />
+      <scope id="8432634623182692153" at="162,84,165,7">
+        <var name="enumConstant" id="8432634623182692154" />
+      </scope>
+      <scope id="8432634623182692177" at="170,0,173,0">
+        <var name="method" id="8432634623182692178" />
+      </scope>
+      <scope id="8432634623182692191" at="174,0,177,0">
+        <var name="method" id="8432634623182692192" />
+      </scope>
+      <scope id="3685988995356018859" at="192,0,195,0">
+        <var name="str" id="3685988995356018859" />
+      </scope>
+      <scope id="8432634623182692216" at="178,66,182,45" />
+      <scope id="8432634623182692115" at="120,0,125,0">
+        <var name="it" id="8432634623182692115" />
+      </scope>
+      <scope id="1150550330731078348" at="148,92,153,37">
+        <var name="methodNameToMethodMapCopy" id="1150550330731078352" />
+      </scope>
+      <scope id="8432634623182692241" at="185,87,190,17" />
+      <scope id="8432634623182692205" at="178,0,184,0">
+        <var name="key" id="8432634623182692211" />
+        <var name="map" id="8432634623182692206" />
+      </scope>
+      <scope id="6941917182340209903" at="46,102,53,5">
+        <var name="methodToCheck" id="6941917182340209914" />
+      </scope>
+      <scope id="8432634623182692309" at="62,102,69,5">
+        <var name="methodToCheck" id="8432634623182692310" />
+      </scope>
+      <scope id="1150550330731132880" at="148,0,155,0">
+        <var name="nameToMethodsMap" id="1150550330731078379" />
+      </scope>
+      <scope id="8432634623182692137" at="160,80,167,18">
+        <var name="result" id="8432634623182692139" />
+      </scope>
+      <scope id="8432634623182692238" at="185,0,192,0">
+        <var name="classifier" id="8432634623182692261" />
+        <var name="classifierSet" id="8432634623182692258" />
+      </scope>
+      <scope id="8432634623182691957" at="104,81,113,9" />
+      <scope id="8432634623182692133" at="160,0,169,0">
+        <var name="containingClassifier" id="8432634623182692134" />
+      </scope>
+      <scope id="8432634623182692297" at="61,80,72,5">
+        <var name="nameToMethodsMap" id="8432634623182692299" />
+      </scope>
+      <scope id="8432634623182692289" at="61,0,74,0">
+        <var name="container" id="8432634623182692290" />
+        <var name="methods" id="8432634623182692292" />
+      </scope>
+      <scope id="6941917182340060248" at="43,75,58,5">
+        <var name="nameToMethodsMap" id="6941917182340209893" />
+        <var name="result" id="6941917182340215620" />
+      </scope>
+      <scope id="8432634623182692040" at="125,9,141,7">
+        <var name="methodsWithNameOfSuperMethod" id="8432634623182692042" />
+        <var name="overridingMethods" id="8432634623182692057" />
+      </scope>
+      <scope id="6941917182340060244" at="43,0,60,0">
+        <var name="container" id="6941917182340206344" />
+        <var name="enumConstant" id="6941917182340208380" />
+      </scope>
+      <scope id="8432634623182691867" at="84,77,103,9">
+        <var name="clazz" id="8432634623182691869" />
+        <var name="superClass" id="8432634623182691874" />
+      </scope>
+      <scope id="8432634623182692038" at="118,82,142,5">
+        <var name="superClassifierMethod" id="8432634623182692039" />
+      </scope>
+      <scope id="8432634623182692011" at="117,167,145,5">
+        <var name="methodNameToMethodMapCopy" id="8432634623182692013" />
+      </scope>
+      <scope id="8432634623182691998" at="117,0,147,0">
+        <var name="classifier" id="595838485962319185" />
+        <var name="nameToMethodsMap" id="8432634623182692001" />
+        <var name="superClassifier" id="8432634623182691999" />
+        <var name="visitedClassifiers" id="8432634623182692006" />
+      </scope>
+      <scope id="8432634623182691861" at="83,171,114,5" />
+      <scope id="8432634623182691848" at="83,0,116,0">
+        <var name="classifier" id="8432634623182691849" />
+        <var name="nameToMethodsMap" id="8432634623182691851" />
+        <var name="visitedClassifiers" id="8432634623182691856" />
+      </scope>
+      <unit id="8432634623182691821" at="207,0,210,0" name="jetbrains.mps.baseLanguage.util.OverridingMethodsCalculator$PROPS" />
+      <unit id="6941917182340209918" at="47,71,51,5" name="jetbrains.mps.baseLanguage.util.OverridingMethodsCalculator$1" />
+      <unit id="8432634623182692314" at="63,72,67,5" name="jetbrains.mps.baseLanguage.util.OverridingMethodsCalculator$2" />
+      <unit id="8432634623182691915" at="95,155,99,7" name="jetbrains.mps.baseLanguage.util.OverridingMethodsCalculator$3" />
+      <unit id="8432634623182691924" at="99,22,103,7" name="jetbrains.mps.baseLanguage.util.OverridingMethodsCalculator$4" />
+      <unit id="8432634623182691976" at="105,202,109,7" name="jetbrains.mps.baseLanguage.util.OverridingMethodsCalculator$5" />
+      <unit id="8432634623182691985" at="109,22,113,7" name="jetbrains.mps.baseLanguage.util.OverridingMethodsCalculator$6" />
+      <unit id="8432634623182692084" at="130,98,134,7" name="jetbrains.mps.baseLanguage.util.OverridingMethodsCalculator$7" />
+      <unit id="8432634623182692115" at="119,234,125,5" name="jetbrains.mps.baseLanguage.util.OverridingMethodsCalculator$8" />
+      <unit id="8432634623182691821" at="211,0,220,0" name="jetbrains.mps.baseLanguage.util.OverridingMethodsCalculator$CONCEPTS" />
+      <unit id="8432634623182691821" at="196,0,206,0" name="jetbrains.mps.baseLanguage.util.OverridingMethodsCalculator$LINKS" />
+      <unit id="8432634623182691821" at="35,0,221,0" name="jetbrains.mps.baseLanguage.util.OverridingMethodsCalculator" />
+    </file>
+  </root>
+</debug-info>
+

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-c00jovsqkc9asbncsdsshyw181nvhpj" />
+<product version="3" modelHash="7vz244lm5behj8tm1b4qv2yuhyqba4j">
+  <files names="AppendOperation_DataFlow.java:CollectionAppendPart_DataFlow.java:ConceptTextGenDeclaration_DataFlow.java:ConstantStringAppendPart_DataFlow.java:DataFlowAspectDescriptorImpl.java:DecreaseDepthOperation_DataFlow.java:FoundErrorOperation_DataFlow.java:IncreaseDepthOperation_DataFlow.java:IndentBufferOperation_DataFlow.java:LanguageTextGenDeclaration_DataFlow.java:NewLineAppendPart_DataFlow.java:NodeAppendPart_DataFlow.java:OperationCall_DataFlow.java:OperationDeclaration_DataFlow.java:UtilityMethodCall_DataFlow.java:UtilityMethodDeclaration_DataFlow.java:WithIndentOperation_DataFlow.java" />
+</product>
 

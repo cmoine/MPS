@@ -16,13 +16,12 @@
 package jetbrains.mps.newTypesystem;
 
 import jetbrains.mps.smodel.NodeReadAccessCasterInEditor;
-import jetbrains.mps.typesystem.TypeSystemReporter;
 import jetbrains.mps.typesystem.inference.TypeChecker;
+import jetbrains.mps.typesystem.inference.TypeCheckerHelper;
 import jetbrains.mps.typesystem.inference.TypeCheckingContext;
 import jetbrains.mps.typesystem.inference.util.StructuralNodeSet;
 import jetbrains.mps.typesystem.inference.util.SubtypingCache;
 import jetbrains.mps.typesystemEngine.util.LatticeUtil;
-import jetbrains.mps.util.Computable;
 import jetbrains.mps.util.Pair;
 import org.jetbrains.mps.openapi.model.SNode;
 
@@ -42,28 +41,30 @@ public class SubtypingResolver {
   private final boolean myWeak;
   final TypeCheckingContext myTypeCheckingContext;
   final Collection<Pair<SNode,SNode>> myMatchingPairs;
+  private final TypeCheckerHelper myTypeCheckerHelper;
 
   public SubtypingResolver(boolean isWeak, TypeCheckingContext typeCheckingContext, /*out*/ Collection<Pair<SNode, SNode>> matchingPairs) {
     this.myWeak = isWeak;
     this.myTypeCheckingContext = typeCheckingContext;
+    this.myTypeCheckerHelper = typeCheckingContext.getTypeCheckerHelper();
     this.myMatchingPairs = matchingPairs;
   }
 
-  public SubtypingResolver(boolean isWeak) {
-    this(isWeak, null, null);
+  public SubtypingResolver(boolean isWeak, TypeCheckerHelper typeCheckerHelper) {
+    this.myWeak = isWeak;
+    this.myTypeCheckingContext = null;
+    this.myMatchingPairs = null;
+    myTypeCheckerHelper = typeCheckerHelper;
   }
 
   public boolean calcIsSubType(final SNode subType, final SNode superType) {
     long start = System.nanoTime();
 
-    Boolean aBoolean = NodeReadAccessCasterInEditor.runReadTransparentAction(new Computable<Boolean>() {
-      @Override
-      public Boolean compute() {
-        boolean result = isSubType(subType, superType);
-        return result;
-      }
+    Boolean aBoolean = NodeReadAccessCasterInEditor.runReadTransparentAction(() -> {
+      boolean result = isSubType(subType, superType);
+      return result;
     });
-    TypeSystemReporter.getInstance().reportIsSubType(subType, superType, (System.nanoTime() - start));
+    myTypeCheckerHelper.getTypeSystemReporter().reportIsSubType(subType, superType, (System.nanoTime() - start));
     return aBoolean;
   }
 
@@ -83,7 +84,7 @@ public class SubtypingResolver {
     if (TypesUtil.match(subType, superType, myMatchingPairs)) {
       return true;
     }
-    Pair<Boolean, Boolean> byReplacementRules = TypeChecker.getInstance().getSubtypingManager().isSubTypeByReplacementRulesAuth(subType, superType, myWeak);
+    Pair<Boolean, Boolean> byReplacementRules = myTypeCheckerHelper.getSubtypingManager().isSubTypeByReplacementRulesAuth(subType, superType, myWeak);
     if (byReplacementRules.o2) {
       return addToCache(subType, superType, byReplacementRules.o1, myWeak);
     }
@@ -96,7 +97,7 @@ public class SubtypingResolver {
   private boolean meetsAndJoins(SNode subType, SNode superType, boolean isWeak) {
     if (LatticeUtil.isJoin(superType)) {
       for (SNode argument : LatticeUtil.getJoinArguments(superType)) {
-        if (!TypesUtil.hasVariablesInside(argument) && TypeChecker.getInstance().getSubtypingManager().isSubTypeByReplacementRules(subType, argument, isWeak)) {
+        if (!TypesUtil.hasVariablesInside(argument) && myTypeCheckerHelper.getSubtypingManager().isSubTypeByReplacementRules(subType, argument, isWeak)) {
           return true;
         }
         if (isSubType(subType, argument)) {
@@ -106,7 +107,7 @@ public class SubtypingResolver {
     }
     if (LatticeUtil.isMeet(subType)) {
       for (SNode argument : LatticeUtil.getMeetArguments(subType)) {
-        if (!TypesUtil.hasVariablesInside(superType) && TypeChecker.getInstance().getSubtypingManager().isSubTypeByReplacementRules(argument, superType, isWeak)) {
+        if (!TypesUtil.hasVariablesInside(superType) && myTypeCheckerHelper.getSubtypingManager().isSubTypeByReplacementRules(argument, superType, isWeak)) {
           return true;
         }
         if (isSubType(argument, superType)) {
@@ -121,23 +122,14 @@ public class SubtypingResolver {
           result = false;
         }
       }
-      if (result) {
-        return true;
-      }     /*
-    if (!TypesUtil.hasVariablesInside(superType) && !TypesUtil.hasVariablesInside(subType)) {
-      for (SNode argument : LatticeUtil.getMeetArguments(superType)) {
-        if (isSubType(subType, argument, info, state, isWeak)) {
-          return true;
-        }
-      }
-    }       */
+      return result;
     }
     return false;
   }
 
   private boolean searchInSuperTypes(SNode subType, SupertypeMatcher superType, boolean isWeak, boolean canAskCache) {
-    Queue<SNode> queue = new LinkedList<SNode>();
-    StructuralNodeSet<SNode> visited = new StructuralNodeSet<SNode>();
+    Queue<SNode> queue = new LinkedList<>();
+    StructuralNodeSet<SNode> visited = new StructuralNodeSet<>();
     queue.add(subType);
     visited.add(subType);
     while (!queue.isEmpty()) {
@@ -149,7 +141,8 @@ public class SubtypingResolver {
         return true;
       }
       StructuralNodeSet<?> ancestors = new StructuralNodeSet();
-      TypeChecker.getInstance().getSubtypingManager().collectImmediateSuperTypes(cur, isWeak, ancestors, myTypeCheckingContext);
+      // FIXME myTypeCheckingContext can be null here!
+      myTypeCheckerHelper.getSubtypingManager().collectImmediateSuperTypes(cur, isWeak, ancestors, myTypeCheckingContext);
       for (SNode ancestor: ancestors) {
         if (visited.contains(ancestor)) continue;
         visited.addStructurally(ancestor);
@@ -171,7 +164,7 @@ public class SubtypingResolver {
   }
 
   private Boolean getIsSubTypeCacheAnswer(SNode subType, SNode superType, boolean isWeak) {
-    SubtypingCache cache = TypeChecker.getInstance().getSubtypingCache();
+    SubtypingCache cache = myTypeCheckerHelper.getSubtypingCache();
     if (cache != null) {
       Boolean answer = cache.getIsSubtype(subType, superType, isWeak);
       if (answer != null) {
@@ -182,14 +175,14 @@ public class SubtypingResolver {
   }
 
   private void addToCache(SNode subType, SupertypeMatcher superType, boolean answer, boolean isWeak) {
-    SubtypingCache cache = TypeChecker.getInstance().getSubtypingCache();
+    SubtypingCache cache = myTypeCheckerHelper.getSubtypingCache();
     if (cache != null) {
       cache.cacheIsSubtype(subType, superType.getSuperType(), answer, isWeak);
     }
   }
 
   private boolean addToCache(SNode subType, SNode superType, boolean answer, boolean isWeak) {
-    SubtypingCache cache = TypeChecker.getInstance().getSubtypingCache();
+    SubtypingCache cache = myTypeCheckerHelper.getSubtypingCache();
     if (cache != null) {
       cache.cacheIsSubtype(subType, superType, answer, isWeak);
     }

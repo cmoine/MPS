@@ -48,16 +48,12 @@ import java.awt.event.MouseMotionListener;
 /**
  * A combo-box button that shows menu based on a {@link ListPopupStep}. Copied from {@link com.intellij.openapi.actionSystem.ex.ComboBoxAction} and simplified.
  */
-abstract class AbstractStepComboBoxButton extends JButton implements UserActivityProviderComponent {
+abstract class AbstractStepComboBoxButton extends ContextAssistantButton implements UserActivityProviderComponent {
   private boolean myForcePressed = false;
   private JBPopup myPopup;
 
   AbstractStepComboBoxButton(String text) {
-    this();
-    setText(text + " \u25be"); // BLACK DOWN-POINTING SMALL TRIANGLE (U+25BE)
-  }
-
-  private AbstractStepComboBoxButton() {
+    super(text + " \u25be");
     setModel(new MyButtonModel());
     setHorizontalAlignment(LEFT);
     putClientProperty("styleCombo", Boolean.TRUE);
@@ -65,7 +61,6 @@ abstract class AbstractStepComboBoxButton extends JButton implements UserActivit
     Insets margins = getMargin();
     setMargin(JBUI.insets(margins.top, 2, margins.bottom, 2));
 
-    setFont(UIUtil.getLabelFont());
     setOpaque(true);
 
     InputMap inputMap = getInputMap();
@@ -98,11 +93,11 @@ abstract class AbstractStepComboBoxButton extends JButton implements UserActivit
       @Override
       public void mouseDragged(MouseEvent e) {
         mouseMoved(MouseEventAdapter.convert(e, e.getComponent(),
-            MouseEvent.MOUSE_MOVED,
-            e.getWhen(),
-            e.getModifiers() | e.getModifiersEx(),
-            e.getX(),
-            e.getY()));
+                                             MouseEvent.MOUSE_MOVED,
+                                             e.getWhen(),
+                                             e.getModifiers() | e.getModifiersEx(),
+                                             e.getX(),
+                                             e.getY()));
       }
 
       @Override
@@ -125,8 +120,9 @@ abstract class AbstractStepComboBoxButton extends JButton implements UserActivit
       if (rectangle.contains(eventPoint)) {
         MouseEvent event = SwingUtilities.convertMouseEvent(e.getComponent(), e, myPopup.getContent());
         Component component = SwingUtilities.getDeepestComponentAt(content, event.getX(), event.getY());
-        if (component != null)
+        if (component != null) {
           component.dispatchEvent(event);
+        }
       }
     }
   }

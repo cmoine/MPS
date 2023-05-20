@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="350dzs675yvna342jfq3gu0x9b8foj4" />
+<product version="3" modelHash="-bwudmm77945a2easwvlywvghkmx5maz">
+  <files names="ConstraintsAspectDescriptor.java:ParallelLoopVariable_Constraints.java:ThreadPool_Constraints.java" />
+</product>
 

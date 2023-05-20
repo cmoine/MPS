@@ -68,20 +68,20 @@ class StyleAttributeMap<T> extends StyleMap<Object> {
   }
 
   public Collection<IntPair<Object>> getAll() {
-    ArrayList<IntPair<Object>> result = new ArrayList<IntPair<Object>>(indexes.length);
+    ArrayList<IntPair<Object>> result = new ArrayList<>(indexes.length);
     for (int i = 0; i < indexes.length; i++) {
-      result.add(new IntPair<Object>(indexes[i], values[i]));
+      result.add(new IntPair<>(indexes[i], values[i]));
     }
     return result;
   }
 
   public Collection<IntPair<T>> getDiscardNullReplaced() {
-    ArrayList<IntPair<T>> result = new ArrayList<IntPair<T>>(indexes.length);
+    ArrayList<IntPair<T>> result = new ArrayList<>(indexes.length);
     for (int i = 0; i < indexes.length; i++) {
       if (values[i] instanceof DiscardValue) {
-        result.add(new IntPair<T>(indexes[i], null));
+        result.add(new IntPair<>(indexes[i], null));
       } else {
-        result.add(new IntPair<T>(indexes[i], (T) values[i]));
+        result.add(new IntPair<>(indexes[i], (T) values[i]));
       }
     }
     return result;

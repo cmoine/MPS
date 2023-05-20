@@ -16,6 +16,7 @@
 package jetbrains.mps.workbench.editors;
 
 import com.intellij.openapi.fileEditor.*;
+import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -25,7 +26,7 @@ import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
-public class MPSLanguageEditorProvider implements FileEditorProvider {
+public class MPSLanguageEditorProvider implements FileEditorProvider, DumbAware {
   @Override
   public boolean accept(@NotNull Project project, @NotNull VirtualFile file) {
     return file instanceof MPSLanguageVirtualFile;
@@ -45,12 +46,7 @@ public class MPSLanguageEditorProvider implements FileEditorProvider {
   @Override
   @NotNull
   public FileEditorState readState(@NotNull Element sourceElement, @NotNull Project project, @NotNull VirtualFile file) {
-    return new FileEditorState() {
-      @Override
-      public boolean canBeMergedWith(FileEditorState otherState, FileEditorStateLevel level) {
-        return false;
-      }
-    };
+    return (otherState, level) -> false;
   }
 
   @Override

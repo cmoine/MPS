@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="-839lqaesmxvabhe5ufybx2gm9au225n">
+  <files names="AnalyzeModuleDependencies_Action.java:ContributeToAnalyzeModule_ActionGroup.java:Depanalyzer_ApplicationPlugin.java:Depanalyzer_ProjectPlugin.java:DependenciesKeyMap_KeymapChanges.java:ModuleDependenies_Tool.java:SafeDeleteModuleDependency_Action.java:ShowDependenciesInViewer_Action.java:ShowInDependenciesViewer_Action.java:startup.properties" />
+</product>
+

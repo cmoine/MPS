@@ -5,18 +5,18 @@ package jetbrains.mps.baseLanguage.math.editor;
 import jetbrains.mps.smodel.runtime.IconResource;
 
 public class IconContainer {
-  protected static IconResource RESOURCE_a0a9c3d6 = new IconResource("max.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a9c4d6 = new IconResource("min.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a9c5d6 = new IconResource("prod.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a9c6d6 = new IconResource("sum.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a9c3h = new IconResource("column.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a9c4h = new IconResource("matrix.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a9c3i = new IconResource("plus.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a9c4i = new IconResource("minus.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a9c5i = new IconResource("times.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a9c6i = new IconResource("frac.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a9c3j = new IconResource("abs.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a9c4j = new IconResource("log.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a9c5j = new IconResource("exp.png", IconContainer.class);
-  protected static IconResource RESOURCE_a0a9c6j = new IconResource("power.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a9c6g8 = new IconResource("max.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a9c7g8 = new IconResource("min.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a9c8g8 = new IconResource("prod.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a9c9g8 = new IconResource("sum.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a9c6j = new IconResource("column.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a9c7j = new IconResource("matrix.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a9c6k = new IconResource("plus.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a9c7k = new IconResource("minus.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a9c8k = new IconResource("times.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a9c9k = new IconResource("frac.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a9c6l = new IconResource("abs.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a9c7l = new IconResource("log.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a9c8l = new IconResource("exp.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a9c9l = new IconResource("power.png", IconContainer.class);
 }

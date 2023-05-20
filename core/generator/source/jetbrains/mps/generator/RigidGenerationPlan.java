@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,13 @@
  */
 package jetbrains.mps.generator;
 
+import jetbrains.mps.generator.plan.PlanIdentity;
 import jetbrains.mps.generator.runtime.TemplateModel;
 import jetbrains.mps.generator.runtime.TemplateModule;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SLanguage;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -31,17 +33,17 @@ import java.util.List;
  * @since 3.3
  */
 public class RigidGenerationPlan implements ModelGenerationPlan {
-  private final String myName;
+  private final PlanIdentity myIdentity;
   private final Step[] mySteps;
 
-  public RigidGenerationPlan(@NotNull String name, @NotNull Step... steps) {
-    myName = name;
+  public RigidGenerationPlan(@NotNull PlanIdentity planIdentity, @NotNull Step... steps) {
+    myIdentity = planIdentity;
     mySteps = steps;
   }
 
-  public RigidGenerationPlan(@NotNull String name, @NotNull Collection<Step> steps) {
-    myName = name;
-    mySteps = steps.toArray(new Step[steps.size()]);
+  public RigidGenerationPlan(@NotNull PlanIdentity planIdentity, @NotNull Collection<Step> steps) {
+    myIdentity = planIdentity;
+    mySteps = steps.toArray(new Step[0]);
   }
 
   @Override
@@ -51,8 +53,10 @@ public class RigidGenerationPlan implements ModelGenerationPlan {
 
   @Override
   public Collection<TemplateModule> getGenerators() {
-    ArrayList<TemplateModule> rv = new ArrayList<TemplateModule>(mySteps.length);
-    for (Step p : mySteps) {
+    ArrayList<TemplateModule> rv = new ArrayList<>(mySteps.length * 2);
+    ArrayDeque<Step> queue = new ArrayDeque<>(Arrays.asList(mySteps));
+    while (!queue.isEmpty()) {
+      Step p = queue.removeFirst();
       if (p instanceof Transform) {
         for (TemplateModel tm : ((Transform) p).getTemplateModels()) {
           TemplateModule templateModule = tm.getModule();
@@ -62,14 +66,11 @@ public class RigidGenerationPlan implements ModelGenerationPlan {
             rv.add(templateModule);
           }
         }
+      } else if (p instanceof Fork) {
+        queue.addAll(((Fork) p).getBranch());
       }
     }
     return rv;
-  }
-
-  @NotNull
-  public String getName() {
-    return myName;
   }
 
   @Override

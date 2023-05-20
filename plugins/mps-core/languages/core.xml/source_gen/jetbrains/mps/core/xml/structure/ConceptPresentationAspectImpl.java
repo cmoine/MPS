@@ -4,99 +4,247 @@ package jetbrains.mps.core.xml.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_XmlAttribute = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlBaseAttribute = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlBaseElement = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlBasePrologElement = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlCDATA = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlCharRef = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlCharRefValue = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlComment = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlCommentLine = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlContent = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlDoctypeDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlDocument = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlElement = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlEntityRef = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlEntityRefValue = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlExternalId = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlFile = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlNoSpaceValue = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlPart = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlProcessingInstruction = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlProlog = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlPrologElement = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlText = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlTextValue = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlValuePart = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_XmlWhitespace = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_XmlAttribute;
+  private ConceptPresentation props_XmlBaseAttribute;
+  private ConceptPresentation props_XmlBaseElement;
+  private ConceptPresentation props_XmlBasePrologElement;
+  private ConceptPresentation props_XmlCDATA;
+  private ConceptPresentation props_XmlCharRef;
+  private ConceptPresentation props_XmlCharRefValue;
+  private ConceptPresentation props_XmlComment;
+  private ConceptPresentation props_XmlCommentLine;
+  private ConceptPresentation props_XmlContent;
+  private ConceptPresentation props_XmlDeclaration;
+  private ConceptPresentation props_XmlDoctypeDeclaration;
+  private ConceptPresentation props_XmlDocument;
+  private ConceptPresentation props_XmlElement;
+  private ConceptPresentation props_XmlEntityRef;
+  private ConceptPresentation props_XmlEntityRefValue;
+  private ConceptPresentation props_XmlExternalId;
+  private ConceptPresentation props_XmlFile;
+  private ConceptPresentation props_XmlNoSpaceValue;
+  private ConceptPresentation props_XmlPart;
+  private ConceptPresentation props_XmlProcessingInstruction;
+  private ConceptPresentation props_XmlProlog;
+  private ConceptPresentation props_XmlPrologElement;
+  private ConceptPresentation props_XmlSingleLineText;
+  private ConceptPresentation props_XmlText;
+  private ConceptPresentation props_XmlTextValue;
+  private ConceptPresentation props_XmlValuePart;
+  private ConceptPresentation props_XmlWhitespace;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.XmlAttribute:
+        if (props_XmlAttribute == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("attribute");
+          props_XmlAttribute = cpb.create();
+        }
         return props_XmlAttribute;
-      case 1:
+      case LanguageConceptSwitch.XmlBaseAttribute:
+        if (props_XmlBaseAttribute == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_XmlBaseAttribute = cpb.create();
+        }
         return props_XmlBaseAttribute;
-      case 2:
+      case LanguageConceptSwitch.XmlBaseElement:
+        if (props_XmlBaseElement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_XmlBaseElement = cpb.create();
+        }
         return props_XmlBaseElement;
-      case 3:
+      case LanguageConceptSwitch.XmlBasePrologElement:
+        if (props_XmlBasePrologElement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_XmlBasePrologElement = cpb.create();
+        }
         return props_XmlBasePrologElement;
-      case 4:
+      case LanguageConceptSwitch.XmlCDATA:
+        if (props_XmlCDATA == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("<![CDATA");
+          props_XmlCDATA = cpb.create();
+        }
         return props_XmlCDATA;
-      case 5:
+      case LanguageConceptSwitch.XmlCharRef:
+        if (props_XmlCharRef == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("single character");
+          cpb.rawPresentation("&#");
+          props_XmlCharRef = cpb.create();
+        }
         return props_XmlCharRef;
-      case 6:
+      case LanguageConceptSwitch.XmlCharRefValue:
+        if (props_XmlCharRefValue == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("single character");
+          cpb.rawPresentation("&#");
+          props_XmlCharRefValue = cpb.create();
+        }
         return props_XmlCharRefValue;
-      case 7:
+      case LanguageConceptSwitch.XmlComment:
+        if (props_XmlComment == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("<!--");
+          props_XmlComment = cpb.create();
+        }
         return props_XmlComment;
-      case 8:
+      case LanguageConceptSwitch.XmlCommentLine:
+        if (props_XmlCommentLine == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("XmlCommentLine");
+          props_XmlCommentLine = cpb.create();
+        }
         return props_XmlCommentLine;
-      case 9:
+      case LanguageConceptSwitch.XmlContent:
+        if (props_XmlContent == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_XmlContent = cpb.create();
+        }
         return props_XmlContent;
-      case 10:
+      case LanguageConceptSwitch.XmlDeclaration:
+        if (props_XmlDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("xml declaration");
+          cpb.rawPresentation("<?xml");
+          props_XmlDeclaration = cpb.create();
+        }
         return props_XmlDeclaration;
-      case 11:
+      case LanguageConceptSwitch.XmlDoctypeDeclaration:
+        if (props_XmlDoctypeDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("xml doctype declaration");
+          cpb.rawPresentation("<!DOCTYPE");
+          props_XmlDoctypeDeclaration = cpb.create();
+        }
         return props_XmlDoctypeDeclaration;
-      case 12:
+      case LanguageConceptSwitch.XmlDocument:
+        if (props_XmlDocument == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("XmlDocument");
+          props_XmlDocument = cpb.create();
+        }
         return props_XmlDocument;
-      case 13:
+      case LanguageConceptSwitch.XmlElement:
+        if (props_XmlElement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("<element/>");
+          props_XmlElement = cpb.create();
+        }
         return props_XmlElement;
-      case 14:
+      case LanguageConceptSwitch.XmlEntityRef:
+        if (props_XmlEntityRef == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("entity reference");
+          cpb.rawPresentation("&");
+          props_XmlEntityRef = cpb.create();
+        }
         return props_XmlEntityRef;
-      case 15:
+      case LanguageConceptSwitch.XmlEntityRefValue:
+        if (props_XmlEntityRefValue == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("entity reference");
+          cpb.rawPresentation("&");
+          props_XmlEntityRefValue = cpb.create();
+        }
         return props_XmlEntityRefValue;
-      case 16:
+      case LanguageConceptSwitch.XmlExternalId:
+        if (props_XmlExternalId == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("XmlExternalId");
+          props_XmlExternalId = cpb.create();
+        }
         return props_XmlExternalId;
-      case 17:
+      case LanguageConceptSwitch.XmlFile:
+        if (props_XmlFile == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_XmlFile = cpb.create();
+        }
         return props_XmlFile;
-      case 18:
+      case LanguageConceptSwitch.XmlNoSpaceValue:
+        if (props_XmlNoSpaceValue == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("concatenates two values without spaces");
+          cpb.rawPresentation("<-no space->");
+          props_XmlNoSpaceValue = cpb.create();
+        }
         return props_XmlNoSpaceValue;
-      case 19:
+      case LanguageConceptSwitch.XmlPart:
+        if (props_XmlPart == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_XmlPart = cpb.create();
+        }
         return props_XmlPart;
-      case 20:
+      case LanguageConceptSwitch.XmlProcessingInstruction:
+        if (props_XmlProcessingInstruction == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("processing instruction");
+          cpb.rawPresentation("<?");
+          props_XmlProcessingInstruction = cpb.create();
+        }
         return props_XmlProcessingInstruction;
-      case 21:
+      case LanguageConceptSwitch.XmlProlog:
+        if (props_XmlProlog == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("XmlProlog");
+          props_XmlProlog = cpb.create();
+        }
         return props_XmlProlog;
-      case 22:
+      case LanguageConceptSwitch.XmlPrologElement:
+        if (props_XmlPrologElement == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_XmlPrologElement = cpb.create();
+        }
         return props_XmlPrologElement;
-      case 23:
+      case LanguageConceptSwitch.XmlSingleLineText:
+        if (props_XmlSingleLineText == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("single line");
+          cpb.rawPresentation("single line text");
+          props_XmlSingleLineText = cpb.create();
+        }
+        return props_XmlSingleLineText;
+      case LanguageConceptSwitch.XmlText:
+        if (props_XmlText == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("plain text");
+          cpb.rawPresentation("text");
+          props_XmlText = cpb.create();
+        }
         return props_XmlText;
-      case 24:
+      case LanguageConceptSwitch.XmlTextValue:
+        if (props_XmlTextValue == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("attribute value contains of text and entity references");
+          cpb.rawPresentation("text");
+          props_XmlTextValue = cpb.create();
+        }
         return props_XmlTextValue;
-      case 25:
+      case LanguageConceptSwitch.XmlValuePart:
+        if (props_XmlValuePart == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("attribute value");
+          props_XmlValuePart = cpb.create();
+        }
         return props_XmlValuePart;
-      case 26:
+      case LanguageConceptSwitch.XmlWhitespace:
+        if (props_XmlWhitespace == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("XmlWhitespace");
+          props_XmlWhitespace = cpb.create();
+        }
         return props_XmlWhitespace;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

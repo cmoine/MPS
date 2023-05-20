@@ -4,7 +4,6 @@ package jetbrains.mps.baseLanguage.doubleDispatch.typesystem;
 
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
@@ -13,6 +12,11 @@ import jetbrains.mps.internal.collections.runtime.Sequence;
 import java.util.Iterator;
 import jetbrains.mps.internal.collections.runtime.ILeftCombinator;
 import jetbrains.mps.lang.core.behavior.BaseConcept__BehaviorDescriptor;
+import org.jetbrains.mps.openapi.language.SProperty;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 
 /**
  * This describes a group of related dispatch methods, i.e. which dispatch to each other
@@ -22,11 +26,11 @@ public class DispatchGroupDescriptor {
   private boolean isStatic;
   private Iterable<SNode> otherParamTypes;
   public DispatchGroupDescriptor(SNode pattern) {
-    methodName = SPropertyOperations.getString(pattern, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name"));
-    isStatic = SNodeOperations.isInstanceOf(pattern, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfbbebabf0aL, "jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration"));
-    otherParamTypes = ListSequence.fromList(SLinkOperations.getChildren(pattern, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, 0xf8cc56b1feL, "parameter"))).skip(1).select(new ISelector<SNode, SNode>() {
+    methodName = SPropertyOperations.getString(pattern, PROPS.name$MnvL);
+    isStatic = SNodeOperations.isInstanceOf(pattern, CONCEPTS.StaticMethodDeclaration$FJ);
+    otherParamTypes = ListSequence.fromList(SLinkOperations.getChildren(pattern, LINKS.parameter$5xBj)).skip(1).select(new ISelector<SNode, SNode>() {
       public SNode select(SNode it) {
-        return SLinkOperations.getTarget(it, MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x450368d90ce15bc3L, 0x4ed4d318133c80ceL, "type"));
+        return SLinkOperations.getTarget(it, LINKS.type$a1UY);
       }
     });
   }
@@ -75,17 +79,17 @@ public class DispatchGroupDescriptor {
   private boolean typesEqual(SNode typ1, SNode typ2) {
     {
       final SNode cls = typ1;
-      if (SNodeOperations.isInstanceOf(cls, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x101de48bf9eL, "jetbrains.mps.baseLanguage.structure.ClassifierType"))) {
+      if (SNodeOperations.isInstanceOf(cls, CONCEPTS.ClassifierType$bL)) {
         {
           final SNode cls2 = typ2;
-          if (SNodeOperations.isInstanceOf(cls2, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x101de48bf9eL, "jetbrains.mps.baseLanguage.structure.ClassifierType"))) {
-            return SLinkOperations.getTarget(cls, MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x101de48bf9eL, 0x101de490babL, "classifier")) == SLinkOperations.getTarget(cls2, MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x101de48bf9eL, 0x101de490babL, "classifier"));
+          if (SNodeOperations.isInstanceOf(cls2, CONCEPTS.ClassifierType$bL)) {
+            return SLinkOperations.getTarget(cls, LINKS.classifier$cxMr) == SLinkOperations.getTarget(cls2, LINKS.classifier$cxMr);
           }
         }
         return false;
       }
     }
-    if (SNodeOperations.isInstanceOf(typ2, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x101de48bf9eL, "jetbrains.mps.baseLanguage.structure.ClassifierType"))) {
+    if (SNodeOperations.isInstanceOf(typ2, CONCEPTS.ClassifierType$bL)) {
       return false;
     }
     return BaseConcept__BehaviorDescriptor.getPresentation_idhEwIMiw.invoke(typ1).equals(BaseConcept__BehaviorDescriptor.getPresentation_idhEwIMiw.invoke(typ2));
@@ -93,10 +97,25 @@ public class DispatchGroupDescriptor {
   private int typeHashCode(SNode typ) {
     {
       final SNode cls = typ;
-      if (SNodeOperations.isInstanceOf(cls, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x101de48bf9eL, "jetbrains.mps.baseLanguage.structure.ClassifierType"))) {
-        return SLinkOperations.getTarget(cls, MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x101de48bf9eL, 0x101de490babL, "classifier")).hashCode();
+      if (SNodeOperations.isInstanceOf(cls, CONCEPTS.ClassifierType$bL)) {
+        return SLinkOperations.getTarget(cls, LINKS.classifier$cxMr).hashCode();
       }
     }
     return BaseConcept__BehaviorDescriptor.getPresentation_idhEwIMiw.invoke(typ).hashCode();
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept StaticMethodDeclaration$FJ = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfbbebabf0aL, "jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration");
+    /*package*/ static final SConcept ClassifierType$bL = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x101de48bf9eL, "jetbrains.mps.baseLanguage.structure.ClassifierType");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink parameter$5xBj = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, 0xf8cc56b1feL, "parameter");
+    /*package*/ static final SContainmentLink type$a1UY = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x450368d90ce15bc3L, 0x4ed4d318133c80ceL, "type");
+    /*package*/ static final SReferenceLink classifier$cxMr = MetaAdapterFactory.getReferenceLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x101de48bf9eL, 0x101de490babL, "classifier");
   }
 }

@@ -25,7 +25,7 @@ public class SortingSequence<U> extends Sequence<U> implements Iterable<U> {
     if (ascending) {
       this.comparator = comparator;
     } else {
-      this.comparator = new SortingSequence.InversedComparator<U>(comparator);
+      this.comparator = new InversedComparator<U>(comparator);
     }
   }
   public SortingSequence(AbstractSequence<U> input, Comparator<U> comparator) {
@@ -38,12 +38,12 @@ public class SortingSequence<U> extends Sequence<U> implements Iterable<U> {
   @Override
   public Iterator<U> iterator() {
     List<U> sortedInput = inputSortedWithSelector();
-    return new SortingSequence.UnmodifiableIterator<U>(sortedInput.listIterator());
+    return new UnmodifiableIterator<U>(sortedInput.listIterator());
   }
   @Override
   public ISequence<U> alsoSort(_FunctionTypes._return_P1_E0<? extends Comparable<?>, ? super U> selector, boolean ascending) {
     SelectComparator<U> selectComparator = new SelectComparator<U>(selector);
-    return new SortingSequence<U>(input, new SortingSequence.CompoundComparator<U>(comparator, (ascending ? selectComparator : new SortingSequence.InversedComparator<U>(selectComparator))));
+    return new SortingSequence<U>(input, new CompoundComparator<U>(comparator, (ascending ? selectComparator : new InversedComparator<U>(selectComparator))));
   }
   @SuppressWarnings(value = "unchecked")
   private List<U> inputSortedWithSelector() {

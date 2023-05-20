@@ -18,6 +18,7 @@ package jetbrains.mps.generator.impl;
 import jetbrains.mps.generator.IGeneratorLogger;
 import jetbrains.mps.generator.IGeneratorLogger.ProblemDescription;
 import jetbrains.mps.generator.impl.DismissTopMappingRuleException.MessageType;
+import jetbrains.mps.generator.runtime.GenerationException;
 import jetbrains.mps.generator.runtime.TemplateContext;
 import jetbrains.mps.util.SNodeOperations;
 import org.jetbrains.annotations.NotNull;
@@ -30,6 +31,13 @@ import java.util.Arrays;
 
 public class GeneratorUtil {
 
+  @Nullable
+  public static ProblemDescription describeTemplateLocation(GenerationException ex) {
+    return ex == null || ex.getTemplateModelLocation() == null ? null : new ProblemDescription(ex.getTemplateModelLocation(),
+        String.format("template location: %s", ex.getTemplateModelLocation()));
+  }
+
+  @Nullable
   public static ProblemDescription describeInput(TemplateContext ctx) {
     return ctx == null ? null : describeIfExists(ctx.getInput(), "input node");
   }

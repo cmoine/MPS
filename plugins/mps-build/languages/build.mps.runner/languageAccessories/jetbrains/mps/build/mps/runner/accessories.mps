@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model ref="r:4e917293-f5b9-4023-b36a-fcf2132c435c(jetbrains.mps.build.mps.runner.accessories)">
   <persistence version="9" />
+  <attribute name="doNotGenerate" value="true" />
   <languages>
     <use id="698a8d22-a104-47a0-ba8d-10e3ec237f13" name="jetbrains.mps.build.workflow" version="0" />
   </languages>
   <imports>
     <import index="zwni" ref="r:4c16a3e9-db56-4447-9b0d-14adce23db0d(jetbrains.mps.build.mps.accessories)" />
-    <import index="arit" ref="r:0d66e868-9778-4307-b6f9-4795c00f662f(jetbrains.mps.build.workflow.preset.general)" implicit="true" />
+    <import index="arit" ref="r:0d66e868-9778-4307-b6f9-4795c00f662f(jetbrains.mps.build.workflow.preset.general)" />
   </imports>
   <registry>
     <language id="698a8d22-a104-47a0-ba8d-10e3ec237f13" name="jetbrains.mps.build.workflow">
@@ -88,7 +89,7 @@
     <node concept="3bMsLL" id="o7F7WgLLi3" role="yghi5">
       <ref role="3bMsLK" to="arit:6l_Qx579cKM" resolve="clean" />
       <node concept="2VaFvH" id="o7F7WgLLia" role="3bMsLN">
-        <property role="TrG5h" value="clear.mps.cahces" />
+        <property role="TrG5h" value="clear.mps.caches" />
         <node concept="2Vbh7Z" id="o7F7WgLLtL" role="2VaTZU">
           <node concept="2pNNFK" id="o7F7WgLLtV" role="2Vbh7K">
             <property role="2pNNFO" value="delete" />

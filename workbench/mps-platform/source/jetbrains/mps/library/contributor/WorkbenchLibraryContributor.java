@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,27 +16,27 @@
 package jetbrains.mps.library.contributor;
 
 import jetbrains.mps.util.PathManager;
-import jetbrains.mps.vfs.openapi.FileSystem;
+import jetbrains.mps.vfs.IFileSystem;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashSet;
+import java.io.File;
+import java.util.Collections;
 import java.util.Set;
 
 /**
  * Contributes workbench modules -- IDE and platform (idea) layers
+ * Relevant for MPS from sources scenario only, there's no "workbench/" path in distribution
  */
 public final class WorkbenchLibraryContributor implements LibraryContributor {
-  private final FileSystem myFs;
+  private final IFileSystem myFs;
 
-  public WorkbenchLibraryContributor(@NotNull FileSystem fs) {
+  public WorkbenchLibraryContributor(@NotNull IFileSystem fs) {
     myFs = fs;
   }
 
   @Override
   public Set<LibDescriptor> getPaths() {
-    Set<LibDescriptor> res = new HashSet<LibDescriptor>();
-    res.add(new LibDescriptor(myFs.getFile(PathManager.getWorkbenchPath()), null));
-    return res;
+    return Collections.singleton(new LibDescriptor(myFs.getFile(new File(PathManager.getWorkbenchPath())), null, "MPS Workbench", false));
   }
 
   @Override

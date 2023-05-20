@@ -9,17 +9,20 @@ import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import java.util.List;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SEnumOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public class EditorCellModel_KeyMap extends KeyMapImpl {
   public EditorCellModel_KeyMap() {
     this.setApplicableToEveryModel(false);
     KeyMapAction action;
-    action = new EditorCellModel_KeyMap.EditorCellModel_KeyMap_Action0();
+    action = new EditorCellModel_KeyMap_Action0();
     this.putAction("ctrl+shift", "VK_F", action);
-    action = new EditorCellModel_KeyMap.EditorCellModel_KeyMap_Action1();
+    action = new EditorCellModel_KeyMap_Action1();
     this.putAction("ctrl+alt+shift", "VK_F", action);
   }
   public static class EditorCellModel_KeyMap_Action0 extends KeyMapActionImpl {
@@ -41,7 +44,7 @@ public class EditorCellModel_KeyMap extends KeyMapImpl {
       if (contextNode == null) {
         return false;
       }
-      if (!(SNodeOperations.isInstanceOf(contextNode, MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eafb9a39L, "jetbrains.mps.lang.editor.structure.EditorCellModel")))) {
+      if (!(SNodeOperations.isInstanceOf(contextNode, CONCEPTS.EditorCellModel$gN))) {
         return false;
       }
       return true;
@@ -51,10 +54,10 @@ public class EditorCellModel_KeyMap extends KeyMapImpl {
       this.execute_internal(editorContext, contextCell.getSNode(), this.getSelectedNodes(editorContext));
     }
     private void execute_internal(final EditorContext editorContext, final SNode node, final List<SNode> selectedNodes) {
-      if (!(SPropertyOperations.hasValue(node, MetaAdapterFactory.getProperty(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eafb9a39L, 0x1074c7a5760L, "attractsFocus"), "1", "0"))) {
-        SPropertyOperations.set(node, MetaAdapterFactory.getProperty(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eafb9a39L, 0x1074c7a5760L, "attractsFocus"), "1");
+      if (!(SEnumOperations.isMember(SPropertyOperations.getEnum(node, PROPS.attractsFocus$GvXL), 0x107507a4fafL))) {
+        SPropertyOperations.setEnum(node, PROPS.attractsFocus$GvXL, 0x107507a4fafL, "attractsFocus");
       } else {
-        SPropertyOperations.set(node, MetaAdapterFactory.getProperty(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eafb9a39L, 0x1074c7a5760L, "attractsFocus"), "0");
+        SPropertyOperations.setEnum(node, PROPS.attractsFocus$GvXL, 0x1075079c86cL, "noAttraction");
       }
     }
     public String getKeyStroke() {
@@ -80,7 +83,7 @@ public class EditorCellModel_KeyMap extends KeyMapImpl {
       if (contextNode == null) {
         return false;
       }
-      if (!(SNodeOperations.isInstanceOf(contextNode, MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eafb9a39L, "jetbrains.mps.lang.editor.structure.EditorCellModel")))) {
+      if (!(SNodeOperations.isInstanceOf(contextNode, CONCEPTS.EditorCellModel$gN))) {
         return false;
       }
       return true;
@@ -90,14 +93,22 @@ public class EditorCellModel_KeyMap extends KeyMapImpl {
       this.execute_internal(editorContext, contextCell.getSNode(), this.getSelectedNodes(editorContext));
     }
     private void execute_internal(final EditorContext editorContext, final SNode node, final List<SNode> selectedNodes) {
-      if (!(SPropertyOperations.hasValue(node, MetaAdapterFactory.getProperty(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eafb9a39L, 0x1074c7a5760L, "attractsFocus"), "2", "0"))) {
-        SPropertyOperations.set(node, MetaAdapterFactory.getProperty(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eafb9a39L, 0x1074c7a5760L, "attractsFocus"), "2");
+      if (!(SEnumOperations.isMember(SPropertyOperations.getEnum(node, PROPS.attractsFocus$GvXL), 0x107507a7b34L))) {
+        SPropertyOperations.setEnum(node, PROPS.attractsFocus$GvXL, 0x107507a7b34L, "firstEditableCell");
       } else {
-        SPropertyOperations.set(node, MetaAdapterFactory.getProperty(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eafb9a39L, 0x1074c7a5760L, "attractsFocus"), "0");
+        SPropertyOperations.setEnum(node, PROPS.attractsFocus$GvXL, 0x1075079c86cL, "noAttraction");
       }
     }
     public String getKeyStroke() {
       return "ctrl alt shift F";
     }
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept EditorCellModel$gN = MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eafb9a39L, "jetbrains.mps.lang.editor.structure.EditorCellModel");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty attractsFocus$GvXL = MetaAdapterFactory.getProperty(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eafb9a39L, 0x1074c7a5760L, "attractsFocus");
   }
 }

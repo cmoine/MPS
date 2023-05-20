@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <root nodeRef="r:69d0bc6c-4ff9-45d7-a283-4057ce36f83f(jetbrains.mps.samples.Entities.sandbox)/4053600266038195162">
+    <file name="Harry.java">
+      <node id="4053600266038197984" at="9,0,10,0" concept="1" trace="son_of_korwg_a" />
+      <node id="4053600266038195162" at="7,0,9,0" concept="0" trace="Harry#()V" />
+      <scope id="4053600266038195162" at="7,18,7,18" />
+      <scope id="4053600266038195162" at="7,0,9,0" />
+      <unit id="4053600266038195162" at="6,0,11,0" name="jetbrains.mps.samples.Entities.sandbox.Harry" />
+    </file>
+  </root>
+  <root nodeRef="r:69d0bc6c-4ff9-45d7-a283-4057ce36f83f(jetbrains.mps.samples.Entities.sandbox)/4053600266038197990">
+    <file name="James.java">
+      <node id="4053600266038197991" at="9,0,10,0" concept="1" trace="father_of_l8ihe_a" />
+      <node id="4053600266038198018" at="10,0,11,0" concept="1" trace="husband_of_l8ihe_b" />
+      <node id="4053600266038197990" at="7,0,9,0" concept="0" trace="James#()V" />
+      <scope id="4053600266038197990" at="7,18,7,18" />
+      <scope id="4053600266038197990" at="7,0,9,0" />
+      <unit id="4053600266038197990" at="6,0,12,0" name="jetbrains.mps.samples.Entities.sandbox.James" />
+    </file>
+  </root>
+  <root nodeRef="r:69d0bc6c-4ff9-45d7-a283-4057ce36f83f(jetbrains.mps.samples.Entities.sandbox)/4053600266038198001">
+    <file name="Lily.java">
+      <node id="4053600266038198002" at="9,0,10,0" concept="1" trace="mother_of_pdrp_a" />
+      <node id="4053600266038198009" at="10,0,11,0" concept="1" trace="wife_of_pdrp_b" />
+      <node id="4053600266038198001" at="7,0,9,0" concept="0" trace="Lily#()V" />
+      <scope id="4053600266038198001" at="7,17,7,17" />
+      <scope id="4053600266038198001" at="7,0,9,0" />
+      <unit id="4053600266038198001" at="6,0,12,0" name="jetbrains.mps.samples.Entities.sandbox.Lily" />
+    </file>
+  </root>
+</debug-info>
+

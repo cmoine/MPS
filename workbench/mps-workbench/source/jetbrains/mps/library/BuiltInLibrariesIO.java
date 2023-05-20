@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +15,12 @@
  */
 package jetbrains.mps.library;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.LogManager;
-import jetbrains.mps.util.*;
+import jetbrains.mps.logging.Logger;
+import jetbrains.mps.util.JDOMUtil;
+import jetbrains.mps.util.MacrosFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,7 +34,7 @@ import java.util.Map;
  * TODO reuse it to read our libraries (core, workbench) from the generated xml file
  */
 public class BuiltInLibrariesIO {
-  private static final Logger LOG = LogManager.getLogger(BuiltInLibrariesIO.class);
+  private static final Logger LOG = Logger.getLogger(BuiltInLibrariesIO.class);
   public static final String CONFIG_FILE_NAME = "CustomBuiltInLibraries";
   private static final String CONFIG_FILE_WHOLE_NAME = CONFIG_FILE_NAME + ".xml";
   public static final String ROOT_TAG = "libraries";
@@ -44,7 +43,7 @@ public class BuiltInLibrariesIO {
   public static final String LIBRARY_PATH_TAG = "path";
 
   public static Map<String, Library> readBuiltInLibraries() {
-    Map<String, Library> result = new HashMap<String, Library>();
+    Map<String, Library> result = new HashMap<>();
 
     URL resource = BuiltInLibrariesIO.class.getResource(CONFIG_FILE_WHOLE_NAME);
     if (resource == null) return result;
@@ -54,32 +53,23 @@ public class BuiltInLibrariesIO {
       in = resource.openStream();
       Document document = JDOMUtil.loadDocument(in);
       Element element = document.getRootElement();
-      List children = element.getChildren(LIBRARY_TAG);
-      for (Object childObj : children) {
-        Element child = (Element) childObj;
+      List<Element> children = element.getChildren(LIBRARY_TAG);
+      for (Element child : children) {
         String name = child.getAttribute(LIBRARY_NAME_TAG).getValue();
         String path = child.getAttribute(LIBRARY_PATH_TAG).getValue();
         final String realPath = MacrosFactory.getGlobal().expandPath(path);
 
-        Library predefinedLibrary = new Library(name) {
-          @NotNull
-          @Override
-          public String getPath() {
-            return realPath;
-          }
-        };
+        Library predefinedLibrary = new Library(name, realPath);
         result.put(name, predefinedLibrary);
       }
-    } catch (JDOMException e) {
-      LOG.error(null, e);
-    } catch (IOException e) {
-      LOG.error(null, e);
+    } catch (JDOMException | IOException e) {
+      LOG.error(e);
     } finally {
       if (in != null) {
         try {
           in.close();
         } catch (IOException e) {
-          LOG.error(null, e);
+          LOG.error(e);
         }
       }
     }
@@ -94,14 +84,12 @@ public class BuiltInLibrariesIO {
         configFile.createNewFile();
         write(configFile, name, path);
       }
-    } catch (JDOMException e) {
-      LOG.error(null, e);
     } catch (IOException e) {
-      LOG.error(null, e);
+      LOG.error(e);
     }
   }
 
-  private static void write(File configFile, String name, String path) throws JDOMException, IOException {
+  private static void write(File configFile, String name, String path) throws IOException {
     Document document;
     try {
       document = JDOMUtil.loadDocument(configFile);

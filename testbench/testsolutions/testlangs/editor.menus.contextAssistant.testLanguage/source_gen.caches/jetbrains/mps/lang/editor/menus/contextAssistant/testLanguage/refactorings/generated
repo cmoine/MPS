@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="ca62ds9vsbzg6o8r3fp4dhkpkkc50uo" />
+<product version="3" modelHash="-dv41lh035ghr7rwgvc5nkp244058i95">
+  <files names="AppendOneToName.java:AppendOneToName_Target.java:RefactoringAspectDescriptor.java" />
+</product>
 

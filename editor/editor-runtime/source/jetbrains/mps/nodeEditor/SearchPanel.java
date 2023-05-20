@@ -16,9 +16,13 @@
 package jetbrains.mps.nodeEditor;
 
 import com.intellij.ide.DataManager;
+import com.intellij.ide.lightEdit.LightEditCompatible;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.IdeActions;
 import com.intellij.openapi.editor.colors.EditorColors;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
+import com.intellij.openapi.keymap.KeymapUtil;
+import com.intellij.openapi.project.DumbAwareAction;
 import jetbrains.mps.ide.actions.MPSCommonDataKeys;
 import jetbrains.mps.ide.search.AbstractSearchPanel;
 import jetbrains.mps.ide.search.SearchHistoryStorage;
@@ -31,10 +35,10 @@ import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.message.EditorMessageOwner;
 import jetbrains.mps.openapi.editor.message.SimpleEditorMessage;
 import jetbrains.mps.project.MPSProject;
-import jetbrains.mps.smodel.ModelAccess;
 import jetbrains.mps.util.CollectionUtil;
 import jetbrains.mps.util.Pair;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.openapi.module.SRepository;
 
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -57,6 +61,18 @@ public class SearchPanel extends AbstractSearchPanel {
   public SearchPanel(EditorComponent editor) {
     super();
     myEditor = editor;
+    new CloseAction() {
+      @Override
+      public void actionPerformed(@NotNull AnActionEvent e) {
+        deactivate();
+      }
+    }.registerCustomShortcutSet(KeymapUtil.getActiveKeymapShortcuts(IdeActions.ACTION_EDITOR_ESCAPE), this);
+  }
+
+  /**
+   * Copied from {@link com.intellij.find.SearchReplaceComponent.CloseAction}
+   */
+  private abstract static class CloseAction extends DumbAwareAction implements LightEditCompatible {
   }
 
   @Override
@@ -87,7 +103,7 @@ public class SearchPanel extends AbstractSearchPanel {
       List<EditorCell_Label> editorCell_labelList = CollectionUtil.filter(EditorCell_Label.class, collection.dfsCells());
       for (EditorCell_Label label : editorCell_labelList) {
         if (PunctuationUtil.hasLeftGap(label)) {
-          sb.append(" ");
+          sb.append(' ');
         }
         sb.append(label.getRenderedText());
       }
@@ -285,7 +301,8 @@ public class SearchPanel extends AbstractSearchPanel {
   }
 
   private void highlight(final List<SearchEntry> searchEntries) {
-    ModelAccess.instance().runReadAction(() -> {
+    final SRepository editorRepo = myEditor.getEditorContext().getRepository();
+    editorRepo.getModelAccess().runReadAction(() -> {
       myHighlightManager = myEditor.getHighlightManager();
       List<EditorMessage> messages = new ArrayList<>();
       Map<EditorCell_Label, List<Pair>> cellToPositions = new LinkedHashMap<>();
@@ -305,7 +322,7 @@ public class SearchPanel extends AbstractSearchPanel {
   }
 
   private List<SearchPanelEditorMessage> getMessages() {
-    final List<SearchPanelEditorMessage> searchMessages = new ArrayList<SearchPanelEditorMessage>();
+    final List<SearchPanelEditorMessage> searchMessages = new ArrayList<>();
     if (myEditor == null) {
       return searchMessages;
     }
@@ -396,8 +413,8 @@ public class SearchPanel extends AbstractSearchPanel {
 
     public SearchPanelEditorMessage(@NotNull EditorCell_Label cell, @NotNull List<Pair> positions) {
       super(cell.getSNode(),
-          EditorColorsManager.getInstance().getGlobalScheme().getAttributes(EditorColors.SEARCH_RESULT_ATTRIBUTES).getBackgroundColor(),
-          "", SearchPanel.this.myOwner);
+            EditorColorsManager.getInstance().getGlobalScheme().getAttributes(EditorColors.SEARCH_RESULT_ATTRIBUTES).getBackgroundColor(),
+            "", SearchPanel.this.myOwner);
       myCell = cell;
       myPositions = positions;
     }
@@ -414,7 +431,7 @@ public class SearchPanel extends AbstractSearchPanel {
 
     @Override
     public void paint(Graphics g, EditorComponent editorComponent, EditorCell cell) {
-      if (cell == null || !(cell instanceof EditorCell_Label)) {
+      if (!(cell instanceof EditorCell_Label)) {
         return;
       }
       EditorCell_Label editorCell = (EditorCell_Label) cell;
@@ -425,9 +442,9 @@ public class SearchPanel extends AbstractSearchPanel {
           FontMetrics metrics = g.getFontMetrics();
           String text = editorCell.getRenderedText().substring(startPosition, endPosition);
           int prevStringWidth = metrics.stringWidth(editorCell.getRenderedText().
-              substring(0, startPosition));
+                                                              substring(0, startPosition));
           int x = editorCell.getX() + editorCell.getLeftInset()
-              + prevStringWidth;
+                  + prevStringWidth;
           int y = editorCell.getY();
           int height = editorCell.getHeight();
           int width = metrics.stringWidth(text);
@@ -468,11 +485,7 @@ public class SearchPanel extends AbstractSearchPanel {
       if (!myCell.equals(that.myCell)) {
         return false;
       }
-      if (!myPositions.equals(that.myPositions)) {
-        return false;
-      }
-
-      return true;
+      return myPositions.equals(that.myPositions);
     }
 
     @Override

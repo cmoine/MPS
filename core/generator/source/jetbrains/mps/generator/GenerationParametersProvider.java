@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,10 @@
  */
 package jetbrains.mps.generator;
 
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SModel;
 
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -24,7 +26,36 @@ import java.util.Map;
  */
 public interface GenerationParametersProvider {
 
-  public static final String HASH = "__parametersHash";
+  String HASH = "__parametersHash";
 
   Map<String, Object> getParameters(SModel descriptor);
+
+  Map<String, Object> getDefaultParameters();
+
+  @Nullable
+  default String getParametersHash(SModel model) {
+    return defaultParametersHash(getParameters(model));
+  }
+
+  static String defaultParametersHash(Map<String, Object> parameters) {
+    if (parameters == null || parameters.isEmpty()) {
+      return null;
+    }
+    String val = (String) parameters.get(GenerationParametersProvider.HASH);
+    if (val != null) {
+      return val;
+    }
+
+    StringBuilder sb = new StringBuilder();
+    String[] keys = parameters.keySet().toArray(new String[0]);
+    Arrays.sort(keys);
+    for (String k : keys) {
+      sb.append(k);
+      sb.append(':');
+      sb.append(String.valueOf(parameters.get(k)));
+      sb.append(";\n");
+    }
+    return ModelDigestUtil.hashText(sb.toString());
+  }
+
 }

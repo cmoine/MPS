@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="dqriax7v0xtpn3o8f4zijjkv07bq6hv" />
+<product version="3" modelHash="-assd4beke6kgwhf1b6bxux1kttggvq8">
+  <files names="ClosureLiteral_DataFlow.java:CompactInvokeFunctionExpression_DataFlow.java:DataFlowAspectDescriptorImpl.java:InvokeExpression_DataFlow.java:InvokeFunctionOperation_DataFlow.java:YieldAllStatement_DataFlow.java:YieldStatement_DataFlow.java" />
+</product>
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2013 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,14 +24,12 @@ import com.intellij.util.IncorrectOperationException;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiNode;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiProvider;
 import jetbrains.mps.idea.core.psi.impl.MPSPsiRef;
-import jetbrains.mps.idea.core.refactoring.NodePtr;
-import jetbrains.mps.idea.java.psi.impl.MPSPsiJavaRef.MPSPsiJavaReference;
-import jetbrains.mps.idea.java.psiStubs.JavaForeignIdBuilder;
 import jetbrains.mps.smodel.DynamicReference;
 import jetbrains.mps.smodel.SNodeId.Foreign;
-import jetbrains.mps.smodel.SNodeId.Regular;
+import jetbrains.mps.smodel.SNodePointer;
 import jetbrains.mps.smodel.StaticReference;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SNodeId;
@@ -44,11 +42,11 @@ import org.jetbrains.mps.openapi.module.SRepository;
 
 public class MPSPsiMethodRef extends MPSPsiJavaRef {
 
-  public MPSPsiMethodRef(String role, SModelReference model, SNodeId nodeId, PsiManager manager) {
+  public MPSPsiMethodRef(SReferenceLink role, SModelReference model, SNodeId nodeId, PsiManager manager) {
     super(role, model, nodeId, manager);
   }
 
-  public MPSPsiMethodRef(String role, String referenceText, PsiManager manager) {
+  public MPSPsiMethodRef(SReferenceLink role, String referenceText, PsiManager manager) {
     super(role, referenceText, manager);
   }
 
@@ -70,7 +68,7 @@ public class MPSPsiMethodRef extends MPSPsiJavaRef {
           // in this case we ignore such reference
           if (sref instanceof StaticReference && sref.getTargetNodeId() instanceof Foreign) {
 
-            String oldTargetIdString = ((StaticReference) sref).getTargetNodeId().toString();
+            String oldTargetIdString = sref.getTargetNodeId().toString();
             int openingBrace = oldTargetIdString.indexOf("(");
             // it should be a good foreign id of java method
             assert openingBrace > 0;
@@ -83,14 +81,11 @@ public class MPSPsiMethodRef extends MPSPsiJavaRef {
             }
             SNodeId newTargetId = new Foreign(newTargetIdString);
 
-            String role = sref.getRole();
+            SReferenceLink role = sref.getLink();
             SNode source = sref.getSourceNode();
             SModelReference modelRef = sref.getTargetSModelReference();
 
-            SReference newRef = StaticReference.create(role, source, modelRef, newTargetId);
-
-//            ((StaticReference) sref).setTargetNodeId(newTargetId);
-            source.setReference(role, newRef);
+            source.setReference(role, new SNodePointer(modelRef, newTargetId));
 
           } else if (sref instanceof DynamicReference) {
             ((DynamicReference) sref).setResolveInfo(newName);

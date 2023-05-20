@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,12 +22,13 @@ import jetbrains.mps.smodel.loading.ModelLoadResult;
 import jetbrains.mps.smodel.loading.ModelLoadingState;
 import jetbrains.mps.smodel.persistence.def.ModelReadException;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.persistence.DataSource;
 import org.jetbrains.mps.openapi.persistence.ModelFactory;
+import org.jetbrains.mps.openapi.persistence.ModelSaveException;
 import org.jetbrains.mps.openapi.persistence.StreamDataSource;
 
 import java.io.IOException;
-import java.util.Map;
 
 /**
  * Internal facility around ModelFactory which is aware of partial loading approach.
@@ -39,33 +40,37 @@ import java.util.Map;
 public abstract class LazyLoadFacility {
   private final ModelFactory myModelFactory;
   private final DataSource mySource;
+  private final boolean myPersistenceIsTextBased;
 
   public LazyLoadFacility(@NotNull ModelFactory modelFactory, @NotNull DataSource dataSource) {
+    this(modelFactory, dataSource, false);
+  }
+
+  public LazyLoadFacility(@NotNull ModelFactory modelFactory, @NotNull DataSource dataSource, boolean isPersistenceTextBased) {
     myModelFactory = modelFactory;
     mySource = dataSource;
+    myPersistenceIsTextBased = isPersistenceTextBased;
   }
 
   @NotNull
-  public ModelFactory getModelFactory() {
+  public final ModelFactory getModelFactory() {
     return myModelFactory;
   }
 
   @NotNull
-  public DataSource getSource() {
+  public final DataSource getSource() {
     return mySource;
   }
 
+  // hash value representing actual model content (i.e. no cached values)
+  @Nullable
   public String getModelHash() {
     // FIXME refactor DataSource to answer hash()/digest() queries itself (and move this code back to generatable model impl)
-    String modelHash = ModelDigestHelper.getInstance().getModelHash((StreamDataSource) getSource());
-    if (modelHash != null) {
-      return modelHash;
-    }
-
-    return ModelDigestUtil.hash((StreamDataSource) getSource(), !getModelFactory().isBinary());
+    // AP: I suppose DataSource is a far too generic object to contain the #hash method.
+    // Furthermore, #hash neighbouring with the DataSourceListener mechanism is rather questionable.
+    return ModelDigestUtil.hash((StreamDataSource) getSource(), myPersistenceIsTextBased);
+    // XXX As for performance, I observed 14-37034 micro seconds range for model hash calculation
   }
-
-  public abstract Map<String, String> getGenerationHashes();
 
   @NotNull
   public abstract SModelHeader readHeader() throws ModelReadException;
@@ -80,5 +85,5 @@ public abstract class LazyLoadFacility {
    */
   public abstract boolean doesSaveUpgradePersistence(@NotNull SModelHeader header);
 
-  public abstract void saveModel(@NotNull SModelHeader header, SModelData modelData) throws IOException;
+  public abstract void saveModel(@NotNull SModelHeader header, SModelData modelData) throws ModelSaveException, IOException;
 }

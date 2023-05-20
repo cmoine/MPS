@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2020 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,25 +26,30 @@ import jetbrains.mps.generator.impl.query.QueryKeyImpl;
 import jetbrains.mps.generator.runtime.TemplateContext;
 import jetbrains.mps.generator.template.TemplateArgumentContext;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.model.SNode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Runtime presentation of a template invocation. Handles arguments, prepares template context for a call.
+ * Runtime presentation of a template invocation or call site. Handles arguments, prepares template context for a call.
+ * Represents {@code node<ITemplateCall>}.
  * @author Artem Tikhomirov
  */
-public class TemplateCall {
+public final class TemplateCall {
   private final ArgumentExpression[] myArguments;
   private final String[] myParameters;
   // true to indicate no-op context, either no args/params, or their count doesn't match
   private final boolean myNoArgs;
+  private final boolean myCallSiteRequired;
 
   /**
+   * FIXME comment below from 2014 is likely outdated, there's been a change in 2018 to facilitate arguments in weaved templates
    * At the moment, we handle ITemplateCall only, the reference to TemplateDeclaration with accompanying arguments.
    * Elements with references to TemplateDeclaration without arguments (like WeaveEach) shall not get here (although it's not a big deal
    * to handle it here, just keep myArguments empty, and return outerContext unchanged). The reason it's not done here as this knowledge
@@ -54,11 +59,29 @@ public class TemplateCall {
   public TemplateCall(@NotNull SNode templateCall) {
     final List<SNode> args = RuleUtil.getTemplateCall_Arguments(templateCall);
     myArguments = toExpressionRuntime(args);
+    // XXX seems reasonable to pass TemplateDeclaration here and ask it for getParameterNames, rather than follow reference to a target template node
+    //     technically, the reference could point to a changed model of otherwise compiled generator.
     final SNode template = RuleUtil.getTemplateCall_Template(templateCall);
     String[] paramNames = RuleUtil.getTemplateDeclarationParameterNames(template);
     myParameters = paramNames == null ? new String[0] : paramNames;
     myNoArgs = myArguments.length == 0 || myArguments.length != myParameters.length;
+    myCallSiteRequired = RuleUtil.getTemplateCall_TemplateNeedCallSite(templateCall);
   }
+
+  /**
+   * FIXME drop this cons and its uses, there's no longer use for that (see 878de4a8e4ca2eda6d5950c5e8105b269c0c4a16)
+   * Transition from TemplateDeclaration that knows its arguments at construction time to TD that evaluates argument
+   * values prior to call and therefore can cache and reuse template runtime nodes (i.e. TemplateContainer)
+   * @param parameterNames name of template parameter, if any
+   * @param arguments values of template parameters
+   */
+  public TemplateCall(@Nullable String[] parameterNames, @Nullable Object[] arguments) {
+    myArguments = arguments == null ? new ArgumentExpression[0] : Arrays.stream(arguments).map(ConstantExpression::new).toArray(ArgumentExpression[]::new);
+    myParameters = parameterNames == null ? new String[0] : parameterNames;
+    myNoArgs = myArguments.length == 0 || myArguments.length != myParameters.length;
+    myCallSiteRequired = false;
+  }
+
 
   /**
    * @return <code>true</code> iff there are arguments or parameters, but their count doesn't match
@@ -67,12 +90,16 @@ public class TemplateCall {
     return myArguments.length != myParameters.length;
   }
 
+  public boolean needCallSite() {
+    return myCallSiteRequired;
+  }
+
   @NotNull
-  public TemplateContext prepareCallContext(@NotNull TemplateContext outerContext) throws GenerationFailureException{
+  public TemplateContext prepareCallContext(@NotNull TemplateContext outerContext) throws GenerationFailureException {
     if (myNoArgs) {
       return outerContext;
     }
-    final Map<String, Object> vars = new HashMap<String, Object>(myArguments.length * 2);
+    final Map<String, Object> vars = new HashMap<>(myArguments.length * 2);
     for (int i = 0; i < myArguments.length; i++) {
       Object value = myArguments[i].evaluate(outerContext);
       vars.put(myParameters[i], value);
@@ -82,7 +109,7 @@ public class TemplateCall {
   }
 
   private static ArgumentExpression[] toExpressionRuntime(List<SNode> args) {
-    final ArrayList<ArgumentExpression> ae = new ArrayList<ArgumentExpression>(args.size());
+    final ArrayList<ArgumentExpression> ae = new ArrayList<>(args.size());
     int i = 1;
     for (SNode argExpr : args) {
       final SConcept argConcept = argExpr.getConcept();
@@ -92,8 +119,8 @@ public class TemplateCall {
         ae.add(new PatternRefExpr(argExpr, i));
       } else if (argConcept.isSubConceptOf(RuleUtil.concept_TemplateArgumentQueryExpression)) {
         ae.add(new QueryExpr(argExpr));
-      } else if (argConcept.isSubConceptOf(RuleUtil.concept_TemplateArgumentVarRefExpression)) {
-        ae.add(new VarRefExpr(argExpr));
+      } else if (argConcept.isSubConceptOf(RuleUtil.concept_TemplateArgumentVarRefExpression2)) {
+        ae.add(new VarRefExpr2(argExpr));
       } else if(GeneratorUtilEx.shallGenerateFunctionToEvaluate(argExpr)) {
         ae.add(new GeneratedExpr(argExpr));
       } else {
@@ -101,11 +128,11 @@ public class TemplateCall {
       }
       i++;
     }
-    return ae.toArray(new ArgumentExpression[ae.size()]);
+    return ae.toArray(new ArgumentExpression[0]);
   }
 
   interface ArgumentExpression {
-    public Object evaluate(TemplateContext context) throws GenerationFailureException;
+    Object evaluate(TemplateContext context) throws GenerationFailureException;
   }
 
   // TemplateArgumentParameterExpression
@@ -184,12 +211,13 @@ public class TemplateCall {
     }
   }
 
-  // TemplateArgumentVariableRefExpression
-  private static class VarRefExpr implements ArgumentExpression {
+  // TemplateArgumentVarRefExpression2
+  private static class VarRefExpr2 implements ArgumentExpression {
     private final String myMacroVarName;
-    public VarRefExpr(SNode varRefExpression) {
-      SNode varmacro = RuleUtil.getTemplateArgumentVarRef_VarMacro(varRefExpression);
-      myMacroVarName = RuleUtil.getVarMacro_Name(varmacro);
+    public VarRefExpr2(SNode varRefExpression) {
+      // node<VarDeclaration>
+      SNode vardecl = RuleUtil.getTemplateArgumentVarRef2_VarDeclaration(varRefExpression);
+      myMacroVarName = RuleUtil.getVarDecl_Name(vardecl);
     }
     @Override
     public Object evaluate(TemplateContext context) throws GenerationFailureException {
@@ -225,6 +253,19 @@ public class TemplateCall {
             GeneratorUtil.describeInput(context));
       }
       return null;
+    }
+  }
+
+  private static class ConstantExpression implements ArgumentExpression {
+    private final Object myValue;
+
+    public ConstantExpression(@Nullable Object value) {
+      myValue = value;
+    }
+
+    @Override
+    public Object evaluate(TemplateContext context) throws GenerationFailureException {
+      return myValue;
     }
   }
 }

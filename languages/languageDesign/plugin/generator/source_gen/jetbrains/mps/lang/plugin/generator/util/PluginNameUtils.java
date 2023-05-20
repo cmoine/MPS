@@ -5,7 +5,6 @@ package jetbrains.mps.lang.plugin.generator.util;
 import org.jetbrains.mps.openapi.module.SModule;
 import jetbrains.mps.util.ModuleNameUtil;
 import jetbrains.mps.generator.template.TemplateQueryContext;
-import jetbrains.mps.smodel.Generator;
 
 public class PluginNameUtils {
   public static String getPluginName(SModule module) {
@@ -20,9 +19,6 @@ public class PluginNameUtils {
   public static SModule getOriginalModule(TemplateQueryContext context) {
     SModule originalModule = context.getOriginalInputModel().getModule();
     assert originalModule != null;
-    if (originalModule instanceof Generator) {
-      originalModule = ((Generator) originalModule).getSourceLanguage();
-    }
     return originalModule;
   }
 }

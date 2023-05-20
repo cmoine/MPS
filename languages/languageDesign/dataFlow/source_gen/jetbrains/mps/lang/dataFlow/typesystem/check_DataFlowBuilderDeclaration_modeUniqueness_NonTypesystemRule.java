@@ -10,7 +10,6 @@ import jetbrains.mps.lang.typesystem.runtime.IsApplicableStatus;
 import jetbrains.mps.smodel.Language;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import java.util.Map;
 import java.util.List;
 import jetbrains.mps.internal.collections.runtime.MapSequence;
@@ -29,13 +28,16 @@ import jetbrains.mps.errors.IErrorReporter;
 import jetbrains.mps.internal.collections.runtime.ILeftCombinator;
 import jetbrains.mps.lang.core.behavior.INamedConcept__BehaviorDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 
 public class check_DataFlowBuilderDeclaration_modeUniqueness_NonTypesystemRule extends AbstractNonTypesystemRule_Runtime implements NonTypesystemRule_Runtime {
   public check_DataFlowBuilderDeclaration_modeUniqueness_NonTypesystemRule() {
   }
   public void applyRule(final SNode builder, final TypeCheckingContext typeCheckingContext, IsApplicableStatus status) {
     Language containingLanguage = as_46aqev_a0a0a1(SNodeOperations.getModel(builder).getModule(), Language.class);
-    if (containingLanguage == null || SLinkOperations.getTarget(builder, MetaAdapterFactory.getReferenceLink(0x7fa12e9cb9494976L, 0xb4fa19accbc320b4L, 0x118e58cd635L, 0x118e58d76a0L, "conceptDeclaration")) == null) {
+    if (containingLanguage == null || SLinkOperations.getTarget(builder, LINKS.conceptDeclaration$vN83) == null) {
       return;
     }
 
@@ -43,16 +45,16 @@ public class check_DataFlowBuilderDeclaration_modeUniqueness_NonTypesystemRule e
     Map<SNode, List<SNode>> duplicatingDeclarations = MapSequence.fromMap(new HashMap<SNode, List<SNode>>());
     SModel dataFlowModel = SModuleOperations.getAspect(containingLanguage, "dataFlow");
     if (dataFlowModel != null) {
-      List<SNode> roots = SModelOperations.roots(dataFlowModel, MetaAdapterFactory.getConcept(0x7fa12e9cb9494976L, 0xb4fa19accbc320b4L, 0x118e58cd635L, "jetbrains.mps.lang.dataFlow.structure.DataFlowBuilderDeclaration"));
+      List<SNode> roots = SModelOperations.roots(dataFlowModel, CONCEPTS.DataFlowBuilderDeclaration$NP);
       for (SNode root : ListSequence.fromList(roots)) {
-        if (root == builder || SLinkOperations.getTarget(root, MetaAdapterFactory.getReferenceLink(0x7fa12e9cb9494976L, 0xb4fa19accbc320b4L, 0x118e58cd635L, 0x118e58d76a0L, "conceptDeclaration")) != SLinkOperations.getTarget(builder, MetaAdapterFactory.getReferenceLink(0x7fa12e9cb9494976L, 0xb4fa19accbc320b4L, 0x118e58cd635L, 0x118e58d76a0L, "conceptDeclaration"))) {
+        if (root == builder || SLinkOperations.getTarget(root, LINKS.conceptDeclaration$vN83) != SLinkOperations.getTarget(builder, LINKS.conceptDeclaration$vN83)) {
           continue;
         }
-        if (ListSequence.fromList(SLinkOperations.getChildren(builder, MetaAdapterFactory.getContainmentLink(0x7fa12e9cb9494976L, 0xb4fa19accbc320b4L, 0x118e58cd635L, 0x6e8db6877fd04efbL, "modes"))).isEmpty() && ListSequence.fromList(SLinkOperations.getChildren(root, MetaAdapterFactory.getContainmentLink(0x7fa12e9cb9494976L, 0xb4fa19accbc320b4L, 0x118e58cd635L, 0x6e8db6877fd04efbL, "modes"))).isEmpty()) {
+        if (ListSequence.fromList(SLinkOperations.getChildren(builder, LINKS.modes$Mjcf)).isEmpty() && ListSequence.fromList(SLinkOperations.getChildren(root, LINKS.modes$Mjcf)).isEmpty()) {
           MapSequence.fromMap(duplicatingDeclarations).put(root, ListSequence.fromList(new ArrayList<SNode>()));
         } else {
-          for (SNode myMode : ListSequence.fromList(SLinkOperations.getChildren(builder, MetaAdapterFactory.getContainmentLink(0x7fa12e9cb9494976L, 0xb4fa19accbc320b4L, 0x118e58cd635L, 0x6e8db6877fd04efbL, "modes")))) {
-            if (ListSequence.fromList(SLinkOperations.getChildren(root, MetaAdapterFactory.getContainmentLink(0x7fa12e9cb9494976L, 0xb4fa19accbc320b4L, 0x118e58cd635L, 0x6e8db6877fd04efbL, "modes"))).select(new ISelector<SNode, SConcept>() {
+          for (SNode myMode : ListSequence.fromList(SLinkOperations.getChildren(builder, LINKS.modes$Mjcf))) {
+            if (ListSequence.fromList(SLinkOperations.getChildren(root, LINKS.modes$Mjcf)).select(new ISelector<SNode, SConcept>() {
               public SConcept select(SNode it) {
                 return SNodeOperations.getConcept(it);
               }
@@ -70,7 +72,7 @@ public class check_DataFlowBuilderDeclaration_modeUniqueness_NonTypesystemRule e
     if (SetSequence.fromSet(MapSequence.fromMap(duplicatingDeclarations).keySet()).isNotEmpty()) {
       for (SNode duplicatingDecl : SetSequence.fromSet(MapSequence.fromMap(duplicatingDeclarations).keySet())) {
         {
-          MessageTarget errorTarget = new NodeMessageTarget();
+          final MessageTarget errorTarget = new NodeMessageTarget();
           IErrorReporter _reporter_2309309498 = typeCheckingContext.reportTypeError(builder, "Conflicting modes. Data flow builder" + ((ListSequence.fromList(MapSequence.fromMap(duplicatingDeclarations).get(duplicatingDecl)).isEmpty() ? "" : "  with modes (" + ListSequence.fromList(MapSequence.fromMap(duplicatingDeclarations).get(duplicatingDecl)).select(new ISelector<SNode, String>() {
             public String select(SNode it) {
               return SNodeOperations.getConcept(it).getName();
@@ -85,7 +87,7 @@ public class check_DataFlowBuilderDeclaration_modeUniqueness_NonTypesystemRule e
     }
   }
   public SAbstractConcept getApplicableConcept() {
-    return MetaAdapterFactory.getConcept(0x7fa12e9cb9494976L, 0xb4fa19accbc320b4L, 0x118e58cd635L, "jetbrains.mps.lang.dataFlow.structure.DataFlowBuilderDeclaration");
+    return CONCEPTS.DataFlowBuilderDeclaration$NP;
   }
   public IsApplicableStatus isApplicableAndPattern(SNode argument) {
     return new IsApplicableStatus(argument.getConcept().isSubConceptOf(getApplicableConcept()), null);
@@ -95,5 +97,14 @@ public class check_DataFlowBuilderDeclaration_modeUniqueness_NonTypesystemRule e
   }
   private static <T> T as_46aqev_a0a0a1(Object o, Class<T> type) {
     return (type.isInstance(o) ? (T) o : null);
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SReferenceLink conceptDeclaration$vN83 = MetaAdapterFactory.getReferenceLink(0x7fa12e9cb9494976L, 0xb4fa19accbc320b4L, 0x118e58cd635L, 0x118e58d76a0L, "conceptDeclaration");
+    /*package*/ static final SContainmentLink modes$Mjcf = MetaAdapterFactory.getContainmentLink(0x7fa12e9cb9494976L, 0xb4fa19accbc320b4L, 0x118e58cd635L, 0x6e8db6877fd04efbL, "modes");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept DataFlowBuilderDeclaration$NP = MetaAdapterFactory.getConcept(0x7fa12e9cb9494976L, 0xb4fa19accbc320b4L, 0x118e58cd635L, "jetbrains.mps.lang.dataFlow.structure.DataFlowBuilderDeclaration");
   }
 }

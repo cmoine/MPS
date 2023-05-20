@@ -17,7 +17,6 @@ package org.jetbrains.mps.util;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.model.SNode;
 
 import java.util.ArrayList;
@@ -48,13 +47,13 @@ public final class InstanceOfCondition implements Condition<SNode> {
   }
 
   public InstanceOfCondition(@NotNull SAbstractConcept[] concepts) {
-    ArrayList<SAbstractConcept> a = new ArrayList<SAbstractConcept>(concepts.length);
+    ArrayList<SAbstractConcept> a = new ArrayList<>(concepts.length);
     for (SAbstractConcept n : concepts) {
       if (n != null) {
         a.add(n);
       }
     }
-    myConcepts = a.toArray(new SAbstractConcept[a.size()]);
+    myConcepts = a.toArray(new SAbstractConcept[0]);
   }
 
   @Override

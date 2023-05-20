@@ -9,36 +9,36 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
   <root nodeRef="r:6c15a5c9-1bba-4ade-a066-13f2741b04fc(jetbrains.mps.debugger.java.api.state)/3432969378036015499">
     <file name="JavaUiState.java">
-      <node id="3432969378036015508" at="15,60,16,24" concept="6" />
-      <node id="3432969378036015510" at="18,0,19,0" concept="1" trace="getThisObject#()Lcom/sun/jdi/ObjectReference;" />
-      <node id="7279139148253430327" at="33,69,34,45" concept="2" />
-      <node id="7279139148252748845" at="34,45,35,85" concept="4" />
-      <node id="7279139148252750275" at="35,85,36,73" concept="4" />
-      <node id="7279139148252750431" at="36,73,37,44" concept="2" />
-      <node id="7279139148252751194" at="37,44,38,65" concept="3" />
-      <node id="3432969378036015514" at="19,0,21,0" concept="1" trace="getStackFrame#()Ljetbrains/mps/debugger/java/api/state/proxy/JavaStackFrame;" />
-      <node id="3432969378036015518" at="21,0,23,0" concept="1" trace="getThread#()Ljetbrains/mps/debugger/java/api/state/proxy/JavaThread;" />
-      <node id="4750532960509859178" at="26,0,28,0" concept="1" trace="invokeEvaluationSynchronously#(Ljetbrains/mps/baseLanguage/closures/runtime/_FunctionTypes/_return_P0_E0;)null" />
-      <node id="3432969378036015502" at="15,0,18,0" concept="0" trace="JavaUiState#(Ljetbrains/mps/debug/api/AbstractDebugSession;)V" />
-      <node id="7279139148252738073" at="33,0,40,0" concept="5" trace="modelNameFromLocation#(Ljetbrains/mps/debugger/java/api/state/proxy/JavaLocation;)Ljava/lang/String;" />
-      <scope id="3432969378036015507" at="15,60,16,24" />
-      <scope id="3432969378036015510" at="18,0,19,0" />
-      <scope id="3432969378036015514" at="19,0,21,0" />
-      <scope id="3432969378036015518" at="21,0,23,0" />
-      <scope id="4750532960509859178" at="26,0,28,0">
+      <node id="3432969378036015508" at="17,60,18,24" concept="6" />
+      <node id="3432969378036015510" at="20,0,21,0" concept="1" trace="getThisObject#()Lcom/sun/jdi/ObjectReference;" />
+      <node id="7279139148253430327" at="35,69,36,45" concept="2" />
+      <node id="7279139148252748845" at="36,45,37,84" concept="4" />
+      <node id="7279139148252750275" at="37,84,38,72" concept="4" />
+      <node id="7279139148252750431" at="38,72,39,44" concept="2" />
+      <node id="7279139148252751194" at="39,44,40,65" concept="3" />
+      <node id="3432969378036015514" at="21,0,23,0" concept="1" trace="getStackFrame#()Ljetbrains/mps/debugger/java/api/state/proxy/JavaStackFrame;" />
+      <node id="3432969378036015518" at="23,0,25,0" concept="1" trace="getThread#()Ljetbrains/mps/debugger/java/api/state/proxy/JavaThread;" />
+      <node id="4750532960509859178" at="28,0,30,0" concept="1" trace="invokeEvaluationSynchronously#(Ljetbrains/mps/baseLanguage/closures/runtime/_FunctionTypes/_return_P0_E0;)null" />
+      <node id="3432969378036015502" at="17,0,20,0" concept="0" trace="JavaUiState#(Ljetbrains/mps/debug/api/AbstractDebugSession;)V" />
+      <node id="7279139148252738073" at="35,0,42,0" concept="5" trace="modelNameFromLocation#(Ljetbrains/mps/debugger/java/api/state/proxy/JavaLocation;)Ljava/lang/String;" />
+      <scope id="3432969378036015507" at="17,60,18,24" />
+      <scope id="3432969378036015510" at="20,0,21,0" />
+      <scope id="3432969378036015514" at="21,0,23,0" />
+      <scope id="3432969378036015518" at="23,0,25,0" />
+      <scope id="4750532960509859178" at="28,0,30,0">
         <var name="command" id="4750532960509859181" />
       </scope>
-      <scope id="3432969378036015502" at="15,0,18,0">
+      <scope id="3432969378036015502" at="17,0,20,0">
         <var name="debugSession" id="3432969378036015505" />
       </scope>
-      <scope id="7279139148252738077" at="33,69,38,65">
+      <scope id="7279139148252738077" at="35,69,40,65">
         <var name="lastDot" id="7279139148252750432" />
         <var name="unitName" id="7279139148253430328" />
       </scope>
-      <scope id="7279139148252738073" at="33,0,40,0">
+      <scope id="7279139148252738073" at="35,0,42,0">
         <var name="location" id="7279139148252743995" />
       </scope>
-      <unit id="3432969378036015499" at="14,0,41,0" name="jetbrains.mps.debugger.java.api.state.JavaUiState" />
+      <unit id="3432969378036015499" at="15,0,43,0" name="jetbrains.mps.debugger.java.api.state.JavaUiState" />
     </file>
   </root>
 </debug-info>

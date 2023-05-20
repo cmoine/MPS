@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="d53rrdyufdt5l6dinzwnyhyh5ojci6l" />
+<product version="3" modelHash="-e3yyq9vsqwzhokwowjtccjzcbccss0u">
+  <files names="ConstraintsAspectDescriptor.java:TestModuleManifest_Constraints.java" />
+</product>
 

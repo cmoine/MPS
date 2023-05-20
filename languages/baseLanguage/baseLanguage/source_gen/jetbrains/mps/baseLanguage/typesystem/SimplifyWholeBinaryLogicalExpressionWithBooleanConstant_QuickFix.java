@@ -6,8 +6,10 @@ import jetbrains.mps.errors.QuickFix_Runtime;
 import jetbrains.mps.smodel.SNodePointer;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.smodel.action.SNodeFactoryOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public class SimplifyWholeBinaryLogicalExpressionWithBooleanConstant_QuickFix extends QuickFix_Runtime {
   public SimplifyWholeBinaryLogicalExpressionWithBooleanConstant_QuickFix() {
@@ -17,7 +19,15 @@ public class SimplifyWholeBinaryLogicalExpressionWithBooleanConstant_QuickFix ex
     return "Simplify Binary Logical Expression " + ExpressionPresentationUtil.getExpressionPresentation(((SNode) SimplifyWholeBinaryLogicalExpressionWithBooleanConstant_QuickFix.this.getField("operation")[0]));
   }
   public void execute(SNode node) {
-    SNode constant = SNodeFactoryOperations.replaceWithNewChild(((SNode) SimplifyWholeBinaryLogicalExpressionWithBooleanConstant_QuickFix.this.getField("operation")[0]), SNodeFactoryOperations.asInstanceConcept(MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b201L, "jetbrains.mps.baseLanguage.structure.BooleanConstant")));
-    SPropertyOperations.set(constant, MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b201L, 0xf8cc56b202L, "value"), "" + (((Boolean) SimplifyWholeBinaryLogicalExpressionWithBooleanConstant_QuickFix.this.getField("value")[0])));
+    SNode constant = SNodeFactoryOperations.replaceWithNewChild(((SNode) SimplifyWholeBinaryLogicalExpressionWithBooleanConstant_QuickFix.this.getField("operation")[0]), CONCEPTS.BooleanConstant$n4);
+    SPropertyOperations.assign(constant, PROPS.value$5y_M, ((Boolean) SimplifyWholeBinaryLogicalExpressionWithBooleanConstant_QuickFix.this.getField("value")[0]));
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept BooleanConstant$n4 = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b201L, "jetbrains.mps.baseLanguage.structure.BooleanConstant");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty value$5y_M = MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b201L, 0xf8cc56b202L, "value");
   }
 }

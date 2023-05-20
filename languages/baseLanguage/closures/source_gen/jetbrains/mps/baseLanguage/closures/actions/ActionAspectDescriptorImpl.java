@@ -7,7 +7,6 @@ import jetbrains.mps.openapi.actions.descriptor.ActionAspectDescriptor;
 import java.util.Collection;
 import jetbrains.mps.openapi.actions.descriptor.NodeFactory;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor implements ActionAspectDescriptor {
@@ -16,20 +15,15 @@ public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor imple
   @Override
   public Collection<NodeFactory> getFactories(SAbstractConcept concept) {
     if (LANGUAGE_FQ_NAME.equals(concept.getLanguage().getQualifiedName())) {
-      switch (Arrays.binarySearch(stringSwitchCases_tpto26_a0a0a0c, concept.getName())) {
-        case 0:
+      switch (concept.getName()) {
+        case "ClosureLiteral":
           return Collections.<NodeFactory>singletonList(new initialize_ClosureLiteral.NodeFactory_876385242039333159());
-        case 1:
-          return Collections.<NodeFactory>singletonList(new initialize_UnrestrictedFunctionType.NodeFactory_1232132222404());
+        case "InferredClosureParameterDeclaration":
+          return Collections.<NodeFactory>singletonList(new initialize_ClosureLiteral.NodeFactory_8992394414545768356());
         default:
       }
     }
     return Collections.<NodeFactory>emptyList();
   }
 
-  @Override
-  public boolean hasBuilders() {
-    return false;
-  }
-  private static String[] stringSwitchCases_tpto26_a0a0a0c = new String[]{"ClosureLiteral", "UnrestrictedFunctionType"};
 }

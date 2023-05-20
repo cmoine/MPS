@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-4nk24hzw0qsa1lo2dles0y3kaw4zhbi" />
+<product version="3" modelHash="-afaijn076mn1u4r29ju6xkr8ew9uicp">
+  <files names="TypesystemDescriptor.java:check_BaseExecuteCommandStatement_NonTypesystemRule.java:check_CommandClosureLiteral_NonTypesystemRule.java:typeof_BaseExecuteCommandStatement_InferenceRule.java" />
+</product>
 

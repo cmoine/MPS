@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+  <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/classes" />
     <output-test url="file://$MODULE_DIR$/classes" />
     <exclude-output />
@@ -9,20 +9,12 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library name="idea-startup">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../lib/util.jar!/" />
-          <root url="jar://$MODULE_DIR$/../lib/boot.jar!/" />
-          <root url="jar://$MODULE_DIR$/../lib/bootstrap.jar!/" />
-          <root url="jar://$MODULE_DIR$/../lib/trove4j.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="library" name="Log4j" level="project" />
     <orderEntry type="library" name="Annotations" level="project" />
-    <orderEntry type="module" module-name="startup-util" />
+    <orderEntry type="library" name="idea-bootstrap" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="google.guava" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="MPS runtime" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Runtime classpath" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="jna" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="kotlin_builtins" level="project" />
   </component>
 </module>

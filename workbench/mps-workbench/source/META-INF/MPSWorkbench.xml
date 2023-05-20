@@ -1,6 +1,23 @@
-<components>
+<!--
+  ~ Copyright 2003-2020 JetBrains s.r.o.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<idea-plugin>
   <extensions defaultExtensionNs="com.intellij">
     <mps.facetTabFactory facetType="ideaPlugin" className="jetbrains.mps.ide.project.facets.ui.IdeaPluginModuleFacetTabFactory"/>
+    <projectService serviceImplementation="jetbrains.mps.ide.projectPane.TreeNodeSortService"/>
   </extensions>
   <application-components>
     <component>
@@ -12,8 +29,16 @@
       <implementation-class>jetbrains.mps.ide.make.WorkbenchMakeService</implementation-class>
     </component>
 
-    <component>
-      <implementation-class>jetbrains.mps.ide.actions.refactoring.MoveModelExtensionComponent</implementation-class>
-    </component>
   </application-components>
-</components>
+
+  <applicationListeners>
+    <listener class="jetbrains.mps.intellij.integration.LafFixer$MyAppLifecycleListener" topic="com.intellij.ide.AppLifecycleListener"/>
+    <listener class="jetbrains.mps.ide.blame.IntelliJReporterReplacer" topic="com.intellij.ide.AppLifecycleListener"/>
+  </applicationListeners>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <projectService serviceImplementation="jetbrains.mps.ide.make.MakeServiceConfiguration"/>
+    <mps.projectPrefsPanel implementation="jetbrains.mps.ide.make.MakeSettingsPanel"/>
+  </extensions>
+
+</idea-plugin>

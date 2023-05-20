@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,41 +15,50 @@
  */
 package jetbrains.mps.classloading;
 
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.module.ReloadableModule;
 import jetbrains.mps.module.SDependencyImpl;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import jetbrains.mps.reloading.FakeClassPathItem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.module.SDependencyScope;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Deque;
+import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * @author apyshkin
  * @since 31/12/16
  */
 final class CrossDependentTaskGenerator1 extends TaskGenerator {
-  private static final Logger LOG = LogManager.getLogger(CrossDependentTaskGenerator1.class);
+  private static final Logger LOG = Logger.getLogger(CrossDependentTaskGenerator1.class);
   private final static int nThreads = 2;
   private final CyclicBarrier barrier = new CyclicBarrier(2);
-  private final Deque<ModuleClassLoader> myFirst = new LinkedBlockingDeque<>();
-  private final Deque<ModuleClassLoader> mySecond = new LinkedBlockingDeque<>();
+  private final AtomicReference<ModuleClassLoader> myFirst = new AtomicReference<>();
+  private final AtomicReference<ModuleClassLoader> mySecond = new AtomicReference<>();
+  private static final int TIMEOUT = 2000;
 
   @NotNull
   private Callable<Object> firstCLTask(FakeReloadableModule s1) {
     return () -> {
       try {
         LOG.info("Creating first classloader");
-        ModuleClassLoader cl1 = createCL(s1, FIRST.class, myFirst, mySecond);
-        barrier.await();
-        LOG.info("First loaded " + cl1.loadClass(SECOND.class.getName()));
-        barrier.await();
+        ModuleClassLoader cl1 = createCL(s1, FIRST.class, mySecond);
+        myFirst.set(cl1);
+        barrier.await(TIMEOUT, TimeUnit.MILLISECONDS);
+        Class<?> aClass = cl1.loadClass(SECOND.class.getName());
+        LOG.info("First loaded " + aClass);
+        barrier.await(TIMEOUT, TimeUnit.MILLISECONDS);
+      } catch (BrokenBarrierException e) {
+        LOG.error("Exception during task execution", e);
+      } catch (InterruptedException e) {
+        LOG.error("Execution was interrupted ", e);
+        Thread.interrupted();
       } catch (VirtualMachineError e) {
         throw e;
       } catch (Throwable e) {
@@ -65,10 +74,17 @@ final class CrossDependentTaskGenerator1 extends TaskGenerator {
     return () -> {
       try {
         LOG.info("Creating second classloader");
-        ModuleClassLoader cl2 = createCL(s2, SECOND.class, mySecond, myFirst);
-        barrier.await();
-        LOG.info("Second loaded " + cl2.loadClass(FIRST.class.getName()));
-        barrier.await();
+        ModuleClassLoader cl2 = createCL(s2, SECOND.class, myFirst);
+        mySecond.set(cl2);
+        barrier.await(TIMEOUT, TimeUnit.MILLISECONDS);
+        Class<?> aClass = cl2.loadClass(FIRST.class.getName());
+        LOG.info("Second loaded " + aClass);
+        barrier.await(TIMEOUT, TimeUnit.MILLISECONDS);
+      } catch (BrokenBarrierException e) {
+        LOG.error("Exception during task execution", e);
+      } catch (InterruptedException e) {
+        LOG.error("Execution was interrupted ", e);
+        Thread.interrupted();
       } catch (VirtualMachineError e) {
         throw e;
       } catch (Throwable e) {
@@ -79,12 +95,11 @@ final class CrossDependentTaskGenerator1 extends TaskGenerator {
     };
   }
 
-  private ModuleClassLoader createCL(ReloadableModule module, Class<?> aClass, Deque<ModuleClassLoader> toAdd, Deque<ModuleClassLoader> toPeek) {
-    ModuleClassLoader cl = new ModuleClassLoader(new ModuleClassLoaderSupport(module,
-                                                                              () -> Collections.singletonList(toPeek.peekLast()),
-                                                                              new FakeClassPathItem(aClass)));
-    toAdd.addLast(cl);
-    return cl;
+  private ModuleClassLoader createCL(ReloadableModule module, Class<?> aClass, AtomicReference<ModuleClassLoader> dep) {
+    ModuleClassLoaderSupport support = new ModuleClassLoaderSupport(module,
+                                                                    () -> Collections.singletonList(dep.get()),
+                                                                    new FakeClassPathItem(aClass));
+    return new ModuleClassLoader(support);
   }
 
   @NotNull

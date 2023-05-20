@@ -1,0 +1,8 @@
+<ivy-module version="2.0">
+  <info organisation="org.jetbrains.mps" module="kotlin-compiler"/>
+  <dependencies>
+    <dependency org="org.jetbrains.kotlin" name="kotlin-dist-for-jps-meta" rev="${kotlin.version}">
+      <artifact name="kotlin-dist-for-jps-meta" ext="pom"/>
+    </dependency>
+  </dependencies>
+</ivy-module>

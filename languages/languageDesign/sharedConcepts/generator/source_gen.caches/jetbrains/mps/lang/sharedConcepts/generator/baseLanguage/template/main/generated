@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-76nf4yw2214w4rgn6zmbpomn2abnemf" />
+<product version="3" modelHash="48yfcff1louruzcw1u2v2xx5eaovrko">
+  <files names="QueriesGenerated.java" />
+</product>
 

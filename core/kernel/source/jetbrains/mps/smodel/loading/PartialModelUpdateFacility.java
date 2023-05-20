@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2015 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,10 @@
 package jetbrains.mps.smodel.loading;
 
 import jetbrains.mps.extapi.model.SModelData;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.smodel.InterfaceSNode;
 import jetbrains.mps.smodel.LazySNode;
 import jetbrains.mps.util.IterableUtil;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.model.SModel;
@@ -38,7 +37,7 @@ import java.util.Iterator;
  */
 public class PartialModelUpdateFacility {
 
-  private static final Logger LOG = LogManager.getLogger(PartialModelUpdateFacility.class);
+  private static final Logger LOG = Logger.getLogger(PartialModelUpdateFacility.class);
 
   private SModelData myModel;
   private SModelData myFullModel;
@@ -80,7 +79,7 @@ public class PartialModelUpdateFacility {
       SNode fullNode = myFullModel.getNode(node.getNodeId());
       if (fullNode == null) {
         final String m = "model %s: no peer node in full model for %s (in %s)";
-        LOG.error(String.format(m, myModel.getReference().getModelName(), node.getNodeId(), myDataOwner.getSource().getLocation()));
+        LOG.error(String.format(m, myModel.getModelName(), node.getNodeId(), myDataOwner.getSource().getLocation()));
         return;
       }
       Iterator<? extends SNode> it = fullNode.getChildren().iterator();

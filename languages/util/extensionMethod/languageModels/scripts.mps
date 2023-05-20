@@ -2,10 +2,10 @@
 <model ref="r:6f595bf3-27c5-4410-a8f0-094e3ff4d9f0(jetbrains.mps.baseLanguage.extensionMethods.scripts)">
   <persistence version="9" />
   <languages>
-    <use id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections" version="0" />
-    <use id="0eddeefa-c2d6-4437-bc2c-de50fd4ce470" name="jetbrains.mps.lang.script" version="0" />
-    <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="4" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections" version="1" />
+    <use id="0eddeefa-c2d6-4437-bc2c-de50fd4ce470" name="jetbrains.mps.lang.script" version="1" />
+    <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="19" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -14,7 +14,6 @@
     <import index="tpee" ref="r:00000000-0000-4000-0000-011c895902ca(jetbrains.mps.baseLanguage.structure)" />
     <import index="5tns" ref="r:a5509d93-a6df-4356-9363-7de4efc47849(jetbrains.mps.baseLanguage.extensionMethods.behavior)" />
     <import index="wyt6" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)" />
-    <import index="5h2r" ref="r:e985db5c-6ba2-43f6-94fe-1b4547c2cc5c(jetbrains.mps.baseLanguage.search)" />
     <import index="fnmy" ref="r:89c0fb70-0977-4113-a076-5906f9d8630f(jetbrains.mps.baseLanguage.scopes)" />
     <import index="tpck" ref="r:00000000-0000-4000-0000-011c89590288(jetbrains.mps.lang.core.structure)" implicit="true" />
   </imports>
@@ -99,8 +98,6 @@
     <language id="0eddeefa-c2d6-4437-bc2c-de50fd4ce470" name="jetbrains.mps.lang.script">
       <concept id="1177457067821" name="jetbrains.mps.lang.script.structure.MigrationScript" flags="ig" index="_UgoZ">
         <property id="1177457669450" name="title" index="_Wzho" />
-        <property id="1206123256132" name="migrationFromBuild" index="3iz5xs" />
-        <property id="1206123296179" name="category" index="3izfiF" />
         <child id="1177458178889" name="part" index="_YvDr" />
       </concept>
       <concept id="1177457850499" name="jetbrains.mps.lang.script.structure.MigrationScriptPart_Instance" flags="lg" index="_XfAh">
@@ -161,10 +158,8 @@
     </language>
   </registry>
   <node concept="_UgoZ" id="6xkNu_iwnE8">
-    <property role="3izfiF" value="Extension Methods" />
     <property role="_Wzho" value="Convert ExtensionMethodCall to Local" />
     <property role="TrG5h" value="ConvertExtensionMethodCallToLocal" />
-    <property role="3iz5xs" value="6252" />
     <node concept="_XfAh" id="6xkNu_iwnGd" role="_YvDr">
       <property role="_XH9r" value="ConvertLocalInstanceMethodCall" />
       <property role="1iWc8x" value="true" />
@@ -193,7 +188,7 @@
               <node concept="2OqwBi" id="6xkNu_iwnGq" role="37vLTx">
                 <node concept="_YI3z" id="6xkNu_iwnGr" role="2Oq$k0" />
                 <node concept="3TrEf2" id="6xkNu_iwnGs" role="2OqNvi">
-                  <ref role="3Tt5mk" to="tpee:hwllgre" />
+                  <ref role="3Tt5mk" to="tpee:hwllgre" resolve="instanceMethodDeclaration" />
                 </node>
               </node>
               <node concept="2OqwBi" id="6xkNu_iwnGt" role="37vLTJ">
@@ -201,7 +196,7 @@
                   <ref role="3cqZAo" node="6xkNu_iwnGh" resolve="methodCall" />
                 </node>
                 <node concept="3TrEf2" id="6xkNu_iwnIg" role="2OqNvi">
-                  <ref role="3Tt5mk" to="uigu:6EBM_lhyT5L" />
+                  <ref role="3Tt5mk" to="uigu:6EBM_lhyT5L" resolve="instanceMethodDeclaration" />
                 </node>
               </node>
             </node>
@@ -213,14 +208,14 @@
                   <ref role="3cqZAo" node="6xkNu_iwnGh" resolve="methodCall" />
                 </node>
                 <node concept="3Tsc0h" id="6xkNu_iwnG$" role="2OqNvi">
-                  <ref role="3TtcxE" to="tpee:fz7wK6I" />
+                  <ref role="3TtcxE" to="tpee:fz7wK6I" resolve="actualArgument" />
                 </node>
               </node>
               <node concept="X8dFx" id="6xkNu_iwnG_" role="2OqNvi">
                 <node concept="2OqwBi" id="6xkNu_iwnGA" role="25WWJ7">
                   <node concept="_YI3z" id="6xkNu_iwnGB" role="2Oq$k0" />
                   <node concept="3Tsc0h" id="6xkNu_iwnGC" role="2OqNvi">
-                    <ref role="3TtcxE" to="tpee:fz7wK6I" />
+                    <ref role="3TtcxE" to="tpee:fz7wK6I" resolve="actualArgument" />
                   </node>
                 </node>
               </node>
@@ -263,7 +258,7 @@
               <node concept="2OqwBi" id="6xkNu_iwnH5" role="33vP2m">
                 <node concept="_YI3z" id="6xkNu_iwnH6" role="2Oq$k0" />
                 <node concept="3TrEf2" id="6xkNu_iwnH7" role="2OqNvi">
-                  <ref role="3Tt5mk" to="tpee:hwllgre" />
+                  <ref role="3Tt5mk" to="tpee:hwllgre" resolve="instanceMethodDeclaration" />
                 </node>
               </node>
             </node>
@@ -383,7 +378,7 @@
                         </node>
                       </node>
                       <node concept="liA8E" id="6xkNu_iwnHN" role="2OqNvi">
-                        <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object):boolean" resolve="equals" />
+                        <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object)" resolve="equals" />
                         <node concept="2OqwBi" id="6xkNu_iwnHO" role="37wK5m">
                           <node concept="37vLTw" id="3GM_nagTz8Q" role="2Oq$k0">
                             <ref role="3cqZAo" node="6xkNu_iwnH3" resolve="declaration" />

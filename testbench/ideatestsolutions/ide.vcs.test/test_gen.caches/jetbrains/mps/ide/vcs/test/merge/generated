@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="8fffgzh6rmtuerxsh5oc71uwc21u224" />
+<product version="3" modelHash="bjnbn6uw7x9lml20pmq4bg3l2uuhrl6">
+  <files names="ChangesCalculationTest.java:ChangesManagerTestWaitHelper.java:ChangesRollbackTest.java:ChangesTestBase.java:ChangesTestUtil.java:ConflictsBuilderTest.java:IncrementalChangeUpdateTest_Model.java:IncrementalChangeUpdateTest_Nodes.java:MergeTest.java:MoveChangeConflictsTest.java:NotMoveChangeConflictsTest.java:RootStatusItem.java:RootStatusTest.java:StructuredChangesCalculationTest.java:WrapChangeConflictsTest.java:_Adapters.java" />
+</product>
 

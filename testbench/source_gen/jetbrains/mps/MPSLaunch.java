@@ -6,8 +6,14 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.annotation.ElementType;
+import jetbrains.mps.annotations.GeneratedClass;
 
+/**
+ * Denotes JUnit test classes (both JUnit version 3 and 4) that expect MPS instance up and running.
+ * AbstractTestWrapper#needsMPS uses it to figure out proper test executor (i.e. one that starts MPS vs another bare console one).
+ */
 @Retention(value = RetentionPolicy.RUNTIME)
 @Target(value = {ElementType.METHOD, ElementType.TYPE})
+@GeneratedClass(node = "r:609ff00a-e99e-4fdb-a9f0-2fac708d77c0(jetbrains.mps)/5294483648489409013", model = "r:609ff00a-e99e-4fdb-a9f0-2fac708d77c0(jetbrains.mps)")
 public @interface MPSLaunch {
 }

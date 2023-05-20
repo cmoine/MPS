@@ -5,72 +5,81 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
   <root>
     <file name="ConstraintsAspectDescriptor.java">
-      <unit at="13,0,50,0" name="jetbrains.mps.baseLanguage.unitTest.constraints.ConstraintsAspectDescriptor" />
+      <unit at="13,0,31,0" name="jetbrains.mps.baseLanguage.unitTest.constraints.ConstraintsAspectDescriptor" />
     </file>
   </root>
   <root nodeRef="r:00000000-0000-4000-0000-011c895902d2(jetbrains.mps.baseLanguage.unitTest.constraints)/1213104846868">
     <file name="BTestCase_Constraints.java">
-      <node id="1213104846868" at="17,34,18,158" concept="5" />
-      <node id="1213104846868" at="22,84,23,119" concept="3" />
-      <node id="1213104846868" at="26,37,27,20" concept="4" />
-      <node id="1213104846868" at="30,42,31,37" concept="3" />
-      <node id="1213104846872" at="31,37,32,183" concept="4" />
-      <node id="1213104846868" at="34,7,35,22" concept="4" />
-      <node id="1213104846868" at="17,0,20,0" concept="0" trace="BTestCase_Constraints#()V" />
-      <node id="1213104846868" at="25,0,29,0" concept="2" trace="hasOwnGetter#()Z" />
-      <node id="1213104846868" at="29,0,34,0" concept="2" trace="getValue#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/Object;" />
-      <node id="1213104846868" at="23,119,34,7" concept="1" />
-      <node id="1213104846868" at="21,0,37,0" concept="2" trace="getSpecifiedProperties#()Ljava/util/Map;" />
-      <scope id="1213104846868" at="17,34,18,158" />
-      <scope id="1213104846868" at="26,37,27,20" />
-      <scope id="1213104846868" at="30,42,32,183">
-        <var name="propertyName" id="1213104846868" />
+      <node id="1213104846868" at="18,34,19,33" concept="6" />
+      <node id="1213104846869" at="23,59,24,60" concept="6" />
+      <node id="1213104846872" at="27,40,28,84" concept="4" />
+      <node id="1213104846868" at="32,84,33,119" concept="3" />
+      <node id="1213104846869" at="33,119,34,61" concept="1" />
+      <node id="1213104846868" at="34,61,35,22" concept="4" />
+      <node id="1213104846868" at="39,0,40,0" concept="5" trace="BTestCase$_a" />
+      <node id="1213104846868" at="43,0,44,0" concept="5" trace="name$MnvL" />
+      <node id="1213104846868" at="44,0,45,0" concept="5" trace="testCaseName$ESwy" />
+      <node id="1213104846868" at="18,0,21,0" concept="0" trace="BTestCase_Constraints#()V" />
+      <node id="1213104846869" at="23,0,26,0" concept="0" trace="Name_Property#(Ljetbrains/mps/smodel/runtime/ConstraintsDescriptor;)V" />
+      <node id="1213104846869" at="26,0,30,0" concept="2" trace="getValue#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/Object;" />
+      <node id="1213104846868" at="31,0,37,0" concept="2" trace="getSpecifiedProperties#()Ljava/util/Map;" />
+      <scope id="1213104846868" at="18,34,19,33" />
+      <scope id="1213104846869" at="23,59,24,60" />
+      <scope id="1213104846871" at="27,40,28,84" />
+      <scope id="1213104846868" at="18,0,21,0" />
+      <scope id="1213104846869" at="23,0,26,0">
+        <var name="container" id="1213104846869" />
       </scope>
-      <scope id="1213104846868" at="17,0,20,0" />
-      <scope id="1213104846868" at="25,0,29,0" />
-      <scope id="1213104846868" at="29,0,34,0">
-        <var name="node" id="1213104846868" />
-      </scope>
-      <scope id="1213104846868" at="22,84,35,22">
+      <scope id="1213104846868" at="32,84,35,22">
         <var name="properties" id="1213104846868" />
       </scope>
-      <scope id="1213104846868" at="21,0,37,0" />
-      <unit id="1213104846868" at="24,137,34,5" name="jetbrains.mps.baseLanguage.unitTest.constraints.BTestCase_Constraints$1" />
-      <unit id="1213104846868" at="16,0,38,0" name="jetbrains.mps.baseLanguage.unitTest.constraints.BTestCase_Constraints" />
+      <scope id="1213104846869" at="26,0,30,0">
+        <var name="node" id="1213104846869" />
+      </scope>
+      <scope id="1213104846868" at="31,0,37,0" />
+      <unit id="1213104846868" at="38,0,41,0" name="jetbrains.mps.baseLanguage.unitTest.constraints.BTestCase_Constraints$CONCEPTS" />
+      <unit id="1213104846868" at="42,0,46,0" name="jetbrains.mps.baseLanguage.unitTest.constraints.BTestCase_Constraints$PROPS" />
+      <unit id="1213104846869" at="22,0,31,0" name="jetbrains.mps.baseLanguage.unitTest.constraints.BTestCase_Constraints$Name_Property" />
+      <unit id="1213104846868" at="17,0,47,0" name="jetbrains.mps.baseLanguage.unitTest.constraints.BTestCase_Constraints" />
     </file>
   </root>
   <root nodeRef="r:00000000-0000-4000-0000-011c895902d2(jetbrains.mps.baseLanguage.unitTest.constraints)/1213104847596">
     <file name="TestMethod_Constraints.java">
-      <node id="1213104847596" at="17,35,18,159" concept="5" />
-      <node id="1213104847596" at="22,84,23,119" concept="3" />
-      <node id="1213104847596" at="26,37,27,20" concept="4" />
-      <node id="1213104847596" at="30,42,31,37" concept="3" />
-      <node id="1213104847600" at="31,37,32,181" concept="4" />
-      <node id="1213104847596" at="34,7,35,22" concept="4" />
-      <node id="1213104847596" at="17,0,20,0" concept="0" trace="TestMethod_Constraints#()V" />
-      <node id="1213104847596" at="25,0,29,0" concept="2" trace="hasOwnGetter#()Z" />
-      <node id="1213104847596" at="29,0,34,0" concept="2" trace="getValue#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/Object;" />
-      <node id="1213104847596" at="23,119,34,7" concept="1" />
-      <node id="1213104847596" at="21,0,37,0" concept="2" trace="getSpecifiedProperties#()Ljava/util/Map;" />
-      <scope id="1213104847596" at="17,35,18,159" />
-      <scope id="1213104847596" at="26,37,27,20" />
-      <scope id="1213104847596" at="30,42,32,181">
-        <var name="propertyName" id="1213104847596" />
+      <node id="1213104847596" at="18,35,19,34" concept="6" />
+      <node id="1213104847597" at="23,59,24,60" concept="6" />
+      <node id="1213104847600" at="27,40,28,82" concept="4" />
+      <node id="1213104847596" at="32,84,33,119" concept="3" />
+      <node id="1213104847597" at="33,119,34,61" concept="1" />
+      <node id="1213104847596" at="34,61,35,22" concept="4" />
+      <node id="1213104847596" at="39,0,40,0" concept="5" trace="TestMethod$FX" />
+      <node id="1213104847596" at="43,0,44,0" concept="5" trace="name$MnvL" />
+      <node id="1213104847596" at="44,0,45,0" concept="5" trace="methodName$OVU2" />
+      <node id="1213104847596" at="18,0,21,0" concept="0" trace="TestMethod_Constraints#()V" />
+      <node id="1213104847597" at="23,0,26,0" concept="0" trace="Name_Property#(Ljetbrains/mps/smodel/runtime/ConstraintsDescriptor;)V" />
+      <node id="1213104847597" at="26,0,30,0" concept="2" trace="getValue#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/Object;" />
+      <node id="1213104847596" at="31,0,37,0" concept="2" trace="getSpecifiedProperties#()Ljava/util/Map;" />
+      <scope id="1213104847596" at="18,35,19,34" />
+      <scope id="1213104847597" at="23,59,24,60" />
+      <scope id="1213104847599" at="27,40,28,82" />
+      <scope id="1213104847596" at="18,0,21,0" />
+      <scope id="1213104847597" at="23,0,26,0">
+        <var name="container" id="1213104847597" />
       </scope>
-      <scope id="1213104847596" at="17,0,20,0" />
-      <scope id="1213104847596" at="25,0,29,0" />
-      <scope id="1213104847596" at="29,0,34,0">
-        <var name="node" id="1213104847596" />
-      </scope>
-      <scope id="1213104847596" at="22,84,35,22">
+      <scope id="1213104847596" at="32,84,35,22">
         <var name="properties" id="1213104847596" />
       </scope>
-      <scope id="1213104847596" at="21,0,37,0" />
-      <unit id="1213104847596" at="24,137,34,5" name="jetbrains.mps.baseLanguage.unitTest.constraints.TestMethod_Constraints$1" />
-      <unit id="1213104847596" at="16,0,38,0" name="jetbrains.mps.baseLanguage.unitTest.constraints.TestMethod_Constraints" />
+      <scope id="1213104847597" at="26,0,30,0">
+        <var name="node" id="1213104847597" />
+      </scope>
+      <scope id="1213104847596" at="31,0,37,0" />
+      <unit id="1213104847596" at="38,0,41,0" name="jetbrains.mps.baseLanguage.unitTest.constraints.TestMethod_Constraints$CONCEPTS" />
+      <unit id="1213104847596" at="42,0,46,0" name="jetbrains.mps.baseLanguage.unitTest.constraints.TestMethod_Constraints$PROPS" />
+      <unit id="1213104847597" at="22,0,31,0" name="jetbrains.mps.baseLanguage.unitTest.constraints.TestMethod_Constraints$Name_Property" />
+      <unit id="1213104847596" at="17,0,47,0" name="jetbrains.mps.baseLanguage.unitTest.constraints.TestMethod_Constraints" />
     </file>
   </root>
 </debug-info>

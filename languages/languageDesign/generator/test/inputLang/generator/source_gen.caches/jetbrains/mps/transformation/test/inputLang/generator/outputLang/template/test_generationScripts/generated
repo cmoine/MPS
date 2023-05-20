@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="d62c7mow3qelx2lju2a5ylgq1le6c93" />
+<product version="3" modelHash="-buci2cdl1373tvwj40s202ses2rolmn">
+  <files names="Mapping_main.java:QueriesGenerated.java:Script_test_postMappingScript.java:Script_test_preMappingScript.java:TemplateModelImpl.java:Template_OutputRoot_By_RootRule.java:Template_OutputRoot_by_MappingRule.java" />
+</product>
 

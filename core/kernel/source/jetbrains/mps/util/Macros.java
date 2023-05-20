@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,99 +17,77 @@ package jetbrains.mps.util;
 
 import jetbrains.mps.project.PathMacros;
 import jetbrains.mps.vfs.IFile;
-import jetbrains.mps.vfs.IFileUtils;
-import jetbrains.mps.vfs.impl.IoFileSystem;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import jetbrains.mps.vfs.IFileSystem;
+import jetbrains.mps.vfs.util.PathFormatChecker;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
+import java.util.List;
 import java.util.Set;
 
-/**
- * TODO AP rewrite everything using {@link jetbrains.mps.vfs.path.Path}
- */
 class Macros {
-  private static final Logger LOG = LogManager.getLogger(Macros.class);
+  private final PathMacros myComponent;
 
-  @NotNull private final static PathMacros PATH_MACROS = PathMacros.getInstance();
-
-  @NotNull
-  private String getFullPath(@NotNull String anchorPath, @NotNull String relativePath) {
-    return IFileUtils.getCanonicalPath(new IoFileSystem().getFile(anchorPath).getDescendant(relativePath));
+  protected Macros(@NotNull PathMacros component) {
+    myComponent = component;
   }
 
   protected String expand(String path, @Nullable IFile anchorFile) {
+    new PathFormatChecker(path).osIndependentPath();
+
     if (!MacrosFactory.containsMacro(path)) {
       return path;
     }
-    String macro = path.substring(2, path.indexOf("}"));
-    String relativePath = removePrefix(path);
-    String macroValue = PATH_MACROS.getValue(macro);
-    if (macroValue != null) {
-      return getFullPath(macroValue, relativePath);
+    int macroEnd = path.indexOf('}');
+    String macro = path.substring(2, macroEnd);
+    String macroValue = myComponent.getValue(macro);
+    if (macroValue == null) {
+      myComponent.report(macro);
+      return path;
     }
-
-    PATH_MACROS.report("Please define path variable in path variables section of settings", macro);
-    return path;
+    String expanded = macroValue + path.substring(macroEnd + 1);
+    return FileUtil.resolveParentDirs(expanded);
   }
 
-  protected String shrink(String absolutePath, IFile anchorFile) {
+  protected void shrink(String absolutePath, IFile anchorFile, List<String> alternatives) {
+    new PathFormatChecker(absolutePath).osIndependentPath().noDots().absolute();
+
     String fileName;
-    Set<String> macroNames = PATH_MACROS.getNames();
+    Set<String> macroNames = myComponent.getNames();
     for (String macro : macroNames) {
-      String path = PATH_MACROS.getValue(macro);
+      String path = myComponent.getValue(macro);
       if (path != null) {
-        path = getCanonicalPath(path).replace(MacrosFactory.SEPARATOR_CHAR, File.separatorChar);
+        path = FileUtil.normalize(path);//hack for 19.1, replace with assertion in 19.2
         if (pathStartsWith(absolutePath, path)) {
           String relationalPath = shrink(absolutePath, path);
           fileName = "${" + macro + "}" + relationalPath;
-          return fileName;
+          alternatives.add(fileName);
         }
       }
     }
-    fileName = absolutePath;
-    return fileName;
-  }
-
-  private static String getCanonicalPath(String path) {
-    return FileUtil.getCanonicalPath(path);
   }
 
   protected static String shrink(String path, String prefix) {
-    // since pathStartsWith uses getCanonicalPath
-    // we use it here also
-    path = getCanonicalPath(path);
     if (path.equals(prefix)) {
       return "";
     }
     assert path.length() >= prefix.length() : "path: " + path + "; prefix: " + prefix;
-    return File.separator + FileUtil.getRelativePath(path, prefix, File.separator);
+    return IFileSystem.SEPARATOR + FileUtil.getRelativePath(path, prefix, IFileSystem.SEPARATOR);
   }
 
-  String removePrefix(String path) {
-    String result = path.substring(path.indexOf("}") + 1);
-    if (result.startsWith(File.separator)) {
-      result = result.substring(1);
-    }
-    return result;
-  }
+  static boolean pathStartsWith(String absolutePath, @NotNull String with) {
+    new PathFormatChecker(absolutePath).absolute();
 
-  static boolean pathStartsWith(String path, @NotNull String with) {
-    // shrink uses getCanonicalPath
-    path = getCanonicalPath(path);
-
-    if (path.equals(with)) {
+    if (absolutePath.equals(with)) {
       return true;
     }
 
-    String fullPart = with + (with.endsWith(File.separator) ? "" : File.separator);
-    if (!path.toLowerCase().startsWith(fullPart.toLowerCase())) {
+    String fullPart = with + (with.endsWith(IFileSystem.SEPARATOR) ? "" : IFileSystem.SEPARATOR);
+    if (!absolutePath.toLowerCase().startsWith(fullPart.toLowerCase())) {
       return false;
     }
 
-    String pathReplaced = getCanonicalPath(with + path.substring(with.length()));
-    return path.equals(pathReplaced);
+    String pathReplaced = with + absolutePath.substring(with.length());
+    return absolutePath.equals(pathReplaced);
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,9 +43,9 @@ import java.util.List;
 public final class ConceptInfo extends BaseInfo implements Comparable<ConceptInfo> {
   private final SConceptId myConcept;
   private final String myName;
-  private final HashMap<SPropertyId, PropertyInfo> myProperties = new HashMap<SPropertyId, PropertyInfo>();
-  private final HashMap<SReferenceLinkId, AssociationLinkInfo> myAssociations = new HashMap<SReferenceLinkId, AssociationLinkInfo>();
-  private final HashMap<SContainmentLinkId, AggregationLinkInfo> myAggregations = new HashMap<SContainmentLinkId, AggregationLinkInfo>(8);
+  private final HashMap<SPropertyId, PropertyInfo> myProperties = new HashMap<>();
+  private final HashMap<SReferenceLinkId, AssociationLinkInfo> myAssociations = new HashMap<>();
+  private final HashMap<SContainmentLinkId, AggregationLinkInfo> myAggregations = new HashMap<>(8);
   private ConceptKind myKind = ConceptKind.NORMAL;
   private StaticScope myScope = StaticScope.GLOBAL;
   private SConceptId myStubCounterpart = null; // makes sense only for ConceptKind.IMPLEMENTATION_WITH_STUB
@@ -58,17 +58,17 @@ public final class ConceptInfo extends BaseInfo implements Comparable<ConceptInf
     return myConcept;
   }
   public List<PropertyInfo> getPropertiesInUse() {
-    ArrayList<PropertyInfo> rv = new ArrayList<PropertyInfo>(myProperties.values());
+    ArrayList<PropertyInfo> rv = new ArrayList<>(myProperties.values());
     Collections.sort(rv);
     return rv;
   }
   public List<AssociationLinkInfo> getAssociationsInUse() {
-    ArrayList<AssociationLinkInfo> rv = new ArrayList<AssociationLinkInfo>(myAssociations.values());
+    ArrayList<AssociationLinkInfo> rv = new ArrayList<>(myAssociations.values());
     Collections.sort(rv);
     return rv;
   }
   public List<AggregationLinkInfo> getAggregationsInUse() {
-    ArrayList<AggregationLinkInfo> rv = new ArrayList<AggregationLinkInfo>(myAggregations.values());
+    ArrayList<AggregationLinkInfo> rv = new ArrayList<>(myAggregations.values());
     Collections.sort(rv);
     return rv;
   }
@@ -102,7 +102,7 @@ public final class ConceptInfo extends BaseInfo implements Comparable<ConceptInf
   public String constructStubConceptName() {
     return constructStubConceptName(myName);
   }
-  public static String constructStubConceptName(@NotNull String originalConceptQualifiedName) {
+  private static String constructStubConceptName(@NotNull String originalConceptQualifiedName) {
     String ns = NameUtil.namespaceFromLongName(originalConceptQualifiedName);
     String sname = NameUtil.shortNameFromLongName(originalConceptQualifiedName);
     return ((ns == null || ns.isEmpty()) ? "" : ns + '.') + "Stub" + sname;

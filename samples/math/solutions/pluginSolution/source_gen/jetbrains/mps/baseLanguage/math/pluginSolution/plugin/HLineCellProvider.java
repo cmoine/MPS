@@ -13,13 +13,13 @@ import java.awt.Color;
 import jetbrains.mps.openapi.editor.cells.CellTraversalUtil;
 
 public class HLineCellProvider extends AbstractCellProvider {
-  private SNode myNode;
   public HLineCellProvider(SNode node) {
-    this.myNode = node;
+    super(node);
   }
+
   @Override
-  public EditorCell createEditorCell(EditorContext p0) {
-    EditorCell_Basic result = new EditorCell_Basic(p0, this.myNode) {
+  public EditorCell createEditorCell(EditorContext context) {
+    EditorCell_Basic result = new EditorCell_Basic(context, getSNode()) {
       @Override
       protected void paintContent(Graphics g, ParentSettings parentSettings) {
         if (this.isSelectionPaintedOnAncestor(parentSettings).isSelectionPainted()) {

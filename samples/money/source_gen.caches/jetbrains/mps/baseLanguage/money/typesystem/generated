@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-21cqi9oxx6p8544t6aaoy0sd7m4xra0" />
+<product version="3" modelHash="-8iesgx91lvplfeyq8brksxez0gx1xv3">
+  <files names="TypesystemDescriptor.java:typeof_MoneyCreator_InferenceRule.java:typeof_MoneyGetAmountMethodCall_InferenceRule.java:typeof_MoneyGetCurrencyMethodCall_InferenceRule.java:typeof_MoneyIsZeroMethodCall_InferenceRule.java:typeof_MoneyLiteral_InferenceRule.java" />
+</product>
 

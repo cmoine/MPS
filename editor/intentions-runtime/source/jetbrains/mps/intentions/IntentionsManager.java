@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,37 +16,35 @@
 package jetbrains.mps.intentions;
 
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-import jetbrains.mps.errors.QuickFixProvider;
+import jetbrains.mps.errors.item.EditorQuickFix;
+import jetbrains.mps.errors.item.ReportItem;
+import jetbrains.mps.errors.item.TypesystemReportItemAdapter;
 import jetbrains.mps.ide.MPSCoreComponents;
 import jetbrains.mps.intentions.IntentionsVisitor.CollectAvailableIntentionsVisitor;
 import jetbrains.mps.intentions.IntentionsVisitor.GetHighestAvailableIntentionTypeVisitor;
 import jetbrains.mps.lang.script.runtime.AbstractMigrationRefactoring;
 import jetbrains.mps.lang.script.runtime.RefactoringScript;
 import jetbrains.mps.lang.script.runtime.ScriptAspectDescriptor;
+import jetbrains.mps.logging.Logger;
 import jetbrains.mps.nodeEditor.EditorComponent;
-import jetbrains.mps.nodeEditor.EditorMessage;
-import jetbrains.mps.openapi.editor.Editor;
+import jetbrains.mps.nodeEditor.HighlighterMessage;
 import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.message.SimpleEditorMessage;
-import jetbrains.mps.smodel.MPSModuleRepository;
-import jetbrains.mps.smodel.ModelAccessHelper;
+import jetbrains.mps.openapi.intentions.IntentionAspectDescriptor;
+import jetbrains.mps.openapi.intentions.IntentionDescriptor;
+import jetbrains.mps.openapi.intentions.IntentionExecutable;
+import jetbrains.mps.openapi.intentions.IntentionFactory;
+import jetbrains.mps.openapi.intentions.Kind;
 import jetbrains.mps.smodel.SLanguageHierarchy;
 import jetbrains.mps.smodel.SModelOperations;
 import jetbrains.mps.smodel.language.LanguageRegistry;
 import jetbrains.mps.smodel.language.LanguageRuntime;
-import jetbrains.mps.typesystem.inference.ITypeContextOwner;
-import jetbrains.mps.typesystem.inference.TypeContextManager;
-import jetbrains.mps.util.Computable;
+import jetbrains.mps.typechecking.TypecheckingFacade;
 import jetbrains.mps.util.Pair;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.language.SLanguage;
 import org.jetbrains.mps.openapi.model.SNode;
@@ -57,129 +55,181 @@ import org.jetbrains.mps.util.UniqueIterator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @State(
     name = "MPSIntentionsManager",
     storages = @Storage("intentions.xml")
 )
-public class IntentionsManager implements ApplicationComponent, PersistentStateComponent<IntentionsManager.MyState> {
-  private static final Logger LOG = LogManager.getLogger(IntentionsManager.class);
+public class IntentionsManager implements PersistentStateComponent<IntentionsManager.MyState> {
+  private static final Logger LOG = Logger.getLogger(IntentionsManager.class);
 
   public static String getDescriptorClassName(SModuleReference langRef) {
     return "IntentionsDescriptor";
   }
 
   public static IntentionsManager getInstance() {
-    return ApplicationManager.getApplication().getComponent(IntentionsManager.class);
+    return ApplicationManager.getApplication().getService(IntentionsManager.class);
   }
 
   private MyState myState = new MyState();
 
+  public IntentionsManager() {
+  }
+
+  public synchronized Kind getHighestAvailableBaseIntentionType(final SNode node, final EditorContext editorContext) {
+    final GetHighestAvailableIntentionTypeVisitor visitor = new GetHighestAvailableIntentionTypeVisitor(editorContext);
+    // FIXME invoking runWithSession is unnecessary here b/c the only client takes care of that already
+    if (((EditorComponent) editorContext.getEditorComponent()).getTypecheckingSession() == null) return null;
+    
+    TypecheckingFacade
+        .getFromContext()
+        .runWithSession(((EditorComponent) editorContext.getEditorComponent()).getTypecheckingSession(),
+                        (session) -> {
+                          Filter filter = new Filter(getDisabledIntentions()) {
+
+                            @Override
+                            boolean accept(IntentionFactory intentionFactory) {
+                              return super.accept(intentionFactory) && visitor.hasHigherPriority(intentionFactory.getKind());
+                            }
+                          };
+                          for (SNode currentNode = node; currentNode != null; currentNode = currentNode.getParent()) {
+                            if (!visitIntentions(currentNode, visitor, filter, currentNode != node, editorContext)) {
+                              break;
+                            }
+                          }
+                        });
+    return visitor.getIntentionKind();
+  }
+
   /**
-   * FIXME this field is here just for the sake of ModelAccess, ApplicationComponent shall not depend on any project-related stuff,
-   * rather shall get it from context.
+   * Composite of intention and the node for which the intention was calculated
+   * {@link #getAvailableIntentionsForExactNode(SNode, EditorContext, boolean, Filter)})
    */
-  private final MPSModuleRepository myRepository;
+  private static class IntentionExecutableWithSNode {
+    public final IntentionExecutable intention;
+    public final SNode node;
 
-  public IntentionsManager(MPSCoreComponents coreComponents) {
-    myRepository = coreComponents.getModuleRepository();
+    private IntentionExecutableWithSNode(@NotNull IntentionExecutable intention, @NotNull SNode node) {
+      this.intention = intention;
+      this.node = node;
+    }
   }
 
-  public synchronized IntentionType getHighestAvailableBaseIntentionType(final SNode node, final EditorContext editorContext) {
-    final GetHighestAvailableIntentionTypeVisitor visitor = new GetHighestAvailableIntentionTypeVisitor();
-    TypeContextManager.getInstance().runTypecheckingAction((ITypeContextOwner) editorContext.getEditorComponent(), new Runnable() {
-      @Override
-      public void run() {
-        Filter filter = new Filter(getDisabledIntentions()) {
+  private final class IntentionsCollector {
+    @NotNull private final QueryDescriptor myQuery;
+    @NotNull private final SNode myStartingNode;
+    @NotNull private final EditorContext myEditorContext;
 
-          @Override
-          boolean accept(IntentionFactory intentionFactory) {
-            return super.accept(intentionFactory) && visitor.hasHigherPriority(intentionFactory.getType());
+    public IntentionsCollector(@NotNull QueryDescriptor query, @NotNull SNode startingNode, @NotNull EditorContext context) {
+      myQuery = query;
+      myStartingNode = startingNode;
+      myEditorContext = context;
+    }
+
+    /**
+     * Called inside the type checking action in the {@link #collect()}
+     * @return the sorted collection (according to kind, distance to the starting node) of the applicable intentions
+     */
+    private Collection<IntentionExecutableWithSNode> collect0() {
+      final Map<IntentionExecutable, Kind> intention2Kind = new HashMap<>();
+      final Map<SNode, Integer> distance2StartingNodeInAST = new HashMap<>();
+
+      // Hiding intentions with same IntentionDescriptor
+      // important when currently selected element and it's parent has same intention
+      final Set<IntentionDescriptor> processedIntentionDescriptors = new HashSet<>();
+      Filter filter = new Filter(myQuery.myEnabledOnly ? getDisabledIntentions() : null, myQuery.mySurroundWith) {
+        @Override
+        boolean accept(IntentionFactory intentionFactory) {
+          return super.accept(intentionFactory) && !processedIntentionDescriptors.contains(intentionFactory);
+        }
+      };
+      List<IntentionExecutableWithSNode> result = new ArrayList<>();
+      Map<IntentionExecutable, Kind> intentionsForExactNode = getAvailableIntentionsForExactNode(myStartingNode, myEditorContext, false, filter);
+      intention2Kind.putAll(intentionsForExactNode);
+      for (IntentionExecutable intentionExecutable : intentionsForExactNode.keySet()) {
+        result.add(new IntentionExecutableWithSNode(intentionExecutable, myStartingNode));
+        processedIntentionDescriptors.add(intentionExecutable.getDescriptor());
+      }
+      distance2StartingNodeInAST.put(myStartingNode, 0);
+      int distance = 0;
+
+      if (!myQuery.isCurrentNodeOnly()) {
+        SNode parent = myStartingNode.getParent();
+        while (parent != null) {
+          Map<IntentionExecutable, Kind> intentionsForParent = getAvailableIntentionsForExactNode(parent, myEditorContext, true, filter);
+          intention2Kind.putAll(intentionsForParent);
+
+          for (IntentionExecutable intentionExecutable : intentionsForParent.keySet()) {
+            result.add(new IntentionExecutableWithSNode(intentionExecutable, parent));
+            processedIntentionDescriptors.add(intentionExecutable.getDescriptor());
           }
-        };
-        for (SNode currentNode = node; currentNode != null; currentNode = currentNode.getParent()) {
-          if (!visitIntentions(currentNode, visitor, filter, currentNode != node, editorContext)) {
-            break;
-          }
+          distance2StartingNodeInAST.put(parent, ++distance);
+          parent = parent.getParent();
         }
       }
-    });
-    return visitor.getIntentionType();
-  }
+      return sortResult(result, intention2Kind, distance2StartingNodeInAST);
+    }
 
-  public synchronized Collection<Pair<IntentionExecutable, SNode>> getAvailableIntentions(final QueryDescriptor query, @NotNull final SNode node,
-      final EditorContext context) {
-    return TypeContextManager.getInstance().runTypecheckingAction((ITypeContextOwner) context.getEditorComponent(),
-        new Computable<Collection<Pair<IntentionExecutable, SNode>>>() {
-          @Override
-          public Set<Pair<IntentionExecutable, SNode>> compute() {
-            // Hiding intentions with same IntentionDescriptor
-            // important when currently selected element and it's parent has same intention
-            final Set<IntentionDescriptor> processedIntentionDescriptors = new HashSet<IntentionDescriptor>();
-            Filter filter = new Filter(query.myEnabledOnly ? getDisabledIntentions() : null, query.mySurroundWith) {
-              @Override
-              boolean accept(IntentionFactory intentionFactory) {
-                return super.accept(intentionFactory) && !processedIntentionDescriptors.contains(intentionFactory);
-              }
-            };
-            Set<Pair<IntentionExecutable, SNode>> result = new HashSet<Pair<IntentionExecutable, SNode>>();
-
-            for (IntentionExecutable intentionExecutable : getAvailableIntentionsForExactNode(node, context, false, filter)) {
-              result.add(new Pair<IntentionExecutable, SNode>(intentionExecutable, node));
-              processedIntentionDescriptors.add(intentionExecutable.getDescriptor());
-            }
-
-            if (!query.isCurrentNodeOnly()) {
-              SNode parent = node.getParent();
-              while (parent != null) {
-                for (IntentionExecutable intentionExecutable : getAvailableIntentionsForExactNode(parent, context, true, filter)) {
-                  result.add(new Pair<IntentionExecutable, SNode>(intentionExecutable, parent));
-                  processedIntentionDescriptors.add(intentionExecutable.getDescriptor());
-                }
-                parent = parent.getParent();
-              }
-            }
-            return result;
+    private Collection<IntentionExecutableWithSNode> sortResult(Collection<IntentionExecutableWithSNode> result,
+                                                                Map<IntentionExecutable, Kind> intention2Kind,
+                                                                Map<SNode, Integer> distance2StartingNodeInAST) {
+      Comparator<IntentionExecutableWithSNode> pairComparator = (executableNodePair1, executableNodePair2) -> {
+        IntentionExecutable executable1 = executableNodePair1.intention;
+        SNode node1 = executableNodePair1.node;
+        IntentionExecutable executable2 = executableNodePair2.intention;
+        SNode node2 = executableNodePair2.node;
+        Kind kind1 = intention2Kind.get(executable1);
+        Kind kind2 = intention2Kind.get(executable2);
+        if (kind1.ordinal() == kind2.ordinal()) {
+          if (node1 == node2) {
+            return executable1.getDescription(node1, myEditorContext)
+                              .compareTo(executable2.getDescription(node2, myEditorContext));
+          } else {
+            return distance2StartingNodeInAST.get(node1).compareTo(distance2StartingNodeInAST.get(node2));
           }
-        });
+        } else {
+          return kind1.compareTo(kind2);
+        }
+      };
+      return result.stream()
+                   .distinct()
+                   .sorted(pairComparator)
+                   .collect(Collectors.toList());
+    }
+
+    @NotNull
+    public Collection<IntentionExecutableWithSNode> collect() {
+      jetbrains.mps.openapi.editor.EditorComponent editorComponent = myEditorContext.getEditorComponent();
+      return TypecheckingFacade
+                 .getFromContext()
+                 .computeWithSession(((EditorComponent) editorComponent).getTypecheckingSession(), (sesssion) -> collect0());
+    }
   }
 
-  private List<IntentionExecutable> getAvailableIntentionsForExactNode(@NotNull final SNode node, @NotNull final EditorContext context, boolean isAncestor,
-      Filter filter) {
-    CollectAvailableIntentionsVisitor visitor = new CollectAvailableIntentionsVisitor();
+  public synchronized Collection<Pair<IntentionExecutable, SNode>> getAvailableIntentions(final QueryDescriptor query,
+                                                                                          @NotNull final SNode node,
+                                                                                          final EditorContext context) {
+    IntentionsCollector intentionsCollector = new IntentionsCollector(query, node, context);
+    return intentionsCollector.collect()
+                              .stream()
+                              .map(intentionWithNode -> new Pair<>(intentionWithNode.intention, intentionWithNode.node))
+                              .collect(Collectors.toList());
+  }
+
+
+  private Map<IntentionExecutable, Kind> getAvailableIntentionsForExactNode(@NotNull final SNode node, @NotNull final EditorContext context, boolean isAncestor,
+                                                                            Filter filter) {
+    CollectAvailableIntentionsVisitor visitor = new CollectAvailableIntentionsVisitor(context);
     visitIntentions(node, visitor, filter, isAncestor, context);
-
-    List<IntentionExecutable> result = new ArrayList<IntentionExecutable>();
-
-    for (IntentionFactory factory : visitor.getAvailableIntentionFactories()) {
-      try {
-        result.addAll(factory.instances(node, context));
-      } catch (Throwable t) {
-        LOG.error("Exception during parameterized intentions instantiation", t);
-      }
-    }
-
-    List<SimpleEditorMessage> messages = ((EditorComponent) context.getEditorComponent()).getHighlightManager().getMessagesFor(node);
-    for (SimpleEditorMessage message : messages) {
-      //TODO remove this cast
-      List<QuickFixProvider> intentionProviders = ((EditorMessage) message).getIntentionProviders();
-      for (QuickFixProvider intentionProvider : intentionProviders) {
-        QuickFixAdapter intention = new QuickFixAdapter(intentionProvider.getQuickFix(), intentionProvider.isError());
-        if ((isAncestor && !intention.isAvailableInChildNodes()) || !intention.isApplicable(node, context)) {
-          continue;
-        }
-        try {
-          result.addAll(intention.instances(node, context));
-        } catch (Throwable t) {
-          LOG.error("Exception during parameterized intentions instantiation", t);
-        }
-      }
-    }
-    return result;
+    return visitor.getResult();
   }
 
   public synchronized boolean isIntentionDisabled(String persistentStateKey) {
@@ -210,25 +260,34 @@ public class IntentionsManager implements ApplicationComponent, PersistentStateC
 
   //-------------node info by intention-----------------
 
+  /**
+   * Returning combined list of all {@link IntentionFactory} available in the current repository.
+   * This list is intended for intention presentation in UI components.
+   *
+   * @return combined sorted list of all available {@link IntentionFactory}
+   */
   @NotNull
-  public synchronized Set<IntentionFactory> getAllIntentionFactories() {
-    return new ModelAccessHelper(myRepository).runReadAction(new Computable<Set<IntentionFactory>>() {
-      @Override
-      public Set<IntentionFactory> compute() {
-        final HashSet<IntentionFactory> rv = new HashSet<IntentionFactory>();
-        for (LanguageRuntime lr : LanguageRegistry.getInstance().getAvailableLanguages()) {
-          final IntentionAspectDescriptor intentionAspect = lr.getAspect(IntentionAspectDescriptor.class);
-          if (intentionAspect != null) {
-            rv.addAll(intentionAspect.getAllIntentions());
-          }
-          final ScriptAspectDescriptor scriptAspect = lr.getAspect(ScriptAspectDescriptor.class);
-          if (scriptAspect != null) {
-            rv.addAll(new MigrationRefactoringIntentions(lr, scriptAspect).getIntentions());
-          }
-        }
-        return rv;
+  public synchronized Map<SLanguage, Collection<IntentionFactory>> getAllIntentionFactories() {
+    Map<SLanguage, Collection<IntentionFactory>> result = new HashMap<>();
+
+    final LanguageRegistry languageRegistry = MPSCoreComponents.getInstance().getPlatform().findComponent(LanguageRegistry.class);
+    languageRegistry.withAvailableLanguages(lr -> {
+      List<IntentionFactory> languageIntentions = new ArrayList<>();
+
+      IntentionAspectDescriptor intentionAspect = lr.getAspect(IntentionAspectDescriptor.class);
+      if (intentionAspect != null) {
+        languageIntentions.addAll(intentionAspect.getAllIntentions());
+      }
+
+      final ScriptAspectDescriptor scriptAspect = lr.getAspect(ScriptAspectDescriptor.class);
+      if (scriptAspect != null) {
+        languageIntentions.addAll(new MigrationRefactoringIntentions(lr, scriptAspect).getIntentions());
+      }
+      if (!languageIntentions.isEmpty()) {
+        result.put(lr.getIdentity(), languageIntentions);
       }
     });
+    return result;
   }
 
   //-------------visiting registered intentions---------------
@@ -237,11 +296,16 @@ public class IntentionsManager implements ApplicationComponent, PersistentStateC
     if (node.getModel() == null) {
       return true;
     }
-    LanguageRegistry languageRegistry = LanguageRegistry.getInstance(editorContext.getRepository());
+    return visitIntentionsImpl(node, visitor, filter, isAncestor, editorContext)
+           && visitQuickFixes(node, visitor, filter, isAncestor, editorContext);
+  }
+
+  private static boolean visitIntentionsImpl(SNode node, IntentionsVisitor visitor, Filter filter, boolean isAncestor, EditorContext editorContext) {
+    final LanguageRegistry languageRegistry = MPSCoreComponents.getInstance().getPlatform().findComponent(LanguageRegistry.class);
     // respect intentions from imported languages only
-    ArrayList<IntentionAspectDescriptor> activeIntentionAspects = new ArrayList<IntentionAspectDescriptor>();
+    ArrayList<IntentionAspectDescriptor> activeIntentionAspects = new ArrayList<>();
     // respect migration scripts from imported languages only
-    ArrayList<MigrationRefactoringIntentions> activeIntentionsFromMigrationScripts = new ArrayList<MigrationRefactoringIntentions>();
+    ArrayList<MigrationRefactoringIntentions> activeIntentionsFromMigrationScripts = new ArrayList<>();
     for (SLanguage l : new SLanguageHierarchy(languageRegistry, SModelOperations.getAllLanguageImports(node.getModel())).getExtended()) {
       final LanguageRuntime lr = languageRegistry.getLanguage(l);
       if (lr == null) {
@@ -259,8 +323,8 @@ public class IntentionsManager implements ApplicationComponent, PersistentStateC
 
     // there's no special meaning in using depth-first iterator, it's just the only one available at the moment
     // and looks pretty reasonable for the task (super-concepts first, then implemented interfaces)
-    for (SAbstractConcept concept : new UniqueIterator<SAbstractConcept>(new DepthFirstConceptIterator(node.getConcept()))) {
-      ArrayList<IntentionFactory> intentionsForConcept = new ArrayList<IntentionFactory>();
+    for (SAbstractConcept concept : new UniqueIterator<>(new DepthFirstConceptIterator(node.getConcept()))) {
+      ArrayList<IntentionFactory> intentionsForConcept = new ArrayList<>();
       for (IntentionAspectDescriptor intentionAspect : activeIntentionAspects) {
         final Collection<IntentionFactory> intentions = intentionAspect.getIntentions(concept);
         if (intentions == null) {
@@ -275,10 +339,45 @@ public class IntentionsManager implements ApplicationComponent, PersistentStateC
         if (isAncestor && !intentionFactory.isAvailableInChildNodes()) {
           continue;
         }
-        if (!filter.accept(intentionFactory) || !intentionFactory.isApplicable(node, editorContext)) {
+
+        if (!filter.accept(intentionFactory)) {
           continue;
         }
-        if (!visitor.visit(intentionFactory)) {
+
+        boolean isApplicable = false;
+        try {
+          isApplicable = intentionFactory.isApplicable(node, editorContext);
+        } catch (Throwable t) {
+          LOG.error("Failed to evaluate isApplicable for " + intentionFactory.getClass().getName(), t);
+        }
+        if (!isApplicable) {
+          continue;
+        }
+
+        if (!visitor.visit(intentionFactory, node)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  private static boolean visitQuickFixes(SNode node, IntentionsVisitor visitor, Filter filter, boolean isAncestor, EditorContext context) {
+    List<ReportItem> messages = new ArrayList<>();
+    for (SimpleEditorMessage simpleEditorMessage : ((EditorComponent) context.getEditorComponent()).getHighlightManager().getMessagesFor(node)) {
+      if (simpleEditorMessage instanceof HighlighterMessage) {
+        HighlighterMessage highlighterMessage = (HighlighterMessage) simpleEditorMessage;
+        messages.add(highlighterMessage.getReportItem());
+      }
+    }
+    for (ReportItem message : messages) {
+      Collection<EditorQuickFix> intentionProviders = TypesystemReportItemAdapter.FLAVOUR_EDITOR_QUICKFIX.getCollection(message);
+      for (EditorQuickFix intentionProvider : intentionProviders) {
+        QuickFixAdapter intention = new QuickFixAdapter(intentionProvider, message.getSeverity());
+        if (!filter.accept(intention) || (isAncestor && !intention.isAvailableInChildNodes()) || !intention.isApplicable(node, context)) {
+          continue;
+        }
+        if (!visitor.visit(intention, node)) {
           return false;
         }
       }
@@ -303,7 +402,7 @@ public class IntentionsManager implements ApplicationComponent, PersistentStateC
       if (myDisabledIntentions != null && myDisabledIntentions.contains(intentionFactory.getPersistentStateKey())) {
         return false;
       }
-      return intentionFactory.isSurroundWith() ? mySurroundWith : !mySurroundWith;
+      return intentionFactory.isSurroundWith() == mySurroundWith;
     }
   }
 
@@ -337,32 +436,17 @@ public class IntentionsManager implements ApplicationComponent, PersistentStateC
   //-------------component methods-----------------
 
   @Override
-  public void initComponent() {
-  }
-
-  @Override
-  @NonNls
-  @NotNull
-  public String getComponentName() {
-    return "MPS Intention Manager";
-  }
-
-  @Override
-  public void disposeComponent() {
-  }
-
-  @Override
   public MyState getState() {
     return myState;
   }
 
   @Override
-  public void loadState(MyState state) {
+  public void loadState(@NotNull MyState state) {
     myState = state;
   }
 
   public static class MyState {
-    private Set<String> myDisabledIntentions = new HashSet<String>();
+    private Set<String> myDisabledIntentions = new HashSet<>();
 
     public Set<String> getDisabledIntentions() {
       return myDisabledIntentions;
@@ -380,15 +464,15 @@ public class IntentionsManager implements ApplicationComponent, PersistentStateC
     private final Collection<MigrationRefactoringAdapter> myIntentionAdapters;
 
     public MigrationRefactoringIntentions(@NotNull LanguageRuntime lr, @NotNull ScriptAspectDescriptor scriptAspect) {
-      ArrayList<MigrationRefactoringAdapter> adapters = new ArrayList<MigrationRefactoringAdapter>();
+      ArrayList<MigrationRefactoringAdapter> adapters = new ArrayList<>();
       for (RefactoringScript rs : scriptAspect.getRefactoringScripts()) {
         for (AbstractMigrationRefactoring refactoring : rs.getRefactorings()) {
           if (refactoring.isShowAsIntention()) {
-            adapters.add(new MigrationRefactoringAdapter(lr.getNamespace(), refactoring, rs.getScriptNode()));
+            adapters.add(new MigrationRefactoringAdapter(refactoring, rs.getScriptNode()));
           }
         }
       }
-      myIntentionAdapters = adapters.isEmpty() ? Collections.<MigrationRefactoringAdapter>emptyList() : adapters;
+      myIntentionAdapters = adapters.isEmpty() ? Collections.emptyList() : adapters;
     }
 
     @NotNull
@@ -401,7 +485,7 @@ public class IntentionsManager implements ApplicationComponent, PersistentStateC
       if (myIntentionAdapters.isEmpty()) {
         return Collections.emptyList();
       }
-      ArrayList<IntentionFactory> rv = new ArrayList<IntentionFactory>(myIntentionAdapters.size());
+      ArrayList<IntentionFactory> rv = new ArrayList<>(myIntentionAdapters.size());
       for (MigrationRefactoringAdapter a : myIntentionAdapters) {
         // don't want to use IntentionDescriptor.getConcept():String, thus exposed AbstractMigrationRefactoring
         if (a.getRefactoring().getApplicableConcept().equals(concept)) {
@@ -410,22 +494,6 @@ public class IntentionsManager implements ApplicationComponent, PersistentStateC
       }
       return rv;
     }
-  }
-
-  @Nullable
-  public IntentionExecutable getIntentionById(SNode node, Editor editor, String id) {
-    return getIntentionById(node, editor.getEditorContext(), id);
-  }
-
-  /**
-   * @return the matching intention, if found <em>and applicable</em>, {@code null} otherwise
-   */
-  @Nullable
-  public IntentionExecutable getIntentionById(SNode node, EditorContext editorContext, String id) {
-    List<IntentionExecutable> result = getIntentionsById(node, editorContext, id);
-
-    assert result.size() <= 1;
-    return result.isEmpty() ? null : result.get(0);
   }
 
   @NotNull

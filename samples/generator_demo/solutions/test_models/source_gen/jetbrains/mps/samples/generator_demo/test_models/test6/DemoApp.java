@@ -46,7 +46,7 @@ public class DemoApp {
     JPanel component = new JPanel();
     component.setOpaque(true);
     component.setBackground(Color.white);
-    //  add children 
+    //  add children
     component.add(createComponent_a0());
     component.add(createComponent_b0());
     component.add(createComponent_c0());

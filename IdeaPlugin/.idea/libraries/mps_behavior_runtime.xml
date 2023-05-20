@@ -4,6 +4,8 @@
       <root url="jar://$PROJECT_DIR$/mps-core/lib/mps-behavior-runtime.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../core/aspects/behavior/behavior-runtime/source" />
+    </SOURCES>
   </library>
 </component>

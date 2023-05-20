@@ -11,13 +11,15 @@ import jetbrains.mps.generator.runtime.TemplateReductionRule;
 import java.util.Collections;
 import java.util.Collection;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.generator.runtime.TemplateExecutionEnvironment;
 import jetbrains.mps.generator.runtime.TemplateContext;
 import jetbrains.mps.generator.runtime.GenerationException;
+import jetbrains.mps.generator.runtime.TemplateExecutionEnvironment;
+import jetbrains.mps.generator.runtime.MetaObjectContainer;
 
 @Generated
 public class Switch_InstantiateAspectDescriptor extends TemplateSwitchBase implements TemplateSwitchMapping {
   public Switch_InstantiateAspectDescriptor() {
+    super(new MO());
   }
   public SNodeReference getSwitchNode() {
     return new SNodePointer("r:1dfaf07d-c77a-451e-91d3-b6f80f0f8508(jetbrains.mps.lang.descriptor.generator.template.main@generator)", "2030416617761786951");
@@ -28,10 +30,15 @@ public class Switch_InstantiateAspectDescriptor extends TemplateSwitchBase imple
   public Iterable<TemplateReductionRule> getReductionRules() {
     return Collections.emptySet();
   }
-  public Collection<SNode> applyDefault(final TemplateExecutionEnvironment environment, SNodeReference templateSwitch, String mappingLabel, final TemplateContext context) throws GenerationException {
+  public Collection<SNode> applyDefault(final TemplateContext context) throws GenerationException {
+    final TemplateExecutionEnvironment environment = context.getEnvironment();
     Collection<SNode> tlist1 = Collections.emptyList();
     return tlist1;
   }
-  public void processNull(TemplateExecutionEnvironment environment, SNodeReference templateSwitch, TemplateContext context) {
+
+  /*package*/ static final class MO implements MetaObjectContainer {
+
+
+
   }
 }

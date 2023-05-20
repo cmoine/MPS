@@ -4,20 +4,25 @@ package jetbrains.mps.lang.migration.actions.plugin;
 
 import jetbrains.mps.plugins.applicationplugins.BaseApplicationPlugin;
 import com.intellij.openapi.extensions.PluginId;
+import org.jetbrains.annotations.NotNull;
 import jetbrains.mps.ide.actions.LanguageActions_ActionGroup;
 
 public class Actions_ApplicationPlugin extends BaseApplicationPlugin {
-  private PluginId myId = PluginId.getId("jetbrains.mps.lang.migration.actions");
+  private final PluginId myId = PluginId.getId("jetbrains.mps.lang.migration.actions");
+
   public Actions_ApplicationPlugin() {
   }
+
+  @NotNull
   public PluginId getId() {
     return myId;
   }
+
   public void createGroups() {
-    // actions w/o parameters 
+    // actions w/o parameters
     addAction(new CorrectLanguageVersion_Action());
-    // groups 
-    addGroup(new MigrationGroup_ActionGroup());
+    // groups
+    addGroup(new MigrationGroup_ActionGroup(this));
   }
   public void adjustRegularGroups() {
     insertGroupIntoAnother(MigrationGroup_ActionGroup.ID, LanguageActions_ActionGroup.ID, LanguageActions_ActionGroup.LABEL_ID_ex);

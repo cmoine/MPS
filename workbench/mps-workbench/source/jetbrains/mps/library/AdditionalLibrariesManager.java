@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2023 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,54 +15,38 @@
  */
 package jetbrains.mps.library;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-import jetbrains.mps.ide.MPSCoreComponents;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 
 /**
+ * IDEA service.
  * reads custom libraries from the xml file
  */
 @State(
   name = "AdditionalLibrariesManager",
   storages = @Storage("AdditionalLibrariesManager.xml")
 )
-public class AdditionalLibrariesManager extends BaseLibraryManager implements ApplicationComponent {
-  private Map<String, Library> myCustomBuiltInLibraries = new HashMap<String, Library>();
+public class AdditionalLibrariesManager extends BaseLibraryManager {
 
-  public AdditionalLibrariesManager(MPSCoreComponents coreComponents) {
-    super(coreComponents);
+  public static AdditionalLibrariesManager getInstance() {
+    return ApplicationManager.getApplication().getService(AdditionalLibrariesManager.class);
   }
 
-  @Override
-  public void initComponent() {
-    myCustomBuiltInLibraries = BuiltInLibrariesIO.readBuiltInLibraries();
-    super.initComponent();
+  public AdditionalLibrariesManager() {
   }
 
   @Override
   public Set<Library> getUILibraries() {
-    Set<Library> result = new HashSet<Library>(super.getUILibraries());
-    result.addAll(myCustomBuiltInLibraries.values());
+    Set<Library> result = new HashSet<>(super.getUILibraries());
+    Map<String, Library> customBuiltInLibraries = BuiltInLibrariesIO.readBuiltInLibraries();
+    result.addAll(customBuiltInLibraries.values());
     return result;
   }
-
-  @Override
-  public String toString() {
-    return "AdditionalLibrariesManager";
-  }
-
-  @Override
-  @NotNull
-  public String getComponentName() {
-    return AdditionalLibrariesManager.class.getSimpleName();
-  }
-
 }

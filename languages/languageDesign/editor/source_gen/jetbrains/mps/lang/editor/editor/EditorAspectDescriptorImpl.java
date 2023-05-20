@@ -9,1041 +9,609 @@ import jetbrains.mps.openapi.editor.descriptor.ConceptEditor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import java.util.Collections;
 import jetbrains.mps.openapi.editor.descriptor.ConceptEditorComponent;
-import java.util.Arrays;
 import jetbrains.mps.openapi.editor.descriptor.TransformationMenu;
 import jetbrains.mps.openapi.editor.descriptor.NamedMenuId;
+import java.util.Arrays;
 import jetbrains.mps.openapi.editor.descriptor.SubstituteMenu;
-import java.util.Map;
-import java.util.HashMap;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.openapi.editor.menus.style.EditorMenuItemCustomizer;
+import jetbrains.mps.openapi.editor.cells.KeyMap;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public class EditorAspectDescriptorImpl extends EditorAspectDescriptorBase {
   @NotNull
   public Collection<ConceptEditor> getDeclaredEditors(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = ((SAbstractConcept) concept);
-      Integer preIndex = indices_xbvbvu_a0a.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new AbstractCellSelector_Editor());
-          }
-          break;
-        case 1:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new AbstractPaddingStyleClassItem_Editor());
-          }
-          break;
-        case 2:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new AbstractStyledTextOperation_Editor());
-          }
-          break;
-        case 3:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ApplyStyleClass_Editor());
-          }
-          break;
-        case 4:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ApplyStyleClassCondition_Editor());
-          }
-          break;
-        case 5:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new AttributeStyleClassItem_Editor());
-          }
-          break;
-        case 6:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new BooleanStyleSheetItem_Editor());
-          }
-          break;
-        case 7:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CaretPositionParameter_Editor());
-          }
-          break;
-        case 8:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellActionMapDeclaration_Editor());
-          }
-          break;
-        case 9:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellActionMapItem_Editor());
-          }
-          break;
-        case 10:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellIdReferenceSelector_Editor());
-          }
-          break;
-        case 11:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellKeyMapDeclaration_Editor());
-          }
-          break;
-        case 12:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellKeyMapItem_Editor());
-          }
-          break;
-        case 13:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellKeyMapKeystroke_Editor());
-          }
-          break;
-        case 14:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellLayout_Editor());
-          }
-          break;
-        case 15:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellMenuComponent_Editor());
-          }
-          break;
-        case 16:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellMenuComponentFeature_Link_Editor());
-          }
-          break;
-        case 17:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellMenuComponentFeature_Property_Editor());
-          }
-          break;
-        case 18:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellMenuDescriptor_Editor());
-          }
-          break;
-        case 19:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellMenuPart_Abstract_Editor());
-          }
-          break;
-        case 20:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellMenuPart_ApplySideTransforms_Editor());
-          }
-          break;
-        case 21:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellMenuPart_CellMenuComponent_Editor());
-          }
-          break;
-        case 22:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellMenuPart_Generic_Group_Editor());
-          }
-          break;
-        case 23:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellMenuPart_Generic_Item_Editor());
-          }
-          break;
-        case 24:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellMenuPart_PropertyPostfixHints_Editor());
-          }
-          break;
-        case 25:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellMenuPart_PropertyValues_Editor());
-          }
-          break;
-        case 26:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellMenuPart_ReferentPrimary_Editor());
-          }
-          break;
-        case 27:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellMenuPart_ReplaceChildPrimary_Editor());
-          }
-          break;
-        case 28:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellMenuPart_ReplaceChild_CustomChildConcept_Editor());
-          }
-          break;
-        case 29:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellMenuPart_ReplaceChild_Group_Editor());
-          }
-          break;
-        case 30:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellMenuPart_ReplaceChild_Item_Editor());
-          }
-          break;
-        case 31:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellMenuPart_ReplaceNode_CustomNodeConcept_Editor());
-          }
-          break;
-        case 32:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellMenuPart_ReplaceNode_Group_Editor());
-          }
-          break;
-        case 33:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_Alternation_Editor());
-          }
-          break;
-        case 34:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_AttributedLinkCell_Editor());
-          }
-          break;
-        case 35:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_AttributedNodeCell_Editor());
-          }
-          break;
-        case 36:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_AttributedPropertyCell_Editor());
-          }
-          break;
-        case 37:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_Block_Editor());
-          }
-          break;
-        case 38:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_BlockEnd_Editor());
-          }
-          break;
-        case 39:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_BlockStart_Editor());
-          }
-          break;
-        case 40:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_Collection_Editor());
-          }
-          break;
-        case 41:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_Component_Editor());
-          }
-          break;
-        case 42:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_Constant_Editor());
-          }
-          break;
-        case 43:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_ContextAssistant_Editor());
-          }
-          break;
-        case 44:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_Custom_Editor());
-          }
-          break;
-        case 45:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_Empty_Editor());
-          }
-          break;
-        case 46:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_Error_Editor());
-          }
-          break;
-        case 47:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_Image_Editor());
-          }
-          break;
-        case 48:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_Indent_Editor());
-          }
-          break;
-        case 49:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_JComponent_Editor());
-          }
-          break;
-        case 50:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_ModelAccess_Editor());
-          }
-          break;
-        case 51:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_NextEditor_Editor());
-          }
-          break;
-        case 52:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_Property_Editor());
-          }
-          break;
-        case 53:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_ReadOnlyModelAccessor_Editor());
-          }
-          break;
-        case 54:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_RefCell_Editor());
-          }
-          break;
-        case 55:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_RefNode_Editor());
-          }
-          break;
-        case 56:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_RefNodeList_Editor());
-          }
-          break;
-        case 57:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_ReferencePresentation_Editor());
-          }
-          break;
-        case 58:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_TransactionalProperty_Editor());
-          }
-          break;
-        case 59:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new CellModel_URL_Editor());
-          }
-          break;
-        case 60:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ColorStyleClassItem_Editor());
-          }
-          break;
-        case 61:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ConceptEditorContextHints_Editor());
-          }
-          break;
-        case 62:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ConceptEditorDeclaration_Editor());
-          }
-          break;
-        case 63:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ConceptEditorHintDeclaration_Editor());
-          }
-          break;
-        case 64:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ConceptEditorHintDeclarationReference_Editor());
-          }
-          break;
-        case 65:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ConceptEditorHintDeclarationReferenceExpression_Editor());
-          }
-          break;
-        case 66:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ContextVariable_Editor());
-          }
-          break;
-        case 67:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new DefaultBaseLine_Editor());
-          }
-          break;
-        case 68:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new DefaultCaretPositionStyleClassItem_Editor());
-          }
-          break;
-        case 69:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new DominatesRecord_Editor());
-          }
-          break;
-        case 70:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new EditorCellId_Editor());
-          }
-          break;
-        case 71:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new EditorCellModel_Editor());
-          }
-          break;
-        case 72:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new EditorComponentDeclaration_Editor());
-          }
-          break;
-        case 73:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new EditorComponentDeclarationReference_Editor());
-          }
-          break;
-        case 74:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ExplicitHintsSpecification_Editor());
-          }
-          break;
-        case 75:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new FloatStyleClassItem_Editor());
-          }
-          break;
-        case 76:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new FontSizeStyleClassItem_Editor());
-          }
-          break;
-        case 77:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new FontStyleStyleClassItem_Editor());
-          }
-          break;
-        case 78:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new HorizontalAlign_Editor());
-          }
-          break;
-        case 79:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new IdSelector_Editor());
-          }
-          break;
-        case 80:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new InlineEditorComponent_Editor());
-          }
-          break;
-        case 81:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new InlineStyleDeclaration_Editor());
-          }
-          break;
-        case 82:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new LayoutConstraintStyleClassItem_Editor());
-          }
-          break;
-        case 83:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MatchingLabelStyleClassItem_Editor());
-          }
-          break;
-        case 84:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MaxWidthStyleClassItem_Editor());
-          }
-          break;
-        case 85:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MigrateManuallyAnnotation_Editor());
-          }
-          break;
-        case 86:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MigratedSideTransformMenuAttribute_Editor());
-          }
-          break;
-        case 87:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new MigratedToAnnotation_Editor());
-          }
-          break;
-        case 88:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ModelAccessor_Editor());
-          }
-          break;
-        case 89:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new NavigatableNodeStyleClassItem_Editor());
-          }
-          break;
-        case 90:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new NavigatableReferenceStyleClassItem_Editor());
-          }
-          break;
-        case 91:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new OptionalConceptReference_Editor());
-          }
-          break;
-        case 92:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new OrCellSelector_Editor());
-          }
-          break;
-        case 93:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ParametersInformationQuery_Editor());
-          }
-          break;
-        case 94:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ParametersInformationStyleClassItem_Editor());
-          }
-          break;
-        case 95:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new PositionChildrenStyleClassItem_Editor());
-          }
-          break;
-        case 96:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new PositionStyleClassItem_Editor());
-          }
-          break;
-        case 97:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new PreDefinedStyleClassItem_Editor());
-          }
-          break;
-        case 98:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new PredefinedSelector_Editor());
-          }
-          break;
-        case 99:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new PropertyDeclarationCellSelector_Editor());
-          }
-          break;
-        case 100:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new PropertyExpressionCellSelector_Editor());
-          }
-          break;
-        case 101:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new RGBColor_Editor());
-          }
-          break;
-        case 102:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ReadOnlyModelAccessor_Editor());
-          }
-          break;
-        case 103:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new RightTransformAnchorTagWrapper_Editor());
-          }
-          break;
-        case 104:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ScriptKindClassItem_Editor());
-          }
-          break;
-        case 105:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SelectInEditorOperation_Editor());
-          }
-          break;
-        case 106:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SelectPositionParameter_Editor());
-          }
-          break;
-        case 107:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new ShowBoundariesInStyleClassItem_Editor());
-          }
-          break;
-        case 108:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SideTransformAnchorTagStyleClassItem_Editor());
-          }
-          break;
-        case 109:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new StubEditorCellModel_Editor());
-          }
-          break;
-        case 110:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new StyleAttributeDeclaration_Editor());
-          }
-          break;
-        case 111:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new StyleAttributeReferenceExpression_Editor());
-          }
-          break;
-        case 112:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new StyleClass_Editor());
-          }
-          break;
-        case 113:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new StyleClassReference_Editor());
-          }
-          break;
-        case 114:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new StyleClassReferenceList_Editor());
-          }
-          break;
-        case 115:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new StyleKey_Editor());
-          }
-          break;
-        case 116:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new StyleKeyPack_Editor());
-          }
-          break;
-        case 117:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new StyleReference_Editor());
-          }
-          break;
-        case 118:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new StyleSheet_Editor());
-          }
-          break;
-        case 119:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new StyleSheetClass_Editor());
-          }
-          break;
-        case 120:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new StyleSheetClassReference_Editor());
-          }
-          break;
-        case 121:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubstituteFeature_ActionType_Editor());
-          }
-          break;
-        case 122:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubstituteFeature_CanSubstitute_Editor());
-          }
-          break;
-        case 123:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubstituteFeature_DescriptionText_Editor());
-          }
-          break;
-        case 124:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubstituteFeature_Icon_Editor());
-          }
-          break;
-        case 125:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubstituteFeature_MatchingText_Editor());
-          }
-          break;
-        case 126:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubstituteFeature_Selection_Editor());
-          }
-          break;
-        case 127:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubstituteMenuPart_Action_Editor());
-          }
-          break;
-        case 128:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubstituteMenuPart_AddConcept_Editor());
-          }
-          break;
-        case 129:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubstituteMenuPart_Concepts_Editor());
-          }
-          break;
-        case 130:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubstituteMenuPart_Group_Editor());
-          }
-          break;
-        case 131:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubstituteMenuPart_IncludeMenu_Editor());
-          }
-          break;
-        case 132:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubstituteMenuPart_Parameterized_Editor());
-          }
-          break;
-        case 133:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubstituteMenuPart_Placeholder_Editor());
-          }
-          break;
-        case 134:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubstituteMenuPart_Subconcepts_Editor());
-          }
-          break;
-        case 135:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubstituteMenuPart_Wrapper_Editor());
-          }
-          break;
-        case 136:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubstituteMenuReference_Default_Editor());
-          }
-          break;
-        case 137:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubstituteMenuReference_DefaultWithFunction_Editor());
-          }
-          break;
-        case 138:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubstituteMenuReference_Named_Editor());
-          }
-          break;
-        case 139:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubstituteMenuVariableDeclaration_Editor());
-          }
-          break;
-        case 140:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubstituteMenu_Contribution_Editor());
-          }
-          break;
-        case 141:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubstituteMenu_Default_Editor());
-          }
-          break;
-        case 142:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubstituteMenu_Named_Editor());
-          }
-          break;
-        case 143:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new SubstituteMenu_SimpleString_Editor());
-          }
-          break;
-        case 144:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TableComponentStyleClassItem_Editor());
-          }
-          break;
-        case 145:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TransformationFeature_ActionType_Editor());
-          }
-          break;
-        case 146:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TransformationFeature_DescriptionText_Editor());
-          }
-          break;
-        case 147:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TransformationFeature_Icon_Editor());
-          }
-          break;
-        case 148:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TransformationLocation_Editor());
-          }
-          break;
-        case 149:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TransformationLocation_SideTransform_Editor());
-          }
-          break;
-        case 150:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TransformationLocation_SideTransform_PlaceInCellHolder_Editor());
-          }
-          break;
-        case 151:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TransformationMenuContribution_Editor());
-          }
-          break;
-        case 152:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TransformationMenuPart_Editor());
-          }
-          break;
-        case 153:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TransformationMenuPart_Action_Editor());
-          }
-          break;
-        case 154:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TransformationMenuPart_Group_Editor());
-          }
-          break;
-        case 155:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TransformationMenuPart_IncludeMenu_Editor());
-          }
-          break;
-        case 156:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TransformationMenuPart_IncludeSubstituteMenu_Editor());
-          }
-          break;
-        case 157:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TransformationMenuPart_Parameterized_Editor());
-          }
-          break;
-        case 158:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TransformationMenuPart_Placeholder_Editor());
-          }
-          break;
-        case 159:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TransformationMenuPart_SubMenu_Editor());
-          }
-          break;
-        case 160:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TransformationMenuPart_Super_Editor());
-          }
-          break;
-        case 161:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TransformationMenuPart_WrapSubstituteMenu_Editor());
-          }
-          break;
-        case 162:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TransformationMenuReference_Default_Editor());
-          }
-          break;
-        case 163:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TransformationMenuReference_Named_Editor());
-          }
-          break;
-        case 164:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TransformationMenuSection_Editor());
-          }
-          break;
-        case 165:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TransformationMenuVariableDeclaration_Editor());
-          }
-          break;
-        case 166:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TransformationMenu_Default_Editor());
-          }
-          break;
-        case 167:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new TransformationMenu_Named_Editor());
-          }
-          break;
-        case 168:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new UnapplyStyle_Editor());
-          }
-          break;
-        case 169:
-          if (true) {
-            return Collections.<ConceptEditor>singletonList(new UnderlinedStyleClassItem_Editor());
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = ((SAbstractConcept) concept);
+    switch (conceptIndex.index(cncpt)) {
+      case 0:
+        return Collections.<ConceptEditor>singletonList(new AbstractCellSelector_Editor());
+      case 1:
+        return Collections.<ConceptEditor>singletonList(new AbstractPaddingStyleClassItem_Editor());
+      case 2:
+        return Collections.<ConceptEditor>singletonList(new AbstractStyledTextOperation_Editor());
+      case 3:
+        return Collections.<ConceptEditor>singletonList(new ApplyStyleClass_Editor());
+      case 4:
+        return Collections.<ConceptEditor>singletonList(new ApplyStyleClassCondition_Editor());
+      case 5:
+        return Collections.<ConceptEditor>singletonList(new ApproveDelete_Operation_Editor());
+      case 6:
+        return Collections.<ConceptEditor>singletonList(new AttributeStyleClassItem_Editor());
+      case 7:
+        return Collections.<ConceptEditor>singletonList(new BooleanStyleSheetItem_Editor());
+      case 8:
+        return Collections.<ConceptEditor>singletonList(new CaretPositionParameter_Editor());
+      case 9:
+        return Collections.<ConceptEditor>singletonList(new CellActionMapDeclaration_Editor());
+      case 10:
+        return Collections.<ConceptEditor>singletonList(new CellActionMapImport_Editor());
+      case 11:
+        return Collections.<ConceptEditor>singletonList(new CellActionMapImportSelectorByActionId_Editor());
+      case 12:
+        return Collections.<ConceptEditor>singletonList(new CellActionMapImportWildcardSelector_Editor());
+      case 13:
+        return Collections.<ConceptEditor>singletonList(new CellActionMapItem_Editor());
+      case 14:
+        return Collections.<ConceptEditor>singletonList(new CellIdReferenceSelector_Editor());
+      case 15:
+        return Collections.<ConceptEditor>singletonList(new CellKeyMapDeclaration_Editor());
+      case 16:
+        return Collections.<ConceptEditor>singletonList(new CellKeyMapItem_Editor());
+      case 17:
+        return Collections.<ConceptEditor>singletonList(new CellKeyMapKeystroke_Editor());
+      case 18:
+        return Collections.<ConceptEditor>singletonList(new CellLayout_Editor());
+      case 19:
+        return Collections.<ConceptEditor>singletonList(new CellMenuComponent_Editor());
+      case 20:
+        return Collections.<ConceptEditor>singletonList(new CellMenuComponentFeature_Link_Editor());
+      case 21:
+        return Collections.<ConceptEditor>singletonList(new CellMenuComponentFeature_Property_Editor());
+      case 22:
+        return Collections.<ConceptEditor>singletonList(new CellMenuDescriptor_Editor());
+      case 23:
+        return Collections.<ConceptEditor>singletonList(new CellMenuPart_Abstract_Editor());
+      case 24:
+        return Collections.<ConceptEditor>singletonList(new CellMenuPart_CellMenuComponent_Editor());
+      case 25:
+        return Collections.<ConceptEditor>singletonList(new CellMenuPart_Generic_Group_Editor());
+      case 26:
+        return Collections.<ConceptEditor>singletonList(new CellMenuPart_Generic_Item_Editor());
+      case 27:
+        return Collections.<ConceptEditor>singletonList(new CellMenuPart_PropertyPostfixHints_Editor());
+      case 28:
+        return Collections.<ConceptEditor>singletonList(new CellMenuPart_PropertyValues_Editor());
+      case 29:
+        return Collections.<ConceptEditor>singletonList(new CellMenuPart_ReferentPrimary_Editor());
+      case 30:
+        return Collections.<ConceptEditor>singletonList(new CellMenuPart_ReplaceChildPrimary_Editor());
+      case 31:
+        return Collections.<ConceptEditor>singletonList(new CellMenuPart_ReplaceChild_CustomChildConcept_Editor());
+      case 32:
+        return Collections.<ConceptEditor>singletonList(new CellMenuPart_ReplaceChild_Group_Editor());
+      case 33:
+        return Collections.<ConceptEditor>singletonList(new CellMenuPart_ReplaceChild_Item_Editor());
+      case 34:
+        return Collections.<ConceptEditor>singletonList(new CellMenuPart_ReplaceNode_CustomNodeConcept_Editor());
+      case 35:
+        return Collections.<ConceptEditor>singletonList(new CellMenuPart_ReplaceNode_Group_Editor());
+      case 36:
+        return Collections.<ConceptEditor>singletonList(new CellModel_Alternation_Editor());
+      case 37:
+        return Collections.<ConceptEditor>singletonList(new CellModel_AttributedLinkCell_Editor());
+      case 38:
+        return Collections.<ConceptEditor>singletonList(new CellModel_AttributedNodeCell_Editor());
+      case 39:
+        return Collections.<ConceptEditor>singletonList(new CellModel_AttributedPropertyCell_Editor());
+      case 40:
+        return Collections.<ConceptEditor>singletonList(new CellModel_Block_Editor());
+      case 41:
+        return Collections.<ConceptEditor>singletonList(new CellModel_BlockEnd_Editor());
+      case 42:
+        return Collections.<ConceptEditor>singletonList(new CellModel_BlockStart_Editor());
+      case 43:
+        return Collections.<ConceptEditor>singletonList(new CellModel_Collection_Editor());
+      case 44:
+        return Collections.<ConceptEditor>singletonList(new CellModel_Component_Editor());
+      case 45:
+        return Collections.<ConceptEditor>singletonList(new CellModel_Constant_Editor());
+      case 46:
+        return Collections.<ConceptEditor>singletonList(new CellModel_ContextAssistant_Editor());
+      case 47:
+        return Collections.<ConceptEditor>singletonList(new CellModel_Custom_Editor());
+      case 48:
+        return Collections.<ConceptEditor>singletonList(new CellModel_Empty_Editor());
+      case 49:
+        return Collections.<ConceptEditor>singletonList(new CellModel_Error_Editor());
+      case 50:
+        return Collections.<ConceptEditor>singletonList(new CellModel_Image_Editor());
+      case 51:
+        return Collections.<ConceptEditor>singletonList(new CellModel_Indent_Editor());
+      case 52:
+        return Collections.<ConceptEditor>singletonList(new CellModel_JComponent_Editor());
+      case 53:
+        return Collections.<ConceptEditor>singletonList(new CellModel_ModelAccess_Editor());
+      case 54:
+        return Collections.<ConceptEditor>singletonList(new CellModel_NextEditor_Editor());
+      case 55:
+        return Collections.<ConceptEditor>singletonList(new CellModel_Property_Editor());
+      case 56:
+        return Collections.<ConceptEditor>singletonList(new CellModel_ReadOnlyModelAccessor_Editor());
+      case 57:
+        return Collections.<ConceptEditor>singletonList(new CellModel_RefCell_Editor());
+      case 58:
+        return Collections.<ConceptEditor>singletonList(new CellModel_RefNode_Editor());
+      case 59:
+        return Collections.<ConceptEditor>singletonList(new CellModel_RefNodeList_Editor());
+      case 60:
+        return Collections.<ConceptEditor>singletonList(new CellModel_ReferencePresentation_Editor());
+      case 61:
+        return Collections.<ConceptEditor>singletonList(new CellModel_TransactionalProperty_Editor());
+      case 62:
+        return Collections.<ConceptEditor>singletonList(new CellModel_URL_Editor());
+      case 63:
+        return Collections.<ConceptEditor>singletonList(new ColorStyleClassItem_Editor());
+      case 64:
+        return Collections.<ConceptEditor>singletonList(new CompletionCustomizationConceptCreatingSpecificator_Editor());
+      case 65:
+        return Collections.<ConceptEditor>singletonList(new CompletionCustomizationConceptModifyingSpecificator_Editor());
+      case 66:
+        return Collections.<ConceptEditor>singletonList(new CompletionCustomization_LinkFeature_Editor());
+      case 67:
+        return Collections.<ConceptEditor>singletonList(new CompletionCustomization_PropertyFeature_Editor());
+      case 68:
+        return Collections.<ConceptEditor>singletonList(new CompletionStyling_Editor());
+      case 69:
+        return Collections.<ConceptEditor>singletonList(new ConceptEditorContextHints_Editor());
+      case 70:
+        return Collections.<ConceptEditor>singletonList(new ConceptEditorDeclaration_Editor());
+      case 71:
+        return Collections.<ConceptEditor>singletonList(new ConceptEditorHintDeclaration_Editor());
+      case 72:
+        return Collections.<ConceptEditor>singletonList(new ConceptEditorHintDeclarationReference_Editor());
+      case 73:
+        return Collections.<ConceptEditor>singletonList(new ConceptEditorHintDeclarationReferenceExpression_Editor());
+      case 74:
+        return Collections.<ConceptEditor>singletonList(new ContextVariable_Editor());
+      case 75:
+        return Collections.<ConceptEditor>singletonList(new DefaultBaseLine_Editor());
+      case 76:
+        return Collections.<ConceptEditor>singletonList(new DefaultCaretPositionStyleClassItem_Editor());
+      case 77:
+        return Collections.<ConceptEditor>singletonList(new DominatesRecord_Editor());
+      case 78:
+        return Collections.<ConceptEditor>singletonList(new EditorCellId_Editor());
+      case 79:
+        return Collections.<ConceptEditor>singletonList(new EditorCellModel_Editor());
+      case 80:
+        return Collections.<ConceptEditor>singletonList(new EditorComponentDeclaration_Editor());
+      case 81:
+        return Collections.<ConceptEditor>singletonList(new EditorComponentDeclarationReference_Editor());
+      case 82:
+        return Collections.<ConceptEditor>singletonList(new ExplicitHintsSpecification_Editor());
+      case 83:
+        return Collections.<ConceptEditor>singletonList(new FloatStyleClassItem_Editor());
+      case 84:
+        return Collections.<ConceptEditor>singletonList(new FontFamilyLiteral_Editor());
+      case 85:
+        return Collections.<ConceptEditor>singletonList(new FontFamilyStyleClassItem_Editor());
+      case 86:
+        return Collections.<ConceptEditor>singletonList(new FontSizeStyleClassItem_Editor());
+      case 87:
+        return Collections.<ConceptEditor>singletonList(new FontStyleStyleClassItem_Editor());
+      case 88:
+        return Collections.<ConceptEditor>singletonList(new GeneratedSubstituteMenuAttribute_Editor());
+      case 89:
+        return Collections.<ConceptEditor>singletonList(new HorizontalAlign_Editor());
+      case 90:
+        return Collections.<ConceptEditor>singletonList(new IdSelector_Editor());
+      case 91:
+        return Collections.<ConceptEditor>singletonList(new InlineEditorComponent_Editor());
+      case 92:
+        return Collections.<ConceptEditor>singletonList(new InlineStyleDeclaration_Editor());
+      case 93:
+        return Collections.<ConceptEditor>singletonList(new LayoutConstraintStyleClassItem_Editor());
+      case 94:
+        return Collections.<ConceptEditor>singletonList(new MatchingLabelStyleClassItem_Editor());
+      case 95:
+        return Collections.<ConceptEditor>singletonList(new MaxWidthStyleClassItem_Editor());
+      case 96:
+        return Collections.<ConceptEditor>singletonList(new MenuTypeDefault_Editor());
+      case 97:
+        return Collections.<ConceptEditor>singletonList(new MenuTypeNamed_Editor());
+      case 98:
+        return Collections.<ConceptEditor>singletonList(new MigrateManuallyAnnotation_Editor());
+      case 99:
+        return Collections.<ConceptEditor>singletonList(new MigratedSideTransformMenuAttribute_Editor());
+      case 100:
+        return Collections.<ConceptEditor>singletonList(new MigratedToAnnotation_Editor());
+      case 101:
+        return Collections.<ConceptEditor>singletonList(new ModelAccessor_Editor());
+      case 102:
+        return Collections.<ConceptEditor>singletonList(new ModuleImageProvider_Editor());
+      case 103:
+        return Collections.<ConceptEditor>singletonList(new NavigatableNodeStyleClassItem_Editor());
+      case 104:
+        return Collections.<ConceptEditor>singletonList(new NavigatableReferenceStyleClassItem_Editor());
+      case 105:
+        return Collections.<ConceptEditor>singletonList(new OptionalConceptReference_Editor());
+      case 106:
+        return Collections.<ConceptEditor>singletonList(new OrCellSelector_Editor());
+      case 107:
+        return Collections.<ConceptEditor>singletonList(new ParametersInformationQuery_Editor());
+      case 108:
+        return Collections.<ConceptEditor>singletonList(new ParametersInformationStyleClassItem_Editor());
+      case 109:
+        return Collections.<ConceptEditor>singletonList(new PositionChildrenStyleClassItem_Editor());
+      case 110:
+        return Collections.<ConceptEditor>singletonList(new PositionStyleClassItem_Editor());
+      case 111:
+        return Collections.<ConceptEditor>singletonList(new PredefinedSelector_Editor());
+      case 112:
+        return Collections.<ConceptEditor>singletonList(new PropertyDeclarationCellSelector_Editor());
+      case 113:
+        return Collections.<ConceptEditor>singletonList(new PropertyExpressionCellSelector_Editor());
+      case 114:
+        return Collections.<ConceptEditor>singletonList(new RGBColor_Editor());
+      case 115:
+        return Collections.<ConceptEditor>singletonList(new ReadOnlyModelAccessor_Editor());
+      case 116:
+        return Collections.<ConceptEditor>singletonList(new ScriptKindClassItem_Editor());
+      case 117:
+        return Collections.<ConceptEditor>singletonList(new SelectInEditorOperation_Editor());
+      case 118:
+        return Collections.<ConceptEditor>singletonList(new SelectPositionParameter_Editor());
+      case 119:
+        return Collections.<ConceptEditor>singletonList(new ShowBoundariesInStyleClassItem_Editor());
+      case 120:
+        return Collections.<ConceptEditor>singletonList(new StubEditorCellModel_Editor());
+      case 121:
+        return Collections.<ConceptEditor>singletonList(new StyleAttributeDeclaration_Editor());
+      case 122:
+        return Collections.<ConceptEditor>singletonList(new StyleAttributeReferenceExpression_Editor());
+      case 123:
+        return Collections.<ConceptEditor>singletonList(new StyleClass_Editor());
+      case 124:
+        return Collections.<ConceptEditor>singletonList(new StyleClassReference_Editor());
+      case 125:
+        return Collections.<ConceptEditor>singletonList(new StyleClassReferenceList_Editor());
+      case 126:
+        return Collections.<ConceptEditor>singletonList(new StyleKey_Editor());
+      case 127:
+        return Collections.<ConceptEditor>singletonList(new StyleKeyPack_Editor());
+      case 128:
+        return Collections.<ConceptEditor>singletonList(new StyleReference_Editor());
+      case 129:
+        return Collections.<ConceptEditor>singletonList(new StyleSheet_Editor());
+      case 130:
+        return Collections.<ConceptEditor>singletonList(new SubstituteFeature_ActionType_Editor());
+      case 131:
+        return Collections.<ConceptEditor>singletonList(new SubstituteFeature_CanSubstitute_Editor());
+      case 132:
+        return Collections.<ConceptEditor>singletonList(new SubstituteFeature_DescriptionText_Editor());
+      case 133:
+        return Collections.<ConceptEditor>singletonList(new SubstituteFeature_Icon_Editor());
+      case 134:
+        return Collections.<ConceptEditor>singletonList(new SubstituteFeature_MatchingText_Editor());
+      case 135:
+        return Collections.<ConceptEditor>singletonList(new SubstituteFeature_Selection_Editor());
+      case 136:
+        return Collections.<ConceptEditor>singletonList(new SubstituteMenu_Editor());
+      case 137:
+        return Collections.<ConceptEditor>singletonList(new SubstituteMenuItem_AbstractOperation_Editor());
+      case 138:
+        return Collections.<ConceptEditor>singletonList(new SubstituteMenuPart_Action_Editor());
+      case 139:
+        return Collections.<ConceptEditor>singletonList(new SubstituteMenuPart_AddConcept_Editor());
+      case 140:
+        return Collections.<ConceptEditor>singletonList(new SubstituteMenuPart_Concepts_Editor());
+      case 141:
+        return Collections.<ConceptEditor>singletonList(new SubstituteMenuPart_Group_Editor());
+      case 142:
+        return Collections.<ConceptEditor>singletonList(new SubstituteMenuPart_IncludeMenu_Editor());
+      case 143:
+        return Collections.<ConceptEditor>singletonList(new SubstituteMenuPart_Parameterized_Editor());
+      case 144:
+        return Collections.<ConceptEditor>singletonList(new SubstituteMenuPart_Placeholder_Editor());
+      case 145:
+        return Collections.<ConceptEditor>singletonList(new SubstituteMenuPart_ReferenceScope_Editor());
+      case 146:
+        return Collections.<ConceptEditor>singletonList(new SubstituteMenuPart_Subconcepts_Editor());
+      case 147:
+        return Collections.<ConceptEditor>singletonList(new SubstituteMenuPart_Wrapper_Editor());
+      case 148:
+        return Collections.<ConceptEditor>singletonList(new SubstituteMenuReference_Default_Editor());
+      case 149:
+        return Collections.<ConceptEditor>singletonList(new SubstituteMenuReference_DefaultWithFunction_Editor());
+      case 150:
+        return Collections.<ConceptEditor>singletonList(new SubstituteMenuReference_Named_Editor());
+      case 151:
+        return Collections.<ConceptEditor>singletonList(new SubstituteMenuVariableDeclaration_Editor());
+      case 152:
+        return Collections.<ConceptEditor>singletonList(new SubstituteMenu_Contribution_Editor());
+      case 153:
+        return Collections.<ConceptEditor>singletonList(new SubstituteMenu_Default_Editor());
+      case 154:
+        return Collections.<ConceptEditor>singletonList(new SubstituteMenu_Named_Editor());
+      case 155:
+        return Collections.<ConceptEditor>singletonList(new SubstituteMenu_SimpleString_Editor());
+      case 156:
+        return Collections.<ConceptEditor>singletonList(new TableComponentStyleClassItem_Editor());
+      case 157:
+        return Collections.<ConceptEditor>singletonList(new TransformationFeature_ActionType_Editor());
+      case 158:
+        return Collections.<ConceptEditor>singletonList(new TransformationFeature_DescriptionText_Editor());
+      case 159:
+        return Collections.<ConceptEditor>singletonList(new TransformationFeature_Icon_Editor());
+      case 160:
+        return Collections.<ConceptEditor>singletonList(new TransformationLocation_Editor());
+      case 161:
+        return Collections.<ConceptEditor>singletonList(new TransformationLocation_SideTransform_Editor());
+      case 162:
+        return Collections.<ConceptEditor>singletonList(new TransformationLocation_SideTransform_PlaceInCellHolder_Editor());
+      case 163:
+        return Collections.<ConceptEditor>singletonList(new TransformationMenu_Editor());
+      case 164:
+        return Collections.<ConceptEditor>singletonList(new TransformationMenuContribution_Editor());
+      case 165:
+        return Collections.<ConceptEditor>singletonList(new TransformationMenuPart_Editor());
+      case 166:
+        return Collections.<ConceptEditor>singletonList(new TransformationMenuPart_Action_Editor());
+      case 167:
+        return Collections.<ConceptEditor>singletonList(new TransformationMenuPart_Group_Editor());
+      case 168:
+        return Collections.<ConceptEditor>singletonList(new TransformationMenuPart_IncludeMenu_Editor());
+      case 169:
+        return Collections.<ConceptEditor>singletonList(new TransformationMenuPart_IncludeSubstituteMenu_Editor());
+      case 170:
+        return Collections.<ConceptEditor>singletonList(new TransformationMenuPart_Parameterized_Editor());
+      case 171:
+        return Collections.<ConceptEditor>singletonList(new TransformationMenuPart_Placeholder_Editor());
+      case 172:
+        return Collections.<ConceptEditor>singletonList(new TransformationMenuPart_PropertyMenu_Editor());
+      case 173:
+        return Collections.<ConceptEditor>singletonList(new TransformationMenuPart_ReferenceMenu_Editor());
+      case 174:
+        return Collections.<ConceptEditor>singletonList(new TransformationMenuPart_SubMenu_Editor());
+      case 175:
+        return Collections.<ConceptEditor>singletonList(new TransformationMenuPart_Super_Editor());
+      case 176:
+        return Collections.<ConceptEditor>singletonList(new TransformationMenuPart_WrapSubstituteMenu_Editor());
+      case 177:
+        return Collections.<ConceptEditor>singletonList(new TransformationMenuReference_Default_Editor());
+      case 178:
+        return Collections.<ConceptEditor>singletonList(new TransformationMenuReference_Named_Editor());
+      case 179:
+        return Collections.<ConceptEditor>singletonList(new TransformationMenuSection_Editor());
+      case 180:
+        return Collections.<ConceptEditor>singletonList(new TransformationMenuVariableDeclaration_Editor());
+      case 181:
+        return Collections.<ConceptEditor>singletonList(new TransformationMenu_Default_Editor());
+      case 182:
+        return Collections.<ConceptEditor>singletonList(new TransformationMenu_Named_Editor());
+      case 183:
+        return Collections.<ConceptEditor>singletonList(new URLStyleClassItem_Editor());
+      case 184:
+        return Collections.<ConceptEditor>singletonList(new UnapplyStyle_Editor());
+      case 185:
+        return Collections.<ConceptEditor>singletonList(new UnderlinedStyleClassItem_Editor());
+      default:
     }
     return Collections.<ConceptEditor>emptyList();
   }
-
+  private Collection<ConceptEditorComponent> getDeclaredEC_0(String editorComponentId) {
+    if ("jetbrains.mps.lang.editor.editor.CellModelCollection_FoldedCellComponent".equals(editorComponentId)) {
+      return Collections.singletonList(new CellModelCollection_FoldedCellComponent());
+    }
+    return Collections.emptyList();
+  }
+  private Collection<ConceptEditorComponent> getDeclaredEC_1(String editorComponentId) {
+    if ("jetbrains.mps.lang.editor.editor.CellModelListWithRole_FoldedCellComponent".equals(editorComponentId)) {
+      return Collections.singletonList(new CellModelListWithRole_FoldedCellComponent());
+    }
+    return Collections.emptyList();
+  }
+  private Collection<ConceptEditorComponent> getDeclaredEC_2(String editorComponentId) {
+    switch (editorComponentId) {
+      case "jetbrains.mps.lang.editor.editor.Common_Component":
+        return Collections.singletonList(new Common_Component());
+      case "jetbrains.mps.lang.editor.editor.Style_Component":
+        return Collections.singletonList(new Style_Component());
+      case "jetbrains.mps.lang.editor.editor._CellKeyMapLnk_Component":
+        return Collections.singletonList(new _CellKeyMapLnk_Component());
+      case "jetbrains.mps.lang.editor.editor._CellModel_Common":
+        return Collections.singletonList(new _CellModel_Common());
+      case "jetbrains.mps.lang.editor.editor._CloseTag":
+        return Collections.singletonList(new _CloseTag());
+      case "jetbrains.mps.lang.editor.editor._FocusPolicy_Applicable":
+        return Collections.singletonList(new _FocusPolicy_Applicable());
+      case "jetbrains.mps.lang.editor.editor._OpenTag":
+        return Collections.singletonList(new _OpenTag());
+    }
+    return Collections.emptyList();
+  }
+  private Collection<ConceptEditorComponent> getDeclaredEC_3(String editorComponentId) {
+    if ("jetbrains.mps.lang.editor.editor.CellStyle_Component".equals(editorComponentId)) {
+      return Collections.singletonList(new CellStyle_Component());
+    }
+    return Collections.emptyList();
+  }
+  private Collection<ConceptEditorComponent> getDeclaredEC_4(String editorComponentId) {
+    if ("jetbrains.mps.lang.editor.editor.IOutputConcept_Component".equals(editorComponentId)) {
+      return Collections.singletonList(new IOutputConcept_Component());
+    }
+    return Collections.emptyList();
+  }
+  private Collection<ConceptEditorComponent> getDeclaredEC_5(String editorComponentId) {
+    switch (editorComponentId) {
+      case "jetbrains.mps.lang.editor.editor.ISubstituteMenu_FieldsAndMethods":
+        return Collections.singletonList(new ISubstituteMenu_FieldsAndMethods());
+      case "jetbrains.mps.lang.editor.editor.ISubstituteMenu_PartsComponent":
+        return Collections.singletonList(new ISubstituteMenu_PartsComponent());
+    }
+    return Collections.emptyList();
+  }
+  private Collection<ConceptEditorComponent> getDeclaredEC_6(String editorComponentId) {
+    switch (editorComponentId) {
+      case "jetbrains.mps.lang.editor.editor.ITransformationMenu_FieldsAndMethods":
+        return Collections.singletonList(new ITransformationMenu_FieldsAndMethods());
+      case "jetbrains.mps.lang.editor.editor.TransformationMenu_Sections_Component":
+        return Collections.singletonList(new TransformationMenu_Sections_Component());
+    }
+    return Collections.emptyList();
+  }
+  private Collection<ConceptEditorComponent> getDeclaredEC_7(String editorComponentId) {
+    if ("jetbrains.mps.lang.editor.editor.SubstituteFeatureAlias".equals(editorComponentId)) {
+      return Collections.singletonList(new SubstituteFeatureAlias());
+    }
+    return Collections.emptyList();
+  }
+  private Collection<ConceptEditorComponent> getDeclaredEC_8(String editorComponentId) {
+    if ("jetbrains.mps.lang.editor.editor.SubstituteMenuPartAlias".equals(editorComponentId)) {
+      return Collections.singletonList(new SubstituteMenuPartAlias());
+    }
+    return Collections.emptyList();
+  }
+  private Collection<ConceptEditorComponent> getDeclaredEC_9(String editorComponentId) {
+    if ("jetbrains.mps.lang.editor.editor.TransformationFeatureAlias".equals(editorComponentId)) {
+      return Collections.singletonList(new TransformationFeatureAlias());
+    }
+    return Collections.emptyList();
+  }
+  private Collection<ConceptEditorComponent> getDeclaredEC_10(String editorComponentId) {
+    if ("jetbrains.mps.lang.editor.editor.TransformationMenuPartAlias".equals(editorComponentId)) {
+      return Collections.singletonList(new TransformationMenuPartAlias());
+    }
+    return Collections.emptyList();
+  }
   @NotNull
   public Collection<ConceptEditorComponent> getDeclaredEditorComponents(SAbstractConcept concept, String editorComponentId) {
-    {
-      SAbstractConcept cncpt = ((SAbstractConcept) concept);
-      Integer preIndex = indices_xbvbvu_a0c.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            if ("jetbrains.mps.lang.editor.editor.CellModelCollection_FoldedCellComponent".equals(editorComponentId)) {
-              return Collections.<ConceptEditorComponent>singletonList(new CellModelCollection_FoldedCellComponent());
-            }
-          }
-          break;
-        case 1:
-          if (true) {
-            if ("jetbrains.mps.lang.editor.editor.CellModelListWithRole_FoldedCellComponent".equals(editorComponentId)) {
-              return Collections.<ConceptEditorComponent>singletonList(new CellModelListWithRole_FoldedCellComponent());
-            }
-          }
-          break;
-        case 2:
-          if (true) {
-            switch (Arrays.binarySearch(stringSwitchCases_xbvbvu_a0a0a0c3a0a2, editorComponentId)) {
-              case 0:
-                return Collections.<ConceptEditorComponent>singletonList(new Common_Component());
-              case 1:
-                return Collections.<ConceptEditorComponent>singletonList(new Style_Component());
-              case 2:
-                return Collections.<ConceptEditorComponent>singletonList(new _CellKeyMapLnk_Component());
-              case 3:
-                return Collections.<ConceptEditorComponent>singletonList(new _CellModel_Common());
-              case 4:
-                return Collections.<ConceptEditorComponent>singletonList(new _CloseTag());
-              case 5:
-                return Collections.<ConceptEditorComponent>singletonList(new _FocusPolicy_Applicable());
-              case 6:
-                return Collections.<ConceptEditorComponent>singletonList(new _OpenTag());
-              default:
-                return Collections.<ConceptEditorComponent>emptyList();
-            }
-          }
-          break;
-        case 3:
-          if (true) {
-            if ("jetbrains.mps.lang.editor.editor.CellStyle_Component".equals(editorComponentId)) {
-              return Collections.<ConceptEditorComponent>singletonList(new CellStyle_Component());
-            }
-          }
-          break;
-        case 4:
-          if (true) {
-            if ("jetbrains.mps.lang.editor.editor.IOutputConcept_Component".equals(editorComponentId)) {
-              return Collections.<ConceptEditorComponent>singletonList(new IOutputConcept_Component());
-            }
-          }
-          break;
-        case 5:
-          if (true) {
-            if ("jetbrains.mps.lang.editor.editor.TransformationMenu_Sections_Component".equals(editorComponentId)) {
-              return Collections.<ConceptEditorComponent>singletonList(new TransformationMenu_Sections_Component());
-            }
-          }
-          break;
-        case 6:
-          if (true) {
-            if ("jetbrains.mps.lang.editor.editor.SubstituteFeatureAlias".equals(editorComponentId)) {
-              return Collections.<ConceptEditorComponent>singletonList(new SubstituteFeatureAlias());
-            }
-          }
-          break;
-        case 7:
-          if (true) {
-            if ("jetbrains.mps.lang.editor.editor.SubstituteMenuPartAlias".equals(editorComponentId)) {
-              return Collections.<ConceptEditorComponent>singletonList(new SubstituteMenuPartAlias());
-            }
-          }
-          break;
-        case 8:
-          if (true) {
-            if ("jetbrains.mps.lang.editor.editor.TransformationFeatureAlias".equals(editorComponentId)) {
-              return Collections.<ConceptEditorComponent>singletonList(new TransformationFeatureAlias());
-            }
-          }
-          break;
-        case 9:
-          if (true) {
-            if ("jetbrains.mps.lang.editor.editor.TransformationMenuPartAlias".equals(editorComponentId)) {
-              return Collections.<ConceptEditorComponent>singletonList(new TransformationMenuPartAlias());
-            }
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = ((SAbstractConcept) concept);
+    switch (conceptIndex1.index(cncpt)) {
+      case 0:
+        return getDeclaredEC_0(editorComponentId);
+      case 1:
+        return getDeclaredEC_1(editorComponentId);
+      case 2:
+        return getDeclaredEC_2(editorComponentId);
+      case 3:
+        return getDeclaredEC_3(editorComponentId);
+      case 4:
+        return getDeclaredEC_4(editorComponentId);
+      case 5:
+        return getDeclaredEC_5(editorComponentId);
+      case 6:
+        return getDeclaredEC_6(editorComponentId);
+      case 7:
+        return getDeclaredEC_7(editorComponentId);
+      case 8:
+        return getDeclaredEC_8(editorComponentId);
+      case 9:
+        return getDeclaredEC_9(editorComponentId);
+      case 10:
+        return getDeclaredEC_10(editorComponentId);
+      default:
     }
-    return Collections.<ConceptEditorComponent>emptyList();
+    return Collections.emptyList();
   }
+
 
   @NotNull
   @Override
   public Collection<TransformationMenu> getDeclaredDefaultTransformationMenus(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_xbvbvu_a0e.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new AbstractCellSelector_TransformationMenu());
-          }
-          break;
-        case 1:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new EditorCellModel_TransformationMenu());
-          }
-          break;
-        case 2:
-          if (true) {
-            return Collections.<TransformationMenu>singletonList(new SelectInEditorOperationSideTransforms_Contribution());
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex2.index(cncpt)) {
+      case 0:
+        return Collections.<TransformationMenu>singletonList(new AbstractCellSelector_TransformationMenu());
+      case 1:
+        return Collections.<TransformationMenu>singletonList(new EditorCellModel_TransformationMenu());
+      case 2:
+        return Collections.<TransformationMenu>singletonList(new SelectInEditorOperationSideTransforms_Contribution());
+      default:
     }
     return Collections.<TransformationMenu>emptyList();
   }
   @NotNull
   @Override
   public Collection<TransformationMenu> getDeclaredNamedTransformationMenus(NamedMenuId menuId) {
-    {
-      SAbstractConcept cncpt = (SAbstractConcept) menuId.getConcept();
-      Integer preIndex = indices_xbvbvu_a0f.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            switch (Arrays.binarySearch(stringSwitchCases_xbvbvu_a0a0a0a3a0a5, menuId.getFqName())) {
-              case 0:
-                return Arrays.asList(new TransformationMenu[]{new addCondition()});
-              default:
-            }
+    SAbstractConcept cncpt = (SAbstractConcept) menuId.getConcept();
+    switch (conceptIndex3.index(cncpt)) {
+      case 0:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.editor.editor.addCondition":
+              return Arrays.asList(new TransformationMenu[]{new addCondition()});
+            default:
           }
-          break;
-        case 1:
-          if (true) {
-            switch (Arrays.binarySearch(stringSwitchCases_xbvbvu_a0a0a0b3a0a5, menuId.getFqName())) {
-              case 0:
-                return Arrays.asList(new TransformationMenu[]{new addExtendedClass_StyleClass()});
-              default:
-            }
+        }
+        break;
+      case 1:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.editor.editor.BooleanStyleSheetItem_FlagMenu":
+              return Arrays.asList(new TransformationMenu[]{new BooleanStyleSheetItem_FlagMenu()});
+            default:
           }
-          break;
-        case 2:
-          if (true) {
-            switch (Arrays.binarySearch(stringSwitchCases_xbvbvu_a0a0a0c3a0a5, menuId.getFqName())) {
-              case 0:
-                return Arrays.asList(new TransformationMenu[]{new addExtendedClass()});
-              default:
-            }
+        }
+        break;
+      case 2:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.editor.editor.CellModel_Collection_CollapseByDefaultMenu":
+              return Arrays.asList(new TransformationMenu[]{new CellModel_Collection_CollapseByDefaultMenu()});
+            case "jetbrains.mps.lang.editor.editor.CellModel_Collection_UsesFoldingMenu":
+              return Arrays.asList(new TransformationMenu[]{new CellModel_Collection_UsesFoldingMenu()});
+            default:
           }
-          break;
-        default:
-      }
+        }
+        break;
+      case 3:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.editor.editor.CellModel_RefNodeList_UsesFoldingMenu":
+              return Arrays.asList(new TransformationMenu[]{new CellModel_RefNodeList_UsesFoldingMenu()});
+            default:
+          }
+        }
+        break;
+      case 4:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.editor.editor.CompletionCustomization_SubstituteSpecificator":
+              return Arrays.asList(new TransformationMenu[]{new CompletionCustomization_SubstituteSpecificator()});
+            default:
+          }
+        }
+        break;
+      case 5:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.editor.editor.PropertyDeclarationCellSelector_Empty_SideTransformMenu":
+              return Arrays.asList(new TransformationMenu[]{new PropertyDeclarationCellSelector_Empty_SideTransformMenu()});
+            default:
+          }
+        }
+        break;
+      case 6:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.editor.editor.addExtendedClass_StyleClass":
+              return Arrays.asList(new TransformationMenu[]{new addExtendedClass_StyleClass()});
+            default:
+          }
+        }
+        break;
+      case 7:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.editor.editor.SubstituteMenuReference_Default_QueryMenu":
+              return Arrays.asList(new TransformationMenu[]{new SubstituteMenuReference_Default_QueryMenu()});
+            default:
+          }
+        }
+        break;
+      default:
     }
 
     return Collections.<TransformationMenu>emptyList();
@@ -1051,247 +619,184 @@ public class EditorAspectDescriptorImpl extends EditorAspectDescriptorBase {
   @NotNull
   @Override
   public Collection<SubstituteMenu> getDeclaredDefaultSubstituteMenus(SAbstractConcept concept) {
-    {
-      SAbstractConcept cncpt = concept;
-      Integer preIndex = indices_xbvbvu_a0g.get(cncpt);
-      int switchIndex = (preIndex == null ? -1 : preIndex);
-      switch (switchIndex) {
-        case 0:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new AbstractCellSelector_SubstituteMenu());
-          }
-          break;
-        case 1:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new AbstractStyledTextOperation_SubstituteMenu());
-          }
-          break;
-        case 2:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new CellActionMapItem_SubstituteMenu());
-          }
-          break;
-        case 3:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new CellMenuPart_Abstract_SubstituteMenu());
-          }
-          break;
-        case 4:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new CellMenuPart_AbstractGroup_parameterObject_SubstituteMenu());
-          }
-          break;
-        case 5:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new CellMenuPart_Abstract_editedNode_SubstituteMenu());
-          }
-          break;
-        case 6:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new CellMenuPart_PropertyPostfixHints_SubstituteMenu());
-          }
-          break;
-        case 7:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new CellMenuPart_PropertyValues_SubstituteMenu());
-          }
-          break;
-        case 8:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new CellMenuPart_ReferentPrimary_SubstituteMenu());
-          }
-          break;
-        case 9:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new CellMenuPart_ReplaceChildPrimary_SubstituteMenu());
-          }
-          break;
-        case 10:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new CellMenuPart_ReplaceChild_CustomChildConcept_SubstituteMenu());
-          }
-          break;
-        case 11:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new CellMenuPart_ReplaceChild_Group_SubstituteMenu());
-          }
-          break;
-        case 12:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new CellMenuPart_ReplaceChild_Item_SubstituteMenu());
-          }
-          break;
-        case 13:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new CellMenuPart_ReplaceChild_currentChild_SubstituteMenu());
-          }
-          break;
-        case 14:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new CellMenuPart_ReplaceChild_defaultConceptOfChild_SubstituteMenu());
-          }
-          break;
-        case 15:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new CellModel_NonEmptyProperty_SubstituteMenu());
-          }
-          break;
-        case 16:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new CellModel_TransactionalProperty_SubstituteMenu());
-          }
-          break;
-        case 17:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_StyledText_SubstituteMenu());
-          }
-          break;
-        case 18:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_childNode_SubstituteMenu());
-          }
-          break;
-        case 19:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_editorContext_SubstituteMenu());
-          }
-          break;
-        case 20:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_model_SubstituteMenu());
-          }
-          break;
-        case 21:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_nextNode_SubstituteMenu());
-          }
-          break;
-        case 22:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_node_SubstituteMenu());
-          }
-          break;
-        case 23:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_oldText_SubstituteMenu());
-          }
-          break;
-        case 24:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_parameterObject_SubstituteMenu());
-          }
-          break;
-        case 25:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_prevNode_SubstituteMenu());
-          }
-          break;
-        case 26:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_selectedNode_SubstituteMenu());
-          }
-          break;
-        case 27:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_text_SubstituteMenu());
-          }
-          break;
-        case 28:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new ContextHintsSpecification_SubstituteMenu());
-          }
-          break;
-        case 29:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new EditorCellId_SubstituteMenu());
-          }
-          break;
-        case 30:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new EditorCellModel_SubstituteMenu());
-          }
-          break;
-        case 31:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new SubstituteAbstractStyledTextOperation_Contribution());
-          }
-          break;
-        case 32:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new StubEditorCellModel_SubstituteMenu());
-          }
-          break;
-        case 33:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new StyleClassReferenceList_SubstituteMenu());
-          }
-          break;
-        case 34:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new StyleSheetClass_SubstituteMenu());
-          }
-          break;
-        case 35:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new SubstituteMenuPart_Placeholder_SubstituteMenu());
-          }
-          break;
-        case 36:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new SubstituteMenuReference_DefaultWithFunction_SubstituteMenu());
-          }
-          break;
-        case 37:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new SubstituteMenuVariableDeclaration_SubstituteMenu());
-          }
-          break;
-        case 38:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new TransactionPropertyHandler_newValue_SubstituteMenu());
-          }
-          break;
-        case 39:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new TransformationFeature_SubstituteMenu());
-          }
-          break;
-        case 40:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new TransformationLocation_SubstituteMenu());
-          }
-          break;
-        case 41:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new TransformationMenuPart_Placeholder_SubstituteMenu());
-          }
-          break;
-        case 42:
-          if (true) {
-            return Collections.<SubstituteMenu>singletonList(new TransformationMenuVariableDeclaration_SubstituteMenu());
-          }
-          break;
-        default:
-      }
+    SAbstractConcept cncpt = concept;
+    switch (conceptIndex4.index(cncpt)) {
+      case 0:
+        return Collections.<SubstituteMenu>singletonList(new AbstractCellSelector_SubstituteMenu());
+      case 1:
+        return Collections.<SubstituteMenu>singletonList(new AbstractStyledTextOperation_SubstituteMenu());
+      case 2:
+        return Collections.<SubstituteMenu>singletonList(new AttributeStyleClassItem_SubstituteMenu());
+      case 3:
+        return Collections.<SubstituteMenu>singletonList(new CellActionMapImport_SubstituteMenu());
+      case 4:
+        return Collections.<SubstituteMenu>singletonList(new CellActionMapImportSelectorByActionId_SubstituteMenu());
+      case 5:
+        return Collections.<SubstituteMenu>singletonList(new CellActionMapItem_SubstituteMenu());
+      case 6:
+        return Collections.<SubstituteMenu>singletonList(new CellIdReferenceSelector_SubstituteMenu());
+      case 7:
+        return Collections.<SubstituteMenu>singletonList(new CellMenuComponentFeature_Link_SubstituteMenu());
+      case 8:
+        return Collections.<SubstituteMenu>singletonList(new CellMenuComponentFeature_Property_SubstituteMenu());
+      case 9:
+        return Collections.<SubstituteMenu>singletonList(new CellMenuPart_Abstract_SubstituteMenu());
+      case 10:
+        return Collections.<SubstituteMenu>singletonList(new CellMenuPart_AbstractGroup_parameterObject_SubstituteMenu());
+      case 11:
+        return Collections.<SubstituteMenu>singletonList(new CellMenuPart_Abstract_editedNode_SubstituteMenu());
+      case 12:
+        return Collections.<SubstituteMenu>singletonList(new CellMenuPart_PropertyPostfixHints_SubstituteMenu());
+      case 13:
+        return Collections.<SubstituteMenu>singletonList(new CellMenuPart_PropertyValues_SubstituteMenu());
+      case 14:
+        return Collections.<SubstituteMenu>singletonList(new CellMenuPart_ReferentPrimary_SubstituteMenu());
+      case 15:
+        return Collections.<SubstituteMenu>singletonList(new CellMenuPart_ReplaceChildPrimary_SubstituteMenu());
+      case 16:
+        return Collections.<SubstituteMenu>singletonList(new CellMenuPart_ReplaceChild_CustomChildConcept_SubstituteMenu());
+      case 17:
+        return Collections.<SubstituteMenu>singletonList(new CellMenuPart_ReplaceChild_Group_SubstituteMenu());
+      case 18:
+        return Collections.<SubstituteMenu>singletonList(new CellMenuPart_ReplaceChild_Item_SubstituteMenu());
+      case 19:
+        return Collections.<SubstituteMenu>singletonList(new CellMenuPart_ReplaceChild_currentChild_SubstituteMenu());
+      case 20:
+        return Collections.<SubstituteMenu>singletonList(new CellMenuPart_ReplaceChild_defaultChildConcept_SubstituteMenu());
+      case 21:
+        return Collections.<SubstituteMenu>singletonList(new CellMenuPart_ReplaceChild_defaultConceptOfChild_SubstituteMenu());
+      case 22:
+        return Collections.<SubstituteMenu>singletonList(new CellModel_NonEmptyProperty_SubstituteMenu());
+      case 23:
+        return Collections.<SubstituteMenu>singletonList(new CellModel_Property_SubstituteMenu());
+      case 24:
+        return Collections.<SubstituteMenu>singletonList(new CellModel_RefCell_SubstituteMenu());
+      case 25:
+        return Collections.<SubstituteMenu>singletonList(new CellModel_RefNode_SubstituteMenu());
+      case 26:
+        return Collections.<SubstituteMenu>singletonList(new CellModel_RefNodeList_SubstituteMenu());
+      case 27:
+        return Collections.<SubstituteMenu>singletonList(new CellModel_TransactionalProperty_SubstituteMenu());
+      case 28:
+        return Collections.<SubstituteMenu>singletonList(new CompletionCustomization_LinkFeature_SubstituteMenu());
+      case 29:
+        return Collections.<SubstituteMenu>singletonList(new CompletionCustomization_PropertyFeature_SubstituteMenu());
+      case 30:
+        return Collections.<SubstituteMenu>singletonList(new ConceptEditorHintDeclarationReference_SubstituteMenu());
+      case 31:
+        return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_StyledText_SubstituteMenu());
+      case 32:
+        return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_childNode_SubstituteMenu());
+      case 33:
+        return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_editorContext_SubstituteMenu());
+      case 34:
+        return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_index_SubstituteMenu());
+      case 35:
+        return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_model_SubstituteMenu());
+      case 36:
+        return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_nextNode_SubstituteMenu());
+      case 37:
+        return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_node_SubstituteMenu());
+      case 38:
+        return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_oldText_SubstituteMenu());
+      case 39:
+        return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_parameterObject_SubstituteMenu());
+      case 40:
+        return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_prevNode_SubstituteMenu());
+      case 41:
+        return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_selectedNode_SubstituteMenu());
+      case 42:
+        return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_sourceNode_SubstituteMenu());
+      case 43:
+        return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_targetNode_SubstituteMenu());
+      case 44:
+        return Collections.<SubstituteMenu>singletonList(new ConceptFunctionParameter_text_SubstituteMenu());
+      case 45:
+        return Collections.<SubstituteMenu>singletonList(new ContextHintsSpecification_SubstituteMenu());
+      case 46:
+        return Collections.<SubstituteMenu>singletonList(new EditorCellId_SubstituteMenu());
+      case 47:
+        return Collections.<SubstituteMenu>singletonList(new EditorCellModel_SubstituteMenu());
+      case 48:
+        return Collections.<SubstituteMenu>singletonList(new EditorComponentDeclarationReference_SubstituteMenu());
+      case 49:
+        return Collections.<SubstituteMenu>singletonList(new SubstituteAbstractStyledTextOperation_Contribution());
+      case 50:
+        return Collections.<SubstituteMenu>singletonList(new PropertyDeclarationCellSelector_SubstituteMenu());
+      case 51:
+        return Collections.<SubstituteMenu>singletonList(new QueryFunction_RefPresentation_SubstituteMenu());
+      case 52:
+        return Collections.<SubstituteMenu>singletonList(new StubEditorCellModel_SubstituteMenu());
+      case 53:
+        return Collections.<SubstituteMenu>singletonList(new StyleClassReference_SubstituteMenu());
+      case 54:
+        return Collections.<SubstituteMenu>singletonList(new StyleClassReferenceList_SubstituteMenu());
+      case 55:
+        return Collections.<SubstituteMenu>singletonList(new StyleReference_SubstituteMenu());
+      case 56:
+        return Collections.<SubstituteMenu>singletonList(new SubstituteMenuPart_Placeholder_SubstituteMenu());
+      case 57:
+        return Collections.<SubstituteMenu>singletonList(new SubstituteMenuReference_DefaultWithFunction_SubstituteMenu());
+      case 58:
+        return Collections.<SubstituteMenu>singletonList(new SubstituteMenuVariableDeclaration_SubstituteMenu());
+      case 59:
+        return Collections.<SubstituteMenu>singletonList(new SubstituteMenuVariableReference_SubstituteMenu());
+      case 60:
+        return Collections.<SubstituteMenu>singletonList(new TransactionPropertyHandler_newValue_SubstituteMenu());
+      case 61:
+        return Collections.<SubstituteMenu>singletonList(new TransformationFeature_SubstituteMenu());
+      case 62:
+        return Collections.<SubstituteMenu>singletonList(new TransformationLocation_SubstituteMenu());
+      case 63:
+        return Collections.<SubstituteMenu>singletonList(new TransformationLocation_SideTransform_PlaceInCellHolder_SubstituteMenu());
+      case 64:
+        return Collections.<SubstituteMenu>singletonList(new TransformationMenuPart_Placeholder_SubstituteMenu());
+      case 65:
+        return Collections.<SubstituteMenu>singletonList(new TransformationMenuReference_Default_SubstituteMenu());
+      case 66:
+        return Collections.<SubstituteMenu>singletonList(new TransformationMenuReference_Named_SubstituteMenu());
+      case 67:
+        return Collections.<SubstituteMenu>singletonList(new TransformationMenuVariableDeclaration_SubstituteMenu());
+      case 68:
+        return Collections.<SubstituteMenu>singletonList(new TransformationMenuVariableReference_SubstituteMenu());
+      default:
     }
     return Collections.<SubstituteMenu>emptyList();
   }
-
-  private static Map<SAbstractConcept, Integer> buildConceptIndices(SAbstractConcept... concepts) {
-    HashMap<SAbstractConcept, Integer> res = new HashMap<SAbstractConcept, Integer>();
-    int counter = 0;
-    for (SAbstractConcept c : concepts) {
-      res.put(c, counter++);
+  @NotNull
+  @Override
+  public Collection<SubstituteMenu> getDeclaredNamedSubstituteMenus(NamedMenuId menuId) {
+    SAbstractConcept cncpt = (SAbstractConcept) menuId.getConcept();
+    switch (conceptIndex5.index(cncpt)) {
+      case 0:
+        if (true) {
+          switch (menuId.getFqName()) {
+            case "jetbrains.mps.lang.editor.editor.CellIdReferenceSelector_SmartReference":
+              return Arrays.asList(new SubstituteMenu[]{new CellIdReferenceSelector_SmartReference()});
+            default:
+          }
+        }
+        break;
+      default:
     }
-    return res;
+
+    return Collections.<SubstituteMenu>emptyList();
   }
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0a = buildConceptIndices(MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1b0a9b8c0eb8e726L, "jetbrains.mps.lang.editor.structure.AbstractCellSelector"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11d878e7095L, "jetbrains.mps.lang.editor.structure.AbstractPaddingStyleClassItem"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3ee423fc2ad10eceL, "jetbrains.mps.lang.editor.structure.AbstractStyledTextOperation"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1b1161f6e648b4b2L, "jetbrains.mps.lang.editor.structure.ApplyStyleClass"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7e9b10ab20495600L, "jetbrains.mps.lang.editor.structure.ApplyStyleClassCondition"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3744c0f9eae0a402L, "jetbrains.mps.lang.editor.structure.AttributeStyleClassItem"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1143bd1283bL, "jetbrains.mps.lang.editor.structure.BooleanStyleSheetItem"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x117b152bc1fL, "jetbrains.mps.lang.editor.structure.CaretPositionParameter"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10951978cfeL, "jetbrains.mps.lang.editor.structure.CellActionMapDeclaration"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x109519879e9L, "jetbrains.mps.lang.editor.structure.CellActionMapItem"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3c0028bb8556f621L, "jetbrains.mps.lang.editor.structure.CellIdReferenceSelector"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xfbc216b31bL, "jetbrains.mps.lang.editor.structure.CellKeyMapDeclaration"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x108b5877365L, "jetbrains.mps.lang.editor.structure.CellKeyMapItem"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x108b5885461L, "jetbrains.mps.lang.editor.structure.CellKeyMapKeystroke"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10192dc11caL, "jetbrains.mps.lang.editor.structure.CellLayout"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f7d702058L, "jetbrains.mps.lang.editor.structure.CellMenuComponent"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f7d86ed9bL, "jetbrains.mps.lang.editor.structure.CellMenuComponentFeature_Link"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f7d811428L, "jetbrains.mps.lang.editor.structure.CellMenuComponentFeature_Property"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f34f6aaacL, "jetbrains.mps.lang.editor.structure.CellMenuDescriptor"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f34f8c0deL, "jetbrains.mps.lang.editor.structure.CellMenuPart_Abstract"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x72449b609d0e77bbL, "jetbrains.mps.lang.editor.structure.CellMenuPart_ApplySideTransforms"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f7e91dcf6L, "jetbrains.mps.lang.editor.structure.CellMenuPart_CellMenuComponent"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f58784317L, "jetbrains.mps.lang.editor.structure.CellMenuPart_Generic_Group"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f58b5e5f6L, "jetbrains.mps.lang.editor.structure.CellMenuPart_Generic_Item"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x112e2300bcaL, "jetbrains.mps.lang.editor.structure.CellMenuPart_PropertyPostfixHints"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f357f9ab7L, "jetbrains.mps.lang.editor.structure.CellMenuPart_PropertyValues"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f3f33baebL, "jetbrains.mps.lang.editor.structure.CellMenuPart_ReferentPrimary"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1115d1a2839L, "jetbrains.mps.lang.editor.structure.CellMenuPart_ReplaceChildPrimary"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f5021674eL, "jetbrains.mps.lang.editor.structure.CellMenuPart_ReplaceChild_CustomChildConcept"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f4f87862dL, "jetbrains.mps.lang.editor.structure.CellMenuPart_ReplaceChild_Group"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f53a0aafeL, "jetbrains.mps.lang.editor.structure.CellMenuPart_ReplaceChild_Item"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f3a50ec74L, "jetbrains.mps.lang.editor.structure.CellMenuPart_ReplaceNode_CustomNodeConcept"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f3fa975a0L, "jetbrains.mps.lang.editor.structure.CellMenuPart_ReplaceNode_Group"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xfd766383e4L, "jetbrains.mps.lang.editor.structure.CellModel_Alternation"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x108a0861503L, "jetbrains.mps.lang.editor.structure.CellModel_AttributedLinkCell"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10bb871ad98L, "jetbrains.mps.lang.editor.structure.CellModel_AttributedNodeCell"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1081e457de7L, "jetbrains.mps.lang.editor.structure.CellModel_AttributedPropertyCell"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1170b90f356L, "jetbrains.mps.lang.editor.structure.CellModel_Block"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x116fdba37cdL, "jetbrains.mps.lang.editor.structure.CellModel_BlockEnd"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x116fdb876c6L, "jetbrains.mps.lang.editor.structure.CellModel_BlockStart"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eaff2517L, "jetbrains.mps.lang.editor.structure.CellModel_Collection"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xfb35c96896L, "jetbrains.mps.lang.editor.structure.CellModel_Component"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eb01232eL, "jetbrains.mps.lang.editor.structure.CellModel_Constant"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x2ea28b54668aeb4bL, "jetbrains.mps.lang.editor.structure.CellModel_ContextAssistant"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xfb103073dcL, "jetbrains.mps.lang.editor.structure.CellModel_Custom"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x73604585b6d5c973L, "jetbrains.mps.lang.editor.structure.CellModel_Empty"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xfa61615ec3L, "jetbrains.mps.lang.editor.structure.CellModel_Error"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1095e12de6fL, "jetbrains.mps.lang.editor.structure.CellModel_Image"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x116fdad17a0L, "jetbrains.mps.lang.editor.structure.CellModel_Indent"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x100d0e71cb2L, "jetbrains.mps.lang.editor.structure.CellModel_JComponent"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xfa3d28fe7dL, "jetbrains.mps.lang.editor.structure.CellModel_ModelAccess"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7456aec153c7f5a2L, "jetbrains.mps.lang.editor.structure.CellModel_NextEditor"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eb02612eL, "jetbrains.mps.lang.editor.structure.CellModel_Property"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11d6d56c00cL, "jetbrains.mps.lang.editor.structure.CellModel_ReadOnlyModelAccessor"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xfd52a2c922L, "jetbrains.mps.lang.editor.structure.CellModel_RefCell"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eb05cdc7L, "jetbrains.mps.lang.editor.structure.CellModel_RefNode"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eb0ad38eL, "jetbrains.mps.lang.editor.structure.CellModel_RefNodeList"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x8ace515f0191e6eL, "jetbrains.mps.lang.editor.structure.CellModel_ReferencePresentation"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11b35f4f515L, "jetbrains.mps.lang.editor.structure.CellModel_TransactionalProperty"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x334adf8cb15f3fdeL, "jetbrains.mps.lang.editor.structure.CellModel_URL"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1143b2bb8c4L, "jetbrains.mps.lang.editor.structure.ColorStyleClassItem"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x527faacef4e35767L, "jetbrains.mps.lang.editor.structure.ConceptEditorContextHints"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9845363abL, "jetbrains.mps.lang.editor.structure.ConceptEditorDeclaration"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x527faacef50d095eL, "jetbrains.mps.lang.editor.structure.ConceptEditorHintDeclaration"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5eadaecad41188dcL, "jetbrains.mps.lang.editor.structure.ConceptEditorHintDeclarationReference"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x42e5e943db1f2dd0L, "jetbrains.mps.lang.editor.structure.ConceptEditorHintDeclarationReferenceExpression"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x794cf8ea9e119f99L, "jetbrains.mps.lang.editor.structure.ContextVariable"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x69c06896a0e42a51L, "jetbrains.mps.lang.editor.structure.DefaultBaseLine"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11ac437b468L, "jetbrains.mps.lang.editor.structure.DefaultCaretPositionStyleClassItem"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x22926e62b7d495a0L, "jetbrains.mps.lang.editor.structure.DominatesRecord"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3c0028bb846a5817L, "jetbrains.mps.lang.editor.structure.EditorCellId"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eafb9a39L, "jetbrains.mps.lang.editor.structure.EditorCellModel"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xfb35c2bb47L, "jetbrains.mps.lang.editor.structure.EditorComponentDeclaration"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x619d95571435dfe8L, "jetbrains.mps.lang.editor.structure.EditorComponentDeclarationReference"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3ae0865e9a712712L, "jetbrains.mps.lang.editor.structure.ExplicitHintsSpecification"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11ae41b27e5L, "jetbrains.mps.lang.editor.structure.FloatStyleClassItem"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1143be33e36L, "jetbrains.mps.lang.editor.structure.FontSizeStyleClassItem"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1143b2c9756L, "jetbrains.mps.lang.editor.structure.FontStyleStyleClassItem"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11fc74ebe6cL, "jetbrains.mps.lang.editor.structure.HorizontalAlign"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1e02662c4b880750L, "jetbrains.mps.lang.editor.structure.IdSelector"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xfd5cee772bL, "jetbrains.mps.lang.editor.structure.InlineEditorComponent"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11f1d6594edL, "jetbrains.mps.lang.editor.structure.InlineStyleDeclaration"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11abafc10eaL, "jetbrains.mps.lang.editor.structure.LayoutConstraintStyleClassItem"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11fd6f8d518L, "jetbrains.mps.lang.editor.structure.MatchingLabelStyleClassItem"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x6a2febf37d13730eL, "jetbrains.mps.lang.editor.structure.MaxWidthStyleClassItem"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7ce0198267c4eb2L, "jetbrains.mps.lang.editor.structure.MigrateManuallyAnnotation"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7ce019825aa4e82L, "jetbrains.mps.lang.editor.structure.MigratedSideTransformMenuAttribute"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7ce01982652a98aL, "jetbrains.mps.lang.editor.structure.MigratedToAnnotation"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x111f9dbb2ccL, "jetbrains.mps.lang.editor.structure.ModelAccessor"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x696ed29ebd7c1429L, "jetbrains.mps.lang.editor.structure.NavigatableNodeStyleClassItem"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11de23fdb1fL, "jetbrains.mps.lang.editor.structure.NavigatableReferenceStyleClassItem"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xbb2f315607dc1f1L, "jetbrains.mps.lang.editor.structure.OptionalConceptReference"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x235af965a76b03fL, "jetbrains.mps.lang.editor.structure.OrCellSelector"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x6a67a319ce06acceL, "jetbrains.mps.lang.editor.structure.ParametersInformationQuery"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x6a67a319ce060712L, "jetbrains.mps.lang.editor.structure.ParametersInformationStyleClassItem"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11b40a56a20L, "jetbrains.mps.lang.editor.structure.PositionChildrenStyleClassItem"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11b31a45ad7L, "jetbrains.mps.lang.editor.structure.PositionStyleClassItem"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x399cb6c68c707bf7L, "jetbrains.mps.lang.editor.structure.PreDefinedStyleClassItem"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x313a48d996236c93L, "jetbrains.mps.lang.editor.structure.PredefinedSelector"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3e970bbc3009e3a3L, "jetbrains.mps.lang.editor.structure.PropertyDeclarationCellSelector"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3e970bbc30443a0aL, "jetbrains.mps.lang.editor.structure.PropertyExpressionCellSelector"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11d52e2b1a0L, "jetbrains.mps.lang.editor.structure.RGBColor"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11d6d3fe71eL, "jetbrains.mps.lang.editor.structure.ReadOnlyModelAccessor"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3212fe82cb95ffe7L, "jetbrains.mps.lang.editor.structure.RightTransformAnchorTagWrapper"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x72908ac6c78618c8L, "jetbrains.mps.lang.editor.structure.ScriptKindClassItem"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x329d4406465c63a0L, "jetbrains.mps.lang.editor.structure.SelectInEditorOperation"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x117b132f8cdL, "jetbrains.mps.lang.editor.structure.SelectPositionParameter"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x49177f9006c530a0L, "jetbrains.mps.lang.editor.structure.ShowBoundariesInStyleClassItem"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11abb1e8d85L, "jetbrains.mps.lang.editor.structure.SideTransformAnchorTagStyleClassItem"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xa2364a3edcb8ed2L, "jetbrains.mps.lang.editor.structure.StubEditorCellModel"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3744c0f9ea5367ebL, "jetbrains.mps.lang.editor.structure.StyleAttributeDeclaration"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x53ac4acb2cb6e9d7L, "jetbrains.mps.lang.editor.structure.StyleAttributeReferenceExpression"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x2ef3b3796a126f24L, "jetbrains.mps.lang.editor.structure.StyleClass"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x2ef3b3796a130c0dL, "jetbrains.mps.lang.editor.structure.StyleClassReference"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7e9b10ab1cb5b6d8L, "jetbrains.mps.lang.editor.structure.StyleClassReferenceList"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x399cb6c68aa9aeaaL, "jetbrains.mps.lang.editor.structure.StyleKey"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x399cb6c68aa9af02L, "jetbrains.mps.lang.editor.structure.StyleKeyPack"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7e9b10ab1edbd2fbL, "jetbrains.mps.lang.editor.structure.StyleReference"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1143b151743L, "jetbrains.mps.lang.editor.structure.StyleSheet"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1143b178f1fL, "jetbrains.mps.lang.editor.structure.StyleSheetClass"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x116fd64815dL, "jetbrains.mps.lang.editor.structure.StyleSheetClassReference"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x75a895eb6bcee96cL, "jetbrains.mps.lang.editor.structure.SubstituteFeature_ActionType"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7ce1116e3a2e0187L, "jetbrains.mps.lang.editor.structure.SubstituteFeature_CanSubstitute"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7ce1116e3a2e0173L, "jetbrains.mps.lang.editor.structure.SubstituteFeature_DescriptionText"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x75a895eb6c03385dL, "jetbrains.mps.lang.editor.structure.SubstituteFeature_Icon"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7ce1116e3a2dee5aL, "jetbrains.mps.lang.editor.structure.SubstituteFeature_MatchingText"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x75a895eb6bcee97fL, "jetbrains.mps.lang.editor.structure.SubstituteFeature_Selection"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x65e54712ab56010bL, "jetbrains.mps.lang.editor.structure.SubstituteMenuPart_Action"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5c03050cab46db2L, "jetbrains.mps.lang.editor.structure.SubstituteMenuPart_AddConcept"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x49f6d25f12102816L, "jetbrains.mps.lang.editor.structure.SubstituteMenuPart_Concepts"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5c03050cab4546bL, "jetbrains.mps.lang.editor.structure.SubstituteMenuPart_Group"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xa22200b56b57990L, "jetbrains.mps.lang.editor.structure.SubstituteMenuPart_IncludeMenu"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x4467282afd5201dL, "jetbrains.mps.lang.editor.structure.SubstituteMenuPart_Parameterized"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x25c7da75de4cff05L, "jetbrains.mps.lang.editor.structure.SubstituteMenuPart_Placeholder"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x88a6ffdb3b4f8c6L, "jetbrains.mps.lang.editor.structure.SubstituteMenuPart_Subconcepts"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5cc5669cafd1be9bL, "jetbrains.mps.lang.editor.structure.SubstituteMenuPart_Wrapper"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5480a271c0d1df1eL, "jetbrains.mps.lang.editor.structure.SubstituteMenuReference_Default"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x71f19593ac95dee9L, "jetbrains.mps.lang.editor.structure.SubstituteMenuReference_DefaultWithFunction"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5480a271c0d1df1fL, "jetbrains.mps.lang.editor.structure.SubstituteMenuReference_Named"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x780e6728403987bL, "jetbrains.mps.lang.editor.structure.SubstituteMenuVariableDeclaration"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x2de9c932f4e5cb53L, "jetbrains.mps.lang.editor.structure.SubstituteMenu_Contribution"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x2de9c932f4e5ab84L, "jetbrains.mps.lang.editor.structure.SubstituteMenu_Default"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x33e0267905fba6fdL, "jetbrains.mps.lang.editor.structure.SubstituteMenu_Named"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x116910ff20bL, "jetbrains.mps.lang.editor.structure.SubstituteMenu_SimpleString"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5ea66701cd0a0c86L, "jetbrains.mps.lang.editor.structure.TableComponentStyleClassItem"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x198452f4d5eea7f2L, "jetbrains.mps.lang.editor.structure.TransformationFeature_ActionType"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x198452f4d5ee9587L, "jetbrains.mps.lang.editor.structure.TransformationFeature_DescriptionText"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x198452f4d5ee6651L, "jetbrains.mps.lang.editor.structure.TransformationFeature_Icon"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7c45559defb64aa6L, "jetbrains.mps.lang.editor.structure.TransformationLocation"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x28336854e4c19a06L, "jetbrains.mps.lang.editor.structure.TransformationLocation_SideTransform"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x30335f3d1845bdccL, "jetbrains.mps.lang.editor.structure.TransformationLocation_SideTransform_PlaceInCellHolder"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x4e0f93d8a0c10ff0L, "jetbrains.mps.lang.editor.structure.TransformationMenuContribution"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x16be955f384efffeL, "jetbrains.mps.lang.editor.structure.TransformationMenuPart"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x16be955f384f93e6L, "jetbrains.mps.lang.editor.structure.TransformationMenuPart_Action"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x671b36136d224047L, "jetbrains.mps.lang.editor.structure.TransformationMenuPart_Group"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xae2d2fe1c9d6be2L, "jetbrains.mps.lang.editor.structure.TransformationMenuPart_IncludeMenu"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x6a77f9c87420a6caL, "jetbrains.mps.lang.editor.structure.TransformationMenuPart_IncludeSubstituteMenu"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3abfebf456f8ad25L, "jetbrains.mps.lang.editor.structure.TransformationMenuPart_Parameterized"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x6ed0e5fc004ba432L, "jetbrains.mps.lang.editor.structure.TransformationMenuPart_Placeholder"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x384b3925671e99efL, "jetbrains.mps.lang.editor.structure.TransformationMenuPart_SubMenu"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7541587144d24773L, "jetbrains.mps.lang.editor.structure.TransformationMenuPart_Super"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1a533160d670600cL, "jetbrains.mps.lang.editor.structure.TransformationMenuPart_WrapSubstituteMenu"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5d3b34577b3cff0cL, "jetbrains.mps.lang.editor.structure.TransformationMenuReference_Default"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5d3b34577b3cff09L, "jetbrains.mps.lang.editor.structure.TransformationMenuReference_Named"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x6ec02d9918b4efbcL, "jetbrains.mps.lang.editor.structure.TransformationMenuSection"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11266742db0L, "jetbrains.mps.lang.editor.structure.TransformationMenuVariableDeclaration"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x16be955f384efce1L, "jetbrains.mps.lang.editor.structure.TransformationMenu_Default"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x4e0f93d8a0ac4ee8L, "jetbrains.mps.lang.editor.structure.TransformationMenu_Named"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1b1161f6e68dfae3L, "jetbrains.mps.lang.editor.structure.UnapplyStyle"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1143bd837d7L, "jetbrains.mps.lang.editor.structure.UnderlinedStyleClassItem"));
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0c = buildConceptIndices(MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eaff2517L, "jetbrains.mps.lang.editor.structure.CellModel_Collection"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1098c8cf48aL, "jetbrains.mps.lang.editor.structure.CellModel_ListWithRole"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eafb9a39L, "jetbrains.mps.lang.editor.structure.EditorCellModel"), MetaAdapterFactory.getInterfaceConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x132a500f473d6174L, "jetbrains.mps.lang.editor.structure.ICellStyle"), MetaAdapterFactory.getInterfaceConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x6ee6ee2b8485887fL, "jetbrains.mps.lang.editor.structure.IOutputConceptSubstituteMenuPart"), MetaAdapterFactory.getInterfaceConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x4e0f93d8a0c11832L, "jetbrains.mps.lang.editor.structure.ITransformationMenu"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x75a895eb6bcee969L, "jetbrains.mps.lang.editor.structure.SubstituteFeature"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5c03050cab4546aL, "jetbrains.mps.lang.editor.structure.SubstituteMenuPart"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7c45559defb64aa5L, "jetbrains.mps.lang.editor.structure.TransformationFeature"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x16be955f384efffeL, "jetbrains.mps.lang.editor.structure.TransformationMenuPart"));
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0e = buildConceptIndices(MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1b0a9b8c0eb8e726L, "jetbrains.mps.lang.editor.structure.AbstractCellSelector"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eafb9a39L, "jetbrains.mps.lang.editor.structure.EditorCellModel"), MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c37f506fL, "jetbrains.mps.baseLanguage.structure.Expression"));
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0f = buildConceptIndices(MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7e9b10ab20495600L, "jetbrains.mps.lang.editor.structure.ApplyStyleClassCondition"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x2ef3b3796a126f24L, "jetbrains.mps.lang.editor.structure.StyleClass"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1143b178f1fL, "jetbrains.mps.lang.editor.structure.StyleSheetClass"));
-  private static final Map<SAbstractConcept, Integer> indices_xbvbvu_a0g = buildConceptIndices(MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1b0a9b8c0eb8e726L, "jetbrains.mps.lang.editor.structure.AbstractCellSelector"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3ee423fc2ad10eceL, "jetbrains.mps.lang.editor.structure.AbstractStyledTextOperation"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x109519879e9L, "jetbrains.mps.lang.editor.structure.CellActionMapItem"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f34f8c0deL, "jetbrains.mps.lang.editor.structure.CellMenuPart_Abstract"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10eecc5b3feL, "jetbrains.mps.lang.editor.structure.CellMenuPart_AbstractGroup_parameterObject"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10eecc9de0fL, "jetbrains.mps.lang.editor.structure.CellMenuPart_Abstract_editedNode"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x112e2300bcaL, "jetbrains.mps.lang.editor.structure.CellMenuPart_PropertyPostfixHints"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f357f9ab7L, "jetbrains.mps.lang.editor.structure.CellMenuPart_PropertyValues"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f3f33baebL, "jetbrains.mps.lang.editor.structure.CellMenuPart_ReferentPrimary"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1115d1a2839L, "jetbrains.mps.lang.editor.structure.CellMenuPart_ReplaceChildPrimary"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f5021674eL, "jetbrains.mps.lang.editor.structure.CellMenuPart_ReplaceChild_CustomChildConcept"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f4f87862dL, "jetbrains.mps.lang.editor.structure.CellMenuPart_ReplaceChild_Group"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f53a0aafeL, "jetbrains.mps.lang.editor.structure.CellMenuPart_ReplaceChild_Item"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10eaa3a3c68L, "jetbrains.mps.lang.editor.structure.CellMenuPart_ReplaceChild_currentChild"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10eaa4bf8b2L, "jetbrains.mps.lang.editor.structure.CellMenuPart_ReplaceChild_defaultConceptOfChild"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x113bef3a464L, "jetbrains.mps.lang.editor.structure.CellModel_NonEmptyProperty"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11b35f4f515L, "jetbrains.mps.lang.editor.structure.CellModel_TransactionalProperty"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3ed01d37608fe0afL, "jetbrains.mps.lang.editor.structure.ConceptFunctionParameter_StyledText"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1134297c615L, "jetbrains.mps.lang.editor.structure.ConceptFunctionParameter_childNode"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10e76200a6fL, "jetbrains.mps.lang.editor.structure.ConceptFunctionParameter_editorContext"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x69333c273254322aL, "jetbrains.mps.lang.editor.structure.ConceptFunctionParameter_model"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x6ee8c7d6704ae262L, "jetbrains.mps.lang.editor.structure.ConceptFunctionParameter_nextNode"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10a195cc7c5L, "jetbrains.mps.lang.editor.structure.ConceptFunctionParameter_node"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x111faaffcc5L, "jetbrains.mps.lang.editor.structure.ConceptFunctionParameter_oldText"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x950e7629b27d763L, "jetbrains.mps.lang.editor.structure.ConceptFunctionParameter_parameterObject"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x6ee8c7d6704ae9f2L, "jetbrains.mps.lang.editor.structure.ConceptFunctionParameter_prevNode"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3a54c53a29dbb0faL, "jetbrains.mps.lang.editor.structure.ConceptFunctionParameter_selectedNode"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x111f9d863e4L, "jetbrains.mps.lang.editor.structure.ConceptFunctionParameter_text"), MetaAdapterFactory.getInterfaceConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x40953da3e594b7a8L, "jetbrains.mps.lang.editor.structure.ContextHintsSpecification"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3c0028bb846a5817L, "jetbrains.mps.lang.editor.structure.EditorCellId"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eafb9a39L, "jetbrains.mps.lang.editor.structure.EditorCellModel"), MetaAdapterFactory.getInterfaceConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x116b46ac030L, "jetbrains.mps.baseLanguage.structure.IOperation"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xa2364a3edcb8ed2L, "jetbrains.mps.lang.editor.structure.StubEditorCellModel"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7e9b10ab1cb5b6d8L, "jetbrains.mps.lang.editor.structure.StyleClassReferenceList"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1143b178f1fL, "jetbrains.mps.lang.editor.structure.StyleSheetClass"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x25c7da75de4cff05L, "jetbrains.mps.lang.editor.structure.SubstituteMenuPart_Placeholder"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x71f19593ac95dee9L, "jetbrains.mps.lang.editor.structure.SubstituteMenuReference_DefaultWithFunction"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x780e6728403987bL, "jetbrains.mps.lang.editor.structure.SubstituteMenuVariableDeclaration"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11b35f75b6dL, "jetbrains.mps.lang.editor.structure.TransactionPropertyHandler_newValue"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7c45559defb64aa5L, "jetbrains.mps.lang.editor.structure.TransformationFeature"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7c45559defb64aa6L, "jetbrains.mps.lang.editor.structure.TransformationLocation"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x6ed0e5fc004ba432L, "jetbrains.mps.lang.editor.structure.TransformationMenuPart_Placeholder"), MetaAdapterFactory.getConcept(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11266742db0L, "jetbrains.mps.lang.editor.structure.TransformationMenuVariableDeclaration"));
-  private static String[] stringSwitchCases_xbvbvu_a0a0a0c3a0a2 = new String[]{"jetbrains.mps.lang.editor.editor.Common_Component", "jetbrains.mps.lang.editor.editor.Style_Component", "jetbrains.mps.lang.editor.editor._CellKeyMapLnk_Component", "jetbrains.mps.lang.editor.editor._CellModel_Common", "jetbrains.mps.lang.editor.editor._CloseTag", "jetbrains.mps.lang.editor.editor._FocusPolicy_Applicable", "jetbrains.mps.lang.editor.editor._OpenTag"};
-  private static String[] stringSwitchCases_xbvbvu_a0a0a0a3a0a5 = new String[]{"jetbrains.mps.lang.editor.editor.addCondition"};
-  private static String[] stringSwitchCases_xbvbvu_a0a0a0b3a0a5 = new String[]{"jetbrains.mps.lang.editor.editor.addExtendedClass_StyleClass"};
-  private static String[] stringSwitchCases_xbvbvu_a0a0a0c3a0a5 = new String[]{"jetbrains.mps.lang.editor.editor.addExtendedClass"};
+  @NotNull
+  @Override
+  public Collection<EditorMenuItemCustomizer> getEditorMenuItemCustomizers() {
+    return Arrays.asList(new EditorMenuItemCustomizer[]{new ColorOrdering()});
+  }
+  @NotNull
+  @Override
+  public Collection<KeyMap> getDeclaredKeyMaps() {
+    return Arrays.<KeyMap>asList(new EditorCellModel_KeyMap(), new _SplitConctantCellIntoWordsKeyMap(), new CellModel_Component_KeyMap(), new ConceptEditor_DefaultContextHintLabel(), new ConceptEditorContextHints_hintKeymap(), new EditorComponent_DefaultContextHintLabel());
+  }
+
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1b0a9b8c0eb8e726L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11d878e7095L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3ee423fc2ad10eceL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1b1161f6e648b4b2L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7e9b10ab20495600L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x73977fa5d21f1f37L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3744c0f9eae0a402L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1143bd1283bL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x117b152bc1fL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10951978cfeL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x765abcb2949869d7L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x4f883d0411451703L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x4f883d04112b75cfL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x109519879e9L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3c0028bb8556f621L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xfbc216b31bL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x108b5877365L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x108b5885461L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10192dc11caL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f7d702058L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f7d86ed9bL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f7d811428L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f34f6aaacL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f34f8c0deL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f7e91dcf6L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f58784317L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f58b5e5f6L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x112e2300bcaL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f357f9ab7L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f3f33baebL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1115d1a2839L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f5021674eL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f4f87862dL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f53a0aafeL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f3a50ec74L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f3fa975a0L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xfd766383e4L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x108a0861503L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10bb871ad98L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1081e457de7L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1170b90f356L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x116fdba37cdL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x116fdb876c6L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eaff2517L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xfb35c96896L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eb01232eL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x2ea28b54668aeb4bL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xfb103073dcL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x73604585b6d5c973L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xfa61615ec3L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1095e12de6fL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x116fdad17a0L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x100d0e71cb2L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xfa3d28fe7dL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7456aec153c7f5a2L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eb02612eL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11d6d56c00cL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xfd52a2c922L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eb05cdc7L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eb0ad38eL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x8ace515f0191e6eL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11b35f4f515L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x334adf8cb15f3fdeL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1143b2bb8c4L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x64a01fa8546d02feL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x64a01fa8546d02fdL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xab9d570dedb336aL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xab9d570dedb3369L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x6c7f2eeda1a0b162L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x527faacef4e35767L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9845363abL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x527faacef50d095eL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5eadaecad41188dcL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x42e5e943db1f2dd0L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x794cf8ea9e119f99L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x69c06896a0e42a51L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11ac437b468L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x22926e62b7d495a0L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3c0028bb846a5817L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eafb9a39L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xfb35c2bb47L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x619d95571435dfe8L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3ae0865e9a712712L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11ae41b27e5L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x64508f613f1be026L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x66f3048aedb8fcd4L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1143be33e36L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1143b2c9756L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1d5b104bd5525fa7L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11fc74ebe6cL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1e02662c4b880750L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xfd5cee772bL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11f1d6594edL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11abafc10eaL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11fd6f8d518L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x6a2febf37d13730eL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5326ef9ad1607089L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5326ef9ad160708aL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7ce0198267c4eb2L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7ce019825aa4e82L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7ce01982652a98aL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x111f9dbb2ccL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xa2b9e328a5381acL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x696ed29ebd7c1429L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11de23fdb1fL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xbb2f315607dc1f1L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x235af965a76b03fL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x6a67a319ce06acceL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x6a67a319ce060712L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11b40a56a20L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11b31a45ad7L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x313a48d996236c93L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3e970bbc3009e3a3L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3e970bbc30443a0aL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11d52e2b1a0L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11d6d3fe71eL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x72908ac6c78618c8L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x329d4406465c63a0L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x117b132f8cdL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x49177f9006c530a0L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xa2364a3edcb8ed2L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3744c0f9ea5367ebL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x53ac4acb2cb6e9d7L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x2ef3b3796a126f24L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x2ef3b3796a130c0dL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7e9b10ab1cb5b6d8L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x399cb6c68aa9aeaaL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x399cb6c68aa9af02L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7e9b10ab1edbd2fbL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1143b151743L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x75a895eb6bcee96cL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7ce1116e3a2e0187L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7ce1116e3a2e0173L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x75a895eb6c03385dL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7ce1116e3a2dee5aL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x75a895eb6bcee97fL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1bc2c2df999a0078L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3244dde8e150cff4L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x65e54712ab56010bL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5c03050cab46db2L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x49f6d25f12102816L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5c03050cab4546bL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xa22200b56b57990L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x4467282afd5201dL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x25c7da75de4cff05L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x74f6a88f89419d55L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x88a6ffdb3b4f8c6L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5cc5669cafd1be9bL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5480a271c0d1df1eL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x71f19593ac95dee9L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5480a271c0d1df1fL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x780e6728403987bL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x2de9c932f4e5cb53L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x2de9c932f4e5ab84L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x33e0267905fba6fdL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x116910ff20bL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5ea66701cd0a0c86L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x198452f4d5eea7f2L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x198452f4d5ee9587L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x198452f4d5ee6651L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7c45559defb64aa6L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x28336854e4c19a06L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x30335f3d1845bdccL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x4e0f93d8a0ac3ebaL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x4e0f93d8a0c10ff0L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x16be955f384efffeL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x16be955f384f93e6L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x671b36136d224047L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xae2d2fe1c9d6be2L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x6a77f9c87420a6caL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3abfebf456f8ad25L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x6ed0e5fc004ba432L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x2717714f9c03978cL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5ddc2e3f050ded4L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x384b3925671e99efL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7541587144d24773L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1a533160d670600cL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5d3b34577b3cff0cL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5d3b34577b3cff09L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x6ec02d9918b4efbcL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11266742db0L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x16be955f384efce1L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x4e0f93d8a0ac4ee8L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5cb9219482b227f7L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1b1161f6e68dfae3L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1143bd837d7L)).seal();
+  private static final ConceptSwitchIndex conceptIndex1 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eaff2517L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1098c8cf48aL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eafb9a39L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x132a500f473d6174L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x6ee6ee2b8485887fL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1bc2c2df999a7727L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x4e0f93d8a0c11832L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x75a895eb6bcee969L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5c03050cab4546aL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7c45559defb64aa5L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x16be955f384efffeL)).seal();
+  private static final ConceptSwitchIndex conceptIndex2 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1b0a9b8c0eb8e726L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eafb9a39L), MetaIdFactory.conceptId(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c37f506fL)).seal();
+  private static final ConceptSwitchIndex conceptIndex3 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7e9b10ab20495600L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1143bd1283bL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eaff2517L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eb0ad38eL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7e806541c9392c22L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3e970bbc3009e3a3L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x2ef3b3796a126f24L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5480a271c0d1df1eL)).seal();
+  private static final ConceptSwitchIndex conceptIndex4 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1b0a9b8c0eb8e726L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3ee423fc2ad10eceL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3744c0f9eae0a402L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x765abcb2949869d7L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x4f883d0411451703L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x109519879e9L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3c0028bb8556f621L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f7d86ed9bL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f7d811428L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f34f8c0deL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10eecc5b3feL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10eecc9de0fL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x112e2300bcaL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f357f9ab7L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f3f33baebL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1115d1a2839L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f5021674eL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f4f87862dL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10f53a0aafeL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10eaa3a3c68L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x306b0e1228f7e93aL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10eaa4bf8b2L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x113bef3a464L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eb02612eL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xfd52a2c922L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eb05cdc7L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eb0ad38eL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11b35f4f515L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xab9d570dedb336aL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xab9d570dedb3369L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5eadaecad41188dcL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3ed01d37608fe0afL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x1134297c615L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10e76200a6fL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7b816160a669d1f1L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x69333c273254322aL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x6ee8c7d6704ae262L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x10a195cc7c5L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x111faaffcc5L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x950e7629b27d763L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x6ee8c7d6704ae9f2L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3a54c53a29dbb0faL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x6001c76613c99a36L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x6001c76613c99a37L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x111f9d863e4L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x40953da3e594b7a8L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3c0028bb846a5817L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xf9eafb9a39L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x619d95571435dfe8L), MetaIdFactory.conceptId(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x116b46ac030L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3e970bbc3009e3a3L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x6001c76613c8c373L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0xa2364a3edcb8ed2L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x2ef3b3796a130c0dL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7e9b10ab1cb5b6d8L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7e9b10ab1edbd2fbL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x25c7da75de4cff05L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x71f19593ac95dee9L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x780e6728403987bL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x780e6728403987eL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11b35f75b6dL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7c45559defb64aa5L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x7c45559defb64aa6L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x30335f3d1845bdccL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x6ed0e5fc004ba432L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5d3b34577b3cff0cL), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x5d3b34577b3cff09L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x11266742db0L), MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x201faaffc29bac4fL)).seal();
+  private static final ConceptSwitchIndex conceptIndex5 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x18bc659203a64e29L, 0xa83a7ff23bde13baL, 0x3c0028bb8556f621L)).seal();
 }

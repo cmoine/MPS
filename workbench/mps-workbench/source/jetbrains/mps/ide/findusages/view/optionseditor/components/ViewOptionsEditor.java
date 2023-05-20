@@ -36,22 +36,12 @@ public class ViewOptionsEditor extends BaseEditor<ViewOptions> {
 
     myPanel.setBorder(IdeBorderFactory.createTitledBorder("View Options", false));
 
-    myShowOneResult = new JCheckBox("Skip results tab with one usages", !myOptions.myShowOneResult);
-    myShowOneResult.addChangeListener(new ChangeListener() {
-      @Override
-      public void stateChanged(ChangeEvent e) {
-        myOptions.myShowOneResult = !((JCheckBox) e.getSource()).isSelected();
-      }
-    });
+    myShowOneResult = new JCheckBox("Skip results tab with one usage", !myOptions.myShowOneResult);
+    myShowOneResult.addChangeListener(e -> myOptions.myShowOneResult = !((JCheckBox) e.getSource()).isSelected());
     myPanel.add(myShowOneResult);
 
-    myNewTab = new JCheckBox("New tab", myOptions.myNewTab);
-    myNewTab.addChangeListener(new ChangeListener() {
-      @Override
-      public void stateChanged(ChangeEvent e) {
-        myOptions.myNewTab = ((JCheckBox) e.getSource()).isSelected();
-      }
-    });
+    myNewTab = new JCheckBox("Open in new tab", myOptions.myNewTab);
+    myNewTab.addChangeListener(e -> myOptions.myNewTab = ((JCheckBox) e.getSource()).isSelected());
     myPanel.add(myNewTab);
   }
 }

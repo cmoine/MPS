@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2021 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +15,14 @@
  */
 package jetbrains.mps.newTypesystem.state.blocks;
 
-import jetbrains.mps.newTypesystem.context.InferenceTypecheckingContext;
 import jetbrains.mps.newTypesystem.TypesUtil;
+import jetbrains.mps.newTypesystem.context.InferenceTypecheckingContext;
 import jetbrains.mps.newTypesystem.state.State;
-import org.jetbrains.mps.openapi.model.SNode;
+import jetbrains.mps.smodel.SNodeUtil;
 import jetbrains.mps.typesystem.inference.EquationInfo;
 import jetbrains.mps.util.CollectionUtil;
 import jetbrains.mps.util.Pair;
+import org.jetbrains.mps.openapi.model.SNode;
 
 import java.util.List;
 import java.util.Set;
@@ -34,7 +35,7 @@ public abstract class RelationBlock extends Block {
 
   public RelationBlock(State state, SNode left, SNode right,
                        RelationKind kind, EquationInfo equationInfo) {
-    super(state, equationInfo.getRuleModel(), equationInfo.getRuleId());
+    super(state, equationInfo.getRuleNode());
     myRelationKind = kind;
     myLeftNode = left;
     myRightNode = right;
@@ -72,7 +73,7 @@ public abstract class RelationBlock extends Block {
   }
 
   private String getPresentationInternal(SNode left, SNode right) {
-    return left + myRelationKind.getRelationSign() + right;
+    return SNodeUtil.getPresentation(left) + myRelationKind.getRelationSign() + SNodeUtil.getPresentation(right);
   }
 
   @Override

@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-8juhhona8z81d7xsnivrv7mbw9wu3l5" />
+<product version="3" modelHash="-7qfwtuex8lnyr2nis6wo0hg5sxzv2mv">
+  <files names="TypesystemDescriptor.java:check_ExtendedAnalyzersAreInExtendedLanguages_NonTypesystemRule.java:typeof_AnalyzerFunParameterInput_InferenceRule.java:typeof_AnalyzerFunParameterProgramState_InferenceRule.java:typeof_AnalyzerFunParameterStateValues_InferenceRule.java:typeof_AnalyzerFunctionResultType_InferenceRule.java:typeof_AnalyzerMergeParameterInput_InferenceRule.java:typeof_AnalyzerParameterProgram_InferenceRule.java:typeof_AnalyzerRunnerCreator_InferenceRule.java:typeof_ApplicableNodeReference_InferenceRule.java:typeof_ConceptCondition_InferenceRule.java:typeof_InstructionReference_InferenceRule.java:typeof_InstructionType_InferenceRule.java:typeof_ProgramParameter_InferenceRule.java" />
+</product>
 

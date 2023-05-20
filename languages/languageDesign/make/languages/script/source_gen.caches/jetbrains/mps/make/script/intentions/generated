@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-cvyzsy3h06billoxw07wgs70y1y501d" />
+<product version="3" modelHash="dw2t1evbyn9ockgs17o7imr4x1qua72">
+  <files names="IntentionsDescriptor.java:Option_makeDefault_Intention.java" />
+</product>
 

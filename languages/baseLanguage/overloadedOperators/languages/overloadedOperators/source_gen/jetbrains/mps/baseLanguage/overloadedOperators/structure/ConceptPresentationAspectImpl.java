@@ -4,48 +4,97 @@ package jetbrains.mps.baseLanguage.overloadedOperators.structure;
 
 import jetbrains.mps.smodel.runtime.ConceptPresentationAspectBase;
 import jetbrains.mps.smodel.runtime.ConceptPresentation;
-import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private final ConceptPresentation props_BinaryOperationReference = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_ContainerImport = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CustomOperator = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CustomOperatorDeclaration = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_CustomOperatorUsage = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_LeftOperand = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_Operator = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_OverloadedBinaryOperator = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_OverloadedOperatorContainer = new ConceptPresentationBuilder().create();
-  private final ConceptPresentation props_RightOperand = new ConceptPresentationBuilder().create();
+  private ConceptPresentation props_BinaryOperationReference;
+  private ConceptPresentation props_ContainerImport;
+  private ConceptPresentation props_CustomOperator;
+  private ConceptPresentation props_CustomOperatorDeclaration;
+  private ConceptPresentation props_CustomOperatorUsage;
+  private ConceptPresentation props_LeftOperand;
+  private ConceptPresentation props_Operator;
+  private ConceptPresentation props_OverloadedBinaryOperator;
+  private ConceptPresentation props_OverloadedOperatorContainer;
+  private ConceptPresentation props_RightOperand;
 
   @Override
   @Nullable
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case 0:
+      case LanguageConceptSwitch.BinaryOperationReference:
+        if (props_BinaryOperationReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xfc8d557e5de64dd8L, 0xb749aab2fb23aefcL, 0x2764eda929d23eb4L, 0x2764eda929d23eb5L, "binaryOperation", "", "");
+          props_BinaryOperationReference = cpb.create();
+        }
         return props_BinaryOperationReference;
-      case 1:
+      case LanguageConceptSwitch.ContainerImport:
+        if (props_ContainerImport == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xfc8d557e5de64dd8L, 0xb749aab2fb23aefcL, 0x66302c3c8df72c49L, 0x66302c3c8df72d45L, "container", "", "");
+          props_ContainerImport = cpb.create();
+        }
         return props_ContainerImport;
-      case 2:
+      case LanguageConceptSwitch.CustomOperator:
+        if (props_CustomOperator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xfc8d557e5de64dd8L, 0xb749aab2fb23aefcL, 0x2764eda929d60237L, 0x2764eda929d60239L, "declaration", "", "");
+          props_CustomOperator = cpb.create();
+        }
         return props_CustomOperator;
-      case 3:
+      case LanguageConceptSwitch.CustomOperatorDeclaration:
+        if (props_CustomOperatorDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_CustomOperatorDeclaration = cpb.create();
+        }
         return props_CustomOperatorDeclaration;
-      case 4:
+      case LanguageConceptSwitch.CustomOperatorUsage:
+        if (props_CustomOperatorUsage == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0xfc8d557e5de64dd8L, 0xb749aab2fb23aefcL, 0x15c86fdc6084766fL, 0x15c86fdc60847670L, "operator", "", "");
+          props_CustomOperatorUsage = cpb.create();
+        }
         return props_CustomOperatorUsage;
-      case 5:
+      case LanguageConceptSwitch.LeftOperand:
+        if (props_LeftOperand == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_LeftOperand = cpb.create();
+        }
         return props_LeftOperand;
-      case 6:
+      case LanguageConceptSwitch.Operator:
+        if (props_Operator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_Operator = cpb.create();
+        }
         return props_Operator;
-      case 7:
+      case LanguageConceptSwitch.OverloadedBinaryOperator:
+        if (props_OverloadedBinaryOperator == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("OverloadedBinaryOperator");
+          props_OverloadedBinaryOperator = cpb.create();
+        }
         return props_OverloadedBinaryOperator;
-      case 8:
+      case LanguageConceptSwitch.OverloadedOperatorContainer:
+        if (props_OverloadedOperatorContainer == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_OverloadedOperatorContainer = cpb.create();
+        }
         return props_OverloadedOperatorContainer;
-      case 9:
+      case LanguageConceptSwitch.RightOperand:
+        if (props_RightOperand == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("right");
+          props_RightOperand = cpb.create();
+        }
         return props_RightOperand;
     }
-    throw new IllegalStateException("Unknown concept " + c);
+    return null;
   }
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MPSProject">
+    <projectModules>
+      <modulePath path="$PROJECT_DIR$/jetbrains.mps.baseLanguage.box/jetbrains.mps.baseLanguage.box.mpl" folder="" />
+      <modulePath path="$PROJECT_DIR$/jetbrains.mps.baseLanguage.box/runtime/jetbrains.mps.baseLanguage.box.runtime.msd" folder="" />
+      <modulePath path="$PROJECT_DIR$/jetbrains.mps.baseLanguage.date/jetbrains.mps.baseLanguage.date.mpl" folder="" />
+      <modulePath path="$PROJECT_DIR$/jetbrains.mps.baseLanguage.date/runtime/jetbrains.mps.baseLanguage.date.runtime.msd" folder="" />
+      <modulePath path="$PROJECT_DIR$/sandbox/jetbrains.mps.samples.blReferences.msd" folder="" />
+    </projectModules>
+  </component>
+</project>

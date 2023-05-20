@@ -15,13 +15,14 @@
  */
 package jetbrains.mps.nodeEditor.menus;
 
+import jetbrains.mps.core.aspects.constraints.rules.kinds.ContainmentContext;
+import jetbrains.mps.smodel.constraints.ConstraintsCanBeFacade;
 import jetbrains.mps.smodel.constraints.ModelConstraints;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.model.SNode;
-import org.jetbrains.mps.openapi.model.SNodeReference;
 import org.jetbrains.mps.openapi.module.SRepository;
 
 import java.util.function.Predicate;
@@ -33,16 +34,17 @@ public class CanBeParentPredicate implements Predicate<SAbstractConcept> {
   @Nullable
   private final SNode myParentNode;
 
-  @NotNull
-  private final SRepository myRepository;
-
   @Nullable
-  private final SNode myLinkDeclarationNode;
+  private final SContainmentLink myContainmentLink;
 
+@Deprecated(since = "2017.2", forRemoval = true)
   public CanBeParentPredicate(@Nullable SNode parentNode, @Nullable SContainmentLink link, @NotNull SRepository repository) {
+    this(parentNode, link);
+  }
+
+  public CanBeParentPredicate(@Nullable SNode parentNode, @Nullable SContainmentLink containmentLink) {
     myParentNode = parentNode;
-    myRepository = repository;
-    myLinkDeclarationNode = link == null ? null : link.getDeclarationNode();
+    myContainmentLink = containmentLink;
   }
 
   @Override
@@ -53,15 +55,11 @@ public class CanBeParentPredicate implements Predicate<SAbstractConcept> {
     if (concept == null) {
       return true;
     }
-    SNodeReference outputConceptSourceNodeReference = concept.getSourceNode();
-    if (outputConceptSourceNodeReference == null) {
-      return true;
-    }
-    SNode outputConceptSourceNode = outputConceptSourceNodeReference.resolve(myRepository);
-    if (outputConceptSourceNode == null) {
-      return true;
-    }
-    return (myLinkDeclarationNode == null || ModelConstraints.canBeParent(myParentNode, outputConceptSourceNode, myLinkDeclarationNode, null, null)) &&
-        ModelConstraints.canBeAncestor(myParentNode, null, outputConceptSourceNode, myLinkDeclarationNode, null);
+    ContainmentContext context = new ContainmentContext.Builder().parentNode(myParentNode)
+                                                                 .childConcept(concept)
+                                                                 .link(myContainmentLink)
+                                                                 .build();
+    return (myContainmentLink == null || ConstraintsCanBeFacade.checkCanBeParent(context).isEmpty()) &&
+           ModelConstraints.canBeAncestor(myParentNode, concept, myContainmentLink, null);
   }
 }

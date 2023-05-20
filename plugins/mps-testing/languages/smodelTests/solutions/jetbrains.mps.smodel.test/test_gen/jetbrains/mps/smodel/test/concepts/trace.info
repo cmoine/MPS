@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <root nodeRef="r:783567bb-6a97-47d3-ab6c-d2a82efd2145(jetbrains.mps.smodel.test.concepts@tests)/359299525883788095">
+    <file name="SConceptHierarchy_Test.java">
+      <node id="359299525883788095" at="27,35,28,60" concept="8" />
+      <node id="359299525883788102" at="32,56,33,47" concept="1" />
+      <node id="5308535536686266820" at="36,59,37,50" concept="1" />
+      <node id="5308535536686088778" at="40,59,41,50" concept="1" />
+      <node id="359299525883788095" at="46,52,47,19" concept="8" />
+      <node id="6638738203687277589" at="51,30,52,141" concept="1" />
+      <node id="6638738203687278534" at="52,141,53,93" concept="1" />
+      <node id="6638738203687280475" at="53,93,54,142" concept="1" />
+      <node id="6638738203687284413" at="54,142,55,171" concept="1" />
+      <node id="359299525882683688" at="55,171,56,82" concept="1" />
+      <node id="5308535536686252678" at="56,82,57,112" concept="5" />
+      <node id="5308535536686099012" at="57,112,58,144" concept="1" />
+      <node id="5308535536686382585" at="62,30,63,79" concept="5" />
+      <node id="5308535536686460612" at="63,79,64,83" concept="5" />
+      <node id="5308535536686274909" at="64,83,65,55" concept="3" />
+      <node id="5308535536686451922" at="65,55,66,57" concept="1" />
+      <node id="5308535536686418046" at="66,57,67,82" concept="1" />
+      <node id="5308535536686362690" at="67,82,68,87" concept="1" />
+      <node id="5308535536686426859" at="68,87,69,101" concept="1" />
+      <node id="359299525883522055" at="73,30,74,170" concept="3" />
+      <node id="359299525883527475" at="74,170,75,137" concept="1" />
+      <node id="359299525883524125" at="75,137,76,135" concept="1" />
+      <node id="5308535536686485263" at="76,135,77,96" concept="5" />
+      <node id="359299525883533395" at="77,96,78,82" concept="1" />
+      <node id="5308535536686504261" at="78,82,79,133" concept="1" />
+      <node id="5308535536686507850" at="79,133,80,0" concept="6" />
+      <node id="2549667115980011350" at="80,0,81,42" concept="5" />
+      <node id="2549667115980008918" at="81,42,82,89" concept="1" />
+      <node id="5302237107384186928" at="82,89,83,0" concept="6" />
+      <node id="5302237107384220681" at="83,0,84,67" concept="1" />
+      <node id="5302237107384229502" at="84,67,85,110" concept="1" />
+      <node id="5302237107384317212" at="85,110,86,120" concept="1" />
+      <node id="5302237107384209108" at="86,120,87,133" concept="1" />
+      <node id="359299525883788095" at="94,0,95,0" concept="7" trace="INamedConcept$Kd" />
+      <node id="359299525883788095" at="95,0,96,0" concept="7" trace="BaseConcept$gP" />
+      <node id="359299525883788095" at="96,0,97,0" concept="7" trace="ImplementationWithStubPart$Lx" />
+      <node id="359299525883788095" at="97,0,98,0" concept="7" trace="ImplementationPart$LI" />
+      <node id="359299525883788095" at="98,0,99,0" concept="7" trace="Attribute$g1" />
+      <node id="359299525883788095" at="99,0,100,0" concept="7" trace="NodeAttribute$x2" />
+      <node id="359299525883788095" at="24,0,26,0" concept="7" trace="ourParametersCacheExtension" />
+      <node id="359299525883788095" at="27,0,30,0" concept="0" trace="SConceptHierarchy_Test#()V" />
+      <node id="359299525883788095" at="46,0,49,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="359299525883788102" at="31,0,35,0" concept="2" trace="test_conceptHierarchy#()V" />
+      <node id="5308535536686266820" at="35,0,39,0" concept="2" trace="test_conceptSuperConcept#()V" />
+      <node id="5308535536686088778" at="39,0,43,0" concept="2" trace="test_defaultIfaceConcept#()V" />
+      <node id="359299525883788102" at="50,58,59,9" concept="1" />
+      <node id="5308535536686266820" at="61,61,70,9" concept="1" />
+      <node id="359299525883788102" at="50,0,61,0" concept="2" trace="test_conceptHierarchy#()V" />
+      <node id="5308535536686266820" at="61,0,72,0" concept="2" trace="test_conceptSuperConcept#()V" />
+      <node id="5308535536686088778" at="72,61,88,9" concept="1" />
+      <node id="5308535536686088778" at="72,0,90,0" concept="2" trace="test_defaultIfaceConcept#()V" />
+      <scope id="359299525883788095" at="27,35,28,60" />
+      <scope id="359299525883788102" at="32,56,33,47" />
+      <scope id="5308535536686266820" at="36,59,37,50" />
+      <scope id="5308535536686088778" at="40,59,41,50" />
+      <scope id="359299525883788095" at="46,52,47,19" />
+      <scope id="359299525883788095" at="27,0,30,0" />
+      <scope id="359299525883788095" at="46,0,49,0">
+        <var name="owner" id="359299525883788095" />
+      </scope>
+      <scope id="359299525883788102" at="31,0,35,0" />
+      <scope id="5308535536686266820" at="35,0,39,0" />
+      <scope id="5308535536686088778" at="39,0,43,0" />
+      <scope id="359299525883788102" at="51,30,58,144" />
+      <scope id="5308535536686266820" at="62,30,69,101">
+        <var name="baseConcept" id="5308535536686274910" />
+      </scope>
+      <scope id="359299525883788102" at="50,58,59,9" />
+      <scope id="5308535536686266820" at="61,61,70,9" />
+      <scope id="359299525883788102" at="50,0,61,0" />
+      <scope id="5308535536686266820" at="61,0,72,0" />
+      <scope id="5308535536686088778" at="73,30,87,133">
+        <var name="defaultIfaceConcept" id="359299525883522056" />
+      </scope>
+      <scope id="5308535536686088778" at="72,61,88,9" />
+      <scope id="5308535536686088778" at="72,0,90,0" />
+      <unit id="359299525883788095" at="93,0,101,0" name="jetbrains.mps.smodel.test.concepts.SConceptHierarchy_Test$CONCEPTS" />
+      <unit id="359299525883788095" at="44,0,92,0" name="jetbrains.mps.smodel.test.concepts.SConceptHierarchy_Test$TestBody" />
+      <unit id="359299525883788095" at="22,0,102,0" name="jetbrains.mps.smodel.test.concepts.SConceptHierarchy_Test" />
+    </file>
+  </root>
+  <root nodeRef="r:783567bb-6a97-47d3-ab6c-d2a82efd2145(jetbrains.mps.smodel.test.concepts@tests)/6410670351276877495">
+    <file name="ConceptCasts_Test.java">
+      <node id="6410670351276877627" at="21,49,22,218" concept="3" />
+      <node id="6410670351276887412" at="24,50,25,104" concept="4" />
+      <node id="6410670351276893674" at="28,51,29,70" concept="4" />
+      <node id="6410670351276910050" at="31,24,32,77" concept="1" />
+      <node id="6410670351277074989" at="35,65,36,218" concept="3" />
+      <node id="6410670351277075000" at="36,218,37,53" concept="3" />
+      <node id="6410670351277075015" at="39,50,40,104" concept="4" />
+      <node id="6410670351277075025" at="43,51,44,86" concept="4" />
+      <node id="6410670351277075033" at="46,24,47,77" concept="1" />
+      <node id="5375498624328879719" at="50,57,51,43" concept="3" />
+      <node id="5375498624329234440" at="51,43,52,53" concept="3" />
+      <node id="5375498624329568615" at="52,53,53,112" concept="3" />
+      <node id="5375498624329581434" at="53,112,54,34" concept="1" />
+      <node id="6410670351276877495" at="58,0,59,0" concept="7" trace="BaseConcept$gP" />
+      <node id="6410670351276877495" at="59,0,60,0" concept="7" trace="ExpressionStatement$O8" />
+      <node id="6410670351276877495" at="60,0,61,0" concept="7" trace="Statement$P6" />
+      <node id="6410670351276877495" at="61,0,62,0" concept="7" trace="INamedAspect$zw" />
+      <node id="6410670351276877495" at="62,0,63,0" concept="7" trace="INamedConcept$Kd" />
+      <node id="6410670351276886922" at="24,0,27,0" concept="2" trace="accept#(Lorg/jetbrains/mps/openapi/language/SAbstractConcept;)Z" />
+      <node id="6410670351276893368" at="28,0,31,0" concept="2" trace="select#(Lorg/jetbrains/mps/openapi/language/SAbstractConcept;)Lorg/jetbrains/mps/openapi/language/SConcept;" />
+      <node id="6410670351277075013" at="39,0,42,0" concept="2" trace="accept#(Lorg/jetbrains/mps/openapi/language/SAbstractConcept;)Z" />
+      <node id="6410670351277075023" at="43,0,46,0" concept="2" trace="select#(Lorg/jetbrains/mps/openapi/language/SAbstractConcept;)Lorg/jetbrains/mps/openapi/language/SConcept;" />
+      <node id="5375498624329581386" at="49,0,56,0" concept="2" trace="test_castToBaseConcept#()V" />
+      <node id="6410670351276877911" at="22,218,31,24" concept="3" />
+      <node id="6410670351277075004" at="37,53,46,24" concept="3" />
+      <node id="6410670351276877550" at="20,0,34,0" concept="2" trace="test_MPS_31361#()V" />
+      <node id="6410670351277074985" at="34,0,49,0" concept="2" trace="test_MPS_31361_PoundExpression#()V" />
+      <scope id="6410670351276886923" at="24,50,25,104" />
+      <scope id="6410670351276893369" at="28,51,29,70" />
+      <scope id="6410670351277075014" at="39,50,40,104" />
+      <scope id="6410670351277075024" at="43,51,44,86" />
+      <scope id="6410670351276886922" at="24,0,27,0">
+        <var name="it" id="6410670351276886922" />
+      </scope>
+      <scope id="6410670351276893368" at="28,0,31,0">
+        <var name="it" id="6410670351276893368" />
+      </scope>
+      <scope id="6410670351277075013" at="39,0,42,0">
+        <var name="it" id="6410670351277075013" />
+      </scope>
+      <scope id="6410670351277075023" at="43,0,46,0">
+        <var name="it" id="6410670351277075023" />
+      </scope>
+      <scope id="5375498624329581389" at="50,57,54,34">
+        <var name="bc1" id="5375498624328879720" />
+        <var name="bc2" id="5375498624329568616" />
+        <var name="inc" id="5375498624329234441" />
+      </scope>
+      <scope id="5375498624329581386" at="49,0,56,0" />
+      <scope id="6410670351276877553" at="21,49,32,77">
+        <var name="abstractConcepts" id="6410670351276877630" />
+        <var name="statementConcepts" id="6410670351276877914" />
+      </scope>
+      <scope id="6410670351277074988" at="35,65,47,77">
+        <var name="abstractConcepts" id="6410670351277074990" />
+        <var name="statement" id="6410670351277075001" />
+        <var name="statementConcepts" id="6410670351277075005" />
+      </scope>
+      <scope id="6410670351276877550" at="20,0,34,0" />
+      <scope id="6410670351277074985" at="34,0,49,0" />
+      <unit id="6410670351276886922" at="23,89,27,5" name="jetbrains.mps.smodel.test.concepts.ConceptCasts_Test$1" />
+      <unit id="6410670351276893368" at="27,18,31,5" name="jetbrains.mps.smodel.test.concepts.ConceptCasts_Test$2" />
+      <unit id="6410670351277075013" at="38,89,42,5" name="jetbrains.mps.smodel.test.concepts.ConceptCasts_Test$3" />
+      <unit id="6410670351277075023" at="42,18,46,5" name="jetbrains.mps.smodel.test.concepts.ConceptCasts_Test$4" />
+      <unit id="6410670351276877495" at="57,0,64,0" name="jetbrains.mps.smodel.test.concepts.ConceptCasts_Test$CONCEPTS" />
+      <unit id="6410670351276877495" at="19,0,65,0" name="jetbrains.mps.smodel.test.concepts.ConceptCasts_Test" />
+    </file>
+  </root>
+</debug-info>
+

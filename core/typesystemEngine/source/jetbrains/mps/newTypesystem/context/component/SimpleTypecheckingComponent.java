@@ -32,9 +32,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.typesystem.inference.TypeChecker;
 import jetbrains.mps.util.Pair;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -52,12 +52,12 @@ import java.util.Set;
 /*package*/ public class SimpleTypecheckingComponent<STATE extends State> {
 
   private final STATE myState;
-  protected Queue<SNode> myQueue = new LinkedList<SNode>();
-  protected boolean myIsChecked = false;
+  protected Queue<SNode> myQueue = new LinkedList<>();
+  private boolean myIsChecked = false;
   protected BaseTypechecking<?, ?> myTypechecking;
-  protected Set<SNode> myNodes = new THashSet<SNode>();
-  protected Set<SNode> myFullyCheckedNodes = new THashSet<SNode>(); //nodes which are checked with their children
-  protected Set<SNode> myPartlyCheckedNodes = new THashSet<SNode>(); // nodes which are checked themselves but not children
+  protected Set<SNode> myNodes = new THashSet<>();
+  protected Set<SNode> myFullyCheckedNodes = new THashSet<>(); //nodes which are checked with their children
+  protected Set<SNode> myPartlyCheckedNodes = new THashSet<>(); // nodes which are checked themselves but not children
 
 
   public SimpleTypecheckingComponent(STATE state, BaseTypechecking component) {
@@ -107,7 +107,7 @@ import java.util.Set;
   }
 
   public void computeTypes(boolean refreshTypes) {
-    computeTypes(getTypechecking().getNode(), refreshTypes, true, Collections.<SNode>emptyList(), true, null);
+    computeTypes(getTypechecking().getNode(), refreshTypes, true, Collections.emptyList(), true, null);
   }
 
   protected void computeTypes(SNode nodeToCheck, boolean refreshTypes, boolean forceChildrenCheck, Collection<SNode> additionalNodes, boolean finalExpansion, SNode initialNode) {
@@ -137,13 +137,7 @@ import java.util.Set;
   protected BaseTypechecking getTypechecking() {
     return myTypechecking;
   }
-
-  public void solveInequalitiesAndExpandTypes(boolean finalExpansion) {
-    myState.solveInequalities();
-    myState.expandAll(myNodes, finalExpansion);
-    myNodes.clear();
-  }
-
+  
   protected AccessTracking createAccessTracking() {
     return new AccessTracking();
   }
@@ -163,16 +157,14 @@ import java.util.Set;
    * @param node
    * @return
    */
-  protected boolean applyRulesToNode(SNode node) {
-    final List<Pair<SNode, List<Pair<InferenceRule_Runtime, IsApplicableStatus>>>> nodesAndRules = new ArrayList<Pair<SNode, List<Pair<InferenceRule_Runtime, IsApplicableStatus>>>>();
+  protected void applyRulesToNode(SNode node) {
+    final List<Pair<SNode, List<Pair<InferenceRule_Runtime, IsApplicableStatus>>>> nodesAndRules = new ArrayList<>();
 
-    if (!collectNodesAndRules(node, nodesAndRules)) return false;
+    if (!collectNodesAndRules(node, nodesAndRules)) return;
 
     for (Pair<SNode, List<Pair<InferenceRule_Runtime, IsApplicableStatus>>> pair : nodesAndRules) {
       applyRulesToNode(pair.o1, pair.o2);
     }
-
-    return true;
   }
 
   @NotNull
@@ -192,14 +184,14 @@ import java.util.Set;
 
   protected boolean collectNodesAndRules(SNode node, List<Pair<SNode, List<Pair<InferenceRule_Runtime, IsApplicableStatus>>>> nodesAndRules) {
     for (SNode nodeOrAttr : myTypechecking.nodesToApplyRulesTo(node)) {
-      List<Pair<InferenceRule_Runtime, IsApplicableStatus>> rules = TypeChecker.getInstance().getRulesManager().getInferenceRules(nodeOrAttr);
+      List<Pair<InferenceRule_Runtime, IsApplicableStatus>> rules = getState().getTypeCheckingContext().getTypeCheckerHelper().getRulesManager().getInferenceRules(nodeOrAttr);
       if (rules != null && !rules.isEmpty()) {
-        nodesAndRules.add(new Pair<SNode, List<Pair<InferenceRule_Runtime, IsApplicableStatus>>>(nodeOrAttr, rules));
+        nodesAndRules.add(new Pair<>(nodeOrAttr, rules));
 
-        // check if the last rule applicable to an attribute supercedes the rules that may follow (last one wins)
+        // check if the last rule applicable to an attribute supersedes the rules that may follow (last one wins)
         // this has no effect if we're looking at the attributed node
         Pair<InferenceRule_Runtime, IsApplicableStatus> lastPair = rules.get(rules.size() - 1);
-        if (lastPair.o1.supercedesAttributed(nodeOrAttr, lastPair.o2)) {
+        if (lastPair.o1.supersedesAttributed(nodeOrAttr, lastPair.o2)) {
           break;
         }
       }
@@ -227,7 +219,7 @@ import java.util.Set;
       if (myFullyCheckedNodes.contains(sNode) || !TypeSystemUtil.shouldApplyTypeSystemRules(sNode)) {
         continue;
       }
-      Set<SNode> candidatesForFrontier = new LinkedHashSet<SNode>();
+      Set<SNode> candidatesForFrontier = new LinkedHashSet<>();
       if (forceChildrenCheck) {
         candidatesForFrontier.addAll(IterableUtil.asCollection(sNode.getChildren()));
       }
@@ -250,14 +242,13 @@ import java.util.Set;
 
   private void applyRulesAndTrackAccess(AccessTracking accessTracking, SNode sNode) {
     accessTracking.installReadListeners();
-    boolean typeAffected = false;
     try {
       myNodes.add(sNode);
-      typeAffected = applyRulesToNode(sNode);
+      applyRulesToNode(sNode);
     } finally {
       accessTracking.removeReadListeners();
     }
-    accessTracking.postProcess(sNode, typeAffected);
+    accessTracking.postProcess(sNode);
   }
 
   protected SNode typeCalculated(SNode initialNode) {
@@ -273,8 +264,14 @@ import java.util.Set;
     while (!myQueue.isEmpty()) {
       drainQueue(forceChildrenCheck, initialNode, accessTracking);
       if (typeCalculated(initialNode) != null) return;
-      solveInequalitiesAndExpandTypes(finalExpansion);
+      solveInequalities(accessTracking);
+      myState.expandAll(myNodes, finalExpansion);
+      myNodes.clear();
     }
+  }
+
+  protected void solveInequalities(AccessTracking accessTracking) {
+    myState.solveInequalities();
   }
 
   protected SNode computeTypesForNode_special_(SNode initialNode, Collection<SNode> givenAdditionalNodes) {
@@ -309,7 +306,7 @@ import java.util.Set;
   }
 
   public void clear() {
-
+    myIsChecked = false;
   }
 
   /*package*/ STATE getState() {
@@ -321,7 +318,7 @@ import java.util.Set;
 
     protected void removeReadListeners() {}
 
-    protected void postProcess(SNode sNode, boolean typeAffected){}
+    protected void postProcess(SNode sNode){}
   }
 
   public TypeSubstitution lookupSubstitution(SNode origNode, TypeCheckingContext typeCheckingContext) {
@@ -340,7 +337,7 @@ import java.util.Set;
   }
 
   private List<Pair<SubstituteType_Runtime, IsApplicableStatus>> substituteTypeRules(SNode test) {
-    return TypeChecker.getInstance().getRulesManager().getSubstituteTypeRules(test);
+    return getState().getTypeCheckingContext().getTypeCheckerHelper().getRulesManager().getSubstituteTypeRules(test);
   }
 
 }

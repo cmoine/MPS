@@ -6,14 +6,14 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
   <root nodeRef="r:ec46ec3f-76d3-4bf3-b52d-6703b340405c(jetbrains.mps.samples.languagePatterns.Basic.sandbox)/9119725621034347484">
     <file name="UsageSample.java">
-      <node id="9119725621034409779" at="7,42,8,20" concept="2" />
-      <node id="9119725621034403719" at="8,20,9,35" concept="1" />
+      <node id="9119725621034409779" at="7,42,8,19" concept="2" />
+      <node id="9119725621034403719" at="8,19,9,35" concept="1" />
       <node id="9119725621034403837" at="9,35,10,35" concept="1" />
-      <node id="9119725621034410093" at="10,35,11,35" concept="2" />
-      <node id="9119725621034403977" at="11,35,12,36" concept="1" />
+      <node id="9119725621034410093" at="10,35,11,34" concept="2" />
+      <node id="9119725621034403977" at="11,34,12,36" concept="1" />
       <node id="9119725621034404986" at="12,36,13,26" concept="0" />
-      <node id="9119725621034410381" at="13,26,14,59" concept="2" />
-      <node id="9119725621034405387" at="14,59,15,26" concept="0" />
+      <node id="9119725621034410381" at="13,26,14,58" concept="2" />
+      <node id="9119725621034405387" at="14,58,15,26" concept="0" />
       <node id="9119725621034406692" at="15,26,16,26" concept="0" />
       <node id="9119725621034347492" at="7,0,18,0" concept="3" trace="main#([Ljava/lang/String;)V" />
       <scope id="9119725621034347498" at="7,42,16,26">

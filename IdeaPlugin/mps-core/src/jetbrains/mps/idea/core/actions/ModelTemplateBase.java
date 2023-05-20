@@ -16,13 +16,10 @@
 
 package jetbrains.mps.idea.core.actions;
 
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactoryByName;
 import org.jetbrains.mps.openapi.language.SLanguage;
 import org.jetbrains.mps.openapi.model.SModel;
 
 import javax.swing.Icon;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by danilla on 13/05/16.

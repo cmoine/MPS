@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-bb1ges6uf40vkgyyhz2r4vvko5jfqz3" />
+<product version="3" modelHash="-54bhnde4bwp0i7vlael7dqky70g82sj">
+  <files names="AbstractFunctionType__BehaviorDescriptor.java:BehaviorAspectDescriptor.java:ClosureLiteralType__BehaviorDescriptor.java:ClosureLiteral__BehaviorDescriptor.java:CompactInvokeFunctionExpression__BehaviorDescriptor.java:ControlAbstractionContainer__BehaviorDescriptor.java:ControlAbstractionDeclaration__BehaviorDescriptor.java:FunctionMethodDeclaration__BehaviorDescriptor.java:FunctionType__BehaviorDescriptor.java:InvokeExpression__BehaviorDescriptor.java:InvokeFunctionExpression__BehaviorDescriptor.java:InvokeFunctionOperation__BehaviorDescriptor.java:UnboundClosureParameterDeclaration__BehaviorDescriptor.java:YieldAllStatement__BehaviorDescriptor.java:YieldStatement__BehaviorDescriptor.java" />
+</product>
 

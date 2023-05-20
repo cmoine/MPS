@@ -48,19 +48,19 @@ public class SModelModificationsCollector extends SModelEventVisitorAdapter {
     if (events == null) {
       return;
     }
-    myModifications = new LinkedHashSet<Pair<SNode, SNodeReference>>();
+    myModifications = new LinkedHashSet<>();
     for (SModelEvent event : events) {
       event.accept(this);
     }
   }
 
   public List<Pair<SNode, SNodeReference>> getModifications() {
-    return myModifications == null ? null : new ArrayList<Pair<SNode, SNodeReference>>(myModifications);
+    return myModifications == null ? null : new ArrayList<>(myModifications);
   }
 
   @Override
   public void visitRootEvent(SModelRootEvent event) {
-    Queue<SNode> nodeQueue = new LinkedList<SNode>();
+    Queue<SNode> nodeQueue = new LinkedList<>();
     nodeQueue.add(event.getRoot());
     while (!nodeQueue.isEmpty()) {
       SNode nextNode = nodeQueue.remove();
@@ -74,7 +74,7 @@ public class SModelModificationsCollector extends SModelEventVisitorAdapter {
   @Override
   public void visitChildEvent(SModelChildEvent event) {
     addModification(event.getParent(), event);
-    Queue<SNode> nodeQueue = new LinkedList<SNode>();
+    Queue<SNode> nodeQueue = new LinkedList<>();
     nodeQueue.add(event.getChild());
     while (!nodeQueue.isEmpty()) {
       SNode nextNode = nodeQueue.remove();
@@ -96,7 +96,7 @@ public class SModelModificationsCollector extends SModelEventVisitorAdapter {
   }
 
   private void addModification(SNode node, SModelEvent event) {
-    myModifications.add(new Pair<SNode, SNodeReference>(node, new CachingSNodePointer(event.getModel().getReference(), node.getNodeId())));
+    myModifications.add(new Pair<>(node, new CachingSNodePointer(event.getModel().getReference(), node.getNodeId())));
   }
 
   // TODO: move this logic to SNodePointer? Ask MMuhin.

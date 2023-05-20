@@ -7,8 +7,9 @@ import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.generator.template.TemplateQueryContext;
 import java.util.concurrent.ConcurrentHashMap;
 import jetbrains.mps.util.containers.ConcurrentHashSet;
-import jetbrains.mps.util.SNodeOperations;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SModelOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
+import org.jetbrains.mps.openapi.language.SProperty;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class GenerationUtil {
@@ -42,6 +43,10 @@ public class GenerationUtil {
     return set;
   }
   private static String getKey(String prefix, TemplateQueryContext genContext, SNode project) {
-    return prefix + "/" + SNodeOperations.getModelLongName(genContext.getOriginalInputModel()) + "/" + SPropertyOperations.getString(project, MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name"));
+    return prefix + '/' + SModelOperations.getModelName(genContext.getOriginalInputModel()) + '/' + SPropertyOperations.getString(project, PROPS.name$MnvL);
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }

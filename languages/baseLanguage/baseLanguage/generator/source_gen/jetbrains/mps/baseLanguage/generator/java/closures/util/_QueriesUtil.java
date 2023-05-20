@@ -5,19 +5,25 @@ package jetbrains.mps.baseLanguage.generator.java.closures.util;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.generator.template.TemplateQueryContext;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.internal.collections.runtime.Sequence;
 import java.util.Collections;
 import java.util.List;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class _QueriesUtil {
   public _QueriesUtil() {
   }
   public static Iterable<SNode> getList_ContextOwner_ifMethod_ParmsUsedInClosure(SNode inputNode, TemplateQueryContext genContext) {
-    if (!((SNodeOperations.isInstanceOf(inputNode, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, "jetbrains.mps.baseLanguage.structure.BaseMethodDeclaration"))))) {
+    if (!(SNodeOperations.isInstanceOf(inputNode, CONCEPTS.BaseMethodDeclaration$kD))) {
       return Sequence.fromIterable(Collections.<SNode>emptyList());
     }
     List<SNode> variablesUsedInClosure = ClosuresUtil.getVariablesUsedInClosure(inputNode, genContext);
-    return SNodeOperations.ofConcept(variablesUsedInClosure, MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c77f1e94L, "jetbrains.mps.baseLanguage.structure.ParameterDeclaration"));
+    return SNodeOperations.ofConcept(variablesUsedInClosure, CONCEPTS.ParameterDeclaration$RG);
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept BaseMethodDeclaration$kD = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b1fcL, "jetbrains.mps.baseLanguage.structure.BaseMethodDeclaration");
+    /*package*/ static final SConcept ParameterDeclaration$RG = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8c77f1e94L, "jetbrains.mps.baseLanguage.structure.ParameterDeclaration");
   }
 }

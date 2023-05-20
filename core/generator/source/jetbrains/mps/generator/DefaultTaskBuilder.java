@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2017 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 package jetbrains.mps.generator;
 
 import jetbrains.mps.generator.GeneratorTask.Factory;
-import jetbrains.mps.smodel.SModelOperations;
+import jetbrains.mps.smodel.ModelDependencyScanner;
 import jetbrains.mps.util.GraphUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SModel;
@@ -38,7 +38,7 @@ import java.util.Map;
  * @since 3.4
  */
 public class DefaultTaskBuilder<T extends GeneratorTask> {
-  private final Map<SModule, List<SModel>> myModuleSequence = new LinkedHashMap<SModule, List<SModel>>();
+  private final Map<SModule, List<SModel>> myModuleSequence = new LinkedHashMap<>();
   private final Factory<T> myFactory;
 
   public DefaultTaskBuilder(@NotNull Factory<T> factory) {
@@ -46,7 +46,7 @@ public class DefaultTaskBuilder<T extends GeneratorTask> {
   }
 
   public List<T> getResult() {
-    ArrayList<T> rv = new ArrayList<T>();
+    ArrayList<T> rv = new ArrayList<>();
     for (List<SModel> step : myModuleSequence.values()) {
       for (SModel m : topoOrder(step)) {
         rv.add(myFactory.create(m));
@@ -60,7 +60,7 @@ public class DefaultTaskBuilder<T extends GeneratorTask> {
       SModule module = inputModel.getModule();
       List<SModel> models = myModuleSequence.get(module);
       if (models == null) {
-        myModuleSequence.put(module, models = new ArrayList<SModel>(5));
+        myModuleSequence.put(module, models = new ArrayList<>(5));
       }
       models.add(inputModel);
     }
@@ -68,8 +68,8 @@ public class DefaultTaskBuilder<T extends GeneratorTask> {
 
   private static List<SModel> topoOrder(List<SModel> inputModels) {
     int[][] graph = new int[inputModels.size()][];
-    HashMap<SModelReference, Integer> vertex2Index = new HashMap<SModelReference, Integer>(graph.length * 2);
-    HashMap<SModelReference, SModel> vertex2InputModel = new HashMap<SModelReference, SModel>(graph.length * 2);
+    HashMap<SModelReference, Integer> vertex2Index = new HashMap<>(graph.length * 2);
+    HashMap<SModelReference, SModel> vertex2InputModel = new HashMap<>(graph.length * 2);
     for (int i = 0; i < graph.length; i++) {
       final SModel inputModel = inputModels.get(i);
       final SModelReference ref = inputModel.getReference();
@@ -80,7 +80,9 @@ public class DefaultTaskBuilder<T extends GeneratorTask> {
     for (int i = 0, x = inputModels.size(); i < x; i++) {
       SModel inputModel = inputModels.get(i);
       int j = 0;
-      for (SModelReference ie : SModelOperations.getImportedModelUIDs(inputModel)) {
+      // some aspect models get implicit dependencies (e.g. editor aspects could implicitly see structure one), we have to respect
+      // these implicit dependencies to ensure proper order (otherwise checkpoint models may get disposed unexpectedly, see MPS-26570)
+      for (SModelReference ie : new ModelDependencyScanner().usedLanguages(false).crossModelReferences(true).walk(inputModel).getCrossModelReferences()) {
         if (!vertex2Index.containsKey(ie)) {
           continue;
         }
@@ -92,17 +94,17 @@ public class DefaultTaskBuilder<T extends GeneratorTask> {
 
     final int[][] strongComponents = GraphUtil.tarjan(graph);
 
-    List<SModelReference[]> components = new ArrayList<SModelReference[]>(strongComponents.length);
-    for (int i = 0; i < strongComponents.length; i++) {
-      SModelReference[] x = new SModelReference[strongComponents[i].length];
+    List<SModelReference[]> components = new ArrayList<>(strongComponents.length);
+    for (int[] strongComponent : strongComponents) {
+      SModelReference[] x = new SModelReference[strongComponent.length];
       for (int j = 0; j < x.length; j++) {
-        final int vertex = strongComponents[i][j];
+        final int vertex = strongComponent[j];
         x[j] = inputModels.get(vertex).getReference();
       }
       components.add(x);
     }
     // flatten components into plain list
-    ArrayList<SModel> rv = new ArrayList<SModel>(inputModels.size());
+    ArrayList<SModel> rv = new ArrayList<>(inputModels.size());
     for (SModelReference[] mrs : components) {
       for (SModelReference mr : mrs) {
         assert vertex2InputModel.containsKey(mr);

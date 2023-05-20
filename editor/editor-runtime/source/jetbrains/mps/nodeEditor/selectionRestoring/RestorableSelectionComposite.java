@@ -18,14 +18,13 @@ package jetbrains.mps.nodeEditor.selectionRestoring;
 import jetbrains.mps.openapi.editor.EditorContext;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
  * @author simon
  */
 public class RestorableSelectionComposite implements RestorableSelection {
-  private final List<RestorableSelection> myRestorableSelections = new ArrayList<RestorableSelection>();
+  private final List<RestorableSelection> myRestorableSelections = new ArrayList<>();
   public RestorableSelectionComposite(RestorableSelection... selections) {
     for (RestorableSelection selection : selections) {
       if (selection != null) {

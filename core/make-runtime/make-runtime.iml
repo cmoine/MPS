@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+  <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/classes" />
     <output-test url="file://$MODULE_DIR$/testclasses" />
     <exclude-output />
@@ -18,14 +18,13 @@
     <orderEntry type="module" module-name="kernel" />
     <orderEntry type="module" module-name="kernel-resources" />
     <orderEntry type="module" module-name="generator-engine" />
-    <orderEntry type="library" name="JDOM" level="project" />
-    <orderEntry type="library" name="Trove" level="project" />
-    <orderEntry type="library" exported="" name="Eclipse-compiler" level="project" />
+    <orderEntry type="library" name="javac2" level="project" />
+    <orderEntry type="library" name="org.jdom" level="project" />
+    <orderEntry type="library" name="objectweb.asm" level="project" />
+    <orderEntry type="library" name="KotlinCoreLibs" level="project" />
     <orderEntry type="module" module-name="testbench" scope="TEST" />
     <orderEntry type="library" scope="TEST" name="JUnit4" level="project" />
     <orderEntry type="library" scope="TEST" name="Idea-platform" level="project" />
     <orderEntry type="module" module-name="environment" scope="TEST" />
-    <orderEntry type="library" name="javac2" level="project" />
-    <orderEntry type="library" name="ASM" level="project" />
   </component>
 </module>

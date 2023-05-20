@@ -1,0 +1,47 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="RunCodeFromSolution_Test" type="JUnit Tests" factoryName="JUnit Tests">
+    <myJUnitSettings>
+      <MyState>
+        <option name="myModelRef" />
+        <option name="myModuleRef" />
+        <option name="myInProcess" value="false" />
+        <option name="myReuseCaches" value="true" />
+        <option name="myOverrideCachesLocation" value="false" />
+        <option name="myDebug" value="false" />
+        <option name="myCachesPath" value="$USER_HOME$/.MPSJUnitRC/config0" />
+        <option name="myTestCases">
+          <list>
+            <option value="r:cced89f7-d5c2-463a-b754-a486d525dd67(jetbrains.mps.build.mps.runner.test@tests)/2304492758937914221" />
+          </list>
+        </option>
+        <option name="myTestMethods">
+          <list />
+        </option>
+        <option name="myRunType" value="3" />
+      </MyState>
+    </myJUnitSettings>
+    <myJavaRunParameters>
+      <MyState>
+        <option name="myJavaParameters">
+          <JavaRunParameters>
+            <option name="jrePath" value="" />
+            <option name="programParameters" value="" />
+            <option name="useAlternativeJre" value="false" />
+            <option name="vmOptions" value="-Dmps.home.path=build/artifacts/mps" />
+            <option name="workingDirectory" value="$PROJECT_DIR$" />
+          </JavaRunParameters>
+        </option>
+      </MyState>
+    </myJavaRunParameters>
+    <myDeploySettings>
+      <MyState>
+        <option name="myPluginsToDeploy">
+          <list />
+        </option>
+      </MyState>
+    </myDeploySettings>
+    <method v="2">
+      <option name="jetbrains.mps.execution.configurations.pluginSolution.plugin.MakeNodePointers_BeforeTask" enabled="true" />
+    </method>
+  </configuration>
+</component>

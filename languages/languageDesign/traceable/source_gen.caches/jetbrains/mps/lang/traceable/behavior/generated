@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="8mfqrh3cuc6tpstwo49telaupjkcnld" />
+<product version="3" modelHash="3v4tj1t5fffc1y3ydqtu7kx7y3390tk">
+  <files names="BehaviorAspectDescriptor.java:ScopeConcept__BehaviorDescriptor.java:TraceableConcept__BehaviorDescriptor.java:UnitConcept__BehaviorDescriptor.java" />
+</product>
 

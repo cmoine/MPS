@@ -6,39 +6,9 @@ import jetbrains.mps.nodeEditor.DefaultNodeEditor;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Collection;
-import jetbrains.mps.nodeEditor.cells.EditorCell_Constant;
-import jetbrains.mps.nodeEditor.EditorManager;
-import jetbrains.mps.openapi.editor.update.AttributeKind;
 
 public class TestSubstituteSpecialChildAttribute_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return this.createCollection_kzoxcf_a(editorContext, node);
-  }
-  private EditorCell createCollection_kzoxcf_a(EditorContext editorContext, SNode node) {
-    EditorCell_Collection editorCell = EditorCell_Collection.createIndent2(editorContext, node);
-    editorCell.setCellId("Collection_kzoxcf_a");
-    editorCell.setBig(true);
-    editorCell.addEditorCell(this.createConstant_kzoxcf_a0(editorContext, node));
-    editorCell.addEditorCell(this.createAttributedNodeCell_kzoxcf_b0(editorContext, node));
-    editorCell.addEditorCell(this.createConstant_kzoxcf_c0(editorContext, node));
-    return editorCell;
-  }
-  private EditorCell createConstant_kzoxcf_a0(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, "<a");
-    editorCell.setCellId("Constant_kzoxcf_a0");
-    editorCell.setDefaultText("");
-    return editorCell;
-  }
-  private EditorCell createAttributedNodeCell_kzoxcf_b0(EditorContext editorContext, SNode node) {
-    EditorManager manager = EditorManager.getInstanceFromContext(editorContext);
-    EditorCell editorCell = editorContext.getEditorComponent().getUpdater().getCurrentUpdateSession().getAttributedCell(AttributeKind.NODE, node);
-    return editorCell;
-  }
-  private EditorCell createConstant_kzoxcf_c0(EditorContext editorContext, SNode node) {
-    EditorCell_Constant editorCell = new EditorCell_Constant(editorContext, node, ">");
-    editorCell.setCellId("Constant_kzoxcf_c0");
-    editorCell.setDefaultText("");
-    return editorCell;
+    return new TestSubstituteSpecialChildAttribute_EditorBuilder_a(editorContext, node).createCell();
   }
 }

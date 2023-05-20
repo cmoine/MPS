@@ -2,9 +2,9 @@
 <model ref="r:540d5e3a-9424-4c25-a6ed-9d51ec46dfad(org.jetbrains.mps.samples.money.runtime)">
   <persistence version="9" />
   <languages>
-    <use id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections" version="0" />
+    <use id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections" version="1" />
     <use id="fd392034-7849-419d-9071-12563d152375" name="jetbrains.mps.baseLanguage.closures" version="0" />
-    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="4" />
+    <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
   </languages>
   <imports>
     <import index="xlxw" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.math(JDK/)" />
@@ -26,7 +26,10 @@
       </concept>
       <concept id="4836112446988635817" name="jetbrains.mps.baseLanguage.structure.UndefinedType" flags="in" index="2jxLKc" />
       <concept id="1202948039474" name="jetbrains.mps.baseLanguage.structure.InstanceMethodCallOperation" flags="nn" index="liA8E" />
-      <concept id="1465982738277781862" name="jetbrains.mps.baseLanguage.structure.PlaceholderMember" flags="ng" index="2tJIrI" />
+      <concept id="8118189177080264853" name="jetbrains.mps.baseLanguage.structure.AlternativeType" flags="ig" index="nSUau">
+        <child id="8118189177080264854" name="alternative" index="nSUat" />
+      </concept>
+      <concept id="1465982738277781862" name="jetbrains.mps.baseLanguage.structure.PlaceholderMember" flags="nn" index="2tJIrI" />
       <concept id="1076505808687" name="jetbrains.mps.baseLanguage.structure.WhileStatement" flags="nn" index="2$JKZl">
         <child id="1076505808688" name="condition" index="2$JKZa" />
       </concept>
@@ -42,9 +45,6 @@
       </concept>
       <concept id="1188208481402" name="jetbrains.mps.baseLanguage.structure.HasAnnotation" flags="ng" index="2AJDlI">
         <child id="1188208488637" name="annotation" index="2AJF6D" />
-      </concept>
-      <concept id="1224848483129" name="jetbrains.mps.baseLanguage.structure.IBLDeprecatable" flags="ng" index="IEa8$">
-        <property id="1224848525476" name="isDeprecated" index="IEkAT" />
       </concept>
       <concept id="1154032098014" name="jetbrains.mps.baseLanguage.structure.AbstractLoopStatement" flags="nn" index="2LF5Ji">
         <child id="1154032183016" name="body" index="2LFqv$" />
@@ -65,16 +65,8 @@
       <concept id="1201385106094" name="jetbrains.mps.baseLanguage.structure.PropertyReference" flags="nn" index="2S8uIT">
         <reference id="1201385237847" name="property" index="2S8YL0" />
       </concept>
-      <concept id="1164879751025" name="jetbrains.mps.baseLanguage.structure.TryCatchStatement" flags="nn" index="SfApY">
-        <child id="1164879758292" name="body" index="SfCbr" />
-        <child id="1164903496223" name="catchClause" index="TEbGg" />
-      </concept>
       <concept id="1145552977093" name="jetbrains.mps.baseLanguage.structure.GenericNewExpression" flags="nn" index="2ShNRf">
         <child id="1145553007750" name="creator" index="2ShVmc" />
-      </concept>
-      <concept id="1164903280175" name="jetbrains.mps.baseLanguage.structure.CatchClause" flags="nn" index="TDmWw">
-        <child id="1164903359218" name="catchBody" index="TDEfX" />
-        <child id="1164903359217" name="throwable" index="TDEfY" />
       </concept>
       <concept id="1070462154015" name="jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" flags="ig" index="Wx3nA">
         <property id="6468716278899126575" name="isVolatile" index="2dlcS1" />
@@ -84,6 +76,7 @@
       <concept id="1070475926800" name="jetbrains.mps.baseLanguage.structure.StringLiteral" flags="nn" index="Xl_RD">
         <property id="1070475926801" name="value" index="Xl_RC" />
       </concept>
+      <concept id="4952749571008284462" name="jetbrains.mps.baseLanguage.structure.CatchVariable" flags="ng" index="XOnhg" />
       <concept id="1081236700938" name="jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" flags="ig" index="2YIFZL" />
       <concept id="1081236700937" name="jetbrains.mps.baseLanguage.structure.StaticMethodCall" flags="nn" index="2YIFZM">
         <reference id="1144433194310" name="classConcept" index="1Pybhc" />
@@ -182,6 +175,10 @@
         <child id="1081773367580" name="leftExpression" index="3uHU7B" />
       </concept>
       <concept id="1214918800624" name="jetbrains.mps.baseLanguage.structure.PostfixIncrementExpression" flags="nn" index="3uNrnE" />
+      <concept id="3093926081414150598" name="jetbrains.mps.baseLanguage.structure.MultipleCatchClause" flags="ng" index="3uVAMA">
+        <child id="8276990574895933173" name="catchBody" index="1zc67A" />
+        <child id="8276990574895933172" name="throwable" index="1zc67B" />
+      </concept>
       <concept id="1202065242027" name="jetbrains.mps.baseLanguage.structure.DefaultGetAccessor" flags="ng" index="3wEZqW" />
       <concept id="1202077725299" name="jetbrains.mps.baseLanguage.structure.DefaultSetAccessor" flags="ng" index="3xqBd$">
         <child id="1202077744034" name="visibility" index="3xqFEP" />
@@ -204,11 +201,12 @@
         <child id="1144231399730" name="condition" index="1Dwp0S" />
         <child id="1144231408325" name="iteration" index="1Dwrff" />
       </concept>
-      <concept id="6329021646629104957" name="jetbrains.mps.baseLanguage.structure.TextCommentPart" flags="nn" index="3SKdUq">
-        <property id="6329021646629104958" name="text" index="3SKdUp" />
+      <concept id="5351203823916750322" name="jetbrains.mps.baseLanguage.structure.TryUniversalStatement" flags="nn" index="3J1_TO">
+        <child id="8276990574886367510" name="catchClause" index="1zxBo5" />
+        <child id="8276990574886367508" name="body" index="1zxBo7" />
       </concept>
       <concept id="6329021646629104954" name="jetbrains.mps.baseLanguage.structure.SingleLineComment" flags="nn" index="3SKdUt">
-        <child id="6329021646629175155" name="commentPart" index="3SKWNk" />
+        <child id="8356039341262087992" name="line" index="1aUNEU" />
       </concept>
       <concept id="1146644602865" name="jetbrains.mps.baseLanguage.structure.PublicVisibility" flags="nn" index="3Tm1VV" />
       <concept id="1146644623116" name="jetbrains.mps.baseLanguage.structure.PrivateVisibility" flags="nn" index="3Tm6S6" />
@@ -222,6 +220,14 @@
     <language id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core">
       <concept id="1169194658468" name="jetbrains.mps.lang.core.structure.INamedConcept" flags="ng" index="TrEIO">
         <property id="1169194664001" name="name" index="TrG5h" />
+      </concept>
+    </language>
+    <language id="c7fb639f-be78-4307-89b0-b5959c3fa8c8" name="jetbrains.mps.lang.text">
+      <concept id="155656958578482948" name="jetbrains.mps.lang.text.structure.Word" flags="nn" index="3oM_SD">
+        <property id="155656958578482949" name="value" index="3oM_SC" />
+      </concept>
+      <concept id="2535923850359271782" name="jetbrains.mps.lang.text.structure.Line" flags="nn" index="1PaTwC">
+        <child id="2535923850359271783" name="elements" index="1PaTwD" />
       </concept>
     </language>
     <language id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections">
@@ -413,7 +419,6 @@
       </node>
     </node>
     <node concept="3clFb_" id="4IqbYlp4W7a" role="jymVt">
-      <property role="IEkAT" value="false" />
       <property role="1EzhhJ" value="false" />
       <property role="TrG5h" value="toString" />
       <property role="DiZV1" value="false" />
@@ -472,7 +477,7 @@
                 </node>
               </node>
               <node concept="liA8E" id="4IqbYlp54ZP" role="2OqNvi">
-                <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object):boolean" resolve="equals" />
+                <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object)" resolve="equals" />
                 <node concept="2OqwBi" id="4IqbYlp54ZR" role="37wK5m">
                   <node concept="37vLTw" id="2BHiRxgmuAP" role="2Oq$k0">
                     <ref role="3cqZAo" node="4IqbYlp54Z2" resolve="other" />
@@ -533,7 +538,7 @@
                         </node>
                       </node>
                       <node concept="liA8E" id="4IqbYlp54Zm" role="2OqNvi">
-                        <ref role="37wK5l" to="xlxw:~BigDecimal.add(java.math.BigDecimal):java.math.BigDecimal" resolve="add" />
+                        <ref role="37wK5l" to="xlxw:~BigDecimal.add(java.math.BigDecimal)" resolve="add" />
                         <node concept="2OqwBi" id="4IqbYlp54Zo" role="37wK5m">
                           <node concept="37vLTw" id="2BHiRxgm7M4" role="2Oq$k0">
                             <ref role="3cqZAo" node="4IqbYlp54Z2" resolve="other" />
@@ -575,7 +580,7 @@
                 </node>
               </node>
               <node concept="liA8E" id="4IqbYlp550B" role="2OqNvi">
-                <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object):boolean" resolve="equals" />
+                <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object)" resolve="equals" />
                 <node concept="2OqwBi" id="4IqbYlp550C" role="37wK5m">
                   <node concept="37vLTw" id="2BHiRxghg8o" role="2Oq$k0">
                     <ref role="3cqZAo" node="4IqbYlp551a" resolve="other" />
@@ -636,7 +641,7 @@
                         </node>
                       </node>
                       <node concept="liA8E" id="4IqbYlp5513" role="2OqNvi">
-                        <ref role="37wK5l" to="xlxw:~BigDecimal.subtract(java.math.BigDecimal):java.math.BigDecimal" resolve="subtract" />
+                        <ref role="37wK5l" to="xlxw:~BigDecimal.subtract(java.math.BigDecimal)" resolve="subtract" />
                         <node concept="2OqwBi" id="4IqbYlp5514" role="37wK5m">
                           <node concept="37vLTw" id="2BHiRxgm7IT" role="2Oq$k0">
                             <ref role="3cqZAo" node="4IqbYlp551a" resolve="other" />
@@ -818,10 +823,10 @@
               <ref role="3cqZAo" node="3u6SZi0AnSo" resolve="open" />
             </node>
             <node concept="2YIFZM" id="3u6SZi0C94T" role="37vLTx">
-              <ref role="37wK5l" to="xlxw:~BigDecimal.valueOf(double):java.math.BigDecimal" resolve="valueOf" />
+              <ref role="37wK5l" to="xlxw:~BigDecimal.valueOf(double)" resolve="valueOf" />
               <ref role="1Pybhc" to="xlxw:~BigDecimal" resolve="BigDecimal" />
               <node concept="2YIFZM" id="3u6SZi0BsaK" role="37wK5m">
-                <ref role="37wK5l" to="wyt6:~Double.parseDouble(java.lang.String):double" resolve="parseDouble" />
+                <ref role="37wK5l" to="wyt6:~Double.parseDouble(java.lang.String)" resolve="parseDouble" />
                 <ref role="1Pybhc" to="wyt6:~Double" resolve="Double" />
                 <node concept="37vLTw" id="3u6SZi0Bsga" role="37wK5m">
                   <ref role="3cqZAo" node="3u6SZi0Ao9b" resolve="open1" />
@@ -836,10 +841,10 @@
               <ref role="3cqZAo" node="3u6SZi0AnT_" resolve="high" />
             </node>
             <node concept="2YIFZM" id="3u6SZi0C9oW" role="37vLTx">
-              <ref role="37wK5l" to="xlxw:~BigDecimal.valueOf(double):java.math.BigDecimal" resolve="valueOf" />
+              <ref role="37wK5l" to="xlxw:~BigDecimal.valueOf(double)" resolve="valueOf" />
               <ref role="1Pybhc" to="xlxw:~BigDecimal" resolve="BigDecimal" />
               <node concept="2YIFZM" id="3u6SZi0BvpM" role="37wK5m">
-                <ref role="37wK5l" to="wyt6:~Double.parseDouble(java.lang.String):double" resolve="parseDouble" />
+                <ref role="37wK5l" to="wyt6:~Double.parseDouble(java.lang.String)" resolve="parseDouble" />
                 <ref role="1Pybhc" to="wyt6:~Double" resolve="Double" />
                 <node concept="37vLTw" id="3u6SZi0Bx5o" role="37wK5m">
                   <ref role="3cqZAo" node="3u6SZi0Ao9l" resolve="high1" />
@@ -854,10 +859,10 @@
               <ref role="3cqZAo" node="3u6SZi0AnU3" resolve="low" />
             </node>
             <node concept="2YIFZM" id="3u6SZi0C9H0" role="37vLTx">
-              <ref role="37wK5l" to="xlxw:~BigDecimal.valueOf(double):java.math.BigDecimal" resolve="valueOf" />
+              <ref role="37wK5l" to="xlxw:~BigDecimal.valueOf(double)" resolve="valueOf" />
               <ref role="1Pybhc" to="xlxw:~BigDecimal" resolve="BigDecimal" />
               <node concept="2YIFZM" id="3u6SZi0Bvyi" role="37wK5m">
-                <ref role="37wK5l" to="wyt6:~Double.parseDouble(java.lang.String):double" resolve="parseDouble" />
+                <ref role="37wK5l" to="wyt6:~Double.parseDouble(java.lang.String)" resolve="parseDouble" />
                 <ref role="1Pybhc" to="wyt6:~Double" resolve="Double" />
                 <node concept="37vLTw" id="3u6SZi0BwXc" role="37wK5m">
                   <ref role="3cqZAo" node="3u6SZi0Ao9v" resolve="low1" />
@@ -872,11 +877,11 @@
               <ref role="3cqZAo" node="3u6SZi0AnT0" resolve="close" />
             </node>
             <node concept="2YIFZM" id="3u6SZi0Ca14" role="37vLTx">
-              <ref role="37wK5l" to="xlxw:~BigDecimal.valueOf(double):java.math.BigDecimal" resolve="valueOf" />
+              <ref role="37wK5l" to="xlxw:~BigDecimal.valueOf(double)" resolve="valueOf" />
               <ref role="1Pybhc" to="xlxw:~BigDecimal" resolve="BigDecimal" />
               <node concept="2YIFZM" id="3u6SZi0BvEO" role="37wK5m">
                 <ref role="1Pybhc" to="wyt6:~Double" resolve="Double" />
-                <ref role="37wK5l" to="wyt6:~Double.parseDouble(java.lang.String):double" resolve="parseDouble" />
+                <ref role="37wK5l" to="wyt6:~Double.parseDouble(java.lang.String)" resolve="parseDouble" />
                 <node concept="37vLTw" id="3u6SZi0BwP0" role="37wK5m">
                   <ref role="3cqZAo" node="3u6SZi0Ao9D" resolve="close1" />
                 </node>
@@ -890,10 +895,10 @@
               <ref role="3cqZAo" node="3u6SZi0AnYa" resolve="volume" />
             </node>
             <node concept="2YIFZM" id="3u6SZi0Cal7" role="37vLTx">
-              <ref role="37wK5l" to="xlxw:~BigDecimal.valueOf(double):java.math.BigDecimal" resolve="valueOf" />
+              <ref role="37wK5l" to="xlxw:~BigDecimal.valueOf(double)" resolve="valueOf" />
               <ref role="1Pybhc" to="xlxw:~BigDecimal" resolve="BigDecimal" />
               <node concept="2YIFZM" id="3u6SZi0BvNo" role="37wK5m">
-                <ref role="37wK5l" to="wyt6:~Double.parseDouble(java.lang.String):double" resolve="parseDouble" />
+                <ref role="37wK5l" to="wyt6:~Double.parseDouble(java.lang.String)" resolve="parseDouble" />
                 <ref role="1Pybhc" to="wyt6:~Double" resolve="Double" />
                 <node concept="37vLTw" id="3u6SZi0BwGN" role="37wK5m">
                   <ref role="3cqZAo" node="3u6SZi0Ao9N" resolve="volume1" />
@@ -908,11 +913,11 @@
               <ref role="3cqZAo" node="3u6SZi0Ao2p" resolve="adjustedClose" />
             </node>
             <node concept="2YIFZM" id="3u6SZi0CaDa" role="37vLTx">
-              <ref role="37wK5l" to="xlxw:~BigDecimal.valueOf(double):java.math.BigDecimal" resolve="valueOf" />
+              <ref role="37wK5l" to="xlxw:~BigDecimal.valueOf(double)" resolve="valueOf" />
               <ref role="1Pybhc" to="xlxw:~BigDecimal" resolve="BigDecimal" />
               <node concept="2YIFZM" id="3u6SZi0BvYs" role="37wK5m">
                 <ref role="1Pybhc" to="wyt6:~Double" resolve="Double" />
-                <ref role="37wK5l" to="wyt6:~Double.parseDouble(java.lang.String):double" resolve="parseDouble" />
+                <ref role="37wK5l" to="wyt6:~Double.parseDouble(java.lang.String)" resolve="parseDouble" />
                 <node concept="37vLTw" id="3u6SZi0Bw6Y" role="37wK5m">
                   <ref role="3cqZAo" node="3u6SZi0Ao9X" resolve="adjustedClose1" />
                 </node>
@@ -1174,8 +1179,8 @@
       <node concept="3clFbS" id="3u6SZi0yq4O" role="3clF47">
         <node concept="3clFbJ" id="3u6SZi0yqJ6" role="3cqZAp">
           <node concept="3clFbS" id="3u6SZi0yqJ7" role="3clFbx">
-            <node concept="SfApY" id="3u6SZi0yBZ_" role="3cqZAp">
-              <node concept="3clFbS" id="3u6SZi0yBZA" role="SfCbr">
+            <node concept="3J1_TO" id="3u6SZi0yBZ_" role="3cqZAp">
+              <node concept="3clFbS" id="3u6SZi0yBZA" role="1zxBo7">
                 <node concept="3cpWs8" id="3u6SZi0D1eL" role="3cqZAp">
                   <node concept="3cpWsn" id="3u6SZi0D1eM" role="3cpWs9">
                     <property role="TrG5h" value="prices" />
@@ -1237,11 +1242,12 @@
                         <node concept="3uibUv" id="3u6SZi0yBNb" role="1tU5fm">
                           <ref role="3uigEE" to="guwi:~InputStream" resolve="InputStream" />
                         </node>
-                        <node concept="2YIFZM" id="3u6SZi0yBNe" role="33vP2m">
-                          <ref role="37wK5l" to="18ew:~URLUtil.openStream(java.net.URL):java.io.InputStream" resolve="openStream" />
-                          <ref role="1Pybhc" to="18ew:~URLUtil" resolve="URLUtil" />
-                          <node concept="37vLTw" id="3u6SZi0yBNf" role="37wK5m">
+                        <node concept="2OqwBi" id="5fPzS2nS3yI" role="33vP2m">
+                          <node concept="37vLTw" id="5fPzS2nS35s" role="2Oq$k0">
                             <ref role="3cqZAo" node="3u6SZi0yBnp" resolve="url" />
+                          </node>
+                          <node concept="liA8E" id="5fPzS2nS7h9" role="2OqNvi">
+                            <ref role="37wK5l" to="zf81:~URL.openStream()" resolve="openStream" />
                           </node>
                         </node>
                       </node>
@@ -1339,26 +1345,8 @@
                                 </node>
                               </node>
                             </node>
-                            <node concept="SfApY" id="3u6SZi0zCK3" role="3cqZAp">
-                              <node concept="TDmWw" id="3u6SZi0By$z" role="TEbGg">
-                                <node concept="3cpWsn" id="3u6SZi0By$$" role="TDEfY">
-                                  <property role="TrG5h" value="e" />
-                                  <node concept="3uibUv" id="3u6SZi0B$47" role="1tU5fm">
-                                    <ref role="3uigEE" to="25x5:~ParseException" resolve="ParseException" />
-                                  </node>
-                                </node>
-                                <node concept="3clFbS" id="3u6SZi0By$A" role="TDEfX">
-                                  <node concept="3SKdUt" id="3u6SZi0B_Rz" role="3cqZAp">
-                                    <node concept="3SKdUq" id="3u6SZi0B_R$" role="3SKWNk">
-                                      <property role="3SKdUp" value="date parsing error" />
-                                    </node>
-                                  </node>
-                                  <node concept="3cpWs6" id="3u6SZi0BDvF" role="3cqZAp">
-                                    <node concept="10Nm6u" id="3u6SZi0EU4a" role="3cqZAk" />
-                                  </node>
-                                </node>
-                              </node>
-                              <node concept="3clFbS" id="3u6SZi0zCK4" role="SfCbr">
+                            <node concept="3J1_TO" id="3u6SZi0zCK3" role="3cqZAp">
+                              <node concept="3clFbS" id="3u6SZi0zCK4" role="1zxBo7">
                                 <node concept="1Dw8fO" id="3u6SZi0zyex" role="3cqZAp">
                                   <node concept="3clFbS" id="3u6SZi0zye$" role="2LFqv$">
                                     <node concept="3clFbF" id="3u6SZi0z_TF" role="3cqZAp">
@@ -1369,7 +1357,7 @@
                                               <ref role="3cqZAo" node="3u6SZi0zv$V" resolve="tokenizer" />
                                             </node>
                                             <node concept="liA8E" id="3u6SZi0zCk6" role="2OqNvi">
-                                              <ref role="37wK5l" to="33ny:~StringTokenizer.nextToken():java.lang.String" resolve="nextToken" />
+                                              <ref role="37wK5l" to="33ny:~StringTokenizer.nextToken()" resolve="nextToken" />
                                             </node>
                                           </node>
                                           <node concept="17S1cR" id="3u6SZi0_yC8" role="2OqNvi" />
@@ -1417,7 +1405,7 @@
                                             <ref role="3cqZAo" node="3u6SZi0ARgI" resolve="dateFormat" />
                                           </node>
                                           <node concept="liA8E" id="3u6SZi0AXC$" role="2OqNvi">
-                                            <ref role="37wK5l" to="25x5:~DateFormat.parse(java.lang.String):java.util.Date" resolve="parse" />
+                                            <ref role="37wK5l" to="25x5:~DateFormat.parse(java.lang.String)" resolve="parse" />
                                             <node concept="AH0OO" id="3u6SZi0AYMG" role="37wK5m">
                                               <node concept="3cmrfG" id="3u6SZi0AZwf" role="AHEQo">
                                                 <property role="3cmrfH" value="0" />
@@ -1497,17 +1485,57 @@
                                 </node>
                                 <node concept="3clFbH" id="3u6SZi0AEUZ" role="3cqZAp" />
                               </node>
-                              <node concept="TDmWw" id="3u6SZi0zCK5" role="TEbGg">
-                                <node concept="3cpWsn" id="3u6SZi0zCK6" role="TDEfY">
+                              <node concept="3uVAMA" id="3u6SZi0By$z" role="1zxBo5">
+                                <node concept="XOnhg" id="3u6SZi0By$$" role="1zc67B">
+                                  <property role="3TUv4t" value="false" />
                                   <property role="TrG5h" value="e" />
-                                  <node concept="3uibUv" id="3u6SZi0zDix" role="1tU5fm">
-                                    <ref role="3uigEE" to="wyt6:~IndexOutOfBoundsException" resolve="IndexOutOfBoundsException" />
+                                  <node concept="nSUau" id="xvs04dIuFt" role="1tU5fm">
+                                    <node concept="3uibUv" id="3u6SZi0B$47" role="nSUat">
+                                      <ref role="3uigEE" to="25x5:~ParseException" resolve="ParseException" />
+                                    </node>
                                   </node>
                                 </node>
-                                <node concept="3clFbS" id="3u6SZi0zCK8" role="TDEfX">
+                                <node concept="3clFbS" id="3u6SZi0By$A" role="1zc67A">
+                                  <node concept="3SKdUt" id="3u6SZi0B_Rz" role="3cqZAp">
+                                    <node concept="1PaTwC" id="ATZLwXonRp" role="1aUNEU">
+                                      <node concept="3oM_SD" id="ATZLwXonRq" role="1PaTwD">
+                                        <property role="3oM_SC" value="date" />
+                                      </node>
+                                      <node concept="3oM_SD" id="ATZLwXonRr" role="1PaTwD">
+                                        <property role="3oM_SC" value="parsing" />
+                                      </node>
+                                      <node concept="3oM_SD" id="ATZLwXonRs" role="1PaTwD">
+                                        <property role="3oM_SC" value="error" />
+                                      </node>
+                                    </node>
+                                  </node>
+                                  <node concept="3cpWs6" id="3u6SZi0BDvF" role="3cqZAp">
+                                    <node concept="10Nm6u" id="3u6SZi0EU4a" role="3cqZAk" />
+                                  </node>
+                                </node>
+                              </node>
+                              <node concept="3uVAMA" id="3u6SZi0zCK5" role="1zxBo5">
+                                <node concept="XOnhg" id="3u6SZi0zCK6" role="1zc67B">
+                                  <property role="3TUv4t" value="false" />
+                                  <property role="TrG5h" value="e" />
+                                  <node concept="nSUau" id="xvs04dIuFv" role="1tU5fm">
+                                    <node concept="3uibUv" id="3u6SZi0zDix" role="nSUat">
+                                      <ref role="3uigEE" to="wyt6:~IndexOutOfBoundsException" resolve="IndexOutOfBoundsException" />
+                                    </node>
+                                  </node>
+                                </node>
+                                <node concept="3clFbS" id="3u6SZi0zCK8" role="1zc67A">
                                   <node concept="3SKdUt" id="3u6SZi0zHBt" role="3cqZAp">
-                                    <node concept="3SKdUq" id="3u6SZi0zIgQ" role="3SKWNk">
-                                      <property role="3SKdUp" value="line parsing error" />
+                                    <node concept="1PaTwC" id="ATZLwXonRt" role="1aUNEU">
+                                      <node concept="3oM_SD" id="ATZLwXonRu" role="1PaTwD">
+                                        <property role="3oM_SC" value="line" />
+                                      </node>
+                                      <node concept="3oM_SD" id="ATZLwXonRv" role="1PaTwD">
+                                        <property role="3oM_SC" value="parsing" />
+                                      </node>
+                                      <node concept="3oM_SD" id="ATZLwXonRw" role="1PaTwD">
+                                        <property role="3oM_SC" value="error" />
+                                      </node>
                                     </node>
                                   </node>
                                   <node concept="3cpWs6" id="3u6SZi0zEcl" role="3cqZAp">
@@ -1546,7 +1574,7 @@
                                 <ref role="3cqZAo" node="3u6SZi0ySWs" resolve="reader" />
                               </node>
                               <node concept="liA8E" id="3u6SZi0yYwv" role="2OqNvi">
-                                <ref role="37wK5l" to="guwi:~BufferedReader.readLine():java.lang.String" resolve="readLine" />
+                                <ref role="37wK5l" to="guwi:~BufferedReader.readLine()" resolve="readLine" />
                               </node>
                             </node>
                             <node concept="37vLTw" id="3u6SZi0yYww" role="37vLTJ">
@@ -1604,29 +1632,35 @@
                   </node>
                 </node>
               </node>
-              <node concept="TDmWw" id="3u6SZi0yBZN" role="TEbGg">
-                <node concept="3clFbS" id="3u6SZi0yBZQ" role="TDEfX">
+              <node concept="3uVAMA" id="3u6SZi0yBZN" role="1zxBo5">
+                <node concept="XOnhg" id="3u6SZi0yBZR" role="1zc67B">
+                  <property role="3TUv4t" value="false" />
+                  <property role="TrG5h" value="e" />
+                  <node concept="nSUau" id="xvs04dIuFx" role="1tU5fm">
+                    <node concept="3uibUv" id="3u6SZi0yBZM" role="nSUat">
+                      <ref role="3uigEE" to="zf81:~MalformedURLException" resolve="MalformedURLException" />
+                    </node>
+                  </node>
+                </node>
+                <node concept="3clFbS" id="3u6SZi0yBZQ" role="1zc67A">
                   <node concept="3cpWs6" id="3u6SZi0yCws" role="3cqZAp">
                     <node concept="10Nm6u" id="3u6SZi0EPEw" role="3cqZAk" />
                   </node>
                 </node>
-                <node concept="3cpWsn" id="3u6SZi0yBZR" role="TDEfY">
+              </node>
+              <node concept="3uVAMA" id="3u6SZi0yBZG" role="1zxBo5">
+                <node concept="XOnhg" id="3u6SZi0yBZK" role="1zc67B">
+                  <property role="3TUv4t" value="false" />
                   <property role="TrG5h" value="e" />
-                  <node concept="3uibUv" id="3u6SZi0yBZM" role="1tU5fm">
-                    <ref role="3uigEE" to="zf81:~MalformedURLException" resolve="MalformedURLException" />
+                  <node concept="nSUau" id="xvs04dIuFz" role="1tU5fm">
+                    <node concept="3uibUv" id="3u6SZi0yBZF" role="nSUat">
+                      <ref role="3uigEE" to="guwi:~IOException" resolve="IOException" />
+                    </node>
                   </node>
                 </node>
-              </node>
-              <node concept="TDmWw" id="3u6SZi0yBZG" role="TEbGg">
-                <node concept="3clFbS" id="3u6SZi0yBZJ" role="TDEfX">
+                <node concept="3clFbS" id="3u6SZi0yBZJ" role="1zc67A">
                   <node concept="3cpWs6" id="3u6SZi0yF29" role="3cqZAp">
                     <node concept="10Nm6u" id="3u6SZi0EO6n" role="3cqZAk" />
-                  </node>
-                </node>
-                <node concept="3cpWsn" id="3u6SZi0yBZK" role="TDEfY">
-                  <property role="TrG5h" value="e" />
-                  <node concept="3uibUv" id="3u6SZi0yBZF" role="1tU5fm">
-                    <ref role="3uigEE" to="guwi:~IOException" resolve="IOException" />
                   </node>
                 </node>
               </node>
@@ -1723,7 +1757,7 @@
                           <ref role="3cqZAo" node="3u6SZi0GElq" resolve="a" />
                         </node>
                         <node concept="liA8E" id="3u6SZi0GElo" role="2OqNvi">
-                          <ref role="37wK5l" to="xlxw:~BigDecimal.add(java.math.BigDecimal):java.math.BigDecimal" resolve="add" />
+                          <ref role="37wK5l" to="xlxw:~BigDecimal.add(java.math.BigDecimal)" resolve="add" />
                           <node concept="37vLTw" id="3u6SZi0GElp" role="37wK5m">
                             <ref role="3cqZAo" node="3u6SZi0GEls" resolve="b" />
                           </node>
@@ -1755,9 +1789,9 @@
                 <ref role="3cqZAo" node="3u6SZi0GEl5" resolve="sum" />
               </node>
               <node concept="liA8E" id="3u6SZi0GJX4" role="2OqNvi">
-                <ref role="37wK5l" to="xlxw:~BigDecimal.divide(java.math.BigDecimal):java.math.BigDecimal" resolve="divide" />
+                <ref role="37wK5l" to="xlxw:~BigDecimal.divide(java.math.BigDecimal)" resolve="divide" />
                 <node concept="2YIFZM" id="3u6SZi0GJX5" role="37wK5m">
-                  <ref role="37wK5l" to="xlxw:~BigDecimal.valueOf(long):java.math.BigDecimal" resolve="valueOf" />
+                  <ref role="37wK5l" to="xlxw:~BigDecimal.valueOf(long)" resolve="valueOf" />
                   <ref role="1Pybhc" to="xlxw:~BigDecimal" resolve="BigDecimal" />
                   <node concept="2OqwBi" id="3u6SZi0GJX6" role="37wK5m">
                     <node concept="37vLTw" id="3u6SZi0GJX7" role="2Oq$k0">
@@ -1793,7 +1827,6 @@
     <node concept="2tJIrI" id="3u6SZi0GsTd" role="jymVt" />
     <node concept="2YIFZL" id="3u6SZi0GtsI" role="jymVt">
       <property role="TrG5h" value="retrievePricesWithin" />
-      <property role="IEkAT" value="false" />
       <property role="DiZV1" value="false" />
       <property role="od$2w" value="false" />
       <node concept="3clFbS" id="3u6SZi0GsTQ" role="3clF47">

@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2014 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,51 +15,28 @@
  */
 package jetbrains.mps.smodel.runtime;
 
-import jetbrains.mps.smodel.adapter.ids.SConceptId;
-import jetbrains.mps.util.annotation.ToRemove;
+import jetbrains.mps.smodel.adapter.ids.SDataTypeId;
 
 import java.util.Collection;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Collections;
 
 /**
  * Base implementation generated code shall use to facilitate future changes in {@link jetbrains.mps.smodel.runtime.StructureAspectDescriptor}.
  */
 public abstract class BaseStructureAspectDescriptor implements StructureAspectDescriptor {
-  private static final Object LOCK = new Object();
 
-  private volatile Map<SConceptId, ConceptDescriptor> myDescriptors;
-
-  public abstract Collection<ConceptDescriptor> getDescriptors();
-
-  @Deprecated
-  @ToRemove(version = 3.4)
-  //this is needed only because in 3.3 there's overriding method with @Override annotation
-  public ConceptDescriptor getDescriptor(String fqName) {
-    throw new UnsupportedOperationException();
+  @Override
+  public DataTypeDescriptor getDataTypeDescriptor(SDataTypeId id) {
+    return getDataTypeDescriptors().stream().filter(it -> it.getId().equals(id)).findFirst().orElse(null);
   }
 
   @Override
-  public ConceptDescriptor getDescriptor(SConceptId id) {
-    ensureInitialized();
-    return myDescriptors.get(id);
+  public Collection<DataTypeDescriptor> getDataTypeDescriptors() {
+    return Collections.emptyList();
   }
 
-  protected void ensureInitialized() {
-    if (myDescriptors != null) {
-      return;
-    }
-    synchronized (LOCK) {
-      if (myDescriptors != null) {
-        return;
-      }
-
-      Collection<ConceptDescriptor> ds = getDescriptors();
-      Map<SConceptId, ConceptDescriptor> descriptors = new ConcurrentHashMap<SConceptId, ConceptDescriptor>(ds.size());
-      for (ConceptDescriptor d : ds) {
-        descriptors.put(d.getId(), d);
-      }
-      myDescriptors = descriptors;
-    }
+  @Override
+  public void reportDependencies(Dependencies deps) {
+    // no-op, subclasses shall override if they got any dependency, and are not obliged to invoke super.
   }
 }

@@ -9,45 +9,45 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1170075670744:jetbrains.mps.baseLanguage.structure.SynchronizedStatement" />
   <root nodeRef="r:9e383f3b-cf02-4e9f-861b-72b030ba5e68(jetbrains.mps.debugger.java.api.evaluation.transform)/4871586248217809898">
     <file name="TransformatorBuilder.java">
-      <node id="4871586248217809912" at="9,0,10,0" concept="4" trace="INSTANCE" />
-      <node id="7494124042451449896" at="10,0,11,0" concept="4" trace="LOCK" />
-      <node id="8321799582438650785" at="13,0,14,0" concept="2" trace="build#(Lorg/jetbrains/mps/openapi/model/SNode;Z)Ljetbrains/mps/debugger/java/api/evaluation/transform/TransformatorBuilder/Transformator;" />
-      <node id="2176810104473232861" at="14,0,15,0" concept="2" trace="getJniSignatureFromType#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
-      <node id="2176810104473232867" at="15,0,16,0" concept="2" trace="getProxyTypeFromType#(Lorg/jetbrains/mps/openapi/model/SNode;)Lorg/jetbrains/mps/openapi/model/SNode;" />
-      <node id="7157912897227122364" at="16,0,17,0" concept="2" trace="init#()V" />
-      <node id="7157912897227122368" at="17,0,18,0" concept="2" trace="dispose#()V" />
-      <node id="7494124042451491863" at="19,25,20,22" concept="3" />
-      <node id="8321799582438650762" at="26,0,27,0" concept="2" trace="transform#()V" />
-      <node id="8321799582438670187" at="27,0,28,0" concept="2" trace="transformEvaluator#()V" />
-      <node id="6778494138741517016" at="29,10,30,42" concept="1" />
-      <node id="4871586248217809900" at="11,0,13,0" concept="0" trace="TransformatorBuilder#()V" />
-      <node id="8321799582438650766" at="24,0,26,0" concept="0" trace="Transformator#()V" />
-      <node id="7494124042451491859" at="18,52,21,5" concept="6" />
-      <node id="4871586248217809907" at="18,0,23,0" concept="5" trace="getInstance#()Ljetbrains/mps/debugger/java/api/evaluation/transform/TransformatorBuilder;" />
-      <scope id="4871586248217809903" at="11,33,11,33" />
-      <scope id="8321799582438650768" at="24,28,24,28" />
-      <scope id="8321799582438650785" at="13,0,14,0">
+      <node id="4871586248217809912" at="11,0,12,0" concept="4" trace="INSTANCE" />
+      <node id="7494124042451449896" at="12,0,13,0" concept="4" trace="LOCK" />
+      <node id="8321799582438650785" at="15,0,16,0" concept="2" trace="build#(Lorg/jetbrains/mps/openapi/model/SNode;Z)Ljetbrains/mps/debugger/java/api/evaluation/transform/TransformatorBuilder/Transformator;" />
+      <node id="2176810104473232861" at="16,0,17,0" concept="2" trace="getJniSignatureFromType#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
+      <node id="2176810104473232867" at="17,0,18,0" concept="2" trace="getProxyTypeFromType#(Lorg/jetbrains/mps/openapi/model/SNode;)Lorg/jetbrains/mps/openapi/model/SNode;" />
+      <node id="7157912897227122364" at="18,0,19,0" concept="2" trace="init#()V" />
+      <node id="7157912897227122368" at="19,0,20,0" concept="2" trace="dispose#()V" />
+      <node id="7494124042451491863" at="21,25,22,22" concept="3" />
+      <node id="8321799582438650762" at="28,0,29,0" concept="2" trace="transform#()V" />
+      <node id="8321799582438670187" at="29,0,30,0" concept="2" trace="transformEvaluator#()V" />
+      <node id="6778494138741517016" at="31,10,32,42" concept="1" />
+      <node id="4871586248217809900" at="13,0,15,0" concept="0" trace="TransformatorBuilder#()V" />
+      <node id="8321799582438650766" at="26,0,28,0" concept="0" trace="Transformator#()V" />
+      <node id="7494124042451491859" at="20,52,23,5" concept="6" />
+      <node id="4871586248217809907" at="20,0,25,0" concept="5" trace="getInstance#()Ljetbrains/mps/debugger/java/api/evaluation/transform/TransformatorBuilder;" />
+      <scope id="4871586248217809903" at="13,33,13,33" />
+      <scope id="8321799582438650768" at="26,28,26,28" />
+      <scope id="8321799582438650785" at="15,0,16,0">
         <var name="insideTransformation" id="8321799582438650792" />
         <var name="node" id="8321799582438650790" />
       </scope>
-      <scope id="2176810104473232861" at="14,0,15,0">
+      <scope id="2176810104473232861" at="16,0,17,0">
         <var name="type" id="2176810104473232865" />
       </scope>
-      <scope id="2176810104473232867" at="15,0,16,0">
+      <scope id="2176810104473232867" at="17,0,18,0">
         <var name="type" id="2176810104473232871" />
       </scope>
-      <scope id="7157912897227122364" at="16,0,17,0" />
-      <scope id="7157912897227122368" at="17,0,18,0" />
-      <scope id="7494124042451491861" at="19,25,20,22" />
-      <scope id="8321799582438650762" at="26,0,27,0" />
-      <scope id="8321799582438670187" at="27,0,28,0" />
-      <scope id="6778494138741515965" at="29,10,30,42" />
-      <scope id="4871586248217809900" at="11,0,13,0" />
-      <scope id="8321799582438650766" at="24,0,26,0" />
-      <scope id="4871586248217809910" at="18,52,21,5" />
-      <scope id="4871586248217809907" at="18,0,23,0" />
-      <unit id="8321799582438650756" at="23,0,29,0" name="jetbrains.mps.debugger.java.api.evaluation.transform.TransformatorBuilder$Transformator" />
-      <unit id="4871586248217809898" at="8,0,33,0" name="jetbrains.mps.debugger.java.api.evaluation.transform.TransformatorBuilder" />
+      <scope id="7157912897227122364" at="18,0,19,0" />
+      <scope id="7157912897227122368" at="19,0,20,0" />
+      <scope id="7494124042451491861" at="21,25,22,22" />
+      <scope id="8321799582438650762" at="28,0,29,0" />
+      <scope id="8321799582438670187" at="29,0,30,0" />
+      <scope id="6778494138741515965" at="31,10,32,42" />
+      <scope id="4871586248217809900" at="13,0,15,0" />
+      <scope id="8321799582438650766" at="26,0,28,0" />
+      <scope id="4871586248217809910" at="20,52,23,5" />
+      <scope id="4871586248217809907" at="20,0,25,0" />
+      <unit id="8321799582438650756" at="25,0,31,0" name="jetbrains.mps.debugger.java.api.evaluation.transform.TransformatorBuilder$Transformator" />
+      <unit id="4871586248217809898" at="9,0,35,0" name="jetbrains.mps.debugger.java.api.evaluation.transform.TransformatorBuilder" />
     </file>
   </root>
 </debug-info>

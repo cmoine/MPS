@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,7 +49,7 @@ public abstract class FilteredScope extends BaseScope {
   }
 
   @Override
-  public SModule resolve(SModuleReference reference) {
+  public SModule resolve(@NotNull SModuleReference reference) {
     SModule module = myScope.resolve(reference);
     if (module != null && acceptModule(module)) {
       return module;
@@ -59,7 +59,7 @@ public abstract class FilteredScope extends BaseScope {
   }
 
   @Override
-  public SModel resolve(SModelReference reference) {
+  public SModel resolve(@NotNull SModelReference reference) {
     SModel model = myScope.resolve(reference);
     if (model != null && acceptModel(model)) {
       return model;
@@ -67,6 +67,8 @@ public abstract class FilteredScope extends BaseScope {
       return null;
     }
   }
+
+  // resolve(SNodeReference) is not overridden as there's no acceptNode and default implementation (goes into resolve(SModelReference)) is fine.
 
   protected abstract boolean acceptModule(SModule module);
 

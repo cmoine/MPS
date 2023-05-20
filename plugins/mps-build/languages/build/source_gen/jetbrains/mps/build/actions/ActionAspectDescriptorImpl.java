@@ -7,8 +7,9 @@ import jetbrains.mps.openapi.actions.descriptor.ActionAspectDescriptor;
 import java.util.Collection;
 import jetbrains.mps.openapi.actions.descriptor.NodeFactory;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import java.util.Arrays;
 import java.util.Collections;
+import jetbrains.mps.openapi.actions.descriptor.PasteWrapper;
+import java.util.Arrays;
 
 public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor implements ActionAspectDescriptor {
   private static final String LANGUAGE_FQ_NAME = "jetbrains.mps.build";
@@ -16,24 +17,24 @@ public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor imple
   @Override
   public Collection<NodeFactory> getFactories(SAbstractConcept concept) {
     if (LANGUAGE_FQ_NAME.equals(concept.getLanguage().getQualifiedName())) {
-      switch (Arrays.binarySearch(stringSwitchCases_tpto26_a0a0a0c, concept.getName())) {
-        case 0:
+      switch (concept.getName()) {
+        case "BuildInputFiles":
           return Collections.<NodeFactory>singletonList(new buildScript_nodeFactories.NodeFactory_1258644073389160421());
-        case 1:
+        case "BuildInputSingleFile":
           return Collections.<NodeFactory>singletonList(new buildScript_nodeFactories.NodeFactory_1258644073389160370());
-        case 2:
+        case "BuildLayout_AbstractCopy":
           return Collections.<NodeFactory>singletonList(new buildScript_nodeFactories.NodeFactory_6977615362526183835());
-        case 3:
+        case "BuildLayout_NamedContainer":
           return Collections.<NodeFactory>singletonList(new buildScript_nodeFactories.NodeFactory_6099797596647438149());
-        case 4:
+        case "BuildMacro":
           return Collections.<NodeFactory>singletonList(new buildScript_nodeFactories.NodeFactory_6099797596647440630());
-        case 5:
+        case "BuildProject":
           return Collections.<NodeFactory>singletonList(new buildScript_nodeFactories.NodeFactory_6099797596647447256());
-        case 6:
+        case "BuildProjectPart":
           return Collections.<NodeFactory>singletonList(new buildScript_nodeFactories.NodeFactory_6099797596647417250());
-        case 7:
+        case "BuildSourceMacroRelativePath":
           return Collections.<NodeFactory>singletonList(new buildScript_nodeFactories.NodeFactory_7389400916848172015());
-        case 8:
+        case "BuildSourceProjectRelativePath":
           return Collections.<NodeFactory>singletonList(new buildScript_nodeFactories.NodeFactory_5481553824944787386());
         default:
       }
@@ -42,8 +43,7 @@ public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor imple
   }
 
   @Override
-  public boolean hasBuilders() {
-    return false;
+  public Collection<PasteWrapper> getPasteWrappers() {
+    return Arrays.asList(new PasteWrapper[]{new wrappers_PasteWrapper_0(), new wrappers_PasteWrapper_1(), new wrappers_PasteWrapper_2(), new wrappers_PasteWrapper_3()});
   }
-  private static String[] stringSwitchCases_tpto26_a0a0a0c = new String[]{"BuildInputFiles", "BuildInputSingleFile", "BuildLayout_AbstractCopy", "BuildLayout_NamedContainer", "BuildMacro", "BuildProject", "BuildProjectPart", "BuildSourceMacroRelativePath", "BuildSourceProjectRelativePath"};
 }

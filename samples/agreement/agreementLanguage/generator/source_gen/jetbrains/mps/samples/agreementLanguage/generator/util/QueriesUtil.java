@@ -4,34 +4,55 @@ package jetbrains.mps.samples.agreementLanguage.generator.util;
 
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SEnumOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
+import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public class QueriesUtil {
   public QueriesUtil() {
   }
   public static boolean isMoney(SNode node) {
-    if (SNodeOperations.isInstanceOf(node, MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db8620dbL, "jetbrains.mps.samples.formulaLanguage.structure.Operation"))) {
-      return isMoney(SLinkOperations.getTarget(SNodeOperations.cast(node, MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db8620dbL, "jetbrains.mps.samples.formulaLanguage.structure.Operation")), MetaAdapterFactory.getContainmentLink(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db8620dbL, 0x102db86e5b3L, "leftOperand")));
+    if (SNodeOperations.isInstanceOf(node, CONCEPTS.Operation$Dj)) {
+      return isMoney(SLinkOperations.getTarget(SNodeOperations.cast(node, CONCEPTS.Operation$Dj), LINKS.leftOperand$mKQu));
     }
-    if (SNodeOperations.isInstanceOf(node, MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102ea8a3c37L, "jetbrains.mps.samples.agreementLanguage.structure.EventVariableReference"))) {
-      SNode eventVariable = SLinkOperations.getTarget(SNodeOperations.cast(node, MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102ea8a3c37L, "jetbrains.mps.samples.agreementLanguage.structure.EventVariableReference")), MetaAdapterFactory.getReferenceLink(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102ea8a3c37L, 0x102ea8aa283L, "eventVariable"));
-      return SPropertyOperations.hasValue(eventVariable, MetaAdapterFactory.getProperty(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dc12643eL, 0x102dc1330d6L, "type"), "Money", "Quantity");
+    if (SNodeOperations.isInstanceOf(node, CONCEPTS.EventVariableReference$13)) {
+      SNode eventVariable = SLinkOperations.getTarget(SNodeOperations.cast(node, CONCEPTS.EventVariableReference$13), LINKS.eventVariable$v2WC);
+      return SEnumOperations.isMember(SPropertyOperations.getEnum(eventVariable, PROPS.type$G5FK), 0x102dc055e26L);
     }
-    if (SNodeOperations.isInstanceOf(node, MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dbf92b68L, "jetbrains.mps.samples.agreementLanguage.structure.Quantity"))) {
-      return SPropertyOperations.hasValue(SNodeOperations.cast(node, MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dbf92b68L, "jetbrains.mps.samples.agreementLanguage.structure.Quantity")), MetaAdapterFactory.getProperty(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dbf92b68L, 0x102dc0c5503L, "unit"), "USD", "USD_KWH");
+    if (SNodeOperations.isInstanceOf(node, CONCEPTS.Quantity$$_)) {
+      return SEnumOperations.isMember(SPropertyOperations.getEnum(SNodeOperations.cast(node, CONCEPTS.Quantity$$_), PROPS.unit$fWoD), 0x102dc0b6d03L);
     }
     return false;
   }
   public static boolean isQuantity(SNode node) {
-    if (SNodeOperations.isInstanceOf(node, MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db8620dbL, "jetbrains.mps.samples.formulaLanguage.structure.Operation"))) {
-      return isQuantity(SLinkOperations.getTarget(SNodeOperations.cast(node, MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db8620dbL, "jetbrains.mps.samples.formulaLanguage.structure.Operation")), MetaAdapterFactory.getContainmentLink(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db8620dbL, 0x102db86e5b3L, "leftOperand")));
+    if (SNodeOperations.isInstanceOf(node, CONCEPTS.Operation$Dj)) {
+      return isQuantity(SLinkOperations.getTarget(SNodeOperations.cast(node, CONCEPTS.Operation$Dj), LINKS.leftOperand$mKQu));
     }
-    if (SNodeOperations.isInstanceOf(node, MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102ea8a3c37L, "jetbrains.mps.samples.agreementLanguage.structure.EventVariableReference"))) {
-      SNode eventVariable = SLinkOperations.getTarget(SNodeOperations.cast(node, MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102ea8a3c37L, "jetbrains.mps.samples.agreementLanguage.structure.EventVariableReference")), MetaAdapterFactory.getReferenceLink(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102ea8a3c37L, 0x102ea8aa283L, "eventVariable"));
-      return SPropertyOperations.hasValue(eventVariable, MetaAdapterFactory.getProperty(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dc12643eL, 0x102dc1330d6L, "type"), "Quantity", "Quantity");
+    if (SNodeOperations.isInstanceOf(node, CONCEPTS.EventVariableReference$13)) {
+      SNode eventVariable = SLinkOperations.getTarget(SNodeOperations.cast(node, CONCEPTS.EventVariableReference$13), LINKS.eventVariable$v2WC);
+      return SEnumOperations.isMember(SPropertyOperations.getEnum(eventVariable, PROPS.type$G5FK), 0x102dc04f5a7L);
     }
-    return SNodeOperations.isInstanceOf(node, MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dbf92b68L, "jetbrains.mps.samples.agreementLanguage.structure.Quantity"));
+    return SNodeOperations.isInstanceOf(node, CONCEPTS.Quantity$$_);
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept Operation$Dj = MetaAdapterFactory.getConcept(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db8620dbL, "jetbrains.mps.samples.formulaLanguage.structure.Operation");
+    /*package*/ static final SConcept EventVariableReference$13 = MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102ea8a3c37L, "jetbrains.mps.samples.agreementLanguage.structure.EventVariableReference");
+    /*package*/ static final SConcept Quantity$$_ = MetaAdapterFactory.getConcept(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dbf92b68L, "jetbrains.mps.samples.agreementLanguage.structure.Quantity");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink leftOperand$mKQu = MetaAdapterFactory.getContainmentLink(0xb1a9bc478a264792L, 0x8b684660c531090aL, 0x102db8620dbL, 0x102db86e5b3L, "leftOperand");
+    /*package*/ static final SReferenceLink eventVariable$v2WC = MetaAdapterFactory.getReferenceLink(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102ea8a3c37L, 0x102ea8aa283L, "eventVariable");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty type$G5FK = MetaAdapterFactory.getProperty(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dc12643eL, 0x102dc1330d6L, "type");
+    /*package*/ static final SProperty unit$fWoD = MetaAdapterFactory.getProperty(0x144f7012c2d543beL, 0xbe2b4bfb7dff6503L, 0x102dbf92b68L, 0x102dc0c5503L, "unit");
   }
 }

@@ -1,29 +1,32 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="BootstrapSolutionsNotMigratedTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
-    <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+  <configuration default="false" name="BootstrapSolutionsNotMigratedTest" type="JUnit" factoryName="JUnit" folderName="Tests from IDEA Project" nameIsGenerated="true">
+    <module name="testbench" />
+    <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="jetbrains.mps.migration.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>
-    <module name="testbench" />
-    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-    <option name="ALTERNATIVE_JRE_PATH" />
     <option name="PACKAGE_NAME" value="jetbrains.mps.migration" />
     <option name="MAIN_CLASS_NAME" value="jetbrains.mps.migration.BootstrapSolutionsNotMigratedTest" />
     <option name="METHOD_NAME" value="" />
     <option name="TEST_OBJECT" value="class" />
-    <option name="VM_PARAMETERS" value="-ea -Xss1024k -Xmx2048m -XX:NewSize=384m -XX:MaxPermSize=256m -XX:+HeapDumpOnOutOfMemoryError -Dmps.junit.project=. -client" />
+    <option name="VM_PARAMETERS" value="-ea -Xmx2048m -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError -client -Dmps.junit.project=. --add-opens=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED" />
     <option name="PARAMETERS" value="" />
-    <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-    <option name="ENV_VARIABLES" />
-    <option name="PASS_PARENT_ENVS" value="true" />
-    <option name="TEST_SEARCH_SCOPE">
-      <value defaultName="singleModule" />
-    </option>
-    <envs />
-    <patterns />
-    <method>
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+      <option name="BuildArtifacts" enabled="true">
+        <artifact name="bootstrap:aspects-feedback" />
+        <artifact name="bootstrap:mps-annotations" />
+        <artifact name="bootstrap:mps-core" />
+        <artifact name="bootstrap:mps-editor" />
+        <artifact name="bootstrap:mps-openapi" />
+        <artifact name="bootstrap:mps-platform" />
+        <artifact name="bootstrap:mps-testbench" />
+        <artifact name="bootstrap:mps-workbench" />
+        <artifact name="mpsdevkit" />
+      </option>
       <option name="AntTarget" enabled="true" antfile="file://$PROJECT_DIR$/testbench/cleanup.xml" target="cleanup" />
     </method>
   </configuration>

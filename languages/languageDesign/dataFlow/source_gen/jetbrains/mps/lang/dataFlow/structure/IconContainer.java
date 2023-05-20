@@ -5,5 +5,5 @@ package jetbrains.mps.lang.dataFlow.structure;
 import jetbrains.mps.smodel.runtime.IconResource;
 
 public class IconContainer {
-  protected static IconResource RESOURCE_a0a0h = new IconResource("dataFlow.png", IconContainer.class);
+  protected static IconResource RESOURCE_a0a3a0a7b0jb = new IconResource("dataFlow.png", IconContainer.class);
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <root nodeRef="r:d3a76066-efb5-4845-b088-1d92be099526(jetbrains.mps.baseLanguage.methodReferences.test.editor@tests)/2448987392437275675">
+    <file name="MethodRef_Complete_Test.java">
+      <node id="2448987392437275675" at="19,36,20,60" concept="5" />
+      <node id="2448987392437275675" at="24,58,25,36" concept="1" />
+      <node id="2448987392437275675" at="30,52,31,19" concept="5" />
+      <node id="2448987392437275675" at="35,51,36,72" concept="1" />
+      <node id="2448987392437288129" at="36,72,37,29" concept="1" />
+      <node id="2448987392437288788" at="37,29,38,23" concept="1" />
+      <node id="2448987392437288800" at="38,23,39,71" concept="1" />
+      <node id="2448987392437288794" at="39,71,40,0" concept="3" />
+      <node id="2448987392437275675" at="16,0,18,0" concept="4" trace="ourParametersCacheExtension" />
+      <node id="2448987392437275675" at="19,0,22,0" concept="0" trace="MethodRef_Complete_Test#()V" />
+      <node id="2448987392437275675" at="30,0,33,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="2448987392437275675" at="23,0,27,0" concept="2" trace="test_MethodRef_Complete#()V" />
+      <node id="2448987392437275675" at="34,0,42,0" concept="2" trace="testMethodImpl#()V" />
+      <scope id="2448987392437275675" at="19,36,20,60" />
+      <scope id="2448987392437275675" at="24,58,25,36" />
+      <scope id="2448987392437275675" at="30,52,31,19" />
+      <scope id="2448987392437275675" at="19,0,22,0" />
+      <scope id="2448987392437275675" at="30,0,33,0">
+        <var name="owner" id="2448987392437275675" />
+      </scope>
+      <scope id="2448987392437275675" at="23,0,27,0" />
+      <scope id="2448987392437275675" at="35,51,40,0" />
+      <scope id="2448987392437275675" at="34,0,42,0" />
+      <unit id="2448987392437275675" at="28,0,43,0" name="jetbrains.mps.baseLanguage.methodReferences.test.editor.MethodRef_Complete_Test$TestBody" />
+      <unit id="2448987392437275675" at="14,0,44,0" name="jetbrains.mps.baseLanguage.methodReferences.test.editor.MethodRef_Complete_Test" />
+    </file>
+  </root>
+</debug-info>
+

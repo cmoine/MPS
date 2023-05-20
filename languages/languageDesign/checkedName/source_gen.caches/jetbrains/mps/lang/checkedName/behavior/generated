@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-c3wz4ltzw1aytq0j64161t3lqwhjv8g" />
+<product version="3" modelHash="1o7vk87505wqur9n20vza5gs3gmv89t">
+  <files names="BehaviorAspectDescriptor.java:ICheckedNamePolicy__BehaviorDescriptor.java:PropertyPointerValueOperation__BehaviorDescriptor.java" />
+</product>
 

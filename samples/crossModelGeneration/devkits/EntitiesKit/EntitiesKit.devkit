@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dev-kit name="EntitiesKit" uuid="c9dad1e0-8583-4973-b65d-a92da714cf5d">
+  <exported-language name="7917ee54-129c-42c6-8b53-ba6a5e718e32(jetbrains.mps.samples.Entities)" />
+  <exported-language name="f3061a53-9226-4cc5-a443-f952ceaf5816(jetbrains.mps.baseLanguage)" />
+  <exported-language name="df345b11-b8c7-4213-ac66-48d2a9b75d88(jetbrains.mps.baseLanguageInternal)" />
+  <exported-solutions>
+    <exported-solution>4975ea05-6f1c-407a-97b4-076c431f3795(Plan)</exported-solution>
+  </exported-solutions>
+  <generation-plan model="r:2542d544-47da-47e7-ad01-9046425af2f3(Plan.generation_plan@genplan)" />
+</dev-kit>
+

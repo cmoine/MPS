@@ -5,12 +5,9 @@ package BHL2.behavior;
 import jetbrains.mps.core.aspects.behaviour.BaseBHDescriptor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.core.aspects.behaviour.api.BehaviorRegistry;
-import jetbrains.mps.smodel.language.ConceptRegistry;
 import jetbrains.mps.core.aspects.behaviour.api.SMethod;
 import jetbrains.mps.core.aspects.behaviour.SMethodBuilder;
 import jetbrains.mps.core.aspects.behaviour.SJavaCompoundTypeImpl;
-import jetbrains.mps.core.aspects.behaviour.SModifiersImpl;
 import jetbrains.mps.core.aspects.behaviour.AccessPrivileges;
 import java.util.List;
 import java.util.Arrays;
@@ -23,12 +20,11 @@ import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
 
 public final class A__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0xd9c7536e76b5498fL, 0x80640955dd8aebcbL, 0x6ab2e61d35e45c5dL, "BHL2.structure.A");
-  private static final BehaviorRegistry REGISTRY = ConceptRegistry.getInstance().getBehaviorRegistry();
 
-  public static final SMethod<Object> nonVirtual_id7zO8mNAVlna = new SMethodBuilder<Object>(new SJavaCompoundTypeImpl(Object.class)).name("nonVirtual").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("7zO8mNAVlna").registry(REGISTRY).build();
-  public static final SMethod<Object> foo_id6EMTxOPT5LT = new SMethodBuilder<Object>(new SJavaCompoundTypeImpl(Object.class)).name("foo").modifiers(SModifiersImpl.create(8, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("6EMTxOPT5LT").registry(REGISTRY).build();
-  public static final SMethod<Object> foo2_id4hDSxB1Zrx8 = new SMethodBuilder<Object>(new SJavaCompoundTypeImpl(Object.class)).name("foo2").modifiers(SModifiersImpl.create(8, AccessPrivileges.PROTECTED)).concept(CONCEPT).id("4hDSxB1Zrx8").registry(REGISTRY).build();
-  public static final SMethod<Void> testCommentGeneration_id1eK5xBtRrre = new SMethodBuilder<Void>(new SJavaCompoundTypeImpl(Void.class)).name("testCommentGeneration").modifiers(SModifiersImpl.create(0, AccessPrivileges.PUBLIC)).concept(CONCEPT).id("1eK5xBtRrre").registry(REGISTRY).build();
+  public static final SMethod<Object> nonVirtual_id7zO8mNAVlna = new SMethodBuilder<Object>(new SJavaCompoundTypeImpl(Object.class)).name("nonVirtual").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(8715627930483250634L).languageId(0x80640955dd8aebcbL, 0xd9c7536e76b5498fL).build2();
+  public static final SMethod<Object> foo_id6EMTxOPT5LT = new SMethodBuilder<Object>(new SJavaCompoundTypeImpl(Object.class)).name("foo").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(7688460527007456377L).languageId(0x80640955dd8aebcbL, 0xd9c7536e76b5498fL).build2();
+  public static final SMethod<Object> foo2_id4hDSxB1Zrx8 = new SMethodBuilder<Object>(new SJavaCompoundTypeImpl(Object.class)).name("foo2").modifiers(8, AccessPrivileges.PROTECTED).concept(CONCEPT).baseMethodId(4929719867390408776L).languageId(0x80640955dd8aebcbL, 0xd9c7536e76b5498fL).build2();
+  public static final SMethod<Void> testCommentGeneration_id1eK5xBtRrre = new SMethodBuilder<Void>(new SJavaCompoundTypeImpl(Void.class)).name("testCommentGeneration").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(1418658182973994702L).languageId(0x80640955dd8aebcbL, 0xd9c7536e76b5498fL).build2();
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(nonVirtual_id7zO8mNAVlna, foo_id6EMTxOPT5LT, foo2_id4hDSxB1Zrx8, testCommentGeneration_id1eK5xBtRrre);
 
@@ -48,7 +44,6 @@ public final class A__BehaviorDescriptor extends BaseBHDescriptor {
   }
 
   /*package*/ A__BehaviorDescriptor() {
-    super(REGISTRY);
   }
 
   @Override

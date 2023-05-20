@@ -34,7 +34,7 @@ import java.util.Set;
 public class KeyMapImpl implements KeyMap {
   private boolean myApplicableToEveryModel = false;
   private List<KeyMap> myChildKeyMaps;
-  private HashMap<ActionKey, KeyMapAction> myActionMap = new HashMap<ActionKey, KeyMapAction>();
+  private HashMap<ActionKey, KeyMapAction> myActionMap = new HashMap<>();
   private List<Pair<ActionKey, KeyMapAction>> myDuplicatedActionList;
 
   @Override
@@ -49,7 +49,7 @@ public class KeyMapImpl implements KeyMap {
   @Override
   public void addKeyMap(KeyMap keyMap) {
     if (myChildKeyMaps == null) {
-      myChildKeyMaps = new LinkedList<KeyMap>();
+      myChildKeyMaps = new LinkedList<>();
     }
     myChildKeyMaps.add(keyMap);
   }
@@ -62,15 +62,15 @@ public class KeyMapImpl implements KeyMap {
       myActionMap.put(key, action);
     } else {
       if (myDuplicatedActionList == null) {
-        myDuplicatedActionList = new LinkedList<Pair<ActionKey, KeyMapAction>>();
+        myDuplicatedActionList = new LinkedList<>();
       }
-      myDuplicatedActionList.add(new Pair<ActionKey, KeyMapAction>(key, action));
+      myDuplicatedActionList.add(new Pair<>(key, action));
     }
   }
 
   @Override
   public Collection<KeyMapAction> getActions(Collection<ActionKey> keys) {
-    return getActions(keys, new ArrayList<KeyMapAction>());
+    return getActions(keys, new ArrayList<>());
   }
 
   private Collection<KeyMapAction> getActions(Collection<KeyMap.ActionKey> keys, Collection<KeyMapAction> result) {
@@ -102,7 +102,7 @@ public class KeyMapImpl implements KeyMap {
 
   @Override
   public Collection<KeyMapAction> getAllActions() {
-    return getAllActions(new ArrayList<KeyMapAction>());
+    return getAllActions(new ArrayList<>());
   }
 
   private Collection<KeyMapAction> getAllActions(Collection<KeyMapAction> result) {
@@ -126,7 +126,7 @@ public class KeyMapImpl implements KeyMap {
 
   @Override
   public Collection<ActionKey> getActionKeys() {
-    return getActionKeys(new HashSet<ActionKey>());
+    return getActionKeys(new HashSet<>());
   }
 
   private Collection<ActionKey> getActionKeys(Set<ActionKey> result) {

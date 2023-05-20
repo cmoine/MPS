@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="3ywx7q9qys24f43ago5eiay60nvpjiy" />
+<product version="3" modelHash="90lhgd4rj5xjpd1s1g79zjcolxvm5pw">
+  <files names="TypesystemDescriptor.java:typeof_InputFieldReference_InferenceRule.java" />
+</product>
 

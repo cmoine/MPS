@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="8f99v8bb17tamvpg0r4anvlgrxzpzmx">
+  <files names="Default_KeymapChanges.java:GoToTypeErrorGroup_ActionGroup.java:GoToTypeErrorHelper.java:GoToTypeErrorRule_Action.java:GoToTypeErrorRule_InGroup_Action.java:HighlightSuppressor_Action.java:InternalTypeSystemActions_ActionGroup.java:PluginSolution_ApplicationPlugin.java:ShowExpectedType_Action.java:ShowRulesWhichAffectNodeType_Action.java:TypesystemActions_Devkit_ActionGroup.java" />
+</product>
+

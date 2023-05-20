@@ -2,7 +2,7 @@
 <model ref="r:69c80171-1c29-4a65-a4dd-6ac282fe55ff(jetbrains.mps.samples.multipleProjections.stateMachine.behavior)">
   <persistence version="9" />
   <languages>
-    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="0" />
+    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="2" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -43,9 +43,12 @@
       <concept id="1146644602865" name="jetbrains.mps.baseLanguage.structure.PublicVisibility" flags="nn" index="3Tm1VV" />
     </language>
     <language id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel">
+      <concept id="1177026924588" name="jetbrains.mps.lang.smodel.structure.RefConcept_Reference" flags="nn" index="chp4Y">
+        <reference id="1177026940964" name="conceptDeclaration" index="cht4Q" />
+      </concept>
       <concept id="2396822768958367367" name="jetbrains.mps.lang.smodel.structure.AbstractTypeCastExpression" flags="nn" index="$5XWr">
-        <reference id="6733348108486823428" name="concept" index="1m5ApE" />
         <child id="6733348108486823193" name="leftExpression" index="1m5AlR" />
+        <child id="3906496115198199033" name="conceptArgument" index="3oSUPX" />
       </concept>
       <concept id="1139613262185" name="jetbrains.mps.lang.smodel.structure.Node_GetParentOperation" flags="nn" index="1mfA1w" />
       <concept id="1140137987495" name="jetbrains.mps.lang.smodel.structure.SNodeTypeCastExpression" flags="nn" index="1PxgMI">
@@ -73,10 +76,12 @@
         <node concept="3clFbF" id="6SYFRDkTQW1" role="3cqZAp">
           <node concept="1PxgMI" id="6SYFRDkTQW8" role="3clFbG">
             <property role="1BlNFB" value="true" />
-            <ref role="1m5ApE" to="owg1:EpZY78hmIx" resolve="StateMachine" />
             <node concept="2OqwBi" id="6SYFRDkTQW3" role="1m5AlR">
               <node concept="13iPFW" id="6SYFRDkTQW2" role="2Oq$k0" />
               <node concept="1mfA1w" id="6SYFRDkTQW7" role="2OqNvi" />
+            </node>
+            <node concept="chp4Y" id="714IaVdGYtm" role="3oSUPX">
+              <ref role="cht4Q" to="owg1:EpZY78hmIx" resolve="StateMachine" />
             </node>
           </node>
         </node>

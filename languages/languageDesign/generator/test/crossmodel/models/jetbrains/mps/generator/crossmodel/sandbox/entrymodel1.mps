@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model ref="r:05c2f926-57b0-4b6d-930c-1aabb187694d(jetbrains.mps.generator.crossmodel.sandbox.entrymodel1)">
   <persistence version="9" />
+  <attribute name="doNotGenerate" value="true" />
   <languages>
     <use id="4d14758c-3ecb-486d-b8c8-ea5beb8ae408" name="jetbrains.mps.generator.test.crossmodel.entity" version="0" />
   </languages>
@@ -8,7 +9,6 @@
   <registry>
     <language id="4d14758c-3ecb-486d-b8c8-ea5beb8ae408" name="jetbrains.mps.generator.test.crossmodel.entity">
       <concept id="4355167635271935478" name="jetbrains.mps.generator.test.crossmodel.entity.structure.Entry" flags="ng" index="21QsKl">
-        <property id="4355167635271953278" name="kind" index="21Qgat" />
         <reference id="3003826652066045294" name="owner" index="3U$e42" />
       </concept>
       <concept id="4355167635271935075" name="jetbrains.mps.generator.test.crossmodel.entity.structure.NodeA" flags="ng" index="21QsQ0">
@@ -25,12 +25,10 @@
     <property role="TrG5h" value="First" />
     <node concept="21QsKl" id="3LKEueXERiT" role="21Qgav">
       <property role="TrG5h" value="EntryOne" />
-      <property role="21Qgat" value="1" />
       <ref role="3U$e42" node="3LKEueXERi5" resolve="First" />
     </node>
     <node concept="21QsKl" id="3LKEueXERiV" role="21Qgav">
       <property role="TrG5h" value="EntryTwo" />
-      <property role="21Qgat" value="1" />
       <ref role="3U$e42" node="3LKEueXERi5" resolve="First" />
     </node>
   </node>

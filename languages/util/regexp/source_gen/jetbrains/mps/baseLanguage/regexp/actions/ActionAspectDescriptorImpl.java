@@ -7,7 +7,6 @@ import jetbrains.mps.openapi.actions.descriptor.ActionAspectDescriptor;
 import java.util.Collection;
 import jetbrains.mps.openapi.actions.descriptor.NodeFactory;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor implements ActionAspectDescriptor {
@@ -16,20 +15,20 @@ public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor imple
   @Override
   public Collection<NodeFactory> getFactories(SAbstractConcept concept) {
     if (LANGUAGE_FQ_NAME.equals(concept.getLanguage().getQualifiedName())) {
-      switch (Arrays.binarySearch(stringSwitchCases_tpto26_a0a0a0c, concept.getName())) {
-        case 0:
+      switch (concept.getName()) {
+        case "LookRegexp":
           return Collections.<NodeFactory>singletonList(new regexps_node_factories.NodeFactory_8786899561263173301());
-        case 1:
+        case "MatchParensRegexp":
           return Collections.<NodeFactory>singletonList(new regexps_node_factories.NodeFactory_3050481019131578337());
-        case 2:
+        case "OrRegexp":
           return Collections.<NodeFactory>singletonList(new regexps_node_factories.NodeFactory_1353467374625228627());
-        case 3:
+        case "ParensRegexp":
           return Collections.<NodeFactory>singletonList(new regexps_node_factories.NodeFactory_6799940379547316574());
-        case 4:
+        case "RegexpUsingConstruction":
           return Collections.<NodeFactory>singletonList(new regexps_node_factories.NodeFactory_7048923897762413188());
-        case 5:
+        case "SymbolClassRegexp":
           return Collections.<NodeFactory>singletonList(new regexps_node_factories.NodeFactory_4759120547780396753());
-        case 6:
+        case "UnaryRegexp":
           return Collections.<NodeFactory>singletonList(new regexps_node_factories.NodeFactory_6799940379546646404());
         default:
       }
@@ -37,9 +36,4 @@ public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor imple
     return Collections.<NodeFactory>emptyList();
   }
 
-  @Override
-  public boolean hasBuilders() {
-    return false;
-  }
-  private static String[] stringSwitchCases_tpto26_a0a0a0c = new String[]{"LookRegexp", "MatchParensRegexp", "OrRegexp", "ParensRegexp", "RegexpUsingConstruction", "SymbolClassRegexp", "UnaryRegexp"};
 }

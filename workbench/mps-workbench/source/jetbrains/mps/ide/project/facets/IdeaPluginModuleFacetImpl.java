@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,35 +17,32 @@ package jetbrains.mps.ide.project.facets;
 
 import com.intellij.ide.plugins.IdeaPluginDescriptor;
 import com.intellij.ide.plugins.PluginManager;
+import com.intellij.ide.plugins.PluginManagerCore;
 import com.intellij.openapi.extensions.PluginId;
 import jetbrains.mps.classloading.IdeaPluginModuleFacet;
 import jetbrains.mps.extapi.module.ModuleFacetBase;
-import jetbrains.mps.project.Solution;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.module.SModule;
 import org.jetbrains.mps.openapi.persistence.Memento;
 
 /**
+ * @deprecated Remove once no uses in MPS code. It's our own implementation, nobody shall care.
+ *             Need to deal with {@code IdeaPluginModuleFacetTab} first
+ *             Keep this class for one release and remove once 2022.3 is out, just in case there's direct instantiation of the class.
+ *             For MPS itself, it's sufficient to go on with DumbIdeaPluginFacet (for another release or two, until
+ *             ideaPlugin facet is complete history)
+ *
  * IMPLEMENTATION NOTE: due to the need to keep actual facet intact (idea plugin facet shall answer
  * old id for classloading purposes), facet keeps both value, the one for classloading, and another for serialization.
  * evgeny, 2/28/13
  */
+@Deprecated(since = "2022.3", forRemoval = true)
 public class IdeaPluginModuleFacetImpl extends ModuleFacetBase implements IdeaPluginModuleFacet {
   private String myClassloadPluginId;
   private String myPersistencePluginId;
 
-  public IdeaPluginModuleFacetImpl() {
-    super(FACET_TYPE);
-  }
-
-  @Override
-  public String getFacetPresentation() {
-    return "Idea Plugin";
-  }
-
-  @Override
-  public boolean setModule(SModule module) {
-    return module instanceof Solution && super.setModule(module);
+  public IdeaPluginModuleFacetImpl(SModule module) {
+    super(FACET_TYPE, module);
   }
 
   @Override
@@ -61,19 +58,23 @@ public class IdeaPluginModuleFacetImpl extends ModuleFacetBase implements IdeaPl
   }
 
   @Override
-  public void save(Memento memento) {
+  public void save(@NotNull Memento memento) {
     memento.put("pluginId", myPersistencePluginId);
   }
 
   @Override
-  public void load(Memento memento) {
-    checkNotRegistered();
+  public void load(@NotNull Memento memento) {
     myClassloadPluginId = myPersistencePluginId = memento.get("pluginId");
   }
 
   @Override
   public boolean isValid() {
-    return getPluginId() != null && PluginManager.getPlugin(PluginId.getId(getPluginId())) != null;
+    String pluginId = getPluginId();
+    if (pluginId == null) {
+      return false;
+    }
+    IdeaPluginDescriptor plugin = PluginManagerCore.getPlugin(PluginId.getId(pluginId));
+    return plugin != null && plugin.isEnabled();
   }
 
   @NotNull

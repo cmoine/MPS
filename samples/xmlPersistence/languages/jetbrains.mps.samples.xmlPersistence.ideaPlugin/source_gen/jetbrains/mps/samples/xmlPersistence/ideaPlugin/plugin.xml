@@ -2,11 +2,12 @@
 <idea-plugin xmlns:xi="http://www.w3.org/2001/XInclude">
   <id>jetbrains.mps.samples.xmlPersistence</id>
   <name>Sample XML Persistence</name>
-  <description>
-      Sample persistence of MPS models into xml files</description>
+  <description>    
+    Sample persistence of MPS models into xml files
+  </description>
   <version>1.0</version>
   <vendor url="http://www.jetbrains.com/mps/">JetBrains</vendor>
-  <idea-version since-build="143.1" until-build="163.1" />
+  <idea-version since-build="193.1" />
   
   <depends>jetbrains.mps.core</depends>
   

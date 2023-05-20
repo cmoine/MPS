@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2016 JetBrains s.r.o.
+ * Copyright 2003-2022 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,17 +22,15 @@ import com.intellij.openapi.project.Project;
 import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.progress.EmptyProgressMonitor;
 import jetbrains.mps.smodel.ModelAccessHelper;
-import jetbrains.mps.util.Computable;
 import jetbrains.mps.util.ConditionalIterable;
 import jetbrains.mps.util.IterableUtil;
-import jetbrains.mps.workbench.goTo.navigation.GotoNavigationUtil;
+import jetbrains.mps.workbench.NavigationService;
 import jetbrains.mps.workbench.goTo.navigation.RootNodeElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.mps.openapi.model.SModelReference;
 import org.jetbrains.mps.openapi.module.SearchScope;
 import org.jetbrains.mps.openapi.persistence.NavigationParticipant.NavigationTarget;
-import org.jetbrains.mps.openapi.persistence.NavigationParticipant.TargetKind;
 import org.jetbrains.mps.util.Condition;
 
 import java.util.Arrays;
@@ -60,28 +58,21 @@ public class MPSIdeaGotoClassContributor implements GotoClassContributor {
   @Override
   public NavigationItem[] getItemsByName(String name, String pattern, Project project, boolean includeNonProjectItems) {
     jetbrains.mps.project.Project mpsProject = ProjectHelper.fromIdeaProject(project);
-    if (mpsProject == null) {
+    final NavigationService navigationService = project.getService(NavigationService.class);
+    if (mpsProject == null || navigationService == null) {
       return NavigationItem.EMPTY_NAVIGATION_ITEM_ARRAY;
     }
 
-    SearchScope scope = includeNonProjectItems ? new ProperModelsGlobalSearchScope() : new ProperModelsProjectSearchScope(project);
-    Condition<NavigationItem> rightName = new Condition<NavigationItem>() {
-      @Override
-      public boolean met(NavigationItem item) {
-        return name.equals(item.getName());
+    SearchScope scope = includeNonProjectItems ? new ProperModelsGlobalSearchScope(mpsProject.getRepository()) : new ProperModelsProjectSearchScope(project);
+    Condition<NavigationItem> rightName = item -> name.equals(item.getName());
+    List<NavigationItem> items = new ModelAccessHelper(mpsProject.getModelAccess()).runReadAction(() -> {
+      Collection<NavigationTarget> targets = navigationService.getNavigationRoots(scope, new EmptyProgressMonitor());
+      NavigationItem[] items1 = new NavigationItem[targets.size()];
+      int i = 0;
+      for (NavigationTarget target : targets) {
+        items1[i++] = new RootNodeElement(mpsProject, target);
       }
-    };
-    List<NavigationItem> items = new ModelAccessHelper(mpsProject.getModelAccess()).runReadAction(new Computable<List<NavigationItem>>() {
-      @Override
-      public List<NavigationItem> compute() {
-        Collection<NavigationTarget> targets = GotoNavigationUtil.getNavigationTargets(TargetKind.ROOT, scope, new EmptyProgressMonitor());
-        NavigationItem[] items = new NavigationItem[targets.size()];
-        int i = 0;
-        for (NavigationTarget target : targets) {
-          items[i++] = new RootNodeElement(mpsProject, target);
-        }
-        return Arrays.asList(items);
-      }
+      return Arrays.asList(items1);
     });
 
     Iterable<NavigationItem> itemsFilteredByName = name == null ? items : new ConditionalIterable<>(items, rightName);

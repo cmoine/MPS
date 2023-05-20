@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="4a2qujul8smgqlj0ts7pp802xi8bzh7" />
+<product version="3" modelHash="-58vowxgecmjxcodm40prbgue01r112m">
+  <files names="BehaviorAspectDescriptor.java:DecisionTable__BehaviorDescriptor.java" />
+</product>
 

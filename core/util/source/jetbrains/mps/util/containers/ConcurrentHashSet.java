@@ -27,11 +27,11 @@ public class ConcurrentHashSet<K> implements Set<K> {
   private final ConcurrentMap<K, Boolean> map;
 
   public ConcurrentHashSet(int initialCapacity) {
-    map = new ConcurrentHashMap<K, Boolean>(initialCapacity);
+    map = new ConcurrentHashMap<>(initialCapacity);
   }
 
   public ConcurrentHashSet() {
-    map = new ConcurrentHashMap<K, Boolean>();
+    map = new ConcurrentHashMap<>();
   }
 
   @Override
@@ -78,12 +78,12 @@ public class ConcurrentHashSet<K> implements Set<K> {
   }
 
   @Override
-  public boolean containsAll(Collection<?> c) {
+  public boolean containsAll(@NotNull Collection<?> c) {
     return map.keySet().containsAll(c);
   }
 
   @Override
-  public boolean addAll(Collection<? extends K> c) {
+  public boolean addAll(@NotNull Collection<? extends K> c) {
     boolean ret = false;
     for (K o : c) {
       ret |= add(o);
@@ -93,12 +93,12 @@ public class ConcurrentHashSet<K> implements Set<K> {
   }
 
   @Override
-  public boolean retainAll(Collection<?> c) {
+  public boolean retainAll(@NotNull Collection<?> c) {
     return map.keySet().retainAll(c);
   }
 
   @Override
-  public boolean removeAll(Collection<?> c) {
+  public boolean removeAll(@NotNull Collection<?> c) {
     return map.keySet().removeAll(c);
   }
 

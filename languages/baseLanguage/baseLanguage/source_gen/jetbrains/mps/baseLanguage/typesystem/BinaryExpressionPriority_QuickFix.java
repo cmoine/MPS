@@ -6,8 +6,9 @@ import jetbrains.mps.errors.QuickFix_Runtime;
 import jetbrains.mps.smodel.SNodePointer;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.baseLanguage.behavior.ParenthesisUtil;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class BinaryExpressionPriority_QuickFix extends QuickFix_Runtime {
   public BinaryExpressionPriority_QuickFix() {
@@ -17,10 +18,15 @@ public class BinaryExpressionPriority_QuickFix extends QuickFix_Runtime {
     return "Fix syntax tree operation priorities.";
   }
   public void execute(SNode node) {
-    if (SLinkOperations.getTarget(((SNode) BinaryExpressionPriority_QuickFix.this.getField("parent")[0]), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfbdeb6fecfL, 0xfbdeb7a11cL, "leftExpression")) == ((SNode) BinaryExpressionPriority_QuickFix.this.getField("child")[0])) {
+    if (SLinkOperations.getTarget(((SNode) BinaryExpressionPriority_QuickFix.this.getField("parent")[0]), LINKS.leftExpression$sEj) == ((SNode) BinaryExpressionPriority_QuickFix.this.getField("child")[0])) {
       ParenthesisUtil.rotateTree(((SNode) BinaryExpressionPriority_QuickFix.this.getField("child")[0]), ((SNode) BinaryExpressionPriority_QuickFix.this.getField("parent")[0]), false);
-    } else if (SLinkOperations.getTarget(((SNode) BinaryExpressionPriority_QuickFix.this.getField("parent")[0]), MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfbdeb6fecfL, 0xfbdeb7a11bL, "rightExpression")) == ((SNode) BinaryExpressionPriority_QuickFix.this.getField("child")[0])) {
+    } else if (SLinkOperations.getTarget(((SNode) BinaryExpressionPriority_QuickFix.this.getField("parent")[0]), LINKS.rightExpression$nvX) == ((SNode) BinaryExpressionPriority_QuickFix.this.getField("child")[0])) {
       ParenthesisUtil.rotateTree(((SNode) BinaryExpressionPriority_QuickFix.this.getField("child")[0]), ((SNode) BinaryExpressionPriority_QuickFix.this.getField("parent")[0]), true);
     }
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink leftExpression$sEj = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfbdeb6fecfL, 0xfbdeb7a11cL, "leftExpression");
+    /*package*/ static final SContainmentLink rightExpression$nvX = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfbdeb6fecfL, 0xfbdeb7a11bL, "rightExpression");
   }
 }

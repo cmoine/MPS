@@ -23,20 +23,26 @@ import com.intellij.openapi.wm.IdeFrame;
 import com.intellij.openapi.wm.ex.WindowManagerEx;
 import com.intellij.util.ui.UIUtil;
 import jetbrains.mps.ide.project.ProjectHelper;
+import jetbrains.mps.project.MPSProject;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.mps.annotations.Singleton;
 
 import java.awt.Component;
 import java.awt.Window;
 
 /**
  * This class is a sort of hack used to get proper project instance from currently
- * active UI component. It's always better geting proper project instance from the
+ * active UI component. It's always better getting the proper project instance from the
  * context of model command execution.
  * <p/>
- * In over words: avoid using this class!
+ * In other words: avoid using this class!
  */
-class CurrentProjectAccessUtil {
+@Singleton
+public final class CurrentProjectAccessUtil {
+  private CurrentProjectAccessUtil() {
+  }
 
-  static Project getProjectFromUI() {
+  private static Project getProjectFromUI() {
     // This code is for performance reasons
     // The method is called very often, so getting data from DataContext
     // seems to be too time-consuming to use here
@@ -56,8 +62,9 @@ class CurrentProjectAccessUtil {
     return PlatformDataKeys.PROJECT.getData(dataContext);
   }
 
-  static jetbrains.mps.project.Project getMPSProjectFromUI() {
+  @Nullable
+  /*package*/ static MPSProject getMPSProjectFromUI() {
     Project ideaProject = getProjectFromUI();
-    return ideaProject != null ? ProjectHelper.toMPSProject(ideaProject) : null;
+    return ideaProject != null ? ProjectHelper.fromIdeaProject(ideaProject) : null;
   }
 }

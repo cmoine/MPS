@@ -2,8 +2,7 @@
 <model ref="r:f348e313-94f1-424e-9233-5bd41095169e(org.jetbrains.mps.samples.DecisionTable.typesystem)">
   <persistence version="9" />
   <languages>
-    <use id="7a5dda62-9140-4668-ab76-d5ed1746f2b2" name="jetbrains.mps.lang.typesystem" version="0" />
-    <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
+    <devkit ref="00000000-0000-4000-0000-1de82b3a4936(jetbrains.mps.devkit.aspect.typesystem)" />
   </languages>
   <imports>
     <import index="278c" ref="r:885978b0-baca-4eda-8c29-d1384945a64e(org.jetbrains.mps.samples.DecisionTable.structure)" />
@@ -99,7 +98,7 @@
                 <ref role="1YBMHb" node="1Ik8KAj744R" resolve="decisionTable" />
               </node>
               <node concept="3TrEf2" id="1Ik8KAj7n4A" role="2OqNvi">
-                <ref role="3Tt5mk" to="278c:1Ik8KAj6Lm2" />
+                <ref role="3Tt5mk" to="278c:1Ik8KAj6Lm2" resolve="expectedType" />
               </node>
             </node>
             <node concept="1$rogu" id="1Ik8KAj7n4F" role="2OqNvi" />
@@ -116,7 +115,7 @@
             <ref role="1YBMHb" node="1Ik8KAj744R" resolve="decisionTable" />
           </node>
           <node concept="3Tsc0h" id="1Ik8KAj74Yj" role="2OqNvi">
-            <ref role="3TtcxE" to="278c:1Ik8KAj6Lm5" />
+            <ref role="3TtcxE" to="278c:1Ik8KAj6Lm5" resolve="rowHeaders" />
           </node>
         </node>
         <node concept="3clFbS" id="1Ik8KAj74Yd" role="2LFqv$">
@@ -148,7 +147,7 @@
             <ref role="1YBMHb" node="1Ik8KAj744R" resolve="decisionTable" />
           </node>
           <node concept="3Tsc0h" id="1Ik8KAj74YP" role="2OqNvi">
-            <ref role="3TtcxE" to="278c:1Ik8KAj6Lm4" />
+            <ref role="3TtcxE" to="278c:1Ik8KAj6Lm4" resolve="colHeaders" />
           </node>
         </node>
         <node concept="3clFbS" id="1Ik8KAj74YG" role="2LFqv$">
@@ -180,7 +179,7 @@
             <ref role="1YBMHb" node="1Ik8KAj744R" resolve="decisionTable" />
           </node>
           <node concept="3Tsc0h" id="1Ik8KAj74Z4" role="2OqNvi">
-            <ref role="3TtcxE" to="278c:1Ik8KAj6Lm6" />
+            <ref role="3TtcxE" to="278c:1Ik8KAj6Lm6" resolve="resultValues" />
           </node>
         </node>
         <node concept="3clFbS" id="1Ik8KAj74YV" role="2LFqv$">
@@ -212,7 +211,7 @@
                 <ref role="1YBMHb" node="1Ik8KAj744R" resolve="decisionTable" />
               </node>
               <node concept="3TrEf2" id="1Ik8KAj74Zr" role="2OqNvi">
-                <ref role="3Tt5mk" to="278c:1Ik8KAj6Lm3" />
+                <ref role="3Tt5mk" to="278c:1Ik8KAj6Lm3" resolve="defaultValue" />
               </node>
             </node>
           </node>

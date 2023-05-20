@@ -22,7 +22,7 @@ public class BigComplex extends Number {
   }
   @Override
   public boolean equals(Object obj) {
-    if ((obj == null) || !((obj instanceof BigComplex))) {
+    if ((obj == null) || !(obj instanceof BigComplex)) {
       return false;
     }
     BigComplex Cobj = (BigComplex) obj;

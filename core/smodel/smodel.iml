@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+  <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/classes" />
     <output-test url="file://$MODULE_DIR$/testclasses" />
     <exclude-output />
@@ -10,12 +10,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="openapi" exported="" />
-    <orderEntry type="library" name="JDOM" level="project" />
-    <orderEntry type="library" name="Trove" level="project" />
-    <orderEntry type="module" module-name="components" />
     <orderEntry type="module" module-name="logging" exported="" />
     <orderEntry type="module" module-name="mps-annotations" exported="" />
-    <orderEntry type="module" module-name="vfs" exported="" />
     <orderEntry type="module" module-name="util-core" exported="" />
+    <orderEntry type="library" name="gnu.trove" level="project" />
   </component>
 </module>

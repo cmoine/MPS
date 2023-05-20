@@ -1,5 +1,5 @@
 /*
- * Copyright 2003-2011 JetBrains s.r.o.
+ * Copyright 2003-2019 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,8 +26,8 @@ import javax.swing.Icon;
 public class SearchedNodesNodeData extends BaseNodeData {
   public static final String CATEGORY_NAME = "Searched nodes";
 
-  public SearchedNodesNodeData(PathItemRole role) {
-    super(role, CATEGORY_NAME, "", true, false, false);
+  public SearchedNodesNodeData() {
+    super(PathItemRole.ROLE_MAIN_SEARCHED_NODES, CATEGORY_NAME, null, false, false);
   }
 
   public SearchedNodesNodeData(Element element, Project project) throws CantLoadSomethingException {
@@ -35,7 +35,7 @@ public class SearchedNodesNodeData extends BaseNodeData {
   }
 
   @Override
-  public Icon getIcon() {
+  public Icon getIcon(PresentationContext presentationContext) {
     return Actions.SearchedNodes;
   }
 

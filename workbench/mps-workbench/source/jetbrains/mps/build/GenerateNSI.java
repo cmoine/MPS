@@ -25,7 +25,7 @@ import java.lang.String;
 import java.util.*;
 
 public class GenerateNSI {
-  private final List<File> myBaseDirs = new ArrayList<File>();
+  private final List<File> myBaseDirs = new ArrayList<>();
   private final File myCurrentDir;
   private final String myInput;
   private final String myOutput;
@@ -159,7 +159,7 @@ public class GenerateNSI {
   }
 
   private List<File> getAllFiles(File basedir) {
-    return getAllFiles(basedir, new LinkedList<File>());
+    return getAllFiles(basedir, new LinkedList<>());
   }
 
   private List<File> getAllFiles(File dir, List<File> list) {
@@ -176,7 +176,7 @@ public class GenerateNSI {
   }
 
   private ArrayList<File> getAllDirs(File basedir) {
-    return getAllDirs(basedir, new ArrayList<File>());
+    return getAllDirs(basedir, new ArrayList<>());
   }
 
   private ArrayList<File> getAllDirs(File dir, ArrayList<File> list) {

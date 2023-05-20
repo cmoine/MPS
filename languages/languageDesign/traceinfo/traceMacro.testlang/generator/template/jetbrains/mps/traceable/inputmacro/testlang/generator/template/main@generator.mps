@@ -2,8 +2,8 @@
 <model ref="r:75f95d80-1d60-4222-8b1e-a09f089fee3e(jetbrains.mps.traceInfo.tracemacro.testlang.generator.template.main@generator)">
   <persistence version="9" />
   <languages>
-    <use id="b401a680-8325-4110-8fd3-84331ff25bef" name="jetbrains.mps.lang.generator" version="0" />
-    <use id="d7706f63-9be2-479c-a3da-ae92af1e64d5" name="jetbrains.mps.lang.generator.generationContext" version="0" />
+    <use id="b401a680-8325-4110-8fd3-84331ff25bef" name="jetbrains.mps.lang.generator" version="4" />
+    <use id="d7706f63-9be2-479c-a3da-ae92af1e64d5" name="jetbrains.mps.lang.generator.generationContext" version="2" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -109,11 +109,11 @@
         <child id="5169995583184591170" name="smodelAttribute" index="lGtFl" />
       </concept>
       <concept id="3364660638048049750" name="jetbrains.mps.lang.core.structure.PropertyAttribute" flags="ng" index="A9Btg">
-        <property id="1757699476691236117" name="propertyName" index="2qtEX9" />
+        <property id="1757699476691236117" name="name_DebugInfo" index="2qtEX9" />
         <property id="1341860900487648621" name="propertyId" index="P4ACc" />
       </concept>
       <concept id="3364660638048049745" name="jetbrains.mps.lang.core.structure.LinkAttribute" flags="ng" index="A9Btn">
-        <property id="1757699476691236116" name="linkRole" index="2qtEX8" />
+        <property id="1757699476691236116" name="role_DebugInfo" index="2qtEX8" />
         <property id="1341860900488019036" name="linkId" index="P3scX" />
       </concept>
       <concept id="1169194658468" name="jetbrains.mps.lang.core.structure.INamedConcept" flags="ng" index="TrEIO">
@@ -143,7 +143,7 @@
                   <node concept="3clFbF" id="6V1k6Hk$rum" role="3cqZAp">
                     <node concept="2OqwBi" id="6V1k6Hk$run" role="3clFbG">
                       <node concept="3TrEf2" id="6V1k6Hk$ruo" role="2OqNvi">
-                        <ref role="3Tt5mk" to="tp2q:gMGsD4q" />
+                        <ref role="3Tt5mk" to="tp2q:gMGsD4q" resolve="inputSequence" />
                       </node>
                       <node concept="30H73N" id="6V1k6Hk$rup" role="2Oq$k0" />
                     </node>
@@ -159,7 +159,7 @@
                   <node concept="3clFbF" id="6V1k6Hk$ruF" role="3cqZAp">
                     <node concept="2OqwBi" id="6V1k6Hk$ruG" role="3clFbG">
                       <node concept="3TrEf2" id="6V1k6Hk$ruH" role="2OqNvi">
-                        <ref role="3Tt5mk" to="tpee:gMLFqrC" />
+                        <ref role="3Tt5mk" to="tpee:gMLFqrC" resolve="body" />
                       </node>
                       <node concept="30H73N" id="6V1k6Hk$ruI" role="2Oq$k0" />
                     </node>
@@ -184,7 +184,7 @@
                         <node concept="2OqwBi" id="6V1k6Hk$sNr" role="2Oq$k0">
                           <node concept="30H73N" id="6V1k6Hk$sN6" role="2Oq$k0" />
                           <node concept="3TrEf2" id="6V1k6Hk$sNx" role="2OqNvi">
-                            <ref role="3Tt5mk" to="tp2q:gMGsz7L" />
+                            <ref role="3Tt5mk" to="tp2q:gMGsz7L" resolve="variable" />
                           </node>
                         </node>
                         <node concept="3TrcHB" id="6V1k6Hk$sNW" role="2OqNvi">
@@ -203,7 +203,7 @@
                     <node concept="2OqwBi" id="6V1k6Hk$sOP" role="3clFbG">
                       <node concept="30H73N" id="6V1k6Hk$sOw" role="2Oq$k0" />
                       <node concept="3TrEf2" id="6V1k6Hk$sOV" role="2OqNvi">
-                        <ref role="3Tt5mk" to="tp2q:gMGsz7L" />
+                        <ref role="3Tt5mk" to="tp2q:gMGsz7L" resolve="variable" />
                       </node>
                     </node>
                   </node>
@@ -242,7 +242,7 @@
                       </node>
                     </node>
                     <node concept="3TrEf2" id="6V1k6Hk$sQP" role="2OqNvi">
-                      <ref role="3Tt5mk" to="tp2q:gMGsz7L" />
+                      <ref role="3Tt5mk" to="tp2q:gMGsz7L" resolve="variable" />
                     </node>
                   </node>
                 </node>

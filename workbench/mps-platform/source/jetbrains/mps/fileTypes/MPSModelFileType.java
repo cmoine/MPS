@@ -58,12 +58,12 @@ public class MPSModelFileType implements FileType, FileTypeIdentifiableByVirtual
   }
 
   @Override
-  public String getCharset(@NotNull VirtualFile file, byte[] content) {
+  public String getCharset(@NotNull VirtualFile file, @NotNull byte[] content) {
     return null;
   }
 
   @Override
-  public boolean isMyFileType(VirtualFile file) {
+  public boolean isMyFileType(@NotNull VirtualFile file) {
     return file instanceof MPSModelVirtualFile;
   }
 }

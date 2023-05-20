@@ -1,0 +1,8 @@
+<ivy-module version="2.0">
+  <info organisation="org.jetbrains.mps" module="kotlin-compiler"/>
+  <dependencies>
+    <dependency org="org.jetbrains.kotlin" name="kotlin-compiler-standalone-zip" rev="${kotlin.version}">
+      <artifact name="kotlin-compiler" ext="zip"/>
+    </dependency>
+  </dependencies>
+</ivy-module>

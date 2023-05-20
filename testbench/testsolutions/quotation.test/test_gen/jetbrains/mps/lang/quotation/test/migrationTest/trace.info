@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068390468200:jetbrains.mps.baseLanguage.structure.FieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
+  <root nodeRef="r:c0ca7d69-6a8e-4207-889d-76c844df55e0(jetbrains.mps.lang.quotation.test.migrationTest@tests)/7191184120223869377">
+    <file name="EncapsulateModelNodeId.java">
+      <node id="7191184120223869377" at="33,35,34,60" concept="6" />
+      <node id="7191184120223869377" at="38,62,39,36" concept="1" />
+      <node id="7191184120223869377" at="44,52,45,19" concept="6" />
+      <node id="7191184120223869377" at="49,46,50,202" concept="4" />
+      <node id="7191184120223869377" at="53,47,54,202" concept="4" />
+      <node id="7191184120223869377" at="57,51,58,104" concept="4" />
+      <node id="7191184120223869377" at="63,0,64,0" concept="5" trace="TestNode$zF" />
+      <node id="7191184120223869377" at="67,0,68,0" concept="5" trace="nodeToCheck$OBcW" />
+      <node id="7191184120223869377" at="27,0,29,0" concept="5" trace="ourParametersCacheExtension" />
+      <node id="7191184120223869377" at="30,0,32,0" concept="2" trace="myCommandExtension" />
+      <node id="7191184120223869377" at="33,0,36,0" concept="0" trace="EncapsulateModelNodeId#()V" />
+      <node id="7191184120223869377" at="44,0,47,0" concept="0" trace="TestBody#(Ljetbrains/mps/lang/test/runtime/TransformationTest;)V" />
+      <node id="7191184120223869377" at="37,0,41,0" concept="3" trace="test_EncapsulateModelNodeId#()V" />
+      <node id="7191184120223869377" at="48,0,52,0" concept="3" trace="getInputNodes#()Ljava/util/Collection;" />
+      <node id="7191184120223869377" at="52,0,56,0" concept="3" trace="getOutputNodes#()Ljava/util/Collection;" />
+      <node id="7191184120223869377" at="56,0,60,0" concept="3" trace="getMigrationScript#()[Ljetbrains/mps/lang/migration/runtime/base/MigrationScript;" />
+      <scope id="7191184120223869377" at="33,35,34,60" />
+      <scope id="7191184120223869377" at="38,62,39,36" />
+      <scope id="7191184120223869377" at="44,52,45,19" />
+      <scope id="7191184120223869377" at="49,46,50,202" />
+      <scope id="7191184120223869377" at="53,47,54,202" />
+      <scope id="7191184120223869377" at="57,51,58,104" />
+      <scope id="7191184120223869377" at="33,0,36,0" />
+      <scope id="7191184120223869377" at="44,0,47,0">
+        <var name="owner" id="7191184120223869377" />
+      </scope>
+      <scope id="7191184120223869377" at="37,0,41,0" />
+      <scope id="7191184120223869377" at="48,0,52,0" />
+      <scope id="7191184120223869377" at="52,0,56,0" />
+      <scope id="7191184120223869377" at="56,0,60,0" />
+      <unit id="7191184120223869377" at="62,0,65,0" name="jetbrains.mps.lang.quotation.test.migrationTest.EncapsulateModelNodeId$CONCEPTS" />
+      <unit id="7191184120223869377" at="66,0,69,0" name="jetbrains.mps.lang.quotation.test.migrationTest.EncapsulateModelNodeId$LINKS" />
+      <unit id="7191184120223869377" at="42,0,61,0" name="jetbrains.mps.lang.quotation.test.migrationTest.EncapsulateModelNodeId$TestBody" />
+      <unit id="7191184120223869377" at="25,0,70,0" name="jetbrains.mps.lang.quotation.test.migrationTest.EncapsulateModelNodeId" />
+    </file>
+  </root>
+</debug-info>
+

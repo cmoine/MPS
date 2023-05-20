@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-a41zemfa486pr4elmoi24fonkmpron1" />
+<product version="3" modelHash="at60djlfjavd7pn5mueztstuk41ot44">
+  <files names="CheckRootNodesNamingInternalPolicy_MigrationScript.java:DeleteUndeclaredLinksAndProperties_MigrationScript.java:EnumerationMigrationScipts_MigrationScript.java:RefUtil.java:RemoveBackslashesFromIconPath_MigrationScript.java:ScriptsDescriptor.java" />
+</product>
 

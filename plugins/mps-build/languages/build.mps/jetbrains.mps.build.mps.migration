@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model ref="r:b6980060-3c1e-4cda-997e-b486908a180c(migrationData)">
+  <persistence version="9" />
+  <languages />
+  <imports>
+    <import index="kdzh" ref="r:0353b795-df17-4050-9687-ee47eeb7094f(jetbrains.mps.build.mps.structure)" implicit="true" />
+    <import index="bb3p" ref="r:589e3942-2f2d-42a2-9312-986a1d3e2f7f(jetbrains.mps.build.mps.editor)" implicit="true" />
+  </imports>
+  <registry>
+    <language id="18bc6592-03a6-4e29-a83a-7ff23bde13ba" name="jetbrains.mps.lang.editor">
+      <concept id="3017733173184487099" name="jetbrains.mps.lang.editor.structure.SmartRefMigrationDataEntity" flags="ng" index="ZsZFI">
+        <reference id="3017733173184487105" name="generatedMenu" index="ZsZEk" />
+        <reference id="3017733173184487102" name="conceptNode" index="ZsZFF" />
+      </concept>
+      <concept id="3017733173184487098" name="jetbrains.mps.lang.editor.structure.SmartRefMigrationData" flags="ng" index="ZsZFJ">
+        <child id="3017733173184487121" name="entities" index="ZsZE4" />
+      </concept>
+    </language>
+    <language id="9882f4ad-1955-46fe-8269-94189e5dbbf2" name="jetbrains.mps.lang.migration.util">
+      <concept id="7417095922908669705" name="jetbrains.mps.lang.migration.util.structure.StepData" flags="ng" index="2z5JpS">
+        <property id="1973338949477451252" name="script" index="3qqn2_" />
+        <child id="7417095922908725798" name="data" index="2z5Xdn" />
+      </concept>
+    </language>
+  </registry>
+  <node concept="2z5JpS" id="47y0FrqhJzc">
+    <property role="3qqn2_" value="18bc6592-03a6-4e29-a83a-7ff23bde13ba(jetbrains.mps.lang.editor)/8" />
+    <node concept="ZsZFJ" id="47y0FrqhJx_" role="2z5Xdn">
+      <node concept="ZsZFI" id="47y0FrqhJyo" role="ZsZE4">
+        <ref role="ZsZFF" to="kdzh:5HVSRHdUrJs" resolve="BuildMps_IdeaPluginModule" />
+        <ref role="ZsZEk" to="bb3p:47y0FrqhJyi" resolve="BuildMps_IdeaPluginModule_SmartReference" />
+      </node>
+      <node concept="ZsZFI" id="47y0FrqhJzb" role="ZsZE4">
+        <ref role="ZsZFF" to="kdzh:5HVSRHdUL81" resolve="BuildMps_IdeaPluginGroup" />
+        <ref role="ZsZEk" to="bb3p:47y0FrqhJz5" resolve="BuildMps_IdeaPluginGroup_SmartReference" />
+      </node>
+    </node>
+  </node>
+</model>
+
