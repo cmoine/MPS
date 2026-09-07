@@ -48,6 +48,7 @@ public abstract class AbstractHierarchyViewState {
   protected AbstractHierarchyTree myHierarchyTree;
   protected RootPanel myComponent;
   private OccurenceNavigatorSupport myOccurenceNavigator;
+  private boolean myDisposed;
 
   public AbstractHierarchyViewState(Project project, BaseTool tool) {
     this.project = project;
@@ -63,11 +64,14 @@ public abstract class AbstractHierarchyViewState {
   }
 
   public void disposeHierarchyTool() {
+    myDisposed = true;
     if (myHierarchyTree == null) {
       return;
     }
     myHierarchyTree.dispose();
     myHierarchyTree = null;
+    myComponent = null;
+    myOccurenceNavigator = null;
   }
 
   private void createToolLazy() {
@@ -252,6 +256,9 @@ public abstract class AbstractHierarchyViewState {
   }
 
   public final JComponent getComponent() {
+    if (myDisposed) {
+      return myComponent;
+    }
     if (myComponent == null) {
       createToolLazy();
     }

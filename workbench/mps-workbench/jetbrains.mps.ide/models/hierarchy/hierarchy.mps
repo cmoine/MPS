@@ -6,6 +6,8 @@
     <use id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel" version="19" />
     <use id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage" version="12" />
     <use id="69b8a993-9b87-4d96-bf0c-3559f4bb0c63" name="jetbrains.mps.lang.slanguage" version="-1" />
+    <use id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior" version="2" />
+    <use id="446c26eb-2b7b-4bf0-9b35-f83fa582753e" name="jetbrains.mps.lang.modelapi" version="0" />
     <devkit ref="fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)" />
   </languages>
   <imports>
@@ -67,7 +69,7 @@
     <import index="yyf4" ref="8865b7a8-5271-43d3-884c-6fd1d9cfdd34/java:org.jetbrains.mps.openapi.util(MPS.OpenAPI/)" />
     <import index="ouby" ref="498d89d2-c2e9-11e2-ad49-6cf049e62fe5/java:com.intellij.ui.tree(MPS.IDEA/)" />
     <import index="alof" ref="742f6602-5a2f-4313-aa6e-ae1cd4ffdc61/java:jetbrains.mps.ide.project(MPS.Platform/)" />
-    <import index="tpcu" ref="r:00000000-0000-4000-0000-011c89590282(jetbrains.mps.lang.core.behavior)" implicit="true" />
+    <import index="tpcu" ref="r:00000000-0000-4000-0000-011c89590282(jetbrains.mps.lang.core.behavior)" />
   </imports>
   <registry>
     <language id="af65afd8-f0dd-4942-87d9-63a55f2a9db1" name="jetbrains.mps.lang.behavior">
@@ -629,6 +631,11 @@
         <ref role="3uigEE" to="ddhc:~OccurenceNavigatorSupport" resolve="OccurenceNavigatorSupport" />
       </node>
     </node>
+    <node concept="312cEg" id="1$YBF88Ri7D" role="jymVt">
+      <property role="TrG5h" value="myDisposed" />
+      <node concept="10P_77" id="1$YBF88Ri7F" role="1tU5fm" />
+      <node concept="3Tm6S6" id="1$YBF88Ri7G" role="1B3o_S" />
+    </node>
     <node concept="2tJIrI" id="7I$WKBiYFn8" role="jymVt" />
     <node concept="3clFbW" id="51NkKCgB3dz" role="jymVt">
       <node concept="3Tm1VV" id="51NkKCgB3d$" role="1B3o_S" />
@@ -719,6 +726,16 @@
       <node concept="3Tm1VV" id="1hqpk0YMs10" role="1B3o_S" />
       <node concept="3cqZAl" id="1hqpk0YMs11" role="3clF45" />
       <node concept="3clFbS" id="1hqpk0YMs12" role="3clF47">
+        <node concept="3clFbF" id="1$YBF88Ryhd" role="3cqZAp">
+          <node concept="37vLTI" id="1$YBF88Ryhe" role="3clFbG">
+            <node concept="37vLTw" id="1$YBF88Ryhf" role="37vLTJ">
+              <ref role="3cqZAo" node="1$YBF88Ri7D" resolve="myDisposed" />
+            </node>
+            <node concept="3clFbT" id="1$YBF88Ryhg" role="37vLTx">
+              <property role="3clFbU" value="true" />
+            </node>
+          </node>
+        </node>
         <node concept="3clFbJ" id="YlfeaJOSh2" role="3cqZAp">
           <node concept="3clFbS" id="YlfeaJOSh3" role="3clFbx">
             <node concept="3cpWs6" id="YlfeaJOShv" role="3cqZAp" />
@@ -746,6 +763,22 @@
             <node concept="37vLTw" id="ROdlokF6Od" role="37vLTJ">
               <ref role="3cqZAo" node="51NkKCgB3d9" resolve="myHierarchyTree" />
             </node>
+          </node>
+        </node>
+        <node concept="3clFbF" id="1$YBF88RIi2" role="3cqZAp">
+          <node concept="37vLTI" id="1$YBF88RIi3" role="3clFbG">
+            <node concept="37vLTw" id="1$YBF88RIi4" role="37vLTJ">
+              <ref role="3cqZAo" node="51NkKCgB3dh" resolve="myComponent" />
+            </node>
+            <node concept="10Nm6u" id="1$YBF88RIi5" role="37vLTx" />
+          </node>
+        </node>
+        <node concept="3clFbF" id="1$YBF88RIi6" role="3cqZAp">
+          <node concept="37vLTI" id="1$YBF88RIi7" role="3clFbG">
+            <node concept="37vLTw" id="1$YBF88RIi8" role="37vLTJ">
+              <ref role="3cqZAo" node="3cy8vNEdygP" resolve="myOccurenceNavigator" />
+            </node>
+            <node concept="10Nm6u" id="1$YBF88RIi9" role="37vLTx" />
           </node>
         </node>
       </node>
@@ -2181,6 +2214,18 @@
         <ref role="3uigEE" to="dxuu:~JComponent" resolve="JComponent" />
       </node>
       <node concept="3clFbS" id="51NkKCgB3iA" role="3clF47">
+        <node concept="3clFbJ" id="1$YBF88RSBk" role="3cqZAp">
+          <node concept="37vLTw" id="1$YBF88RSBl" role="3clFbw">
+            <ref role="3cqZAo" node="1$YBF88Ri7D" resolve="myDisposed" />
+          </node>
+          <node concept="3clFbS" id="1$YBF88RSBn" role="3clFbx">
+            <node concept="3cpWs6" id="1$YBF88RSBo" role="3cqZAp">
+              <node concept="37vLTw" id="1$YBF88RSBp" role="3cqZAk">
+                <ref role="3cqZAo" node="51NkKCgB3dh" resolve="myComponent" />
+              </node>
+            </node>
+          </node>
+        </node>
         <node concept="3clFbJ" id="ROdlokF_uq" role="3cqZAp">
           <node concept="3clFbS" id="ROdlokF_us" role="3clFbx">
             <node concept="3clFbF" id="ROdlokFHs4" role="3cqZAp">
