@@ -112,15 +112,22 @@ public abstract class BaseTabbedProjectTool extends BaseTool {
     contentManager.setSelectedContent(content);
   }
 
-  public void closeTab(JComponent component) {
-    ContentManager contentManager = getContentManager();
+  /**
+   * Closes the tab backed by {@code component}, if any. Non-creating: never forces a never-shown tool window to
+   * build its content just to close a tab (see {@link #getContentManagerIfCreated()}).
+   * @return whether the backing {@link Content} was actually removed; {@code false} when {@code component} is
+   * {@code null}, there is no content manager yet, there is no matching tab, or the platform rejected the removal.
+   */
+  public boolean closeTab(@Nullable JComponent component) {
+    if (component == null) {
+      return false;
+    }
+    ContentManager contentManager = getContentManagerIfCreated();
     if (contentManager == null) {
-      return;
+      return false;
     }
     Content content = contentManager.getContent(component);
-    if (content != null) {
-      contentManager.removeContent(content, true);
-    }
+    return content != null && contentManager.removeContent(content, true);
   }
 
   /**
