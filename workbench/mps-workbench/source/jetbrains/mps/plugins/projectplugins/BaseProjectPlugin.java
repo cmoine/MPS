@@ -129,10 +129,15 @@ public abstract class BaseProjectPlugin implements PersistentStateComponent<Plug
       try {
         tool.init(myIJProject);
         tool.registerLater();
+        myInitializedTools.get().add(tool);
       } catch (Throwable t) {
         LOG.error("Exception on a tool init: " + tool, t);
+        try {
+          tool.dispose();
+        } catch (Throwable t2) {
+          LOG.warning("Cleanup of partially initialized tool " + tool + " failed", t2);
+        }
       }
-      myInitializedTools.get().add(tool);
     }
     for (BaseProjectPrefsComponent component : prefsToInit) {
       try {
