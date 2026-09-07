@@ -309,9 +309,24 @@ public abstract class BaseTabbedProjectTool extends BaseTool {
    * {@code com.intellij.toolWindow} EP): {@code unregister()} does not dispose its {@link ContentManager}. Without
    * this, every plugin reload would leave the previous tool's listener attached to the surviving manager, strongly
    * referencing that dead tool and its whole tab graph (MPS editors included).
+   * <p>
+   * Note this does not cover a tool whose registration never completed: {@link BaseTool#unregister()}'s
+   * {@code !isRegistered()} early return skips calling this method entirely. That's a separate, already-flagged
+   * sibling gap (found during TAB-C4's review), not fixed here.
    */
   @Override
   void onUnregistered() {
+    List<IDisposableTab> tabs = new ArrayList<>(myTabList);
+    myTabList.clear();
+    for (IDisposableTab tab : tabs) {
+      try {
+        tab.disposeTab();
+      } catch (Throwable t) {
+        // Deliberately swallowed, including ProcessCanceledException/AlreadyDisposedException: this is a teardown
+        // path and one failing disposer must not strand the rest of the drain.
+        LOG.warning("Failed to dispose tab " + tab + " while unregistering tool " + getId(), t);
+      }
+    }
     if (myListenerInstalledOn == null) {
       return;
     }
