@@ -51,6 +51,7 @@ public class CellExplorerTab implements IComponentDisposer<JComponent> {
   private final BaseTabbedProjectTool myTool;
   private final EditorComponent myEditorComponent;
   private final Runnable myEditorActivator;
+  private boolean myDisposed;
   private final EditorDisposeListener myCloseTabOnEditorDisposeListener = new CloseTabOnEditorDisposeListener();
   private final SimpleToolWindowPanel myComponent;
   private final CellsTree myCellsTree;
@@ -90,6 +91,8 @@ public class CellExplorerTab implements IComponentDisposer<JComponent> {
 
   @Override
   public void disposeComponent(JComponent component) {
+    myDisposed = true;
+
     ((jetbrains.mps.nodeEditor.EditorComponent) myEditorComponent).removeDisposeListener(myCloseTabOnEditorDisposeListener);
 
     myCellsTree.dispose();
@@ -121,7 +124,7 @@ public class CellExplorerTab implements IComponentDisposer<JComponent> {
   }
 
   private boolean isDisposed() {
-    return myEditorComponent == null;
+    return myDisposed;
   }
 
   private JComponent createToolbar(JComponent targetComponent) {
@@ -163,6 +166,9 @@ public class CellExplorerTab implements IComponentDisposer<JComponent> {
     if (isDisposed()) return;
 
     EditorCell cell = myCellDetailTree.getCell();
+    if (cell == null) {
+      return;
+    }
     EditorComponent editorComponent = cell.getEditorComponent();
     if (editorComponent == null || editorComponent.isDisposed()) return;
 
