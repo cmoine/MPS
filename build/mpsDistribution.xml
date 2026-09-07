@@ -197,7 +197,7 @@
       <zipfileset dir="${basedir}/lib/pty4j/darwin" prefix="MPS ${mpsBootstrapCore.version}/lib/pty4j/x86-64" />
       <zipfileset dir="${basedir}/lib/pty4j/linux/x86-64" prefix="MPS ${mpsBootstrapCore.version}/lib/pty4j/x86-64" />
       <zipfileset dir="${basedir}/lib/pty4j/win/x86-64" prefix="MPS ${mpsBootstrapCore.version}/lib/pty4j/x86-64" />
-      <zipfileset dir="${artifacts.overlay}/__overlay__/mac.x64/plugins" prefix="MPS ${mpsBootstrapCore.version}/plugins">
+      <zipfileset dir="${artifacts.overlay}/__overlay__/unix.x64/plugins" prefix="MPS ${mpsBootstrapCore.version}/plugins">
         <include name="**/*" />
       </zipfileset>
       <zipfileset dir="${build.tmp}/default/_dl__lbrace_build.number_rbrace_.zip_f755" filemode="755" prefix="MPS ${mpsBootstrapCore.version}/bin" />

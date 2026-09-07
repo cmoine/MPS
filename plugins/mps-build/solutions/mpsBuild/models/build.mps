@@ -39740,7 +39740,7 @@
               </node>
             </node>
             <node concept="3ygNvl" id="6WWoVOy5TV9" role="39821P">
-              <ref role="3ygNvj" node="6WWoVOy5TBF" resolve="plugins" />
+              <ref role="3ygNvj" node="6WWoVOy5TCV" resolve="plugins" />
               <node concept="3LWZYx" id="6WWoVOy5TVa" role="1juEy9">
                 <property role="3LWZYw" value="**/*" />
               </node>
