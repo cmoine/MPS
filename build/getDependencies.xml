@@ -389,8 +389,8 @@
   </target>
 
   <target name="unzip-platform-overlay" description="Unpacks mps-platform.zip!/__overlay__" if="${unzip.overlay}">
-    <mkdir dir="${basedir}/tmp"/>
-    <untar src="${basedir}/../${platform.zip.file}" dest="${basedir}/tmp" compression="gzip" overwrite="true">
+    <mkdir dir="${basedir}/resources"/>
+    <untar src="${basedir}/../${platform.zip.file}" dest="${basedir}/resources" compression="gzip" overwrite="true">
       <patternset>
         <exclude name="*"/>
         <include name="__overlay__/**"/>
