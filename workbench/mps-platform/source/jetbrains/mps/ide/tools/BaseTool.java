@@ -633,6 +633,8 @@ public abstract class BaseTool {
    * Non-creating counterpart of {@link #getContentManager()}: never triggers the platform's lazy content
    * creation ({@code ToolWindowImpl.createContentIfNeeded}). Use this from code paths that must not force a
    * never-shown tool window to build its content just to answer a query (e.g. persistence save, tab lookups).
+   * Intentionally does not assert EDT (unlike {@link #getToolWindow()}) — {@code UsagesViewTool.getState()}
+   * relies on calling this from a background thread.
    *
    * @return {@code null} when the project is disposed, the tool window is absent, or the tool window's content
    * manager has not been created yet.
