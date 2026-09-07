@@ -150,6 +150,19 @@ final class GenerationTracerView {
     return myPanel;
   }
 
+  /**
+   * Releases the tree this view owns. Invoked when the view's tab goes away (see
+   * {@link GenerationTracerViewToolState#showTraceView}); without it every closed trace tab left an
+   * {@link jetbrains.mps.ide.ui.tree.MPSTree} - and the whole trace node graph behind it - registered and alive.
+   */
+  void dispose() {
+    if (myTree.isDisposed()) {
+      // MPSTree.dispose() asserts it is called at most once; a tab can be closed both explicitly and by the platform.
+      return;
+    }
+    myTree.dispose();
+  }
+
   void setAutoscrollToSource(boolean b) {
     myTree.setAutoOpen(b);
   }

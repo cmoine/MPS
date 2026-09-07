@@ -249,8 +249,18 @@ public final class GenerationTracerViewToolState {
         // tab the ContentManager holds, so the two index spaces are offset, and tabs can be reordered on top.
         myTracerViews.removeIf(view -> view.getComponent() == getComponent());
         onTabClosed(getComponent());
+        tracerView.dispose();
       }
     }, true, true);
+    if (myTool.findContent(tracerView.getComponent()) == null) {
+      // addTab() above bailed out (no content manager: tool window or project torn down between the check at the
+      // top of this method and here): no Content was created and the Tab was never added to the tool's tab list,
+      // so nothing will ever invoke its disposeTab(). Dispose the view here instead of leaking its tree.
+      // findContent() rather than findTab(): the latter is protected on BaseTabbedProjectTool and this class is
+      // not a subclass of it.
+      tracerView.dispose();
+      return;
+    }
     myTracerViews.add(tracerView);
     myTool.closeTab(myNoTabsComponent);
     myTool.openToolLater(true);

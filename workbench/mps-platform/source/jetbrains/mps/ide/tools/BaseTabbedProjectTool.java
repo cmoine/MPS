@@ -123,6 +123,12 @@ public abstract class BaseTabbedProjectTool extends BaseTool {
     }
   }
 
+  /**
+   * A tab component that implements {@link com.intellij.openapi.Disposable} is disposed by the platform when its
+   * {@link Content} goes away ({@code ContentImpl.dispose()} calls {@code Disposer.dispose(component)}), so it needs
+   * no {@code IComponentDisposer}. Supply one when the component is NOT {@code Disposable} but owns resources that
+   * must be released (e.g. an {@code MPSTree} behind a plain {@code JPanel}).
+   */
   public <T extends JComponent> void addTab(final T tabComponent, @NotNull String title, Icon icon,
       final IComponentDisposer<T> tabDisposer, boolean openTool) {
     Tab tab;
