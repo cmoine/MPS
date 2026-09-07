@@ -598,6 +598,10 @@ public abstract class BaseTool {
     return content;
   }
 
+  /**
+   * See also {@link BaseTabbedProjectTool#selectTabSafely(JComponent)}, which does the same but non-creating
+   * (never forces a never-shown tool window to build its content).
+   */
   public void setSelectedComponent(JComponent component) {
     ContentManager manager = getContentManager();
     if (manager == null) {

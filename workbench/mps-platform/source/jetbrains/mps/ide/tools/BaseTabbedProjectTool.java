@@ -110,12 +110,14 @@ public abstract class BaseTabbedProjectTool extends BaseTool {
    * {@code setSelectedContent(null)} crash) when there is no content manager yet or no matching tab.
    */
   public void selectTabSafely(@Nullable JComponent tab) {
-    ContentManager contentManager = getContentManagerIfCreated();
-    Content content = findContent(tab);
-    if (contentManager == null || content == null) {
+    if (tab == null) {
       return;
     }
-    contentManager.setSelectedContent(content);
+    ContentManager contentManager = getContentManagerIfCreated();
+    if (contentManager == null) {
+      return;
+    }
+    setSelectedComponent(contentManager, tab);
   }
 
   /**
