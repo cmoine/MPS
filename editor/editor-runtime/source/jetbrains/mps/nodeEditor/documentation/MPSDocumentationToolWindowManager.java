@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.JPanel;
 
 public class MPSDocumentationToolWindowManager {
-  private final Key<MPSDocumentationToolWindowUI> TW_UI_KEY = Key.create("mps.documentation.tw.ui");
+  public static final Key<MPSDocumentationToolWindowUI> TW_UI_KEY = Key.create("mps.documentation.tw.ui");
   private final Project myProject;
 
   public static MPSDocumentationToolWindowManager getInstance(@NotNull Project project) {
