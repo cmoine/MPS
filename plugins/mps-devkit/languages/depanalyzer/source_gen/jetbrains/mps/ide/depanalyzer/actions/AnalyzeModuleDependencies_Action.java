@@ -48,7 +48,7 @@ public class AnalyzeModuleDependencies_Action extends BaseAction {
   }
   @Override
   public void doExecute(@NotNull final AnActionEvent event, final Map<String, Object> _params) {
-    ModuleDependenies_Tool tool = ProjectPluginManager.getInstance(event.getData(CommonDataKeys.PROJECT)).getTool(ModuleDependenies_Tool.class);
+    ModuleDependencies_Tool tool = ProjectPluginManager.getInstance(event.getData(CommonDataKeys.PROJECT)).getTool(ModuleDependencies_Tool.class);
     tool.setModules(event.getData(MPSCommonDataKeys.MODULE));
     tool.openToolLater(true);
   }

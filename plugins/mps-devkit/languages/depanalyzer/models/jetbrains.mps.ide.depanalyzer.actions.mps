@@ -447,7 +447,7 @@
     </node>
   </node>
   <node concept="sEfby" id="4K0u7uB3vjg">
-    <property role="TrG5h" value="ModuleDependenies" />
+    <property role="TrG5h" value="ModuleDependencies" />
     <property role="2XNbzY" value="Module Dependencies" />
     <node concept="1GtWCo" id="6S5fI02CGAz" role="1nVCmq">
       <node concept="10M0yZ" id="6XsdSpivWqK" role="1GtWoa">

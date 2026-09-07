@@ -120,7 +120,7 @@ public class SafeDeleteModuleDependency_Action extends BaseAction {
       CollectionSequence.fromCollection(dependencies).removeSequence(ListSequence.fromList(badDeps));
       from.save();
     });
-    ProjectPluginManager.getInstance(((Project) MapSequence.fromMap(_params).get("ideaProject"))).getTool(ModuleDependenies_Tool.class).resetAll();
+    ProjectPluginManager.getInstance(((Project) MapSequence.fromMap(_params).get("ideaProject"))).getTool(ModuleDependencies_Tool.class).resetAll();
   }
   private static <T> T as_iuftgz_a0a0a0c0e(Object o, Class<T> type) {
     return (type.isInstance(o) ? (T) o : null);

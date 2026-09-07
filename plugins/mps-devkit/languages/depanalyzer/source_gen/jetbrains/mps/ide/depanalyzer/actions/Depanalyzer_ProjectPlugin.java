@@ -15,7 +15,7 @@ public class Depanalyzer_ProjectPlugin extends BaseProjectPlugin {
   public List<BaseTool> initAllTools1(Project project) {
     List<BaseTool> tools = ListSequence.fromList(new ArrayList<BaseTool>());
     ListSequence.fromList(tools).addElement(new AnalyzeDependencies_Tool(project));
-    ListSequence.fromList(tools).addElement(new ModuleDependenies_Tool(project));
+    ListSequence.fromList(tools).addElement(new ModuleDependencies_Tool(project));
     return tools;
   }
 }

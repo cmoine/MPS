@@ -11,30 +11,30 @@ import com.intellij.openapi.wm.ToolWindowAnchor;
 import org.jetbrains.mps.openapi.module.SModule;
 import javax.swing.JComponent;
 
-public class ModuleDependenies_Tool extends GeneratedTool {
+public class ModuleDependencies_Tool extends GeneratedTool {
   private static final Icon ICON = AllIcons.Toolwindows.ToolWindowModuleDependencies;
   private ModuleDependenciesView myComponent;
-  public ModuleDependenies_Tool(Project project) {
+  public ModuleDependencies_Tool(Project project) {
     super(project, "Module Dependencies", null, ICON, ToolWindowAnchor.BOTTOM, false);
   }
   public void init(Project project) {
     super.init(project);
-    ModuleDependenies_Tool.this.myComponent = new ModuleDependenciesView(ModuleDependenies_Tool.this, project);
+    ModuleDependencies_Tool.this.myComponent = new ModuleDependenciesView(ModuleDependencies_Tool.this, project);
   }
   public void dispose() {
-    if (ModuleDependenies_Tool.this.myComponent != null) {
-      ModuleDependenies_Tool.this.myComponent.dispose();
-      ModuleDependenies_Tool.this.myComponent = null;
+    if (ModuleDependencies_Tool.this.myComponent != null) {
+      ModuleDependencies_Tool.this.myComponent.dispose();
+      ModuleDependencies_Tool.this.myComponent = null;
     }
     super.dispose();
   }
   /*package*/ void setModules(SModule module) {
-    ModuleDependenies_Tool.this.myComponent.setModules(module);
+    ModuleDependencies_Tool.this.myComponent.setModules(module);
   }
   public void resetAll() {
-    ModuleDependenies_Tool.this.myComponent.resetAll();
+    ModuleDependencies_Tool.this.myComponent.resetAll();
   }
   public JComponent getComponent() {
-    return ModuleDependenies_Tool.this.myComponent;
+    return ModuleDependencies_Tool.this.myComponent;
   }
 }
