@@ -312,12 +312,12 @@
   </target>
 
   <target name="check-provided-platform" if="${platform.provided}">
-    <unzip src="${basedir}/../${idea.platform.provided.filename}" dest="${basedir}">
+    <untar src="${basedir}/../${idea.platform.provided.filename}" dest="${basedir}" compression="gzip">
       <patternset>
         <include name="lib/build.txt"/>
       </patternset>
       <mapper type="flatten"/>
-    </unzip>
+    </untar>
     <loadfile property="platform.zip.version" srcFile="${basedir}/build.txt">
       <filterchain>
         <replacestring from="MPS-" to=""/>
