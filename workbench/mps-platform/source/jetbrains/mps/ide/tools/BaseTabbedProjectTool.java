@@ -128,8 +128,10 @@ public abstract class BaseTabbedProjectTool extends BaseTool {
    * {@link Content} goes away ({@code ContentImpl.dispose()} calls {@code Disposer.dispose(component)}), so it needs
    * no {@code IComponentDisposer}. Supply one when the component is NOT {@code Disposable} but owns resources that
    * must be released (e.g. an {@code MPSTree} behind a plain {@code JPanel}).
+   * @return the {@link Content} created for the new tab, or {@code null} if the tab was dropped - see
+   * {@link #addTab(Tab, boolean, boolean)}.
    */
-  public <T extends JComponent> void addTab(final T tabComponent, @NotNull String title, Icon icon,
+  public <T extends JComponent> @Nullable Content addTab(final T tabComponent, @NotNull String title, Icon icon,
       final IComponentDisposer<T> tabDisposer, boolean openTool) {
     Tab tab;
     if (tabDisposer == null) {
@@ -142,7 +144,7 @@ public abstract class BaseTabbedProjectTool extends BaseTool {
         }
       };
     }
-    addTab(tab, false, openTool);
+    return addTab(tab, false, openTool);
   }
 
   /**
@@ -155,24 +157,28 @@ public abstract class BaseTabbedProjectTool extends BaseTool {
    * only when installing the listener) would let the two calls interleave. {@code cm} is threaded through the
    * rest of the method instead of re-resolving it, so every step below observes the same instance the nested
    * call (if any) already finished with.
+   * @return the {@link Content} created for {@code tab}, or {@code null} if the tab was dropped because there is
+   * no content manager (tool window absent or project disposed). Callers that allocated the tab component must
+   * dispose it themselves on {@code null}, since no {@link Content} took ownership of it.
    */
-  public void addTab(final Tab tab, boolean forceNewTab, boolean openTool) {
+  public @Nullable Content addTab(final Tab tab, boolean forceNewTab, boolean openTool) {
     ContentManager cm = getContentManager();
     if (cm == null) {
       // Tool window absent (e.g. project closing) or project disposed: never partially mutate myTabList/content.
       LOG.warning("addTab(\"" + tab.getTitle() + "\") ignored: no content manager for tool " + getId());
-      return;
+      return null;
     }
     addContentRemovedListenerIfNeeded(cm);
     if (!forceNewTab) {
       closeCurrentTabIfUnpinned(cm);
     }
-    addContent(cm, tab.getComponent(), tab.getTitle(), tab.getIcon(), true);
+    Content content = addContent(cm, tab.getComponent(), tab.getTitle(), tab.getIcon(), true);
     setSelectedComponent(cm, tab.getComponent());
     myTabList.add(tab);
     if (openTool) {
       openToolLater(true);
     }
+    return content;
   }
 
   /**

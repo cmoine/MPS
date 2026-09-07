@@ -58,7 +58,7 @@
       <node id="6837509207611964512" at="133,39,134,91" concept="3" />
       <node id="6837509207611952094" at="135,12,136,91" concept="3" />
       <node id="5741794089710285508" at="140,62,141,85" concept="3" />
-      <node id="1087075191989950721" at="144,69,145,20" concept="3" />
+      <node id="1087075191989950721" at="144,26,145,20" concept="3" />
       <node id="1087075191989950723" at="145,20,146,18" concept="10" />
       <node id="1087075191989950725" at="147,5,148,72" concept="3" />
       <node id="5420269209694142331" at="148,72,149,0" concept="11" />
@@ -148,7 +148,7 @@
       <node id="2585815063432331832" at="176,85,181,5" concept="6" />
       <node id="7613684956586787210" at="201,56,206,5" concept="5" />
       <node id="1087075191989381178" at="63,53,69,5" concept="6" />
-      <node id="5420269209694151134" at="137,5,143,17" concept="3" />
+      <node id="8556091762408442401" at="137,5,143,17" concept="8" />
       <node id="6837509207612820973" at="240,0,246,0" concept="13" trace="check_39mclg_a0a0o#(Ljetbrains/mps/console/actions/TabState;)Ljava/lang/String;" />
       <node id="6837509207612816294" at="246,0,252,0" concept="13" trace="check_39mclg_a7a41#(Ljetbrains/mps/console/actions/TabState;)Z" />
       <node id="2960931074097666055" at="194,0,201,0" concept="7" trace="getCurrentEditableTab#()Ljetbrains/mps/console/tool/DialogConsoleTab;" />
@@ -196,7 +196,7 @@
       <scope id="6837509207612816294" at="247,36,248,44" />
       <scope id="6837509207609004138" at="252,67,253,47" />
       <scope id="7613684956586787222" at="255,69,256,47" />
-      <scope id="1087075191989950720" at="144,69,146,18" />
+      <scope id="1087075191989950720" at="144,26,146,18" />
       <scope id="2627483134933360991" at="161,13,163,56">
         <var name="tab" id="1562788031647545813" />
       </scope>
@@ -305,6 +305,7 @@
       <scope id="2960931074097681424" at="209,0,240,0" />
       <scope id="2960931074097523168" at="152,0,184,0" />
       <scope id="6837509207610363924" at="107,107,150,15">
+        <var name="content" id="8556091762408442404" />
         <var name="history" id="2627483134932946048" />
         <var name="historyChildren" id="2627483134932946033" />
         <var name="tab" id="6837509207611895418" />
@@ -317,7 +318,7 @@
         <var name="tabState" id="6837509207611745708" />
       </scope>
       <unit id="2960931074096488202" at="259,0,262,0" name="jetbrains.mps.console.plugin.ConsoleTool_Tool$CONCEPTS" />
-      <unit id="5741794089710261789" at="138,83,143,5" name="jetbrains.mps.console.plugin.ConsoleTool_Tool$2" />
+      <unit id="5741794089710261789" at="138,101,143,5" name="jetbrains.mps.console.plugin.ConsoleTool_Tool$2" />
       <unit id="2960931074102047458" at="117,28,131,5" name="jetbrains.mps.console.plugin.ConsoleTool_Tool$1" />
       <unit id="2960931074096488202" at="41,0,263,0" name="jetbrains.mps.console.plugin.ConsoleTool_Tool" />
     </file>

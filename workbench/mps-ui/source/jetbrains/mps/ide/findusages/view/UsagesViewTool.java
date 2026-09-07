@@ -257,13 +257,13 @@ public final class UsagesViewTool extends BaseTabbedProjectTool implements Persi
     Icon icon = usagesView.getIcon();
     String caption = usagesView.getCaption();
     JComponent component = usagesView.getComponent();
-    addTab(new Tab(component, caption, icon, usageViewData) {
+    Content content = addTab(new Tab(component, caption, icon, usageViewData) {
       @Override
       public void disposeTab() {
         unregisterAndDispose(usageViewData);
       }
     }, forceNewTab, openTool);
-    if (findTab(component) == null) {
+    if (content == null) {
       // addTab() above bailed out (no content manager, e.g. tool window/project torn down): no Content was
       // created and the Tab above was never added to the tab list, so nothing will ever invoke its disposeTab().
       // Clean up here instead of leaking usageViewData - and, if it was the only one, the repo listener - forever.

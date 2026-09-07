@@ -22,6 +22,7 @@ import com.intellij.openapi.actionSystem.ActionToolbar;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.startup.StartupManager;
+import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentManager;
 import jetbrains.mps.generator.GenerationSettingsProvider;
 import jetbrains.mps.generator.GenerationTrace;
@@ -242,7 +243,7 @@ public final class GenerationTracerViewToolState {
     }
     GenerationTracerView tracerView = new GenerationTracerView(this, node.getReference(), viewToken, tracerNode);
     Icon i = Icons.getIcon(tracerView.isForwardTraceView() ? TraceNodeUI.Kind.INPUT : TraceNodeUI.Kind.OUTPUT, node);
-    myTool.addTab(new Tab(tracerView.getComponent(), node.getPresentation(), i) {
+    Content content = myTool.addTab(new Tab(tracerView.getComponent(), node.getPresentation(), i) {
       @Override
       public void disposeTab() {
         // Identity lookup rather than remove(event.getIndex()): myTracerViews deliberately excludes the "no tabs"
@@ -252,12 +253,10 @@ public final class GenerationTracerViewToolState {
         tracerView.dispose();
       }
     }, true, true);
-    if (myTool.findContent(tracerView.getComponent()) == null) {
+    if (content == null) {
       // addTab() above bailed out (no content manager: tool window or project torn down between the check at the
       // top of this method and here): no Content was created and the Tab was never added to the tool's tab list,
       // so nothing will ever invoke its disposeTab(). Dispose the view here instead of leaking its tree.
-      // findContent() rather than findTab(): the latter is protected on BaseTabbedProjectTool and this class is
-      // not a subclass of it.
       tracerView.dispose();
       return;
     }

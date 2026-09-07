@@ -28,9 +28,9 @@ import jetbrains.mps.console.actions.IConsoleTool;
 import com.intellij.openapi.wm.ToolWindow;
 import jetbrains.mps.console.tool.OutputConsoleTab;
 import jetbrains.mps.console.tool.DialogConsoleTab;
+import com.intellij.ui.content.Content;
 import jetbrains.mps.plugins.tool.IComponentDisposer;
 import com.intellij.ui.content.ContentManager;
-import com.intellij.ui.content.Content;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.smodel.behaviour.BHReflection;
 import jetbrains.mps.core.aspects.behaviour.SMethodIdV2;
@@ -135,13 +135,13 @@ public class ConsoleTool_Tool extends BaseTabbedProjectTool {
     } else {
       tab = new DialogConsoleTab(ConsoleTool_Tool.this.myMPSProject, tool, title, history);
     }
-    ConsoleTool_Tool.this.getMyself().<BaseConsoleTab>addTab(tab, title, icon, new IComponentDisposer<BaseConsoleTab>() {
+    Content content = ConsoleTool_Tool.this.getMyself().<BaseConsoleTab>addTab(tab, title, icon, new IComponentDisposer<BaseConsoleTab>() {
       @Override
       public void disposeComponent(BaseConsoleTab component) {
         ListSequence.fromList(ConsoleTool_Tool.this.myTabs).removeElement(component);
       }
     }, openTool);
-    if (ConsoleTool_Tool.this.getMyself().findContent(tab) == null) {
+    if (content == null) {
       tab.dispose();
       return null;
     }

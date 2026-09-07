@@ -1286,96 +1286,91 @@
             </node>
           </node>
         </node>
-        <node concept="3clFbF" id="4GSEy3uNE7u" role="3cqZAp">
-          <node concept="2OqwBi" id="4GSEy3uNHIn" role="3clFbG">
-            <node concept="2OqwBi" id="4GSEy3uNE7w" role="2Oq$k0">
-              <node concept="2WthIp" id="4GSEy3uNE7x" role="2Oq$k0">
-                <ref role="32nkFo" node="2$nlLZbVXWa" resolve="ConsoleTool" />
-              </node>
-              <node concept="2XshWL" id="4GSEy3uNE7y" role="2OqNvi">
-                <ref role="2WH_rO" node="4GSEy3uNxSW" resolve="getMyself" />
-              </node>
+        <node concept="3cpWs8" id="7qXm20O04Cx" role="3cqZAp">
+          <node concept="3cpWsn" id="7qXm20O04C$" role="3cpWs9">
+            <property role="TrG5h" value="content" />
+            <node concept="3uibUv" id="7qXm20O04CA" role="1tU5fm">
+              <ref role="3uigEE" to="v7ux:~Content" resolve="Content" />
             </node>
-            <node concept="liA8E" id="4GSEy3uNKhT" role="2OqNvi">
-              <ref role="37wK5l" to="71xd:~BaseTabbedProjectTool.addTab(javax.swing.JComponent,java.lang.String,javax.swing.Icon,jetbrains.mps.plugins.tool.IComponentDisposer,boolean)" resolve="addTab" />
-              <node concept="37vLTw" id="4GSEy3uNMnY" role="37wK5m">
-                <ref role="3cqZAo" node="5VzHAncaQTU" resolve="tab" />
+            <node concept="2OqwBi" id="4GSEy3uNHIn" role="33vP2m">
+              <node concept="2OqwBi" id="4GSEy3uNE7w" role="2Oq$k0">
+                <node concept="2WthIp" id="4GSEy3uNE7x" role="2Oq$k0">
+                  <ref role="32nkFo" node="2$nlLZbVXWa" resolve="ConsoleTool" />
+                </node>
+                <node concept="2XshWL" id="4GSEy3uNE7y" role="2OqNvi">
+                  <ref role="2WH_rO" node="4GSEy3uNxSW" resolve="getMyself" />
+                </node>
               </node>
-              <node concept="37vLTw" id="4GSEy3uNQws" role="37wK5m">
-                <ref role="3cqZAo" node="5VzHAncawFZ" resolve="title" />
-              </node>
-              <node concept="37vLTw" id="4GSEy3uNUTt" role="37wK5m">
-                <ref role="3cqZAo" node="5VzHAnc511e" resolve="icon" />
-              </node>
-              <node concept="2ShNRf" id="4YIWOQyBfCz" role="37wK5m">
-                <node concept="YeOm9" id="4YIWOQyBxoq" role="2ShVmc">
-                  <node concept="1Y3b0j" id="4YIWOQyBxot" role="YeSDq">
-                    <property role="2bfB8j" value="true" />
-                    <property role="373rjd" value="true" />
-                    <ref role="1Y3XeK" to="eqyk:~IComponentDisposer" resolve="IComponentDisposer" />
-                    <ref role="37wK5l" to="wyt6:~Object.&lt;init&gt;()" resolve="Object" />
-                    <node concept="3Tm1VV" id="4YIWOQyBxou" role="1B3o_S" />
-                    <node concept="3clFb_" id="4YIWOQyBxoG" role="jymVt">
-                      <property role="TrG5h" value="disposeComponent" />
-                      <node concept="3Tm1VV" id="4YIWOQyBxoH" role="1B3o_S" />
-                      <node concept="3cqZAl" id="4YIWOQyBxoJ" role="3clF45" />
-                      <node concept="37vLTG" id="4YIWOQyBxoK" role="3clF46">
-                        <property role="TrG5h" value="component" />
-                        <node concept="3uibUv" id="4YIWOQyBxoQ" role="1tU5fm">
-                          <ref role="3uigEE" to="qgo0:4gO8Gruz$1J" resolve="BaseConsoleTab" />
+              <node concept="liA8E" id="4GSEy3uNKhT" role="2OqNvi">
+                <ref role="37wK5l" to="71xd:~BaseTabbedProjectTool.addTab(javax.swing.JComponent,java.lang.String,javax.swing.Icon,jetbrains.mps.plugins.tool.IComponentDisposer,boolean)" resolve="addTab" />
+                <node concept="37vLTw" id="4GSEy3uNMnY" role="37wK5m">
+                  <ref role="3cqZAo" node="5VzHAncaQTU" resolve="tab" />
+                </node>
+                <node concept="37vLTw" id="4GSEy3uNQws" role="37wK5m">
+                  <ref role="3cqZAo" node="5VzHAncawFZ" resolve="title" />
+                </node>
+                <node concept="37vLTw" id="4GSEy3uNUTt" role="37wK5m">
+                  <ref role="3cqZAo" node="5VzHAnc511e" resolve="icon" />
+                </node>
+                <node concept="2ShNRf" id="4YIWOQyBfCz" role="37wK5m">
+                  <node concept="YeOm9" id="4YIWOQyBxoq" role="2ShVmc">
+                    <node concept="1Y3b0j" id="4YIWOQyBxot" role="YeSDq">
+                      <property role="2bfB8j" value="true" />
+                      <property role="373rjd" value="true" />
+                      <ref role="1Y3XeK" to="eqyk:~IComponentDisposer" resolve="IComponentDisposer" />
+                      <ref role="37wK5l" to="wyt6:~Object.&lt;init&gt;()" resolve="Object" />
+                      <node concept="3Tm1VV" id="4YIWOQyBxou" role="1B3o_S" />
+                      <node concept="3clFb_" id="4YIWOQyBxoG" role="jymVt">
+                        <property role="TrG5h" value="disposeComponent" />
+                        <node concept="3Tm1VV" id="4YIWOQyBxoH" role="1B3o_S" />
+                        <node concept="3cqZAl" id="4YIWOQyBxoJ" role="3clF45" />
+                        <node concept="37vLTG" id="4YIWOQyBxoK" role="3clF46">
+                          <property role="TrG5h" value="component" />
+                          <node concept="3uibUv" id="4YIWOQyBxoQ" role="1tU5fm">
+                            <ref role="3uigEE" to="qgo0:4gO8Gruz$1J" resolve="BaseConsoleTab" />
+                          </node>
                         </node>
-                      </node>
-                      <node concept="3clFbS" id="4YIWOQyBxoM" role="3clF47">
-                        <node concept="3clFbF" id="4YIWOQyBBb4" role="3cqZAp">
-                          <node concept="2OqwBi" id="4YIWOQyBBb6" role="3clFbG">
-                            <node concept="2OqwBi" id="4YIWOQyBBb7" role="2Oq$k0">
-                              <node concept="2WthIp" id="4YIWOQyBBb8" role="2Oq$k0" />
-                              <node concept="2BZ7hE" id="4YIWOQyBBb9" role="2OqNvi">
-                                <ref role="2WH_rO" node="2$nlLZbWs$f" resolve="myTabs" />
+                        <node concept="3clFbS" id="4YIWOQyBxoM" role="3clF47">
+                          <node concept="3clFbF" id="4YIWOQyBBb4" role="3cqZAp">
+                            <node concept="2OqwBi" id="4YIWOQyBBb6" role="3clFbG">
+                              <node concept="2OqwBi" id="4YIWOQyBBb7" role="2Oq$k0">
+                                <node concept="2WthIp" id="4YIWOQyBBb8" role="2Oq$k0" />
+                                <node concept="2BZ7hE" id="4YIWOQyBBb9" role="2OqNvi">
+                                  <ref role="2WH_rO" node="2$nlLZbWs$f" resolve="myTabs" />
+                                </node>
                               </node>
-                            </node>
-                            <node concept="3dhRuq" id="4YIWOQyBBba" role="2OqNvi">
-                              <node concept="37vLTw" id="4YIWOQyBBbb" role="25WWJ7">
-                                <ref role="3cqZAo" node="4YIWOQyBxoK" resolve="component" />
+                              <node concept="3dhRuq" id="4YIWOQyBBba" role="2OqNvi">
+                                <node concept="37vLTw" id="4YIWOQyBBbb" role="25WWJ7">
+                                  <ref role="3cqZAo" node="4YIWOQyBxoK" resolve="component" />
+                                </node>
                               </node>
                             </node>
                           </node>
                         </node>
+                        <node concept="2AHcQZ" id="4YIWOQyBxoO" role="2AJF6D">
+                          <ref role="2AI5Lk" to="wyt6:~Override" resolve="Override" />
+                        </node>
                       </node>
-                      <node concept="2AHcQZ" id="4YIWOQyBxoO" role="2AJF6D">
-                        <ref role="2AI5Lk" to="wyt6:~Override" resolve="Override" />
+                      <node concept="3uibUv" id="4YIWOQyBxoP" role="2Ghqu4">
+                        <ref role="3uigEE" to="qgo0:4gO8Gruz$1J" resolve="BaseConsoleTab" />
                       </node>
-                    </node>
-                    <node concept="3uibUv" id="4YIWOQyBxoP" role="2Ghqu4">
-                      <ref role="3uigEE" to="qgo0:4gO8Gruz$1J" resolve="BaseConsoleTab" />
                     </node>
                   </node>
                 </node>
-              </node>
-              <node concept="37vLTw" id="4GSEy3uO8$B" role="37wK5m">
-                <ref role="3cqZAo" node="7s6$JurAJpA" resolve="openTool" />
-              </node>
-              <node concept="3uibUv" id="JU0IbvloH4" role="3PaCim">
-                <ref role="3uigEE" to="qgo0:4gO8Gruz$1J" resolve="BaseConsoleTab" />
+                <node concept="37vLTw" id="4GSEy3uO8$B" role="37wK5m">
+                  <ref role="3cqZAo" node="7s6$JurAJpA" resolve="openTool" />
+                </node>
+                <node concept="3uibUv" id="JU0IbvloH4" role="3PaCim">
+                  <ref role="3uigEE" to="qgo0:4gO8Gruz$1J" resolve="BaseConsoleTab" />
+                </node>
               </node>
             </node>
           </node>
         </node>
         <node concept="3clFbJ" id="Wm4i2AGPzS" role="3cqZAp">
           <node concept="3clFbC" id="Wm4i2AGPzT" role="3clFbw">
-            <node concept="2OqwBi" id="Wm4i2AHjGN" role="3uHU7B">
-              <node concept="2OqwBi" id="Wm4i2AHjGQ" role="2Oq$k0">
-                <node concept="2WthIp" id="Wm4i2AHjGT" role="2Oq$k0" />
-                <node concept="2XshWL" id="Wm4i2AHjGU" role="2OqNvi">
-                  <ref role="2WH_rO" node="4GSEy3uNxSW" resolve="getMyself" />
-                </node>
-              </node>
-              <node concept="liA8E" id="Wm4i2AHjGV" role="2OqNvi">
-                <ref role="37wK5l" to="71xd:~BaseTabbedProjectTool.findContent(javax.swing.JComponent)" resolve="findContent" />
-                <node concept="37vLTw" id="Wm4i2AHjGW" role="37wK5m">
-                  <ref role="3cqZAo" node="5VzHAncaQTU" resolve="tab" />
-                </node>
-              </node>
+            <node concept="37vLTw" id="7qXm20O04Ke" role="3uHU7B">
+              <ref role="3cqZAo" node="7qXm20O04C$" resolve="content" />
             </node>
             <node concept="10Nm6u" id="Wm4i2AGPzY" role="3uHU7w" />
           </node>
