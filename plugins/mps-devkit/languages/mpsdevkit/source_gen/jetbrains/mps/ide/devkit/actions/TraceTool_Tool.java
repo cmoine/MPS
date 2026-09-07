@@ -6,12 +6,13 @@ import jetbrains.mps.plugins.tool.GeneratedTool;
 import javax.swing.Icon;
 import jetbrains.mps.icons.MPSIcons;
 import jetbrains.mps.ide.devkit.typesystem.trace.TypeSystemTracePanel;
-import com.intellij.util.messages.MessageBusConnection;
+import jetbrains.mps.editor.EditorComponentTrackService;
+import jetbrains.mps.editor.EditorComponentLifecycleListener;
 import jetbrains.mps.nodeEditor.EditorComponent;
 import com.intellij.openapi.project.Project;
 import jetbrains.mps.ide.tools.BaseTool;
 import com.intellij.openapi.wm.ToolWindowAnchor;
-import jetbrains.mps.nodeEditor.highlighter.EditorComponentCreateListener;
+import jetbrains.mps.ide.project.ProjectHelper;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.util.Disposer;
 import jetbrains.mps.project.MPSProject;
@@ -21,7 +22,8 @@ import javax.swing.JComponent;
 public class TraceTool_Tool extends GeneratedTool {
   private static final Icon ICON = MPSIcons.ToolWindows.TypeTraceView;
   private TypeSystemTracePanel myPanel;
-  private MessageBusConnection myBusConnection;
+  private EditorComponentTrackService myTrackService;
+  private EditorComponentLifecycleListener myListener;
   private EditorComponent myEditorComponent;
   public TraceTool_Tool(Project project) {
     super(project, "Typesystem Trace", BaseTool.shortcutsFromNumber(5), ICON, ToolWindowAnchor.RIGHT, false);
@@ -30,23 +32,24 @@ public class TraceTool_Tool extends GeneratedTool {
     super.init(project);
     TraceTool_Tool.this.myPanel = new TypeSystemTracePanel(TraceTool_Tool.this);
 
-    // TODO: find way to rewrite this
-
-    TraceTool_Tool.this.myBusConnection = project.getMessageBus().connect();
-    TraceTool_Tool.this.myBusConnection.subscribe(EditorComponentCreateListener.EDITOR_COMPONENT_CREATION, new EditorComponentCreateListener() {
-      public void editorComponentCreated(@NotNull EditorComponent ecomp) {
-      }
-      public void editorComponentDisposed(@NotNull EditorComponent ecomp) {
+    TraceTool_Tool.this.myTrackService = ProjectHelper.fromIdeaProjectOrFail(project).getComponent(EditorComponentTrackService.class);
+    TraceTool_Tool.this.myListener = new EditorComponentLifecycleListener() {
+      public void editorComponentDisposed(@NotNull org.jetbrains.mps.openapi.project.Project mpsProject, @NotNull jetbrains.mps.openapi.editor.EditorComponent ecomp) {
         if (ecomp == TraceTool_Tool.this.myEditorComponent) {
           TraceTool_Tool.this.myPanel.cleanUp();
           TraceTool_Tool.this.myEditorComponent = null;
         }
       }
-    });
+    };
+    if (TraceTool_Tool.this.myTrackService != null) {
+      TraceTool_Tool.this.myTrackService.addListener(TraceTool_Tool.this.myListener);
+    }
   }
   public void dispose() {
     Disposer.dispose(TraceTool_Tool.this.myPanel);
-    TraceTool_Tool.this.myBusConnection.disconnect();
+    if (TraceTool_Tool.this.myTrackService != null) {
+      TraceTool_Tool.this.myTrackService.removeListener(TraceTool_Tool.this.myListener);
+    }
     super.dispose();
   }
   public void buildTrace(MPSProject mpsProject, SNode node, EditorComponent editorComponent) {
