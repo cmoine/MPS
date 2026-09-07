@@ -887,7 +887,7 @@
                           </node>
                         </node>
                         <node concept="liA8E" id="4r$i1_a$4pO" role="2OqNvi">
-                          <ref role="37wK5l" to="v7ux:~ContentManager.removeContent(com.intellij.ui.content.Content,boolean)" />
+                          <ref role="37wK5l" to="v7ux:~ContentManager.removeContent(com.intellij.ui.content.Content,boolean)" resolve="removeContent" />
                           <node concept="37vLTw" id="6vUEXPkxBTf" role="37wK5m">
                             <ref role="3cqZAo" node="4r$i1_a$4pu" resolve="attachedContent" />
                           </node>
