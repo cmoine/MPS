@@ -37,6 +37,12 @@ public abstract class BaseTabbedProjectTool extends BaseTool {
 
   private static final Logger LOG = Logger.getLogger(BaseTabbedProjectTool.class);
 
+  /**
+   * Tabs in insertion order, <em>not</em> their current display order: the user can drag-reorder tabs in the
+   * {@link ContentManager}, which reorders its own backing list but not this one. A tool that needs to persist
+   * the tab order the user actually sees should read it from {@code getContentManagerIfCreated().getContentsRecursively()}
+   * instead, as {@code UsagesViewTool.write()} does.
+   */
   private final List<IDisposableTab> myTabList = new ArrayList<>();
   /**
    * The {@link ContentManager} instance {@link #addContentRemovedListenerIfNeeded} last installed
