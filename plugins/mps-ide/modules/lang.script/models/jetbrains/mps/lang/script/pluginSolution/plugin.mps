@@ -60,6 +60,7 @@
     <import index="rcv5" ref="498d89d2-c2e9-11e2-ad49-6cf049e62fe5/java:com.intellij.ide.util.treeView(MPS.IDEA/)" />
     <import index="tprs" ref="r:00000000-0000-4000-0000-011c895904a4(jetbrains.mps.ide.actions)" />
     <import index="bbgb" ref="r:3189948c-a57a-415e-beba-405572f2d13c(jetbrains.mps.ide.findusages.model.scopes)" />
+    <import index="1m72" ref="498d89d2-c2e9-11e2-ad49-6cf049e62fe5/java:com.intellij.openapi.components(MPS.IDEA/)" />
   </imports>
   <registry>
     <language id="28f9e497-3b42-4291-aeba-0a1039153ab1" name="jetbrains.mps.lang.plugin">
@@ -7603,6 +7604,19 @@
                                                       <node concept="3Tm1VV" id="6m98d5YYbFb" role="1B3o_S" />
                                                       <node concept="3cqZAl" id="6m98d5YYbFc" role="3clF45" />
                                                       <node concept="3clFbS" id="6m98d5YYbFe" role="3clF47">
+                                                        <node concept="3clFbJ" id="1$YBF88YlDQ" role="3cqZAp">
+                                                          <node concept="2OqwBi" id="1$YBF88YlEq" role="3clFbw">
+                                                            <node concept="37vLTw" id="1$YBF88YlE1" role="2Oq$k0">
+                                                              <ref role="3cqZAo" node="1wgDEmyi2Wu" resolve="ideaProject" />
+                                                            </node>
+                                                            <node concept="liA8E" id="1$YBF88YlEr" role="2OqNvi">
+                                                              <ref role="37wK5l" to="1m72:~ComponentManager.isDisposed()" resolve="isDisposed" />
+                                                            </node>
+                                                          </node>
+                                                          <node concept="3clFbS" id="1$YBF88YlDT" role="3clFbx">
+                                                            <node concept="3cpWs6" id="1$YBF88YlDU" role="3cqZAp" />
+                                                          </node>
+                                                        </node>
                                                         <node concept="3clFbJ" id="6m98d5YYbFf" role="3cqZAp">
                                                           <node concept="2OqwBi" id="6m98d5YYbFg" role="3clFbw">
                                                             <node concept="2OqwBi" id="6m98d5YYbFh" role="2Oq$k0">
@@ -7619,27 +7633,6 @@
                                                           </node>
                                                           <node concept="9aQIb" id="6m98d5YYbFl" role="9aQIa">
                                                             <node concept="3clFbS" id="6m98d5YYbFm" role="9aQI4">
-                                                              <node concept="3clFbF" id="rl1Z4LbU__" role="3cqZAp">
-                                                                <node concept="2OqwBi" id="rl1Z4Lc3iy" role="3clFbG">
-                                                                  <node concept="2OqwBi" id="rl1Z4Lc1NW" role="2Oq$k0">
-                                                                    <node concept="2OqwBi" id="rl1Z4LbVTc" role="2Oq$k0">
-                                                                      <node concept="2WthIp" id="rl1Z4LbU_z" role="2Oq$k0" />
-                                                                      <node concept="liA8E" id="rl1Z4LbWHX" role="2OqNvi">
-                                                                        <ref role="37wK5l" to="71xd:~BaseTool.getToolWindow()" resolve="getToolWindow" />
-                                                                      </node>
-                                                                    </node>
-                                                                    <node concept="liA8E" id="rl1Z4Lc2Kb" role="2OqNvi">
-                                                                      <ref role="37wK5l" to="jkny:~ToolWindow.getContentManager()" resolve="getContentManager" />
-                                                                    </node>
-                                                                  </node>
-                                                                  <node concept="liA8E" id="rl1Z4Lc3YG" role="2OqNvi">
-                                                                    <ref role="37wK5l" to="v7ux:~ContentManager.removeAllContents(boolean)" resolve="removeAllContents" />
-                                                                    <node concept="3clFbT" id="rl1Z4Lc6Cr" role="37wK5m">
-                                                                      <property role="3clFbU" value="true" />
-                                                                    </node>
-                                                                  </node>
-                                                                </node>
-                                                              </node>
                                                               <node concept="3clFbF" id="1wgDEmyfsAk" role="3cqZAp">
                                                                 <node concept="2OqwBi" id="1wgDEmyfsAe" role="3clFbG">
                                                                   <node concept="2WthIp" id="1wgDEmyfsAh" role="2Oq$k0">
@@ -7662,19 +7655,41 @@
                                                             </node>
                                                           </node>
                                                           <node concept="3clFbS" id="6m98d5YYbFM" role="3clFbx">
+                                                            <node concept="3cpWs8" id="1$YBF88Yn_3" role="3cqZAp">
+                                                              <node concept="3cpWsn" id="1$YBF88Yn_2" role="3cpWs9">
+                                                                <property role="TrG5h" value="toolWindow" />
+                                                                <node concept="3uibUv" id="1$YBF88Yn_4" role="1tU5fm">
+                                                                  <ref role="3uigEE" to="jkny:~ToolWindow" resolve="ToolWindow" />
+                                                                </node>
+                                                                <node concept="2OqwBi" id="1$YBF88YtNr" role="33vP2m">
+                                                                  <node concept="2WthIp" id="1$YBF88YtNu" role="2Oq$k0" />
+                                                                  <node concept="liA8E" id="1$YBF88YtNv" role="2OqNvi">
+                                                                    <ref role="37wK5l" to="71xd:~BaseTool.getToolWindow()" resolve="getToolWindow" />
+                                                                  </node>
+                                                                </node>
+                                                              </node>
+                                                            </node>
+                                                            <node concept="3clFbJ" id="1$YBF88Yn_7" role="3cqZAp">
+                                                              <node concept="3clFbC" id="1$YBF88Yn_8" role="3clFbw">
+                                                                <node concept="37vLTw" id="1$YBF88Yn_9" role="3uHU7B">
+                                                                  <ref role="3cqZAo" node="1$YBF88Yn_2" resolve="toolWindow" />
+                                                                </node>
+                                                                <node concept="10Nm6u" id="1$YBF88Yn_a" role="3uHU7w" />
+                                                              </node>
+                                                              <node concept="3clFbS" id="1$YBF88Yn_c" role="3clFbx">
+                                                                <node concept="3cpWs6" id="1$YBF88Yn_d" role="3cqZAp" />
+                                                              </node>
+                                                            </node>
                                                             <node concept="3clFbF" id="6m98d5YYbFN" role="3cqZAp">
                                                               <node concept="2YIFZM" id="6m98d5YYbFO" role="3clFbG">
                                                                 <ref role="37wK5l" to="dxuu:~JOptionPane.showMessageDialog(java.awt.Component,java.lang.Object,java.lang.String,int)" resolve="showMessageDialog" />
                                                                 <ref role="1Pybhc" to="dxuu:~JOptionPane" resolve="JOptionPane" />
-                                                                <node concept="2OqwBi" id="6m98d5YYbFP" role="37wK5m">
-                                                                  <node concept="liA8E" id="6m98d5YYbFR" role="2OqNvi">
-                                                                    <ref role="37wK5l" to="jkny:~ToolWindow.getComponent()" resolve="getComponent" />
+                                                                <node concept="2OqwBi" id="1$YBF88YtOE" role="37wK5m">
+                                                                  <node concept="37vLTw" id="1$YBF88YtOH" role="2Oq$k0">
+                                                                    <ref role="3cqZAo" node="1$YBF88Yn_2" resolve="toolWindow" />
                                                                   </node>
-                                                                  <node concept="2OqwBi" id="rl1Z4LbHXD" role="2Oq$k0">
-                                                                    <node concept="2WthIp" id="rl1Z4LbZPN" role="2Oq$k0" />
-                                                                    <node concept="liA8E" id="rl1Z4LbIZJ" role="2OqNvi">
-                                                                      <ref role="37wK5l" to="71xd:~BaseTool.getToolWindow()" resolve="getToolWindow" />
-                                                                    </node>
+                                                                  <node concept="liA8E" id="1$YBF88YtOI" role="2OqNvi">
+                                                                    <ref role="37wK5l" to="jkny:~ToolWindow.getComponent()" resolve="getComponent" />
                                                                   </node>
                                                                 </node>
                                                                 <node concept="Xl_RD" id="6m98d5YYbFS" role="37wK5m">

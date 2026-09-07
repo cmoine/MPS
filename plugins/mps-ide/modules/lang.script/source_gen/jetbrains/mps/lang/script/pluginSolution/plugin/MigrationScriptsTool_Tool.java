@@ -24,6 +24,7 @@ import jetbrains.mps.smodel.ModelAccessHelper;
 import jetbrains.mps.ide.project.ProjectHelper;
 import jetbrains.mps.util.Computable;
 import jetbrains.mps.progress.ProgressMonitorAdapter;
+import com.intellij.openapi.wm.ToolWindow;
 import javax.swing.JOptionPane;
 import jetbrains.mps.ide.findusages.view.icons.IconManager;
 import javax.swing.JComponent;
@@ -54,10 +55,16 @@ public class MigrationScriptsTool_Tool extends BaseTabbedProjectTool {
             ApplicationManager.getApplication().invokeLater(new Runnable() {
               @Override
               public void run() {
+                if (ideaProject.isDisposed()) {
+                  return;
+                }
                 if (results.getSearchResults2().isEmpty()) {
-                  JOptionPane.showMessageDialog(MigrationScriptsTool_Tool.this.getToolWindow().getComponent(), "No applicable nodes found", "Migration Scripts", JOptionPane.INFORMATION_MESSAGE);
+                  ToolWindow toolWindow = MigrationScriptsTool_Tool.this.getToolWindow();
+                  if (toolWindow == null) {
+                    return;
+                  }
+                  JOptionPane.showMessageDialog(toolWindow.getComponent(), "No applicable nodes found", "Migration Scripts", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                  MigrationScriptsTool_Tool.this.getToolWindow().getContentManager().removeAllContents(true);
                   MigrationScriptsTool_Tool.this.addTab(finder, provider, query);
                 }
               }
