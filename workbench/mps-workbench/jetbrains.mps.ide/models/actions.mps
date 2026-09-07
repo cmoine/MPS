@@ -55480,8 +55480,16 @@
           </node>
         </node>
         <node concept="3cpWs6" id="hpM5fPe1F$" role="3cqZAp">
-          <node concept="37vLTw" id="hpM5fPe1WP" role="3cqZAk">
-            <ref role="3cqZAo" node="hpM5fPdXl$" resolve="component" />
+          <node concept="2OqwBi" id="1$YBF88NSou" role="3cqZAk">
+            <node concept="2OqwBi" id="1$YBF88NSox" role="2Oq$k0">
+              <node concept="2WthIp" id="1$YBF88NSo$" role="2Oq$k0" />
+              <node concept="2BZ7hE" id="1$YBF88NSo_" role="2OqNvi">
+                <ref role="2WH_rO" node="6vjnGs7NjKd" resolve="myContainer" />
+              </node>
+            </node>
+            <node concept="liA8E" id="1$YBF88NSoA" role="2OqNvi">
+              <ref role="37wK5l" node="6vjnGs7MVbU" resolve="getComponent" />
+            </node>
           </node>
         </node>
       </node>

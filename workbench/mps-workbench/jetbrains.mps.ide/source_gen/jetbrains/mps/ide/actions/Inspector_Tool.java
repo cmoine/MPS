@@ -105,6 +105,6 @@ public class Inspector_Tool extends GeneratedTool {
     if (component == null) {
       Inspector_Tool.this.myContainer.createTool();
     }
-    return component;
+    return Inspector_Tool.this.myContainer.getComponent();
   }
 }
