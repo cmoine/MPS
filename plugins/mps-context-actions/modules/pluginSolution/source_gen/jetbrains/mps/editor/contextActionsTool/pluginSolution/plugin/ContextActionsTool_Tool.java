@@ -23,16 +23,15 @@ public class ContextActionsTool_Tool extends GeneratedTool {
   }
   public void init(Project project) {
     super.init(project);
-    MPSProject mpsProject = ProjectHelper.fromIdeaProject(project);
-    if (mpsProject == null) {
-      throw new IllegalArgumentException("project must be an MPSProject");
-    }
+    MPSProject mpsProject = ProjectHelper.fromIdeaProjectOrFail(project);
 
     ContextActionsTool_Tool.this.myComponent = new ToolComponent(ContextActionsTool_Tool.this);
     ContextActionsTool_Tool.this.myController = new ToolController(mpsProject, ContextActionsTool_Tool.this.myComponent, new SelectionMenuProviderByCellAndConcept(MenuLocations.CONTEXT_ACTIONS_TOOL));
   }
   public void dispose() {
-    ContextActionsTool_Tool.this.myController.dispose();
+    if (ContextActionsTool_Tool.this.myController != null) {
+      ContextActionsTool_Tool.this.myController.dispose();
+    }
     super.dispose();
   }
   @Override

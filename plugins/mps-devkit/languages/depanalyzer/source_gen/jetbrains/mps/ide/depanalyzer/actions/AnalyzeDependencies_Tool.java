@@ -24,7 +24,7 @@ public class AnalyzeDependencies_Tool extends GeneratedTool {
   }
   public void init(Project project) {
     super.init(project);
-    AnalyzeDependencies_Tool.this.myProject = ProjectHelper.fromIdeaProject(project);
+    AnalyzeDependencies_Tool.this.myProject = ProjectHelper.fromIdeaProjectOrFail(project);
   }
   public void dispose() {
     if (AnalyzeDependencies_Tool.this.myDependenciesPanel != null) {

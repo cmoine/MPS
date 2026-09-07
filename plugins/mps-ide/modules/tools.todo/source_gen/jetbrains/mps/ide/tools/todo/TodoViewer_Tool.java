@@ -19,15 +19,17 @@ public class TodoViewer_Tool extends GeneratedTool {
   }
   public void init(Project project) {
     super.init(project);
-    TodoViewer_Tool.this.myComponent = new TodoViewer(ProjectHelper.fromIdeaProject(project), TodoViewer_Tool.this);
+    TodoViewer_Tool.this.myComponent = new TodoViewer(ProjectHelper.fromIdeaProjectOrFail(project), TodoViewer_Tool.this);
   }
   public void dispose() {
-    Container container = TodoViewer_Tool.this.myComponent.getParent();
-    if (container != null) {
-      container.remove(TodoViewer_Tool.this.myComponent);
+    if (TodoViewer_Tool.this.myComponent != null) {
+      Container container = TodoViewer_Tool.this.myComponent.getParent();
+      if (container != null) {
+        container.remove(TodoViewer_Tool.this.myComponent);
+      }
+      TodoViewer_Tool.this.myComponent.dispose();
+      TodoViewer_Tool.this.myComponent = null;
     }
-    TodoViewer_Tool.this.myComponent.dispose();
-    TodoViewer_Tool.this.myComponent = null;
     super.dispose();
   }
   @Override

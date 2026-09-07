@@ -569,16 +569,29 @@
     </node>
     <node concept="2xpOpl" id="5lGdLibXOZR" role="uR5co">
       <node concept="3clFbS" id="5lGdLibXOZS" role="2VODD2">
-        <node concept="3clFbF" id="7pClCNYaaEv" role="3cqZAp">
-          <node concept="2OqwBi" id="7pClCNYabxf" role="3clFbG">
-            <node concept="2OqwBi" id="7pClCNYaaNK" role="2Oq$k0">
-              <node concept="2WthIp" id="7pClCNYaaEt" role="2Oq$k0" />
-              <node concept="2BZ7hE" id="7pClCNYab0G" role="2OqNvi">
+        <node concept="3clFbJ" id="1$YBF88SoTT" role="3cqZAp">
+          <node concept="3y3z36" id="1$YBF88SoTW" role="3clFbw">
+            <node concept="2OqwBi" id="1$YBF88SoTZ" role="3uHU7B">
+              <node concept="2WthIp" id="1$YBF88SoU2" role="2Oq$k0" />
+              <node concept="2BZ7hE" id="1$YBF88SoU3" role="2OqNvi">
                 <ref role="2WH_rO" node="7pClCNYa4$I" resolve="myController" />
               </node>
             </node>
-            <node concept="liA8E" id="7pClCNYabLJ" role="2OqNvi">
-              <ref role="37wK5l" node="7pClCNY9UxU" resolve="dispose" />
+            <node concept="10Nm6u" id="1$YBF88SoU4" role="3uHU7w" />
+          </node>
+          <node concept="3clFbS" id="1$YBF88SoU5" role="3clFbx">
+            <node concept="3clFbF" id="7pClCNYaaEv" role="3cqZAp">
+              <node concept="2OqwBi" id="7pClCNYabxf" role="3clFbG">
+                <node concept="2OqwBi" id="7pClCNYaaNK" role="2Oq$k0">
+                  <node concept="2WthIp" id="7pClCNYaaEt" role="2Oq$k0" />
+                  <node concept="2BZ7hE" id="7pClCNYab0G" role="2OqNvi">
+                    <ref role="2WH_rO" node="7pClCNYa4$I" resolve="myController" />
+                  </node>
+                </node>
+                <node concept="liA8E" id="7pClCNYabLJ" role="2OqNvi">
+                  <ref role="37wK5l" node="7pClCNY9UxU" resolve="dispose" />
+                </node>
+              </node>
             </node>
           </node>
         </node>
@@ -594,28 +607,8 @@
             </node>
             <node concept="2YIFZM" id="7D_l88gJSnv" role="33vP2m">
               <ref role="1Pybhc" to="alof:~ProjectHelper" resolve="ProjectHelper" />
-              <ref role="37wK5l" to="alof:~ProjectHelper.fromIdeaProject(com.intellij.openapi.project.Project)" resolve="fromIdeaProject" />
+              <ref role="37wK5l" to="alof:~ProjectHelper.fromIdeaProjectOrFail(com.intellij.openapi.project.Project)" />
               <node concept="2xqhHp" id="7D_l88gJSnw" role="37wK5m" />
-            </node>
-          </node>
-        </node>
-        <node concept="3clFbJ" id="7D_l88gJVhD" role="3cqZAp">
-          <node concept="3clFbS" id="7D_l88gJVhF" role="3clFbx">
-            <node concept="YS8fn" id="7D_l88gJVT3" role="3cqZAp">
-              <node concept="2ShNRf" id="7D_l88gJVTa" role="YScLw">
-                <node concept="1pGfFk" id="7D_l88gJWb0" role="2ShVmc">
-                  <ref role="37wK5l" to="wyt6:~IllegalArgumentException.&lt;init&gt;(java.lang.String)" resolve="IllegalArgumentException" />
-                  <node concept="Xl_RD" id="7D_l88gJWb4" role="37wK5m">
-                    <property role="Xl_RC" value="project must be an MPSProject" />
-                  </node>
-                </node>
-              </node>
-            </node>
-          </node>
-          <node concept="3clFbC" id="7D_l88gJVPT" role="3clFbw">
-            <node concept="10Nm6u" id="7D_l88gJVQ1" role="3uHU7w" />
-            <node concept="37vLTw" id="7D_l88gJVjb" role="3uHU7B">
-              <ref role="3cqZAo" node="7D_l88gJSnu" resolve="mpsProject" />
             </node>
           </node>
         </node>
