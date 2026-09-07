@@ -252,6 +252,11 @@ public abstract class BaseTabbedProjectTool extends BaseTool {
       return;
     }
 
+    if (myListenerInstalledOn != null) {
+      LOG.warning("Replacing content-removed listener on a new ContentManager for " + this + " without onUnregistered() having run first — check the tool's register/unregister lifecycle");
+      myListenerInstalledOn.removeContentManagerListener(myContentRemovedListener);
+    }
+
     ContentManagerListener listener = new ContentManagerListener() {
       @Override
       public void contentRemoved(@NotNull ContentManagerEvent event) {
