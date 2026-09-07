@@ -93,6 +93,10 @@ public class ModuleDependenciesView extends JPanel implements DataProvider {
     myLeftTree.rebuildNow();
     rebuildDependencies();
   }
+  public void dispose() {
+    myLeftTree.dispose();
+    myRightTree.dispose();
+  }
   @Nullable
   @Override
   public Object getData(@NonNls String dataId) {

@@ -21,6 +21,13 @@ public class ModuleDependenies_Tool extends GeneratedTool {
     super.init(project);
     ModuleDependenies_Tool.this.myComponent = new ModuleDependenciesView(ModuleDependenies_Tool.this, project);
   }
+  public void dispose() {
+    if (ModuleDependenies_Tool.this.myComponent != null) {
+      ModuleDependenies_Tool.this.myComponent.dispose();
+      ModuleDependenies_Tool.this.myComponent = null;
+    }
+    super.dispose();
+  }
   /*package*/ void setModules(SModule module) {
     ModuleDependenies_Tool.this.myComponent.setModules(module);
   }

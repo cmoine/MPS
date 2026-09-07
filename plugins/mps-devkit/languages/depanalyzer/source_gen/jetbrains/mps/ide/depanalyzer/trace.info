@@ -511,46 +511,50 @@
       <node id="2442969026332318244" at="89,38,90,15" concept="5" />
       <node id="7574561536407728012" at="92,26,93,28" concept="5" />
       <node id="2021912758216808712" at="93,28,94,26" concept="5" />
-      <node id="574098046356762894" at="99,45,100,45" concept="11" />
-      <node id="574098046356640281" at="101,5,102,16" concept="11" />
-      <node id="2442969026332317197" at="105,0,106,0" concept="6" trace="myValue" />
-      <node id="2442969026332317214" at="106,0,107,0" concept="6" trace="mySetValue" />
-      <node id="2442969026332317273" at="107,121,108,32" concept="16" />
-      <node id="2442969026332317221" at="108,32,109,22" concept="5" />
-      <node id="2442969026332317228" at="109,22,110,28" concept="5" />
-      <node id="2442969026332317252" at="113,61,114,37" concept="5" />
-      <node id="2442969026332317250" at="117,52,118,21" concept="11" />
-      <node id="6370281469027447544" at="122,55,123,36" concept="11" />
-      <node id="574098046356705005" at="98,48,101,5" concept="8" />
+      <node id="1819065786993181492" at="96,25,97,25" concept="5" />
+      <node id="1819065786993181494" at="97,25,98,26" concept="5" />
+      <node id="574098046356762894" at="103,45,104,45" concept="11" />
+      <node id="574098046356640281" at="105,5,106,16" concept="11" />
+      <node id="2442969026332317197" at="109,0,110,0" concept="6" trace="myValue" />
+      <node id="2442969026332317214" at="110,0,111,0" concept="6" trace="mySetValue" />
+      <node id="2442969026332317273" at="111,121,112,32" concept="16" />
+      <node id="2442969026332317221" at="112,32,113,22" concept="5" />
+      <node id="2442969026332317228" at="113,22,114,28" concept="5" />
+      <node id="2442969026332317252" at="117,61,118,37" concept="5" />
+      <node id="2442969026332317250" at="121,52,122,21" concept="11" />
+      <node id="6370281469027447544" at="126,55,127,36" concept="11" />
+      <node id="574098046356705005" at="102,48,105,5" concept="8" />
       <node id="6059554334738559629" at="57,0,61,0" concept="9" trace="valueChanged#(Ljavax/swing/event/TreeSelectionEvent;)V" />
       <node id="7574561536407727926" at="74,47,78,9" concept="8" />
       <node id="2442969026332317289" at="84,0,88,0" concept="9" trace="setShowRuntime#(Z)V" />
       <node id="2442969026332318233" at="88,0,92,0" concept="9" trace="setShowUsedLanguages#(Z)V" />
       <node id="6059554334738559702" at="92,0,96,0" concept="9" trace="resetAll#()V" />
-      <node id="2442969026332317234" at="112,0,116,0" concept="9" trace="setSelected#(Lcom/intellij/openapi/actionSystem/AnActionEvent;Z)V" />
-      <node id="2442969026332317242" at="116,0,120,0" concept="9" trace="isSelected#(Lcom/intellij/openapi/actionSystem/AnActionEvent;)Z" />
+      <node id="1819065786993181490" at="96,0,100,0" concept="9" trace="dispose#()V" />
+      <node id="2442969026332317234" at="116,0,120,0" concept="9" trace="setSelected#(Lcom/intellij/openapi/actionSystem/AnActionEvent;Z)V" />
+      <node id="2442969026332317242" at="120,0,124,0" concept="9" trace="isSelected#(Lcom/intellij/openapi/actionSystem/AnActionEvent;)Z" />
       <node id="6059554334738584777" at="63,0,68,0" concept="9" trace="setModules#(Lorg/jetbrains/mps/openapi/module/SModule;)V" />
-      <node id="2442969026332309261" at="107,0,112,0" concept="3" trace="MyToggleAction#(Ljava/lang/String;Ljavax/swing/Icon;ZLjetbrains/mps/baseLanguage/closures/runtime/_FunctionTypes/_void_P1_E0;)V" />
-      <node id="6370281469027447539" at="120,0,125,0" concept="9" trace="getActionUpdateThread#()Lcom/intellij/openapi/actionSystem/ActionUpdateThread;" />
+      <node id="2442969026332309261" at="111,0,116,0" concept="3" trace="MyToggleAction#(Ljava/lang/String;Ljavax/swing/Icon;ZLjetbrains/mps/baseLanguage/closures/runtime/_FunctionTypes/_void_P1_E0;)V" />
+      <node id="6370281469027447539" at="124,0,129,0" concept="9" trace="getActionUpdateThread#()Lcom/intellij/openapi/actionSystem/ActionUpdateThread;" />
       <node id="6059554334738559618" at="55,0,61,7" concept="5" />
       <node id="7574561536407727914" at="72,24,79,7" concept="7" />
-      <node id="574098046356501583" at="96,0,104,0" concept="9" trace="getData#(Ljava/lang/String;)Ljava/lang/Object;" />
+      <node id="574098046356501583" at="100,0,108,0" concept="9" trace="getData#(Ljava/lang/String;)Ljava/lang/Object;" />
       <node id="7574561536407727912" at="71,54,80,5" concept="8" />
       <node id="6059554334738559652" at="68,0,84,0" concept="9" trace="rebuildDependencies#()V" />
       <node id="6059554334738541130" at="38,0,63,0" concept="3" trace="ModuleDependenciesView#(Ljetbrains/mps/ide/tools/BaseTool;Lcom/intellij/openapi/project/Project;)V" />
       <scope id="6059554334738559634" at="58,54,59,30" />
-      <scope id="574098046356705007" at="99,45,100,45" />
-      <scope id="2442969026332317241" at="113,61,114,37" />
-      <scope id="2442969026332317247" at="117,52,118,21" />
-      <scope id="6370281469027447543" at="122,55,123,36" />
+      <scope id="574098046356705007" at="103,45,104,45" />
+      <scope id="2442969026332317241" at="117,61,118,37" />
+      <scope id="2442969026332317247" at="121,52,122,21" />
+      <scope id="6370281469027447543" at="126,55,127,36" />
       <scope id="7574561536407727927" at="75,81,77,73">
         <var name="node" id="7574561536407727929" />
       </scope>
       <scope id="2442969026332317292" at="84,42,86,15" />
       <scope id="2442969026332318236" at="88,48,90,15" />
       <scope id="6059554334738559705" at="92,26,94,26" />
+      <scope id="1819065786993181491" at="96,25,98,26" />
       <scope id="6059554334738584780" at="63,43,66,28" />
-      <scope id="2442969026332309264" at="107,121,110,28" />
+      <scope id="2442969026332309264" at="111,121,114,28" />
       <scope id="6059554334738559629" at="57,0,61,0">
         <var name="e" id="6059554334738559632" />
       </scope>
@@ -561,12 +565,13 @@
         <var name="b" id="2442969026332318237" />
       </scope>
       <scope id="6059554334738559702" at="92,0,96,0" />
-      <scope id="574098046356501593" at="98,48,102,16" />
-      <scope id="2442969026332317234" at="112,0,116,0">
+      <scope id="1819065786993181490" at="96,0,100,0" />
+      <scope id="574098046356501593" at="102,48,106,16" />
+      <scope id="2442969026332317234" at="116,0,120,0">
         <var name="b" id="2442969026332317239" />
         <var name="event" id="2442969026332317237" />
       </scope>
-      <scope id="2442969026332317242" at="116,0,120,0">
+      <scope id="2442969026332317242" at="120,0,124,0">
         <var name="event" id="2442969026332317245" />
       </scope>
       <scope id="6059554334738584777" at="63,0,68,0">
@@ -575,18 +580,18 @@
       <scope id="7574561536407727917" at="73,35,78,9">
         <var name="o" id="7574561536407727919" />
       </scope>
-      <scope id="2442969026332309261" at="107,0,112,0">
+      <scope id="2442969026332309261" at="111,0,116,0">
         <var name="icon" id="2442969026332317269" />
         <var name="setValue" id="2442969026332317203" />
         <var name="title" id="2442969026332317266" />
         <var name="value" id="2442969026332317201" />
       </scope>
-      <scope id="6370281469027447539" at="120,0,125,0" />
+      <scope id="6370281469027447539" at="124,0,129,0" />
       <scope id="7574561536407727913" at="72,24,79,7" />
       <scope id="7574561536407727914" at="72,24,79,7">
         <var name="path" id="7574561536407727915" />
       </scope>
-      <scope id="574098046356501583" at="96,0,104,0">
+      <scope id="574098046356501583" at="100,0,108,0">
         <var name="dataId" id="574098046356501587" />
       </scope>
       <scope id="6059554334738559655" at="68,37,82,28">
@@ -604,8 +609,8 @@
         <var name="tool" id="6059554334738559584" />
       </scope>
       <unit id="6059554334738559627" at="56,44,61,5" name="jetbrains.mps.ide.depanalyzer.ModuleDependenciesView$1" />
-      <unit id="2442969026332309259" at="104,0,126,0" name="jetbrains.mps.ide.depanalyzer.ModuleDependenciesView$MyToggleAction" />
-      <unit id="6059554334738541128" at="35,0,127,0" name="jetbrains.mps.ide.depanalyzer.ModuleDependenciesView" />
+      <unit id="2442969026332309259" at="108,0,130,0" name="jetbrains.mps.ide.depanalyzer.ModuleDependenciesView$MyToggleAction" />
+      <unit id="6059554334738541128" at="35,0,131,0" name="jetbrains.mps.ide.depanalyzer.ModuleDependenciesView" />
     </file>
   </root>
   <root nodeRef="r:e9e5ee4e-8216-40bc-b13e-6f1480c626c5(jetbrains.mps.ide.depanalyzer)/691189692235652543">

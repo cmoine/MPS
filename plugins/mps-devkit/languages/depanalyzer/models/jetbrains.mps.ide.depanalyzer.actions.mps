@@ -543,6 +543,47 @@
         </node>
       </node>
     </node>
+    <node concept="2xpOpl" id="1$YBF88N69y" role="uR5co">
+      <node concept="3clFbS" id="1$YBF88N69$" role="2VODD2">
+        <node concept="3clFbJ" id="1$YBF88N69_" role="3cqZAp">
+          <node concept="3y3z36" id="1$YBF88N69C" role="3clFbw">
+            <node concept="2OqwBi" id="1$YBF88N69F" role="3uHU7B">
+              <node concept="2WthIp" id="1$YBF88N69I" role="2Oq$k0" />
+              <node concept="2BZ7hE" id="1$YBF88N69J" role="2OqNvi">
+                <ref role="2WH_rO" node="4K0u7uB3vjn" resolve="myComponent" />
+              </node>
+            </node>
+            <node concept="10Nm6u" id="1$YBF88N69K" role="3uHU7w" />
+          </node>
+          <node concept="3clFbS" id="1$YBF88N69L" role="3clFbx">
+            <node concept="3clFbF" id="1$YBF88N69M" role="3cqZAp">
+              <node concept="2OqwBi" id="1$YBF88N69O" role="3clFbG">
+                <node concept="2OqwBi" id="1$YBF88N69R" role="2Oq$k0">
+                  <node concept="2WthIp" id="1$YBF88N69U" role="2Oq$k0" />
+                  <node concept="2BZ7hE" id="1$YBF88N69V" role="2OqNvi">
+                    <ref role="2WH_rO" node="4K0u7uB3vjn" resolve="myComponent" />
+                  </node>
+                </node>
+                <node concept="liA8E" id="1$YBF88N69W" role="2OqNvi">
+                  <ref role="37wK5l" to="g6cj:1$YBF88MScM" resolve="dispose" />
+                </node>
+              </node>
+            </node>
+            <node concept="3clFbF" id="1$YBF88N69X" role="3cqZAp">
+              <node concept="37vLTI" id="1$YBF88N69Z" role="3clFbG">
+                <node concept="2OqwBi" id="1$YBF88N6a2" role="37vLTJ">
+                  <node concept="2WthIp" id="1$YBF88N6a5" role="2Oq$k0" />
+                  <node concept="2BZ7hE" id="1$YBF88N6a6" role="2OqNvi">
+                    <ref role="2WH_rO" node="4K0u7uB3vjn" resolve="myComponent" />
+                  </node>
+                </node>
+                <node concept="10Nm6u" id="1$YBF88N6a7" role="37vLTx" />
+              </node>
+            </node>
+          </node>
+        </node>
+      </node>
+    </node>
   </node>
   <node concept="sE7Ow" id="yXzhPPCIr5">
     <property role="1WHSii" value="Safe delete module dependency" />

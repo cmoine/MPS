@@ -5162,6 +5162,33 @@
         </node>
       </node>
     </node>
+    <node concept="3clFb_" id="1$YBF88MScM" role="jymVt">
+      <property role="TrG5h" value="dispose" />
+      <node concept="3clFbS" id="1$YBF88MScN" role="3clF47">
+        <node concept="3clFbF" id="1$YBF88MScO" role="3cqZAp">
+          <node concept="2OqwBi" id="1$YBF88MVUs" role="3clFbG">
+            <node concept="37vLTw" id="1$YBF88MSO1" role="2Oq$k0">
+              <ref role="3cqZAo" node="3oy_yTlMYki" resolve="myLeftTree" />
+            </node>
+            <node concept="liA8E" id="1$YBF88MVUt" role="2OqNvi">
+              <ref role="37wK5l" to="7e8u:~MPSTree.dispose()" resolve="dispose" />
+            </node>
+          </node>
+        </node>
+        <node concept="3clFbF" id="1$YBF88MScQ" role="3cqZAp">
+          <node concept="2OqwBi" id="1$YBF88MVWm" role="3clFbG">
+            <node concept="37vLTw" id="1$YBF88MSO5" role="2Oq$k0">
+              <ref role="3cqZAo" node="3oy_yTlMZ6E" resolve="myRightTree" />
+            </node>
+            <node concept="liA8E" id="1$YBF88MVWn" role="2OqNvi">
+              <ref role="37wK5l" to="7e8u:~MPSTree.dispose()" resolve="dispose" />
+            </node>
+          </node>
+        </node>
+      </node>
+      <node concept="3Tm1VV" id="1$YBF88MScS" role="1B3o_S" />
+      <node concept="3cqZAl" id="1$YBF88MScT" role="3clF45" />
+    </node>
     <node concept="3clFb_" id="vRAM6BkNhf" role="jymVt">
       <property role="1EzhhJ" value="false" />
       <property role="TrG5h" value="getData" />
