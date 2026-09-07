@@ -10,7 +10,8 @@
   <property name="idea.platform.provided.filename" value="mps-platform-provided.tar.gz"/>
   <property name="ivy.jar.dir" value="${basedir}/ivy"/>
   <property name="ivy.cache.ttl.default" value="eternal"/>
-
+  <property name="resources" location="${basedir}/resources"/>
+  
   <loadproperties srcfile="version.properties" description="Load versions of dependencies to download"/>
   <loadproperties srcfile="lib.properties" description="Load destination paths to 3rd party libraries"/>
 
@@ -389,8 +390,8 @@
   </target>
 
   <target name="unzip-platform-overlay" description="Unpacks mps-platform.zip!/__overlay__" if="${unzip.overlay}">
-    <mkdir dir="${basedir}/resources"/>
-    <untar src="${basedir}/../${platform.zip.file}" dest="${basedir}/resources" compression="gzip" overwrite="true">
+    <mkdir dir="${resources}"/>
+    <untar src="${basedir}/../${platform.zip.file}" dest="${resources}" compression="gzip" overwrite="true">
       <patternset>
         <exclude name="*"/>
         <include name="__overlay__/**"/>
