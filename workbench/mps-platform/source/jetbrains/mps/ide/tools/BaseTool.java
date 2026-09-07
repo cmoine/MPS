@@ -438,7 +438,8 @@ public abstract class BaseTool {
 
   /**
    * Override this method to add implementation specific registration.
-   * Called in {@link jetbrains.mps.ide.tools.BaseTool#register} before {@link jetbrains.mps.ide.tools.BaseTool#getComponent()}.
+   * Called in {@link jetbrains.mps.ide.tools.BaseTool#rebuildContent} (during lazy content creation, invoked from
+   * {@link #attachTo}), before {@link jetbrains.mps.ide.tools.BaseTool#getComponent()}.
    */
   protected void doRegister() {
 
