@@ -130,6 +130,11 @@
     <registryKey key="vcs.show.root.history.compare.models" defaultValue="true"
                  description="Show Root History action uses models comparison if true, otherwise the persisted files comparison is used."/>
     <registryKey key="mps.sync.external.git.repos" defaultValue="true" description="Enables external vcs repo synchronization"/>
+    <!-- MPS-40007: iterative merge requires support for MPS structural merge sessions. -->
+    <registryKey key="vcs.merge.conflict.iterative.resolution" defaultValue="false" restartRequired="false"
+                 description="Enable iterative VCS conflict resolution flow" overrides="true"/>
+    <registryKey key="vcs.merge.conflict.file.suggestion" defaultValue="false" restartRequired="false"
+                 description="Automatically open the next file in the merge conflict" overrides="true"/>
 
     <obsoleteStorage file="$WORKSPACE_FILE$" isProjectLevel="true">
       <components>
