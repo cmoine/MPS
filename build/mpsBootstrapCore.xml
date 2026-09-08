@@ -6,7 +6,7 @@
   <property name="version.major" value="2026" />
   <property name="version.minor" value="2" />
   <property name="version.bugfixNr" value="" />
-  <property name="version.eap" value=" EAP" />
+  <property name="version.eap" value="" />
   <property name="version" value="${version.major}.${version.minor}${version.bugfixNr}${version.eap}" />
   <property name="idea_home" location="" />
   <property name="mps_home" location="${basedir}" />
