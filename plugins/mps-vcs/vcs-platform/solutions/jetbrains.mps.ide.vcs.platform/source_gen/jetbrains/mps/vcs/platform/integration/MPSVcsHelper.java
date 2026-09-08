@@ -18,6 +18,7 @@ import java.util.Collections;
 import com.intellij.openapi.vcs.merge.MergeSession;
 import com.intellij.openapi.vcs.merge.MergeProvider2;
 import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.openapi.util.registry.RegistryManager;
 
 @GeneratedClass(nodeId = "3906168775482822123", model = "r:f7252e75-44f2-46f6-9600-c9b291e7dd5f(jetbrains.mps.vcs.platform.integration)")
 public class MPSVcsHelper extends AbstractVcsHelperImpl {
@@ -73,11 +74,19 @@ public class MPSVcsHelper extends AbstractVcsHelperImpl {
           }
         }
         List<VirtualFile> toResolve = ListSequence.fromList(((List<VirtualFile>) files)).subtract(ListSequence.fromList(autoResolvedFiles)).toList();
-        AbstractVcsHelper.MergeDialogResult resolvedResult = super.showMergeDialogWithResult(toResolve, provider, customizer);
+        AbstractVcsHelper.MergeDialogResult resolvedResult = showPlatformMergeDialog(toResolve, provider, customizer);
         return new MPSMergeDialogResult(ListSequence.fromList(autoResolvedFiles).addSequence(ListSequence.fromList(resolvedResult.getProcessedFiles())), resolvedResult.shouldFinishMerge());
       }
     }
 
-    return super.showMergeDialogWithResult(files, provider, customizer);
+    return showPlatformMergeDialog(files, provider, customizer);
+  }
+  private AbstractVcsHelper.MergeDialogResult showPlatformMergeDialog(List<? extends VirtualFile> files, MergeProvider provider, MergeDialogCustomizer customizer) {
+    boolean iterative = RegistryManager.getInstance().is("vcs.merge.conflict.iterative.resolution");
+    AbstractVcsHelper.MergeDialogResult result = super.showMergeDialogWithResult(files, provider, customizer);
+    // MPS-40007: since IJPL-244835, Git requires an explicit finish flag,
+    // but the legacy dialog does not set it after resolving all files.
+    boolean shouldFinish = result.shouldFinishMerge() || (!(iterative) && result.getProcessedFiles().containsAll(files));
+    return new MPSMergeDialogResult(result.getProcessedFiles(), shouldFinish);
   }
 }

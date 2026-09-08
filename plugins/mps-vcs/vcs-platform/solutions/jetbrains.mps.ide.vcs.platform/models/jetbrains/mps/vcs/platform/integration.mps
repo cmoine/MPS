@@ -71,6 +71,7 @@
     <import index="4zvo" ref="498d89d2-c2e9-11e2-ad49-6cf049e62fe5/java:com.intellij.openapi.vcs.ui(MPS.IDEA/)" />
     <import index="ov6m" ref="498d89d2-c2e9-11e2-ad49-6cf049e62fe5/java:com.intellij.openapi.ui.messages(MPS.IDEA/)" />
     <import index="yt4g" ref="f35cbfcb-ea50-4f20-9d5c-c765fbd8fd3b/java:com.intellij.diff(jetbrains.mps.vcs.idea.stubs/)" />
+    <import index="rfhd" ref="498d89d2-c2e9-11e2-ad49-6cf049e62fe5/java:com.intellij.openapi.util.registry(MPS.IDEA/)" />
   </imports>
   <registry>
     <language id="a247e09e-2435-45ba-b8d2-07e93feba96a" name="jetbrains.mps.baseLanguage.tuples">
@@ -4677,15 +4678,15 @@
                     <node concept="3uibUv" id="2bADoQZe1iM" role="1tU5fm">
                       <ref role="3uigEE" to="jlcu:~AbstractVcsHelper$MergeDialogResult" resolve="AbstractVcsHelper.MergeDialogResult" />
                     </node>
-                    <node concept="3nyPlj" id="2KwMPspmhrM" role="33vP2m">
-                      <ref role="37wK5l" to="j86o:~AbstractVcsHelperImpl.showMergeDialogWithResult(java.util.List,com.intellij.openapi.vcs.merge.MergeProvider,com.intellij.openapi.vcs.merge.MergeDialogCustomizer)" resolve="showMergeDialogWithResult" />
-                      <node concept="37vLTw" id="2KwMPspmT9p" role="37wK5m">
+                    <node concept="1rXfSq" id="5pyYflDl9Cg" role="33vP2m">
+                      <ref role="37wK5l" node="5pyYflDkIZR" resolve="showPlatformMergeDialog" />
+                      <node concept="37vLTw" id="5pyYflDl9Ch" role="37wK5m">
                         <ref role="3cqZAo" node="2KwMPspmy_u" resolve="toResolve" />
                       </node>
-                      <node concept="37vLTw" id="2KwMPspmhrX" role="37wK5m">
+                      <node concept="37vLTw" id="5pyYflDl9Ci" role="37wK5m">
                         <ref role="3cqZAo" node="3oPvWSRpVEZ" resolve="provider" />
                       </node>
-                      <node concept="37vLTw" id="2KwMPspmhrY" role="37wK5m">
+                      <node concept="37vLTw" id="5pyYflDl9Cj" role="37wK5m">
                         <ref role="3cqZAo" node="3oPvWSRpVF1" resolve="customizer" />
                       </node>
                     </node>
@@ -4789,15 +4790,15 @@
         </node>
         <node concept="3clFbH" id="7UDnPJKjMf7" role="3cqZAp" />
         <node concept="3clFbF" id="7UDnPJKkacY" role="3cqZAp">
-          <node concept="3nyPlj" id="7UDnPJKkacW" role="3clFbG">
-            <ref role="37wK5l" to="j86o:~AbstractVcsHelperImpl.showMergeDialogWithResult(java.util.List,com.intellij.openapi.vcs.merge.MergeProvider,com.intellij.openapi.vcs.merge.MergeDialogCustomizer)" resolve="showMergeDialogWithResult" />
-            <node concept="37vLTw" id="7UDnPJKkaA9" role="37wK5m">
+          <node concept="1rXfSq" id="5pyYflDlewH" role="3clFbG">
+            <ref role="37wK5l" node="5pyYflDkIZR" resolve="showPlatformMergeDialog" />
+            <node concept="37vLTw" id="5pyYflDlewI" role="37wK5m">
               <ref role="3cqZAo" node="3oPvWSRpVEW" resolve="files" />
             </node>
-            <node concept="37vLTw" id="7UDnPJKkaBU" role="37wK5m">
+            <node concept="37vLTw" id="5pyYflDlewJ" role="37wK5m">
               <ref role="3cqZAo" node="3oPvWSRpVEZ" resolve="provider" />
             </node>
-            <node concept="37vLTw" id="7UDnPJKkaHL" role="37wK5m">
+            <node concept="37vLTw" id="5pyYflDlewK" role="37wK5m">
               <ref role="3cqZAo" node="3oPvWSRpVF1" resolve="customizer" />
             </node>
           </node>
@@ -4811,6 +4812,206 @@
     <node concept="3Tm1VV" id="3oPvWSRo4RG" role="1B3o_S" />
     <node concept="3uibUv" id="48Xq_bGQ3oC" role="1zkMxy">
       <ref role="3uigEE" to="j86o:~AbstractVcsHelperImpl" resolve="AbstractVcsHelperImpl" />
+    </node>
+    <node concept="3clFb_" id="5pyYflDkIZR" role="jymVt">
+      <property role="TrG5h" value="showPlatformMergeDialog" />
+      <node concept="37vLTG" id="5pyYflDkIZS" role="3clF46">
+        <property role="TrG5h" value="files" />
+        <node concept="3uibUv" id="5pyYflDkIZT" role="1tU5fm">
+          <ref role="3uigEE" to="33ny:~List" resolve="java.util.List" />
+          <node concept="3qUE_q" id="5pyYflDkIZV" role="11_B2D">
+            <node concept="3uibUv" id="5pyYflDkIZU" role="3qUE_r">
+              <ref role="3uigEE" to="jlff:~VirtualFile" resolve="com.intellij.openapi.vfs.VirtualFile" />
+            </node>
+          </node>
+        </node>
+      </node>
+      <node concept="37vLTG" id="5pyYflDkIZW" role="3clF46">
+        <property role="TrG5h" value="provider" />
+        <node concept="3uibUv" id="5pyYflDkIZX" role="1tU5fm">
+          <ref role="3uigEE" to="hlwo:~MergeProvider" resolve="com.intellij.openapi.vcs.merge.MergeProvider" />
+        </node>
+      </node>
+      <node concept="37vLTG" id="5pyYflDkIZY" role="3clF46">
+        <property role="TrG5h" value="customizer" />
+        <node concept="3uibUv" id="5pyYflDkIZZ" role="1tU5fm">
+          <ref role="3uigEE" to="hlwo:~MergeDialogCustomizer" resolve="com.intellij.openapi.vcs.merge.MergeDialogCustomizer" />
+        </node>
+      </node>
+      <node concept="3clFbS" id="5pyYflDkJ00" role="3clF47">
+        <node concept="3cpWs8" id="5pyYflDkJ02" role="3cqZAp">
+          <node concept="3cpWsn" id="5pyYflDkJ01" role="3cpWs9">
+            <property role="TrG5h" value="iterative" />
+            <node concept="10P_77" id="5pyYflDkJ03" role="1tU5fm" />
+            <node concept="2OqwBi" id="5pyYflDl9BU" role="33vP2m">
+              <node concept="2YIFZM" id="5pyYflDl9BX" role="2Oq$k0">
+                <ref role="1Pybhc" to="rfhd:~RegistryManager" resolve="RegistryManager" />
+                <ref role="37wK5l" to="rfhd:~RegistryManager.getInstance()" resolve="getInstance" />
+              </node>
+              <node concept="liA8E" id="5pyYflDl9BY" role="2OqNvi">
+                <ref role="37wK5l" to="rfhd:~RegistryManager.is(java.lang.String)" resolve="is" />
+                <node concept="Xl_RD" id="5pyYflDl9BZ" role="37wK5m">
+                  <property role="Xl_RC" value="vcs.merge.conflict.iterative.resolution" />
+                </node>
+              </node>
+            </node>
+          </node>
+        </node>
+        <node concept="3cpWs8" id="5pyYflDkJ08" role="3cqZAp">
+          <node concept="3cpWsn" id="5pyYflDkJ07" role="3cpWs9">
+            <property role="TrG5h" value="result" />
+            <node concept="3uibUv" id="5pyYflDkJ09" role="1tU5fm">
+              <ref role="3uigEE" to="jlcu:~AbstractVcsHelper$MergeDialogResult" resolve="com.intellij.openapi.vcs.AbstractVcsHelper.MergeDialogResult" />
+            </node>
+            <node concept="3nyPlj" id="5pyYflDkJ0a" role="33vP2m">
+              <ref role="37wK5l" to="j86o:~AbstractVcsHelperImpl.showMergeDialogWithResult(java.util.List,com.intellij.openapi.vcs.merge.MergeProvider,com.intellij.openapi.vcs.merge.MergeDialogCustomizer)" resolve="showMergeDialogWithResult" />
+              <node concept="37vLTw" id="5pyYflDkJ0b" role="37wK5m">
+                <ref role="3cqZAo" node="5pyYflDkIZS" resolve="files" />
+              </node>
+              <node concept="37vLTw" id="5pyYflDkJ0c" role="37wK5m">
+                <ref role="3cqZAo" node="5pyYflDkIZW" resolve="provider" />
+              </node>
+              <node concept="37vLTw" id="5pyYflDkJ0d" role="37wK5m">
+                <ref role="3cqZAo" node="5pyYflDkIZY" resolve="customizer" />
+              </node>
+            </node>
+          </node>
+        </node>
+        <node concept="3SKdUt" id="5pyYflDkJ0w" role="3cqZAp">
+          <node concept="1PaTwC" id="241_1eTOTBF" role="1aUNEU">
+            <node concept="3oM_SD" id="241_1eTOTBH" role="1PaTwD">
+              <property role="3oM_SC" value="MPS-40007:" />
+            </node>
+            <node concept="3oM_SD" id="241_1eTOTBI" role="1PaTwD">
+              <property role="3oM_SC" value="since" />
+            </node>
+            <node concept="3oM_SD" id="241_1eTOTBJ" role="1PaTwD">
+              <property role="3oM_SC" value="IJPL-244835," />
+            </node>
+            <node concept="3oM_SD" id="241_1eTOTBK" role="1PaTwD">
+              <property role="3oM_SC" value="Git" />
+            </node>
+            <node concept="3oM_SD" id="241_1eTOTBL" role="1PaTwD">
+              <property role="3oM_SC" value="requires" />
+            </node>
+            <node concept="3oM_SD" id="241_1eTOTBM" role="1PaTwD">
+              <property role="3oM_SC" value="an" />
+            </node>
+            <node concept="3oM_SD" id="241_1eTOTBN" role="1PaTwD">
+              <property role="3oM_SC" value="explicit" />
+            </node>
+            <node concept="3oM_SD" id="241_1eTOTBO" role="1PaTwD">
+              <property role="3oM_SC" value="finish" />
+            </node>
+            <node concept="3oM_SD" id="241_1eTOTBP" role="1PaTwD">
+              <property role="3oM_SC" value="flag," />
+            </node>
+          </node>
+        </node>
+        <node concept="3SKdUt" id="241_1eTOTBQ" role="3cqZAp">
+          <node concept="1PaTwC" id="241_1eTOTBU" role="1aUNEU">
+            <node concept="3oM_SD" id="241_1eTOTBW" role="1PaTwD">
+              <property role="3oM_SC" value="but" />
+            </node>
+            <node concept="3oM_SD" id="241_1eTOTBX" role="1PaTwD">
+              <property role="3oM_SC" value="the" />
+            </node>
+            <node concept="3oM_SD" id="241_1eTOTBY" role="1PaTwD">
+              <property role="3oM_SC" value="legacy" />
+            </node>
+            <node concept="3oM_SD" id="241_1eTOTBZ" role="1PaTwD">
+              <property role="3oM_SC" value="dialog" />
+            </node>
+            <node concept="3oM_SD" id="241_1eTOTC0" role="1PaTwD">
+              <property role="3oM_SC" value="does" />
+            </node>
+            <node concept="3oM_SD" id="241_1eTOTC1" role="1PaTwD">
+              <property role="3oM_SC" value="not" />
+            </node>
+            <node concept="3oM_SD" id="241_1eTOTC2" role="1PaTwD">
+              <property role="3oM_SC" value="set" />
+            </node>
+            <node concept="3oM_SD" id="241_1eTOTC3" role="1PaTwD">
+              <property role="3oM_SC" value="it" />
+            </node>
+            <node concept="3oM_SD" id="241_1eTOTC4" role="1PaTwD">
+              <property role="3oM_SC" value="after" />
+            </node>
+            <node concept="3oM_SD" id="241_1eTOTC5" role="1PaTwD">
+              <property role="3oM_SC" value="resolving" />
+            </node>
+            <node concept="3oM_SD" id="241_1eTOTC6" role="1PaTwD">
+              <property role="3oM_SC" value="all" />
+            </node>
+            <node concept="3oM_SD" id="241_1eTOTC7" role="1PaTwD">
+              <property role="3oM_SC" value="files." />
+            </node>
+          </node>
+        </node>
+        <node concept="3cpWs8" id="5pyYflDkJ0f" role="3cqZAp">
+          <node concept="3cpWsn" id="5pyYflDkJ0e" role="3cpWs9">
+            <property role="TrG5h" value="shouldFinish" />
+            <node concept="10P_77" id="5pyYflDkJ0g" role="1tU5fm" />
+            <node concept="22lmx$" id="5pyYflDkJ0h" role="33vP2m">
+              <node concept="2OqwBi" id="5pyYflDkW_R" role="3uHU7B">
+                <node concept="37vLTw" id="5pyYflDkW_1" role="2Oq$k0">
+                  <ref role="3cqZAo" node="5pyYflDkJ07" resolve="result" />
+                </node>
+                <node concept="liA8E" id="5pyYflDkW_S" role="2OqNvi">
+                  <ref role="37wK5l" to="jlcu:~AbstractVcsHelper$MergeDialogResult.shouldFinishMerge()" resolve="shouldFinishMerge" />
+                </node>
+              </node>
+              <node concept="1eOMI4" id="5pyYflDkJ0p" role="3uHU7w">
+                <node concept="1Wc70l" id="5pyYflDkJ0j" role="1eOMHV">
+                  <node concept="3fqX7Q" id="5pyYflDkJ0k" role="3uHU7B">
+                    <node concept="37vLTw" id="5pyYflDkJ0l" role="3fr31v">
+                      <ref role="3cqZAo" node="5pyYflDkJ01" resolve="iterative" />
+                    </node>
+                  </node>
+                  <node concept="2OqwBi" id="5pyYflDkWDz" role="3uHU7w">
+                    <node concept="2OqwBi" id="5pyYflDkWAb" role="2Oq$k0">
+                      <node concept="37vLTw" id="5pyYflDkW_c" role="2Oq$k0">
+                        <ref role="3cqZAo" node="5pyYflDkJ07" resolve="result" />
+                      </node>
+                      <node concept="liA8E" id="5pyYflDkWAc" role="2OqNvi">
+                        <ref role="37wK5l" to="jlcu:~AbstractVcsHelper$MergeDialogResult.getProcessedFiles()" resolve="getProcessedFiles" />
+                      </node>
+                    </node>
+                    <node concept="liA8E" id="5pyYflDkWD$" role="2OqNvi">
+                      <ref role="37wK5l" to="33ny:~List.containsAll(java.util.Collection)" resolve="containsAll" />
+                      <node concept="37vLTw" id="5pyYflDkWD_" role="37wK5m">
+                        <ref role="3cqZAo" node="5pyYflDkIZS" resolve="files" />
+                      </node>
+                    </node>
+                  </node>
+                </node>
+              </node>
+            </node>
+          </node>
+        </node>
+        <node concept="3cpWs6" id="5pyYflDkJ0q" role="3cqZAp">
+          <node concept="2ShNRf" id="5pyYflDkW_e" role="3cqZAk">
+            <node concept="1pGfFk" id="5pyYflDkW_x" role="2ShVmc">
+              <ref role="37wK5l" node="2bADoQZbW$p" resolve="MPSVcsHelper.MPSMergeDialogResult" />
+              <node concept="2OqwBi" id="5pyYflDkWDK" role="37wK5m">
+                <node concept="37vLTw" id="5pyYflDkWAe" role="2Oq$k0">
+                  <ref role="3cqZAo" node="5pyYflDkJ07" resolve="result" />
+                </node>
+                <node concept="liA8E" id="5pyYflDkWDL" role="2OqNvi">
+                  <ref role="37wK5l" to="jlcu:~AbstractVcsHelper$MergeDialogResult.getProcessedFiles()" resolve="getProcessedFiles" />
+                </node>
+              </node>
+              <node concept="37vLTw" id="5pyYflDkW_z" role="37wK5m">
+                <ref role="3cqZAo" node="5pyYflDkJ0e" resolve="shouldFinish" />
+              </node>
+            </node>
+          </node>
+        </node>
+      </node>
+      <node concept="3Tm6S6" id="5pyYflDkJ0u" role="1B3o_S" />
+      <node concept="3uibUv" id="5pyYflDkJ0v" role="3clF45">
+        <ref role="3uigEE" to="jlcu:~AbstractVcsHelper$MergeDialogResult" resolve="com.intellij.openapi.vcs.AbstractVcsHelper.MergeDialogResult" />
+      </node>
     </node>
   </node>
   <node concept="312cEu" id="1R9fMbxrKEY">
